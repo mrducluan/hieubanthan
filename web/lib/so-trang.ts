@@ -356,7 +356,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
 
   // ---------------- chủ đề kiến thức (tên + mô tả = CHU_DE trong lib/kien-thuc.ts)
   ...Object.entries(CHU_DE).map(([k, c]): MucSoTrang => ({
-    duong: c.duong, nhom: "chu_de", ten: c.ten, o: O_CHU_DE, mac_dinh: { h1: c.ten, loi_dan: c.mo_ta },
+    duong: c.duong, nhom: "chu_de", ten: c.ten, o: O_CHU_DE, mac_dinh: { h1: c.h1 ?? c.ten, loi_dan: c.mo_ta },
   })),
 ];
 

@@ -56,6 +56,15 @@ export const CHU_GIAO_DIEN = {
   "moi.tv_huynh_de": { nhom: M, nhan: "Minh hoạ Tử vi: cung Huynh Đệ", mac_dinh: "Huynh Đệ", en: "Siblings" },
   "moi.tv_giua": { nhom: M, nhan: "Minh hoạ Tử vi: chữ giữa", mac_dinh: "Lá số của bạn", en: "Your chart" },
   "moi.tv_giua_phu": { nhom: M, nhan: "Minh hoạ Tử vi: dòng nhỏ giữa", mac_dinh: "12 cung · từng mảng đời", en: "12 palaces · each area of life" },
+  // EN-ALL GĐ 8 — minh hoạ ma trận ba cách nhìn (Chân dung tổng hợp). Chữ Việt = đúng chữ cũ trong MoiLapLaSo.
+  "moi.bc_tu_vi": { nhom: M, nhan: "Minh hoạ chân dung: cột Tử vi", mac_dinh: "Tử vi", en: "Zi Wei" },
+  "moi.bc_bat_tu": { nhom: M, nhan: "Minh hoạ chân dung: cột Bát tự", mac_dinh: "Bát tự", en: "BaZi" },
+  "moi.bc_nhan_tuong": { nhom: M, nhan: "Minh hoạ chân dung: cột Nhân tướng", mac_dinh: "Nhân tướng", en: "Face" },
+  "moi.bc_cong_viec": { nhom: M, nhan: "Minh hoạ chân dung: dòng Công việc", mac_dinh: "Công việc", en: "Work" },
+  "moi.bc_tien_bac": { nhom: M, nhan: "Minh hoạ chân dung: dòng Tiền bạc", mac_dinh: "Tiền bạc", en: "Money" },
+  "moi.bc_tinh_cam": { nhom: M, nhan: "Minh hoạ chân dung: dòng Tình cảm", mac_dinh: "Tình cảm", en: "Love" },
+  "moi.bc_suc_khoe": { nhom: M, nhan: "Minh hoạ chân dung: dòng Sức khoẻ", mac_dinh: "Sức khoẻ", en: "Health" },
+  "moi.bc_cung_thay": { nhom: M, nhan: "Minh hoạ chân dung: nhãn cùng thấy", mac_dinh: "cùng thấy", en: "agree" },
 
   // ---------------------------------------------------------------- dải QR
   "qr.mac_dinh": { nhom: Q, nhan: "Dòng mời quét (mặc định)", mac_dinh: "Quét để mở trang này", en: "Scan to open this page" },
@@ -170,6 +179,11 @@ export const CHU_GIAO_DIEN = {
   "hs.nuoc_khac": { nhom: H, nhan: "Lựa chọn nước khác", mac_dinh: "Nước khác / không thấy thành phố", en: "Other country / city not listed" },
   "hs.thanh_pho": { nhom: H, nhan: "Nhãn thành phố", mac_dinh: "Thành phố / vùng", en: "City / region" },
   "hs.chon_thanh_pho": { nhom: H, nhan: "Dòng chọn thành phố", mac_dinh: "— Chọn thành phố —", en: "— Select a city —" },
+  "ns.nhan": { nhom: H, nhan: "Nhãn ô gõ nơi sinh nước ngoài", mac_dinh: "Thành phố nơi sinh", en: "City of birth" },
+  "ns.goi_y": { nhom: H, nhan: "Chữ mờ trong ô gõ nơi sinh", mac_dinh: "Gõ tên thành phố, vd San Jose, Paris, Melbourne", en: "Type a city, e.g. San Jose, Paris, Melbourne" },
+  "ns.khong_thay": { nhom: H, nhan: "Không có gợi ý", toi_da: 200, mac_dinh: "Chưa thấy nơi này. Thử gõ tên tiếng Anh, thêm tên bang / nước (vd “Springfield Illinois”), hoặc chọn múi giờ bên dưới.", en: "No match yet. Try the English name, add the state or country (e.g. “Springfield Illinois”), or pick a time zone below." },
+  "ns.chon_mui_gio": { nhom: H, nhan: "Lối thoát chọn múi giờ", mac_dinh: "Không thấy nơi của bạn? Chọn múi giờ", en: "Can't find your place? Pick a time zone" },
+  "ns.loi": { nhom: H, nhan: "Lỗi tìm nơi sinh", mac_dinh: "Chưa tìm được lúc này, thử lại sau ít giây.", en: "Search is unavailable right now. Try again in a moment." },
   "hs.mui_gio_noi_sinh": { nhom: H, nhan: "Nhãn múi giờ nơi sinh", mac_dinh: "Múi giờ nơi sinh", en: "Time zone of birthplace" },
   "hs.chon_mui_gio": { nhom: H, nhan: "Dòng chọn múi giờ", mac_dinh: "— Chọn múi giờ —", en: "— Select a time zone —" },
   "hs.may_ban": { nhom: H, nhan: "Vế múi giờ máy đang dùng", mac_dinh: " (máy bạn đang dùng)", en: " (this device)" },

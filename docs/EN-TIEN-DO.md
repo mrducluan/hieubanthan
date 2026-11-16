@@ -15,8 +15,8 @@
 | 4 | Tử vi | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/zi-wei-dou-shu` + 6 cụm kiến thức; hỏi đáp tiếng Anh (mục 3e) |
 | 5 | Phong thuỷ | **xong** (2026-11-13) | 12 nhóm route sạch; `/en/feng-shui` + cụm dấu hiệu trong nhà (gồm `kb.trang.dau_hieu`, `hoi.phongthuy`) — mục 3f |
 | 6 | Kinh Dịch | **xong** (2026-11-14) | 6 nhóm route sạch; `/en/i-ching` + cụm 64 quẻ; hỏi đáp tiếng Anh — mục 3g |
-| 7 | Thần số + Tarot đầy đủ | chưa | 18 |
-| 8 | Nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới | chưa | 26 |
+| 7 | Thần số + Tarot đầy đủ | **xong** (2026-11-16) | 19 nhóm route + 8 loại trang sạch, hỏi đáp đầy đủ, `/en/numerology` + `/en/tarot` một-component, 7 cụm mở — mục 3i; Hợp đôi web chưa mở |
+| 8 | Nhịp ngày, lịch, năm, tập quán, Nhân tướng, Chân dung, Thời gian tới | **xong** (2026-11-16) | 27 nhóm route + `kb.trang.bo_vi` + mục lục `kb` sạch; web mở 14 trang gốc + cụm con (lịch, Hôm nay, năm & tuổi, Nhân tướng, Chân dung, Thời gian tới) — mục 3j |
 | 9 | Tài khoản & kinh tế, Web Push theo ngôn ngữ, thẻ chia sẻ | chưa | 3 nhóm route + web |
 | 10 | CMS + Blog + pháp lý + hub | chưa | |
 | 11 | QC tổng | chưa | |
@@ -300,6 +300,75 @@ cho người dùng thật cần chủ dự án (mục 6).
 - **Thuật ngữ cần người bản xứ duyệt**: changed / resulting hexagram, Response / Other line (Ying), Use God line, Officer / Wealth /
   Parent / Offspring / Sibling line, body / use trigram (Mai Hoa), void branch, month breaker, "meaning-and-principle reading".
 
+## 3i. Giai đoạn 7 — Thần số + Tarot (2026-11-16)
+
+Ba nhóm chạy song song (worktree riêng, tệp mẫu câu riêng `en/loi/{thanso,trang_thanso,trang_tarot,nhip_ngay}.json`):
+- **A1 bài đọc Thần số**: ban_do (Bản đồ con số), chaldea, chu_ky, do_nhay, doi_chieu_nam, tong_hop, ba_goc_nhin, ngu_canh,
+  noi_dau, cap_so, hop_doi — bản phủ `en/thanso_{ban_do,chaldean,do_thi,doi_chieu,cap_so,quan_he,noi_dau,giai_thich,xu_ly}.json`,
+  `en/thanso_linh_vuc.json` thêm 5 lĩnh vực. Nỗi đau: câu hỏi luôn so với câu chuẩn bản Việt để hai bản chọn cùng câu.
+- **A2 trang kiến thức**: so, so_kep, cap_so, nghe, tinh_yeu, nam_ca_nhan, no_nghiep + 78 lá Tarot; 7 tệp `en/bo_sung_*.json`
+  (4.609 chuỗi, giữ số liệu / bảng / nguồn). Trang lá bài vẫn lệch khung có chủ đích (mục "bốn trường phái" tắt ở bản Anh — QTE-3).
+- **B nhịp ngày**: hom_nay (+ Ba lá), nhip, the_ngay, tuan, hom_nay_hai, goi_y_cheo, ban_do_5_mang, tarot.the; lớp hiển thị lịch
+  `luangiai/lich_hien.py` (tính + quyết định vẫn bằng tên Việt, chỉ đổi chữ ở bước hiển thị) + bản phủ `en/hoang_lich_kb.json`
+  (dùng lại ở GĐ 8). `push.tuan` sạch luôn.
+- Gộp: ba tệp phủ trùng (`thanso_chaldean`, `thanso_cap_so`, `thanso_quan_he`) gộp sâu — giữ bản A1 cho khoá chung.
+- **H hỏi đáp Thần số**: `hoi_en.py` viết lại trên `hoi.phan_loai` + `hoi.goi_bang_chung` của bản Việt, câu Anh → cụm từ khoá Việt
+  (`hoidap/en_gloss_ts.py`), hai lượt "bản Việt quyết" (khoá `hoi.ts.*`), mẫu `en/loi/hoi_thanso.json`. Bộ dev mới
+  `dev_en_thanso.jsonl` (152 câu) định tuyến 64 → 100 %, holdout đóng băng `holdout_en_thanso.jsonl` (60 câu) 55 → **92 %**,
+  mốc thời gian holdout 6/7; chấm `scripts/cham_en_thanso.py`. Khi gộp: khối hình (`truc_quan.thanso`) bản Anh; "curse on me / my
+  house" bản Anh dẫn hướng như bản Việt (người hỏi là nạn nhân), "curse on my ex" vẫn chặn; tiêu đề "Năm None trong vòng 9 năm"
+  (lỗi cả bản Việt, 44 câu golden) → "Năm cá nhân N trong vòng 9 năm".
+- **W web**: `/en/numerology`, `/en/tarot` thành rewrite của `/than-so`, `/tarot` (một cây component, catalog `lib/chu/{than-so,tarot}.ts`);
+  mở `/en/numerology/{life-path,careers,love,personal-year,karmic-debt,compound-numbers}`, `/en/compatibility/number-pairs`,
+  `/en/tarot/cards`; xoá trang viết riêng + `lib/en/api.ts` (giữ bước chuyển hồ sơ `hbt.en.profile.v1`). Bản Anh ẩn thẻ chia sẻ Tarot,
+  hỏi lại 30 ngày, CTA cuối bài, ghi nhớ tài khoản. **Bản đồ con số bản Anh đọc miễn phí** (`MO_DUN_MIEN_PHI_EN.luan_giai` thêm
+  `thanso`, cùng chính sách Bát tự / Tử vi bản Anh). HTML 74 trang Việt: chỉ thêm hreflang ở 11 trang. E2E `en-numerology` 18/18,
+  `en-tarot` 9/9.
+- Còn: trang công cụ Hợp đôi bản Anh (`/en/compatibility`, ~40 dòng chữ Việt + link mời / Sao) → làm cùng GĐ 9 (tài khoản & kinh tế);
+  Tarot "He ghosted me…" bản Anh chưa hiểu (khong_hieu).
+- Cần quyết: tên thường gọi trong bài Chaldea bản Anh đang không dấu ("Luan") vì bộ kiểm coi tên có dấu là chữ Việt; mọi chữ Anh
+  `bien_tap`, cần người bản xứ duyệt.
+
+## 3j. Giai đoạn 8 — lịch, năm & tuổi, Nhân tướng, Chân dung, Thời gian tới (engine, 2026-11-16)
+
+Ba nhóm song song (worktree riêng, tệp mẫu câu riêng `en/loi/{lich,nam_tuoi,nhan_tuong,chan_dung,thoi_gian}.json`):
+- **C lịch**: lich (việc, chọn ngày nhiều người), chon_ngay, doi, nam (lịch âm năm), ngay, ngay_tot, thang, thang_post, viec_thang.
+  Lớp hiển thị `luangiai/lich_trang_hien.py` chạy ở bước API khi lượt gọi không phải tiếng Việt, dựng lại chữ từ dữ kiện đã tính —
+  `hoang_lich.py` không đổi (Hôm nay, Tuần này, tuổi dân gian, Thời gian tới vẫn đọc tên Việt). `chon_ngay_nhieu`: nhãn Việt vẫn là
+  khoá gộp / xếp, chữ Anh dựng cùng lượt. Bản phủ `en/hoang_lich_kb.json` thêm 142 việc nên / kiêng, 151 thần sát, 28 tú, Bành Tổ.
+- **D năm & tuổi**: nam, nam.cuoi_hoi, nam.sinh_con, nam.tuoi, tuoi.{han_nam, lam_nha, lam_nha_nam, sao_han, sao_han_nam, xong_dat,
+  xong_dat_nam}, sinh_nuoc_ngoai. Lớp hiển thị `luangiai/nam_tuoi_hien.py` (hàm gốc `tuoi_dan_gian`, `nam_tong_quan`, `trang_tuoi` không
+  đổi); bản phủ `en/{nam_tong_quan_kb,sinh_nuoc_ngoai_kb}.json`, mở rộng `en/{tuoi_dan_gian_kb,sao_han_kb}.json`. Tục lệ giữ tên gốc kèm
+  nghĩa (Kim Lau, Tam Tai (Three Calamities), lunar age, xong dat).
+- **E**: nhan_tuong (+ hỏi đáp, luận giải), kb.trang.bo_vi (khớp khung nhờ ý chính tiếng Anh theo số ý bản Việt), chan_dung, thoi_gian_toi.
+  Bản phủ `en/{nhan_tuong_kb,chan_dung_kb,thoi_gian_lop_kb}.json`. Lời sách xưa bản Anh chỉ chữ Hán + ý tiếng Anh (không phiên âm).
+- Gộp: `ten.KHOA_MA` hai nhóm cùng thêm khoá (giữ cả hai). Thời gian tới lấy hộp con giáp qua đúng `nam_tuoi_hien.theo_tuoi` của
+  trang "Tử vi năm theo tuổi" (một nguồn chữ) — 40/41 lượt lỗi → 0. Mục lục `kb` sạch vì mọi loại trang đã sạch (trước ghi GĐ 11).
+- Đo sau gộp: golden bản Việt lệch 0/10509; holdout_v2 92 % / 81 % / an toàn 25/25; an toàn tiếng Anh 128/17/90, chặn nhầm 0.
+- Còn / cần quyết: Dậu hiện "You (Rooster)" trong can chi ("Xin You (Rooster)") theo bảng tên GĐ 7 — gọn lại thì sửa
+  `ten_en.json`; lời lỗi 422 và lỗi phép đo gương mặt (`do_anh.loi`) vẫn tiếng Việt (bộ đo không gọi ca lỗi); hỏi đáp Nhân tướng
+  chưa hiểu câu tiếng Anh; tên Cửu Diệu / Bát hạn ở Thời gian tới (`tgt.sao.*`) nên gộp về bảng tên chung; web `/en` cho lịch, năm,
+  tuổi, Nhân tướng, Chân dung, Thời gian tới — làm ở PR web (dưới). Mọi chữ Anh `bien_tap`, chờ người bản xứ duyệt.
+- **Web lịch + Hôm nay** (worktree riêng): mở `/en/auspicious-dates` (+ ngày `/2026-11-16`, tháng `/2026-11`, việc `/weddings-2026-11` —
+  đuôi Anh, đuôi Việt gõ ở bản Anh → 308), `/en/lunar-calendar` (+ năm), `/en/lunar-converter`, `/en/today`. Một cây component, catalog
+  `lib/chu/{lich,hom-nay}.ts`, chữ máy chủ `lib/so-trang-en.ts`, hreflang hai chiều (trang Việt dùng `voiHreflang`), sitemap-en (ngày −7…+90,
+  tháng −12…+24, việc tháng này…+6, lịch âm ±10 năm). Bản Anh ẩn: chia sẻ thẻ / ba lá, nhịp ghé + Sao + hẹn + tổng kết tháng, hỏi lại,
+  nhắc việc, nhà, mời cài app, hai người hôm nay, quẻ riêng, CTA cuối bài, ảnh tóm tắt, khối CMS. HTML trang Việt: chỉ thêm hreflang ở 9 trang.
+  E2E `en-lich` 16/16. Engine còn: `than.loai` chữ Việt (không hiện), `/v1/lich/cac-nam` chưa có `ten_hien` cho `con_giap` (web đổi qua
+  `CON_GIAP_EN`). Đã sửa khi gộp: số ít "one day / one month" (Tuần này, chọn ngày cả nhà, Bản đồ con số).
+- **Web năm & tuổi**: mở `/en/year` (+ năm, sinh con, cưới hỏi, theo tuổi), `/en/vietnamese-customs/{yearly-star,house-building-age,first-footer}`
+  (+ năm / tuổi), `/en/feng-shui/annual-afflictions`, `/en/born-abroad` (+ nước). Catalog `lib/chu/nam-tuoi.ts`, sitemap-en theo đúng
+  cửa sổ index bản Việt (`lib/sitemap-nam-tuoi.ts`). Đuôi URL giữ chữ Việt (`/en/year/2027/sinh-con`, `…/tuoi-1990`) — luật tiền tố đi nguyên
+  đuôi; đổi sang chữ Anh cần luật đổi đuôi + 308 (chờ quyết). Ảnh `/og/tom-tat` chỉ chữ Việt → bản Anh ẩn. HTML Việt: chỉ thêm hreflang ở 8
+  trang. E2E `en-nam-tuoi` 24/24.
+- **Web Nhân tướng, Chân dung, Thời gian tới**: mở `/en/face-reading` (+ cụm `/face-areas` 25 trang, slug Anh), `/en/portrait`, `/en/year-ahead`;
+  đo điểm mốc ảnh trên máy BẬT, gửi ảnh cho AI TẮT; thoả thuận `dm1` tiếng Anh, `/en/privacy` thêm mục "Face reading photos" (cần luật sư);
+  Chân dung + Thời gian tới miễn phí ở bản Anh (`MO_DUN_MIEN_PHI_EN`). Khung hỏi đáp Nhân tướng ẩn ở bản Anh (engine chưa hiểu câu tiếng Anh).
+  Đã sửa khi gộp: dòng giải thích số đo gương mặt (`do_anh.loi`) theo ngôn ngữ + số thập phân kiểu Anh. HTML Việt: chỉ thêm hreflang ở 5
+  trang. E2E `en-nhan-tuong` 12/12.
+- Sau gộp ba nhóm web: 8 spec `/en` liên quan 96/96 (một ca đỏ do bộ đệm fetch cũ trên máy, xoá `.next/cache/fetch-cache` thì qua — production
+  khoá mục lục theo bản deploy).
+
 ## 3h. Chính sách chặn có ích + "nên chú ý" (CY-2, 2026-11-14, vi + en)
 
 - Đối tác / nhân viên có trung thực không: trả lời phía người hỏi ở mọi mảng (cả bản Anh); vẫn chặn chọn / xếp hạng / sa thải theo lá số.
@@ -475,3 +544,5 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
   sao/cung — đã chuyển thể).
 - **2026-11-13 — hỏi đáp lai** (mục 6.4) + **GĐ 5 Phong thuỷ** engine + hỏi đáp (mục 3f).
 - **2026-11-13 → 14 — GĐ 6 Kinh Dịch** (mục 3g); sửa 10 cảnh báo CodeQL (regex chậm / chèn regex) + test `test_hoi_redos.py` cho mọi route hỏi đáp.
+- **2026-11-16 — GĐ 8 (engine)**: ba nhóm lịch / năm & tuổi / Nhân tướng + Chân dung + Thời gian tới; 27 nhóm route + bộ vị + mục lục `kb` sạch, bản Việt lệch 0 (mục 3j).
+- **2026-11-16 — GĐ 8 (web)**: ba nhóm web lịch + Hôm nay / năm & tuổi / Nhân tướng + Chân dung + Thời gian tới (mục 3j).

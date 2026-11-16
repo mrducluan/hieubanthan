@@ -21,6 +21,16 @@ import { postJson } from "@/lib/goi-api";
 import { hoiMang } from "@/lib/hoi-mang";
 import { laSoTuHoSo, useHoSo } from "@/lib/hoso";
 import { demTraLoi, laVung, luuTraLoi, useTraLoi, type BaoCaoNhanTuong as Bc, type KhaoSat, type TraLoi } from "@/lib/nhan-tuong";
+import { Dam, useChuNhanTuong } from "@/components/nhan-tuong/chu-nhan-tuong";
+import { urlTheoNgonNgu } from "@/lib/ngon-ngu";
+import { useDuong } from "@/components/khung/NgonNgu";
+
+// EN-ALL GĐ 8: /en/face-reading là rewrite của trang này (một cây component) — chữ cố định ở lib/chu/nhan-tuong.ts (chiều
+// `en`), câu khảo sát / bộ vị / bài đọc do engine trả theo ngôn ngữ. Bản Anh không có: khung hỏi đáp (engine chưa hiểu câu
+// tiếng Anh), máy AI gợi ý từ ảnh (tắt ở bản Anh), lối sang Chỉ tay (chưa mở bản Anh).
+
+/** Tên cụm bộ vị bản Anh (lib/so-trang-en.ts CUM_EN). */
+const CUM_TEN_EN = "The areas of the face";
 
 const GOI_Y = [
   { nhom: "Một vùng", cau: ["Ấn Đường rộng nghĩa là gì?", "Sơn Căn thấp thì sao?", "Pháp Lệnh đâm vào mép là gì?"] },
@@ -30,6 +40,8 @@ const GOI_Y = [
 
 export function NhanTuong() {
   const c = useChu();
+  const { t, en } = useChuNhanTuong();
+  const d = useDuong();
   const hoSo = useHoSo();
   const traLoi = useTraLoi();
   const [ks, setKs] = useState<KhaoSat | null>(null);
@@ -40,9 +52,9 @@ export function NhanTuong() {
   const [vungHoi, setVungHoi] = useState<string[]>([]);
   const refBaiDoc = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    fetch("/api/nhan-tuong/khao-sat").then((r) => (r.ok ? r.json() : Promise.reject(new Error("x")))).then((d) => setKs(d as KhaoSat))
-      .catch(() => setLoiKs("Chưa tải được bộ câu hỏi — thử lại sau ít phút."));
-  }, []);
+    fetch(urlTheoNgonNgu("/api/nhan-tuong/khao-sat")).then((r) => (r.ok ? r.json() : Promise.reject(new Error("x")))).then((d) => setKs(d as KhaoSat))
+      .catch(() => setLoiKs(t("loi.ks")));
+  }, [t]);
   useBatDauDoc("nhantuong", Boolean(bc));
   const soCau = demTraLoi(traLoi);
   const namSinh = hoSo?.nam && hoSo.nam >= 1900 ? hoSo.nam : undefined;
@@ -59,14 +71,13 @@ export function NhanTuong() {
       setBc(d);
       ghi("chart_interacted", { mo_dun: "nhantuong", kind: "bai_doc", so_cau: demTraLoi(tl), ngu_hinh: d.da_tinh?.ngu_hinh?.hinh });
       setTimeout(() => refBaiDoc.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
-    } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa đọc được lúc này."); } finally { setDang(false); }
+    } catch (e) { setLoi(e instanceof Error ? e.message : t("loi.doc")); } finally { setDang(false); }
   };
   const xemBaiDoc = () => void docVoi(traLoi);
   const dungVaXem = (tl: TraLoi) => { luuTraLoi(tl); void docVoi(tl); };
 
   const dau = (
-    <DauMang Icon={ScanFace} hinh="nhan-tuong" ten="Xem tướng mặt: gương mặt bạn nói gì?"
-      mo_ta="Gương mặt kể gì về bạn? Tải một ảnh chân dung để máy gợi ý nét mặt (có thoả thuận, ảnh không lưu), hoặc đứng trước gương tự trả lời 31 câu theo sáu bước — trang ghép điều bạn thấy với cách đọc của sách tướng xưa thành bài đọc tám chương: dáng mặt theo năm hành, tính cách, việc và tiền, tình cảm, sức khoẻ, năm nay nhìn vào đâu, tướng và lá số, việc nên làm. Không điểm số, không xem tướng người khác." />
+    <DauMang Icon={ScanFace} hinh="nhan-tuong" ten={t("dau.ten")} mo_ta={t("dau.mo_ta")} />
   );
   // ANH-1: tải ảnh chân dung đứng ngay dưới đầu trang (chỉ khi chưa có bài đọc); gợi ý điền vào khảo sát trên máy.
   const anhChanDung = !bc && traLoi !== undefined && (
@@ -77,13 +88,20 @@ export function NhanTuong() {
         <section aria-labelledby="ban-do" className="mx-auto mb-10 max-w-5xl">
           <TieuDeMuc id="ban-do" nho={c("ban_do.nho")} lon={c("ban_do.lon")} />
           <div className="glass grid gap-6 rounded-2xl p-5 sm:p-6 lg:grid-cols-[18rem_1fr] lg:items-center">
-            <BanDoMat nhan={Object.fromEntries(Object.values(ks?.bo_vi ?? {}).map((b) => [b.vung, b.ten]))} chuThich={false} sang={vungHoi} />
-            <div className="space-y-3 text-sm text-fg-muted">
+            <BanDoMat en={en} nhan={Object.fromEntries(Object.values(ks?.bo_vi ?? {}).map((b) => [b.vung, b.ten]))} chuThich={false} sang={vungHoi} />
+            {en ? (
+              <div className="space-y-3 text-sm text-fg-muted">
+                <p><Dam s={t("ban_do.p1")} /></p>
+                <p><Dam s={t("ban_do.p2")} /></p>
+                <p className="text-xs text-fg-faint">{t("ban_do.p3")}</p>
+                {soCau > 0 && <Button onClick={xemBaiDoc} disabled={dang} size="sm" data-testid="nut-xem-lai-bai-doc">{dang ? t("ban_do.dang_doc") : t("ban_do.xem_lai", { so: String(soCau) })}</Button>}
+              </div>
+            ) : <div className="space-y-3 text-sm text-fg-muted">
               <p>Sách tướng xưa chia mặt thành <b className="text-fg">ba phần</b> (trán – mũi – cằm), <b className="text-fg">năm quan</b> (mày, mắt, tai, mũi, miệng) và <b className="text-fg">mười hai cung</b> — mỗi vùng gắn với một mảng đời: trán là công việc, mũi là tiền bạc, đuôi mắt là đôi lứa, cằm là hậu vận.</p>
               <p>Bạn tự soi gương và chọn điều mình thấy; trang không nhận diện tự động. Mỗi tuổi sách lại xem ở một vùng (<b className="text-fg">100 vị trí lưu niên</b>) — có năm sinh trong hồ sơ, bài đọc sẽ chỉ vùng của năm nay.</p>
               <p className="text-xs text-fg-faint">Gương mặt trên hình vẽ giản lược, không phải mặt của ai. Màu sẽ hiện sau khi bạn trả lời.</p>
               {soCau > 0 && <Button onClick={xemBaiDoc} disabled={dang} size="sm" data-testid="nut-xem-lai-bai-doc">{dang ? "Đang đọc…" : `Xem bài đọc với ${soCau} câu đã trả lời`}</Button>}
-            </div>
+            </div>}
           </div>
         </section>
       );
@@ -101,7 +119,7 @@ export function NhanTuong() {
         {!ks && !loiKs && <KhungTai />}
         {ks && (
           <>
-            {bc && <p className="mb-3 text-sm text-fg-muted">Đổi câu trả lời rồi bấm “Xem bài đọc” để đọc lại.</p>}
+            {bc && <p className="mb-3 text-sm text-fg-muted">{t("ks.doi_tra_loi")}</p>}
             <KhaoSatGuong ks={ks} traLoi={traLoi} onXong={xemBaiDoc} dangTai={dang} />
           </>
         )}
@@ -111,15 +129,18 @@ export function NhanTuong() {
       {bc && ks && (
         <section ref={refBaiDoc} aria-labelledby="bai-doc" id="bai-doc" className="mx-auto mb-10 max-w-5xl scroll-mt-24">
           <TieuDeMuc id="bai-doc" nho={c("bai_doc.nho")} lon={c("bai_doc.lon")} />
-          <BaoCaoNhanTuong bc={bc} boVi={ks.bo_vi} ten={hoSo?.ho_ten?.trim() ? hoSo.ho_ten : "bạn"} />
+          <BaoCaoNhanTuong bc={bc} boVi={ks.bo_vi} ten={hoSo?.ho_ten?.trim() ? hoSo.ho_ten : t("ten_ban")} />
           <div className="mt-6">
-            <CuoiBaiDoc moDun="nhantuong" cauHoi="Bài đọc này có nét nào bạn chưa từng để ý về mình?" />
+            <CuoiBaiDoc moDun="nhantuong" cauHoi={t("cuoi.hoi")} khongCta={en} />
           </div>
         </section>
       )}
 
       <section aria-labelledby="hoi-dap" id="hoi-dap" className="mx-auto max-w-5xl scroll-mt-24">
         <TieuDeMuc id="hoi-dap" nho={c("hoi.nho")} lon={c("hoi.lon")} />
+        {en ? <p className="text-sm text-fg-muted" data-testid="nt-hoi-chua-co">
+          {t("hoi.chua_co")} <Link href={d("/nhan-tuong/bo-vi")} className="text-gold underline underline-offset-2">{CUM_TEN_EN}</Link>.
+        </p> : <>
         <KhungChat moDun="nhantuong" goiY={GOI_Y}
           loiChao={soCau ? "Hỏi về một vùng trên mặt bạn — mình đọc theo điều bạn đã tự quan sát. Nốt ruồi, tuổi lưu niên, cung nào nói về gì cũng hỏi được." : "Hỏi về một vùng trên mặt (trán, mày, mắt, mũi, miệng, cằm…), nốt ruồi hay tuổi lưu niên. Làm Khảo sát để có lời riêng. Mình không xem tướng người khác."}
           gui={(cau) => hoiMang<{ cau_tra_loi?: string; vung?: string[] }>("/api/nhan-tuong/hoi",
@@ -128,12 +149,13 @@ export function NhanTuong() {
         {vungHoi.length > 0 && !bc && (
           <p className="mt-2 inline-flex items-center gap-1 text-xs text-fg-faint"><ScanSearch className="size-3.5" aria-hidden /> Vùng vừa hỏi đang sáng trên bản đồ phía trên.</p>
         )}
+        </>}
       </section>
 
-      <p className="mx-auto mt-8 max-w-5xl text-sm text-fg-muted" data-testid="nt-den-chi-tay">
+      {!en && <p className="mx-auto mt-8 max-w-5xl text-sm text-fg-muted" data-testid="nt-den-chi-tay">
         Xem thêm bàn tay: <Link href="/chi-tay" className="text-gold underline underline-offset-2">Xem chỉ tay theo sách xưa</Link> — chụp
         lòng bàn tay (ảnh không rời máy) để thấy tám cung trên tay mình, hoặc chọn hình vân giống tay mình.
-      </p>
+      </p>}
     </div>
   );
 }

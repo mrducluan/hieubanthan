@@ -9,26 +9,37 @@ import { ChevronDown, ScanFace } from "lucide-react";
 import type { KhaoSat, TraLoi } from "@/lib/nhan-tuong";
 import { DoMatTrenAnh } from "./DoMatTrenAnh";
 import { GoiYTuAi } from "./GoiYTuAi";
+import { Dam, useChuNhanTuong } from "./chu-nhan-tuong";
+
+// EN-ALL GĐ 8: bản Anh chỉ có cách đo trên máy; gửi ảnh cho máy AI TẮT ở bản Anh (chủ dự án chốt, EN-TIEN-DO mục 1).
 
 export function AnhChanDung({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem }: {
   ks: KhaoSat | null; daTraLoi: TraLoi; onGoiY: (tl: TraLoi) => void; onXem: () => void; onDungVaXem?: (tl: TraLoi) => void; dangXem?: boolean;
 }) {
+  const { t, en } = useChuNhanTuong();
   const [bat, setBat] = useState<boolean | null>(null);
   useEffect(() => {
+    if (en) { setBat(false); return; }
     fetch("/api/nhan-tuong/cau-hinh").then((r) => (r.ok ? r.json() : null)).then((d) => setBat(Boolean(d?.doc_anh))).catch(() => setBat(false));
-  }, []);
+  }, [en]);
   return (
     <section aria-labelledby="anh-chan-dung" data-testid="anh-chan-dung" data-ai={bat ? "1" : "0"}
       className="relative mx-auto mb-8 max-w-5xl overflow-hidden rounded-3xl border border-gold/45 bg-gradient-to-br from-gold/[0.09] via-surface/70 to-bg/40 p-5 sm:p-7">
       <div className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full bg-gold/10 blur-3xl" aria-hidden />
       <div className="relative">
+        {en ? <>
+          <p className="eyebrow text-gold">{t("anh.eyebrow")}</p>
+          <h2 id="anh-chan-dung" className="mt-2 font-serif text-2xl leading-tight sm:text-3xl"><Dam s={t("anh.tieu_de")} lop="text-gradient-gold font-normal" /></h2>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-fg-muted sm:text-base">{t("anh.mo_ta")}</p>
+        </> : <>
         <p className="eyebrow text-gold">Từ ảnh của bạn · ảnh không rời máy</p>
         <h2 id="anh-chan-dung" className="mt-2 font-serif text-2xl leading-tight sm:text-3xl">Tải ảnh chân dung — <span className="text-gradient-gold">hệ thống tự đo</span>, bạn xác nhận</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-fg-muted sm:text-base">
           Chọn một ảnh chụp thẳng — máy bạn tự tìm 20 điểm mốc ngay trong trình duyệt (vài giây), bạn chỉ xem lại và kéo chấm nào lệch. Hệ thống đo tỉ lệ ba đình, độ rộng trán, gò má, quai hàm, mắt, mũi, miệng theo phép &ldquo;tam đình ngũ nhãn&rdquo; của sách tướng, gợi ý câu trả lời cho khảo sát, bạn xác nhận rồi xem bài đọc. Ảnh không gửi đi đâu, không chấm điểm, không lưu ảnh.
         </p>
+        </>}
         <div className="mt-5">{ks ? <DoMatTrenAnh ks={ks} daTraLoi={daTraLoi} onGoiY={onGoiY} onXem={onXem} onDungVaXem={onDungVaXem} dangXem={dangXem} /> : null}</div>
-        {bat && ks && (
+        {bat && !en && ks && (
           <details className="group mt-5 rounded-2xl border border-line/70 bg-bg/40 p-4" data-testid="anh-ai-khoi">
             <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium text-fg">
               <ScanFace className="size-4 text-gold" aria-hidden /> Cho máy AI xem thêm sắc da, nếp, ánh mắt (tuỳ chọn)

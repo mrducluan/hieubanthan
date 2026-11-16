@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { MatSau, MatTruoc } from "@/components/tarot/LaBai";
 import { ChepTay, chepLink, guiHoacChep } from "@/components/chia-se/GuiLink";
 import { cn } from "@/lib/utils";
+import { boChuGiai } from "@/lib/ten-hien";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
 import { tenGoi, type HoSo } from "@/lib/hoso";
@@ -20,6 +21,9 @@ import { useMaCuaToi } from "@/lib/sao";
 import { coTaiKhoan } from "@/lib/supabase/trinh-duyet";
 import { docNhatKy, ghiLa, ghiTarot, thongKeThang } from "@/lib/nhat-ky-ngay";
 import { duongMoi } from "@/lib/duong-silo";
+import { useChuHomNay } from "@/components/khung/chu-hom-nay";
+import { useDuong } from "@/components/khung/NgonNgu";
+import { tenTheo, type TenHien } from "@/lib/ten-hien";
 import { baLaDaLat, chuConPhut, gioSapToi, MA_NHAT_KY, nhoBaLa, phutCuaNgay, TEN_BA_LA, THU_TU_BA_LA, type BaLa, type MaBaLa } from "@/lib/ba-la";
 
 const thangCua = (iso: string): [number, number] => [Number(iso.slice(0, 4)), Number(iso.slice(5, 7))];
@@ -36,7 +40,13 @@ function MatGiay({ nhan, children, chan }: { nhan: string; children: React.React
   );
 }
 
-export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { baLa: BaLa; ngay: string; hoSo: HoSo; tieuDe?: string }) {
+export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày", tenHien }: { baLa: BaLa; ngay: string; hoSo: HoSo; tieuDe?: string;
+  /** EN-ALL GĐ 8: tên hiển thị của trường mã (chi giờ, tên quẻ) — bản Anh. */ tenHien?: TenHien }) {
+  // EN-ALL GĐ 8: chữ từ lib/chu/hom-nay.ts; bản Anh không có thẻ chia sẻ ba lá (thẻ chưa có bản Anh).
+  const { c, en, conPhut } = useChuHomNay();
+  const d = useDuong();
+  const ten = tenTheo(tenHien, en);
+  const tenLa = (ma: MaBaLa) => (en ? c(`bl.ten.${ma}`) : TEN_BA_LA[ma]);
   const giam = Boolean(useReducedMotion());
   const [lat, setLat] = useState<MaBaLa[] | null>(null);   // null = chưa đọc máy
   const [xem, setXem] = useState<MaBaLa | null>(null);      // lá đang đọc
@@ -66,7 +76,8 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
   const du = lat.length === THU_TU_BA_LA.length;
   const { tarot, so, thoi_khac: tk } = baLa;
   const sap = phut === null ? null : gioSapToi(tk.gio, phut);
-  const chuGio = sap ? `Giờ ${sap.gio.chi} (${sap.gio.khung})` : null;
+  const chuGio = sap ? (en ? c("bl.gio", { chi: ten("chi", sap.gio.chi), khung: sap.gio.khung }) : `Giờ ${sap.gio.chi} (${sap.gio.khung})`) : null;
+  const tenQue = tk.que ? ten("que_ten", tk.que.ten) : "";
 
   function latLa(ma: MaBaLa) {
     if (!lat) return;
@@ -123,12 +134,12 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
 
   const mat: Record<MaBaLa, React.ReactNode> = {
     tarot: <MatTruoc la={tarot} />,
-    so: <MatGiay nhan="Ngày cá nhân" chan={so.viec?.ten ?? "Việc nhỏ hôm nay"}><span className="font-serif text-5xl leading-none sm:text-6xl">{so.so}</span></MatGiay>,
+    so: <MatGiay nhan={c("bl.ngay_cn")} chan={so.viec?.ten ?? c("bl.viec_nho")}><span className="font-serif text-5xl leading-none sm:text-6xl">{so.so}</span></MatGiay>,
     thoi_khac: (
-      <MatGiay nhan={sap?.dang ? "Đang giờ tốt" : "Giờ tốt sắp tới"} chan={tk.que ? `Quẻ ${tk.que.ten}` : tk.hoang_dao ? "Ngày Hoàng đạo" : "Giờ hoàng đạo"}>
+      <MatGiay nhan={sap?.dang ? c("bl.dang_gio") : c("bl.sap_gio")} chan={tk.que ? (en ? c("bl.que", { ten: tenQue }) : `Quẻ ${tk.que.ten}`) : tk.hoang_dao ? c("bl.hoang_dao") : c("bl.gio_hd")}>
         <span className="flex flex-col items-center gap-1">
           <Clock className="size-6 opacity-70" aria-hidden />
-          <span className="font-serif text-2xl leading-none sm:text-3xl">{sap ? sap.gio.chi : "—"}</span>
+          <span className="font-serif text-2xl leading-none sm:text-3xl">{sap ? (en ? boChuGiai(ten("chi", sap.gio.chi)) : sap.gio.chi) : "—"}</span>
           {sap && <span className="text-[0.62rem] tabular-nums opacity-80">{sap.gio.khung}</span>}
         </span>
       </MatGiay>
@@ -139,17 +150,17 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
     <section id="ba-la" data-neo aria-labelledby="ba-la-h" className="glass scroll-mt-24 rounded-2xl p-5" data-testid="ba-la" data-lat={lat.length}>
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h2 id="ba-la-h" className="text-xl">{tieuDe}</h2>
-        <span className="text-xs text-fg-muted" data-testid="ba-la-tien-do">{du ? "đã lật đủ ba lá" : lat.length ? `đã lật ${lat.length}/3` : "mỗi ngày ba lá · miễn phí"}</span>
+        <span className="text-xs text-fg-muted" data-testid="ba-la-tien-do">{du ? c("bl.du") : lat.length ? (en ? c("bl.da_lat", { so: String(lat.length) }) : `đã lật ${lat.length}/3`) : c("bl.moi_ngay")}</span>
       </div>
-      {!lat.length && <p className="mt-1 text-sm text-fg-muted">Ba điều của riêng bạn hôm nay đang úp. Chạm từng lá để lật — ngày mai là ba lá khác.</p>}
+      {!lat.length && <p className="mt-1 text-sm text-fg-muted">{c("bl.dan")}</p>}
 
-      <div className="mx-auto mt-4 grid max-w-md grid-cols-3 gap-3 sm:gap-4" role="group" aria-label="Ba lá của ngày">
+      <div className="mx-auto mt-4 grid max-w-md grid-cols-3 gap-3 sm:gap-4" role="group" aria-label={c("bl.aria")}>
         {THU_TU_BA_LA.map((ma) => {
           const daLat = lat.includes(ma);
           return (
             <div key={ma} className="space-y-1.5 text-center">
               <button type="button" onClick={() => latLa(ma)} aria-pressed={xem === ma} data-testid={`ba-la-${ma}`} data-lat={daLat ? 1 : 0}
-                aria-label={daLat ? `Đọc ${TEN_BA_LA[ma]}` : `Lật ${TEN_BA_LA[ma]}`}
+                aria-label={daLat ? c("bl.doc", { ten: en ? tenLa(ma).toLowerCase() : TEN_BA_LA[ma] }) : c("bl.lat", { ten: en ? tenLa(ma).toLowerCase() : TEN_BA_LA[ma] })}
                 className={cn("relative block w-full rounded-[9px] shadow-card outline-none transition-transform focus-visible:ring-2 focus-visible:ring-gold",
                   !daLat && "hover:-translate-y-1", xem === ma && daLat && "ring-2 ring-gold/70")}
                 style={{ aspectRatio: "120 / 200", perspective: 900 }}>
@@ -160,7 +171,7 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
                   </div>
                 </div>
               </button>
-              <p className={cn("text-xs", xem === ma && daLat ? "font-medium text-gold" : "text-fg-muted")}>{TEN_BA_LA[ma]}</p>
+              <p className={cn("text-xs", xem === ma && daLat ? "font-medium text-gold" : "text-fg-muted")}>{tenLa(ma)}</p>
             </div>
           );
         })}
@@ -169,57 +180,62 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
       <div ref={noiDung} className="mt-4 scroll-mt-28 text-sm" aria-live="polite">
         {xem === "tarot" && (
           <div className="space-y-2" data-testid="ba-la-doc-tarot">
-            <p className="text-xs font-medium text-moon">Lá Tarot của riêng bạn hôm nay · luôn đọc xuôi</p>
-            <h3 className="text-xl">{tarot.ten} {tarot.en && <span className="text-base text-fg-faint">({tarot.en})</span>}</h3>
+            <p className="text-xs font-medium text-moon">{c("bl.tarot_nhan")}</p>
+            <h3 className="text-xl">{tarot.ten} {tarot.en && !en && <span className="text-base text-fg-faint">({tarot.en})</span>}</h3>
             <ul className="flex flex-wrap gap-1.5">{tarot.tu_khoa.map((k) => <li key={k} className="rounded-full border border-line px-2.5 py-0.5 text-xs text-fg-muted">{k}</li>)}</ul>
             <p className="text-[0.95rem] leading-relaxed text-fg">{tarot.y}</p>
-            <p><b className="text-jade">Việc làm được hôm nay:</b> {tarot.viec}</p>
+            <p><b className="text-jade">{c("bl.viec_lam")}</b> {tarot.viec}</p>
             <p className="italic text-fg-muted">{tarot.cau_tu_soi}</p>
             <p className="text-xs">
-              {tarot.duong && <><Link href={duongMoi(tarot.duong)} className="text-gold hover:underline">Đọc kỹ lá {tarot.ten}</Link> · </>}
-              <Link href="/tarot" className="text-gold hover:underline" onClick={() => ghi("cross_cta_clicked", { tu: "la_bai", den: "tarot" })}>Có câu hỏi riêng? Rút một trải bài</Link>
+              {tarot.duong && <><Link href={d(duongMoi(tarot.duong))} className="text-gold hover:underline">{en ? c("bl.doc_ky", { ten: tarot.ten }) : <>Đọc kỹ lá {tarot.ten}</>}</Link> · </>}
+              <Link href={d("/tarot")} className="text-gold hover:underline" onClick={() => ghi("cross_cta_clicked", { tu: "la_bai", den: "tarot" })}>{c("bl.rut")}</Link>
             </p>
           </div>
         )}
         {xem === "so" && (
           <div className="space-y-2" data-testid="ba-la-doc-so">
-            <p className="text-xs font-medium text-moon">Con số của ngày · việc nhỏ hợp ngày {so.so}</p>
+            <p className="text-xs font-medium text-moon">{en ? c("bl.so_nhan", { so: String(so.so) }) : <>Con số của ngày · việc nhỏ hợp ngày {so.so}</>}</p>
             {so.viec ? (
               <>
                 <h3 className="text-xl">{so.viec.nhan ?? so.viec.ten}</h3>
                 <p className="text-[0.95rem] leading-relaxed text-fg">{so.viec.cach_lam}</p>
                 {so.viec.tu_soi && <p className="italic text-fg-muted">{so.viec.tu_soi}</p>}
               </>
-            ) : <h3 className="text-xl">Ngày cá nhân {so.so}</h3>}
-            {so.cau_hoi && <p className="rounded-xl border border-moon/30 bg-moon/5 px-3 py-2"><span className="text-xs uppercase tracking-wider text-moon">Một câu hỏi riêng cho hôm nay</span><span className="mt-0.5 block text-fg">{so.cau_hoi}</span></p>}
+            ) : <h3 className="text-xl">{en ? c("bl.ngay_cn_so", { so: String(so.so) }) : <>Ngày cá nhân {so.so}</>}</h3>}
+            {so.cau_hoi && <p className="rounded-xl border border-moon/30 bg-moon/5 px-3 py-2"><span className="text-xs uppercase tracking-wider text-moon">{c("bl.cau_hoi")}</span><span className="mt-0.5 block text-fg">{so.cau_hoi}</span></p>}
           </div>
         )}
         {xem === "thoi_khac" && (
           <div className="space-y-2" data-testid="ba-la-doc-thoi_khac">
-            <p className="text-xs font-medium text-moon">Thời khắc của ngày · theo lịch cổ truyền, tham khảo văn hoá</p>
+            <p className="text-xs font-medium text-moon">{c("bl.tk_nhan")}</p>
             <h3 className="text-xl" data-testid="ba-la-gio">
-              {sap ? <>{sap.dang ? "Đang trong giờ tốt: " : "Giờ tốt sắp tới: "}{chuGio}</> : "Các giờ hoàng đạo hôm nay đã qua"}
+              {sap ? <>{sap.dang ? c("bl.trong_gio") : c("bl.sap")}{chuGio}</> : c("bl.da_qua")}
             </h3>
-            {sap && <p className="text-fg-muted">{sap.gio.than} · {sap.dang ? `còn ${chuConPhut(sap.conPhut)}` : `${chuConPhut(sap.conPhut)} nữa`}. Hợp để bắt đầu việc bạn đã chuẩn bị.</p>}
-            {!sap && <p className="text-fg-muted">Tối nay hợp việc quen tay và nghỉ ngơi; sáng mai có ba lá mới.</p>}
-            {tk.nen.length > 0 && <p><span className="text-jade">Nên:</span> {tk.nen.join(", ")}</p>}
-            {tk.kieng.length > 0 && <p><span className="text-[#f0b35c]">Kiêng:</span> {tk.kieng.join(", ")}</p>}
-            {tk.que && (
+            {sap && (en ? <p className="text-fg-muted">{c(sap.dang ? "bl.con" : "bl.nua", { than: sap.gio.than, con: conPhut(sap.conPhut) })}</p>
+              : <p className="text-fg-muted">{sap.gio.than} · {sap.dang ? `còn ${chuConPhut(sap.conPhut)}` : `${chuConPhut(sap.conPhut)} nữa`}. Hợp để bắt đầu việc bạn đã chuẩn bị.</p>)}
+            {!sap && <p className="text-fg-muted">{c("bl.toi")}</p>}
+            {tk.nen.length > 0 && <p><span className="text-jade">{c("bl.nen")}</span> {tk.nen.join(", ")}</p>}
+            {tk.kieng.length > 0 && <p><span className="text-[#f0b35c]">{c("bl.kieng")}</span> {tk.kieng.join(", ")}</p>}
+            {tk.que && (en ? (
+              <p><b>{c("bl.que_dau", { ten: tenQue })}</b> {tk.que.y}{" "}
+                {tk.que.duong && <Link href={d(duongMoi(tk.que.duong))} className="text-gold hover:underline">{c("bl.doc_que")}</Link>}</p>
+            ) : (
               <p><b>Quẻ đầu ngày — {tk.que.ten}:</b> {tk.que.y}{" "}
                 {tk.que.duong && <Link href={duongMoi(tk.que.duong)} className="text-gold hover:underline">Đọc quẻ</Link>}</p>
-            )}
+            ))}
           </div>
         )}
       </div>
 
       {du && (
         <div className="mt-4 rounded-xl border border-gold/40 bg-gold/[0.06] p-4" data-testid="ba-la-ghep">
-          <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-gold"><Sparkles className="size-3.5" aria-hidden /> Ba lá ghép lại</p>
+          <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-gold"><Sparkles className="size-3.5" aria-hidden />{` ${c("bl.ghep")}`}</p>
           <dl className="mt-2 grid gap-1.5 text-sm sm:grid-cols-[6.5rem_1fr]">
-            <dt className="text-fg-muted">Mang theo</dt><dd>{tarot.ten} — {tarot.tu_khoa.join(", ")}</dd>
-            {so.viec && <><dt className="text-fg-muted">Việc nhỏ</dt><dd>{so.viec.nhan ?? so.viec.cach_lam}</dd></>}
-            <dt className="text-fg-muted">Thời điểm</dt><dd>{sap ? `${sap.dang ? "Đang trong" : "Sắp tới"} ${chuGio?.replace(/^Giờ/, "giờ")}` : "Giờ tốt hôm nay đã qua — để dành cho sáng mai"}</dd>
+            <dt className="text-fg-muted">{c("bl.mang")}</dt><dd>{tarot.ten} — {tarot.tu_khoa.join(", ")}</dd>
+            {so.viec && <><dt className="text-fg-muted">{c("bl.viec")}</dt><dd>{so.viec.nhan ?? so.viec.cach_lam}</dd></>}
+            <dt className="text-fg-muted">{c("bl.thoi_diem")}</dt><dd>{sap ? (en ? c(sap.dang ? "bl.td_trong" : "bl.td_sap", { gio: chuGio ?? "" }) : `${sap.dang ? "Đang trong" : "Sắp tới"} ${chuGio?.replace(/^Giờ/, "giờ")}`) : c("bl.td_qua")}</dd>
           </dl>
+          {!en && <>
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <Button size="sm" onClick={() => void chiaSe()} disabled={dang} data-testid="ba-la-chia-se">
               {daChep ? <Check aria-hidden /> : the ? <Send aria-hidden /> : <Share2 aria-hidden />}{daChep ? "Đã chép link" : dang ? "Đang tạo…" : "Chia sẻ ba lá"}
@@ -239,10 +255,11 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày" }: { 
           <p className="mt-2 text-xs text-fg-faint">{baLa.chia_se_tarot
             ? "Thẻ chia sẻ chỉ có tên hiển thị, ba lá và ngày xem — không có ngày sinh."
             : "Thẻ chia sẻ có tên hiển thị, con số và quẻ của ngày; lá Tarot riêng của bạn nằm úp trên thẻ. Không có ngày sinh."}</p>
+          </>}
         </div>
       )}
       <p className="mt-3 text-xs text-fg-faint">
-        {soNgayLat > 0 && <span data-testid="ba-la-thang">{soNgayLat === 1 ? "Ngày đầu tiên bạn lật lá trong tháng này. " : `Ngày thứ ${soNgayLat} bạn lật lá trong tháng này. `}</span>}
+        {soNgayLat > 0 && <span data-testid="ba-la-thang">{soNgayLat === 1 ? c("bl.thang_1") : en ? c("bl.thang_n", { so: String(soNgayLat) }) : `Ngày thứ ${soNgayLat} bạn lật lá trong tháng này. `}</span>}
         {baLa.cach_chon}
       </p>
     </section>

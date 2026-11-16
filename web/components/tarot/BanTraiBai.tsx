@@ -6,14 +6,15 @@ import { useMemo } from "react";
 import { LaBai } from "./LaBai";
 import type { BaoCaoTarot, LaBoBai, LaRut, TraiBai } from "@/lib/tarot-chung";
 import { cn } from "@/lib/utils";
+import { useChuTarot } from "./chu-tarot";
 
-export function BanTraiBai({ tb, la, lat, onLat, boLa, pt, chon, onChon, className, gon = false, chu }: {
+export function BanTraiBai({ tb, la, lat, onLat, boLa, pt, chon, onChon, className, gon = false }: {
   tb: TraiBai; la: (LaRut | null)[]; lat: boolean[]; onLat?: (i: number) => void; boLa: Record<string, LaBoBai>;
   /** Có bài đọc → vẽ đường phẩm giá + hướng nhìn. */ pt?: BaoCaoTarot["da_tinh"] | null;
   chon?: number | null; onChon?: (i: number) => void; className?: string; gon?: boolean;
-  /** QTE: chữ theo ngôn ngữ (mặc định tiếng Việt). */ chu?: { nguoc: string; up: string; nhan_nguoc: string; nguoc_nhan: string };
 }) {
-  const c = chu ?? { nguoc: " (ngược)", up: "Lá bài úp", nhan_nguoc: "NGƯỢC", nguoc_nhan: " · ngược" };
+  // EN-ALL GĐ 7: chữ lá theo ngôn ngữ trang (lib/chu/tarot.ts).
+  const c = useChuTarot().la;
   // Khung bàn theo số lá: chiều cao đủ cho lá ở hàng trên / dưới cùng (toạ độ KB 0,12–0,88) + nhãn dưới lá, không cắt mép.
   const n = tb.vi_tri.length;
   const { W, H, wLa } = n === 10 ? { W: 1100, H: 880, wLa: 100 } : n === 5 ? { W: 760, H: 760, wLa: 110 } : n === 1 ? { W: 760, H: 330, wLa: 150 } : { W: 760, H: 320, wLa: 130 };

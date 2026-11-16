@@ -9,9 +9,13 @@ import { Button } from "@/components/ui/button";
 import { BaoCaoDoiSongView } from "@/components/luan-giai/BaoCaoDoiSong";
 import { SachXuaGhi, type KhoiSachGhi } from "@/components/huyen-hoc/SachXuaGhi";
 import { BanDoMat } from "./BanDoMat";
+import { useChuNhanTuong } from "./chu-nhan-tuong";
 import { TEN_HINH, type BaoCaoNhanTuong as Bc, type BoVi, type VungMat } from "@/lib/nhan-tuong";
 
 export function BaoCaoNhanTuong({ bc, boVi, ten, chanTrang }: { bc: Bc; boVi: Record<string, BoVi>; ten: string; chanTrang?: React.ReactNode }) {
+  const { t, en } = useChuNhanTuong();
+  // EN-ALL GĐ 8: tên hành theo ngôn ngữ (bản Việt: đúng TEN_HINH cũ).
+  const hinh = (k: string) => (en ? t(`hanh.${k}`) || k : TEN_HINH[k]);
   const [chon, setChon] = useState<VungMat | null>(null);
   const [moCa, setMoCa] = useState(false);
   const nhanVung = useMemo(() => Object.fromEntries(Object.values(boVi).map((b) => [b.vung, b.ten])), [boVi]);
@@ -32,17 +36,20 @@ export function BaoCaoNhanTuong({ bc, boVi, ten, chanTrang }: { bc: Bc; boVi: Re
   return (
     <div data-testid="bao-cao-nhan-tuong">
       <div className="glass mb-8 grid gap-5 rounded-2xl p-4 sm:p-6 lg:grid-cols-[18rem_1fr] lg:items-center">
-        <BanDoMat muc={bc.da_tinh.ban_do} sang={namNay?.vung ? [namNay.vung] : []} chon={chon} onChon={bam} nhan={nhanVung}
-          ghiChu={namNay ? <span>Năm nay nhìn vào <b className="text-fg">{namNay.ten_bo_vi}</b>{namNay.nhan_ben} (tuổi mụ {namNay.tuoi})</span> : undefined} />
+        <BanDoMat en={en} muc={bc.da_tinh.ban_do} sang={namNay?.vung ? [namNay.vung] : []} chon={chon} onChon={bam} nhan={nhanVung}
+          ghiChu={namNay ? (en ? <span>{t("bc.nam_nay")} <b className="text-fg">{namNay.ten_bo_vi}</b>{namNay.nhan_ben} {t("bc.tuoi_mu", { tuoi: String(namNay.tuoi) })}</span>
+            : <span>Năm nay nhìn vào <b className="text-fg">{namNay.ten_bo_vi}</b>{namNay.nhan_ben} (tuổi mụ {namNay.tuoi})</span>) : undefined} />
         <div>
-          <p className="eyebrow">Đã quan sát {bc.da_tinh.so_cau} nét · nhận ra {bc.da_tinh.so_dac_diem} điểm sách xưa có nói</p>
-          <h3 className="mt-2 text-2xl">Dáng mặt: <span className="text-gradient-gold">{nh.ten ?? TEN_HINH[nh.hinh]}</span></h3>
+          <p className="eyebrow">{en ? t("bc.da_quan_sat", { so: String(bc.da_tinh.so_cau), dd: String(bc.da_tinh.so_dac_diem) }) : <>Đã quan sát {bc.da_tinh.so_cau} nét · nhận ra {bc.da_tinh.so_dac_diem} điểm sách xưa có nói</>}</p>
+          <h3 className="mt-2 text-2xl">{en ? `${t("bc.dang_mat")} ` : "Dáng mặt: "}<span className="text-gradient-gold">{nh.ten ?? hinh(nh.hinh)}</span></h3>
           <p className="mt-2 text-sm text-fg-muted">
-            {nh.hinh === "pha"
+            {en ? (nh.hinh === "pha" ? t("bc.pha")
+              : t("bc.hanh", { hanh: hinh(nh.hinh) ?? nh.hinh, pha: nh.troi[1] ? t("bc.pha_chut", { hanh: hinh(nh.troi[1]) ?? nh.troi[1] }) : "" }))
+              : nh.hinh === "pha"
               ? "Không nghiêng hẳn về một hành — đa số người là vậy; sách xưa dặn xem theo nét trội nhất."
               : `Dáng mặt mang hành ${TEN_HINH[nh.hinh]}${nh.troi[1] ? `, pha chút ${TEN_HINH[nh.troi[1]]}` : ""}. Chương “Tướng và lá số” đặt hành này cạnh hành lá số Bát tự cần bù.`}
           </p>
-          <p className="mt-3 text-xs text-fg-faint">Bấm một vùng trên bản đồ để tới chương nói về vùng đó. Màu là mức sách xưa gán cho nét bạn chọn, không phải điểm.</p>
+          <p className="mt-3 text-xs text-fg-faint">{t("bc.bam_vung")}</p>
           {chon && (
             <p className="mt-2 rounded-lg border border-line/60 bg-bg/40 px-3 py-2 text-sm" data-testid="vung-dang-chon">
               <b className="text-fg">{nhanVung[chon] ?? chon}</b>{Object.values(boVi).find((b) => b.vung === chon)?.nghia ? ` — ${Object.values(boVi).find((b) => b.vung === chon)!.nghia}` : ""}
@@ -51,25 +58,25 @@ export function BaoCaoNhanTuong({ bc, boVi, ten, chanTrang }: { bc: Bc; boVi: Re
           {namNay?.bai_ca && (
             <button type="button" aria-expanded={moCa} onClick={() => moBaiCa(!moCa)} data-testid="nut-bai-ca"
               className="mt-2 inline-flex min-h-[44px] items-center text-sm text-gold underline decoration-gold/40 underline-offset-2 hover:decoration-gold">
-              Sách xưa nói gì về tuổi {namNay.tuoi}
+              {en ? t("bc.bai_ca", { tuoi: String(namNay.tuoi) }) : <>Sách xưa nói gì về tuổi {namNay.tuoi}</>}
             </button>
           )}
           {moCa && namNay?.bai_ca && (
             <div className="mt-2 rounded-lg border border-gold/30 bg-gold/[0.05] px-3 py-2 text-sm" data-testid="bai-ca-luu-nien">
-              <p className="text-xs uppercase tracking-wide text-gold">Sách xưa · {namNay.bai_ca.sach} — {namNay.bai_ca.ten_bai}</p>
+              <p className="text-xs uppercase tracking-wide text-gold">{t("bc.sach_xua")} · {namNay.bai_ca.sach} — {namNay.bai_ca.ten_bai}</p>
               <p className="mt-1 leading-relaxed">{namNay.bai_ca.y}</p>
               <p lang="zh-Hant" className="mt-1 font-serif text-fg-muted">«{namNay.bai_ca.han}»</p>
-              <p className="mt-1 text-xs text-fg-faint">Sách xưa viết cho người thời đó; đây là văn hoá để tham khảo và tự soi, không phải lời đoán trước.</p>
+              <p className="mt-1 text-xs text-fg-faint">{t("bc.bai_ca_ghi")}</p>
             </div>
           )}
         </div>
       </div>
-      <BaoCaoDoiSongView bc={bc} ten={ten} nhan="Gương mặt của bạn"
-        hanhDong={<Button variant="ghost" size="sm" onClick={() => window.print()}><Printer aria-hidden /> In / lưu PDF</Button>}
+      <BaoCaoDoiSongView bc={bc} ten={ten} nhan={t("bc.nhan")}
+        hanhDong={<Button variant="ghost" size="sm" onClick={() => window.print()}><Printer aria-hidden /> {t("bc.in")}</Button>}
         chanTrang={chanTrang} />
       {/* SX-C: câu sách tướng xưa gắn với đúng các nét đã chọn (engine chọn + đã nói giảm; web chỉ hiển thị). */}
       <div className="mt-8">
-        <SachXuaGhi khoi={(bc as { sach_ghi?: KhoiSachGhi | null }).sach_ghi} moDun="nhantuong" tieuDe="Sách tướng xưa ghi gì về các nét của bạn" />
+        <SachXuaGhi khoi={(bc as { sach_ghi?: KhoiSachGhi | null }).sach_ghi} moDun="nhantuong" tieuDe={t("bc.sach_ghi")} />
       </div>
     </div>
   );

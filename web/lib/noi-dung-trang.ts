@@ -253,7 +253,17 @@ export function banTiengAnh(duong: string): string | undefined {
   if (m && ["1", "2", "3", "4", "5", "6", "7", "8", "9", "11", "22", "33"].includes(m[1]!)) return `/en/numerology/life-path/${m[1]}`;
   // EN-ALL: trang công cụ / trang cụm kiến thức mở bản Anh qua rewrite (lib/duong-en.json, cờ `mo`, ĐÚNG đường dẫn của mục —
   // trang con có slug thì slug Anh khác slug Việt, trang tự khai hreflang).
-  return BAN_TIENG_ANH[duong] ?? (capCuaVi(duong)?.duoi === "" ? capHreflang(duong)?.en : undefined);
+  const cap = capCuaVi(duong);
+  return BAN_TIENG_ANH[duong] ?? (cap?.duoi === "" || (cap && DUOI_GIU.has(cap.cap.vi)) ? capHreflang(duong)?.en : undefined);
+}
+/** EN-ALL GĐ 8: cụm có đuôi đường dẫn GIỮ NGUYÊN ở bản Anh (năm, năm sinh, mã nước) → trang con cũng có bản Anh tương đương. */
+const DUOI_GIU = new Set(["/nam", "/xem-sao-han", "/xem-tuoi-lam-nha", "/tuoi-xong-dat", "/phong-thuy/huong-xau-nam", "/sinh-o-nuoc-ngoai"]);
+
+/** EN-ALL GĐ 8: gắn hreflang hai chiều cho metadata trang dựng thẳng bằng `metaTrang` (không qua `metaMacDinh`) khi trang có
+ *  bản Anh đã mở. Không có bản Anh → trả nguyên metadata. */
+export function kemHreflang(meta: Metadata, duong: string): Metadata {
+  const en = banTiengAnh(duong);
+  return en ? { ...meta, alternates: { ...meta.alternates, languages: { vi: duong, en, "x-default": duong } } } : meta;
 }
 
 export function metaMacDinh(duong: string): Metadata {

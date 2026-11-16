@@ -62,9 +62,16 @@ const LUAT: Record<string, Luat> = {
     tach: (b) => { const n = Number(b.duong.match(/(?:sinh-nam|born)-(\d{4})/)?.[1]); if (!n) return { nhom: null, phu: [] };
       const d = Math.floor(n / 10) * 10; return { nhom: [`thap-nien-${d}`, `${d}–${d + 9}`], phu: [] }; } },
   "so-kep": { nhanNhom: "Theo hàng chục", tieuDe: (t) => `Ý nghĩa số kép ${t.replace(/^Số /, "")}`, viDu: "19, ngôi sao…",
+    en: { nhanNhom: "By tens", viDu: "19, the star…", tieuDe: (t) => `Meaning of compound ${t.replace(/^N/, "n")}`,
+      tach: (b) => { const n = Number(b.duong.match(/\/(\d+)$/)?.[1]); if (!n) return { nhom: null, phu: [] };
+        const d = Math.min(40, Math.floor(n / 10) * 10); return { nhom: [`so-${d}`, d === 40 ? "Numbers 40–52" : `Numbers ${d}–${d + 9}`], phu: [] }; } },
     tach: (b) => { const n = Number(b.duong.match(/so-kep-(\d+)/)?.[1]); if (!n) return { nhom: null, phu: [] };
       const d = Math.min(40, Math.floor(n / 10) * 10); return { nhom: [`so-${d}`, d === 40 ? "Số 40–52" : `Số ${d}–${d + 9}`], phu: [] }; } },
   "hop-so": { nhanNhom: "Theo số nhỏ hơn", tieuDe: (t) => `${t.replace(" với…", "")} hợp với số nào`, viDu: "3 và 7…", loc: { nhan: "Có số" },
+    en: { nhanNhom: "By smaller number", viDu: "3 and 7…", tieuDe: (t) => `${t.replace(" with…", "").replace("Number", "Life Path")} paired with each number`, loc: { nhan: "With number" },
+      tach: (b) => { const m = b.duong.match(/\/(\d+)-and-(\d+)$/); if (!m) return { nhom: null, phu: [] };
+        const a = m[1]!, c = m[2]!;
+        return { nhom: [`so-${a}`, `Number ${a} with…`], phu: [...new Set([a, c])].map((x) => [`so-${x}`, `Number ${x}`] as [string, string]) }; } },
     tach: (b) => { const m = b.duong.match(/so-chu-dao-(\d+)-va-(\d+)/); if (!m) return { nhom: null, phu: [] };
       const a = m[1]!, c = m[2]!;
       return { nhom: [`so-${a}`, `Số ${a} với…`], phu: [...new Set([a, c])].map((x) => [`so-${x}`, `Số ${x}`] as [string, string]) }; } },

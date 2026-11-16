@@ -11,6 +11,8 @@ import { ghi } from "@/lib/do-luong";
 import { useKyUc } from "@/lib/ky-uc";
 import type { QuyUocDD } from "@/lib/quy-uoc-dd";
 import { cn } from "@/lib/utils";
+import { maNgonNguTrang } from "@/lib/ngon-ngu";
+import { fetchNN, useChuThanSo } from "./chu-than-so";
 
 interface SoTraLoi { ma: string; ten: string; gia_tri: number | number[] | null }
 interface CauNoiDau { ma: string; noi_dau: string; cau: string; so: SoTraLoi[] }
@@ -21,22 +23,23 @@ const BIEU_TUONG: Record<string, LucideIcon> = { Briefcase, Heart, User, Calenda
 const boNho = new Map<string, BanDo>();
 
 /** Giá trị chỉ số để hiển thị: danh sách rỗng = "không có", null = cần họ tên đầy đủ. */
-export function hienGiaTri(v: SoTraLoi["gia_tri"]): string {
-  if (v === null) return "cần họ tên";
-  if (Array.isArray(v)) return v.length ? v.join(", ") : "không có";
+export function hienGiaTri(v: SoTraLoi["gia_tri"], chu: { can_ho_ten: string; khong_co: string } = { can_ho_ten: "cần họ tên", khong_co: "không có" }): string {
+  if (v === null) return chu.can_ho_ten;
+  if (Array.isArray(v)) return v.length ? v.join(", ") : chu.khong_co;
   return String(v);
 }
 
 export function NoiDau({ hoSo, onHoi, theoPitago = false, quyUoc = "tong_het" }:
   { hoSo: HoSo; onHoi: (cau: string, maCau?: string) => void; theoPitago?: boolean; quyUoc?: QuyUocDD }) {
-  const khoa = JSON.stringify([hoTenList(hoSo), hoSo.ngay, hoSo.thang, hoSo.nam, quyUoc]);
+  const khoa = JSON.stringify([hoTenList(hoSo), hoSo.ngay, hoSo.thang, hoSo.nam, quyUoc, maNgonNguTrang()]);
+  const { c, en } = useChuThanSo();
   const kyUc = useKyUc();
   const [bd, setBd] = useState<BanDo | null>(boNho.get(khoa) ?? null);
   const [chon, setChon] = useState(0);
   useEffect(() => {
     if (boNho.has(khoa)) { setBd(boNho.get(khoa)!); return; }
     let huy = false;
-    fetch("/api/thanso/noi-dau", {
+    fetchNN("/api/thanso/noi-dau", {
       method: "POST", headers: { "content-type": "application/json" },
       body: JSON.stringify({ ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam, quy_uoc_duong_doi: quyUoc }),
     }).then((r) => (r.ok ? (r.json() as Promise<BanDo>) : null))
@@ -52,9 +55,8 @@ export function NoiDau({ hoSo, onHoi, theoPitago = false, quyUoc = "tong_het" }:
 
   return (
     <section aria-labelledby="noi-dau" data-testid="noi-dau">
-      <TieuDeMuc id="noi-dau" nho="Bạn đang vướng ở đâu?" lon="Chọn điều đang làm bạn băn khoăn"
-        mo_ta="Mỗi câu hỏi đi kèm những con số của chính bạn dùng để trả lời. Bấm “Hỏi câu này” để xem lời giải ngay bên dưới." />
-      {kyUc.dangNhap && kyUc.ds.length > 0 && (
+      <TieuDeMuc id="noi-dau" nho={c("nd.nho")} lon={c("nd.lon")} mo_ta={c("nd.mo_ta")} />
+      {!en && kyUc.dangNhap && kyUc.ds.length > 0 && (
         <div className="mb-4 rounded-xl border border-gold/30 bg-gold/[0.05] p-3" data-testid="ky-uc">
           <p className="text-xs text-fg-muted">Lần trước bạn băn khoăn</p>
           <ul className="mt-1 space-y-1">
@@ -70,7 +72,7 @@ export function NoiDau({ hoSo, onHoi, theoPitago = false, quyUoc = "tong_het" }:
           </ul>
         </div>
       )}
-      <div role="tablist" aria-label="Năm trụ đời" className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none]">
+      <div role="tablist" aria-label={c("nd.aria_tru")} className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none]">
         {bd.tru.map((t, i) => {
           const Icon = BIEU_TUONG[t.bieu_tuong] ?? Sparkles;
           return (
@@ -83,25 +85,25 @@ export function NoiDau({ hoSo, onHoi, theoPitago = false, quyUoc = "tong_het" }:
         })}
       </div>
       <p className="mt-2 text-sm text-fg-muted">{tru.mo_ta}</p>
-      {theoPitago && <p className="mt-1 text-xs text-moon" data-testid="noi-dau-theo-pitago">Con số trên thẻ tính theo phái Pitago; câu về bản thân sẽ được trả lời theo phái bạn đang chọn.</p>}
+      {theoPitago && <p className="mt-1 text-xs text-moon" data-testid="noi-dau-theo-pitago">{c("nd.theo_pitago")}</p>}
       <div role="tabpanel" aria-label={tru.ten} className="mt-4 grid gap-3 md:grid-cols-2">
         {tru.cau_hoi.map((q) => (
           <article key={q.ma} data-testid={`noi-dau-${q.ma}`} className="flex flex-col rounded-xl border border-line/70 bg-bg/40 p-4">
             <h3 className="text-base">“{q.noi_dau}”</h3>
             <p className="mt-1 text-sm text-fg-muted">{q.cau}</p>
-            <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Con số của bạn trả lời câu này">
+            <ul className="mt-3 flex flex-wrap gap-1.5" aria-label={c("nd.aria_so")}>
               {q.so.map((s) => (
                 <li key={s.ma} className="rounded-full bg-gold/10 px-2 py-0.5 text-xs">
-                  {s.ten} <b className="text-gold">{hienGiaTri(s.gia_tri)}</b>
+                  {s.ten} <b className="text-gold">{hienGiaTri(s.gia_tri, { can_ho_ten: c("nd.can_ho_ten"), khong_co: c("nd.khong_co") })}</b>
                 </li>
               ))}
             </ul>
             <div className="mt-3 flex flex-wrap gap-2">
               <Button variant="secondary" size="sm"
                 onClick={() => { ghi("pain_point_clicked", { mo_dun: "thanso", tru: tru.ma, ma_cau: q.ma, nguon: "bang" }); onHoi(q.cau, q.ma); }}>
-                <MessageCircleQuestion aria-hidden /> Hỏi câu này
+                <MessageCircleQuestion aria-hidden /> {c("nd.hoi")}
               </Button>
-              {kyUc.dangNhap && (
+              {!en && kyUc.dangNhap && (
                 <Button variant="ghost" size="sm" disabled={daNho.has(q.ma)} onClick={() => kyUc.them(tru.ma, q.ma)}
                   aria-label={daNho.has(q.ma) ? "Đã ghi nhớ" : "Ghi nhớ điều này"}>
                   {daNho.has(q.ma) ? <BookmarkCheck aria-hidden /> : <Bookmark aria-hidden />} {daNho.has(q.ma) ? "Đã nhớ" : "Ghi nhớ"}

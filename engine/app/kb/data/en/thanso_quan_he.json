@@ -1,0 +1,330 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 — bản tiếng Anh của thanso_quan_he.json (hợp đôi theo loại quan hệ). Ban biên tập viết, chờ người bản xứ duyệt. Không chấm điểm hợp / khắc.",
+ "source": {
+  "ten": "Reference compilation (editorial draft, 2026) following the Balliett–Jordan tradition and common numerology books",
+  "luu_y": "Draft shown by decision of the project owner (2026-09-30); a status column allows gradual review. A cultural reference, not a forecast."
+ },
+ "quan_he": {
+  "nguoi_yeu": {
+   "ten": "Partner",
+   "tieu_de": "Two people, one rhythm of love",
+   "trong_tam": "In love, what matters is that each of you feels loved in the way you need — and that you can tell each other even the hard things.",
+   "cau_hoi_chung": "This week, each of you tells the other one thing that makes you feel most loved."
+  },
+  "ban_be": {
+   "ten": "Friend",
+   "tieu_de": "Two friends, two ways of keeping a friendship",
+   "trong_tam": "A friendship lasts when each of you can be yourself, you meet at a pace that suits you both, and you can be honest with each other at times.",
+   "cau_hoi_chung": "When did the two of you last tell each other something hard to hear?"
+  },
+  "dong_nghiep": {
+   "ten": "Colleague",
+   "tieu_de": "Two ways of working, one goal",
+   "trong_tam": "With a colleague, what matters is clear roles, understanding how the other person works and communicating at their pace — not being close friends.",
+   "cau_hoi_chung": "In your shared project, who decides which part — have the two of you said it out loud?"
+  },
+  "sep": {
+   "ten": "Boss",
+   "tieu_de": "Working with your boss",
+   "trong_tam": "With a manager, what matters is understanding what they value, reporting in a way they take in easily and keeping your own voice.",
+   "cau_hoi_chung": "Have you asked your boss directly what 'doing well' looks like in your role?"
+  },
+  "gia_dinh": {
+   "ten": "Family",
+   "tieu_de": "Family: two worlds under one roof",
+   "trong_tam": "In a family, two people do not choose each other — what matters is respecting differences, sharing responsibilities fairly and saying what you need.",
+   "cau_hoi_chung": "Is there something you wish this family member understood about you but have never said?"
+  }
+ },
+ "theo_so": {
+  "1": {
+   "nguoi_yeu": {
+    "vai": "Takes the initiative, likes to set the pace of the relationship, shows love through protective action.",
+    "can": "To have their decisions respected and some freedom of their own.",
+    "tranh": "Giving orders or comparing them with others; hurting their pride in front of other people.",
+    "cach_noi": "Be direct and brief; offer choices rather than demands."
+   },
+   "ban_be": {
+    "vai": "The one who rounds people up, starts the plans and stands up for friends when needed.",
+    "can": "A friend who dares to follow and dares to argue.",
+    "tranh": "Letting them decide everything, then complaining behind their back.",
+    "cach_noi": "Give honest feedback, but in private, not in front of a group."
+   },
+   "dong_nghiep": {
+    "vai": "Works fast, likes owning their part of the work, often suggests new ways.",
+    "can": "A clear scope of responsibility and the authority to decide within it.",
+    "tranh": "Supervising every step or taking credit.",
+    "cach_noi": "Talk about goals and results, less about procedural detail."
+   },
+   "sep": {
+    "vai": "A decisive boss who expects speed and likes people who take the initiative.",
+    "can": "Staff who solve problems themselves and only come to them for decisions.",
+    "tranh": "Bringing a problem without options; arguing one-on-one in front of the team.",
+    "cach_noi": "Report briefly: result → what is blocking → two proposed options."
+   },
+   "gia_dinh": {
+    "vai": "The one who takes the brunt and often decides for the whole family.",
+    "can": "To have their role recognised and to be trusted.",
+    "tranh": "Challenging their authority head-on when tension is high.",
+    "cach_noi": "Ask their opinion first, then state your own need clearly."
+   }
+  },
+  "2": {
+   "nguoi_yeu": {
+    "vai": "Gentle, attentive, remembers the small details.",
+    "can": "Reassurance that they are loved, through words and a steady presence.",
+    "tranh": "Cold silence or joking about their feelings.",
+    "cach_noi": "Be gentle, check in, and ask 'what are you thinking?'"
+   },
+   "ban_be": {
+    "vai": "The listener, the keeper of secrets, the peacemaker of the group.",
+    "can": "Care that flows both ways, not only when you need them.",
+    "tranh": "Only getting in touch when something is wrong.",
+    "cach_noi": "Ask about their life, not just tell them about yours."
+   },
+   "dong_nghiep": {
+    "vai": "Coordinates well, supports quietly, pays attention to detail.",
+    "can": "A friendly environment and recognition for their contribution.",
+    "tranh": "Harsh criticism or handing over tasks without explaining them.",
+    "cach_noi": "Acknowledge first, give feedback second, and do it in private."
+   },
+   "sep": {
+    "vai": "A gentle boss who cares about team atmosphere and avoids conflict.",
+    "can": "Cooperative staff who bring bad news early but tactfully.",
+    "tranh": "Open confrontation; forming factions.",
+    "cach_noi": "Talk one-on-one and frame it as 'let's work out a way together'."
+   },
+   "gia_dinh": {
+    "vai": "The one who keeps the peace, often giving way so home stays calm.",
+    "can": "To be asked for their opinion, not to have their giving way taken for granted.",
+    "tranh": "Raising your voice or making them take sides.",
+    "cach_noi": "Ask 'what do you think?' and wait until they have finished."
+   }
+  },
+  "3": {
+   "nguoi_yeu": {
+    "vai": "Fun, romantic, full of surprises, good at making the other person laugh.",
+    "can": "To be praised, to be heard, and a relationship that does not get monotonous.",
+    "tranh": "Calling them childish or being cold about their ideas.",
+    "cach_noi": "Show interest in their stories; bring up serious topics when things are relaxed."
+   },
+   "ban_be": {
+    "vai": "The life of the party, the storyteller, the one who connects everyone.",
+    "can": "An appreciative audience and friends to have fun with.",
+    "tranh": "Treating them only as 'the fun one' without asking about their real life.",
+    "cach_noi": "Start with a story; ask deeper questions when they are at ease."
+   },
+   "dong_nghiep": {
+    "vai": "Full of ideas, communicates well, keeps the team in good spirits.",
+    "can": "Room to create and a chance to present their ideas.",
+    "tranh": "Repetitive tasks for too long; shooting down ideas the moment they are voiced.",
+    "cach_noi": "Hear the idea out, then agree together on concrete tasks and deadlines."
+   },
+   "sep": {
+    "vai": "An inspiring boss with lots of ideas, who sometimes changes direction quickly.",
+    "can": "Staff who can turn ideas into concrete work.",
+    "tranh": "Flatly rejecting ideas in a meeting.",
+    "cach_noi": "Note the ideas down and send back a summary of next steps to lock in the direction."
+   },
+   "gia_dinh": {
+    "vai": "The one who keeps the family in good spirits and loves telling stories.",
+    "can": "To be listened to and appreciated.",
+    "tranh": "Ignoring their stories or calling them unserious.",
+    "cach_noi": "Use humour to open a difficult conversation."
+   }
+  },
+  "4": {
+   "nguoi_yeu": {
+    "vai": "Faithful and dependable; shows love through concrete actions.",
+    "can": "Stability, consistency and clear plans.",
+    "tranh": "Breaking promises, sudden changes, taking what they do for granted.",
+    "cach_noi": "Be concrete and clear; thank them for the small things they do."
+   },
+   "ban_be": {
+    "vai": "A reliable friend who turns up when practical help is needed.",
+    "can": "Punctuality and honesty.",
+    "tranh": "Cancelling at the last minute; empty promises.",
+    "cach_noi": "Set a specific day and time; tell the truth even when it is hard to hear."
+   },
+   "dong_nghiep": {
+    "vai": "Careful, follows process, protects quality.",
+    "can": "Clear instructions, reasonable deadlines, consistent processes.",
+    "tranh": "Changing requirements all the time; sloppy work.",
+    "cach_noi": "Bring figures and a step-by-step plan; give advance notice of any change."
+   },
+   "sep": {
+    "vai": "A meticulous boss who values process, quality and deadlines.",
+    "can": "Reliable, careful staff who report with figures.",
+    "tranh": "Taking shortcuts; missing deadlines without warning.",
+    "cach_noi": "Give structured reports with enough detail; ask before changing how something is done."
+   },
+   "gia_dinh": {
+    "vai": "The practical pillar who handles routines, finances and housework.",
+    "can": "Order and shared responsibility.",
+    "tranh": "Brushing off house rules, mess, unplanned spending.",
+    "cach_noi": "Discuss concrete plans and avoid vague talk."
+   }
+  },
+  "5": {
+   "nguoi_yeu": {
+    "vai": "Magnetic, adventurous, brings a sense of novelty.",
+    "can": "Freedom, trust and shared experiences.",
+    "tranh": "Control, jealousy, holding on too tightly.",
+    "cach_noi": "Invite them to try something new together; talk about commitment as a choice, not a tie."
+   },
+   "ban_be": {
+    "vai": "The one who suggests going out, travelling, trying new things.",
+    "can": "A friend ready to 'just go' who does not mind when they disappear for a while.",
+    "tranh": "Holding them to a rigid schedule.",
+    "cach_noi": "Keep it short, fun and flexible."
+   },
+   "dong_nghiep": {
+    "vai": "Flexible, good in unexpected situations, likes varied work.",
+    "can": "Variety and freedom in how they do the work.",
+    "tranh": "Monotonous tasks, micromanagement.",
+    "cach_noi": "State the goal and let them choose how; confirm in writing so nothing slips."
+   },
+   "sep": {
+    "vai": "A dynamic boss who changes things quickly and likes people who adapt well.",
+    "can": "Flexible staff who are not afraid of new tasks.",
+    "tranh": "Complaining about change; clinging rigidly to the old plan.",
+    "cach_noi": "Offer options quickly; confirm what you agreed in a short message."
+   },
+   "gia_dinh": {
+    "vai": "The one who travels, changes things and brings new stories home.",
+    "can": "Not to be tied down by traditional expectations.",
+    "tranh": "Imposing on them or scolding them for being different from the family's ways.",
+    "cach_noi": "Be curious about their experiences before giving advice."
+   }
+  },
+  "6": {
+   "nguoi_yeu": {
+    "vai": "Caring and warm, focused on family and a shared future.",
+    "can": "Appreciation for what they do, and commitment.",
+    "tranh": "Taking their care for granted; being irresponsible.",
+    "cach_noi": "Thank them specifically; say which part you want to take care of yourself."
+   },
+   "ban_be": {
+    "vai": "A thoughtful friend who often helps and gives advice.",
+    "can": "Recognition, and to be asked about in return.",
+    "tranh": "Taking advantage of their kindness; brushing off their advice.",
+    "cach_noi": "Thank them for the advice, then say clearly what you have decided."
+   },
+   "dong_nghiep": {
+    "vai": "Dedicated, looks out for the whole team, keeps things warm.",
+    "can": "A respectful workplace and fair treatment.",
+    "tranh": "Pushing your work onto them because you know they find it hard to say no.",
+    "cach_noi": "Be gentle and appreciative; take on your own share of the work."
+   },
+   "sep": {
+    "vai": "A boss who cares for staff like family and takes responsibility seriously.",
+    "can": "Committed staff with team spirit.",
+    "tranh": "Indifference to the team; working only for yourself.",
+    "cach_noi": "Share personal difficulties when they affect the work; propose shared solutions."
+   },
+   "gia_dinh": {
+    "vai": "The one who looks after everyone, remembers every occasion and keeps family traditions.",
+    "can": "Help and thanks.",
+    "tranh": "Letting them carry everything, then calling them a nag.",
+    "cach_noi": "Take on specific tasks; say 'let me handle this part'."
+   }
+  },
+  "7": {
+   "nguoi_yeu": {
+    "vai": "Deep and private; falls in love slowly and sincerely.",
+    "can": "Quiet time of their own and conversations with depth.",
+    "tranh": "Pressing them to show feelings right away; intruding on their privacy.",
+    "cach_noi": "Ask open questions and give them time to think; talk about ideas and meaning."
+   },
+   "ban_be": {
+    "vai": "Has few friends but good ones, and gives sharp advice.",
+    "can": "Respect when they need to be alone.",
+    "tranh": "Blaming them for disappearing; dragging them into noisy crowds.",
+    "cach_noi": "Meet one-on-one and talk properly; message when needed without expecting an instant reply."
+   },
+   "dong_nghiep": {
+    "vai": "Deep expertise, strong analysis, likes working independently.",
+    "can": "Uninterrupted time to focus.",
+    "tranh": "Pointless meetings; rushing them before the facts are in.",
+    "cach_noi": "Send the problem in writing first so they have time to think."
+   },
+   "sep": {
+    "vai": "An expert boss who says little and expects quality and tight reasoning.",
+    "can": "Knowledgeable staff who work carefully and back things up.",
+    "tranh": "Vague talk without data; flattery.",
+    "cach_noi": "Lay out clear reasoning with data; welcome tough questions."
+   },
+   "gia_dinh": {
+    "vai": "A quiet family member who needs their own space at home.",
+    "can": "To be left alone when needed, and understood as not being cold.",
+    "tranh": "Reading their silence as sulking or indifference.",
+    "cach_noi": "Ask briefly, and start conversations with topics they care about."
+   }
+  },
+  "8": {
+   "nguoi_yeu": {
+    "vai": "Strong and protective, focused on securing the material future.",
+    "can": "Respect for their abilities and a partner who shares their drive.",
+    "tranh": "Belittling their failures; competing for power in public.",
+    "cach_noi": "Be frank and clear; talk about shared goals."
+   },
+   "ban_be": {
+    "vai": "An influential, generous friend who often connects people with opportunities.",
+    "can": "Respect, and friendship without self-interest.",
+    "tranh": "Only getting in touch when you need help or money.",
+    "cach_noi": "Be direct and to the point; acknowledge their successes."
+   },
+   "dong_nghiep": {
+    "vai": "Results-focused, decisive, ambitious.",
+    "can": "Efficient colleagues who do not waste time.",
+    "tranh": "Unexplained delays; hidden rivalry.",
+    "cach_noi": "Go straight to the numbers and the results."
+   },
+   "sep": {
+    "vai": "A powerful, demanding boss who looks at results.",
+    "can": "Staff who deliver measurable results.",
+    "tranh": "Making excuses; challenging their authority in front of others.",
+    "cach_noi": "Open with results and figures; make proposals with the benefits worked out."
+   },
+   "gia_dinh": {
+    "vai": "The one who handles the family finances and has a big say at home.",
+    "can": "Respect and trust.",
+    "tranh": "Arguing about money in front of outsiders.",
+    "cach_noi": "Discuss money clearly, with a plan."
+   }
+  },
+  "9": {
+   "nguoi_yeu": {
+    "vai": "Romantic, forgiving, guided by ideals.",
+    "can": "To have their ideals understood and to be loved for their fragile side too.",
+    "tranh": "Mocking their dreams; being selfish or petty.",
+    "cach_noi": "Talk about meaning and values; gently bring it back to concrete things."
+   },
+   "ban_be": {
+    "vai": "A generous friend who helps without keeping score.",
+    "can": "Sincerity and doing meaningful things together.",
+    "tranh": "Taking advantage of their kindness.",
+    "cach_noi": "Share honestly; invite them to do something good together."
+   },
+   "dong_nghiep": {
+    "vai": "Sees the big picture, inspires others, cares about social impact.",
+    "can": "To see that the work means something.",
+    "tranh": "Talking only about profit and ignoring values.",
+    "cach_noi": "Say 'who does this help?', then settle on concrete tasks."
+   },
+   "sep": {
+    "vai": "A visionary, humane boss who is sometimes far from practicalities.",
+    "can": "Staff who share the values and help make them real.",
+    "tranh": "Belittling the mission; chasing targets only.",
+    "cach_noi": "Link your proposals to the shared vision; bring a realistic plan."
+   },
+   "gia_dinh": {
+    "vai": "A big-hearted person who looks out for the wider family and community.",
+    "can": "Understanding, and someone to share the load.",
+    "tranh": "Harshly blaming them for caring about outsiders more than family.",
+    "cach_noi": "Gently tell them that the family needs them too."
+   }
+  }
+ }
+}

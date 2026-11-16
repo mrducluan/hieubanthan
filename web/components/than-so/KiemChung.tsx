@@ -7,8 +7,10 @@ import { Check } from "lucide-react";
 import type { KiemChung as KC } from "@/lib/engine";
 import { cn } from "@/lib/utils";
 import { KhoiLop } from "./LopNoiDung";
+import { useChuThanSo } from "./chu-than-so";
 
 export function KiemChung({ kc, so, viTri }: { kc: KC; so: number; viTri: string }) {
+  const { c } = useChuThanSo();
   const [chon, setChon] = useState<Set<number>>(new Set());
   const n = chon.size;
   const ketQua = n >= kc.nguong.khop ? kc.ket_qua.khop : n >= kc.nguong.mot_phan ? kc.ket_qua.mot_phan : kc.ket_qua.chua_khop;
@@ -24,19 +26,19 @@ export function KiemChung({ kc, so, viTri }: { kc: KC; so: number; viTri: string
                 chon.has(i) ? "border-moon bg-moon/10" : "border-line/70 hover:border-moon/60")}>
               <span className={cn("mt-0.5 grid size-4 shrink-0 place-items-center rounded border",
                 chon.has(i) ? "border-moon bg-moon text-bg" : "border-line")}>{chon.has(i) && <Check className="size-3" aria-hidden />}</span>
-              <span><span className={cn("text-xs", x.loai === "manh" ? "text-jade" : "text-cinnabar")}>{x.loai === "manh" ? "Điểm mạnh" : "Điểm mù"}:</span> {x.chu}</span>
+              <span><span className={cn("text-xs", x.loai === "manh" ? "text-jade" : "text-cinnabar")}>{x.loai === "manh" ? c("kc.manh") : c("kc.mu")}:</span> {x.chu}</span>
             </button>
           </li>
         ))}
       </ul>
       {n > 0 ? (
         <p className="mt-3 rounded-lg bg-moon/10 px-3 py-2 text-sm" data-testid={`ket-qua-kiem-chung-${viTri}`} aria-live="polite">
-          <b className="text-moon">Khớp {n}/{kc.net.length}.</b> {ketQua}
+          <b className="text-moon">{c("kc.khop", { n: String(n), tong: String(kc.net.length) })}</b> {ketQua}
         </p>
       ) : (
 <>
-          <p className="mt-3 text-xs text-fg-faint">Lúc áp lực, người mang số {so} hay {kc.khi_cang_thang.charAt(0).toLowerCase() + kc.khi_cang_thang.slice(1)}</p>
-          <p className="mt-1 text-xs text-fg-faint">Chỉ máy bạn biết bạn tích gì.</p>
+          <p className="mt-3 text-xs text-fg-faint">{c("kc.ap_luc", { so: String(so), chu: kc.khi_cang_thang.charAt(0).toLowerCase() + kc.khi_cang_thang.slice(1) })}</p>
+          <p className="mt-1 text-xs text-fg-faint">{c("kc.rieng")}</p>
         </>
       )}
     </KhoiLop>

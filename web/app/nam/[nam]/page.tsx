@@ -1,7 +1,9 @@
 // NAM-1 (hướng A, chủ dự án duyệt 2026-10-30) — trang trụ "Năm {năm}": năm con gì, mệnh gì, Tết, Tam tai, 12 con giáp,
 // mốc lễ, hạn năm + lối sang mọi trang tra theo tuổi của năm đó và "Năm {năm} của riêng bạn" (/thoi-gian-toi).
 // Engine dựng toàn bộ dữ kiện (`/v1/nam/{nam}`); web chỉ hiển thị. Index năm âm hiện tại + năm sau.
+// EN-ALL GĐ 8: /en/year/{năm} là rewrite của trang này (chữ lib/chu/nam-tuoi.ts, tên riêng qua `ten_hien`).
 import { AnhTomTat } from "@/components/seo/AnhTomTat";
+import { MoiXemRieng } from "@/components/nam/MoiXemRieng";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -10,12 +12,19 @@ import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { docNamBang, duongHanNam, duongLamNhaNam, duongSaoHanNam, duongXongDatNam, namAmHienTai } from "@/lib/tuoi-dan-gian";
-import { dmy, duongCuoiHoi, duongNam, duongNamTuoi, duongSinhCon, namCongKhai, namIndex } from "@/lib/nam";
-import { duongLichAm } from "@/lib/lich-am";
+import { duongCuoiHoi, duongNam, duongNamTuoi, duongSinhCon, namCongKhai, namIndex } from "@/lib/nam";
+import { duongLichAm, lichNgayCongKhai } from "@/lib/lich-am";
+import { LichAmNam } from "@/components/lich-am/LichAmNam";
+import { homNayVN } from "@/lib/hoang-lich";
 import { duongThang } from "@/lib/hoang-lich";
-import { duongTrang } from "@/lib/kien-thuc";
+import { duongTrang, slugEnCua } from "@/lib/kien-thuc";
 import { taoChu } from "@/lib/chu-trang";
-import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
+import { voiAnhChiaSe } from "@/lib/noi-dung-trang";
+import { ngonNguMayChu } from "@/lib/ngon-ngu-may-chu";
+import { ldTrangWebEn, metaTrangEn, themHreflangVi } from "@/lib/en/seo";
+import { CON_GIAP_EN, chuNamTuoi, lienNN, ngayNN } from "@/lib/chu/nam-tuoi";
+import { noiDungTheo } from "@/lib/nam-tuoi-nd";
+import { boChuGiai, tenTheo } from "@/lib/ten-hien";
 import { CHU_NAM } from "@/lib/chu/trang-con";
 
 type P = { params: Promise<{ nam: string }> };
@@ -24,59 +33,68 @@ const MENH_TOI = 2027;   // cụm "Sinh năm X mệnh gì" có tới năm này (
 async function metaGoc(p: P): Promise<Metadata> {
   const n = docNamBang((await p.params).nam);
   if (!n) return {};
-  const m = metaTrang({ tieuDe: `Năm ${n} là năm con gì, mệnh gì? Tết, Tam tai`,
-    moTa: `Năm ${n} theo âm lịch Việt Nam: can chi, mệnh nạp âm, ngày Tết, tháng nhuận, tuổi Tam tai, năm tuổi, tuổi xung, mốc lễ trong năm và lối tra sao hạn, tuổi làm nhà, xông đất, cưới hỏi.`,
-    duong: duongNam(n), anh: anhBai({ tieuDe: `Năm ${n}`, mang: "lich" }) });
-  return namIndex(n, await namAmHienTai()) ? m : { ...m, robots: { index: false, follow: true } };
+  const { ngonNgu } = await ngonNguMayChu(), { c } = chuNamTuoi(ngonNgu), b = { nam: n };
+  const index = namIndex(n, await namAmHienTai());
+  if (ngonNgu === "en") return metaTrangEn({ tieuDe: c("nam.seo_tieu_de", b), moTa: c("nam.seo_mo_ta", b), duongVi: duongNam(n), noindex: !index });
+  const m = themHreflangVi(metaTrang({ tieuDe: c("nam.seo_tieu_de", b), moTa: c("nam.seo_mo_ta", b),
+    duong: duongNam(n), anh: anhBai({ tieuDe: `Năm ${n}`, mang: "lich" }) }), duongNam(n));
+  return index ? m : { ...m, robots: { index: false, follow: true } };
 }
 
 export default async function Page(p: P) {
   const n = docNamBang((await p.params).nam);
   if (!n) notFound();
-  const d = await namCongKhai(n);
+  const [d, lich] = await Promise.all([namCongKhai(n), lichNgayCongKhai(n)]);
   if (!d) throw new Error("engine không phản hồi");
+  const { ngonNgu } = await ngonNguMayChu(), { c: t, p: tp, en } = chuNamTuoi(ngonNgu), ten = tenTheo(d.ten_hien, en);
   const duong = duongNam(n), bien = { nam: String(n), can_chi: d.can_chi };
-  const nd = await layNoiDungTrang(duong, bien), c = taoChu(CHU_NAM, nd.chu);
+  const nd = await noiDungTheo(en, duong, bien), c = taoChu(CHU_NAM, nd.chu, ngonNgu);
+  const L = (x: string) => lienNN(en, x), dHien = L(duong)!;
+  const slugMenhEn = en && n <= MENH_TOI ? await slugEnCua("menh_nam", `sinh-nam-${n}-menh-gi`) : null;
   const tieuDe = c("dau.tieu_de", bien);
   const [tetY, tetM] = [Number(d.tet.slice(0, 4)), Number(d.tet.slice(5, 7))];
+  const nb = { nam: n };
   const o: [string, string][] = [
-    ["Can chi", d.can_chi], ["Mệnh nạp âm", `${d.nap_am.ten} · hành ${d.nap_am.hanh}`],
-    ["Tết Nguyên đán", dmy(d.tet)], ["Giao thừa", dmy(d.het_nam)],
-    ["Lập xuân", dmy(d.lap_xuan)], ["Tháng nhuận", d.thang_nhuan ? `Tháng ${d.thang_nhuan}` : "Không có"],
-    ["Năm tuổi", `Tuổi ${d.nam_tuoi}`], ["Xung năm", `Tuổi ${d.xung}`], ["Hợp năm", `Tuổi ${d.tuoi_hop.join(", ")}`],
-    ["Rằm tháng Giêng", dmy(d.moc.find((m) => m.ma === "ram_gieng")?.duong ?? d.tet)],
-    ["Tam tai", `Tuổi ${d.tam_tai.tuoi.join(", ")} (năm thứ ${d.tam_tai.nam_thu})`],
-    ["Số của năm (thần số)", d.so_nam_the_gioi.so === d.so_nam_the_gioi.rut_gon ? String(d.so_nam_the_gioi.so) : `${d.so_nam_the_gioi.so} / ${d.so_nam_the_gioi.rut_gon}`],
+    [t("nam.o_can_chi"), d.can_chi], [t("nam.o_menh"), t("nam.o_menh_gia_tri", { menh: ten("nap_am", d.nap_am.ten), hanh: ten("hanh", d.nap_am.hanh) })],
+    [t("nam.o_tet"), ngayNN(en, d.tet)], [t("nam.o_giao_thua"), ngayNN(en, d.het_nam)],
+    [t("nam.o_lap_xuan"), ngayNN(en, d.lap_xuan)], [t("nam.o_nhuan"), d.thang_nhuan ? t("nam.o_nhuan_thang", { n: d.thang_nhuan }) : t("nam.o_nhuan_khong")],
+    [t("nam.o_nam_tuoi"), t("nam.o_tuoi", { x: d.nam_tuoi })], [t("nam.o_xung"), t("nam.o_tuoi", { x: d.xung })], [t("nam.o_hop"), t("nam.o_tuoi", { x: d.tuoi_hop.join(", ") })],
+    [t("nam.o_ram"), ngayNN(en, d.moc.find((m) => m.ma === "ram_gieng")?.duong ?? d.tet)],
+    [t("nam.o_tam_tai"), t("nam.o_tam_tai_gia_tri", { tuoi: d.tam_tai.tuoi.join(", "), n: String(d.tam_tai.nam_thu) })],
+    [t("nam.o_so"), d.so_nam_the_gioi.so === d.so_nam_the_gioi.rut_gon ? String(d.so_nam_the_gioi.so) : `${d.so_nam_the_gioi.so} / ${d.so_nam_the_gioi.rut_gon}`],
   ];   // 12 ô: kín hàng ở lưới 2 và 3 cột
-  const tra: { href: string; ten: string; mo_ta: string }[] = [
-    { href: "#theo-tuoi", ten: `Tử vi năm ${n} theo tuổi`, mo_ta: "Từng năm sinh 1960–2005, nam và nữ mạng" },
-    { href: duongSaoHanNam(n), ten: `Sao hạn năm ${n}`, mo_ta: "Sao Cửu Diệu theo tuổi, nam và nữ" },
-    { href: duongLamNhaNam(n), ten: `Tuổi làm nhà năm ${n}`, mo_ta: "Kim lâu, Hoang ốc, Tam tai từng tuổi" },
-    { href: duongCuoiHoi(n), ten: `Cưới năm ${n} tuổi nào`, mo_ta: "Kim lâu theo tuổi mụ cô dâu" },
-    { href: duongSinhCon(n), ten: `Sinh con năm ${n}`, mo_ta: "Tuổi bố mẹ hợp, xung với tuổi con" },
-    { href: duongXongDatNam(n), ten: `Tuổi xông đất Tết ${n}`, mo_ta: "Tuổi hợp theo từng tuổi gia chủ" },
-    { href: duongHanNam(n), ten: `Hướng xấu năm ${n}`, mo_ta: "Thái Tuế, Tam Sát, Ngũ Hoàng" },
-    { href: duongLichAm(n), ten: `Lịch âm ${n}`, mo_ta: "Mùng 1, rằm từng tháng, tháng đủ thiếu" },
-    { href: duongThang(tetY, tetM), ten: `Ngày tốt tháng ${tetM}/${tetY}`, mo_ta: "Tháng có Tết: ngày hoàng đạo, giờ tốt" },
-    ...(n <= MENH_TOI ? [{ href: duongTrang("menh_nam", `sinh-nam-${n}-menh-gi`), ten: `Sinh năm ${n} mệnh gì`, mo_ta: "Mệnh, màu hợp, tuổi hợp, cung phi" }] : []),
-  ];
+  // EN-ALL: bản Anh chỉ giữ lối sang trang đã mở bản Anh (lienNN → null thì bỏ); "Sinh năm X mệnh gì" dùng slug Anh của engine.
+  const tra = ([
+    { href: "#theo-tuoi", ten: t("nam.tra_theo_tuoi", nb), mo_ta: t("nam.tra_theo_tuoi_mo") },
+    { href: L(duongSaoHanNam(n)), ten: t("nam.tra_sao_han", nb), mo_ta: t("nam.tra_sao_han_mo") },
+    { href: L(duongLamNhaNam(n)), ten: t("nam.tra_lam_nha", nb), mo_ta: t("nam.tra_lam_nha_mo") },
+    { href: L(duongCuoiHoi(n)), ten: t("nam.tra_cuoi", nb), mo_ta: t("nam.tra_cuoi_mo") },
+    { href: L(duongSinhCon(n)), ten: t("nam.tra_sinh_con", nb), mo_ta: t("nam.tra_sinh_con_mo") },
+    { href: L(duongXongDatNam(n)), ten: t("nam.tra_xong_dat", nb), mo_ta: t("nam.tra_xong_dat_mo") },
+    { href: L(duongHanNam(n)), ten: t("nam.tra_han", nb), mo_ta: t("nam.tra_han_mo") },
+    { href: L(duongLichAm(n)), ten: t("nam.tra_lich_am", nb), mo_ta: t("nam.tra_lich_am_mo") },
+    { href: L(duongThang(tetY, tetM)), ten: t("nam.tra_thang", { thang: tetM, y: tetY }), mo_ta: t("nam.tra_thang_mo") },
+    ...(n <= MENH_TOI ? [{ href: en ? (slugMenhEn ? lienNN(en, duongTrang("menh_nam", `sinh-nam-${n}-menh-gi`).replace(/\/[^/]+$/, `/${slugMenhEn}`)) : null) : duongTrang("menh_nam", `sinh-nam-${n}-menh-gi`), ten: t("nam.tra_menh", nb), mo_ta: t("nam.tra_menh_mo") }] : []),
+  ] as { href: string | null; ten: string; mo_ta: string }[]).filter((x): x is { href: string; ten: string; mo_ta: string } => Boolean(x.href));
   return (
     <div className="mx-auto max-w-3xl">
       <JsonLd data={goiLd(
-        ldTrangWeb({ duong, ten: tieuDe, tomTat: d.tra_loi_nhanh, about: [`Năm ${d.can_chi}`, "Âm lịch Việt Nam", "Tết Nguyên đán"] }),
-        ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Năm", duong: "/nam" }, { ten: `Năm ${n}`, duong }]),
+        en ? ldTrangWebEn({ duong: dHien, ten: tieuDe, tomTat: d.tra_loi_nhanh, about: [`${d.can_chi} year`, "Vietnamese lunar calendar", "Lunar New Year"] })
+          : ldTrangWeb({ duong, ten: tieuDe, tomTat: d.tra_loi_nhanh, about: [`Năm ${d.can_chi}`, "Âm lịch Việt Nam", "Tết Nguyên đán"] }),
+        en ? ldDuongDan([{ ten: "Hieuban", duong: "/en" }, { ten: t("muc.ten"), duong: L("/nam")! }, { ten: String(n), duong: dHien }])
+          : ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Năm", duong: "/nam" }, { ten: `Năm ${n}`, duong }]),
         ldHoiDap(d.hoi_dap),
       )} />
-      <nav aria-label="Đường dẫn" className="mb-2 text-sm text-fg-muted"><Link href="/nam" className="hover:underline">Xem theo năm</Link></nav>
+      <nav aria-label={t("c.duong_dan")} className="mb-2 text-sm text-fg-muted"><Link href={L("/nam")!} className="hover:underline">{t("nam.ve_muc")}</Link></nav>
       <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
-      <section aria-label="Trả lời nhanh" className="rounded-2xl border border-gold/30 bg-gold/5 p-5">
-        <p className="eyebrow">Trả lời nhanh</p>
+      <section aria-label={t("c.tra_loi_nhanh")} className="rounded-2xl border border-gold/30 bg-gold/5 p-5">
+        <p className="eyebrow">{t("c.tra_loi_nhanh")}</p>
         <p className="mt-2 leading-relaxed text-fg">{d.tra_loi_nhanh}</p>
       </section>
 
       <section className="mt-6" aria-labelledby="thong-tin">
-        <h2 id="thong-tin" className="sr-only">Năm {n} con gì, mệnh gì, Tết ngày nào</h2>
+        <h2 id="thong-tin" className="sr-only">{tp("nam.sr_thong_tin", nb)}</h2>
         <dl className="grid grid-cols-2 gap-2 sm:grid-cols-3" data-testid="o-nam">
           {o.map(([k, v]) => (
             <div key={k} className="rounded-xl border border-line/70 p-3">
@@ -84,14 +102,17 @@ export default async function Page(p: P) {
             </div>
           ))}
         </dl>
-        <p className="mt-2 text-xs text-fg-faint">Sinh tháng 1 hoặc đầu tháng 2/{n} trước Tết thì thuộc năm {d.nam_truoc_tet.can_chi} ({d.nam_truoc_tet.nam}).</p>
+        <p className="mt-2 text-xs text-fg-faint">{tp("nam.truoc_tet", { nam: n, can_chi: d.nam_truoc_tet.can_chi, nam_truoc: d.nam_truoc_tet.nam })}</p>
       </section>
 
-      <section className="mt-8 rounded-2xl border border-line bg-surface/40 p-5" aria-labelledby="ca-nhan" data-nosnippet="">
+      {/* LA-UI: lịch cả năm âm (chỉ bản Việt) — sau câu trả lời nhanh + 12 ô dữ kiện của năm. */}
+      {!en && lich && <LichAmNam d={lich} homNay={homNayVN()} className="mt-6" />}
+
+      {L("/thoi-gian-toi") && <section className="mt-8 rounded-2xl border border-line bg-surface/40 p-5" aria-labelledby="ca-nhan" data-nosnippet="">
         <h2 id="ca-nhan" className="text-xl">{c("ca_nhan.tieu_de", bien)}</h2>
         <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{c("ca_nhan.mo_ta", bien)}</p>
-        <Link href={`/thoi-gian-toi?nam=${n}`} className="mt-3 inline-flex rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-bg" data-testid="nut-ca-nhan">{c("ca_nhan.nut", bien)}</Link>
-      </section>
+        <Link href={L(`/thoi-gian-toi?nam=${n}`)!} className="mt-3 inline-flex rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-bg" data-testid="nut-ca-nhan">{c("ca_nhan.nut", bien)}</Link>
+      </section>}
 
       <section className="mt-8" aria-labelledby="tra">
         <h2 id="tra" className="text-2xl">{c("tra.tieu_de", bien)}</h2>
@@ -106,38 +127,38 @@ export default async function Page(p: P) {
 
       {d.bang_con_giap.some((r) => r.nam_sinh_trang?.length) && (
         <section className="mt-8" aria-labelledby="theo-tuoi">
-          <h2 id="theo-tuoi" className="text-2xl">Tử vi năm {n} theo tuổi</h2>
-          <p className="mt-1 text-sm text-fg-muted">Chọn năm sinh để xem điểm thuận, điều nên để ý, sao năm của nam mạng và nữ mạng — đọc bằng lời đời thường.</p>
+          <h2 id="theo-tuoi" className="text-2xl">{tp("nam.theo_tuoi_tieu_de", nb)}</h2>
+          <p className="mt-1 text-sm text-fg-muted">{t("nam.theo_tuoi_mo_ta")}</p>
           <div className="mt-4 grid gap-2 sm:grid-cols-2" data-testid="luoi-theo-tuoi">
             {d.bang_con_giap.filter((r) => r.nam_sinh_trang?.length).map((r) => (
               <div key={r.chi} className="flex items-center gap-3 rounded-xl border border-line/70 px-3 py-2.5">
-                <span className={`w-12 shrink-0 font-serif text-lg ${r.quan_he === "tam_hop" || r.quan_he === "luc_hop" ? "text-jade" : r.quan_he === "binh" ? "text-fg" : "text-gold"}`} title={r.nhan}>{r.chi}</span>
+                <span className={`w-12 shrink-0 font-serif text-lg ${r.quan_he === "tam_hop" || r.quan_he === "luc_hop" ? "text-jade" : r.quan_he === "binh" ? "text-fg" : "text-gold"}`} title={r.nhan}>{en ? CON_GIAP_EN[r.chi] ?? ten("chi", r.chi) : r.chi}</span>
                 <span className="flex flex-wrap gap-1.5">
                   {r.nam_sinh_trang!.map((ns) => (
-                    <Link key={ns} href={duongNamTuoi(n, ns)} className="inline-flex min-h-9 items-center rounded-full border border-line px-3 text-sm tabular-nums text-fg-muted hover:border-gold/50 hover:text-fg">{ns}</Link>
+                    <Link key={ns} href={L(duongNamTuoi(n, ns))!} className="inline-flex min-h-9 items-center rounded-full border border-line px-3 text-sm tabular-nums text-fg-muted hover:border-gold/50 hover:text-fg">{ns}</Link>
                   ))}
                 </span>
               </div>
             ))}
           </div>
-          <p className="mt-2 text-xs text-fg-faint">Màu tên con giáp: xanh = hợp với năm, vàng = năm tuổi hoặc xung, hình, hại.</p>
+          <p className="mt-2 text-xs text-fg-faint">{t("nam.theo_tuoi_chu_thich")}</p>
         </section>
       )}
 
       <section className="mt-8" aria-labelledby="con-giap">
         <h2 id="con-giap" className="text-2xl">{c("con_giap.tieu_de", bien)}</h2>
         <p className="mt-1 text-sm text-fg-muted">{c("con_giap.mo_ta", bien)}</p>
-        <p className="mt-1 text-xs text-fg-faint">Dòng “Bình thường”: không có quan hệ đặc biệt với năm theo địa chi.</p>
+        <p className="mt-1 text-xs text-fg-faint">{t("nam.binh_thuong")}</p>
         <div className="mt-4 overflow-x-auto">
           <table className="w-full min-w-[32rem] text-left text-sm" data-testid="bang-con-giap">
-            <thead className="text-xs text-fg-faint"><tr><th className="py-2 pr-3">Tuổi</th><th className="pr-3">Với năm {d.con_giap}</th><th className="pr-3">Tam tai</th><th>Năm sinh</th></tr></thead>
+            <thead className="text-xs text-fg-faint"><tr><th className="py-2 pr-3">{t("nam.cot_tuoi")}</th><th className="pr-3">{tp("nam.cot_voi_nam", { con_giap: d.con_giap })}</th><th className="pr-3">{t("nam.cot_tam_tai")}</th><th>{t("nam.cot_nam_sinh")}</th></tr></thead>
             <tbody>
               {d.bang_con_giap.map((r) => (
                 <tr key={r.chi} className="border-t border-line/50 align-top">
-                  <td className="py-2 pr-3 font-medium text-fg">{r.chi}</td>
+                  <td className="py-2 pr-3 font-medium text-fg">{en ? `${CON_GIAP_EN[r.chi] ?? ""} (${boChuGiai(ten("chi", r.chi))})` : r.chi}</td>
                   <td className="py-2 pr-3"><span className={r.quan_he === "tam_hop" || r.quan_he === "luc_hop" ? "font-medium text-jade" : r.quan_he === "binh" ? "text-fg-muted" : "font-medium text-gold"}>{r.nhan}</span>
                     {r.quan_he !== "binh" && <span className="mt-0.5 block text-xs leading-relaxed text-fg-muted">{r.loi}</span>}</td>
-                  <td className="py-2 pr-3">{r.tam_tai ? <span className="inline-flex rounded-full border border-gold/50 bg-gold/10 px-2 py-0.5 text-xs text-gold">Năm thứ {r.tam_tai}</span> : <span className="text-fg-faint">—</span>}</td>
+                  <td className="py-2 pr-3">{r.tam_tai ? <span className="inline-flex rounded-full border border-gold/50 bg-gold/10 px-2 py-0.5 text-xs text-gold">{tp("c.Nam_thu", { n: r.tam_tai })}</span> : <span className="text-fg-faint">—</span>}</td>
                   <td className="py-2 text-xs text-fg-muted tabular-nums">{r.nam_sinh.join(", ")}</td>
                 </tr>
               ))}
@@ -151,35 +172,36 @@ export default async function Page(p: P) {
         <ul className="mt-3 divide-y divide-line/50 rounded-xl border border-line/70">
           {d.moc.map((m) => (
             <li key={m.ma} className="flex items-center justify-between gap-3 px-4 py-2.5 text-sm">
-              <span className="text-fg">{m.ten}</span><span className="tabular-nums text-fg-muted">{dmy(m.duong)}</span>
+              <span className="text-fg">{m.ten}</span><span className="tabular-nums text-fg-muted">{ngayNN(en, m.duong)}</span>
             </li>
           ))}
         </ul>
       </section>
 
       <section className="mt-8" aria-labelledby="han-nam">
-        <h2 id="han-nam" className="text-2xl">Hướng nên tránh động thổ năm {n}</h2>
+        <h2 id="han-nam" className="text-2xl">{tp("nam.han_tieu_de", nb)}</h2>
         <ul className="mt-3 space-y-1.5 text-sm">
-          {d.han_nam.huong_tranh.map((h) => <li key={h.ma}><b className="text-fg">{h.ten}</b> <span className="text-fg-muted">ở phương {h.phuong}</span></li>)}
+          {d.han_nam.huong_tranh.map((h) => <li key={h.ma}><b className="text-fg">{h.ten}</b> <span className="text-fg-muted">{tp("nam.han_o_phuong", { phuong: ten("huong", h.phuong) })}</span></li>)}
         </ul>
-        <p className="mt-2 text-sm text-fg-muted">{d.han_nam.moc} <Link href={duongHanNam(n)} className="text-gold underline">Đọc kỹ hướng xấu năm {n}</Link>.</p>
+        <p className="mt-2 text-sm text-fg-muted">{d.han_nam.moc} <Link href={L(duongHanNam(n))!} className="text-gold underline">{tp("nam.han_doc_ky", nb)}</Link>.</p>
       </section>
 
       <section className="mt-10" aria-labelledby="hoi-dap">
-        <h2 id="hoi-dap" className="text-2xl">Câu hỏi thường gặp</h2>
+        <h2 id="hoi-dap" className="text-2xl">{t("c.hoi_dap")}</h2>
         <dl className="mt-4 space-y-4">{d.hoi_dap.map((h) => (
           <div key={h.hoi} className="rounded-xl border border-line/70 p-4"><dt className="font-medium text-fg">{h.hoi}</dt><dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd></div>
         ))}</dl>
       </section>
       {/* SEO-O: ảnh tóm tắt có chữ thật (Google Hình ảnh) — alt cùng nguồn với chữ trong ảnh. */}
-      <AnhTomTat kieu="nam" nam={n} />
+      {!en && <AnhTomTat kieu="nam" nam={n} />}
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       {/* AUD-Q5 (chủ dự án 2026-11-03): câu "tập quán, không phải tiên đoán" ĐƯỢC trích — AI trích lời tục lệ phải kèm câu rào này. */}
       <p className="mt-8 text-sm text-fg-muted" data-testid="luu-y-tap-quan">{d.luu_y}</p>
       <p className="mt-3 flex flex-wrap gap-3 text-sm">
-        {n > 2006 && <Link href={duongNam(n - 1)} className="text-gold underline">Năm {n - 1}</Link>}
-        {n < 2099 && <Link href={duongNam(n + 1)} className="text-gold underline">Năm {n + 1}</Link>}
+        {n > 2006 && <Link href={L(duongNam(n - 1))!} className="text-gold underline">{tp("c.nam_n", { nam: n - 1 })}</Link>}
+        {n < 2099 && <Link href={L(duongNam(n + 1))!} className="text-gold underline">{tp("c.nam_n", { nam: n + 1 })}</Link>}
       </p>
+      <MoiXemRieng trang="nam" nam={n} className="mt-10" />
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
     </div>
   );

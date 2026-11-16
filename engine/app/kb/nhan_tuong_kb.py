@@ -132,4 +132,6 @@ def cum_cam() -> list[str]:
 
 
 def ten_nguon(ma: str | None) -> str:
-    return TEN_NGUON.get(ma or "", TEN_NGUON["ma_y"])
+    m = ma if (ma or "") in TEN_NGUON else "ma_y"
+    from app.kb.loi import L  # noqa: PLC0415 — EN-ALL GĐ 8: tên sách theo ngôn ngữ (bản Anh: pinyin + chú giải)
+    return L(f"nt.ten_nguon.{m}", TEN_NGUON[m])

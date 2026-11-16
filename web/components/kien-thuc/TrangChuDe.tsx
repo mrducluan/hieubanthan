@@ -23,7 +23,7 @@ import { duongDanCumEn } from "@/lib/duong-dan";
 import { cumEn } from "@/lib/so-trang-en";
 import { ldThucTheEn, metaEn } from "@/lib/en/seo";
 import { taoChu } from "@/lib/chu-trang";
-import { CHU_KIEN_THUC } from "@/lib/chu/kien-thuc";
+import { CHU_KIEN_THUC, NUT_MOI_EN } from "@/lib/chu/kien-thuc";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -56,7 +56,7 @@ export async function metaChuDe(khoa: string | null): Promise<Metadata> {
     return metaEn({ title: ce.tieu_de_seo, description: ce.mo_ta, path: en, vi: cd.duong });
   }
   // SEO-K: metaTrang dựng đủ bộ OG + Twitter (trước đây twitter kế thừa tiêu đề trang chủ) + ảnh có hình theo mảng.
-  const meta = apDungSeo(metaTrang({ tieuDe: cd.ten, moTa: cd.mo_ta, duong: cd.duong, md: `${cd.duong}.md` }), await layNoiDungTrang(cd.duong));
+  const meta = apDungSeo(metaTrang({ tieuDe: cd.h1 ?? cd.ten, moTa: cd.mo_ta, duong: cd.duong, md: `${cd.duong}.md` }), await layNoiDungTrang(cd.duong));
   // EN-ALL: cụm đã mở bản Anh → hreflang hai chiều (bản Việt là x-default).
   return en ? { ...meta, alternates: { ...meta.alternates, languages: { vi: cd.duong, en, "x-default": cd.duong } } } : meta;
 }
@@ -85,7 +85,7 @@ export async function TrangChuDe({ khoa }: { khoa: string | null }) {
       )} />
       <DuongDan ds={dd} />
       <HinhMang kieu={HINH_CHU_DE[khoa] ?? "than-so"} className="mt-4 h-20" />
-      <h1 className="mt-3 text-4xl sm:text-5xl">{nd.dau.h1 ?? cd.ten}</h1>
+      <h1 className="mt-3 text-4xl sm:text-5xl">{nd.dau.h1 ?? cd.h1 ?? cd.ten}</h1>
       <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">{cd.mo_ta}</LoiDanCms>
       {TRA_LOI_CUM[khoa] && <div className="mt-6 max-w-3xl"><TraLoiNhanh chu={TRA_LOI_CUM[khoa]!.replace("{so}", String(ds.length))} /></div>}
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-8" />
@@ -148,7 +148,7 @@ async function TrangChuDeEn({ khoa, cd }: { khoa: string; cd: (typeof CHU_DE)[st
         <aside className="glass mt-12 flex flex-col items-start gap-4 rounded-2xl p-6 sm:flex-row sm:items-center" data-nosnippet="">
           <BookOpen className="size-6 shrink-0 text-gold" aria-hidden />
           <p className="flex-1 text-fg-muted">{loiMoi ?? c("moi.chung").replace(/\*/g, "")}</p>
-          <Button asChild><Link href={congCu}>{cd.mang === "/bat-tu" ? c("moi.nut_bat_tu") : cd.mang === "/tu-vi" ? c("moi.nut_tu_vi") : cd.mang === "/phong-thuy" ? c("moi.nut_phong_thuy") : cd.mang === "/kinh-dich" ? c("moi.nut_kinh_dich") : c("moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
+          <Button asChild><Link href={congCu}>{c(NUT_MOI_EN[cd.mang] ?? "moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
         </aside>
       )}
     </div>

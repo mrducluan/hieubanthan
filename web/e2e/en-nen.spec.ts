@@ -47,7 +47,10 @@ test.describe("bảng đường dẫn", () => {
     for (const u of ["/en", "/en/numerology", "/en/numerology/life-path", "/en/tarot", "/en/tarot/cards", "/en/privacy", "/en/terms"]) {
       expect(CAP_DUONG.find((c) => c.en === u)?.mo, u).toBe(true);
       expect(suaDuongLac(u), u).toBeNull();
-      expect(dichRewrite(u), u).toBeNull();      // còn là trang riêng → không rewrite
+      // EN-ALL GĐ 7: Numerology, Tarot (+ Life Path, 78 lá) đã chuyển sang hệ một-component (rewrite trang Việt); trang vào /en
+      // và pháp lý vẫn là trang riêng.
+      if (["/en", "/en/privacy", "/en/terms"].includes(u)) expect(dichRewrite(u), u).toBeNull();
+      else expect(dichRewrite(u), u).not.toBeNull();
     }
   });
 
@@ -90,16 +93,16 @@ test.describe("bảng đường dẫn", () => {
     expect(duongTheo("vi", "/than-so")).toBe("/than-so");
     expect(duongTheo("en", "/than-so")).toBe("/en/numerology");
     expect(duongTheo("en", "/tarot#la-ngay")).toBe("/en/tarot#la-ngay");
-    expect(duongTheo("en", "/nhan-tuong")).toBe("/nhan-tuong");     // chưa mở → link sang bản Việt
+    expect(duongTheo("en", "/huyen-hoc")).toBe("/huyen-hoc");       // chưa mở → link sang bản Việt (GĐ 8 đã mở /nhan-tuong)
     expect(duongTheo("en", "https://example.com/tu-vi")).toBe("https://example.com/tu-vi");
     expect(duongTheo("en", "/en/tarot")).toBe("/en/tarot");
     expect(duongTheo("en", "#neo")).toBe("#neo");
     expect(capHreflang("/than-so?x=1")).toEqual({ vi: "/than-so", en: "/en/numerology" });
-    expect(capHreflang("/nhan-tuong")).toBeNull();
+    expect(capHreflang("/huyen-hoc")).toBeNull();                   // GĐ 8 đã mở /nhan-tuong
     expect(khongCoBanAnh("/quan-tri/cai-dat")).toBe(true);
     expect(khongCoBanAnh("/tu-vi")).toBe(false);
     expect(banVietCuaTrang("/en/numerology/life-path/7")).toBe("/than-so/y-nghia-so/so-7");
-    expect(banVietCuaTrang("/en/tarot/cards/the-fool")).toBe("/tarot/la-bai");
+    expect(banVietCuaTrang("/en/tarot/cards/the-fool")).toBe("/tarot/la-bai/the-fool");
     expect(banVietCuaTrang("/en/khong-co")).toBe("/");
   });
 });
@@ -169,7 +172,7 @@ test.describe("trên trình duyệt", () => {
   });
 
   test("URL Anh của trang CHƯA mở: 404 tiếng Anh, không rewrite sang chữ Việt, không chuyển hướng", async ({ page }) => {
-    for (const u of ["/en/feng-shui/annual-afflictions", "/en/face-reading", "/en/nhan-tuong"]) {
+    for (const u of ["/en/feng-shui/best-directions", "/en/chinese-metaphysics", "/en/huyen-hoc"]) {
       const r = await page.goto(u);
       expect(r!.status(), u).toBe(404);
       expect(new URL(page.url()).pathname, u).toBe(u);

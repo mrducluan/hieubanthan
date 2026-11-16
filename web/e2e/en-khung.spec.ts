@@ -74,7 +74,8 @@ test.describe("trên trình duyệt", () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/en/tarot/cards/the-fool");
     const nav = page.getByTestId("menu-dau-trang");
-    await expect(nav.getByRole("link", { name: "Numerology" })).toBeVisible();
+    // EN-ALL GĐ 8: /en/today + /en/auspicious-dates mở → mục cha "Me" có ≥ 2 con, không còn đẩy "Numerology" lên trên cùng.
+    await expect(nav.getByRole("link", { name: "Me", exact: true })).toBeVisible();
     // EN-ALL GĐ 3d: Bát tự mở bản Anh → mục cha "Chinese Metaphysics" có ≥ 2 con (BaZi, Tarot), Tarot nằm trong bảng thả xuống;
     // mục cha sáng khi đang ở trang Tarot.
     await expect(nav.getByRole("link", { name: "Chinese Metaphysics" })).toHaveAttribute("aria-current", "page");
@@ -92,7 +93,7 @@ test.describe("trên trình duyệt", () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/en/numerology");
     const tab = page.locator("[data-thanh-duoi]");
-    await expect(tab.getByRole("link", { name: "Numerology" })).toHaveAttribute("aria-current", "page");
+    await expect(tab.getByRole("link", { name: "Me", exact: true })).toHaveAttribute("aria-current", "page");
     await page.getByTestId("nut-menu").click();
     const dd = page.getByTestId("menu-di-dong");
     await expect(dd.getByRole("link", { name: "Tarot" })).toBeVisible();
@@ -119,7 +120,7 @@ test.describe("hồ sơ chung giữa hai ngôn ngữ (việc 4)", () => {
       localStorage.setItem("hbt.en.profile.v1", JSON.stringify({ name: "Mary O'Brien", nickname: "Mo", day: 7, month: 3, year: 1990, method: "tong_het" }));
     });
     await page.goto("/en/numerology");
-    await expect(page.getByTestId("dong-ho-so-en")).toContainText("Mary O'Brien");
+    await expect(page.getByTestId("ten-chinh")).toContainText("Mary O'Brien");
     const may = await page.evaluate(() => ({ cu: localStorage.getItem("hbt.en.profile.v1"), moi: JSON.parse(localStorage.getItem("hbt.hoso.v1") ?? "null"), dd: localStorage.getItem("hbt.thanso_dd") }));
     expect(may.cu).toBeNull();
     expect(may.moi).toMatchObject({ ho_ten: "Mary O'Brien", ten_khac: "Mo", ngay: 7, thang: 3, nam: 1990 });
@@ -133,7 +134,7 @@ test.describe("hồ sơ chung giữa hai ngôn ngữ (việc 4)", () => {
       localStorage.setItem("hbt.en.profile.v1", JSON.stringify({ name: "Someone Else", day: 1, month: 1, year: 2000, method: "tung_phan" }));
     });
     await page.goto("/en/numerology");
-    await expect(page.getByTestId("dong-ho-so-en")).toContainText("Nguyen An");
+    await expect(page.getByTestId("ten-chinh")).toContainText("Nguyen An");
     const may = await page.evaluate(() => ({ cu: localStorage.getItem("hbt.en.profile.v1"), moi: JSON.parse(localStorage.getItem("hbt.hoso.v1") ?? "null") }));
     expect(may.cu).toBeNull();
     expect(may.moi).toMatchObject({ ho_ten: "Nguyen An", gio: "09:30" });   // trường bản Việt (giờ sinh) không mất

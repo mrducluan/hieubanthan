@@ -17,7 +17,7 @@ for (const [duong, h1] of [
     const html = await r.text();
     expect(html).toMatch(new RegExp(`<h1[^>]*>${thoatRegex(h1)}`));
     expect(html).toContain("Trả lời nhanh");
-    expect(html).toContain("Việc nên làm theo chi phí");
+    expect(html).toMatch(/Cách xử lý [^<]* theo chi phí/);          // SEO-P: H2 mang tên dấu hiệu
     expect(html).toContain("<table");
     expect(html).toContain('data-testid="minh-hoa"');
     expect(html).toContain("bg-[#f6f0e2]");                 // hình minh hoạ nền sáng

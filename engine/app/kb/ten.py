@@ -48,6 +48,8 @@ NHOM: dict[str, tuple[tuple[str, str], ...]] = {
     "que_ten": (("kinhdich", "que_ten"),), "luc_than_kd": (("kinhdich", "luc_than"), ("kinhdich", "the_ung")),
     "the_ung_kd": (("kinhdich", "the_ung"),), "luc_thu": (("kinhdich", "luc_thu"),), "vuong_suy": (("kinhdich", "vuong_suy"),),
     "hoa_hao": (("kinhdich", "hoa_hao"),), "the_bac": (("kinhdich", "the_bac"),), "don_vi_kd": (("kinhdich", "don_vi"),),
+    # EN-ALL GĐ 8 — Xem ngày tốt: loại của thần trực nhật (hoàng đạo / hắc đạo).
+    "hoang_dao": (("lich", "hoang_dao"),),
 }
 
 
@@ -197,6 +199,13 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     # EN-ALL GĐ 6 — hỏi đáp Kinh Dịch: mục quẻ trong gói bằng chứng (`bang_chung.muc[].ten` = tên quẻ Việt làm mã), mục Mai
     # Hoa thể–dụng (`muc[].the`, `muc[].dung` = quái; ngũ hành của thể / dụng).
     "muc.ten": "que_ten", "muc.the": "quai", "muc.dung": "quai", "muc.the_ngu_hanh": "hanh", "muc.dung_ngu_hanh": "hanh",
+    # EN-ALL GĐ 7 — Hôm nay / Ba lá / Bản đồ 5 mảng: quẻ đầu ngày (tên quẻ + hai quái), nhật chủ của lưu nhật Bát tự.
+    "que_ngay.ten": "que_ten", "que_ngay.thuong": "quai", "que_ngay.ha": "quai", "que.ten": "que_ten",
+    "nhip_bat_tu.nhat_chu": "can",
+    # EN-ALL GĐ 8 — Xem ngày tốt: `than.loai` = "hoàng đạo" / "hắc đạo" (web tô màu theo mã).
+    "than.loai": "hoang_dao",
+    # EN-ALL GĐ 8 (nhóm D) — hướng xấu theo năm: bàn phi tinh lưu niên (cung = 8 quái + "Trung cung").
+    "phi_tinh.cung": "cung_hk",
 }
 
 

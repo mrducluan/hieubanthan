@@ -24,6 +24,11 @@ from app.calc import lunar
 from app.calc import tuoi_dan_gian as t
 from app.luangiai import hoang_lich as L
 from app.luangiai import tuoi_dan_gian as tdg
+from app.kb import nap
+from app.kb import ten as _ten
+from app.kb.loi import L as _L, danh_sach
+from app.luangiai import lich_hien as lh
+from app.luangiai import lich_trang_hien as lth
 
 VAI = {
     "co_dau": ("cô dâu", True), "chu_re": ("chú rể", True),
@@ -53,28 +58,52 @@ def _nam_am(d: dt.date) -> int:
     return L._calc(d)["am"]["nam"]
 
 
-def _luu_y_nam(viec: str, p: dict, nam_am: int) -> list[tuple[str, str]]:
-    """Lưu ý theo NĂM âm của một người chính (không loại ngày): (nhãn ngắn, lời giải thích)."""
+def _luu_y_nam(viec: str, p: dict, nam_am: int, dich: dict | None = None) -> list[tuple[str, str]]:
+    """Lưu ý theo NĂM âm của một người chính (không loại ngày): (nhãn ngắn, lời giải thích). `dich` (chỉ bản ngôn ngữ
+    khác): ghi kèm chữ theo ngôn ngữ của từng nhãn / lời — nhãn Việt vẫn là khoá gộp + sắp xếp (bản Việt quyết định)."""
     ten = p["ten_vai"]
     if viec == "cuoi_hoi" and p["vai"] == "co_dau":
         tuoi = t.tuoi_mu(p["nam_am"], nam_am)
         kl = t.kim_lau(tuoi)
         if kl:
-            return [(f"Kim lâu {ten} (năm âm {nam_am})",
-                     f"Năm âm {nam_am} {ten} {tuoi} tuổi mụ, phạm {tdg.KB['kim_lau'][kl]['ten']} — dân gian thường tránh "
-                     "cưới, nhiều nhà mượn tuổi hoặc dời sang năm sau.")]
+            ra = [(f"Kim lâu {ten} (năm âm {nam_am})",
+                   f"Năm âm {nam_am} {ten} {tuoi} tuổi mụ, phạm {tdg.KB['kim_lau'][kl]['ten']} — dân gian thường tránh "
+                   "cưới, nhiều nhà mượn tuổi hoặc dời sang năm sau.")]
+            if dich is not None:
+                dich[ra[0][0]] = _L("lich.cn.kl.nhan", ra[0][0], vai=_vai(p), n=nam_am)
+                dich[ra[0][1]] = _L("lich.cn.kl.loi", ra[0][1], vai=_vai(p), n=nam_am, tuoi=tuoi, kl=_L(f"lich.cn.kl_ten.{kl}", tdg.KB["kim_lau"][kl]["ten"]))
+            return ra
         return []
     if viec in _LAM_NHA and p["vai"] == "chu":
         x = tdg._danh_gia_nam(p["nam_am"], nam_am)
-        return [(f"tuổi làm nhà {ten} (năm âm {nam_am})",
-                 f"Năm âm {nam_am} {ten} {x['tuoi']} tuổi mụ, phạm {', '.join(x['xau'])} — dân gian thường mượn tuổi "
-                 "người khác đứng tên khi động thổ / về nhà mới.")] if x["xau"] else []
+        ra = [(f"tuổi làm nhà {ten} (năm âm {nam_am})",
+               f"Năm âm {nam_am} {ten} {x['tuoi']} tuổi mụ, phạm {', '.join(x['xau'])} — dân gian thường mượn tuổi "
+               "người khác đứng tên khi động thổ / về nhà mới.")] if x["xau"] else []
+        if ra and dich is not None:
+            xau = [y for y in (_L(f"lich.cn.kl_ten.{x['kl']}", tdg.KB["kim_lau"][x["kl"]]["ten"]) if x["kl"] else None,
+                               _tdg_ten("hoang_oc", x["ho"]) if x["ho"] in t.HOANG_OC_XAU else None,
+                               _L("lich.cn.tam_tai_nam", "Tam tai (năm thứ {tt})", tt=x["tt"]) if x["tt"] else None) if y]
+            dich[ra[0][0]] = _L("lich.cn.ln.nhan", ra[0][0], vai=_vai(p), n=nam_am)
+            dich[ra[0][1]] = _L("lich.cn.ln.loi", ra[0][1], vai=_vai(p), n=nam_am, tuoi=x["tuoi"], xau=danh_sach(xau))
+        return ra
     if viec in _TAM_TAI and p["vai"] == "chu":
         tt = t.pham_tam_tai(t.can_chi_nam(p["nam_am"])[1], t.can_chi_nam(nam_am)[1])
-        return [(f"Tam tai {ten} (năm âm {nam_am})",
-                 f"Năm âm {nam_am} là năm thứ {tt} Tam tai của {ten} — dân gian hay nhắc làm chậm, chuẩn bị kỹ hơn.")] \
+        ra = [(f"Tam tai {ten} (năm âm {nam_am})",
+               f"Năm âm {nam_am} là năm thứ {tt} Tam tai của {ten} — dân gian hay nhắc làm chậm, chuẩn bị kỹ hơn.")] \
             if tt else []
+        if ra and dich is not None:
+            dich[ra[0][0]] = _L("lich.cn.tt.nhan", ra[0][0], vai=_vai(p), n=nam_am)
+            dich[ra[0][1]] = _L("lich.cn.tt.loi", ra[0][1], vai=_vai(p), n=nam_am, tt=tt)
+        return ra
     return []
+
+
+def _vai(p: dict) -> str:
+    return _L(f"lich.cn.vai.{p['vai']}", p["ten_vai"])
+
+
+def _tdg_ten(muc: str, ma: str) -> str:
+    return ((nap.doc("tuoi_dan_gian_kb.json").get(muc) or {}).get(ma) or {}).get("ten") or tdg.KB[muc][ma]["ten"]
 
 
 def _nguoi(ds: list[dict]) -> list[dict]:
@@ -104,6 +133,7 @@ def chon(viec: str, tu: dt.date, den: dt.date, nguoi: list[dict]) -> dict:
     nam_luu_y: dict[tuple[str, int], list[tuple[str, str]]] = {}
     giai_thich: dict[str, str] = {}             # nhãn ngắn → lời giải thích (hiện một lần, không lặp ở từng tháng)
     ngay: list[dict] = []
+    dich: dict[str, str] | None = None if lh.la_viet() else {}
     co_dau = next((p for p in ps if p["vai"] == "co_dau"), None) if viec == "cuoi_hoi" else None
     gia_thu = t.thang_gia_thu(co_dau["con_giap"]) if co_dau else None
     d = tu
@@ -124,10 +154,14 @@ def chon(viec: str, tu: dt.date, den: dt.date, nguoi: list[dict]) -> dict:
                     giai_thich[nhan] = (f"Tháng {_ten_chi(chi_thang)} (tính theo tiết khí) xung tuổi {p['con_giap']} của "
                                         f"{p['ten_vai']} — dân gian thường tránh việc lớn trong tháng xung tuổi.")
                     luu_y.append(nhan)
+                    if dich is not None:
+                        dich[nhan] = _L("lich.cn.xung.nhan", nhan, chi=_ten.ten("chi", _ten_chi(chi_thang)), vai=_vai(p))
+                        dich[giai_thich[nhan]] = _L("lich.cn.xung.loi", giai_thich[nhan], chi=_ten.ten("chi", _ten_chi(chi_thang)),
+                                                    vai=_vai(p), con_giap=lth.con_giap(p["con_giap"]))
                 na = _nam_am(d)
                 key = (p["vai"], na)
                 if key not in nam_luu_y:
-                    nam_luu_y[key] = _luu_y_nam(viec, p, na)
+                    nam_luu_y[key] = _luu_y_nam(viec, p, na, dich)
                 for nhan, dai in nam_luu_y[key]:
                     giai_thich[nhan] = dai
                     luu_y.append(nhan)
@@ -173,6 +207,9 @@ def chon(viec: str, tu: dt.date, den: dt.date, nguoi: list[dict]) -> dict:
             goi_y.append(f"Năm âm {', '.join(map(str, vuong))} {p['ten_vai']} vướng lưu ý theo tuổi; năm âm "
                          f"{', '.join(map(str, sach_nam))} thì không — trong khoảng đã chọn có {len(moc)} ngày hợp việc "
                          "thuộc năm không vướng (năm âm đổi từ mùng 1 Tết).")
+            if dich is not None:
+                dich[goi_y[-1]] = _L("lich.cn.goi_y", goi_y[-1], vuong=", ".join(map(str, vuong)), vai=_vai(p),
+                                     sach=", ".join(map(str, sach_nam)), so=len(moc))
     noi_bat = sorted(ngay, key=khoa)[:6]
     sach = [n for n in ngay if not n["luu_y"]]
     ten_viec = v["ten"][:1].lower() + v["ten"][1:]
@@ -188,7 +225,7 @@ def chon(viec: str, tu: dt.date, den: dt.date, nguoi: list[dict]) -> dict:
                           "sách khuyên tránh, và không xung tuổi ai trong danh sách. Tháng xung tuổi và năm phạm tuổi chỉ "
                           "xét cho người chính (cô dâu, chú rể, người đứng tên); ngày vướng các lưu ý này vẫn hiện, xếp sau."),
             "thang_gia_thu": _gia_thu_ra(co_dau, gia_thu),
-            "luu_y": L.LUU_Y}
+            "luu_y": L.LUU_Y, **({"_dich": dich} if dich is not None else {})}
 
 
 def _gia_thu_ra(co_dau: dict | None, g: dict | None) -> dict | None:
@@ -202,3 +239,57 @@ def _gia_thu_ra(co_dau: dict | None, g: dict | None) -> dict | None:
                     "Tháng ở đây tính theo tiết khí (tháng Dần là tháng Giêng), lịch in theo tháng âm có thể lệch vài "
                     "ngày quanh đầu tháng. Chính bộ sách lịch ghi lại cách chia này cũng nói nó không có căn cứ, nên hệ thống "
                     "chỉ gắn nhãn để gia đình tham khảo — không dùng để xếp hay bỏ ngày nào.")}
+
+
+# ------------------------------------------------------------------ EN-ALL GĐ 8: chữ theo ngôn ngữ (bản Việt trả nguyên)
+def hien(kq: dict) -> dict:
+    """Phản hồi `chon` → chữ theo ngôn ngữ. Nhãn / lời lưu ý tra bảng `_dich` dựng cùng lượt tính (khoá = chữ Việt),
+    tên ngày qua `lich_trang_hien`. Số, mã, độ dài danh sách giữ nguyên."""
+    dich = kq.pop("_dich", None)
+    if lh.la_viet() or dich is None:
+        return kq
+    d = lambda s: dich.get(s, s)  # noqa: E731
+    vai = {k: _L(f"lich.cn.vai.{k}", v[0]) for k, v in VAI.items()}
+
+    def ngay_(n: dict) -> dict:
+        n = lth.ngay_chon(n)
+        n["hop"] = [{**h, "ten_vai": vai.get(h["vai"], h["ten_vai"]), "ten": lh.ten("quan_he_tuoi", h["ten"])} for h in n["hop"]]
+        n["luu_y"] = [d(x) for x in n["luu_y"]]
+        return n
+
+    ten_viec = lh.ten("viec", kq["viec"]["ten"])
+    so_nguoi = len(kq["nguoi"])
+    sach = [n for n in kq["ngay"] if not n["luu_y"]]
+    tu, den = dt.date.fromisoformat(kq["tu"]), dt.date.fromisoformat(kq["den"])
+    tv = lth._thuong(ten_viec)  # noqa: SLF001
+    ra = dict(kq)
+    ra["viec"] = {**kq["viec"], "ten": ten_viec}
+    ra["nguoi"] = [{**p, "ten_vai": vai.get(p["vai"], p["ten_vai"]), "can_chi": lh.can_chi(p["can_chi"]),
+                    "con_giap": lth.con_giap(p["con_giap"]),
+                    "nam": [{**x, "luu_y": [d(y) for y in x["luu_y"]]} for x in p["nam"]]} for p in kq["nguoi"]]
+    ra["ngay"] = [ngay_(n) for n in kq["ngay"]]
+    ra["ngay_noi_bat"] = [ngay_(n) for n in kq["ngay_noi_bat"]]
+    ra["thang"] = [{**m, "ngay": [ngay_(n) for n in m["ngay"]], "luu_y": [d(x) for x in m["luu_y"]]} for m in kq["thang"]]
+    ra["tom_tat"] = ((_L("lich.cn.tom_1" if len(kq["ngay"]) == 1 else "lich.cn.tom", "Từ {tu} đến {den} có {so} ngày sách lịch ghi hợp {viec} và không xung tuổi ai trong "
+                                        "{k} người", tu=lth.ngay_dai(tu), den=lth.ngay_dai(den), so=len(kq["ngay"]), viec=tv, k=so_nguoi)
+                      + (_L("lich.cn.tom_sach_1" if len(sach) == 1 else "lich.cn.tom_sach", "; {so} ngày trong số đó không vướng lưu ý theo tuổi.", so=len(sach))
+                         if len(sach) != len(kq["ngay"]) else "."))
+                     if kq["ngay"] else
+                     _L("lich.cn.tom_khong", "Trong khoảng này chưa có ngày nào vừa hợp {viec} vừa không xung tuổi cả {k} "
+                                             "người — thử nới khoảng ngày hoặc bớt người chỉ cần không xung.", viec=tv, k=so_nguoi))
+    ra["goi_y"] = [d(x) for x in kq["goi_y"]]
+    ra["giai_thich"] = [{"nhan": d(x["nhan"]), "loi": d(x["loi"])} for x in kq["giai_thich"]]
+    ra["cach_chon"] = _L("lich.cn.cach_chon", kq["cach_chon"])
+    ra["luu_y"] = lth.luu_y()
+    if kq.get("thang_gia_thu"):
+        g = dict(kq["thang_gia_thu"])
+        g["co_dau"] = {**g["co_dau"], "con_giap": lth.con_giap(g["co_dau"]["con_giap"])}
+        g["dai_loi_chi"] = [lth.con_giap(x) for x in g["dai_loi_chi"]]
+        g["tieu_loi_chi"] = [lth.con_giap(x) for x in g["tieu_loi_chi"]]
+        g["nhan"] = {k: _L(f"lich.cn.gt.nhan.{k}", v) for k, v in g["nhan"].items()}
+        g["nguon"] = _L("lich.cn.gt.nguon", GIA_THU_NGUON)
+        ten = lambda ds, ch: danh_sach([_L("lich.cn.gt.thang", "tháng {m} ({c})", m=m, c=c) for m, c in zip(ds, ch)])  # noqa: E731
+        g["loi"] = _L("lich.cn.gt.loi", g["loi"], con_giap=g["co_dau"]["con_giap"],
+                      dai=ten(g["dai_loi"], g["dai_loi_chi"]), tieu=ten(g["tieu_loi"], g["tieu_loi_chi"]))
+        ra["thang_gia_thu"] = g
+    return ra

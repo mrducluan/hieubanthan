@@ -73,7 +73,11 @@ def ap(t: dict) -> dict:
     if bs.get("trich_dan"):
         # Nguồn chỉ là tập quán truyền khẩu (dấu hiệu nhà) → bản dịch gọi đúng "tập quán" (chữ Việt mặc định giữ nguyên).
         truyen_khau = all(any(k in (x.get("sach") or "") for k in ("truyền khẩu", "oral tradition")) for x in bs["trich_dan"])
-        them.append({"tieu_de": L("trang.sach_xua.dan_gian" if truyen_khau else "trang.sach_xua", "Sách xưa nói gì"),
+        tieu = L("trang.sach_xua.dan_gian" if truyen_khau else "trang.sach_xua", "Sách xưa nói gì")
+        # SEO-P: trang gốc đã có mục cùng tên (dấu hiệu nhà, lá Tarot) → không lặp H2.
+        if any(m["tieu_de"] == tieu for m in t["muc"]):
+            tieu = L("trang.sach_xua.dan_gian.them" if truyen_khau else "trang.sach_xua.them", "Sách xưa còn ghi gì")
+        them.append({"tieu_de": tieu,
                      "trich_dan": bs["trich_dan"],
                      **({"bien_tap": True} if bien_tap else {})})
     # Thêm sau nội dung gốc; nếu mục cuối là "Câu hỏi tự soi" thì chèn trước nó để tự soi vẫn đứng cuối bài.

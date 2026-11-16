@@ -69,6 +69,7 @@
  },
  "bo_tri": {
   "duong_dam": {
+   "ten_khac": null,
    "tieu_de": "A road running straight at the house",
    "noi_dung": "Landform feng shui calls this a 'road arrow': qi and traffic rush straight at the door. In practice: noise, dust, and a risk of vehicles running in.",
    "goi_y": "Set the door back, add a gate, a low wall or a screen of plants in front.",
@@ -120,6 +121,7 @@
    ]
   },
   "song_truoc": {
+   "ten_khac": null,
    "tieu_de": "A river or lake in front of the house",
    "noi_dung": "The Book of Burial: 'qi stops where it meets water' — water curving round the front is good; water running straight away or cutting sharply across is weaker.",
    "goi_y": "Check whether the water curves round or runs straight; mind flood-season safety and damp.",
@@ -227,6 +229,7 @@
    ]
   },
   "cau_thang_cua": {
+   "ten_khac": null,
    "tieu_de": "Stairs facing the front door",
    "noi_dung": "The belief: qi coming through the door runs straight up or down and does not gather. In practice: a cramped entrance and little privacy.",
    "goi_y": "Add a partition or screen, or turn the foot of the stairs if you can.",

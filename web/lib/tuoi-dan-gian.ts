@@ -1,8 +1,10 @@
 // TDG-1 — kiểu dữ liệu + đọc phía máy chủ cho xem tuổi làm nhà/cưới, hướng xấu năm, tuổi xông đất. Engine tính hết.
 import { duongTheoLuot } from "@/lib/engine-ngon-ngu";
 import { unstable_noStore as noStore } from "next/cache";
+import type { TenHien } from "@/lib/ten-hien";
 
-export interface MetaKb { nguon: string; trang_thai: string; luu_y: string }
+export interface MetaKb { nguon: string; trang_thai: string; luu_y: string;
+  /** EN-ALL: bản Anh — tên hiển thị của trường MÃ (lib/ten-hien.ts). */ ten_hien?: TenHien }
 export interface HuongTranh { ma: string; ten: string; nghia?: string; phuong: string; chi?: string[] }
 export interface HanNam extends MetaKb {
   nam: number; can_chi: string; huong_tranh: HuongTranh[]; moc?: string;

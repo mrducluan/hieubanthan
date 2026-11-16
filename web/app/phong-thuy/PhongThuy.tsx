@@ -72,7 +72,7 @@ export function PhongThuy() {
   useBatDauDoc("phongthuy", Boolean(mq));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
   const dau = <DauMang Icon={Compass} hinh="phong-thuy" ten={t("dau.ten")} mo_ta={t("dau.mo_ta")} />;
-  if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
+  if (hoSo === undefined) return <div>{dau}<KhungTai nhan={en ? "Loading" : undefined} /></div>;
   return (
     <TenHienProvider ten={[mq?.ten_hien ?? ss?.ten_hien]}>
     <div>
@@ -80,7 +80,7 @@ export function PhongThuy() {
       <div className="mx-auto mb-6 max-w-3xl"><HanhTrinhNha mq={mq ? { quai: mq.quai, nhom: mq.nhom, so: mq.so } : null} coSinh={Boolean(sinh)} sinh={sinh} /></div>
       <section aria-label={t("aria.menh_quai")} id="menh-quai" className="mx-auto max-w-3xl scroll-mt-24 space-y-3">
           {!sinh && <XinThemDuLieu hoSo={hoSo} can="gioi_tinh" nut={t("xin.nut")} ly_do={t("xin.ly_do")} />}
-          {sinh && !mq && !loi && <KhungTai dong={2} />}
+          {sinh && !mq && !loi && <KhungTai dong={2} nhan={en ? "Loading" : undefined} />}
           {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
           {/* TP-GON: đóng chỉ còn chip mốc đang dùng; nhắc riêng khi ngày sinh nằm giữa các mốc (mệnh quái đổi theo mốc). */}
           {sinh && (

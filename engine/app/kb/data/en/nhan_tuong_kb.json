@@ -1,0 +1,2760 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi": "EN-ALL GĐ 8 — bản phủ tiếng Anh (ban biên tập, chờ người bản xứ duyệt). Tên vị trí theo pinyin + chú giải.",
+ "bo_vi": {
+  "thien_trung": {
+   "ten": "Tian Zhong (top of the forehead)",
+   "vi_tri": "the middle of the forehead, right at the hairline",
+   "nghia": "The old books read beginnings here: the family ways of your early years and your schooling as a child."
+  },
+  "thien_dinh": {
+   "ten": "Tian Ting (upper forehead)",
+   "vi_tri": "the middle of the forehead, upper part",
+   "nghia": "The middle forehead: how you think, how far you look ahead, your youth and early working life."
+  },
+  "tu_khong": {
+   "ten": "Si Kong (mid-forehead)",
+   "vi_tri": "the middle of the forehead, central part",
+   "nghia": "Together with Zhong Zheng it makes up the Career palace: your working path and the people above you."
+  },
+  "trung_chinh": {
+   "ten": "Zhong Zheng (lower forehead)",
+   "vi_tri": "the middle of the forehead, just above Yin Tang",
+   "nghia": "The centre of the Career palace: your career around 25 and how you hold your position."
+  },
+  "nhat_nguyet_giac": {
+   "ten": "Sun and Moon Corners (sides of the forehead)",
+   "vi_tri": "both sides of the forehead, above the inner ends of the brows",
+   "nghia": "The Parents palace: what your parents gave you, your support as a child. Men look at the Sun Corner (left) first, women at the Moon Corner (right)."
+  },
+  "thien_thuong": {
+   "ten": "Tian Cang (temples)",
+   "vi_tri": "the two corners of the forehead, above the ends of the brows",
+   "nghia": "The Travel palace: travelling far, moving, reaching outward; also the 'upper storehouse' of the Fortune palace."
+  },
+  "an_duong": {
+   "ten": "Yin Tang (between the brows)",
+   "vi_tri": "the space between the inner ends of the eyebrows",
+   "nghia": "The Life palace: you as a whole and your present state of mind. The Inner Classic links this area with the airways."
+  },
+  "long_may": {
+   "ten": "Eyebrows (the Longevity Officer)",
+   "vi_tri": "both eyebrows",
+   "nghia": "The Siblings palace and the Longevity Officer: siblings, friends, how you connect with your peers; the brow hair reflects the liver's qi and blood."
+  },
+  "dien_trach": {
+   "ten": "Tian Zhai (upper eyelids)",
+   "vi_tri": "the space between the eyebrows and the eyes",
+   "nghia": "The Property palace: home, savings, the family's living space."
+  },
+  "mat": {
+   "ten": "Eyes (the Inspecting Officer)",
+   "vi_tri": "both eyes",
+   "nghia": "The Inspecting Officer: the 'spirit' gathers in the eyes — the old books count the eyes as the most important of the five features; ages 35 to 40 are read in the eyes."
+  },
+  "ngu_vi": {
+   "ten": "Fish Tail – Jian Men (outer eye corners)",
+   "vi_tri": "the outer eye corners toward the temples",
+   "nghia": "The Spouse palace: life as a couple, how you are with one person."
+  },
+  "le_duong": {
+   "ten": "Lei Tang – Sleeping Silkworm (under the eyes)",
+   "vi_tri": "the area just below the eyes",
+   "nghia": "The Children palace: children, younger people, your capacity to nurture; the Inner Classic links the area under the eyes with the kidneys and sleep."
+  },
+  "son_can": {
+   "ten": "Shan Gen (root of the nose)",
+   "vi_tri": "the root of the nose, between the eyes",
+   "nghia": "The Health palace: stamina, age 41 — the bridge between forehead and nose. The Inner Classic links this area with the heart and circulation."
+  },
+  "song_mui": {
+   "ten": "Nian Shang – Shou Shang (bridge of the nose)",
+   "vi_tri": "the bridge of the nose, from root to near the tip",
+   "nghia": "The central pillar of the face, ages 44 to 45; the Inner Classic links the bridge with the liver and gallbladder."
+  },
+  "luong_quyen": {
+   "ten": "Cheekbones (Liang Quan)",
+   "vi_tri": "both cheekbones",
+   "nghia": "'Quan' means influence, the ability to take charge; cheekbones need flesh around them to last."
+  },
+  "chuan_dau": {
+   "ten": "Zhun Tou (tip of the nose)",
+   "vi_tri": "the tip of the nose",
+   "nghia": "The Wealth palace: money and how you hold on to it; age 48. The Inner Classic links the nose tip with digestion."
+  },
+  "canh_mui": {
+   "ten": "Lan Tai – Ting Wei (wings of the nose)",
+   "vi_tri": "both nose wings",
+   "nghia": "The 'storehouse' of the Wealth palace: thick, closed wings hold on; thin, exposed ones let money in and straight out."
+  },
+  "nhan_trung": {
+   "ten": "Ren Zhong (philtrum)",
+   "vi_tri": "the groove between the nose and the upper lip",
+   "nghia": "The groove that joins upper and lower: vitality, children, age 51; the Inner Classic links the philtrum with the reproductive system and kidneys."
+  },
+  "phap_lenh": {
+   "ten": "Fa Ling (smile lines)",
+   "vi_tri": "the two lines from the nose wings down to the mouth corners",
+   "nghia": "A mark of standing and good order: clear lines that widen downward belong to a disciplined, respected person; ages 56 to 57."
+  },
+  "mieng": {
+   "ten": "Mouth (the Receiving Officer)",
+   "vi_tri": "the mouth and lips",
+   "nghia": "The Receiving Officer: speech, keeping your word, enjoyment of food; age 60. The lips reflect digestion, qi and blood."
+  },
+  "thua_tuong": {
+   "ten": "Cheng Jiang (below the lower lip)",
+   "vi_tri": "the hollow between the lower lip and the chin",
+   "nghia": "Age 61; the old books read moderation in eating and drinking here."
+  },
+  "dia_cac": {
+   "ten": "Di Ge (chin)",
+   "vi_tri": "the chin",
+   "nghia": "The lower zone, later life from age 70: where you live when older, the people below you, stability."
+  },
+  "ham": {
+   "ten": "Nu Pu – Sai Gu (jaw)",
+   "vi_tri": "both sides of the jaw",
+   "nghia": "The Servants palace: helpers, collaborators, endurance; ages 72 to 75."
+  },
+  "tai": {
+   "ten": "Ears (the Listening Officer)",
+   "vi_tri": "both ears",
+   "nghia": "The Listening Officer: ages 1 to 14 (men left ear first, women right ear first); the Inner Classic links the ears with the kidneys and inborn stamina."
+  },
+  "khuon_mat": {
+   "ten": "The whole face (five shapes)",
+   "vi_tri": "the whole face",
+   "nghia": "The Appearance palace: face shapes grouped by the five elements Metal, Wood, Water, Fire and Earth, each with its own way of living that suits it."
+  }
+ },
+ "cung": {
+  "menh": {
+   "ten": "Life",
+   "noi_ve": "you as a whole and your present state of mind"
+  },
+  "tai_bach": {
+   "ten": "Wealth",
+   "noi_ve": "money, and how you earn and keep it"
+  },
+  "huynh_de": {
+   "ten": "Siblings",
+   "noi_ve": "brothers and sisters, friends, peers"
+  },
+  "dien_trach": {
+   "ten": "Property",
+   "noi_ve": "home, savings, the family's living space"
+  },
+  "tu_tuc": {
+   "ten": "Children",
+   "noi_ve": "children, younger people, your capacity to nurture"
+  },
+  "no_boc": {
+   "ten": "Servants",
+   "noi_ve": "helpers, collaborators, later life"
+  },
+  "phu_the": {
+   "ten": "Spouse",
+   "noi_ve": "life as a couple"
+  },
+  "tat_ach": {
+   "ten": "Health",
+   "noi_ve": "stamina, what to look after"
+  },
+  "thien_di": {
+   "ten": "Travel",
+   "noi_ve": "travelling far, moving, opening up to the outside"
+  },
+  "quan_loc": {
+   "ten": "Career",
+   "noi_ve": "work, the people above you, your standing"
+  },
+  "phuc_duc": {
+   "ten": "Fortune",
+   "noi_ve": "good fortune, peace of mind"
+  },
+  "phu_mau": {
+   "ten": "Parents",
+   "noi_ve": "parents, your support as a child"
+  },
+  "quyen": {
+   "ten": "Authority (cheekbones)",
+   "noi_ve": "influence, taking charge"
+  },
+  "tuong_mao": {
+   "ten": "Appearance",
+   "noi_ve": "the face as a whole"
+  }
+ },
+ "truong_phai": {
+  "tam_dinh_ngu_quan": {
+   "ten": "Three Zones – Five Features – Twelve Palaces",
+   "ngan": "Form",
+   "mo_ta": "Looks at the proportions of the three zones of the face, the five 'features' (brows, eyes, ears, nose, mouth) and 12 areas tied to areas of life. It is the foundation school and the easiest to observe yourself."
+  },
+  "tang_than_khi_sac": {
+   "ten": "Spirit and Complexion",
+   "ngan": "Spirit and colour",
+   "mo_ta": "Looks at whether the gaze has 'spirit' (calm, bright, not exposed) and at skin colour in each area through the seasons. The old books put 'spirit first, energy second' ahead of form."
+  },
+  "cot_phap_nhuc_phap": {
+   "ten": "Bone Method – Flesh Method",
+   "ngan": "Bone and flesh",
+   "mo_ta": "Bone is the frame (yang), flesh the covering (yin). Bones not jutting, flesh not slack means balance. Read by touch, pressing gently."
+  },
+  "y_tuong": {
+   "ten": "Medical face reading (observation)",
+   "ngan": "Health",
+   "mo_ta": "The face as a mirror of what is inside: the Inner Classic links each area of the face with a body system. Here it only gives preventive reminders and suggests check-ups, never names an illness."
+  },
+  "tam_tuong": {
+   "ten": "Heart, Movement and Voice Reading",
+   "ngan": "Traits from habit",
+   "mo_ta": "'The face follows the heart': smile lines, frown lines, voice and gait are marks of years of habit — and they change when the habits change."
+  }
+ },
+ "chuong": {
+  "tong_quan": {
+   "tieu_de": "What your face says",
+   "cau_hoi": "Looking at the whole, what is your strongest trait?",
+   "mo_ta": "The three zones, face shape by the five elements, bone and flesh, overall complexion. Free to read."
+  },
+  "con_nguoi": {
+   "tieu_de": "Character and how you meet the world",
+   "cau_hoi": "What do your eyes, brows, mouth and voice say about you?",
+   "mo_ta": "The spirit of the eyes, brows, mouth, your face at rest, voice and bearing — the part the old books call 'spirit' and 'reading of the heart'."
+  },
+  "cong_viec_tien": {
+   "tieu_de": "Work and money",
+   "cau_hoi": "What do forehead, nose, cheekbones and chin say about how you earn a living?",
+   "mo_ta": "The Career palace (forehead, smile lines), Wealth (nose), Authority (cheekbones), Property, later life (chin)."
+  },
+  "tinh_cam_gia_dinh": {
+   "tieu_de": "Love and family",
+   "cau_hoi": "What do the eye corners, under-eye area, sides of the forehead and brows say?",
+   "mo_ta": "The Spouse palace (eye corners), Children (under the eyes, philtrum), Parents (sides of the forehead), Siblings (brows), Servants (jaw)."
+  },
+  "suc_khoe": {
+   "tieu_de": "Health and daily rhythm",
+   "cau_hoi": "What does the colour of each area remind you to look after?",
+   "mo_ta": "Medical face reading after the Inner Classic: each area of the face is tied to a body system — preventive reminders and check-ups only, never an illness."
+  },
+  "nam_nay": {
+   "tieu_de": "Where to look this year",
+   "cau_hoi": "Which area of the face do the old books read at this age?",
+   "mo_ta": "100 yearly positions: one area for each age. Where to look this year and the next three years, and what you observed there."
+  },
+  "tuong_va_la_so": {
+   "tieu_de": "Face and birth chart",
+   "cau_hoi": "Does your face shape suit the element your Bazi chart needs?",
+   "mo_ta": "The five-element shape of your face set beside the element your Bazi chart should add (two methods): is what you have built up making up for what you were born with?"
+  },
+  "loi_khuyen": {
+   "tieu_de": "The face follows the heart: things to do",
+   "cau_hoi": "Which habits are writing themselves onto your face?",
+   "mo_ta": "Free actions gathered from every chapter: facial habits, sleep, the way you speak — the face changes when habits change."
+  }
+ },
+ "ngu_hinh": {
+  "kim": {
+   "ten": "Metal shape",
+   "dau_hieu": "A square face with clear angles, bright or slightly fair skin, strong bones, a neat build.",
+   "loi": "People with a Metal shape are usually clear, decisive, fond of order, and do what they say. The trap: being hard on themselves and others, struggling to soften when it is needed.",
+   "hop": "The old books say the Metal shape likes 'square' and dislikes 'round': keep a tidy way of life, and work with a clear frame will last.",
+   "viec": "Each week, do one thing just for fun, with no need for it to be perfect."
+  },
+  "moc": {
+   "ten": "Wood shape",
+   "dau_hieu": "A long face, a slim upright body, fine brows and eyes, small but strong bones, a slightly greenish tint.",
+   "loi": "People with a Wood shape are usually refined, eager to learn, and keep going in one direction for a long time, suited to work that needs deep thought. The trap: overthinking, keeping things inside, getting tense.",
+   "hop": "Wood likes 'straight and reaching': it does well when free to grow its own way, and wilts when boxed in.",
+   "viec": "Walk outdoors for 20 minutes a day, ideally among trees."
+  },
+  "thuy": {
+   "ten": "Water shape",
+   "dau_hieu": "A round, full face, soft flesh, large moist eyes, slightly dark or smooth skin, a rounded build.",
+   "loi": "People with a Water shape are gentle, easy-going, sensitive to others' feelings and adaptable. The trap: going along with circumstances, finding it hard to be decisive, retaining water.",
+   "hop": "Water likes 'round and moving': work with conversation and travel suits it better than sitting still in one place.",
+   "viec": "Exercise until you sweat 3 times a week; cut down on salt."
+  },
+  "hoa": {
+   "ten": "Fire shape",
+   "dau_hieu": "A forehead narrower than the jaw (pointed at the top, wide at the bottom), a rosy colour, thin or upright hair, bright eyes, fast speech.",
+   "loi": "People with a Fire shape are enthusiastic, quick, with energy that spreads, and want to see results right away. The trap: hot-tempered, impatient, quick to burn out.",
+   "hop": "Fire likes 'pointed and bright': fast-paced work with an audience and some competition suits it; repetitive work bores it quickly.",
+   "viec": "Before answering anything important, count slowly to five."
+  },
+  "tho": {
+   "ten": "Earth shape",
+   "dau_hieu": "A thick face, a wide jaw, slightly yellowish skin, firm flesh, a broad back, a heavy, steady build.",
+   "loi": "People with an Earth shape are steady, hard-working, keep their word, and are someone many others lean on. The trap: slow to change, holding on to work too long, heavy when tired.",
+   "hop": "Earth likes 'thick and still': work that needs to last and to be held on to (management, production, property) suits it.",
+   "viec": "Each quarter, try a new way of doing one familiar task."
+  },
+  "pha": {
+   "ten": "Mixed shape",
+   "dau_hieu": "Does not lean clearly toward one shape — most people are like this.",
+   "loi": "You carry traits of two or three shapes at once; the old books call it a mixed shape and advise reading it by the strongest trait. People with a mixed shape usually adapt well and avoid extremes.",
+   "hop": "Look at your two strongest elements: if they feed each other, it flows; if they restrain each other, they need balancing.",
+   "viec": "Pick the trait you like most in yourself and nurture it until it is clear."
+  }
+ },
+ "not_ruoi": {
+  "tran": {
+   "ten": "a mole on the forehead",
+   "loi": "Folk belief sees it as the mark of someone who becomes independent early and leans little on others. A mole that is clear and neat is seen as favourable; a faint, spreading one is just a reminder to look after your skin."
+  },
+  "an_duong": {
+   "ten": "a mole between the brows",
+   "loi": "The old books see the space between the brows as the 'seal', so they dislike marks there; in everyday terms: people with a mole here tend to be noticed and have their words scrutinised — keeping what you say concise is enough."
+  },
+  "long_may": {
+   "ten": "a mole inside the eyebrow",
+   "loi": "'A pearl hidden in the brow' — a mole hidden in the eyebrow is seen as the mark of a clever person with many close friends and siblings."
+  },
+  "duoi_mat": {
+   "ten": "a mole under the eye",
+   "loi": "Folk belief calls it a 'teardrop mole' and sees someone with deep feelings, easily moved by others. It is only a personality trait, not an omen."
+  },
+  "duoi_mat_duoi": {
+   "ten": "a mole at the outer eye corner",
+   "loi": "The outer eye corner is the Spouse palace; folk belief says such a person has charm and gets noticed. Something to do: be clear with the person you choose."
+  },
+  "mui": {
+   "ten": "a mole on the nose",
+   "loi": "The nose is the Wealth palace; folk belief says a mole on the bridge or tip means 'money in, money out' — in everyday terms: keep a separate amount aside and do not spend on impulse."
+  },
+  "canh_mui": {
+   "ten": "a mole on a nose wing",
+   "loi": "The nose wings are the 'storehouse' — folk belief says people with a mole here tend to be over-generous. Something to do: track your spending for a month."
+  },
+  "moi": {
+   "ten": "a mole on or around the lips",
+   "loi": "Around the mouth is the Receiving Officer: folk belief sees someone who enjoys good food, speaks well and is often treated to meals. A gentle nudge: keep the promises you make."
+  },
+  "cam": {
+   "ten": "a mole on the chin",
+   "loi": "The chin is later life and home; folk belief sees someone tied to land who often moves house. In everyday terms: someone who likes rearranging the place they live."
+  },
+  "go_ma": {
+   "ten": "a mole on the cheekbone",
+   "loi": "The cheekbones are 'authority': folk belief sees someone who often has to step up and take things on. A reminder: you do not have to carry everyone else's work."
+  },
+  "tai": {
+   "ten": "a mole on the ear",
+   "loi": "The ears stand for childhood and stamina; folk belief sees a mole on the ear as favourable, the mark of someone clever and devoted to family."
+  },
+  "co": {
+   "ten": "a mole on the neck",
+   "loi": "Folk belief sees someone easy-going who likes to help others. Neck skin is thin and moles there get rubbed: if it changes colour or size, see a dermatologist."
+  },
+  "chung": {
+   "ten": "moles in general",
+   "loi": "The old books say a mole that is clear, neat and slightly raised is a 'living mark', while a faint, spreading one is a 'dead mark'. In everyday life, remember one thing: a mole that changes colour or size, or weeps, should be seen by a dermatologist — fortune-telling is no substitute for a check-up."
+  }
+ },
+ "buoc": [
+  {
+   "ten": "Look at the whole face",
+   "goi_y": "Stand an arm's length from the mirror, in daylight, without make-up, hair pulled back."
+  },
+  {
+   "ten": "Forehead and eyebrows",
+   "goi_y": "Look straight on, then turn 45° to see how full your forehead is."
+  },
+  {
+   "ten": "The eyes",
+   "goi_y": "Look into your own eyes in the mirror for 5 seconds and notice whether your gaze is calm."
+  },
+  {
+   "ten": "Nose and cheekbones",
+   "goi_y": "Look from the side to see the bridge of your nose; look straight on to see the nose wings and cheekbones."
+  },
+  {
+   "ten": "Mouth, chin and ears",
+   "goi_y": "Close your lips naturally, without smiling; pull your hair back to see your ears."
+  },
+  {
+   "ten": "Voice and bearing",
+   "goi_y": "Recall what people who know you say about your voice and the way you carry yourself."
+  }
+ ],
+ "cau_hoi": [
+  {
+   "hoi": "Which type is your overall face shape closest to?",
+   "huong_dan": "Compare forehead, cheekbones and jaw: which part is widest; is the chin pointed or square?",
+   "lua_chon": [
+    {
+     "nhan": "Square, with clear angles"
+    },
+    {
+     "nhan": "Long, narrow, slender"
+    },
+    {
+     "nhan": "Round and full, soft flesh"
+    },
+    {
+     "nhan": "Narrow forehead, wide jaw (pointed top, wide bottom)"
+    },
+    {
+     "nhan": "Wide forehead, pointed chin (wide top, pointed bottom)"
+    },
+    {
+     "nhan": "Thick and solid, wide jaw, firm flesh"
+    },
+    {
+     "nhan": "Balanced, no single type stands out"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Divide your face into three parts: hairline → brows, brows → nose tip, nose tip → chin. Which part is longest?",
+   "huong_dan": "Measure with your fingers; if the three parts are about equal, that is 'balanced'.",
+   "lua_chon": [
+    {
+     "nhan": "The three parts are about equal"
+    },
+    {
+     "nhan": "The forehead part is clearly longer"
+    },
+    {
+     "nhan": "The middle (nose) part is clearly longer"
+    },
+    {
+     "nhan": "The chin part is clearly longer"
+    },
+    {
+     "nhan": "The forehead part is clearly shorter"
+    },
+    {
+     "nhan": "The chin part is clearly shorter"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "What has your complexion looked like lately, in daylight?",
+   "huong_dan": "Look at the whole face, not one area; compare with when you feel your best.",
+   "lua_chon": [
+    {
+     "nhan": "Bright, rosy, with a glow"
+    },
+    {
+     "nhan": "Dull yellow, not very fresh"
+    },
+    {
+     "nhan": "Pale, with pale lips"
+    },
+    {
+     "nhan": "Dark, sallow, greyish"
+    },
+    {
+     "nhan": "Flushed and dry"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Press a finger gently into your cheekbones and jaw: how does it feel?",
+   "huong_dan": "Do the bones jut out; is the flesh springy?",
+   "lua_chon": [
+    {
+     "nhan": "Firm, springy flesh, bones not jutting"
+    },
+    {
+     "nhan": "Bones clearly visible, little flesh over them"
+    },
+    {
+     "nhan": "Soft, slack flesh, bones hard to feel"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Your forehead",
+   "huong_dan": "From the side: is your forehead full and rounded or flat; is it sunken in the middle?",
+   "lua_chon": [
+    {
+     "nhan": "High, broad, full, not sunken"
+    },
+    {
+     "nhan": "Narrow or low"
+    },
+    {
+     "nhan": "Bulging, the two corners stand out"
+    },
+    {
+     "nhan": "Sunken or flat in the middle"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Horizontal lines on the forehead",
+   "huong_dan": "With your face relaxed, not raising your eyebrows.",
+   "lua_chon": [
+    {
+     "nhan": "No lines yet, or very faint"
+    },
+    {
+     "nhan": "One to three long, unbroken lines"
+    },
+    {
+     "nhan": "Many short, broken lines"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Both sides of the forehead above the inner ends of the brows (from the side)",
+   "huong_dan": "Is this area full or sunken; are both sides even?",
+   "lua_chon": [
+    {
+     "nhan": "Full and even on both sides"
+    },
+    {
+     "nhan": "One side higher than the other"
+    },
+    {
+     "nhan": "Sunken, low"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Your eyebrows",
+   "huong_dan": "Do the hairs grow smoothly or unruly; how far does the end of the brow reach compared with the outer corner of the eye?",
+   "lua_chon": [
+    {
+     "nhan": "Smooth hairs, growing neatly, running past the outer eye corner"
+    },
+    {
+     "nhan": "Dark, thick, shorter than the eye"
+    },
+    {
+     "nhan": "Sparse, faint, broken"
+    },
+    {
+     "nhan": "Unruly, growing upward"
+    },
+    {
+     "nhan": "The inner ends almost meet"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "The space between the eyebrows and the eyes (upper eyelid)",
+   "huong_dan": "Wide or narrow, full or sunken?",
+   "lua_chon": [
+    {
+     "nhan": "Wide, full, smooth"
+    },
+    {
+     "nhan": "Narrow, brows close to the eyes"
+    },
+    {
+     "nhan": "Deeply sunken or with visible blue veins"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "The area between the inner ends of the brows (Yin Tang)",
+   "huong_dan": "Wider than one finger counts as 'wide'; notice the colour and any vertical line.",
+   "lua_chon": [
+    {
+     "nhan": "Wide, smooth, bright"
+    },
+    {
+     "nhan": "Narrow, brows close together"
+    },
+    {
+     "nhan": "A vertical line"
+    },
+    {
+     "nhan": "Dark, greyish"
+    },
+    {
+     "nhan": "Reddish"
+    },
+    {
+     "nhan": "Medium width (about two fingers)"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Shape of your eyes",
+   "huong_dan": "Compare length with height; do the outer corners tilt up or droop down?",
+   "lua_chon": [
+    {
+     "nhan": "Long, slightly narrow, extended outer corners"
+    },
+    {
+     "nhan": "Round, large, wide open"
+    },
+    {
+     "nhan": "Small"
+    },
+    {
+     "nhan": "Outer corners tilt upward"
+    },
+    {
+     "nhan": "Outer corners droop downward"
+    },
+    {
+     "nhan": "Medium length, corners nearly level"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Look into your eyes for 5 seconds: your gaze",
+   "huong_dan": "'Spirit' is how calm and bright the gaze is, not how big or small the eyes are.",
+   "lua_chon": [
+    {
+     "nhan": "Calm, bright, steady"
+    },
+    {
+     "nhan": "Dull, tired, many red veins"
+    },
+    {
+     "nhan": "Sharp, can turn harsh"
+    },
+    {
+     "nhan": "Restless, hard to keep still"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Looking straight ahead, does white show below or above the iris?",
+   "huong_dan": "If the iris touches both upper and lower lids, that is 'not showing'.",
+   "lua_chon": [
+    {
+     "nhan": "No white showing"
+    },
+    {
+     "nhan": "White showing below"
+    },
+    {
+     "nhan": "White showing above"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "The area just below the eyes",
+   "huong_dan": "Look at the small pad under the eyes (with a slight smile) and at the skin colour.",
+   "lua_chon": [
+    {
+     "nhan": "Small pad full, fresh colour"
+    },
+    {
+     "nhan": "Dark circles, sunken"
+    },
+    {
+     "nhan": "Puffy, slightly swollen in the morning"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "The outer eye corners toward the temples",
+   "huong_dan": "Smooth or sunken; did crow's feet appear early?",
+   "lua_chon": [
+    {
+     "nhan": "Smooth, bright"
+    },
+    {
+     "nhan": "Many criss-cross lines from early on"
+    },
+    {
+     "nhan": "Sunken, dark"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "The root of the nose between the eyes (Shan Gen)",
+   "huong_dan": "From the side: does the nose root flow into the forehead or dip down?",
+   "lua_chon": [
+    {
+     "nhan": "High, flowing into the forehead"
+    },
+    {
+     "nhan": "Low, dipped"
+    },
+    {
+     "nhan": "A horizontal line across it"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "The bridge of your nose",
+   "huong_dan": "From the side.",
+   "lua_chon": [
+    {
+     "nhan": "Straight, high, even"
+    },
+    {
+     "nhan": "Humped, with a bump"
+    },
+    {
+     "nhan": "Low, short"
+    },
+    {
+     "nhan": "Leaning to one side"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "The tip of your nose",
+   "huong_dan": "Straight on and from the side.",
+   "lua_chon": [
+    {
+     "nhan": "Round, full, fleshy"
+    },
+    {
+     "nhan": "Pointed, thin"
+    },
+    {
+     "nhan": "Large, broad"
+    },
+    {
+     "nhan": "Often red, oily"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "The wings of your nose",
+   "huong_dan": "Straight on: can you see your nostrils?",
+   "lua_chon": [
+    {
+     "nhan": "Thick, closing around the nostrils"
+    },
+    {
+     "nhan": "Thin, nostrils visible straight on"
+    },
+    {
+     "nhan": "Flared wide"
+    },
+    {
+     "nhan": "Medium width, in proportion with the gap between the eyes"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Your cheekbones",
+   "huong_dan": "Straight on: do the cheekbones stand out or lie flat; is there flesh over them?",
+   "lua_chon": [
+    {
+     "nhan": "Prominent, well covered with flesh"
+    },
+    {
+     "nhan": "Prominent, bony"
+    },
+    {
+     "nhan": "Low, flat"
+    },
+    {
+     "nhan": "One side higher than the other"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "The philtrum (the groove between nose and upper lip)",
+   "huong_dan": "Up close: is the groove deep or shallow, long or short?",
+   "lua_chon": [
+    {
+     "nhan": "Deep, long, clear, slightly wider at the bottom"
+    },
+    {
+     "nhan": "Shallow, flat, faint"
+    },
+    {
+     "nhan": "Short"
+    },
+    {
+     "nhan": "Crooked"
+    },
+    {
+     "nhan": "Medium length"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "The two lines from the nose wings to the mouth (smile lines)",
+   "huong_dan": "With your face relaxed.",
+   "lua_chon": [
+    {
+     "nhan": "Clear, widening downward, not reaching the mouth corners"
+    },
+    {
+     "nhan": "Faint, not clear yet"
+    },
+    {
+     "nhan": "Running straight into the mouth corners"
+    },
+    {
+     "nhan": "Uneven on the two sides"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Your mouth, closed naturally",
+   "huong_dan": "Not smiling; notice the two corners of the mouth.",
+   "lua_chon": [
+    {
+     "nhan": "Medium width, corners turned slightly up"
+    },
+    {
+     "nhan": "Small, thin lips"
+    },
+    {
+     "nhan": "Mouth corners turn down"
+    },
+    {
+     "nhan": "Thick, full lips"
+    },
+    {
+     "nhan": "Crooked, lips do not close fully"
+    },
+    {
+     "nhan": "Medium width, corners nearly level"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Colour of your lips",
+   "huong_dan": "Without lipstick, in daylight.",
+   "lua_chon": [
+    {
+     "nhan": "Pink, smooth"
+    },
+    {
+     "nhan": "Pale, dry, peeling"
+    },
+    {
+     "nhan": "Dark, purplish"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Your chin",
+   "huong_dan": "From the side: does your chin jut forward or recede?",
+   "lua_chon": [
+    {
+     "nhan": "Round, full, slightly forward"
+    },
+    {
+     "nhan": "Pointed or receding"
+    },
+    {
+     "nhan": "Square, broad"
+    },
+    {
+     "nhan": "Cleft"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Your jaw",
+   "huong_dan": "Look from behind (ask someone to take a photo) or feel it.",
+   "lua_chon": [
+    {
+     "nhan": "Full, solid"
+    },
+    {
+     "nhan": "Narrow, thin"
+    },
+    {
+     "nhan": "Flared wide, clearly visible from behind"
+    },
+    {
+     "nhan": "Medium width compared with the cheekbones"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Your ears",
+   "huong_dan": "Compare the top of your ear with your eyebrow; feel your earlobe.",
+   "lua_chon": [
+    {
+     "nhan": "Top of the ear level with the brow, clear rim, thick lobe"
+    },
+    {
+     "nhan": "Thin, rim turned outward"
+    },
+    {
+     "nhan": "Small, sitting below eye level"
+    },
+    {
+     "nhan": "A diagonal crease on the earlobe"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "The bone at the back of your head (feel just where the neck meets the skull)",
+   "huong_dan": "Tilt your head back slightly and feel across where the neck meets the skull.",
+   "lua_chon": [
+    {
+     "nhan": "Rounded and full"
+    },
+    {
+     "nhan": "Flat"
+    },
+    {
+     "nhan": "Hard to tell"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "Your voice (as people who know you describe it)",
+   "huong_dan": "Listen to a recording of yourself if you can.",
+   "lua_chon": [
+    {
+     "nhan": "Deep, warm, resonant, can talk at length without running out of breath"
+    },
+    {
+     "nhan": "High, fast"
+    },
+    {
+     "nhan": "Soft, weak, often short of breath"
+    },
+    {
+     "nhan": "Hoarse"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "When you are not smiling, how do others usually see your face?",
+   "huong_dan": "Ask someone close to you.",
+   "lua_chon": [
+    {
+     "nhan": "Approachable, warm"
+    },
+    {
+     "nhan": "Serious, hard to read"
+    },
+    {
+     "nhan": "Sad or tired"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  },
+  {
+   "hoi": "The way you walk and sit",
+   "huong_dan": "Think back to when you walk into a room.",
+   "lua_chon": [
+    {
+     "nhan": "Steady, upright, unhurried"
+    },
+    {
+     "nhan": "Fast, hurried"
+    },
+    {
+     "nhan": "Stooped, hunched, often restless"
+    },
+    {
+     "nhan": "Not sure / skip"
+    }
+   ]
+  }
+ ],
+ "luu_nien": [
+  {
+   "ten": "Tian Lun"
+  },
+  {
+   "ten": "Tian Lun"
+  },
+  {
+   "ten": "Tian Cheng"
+  },
+  {
+   "ten": "Tian Cheng"
+  },
+  {
+   "ten": "Tian Kuo"
+  },
+  {
+   "ten": "Tian Kuo"
+  },
+  {
+   "ten": "Tian Kuo"
+  },
+  {
+   "ten": "Tian Lun"
+  },
+  {
+   "ten": "Tian Lun"
+  },
+  {
+   "ten": "Ren Lun"
+  },
+  {
+   "ten": "Ren Lun"
+  },
+  {
+   "ten": "Di Lun"
+  },
+  {
+   "ten": "Di Lun"
+  },
+  {
+   "ten": "Di Lun"
+  },
+  {
+   "ten": "Huo Xing"
+  },
+  {
+   "ten": "Tian Zhong"
+  },
+  {
+   "ten": "Sun Corner (Ri Jiao)"
+  },
+  {
+   "ten": "Moon Corner (Yue Jiao)"
+  },
+  {
+   "ten": "Tian Ting"
+  },
+  {
+   "ten": "Fu Jiao"
+  },
+  {
+   "ten": "Fu Jiao"
+  },
+  {
+   "ten": "Si Kong"
+  },
+  {
+   "ten": "Bian Cheng"
+  },
+  {
+   "ten": "Bian Cheng"
+  },
+  {
+   "ten": "Zhong Zheng"
+  },
+  {
+   "ten": "Qiu Ling"
+  },
+  {
+   "ten": "Zhong Mu"
+  },
+  {
+   "ten": "Yin Tang"
+  },
+  {
+   "ten": "Shan Lin"
+  },
+  {
+   "ten": "Shan Lin"
+  },
+  {
+   "ten": "Ling Yun"
+  },
+  {
+   "ten": "Zi Qi"
+  },
+  {
+   "ten": "Fan Xia"
+  },
+  {
+   "ten": "Cai Xia"
+  },
+  {
+   "ten": "Tai Yang"
+  },
+  {
+   "ten": "Tai Yin"
+  },
+  {
+   "ten": "Zhong Yang"
+  },
+  {
+   "ten": "Zhong Yin"
+  },
+  {
+   "ten": "Shao Yang"
+  },
+  {
+   "ten": "Shao Yin"
+  },
+  {
+   "ten": "Shan Gen"
+  },
+  {
+   "ten": "Jing She"
+  },
+  {
+   "ten": "Guang Dian"
+  },
+  {
+   "ten": "Nian Shang"
+  },
+  {
+   "ten": "Shou Shang"
+  },
+  {
+   "ten": "Quan (cheekbone)"
+  },
+  {
+   "ten": "Quan (cheekbone)"
+  },
+  {
+   "ten": "Zhun Tou"
+  },
+  {
+   "ten": "Lan Tai"
+  },
+  {
+   "ten": "Ting Wei"
+  },
+  {
+   "ten": "Ren Zhong"
+  },
+  {
+   "ten": "Xian Ku"
+  },
+  {
+   "ten": "Xian Ku"
+  },
+  {
+   "ten": "Shi Cang"
+  },
+  {
+   "ten": "Lu Cang"
+  },
+  {
+   "ten": "Fa Ling"
+  },
+  {
+   "ten": "Fa Ling"
+  },
+  {
+   "ten": "Hu Er"
+  },
+  {
+   "ten": "Hu Er"
+  },
+  {
+   "ten": "Shui Xing"
+  },
+  {
+   "ten": "Cheng Jiang"
+  },
+  {
+   "ten": "Di Ku"
+  },
+  {
+   "ten": "Di Ku"
+  },
+  {
+   "ten": "Bei Chi"
+  },
+  {
+   "ten": "E Ya"
+  },
+  {
+   "ten": "Jin Lu"
+  },
+  {
+   "ten": "Jin Lu"
+  },
+  {
+   "ten": "Gui Lai"
+  },
+  {
+   "ten": "Gui Lai"
+  },
+  {
+   "ten": "Song Tang"
+  },
+  {
+   "ten": "Di Ge"
+  },
+  {
+   "ten": "Nu Pu"
+  },
+  {
+   "ten": "Nu Pu"
+  },
+  {
+   "ten": "Sai Gu"
+  },
+  {
+   "ten": "Sai Gu"
+  },
+  {
+   "ten": "Rat position (Zi)"
+  },
+  {
+   "ten": "Rat position (Zi)"
+  },
+  {
+   "ten": "Ox position (Chou)"
+  },
+  {
+   "ten": "Ox position (Chou)"
+  },
+  {
+   "ten": "Tiger position (Yin)"
+  },
+  {
+   "ten": "Tiger position (Yin)"
+  },
+  {
+   "ten": "Rabbit position (Mao)"
+  },
+  {
+   "ten": "Rabbit position (Mao)"
+  },
+  {
+   "ten": "Dragon position (Chen)"
+  },
+  {
+   "ten": "Dragon position (Chen)"
+  },
+  {
+   "ten": "Snake position (Si)"
+  },
+  {
+   "ten": "Snake position (Si)"
+  },
+  {
+   "ten": "Horse position (Wu)"
+  },
+  {
+   "ten": "Horse position (Wu)"
+  },
+  {
+   "ten": "Goat position (Wei)"
+  },
+  {
+   "ten": "Goat position (Wei)"
+  },
+  {
+   "ten": "Monkey position (Shen)"
+  },
+  {
+   "ten": "Monkey position (Shen)"
+  },
+  {
+   "ten": "Rooster position (You)"
+  },
+  {
+   "ten": "Rooster position (You)"
+  },
+  {
+   "ten": "Dog position (Xu)"
+  },
+  {
+   "ten": "Dog position (Xu)"
+  },
+  {
+   "ten": "Pig position (Hai)"
+  },
+  {
+   "ten": "Pig position (Hai)"
+  },
+  {
+   "ten": "Rat position (Zi), round again"
+  }
+ ],
+ "bai_ca_luu_nien": {
+  "sach": "Shen Xiang Quan Bian",
+  "ten_bai": "Song of the Yearly Positions of Fortune",
+  "chang": [
+   {
+    "y": "Ages 1–2 are read at the upper rim of the ear (Tian Lun) — the book calls this the luck of life's beginning."
+   },
+   {
+    "y": "At ages 3–4 the luck flows on to Tian Cheng on the ear."
+   },
+   {
+    "y": "Ages 5–7 are at Tian Kuo and the earlobe."
+   },
+   {
+    "y": "At ages 8–9 the luck rests at the upper rim of the other ear."
+   },
+   {
+    "y": "Ages 10–11 are at the middle of the ear rim (Ren Lun)."
+   },
+   {
+    "y": "Ages 12–14 are at the earlobe (Di Lun); the book says an earlobe turned toward the mouth is a peaceful shape."
+   },
+   {
+    "y": "At age 15 the reading moves up to the centre of the forehead (Huo Xing)."
+   },
+   {
+    "y": "Age 16 is at Tian Zhong, where the book reads that the forehead bone has taken shape."
+   },
+   {
+    "y": "Ages 17–18 are at the Sun and Moon Corners — the two corners of the forehead."
+   },
+   {
+    "y": "Age 19 is read at Tian Ting."
+   },
+   {
+    "y": "Ages 20–21 are at Fu Jiao, on both sides of the forehead."
+   },
+   {
+    "y": "Age 22 reaches Si Kong."
+   },
+   {
+    "y": "Ages 23–24 are at Bian Cheng, the edge of the forehead."
+   },
+   {
+    "y": "Age 25 meets Zhong Zheng."
+   },
+   {
+    "y": "Age 26 is at Qiu Ling."
+   },
+   {
+    "y": "Age 27 is read at Zhong Mu — the name of a position on the temple, not an omen of any kind."
+   },
+   {
+    "y": "Age 28 meets Yin Tang; the book hopes this spot is flat and open."
+   },
+   {
+    "y": "Ages 29–30 are at Shan Lin."
+   },
+   {
+    "y": "Age 31 is at Ling Yun."
+   },
+   {
+    "y": "Age 32 is on the right of the forehead (Zi Qi); the book hopes this spot has a bright colour."
+   },
+   {
+    "y": "Age 33 moves up to Fan Xia."
+   },
+   {
+    "y": "Age 34 is at Cai Xia, which the book hopes is bright."
+   },
+   {
+    "y": "Age 35 is at Tai Yang — the outer corner of one eye."
+   },
+   {
+    "y": "Age 36 is at Tai Yin — the outer corner of the other eye."
+   },
+   {
+    "y": "Age 37 is at Zhong Yang."
+   },
+   {
+    "y": "Age 38 is at Zhong Yin; the book calls it a smooth year."
+   },
+   {
+    "y": "Age 39 is at Shao Yang."
+   },
+   {
+    "y": "Age 40 is at Shao Yin."
+   },
+   {
+    "y": "Age 41 is at Shan Gen — the root of the nose between the eyes."
+   },
+   {
+    "y": "Age 42 is at Jing She."
+   },
+   {
+    "y": "Age 43 moves up to Guang Dian."
+   },
+   {
+    "y": "Age 44 is at Nian Shang, on the bridge of the nose."
+   },
+   {
+    "y": "Age 45 is at Shou Shang, on the bridge of the nose."
+   },
+   {
+    "y": "Ages 46–47 are at the two cheekbones (Quan)."
+   },
+   {
+    "y": "Age 48 is at Zhun Tou — the tip of the nose."
+   },
+   {
+    "y": "Age 49 enters Lan Tai — a nose wing."
+   },
+   {
+    "y": "Age 50 meets Ting Wei — the other nose wing."
+   },
+   {
+    "y": "Age 51 is at Ren Zhong."
+   },
+   {
+    "y": "Ages 52–53 are at Xian Ku, on both sides of the philtrum."
+   },
+   {
+    "y": "Age 54 is at Shi Cang; the book hopes this spot is full."
+   },
+   {
+    "y": "Age 55 is at Lu Cang."
+   },
+   {
+    "y": "Ages 56–57 are at Fa Ling; the book hopes these two lines are clear."
+   },
+   {
+    "y": "Ages 58–59 are at Hu Er."
+   },
+   {
+    "y": "Age 60 (the age of 'ears attuned') meets Shui Xing — the mouth."
+   },
+   {
+    "y": "Age 61 is at Cheng Jiang, below the lip."
+   },
+   {
+    "y": "Ages 62–63 are at Di Ku."
+   },
+   {
+    "y": "Age 64 is at Bei Chi."
+   },
+   {
+    "y": "Age 65 is at E Ya."
+   },
+   {
+    "y": "Ages 66–67 are at Jin Lu."
+   },
+   {
+    "y": "Ages 68–69 are at Gui Lai."
+   },
+   {
+    "y": "Age 70 (the age of 'following the heart without overstepping') is at Song Tang."
+   },
+   {
+    "y": "Age 71 is at Di Ge — the chin."
+   },
+   {
+    "y": "Ages 72–73 are at Nu Pu."
+   },
+   {
+    "y": "Ages 74–75 are at Sai Gu — the jaw bone."
+   },
+   {
+    "y": "From ages 76–77 the reading circles the face, starting at the Rat position."
+   },
+   {
+    "y": "Ages 78–79 are at the Ox position."
+   },
+   {
+    "y": "Ages 80–81 are at the Tiger position."
+   },
+   {
+    "y": "Ages 82–83 are at the Rabbit position."
+   },
+   {
+    "y": "Ages 84–85 are at the Dragon position."
+   },
+   {
+    "y": "Ages 86–87 are at the Snake position."
+   },
+   {
+    "y": "Ages 88–89 are at the Horse position."
+   },
+   {
+    "y": "Ages 90–91 are at the Goat position."
+   },
+   {
+    "y": "Ages 92–93 are at the Monkey position."
+   },
+   {
+    "y": "Ages 94–95 are at the Rooster position."
+   },
+   {
+    "y": "Ages 96–97 are at the Dog position."
+   },
+   {
+    "y": "Ages 98–99 are at the Pig position."
+   },
+   {
+    "y": "Past a hundred, the book says the cycle starts again from the top."
+   }
+  ]
+ },
+ "dac_diem": {
+  "tam_dinh_can": {
+   "ten": "The three parts of your face are in balance",
+   "tieu_de": "The three parts of your face are in balance",
+   "noi_dung": "Forehead, nose and chin are roughly the same length — the old books call this 'the three zones in balance', the mark of someone whose life keeps an even rhythm and does not lean too hard on any one stage. Youth, middle age and later years each get their share.",
+   "viec": "Keep the rhythm: each week, make time for all three — work, the people close to you, and your health.",
+   "sach": {
+    "y": "When the three zones match, the face is harmonious and fine (Yu Guan Zhao Shen Ju)."
+   }
+  },
+  "tam_dinh_tran_dai": {
+   "ten": "The forehead section is longer",
+   "tieu_de": "The forehead section is longer",
+   "noi_dung": "The upper zone leads: the old books tie it to youth and thinking — someone who lives in their head, plans early and does well between about 15 and 30. How the later years go depends on how you move from thinking to doing.",
+   "viec": "Pick one plan you have been mulling over for a while and set a 'try it' date this week.",
+   "sach": {
+    "y": "A long forehead that is also full, square and broad is counted as fortunate (Shen Xiang Quan Bian, chapter on the three zones)."
+   }
+  },
+  "tam_dinh_mui_dai": {
+   "ten": "The middle of the face is longer",
+   "tieu_de": "The middle of the face is longer",
+   "noi_dung": "The middle zone leads: roughly 31 to 50 is when you have the most drive, which suits practical people who like to take charge. This person relies less on luck and more on their own hands.",
+   "viec": "Put your main effort into the years between 30 and 50; being slower than others when young is fine.",
+   "sach": {
+    "y": "A middle zone that is high, straight, steady and calm is read as lasting strength (Shen Xiang Quan Bian, chapter on the three zones)."
+   }
+  },
+  "tam_dinh_cam_dai": {
+   "ten": "The chin section is longer",
+   "tieu_de": "The chin section is longer",
+   "noi_dung": "The lower zone leads: the old books tie it to later life and stability — steady, slow but sure, and steadier the further you go. The trap: impatience in youth, feeling you are behind everyone else.",
+   "viec": "Choose work that builds up year after year, not work that only pays off for one season.",
+   "sach": {
+    "y": "A lower face that is flat yet full, upright and thick is read as having enough (Shen Xiang Quan Bian, chapter on the three zones)."
+   }
+  },
+  "tam_dinh_tran_ngan": {
+   "ten": "The forehead section is short",
+   "tieu_de": "The forehead section is short",
+   "noi_dung": "A short upper zone: you had to look after yourself a lot when young, with little help; in return you met the world early and became practical. The old books do not call this bad — only that the first stage is one you build on your own.",
+   "viec": "Write down three things you managed by yourself before 25 — that is real capital."
+  },
+  "tam_dinh_cam_ngan": {
+   "ten": "The chin section is short",
+   "tieu_de": "The chin section is short",
+   "noi_dung": "A short lower zone: the old books advise preparing for later life early — in plain terms, build your own savings rather than counting on others to look after you when you are older.",
+   "viec": "Set up an automatic savings transfer this month, however small."
+  },
+  "mat_vuong": {
+   "ten": "Square face — a Metal trait",
+   "tieu_de": "Square face — a Metal trait",
+   "noi_dung": "A square face with clear angles is a Metal-shape trait: clear, decisive, principled. This person says little, does a lot, and is often handed the jobs that need someone reliable.",
+   "viec": "Once a week, say 'I'm not sure yet' instead of answering with certainty straight away.",
+   "sach": {
+    "y": "The Metal shape is square and upright (Tai Qing Shen Jian)."
+   }
+  },
+  "mat_dai": {
+   "ten": "Long, slender face — a Wood trait",
+   "tieu_de": "Long, slender face — a Wood trait",
+   "noi_dung": "A long, slender face is a Wood-shape trait: eager to learn, steady in one direction, a deep thinker. Suits research, design and teaching.",
+   "viec": "When you have been thinking about one thing for more than 30 minutes, get up and walk.",
+   "sach": {
+    "y": "The Wood shape is long and slender (Tai Qing Shen Jian)."
+   }
+  },
+  "mat_tron": {
+   "ten": "Round, full face — a Water trait",
+   "tieu_de": "Round, full face — a Water trait",
+   "noi_dung": "A round face with soft flesh is a Water-shape trait: easy-going, sensitive to others, adaptable. This person makes friends anywhere, but is easily pulled along by what others want.",
+   "viec": "Before you say yes, ask yourself: 'do I want this, or do I just find it hard to say no?'",
+   "sach": {
+    "y": "The Water shape is full and round (Tai Qing Shen Jian)."
+   }
+  },
+  "mat_hoa": {
+   "ten": "Narrow forehead, wide jaw — a Fire trait",
+   "tieu_de": "Narrow forehead, wide jaw — a Fire trait",
+   "noi_dung": "Narrow at the top and wide at the bottom is a Fire-shape trait: warm, quick, with energy that spreads to others. This person wants to see results right away in whatever they do.",
+   "viec": "Break big jobs into two-week milestones so your 'right now' energy has somewhere to go.",
+   "sach": {
+    "y": "The Fire shape has a rosy colour and a pointed top (Tai Qing Shen Jian)."
+   }
+  },
+  "mat_tam_giac_nguoc": {
+   "ten": "Wide forehead, pointed chin",
+   "tieu_de": "Wide forehead, pointed chin",
+   "noi_dung": "Wide at the top and pointed at the bottom: the thinking side is stronger than the staying side. This person is bright and far-sighted, but tends to drop things once they reach the dull stretch.",
+   "viec": "Hand the 'finishing' part of a job to someone steadier, or set yourself a small reward for getting it done."
+  },
+  "mat_tho": {
+   "ten": "Thick, solid face — an Earth trait",
+   "tieu_de": "Thick, solid face — an Earth trait",
+   "noi_dung": "A thick face, wide jaw and firm flesh is an Earth-shape trait: steady, true to their word, someone others lean on. Slow to change, but once they take something on they see it through.",
+   "viec": "Each quarter, try a new way of doing one familiar task.",
+   "sach": {
+    "y": "The Earth shape is heavy and thick (Tai Qing Shen Jian)."
+   }
+  },
+  "sac_sang": {
+   "ten": "Bright, healthy complexion",
+   "tieu_de": "Bright, healthy complexion",
+   "noi_dung": "Skin that is bright, with a glow from within — the old books say a face without lustre makes even jade look like gravel. It is a sign you are sleeping enough and eating well; things you start now tend to flow.",
+   "viec": "Keep your current rhythm for another month and note what keeps you well.",
+   "sach": {
+    "y": "Without lustre, even fine jade is like gravel (Bing Jian, on complexion)."
+   }
+  },
+  "sac_vang_xin": {
+   "ten": "Dull, yellowish complexion",
+   "tieu_de": "Dull, yellowish complexion",
+   "noi_dung": "A dull, yellowish, tired-looking complexion often comes with irregular meals, skipped breakfasts and late nights. The Inner Classic links yellow with digestion — this is a nudge to look after your meals, not a prediction.",
+   "viec": "Eat breakfast every day for 14 days, then look again; if nothing changes, get your digestion and stomach checked."
+  },
+  "sac_trang_bech": {
+   "ten": "Pale, washed-out complexion",
+   "tieu_de": "Pale, washed-out complexion",
+   "noi_dung": "Pale skin and pale lips are a sign of low energy and shallow breathing. The Inner Classic links white with the lungs and with qi and blood.",
+   "viec": "Practise deep breathing for 5 minutes in the morning and get some early sun; have your breathing, lungs and blood checked regularly."
+  },
+  "sac_toi_sam": {
+   "ten": "Dark, sallow complexion",
+   "tieu_de": "Dark, sallow complexion",
+   "noi_dung": "A dark, greyish complexion often goes with long-term lack of sleep and overwork. The Inner Classic links black with the kidneys — in plain terms, your 'battery' is running low.",
+   "viec": "Get to bed before 11 p.m. for two weeks in a row; have your kidneys and urinary system checked regularly if the colour does not change."
+  },
+  "sac_do_ung": {
+   "ten": "Flushed, dry complexion",
+   "tieu_de": "Flushed, dry complexion",
+   "noi_dung": "A flushed, dry face is 'heat rising': hurried, hot-tempered, short on sleep. The Inner Classic links red with the heart and circulation.",
+   "viec": "Cut back on coffee and alcohol; check your blood pressure regularly and see a doctor about your heart if the redness lasts."
+  },
+  "cot_nhuc_can": {
+   "ten": "Bone and flesh in balance",
+   "tieu_de": "Bone and flesh in balance",
+   "noi_dung": "Firm, springy flesh with bones that do not jut — the old books say plump without being heavy, lean without looking pinched: good stamina, able to take pressure while staying gentle with people.",
+   "viec": "Keep moving regularly to keep your face and body muscles toned.",
+   "sach": {
+    "y": "Plump but not heavy like a bear, lean but not hunched like a magpie in the cold (Bing Jian, on appearance)."
+   }
+  },
+  "cot_tro": {
+   "ten": "Prominent bones, little flesh",
+   "tieu_de": "Prominent bones, little flesh",
+   "noi_dung": "'Heavy bone, light flesh': will is stronger than strength, and this person tends to push too hard. Decisive, but easily drained and easily seen as hard to approach.",
+   "viec": "Eat enough protein and sleep enough; say one gentle sentence to someone near you every day.",
+   "sach": {
+    "y": "Bone is the ruler, flesh the minister; only when they support each other is it fortunate (commentary on the Ren Lun Da Tong Fu)."
+   }
+  },
+  "nhuc_nhao": {
+   "ten": "Soft flesh, bones hard to feel",
+   "tieu_de": "Soft flesh, bones hard to feel",
+   "noi_dung": "'Heavy flesh, light bone': kind and easy to be with, but short on spring when a decision is needed. The old books advise this person to firm up their muscles, and the spirit will follow.",
+   "viec": "Walk briskly for 30 minutes, 4 times a week, for a month.",
+   "sach": {
+    "y": "Bone is the ruler, flesh the minister; only when they support each other is it fortunate (commentary on the Ren Lun Da Tong Fu)."
+   }
+  },
+  "nep_tran_khong": {
+   "ten": "No lines on the forehead yet",
+   "tieu_de": "No lines on the forehead yet",
+   "noi_dung": "A smooth forehead with no worry lines: you have not let things climb up onto your forehead — or you are still young. The physiognomy of the heart advises keeping it that way by worrying about the right things and not worrying on others' behalf.",
+   "viec": "Each evening, write down one thing you did not need to worry about today and that turned out fine anyway."
+  },
+  "tam_bach_khong": {
+   "ten": "The iris touches both eyelids",
+   "tieu_de": "The iris touches both eyelids",
+   "noi_dung": "No white showing above or below the iris — the old books call this 'spirit not exposed': a steady mind, not suspicious, calm in how they look at people. It is the base of a gaze with spirit.",
+   "viec": "Keep it: when you are tired, rest your eyes instead of forcing yourself to keep looking at the screen.",
+   "sach": {
+    "y": "Eyes with clear black and white belong to someone who can plan (a gloss citing Yu Guan Zhao Shen in the Tai Qing Shen Jian)."
+   }
+  },
+  "cham_cot_noi": {
+   "ten": "Rounded bone at the back of the head",
+   "tieu_de": "Rounded bone at the back of the head",
+   "noi_dung": "A full, rounded occipital bone: the bone-reading school sees someone who can carry responsibility and grows steadier under pressure; it also marks a strong neck.",
+   "viec": "Stretch your neck and shoulders for 2 minutes for every hour you sit.",
+   "sach": {
+    "y": "A round, full back of the head is called a 'jade pillow' (Tai Qing Shen Jian)."
+   }
+  },
+  "cot_vung_cham_day": {
+   "ten": "Steady frame, full occipital bone",
+   "tieu_de": "Steady frame, full occipital bone",
+   "noi_dung": "Cheekbones covered with flesh and a rounded bone at the back of the head: the old books see someone who can carry big responsibilities and grows steadier under pressure. This person does what they say and coordinates naturally.",
+   "viec": "When you work at full stretch, relax your jaw, shoulders and neck once an hour.",
+   "sach": {
+    "y": "Bone and flesh in proportion, qi and blood in step (Shen Xiang Quan Bian, chapter on reading bones)."
+   }
+  },
+  "cham_phang": {
+   "ten": "Flat bone at the back of the head",
+   "tieu_de": "Flat bone at the back of the head",
+   "noi_dung": "A flat occipital bone: the old books advise this person to rely on structure and schedules more than on sheer endurance. Not a weakness — just a different way of working.",
+   "viec": "Plan your week on Sunday evening."
+  },
+  "tran_cao_rong": {
+   "ten": "High, broad, full forehead",
+   "tieu_de": "High, broad, full forehead",
+   "noi_dung": "A full upper forehead: the old books tie it to systematic thinking, a good upbringing and finding your footing early. People above you tend to notice you.",
+   "viec": "Take on one job a step harder than your current level in the next 6 months.",
+   "sach": {
+    "y": "An even, high forehead draws support from those above (Yu Guan Zhao Shen Ju)."
+   }
+  },
+  "tran_hep_thap": {
+   "ten": "Narrow or low forehead",
+   "tieu_de": "Narrow or low forehead",
+   "noi_dung": "A narrow forehead: the old books say youth brings little help, so you walk on your own. In everyday terms: you learn by doing more than from books, and you get better the more you do.",
+   "viec": "Find someone a step ahead of you to ask, instead of working it out alone.",
+   "sach": {
+    "y": "The forehead stands for heaven, and the books take broad and round as the norm — a narrow forehead is simply off that norm (Shen Xiang Quan Bian)."
+   }
+  },
+  "tran_go": {
+   "ten": "Bulging forehead, two corners stand out",
+   "tieu_de": "Bulging forehead, two corners stand out",
+   "noi_dung": "Two prominent forehead corners (the Sun and Moon corners): someone with strong views of their own who does not fit a mould easily — suited to running their own show or to deep expertise.",
+   "viec": "When you disagree, say so rather than staying quiet and then doing it your own way.",
+   "sach": {
+    "y": "A forehead that is high and full does not stay in want (Tai Qing Shen Jian)."
+   }
+  },
+  "tran_lom": {
+   "ten": "Forehead sunken or flat in the middle",
+   "tieu_de": "Forehead sunken or flat in the middle",
+   "noi_dung": "A forehead flat in the middle: early career may change direction a few times. The old books do not call this bad — they only advise against locking in a whole life at 25.",
+   "viec": "Allow yourself to try up to three lines of work before 30, then pick one."
+  },
+  "nep_tran_lien": {
+   "ten": "A few long, unbroken forehead lines",
+   "tieu_de": "A few long, unbroken forehead lines",
+   "noi_dung": "Long, unbroken horizontal lines come from raising your eyebrows while thinking — someone who worries about the work and takes responsibility. The old books see unbroken lines as kinder than broken ones.",
+   "viec": "Each evening, write down three things you 'no longer need to worry about'."
+  },
+  "nep_tran_dut": {
+   "ten": "Many short, broken forehead lines",
+   "tieu_de": "Many short, broken forehead lines",
+   "noi_dung": "Broken lines are the mark of scattered worry: lots of small things pulling at you. It is a habit of the facial muscles — change the habit and the lines fade.",
+   "viec": "Batch your small tasks into one block a day instead of spreading them out."
+  },
+  "giac_day": {
+   "ten": "Both sides of the forehead full and even",
+   "tieu_de": "Both sides of the forehead full and even",
+   "noi_dung": "Full, even Sun and Moon corners: the Parents palace is favourable — a steady family foundation, with emotional support from your parents (or whoever raised you).",
+   "viec": "Call home once this week.",
+   "sach": {
+    "y": "The Sun and Moon corners of the forehead are the Parents palace (Tai Qing Shen Jian)."
+   }
+  },
+  "giac_lech": {
+   "ten": "Sides of the forehead uneven or sunken",
+   "tieu_de": "Sides of the forehead uneven or sunken",
+   "noi_dung": "The old books link this with one parent being distant early on, or a childhood that was not quite whole. In everyday terms: you became independent early, and that is a strength, not a lack.",
+   "viec": "Write a thank-you note to the person who raised you, even if you never send it.",
+   "sach": {
+    "y": "The two forehead corners are the area the books tie to parents: high, bright and clean is read as parents in good health (Shen Xiang Quan Bian, general verse on the twelve palaces)."
+   }
+  },
+  "may_thanh_dai": {
+   "ten": "Smooth eyebrows that run past the eyes",
+   "tieu_de": "Smooth eyebrows that run past the eyes",
+   "noi_dung": "Eyebrows longer than the eyes: the old books tie them to someone wise who keeps their word, so friends find it easy to trust you. Smooth brow hair is also a sign of even qi and blood.",
+   "viec": "Message a friend you have not seen in a while.",
+   "sach": {
+    "y": "Brows longer than the eyes mark someone wise who keeps faith (commentary on the Ren Lun Da Tong Fu)."
+   }
+  },
+  "may_dam_ngan": {
+   "ten": "Thick eyebrows, shorter than the eyes",
+   "tieu_de": "Thick eyebrows, shorter than the eyes",
+   "noi_dung": "Thick but short brows: lots of feeling but quick to heat up, so with siblings and friends being too blunt can turn into a clash. The energy is there; add patience.",
+   "viec": "When you are annoyed, sleep on it before sending a message."
+  },
+  "may_thua": {
+   "ten": "Sparse, faint eyebrows",
+   "tieu_de": "Sparse, faint eyebrows",
+   "noi_dung": "Sparse brows: the old books say siblings can lean on each other less, so you stand on your own; it is also a sign the liver's qi and blood are a little low, and you tire easily.",
+   "viec": "Get to bed before 11 p.m.; find 'siblings' among your friends if family is far away."
+  },
+  "may_roi": {
+   "ten": "Unruly eyebrows that grow upward",
+   "tieu_de": "Unruly eyebrows that grow upward",
+   "noi_dung": "Unruly, upright brows: quick-tempered, argumentative, apt to lose friends over words. The old books say 'tend the heart and the brows lie flat' — meaning it can be trained.",
+   "viec": "Brush your eyebrows every morning and practise speaking one beat slower."
+  },
+  "may_giao": {
+   "ten": "Eyebrows that almost meet",
+   "tieu_de": "Eyebrows that almost meet",
+   "noi_dung": "Brows that meet and cover the space between them: someone who overthinks, is hard on themselves, and sees things as heavier than they are. The old books suggest trimming so the space is clear.",
+   "viec": "Trim the gap between your brows to about a finger's width.",
+   "sach": {
+    "y": "The space between the brows should be full, wide and flat, with the brows set apart (Shen Xiang Quan Bian, chapter on Yin Tang)."
+   }
+  },
+  "dien_trach_rong": {
+   "ten": "Wide, full upper eyelid",
+   "tieu_de": "Wide, full upper eyelid",
+   "noi_dung": "A wide Property palace: a generous mind, good at building up, a settled home later on. This person does not quibble over small things.",
+   "viec": "Tidy up one corner of your home this week."
+  },
+  "dien_trach_hep": {
+   "ten": "Brows close to the eyes, narrow upper eyelid",
+   "tieu_de": "Brows close to the eyes, narrow upper eyelid",
+   "noi_dung": "A narrow Property palace: impatient, wanting things now, apt to rush into buying a home or a car. The old books advise slowing down a beat on anything to do with property.",
+   "viec": "For any big purchase: wait 30 days, then decide."
+  },
+  "dien_trach_lom": {
+   "ten": "Sunken upper eyelid, visible veins",
+   "tieu_de": "Sunken upper eyelid, visible veins",
+   "noi_dung": "A deeply sunken upper eyelid or visible blue veins often show up with too little sleep and eyes that work too hard.",
+   "viec": "Look into the distance for 20 seconds every 20 minutes of screen time; have regular eye check-ups."
+  },
+  "an_duong_rong_sang": {
+   "ten": "Wide, bright space between the brows",
+   "tieu_de": "Wide, bright space between the brows",
+   "noi_dung": "A wide, bright Yin Tang means the Life palace is open: your mind is clear right now, decisions come easily, and people find you trustworthy. A good time to start something new.",
+   "viec": "Close off one thing you have left hanging for a long time, this week.",
+   "sach": {
+    "y": "Yin Tang wide and flat (Yue Bo Dong Zhong Ji)."
+   }
+  },
+  "an_duong_hep": {
+   "ten": "Narrow space between the brows",
+   "tieu_de": "Narrow space between the brows",
+   "noi_dung": "A narrow Yin Tang, brows close together: careful and thorough, but easily feels boxed in. The Inner Classic links this area with the lungs — shallow breathing when worried.",
+   "viec": "Breathe out for twice as long as you breathe in, 10 times, whenever your chest feels heavy."
+  },
+  "an_duong_nep_doc": {
+   "ten": "Vertical line between the brows",
+   "tieu_de": "Vertical line between the brows",
+   "noi_dung": "The 'hanging needle' line — a vertical crease from years of frowning in concentration: a perfectionist who carries a lot alone. It is a long facial habit, and it fades when you learn to relax.",
+   "viec": "Set an hourly reminder: relax the space between your brows and smile slightly."
+  },
+  "an_duong_toi": {
+   "ten": "Dark, greyish space between the brows",
+   "tieu_de": "Dark, greyish space between the brows",
+   "noi_dung": "A dark Yin Tang is a sign your energy is blocked: tired, sleeping badly, things keep stalling. The old books advise not starting anything big now; rest until the colour brightens, then act.",
+   "viec": "Put big decisions off for 2 weeks; sleep enough, then look at your Yin Tang again."
+  },
+  "an_duong_do": {
+   "ten": "Reddish space between the brows",
+   "tieu_de": "Reddish space between the brows",
+   "noi_dung": "A dry, red Yin Tang: heat inside, quick to anger, quick to raise your voice. The complexion books call it 'red dry qi' — arguments come easily over the next week or two.",
+   "viec": "Avoid arguing by text this week; check your blood pressure if the redness comes with headaches."
+  },
+  "than_dinh_an_duong_sang": {
+   "ten": "Calm eyes, bright space between the brows",
+   "tieu_de": "Calm eyes, bright space between the brows",
+   "noi_dung": "A calm, bright gaze plus a bright Yin Tang — the old books rank 'spirit first, energy second', above shape itself: your mind is at its clearest. A good stretch for important decisions.",
+   "viec": "Keep 10 quiet minutes every morning to hold on to that steadiness in your eyes.",
+   "sach": {
+    "y": "The spirit of the whole person shows in the eyes (Bing Jian, on spirit and bone)."
+   }
+  },
+  "mat_dai_hep": {
+   "ten": "Long eyes with extended corners",
+   "tieu_de": "Long eyes with extended corners",
+   "noi_dung": "Long, narrow eyes: a sharp reader of people, patient, hard to fool. The old books call these 'phoenix eyes' when the corners lift slightly and the gaze has spirit.",
+   "viec": "Trust your first impression of someone, then check it.",
+   "sach": {
+    "y": "Long brows and long, narrow eyes mark someone rich in feeling (Tai Qing Shen Jian)."
+   }
+  },
+  "mat_tron_to": {
+   "ten": "Round, large eyes",
+   "tieu_de": "Round, large eyes",
+   "noi_dung": "Round, large eyes: direct, feelings show on the face, warm. Easy to like, also easy to read.",
+   "viec": "If something is not certain yet, keep it to yourself one more day."
+  },
+  "mat_nho": {
+   "ten": "Small eyes",
+   "tieu_de": "Small eyes",
+   "noi_dung": "Small eyes: private, thinks more than speaks, steady. The old books see small eyes with spirit as someone who plans carefully and holds on to what they have.",
+   "viec": "Share one thought with someone you trust each week.",
+   "sach": {
+    "y": "Small eyes that are long and deep are read as steady (Shen Xiang Quan Bian, chapter on the eyes)."
+   }
+  },
+  "mat_xech": {
+   "ten": "Outer corners of the eyes lift upward",
+   "tieu_de": "Outer corners of the eyes lift upward",
+   "noi_dung": "Upturned outer corners: confident, ambitious, likes to lead. The trap: strong pride, hard to admit being wrong.",
+   "viec": "When you are wrong, say 'I was wrong' within a day."
+  },
+  "mat_cup": {
+   "ten": "Outer corners of the eyes turn down",
+   "tieu_de": "Outer corners of the eyes turn down",
+   "noi_dung": "Downturned outer corners: gentle, kind-hearted, quick to give way. The trap: staying sad for long, holding on to old things.",
+   "viec": "Each evening, write down one thing that went fine today."
+  },
+  "than_dinh": {
+   "ten": "Calm, bright gaze",
+   "tieu_de": "Calm, bright gaze",
+   "noi_dung": "'Spirit held within' — a gaze that is calm yet bright: a steady mind, not swept along by the crowd, sees through things. The old books count this as the most precious thing on a face.",
+   "viec": "Keep the habit of looking people in the eye when you talk about something important.",
+   "sach": {
+    "y": "At rest like holding a pearl, in motion like flowing water (Bing Jian, on spirit and bone)."
+   }
+  },
+  "than_mo": {
+   "ten": "Dull, tired gaze",
+   "tieu_de": "Dull, tired gaze",
+   "noi_dung": "Dull eyes with red veins mean the 'spirit' is tired — a sign of too little sleep and too much screen time. The old books say: when the spirit is tired, do not decide.",
+   "viec": "Sleep well for 3 nights in a row before making a big decision; have your eyes checked if the redness lasts.",
+   "sach": {
+    "y": "When awake, the spirit lodges in the eyes — so tired eyes mean a tired spirit (Shen Xiang Quan Bian, chapter on the eyes)."
+   }
+  },
+  "than_sac_gat": {
+   "ten": "Sharp, intense gaze",
+   "tieu_de": "Sharp, intense gaze",
+   "noi_dung": "'Spirit exposed' — a sharp, intense gaze: strong will, ready to push ahead, but it can make others wary and keeps your nerves taut. The old books look at the spirit both at rest and in motion: learning to let your gaze soften when you rest is worth practising.",
+   "viec": "In difficult conversations, lower your voice a notch and blink slowly.",
+   "sach": {
+    "y": "To know whether the spirit is upright or off, first watch it at rest and in motion (Bing Jian, on spirit and bone)."
+   }
+  },
+  "than_dao": {
+   "ten": "Restless gaze",
+   "tieu_de": "Restless gaze",
+   "noi_dung": "Eyes that are hard to keep still: quick-witted and sensitive, but the mind is not settled yet — changes its mind, gets impatient. Gaze at one point for a minute a day; the old books call this 'settling the spirit'.",
+   "viec": "Look at one point for 1 minute every morning, for two weeks.",
+   "sach": {
+    "y": "Eyes that keep blinking and cannot rest on one spot belong to someone whose mind is not yet settled (Yue Bo Dong Zhong Ji)."
+   }
+  },
+  "tam_bach_duoi": {
+   "ten": "White showing below the iris",
+   "tieu_de": "White showing below the iris",
+   "noi_dung": "'Lower three whites': a strong drive to get ahead and not lose, but easily tense and suspicious. This person benefits from having someone nearby who tells them the truth.",
+   "viec": "Choose one person who is allowed to be blunt with you."
+  },
+  "tam_bach_tren": {
+   "ten": "White showing above the iris",
+   "tieu_de": "White showing above the iris",
+   "noi_dung": "'Upper three whites': tends to look down, overthinks, carries a lot inside. In everyday terms: watch your sleep and stress, since white showing above often goes with fatigue.",
+   "viec": "Sleep enough and read less bad news before bed."
+  },
+  "le_duong_day": {
+   "ten": "Full, fresh area under the eyes",
+   "tieu_de": "Full, fresh area under the eyes",
+   "noi_dung": "Full, fresh 'silkworm' pads: the Children palace is favourable — good at nurturing, good with children and younger people; also a sign of enough sleep.",
+   "viec": "Spend one session a week with someone younger in your family.",
+   "sach": {
+    "y": "Silkworm pads under the eyes mean good children and grandchildren (Yu Guan Zhao Shen Ju)."
+   }
+  },
+  "le_duong_tham": {
+   "ten": "Dark, sunken circles under the eyes",
+   "tieu_de": "Dark, sunken circles under the eyes",
+   "noi_dung": "Long-lasting dark circles: the Inner Classic links the area under the eyes with the kidneys and sleep — usually from late nights and long worry. This is a nudge to rest, not a prediction.",
+   "viec": "Get to bed before 11 p.m. for two weeks; have your kidneys and urinary system checked regularly if nothing changes.",
+   "sach": {
+    "y": "A mind weighed down by worry shows a colour like pooled ink (Bing Jian, on complexion)."
+   }
+  },
+  "le_duong_bong": {
+   "ten": "Puffiness under the eyes in the morning",
+   "tieu_de": "Puffiness under the eyes in the morning",
+   "noi_dung": "Slight morning puffiness usually comes from salty food, drinking late and short sleep. The Inner Classic links it with the kidneys and water balance.",
+   "viec": "Cut down on salt, drink during the day rather than at night; have regular kidney check-ups."
+  },
+  "ngu_vi_phang": {
+   "ten": "Smooth, bright outer eye corners",
+   "tieu_de": "Smooth, bright outer eye corners",
+   "noi_dung": "Smooth, bright outer eye corners: the Spouse palace is favourable; the old books tie it to an honest nature, so life as a couple tends to be calm, with little hidden friction.",
+   "viec": "Tell your partner one thing you are grateful for this week.",
+   "sach": {
+    "y": "Outer eye corners that are flat, wide and bright mark someone honest and clean-living (commentary on the Ren Lun Da Tong Fu)."
+   }
+  },
+  "ngu_vi_nep": {
+   "ten": "Crow's feet showing early",
+   "tieu_de": "Crow's feet showing early",
+   "noi_dung": "Criss-cross lines at the eye corners from early on: sensitive, prone to worry in love, laughs a lot and thinks a lot. Laughter lines are lovely; worry lines are worth learning to let go of.",
+   "viec": "Do not discuss things that have not happened yet with your partner."
+  },
+  "ngu_vi_trung": {
+   "ten": "Sunken, dark outer eye corners",
+   "tieu_de": "Sunken, dark outer eye corners",
+   "noi_dung": "Sunken, dark outer eye corners: the old books say love is taking a lot out of you; it also shows up with too little sleep. The advice is to rest and talk openly, not a prediction.",
+   "viec": "Set aside a phone-free conversation with your partner."
+  },
+  "son_can_cao": {
+   "ten": "High nose root, continuous with the forehead",
+   "tieu_de": "High nose root, continuous with the forehead",
+   "noi_dung": "A high nose root that flows into the forehead: good stamina, the age-41 stretch passes smoothly, and mid-life work keeps its rhythm.",
+   "viec": "Keep up one sport or form of exercise from now until 45.",
+   "sach": {
+    "y": "The nose root unbroken, the bridge not crooked (Yue Bo Dong Zhong Ji)."
+   }
+  },
+  "son_can_thap": {
+   "ten": "Low, dipped nose root",
+   "tieu_de": "Low, dipped nose root",
+   "noi_dung": "A low nose root: the old books mention a turning point around 41 — work, home or energy changes rhythm. In everyday terms: prepare your finances and health for the years 38 to 43.",
+   "viec": "Get a full check-up at 40 and keep an emergency fund of 6 months' spending.",
+   "sach": {
+    "y": "The nose root should be high, not low or dipped (Shen Xiang Quan Bian, chapter on Shan Gen)."
+   }
+  },
+  "son_can_nep": {
+   "ten": "Horizontal line across the nose root",
+   "tieu_de": "Horizontal line across the nose root",
+   "noi_dung": "A horizontal line across the nose root: the Inner Classic links this area with the heart and circulation — common in people who carry a lot alone under long stress. This is a nudge to take care, not a prediction.",
+   "viec": "Gently warm both sides of the nose root 30 times each morning; have regular heart check-ups around 40.",
+   "sach": {
+    "y": "The lower point (the nose root between the eyes) corresponds to the heart (Ling Shu, Five Colours)."
+   }
+  },
+  "son_can_nep_an_duong_toi": {
+   "ten": "Line at the nose root, dark between the brows",
+   "tieu_de": "Line at the nose root, dark between the brows",
+   "noi_dung": "Two signs at once: your body is overloaded from too much thinking and too little sleep. The old books advise rest before planning anything else.",
+   "viec": "Take 2 full days without screens; then book a general check-up."
+  },
+  "song_mui_thang": {
+   "ten": "Straight, high nose bridge",
+   "tieu_de": "Straight, high nose bridge",
+   "noi_dung": "A straight, high bridge: the central pillar of the face is steady — self-respecting, opinionated, steady around 44 to 45. This person does not like being ordered about over small things.",
+   "viec": "Take the lead on a small task in your group.",
+   "sach": {
+    "y": "A straight, even bridge with a rounded tip is a fine trait (Yue Bo Dong Zhong Ji)."
+   }
+  },
+  "song_mui_go": {
+   "ten": "Humped nose bridge",
+   "tieu_de": "Humped nose bridge",
+   "noi_dung": "A humped bridge: strong character, likes to 'switch hands' midway — prefers to build things their own way. Better suited to working for themselves than for someone else.",
+   "viec": "If you are employed, keep one small project of your own."
+  },
+  "song_mui_thap": {
+   "ten": "Low, short nose bridge",
+   "tieu_de": "Low, short nose bridge",
+   "noi_dung": "A low bridge: listens to others, gentle, avoids conflict. The old books advise choosing teammates carefully, because you tend to follow your team.",
+   "viec": "Choose who you work with by character first, then by the job."
+  },
+  "song_mui_lech": {
+   "ten": "Crooked nose bridge",
+   "tieu_de": "Crooked nose bridge",
+   "noi_dung": "A crooked bridge (from birth or from a knock): the Inner Classic links the bridge with the liver and gallbladder; in everyday terms, just notice whether you breathe freely through both sides.",
+   "viec": "See an ear, nose and throat doctor if one side often feels blocked."
+  },
+  "chuan_dau_tron": {
+   "ten": "Round, full nose tip",
+   "tieu_de": "Round, full nose tip",
+   "noi_dung": "A round, full nose tip is a good Wealth palace: knows how to hold on to money, practical, careful with investments. Age 48 is often a harvest point.",
+   "viec": "Raise your savings by another 5% starting this month.",
+   "sach": {
+    "y": "A full, even nose tip marks a kind heart (Tai Qing Shen Jian)."
+   }
+  },
+  "chuan_dau_nhon": {
+   "ten": "Pointed, thin nose tip",
+   "tieu_de": "Pointed, thin nose tip",
+   "noi_dung": "A pointed, thin nose tip: sharp and perceptive, but money comes in and goes out fast, often on hobbies. The old books say 'money does not stay long' — so keep it somewhere you cannot reach straight away.",
+   "viec": "Move your savings to an account with no card attached."
+  },
+  "chuan_dau_to": {
+   "ten": "Large, broad nose tip",
+   "tieu_de": "Large, broad nose tip",
+   "noi_dung": "A large nose tip: earns well, spends freely, generous with friends. Whether it stays depends on the wings of the nose.",
+   "viec": "Track your spending for a month to see where the money goes.",
+   "sach": {
+    "y": "A full, large nose tip marks someone who means no harm to others (Shen Xiang Quan Bian, chapter on the nose)."
+   }
+  },
+  "chuan_dau_do": {
+   "ten": "Red, oily nose tip",
+   "tieu_de": "Red, oily nose tip",
+   "noi_dung": "A nose tip that is often red and oily: the Inner Classic links it with digestion — usually from spicy food, alcohol and late-night eating. The face-reading books also call it 'red nose, money spent' — in everyday terms, when you run hot inside you spend hot too.",
+   "viec": "Cut back on alcohol and fried food for 3 weeks; get your digestion and stomach checked if it lasts."
+  },
+  "canh_mui_day": {
+   "ten": "Thick, closed nose wings",
+   "tieu_de": "Thick, closed nose wings",
+   "noi_dung": "Thick nose wings that close around the nostrils: a good 'storehouse' — money that comes in stays, and saving comes naturally.",
+   "viec": "Keep your current way of spending; add one amount set aside for family.",
+   "sach": {
+    "y": "The left wing is Lan Tai, the right Ting Wei; both full and even mark someone clear-minded and knowledgeable (Tai Qing Shen Jian)."
+   }
+  },
+  "canh_mui_mong": {
+   "ten": "Thin nose wings, nostrils visible",
+   "tieu_de": "Thin nose wings, nostrils visible",
+   "noi_dung": "Thin wings with exposed nostrils: generous, finds it hard to hold on to money, 'spends whatever comes in'. Not poor — money just flows fast. The answer is an automatic place to keep it.",
+   "viec": "Set up an automatic savings transfer on payday.",
+   "sach": {
+    "y": "Large, exposed nostrils find it hard to gather wealth (Shen Xiang Quan Bian, chapter on the nose)."
+   }
+  },
+  "canh_mui_xoe": {
+   "ten": "Wide, flared nose wings",
+   "tieu_de": "Wide, flared nose wings",
+   "noi_dung": "Flared wings: strong vitality, willing to do business on a big scale, likes to expand. Money comes in big waves and goes out in big waves.",
+   "viec": "Every time money comes in, set aside a portion straight away and do not touch it."
+  },
+  "tam_dinh_can_chuan_dau_day": {
+   "ten": "Balanced face, full nose, closed wings",
+   "tieu_de": "Balanced face, full nose, closed wings",
+   "noi_dung": "Three balanced zones, a rounded nose tip and closed nose wings: the old books see the structure of a practical money manager who stays steady through each stage. You value what is real over what is for show.",
+   "viec": "Share your resources with the right people so money keeps circulating."
+  },
+  "quyen_co_thit": {
+   "ten": "Prominent cheekbones covered with flesh",
+   "tieu_de": "Prominent cheekbones covered with flesh",
+   "noi_dung": "Prominent cheekbones with flesh over them: influential, able to take charge, respected without being resented. Ages 46 to 47 are often when you hold real responsibility.",
+   "viec": "Take on coordinating something in the next 3 months.",
+   "sach": {
+    "y": "On the face, the brow bones and cheekbones are the main bones (Bing Jian, on spirit and bone)."
+   }
+  },
+  "quyen_tro": {
+   "ten": "Prominent, bony cheekbones",
+   "tieu_de": "Prominent, bony cheekbones",
+   "noi_dung": "Prominent, bony cheekbones: wants to take charge but lacks softness — easily seen as imposing. The old books say 'high cheekbones without flesh' should be built up by listening.",
+   "viec": "In every meeting, let others speak first for 2 minutes."
+  },
+  "quyen_thap": {
+   "ten": "Low, flat cheekbones",
+   "tieu_de": "Low, flat cheekbones",
+   "noi_dung": "Low cheekbones: not hungry for power, better suited to expert work than management; gets things done with little friction. If you must lead, lead through expertise rather than authority.",
+   "viec": "Choose the role of 'the person who is best at one thing' rather than 'the person at the top'.",
+   "sach": {
+    "y": "Bones that stand out on the face are called cheekbones of authority, which the books tie to power — so low cheekbones are read as less hungry for power (Shen Xiang Quan Bian, chapter on reading bones)."
+   }
+  },
+  "quyen_lech": {
+   "ten": "One cheekbone higher than the other",
+   "tieu_de": "One cheekbone higher than the other",
+   "noi_dung": "Uneven cheekbones: tends to change approach midway, and what shows does not always match what is inside. In everyday terms: say clearly what you want from the start so others do not have to guess.",
+   "viec": "Say what you really want in the first sentence."
+  },
+  "nhan_trung_sau": {
+   "ten": "Deep, long philtrum",
+   "tieu_de": "Deep, long philtrum",
+   "noi_dung": "A deep, long philtrum that widens at the bottom: lasting vitality, steady will in hard times; the old books tie it to things going well with children.",
+   "viec": "Keep a regular sleep rhythm — that is what feeds this stamina.",
+   "sach": {
+    "y": "A philtrum that is deep, straight, upright and wide marks someone loyal and trustworthy (Tai Qing Shen Jian)."
+   }
+  },
+  "nhan_trung_nong": {
+   "ten": "Shallow, faint philtrum",
+   "tieu_de": "Shallow, faint philtrum",
+   "noi_dung": "A shallow philtrum: the Inner Classic links this area with the kidneys and reproductive system — the reminder is to conserve your energy and not stay up late, not a prediction about children.",
+   "viec": "Sleep enough; have regular reproductive-health check-ups if you are planning a family."
+  },
+  "nhan_trung_ngan": {
+   "ten": "Short philtrum",
+   "tieu_de": "Short philtrum",
+   "noi_dung": "A short philtrum: quick, hot-tempered, outspoken. Good with people and with work that needs fast reactions.",
+   "viec": "Count to three before answering something that annoys you."
+  },
+  "nhan_trung_lech": {
+   "ten": "Crooked philtrum",
+   "tieu_de": "Crooked philtrum",
+   "noi_dung": "A crooked philtrum: changes their mind, says one thing now and another later. Keeping their word is this person's exercise.",
+   "viec": "Write down what you have promised and do it on time.",
+   "sach": {
+    "y": "An upright philtrum marks someone who values loyalty — the books read this groove in terms of keeping faith (Shen Xiang Quan Bian, chapter on the philtrum)."
+   }
+  },
+  "phap_lenh_ro": {
+   "ten": "Clear, widening smile lines",
+   "tieu_de": "Clear, widening smile lines",
+   "noi_dung": "Clear smile lines that widen as they go down: a mark of standing and good order — a disciplined person who is listened to, and respected even more from 56 on. These lines come from years of serious work.",
+   "viec": "Take on mentoring someone younger in your field."
+  },
+  "phap_lenh_mo": {
+   "ten": "Faint smile lines",
+   "tieu_de": "Faint smile lines",
+   "noi_dung": "Smile lines not yet clear: your standing is still being built, or you work through friendliness more than authority. Not a lack — it is just not time yet.",
+   "viec": "Keep one principle for 90 days so others can see it."
+  },
+  "phap_lenh_cham_mep": {
+   "ten": "Smile lines that run into the mouth corners",
+   "tieu_de": "Smile lines that run into the mouth corners",
+   "noi_dung": "Smile lines that run straight into the corners of the mouth, which the old books call 'a snake entering the mouth' — in everyday terms: holding feelings in, mouth corners pulled down for years; also a reminder to look after your eating. Change your habits of expression and the lines open out.",
+   "viec": "Laugh out loud at least once a day; have regular digestive check-ups."
+  },
+  "phap_lenh_lech": {
+   "ten": "Uneven smile lines",
+   "tieu_de": "Uneven smile lines",
+   "noi_dung": "Uneven smile lines: a lopsided smile, with what shows outside sometimes not matching inside. A gentle nudge: say what you think sooner.",
+   "viec": "When you do not like something, say 'I don't like this' instead of smiling it off."
+  },
+  "huyen_cham_phap_lenh_ro_giong_tram": {
+   "ten": "Thinking line between the brows, open smile lines, deep voice",
+   "tieu_de": "Thinking line between the brows, open smile lines, deep voice",
+   "noi_dung": "A thinking line between the brows, but wide smile lines and a deep, warm voice: serious about work yet generous with people, more tolerant with experience. Seems strict at first meeting, trustworthy once you know them.",
+   "viec": "Whenever you are concentrating hard, relax the space between your brows and smile slightly."
+  },
+  "mieng_khoe_len": {
+   "ten": "Medium-width mouth, corners turned up",
+   "tieu_de": "Medium-width mouth, corners turned up",
+   "noi_dung": "Mouth corners that naturally turn up — the old books liken it to 'a mouth like a drawn bow': a pleasant way with words, keeps their word, does well through speaking. It is also the shape of someone who laughs for real.",
+   "viec": "Say thank you out loud to three people today.",
+   "sach": {
+    "y": "A mouth shaped like a bow earns its living through its work (commentary on the Ren Lun Da Tong Fu)."
+   }
+  },
+  "mieng_nho_mong": {
+   "ten": "Small mouth, thin lips",
+   "tieu_de": "Small mouth, thin lips",
+   "noi_dung": "A small mouth with thin lips: says little, chooses words carefully, keeps confidences; suited to work that needs discretion. The trap: being seen as cold.",
+   "viec": "Each day, give someone one specific compliment."
+  },
+  "mieng_khoe_cup": {
+   "ten": "Mouth corners that turn down",
+   "tieu_de": "Mouth corners that turn down",
+   "noi_dung": "Downturned mouth corners: the shape of someone who holds things in and is quietly disappointed; looks sad even when not. It is a facial habit — practise lifting the corners and both face and mood brighten.",
+   "viec": "In front of the mirror each morning, lift the corners of your mouth for 10 seconds, 3 times."
+  },
+  "moi_day": {
+   "ten": "Thick, full lips",
+   "tieu_de": "Thick, full lips",
+   "noi_dung": "Thick lips: values relationships, warm, looks after people; enjoys food. The trap: finding it hard to say no.",
+   "viec": "Each week, turn down one task that is not yours.",
+   "sach": {
+    "y": "Both lips thick mark someone loyal and trustworthy (Shen Xiang Quan Bian, chapter on spirit)."
+   }
+  },
+  "mieng_lech": {
+   "ten": "Crooked mouth, lips that do not close fully",
+   "tieu_de": "Crooked mouth, lips that do not close fully",
+   "noi_dung": "A crooked mouth or lips that do not close fully: the old books advise keeping your word; the Inner Classic links lips and mouth with digestion and breathing (mouth-breathing at night).",
+   "viec": "See a dentist and an ear, nose and throat doctor if you often sleep with your mouth open.",
+   "sach": {
+    "y": "Lips that are not straight make words hard to keep consistent — so the books advise keeping your word (Shen Xiang Quan Bian, chapter on spirit)."
+   }
+  },
+  "moi_hong": {
+   "ten": "Pink, smooth lips",
+   "tieu_de": "Pink, smooth lips",
+   "noi_dung": "Pink, smooth lips are a sign of enough qi and blood and good digestion.",
+   "viec": "Keep your meals regular.",
+   "sach": {
+    "y": "Lips should be pink, not dark (Yu Guan Zhao Shen Ju)."
+   }
+  },
+  "moi_nhat": {
+   "ten": "Pale, dry lips",
+   "tieu_de": "Pale, dry lips",
+   "noi_dung": "Pale, dry lips: not enough water, mild anaemia or not eating enough; the Inner Classic links the lips with the spleen and stomach.",
+   "viec": "Drink enough water and eat proper meals; have your blood checked regularly."
+  },
+  "moi_tham": {
+   "ten": "Dark, purplish lips",
+   "tieu_de": "Dark, purplish lips",
+   "noi_dung": "Dark, purplish lips: the Inner Classic links them with poor circulation or coldness inside; also common in smokers.",
+   "viec": "Keep warm and cut down on smoking; see a doctor about your heart if your lips turn purple and you get tired on the stairs.",
+   "sach": {
+    "y": "Lips should be pink, not dark (Yu Guan Zhao Shen Ju)."
+   }
+  },
+  "cam_tron_day": {
+   "ten": "Round, full chin, slightly forward",
+   "tieu_de": "Round, full chin, slightly forward",
+   "noi_dung": "A square, full chin area: a settled later life, trusted by those who work for you, a stable home in old age. This person gets there by persistence rather than speed.",
+   "viec": "Buy or keep a long-term home rather than moving all the time.",
+   "sach": {
+    "y": "A square, balanced chin marks someone with house and land (commentary on the Ren Lun Da Tong Fu)."
+   }
+  },
+  "cam_nhon_lem": {
+   "ten": "Pointed or receding chin",
+   "tieu_de": "Pointed or receding chin",
+   "noi_dung": "A pointed or receding chin: quick, sensitive, likes change, but needs to prepare for later life on their own. The old books say 'a thin chin' should start saving early.",
+   "viec": "Start saving for old age now, even if it is very little each month."
+  },
+  "cam_vuong": {
+   "ten": "Square, broad chin",
+   "tieu_de": "Square, broad chin",
+   "noi_dung": "A square chin: persistent, hard-working, sees a decision through; hard on themselves. Suited to long-haul work.",
+   "viec": "Give yourself a small reward each month when you finish something.",
+   "sach": {
+    "y": "The chin corresponds to earth, so it should be square and broad (Shen Xiang Quan Bian, chapter on the three powers and three zones)."
+   }
+  },
+  "cam_che": {
+   "ten": "Cleft chin",
+   "tieu_de": "Cleft chin",
+   "noi_dung": "A cleft chin: lives by feeling, artistic, likes doing two things at once. Folk belief sees it as charming.",
+   "viec": "Pick one main pursuit and one just for fun."
+  },
+  "ham_day": {
+   "ten": "Full, solid jaw",
+   "tieu_de": "Full, solid jaw",
+   "noi_dung": "A full, solid jaw: those who work under you and with you are reliable; good endurance, steady at ages 72 to 75.",
+   "viec": "This week, tell someone who helps you that you appreciate them.",
+   "sach": {
+    "y": "A full chin and jaw — the books count it as a fine trait (Yu Guan Zhao Shen Ju)."
+   }
+  },
+  "ham_hep": {
+   "ten": "Narrow, thin jaw",
+   "tieu_de": "Narrow, thin jaw",
+   "noi_dung": "A narrow jaw: finds it hard to keep helpers for long, often has to do things alone. In everyday terms: choose few people, but the right ones.",
+   "viec": "Make time for your two most important collaborators."
+  },
+  "ham_banh": {
+   "ten": "Broad, flared jaw",
+   "tieu_de": "Broad, flared jaw",
+   "noi_dung": "A jaw that flares and shows from behind: very high stamina and endurance, strong will; the old books warn this person not to rely on strength and forget to listen.",
+   "viec": "Ask others' views before deciding on shared matters."
+  },
+  "tai_cao_day": {
+   "ten": "High ears, clear rims, thick lobes",
+   "tieu_de": "High ears, clear rims, thick lobes",
+   "noi_dung": "Ears level with the brows, clear rims, thick lobes: good natural stamina, well looked after as a child, a lasting memory. The Inner Classic links the ears with the kidneys.",
+   "viec": "Keep your sleep rhythm — good natural capital still needs looking after.",
+   "sach": {
+    "y": "Ears should not point forward or sit lower than the brows (Yue Bo Dong Zhong Ji)."
+   }
+  },
+  "tai_mong_lat": {
+   "ten": "Thin ears, rims turned out",
+   "tieu_de": "Thin ears, rims turned out",
+   "noi_dung": "Thin ears with rims turned out: had to look after themselves a lot as a child, independent, likes to do things their own way; the old books do not call this bad, only advise conserving energy.",
+   "viec": "Sleep enough; do not take on more when you are already tired."
+  },
+  "tai_nho_thap": {
+   "ten": "Small, low ears",
+   "tieu_de": "Small, low ears",
+   "noi_dung": "Small, low ears: practical, no illusions, does better with age. Ages 1 to 14 may have been bumpy, but that does not carry over.",
+   "viec": "Look at the last three years to see that you are on the way up.",
+   "sach": {
+    "y": "Ears matter not by size, only by clearly formed rims (Shen Xiang Quan Bian, chapter on the ten officers)."
+   }
+  },
+  "tai_dai_nep": {
+   "ten": "Diagonal crease on the earlobe",
+   "tieu_de": "Diagonal crease on the earlobe",
+   "noi_dung": "A diagonal crease on the earlobe: modern medicine also pays attention to this sign in older adults with regard to the heart. The reminder is to get checked, not a prediction.",
+   "viec": "Have your heart, blood pressure and blood fats checked every year."
+  },
+  "nhan_trung_nong_tai_nep": {
+   "ten": "Faint philtrum, creased earlobe",
+   "tieu_de": "Faint philtrum, creased earlobe",
+   "noi_dung": "Two signs together point to looking after your heart and stamina: not something to worry about, but a reason to book a check-up and keep moving regularly.",
+   "viec": "Walk briskly for 30 minutes a day; book a heart check-up this month."
+  },
+  "giong_tram": {
+   "ten": "Deep, warm, resonant voice",
+   "tieu_de": "Deep, warm, resonant voice",
+   "noi_dung": "'The voice comes from the dan tian' — a voice that resonates from the belly and does not run out of breath: deep inner strength, trusted, suited to speaking in front of people.",
+   "viec": "Use this voice for difficult conversations instead of texting.",
+   "sach": {
+    "y": "The voice starts in the dan tian and only then reaches the throat (Bing Jian, on voice)."
+   }
+  },
+  "giong_cao_nhanh": {
+   "ten": "High, fast voice",
+   "tieu_de": "High, fast voice",
+   "noi_dung": "A high, fast voice: enthusiastic and quick-thinking, but it can tire listeners and lead to slips of the tongue. The voice-reading tradition calls it 'hurried'.",
+   "viec": "Slow your speech by breathing out before each sentence.",
+   "sach": {
+    "y": "When the spirit is calm the breath is even, and only when the breath is even is the voice smooth (Shen Xiang Quan Bian, chapter on the voice)."
+   }
+  },
+  "giong_nho_yeu": {
+   "ten": "Soft voice, often short of breath",
+   "tieu_de": "Soft voice, often short of breath",
+   "noi_dung": "A soft voice that runs short of breath: the energy behind it is not enough yet — usually from shallow breathing, little exercise or long-standing lack of confidence. Training the breath trains both voice and spirit.",
+   "viec": "Read a passage aloud for 5 minutes a day; have your breathing checked if you run short of breath on short sentences.",
+   "sach": {
+    "y": "The lower belly is the root of the voice — breathe deeply and the voice fills out (Shen Xiang Quan Bian, chapter on the voice)."
+   }
+  },
+  "giong_khan": {
+   "ten": "Hoarse voice",
+   "tieu_de": "Hoarse voice",
+   "noi_dung": "A long-lasting hoarse voice: overusing your voice or a dry throat. The reminder is to rest your voice and get checked.",
+   "viec": "Drink warm drinks and speak less loudly; see an ear, nose and throat doctor if the hoarseness lasts more than 3 weeks."
+  },
+  "net_de_gan": {
+   "ten": "Approachable even at rest",
+   "tieu_de": "Approachable even at rest",
+   "noi_dung": "Warm even without smiling — the old books say the heart is the root of the face: this is the face of someone who thinks well of others. It draws helpful people without trying.",
+   "viec": "Keep it: say one encouraging word to someone each day.",
+   "sach": {
+    "y": "The heart is the root of the face; look into the heart and good and bad show themselves (Xin Xiang Pian)."
+   }
+  },
+  "net_nghiem": {
+   "ten": "Serious, hard-to-read face at rest",
+   "tieu_de": "Serious, hard-to-read face at rest",
+   "noi_dung": "A serious face: respected and rarely bothered, but new people hesitate to start a conversation. It is a facial habit — relax your jaw and it changes.",
+   "viec": "Greet people before they greet you, three times a day."
+  },
+  "net_buon": {
+   "ten": "Sad or tired face at rest",
+   "tieu_de": "Sad or tired face at rest",
+   "noi_dung": "A sad or tired face at rest: your facial muscles are holding the shape of a heavy period. The physiognomy of the heart says 'the face fades as the heart lets go' — with enough rest and something to enjoy, it softens.",
+   "viec": "Spend 15 minutes a day on something you truly enjoy."
+  },
+  "dang_vung": {
+   "ten": "Steady, upright, unhurried bearing",
+   "tieu_de": "Steady, upright, unhurried bearing",
+   "noi_dung": "The old books liken a person of standing to 'walking like flowing water': a steady, unhurried gait shows inner strength, someone trusted with big things. The movement-reading tradition counts it as a fine sign.",
+   "viec": "Keep it: enter a room one beat slower and look at everyone.",
+   "sach": {
+    "y": "A person of standing walks like flowing water (Tai Qing Shen Jian)."
+   }
+  },
+  "dang_hap_tap": {
+   "ten": "Fast, hurried bearing",
+   "tieu_de": "Fast, hurried bearing",
+   "noi_dung": "A hurried gait: lots to do, a rushed mind; the old books say 'a hurried heart spills the work'. Learning to slow your step is learning to slow your thinking.",
+   "viec": "Walk slowly for 10 minutes a day, without your phone.",
+   "sach": {
+    "y": "Walking too fast becomes hurried, too slow becomes late (Shen Xiang Quan Bian, chapter on walking)."
+   }
+  },
+  "dang_khom": {
+   "ten": "Stooped, hunched bearing",
+   "tieu_de": "Stooped, hunched bearing",
+   "noi_dung": "A stooped, hunched posture: low confidence or long fatigue; it also affects breathing and the spine.",
+   "viec": "Roll your shoulders back and open your chest for 1 minute every hour you sit; do back exercises 3 times a week.",
+   "sach": {
+    "y": "When walking, the knees should not buckle and the head should not hang (Shen Xiang Quan Bian, chapter on walking)."
+   }
+  },
+  "mat_can_doi": {
+   "ten": "Balanced face shape",
+   "tieu_de": "Balanced face shape, no single type stands out",
+   "noi_dung": "Your face length and the width of your forehead, cheekbones and jaw fall within the usual range — not clearly square, long or round. When the old books meet a face like this, they look at other traits (complexion, bone and flesh, voice, bearing) to decide the element, rather than labelling it straight away.",
+   "viec": "Answer two more questions in the Survey, about bone and flesh and about your voice, so your element shape becomes clearer.",
+   "sach": {
+    "y": "When the parts look to each other and match in proportion, good fortune follows (Bing Jian, on appearance)."
+   }
+  },
+  "an_duong_vua": {
+   "ten": "Medium-width space between the brows",
+   "tieu_de": "Medium-width space between the brows",
+   "noi_dung": "The gap between the inner ends of your brows is about as wide as the gap between the inner corners of your eyes — just what the old books call open. Such a person is usually neither too closed nor too easy-going; how bright or dark this area looks says more about the present stretch.",
+   "viec": "Look in the mirror each morning for a week: does the area between your brows look bright or dull on days you sleep less?",
+   "sach": {
+    "y": "The space between the inner ends of the brows should be wide and flat (Shen Xiang Quan Bian, chapter on Yin Tang)."
+   }
+  },
+  "mat_vua": {
+   "ten": "Medium-length eyes, corners nearly level",
+   "tieu_de": "Medium-length eyes, corners nearly level",
+   "noi_dung": "Eyes about one fifth of the face's width, corners neither lifting nor drooping — right on the 'five eyes' rule. The old books read the eyes mainly by their spirit (a calm or restless gaze), which a photo cannot measure.",
+   "viec": "Answer the 'your gaze' question in the Survey: look straight into the mirror for 5 seconds, then choose.",
+   "sach": {
+    "y": "Looking at the eyes is about seeing whether the spirit is clear or cloudy (Shen Xiang Quan Bian, chapter on the eyes)."
+   }
+  },
+  "canh_mui_vua": {
+   "ten": "Medium-width nose wings",
+   "tieu_de": "Medium-width nose wings, in proportion with the eyes",
+   "noi_dung": "Your nose wings are about as wide as the gap between the inner corners of your eyes — the old books call Lan Tai and Ting Wei 'well matched'. In everyday terms: money comes and goes in measure, neither too tight nor too loose. Check the thickness of your nose wings (holding on to money) yourself.",
+   "viec": "Write down this month's three biggest expenses and see which you would rather have kept.",
+   "sach": {
+    "y": "The left wing is Lan Tai, the right Ting Wei; both full and even mark someone clear-minded and knowledgeable (Tai Qing Shen Jian)."
+   }
+  },
+  "mieng_vua": {
+   "ten": "Medium-width mouth, corners nearly level",
+   "tieu_de": "Medium-width mouth, corners nearly level",
+   "noi_dung": "Your mouth is wider than your nose wings by the usual amount, with corners nearly level. The old books read the mouth by its habits: corners that curve up when talking mark someone who keeps their word and speaks pleasantly — and that changes with how you smile and talk.",
+   "viec": "For a week, notice whether the corners of your mouth lift or tighten when you talk.",
+   "sach": {
+    "y": "A straight, full mouth that does not speak carelessly — the books call it 'virtue of speech' (Shen Xiang Quan Bian, chapter on the mouth)."
+   }
+  },
+  "nhan_trung_vua": {
+   "ten": "Medium-length philtrum",
+   "tieu_de": "Medium-length philtrum",
+   "noi_dung": "The groove from the base of your nose to your upper lip is about a third of the lower face — the usual measure. The old books also look at whether it is deep or shallow, straight or crooked; a straight-on photo cannot show depth, so check it yourself with light from the side.",
+   "viec": "Keep your sleep regular this week — the old books tie this area to stamina.",
+   "sach": {
+    "y": "The philtrum should be long, not pinched; deep in the middle, wider at the edges; straight, not crooked (Shen Xiang Quan Bian, chapter on the philtrum)."
+   }
+  },
+  "ham_vua": {
+   "ten": "Medium-width jaw",
+   "tieu_de": "Jaw of medium width compared with the cheekbones",
+   "noi_dung": "Your jaw is narrower than your cheekbones by the usual amount, neither flared nor thin. The old books call this area the Servants palace — helpers and collaborators: how full the flesh is here says more, so feel it yourself.",
+   "viec": "Think of the two people helping you most right now and tell each of them a specific thank-you.",
+   "sach": {
+    "y": "The bones on both sides of the face should be full and support each other, not loose or bony (Shen Xiang Quan Bian, chapter on the six storehouses)."
+   }
+  }
+ },
+ "mau": {
+  "mo_dau": "This reading is built from what YOU observed in the mirror ({so} traits), matched with how the old face-reading books read them. It speaks about tendencies and habits, not about what will happen; whether it fits is for you to judge.",
+  "thieu": "You have not answered any question about {ten} yet — a photo cannot measure this part (fullness of flesh, colour, lines, height in profile). Open the mirror Survey to add it and this chapter will fill out.",
+  "khong_dau_hieu": "The traits you chose in this area are all neutral — the old books have nothing special to say, and that is usually a good sign.",
+  "muc_chuong": {
+   "thuan": "Many traits in this area are favourable.",
+   "can_bang": "This area has favourable traits and some to watch — balanced.",
+   "can_chu_dong": "This area has a few traits worth actively looking after."
+  },
+  "suc_khoe_mo": "Medical face reading does not diagnose illness. The Inner Classic links each area of the face with a body system; changes in colour usually mean changes in daily rhythm. What follows are only reminders to take care and get checked.",
+  "suc_khoe_mien_tru": "These notes are preventive suggestions based on old books and are not medical advice. If you have symptoms, see a doctor — do not wait for a face reading.",
+  "nam_nay": "At age {tuoi} (counted the traditional East Asian way), the yearly-position book reads {ten}, in the area of {vung}{ben}. What you observed there: {quan_sat}.",
+  "nam_nay_khong_quan_sat": "At age {tuoi} (counted the traditional East Asian way), the yearly-position book reads {ten}, in the area of {vung}{ben}. You have not answered any question about this area yet; open the Survey to add it.",
+  "nam_toi": "{nam} (age {tuoi}): {ten} — {vung}.",
+  "luu_nien_giai_thich": "The old books divide the face into 100 positions, one for each age, running from the ears (1–14) up to the forehead, down the nose and mouth to the chin (71–75), then around the face by the 12 branches (76–99). This is the books' WAY OF LOOKING, not a forecast: where the area for an age is full and bright, that age goes easier; where it has lines or is dark, that age calls for more initiative.",
+  "nam_nay_muc": {
+   "thuan": "You see this year's area as favourable — a year to push things forward.",
+   "can_bang": "This year's area has favourable traits and some to watch — a steady year.",
+   "can_chu_dong": "You see traits worth caring for in this year's area — a year to go slower and look after your energy."
+  },
+  "la_so_hop": "Your face shape carries the {hinh} element; your Bazi chart, read by {cach}, needs to add {can}. {quan_he}",
+  "la_so_sinh": "The element of your face shape feeds the element you need — the old books call it what you build up nourishing what you were born with: favourable.",
+  "la_so_trung": "The element of your face shape is the very element you need — the old books call it what you build up already making up for what you were born with: very favourable.",
+  "la_so_khac": "The element of your face shape restrains the element you need — nothing to worry about; your natural way of living and what the chart needs simply pull in two directions, so make it up through habits (colours, work, daily rhythm) rather than appearance.",
+  "la_so_bi_khac": "The element you need restrains the element of your face shape — in everyday terms: what the chart needs will 'bend' your natural ways; take it slowly.",
+  "la_so_trung_tinh": "The two elements neither feed nor restrain each other directly: adding what the chart needs does not clash with your natural ways.",
+  "la_so_pha": "Your face shape does not lean clearly toward one element (a mixed shape) — the old books advise reading it by the strongest trait; as for the chart, just add the element it needs, your face shape does not get in the way.",
+  "la_so_thieu": "This chapter needs your date and time of birth (Bazi) — add your birth time to your profile to compare your face shape with the element your chart needs.",
+  "loi_khuyen_mo": "'Where the heart leads, the face follows' — if the heart is there but the face is not yet, the face will grow from the heart. Every line on the face is years of habit; change the habit and the face follows. Below are free actions gathered from every chapter.",
+  "ket": "The old face-reading books speak about tendencies, not about what will happen; and a face you observe yourself is always truer than a face someone else reads. Look again in three months — any line that has faded is a habit you have changed.",
+  "cum_doi_thuong": "in plain words",
+  "nhan_ben": {
+   "trai": " (left side)",
+   "phai": " (right side)"
+  },
+  "nhan_gioi_ben": "The old books say men look at the left side first, women at the right side first.",
+  "hoi": {
+   "chao": "Ask about an area of your face (forehead, brows, eyes, nose, mouth, chin, ears, cheekbones, philtrum, moles…) or about how face reading works. The face is your own — I do not read other people's faces.",
+   "nguoi_khac": "I do not read other people's faces (a boss, an employee, a partner, someone you are dating) — judging people by their looks is unfair to them, and the old face-reading books themselves say 'the face follows the heart': you only know someone by living alongside them. If you like, observe your own face instead.",
+   "tuyen_dung": "I do not help choose employees, partners or a spouse by their looks — judging people by appearance is something to avoid and is banned in many places. Judge people by what they do.",
+   "khong_hieu": "I could not tell which area of your face you are asking about. Try something specific: 'What does a wide Yin Tang mean?', 'A mole on the chin?', 'Where is age 35 read this year?'.",
+   "chua_khao_sat": "You have not done the Survey yet, so I can only give the books' general meaning of this area; take the Survey for a reading of your own.",
+   "da_khao_sat": "Based on what you observed yourself:",
+   "mo_ta_bo_vi": "{ten} ({vi_tri}): {nghia}",
+   "cach_quan_sat": "How to check it yourself: {huong_dan}",
+   "khong_doan_benh": "I do not diagnose illness from the face. The old books link this area with {he}; if you have symptoms, seeing a doctor comes first."
+  }
+ },
+ "do_anh": {
+  "nhom": {
+   "vien": "Face outline",
+   "mat_may": "Eyes and brows",
+   "mui_mieng": "Nose and mouth",
+   "tai": "Ears (optional)",
+   "nghieng_tren": "Forehead and nose root (profile photo)",
+   "nghieng_duoi": "Nose and chin (profile photo)"
+  },
+  "diem": [
+   {
+    "ten": "Hairline at the centre of the forehead",
+    "mo": "Where the hair starts to grow, right at the centre of the forehead. If a fringe covers it, estimate where the hairline is."
+   },
+   {
+    "ten": "Forehead edge, left of the photo",
+    "mo": "The outer edge of the forehead, level with the end of the eyebrow."
+   },
+   {
+    "ten": "Forehead edge, right of the photo",
+    "mo": "The outer edge of the forehead, level with the end of the eyebrow."
+   },
+   {
+    "ten": "Widest point of the cheekbone, left of the photo",
+    "mo": "Where the face is widest, across the cheekbones."
+   },
+   {
+    "ten": "Widest point of the cheekbone, right of the photo",
+    "mo": "Where the face is widest, across the cheekbones."
+   },
+   {
+    "ten": "Jaw angle, left of the photo",
+    "mo": "Where the jawline turns from vertical to horizontal, below the earlobe."
+   },
+   {
+    "ten": "Jaw angle, right of the photo",
+    "mo": "Where the jawline turns from vertical to horizontal, below the earlobe."
+   },
+   {
+    "ten": "Lowest point of the chin",
+    "mo": "The bottom of the chin, right in the middle."
+   },
+   {
+    "ten": "Inner end of the eyebrow, left of the photo",
+    "mo": "The end of the brow nearest the nose."
+   },
+   {
+    "ten": "Inner end of the eyebrow, right of the photo",
+    "mo": "The end of the brow nearest the nose."
+   },
+   {
+    "ten": "Outer eye corner, left of the photo",
+    "mo": "The outer corner of the eye, where the two lids meet."
+   },
+   {
+    "ten": "Inner eye corner, left of the photo",
+    "mo": "The inner corner of the eye, near the bridge of the nose."
+   },
+   {
+    "ten": "Inner eye corner, right of the photo",
+    "mo": "The inner corner of the eye, near the bridge of the nose."
+   },
+   {
+    "ten": "Outer eye corner, right of the photo",
+    "mo": "The outer corner of the eye, where the two lids meet."
+   },
+   {
+    "ten": "Base of the nose",
+    "mo": "Where the nose meets the upper lip, right in the middle."
+   },
+   {
+    "ten": "Edge of the nose wing, left of the photo",
+    "mo": "The outermost edge of the nose wing."
+   },
+   {
+    "ten": "Edge of the nose wing, right of the photo",
+    "mo": "The outermost edge of the nose wing."
+   },
+   {
+    "ten": "Mouth corner, left of the photo",
+    "mo": "The corner of the mouth with the lips closed naturally."
+   },
+   {
+    "ten": "Between the lips",
+    "mo": "The middle point of the line where the lips meet."
+   },
+   {
+    "ten": "Mouth corner, right of the photo",
+    "mo": "The corner of the mouth with the lips closed naturally."
+   },
+   {
+    "ten": "Top of the ear (one side)",
+    "mo": "The highest visible point of the ear rim."
+   },
+   {
+    "ten": "Bottom of the earlobe (same side)",
+    "mo": "The lowest point of the earlobe, on the same side as the top of the ear."
+   }
+  ],
+  "diem_nghieng": [
+   {
+    "ten": "Hairline",
+    "mo": "Where the hair starts to grow on the forehead outline."
+   },
+   {
+    "ten": "Middle of the forehead",
+    "mo": "A point on the forehead outline, about halfway between the hairline and the brow."
+   },
+   {
+    "ten": "Bump between the brows",
+    "mo": "The most forward point on the outline, level with the inner ends of the brows."
+   },
+   {
+    "ten": "Root of the nose (Shan Gen)",
+    "mo": "The deepest dip between the forehead and the bridge of the nose, at eye level."
+   },
+   {
+    "ten": "Middle of the nose bridge",
+    "mo": "The highest point around the middle of the bridge (the hump, if there is one)."
+   },
+   {
+    "ten": "Tip of the nose",
+    "mo": "The point of the nose that sticks out furthest."
+   },
+   {
+    "ten": "Base of the nose",
+    "mo": "Where the underside of the nose meets the upper lip."
+   },
+   {
+    "ten": "Front of the chin",
+    "mo": "The most forward point of the chin."
+   },
+   {
+    "ten": "Bottom of the chin",
+    "mo": "The lowest point of the chin."
+   },
+   {
+    "ten": "Top of the ear",
+    "mo": "The highest point of the ear rim."
+   },
+   {
+    "ten": "Bottom of the earlobe",
+    "mo": "The lowest point of the earlobe."
+   }
+  ],
+  "loi": {
+   "khuon_mat": "Face height is {cao_rong} times the cheekbone width; the forehead is {tran_ma} and the jaw {ham_ma} of the cheekbone width.",
+   "tam_dinh": "Forehead, middle and chin take {thuong}% – {trung}% – {ha}% of the face length (the classic standard: about one third each).",
+   "long_may": "The gap between the inner brow ends is {may_khoe} times the gap between the inner eye corners (old texts: the Yin Tang about two fingers wide).",
+   "an_duong": "The gap between the inner brow ends is {may_khoe} times the gap between the inner eye corners. Check the brightness and lines of this area yourself.",
+   "mat_hinh_nghieng": "The outer eye corner sits {nghieng_mat} eye-lengths above the inner corner (positive = upturned, negative = downturned).",
+   "mat_hinh_nho": "Each eye is {mat_mat} of the cheekbone width (the 'five eyes' standard: about 0.2 — the face is five eyes wide).",
+   "canh_mui": "The nose wings are {mui_khoe} times the gap between the inner eye corners (standard: about equal). Check the fleshiness of the wings yourself.",
+   "mieng": "The mouth is {mieng_mui} times the nose width; the mouth corners sit {khoe_mieng} mouth-widths above the middle of the lips.",
+   "mieng_lech": "The two mouth corners differ in height by {lech_mieng} of the mouth width (already corrected for head tilt).",
+   "nhan_trung": "Nose base to the middle of the lips is {nhan_trung} of the lower face (usually about one third).",
+   "ham": "The jaw is {ham_ma} of the cheekbone width.",
+   "song_mui": "The nose base is off the midline between the eyes by {lech_mui} of the inner-eye gap.",
+   "tai": "The top of the ear is {dinh_tai} the brows; the earlobe is {dai_tai} the nose base (old texts: ears level with the brows and lobes reaching the nose base are good ears).",
+   "canh_bao_quay": "The face in the photo is turned slightly to one side — left/right measurements (nose, mouth offset) were skipped; a straight-on photo works best.",
+   "canh_bao_nghieng": "The head in the photo is tilted ({goc}°) — the system straightened it along the line of the outer eye corners before measuring.",
+   "tran": "In profile, the mid-forehead stands {tran_cong} of the forehead height off the line from hairline to brow (usually about 0.05: a slight curve).",
+   "son_can": "The angle between forehead and nose bridge at the nose root is {goc_son_can}° (usually 115–135°; a wide angle = a high nose root, flowing from the forehead).",
+   "song_mui_nghieng": "The nose bridge bulges {gu_mui} of its length off the straight root–tip line; the tip projects {nho_mui} of the nose length (usually about 0.3).",
+   "cam_nghieng": "The facial convexity angle (brow centre – nose base – chin) is {loi_mat}° (usually 8–16°; larger = a receding chin).",
+   "tai_nghieng": "In profile: the top of the ear is {dinh_tai} the brows; the earlobe is {dai_tai} the nose base (old texts: ears level with the brows and lobes reaching the nose base are good ears).",
+   "canh_bao_hai_nghieng": "The two profile photos disagree on: {cau} — these features are not suggested yet; re-mark them so they match, or use one photo only.",
+   "tran_thang": "The forehead (at the brow tails) is {tran_ma} of the cheekbone width and takes {thuong}% of the face length. Fullness, bulge or dip needs a profile photo."
+  }
+ }
+}

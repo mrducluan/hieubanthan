@@ -1,0 +1,235 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 — bản tiếng Anh của thanso_cap_so.json (45 cặp số). Ban biên tập viết, chờ người bản xứ duyệt. Không chấm điểm hợp / khắc.",
+ "source": {
+  "ten": "Reference compilation (editorial draft, 2026) following the Balliett–Jordan tradition and common numerology books",
+  "luu_y": "Draft shown by decision of the project owner (2026-09-30); a status column allows gradual review. A cultural reference, not a forecast."
+ },
+ "cap": {
+  "1-1": {
+   "hoa": "Both take the initiative and like getting things done — easy to fall into step when the goal is shared.",
+   "va": "Both want to hold the wheel — easy to fight over who makes the call.",
+   "cung_lam": "Agree clearly which areas each of you has the final say on."
+  },
+  "1-2": {
+   "hoa": "One opens the way, the other keeps the peace — you complement each other easily.",
+   "va": "The 1 tends to decide for both; the 2 tends to give in and then feel hurt.",
+   "cung_lam": "The 1 asks first; the 2 says what they want instead of waiting to be guessed."
+  },
+  "1-3": {
+   "hoa": "High energy, lots of ideas, happy starting new things together.",
+   "va": "The 1 wants to move fast in one direction; the 3 tends to branch off.",
+   "cung_lam": "Settle on one shared goal each quarter and both stick to it."
+  },
+  "1-4": {
+   "hoa": "One starts things, the other builds the base — a pair that gets things done.",
+   "va": "The 1 finds the 4 slow; the 4 finds the 1 reckless.",
+   "cung_lam": "Agree on 'try small first, go big later' for every new plan."
+  },
+  "1-5": {
+   "hoa": "Both love freedom and dare to try things, with few ties on each other.",
+   "va": "Both find long-term commitment hard and can drift in different directions.",
+   "cung_lam": "Keep a few fixed shared rituals between two free lifestyles."
+  },
+  "1-6": {
+   "hoa": "The 1 brings direction, the 6 brings care — one looks after the path, the other after the people.",
+   "va": "The 1 feels managed; the 6 feels unappreciated.",
+   "cung_lam": "The 1 gives specific thanks; the 6 lets the 1 decide their own part."
+  },
+  "1-7": {
+   "hoa": "Both are independent and respect each other's space.",
+   "va": "Little sharing of feelings; easy to live side by side instead of together.",
+   "cung_lam": "One evening a week to tell each other what you are really thinking."
+  },
+  "1-8": {
+   "hoa": "Both ambitious and results-driven — strong when the goal is shared.",
+   "va": "Two big egos, a struggle for power, quiet competition.",
+   "cung_lam": "Pick a shared 'opponent' outside instead of fighting each other; keep roles clearly separate."
+  },
+  "1-9": {
+   "hoa": "The 1 acts, the 9 inspires — easy to do meaningful work together.",
+   "va": "The 1 finds the 9 vague; the 9 finds the 1 selfish.",
+   "cung_lam": "Work together on a project with both measurable results and real meaning."
+  },
+  "2-2": {
+   "hoa": "Deep understanding, gentleness, few big clashes.",
+   "va": "Both avoid conflict, so small things pile up into distance.",
+   "cung_lam": "Set a regular time to say one thing you are unhappy about, plainly."
+  },
+  "2-3": {
+   "hoa": "The 2 listens, the 3 tells stories — a light, warm atmosphere.",
+   "va": "The 3 is carefree; the 2 is easily hurt by a joke.",
+   "cung_lam": "The 3 asks 'did that comment upset you?'; the 2 says so straight away."
+  },
+  "2-4": {
+   "hoa": "Stable, loyal, steady — good for building something long-term together.",
+   "va": "Can get dull with few surprises; the 4 can be dry about the 2's need for attention.",
+   "cung_lam": "Plan small surprises on purpose."
+  },
+  "2-5": {
+   "hoa": "The 5 brings fresh air, the 2 brings warmth.",
+   "va": "The 2 needs closeness, the 5 needs freedom — easily misread as love fading.",
+   "cung_lam": "Put numbers on your needs for space and for connection (how many evenings a week)."
+  },
+  "2-6": {
+   "hoa": "Both are thoughtful and know how to look after each other — very warm.",
+   "va": "Both give a lot and ask for little; resentment builds when it is not returned.",
+   "cung_lam": "Each of you names one need of your own every week."
+  },
+  "2-7": {
+   "hoa": "Quiet, deep, respectful of each other.",
+   "va": "The 2 needs closeness, the 7 needs distance — easy to feel left out.",
+   "cung_lam": "The 7 says in advance when they need time alone; the 2 has their own plans then."
+  },
+  "2-8": {
+   "hoa": "The 8 handles the big picture, the 2 handles the bond — a good complement.",
+   "va": "The 8 can overpower; the 2 can go quiet.",
+   "cung_lam": "Big decisions always need both of you to agree."
+  },
+  "2-9": {
+   "hoa": "Both are compassionate and empathise easily.",
+   "va": "Both sacrifice easily and can be vague about money and responsibilities.",
+   "cung_lam": "Make a clear shared financial plan."
+  },
+  "3-3": {
+   "hoa": "Fun, creative, never short of things to talk about.",
+   "va": "Both are scattered, with no one minding the practical side.",
+   "cung_lam": "Split practical tasks on a schedule, with a shared list."
+  },
+  "3-4": {
+   "hoa": "The 3 brings joy, the 4 brings certainty.",
+   "va": "The 4 finds the 3 irresponsible; the 3 finds the 4 rigid.",
+   "cung_lam": "The 3 keeps small promises; the 4 leaves room for spontaneity."
+  },
+  "3-5": {
+   "hoa": "Lively, fun, love new experiences — rarely bored.",
+   "va": "Unsettled; easy to overspend and leave things unfinished together.",
+   "cung_lam": "Set a long-term shared goal and let one person keep the budget."
+  },
+  "3-6": {
+   "hoa": "The 3 makes things fun, the 6 makes things warm.",
+   "va": "The 6 can over-care and over-remind; the 3 feels hemmed in.",
+   "cung_lam": "The 6 reminds less; the 3 takes on shared tasks without being asked."
+  },
+  "3-7": {
+   "hoa": "The 3 draws the 7 out; the 7 helps the 3 go deeper.",
+   "va": "The 3 finds the 7 cold; the 7 finds the 3 shallow.",
+   "cung_lam": "Alternate lively activities with quiet ones."
+  },
+  "3-8": {
+   "hoa": "The 3 communicates well, the 8 organises well — good for business.",
+   "va": "The 8 finds the 3 not serious enough; the 3 finds the 8 too practical.",
+   "cung_lam": "Split roles: the 3 handles the outside world, the 8 runs operations."
+  },
+  "3-9": {
+   "hoa": "Emotionally rich; both love beauty and things that mean something.",
+   "va": "Neither is very practical; easy to skip what needs doing.",
+   "cung_lam": "Review practical matters (money, paperwork) together every month."
+  },
+  "4-4": {
+   "hoa": "Very stable, planned and dependable with each other.",
+   "va": "Rigid, slow to change, easily bored.",
+   "cung_lam": "Try one new thing together every year."
+  },
+  "4-5": {
+   "hoa": "The 4 gives a base, the 5 gives a breeze — you learn a lot from each other.",
+   "va": "The 4 finds the 5 unsettled; the 5 finds the 4 confining.",
+   "cung_lam": "Agree which parts of your shared life are 'fixed' and which are 'flexible'."
+  },
+  "4-6": {
+   "hoa": "Both responsible, both caring for those around them — a solid foundation.",
+   "va": "Lots of duty, little play.",
+   "cung_lam": "Keep some time purely for fun, with no talk of things to do."
+  },
+  "4-7": {
+   "hoa": "Both serious, careful and respectful of reason.",
+   "va": "Dry, with little open affection.",
+   "cung_lam": "Practise putting feelings into words, not only into actions."
+  },
+  "4-8": {
+   "hoa": "A practical pair, good at building assets and careers.",
+   "va": "Swept up in work, forgetting the relationship.",
+   "cung_lam": "Keep private time separate from time spent talking money."
+  },
+  "4-9": {
+   "hoa": "The 4 turns the 9's ideals into reality.",
+   "va": "The 9 finds the 4 short-sighted; the 4 finds the 9 unrealistic.",
+   "cung_lam": "The 9 states the purpose, the 4 makes the plan — and you sign off on it together."
+  },
+  "5-5": {
+   "hoa": "Free, lively, lots of shared experiences.",
+   "va": "Unsettled; commitment and routines are hard to keep.",
+   "cung_lam": "Keep a few fixed commitments even while living flexibly."
+  },
+  "5-6": {
+   "hoa": "The 5 brings freshness, the 6 brings a home.",
+   "va": "The 6 wants to hold on, the 5 wants to go.",
+   "cung_lam": "The 5 shares plans in advance; the 6 respects the space for freedom you agreed on."
+  },
+  "5-7": {
+   "hoa": "Both curious and fond of exploring (the 5 outward, the 7 inward).",
+   "va": "Different rhythms of life; hard to find shared time.",
+   "cung_lam": "Choose experiences that are both adventurous and deep (cultural travel, learning together)."
+  },
+  "5-8": {
+   "hoa": "Energetic, bold, good for business.",
+   "va": "Both take risks and can make big mistakes by deciding fast.",
+   "cung_lam": "Every big money decision waits one day and gets a third person's view."
+  },
+  "5-9": {
+   "hoa": "Both expansive, fond of travel, generous.",
+   "va": "Few roots, little saved.",
+   "cung_lam": "Have a shared savings goal and a fixed place to come home to."
+  },
+  "6-6": {
+   "hoa": "Very caring, family-minded and cosy.",
+   "va": "Both want to do the caring, so you can end up controlling each other and worn out by duty.",
+   "cung_lam": "Take turns being the one who is looked after."
+  },
+  "6-7": {
+   "hoa": "The 6 brings warmth, the 7 brings depth.",
+   "va": "The 6 feels pushed away; the 7 feels intruded on.",
+   "cung_lam": "Agree on personal space and on how to check in."
+  },
+  "6-8": {
+   "hoa": "The 8 handles the material side, the 6 the emotional side — a solid household.",
+   "va": "The 8 is absent; the 6 feels alone with the responsibilities.",
+   "cung_lam": "The 8 shows up for important occasions as firmly as for a work commitment."
+  },
+  "6-9": {
+   "hoa": "Both compassionate and fond of helping others.",
+   "va": "So busy caring for others that you forget each other.",
+   "cung_lam": "Make time for just the two of you before shared obligations."
+  },
+  "7-7": {
+   "hoa": "You understand each other without many words and respect each other's space.",
+   "va": "Too closed off; you can drift apart.",
+   "cung_lam": "Share an intellectual interest so you always have something in common to talk about."
+  },
+  "7-8": {
+   "hoa": "The 7 analyses, the 8 decides — good for big work.",
+   "va": "The 8 finds the 7 slow; the 7 finds the 8 hasty.",
+   "cung_lam": "The 7 delivers analysis by a deadline; the 8 waits until that deadline."
+  },
+  "7-9": {
+   "hoa": "Both drawn to meaning, the inner life and knowledge.",
+   "va": "Both are far from practical matters.",
+   "cung_lam": "Make practical plans together for the things you both believe in."
+  },
+  "8-8": {
+   "hoa": "Both ambitious; you can build a lot together.",
+   "va": "Power struggles, competition, getting absorbed in money.",
+   "cung_lam": "Keep roles clearly separate; set a shared goal that has nothing to do with money."
+  },
+  "8-9": {
+   "hoa": "The 8 has resources, the 9 has ideals — you can do big, useful things.",
+   "va": "The 9 finds the 8 too practical; the 8 finds the 9 wasteful.",
+   "cung_lam": "Decide together on a share of income for meaningful causes and save the rest."
+  },
+  "9-9": {
+   "hoa": "Generous, idealistic, aligned on values.",
+   "va": "Both tend to neglect practical matters and themselves.",
+   "cung_lam": "Have one person take charge of practical matters each month."
+  }
+ }
+}

@@ -7,7 +7,8 @@ import { unstable_noStore as noStore } from "next/cache";
 export const DUONG_SINH_NN = "/sinh-o-nuoc-ngoai";
 export const duongSinhNN = (ma: string) => `${DUONG_SINH_NN}/${ma}`;
 /** Mã nước có trang (khớp engine `MA_NUOC`; engine là nguồn — mục lục lấy từ engine, hằng này chỉ để đoán khi engine bận). */
-export const MA_NUOC_SEO = ["us", "au", "ca", "de", "jp", "kr", "tw", "fr", "cz", "gb", "pl", "ru", "th", "la", "kh"] as const;
+import { MA_NUOC_SEO } from "@/lib/nuoc-co-trang";
+export { MA_NUOC_SEO };
 export const docMaNuoc = (s: string): string | null => (/^[a-z]{2}$/.test(s) ? s : null);
 
 export interface MocDoiGio { ngay: string; gio: string; sang: "mùa hè" | "giờ chuẩn" }

@@ -14,7 +14,7 @@ import { GocNhinChuyenGia } from "@/components/kien-thuc/GocNhinChuyenGia";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHUYEN_GIA, idChuyenGia, ldNguoi } from "@/lib/chuyen-gia";
-import { CHU_DE, CHU_DE_THEO_LOAI, TEN_MANG_SILO, duongTrang, trang, truCua, slugEnCua, slugViCua, type LoaiTrang, type TrangKienThuc } from "@/lib/kien-thuc";
+import { CHU_DE, CHU_DE_THEO_LOAI, TEN_MANG_SILO, duongTrang, mucLuc, trang, truCua, slugEnCua, slugViCua, type LoaiTrang, type TrangKienThuc } from "@/lib/kien-thuc";
 import { anhBai, catMoTa, goiLd, ldAnh, ldDuongDan, ldHoiDap, ldThucThe, mangTheoDuong, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import { duongMoi } from "@/lib/duong-silo";
 import { idTu } from "@/lib/cms-html";
@@ -26,7 +26,7 @@ import { anhOgEn, ldThucTheEn, metaEn, tieuDeVua } from "@/lib/en/seo";
 import { cumEn, trangCongCuEn } from "@/lib/so-trang-en";
 import { tenTheo } from "@/lib/ten-hien";
 import { taoChu, tachNhan, type DocChu } from "@/lib/chu-trang";
-import { CHU_KIEN_THUC } from "@/lib/chu/kien-thuc";
+import { CHU_KIEN_THUC, NUT_MOI_EN } from "@/lib/chu/kien-thuc";
 import { dinhNgay } from "@/lib/dinh-dang";
 
 type Thamso = { khoa: string | null; slug: string };
@@ -118,6 +118,21 @@ const LOI_MOI: Partial<Record<string, string>> = {
   co_thu: "Câu phú nào ứng với lá số của bạn — sao nào ở Mệnh, cách cục nào thành? Nhập ngày giờ sinh để xem, có từng bước an sao.",
 };
 
+/** Tối đa 8 trang kề trong cùng cụm (4 trước, 4 sau theo thứ tự mục lục, vòng tròn), bỏ trang đang xem + trang đã có ở
+ *  "Đọc tiếp"; chỉ trang được index. */
+function trangKe(ml: { loai: string; slug: string; tieu_de: string; index?: boolean }[], t: TrangKienThuc) {
+  const ds = ml.filter((x) => x.loai === t.loai && x.index !== false);
+  const i = ds.findIndex((x) => x.slug === t.slug);
+  if (i < 0 || ds.length < 3) return [];
+  const da = new Set([t.slug, ...t.lien_quan.map((l) => l.slug)]);
+  const ra: typeof ds = [];
+  for (const k of [-1, 1, -2, 2, -3, 3, -4, 4]) {
+    const x = ds[(i + k + ds.length) % ds.length]!;
+    if (!da.has(x.slug)) { da.add(x.slug); ra.push(x); }
+  }
+  return ra.map((x) => ({ ...x, loai: x.loai as LoaiTrang }));
+}
+
 export async function TrangKienThucView(params: Thamso) {
   const nn = await ngonNguMayChu(), en = nn.ngonNgu === "en";
   const kq = await tai(params);
@@ -137,7 +152,8 @@ export async function TrangKienThucView(params: Thamso) {
   if (en) return <TrangKienThucEn cd={cd} t={t} duong={duongEn!} ma={nn.ma} />;
   const duong = duongTrang(t.loai, t.slug);
   // ND-5: khối CMS của mẫu cụm (+ ghi đè riêng URL này) — đặt quanh văn KB, không xen vào giữa.
-  const nd = await layNoiDungTrang(duong, { tieu_de: t.tieu_de, mo_ta: t.mo_ta, ten_chu_de: cd.ten });
+  const [nd, ml] = await Promise.all([layNoiDungTrang(duong, { tieu_de: t.tieu_de, mo_ta: t.mo_ta, ten_chu_de: cd.ten }), mucLuc().catch(() => [])]);
+  const cungCum = trangKe(ml, t);
   const nhap = t.trang_thai !== "da_duyet";
   const tacGia = [t.tac_gia, t.tham_dinh?.nguoi].find((x) => x && CHUYEN_GIA[x]);
 
@@ -268,6 +284,20 @@ export async function TrangKienThucView(params: Thamso) {
         </nav>
       )}
 
+      {/* SEO-P: liên kết nội bộ trong cụm — trang kề trước / sau trong mục lục (vd "sinh năm 2018 / 2020 mệnh gì"), chữ link
+          = tiêu đề dạng câu hỏi của trang đích. Chỉ đọc mục lục engine (đã cache), không tính gì. */}
+      {cungCum.length > 0 && (
+        <nav className="mt-10" aria-labelledby="cung-cum" data-testid="cung-cum">
+          <h2 id="cung-cum" className="text-xl">Xem thêm trong {cd.ten.charAt(0).toLowerCase() + cd.ten.slice(1)}</h2>
+          <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+            {cungCum.map((l) => (
+              <li key={l.slug}><Link href={duongTrang(l.loai, l.slug)} className="block rounded-xl border border-line/70 px-3 py-2 text-sm text-fg-muted transition-colors hover:border-gold/50 hover:text-fg">{l.tieu_de}</Link></li>
+            ))}
+          </ul>
+          <p className="mt-3 text-sm"><Link href={cd.duong} className="text-gold underline underline-offset-4">Tất cả: {cd.ten} →</Link></p>
+        </nav>
+      )}
+
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
         <p className="font-medium text-fg-muted">{c("bai.nguon")}</p>
@@ -375,7 +405,7 @@ async function TrangKienThucEn({ cd, t, duong, ma }: { cd: (typeof CHU_DE)[strin
             <p>{loiMoi ?? <LoiMoiChung c={c} />}</p>
             <p className="mt-2 text-sm">{c("bai.tat_ca")} <Link href={duongCum} className="text-gold underline underline-offset-2 hover:text-fg">{tenCum}</Link></p>
           </div>
-          <Button asChild><Link href={congCu}>{cd.mang === "/bat-tu" ? c("moi.nut_bat_tu") : cd.mang === "/tu-vi" ? c("moi.nut_tu_vi") : cd.mang === "/phong-thuy" ? c("moi.nut_phong_thuy") : cd.mang === "/kinh-dich" ? c("moi.nut_kinh_dich") : c("moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
+          <Button asChild><Link href={congCu}>{c(NUT_MOI_EN[cd.mang] ?? "moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
         </aside>
       )}
 

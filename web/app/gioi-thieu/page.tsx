@@ -76,6 +76,9 @@ export default async function GioiThieu() {
           ]} />
           <p>Cổ thư chúng tôi dùng nguyên văn thuộc phạm vi công cộng. Sách hiện đại chỉ tóm ý và ghi nguồn, không chép
             nguyên văn.</p>
+          {/* NS-QT: giấy phép CC BY 4.0 của GeoNames bắt buộc ghi công. */}
+          <p>Dữ liệu địa danh ngoài Việt Nam (gợi ý nơi sinh): <a href="https://www.geonames.org" rel="noopener" className="underline">GeoNames</a>, giấy
+            phép CC BY 4.0.</p>
         </>
       ),
     },

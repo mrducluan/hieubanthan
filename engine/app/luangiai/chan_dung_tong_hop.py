@@ -20,6 +20,8 @@ from app import config
 from app.calc import lunar
 from app.luangiai import doi_song_khuon as kh
 from app.kb import nap
+from app.kb import ten as _tn
+from app.kb.loi import L
 from app.luangiai import dong_thuan_thong_ke as dtk
 from app.luangiai import giao_thoa as gt
 
@@ -61,7 +63,8 @@ def _ten(mon: str) -> str:
 
 def _noi(mons: list[str]) -> str:
     ten = [_ten(m) for m in mons]
-    return ten[0] if len(ten) == 1 else ", ".join(ten[:-1]) + " và " + ten[-1]
+    from app.kb.loi import danh_sach  # noqa: PLC0415 — EN-ALL GĐ 8: nối theo ngôn ngữ (" và " / " and ")
+    return danh_sach(ten)
 
 
 def _gan(h: dict, nguon: str, **them) -> dict:
@@ -81,7 +84,7 @@ def dong_thuan(mang: str, muc: dict[str, str | None]) -> dict | None:
     k = kb()
     ten_mang, ngan = k["mang"][mang]["ten"], k["mang"][mang]["ngan"]
     noi = _noi(list(co))
-    can_cu = [f"{_ten(m)}: {ten_mang.lower()} {kh.NHAN_MUC[v].lower()}" for m, v in co.items()]
+    can_cu = [L("cd.can_cu_mon", "{mon}: {mang} {muc}", mon=_ten(m), mang=ten_mang.lower(), muc=kh.nhan_muc(v).lower()) for m, v in co.items()]
     if len(set(co.values())) == 1:
         m = next(iter(co.values()))
         o = k["cung"][m]
@@ -90,7 +93,7 @@ def dong_thuan(mang: str, muc: dict[str, str | None]) -> dict | None:
                    ma=kh.ma_mau(MO_DUN, mang, "cung", m, str(len(co))))
         return _gan(h, "ba_mon")
     thap = min(co.values(), key=_THU_TU_MUC.index)
-    mat = "; ".join(f"{_ten(m)} ({k['mon'][m]['mat']}) thấy {kh.NHAN_MUC[v].lower()}" for m, v in co.items())
+    mat = "; ".join(L("cd.mat", "{mon} ({mat}) thấy {muc}", mon=_ten(m), mat=k['mon'][m]['mat'], muc=kh.nhan_muc(v).lower()) for m, v in co.items())
     o = k["khac"]
     noi_dung = o["noi_dung"].format(mat=mat)
     if len(co) == 3:
@@ -99,7 +102,7 @@ def dong_thuan(mang: str, muc: dict[str, str | None]) -> dict | None:
         if da_so:
             v_ds, _ = da_so
             m_le, v_le = next((m, x) for m, x in co.items() if x != v_ds)
-            noi_dung = o["da_so"].format(muc_da_so=kh.NHAN_MUC[v_ds].lower(), mon_le=_ten(m_le), muc_le=kh.NHAN_MUC[v_le].lower(),
+            noi_dung = o["da_so"].format(muc_da_so=kh.nhan_muc(v_ds).lower(), mon_le=_ten(m_le), muc_le=kh.nhan_muc(v_le).lower(),
                                          mat_le=k["mon"][m_le]["mat"]) + " " + noi_dung
     ma = "".join(_MA_NGAN[co.get(m)] for m in MON)
     # Ý4: hai lá số khác mức ở mảng mà trên lá số mẫu chúng hiếm khi trùng (kappa < 0,1) → nói thật là hai góc nhìn độc lập.
@@ -149,7 +152,7 @@ def _muon(bc: dict | None, ma_chuong: str, mon: str, uu_tien: str | None, da_dun
 
 def _dong_muc(mang: str, muc: dict[str, str | None]) -> str:
     ten = kb()["mang"][mang]["ten"]
-    phan = [f"{_ten(m)}: {kh.NHAN_MUC[v] if v else 'chưa có'}" for m, v in muc.items()]
+    phan = [f"{_ten(m)}: {kh.nhan_muc(v) if v else L('cd.chua_co', 'chưa có')}" for m, v in muc.items()]
     return f"{ten} — " + " · ".join(phan) + "."
 
 
@@ -244,7 +247,7 @@ def lap(tv_sinh: dict, bt_sinh: dict, tra_loi: dict | None, ngay_xem: dt.date | 
             + _muon(n, "tong_quan", "nhantuong", "cot_loi", da_dung, 1)
             + _muon(n, "con_nguoi", "nhantuong", "diem_manh", da_dung, 2))
     chuong.append(kh.chuong("con_nguoi", ck["con_nguoi"]["tieu_de"], [str(k["mau"]["con_nguoi_mo"])] + ([] if n else [str(k["mau"]["thieu_nhan_tuong"])]),
-                            hop=hop2, cau_hoi=ck["con_nguoi"]["cau_hoi"], cau_tu_soi=cts["con_nguoi"], thieu=None if n else "Chưa có khảo sát gương mặt."))
+                            hop=hop2, cau_hoi=ck["con_nguoi"]["cau_hoi"], cau_tu_soi=cts["con_nguoi"], thieu=None if n else L("cd.thieu.khao_sat", "Chưa có khảo sát gương mặt.")))
 
     # 3–5. Chương theo mảng: dòng mức từng cách + hộp "khác nhau" (hộp "cùng" đã ở chương 1) + hộp mượn mỗi môn
     def _chuong_mang(ma: str, mo_dau: str, **them) -> dict:
@@ -271,10 +274,11 @@ def lap(tv_sinh: dict, bt_sinh: dict, tra_loi: dict | None, ngay_xem: dt.date | 
     hop6 = _muon(n, "tuong_va_la_so", "nhantuong", "cot_loi", da_dung, 3) if n else []
     doan6 = [str(k["mau"]["nang_luong_mo"])]
     if not n:
-        c1, c2 = ", ".join(pt["cach_1"]["hanh"]), ", ".join(pt["cach_2"]["hanh"])
-        doan6.append(str(k["mau"]["nang_luong_thieu"]) + f" Cách 1 (cân sức): {c1 or 'chưa rõ'}; cách 2 (theo tháng sinh): {c2 or 'chưa rõ'}.")
+        c1, c2 = (", ".join(_tn.ten("hanh", h) for h in pt[x]["hanh"]) for x in ("cach_1", "cach_2"))
+        doan6.append(str(k["mau"]["nang_luong_thieu"]) + L("cd.hai_cach", " Cách 1 (cân sức): {c1}; cách 2 (theo tháng sinh): {c2}.",
+                                                          c1=c1 or L("cd.chua_ro", "chưa rõ"), c2=c2 or L("cd.chua_ro", "chưa rõ")))
     chuong.append(kh.chuong("nang_luong", ck["nang_luong"]["tieu_de"], doan6, hop=hop6, cau_hoi=ck["nang_luong"]["cau_hoi"],
-                            cau_tu_soi=cts["nang_luong"], thieu=None if n else "Cần khảo sát gương mặt."))
+                            cau_tu_soi=cts["nang_luong"], thieu=None if n else L("cd.thieu.can_khao_sat", "Cần khảo sát gương mặt.")))
 
     # 7. Năm nay: hai lá số cùng / khác mức năm (EN-2 nhat_quan) + hộp năm của từng cách
     nam_am = lunar.solar_to_lunar(ngay_xem.day, ngay_xem.month, ngay_xem.year, _TZ)[2]
@@ -301,7 +305,8 @@ def lap(tv_sinh: dict, bt_sinh: dict, tra_loi: dict | None, ngay_xem: dt.date | 
         h = hop_mang[d["ma"]]
         if not h or not h.get("huong_xu_ly"):
             continue
-        hop8.append(_gan(kh.hop("loi_khuyen", h["huong_xu_ly"].rstrip("."), f"Từ mảng {d['ten'].lower()}: {h['tieu_de'].rstrip('.')}.",
+        hop8.append(_gan(kh.hop("loi_khuyen", h["huong_xu_ly"].rstrip("."),
+                                L("cd.tu_mang", "Từ mảng {mang}: {td}.", mang=d['ten'].lower(), td=h['tieu_de'].rstrip('.')),
                                 can_cu=h.get("can_cu"), ma=kh.ma_mau(MO_DUN, "loi_khuyen", d["ma"])), "ba_mon"))
         if len(hop8) >= TOI_DA_LOI_KHUYEN:
             break
@@ -315,5 +320,5 @@ def lap(tv_sinh: dict, bt_sinh: dict, tra_loi: dict | None, ngay_xem: dt.date | 
           "ma_tran": {"mon": list(MON), "ten_mon": {m: _ten(m) for m in MON}, "dong": dong},
           "so_mang_cung": so_cung, "so_mang_khac": so_khac, "thieu": thieu, "cot_loi": cot_loi, "chuong": chuong,
           "ket": str(k["tong_quan"]["ket"]), "trang_thai": k["_meta"]["trang_thai"], "dien_dat": "mau",
-          "nguon": "Tử vi Nam phái · Bát tự Tử Bình · Nhân tướng (Ma Y, Thần Tướng Toàn Biên) — ghép, không thêm dữ kiện"}
+          "nguon": L("cd.nguon", "Tử vi Nam phái · Bát tự Tử Bình · Nhân tướng (Ma Y, Thần Tướng Toàn Biên) — ghép, không thêm dữ kiện")}
     return kh.ap_hoc(bc, trong_so, ca_nhan)

@@ -7,16 +7,19 @@ import { ImagePlus, RotateCcw, Ruler } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { postJson } from "@/lib/goi-api";
 import { ghi } from "@/lib/do-luong";
+import { urlAnhSach } from "@/lib/anh-tren-may";
+import { useChuNhanTuong } from "./chu-nhan-tuong";
 
 const DIEM = [
   { ma: "chan_toc", nhan: "Chân tóc giữa trán" }, { ma: "an_duong", nhan: "Giữa hai đầu mày" },
   { ma: "chuan_dau", nhan: "Đầu mũi" }, { ma: "cam", nhan: "Điểm thấp nhất của cằm" },
 ] as const;
-/** Chỉ nhận URL `blob:` do trình duyệt cấp cho tệp trên máy — không bao giờ là chuỗi từ nơi khác (CodeQL: src ảnh). */
-const urlBlob = (f: File): string | null => { const u = URL.createObjectURL(f); return u.startsWith("blob:") ? u : null; };
 const NHAN_LUA: Record<string, string> = { can_doi: "ba phần cân nhau", tran_dai: "phần trán dài hơn", mui_dai: "phần giữa dài hơn", cam_dai: "phần cằm dài hơn", tran_ngan: "phần trán ngắn", cam_ngan: "phần cằm ngắn" };
 
 export function ChamDiemAnh({ onKetQua }: { onKetQua: (luaChon: string) => void }) {
+  // EN-ALL GĐ 8: tên điểm + lựa chọn theo ngôn ngữ (bản Việt = đúng DIEM / NHAN_LUA cũ).
+  const { t } = useChuNhanTuong();
+  const tenDiem = (ma: string) => t(`td.d_${ma}`);
   const [url, setUrl] = useState<string | null>(null);
   const [diem, setDiem] = useState<{ x: number; y: number }[]>([]);
   const [kq, setKq] = useState<{ thuong: number; trung: number; ha: number; lua_chon: string } | null>(null);
@@ -26,10 +29,12 @@ export function ChamDiemAnh({ onKetQua }: { onKetQua: (luaChon: string) => void 
   urlRef.current = url;
   useEffect(() => () => { if (urlRef.current) URL.revokeObjectURL(urlRef.current); }, []);
 
-  const chonAnh = (f: File | undefined) => {
+  // Ảnh vẽ lại qua canvas (`urlAnhSach`, dùng chung các khối ảnh khác): URL hiển thị không phải tệp gốc (CodeQL js/xss-through-dom).
+  const chonAnh = async (f: File | undefined) => {
     if (!f || !f.type.startsWith("image/")) return;
+    const moi = await urlAnhSach(f);
     if (url) URL.revokeObjectURL(url);
-    setUrl(urlBlob(f)); setDiem([]); setKq(null); setLoi(null);
+    setUrl(moi); setDiem([]); setKq(null); setLoi(null);
   };
   const cham = (e: React.MouseEvent<HTMLImageElement>) => {
     if (diem.length >= 4) return;
@@ -45,35 +50,35 @@ export function ChamDiemAnh({ onKetQua }: { onKetQua: (luaChon: string) => void 
       const r = await postJson<{ tam_dinh: { thuong: number; trung: number; ha: number; lua_chon: string } }>("/api/nhan-tuong/do-anh", body);
       setKq(r.tam_dinh); onKetQua(r.tam_dinh.lua_chon);
       ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_tam_dinh", lua_chon: r.tam_dinh.lua_chon });
-    } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa tính được."); } finally { setDang(false); }
+    } catch (e) { setLoi(e instanceof Error ? e.message : t("td.loi")); } finally { setDang(false); }
   };
 
   return (
     <details className="mt-3 rounded-xl border border-line/60 bg-bg/30 p-3 text-sm" data-testid="cham-diem-anh">
-      <summary className="cursor-pointer text-fg-muted"><Ruler className="mr-1 inline size-4 text-gold" aria-hidden /> Khó ước lượng? Đo ba đình trên ảnh của bạn (ảnh không rời máy)</summary>
-      <p className="mt-2 text-xs text-fg-muted">Chọn một ảnh chụp thẳng, rồi chấm lần lượt 4 điểm: {DIEM.map((d) => d.nhan.toLowerCase()).join(" → ")}. Ảnh chỉ hiện trên máy bạn; trang chỉ gửi 4 cặp toạ độ để tính tỉ lệ.</p>
+      <summary className="cursor-pointer text-fg-muted"><Ruler className="mr-1 inline size-4 text-gold" aria-hidden /> {t("td.tom")}</summary>
+      <p className="mt-2 text-xs text-fg-muted">{t("td.mo", { ds: DIEM.map((d) => tenDiem(d.ma).toLowerCase()).join(" → ") })}</p>
       <div className="mt-2 flex flex-wrap items-center gap-2">
         <label className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-line px-3 py-1 text-xs text-fg-muted hover:text-fg">
-          <ImagePlus className="size-3.5" aria-hidden /> {url ? "Đổi ảnh" : "Chọn ảnh"}
-          <input type="file" accept="image/*" className="sr-only" aria-label="Chọn ảnh chân dung (chỉ hiện trên máy)" onChange={(e) => { chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
+          <ImagePlus className="size-3.5" aria-hidden /> {url ? t("td.doi_anh") : t("td.chon_anh")}
+          <input type="file" accept="image/*" className="sr-only" aria-label={t("td.aria_input")} onChange={(e) => { void chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
         </label>
-        {url && diem.length > 0 && <Button variant="ghost" size="sm" onClick={() => { setDiem([]); setKq(null); }}><RotateCcw aria-hidden /> Chấm lại</Button>}
-        {url && <span className="text-xs text-fg-faint">{diem.length < 4 ? `Chấm: ${DIEM[diem.length]!.nhan}` : "Đủ 4 điểm"}</span>}
+        {url && diem.length > 0 && <Button variant="ghost" size="sm" onClick={() => { setDiem([]); setKq(null); }}><RotateCcw aria-hidden /> {t("td.cham_lai")}</Button>}
+        {url && <span className="text-xs text-fg-faint">{diem.length < 4 ? t("td.cham", { diem: tenDiem(DIEM[diem.length]!.ma) }) : t("td.du")}</span>}
       </div>
       {url && (
         <div className="relative mt-3 inline-block max-w-full">
           {/* eslint-disable-next-line @next/next/no-img-element -- ảnh blob trên máy người dùng, không qua next/image */}
-          <img src={url} alt="Ảnh bạn chọn (chỉ hiện trên máy)" onClick={cham} className="max-h-80 w-auto cursor-crosshair rounded-lg border border-line select-none" draggable={false} />
+          <img src={url} alt={t("td.alt")} onClick={cham} className="max-h-80 w-auto cursor-crosshair rounded-lg border border-line select-none" draggable={false} />
           {diem.map((d, i) => (
             <span key={i} aria-hidden className="pointer-events-none absolute grid size-5 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-2 border-gold bg-bg/70 text-[10px] text-gold"
               style={{ left: `${d.x * 100}%`, top: `${d.y * 100}%` }}>{i + 1}</span>
           ))}
         </div>
       )}
-      {url && diem.length === 4 && !kq && <div className="mt-2"><Button size="sm" onClick={tinh} disabled={dang}>{dang ? "Đang tính…" : "Tính tỉ lệ ba đình"}</Button></div>}
+      {url && diem.length === 4 && !kq && <div className="mt-2"><Button size="sm" onClick={tinh} disabled={dang}>{dang ? t("td.dang_tinh") : t("td.tinh")}</Button></div>}
       {kq && (
         <p className="mt-2 text-xs text-fg" data-testid="kq-tam-dinh">
-          Trán {Math.round(kq.thuong * 100)}% · giữa {Math.round(kq.trung * 100)}% · cằm {Math.round(kq.ha * 100)}% → đã điền “{NHAN_LUA[kq.lua_chon] ?? kq.lua_chon}”. Bạn vẫn sửa được ở trên.
+          {t("td.kq", { a: String(Math.round(kq.thuong * 100)), b: String(Math.round(kq.trung * 100)), c: String(Math.round(kq.ha * 100)), nhan: NHAN_LUA[kq.lua_chon] ? t(`td.l_${kq.lua_chon}`) : kq.lua_chon })}
         </p>
       )}
       {loi && <p className="mt-2 text-xs text-cinnabar">{loi}</p>}

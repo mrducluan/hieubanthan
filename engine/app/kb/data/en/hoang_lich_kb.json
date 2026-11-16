@@ -1,0 +1,1468 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7–8 — bản phủ tiếng Anh của KB hoàng lịch (trang Hôm nay / Tuần này / Xem ngày tốt / lịch tháng / chọn ngày) — ban biên tập, chờ người bản xứ duyệt.",
+ "nghi_ky": {
+  "祭祀": {
+   "ten": "Offerings and rites",
+   "nghia": "ancestor offerings, death anniversaries, visiting pagodas and temples",
+   "ten_goc": "Jisi (sacrificial rites)"
+  },
+  "祈福": {
+   "ten": "Praying for blessings",
+   "nghia": "praying for peace, health and good luck"
+  },
+  "求嗣": {
+   "ten": "Praying for a child",
+   "nghia": "rites asking for a child"
+  },
+  "开光": {
+   "ten": "Consecrating statues",
+   "nghia": "consecrating a newly brought-home statue or altar object"
+  },
+  "塑绘": {
+   "ten": "Making or painting altar statues",
+   "nghia": "sculpting or painting altar statues, painting altar pictures",
+   "ten_goc": "Suhui (carving and painting images)"
+  },
+  "齐醮": {
+   "ten": "Prayer ceremonies",
+   "nghia": "vegetarian ceremonies praying for peace or for the departed, at a pagoda or at home",
+   "ten_goc": "Zhaijiao (vegetarian altar rites)"
+  },
+  "斋醮": {
+   "ten": "Prayer ceremonies",
+   "nghia": "vegetarian ceremonies praying for peace or for the departed, at a pagoda or at home",
+   "ten_goc": "Zhaijiao (vegetarian altar rites)"
+  },
+  "沐浴": {
+   "ten": "Bathing, cleansing",
+   "nghia": "washing and cleansing before a ceremony"
+  },
+  "酬神": {
+   "ten": "Thanksgiving offerings",
+   "nghia": "thanking the deities after a wish has come true"
+  },
+  "造庙": {
+   "ten": "Building or repairing temples",
+   "nghia": "building or repairing communal houses, pagodas, shrines, clan halls",
+   "ten_goc": "Zaomiao (building temples)"
+  },
+  "祀灶": {
+   "ten": "Offering to the Kitchen God",
+   "nghia": "offerings to the Kitchen God"
+  },
+  "焚香": {
+   "ten": "Burning incense",
+   "nghia": "offering incense"
+  },
+  "谢土": {
+   "ten": "Thanking the land",
+   "nghia": "thanking the land after building or repair work is finished",
+   "ten_goc": "Xietu (thanking the earth)"
+  },
+  "出火": {
+   "ten": "Moving the stove or altar",
+   "nghia": "moving the stove or the altar to a temporary place"
+  },
+  "雕刻": {
+   "ten": "Carving",
+   "nghia": "carving, sculpture, engraving steles and signboards"
+  },
+  "嫁娶": {
+   "ten": "Weddings",
+   "nghia": "weddings, fetching the bride, holding the wedding party"
+  },
+  "订婚": {
+   "ten": "Engagement ceremony",
+   "nghia": "engagement ceremony",
+   "ten_goc": "Dinghun (betrothal)"
+  },
+  "纳采": {
+   "ten": "First visit to the bride's family",
+   "nghia": "the groom's family visits to raise the question, bringing first gifts",
+   "ten_goc": "Nacai (presenting betrothal gifts)"
+  },
+  "问名": {
+   "ten": "Families meeting",
+   "nghia": "the two families meet and exchange names, ages and birth dates",
+   "ten_goc": "Wenming (asking names)"
+  },
+  "纳婿": {
+   "ten": "Welcoming a son-in-law home",
+   "nghia": "a son-in-law coming to live with the bride's family",
+   "ten_goc": "Naxu (taking in a son-in-law)"
+  },
+  "归宁": {
+   "ten": "Bride's return visit",
+   "nghia": "the bride visits her parents' home"
+  },
+  "安床": {
+   "ten": "Setting up a bed",
+   "nghia": "placing a new bed, setting the wedding bed, rearranging the bedroom"
+  },
+  "合帐": {
+   "ten": "Preparing the wedding room",
+   "nghia": "hanging curtains, laying bedding, decorating the newly-weds' room",
+   "ten_goc": "Hezhang (hanging the wedding curtains)"
+  },
+  "冠笄": {
+   "ten": "Coming-of-age ceremony",
+   "nghia": "a coming-of-age rite"
+  },
+  "订盟": {
+   "ten": "Making a pledge",
+   "nghia": "two sides make a promise or agreement (often a marriage pledge)",
+   "ten_goc": "Dingmeng (making a pact)"
+  },
+  "进人口": {
+   "ten": "Welcoming someone into the household",
+   "nghia": "adopting a child, taking a relative in to live with you, taking on household help",
+   "ten_goc": "Jin renkou (taking people in)"
+  },
+  "裁衣": {
+   "ten": "Tailoring, buying new clothes",
+   "nghia": "cutting and sewing or buying new clothes (wedding outfits, New Year clothes)",
+   "ten_goc": "Caiyi (cutting clothes)"
+  },
+  "挽面": {
+   "ten": "Facial care",
+   "nghia": "facial threading, skin care, going to a spa",
+   "ten_goc": "Wanmian (facial threading)"
+  },
+  "开容": {
+   "ten": "Beauty treatments",
+   "nghia": "grooming, make-up, hair and skin care",
+   "ten_goc": "Kairong (improving one's looks)"
+  },
+  "修坟": {
+   "ten": "Repairing a grave",
+   "nghia": "repairing or rebuilding a grave"
+  },
+  "启钻": {
+   "ten": "Reburial",
+   "nghia": "exhuming and reburying remains"
+  },
+  "破土": {
+   "ten": "Digging a grave",
+   "nghia": "digging a grave and building a tomb — not the same as breaking ground for a house",
+   "ten_goc": "Potu (breaking earth for a grave)"
+  },
+  "安葬": {
+   "ten": "Burial",
+   "nghia": "burial"
+  },
+  "立碑": {
+   "ten": "Setting a headstone",
+   "nghia": "setting up or replacing a headstone"
+  },
+  "成服": {
+   "ten": "Starting mourning",
+   "nghia": "putting on mourning clothes, announcing a death",
+   "ten_goc": "Chengfu (putting on mourning dress)"
+  },
+  "除服": {
+   "ten": "Ending mourning",
+   "nghia": "taking off mourning clothes at the end of mourning",
+   "ten_goc": "Chufu (removing mourning dress)"
+  },
+  "开生坟": {
+   "ten": "Building a tomb in advance",
+   "nghia": "building a tomb in advance while the person is still alive",
+   "ten_goc": "Kai shengfen (building a tomb in life)"
+  },
+  "合寿木": {
+   "ten": "Making a coffin in advance",
+   "nghia": "making a coffin in advance for an elderly person"
+  },
+  "入殓": {
+   "ten": "Placing in the coffin",
+   "nghia": "laying out the body and placing it in the coffin"
+  },
+  "移柩": {
+   "ten": "Moving the coffin",
+   "nghia": "moving the coffin",
+   "ten_goc": "Yijiu (moving the coffin)"
+  },
+  "普渡": {
+   "ten": "Offerings for wandering souls",
+   "nghia": "food offerings for wandering souls (as at the full moon of the 7th lunar month)",
+   "ten_goc": "Pudu (universal salvation offerings)"
+  },
+  "入宅": {
+   "ten": "Moving into a new home",
+   "nghia": "moving in and living in a new home, the house-warming rite",
+   "ten_goc": "Ruzhai (entering the house)"
+  },
+  "安香": {
+   "ten": "Setting up an altar",
+   "nghia": "placing the incense bowl and the altar"
+  },
+  "安门": {
+   "ten": "Fitting doors",
+   "nghia": "fitting the main door"
+  },
+  "修造": {
+   "ten": "Home repairs",
+   "nghia": "repairing, renovating and building the home"
+  },
+  "起基": {
+   "ten": "Laying foundations",
+   "nghia": "digging foundations, driving piles, pouring the foundation"
+  },
+  "动土": {
+   "ten": "Breaking ground",
+   "nghia": "starting construction, the ground-breaking rite for a house or a project"
+  },
+  "上梁": {
+   "ten": "Raising the ridge beam",
+   "nghia": "placing the ridge beam, pouring the concrete roof"
+  },
+  "竖柱": {
+   "ten": "Raising pillars",
+   "nghia": "raising or pouring the house pillars"
+  },
+  "开井开池": {
+   "ten": "Drilling wells, digging ponds",
+   "nghia": "drilling wells, digging ponds, building water tanks",
+   "ten_goc": "Kaijing kaichi (opening wells and ponds)"
+  },
+  "作陂放水": {
+   "ten": "Irrigation work",
+   "nghia": "building banks, letting water into fields, ponds and lakes",
+   "ten_goc": "Zuobei fangshui (building banks, releasing water)"
+  },
+  "拆卸": {
+   "ten": "Dismantling",
+   "nghia": "demolishing old structures"
+  },
+  "破屋": {
+   "ten": "Demolishing an old house",
+   "nghia": "taking down an old house to rebuild"
+  },
+  "坏垣": {
+   "ten": "Knocking down walls",
+   "nghia": "knocking down walls"
+  },
+  "补垣": {
+   "ten": "Repairing walls",
+   "nghia": "patching or rebuilding walls and fences"
+  },
+  "伐木做梁": {
+   "ten": "Preparing timber for building",
+   "nghia": "felling trees, sawing timber, making beams and rafters for a house",
+   "ten_goc": "Famu zuoliang (felling trees for beams)"
+  },
+  "作灶": {
+   "ten": "Building a kitchen",
+   "nghia": "building or installing a new stove"
+  },
+  "解除": {
+   "ten": "Clearing out, cleansing",
+   "nghia": "tidying and cleaning the house, a cleansing rite",
+   "ten_goc": "Jiechu (removal)"
+  },
+  "开柱眼": {
+   "ten": "Drilling pillars",
+   "nghia": "cutting joints, drilling holes in pillars and rafters",
+   "ten_goc": "Kai zhuyan (drilling pillar holes)"
+  },
+  "穿屏扇架": {
+   "ten": "Fitting partitions and door frames",
+   "nghia": "putting up partitions, fitting door and window frames",
+   "ten_goc": "Chuan pingshan jia (fitting screens and frames)"
+  },
+  "盖屋合脊": {
+   "ten": "Roofing",
+   "nghia": "roofing, pouring the roof, closing the ridge"
+  },
+  "开厕": {
+   "ten": "Building a toilet",
+   "nghia": "building or repairing a toilet or septic tank"
+  },
+  "造仓": {
+   "ten": "Building a storeroom",
+   "nghia": "building a storeroom or workshop"
+  },
+  "塞穴": {
+   "ten": "Sealing holes, pest-proofing",
+   "nghia": "sealing holes in walls, filling rat holes and ant nests, termite-proofing",
+   "ten_goc": "Saixue (blocking burrows)"
+  },
+  "平治道涂": {
+   "ten": "Paving paths and yards",
+   "nghia": "levelling ground, building paths, pouring a yard, paving walkways",
+   "ten_goc": "Pingzhi daotu (mending roads)"
+  },
+  "造桥": {
+   "ten": "Building bridges",
+   "nghia": "building a bridge"
+  },
+  "作厕": {
+   "ten": "Building a toilet",
+   "nghia": "building or repairing a toilet or septic tank"
+  },
+  "筑堤": {
+   "ten": "Building embankments",
+   "nghia": "building dykes, shoring up pond and river banks"
+  },
+  "开池": {
+   "ten": "Digging ponds",
+   "nghia": "digging a pond, making a fish pond or water tank"
+  },
+  "伐木": {
+   "ten": "Felling or pruning trees",
+   "nghia": "felling, cutting or pruning large trees"
+  },
+  "开渠": {
+   "ten": "Digging ditches and drains",
+   "nghia": "clearing ditches, digging drains and culverts",
+   "ten_goc": "Kaiqu (digging channels)"
+  },
+  "掘井": {
+   "ten": "Drilling a well",
+   "nghia": "drilling or digging a well",
+   "ten_goc": "Juejing (digging a well)"
+  },
+  "扫舍": {
+   "ten": "Deep-cleaning the house",
+   "nghia": "sweeping and cleaning the whole house",
+   "ten_goc": "Saoshe (sweeping the house)"
+  },
+  "放水": {
+   "ten": "Draining water",
+   "nghia": "draining ponds, fields or tanks"
+  },
+  "造屋": {
+   "ten": "Building a house",
+   "nghia": "building a house"
+  },
+  "合脊": {
+   "ten": "Closing the roof ridge",
+   "nghia": "finishing the roof ridge, pouring the roof"
+  },
+  "造畜稠": {
+   "ten": "Building animal pens",
+   "nghia": "building pens for livestock, a home for pets",
+   "ten_goc": "Zao chuchou (building pens)"
+  },
+  "修门": {
+   "ten": "Repairing doors",
+   "nghia": "repairing gates and doors"
+  },
+  "定磉": {
+   "ten": "Setting pillar bases",
+   "nghia": "setting stone bases, pouring the pillar footings",
+   "ten_goc": "Dingsang (setting pillar bases)"
+  },
+  "作梁": {
+   "ten": "Making beams",
+   "nghia": "making beams, pouring girders"
+  },
+  "修饰垣墙": {
+   "ten": "Painting and repairing walls",
+   "nghia": "painting, repairing and decorating walls and fences",
+   "ten_goc": "Xiushi yuanqiang (decorating walls)"
+  },
+  "架马": {
+   "ten": "Putting up scaffolding",
+   "nghia": "putting up scaffolding or temporary frames for building work",
+   "ten_goc": "Jiama (putting up trestles)"
+  },
+  "开市": {
+   "ten": "Opening a business",
+   "nghia": "opening a shop or office, starting to trade"
+  },
+  "挂匾": {
+   "ten": "Hanging a shop sign",
+   "nghia": "hanging a shop or company signboard"
+  },
+  "纳财": {
+   "ten": "Collecting money, stocking up",
+   "nghia": "collecting money, receiving payment, stocking goods, recovering debts",
+   "ten_goc": "Nacai (taking in wealth)"
+  },
+  "求财": {
+   "ten": "Business matters",
+   "nghia": "talking business, finding customers, looking for ways to earn",
+   "ten_goc": "Qiucai (seeking wealth)"
+  },
+  "开仓": {
+   "ten": "Opening the stockroom, shipping goods",
+   "nghia": "opening the stockroom and shipping goods for sale",
+   "ten_goc": "Kaicang (opening the granary)"
+  },
+  "买车": {
+   "ten": "Buying a vehicle",
+   "nghia": "buying a car or other vehicle"
+  },
+  "置产": {
+   "ten": "Buying property",
+   "nghia": "buying a house or land, acquiring major assets"
+  },
+  "雇佣": {
+   "ten": "Hiring staff",
+   "nghia": "recruiting and hiring staff"
+  },
+  "出货财": {
+   "ten": "Shipping goods, paying out",
+   "nghia": "delivering goods, paying out, large expenses",
+   "ten_goc": "Chu huocai (sending out goods and money)"
+  },
+  "安机械": {
+   "ten": "Installing machinery",
+   "nghia": "installing and test-running machines and equipment"
+  },
+  "造车器": {
+   "ten": "Making vehicles and tools",
+   "nghia": "making or assembling vehicles, machines, farm and trade tools",
+   "ten_goc": "Zao cheqi (making carts and tools)"
+  },
+  "经络": {
+   "ten": "Weaving and sewing",
+   "nghia": "spinning, weaving, sewing",
+   "ten_goc": "Jingluo (spinning and weaving)"
+  },
+  "酝酿": {
+   "ten": "Fermenting food and drink",
+   "nghia": "brewing, making sauces, pickling, fermenting",
+   "ten_goc": "Yunniang (brewing)"
+  },
+  "作染": {
+   "ten": "Dyeing fabric",
+   "nghia": "dyeing fabric or yarn",
+   "ten_goc": "Zuoran (dyeing)"
+  },
+  "鼓铸": {
+   "ten": "Forging and casting metal",
+   "nghia": "forging, casting, welding and metalwork",
+   "ten_goc": "Guzhu (casting metal)"
+  },
+  "造船": {
+   "ten": "Building boats",
+   "nghia": "building or repairing boats"
+  },
+  "割蜜": {
+   "ten": "Harvesting honey",
+   "nghia": "harvesting honey",
+   "ten_goc": "Gemi (taking honey)"
+  },
+  "栽种": {
+   "ten": "Planting",
+   "nghia": "sowing seeds, planting trees and vegetables",
+   "ten_goc": "Zaizhong (planting)"
+  },
+  "取渔": {
+   "ten": "Fishing",
+   "nghia": "fishing, draining ponds, harvesting fish",
+   "ten_goc": "Quyu (fishing)"
+  },
+  "结网": {
+   "ten": "Mending fishing gear",
+   "nghia": "making nets and fishing gear, mending tackle",
+   "ten_goc": "Jiewang (knotting nets)"
+  },
+  "牧养": {
+   "ten": "Raising livestock",
+   "nghia": "grazing and raising livestock and poultry"
+  },
+  "安碓磑": {
+   "ten": "Installing mills and grinders",
+   "nghia": "setting up a mortar or mill; today, installing milling and processing machines",
+   "ten_goc": "Setting up mortars and mills"
+  },
+  "习艺": {
+   "ten": "Learning a trade or skill",
+   "nghia": "learning a trade or a new skill"
+  },
+  "入学": {
+   "ten": "Starting school",
+   "nghia": "the first day of school, starting a course"
+  },
+  "理发": {
+   "ten": "Haircut",
+   "nghia": "cutting or styling hair"
+  },
+  "探病": {
+   "ten": "Visiting the sick",
+   "nghia": "visiting someone who is ill, visiting a hospital"
+  },
+  "见贵": {
+   "ten": "Meeting a boss or partner",
+   "nghia": "meeting a superior, a partner or someone who can help you; going to an interview",
+   "ten_goc": "Jiangui (meeting noble people)"
+  },
+  "乘船": {
+   "ten": "Travelling by boat",
+   "nghia": "travelling by train or boat, river and sea trips",
+   "ten_goc": "Chengchuan (taking a boat)"
+  },
+  "渡水": {
+   "ten": "Travelling by water",
+   "nghia": "crossing rivers, travelling by water",
+   "ten_goc": "Dushui (crossing water)"
+  },
+  "针灸": {
+   "ten": "Acupuncture",
+   "nghia": "acupuncture, acupressure",
+   "luu_y": "If you need to see a doctor, go now — do not wait for a good day; the almanac is only a custom for choosing dates for things that can be planned, and it is not medical advice."
+  },
+  "出行": {
+   "ten": "Setting out, travelling",
+   "nghia": "setting out on a long trip, business travel, holidays"
+  },
+  "移徙": {
+   "ten": "Moving house",
+   "nghia": "moving house, moving to a new place or office"
+  },
+  "分居": {
+   "ten": "Moving out on your own",
+   "nghia": "splitting the household, moving out on your own"
+  },
+  "剃头": {
+   "ten": "A baby's first haircut, head shaving",
+   "nghia": "shaving the head: a baby's first haircut, or shaving the head to become a monk or nun",
+   "ten_goc": "Titou (shaving the head)"
+  },
+  "整手足甲": {
+   "ten": "Trimming nails",
+   "nghia": "trimming and tidying finger and toe nails, manicure"
+  },
+  "纳畜": {
+   "ten": "Buying animals",
+   "nghia": "buying or taking in livestock or pets",
+   "ten_goc": "Nachu (taking in animals)"
+  },
+  "捕捉": {
+   "ten": "Pest control",
+   "nghia": "getting rid of rats and pests, catching animals that got loose",
+   "ten_goc": "Buzhuo (catching thieves and animals)"
+  },
+  "畋猎": {
+   "ten": "Fishing, setting traps",
+   "nghia": "fishing, setting traps, outdoor catching",
+   "ten_goc": "Tianlie (hunting)"
+  },
+  "教牛马": {
+   "ten": "Training animals",
+   "nghia": "training cattle, dogs, cats and pets",
+   "ten_goc": "Jiao niuma (training oxen and horses)"
+  },
+  "会亲友": {
+   "ten": "Seeing family and friends",
+   "nghia": "visiting and getting together"
+  },
+  "赴任": {
+   "ten": "Starting a new job",
+   "nghia": "the first day at work, taking up a post, transferring jobs",
+   "ten_goc": "Furen (taking office)"
+  },
+  "求医": {
+   "ten": "Seeing a doctor",
+   "nghia": "starting a course of check-ups or treatment that can be planned ahead",
+   "ten_goc": "Qiuyi (seeking a physician)",
+   "luu_y": "If you need to see a doctor, go now — do not wait for a good day; the almanac is only a custom for choosing dates for things that can be planned, and it is not medical advice."
+  },
+  "治病": {
+   "ten": "Medical treatment",
+   "nghia": "starting a treatment or course of therapy",
+   "luu_y": "If you need to see a doctor, go now — do not wait for a good day; the almanac is only a custom for choosing dates for things that can be planned, and it is not medical advice."
+  },
+  "词讼": {
+   "ten": "Filing a lawsuit, disputes",
+   "nghia": "filing a lawsuit, settling disputes",
+   "ten_goc": "Cisong (litigation)",
+   "luu_y": "Legal deadlines do not wait for a good day; for a lawsuit, ask a lawyer."
+  },
+  "起基动土": {
+   "ten": "Laying foundations, breaking ground",
+   "nghia": "starting foundation work"
+  },
+  "破屋坏垣": {
+   "ten": "Demolishing houses and walls",
+   "nghia": "taking down houses and walls"
+  },
+  "盖屋": {
+   "ten": "Roofing a house",
+   "nghia": "roofing"
+  },
+  "造仓库": {
+   "ten": "Building a storeroom",
+   "nghia": "building a storeroom or workshop"
+  },
+  "立券交易": {
+   "ten": "Signing contracts, deals",
+   "nghia": "signing contracts, buying and selling, notarising"
+  },
+  "交易": {
+   "ten": "Deals",
+   "nghia": "buying, selling and trading"
+  },
+  "立券": {
+   "ten": "Signing documents",
+   "nghia": "signing contracts, preparing documents",
+   "ten_goc": "Liquan (drawing up deeds)"
+  },
+  "安机": {
+   "ten": "Installing machinery",
+   "nghia": "installing and test-running machines and equipment"
+  },
+  "会友": {
+   "ten": "Meeting friends",
+   "nghia": "meeting friends"
+  },
+  "求医疗病": {
+   "ten": "Seeing a doctor",
+   "nghia": "starting a course of check-ups or treatment that can be planned ahead",
+   "ten_goc": "Qiuyi liaobing (seeking treatment)",
+   "luu_y": "If you need to see a doctor, go now — do not wait for a good day; the almanac is only a custom for choosing dates for things that can be planned, and it is not medical advice."
+  },
+  "诸事不宜": {
+   "ten": "Postpone all major matters",
+   "nghia": "the almanac advises not starting any major matter on this day"
+  },
+  "馀事勿取": {
+   "ten": "Postpone everything else",
+   "nghia": "the almanac advises doing only what is listed under Favourable and leaving everything else for another day"
+  },
+  "行丧": {
+   "ten": "Holding a funeral",
+   "nghia": "handling a funeral"
+  },
+  "断蚁": {
+   "ten": "Getting rid of termites and ants",
+   "nghia": "spraying against termites, ants and woodworm",
+   "ten_goc": "Duanyi (stopping ants)"
+  },
+  "归岫": {
+   "ten": "Returning home",
+   "nghia": "returning to your home town or old place",
+   "ten_goc": "Guixiu (returning to the old place)"
+  },
+  "无": {
+   "ten": "—"
+  }
+ },
+ "truc": {
+  "建": {
+   "ten": "Jian (Establish)",
+   "y": "beginning, setting up",
+   "hop": "travel, meeting people, starting something new",
+   "tranh": "breaking ground, digging"
+  },
+  "除": {
+   "ten": "Chu (Remove)",
+   "y": "clearing out the old",
+   "hop": "cleaning up, medical treatment, clearing things away",
+   "tranh": "weddings, opening a business"
+  },
+  "满": {
+   "ten": "Man (Full)",
+   "y": "fullness, completion",
+   "hop": "business matters, offerings, opening the stockroom",
+   "tranh": "lawsuits, taking up a new post"
+  },
+  "平": {
+   "ten": "Ping (Balance)",
+   "y": "level, calm",
+   "hop": "road repairs, everyday tasks",
+   "tranh": "digging, starting big ventures"
+  },
+  "定": {
+   "ten": "Ding (Stable)",
+   "y": "stability",
+   "hop": "signing contracts, weddings, moving into a new home",
+   "tranh": "lawsuits, long trips"
+  },
+  "执": {
+   "ten": "Zhi (Initiate)",
+   "y": "holding on",
+   "hop": "building and repairs, planting, starting to pursue a goal",
+   "tranh": "moving house, travelling"
+  },
+  "破": {
+   "ten": "Po (Destruction)",
+   "y": "breaking apart",
+   "hop": "demolition, medical treatment",
+   "tranh": "most new beginnings"
+  },
+  "危": {
+   "ten": "Wei (Danger)",
+   "y": "precarious",
+   "hop": "offerings, small tasks, work that needs care",
+   "tranh": "climbing high, boat trips, risky ventures"
+  },
+  "成": {
+   "ten": "Cheng (Success)",
+   "y": "achievement",
+   "hop": "opening a business, weddings, starting school, signing contracts",
+   "tranh": "lawsuits"
+  },
+  "收": {
+   "ten": "Shou (Receive)",
+   "y": "gathering in",
+   "hop": "collecting money, collecting debts, harvesting",
+   "tranh": "burials, travelling"
+  },
+  "开": {
+   "ten": "Kai (Open)",
+   "y": "opening up",
+   "hop": "opening a business, starting school, weddings, travelling",
+   "tranh": "burials, interments"
+  },
+  "闭": {
+   "ten": "Bi (Close)",
+   "y": "closing",
+   "hop": "building embankments, filling holes, finishing things",
+   "tranh": "opening a business, travelling, starting big ventures"
+  }
+ },
+ "than": {
+  "青龙": {
+   "ten": "Azure Dragon"
+  },
+  "明堂": {
+   "ten": "Bright Hall"
+  },
+  "天刑": {
+   "ten": "Heavenly Punishment"
+  },
+  "朱雀": {
+   "ten": "Vermilion Bird"
+  },
+  "金匮": {
+   "ten": "Golden Coffer"
+  },
+  "天德": {
+   "ten": "Heavenly Virtue"
+  },
+  "白虎": {
+   "ten": "White Tiger"
+  },
+  "玉堂": {
+   "ten": "Jade Hall"
+  },
+  "天牢": {
+   "ten": "Heavenly Prison"
+  },
+  "玄武": {
+   "ten": "Black Tortoise"
+  },
+  "司命": {
+   "ten": "Life Governor"
+  },
+  "勾陈": {
+   "ten": "Hook Array"
+  }
+ },
+ "ly_thuan_phong": {
+  "dai_an": {
+   "ten": "Great Peace",
+   "nghia": "things go smoothly, safe journeys there and back"
+  },
+  "luu_lien": {
+   "ten": "Lingering",
+   "nghia": "things tend to drag on and run late — prepare well"
+  },
+  "toc_hy": {
+   "ten": "Quick Joy",
+   "nghia": "good news arrives fast, good for meeting people"
+  },
+  "xich_khau": {
+   "ten": "Red Mouth",
+   "nghia": "arguments come easily — keep your words gentle"
+  },
+  "tieu_cat": {
+   "ten": "Small Luck",
+   "nghia": "a little luck, someone lends a hand"
+  },
+  "khong_vong": {
+   "ten": "Emptiness",
+   "nghia": "things tend to fall short — pick another time if you can"
+  }
+ },
+ "ky_dan_gian": {
+  "tam_nuong": {
+   "ten": "Tam Nuong day",
+   "nghia": "the 3rd, 7th, 13th, 18th, 22nd and 27th of the lunar month — folk custom avoids weddings and openings"
+  },
+  "nguyet_ky": {
+   "ten": "Moon taboo day",
+   "nghia": "the 5th, 14th and 23rd of the lunar month — folk custom avoids long trips and big beginnings"
+  },
+  "duong_cong": {
+   "ten": "Yang Gong taboo day",
+   "nghia": "13 fixed days a year from an old book — folk custom avoids major undertakings"
+  }
+ },
+ "quan_he_tuoi": {
+  "xung": {
+   "ten": "Clash",
+   "nghia": "a day that clashes with your zodiac sign — think twice about big matters or choose another day"
+  },
+  "tam_hop": {
+   "ten": "Three Harmony",
+   "nghia": "a day in Three Harmony with your zodiac sign — good for work that needs joined effort"
+  },
+  "luc_hop": {
+   "ten": "Six Harmony",
+   "nghia": "a day in Six Harmony with your zodiac sign — good for meeting people and making connections"
+  },
+  "hai": {
+   "ten": "Harm",
+   "nghia": "a day in Harm with your zodiac sign — keep the peace and avoid disputes"
+  },
+  "trung": {
+   "ten": "Same sign",
+   "nghia": "a day that shares your zodiac sign — folk custom calls it your own day, keep a moderate pace"
+  }
+ },
+ "nhan_tap_quan": {
+  "tue_pha": {
+   "ten": "Year Breaker",
+   "nghia": "the day's branch clashes with the year's branch — popular date-selection books advise caution with big matters such as breaking ground or moving house",
+   "nguon": "The Qing-dynasty almanac only treats the Year Breaker as a direction within the year; naming days after it is a habit of popular date-selection books.",
+   "luu_y": "Only a label for your information; the system does not drop any day because of it."
+  },
+  "thu_tu": {
+   "ten": "Receiving Death",
+   "nghia": "a day set by the solar month in the old calendar — popular date-selection books often advise postponing celebrations and new beginnings",
+   "nguon": "The Qing-dynasty almanac notes that the old calendar had this day and removed it from the main set of spirits; popular date-selection books still keep it.",
+   "luu_y": "Only a label for your information; the system does not drop any day because of it."
+  }
+ },
+ "viec": [
+  {
+   "ten": "Weddings"
+  },
+  {
+   "ten": "Opening a business"
+  },
+  {
+   "ten": "Moving into a new home"
+  },
+  {
+   "ten": "Breaking ground, building"
+  },
+  {
+   "ten": "Setting out, travelling"
+  },
+  {
+   "ten": "Signing contracts, deals"
+  },
+  {
+   "ten": "Business, collecting money"
+  },
+  {
+   "ten": "Buying a vehicle or property"
+  },
+  {
+   "ten": "Starting school, exams"
+  },
+  {
+   "ten": "Haircut"
+  },
+  {
+   "ten": "Burials, grave repairs"
+  }
+ ],
+ "than_sat": {
+  "天恩": {
+   "ten": "Heavenly Grace (Tian En)",
+   "nghia": "kindness from above; good for acts of gratitude and praying for blessings"
+  },
+  "鸣吠": {
+   "ten": "Calling Bark (Ming Fei)"
+  },
+  "母仓": {
+   "ten": "Mother Granary (Mu Cang)",
+   "nghia": "the mother storehouse; good for planting and raising animals"
+  },
+  "不将": {
+   "ten": "Bu Jiang (Not General)"
+  },
+  "四相": {
+   "ten": "Four Ministers (Si Xiang)"
+  },
+  "鸣吠对": {
+   "ten": "Calling Bark Pair (Ming Fei Dui)"
+  },
+  "五合": {
+   "ten": "Five Unions (Wu He)"
+  },
+  "三合": {
+   "ten": "Three Harmony (San He)",
+   "nghia": "joined strength; good for working together"
+  },
+  "除神": {
+   "ten": "Clearing Spirit (Chu Shen)"
+  },
+  "月德": {
+   "ten": "Monthly Virtue (Yue De)",
+   "nghia": "the month's star of blessing; good for kind deeds"
+  },
+  "月空": {
+   "ten": "Monthly Void (Yue Kong)"
+  },
+  "月德合": {
+   "ten": "Monthly Virtue Union (Yue De He)"
+  },
+  "月恩": {
+   "ten": "Monthly Grace (Yue En)",
+   "nghia": "the month's favour; good for happy occasions"
+  },
+  "时阴": {
+   "ten": "Seasonal Yin (Shi Yin)"
+  },
+  "五富": {
+   "ten": "Five Riches (Wu Fu)"
+  },
+  "生气": {
+   "ten": "Living Breath (Sheng Qi)",
+   "nghia": "growing energy; good for beginnings"
+  },
+  "金匮": {
+   "ten": "Golden Coffer (Jin Kui)"
+  },
+  "相日": {
+   "ten": "Minister Day (Xiang Ri)"
+  },
+  "阴德": {
+   "ten": "Hidden Virtue (Yin De)"
+  },
+  "六合": {
+   "ten": "Six Harmony (Liu He)",
+   "nghia": "harmony; good for making connections"
+  },
+  "益后": {
+   "ten": "Benefit to Descendants (Yi Hou)"
+  },
+  "青龙": {
+   "ten": "Azure Dragon (Qing Long)"
+  },
+  "续世": {
+   "ten": "Continuing Generations (Xu Shi)"
+  },
+  "明堂": {
+   "ten": "Bright Hall (Ming Tang)"
+  },
+  "王日": {
+   "ten": "King Day (Wang Ri)"
+  },
+  "要安": {
+   "ten": "Essential Peace (Yao An)"
+  },
+  "官日": {
+   "ten": "Official Day (Guan Ri)"
+  },
+  "吉期": {
+   "ten": "Lucky Date (Ji Qi)"
+  },
+  "福德": {
+   "ten": "Fortune and Virtue (Fu De)"
+  },
+  "六仪": {
+   "ten": "Six Ceremonies (Liu Yi)"
+  },
+  "金堂": {
+   "ten": "Golden Hall (Jin Tang)"
+  },
+  "宝光": {
+   "ten": "Precious Light (Bao Guang)"
+  },
+  "民日": {
+   "ten": "People Day (Min Ri)"
+  },
+  "临日": {
+   "ten": "Arrival Day (Lin Ri)"
+  },
+  "天马": {
+   "ten": "Heavenly Horse (Tian Ma)",
+   "nghia": "going far; good for setting out"
+  },
+  "敬安": {
+   "ten": "Respectful Peace (Jing An)"
+  },
+  "普护": {
+   "ten": "Universal Protection (Pu Hu)"
+  },
+  "驿马": {
+   "ten": "Travelling Horse (Yi Ma)",
+   "nghia": "movement; good for setting out and relocating"
+  },
+  "天后": {
+   "ten": "Heavenly Empress (Tian Hou)"
+  },
+  "阳德": {
+   "ten": "Yang Virtue (Yang De)"
+  },
+  "天喜": {
+   "ten": "Heavenly Joy (Tian Xi)",
+   "nghia": "happiness; good for weddings and meetings"
+  },
+  "天医": {
+   "ten": "Heavenly Doctor (Tian Yi)",
+   "nghia": "the heavenly physician; traditionally linked with check-ups and treatment"
+  },
+  "司命": {
+   "ten": "Life Governor (Si Ming)"
+  },
+  "圣心": {
+   "ten": "Sacred Heart (Sheng Xin)"
+  },
+  "玉宇": {
+   "ten": "Jade Palace (Yu Yu)"
+  },
+  "守日": {
+   "ten": "Guarding Day (Shou Ri)"
+  },
+  "时德": {
+   "ten": "Seasonal Virtue (Shi De)"
+  },
+  "解神": {
+   "ten": "Releasing Spirit (Jie Shen)"
+  },
+  "时阳": {
+   "ten": "Seasonal Yang (Shi Yang)"
+  },
+  "天仓": {
+   "ten": "Heavenly Granary (Tian Cang)"
+  },
+  "天巫": {
+   "ten": "Heavenly Shaman (Tian Wu)"
+  },
+  "玉堂": {
+   "ten": "Jade Hall (Yu Tang)"
+  },
+  "福生": {
+   "ten": "Fortune Born (Fu Sheng)"
+  },
+  "天德": {
+   "ten": "Heavenly Virtue (Tian De)",
+   "nghia": "a great star of blessing; the almanac counts it a protected day"
+  },
+  "天德合": {
+   "ten": "Heavenly Virtue Union (Tian De He)"
+  },
+  "天愿": {
+   "ten": "Heavenly Wish (Tian Yuan)"
+  },
+  "天赦": {
+   "ten": "Heavenly Pardon (Tian She)",
+   "nghia": "the day of pardon; the almanac ranks it among the very best days"
+  },
+  "天符": {
+   "ten": "Heavenly Talisman (Tian Fu)"
+  },
+  "阴神": {
+   "ten": "Yin Spirit (Yin Shen)"
+  },
+  "解除": {
+   "ten": "Removal (Jie Chu)"
+  },
+  "五虚": {
+   "ten": "Five Voids (Wu Xu)"
+  },
+  "五离": {
+   "ten": "Five Partings (Wu Li)"
+  },
+  "重日": {
+   "ten": "Double Day (Chong Ri)"
+  },
+  "复日": {
+   "ten": "Repeat Day (Fu Ri)"
+  },
+  "血支": {
+   "ten": "Blood Branch (Xue Zhi)"
+  },
+  "天贼": {
+   "ten": "Heavenly Thief (Tian Zei)"
+  },
+  "土符": {
+   "ten": "Earth Talisman (Tu Fu)"
+  },
+  "游祸": {
+   "ten": "Wandering Misfortune (You Huo)"
+  },
+  "白虎": {
+   "ten": "White Tiger (Bai Hu)",
+   "nghia": "a Black Path day; think twice about big matters"
+  },
+  "小耗": {
+   "ten": "Small Loss (Xiao Hao)",
+   "nghia": "small losses; be careful with spending"
+  },
+  "致死": {
+   "ten": "Zhi Si (Deadly)"
+  },
+  "河魁": {
+   "ten": "River Chief (He Kui)"
+  },
+  "劫煞": {
+   "ten": "Robbery Star (Jie Sha)",
+   "nghia": "look after your belongings and take care on the road"
+  },
+  "月煞": {
+   "ten": "Monthly Sha (Yue Sha)",
+   "nghia": "the almanac advises postponing big matters"
+  },
+  "月建": {
+   "ten": "Month Establisher (Yue Jian)"
+  },
+  "往亡": {
+   "ten": "Going and Lost (Wang Wang)",
+   "nghia": "the almanac advises postponing long trips and taking up a new post"
+  },
+  "大时": {
+   "ten": "Great Time (Da Shi)"
+  },
+  "大败": {
+   "ten": "Great Defeat (Da Bai)"
+  },
+  "咸池": {
+   "ten": "Salty Pool (Xian Chi)"
+  },
+  "厌对": {
+   "ten": "Loathing Pair (Yan Dui)"
+  },
+  "招摇": {
+   "ten": "Swaying Star (Zhao Yao)"
+  },
+  "九坎": {
+   "ten": "Nine Pits (Jiu Kan)"
+  },
+  "九焦": {
+   "ten": "Nine Scorchings (Jiu Jiao)"
+  },
+  "天罡": {
+   "ten": "Heavenly Ridge (Tian Gang)"
+  },
+  "死神": {
+   "ten": "Death Spirit (Si Shen)"
+  },
+  "月害": {
+   "ten": "Monthly Harm (Yue Hai)"
+  },
+  "死气": {
+   "ten": "Dead Breath (Si Qi)"
+  },
+  "月破": {
+   "ten": "Month Breaker (Yue Po)",
+   "nghia": "the breaking day of the month; the almanac advises postponing big matters"
+  },
+  "大耗": {
+   "ten": "Great Loss (Da Hao)",
+   "nghia": "losses; keep a firm hold on your money"
+  },
+  "天牢": {
+   "ten": "Heavenly Prison (Tian Lao)",
+   "nghia": "matters tend to stall"
+  },
+  "元武": {
+   "ten": "Black Tortoise (Xuan Wu)",
+   "nghia": "take care against losing things"
+  },
+  "月厌": {
+   "ten": "Monthly Loathing (Yue Yan)"
+  },
+  "月虚": {
+   "ten": "Monthly Void (Yue Xu)"
+  },
+  "归忌": {
+   "ten": "Return Taboo (Gui Ji)",
+   "nghia": "the almanac advises postponing moving into a new home or coming back from a long trip"
+  },
+  "小时": {
+   "ten": "Small Time (Xiao Shi)"
+  },
+  "天刑": {
+   "ten": "Heavenly Punishment (Tian Xing)",
+   "nghia": "paperwork can get tangled; take care"
+  },
+  "朱雀": {
+   "ten": "Vermilion Bird (Zhu Que)",
+   "nghia": "words can cause trouble; mind what you say"
+  },
+  "九空": {
+   "ten": "Nine Voids (Jiu Kong)"
+  },
+  "天吏": {
+   "ten": "Heavenly Official (Tian Li)"
+  },
+  "地火": {
+   "ten": "Earth Fire (Di Huo)",
+   "nghia": "postpone planting and ground-breaking"
+  },
+  "四击": {
+   "ten": "Four Strikes (Si Ji)"
+  },
+  "大煞": {
+   "ten": "Great Sha (Da Sha)"
+  },
+  "勾陈": {
+   "ten": "Hook Array (Gou Chen)",
+   "nghia": "matters tend to get tangled"
+  },
+  "八专": {
+   "ten": "Eight Focus (Ba Zhuan)"
+  },
+  "灾煞": {
+   "ten": "Disaster Sha (Zai Sha)",
+   "nghia": "stick to safe moves and avoid risks"
+  },
+  "天火": {
+   "ten": "Heavenly Fire (Tian Huo)",
+   "nghia": "be careful with fire; postpone roofing"
+  },
+  "血忌": {
+   "ten": "Blood Taboo (Xue Ji)",
+   "nghia": "the almanac lists it as a day to avoid needles — medical care always follows your doctor's advice, never postponed because of the day"
+  },
+  "土府": {
+   "ten": "Earth Mansion (Tu Fu)"
+  },
+  "月刑": {
+   "ten": "Monthly Punishment (Yue Xing)"
+  },
+  "触水龙": {
+   "ten": "Touching the Water Dragon (Chu Shui Long)"
+  },
+  "地囊": {
+   "ten": "Earth Sack (Di Nang)"
+  },
+  "八风": {
+   "ten": "Eight Winds (Ba Feng)"
+  },
+  "四废": {
+   "ten": "Four Wastes (Si Fei)",
+   "nghia": "the almanac sees the day as low in energy; keep to small tasks"
+  },
+  "四忌": {
+   "ten": "Four Taboos (Si Ji)"
+  },
+  "四穷": {
+   "ten": "Four Exhaustions (Si Qiong)"
+  },
+  "五墓": {
+   "ten": "Five Tombs (Wu Mu)"
+  },
+  "阴错": {
+   "ten": "Yin Error (Yin Cuo)"
+  },
+  "四耗": {
+   "ten": "Four Losses (Si Hao)"
+  },
+  "阳错": {
+   "ten": "Yang Error (Yang Cuo)"
+  },
+  "孤辰": {
+   "ten": "Lonely Star (Gu Chen)"
+  },
+  "小会": {
+   "ten": "Small Meeting (Xiao Hui)"
+  },
+  "大会": {
+   "ten": "Great Meeting (Da Hui)"
+  },
+  "八龙": {
+   "ten": "Eight Dragons (Ba Long)"
+  },
+  "七鸟": {
+   "ten": "Seven Birds (Qi Niao)"
+  },
+  "九虎": {
+   "ten": "Nine Tigers (Jiu Hu)"
+  },
+  "六蛇": {
+   "ten": "Six Snakes (Liu She)"
+  },
+  "天狗": {
+   "ten": "Heavenly Dog (Tian Gou)"
+  },
+  "行狠": {
+   "ten": "Harsh Path (Xing Hen)"
+  },
+  "了戾": {
+   "ten": "Final Perversity (Liao Li)"
+  },
+  "岁薄": {
+   "ten": "Thin Year (Sui Bo)"
+  },
+  "逐阵": {
+   "ten": "Chasing Array (Zhu Zhen)"
+  },
+  "三丧": {
+   "ten": "Three Mournings (San Sang)"
+  },
+  "三阴": {
+   "ten": "Three Yin (San Yin)"
+  },
+  "阴道冲阳": {
+   "ten": "Yin Path Clashing Yang (Yin Dao Chong Yang)"
+  },
+  "阴位": {
+   "ten": "Yin Position (Yin Wei)"
+  },
+  "阴阳交破": {
+   "ten": "Yin and Yang Both Broken (Yin Yang Jiao Po)"
+  },
+  "阴阳俱错": {
+   "ten": "Yin and Yang Both in Error (Yin Yang Ju Cuo)"
+  },
+  "阴阳击冲": {
+   "ten": "Yin and Yang Striking (Yin Yang Ji Chong)"
+  },
+  "鬼哭": {
+   "ten": "Weeping Ghost (Gui Ku)"
+  },
+  "单阴": {
+   "ten": "Single Yin (Dan Yin)"
+  },
+  "绝阴": {
+   "ten": "Extreme Yin (Jue Yin)"
+  },
+  "纯阳": {
+   "ten": "Pure Yang (Chun Yang)"
+  },
+  "阳错阴冲": {
+   "ten": "Yang Error, Yin Clash (Yang Cuo Yin Chong)"
+  },
+  "七符": {
+   "ten": "Seven Talismans (Qi Fu)"
+  },
+  "成日": {
+   "ten": "Completion Day (Cheng Ri)"
+  },
+  "孤阳": {
+   "ten": "Lonely Yang (Gu Yang)"
+  },
+  "绝阳": {
+   "ten": "Extreme Yang (Jue Yang)"
+  },
+  "纯阴": {
+   "ten": "Pure Yin (Chun Yin)"
+  },
+  "大退": {
+   "ten": "Great Retreat (Da Tui)"
+  },
+  "四离": {
+   "ten": "Four Partings (Si Li)",
+   "nghia": "the day before an equinox or solstice; the almanac advises postponing big matters"
+  },
+  "阳破阴冲": {
+   "ten": "Yang Broken, Yin Clash (Yang Po Yin Chong)"
+  }
+ },
+ "tu": {
+  "角": "Horn (Jiao)",
+  "亢": "Neck (Kang)",
+  "氐": "Root (Di)",
+  "房": "Room (Fang)",
+  "心": "Heart (Xin)",
+  "尾": "Tail (Wei)",
+  "箕": "Winnowing Basket (Ji)",
+  "斗": "Dipper (Dou)",
+  "牛": "Ox (Niu)",
+  "女": "Girl (Nü)",
+  "虚": "Emptiness (Xu)",
+  "危": "Rooftop (Wei)",
+  "室": "Encampment (Shi)",
+  "壁": "Wall (Bi)",
+  "奎": "Legs (Kui)",
+  "娄": "Bond (Lou)",
+  "胃": "Stomach (Wei)",
+  "昴": "Hairy Head (Mao)",
+  "毕": "Net (Bi)",
+  "觜": "Turtle Beak (Zi)",
+  "参": "Three Stars (Shen)",
+  "井": "Well (Jing)",
+  "鬼": "Ghost (Gui)",
+  "柳": "Willow (Liu)",
+  "星": "Star (Xing)",
+  "张": "Extended Net (Zhang)",
+  "翼": "Wings (Yi)",
+  "轸": "Chariot (Zhen)"
+ },
+ "banh_to": {
+  "甲": "Jia: do not open the storehouse",
+  "乙": "Yi: do not plant trees",
+  "丙": "Bing: do not repair the stove",
+  "丁": "Ding: do not cut hair",
+  "戊": "Wu: do not take on farmland",
+  "己": "Ji: do not break an agreement",
+  "庚": "Geng: do not weave",
+  "辛": "Xin: do not make sauces",
+  "壬": "Ren: do not drain water",
+  "癸": "Gui: do not go to court",
+  "子": "Zi: do not consult fortune-tellers",
+  "丑": "Chou: do not hold capping rites",
+  "寅": "Yin: do not hold great sacrifices",
+  "卯": "Mao: do not dig wells",
+  "辰": "Chen: do not weep and wail",
+  "巳": "Si: do not travel far",
+  "午": "Wu: do not roof a house",
+  "未": "Wei: do not take unfamiliar medicine",
+  "申": "Shen: do not move beds",
+  "酉": "You: do not entertain drinking guests",
+  "戌": "Xu: do not eat dog meat",
+  "亥": "Hai: do not hold weddings"
+ },
+ "phuong": {
+  "坎": "North",
+  "艮": "North-East",
+  "震": "East",
+  "巽": "South-East",
+  "离": "South",
+  "坤": "South-West",
+  "兑": "West",
+  "乾": "North-West",
+  "中": "Centre",
+  "东": "East",
+  "西": "West",
+  "南": "South",
+  "北": "North",
+  "东南": "South-East",
+  "东北": "North-East",
+  "西南": "South-West",
+  "西北": "North-West",
+  "正东": "due East",
+  "正西": "due West",
+  "正南": "due South",
+  "正北": "due North"
+ },
+ "thai_chu": {
+  "占": "",
+  "门": "door",
+  "碓": "mortar",
+  "磨": "millstone",
+  "厕": "toilet",
+  "厨": "kitchen",
+  "灶": "stove",
+  "炉": "furnace",
+  "房": "bedroom",
+  "床": "bed",
+  "户": "side door",
+  "窗": "window",
+  "堂": "hall",
+  "仓": "storeroom",
+  "库": "storeroom",
+  "栖": "pen",
+  "外": "outside",
+  "内": "inside",
+  "鸡": "chicken coop",
+  "大门": "gate",
+  "正": "main",
+  "东": "East",
+  "西": "West",
+  "南": "South",
+  "北": "North",
+  "仓库": "storeroom",
+  "厨灶": "kitchen",
+  "房床": "bed in the bedroom",
+  "碓磨": "mortar and mill",
+  "门房": "bedroom door",
+  "床仓": "bed, storeroom"
+ },
+ "source": {
+  "ten": "Xieji Bianfang Shu (imperial almanac, Qing dynasty) · Vietnamese folk perpetual calendars"
+ }
+}

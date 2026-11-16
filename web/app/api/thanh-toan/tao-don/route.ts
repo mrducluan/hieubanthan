@@ -7,6 +7,7 @@ import { z } from "zod";
 import { congDangBat, khachDichVu, khachNguoiMua } from "@/lib/thanh-toan/cong";
 import { cauHinhPay2s, maPay2s, taoLink } from "@/lib/thanh-toan/pay2s";
 import { siteUrl } from "@/lib/seo";
+import { ghiMetaDon } from "@/lib/meta-capi";
 
 const Vao = z.union([
   z.object({ goi: z.string().regex(/^[a-z0-9_]{2,30}$/) }),
@@ -26,7 +27,10 @@ const LOI: Record<string, [string, number]> = {
 export async function POST(req: Request) {
   const cong = congDangBat();
   if (!cong) return NextResponse.json({ error: "Nạp Sao chưa mở." }, { status: 503 });
-  const vao = Vao.safeParse(await req.json().catch(() => null));
+  const tho: unknown = await req.json().catch(() => null);
+  // META-CAPI: trình duyệt báo người mua chưa tắt cookie đo lường → được ghi mã khớp cho API chuyển đổi Meta.
+  const dongYMeta = typeof tho === "object" && tho !== null && (tho as { meta?: unknown }).meta === true;
+  const vao = Vao.safeParse(tho);
   if (!vao.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
   const nm = await khachNguoiMua(req);
   if (!nm) return NextResponse.json({ error: "Hãy đăng nhập để nạp Sao.", can: "dang_nhap" }, { status: 401 });
@@ -44,6 +48,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: msg }, { status: st });
   }
 
+  await ghiMetaDon(khachDichVu(), d.ma_don, req, dongYMeta);
   const ketQua = `${siteUrl()}/nap-sao/ket-qua?ma=${d.ma_don}`;
   const loai = hoiVien ? "hoi_vien" : "sao";
   if (cong === "gia") {

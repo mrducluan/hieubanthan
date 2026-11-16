@@ -315,6 +315,23 @@ export default async function Page() {
         </Card>
       )}
 
+      {ph.ok && ph.du.meta && (
+        <Card data-testid="qt-meta-qc">
+          <h2 className="text-lg">Người đến từ quảng cáo Meta (PostHog, 28 ngày)</h2>
+          <p className="mt-1 text-sm text-fg-muted">Trình duyệt vào trang có <code>fbclid</code> hoặc <code>utm_source=facebook / instagram</code> — mọi
+            bước trong 30 ngày sau đó được tính cho quảng cáo. So cột "Nạp thành công" với tiền đã chi trong Meta Ads Manager.</p>
+          <div className="mt-4 space-y-2">
+            {(() => {
+              const max = Math.max(1, ...ph.du.meta.pheu.map((x) => x.nguoi));
+              return ph.du.meta.pheu.map((x) => <Thanh key={x.su_kien} ten={x.ten} gt={x.nguoi} max={max} />);
+            })()}
+          </div>
+          {ph.du.meta.theoMang.length > 0 && (
+            <p className="mt-3 text-sm">Bắt đầu xem theo mảng: {ph.du.meta.theoMang.map((x) => `${x.mo_dun} ${so(x.nguoi)}`).join(" · ")}</p>
+          )}
+        </Card>
+      )}
+
       {ph.ok && ph.du.pheuThe && (
         <Card data-testid="qt-pheu-the">
           <h2 className="text-lg">Phễu lời mời theo loại thẻ (PostHog, 28 ngày)</h2>

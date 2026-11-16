@@ -15,6 +15,7 @@ import { ChevronDown, Gift, Loader2, QrCode, Sparkles, UserPlus, Zap } from "luc
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
+import { metaDongY } from "@/lib/meta-pixel";
 import { QUAY_VE, TU_DONG_Y, dangKyHopThoaiSao, xoaChoMo, type YeuCauSao } from "@/lib/sao-client";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { useHoSo } from "@/lib/hoso";
@@ -290,7 +291,7 @@ export function NapNhanh({ can = 0, kind = "nap", nguon = "luan_giai", giaCau, m
       if (!token) { window.location.href = `/dang-nhap?tiep=${encodeURIComponent(duongHienTai())}`; return; }
       ghiPhien(QUAY_VE, duongHienTai());
       const r = await fetch("/api/thanh-toan/tao-don", {
-        method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${token}` }, body: JSON.stringify({ goi: chon }),
+        method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${token}` }, body: JSON.stringify({ goi: chon, meta: metaDongY() }),
       });
       const j = (await r.json().catch(() => ({}))) as { checkoutUrl?: string; error?: string };
       if (!r.ok || !j.checkoutUrl) throw new Error(j.error ?? "Chưa tạo được đơn.");

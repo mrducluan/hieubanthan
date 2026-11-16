@@ -1,0 +1,55 @@
+{
+  "_trang_thai": "bien_tap",
+  "_ghi": "EN-ALL GĐ 8 — bản phủ tiếng Anh của các lớp tháng trong \"Thời gian tới\" (ban biên tập, chờ người bản xứ duyệt). Câu phong thuỷ trùng ý tuan.pt.* (en/loi/nhip_ngay.json).",
+  "con_giap": {
+    "tam_hop": {"nhan": "The {chi_thang} month forms a triad with your {chi_tuoi} sign",
+      "loi": "Folk tradition sees this as a month for meeting like-minded people. Good for bringing others in on a project and saying yes to a partnership."},
+    "luc_hop": {"nhan": "The {chi_thang} month pairs with your {chi_tuoi} sign",
+      "loi": "Folk tradition sees this as a month when help arrives at the right moment. Good for asking for help, meeting old contacts and having difficult conversations."},
+    "trung": {"nhan": "The {chi_thang} month shares your {chi_tuoi} sign",
+      "loi": "A month of your own zodiac sign. Folk tradition advises keeping to your routines and having a clear plan before you act."},
+    "xung": {"nhan": "The {chi_thang} month clashes with your {chi_tuoi} sign",
+      "loi": "Folk tradition advises slowing down a beat on big matters this month: read paperwork carefully, do not rush to sign, keep the peace at home."},
+    "hinh": {"nhan": "The {chi_thang} month is in punishment with your {chi_tuoi} sign",
+      "loi": "Folk tradition sees this as a month of small frictions. Speak more slowly, and write down who does what on shared tasks."},
+    "hai": {"nhan": "The {chi_thang} month harms your {chi_tuoi} sign",
+      "loi": "Folk tradition sees this as a month for misunderstandings. Confirm arrangements in writing and ask before you blame."},
+    "binh": {"nhan": "The {chi_thang} month and your {chi_tuoi} sign: neutral",
+      "loi": "Neither a match nor a clash by the zodiac. Follow your own plan for the month."}
+  },
+  "phong_thuy": {
+    "sao_tot": {
+      "9": "happy news, getting noticed",
+      "1": "good news, meeting people who help",
+      "8": "money and property holding steady"
+    },
+    "goc_hop": "The {phuong} corner of your home is both a direction that suits you and the spot this month's good star visits ({y}). It is a good place for your desk, a reading chair or anything that needs focus.",
+    "goc_tot": "This month's good star ({y}) visits the {phuong} corner. Keeping that corner bright, airy and tidy is enough.",
+    "goc_yen": "Keep the {phuong} corner quiet this month: no drilling, no piling up heavy things, keep it tidy.",
+    "goc_yen_hai": "Keep the {a} and {b} corners quiet this month: no drilling, no piling up heavy things, keep them tidy.",
+    "thieu_gioi": "Add your gender to your profile to see which corner of your home suits you each month.",
+    "nam_goc_hop": "In {nam}, the {phuong} corner of your home is both a direction that suits you and the spot the year's good star visits ({y}). It is the place worth putting your desk, bed or study corner for the whole year.",
+    "nam_goc_tot": "In {nam}, the year's good star ({y}) visits the {phuong} corner. Keep that corner bright, airy and tidy all year.",
+    "nam_can_cu": "Yearly stars for {nam} by Xuan Kong ({tam} in the centre){chi_tiet}; Gua {quai} from your birth year and gender (Eight Mansions)."
+  },
+  "ngay_dep": {
+    "loi": "Good days to start things this month that do not clash with your sign: {ds}.",
+    "khong_co": "No day this month fully suits starting something for your sign — move big plans to next month or check the Good Days page carefully.",
+    "can_cu": "Almanac: days with \"opening a business\" in the Good-for list and not in the Avoid list, a favourable day officer, no clash with your sign, and no folk taboo day."
+  },
+  "noi_bat": {
+    "tieu_de": "Months where the most readings agree it is favourable: {ds}",
+    "loi": "Over the next 12 months, these are the months where several readings agree it is favourable ({ly_do}). Good to keep for something you want to start or close.",
+    "di_cham_tieu_de": "Months to slow down a beat: {ds}",
+    "di_cham_loi": "In these months several readings agree on caution ({ly_do}). Prepare big plans more carefully and leave extra time.",
+    "can_cu": "Counted from each layer already worked out: zodiac match with your sign, the month's good star in a corner that suits you, and the month's Zi Wei / Bazi level. Not a score."
+  },
+  "ten_lop": {
+    "thanso": "Numerology",
+    "con_giap": "Zodiac",
+    "phong_thuy": "Feng shui",
+    "ngay_dep": "Good days",
+    "tuvi": "Zi Wei Dou Shu",
+    "battu": "Bazi"
+  }
+}

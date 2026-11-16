@@ -22,6 +22,7 @@ import { GhiGioiThieu } from "@/components/khung/GhiGioiThieu";
 import { GiamSat } from "@/components/khung/GiamSat";
 import { GtmNoScript } from "@/components/khung/GoogleTagManager";
 import { DoLuongGoogle } from "@/components/khung/DoLuongGoogle";
+import { MetaPixel, MetaPixelNoScript } from "@/components/khung/MetaPixel";
 import { HoiDongYCookie } from "@/components/khung/HoiDongYCookie";
 import { goiLd, ldToChuc, ldUngDung, ldWebsite, MO_TA_SITE, siteUrl, TEN_SITE } from "@/lib/seo";
 import { ThongBaoSite } from "@/components/khung/ThongBaoSite";
@@ -81,6 +82,13 @@ export const metadata: Metadata = {
   },
 };
 
+// META-QC: xác minh tên miền hieuban.com trong Meta Business (Brand safety → Domains). Mã công khai (nằm trong HTML), đặt thẳng
+// trong <head> của HTML máy chủ — Meta không đọc thẻ do JavaScript chèn hay metadata stream. Env FACEBOOK_DOMAIN_VERIFICATION
+// ghi đè, "off" để bỏ.
+const FB_XAC_MINH = (process.env.FACEBOOK_DOMAIN_VERIFICATION ?? "yc7164ai9ptzswsj79rn9aen2eduk8").trim();
+const DauXacMinh = () => (/^[a-z0-9]{10,64}$/.test(FB_XAC_MINH)
+  ? <head><meta name="facebook-domain-verification" content={FB_XAC_MINH} /></head> : null);
+
 export const viewport: Viewport = { themeColor: "#0a0a17", width: "device-width", initialScale: 1 };
 
 /** ND-6: dải "đang xem bản nháp" khi bật chế độ nháp từ CMS. */
@@ -103,6 +111,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     const banVietEn = await banVietTrangEn(hienThi);
     return (
       <html lang={langHtml(maNn)} className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
+        <DauXacMinh />
         <body>
           <GtmNoScript />
           <JsonLd data={goiLd(ldToChuc("en"), ldWebsite("en"))} />
@@ -122,6 +131,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           <GiamSat />
           <GhiVaoTrang />
           <DoLuongGoogle nonce={nonce} />
+          <MetaPixel nonce={nonce} />
+          <MetaPixelNoScript />
         </body>
       </html>
     );
@@ -138,6 +149,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const goiYEn = Boolean(hrefEn) && uuTien.startsWith("en") && !coTiengViet && !(await cookies()).get("hbt-goi-y-en");
   return (
     <html lang="vi" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
+      <DauXacMinh />
       <body>
         <GtmNoScript />
         {goiYEn && hrefEn && <GoiYTiengAnh href={hrefEn} />}
@@ -167,6 +179,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <DangKyApp />
         <GhiVaoTrang />
         <DoLuongGoogle nonce={nonce} />
+        <MetaPixel nonce={nonce} />
+        <MetaPixelNoScript />
       </body>
     </html>
   );

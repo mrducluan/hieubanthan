@@ -27,3 +27,14 @@ export async function hoi(page: Page, cau: string) {
   await page.getByRole("button", { name: "Gửi câu hỏi" }).click();
   return page.getByTestId("cau-tra-loi").last();
 }
+
+/** NS-QT: gõ nơi sinh nước ngoài vào ô gợi ý (`#<id>-tim`) rồi chọn gợi ý có tên `ten`. `id` = "hs" (form hồ sơ chính)
+ *  hoặc id của form phụ ("ht"…). Engine tìm trong GeoNames nên mã lưu là "gn-<geonameid>". */
+export async function chonNoiSinh(page: Page, id: string, go: string, ten: string) {
+  const o = page.locator(`#${id}-tim`);
+  await o.fill(go);
+  const muc = page.getByTestId(`${id}-goi-y`).getByRole("option").filter({ hasText: ten }).first();
+  await muc.waitFor({ timeout: 20_000 });
+  await muc.click();
+  await page.getByTestId(`${id}-noi-da-chon`).waitFor({ timeout: 10_000 });
+}

@@ -1,0 +1,230 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 — bản tiếng Anh của thanso_ban_do.json (Bản đồ con số). Ban biên tập viết, chờ người bản xứ duyệt.",
+ "source": {
+  "ten": "Reference compilation (editorial draft, 2026) following the Balliett–Jordan tradition and common numerology books",
+  "luu_y": "Draft shown by decision of the project owner (2026-09-30); a status column allows gradual review. A cultural reference, not a forecast."
+ },
+ "nhom": {
+  "khoi_xuong": {
+   "ten": "Initiating",
+   "muon": "to decide for yourself, go first and see that you made something happen",
+   "bieu_hien": "confident, decisive, a little hard-edged",
+   "bi_hieu_lam": "cold, only focused on the goal, hard to approach",
+   "can": "to be trusted with real authority and recognised for results"
+  },
+  "ket_noi": {
+   "ten": "Connecting",
+   "muon": "to belong, to be needed and to see the people around you doing well",
+   "bieu_hien": "approachable, thoughtful, quick to give way",
+   "bi_hieu_lam": "a pushover with no opinion of your own, who says yes to everyone",
+   "can": "warm appreciation and relationships that give back as much as they take"
+  },
+  "bieu_dat": {
+   "ten": "Expressing",
+   "muon": "to express yourself freely, try new things and live in colour",
+   "bieu_hien": "fun, flexible, an engaging talker",
+   "bi_hieu_lam": "shallow, quick to get bored, inconsistent",
+   "can": "room to create and change without being boxed in"
+  },
+  "nen_tang": {
+   "ten": "Grounding",
+   "muon": "things to be solid and planned, and to see work through to the end",
+   "bieu_hien": "calm, principled, reliable",
+   "bi_hieu_lam": "rigid, dry, resistant to change",
+   "can": "stability, clear processes and time to do things properly"
+  },
+  "chiem_nghiem": {
+   "ten": "Reflecting",
+   "muon": "to understand things to the root and to have quiet time of your own to think",
+   "bieu_hien": "quiet, private, observing more than talking",
+   "bi_hieu_lam": "distant, hard to read, a little aloof",
+   "can": "time alone and people who respect your depth"
+  }
+ },
+ "cau_noi": {
+  "khoi_xuong|khoi_xuong": {
+   "ten": "The same inside and out",
+   "doc": "Inside and outside share the same decisive rhythm: people see exactly what you want.",
+   "cach_noi_ro": "Because you rarely voice your feelings, make a habit of asking others what they need before you settle a shared decision.",
+   "khi_hoa": "A strong pull: you say it and do it, and people find it easy to follow you."
+  },
+  "ket_noi|khoi_xuong": {
+   "ten": "Soft and firm",
+   "doc": "One side wants to keep the peace, the other wants to get to the result fast — you often swing between giving way and deciding.",
+   "cach_noi_ro": "Say both things out loud: 'I want everyone to be okay, and I also need to settle this today.'",
+   "khi_hoa": "A leader who listens — deciding quickly without anyone feeling pushed aside."
+  },
+  "bieu_dat|khoi_xuong": {
+   "ten": "Speed and colour",
+   "doc": "One side wants to be in charge, the other wants the freedom to try new things — you easily start several things at once.",
+   "cach_noi_ro": "Before opening something new, tell the people you work with which task you will finish first.",
+   "khi_hoa": "An initiator with charm — opening the way and getting others excited to follow."
+  },
+  "khoi_xuong|nen_tang": {
+   "ten": "Bold and steady",
+   "doc": "One side wants to go first, the other wants each step to be safe — you may hold yourself back for fear of getting it wrong.",
+   "cach_noi_ro": "Break the work into small milestones: decide the direction quickly, take care over the execution.",
+   "khi_hoa": "Someone who can build big things: vision plus a process to see it through."
+  },
+  "chiem_nghiem|khoi_xuong": {
+   "ten": "Action and thought",
+   "doc": "One side wants to make the call, the other wants to understand it to the root — you often think for a long time, then act very fast.",
+   "cach_noi_ro": "Let people know you are weighing things up and when you will answer, so your silence is not taken as a brush-off.",
+   "khi_hoa": "A thoughtful decision-maker: rarely wrong, because you have thought it through."
+  },
+  "ket_noi|ket_noi": {
+   "ten": "The same inside and out",
+   "doc": "Inside and outside both turn towards people: others see exactly how caring you are.",
+   "cach_noi_ro": "Because everyone comes to you, practise saying 'I can't take this one on' without a long explanation.",
+   "khi_hoa": "The person a group relies on — keeping people together and keeping the mood good."
+  },
+  "bieu_dat|ket_noi": {
+   "ten": "Warmth and freedom",
+   "doc": "One side wants closeness, the other needs room to roam — you may feel guilty when you want to go your own way.",
+   "cach_noi_ro": "Tell the people close to you in advance when you need time to yourself, so they do not read it as you pulling away.",
+   "khi_hoa": "A charming connector — bringing joy into your relationships."
+  },
+  "ket_noi|nen_tang": {
+   "ten": "Heart and rules",
+   "doc": "One side puts people first, the other puts principles first — you easily blame yourself when you have to say 'no' because of a rule.",
+   "cach_noi_ro": "Separate the two: 'I care about you, and I still have to keep to this rule.'",
+   "khi_hoa": "Someone trusted both personally and professionally — caring, with clear standards."
+  },
+  "chiem_nghiem|ket_noi": {
+   "ten": "Near and far",
+   "doc": "One side wants to be close to people, the other needs to be alone — others find it hard to guess when you want to be checked on.",
+   "cach_noi_ro": "Have a familiar line ready: 'I need a quiet evening — let's talk tomorrow.'",
+   "khi_hoa": "Someone who truly understands — listening deeply and reading people better than they expect."
+  },
+  "bieu_dat|bieu_dat": {
+   "ten": "The same inside and out",
+   "doc": "Inside and outside share the same free, creative rhythm: people see your energy exactly as it is.",
+   "cach_noi_ro": "Because you get enthusiastic easily, be clear about which things you are committing to and which you are only toying with.",
+   "khi_hoa": "A source of inspiration — making everything around you feel fresh."
+  },
+  "bieu_dat|nen_tang": {
+   "ten": "Flight and anchor",
+   "doc": "One side wants change, the other wants stability — you may feel bored by routine and afraid of losing your footing at the same time.",
+   "cach_noi_ro": "Keep one fixed base (your schedule, your finances) and let yourself experiment with the rest.",
+   "khi_hoa": "A disciplined creator — new ideas that still turn into finished work."
+  },
+  "bieu_dat|chiem_nghiem": {
+   "ten": "Lively and quiet",
+   "doc": "One side wants to show itself, the other wants to withdraw — people see you sometimes very bright, sometimes very closed.",
+   "cach_noi_ro": "Give people a heads-up about your rhythm: 'I'm a bit quiet today — it's not about anyone.'",
+   "khi_hoa": "A storyteller with depth — you speak well because you have thought it through."
+  },
+  "nen_tang|nen_tang": {
+   "ten": "The same inside and out",
+   "doc": "Inside and outside share the same steady rhythm: people see exactly how dependable you are.",
+   "cach_noi_ro": "Because you rarely show your feelings, now and then say out loud what you value in other people.",
+   "khi_hoa": "A pillar — whatever is handed to you is in safe hands."
+  },
+  "chiem_nghiem|nen_tang": {
+   "ten": "Solid and deep",
+   "doc": "Both sides like to be thorough — you easily keep the work to yourself because you want to be sure before sharing.",
+   "cach_noi_ro": "Share a rough draft earlier than you would like; people need to know where you are heading.",
+   "khi_hoa": "A true specialist — deep understanding and work done properly."
+  },
+  "chiem_nghiem|chiem_nghiem": {
+   "ten": "The same inside and out",
+   "doc": "Inside and outside both turn towards depth: people see exactly how calm and reflective you are.",
+   "cach_noi_ro": "Because you say little, choose one or two people to share what you are thinking with — do not keep everything in your head.",
+   "khi_hoa": "Someone with a mind of their own — a point of view few people have."
+  }
+ },
+ "thang_hop": {
+  "1": {
+   "nhan": "Opening",
+   "hop_de": [
+    "starting something new",
+    "setting goals",
+    "taking the lead yourself"
+   ]
+  },
+  "2": {
+   "nhan": "Cooperation",
+   "hop_de": [
+    "finding people to work with",
+    "gentle negotiation",
+    "nurturing relationships"
+   ]
+  },
+  "3": {
+   "nhan": "Expression",
+   "hop_de": [
+    "introducing yourself",
+    "writing, speaking, creating",
+    "meeting people and widening your circle"
+   ]
+  },
+  "4": {
+   "nhan": "Building foundations",
+   "hop_de": [
+    "sorting out your finances",
+    "finishing unfinished work properly",
+    "learning core skills"
+   ]
+  },
+  "5": {
+   "nhan": "Renewal",
+   "hop_de": [
+    "changing jobs",
+    "travelling, trying new things",
+    "refreshing your habits"
+   ]
+  },
+  "6": {
+   "nhan": "Commitment",
+   "hop_de": [
+    "looking after family",
+    "committing in a relationship",
+    "taking care of your home"
+   ]
+  },
+  "7": {
+   "nhan": "Slowing down",
+   "hop_de": [
+    "deep study and research",
+    "resting and recharging",
+    "reviewing your direction"
+   ]
+  },
+  "8": {
+   "nhan": "Harvest",
+   "hop_de": [
+    "talking money and pay",
+    "taking on a bigger role",
+    "closing contracts"
+   ]
+  },
+  "9": {
+   "nhan": "Closing",
+   "hop_de": [
+    "ending what no longer fits",
+    "clearing out, giving away",
+    "taking stock before a new cycle"
+   ]
+  }
+ },
+ "nhom_viec": {
+  "khoi_su": "Starting something new",
+  "doi_viec": "Change, changing jobs",
+  "quan_he": "Relationships, partnerships",
+  "tien_bac": "Money, promotion",
+  "khep_lai": "Closing old chapters"
+ },
+ "nam_doc_thang": {
+  "1": "A year of beginnings: any month suits planting something new; a \"closing\" month this year is about clearing space for the new, not giving up.",
+  "2": "A year of nurturing: a \"starting\" month suits beginning small and together with others; things tend to move slowly, so do not force the pace.",
+  "3": "A year of expression: a \"change\" month suits trying a new role at a manageable level; keep your promises within what you can do.",
+  "4": "A year of building foundations: a \"starting\" month suits opening something with a clear plan; think big changes through carefully before making them.",
+  "5": "A year of change: starting and changing-job months flow very easily; \"building\" and \"slowing down\" months help you keep your direction amid all the change.",
+  "6": "A year of commitment: family matters and commitments come first; in a \"change\" month, take the people close to you into account.",
+  "7": "A year of slowing down: a \"starting\" month suits learning and preparing more than a big launch; in a \"money\" month, protecting what you have comes before taking risks.",
+  "8": "A year of harvest: \"money\" months are the highlight of the year; \"slowing down\" months keep you from overdoing it.",
+  "9": "A year of closing: a \"starting\" month this year suits sketching and preparing; leave big commitments for the year of beginnings (from January next year)."
+ },
+ "ghi_chu_thang_1": "Your personal month is your personal year plus the month number, so from January the numbers follow the new personal year — which is why the rhythm around the turn of the calendar year can repeat."
+}

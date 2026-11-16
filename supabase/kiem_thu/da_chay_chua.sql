@@ -45,6 +45,7 @@ select * from (values
   ('0033 múi giờ nơi sinh trong hồ sơ', exists (select 1 from information_schema.columns
                                            where table_schema = 'public' and table_name = 'ho_so'
                                              and column_name = 'utc_noi_sinh')),
+  ('0039 nhà mình trong tài khoản', to_regclass('public.gia_dinh') is not null),
   ('0034 phiếu kiểm chứng theo ngôn ngữ', exists (select 1 from information_schema.columns
                                            where table_schema = 'public' and table_name = 'kiem_chung_phieu'
                                              and column_name = 'ngon_ngu')),
@@ -55,6 +56,8 @@ select * from (values
                                            where conname = 'push_tuy_chon_moc_lich_check'
                                              and pg_get_constraintdef(oid) like '%tuan_cua_toi%')),
   ('0037 cổng thanh toán Pay2S',  exists (select 1 from pg_constraint where conname = 'don_nap_cong_check'
-                                             and pg_get_constraintdef(oid) like '%pay2s%'))
+                                             and pg_get_constraintdef(oid) like '%pay2s%')),
+  ('0038 API chuyển đổi Meta (mã cookie theo đơn)', exists (select 1 from information_schema.tables
+                                           where table_schema = 'public' and table_name = 'meta_don'))
 ) as t(migration, da_chay)
 order by 1;

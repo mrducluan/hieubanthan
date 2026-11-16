@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import type { LuanGiaiResult } from "@/lib/engine";
 import { hoTenList, type HoSo } from "@/lib/hoso";
 import { useQuyUocDD } from "@/lib/quy-uoc-dd";
+import { maNgonNguTrang } from "@/lib/ngon-ngu";
+import { kemNgonNgu } from "@/lib/sao-client";
 
 const boNho = new Map<string, LuanGiaiResult>();
 
@@ -13,7 +15,8 @@ export function khoaBaiDoc(h: HoSo): string {
 
 export function useBaiDoc(h: HoSo | null | undefined) {
   const qu = useQuyUocDD();
-  const khoa = h ? `${khoaBaiDoc(h)}|${qu}` : null;
+  // EN-ALL GĐ 7: bài đọc theo ngôn ngữ trang (engine trả chữ Anh khi `x-ngon-ngu: en`) — nhớ riêng từng ngôn ngữ.
+  const khoa = h ? `${khoaBaiDoc(h)}|${qu}|${maNgonNguTrang()}` : null;
   const [kq, setKq] = useState<LuanGiaiResult | null>(khoa ? boNho.get(khoa) ?? null : null);
   const [loi, setLoi] = useState<string | null>(null);
   const [lan, setLan] = useState(0);
@@ -25,18 +28,18 @@ export function useBaiDoc(h: HoSo | null | undefined) {
     let huy = false;
     setKq(null);
     setLoi(null);
-    fetch("/api/thanso/luan-giai", {
+    fetch("/api/thanso/luan-giai", kemNgonNgu("/api/thanso/luan-giai", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, quy_uoc_duong_doi: qu }),
-    })
+    }))
       .then(async (r) => {
         const d = (await r.json()) as LuanGiaiResult & { error?: string };
-        if (!r.ok) throw new Error(d.error ?? "Chưa tính được lúc này.");
+        if (!r.ok) throw new Error(d.error ?? (maNgonNguTrang() === "vi" ? "Chưa tính được lúc này." : "Could not work this out right now."));
         return d;
       })
       .then((d) => { boNho.set(khoa, d); if (!huy) setKq(d); })
-      .catch((e: unknown) => { if (!huy) setLoi(e instanceof Error ? e.message : "Chưa tính được lúc này."); });
+      .catch((e: unknown) => { if (!huy) setLoi(e instanceof Error ? e.message : maNgonNguTrang() === "vi" ? "Chưa tính được lúc này." : "Could not work this out right now."); });
     return () => { huy = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- khoa đại diện đủ cho h
   }, [khoa, lan]);

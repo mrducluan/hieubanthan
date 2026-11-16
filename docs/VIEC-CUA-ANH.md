@@ -3,9 +3,16 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-14 (WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-16 (SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
 
-### 4at. GIA-99 — giá 99 Sao, gói mới, bật thu Sao (2026-11-16, `docs/GOI-XEM-VA-GIA-2026-11.md`)
+### 4at. SEO-P — tối ưu theo số liệu Search Console 16/11/2026 (`docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 8)
+
+- [ ] **Deploy engine TRƯỚC web** (engine thêm `con_giap` ngày, `tuoi_tron`, câu nhuận đứng đầu, tên chủ thể trong H2 trang kiến thức). Dữ liệu engine được web giữ đệm tối đa 6–24 giờ → tiêu đề mới của trang lịch âm / tuổi hiện chậm nhất 1 ngày sau deploy.
+- [ ] Search Console → Kiểm tra URL → **Yêu cầu lập chỉ mục**: `/lich-am/2027`, `/lich-am/2028`, `/lich-am/2029`, `/nam/2026/tuoi-1998`, `/nam/2027/tuoi-1979`, `/bat-tu/thap-than`, `/phong-thuy/dau-hieu/cau-thang-doi-dien-cua-chinh`, `/xem-ngay-tot` (trang ngày mới có bảng 12 con giáp).
+- [ ] **Brand SERP**: đặt env `MXH_FACEBOOK` / `MXH_YOUTUBE` / `MXH_TIKTOK`… (link trang chính thức) để Organization có `sameAs` — hiện trống, Google chưa có tín hiệu nối thương hiệu với các trang mạng xã hội. Nên tạo Google Business Profile tên "Hiểu Bản Thân (hieuban.com)".
+- [ ] **Hai bài blog CMS đang ở trang 1 mà 0 lượt nhấp** (sửa trong CMS, em không sửa được bài CMS từ code): "vòng tròn ngũ hành" (vị trí 7, 27 hiển thị) và "ngũ hành là gì" (vị trí 12). Gợi ý tiêu đề SEO: *"Vòng tròn ngũ hành: sơ đồ tương sinh, tương khắc dễ nhớ"* và *"Ngũ hành là gì? Kim Mộc Thủy Hỏa Thổ và cách sinh khắc"*; mô tả mở bằng câu trả lời 1 dòng.
+
+### 4au. GIA-99 — giá 99 Sao, gói mới, bật thu Sao (2026-11-16, `docs/GOI-XEM-VA-GIA-2026-11.md`)
 
 - [ ] Gộp PR và để Vercel deploy dự án **web**. Sau deploy `/goi-xem` mở được; mọi nơi vẫn ghi "đang miễn phí" cho tới bước 3.
 - [ ] Hoàn tất Pay2S ở mục 4aq (migration 0037, bốn biến `PAY2S_*`, thử nạp). Chưa xong bước này thì dù chạy bước 3, báo cáo vẫn miễn phí (web không khoá khi chưa có cổng nạp).
@@ -1479,3 +1486,32 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - Gợi ý cách làm nhanh: mỗi trang kể MỘT tình huống anh thật sự đã gặp (ẩn danh) hoặc một điều anh thấy khác sách; 5–10 phút/trang; làm
   trước 14 chính tinh + 12 cung + 3 trang dấu hiệu nhà đang có hiển thị.
 - Bài viết blog trong CMS: đã có sẵn mục chữ ký "Chuyên gia là tác giả / thẩm định" (anh tự tích xác nhận) — không cần ô riêng.
+
+## META-QC. Đo quảng cáo Meta: sự kiện chuẩn + API chuyển đổi (2026-11-16)
+
+- [ ] **MQ-1.** Chạy migration **0038** (`supabase/migrations/0038_meta_capi.sql`) trong Supabase → SQL Editor. Bảng `meta_don` chỉ máy chủ đọc
+  được, tự xoá sau 8 ngày. Kiểm: `/quan-tri` thẻ "Migration Supabase" có dòng 0038 đã chạy.
+- [ ] **MQ-2.** Meta Events Manager → chọn Pixel `2153819128819535` → **Settings** → **Conversions API** → **Generate access token** → chép vào
+  Vercel (dự án web) env **`META_CAPI_TOKEN`** (Production) → Redeploy. Chưa đặt thì web vẫn chạy, chỉ không gửi từ máy chủ.
+- [ ] **MQ-3.** (Thử trước khi chạy quảng cáo) Events Manager → **Test events** → chép mã thử (dạng `TEST12345`) vào env
+  **`META_CAPI_TEST_CODE`** → nạp thử một gói nhỏ → thấy "Purchase" hai nguồn (Browser + Server) gộp một ("Deduplicated"). Thử xong **xoá**
+  env này (để nguyên thì sự kiện thật chỉ hiện ở mục thử).
+- [ ] **MQ-4.** Events Manager → **Aggregated Event Measurement / Web events** xếp ưu tiên: Purchase > InitiateCheckout > Lead > ViewContent.
+- [ ] **MQ-5.** Chạy quảng cáo: tuần đầu tối ưu theo **Lead** (tạo hồ sơ) vì đơn nạp còn ít; khi ~50 Purchase/tuần thì chuyển tối ưu theo
+  **Purchase / giá trị**. Gắn link quảng cáo `?utm_source=facebook&utm_campaign=<tên>` (fbclid Meta tự thêm). Xem phễu người đến từ quảng
+  cáo ở `/quan-tri/tang-truong` → khung "Người đến từ quảng cáo Meta" (cần khoá PostHog như các khung khác).
+- [ ] **MQ-6.** Xác minh tên miền: web đã có sẵn thẻ `facebook-domain-verification` trong `<head>` (mã `yc7164ai9ptzswsj79rn9aen2eduk8`,
+  env `FACEBOOK_DOMAIN_VERIFICATION` ghi đè). Sau khi bản mới lên production: Business Settings → Brand safety → Domains → hieuban.com →
+  **Verify Domain** (chọn "Add a meta-tag").
+- [ ] **MQ-7.** Pixel Hieuban → Settings → tắt **Automatic advanced matching** (bật thì Meta tự đọc ô nhập như email — trái Chính sách riêng tư).
+- Chữ quảng cáo: không ngầm nói biết đặc điểm riêng của người xem ("Bạn đang buồn chuyện tình cảm?") — chính sách Meta; nên viết "Xem lá số
+  Tử vi của bạn", "Năm 2027 của tuổi …".
+
+## LA-UI / NS-QT / GD-1 (2026-11-16) — lịch âm mới + hai đề xuất chờ anh quyết
+- **Deploy engine trước web** cho lịch âm mới (web gọi route mới `/v1/lich/nam-ngay/{năm}`; engine cũ thì trang chỉ thiếu khối lịch, không lỗi).
+- [x] **NS-QT** — đã làm theo đề xuất (môi trường đã mở `download.geonames.org`). Còn tuỳ anh: migration (số sau 0039) `ho_so.mui_gio` để đồng bộ nơi sinh nước ngoài lên tài khoản (hiện chỉ lưu trên máy).
+- [x] **GD-1 đợt 1** — trang `/gia-dinh` (chỉ trên máy). Đợt 2 (lớp ngày giờ sinh, thẻ cặp sâu, link mời, chương Sao) và đợt 3 (đồng bộ tài khoản — cần luật sư về dữ liệu trẻ em) chờ anh giao.
+- [x] **GD-1 đợt 2** — từng cặp nhiều lớp, sơ đồ nhà, năm năm tới, lá số của anh nhìn về nhà mình. Deploy engine trước web.
+- [ ] **GD-1 đợt 3** — chạy migration **0039** (`supabase/migrations/0039_gia_dinh.sql`) trong Supabase → SQL Editor để nút "Lưu nhà mình vào
+  tài khoản" hoạt động (chưa chạy thì nút báo lỗi nhẹ, trang vẫn chạy). Bảng chỉ nhận vai + năm sinh + giới tính. Anh đã quyết (16/11/2026): năm sinh người trong gia đình được lưu và xem trên
+  hieuban khi người dùng tự tích đồng ý. Kiểm: `/quan-tri` thẻ "Migration Supabase" có dòng 0039.

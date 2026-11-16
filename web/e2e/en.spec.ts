@@ -1,5 +1,6 @@
-// QTE — bản tiếng Anh /en: khung riêng (lang=en, không menu Việt), Numerology (form → bài đọc tiếng Anh → hỏi đáp), Tarot (xáo máy →
-// rút 3 lá → lật → bài đọc tiếng Anh), trang kiến thức (Life Path, lá bài), sitemap-en, hreflang; bản Việt không đổi.
+// QTE — bản tiếng Anh /en: khung (lang=en, không menu Việt), trang kiến thức (Life Path, lá bài), sitemap-en, hreflang; bản Việt
+// không đổi. EN-ALL GĐ 7: Numerology + Tarot là rewrite của /than-so, /tarot (một cây component) — luồng công cụ kiểm ở
+// e2e/en-numerology.spec.ts, e2e/en-tarot.spec.ts.
 import { test, expect } from "@playwright/test";
 
 const VI = /[ăâđêôơưàáảãạèéẻẽẹìíỉĩịòóỏõọùúủũụỳýỷỹỵ]/i;
@@ -22,85 +23,18 @@ test("khung /en: lang=en, hreflang hai chiều, không chữ Việt trong nội 
   expect((await (await request.get("/robots.txt")).text())).toContain("/sitemap-en.xml");
 });
 
-test("numerology: form → bài đọc tiếng Anh → tích thẻ → hỏi đáp tiếng Anh", async ({ page }) => {
-  await page.goto("/en/numerology");
-  await page.getByTestId("o-ten-en").fill("Mary Ann Lee");
-  await page.getByTestId("o-ngay-en").fill("24");
-  await page.getByTestId("o-thang-en").selectOption("10");
-  await page.getByTestId("o-nam-en").fill("1988");
-  await page.getByTestId("nut-xem-en").click();
-  await expect(page.getByTestId("so-en-duong_doi")).toBeVisible({ timeout: 20_000 });
-  await expect(page.getByTestId("so-en-duong_doi")).toContainText("Life Path");
-  await expect(page.getByTestId("chan-dung-en")).toBeVisible();
-  const text = await page.locator("main").innerText();
-  expect(text).not.toMatch(VI);
-  expect(text).toContain("Personal years");
-  // thẻ tự tích: đủ 4 nét → kết quả
-  const o = page.getByTestId("so-en-duong_doi").locator('input[type="checkbox"]');
-  for (let i = 0; i < 4; i++) await o.nth(i).check();
-  await expect(page.getByTestId("so-en-duong_doi").getByTestId("ket-qua-tick")).toContainText("fits you");
-  // hỏi đáp
-  // EN-ALL GĐ 1: khung hỏi đáp CHUNG (KhungChat) với chữ khung tiếng Anh — không còn HoiEn riêng.
-  await page.getByLabel("Suggested questions").getByRole("button").first().click();
-  const luot = page.getByTestId("cau-tra-loi").first();
-  await expect(luot).toBeVisible({ timeout: 15_000 });
-  expect(await luot.innerText()).not.toMatch(VI);
-  await expect(page.getByTestId("cau-hoi-ban").first()).toContainText("You asked");
-  await page.getByRole("textbox", { name: "Your question", exact: true }).fill("What is my personal year about this year?");
-  await page.getByRole("button", { name: "Send question" }).click();
-  await expect(page.getByTestId("cau-tra-loi").nth(1)).toContainText(/personal year/i, { timeout: 15_000 });
-  await expect(page.getByTestId("hanh-dong-tra-loi")).toHaveCount(0);   // Lưu / thẻ chia sẻ chưa có ở bản Anh
-  // xoá hồ sơ trên máy → về form
-  page.once("dialog", (d) => { expect(d.message()).toContain("Vietnamese site"); void d.accept(); });   // hồ sơ dùng chung → hỏi lại
-  await page.getByTestId("nut-xoa-en").click();
-  await expect(page.getByTestId("form-en")).toBeVisible();
-});
-
-test("tarot: câu hỏi tiếng Anh được hiểu → xáo máy → rút 3 lá → lật → bài đọc tiếng Anh mở bằng câu trả lời", async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 900 });
-  await page.goto("/en/tarot");
-  await expect(page.getByTestId("buoc-hoi-en")).toBeVisible();
-  await expect(page.getByTestId("la-ngay-en")).toBeVisible({ timeout: 15_000 });
-  await page.getByTestId("o-cau-hoi-en").fill("Should I take the new job offer?");
-  await expect(page.getByTestId("goi-y-cau-hoi-en")).toContainText(/should I/i, { timeout: 10_000 });
-  await page.getByTestId("trai-bai-en-ba_la_loi_khuyen").click();
-  await page.getByTestId("nut-bat-dau-en").click();
-  await expect(page.getByTestId("xao-bai")).toContainText("Hold to shuffle");
-  await page.getByTestId("nut-may-xao").click();
-  const quat = page.getByTestId("quat-bai");
-  await expect(quat).toBeVisible({ timeout: 15_000 });
-  for (const k of [5, 40, 70]) await quat.locator(`[data-chi-so="${k}"]`).dispatchEvent("click");
-  await expect(page.getByTestId("quat-bai")).toHaveCount(0);
-  await page.getByTestId("nut-lat-het-en").click();
-  await page.getByTestId("nut-doc-bai-en").click();
-  const bc = page.getByTestId("luan-giai-toan-bo");
-  await expect(bc).toBeVisible({ timeout: 20_000 });
-  await expect(page.getByTestId("lg-chuong-tra_loi")).toBeVisible();
-  const text = await bc.innerText();
-  expect(text).not.toMatch(VI);
-  expect(text).toMatch(/Leans|condition|Not yet|Stuck/);
-  // hỏi về lá vừa rút
-  await page.getByRole("textbox", { name: "Your question", exact: true }).fill("What does the advice card mean?");
-  await page.getByRole("button", { name: "Send question" }).click();
-  const luot = page.getByTestId("cau-tra-loi").first();
-  await expect(luot).toBeVisible({ timeout: 15_000 });
-  expect(await luot.innerText()).not.toMatch(VI);
-});
-
 test("trang kiến thức tiếng Anh: Life Path 7, lá The Tower, 404 đúng", async ({ page, request }) => {
   const lp = (await (await request.get("/en/numerology/life-path/7")).text()).replace(/<!-- -->/g, "");
-  expect(lp).toMatch(/<h1[^>]*>Life Path 7/);
-  expect(lp).toContain("Counter-question");
-  expect(lp).toMatch(/<title>Life Path 7[^<]*<\/title>/);   // tiêu đề tuyệt đối, không mang mẫu "· Hiểu Bản Thân"
+  expect(lp).toMatch(/<h1[^>]*>Number 7/);
+  expect(lp).toMatch(/<title>Number 7[^<]*<\/title>/);   // tiêu đề tuyệt đối, không mang mẫu "· Hiểu Bản Thân"
   await page.goto("/en/numerology/life-path/7");
   expect(await page.locator("main").innerText()).not.toMatch(VI);
   const la = (await (await request.get("/en/tarot/cards/the-tower")).text()).replace(/<!-- -->/g, "");
   expect(la).toMatch(/<h1[^>]*>The Tower/);
-  expect(la).toContain("Pictorial Key");
   expect((await request.get("/en/tarot/cards/khong-co")).status()).toBe(404);
   expect((await request.get("/en/numerology/life-path/10")).status()).toBe(404);
   const ds = await (await request.get("/en/tarot/cards")).text();
-  expect((ds.match(/data-testid="the-la-en"/g) ?? []).length).toBe(78);
+  expect(new Set(ds.match(/href="\/en\/tarot\/cards\/[a-z0-9-]+"/g) ?? []).size).toBe(78);
 });
 
 // HTT-2 mục 8 (2026-11-09) — QC SEO/GEO bản /en: 404 tiếng Anh, OG tiếng Anh, breadcrumb JSON-LD, hreflang hai chiều tới trang
@@ -132,7 +66,6 @@ test("/en: OG tiếng Anh, BreadcrumbList + Article có ngày, hreflang tới tr
   const lp = (await (await request.get("/en/numerology/life-path/22")).text());
   expect(lp).toMatch(/hrefLang="vi" href="http:\/\/localhost:3000\/than-so\/y-nghia-so\/so-22"/i);
   expect(lp).toContain('"@type":"BreadcrumbList"');
-  expect(lp).toContain('data-testid="doc-tiep-en"');
   const sm = await (await request.get("/sitemap-en.xml")).text();
   expect(sm).toMatch(/<loc>http:\/\/localhost:3000\/en\/tarot\/cards\/the-tower<\/loc><lastmod>\d{4}-\d{2}-\d{2}<\/lastmod><xhtml:link rel="alternate" hreflang="en"[^>]*\/><xhtml:link rel="alternate" hreflang="vi" href="http:\/\/localhost:3000\/tarot\/la-bai\/thap"\/><xhtml:link rel="alternate" hreflang="x-default"/);
   expect(sm).toMatch(/\/en\/numerology\/life-path\/22<\/loc><lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/);

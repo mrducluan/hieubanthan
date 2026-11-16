@@ -44,6 +44,28 @@ def api_mui_gio() -> dict:
     return {"nuoc": ds}
 
 
+@router.get("/v1/dia-ly/tim")
+def api_tim_noi(q: Annotated[str, Query(min_length=1, max_length=40)], gh: Annotated[int, Query(ge=1, le=20)] = 8) -> dict:
+    """NS-QT — gợi ý nơi sinh ngoài Việt Nam khi người dùng gõ (GeoNames cities15000, CC BY 4.0). Không ghi lại chữ gõ."""
+    from app.calc import dia_danh  # noqa: PLC0415
+    return {"ket_qua": dia_danh.tim(q, gh, ngon_ngu.hien_tai())}
+
+
+@router.get("/v1/dia-ly/noi/{ma}")
+def api_noi(ma: Annotated[str, FPath(min_length=4, max_length=64)]) -> dict:
+    """NS-QT — một nơi theo mã (gn-… hoặc mã thành phố cũ): để form hồ sơ hiện lại tên + dòng phụ khi mở hồ sơ đã lưu."""
+    from app.calc import dia_danh  # noqa: PLC0415
+    g = dia_danh.tra(ma, ngon_ngu.hien_tai())
+    if g is None:
+        t = mui_gio.thanh_pho(ma)
+        if t is None:
+            raise HTTPException(404, detail="Không có nơi này")
+        en = ngon_ngu.hien_tai() != ngon_ngu.MAC_DINH
+        g = {"ma": t["ma"], "ten": (t.get("ten_en") if en else None) or t["ten"], "nuoc": t["nuoc"].upper(),
+             "phu": "", "vi_do": t.get("vi_do"), "kinh_do": t.get("kinh_do"), "zone": t["zone"]}
+    return dia_danh.them_co(g)
+
+
 class MuiGioInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
     mui_gio: str = Field(min_length=2, max_length=64, description="Mã thành phố (us-san_jose) hoặc mã vùng IANA")
@@ -114,7 +136,8 @@ def api_doi_lich(inp: DoiLichInput) -> dict:
     am_d = {"ngay": am[0], "thang": am[1], "nam": am[2], "nhuan": bool(am[3])}
     v = lunar.solar_to_lunar(duong.day, duong.month, duong.year, _tz_lich(duong, inp.noi_sinh))
     am_viet = {"ngay": v[0], "thang": v[1], "nam": v[2], "nhuan": bool(v[3])}
-    return {
+    from app.luangiai import lich_trang_hien as _lth  # noqa: PLC0415 — EN-ALL GĐ 8: can chi theo ngôn ngữ
+    return _lth.doi({
         "duong": {"ngay": duong.day, "thang": duong.month, "nam": duong.year},
         "am": am_d,
         "am_trung_quoc": am_tq,
@@ -128,7 +151,7 @@ def api_doi_lich(inp: DoiLichInput) -> dict:
         "thang_nhuan_nam": lunar.thang_nhuan(am[2], tz),
         "so_ngay_thang": lunar.so_ngay_thang(am[1], am[2], int(am[3]), tz),
         "lich_mien_nam_utc8": inp.lich == "viet" and tz != config.CALENDAR_MERIDIAN_TZ,
-    }
+    })
 
 
 # SEO-L5: lịch âm cả năm (các tháng, Tết, nhuận) — không dữ liệu cá nhân.
@@ -138,6 +161,12 @@ def api_lich_cac_nam(tu: Annotated[int, Query(ge=1901, le=2098)], den: Annotated
     if den < tu or den - tu > 29:
         raise HTTPException(422, "Khoảng năm từ 1 đến 30 năm.")
     return _lich_nam.cac_nam(tu, den)
+
+
+# LA-UI: mọi ngày của năm âm (component lịch) — không dữ liệu cá nhân, web cache được.
+@router.get("/v1/lich/nam-ngay/{nam}")
+def api_lich_nam_ngay(nam: Annotated[int, FPath(ge=1901, le=2098)]) -> dict:
+    return _lich_nam.lich_ngay(nam)
 
 
 @router.get("/v1/lich/nam/{nam}")

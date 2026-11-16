@@ -144,7 +144,7 @@ test.describe("trình duyệt thật + camera giả", () => {
     await expect(page.getByTestId("do-nghieng")).toHaveAttribute("open", "");
     await expect(page.getByTestId("ng-khung-nghieng_trai").locator("img")).toHaveAttribute("src", /^blob:/);
     await expect(page.getByTestId("ng-khung-nghieng_phai").locator("img")).toHaveAttribute("src", /^blob:/);
-    expect(ngoai.filter((o) => !o.includes("posthog") && !o.includes("google-analytics") && !o.includes("googletagmanager"))).toEqual([]);
+    expect(ngoai.filter((o) => !o.includes("posthog") && !o.includes("google-analytics") && !o.includes("googletagmanager") && !o.includes("facebook"))).toEqual([]);
   });
 
   test("bỏ qua hai góc nghiêng → chỉ ảnh thẳng; Esc đóng; từ chối camera → lời báo + quay lại chọn ảnh", async ({ page, browser }) => {

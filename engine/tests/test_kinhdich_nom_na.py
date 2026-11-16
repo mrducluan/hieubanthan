@@ -61,6 +61,6 @@ def test_tra_loi_co_noi_nom_na_cho_hao_dong():
 def test_trang_que_co_muc_nom_na():
     t = trang.lay("que", "que-1-can")
     tieu_de = [m["tieu_de"] for m in t["muc"]]
-    assert "Hiểu đơn giản" in tieu_de
-    m = next(m for m in t["muc"] if m["tieu_de"] == "Sáu hào (hào từ)")
+    assert "Hiểu quẻ Càn đơn giản" in tieu_de
+    m = next(m for m in t["muc"] if m["tieu_de"] == "Sáu hào của quẻ Càn (hào từ)")
     assert any("Hiểu đơn giản:" in d for d in m["danh_sach"])

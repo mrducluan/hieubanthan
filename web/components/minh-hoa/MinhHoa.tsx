@@ -90,14 +90,14 @@ const diem = (cx: number, cy: number, r: number, goc: number) =>
   [cx + r * Math.cos(goc), cy + r * Math.sin(goc)] as const;
 
 // ---------------------------------------------------------------- số: đa giác/ngôi sao N đỉnh quanh con số
-function HinhSo({ so, so_cai, so_goc }: { so: number; so_cai: boolean; so_goc: number }) {
+function HinhSo({ so, so_cai, so_goc, c }: { so: number; so_cai: boolean; so_goc: number; c: Chu }) {
   const cx = 160, cy = 120, r = 82;
   const n = so_goc;                               // số cái vẽ theo số gốc (engine trả: 11→2, 22→4, 33→6)
   const dinh = Array.from({ length: Math.max(n, 1) }, (_, i) => diem(cx, cy, r, -Math.PI / 2 + (2 * Math.PI * i) / Math.max(n, 1)));
   const buoc = n >= 5 ? Math.floor((n - 1) / 2) : 1;
   const duong = n >= 3 ? dinh.map((_, i) => dinh[(i * buoc) % n]!).map((p, i) => `${i ? "L" : "M"}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(" ") + " Z" : "";
   return (
-    <Khung nhan={`Số ${so} trong thần số học${so_cai ? " — số cái" : ""}`}>
+    <Khung nhan={`${c("mh.so", { so: String(so) })}${so_cai ? c("mh.so_cai") : ""}`}>
       <circle cx={cx} cy={cy} r={r + 14} className="fill-none stroke-gold/25" strokeWidth={1} />
       {so_cai && <circle cx={cx} cy={cy} r={r + 22} className="fill-none stroke-moon/40" strokeWidth={1} strokeDasharray="2 5" />}
       {duong && <path d={duong} className="fill-gold/5 stroke-gold/60" strokeWidth={1.2} />}
@@ -109,9 +109,9 @@ function HinhSo({ so, so_cai, so_goc }: { so: number; so_cai: boolean; so_goc: n
 }
 
 // ---------------------------------------------------------------- cặp số: hai vòng giao nhau (phần chung = chỗ dễ hoà)
-function HinhCapSo({ a, b }: { a: number; b: number }) {
+function HinhCapSo({ a, b, c }: { a: number; b: number; c: Chu }) {
   return (
-    <Khung nhan={`Số chủ đạo ${a} và ${b} — hai vòng giao nhau: phần chung là chỗ dễ hoà`}>
+    <Khung nhan={c("mh.cap_so", { a: String(a), b: String(b) })}>
       <circle cx={125} cy={118} r={70} className="fill-gold/10 stroke-gold/70" strokeWidth={1.4} />
       <circle cx={195} cy={118} r={70} className="fill-moon/10 stroke-moon/70" strokeWidth={1.4} />
       <text x={100} y={136} textAnchor="middle" className="fill-gold font-serif" fontSize={52}>{a}</text>
@@ -326,18 +326,21 @@ function HinhDauHieu({ nhom, phong, veto, tot, ten, c }: { nhom: string; phong: 
 }
 
 /** `gon`: chỉ hình, không khung figure / dải QR — khi hình nằm trong một khung khác (khối hình của câu trả lời hỏi đáp). */
-function HinhBoVi({ vung, ten, cung }: { vung: string; ten: string; cung: string | null }) {
+function HinhBoVi({ vung, ten, cung, c, tiengAnh }: { vung: string; ten: string; cung: string | null; c: Chu; tiengAnh: boolean }) {
+  // EN-ALL GĐ 8: bản Anh đọc chữ ghi chú từ lib/chu/kien-thuc.ts (`mh.bo_vi_*`); bản Việt giữ đúng HTML cũ.
   return (
-    <BanDoMat tinh sang={[vung]} nhan={{ [vung]: ten }} chuThich
-      ghiChu={<span>{ten}{cung ? ` — cung ${cung}` : ""} (vùng sáng trên gương mặt giản lược)</span>} className="mx-auto max-w-md" />
+    <BanDoMat tinh en={tiengAnh} sang={[vung]} nhan={{ [vung]: ten }} chuThich
+      ghiChu={tiengAnh ? <span>{ten}{cung ? c("mh.bo_vi_cung", { cung }) : ""}{c("mh.bo_vi_sang")}</span>
+        : <span>{ten}{cung ? ` — cung ${cung}` : ""} (vùng sáng trên gương mặt giản lược)</span>} className="mx-auto max-w-md" />
   );
 }
 
-function HinhLaBai(mh: { id: string; ten: string; en: string; so: number; bo: BoTarot | null; loai: LoaiLa; nguyen_to: NguyenTo }) {
+function HinhLaBai({ c, tiengAnh, ...mh }: { id: string; ten: string; en: string; so: number; bo: BoTarot | null; loai: LoaiLa; nguyen_to: NguyenTo; c: Chu; tiengAnh: boolean }) {
   return (
     <figure className="mx-auto w-[168px]">
       <MatTruoc la={{ id: mh.id, ten: mh.ten, en: mh.en, so: mh.so, bo: mh.bo, loai: mh.loai, nguyen_to: mh.nguyen_to }} w={168} />
-      <figcaption className="mt-2 text-center text-xs text-fg-faint">{mh.ten} ({mh.en}) — tranh bộ Rider–Waite in năm 1909</figcaption>
+      {/* Bản Việt giữ đúng HTML cũ; bản Anh tên lá đã là tên Anh → không lặp "(The Fool)". */}
+      <figcaption className="mt-2 text-center text-xs text-fg-faint">{tiengAnh ? <>{mh.ten} — {c("mh.la_bai")}</> : <>{mh.ten} ({mh.en}) — tranh bộ Rider–Waite in năm 1909</>}</figcaption>
     </figure>
   );
 }
@@ -348,9 +351,9 @@ export function MinhHoa({ mh, duong, gon = false, en = false, ten = MA }: { mh?:
   const c = taoChu(CHU_KIEN_THUC, null, en ? "en" : "vi");
   const hinh = (() => {
     switch (mh.kieu) {
-      case "so": return <HinhSo {...mh} />;
+      case "so": return <HinhSo {...mh} c={c} />;
       case "que": return <HinhQue {...mh} c={c} />;
-      case "cap_so": return <HinhCapSo {...mh} />;
+      case "cap_so": return <HinhCapSo {...mh} c={c} />;
       case "sao": return <HinhSaoTuVi {...mh} c={c} tn={ten} />;
       case "cung": return <HinhCung {...mh} c={c} />;
       case "sao_cung": return <HinhSaoCung {...mh} c={c} />;
@@ -359,8 +362,8 @@ export function MinhHoa({ mh, duong, gon = false, en = false, ten = MA }: { mh?:
       case "thap_than": return <HinhThapThan {...mh} c={c} />;
       case "nhat_chu": return <HinhNhatChu {...mh} c={c} ten={ten} />;
       case "dau_hieu": return <HinhDauHieu {...mh} c={c} />;
-      case "bo_vi": return <HinhBoVi {...mh} />;
-      case "la_bai": return <HinhLaBai {...mh} />;
+      case "bo_vi": return <HinhBoVi {...mh} c={c} tiengAnh={en} />;
+      case "la_bai": return <HinhLaBai {...mh} c={c} tiengAnh={en} />;
       default: return null;
     }
   })();

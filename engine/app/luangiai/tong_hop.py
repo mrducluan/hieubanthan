@@ -16,6 +16,7 @@ import datetime as dt
 
 from app.calc import thanso, thanso_chaldean as ch
 from app.kb import store, thanso_v2 as kb
+from app.kb.loi import L
 from app.luangiai import hoi, noi_dau, thanso_chaldean as lch
 
 PHAI = ("pitago", "chaldea")
@@ -25,6 +26,11 @@ TEN_VI_TRI = {
     ("chaldea", "ngay_sinh"): "Số ngày sinh", ("chaldea", "duong_doi"): "Số đường đời",
     ("chaldea", "linh_hon"): "Số linh hồn", ("chaldea", "nhan_cach"): "Số nhân cách",
 }
+
+
+def _ten_vt(phai: str, vt: str) -> str:
+    """Tên vị trí theo ngôn ngữ — dùng chung mã với bài Pitago (`thanso.vi_tri.*`) và bài Chaldea (`tsch.vt.*`)."""
+    return L(f"thanso.vi_tri.{vt}" if phai == "pitago" else f"tsch.vt.{vt}", TEN_VI_TRI[(phai, vt)])
 
 
 def goc(n: int) -> int:
@@ -57,12 +63,12 @@ def _nguon(hs: dict) -> list[tuple[str, str, int]]:
     out: list[tuple[str, str, int]] = []
     dd = hs["pitago"].get("duong_doi")
     if dd and dd["goc"]:
-        out.append(("chung", "Đường đời (hai phái cùng một phép cộng ngày sinh)", dd["goc"]))
+        out.append(("chung", L("tsth.dd_chung", "Đường đời (hai phái cùng một phép cộng ngày sinh)"), dd["goc"]))
     for phai in PHAI:
         for vt, v in hs[phai].items():
             if (phai, vt) in HO_NGAY_SINH or not v["goc"]:
                 continue
-            out.append((phai, f"{ten_phai[phai]} · {TEN_VI_TRI[(phai, vt)]}", v["goc"]))
+            out.append((phai, f"{ten_phai[phai]} · {_ten_vt(phai, vt)}", v["goc"]))
     return out
 
 
@@ -96,7 +102,7 @@ def tuong_tac(hs: dict, ho_ten: list[str], ngay: int, thang: int, nam: int, ngay
     qh, ten_phai = g["quan_he"], g["ten_phai"]
     kq = []
     for ma_nhom, nhom in g["nhom"].items():
-        cac = [{"phai": p, "ten": f"{ten_phai[p]} · {TEN_VI_TRI[(p, vt)]}", **hs[p][vt]}
+        cac = [{"phai": p, "ten": f"{ten_phai[p]} · {_ten_vt(p, vt)}", **hs[p][vt]}
                for p, vt in nhom["vi_tri"] if vt in hs[p] and hs[p][vt]["goc"]]
         if len(cac) < 2:
             continue
@@ -118,9 +124,9 @@ def tuong_tac(hs: dict, ho_ten: list[str], ngay: int, thang: int, nam: int, ngay
         if gd["cung_so"] and gd["cach_dung"]:
             kq.append({"quan_he": "bo_sung", "ten_quan_he": qh["bo_sung"]["ten"],
                        "nhom": gd["ma"], "ten_nhom": gd["ten"],
-                       "cac_so": [{"phai": "pitago", "ten": f"Pitago · nợ nghiệp ở {_vi_tri_thuong(gd['ten'])}", "so": gd["pitago_no_nghiep"],
-                                   "goc": goc(gd["pitago_no_nghiep"])},
-                                  {"phai": "chaldea", "ten": "Chaldea · số kép", "so": gd["chaldea_kep"],
+                       "cac_so": [{"phai": "pitago", "ten": L("tsth.no_nghiep_o", "Pitago · nợ nghiệp ở {o}", o=_vi_tri_thuong(gd["ten"])),
+                                   "so": gd["pitago_no_nghiep"], "goc": goc(gd["pitago_no_nghiep"])},
+                                  {"phai": "chaldea", "ten": L("tsth.so_kep", "Chaldea · số kép"), "so": gd["chaldea_kep"],
                                    "goc": goc(gd["chaldea_kep"])}],
                        "cach_doc": _dien(qh["bo_sung"]["cach_doc"], nhom=gd["ten"], so_a=gd["pitago_no_nghiep"],
                                          so_b=gd["chaldea_kep"], cach_dung=gd["cach_dung"]),
@@ -131,8 +137,8 @@ def tuong_tac(hs: dict, ho_ten: list[str], ngay: int, thang: int, nam: int, ngay
         s = noi_bat[0]["goc"]
         if ncn == s:
             kq.append({"quan_he": "nhip_thoi_gian", "ten_quan_he": qh["nhip_thoi_gian"]["ten"],
-                       "nhom": "nam_ca_nhan", "ten_nhom": "Năm cá nhân",
-                       "cac_so": [{"phai": "pitago", "ten": f"Năm cá nhân {ngay_xem.year}", "so": ncn, "goc": ncn}],
+                       "nhom": "nam_ca_nhan", "ten_nhom": L("tsth.nam_ca_nhan", "Năm cá nhân"),
+                       "cac_so": [{"phai": "pitago", "ten": L("tsth.nam_ca_nhan_y", "Năm cá nhân {nam}", nam=ngay_xem.year), "so": ncn, "goc": ncn}],
                        **{k: _dien(qh["nhip_thoi_gian"][k], nam=ngay_xem.year, so=s,
                                    tu_khoa=(noi_bat[0]["tu_khoa"] or "").lower()) for k in ("cach_doc", "goi_y")}})
     return kq
@@ -154,13 +160,13 @@ def tong_hop(ho_ten: list[str], ngay: int, thang: int, nam: int, ngay_xem: dt.da
         "so_noi_bat": nb,
         "tuong_tac": tt,
         "nhip": {"nam": ngay_xem.year, "nam_ca_nhan": ncn, "cham_net_noi_bat": bool(nb) and ncn == nb[0]["goc"]},
-        "cach_doc": ("Hai phái tính từ cùng họ tên và ngày sinh bằng hai bảng chữ khác nhau. Chỗ các phái cùng ra một số là nét "
-                     "đáng đối chiếu trước; chỗ khác nhau là các góc nhìn để bạn tự chọn điều đúng với mình."),
-        "ghi_chu_duong_doi": ("Đường đời của hai phái cùng là một phép cộng chữ số ngày sinh nên luôn trùng nhau — được tính "
-                              "là một nguồn, không coi là hai phái cùng đồng ý."),
+        "cach_doc": L("tsth.cach_doc", "Hai phái tính từ cùng họ tên và ngày sinh bằng hai bảng chữ khác nhau. Chỗ các phái cùng ra một số là nét "
+                      "đáng đối chiếu trước; chỗ khác nhau là các góc nhìn để bạn tự chọn điều đúng với mình."),
+        "ghi_chu_duong_doi": L("tsth.ghi_chu_dd", "Đường đời của hai phái cùng là một phép cộng chữ số ngày sinh nên luôn trùng nhau — được tính "
+                               "là một nguồn, không coi là hai phái cùng đồng ý."),
         "nguon": meta["nguon"], "source_id": meta["source_id"], "school_id": meta["school_id"],
         "trang_thai": meta["trang_thai"],
-        "luu_y": "Thần số học là góc nhìn văn hoá để tự soi, không phải dự báo.",
+        "luu_y": L("tsth.luu_y", "Thần số học là góc nhìn văn hoá để tự soi, không phải dự báo."),
     }
 
 

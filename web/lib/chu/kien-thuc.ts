@@ -41,6 +41,21 @@ export const CHU_KIEN_THUC = {
   "bai.chu_thich": { nhom: "Bài", nhan: "Trích dẫn cổ thư — nhãn chú thích chữ", mac_dinh: "Chú thích: ", en: "Note: " },
   "moi.nut_tu_vi": { nhom: M, nhan: "Nút mời — Tử vi", mac_dinh: "Lập lá số Tử vi của tôi", en: "Set up my Zi Wei chart" },
   "moi.nut_chung": { nhom: M, nhan: "Nút mời mặc định", mac_dinh: "Xem của tôi", en: "See mine" },
+  // EN-ALL GĐ 7 — cụm Thần số, cặp số, lá bài Tarot (chữ Việt = đúng lời mời / nút cũ của trang Việt).
+  "moi.so": { nhom: M, nhan: "Lời mời — trang ý nghĩa số", mac_dinh: "Số chủ đạo, linh hồn, sứ mệnh, năm cá nhân của chính bạn là bao nhiêu? Nhập tên và ngày sinh — có từng bước cộng.", en: "What are your own Life Path, Soul Urge, Expression and Personal Year numbers? Enter your name and date of birth — every step of the sum is shown." },
+  "moi.so_kep": { nhom: M, nhan: "Lời mời — trang số kép", mac_dinh: "Tên và ngày sinh của bạn ra số kép nào theo bảng Chaldea? Nhập để xem từng bước cộng.", en: "Which compound number do your name and birth date give in the Chaldean table? Enter them to see every step of the sum." },
+  "moi.nghe": { nhom: M, nhan: "Lời mời — trang nghề theo số", mac_dinh: "Số chủ đạo của bạn là bao nhiêu, hợp kiểu việc nào? Nhập tên và ngày sinh — có từng bước cộng.", en: "What is your own Life Path number, and which kind of work suits it? Enter your name and date of birth — every step of the sum is shown." },
+  "moi.tinh_yeu": { nhom: M, nhan: "Lời mời — trang tình yêu theo số", mac_dinh: "Số chủ đạo của bạn là bao nhiêu, yêu theo kiểu nào? Nhập tên và ngày sinh — có từng bước cộng.", en: "What is your own Life Path number, and how do you tend to love? Enter your name and date of birth — every step of the sum is shown." },
+  "moi.nam_ca_nhan": { nhom: M, nhan: "Lời mời — trang năm cá nhân", mac_dinh: "Năm nay bạn đang ở năm cá nhân số mấy, tháng này số mấy? Nhập ngày sinh để biết.", en: "Which Personal Year are you in this year, and which Personal Month this month? Enter your date of birth to find out." },
+  "moi.no_nghiep": { nhom: M, nhan: "Lời mời — trang nợ nghiệp", mac_dinh: "Ngày sinh và tên của bạn có mang nợ nghiệp 13, 14, 16, 19 không, nằm ở chỉ số nào? Nhập để xem từng bước.", en: "Do your birth date and name carry karmic debt 13, 14, 16 or 19, and in which number? Enter them to see every step." },
+  "moi.cap_so": { nhom: M, nhan: "Lời mời — trang cặp số", mac_dinh: "Hai người cụ thể hợp ở đâu, dễ va ở đâu, nên cùng làm gì? Nhập ngày sinh của hai người.", en: "Where do two real people flow, where do they clash, and what should they do together? Enter both birth dates." },
+  "moi.la_bai": { nhom: M, nhan: "Lời mời — trang lá bài Tarot", mac_dinh: "Lá này nói gì với câu bạn đang băn khoăn? Gõ câu hỏi, tự xáo và rút bài — bài đọc trả lời đúng câu bạn hỏi.", en: "What does this card say about the question on your mind? Type it, shuffle and draw your own cards — the reading answers what you asked." },
+  "moi.nut_than_so": { nhom: M, nhan: "Nút mời — Thần số học", mac_dinh: "Tính thần số học của tôi", en: "Work out my numbers" },
+  "moi.nut_hop_doi": { nhom: M, nhan: "Nút mời — Hợp đôi", mac_dinh: "Xem hợp đôi của tôi", en: "Compare two birth dates" },
+  "moi.nut_tarot": { nhom: M, nhan: "Nút mời — Tarot", mac_dinh: "Rút bài Tarot của tôi", en: "Draw my tarot cards" },
+  // EN-ALL GĐ 8 — cụm bộ vị gương mặt (bản Việt đọc LOI_MOI / NUT_CONG_CU trong TrangKienThuc, chữ Việt ở đây = nút cũ).
+  "moi.bo_vi": { nhom: M, nhan: "Lời mời — trang bộ vị gương mặt", mac_dinh: "Vùng này trên gương mặt bạn trông thế nào, sách xưa đọc ra sao? Soi gương sáu bước — không cần ảnh.", en: "How does this area look on your own face, and how do the old books read it? Take the six-step mirror survey — no photo needed." },
+  "moi.nut_nhan_tuong": { nhom: M, nhan: "Nút mời — Nhân tướng học", mac_dinh: "Xem tướng mặt của tôi", en: "Read my face" },
 
   // ---------------------------------------------------------------- mục lục cụm dài (DanhSachCum + BoLocCum)
   "ml.rong": { nhom: L, nhan: "Không trang nào khớp bộ lọc", mac_dinh: "Không có trang nào khớp. Thử tên ngắn hơn hoặc bỏ bớt lọc.", en: "No page matches. Try a shorter name or clear a filter." },
@@ -69,6 +84,14 @@ export const CHU_KIEN_THUC = {
   "tg.ten_chu_bien": { nhom: T, nhan: "Bản Anh: tên chủ biên viết không dấu", mac_dinh: "Đức Luân", en: "Duc Luan" },
 
   // ---------------------------------------------------------------- hình minh hoạ + dải QR
+  // EN-ALL GĐ 7 — hình số, cặp số, lá bài (chữ Việt = đúng chữ cũ trong MinhHoa).
+  "mh.so": { nhom: H, nhan: "Hình số — tên hình ({so})", mac_dinh: "Số {so} trong thần số học", en: "Number {so} in numerology" },
+  "mh.so_cai": { nhom: H, nhan: "Hình số — đuôi số cái", mac_dinh: " — số cái", en: " — master number" },
+  "mh.cap_so": { nhom: H, nhan: "Hình cặp số ({a}, {b})", mac_dinh: "Số chủ đạo {a} và {b} — hai vòng giao nhau: phần chung là chỗ dễ hoà", en: "Life Path {a} and {b} — two overlapping circles: the overlap is where you flow easily" },
+  "mh.la_bai": { nhom: H, nhan: "Chú thích tranh lá bài", mac_dinh: "tranh bộ Rider–Waite in năm 1909", en: "from the Rider–Waite deck, 1909 printing" },
+  // EN-ALL GĐ 8 — hình bộ vị gương mặt (chữ Việt = đúng chữ cũ trong MinhHoa).
+  "mh.bo_vi_cung": { nhom: H, nhan: "Hình bộ vị — cung của vùng ({cung})", mac_dinh: " — cung {cung}", en: " — {cung} palace" },
+  "mh.bo_vi_sang": { nhom: H, nhan: "Hình bộ vị — ghi chú vùng sáng", mac_dinh: " (vùng sáng trên gương mặt giản lược)", en: " (highlighted on a simplified face)" },
   "mh.qr_moi": { nhom: H, nhan: "Dòng mời quét dưới hình", mac_dinh: "Quét để mở bài này", en: "Scan to open this page" },
   "mh.qr_aria": { nhom: H, nhan: "Tên mã QR ({url})", mac_dinh: "Mã QR mở {url}", en: "QR code that opens {url}" },
   "mh.qh_1": { nhom: H, nhan: "Thập thần — vòng: đồng hành (ngắn)", mac_dinh: "Ta", en: "Self" },
@@ -106,3 +129,9 @@ export const CHU_KIEN_THUC = {
   "mh.dh_tot_nho": { nhom: H, nhan: "Dấu hiệu nhà — nhãn trên hình (tốt)", mac_dinh: "✓ dấu hiệu tốt", en: "✓ a good sign" },
   "mh.dh_veto_nho": { nhom: H, nhan: "Dấu hiệu nhà — nhãn trên hình (xử lý trước)", mac_dinh: "! nên xử lý trước", en: "! deal with this first" },
 } as const satisfies BangChu;
+
+/** EN-ALL — khoá chữ nút mời cuối trang kiến thức bản Anh theo trang công cụ của mảng (thiếu → "moi.nut_chung"). */
+export const NUT_MOI_EN: Readonly<Record<string, keyof typeof CHU_KIEN_THUC>> = {
+  "/bat-tu": "moi.nut_bat_tu", "/tu-vi": "moi.nut_tu_vi", "/phong-thuy": "moi.nut_phong_thuy", "/kinh-dich": "moi.nut_kinh_dich",
+  "/than-so": "moi.nut_than_so", "/hop-doi": "moi.nut_hop_doi", "/tarot": "moi.nut_tarot", "/nhan-tuong": "moi.nut_nhan_tuong",
+};

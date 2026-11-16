@@ -13,27 +13,33 @@ import { duongSaoHanNam, namAmHienTai } from "@/lib/tuoi-dan-gian";
 import { ND_SAO_HAN } from "../xem-tuoi-lam-nha/noi-dung";
 import { CHU_SAO_HAN } from "@/lib/chu/cong-cu";
 import { taoChu } from "@/lib/chu-trang";
+import { ngonNguMayChu } from "@/lib/ngon-ngu-may-chu";
+import { metaCongCuEn, themHreflangVi } from "@/lib/en/seo";
+import { chuNamTuoi, lienNN } from "@/lib/chu/nam-tuoi";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return apDungSeo(metaTrang({ tieuDe: "Xem sao hạn theo tuổi: La Hầu, Kế Đô, Thái Bạch", moTa: ND_SAO_HAN.moTa, duong: ND_SAO_HAN.duong }), await layNoiDungTrang(ND_SAO_HAN.duong));
+  // EN-ALL GĐ 8: /en/vietnamese-customs/yearly-star là rewrite của trang này — metadata bản Anh từ lib/so-trang-en.ts.
+  if ((await ngonNguMayChu()).ngonNgu === "en") return metaCongCuEn(ND_SAO_HAN.duong);
+  return themHreflangVi(apDungSeo(metaTrang({ tieuDe: "Xem sao hạn theo tuổi: La Hầu, Kế Đô, Thái Bạch", moTa: ND_SAO_HAN.moTa, duong: ND_SAO_HAN.duong }), await layNoiDungTrang(ND_SAO_HAN.duong)), ND_SAO_HAN.duong);
 }
 
 export default async function Page() {
   const [nam, nd, namSeo] = await Promise.all([namAmHienTai(), layNoiDungTrang(ND_SAO_HAN.duong), namTuoiSeo()]);
-  const c = taoChu(CHU_SAO_HAN, nd.chu);
+  const { ngonNgu } = await ngonNguMayChu(), { c: t, p: tp, en } = chuNamTuoi(ngonNgu);
+  const c = taoChu(CHU_SAO_HAN, en ? null : nd.chu, ngonNgu);
   return (
     <TrangCongCu duong={ND_SAO_HAN.duong}>
       <div className="mx-auto max-w-3xl">
-        <TieuDeTrang nho={CHU_SAO_HAN["dau.nhan_tren"]!.mac_dinh} lon="Xem sao hạn theo tuổi"
-          mo_ta="Năm nay bạn gặp sao nào theo tục xếp theo tuổi — đọc bằng lời đời thường và việc nhỏ nên làm. Không cúng sao, không vật phẩm." />
+        <TieuDeTrang nho={en ? c("dau.nhan_tren") : CHU_SAO_HAN["dau.nhan_tren"]!.mac_dinh} lon={t("sh.h1")}
+          mo_ta={t("sh.loi_dan")} />
         <CongCuTuoi kieu="sao_han" namMacDinh={nam} />
-        <TomTatNam kieu="sao_han" nam={namSeo} tieuDe={`Sao hạn năm ${namSeo}: tuổi nào gặp La Hầu, Kế Đô, Thái Bạch?`} nhanLink={`Bảng sao hạn năm ${namSeo} cho mọi tuổi, nam và nữ`} />
+        {!en && <TomTatNam kieu="sao_han" nam={namSeo} tieuDe={`Sao hạn năm ${namSeo}: tuổi nào gặp La Hầu, Kế Đô, Thái Bạch?`} nhanLink={`Bảng sao hạn năm ${namSeo} cho mọi tuổi, nam và nữ`} />}
         <section aria-labelledby="theo-nam" className="mt-8">
           <h2 id="theo-nam" className="text-xl">{c("theo_nam.tieu_de")}</h2>
           <ul className="mt-2 space-y-1 text-sm">
             {[nam, nam + 1].map((n) => (
               <li key={n}>{c("theo_nam.dong", { nam: String(n) })}{" "}
-                <Link href={duongSaoHanNam(n)} className="text-gold underline">bảng sao hạn năm {n} cho mọi tuổi, nam và nữ</Link></li>
+                <Link href={lienNN(en, duongSaoHanNam(n))!} className="text-gold underline">{tp("sh.theo_nam_link", { nam: n })}</Link></li>
             ))}
           </ul>
         </section>
