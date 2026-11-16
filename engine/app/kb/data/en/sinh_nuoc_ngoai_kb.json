@@ -1,0 +1,67 @@
+{
+"_trang_thai": "bien_tap",
+"_ghi_chu": "EN-ALL GĐ 8 (nhóm D) — bản phủ tiếng Anh cho cụm trang 'Sinh ở nước ngoài'. Mọi con số do engine tính; KB chỉ giữ câu và mẫu câu có {biến}. Ban biên tập viết, chờ người bản xứ duyệt.",
+"mau": {
+"tieu_de": "Born in {ten}: how to set up your Zi Wei and BaZi charts with the right time",
+"nhan_tren": "Vietnamese families with a child born in {ten}",
+"tom_tat_mo": "The time on a birth certificate from {ten} is local clock time. Your chart takes that exact time and then looks up the city's time zone and daylight saving time on your birth date — you do not have to convert anything yourself.",
+"mui_gio_mot": "{ten} uses one standard time zone ({utc}).",
+"mui_gio_nhieu": "{ten} spans {so} standard time zones ({ds}) — pick the right city to get the right time.",
+"gio_mua_he_co": "Daylight saving time applies: if you were born during it, clocks ran one hour ahead of standard time; the system takes that hour back when building your chart, so you still enter the time shown on your papers.",
+"gio_mua_he_khong": "No daylight saving time in {nam}: the time on the birth certificate is standard time, nothing to adjust.",
+"gio_mua_he_mot_phan": "Some places use daylight saving time and some do not ({ds_co} do; {ds_khong} do not) — choosing the right city is enough.",
+"mat_troi_canh_bao": "In {ds} clocks differ from mean solar time by about {phut} minutes, which can change the two-hour double-hour for someone born near a boundary. Charts are still built on clock time, as the Vietnamese books do; to see the other version, turn on “True solar time” in the School settings.",
+"mat_troi_on": "Clocks in these cities run close to solar time (less than half a double-hour off) — the double-hour rarely changes.",
+"nam_ban_cau": "{ten} is in the Southern Hemisphere: the Si – Wu – Wei months (May–August) are winter and the Hai – Zi – Chou months are summer. BaZi has an extra “Season at birthplace” switch that reads the climate-balancing layer by the real season — a modern theory the classics do not discuss, so the system lets you choose rather than changing it for you.",
+"lich_am_khong_lech": "In {nam}, the Vietnamese lunar calendar (Hanoi time) and the Chinese calendar (Beijing time) agree on every day.",
+"lich_am_lech": "In {nam}, the Vietnamese lunar calendar (Hanoi time) and the Chinese calendar (Beijing time) differ on {so} days: {ds}. People born in {ten} still have their chart built on local time, but a LUNAR date written in family records may follow either calendar — choose the right one in the profile form.",
+"lich_am_tet": "Lunar New Year {nam}: {tet_viet} on the Vietnamese calendar, {tet_trung} on the Chinese calendar.",
+"ket_noi_ket": "Enter your profile once: choose “Born abroad” → {ten} → your city. Every chart (Zi Wei, BaZi, The months ahead) uses that same profile."
+},
+"huong_dan": [
+"Enter the time written on your birth certificate or hospital discharge papers — that is local clock time at birth; do not convert it to Vietnam time.",
+"Choose “Born abroad”, then the country and city: the standard time zone and daylight saving time on your birth date are looked up automatically from that place's history, including years when the clock-change rules were different from today.",
+"BaZi changes month and year exactly at the solar-term boundary (at its real moment), so people born near the start of a Western calendar month need an accurate time zone — the wrong city can shift the month pillar.",
+"Lunar dates in family records may follow the Vietnamese or the Chinese calendar; if you only remember the lunar date, pick the right calendar in the form so the engine converts it to the correct Western date.",
+"Born 23:00–23:59 local time: Zi Wei and BaZi use different conventions for the Zi hour — the chart will flag it so you know."
+],
+"hoi_dap_mau": [
+{
+"hoi": "Born in {ten}: do I enter Vietnam time or local time?",
+"dap": "Local time from the birth certificate. The system looks up the city's time zone on your exact birth date; it does not convert to Vietnam time, because the chart is built on the sky where you were born."
+},
+{
+"hoi": "What if I was born during daylight saving time?",
+"dap": "{gio_mua_he}"
+},
+{
+"hoi": "Why choose the city and not just the country?",
+"dap": "{mui_gio} Each city has its own time zone and clock-change history; BaZi also changes month at the solar-term moment, so an hour off can change a pillar."
+},
+{
+"hoi": "Which calendar do the lunar dates in my family records use?",
+"dap": "{lich_am}"
+},
+{
+"hoi": "Should the chart be adjusted to solar time?",
+"dap": "{mat_troi}"
+}
+],
+"nuoc": {
+"us": "The United States has several time zones and changes clocks twice a year (since 2007 daylight saving starts earlier and ends later than before). Arizona and Hawaii do not change clocks.",
+"au": "Australia has several time zones, and only some states use daylight saving (Sydney, Melbourne, Adelaide, Hobart) while others do not (Brisbane, Perth, Darwin). Southern Hemisphere: daylight saving runs from October to April.",
+"ca": "Canada changes clocks on the same dates as the US; Saskatchewan keeps standard time all year.",
+"de": "Germany uses Central European Time and has had daylight saving since 1980 (not before). People born in Germany in the 1970s have no daylight saving time to account for.",
+"jp": "Japan uses one time zone for the whole country and has had no daylight saving since 1952 — the time on the birth certificate is standard time.",
+"kr": "South Korea uses one time zone; it had daylight saving in 1987–1988 only (the Seoul Olympics), so people born in those two years should check.",
+"tw": "Taiwan uses Beijing time (UTC+8), so lunar dates in family records usually follow the Chinese calendar; daylight saving existed only before 1980.",
+"fr": "France uses Central European Time although it sits near the prime meridian, so clocks run nearly an hour ahead of solar time — people born near a double-hour boundary may want to also view a true-solar-time chart.",
+"cz": "Czechia uses Central European Time, with daylight saving since 1979.",
+"gb": "The UK uses Greenwich Mean Time; it kept summer time all year in 1968–1971 (a trial) and has changed clocks twice a year since.",
+"pl": "Poland uses Central European Time, with daylight saving since 1977.",
+"ru": "Russia changed its rules several times: daylight saving until 2010, permanent summer time 2011–2014, then back to standard time from October 2014. The same clock time on paper can mean a different time zone depending on the birth year.",
+"th": "Thailand shares Vietnam's time zone (UTC+7) and has no daylight saving — the chart is almost the same as for someone born in Vietnam, only the longitude differs.",
+"la": "Laos shares Vietnam's time zone (UTC+7), with no daylight saving.",
+"kh": "Cambodia shares Vietnam's time zone (UTC+7), with no daylight saving."
+}
+}

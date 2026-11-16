@@ -200,6 +200,8 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     # EN-ALL GĐ 7 — Hôm nay / Ba lá / Bản đồ 5 mảng: quẻ đầu ngày (tên quẻ + hai quái), nhật chủ của lưu nhật Bát tự.
     "que_ngay.ten": "que_ten", "que_ngay.thuong": "quai", "que_ngay.ha": "quai", "que.ten": "que_ten",
     "nhip_bat_tu.nhat_chu": "can",
+    # EN-ALL GĐ 8 (nhóm D) — hướng xấu theo năm: bàn phi tinh lưu niên (cung = 8 quái + "Trung cung").
+    "phi_tinh.cung": "cung_hk",
 }
 
 
