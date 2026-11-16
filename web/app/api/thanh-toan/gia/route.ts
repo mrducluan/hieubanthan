@@ -1,6 +1,7 @@
 // POST /api/thanh-toan/gia {ma_don} — CỔNG GIẢ: giả lập "đã nhận tiền" cho đơn của chính người gọi, để thử trọn luồng
 // trên bản preview. Chỉ chạy khi THANH_TOAN_GIA=1 và KHÔNG phải production (lib/thanh-toan/cong.ts).
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
+import { guiCapiDon } from "@/lib/meta-capi";
 import { z } from "zod";
 import { choPhepCongGia, khachDichVu, khachNguoiMua } from "@/lib/thanh-toan/cong";
 
@@ -24,5 +25,6 @@ export async function POST(req: Request) {
     p_ma_don: don.ma_don, p_so_tien: don.so_tien, p_cong: "gia", p_ma_giao_dich: `gia-${don.ma_don}`,
   });
   if (error) return NextResponse.json({ error: "Chưa ghi được" }, { status: 502 });
+  if ((data as { ket_qua?: string } | null)?.ket_qua === "da_nap") after(() => guiCapiDon(dv, don.ma_don));   // META-CAPI
   return NextResponse.json(data);
 }

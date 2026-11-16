@@ -1,6 +1,7 @@
 // Đối soát Pay2S (phòng IPN lỡ): Pay2S không có API tra đơn → đọc lịch sử giao dịch ngân hàng, tìm khoản tiền VÀO
 // mang đúng mã chuyển khoản của đơn rồi cộng Sao bằng hàm SQL (idempotent theo mã đơn, tự so số tiền với đơn).
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { guiCapiDon } from "@/lib/meta-capi";
 import { cauHinhPay2s, lichSuGiaoDich, timGiaoDich, type GiaoDichNh } from "@/lib/thanh-toan/pay2s";
 
 type DonCho = { ma_don: number; tao_luc: string };
@@ -9,7 +10,9 @@ async function ghiNhan(dv: SupabaseClient, maDon: number, g: GiaoDichNh): Promis
   const { data } = await dv.rpc("nap_sao_tu_cong", {
     p_ma_don: maDon, p_so_tien: g.amount, p_cong: "pay2s", p_ma_giao_dich: `p2s-ls:${g.id}`.slice(0, 100),
   });
-  return (data as { ket_qua?: string } | null)?.ket_qua === "da_nap";
+  const da = (data as { ket_qua?: string } | null)?.ket_qua === "da_nap";
+  if (da) await guiCapiDon(dv, maDon);   // META-CAPI (không ném lỗi, tối đa 4 giây)
+  return da;
 }
 
 /** Một đơn (người mua đang chờ ở trang kết quả). true nếu vừa cộng Sao. Lỗi mạng / chưa thấy tiền → false. */

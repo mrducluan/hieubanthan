@@ -192,7 +192,17 @@ export interface BaoCaoPosthog {
   pheuThe: SoPheuThe | null;
   /** CTA-2: khối thẻ cuối trang — theo khối (thấy / bấm thẻ thật / bấm thẻ bù) + theo thẻ bù (đường dẫn). null = lỗi. */
   loiDi: BaoCaoLoiDi | null;
+  /** META-QC: phễu của người vào từ quảng cáo Meta (sự kiện mang qc=meta, lib/nguon-qc.ts) — số trình duyệt + theo mảng
+   *  (bắt đầu đọc). null = truy vấn lỗi. */
+  meta: { pheu: { su_kien: string; ten: string; nguoi: number }[]; theoMang: { mo_dun: string; nguoi: number }[] } | null;
 }
+
+/** META-QC: các bước phễu so với tiền quảng cáo Meta. */
+export const PHEU_META: [string, string][] = [
+  ["landing_viewed", "Vào trang"], ["reading_started", "Bắt đầu xem"], ["reading_completed", "Xem xong"],
+  ["profile_created", "Lưu hồ sơ"], ["paywall_viewed", "Thấy phần khoá"], ["checkout_started", "Bắt đầu nạp"],
+  ["payment_succeeded", "Nạp thành công"], ["unlock_succeeded", "Mở khoá bằng Sao"],
+];
 
 export type DongKhoiCuoi = { khoi: string; thay: number; bam_that: number; bam_lap: number };
 export type DongTheBu = { den: string; thay: number; bam: number; ti_le: number | null; du_mau: boolean };
@@ -318,6 +328,16 @@ async function baoCaoPosthogTho(): Promise<BaoCaoPosthog> {
       `SELECT toString(properties.den) AS den, countIf(event = 'end_cta_viewed'), countIf(event = 'end_cta_clicked') FROM events
        WHERE ${CT} AND event IN ('end_cta_viewed', 'end_cta_clicked') AND properties.lap = 1 GROUP BY den LIMIT 500`),
   ]).then(([k, t]) => tinhLoiDi(k, t)).catch(() => null);
+  const meta = await Promise.all([
+    hogql<[string, number]>(`SELECT event, count(DISTINCT distinct_id) FROM events WHERE ${CT} AND properties.qc = 'meta'
+       AND event IN (${PHEU_META.map(([e]) => `'${e}'`).join(", ")}) GROUP BY event`),
+    hogql<[string | null, number]>(`SELECT toString(properties.mo_dun), count(DISTINCT distinct_id) FROM events
+       WHERE ${CT} AND properties.qc = 'meta' AND event = 'reading_started' GROUP BY 1 ORDER BY 2 DESC LIMIT 20`),
+  ]).then(([p, m]) => {
+    const n = new Map(p.map(([e, x]) => [e, Number(x)]));
+    return { pheu: PHEU_META.map(([e, ten]) => ({ su_kien: e, ten, nguoi: n.get(e) ?? 0 })),
+      theoMang: m.map(([md, x]) => ({ mo_dun: md || "khac", nguoi: Number(x) })) };
+  }).catch(() => null);
   const pheuThe = await Promise.all([
     hogql<[unknown, unknown, unknown, number, unknown]>(
       `SELECT toString(properties.ma_moi) AS ma, toString(properties.kind) AS k, toString(properties.co_ma) AS cm, count(), toString(min(timestamp))
@@ -343,7 +363,7 @@ async function baoCaoPosthogTho(): Promise<BaoCaoPosthog> {
     moiBan: mb.map(([k, cm, n]) => ({ kind: chuoi(k), co_ma: chuoi(cm), nguoi: Number(n) })),
   })).catch(() => null);
   return {
-    yDinh, kiemChung, cta, pheuThe, loiDi,
+    yDinh, kiemChung, cta, pheuThe, loiDi, meta,
     pheu: PHEU.map(([e, ten]) => ({ su_kien: e, ten, luot: theo.get(e)?.luot ?? 0, nguoi: nguoi(e) })),
     quayLai: ql[0] ? { truoc: Number(ql[0][0]), tro_lai: Number(ql[0][1]) } : null,
     gate: {
