@@ -50,6 +50,36 @@
     "mat_toi": "Stress easily turns into irritability and a wish to carry everything alone.",
     "goi_y": "Treat rest as a scheduled goal, not a reward for finishing work.",
     "cau_tu_soi": "How many hours this week did you truly rest (no phone, no work)?"
+   },
+   "con_cai": {
+    "xu_huong": "As a parent, 1 tends to teach children to be independent early and to set clear expectations.",
+    "mat_toi": "Can impose a set path and leave little room for the child to try and fail in their own way.",
+    "goi_y": "Let your child choose one thing each week (an after-school activity, how to arrange their room) and keep your word not to step in.",
+    "cau_tu_soi": "When did your child last do something differently from what you wanted and it still turned out fine?"
+   },
+   "tre_em": {
+    "xu_huong": "A child with 1 tends to want to do things themselves, often says 'I'll do it myself', and gets frustrated when someone does it for them.",
+    "mat_toi": "Can be stubborn, a sore loser, and quick to get upset when not in charge.",
+    "goi_y": "Give limited choices ('blue shirt or red shirt?') instead of orders.",
+    "cau_tu_soi": "Is the child really stubborn, or do they just need to decide part of it themselves?"
+   },
+   "hoc_tap": {
+    "xu_huong": "1 tends to learn well when free to choose the direction and set their own goals.",
+    "mat_toi": "Can drop subjects they dislike and avoid asking questions for fear of showing what they don't know.",
+    "goi_y": "Break a hard subject into small goals you set yourself, and mark your own progress each week.",
+    "cau_tu_soi": "Do you avoid asking teachers or classmates because you don't understand, or because you don't want to be seen not understanding?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "In a group of friends, 1 tends to be the one who suggests plans and settles them.",
+    "mat_toi": "Can leave others feeling overshadowed and getting little honest feedback.",
+    "goi_y": "Next time you meet up, let someone else pick the place and time.",
+    "cau_tu_soi": "Do you have a friend who dares to say 'no' to you and is still close?"
+   },
+   "cuoc_song": {
+    "xu_huong": "1 tends to like arranging their own space and pace of life, and doesn't put up with sharing for long.",
+    "mat_toi": "Can move house or change big plans just to 'start over'.",
+    "goi_y": "Before a big change, write down what you are running from and what you are running towards.",
+    "cau_tu_soi": "What did your last 'fresh start' actually solve?"
    }
   },
   "2": {
@@ -88,6 +118,36 @@
     "mat_toi": "Gets tired from emotions more than from work.",
     "goi_y": "After heavy meetings, take 15 minutes alone before doing anything else.",
     "cau_tu_soi": "Is today's tiredness yours, or are you carrying it for someone else?"
+   },
+   "con_cai": {
+    "xu_huong": "As a parent, 2 tends to be gentle and sensitive to the child's feelings.",
+    "mat_toi": "Can find it hard to set limits, giving in for fear of upsetting the child.",
+    "goi_y": "Pick one family rule and keep it consistently, even through tears.",
+    "cau_tu_soi": "Do you give in because your child needs it, or because you can't bear to see them upset?"
+   },
+   "tre_em": {
+    "xu_huong": "A child with 2 tends to be sensitive, watches adults' faces and prefers playing with others to playing alone.",
+    "mat_toi": "Can feel hurt easily and find it hard to say what they want.",
+    "goi_y": "Ask with feeling choices ('do you feel sad or angry?') so the child learns to name emotions.",
+    "cau_tu_soi": "Is the child quiet because they are fine, or because they don't yet know how to say it?"
+   },
+   "hoc_tap": {
+    "xu_huong": "2 tends to learn well with a study partner and a patient guide.",
+    "mat_toi": "Can lose confidence when compared with others and fear answering wrongly.",
+    "goi_y": "Find a regular study partner and explain lessons to each other.",
+    "cau_tu_soi": "Do you really understand, or are you nodding so as not to trouble the person explaining?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "2 tends to be the friend who listens and is trusted with confidences.",
+    "mat_toi": "Can be taken advantage of and find it hard to leave one-sided friendships.",
+    "goi_y": "Notice the balance of giving and receiving in each relationship, and say so when it has been off for too long.",
+    "cau_tu_soi": "Who listens to you the way you listen to them?"
+   },
+   "cuoc_song": {
+    "xu_huong": "2 tends to need a warm, stable space close to the people they love.",
+    "mat_toi": "Can be reluctant to change surroundings even when the old place no longer fits.",
+    "goi_y": "Try small changes first (your work corner, your weekend routine) before thinking about big ones.",
+    "cau_tu_soi": "Are you staying because you like this place, or because you fear somewhere else?"
    }
   },
   "3": {
@@ -126,6 +186,36 @@
     "mat_toi": "Can hide sadness behind a cheerful face; stays up late when inspired.",
     "goi_y": "Have one person you can be honest with, without having to act cheerful.",
     "cau_tu_soi": "When was the last time you let someone see you sad?"
+   },
+   "con_cai": {
+    "xu_huong": "As a parent, 3 tends to be great at playing with children and encouraging creativity.",
+    "mat_toi": "Can lack routine and promise children a lot, then forget.",
+    "goi_y": "Only promise what you can put in the calendar.",
+    "cau_tu_soi": "Does your child remember a promise of yours that hasn't been kept?"
+   },
+   "tre_em": {
+    "xu_huong": "A child with 3 tends to be talkative, loves drawing, singing and storytelling, and enjoys being praised in front of others.",
+    "mat_toi": "Can lose focus and leave homework unfinished.",
+    "goi_y": "Break tasks into short parts and praise the effort more than the result.",
+    "cau_tu_soi": "Is the child slacking from laziness, or because the task is too long for their attention span?"
+   },
+   "hoc_tap": {
+    "xu_huong": "3 tends to learn fast through discussion, presenting and visuals.",
+    "mat_toi": "Can skim, and be better at talking than at detailed written work.",
+    "goi_y": "After each lesson, teach it back to someone else in 5 minutes.",
+    "cau_tu_soi": "Do you understand it deeply, or just well enough to talk about it?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "3 tends to have many friends and be the centre of the group.",
+    "mat_toi": "Can be wide but shallow; says things and forgets them.",
+    "goi_y": "Choose two or three people to invest in more deeply.",
+    "cau_tu_soi": "If something happened at midnight, who could you call?"
+   },
+   "cuoc_song": {
+    "xu_huong": "3 tends to like a colourful space with room for creative hobbies.",
+    "mat_toi": "Can live in clutter, with unfinished projects taking up space.",
+    "goi_y": "Each month, clear one corner and finish (or drop for good) one unfinished project.",
+    "cau_tu_soi": "Are the unfinished things in your home waiting for you, or waiting for you to let them go?"
    }
   },
   "4": {
@@ -164,6 +254,36 @@
     "mat_toi": "Can take on too much and push past their limits out of duty; tension builds up in body and mind.",
     "goi_y": "Schedule exercise as a non-negotiable item in your weekly plan.",
     "cau_tu_soi": "How many times did your body ask you to rest before you listened?"
+   },
+   "con_cai": {
+    "xu_huong": "As a parent, 4 tends to create good routines and a clear daily schedule.",
+    "mat_toi": "Can be strict, leaving little room for spontaneity and for the child's mistakes.",
+    "goi_y": "Keep one session a week with no schedule, and let your child lead the activity.",
+    "cau_tu_soi": "Does your child dare to tell you when they have done something wrong?"
+   },
+   "tre_em": {
+    "xu_huong": "A child with 4 tends to like stability, careful work, building and sorting things.",
+    "mat_toi": "Can get upset when plans change and adapt slowly to new surroundings.",
+    "goi_y": "Warn the child about changes in advance and explain why in simple words.",
+    "cau_tu_soi": "Is the child slow, or do they just need more time to feel secure?"
+   },
+   "hoc_tap": {
+    "xu_huong": "4 tends to learn thoroughly, following a plan and revising regularly.",
+    "mat_toi": "Can learn by rote within the template and get stuck on new types of problem.",
+    "goi_y": "Each week, solve one problem in a different way from the textbook.",
+    "cau_tu_soi": "Do you solve it because you understand it, or because you've seen this type before?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "4 tends to have few friends but lasting ones, and to be reliable and keep their word.",
+    "mat_toi": "Can come across as hard to approach or too serious.",
+    "goi_y": "Invite a friend to do something together with no particular purpose.",
+    "cau_tu_soi": "Your friends know you are reliable — but do they know how fun you can be?"
+   },
+   "cuoc_song": {
+    "xu_huong": "4 tends to like a tidy, stable home and to stay in one place for a long time.",
+    "mat_toi": "Can be reluctant to travel or try new things in everyday life.",
+    "goi_y": "Go somewhere you have never been once a year.",
+    "cau_tu_soi": "When did you last do something for the first time?"
    }
   },
   "5": {
@@ -202,6 +322,36 @@
     "mat_toi": "Can fall into irregular routines; seeks stimulation to escape boredom.",
     "goi_y": "Choose a sport with plenty of variety (climbing, dancing, swimming) so you can keep it up.",
     "cau_tu_soi": "Are you looking for joy, or for something so you do not have to sit still with yourself?"
+   },
+   "con_cai": {
+    "xu_huong": "As a parent, 5 tends to give children rich, open-minded experiences.",
+    "mat_toi": "Can be inconsistent — sometimes close, sometimes hands-off.",
+    "goi_y": "Keep a few fixed routines (bedtime, mealtimes) so your child has something steady to lean on.",
+    "cau_tu_soi": "What does your child know for sure will be the same every day?"
+   },
+   "tre_em": {
+    "xu_huong": "A child with 5 tends to be active, curious and exploring, and easily bored.",
+    "mat_toi": "Finds it hard to sit still and keeps switching interests.",
+    "goi_y": "Let the child move before study time, and change the way they learn often.",
+    "cau_tu_soi": "Is the child refusing to study, or just not yet learning through movement?"
+   },
+   "hoc_tap": {
+    "xu_huong": "5 tends to learn through experience and practice — by going and doing.",
+    "mat_toi": "Can drop out mid-course and learn many things only on the surface.",
+    "goi_y": "Tie your learning to a real project with a deadline.",
+    "cau_tu_soi": "Which skill have you learned deeply enough that someone would pay you for it?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "5 tends to know lots of people, strike up conversations easily and get on with many types.",
+    "mat_toi": "Can vanish and reappear, so friends find them hard to rely on.",
+    "goi_y": "Stay in regular touch with a few of your closest people wherever you are.",
+    "cau_tu_soi": "Who would notice if you disappeared for a month?"
+   },
+   "cuoc_song": {
+    "xu_huong": "5 tends to like travelling and moving, and can live in many places.",
+    "mat_toi": "Can lack roots and move away whenever they feel stuck.",
+    "goi_y": "Before moving, list what the new place solves that the old one doesn't.",
+    "cau_tu_soi": "The new place will be different — but what old things will you bring with you?"
    }
   },
   "6": {
@@ -240,6 +390,36 @@
     "mat_toi": "Can neglect themselves; stress comes from responsibility.",
     "goi_y": "Put one act of caring for yourself on the calendar, the way you would for someone else.",
     "cau_tu_soi": "Who takes care of you when you are tired?"
+   },
+   "con_cai": {
+    "xu_huong": "As a parent, 6 tends to be devoted and to care for children attentively.",
+    "mat_toi": "Can be overprotective and find it hard to let the child face small consequences.",
+    "goi_y": "Let your child face one small consequence (forgetting something, being late) without rescuing them.",
+    "cau_tu_soi": "What problem has your child solved on their own without you?"
+   },
+   "tre_em": {
+    "xu_huong": "A child with 6 tends to be affectionate, likes looking after younger children and animals, and wants to make adults happy.",
+    "mat_toi": "Can take the blame on themselves and worry when their parents are upset.",
+    "goi_y": "Tell the child that grown-up problems are not their responsibility.",
+    "cau_tu_soi": "Is the child good because they are happy, or because they fear upsetting the adults?"
+   },
+   "hoc_tap": {
+    "xu_huong": "6 tends to do well in subjects linked to people, the arts and practical ways of helping others.",
+    "mat_toi": "Can drop their own studies to look after others.",
+    "goi_y": "Keep your study time as a commitment to yourself, not something to give away.",
+    "cau_tu_soi": "When did you last put off your own work for someone else?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "6 tends to be the thoughtful friend who remembers birthdays and checks in.",
+    "mat_toi": "Can become the group's 'parent', worn out from looking after everyone.",
+    "goi_y": "Allow yourself to be the one looked after at one get-together.",
+    "cau_tu_soi": "Do you have a friend who checks in on you first?"
+   },
+   "cuoc_song": {
+    "xu_huong": "6 tends to take care of the home and love a beautiful, cosy space.",
+    "mat_toi": "Can be a perfectionist about the home and annoyed when others do things differently.",
+    "goi_y": "Give one corner of the home to someone close to arrange as they like.",
+    "cau_tu_soi": "Is your beautiful home for people to see, or for people to live in?"
    }
   },
   "7": {
@@ -278,6 +458,36 @@
     "mat_toi": "Can lose sleep from overthinking and withdraw when sad.",
     "goi_y": "Keep a regular hands-on activity so the mind can rest.",
     "cau_tu_soi": "When you are sad, who do you turn to, or do you turn only to your own thoughts?"
+   },
+   "con_cai": {
+    "xu_huong": "As a parent, 7 tends to encourage children to ask questions, read and think for themselves.",
+    "mat_toi": "Can show little affection and lean towards reasoning.",
+    "goi_y": "Hug your child and say 'I love you' for no reason.",
+    "cau_tu_soi": "Does your child feel your love, or mostly hear your lectures?"
+   },
+   "tre_em": {
+    "xu_huong": "A child with 7 tends to be quiet, curious, asks 'why' and likes playing alone.",
+    "mat_toi": "Can be seen as hard to get close to, with few friends.",
+    "goi_y": "Respect the child's alone time; introduce friends with the same interests instead of pushing big groups.",
+    "cau_tu_soi": "Is the child lonely, or simply enjoying the quiet?"
+   },
+   "hoc_tap": {
+    "xu_huong": "7 tends to learn deeply, study well alone and want to understand the essence.",
+    "mat_toi": "Can get lost in detail, keep studying without ever taking the test, and avoid group study.",
+    "goi_y": "Set outside checkpoints (exams, certificates, finished work) for your self-study.",
+    "cau_tu_soi": "Are you learning to know, or learning to use?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "7 tends to have few, carefully chosen friends and to enjoy deep conversation.",
+    "mat_toi": "Can come across as aloof and hard to reach.",
+    "goi_y": "Check in first with one friend each month.",
+    "cau_tu_soi": "Does anyone know what you are going through right now?"
+   },
+   "cuoc_song": {
+    "xu_huong": "7 tends to like quiet places, close to nature, with a corner of their own.",
+    "mat_toi": "Can withdraw and live apart from the community.",
+    "goi_y": "Keep one small, regular community activity.",
+    "cau_tu_soi": "Is the quiet nourishing you, or hiding you?"
    }
   },
   "8": {
@@ -316,6 +526,36 @@
     "mat_toi": "Can push through and ignore the body's signals until it gives out.",
     "goi_y": "Book regular check-ups and real time off, and put them in the calendar ahead of time.",
     "cau_tu_soi": "When was the last time you took leave without opening your email?"
+   },
+   "con_cai": {
+    "xu_huong": "As a parent, 8 tends to teach discipline, financial independence and goal-setting.",
+    "mat_toi": "Can set very high expectations for achievement and measure the child by grades.",
+    "goi_y": "Praise effort and the way your child works, not only the result.",
+    "cau_tu_soi": "Does your child think you love them for who they are, or for doing well?"
+   },
+   "tre_em": {
+    "xu_huong": "A child with 8 tends to like being in charge, likes winning and understands the value of things early.",
+    "mat_toi": "Can be very competitive, hate losing and boss friends around.",
+    "goi_y": "Let the child manage a small amount of money; play win-or-lose games to practise losing well.",
+    "cau_tu_soi": "Is the child just competitive, or learning from adults how to measure worth?"
+   },
+   "hoc_tap": {
+    "xu_huong": "8 tends to learn for clear goals and to study what is useful straight away.",
+    "mat_toi": "Can look down on subjects that 'don't pay'.",
+    "goi_y": "Learn one more thing purely out of curiosity.",
+    "cau_tu_soi": "Is there something you enjoy learning that brings you no benefit at all?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "8 tends to have a wide network and to be respected.",
+    "mat_toi": "Can turn friendships into work relationships, with few real friends.",
+    "goi_y": "Keep a few friendships that have nothing to do with business.",
+    "cau_tu_soi": "Do you have a friend who does nothing at all for your career?"
+   },
+   "cuoc_song": {
+    "xu_huong": "8 tends to like a spacious, high-quality home that shows status.",
+    "mat_toi": "Can live to impress, chasing other people's standards.",
+    "goi_y": "Choose one thing in your life just because you like it, not because it is 'fitting'.",
+    "cau_tu_soi": "If no one were watching, where and how would you want to live?"
    }
   },
   "9": {
@@ -354,6 +594,36 @@
     "mat_toi": "Can burn out from empathy, carrying sadness for others.",
     "goi_y": "Limit negative news; have a ritual to 'close the day'.",
     "cau_tu_soi": "Does today's sadness come from your own life, or from a screen?"
+   },
+   "con_cai": {
+    "xu_huong": "As a parent, 9 tends to teach kindness and tolerance and to widen the child's view of the world.",
+    "mat_toi": "Can expect the child to be 'good' according to their own ideals.",
+    "goi_y": "Let your child be angry, or a little selfish, as fits their age.",
+    "cau_tu_soi": "Do you want your child to be good, or to be like your ideal?"
+   },
+   "tre_em": {
+    "xu_huong": "A child with 9 tends to be emotional and caring, and often gives toys away.",
+    "mat_toi": "Can stay sad for a long time and be sensitive to unfairness.",
+    "goi_y": "When the child is upset about something unfair, help them do one concrete good deed.",
+    "cau_tu_soi": "Is the child sad for themselves, or sad on someone else's behalf?"
+   },
+   "hoc_tap": {
+    "xu_huong": "9 tends to learn broadly and enjoy culture, languages and the humanities.",
+    "mat_toi": "Can spread their learning thin without one deep specialism.",
+    "goi_y": "Choose one main field to go deep in and keep the rest for breadth.",
+    "cau_tu_soi": "If you had to pick one field for the next ten years, what would it be?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "9 tends to have friends from all walks of life and to be trusted easily.",
+    "mat_toi": "Can keep friendships that have run dry because ending them feels awkward.",
+    "goi_y": "Allow a relationship to fade naturally.",
+    "cau_tu_soi": "Which friendship are you keeping out of duty rather than enjoyment?"
+   },
+   "cuoc_song": {
+    "xu_huong": "9 tends to like travelling, experiencing other cultures and living close to a community.",
+    "mat_toi": "Can hold on to old things and old memories and find it hard to clear out.",
+    "goi_y": "Each season, give away a bag of things you don't use.",
+    "cau_tu_soi": "Which object are you keeping for its memories when its job is actually done?"
    }
   },
   "11": {
@@ -392,6 +662,36 @@
     "mat_toi": "Can lose sleep, worry a lot, and get overloaded by noise and stimulation.",
     "goi_y": "Breathe slowly, cut back on coffee, and have some quiet space every day.",
     "cau_tu_soi": "How many minutes of real quiet did you have this week?"
+   },
+   "con_cai": {
+    "xu_huong": "As a parent, 11 tends to be empathetic and understand children without many words.",
+    "mat_toi": "Can worry about the child too much and pass the stress on.",
+    "goi_y": "Look after your own calm before dealing with your child's problem.",
+    "cau_tu_soi": "Is your child anxious, or reflecting your own worry?"
+   },
+   "tre_em": {
+    "xu_huong": "A child with 11 tends to be very sensitive, imaginative and easily moved.",
+    "mat_toi": "Can be fearful and sleep badly when there is tension around them.",
+    "goi_y": "Keep calm, quiet routines; listen to the child's fears without brushing them aside.",
+    "cau_tu_soi": "Do the child's fears come from imagination, or from the atmosphere at home?"
+   },
+   "hoc_tap": {
+    "xu_huong": "11 tends to learn through feeling and do well in the humanities and the arts.",
+    "mat_toi": "Can lose focus when emotions are stirred up.",
+    "goi_y": "Write down what is weighing on you before you study.",
+    "cau_tu_soi": "What is filling your head when you try to study?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "11 tends to attract people looking for advice and to be seen as 'the one who understands'.",
+    "mat_toi": "Can be drained by people who complain a lot.",
+    "goi_y": "Limit how long you listen to others' troubles; suggest a professional when it is beyond you.",
+    "cau_tu_soi": "After seeing friends, do you feel fuller or emptier?"
+   },
+   "cuoc_song": {
+    "xu_huong": "11 tends to need a quiet space with soft light and little chaos.",
+    "mat_toi": "Can be worn out by noisy surroundings.",
+    "goi_y": "Put quiet high on the list when choosing where to live and work.",
+    "cau_tu_soi": "Does the space you live in calm you down or wind you up?"
    }
   },
   "22": {
@@ -430,6 +730,36 @@
     "mat_toi": "Can burn out from carrying responsibility that is too big.",
     "goi_y": "Plan your rest the way you plan a project.",
     "cau_tu_soi": "Does your plan have an item called 'rest'?"
+   },
+   "con_cai": {
+    "xu_huong": "As a parent, 22 tends to build a solid foundation for the child: education, discipline, the future.",
+    "mat_toi": "Can set very high expectations and map out the child's path in advance.",
+    "goi_y": "Ask your child what they want before making plans for them.",
+    "cau_tu_soi": "Is the plan for your child theirs, or yours?"
+   },
+   "tre_em": {
+    "xu_huong": "A child with 22 tends to mature early, like building things and be organised.",
+    "mat_toi": "Can put pressure on themselves and fear failure.",
+    "goi_y": "Praise the child for trying and getting it wrong, not only for succeeding.",
+    "cau_tu_soi": "Does the child dare to break something without being afraid?"
+   },
+   "hoc_tap": {
+    "xu_huong": "22 tends to learn systematically, aiming at large-scale application.",
+    "mat_toi": "Can take on too many learning goals at once.",
+    "goi_y": "Pick one main learning goal each term.",
+    "cau_tu_soi": "Which goal in the next five years are you studying for?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "22 tends to be trusted and often connects people with resources.",
+    "mat_toi": "Can see people through their usefulness for work.",
+    "goi_y": "Spend time with friends with no plan to work together.",
+    "cau_tu_soi": "Do you meet friends to have fun, or to talk business?"
+   },
+   "cuoc_song": {
+    "xu_huong": "22 tends to like building and renovating, and making long-term plans for the home.",
+    "mat_toi": "Can be so busy building a future life that they forget to live the present one.",
+    "goi_y": "Enjoy one small thing each day without thinking about plans.",
+    "cau_tu_soi": "Did you live today, or only get ready to live?"
    }
   },
   "33": {
@@ -468,6 +798,36 @@
     "mat_toi": "Can burn out from caring for others; stress builds quietly.",
     "goi_y": "Ask for help before you are overloaded.",
     "cau_tu_soi": "When was the last time you asked someone for help?"
+   },
+   "con_cai": {
+    "xu_huong": "As a parent, 33 tends to love unconditionally and be patient.",
+    "mat_toi": "Can sacrifice too much and then expect to be repaid, making it hard for the child to grow up.",
+    "goi_y": "Let your child see that you have needs of your own too.",
+    "cau_tu_soi": "Does your child know that parents need looking after too?"
+   },
+   "tre_em": {
+    "xu_huong": "A child with 33 tends to be affectionate, comforting others and sensitive to sadness.",
+    "mat_toi": "Can carry the adults' emotions.",
+    "goi_y": "Let the child be a child: carefree, playing, with no one to look after.",
+    "cau_tu_soi": "Is the child comforting the adults more than the adults comfort the child?"
+   },
+   "hoc_tap": {
+    "xu_huong": "33 tends to do well when they see knowledge can help people.",
+    "mat_toi": "Can drop their studies to look after others.",
+    "goi_y": "See your own learning as a way to help more people later.",
+    "cau_tu_soi": "Today, did you study for yourself, or look after others instead?"
+   },
+   "ban_be_xa_hoi": {
+    "xu_huong": "33 tends to be the forgiving friend everyone wants to turn to.",
+    "mat_toi": "Can be taken advantage of and find it hard to say no.",
+    "goi_y": "Practise saying 'I can't help this time'.",
+    "cau_tu_soi": "Is there a relationship that exists only because you always give?"
+   },
+   "cuoc_song": {
+    "xu_huong": "33 tends to want the home to be a warm, open place that welcomes everyone.",
+    "mat_toi": "Can let the home become other people's place and lose a corner of their own.",
+    "goi_y": "Keep one space that is yours alone.",
+    "cau_tu_soi": "Where in your home is the place just for you to rest?"
    }
   }
  },

@@ -17,6 +17,7 @@ import unicodedata
 
 from app.calc import thanso, thanso_mo_rong as mr
 from app.kb import store, thanso_v2 as kb
+from app.kb.loi import L
 from app.luangiai import an_toan as _at
 
 # --------------------------------------------------------------------------- #
@@ -688,8 +689,8 @@ def _them_nghiep(muc: list, cs: dict, t: str, so_nhac: dict):
             if n:
                 muc.append({"loai": "no_nghiep", "vi_tri": None, "so": s, **n, **kb.meta_phu()})
     if not no and not so_hoi:
-        muc.append({"loai": "khong_no_nghiep", "noi_dung": "Theo cách tính ở đây, ngày sinh và tên của "
-                    "bạn không có nợ nghiệp (13, 14, 16, 19).", **kb.meta_phu()})
+        muc.append({"loai": "khong_no_nghiep", "noi_dung": L("tshoi.khong_no_nghiep", "Theo cách tính ở đây, ngày sinh và tên của "
+                    "bạn không có nợ nghiệp (13, 14, 16, 19)."), **kb.meta_phu()})
     for s in cs.get("bai_hoc_nghiep", [])[:3]:
         n = kb.nghia_phu("bai_hoc_nghiep", s)
         if n:
@@ -725,15 +726,15 @@ def _mau_suc_khoe_ts(nhom: str, t: str, nguoi: dict | None, ngay_xem: _dt.date, 
         return skb.mau("cap_cuu")
     if nhom == "nguoi_than":           # review SK-1: không lấy năm cá nhân của người hỏi để nói về sức khoẻ người thân
         return skb.mau("nguoi_than")      # không đọc gì → không kèm lời "nhắc phòng ngừa theo sách xưa"
-    phan = ["Thần số học không gắn con số với bộ phận cơ thể nào, nên không trả lời được cơ thể bạn có vấn đề hay không — "
-            "chỉ bác sĩ thăm khám mới trả lời được."]
+    phan = [L("tshoi.sk.khong_bo_phan", "Thần số học không gắn con số với bộ phận cơ thể nào, nên không trả lời được cơ thể bạn có "
+              "vấn đề hay không — chỉ bác sĩ thăm khám mới trả lời được.")]
     he = skb.he_cau_hoi(t)
     if he:
-        phan.append(f"Nếu bạn đang lo về {he['he']}, hãy đi {he['kham']} để bác sĩ kiểm tra sớm.")
+        phan.append(L("tshoi.sk.he", "Nếu bạn đang lo về {he}, hãy đi {kham} để bác sĩ kiểm tra sớm.", he=he["he"], kham=he["kham"]))
     # Câu hỏi CÓ / KHÔNG bệnh ("năm sau tôi có mắc bệnh không"): không nêu năm — "năm X nên chú ý sức khoẻ" đặt cạnh câu
     # đó đọc thành "năm X sẽ bệnh" (review SK-1). Câu nhắc bộ phận ("hay đau dạ dày") vẫn nhận nhịp năm.
     if not _at.hoi_benh(cau_goc or t) and (ds := _sk_nam_ts(nguoi, ngay_xem.year)):
-        phan.append("Điều con số nói được là nhịp sống. " + ds)
+        phan.append(L("tshoi.sk.nhip", "Điều con số nói được là nhịp sống. ") + ds)
     phan.append(skn.mien_tru())
     return " ".join(phan)
 
@@ -753,7 +754,8 @@ def _sk_nam_ts(nguoi: dict | None, nam0: int) -> str:
     ds = skn.thanso_nam(ncn, nam0)[:2]
     if not ds:
         return ""
-    return " ".join(f"Năm {x['nam']} là năm cá nhân {x['so']} ({skb.nam_ca_nhan(x['so'])['ly_do']})." for x in ds) \
+    return " ".join(L("tshoi.sk.nam", "Năm {nam} là năm cá nhân {so} ({ly_do}).", nam=x["nam"], so=x["so"],
+                      ly_do=skb.nam_ca_nhan(x["so"])["ly_do"]) for x in ds) \
         + " " + skn.cau_cac_nam(ds)
 
 
@@ -847,7 +849,8 @@ def goi_bang_chung(pl: dict, nguoi: dict, nguoi_kia: dict | None, ngay_xem: _dt.
             goi["can_them"] = ["nguoi_kia"]
             goi["mau"] = kb.mau("can_nguoi_kia")
             return goi
-        ten_vt = {"duong_doi": "số chủ đạo", "linh_hon": "số linh hồn", "nhan_cach": "số nhân cách"}
+        ten_vt = {"duong_doi": L("tshoi.vt_cap.duong_doi", "số chủ đạo"), "linh_hon": L("tshoi.vt_cap.linh_hon", "số linh hồn"),
+                  "nhan_cach": L("tshoi.vt_cap.nhan_cach", "số nhân cách")}
         for vt, cap in mr.hop_doi(a, b).items():
             if vt not in ten_vt:
                 continue

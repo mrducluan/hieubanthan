@@ -5,6 +5,7 @@ from __future__ import annotations
 
 from app.calc import thanso as tinh
 from app.kb import thanso_v2 as kb
+from app.kb.loi import L
 from app.luangiai import thanso_chaldean as lch
 
 
@@ -30,14 +31,15 @@ def ba_goc_nhin(ho_ten: list[str], ngay: int, thang: int, nam: int, linh_vuc: st
     if isinstance(y_pt, list):
         y_pt = "; ".join(y_pt)
     c = next((s for s in lch.luan_chaldea(ho_ten, ngay, thang, nam, quy_uoc)["cac_so"] if s["ma"] == "ten_goi"), None)
-    goc_nhin = [{"phai": "pitago", "ten_phai": ten["pitago"], "nhan": f"Đường đời {dd}", "y": _cau_dau(y_pt)}]
+    goc_nhin = [{"phai": "pitago", "ten_phai": ten["pitago"], "nhan": L("tspn.dd", "Đường đời {so}", so=dd), "y": _cau_dau(y_pt)}]
     # Tên không có chữ cái → số theo tên = 0, KB không có nghĩa → phái đó không góp câu (không hiện "None").
     if c and c["goc"] and c.get("nghia_goc"):
         goc_nhin.append({"phai": "chaldea", "ten_phai": ten["chaldea"],
-                         "nhan": f"Số tên gọi {c['kep']}/{c['goc']}" if c["kep"] else f"Số tên gọi {c['goc']}",
+                         "nhan": L("tspn.ten_goi_kep", "Số tên gọi {kep}/{goc}", kep=c["kep"], goc=c["goc"]) if c["kep"]
+                         else L("tspn.ten_goi", "Số tên gọi {goc}", goc=c["goc"]),
                          "y": _cau_dau(c["nghia_goc"].get("xu_huong"))})
     return {
         "mat": mat,
         "goc_nhin": [g for g in goc_nhin if g["y"]],
-        "luu_y": "Hai phái tính từ cùng họ tên và ngày sinh bằng hai bảng chữ khác nhau — chọn câu nghe đúng với bạn hơn.",
+        "luu_y": L("tspn.luu_y", "Hai phái tính từ cùng họ tên và ngày sinh bằng hai bảng chữ khác nhau — chọn câu nghe đúng với bạn hơn."),
     }

@@ -13,9 +13,11 @@ from __future__ import annotations
 import datetime as dt
 from pathlib import Path
 
+from app import ngon_ngu
 from app.calc import thanso_mo_rong as mr
 from app.luangiai import hoi
 from app.kb import nap
+from app.kb.loi import L
 
 _KB = Path(__file__).parents[1] / "kb" / "data" / "thanso_noi_dau.json"
 
@@ -23,6 +25,17 @@ _KB = Path(__file__).parents[1] / "kb" / "data" / "thanso_noi_dau.json"
 @nap.nho
 def _kb() -> dict:
     return nap.doc(_KB.name)
+
+
+def _cau_hoi_khop() -> list[tuple[dict, dict]]:
+    """(mục bản Việt để SO KHỚP chữ, mục theo ngôn ngữ để TRẢ RA) cùng vị trí — so khớp câu hỏi luôn trên bản Việt (câu
+    chuẩn, biến thể) để quyết định giống nhau ở mọi ngôn ngữ; bản dịch còn so thêm câu chuẩn đã dịch."""
+    hien = _kb()["cau_hoi"]
+    if ngon_ngu.la_viet():
+        return [(q, q) for q in hien]
+    with ngon_ngu.dung(ngon_ngu.MAC_DINH):
+        goc = _kb()["cau_hoi"]
+    return [({**g, "bien_the": [*g["bien_the"], h["cau"]]}, h) for g, h in zip(goc, hien)]
 
 
 def _dinh_cao_hien(cs: dict) -> int:
@@ -82,7 +95,7 @@ def ban_do(ho_ten: list[str], ngay: int, thang: int, nam: int, ngay_xem: dt.date
     return {"ngay_xem": ngay_xem.isoformat(), "tru": tru,
             "nguon": k["source"]["ten"], "source_id": k["source_id"], "school_id": k["school_id"],
             "trang_thai": k["trang_thai"],
-            "luu_y": "Câu hỏi để tự soi qua chính con số của bạn — góc nhìn tham khảo, không phải lời tiên đoán."}
+            "luu_y": L("tsnd.luu_y", "Câu hỏi để tự soi qua chính con số của bạn — góc nhìn tham khảo, không phải lời tiên đoán.")}
 
 
 # Từ rỗng (đã bỏ dấu) — không mang chủ đề, bỏ khi so khớp.
@@ -104,10 +117,10 @@ def lien_quan(cau_hoi: str, k: int = 3) -> list[dict]:
     tu = _tu(cau_hoi)
     chuan = hoi.chuan_hoa(cau_hoi)
     diem = []
-    for i, q in enumerate(_kb()["cau_hoi"]):
-        if hoi.chuan_hoa(q["cau"]) == chuan:
+    for i, (q_so, q) in enumerate(_cau_hoi_khop()):
+        if hoi.chuan_hoa(q_so["cau"]) == chuan or hoi.chuan_hoa(q["cau"]) == chuan:
             continue
-        mau = _tu(q["cau"]).union(*(_tu(b) for b in q["bien_the"]))
+        mau = _tu(q_so["cau"]).union(*(_tu(b) for b in q_so["bien_the"]))
         khop = sum(2 if " " in w else 1 for w in tu & mau)
         # Phải chung ít nhất một từ: câu vô nghĩa không được gợi chỉ nhờ lĩnh vực mặc định.
         d = khop + (3 if pl["linh_vuc"] in q["linh_vuc"] else 0) if khop else 0
@@ -120,7 +133,7 @@ def lien_quan(cau_hoi: str, k: int = 3) -> list[dict]:
 def cau_chuan(cau_hoi: str) -> dict | None:
     """Câu hỏi trùng nguyên văn một câu chuẩn (bấm từ bảng / "hỏi tiếp") → mục KB của câu đó."""
     c = hoi.chuan_hoa(cau_hoi)
-    return next((q for q in _kb()["cau_hoi"] if hoi.chuan_hoa(q["cau"]) == c), None)
+    return next((q for q_so, q in _cau_hoi_khop() if c in (hoi.chuan_hoa(q_so["cau"]), hoi.chuan_hoa(q["cau"]))), None)
 
 
 def _muc_chi_so(ma: str, cs: dict, nguoi: dict, lv: str, ngay_xem: dt.date) -> list[dict]:

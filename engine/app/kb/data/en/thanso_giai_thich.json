@@ -1,0 +1,130 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 — bản tiếng Anh của thanso_giai_thich.json (giải thích kỹ thuật). Chỉ phủ tieu_de + noi_dung; tu_khoa (khoá so khớp) giữ của bản gốc. Ban biên tập viết, chờ người bản xứ duyệt.",
+ "source": {
+  "ten": "Reference compilation (editorial draft, 2026) following the Balliett–Jordan tradition and common numerology books",
+  "luu_y": "Draft shown by decision of the project owner (2026-09-30); a status column allows gradual review. A cultural reference, not a forecast."
+ },
+ "muc": {
+  "cach_tinh_duong_doi": {
+   "tieu_de": "How the Life Path number is calculated",
+   "noi_dung": "Add up every digit of your day, month and year of birth on the Gregorian calendar, then keep reducing until one digit is left. The exceptions are 11, 22 and 33, the master numbers, which are kept as they are. Example 24/10/1988: 2+4+1+0+1+9+8+8 = 33 → keep 33."
+  },
+  "chu_dao_la_duong_doi": {
+   "tieu_de": "Ruling number and Life Path",
+   "noi_dung": "Two names for the same number. Popular Vietnamese books call it the 'ruling number'; books translated from English call it the Life Path."
+  },
+  "am_duong_lich": {
+   "tieu_de": "Lunar or Gregorian calendar?",
+   "noi_dung": "Pythagorean numerology uses the Gregorian (solar) calendar date. A lunar date gives a different number that does not belong to this system. If your documents show a lunar date, convert it to the Gregorian date first."
+  },
+  "gio_ty": {
+   "tieu_de": "Born at 11 pm — which day counts?",
+   "noi_dung": "For numerology, this site treats a birth between 23:00 and 23:59 as belonging to that same day (not the next day). Zi Wei Dou Shu follows a different convention (from 23:00 it is already the next day), so people born at this hour may see the two systems a day apart."
+  },
+  "khac_trang": {
+   "tieu_de": "Why do other sites give a different number?",
+   "noi_dung": "Each site picks different conventions: whether to keep 33, whether Y is a vowel or a consonant, how special letters are handled, and whether to add everything at once or reduce day, month and year separately. For some names, changing the convention can change the number. This site uses one fixed convention and notes when a number is sensitive to how the name is spelled."
+  },
+  "so_cai": {
+   "tieu_de": "What are master numbers (11, 22, 33)?",
+   "noi_dung": "They are numbers that are not reduced any further. Tradition treats them as 'high-intensity' versions of 2, 4 and 6. Many sites keep only 11 and 22 and reduce 33 to 6; this site keeps 33 as well. A master number does not make you 'chosen' — about 9–10% of people have a Life Path of 11."
+  },
+  "ba_chi_so_ten": {
+   "tieu_de": "How do Expression, Soul Urge and Personality differ?",
+   "noi_dung": "All three come from your full name. Expression: add every letter. Soul Urge: only the vowels — what you long for inside. Personality: only the consonants — the impression you make on others."
+  },
+  "nam_ca_nhan": {
+   "tieu_de": "How is the Personal Year calculated?",
+   "noi_dung": "Reduce your birth day + birth month + the year in question to a single number from 1 to 9. The cycle repeats every 9 years. This site counts from 1 January; some schools change the year on your birthday, so the two methods differ in the early part of the year."
+  },
+  "thang_ngay_ca_nhan": {
+   "tieu_de": "Personal Month and Personal Day",
+   "noi_dung": "Personal Month = Personal Year + the current month, reduced to 1–9. Personal Day = Personal Month + the current day, reduced to 1–9."
+  },
+  "dinh_cao_thu_thach": {
+   "tieu_de": "Pinnacles and Challenges",
+   "noi_dung": "Pinnacles split life into 4 stages by age, each with a theme number; the first pinnacle ends at age 36 minus your Life Path number. Challenges are hard lessons that keep coming back, calculated from the differences between the day, month and year of birth. Some sites call this the 'numerology pyramid'."
+  },
+  "bieu_do": {
+   "tieu_de": "The birth chart",
+   "noi_dung": "A 3×3 grid holding the digits of your birth date (zeros left out): top row 3-6-9, middle 2-5-8, bottom 1-4-7. A filled square shows an emphasised strength; an empty square is something to learn."
+  },
+  "mui_ten": {
+   "tieu_de": "Arrows in the chart",
+   "noi_dung": "Three squares in a line that are all filled form an 'arrow' (for example 1-5-9 is the Arrow of Determination); three squares in a line that are all empty form an 'empty arrow' (1-5-9 empty is the Arrow of Procrastination). There are 8 lines: 3 rows, 3 columns, 2 diagonals."
+  },
+  "chi_so_phu": {
+   "tieu_de": "Attitude, Maturity and Birthday numbers",
+   "noi_dung": "Attitude number = day + month of birth: the first impression you make. Maturity number = Life Path + Expression: the direction life leans towards after about 35–40. Birthday number = the day of the month reduced: a secondary talent."
+  },
+  "chu_y": {
+   "tieu_de": "Is Y a vowel or a consonant?",
+   "noi_dung": "This site uses a fixed rule: Y is a vowel when it stands alone, not next to another vowel in the same syllable (e.g. 'Ly', 'Vy'); next to another vowel it is a consonant (e.g. 'Nguyen', 'Huy'). It only affects the Soul Urge and Personality numbers."
+  },
+  "dau_tieng_viet": {
+   "tieu_de": "Accents, special letters and your birth-certificate name",
+   "noi_dung": "Accent and diacritic marks are removed, so every letter counts as its plain Latin letter (the Vietnamese crossed D counts as D). Use your full name as on your birth certificate; an everyday name or nickname can give a different number — the site notes when that happens."
+  },
+  "no_nghiep": {
+   "tieu_de": "How is karmic debt calculated?",
+   "noi_dung": "If 13, 14, 16 or 19 appears while reducing your birth date, Life Path or name numbers, it is called 'karmic debt'. This is the tradition's way of naming a recurring lesson, not a punishment or retribution."
+  },
+  "so_xui": {
+   "tieu_de": "Are there unlucky or bad numbers?",
+   "noi_dung": "Pythagorean numerology has no unlucky or bad numbers: every number from 1 to 9 (and 11, 22, 33) has a strong side and a shadow side. The fear of 13 comes from Western culture, and the fear of 4 from its sound being close to the word for 'death' in Chinese — neither belongs to this system. In numerology, 13 is called 'karmic debt 13/4' when it appears while reducing the Life Path or a name number: it points to a lesson about discipline and persistence, not bad luck. A licence plate, house number or phone number with 13 says nothing about your luck."
+  },
+  "bai_hoc_nghiep": {
+   "tieu_de": "How are karmic lessons calculated?",
+   "noi_dung": "They are the digits from 1 to 9 that do not appear among the letter values of your full name. Each missing number points to a skill worth building."
+  },
+  "so_0_29_2": {
+   "tieu_de": "The number 0 and people born on 29 February",
+   "noi_dung": "0 is not placed in the birth chart (there is no square for 0) but still counts in the sums. People born on 29 February are calculated normally with day 29 of month 2; the Personal Year also uses 29 February."
+  },
+  "khong_doi": {
+   "tieu_de": "Does the Life Path number change over time?",
+   "noi_dung": "No. The Life Path is fixed by your birth date. What changes over time are your Personal Year, Month and Day and your pinnacle stage."
+  },
+  "do_tin": {
+   "tieu_de": "Is numerology accurate or scientific?",
+   "noi_dung": "Numerology is a cultural system of symbols, not a science: no research has shown that numbers can predict personality or events. The system in use was built by American authors (Balliett, Jordan and others) in the early 20th century, and the link to Pythagoras is largely symbolic. It works best as a prompt for self-reflection, not as facts about you."
+  },
+  "barnum": {
+   "tieu_de": "Why does everyone who reads it feel it fits?",
+   "noi_dung": "That is the Barnum effect: a description that is broad enough lets everyone see themselves in it. That is why every number here comes with a shadow side and a self-check question — if you cannot answer 'what shows I am NOT this number', the number has not said anything about you yet."
+  },
+  "ty_le": {
+   "tieu_de": "How many people share my number?",
+   "noi_dung": "Each common Life Path number covers roughly 9–11% of people (hundreds of millions); 2 and 22 are rarer because master numbers are kept. The Personal Year sequence is exactly the same for everyone with the same birth day and month (about 1 in 366 people)."
+  },
+  "kiem_chung": {
+   "tieu_de": "How can I test it for myself?",
+   "noi_dung": "Write down first what the numbers 'say' about a specific past year, and only then compare it with your own record of that year. Do the same with the numbers of a different birth date as a control: if the control fits as well as your real numbers, the numbers carry no specific information about you."
+  },
+  "khac_tu_vi": {
+   "tieu_de": "How is numerology different from Zi Wei Dou Shu?",
+   "noi_dung": "Zi Wei Dou Shu builds a chart from the lunar date and hour of birth with hundreds of stars and has a centuries-old tradition in East Asia. Numerology uses the Gregorian date and your name, has only about 12 number categories, and took shape in the USA in the early 20th century."
+  },
+  "moi_sach_khac": {
+   "tieu_de": "Why does every book say something different?",
+   "noi_dung": "Because numerology has no standard original text. Each author describes the numbers in their own way. The content here is a reference compilation with its sources noted."
+  },
+  "cung_ngay_khac_nguoi": {
+   "tieu_de": "Why are people with the same birth date so different?",
+   "noi_dung": "Because a number is a very rough lens: the same birth date means the same Life Path, but family, culture, choices and experience shape a person far more than any number."
+  },
+  "tuyen_dung": {
+   "tieu_de": "Can numerology be used for hiring?",
+   "noi_dung": "It should not be. There is no evidence that numbers predict ability, and rejecting candidates because of their birth date is discrimination. Use a clear job description, a practical test and a structured interview."
+  },
+  "nguon_goc": {
+   "tieu_de": "Where does numerology come from?",
+   "noi_dung": "The idea that numbers carry meaning is often linked to the Pythagorean school of ancient Greece, but numerology in its popular form today (adding the birth date to get a Life Path, turning the letters of a name into numbers) took shape in the USA in the early 20th century through authors such as L. Dow Balliett and Juno Jordan. The Chaldean school (Cheiro) is a separate branch that puts weight on the name you go by. It is a cultural tradition for self-reflection, not a science."
+  },
+  "chi_so_quan_trong": {
+   "tieu_de": "Which number matters most?",
+   "noi_dung": "Most books put the Life Path first: it speaks of your road and your main lesson. The Expression number (from your full name) speaks of how you show yourself and what you tend to do well; the Soul Urge speaks of what you long for inside; the Personality number is the impression others see. No number 'beats' another — read them together: where the numbers agree is your clearest trait, and where they differ is where you tend to feel torn."
+  }
+ }
+}

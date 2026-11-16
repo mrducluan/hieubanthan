@@ -1,0 +1,149 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 — bản tiếng Anh của thanso_noi_dau.json (\"Where are you stuck?\"). Danh sách cau_hoi phủ theo VỊ TRÍ (cùng thứ tự 25 câu); bien_the / linh_vuc / chi_so giữ của bản gốc. Ban biên tập viết, chờ người bản xứ duyệt.",
+ "source": {
+  "ten": "Reference compilation (editorial draft, 2026) following the Balliett–Jordan tradition and common numerology books",
+  "luu_y": "Draft shown by decision of the project owner (2026-09-30); a status column allows gradual review. Questions for self-reflection, not forecasts."
+ },
+ "tru": {
+  "su_nghiep_tien_bac": {
+   "ten": "Career & money",
+   "mo_ta": "Choosing a career, changing jobs, running a business, holding on to money, losing motivation."
+  },
+  "tinh_cam_gia_dinh": {
+   "ten": "Love & family",
+   "mo_ta": "What you need in love, why patterns repeat, things with your parents, whether you and your partner fit."
+  },
+  "ban_than_tam_ly": {
+   "ten": "Self & emotions",
+   "mo_ta": "Strengths, self-doubt, procrastination, being misunderstood, mood swings."
+  },
+  "thoi_diem_chu_ky": {
+   "ten": "Timing & rhythm",
+   "mo_ta": "This year, this month, today, the stage of life you are in — a rhythm for self-reflection, not a forecast."
+  },
+  "bai_hoc_y_nghia": {
+   "ten": "Lessons & meaning",
+   "mo_ta": "Recurring lessons, life purpose, karmic debt, missing numbers, your name."
+  }
+ },
+ "chi_so": {
+  "duong_doi": "Life Path",
+  "su_menh": "Expression",
+  "linh_hon": "Soul Urge",
+  "nhan_cach": "Personality",
+  "so_ngay_sinh": "Birthday",
+  "so_thai_do": "Attitude",
+  "nam_ca_nhan": "Personal Year",
+  "thang_ca_nhan": "Personal Month",
+  "ngay_ca_nhan": "Personal Day",
+  "dinh_cao": "Current Pinnacle",
+  "thu_thach_chinh": "Main Challenge",
+  "no_nghiep": "Karmic debt",
+  "bai_hoc_nghiep": "Karmic lessons (numbers missing from your name)",
+  "so_vang_bieu_do": "Numbers missing from your birth date",
+  "thang_mo_dau": "Upcoming opening months"
+ },
+ "cau_hoi": [
+  {
+   "noi_dau": "However long I work at it, I still feel I'm in the wrong line of work",
+   "cau": "What kind of work and work environment suit me?"
+  },
+  {
+   "noi_dau": "Torn about whether to quit or change direction",
+   "cau": "Should I change jobs at this stage?"
+  },
+  {
+   "noi_dau": "I want to start my own business but worry it isn't for me",
+   "cau": "Am I suited to running my own business, or to being employed?"
+  },
+  {
+   "noi_dau": "I can earn money but I can't hold on to it",
+   "cau": "What are the strengths and weak spots in how I handle money?"
+  },
+  {
+   "noi_dau": "Burnt out at work, no motivation left",
+   "cau": "Why do I keep losing motivation at work?"
+  },
+  {
+   "noi_dau": "Whoever I'm with, something always feels missing",
+   "cau": "What do I really need in a relationship?"
+  },
+  {
+   "noi_dau": "My relationships keep ending the same way",
+   "cau": "What in me keeps making my relationships follow the same pattern?"
+  },
+  {
+   "noi_dau": "I still haven't met the right person",
+   "cau": "What do I need to understand about myself to meet the right partner?"
+  },
+  {
+   "noi_dau": "I keep clashing with my parents and we never understand each other",
+   "cau": "Why do I keep clashing with my parents, and how can we grow closer?"
+  },
+  {
+   "noi_dau": "Not sure my partner and I really fit",
+   "cau": "Are my partner and I a good match?"
+  },
+  {
+   "noi_dau": "I don't know what I'm good at or where my strengths lie",
+   "cau": "What are my core strengths?"
+  },
+  {
+   "noi_dau": "I often feel inadequate and compare myself with others",
+   "cau": "Why do I feel inadequate and keep comparing myself with others?"
+  },
+  {
+   "noi_dau": "I know what I need to do but keep putting it off",
+   "cau": "Why do I procrastinate, and how do I get started?"
+  },
+  {
+   "noi_dau": "People often misunderstand who I am",
+   "cau": "Why do people often misunderstand me?"
+  },
+  {
+   "noi_dau": "My moods swing and it's hard to settle",
+   "cau": "How should I understand my emotions so I can feel calmer?"
+  },
+  {
+   "noi_dau": "Everything feels tangled this year and I don't know where to start",
+   "cau": "What should I focus on this year?"
+  },
+  {
+   "noi_dau": "Should I push ahead or slow down this month?",
+   "cau": "What should I prioritise this month?"
+  },
+  {
+   "noi_dau": "I don't understand what stage of life I'm in",
+   "cau": "What stage of life am I in, and what is its lesson?"
+  },
+  {
+   "noi_dau": "I want to start something new but don't know when",
+   "cau": "Which coming month is a good time for me to start something new?"
+  },
+  {
+   "noi_dau": "Every morning I feel sluggish and the days drift by",
+   "cau": "What can I do today to make the day feel more complete?"
+  },
+  {
+   "noi_dau": "I keep running into the same kind of difficulty",
+   "cau": "What is the biggest lesson of my life?"
+  },
+  {
+   "noi_dau": "Living without knowing what I'm living for",
+   "cau": "What is my life purpose?"
+  },
+  {
+   "noi_dau": "I heard my numbers include karmic debt and it worries me",
+   "cau": "What does the karmic debt in my numbers mean?"
+  },
+  {
+   "noi_dau": "I always feel something is missing",
+   "cau": "What do the missing numbers in my birth chart say?"
+  },
+  {
+   "noi_dau": "I'm thinking about changing my name or using a nickname",
+   "cau": "How does my name affect my numbers?"
+  }
+ ]
+}
