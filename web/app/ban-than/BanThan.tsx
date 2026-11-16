@@ -24,6 +24,7 @@ import { NhipCaNhan } from "@/components/than-so/NhipCaNhan";
 import { BanDoTomTat } from "@/components/than-so/BanDoTomTat";
 import { useBaiDoc } from "@/lib/bai-doc";
 import { tenGoi, useHoSo } from "@/lib/hoso";
+import { useGiaDinh } from "@/lib/gia-dinh";
 import { useKyUc } from "@/lib/ky-uc";
 import { useQuyUocDD } from "@/lib/quy-uoc-dd";
 import { ghi } from "@/lib/do-luong";
@@ -49,6 +50,7 @@ function useDoLanGhe(sanSang: boolean) {
 
 export function BanThan() {
   const hoSo = useHoSo();
+  const giaDinh = useGiaDinh();
   const router = useRouter();
   const [suaMo, setSuaMo] = useState(false);
   const [matSau, setMatSau] = useState(false);   // thẻ hai mặt: mặt sau = thẻ "5 mảnh ghép"
@@ -116,14 +118,20 @@ export function BanThan() {
                 <span className="flex items-center gap-2 font-medium text-fg"><Pencil className="size-5 shrink-0 text-gold" aria-hidden /> Sửa hồ sơ</span>
                 <span className="mt-1 text-sm text-fg-muted">Tên, ngày giờ sinh, nơi sinh</span>
               </button>
-              {/* GD-1: hồ sơ gia đình (năm của cả nhà) — hàng riêng để lưới 2 cột không lẻ ô. */}
-              <Link href="/gia-dinh" data-testid="loi-gia-dinh"
-                className="glass col-span-2 flex items-center justify-between gap-3 rounded-2xl p-4 transition-colors hover:border-gold/50">
+              {/* GD-MENU: hồ sơ gia đình "Nhà Tôi" — hàng riêng, viền vàng, hiện số người đã thêm (đọc kho trên máy). */}
+              <Link href="/gia-dinh" data-testid="loi-gia-dinh" onClick={() => ghi("cross_cta_clicked", { tu: "ban_than", den: "gia_dinh", ca_nhan: 1 })}
+                className="group col-span-2 flex items-center justify-between gap-3 rounded-2xl border border-gold/50 bg-gold/10 p-4 transition-colors hover:border-gold">
                 <span>
-                  <span className="flex items-center gap-2 font-medium text-fg"><Users className="size-5 shrink-0 text-gold" aria-hidden /> Nhà mình</span>
-                  <span className="mt-1 block text-sm text-fg-muted">Thêm người nhà: năm nay cả nhà cần để ý gì, tuổi ai hợp ai</span>
+                  <span className="flex flex-wrap items-center gap-2 font-medium text-fg"><Users className="size-5 shrink-0 text-gold" aria-hidden /> Nhà Tôi
+                    <span className="rounded-full border border-gold/40 px-2 py-0.5 text-xs font-normal text-fg-muted" data-testid="loi-gia-dinh-so">
+                      {giaDinh?.length ? `Đã có ${giaDinh.length} người` : "Thêm người nhà"}
+                    </span>
+                  </span>
+                  <span className="mt-1 block text-sm text-fg-muted">
+                    {giaDinh?.length ? "Năm nay cả nhà cần để ý gì, tuổi ai hợp ai, năm năm tới của nhà" : "Chỉ cần năm sinh: năm nay cả nhà cần để ý gì, tuổi ai hợp ai"}
+                  </span>
                 </span>
-                <ArrowRight className="size-5 shrink-0 text-gold" aria-hidden />
+                <ArrowRight className="size-5 shrink-0 text-gold transition-transform group-hover:translate-x-1" aria-hidden />
               </Link>
             </div>
             {/* Trục 2 UX: một dòng huy hiệu gần đầu trang (mục đầy đủ ở cuối trang). KV-THANG: hạng hội viên (riêng tư) cạnh đó. */}

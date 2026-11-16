@@ -215,7 +215,7 @@ export function BangNhaMinh() {
 
           {kq.lich_nha && (
             <section aria-labelledby="lich-nha" data-testid="lich-nha">
-              <h2 id="lich-nha" className="flex items-center gap-2 text-2xl"><CalendarRange className="size-5 text-gold" aria-hidden />Năm năm tới của nhà mình</h2>
+              <h2 id="lich-nha" className="flex items-center gap-2 text-2xl"><CalendarRange className="size-5 text-gold" aria-hidden />Năm năm tới của nhà bạn</h2>
               <p className="mt-2 text-sm leading-relaxed text-fg">{kq.lich_nha.goi_y}</p>
               <ol className="mt-3 grid gap-2 sm:grid-cols-5">
                 {kq.lich_nha.nam.map((r) => (
@@ -404,7 +404,7 @@ function LaSoCuaBan({ d, ten }: { d: LaSoKq; ten: Record<string, string> }) {
   );
   return (
     <section aria-labelledby="la-so-nha" data-testid="la-so-cua-ban">
-      <h2 id="la-so-nha" className="flex items-center gap-2 text-2xl"><ScrollText className="size-5 text-gold" aria-hidden />Lá số của bạn nói gì về nhà mình</h2>
+      <h2 id="la-so-nha" className="flex items-center gap-2 text-2xl"><ScrollText className="size-5 text-gold" aria-hidden />Lá số của bạn nói gì về nhà bạn</h2>
       <p className="mt-1 text-sm text-fg-muted">{d.dan}</p>
       <div className="mt-4 grid gap-3 lg:grid-cols-2">
         {cot("Theo Tử vi", "/tu-vi", d.tuvi.mang)}
@@ -451,7 +451,7 @@ function LuuTaiKhoan({ ds }: { ds: NguoiNha[] }) {
       </label>
       <div className="mt-3 flex flex-wrap gap-2">
         <Button size="sm" disabled={!dongY || dang || ds.length === 0} onClick={() => lam(async () => { await luuGiaDinhTaiKhoan(nguoi.id, ds); ghi("chart_interacted", { kind: "gia_dinh_luu_tk", muc: String(ds.length) }); return "Đã lưu nhà mình vào tài khoản."; })}>
-          <CloudUpload aria-hidden /> Lưu nhà mình vào tài khoản
+          <CloudUpload aria-hidden /> Lưu Nhà Tôi vào tài khoản
         </Button>
         <Button size="sm" variant="ghost" disabled={dang} onClick={() => lam(async () => {
           const tk = await giaDinhTaiKhoan(nguoi.id);

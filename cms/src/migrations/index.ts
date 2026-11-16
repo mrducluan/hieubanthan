@@ -27,6 +27,7 @@ import * as migration_20261111_090000_kw6t_bai_cu from './20261111_090000_kw6t_b
 import * as migration_20261111_120000_kw6t_lan_2 from './20261111_120000_kw6t_lan_2';
 import * as migration_20261111_150000_kw6t_tuan_1_2 from './20261111_150000_kw6t_tuan_1_2';
 import * as migration_20261111_180000_kw6t_video from './20261111_180000_kw6t_video';
+import * as migration_20261116_150000_gd_menu_nha_toi from './20261116_150000_gd_menu_nha_toi';
 
 export const migrations = [
   {
@@ -173,5 +174,10 @@ export const migrations = [
     up: migration_20261111_180000_kw6t_video.up,
     down: migration_20261111_180000_kw6t_video.down,
     name: '20261111_180000_kw6t_video',
+  },
+  {
+    up: migration_20261116_150000_gd_menu_nha_toi.up,
+    down: migration_20261116_150000_gd_menu_nha_toi.down,
+    name: '20261116_150000_gd_menu_nha_toi',
   },
 ];

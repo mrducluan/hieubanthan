@@ -16,6 +16,7 @@ export const TEN_MENU_EN: Readonly<Record<string, { ten: string; mo_ta?: string 
   "/than-so": { ten: "Numerology", mo_ta: "Your four core numbers, number map, personal year" },
   "/hom-nay": { ten: "Your day", mo_ta: "Personal day, lunar date and one question to reflect on" },
   "/xem-ngay-tot": { ten: "Auspicious dates", mo_ta: "Lucky hours, what suits the day, find a good date" },
+  "/gia-dinh": { ten: "My family", mo_ta: "What each family member should watch this year, whose signs get along" },
   "cha:/hop-doi": { ten: "Compatibility" },
   "/hop-doi": { ten: "Numerology compatibility", mo_ta: "Two Life Path numbers, no score" },
   "/tu-vi#hop-tham": { ten: "Compare two charts", mo_ta: "Where two charts meet and how to meet halfway" },

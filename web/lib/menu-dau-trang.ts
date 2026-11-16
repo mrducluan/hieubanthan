@@ -9,6 +9,8 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/than-so", ten: "Thần số học", mo_ta: "Bốn số cốt lõi, Bản đồ con số, năm cá nhân" },
     { href: "/hom-nay", ten: "Hôm nay của bạn", mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
     { href: "/xem-ngay-tot", ten: "Xem ngày tốt", mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
+    // GD-MENU (chủ dự án duyệt 2026-11-16): hồ sơ gia đình "Nhà Tôi" thuộc cụm Bản thân (không cần tài khoản, tab đầu ở điện thoại).
+    { href: "/gia-dinh", ten: "Nhà Tôi", mo_ta: "Năm nay cả nhà cần để ý gì, tuổi ai hợp ai" },
   ] },
   { href: "/hop-doi", ten: "Hợp đôi", bieu_tuong: "trai_tim", di_dong: true, con: [
     { href: "/hop-doi", ten: "Hợp đôi thần số", mo_ta: "Hai con số chủ đạo, không chấm điểm" },
