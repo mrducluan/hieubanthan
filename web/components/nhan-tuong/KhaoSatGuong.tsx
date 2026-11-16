@@ -7,10 +7,12 @@ import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 import { BanDoMat } from "./BanDoMat";
+import { useChuNhanTuong } from "./chu-nhan-tuong";
 import { ChamDiemAnh } from "./ChamDiemAnh";
 import { demTraLoi, luuTraLoi, TOI_THIEU_CAU, xoaTraLoi, type KhaoSat, type TraLoi } from "@/lib/nhan-tuong";
 
 export function KhaoSatGuong({ ks, traLoi, onXong, dangTai }: { ks: KhaoSat; traLoi: TraLoi; onXong: () => void; dangTai?: boolean }) {
+  const { t, en } = useChuNhanTuong();
   const [buoc, setBuoc] = useState(1);
   const [tl, setTl] = useState<TraLoi>(traLoi);
   const [cauSang, setCauSang] = useState<string | null>(null);
@@ -37,10 +39,10 @@ export function KhaoSatGuong({ ks, traLoi, onXong, dangTai }: { ks: KhaoSat; tra
   return (
     <div className="grid gap-6 lg:grid-cols-[18rem_1fr] lg:gap-8" data-testid="khao-sat-guong">
       <aside className="lg:sticky lg:top-28 lg:self-start">
-        <BanDoMat sang={vungSang ? [vungSang.bo_vi ? ks.bo_vi[vungSang.bo_vi]?.vung ?? "" : ""] : []} nhan={nhanVung} chuThich={false}
-          ghiChu={vungSang ? <span>Đang hỏi về <b className="text-fg">{ks.bo_vi[vungSang.bo_vi]?.ten}</b></span> : undefined} />
-        <p className="mt-2 text-center text-xs text-fg-faint">Vùng sáng là vùng đang hỏi. Gương mặt vẽ giản lược, không phải mặt của ai.</p>
-        <ol className="mt-4 hidden gap-1 lg:grid" aria-label="Các bước">
+        <BanDoMat en={en} sang={vungSang ? [vungSang.bo_vi ? ks.bo_vi[vungSang.bo_vi]?.vung ?? "" : ""] : []} nhan={nhanVung} chuThich={false}
+          ghiChu={vungSang ? <span>{t("ks.dang_hoi")} <b className="text-fg">{ks.bo_vi[vungSang.bo_vi]?.ten}</b></span> : undefined} />
+        <p className="mt-2 text-center text-xs text-fg-faint">{t("ks.vung_sang")}</p>
+        <ol className="mt-4 hidden gap-1 lg:grid" aria-label={t("ks.cac_buoc")}>
           {ks.buoc.map((b) => (
             <li key={b.so}>
               <button type="button" onClick={() => setBuoc(b.so)} aria-current={b.so === buoc ? "step" : undefined}
@@ -57,12 +59,12 @@ export function KhaoSatGuong({ ks, traLoi, onXong, dangTai }: { ks: KhaoSat; tra
       <div>
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
           <div>
-            <p className="eyebrow">Bước {buoc}/{soBuoc}</p>
+            <p className="eyebrow">{t("ks.buoc", { so: String(buoc), tong: String(soBuoc) })}</p>
             <h3 className="mt-1 text-2xl">{buocHT.ten}</h3>
             <p className="mt-1 text-sm text-fg-muted"><Eye className="mr-1 inline size-4 text-gold" aria-hidden />{buocHT.goi_y}</p>
           </div>
           <div className="text-right text-xs text-fg-faint">
-            <span data-testid="so-cau-da-tra-loi">{daTraLoi}</span>/{ks.cau_hoi.length} câu
+            <span data-testid="so-cau-da-tra-loi">{daTraLoi}</span>/{ks.cau_hoi.length} {t("ks.cau")}
             <div className="mt-1 h-1.5 w-32 overflow-hidden rounded-full bg-surface"><div className="h-full rounded-full bg-gold transition-all" style={{ width: `${(daTraLoi / ks.cau_hoi.length) * 100}%` }} /></div>
           </div>
         </div>
@@ -89,20 +91,20 @@ export function KhaoSatGuong({ ks, traLoi, onXong, dangTai }: { ks: KhaoSat; tra
           ))}
         </ol>
         <div className="mt-6 flex flex-wrap items-center gap-3">
-          <Button variant="secondary" disabled={buoc <= 1} onClick={() => setBuoc((b) => Math.max(1, b - 1))}><ArrowLeft aria-hidden /> Bước trước</Button>
+          <Button variant="secondary" disabled={buoc <= 1} onClick={() => setBuoc((b) => Math.max(1, b - 1))}><ArrowLeft aria-hidden /> {t("ks.buoc_truoc")}</Button>
           {buoc < soBuoc
-            ? <Button onClick={() => setBuoc((b) => Math.min(soBuoc, b + 1))}>Bước tiếp <ArrowRight aria-hidden /></Button>
-            : <Button onClick={xong} disabled={dangTai || daTraLoi === 0} data-testid="nut-xem-bai-doc">{dangTai ? "Đang đọc…" : "Xem bài đọc"}</Button>}
+            ? <Button onClick={() => setBuoc((b) => Math.min(soBuoc, b + 1))}>{t("ks.buoc_tiep")} <ArrowRight aria-hidden /></Button>
+            : <Button onClick={xong} disabled={dangTai || daTraLoi === 0} data-testid="nut-xem-bai-doc">{dangTai ? t("ks.dang_doc") : t("ks.xem")}</Button>}
           {buoc < soBuoc && daTraLoi >= TOI_THIEU_CAU && (
-            <Button variant="ghost" onClick={xong} disabled={dangTai} data-testid="nut-xem-som">Xem bài đọc ngay ({daTraLoi} câu)</Button>
+            <Button variant="ghost" onClick={xong} disabled={dangTai} data-testid="nut-xem-som">{t("ks.xem_som", { so: String(daTraLoi) })}</Button>
           )}
           {daTraLoi > 0 && (
             <button type="button" className="ml-auto inline-flex items-center gap-1 text-xs text-fg-faint hover:text-fg" onClick={() => { xoaTraLoi(); setTl({}); setBuoc(1); }}>
-              <Eraser className="size-3.5" aria-hidden /> Xoá câu trả lời trên máy
+              <Eraser className="size-3.5" aria-hidden /> {t("ks.xoa")}
             </button>
           )}
         </div>
-        {daTraLoi > 0 && daTraLoi < TOI_THIEU_CAU && <p className="mt-2 text-xs text-fg-faint">Trả lời ít nhất {TOI_THIEU_CAU} câu để bài đọc có nội dung.</p>}
+        {daTraLoi > 0 && daTraLoi < TOI_THIEU_CAU && <p className="mt-2 text-xs text-fg-faint">{t("ks.toi_thieu", { so: String(TOI_THIEU_CAU) })}</p>}
       </div>
     </div>
   );

@@ -13,6 +13,9 @@ const MAU: Record<MucVung, string> = {
   trung_tinh: "fill-moon/20 stroke-moon/70",
 };
 const NHAN_MUC: Record<MucVung, string> = { thuan: "thuận", can_bang: "cân bằng", can_chu_dong: "nên chú ý", trung_tinh: "trung tính" };
+// EN-ALL GĐ 8: bản Anh (prop `en` — component dùng được ở máy chủ nên không đọc ngữ cảnh). Cùng chữ lib/chu/nhan-tuong.ts.
+const NHAN_MUC_EN: Record<MucVung, string> = { thuan: "favourable", can_bang: "balanced", can_chu_dong: "needs care", trung_tinh: "neutral" };
+const CHU_EN = { aria: "Face-reading map — a simplified face, nobody's face", toan_mat: "The face as a whole", chu_thich: "Colour key" };
 // Chấm màu chú thích — lớp viết đủ (Tailwind chỉ sinh lớp xuất hiện nguyên văn trong mã).
 const CHAM: Record<MucVung, string> = { thuan: "bg-jade", can_bang: "bg-gold", can_chu_dong: "bg-cinnabar", trung_tinh: "bg-moon" };
 
@@ -50,7 +53,7 @@ function ve(h: Hinh, phai: boolean, props: Record<string, unknown>) {
   return <path d={h.d} transform={g} {...props} />;
 }
 
-export function BanDoMat({ muc = {}, sang = [], chon = null, onChon, nhan = {}, tinh = false, className, chuThich = true, ghiChu }: {
+export function BanDoMat({ muc = {}, sang = [], chon = null, onChon, nhan = {}, tinh = false, className, chuThich = true, ghiChu, en = false }: {
   /** Mức từng vùng (engine `da_tinh.ban_do`). */ muc?: Record<string, MucVung | null | undefined>;
   /** Vùng đang được nhấn mạnh (câu đang hỏi, vùng lưu niên năm nay…). */ sang?: string[];
   /** Vùng đang chọn (viền đậm). */ chon?: string | null;
@@ -59,12 +62,15 @@ export function BanDoMat({ muc = {}, sang = [], chon = null, onChon, nhan = {}, 
   /** Vẽ tĩnh (máy chủ, không bấm, không hiệu ứng). */ tinh?: boolean;
   className?: string; chuThich?: boolean;
   /** Dòng chú thích riêng dưới hình (vd "Năm nay nhìn vào Sơn Căn"). */ ghiChu?: ReactNode;
+  /** EN-ALL GĐ 8: chữ cố định tiếng Anh. */ en?: boolean;
 }) {
+  const NM = en ? NHAN_MUC_EN : NHAN_MUC;
+  const tenTong = en ? CHU_EN.toan_mat : "Khuôn mặt tổng thể";
   const coMuc = Object.values(muc).some(Boolean);
   const vungSang = new Set(sang.filter(laVung));
   return (
     <figure className={cn("relative", className)} data-testid="ban-do-mat">
-      <svg viewBox="0 0 300 380" role={onChon && !tinh ? "group" : "img"} aria-label="Bản đồ gương mặt theo tướng pháp — gương mặt giản lược, không phải mặt của ai"
+      <svg viewBox="0 0 300 380" role={onChon && !tinh ? "group" : "img"} aria-label={en ? CHU_EN.aria : "Bản đồ gương mặt theo tướng pháp — gương mặt giản lược, không phải mặt của ai"}
         className="mx-auto h-auto w-full max-w-[20rem] overflow-visible">
         <defs>
           <radialGradient id="bdm-quang" cx="50%" cy="45%" r="55%">
@@ -75,9 +81,9 @@ export function BanDoMat({ muc = {}, sang = [], chon = null, onChon, nhan = {}, 
         <circle cx={150} cy={190} r={175} fill="url(#bdm-quang)" />
         {/* Khung mặt + đường nét: mờ, dưới các vùng. Hai tai, chân tóc, mày, mắt, mũi, miệng — chỉ gợi hình. */}
         <g data-vung="toan_mat" data-muc={muc.toan_mat ?? undefined} data-sang={vungSang.has("toan_mat") ? "1" : undefined}
-          {...(!tinh && onChon ? { role: "button", tabIndex: 0, "aria-label": nhan.toan_mat ?? "Khuôn mặt tổng thể", onClick: () => onChon("toan_mat"),
+          {...(!tinh && onChon ? { role: "button", tabIndex: 0, "aria-label": nhan.toan_mat ?? tenTong, onClick: () => onChon("toan_mat"),
             onKeyDown: (e: React.KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onChon("toan_mat"); } } } : {})}>
-          <title>{`${nhan.toan_mat ?? "Khuôn mặt tổng thể"}${muc.toan_mat ? ` — ${NHAN_MUC[muc.toan_mat]}` : ""}`}</title>
+          <title>{`${nhan.toan_mat ?? tenTong}${muc.toan_mat ? ` — ${NM[muc.toan_mat]}` : ""}`}</title>
           <path d="M150,22 C96,22 56,72 54,150 C52,232 94,330 150,354 C206,330 248,232 246,150 C244,72 204,22 150,22 Z"
             className={cn("fill-surface/60 transition-colors duration-300", muc.toan_mat ? MAU[muc.toan_mat].split(" ")[1] : "stroke-gold/70",
               (vungSang.has("toan_mat") || chon === "toan_mat") && "stroke-gold stroke-[3]", !tinh && onChon && "cursor-pointer focus:outline-none")}
@@ -103,12 +109,12 @@ export function BanDoMat({ muc = {}, sang = [], chon = null, onChon, nhan = {}, 
           const ten = nhan[v] ?? v;
           const props = { className: lop, strokeWidth: dangSang || dangChon ? 2.5 : 1.2, vectorEffect: "non-scaling-stroke" as const };
           const giao = !tinh && onChon ? {
-            role: "button", tabIndex: 0, "aria-label": `${ten}${m ? ` — ${NHAN_MUC[m]}` : ""}`, "aria-pressed": dangChon,
+            role: "button", tabIndex: 0, "aria-label": `${ten}${m ? ` — ${NM[m]}` : ""}`, "aria-pressed": dangChon,
             onClick: () => onChon(v), onKeyDown: (e: React.KeyboardEvent) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onChon(v); } },
           } : {};
           return (
             <g key={v} data-vung={v} data-muc={m ?? undefined} data-sang={dangSang ? "1" : undefined} {...giao}>
-              <title>{`${ten}${m ? ` — ${NHAN_MUC[m]}` : ""}`}</title>
+              <title>{`${ten}${m ? ` — ${NM[m]}` : ""}`}</title>
               {ve(HINH[v].hinh, false, props)}
               {HINH[v].doi && ve(HINH[v].hinh, true, props)}
               {dangSang && !tinh && (
@@ -123,9 +129,9 @@ export function BanDoMat({ muc = {}, sang = [], chon = null, onChon, nhan = {}, 
         <figcaption className="mt-2 text-center text-xs text-fg-muted">
           {ghiChu}
           {coMuc && (
-            <span className="mt-1 flex flex-wrap justify-center gap-x-3 gap-y-1" aria-label="Chú thích màu">
+            <span className="mt-1 flex flex-wrap justify-center gap-x-3 gap-y-1" aria-label={en ? CHU_EN.chu_thich : "Chú thích màu"}>
               {(["thuan", "can_bang", "can_chu_dong", "trung_tinh"] as MucVung[]).map((k) => (
-                <span key={k} className="inline-flex items-center gap-1"><i aria-hidden className={cn("inline-block size-2.5 rounded-full", CHAM[k])} />{NHAN_MUC[k]}</span>
+                <span key={k} className="inline-flex items-center gap-1"><i aria-hidden className={cn("inline-block size-2.5 rounded-full", CHAM[k])} />{NM[k]}</span>
               ))}
             </span>
           )}

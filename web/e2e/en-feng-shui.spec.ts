@@ -230,11 +230,11 @@ test.describe("/en/feng-shui/home-signs", () => {
     expect(sm).toMatch(/<loc>[^<]*\/en\/feng-shui<\/loc>/);
     expect(sm).toMatch(new RegExp(`<loc>[^<]*${CUM_A}</loc>`));
     expect(sm).toMatch(new RegExp(`<loc>[^<]*${CON_A}</loc>`));
-    expect(sm).not.toMatch(/\/en\/feng-shui\/(best-directions|annual-afflictions)/);
+    expect(sm).not.toMatch(/\/en\/feng-shui\/best-directions/);   // annual-afflictions mở ở GĐ 8 (e2e/en-nam-tuoi.spec.ts)
   });
 
   test("404 tiếng Anh: trang con không có, cụm chưa mở bản Anh", async ({ page }) => {
-    for (const u of [`${CUM_A}/khong-co-dau-hieu-nay`, "/en/feng-shui/best-directions", "/en/feng-shui/annual-afflictions"]) {
+    for (const u of [`${CUM_A}/khong-co-dau-hieu-nay`, "/en/feng-shui/best-directions"]) {
       const r = await page.goto(u);
       expect(r!.status(), u).toBe(404);
       await expect(page.locator("html")).toHaveAttribute("lang", /^en/);

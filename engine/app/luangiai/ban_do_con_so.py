@@ -150,7 +150,7 @@ def _tong_quan(so: dict, ngay: int, thang: int, nam: int, ngay_xem: dt.date, quy
     tc = _then_chot(_thang_toi(ngay, thang, ngay_xem))
     so_then_chot = len({(x["thang"], x["nam"]) for v in tc.values() for x in v})
     hien, _, _ = _giai_doan(ngay, thang, nam, ngay_xem.year, quy_uoc)
-    doan.append(L("tsbd.tq.nhip", "Trong 12 tháng tới có {n} tháng đáng chú ý dành riêng cho bạn, và giai đoạn đời hiện tại "
+    doan.append(L("tsbd.tq.nhip_1" if so_then_chot == 1 else "tsbd.tq.nhip", "Trong 12 tháng tới có {n} tháng đáng chú ý dành riêng cho bạn, và giai đoạn đời hiện tại "
                   "({dinh}/4) ", n=so_then_chot, dinh=hien["dinh"])
                 + (L("tsbd.tq.toi_nam", "kéo dài tới năm {nam}.", nam=hien["den_nam"]) if hien.get("den_nam")
                    else L("tsbd.tq.cuoi", "là giai đoạn cuối, kéo dài suốt phần đời sau."))

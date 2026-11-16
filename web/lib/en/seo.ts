@@ -82,3 +82,32 @@ export function ldThucTheEn(mang: MangAnh | null | undefined) {
   const t = THUC_THE[mang];
   return { "@type": "Thing", name: t.alternateName, sameAs: t.sameAs.filter((u) => !u.includes("vi.wikipedia.org")) };
 }
+
+/** EN-ALL GĐ 8 — WebPage JSON-LD bản Anh (cùng khuôn `ldTrangWeb` của bản Việt: thuộc WebSite + tổ chức, ảnh chia sẻ tiếng Anh). */
+export function ldTrangWebEn(o: { duong: string; ten: string; tomTat?: string; about?: string[] }) {
+  return {
+    "@type": "WebPage",
+    "@id": `${urlDayDu(o.duong)}#trang`,
+    url: urlDayDu(o.duong),
+    name: o.ten,
+    inLanguage: "en",
+    isPartOf: { "@id": `${siteUrl()}/#website` },
+    publisher: { "@id": `${siteUrl()}/#to-chuc` },
+    ...(o.tomTat ? { abstract: o.tomTat } : {}),
+    ...(o.about?.length ? { about: o.about.map((x) => ({ "@type": "Thing", name: x })) } : {}),
+    primaryImageOfPage: { "@type": "ImageObject", url: urlDayDu(anhOgEn(o.ten)), width: 1200, height: 630 },
+  };
+}
+
+/** EN-ALL GĐ 8 — metadata bản Anh của một trang Việt dùng chung component (rewrite): canonical = URL Anh, hreflang về đúng
+ *  trang Việt; thêm thương hiệu khi vừa 70 ký tự; `noindex` theo ĐÚNG luật index của bản Việt. */
+export function metaTrangEn(o: { tieuDe: string; moTa: string; duongVi: string; noindex?: boolean }): Metadata {
+  const path = banAnh(o.duongVi) ?? `/en${o.duongVi}`;
+  return metaEn({ title: tieuDeVua([`${o.tieuDe} · ${TEN_SITE_EN}`, o.tieuDe]), description: o.moTa, path, vi: o.duongVi, noindex: o.noindex });
+}
+
+/** Trang Việt có bản Anh đã mở (cùng đuôi đường dẫn) → thêm hreflang hai chiều (bản Việt là x-default). Không có → giữ nguyên. */
+export function themHreflangVi<M extends Metadata>(m: M, duongVi: string): M {
+  const en = banAnh(duongVi);
+  return en ? { ...m, alternates: { ...(m.alternates ?? {}), languages: { vi: duongVi, en, "x-default": duongVi } } } : m;
+}

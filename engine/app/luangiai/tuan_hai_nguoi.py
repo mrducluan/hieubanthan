@@ -230,7 +230,7 @@ def tuan(ngay: int, thang: int, nam: int, ngay_xem: dt.date, gioi_tinh: str | No
     nb.sort(key=lambda x: x["ngay"])
     so_dep = len(dep)
     tt_k = k["tom_tat"]
-    tom_tat = (tt_k["co_dep"] if so_dep else tt_k["khong_dep"]).format(so=so_dep, xung=tt_k["xung"] if xung else tt_k["khong_xung"])
+    tom_tat = ((tt_k.get("co_dep_mot") or tt_k["co_dep"]) if so_dep == 1 else tt_k["co_dep"] if so_dep else tt_k["khong_dep"]).format(so=so_dep, xung=tt_k["xung"] if xung else tt_k["khong_xung"])
     for n in ds:                                        # trường phụ chỉ dùng để chọn dòng nổi bật
         n.pop("tuoi_nghia", None)
         n.pop("kieng", None)

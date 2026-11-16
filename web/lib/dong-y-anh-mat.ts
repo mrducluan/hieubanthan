@@ -70,8 +70,11 @@ export const KHOA_DONG_Y_CHI_TAY = "hbt.dong_y_chi_tay.v1";
 /** CT-2: đo bàn tay trên ảnh (chỉ 21 điểm mốc, không ảnh). */
 export const DONG_Y_CHI_TAY = taoDongY(KHOA_DONG_Y_CHI_TAY, "ct1");
 
-export function ngayDongYAnhMat(d: DongYAnhMat | null | undefined): string | null {
+export function ngayDongYAnhMat(d: DongYAnhMat | null | undefined, ngonNgu: "vi" | "en" = "vi"): string | null {
   if (!d) return null;
   const t = new Date(d.luc);
-  return Number.isNaN(t.getTime()) ? null : t.toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric" });
+  // EN-ALL GĐ 8: bản Anh ngày kiểu Anh (16 Nov 2026); bản Việt giữ dd/mm/yyyy như cũ.
+  if (Number.isNaN(t.getTime())) return null;
+  return ngonNgu === "en" ? t.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })
+    : t.toLocaleDateString("vi-VN", { day: "2-digit", month: "2-digit", year: "numeric" });
 }

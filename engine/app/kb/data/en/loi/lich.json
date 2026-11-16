@@ -142,5 +142,7 @@
  "lich.loi.muoi_ba_thang": "The date range can be at most 13 months",
  "lich.loi.vai": "Each role (bride, groom, parents…) can only have one person",
  "lich.loi.thang": "The month range goes beyond December 2099",
- "lich.loi.viec": "There is no page for this activity"
+ "lich.loi.viec": "There is no page for this activity",
+ "lich.cn.tom_1": "From {tu} to {den} there is one day the almanac lists as suitable for {viec} that clashes with none of the {k} people",
+ "lich.cn.tom_sach_1": "; one of them has no age-related notes."
 }
