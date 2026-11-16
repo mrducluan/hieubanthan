@@ -135,3 +135,11 @@ test("API chuyển đổi: chỉ nhận cookie Meta đúng định dạng; gói 
     custom_data: { value: 49000, currency: "VND", content_type: "sao" } });
   expect(JSON.stringify(g)).not.toMatch(/email|"em"|"fn"|"db"/);
 });
+
+test("xác minh tên miền Meta: thẻ meta nằm trong <head> của HTML máy chủ (trang chủ + bản /en)", async ({ request }) => {
+  for (const duong of ["/", "/en"]) {
+    const html = await (await request.get(duong)).text();
+    const head = html.slice(0, html.indexOf("</head>"));
+    expect(head).toContain('<meta name="facebook-domain-verification" content="yc7164ai9ptzswsj79rn9aen2eduk8"/>');
+  }
+});
