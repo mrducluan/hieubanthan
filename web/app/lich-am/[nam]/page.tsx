@@ -9,7 +9,7 @@ import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { duongNgay, duongThang, homNayVN } from "@/lib/hoang-lich";
-import { docNamLich, duongLichAm, lichAmIndex, lichNamCongKhai } from "@/lib/lich-am";
+import { cacNamLich, docNamLich, duongLichAm, lichAmIndex, lichNamCongKhai } from "@/lib/lich-am";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_LICH_AM_NAM } from "@/lib/chu/trang-con";
@@ -30,8 +30,13 @@ async function metaGoc(p: P): Promise<Metadata> {
   // EN-ALL GĐ 8: /en/lunar-calendar/{năm} là rewrite của trang này.
   if (l.en) return metaEn({ title: `${l.c("lan.seo", { nam: String(n) })} · Hieuban`, description: l.c("lan.seo_mo_ta", { nam: String(n) }),
     path: duongLichAm(n, true), vi: duongLichAm(n), noindex: !lichAmIndex(n, Number(homNayVN().slice(0, 4))) });
-  const m0 = metaTrang({ tieuDe: `Lịch âm ${n}: Tết, tháng nhuận, các tháng âm lịch`,
-    moTa: `Lịch âm năm ${n} theo âm lịch Việt Nam: ngày Tết, có tháng nhuận không, mùng 1 và rằm từng tháng ứng với dương lịch, tháng đủ hay thiếu.`,
+  // SEO-P: Search Console — "năm 2027 có nhuận không" (nhiều biến thể) là truy vấn chính của cụm này → tiêu đề là đúng câu hỏi,
+  // mô tả mở bằng câu trả lời (số tháng nhuận, ngày Tết do engine tính).
+  const d = await lichNamCongKhai(n);
+  const cauNhuan = d ? (d.thang_nhuan ? `Năm ${n} có nhuận tháng ${d.thang_nhuan} âm lịch (13 tháng).` : `Năm ${n} không có tháng nhuận (12 tháng âm).`) : "";
+  const m0 = metaTrang({ tieuDe: `Năm ${n} có nhuận không? Lịch âm ${n}, Tết ngày nào`,
+    moTa: d ? `${cauNhuan} Tết ${d.can_chi} ngày ${dmy(d.tet)}. Lịch âm ${n} đủ mùng 1, rằm, ngày lễ, tháng đủ hay thiếu theo âm lịch Việt Nam.`
+      : `Lịch âm năm ${n} theo âm lịch Việt Nam: ngày Tết, có tháng nhuận không, mùng 1 và rằm từng tháng ứng với dương lịch, tháng đủ hay thiếu.`,
     duong: duongLichAm(n), anh: anhBai({ tieuDe: `Lịch âm ${n}`, mang: "lich" }) });
   const m = voiHreflang(m0, duongLichAm(n), duongLichAm(n, true));
   return lichAmIndex(n, Number(homNayVN().slice(0, 4))) ? m : { ...m, robots: { index: false, follow: true } };
@@ -40,7 +45,7 @@ async function metaGoc(p: P): Promise<Metadata> {
 export default async function Page(p: P) {
   const n = docNamLich((await p.params).nam);
   if (!n) notFound();
-  const d = await lichNamCongKhai(n);
+  const [d, gan] = await Promise.all([lichNamCongKhai(n), cacNamLich(Math.max(1901, n - 3), Math.min(2098, n + 5))]);
   if (!d) throw new Error("engine lịch không phản hồi");
   const l = await chuLichMayChu();
   if (l.en) return <TrangNamEn n={n} d={d} l={l} />;
@@ -112,10 +117,28 @@ export default async function Page(p: P) {
       <AnhTomTat kieu="lich_am" nam={n} />
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mt-8" />
       <p className="mt-8 text-sm text-fg-muted">{c("cuoi.chu", bien)} <Link href="/doi-lich-am-duong" className="text-gold underline">{c("cuoi.link", bien)}</Link></p>
-      <p className="mt-3 flex flex-wrap gap-3 text-sm">
-        {n > 1901 && <Link href={duongLichAm(n - 1)} className="text-gold underline">Lịch âm {n - 1}</Link>}
-        {n < 2098 && <Link href={duongLichAm(n + 1)} className="text-gold underline">Lịch âm {n + 1}</Link>}
-      </p>
+      {/* SEO-P: Search Console — người ta hỏi "năm 2028/2029 có nhuận không" cho nhiều năm liền → khối link các năm gần,
+          mỗi năm kèm câu trả lời nhuận (engine tính). Engine lỗi → về hai link năm trước / sau như cũ. */}
+      {gan && gan.length > 0 ? (
+        <section aria-labelledby="nam-gan" className="mt-8" data-testid="nam-gan">
+          <h2 id="nam-gan" className="text-xl">Các năm gần {n}: năm nào có tháng nhuận?</h2>
+          <ul className="mt-3 grid gap-2 sm:grid-cols-3">
+            {gan.filter((x) => x.nam !== n).map((x) => (
+              <li key={x.nam}>
+                <Link href={duongLichAm(x.nam)} className="block rounded-xl border border-line/70 px-3 py-2 text-sm hover:border-gold/50">
+                  <b>Lịch âm {x.nam}</b> <span className="text-fg-muted">({x.can_chi})</span>
+                  <span className="mt-0.5 block text-xs text-fg-muted">{x.thang_nhuan ? `Nhuận tháng ${x.thang_nhuan}` : "Không nhuận"} · Tết {dmy(x.tet)}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : (
+        <p className="mt-3 flex flex-wrap gap-3 text-sm">
+          {n > 1901 && <Link href={duongLichAm(n - 1)} className="text-gold underline">Lịch âm {n - 1}</Link>}
+          {n < 2098 && <Link href={duongLichAm(n + 1)} className="text-gold underline">Lịch âm {n + 1}</Link>}
+        </p>
+      )}
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
     </div>
   );

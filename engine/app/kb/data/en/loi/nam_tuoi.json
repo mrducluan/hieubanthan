@@ -184,5 +184,8 @@
  "nt.tt.na_rel.binh_hoa": "the same element",
  "nt.tt.hd4": "How is this reading by age different from a personal chart?",
  "nt.tt.hd5": "What is the lunar age in {nam} of someone born in {ns} ({cc})?",
- "nt.tt.hd5_dap": "Lunar age {tuoi} ({nam} − lunar birth year {ns} + 1). If you were born in January or early February before Tet, count from the previous lunar year."
+ "nt.tt.hd5_dap": "Lunar age {tuoi} ({nam} − lunar birth year {ns} + 1). If you were born in January or early February before Tet, count from the previous lunar year.",
+ "nt.tt.tl_dau2": "In {nam}, a person born in {ns} ({cc_s}) turns {tron}, or {tuoi} in traditional reckoning. The year {cc_n} for this birth year ({na} element):",
+ "nt.tt.hd0": "Born in {ns}, how old are you in {nam}?",
+ "nt.tt.hd0_dap": "In {nam}, someone born in {ns} turns {tron} on their birthday (counted by the solar calendar), and is {tuoi} in traditional reckoning. If you were born in January or early February before Lunar New Year, your lunar birth year is the year before."
 }

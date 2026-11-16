@@ -229,6 +229,9 @@ def ngay_xem(kq: dict) -> dict:
     kq["cat_than"] = [_muc("than_sat", x) for x in kq["cat_than"]]
     kq["hung_sat"] = [_muc("than_sat", x) for x in kq["hung_sat"]]
     kq["xung_tuoi"]["ten"] = lh.can_chi(kq["xung_tuoi"]["ten"])
+    if kq.get("con_giap"):  # SEO-P: 12 con giáp trong ngày — mã giữ, chữ theo ngôn ngữ
+        kq["con_giap"] = [{**lh.quan_he({k: x[k] for k in ("ma", "ten", "nghia")}), "chi": con_giap(x["chi"])}
+                          for x in kq["con_giap"]]
     ph = kb.get("phuong") or {}
     kq["sat"] = ph.get(c["sat_phuong"], kq["sat"])
     kq["huong"] = {k: ph.get(c["huong"][k], v) for k, v in kq["huong"].items()}

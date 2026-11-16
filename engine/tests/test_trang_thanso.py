@@ -24,7 +24,7 @@ def test_so_luong_trang_moi():
 def test_cap_so():
     t = trang.lay("cap_so", "so-chu-dao-3-va-6")
     assert t is not None and t["tieu_de"].startswith("Số chủ đạo 3 và 6 có hợp nhau không")
-    assert [m["tieu_de"] for m in t["muc"]][:3] == ["Dễ hoà ở đâu", "Dễ va ở đâu", "Cùng làm gì để êm"]
+    assert [m["tieu_de"] for m in t["muc"]][:3] == ["Số 3 và số 6 dễ hoà ở đâu", "Số 3 và số 6 dễ va ở đâu", "Số 3 và số 6 cùng làm gì để êm"]
     assert "điểm" not in t["tra_loi_nhanh"].lower() or "không chấm điểm" in t["tra_loi_nhanh"].lower()
     assert t["minh_hoa"] == {"kieu": "cap_so", "a": 3, "b": 6}
     # thứ tự ngược cũng tìm được nhưng chỉ có MỘT trang chuẩn (a ≤ b)

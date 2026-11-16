@@ -84,15 +84,21 @@ def lich_nam(nam: int) -> dict:
     cc = _cc(can, chi)
     tet, tet_sau = _duong(1, 1, nam, 0), _duong(1, 1, nam + 1, 0)
     dmy = _dmy
-    tra_loi = (L("lich.nam.tl", "Năm âm lịch {cc} {nam} bắt đầu từ Tết ngày {tet} và kết thúc ngày {cuoi} (dương lịch), gồm {so} "
-                              "tháng, ", cc=cc, nam=nam, tet=dmy(tet), cuoi=dmy(tet_sau - dt.timedelta(days=1)), so=len(thang))
-               + (L("lich.nam.tl_nhuan", "có tháng {n} nhuận.", n=nhuan) if nhuan else L("lich.nam.tl_khong_nhuan", "không có tháng nhuận.")))
+    # SEO-P: câu người ta tìm nhiều nhất là "năm X có nhuận không" → câu trả lời đứng đầu (mẫu câu theo ngôn ngữ).
+    nh = next((x for x in thang if x["nhuan"]), None)
+    cau_nhuan = (L("lich.nam.tl_dau_nhuan", "Năm {nam} có tháng nhuận: nhuận tháng {n} âm lịch (tháng {n} nhuận bắt đầu ngày "
+                   "{ngay}), cả năm có 13 tháng âm.", nam=nam, n=nhuan, ngay=dmy(dt.date.fromisoformat(nh["mung_mot"])))
+                 if nhuan else L("lich.nam.tl_dau_khong", "Năm {nam} không có tháng nhuận âm lịch, cả năm có 12 tháng âm.", nam=nam))
+    tra_loi = cau_nhuan + " " + L("lich.nam.tl2", "Năm âm lịch {cc} {nam} bắt đầu từ Tết ngày {tet} và kết thúc ngày {cuoi} "
+                                  "(dương lịch), dài {so} ngày.", cc=cc, nam=nam, tet=dmy(tet),
+                                  cuoi=dmy(tet_sau - dt.timedelta(days=1)), so=(tet_sau - tet).days)
     hd = [
+        {"hoi": L("lich.nam.h_nhuan2", "Năm {nam} có nhuận không?", nam=nam),
+         "dap": (L("lich.nam.d_nhuan2", "Có. Năm {nam} âm lịch có tháng {n} nhuận, nên có 13 tháng âm.", nam=nam, n=nhuan) if nhuan
+                 else L("lich.nam.d_khong_nhuan2", "Không. Năm {nam} âm lịch có 12 tháng, không có tháng nhuận.", nam=nam))
+                + L("lich.nam.d_nhuan_vn", " Tính theo âm lịch Việt Nam (giờ Hà Nội).")},
         {"hoi": L("lich.nam.h_tet", "Tết âm lịch {nam} là ngày nào?", nam=nam),
          "dap": L("lich.nam.d_tet", "Mùng 1 Tết {cc} là ngày {ngay} dương lịch (theo âm lịch Việt Nam).", cc=cc, ngay=dmy(tet))},
-        {"hoi": L("lich.nam.h_nhuan", "Năm {nam} âm lịch có tháng nhuận không?", nam=nam),
-         "dap": L("lich.nam.d_nhuan", "Có, năm {nam} nhuận tháng {n}: năm có 13 tháng âm.", nam=nam, n=nhuan) if nhuan
-         else L("lich.nam.d_khong_nhuan", "Không, năm {nam} âm lịch có 12 tháng.", nam=nam)},
         {"hoi": L("lich.nam.h_ram", "Rằm tháng Giêng {nam} là ngày nào?", nam=nam),
          "dap": L("lich.nam.d_ram", "Ngày {ngay} dương lịch.", ngay=dmy(dt.date.fromisoformat(thang[0]['ram'])))},
     ]

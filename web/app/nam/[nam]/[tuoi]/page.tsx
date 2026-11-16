@@ -39,7 +39,14 @@ async function metaGoc(p: P): Promise<Metadata> {
   const { ngonNgu } = await ngonNguMayChu(), { c } = chuNamTuoi(ngonNgu), b = { nam: x.n, nam_sinh: x.ns };
   const index = namTuoiIndex(x.n, await namTuoiSeo(), x.ns);
   if (ngonNgu === "en") return metaTrangEn({ tieuDe: c("nt.seo_tieu_de", b), moTa: c("nt.seo_mo_ta", b), duongVi: duongNamTuoi(x.n, x.ns), noindex: !index });
-  const m = themHreflangVi(metaTrang({ tieuDe: c("nt.seo_tieu_de", b), moTa: c("nt.seo_mo_ta", b),
+  // SEO-P: Search Console — người ta gõ "1998 năm 2026 bao nhiêu tuổi" → tiêu đề + mô tả trả lời đúng câu đó (số do engine
+  // tính: tuổi tròn, tuổi mụ, can chi); engine lỗi → tiêu đề mặc định.
+  const d = await namTheoTuoiCongKhai(x.n, x.ns);
+  const co = d?.tuoi_tron != null;
+  const m = themHreflangVi(metaTrang({
+    tieuDe: co ? `${x.ns} năm ${x.n} bao nhiêu tuổi? Tử vi tuổi ${d!.nguoi.can_chi} ${x.n}` : c("nt.seo_tieu_de", b),
+    moTa: co ? `Sinh năm ${x.ns} (${d!.nguoi.can_chi}), năm ${x.n} bước sang ${d!.tuoi_tron} tuổi, tuổi mụ ${d!.tuoi_mu}. Hợp hay xung với năm, Tam tai, Kim lâu, làm nhà, sao hạn nam và nữ mạng — lời đời thường, không phán hung.`
+      : c("nt.seo_mo_ta", b),
     duong: duongNamTuoi(x.n, x.ns), anh: anhBai({ tieuDe: `Tử vi ${x.n} tuổi ${x.ns}`, mang: "lich" }) }), duongNamTuoi(x.n, x.ns));
   return index ? m : { ...m, robots: { index: false, follow: true } };
 }

@@ -143,6 +143,13 @@
  "lich.loi.vai": "Each role (bride, groom, parents…) can only have one person",
  "lich.loi.thang": "The month range goes beyond December 2099",
  "lich.loi.viec": "There is no page for this activity",
+ "lich.nam.tl_dau_nhuan": "Yes — lunar year {nam} has a leap month: month {n} is doubled (the leap month {n} starts on {ngay}), so the year has 13 lunar months.",
+ "lich.nam.tl_dau_khong": "No — lunar year {nam} has no leap month; it has 12 lunar months.",
+ "lich.nam.tl2": "The lunar year {cc} {nam} runs from Tet on {tet} to {cuoi} (solar calendar), {so} days in all.",
+ "lich.nam.h_nhuan2": "Is {nam} a leap year in the lunar calendar?",
+ "lich.nam.d_nhuan2": "Yes. Lunar year {nam} has a leap month {n}, so it has 13 lunar months.",
+ "lich.nam.d_khong_nhuan2": "No. Lunar year {nam} has 12 months and no leap month.",
+ "lich.nam.d_nhuan_vn": " Calculated with the Vietnamese lunar calendar (Hanoi time).",
  "lich.cn.tom_1": "From {tu} to {den} there is one day the almanac lists as suitable for {viec} that clashes with none of the {k} people",
  "lich.cn.tom_sach_1": "; one of them has no age-related notes."
 }
