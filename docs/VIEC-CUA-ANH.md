@@ -5,6 +5,17 @@
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
 > Cập nhật lần cuối: 2026-11-14 (WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
 
+### 4at. GIA-99 — giá 99 Sao, gói mới, bật thu Sao (2026-11-16, `docs/GOI-XEM-VA-GIA-2026-11.md`)
+
+- [ ] Gộp PR và để Vercel deploy dự án **web**. Sau deploy `/goi-xem` mở được; mọi nơi vẫn ghi "đang miễn phí" cho tới bước 3.
+- [ ] Hoàn tất Pay2S ở mục 4aq (migration 0037, bốn biến `PAY2S_*`, thử nạp). Chưa xong bước này thì dù chạy bước 3, báo cáo vẫn miễn phí (web không khoá khi chưa có cổng nạp).
+- [ ] **Bật chính thức**: Supabase → SQL Editor → dán và chạy `supabase/bang-gia/2026-11_gia_99.sql` (một lần). Tệp này đổi giá báo cáo 99 Sao (Bản đồ con số 49), câu hỏi 5 Sao, bốn gói nạp mới, hội viên 599.000 ₫, hỏi chuyên gia 299.000 ₫, thưởng mời 33/33, tặng 20 % lần nạp đầu, và bật thu Sao Luận giải. Muốn quay lại: chạy `2026-11_gia_99.down.sql`.
+- [ ] Kiểm (5 phút, tài khoản thử): `/goi-xem` hiện giá + bảng "Ba cách trả"; `/nap-sao` có 4 gói, gói Ba lần xem ghi "≈ 83.000 ₫ mỗi lần xem · rẻ hơn 17%"; `/tu-vi` → Luận giải → chương 2 khoá, hộp nạp gợi ý gói Một lần xem và có dòng "Đổi sang gói này"; nạp gói 99.000 ₫ thật → báo cáo tự mở.
+- [ ] (Tuỳ chọn) Giới hạn hỏi đáp miễn phí mỗi ngày: `/quan-tri/cai-dat` → "Giới hạn hỏi đáp miễn phí mỗi ngày" (tệp SQL không bật hộ).
+- [ ] (Tuỳ chọn) Hội viên năm / Hỏi chuyên gia: công tắc bán vẫn do anh bật ở `/quan-tri/cai-dat`; tệp SQL chỉ đặt giá.
+- [ ] Sau 4 tuần: `/quan-tri/doanh-thu` → tỉ lệ từng gói. Gói Ba lần xem dưới 20 % số đơn thì báo em hạ gói lẻ xuống 79.000 ₫.
+- [ ] (Quyết định) Nối cổng Sao cho Xem lá số 2 người / Nhà của bạn / Chọn ngày cho cả nhà; gói ghép "Trọn bộ 2027"; "Lì xì báo cáo Tết" — mục 8 của tài liệu.
+
 ### 4as. PT-NG1 — nguồn tri thức Tarot · Phong thuỷ · Huyền Không còn thiếu (2026-11-12, `docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md`)
 
 - [x] Mở mạng tới Wikisource, archive.org, Gutenberg (đã duyệt 2026-11-12). Dò lại: sách Tarot của Papus, Wirth em tự tải được;

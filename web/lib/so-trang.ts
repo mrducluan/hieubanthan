@@ -238,6 +238,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     tieu_de_seo: "Nạp Sao", h1: "Nạp Sao",
     mo_ta_seo: "Nạp Sao để mở Luận giải toàn bộ và các tính năng chuyên sâu. Thanh toán bằng QR chuyển khoản qua app ngân hàng hoặc ví điện tử.",
   } },
+  // GIA-99: bảng giá + lối vào các gói xem theo nhu cầu (docs/GOI-XEM-VA-GIA-2026-11.md).
+  { duong: "/goi-xem", nhom: "cong_cu", ten: "Gói xem luận giải", o: O_TRANG_PHU, mac_dinh: {
+    tieu_de_seo: "Gói xem luận giải: Tử vi, Bát tự, Thần số, năm mới", h1: "Gói xem luận giải: chọn theo điều bạn đang cần biết",
+    mo_ta_seo: "Các gói xem luận giải theo nhu cầu: năm mới, lá số Tử vi trọn đời, Bát tự, bản đồ con số, chân dung tổng hợp. Chương đầu miễn phí; trả từng lần, gói nhiều lần hoặc hội viên năm.",
+  } },
   { duong: "/hoi-vien", nhom: "cong_cu", ten: "Hội viên năm", o: O_TRANG_PHU, mac_dinh: {
     tieu_de_seo: "Hội viên năm — mở mọi luận giải, mua một lần", h1: "Hội viên năm",
     mo_ta_seo: "Hội viên năm Hiểu Bản Thân: mở mọi chương Luận giải toàn bộ Tử vi, Bát tự, Bản đồ con số, Sao tặng mỗi tháng. Trả một lần bằng QR chuyển khoản, không tự gia hạn.",

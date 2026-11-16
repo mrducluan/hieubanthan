@@ -70,12 +70,16 @@ test("cài đặt: gói Khởi đầu + tặng lần nạp đầu mặc định 
 
 test("/nap-sao chưa bật tài khoản: ghi VND + ≈ N báo cáo, KHÔNG chọn sẵn gói (cổng chưa mở), không có dòng tặng; Điều khoản nêu Sao tặng lần đầu", async ({ page }) => {
   await page.goto("/nap-sao");
-  await expect(page.getByTestId("goi-thu")).toContainText("29.000 ₫");
-  await expect(page.getByTestId("goi-thu")).toContainText("≈ 1 báo cáo Luận giải toàn bộ");
-  await expect(page.getByTestId("goi-gia_dinh")).toContainText("≈ 8 báo cáo");
+  // GIA-99: bốn gói mới cân theo giá 99 Sao; gói nhiều lần ghi giá mỗi lần xem + mức rẻ hơn thật so với mua lẻ.
+  await expect(page.getByTestId("goi-le_1")).toContainText("99.000 ₫");
+  await expect(page.getByTestId("goi-le_1")).toContainText("≈ 1 báo cáo Luận giải toàn bộ");
+  await expect(page.getByTestId("goi-ba_3")).toContainText("≈ 3 báo cáo");
+  await expect(page.getByTestId("goi-ba_3").getByTestId("gia-moi-lan")).toHaveText("≈ 83.000 ₫ mỗi lần xem · rẻ hơn 17% so với mua lẻ");
+  await expect(page.getByTestId("goi-le_1").getByTestId("gia-moi-lan")).toHaveCount(0);
+  await expect(page.getByTestId("goi-ca_nha")).toContainText("≈ 6 báo cáo");
   // Rà UX mục 8: cổng chưa mở → không chọn sẵn gói nào (chọn sẵn "Phổ biến" chỉ khi cổng mở — hộp nạp nhanh kiểm ở dưới).
-  await expect(page.locator('input[value="pho_bien"]')).not.toBeChecked();
-  await expect(page.locator('input[value="pho_bien"]')).toBeDisabled();
+  await expect(page.locator('input[value="ba_3"]')).not.toBeChecked();
+  await expect(page.locator('input[value="ba_3"]')).toBeDisabled();
   await expect(page.getByTestId("nap-dau")).toHaveCount(0);
   await expect(page.getByTestId("sao-tang-dau")).toHaveCount(0);
   await expect(page.getByTestId("nap-sao")).not.toContainText(CAM);

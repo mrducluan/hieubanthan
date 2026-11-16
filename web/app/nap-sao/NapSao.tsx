@@ -10,7 +10,7 @@ import { ghi } from "@/lib/do-luong";
 import { lopCot } from "@/lib/luoi";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import {
-  dongNapDau, goiMacDinh, hienNapDau, saoTangLanDau, soBaoCao, thuocTinhNap, type GoiHienThi, type NapDau,
+  dongNapDau, giaMoiLanXem, goiMacDinh, hienNapDau, saoTangLanDau, soBaoCao, thuocTinhNap, tietKiemPhanTram, type GoiHienThi, type NapDau,
 } from "@/lib/thanh-toan/nap-dau";
 
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} ₫`;
@@ -85,6 +85,9 @@ export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau, mienPhi = f
           {goi.map((x) => {
             const bc = soBaoCao(x.sao, giaBaoCao);
             const tang = nd ? saoTangLanDau(x.sao, nd.phan_tram) : 0;
+            // GIA-99: số thật từ chính bảng giá (không gạch giá): giá mỗi lần xem + rẻ hơn bao nhiêu so với mua lẻ.
+            const moiLan = bc > 1 ? giaMoiLanXem(x, giaBaoCao) : null;
+            const tk = tietKiemPhanTram(x, goi);
             return (
               <label key={x.ma} data-testid={`goi-${x.ma}`}
                 className={`glass relative flex flex-col gap-1 rounded-2xl border p-5 transition-colors ${!cong ? "cursor-not-allowed border-line/70" : chon === x.ma ? "cursor-pointer border-gold" : "cursor-pointer border-line/70 hover:border-gold/50"}`}>
@@ -94,6 +97,7 @@ export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau, mienPhi = f
                 <span className="flex items-center gap-1.5 font-serif text-3xl text-gold"><Sparkles className="size-5" aria-hidden />{x.sao} Sao</span>
                 <span className="text-lg text-fg">{vnd(x.gia_vnd)}</span>
                 {bc > 0 && <span className="text-xs text-fg-muted" data-testid="so-bao-cao">≈ {bc} báo cáo Luận giải toàn bộ</span>}
+                {moiLan && <span className="text-xs text-fg" data-testid="gia-moi-lan">≈ {vnd(moiLan)} mỗi lần xem{tk > 0 ? ` · rẻ hơn ${tk}% so với mua lẻ` : ""}</span>}
                 {tang > 0 && <span className="text-xs text-gold" data-testid="sao-tang-dau">+{tang} Sao tặng nếu là lần nạp đầu</span>}
                 {x.mo_ta && <span className="text-xs text-fg-faint">{x.mo_ta}</span>}
                 {chon === x.ma && <Check className="absolute bottom-4 right-4 size-4 text-gold" aria-hidden />}

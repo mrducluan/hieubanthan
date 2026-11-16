@@ -41,6 +41,7 @@ export default async function Page() {
         thanh toán một lần, không tự gia hạn.
         </>}
       </p>
+      <p className="mt-2 text-sm"><Link href="/goi-xem" className="text-gold hover:underline" data-testid="link-goi-xem">Xem các gói xem theo nhu cầu và cách trả hợp với bạn</Link></p>
       <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
       <NapSao goi={goi} cong={cong} giaBaoCao={giaBaoCao} napDau={napDau} mienPhi={mienPhi} />
       {cong && hienDongHoiVien(hoiVien) && (
