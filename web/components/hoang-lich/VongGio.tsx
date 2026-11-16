@@ -6,6 +6,8 @@
 // `tamGioHienTai`: lõi giữa ghi giờ đang đi (chi · thần · hoàng/hắc đạo) thay cho tiêu đề — dữ liệu vẫn của engine.
 import { useEffect, useId, useState } from "react";
 import type { GioNgay } from "@/lib/hoang-lich";
+import { boChuGiai } from "@/lib/ten-hien";
+import { useChuLich } from "./chu-lich";
 
 const R_NGOAI = 96, R_TRONG = 62, TAM = 110;
 
@@ -29,9 +31,13 @@ export function canhGioHienTai(d: Date = new Date()): number | null {
   return h === 23 ? null : Math.floor((h + 1) / 2);
 }
 
-export function VongGio({ gio, laHomNay, tieuDe, phuDe, tamGioHienTai = false, className = "" }: {
+export function VongGio({ gio, laHomNay, tieuDe, phuDe, tamGioHienTai = false, className = "", tenChi }: {
   gio: GioNgay[]; laHomNay: boolean; tieuDe: string; phuDe?: string; tamGioHienTai?: boolean; className?: string;
+  /** EN-ALL GĐ 8: tên hiển thị của mã chi (bản Anh từ `ten_hien`); không truyền → hiện nguyên mã (bản Việt). */
+  tenChi?: (ma: string) => string;
 }) {
+  const { c, en } = useChuLich();
+  const ten = (ma: string) => (tenChi ? tenChi(ma) : ma);
   const id = useId().replace(/:/g, "");
   const [bay, setBay] = useState<number | null>(null);
   useEffect(() => {
@@ -44,7 +50,7 @@ export function VongGio({ gio, laHomNay, tieuDe, phuDe, tamGioHienTai = false, c
 
   return (
     <svg viewBox="0 0 220 220" role="img" className={`select-none ${className}`} data-testid="vong-gio"
-      aria-label={`Vòng 12 canh giờ: giờ hoàng đạo ${gio.filter((g) => g.hoang_dao).map((g) => g.chi).join(", ")}`}>
+      aria-label={c("vong.aria", { ds: gio.filter((g) => g.hoang_dao).map((g) => ten(g.chi)).join(", ") })}>
       <defs>
         <radialGradient id={`nen-${id}`} cx="50%" cy="45%" r="60%">
           <stop offset="0%" stopColor="rgb(var(--gold))" stopOpacity="0.18" />
@@ -91,10 +97,10 @@ export function VongGio({ gio, laHomNay, tieuDe, phuDe, tamGioHienTai = false, c
               stroke={dang ? "rgb(var(--fg))" : g.hoang_dao ? "rgb(var(--gold) / 0.9)" : "rgb(var(--line))"}
               strokeWidth={dang ? 1.8 : 0.8}
               filter={g.hoang_dao ? `url(#sang-${id})` : undefined}>
-              <title>{`${g.chi} ${g.khung} — ${g.than} (${g.hoang_dao ? "hoàng đạo" : "hắc đạo"})`}</title>
+              <title>{`${ten(g.chi)} ${g.khung} — ${g.than} (${g.hoang_dao ? c("vong.hoang_dao") : c("vong.hac_dao")})`}</title>
             </path>
             <text x={tx} y={ty + 4} textAnchor="middle" fontSize="12.5" fontWeight={g.hoang_dao ? 700 : 600}
-              fill={g.hoang_dao ? "rgb(28 22 10)" : "rgb(var(--fg))"} fillOpacity={g.hoang_dao ? 1 : 0.85}>{g.chi}</text>
+              fill={g.hoang_dao ? "rgb(28 22 10)" : "rgb(var(--fg))"} fillOpacity={g.hoang_dao ? 1 : 0.85}>{en ? boChuGiai(ten(g.chi)) : g.chi}</text>
            </g>
           </g>
         );
@@ -104,7 +110,7 @@ export function VongGio({ gio, laHomNay, tieuDe, phuDe, tamGioHienTai = false, c
         return (
           <g data-testid="kim-gio">
             <circle cx={x} cy={y} r="6" fill="none" stroke="rgb(var(--gold))" strokeWidth="1" className="motion-safe:animate-twinkle" />
-            <circle cx={x} cy={y} r="3.2" fill="rgb(var(--fg))" stroke="rgb(var(--gold))" strokeWidth="1"><title>Giờ hiện tại</title></circle>
+            <circle cx={x} cy={y} r="3.2" fill="rgb(var(--fg))" stroke="rgb(var(--gold))" strokeWidth="1"><title>{c("vong.hien_tai")}</title></circle>
           </g>
         );
       })()}
@@ -115,12 +121,12 @@ export function VongGio({ gio, laHomNay, tieuDe, phuDe, tamGioHienTai = false, c
         const g = gio[bay]!;
         return (
           <g data-testid="tam-gio-hien-tai">
-            <text x={TAM} y={TAM - 18} textAnchor="middle" fontSize="7.5" letterSpacing="1.4" fill="rgb(var(--fg-muted))">BÂY GIỜ</text>
+            <text x={TAM} y={TAM - 18} textAnchor="middle" fontSize="7.5" letterSpacing="1.4" fill="rgb(var(--fg-muted))">{c("vong.bay_gio")}</text>
             <text x={TAM} y={TAM + 2} textAnchor="middle" fontSize="17" fontFamily="var(--font-display), Georgia, serif"
-              fill="rgb(var(--fg))">Giờ {g.chi}</text>
+              fill="rgb(var(--fg))">{en ? c("vong.gio", { chi: boChuGiai(ten(g.chi)) }) : <>Giờ {g.chi}</>}</text>
             <text x={TAM} y={TAM + 15} textAnchor="middle" fontSize="8.5" fill="rgb(var(--gold))">{g.than}</text>
             <text x={TAM} y={TAM + 28} textAnchor="middle" fontSize="7.5" letterSpacing="1.2" fontWeight={700}
-              fill={g.hoang_dao ? "rgb(var(--gold))" : "rgb(var(--moon))"}>{g.hoang_dao ? "HOÀNG ĐẠO" : "HẮC ĐẠO"}</text>
+              fill={g.hoang_dao ? "rgb(var(--gold))" : "rgb(var(--moon))"}>{g.hoang_dao ? c("the.hoang_dao_hoa") : c("the.hac_dao_hoa")}</text>
           </g>
         );
       })() : (

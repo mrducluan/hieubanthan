@@ -7,6 +7,7 @@
 // SAO-HH: "Lá bài đầu ngày" (một điều của hôm nay, tất định, miễn phí) + "Hẹn với chính mình" (7/30 ngày, lưu máy, không
 // có gì để mất) — docs/CO-CHE-RUI-RO-VA-THAY-THE.md. Hẹn lấy tiến độ từ chuỗi máy chủ (đăng nhập) hoặc chuỗi máy.
 import { ThangNayNha } from "@/components/huyen-hoc/ThangNayNha";
+import { kemNgonNgu } from "@/lib/sao-client";
 import { ViecTuanNha } from "@/components/huyen-hoc/ViecTuanNha";
 import { NhacHomNay } from "@/components/khung/NhacHomNay";
 import { CuonToiNeo } from "@/components/khung/CuonToiNeo";
@@ -46,6 +47,10 @@ import { VongGio } from "@/components/hoang-lich/VongGio";
 import type { GioNgay } from "@/lib/hoang-lich";
 import { TieuDeTrang, useChu } from "@/components/cms/DauCms";
 import { duongMoi } from "@/lib/duong-silo";
+import { useChuHomNay } from "@/components/khung/chu-hom-nay";
+import { useDuong } from "@/components/khung/NgonNgu";
+import { dinhNgay } from "@/lib/dinh-dang";
+import { tenTheo, type TenHien } from "@/lib/ten-hien";
 
 interface NgayCN { so: number; nghia: string; tu_soi: string }
 interface TheHomNay {
@@ -79,6 +84,8 @@ interface TheHomNay {
   que_ngay?: QueNgay;
   nhip_bat_tu?: { nhat_chu: string; can_chi_ngay: string; thap_than: string; nhom: string | null; y_nghia: string | null;
     tinh_cach: string | null; cau_tu_soi: string | null; cach_tinh: string };
+  /** EN-ALL: tên hiển thị của trường mã (bản Anh). */
+  ten_hien?: TenHien;
 }
 interface HoangLichHomNay {
   truc: string; truc_y: string; than: string; hoang_dao: boolean;
@@ -94,10 +101,10 @@ interface QueNgay {
   so: number; ten: string; thuong: string; ha: string; hao_dong: number; bien: { so: number; ten: string } | null;
   y_chinh: string | null; loi_khuyen: string | null; cau_tu_soi: string | null; duong: string | null; cach_khoi: string;
 }
-const DANH_GIA_VIEC: Record<HoangLichHomNay["viec"][number]["danh_gia"], { chu: string; lop: string }> = {
-  tot: { chu: "Sách lịch ghi nên", lop: "text-jade" },
-  binh: { chu: "Sách lịch không ghi riêng", lop: "text-fg-muted" },
-  tranh: { chu: "Sách lịch khuyên chọn ngày khác", lop: "text-moon" },
+const DANH_GIA_VIEC: Record<HoangLichHomNay["viec"][number]["danh_gia"], { chu: string; lop: string; khoa: "yd.hl_tot" | "yd.hl_binh" | "yd.hl_tranh" }> = {
+  tot: { chu: "Sách lịch ghi nên", lop: "text-jade", khoa: "yd.hl_tot" },
+  binh: { chu: "Sách lịch không ghi riêng", lop: "text-fg-muted", khoa: "yd.hl_binh" },
+  tranh: { chu: "Sách lịch khuyên chọn ngày khác", lop: "text-moon", khoa: "yd.hl_tranh" },
 };
 const dmy = (iso: string) => iso.split("-").reverse().join("/");
 
@@ -109,6 +116,7 @@ const NHIP: Record<YDinhKq["nhip"], { chu: string; lop: string }> = {
   trung_tinh: { chu: "Bình thường", lop: "border-gold/40 bg-gold/[0.06] text-gold" },
   can_nhac: { chu: "Nên làm theo cách khác", lop: "border-moon/40 bg-moon/[0.06] text-moon" },
 };
+const KHOA_NHIP = { thuan: "yd.thuan", trung_tinh: "yd.trung_tinh", can_nhac: "yd.can_nhac" } as const;
 const TOI_DA_Y_DINH = 3;
 const KHOA_Y_DINH = "hbt.hom_nay_y_dinh";
 
@@ -136,7 +144,7 @@ function docChuoi(): { ngay: string; chuoi: number } | null {
 }
 
 /** "Ngày cá nhân 7: hợp nghỉ…" → "Hợp nghỉ…" (bỏ tiền tố, viết hoa chữ đầu). */
-const boTienTo = (s: string) => { const t = s.replace(/^Ngày cá nhân \d+:\s*/, ""); return t.charAt(0).toUpperCase() + t.slice(1); };
+const boTienTo = (s: string) => { const t = s.replace(/^Ngày cá nhân \d+:\s*/, "").replace(/^Personal Day \d+:\s*/, ""); return t.charAt(0).toUpperCase() + t.slice(1); };
 
 const thu = (iso: string) => new Intl.DateTimeFormat("vi-VN", { weekday: "long", day: "numeric", month: "numeric", year: "numeric", timeZone: "UTC" })
   .format(new Date(`${iso}T00:00:00Z`));
@@ -151,6 +159,9 @@ function ngayMay(): string {
 export function HomNay() {
   const hoSo = useHoSo();
   const c = useChu();
+  // EN-ALL GĐ 8: /en/today — chữ trang từ lib/chu/hom-nay.ts; phần chưa có bản Anh (chia sẻ, tài khoản, nhắc…) ẩn hẳn.
+  const { c: h, en, ma } = useChuHomNay();
+  const d = useDuong();
   const [the, setThe] = useState<TheHomNay | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [chuoi, setChuoi] = useState<{ so: number; batDauLai: boolean } | null>(null);
@@ -175,15 +186,15 @@ export function HomNay() {
 
   /** Gọi engine; `yDinh`/`cau` rỗng = thẻ cơ bản. Ý định đã nhớ của hôm nay được gửi kèm ngay lần đầu. */
   function taiThe(yDinh: string[], cau: string) {
-    if (!hoSo) return Promise.reject(new Error("Chưa có hồ sơ"));
-    return fetch("/api/thanso/hom-nay", {
+    if (!hoSo) return Promise.reject(new Error(h("loi.ho_so")));
+    return fetch("/api/thanso/hom-nay", kemNgonNgu("/api/thanso/hom-nay", {
       method: "POST", headers: { "content-type": "application/json" },
       // QTE-2 giai đoạn 0: "hôm nay" theo đồng hồ máy người dùng (ở Mỹ 20:00 vẫn là hôm nay, dù Việt Nam đã sang ngày mai).
       body: JSON.stringify({ ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam, ngay_xem: ngayMay(),
         ...(yDinh.length ? { y_dinh: yDinh } : {}), ...(cau.trim() ? { du_dinh: cau.trim().slice(0, 200) } : {}) }),
-    }).then(async (r) => {
+    })).then(async (r) => {
       const j = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error((j as { error?: string }).error ?? "Chưa tải được thẻ hôm nay.");
+      if (!r.ok) throw new Error((j as { error?: string }).error ?? h("loi.the"));
       return j as TheHomNay;
     });
   }
@@ -202,7 +213,7 @@ export function HomNay() {
       ghi("daily_intent_set", { y_dinh: ma.join(","), go_tay: duDinh.trim() ? 1 : 0,
         ...(t.nhan_ra == null ? {} : { nhan_ra: t.nhan_ra ? 1 : 0, nhom_chua_ho_tro: (t.nhom_chua_ho_tro ?? []).join(",") }) });
       setDuDinh("");
-    } catch (e) { setLoi(e instanceof Error ? e.message : "Chưa tải được."); }
+    } catch (e) { setLoi(e instanceof Error ? e.message : h("loi.chung")); }
     finally { setDangXem(false); }
   }
 
@@ -251,14 +262,15 @@ export function HomNay() {
 
   useBatDauDoc("hom_nay", Boolean(the));
   const sapToi = the?.ba_la && phut !== null ? gioSapToi(the.ba_la.thoi_khac.gio, phut) : null;
-  const tieuDe = <TieuDeTrang nho={c("dau.nhan_tren")} lon="Hôm nay của bạn" />;
+  const tieuDe = <TieuDeTrang nho={c("dau.nhan_tren")} lon={h("lon")} />;
+  const ten = tenTheo(the?.ten_hien, en);
   if (hoSo === undefined) return <div className="mx-auto max-w-xl">{tieuDe}<KhungTai /></div>;
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">
         {tieuDe}
-        <p className="mb-4 text-fg-muted">Nhập tên và ngày sinh một lần — mỗi ngày mở lại là có thẻ mới.</p>
-        <Card><NhapHoSo nutGui="Xem hôm nay của tôi" onXong={() => { /* useHoSo tự cập nhật */ }} /></Card>
+        <p className="mb-4 text-fg-muted">{h("chua_ho_so")}</p>
+        <Card><NhapHoSo nutGui={h("nut_gui")} onXong={() => { /* useHoSo tự cập nhật */ }} /></Card>
       </div>
     );
   }
@@ -277,9 +289,11 @@ export function HomNay() {
         <div className="space-y-5" data-testid="hom-nay-luoi">
           <div className="space-y-4" data-tang="1">
           <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-fg-muted">
-            <span className="inline-flex items-center gap-1.5 capitalize"><CalendarDays className="size-4" aria-hidden />{thu(the.ngay_xem)}</span>
-            <span className="inline-flex items-center gap-1.5"><MoonStar className="size-4" aria-hidden />
-              Âm lịch {the.am_lich.ngay}/{the.am_lich.thang}{the.am_lich.nhuan ? " (nhuận)" : ""} · ngày {the.am_lich.can_chi_ngay}, tháng {the.am_lich.can_chi_thang}, năm {the.am_lich.can_chi_nam}</span>
+            <span className="inline-flex items-center gap-1.5 capitalize"><CalendarDays className="size-4" aria-hidden />{en ? dinhNgay(the.ngay_xem, ma, "day_du") : thu(the.ngay_xem)}</span>
+            {en ? <span className="inline-flex items-center gap-1.5"><MoonStar className="size-4" aria-hidden />
+              {h("am", { ngay: String(the.am_lich.ngay), thang: String(the.am_lich.thang), nhuan: the.am_lich.nhuan ? h("nhuan") : "", cc_ngay: the.am_lich.can_chi_ngay, cc_thang: the.am_lich.can_chi_thang, cc_nam: the.am_lich.can_chi_nam })}</span>
+            : <span className="inline-flex items-center gap-1.5"><MoonStar className="size-4" aria-hidden />
+              Âm lịch {the.am_lich.ngay}/{the.am_lich.thang}{the.am_lich.nhuan ? " (nhuận)" : ""} · ngày {the.am_lich.can_chi_ngay}, tháng {the.am_lich.can_chi_thang}, năm {the.am_lich.can_chi_nam}</span>}
           </p>
           {/* HN-3 (nút nhỏ) + BT-UI: nút giờ nói luôn giờ hoàng đạo SẮP TỚI (web chỉ chọn trong danh sách engine theo đồng hồ máy). */}
           {the.hoang_lich && (
@@ -287,29 +301,29 @@ export function HomNay() {
               <button type="button" aria-expanded={moGio} aria-controls="gio-hoang-dao" onClick={() => setMoGio((v) => !v)} data-testid="chip-gio"
                 className={`vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border px-3.5 py-2 text-[0.8125rem] transition-colors ${moGio || sapToi ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:border-gold/60 hover:text-fg"}`}>
                 <Clock className="size-4" aria-hidden />
-                {sapToi ? <>{sapToi.dang ? "Đang giờ tốt" : "Giờ tốt sắp tới"}: <b className="font-semibold">{sapToi.gio.chi}</b> {sapToi.gio.khung}</> : "Giờ hoàng đạo"}
+                {sapToi ? <>{sapToi.dang ? h("gio.dang") : h("gio.sap")}: <b className="font-semibold">{ten("chi", sapToi.gio.chi)}</b> {sapToi.gio.khung}</> : h("gio.hoang_dao")}
               </button>
               {the.que_ngay && (
                 <a href="#que-ngay" className="vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line px-3.5 py-2 text-[0.8125rem] text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
-                  <Hexagon className="size-4" aria-hidden />Quẻ ngày: {the.que_ngay.ten}
+                  <Hexagon className="size-4" aria-hidden />{en ? h("que_chip", { ten: ten("que_ten", the.que_ngay.ten) }) : <>Quẻ ngày: {the.que_ngay.ten}</>}
                 </a>
               )}
-              <Link href="/xem-ngay-tot" className="vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line px-3.5 py-2 text-[0.8125rem] text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
-                <CalendarHeart className="size-4" aria-hidden />{the.hoang_lich.hoang_dao ? "Ngày Hoàng đạo" : "Ngày Hắc đạo"}
+              <Link href={d("/xem-ngay-tot")} className="vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line px-3.5 py-2 text-[0.8125rem] text-fg-muted transition-colors hover:border-gold/60 hover:text-fg">
+                <CalendarHeart className="size-4" aria-hidden />{the.hoang_lich.hoang_dao ? h("hoang_dao") : h("hac_dao")}
               </Link>
             </div>
           )}
           {moGio && the.hoang_lich && (
             <div id="gio-hoang-dao" className="bau-troi grid items-center gap-4 p-4 sm:grid-cols-[11rem_1fr]" data-testid="gio-hoang-dao">
-              <VongGio gio={the.hoang_lich.gio} laHomNay tieuDe={the.hoang_lich.than} phuDe="12 CANH GIỜ" className="mx-auto w-full max-w-[11rem]" />
+              <VongGio gio={the.hoang_lich.gio} laHomNay tieuDe={the.hoang_lich.than} phuDe={h("vong_phu")} className="mx-auto w-full max-w-[11rem]" tenChi={(x) => ten("chi", x)} />
               <div>
                 <ul className="grid grid-cols-2 gap-2 text-sm lg:grid-cols-3">
                   {the.hoang_lich.gio_hoang_dao.map((g) => (
-                    <li key={g.chi}><b className="text-gold">{g.chi}</b> <span className="text-fg-muted">{g.khung}</span>
+                    <li key={g.chi}><b className="text-gold">{ten("chi", g.chi)}</b> <span className="text-fg-muted">{g.khung}</span>
                       <span className="block text-xs text-fg-faint">{g.than}</span></li>
                   ))}
                 </ul>
-                <p className="mt-2 text-xs text-fg-faint">Sáu giờ hoàng đạo của ngày {the.am_lich.can_chi_ngay} theo lịch cổ truyền — tham khảo văn hoá, không phải lời khuyên chọn giờ.</p>
+                <p className="mt-2 text-xs text-fg-faint">{en ? h("vong_ghi", { cc: the.am_lich.can_chi_ngay }) : <>Sáu giờ hoàng đạo của ngày {the.am_lich.can_chi_ngay} theo lịch cổ truyền — tham khảo văn hoá, không phải lời khuyên chọn giờ.</>}</p>
               </div>
             </div>
           )}
@@ -323,8 +337,8 @@ export function HomNay() {
           <Card id="the-hom-nay" data-neo className="order-1 scroll-mt-24 space-y-4" data-testid="the-hom-nay">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-sm text-fg-muted">{tenGoi(hoSo)}, hôm nay là</p>
-                <h2 className="mt-1 text-2xl">Ngày cá nhân <span className="text-gold" data-testid="so-ngay-ca-nhan">{the.ngay_ca_nhan.so}</span></h2>
+                <p className="text-sm text-fg-muted">{en ? h("the.chao", { ten: tenGoi(hoSo) }) : <>{tenGoi(hoSo)}, hôm nay là</>}</p>
+                <h2 className="mt-1 text-2xl">{h("the.ngay_cn")}<span className="text-gold" data-testid="so-ngay-ca-nhan">{the.ngay_ca_nhan.so}</span></h2>
               </div>
               <span className="grid size-16 shrink-0 place-items-center rounded-2xl bg-gold/15 font-serif text-4xl text-gold" aria-hidden>{the.ngay_ca_nhan.so}</span>
             </div>
@@ -333,13 +347,13 @@ export function HomNay() {
               ? <p className="text-lg leading-relaxed" data-testid="hom-nay-tom-lai">{the.tom_lai}</p>
               : <p className="text-lg">{boTienTo(the.ngay_ca_nhan.nghia)}</p>}
             <div className="rounded-xl border border-moon/30 bg-moon/5 p-4">
-              <p className="text-xs uppercase tracking-wider text-moon">Câu hỏi tự soi</p>
+              <p className="text-xs uppercase tracking-wider text-moon">{h("the.tu_soi")}</p>
               <p className="mt-1">{the.ngay_ca_nhan.tu_soi}</p>
             </div>
             <SoNoiBatNgay hoSo={hoSo} />
             <div className="flex flex-wrap items-center gap-2 border-t border-line/60 pt-4">
-              <Button size="sm" variant="secondary" className="min-h-10" onClick={() => void chiaSe()} data-testid="chia-se-the-hom-nay"><Share2 aria-hidden />{daChep ? "Đã chép link" : "Chia sẻ thẻ hôm nay"}</Button>
-              <a href="#y-dinh" className="vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full px-3 text-sm text-gold hover:underline">Hôm nay bạn định làm gì? <ArrowDown className="size-4" aria-hidden /></a>
+              {!en && <Button size="sm" variant="secondary" className="min-h-10" onClick={() => void chiaSe()} data-testid="chia-se-the-hom-nay"><Share2 aria-hidden />{daChep ? "Đã chép link" : "Chia sẻ thẻ hôm nay"}</Button>}
+              <a href="#y-dinh" className="vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full px-3 text-sm text-gold hover:underline">{`${h("the.y_dinh")} `}<ArrowDown className="size-4" aria-hidden /></a>
             </div>
             {chepTay && <ChepTay url={chepTay} />}
           </Card>
@@ -347,9 +361,9 @@ export function HomNay() {
           <section id="y-dinh" aria-labelledby="y-dinh-h" className="order-3 glass scroll-mt-24 space-y-4 rounded-2xl p-5" data-testid="y-dinh">
             <div>
               <h2 id="y-dinh-h" className="text-xl">{c("y_dinh.tieu_de")}</h2>
-              <p className="mt-1 text-sm text-fg-muted">Chọn tối đa {TOI_DA_Y_DINH} việc hoặc gõ ngắn — xem việc đó hợp nhịp ngày {the.ngay_ca_nhan.so} thế nào và nên làm theo cách nào.</p>
+              <p className="mt-1 text-sm text-fg-muted">{en ? h("yd.dan", { toi_da: String(TOI_DA_Y_DINH), so: String(the.ngay_ca_nhan.so) }) : <>Chọn tối đa {TOI_DA_Y_DINH} việc hoặc gõ ngắn — xem việc đó hợp nhịp ngày {the.ngay_ca_nhan.so} thế nào và nên làm theo cách nào.</>}</p>
             </div>
-            <div className="flex flex-wrap gap-2" role="group" aria-label="Ý định hôm nay">
+            <div className="flex flex-wrap gap-2" role="group" aria-label={h("yd.aria")}>
               {Object.entries(the.danh_sach_y_dinh).map(([ma, y]) => {
                 const Icon = ICON[y.bieu_tuong] ?? Sparkles;
                 const bat = chon.includes(ma);
@@ -362,13 +376,13 @@ export function HomNay() {
               })}
             </div>
             <form className="flex flex-col gap-2 sm:flex-row" onSubmit={(e) => { e.preventDefault(); void xemYDinh(); }}>
-              <label htmlFor="du-dinh" className="sr-only">Dự định hôm nay</label>
+              <label htmlFor="du-dinh" className="sr-only">{h("yd.nhan_o")}</label>
               <input id="du-dinh" value={duDinh} maxLength={200} onChange={(e) => setDuDinh(e.target.value)} autoComplete="off"
-                placeholder="Hoặc gõ ngắn: chiều nay đi phỏng vấn, tối ôn thi…"
+                placeholder={h("yd.goi_y")}
                 className="min-w-0 flex-1 rounded-xl border border-line bg-bg/60 px-3 py-2 text-sm outline-none focus:border-gold" />
-              <Button type="submit" size="sm" disabled={dangXem || (!chon.length && !duDinh.trim())}>{dangXem ? "Đang xem…" : "Xem nhịp hôm nay"}</Button>
+              <Button type="submit" size="sm" disabled={dangXem || (!chon.length && !duDinh.trim())}>{dangXem ? h("yd.dang") : h("yd.nut")}</Button>
             </form>
-            <p className="text-xs text-fg-faint">Câu bạn gõ chỉ dùng để nhận ra loại việc, không được lưu hay gửi đi nơi khác.</p>
+            <p className="text-xs text-fg-faint">{h("yd.rieng_tu")}</p>
 
             {the.ho_tro && (
               <div role="alert" className="flex gap-3 rounded-xl border border-cinnabar/40 bg-cinnabar/[0.06] p-4 text-sm" data-testid="ho-tro">
@@ -383,11 +397,11 @@ export function HomNay() {
                     <li key={x.ma} className="rounded-xl border border-line/70 bg-bg/40 p-4">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <h3 className="inline-flex items-center gap-2 text-lg"><Icon className="size-4 text-gold" aria-hidden />{x.ten}</h3>
-                        <span className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold ${NHIP[x.nhip].lop}`}>{NHIP[x.nhip].chu}</span>
+                        <span className={`rounded-full border px-2.5 py-0.5 text-xs font-semibold ${NHIP[x.nhip].lop}`}>{h(KHOA_NHIP[x.nhip])}</span>
                       </div>
                       <p className="mt-2 font-medium">{x.nhan}</p>
                       <p className="mt-1 text-sm">{x.cach_lam}</p>
-                      <p className="mt-2 text-sm text-moon">Tự soi: {x.tu_soi}</p>
+                      <p className="mt-2 text-sm text-moon">{en ? h("yd.tu_soi", { cau: x.tu_soi }) : <>Tự soi: {x.tu_soi}</>}</p>
                     </li>
                   );
                 })}
@@ -396,7 +410,11 @@ export function HomNay() {
             {the.hoang_lich && the.hoang_lich.viec.length > 0 && the.y_dinh_hom_nay.length > 0 && (
               <ul className="space-y-1 text-sm" data-testid="hl-viec">
                 {the.hoang_lich.viec.map((v) => (
-                  <li key={v.ma_viec}><span className="text-fg-muted">Theo hoàng lịch, việc {v.ten.toLowerCase()}:</span>{" "}
+                  en ? <li key={v.ma_viec}><span className="text-fg-muted">{h("yd.hl", { ten: v.ten.toLowerCase() })}</span>{" "}
+                    <b className={DANH_GIA_VIEC[v.danh_gia].lop}>{h(DANH_GIA_VIEC[v.danh_gia].khoa)}</b>
+                    {v.danh_gia !== "tot" && v.ngay_tot_gan && <>{h("yd.hl_gan")}<Link href={d(`/xem-ngay-tot/${v.ngay_tot_gan.ngay}`)} className="text-gold hover:underline">{dinhNgay(v.ngay_tot_gan.ngay, ma, "dai")}</Link></>}
+                  </li>
+                  : <li key={v.ma_viec}><span className="text-fg-muted">Theo hoàng lịch, việc {v.ten.toLowerCase()}:</span>{" "}
                     <b className={DANH_GIA_VIEC[v.danh_gia].lop}>{DANH_GIA_VIEC[v.danh_gia].chu}</b>
                     {v.danh_gia !== "tot" && v.ngay_tot_gan && <> — ngày hợp gần nhất <Link href={`/xem-ngay-tot/${v.ngay_tot_gan.ngay}`} className="text-gold hover:underline">{dmy(v.ngay_tot_gan.ngay)}</Link></>}
                   </li>
@@ -404,14 +422,16 @@ export function HomNay() {
               </ul>
             )}
             {!the.ho_tro && duDinh === "" && chon.length > 0 && the.y_dinh_hom_nay.length === 0 && (
-              <p className="text-sm text-fg-muted">Bấm “Xem nhịp hôm nay” để xem các việc đã chọn.</p>
+              <p className="text-sm text-fg-muted">{h("yd.bam")}</p>
             )}
           </section>
 
           <Card className="order-5 flex items-start gap-3" data-testid="ngay-mai">
             <Sunrise className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
-            <p className="text-sm"><span className="text-fg-muted">Ngày mai — Ngày cá nhân {the.ngay_mai.so}:</span>{" "}
-              {boTienTo(the.ngay_mai.nghia)} <span className="text-fg-muted">Mở lại vào ngày mai để lật ba lá mới.</span></p>
+            {en ? <p className="text-sm"><span className="text-fg-muted">{h("mai", { so: String(the.ngay_mai.so) })}</span>{" "}
+              {boTienTo(the.ngay_mai.nghia)} <span className="text-fg-muted">{h("mai.lat")}</span></p>
+            : <p className="text-sm"><span className="text-fg-muted">Ngày mai — Ngày cá nhân {the.ngay_mai.so}:</span>{" "}
+              {boTienTo(the.ngay_mai.nghia)} <span className="text-fg-muted">Mở lại vào ngày mai để lật ba lá mới.</span></p>}
           </Card>
           </div>
 
@@ -419,11 +439,11 @@ export function HomNay() {
           <div className="contents lg:col-span-5 lg:flex lg:flex-col lg:gap-5" data-testid="cot-ben">
             <div className="order-2 empty:hidden">
               {the.ba_la
-                ? <BaLaNgay baLa={the.ba_la} ngay={the.ngay_xem} hoSo={hoSo} tieuDe={c("ba_la.tieu_de")} />
-                /* Engine cũ (deploy lệch) chưa trả ba_la → giữ lá bài đầu ngày một lá như trước. */
-                : <LaBaiDauNgay the={the} hoSo={hoSo} tieuDe={c("la_bai.tieu_de")} />}
+                ? <BaLaNgay baLa={the.ba_la} ngay={the.ngay_xem} hoSo={hoSo} tieuDe={c("ba_la.tieu_de")} tenHien={the.ten_hien} />
+                /* Engine cũ (deploy lệch) chưa trả ba_la → giữ lá bài đầu ngày một lá như trước (bản Anh: không có). */
+                : !en && <LaBaiDauNgay the={the} hoSo={hoSo} tieuDe={c("la_bai.tieu_de")} />}
             </div>
-            <div className="order-4 flex flex-col gap-5 empty:hidden">
+            {!en && <div className="order-4 flex flex-col gap-5 empty:hidden">
             <div className="empty:hidden"><HoiHomQua homNay={the.ngay_xem} tieuDe={c("hom_qua.tieu_de")} cau={(b) => c("hom_qua.cau", b)} camOn={c("hom_qua.cam_on")} /></div>
             <div className="empty:hidden"><HoiSau30Ngay homNay={the.ngay_xem} /></div>
             {chuoi !== null && (
@@ -446,7 +466,7 @@ export function HomNay() {
             <div className="empty:hidden"><ThangNayNha /></div>
             <div className="empty:hidden"><ViecTuanNha /></div>
             <div className="empty:hidden"><MoiCaiApp noi="hom_nay" /></div>
-            </div>
+            </div>}
           </div>
           </div>
 
@@ -456,13 +476,21 @@ export function HomNay() {
           {/* Tầng 3 — đọc thêm: từng môn nói gì về hôm nay. Gập sẵn, mỗi mục một câu tóm tắt. */}
           <section aria-labelledby="doc-them" className="space-y-3" data-tang="3" data-testid="doc-them">
             <div>
-              <h2 id="doc-them" className="text-xl">Đọc thêm về hôm nay</h2>
-              <p className="mt-1 text-sm text-fg-muted">Mỗi môn nhìn ngày này một cách. Bấm mục bạn quan tâm để mở.</p>
+              <h2 id="doc-them" className="text-xl">{h("dt.tieu_de")}</h2>
+              <p className="mt-1 text-sm text-fg-muted">{h("dt.dan")}</p>
             </div>
             {/* Các mục xếp HAI CỘT độc lập (columns — mở một mục dài không để khoảng trống ở cột bên cạnh). */}
             <div className="gap-3 space-y-3 lg:columns-2 [&>*]:break-inside-avoid">
-            <HaiNguoiHomNay hoSo={hoSo} ngay={the.ngay_xem} />
-            {the.nhip_bat_tu && (
+            {!en && <HaiNguoiHomNay hoSo={hoSo} ngay={the.ngay_xem} />}
+            {the.nhip_bat_tu && (en ? (
+              <MucGap ma="bat_tu" testId="nhip-bat-tu" tieuDe={h("bt.tieu_de", { thap_than: ten("thap_than", the.nhip_bat_tu.thap_than) })} tomTat={the.nhip_bat_tu.y_nghia}
+                phu={h("bt.phu", { nc: ten("can", the.nhip_bat_tu.nhat_chu), cc: the.nhip_bat_tu.can_chi_ngay })}>
+                {the.nhip_bat_tu.y_nghia && <p className="text-sm">{the.nhip_bat_tu.y_nghia}</p>}
+                {the.nhip_bat_tu.tinh_cach && <p className="text-sm"><span className="text-jade">{h("bt.nang_luong")}</span> {the.nhip_bat_tu.tinh_cach}</p>}
+                {the.nhip_bat_tu.cau_tu_soi && <p className="text-sm text-moon">{h("bt.tu_soi")} {the.nhip_bat_tu.cau_tu_soi}</p>}
+                <p className="text-xs text-fg-faint">{the.nhip_bat_tu.cach_tinh} <Link href={d("/bat-tu")} className="text-gold hover:underline">{h("bt.link")}</Link></p>
+              </MucGap>
+            ) : (
               <MucGap ma="bat_tu" testId="nhip-bat-tu" tieuDe={<>Nhịp Bát tự: ngày {the.nhip_bat_tu.thap_than}</>} tomTat={the.nhip_bat_tu.y_nghia}
                 phu={<>nhật chủ {the.nhip_bat_tu.nhat_chu} · ngày {the.nhip_bat_tu.can_chi_ngay}</>}>
                 {the.nhip_bat_tu.y_nghia && <p className="text-sm">{the.nhip_bat_tu.y_nghia}</p>}
@@ -470,8 +498,19 @@ export function HomNay() {
                 {the.nhip_bat_tu.cau_tu_soi && <p className="text-sm text-moon">Tự soi: {the.nhip_bat_tu.cau_tu_soi}</p>}
                 <p className="text-xs text-fg-faint">{the.nhip_bat_tu.cach_tinh} <Link href="/bat-tu" className="text-gold hover:underline">Xem lá Bát tự đầy đủ</Link></p>
               </MucGap>
+            ))}
+            {the.que_ngay && en && (
+              <MucGap id="que-ngay" ma="que" testId="que-ngay" tieuDe={h("que.tieu_de", { ten: ten("que_ten", the.que_ngay.ten) })} tomTat={the.que_ngay.y_chinh}
+                phu={h("que.phu", { so: String(the.que_ngay.so), hao: String(the.que_ngay.hao_dong), bien: the.que_ngay.bien ? ` → ${ten("que_ten", the.que_ngay.bien.ten)}` : "" })}>
+                {the.que_ngay.y_chinh && <p className="text-sm">{the.que_ngay.y_chinh}</p>}
+                {the.que_ngay.loi_khuyen && <p className="text-sm"><span className="text-jade">{h("que.goi_y")}</span> {the.que_ngay.loi_khuyen}</p>}
+                {the.que_ngay.cau_tu_soi && <p className="text-sm text-moon">{h("bt.tu_soi")} {the.que_ngay.cau_tu_soi}</p>}
+                <p className="text-xs text-fg-faint">{the.que_ngay.cach_khoi}{h("que.chung")}{" "}
+                  {the.que_ngay.duong && <Link href={d(duongMoi(the.que_ngay.duong))} className="text-gold hover:underline">{h("que.doc", { ten: ten("que_ten", the.que_ngay.ten) })}</Link>}{" "}
+                  · <Link href={d("/kinh-dich?cach=mai_hoa")} className="text-gold hover:underline">{h("que.mai_hoa")}</Link></p>
+              </MucGap>
             )}
-            {the.que_ngay && (
+            {the.que_ngay && !en && (
               <MucGap id="que-ngay" ma="que" testId="que-ngay" tieuDe={<>Quẻ đầu ngày: {the.que_ngay.ten}</>} tomTat={the.que_ngay.y_chinh}
                 phu={<>quẻ {the.que_ngay.so} · hào {the.que_ngay.hao_dong} động{the.que_ngay.bien ? ` → ${the.que_ngay.bien.ten}` : ""}</>}>
                 {the.que_ngay.y_chinh && <p className="text-sm">{the.que_ngay.y_chinh}</p>}
@@ -483,7 +522,20 @@ export function HomNay() {
                   · <Link href="/kinh-dich?cach=mai_hoa" className="text-gold hover:underline">Gieo quẻ Mai Hoa theo giờ này</Link></p>
               </MucGap>
             )}
-            {the.hoang_lich && (
+            {the.hoang_lich && en && (
+              <MucGap ma="hoang_lich" testId="hoang-lich-hom-nay" tieuDe={c("hoang_lich.tieu_de")}
+                phu={<>{the.hoang_lich.hoang_dao ? h("hl.hoang_dao") : h("hl.hac_dao")} · {the.hoang_lich.than}</>}
+                tomTat={the.hoang_lich.nghi.length > 0 ? h("hl.nen_tom", { ds: the.hoang_lich.nghi.slice(0, 3).join(", ") }) : h("hl.truc_tom", { truc: the.hoang_lich.truc, y: the.hoang_lich.truc_y })}>
+                <p className="text-sm">{h("hl.truc", { truc: the.hoang_lich.truc, y: the.hoang_lich.truc_y, xung: the.hoang_lich.xung_tuoi,
+                  ky: the.hoang_lich.ky_dan_gian.length > 0 ? ` · ${the.hoang_lich.ky_dan_gian.join(", ")}` : "" })}</p>
+                {the.hoang_lich.tuoi && <p className="text-sm" data-testid="hl-tuoi">{h("hl.tuoi", { cc: the.hoang_lich.tuoi.can_chi })} <b>{the.hoang_lich.tuoi.quan_he.ten}</b> — {the.hoang_lich.tuoi.quan_he.nghia}.</p>}
+                {the.hoang_lich.nghi.length > 0 && <p className="text-sm"><span className="text-jade">{h("hl.nen")}</span> {the.hoang_lich.nghi.join(", ")}</p>}
+                {the.hoang_lich.ky.length > 0 && <p className="text-sm"><span className="text-cinnabar">{h("hl.kieng")}</span> {the.hoang_lich.ky.join(", ")}</p>}
+                <p className="text-sm"><Link href={d("/xem-ngay-tot")} className="text-gold hover:underline">{h("hl.link")}</Link>
+                  {the.hoang_lich.ngay_tot_gan && <span className="text-fg-muted">{h("hl.gan", { ngay: dinhNgay(the.hoang_lich.ngay_tot_gan.ngay, ma, "dai") })}</span>}</p>
+              </MucGap>
+            )}
+            {the.hoang_lich && !en && (
               <MucGap ma="hoang_lich" testId="hoang-lich-hom-nay" tieuDe={c("hoang_lich.tieu_de")}
                 phu={<>{the.hoang_lich.hoang_dao ? "Hoàng đạo" : "Hắc đạo"} · {the.hoang_lich.than}</>}
                 tomTat={the.hoang_lich.nghi.length > 0 ? <>Nên: {the.hoang_lich.nghi.slice(0, 3).join(", ")}</> : <>Trực {the.hoang_lich.truc} ({the.hoang_lich.truc_y})</>}>
@@ -496,7 +548,24 @@ export function HomNay() {
                   {the.hoang_lich.ngay_tot_gan && <span className="text-fg-muted"> · Ngày đẹp gần nhất: {dmy(the.hoang_lich.ngay_tot_gan.ngay)}</span>}</p>
               </MucGap>
             )}
-            {(the.thang_ca_nhan.chu_de || the.nam_ca_nhan.chu_de) && (
+            {(the.thang_ca_nhan.chu_de || the.nam_ca_nhan.chu_de) && en && (
+              <MucGap ma="thang_nam" testId="thang-nam" tieuDe={h("tn.tieu_de")}
+                tomTat={<>{the.thang_ca_nhan.chu_de}{the.thang_ca_nhan.chu_de && the.nam_ca_nhan.chu_de ? " · " : ""}{the.nam_ca_nhan.chu_de}</>}>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {[{ nhan: h("tn.thang", { thang: dinhNgay({ nam: the.nam_ca_nhan.nam, thang: the.thang_ca_nhan.thang, ngay: 1 }, ma, "thang_nam") }), ...the.thang_ca_nhan },
+                    { nhan: h("tn.nam", { nam: String(the.nam_ca_nhan.nam) }), ...the.nam_ca_nhan }].map((x) => x.chu_de && (
+                    <article key={x.nhan} className="rounded-xl border border-line/70 bg-bg/40 p-4">
+                      <div className="flex items-center justify-between text-sm text-fg-muted"><span>{x.nhan}</span>
+                        <span className="rounded-full bg-gold/15 px-2 py-0.5 font-semibold text-gold">{h("tn.so", { so: String(x.so) })}</span></div>
+                      <h3 className="mt-2 text-lg">{x.chu_de}</h3>
+                      {x.nen && <p className="mt-1 text-sm"><span className="text-jade">{h("tn.hop")}</span> {x.nen}</p>}
+                      {x.tranh && <p className="mt-1 text-sm"><span className="text-cinnabar">{h("tn.de_y")}</span> {x.tranh}</p>}
+                    </article>
+                  ))}
+                </div>
+              </MucGap>
+            )}
+            {(the.thang_ca_nhan.chu_de || the.nam_ca_nhan.chu_de) && !en && (
               <MucGap ma="thang_nam" testId="thang-nam" tieuDe={<>Tháng {the.thang_ca_nhan.thang} và năm {the.nam_ca_nhan.nam} của bạn</>}
                 tomTat={<>{the.thang_ca_nhan.chu_de}{the.thang_ca_nhan.chu_de && the.nam_ca_nhan.chu_de ? " · " : ""}{the.nam_ca_nhan.chu_de}</>}>
                 <div className="grid gap-3 sm:grid-cols-2">
@@ -518,6 +587,21 @@ export function HomNay() {
                 <ul className="space-y-2 text-sm">{the.cau_hoi_noi_bat.map((x) => <li key={x} className="border-l-2 border-moon/50 pl-3">{x}</li>)}</ul>
               </MucGap>
             )}
+            {en && (
+            <MucGap ma="phai_khac" testId="ngay-chaldea" tieuDe={h("ch.tieu_de")}
+              phu={h("ch.phu", { so: String(the.ngay_pho_quat.so), ch: String(the.chaldea.so), kep: the.chaldea.kep ? h("ch.kep", { kep: String(the.chaldea.kep) }) : "" })}
+              tomTat={the.ngay_pho_quat.nghia ?? h("ch.hai_cach")}>
+              {the.ngay_pho_quat.nghia && (
+                <p className="text-sm" data-testid="ngay-pho-quat"><span className="inline-flex items-center gap-1.5 text-fg-muted"><Globe2 className="size-4" aria-hidden />{h("ch.chung", { so: String(the.ngay_pho_quat.so) })}</span> {the.ngay_pho_quat.nghia}</p>
+              )}
+              <p className="text-sm"><span className="text-fg-muted">{h("ch.theo", { so: String(the.chaldea.so), kep: the.chaldea.kep ? h("ch.kep_ngan", { kep: String(the.chaldea.kep) }) : "" })}</span>{" "}
+                {the.chaldea.nghia_kep ? <><b>{the.chaldea.nghia_kep.bieu_tuong}</b> — {the.chaldea.nghia_kep.xu_huong}</>
+                  : the.chaldea.nghia_goc && <><b>{the.chaldea.nghia_goc.ten}</b> ({the.chaldea.nghia_goc.hanh_tinh})</>}</p>
+              <p className="text-xs text-fg-muted">{the.chaldea.cong_huong ? h("ch.cong_huong", { so: String(the.chaldea.so_ngay_sinh) }) : h("ch.so_sinh", { so: String(the.chaldea.so_ngay_sinh) })}{" "}
+                <Link href={d("/than-so")} className="text-gold hover:underline">{h("ch.link")}</Link></p>
+            </MucGap>
+            )}
+            {!en && (
             <MucGap ma="phai_khac" testId="ngay-chaldea" tieuDe="Ngày chung và phái Chaldea"
               phu={<>ngày chung số {the.ngay_pho_quat.so} · Chaldea số {the.chaldea.so}{the.chaldea.kep ? ` (kép ${the.chaldea.kep})` : ""}</>}
               tomTat={the.ngay_pho_quat.nghia ?? "Hai cách tính khác cho cùng ngày này."}>
@@ -531,10 +615,11 @@ export function HomNay() {
                 ? `Trùng số ngày sinh của bạn (${the.chaldea.so_ngay_sinh}) — phái này gọi là ngày cộng hưởng.`
                 : `Số ngày sinh của bạn theo Chaldea là ${the.chaldea.so_ngay_sinh}.`} <Link href="/than-so" className="text-gold hover:underline">Xem bài đọc Chaldea</Link></p>
             </MucGap>
+            )}
             </div>
           </section>
 
-          <CuoiBaiDoc moDun="hom_nay" cauHoi="Thẻ hôm nay có giúp bạn định hướng ngày của mình?" />
+          <CuoiBaiDoc moDun="hom_nay" cauHoi={h("cuoi.hoi")} khongCta={en} />
           <p className="text-xs text-fg-faint">{the.luu_y}</p>
         </div>
       )}

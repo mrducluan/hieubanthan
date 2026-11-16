@@ -158,22 +158,22 @@ export const CHU_HOP_DOI = gopBang(KHUNG, {
 });
 
 export const CHU_HOM_NAY = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Mỗi ngày một thẻ", toi_da: 60 },
-  "hoang_lich.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục hoàng lịch", mac_dinh: "Hoàng lịch hôm nay", toi_da: 80 },
-  "y_dinh.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục ý định", mac_dinh: "Hôm nay bạn định làm gì?", toi_da: 80 },
-  "noi_bat.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục câu hỏi nổi bật", mac_dinh: "Câu hỏi nổi bật hôm nay", toi_da: 80 },
-  "hom_qua.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục hỏi lại hôm qua", mac_dinh: "Hôm qua của bạn", toi_da: 80 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Mỗi ngày một thẻ", en: "A new card every day", toi_da: 60 },
+  "hoang_lich.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục hoàng lịch", mac_dinh: "Hoàng lịch hôm nay", en: "Today in the Chinese almanac", toi_da: 80 },
+  "y_dinh.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục ý định", mac_dinh: "Hôm nay bạn định làm gì?", en: "What are you planning today?", toi_da: 80 },
+  "noi_bat.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục câu hỏi nổi bật", mac_dinh: "Câu hỏi nổi bật hôm nay", en: "Questions for today", toi_da: 80 },
+  "hom_qua.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề mục hỏi lại hôm qua", mac_dinh: "Hôm qua của bạn", en: "Your yesterday", toi_da: 80 },
   "hom_qua.cau": { nhom: "Các mục", nhan: "Câu hỏi lại hôm qua ({ten} = việc, {nhip} = nhịp đã gợi ý)",
-    mac_dinh: "Hôm qua gợi ý cho việc {ten}: {nhip}. Với bạn có đúng vậy không?", toi_da: 160 },
-  "hom_qua.cam_on": { nhom: "Các mục", nhan: "Lời cảm ơn sau khi trả lời", mac_dinh: "Cảm ơn bạn — câu trả lời giúp gợi ý những ngày sau sát hơn với bạn.", toi_da: 160 },
+    mac_dinh: "Hôm qua gợi ý cho việc {ten}: {nhip}. Với bạn có đúng vậy không?", en: "Yesterday's suggestion for {ten}: {nhip}. Did that ring true for you?", toi_da: 160 },
+  "hom_qua.cam_on": { nhom: "Các mục", nhan: "Lời cảm ơn sau khi trả lời", mac_dinh: "Cảm ơn bạn — câu trả lời giúp gợi ý những ngày sau sát hơn với bạn.", en: "Thank you — your answer helps make the next days' suggestions fit you better.", toi_da: 160 },
   // SAO-HH
-  "ba_la.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề khối ba lá của ngày", mac_dinh: "Ba lá của ngày", toi_da: 80 },
-  "la_bai.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề khối lá bài đầu ngày", mac_dinh: "Lá bài đầu ngày", toi_da: 80 },
-  "hen.tieu_de": { nhom: "Các mục", nhan: "Nhãn “Hẹn với chính mình” (cạnh chuỗi ngày)", mac_dinh: "Hẹn với chính mình", toi_da: 60 },
+  "ba_la.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề khối ba lá của ngày", mac_dinh: "Ba lá của ngày", en: "Three cards for today", toi_da: 80 },
+  "la_bai.tieu_de": { nhom: "Các mục", nhan: "Tiêu đề khối lá bài đầu ngày", mac_dinh: "Lá bài đầu ngày", en: "Card of the morning", toi_da: 80 },
+  "hen.tieu_de": { nhom: "Các mục", nhan: "Nhãn “Hẹn với chính mình” (cạnh chuỗi ngày)", mac_dinh: "Hẹn với chính mình", en: "A promise to yourself", toi_da: 60 },
 });
 
 export const CHU_XEM_NGAY = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Hoàng lịch mỗi ngày", toi_da: 60 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Hoàng lịch mỗi ngày", en: "The Chinese almanac, every day", toi_da: 60 },
 });
 export const CHU_LAM_NHA = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Tuổi dân gian", toi_da: 60 },
@@ -192,8 +192,8 @@ export const CHU_SAO_HAN = gopBang(KHUNG, {
 });
 // SEO-L5 — công cụ đổi lịch âm dương.
 export const CHU_DOI_LICH = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Âm lịch Việt Nam", toi_da: 60 },
-  "nam.tieu_de": { nhom: "Lịch theo năm", nhan: "Tiêu đề mục lịch âm từng năm", mac_dinh: "Lịch âm theo năm", toi_da: 80 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Âm lịch Việt Nam", en: "Vietnamese lunar calendar", toi_da: 60 },
+  "nam.tieu_de": { nhom: "Lịch theo năm", nhan: "Tiêu đề mục lịch âm từng năm", mac_dinh: "Lịch âm theo năm", en: "Lunar calendar by year", toi_da: 80 },
 });
 export const CHU_HAN_NAM = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Phong thuỷ theo năm", toi_da: 60 },

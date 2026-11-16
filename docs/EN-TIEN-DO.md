@@ -349,6 +349,12 @@ Ba nhóm song song (worktree riêng, tệp mẫu câu riêng `en/loi/{lich,nam_t
   `ten_en.json`; lời lỗi 422 và lỗi phép đo gương mặt (`do_anh.loi`) vẫn tiếng Việt (bộ đo không gọi ca lỗi); hỏi đáp Nhân tướng
   chưa hiểu câu tiếng Anh; tên Cửu Diệu / Bát hạn ở Thời gian tới (`tgt.sao.*`) nên gộp về bảng tên chung; web `/en` cho lịch, năm,
   tuổi, Nhân tướng, Chân dung, Thời gian tới chưa mở. Mọi chữ Anh `bien_tap`, chờ người bản xứ duyệt.
+- **Web lịch + Hôm nay** (worktree riêng): mở `/en/auspicious-dates` (+ ngày `/2026-11-16`, tháng `/2026-11`, việc `/weddings-2026-11` —
+  đuôi Anh, đuôi Việt gõ ở bản Anh → 308), `/en/lunar-calendar` (+ năm), `/en/lunar-converter`, `/en/today`. Một cây component, catalog
+  `lib/chu/{lich,hom-nay}.ts`, chữ máy chủ `lib/so-trang-en.ts`, hreflang hai chiều (trang Việt dùng `voiHreflang`), sitemap-en (ngày −7…+90,
+  tháng −12…+24, việc tháng này…+6, lịch âm ±10 năm). Bản Anh ẩn: chia sẻ thẻ / ba lá, nhịp ghé + Sao + hẹn + tổng kết tháng, hỏi lại,
+  nhắc việc, nhà, mời cài app, hai người hôm nay, quẻ riêng, CTA cuối bài, ảnh tóm tắt, khối CMS. HTML trang Việt: chỉ thêm hreflang ở 9 trang.
+  E2E `en-lich` 16/16. Engine còn: `than.loai` chữ Việt (không hiện), `tuan.tom_tat` "1 days", `/v1/lich/cac-nam` chưa có `ten_hien` cho `con_giap`.
 
 ## 3h. Chính sách chặn có ích + "nên chú ý" (CY-2, 2026-11-14, vi + en)
 
