@@ -94,6 +94,9 @@ def gan_khop(k: dict) -> dict:
             khop = [L("hoi.tq.khop_hanh", "hành {h}", h=_ten.ten("hanh", m["nhan"]))]
         elif kieu == "cot":   # "hành Kim" thay "Kim" trần — tránh khớp tên nạp âm / thần sát ("Kim Dư", "Phúc Đăng Hỏa")
             khop = _hai_kieu(*(f"hành {h}" for h in [m["nhan"], *([_HANH_KHAC[m["nhan"]]] if m["nhan"] in _HANH_KHAC else [])]))
+        elif kieu == "so" and not ngon_ngu.la_viet():   # bản dịch: "number 6", "Life Path 6"
+            khop = _hai_kieu(L("hoi.tq.khop_so", "số {n}", n=m["gia_tri"]),
+                             *([f"{m['nhan']} {m['gia_tri']}"] if not any(ch.isdigit() for ch in m["nhan"]) else []))
         elif kieu == "so":
             khop = _hai_kieu(f"số {m['gia_tri']}")
         elif kieu == "la_ban" and m.get("sac") == "hop":
@@ -475,31 +478,37 @@ def thanso(goi: dict) -> list[dict]:
     for m in muc:
         if m["loai"] == "linh_vuc" and m.get("vai") == "ban" and m.get("vi_tri") in _TEN_SO and m["vi_tri"] not in da:
             da.add(m["vi_tri"])
-            so.append({"nhan": _TEN_SO[m["vi_tri"]], "gia_tri": m["so"], "chu_thich": m.get("ten_linh_vuc") or ""})
+            so.append({"nhan": L(f"hoi.tq.ts.vt.{m['vi_tri']}", _TEN_SO[m["vi_tri"]]), "gia_tri": m["so"],
+                       "chu_thich": m.get("ten_linh_vuc") or "", "_goc": 0})
         elif m["loai"] == "thang_ca_nhan":
-            so.append({"nhan": f"Tháng {m['thang']}", "gia_tri": m["so"], "chu_thich": m.get("chu_de") or ""})
+            so.append({"nhan": L("hoi.tq.ts.thang", "Tháng {t}", t=m["thang"]), "gia_tri": m["so"],
+                       "chu_thich": m.get("chu_de") or "", "_goc": 1})
         elif m["loai"] == "dinh_cao" and m.get("hien_tai"):
-            so.append({"nhan": f"Chặng {m['tu_tuoi']}–{m['den_tuoi']} tuổi", "gia_tri": m["so"],
-                       "chu_thich": m.get("chu_de") or ""})
-    so.sort(key=lambda s: 0 if s["nhan"] in _TEN_SO.values() else 1)   # số gốc của người hỏi đứng trước nhịp thời gian
+            so.append({"nhan": L("hoi.tq.ts.chang", "Chặng {a}–{b} tuổi", a=m["tu_tuoi"], b=m["den_tuoi"]), "gia_tri": m["so"],
+                       "chu_thich": m.get("chu_de") or "", "_goc": 1})
+    so.sort(key=lambda s: s["_goc"])   # số gốc của người hỏi đứng trước nhịp thời gian
     for i, s in enumerate(so):
+        del s["_goc"]
         s["sac"] = "chinh" if i == 0 else "trung"
     if so:
-        ds.append({"kieu": "so", "tieu_de": "Các con số trả lời câu này", "muc": so[:4], "cau_chuan": cau_hien(_cau_ts(goi))})
+        ds.append({"kieu": "so", "tieu_de": L("hoi.tq.ts.so_tieu_de", "Các con số trả lời câu này"), "muc": so[:4],
+                   "cau_chuan": cau_hien(_cau_ts(goi))})
     nam = next((m for m in muc if m["loai"] == "nam_ca_nhan"), None)
     if nam and 1 <= nam["so"] <= 9:
-        ds.append({"kieu": "chu_ky", "tieu_de": f"Năm {nam['nam']} trong vòng 9 năm", "so_nac": 9, "hien_tai": nam["so"],
+        ds.append({"kieu": "chu_ky", "tieu_de": (L("hoi.tq.ts.nam_vong", "Năm {nam} trong vòng 9 năm", nam=nam["nam"]) if nam.get("nam")
+                               else L("hoi.tq.ts.nam_vong_so", "Năm cá nhân {so} trong vòng 9 năm", so=nam["so"])),
+                   "so_nac": 9, "hien_tai": nam["so"],
                    "cau_chuan": cau_hien(HOI_TS["nam"] if _cau_ts(goi) == HOI_TS["nam"] else None),
                    "nhan_hien_tai": nam.get("chu_de") or "", "giai_thich": nam.get("y_nghia") or ""})
         if nam.get("nen") or nam.get("tranh"):
-            ds.append({"kieu": "hai_cot", "tieu_de": "Năm nay nên và nên tránh",
-                       "trai": {"tieu_de": "Nên", "ds": [nam["nen"]] if nam.get("nen") else []},
-                       "phai": {"tieu_de": "Nên tránh", "ds": [nam["tranh"]] if nam.get("tranh") else []}})
+            ds.append({"kieu": "hai_cot", "tieu_de": L("hoi.tq.ts.nam_nen", "Năm nay nên và nên tránh"),
+                       "trai": {"tieu_de": L("hoi.tq.ts.nen", "Nên"), "ds": [nam["nen"]] if nam.get("nen") else []},
+                       "phai": {"tieu_de": L("hoi.tq.ts.tranh", "Nên tránh"), "ds": [nam["tranh"]] if nam.get("tranh") else []}})
     cd = next((m for m in muc if m["loai"] == "chan_dung" and m.get("diem_manh")), None)
     if cd:
-        ds.append({"kieu": "hai_cot", "tieu_de": f"Số {cd['so']}: mặt mạnh và chỗ dễ vấp",
-                   "trai": {"tieu_de": "Điểm mạnh", "ds": list(cd["diem_manh"])[:3]},
-                   "phai": {"tieu_de": "Dễ vấp", "ds": list(cd.get("diem_mu") or [])[:3]}})
+        ds.append({"kieu": "hai_cot", "tieu_de": L("hoi.tq.ts.so_mat", "Số {so}: mặt mạnh và chỗ dễ vấp", so=cd["so"]),
+                   "trai": {"tieu_de": L("hoi.tq.ts.manh", "Điểm mạnh"), "ds": list(cd["diem_manh"])[:3]},
+                   "phai": {"tieu_de": L("hoi.tq.ts.vap", "Dễ vấp"), "ds": list(cd.get("diem_mu") or [])[:3]}})
     return _cat(ds)
 
 

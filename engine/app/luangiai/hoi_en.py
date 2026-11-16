@@ -548,6 +548,9 @@ def tra_loi(cau: str, nguoi: dict, ngay_xem: dt.date | None = None, nguoi_kia: d
     kq.update(phan_loai=goi["phan_loai"], bang_chung=goi, cau_tra_loi=van, can_them=goi["can_them"],
               do_phu="day_du" if (goi["muc"] or dac_biet) else "khong", hoi_tiep=_hoi_tiep(pl.get("linh_vuc")),
               can_cu=_can_cu(goi, nguoi), hoi_lai=chung.hoi_lai_neu(pl, "thanso"))
+    if not goi["can_them"]:
+        from app.luangiai import truc_quan  # noqa: PLC0415
+        kq["truc_quan"] = truc_quan.thanso(goi)        # khối hình như bản Việt (chữ qua L(), KB qua bản phủ)
     if _at.ho_tro_mem_en(goc):
         kq["ho_tro"] = _at.loi_ho_tro_mem()
     return kq

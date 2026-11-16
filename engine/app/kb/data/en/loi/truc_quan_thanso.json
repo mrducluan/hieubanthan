@@ -1,0 +1,20 @@
+{
+ "hoi.tq.ts.vt.duong_doi": "Life Path",
+ "hoi.tq.ts.vt.su_menh": "Expression",
+ "hoi.tq.ts.vt.linh_hon": "Soul Urge",
+ "hoi.tq.ts.vt.nhan_cach": "Personality",
+ "hoi.tq.ts.vt.ngay_sinh": "Birthday",
+ "hoi.tq.ts.vt.thai_do": "Attitude",
+ "hoi.tq.ts.thang": "Month {t}",
+ "hoi.tq.ts.chang": "Ages {a}–{b}",
+ "hoi.tq.ts.so_tieu_de": "The numbers behind this answer",
+ "hoi.tq.ts.nam_vong": "{nam} in your 9-year cycle",
+ "hoi.tq.ts.nam_nen": "This year: lean into, and go easy on",
+ "hoi.tq.ts.nen": "Lean into",
+ "hoi.tq.ts.tranh": "Go easy on",
+ "hoi.tq.ts.so_mat": "Number {so}: strengths and blind spots",
+ "hoi.tq.ts.manh": "Strengths",
+ "hoi.tq.ts.vap": "Blind spots",
+ "hoi.tq.khop_so": "number {n}",
+ "hoi.tq.ts.nam_vong_so": "Personal Year {so} in your 9-year cycle"
+}

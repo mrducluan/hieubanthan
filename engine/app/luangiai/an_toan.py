@@ -1044,7 +1044,8 @@ TU_CHOI_ANH: list[tuple[re.Pattern, str]] = [
             r"(?:10x|100x|moon|go up|rise|pump|double|skyrocket|buy)"),
      "may_rui"),
     # GĐ 4: yểm bùa / nguyền rủa người khác bằng lá số — không làm
-    (_rx_en(r"(?:do|put|cast|place|make|perform) (?:a |an )?(?:curse|hex|spell|black magic|jinx) (?:on|against|for)",
+    # review vòng 4: "Did someone put a curse on me?" — người hỏi là NGƯỜI BỊ → dẫn hướng như bản Việt, không từ chối
+    (_rx_en(r"(?:do|put|cast|place|make|perform) (?:a |an )?(?:curse|hex|spell|black magic|jinx) (?:on|against|for)(?! me\b| us\b| my (?:house|home|family|shop|business)\b)",
             r"(?:curse|hex|jinx) (?:my |him|her|them|that|this)(?! (?:word|words))"),
      "ngoai_pham_vi"),
     # chọn / loại người làm theo lá số (của NGƯỜI ĐƯỢC CHỌN — "my bazi says hire next year" là câu thời điểm, không chặn)
@@ -1576,7 +1577,7 @@ _TU_CHOI_GD6: list[tuple[re.Pattern, str]] = [
             r"(?:make|making|see|watch) (?:my |our |the |that )?(?:neighbou?r|ex|boss|rival|colleague|coworker|competitor|landlord|"
             r"in laws?|sister in law|brother in law)\w* (?:s )?(?:\w+ ){0,2}(?:fail|suffer|go bankrupt|lose (?:it|everything|their \w+)|"
             r"get sick|get fired|break up|collapse)"), "ngoai_pham_vi"),
-    (_rx_en(r"(?:cast|put|place|lay|send) (?:a )?curse|curse (?:hexagram|spell)? ?(?:on|against) (?:my |the |that )?\w+|hex (?:on|against) (?:my|the)"),
+    (_rx_en(r"(?:cast|put|place|lay|send) (?:a )?curse(?! on me\b| on us\b| on my (?:house|home|family|shop|business)\b)|curse (?:hexagram|spell)? ?(?:on|against) (?!me\b|us\b|my (?:house|home|family|shop|business)\b)(?:my |the |that )?\w+|hex (?:on|against) (?:my|the)"),
      "ngoai_pham_vi"),
     (_rx_en(r"(?:hire|hiring|recruit\w*|pick|choose|select|fire|sack|promote)\b.{0,60}(?:applicants?|candidates?|staff|employees?|workers?)"
             r"\b.{0,60}(?:hexagrams?|i ching|iching|coins|oracle|cast\w*|yijing)|(?:hexagrams?|i ching|oracle|cast\w*)\b.{0,60}"

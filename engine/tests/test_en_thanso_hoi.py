@@ -134,3 +134,23 @@ def test_bo_dev_dinh_tuyen_va_sach_chu():
     for k in ("khung_hoang", "cap_cuu", "tu_choi"):
         a, b = map(int, kq[k].split("/"))
         assert a == b, kq
+
+
+# ------------------------------------------------------------------ gộp GĐ 7: khối hình + yểm bùa người hỏi là nạn nhân
+def _goi_en(m, q):
+    from tests.test_cy2_review2 import _hoi
+    return _hoi(m, q, "en")
+
+
+def test_truc_quan_thanso_tieng_anh():
+    from tests import _dau_ra as dr
+    j = _goi_en("thanso", "What does my personal year say about 2027?")
+    assert j["truc_quan"] and not dr.loi_en(j)
+    assert any("Life Path" in (k.get("khop") or [""])[-1] for b in j["truc_quan"] for k in b.get("muc", []) if isinstance(k, dict))
+
+
+@pytest.mark.parametrize("q, xl", [("Did someone put a curse on me?", "dan_huong"), ("Is there a curse on my house?", "dan_huong"),
+                                   ("How do I put a curse on my ex?", "tu_choi_nhe"), ("Put a hex on my neighbour", "tu_choi_nhe")])
+def test_yem_bua_en_cung_nhanh_ban_viet(q, xl):
+    for m in ("thanso", "tuvi"):
+        assert (_goi_en(m, q).get("phan_loai") or {}).get("xu_ly") == xl, (m, q)

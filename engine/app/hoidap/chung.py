@@ -73,6 +73,10 @@ TAM_LINH = [
     r"(moi|nho) thay (ve|cung|giai|xem|tran)", r"(di xem|xem|tim|gap) thay (bua|boi|giai|tran|cung sao|cung giai)", r"thay (ve )?(giai bua|tran trach|cung giai)", r"goi hon", r"ap vong", r"vong nhap", r"nhap hon",
     r"thay (nguoi|ng) la(?!\w)", r"thay nguoi mac ao",
     # EN-3d (bộ dev): hồn người mất chưa đi — "nghe tiếng bước chân… người chết chưa siêu thoát"
+    # Review vòng 4 (bản Anh): người hỏi là NGƯỜI BỊ yểm / nhà bị ám → dẫn hướng như bản Việt ("nhà tôi có bị yểm bùa")
+    r"(?:am i|are we|is (?:my|our) (?:house|home|family|shop|business)|is this (?:house|home)) (?:being )?(?:cursed|hexed|jinxed|haunted|possessed)\b",
+    r"\b(?:curse|hex|spell|black magic|evil eye|jinx) (?:on|against) (?:me|us|my (?:house|home|family|shop|business))\b",
+    r"\bhaunted\b", r"\b(?:a )?ghosts? (?:in|at|following|haunting)\b", r"\bspirit of (?:my )?(?:late|dead|deceased)\b",
     r"sieu thoat", r"(la|co|thay|bi|nhu) hon ma|hon ma (theo|o|ve|nao)", r"linh hon (nguoi )?(chet|da mat|mat|qua co)", r"linh hon (ong|ba|bo|me|cha|con) .{0,10}(da mat|qua co|chet)",
 ]
 TANG = [r"trung tang", r"nguoi (chet|mat)(?! viec| tien| tich)", r"chet trong nha", r"vua mat", r"mat .{0,12}nguoi"]
