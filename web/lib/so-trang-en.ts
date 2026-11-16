@@ -73,6 +73,54 @@ export const CUM_EN: Readonly<Record<string, CumEn>> = {
     mo_ta: "Old verses of Zi Wei Dou Shu in the original Chinese with pinyin and a plain-English editorial translation, and what each line means on a real chart.",
     tra_loi: "The rules of Zi Wei Dou Shu were handed down as short verses in classical Chinese. This section gives the original text with pinyin, a plain-English translation by our editorial team, and what each line means when you read a chart. It has {so} page(s).",
   },
+  "/than-so/y-nghia-so": {
+    ten: "Numbers 1–9, 11, 22, 33", h1: "What each number means in numerology",
+    tieu_de_seo: "Numerology numbers 1–9, 11, 22, 33: meaning and shadow side · Hieuban",
+    mo_ta: "What numbers 1 to 9 and the master numbers 11, 22 and 33 mean in Pythagorean numerology: keywords, strengths, shadow side and a question to ask yourself.",
+    tra_loi: "In Pythagorean numerology every core number (Life Path, Expression, Soul Urge, Personality) reduces to 1–9, except the master numbers 11, 22 and 33, which are kept. Each number is a set of tendencies to check against yourself, with a shadow side and a counter-question, never a verdict. This section has {so} pages, one for each number.",
+  },
+  "/than-so/nghe-nghiep": {
+    ten: "Careers by Life Path", h1: "Which careers suit each Life Path number",
+    tieu_de_seo: "Careers by Life Path number: strengths, roles, traps · Hieuban",
+    mo_ta: "Which kinds of work tend to suit each Life Path number: strengths, the environment that helps, roles, the career trap to watch and money habits.",
+    tra_loi: "Numerology does not pick a job for you, but each Life Path number tends to do best in certain kinds of work: some start things, some build, some care for people, some analyse. This section has {so} pages, one per Life Path number: strengths at work, the environment and roles that suit, the trap to watch, and habits around money.",
+  },
+  "/than-so/tinh-yeu": {
+    ten: "Life Path numbers in love", h1: "How each Life Path number loves",
+    tieu_de_seo: "Life Path numbers in love: how they love, blind spots · Hieuban",
+    mo_ta: "How each Life Path number tends to love: what it needs, its blind spots, the kind of person who suits it, and signs the rhythm is off. No scores.",
+    tra_loi: "Your Life Path number colours how you love: what you need from a partner, how you show care, and where you tend to trip. This section has {so} pages, one per Life Path number, covering how it loves, its blind spots, the kind of person who suits it, signs that the rhythm is off, and a question to ask yourself. No compatibility scores.",
+  },
+  "/than-so/nam-ca-nhan": {
+    ten: "Personal Years 1–9", h1: "Personal Years 1 to 9 in numerology",
+    tieu_de_seo: "Personal Year 1–9 in numerology: what to do and avoid · Hieuban",
+    mo_ta: "What each Personal Year from 1 to 9 tends to bring in numerology: what to do, what to avoid, what often comes up, and how to work out your own Personal Year.",
+    tra_loi: "Your Personal Year is your birth day and month added to the current calendar year, reduced to 1–9. The years run in a nine-year cycle, from beginnings (1) to closing and letting go (9). This section has {so} pages, one per Personal Year: what it tends to bring, what to do, what to avoid, and how to work out your own.",
+  },
+  "/than-so/no-nghiep": {
+    ten: "Karmic debt 13, 14, 16, 19", h1: "Karmic debt numbers 13, 14, 16 and 19",
+    tieu_de_seo: "Karmic debt 13, 14, 16, 19 in numerology: meaning · Hieuban",
+    mo_ta: "What karmic debt numbers 13, 14, 16 and 19 mean in numerology, when they count as present, and how to read them as lessons to practise, not a sentence.",
+    tra_loi: "In numerology a karmic debt number is 13, 14, 16 or 19 showing up as an unreduced total on the way to a core number. It is read as a lesson to practise, not a punishment. This section has {so} pages, one per number: what it means, when it counts as present, and a concrete way to work with it.",
+  },
+  "/than-so/so-kep": {
+    ten: "Chaldean compound numbers 10–52", h1: "Chaldean compound numbers 10 to 52",
+    tieu_de_seo: "Chaldean compound numbers 10–52: meaning of each · Hieuban",
+    mo_ta: "Chaldean compound numbers 10 to 52 (after Cheiro): the image of each, its meaning and shadow side, what it reduces to, and whether your name carries it.",
+    tra_loi: "In Chaldean numerology the total of a name or birth date is read before it is reduced: 10 to 52 each have their own image, from the wheel of fortune (10) upward. This section has {so} pages, one per compound number: meaning, shadow side, the single digit it reduces to, and how to tell whether your name carries it. Written neutrally — no number is called unlucky.",
+  },
+  "/hop-doi/cap-so": {
+    ten: "Life Path number pairs", h1: "Which Life Path numbers get along",
+    tieu_de_seo: "Life Path compatibility: every pair of numbers 1–9 · Hieuban",
+    mo_ta: "Every pair of Life Path numbers from 1 and 1 to 9 and 9: where the two flow, where they clash, and what to do together to keep things smooth. No scores.",
+    tra_loi: "Numerology compares two people mainly through their Life Path numbers. Each pair has places where it flows easily and places where it tends to clash; neither makes a match good or bad. This section has {so} pages, one for each pair from 1 and 1 to 9 and 9, with what to do together and a question to reflect on. No compatibility scores.",
+  },
+  "/tarot/la-bai": {
+    ten: "The 78 tarot cards", h1: "Meaning of all 78 tarot cards",
+    tieu_de_seo: "78 tarot card meanings: upright, reversed, love, work · Hieuban",
+    mo_ta: "The 22 Major and 56 Minor Arcana in plain English from Waite 1910, Mathers 1888 and Book T: upright, reversed, love, work, money, one thing to do.",
+    tra_loi: "A tarot deck has 78 cards: 22 Major Arcana for the big stages of life, and 56 Minor Arcana in four suits — Wands (will, work), Cups (feelings), Swords (thinking, conflict) and Pentacles (money, body, home). This section has {so} pages, one per card, with its upright and reversed meaning, how it reads in love, work and money, and one small thing to do. A reversed card is not a bad omen.",
+  },
   "/kinh-dich/que": {
     ten: "The 64 hexagrams", h1: "The 64 hexagrams of the I Ching",
     tieu_de_seo: "The 64 I Ching hexagrams: meaning, lines and judgement · Hieuban",
@@ -199,6 +247,42 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
     kien_thuc: {
       tieu_de: "Learn feng shui",
       cum: Object.fromEntries(["/phong-thuy/dau-hieu"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
+    },
+  },
+  "/tarot": {
+    ten: "Tarot",
+    tieu_de_seo: "Free tarot reading: draw your own cards for one question · Hieuban",
+    mo_ta_seo: "Free tarot reading: type a question, shuffle and draw your own cards from the 78-card Rider–Waite deck, and get a straight answer first. No predictions.",
+    tra_loi_nhanh: {
+      hoi: "How does this online tarot reading work?",
+      dap: "Type your question, pick a spread (one card, three cards, Two choices, When…), shuffle with your own hand and draw from the 78 cards. The reading answers exactly what you asked — leaning yes, yes with a condition, or not yet — then tells the cards in order, upright or reversed, with what to do in the next 72 hours. Tarot is a mirror for thinking, not a prediction.",
+      lien_ket: [{ href: "/en/tarot/cards", ten: "Meaning of the 78 tarot cards" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the tarot reading",
+      doan: [
+        "Ask about one matter in your own life — a decision, a relationship, work, money — and draw your own cards. You shuffle by holding a button; the rhythm of your hand is hashed on your device into the shuffle seed, so only a hash leaves your device. Or let the machine shuffle.",
+        "Card meanings follow Waite's Pictorial Key to the Tarot (1910) and Mathers (1888), with the Golden Dawn's elemental dignities (Book T) for how neighbouring cards strengthen or hold each other back, and the Marseille way of reading where a figure is looking. A reversed card is read as a quality that is blocked or turned inward — never as a bad omen.",
+        "The reading opens with the answer to what you asked, then the story the cards tell together, each position, and three small things to do. It does not predict events, does not give scores, and does not read other people. Decisions stay with you.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Is the shuffle really random?", dap: "You shuffle by holding the button and moving your finger; the rhythm is hashed in your browser into a seed, and the server shuffles from it. Only the hash leaves your device. You can also let the machine shuffle." },
+        { hoi: "Which tarot tradition is used?", dap: "Meanings follow Waite's Pictorial Key (1910) and Mathers (1888), with Golden Dawn elemental dignities (Book T) for how neighbouring cards affect each other, and the Marseille reading of numbers and gaze." },
+        { hoi: "Do reversed cards mean something bad?", dap: "No. A reversed card means the quality is blocked, turned inward, delayed or overdone — the reading says so and gives a small step to take." },
+        { hoi: "Which spread should I choose?", dap: "One card for a quick focus, three cards for a situation, the obstacle and advice, Two choices when you are weighing A against B, When for timing, and the Celtic Cross for a full picture. When you type a question, the page picks the spread that fits it; you can change it." },
+        { hoi: "Can it read another person?", dap: "No. The cards here read the person asking. Ask what you should do about a situation and the spread can answer that." },
+        { hoi: "Is it free? Is my question stored?", dap: "The tarot reading is free. Your question passes through one reading and is not stored on our side; the spreads you have drawn are saved only on your device, and you can delete them at any time." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/numerology", ten: "Numerology from your name and birth date" },
+        { href: "/en/i-ching", ten: "I Ching reading" },
+        { href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" },
+      ] },
+    },
+    kien_thuc: {
+      tieu_de: "Learn tarot",
+      cum: Object.fromEntries(["/tarot/la-bai"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
     },
   },
   "/kinh-dich": {

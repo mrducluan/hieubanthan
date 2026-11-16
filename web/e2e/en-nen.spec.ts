@@ -99,7 +99,7 @@ test.describe("bảng đường dẫn", () => {
     expect(khongCoBanAnh("/quan-tri/cai-dat")).toBe(true);
     expect(khongCoBanAnh("/tu-vi")).toBe(false);
     expect(banVietCuaTrang("/en/numerology/life-path/7")).toBe("/than-so/y-nghia-so/so-7");
-    expect(banVietCuaTrang("/en/tarot/cards/the-fool")).toBe("/tarot/la-bai");
+    expect(banVietCuaTrang("/en/tarot/cards/the-fool")).toBe("/tarot/la-bai/the-fool");
     expect(banVietCuaTrang("/en/khong-co")).toBe("/");
   });
 });

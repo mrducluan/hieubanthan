@@ -125,14 +125,15 @@ export const CHU_NHAN_TUONG = gopBang(mangHuyenHoc(true, "Tự soi gương · Ta
 });
 
 // TR-1: Tarot — năm bước (hỏi · xáo · rút · lật · đọc), lá của ngày, bài đọc 8 chương (mở bằng câu trả lời đúng câu hỏi — TR-2), hỏi đáp nghĩa lá.
-export const CHU_TAROT = gopBang(mangHuyenHoc(true, "Tarot · 4 trường phái · 78 lá"), {
-  "la_ngay.tieu_de": { nhom: "Lá của ngày", nhan: "Dòng nhỏ khối lá của ngày", mac_dinh: "Lá của ngày", toi_da: 60 },
-  "hoi_bai.nho": { nhom: "Trải bài", nhan: "Bước 1 — dòng nhỏ", mac_dinh: "Bước 1", toi_da: 60 },
-  "hoi_bai.lon": { nhom: "Trải bài", nhan: "Bước 1 — tiêu đề", mac_dinh: "Bạn đang hỏi chuyện gì?", toi_da: 120 },
-  "bai_doc.nho": { nhom: "Bài đọc", nhan: "Mục bài đọc — dòng nhỏ", mac_dinh: "Bài đọc tám chương", toi_da: 60 },
-  "bai_doc.lon": { nhom: "Bài đọc", nhan: "Mục bài đọc — tiêu đề", mac_dinh: "Trải bài của bạn", toi_da: 120 },
-  "hoi.nho": { nhom: "Hỏi đáp", nhan: "Mục hỏi — dòng nhỏ", mac_dinh: "Hỏi đáp chuyên sâu", toi_da: 60 },
-  "hoi.lon": { nhom: "Hỏi đáp", nhan: "Mục hỏi — tiêu đề", mac_dinh: "Hỏi về một lá, một trải bài", toi_da: 120 },
+// EN-ALL GĐ 7: /en/tarot là rewrite của /tarot → mọi khoá có chiều `en`.
+export const CHU_TAROT = gopBang(mangHuyenHoc(true, "Tarot · 4 trường phái · 78 lá", "Tarot · four traditions · 78 cards"), {
+  "la_ngay.tieu_de": { nhom: "Lá của ngày", nhan: "Dòng nhỏ khối lá của ngày", mac_dinh: "Lá của ngày", en: "Card of the day", toi_da: 60 },
+  "hoi_bai.nho": { nhom: "Trải bài", nhan: "Bước 1 — dòng nhỏ", mac_dinh: "Bước 1", en: "Step 1", toi_da: 60 },
+  "hoi_bai.lon": { nhom: "Trải bài", nhan: "Bước 1 — tiêu đề", mac_dinh: "Bạn đang hỏi chuyện gì?", en: "What are you asking about?", toi_da: 120 },
+  "bai_doc.nho": { nhom: "Bài đọc", nhan: "Mục bài đọc — dòng nhỏ", mac_dinh: "Bài đọc tám chương", en: "Your reading", toi_da: 60 },
+  "bai_doc.lon": { nhom: "Bài đọc", nhan: "Mục bài đọc — tiêu đề", mac_dinh: "Trải bài của bạn", en: "Your spread", toi_da: 120 },
+  "hoi.nho": { nhom: "Hỏi đáp", nhan: "Mục hỏi — dòng nhỏ", mac_dinh: "Hỏi đáp chuyên sâu", en: "Ask in depth", toi_da: 60 },
+  "hoi.lon": { nhom: "Hỏi đáp", nhan: "Mục hỏi — tiêu đề", mac_dinh: "Hỏi về một lá, một trải bài", en: "Ask about a card or a spread", toi_da: 120 },
 });
 
 export const CHU_THAN_SO = gopBang(KHUNG, {

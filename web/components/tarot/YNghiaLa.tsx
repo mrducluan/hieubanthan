@@ -10,15 +10,20 @@ import { MatTruoc } from "./LaBai";
 import { slug } from "./LaNgay";
 import type { LaGon } from "@/lib/tarot-chung";
 import { cn } from "@/lib/utils";
+import { useDuong } from "@/components/khung/NgonNgu";
+import { useChuTarot } from "./chu-tarot";
 
 export interface MucLa {
   /** chỉ số vị trí trên bàn (0…) */ so: number; viTri: string; hoi: string; la: LaGon; nguoc: boolean; tuKhoa: string[];
   noiDung?: string; viec?: string | null; tuSoi?: string | null;
 }
 
-export function YNghiaLa({ muc, chon, onChon, tieuDe = "Ý nghĩa từng lá", ghiChu, className }: {
+export function YNghiaLa({ muc, chon, onChon, tieuDe: tieuDeVao, ghiChu, className }: {
   muc: MucLa[]; chon: number | null; onChon: (so: number) => void; tieuDe?: string; ghiChu?: string; className?: string;
 }) {
+  const { c, la: chuLa } = useChuTarot();
+  const d = useDuong();
+  const tieuDe = tieuDeVao ?? c("ynl.tieu_de");
   const refDai = useRef<HTMLDivElement>(null);
   const dang = muc.find((m) => m.so === chon) ?? null;
   // Lá đang chọn luôn nằm trong tầm nhìn của dải (lật lá thứ 9 trên điện thoại → dải tự trượt tới).
@@ -42,28 +47,28 @@ export function YNghiaLa({ muc, chon, onChon, tieuDe = "Ý nghĩa từng lá", g
           <button key={m.so} type="button" role="tab" aria-selected={chon === m.so} data-so={m.so} data-testid="the-la" onClick={() => onChon(m.so)}
             className={cn("w-[104px] shrink-0 snap-start rounded-xl border p-2 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-gold sm:w-[118px]",
               chon === m.so ? "border-gold bg-gold/10" : "border-line/60 hover:border-gold/40")}>
-            <MatTruoc la={m.la} nguoc={m.nguoc} gap />
+            <MatTruoc la={m.la} nguoc={m.nguoc} nhanNguoc={chuLa.nhan_nguoc} gap />
             <span className="mt-1.5 block truncate text-[11px] text-fg-faint">{m.so + 1}. {m.viTri}</span>
-            <span className="block truncate text-xs font-medium text-fg">{m.la.ten}{m.nguoc && <span className="font-normal text-[#f0b35c]"> · ngược</span>}</span>
+            <span className="block truncate text-xs font-medium text-fg">{m.la.ten}{m.nguoc && <span className="font-normal text-[#f0b35c]">{chuLa.nguoc_nhan}</span>}</span>
           </button>
         ))}
       </div>
       {dang && (
         <div role="tabpanel" className="mt-3 grid gap-4 rounded-xl border border-line/60 bg-bg/40 p-4 sm:grid-cols-[112px_1fr]" data-testid="nghia-la-dang-chon" aria-live="polite">
-          <div className="mx-auto w-24 sm:w-full"><MatTruoc la={dang.la} nguoc={dang.nguoc} gap /></div>
+          <div className="mx-auto w-24 sm:w-full"><MatTruoc la={dang.la} nguoc={dang.nguoc} nhanNguoc={chuLa.nhan_nguoc} gap /></div>
           <div className="min-w-0">
-            <p className="eyebrow">Vị trí {dang.so + 1} · {dang.viTri}</p>
+            <p className="eyebrow">{c("ynl.vi_tri", { so: String(dang.so + 1), ten: dang.viTri })}</p>
             <p className="text-sm text-fg-muted">{dang.hoi}</p>
-            <h4 className="mt-2 font-serif text-xl text-fg">{dang.la.ten}{dang.nguoc ? " (ngược)" : ""}{dang.la.en && <span className="ml-2 font-sans text-sm text-fg-faint">{dang.la.en}</span>}</h4>
-            <ul className="mt-2 flex flex-wrap gap-1.5" aria-label="Từ khoá">
+            <h4 className="mt-2 font-serif text-xl text-fg">{dang.la.ten}{dang.nguoc ? chuLa.nguoc : ""}{dang.la.en && dang.la.en !== dang.la.ten && <span className="ml-2 font-sans text-sm text-fg-faint">{dang.la.en}</span>}</h4>
+            <ul className="mt-2 flex flex-wrap gap-1.5" aria-label={c("ynl.tu_khoa")}>
               {dang.tuKhoa.map((k) => <li key={k} className="rounded-full border border-gold/30 bg-gold/5 px-2.5 py-0.5 text-xs text-fg">{k}</li>)}
             </ul>
             {dang.noiDung && <p className="mt-3 text-[0.95rem] leading-relaxed text-fg">{dang.noiDung}</p>}
-            {dang.viec && <p className="mt-2 text-sm text-fg"><b className="text-gold">Việc nhỏ nên làm:</b> {dang.viec}</p>}
-            {dang.tuSoi && <p className="mt-2 text-sm italic text-fg-muted">Tự hỏi: {dang.tuSoi}</p>}
+            {dang.viec && <p className="mt-2 text-sm text-fg"><b className="text-gold">{c("ynl.viec")}</b> {dang.viec}</p>}
+            {dang.tuSoi && <p className="mt-2 text-sm italic text-fg-muted">{c("ynl.tu_hoi")} {dang.tuSoi}</p>}
             <p className="mt-3 text-sm">
-              <Link href={`/tarot/la-bai/${slug(dang.la.ten)}`} target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 text-gold underline-offset-4 hover:underline" data-testid="link-la-day-du">
-                <BookOpen className="size-4" aria-hidden /> Xem đầy đủ ý nghĩa lá {dang.la.ten}
+              <Link href={d("/tarot/la-bai", `/${slug(dang.la.ten)}`)} target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 text-gold underline-offset-4 hover:underline" data-testid="link-la-day-du">
+                <BookOpen className="size-4" aria-hidden /> {c("ynl.day_du", { ten: dang.la.ten })}
               </Link>
             </p>
           </div>

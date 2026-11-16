@@ -4,6 +4,8 @@
 // nhớ trong phiên. Web không tính gì: thứ tự lá, phẩm giá, lời đọc đều của engine.
 import { useEffect, useState } from "react";
 import { MA_LA, laMaTraiBai, type BoBai, type LaRut, type MaTraiBai } from "@/lib/tarot-chung";
+import { maNgonNguTrang, urlTheoNgonNgu } from "@/lib/ngon-ngu";
+import { kemNgonNgu } from "@/lib/sao-client";
 
 export const KHOA_LICH_SU = "hbt.tarot.v1";
 export const TOI_DA_LICH_SU = 20;
@@ -49,24 +51,31 @@ export async function hatGiong(cuChi: string): Promise<string> {
   }
 }
 
-let boNho: BoBai | null = null;
-let dangTai: Promise<BoBai | null> | null = null;
-/** Bộ bài (78 lá rút gọn + trải bài) — tải một lần mỗi phiên. */
-export function useBoBai(): { bo: BoBai | null; loi: string | null; thuLai: () => void } {
-  const [bo, setBo] = useState<BoBai | null>(boNho);
+// EN-ALL GĐ 7: bộ bài theo ngôn ngữ trang (tên lá, trải bài, vị trí do engine trả) — nhớ riêng từng ngôn ngữ.
+const boNho = new Map<string, BoBai>();
+const dangTai = new Map<string, Promise<BoBai | null>>();
+/** Bộ bài (78 lá rút gọn + trải bài) — tải một lần mỗi phiên. `loiThuLai`: câu lỗi theo ngôn ngữ trang. */
+export function useBoBai(loiThuLai = "Chưa tải được bộ bài — thử lại sau ít phút."): { bo: BoBai | null; loi: string | null; thuLai: () => void } {
+  const [bo, setBo] = useState<BoBai | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [lan, setLan] = useState(0);
   useEffect(() => {
-    if (boNho) { setBo(boNho); return; }
-    dangTai ??= fetch("/api/tarot/bo-bai").then((r) => (r.ok ? (r.json() as Promise<BoBai>) : null)).catch(() => null);
+    const nn = maNgonNguTrang();
+    const co = boNho.get(nn);
+    if (co) { setBo(co); return; }
+    let p = dangTai.get(nn);
+    if (!p) {
+      p = fetch(urlTheoNgonNgu("/api/tarot/bo-bai"), kemNgonNgu("/api/tarot/bo-bai")).then((r) => (r.ok ? (r.json() as Promise<BoBai>) : null)).catch(() => null);
+      dangTai.set(nn, p);
+    }
     let huy = false;
-    void dangTai.then((d) => {
-      dangTai = null;
+    void p.then((d) => {
+      dangTai.delete(nn);
       if (huy) return;
-      if (d && d.la && Object.keys(d.la).length === 78) { boNho = d; setBo(d); setLoi(null); } else setLoi("Chưa tải được bộ bài — thử lại sau ít phút.");
+      if (d && d.la && Object.keys(d.la).length === 78) { boNho.set(nn, d); setBo(d); setLoi(null); } else setLoi(loiThuLai);
     });
     return () => { huy = true; };
-  }, [lan]);
+  }, [lan, loiThuLai]);
   return { bo, loi, thuLai: () => setLan((n) => n + 1) };
 }
 
