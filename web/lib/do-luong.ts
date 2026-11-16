@@ -5,6 +5,7 @@
 import type { PostHog } from "posthog-js";
 import { ghiMangDaXem } from "@/lib/huy-hieu";
 import { choRanh } from "@/lib/cho-ranh";
+import { metaLead } from "@/lib/meta-pixel";
 
 export type SuKien =
   | "landing_viewed" | "reading_started" | "reading_completed" | "profile_created"
@@ -216,6 +217,7 @@ export function ghi(su_kien: SuKien, p: Record<string, unknown> = {}): void {
     (window as unknown as { __hbt_su_kien?: unknown[] }).__hbt_su_kien ??= [];
     (window as unknown as { __hbt_su_kien: unknown[] }).__hbt_su_kien.push({ su_kien, ...props });
   }
+  if (su_kien === "profile_created") metaLead();   // Meta Pixel: Lead
   void nap().then((p2) => p2?.capture(su_kien, props));
 }
 
