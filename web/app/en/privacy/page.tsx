@@ -21,6 +21,13 @@ export default function Page() {
         <li><b>Questions you type in the BaZi and Zi Wei Dou Shu question boxes</b>: answers are always built by our own calculation server. When the AI question check is switched on (currently off — the start date will be shown here), the question text alone — no name, no birth data, no chart — may be sent to a third-party AI provider (servers in the United States) only to label it for safety and topic, so that a message asking for help is recognised. It is not stored by us and not used to train AI models.</li>
         <li><b>Usage analytics</b> (Google Tag Manager / Analytics, PostHog): page views and anonymous interaction events. You can opt out of Google Analytics via the cookie settings on the Vietnamese site.</li>
       </ul>
+      {/* EN-ALL GĐ 8: /en/face-reading — đo điểm mốc trên máy (bật ở bản Anh), gửi ảnh cho AI (TẮT ở bản Anh). Neo #anh-mat như bản Việt. */}
+      <h2 id="anh-mat">Face reading photos</h2>
+      <ul>
+        <li><b>Your photo never leaves your device.</b> On the face reading page you can pick or take a photo of your own face. It is shown only in your browser; your device finds the facial landmarks itself, or you place them by hand.</li>
+        <li><b>Only point coordinates are sent, and only after you agree.</b> When you tick the agreement and press “Measure”, the coordinates of those points (and the photo’s aspect ratio) go to our calculation server once to work out the classic proportions. They are not stored, not shared with third parties, and not used to recognise you. Facial landmarks are sensitive data, so the agreement is separate, never pre-ticked, and you can withdraw it on the same page at any time.</li>
+        <li><b>No photo is sent to an AI service</b> from the English pages. The photo must be of you, and you must be 18 or over.</li>
+      </ul>
       <h2>What we do not do</h2>
       <ul>
         <li>No account is needed; no profile is built on our servers from the English pages.</li>

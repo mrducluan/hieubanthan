@@ -116,7 +116,9 @@ export function MoiLapLaSo({ moDun, hoSo }: { moDun: MoDun; hoSo: HoSo | null })
 
 // CD-1: ma trận mảng × cách nhìn (3 cột, 4 dòng), ô "cùng thấy" sáng — hình tĩnh, không phải của ai.
 function MinhHoaBaCach() {
-  const cot = ["Tử vi", "Bát tự", "Nhân tướng"], dong = ["Công việc", "Tiền bạc", "Tình cảm", "Sức khoẻ"];
+  // EN-ALL GĐ 8: chữ là khoá lib/chu/giao-dien.ts (moi.bc_*); bản Việt = đúng chữ cũ.
+  const { c } = useChuGiaoDien();
+  const cot = ["bc_tu_vi", "bc_bat_tu", "bc_nhan_tuong"].map((k) => c(`moi.${k}`)), dong = ["bc_cong_viec", "bc_tien_bac", "bc_tinh_cam", "bc_suc_khoe"].map((k) => c(`moi.${k}`));
   const o = [[1, 1, 1], [1, 2, 1], [2, 2, 2], [1, 3, 2]];   // 1 thuận · 2 cân bằng · 3 lưu ý (minh hoạ)
   const mau = ["", "fill-jade/25 stroke-jade/70", "fill-gold/15 stroke-gold/60", "fill-fg-faint/15 stroke-fg-faint"];
   return (
@@ -126,7 +128,7 @@ function MinhHoaBaCach() {
         <g key={t}>
           <text x={4} y={38 + r * 30} className="fill-fg text-[9px]">{t}</text>
           {o[r]!.map((v, i) => <rect key={i} x={72 + i * 48} y={24 + r * 30} width={40} height={20} rx={10} className={mau[v]} strokeWidth={0.8} />)}
-          {new Set(o[r]).size === 1 && <text x={230} y={38 + r * 30} textAnchor="end" className="fill-jade text-[8px]">cùng thấy</text>}
+          {new Set(o[r]).size === 1 && <text x={230} y={38 + r * 30} textAnchor="end" className="fill-jade text-[8px]">{c("moi.bc_cung_thay")}</text>}
         </g>
       ))}
     </svg>

@@ -53,6 +53,9 @@ export const CHU_KIEN_THUC = {
   "moi.nut_than_so": { nhom: M, nhan: "Nút mời — Thần số học", mac_dinh: "Tính thần số học của tôi", en: "Work out my numbers" },
   "moi.nut_hop_doi": { nhom: M, nhan: "Nút mời — Hợp đôi", mac_dinh: "Xem hợp đôi của tôi", en: "Compare two birth dates" },
   "moi.nut_tarot": { nhom: M, nhan: "Nút mời — Tarot", mac_dinh: "Rút bài Tarot của tôi", en: "Draw my tarot cards" },
+  // EN-ALL GĐ 8 — cụm bộ vị gương mặt (bản Việt đọc LOI_MOI / NUT_CONG_CU trong TrangKienThuc, chữ Việt ở đây = nút cũ).
+  "moi.bo_vi": { nhom: M, nhan: "Lời mời — trang bộ vị gương mặt", mac_dinh: "Vùng này trên gương mặt bạn trông thế nào, sách xưa đọc ra sao? Soi gương sáu bước — không cần ảnh.", en: "How does this area look on your own face, and how do the old books read it? Take the six-step mirror survey — no photo needed." },
+  "moi.nut_nhan_tuong": { nhom: M, nhan: "Nút mời — Nhân tướng học", mac_dinh: "Xem tướng mặt của tôi", en: "Read my face" },
 
   // ---------------------------------------------------------------- mục lục cụm dài (DanhSachCum + BoLocCum)
   "ml.rong": { nhom: L, nhan: "Không trang nào khớp bộ lọc", mac_dinh: "Không có trang nào khớp. Thử tên ngắn hơn hoặc bỏ bớt lọc.", en: "No page matches. Try a shorter name or clear a filter." },
@@ -86,6 +89,9 @@ export const CHU_KIEN_THUC = {
   "mh.so_cai": { nhom: H, nhan: "Hình số — đuôi số cái", mac_dinh: " — số cái", en: " — master number" },
   "mh.cap_so": { nhom: H, nhan: "Hình cặp số ({a}, {b})", mac_dinh: "Số chủ đạo {a} và {b} — hai vòng giao nhau: phần chung là chỗ dễ hoà", en: "Life Path {a} and {b} — two overlapping circles: the overlap is where you flow easily" },
   "mh.la_bai": { nhom: H, nhan: "Chú thích tranh lá bài", mac_dinh: "tranh bộ Rider–Waite in năm 1909", en: "from the Rider–Waite deck, 1909 printing" },
+  // EN-ALL GĐ 8 — hình bộ vị gương mặt (chữ Việt = đúng chữ cũ trong MinhHoa).
+  "mh.bo_vi_cung": { nhom: H, nhan: "Hình bộ vị — cung của vùng ({cung})", mac_dinh: " — cung {cung}", en: " — {cung} palace" },
+  "mh.bo_vi_sang": { nhom: H, nhan: "Hình bộ vị — ghi chú vùng sáng", mac_dinh: " (vùng sáng trên gương mặt giản lược)", en: " (highlighted on a simplified face)" },
   "mh.qr_moi": { nhom: H, nhan: "Dòng mời quét dưới hình", mac_dinh: "Quét để mở bài này", en: "Scan to open this page" },
   "mh.qr_aria": { nhom: H, nhan: "Tên mã QR ({url})", mac_dinh: "Mã QR mở {url}", en: "QR code that opens {url}" },
   "mh.qh_1": { nhom: H, nhan: "Thập thần — vòng: đồng hành (ngắn)", mac_dinh: "Ta", en: "Self" },
@@ -127,5 +133,5 @@ export const CHU_KIEN_THUC = {
 /** EN-ALL — khoá chữ nút mời cuối trang kiến thức bản Anh theo trang công cụ của mảng (thiếu → "moi.nut_chung"). */
 export const NUT_MOI_EN: Readonly<Record<string, keyof typeof CHU_KIEN_THUC>> = {
   "/bat-tu": "moi.nut_bat_tu", "/tu-vi": "moi.nut_tu_vi", "/phong-thuy": "moi.nut_phong_thuy", "/kinh-dich": "moi.nut_kinh_dich",
-  "/than-so": "moi.nut_than_so", "/hop-doi": "moi.nut_hop_doi", "/tarot": "moi.nut_tarot",
+  "/than-so": "moi.nut_than_so", "/hop-doi": "moi.nut_hop_doi", "/tarot": "moi.nut_tarot", "/nhan-tuong": "moi.nut_nhan_tuong",
 };

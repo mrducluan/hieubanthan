@@ -256,6 +256,13 @@ export function banTiengAnh(duong: string): string | undefined {
   return BAN_TIENG_ANH[duong] ?? (capCuaVi(duong)?.duoi === "" ? capHreflang(duong)?.en : undefined);
 }
 
+/** EN-ALL GĐ 8: gắn hreflang hai chiều cho metadata trang dựng thẳng bằng `metaTrang` (không qua `metaMacDinh`) khi trang có
+ *  bản Anh đã mở. Không có bản Anh → trả nguyên metadata. */
+export function kemHreflang(meta: Metadata, duong: string): Metadata {
+  const en = banTiengAnh(duong);
+  return en ? { ...meta, alternates: { ...meta.alternates, languages: { vi: duong, en, "x-default": duong } } } : meta;
+}
+
 export function metaMacDinh(duong: string): Metadata {
   const m = mucSoTrang(duong)?.mac_dinh ?? {};
   const meta = metaTrang({ tieuDe: m.tieu_de_seo ?? "", moTa: m.mo_ta_seo ?? "", duong });
