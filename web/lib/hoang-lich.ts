@@ -138,7 +138,10 @@ export function viecThangIndex(nam: number, thang: number, soNgay: number | null
   const l = lechThang(nam, thang, h);
   return l >= 0 && l <= VIEC_THANG_SAU && soNgay !== 0;
 }
-export const duongViecThang = (slug: string, nam: number, thang: number) => `/xem-ngay-tot/${slug}-thang-${thang}-${nam}`;
+export const duongViecThang = (slug: string, nam: number, thang: number, en = false) => {
+  const v = en ? VIEC_SEO.find((x) => x.slug === slug) : undefined;
+  return v ? `${GOC_EN}/${SLUG_VIEC_EN[v.ma]}-${nam}-${String(thang).padStart(2, "0")}` : `/xem-ngay-tot/${slug}-thang-${thang}-${nam}`;
+};
 const RE_VIEC = /^([a-z-]+)-thang-(\d{1,2})-(\d{4})$/;
 
 const RE_NGAY = /^(\d{4})-(\d{2})-(\d{2})$/;
@@ -171,8 +174,40 @@ export function docDuong(s: string): { loai: "ngay"; iso: string } | { loai: "th
   return null;
 }
 
-export const duongNgay = (iso: string) => `/xem-ngay-tot/${iso}`;
-export const duongThang = (nam: number, thang: number) => `/xem-ngay-tot/thang-${thang}-${nam}`;
+export const duongNgay = (iso: string, en = false) => en ? `${GOC_EN}/${iso}` : `/xem-ngay-tot/${iso}`;
+export const duongThang = (nam: number, thang: number, en = false) =>
+  en ? `${GOC_EN}/${nam}-${String(thang).padStart(2, "0")}` : `/xem-ngay-tot/thang-${thang}-${nam}`;
+
+// EN-ALL GĐ 8 — bản Anh /en/auspicious-dates (rewrite của /xem-ngay-tot): đuôi URL tiếng Anh — ngày "2026-11-16", tháng
+// "2026-11", việc trong tháng "weddings-2026-11". Proxy đưa nguyên đuôi sang trang Việt; trang đọc bằng `docDuongEn` khi lượt
+// tải là bản Anh (đuôi Việt "thang-11-2026" ở bản Anh → 308 về đuôi Anh; đuôi Anh ở bản Việt → 404).
+export const GOC_EN = "/en/auspicious-dates";
+export const SLUG_VIEC_EN: Readonly<Record<ViecSeo["ma"], string>> = {
+  cuoi_hoi: "weddings", khai_truong: "business-opening", nhap_trach: "moving-in", dong_tho: "breaking-ground",
+  xuat_hanh: "travel", mua_xe: "buying-a-car",
+};
+const RE_THANG_EN = /^(\d{4})-(\d{2})$/;
+const RE_VIEC_EN = /^([a-z-]+)-(\d{4})-(\d{2})$/;
+/** Đuôi URL bản Anh → cùng kiểu kết quả `docDuong`. Sai dạng → null. */
+export function docDuongEn(s: string): ReturnType<typeof docDuong> {
+  const a = RE_NGAY.exec(s);
+  if (a) return docDuong(s);
+  const t = RE_THANG_EN.exec(s);
+  if (t) { const [y, m] = [Number(t[1]), Number(t[2])]; return m >= 1 && m <= 12 && y >= 1901 && y <= 2099 ? { loai: "thang", nam: y, thang: m } : null; }
+  const v = RE_VIEC_EN.exec(s);
+  if (v) {
+    const viec = VIEC_SEO.find((x) => SLUG_VIEC_EN[x.ma] === v[1]);
+    const [y, m] = [Number(v[2]), Number(v[3])];
+    return viec && m >= 1 && m <= 12 && y >= 1901 && y <= 2099 ? { loai: "viec", viec, nam: y, thang: m } : null;
+  }
+  return null;
+}
+/** Đuôi bản Anh của một kết quả `docDuong` (308 từ đuôi Việt gõ ở bản Anh; hreflang trang Việt). */
+export function duoiEn(x: NonNullable<ReturnType<typeof docDuong>>): string {
+  if (x.loai === "ngay") return x.iso;
+  const mm = String(x.thang).padStart(2, "0");
+  return x.loai === "thang" ? `${x.nam}-${mm}` : `${SLUG_VIEC_EN[x.viec.ma]}-${x.nam}-${mm}`;
+}
 
 /** Cộng ngày cho chuỗi YYYY-MM-DD (UTC, không lệch múi giờ). */
 export function congNgay(iso: string, n: number): string {

@@ -8,12 +8,17 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
-import { duongThang, homNayVN } from "@/lib/hoang-lich";
+import { duongNgay, duongThang, homNayVN } from "@/lib/hoang-lich";
 import { docNamLich, duongLichAm, lichAmIndex, lichNamCongKhai } from "@/lib/lich-am";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_LICH_AM_NAM } from "@/lib/chu/trang-con";
 import { DuongDan } from "@/components/khung/DuongDan";
+import { chuLichMayChu, voiHreflang } from "@/lib/en/lich";
+import { ldDuongDanEn, metaEn } from "@/lib/en/seo";
+import { urlDayDu } from "@/lib/seo";
+import { dinhNgay } from "@/lib/dinh-dang";
+import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 
 type P = { params: Promise<{ nam: string }> };
 const dmy = (iso: string) => iso.split("-").reverse().join("/");
@@ -21,9 +26,14 @@ const dmy = (iso: string) => iso.split("-").reverse().join("/");
 async function metaGoc(p: P): Promise<Metadata> {
   const n = docNamLich((await p.params).nam);
   if (!n) return {};
-  const m = metaTrang({ tieuDe: `Lịch âm ${n}: Tết, tháng nhuận, các tháng âm lịch`,
+  const l = await chuLichMayChu();
+  // EN-ALL GĐ 8: /en/lunar-calendar/{năm} là rewrite của trang này.
+  if (l.en) return metaEn({ title: `${l.c("lan.seo", { nam: String(n) })} · Hieuban`, description: l.c("lan.seo_mo_ta", { nam: String(n) }),
+    path: duongLichAm(n, true), vi: duongLichAm(n), noindex: !lichAmIndex(n, Number(homNayVN().slice(0, 4))) });
+  const m0 = metaTrang({ tieuDe: `Lịch âm ${n}: Tết, tháng nhuận, các tháng âm lịch`,
     moTa: `Lịch âm năm ${n} theo âm lịch Việt Nam: ngày Tết, có tháng nhuận không, mùng 1 và rằm từng tháng ứng với dương lịch, tháng đủ hay thiếu.`,
     duong: duongLichAm(n), anh: anhBai({ tieuDe: `Lịch âm ${n}`, mang: "lich" }) });
+  const m = voiHreflang(m0, duongLichAm(n), duongLichAm(n, true));
   return lichAmIndex(n, Number(homNayVN().slice(0, 4))) ? m : { ...m, robots: { index: false, follow: true } };
 }
 
@@ -32,6 +42,8 @@ export default async function Page(p: P) {
   if (!n) notFound();
   const d = await lichNamCongKhai(n);
   if (!d) throw new Error("engine lịch không phản hồi");
+  const l = await chuLichMayChu();
+  if (l.en) return <TrangNamEn n={n} d={d} l={l} />;
   const duong = duongLichAm(n), bien = { nam: String(n), can_chi: d.can_chi };
   const nd = await layNoiDungTrang(duong, bien), c = taoChu(CHU_LICH_AM_NAM, nd.chu);
   const tieuDe = c("dau.tieu_de", bien);
@@ -111,3 +123,73 @@ export default async function Page(p: P) {
 
 // ND-7 đợt 2: ảnh chia sẻ của cụm (CMS → Mẫu cụm trang → "Hình trên trang") thay ảnh /og tự vẽ khi có.
 export const generateMetadata = async (...a: Parameters<typeof metaGoc>) => voiAnhChiaSe(await metaGoc(...a));
+
+/** EN-ALL GĐ 8 — /en/lunar-calendar/{năm}: dữ liệu engine bản Anh, chữ lib/chu/lich.ts, không CMS, không ảnh tóm tắt. */
+function TrangNamEn({ n, d, l }: { n: number; d: NonNullable<Awaited<ReturnType<typeof lichNamCongKhai>>>; l: Awaited<ReturnType<typeof chuLichMayChu>> }) {
+  const { c, ma } = l;
+  const ngay = (iso: string) => dinhNgay(iso, ma, "dai");
+  const duong = duongLichAm(n, true), nam = String(n);
+  const tieuDe = c("lan.h1", { nam });
+  const dd = [{ ten: c("la.nhan"), duong: "/en/lunar-calendar" }, { ten: c("la.o", { nam }), duong }];
+  const tenThang = (t: number) => (t === 1 ? c("lan.gieng") : t === 12 ? c("lan.chap") : String(t));
+  return (
+    <div className="mx-auto max-w-3xl">
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebPage", "@id": `${urlDayDu(duong)}#trang`, url: urlDayDu(duong), name: tieuDe,
+        description: d.tra_loi_nhanh, inLanguage: "en", about: [{ "@type": "Thing", name: c("la.ld_about") }] }} />
+      <JsonLd data={ldDuongDanEn(dd)} />
+      <JsonLd data={goiLd(ldHoiDap(d.hoi_dap))} />
+      <DuongDan nhan="Breadcrumb" ds={[{ ten: "Hieuban", duong: "/en" }, ...dd]} className="mb-2" />
+      <TieuDeMuc cap={1} nho={c("lan.nhan", { can_chi: d.can_chi })} lon={tieuDe} />
+      <TraLoiNhanh chu={d.tra_loi_nhanh} en />
+      <section className="mt-8" aria-labelledby="bang-thang">
+        <h2 id="bang-thang" className="text-2xl">{c("lan.bang", { nam })}</h2>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full min-w-[30rem] text-left text-sm" data-testid="bang-lich-am">
+            <thead className="text-xs text-fg-faint"><tr><th className="py-2 pr-3">{c("lan.c_thang")}</th><th className="pr-3">{c("la.c_can_chi")}</th><th className="pr-3">{c("lan.c_mung_mot")}</th><th className="pr-3">{c("lan.c_ram")}</th><th>{c("la.c_so_ngay")}</th></tr></thead>
+            <tbody>
+              {d.thang.map((t) => (
+                <tr key={`${t.thang}${t.nhuan ? "n" : ""}`} className="border-t border-line/50">
+                  <td className="py-2 pr-3 text-fg">{`${tenThang(t.thang)}${t.nhuan ? c("the.nhuan") : ""}`}</td>
+                  <td className="pr-3 text-fg-muted">{t.can_chi}</td>
+                  <td className="pr-3"><Link href={duongThang(Number(t.mung_mot.slice(0, 4)), Number(t.mung_mot.slice(5, 7)), true)} className="text-gold underline decoration-gold/40 underline-offset-2">{ngay(t.mung_mot)}</Link></td>
+                  <td className="pr-3 text-fg-muted">{ngay(t.ram)}</td>
+                  <td className="text-fg-muted">{t.so_ngay === 30 ? c("lan.du") : c("lan.thieu")}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3 text-xs leading-relaxed text-fg-faint">{d.cach_tinh}</p>
+      </section>
+      {d.le?.length ? (
+        <section className="mt-10" aria-labelledby="ngay-le">
+          <h2 id="ngay-le" className="text-2xl">{c("lan.le_tieu_de", { nam })}</h2>
+          <p className="mt-2 text-sm text-fg-muted">{c("lan.le_dan", { can_chi: d.can_chi })}</p>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full min-w-[26rem] text-left text-sm" data-testid="bang-le">
+              <thead className="text-xs text-fg-faint"><tr><th className="py-2 pr-3">{c("lan.c_le")}</th><th className="pr-3">{c("lan.c_am")}</th><th>{c("lan.c_duong")}</th></tr></thead>
+              <tbody>{d.le.map((x) => (
+                <tr key={x.ma} className="border-t border-line/50">
+                  <td className="py-2 pr-3 text-fg">{x.ten}</td>
+                  <td className="pr-3 text-fg-muted">{x.am}</td>
+                  <td><Link href={duongNgay(x.duong, true)} className="text-gold underline decoration-gold/40 underline-offset-2">{dinhNgay(x.duong, ma, "day_du")}</Link></td>
+                </tr>
+              ))}</tbody>
+            </table>
+          </div>
+        </section>
+      ) : null}
+      <section className="mt-10" aria-labelledby="hoi-dap">
+        <h2 id="hoi-dap" className="text-2xl">{c("con.hoi_dap")}</h2>
+        <dl className="mt-4 space-y-4">{d.hoi_dap.map((h) => (
+          <div key={h.hoi} className="rounded-xl border border-line/70 p-4"><dt className="font-medium text-fg">{h.hoi}</dt><dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd></div>
+        ))}</dl>
+      </section>
+      <p className="mt-8 text-sm text-fg-muted">{c("lan.cuoi_chu")} <Link href="/en/lunar-converter" className="text-gold underline">{c("lan.cuoi_link")}</Link></p>
+      <p className="mt-3 flex flex-wrap gap-3 text-sm">
+        {n > 1901 && <Link href={duongLichAm(n - 1, true)} className="text-gold underline">{c("la.o", { nam: String(n - 1) })}</Link>}
+        {n < 2098 && <Link href={duongLichAm(n + 1, true)} className="text-gold underline">{c("la.o", { nam: String(n + 1) })}</Link>}
+      </p>
+    </div>
+  );
+}

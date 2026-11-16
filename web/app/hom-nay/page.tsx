@@ -6,6 +6,8 @@ import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
 import { HomNay } from "./HomNay";
 import { docMaNgay } from "@/lib/ma-moi";
 import { MAU_TU } from "@/lib/the-chia-se";
+import { ngonNguMayChu } from "@/lib/ngon-ngu-may-chu";
+import { metaCongCuEn } from "@/lib/en/seo";
 
 const DUONG = "/hom-nay";
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
@@ -17,6 +19,8 @@ async function theNgay(sp: Props["searchParams"]) {
 }
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  // EN-ALL GĐ 8: /en/today là rewrite của trang này — metadata bản Anh; thẻ chia sẻ ngày (?the=) chưa có bản Anh.
+  if ((await ngonNguMayChu()).ngonNgu === "en") return metaCongCuEn(DUONG);
   const META = apDungSeo(metaMacDinh(DUONG), await layNoiDungTrang(DUONG));
   const nd = await theNgay(searchParams);
   const ma = nd ? ((await searchParams).the as string) : null;
@@ -33,7 +37,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 }
 
 export default async function Page({ searchParams }: Props) {
-  const nd = await theNgay(searchParams);
+  const nd = (await ngonNguMayChu()).ngonNgu === "en" ? null : await theNgay(searchParams);
   return (
     <TrangCongCu duong={DUONG} mang="than_so" truoc={nd && (
       <p className="mx-auto mb-6 max-w-xl rounded-2xl border border-gold/30 bg-gold/[0.06] px-4 py-3 text-center text-sm" data-testid="loi-moi-ngay">

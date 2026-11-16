@@ -15,8 +15,10 @@ export interface TetNam { nam: number; can_chi: string; con_giap: string; tet: s
 /** SEO-O: bảng Tết nhiều năm (≤ 30 năm) cho mục lục /lich-am. Engine cũ → null (trang giữ bản cũ). */
 export async function cacNamLich(tu: number, den: number): Promise<TetNam[] | null> {
   try {
-    const r = await fetch(`${ENGINE_URL}/v1/lich/cac-nam?tu=${tu}&den=${den}`, {
-      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+    // EN-ALL GĐ 8: ngôn ngữ của lượt tải đi trong URL (khoá đệm) + header; bản Việt giữ nguyên URL cũ.
+    const nn = await duongTheoLuot(`/v1/lich/cac-nam?tu=${tu}&den=${den}`);
+    const r = await fetch(`${ENGINE_URL}${nn.duong}`, {
+      headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn.dau },
       next: { revalidate: 60 * 60 * 24 * 7 }, signal: AbortSignal.timeout(15_000),
     });
     if (r.ok) return (await r.json()) as TetNam[];
@@ -41,7 +43,7 @@ export async function lichNamCongKhai(nam: number): Promise<LichNam | null> {
   return null;
 }
 
-export const duongLichAm = (nam: number) => `/lich-am/${nam}`;
+export const duongLichAm = (nam: number, en = false) => en ? `/en/lunar-calendar/${nam}` : `/lich-am/${nam}`;
 /** Năm có trang lịch âm được index: 10 năm trước → 10 năm tới (năm khác vẫn xem được, noindex). */
 export const lichAmIndex = (nam: number, namNay: number) => nam >= namNay - 10 && nam <= namNay + 10;
 export function docNamLich(s: string): number | null {

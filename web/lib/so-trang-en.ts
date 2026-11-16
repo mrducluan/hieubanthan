@@ -356,6 +356,96 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
       cum: Object.fromEntries(["/kinh-dich/que"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
     },
   },
+  // EN-ALL GĐ 8 — lịch & Hôm nay.
+  "/xem-ngay-tot": {
+    ten: "Auspicious dates",
+    tieu_de_seo: "Auspicious dates: is today a good day? Chinese almanac · Hieuban",
+    mo_ta_seo: "Today in the Chinese almanac: Yellow or Black Path day, auspicious hours, what the almanac lists as favourable or to avoid, and good days for your plans.",
+    tra_loi_nhanh: {
+      hoi: "How do I know if a date is auspicious?",
+      dap: "Look at three things in the traditional Chinese almanac: whether the day is a Yellow Path (auspicious) or Black Path day, its Day Officer, and the activities the almanac lists as favourable or to avoid. A date suits a plan when that activity is listed as favourable and nothing gets in the way. Add your date of birth to leave out days that clash with your birth year. The almanac is cultural reference, not a forecast.",
+      lien_ket: [{ href: "/en/lunar-calendar", ten: "Lunar calendar by year" }, { href: "/en/lunar-converter", ten: "Lunar–solar date converter" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the auspicious-dates tool",
+      doan: [
+        "Each day has one of twelve spirits on duty: six Yellow Path (auspicious) spirits — Azure Dragon, Bright Hall, Golden Coffer, Heavenly Virtue, Jade Hall and Life Governor — and six Black Path ones. The Day Officer (Establish, Remove, Full, Balance, Stable, Initiate, Destruction, Danger, Success, Receive, Open, Close) comes from the day's branch and the solar month.",
+        "The lists of favourable and avoid activities follow the Xieji Bianfang Shu, the Qing-dynasty date-selection manual most almanacs draw on. The page also notes the folk taboo days kept in Vietnam (Tam Nuong, Moon taboo days, Duong Cong days).",
+        "If your date of birth is saved on this device, the page shows whether a day clashes with, suits or is neutral to your birth year, and leaves clashing days out when you search. Your date of birth is used for the calculation only and not stored on our side.",
+        "The almanac is cultural knowledge to consult, not a prediction — important plans still rest on practical preparation.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "What is a Yellow Path day?", dap: "A day guarded by one of the six auspicious spirits: Azure Dragon, Bright Hall, Golden Coffer, Heavenly Virtue, Jade Hall or Life Governor. The other six days of the cycle are Black Path days." },
+        { hoi: "How are the auspicious hours worked out?", dap: "A day has twelve two-hour periods. The cycle of twelve spirits also turns through the hours, starting from the day's branch, so every day has six auspicious hours." },
+        { hoi: "What does it mean that a day clashes with my birth year?", dap: "The day's earthly branch is opposite the branch of your birth year (for example, a Monkey day clashes with people born in a Tiger year). The almanac suggests thinking twice before using that day for a big event." },
+        { hoi: "Is the almanac month the lunar month?", dap: "No. Day Officers and day spirits follow the solar-term month, which changes on dates such as the Start of Spring, not on the first day of the lunar month. The page computes solar terms in Vietnam time." },
+        { hoi: "Is it free?", dap: "Yes. Looking up any day, month or good days for a plan is free, and your date of birth stays on your device." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/lunar-calendar", ten: "Lunar calendar by year" },
+        { href: "/en/lunar-converter", ten: "Lunar–solar date converter" },
+        { href: "/en/today", ten: "Your day today" },
+      ] },
+    },
+  },
+  "/doi-lich-am-duong": {
+    ten: "Lunar converter",
+    tieu_de_seo: "Lunar–solar date converter: today's lunar date · Hieuban",
+    mo_ta_seo: "Convert a solar date to the Vietnamese lunar calendar and back, with the stem and branch of the day, month and year, leap months and Chinese-calendar gaps.",
+    tra_loi_nhanh: {
+      hoi: "How do I convert a solar date to a lunar date?",
+      dap: "Choose the direction, enter the day, month and year, and press Convert. The page gives the date in the Vietnamese lunar calendar (Hanoi time), the stem and branch of the day, month and year, whether the lunar year has a leap month, and the Chinese-calendar date when the two calendars differ.",
+      lien_ket: [{ href: "/en/lunar-calendar", ten: "Lunar calendar by year" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the lunar–solar converter",
+      doan: [
+        "The Vietnamese lunar calendar is computed astronomically for Hanoi time (UTC+7): the first day of a month is the day of the new moon, and the leap month is the first month in a year with no major solar term.",
+        "The Chinese calendar uses Beijing time (UTC+8), so in some years Lunar New Year differs by a day between the two calendars, and occasionally by a whole month (as in 1985). The converter says so when the two calendars differ.",
+        "The result includes the stem and branch of the day, month and year and the length of the lunar month (29 or 30 days) — handy for old records, family anniversaries or full-moon days.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Why do the Vietnamese and Chinese lunar calendars sometimes differ?", dap: "They use different time zones (UTC+7 and UTC+8). When the new moon falls between 23:00 and midnight Hanoi time, the first day of the month differs by one day; in some years even the leap month differs." },
+        { hoi: "What is a leap month?", dap: "About every three lunar years one year has 13 months. The extra month is the leap month and takes the name of the month before it (for example, 2025 has a leap sixth month)." },
+        { hoi: "Is the converter free?", dap: "Yes, and nothing you enter is stored." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/auspicious-dates", ten: "Auspicious dates" },
+        { href: "/en/today", ten: "Your day today" },
+      ] },
+    },
+  },
+  "/hom-nay": {
+    ten: "Today",
+    tieu_de_seo: "Your day today: personal day number and the Chinese almanac · Hieuban",
+    mo_ta_seo: "A new card every day from your name and date of birth: your personal day number, three cards for today, the good hours, the Chinese almanac and your week ahead.",
+    tra_loi_nhanh: {
+      hoi: "What does the daily card show?",
+      dap: "Enter your name and date of birth once. Each day the page shows your personal day number (numerology) with a question to reflect on, three cards to flip — a tarot card, a number card and an hour card — the next auspicious hour, what the Chinese almanac says about the day, and your week at a glance. It is a nudge for reflection, not a forecast.",
+      lien_ket: [{ href: "/en/numerology", ten: "Your numerology reading" }, { href: "/en/auspicious-dates", ten: "Auspicious dates" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About your day today",
+      doan: [
+        "Your personal day number comes from your birth day and month plus today's date, reduced to 1–9 as in Pythagorean numerology. Each number has a theme for the day and a question to reflect on.",
+        "The three cards change every day: a tarot card that is yours for the day, a number card with a small task that fits it, and an hour card with the next auspicious hour by the traditional calendar. Everything is worked out on our side from the same rules every time — no draw for prizes, nothing to unlock.",
+        "You can also pick up to three things you plan to do today, or type a short note, and see how each one fits the rhythm of the day. Your note is only used to recognise the kind of task and is not stored.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "How is my personal day number worked out?", dap: "Add your birth day and month to today's day, month and year, then reduce the total to a single digit (1–9). The personal month and year numbers are worked out the same way." },
+        { hoi: "Do I need an account?", dap: "No. Your name and date of birth are saved only on this device." },
+        { hoi: "Is the daily card a prediction?", dap: "No. It is a theme and a question for the day, plus traditional calendar notes as cultural reference. Decisions stay with you." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/numerology", ten: "Numerology from your name and birth date" },
+        { href: "/en/tarot", ten: "Tarot reading" },
+        { href: "/en/auspicious-dates", ten: "Auspicious dates" },
+      ] },
+    },
+  },
 };
 
 export const trangCongCuEn = (duongVi: string): TrangCongCuEn | null => SO_TRANG_EN[duongVi] ?? null;

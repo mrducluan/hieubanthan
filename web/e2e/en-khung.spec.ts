@@ -74,7 +74,8 @@ test.describe("trên trình duyệt", () => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto("/en/tarot/cards/the-fool");
     const nav = page.getByTestId("menu-dau-trang");
-    await expect(nav.getByRole("link", { name: "Numerology" })).toBeVisible();
+    // EN-ALL GĐ 8: /en/today + /en/auspicious-dates mở → mục cha "Me" có ≥ 2 con, không còn đẩy "Numerology" lên trên cùng.
+    await expect(nav.getByRole("link", { name: "Me", exact: true })).toBeVisible();
     // EN-ALL GĐ 3d: Bát tự mở bản Anh → mục cha "Chinese Metaphysics" có ≥ 2 con (BaZi, Tarot), Tarot nằm trong bảng thả xuống;
     // mục cha sáng khi đang ở trang Tarot.
     await expect(nav.getByRole("link", { name: "Chinese Metaphysics" })).toHaveAttribute("aria-current", "page");
@@ -92,7 +93,7 @@ test.describe("trên trình duyệt", () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/en/numerology");
     const tab = page.locator("[data-thanh-duoi]");
-    await expect(tab.getByRole("link", { name: "Numerology" })).toHaveAttribute("aria-current", "page");
+    await expect(tab.getByRole("link", { name: "Me", exact: true })).toHaveAttribute("aria-current", "page");
     await page.getByTestId("nut-menu").click();
     const dd = page.getByTestId("menu-di-dong");
     await expect(dd.getByRole("link", { name: "Tarot" })).toBeVisible();

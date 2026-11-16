@@ -9,6 +9,9 @@ import { CAP_DUONG } from "@/lib/duong-en";
 import { mucSoTrang } from "@/lib/so-trang";
 import { banAnhRewrite } from "@/lib/duong-en";
 import { CHU_DE, type MucLuc } from "@/lib/kien-thuc";
+import { GOC_EN, NGAY_SAU, THANG_SAU, THANG_TRUOC, VIEC_SEO, VIEC_THANG_SAU, congNgay, demViecThang, duoiEn, duongNgay, duongThang,
+  duongViecThang, homNayVN } from "@/lib/hoang-lich";
+import { duongLichAm } from "@/lib/lich-am";
 
 export const revalidate = 21600;
 
@@ -41,6 +44,30 @@ export async function GET() {
     const ds = await engineEn<{ ds: { slug: string }[] }>("/v1/tuvi/la-so-mau");
     muc.push({ en: lsm, vi: "/tu-vi/la-so-mau" });
     if (ds.ok) for (const x of ds.data.ds) muc.push({ en: `${lsm}/${x.slug}`, vi: `/tu-vi/la-so-mau/${x.slug}` });
+  }
+  // EN-ALL GĐ 8: lịch âm (trang "tinh", không phải công cụ) + năm ±10; Xem ngày tốt theo cùng cửa sổ index bản Việt:
+  // ngày −7…+NGAY_SAU, tháng −THANG_TRUOC…+THANG_SAU, việc trong tháng tháng này…+VIEC_THANG_SAU (tháng 0 ngày tốt bỏ).
+  if (CAP_DUONG.some((c) => c.vi === "/lich-am" && c.mo)) {
+    const namNay = Number(homNayVN().slice(0, 4));
+    muc.push({ en: "/en/lunar-calendar", vi: "/lich-am" });
+    for (let n = namNay - 10; n <= namNay + 10; n++) muc.push({ en: duongLichAm(n, true), vi: duongLichAm(n) });
+  }
+  if (CAP_DUONG.some((c) => c.vi === "/xem-ngay-tot" && c.mo)) {
+    const h = homNayVN();
+    for (let i = -7; i <= NGAY_SAU; i++) { const iso = congNgay(h, i); muc.push({ en: duongNgay(iso, true), vi: duongNgay(iso) }); }
+    const y = Number(h.slice(0, 4)), m = Number(h.slice(5, 7));
+    const thang = (l: number) => { const t = y * 12 + (m - 1) + l; return { nam: Math.floor(t / 12), thang: (t % 12) + 1 }; };
+    for (let l = -THANG_TRUOC; l <= THANG_SAU; l++) { const x = thang(l); muc.push({ en: duongThang(x.nam, x.thang, true), vi: duongThang(x.nam, x.thang) }); }
+    const dau = thang(0);
+    const dem = await demViecThang(dau.nam, dau.thang, VIEC_THANG_SAU + 1);
+    for (let l = 0; l <= VIEC_THANG_SAU; l++) {
+      const x = thang(l);
+      for (const v of VIEC_SEO) {
+        const so = dem?.find((z) => z.ma === v.ma && z.nam === x.nam && z.thang === x.thang)?.so_ngay;
+        if (so === 0) continue;
+        muc.push({ en: `${GOC_EN}/${duoiEn({ loai: "viec", viec: v, nam: x.nam, thang: x.thang })}`, vi: duongViecThang(v.slug, x.nam, x.thang) });
+      }
+    }
   }
   const dong = muc.map((m) => {
     const alt = [`<xhtml:link rel="alternate" hreflang="en" href="${xmlThoat(urlDayDu(m.en))}"/>`];
