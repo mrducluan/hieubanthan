@@ -356,6 +356,127 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
       cum: Object.fromEntries(["/kinh-dich/que"].map((d) => [d, { ten: CUM_EN[d]!.ten, mo_ta: CUM_EN[d]!.mo_ta }])),
     },
   },
+  // EN-ALL GĐ 8 — tập quán Việt theo tuổi + hướng xấu năm (rewrite của trang Việt; trang theo năm / tuổi dựng chữ ở lib/chu/nam-tuoi.ts).
+  "/xem-sao-han": {
+    ten: "Yearly star by age",
+    tieu_de_seo: "Vietnamese yearly star (sao han) by age and sex · Hieuban",
+    mo_ta_seo: "Which of the nine yearly stars the Vietnamese custom gives your age this year, for men and women, read in plain words with small things worth doing. No rituals.",
+    tra_loi_nhanh: {
+      hoi: "What is a yearly star (sao han)?",
+      dap: "A Vietnamese folk custom: nine stars rotate by lunar age from age 10, with a different order for men and women, so everyone of the same age and sex shares the same star. Enter your birth year and sex to see this year's star in plain words, with practical things to do. It is a custom to consult, not a prediction, and we teach no rituals.",
+      lien_ket: [{ href: "/en/vietnamese-customs/yearly-star/{nam}", ten: "Yearly star table {nam}" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the yearly star tool",
+      doan: [
+        "Yearly stars (sao han) are a Vietnamese custom set by lunar age and sex: the nine stars of the Cuu Dieu cycle rotate from age 10, and everyone of the same age and sex shares the same star. The tool works out the star from the almanac table, then reads it in everyday words: what to keep an eye on this year and small things worth doing.",
+        "It is a custom, not something worked out from your own date and time of birth. A Zi Wei Dou Shu or BaZi chart, built from your own birth data, is closer to you; when the two say different things, trust the reading from your own chart.",
+        "We do not teach rituals, recommend practitioners or sell charms. If your family keeps a New Year custom, keep it as a time to gather, and never pay anyone out of fear.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "How is the yearly star worked out?", dap: "Lunar age = the lunar year being read − your lunar birth year + 1. Men from age 10 go La Hou, Tu Xiu, Shui Yao, Tai Bai, Tai Yang, Yun Han, Ji Du, Tai Yin, Mu De and repeat; women start at Ji Du. Under 10 there is no star." },
+        { hoi: "Should I worry about La Hou or Ji Du?", dap: "They are the two stars people mention most. In everyday terms, La Hou is a year to talk less, listen more and keep papers in order; Ji Du is a year to worry less and look after family. No star decides in advance what will happen." },
+        { hoi: "Do I need a ritual to ward off a bad star?", dap: "We do not teach rituals. The useful thing is real action during the year: look after your health, your money and your word." },
+        { hoi: "Yearly star or personal chart: which is more accurate?", dap: "The yearly star is the same for everyone of the same age and sex; a chart built from your own date and time of birth is closer to you. We give the custom first, then the reading from your chart." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" },
+        { href: "/en/vietnamese-customs/house-building-age", ten: "House-building and wedding age" },
+        { href: "/en/vietnamese-customs/first-footer", ten: "First-footer for Lunar New Year" },
+        { href: "/en/feng-shui/annual-afflictions", ten: "Annual afflictions" },
+      ] },
+    },
+  },
+  "/xem-tuoi-lam-nha": {
+    ten: "House-building and wedding age",
+    tieu_de_seo: "Vietnamese house-building and wedding age: Kim Lau, Tam Tai · Hieuban",
+    mo_ta_seo: "Does your lunar age in the planned year fall on Kim Lau, Hoang Oc or Tam Tai under Vietnamese custom? See the nearest clear years and directions to avoid.",
+    tra_loi_nhanh: {
+      hoi: "How does Vietnamese custom choose a year to build a house?",
+      dap: "It checks three things by lunar age: Kim Lau (lunar age divided by 9 leaves 1, 3, 6 or 8), Hoang Oc (a six-step count by decade) and Tam Tai (three years in a row by your sign's triad). Enter the birth year of the person named on the build and the planned year to see whether it is clear and which nearby years are.",
+      lien_ket: [{ href: "/en/vietnamese-customs/house-building-age/{nam}", ten: "House-building ages {nam}" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the house-building age tool",
+      doan: [
+        "Vietnamese folk custom checks three things before building a house or holding a wedding: Kim Lau (lunar age divided by 9 leaves 1, 3, 6 or 8), Hoang Oc (counting six steps by decade: Nhat Cat, Nhi Nghi, Tam Dia Sat, Tu Tan Tai, Ngu Tho Tu, Luc Hoang Oc) and Tam Tai (three consecutive years set by your sign's triad).",
+        "Age here is lunar age on the Vietnamese lunar calendar: the planned year minus the lunar birth year, plus one. Anyone born before Lunar New Year belongs to the previous lunar year, so enter your full date of birth (or use the profile on this device) to be exact.",
+        "The tool also shows the directions tradition advises leaving undisturbed during the year (Grand Duke, Year Breaker, Three Killings, Five Yellow, Two Black) and suggests the nearest clear years. It is a custom to consult when planning, not a prediction.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "What is Kim Lau?", dap: "A lunar age that leaves 1, 3, 6 or 8 when divided by 9 (Kim Lau of self, spouse, children or livestock). Folk custom tends to avoid building a house or marrying in a Kim Lau year." },
+        { hoi: "How is Hoang Oc counted?", dap: "Over six steps: age 10 is Nhat Cat, 20 Nhi Nghi, 30 Tam Dia Sat, 40 Tu Tan Tai, 50 Ngu Tho Tu, 60 Luc Hoang Oc; the units carry on from the decade's step. Landing on Tam Dia Sat, Ngu Tho Tu or Luc Hoang Oc is a year folk custom tends to avoid." },
+        { hoi: "Which years are Tam Tai?", dap: "Monkey, Rat, Dragon: Tiger, Rabbit, Dragon years. Tiger, Horse, Dog: Monkey, Rooster, Dog years. Pig, Rabbit, Goat: Snake, Horse, Goat years. Snake, Rooster, Ox: Pig, Rat, Ox years." },
+        { hoi: "What if the year does not suit my age?", dap: "Many families pick another year, or ask a relative of a suitable age to stand in for the ground-breaking (borrowing an age). The decision should rest on your real circumstances." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/feng-shui/annual-afflictions", ten: "Annual afflictions" },
+        { href: "/en/vietnamese-customs/first-footer", ten: "First-footer for Lunar New Year" },
+        { href: "/en/vietnamese-customs/yearly-star", ten: "Yearly star by age" },
+        { href: "/en/year", ten: "Lunar year guide" },
+      ] },
+    },
+  },
+  "/tuoi-xong-dat": {
+    ten: "First-footer for Lunar New Year",
+    tieu_de_seo: "First-footer for Lunar New Year (xong dat) by the host's age · Hieuban",
+    mo_ta_seo: "Choose a first-footer for Vietnamese Lunar New Year who suits the host: allied signs and elements, signs to avoid, and the auspicious hours of the first day.",
+    tra_loi_nhanh: {
+      hoi: "What is first-footing (xong dat)?",
+      dap: "The first person to step into a home after the turn of the Lunar New Year. Vietnamese custom picks someone whose sign and element suit both the new year and the head of the household. Enter the host's birth year to see the best-suited ages, the ages best avoided and the good hours of the first day.",
+      lien_ket: [{ href: "/en/vietnamese-customs/first-footer/{nam}", ten: "First-footer table {nam}" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the first-footer tool",
+      doan: [
+        "The first-footer (xong dat, xong nha) is the first person to enter the home after New Year's Eve. Folk custom picks an age that suits the new year and the head of the household, to start the year on a good note.",
+        "The tool checks: earthly branches allied (triad or pair) with the year and with the host; a heavenly stem that combines with or nourishes the host's; and a Na Yin element that nourishes or matches the host's. It leaves out ages that clash with the year or the host, and ages in Tam Tai.",
+        "It also lists the auspicious hours and travel directions of the first day, on the Vietnamese almanac. Most important of all is a first-footer who is cheerful, well and close to the family; the age is only a reference.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Which ages suit first-footing?", dap: "Ages whose sign is a triad or paired ally of the new year and of the host, whose stem combines with or nourishes the host's, whose element nourishes or matches the host's, and who are not in Tam Tai." },
+        { hoi: "Which ages are best avoided?", dap: "Signs that clash with the year (for example Ox in a Goat year), signs that clash with the host, and signs in their three Tam Tai years." },
+        { hoi: "At what time should the first-footer arrive?", dap: "Usually during an auspicious hour of the first day by the almanac; the tool lists the six auspicious hours and the travel directions of that day." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/vietnamese-customs/house-building-age", ten: "House-building and wedding age" },
+        { href: "/en/vietnamese-customs/yearly-star", ten: "Yearly star by age" },
+        { href: "/en/feng-shui/annual-afflictions", ten: "Annual afflictions" },
+        { href: "/en/year", ten: "Lunar year guide" },
+      ] },
+    },
+  },
+  "/phong-thuy/huong-xau-nam": {
+    ten: "Annual afflictions",
+    tieu_de_seo: "Annual afflictions: Grand Duke, Three Killings, Five Yellow · Hieuban",
+    mo_ta_seo: "The sides feng shui tradition says to leave undisturbed this year: Grand Duke, Year Breaker, Three Killings, Five Yellow, Two Black, with the flying star grid.",
+    tra_loi_nhanh: {
+      hoi: "Which directions should be left undisturbed this year?",
+      dap: "Each year tradition marks a few sides of the home not to dig, demolish or renovate heavily: the Grand Duke (Tai Sui) at the year's branch, the Year Breaker opposite it, the Three Killings, and where the Five Yellow and Two Black stars fly. The feng shui year changes at the Start of Spring, around 4 February.",
+    },
+    gioi_thieu: {
+      tieu_de: "About the annual afflictions page",
+      doan: [
+        "The Grand Duke (Tai Sui) sits at the direction of the year's branch, and the Year Breaker opposite it. The Three Killings are the three mountains opposite the year's triad. The Five Yellow and Two Black are where stars 5 and 2 fly in the annual flying star grid (Xuan Kong).",
+        "The feng shui year changes at the Start of Spring (around 4 February), not on 1 January or Lunar New Year.",
+        "Tradition advises leaving these sides undisturbed: no ground-breaking, no knocking through, no major renovation. We do not recommend or sell remedies.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Where is the Five Yellow this year?", dap: "Look for the square with the number 5 in the nine-palace grid on the page. Star 5 moves to a different palace every year in Lo Shu order." },
+        { hoi: "What are the Three Killings?", dap: "The three mountains opposite the triad of the year's branch: for example, in a Horse year (Tiger, Horse, Dog) the Three Killings sit in the North (Hai, Zi, Chou)." },
+        { hoi: "Do I need to avoid the Grand Duke direction when building?", dap: "Tradition advises against breaking ground or digging large foundations on the Grand Duke and Year Breaker sides during the year; building facing another way goes on as normal." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/feng-shui", ten: "Feng shui home reading" },
+        { href: "/en/vietnamese-customs/house-building-age", ten: "House-building and wedding age" },
+        { href: "/en/year", ten: "Lunar year guide" },
+      ] },
+    },
+  },
 };
 
 export const trangCongCuEn = (duongVi: string): TrangCongCuEn | null => SO_TRANG_EN[duongVi] ?? null;

@@ -14,11 +14,11 @@ export function TraLoiNhanh({ chu, en = false }: { chu?: string | null; en?: boo
   );
 }
 
-export function HoiDapHien({ ds, id = "hoi-dap" }: { ds?: { hoi: string; dap: string }[] | null; id?: string }) {
+export function HoiDapHien({ ds, id = "hoi-dap", tieuDe = "Câu hỏi thường gặp" }: { ds?: { hoi: string; dap: string }[] | null; id?: string; tieuDe?: string }) {
   if (!ds?.length) return null;
   return (
     <section aria-labelledby={id} className="space-y-3">
-      <h2 id={id} className="text-xl">Câu hỏi thường gặp</h2>
+      <h2 id={id} className="text-xl">{tieuDe}</h2>
       <dl className="space-y-3">{ds.map((h) => (
         <div key={h.hoi} className="rounded-xl border border-line/70 p-4"><dt className="font-medium text-fg">{h.hoi}</dt><dd className="mt-1.5 text-sm leading-relaxed text-fg-muted">{h.dap}</dd></div>
       ))}</dl>

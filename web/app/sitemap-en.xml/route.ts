@@ -9,6 +9,8 @@ import { CAP_DUONG } from "@/lib/duong-en";
 import { mucSoTrang } from "@/lib/so-trang";
 import { banAnhRewrite } from "@/lib/duong-en";
 import { CHU_DE, type MucLuc } from "@/lib/kien-thuc";
+import { banAnh } from "@/lib/duong-en";
+import { duongNamTuoiSitemap } from "@/lib/sitemap-nam-tuoi";
 
 export const revalidate = 21600;
 
@@ -41,6 +43,11 @@ export async function GET() {
     const ds = await engineEn<{ ds: { slug: string }[] }>("/v1/tuvi/la-so-mau");
     muc.push({ en: lsm, vi: "/tu-vi/la-so-mau" });
     if (ds.ok) for (const x of ds.data.ds) muc.push({ en: `${lsm}/${x.slug}`, vi: `/tu-vi/la-so-mau/${x.slug}` });
+  }
+  // EN-ALL GĐ 8: trang năm & tuổi (mục lục năm, trang năm, theo tuổi, sinh ở nước ngoài…) — cùng luật index bản Việt.
+  for (const vi of await duongNamTuoiSitemap().catch(() => [] as string[])) {
+    const en = banAnh(vi);
+    if (en && !muc.some((m) => m.en === en)) muc.push({ en, vi });
   }
   const dong = muc.map((m) => {
     const alt = [`<xhtml:link rel="alternate" hreflang="en" href="${xmlThoat(urlDayDu(m.en))}"/>`];

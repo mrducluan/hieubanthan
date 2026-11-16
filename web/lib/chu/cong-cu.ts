@@ -176,19 +176,19 @@ export const CHU_XEM_NGAY = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Hoàng lịch mỗi ngày", toi_da: 60 },
 });
 export const CHU_LAM_NHA = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Tuổi dân gian", toi_da: 60 },
-  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục tra theo năm sinh", mac_dinh: "Tra nhanh theo năm sinh", toi_da: 80 },
-  "theo_nam.dong": { nhom: "Tra nhanh", nhan: "Dòng trước danh sách năm ({nam} = năm làm nhà)", mac_dinh: "Làm nhà năm {nam}:", toi_da: 60 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Tuổi dân gian", en: "Vietnamese folk custom", toi_da: 60 },
+  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục tra theo năm sinh", mac_dinh: "Tra nhanh theo năm sinh", en: "Quick look-up by birth year", toi_da: 80 },
+  "theo_nam.dong": { nhom: "Tra nhanh", nhan: "Dòng trước danh sách năm ({nam} = năm làm nhà)", mac_dinh: "Làm nhà năm {nam}:", en: "Building in {nam}:", toi_da: 60 },
 });
 export const CHU_XONG_DAT = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề ({tet} = năm Tết)", mac_dinh: "Tết {tet}", toi_da: 60 },
-  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục tra theo năm sinh ({tet} = năm Tết)", mac_dinh: "Tuổi xông đất Tết {tet} theo năm sinh gia chủ", toi_da: 100 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề ({tet} = năm Tết)", mac_dinh: "Tết {tet}", en: "Lunar New Year {tet}", toi_da: 60 },
+  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục tra theo năm sinh ({tet} = năm Tết)", mac_dinh: "Tuổi xông đất Tết {tet} theo năm sinh gia chủ", en: "First-footers for Lunar New Year {tet} by the host's birth year", toi_da: 100 },
 });
 // MT-ĐS B3 — sao hạn theo tuổi.
 export const CHU_SAO_HAN = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Tục lệ theo tuổi", toi_da: 60 },
-  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục bảng theo năm", mac_dinh: "Bảng sao hạn theo năm sinh", toi_da: 100 },
-  "theo_nam.dong": { nhom: "Tra nhanh", nhan: "Chữ trước link bảng ({nam} = năm)", mac_dinh: "Năm {nam}:", toi_da: 60 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Tục lệ theo tuổi", en: "A custom by age", toi_da: 60 },
+  "theo_nam.tieu_de": { nhom: "Tra nhanh", nhan: "Tiêu đề mục bảng theo năm", mac_dinh: "Bảng sao hạn theo năm sinh", en: "Yearly star tables by year", toi_da: 100 },
+  "theo_nam.dong": { nhom: "Tra nhanh", nhan: "Chữ trước link bảng ({nam} = năm)", mac_dinh: "Năm {nam}:", en: "{nam}:", toi_da: 60 },
 });
 // SEO-L5 — công cụ đổi lịch âm dương.
 export const CHU_DOI_LICH = gopBang(KHUNG, {
@@ -196,7 +196,7 @@ export const CHU_DOI_LICH = gopBang(KHUNG, {
   "nam.tieu_de": { nhom: "Lịch theo năm", nhan: "Tiêu đề mục lịch âm từng năm", mac_dinh: "Lịch âm theo năm", toi_da: 80 },
 });
 export const CHU_HAN_NAM = gopBang(KHUNG, {
-  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Phong thuỷ theo năm", toi_da: 60 },
+  "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề", mac_dinh: "Phong thuỷ theo năm", en: "Feng shui by year", toi_da: 60 },
 });
 // NAM-2 — "Thời gian tới của bạn".
 // CD-1: chữ khối "Mời lập lá số" của /chan-dung (cần giờ + giới tính + nơi sinh như Tử vi / Bát tự).
