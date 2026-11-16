@@ -384,5 +384,9 @@
    "An Giang": {"en": "An Giang"}, "Kiên Giang": {"en": "Kien Giang"}, "Cần Thơ": {"en": "Can Tho"}, "Hậu Giang": {"en": "Hau Giang"},
    "Sóc Trăng": {"en": "Soc Trang"}, "Bạc Liêu": {"en": "Bac Lieu"}, "Cà Mau": {"en": "Ca Mau"}
   }
+ },
+ "lich": {
+  "_ghi_chu": "EN-ALL GĐ 8 — loại ngày / giờ theo 12 thần trực nhật (trường mã `than.loai` của Xem ngày tốt).",
+  "hoang_dao": {"hoàng đạo": {"en": "Yellow Path (auspicious)"}, "hắc đạo": {"en": "Black Path (inauspicious)"}}
  }
 }
