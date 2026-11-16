@@ -1495,3 +1495,10 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - [ ] **MQ-7.** Pixel Hieuban → Settings → tắt **Automatic advanced matching** (bật thì Meta tự đọc ô nhập như email — trái Chính sách riêng tư).
 - Chữ quảng cáo: không ngầm nói biết đặc điểm riêng của người xem ("Bạn đang buồn chuyện tình cảm?") — chính sách Meta; nên viết "Xem lá số
   Tử vi của bạn", "Năm 2027 của tuổi …".
+
+## LA-UI / NS-QT / GD-1 (2026-11-16) — lịch âm mới + hai đề xuất chờ anh quyết
+- **Deploy engine trước web** cho lịch âm mới (web gọi route mới `/v1/lich/nam-ngay/{năm}`; engine cũ thì trang chỉ thiếu khối lịch, không lỗi).
+- [ ] **NS-QT** — nhập nơi sinh nước ngoài bằng ô gõ có gợi ý: đọc `docs/DE-XUAT-NOI-SINH-QUOC-TE.md` mục 5, trả lời 6 câu
+  (dùng GeoNames + ghi công · cỡ dữ liệu · cho môi trường tải `download.geonames.org` hoặc anh gửi tệp qua Drive · migration 0039 · nhập toạ độ tay · bỏ hai ô chọn cũ).
+- [ ] **GD-1** — hồ sơ gia đình: đọc `docs/DE-XUAT-HO-SO-GIA-DINH.md` mục 6, trả lời 6 câu (trần 8 người · danh mục vai ·
+  thẻ cặp có hiện điểm không · chương thu Sao · đồng bộ tài khoản chờ luật sư · bỏ ghép Bát tự chéo).

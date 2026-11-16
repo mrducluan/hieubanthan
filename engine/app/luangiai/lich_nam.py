@@ -117,3 +117,67 @@ def lich_nam(nam: int) -> dict:
             "cach_tinh": L("lich.nam.cach_tinh", "Âm lịch Việt Nam tính theo giờ Hà Nội (UTC+7) theo phép tính thiên văn: mùng 1 là "
                            "ngày có điểm sóc, tháng nhuận là tháng đầu tiên trong năm không chứa trung khí. Lịch Trung Quốc "
                            "tính theo UTC+8 nên có năm lệch một ngày hoặc một tháng.")}
+
+
+# ---- LA-UI (2026-11-16): lịch cả năm âm theo TỪNG NGÀY — dữ liệu cho component lịch (web chỉ vẽ) -------------------
+def _tiet_khi(tu: dt.date, den: dt.date) -> dict[dt.date, dict]:
+    """24 tiết khí rơi trong [tu, den] theo NGÀY giờ Việt Nam: {ngày: {kd, ten, nghia, gio}}."""
+    from app.calc import tietkhi  # noqa: PLC0415
+    from app.luangiai import hoang_lich as hl  # noqa: PLC0415
+    kb = hl.KB["tiet_khi"]
+    ra: dict[dt.date, dict] = {}
+    for nam in range(tu.year, den.year + 1):
+        for kd in range(0, 360, 15):
+            t = tietkhi.thoi_diem(nam, kd) + dt.timedelta(hours=TZ)
+            if tu <= t.date() <= den:
+                ra[t.date()] = {"kd": kd, "ten": kb[str(kd)]["ten"], "nghia": kb[str(kd)]["nghia"],
+                                "loai": kb[str(kd)]["loai"], "gio": f"{t.hour:02d}:{t.minute:02d}"}
+    return ra
+
+
+def _ten_thang(m: int, nhuan: bool) -> str:
+    return f"Tháng {'Giêng' if m == 1 else 'Chạp' if m == 12 else m}{' nhuận' if nhuan else ''}"
+
+
+def lich_ngay(nam: int) -> dict:
+    """Mọi ngày của năm âm lịch `nam` (Tết → ngày trước Tết năm sau), gom theo tháng âm. Mỗi ngày: `d` dương lịch,
+    `a` ngày âm, `thu` (0 = thứ Hai), `cc` can chi ngày, `hd` hoàng đạo, `th` thần, `tr` trực, `dep`/`ky` (đúng
+    `hoang_lich.tom_tat` — một nguồn với trang ngày), `tiet` tiết khí giao trong ngày, `le` ngày lễ âm + dương.
+    Khoá ngắn vì trang nhận ~355 ngày một lượt. Chữ tiếng Việt (component lịch hiện chỉ có ở bản Việt)."""
+    from app.luangiai import hoang_lich as hl  # noqa: PLC0415
+    goc = lich_nam(nam)
+    tet, tet_sau = dt.date.fromisoformat(goc["tet"]), dt.date.fromisoformat(goc["tet_sau"])
+    tiet = _tiet_khi(tet, tet_sau - dt.timedelta(days=1))
+    le: dict[str, list[str]] = {}
+    for x in goc["le"]:
+        le.setdefault(x["duong"], []).append(x["ten"])
+    le_duong = {k: v for k, v in hl.KB["le_duong"].items() if not k.startswith("_")}
+    thang = []
+    for g in goc["thang"]:
+        mot = dt.date.fromisoformat(g["mung_mot"])
+        ds = []
+        for i in range(g["so_ngay"]):
+            d = mot + dt.timedelta(days=i)
+            s = lh.tom_tat_ngay(hl.tom_tat(d))
+            n: dict = {"d": d.isoformat(), "a": i + 1, "thu": d.weekday(), "cc": s["can_chi"], "hd": s["hoang_dao"],
+                       "th": s["than"], "tr": s["truc"]}
+            if s["dep"]:
+                n["dep"] = True
+            if s["ky_dan_gian"]:
+                n["ky"] = s["ky_dan_gian"]
+            if d in tiet:
+                n["tiet"] = tiet[d]["ten"]
+            ten_le = le.get(n["d"], []) + ([le_duong[k]] if (k := f"{d.month:02d}-{d.day:02d}") in le_duong else [])
+            if ten_le:
+                n["le"] = ten_le
+            ds.append(n)
+        thang.append({"thang": g["thang"], "nhuan": g["nhuan"], "ten": _ten_thang(g["thang"], g["nhuan"]),
+                      "can_chi": g["can_chi"], "mung_mot": g["mung_mot"], "cuoi": g["cuoi"], "so_ngay": g["so_ngay"],
+                      "so_hoang_dao": sum(x["hd"] for x in ds), "so_dep": sum(x.get("dep", False) for x in ds), "ngay": ds})
+    am = {n["d"]: f"{n['a']}/{t['thang']}{' nhuận' if t['nhuan'] else ''}" for t in thang for n in t["ngay"]}
+    return {"nam": nam, "can_chi": goc["can_chi"], "tet": goc["tet"], "tet_sau": goc["tet_sau"], "so_ngay": goc["so_ngay"],
+            "thang_nhuan": goc["thang_nhuan"], "thang": thang,
+            "tiet_khi": [{"ten": v["ten"], "nghia": v["nghia"], "loai": v["loai"], "ngay": k.isoformat(), "gio": v["gio"],
+                          "am": am[k.isoformat()]} for k, v in sorted(tiet.items())],
+            "chu_thich": "Số vàng: ngày hoàng đạo. Sao: ngày hoàng đạo có trực tốt, không vướng kiêng dân gian (chưa xét tuổi). "
+                         "Tiết khí tính theo giờ Việt Nam."}

@@ -1,6 +1,7 @@
 // SEO-L5 — "Lịch âm năm {năm}": các tháng âm lịch Việt (mùng 1 dương lịch, đủ/thiếu, nhuận), Tết, rằm — engine tính
 // (Hồ Ngọc Đức UTC+7). Index ±10 năm quanh năm nay; năm khác vẫn xem được, noindex.
 import { AnhTomTat } from "@/components/seo/AnhTomTat";
+import { MoiXemRieng } from "@/components/nam/MoiXemRieng";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -9,7 +10,8 @@ import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { duongNgay, duongThang, homNayVN } from "@/lib/hoang-lich";
-import { cacNamLich, docNamLich, duongLichAm, lichAmIndex, lichNamCongKhai } from "@/lib/lich-am";
+import { cacNamLich, docNamLich, duongLichAm, lichAmIndex, lichNamCongKhai, lichNgayCongKhai } from "@/lib/lich-am";
+import { LichAmNam } from "@/components/lich-am/LichAmNam";
 import { taoChu } from "@/lib/chu-trang";
 import { layNoiDungTrang, voiAnhChiaSe } from "@/lib/noi-dung-trang";
 import { CHU_LICH_AM_NAM } from "@/lib/chu/trang-con";
@@ -45,7 +47,7 @@ async function metaGoc(p: P): Promise<Metadata> {
 export default async function Page(p: P) {
   const n = docNamLich((await p.params).nam);
   if (!n) notFound();
-  const [d, gan] = await Promise.all([lichNamCongKhai(n), cacNamLich(Math.max(1901, n - 3), Math.min(2098, n + 5))]);
+  const [d, gan, lich] = await Promise.all([lichNamCongKhai(n), cacNamLich(Math.max(1901, n - 3), Math.min(2098, n + 5)), lichNgayCongKhai(n)]);
   if (!d) throw new Error("engine lịch không phản hồi");
   const l = await chuLichMayChu();
   if (l.en) return <TrangNamEn n={n} d={d} l={l} />;
@@ -68,6 +70,8 @@ export default async function Page(p: P) {
         <p className="eyebrow">Trả lời nhanh</p>
         <p className="mt-2 leading-relaxed text-fg">{d.tra_loi_nhanh}</p>
       </section>
+      {/* LA-UI: lịch cả năm âm (tháng / cả năm) ngay dưới câu trả lời nhanh — engine cũ / bận thì bỏ khối, bảng dưới vẫn đủ. */}
+      {lich && <LichAmNam d={lich} homNay={homNayVN()} className="mt-6" />}
       <section className="mt-8" aria-labelledby="bang-thang">
         <h2 id="bang-thang" className="text-2xl">{c("bang.tieu_de", bien)}</h2>
         <div className="mt-4 overflow-x-auto">
@@ -139,6 +143,7 @@ export default async function Page(p: P) {
           {n < 2098 && <Link href={duongLichAm(n + 1)} className="text-gold underline">Lịch âm {n + 1}</Link>}
         </p>
       )}
+      <MoiXemRieng trang="lich_am" nam={n} className="mt-10" />
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
     </div>
   );

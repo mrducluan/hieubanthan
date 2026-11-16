@@ -141,6 +141,12 @@ def api_lich_cac_nam(tu: Annotated[int, Query(ge=1901, le=2098)], den: Annotated
     return _lich_nam.cac_nam(tu, den)
 
 
+# LA-UI: mọi ngày của năm âm (component lịch) — không dữ liệu cá nhân, web cache được.
+@router.get("/v1/lich/nam-ngay/{nam}")
+def api_lich_nam_ngay(nam: Annotated[int, FPath(ge=1901, le=2098)]) -> dict:
+    return _lich_nam.lich_ngay(nam)
+
+
 @router.get("/v1/lich/nam/{nam}")
 def api_lich_nam(nam: Annotated[int, FPath(ge=1901, le=2098)]) -> dict:
     return _lich_nam.lich_nam(nam)
