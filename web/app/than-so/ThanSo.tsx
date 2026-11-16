@@ -177,7 +177,7 @@ export function ThanSo() {
     return () => io.disconnect();
   }, [kq, dangNghiThuc, phai]);
   // Lúc chờ hồ sơ vẫn có <h1> trong HTML phía máy chủ (SEO); có hồ sơ thì tiêu đề là tên người dùng.
-  if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeTrang nho={c("dau.nhan_tren")} lon={c("dau.dang_tai")} /><KhungTai /></div>;
+  if (hoSo === undefined) return <div className="mx-auto max-w-lg"><TieuDeTrang nho={c("dau.nhan_tren")} lon={c("dau.dang_tai")} /><KhungTai nhan={t("tai")} /></div>;
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">
@@ -188,7 +188,7 @@ export function ThanSo() {
   }
   if (loi) return <BaoLoi loi={loi} thuLai={thuLai} />;
   if (dangNghiThuc) return <NghiThuc daCoKetQua={Boolean(kq)} onXong={xongNghiThuc} />;
-  if (!kq) return <KhungTai dong={4} />;
+  if (!kq) return <KhungTai dong={4} nhan={t("tai")} />;
 
   const cs = kq.chieu_sau;
   const tuoi = cs.nam_ca_nhan[0]?.tuoi ?? 0;

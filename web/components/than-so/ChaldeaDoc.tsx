@@ -101,7 +101,7 @@ export function ChaldeaDoc({ hoSo }: { hoSo: HoSo }) {
   const { kq, loi, thuLai } = useChaldea(hoSo);
   const { c } = useChuThanSo();
   if (loi) return <BaoLoi loi={loi} thuLai={thuLai} />;
-  if (!kq) return <KhungTai dong={4} />;
+  if (!kq) return <KhungTai dong={4} nhan={c("tai")} />;
   const gt = kq.gioi_thieu;
   return (
     <div className="space-y-10" data-testid="bai-chaldea">

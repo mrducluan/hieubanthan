@@ -198,7 +198,7 @@ export function Tarot() {
   const dau = (
     <DauMang Icon={Layers} hinh="tarot" ten={t("dau.ten")} mo_ta={t("dau.mo_ta")} />
   );
-  if (!bo && !loiBo) return <div>{dau}<KhungTai /></div>;
+  if (!bo && !loiBo) return <div>{dau}<KhungTai nhan={t("tai")} /></div>;
   if (!bo) return <div>{dau}<BaoLoi loi={loiBo ?? t("loi.bo")} thuLai={thuLai} /></div>;
 
   return (

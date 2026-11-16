@@ -28,7 +28,7 @@ export function TongHopDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: QuyUocDD }) {
   const { kq, loi, thuLai } = useEngineDoc<BaiTongHop>("/api/thanso/tong-hop", hoSo, { quy_uoc_duong_doi: quyUoc });
   const { c } = useChuThanSo();
   if (loi) return <BaoLoi loi={loi} thuLai={thuLai} />;
-  if (!kq) return <KhungTai dong={3} />;
+  if (!kq) return <KhungTai dong={3} nhan={c("tai")} />;
   return (
     <div className="space-y-10" data-testid="bai-tong-hop">
       <section aria-labelledby="th-noi-bat">

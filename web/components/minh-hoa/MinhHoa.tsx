@@ -333,11 +333,12 @@ function HinhBoVi({ vung, ten, cung }: { vung: string; ten: string; cung: string
   );
 }
 
-function HinhLaBai({ c, ...mh }: { id: string; ten: string; en: string; so: number; bo: BoTarot | null; loai: LoaiLa; nguyen_to: NguyenTo; c: Chu }) {
+function HinhLaBai({ c, tiengAnh, ...mh }: { id: string; ten: string; en: string; so: number; bo: BoTarot | null; loai: LoaiLa; nguyen_to: NguyenTo; c: Chu; tiengAnh: boolean }) {
   return (
     <figure className="mx-auto w-[168px]">
       <MatTruoc la={{ id: mh.id, ten: mh.ten, en: mh.en, so: mh.so, bo: mh.bo, loai: mh.loai, nguyen_to: mh.nguyen_to }} w={168} />
-      <figcaption className="mt-2 text-center text-xs text-fg-faint">{mh.ten}{mh.en && mh.en !== mh.ten ? ` (${mh.en})` : ""} — {c("mh.la_bai")}</figcaption>
+      {/* Bản Việt giữ đúng HTML cũ; bản Anh tên lá đã là tên Anh → không lặp "(The Fool)". */}
+      <figcaption className="mt-2 text-center text-xs text-fg-faint">{tiengAnh ? <>{mh.ten} — {c("mh.la_bai")}</> : <>{mh.ten} ({mh.en}) — tranh bộ Rider–Waite in năm 1909</>}</figcaption>
     </figure>
   );
 }
@@ -360,7 +361,7 @@ export function MinhHoa({ mh, duong, gon = false, en = false, ten = MA }: { mh?:
       case "nhat_chu": return <HinhNhatChu {...mh} c={c} ten={ten} />;
       case "dau_hieu": return <HinhDauHieu {...mh} c={c} />;
       case "bo_vi": return <HinhBoVi {...mh} />;
-      case "la_bai": return <HinhLaBai {...mh} c={c} />;
+      case "la_bai": return <HinhLaBai {...mh} c={c} tiengAnh={en} />;
       default: return null;
     }
   })();

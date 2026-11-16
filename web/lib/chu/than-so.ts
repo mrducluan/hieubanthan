@@ -11,6 +11,7 @@ const P = "Trang", K = "Thẻ số", C = "Chân dung", D = "Chiều sâu", DD = 
 
 export const CHU_THAN_SO_UI = {
   // ---------------------------------------------------------------- trang (app/than-so/ThanSo.tsx)
+  "tai": m(P, "Đang tải", "Loading"),
   "phai.pitago": m(P, "Pitago", "Pythagorean"),
   "phai.chaldea": m(P, "Chaldea", "Chaldean"),
   "phai.tong_hop": m(P, "tổng hợp hai phái", "both schools combined"),
