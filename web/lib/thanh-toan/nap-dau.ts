@@ -5,7 +5,7 @@
 export type NapDau = { bat: boolean; phan_tram: number; lan_dau: boolean | null };
 export type GoiHienThi = { ma: string; ten: string; gia_vnd: number; sao: number; nhan: string | null; mo_ta: string | null };
 
-/** Mã gói khởi đầu (19.000 ₫ / 19 Sao — cùng 10 Sao chào mừng vừa đủ 1 báo cáo 29 Sao) — không chọn sẵn ở trang nạp, chỉ gợi ý khi nó là gói nhỏ nhất đủ dùng. */
+/** Mã gói khởi đầu (19.000 ₫ / 19 Sao, từ thời giá 29 Sao; GIA-99 để tắt) — không chọn sẵn ở trang nạp, chỉ gợi ý khi nó là gói nhỏ nhất đủ dùng. */
 export const GOI_KHOI_DAU = "khoi_dau";
 
 export const saoTangLanDau = (sao: number, phanTram: number) =>
@@ -39,4 +39,32 @@ export function goiMacDinh<G extends GoiHienThi>(ds: readonly G[]): G | undefine
 export function thuocTinhNap(goi: string, nd: NapDau | null | undefined): { kind: string; goi: string; lan_dau?: number } {
   const lanDau = nd?.lan_dau;
   return { kind: goi, goi, ...(typeof lanDau === "boolean" ? { lan_dau: lanDau ? 1 : 0 } : {}) };
+}
+
+/** GIA-99: gói này rẻ hơn bao nhiêu % mỗi Sao so với gói ĐẮT NHẤT tính theo Sao trong danh sách đang bán (thường là gói
+ *  lẻ). Số thật tính từ chính bảng giá — không gạch giá, không "giá gốc". < 5 % → 0 (không khoe mức lệch làm tròn). */
+export function tietKiemPhanTram(g: GoiHienThi, ds: readonly GoiHienThi[]): number {
+  const donGia = (x: GoiHienThi) => (x.sao > 0 ? x.gia_vnd / x.sao : 0);
+  const cao = Math.max(0, ...ds.map(donGia));
+  const cua = donGia(g);
+  if (cao <= 0 || cua <= 0) return 0;
+  const pt = Math.round((1 - cua / cao) * 100);
+  return pt >= 5 ? pt : 0;
+}
+
+/** Giá mỗi lần xem (₫) khi dùng hết gói vào Luận giải toàn bộ; gói chưa đủ một báo cáo → null. */
+export function giaMoiLanXem(g: GoiHienThi, giaBaoCao: number): number | null {
+  const n = soBaoCao(g.sao, giaBaoCao);
+  return n > 0 ? Math.round(g.gia_vnd / n / 1000) * 1000 : null;
+}
+
+/** GIA-99 (chim mồi trung thực): đang chọn gói `chon`, có gói CÓ NHÃN lớn hơn mà mỗi Sao rẻ hơn ≥ 5 % → gợi ý đổi, kèm
+ *  phần chênh thật. Không có / đang chọn chính nó / gói đang chọn đã lớn hơn → null. */
+export function goiNangCap<G extends GoiHienThi>(ds: readonly G[], chon: string, giaBaoCao: number):
+  { goi: G; themVnd: number; baoCao: number; moiLan: number | null } | null {
+  const c = ds.find((g) => g.ma === chon);
+  const dich = ds.find((g) => g.nhan && g.ma !== GOI_KHOI_DAU);
+  if (!c || !dich || dich.ma === c.ma || dich.gia_vnd <= c.gia_vnd || c.sao <= 0 || dich.sao <= 0) return null;
+  if (dich.gia_vnd / dich.sao > (c.gia_vnd / c.sao) * 0.95) return null;
+  return { goi: dich, themVnd: dich.gia_vnd - c.gia_vnd, baoCao: soBaoCao(dich.sao, giaBaoCao), moiLan: giaMoiLanXem(dich, giaBaoCao) };
 }

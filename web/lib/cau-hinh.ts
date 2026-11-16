@@ -40,7 +40,7 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Số tài khoản / một máy / 30 ngày thì gắn cờ", moTa: "Tài khoản thứ N nhận lời mời trên cùng một máy trong 30 ngày → người mời không được thưởng. Gia đình dùng chung máy: tăng số này." },
   // SAO-ND (migration 0027): thiết kế lần nạp đầu — SQL đọc cùng khoá (tao_don_nap / goi_sao_dang_ban / nd_tang_cho_don).
   { khoa: "sao.goi_khoi_dau.bat", nhom: "Nạp Sao", loai: "bat_tat", macDinh: false,
-    ten: "Bán gói Khởi đầu (12.000 ₫ / 12 Sao)", moTa: "Gói vừa đủ mở 1 Luận giải toàn bộ, đứng đầu trang nạp và được gợi ý trong hộp nạp nhanh khi là gói nhỏ nhất đủ dùng. Tắt = ẩn và máy chủ từ chối tạo đơn gói này." },
+    ten: "Bán gói Khởi đầu (19.000 ₫ / 19 Sao)", moTa: "Gói nhỏ từ thời giá 29 Sao — ở giá 99 Sao không còn đủ mở báo cáo nào, nên để TẮT (GIA-99). Tắt = ẩn và máy chủ từ chối tạo đơn gói này." },
   { khoa: "sao.nap_dau.bat", nhom: "Nạp Sao", loai: "bat_tat", macDinh: false,
     ten: "Tặng Sao lần nạp đầu", moTa: "Bật = đơn nạp thành công ĐẦU TIÊN của mỗi tài khoản được cộng thêm % số Sao của gói, dưới dạng Sao tặng (hạn 365 ngày). Một lần mỗi tài khoản; hoàn tiền đơn đó → tự thu hồi. Hoa hồng người mời vẫn tính trên Sao của gói." },
   { khoa: "sao.nap_dau.phan_tram", nhom: "Nạp Sao", loai: "so", min: 0, max: 100, macDinh: 20,
@@ -90,8 +90,19 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Thu Sao riêng: Luận giải Tử vi", moTa: "Bật = mảng này thu Sao, kể cả khi công tắc chung đang tắt." },
   { khoa: "luan_giai.thu_sao.battu", nhom: "Luận giải toàn bộ", loai: "bat_tat", macDinh: false,
     ten: "Thu Sao riêng: Luận giải Bát tự", moTa: "Bật = mảng này thu Sao, kể cả khi công tắc chung đang tắt." },
-  { khoa: "luan_giai.gia_sao", nhom: "Luận giải toàn bộ", loai: "so", min: 1, max: 100, macDinh: 29,
-    ten: "Giá Luận giải toàn bộ (Sao/báo cáo)", moTa: "Chỉ áp dụng khi đang thu Sao." },
+  { khoa: "luan_giai.gia_sao", nhom: "Luận giải toàn bộ", loai: "so", min: 1, max: 300, macDinh: 99,
+    ten: "Giá Luận giải toàn bộ (Sao/báo cáo)", moTa: "Giá chung, chỉ áp dụng khi đang thu Sao. GIA-99 (16/11/2026): 99 Sao. Báo cáo có giá riêng bên dưới thì theo giá riêng." },
+  // GIA-99: giá RIÊNG từng báo cáo (0 = theo giá chung). Chỉ web đọc (SQL dung_sao nhận số Sao do máy chủ web quyết).
+  { khoa: "luan_giai.gia_sao.thanso", nhom: "Luận giải toàn bộ", loai: "so", min: 0, max: 300, macDinh: 49,
+    ten: "Giá riêng: Bản đồ con số (Thần số)", moTa: "Báo cáo ngắn (4 chương) — cửa vào giá thấp. 0 = theo giá chung." },
+  { khoa: "luan_giai.gia_sao.tuvi", nhom: "Luận giải toàn bộ", loai: "so", min: 0, max: 300, macDinh: 0,
+    ten: "Giá riêng: Luận giải Tử vi", moTa: "0 = theo giá chung." },
+  { khoa: "luan_giai.gia_sao.battu", nhom: "Luận giải toàn bộ", loai: "so", min: 0, max: 300, macDinh: 0,
+    ten: "Giá riêng: Luận giải Bát tự", moTa: "0 = theo giá chung." },
+  { khoa: "luan_giai.gia_sao.thoi_gian", nhom: "Luận giải toàn bộ", loai: "so", min: 0, max: 300, macDinh: 0,
+    ten: "Giá riêng: Thời gian tới (năm)", moTa: "0 = theo giá chung." },
+  { khoa: "luan_giai.gia_sao.chan_dung", nhom: "Luận giải toàn bộ", loai: "so", min: 0, max: 300, macDinh: 0,
+    ten: "Giá riêng: Chân dung tổng hợp", moTa: "0 = theo giá chung." },
   { khoa: "luan_giai.chuong_mien_phi", nhom: "Luận giải toàn bộ", loai: "so", min: 0, max: 3, macDinh: 1,
     ten: "Số chương xem miễn phí", moTa: "Khi đang thu Sao: ai cũng đọc trọn N chương đầu; chương sau hiện tiêu đề + điểm nhấn + câu hỏi, mở bằng Sao." },
   // EN-AI: lớp phân loại AI cho câu gõ tự do tiếng Anh (Bát tự, Tử vi). Cần CẢ env engine HOI_PHAN_LOAI_AI=1 lẫn công tắc này.
@@ -103,7 +114,7 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Câu miễn phí/ngày — khách chưa đăng nhập", moTa: "Hết lượt → mời đăng nhập (nhận Sao chào mừng) để hỏi tiếp." },
   { khoa: "sao.hoi.mien_phi_tk", nhom: "Hỏi đáp", loai: "so", min: 0, max: 100, macDinh: 10,
     ten: "Câu miễn phí/ngày — có tài khoản", moTa: "Tính chung mọi mảng. Hết lượt → mỗi câu tốn Sao (người dùng bấm đồng ý từng câu)." },
-  { khoa: "sao.hoi.gia", nhom: "Hỏi đáp", loai: "so", min: 1, max: 10, macDinh: 3,
+  { khoa: "sao.hoi.gia", nhom: "Hỏi đáp", loai: "so", min: 1, max: 10, macDinh: 5,
     ten: "Giá mỗi câu vượt lượt (Sao)", moTa: "Chỉ áp dụng khi bật giới hạn hỏi đáp." },
   // ---- SAO-HV (0028) ----
   // Hội viên năm HAI HẠNG (chủ dự án chốt phương án a, docs/SO-SANH-GIA-HOI-VIEN.md): thường + Chuyên gia. Mua MỘT LẦN bằng

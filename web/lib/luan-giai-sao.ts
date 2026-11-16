@@ -1,4 +1,4 @@
-// SAO-LG + SAO-2 — "Luận giải toàn bộ" Tử vi / Bát tự (10 Sao/báo cáo, công tắc ở /quan-tri, mặc định TẮT = miễn phí).
+// SAO-LG + SAO-2 — "Luận giải toàn bộ" Tử vi / Bát tự (GIA-99: 99 Sao/báo cáo, giá riêng từng báo cáo; công tắc ở /quan-tri).
 // Khi thu Sao:
 //   1. Ai cũng xem trước MIỄN PHÍ: N chương đầu trọn vẹn (luan_giai.chuong_mien_phi), chương sau chỉ có tiêu đề +
 //      lời mời xem tiếp do engine soạn (điểm nhấn đã tính + câu hỏi mở). Engine chỉ diễn đạt AI N chương đầu.
@@ -14,10 +14,23 @@ import { layCauHinh } from "@/lib/cau-hinh";
 import { biMat, chaoMungConNhan, coTaiKhoan, phienNguoiDung } from "@/lib/cua-sao";
 import { catXemTruoc, type BaoCaoDay } from "@/lib/sao-xem-truoc";
 import { mangLuanGiai } from "@/lib/luan-giai-mang";
+import { congDangBat } from "@/lib/thanh-toan/cong";
 
 /** Giá mặc định; QT-2: chủ sở hữu đổi ở /quan-tri/cai-dat (khoá luan_giai.gia_sao). */
-export const GIA_LUAN_GIAI_SAO = 29;   // chủ dự án chốt 26/10/2026 (trước 10); câu hỏi vượt lượt 3 Sao
-export const giaLuanGiaiSao = () => layCauHinh<number>("luan_giai.gia_sao");
+export const GIA_LUAN_GIAI_SAO = 99;   // GIA-99: chủ dự án chốt 16/11/2026 (trước 29); câu hỏi vượt lượt 5 Sao
+/** Báo cáo có khoá giá riêng `luan_giai.gia_sao.<mã>` (GIA-99). Mã khác → giá chung. */
+export const BAO_CAO_GIA_RIENG = ["thanso", "tuvi", "battu", "thoi_gian", "chan_dung"] as const;
+/** Giá một báo cáo (Sao). Có `moDun` và khoá giá riêng của nó > 0 → giá riêng; còn lại giá chung `luan_giai.gia_sao`.
+ *  Nhận cả bí danh mảng (thanso_sau, tu_vi…). Lỗi đọc giá riêng → giá chung (không bao giờ ra 0). */
+export async function giaLuanGiaiSao(moDun?: string | null): Promise<number> {
+  const chung = await layCauHinh<number>("luan_giai.gia_sao");
+  const ma = mangLuanGiai(moDun) ?? moDun;
+  if (!ma || !(BAO_CAO_GIA_RIENG as readonly string[]).includes(ma)) return chung;
+  try {
+    const rieng = Number(await layCauHinh<number>(`luan_giai.gia_sao.${ma}`));
+    return Number.isFinite(rieng) && rieng > 0 ? rieng : chung;
+  } catch { return chung; }
+}
 
 /** Công tắc: (cài đặt chung luan_giai.thu_sao — chưa đặt thì theo env LUAN_GIAI_THU_SAO=1 — HOẶC công tắc riêng của
  *  mảng luan_giai.thu_sao.<tuvi|battu|thanso>, SAO-V: bật Bản đồ con số trước) VÀ đã cấu hình Supabase + bí mật ký khoá
@@ -25,6 +38,9 @@ export const giaLuanGiaiSao = () => layCauHinh<number>("luan_giai.gia_sao");
  *  `moDun`: mã mảng (nhận cả bí danh như thanso_sau, tu_vi); không truyền / không thuộc ba mảng → chỉ xét công tắc chung. */
 export async function dangThuSao(moDun?: string | null): Promise<boolean> {
   if (!coTaiKhoan() || !biMat()) return false;
+  // GIA-99: chưa có cổng nạp (Pay2S chưa đủ khoá) → KHÔNG khoá báo cáo: bật công tắc trước khi cổng sẵn sàng không được
+  // thành ngõ cụt "cần Sao nhưng không nạp được". Cùng tinh thần fail-open của SAO-2.
+  if (congDangBat() === null) return false;
   if (await layCauHinh<boolean>("luan_giai.thu_sao")) return true;
   const mang = mangLuanGiai(moDun);
   if (!mang) return false;
@@ -87,7 +103,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     return kq.ok ? NextResponse.json({ ...(kq.body as object), phi: MIEN_PHI }) : kq.res;
   }
 
-  const [gia, mienPhi, phien] = await Promise.all([giaLuanGiaiSao(), layCauHinh<number>("luan_giai.chuong_mien_phi"), phienNguoiDung()]);
+  const [gia, mienPhi, phien] = await Promise.all([giaLuanGiaiSao(moDun), layCauHinh<number>("luan_giai.chuong_mien_phi"), phienNguoiDung()]);
   // SEC-1: khoá giao dịch ký HMAC bằng bí mật máy chủ (người dùng không tự tính được để gọi thẳng dung_sao rẻ hơn).
   // Không gồm giá: đổi giá giữa ngày thì báo cáo đã mở vẫn xem lại được, không trừ lần hai.
   const bi_mat = biMat();
