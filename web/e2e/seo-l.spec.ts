@@ -46,7 +46,7 @@ test("ngày tốt theo việc: cưới hỏi tháng 12/2026 — danh sách ngày
 
 test("lịch âm 2025 (nhuận tháng 6) + công cụ đổi lịch", async ({ request, page }) => {
   const h = await (await request.get("/lich-am/2025")).text();
-  expect(h).toMatch(/<h1[^>]*>Lịch âm năm 2025/);
+  expect(h).toMatch(/<h1[^>]*>Lịch âm 2025: năm 2025 có nhuận không/);   // SEO-P: H1 theo câu người ta tìm
   expect(h).toContain("Tháng 6 (nhuận)");
   expect(h).toContain("29/01/2025");                                    // Tết Ất Tỵ
   expect((await request.get("/lich-am/1800")).status()).toBe(404);
@@ -60,7 +60,8 @@ test("lịch âm 2025 (nhuận tháng 6) + công cụ đổi lịch", async ({ r
 
 test("trang kiến thức: ngày đăng + sửa thật (không còn một ngày cho cả kho)", async ({ request }) => {
   const a = await (await request.get("/tu-vi/sao-o-cung/tu-vi-cung-menh")).text();
-  const b = await (await request.get("/than-so/y-nghia-so/so-7")).text();
+  // SEO-P (16/11/2026) sửa heading mọi họ trang kiến thức cùng ngày → so với họ bộ vị gương mặt (không đổi lần đó).
+  const b = await (await request.get("/nhan-tuong/bo-vi/an-duong")).text();
   const ngay = (h: string) => h.match(/"dateModified":"(\d{4}-\d{2}-\d{2})"/)?.[1];
   expect(a).toMatch(/"datePublished":"\d{4}-\d{2}-\d{2}"/);
   expect(ngay(a)).toBeTruthy();

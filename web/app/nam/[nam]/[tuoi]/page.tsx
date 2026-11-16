@@ -30,8 +30,15 @@ async function doc(p: P) {
 async function metaGoc(p: P): Promise<Metadata> {
   const x = await doc(p);
   if (!x) return {};
-  const m = metaTrang({ tieuDe: `Tử vi năm ${x.n} tuổi ${x.ns} nam mạng, nữ mạng`,
-    moTa: `Tuổi ${x.ns} năm ${x.n}: hợp hay xung với năm, Tam tai, Kim lâu, làm nhà, sao hạn nam mạng và nữ mạng đọc bằng lời đời thường, việc nên làm trong năm — không phán hung, không cúng giải.`,
+  // SEO-P: Search Console — người ta gõ "1998 năm 2026 bao nhiêu tuổi" → tiêu đề + mô tả trả lời đúng câu đó (số do engine
+  // tính: tuổi tròn, tuổi mụ, can chi); engine lỗi → tiêu đề cũ.
+  const d = await namTheoTuoiCongKhai(x.n, x.ns);
+  const m = metaTrang({ tieuDe: d?.tuoi_tron != null
+      ? `${x.ns} năm ${x.n} bao nhiêu tuổi? Tử vi tuổi ${d.nguoi.can_chi} ${x.n}`
+      : `Tử vi năm ${x.n} tuổi ${x.ns} nam mạng, nữ mạng`,
+    moTa: d?.tuoi_tron != null
+      ? `Sinh năm ${x.ns} (${d.nguoi.can_chi}), năm ${x.n} bước sang ${d.tuoi_tron} tuổi, tuổi mụ ${d.tuoi_mu}. Hợp hay xung với năm, Tam tai, Kim lâu, làm nhà, sao hạn nam và nữ mạng — lời đời thường, không phán hung.`
+      : `Tuổi ${x.ns} năm ${x.n}: hợp hay xung với năm, Tam tai, Kim lâu, làm nhà, sao hạn nam mạng và nữ mạng đọc bằng lời đời thường, việc nên làm trong năm — không phán hung, không cúng giải.`,
     duong: duongNamTuoi(x.n, x.ns), anh: anhBai({ tieuDe: `Tử vi ${x.n} tuổi ${x.ns}`, mang: "lich" }) });
   return namTuoiIndex(x.n, await namTuoiSeo(), x.ns) ? m : { ...m, robots: { index: false, follow: true } };
 }

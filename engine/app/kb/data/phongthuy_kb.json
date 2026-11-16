@@ -151,6 +151,7 @@
  },
  "bo_tri": {
   "duong_dam": {
+   "ten_khac": ["đường đâm vào nhà", "hẻm đâm vào nhà", "nhà cuối đường thẳng"],
    "tieu_de": "Đường đâm thẳng vào nhà",
    "noi_dung": "Loan đầu gọi là 'lộ xung': khí và dòng xe dồn thẳng vào cửa. Thực tế: ồn, bụi, nguy cơ xe lao vào.",
    "goi_y": "Lùi cửa, làm cổng/tường thấp hoặc cây xanh chắn phía trước.",
@@ -235,6 +236,7 @@
    ]
   },
   "song_truoc": {
+   "ten_khac": ["sông nước trước nhà", "hồ nước trước nhà", "nhà nhìn ra sông"],
    "tieu_de": "Sông, hồ trước nhà",
    "noi_dung": "Táng Thư: 'khí gặp nước thì dừng' — nước ôm trước mặt (thuỷ bão) là tốt; nước chảy thẳng đi hoặc cắt ngang gấp là kém.",
    "goi_y": "Xem nước ôm vòng hay chảy thẳng; lưu ý an toàn mùa mưa lũ, độ ẩm.",
@@ -426,6 +428,7 @@
    ]
   },
   "cau_thang_cua": {
+   "ten_khac": ["cầu thang đâm ra cửa", "cầu thang quay ra cửa", "cầu thang thẳng cửa chính"],
    "tieu_de": "Cầu thang đối diện cửa chính",
    "noi_dung": "Quan niệm: khí vào cửa chạy thẳng lên/xuống, không tụ. Thực tế: lối đi chật, thiếu riêng tư.",
    "goi_y": "Đặt vách, bình phong hoặc xoay chân cầu thang nếu được.",

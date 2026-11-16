@@ -26,7 +26,9 @@ export interface NgayTot {
   truc: { ten: string; y: string; hop: string; tranh: string };
   tu: { ten: string; tot: boolean };
   nghi: MucNghiKy[]; ky: MucNghiKy[]; cat_than: ThanSat[]; hung_sat: ThanSat[];
-  xung_tuoi: { ten: string; chi: string }; sat: string; banh_to: string[];
+  xung_tuoi: { ten: string; chi: string };
+  /** SEO-P: 12 con giáp với ngày — engine tính (đúng hàm quan hệ tuổi của hồ sơ); engine cũ không có. */
+  con_giap?: { chi: string; ma: string | null; ten: string; nghia: string }[]; sat: string; banh_to: string[];
   huong: { hy_than: string; tai_than: string; phuc_than: string }; thai_than: string;
   gio: GioNgay[]; gio_hoang_dao: GioNgay[]; ghi_chu_gio_ty?: string;
   ky_dan_gian: { ma: string; ten: string; nghia: string }[];

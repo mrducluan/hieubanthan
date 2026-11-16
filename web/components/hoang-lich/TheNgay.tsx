@@ -160,6 +160,7 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
       </div>
 
       {d.viec_lon && d.viec_lon.length > 0 && <ViecLon d={d} />}
+      {d.con_giap && d.con_giap.length === 12 && <ConGiap d={d} />}
 
       {(d.nghi.length > 0 || d.ky.length > 0) && (
         <details className="glass rounded-2xl px-5 py-3 text-sm" data-testid="giai-nghia-nghi-ky">
@@ -224,6 +225,27 @@ export function TheNgay({ d, gon = false }: { d: NgayTot; gon?: boolean }) {
 const NHAN_VIEC = { tot: "Ngày tốt", binh: "Bình thường", tranh: "Nên chọn ngày khác" } as const;
 
 const ngayHienThi = (iso: string) => iso.split("-").reverse().join("/");
+
+/** SEO-P — "tử vi ngày … của 12 con giáp" (Search Console): mỗi con giáp một dòng quan hệ với chi ngày. Engine tính bằng
+ *  đúng hàm quan hệ tuổi của hồ sơ, lời ở KB; web chỉ hiển thị. Không chấm điểm, chỉ tập quán dân gian. */
+const MAU_CON_GIAP: Record<string, string> = { tam_hop: "text-jade", luc_hop: "text-jade", xung: "text-gold", hai: "text-moon", trung: "text-moon" };
+function ConGiap({ d }: { d: NgayTot }) {
+  const nd = ngayHienThi(d.ngay);
+  return (
+    <section aria-labelledby="con-giap" className="glass rounded-2xl p-5" data-testid="con-giap">
+      <h2 id="con-giap" className="text-lg">12 con giáp ngày {nd}: tuổi nào hợp, tuổi nào xung?</h2>
+      <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+        {d.con_giap!.map((x) => (
+          <li key={x.chi} className="rounded-xl border border-line/70 px-3 py-2 text-sm" data-ma={x.ma ?? "binh"}>
+            <b>Tuổi {x.chi}</b> <span className={MAU_CON_GIAP[x.ma ?? ""] ?? "text-fg-muted"}>· {x.ten}</span>
+            <span className="mt-0.5 block text-xs text-fg-muted">{x.nghia.charAt(0).toUpperCase() + x.nghia.slice(1)}.</span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-3 text-xs leading-relaxed text-fg-faint">Theo quan hệ con giáp của năm sinh với ngày (tam hợp, lục hợp, xung, hại) — tập quán dân gian để tham khảo, không định sẵn chuyện tốt xấu.</p>
+    </section>
+  );
+}
 
 /** 6b-1 — 6 việc lớn chấm bằng ĐÚNG luật của trang "ngày tốt {việc} tháng": sách ghi Nên mà vướng mục Kiêng (vd nên cưới
  *  gả nhưng kiêng Dạm ngõ) thì không gọi là ngày tốt — hai trang nói cùng một kết luận. Engine chấm, web chỉ hiển thị. */

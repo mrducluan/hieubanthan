@@ -100,7 +100,7 @@ export const CHU_VIEC_THANG = {
 // SEO-L5 — lịch âm cả năm.
 export const CHU_LICH_AM_NAM = {
   "dau.nhan_tren": { nhom: D, nhan: "Dòng nhỏ ({can_chi})", mac_dinh: "Năm {can_chi}", toi_da: 60 },
-  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Lịch âm năm {nam}: Tết, tháng nhuận, các tháng âm lịch", toi_da: 120 },
+  "dau.tieu_de": { nhom: D, nhan: "Tiêu đề H1 ({nam})", mac_dinh: "Lịch âm {nam}: năm {nam} có nhuận không, Tết ngày nào?", toi_da: 120 },
   "bang.tieu_de": { nhom: "Bảng", nhan: "Tiêu đề bảng", mac_dinh: "Các tháng âm lịch năm {nam}", toi_da: 100 },
   "cuoi.chu": { nhom: C, nhan: "Chữ trước link công cụ", mac_dinh: "Đổi một ngày cụ thể giữa âm lịch và dương lịch:", toi_da: 160 },
   "cuoi.link": { nhom: C, nhan: "Chữ link công cụ", mac_dinh: "công cụ đổi lịch âm dương", toi_da: 60 },

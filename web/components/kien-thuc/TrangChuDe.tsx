@@ -56,7 +56,7 @@ export async function metaChuDe(khoa: string | null): Promise<Metadata> {
     return metaEn({ title: ce.tieu_de_seo, description: ce.mo_ta, path: en, vi: cd.duong });
   }
   // SEO-K: metaTrang dựng đủ bộ OG + Twitter (trước đây twitter kế thừa tiêu đề trang chủ) + ảnh có hình theo mảng.
-  const meta = apDungSeo(metaTrang({ tieuDe: cd.ten, moTa: cd.mo_ta, duong: cd.duong, md: `${cd.duong}.md` }), await layNoiDungTrang(cd.duong));
+  const meta = apDungSeo(metaTrang({ tieuDe: cd.h1 ?? cd.ten, moTa: cd.mo_ta, duong: cd.duong, md: `${cd.duong}.md` }), await layNoiDungTrang(cd.duong));
   // EN-ALL: cụm đã mở bản Anh → hreflang hai chiều (bản Việt là x-default).
   return en ? { ...meta, alternates: { ...meta.alternates, languages: { vi: cd.duong, en, "x-default": cd.duong } } } : meta;
 }
@@ -85,7 +85,7 @@ export async function TrangChuDe({ khoa }: { khoa: string | null }) {
       )} />
       <DuongDan ds={dd} />
       <HinhMang kieu={HINH_CHU_DE[khoa] ?? "than-so"} className="mt-4 h-20" />
-      <h1 className="mt-3 text-4xl sm:text-5xl">{nd.dau.h1 ?? cd.ten}</h1>
+      <h1 className="mt-3 text-4xl sm:text-5xl">{nd.dau.h1 ?? cd.h1 ?? cd.ten}</h1>
       <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">{cd.mo_ta}</LoiDanCms>
       {TRA_LOI_CUM[khoa] && <div className="mt-6 max-w-3xl"><TraLoiNhanh chu={TRA_LOI_CUM[khoa]!.replace("{so}", String(ds.length))} /></div>}
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-8" />

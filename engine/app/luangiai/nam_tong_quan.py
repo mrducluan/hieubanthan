@@ -278,13 +278,20 @@ def theo_tuoi(nam: int, nam_sinh: int) -> dict:
     tu_hoa = [{"hoa": h, "sao": s, "y_nghia": tu_hoa_kb[h]["y_nghia"]} for h, s in zip(("Lộc", "Quyền", "Khoa", "Kỵ"), TU_HOA[can_n])]
     thuan = [x["tieu_de"] for x in dn if x["loai"] == "thuan"]
     luu_y = [x["tieu_de"] for x in dn if x["loai"] == "luu_y"]
-    tra_loi = (f"Năm {nam} ({can_n} {chi_n}), người tuổi {can_s} {chi_s} sinh {nam_sinh} (mệnh {na_s['ten']}) bước vào tuổi mụ {tuoi}. "
+    # SEO-P: "sinh năm X năm Y bao nhiêu tuổi" là câu được tìm nhiều → trả lời ngay câu đầu (tuổi tròn theo năm dương lịch,
+    # tuổi mụ theo năm âm lịch).
+    tuoi_tron = nam - nam_sinh
+    tra_loi = (f"Năm {nam}, người sinh năm {nam_sinh} (tuổi {can_s} {chi_s}) bước sang {tuoi_tron} tuổi, tuổi mụ {tuoi}. "
+               f"Năm {can_n} {chi_n} với tuổi này (mệnh {na_s['ten']}): "
                + (f"Điểm thuận: {thuan[0][:1].lower()}{thuan[0][1:]}. " if thuan else "")
                + (f"Điều nên để ý: {'; '.join(x[:1].lower() + x[1:] for x in luu_y[:3])}. " if luu_y else "")
                + (f"Sao theo tục: nam {sao['nam']['ten']}, nữ {sao['nu']['ten']}." if sao["nam"] else ""))
     na_loi = {"sinh": "mệnh năm nâng đỡ mệnh bạn", "khắc": "mệnh năm khắc mệnh bạn", "bị sinh": "mệnh bạn nuôi mệnh năm",
               "bị khắc": "mệnh bạn chế ngự mệnh năm", "bình hoà": "cùng hành"}[q_na]
     hoi_dap = [
+        {"hoi": f"Sinh năm {nam_sinh}, năm {nam} bao nhiêu tuổi?",
+         "dap": (f"Năm {nam}, người sinh năm {nam_sinh} tròn {tuoi_tron} tuổi khi qua sinh nhật (tính theo năm dương lịch), "
+                 f"tuổi mụ {tuoi} theo cách tính dân gian. Sinh tháng 1 hoặc đầu tháng 2 trước Tết thì năm âm lịch là năm trước.")},
         {"hoi": f"Tuổi {can_s} {chi_s} năm {nam} sao gì chiếu mệnh?",
          "dap": (f"Theo tục xếp theo tuổi mụ {tuoi}: nam mạng sao {sao['nam']['ten']} (hạn {sao['nam']['han']}), nữ mạng sao "
                  f"{sao['nu']['ten']} (hạn {sao['nu']['han']}). Mỗi sao đọc bằng việc nên làm trên trang, không cần nghi lễ gì."
@@ -302,7 +309,7 @@ def theo_tuoi(nam: int, nam_sinh: int) -> dict:
     ]
     return {"nam": nam, "can_chi_nam": f"{can_n} {chi_n}", "nap_am_nam": na_n["ten"],
             "nguoi": {"nam_sinh": nam_sinh, "can_chi": f"{can_s} {chi_s}", "nap_am": na_s["ten"], "hanh": na_s["hanh"]},
-            "tuoi_mu": tuoi, "quan_he": {"chi": q_chi, "can": q_can, "nap_am": q_na},
+            "tuoi_mu": tuoi, "tuoi_tron": tuoi_tron, "quan_he": {"chi": q_chi, "can": q_can, "nap_am": q_na},
             "diem_nhan": dn, "sao": sao, "tam_tai": tt, "kim_lau": tdg.KB["kim_lau"][kl]["ten"] if kl else None,
             "lam_nha": {"thuan": not d_lam["xau"], "xau": d_lam["xau"], "hoang_oc": tdg.KB["hoang_oc"][d_lam["ho"]]["ten"]},
             "tu_hoa": tu_hoa, "tu_hoa_loi": k["tu_hoa"].format(can_chi=f"{can_n} {chi_n}"), "ranh_gioi": k["ranh_gioi"],

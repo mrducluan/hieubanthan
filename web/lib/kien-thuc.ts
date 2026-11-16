@@ -14,13 +14,15 @@ import { CHU_DE_THEO_LOAI as CHU_DE_THEO_LOAI_GOC } from "@/lib/duong-silo";
 export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu"
   | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep" | "dau_hieu" | "co_thu" | "bo_vi" | "la_bai";
 
-type ChuDe = { loai: LoaiTrang; ten: string; mo_ta: string; mang: string };
+/** `h1`: SEO-P — tiêu đề trang + H1 theo đúng câu người ta tìm (Search Console: "thập thần trong bát tự", "tứ hoá ở 12 cung"…);
+ *  `ten` ngắn giữ cho breadcrumb, menu, thẻ. Không có `h1` → dùng `ten`. */
+type ChuDe = { loai: LoaiTrang; ten: string; mo_ta: string; mang: string; h1?: string };
 /** Khoá = mã chủ đề (giữ nguyên làm mã nội bộ: CMS, hình, llms); `duong` = URL cụm theo silo mảng (lib/chuyen-huong.json). */
 const CHU_DE_GOC: Record<string, ChuDe> = {
   "than-so": { loai: "so", ten: "Ý nghĩa các con số", mang: "/than-so",
     mo_ta: "12 con số của thần số học Pythagoras (1–9 và số cái 11, 22, 33): từ khoá, mặt tối, năm cá nhân, đỉnh cao, thử thách." },
   // SEO-G: cụm thần số theo câu người Việt hay tìm
-  "hop-so": { loai: "cap_so", ten: "Số chủ đạo nào hợp nhau", mang: "/hop-doi",
+  "hop-so": { loai: "cap_so", ten: "Số chủ đạo nào hợp nhau", h1: "Số chủ đạo nào hợp nhau? 45 cặp số thần số học", mang: "/hop-doi",
     mo_ta: "45 cặp số chủ đạo 1–9: hai người dễ hoà ở đâu, dễ va ở đâu, cùng làm gì để êm. Không chấm điểm hợp – khắc." },
   "nghe-nghiep": { loai: "nghe", ten: "Số chủ đạo hợp nghề gì", mang: "/than-so",
     mo_ta: "12 số chủ đạo và sự nghiệp: nghề thường hợp, thế mạnh, môi trường, cái bẫy nghề nghiệp và chuyện tiền bạc." },
@@ -32,27 +34,27 @@ const CHU_DE_GOC: Record<string, ChuDe> = {
     mo_ta: "Bốn số nợ nghiệp trong thần số học: ý nghĩa, khi nào được xem là có, và cách hiểu như bài học cần luyện." },
   "so-kep": { loai: "so_kep", ten: "Số kép Chaldea 10–52", mang: "/than-so",
     mo_ta: "43 số kép trong thần số học phái Chaldea: hình ảnh biểu tượng, xu hướng, mặt tối, rút gọn về số gốc nào." },
-  "kinh-dich": { loai: "que", ten: "64 quẻ Kinh Dịch", mang: "/kinh-dich",
+  "kinh-dich": { loai: "que", ten: "64 quẻ Kinh Dịch", h1: "64 quẻ Kinh Dịch: ý nghĩa từng quẻ", mang: "/kinh-dich",
     mo_ta: "Ý nghĩa 64 quẻ Kinh Dịch theo Nghĩa Lý: lời khuyên, mặt tối, theo từng lĩnh vực, trích Chu Dịch." },
-  "tu-vi": { loai: "sao", ten: "14 chính tinh Tử vi", mang: "/tu-vi",
+  "tu-vi": { loai: "sao", ten: "14 chính tinh Tử vi", h1: "14 chính tinh Tử vi: ý nghĩa từng sao", mang: "/tu-vi",
     mo_ta: "14 chính tinh trong Tử vi Đẩu Số: ngũ hành, tính chất, điểm mạnh, mặt tối, ý nghĩa ở 12 cung." },
-  "cung-tu-vi": { loai: "cung", ten: "12 cung Tử vi", mang: "/tu-vi",
+  "cung-tu-vi": { loai: "cung", ten: "12 cung Tử vi", h1: "12 cung Tử vi: mỗi cung nói về điều gì", mang: "/tu-vi",
     mo_ta: "12 cung trong lá số Tử vi: mỗi cung nói về điều gì, không trả lời được gì, 14 chính tinh và tứ hoá ở từng cung." },
   // SEO-H: "sao X ở cung Y" — 14 chính tinh × 12 cung
-  "sao-cung": { loai: "sao_cung", ten: "Chính tinh ở từng cung Tử vi", mang: "/tu-vi",
+  "sao-cung": { loai: "sao_cung", ten: "Chính tinh ở từng cung Tử vi", h1: "Chính tinh ở 12 cung Tử vi: ý nghĩa 168 vị trí", mang: "/tu-vi",
     mo_ta: "168 trường hợp 14 chính tinh đứng ở 12 cung: ý nghĩa, sáng hay hãm theo từng chi, sao đồng cung, xung chiếu, tam hợp và tứ hoá." },
   // SEO-I: "Hoá X ở cung Y" — 4 tứ hoá × 12 cung
-  "tu-hoa": { loai: "hoa_cung", ten: "Tứ hoá ở 12 cung Tử vi", mang: "/tu-vi",
+  "tu-hoa": { loai: "hoa_cung", ten: "Tứ hoá ở 12 cung Tử vi", h1: "Tứ hoá ở 12 cung Tử vi: Hoá Lộc, Quyền, Khoa, Kỵ", mang: "/tu-vi",
     mo_ta: "48 trường hợp Hoá Lộc, Quyền, Khoa, Kỵ rơi vào 12 cung: ý nghĩa, năm sinh nào có, sao nào mang hoá, tam phương tứ chính." },
   // SEO-J: "sinh năm X mệnh gì" — 1950–2027
-  "menh-tuoi": { loai: "menh_nam", ten: "Sinh năm nào mệnh gì", mang: "/bat-tu",
+  "menh-tuoi": { loai: "menh_nam", ten: "Sinh năm nào mệnh gì", h1: "Sinh năm nào mệnh gì? Bảng tra mệnh 1950–2027", mang: "/bat-tu",
     mo_ta: "Tra mệnh theo năm sinh 1950–2027: tuổi can chi, mệnh nạp âm và ý nghĩa, màu hợp theo ngũ hành, tuổi hợp – xung, cung phi nam nữ, mốc Tết và Lập xuân." },
-  "thap-than": { loai: "thap_than", ten: "10 thập thần Bát tự", mang: "/bat-tu",
+  "thap-than": { loai: "thap_than", ten: "10 thập thần Bát tự", h1: "Thập thần trong Bát tự là gì? Ý nghĩa 10 thập thần", mang: "/bat-tu",
     mo_ta: "10 thập thần trong Bát tự (Tỷ Kiên đến Chính Ấn): ý nghĩa, tính cách, khi quá nhiều, khi thiếu, với nam và nữ." },
-  "nhat-chu": { loai: "nhat_chu", ten: "10 nhật chủ Bát tự", mang: "/bat-tu",
+  "nhat-chu": { loai: "nhat_chu", ten: "10 nhật chủ Bát tự", h1: "Nhật chủ là gì? Ý nghĩa 10 nhật chủ trong Bát tự", mang: "/bat-tu",
     mo_ta: "10 nhật chủ (can ngày sinh) trong Bát tự: hình tượng, tính chất, điểm mạnh, mặt tối và ảnh hưởng của mùa sinh." },
   // Y5: dấu hiệu nhà ở — một trang cho mỗi dấu hiệu của form Khảo sát nhà (engine kb/trang_phongthuy.py)
-  "dau-hieu": { loai: "dau_hieu", ten: "Dấu hiệu nhà ở", mang: "/phong-thuy",
+  "dau-hieu": { loai: "dau_hieu", ten: "Dấu hiệu nhà ở", h1: "Dấu hiệu nhà ở trong phong thuỷ: 23 điều nên biết", mang: "/phong-thuy",
     mo_ta: "23 dấu hiệu nhà ở hay gặp (gương đối giường, xà ngang, nhà vệ sinh giữa nhà…): sách xưa nói gì, nhìn theo đời sống hiện đại, việc nên làm từ 0 đồng." },
   // TV-CTP: cổ thư Tử vi — nguyên văn chữ Hán, phiên âm, nghĩa đời thường (engine kb/trang_co_thu.py)
   // NT-1: bộ vị gương mặt — một trang cho mỗi vùng của khảo sát tự quan sát (engine kb/trang_nhan_tuong.py)

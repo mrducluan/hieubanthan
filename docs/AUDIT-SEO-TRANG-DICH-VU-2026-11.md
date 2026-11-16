@@ -145,3 +145,21 @@ Rà dàn ý heading 28 trang (năm, lịch & tuổi, ngày tốt, mục lục c�
 - Trang ngày: "Giờ hoàng đạo", "Sách lịch ghi nên / kiêng", "Xuất hành", "Việc lớn hôm nay" (sai ở trang ngày khác) → "Giờ hoàng đạo ngày 20/11/2026", "Ngày 20/11/2026 nên làm gì / kiêng làm gì", "Hướng xuất hành ngày …", "Ngày … có hợp cưới hỏi, khai trương, động thổ?"; lịch tháng "Lịch âm dương tháng 11/2026".
 - H1 dạng câu hỏi người ta gõ: `/nam`, `/lich-am`, `/phong-thuy/huong-xau-nam/{năm}`, `/tuoi-xong-dat/{năm}` (CMS vẫn ghi đè được).
 - `/xem-ngay-tot`: khối tóm tắt hôm nay bỏ danh sách ý chính trùng thẻ ngày (giữ câu trả lời nhanh + ảnh).
+
+## 8. Đợt 5 (SEO-P, 2026-11-16) — tối ưu theo số liệu Search Console thật
+
+**Số liệu** (07/10 → 13/11/2026, 1.765 hiển thị, 58 nhấp): trang chủ giữ phần lớn lượt nhấp (CTR 47 %); nhiều trang đã ở **trang 1 nhưng 0 nhấp** vì tiêu đề không trả lời đúng câu người ta gõ:
+
+| Truy vấn (gộp biến thể) | Trang | Vị trí | Vấn đề | Đã sửa |
+|---|---|---|---|---|
+| "năm 2027 có nhuận không" (~60 hiển thị, 10 biến thể), "2028 có nhuận", "năm 2029 có nhuận" | `/lich-am/{năm}` | 6–17 | Tiêu đề "Lịch âm 2027: Tết, tháng nhuận…" không trả lời | Tiêu đề "Năm 2027 có nhuận không? Lịch âm 2027, Tết ngày nào"; mô tả + câu trả lời nhanh + hỏi đáp đầu tiên mở bằng câu trả lời (engine); khối "Các năm gần: năm nào có tháng nhuận?" (−3 … +5 năm, link nội bộ) |
+| "1998 bao nhiêu tuổi 2026", "1979 năm 2027 bao nhiêu tuổi" | `/nam/{năm}/tuoi-{năm sinh}` | 6–10 | Trang không nêu tuổi tròn | Engine `tuoi_tron`; tiêu đề "1998 năm 2026 bao nhiêu tuổi? Tử vi tuổi Mậu Dần 2026"; câu đầu + hỏi đáp đầu "bước sang 28 tuổi, tuổi mụ 29" |
+| "tử vi ngày … của 12 con giáp" | `/xem-ngay-tot/{ngày}` | 20–60 | Trang chỉ có "xung tuổi X" | Engine `con_giap` (12 con giáp × quan hệ với chi ngày, đúng hàm quan hệ tuổi của hồ sơ, lời KB); khối "12 con giáp ngày …: tuổi nào hợp, tuổi nào xung?" + câu "Tuổi hợp ngày" trong câu trả lời nhanh |
+| "thập thần trong bát tự" | `/bat-tu/thap-than` | 57 | Tiêu đề "10 thập thần Bát tự" | Trang mục lục cụm có `h1` dạng câu hỏi (10 cụm: thập thần, nhật chủ, mệnh theo năm, sao ở cung, tứ hoá, 64 quẻ, dấu hiệu nhà…) |
+| "cầu thang đâm ra cửa / quay ra cửa", "đường đâm vào nhà", "sông nước trước nhà" | `/phong-thuy/dau-hieu/*` | 17–102 | Trang gọi bằng tên khác | KB `bo_tri.ten_khac` → mô tả + câu trả lời nhanh "Còn gọi là …" |
+
+**Heading trang kiến thức (668 trang)**: không trang nào có H2 trùng (sửa trang dấu hiệu nhà lặp "Sách xưa nói gì"); ~50 heading chung lặp ở mọi trang của cụm ("Mặt tối", "Sách xưa nói gì", "Câu hỏi tự soi", "Dễ hoà ở đâu"…) nay mang tên chủ thể ("Mặt tối của quẻ Càn", "Số 3 và số 5 dễ hoà ở đâu", "Câu hỏi tự soi cho người sinh năm 2019") — chỉ bản Việt (`kb/trang.py` `_H2_CHUNG`, test `tests/test_seo_p.py`).
+
+**Độ dày + ảnh + liên kết nội bộ**: trang kiến thức đã dày (1.100–2.100 chữ, ảnh tóm tắt có alt); điểm yếu là liên kết nội bộ (8–10 link trong bài) → khối **"Xem thêm trong {cụm}"**: 8 trang kề trước / sau trong mục lục, chữ link là tiêu đề dạng câu hỏi của trang đích (vd trang "sinh năm 2019 mệnh gì" dẫn sang 2015–2023).
+
+**Brand SERP**: tiêu đề trang chủ, `WebSite`/`Organization` (`alternateName` Hieuban, hieuban.com), logo PNG 512, favicon, HSTS — đủ. Thiếu `sameAs` (env `MXH_*` chưa đặt) → việc của anh (`docs/VIEC-CUA-ANH.md` 4at). `http://hieuban.com/` trong báo cáo là lượt cũ trước khi chuyển hướng HTTPS, không cần làm gì.

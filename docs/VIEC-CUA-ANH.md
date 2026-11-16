@@ -3,7 +3,14 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-14 (WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-16 (SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+
+### 4at. SEO-P — tối ưu theo số liệu Search Console 16/11/2026 (`docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 8)
+
+- [ ] **Deploy engine TRƯỚC web** (engine thêm `con_giap` ngày, `tuoi_tron`, câu nhuận đứng đầu, tên chủ thể trong H2 trang kiến thức). Dữ liệu engine được web giữ đệm tối đa 6–24 giờ → tiêu đề mới của trang lịch âm / tuổi hiện chậm nhất 1 ngày sau deploy.
+- [ ] Search Console → Kiểm tra URL → **Yêu cầu lập chỉ mục**: `/lich-am/2027`, `/lich-am/2028`, `/lich-am/2029`, `/nam/2026/tuoi-1998`, `/nam/2027/tuoi-1979`, `/bat-tu/thap-than`, `/phong-thuy/dau-hieu/cau-thang-doi-dien-cua-chinh`, `/xem-ngay-tot` (trang ngày mới có bảng 12 con giáp).
+- [ ] **Brand SERP**: đặt env `MXH_FACEBOOK` / `MXH_YOUTUBE` / `MXH_TIKTOK`… (link trang chính thức) để Organization có `sameAs` — hiện trống, Google chưa có tín hiệu nối thương hiệu với các trang mạng xã hội. Nên tạo Google Business Profile tên "Hiểu Bản Thân (hieuban.com)".
+- [ ] **Hai bài blog CMS đang ở trang 1 mà 0 lượt nhấp** (sửa trong CMS, em không sửa được bài CMS từ code): "vòng tròn ngũ hành" (vị trí 7, 27 hiển thị) và "ngũ hành là gì" (vị trí 12). Gợi ý tiêu đề SEO: *"Vòng tròn ngũ hành: sơ đồ tương sinh, tương khắc dễ nhớ"* và *"Ngũ hành là gì? Kim Mộc Thủy Hỏa Thổ và cách sinh khắc"*; mô tả mở bằng câu trả lời 1 dòng.
 
 ### 4as. PT-NG1 — nguồn tri thức Tarot · Phong thuỷ · Huyền Không còn thiếu (2026-11-12, `docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md`)
 

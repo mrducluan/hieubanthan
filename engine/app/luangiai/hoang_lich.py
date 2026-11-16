@@ -228,12 +228,24 @@ def ngay_xem(d: dt.date, nam_sinh: int | None = None, thang_sinh: int | None = N
     ky_dg = [KB["ky_dan_gian"][k]["ten"] for k in c["ky_dan_gian"]]
     gio_hd = [_CHI[g["chi"]] for g in c["gio"] if g["hoang_dao"]]
     viec_lon = _viec_lon(c)
+    # SEO-P: 12 con giáp trong ngày — ĐÚNG hàm quan hệ tuổi của hồ sơ (`hl.quan_he_tuoi`), lời ở KB `quan_he_tuoi`.
+    con_giap = []
+    for i, ten_chi in enumerate(lunar.CHI):
+        q = hl.quan_he_tuoi(c["ngay_gz"][1], hl.ZHI[i])
+        kb_q = KB["quan_he_tuoi"][q] if q else {"ten": "Bình thường", "nghia": "ngày không xung không hợp với tuổi bạn"}
+        con_giap.append({"chi": ten_chi, "ma": q, "ten": kb_q["ten"], "nghia": kb_q["nghia"]})
+    hop_ngay = [f"{x['chi']}" for x in con_giap if x["ma"] == "tam_hop"]
+    luc_hop = [x["chi"] for x in con_giap if x["ma"] == "luc_hop"]
+    cau_hop = ("Tuổi hợp ngày: " + ", ".join(
+        ([f"{', '.join(hop_ngay)} (tam hợp)"] if hop_ngay else []) + ([f"{', '.join(luc_hop)} (lục hợp)"] if luc_hop else []))
+        + ".") if (hop_ngay or luc_hop) else ""
     tra_loi = (f"{thu}, {d.day}/{d.month}/{d.year} (âm lịch {am_chu}, ngày {_gz(c['ngay_gz'])}) là ngày "
                f"{'hoàng đạo' if c['hoang_dao'] else 'hắc đạo'} ({KB['than'][c['than']]['ten']}), trực {truc['ten']} — "
                f"hợp {truc['hop']}." + (f" Sách lịch ghi nên: {', '.join(nghi3)}." if nghi3 else "")
                + _cau_viec_lon(viec_lon)
                + (f" Dân gian thường tránh việc lớn vì là ngày {', '.join(ky_dg)}." if ky_dg else "")
-               + f" Xung tuổi {_CAN[xc['can']]} {_CHI[xc['chi']]}. Giờ hoàng đạo: {', '.join(gio_hd)}.")
+               + f" Xung tuổi {_CAN[xc['can']]} {_CHI[xc['chi']]}." + (f" {cau_hop}" if cau_hop else "")
+               + f" Giờ hoàng đạo: {', '.join(gio_hd)}.")
     return {
         "tra_loi_nhanh": tra_loi,
         "ngay": d.isoformat(), "thu": thu,
@@ -246,6 +258,7 @@ def ngay_xem(d: dt.date, nam_sinh: int | None = None, thang_sinh: int | None = N
         "nghi": [_nk(x) for x in c["nghi"]], "ky": [_nk(x) for x in c["ky"]],
         "cat_than": [_ts(x) for x in c["cat_than"]], "hung_sat": [_ts(x) for x in c["hung_sat"]],
         "xung_tuoi": {"ten": f"{_CAN[xc['can']]} {_CHI[xc['chi']]}", "chi": _CHI[xc["chi"]]},
+        "con_giap": con_giap,
         "sat": _phuong(c["sat_phuong"]),
         "banh_to": [KB["banh_to"][c["ngay_gz"][0]], KB["banh_to"][c["ngay_gz"][1]]],
         "huong": {"hy_than": _phuong(c["huong"]["hy_than"]), "tai_than": _phuong(c["huong"]["tai_than"]),

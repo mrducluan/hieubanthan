@@ -49,7 +49,7 @@ async function lay<T>(duong: string): Promise<T | null> {
 export interface SaoGioi { ten: string; han: string | null; nghia?: string; viec?: string[]; tu_soi?: string }
 export interface DiemNhan { loai: "thuan" | "luu_y" | "trung"; tieu_de: string; noi_dung: string; can_cu: string }
 export interface NamTheoTuoi extends MetaKb {
-  nam: number; can_chi_nam: string; nap_am_nam: string; tuoi_mu: number;
+  nam: number; can_chi_nam: string; nap_am_nam: string; tuoi_mu: number; tuoi_tron?: number;
   nguoi: { nam_sinh: number; can_chi: string; nap_am: string; hanh: string };
   quan_he: { chi: string; can: string; nap_am: string }; diem_nhan: DiemNhan[];
   sao: { nam: SaoGioi | null; nu: SaoGioi | null }; tam_tai: number | null; kim_lau: string | null;

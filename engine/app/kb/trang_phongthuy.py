@@ -92,6 +92,10 @@ def trang_dau_hieu(ma: str, slug: str) -> dict:
                 L("pt.dh.tl.thuong", "{ten} là một dấu hiệu được xét trong phong thuỷ nhà ở. ", ten=ten))
                + _cau_dau(m["noi_dung"]) + " " + _cau_dau(m.get("giai_thich_hien_dai") or "")
                + (L("pt.dh.tl.v0", " Việc không tốn tiền: {v0}", v0=v0) if v0 else "")).strip()
+    # SEO-P: tên người ta hay gõ (Search Console) — chỉ bản Việt, nằm cuối câu trả lời + mô tả.
+    ten_khac = m.get("ten_khac") if ngon_ngu.la_viet() else None
+    if ten_khac:
+        tra_loi += " Còn gọi là " + ", ".join(ten_khac) + "."
     muc = [{"tieu_de": L("pt.dh.m.sach", "Sách xưa nói gì") if m["nguon"] != "dan_gian" else L("pt.dh.m.dan_gian", "Dân gian nói gì"),
             "doan": m["noi_dung"]}]
     if m.get("sach") and ngon_ngu.la_viet():   # KT-PT1: nguyên văn đã đối chiếu kho nguồn; lời mới có bản Việt
@@ -148,7 +152,8 @@ def trang_dau_hieu(ma: str, slug: str) -> dict:
         "loai": "dau_hieu", "slug": slug,
         "tieu_de": _tieu_de(ten, tot),
         "mo_ta": t._cat(L("pt.dh.mo_ta", "{ten}: {nguon} nói gì, nhìn theo đời sống hiện đại và việc nên làm theo 3 mức chi phí, bắt đầu "
-                          "từ việc 0 đồng.", ten=ten, nguon=nguon_y, gy=(m.get("goi_y") or "")[:1].lower() + (m.get("goi_y") or "")[1:])),
+                          "từ việc 0 đồng.", ten=ten, nguon=nguon_y, gy=(m.get("goi_y") or "")[:1].lower() + (m.get("goi_y") or "")[1:])
+                       + (f" Còn gọi: {', '.join(ten_khac)}." if ten_khac else "")),
         "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
         "nguon": [kb["_nguon"]],
         "trang_thai": kb.get("trang_thai", "nhap_ai"),

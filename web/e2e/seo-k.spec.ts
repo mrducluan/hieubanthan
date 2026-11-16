@@ -158,3 +158,23 @@ test("SEO-O: ảnh tóm tắt có alt, route ảnh trả PNG, lịch âm có b�
   const muc = await (await request.get("/lich-am")).text();
   expect(muc).toContain('data-testid="bang-tet"');
 });
+
+// SEO-P — trả lời đúng câu người ta tìm (Search Console 11/2026) + liên kết nội bộ trong cụm.
+test("SEO-P: tiêu đề trả lời câu hỏi, 12 con giáp ngày, năm nhuận các năm gần, cùng cụm kiến thức", async ({ request }) => {
+  const lich = await (await request.get("/lich-am/2027")).text();
+  expect(lich).toContain("<title>Năm 2027 có nhuận không? Lịch âm 2027, Tết ngày nào");
+  expect(lich).toContain('data-testid="nam-gan"');
+  expect(lich).toMatch(/href="\/lich-am\/2028"[\s\S]{0,400}Nhuận tháng 5/);
+  const tuoi = await (await request.get("/nam/2026/tuoi-1998")).text();
+  expect(tuoi).toContain("<title>1998 năm 2026 bao nhiêu tuổi?");
+  expect(tuoi).toContain("bước sang 28 tuổi, tuổi mụ 29");
+  const ngay = await (await request.get("/xem-ngay-tot/2026-11-20")).text();
+  expect(ngay).toContain('data-testid="con-giap"');
+  expect(ngay).toMatch(/Giờ hoàng đạo ngày (<!-- -->)?20\/11\/2026/);
+  const menh = await (await request.get("/bat-tu/menh-theo-nam/sinh-nam-2019-menh-gi")).text();
+  expect(menh).toContain('data-testid="cung-cum"');
+  expect(menh).toContain('href="/bat-tu/menh-theo-nam/sinh-nam-2018-menh-gi"');
+  expect(menh).toContain("Câu hỏi tự soi cho người sinh năm 2019");
+  const tt = await (await request.get("/bat-tu/thap-than")).text();
+  expect(tt).toContain("<title>Thập thần trong Bát tự là gì?");
+});

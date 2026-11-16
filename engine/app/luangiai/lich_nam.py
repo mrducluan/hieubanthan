@@ -65,13 +65,19 @@ def lich_nam(nam: int) -> dict:
     can, chi = lunar.can_chi_nam(nam)
     tet, tet_sau = _duong(1, 1, nam, 0), _duong(1, 1, nam + 1, 0)
     dmy = lambda d: f"{d.day:02d}/{d.month:02d}/{d.year}"  # noqa: E731
-    tra_loi = (f"Năm âm lịch {can} {chi} {nam} bắt đầu từ Tết ngày {dmy(tet)} và kết thúc ngày "
-               f"{dmy(tet_sau - dt.timedelta(days=1))} (dương lịch), gồm {len(thang)} tháng, "
-               + (f"có tháng {nhuan} nhuận." if nhuan else "không có tháng nhuận."))
+    # SEO-P: câu người ta tìm nhiều nhất là "năm X có nhuận không" → câu trả lời đứng đầu.
+    nh = next((x for x in thang if x["nhuan"]), None)
+    cau_nhuan = (f"Năm {nam} có tháng nhuận: nhuận tháng {nhuan} âm lịch (tháng {nhuan} nhuận bắt đầu ngày "
+                 f"{dmy(dt.date.fromisoformat(nh['mung_mot']))}), cả năm có 13 tháng âm."
+                 if nhuan else f"Năm {nam} không có tháng nhuận âm lịch, cả năm có 12 tháng âm.")
+    tra_loi = (f"{cau_nhuan} Năm âm lịch {can} {chi} {nam} bắt đầu từ Tết ngày {dmy(tet)} và kết thúc ngày "
+               f"{dmy(tet_sau - dt.timedelta(days=1))} (dương lịch), dài {(tet_sau - tet).days} ngày.")
     hd = [
+        {"hoi": f"Năm {nam} có nhuận không?",
+         "dap": (f"Có. Năm {nam} âm lịch có tháng {nhuan} nhuận, nên có 13 tháng âm." if nhuan
+                 else f"Không. Năm {nam} âm lịch có 12 tháng, không có tháng nhuận.")
+                + " Tính theo âm lịch Việt Nam (giờ Hà Nội)."},
         {"hoi": f"Tết âm lịch {nam} là ngày nào?", "dap": f"Mùng 1 Tết {can} {chi} là ngày {dmy(tet)} dương lịch (theo âm lịch Việt Nam)."},
-        {"hoi": f"Năm {nam} âm lịch có tháng nhuận không?",
-         "dap": f"Có, năm {nam} nhuận tháng {nhuan}: năm có 13 tháng âm." if nhuan else f"Không, năm {nam} âm lịch có 12 tháng."},
         {"hoi": f"Rằm tháng Giêng {nam} là ngày nào?", "dap": f"Ngày {dmy(dt.date.fromisoformat(thang[0]['ram']))} dương lịch."},
     ]
     le = _le(nam, tet_sau)
