@@ -21,7 +21,7 @@ export function MatTruoc({ la, w, nguoc = false, nhanNguoc = "NGƯỢC", gap = f
       className="relative block select-none overflow-hidden rounded-[9px] [container-type:inline-size]"
       style={{ width: w ?? "100%", height: w ? w * TI_LE : undefined, aspectRatio: w ? undefined : "120 / 200", padding: "2.6%", background: `linear-gradient(135deg,#fff2c8,${VANG} 50%,#b9892f)` }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={anhLa(la.id)} alt={`${la.ten}${la.en ? ` (${la.en})` : ""}${nguoc ? ` — ${nhanNguoc.toLowerCase()}` : ""}`} width={360} height={618} loading={gap ? "eager" : "lazy"} decoding="async" draggable={false}
+      <img src={anhLa(la.id)} alt={`${la.ten}${la.en && la.en !== la.ten ? ` (${la.en})` : ""}${nguoc ? ` — ${nhanNguoc.toLowerCase()}` : ""}`} width={360} height={618} loading={gap ? "eager" : "lazy"} decoding="async" draggable={false}
         className="block size-full rounded-[6px] bg-[#f3ead6] object-cover" style={nguoc ? { transform: "rotate(180deg)" } : undefined} />
       {nguoc && (
         <span data-testid="nhan-nguoc" className="absolute right-[6%] top-[4%] rounded-full bg-[#b9772f] font-sans font-bold leading-none tracking-wide text-[#fff8e6] shadow"

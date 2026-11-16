@@ -9,18 +9,14 @@ import { Button } from "@/components/ui/button";
 import { MatSau } from "./LaBai";
 import { hatGiong } from "@/lib/tarot";
 import { cn } from "@/lib/utils";
+import { useChuTarot } from "./chu-tarot";
 
 const GIU_TOI_THIEU = 800;
 
-export const CHU_XAO_VI = {
-  buoc: "Bước 2", tieu_de: "Nhấn giữ để xáo bài",
-  mo_ta: "Giữ nút ít nhất một giây, trong lúc giữ cứ rê nhẹ ngón tay hoặc chuột. Nhịp tay của bạn thành hạt giống xáo bài — chỉ một chuỗi băm rời máy, không phải toạ độ.",
-  nguoc: "Dùng lá ngược (lối Waite). Bỏ chọn → đọc theo lá bên cạnh (lối Marseille / Thoth).",
-  dang: "Đang xáo…", giu: "Giữ… rê nhẹ tay", nhan: "Nhấn giữ để xáo", may: "Để máy xáo",
-};
-export type ChuXao = typeof CHU_XAO_VI;
-
-export function XaoBai({ onXong, dang, nguoc, onNguoc, chu = CHU_XAO_VI }: { onXong: (hatGiong: string | null) => void; dang: boolean; nguoc: boolean; onNguoc: (v: boolean) => void; /** QTE: chữ theo ngôn ngữ. */ chu?: ChuXao }) {
+export function XaoBai({ onXong, dang, nguoc, onNguoc }: { onXong: (hatGiong: string | null) => void; dang: boolean; nguoc: boolean; onNguoc: (v: boolean) => void }) {
+  // EN-ALL GĐ 7: chữ theo ngôn ngữ trang (lib/chu/tarot.ts).
+  const { c } = useChuTarot();
+  const chu = { buoc: c("xao.buoc"), tieu_de: c("xao.tieu_de"), mo_ta: c("xao.mo_ta"), nguoc: c("xao.nguoc"), dang: c("xao.dang"), giu: c("xao.giu"), nhan: c("xao.nhan"), may: c("xao.may") };
   const giam = Boolean(useReducedMotion());
   const [giu, setGiu] = useState(false);
   const [tien, setTien] = useState(0);

@@ -1,5 +1,7 @@
+"use client";
 import { BookOpen, Calculator, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useChuThanSo } from "./chu-than-so";
 
 // Ba lớp nội dung (Blueprint §17) — màu + biểu tượng cố định trên toàn sản phẩm.
 export const LOP = {
@@ -16,7 +18,8 @@ const MAU: Record<string, string> = {
 };
 
 export function NhanLop({ loai, className }: { loai: LoaiLop; className?: string }) {
-  const { ten, Icon, mau } = LOP[loai];
+  const { Icon, mau } = LOP[loai];
+  const ten = useChuThanSo().c(`lop.${loai}`);   // EN-ALL GĐ 7: tên lớp theo ngôn ngữ trang
   return (
     <span className={cn("inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[0.7rem] font-semibold uppercase tracking-wider", MAU[mau], className)}>
       <Icon className="size-3" aria-hidden /> {ten}
@@ -35,12 +38,13 @@ export function KhoiLop({ loai, children, className }: { loai: LoaiLop; children
 }
 
 export function ChuThichLop() {
+  const { c } = useChuThanSo();
   return (
     <ul className="grid gap-3 sm:grid-cols-3">
       {(Object.keys(LOP) as LoaiLop[]).map((k) => (
         <li key={k} className="glass rounded-xl p-4">
           <NhanLop loai={k} />
-          <p className="mt-2 text-sm text-fg-muted">{LOP[k].mo_ta}</p>
+          <p className="mt-2 text-sm text-fg-muted">{c(`lop.${k}_mo_ta`)}</p>
         </li>
       ))}
     </ul>

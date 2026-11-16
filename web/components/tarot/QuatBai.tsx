@@ -6,22 +6,22 @@ import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { MatSau, TI_LE } from "./LaBai";
 import { cn } from "@/lib/utils";
+import { useChuTarot } from "./chu-tarot";
 
 const GOC_QUAT = { lon: 150, nho: 118 };     // độ mở của vòng cung (máy tính / điện thoại)
 
-export const CHU_QUAT_VI = {
-  quat: (n: number, con: number) => `Quạt bài ${n} lá úp — còn rút ${con} lá`, la_up: (i: number) => `Lá úp thứ ${i}`,
-  du: "Đã rút đủ — lật bài phía trên.", huong_dan: (con: number) => `Chạm hoặc bấm một lá để rút · còn ${con} lá · kéo ngang để xoay quạt`,
-};
-export type ChuQuat = typeof CHU_QUAT_VI;
-
-export function QuatBai({ thuTu, daRut, onRut, conLai, className, chu = CHU_QUAT_VI }: {
+export function QuatBai({ thuTu, daRut, onRut, conLai, className }: {
   /** 78 mã lá theo thứ tự engine xáo. */ thuTu: string[];
   /** chỉ số (trong thuTu) đã rút. */ daRut: number[];
   onRut: (chiSo: number) => void;
   /** số lá còn phải rút (0 → khoá quạt). */ conLai: number; className?: string;
-  /** QTE: chữ theo ngôn ngữ. */ chu?: ChuQuat;
 }) {
+  // EN-ALL GĐ 7: chữ theo ngôn ngữ trang (lib/chu/tarot.ts).
+  const { c } = useChuTarot();
+  const chu = {
+    quat: (n: number, con: number) => c("quat.aria", { n: String(n), con: String(con) }), la_up: (i: number) => c("quat.la_up", { i: String(i) }),
+    du: c("quat.du"), huong_dan: (con: number) => c("quat.huong_dan", { con: String(con) }),
+  };
   const giam = Boolean(useReducedMotion());
   const ref = useRef<HTMLDivElement>(null);
   const [rong, setRong] = useState(720);

@@ -26,7 +26,7 @@ import { anhOgEn, ldThucTheEn, metaEn, tieuDeVua } from "@/lib/en/seo";
 import { cumEn, trangCongCuEn } from "@/lib/so-trang-en";
 import { tenTheo } from "@/lib/ten-hien";
 import { taoChu, tachNhan, type DocChu } from "@/lib/chu-trang";
-import { CHU_KIEN_THUC } from "@/lib/chu/kien-thuc";
+import { CHU_KIEN_THUC, NUT_MOI_EN } from "@/lib/chu/kien-thuc";
 import { dinhNgay } from "@/lib/dinh-dang";
 
 type Thamso = { khoa: string | null; slug: string };
@@ -375,7 +375,7 @@ async function TrangKienThucEn({ cd, t, duong, ma }: { cd: (typeof CHU_DE)[strin
             <p>{loiMoi ?? <LoiMoiChung c={c} />}</p>
             <p className="mt-2 text-sm">{c("bai.tat_ca")} <Link href={duongCum} className="text-gold underline underline-offset-2 hover:text-fg">{tenCum}</Link></p>
           </div>
-          <Button asChild><Link href={congCu}>{cd.mang === "/bat-tu" ? c("moi.nut_bat_tu") : cd.mang === "/tu-vi" ? c("moi.nut_tu_vi") : cd.mang === "/phong-thuy" ? c("moi.nut_phong_thuy") : cd.mang === "/kinh-dich" ? c("moi.nut_kinh_dich") : c("moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
+          <Button asChild><Link href={congCu}>{c(NUT_MOI_EN[cd.mang] ?? "moi.nut_chung")} <ArrowRight aria-hidden /></Link></Button>
         </aside>
       )}
 
