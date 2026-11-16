@@ -271,10 +271,11 @@ def api_do_nhay(inp: ThanSoInput) -> dict:
     inp.kiem_tra_ngay()
     dn = thanso.do_nhay(inp.ho_ten, inp.ngay, inp.thang, inp.nam)
     canh_bao = [
-        f"Chỉ số '{k}' KHÔNG xác định: ra {len(v)} giá trị khác nhau ({v}) "
-        f"tuỳ quy ước phiên âm / cộng gộp. Phải chốt quy ước rồi mới luận."
+        L("ts.api.do_nhay.khong_xd", "Chỉ số '{k}' KHÔNG xác định: ra {n} giá trị khác nhau ({v}) "
+          "tuỳ quy ước phiên âm / cộng gộp. Phải chốt quy ước rồi mới luận.", k=k, n=len(v), v=v,
+          ten=L(f"thanso.vi_tri.{k}", k))
         for k, v in dn.items() if len(v) > 1
-    ] or ["Mọi quy ước cho cùng kết quả — trường hợp ổn định, hiếm."]
+    ] or [L("ts.api.do_nhay.on_dinh", "Mọi quy ước cho cùng kết quả — trường hợp ổn định, hiếm.")]
     return {
         "engine_version": ENGINE_VERSION,
         "ten_bien_the_da_quet": inp.ho_ten,
@@ -500,9 +501,10 @@ def api_hoi(inp: HoiInput, background: BackgroundTasks) -> dict:
     nguoi = {"ho_ten": inp.ho_ten, "ngay": inp.ngay, "thang": inp.thang, "nam": inp.nam,
              "quy_uoc": inp.quy_uoc_duong_doi}
     if not ngon_ngu.la_viet():
-        # QTE: tiếng Anh → bản hỏi đáp gọn tất định (KB có bản phủ); từ điển / câu liên quan là chữ Việt nên để trống.
+        # EN-ALL GĐ 7 (nhóm H): tiếng Anh → cùng bộ phân loại + gói bằng chứng bản Việt, lời theo ngôn ngữ (hoi_en);
+        # từ điển / câu liên quan là chữ Việt nên để trống.
         from app.luangiai import hoi_en  # noqa: PLC0415
-        kq = hoi_en.tra_loi(inp.cau_hoi.strip(), nguoi, inp.ngay_xem)
+        kq = hoi_en.tra_loi(inp.cau_hoi.strip(), nguoi, inp.ngay_xem, kia, phai=inp.phai)
         background.add_task(nhat_ky.ghi, inp.cau_hoi, kq)
         return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": [], "cau_lien_quan": []}
     kq = hoi_van.tra_loi(inp.cau_hoi.strip(), nguoi, kia, inp.ngay_xem, phai=inp.phai)
@@ -603,7 +605,7 @@ class DoiChieuNamInput(BaseModel):
 def api_doi_chieu_nam(inp: DoiChieuNamInput) -> dict:
     """Đặt những năm có biến cố lên trục đời: năm cá nhân, giai đoạn (đỉnh), thử thách, mốc bước ngoặt."""
     from app.calc import thanso_dong_doi
-    from app.luangiai.thanso import NHAN_MOC
+    from app.luangiai.thanso import _nhan_moc
     try:
         _dt.date(inp.nam, inp.thang, inp.ngay)
     except ValueError:
@@ -617,13 +619,14 @@ def api_doi_chieu_nam(inp: DoiChieuNamInput) -> dict:
                    "nghia_nam": kb_store.nghia_nam_ca_nhan(r["nam_ca_nhan"]),
                    "nghia_dinh": kb_store.nghia_dinh_cao(r["so_dinh"]),
                    "nghia_thu_thach": kb_store.nghia_thu_thach(r["thu_thach"]),
-                   "nhan_moc": [NHAN_MOC[m].format(so=r["so_dinh"]) for m in r["moc"]]})
+                   "nhan_moc": [_nhan_moc(m, r["so_dinh"]) for m in r["moc"]]})
     return {
         "engine_version": ENGINE_VERSION,
         "cac_nam": ra,
-        "cach_doc": ("Mỗi năm được đặt lên nhịp số của bạn. Nếu nhiều biến cố rơi đúng năm mở/khép chu kỳ hay năm "
-                     "chuyển giai đoạn, đó là một mẫu hình để bạn tự ngẫm — nếu không trùng, con số chưa nói gì về "
-                     "những biến cố đó. Năm theo mốc dương lịch; mốc sinh nhật được ghi kèm."),
+        "cach_doc": L("ts.api.doi_chieu_nam.cach_doc",
+                      "Mỗi năm được đặt lên nhịp số của bạn. Nếu nhiều biến cố rơi đúng năm mở/khép chu kỳ hay năm "
+                      "chuyển giai đoạn, đó là một mẫu hình để bạn tự ngẫm — nếu không trùng, con số chưa nói gì về "
+                      "những biến cố đó. Năm theo mốc dương lịch; mốc sinh nhật được ghi kèm."),
     }
 
 
@@ -752,8 +755,8 @@ def api_chu_ky(inp: ChuKyInput) -> dict:
         ),
         "trung_chu_ky": thanso.so_nguoi_trung_chu_ky(),
         "canh_bao": [
-            "Chu kỳ 9 năm là TIỀN ĐỊNH từ ngày+tháng sinh — nó không phải dự báo, "
-            "mà là một mẫu hình lặp có thể ĐỐI CHIẾU HỒI TỐ với đời thực."
+            L("ts.api.chu_ky.canh_bao", "Chu kỳ 9 năm là TIỀN ĐỊNH từ ngày+tháng sinh — nó không phải dự báo, "
+              "mà là một mẫu hình lặp có thể ĐỐI CHIẾU HỒI TỐ với đời thực.")
         ],
     }
 

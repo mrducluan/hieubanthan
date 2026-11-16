@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/input";
 import { ghi } from "@/lib/do-luong";
 import { hoTenList, type HoSo } from "@/lib/hoso";
+import { useDuong } from "@/components/khung/NgonNgu";
+import { fetchNN, useChuThanSo } from "@/components/than-so/chu-than-so";
 
 export interface NguCanhGopY {
   phai: "pitago" | "chaldea" | "tong_hop";
@@ -20,6 +22,8 @@ export interface NguCanhGopY {
 
 export function GopYCauTraLoi({ hoSo, nc }: { hoSo: HoSo; nc: NguCanhGopY }) {
   const c = useChuChung();
+  const { c: t } = useChuThanSo();
+  const d = useDuong();
   const [buoc, setBuoc] = useState<"hoi" | "ghi_chu" | "xong">("hoi");
   const [ghiChu, setGhiChu] = useState("");
   const [dongY, setDongY] = useState(false);
@@ -27,7 +31,7 @@ export function GopYCauTraLoi({ hoSo, nc }: { hoSo: HoSo; nc: NguCanhGopY }) {
   async function gui(dung: boolean, kemGhiChu = false) {
     ghi("feedback_submitted", { huu_ich: dung ? "co" : "khong", mo_dun: "thanso_hoi", phai: nc.phai, ma_cau: nc.maCau });
     setBuoc("xong");
-    await fetch("/api/thanso/phan-hoi", {
+    await fetchNN("/api/thanso/phan-hoi", {
       method: "POST", headers: { "content-type": "application/json" },
       body: JSON.stringify({
         ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam,
@@ -44,13 +48,11 @@ export function GopYCauTraLoi({ hoSo, nc }: { hoSo: HoSo; nc: NguCanhGopY }) {
     return (
       <div className="space-y-2" data-testid="gop-y-ghi-chu">
         <Textarea rows={2} maxLength={300} value={ghiChu} onChange={(e) => setGhiChu(e.target.value)}
-          aria-label="Chưa đúng ở đâu?" placeholder="Chưa đúng ở đâu? Đừng ghi tên, số điện thoại, ngày sinh, sức khoẻ hay tôn giáo." />
+          aria-label={t("gy.aria")} placeholder={t("gy.goi_y")} />
         <label className="flex items-start gap-2 text-xs text-fg-muted">
           <input type="checkbox" checked={dongY} onChange={(e) => setDongY(e.target.checked)} className="mt-0.5" />
-          <span>Đồng ý dùng ghi chú này để cải thiện câu trả lời (lưu kèm các con số rút gọn, không kèm tên, ngày sinh hay tài
-            khoản; email, số điện thoại, ngày tháng tự bị xoá; tự xoá sau 12 tháng). Không tích thì chỉ gửi "chưa đúng", không gửi
-            ghi chú; ghi chú không gắn với bạn nên không gỡ riêng được sau khi gửi.{" "}
-            <Link href="/chinh-sach-rieng-tu#dong-y" className="text-gold underline">Chính sách quyền riêng tư</Link></span>
+          <span>{t("gy.dong_y")}{" "}
+            <Link href={d("/chinh-sach-rieng-tu#dong-y")} className="text-gold underline">{t("gy.chinh_sach")}</Link></span>
         </label>
         <div className="flex gap-2">
           <Button size="sm" variant="secondary" onClick={() => gui(false, true)}>{c("gop_y_cau.gui")}</Button>
@@ -64,7 +66,7 @@ export function GopYCauTraLoi({ hoSo, nc }: { hoSo: HoSo; nc: NguCanhGopY }) {
       <span className="text-xs text-fg-muted">{c("gop_y_cau.hoi")}</span>
       <Button size="sm" variant="outline" className="h-8" onClick={() => gui(true)}>{c("gop_y_cau.dung")}</Button>
       <Button size="sm" variant="outline" className="h-8" onClick={() => setBuoc("ghi_chu")}>{c("gop_y_cau.chua_dung")}</Button>
-      <span className="w-full text-[11px] text-fg-faint">Góp ý lưu các con số rút gọn của bạn (nhiều người có chung), không lưu tên hay ngày sinh.</span>
+      <span className="w-full text-[11px] text-fg-faint">{t("gy.luu")}</span>
     </div>
   );
 }

@@ -40,16 +40,15 @@ test("giao thoa (vi): bấm Đúng với mình ≥ 2 hộp → engine ghép đi�
 test("giao thoa + kiểm chứng tiếng Anh trên bài đọc Tarot /en", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/en/tarot");
-  await expect(page.getByTestId("la-ngay-en")).toBeVisible({ timeout: 15_000 });
-  await page.getByTestId("o-cau-hoi-en").fill("Should I take the new job offer?");
-  await page.getByTestId("trai-bai-en-ba_la_loi_khuyen").click();
-  await page.getByTestId("nut-bat-dau-en").click();
+  await expect(page.getByTestId("la-ngay")).toBeVisible({ timeout: 15_000 });
+  await page.getByTestId("o-cau-hoi").fill("Should I take the new job offer?");
+  await page.getByTestId("nut-tuy-chinh").click();
+  await page.getByTestId("trai-bai-ba_la_loi_khuyen").click();
+  await page.getByTestId("nut-bat-dau").click();
   await page.getByTestId("nut-may-xao").click();
-  const quat = page.getByTestId("quat-bai");
-  await expect(quat).toBeVisible({ timeout: 15_000 });
-  for (const k of [5, 40, 70]) await quat.locator(`[data-chi-so="${k}"]`).dispatchEvent("click");
-  await page.getByTestId("nut-lat-het-en").click();
-  await page.getByTestId("nut-doc-bai-en").click();
+  await expect(page.getByTestId("quat-bai")).toBeVisible({ timeout: 15_000 });
+  await page.getByTestId("nut-rut-giup").click();
+  await page.getByTestId("nut-lat-het").click();
   const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc).toBeVisible({ timeout: 20_000 });
   // Nút kiểm chứng tiếng Anh + phiếu mang ngon_ngu = en

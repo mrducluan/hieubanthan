@@ -1,0 +1,34 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 — bản tiếng Anh của thanso_doi_chieu.json (giao điểm Pitago ↔ Chaldea). Ban biên tập viết, chờ người bản xứ duyệt.",
+ "source": {
+  "ten": "Hieuban editorial reference text (2026) comparing the Balliett–Jordan (Pythagorean) and Cheiro (Chaldean) traditions",
+  "luu_y": "Draft written with AI assistance, shown by decision of the project owner. The two schools are two different cultural traditions; neither is a forecast."
+ },
+ "so": {
+  "13": {
+   "pitago": "Pythagorean numerology treats 13 as a lesson in discipline: steady work instead of shortcuts.",
+   "chaldea": "Chaldean numerology reads compound 13 as a season of change: the old closes so the new has room.",
+   "cach_dung": "The two readings meet here: renewal lasts when it comes with steady habits — clear out the old, then be patient with the new.",
+   "tu_soi": "The last change you started — how long did you keep up a steady rhythm with it?"
+  },
+  "14": {
+   "pitago": "Pythagorean numerology treats 14 as a lesson in moderation: freedom comes with responsibility.",
+   "chaldea": "Chaldean numerology reads compound 14 as a connecting current: meeting, exchanging, everything moving fast.",
+   "cach_dung": "The two readings meet here: the more connections and opportunities you have, the more you need clear limits of your own.",
+   "tu_soi": "What do you often say yes to and later find is too much?"
+  },
+  "16": {
+   "pitago": "Pythagorean numerology treats 16 as a lesson about ego: rebuilding after something old no longer stands.",
+   "chaldea": "Chaldean numerology reads compound 16 as the tower of renewal: an old structure gives way to a truer foundation.",
+   "cach_dung": "The two readings meet here: humbly listening to feedback early helps you adjust before you have to start over.",
+   "tu_soi": "Is there a plan you are holding on to only because you have already put effort into it?"
+  },
+  "19": {
+   "pitago": "Pythagorean numerology treats 19 as a lesson in independence and in asking for help: it is easy to carry everything alone.",
+   "chaldea": "Chaldean numerology reads compound 19 as the bright sun: effort that is seen and recognised.",
+   "cach_dung": "The two readings meet here: self-reliance is a strength, and letting others pitch in is also a way of being recognised.",
+   "tu_soi": "Which task this week could you do together with someone?"
+  }
+ }
+}

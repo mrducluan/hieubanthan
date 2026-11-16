@@ -17,6 +17,7 @@ from app.config import hom_nay_vn as _hom_nay_vn  # EN-1: ngày mặc định th
 from app.calc import thanso, thanso_mo_rong as mr
 from app.config import ENGINE_VERSION
 from app.kb import store, thanso_v2 as kb
+from app.kb.loi import L
 from app.luangiai.thanso import _nghia_cua
 
 THU_TU = ("duong_doi", "linh_hon", "nhan_cach", "su_menh")
@@ -47,8 +48,8 @@ def luan_hop_doi(a: dict, b: dict, quan_he: str = QUAN_HE_MAC_DINH, nam_xem: int
     nam = nam_xem or _hom_nay_vn().year
     kq["nhip_nam"] = {
         "nam": nam, "a": _nhip(a, nam), "b": _nhip(b, nam),
-        "cach_doc": ("Năm cá nhân của mỗi người năm nay — hai nhịp khác nhau thì một người muốn tiến, người kia "
-                     "muốn chậm; biết trước để không trách nhau."),
+        "cach_doc": L("tshd.nhip_cach_doc", "Năm cá nhân của mỗi người năm nay — hai nhịp khác nhau thì một người muốn tiến, người kia "
+                      "muốn chậm; biết trước để không trách nhau."),
     }
     return kq
 
@@ -71,7 +72,7 @@ def luan_hop_doi_tu_chi_so(cs_a: dict[str, int], cs_b: dict[str, int], quan_he: 
             continue
         n = kb.nghia_cap(cap[vt])
         cac_cap.append({
-            "vi_tri": vt, "ten_vi_tri": TEN_VI_TRI[vt], "so_a": cs_a[vt], "so_b": cs_b[vt], "cap": cap[vt],
+            "vi_tri": vt, "ten_vi_tri": L(f"thanso.vi_tri.{vt}", TEN_VI_TRI[vt]), "so_a": cs_a[vt], "so_b": cs_b[vt], "cap": cap[vt],
             "nghia": {"hoa": n["hoa"], "va": n["va"], "cung_lam": n["cung_lam"]} if n else None,
         })
     meta = kb.nghia_cap(cap["duong_doi"]) or {}
@@ -87,7 +88,7 @@ def luan_hop_doi_tu_chi_so(cs_a: dict[str, int], cs_b: dict[str, int], quan_he: 
         "cac_cap": cac_cap,
         "quan_he": qh,
         "trong_vai": {"a": _trong_vai(cs_a["duong_doi"], vai_a), "b": _trong_vai(cs_b["duong_doi"], quan_he)},
-        "cach_doc": ("Không có điểm số hợp hay khắc. Mỗi cặp số cho thấy chỗ hai người dễ hoà, chỗ dễ va, "
-                     "và một việc cụ thể nên cùng làm — để hai người tự nhìn lại cách mình đối xử với nhau."),
+        "cach_doc": L("tshd.cach_doc", "Không có điểm số hợp hay khắc. Mỗi cặp số cho thấy chỗ hai người dễ hoà, chỗ dễ va, "
+                      "và một việc cụ thể nên cùng làm — để hai người tự nhìn lại cách mình đối xử với nhau."),
         "nguon": {k: meta.get(k) for k in ("source_id", "school_id", "trang_thai", "nguon")},
     }

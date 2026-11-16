@@ -268,7 +268,7 @@ def thanso_nam(nam_ca_nhan_cua: dict[int, int], mang: str, nam_hien_tai: int | N
         return skn.thanso_nam(nam_ca_nhan_cua, nam_hien_tai)
     so = kb.theo_mon(mang, "thanso").get("so") or {}
     return [{"nam": n, "so": s, "ly_do": [f"nam{s}"], "hien_tai": n == nam_hien_tai, "mang": mang,
-             "can_cu": [f"Năm {n} là {so[str(s)]}"]}
+             "can_cu": [L("ts.cyn.nam_la", "Năm {n} là {y}", n=n, y=so[str(s)])]}
             for n, s in sorted(nam_ca_nhan_cua.items()) if str(s) in so]
 
 

@@ -121,7 +121,6 @@ export function banVietCuaTrang(duongEn: string): string {
   const [p, sau] = tachDuong(duongEn);
   const m = p.match(/^\/en\/numerology\/life-path\/(\d{1,2})$/);
   if (m) return `/than-so/y-nghia-so/so-${m[1]}`;
-  if (p.startsWith("/en/tarot/cards/")) return "/tarot/la-bai";
   return banViet(p + sau) ?? "/";
 }
 

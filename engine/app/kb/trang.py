@@ -94,44 +94,49 @@ def _trang_so(so: str) -> dict:
     kb, sau = _doc("thanso_meanings.json"), _doc("thanso_depth.json")
     m = kb["so_meanings"][so]
     so_cai = bool(m.get("so_cai"))
-    tra_loi = (f"Trong thần số học Pythagoras, số {so} gắn với: {m['tu_khoa']}. "
-               f"Mặt tối cần để ý: {m['mat_toi']}.")
+    # EN-ALL GĐ 7: chữ khuôn qua `L()` (data/en/loi/trang_thanso.json) — bản Việt giữ nguyên từng byte.
+    tra_loi = L("trang_ts.so.tra_loi", "Trong thần số học Pythagoras, số {so} gắn với: {tk}. Mặt tối cần để ý: {mt}.",
+                so=so, tk=m["tu_khoa"], mt=m["mat_toi"])
     if so_cai:
-        tra_loi += (f" Số {so} là số cái — giữ nguyên, không rút gọn về {_SO_GOC[so]} khi là con số đường đời, "
-                    f"nhưng vẫn mang nền của số {_SO_GOC[so]}.")
-    muc = [{"tieu_de": f"Số {so} xuất hiện ở đâu trong hồ sơ",
+        tra_loi += L("trang_ts.so.so_cai", " Số {so} là số cái — giữ nguyên, không rút gọn về {goc} khi là con số đường đời, "
+                     "nhưng vẫn mang nền của số {goc}.", so=so, goc=_SO_GOC[so])
+    muc = [{"tieu_de": L("trang_ts.so.vi_tri", "Số {so} xuất hiện ở đâu trong hồ sơ", so=so),
             "danh_sach": [f"{v['ten']}: {v['khung']}." for v in kb["vi_tri"].values()]}]
     if (dc := sau["dinh_cao"].get(so)):
-        muc.append({"tieu_de": f"Đỉnh cao số {so}: {dc['chu_de'].lower()}",
-                    "danh_sach": [_cau(dc["y_nghia"]), "Bóng tối: " + _cau(dc["bong_toi"]), "Tự soi: " + dc["phan_chung"]]})
+        muc.append({"tieu_de": L("trang_ts.so.dinh_cao", "Đỉnh cao số {so}: {cd}", so=so, cd=dc["chu_de"].lower()),
+                    "danh_sach": [_cau(dc["y_nghia"]), L("trang_ts.so.bong_toi", "Bóng tối: ") + _cau(dc["bong_toi"]),
+                                  L("trang_ts.so.tu_soi", "Tự soi: ") + dc["phan_chung"]]})
     if (nm := sau["nam_ca_nhan"].get(so)):
-        muc.append({"tieu_de": f"Năm cá nhân số {so}: {nm['chu_de'].lower()}",
-                    "danh_sach": [_cau(nm["y_nghia"]), "Nên: " + _cau(nm["nen"]), "Tránh: " + _cau(nm["tranh"])]})
+        muc.append({"tieu_de": L("trang_ts.so.nam", "Năm cá nhân số {so}: {cd}", so=so, cd=nm["chu_de"].lower()),
+                    "danh_sach": [_cau(nm["y_nghia"]), L("trang_ts.so.nen", "Nên: ") + _cau(nm["nen"]),
+                                  L("trang_ts.so.tranh", "Tránh: ") + _cau(nm["tranh"])]})
     if (tt := sau["thu_thach"].get(so)):
-        muc.append({"tieu_de": f"Thử thách số {so}: {tt['mo_ta'].lower()}",
-                    "danh_sach": [_cau(tt["y_nghia"]), "Cách vượt: " + _cau(tt["cach_vuot"])]})
-    muc.append({"tieu_de": "Cách tính số đường đời",
-                "doan": ("Rút gọn riêng ngày, tháng, năm sinh dương lịch về một chữ số (giữ 11, 22, 33 nếu gặp), cộng "
-                         "ba kết quả rồi rút gọn tiếp; tổng 11, 22, 33 giữ nguyên là số cái. Hiểu Bản Thân hiển thị "
-                         "từng bước cộng để bạn tự kiểm.")})
+        muc.append({"tieu_de": L("trang_ts.so.thu_thach", "Thử thách số {so}: {mt}", so=so, mt=tt["mo_ta"].lower()),
+                    "danh_sach": [_cau(tt["y_nghia"]), L("trang_ts.so.cach_vuot", "Cách vượt: ") + _cau(tt["cach_vuot"])]})
+    muc.append({"tieu_de": L("trang_ts.so.cach_tinh", "Cách tính số đường đời"),
+                "doan": L("trang_ts.so.cach_tinh_doan",
+                          "Rút gọn riêng ngày, tháng, năm sinh dương lịch về một chữ số (giữ 11, 22, 33 nếu gặp), cộng "
+                          "ba kết quả rồi rút gọn tiếp; tổng 11, 22, 33 giữ nguyên là số cái. Hiểu Bản Thân hiển thị "
+                          "từng bước cộng để bạn tự kiểm.")})
     hoi_dap = [
-        {"hoi": f"Số {so} trong thần số học nghĩa là gì?", "dap": tra_loi},
-        {"hoi": f"Mặt tối của số {so} là gì?", "dap": _cau(m["mat_toi"])},
-        {"hoi": f"Người mang số {so} nên tự hỏi điều gì?", "dap": m["phan_chung"]},
+        {"hoi": L("trang_ts.so.hd.nghia", "Số {so} trong thần số học nghĩa là gì?", so=so), "dap": tra_loi},
+        {"hoi": L("trang_ts.so.hd.mat_toi", "Mặt tối của số {so} là gì?", so=so), "dap": _cau(m["mat_toi"])},
+        {"hoi": L("trang_ts.so.hd.tu_hoi", "Người mang số {so} nên tự hỏi điều gì?", so=so), "dap": m["phan_chung"]},
     ]
     if nm:
-        hoi_dap.append({"hoi": f"Năm cá nhân số {so} nên làm gì?", "dap": f"Nên: {_cau(nm['nen'])} Tránh: {_cau(nm['tranh'])}"})
+        hoi_dap.append({"hoi": L("trang_ts.nam.hd.nen", "Năm cá nhân số {so} nên làm gì?", so=so),
+                        "dap": L("trang_ts.nam.nen_tranh", "Nên: {nen} Tránh: {tranh}", nen=_cau(nm["nen"]), tranh=_cau(nm["tranh"]))})
     i = _SO.index(so)
     lien = [f"so-{x}" for x in (_SO[i - 1] if i else None, _SO[i + 1] if i + 1 < len(_SO) else None, _SO_GOC.get(so)) if x]
     return {
         "loai": "so", "slug": f"so-{so}",
         # QTE: bản tiếng Anh tương ứng (hreflang hai chiều; web chỉ đọc).
         "ban_en": f"/en/numerology/life-path/{so}",
-        "tieu_de": f"Số {so} trong thần số học: {m['tu_khoa'].lower()}",
-        "mo_ta": _cat(f"Số {so} thần số học: {m['tu_khoa'].lower()}. Mặt tối: {m['mat_toi'].lower()}. "
-                      "Kèm câu hỏi tự soi, năm cá nhân và cách tính."),
+        "tieu_de": L("trang_ts.so.tieu_de", "Số {so} trong thần số học: {tk}", so=so, tk=m["tu_khoa"].lower()),
+        "mo_ta": _cat(L("trang_ts.so.mo_ta", "Số {so} thần số học: {tk}. Mặt tối: {mt}. Kèm câu hỏi tự soi, năm cá nhân và cách tính.",
+                        so=so, tk=m["tu_khoa"].lower(), mt=m["mat_toi"].lower())),
         "tra_loi_nhanh": tra_loi, "muc": muc, "hoi_dap": hoi_dap,
-        "nguon": [f"{s['ten']} — {s['mo_ta']}" for s in kb["sources"]] + [sau["_nguon"]],
+        "nguon": [f"{s['ten']} — {s['mo_ta']}" for s in kb["sources"]] + [L("trang_ts.nguon.depth", sau["_nguon"])],
         "trang_thai": "da_duyet",
         "lien_quan": [{"loai": "so", "slug": s} for s in dict.fromkeys(lien)],
         "minh_hoa": {"kieu": "so", "so": int(so), "so_cai": so in _SO_GOC, "so_goc": int(_SO_GOC.get(so, so))},
@@ -506,7 +511,7 @@ def _ten_ngan(loai: str, slug: str) -> str:
     """Tên ngắn của một trang (cho link liên quan). EN-1 HT-2: nhớ kết quả — mỗi link trước đây dựng lại cả danh sách
     slug của loại trang (O(n²), mục lục 564 trang mất ~1,35 s). Dữ liệu KB tĩnh trong một bản deploy."""
     if loai == "so":
-        return f"Số {slug[3:]}"
+        return L("trang_ts.ten_ngan.so", "Số {so}", so=slug[3:])
     if loai == "que":
         k = slug.split("-")[1]
         return L("trang_kd.ten_ngan", "Quẻ {que}", que=_tn.ten("que_ten", _doc('kinhdich_kb.json')['que'][k]['ten']))

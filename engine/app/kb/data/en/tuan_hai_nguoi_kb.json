@@ -1,0 +1,149 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "EN-ALL GĐ 7 — bản phủ tiếng Anh (ban biên tập, chờ người bản xứ duyệt).",
+ "nguon": "Pythagorean numerology (Personal Day) · traditional Vietnamese almanac (auspicious days, Day Officers, favourable / avoid lists, zodiac clashes and harmonies) · Bazi (Ten Gods of the day) · Plum Blossom numerology (hexagram of the day) · Xuan Kong + Eight Mansions (monthly stars, favourable directions)",
+ "tuan": {
+  "noi_bat": {
+   "thuan": {
+    "tieu_de": "{thu} {dm} — the smoothest day of the week",
+    "cau": "The almanac marks this as a good day{hop}. If you have something ready to go, put it on this day."
+   },
+   "hop_tuoi": {
+    "tieu_de": "{thu} {dm} — a day in harmony with your zodiac sign",
+    "cau": "By the traditional calendar, this is {nghia}. Anything that needs other people's help is best arranged for this day."
+   },
+   "cham": {
+    "tieu_de": "{thu} {dm} — a day to take it slowly",
+    "cau": "By the traditional calendar, this day clashes with your zodiac sign. If a big matter can be moved, move it to another day; everyday tasks can go ahead as usual."
+   },
+   "mo_dau": {
+    "tieu_de": "{thu} {dm} — a day for beginnings",
+    "cau": "Personal Day 1: good for starting a small thing you have been thinking about for a long time."
+   },
+   "khep": {
+    "tieu_de": "{thu} {dm} — a day for wrapping up",
+    "cau": "Personal Day 9: good for tidying up and finishing loose ends before the next cycle begins."
+   }
+  },
+  "hop": {
+   "tam_hop": " and in Three Harmony with your zodiac sign",
+   "luc_hop": " and in Six Harmony with your zodiac sign"
+  },
+  "tom_tat": {
+   "co_dep": "Between now and Sunday there are {so} days that are both good by the almanac and free of conflict with your zodiac sign{xung}.",
+   "khong_dep": "Between now and Sunday there is no day that is both good by the almanac and free of conflict with your zodiac sign{xung} — a week for familiar tasks.",
+   "xung": ", plus one day that clashes with your sign"
+  },
+  "luu_y": "The week's rhythm combines your Personal Days with the traditional calendar — a reference for planning, not a forecast.",
+  "push": {
+   "tieu_de": "Your week",
+   "co_ngay": "{tom_tat} Most worth noting: {ngay}.",
+   "khong_ngay": "{tom_tat} Open it to see the rhythm of your seven days."
+  },
+  "lop": {
+   "than_so": {
+    "ten": "Numerology",
+    "nhan": "Personal Day {so}"
+   },
+   "lich": {
+    "ten": "Traditional calendar",
+    "nhan_hd": "Auspicious day · Day Officer {truc}",
+    "nhan_hac": "Inauspicious day · Day Officer {truc}",
+    "dep": "The almanac marks a good day — suited to {hop}.",
+    "binh": "Day Officer {truc} suits {hop}.",
+    "hoan": "The almanac advises moving big matters to another day; everyday tasks can go ahead as usual.",
+    "kieng": "Folk custom avoids big matters on this day ({ky}); everyday tasks can go ahead as usual.",
+    "nen": "Day Officer {truc}: the almanac only recommends what is listed under Favourable for this day; other big matters can wait for another day."
+   },
+   "tuoi": {
+    "ten": "Your zodiac sign",
+    "nhan": "{ten} · sign {can_chi}",
+    "binh_nhan": "No clash, no harmony · sign {can_chi}",
+    "cau": "By the traditional calendar, this is {nghia}.",
+    "binh_cau": "Your zodiac sign has no conflict with this day."
+   },
+   "bat_tu": {
+    "ten": "Bazi",
+    "nhan": "A {thap_than} day ({can_chi})"
+   },
+   "kinh_dich": {
+    "ten": "I Ching",
+    "nhan": "Hexagram of the day: {ten}"
+   }
+  },
+  "tom": {
+   "thuan": "Calendar and zodiac sign both favourable — a day worth giving to something you have prepared.",
+   "thuan_viec": "Calendar and zodiac sign both favourable — the almanac lists it as good for {viec}.",
+   "kha": "One of the two views (calendar, zodiac sign) is favourable, the other is neutral.",
+   "kha_viec": "The almanac lists it as good for {viec}; your zodiac sign has no conflict with this day.",
+   "binh": "An ordinary day by both calendar and zodiac sign — good for familiar tasks.",
+   "lech": "Calendar and zodiac sign point in different directions — small tasks are fine, pick another day for big ones.",
+   "cham": "A day to take it slowly: move big matters if you can, everyday tasks can go ahead as usual.",
+   "kieng": "Folk custom avoids big matters on this day ({ky}); everyday tasks can go ahead as usual.",
+   "vuong": "Today's relation with your zodiac sign is {ten} — everyday tasks are fine; where harmony matters, keep your words gentle."
+  },
+  "moc": {
+   "mung_1": "Lunar month {thang}, day 1",
+   "ram": "Full moon of lunar month {thang}",
+   "thang_ca_nhan": "Personal Month {so} begins",
+   "giao_tiet": "Solar term: {ten}",
+   "giao_tiet_cau": "The solar month of {chi} begins — your home's monthly stars shift position from this day.",
+   "lap_xuan": "Start of Spring",
+   "lap_xuan_cau": "The new solar year begins on this day (the year boundary used by Bazi and feng shui).",
+   "tet": "Lunar New Year, {can_chi}"
+  },
+  "viec_tuan": {
+   "luu_y": "Based on the almanac, leaving out days that clash with your zodiac sign and days folk custom avoids. Other people's signs are not considered."
+  },
+  "phong_thuy": {
+   "ten": "Feng shui this month"
+  },
+  "viec_xung": "The almanac applies to everyone; this day clashes with your zodiac sign, so for your own big matters choose another day.",
+  "viec_kieng": "The almanac lists the activities above as favourable, but folk custom avoids big matters on this day ({ky}) — whether to follow it is up to your family's customs.",
+  "nhan": {
+   "gioi_thieu": "Your seven days through five lenses. Tap a day to read it lens by lens.",
+   "nhip": {
+    "thuan": "Favourable",
+    "kha": "Fairly favourable",
+    "binh": "Ordinary",
+    "lech": "Mixed",
+    "cham": "Take it slowly"
+   },
+   "muc": {
+    "thuan": "Favourable",
+    "binh": "Ordinary",
+    "cham": "Go slower"
+   },
+   "ghi_chu": "Zi Wei Dou Shu needs your birth time and reads month by month, so it has no line for each day."
+  }
+ },
+ "hai_nguoi": {
+  "kieu": {
+   "cung_so": {
+    "tieu_de": "Today you are both on the same rhythm",
+    "cau": "You are both on Personal Day {a}. You read each other easily, but you may also both want the same thing at the same moment.",
+    "viec_cung": "Pick one thing you both want to do and do it together, rather than each going your own way.",
+    "cau_tu_soi": "What do you both want today that neither of you has said out loud?"
+   },
+   "cung_ra": {
+    "tieu_de": "Today you both want to act and to talk",
+    "cau": "You are on day {a}, they are on day {b} — you are both turned outwards. Lots of energy, and it is easy for both of you to want to speak first.",
+    "viec_cung": "Agree beforehand: each person finishes their point before the other speaks. For shared tasks, be clear about who does which part.",
+    "cau_tu_soi": "In today's conversation, did you hear the other person out fully?"
+   },
+   "cung_vao": {
+    "tieu_de": "Today you both need to slow down",
+    "cau": "You are on day {a}, they are on day {b} — you are both turned inwards. A good day to be together without needing to talk much.",
+    "viec_cung": "A meal at home or a small task done together, no big discussions. Decisions can wait for another day.",
+    "cau_tu_soi": "What today would be enough just by sitting side by side?"
+   },
+   "lech": {
+    "tieu_de": "Today your rhythms are a little out of step",
+    "cau": "You are on day {a}, they are on day {b} — one of you wants to act and talk, the other needs quiet. Being out of step is normal; nobody is in the wrong.",
+    "viec_cung": "Whoever has more energy asks first: \"what do you need today?\". Whoever needs quiet says clearly for how long.",
+    "cau_tu_soi": "Today, are you the one who wants to talk or the one who needs quiet?"
+   }
+  },
+  "luu_y": "Built from both people's Personal Days for self-reflection — it does not rank the two of you and does not predict anything."
+ }
+}
