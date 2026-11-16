@@ -149,5 +149,8 @@
  "lich.nam.h_nhuan2": "Is {nam} a leap year in the lunar calendar?",
  "lich.nam.d_nhuan2": "Yes. Lunar year {nam} has a leap month {n}, so it has 13 lunar months.",
  "lich.nam.d_khong_nhuan2": "No. Lunar year {nam} has 12 months and no leap month.",
- "lich.nam.d_nhuan_vn": " Calculated with the Vietnamese lunar calendar (Hanoi time)."
+ "lich.nam.d_nhuan_vn": " Calculated with the Vietnamese lunar calendar (Hanoi time).",
+ "lich.tl.hop": " Signs in harmony with the day: {ds}.",
+ "lich.tl.hop_tam": "{ds} (Three Harmony)",
+ "lich.tl.hop_luc": "{ds} (Six Harmony)"
 }

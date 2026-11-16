@@ -209,6 +209,17 @@ def _cau_viec_lon(ds: list[dict]) -> str:
             + (L("lich.vl.chua_xep", "; chưa xếp vào ngày tốt {ds}", ds="; ".join(tr)) if tr else "") + ".")
 
 
+def _cau_hop(cg: list[dict]) -> str:
+    """Câu "Tuổi hợp ngày" của `hoang_lich.ngay_xem` theo ngôn ngữ."""
+    th = [x["chi"] for x in cg if x["ma"] == "tam_hop"]
+    lh_ = [x["chi"] for x in cg if x["ma"] == "luc_hop"]
+    if not th and not lh_:
+        return ""
+    phan = ([L("lich.tl.hop_tam", "{ds} (tam hợp)", ds="; ".join(th))] if th else []) + \
+        ([L("lich.tl.hop_luc", "{ds} (lục hợp)", ds="; ".join(lh_))] if lh_ else [])
+    return L("lich.tl.hop", " Tuổi hợp ngày: {ds}.", ds="; ".join(phan))
+
+
 def ngay_xem(kq: dict) -> dict:
     if la_viet():
         return kq
@@ -229,6 +240,9 @@ def ngay_xem(kq: dict) -> dict:
     kq["cat_than"] = [_muc("than_sat", x) for x in kq["cat_than"]]
     kq["hung_sat"] = [_muc("than_sat", x) for x in kq["hung_sat"]]
     kq["xung_tuoi"]["ten"] = lh.can_chi(kq["xung_tuoi"]["ten"])
+    if kq.get("con_giap"):  # SEO-P: 12 con giáp trong ngày — mã giữ, chữ theo ngôn ngữ
+        kq["con_giap"] = [{**lh.quan_he({k: x[k] for k in ("ma", "ten", "nghia")}), "chi": con_giap(x["chi"])}
+                          for x in kq["con_giap"]]
     ph = kb.get("phuong") or {}
     kq["sat"] = ph.get(c["sat_phuong"], kq["sat"])
     kq["huong"] = {k: ph.get(c["huong"][k], v) for k, v in kq["huong"].items()}
@@ -271,6 +285,7 @@ def ngay_xem(kq: dict) -> dict:
         + _cau_viec_lon(kq["viec_lon"])
         + (L("lich.tl.ky_dg", " Dân gian thường tránh việc lớn vì là ngày {ds}.", ds=danh_sach(ky_dg)) if ky_dg else "")
         + L("lich.tl.xung", " Xung tuổi {xung}.", xung=kq["xung_tuoi"]["ten"])
+        + _cau_hop(kq.get("con_giap") or [])
         + L("lich.tl.gio", " Giờ hoàng đạo: {ds}.", ds=", ".join(gio_hd)))
     return kq
 

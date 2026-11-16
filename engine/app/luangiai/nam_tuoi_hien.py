@@ -689,8 +689,10 @@ def theo_tuoi(d: dict) -> dict:
     thuan = [o["tieu_de"] for o in x["diem_nhan"] if o["loai"] == "thuan"]
     luu_y = [o["tieu_de"] for o in x["diem_nhan"] if o["loai"] == "luu_y"]
     thuong = lambda s: s[:1].lower() + s[1:]  # noqa: E731
-    phan = [L("nt.tt.tl_dau", "Năm {nam} ({cc_n}), người tuổi {cc_s} sinh {ns} (mệnh {na}) bước vào tuổi mụ {tuoi}.",
-              nam=nam, cc_n=cc_n, cc_s=cc_s, ns=ns, na=_na(d["nguoi"]["nap_am"]), tuoi=tuoi)]
+    tron = d.get("tuoi_tron", nam - ns)
+    phan = [L("nt.tt.tl_dau2", "Năm {nam}, người sinh năm {ns} (tuổi {cc_s}) bước sang {tron} tuổi, tuổi mụ {tuoi}. Năm {cc_n} "
+              "với tuổi này (mệnh {na}):", nam=nam, cc_n=cc_n, cc_s=cc_s, ns=ns, na=_na(d["nguoi"]["nap_am"]), tuoi=tuoi,
+              tron=tron)]
     if thuan:
         phan.append(L("nt.tt.tl_thuan", "Điểm thuận: {x}.", x=thuong(thuan[0])))
     if luu_y:
@@ -701,6 +703,10 @@ def theo_tuoi(d: dict) -> dict:
     lam = d["lam_nha"]
     tt, kl = d["tam_tai"], d["kim_lau"]
     hd = [
+        {"hoi": L("nt.tt.hd0", "Sinh năm {ns}, năm {nam} bao nhiêu tuổi?", ns=ns, nam=nam),
+         "dap": L("nt.tt.hd0_dap", "Năm {nam}, người sinh năm {ns} tròn {tron} tuổi khi qua sinh nhật (tính theo năm dương lịch), "
+                  "tuổi mụ {tuoi} theo cách tính dân gian. Sinh tháng 1 hoặc đầu tháng 2 trước Tết thì năm âm lịch là năm trước.",
+                  nam=nam, ns=ns, tron=tron, tuoi=tuoi)},
         {"hoi": L("nt.tt.hd1", "Tuổi {cc} năm {nam} sao gì chiếu mệnh?", cc=cc_s, nam=nam),
          "dap": (L("nt.tt.hd1_dap", "Theo tục xếp theo tuổi mụ {tuoi}: nam mạng sao {sn} (hạn {hn}), nữ mạng sao {sf} (hạn {hf}). "
                    "Mỗi sao đọc bằng việc nên làm trên trang, không cần nghi lễ gì.", tuoi=tuoi, sn=sao["nam"]["ten"],
