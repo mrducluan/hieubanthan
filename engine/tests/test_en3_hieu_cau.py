@@ -70,6 +70,8 @@ def test_khong_co_nguoi_thu_hai():
     ("phongthuy", "Sinh Khí và Diên Niên khác gì nhau", "Sinh Khí"),
     ("kinhdich", "Hào động là gì, đọc ra sao", "Hào động"),
     ("thanso", "Số sứ mệnh được tính như thế nào", "Số sứ mệnh"),
+    ("tuvi", "Lá số đẹp là lá số thế nào?", "Lá số đẹp"),          # review CY-2 vòng 3
+    ("tuvi", "Thế nào là lá số tốt?", "Lá số đẹp"),
 ])
 def test_tra_loi_kien_thuc_bang_tu_dien(mo_dun, cau, ten):
     """Câu kiến thức → nhãn ky_thuat, lời trả lời mở bằng mục từ điển (không đọc lá số / không gieo quẻ)."""

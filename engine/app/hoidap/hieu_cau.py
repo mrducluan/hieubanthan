@@ -14,7 +14,10 @@ KIEN_THUC = [r"(la|co nghia la|nghia la|y nghia la) gi", r"y nghia (la )?gi", r"
              r"giong (nhau|va khac)", r"(duoc )?tinh (sao|the nao|nhu the nao|ra sao|bang cach nao|tu dau)",
              r"cach tinh", r"duoc tinh (tu|nhu|theo|bang)", r"doc (the nao|ra sao|nhu the nao)", r"la sao\b",
              r"co (that|that su|thuc su)? ?(boi|du doan|doan) duoc", r"co (that |that su |thuc su )?(khoa hoc|co so|chinh xac) khong",
-             r"khac voi .{2,40} (the nao|ra sao|cho nao|o diem nao)", r"khac .{2,40} o (diem|cho) nao"]
+             r"khac voi .{2,40} (the nao|ra sao|cho nao|o diem nao)", r"khac .{2,40} o (diem|cho) nao",
+             # review CY-2 vòng 3: "Lá số đẹp là lá số thế nào?", "Thế nào là lá số tốt?" (chỉ lá số / mệnh / quẻ + đẹp, tốt, xấu)
+             r"(la so|cach cuc|menh|que) (dep|tot|xau|quy) (la|thi) .{0,12}(gi|the nao|ra sao|nhu the nao)",
+             r"the nao (la|moi la|thi la) (la so|menh|que) (dep|tot|xau|quy)"]
 # Câu có chủ thể là người hỏi → không phải câu kiến thức thuần ("Nhật chủ CỦA TÔI là gì").
 CA_NHAN = [r"cua (toi|em|minh|tui|tao|anh|chi|chau)", r"(voi|toi|den|ve|cho) (toi|minh|tui)\b", r"(toi|em|minh|tui) (co|bi|la|thuoc|sinh|duoc|nen|muon|dang)",
            r"cho (toi|em|minh)", r"(la so|bat tu|tu tru|nha) (cua )?(toi|em|minh)", r"tuoi (toi|em|minh)",

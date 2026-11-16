@@ -316,8 +316,20 @@ cho người dùng thật cần chủ dự án (mục 6).
   hoảng / cấp cứu / từ chối có cặp Anh–Việt cùng nhánh. (2) Câu Anh đi qua câu chuẩn Việt — luật nào đọc chữ phải xét
   cả câu gốc. (3) Holdout `bh046` nhãn cũ ("đối tác có trung thực" = từ chối) trái chính sách CY-2 — không sửa holdout
   đóng băng, ghi nhận câu đó tính lệch có chủ đích.
-- Còn để sau (thấp): "Lá số đẹp là lá số thế nào?" chưa đi nhánh kiến thức; "Có nên kiện công ty đòi lương" Kinh
-  Dịch gắn nhãn "tiền bạc" (lời vẫn đúng việc).
+- Còn để sau (thấp): "Có nên kiện công ty đòi lương" Kinh Dịch gắn nhãn "tiền bạc" (lời vẫn đúng việc).
+- Review vòng 4 (2026-11-15, reviewer độc lập, 118 câu mới × 6 mảng × vi/en): 14 lỗi cao + 9 vừa. Đã sửa: khủng hoảng có
+  phương tiện / kế hoạch ("để tôi treo cổ", "tích đủ thuốc", "viết sẵn thư để lại", "không qua nổi tuần này", "đi không bao
+  giờ về cho mọi người khỏi phiền", "uống thuốc diệt chuột" + cấp cứu trước, "took an overdose"); trẻ nuốt pin = cấp cứu;
+  Thần số tiếng Anh dùng chung lời từ chối / cấp cứu của các mảng (`chung.mau_tu_choi`); chặn "năm nào tôi mất", "xin con
+  lô", hoãn / dời mổ, ca mổ người thân có thành công không, xem lá số người khác để kết luận người xấu, vật phẩm giải hạn
+  (chỉ khi có ý giải hạn / đổi vận — "đeo thạch anh có hợp mệnh" vẫn trả lời), đặt tên con "để giàu" (vi + en); bạo lực /
+  xâm hại có câu mở đầu gọi đúng tên chuyện (`an_toan.bao_luc_truoc`, số 113 / 111; bản Anh đường dây bạo lực gia đình
+  Mỹ / Anh — **cần chủ dự án kiểm số**); "có người khác", kiểm soát tiền / cấm gặp bạn bè → đồng cảm (vi + en; câu Anh
+  xét cả câu gốc lẫn câu chuẩn Việt); "muốn chết vì cười" không còn bị chặn; "Will I lose my job in the layoffs" → giữ việc
+  (trước: nhận offer mới); "Lá số đẹp là lá số thế nào" → mục từ điển mới `la_so_dep`.
+- Đầu vào GĐ 7 (Thần số + Tarot tiếng Anh đầy đủ), reviewer vòng 4 ghi lại: Thần số EN chưa có nhánh ngày cá nhân ("good
+  day for my flight tomorrow"), câu về con thi cử trả lời bằng năm cá nhân của cha mẹ; Tarot EN "I'm dying to know if he
+  likes me back" → khong_hieu (bản Việt → người khác).
 
 ## 4. Chỗ code khác mô tả trong prompt / phát hiện khi đo
 

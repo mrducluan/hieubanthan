@@ -660,7 +660,15 @@ KHUNG_HOANG_QH = [r"ngoai tinh", r"ly (hon|di|than)", r"phan boi", r"bao (hanh|l
                   r"(bi|dang bi) (danh|xam hai|hanh ha)", r"(?<!\w)cam sung", r"nguoi thu ba", r"(?<!\w)tieu tam",
                   # CY-2 review 3: bản Anh ("Will my husband cheat on me?") nhận lời khuyên bàn chuyện tiền của chương
                   r"\b(cheat\w*|affair|unfaithful|infidelity|divorc\w*|separation|abus\w*|mistress|the other woman)\b",
-                  r"\b(we|i)( are|'re| am|'m)? separat\w*", r"\b(hits?|beats?|hurts?) me\b"]
+                  r"\b(we|i)( are|'re| am|'m)? separat\w*", r"\b(hits?|beats?|hurts?) me\b",
+                  # review vòng 4: có người khác; kiểm soát cưỡng ép (giữ hết tiền, cấm gặp bạn bè / gia đình)
+                  r"(vo|chong|nguoi yeu|anh ay|co ay|ban trai|ban gai)( toi| em| minh)? (co|dang co|co them|di voi|qua lai voi) "
+                  r"(nguoi khac|nguoi moi|bo nhi|nhan tinh|nguoi thu ba)",
+                  r"(giu|quan|kiem soat|cam) (het|toan bo|tat ca) (tien|luong|the|tai khoan).{0,40}(khong cho|cam) .{0,20}(gap|di|lien lac|noi chuyen)",
+                  r"khong cho (toi|em|minh) (gap|lien lac|noi chuyen|di choi) (voi )?(ban|ban be|gia dinh|bo me|nguoi nha)",
+                  r"\b(has|have|is seeing|seeing|found) (someone|somebody) else\b", r"\bother (woman|man)\b",
+                  r"\bcontrols? (all )?(of )?my (money|phone|finances|bank)",
+                  r"\b(won ?t|will not|doesn ?t|does not) (let|allow) me (to )?(see|talk to|meet|call) (my )?(friends|family|parents)"]
 
 
 DONG_CAM_QH = ("Chuyện bạn đang trải qua rất nặng lòng. Không lá số, quẻ hay con số nào quyết thay bạn việc giữ hay buông; "
@@ -669,7 +677,8 @@ DONG_CAM_QH = ("Chuyện bạn đang trải qua rất nặng lòng. Không lá s
 
 
 _BAO_LUC = [r"bao (hanh|luc)", r"danh dap", r"(bi|dang bi) (danh|xam hai|hanh ha)", r"(?<!\w)danh (toi|em|minh|con)",
-            r"cam sung", r"de doa"]
+            r"cam sung", r"de doa", r"khong cho (toi|em|minh) (gap|lien lac|noi chuyen)", r"\b(abus\w*|hits? me|beats? me|threat\w*)\b",
+            r"\bcontrols? (all )?(of )?my\b", r"\b(won ?t|will not) (let|allow) me\b"]
 
 
 _LO_NGHI = [r"(?<!\w)lo( la| rang)?(?!\w)", r"(?<!\w)nghi( ngo| la| rang)?(?!\w)", r"(?<!\w)so( la| rang)?(?!\w)", r"hinh nhu",
@@ -695,9 +704,10 @@ def dong_cam(dieu: dict | None, t: str | None = None) -> str:
     return loi
 
 
-def khong_mo(t: str, raw: str | None = None) -> bool:
-    """`raw` = câu gốc: câu Anh được đổi sang câu chuẩn tiếng Việt ("tinh duyen cua toi") trước khi tới đây (CY-2 review 3)."""
-    return _co(t, KHUNG_HOANG_QH) or bool(raw and _co(raw.lower(), KHUNG_HOANG_QH))
+def khong_mo(t: str, *goc: str | None) -> bool:
+    """`goc` = câu gốc (một hay nhiều dạng): câu Anh được đổi sang câu chuẩn tiếng Việt ("tinh duyen cua toi", "luc duc")
+    trước khi tới đây — xét cả câu gốc (CY-2 review 3, 4)."""
+    return _co(t, KHUNG_HOANG_QH) or any(g and _co(g.lower(), KHUNG_HOANG_QH) for g in goc)
 
 
 # ---------------------------------------------------------------- lời cố định của đoạn mở đầu
@@ -1109,8 +1119,8 @@ def doi_song_mo(goi: dict, t: str, mon: str, raw: str | None = None, khoa: tuple
     ds = next((m for m in muc if m.get("loai") == "doi_song" and m.get("nhan_muc")), None)
     sn = next((m for m in muc if m.get("loai") == "so_nam" and m.get("nam")), None)
     cs = next((m for m in muc if m.get("loai") == "cua_so"), None)
-    if khong_mo(t, raw or goc):
-        return dong_cam(dieu_hoi(t, raw), t + " " + (raw or goc or "").lower())           # câu trung tính, đồng cảm — không nêu mức (CY-3: việc phía người hỏi từ KB)
+    if khong_mo(t, raw, goc):
+        return dong_cam(dieu_hoi(t, raw), " ".join(x.lower() for x in (t, raw, goc) if x))           # câu trung tính, đồng cảm — không nêu mức (CY-3: việc phía người hỏi từ KB)
     nh_cau, nh_tk = _ngu_hanh_cau(muc) if (mon == "battu" and pl.get("chu_de") == "ngu_hanh") else ("", "")
     dv_cau = _dai_van_cau(muc) if (mon == "battu" and pl.get("loai") == "van" and re.search(r"dai van|\bvan\b", t)) else ""
     if ds and sn and ds.get("chuong") in ("nam_nay", "cuoc_doi"):
@@ -1268,8 +1278,8 @@ def sang_goi(goi: dict, ds: dict | None = None, uu_cung: bool = False) -> str:
 def que_mo(dq: dict | None, t: str, raw: str | None = None, moc: str | None = None, goc: str | None = None) -> str | None:
     """Điều được hỏi + mức quẻ (theo phái đang đọc) + nghĩa của mức + hình ảnh quẻ + việc đầu của nhóm việc đúng mức.
     Mọi chữ lấy từ `doc_que` (KB `kinhdich_doi_song` + "Hiểu đơn giản" của quẻ)."""
-    if khong_mo(t, raw or goc):
-        return dong_cam(dieu_hoi(t, raw), t + " " + (raw or goc or "").lower())
+    if khong_mo(t, raw, goc):
+        return dong_cam(dieu_hoi(t, raw), " ".join(x.lower() for x in (t, raw, goc) if x))
     if not dq or not dq.get("nhan_muc"):
         return None
     from app.luangiai import kinhdich_doi_song as kd  # noqa: PLC0415

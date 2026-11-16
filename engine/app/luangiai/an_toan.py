@@ -23,7 +23,7 @@ _AI_KD = r"(toi|em|minh|con|to|tao|t|mk)"
 KHUNG_HOANG: list[tuple[str, str | None]] = [
     # tự hại nói thẳng
     (r"(muon|nen|dinh|se|thi|de|thoi|toan) chet (di|cho|quach|luon|phut)", None), (r"chet di cho", None),
-    (r"chet cho (xong|roi|do)", None), (r"(muon|het muon) chet", None), (r"nghi den (chuyen )?(tu tu|chet)", None),
+    (r"chet cho (xong|roi|do)", None), (r"(muon|het muon) chet(?! (vi|voi) (cuoi|buon cuoi|them|thich|ngai|vui))", None), (r"nghi den (chuyen )?(tu tu|chet)", None),
     (r"(muon|nghi den|dinh|toan|se|nen|da|tinh) tu tu(?! (tim|tinh|lam|roi|hieu|xem|noi|thoi|ma))", r"tự tử|tự sát"),
     (r"tu sat", r"tự sát"), (r"ket lieu (ban than|doi|minh|cuoc)", None), (r"tu thieu", None),
     (r"tu (ket thuc|ket lieu) (doi|cuoc doi|cuoc song|ban than)", None),
@@ -36,6 +36,18 @@ KHUNG_HOANG: list[tuple[str, str | None]] = [
     # mất THÌ người khác đỡ khổ (không bắt "đi luôn chuyến sớm thì vợ con đỡ phải chờ": "thì" phải liền sau động từ).
     (r"(toi|minh|em|con|tao|tui) (chet|chet di|di luon|bien mat|ra di|bo di|khong con)( di| luon)? thi "
      r"[a-z ]{0,40}(do kho|bot kho|khoi kho|nhe ganh|nhe no|nhe nhom|thanh than|hanh phuc hon|tot hon)", None),
+    # Review vòng 4 (2026-11-15): có phương tiện / kế hoạch cụ thể — "để tôi treo cổ", "tích đủ thuốc rồi", "viết sẵn thư để
+    # lại", "không qua nổi tuần này", "chẳng ai cần em nữa", "đi không bao giờ về cho mọi người khỏi phiền".
+    (r"(toi|minh|em|tao|tui|con|anh|chi) (se |dinh |muon |tinh |chac |phai )?(treo co|tu treo|that co)(?! (ao|tay ao|vat))",
+     r"(tôi|mình|em|tao|tui|con|anh|chị) (sẽ |định |muốn |tính |chắc |phải )?(treo cổ|tự treo|thắt cổ)(?! (áo|tay áo|vạt))"),
+    (r"(tich|gom|de danh|tru) (du|san) (thuoc|thuoc ngu|vien thuoc)(?! (ha sot|cam|ho|cho con|cho be|cho bo|cho me|du phong))",
+     r"(tích|gom|để dành|trữ) (đủ|sẵn) (thuốc|thuốc ngủ|viên thuốc)(?! (hạ sốt|cảm|ho|cho con|cho bé|cho bố|cho mẹ|dự phòng))"),
+    (r"(viet|soan|de) (san )?(thu|la thu|loi) (de lai|tu biet|vinh biet|tham biet)",
+     r"(viết|soạn|để) (sẵn )?(thư|lá thư|lời) (để lại|từ biệt|vĩnh biệt|thăm biệt)"),
+    (r"(toi|em|minh|tao|tui) (chac |se |co le |chac chan )?(khong|chang) (qua|song) (noi|duoc|qua) (dem nay|tuan nay|thang nay"
+     r"|toi nay|hom nay|nam nay|mai)", None),
+    (r"(chang|khong) (con )?(ai|mot ai) can (toi|em|minh|tao|tui) (nua|ca|het)( ca)?" + _H, None),   # hết vế: không bắt "… nữa ở công ty cũ"
+    (r"khong bao gio (ve|quay ve|tro ve|tinh lai|thuc day) (nua )?(cho|de) .{0,25}(khoi|do|bot|nhe) (phien|kho|ganh|no|lo)", None),
     # "Giá mà / ước gì tôi chưa từng được sinh ra" (không bắt "giá mà tôi được sinh ra ở Hà Nội")
     (r"(gia (nhu|ma)|uoc (gi|chi)) (toi|minh|em|con|tao|tui) (chua tung|chua|khong bao gio|khong|dung) (duoc |bi )?"
      r"(sinh ra|ton tai|co mat)(?! (o|tai|vao))", None),
@@ -58,7 +70,7 @@ KHUNG_HOANG: list[tuple[str, str | None]] = [
      r"(thuoc|vien)(?! (khang sinh|theo don|bo|vitamin|ho|cam|tranh thai|bac si ke|da day|giun))", None),
     (r"(uong|nuot|tong) (rat nhieu|ca dong|mot dong|may chuc|vai chuc|ca nam|mot nam|ca von|[1-9]\d) (vien )?(thuoc ngu|thuoc an than|"
      r"thuoc doc|vien thuoc|vien)", None),
-    (r"(da|vua|moi|lo) (uong|nuot|tong) (het |ca |nhieu |rat nhieu )?(thuoc ngu|thuoc an than|thuoc doc|thuoc tru sau|thuoc chuot"
+    (r"(da|vua|moi|lo) (uong|nuot|tong) (het |ca |nhieu |rat nhieu )?(thuoc ngu|thuoc an than|thuoc doc|thuoc tru sau|thuoc chuot|thuoc diet chuot|thuoc diet con trung|thuoc tru co"
      r"|thuoc diet co|thuoc sau|axit|xang|nuoc tay)(?! (de ngu|moi ngu|cho de ngu|theo don|bac si ke))", None),
     (r"nhay (xuong|lau|cau|song)|nhay tu tang", r"nhảy (xuống|lầu|cầu|sông)|nhảy từ tầng"),
     (r"cat tay|rach tay|tu hai (ban than|minh)|tu lam dau|(muon|hay|thuong) lam dau (ban than|chinh minh)",
@@ -345,6 +357,29 @@ TU_CHOI: list[tuple[str, str | None, str]] = [
      r"|bất đắc kỳ tử|(\d{2,3} tuổi|ông nội|ông ngoại|bà nội|bà ngoại|cụ nhà).{0,40}có (đi|mất|ra đi) (không|ko)"
      r"|(con|bé|nó|ông|bà|bố|mẹ|tôi|mình|em|cháu|vợ|chồng) (có )?sống được (không|ko)(?!\w)|năm nào .{0,30}có người mất",
      "du_doan_cu_the"),
+    # Review vòng 4 (2026-11-15): "Năm nào tôi mất?" (hết câu — không chặn "năm nào tôi mất việc"), "xin con lô đẹp hôm
+    # nay", hoãn / dời mổ theo lá số, ca mổ của người thân có thành công không, xem lá số người khác để kết luận người xấu /
+    # lừa đảo, vật phẩm giải hạn (tỳ hưu, cóc ba chân, thạch anh…), đặt tên con "để giàu".
+    (r"(nam|thang|tuoi|ngay) nao (thi )?(toi|minh|em|tui|bo toi|me toi|ong toi|ba toi|chong toi|vo toi) (se )?mat" + _H,
+     r"(năm|tháng|tuổi|ngày) nào (thì )?(tôi|mình|em|tui|bố tôi|mẹ tôi|ông tôi|bà tôi|chồng tôi|vợ tôi) (sẽ )?mất" + _H,
+     "du_doan_cu_the"),
+    (r"(xin|cho|choi|danh|bat|soi|chot|nuoi) (con|cap) (lo|de)(?!\w)", r"(xin|cho|chơi|đánh|bắt|soi|chốt|nuôi) (con|cặp) (lô|đề)(?!\w)",
+     "may_rui"),
+    (r"(bac si|benh vien|ruot thua|phau thuat|khoi u|ca mo).{0,60}(hoan|lui|doi) (lich )?mo(?!\w)"
+     r"|(hoan|lui|doi) (lich )?mo (ruot|tim|mat|u|de|lay|soi|tuyen|xuong|bung)"
+     r"|(phau thuat|ca mo|mo (ruot|tim|mat|u|de|lay|soi|tuyen|xuong|bung)\w*)(?!\w).{0,15}(co )?(thanh cong|on|suon se) (khong|ko|chu)"
+     r"|(khoi u|ung thu|benh).{0,30}(?<!\w)mo (co )?(thanh cong|on|suon se) (khong|ko|chu)",
+     r"(hoãn|lùi|dời) (lịch )?mổ|(phẫu thuật|ca mổ|mổ)(?!\w).{0,15}(có )?(thành công|ổn|suôn sẻ) (không|ko|chứ)",
+     "suc_khoe_the_chat"),
+    (r"(la so|tuoi|menh|tuong|ngay sinh|so chu dao|bat tu)( cua)? (sep|dong nghiep|nhan vien|hang xom|doi tac|nguoi ay|anh ay"
+     r"|co ay|ong ay|ba ay|chi ay|nguoi yeu|chong|vo|ban)( toi| em| minh)?(?!\w).{0,40}(co phai |la )(nguoi |ke |dua )?"
+     r"(xau|lua dao|gian doi|noi doi|dao hoa|doc ac|ac|xau tinh|hai minh|phan boi)(?!\w)", None, "ngoai_pham_vi"),
+    # chỉ khi có ý giải hạn / đổi vận / chiêu tài — "đeo vòng thạch anh có hợp mệnh không" vẫn trả lời (màu, hành)
+    (r"(ty huu|coc ba chan|thach anh|linh vat|bua (ho menh|binh an|giai han|may man)).{0,40}(giai han|hoa giai|giai (duoc )?han|doi van|chieu tai|giai xui|cat han|hoa han)|(giai han|hoa giai|giai (duoc )?han|doi van|chieu tai|giai xui|cat han|hoa han).{0,40}(ty huu|coc ba chan|thach anh|linh vat|bua (ho menh|binh an|giai han|may man))",
+     r"(tỳ hưu|tì hưu|cóc ba chân|thạch anh|linh vật|bùa (hộ mệnh|bình an|giải hạn|may mắn)).{0,40}(giải hạn|hoá giải|hóa giải|giải (được )?hạn|đổi vận|chiêu tài|giải xui|cắt hạn|hoá hạn|hóa hạn)|(giải hạn|hoá giải|hóa giải|giải (được )?hạn|đổi vận|chiêu tài|giải xui|cắt hạn|hoá hạn|hóa hạn).{0,40}(tỳ hưu|tì hưu|cóc ba chân|thạch anh|linh vật|bùa (hộ mệnh|bình an|giải hạn|may mắn))", "ngoai_pham_vi"),
+    (r"(dat|chon|doi) ten (cho )?con.{0,40}(giau|lam giau|thanh dat|giau co|may man nhat|tai loc)|ten nao (giau|giau nhat|may man nhat)",
+     r"(đặt|chọn|đổi) tên (cho )?con.{0,40}(giàu|làm giàu|thành đạt|giàu có|may mắn nhất|tài lộc)|tên nào (giàu|giàu nhất|may mắn nhất)",
+     "ngoai_pham_vi"),
     # Review CY-1: tuyển dụng trá hình ("tuổi nào hợp làm nhân viên kế toán cho tôi") — bộ chung cho cả 5 mảng.
     (r"(tuoi|nguoi tuoi|menh|con giap|nguoi sinh nam) (nao|gi) .{0,25}(lam|vao vi tri|vao lam) (nhan vien|ke toan|thu ky"
      r"|tro ly|quan ly|bao ve|tai xe|lai xe|giup viec|nhan su|ban hang|thu ngan|cong nhan)(?!\w).{0,30}"
@@ -1558,6 +1593,10 @@ _TU_CHOI_GD6: list[tuple[re.Pattern, str]] = [
     (_rx_en(r"(?:buy|purchase|pay for|pay)\b.{0,50}(?:talisman|amulet|charm|crystal|bracelet|statue|ritual|ceremony|blessing)\b.{0,50}"
             r"(?:fix|cure|remove|change|break|neutrali[sz]e|undo|cancel)|(?:talisman|amulet|ritual|charm)\b.{0,80}should i (?:pay|buy)"),
      "ngoai_pham_vi"),
+    # Review vòng 4: "Which crystal bracelet should I buy to fix my luck?", "Pick my baby's name so she becomes rich"
+    (_rx_en(r"(?:crystal|bracelet|talisman|amulet|charm|statue)s?\b.{0,40}\b(?:buy|wear|get|use)\b.{0,30}\b(?:luck|fix|wealth|money|protect\w*)|"
+            r"\bnames?\b.{0,40}\b(?:baby|son|daughter|child|kid)\b.{0,40}\b(?:rich|wealthy|successful|lucky|fortune)|"
+            r"\b(?:baby|son|daughter|child|kid) s? names?\b.{0,40}\b(?:rich|wealthy|success\w*|lucky|fortune)"), "ngoai_pham_vi"),
 ]
 
 
@@ -1945,9 +1984,9 @@ _CAP_CUU: list[tuple[str, str | None]] = [
     # Review 2026-11-14: quá liều / ngộ độc ĐÃ xảy ra (kể cả uống nhầm) → gọi cấp cứu ngay. Câu hỏi chung ("uống quá liều có
     # sao không") không có "đã / vừa / lỡ" → không thuộc nhóm này.
     (r"(da|vua|moi|lo|bi|dang) (uong|nuot|dung|tiem) .{0,25}qua lieu|(da|vua|bi|lo) (bi )?(ngo doc|qua lieu)"
-     r"|(be|con|chau|em be) .{0,15}(nuot|uong|an) (phai |nham )?(thuoc|pin|nuoc tay|thuoc tru sau|thuoc chuot|hoa chat)",
+     r"|(be|con|chau|em be) .{0,25}(nuot|uong|an) (phai |nham )?(vien |cuc |cai )?(thuoc|pin|nuoc tay|thuoc tru sau|thuoc chuot|thuoc diet chuot|thuoc diet con trung|thuoc tru co|hoa chat)",
      r"(đã|vừa|mới|lỡ|bị|đang) (uống|nuốt|dùng|tiêm) .{0,25}quá liều|(đã|vừa|bị|lỡ) (bị )?(ngộ độc|quá liều)"
-     r"|(bé|con|cháu|em bé) .{0,15}(nuốt|uống|ăn) (phải |nhầm )?(thuốc|pin|nước tẩy|thuốc trừ sâu|thuốc chuột|hoá chất|hóa chất)"),
+     r"|(bé|con|cháu|em bé) .{0,25}(nuốt|uống|ăn) (phải |nhầm )?(viên |cục |cái )?(thuốc|pin|nước tẩy|thuốc trừ sâu|thuốc chuột|hoá chất|hóa chất)"),
     (r"(?:^|[,.!?;] )" + _AI_KD + r" (dang |bi |thay |cu |tu nhien |hay bi )*kho tho(?! (vi|qua vi|voi|khi nghi|khi nhac))"
      r"|(bi|dang) kho tho(?! (vi|qua vi|voi))|kho tho .{0,20}(nguc|ngat|tim tai|choang)",
      r"(?:^|[,.!?;] )" + _AI + r" (đang |bị |thấy |cứ |tự nhiên |hay bị )*khó thở(?! (vì|quá vì|với|khi nghĩ|khi nhắc))"
@@ -2100,7 +2139,7 @@ def nhom_suc_khoe(raw: str) -> str | None:
 _DA_LAM: list[tuple[str, str | None]] = [
     (r"(uong|nuot|tong) (het|ca|nguyen|gan het|sach) (ca )?(mot )?(lo|vi|hop|chai|nam|von|tui|bao|lieu|dong|vien|loat) (thuoc|vien)"
      r"|(uong|nuot|tong) (rat nhieu|ca dong|mot dong|may chuc|vai chuc|ca nam|mot nam|ca von|[1-9]\d) (vien )?(thuoc|vien)"
-     r"|(da|vua|moi|lo) (uong|nuot|tong) (het |ca |nhieu |rat nhieu )?(thuoc ngu|thuoc an than|thuoc doc|thuoc tru sau|thuoc chuot"
+     r"|(da|vua|moi|lo) (uong|nuot|tong) (het |ca |nhieu |rat nhieu )?(thuoc ngu|thuoc an than|thuoc doc|thuoc tru sau|thuoc chuot|thuoc diet chuot|thuoc diet con trung|thuoc tru co"
      r"|thuoc diet co|thuoc sau|axit|xang|nuoc tay)|qua lieu", None),
     (r"(da|vua|moi|lai) (cat|rach|dam|cua) (tay|co tay|mach|ven|nguoi|bung|co)|dang chay mau|chay (rat )?nhieu mau"
      r"|mau (chay|ra) (nhieu|khong ngung|khong cam|lenh lang)|(khong|chua) cam (duoc )?mau",
@@ -2119,7 +2158,7 @@ _DA_LAM_ANH = _rx_en(
     r"(?:i ve|i have|i just|i already|just) (?:\w+ ){0,1}(?:took|taken|swallowed|drank|drunk) (?:some |the )?(?:poison|bleach|pesticide|"
     r"weed killer|rat poison|antifreeze)",
     r"(?:i ve|i have|i just|i already|just) (?:\w+ ){0,1}(?:cut|slit|stabbed) (?:myself|my (?:wrists?|arms?|throat|legs?))",
-    r"overdosed|(?:i m|i am|im|it s|it is|wrist s|wrists are|arm is) (?:still )?bleeding|won t stop bleeding|losing (?:a lot of )?blood",
+    r"overdosed|(?:took|taken|had|did|done) an? (?:overdose|od)\b|\bod (?:d|ed)\b|(?:i m|i am|im|it s|it is|wrist s|wrists are|arm is) (?:still )?bleeding|won t stop bleeding|losing (?:a lot of )?blood",
     r"(?:i m|i am|im) (?:standing|sitting|sat|on|at|up on) (?:on |at )?(?:the |a |my |our )?(?:edge|ledge|railing|parapet|roof|rooftop|"
     r"bridge|window ?sill|top floor|balcony edge|tracks)",
 )
@@ -2149,10 +2188,31 @@ def loi_cap_cuu_truoc() -> str:
     return L("an_toan.cap_cuu_truoc", CAP_CUU_TRUOC_VI)
 
 
+# Review vòng 4: câu bạo lực / xâm hại / kiểm soát nhận lời hỗ trợ chung ("nếu bạn nghĩ tới làm hại bản thân…") — sai
+# loại. Thêm một câu mở đầu gọi đúng tên chuyện (không thay đường dây hỗ trợ của mảng).
+_BAO_LUC_RX = re.compile(
+    r"(?<!\w)(?:bao hanh|bao luc|danh dap|hanh ha|xam hai|cuong hiep|hiep dam|so soang|bop co|(?:doa|de doa) (?:giet|danh)"
+    r"|(?:chong|vo|bo|me|ba|nguoi yeu|ny|ban trai|ban gai|bo duong|me ke|cha duong)(?: toi| em| minh)? (?:hay |cu |lai |say ruou )*"
+    r"(?:danh|tat|dap|hanh ha) (?:toi|em|minh|con)|bi (?:chong|vo|bo|me|nguoi yeu|ban trai|ban gai) (?:danh|tat|dap|hanh ha)"
+    r"|abus\w*|domestic violence|(?:hits?|beats?|hurts?|chokes?|slaps?) me|threaten\w* to (?:kill|hurt|beat) me)(?!\w)")
+BAO_LUC_TRUOC_VI = ("Không ai đáng bị đánh, xâm hại, doạ hay kiểm soát như vậy. Nếu bạn đang gặp nguy hiểm, gọi 113 hoặc nhờ hàng xóm, "
+                    "người thân đến ngay; trẻ em bị bạo hành gọi 111. Nếu được, tìm chỗ ở tạm an toàn và giữ lại tin nhắn, ảnh vết "
+                    "thương ở nơi người kia không xem được.")
+
+
+def bao_luc(raw: str | None) -> bool:
+    return bool(raw) and bool(_BAO_LUC_RX.search(_sua_en(_hai_ban(raw)[1])))
+
+
 def loi_khung_hoang(raw: str | None, mau: str | None) -> str:
     """Lời đáp câu khủng hoảng: `mau` (lời hỗ trợ + đường dây hiện có của mảng); câu có hành vi đã xảy ra / nguy hiểm tức
-    thì → câu cấp cứu đứng ĐẦU. Không trùng lặp khi `mau` đã mở bằng câu đó."""
+    thì → câu cấp cứu đứng ĐẦU. Không trùng lặp khi `mau` đã mở bằng câu đó. Câu bạo lực / xâm hại → câu gọi đúng tên
+    chuyện đứng đầu (review vòng 4)."""
     mau = mau or ""
+    if raw and bao_luc(raw) and not cap_cuu_ngay(raw):
+        from app.kb.loi import L  # noqa: PLC0415
+        dau = L("an_toan.bao_luc_truoc", BAO_LUC_TRUOC_VI)
+        return mau if mau.startswith(dau) else f"{dau} {mau}".strip()
     if not (raw and cap_cuu_ngay(raw)):
         return mau
     dau = loi_cap_cuu_truoc()

@@ -260,6 +260,9 @@ _CHU_DE: list[tuple[str, str]] = [
     # thăng tiến, phỏng vấn
     (r"interview|promot\w*|senior role|passed over|appraisal|performance review|shortlist\w*|selected|be chosen|management role|"
      r"lead role|team lead", "thang chuc"),
+    # giữ việc / sợ mất việc (review vòng 4: "Will I lose my job in the layoffs?" từng thành "chuyển việc")
+    (r"lose (?:my |our |this )?job|losing (?:my |our |this )?job|layoffs?|laid off|lay ?offs?|(?:be|get|getting|being) (?:fired|sacked|let go)|"
+     r"job cuts?|downsiz\w*|keep (?:my |this )?job|job (?:is )?(?:safe|secure|at risk)", "mat viec"),
     # chuyển việc
     (r"job offer|offer letter|accept\w* (?:the |an |a )?(?:job|offer|position|role)|new (?:job|role|position|team)|change (?:jobs?|careers?)|"
      r"career change|switch (?:jobs?|careers?)|job hunt\w*|(?:find|get|land) (?:a )?(?:new )?job|look\w* for (?:a )?(?:new )?(?:job|role|work)|"
@@ -432,6 +435,8 @@ def gloss(cau: str) -> str:
     cd = _chu_de(cau, t)
     if re.search(r"\b(?:buy\w*|purchas\w*) or sell\w*\b|\bsell\w* or (?:buy|purchas)\w*\b", t):
         cd = ["mua hay ban nha"] + [x for x in cd if x not in ("mua nha", "ban nha")]     # bộ làm rõ hỏi lại: mua hay bán
+    if "mat viec" in cd:                       # sợ mất việc ≠ chuyển việc (chữ "job" chung khớp cả hai)
+        cd = [x for x in cd if x != "chuyen viec"]
     if "tien bac" in cd and _TANG_LUONG.search(t):
         cd = [("tien bac luong" if x == "tien bac" else x) for x in cd]
     vai = _vai(t)
