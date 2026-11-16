@@ -1,0 +1,1021 @@
+{
+ "_trang_thai": "bien_tap",
+ "_nguon": "EN-ALL GĐ 7 — bản tiếng Anh do ban biên tập viết lại từ bản Việt (giữ nguyên số liệu, bảng, nguồn); chờ người bản xứ duyệt.",
+ "source": {
+  "ten": "Meaning of numbers in Pythagorean numerology — added by the Hieuban editorial team",
+  "mo_ta": "Compiled by the Hieuban editorial team from the knowledge base and public-domain sources (editorial draft, awaiting expert review)"
+ },
+ "trang": {
+  "so-1": {
+   "muc": [
+    {
+     "tieu_de": "How common is Life Path 1?",
+     "doan": "Fairly common: about 11.1% of birth dates from 1940 to 2010 give Life Path 1, close to one date in nine. For number 1, reducing the numbers and adding all the digits always give the same result, so one site can't give you 1 while another gives a different number. This is a count over the calendar, not population statistics."
+    },
+    {
+     "tieu_de": "Which numbers is 1 compatible with?",
+     "doan": "Many popular numerology books group 1 with 5 and 7, the group that likes deciding for itself and needs personal space. People with 1 usually fall into step with anyone who respects their independence. With 2 or 6, a 1 is often reminded to slow down and listen; with another 1, it can easily become two people both wanting to drive. Hieuban does not score matches as good or bad; the Compatibility page shows where each pair flows easily and where it tends to clash."
+    },
+    {
+     "tieu_de": "What careers suit a 1?",
+     "danh_sach": [
+      "Work where they set their own goals: running a small shop, freelancing, taking charge of a project from scratch.",
+      "Pathfinding roles in an organisation: opening new markets, building new teams, testing the first product.",
+      "Work that needs fast decisions under time pressure: event coordination, handling a media crisis.",
+      "Less suited: positions that only follow orders, with no room to decide anything themselves."
+     ]
+    },
+    {
+     "tieu_de": "A number 1 under pressure",
+     "doan": "When cornered, a 1 tends to harden their tone and carry everything alone instead of sharing the work. They often see asking for help as losing. The sign to stop is when they start giving orders at home too. Something to do this week: before each big decision, ask someone else exactly one question: “what do you think I've missed?”."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Birth dates that give Life Path 1 under both methods",
+    "chu_thich": "Three birth dates worked out by the system; for number 1 the two ways of adding always match.",
+    "cot": [
+     "Birth date",
+     "Reducing the numbers (default)",
+     "Adding all the digits"
+    ],
+    "dong": [
+     [
+      "08/09/1982",
+      "day 8, month 9, year 1982 → 20 → 2; 8 + 9 + 2 = 19 → 10 → 1",
+      "8+9+1+9+8+2 = 37 → 10 → 1"
+     ],
+     [
+      "03/04/1965",
+      "day 3, month 4, year 1965 → 21 → 3; 3 + 4 + 3 = 10 → 1",
+      "3+4+1+9+6+5 = 28 → 10 → 1"
+     ],
+     [
+      "27/10/1989",
+      "day 27 → 9, month 10 → 1, year 1989 → 27 → 9; 9 + 1 + 9 = 19 → 10 → 1",
+      "2+7+1+0+1+9+8+9 = 37 → 10 → 1"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "How are 1 and 19 different?",
+     "dap": "19 is one of the totals that reduce to 1, and it carries an added karmic debt lesson about independence and asking for help; a plain 1 does not carry that lesson."
+    },
+    {
+     "hoi": "Does a number 1 make a good boss?",
+     "dap": "Usually described as suited to leadership, provided they learn to delegate and to listen to feedback from the people they lead."
+    },
+    {
+     "hoi": "Do number 1s find teamwork hard?",
+     "dap": "They are usually described as liking to decide for themselves; they work well in a team when given a whole share of the work and full responsibility for it."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "chuong": "Number 1",
+     "nghia": "1 is the first number in the series, linked to will, independence and going first."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Number 1",
+     "nghia": "In the Chaldean system, Cheiro links 1 to the Sun and describes a 1 as an initiator with strong opinions."
+    }
+   ],
+   "y_chinh": [
+    "Close to one birth date in nine gives Life Path 1",
+    "Both ways of adding always agree for number 1",
+    "Usually grouped together: 1, 5, 7",
+    "Under pressure: carries everything, sees asking for help as losing"
+   ]
+  },
+  "so-2": {
+   "muc": [
+    {
+     "tieu_de": "Why is Life Path 2 rarer than the other numbers?",
+     "doan": "Because many totals that would give 2 are kept as 11: only about 4.6% of dates from 1940 to 2010 give 2 when reducing the numbers, and only 1.6% when adding all the digits. The rest stop at the master number 11. The same birth date can give 2 one way and 11 the other, as the table below shows."
+    },
+    {
+     "tieu_de": "Which numbers is 2 compatible with?",
+     "doan": "Popular books often group 2 with 4 and 8, numbers that value stability and real work. A 2 usually feels at ease with people who keep their word and speak gently. With a 5, a 2 can feel out of rhythm, because one needs calm and the other needs to move. With a 1, a 2 tends to give way too much. No pair is considered doomed; what matters is knowing where things need to be said clearly."
+    },
+    {
+     "tieu_de": "What work suits a number 2?",
+     "danh_sach": [
+      "Work that involves listening and keeping relationships over time: customer care, HR, school counselling.",
+      "Roles that coordinate between several parties: project assistant, production coordinator, editorial assistant.",
+      "Meticulous work that catches details others miss: proofreading, testing, internal accounting.",
+      "Less suited: fiercely competitive settings where whoever shouts loudest wins."
+     ]
+    },
+    {
+     "tieu_de": "A number 2 under pressure",
+     "doan": "Under pressure, a 2 usually suffers in silence, nods to keep the peace, then takes the frustration home. They often dwell for too long on something someone said. The sign to watch is when they start apologising even for things that aren't their fault. A suggestion for this week: write down one thing you disagree with, then say it at a meeting or over a meal."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Birth dates with Life Path 2 (and when it becomes 11)",
+    "chu_thich": "The first two rows give 2 both ways; the next two show that the same birth date can give 2 or 11 depending on how you add.",
+    "cot": [
+     "Birth date",
+     "Reducing the numbers (default)",
+     "Adding all the digits"
+    ],
+    "dong": [
+     [
+      "31/05/2009",
+      "day 31 → 4, month 5, year 2009 → 11; 4 + 5 + 11 = 20 → 2",
+      "3+1+5+2+0+0+9 = 20 → 2"
+     ],
+     [
+      "10/11/1952",
+      "day 10 → 1, month 11, year 1952 → 17 → 8; 1 + 11 + 8 = 20 → 2",
+      "1+0+1+1+1+9+5+2 = 20 → 2"
+     ],
+     [
+      "13/11/1985",
+      "day 13 → 4, month 11, year 1985 → 23 → 5; 4 + 11 + 5 = 20 → 2",
+      "1+3+1+1+1+9+8+5 = 29 → 11"
+     ],
+     [
+      "31/10/1950",
+      "day 31 → 4, month 10 → 1, year 1950 → 15 → 6; 4 + 1 + 6 = 11",
+      "3+1+1+0+1+9+5+0 = 20 → 2"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "If I get 2 one way and 11 the other, which number do I read?",
+     "dap": "Hieuban uses reducing the numbers as the default and always tells you when the two methods disagree; you can read both, because 11 still carries the base of 2."
+    },
+    {
+     "hoi": "Is 2 a weak number?",
+     "dap": "No. The gentleness of a 2 is often a strength in keeping people and teams together; what they need to practise is saying what they think."
+    },
+    {
+     "hoi": "What is a 2 like in love?",
+     "dap": "Usually described as faithful, considerate and sensitive to the other person's mood, but shy about naming their own needs."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "chuong": "Number 2",
+     "nghia": "2 is the number of the pair: cooperation, balance, sensitivity to others."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Number 2",
+     "nghia": "Cheiro links 2 to the Moon and describes a 2 as imaginative, gentle and led by feelings."
+    }
+   ],
+   "y_chinh": [
+    "Life Path 2 is rare because many totals stop at 11",
+    "The same birth date can give 2 or 11 depending on the method",
+    "Usually grouped together: 2, 4, 8",
+    "Under pressure: nods to keep the peace, takes the frustration home"
+   ]
+  },
+  "so-3": {
+   "muc": [
+    {
+     "tieu_de": "How many people have Life Path 3?",
+     "doan": "Over the 1940–2010 calendar, about 11.1% of birth dates give Life Path 3, roughly one in nine. 3 is not tied to any master number, so both ways of adding always give the same result. This share counts calendar days and says nothing about how many real people are alive."
+    },
+    {
+     "tieu_de": "Which numbers is 3 compatible with?",
+     "doan": "In the usual grouping, 3 sits with 6 and 9, numbers that lean towards feeling and creativity. A 3 is usually happy around people who laugh easily and enjoy a story. With a 4 or an 8, a 3 can come across as not serious enough, while finding them dry in return. The two sides usually get on better when the 3 keeps appointments and the other side leaves room for fun."
+    },
+    {
+     "tieu_de": "What careers suit a 3?",
+     "danh_sach": [
+      "Work with words: content writing, presenting, teaching, consultative sales.",
+      "Work with images and sound: design, photography, video editing, music.",
+      "Roles that connect with the public: communications, event organising, community management.",
+      "Less suited: working alone with dry figures all day, with nobody to talk to."
+     ]
+    },
+    {
+     "tieu_de": "A number 3 under pressure",
+     "doan": "When tense, a 3 tends to joke more as cover, or talk non-stop without touching what is really worrying them. Some go completely quiet instead, which is very unlike them — and that is the sign to watch for. Try this week: write by hand for ten minutes about what is bothering you; it doesn't have to be good, and nobody has to read it."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Working out Life Path 3 from three sample birth dates",
+    "chu_thich": "The middle column reduces the day, month and year first and then adds; the right-hand column adds every digit at once; both give 3.",
+    "cot": [
+     "Birth date",
+     "Reducing the numbers (default)",
+     "Adding all the digits"
+    ],
+    "dong": [
+     [
+      "21/09/1953",
+      "day 21 → 3, month 9, year 1953 → 18 → 9; 3 + 9 + 9 = 21 → 3",
+      "2+1+9+1+9+5+3 = 30 → 3"
+     ],
+     [
+      "26/08/1958",
+      "day 26 → 8, month 8, year 1958 → 23 → 5; 8 + 8 + 5 = 21 → 3",
+      "2+6+8+1+9+5+8 = 39 → 12 → 3"
+     ],
+     [
+      "26/09/1993",
+      "day 26 → 8, month 9, year 1993 → 22; 8 + 9 + 22 = 39 → 12 → 3",
+      "2+6+9+1+9+9+3 = 39 → 12 → 3"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Do 3s often promise and not deliver?",
+     "dap": "That is the shadow side of 3 most often mentioned. The fix is to promise less, write your promises down and set concrete deadlines."
+    },
+    {
+     "hoi": "Are 3, 12, 21 and 30 the same?",
+     "dap": "They all reduce to 3, so they share the main traits; the Pythagorean tradition doesn't read these totals separately the way it does 13 or 19."
+    },
+    {
+     "hoi": "What should a 3 learn?",
+     "dap": "A skill that helps them see things through: time management, project planning, or the discipline of regular practice."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "chuong": "Number 3",
+     "nghia": "3 is the number of expression: speech, writing, art and the joy of meeting people."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Number 3",
+     "nghia": "Cheiro links 3 to Jupiter and describes a 3 as ambitious, keen to expand and to rise in their field."
+    }
+   ],
+   "y_chinh": [
+    "About one birth date in nine gives Life Path 3",
+    "Usually grouped together: 3, 6, 9",
+    "Work with words, images, sound and the public",
+    "Under pressure: jokes as cover, or goes completely quiet"
+   ]
+  },
+  "so-4": {
+   "muc": [
+    {
+     "tieu_de": "Life Path 4 and 22: why do the two methods differ?",
+     "doan": "Because 22 is a master number that reduces to 4, some birth dates keep 22 under one method and give 4 under the other. Counting over the 1940–2010 calendar, reducing the numbers gives Life Path 4 on about 8.1% of dates, and adding all the digits on about 8.8%. If you see two different numbers, you can read both 4 and 22, because 22 still stands on the base of 4."
+    },
+    {
+     "tieu_de": "Which numbers is 4 compatible with?",
+     "doan": "The group usually paired with 4 is 2 and 8, numbers that value solid plans and finances. A 4 tends to get on with people who are punctual and do their share. With a 5 or a 3, a 4 can feel out of step because they change their minds quickly. If each side learns a little from the other, the 4 gains flexibility and the other gains a foundation."
+    },
+    {
+     "tieu_de": "What careers suit a number 4?",
+     "danh_sach": [
+      "Work that needs procedures and precision: accounting, internal audit, civil engineering, technical roles.",
+      "Roles that keep systems running smoothly: operations, warehouse management, data administration.",
+      "Skilled manual trades: carpentry, mechanics, professional cooking.",
+      "Less suited: work that keeps changing direction, where nobody says clearly what result is needed."
+     ]
+    },
+    {
+     "tieu_de": "A number 4 under pressure",
+     "doan": "When things get messy, a 4 tends to tighten the rules, work overtime and get irritated with anyone who does it differently. They rarely complain, so people around them may not realise they are overloaded. Try this week: pick one task you do out of habit, ask “what if I skipped this step?”, and try skipping it for one day."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Examples of Life Path 4, and when it becomes 22",
+    "chu_thich": "The first two rows give 4 both ways; in the next two, one method gives 4 and the other keeps the master number 22.",
+    "cot": [
+     "Birth date",
+     "Reducing the numbers (default)",
+     "Adding all the digits"
+    ],
+    "dong": [
+     [
+      "22/03/1986",
+      "day 22, month 3, year 1986 → 24 → 6; 22 + 3 + 6 = 31 → 4",
+      "2+2+3+1+9+8+6 = 31 → 4"
+     ],
+     [
+      "31/07/1973",
+      "day 31 → 4, month 7, year 1973 → 20 → 2; 4 + 7 + 2 = 13 → 4",
+      "3+1+7+1+9+7+3 = 31 → 4"
+     ],
+     [
+      "30/12/1951",
+      "day 30 → 3, month 12 → 3, year 1951 → 16 → 7; 3 + 3 + 7 = 13 → 4",
+      "3+0+1+2+1+9+5+1 = 22"
+     ],
+     [
+      "18/11/1955",
+      "day 18 → 9, month 11, year 1955 → 20 → 2; 9 + 11 + 2 = 22",
+      "1+8+1+1+1+9+5+5 = 31 → 4"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is 4 a number of hardship?",
+     "dap": "Tradition links 4 with persistent work, but whether it feels hard depends on how each person paces themselves."
+    },
+    {
+     "hoi": "How are 4 and 13 related?",
+     "dap": "13 is a total that reduces to 4 and is read as a karmic debt, stressing a lesson in discipline; a plain 4 usually doesn't carry that label."
+    },
+    {
+     "hoi": "Are number 4s romantic?",
+     "dap": "They usually show affection through actions — fixing things, sorting paperwork, picking you up on time — more than sweet words."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "chuong": "Number 4",
+     "nghia": "4 is the square with four corners: foundations, order, working systematically."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Number 4",
+     "nghia": "Cheiro links 4 to Uranus and describes a 4 as someone who sees things their own way and often goes against the crowd."
+    }
+   ],
+   "y_chinh": [
+    "A birth date can give 4 or 22 depending on the method",
+    "Usually grouped together: 2, 4, 8",
+    "Work that needs procedures, precision and skill",
+    "Under pressure: tightens the rules, works overtime, rarely complains"
+   ]
+  },
+  "so-5": {
+   "muc": [
+    {
+     "tieu_de": "What share of birth dates give Life Path 5?",
+     "doan": "About 11.1% of dates from 1940 to 2010, roughly the same as the odd numbers 1, 3, 7 and 9. No master number gets in the way of 5, so reducing the numbers or adding all the digits both give 5. Those whose total passes through 14 also read the karmic debt 14 lesson about moderation."
+    },
+    {
+     "tieu_de": "Which numbers is 5 compatible with?",
+     "doan": "The familiar grouping places 5 next to 1 and 7, people who need freedom and dislike being held tight. A 5 is usually happy with people who love to travel and try things. With a 4 or a 6, a 5 can feel tied down, while the other side finds the 5 restless. This pair still lasts when both agree clearly on their own freedom and their shared commitments."
+    },
+    {
+     "tieu_de": "What careers suit a 5?",
+     "danh_sach": [
+      "Work that involves travel: tour guiding, regional sales, field reporting.",
+      "Work with lots of people and situations: sales, event organising, brokering.",
+      "Work that needs quick adaptation: early-stage start-ups, trend-led content production.",
+      "Less suited: a desk job that is exactly the same every day, with few people and little change."
+     ]
+    },
+    {
+     "tieu_de": "A number 5 under pressure",
+     "doan": "When stuck, a 5 usually wants to escape: a spur-of-the-moment trip, shopping, taking on something new to forget the old. A change of scene helps them breathe, but if it becomes a habit the old problem is still there. A small task for this week: before you change anything, sit down for fifteen minutes and write out what you are trying to avoid."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Three sample birth dates with Life Path 5",
+    "chu_thich": "Worked out by the system; 5 gives the same result whichever way you add.",
+    "cot": [
+     "Birth date",
+     "Reducing the numbers (default)",
+     "Adding all the digits"
+    ],
+    "dong": [
+     [
+      "02/11/2008",
+      "day 2, month 11, year 2008 → 10 → 1; 2 + 11 + 1 = 14 → 5",
+      "2+1+1+2+0+0+8 = 14 → 5"
+     ],
+     [
+      "17/03/1956",
+      "day 17 → 8, month 3, year 1956 → 21 → 3; 8 + 3 + 3 = 14 → 5",
+      "1+7+3+1+9+5+6 = 32 → 5"
+     ],
+     [
+      "19/03/2008",
+      "day 19 → 10 → 1, month 3, year 2008 → 10 → 1; 1 + 3 + 1 = 5",
+      "1+9+3+2+0+0+8 = 23 → 5"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Do 5s find it hard to commit in love?",
+     "dap": "They are usually described as needing plenty of space; they commit well when the other person doesn't hold on too tight and the two of them do new things together."
+    },
+    {
+     "hoi": "Does freelancing suit a 5?",
+     "dap": "Usually seen as a good fit, provided they keep a minimum work schedule and a buffer fund for quiet months."
+    },
+    {
+     "hoi": "Should a 5 change jobs often?",
+     "dap": "Changing to learn more is a strength; changing just out of boredom is worth waiting at least one project cycle before deciding."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "chuong": "Number 5",
+     "nghia": "5 sits in the middle of 1–9: freedom, change, experience through the five senses."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Number 5",
+     "nghia": "Cheiro links 5 to Mercury and describes a 5 as quick, sociable and adaptable."
+    }
+   ],
+   "y_chinh": [
+    "Life Path 5 comes out the same both ways",
+    "Usually grouped together: 1, 5, 7",
+    "Work with travel, lots of people and lots of situations",
+    "Under pressure: wants to escape through trips and shopping"
+   ]
+  },
+  "so-6": {
+   "muc": [
+    {
+     "tieu_de": "Why do some people get 6 one time and 33 another?",
+     "doan": "Because 33 is a master number standing on the base of 6, and the two ways of adding the Life Path keep 33 on different dates. Over the 1940–2010 calendar, reducing the numbers gives 6 on about 10.2% of dates, while adding all the digits gives only 5.4%, because many totals of 33 are kept as they are. The table below includes two birth dates that differ between 6 and 33."
+    },
+    {
+     "tieu_de": "Which numbers is 6 compatible with?",
+     "doan": "Popular books often pair 6 with 3 and 9, numbers that live by feeling and like to care for others. A 6 usually gets on with people who are grateful and return the care. With a 1 or a 5, a 6 can feel left behind, while they find the 6 over-anxious. A clear agreement about who looks after what at home usually makes this pair much easier."
+    },
+    {
+     "tieu_de": "What careers suit a 6?",
+     "danh_sach": [
+      "Caring work: nursing, early-years teaching, social work.",
+      "Work that makes living spaces beautiful: interior design, gardening, home cooking.",
+      "Roles that safeguard service quality: hotel management, premium customer care.",
+      "Less suited: cold environments measured only in numbers, where nobody checks on anybody."
+     ]
+    },
+    {
+     "tieu_de": "A number 6 under pressure",
+     "doan": "When tense, a 6 tends to take on other people's tasks, give more instructions, and get worn out without anyone noticing. They may feel hurt that they have looked after everyone while few look after them. Try this week: ask someone at home “is there something I do that you'd rather do yourself?”, then hand it over."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Birth dates with Life Path 6, and when it becomes 33",
+    "chu_thich": "The first two rows give 6 both ways; in the next two, one method gives 6 and the other keeps 33.",
+    "cot": [
+     "Birth date",
+     "Reducing the numbers (default)",
+     "Adding all the digits"
+    ],
+    "dong": [
+     [
+      "05/06/2002",
+      "day 5, month 6, year 2002 → 4; 5 + 6 + 4 = 15 → 6",
+      "5+6+2+0+0+2 = 15 → 6"
+     ],
+     [
+      "18/08/1978",
+      "day 18 → 9, month 8, year 1978 → 25 → 7; 9 + 8 + 7 = 24 → 6",
+      "1+8+8+1+9+7+8 = 42 → 6"
+     ],
+     [
+      "06/06/1956",
+      "day 6, month 6, year 1956 → 21 → 3; 6 + 6 + 3 = 15 → 6",
+      "6+6+1+9+5+6 = 33"
+     ],
+     [
+      "22/09/2000",
+      "day 22, month 9, year 2000 → 2; 22 + 9 + 2 = 33",
+      "2+2+9+2+0+0+0 = 15 → 6"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Does a 6 always sacrifice themselves for the family?",
+     "dap": "Not always. Tradition says a 6 takes on responsibility readily; how much to sacrifice is each person's own choice."
+    },
+    {
+     "hoi": "How are 6 and 33 different?",
+     "dap": "They share the theme of care and responsibility; 33 is described as a more intense version, bringing more pressure."
+    },
+    {
+     "hoi": "Does business suit a 6?",
+     "dap": "It suits close, personal models such as family services, food and education, where customers notice the dedication."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "chuong": "Number 6",
+     "nghia": "6 is linked to home, responsibility, harmony and care."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Number 6",
+     "nghia": "Cheiro links 6 to Venus and describes a 6 as a lover of beauty, focused on family and harmony."
+    }
+   ],
+   "y_chinh": [
+    "The same birth date can give 6 or 33 depending on the method",
+    "Usually grouped together: 3, 6, 9",
+    "Caring work and making living spaces beautiful",
+    "Under pressure: takes on others' tasks, then feels hurt"
+   ]
+  },
+  "so-7": {
+   "muc": [
+    {
+     "tieu_de": "Is Life Path 7 rare?",
+     "doan": "Not rare: about 11.1% of calendar dates from 1940 to 2010 give Life Path 7, the same as 1, 3, 5, 8 and 9. The impression that 7 is rare may come from 7s usually being quiet. Both ways of adding always give 7; those whose total passes through 16 also read the karmic debt 16 lesson."
+    },
+    {
+     "tieu_de": "Which numbers is 7 compatible with?",
+     "doan": "7 is usually grouped with 1 and 5, numbers that live in their heads and need personal space. A 7 tends to suit people who enjoy deep conversation and don't demand to be together all the time. With a 2 or a 6, a 7 can seem cold when they only need quiet. Saying in advance “I need an evening on my own” helps this pair avoid misunderstandings."
+    },
+    {
+     "tieu_de": "What careers suit a 7?",
+     "danh_sach": [
+      "Work that goes deep: research, data analysis, systems programming, specialist law.",
+      "Work that needs close scrutiny: quality control, specialist editing, forensic assessment.",
+      "Advisory roles rather than the top job: in-house expert, strategy consultant.",
+      "Less suited: noisy work with constant meetings and no quiet time to think."
+     ]
+    },
+    {
+     "tieu_de": "A number 7 under pressure",
+     "doan": "When cornered, a 7 tends to withdraw, switch off the phone, give short answers and turn a little sarcastic. They try to think their way to a solution before telling anyone. Quiet time helps them, but if it goes on too long, the people close to them get pushed away. A suggestion for this week: put a limit on your time alone, say two days, then tell one person what you are thinking."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Birth date examples: Life Path 7 under both methods",
+    "chu_thich": "Three sample birth dates, each from a different decade, all give 7 whichever way you add.",
+    "cot": [
+     "Birth date",
+     "Reducing the numbers (default)",
+     "Adding all the digits"
+    ],
+    "dong": [
+     [
+      "14/12/1961",
+      "day 14 → 5, month 12 → 3, year 1961 → 17 → 8; 5 + 3 + 8 = 16 → 7",
+      "1+4+1+2+1+9+6+1 = 25 → 7"
+     ],
+     [
+      "21/03/1981",
+      "day 21 → 3, month 3, year 1981 → 19 → 10 → 1; 3 + 3 + 1 = 7",
+      "2+1+3+1+9+8+1 = 25 → 7"
+     ],
+     [
+      "07/09/2007",
+      "day 7, month 9, year 2007 → 9; 7 + 9 + 9 = 25 → 7",
+      "7+9+2+0+0+7 = 25 → 7"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Are 7s meant to marry late?",
+     "dap": "The number doesn't decide when anyone marries. Tradition only says a 7 often falls in love slowly and needs time to trust."
+    },
+    {
+     "hoi": "Is 7 a spiritual number?",
+     "dap": "7 is often linked to reflection and the search for meaning; some follow that through religion, others through science."
+    },
+    {
+     "hoi": "Does business suit a 7?",
+     "dap": "It suits areas that need deep product knowledge rather than mass selling; it helps to have a partner who handles the people side."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "chuong": "Number 7",
+     "nghia": "7 is linked to reflection, knowledge and looking for the answer beneath the surface."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Number 7",
+     "nghia": "Cheiro links 7 to Neptune and describes a 7 as intuitive, reflective and fond of travel."
+    }
+   ],
+   "y_chinh": [
+    "Life Path 7 is not rare: close to one birth date in nine",
+    "Usually grouped together: 1, 5, 7",
+    "Deep work, close scrutiny, advisory roles",
+    "Under pressure: withdraws — set a limit on time alone"
+   ]
+  },
+  "so-8": {
+   "muc": [
+    {
+     "tieu_de": "How many birth dates give Life Path 8?",
+     "doan": "About 11.1% of Gregorian dates from 1940 to 2010, under both ways of adding. There is no master number above 8, so any site that calculates correctly gives the same result. This figure counts calendar days; it is not a share of the population."
+    },
+    {
+     "tieu_de": "Which numbers is 8 compatible with?",
+     "doan": "8 is usually grouped with 2 and 4, practical numbers that value results and material stability. An 8 tends to respect people who get things done and keep their word. With a 3 or a 9, an 8 may find them careless with money, while they find the 8 too focused on it. This pair runs more smoothly when it is clear who handles the money and who handles shared fun."
+    },
+    {
+     "tieu_de": "What careers suit an 8?",
+     "danh_sach": [
+      "Roles that manage resources: executive management, finance, running large projects.",
+      "Work with clear measures: business, real estate, B2B sales.",
+      "Work that needs decisiveness under risk: negotiating contracts, restructuring a department.",
+      "Less suited: work with no measurable goal, where nobody owns the result."
+     ]
+    },
+    {
+     "tieu_de": "A number 8 under pressure",
+     "doan": "When pressure rises, an 8 tends to work even harder, control more tightly and measure even loved ones by results. They rarely allow themselves rest for fear of losing momentum. The sign to stop is when every conversation at home comes back to money. Something you can do this week: keep one evening free of work talk, with your email closed."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Life Path 8: three worked birth dates",
+    "chu_thich": "Each row shows the two ways of adding taking different routes but both stopping at 8.",
+    "cot": [
+     "Birth date",
+     "Reducing the numbers (default)",
+     "Adding all the digits"
+    ],
+    "dong": [
+     [
+      "29/07/2006",
+      "day 29 → 11, month 7, year 2006 → 8; 11 + 7 + 8 = 26 → 8",
+      "2+9+7+2+0+0+6 = 26 → 8"
+     ],
+     [
+      "07/04/1968",
+      "day 7, month 4, year 1968 → 24 → 6; 7 + 4 + 6 = 17 → 8",
+      "7+4+1+9+6+8 = 35 → 8"
+     ],
+     [
+      "13/06/1960",
+      "day 13 → 4, month 6, year 1960 → 16 → 7; 4 + 6 + 7 = 17 → 8",
+      "1+3+6+1+9+6+0 = 26 → 8"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is 8 a number of wealth?",
+     "dap": "No number promises wealth. 8 is only described as paying close attention to money, power and how to manage them."
+    },
+    {
+     "hoi": "Are 8s hard to please?",
+     "dap": "They usually set high standards for themselves and others; what they need to practise is giving praise before criticism."
+    },
+    {
+     "hoi": "What is an 8 like in love?",
+     "dap": "They usually show love by making sure the other person has everything they need; they can forget that the other person also needs time and a kind word."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "chuong": "Number 8",
+     "nghia": "8 is linked to organisation, authority, material matters and the responsibility of using resources."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Number 8",
+     "nghia": "Cheiro links 8 to Saturn and describes an 8 as persevering and serious, often mistaken for cold."
+    }
+   ],
+   "y_chinh": [
+    "Life Path 8 comes out the same both ways",
+    "Usually grouped together: 2, 4, 8",
+    "Resource management, work with clear measures",
+    "Under pressure: works harder, measures loved ones by results"
+   ]
+  },
+  "so-9": {
+   "muc": [
+    {
+     "tieu_de": "Is Life Path 9 common?",
+     "doan": "Yes: about 11.1% of birth dates from 1940 to 2010 give Life Path 9, like the other odd numbers. 9 is not tied to a master number, so both ways of adding give 9. A small tip: if the sum of the digits is divisible by 9, the Life Path is always 9."
+    },
+    {
+     "tieu_de": "Which numbers is 9 compatible with?",
+     "doan": "Books usually place 9 with 3 and 6, numbers that live by feeling and want to do something useful for others. A 9 tends to suit people with ideals who still take care of practical matters. With an 8 or a 4, a 9 may find them too practical, while they find the 9 too lofty. This pair complements each other well when the 9 looks after the vision and the other looks after the plan."
+    },
+    {
+     "tieu_de": "What work suits a number 9?",
+     "danh_sach": [
+      "Work that helps the community: non-profits, public health, community education.",
+      "Work that tells human stories: journalism, documentary film-making, writing books.",
+      "Roles that connect cultures: diplomacy, travel, translation.",
+      "Less suited: work purely for short-term profit, where nobody is seen to be helped."
+     ]
+    },
+    {
+     "tieu_de": "A number 9 under pressure",
+     "doan": "When stressed, a 9 tends to look after others even more so they don't have to look at their own situation. They also often feel let down when others don't live up to the ideals they have set. The sign to stop is catching yourself saying “after all I've done for them”. A suggestion for this week: do one thing purely for yourself, not for anyone else."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Birth dates that give Life Path 9",
+    "chu_thich": "Three sample birth dates; the digit totals in the right-hand column are all divisible by 9.",
+    "cot": [
+     "Birth date",
+     "Reducing the numbers (default)",
+     "Adding all the digits"
+    ],
+    "dong": [
+     [
+      "26/09/2008",
+      "day 26 → 8, month 9, year 2008 → 10 → 1; 8 + 9 + 1 = 18 → 9",
+      "2+6+9+2+0+0+8 = 27 → 9"
+     ],
+     [
+      "19/08/2007",
+      "day 19 → 10 → 1, month 8, year 2007 → 9; 1 + 8 + 9 = 18 → 9",
+      "1+9+8+2+0+0+7 = 27 → 9"
+     ],
+     [
+      "09/12/1968",
+      "day 9, month 12 → 3, year 1968 → 24 → 6; 9 + 3 + 6 = 18 → 9",
+      "9+1+2+1+9+6+8 = 36 → 9"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is 9, as the last number, a number of endings?",
+     "dap": "9 is read as the number of completion and giving; it doesn't mean a 9 meets more endings in life than anyone else."
+    },
+    {
+     "hoi": "Does charity work suit a 9?",
+     "dap": "It is usually seen as a good fit; choose work within your means and keep boundaries so you don't give until you are drained."
+    },
+    {
+     "hoi": "Are 9, 18 and 27 different?",
+     "dap": "They all reduce to 9, so they share the main traits; the Pythagorean tradition doesn't treat these totals as karmic debts."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "chuong": "Number 9",
+     "nghia": "9 closes the series 1–9: tolerance, ideals and giving."
+    },
+    {
+     "sach": "Cheiro's Book of Numbers (1926)",
+     "chuong": "Number 9",
+     "nghia": "Cheiro links 9 to Mars and describes a 9 as energetic, bold and ready to fight for a cause."
+    }
+   ],
+   "y_chinh": [
+    "If the digit total is divisible by 9, the Life Path is 9",
+    "Usually grouped together: 3, 6, 9",
+    "Suits community work and telling human stories",
+    "Under pressure: looks after others to avoid looking inward"
+   ]
+  },
+  "so-11": {
+   "muc": [
+    {
+     "tieu_de": "Is Life Path 11 rare?",
+     "doan": "It depends on how you add: reducing the numbers gives 11 on about 6.5% of dates from 1940 to 2010, adding all the digits on about 9.5%. So the same person can be an 11 on one site and a 2 on another. Hieuban uses reducing the numbers as the default and tells you when the two methods disagree."
+    },
+    {
+     "tieu_de": "Which numbers is 11 compatible with?",
+     "doan": "11 stands on the base of 2, so it is usually grouped with 2, 4 and 8, sharing a need for calm and trust. An 11 tends to suit someone steady and calm who helps them cool down when they worry. With someone just as highly sensitive, such as another 11, the two understand each other easily but can also worry at the same time. No pair is considered doomed; they just differ in where things need to be said clearly."
+    },
+    {
+     "tieu_de": "What careers suit an 11?",
+     "danh_sach": [
+      "Work that involves reading people: counselling, coaching, special-needs education.",
+      "Work that conveys ideas: public speaking, writing, the performing arts.",
+      "Roles that spot problems early: user research, product experience testing.",
+      "Less suited: noisy settings with constant friction and no time for the mind to rest."
+     ]
+    },
+    {
+     "tieu_de": "A number 11 under pressure",
+     "doan": "11 is the high-intensity version of 2, so pressure tends to hit them harder: overthinking, broken sleep, worrying about things that haven't happened. The shadow side is setting very high expectations for themselves and then feeling they fall short. A small habit for the week: switch off notifications after 9 pm and write down three worries on paper before bed. If the anxiety lasts for weeks, look for a professional counsellor; this is not medical advice and does not replace a doctor."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Birth dates with Life Path 11, and when it becomes 2",
+    "chu_thich": "The first two rows give 11 both ways; the next two show 11 and 2 swapping places when you change the method.",
+    "cot": [
+     "Birth date",
+     "Reducing the numbers (default)",
+     "Adding all the digits"
+    ],
+    "dong": [
+     [
+      "19/06/1984",
+      "day 19 → 10 → 1, month 6, year 1984 → 22; 1 + 6 + 22 = 29 → 11",
+      "1+9+6+1+9+8+4 = 38 → 11"
+     ],
+     [
+      "18/10/1999",
+      "day 18 → 9, month 10 → 1, year 1999 → 28 → 10 → 1; 9 + 1 + 1 = 11",
+      "1+8+1+0+1+9+9+9 = 38 → 11"
+     ],
+     [
+      "20/12/1950",
+      "day 20 → 2, month 12 → 3, year 1950 → 15 → 6; 2 + 3 + 6 = 11",
+      "2+0+1+2+1+9+5+0 = 20 → 2"
+     ],
+     [
+      "25/04/1989",
+      "day 25 → 7, month 4, year 1989 → 27 → 9; 7 + 4 + 9 = 20 → 2",
+      "2+5+4+1+9+8+9 = 38 → 11"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Are 11s chosen people?",
+     "dap": "No. A master number is read as a higher intensity, with greater pressure; it doesn't make anyone better than anyone else."
+    },
+    {
+     "hoi": "If I was born on the 11th or 29th, am I an 11?",
+     "dap": "If you were born on the 11th or the 29th, your Birthday number is 11; your Life Path still depends on the month, the year and the method."
+    },
+    {
+     "hoi": "Should an 11 also read the page on number 2?",
+     "dap": "Yes. 11 carries the base of 2, so many of the 2's traits around cooperation and sensitivity still apply, more strongly."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "chuong": "Master number 11",
+     "nghia": "11 is the first master number, kept as it is when working out the Life Path and read as the high-intensity version of 2: intuition and sensitivity."
+    }
+   ],
+   "y_chinh": [
+    "11 or 2, depending on how the Life Path is added",
+    "11 is the high-intensity 2, not a chosen one",
+    "Suits work reading people and conveying ideas",
+    "Under pressure: overthinking; switch off notifications after 9 pm"
+   ]
+  },
+  "so-22": {
+   "muc": [
+    {
+     "tieu_de": "How many people have Life Path 22?",
+     "doan": "Not many: about 3.0% of dates from 1940 to 2010 give 22 when reducing the numbers, and 2.3% when adding all the digits. The two methods often land on different dates, so someone who gets 22 one way can easily get 4 the other. The example table below shows both cases."
+    },
+    {
+     "tieu_de": "Which numbers is 22 compatible with?",
+     "doan": "22 stands on the base of 4, so it is often grouped with 2, 4 and 8, people who value real work and long plans. A 22 tends to suit someone who can live with a big-project pace and doesn't expect them at every gathering. With a 3 or a 5, a 22 may find them not serious enough. Yet the other side's lightness often helps the 22 ease up."
+    },
+    {
+     "tieu_de": "What careers suit a number 22?",
+     "danh_sach": [
+      "Building large systems: urban planning, architecture, infrastructure, systems engineering.",
+      "Running multi-layered organisations: operations director, programme manager.",
+      "Projects lasting years that need both vision and detail: building a school, setting up a social enterprise.",
+      "Less suited: fragmented, short-term work that doesn't seem to lead anywhere."
+     ]
+    },
+    {
+     "tieu_de": "A number 22 under pressure",
+     "doan": "22 is the high-intensity version of 4: when pressure rises, they take on more responsibility, set themselves tougher deadlines, and get frustrated when things aren't big enough yet. Others do the opposite, putting things off because conditions aren't right for something big. Both are exhausting. A suggestion for this week: pick the smallest part of the big plan, finish it within seven days, and write it down."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Birth dates with Life Path 22, and when it becomes 4",
+    "chu_thich": "The first two rows give 22 both ways; the next two switch between 22 and 4 when you change the method.",
+    "cot": [
+     "Birth date",
+     "Reducing the numbers (default)",
+     "Adding all the digits"
+    ],
+    "dong": [
+     [
+      "26/12/2009",
+      "day 26 → 8, month 12 → 3, year 2009 → 11; 8 + 3 + 11 = 22",
+      "2+6+1+2+2+0+0+9 = 22"
+     ],
+     [
+      "08/06/2006",
+      "day 8, month 6, year 2006 → 8; 8 + 6 + 8 = 22",
+      "8+6+2+0+0+6 = 22"
+     ],
+     [
+      "14/09/1997",
+      "day 14 → 5, month 9, year 1997 → 26 → 8; 5 + 9 + 8 = 22",
+      "1+4+9+1+9+9+7 = 40 → 4"
+     ],
+     [
+      "11/10/1963",
+      "day 11, month 10 → 1, year 1963 → 19 → 10 → 1; 11 + 1 + 1 = 13 → 4",
+      "1+1+1+0+1+9+6+3 = 22"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is 22 the number of people who do great things?",
+     "dap": "Tradition describes 22 as the high intensity of 4, linked to turning ideas into systems; the real scale depends on each person."
+    },
+    {
+     "hoi": "If I was born on the 22nd, is my Life Path 22?",
+     "dap": "No. Being born on the 22nd gives you a Birthday number of 22; the Life Path adds the month and year too, and depends on the method."
+    },
+    {
+     "hoi": "Should a 22 read the page on number 4?",
+     "dap": "Yes, because 22 stands on the base of 4; the 4's discipline and systematic work still apply, under higher pressure."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "chuong": "Master number 22",
+     "nghia": "22 is a master number kept as it is when working out the Life Path, read as the high-intensity version of 4: turning a vision into something real."
+    }
+   ],
+   "y_chinh": [
+    "Life Path 22 is uncommon; 22 or 4 depends on the method",
+    "22 is the high-intensity 4, with heavy pressure",
+    "Suits building systems and multi-year projects",
+    "This week: finish the smallest part of the big plan"
+   ]
+  },
+  "so-33": {
+   "muc": [
+    {
+     "tieu_de": "How rare is Life Path 33?",
+     "doan": "It depends a great deal on how you add: reducing the numbers gives 33 on only about 0.9% of dates from 1940 to 2010, while adding all the digits gives 33 on about 5.8%. This big gap is why many people find they are a 33 on one site but a 6 on another. Hieuban shows both numbers when they disagree."
+    },
+    {
+     "tieu_de": "Which numbers is 33 compatible with?",
+     "doan": "33 stands on the base of 6, so it is usually grouped with 3, 6 and 9, sharing a need to care and to give. A 33 tends to suit someone who knows how to receive and give back, rather than taking all their devotion. With a 1 or an 8, a 33 may feel their feelings are taken lightly. Saying clearly “I need to be asked how I am too” helps this pair rebalance."
+    },
+    {
+     "tieu_de": "What careers suit a 33?",
+     "danh_sach": [
+      "Work that supports others over the long term: education, social work, caring for older people.",
+      "Roles that lead by example: community leader, vocational mentor.",
+      "Healing through the arts: music therapy, art for children.",
+      "Less suited: work that forces profit above people for a long time."
+     ]
+    },
+    {
+     "tieu_de": "A number 33 under pressure",
+     "doan": "33 is the high-intensity version of 6: when tense, they take on extra responsibility for the whole group, forget to eat and rest, and feel guilty for resting. The shadow side is dissolving into the role of looking after everyone until they no longer know what they want. A small task for this week: write down three things you enjoy that don't serve anyone, then do one. Regular meals and enough sleep are habits worth keeping; this is not medical advice and does not replace a doctor."
+    }
+   ],
+   "bang": {
+    "tieu_de": "Birth dates with Life Path 33, and when it becomes 6",
+    "chu_thich": "The first two rows give 33 both ways; the next two give 33 one way and 6 the other.",
+    "cot": [
+     "Birth date",
+     "Reducing the numbers (default)",
+     "Adding all the digits"
+    ],
+    "dong": [
+     [
+      "22/04/1969",
+      "day 22, month 4, year 1969 → 25 → 7; 22 + 4 + 7 = 33",
+      "2+2+4+1+9+6+9 = 33"
+     ],
+     [
+      "14/06/1993",
+      "day 14 → 5, month 6, year 1993 → 22; 5 + 6 + 22 = 33",
+      "1+4+6+1+9+9+3 = 33"
+     ],
+     [
+      "22/03/1970",
+      "day 22, month 3, year 1970 → 17 → 8; 22 + 3 + 8 = 33",
+      "2+2+3+1+9+7+0 = 24 → 6"
+     ],
+     [
+      "07/05/1983",
+      "day 7, month 5, year 1983 → 21 → 3; 7 + 5 + 3 = 15 → 6",
+      "7+5+1+9+8+3 = 33"
+     ]
+    ]
+   },
+   "hoi_dap": [
+    {
+     "hoi": "Is 33 the highest, best number?",
+     "dap": "No. 33 is only read as the high-intensity version of 6, with greater pressure of responsibility; no number is better than another."
+    },
+    {
+     "hoi": "Why doesn't another site say I'm a 33?",
+     "dap": "Many sites use only one method. Adding all the digits keeps 33 more often than reducing the numbers."
+    },
+    {
+     "hoi": "Should a 33 also read the page on number 6?",
+     "dap": "Yes. 33 stands on the base of 6, so the traits around family, responsibility and care still apply, more strongly."
+    }
+   ],
+   "trich_dan": [
+    {
+     "sach": "Pythagorean numerology — the most widely used system",
+     "chuong": "Master number 33",
+     "nghia": "33 is a master number kept as it is when working out the Life Path, read as the high-intensity version of 6: leading through care."
+    }
+   ],
+   "y_chinh": [
+    "33 or 6 depends on the method, with a very large gap",
+    "33 is the high-intensity 6, with heavy responsibility",
+    "Suits work supporting others over the long term",
+    "This week: do one thing you enjoy that serves no one"
+   ]
+  }
+ }
+}
