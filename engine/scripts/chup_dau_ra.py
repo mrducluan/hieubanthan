@@ -118,7 +118,7 @@ def main() -> int:
             cu = {m: v for m, v in cu.items() if m in bam}
         lech = [m for m in sorted(set(cu) | set(bam)) if cu.get(m) != bam.get(m)]
         print(f"lệch {len(lech)}/{len(cu)}")
-        for m in lech[:50]:
+        for m in lech[:int(os.environ.get("SO_LECH", "50"))]:
             print("  ", m, "thiếu ở golden" if m not in cu else "thiếu ở lần chạy" if m not in bam else "")
         return 1 if lech else 0
     ghi(bam, mau)

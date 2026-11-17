@@ -143,6 +143,10 @@ SO: dict[str, dict] = {
         "thanso_meanings.json", "thanso_depth.json", "thanso_chaldean.json", "thanso_cap_so.json", "thanso_chi_so_phu.json",
         "thanso_bieu_do.json", "thanso_chan_dung.json", "thanso_linh_vuc.json", "thanso_quan_he.json", "thanso_giai_thich.json",
         "thanso_doi_chieu.json")},
+    # TK-2: số kép 10–52 có câu nguyên văn Cheiro (khoá `kep.*.trich`) — phần này lên mức có nguyên văn đối chiếu
+    "thanso_chaldean.json": {"mang": "thanso", "muc": "truyen_thong", "phan": {
+        "kep": _nv("thanso_cheiro_book_of_numbers_1926.json", "tests/test_tk2_thanso_cheiro.py::test_moi_so_kep_co_cau_sach",
+                   "TK-2: 43/43 số kép có câu Cheiro (OCR, can_doi_chieu); bảng chữ 23/26 khớp; lời Việt là tóm ý trung tính")}},
     **{f: {"mang": "thanso", "muc": "bien_tap"} for f in (
         "thanso_ban_do.json", "thanso_hom_nay.json", "thanso_noi_dau.json", "thanso_xu_ly.json", "thanso_do_thi.json",
         "bo_sung_so.json", "bo_sung_so_kep.json", "bo_sung_cap_so.json", "bo_sung_nghe.json", "bo_sung_tinh_yeu.json",
