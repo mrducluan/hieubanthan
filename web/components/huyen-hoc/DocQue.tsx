@@ -36,6 +36,8 @@ export interface DocQueKq {
     tieu_de: string; han: string; dich: string; y?: string | null; nom_na?: string | null; thoan?: string | null; chu?: boolean;
     /** KT-TT: Tiểu tượng của hào + lời Trình Di, Chu Hy (engine trích từ bản dịch Ngô Tất Tố; web chỉ hiện). */
     tieu_tuong?: { han: string; dich: string } | null; trinh?: string | null; chu_hy?: string | null; nguoi_dich?: string | null;
+    /** TK-2 việc 4: bản dịch James Legge (1882) — chỉ bản Anh, chỉ quẻ đã qua bộ kiểm cấu trúc (engine quyết). */
+    legge?: { dich: string; nguoi_dich: string } | null;
   }[];
   goc_nhin: { chinh: string; nghia_ly: GocNhin; mai_hoa: GocNhinMaiHoa | null; luc_hao: GocNhinLucHao | null };
   ung_ky: { chi: string; ly_do: string; ngay_gan_nhat: string; sau_bao_nhieu_ngay: number }[];
@@ -228,6 +230,9 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
                   <p className="font-semibold text-fg">{l.chu ? c("dq.loi_chu") : ""}{l.tieu_de}</p>
                   <p className="text-fg-muted" style={{ fontFamily: "var(--font-han), serif" }}>「{l.han}」</p>
                   <p className="text-fg-muted">{l.dich}{l.y ? ` — ${l.y}` : ""}</p>
+                  {l.legge?.dich && (
+                    <p className="text-fg-faint" data-testid="loi-legge">{c("dq.legge", { x: l.legge.nguoi_dich })}{l.legge.dich}</p>
+                  )}
                   {l.thoan && <p className="text-fg-faint">{c("dq.thoan")}{l.thoan}</p>}
                   {l.nom_na && <p className="text-fg-faint">{c("dq.nom_na")}{l.nom_na}</p>}
                   {l.tieu_tuong && (

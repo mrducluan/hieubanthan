@@ -199,6 +199,7 @@ export const CHU_KINH_DICH_UI = {
   "dq.loi_kinh": m(DQ, "Lời kinh nguyên văn (Chu Dịch)", "The original text (Book of Changes)"),
   "dq.loi_chu": m(DQ, "【Lời chủ】 ", "[Leading text] "),
   "dq.thoan": m(DQ, "Thoán truyện: ", "Commentary on the Judgement: "),
+  "dq.legge": m(DQ, "Bản dịch {x}: ", "Translation — {x}: "),
   "dq.nom_na": m(DQ, "Hiểu đơn giản: ", "In plain words: "),
   "dq.tieu_tuong": m(DQ, "Tiểu tượng: ", "Small Image: "),
   "dq.trinh": m(DQ, "Trình Di giảng: ", "Cheng Yi explains: "),

@@ -72,6 +72,9 @@ SO: dict[str, dict] = {
     "kinhdich_dich_lam.json": {"mang": "kinhdich", **_nv(
         "tieu_thi_dich_lam.json", "tests/test_tk2_dich_lam.py::test_kb_la_ban_cat_cua_kho_nguon_va_du_4096_bai",
         "TK-2: 4.096 bài từ Tiêu Thị Dịch Lâm (quẻ bản → quẻ biến), nguyên văn chưa dịch; bài có chữ nặng không hiện")},
+    "kinhdich_legge.json": {"mang": "kinhdich", **_nv(
+        "kinhdich_legge_que.json", "tests/test_tk2_legge.py::test_moi_doan_la_chuoi_con_cua_nguon",
+        "TK-2 việc 4: bản dịch Anh James Legge 1882 (PD) — chỉ quẻ qua kiểm vạch âm dương + kiểm chữ hỏng; chỉ bản /en")},
     "kinhdich_hao.json": {"mang": "kinhdich", **_nv(
         "chu_dich_truyen_nghia.json", "tests/test_nguon_chu_dich_truyen_nghia.py::test_loi_que_loi_hao_trong_kb_khop_ban_tu_kho",
         "kinh văn khớp nguyên văn; phần dịch và «Hiểu đơn giản» là nháp")},
