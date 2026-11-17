@@ -13,13 +13,14 @@ import datetime as _dt
 import re
 from typing import Literal
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Query
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator, model_validator
 
 from app import config
 from app.calc import chi_tay_do
 from app.config import ENGINE_VERSION
 from app.kb import chi_tay_kb as kb
+from app.kb import chi_tay_tay_kb as kb_tay
 from app.luangiai import hoan_canh
 
 router = APIRouter(prefix="/v1/chi-tay", tags=["chi-tay"])
@@ -28,8 +29,14 @@ router = APIRouter(prefix="/v1/chi-tay", tags=["chi-tay"])
 _NGAY_SINH = Field(default=None, ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))
 
 
+Phai = Literal["dong", "tay"]
+
+
 class DocIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
+    phai: Phai = "dong"
+    dang_tay: str | None = Field(default=None, pattern=r"^[a-z_]{2,20}$")
+    go: dict[str, str] | None = Field(default=None, max_length=7)
     van: list[str] = Field(default_factory=list, max_length=30)
     cung: dict[str, str] | None = Field(default=None, max_length=12)
     duong: dict[str, str] | None = Field(default=None, max_length=8)
@@ -49,15 +56,20 @@ class DocIn(BaseModel):
             raise ValueError("; ".join(loi))
         return v
 
-    @field_validator("duong")
-    @classmethod
-    def _duong(cls, v: dict[str, str] | None) -> dict[str, str] | None:
-        if v and (loi := kb.duong_hop_le(v)):
-            raise ValueError("; ".join(loi))
-        return v
-
     @model_validator(mode="after")
     def _co_mot(self) -> "DocIn":
+        if self.phai == "tay":   # TK-2: phái Tây chỉ nhận dáng tay / gò / đường chỉ của chính nó
+            if self.van or self.cung:
+                raise ValueError("phái Tây không nhận vân / cung của sách tướng xưa")
+            if loi := kb_tay.hop_le(self.dang_tay, self.go, self.duong):
+                raise ValueError("; ".join(loi))
+            if not self.dang_tay and not self.go and not self.duong:
+                raise ValueError("cần ít nhất một lựa chọn dáng tay, gò hoặc đường chỉ")
+            return self
+        if self.dang_tay or self.go:
+            raise ValueError("dáng tay / gò chỉ có ở phái Tây")
+        if self.duong and (loi := kb.duong_hop_le(self.duong)):
+            raise ValueError("; ".join(loi))
         if not self.van and not self.cung and not self.duong:
             raise ValueError("cần ít nhất một vân, một lựa chọn cung hoặc một lựa chọn đường chỉ")
         return self
@@ -67,6 +79,7 @@ class DoTayIn(BaseModel):
     """Chỉ toạ độ — không ảnh. `dong_y` phải đúng `true` (người dùng tự tích ô đồng ý `ct1`)."""
     model_config = ConfigDict(extra="forbid")
     dong_y: StrictBool
+    phai: Phai = "dong"
     tay: Literal["trai", "phai"]
     ty_le: float = Field(ge=0.2, le=5)
     diem: list[tuple[float, float]] = Field(min_length=chi_tay_do.SO_DIEM, max_length=chi_tay_do.SO_DIEM)
@@ -92,16 +105,22 @@ def _tuoi(ngay_sinh: _dt.date | None) -> int | None:
 
 
 @router.get("")
-def api_thu_vien() -> dict:
+def api_thu_vien(phai: Phai = Query("dong")) -> dict:
+    if phai == "tay":
+        return {"engine_version": ENGINE_VERSION, "pham_vi": "chi_tay", **kb_tay.thu_vien()}
     return {"engine_version": ENGINE_VERSION, "pham_vi": "chi_tay", **kb.thu_vien()}
 
 
 @router.post("/doc")
 def api_doc(inp: DocIn) -> dict:
+    if inp.phai == "tay":
+        return {"engine_version": ENGINE_VERSION, "pham_vi": "chi_tay", **kb_tay.doc(inp.dang_tay, inp.go, inp.duong)}
     return {"engine_version": ENGINE_VERSION, "pham_vi": "chi_tay", **kb.doc(inp.van, _tuoi(inp.ngay_sinh), inp.cung, inp.duong)}
 
 
 @router.post("/do-tay")
 def api_do_tay(inp: DoTayIn) -> dict:
     kq = chi_tay_do.do_tay([list(p) for p in inp.diem], inp.ty_le, inp.tay)
+    if inp.phai == "tay":
+        return {"engine_version": ENGINE_VERSION, "pham_vi": "chi_tay", **kb_tay.ket_qua_do_tay(kq, inp.tay)}
     return {"engine_version": ENGINE_VERSION, "pham_vi": "chi_tay", **kb.ket_qua_do_tay(kq, inp.tay, _tuoi(inp.ngay_sinh))}

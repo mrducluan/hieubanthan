@@ -198,6 +198,28 @@ def _ds_que() -> list[tuple[str, str]]:
     return [(k, f"que-{k}-{_slug(v['ten'])}") for k, v in _doc("kinhdich_kb.json")["que"].items()]
 
 
+def _muc_legge(k: str, kv: dict) -> list[dict]:
+    """TK-2 việc 4: bản dịch James Legge (1882) của quái từ + sáu hào — chỉ bản tiếng Anh, chỉ quẻ đã qua bộ kiểm cấu
+    trúc (`kinhdich_legge.json`); lời ban biên tập vẫn đứng trước, Legge là bản dịch kinh điển được trích."""
+    from app.kb import kinhdich_kb as kd
+    if ngon_ngu.la_viet():
+        return []
+    so = int(k)
+    qt = kd.legge(so, "que_tu")
+    if not qt:
+        return []
+    ds = [L("trang_kd.legge_quai_tu", "Quái từ — {dich}", dich=qt["dich"])]
+    for h in kv["hao"]:
+        x = kd.legge(so, "hao", h["vi_tri"])
+        if x:
+            ds.append(L("trang_kd.legge_hao", "{ten} — {dich}", ten=h["ten"], dich=x["dich"]))
+    if kv.get("dung") and (x := kd.legge(so, "dung")):
+        ds.append(L("trang_kd.legge_hao", "{ten} — {dich}",
+                    ten=(L("trang_kd.dung_cuu", "Dụng Cửu") if k == "1" else L("trang_kd.dung_luc", "Dụng Lục")), dich=x["dich"]))
+    return [{"tieu_de": L("trang_kd.legge_tieu_de", "Bản dịch James Legge (1882)"), "danh_sach": ds,
+             "doan": L("trang_kd.legge_doan", "Bản dịch tiếng Anh của James Legge, thuộc phạm vi công cộng.")}]
+
+
 def _muc_truyen_nghia(k: str, kv: dict) -> list[dict]:
     """KT-TT: Tiểu tượng từng hào + lời Trình Di, Chu Hy (Ngô Tất Tố dịch) — chỉ bản tiếng Việt."""
     from app import ngon_ngu
@@ -247,6 +269,7 @@ def _trang_que(k: str, slug: str) -> dict:
                                                                          else L("trang_kd.dung_luc", "Dụng Lục")),
                           han=kv["dung"]["han"], dich=kv["dung"]["dich"])]
                        if kv.get("dung") else [])})
+        muc += _muc_legge(k, kv)
         muc += _muc_truyen_nghia(k, kv)
     muc.append(_muc_cau_truc_que(k))
     muc += [

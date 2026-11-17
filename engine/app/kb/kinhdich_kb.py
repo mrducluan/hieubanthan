@@ -127,6 +127,30 @@ def truyen_nghia(so: int, loai: str, vi_tri: int | None = None) -> dict | None:
     return {**ra, "nguoi_dich": d["nguoi_dich"]} if ra else None
 
 
+@nap.nho
+def _legge() -> dict:
+    return nap.doc("kinhdich_legge.json")
+
+
+def legge(so: int, loai: str, vi_tri: int | None = None) -> dict | None:
+    """TK-2 việc 4 — bản dịch Anh của James Legge (1882, phạm vi công cộng) cho quái từ / một hào / Dụng Cửu – Dụng
+    Lục. Chỉ ở bản tiếng Anh; quẻ mà bộ kiểm cấu trúc gắn `can_soat` không có trong kho → None (không gõ bù)."""
+    from app import ngon_ngu
+    if ngon_ngu.la_viet():
+        return None
+    d = _legge()
+    q = d["que"].get(str(so))
+    if not q:
+        return None
+    if loai == "hao":
+        van = q["hao"][vi_tri - 1] if vi_tri and 1 <= vi_tri <= 6 else None
+    elif loai == "dung":
+        van = q.get("dung")
+    else:
+        van = q["que_tu"]
+    return {"dich": van, "nguoi_dich": d["nguoi_dich"]} if van else None
+
+
 def truyen_nghia_que(so: int) -> dict:
     return _tn()["que"].get(str(so)) or {}
 

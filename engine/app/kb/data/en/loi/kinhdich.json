@@ -136,5 +136,9 @@
  "trang_kd.hd.lv": "What does {que} say about {lv}?",
  "trang_kd.tieu_de": "Hexagram {so}: {ten} ({han}) — I Ching meaning",
  "trang_kd.mo_ta": "{que} {han}: {y}",
- "trang_kd.ten_ngan": "{que}"
+ "trang_kd.ten_ngan": "{que}",
+ "trang_kd.legge_tieu_de": "Translation: James Legge (1882)",
+ "trang_kd.legge_doan": "The classic English translation by James Legge, The Yî King (Sacred Books of the East, vol. XVI, 1882), in the public domain. Words in parentheses are Legge's own additions; hexagram names follow his romanisation.",
+ "trang_kd.legge_quai_tu": "Judgement — {dich}",
+ "trang_kd.legge_hao": "{ten} — {dich}"
 }

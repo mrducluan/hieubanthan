@@ -556,7 +556,7 @@ function ThanMuc({ m, c, lk }: { m: TrangKienThuc["muc"][number]; c: Chu; lk: Du
           {m.trich_dan.map((x) => (
             <blockquote key={`${x.sach}${x.chuong ?? ""}${x.nghia ?? ""}`} {...(x.neo ? { id: x.neo } : {})}
               className="scroll-mt-24 border-l-2 border-gold/50 pl-4">
-              {x.nguyen_van && <p className="font-serif text-lg text-fg" lang="zh-Hant">{x.nguyen_van}</p>}
+              {x.nguyen_van && <p className="font-serif text-lg text-fg" lang={x.ngon_ngu ?? "zh-Hant"}>{x.nguyen_van}</p>}
               {x.phien_am && <p className="text-sm italic text-fg-muted">{x.phien_am}</p>}
               {x.nghia && <p className="mt-1 leading-relaxed text-fg-muted">{x.nghia}</p>}
               {/* TV-CTP: điều kiện trên lá số bằng lời thường + chú thích chữ của bản chép. */}

@@ -8,6 +8,7 @@ const So01 = z.number().finite().min(0).max(1);
 
 const Input = z.object({
   dong_y: z.literal(true),
+  phai: z.enum(["dong", "tay"]).optional(),   // TK-2: "tay" → ba nhãn + câu sách chỉ tay phương Tây
   tay: z.enum(["trai", "phai"]),
   ty_le: z.number().finite().min(0.1).max(10),
   diem: z.array(z.tuple([So01, So01])).length(21),
