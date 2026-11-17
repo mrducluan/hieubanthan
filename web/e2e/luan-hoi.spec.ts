@@ -25,7 +25,7 @@ test("báo cáo Tử vi có bản đồ người quanh bạn + năm chương có
   await expect(mau.locator('[data-testid="lh-cau"][data-ma="nghe_hop"]')).toBeVisible();
   await expect(mau.getByTestId("lh-cau-mau-nut")).toBeVisible();
   // … và câu mẫu còn nguyên sau khi cắt bản xem trước (chương 1 miễn phí).
-  expect((catXemTruoc(bc, 1).chuong as { cau_mau?: { ma: string } }[])[0].cau_mau?.ma).toBe("nghe_hop");
+  expect((catXemTruoc(bc, 1).chuong as { cau_mau?: { ma: string } }[])[0]?.cau_mau?.ma).toBe("nghe_hop");
 
   // Bản đồ: 7 nút, bấm một người → khung chi tiết đổi theo, có nút tới chương.
   const bd = page.getByTestId("lg-nguoi-quanh");
