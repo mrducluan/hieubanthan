@@ -4,6 +4,7 @@
 // chuyên gia là tác giả bài họ chưa đọc; bài chuyên gia đã đọc, sửa, duyệt mới ghi "Biên soạn & thẩm định".
 // DX-1: "Chủ biên … duyệt xuất bản" = quyết định biên tập cho toàn kho (như tổng biên tập duyệt đăng), không phải
 // thẩm định từng bài → không gắn reviewedBy, không đổi nhãn "Đã thẩm định".
+import { AnhTacGia } from "@/components/khung/AnhTacGia";
 import Link from "@/components/khung/Lien";
 import { BookOpen, ShieldCheck } from "lucide-react";
 import { CHUYEN_GIA, duongChuyenGia, ngayVN } from "@/lib/chuyen-gia";
@@ -26,10 +27,7 @@ export function DongTacGia({ chu_bien, tac_gia, tham_dinh, duyet_xuat_ban, en = 
   const c = taoChu(CHU_KIEN_THUC);
   return (
     <div className="mt-5 flex items-start gap-3 rounded-2xl border border-line/70 p-4" data-dong-tac-gia data-nosnippet="">
-      <span aria-hidden
-        className="grid size-11 shrink-0 place-items-center rounded-full border border-gold/50 bg-gold/10 font-serif text-base text-gold">
-        {cg ? cg.ten.split(" ").map((w) => w[0]).join("") : "?"}
-      </span>
+      <AnhTacGia cg={cg} lop="size-11 text-base" px={44} />
       <div className="min-w-0 text-sm leading-relaxed text-fg-muted">
         {tac_gia ? (
           <p>{c("tg.tac_gia")}<TenChuyenGia slug={tac_gia} /></p>
@@ -69,10 +67,7 @@ function DongTacGiaEn({ chu_bien, tac_gia, tham_dinh, c }: Omit<Props, "duyet_xu
     : tac_gia && tenViet(tac_gia) ? c("tg.ban_viet_tac_gia", { ten: tenViet(tac_gia) }) : "";
   return (
     <div className="mt-5 flex items-start gap-3 rounded-2xl border border-line/70 p-4" data-dong-tac-gia data-nosnippet="">
-      <span aria-hidden
-        className="grid size-11 shrink-0 place-items-center rounded-full border border-gold/50 bg-gold/10 font-serif text-base text-gold">
-        {ten ? ten.split(" ").map((w) => w[0]).join("") : "?"}
-      </span>
+      <AnhTacGia cg={CHUYEN_GIA[chu_bien]} ten={ten || undefined} lop="size-11 text-base" px={44} alt={ten ? `Photo of ${ten}` : undefined} />
       <div className="min-w-0 text-sm leading-relaxed text-fg-muted">
         <p>{c("tg.ban_bien_tap")}<span className="font-medium text-fg">{ten}</span></p>
         {ten && <p className="text-xs text-fg-faint">{c("tg.vai_tro")} · {c("tg.tom_tat")}</p>}

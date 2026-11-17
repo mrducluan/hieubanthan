@@ -3,7 +3,7 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-17 (NF-BT mục 4av; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-17 (NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
 
 ### 4av. NF-BT — biên tập 21 bài NotFair + 4 bài tuần 3 (2026-11-17, `docs/kw6t/AUDIT-NOTFAIR-2026-11-17.md`)
 
@@ -12,12 +12,24 @@
 - [ ] Search Console → Yêu cầu lập chỉ mục 4 bài tuần 3 + 3 đường dẫn mới đổi (hợp đôi, hợp sếp, Kinh Dịch hay Bát tự).
 - [ ] Đọc lại bài (ghi chú "NF-BT" trong "Ghi chú của Chủ biên" nói máy đã sửa gì), thêm "Góc nhìn chuyên gia" bằng lời của anh, bấm Xuất bản → "Đã duyệt".
 
+### 4au. SEO-Q — tiêu đề blog trong CMS, hồ sơ Đức Luân, rà SEO 2.212 URL (2026-11-17, `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 9)
+
+- [ ] **Deploy CMS** (Vercel tự build khi merge): migration dữ liệu `20261117_090000_seo_q_tieu_de_blog` đổi tiêu đề SEO + mô tả 6 bài
+  (2 bài ngũ hành; 3 bài tiêu đề nhồi từ khoá: hợp sếp, hợp đôi, Kinh Dịch/Huyền Không/Bát tự; 1 bài self discovery thiếu dấu cách).
+  Không đụng H1, đường dẫn, ảnh, thân bài. Bài nào anh đang có bản nháp sửa dở thì migration bỏ qua (log Vercel ghi "CHƯA").
+  Sau deploy: Search Console → Kiểm tra URL → Yêu cầu lập chỉ mục 2 bài ngũ hành.
+- [x] (2026-11-17, anh gửi qua Drive; em cắt 512×512 quanh mặt → `web/public/thuong-hieu/duc-luan.{jpg,webp}`) **Ảnh chân dung Đức Luân** — hiện ở trang tác giả, dòng tác giả trang kiến thức, khung ký bài blog + schema Person `image`.
+- [ ] (Tuỳ chọn) Hồ sơ công khai khác của Đức Luân (YouTube, TikTok, LinkedIn…): gửi em hoặc tự đặt env Vercel
+  `CHUYEN_GIA_SAME_AS_DUC_LUAN` (link https, cách nhau dấu phẩy) — không cần sửa code. Facebook cá nhân đã gắn trong code.
+- [ ] Google Business Profile: khi xong, đặt link hồ sơ (dạng `https://maps.google.com/?cid=…` hoặc `https://g.page/…`) vào env
+  Vercel **`MXH_GOOGLE`** (em đã thêm khoá này) → Organization `sameAs` + nút "Google" ở chân trang tự có, không cần sửa code.
+
 ### 4at. SEO-P — tối ưu theo số liệu Search Console 16/11/2026 (`docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 8)
 
 - [ ] **Deploy engine TRƯỚC web** (engine thêm `con_giap` ngày, `tuoi_tron`, câu nhuận đứng đầu, tên chủ thể trong H2 trang kiến thức). Dữ liệu engine được web giữ đệm tối đa 6–24 giờ → tiêu đề mới của trang lịch âm / tuổi hiện chậm nhất 1 ngày sau deploy.
 - [ ] Search Console → Kiểm tra URL → **Yêu cầu lập chỉ mục**: `/lich-am/2027`, `/lich-am/2028`, `/lich-am/2029`, `/nam/2026/tuoi-1998`, `/nam/2027/tuoi-1979`, `/bat-tu/thap-than`, `/phong-thuy/dau-hieu/cau-thang-doi-dien-cua-chinh`, `/xem-ngay-tot` (trang ngày mới có bảng 12 con giáp).
-- [ ] **Brand SERP**: đặt env `MXH_FACEBOOK` / `MXH_YOUTUBE` / `MXH_TIKTOK`… (link trang chính thức) để Organization có `sameAs` — hiện trống, Google chưa có tín hiệu nối thương hiệu với các trang mạng xã hội. Nên tạo Google Business Profile tên "Hiểu Bản Thân (hieuban.com)".
-- [ ] **Hai bài blog CMS đang ở trang 1 mà 0 lượt nhấp** (sửa trong CMS, em không sửa được bài CMS từ code): "vòng tròn ngũ hành" (vị trí 7, 27 hiển thị) và "ngũ hành là gì" (vị trí 12). Gợi ý tiêu đề SEO: *"Vòng tròn ngũ hành: sơ đồ tương sinh, tương khắc dễ nhớ"* và *"Ngũ hành là gì? Kim Mộc Thủy Hỏa Thổ và cách sinh khắc"*; mô tả mở bằng câu trả lời 1 dòng.
+- [x] (2026-11-17, đã đặt — Organization `sameAs` có Facebook, TikTok, YouTube, X trên hieuban.com) **Brand SERP**: đặt env `MXH_FACEBOOK` / `MXH_YOUTUBE` / `MXH_TIKTOK`… (link trang chính thức) để Organization có `sameAs` — hiện trống, Google chưa có tín hiệu nối thương hiệu với các trang mạng xã hội. Nên tạo Google Business Profile tên "Hiểu Bản Thân (hieuban.com)".
+- [x] (2026-11-17, em sửa bằng migration dữ liệu CMS — xem 4au) **Hai bài blog CMS đang ở trang 1 mà 0 lượt nhấp** (sửa trong CMS, em không sửa được bài CMS từ code): "vòng tròn ngũ hành" (vị trí 7, 27 hiển thị) và "ngũ hành là gì" (vị trí 12). Gợi ý tiêu đề SEO: *"Vòng tròn ngũ hành: sơ đồ tương sinh, tương khắc dễ nhớ"* và *"Ngũ hành là gì? Kim Mộc Thủy Hỏa Thổ và cách sinh khắc"*; mô tả mở bằng câu trả lời 1 dòng.
 
 ### 4au. GIA-99 — giá 99 Sao, gói mới, bật thu Sao (2026-11-16, `docs/GOI-XEM-VA-GIA-2026-11.md`)
 

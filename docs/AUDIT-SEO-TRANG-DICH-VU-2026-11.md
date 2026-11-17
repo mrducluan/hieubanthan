@@ -163,3 +163,26 @@ Rà dàn ý heading 28 trang (năm, lịch & tuổi, ngày tốt, mục lục c�
 **Độ dày + ảnh + liên kết nội bộ**: trang kiến thức đã dày (1.100–2.100 chữ, ảnh tóm tắt có alt); điểm yếu là liên kết nội bộ (8–10 link trong bài) → khối **"Xem thêm trong {cụm}"**: 8 trang kề trước / sau trong mục lục, chữ link là tiêu đề dạng câu hỏi của trang đích (vd trang "sinh năm 2019 mệnh gì" dẫn sang 2015–2023).
 
 **Brand SERP**: tiêu đề trang chủ, `WebSite`/`Organization` (`alternateName` Hieuban, hieuban.com), logo PNG 512, favicon, HSTS — đủ. Thiếu `sameAs` (env `MXH_*` chưa đặt) → việc của anh (`docs/VIEC-CUA-ANH.md` 4at). `http://hieuban.com/` trong báo cáo là lượt cũ trước khi chuyển hướng HTTPS, không cần làm gì.
+
+## 9. Đợt 6 (SEO-Q, 2026-11-17) — rà 2.212 URL sitemap, tiêu đề blog trong CMS, E-E-A-T Đức Luân
+
+**Quét**: mọi URL của `sitemap.xml` + `sitemap-ngay.xml` + `sitemap-en.xml` (2.212 URL, Googlebot UA): tiêu đề ≤ 70, mô tả 50–170,
+canonical tự trỏ, không noindex trong sitemap, đúng 1 H1, H2 trùng, < 300 chữ, ảnh thiếu alt.
+- 0 lỗi tiêu đề / mô tả / canonical / H1 / alt. (Lần quét song song 12 luồng thấy ~1.000 trang "không có `<title>` trong `<head>`":
+  khi máy chủ chậm, Next stream metadata xuống cuối `<body>` cho Googlebot (Q-I2 — Googlebot chạy JS nên vẫn đọc được); quét lại
+  từng trang thì tiêu đề nằm đúng trong `<head>`. Theo dõi ở Search Console → Kiểm tra URL → HTML đã hiển thị.)
+- **32 bài blog có hai H2 "Đọc tiếp" trùng `id`** (thân bài KW-6T có mục "Đọc tiếp" + khối bài cùng chuyên mục của trang) → khối
+  trang đổi thành "Bài viết cùng chủ đề" (`#bai-cung-chu-de`).
+- Mỏng (< 300 chữ): `/blog/mang/*` (trang danh sách, ít bài — để tự dày theo số bài), `/en/terms`, `/en/numerology/karmic-debt`.
+- `/chi-tay`: tiêu đề ghi "67 hình", thư viện engine trả 66 → "hơn 60 hình" (không lệch khi KB đổi).
+- H1 `/blog` "Blog" → có từ khoá; H1 trang chuyên đề "Blog {mảng}: bài viết và hướng dẫn tự xem".
+
+**Tiêu đề blog trong CMS** (migration dữ liệu `20261117_090000_seo_q_tieu_de_blog`, chỉ tiêu đề SEO + mô tả, có down): 2 bài ngũ hành
+(trang 1, 0 nhấp) + 3 tiêu đề nhồi từ khoá + 1 lỗi dấu cách. Mô tả mở bằng câu trả lời.
+
+**Liên kết nội bộ**: ~700 trang kiến thức (mảng có chuyên mục blog) có khối "Bài viết liên quan" cùng mảng — vd 78 trang "Sinh năm X
+mệnh gì" dẫn tới "Ngũ hành là gì" / "Vòng tròn ngũ hành" (đang ở trang 1).
+
+**E-E-A-T / brand SERP**: Organization `sameAs` đã có (Facebook, TikTok, YouTube, X). Person Đức Luân `sameAs` = Facebook cá nhân
+(chủ dự án gửi), nút `rel="me"` ở trang tác giả; bài blog do Đức Luân ký nhúng Person đầy đủ (trước chỉ `@id`). Khoá env `MXH_GOOGLE`
+cho hồ sơ Google Business Profile. Còn thiếu: ảnh chân dung (schema `image`).

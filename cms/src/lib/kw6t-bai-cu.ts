@@ -391,8 +391,7 @@ export const KE_HOACH: Ke[] = [
     lienQuan: [S.tvLaGi, S.selfDiscovery],
   },
   {
-    slug: S.selfDiscovery, goc: G.chung, dat: { mang: "chung",
-      meta: { title: "Tự hiểu mình qua giá trị, thói quen và lựa chọn" } },
+    slug: S.selfDiscovery, goc: G.chung, dat: { mang: "chung" },   // tiêu đề SEO do SEO-Q đặt (2026-11-17) — không đè
     themCuoi: docTiep(`<a href="/hom-nay">câu tự soi mỗi ngày</a>`, B(S.tsLaGi, "thần số học là gì"), B(S.astrology, "astrology là gì")),
     lienQuan: [S.tsLaGi, S.astrology],
   },

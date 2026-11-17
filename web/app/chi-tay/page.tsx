@@ -1,5 +1,5 @@
 // Xem chỉ tay theo sách xưa — Thần Tướng Toàn Biên quyển 10. Đồ hình tám cung bàn tay (lớp phủ chú giải trên bản khắc gỗ)
-// + công cụ tự soi: người dùng chọn hình vân giống tay mình → lời sách theo khuôn SX-C. Thư viện đủ 67 hình render ở máy chủ
+// + công cụ tự soi: người dùng chọn hình vân giống tay mình → lời sách theo khuôn SX-C. Thư viện đủ hình (số hình do engine trả) render ở máy chủ
 // (Google, bot AI đọc được không cần JS). Engine lỗi → 5xx. Web chỉ hiển thị.
 // CT-2: khối "Chụp lòng bàn tay" đầu trang — ảnh chỉ xử lý trên máy người dùng, chỉ 21 toạ độ điểm mốc gửi engine (ChupBanTay).
 import type { Metadata } from "next";
@@ -19,8 +19,8 @@ import { anhDoHinh } from "@/lib/do-hinh";
 import { anhVan, DUONG_CHI_TAY, layThuVienChiTay, tachCau } from "@/lib/chi-tay";
 
 const MAC = {
-  tieuDe: "Xem chỉ tay theo sách xưa: 67 hình vân tay có chú giải",
-  moTa: "Tự soi bàn tay theo Thần Tướng Toàn Biên: tám cung trên bản khắc gỗ và trên ảnh tay bạn (ảnh không rời máy), 67 hình vân kèm nguyên văn, lời dễ hiểu.",
+  tieuDe: "Xem chỉ tay theo sách xưa: hơn 60 hình vân tay có chú giải",
+  moTa: "Tự soi bàn tay theo Thần Tướng Toàn Biên: tám cung trên bản khắc gỗ và trên ảnh tay bạn (ảnh không rời máy), hơn 60 hình vân kèm nguyên văn, lời dễ hiểu.",
 };
 const NHAN: Record<string, string> = { A: "Sách ghi", B: "Nên chú ý", C: "Ghi chép xưa" };
 

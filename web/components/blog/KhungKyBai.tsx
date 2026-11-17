@@ -3,6 +3,7 @@
 // <details> thuần HTML: không cần JS, nội dung xổ ra vẫn nằm trong HTML máy chủ (Google / bot AI đọc đủ), bàn phím Enter/Space mở được.
 // Quy tắc chữ ký (EEAT-1 / BM-1 / DX-1) giữ nguyên: chưa có chuyên gia đọc → "Ban biên tập … · Chủ biên duyệt xuất bản" (không gắn
 // reviewedBy); chỉ khi CMS ghi "tác giả"/"thẩm định" (có xác nhận, có ngày) mới đứng tên người.
+import { AnhTacGia } from "@/components/khung/AnhTacGia";
 import Link from "@/components/khung/Lien";
 import { BookOpen, ChevronDown, ShieldCheck } from "lucide-react";
 import { CHUYEN_GIA, duongChuyenGia, ngayVN } from "@/lib/chuyen-gia";
@@ -36,7 +37,6 @@ export function KhungKyBai({ ky, ngayThamDinh }: { ky: KyBai; ngayThamDinh?: str
   const chuBien = CHUYEN_GIA[CHU_BIEN]!;
   const noiBo = ky?.n.slug ? CHUYEN_GIA[ky.n.slug] : undefined;
   const ten = ky ? (noiBo?.ten ?? ky.n.ten) : chuBien.ten;
-  const chuCai = ten.split(" ").map((w) => w[0]).join("").slice(0, 3);
   const ngay = ngayThamDinh ? ngayThamDinh.slice(0, 10) : null;
 
   // Hai dòng gọn hiện sẵn (không link, để chạm vào đâu cũng xổ khung ra).
@@ -49,7 +49,7 @@ export function KhungKyBai({ ky, ngayThamDinh }: { ky: KyBai; ngayThamDinh?: str
       <details className="group rounded-2xl border border-line/70 bg-surface/30 open:border-gold/40" data-dong-tac-gia data-ky={ky?.vai ?? "ban_bien_tap"}>
         <summary
           className="flex cursor-pointer list-none items-start gap-3 rounded-2xl p-4 marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60 [&::-webkit-details-marker]:hidden">
-          <span aria-hidden className="grid size-10 shrink-0 place-items-center rounded-full border border-gold/50 bg-gold/10 font-serif text-sm text-gold">{chuCai}</span>
+          <AnhTacGia cg={noiBo ?? (ky ? undefined : chuBien)} ten={ten} lop="size-10 text-sm" px={40} />
           <span className="min-w-0 flex-1 text-sm leading-relaxed text-fg-muted">
             <span className="line-clamp-2 block">{dong1}</span>
             <span className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-gold">

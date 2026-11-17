@@ -31,12 +31,16 @@ export const CHUYEN_GIA: Record<string, ChuyenGia> = {
       "Anh tự biên soạn phần ý nghĩa 12 con số thần số học Pythagoras bản tiếng Việt — nền của mọi bài đọc thần số trên trang — và chịu trách nhiệm biên tập toàn bộ kho tri thức: chọn trường phái mặc định (âm lịch Việt Nam, độ sáng sao Nam phái, Hoả Linh lối Việt…), đặt ranh giới nội dung, và thẩm định từng bài trước khi gỡ nhãn chờ duyệt.",
       "Quan điểm của anh: các hệ thống này là di sản văn hoá để tự soi, không phải lời phán định mệnh. Vì vậy mọi bài đều nêu cả mặt sáng lẫn mặt tối, ghi nguồn và trường phái, và không bàn chuyện bệnh tật, sống chết hay \"giải hạn\".",
     ],
-    sameAs: [],
+    // Chủ dự án gửi 2026-11-17 (trang Facebook cá nhân công khai của Đức Luân).
+    sameAs: ["https://www.facebook.com/ducluan.hieuban/"],
   },
 };
 
-/** Ảnh chân dung công khai (đặt tệp vào web/public khi chủ dự án gửi ảnh — VIEC-CUA-ANH mục M2). */
-const CHUYEN_GIA_ANH: Record<string, string | undefined> = {};
+/** Ảnh chân dung công khai (chủ dự án gửi 2026-11-17; 512×512, cắt quanh mặt). `jpg` cho schema, `webp` cho trang. */
+const CHUYEN_GIA_ANH: Record<string, { jpg: string; webp: string } | undefined> = {
+  "duc-luan": { jpg: "/thuong-hieu/duc-luan.jpg", webp: "/thuong-hieu/duc-luan.webp" },
+};
+export const anhChuyenGia = (slug: string) => CHUYEN_GIA_ANH[slug];
 
 export const duongChuyenGia = (slug: string) => `/tac-gia/${slug}`;
 export const idChuyenGia = (slug: string) => `${siteUrl()}${duongChuyenGia(slug)}#nguoi`;
@@ -48,6 +52,13 @@ export function sameAsChuyenGia(cg: ChuyenGia): string[] {
   return [...new Set([...cg.sameAs, ...env.split(",").map((x) => x.trim()).filter((x) => /^https:\/\/[^\s]+$/.test(x))])];
 }
 
+/** Tên hiển thị của một link hồ sơ (cho nút trên trang tác giả). */
+export function tenHoSo(url: string): string {
+  const h = new URL(url).hostname.replace(/^www\./, "");
+  return ({ "facebook.com": "Facebook", "youtube.com": "YouTube", "tiktok.com": "TikTok", "x.com": "X", "linkedin.com": "LinkedIn",
+    "instagram.com": "Instagram", "threads.net": "Threads", "zalo.me": "Zalo" } as Record<string, string>)[h] ?? h;
+}
+
 export function ldNguoi(cg: ChuyenGia) {
   return {
     "@type": "Person",
@@ -57,7 +68,7 @@ export function ldNguoi(cg: ChuyenGia) {
     jobTitle: cg.vaiTro,
     description: cg.tomTat,
     knowsAbout: cg.linhVuc,
-    ...(CHUYEN_GIA_ANH[cg.slug] ? { image: urlDayDu(CHUYEN_GIA_ANH[cg.slug]!) } : {}),
+    ...(CHUYEN_GIA_ANH[cg.slug] ? { image: { "@type": "ImageObject", url: urlDayDu(CHUYEN_GIA_ANH[cg.slug]!.jpg), width: 512, height: 512 } } : {}),
     worksFor: { "@id": `${siteUrl()}/#to-chuc` },
     ...(sameAsChuyenGia(cg).length ? { sameAs: sameAsChuyenGia(cg) } : {}),
   };

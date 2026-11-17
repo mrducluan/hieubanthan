@@ -131,7 +131,7 @@ test("route từ CMS: sai bí mật bị từ chối; /blog vẫn chạy khi ch�
   expect((await request.get("/api/cms/xem-truoc?slug=abc&ma=sai", { maxRedirects: 0 })).status()).toBe(401);
   expect((await request.get("/api/cms/xem-truoc?slug=../../x&ma=sai", { maxRedirects: 0 })).status()).toBe(401);
   await page.goto("/blog");
-  await expect(page.locator("h1")).toHaveText("Blog");
+  await expect(page.locator("h1")).toHaveText("Blog hiểu bản thân: thần số học, Tử vi, phong thuỷ, Kinh Dịch");
   expect((await request.get("/blog/khong-co-bai-nay")).status()).toBe(404);
 });
 
