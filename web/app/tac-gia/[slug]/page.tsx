@@ -1,5 +1,6 @@
 // EEAT-1 — hồ sơ chuyên gia: ai đứng sau nội dung, làm vai trò gì, đã viết / thẩm định những bài nào, quy trình ra sao.
 // Schema ProfilePage + Person (Google: trang hồ sơ tác giả là tín hiệu "Who" của E-E-A-T). Chỉ ghi điều đã công bố.
+import { AnhTacGia } from "@/components/khung/AnhTacGia";
 import { lopCot } from "@/lib/luoi";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
@@ -74,9 +75,7 @@ export default async function Page({ params }: Props) {
       </nav>
 
       <header className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-center">
-        <span aria-hidden className="grid size-24 shrink-0 place-items-center rounded-full border border-gold/60 bg-gold/10 font-serif text-4xl text-gold">
-          {cg.ten.split(" ").map((w) => w[0]).join("")}
-        </span>
+        <AnhTacGia cg={cg} lop="size-24 text-4xl" px={96} />
         <div>
           <p className="eyebrow">{cg.vaiTro}</p>
           <h1 className="mt-1 text-4xl leading-tight sm:text-5xl">{cg.ten}</h1>

@@ -11,7 +11,7 @@
   (2 bài ngũ hành; 3 bài tiêu đề nhồi từ khoá: hợp sếp, hợp đôi, Kinh Dịch/Huyền Không/Bát tự; 1 bài self discovery thiếu dấu cách).
   Không đụng H1, đường dẫn, ảnh, thân bài. Bài nào anh đang có bản nháp sửa dở thì migration bỏ qua (log Vercel ghi "CHƯA").
   Sau deploy: Search Console → Kiểm tra URL → Yêu cầu lập chỉ mục 2 bài ngũ hành.
-- [ ] **Ảnh chân dung Đức Luân** (vuông, ≥ 400×400) — gửi em để gắn vào trang tác giả + schema Person `image` (tín hiệu E-E-A-T).
+- [x] (2026-11-17, anh gửi qua Drive; em cắt 512×512 quanh mặt → `web/public/thuong-hieu/duc-luan.{jpg,webp}`) **Ảnh chân dung Đức Luân** — hiện ở trang tác giả, dòng tác giả trang kiến thức, khung ký bài blog + schema Person `image`.
 - [ ] (Tuỳ chọn) Hồ sơ công khai khác của Đức Luân (YouTube, TikTok, LinkedIn…): gửi em hoặc tự đặt env Vercel
   `CHUYEN_GIA_SAME_AS_DUC_LUAN` (link https, cách nhau dấu phẩy) — không cần sửa code. Facebook cá nhân đã gắn trong code.
 - [ ] Google Business Profile: khi xong, đặt link hồ sơ (dạng `https://maps.google.com/?cid=…` hoặc `https://g.page/…`) vào env

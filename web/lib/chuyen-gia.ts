@@ -36,8 +36,11 @@ export const CHUYEN_GIA: Record<string, ChuyenGia> = {
   },
 };
 
-/** Ảnh chân dung công khai (đặt tệp vào web/public khi chủ dự án gửi ảnh — VIEC-CUA-ANH mục M2). */
-const CHUYEN_GIA_ANH: Record<string, string | undefined> = {};
+/** Ảnh chân dung công khai (chủ dự án gửi 2026-11-17; 512×512, cắt quanh mặt). `jpg` cho schema, `webp` cho trang. */
+const CHUYEN_GIA_ANH: Record<string, { jpg: string; webp: string } | undefined> = {
+  "duc-luan": { jpg: "/thuong-hieu/duc-luan.jpg", webp: "/thuong-hieu/duc-luan.webp" },
+};
+export const anhChuyenGia = (slug: string) => CHUYEN_GIA_ANH[slug];
 
 export const duongChuyenGia = (slug: string) => `/tac-gia/${slug}`;
 export const idChuyenGia = (slug: string) => `${siteUrl()}${duongChuyenGia(slug)}#nguoi`;
@@ -65,7 +68,7 @@ export function ldNguoi(cg: ChuyenGia) {
     jobTitle: cg.vaiTro,
     description: cg.tomTat,
     knowsAbout: cg.linhVuc,
-    ...(CHUYEN_GIA_ANH[cg.slug] ? { image: urlDayDu(CHUYEN_GIA_ANH[cg.slug]!) } : {}),
+    ...(CHUYEN_GIA_ANH[cg.slug] ? { image: { "@type": "ImageObject", url: urlDayDu(CHUYEN_GIA_ANH[cg.slug]!.jpg), width: 512, height: 512 } } : {}),
     worksFor: { "@id": `${siteUrl()}/#to-chuc` },
     ...(sameAsChuyenGia(cg).length ? { sameAs: sameAsChuyenGia(cg) } : {}),
   };
