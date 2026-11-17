@@ -14,7 +14,7 @@ import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
 import { TheLap } from "@/components/khung/TheLap";
 import { DoKhoiCuoi } from "@/components/khung/DoKhoiCuoi";
 import { theLapBlog, type TuyChonLap } from "@/lib/the-lap";
-import { CHUYEN_GIA, idChuyenGia, ldNguoi, ngayVN } from "@/lib/chuyen-gia";
+import { CHUYEN_GIA, ldNguoi, ngayVN } from "@/lib/chuyen-gia";
 import { anhCms, cacChuyenMuc, KIEU_LD, NHAN_LOAI, phutDoc, type BaiCms as Bai, type BaiCmsTomTat, type NguoiCms, type TinhNangCms } from "@/lib/cms";
 import { locHtmlCms } from "@/lib/cms-html";
 import { goiLd, ldDuongDan, ldHoiDap, siteUrl, urlDayDu } from "@/lib/seo";
@@ -29,7 +29,8 @@ const ngayIso = (s?: string | null) => (s ? s.slice(0, 10) : null);
 
 function ldNguoiCms(n: NguoiCms) {
   const cg = n.slug ? CHUYEN_GIA[n.slug] : undefined;
-  if (cg) return { "@id": idChuyenGia(cg.slug) };
+  // EEAT: chuyên gia nội bộ → Person đầy đủ (jobTitle, knowsAbout, sameAs hồ sơ công khai) ngay trong bài, không chỉ @id.
+  if (cg) return ldNguoi(cg);
   return {
     "@type": "Person", name: n.ten, ...(n.chuc_danh ? { jobTitle: n.chuc_danh } : {}),
     ...(n.trang_ho_so ? { url: urlDayDu(n.trang_ho_so) } : {}),

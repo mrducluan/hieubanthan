@@ -6,7 +6,7 @@ import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { ArrowRight, BookOpenCheck, Feather, ShieldCheck } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { CHUYEN_GIA, duongChuyenGia, ldNguoi, ngayVN } from "@/lib/chuyen-gia";
+import { CHUYEN_GIA, duongChuyenGia, ldNguoi, ngayVN, sameAsChuyenGia, tenHoSo } from "@/lib/chuyen-gia";
 import { duongTrang, soTrangChuyenGia } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, siteUrl, urlDayDu } from "@/lib/seo";
 import { vanHanh } from "@/lib/van-hanh";
@@ -84,6 +84,14 @@ export default async function Page({ params }: Props) {
           <ul className="mt-3 flex flex-wrap gap-2" aria-label="Lĩnh vực">
             {cg.linhVuc.map((l) => <li key={l} className="rounded-full border border-line px-3 py-1 text-xs text-fg-muted">{l}</li>)}
           </ul>
+          {/* EEAT: hồ sơ công khai của chính chuyên gia (rel="me" — cùng một người; schema Person sameAs dùng chung danh sách). */}
+          {sameAsChuyenGia(cg).length > 0 && (
+            <p className="mt-3 flex flex-wrap gap-3 text-sm" data-testid="ho-so-mxh">
+              {sameAsChuyenGia(cg).map((u) => (
+                <a key={u} href={u} rel="me noopener" target="_blank" className="text-gold underline underline-offset-4">{cg.ten} trên {tenHoSo(u)}</a>
+              ))}
+            </p>
+          )}
         </div>
       </header>
 
