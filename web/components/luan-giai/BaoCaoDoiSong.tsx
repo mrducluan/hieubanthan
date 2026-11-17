@@ -23,6 +23,7 @@ import { HopNoiBat, KiemChungBai, ViSao } from "./HopNoiBat";
 import { GiaoThoa } from "./GiaoThoa";
 import { ChuQua } from "./ChuQua";
 import { GocNhinKhac } from "./GocNhinKhac";
+import { BanDoNguoi, CauMau, LuanHoiCuoi, LuanHoiDau } from "./LuanHoi";
 import { useCachChinhBaoCao } from "@/lib/cach-chinh-battu";
 import { ChamMuc, ChuThichMuc, CotChuong, giamChuyenDong, ThanhChuongGon, useChuongDangDoc, type MucChuong } from "./MucLucChuong";
 import { useChuBaoCao } from "./chu-bao-cao";
@@ -163,6 +164,10 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
           <KhungLuuYMang ds={bc.luu_y_mang} soChuong={soChuong} tenChuong={tenChuong} onMo={(ma) => moChuong(ma, true)} />
         )}
 
+        {bc.nguoi_quanh && bc.nguoi_quanh.length > 0 && (
+          <BanDoNguoi ds={bc.nguoi_quanh} moDun={bc.mo_dun} soChuong={soChuong} tenChuong={tenChuong} onMo={(ma) => moChuong(ma, true)} />
+        )}
+
         <nav aria-label={chu("muc_luc")} className="mt-6 print:hidden" data-testid="lg-muc-luc">
           <div className="flex items-baseline justify-between gap-3">
             <p className="text-sm text-fg-faint">{chu("muc_luc_dem", { so: String(bc.chuong.length) })}{doc.length > 1 ? chu("muc_luc_bam") : ""}</p>
@@ -196,7 +201,7 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
                 const k = doc.indexOf(c);
                 const tiep = doc[k + 1];
                 return (
-                  <Chuong key={c.ma} c={c} so={i + 1} goc={goc} thoiGian={c.ma === "cuoc_doi" ? bc.thoi_gian_bieu : undefined}
+                  <Chuong key={c.ma} c={c} so={i + 1} goc={goc} moDun={bc.mo_dun} thoiGian={c.ma === "cuoc_doi" ? bc.thoi_gian_bieu : undefined}
                     qua={c.ma === chuongQua} mo={mo.has(c.ma) || doc.length === 1} doiMo={() => doiChuong(c.ma)}
                     thamChieu={thamChieu} soChuong={soChuong} tenChuong={tenChuong} moDich={(ma) => moChuong(ma, true)}
                     tiep={tiep ? { ma: tiep.ma, so: soChuong(tiep.ma), tieu_de: tiep.tieu_de } : null}
@@ -235,8 +240,8 @@ function DongThamChieu({ hop, den, tenDen, onMo }: { hop: Hop; den: string; tenD
   );
 }
 
-function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChuong, tenChuong, moDich, tiep, conKhoa, onCuoi }: {
-  c: ChuongDoiSongMo; so: number; goc: boolean; thoiGian?: MocDaiHan[]; qua?: boolean;
+function Chuong({ c, so, goc, moDun, thoiGian, qua = false, mo, doiMo, thamChieu, soChuong, tenChuong, moDich, tiep, conKhoa, onCuoi }: {
+  c: ChuongDoiSongMo; so: number; goc: boolean; moDun: string; thoiGian?: MocDaiHan[]; qua?: boolean;
   mo: boolean; doiMo: () => void; thamChieu: (h: Hop) => string | null;
   soChuong: (ma: string) => number; tenChuong: (ma: string) => string; moDich: (ma: string) => void;
   tiep: { ma: string; so: number; tieu_de: string } | null; conKhoa: boolean; onCuoi?: () => void;
@@ -291,6 +296,8 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
       )}
       <div id={idThan} className={cn(!mo && "hidden print:block")}>
         {c.doan_truoc && khoiDoan}
+        {c.cau_mau && <CauMau mau={c.cau_mau} thuatNgu={c.thuat_ngu} onMo={conKhoa ? undefined : moDich} />}
+        {c.luan_hoi && <LuanHoiDau lh={c.luan_hoi} moDun={moDun} chuong={c.ma} thuatNgu={c.thuat_ngu} />}
         {c.than_do && <ThanhThan than={c.than_do} />}
         {c.bieu_do && <BieuDoNguHanh bd={c.bieu_do} haiCach={c.hai_cach} />}
         {thoiGian && thoiGian.length > 0 && <DaiVanHaiCach ds={thoiGian} />}
@@ -308,6 +315,7 @@ function Chuong({ c, so, goc, thoiGian, qua = false, mo, doiMo, thamChieu, soChu
             <HopNoiBat hop={c.loi_hoan_canh} thuatNgu={c.thuat_ngu} />
           </div>
         )}
+        {c.luan_hoi && <LuanHoiCuoi lh={c.luan_hoi} />}
         {c.goc_nhin_khac && c.goc_nhin_khac.y.length > 0 && <GocNhinKhac g={c.goc_nhin_khac} chuong={c.ma} thuatNgu={c.thuat_ngu} />}
         {thamChieuDs.length > 0 && (
           <div className="mt-3 space-y-2">

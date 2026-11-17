@@ -38,6 +38,7 @@ from app.luangiai import hoan_canh as hc
 from app.luangiai import chu_y_nam as cyn
 from app.luangiai import suc_khoe_nam as skn
 from app.luangiai import tuvi_y_bo_sung as yb
+from app.luangiai import tuvi_luan_hoi as lhoi
 from app.luangiai.battu_doi_song import _sao_han_hien   # tên sao hạn / Bát hạn theo ngôn ngữ (dùng chung Bát tự)
 from app.luangiai.doi_song_chung import (  # noqa: F401 — tách dùng chung với Bát tự (BT-ĐS), giữ tên cũ
     MA_MAU_RE, TOI_DA_HOP, _ap_hoc, _cac_cau, _cau_dau, _hoa_dau, _ma, _sach, _sap, _tieu_de, slug, trong_so_xem_lai)
@@ -1516,9 +1517,12 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
            toi_da_hop=TOI_DA_HOP, toi_da_them=yb.TOI_DA_HOP_MOI)
     # EN-2 mục 5: hộp lời theo tuổi + tình trạng (người dùng tự chọn) ở 5 chương — sau khi chọn cốt lõi (không vào cốt lõi).
     hc.ap(ds, sinh["ngay"], ngay_xem, sinh.get("tinh_trang"), "ds", hoc)
+    # LH-1: lớp "Luận theo câu hỏi" (trả lời thẳng · người quanh bạn · hoá giải · dòng mười năm từng mảng) — không đổi mức.
+    nguoi_quanh = lhoi.ap(ds, ls, cc, dong, tgb, nam_am_xem, nam_am_sinh, vh["tuoi_mu"], sinh.get("gioi_tinh"), sl)
     # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).
     kh.gon_bao_cao({"cot_loi": cot_loi, "chuong": ds})
     from app.luangiai import luu_y_mang as lym  # noqa: PLC0415
     luu_y_mang = lym.dung(ds, "tuvi", muc_cung={k: v["muc"] for k, v in cc.items()})
     return _sach({"phien_ban": PHIEN_BAN, "cot_loi": cot_loi, "thoi_gian_bieu": tgb, "chuong": ds, "luu_y_mang": luu_y_mang,
+                  **({"nguoi_quanh": nguoi_quanh} if nguoi_quanh else {}),
                   "tuoi_mu": vh["tuoi_mu"], "ngay_xem": ngay_xem.isoformat(), **kb.meta()})

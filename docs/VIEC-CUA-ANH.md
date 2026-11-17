@@ -3,7 +3,23 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-17 (NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-17 (TK-1 mục 4ax; LH-1 + LH-2 + LH-3 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+
+### 4aw. LH-1 — "Luận theo câu hỏi" cho Luận giải Tử vi (2026-11-17, `docs/LUAN-GIAI-DOI-SONG.md` mục 11)
+
+- [ ] **Deploy engine TRƯỚC web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì không hiện lớp này).
+- [ ] Mở `/tu-vi` bằng hồ sơ của anh → Xem luận giải: đọc khối "Người quanh bạn" và 5 chương có "Trả lời thẳng những câu bạn
+  hay hỏi". Câu nào anh thấy lệch với kinh nghiệm luận của anh thì báo em mã câu (hoặc sửa ở `/quan-tri` → Kho tri thức →
+  `tuvi_luan_hoi_kb.json`, Xuất bản = PR).
+- [x] (Quyết định 2026-11-17) Ngưỡng nhãn nặng: anh chọn **nói mạnh tay hơn** → "hai lần đò" nay ~16 % lá Tử vi / ~19 % Bát tự,
+  "có dấu hiệu người thứ ba" ~29 % / ~27 % (LH-3). Muốn chỉnh tiếp: báo em, test giữ khoảng 12–20 % và 22–35 %.
+- [x] (Quyết định 2026-11-17) Mục "Dân gian thường làm": anh duyệt danh sách hiện có.
+- [ ] Bát tự cùng khuôn đã làm (LH-2). Mở `/bat-tu` → Xem luận giải, đọc soát như Tử vi (kho lời riêng:
+  `battu_luan_hoi_kb.json`).
+- [ ] **Trước ngày bật thu Sao**: đọc soát 27 câu trả lời (các nhãn) của cả hai môn — đây là nội dung người dùng trả tiền để đọc.
+- [x] D1 đã làm (LH-3): chương 1 miễn phí có một câu trả lời mẫu "Tôi hợp nghề gì?".
+- [ ] (Quyết định) Việc tiếp theo trong D2–D6 của `docs/RA-SOAT-LUAN-HOI-VA-THU-SAO.md` mục 4–6; em khuyên D2 (hỏi đáp dùng
+  cùng nhãn với báo cáo).
 
 ### 4av. NF-BT — biên tập 21 bài NotFair + 4 bài tuần 3 (2026-11-17, `docs/kw6t/AUDIT-NOTFAIR-2026-11-17.md`)
 
@@ -42,7 +58,7 @@
 - [ ] Sau 4 tuần: `/quan-tri/doanh-thu` → tỉ lệ từng gói. Gói Ba lần xem dưới 20 % số đơn thì báo em hạ gói lẻ xuống 79.000 ₫.
 - [ ] (Quyết định) Nối cổng Sao cho Xem lá số 2 người / Nhà của bạn / Chọn ngày cho cả nhà; gói ghép "Trọn bộ 2027"; "Lì xì báo cáo Tết" — mục 8 của tài liệu.
 
-### 4av. TK-1 — sách cần bổ sung cho 7 mảng (2026-11-17, `docs/THONG-KE-SACH-VA-DE-XUAT-NAP.md`)
+### 4ax. TK-1 — sách cần bổ sung cho 7 mảng (2026-11-17, `docs/THONG-KE-SACH-VA-DE-XUAT-NAP.md`)
 
 - [x] (Đã chọn A, 17/11/2026) Đọc mục 3 và chọn phương án bản quyền **A / B / C** cho sách hiện đại (em khuyên A: anh mua sách, em đọc và rút quy tắc, không chép câu vào repo công khai).
 - [x] (Đã làm cả 5 việc — TK-2) Chọn việc làm trước trong 5 việc em tự làm được (mục 4, việc 1–5): đối chiếu Chaldea với Cheiro · chỉ tay phương Tây · 60 trụ ngày × giờ · Legge cho `/en/i-ching` · bài từ Dịch Lâm.

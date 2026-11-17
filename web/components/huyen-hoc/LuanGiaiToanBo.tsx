@@ -246,6 +246,7 @@ function PhanKhoa({ bc, dang, loi, moKhoa }: { bc: BaoCao; dang: boolean; loi: s
   const khoa = bc.chuong.filter((c): c is ChuongKhoa => c.khoa === true);
   const daDoc = bc.chuong.length - khoa.length;
   const phut = khoa.reduce((t, c) => t + c.moi_xem.phut_doc, 0);
+  const soCau = khoa.reduce((t, c) => t + (c.moi_xem.cau_tra_loi?.length ?? 0), 0);
   const { sao, so_du, dang_nhap, thuong_chao_mung } = bc.phi;
   const muc = useMucSao();
   // Cửa Sao v2: giá trị trước ("Đọc tiếp N chương"), rồi lối rẻ nhất — gồm lối miễn phí (quà + mời bạn) khi đủ.
@@ -259,7 +260,9 @@ function PhanKhoa({ bc, dang, loi, moKhoa }: { bc: BaoCao; dang: boolean; loi: s
         <span>Đã đọc {daDoc}/{bc.chuong.length} chương</span>
       </div>
       <h3 id="lg-khoa" className="mt-5 font-serif text-2xl">Còn {khoa.length} chương viết riêng cho lá số của bạn</h3>
-      <p className="mt-1 text-sm text-fg-muted">Khoảng {phut} phút đọc · mỗi chương bám đúng dữ liệu đã tính, có câu hỏi để bạn tự soi.</p>
+      <p className="mt-1 text-sm text-fg-muted" data-testid="lg-khoa-dan">
+        Khoảng {phut} phút đọc · {soCau > 0 ? `trả lời thẳng ${soCau} câu bạn hay hỏi, kèm hướng hoá giải từng mảng` : "mỗi chương bám đúng dữ liệu đã tính, có câu hỏi để bạn tự soi"}.
+      </p>
       <ol className="mt-5 space-y-3">
         {khoa.map((c) => (
           <li key={c.ma} className="relative overflow-hidden rounded-2xl border border-line/70 p-4 sm:p-5" data-testid="lg-chuong-khoa">
@@ -270,6 +273,26 @@ function PhanKhoa({ bc, dang, loi, moKhoa }: { bc: BaoCao; dang: boolean; loi: s
             <p className="mt-1 font-serif text-xl">{c.tieu_de}</p>
             {c.moi_xem.diem_nhan && <p className="mt-2 text-sm text-gold/90">{c.moi_xem.diem_nhan}</p>}
             <p className="mt-2 text-[0.95rem] italic text-fg">{c.moi_xem.cau_hoi}</p>
+            {c.moi_xem.cau_tra_loi && c.moi_xem.cau_tra_loi.length > 0 && (
+              <div className="mt-3" data-testid="lg-khoa-cau">
+                <p className="text-xs font-semibold uppercase tracking-wider text-fg-faint">Chương này trả lời</p>
+                <ul className="mt-1.5 grid grid-cols-1 gap-x-6 gap-y-1 text-sm text-fg-muted sm:grid-cols-2">
+                  {c.moi_xem.cau_tra_loi.map((q) => (
+                    <li key={q.ma}>
+                      {/* Bấm một câu = mở đúng luồng "Mở toàn bộ" (SAO-2); đo câu nào khiến người đọc muốn mở (chỉ mã câu). */}
+                      <button type="button" disabled={dang} data-testid="lg-khoa-cau-nut" data-ma={q.ma}
+                        onClick={() => { ghi("sao_cta_clicked", { tu: "cau_khoa", mo_dun: bc.mo_dun, chuong: c.ma, cau: q.ma }); moKhoa(); }}
+                        className="flex min-h-9 w-full items-start gap-2 rounded-lg text-left underline-offset-4 hover:text-fg hover:underline">
+                        <span aria-hidden className="mt-2 size-1 shrink-0 rounded-full bg-gold/70" /><span>{q.cau}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+                {(c.moi_xem.so_nguoi ?? 0) > 0 && (
+                  <p className="mt-1.5 text-xs text-fg-faint">Kèm chân dung {c.moi_xem.so_nguoi} người liên quan và hướng hoá giải cho mảng này.</p>
+                )}
+              </div>
+            )}
             <div className="mt-3 space-y-2 blur-[3px] select-none" aria-hidden>
               <div className="h-2.5 w-11/12 rounded bg-fg-faint/20" /><div className="h-2.5 w-4/5 rounded bg-fg-faint/20" /><div className="h-2.5 w-2/3 rounded bg-fg-faint/15" />
             </div>

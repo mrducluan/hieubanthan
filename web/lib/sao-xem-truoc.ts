@@ -2,7 +2,9 @@
 // N chương đầu giữ trọn; chương sau CHỈ còn tiêu đề + lời mời xem tiếp (điểm nhấn đã tính + câu hỏi mở) do engine
 // soạn — đoạn văn bị bỏ hẳn khỏi phản hồi (không lộ qua tab Network), không phải làm mờ bằng CSS.
 
-export type MoiXem = { diem_nhan: string; cau_hoi: string; so_doan: number; phut_doc: number };
+export type MoiXem = { diem_nhan: string; cau_hoi: string; so_doan: number; phut_doc: number;
+  /** LH-1: các CÂU HỎI chương trả lời (chỉ câu hỏi — không có câu trả lời) + số người có chân dung trong chương. */
+  cau_tra_loi?: { ma: string; cau: string }[]; so_nguoi?: number };
 export type ChuongDay = { ma: string; tieu_de: string; doan: string[]; van_ai?: string; moi_xem?: MoiXem; [k: string]: unknown };
 export type ChuongKhoa = { ma: string; tieu_de: string; khoa: true; moi_xem: MoiXem };
 export type BaoCaoDay = { chuong: ChuongDay[]; [k: string]: unknown };
@@ -26,6 +28,12 @@ export function catXemTruoc<T extends BaoCaoDay>(bc: T, mienPhi: number): Omit<T
     // MT-ĐS B6: khung "Cần lưu ý ở từng mảng" — dòng của chương khoá chỉ giữ tên + mức (lời và việc nên làm bỏ hẳn).
     if (Array.isArray(bc.luu_y_mang)) {
       o.luu_y_mang = (bc.luu_y_mang as Record<string, unknown>[]).map((r) =>
+        typeof r.tu_chuong === "string" && mo.has(r.tu_chuong) ? r
+          : { ma: r.ma, ten: r.ten, muc: r.muc, nhan_muc: r.nhan_muc, tu_chuong: r.tu_chuong, khoa: true });
+    }
+    // LH-1: bản đồ "Người quanh bạn" — người thuộc chương khoá chỉ giữ tên + mức (chân dung, tác động bỏ hẳn).
+    if (Array.isArray(bc.nguoi_quanh)) {
+      o.nguoi_quanh = (bc.nguoi_quanh as Record<string, unknown>[]).map((r) =>
         typeof r.tu_chuong === "string" && mo.has(r.tu_chuong) ? r
           : { ma: r.ma, ten: r.ten, muc: r.muc, nhan_muc: r.nhan_muc, tu_chuong: r.tu_chuong, khoa: true });
     }

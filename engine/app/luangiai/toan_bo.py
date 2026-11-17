@@ -129,8 +129,15 @@ def diem_nhan_hop(chuong: dict | None) -> str | None:
 
 def _moi_xem(mo_dun: str, ma: str, doan: list[str], chuong: dict | None = None) -> dict:
     chu = so_chu_chuong(chuong) if chuong is not None else sum(len(d.split()) for d in doan)
-    return {"diem_nhan": diem_nhan_hop(chuong) or diem_nhan(doan), "cau_hoi": CAU_HOI_MO.get((mo_dun, ma), "Chương này nói gì về chính bạn?"),
-            "so_doan": len(doan), "phut_doc": max(1, round(chu / 200))}
+    ra = {"diem_nhan": diem_nhan_hop(chuong) or diem_nhan(doan), "cau_hoi": CAU_HOI_MO.get((mo_dun, ma), "Chương này nói gì về chính bạn?"),
+          "so_doan": len(doan), "phut_doc": max(1, round(chu / 200))}
+    # LH-1 / LH-2: chương có lớp "Luận theo câu hỏi" → lời mời nêu ĐÚNG các câu hỏi chương trả lời (chỉ câu hỏi — chữ cố
+    # định của KB, giống nhau với mọi lá số; câu trả lời, nhãn, chân dung không xuống trình duyệt khi chương khoá).
+    lh = (chuong or {}).get("luan_hoi") or {}
+    if lh.get("tra_loi"):
+        ra["cau_tra_loi"] = [{"ma": t["ma"], "cau": t["cau"]} for t in lh["tra_loi"]]
+        ra["so_nguoi"] = len(lh.get("nguoi") or [])
+    return ra
 
 
 def tuvi(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = None,
