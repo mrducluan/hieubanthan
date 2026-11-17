@@ -31,7 +31,7 @@ test("Ban biên tập: khung ở CUỐI bài (dưới thân bài, nguồn), thu 
   expect(yKhung).toBeGreaterThan(await y("h1"));
   expect(yKhung).toBeGreaterThan(await y("#nguon"));
   expect(yKhung).toBeGreaterThan(await y("h2#hoi-dap"));
-  expect(yKhung).toBeLessThan(await y("#doc-tiep"));
+  expect(yKhung).toBeLessThan(await y("#bai-cung-chu-de"));
 
   // Thu gọn: đóng, thấy hai dòng gọn + lời mời xổ; phần dài (vai trò, tóm tắt, quy trình) ẩn.
   await expect(khung).not.toHaveAttribute("open", "");

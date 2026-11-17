@@ -166,8 +166,8 @@ export function BaiCms({ bai, tn, lienQuan, nhap, lapCms }: {
       {tn.keu_goi_cong_cu && <CtaBlog mang={mang} className="mt-12" />}
 
       {tn.bai_lien_quan && (
-        <section aria-labelledby="doc-tiep" className="mt-12">
-          <h2 id="doc-tiep" className="text-2xl">Đọc tiếp</h2>
+        <section aria-labelledby="bai-cung-chu-de" className="mt-12">
+          <h2 id="bai-cung-chu-de" className="text-2xl">Bài viết cùng chủ đề</h2>
         <DoKhoiCuoi khoi="doc_tiep" />
           <ul className="mt-4 grid gap-3 sm:grid-cols-3">
             {lienQuan.map((b) => (
