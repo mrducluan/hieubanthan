@@ -31,6 +31,18 @@ export const LO_KW6T: LoBai = {
   xuatBan: true,
 };
 
+/** KW-6T tuần 3 (chủ dự án giao 2026-11-17: "viết bài tiếp theo plan SEO dựa trên engine kiến thức"): 4 bài tuần 3 của kế hoạch
+ *  — 33 hay 6, thần số có đúng không, không biết giờ sinh, mua nhà cũ. Ảnh WebP vẽ bằng notfair/ve-anh.mjs, số liệu engine. */
+export const LO_KW6T_T3: LoBai = {
+  thuMuc: path.join(THU_MUC, "kw6t-tuan-3"),
+  nguonAnh: "Ban biên tập Hiểu Bản Thân vẽ minh hoạ (KW-6T tuần 3)",
+  ghiChu: "KW-6T tuần 3: bài soạn theo kế hoạch từ khoá 6 tháng (tuần 3), số liệu chạy bằng engine Hiểu Bản Thân ngày 17/11/2026 "
+    + "(hai cách cộng Đường đời trên 25.933 ngày sinh, lá số 12 canh giờ, tên Nguyễn Minh Anh, dấu hiệu phong thuỷ trong KB). "
+    + "Chủ dự án cho đăng ngay khi qua kiểm định; Chủ biên đọc lại, thêm trải nghiệm thật (Góc nhìn) rồi bấm Xuất bản lại.",
+  nhan: "KW-6T tuần 3",
+  xuatBan: true,
+};
+
 export function docBaiKhoiTao(lo: LoBai = LO_BLOG6): BaiKhoiTao[] {
   if (!existsSync(lo.thuMuc)) return [];
   return readdirSync(lo.thuMuc).filter((f) => f.endsWith(".json")).sort()
