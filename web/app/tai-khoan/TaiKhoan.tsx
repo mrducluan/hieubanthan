@@ -108,7 +108,7 @@ export function TaiKhoan({ emailDuLieu = null, dichVu = { hoiVien: false, chuyen
         {coTaiKhoan() && user === null && (
           <Card className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <Cloud className="size-6 shrink-0 text-gold" aria-hidden />
-            <p className="flex-1 text-sm text-fg-muted">Đăng nhập bằng email, Google hoặc số điện thoại để giữ hồ sơ khi đổi máy.</p>
+            <p className="flex-1 text-sm text-fg-muted">Đăng nhập bằng email hoặc tài khoản Google để giữ hồ sơ khi đổi máy.</p>
             <Button asChild><Link href="/dang-nhap">Đăng nhập</Link></Button>
           </Card>
         )}

@@ -1,5 +1,5 @@
 "use client";
-// Tài khoản tuỳ chọn (UI-4): đăng nhập email/Google/SMS, lưu hồ sơ vào bảng ho_so khi người dùng
+// Tài khoản tuỳ chọn (UI-4): đăng nhập email/Google (+ Apple, Facebook, SMS theo env NEXT_PUBLIC_DANG_NHAP — lib/dang-nhap.ts), lưu hồ sơ vào bảng ho_so khi người dùng
 // ĐỒNG Ý, tải về máy khác, xoá hồ sơ/xoá tài khoản. Không lưu luận giải (CLAUDE.md).
 import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
