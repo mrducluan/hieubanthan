@@ -30,6 +30,8 @@ export function vanHanh(): VanHanh {
     ["Facebook", "MXH_FACEBOOK"], ["Zalo", "MXH_ZALO"], ["TikTok", "MXH_TIKTOK"], ["YouTube", "MXH_YOUTUBE"],
     // SEO-K (mục 7): thêm kênh cho schema sameAs của tổ chức + nút ở chân trang (đặt env trên Vercel, chỉ https).
     ["X (Twitter)", "MXH_X"], ["Instagram", "MXH_INSTAGRAM"], ["LinkedIn", "MXH_LINKEDIN"], ["Threads", "MXH_THREADS"],
+    // SEO-Q: hồ sơ Google Business Profile (link maps.google.com / g.page) — nối thương hiệu với hồ sơ doanh nghiệp trên Google.
+    ["Google", "MXH_GOOGLE"],
   ];
   return {
     chuSoHuu: v("THONG_TIN_CHU_SO_HUU") ?? DON_VI_MAC_DINH.ten,

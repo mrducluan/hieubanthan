@@ -1,4 +1,5 @@
 // EEAT-1 — đội ngũ chuyên gia (hiện có chủ biên; chuyên gia cộng đồng thêm theo docs/LO-TRINH-CHUYEN-GIA.md).
+import { AnhTacGia } from "@/components/khung/AnhTacGia";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { ArrowRight } from "lucide-react";
@@ -28,8 +29,7 @@ export default async function Page() {
         {ds.map((cg) => (
           <li key={cg.slug}>
             <Link href={duongChuyenGia(cg.slug)} className="glass flex items-center gap-4 rounded-2xl p-5 hover:border-gold/50">
-              <span aria-hidden className="grid size-14 shrink-0 place-items-center rounded-full border border-gold/50 bg-gold/10 font-serif text-xl text-gold">
-                {cg.ten.split(" ").map((w) => w[0]).join("")}</span>
+              <AnhTacGia cg={cg} lop="size-14 text-xl" px={56} />
               <span className="min-w-0 flex-1">
                 <span className="block text-lg text-fg">{cg.ten}</span>
                 <span className="block text-xs text-fg-faint">{cg.vaiTro}</span>
