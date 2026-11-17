@@ -453,7 +453,8 @@ def _muc_loi_kinh(x: dict) -> dict | None:
                "y": L("hoi.kd.lk.dai_tuong", "Đại tượng: {y}", y=q["dai_tuong"]["dich"]), "nom_na": None,
                "thoan": q["thoan"].get("dich") if x["chu"] else None}
     tn = kb.truyen_nghia(x["que"], "hao" if x["loai"] == "hao" else "que_tu", x.get("vi_tri")) if x["loai"] != "dung" else None
-    return {"loai": "loi_kinh", "chu": x["chu"], **noi, **(tn or {}), "source_id": q["source_id"],
+    lg = kb.legge(x["que"], x["loai"], x.get("vi_tri"))      # TK-2 việc 4: bản Legge, chỉ bản Anh
+    return {"loai": "loi_kinh", "chu": x["chu"], **noi, **(tn or {}), **({"legge": lg} if lg else {}), "source_id": q["source_id"],
             "school_id": q["school_id"], "trang_thai": q["trang_thai"]}
 
 

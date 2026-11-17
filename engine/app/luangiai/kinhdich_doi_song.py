@@ -466,7 +466,7 @@ def doc_que(que: dict, pl: dict, goi: dict, *, mai_hoa: dict | None = None, luc_
             can_cu.append({"tieu_de": f"{L(f'kd.cc.{g}', ten)} → {gn[g]['nhan']}", "noi_dung": " ".join(gn[g]["can_cu"])})
     if tcq:
         can_cu.append({"tieu_de": L("kd.cc.the_que", "Lục Hào — thế quẻ (Tăng San Bốc Dịch)"), "noi_dung": tcq["can_cu"]})
-    loi_kinh = [{k: m.get(k) for k in ("tieu_de", "han", "dich", "y", "nom_na", "thoan", "chu", "tieu_tuong", "trinh", "chu_hy", "nguoi_dich")
+    loi_kinh = [{k: m.get(k) for k in ("tieu_de", "han", "dich", "y", "nom_na", "thoan", "chu", "tieu_tuong", "trinh", "chu_hy", "nguoi_dich", "legge")
                  if k in m or k in ("tieu_de", "han", "dich", "y", "nom_na", "thoan", "chu")} for m in goi["muc"] if m["loai"] == "loi_kinh"]
 
     # ---- câu hỏi tiếp (không gieo lại cùng việc)
