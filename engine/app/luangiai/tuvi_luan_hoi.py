@@ -318,26 +318,86 @@ def _hoa_dau(s: str) -> str:
     return s[:1].upper() + s[1:]
 
 
+def _net_them(cc: dict, cung: str, goi: str) -> list[str]:
+    """Nét riêng của CHÍNH cung ấy (hoá năm sinh, sát tinh, Tuần / Triệt, cát tinh) → tối đa hai câu thêm vào chân dung."""
+    x = cc[cung]
+    hoa = {h["hoa"] for h in x["hoa"]}
+    ma = [k for k, co in (("ky", "Kỵ" in hoa), ("loc", "Lộc" in hoa), ("sat", bool(x["sat"])), ("cham", bool(x["cham"])),
+                          ("quyen", "Quyền" in hoa), ("khoa", "Khoa" in hoa), ("cat", bool(x["cat"]))) if co]
+    # nét thêm không nói ngược mức của cung: cung thuận bỏ nét khó, cung cần lưu ý bỏ nét đỡ
+    bo = {"thuan": ("ky", "sat", "cham"), "can_chu_dong": ("loc", "khoa", "cat")}.get(x["muc"], ())
+    return [kb.chuoi("net_them", k).format(goi=goi, Goi=_hoa_dau(goi)) for k in ma if k not in bo][:2]
+
+
+VAI_NHOM = ("con", "anh_em", "ban_be", "nguoi_ngoai")      # cung nói về MỘT NHÓM người: đọc thế quan hệ, không tả tính một người
+
+
 def chan_dung(cc: dict, ma: str, gioi_tinh: str | None) -> tuple[str, str]:
-    """→ (câu chân dung, cách sống hợp với người đó) từ sao chính của cung người ấy."""
+    """→ (câu chân dung, cách đối đãi hợp).
+
+    • Vợ / chồng, cha mẹ: tả người (sao chính của cung) + nét riêng của cung.
+    • Con, anh chị em, bạn bè – đồng nghiệp, khách – đối tác: cung nói về một NHÓM người → câu đầu là THẾ của mối
+      quan hệ (theo mức cung đã chấm), sau đó mới tới kiểu người hay gặp (nói nghiêng, không khẳng định từng người).
+    • Sếp: cùng cung Phụ Mẫu với cha mẹ nhưng lời riêng (mục `sep` của sao + thế quan hệ), không lặp câu cha mẹ."""
     v = kb.vai()[ma]
-    ten, goi = _ten_vai(ma, gioi_tinh), v["goi"]
-    ds = cc[v["cung"]]["chinh"]
-    if not ds:
-        return kb.chuoi("chan_dung_mau", "khong").format(vai=ten, goi=goi), ""
-    s = ds[0]
-    o = kb.lay("sao_nguoi", s["ten"]) or {}
-    if s["muon"]:
-        cau = kb.chuoi("chan_dung_mau", "muon").format(goi=goi, kieu=o.get("kieu", ""))
-    elif s["do_sang"] == "Hãm":
-        cau = kb.chuoi("chan_dung_mau", "ham").format(vai=ten, kieu=o.get("kieu", ""), ham=o.get("ham", ""))
+    ten, goi, cung = _ten_vai(ma, gioi_tinh), v["goi"], v["cung"]
+    ds = cc[cung]["chinh"]
+    la_sep, la_nhom = ma == "sep", ma in VAI_NHOM
+    the = kb.chuoi("the_quan_he", ma, cc[cung]["muc"]) if (la_sep or la_nhom) else ""
+    net = [] if la_sep else _net_them(cc, cung, goi)[: 1 if la_nhom else 2]
+    s = ds[0] if ds else None
+    o = (kb.lay("sao_nguoi", s["ten"]) or {}) if s else {}
+    r = (o.get("sep") or {}) if la_sep else o
+    if la_sep or la_nhom:
+        if not s:
+            kieu = kb.chuoi("chan_dung_mau", "sep_khong" if la_sep else "kieu_muon")
+        elif s["muon"]:
+            kieu = (kb.chuoi("chan_dung_mau", "sep_muon").format(kieu=r.get("kieu", "")) if la_sep
+                    else kb.chuoi("chan_dung_mau", "kieu_muon"))
+        else:
+            kieu = (kb.chuoi("chan_dung_mau", "sep_ro") if la_sep else kb.chuoi("chan_dung_mau", "kieu_" + ma)).format(
+                kieu=r.get("kieu", ""), ngan=o.get("ngan", ""))
+            if s["do_sang"] == "Hãm" and o.get("ham"):
+                kieu += " " + kb.chuoi("chan_dung_mau", "kieu_ham").format(ham=o["ham"])
+        cau = " ".join(x for x in (the, kieu, *net) if x)
     else:
-        cau = kb.chuoi("chan_dung_mau", "ro").format(vai=ten, kieu=o.get("kieu", ""))
-    if len(ds) > 1 and not ds[1]["muon"]:
-        o2 = kb.lay("sao_nguoi", ds[1]["ten"]) or {}
-        if o2.get("ngan"):
-            cau += " " + kb.chuoi("chan_dung_mau", "them").format(ngan=o2["ngan"])
-    return _hoa_dau(cau), o.get("song", "")
+        if not s:
+            cau = kb.chuoi("chan_dung_mau", "khong").format(vai=ten, goi=goi)
+        elif s["muon"]:
+            cau = kb.chuoi("chan_dung_mau", "muon").format(goi=goi, kieu=o.get("kieu", ""))
+        elif s["do_sang"] == "Hãm":
+            cau = kb.chuoi("chan_dung_mau", "ham").format(vai=ten, kieu=o.get("kieu", ""), ham=o.get("ham", ""))
+        else:
+            cau = kb.chuoi("chan_dung_mau", "ro").format(vai=ten, kieu=o.get("kieu", ""))
+        if s and len(ds) > 1 and not ds[1]["muon"]:
+            o2 = kb.lay("sao_nguoi", ds[1]["ten"]) or {}
+            if o2.get("ngan"):
+                cau += " " + kb.chuoi("chan_dung_mau", "them").format(ngan=o2["ngan"])
+        cau = " ".join(x for x in (_hoa_dau(cau), *net) if x)
+    if not s:
+        song = ""
+    elif s["muon"] and not la_sep:
+        song = kb.chuoi("chan_dung_mau", "song_muon").format(goi=goi)
+    else:
+        song = r.get("song", "")
+    return cau, song
+
+
+def _sep_viec(ls: dict) -> tuple[list[str], list[str], list[str]]:
+    """Sếp ↔ CÔNG VIỆC của bạn: đường bay tứ hoá giữa cung Phụ Mẫu và cung Quan Lộc (khác thẻ cha mẹ: Phụ Mẫu ↔ Mệnh)."""
+    can_pm, can_ql = _cung(ls, "Phụ Mẫu").get("can"), _cung(ls, "Quan Lộc").get("can")
+    di, ve, cu = [], [], []
+    if can_pm:
+        for x in phi_calc.phi_tu_can(can_pm, ls["cung"]):
+            if x["den_cung"] == "Quan Lộc":
+                ve.append(kb.chuoi("tac_dong", "sep_viec", x["hoa"]))
+                cu.append(f"Can cung Phụ Mẫu ({can_pm}) phi Hoá {x['hoa']} ({x['sao']}) vào cung Quan Lộc")
+    if can_ql:
+        for x in phi_calc.phi_tu_can(can_ql, ls["cung"]):
+            if x["den_cung"] == "Phụ Mẫu":
+                di.append(kb.chuoi("tac_dong", "sep_viec", "ban_" + x["hoa"]))
+                cu.append(f"Can cung Quan Lộc ({can_ql}) phi Hoá {x['hoa']} ({x['sao']}) vào cung Phụ Mẫu")
+    return di, ve, cu
 
 
 def tac_dong(ls: dict, cung_nguoi: str, goi: str) -> tuple[list[str], list[str], list[str]]:
@@ -361,7 +421,7 @@ def nguoi(ls: dict, cc: dict, ma: str, gioi_tinh: str | None) -> dict:
     v = kb.vai()[ma]
     cung = v["cung"]
     cd, song = chan_dung(cc, ma, gioi_tinh)
-    di, ve, cu = tac_dong(ls, cung, v["goi"])
+    di, ve, cu = _sep_viec(ls) if ma == "sep" else tac_dong(ls, cung, v["goi"])
     muc = cc[cung]["muc"]
     return {"ma": ma, "ten": _ten_vai(ma, gioi_tinh), "muc": muc, "nhan_muc": kb_ds.nhan_muc(muc), "chan_dung": cd,
             "song_chung": song, "ban_voi_ho": di, "ho_voi_ban": ve, "tu_chuong": v["chuong"],

@@ -46,8 +46,8 @@
       "chuong": "quan_he"
     },
     "nguoi_ngoai": {
-      "ten": "Khách hàng, đối tác",
-      "goi": "khách hàng, đối tác",
+      "ten": "Người ngoài xã hội",
+      "goi": "người ngoài",
       "cung": "Thiên Di",
       "chuong": "quan_he"
     }
@@ -57,92 +57,159 @@
     "ham": "{vai} thường là {kieu}; lúc căng thẳng dễ {ham}.",
     "them": "Pha thêm nét {ngan}.",
     "muon": "Nét của {goi} không lộ hẳn, mỗi giai đoạn một khác; phần hay thấy nhất là {kieu}.",
-    "khong": "Không có nét nào nổi hẳn: {goi} dễ đổi theo hoàn cảnh, nên nhìn từng giai đoạn mà đối đãi."
+    "khong": "Không có nét nào nổi hẳn: {goi} dễ đổi theo hoàn cảnh, nên nhìn từng giai đoạn mà đối đãi.",
+    "sep_ro": "Bề trên bạn hay gặp trong công việc thường là {kieu}.",
+    "sep_ham": "Bề trên bạn hay gặp trong công việc thường là {kieu}; lúc việc căng dễ {ham}.",
+    "sep_muon": "Kiểu bề trên của bạn không cố định, mỗi nơi làm một khác; kiểu hay gặp nhất là {kieu}.",
+    "sep_khong": "Không có kiểu bề trên nào nổi hẳn: mỗi nơi làm bạn gặp một kiểu sếp, nên quan sát vài tháng đầu rồi mới chọn cách làm việc.",
+    "song_muon": "Nhìn {goi} theo từng giai đoạn rồi mới chọn cách đối đãi; đừng đóng khung vào một kiểu.",
+    "kieu_con": "Nết con nghiêng về kiểu {ngan}.",
+    "kieu_anh_em": "Anh chị em nghiêng về kiểu {ngan}.",
+    "kieu_ban_be": "Người chơi lâu, làm cùng lâu với bạn thường là {kieu}.",
+    "kieu_nguoi_ngoai": "Người ngoài hợp với bạn nhất thường là {kieu}.",
+    "kieu_ham": "Lúc căng thẳng họ dễ {ham}.",
+    "kieu_muon": "Kiểu người trong mối này không cố định, mỗi giai đoạn một khác."
   },
   "sao_nguoi": {
     "Tử Vi": {
       "kieu": "người có uy, thích cầm trịch và trọng thể diện",
       "ngan": "có uy, thích quyết",
       "ham": "độc đoán, khó nghe góp ý",
-      "song": "Việc lớn để họ quyết phần chính; muốn góp ý thì nói riêng, đừng nói trước mặt người khác."
+      "song": "Việc lớn để họ quyết phần chính; muốn góp ý thì nói riêng, đừng nói trước mặt người khác.",
+      "sep": {
+        "kieu": "người có uy, thích quyết việc lớn và muốn được tôn trọng đúng vai",
+        "song": "Báo cáo ngắn, đúng tuyến; có ý khác thì nói riêng, đừng nói trước đông người."
+      }
     },
     "Thiên Cơ": {
       "kieu": "người nhanh trí, hay tính toán và lo xa",
       "ngan": "nhanh trí, lo xa",
       "ham": "nghĩ nhiều, hay đổi ý",
-      "song": "Nói rõ kế hoạch từ sớm và cho họ thời gian cân nhắc; đừng ép trả lời ngay."
+      "song": "Nói rõ kế hoạch từ sớm và cho họ thời gian cân nhắc; đừng ép trả lời ngay.",
+      "sep": {
+        "kieu": "người giỏi tính đường, hay đổi phương án khi có dữ kiện mới",
+        "song": "Gửi phương án kèm số liệu từ sớm; chuẩn bị sẵn phương án hai vì họ hay đổi ý."
+      }
     },
     "Thái Dương": {
       "kieu": "người nhiệt tình, thẳng tính, hay lo việc chung",
       "ngan": "nhiệt tình, thẳng",
       "ham": "nóng nảy, lo việc ngoài hơn việc nhà",
-      "song": "Ghi nhận công sức của họ thành lời; việc cần họ làm thì hẹn giờ cụ thể."
+      "song": "Ghi nhận công sức của họ thành lời; việc cần họ làm thì hẹn giờ cụ thể.",
+      "sep": {
+        "kieu": "người thẳng, làm việc công khai, quý người dám nhận việc",
+        "song": "Nhận việc rõ ràng và báo tiến độ đều; làm tốt thì họ nêu tên bạn trước tập thể."
+      }
     },
     "Vũ Khúc": {
       "kieu": "người cứng cỏi, thực tế, giỏi chuyện tiền bạc nhưng ít lời ngọt",
       "ngan": "thực tế, cứng cỏi",
       "ham": "khô khan, cố chấp",
-      "song": "Nói với họ bằng việc và con số cụ thể; đừng đợi lời hoa mỹ, hãy nhìn việc họ làm."
+      "song": "Nói với họ bằng việc và con số cụ thể; đừng đợi lời hoa mỹ, hãy nhìn việc họ làm.",
+      "sep": {
+        "kieu": "người nhìn vào kết quả và con số, ít lời, không thích vòng vo",
+        "song": "Nói bằng số và mốc thời gian; hứa gì thì giao đúng thứ đó."
+      }
     },
     "Thiên Đồng": {
       "kieu": "người hiền, dễ chịu, thích yên ổn",
       "ngan": "hiền, thích yên ổn",
       "ham": "né việc khó, hay ỷ lại",
-      "song": "Giao việc rõ ràng, nhắc nhẹ nhàng; đừng lớn tiếng vì họ dễ thu mình lại."
+      "song": "Giao việc rõ ràng, nhắc nhẹ nhàng; đừng lớn tiếng vì họ dễ thu mình lại.",
+      "sep": {
+        "kieu": "người dễ chịu, ngại va chạm, hay để việc trôi theo nhịp chung",
+        "song": "Chủ động đề xuất và nhắc mốc; đừng chờ họ thúc mới làm."
+      }
     },
     "Liêm Trinh": {
       "kieu": "người sắc sảo, nguyên tắc, tự trọng cao và có sức hút",
       "ngan": "sắc sảo, tự trọng",
       "ham": "nóng, hay ghen, dễ làm căng",
-      "song": "Giữ đúng lời hứa và rõ ràng trong mọi chuyện; đừng đùa quá trớn về lòng tự trọng của họ."
+      "song": "Giữ đúng lời hứa và rõ ràng trong mọi chuyện; đừng đùa quá trớn về lòng tự trọng của họ.",
+      "sep": {
+        "kieu": "người kỹ nguyên tắc, kiểm soát chặt và nhớ lâu chuyện sai sót",
+        "song": "Làm đúng quy trình, lỗi thì báo sớm kèm cách sửa; đừng giấu."
+      }
     },
     "Thiên Phủ": {
       "kieu": "người chững chạc, bao dung, giỏi giữ của và thích ổn định",
       "ngan": "chững chạc, giữ của",
       "ham": "bảo thủ, giữ kẽ",
-      "song": "Việc lớn bàn trước với họ; tôn trọng nếp cũ, muốn đổi thì đổi từng bước."
+      "song": "Việc lớn bàn trước với họ; tôn trọng nếp cũ, muốn đổi thì đổi từng bước.",
+      "sep": {
+        "kieu": "người điềm, chắc tay, giữ ổn định và che cho người của mình",
+        "song": "Làm chắc phần mình, đừng đẩy rủi ro lên họ; đổi lại họ giữ chỗ cho bạn lâu dài."
+      }
     },
     "Thái Âm": {
       "kieu": "người dịu, tinh tế, kín đáo và chăm lo cho nhà",
       "ngan": "dịu, kín đáo",
       "ham": "hay buồn, nghĩ ngợi, giữ trong lòng",
-      "song": "Hỏi han đều đặn, đừng đợi họ tự nói; để ý những điều nhỏ họ làm."
+      "song": "Hỏi han đều đặn, đừng đợi họ tự nói; để ý những điều nhỏ họ làm.",
+      "sep": {
+        "kieu": "người kín, tinh ý, để tâm tới chi tiết và cách cư xử",
+        "song": "Chỉn chu câu chữ, giấy tờ; góp ý với họ nên nhẹ và riêng."
+      }
     },
     "Tham Lang": {
       "kieu": "người hoạt bát, nhiều tài lẻ, giao thiệp rộng",
       "ngan": "hoạt bát, quen rộng",
       "ham": "ham vui, dễ sa đà",
-      "song": "Nói rõ ranh giới ngay từ đầu; gặp họ ở dịp vui, đông người thì dễ thân hơn là bàn việc khô."
+      "song": "Nói rõ ranh giới ngay từ đầu; gặp họ ở dịp vui, đông người thì dễ thân hơn là bàn việc khô.",
+      "sep": {
+        "kieu": "người nhiều tham vọng, giỏi giao thiệp, thích người nhanh và được việc",
+        "song": "Cho họ thấy kết quả nhanh; thoả thuận quyền lợi của bạn rõ từ đầu."
+      }
     },
     "Cự Môn": {
       "kieu": "người giỏi nói, lý lẽ sắc và hay soi kỹ",
       "ngan": "giỏi nói, hay soi",
       "ham": "hay cãi, đa nghi, lời nói dễ làm đau",
-      "song": "Tranh luận về việc, đừng về người; lúc căng thì viết ra thay vì nói."
+      "song": "Tranh luận về việc, đừng về người; lúc căng thì viết ra thay vì nói.",
+      "sep": {
+        "kieu": "người hay xét nét, hỏi vặn, giỏi lý lẽ",
+        "song": "Chuẩn bị kỹ trước khi trình bày; việc quan trọng nên chốt lại bằng chữ."
+      }
     },
     "Thiên Tướng": {
       "kieu": "người chu đáo, trọng công bằng, hay giúp người và chỉn chu",
       "ngan": "chu đáo, công bằng",
       "ham": "cả nể, thiếu quyết đoán",
-      "song": "Cùng quyết với họ; đừng bắt họ đứng giữa hai bên."
+      "song": "Cùng quyết với họ; đừng bắt họ đứng giữa hai bên.",
+      "sep": {
+        "kieu": "người trọng thể diện, công bằng, thích mọi thứ đúng vai đúng việc",
+        "song": "Giữ thể diện cho họ trước người ngoài; nhờ việc gì thì nói rõ lý do."
+      }
     },
     "Thiên Lương": {
       "kieu": "người điềm đạm, hay che chở và thích khuyên bảo",
       "ngan": "điềm đạm, hay che chở",
       "ham": "hay lên lớp, cầu toàn",
-      "song": "Nghe họ khuyên hết rồi mới nói ý mình; nhờ họ góp ý là cách dễ gần nhất."
+      "song": "Nghe họ khuyên hết rồi mới nói ý mình; nhờ họ góp ý là cách dễ gần nhất.",
+      "sep": {
+        "kieu": "người lớn tuổi hơn hoặc có tính che chở, thích dạy bảo",
+        "song": "Hỏi ý họ trước việc khó; nghe hết rồi mới trình bày cách của bạn."
+      }
     },
     "Thất Sát": {
       "kieu": "người quyết liệt, độc lập, chịu được việc nặng",
       "ngan": "quyết liệt, độc lập",
       "ham": "nóng, cứng, ít nhường",
-      "song": "Cho họ khoảng riêng; đừng đối đầu lúc họ đang nóng, đợi nguội rồi nói."
+      "song": "Cho họ khoảng riêng; đừng đối đầu lúc họ đang nóng, đợi nguội rồi nói.",
+      "sep": {
+        "kieu": "người quyết nhanh, đòi hỏi cao, nóng khi việc chậm",
+        "song": "Trả lời ngắn, làm nhanh; việc chưa xong thì báo trước hạn, đừng đợi bị hỏi."
+      }
     },
     "Phá Quân": {
       "kieu": "người dám bỏ cái cũ, thích đổi mới và khó đoán",
       "ngan": "thích đổi mới",
       "ham": "bốc đồng, tiêu pha mạnh tay",
-      "song": "Chuyện tiền và những thay đổi lớn nói trước với họ; đừng mong họ ngồi yên một chỗ."
+      "song": "Chuyện tiền và những thay đổi lớn nói trước với họ; đừng mong họ ngồi yên một chỗ.",
+      "sep": {
+        "kieu": "người thích đổi mới, phá lề lối cũ, hay thay người thay việc",
+        "song": "Sẵn sàng đổi cách làm; giữ cho mình một kỹ năng riêng để không bị thay."
+      }
     }
   },
   "tac_dong": {
@@ -158,7 +225,17 @@
       "Khoa": "{Goi} nâng tiếng tăm và chỉ lối cho bạn; bạn nên hỏi ý họ khi phân vân.",
       "Kỵ": "{Goi} là chỗ bạn nặng lòng; nhiều quyết định của bạn bị kéo theo chuyện của họ."
     },
-    "khong": "Giữa bạn và {goi} không có đường tác động riêng nào nổi lên; hai bên ảnh hưởng nhau ở mức thường."
+    "khong": "Giữa bạn và {goi} không có đường tác động riêng nào nổi lên; hai bên ảnh hưởng nhau ở mức thường.",
+    "sep_viec": {
+      "Lộc": "Bề trên thường mang việc tốt, cơ hội về cho bạn.",
+      "Quyền": "Bề trên hay giao bạn việc nặng và quyền đi kèm; áp lực nhưng lên tay nghề.",
+      "Khoa": "Bề trên hay đứng ra nói tốt, bảo lãnh uy tín cho việc của bạn.",
+      "Kỵ": "Việc của bạn dễ bị bề trên soi kỹ hoặc giữ lại; mọi thứ nên có giấy tờ.",
+      "ban_Lộc": "Việc bạn làm thường đem lợi về cho bề trên, nên bạn dễ được giữ lại.",
+      "ban_Quyền": "Bạn hay gánh phần việc khó thay bề trên.",
+      "ban_Khoa": "Việc bạn làm giúp bề trên được tiếng.",
+      "ban_Kỵ": "Bạn dễ ôm việc của bề trên tới mức quá sức; nên nói rõ giới hạn."
+    }
   },
   "sao_nghe": {
     "Tử Vi": {
@@ -1104,5 +1181,41 @@
     "quyen": "bạn nắm được phần quyết",
     "khoa": "có tiếng tốt, việc dễ rõ ràng",
     "noi": "mảng này nổi lên trong năm"
+  },
+  "net_them": {
+    "ky": "Giữa bạn và {goi} hay có điều khó nói thẳng, dễ hiểu lầm nhau.",
+    "loc": "Bạn dễ được {goi} thương và cho phần hơn.",
+    "sat": "Mối này hay va chạm vì cả hai bên đều nóng.",
+    "cham": "Lúc đầu thường xa cách, ít gần; càng về sau càng dễ nói chuyện.",
+    "quyen": "{Goi} hay muốn quyết thay bạn.",
+    "khoa": "{Goi} hay chỉ đường, giúp bạn giữ tiếng tốt.",
+    "cat": "Mối này thường có người đứng giữa đỡ lời."
+  },
+  "the_quan_he": {
+    "con": {
+      "thuan": "Bạn có duyên với con: con gần bạn, dễ dạy và là chỗ dựa tinh thần khi bạn về già.",
+      "can_bang": "Duyên với con ở mức thường: thương nhau nhưng mỗi giai đoạn phải học lại cách nói chuyện với con.",
+      "can_chu_dong": "Chuyện con cái là mảng bạn phải bỏ nhiều công: con đến chậm, hoặc nuôi dạy vất vả hơn nhà khác."
+    },
+    "anh_em": {
+      "thuan": "Anh chị em là chỗ đỡ thật của bạn: lúc khó có người đứng ra giúp.",
+      "can_bang": "Anh chị em thương nhau nhưng mỗi người một việc; cần thì giúp, không cần thì ít qua lại.",
+      "can_chu_dong": "Anh chị em ít nhờ được nhau, dễ lệch ý về tiền bạc và việc chung của nhà."
+    },
+    "sep": {
+      "thuan": "Bạn dễ được bề trên để ý và nâng đỡ; đi làm thường gặp sếp chịu dạy việc.",
+      "can_bang": "Với bề trên, bạn được việc thì được ghi nhận, không có phần ưu ái sẵn.",
+      "can_chu_dong": "Bạn hay khó hợp ý bề trên: làm nhiều mà ít được nói đỡ, dễ bị xét nét."
+    },
+    "ban_be": {
+      "thuan": "Bạn có lộc bạn bè: quen rộng, đồng nghiệp chịu giúp và giữ được bạn lâu.",
+      "can_bang": "Bạn bè, đồng nghiệp vừa đủ: chơi được, làm chung được, nhưng người giúp thật lúc khó không nhiều.",
+      "can_chu_dong": "Chuyện bạn bè, đồng nghiệp là chỗ bạn dễ thiệt: giúp người nhiều hơn được giúp, dễ bị nói sau lưng."
+    },
+    "nguoi_ngoai": {
+      "thuan": "Ra ngoài bạn được đón nhận: người mới quen dễ tin bạn, đi xa hay gặp người giúp. Nếu bạn làm ăn, đó là khách và đối tác dễ gật đầu.",
+      "can_bang": "Ra ngoài bạn được việc nhờ sức mình là chính: người ngoài không gây khó nhưng cũng không ưu ái bạn.",
+      "can_chu_dong": "Ra ngoài bạn hay gặp người khó tính, cạnh tranh hoặc đổi ý giữa chừng; việc với người ngoài nên rõ ràng bằng giấy tờ."
+    }
   }
 }
