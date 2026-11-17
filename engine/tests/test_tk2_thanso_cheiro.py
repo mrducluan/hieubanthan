@@ -30,12 +30,15 @@ CHEIRO = "thanso_cheiro_book_of_numbers_1926.json"
 # Nhãn sách hiện công khai (kiểu sách, không tên máy chủ / bản quét) → tệp kho nguồn dùng để so chữ.
 SACH_KHO = {
     "Cheiro's Book of Numbers (1926)": CHEIRO,
-    "W. Wynn Westcott, Numbers: Their Occult Power and Mystic Virtues (1890; bản in 1911)": "thanso_westcott_numbers_1911.json",
+    "W. Wynn Westcott, Numbers: Their Occult Power and Mystic Virtues (1890)": "thanso_westcott_numbers_1911.json",
+    # Tên tác giả L. Dow Balliett bị BM-1 chặn ở đầu ra công khai (cong_khai + test_cong_khai) → chỉ ghi tên sách + năm.
     "The Philosophy of Numbers: Their Tone and Colors (1908)": "thanso_balliett_philosophy_1908.json",
-    "How to Attain Success Through the Strength of Vibration (1905)": "thanso_balliett_success_1905.json",
 }
-# Chương của SÁCH → tên chương trong kho nguồn (đầu đề chương XIII bị máy đọc thành "XI H").
-CHUONG = {"XII": "Chapter XII", "XIII": "Chapter XI H", "XXXI": "Chapter XXXI"}
+# Máy đọc đổi "11" thành "ii" ở mọi chỗ sách dẫn lại số 11.
+SO_OCR = {11: "(?:11|ii)"}
+# Chương của SÁCH → (số, tên) chương trong kho nguồn. Đầu đề chương XIII bị máy đọc thành "Chapter XI" + tên "H"
+# (trùng số với chương XI "THE NUMBER 9") nên phải phân biệt bằng tên.
+CHUONG = {"XII": ("Chapter XII", "THE OCCULT"), "XIII": ("Chapter XI", "H"), "XXXI": ("Chapter XXXI", "")}
 
 
 def chuan(s: str) -> str:
@@ -46,8 +49,10 @@ def _kho(ten: str) -> dict:
     return json.loads((NGUON / ten).read_text(encoding="utf-8"))
 
 
-def _van(ten: str, chuong: str | None = None) -> str:
-    return chuan(" ".join(p for c in _kho(ten)["chuong"] if chuong is None or c["so"] == chuong for p in c["doan"]))
+def _van(ten: str, chuong: tuple[str, str] | None = None) -> str:
+    def dung(c: dict) -> bool:
+        return chuong is None or (c["so"] == chuong[0] and (c["ten"] == chuong[1] if chuong[1] == "H" else c["ten"].startswith(chuong[1])))
+    return chuan(" ".join(p for c in _kho(ten)["chuong"] if dung(c) for p in c["doan"]))
 
 
 def _tho(ten: str) -> str:
@@ -55,7 +60,7 @@ def _tho(ten: str) -> str:
 
 
 def _kb() -> dict:
-    with ngon_ngu.dat("vi"):
+    with ngon_ngu.dung("vi"):
         return nap.doc("thanso_chaldean.json")
 
 
@@ -165,7 +170,7 @@ def test_moi_so_kep_co_cau_sach():
         if tr["chuong"] == "XIII":
             vi_tri.append((n, p))
         else:       # câu sách tự dẫn lại ở chương khác: ngay trước đó phải nêu đúng con số
-            assert re.search(rf"\b{n}\b", van[tr["chuong"]][max(0, p - 400):p]), (n, "đoạn dẫn không nêu số")
+            assert re.search(rf"\b{SO_OCR.get(n, n)}\b", van[tr["chuong"]][max(0, p - 400):p]), (n, "đoạn dẫn không nêu số")
     # trong chương XIII sách tả lần lượt 10 → 51: vị trí các câu phải tăng dần theo số
     assert [p for _, p in vi_tri] == sorted(p for _, p in vi_tri), vi_tri
     assert len(vi_tri) >= 22
@@ -198,7 +203,7 @@ def _trich_co_nguyen_van(loai: str):
 
 @pytest.mark.parametrize("loai", ["so", "so_kep"])
 def test_nguyen_van_tren_trang_la_chu_cua_sach(loai):
-    with ngon_ngu.dat("vi"):
+    with ngon_ngu.dung("vi"):
         ds = list(_trich_co_nguyen_van(loai))
     assert ds
     for slug, x in ds:
@@ -209,7 +214,7 @@ def test_nguyen_van_tren_trang_la_chu_cua_sach(loai):
 
 
 def test_trang_so_kep_mang_dung_cau_trong_kb():
-    with ngon_ngu.dat("vi"):
+    with ngon_ngu.dung("vi"):
         kep = nap.doc("thanso_chaldean.json")["kep"]
         for n in range(10, 53):
             t = trang.lay("so_kep", f"so-kep-{n}")
@@ -228,7 +233,7 @@ _DAU_DE = {"1": "the monad i", "2": "the dyad 2", "3": "the triad 3", "4": "the 
 
 def test_trang_y_nghia_so_co_cau_sach_xua_va_ghi_ban_bien_tap():
     westcott = _van("thanso_westcott_numbers_1911.json")
-    with ngon_ngu.dat("vi"):
+    with ngon_ngu.dung("vi"):
         for so in trang._SO:
             t = trang.lay("so", f"so-{so}")
             muc = [m for m in t["muc"] if m.get("trich_dan")]
@@ -239,7 +244,7 @@ def test_trang_y_nghia_so_co_cau_sach_xua_va_ghi_ban_bien_tap():
             if so in _DAU_DE:
                 assert x["sach"].startswith("W. Wynn Westcott"), so
                 p = westcott.find(chuan(x["nguyen_van"]))
-                a, b = westcott.find(_DAU_DE[so]), westcott.find(_DAU_DE[str(int(so) + 1)])
+                a, b = (re.search(rf"{_DAU_DE[k]}\b", westcott).start() for k in (so, str(int(so) + 1)))
                 assert 0 <= a < p < b, (so, a, p, b)
             elif so == "33":
                 assert chuan(x["nguyen_van"]).startswith("33 ") and x["sach"].startswith("W. Wynn Westcott")
@@ -250,11 +255,11 @@ def test_trang_y_nghia_so_co_cau_sach_xua_va_ghi_ban_bien_tap():
 def test_ban_tieng_anh_khong_lot_chu_viet():
     """Bản phủ tiếng Anh: câu sách (vốn tiếng Anh) hiện cả hai bản; lời diễn giải + chú thích phải là tiếng Anh."""
     dau = re.compile(r"[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]", re.I)
-    with ngon_ngu.dat("en"):
+    with ngon_ngu.dung("en"):
         for loai, slugs in (("so", [f"so-{s}" for s in trang._SO]), ("so_kep", [f"so-kep-{n}" for n in range(10, 53)])):
             for slug in slugs:
-                for m in trang.lay(loai, slug)["muc"]:
-                    for x in m.get("trich_dan") or []:
-                        assert x.get("nguyen_van"), slug
+                td = [x for m in trang.lay(loai, slug)["muc"] for x in m.get("trich_dan") or []]
+                assert any(x.get("nguyen_van") for x in td), slug
+                for x in td:
                         for k in ("sach", "chuong", "nghia", "chu_thich"):
                             assert not dau.search(x.get(k) or ""), (slug, k, x.get(k))

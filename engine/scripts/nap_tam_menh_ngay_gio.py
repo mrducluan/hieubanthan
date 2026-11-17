@@ -6,10 +6,10 @@ Cấu trúc sách (bản Tứ khố trong `fixtures/nguon/tam_menh_thong_hoi_du_
   (2) một đoạn văn xuôi «X日YZ時…» giải bài ca,
   (3) sáu đoạn riêng từng trụ ngày (甲子日…, 甲寅日…) kèm lá số người xưa trong 〔…〕,
   (4) vài bài ca kết.
-Tệp này chỉ lấy (1) — bài ca chung — làm `han` của KB `app/kb/data/battu_ngay_gio.json`, khoá "<can ngày>|<chi giờ>".
+Tệp này chỉ lấy (1) — bài ca chung (28 chữ, hoặc một đoạn liền trong đó khi cả bài có chữ nặng không cần) — làm `han` của KB `app/kb/data/battu_ngay_gio.json`, khoá "<can ngày>|<chi giờ>".
 Trụ giờ của sách theo phép Ngũ Thử Độn (ngày Giáp, Kỷ khởi giờ Giáp Tý…) nên can ngày + chi giờ xác định đúng một mục.
 
-Chạy lại (tất định): `PYTHONPATH=. .venv/bin/python scripts/nap_tam_menh_ngay_gio.py` — chỉ làm mới `han`, `tru_gio`;
+Chạy lại (tất định): `PYTHONPATH=. .venv/bin/python scripts/nap_tam_menh_ngay_gio.py` — chỉ làm mới `han` (khi không còn nằm trong bài ca), `tru_gio`, `quyen`;
 lời Việt (`am`, `y`, `nhom`, `ham_y`, `viec`…) do ban biên tập viết trong tệp KB, script không đụng. `--kiem` chỉ so, không ghi.
 """
 from __future__ import annotations
@@ -66,9 +66,11 @@ def main() -> int:
     lech = 0
     for k, c in cac.items():
         cu = muc.setdefault(k, {})
-        if cu.get("han") != c["han"] or cu.get("tru_gio") != c["tru_gio"]:
+        # `han` của KB có thể là một đoạn liền trích từ bài ca (ban biên tập chọn) — còn nằm trong bài ca thì giữ.
+        han = cu["han"] if cu.get("han") and cu["han"] in c["han"] else c["han"]
+        if cu.get("han") != han or cu.get("tru_gio") != c["tru_gio"] or cu.get("quyen") != c["quyen"]:
             lech += 1
-            cu.update({"han": c["han"], "tru_gio": c["tru_gio"]})
+            cu.update({"han": han, "tru_gio": c["tru_gio"], "quyen": c["quyen"]})
     if "--kiem" in sys.argv:
         print(f"{len(cac)} mục, {lech} mục lệch với KB")
         return 1 if lech else 0

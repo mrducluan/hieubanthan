@@ -77,7 +77,7 @@ def test_cau_trich_ngan_va_chu_sach():
         assert 20 <= len(t) <= 260, (m["ma"], len(t))
         assert len(re.findall(r"[.;!?](?=\s)", t)) <= 1, m["ma"]          # ≤ 2 câu
         assert re.fullmatch(r"[A-Za-z ,.;:'’\-—]+", t), (m["ma"], t)      # không ký tự rác, không số hình, không ngoặc
-        assert not re.search(r"\b[b-hj-z]\b", t, flags=re.I), (m["ma"], t)  # không chữ cái lẻ (rác nhận dạng)
+        assert not re.search(r"(?<!['’])\b[b-hj-z]\b", t, flags=re.I), (m["ma"], t)  # không chữ cái lẻ (rác nhận dạng)
         assert t[0].isalpha() and "  " not in t, m["ma"]
 
 

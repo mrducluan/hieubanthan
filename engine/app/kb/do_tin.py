@@ -110,6 +110,11 @@ SO: dict[str, dict] = {
                                                       "SX-C: 119 kiểu hình mày, mắt, mũi, tai, miệng (bài thơ từng kiểu) khớp kho nguồn; 7 mục gắn `ngo`")},
     "nhan_tuong_lieu_trang.json": {"mang": "nhantuong", **_nv("lieu_trang_tuong_phap.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                        "SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn")},
+    "chi_tay_tay_kb.json": {"mang": "nhantuong", **_nv("chi_tay_cheiro_language_of_the_hand.json",
+                                                    "tests/test_tk2_chi_tay_tay.py::test_moi_cau_trich_la_chuoi_con_kho_nguon",
+                                                    "TK-2 chỉ tay phương Tây: câu trích tiếng Anh Cheiro 1894 + Benham 1900 (kho nguồn lớp chữ "
+                                                    "nhận dạng, can_doi_chieu) khớp từng câu; lời Việt ban biên tập; ngưỡng số đo `do_tay` "
+                                                    "giả định, can_doi_chieu; không nhóm C")},
     "chi_tay_kb.json": {"mang": "nhantuong", **_nv("than_tuong_toan_bien.json", "tests/test_chi_tay.py::test_moi_cau_la_nguyen_van",
                                              "Chỉ tay: 67 bài thơ vân tay quyển 10 + câu đồ hình tám cung («根基所屬», Luận thủ) khớp kho nguồn; "
                                              "CT-2: câu theo số đo bàn tay (`sach_do_tay`: «論手», «相指掌») + vai và lựa chọn từng cung "

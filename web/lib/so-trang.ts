@@ -285,9 +285,9 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     loi_dan: "Bản khắc gỗ giữ nguyên, phủ thêm điểm chú giải: chạm vào chữ khắc để đọc âm Hán Việt và nghĩa bằng lời thường.",
   } },
   { duong: "/chi-tay", nhom: "tinh", ten: "Xem chỉ tay theo sách xưa", o: O_TINH, mac_dinh: {   // chỉ tay quyển 10 Toàn Biên
-    tieu_de_seo: "Xem chỉ tay theo sách xưa: hơn 60 hình vân tay có chú giải", h1: "Xem chỉ tay theo sách xưa",
-    mo_ta_seo: "Tự soi bàn tay theo Thần Tướng Toàn Biên: tám cung trên bản khắc gỗ và trên ảnh tay bạn (ảnh không rời máy), hơn 60 hình vân kèm nguyên văn, lời dễ hiểu.",
-    loi_dan: "Chụp lòng bàn tay (ảnh không rời máy) để thấy tám cung trên tay mình, hoặc ngửa tay ra chỗ sáng, chọn hình vân giống tay mình để đọc sách xưa nói gì.",
+    tieu_de_seo: "Xem chỉ tay: sách tướng xưa và chỉ tay phương Tây", h1: "Xem chỉ tay theo sách xưa",
+    mo_ta_seo: "Tự soi bàn tay theo Thần Tướng Toàn Biên (tám cung, hơn 60 hình vân) hoặc theo chỉ tay phương Tây của Cheiro, Benham (dáng tay, các gò, đường chỉ). Ảnh không rời máy.",
+    loi_dan: "Chụp lòng bàn tay (ảnh không rời máy) để thấy tám cung trên tay mình, hoặc ngửa tay ra chỗ sáng, chọn hình vân giống tay mình để đọc sách xưa nói gì. Muốn xem theo lối phương Tây (dáng tay, các gò, đường chỉ) thì đổi trường phái ngay dưới.",
   } },
   { duong: "/lich-am", nhom: "tinh", ten: "Lịch âm các năm", o: O_TINH, mac_dinh: {
     tieu_de_seo: "Lịch âm các năm: Tết, tháng nhuận, mùng 1 và rằm", h1: "Lịch âm các năm: Tết ngày nào, năm nào nhuận?",

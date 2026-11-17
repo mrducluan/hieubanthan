@@ -15,6 +15,7 @@ import { urlAnhSach } from "@/lib/anh-tren-may";
 import { DONG_Y_CHI_TAY, ngayDongYAnhMat } from "@/lib/dong-y-anh-mat";
 import type { DiemTay, KetQuaTimTay } from "@/lib/ban-tay-tu-dong";
 import { datCung, datTay, useChonChiTay, type Tay } from "@/lib/chi-tay-chon";
+import { usePhaiChiTay } from "@/lib/chi-tay-phai";
 import { ngaySinhIso, useHoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
 
@@ -22,10 +23,15 @@ interface LuaChonCung { ma: string; ten: string }
 export interface CungTay { ma: string; han: string; ten: string; ten_ngan?: string; vt: [number, number]; y: string; lua_chon: LuaChonCung[] }
 interface NhanDo { ma: string; ten: string; y?: string; vua?: boolean }
 interface SachGhiDo { ma: string; han?: string; nhom?: string; loi: string; viec?: string }
+/** TK-2 — câu sách phái Tây theo số đo (Benham / Cheiro): lời Việt + nguyên văn tiếng Anh gập. */
+interface MucTay { ma: string; ten: string; loi: string; viec?: string; trich?: string; nguon_hien_thi?: string; nhom?: string }
 export interface KqDoTay {
-  hop_le: boolean; loi: string | null; loi_nhac?: string | null; loi_chu?: string;
+  hop_le: boolean; loi: string | null; loi_nhac?: string | null; loi_chu?: string; phai?: "tay";
   nhan?: NhanDo[]; sach_ghi?: SachGhiDo[]; cung?: CungTay[]; bo_nhom_c?: number; cau_ket?: string;
+  muc?: MucTay[]; to_hop?: { ma: string; ten: string } | null; goi_y_dang?: string[];
 }
+/** Tên dáng tay phái Tây (mã engine `dang_tay`) — chỉ để ghi lời gợi ý "tự xem dáng nào". */
+const TEN_DANG: Record<string, string> = { vuong: "Tay vuông", be: "Tay bè", triet: "Tay nhiều khớp", thon: "Tay thon dài" };
 
 /** Cặp điểm nối thành khung xương bàn tay (thứ tự 21 điểm MediaPipe Hand) — chỉ để vẽ. */
 const NOI: [number, number][] = [[0, 1], [1, 2], [2, 3], [3, 4], [0, 5], [5, 6], [6, 7], [7, 8], [5, 9], [9, 10], [10, 11], [11, 12],
@@ -93,6 +99,8 @@ export function ChupBanTay() {
   const hs = useHoSo();
   const chon = useChonChiTay();
   const tay: Tay = chon.tay ?? (hs?.gioi_tinh === "nu" ? "phai" : "trai");
+  const phai = usePhaiChiTay();
+  const daDo = useRef<{ diem: DiemTay[]; tl: number } | null>(null);
   const dongY = DONG_Y_CHI_TAY.use();
   const [tick, setTick] = useState(false);
   const duocChon = Boolean(dongY || tick);
@@ -115,6 +123,7 @@ export function ChupBanTay() {
     luot.current++;
     if (urlRef.current) URL.revokeObjectURL(urlRef.current);
     urlRef.current = null;
+    daDo.current = null;
     setUrl(null); setTyLe(null); setDiem(null); setTim(null); setKq(null); setLoi(null); setMo(null);
   }, []);
 
@@ -134,13 +143,13 @@ export function ChupBanTay() {
     try {
       const r = await fetch("/api/chi-tay/do-tay", {
         method: "POST", headers: { "content-type": "application/json" },
-        body: JSON.stringify({ dong_y: true, tay, ty_le: Number(tl.toFixed(4)), diem: ds, ...(hs ? { ngay_sinh: ngaySinhIso(hs) } : {}) }),
+        body: JSON.stringify({ dong_y: true, ...(phai === "tay" ? { phai } : {}), tay, ty_le: Number(tl.toFixed(4)), diem: ds, ...(hs ? { ngay_sinh: ngaySinhIso(hs) } : {}) }),
       });
       const d = (await r.json().catch(() => ({}))) as KqDoTay & { error?: string };
       if (l !== luot.current) return;
       if (!r.ok) throw new Error(d.error ?? "Máy chủ đang bận, bạn thử lại sau ít phút.");
       setKq(d);
-      if (d.hop_le) ghi("chart_interacted", { mo_dun: "chitay", kind: "chup_tay_xong", tay, so_cung: d.cung?.length ?? 0, so_nhan: d.nhan?.length ?? 0, so_sach: d.sach_ghi?.length ?? 0 });
+      if (d.hop_le) ghi("chart_interacted", { mo_dun: "chitay", kind: "chup_tay_xong", tay, phai, so_cung: d.cung?.length ?? 0, so_nhan: d.nhan?.length ?? 0, so_sach: d.sach_ghi?.length ?? 0 });
       else ghi("chart_interacted", { mo_dun: "chitay", kind: "chup_tay_loi", ket_qua: d.loi ?? "khong_hop_le" });
     } catch (e) {
       if (l !== luot.current) return;
@@ -165,9 +174,22 @@ export function ChupBanTay() {
       return;
     }
     setTim(null); setDiem(r.diem);
+    daDo.current = { diem: r.diem, tl: r.ty_le };
     if (!DONG_Y_CHI_TAY.da()) return;           // đã rút thoả thuận trong lúc chờ → không gửi
     await doTay(r.diem, r.ty_le, l);
   };
+
+  // TK-2: đổi phái khi đã có điểm mốc → đo lại theo phái mới (cùng 21 toạ độ, không tìm lại trên ảnh).
+  const phaiTruoc = useRef(phai);
+  useEffect(() => {
+    if (phaiTruoc.current === phai) return;
+    phaiTruoc.current = phai;
+    setMo(null);
+    const d = daDo.current;
+    if (!d || !DONG_Y_CHI_TAY.da()) { setKq(null); return; }
+    void doTay(d.diem, d.tl, ++luot.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- chỉ chạy khi phái đổi
+  }, [phai]);
 
   // Điện thoại: thẻ cung nằm dưới ảnh → chạm vòng cung thì đưa thẻ vào tầm nhìn.
   const theRef = useRef<HTMLDivElement>(null);
@@ -309,7 +331,12 @@ export function ChupBanTay() {
               {(tim && tim !== "dang") || (kq && !kq.hop_le) || loi ? (
                 <div className="mx-auto mt-3 max-w-md rounded-xl border border-gold/40 bg-gold/[0.06] p-3 text-sm" role="alert" data-testid="ct-loi">
                   <p>{tim && tim !== "dang" ? LOI_TIM[tim] : kq && !kq.hop_le ? loiAnh(kq) : loi}</p>
-                  {(tim === "loi" || loi) && (
+                  {(tim === "loi" || loi) && phai === "tay" && (
+                    <p className="mt-1.5 text-xs text-fg-muted">
+                      Bạn vẫn tự soi được: <a href="#tu-soi-tay" className="text-gold underline underline-offset-2">chọn dáng tay, gò và đường chỉ</a> ở phía dưới.
+                    </p>
+                  )}
+                  {(tim === "loi" || loi) && phai !== "tay" && (
                     <p className="mt-1.5 text-xs text-fg-muted">
                       Bạn vẫn tự soi được: chạm <a href="#tam-cung" className="text-gold underline underline-offset-2">tám cung trên đồ hình sách</a>, rồi chọn{" "}
                       <a href="#tu-soi" className="text-gold underline underline-offset-2">hình vân giống tay mình</a> ở phía dưới.
@@ -398,6 +425,37 @@ export function ChupBanTay() {
                   {hs ? `${kq.bo_nhom_c} câu sách theo dáng tay này chỉ dành cho người từ 18 tuổi, nên không hiện ở đây.`
                     : `${kq.bo_nhom_c} câu sách theo dáng tay này chỉ hiện khi biết bạn đã đủ 18 tuổi — lưu hồ sơ (ngày sinh) để xem đủ.`}
                 </p>
+              )}
+              {kq?.hop_le && kq.phai === "tay" && (kq.to_hop || (kq.goi_y_dang?.length ?? 0) > 0) && (
+                <div className="rounded-2xl border border-line/70 p-4 text-sm" data-testid="ct-to-hop">
+                  {kq.to_hop && <p className="font-semibold text-fg">{kq.to_hop.ten}</p>}
+                  {(kq.goi_y_dang?.length ?? 0) > 0 && (
+                    <p className="mt-1 text-fg-muted">
+                      Dáng lòng bàn tay này gần với {kq.goi_y_dang!.map((g) => TEN_DANG[g] ?? g).join(" hoặc ")} trong sách Cheiro. Nhìn thêm
+                      đầu ngón và khớp rồi <a href="#tu-soi-tay" className="text-gold underline underline-offset-2">tự chọn dáng tay ở dưới</a>.
+                    </p>
+                  )}
+                </div>
+              )}
+              {kq?.hop_le && kq.phai === "tay" && (kq.muc?.length ?? 0) > 0 && (
+                <div className="rounded-2xl border border-line/70 p-4" data-testid="ct-muc-tay">
+                  <p className="text-sm font-semibold text-fg">Sách chỉ tay phương Tây nói gì về dáng tay này</p>
+                  <ul className="mt-2 space-y-3">
+                    {kq.muc!.map((m) => (
+                      <li key={m.ma} className="text-sm leading-relaxed">
+                        <p>{m.loi}</p>
+                        {m.viec && <p className="mt-1 text-xs text-fg-muted"><span className="text-fg">Việc nên làm:</span> {m.viec}</p>}
+                        {m.trich && (
+                          <details className="mt-1 text-xs text-fg-muted">
+                            <summary className="cursor-pointer">Nguyên văn</summary>
+                            <p lang="en" className="mt-1 italic">“{m.trich}”</p>
+                            {m.nguon_hien_thi && <p className="mt-0.5">— {m.nguon_hien_thi}</p>}
+                          </details>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
               {kq?.hop_le && kq.cau_ket && <p className="text-xs text-fg-faint">{kq.cau_ket}</p>}
 

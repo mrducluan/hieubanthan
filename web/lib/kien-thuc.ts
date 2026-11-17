@@ -118,6 +118,8 @@ export interface TrichDan {
   sach: string; chuong?: string; nguyen_van?: string; phien_am?: string; nghia?: string;
   /** TV-CTP: điều kiện trên lá số bằng lời thường ("Câu này nói về lá số khi …"), chú thích chữ, neo #cau-n. */
   khi?: string; chu_thich?: string; neo?: string;
+  /** TK-2: ngôn ngữ của nguyên văn (sách thần số tiếng Anh); thiếu = chữ Hán phồn thể. */
+  ngon_ngu?: string;
 }
 export interface MucTrang {
   tieu_de: string; doan?: string; danh_sach?: string[]; xem_them?: { loai: LoaiTrang; slug: string; tieu_de: string; slug_en?: string }[];
