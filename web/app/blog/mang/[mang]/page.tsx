@@ -53,7 +53,7 @@ export default async function Page({ params }: P) {
         <ol className="flex flex-wrap gap-1.5"><li><Link href="/" className="hover:text-fg">Trang chủ</Link> ›</li><li><Link href="/blog" className="hover:text-fg">Blog</Link> ›</li><li aria-current="page" className="text-fg-muted">{tt.ten}</li></ol>
       </nav>
       <p className="eyebrow mt-4">Chuyên đề</p>
-      <h1 className="mt-2 text-4xl sm:text-5xl">Blog {tt.ten}</h1>
+      <h1 className="mt-2 text-4xl sm:text-5xl">Blog {tt.ten}: bài viết và hướng dẫn tự xem</h1>
       <p className="mt-3 max-w-2xl text-fg-muted">{tt.ngan} {d.bai.length ? `${d.bai.length} bài viết.` : ""}</p>
       <ThanhMangBlog ds={d.nhom.map((g) => ({ mang: g.mang, so: g.bai.length }))} dangChon={d.mang} tong={d.tatCa.length} />
 

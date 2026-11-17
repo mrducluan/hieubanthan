@@ -285,8 +285,8 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     loi_dan: "Bản khắc gỗ giữ nguyên, phủ thêm điểm chú giải: chạm vào chữ khắc để đọc âm Hán Việt và nghĩa bằng lời thường.",
   } },
   { duong: "/chi-tay", nhom: "tinh", ten: "Xem chỉ tay theo sách xưa", o: O_TINH, mac_dinh: {   // chỉ tay quyển 10 Toàn Biên
-    tieu_de_seo: "Xem chỉ tay theo sách xưa: 67 hình vân tay có chú giải", h1: "Xem chỉ tay theo sách xưa",
-    mo_ta_seo: "Tự soi bàn tay theo Thần Tướng Toàn Biên: tám cung trên bản khắc gỗ và trên ảnh tay bạn (ảnh không rời máy), 67 hình vân kèm nguyên văn, lời dễ hiểu.",
+    tieu_de_seo: "Xem chỉ tay theo sách xưa: hơn 60 hình vân tay có chú giải", h1: "Xem chỉ tay theo sách xưa",
+    mo_ta_seo: "Tự soi bàn tay theo Thần Tướng Toàn Biên: tám cung trên bản khắc gỗ và trên ảnh tay bạn (ảnh không rời máy), hơn 60 hình vân kèm nguyên văn, lời dễ hiểu.",
     loi_dan: "Chụp lòng bàn tay (ảnh không rời máy) để thấy tám cung trên tay mình, hoặc ngửa tay ra chỗ sáng, chọn hình vân giống tay mình để đọc sách xưa nói gì.",
   } },
   { duong: "/lich-am", nhom: "tinh", ten: "Lịch âm các năm", o: O_TINH, mac_dinh: {
@@ -318,7 +318,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Tra hướng nhà, hướng bếp, hướng giường hợp tuổi theo Bát trạch cho nam và nữ sinh từ 1960 đến 2005: mệnh quái, 4 hướng tốt, 4 hướng nên tránh.",
   } },
   { duong: "/blog", nhom: "blog_khung", ten: "Blog", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Blog thần số học, Tử vi, phong thuỷ, Kinh Dịch", h1: "Blog",
+    tieu_de_seo: "Blog thần số học, Tử vi, phong thuỷ, Kinh Dịch", h1: "Blog hiểu bản thân: thần số học, Tử vi, phong thuỷ, Kinh Dịch",
     mo_ta_seo: "Bài viết về hiểu bản thân, thần số học, Tử vi, Kinh Dịch, Bát tự, phong thuỷ và đời sống — đọc thêm ngoài thư viện kiến thức.",
     loi_dan: "Bài viết về hiểu bản thân, thần số học, Tử vi, Kinh Dịch, Bát tự, phong thuỷ và đời sống — đọc thêm ngoài thư viện kiến thức.",
   } },

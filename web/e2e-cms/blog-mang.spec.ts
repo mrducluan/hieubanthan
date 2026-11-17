@@ -19,7 +19,7 @@ test("/blog có thanh chủ đề + lưới Đọc theo chủ đề, mỗi ô d�
 
 test("trang chuyên đề: H1, breadcrumb JSON-LD, chỉ bài của mảng; slug lạ 404; sitemap có trang", async ({ page, request }) => {
   await page.goto("/blog/mang/than-so-hoc");
-  await expect(page.locator("h1")).toHaveText("Blog Thần số học");
+  await expect(page.locator("h1")).toHaveText("Blog Thần số học: bài viết và hướng dẫn tự xem");
   await expect(page.getByTestId("luoi-bai").getByRole("link")).toHaveCount(1);
   const ld = (await page.locator('script[type="application/ld+json"]').allTextContents()).join("");
   expect(ld).toContain("CollectionPage");

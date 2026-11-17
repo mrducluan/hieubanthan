@@ -1,12 +1,13 @@
 // EEAT-1 — hồ sơ chuyên gia: ai đứng sau nội dung, làm vai trò gì, đã viết / thẩm định những bài nào, quy trình ra sao.
 // Schema ProfilePage + Person (Google: trang hồ sơ tác giả là tín hiệu "Who" của E-E-A-T). Chỉ ghi điều đã công bố.
+import { AnhTacGia } from "@/components/khung/AnhTacGia";
 import { lopCot } from "@/lib/luoi";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
 import { ArrowRight, BookOpenCheck, Feather, ShieldCheck } from "lucide-react";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { CHUYEN_GIA, duongChuyenGia, ldNguoi, ngayVN } from "@/lib/chuyen-gia";
+import { CHUYEN_GIA, duongChuyenGia, ldNguoi, ngayVN, sameAsChuyenGia, tenHoSo } from "@/lib/chuyen-gia";
 import { duongTrang, soTrangChuyenGia } from "@/lib/kien-thuc";
 import { catMoTa, goiLd, ldDuongDan, siteUrl, urlDayDu } from "@/lib/seo";
 import { vanHanh } from "@/lib/van-hanh";
@@ -74,9 +75,7 @@ export default async function Page({ params }: Props) {
       </nav>
 
       <header className="mt-4 flex flex-col gap-5 sm:flex-row sm:items-center">
-        <span aria-hidden className="grid size-24 shrink-0 place-items-center rounded-full border border-gold/60 bg-gold/10 font-serif text-4xl text-gold">
-          {cg.ten.split(" ").map((w) => w[0]).join("")}
-        </span>
+        <AnhTacGia cg={cg} lop="size-24 text-4xl" px={96} />
         <div>
           <p className="eyebrow">{cg.vaiTro}</p>
           <h1 className="mt-1 text-4xl leading-tight sm:text-5xl">{cg.ten}</h1>
@@ -84,6 +83,14 @@ export default async function Page({ params }: Props) {
           <ul className="mt-3 flex flex-wrap gap-2" aria-label="Lĩnh vực">
             {cg.linhVuc.map((l) => <li key={l} className="rounded-full border border-line px-3 py-1 text-xs text-fg-muted">{l}</li>)}
           </ul>
+          {/* EEAT: hồ sơ công khai của chính chuyên gia (rel="me" — cùng một người; schema Person sameAs dùng chung danh sách). */}
+          {sameAsChuyenGia(cg).length > 0 && (
+            <p className="mt-3 flex flex-wrap gap-3 text-sm" data-testid="ho-so-mxh">
+              {sameAsChuyenGia(cg).map((u) => (
+                <a key={u} href={u} rel="me noopener" target="_blank" className="text-gold underline underline-offset-4">{cg.ten} trên {tenHoSo(u)}</a>
+              ))}
+            </p>
+          )}
         </div>
       </header>
 

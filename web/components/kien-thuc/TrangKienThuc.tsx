@@ -28,6 +28,9 @@ import { tenTheo } from "@/lib/ten-hien";
 import { taoChu, tachNhan, type DocChu } from "@/lib/chu-trang";
 import { CHU_KIEN_THUC, NUT_MOI_EN } from "@/lib/chu/kien-thuc";
 import { dinhNgay } from "@/lib/dinh-dang";
+import { Suspense } from "react";
+import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
+import { MANG_CONG_CU } from "@/components/kien-thuc/TrangChuDe";
 
 type Thamso = { khoa: string | null; slug: string };
 
@@ -298,6 +301,11 @@ export async function TrangKienThucView(params: Thamso) {
         </nav>
       )}
 
+      {/* SEO-Q: bài blog cùng mảng (vd "Ngũ hành là gì" dưới trang mệnh theo năm) — nối trang kiến thức với bài đang có hiển
+          trên Google. Chỉ mảng có chuyên mục blog; mảng khác không hiện (tránh bài lạc đề dưới tiêu đề "liên quan"). */}
+      {MANG_CONG_CU[cd.mang] && (
+        <Suspense fallback={null}><BaiLienQuanMang mang={MANG_CONG_CU[cd.mang]!} className="mt-10" boQua={[duong, cd.duong]} duong={duong} /></Suspense>
+      )}
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
         <p className="font-medium text-fg-muted">{c("bai.nguon")}</p>

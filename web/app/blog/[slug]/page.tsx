@@ -164,8 +164,8 @@ export default async function Page({ params }: Props) {
       <CtaBlog mang={mang} className="mt-12" />
 
       {/* CTA-2: ít bài khác (blog mới) → bù cụm kiến thức cùng mảng / lối chung, không để ô trống. */}
-      <section aria-labelledby="doc-tiep" className="mt-12" data-testid="doc-tiep">
-        <h2 id="doc-tiep" className="text-2xl">Đọc tiếp</h2>
+      <section aria-labelledby="bai-cung-chu-de" className="mt-12" data-testid="doc-tiep">
+        <h2 id="bai-cung-chu-de" className="text-2xl">Bài viết cùng chủ đề</h2>
         <DoKhoiCuoi khoi="doc_tiep" />
         <ul className="mt-4 grid gap-3 sm:grid-cols-3">
           {docTiep.map((b) => (

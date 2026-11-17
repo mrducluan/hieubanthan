@@ -28,7 +28,7 @@ import { ArrowRight, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Chủ đề kiến thức → mảng bài CMS, suy từ trang công cụ của chủ đề (CHU_DE[x].mang) — thêm chủ đề không phải sửa ở đây.
-const MANG_CONG_CU: Record<string, string> = {
+export const MANG_CONG_CU: Record<string, string> = {
   "/than-so": "than_so", "/hop-doi": "than_so", "/tu-vi": "tu_vi", "/bat-tu": "bat_tu", "/kinh-dich": "kinh_dich", "/phong-thuy": "phong_thuy",
 };
 
