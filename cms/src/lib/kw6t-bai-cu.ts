@@ -391,8 +391,7 @@ export const KE_HOACH: Ke[] = [
     lienQuan: [S.tvLaGi, S.selfDiscovery],
   },
   {
-    slug: S.selfDiscovery, goc: G.chung, dat: { mang: "chung",
-      meta: { title: "Tự hiểu mình qua giá trị, thói quen và lựa chọn" } },
+    slug: S.selfDiscovery, goc: G.chung, dat: { mang: "chung" },   // tiêu đề SEO do SEO-Q đặt (2026-11-17) — không đè
     themCuoi: docTiep(`<a href="/hom-nay">câu tự soi mỗi ngày</a>`, B(S.tsLaGi, "thần số học là gì"), B(S.astrology, "astrology là gì")),
     lienQuan: [S.tsLaGi, S.astrology],
   },
@@ -464,7 +463,9 @@ async function coNhapDangSua(payload: Payload, bai: Record<string, any>): Promis
 
 const loiCua = (e: unknown) => String((e as Error)?.message ?? e).slice(0, 300);
 
-export async function apDungKw6t(payload: Payload, _req?: PayloadRequest): Promise<KetQuaKw6t[]> {
+/** `boQuaNhap` (NF-BT, chủ dự án giao sửa thẳng 2026-11-17): không dừng ở bài có bản nháp mới hơn — trên production cả 21 bài
+ *  chính bị chặn ở lần 2 vì bản nháp do máy để lại (chuẩn hoá BLOG-7 / tự lưu). Bản nháp đó vẫn còn trong lịch sử phiên bản. */
+export async function apDungKw6t(payload: Payload, _req?: PayloadRequest, opts: { boQuaNhap?: boolean } = {}): Promise<KetQuaKw6t[]> {
   const kq: KetQuaKw6t[] = [];
   // Bài đổi slug giữ nguyên id → tra theo cả slug mới lẫn slug cũ (bài chưa tới lượt đổi vẫn tìm được).
   const cuCua = new Map(KE_HOACH.filter((k) => k.slugMoi).map((k) => [k.slugMoi!, k.slug]));
@@ -483,7 +484,7 @@ export async function apDungKw6t(payload: Payload, _req?: PayloadRequest): Promi
       kq.push({ slug: ke.slug, viec: "sửa", ok: true, ly_do: "đã sửa từ trước" });
     } else {
       try {
-        if (await coNhapDangSua(payload, bai)) { kq.push({ slug: ke.slug, viec: "sửa", ok: false, ly_do: "có bản nháp đang sửa — không đè" }); continue; }
+        if (!opts.boQuaNhap && await coNhapDangSua(payload, bai)) { kq.push({ slug: ke.slug, viec: "sửa", ok: false, ly_do: "có bản nháp đang sửa — không đè" }); continue; }
         const than = apThan(bai.noi_dung, ke);
         const data = apTruong(bai, ke);
         const ids = (await Promise.all((ke.lienQuan ?? []).map(idTheoSlug))).filter((x) => x != null && x !== bai.id);
@@ -518,10 +519,10 @@ export async function apDungKw6t(payload: Payload, _req?: PayloadRequest): Promi
   return kq;
 }
 
-/** Hoàn tác: mỗi bài có ghi chú KW-6T → khôi phục phiên bản mới nhất chưa có ghi chú đó. */
-export async function hoanTacKw6t(payload: Payload): Promise<number> {
+/** Hoàn tác: mỗi bài có ghi chú `dau` (mặc định KW-6T) → khôi phục phiên bản đã xuất bản mới nhất chưa có ghi chú đó. */
+export async function hoanTacKw6t(payload: Payload, dau: string = DAU_KW6T): Promise<number> {
   let dem = 0;
-  const r = await payload.find({ collection: "bai-viet", where: { ghi_chu_duyet: { like: DAU_KW6T } }, limit: 100, depth: 0,
+  const r = await payload.find({ collection: "bai-viet", where: { ghi_chu_duyet: { like: dau } }, limit: 100, depth: 0,
     overrideAccess: true, draft: true });
   for (const bai of r.docs) {
     const v = await payload.findVersions({ collection: "bai-viet", where: { parent: { equals: bai.id } }, sort: "-updatedAt", limit: 50,
@@ -529,7 +530,7 @@ export async function hoanTacKw6t(payload: Payload): Promise<number> {
     // Chỉ phiên bản ĐÃ XUẤT BẢN trước KW-6T (bỏ qua bản nháp trình soạn thảo tự lưu).
     const cu = v.docs.find((d) => {
       const x = (d as { version?: { ghi_chu_duyet?: string; _status?: string } }).version;
-      return x?._status === "published" && !String(x?.ghi_chu_duyet ?? "").includes(DAU_KW6T);
+      return x?._status === "published" && !String(x?.ghi_chu_duyet ?? "").includes(dau);
     });
     if (!cu) continue;
     await payload.restoreVersion({ collection: "bai-viet", id: cu.id, overrideAccess: true, depth: 0 });
