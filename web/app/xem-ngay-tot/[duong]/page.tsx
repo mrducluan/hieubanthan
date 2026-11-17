@@ -8,6 +8,9 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { LichThang, XemNgayTot } from "@/components/hoang-lich/XemNgayTot";
+import { LichAmNam } from "@/components/lich-am/LichAmNam";
+import { lichNgayChoNgay } from "@/lib/lich-am";
+import { homNayVN } from "@/lib/hoang-lich";
 import { VIEC_SEO, docDuong, duongNgay, duongThang, duongViecThang, ngayDangIndex, ngayTotCongKhai, thangCongKhai, thangIndex, viecThangCongKhai, viecThangIndex } from "@/lib/hoang-lich";
 import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { KhoiCms } from "@/components/cms/KhoiCms";
@@ -72,13 +75,30 @@ async function metaGoc({ params }: P): Promise<Metadata> {
   return thangIndex(x.nam, x.thang) ? mh : { ...mh, robots: { index: false, follow: true } };
 }
 
+/** Lối sang tháng dương trước / sau (lịch cũ có sẵn ở đầu lưới; lịch năm âm đi theo tháng âm nên giữ riêng hàng này).
+ *  Ngoài cửa sổ index: vẫn bấm được nhưng nofollow; hết phạm vi 1901–2099 thì ẩn. */
+function ThangKe({ nam, thang }: { nam: number; thang: number }) {
+  const truoc = thang === 1 ? { nam: nam - 1, thang: 12 } : { nam, thang: thang - 1 };
+  const sau = thang === 12 ? { nam: nam + 1, thang: 1 } : { nam, thang: thang + 1 };
+  const rel = (n: { nam: number; thang: number }) => (thangIndex(n.nam, n.thang) ? undefined : "nofollow");
+  return (
+    <nav aria-label="Tháng dương lịch" className="flex items-center justify-between gap-2 text-sm" data-testid="thang-ke">
+      {truoc.nam >= 1901 ? <Link href={duongThang(truoc.nam, truoc.thang)} rel={rel(truoc)} aria-label="Tháng trước"
+        className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-fg-muted hover:border-gold/50 hover:text-gold">‹ Tháng {truoc.thang}/{truoc.nam}</Link> : <span />}
+      {sau.nam <= 2099 ? <Link href={duongThang(sau.nam, sau.thang)} rel={rel(sau)} aria-label="Tháng sau"
+        className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-fg-muted hover:border-gold/50 hover:text-gold">Tháng {sau.thang}/{sau.nam} ›</Link> : <span />}
+    </nav>
+  );
+}
+
 export default async function Page({ params }: P) {
   if ((await chuLichMayChu()).en) return <TrangEn duoi={(await params).duong} />;
   const x = docDuong((await params).duong);
   if (!x) notFound();
   if (x.loai === "viec") return <TrangViecThang x={x} />;
   if (x.loai === "ngay") {
-    const [d, t] = await Promise.all([ngayTotCongKhai(x.iso), thangCongKhai(Number(x.iso.slice(0, 4)), Number(x.iso.slice(5, 7)))]);
+    const [d, t, lichAm] = await Promise.all([ngayTotCongKhai(x.iso), thangCongKhai(Number(x.iso.slice(0, 4)), Number(x.iso.slice(5, 7))),
+      lichNgayChoNgay(x.iso)]);
     if (!d) throw new Error("engine lịch không phản hồi");   // → error.tsx, mã 5xx (không index trang lỗi)
     const thangCua = { nam: Number(x.iso.slice(0, 4)), thang: Number(x.iso.slice(5, 7)) };
     // ND-7: mẫu cụm "/xem-ngay-tot/{ngay}" — khối CMS + chữ (tiêu đề, đoạn cuối) sửa được cho cả cụm hoặc riêng ngày.
@@ -92,7 +112,7 @@ export default async function Page({ params }: P) {
             <Link href={`/xem-ngay-tot/thang-${Number(x.iso.slice(5, 7))}-${x.iso.slice(0, 4)}`} className="hover:underline">Tháng {Number(x.iso.slice(5, 7))}/{x.iso.slice(0, 4)}</Link></nav>
           <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
           <div className="mb-5"><TraLoiNhanh chu={d.tra_loi_nhanh} /></div>
-          <XemNgayTot banDau={d} thang={t} />
+          <XemNgayTot banDau={d} thang={t} lichAm={lichAm} />
         </div>
         {/* SEO-O: ảnh tóm tắt ngày (alt cùng nguồn với chữ trong ảnh). */}
         <AnhTomTat kieu="ngay" ngay={x.iso} />
@@ -105,7 +125,10 @@ export default async function Page({ params }: P) {
       </>
     );
   }
-  const t = await thangCongKhai(x.nam, x.thang);
+  // LA-UI: lịch năm âm mở sẵn ở hôm nay (nếu thuộc tháng này) hoặc ngày 15 — tháng âm phủ phần lớn tháng dương đang xem.
+  const homNay = homNayVN(), mm = String(x.thang).padStart(2, "0");
+  const moSan = homNay.startsWith(`${x.nam}-${mm}-`) ? homNay : `${x.nam}-${mm}-15`;
+  const [t, lichAm] = await Promise.all([thangCongKhai(x.nam, x.thang), lichNgayChoNgay(moSan)]);
   if (!t) throw new Error("engine lịch không phản hồi");
   const dep = t.ngay.filter((n) => n.dep);
   const duong = `/xem-ngay-tot/thang-${x.thang}-${x.nam}`, bien = { thang: String(x.thang), nam: String(x.nam) };
@@ -116,7 +139,12 @@ export default async function Page({ params }: P) {
         <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} mo_ta={c("dau.mo_ta", bien)} />
         <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" />
         <TraLoiNhanh chu={t.tra_loi_nhanh} />
-        <LichThang t={t} />
+        {lichAm ? (
+          <>
+            <ThangKe nam={x.nam} thang={x.thang} />
+            <LichAmNam d={lichAm} homNay={homNay} chon={moSan} lienKet />
+          </>
+        ) : <LichThang t={t} />}
         <section aria-labelledby="ngay-dep" className="glass rounded-2xl p-5" data-testid="ngay-dep-thang">
           <h2 id="ngay-dep" className="text-xl">{c("dep.tieu_de", bien)}</h2>
           <p className="mt-1 text-sm text-fg-muted">{c("dep.mo_ta", bien)}</p>
