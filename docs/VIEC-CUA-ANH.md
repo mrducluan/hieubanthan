@@ -514,6 +514,16 @@ mỗi lượt xem trang sinh 40–100 lượt chạy hàm vì Next.js tải trư
   "Chọn trên ảnh vệ tinh" → bấm → thấy ảnh vệ tinh, bấm mái nhà + mặt đường → hiện hướng.
 - Khoá này lộ ra trình duyệt là bình thường (Google thiết kế vậy) — an toàn nhờ giới hạn tên miền ở bước 3.
 
+## UD-1 (2026-11-17) — ưu đãi có hạn + quyền chủ sở hữu
+
+- [ ] **Cấp quyền chủ sở hữu cho tài khoản của anh** (nếu chưa): đăng nhập hieuban.com bằng email đó một lần, rồi Supabase → SQL Editor chạy
+  `insert into vai_tro_quan_tri (user_id, vai_tro) select id, 'chu_so_huu' from auth.users where email = '<email của anh>' on conflict (user_id) do update set vai_tro = 'chu_so_huu';`
+  Sau đó vào `/quan-tri`, quét mã QR bật mã xác thực 2 bước. Từ lúc này: mọi Luận giải toàn bộ mở sẵn cho anh (không trừ Sao);
+  `/quan-tri/nguoi-dung` → "Ví của tôi" để tự cộng Sao, hoặc gõ email người khác để cộng cho họ (mỗi bút toán ±1000, có lý do).
+- [ ] **Chạy đợt ưu đãi đầu tiên** (sau khi đã bật thu Sao ở mục GIA-99): `/quan-tri/cai-dat` → nhóm "Ưu đãi có hạn" → điền mức giảm,
+  hạn chót (dạng 2026-11-30), số suất + mã đợt (nếu muốn "còn N suất"), bật công tắc sau cùng. Bảng hướng dẫn: `docs/UU-DAI-CO-HAN.md` mục 2.
+- [ ] (Nên) Hỏi luật sư về thủ tục khuyến mại giảm giá (NĐ 81/2018) cùng lượt với `docs/PHAP-LY-2026.md`.
+
 ## Bảng tổng việc còn lại (rà 27/10/2026)
 
 Đã bật tài khoản + thu tiền (hội viên, nạp Sao, hỏi chuyên gia) → mấy việc trước đây "để sau" giờ thành **gấp**. Chi tiết

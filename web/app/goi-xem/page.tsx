@@ -1,7 +1,7 @@
 // /goi-xem — bảng giá + lối vào các "gói xem" theo NHU CẦU (GIA-99, docs/GOI-XEM-VA-GIA-2026-11.md; khâu NẠP).
 // Phương án B: gói nằm ngay trong trang công cụ của từng mảng (cổng Sao tại chỗ), trang này là MỘT nơi đặt lẻ ↔ gói ↔ hội
 // viên cạnh nhau. Mọi con số đọc từ đúng nguồn máy chủ dùng khi trừ Sao / tạo đơn (cau_hinh, goi_sao). Báo cáo nào chưa thu
-// Sao thì ghi "Đang miễn phí", không bày giá (UX-NM). Không gạch giá, không đếm ngược, không so với đơn vị khác (Luật QC).
+// Sao thì ghi "Đang miễn phí", không bày giá (UX-NM). Gạch giá + đếm ngược CHỈ khi có đợt ưu đãi thật đang chạy (UD-1, lib/uu-dai.ts); không so với đơn vị khác (Luật QC).
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { ArrowRight, Check, Gift, Sparkles } from "lucide-react";
@@ -15,6 +15,8 @@ import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
 import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb } from "@/lib/seo";
 import { congDangBat, dsGoiSao } from "@/lib/thanh-toan/cong";
 import { tietKiemPhanTram } from "@/lib/thanh-toan/nap-dau";
+import { uuDaiCho } from "@/lib/uu-dai-may-chu";
+import { DaiUuDai, GiaUuDai } from "@/components/sao/UuDai";
 
 const DUONG = "/goi-xem";
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} ₫`;
@@ -35,6 +37,9 @@ export default async function Page() {
       : { thu: false, gia: 0 }),
   ]);
   const cong = congDangBat();
+  // UD-1: đợt ưu đãi có hạn (nếu đang chạy) — giá thẻ = giá ưu đãi, giá thường gạch đi; dải ưu đãi ở đầu trang.
+  const uuDaiGoi = await Promise.all(theoGoi.map((x) => (x.thu ? uuDaiCho(x.gia) : null)));
+  const uuDaiChung = theoGoi.some((x) => x.thu) ? await uuDaiCho(giaChung) : null;
   const dangThu = theoGoi.some((x) => x.thu);
   const hoiVienMo = Boolean(hvBat) && cong !== null;
   const { le, dich } = baCachTra(goi, giaChung);
@@ -66,6 +71,7 @@ export default async function Page() {
           <span>Hiện mọi luận giải đang miễn phí — bạn chưa cần nạp Sao.</span>
         </p>
       )}
+      {uuDaiChung && <DaiUuDai u={uuDaiChung} className="mt-6" />}
       <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
 
       <section className="mt-10" aria-labelledby="theo-nhu-cau">
@@ -73,6 +79,7 @@ export default async function Page() {
         <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="ds-goi-xem">
           {GOI_XEM.map((g, i) => {
             const p = theoGoi[i] ?? { thu: false, gia: 0 };
+            const ud = uuDaiGoi[i] ?? null;
             return (
               <li key={g.ma} className="glass flex flex-col rounded-2xl border border-line/70 p-5" data-testid={`goi-xem-${g.ma}`}>
                 <span className="text-xs uppercase tracking-wide text-fg-faint">{g.mang}</span>
@@ -84,7 +91,7 @@ export default async function Page() {
                 <p className="mt-3 text-xs text-fg-faint">Cần: {g.can}</p>
                 <p className="mt-3 flex flex-wrap items-baseline gap-x-2" data-testid="gia-goi-xem">
                   {p.thu ? <>
-                    <span className="inline-flex items-center gap-1 font-serif text-2xl text-gold"><Sparkles className="size-4" aria-hidden />{p.gia} Sao</span>
+                    {ud ? <GiaUuDai u={ud} /> : <span className="inline-flex items-center gap-1 font-serif text-2xl text-gold"><Sparkles className="size-4" aria-hidden />{p.gia} Sao</span>}
                     <span className="text-xs text-fg-muted">{g.chuong ? `${g.chuong} chương · ${mienPhi > 0 ? `${mienPhi} chương đầu miễn phí` : "xem trước tiêu đề"}` : ""}</span>
                   </> : <span className="rounded-full bg-jade/15 px-2.5 py-0.5 text-sm font-medium text-jade">{g.maGia ? "Đang miễn phí" : "Miễn phí"}</span>}
                 </p>
@@ -100,7 +107,7 @@ export default async function Page() {
       {dangThu && cong && le && (
         <section className="mt-12" aria-labelledby="ba-cach-tra" data-testid="ba-cach-tra">
           <h2 id="ba-cach-tra" className="font-serif text-2xl">Ba cách trả</h2>
-          <p className="mt-1 text-sm text-fg-muted">Một Luận giải toàn bộ là {giaChung} Sao. Chọn cách hợp với số lần bạn định xem.</p>
+          <p className="mt-1 text-sm text-fg-muted">Một Luận giải toàn bộ là {uuDaiChung ? <>{uuDaiChung.gia} Sao trong đợt ưu đãi (giá thường {giaChung} Sao)</> : <>{giaChung} Sao</>}. Chọn cách hợp với số lần bạn định xem.</p>
           <div className={`mt-4 grid gap-4 ${dich && hoiVienMo ? "lg:grid-cols-3" : dich || hoiVienMo ? "sm:grid-cols-2" : ""}`}>
             <div className="glass flex flex-col rounded-2xl border border-line/70 p-5" data-testid="cot-le">
               <h3 className="text-sm text-fg-muted">Từng lần · {le.goi.ten}</h3>

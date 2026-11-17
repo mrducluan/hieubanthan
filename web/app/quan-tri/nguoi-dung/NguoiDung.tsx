@@ -63,7 +63,7 @@ interface KetQuaTra {
 
 const khoaMoi = () => `qt-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 
-export function SoSao({ duocDieuChinh }: { duocDieuChinh: boolean }) {
+export function SoSao({ duocDieuChinh, emailToi }: { duocDieuChinh: boolean; /** Email người quản trị đang đăng nhập — nút "Ví của tôi". */ emailToi?: string | null }) {
   const [email, setEmail] = useState("");
   const [kq, setKq] = useState<KetQuaTra | null>(null);
   const [so, setSo] = useState("");
@@ -94,6 +94,10 @@ export function SoSao({ duocDieuChinh }: { duocDieuChinh: boolean }) {
         <Input type="email" required value={email} onChange={(e) => { setEmail(e.target.value); setKq(null); }}
           placeholder="Email người dùng" aria-label="Email người dùng" className="min-w-0 flex-1" />
         <Button size="sm" type="submit" disabled={dang}>Tra cứu</Button>
+        {emailToi && (
+          <Button size="sm" type="button" variant="outline" disabled={dang} data-testid="qt-vi-cua-toi"
+            onClick={() => { setEmail(emailToi); setKq(null); void tra(emailToi); }}>Ví của tôi</Button>
+        )}
       </form>
       {kq && (
         <div className="space-y-3" data-testid="qt-ket-qua-sao">

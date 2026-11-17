@@ -15,6 +15,8 @@ import { biMat, chaoMungConNhan, coTaiKhoan, phienNguoiDung } from "@/lib/cua-sa
 import { catXemTruoc, type BaoCaoDay } from "@/lib/sao-xem-truoc";
 import { mangLuanGiai } from "@/lib/luan-giai-mang";
 import { congDangBat } from "@/lib/thanh-toan/cong";
+import { uuDaiCho } from "@/lib/uu-dai-may-chu";
+import { dauGhiChu } from "@/lib/uu-dai";
 
 /** Giá mặc định; QT-2: chủ sở hữu đổi ở /quan-tri/cai-dat (khoá luan_giai.gia_sao). */
 export const GIA_LUAN_GIAI_SAO = 99;   // GIA-99: chủ dự án chốt 16/11/2026 (trước 29); câu hỏi vượt lượt 5 Sao
@@ -67,6 +69,16 @@ async function laHoiVien(phien: NonNullable<Awaited<ReturnType<typeof phienNguoi
   } catch { return false; }
 }
 
+/** QT-CSH: chủ sở hữu (bảng vai_tro_quan_tri, migration 0010) đọc trọn mọi báo cáo, không trừ Sao — để tự soát nội dung
+ *  người dùng trả tiền mới thấy. Chỉ cần đăng nhập đúng tài khoản (không đòi MFA: chỉ là quyền ĐỌC báo cáo của chính
+ *  hồ sơ mình nhập). Lỗi / chưa chạy 0010 → false. */
+async function laChuSoHuu(phien: NonNullable<Awaited<ReturnType<typeof phienNguoiDung>>>): Promise<boolean> {
+  try {
+    const { data, error } = await phien.sb.rpc("vai_tro_cua_toi");
+    return !error && data === "chu_so_huu";
+  } catch { return false; }
+}
+
 const MIEN_PHI = { sao: 0, ly_do: "mien_phi_thu_nghiem" } as const;
 const TEN: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự", thanso: "bản đồ con số", thoi_gian: "thời gian tới", chan_dung: "chân dung tổng hợp" };
 
@@ -103,7 +115,17 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     return kq.ok ? NextResponse.json({ ...(kq.body as object), phi: MIEN_PHI }) : kq.res;
   }
 
-  const [gia, mienPhi, phien] = await Promise.all([giaLuanGiaiSao(moDun), layCauHinh<number>("luan_giai.chuong_mien_phi"), phienNguoiDung()]);
+  const [giaThuong, mienPhi, phien] = await Promise.all([giaLuanGiaiSao(moDun), layCauHinh<number>("luan_giai.chuong_mien_phi"), phienNguoiDung()]);
+  const moKhoa = req.headers.get("x-mo-khoa") === "1";
+  // UD-1: đợt ưu đãi có hạn đang chạy → giá ưu đãi (lúc sắp trừ Sao thì đếm suất mới, không dùng số nhớ đệm).
+  const uuDai = await uuDaiCho(giaThuong, moKhoa);
+  const gia = uuDai?.gia ?? giaThuong;
+
+  // QT-CSH: chủ sở hữu đọc trọn báo cáo, không trừ Sao, không tính suất ưu đãi.
+  if (phien && (await laChuSoHuu(phien))) {
+    const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));
+    return kq.ok ? NextResponse.json({ ...(kq.body as object), phi: { sao: 0, ly_do: "quan_tri" } }) : kq.res;
+  }
   // SEC-1: khoá giao dịch ký HMAC bằng bí mật máy chủ (người dùng không tự tính được để gọi thẳng dung_sao rẻ hơn).
   // Không gồm giá: đổi giá giữa ngày thì báo cáo đã mở vẫn xem lại được, không trừ lần hai.
   const bi_mat = biMat();
@@ -127,8 +149,6 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     const { data } = await phien.sb.from("so_cai_sao").select("id").eq("khoa", `dung:${phien.user.id}:${khoa}`).limit(1);
     daMo = Boolean(data?.length);
   }
-  const moKhoa = req.headers.get("x-mo-khoa") === "1";
-
   if (!daMo && !moKhoa) {
     // Quà của bạn bè: thêm đúng một chương sau các chương miễn phí (chương mienPhi + 1), cùng đường cắt + diễn đạt AI.
     const tang = await chuongDuocTang(phien, moDun);
@@ -141,6 +161,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     if (phien) { const { data } = await phien.sb.rpc("so_du_sao"); soDu = typeof data === "number" ? data : null; }
     return NextResponse.json({ ...ban, phi: { sao: gia, ly_do: "xem_truoc", khoa: ban.so_khoa > 0, dang_nhap: Boolean(phien), so_du: soDu,
       thuong_chao_mung: phien ? null : await layCauHinh<number>("sao.thuong.chao_mung"),
+      ...(uuDai ? { uu_dai: uuDai } : {}),
       ...(maTang ? { chuong_tang: 1, chuong_tang_ma: maTang } : {}) } });
   }
 
@@ -154,7 +175,14 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   if (!kq.ok) return kq.res;                                  // engine lỗi → chưa trừ Sao
   if (daMo) return NextResponse.json({ ...(kq.body as object), phi: { sao: 0, ly_do: "da_mo_hom_nay" } });
 
-  const { data, error } = await phien.sb.rpc("dung_sao", { p_so: gia, p_khoa: khoa, p_ghi_chu: `Luận giải toàn bộ ${TEN[moDun] ?? moDun}` });
+  // UD-1: người dùng vừa thấy giá thấp hơn (ưu đãi hết hạn / hết suất giữa chừng) → KHÔNG trừ theo giá cao hơn khi họ
+  // chưa thấy; báo giá mới, giao diện tải lại bản xem trước rồi họ tự bấm lại.
+  const giaThay = Number(req.headers.get("x-gia-thay"));
+  if (Number.isFinite(giaThay) && giaThay > 0 && gia > giaThay) {
+    return NextResponse.json({ error: `Ưu đãi vừa kết thúc — giá hiện tại là ${gia} Sao. Bấm mở lần nữa nếu bạn vẫn muốn đọc tiếp.`, can: "gia_doi", gia }, { status: 409 });
+  }
+  const ghiChu = `Luận giải toàn bộ ${TEN[moDun] ?? moDun}${uuDai?.ma ? dauGhiChu(uuDai.ma) : ""}`;
+  const { data, error } = await phien.sb.rpc("dung_sao", { p_so: gia, p_khoa: khoa, p_ghi_chu: ghiChu });
   if (error) return NextResponse.json({ error: "Chưa trừ được Sao, thử lại sau ít phút." }, { status: 502 });
   const r = data as { ket_qua: string; so_du?: number };
   if (r.ket_qua === "khong_du") {

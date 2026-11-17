@@ -125,6 +125,21 @@
     .vien-chay::before { animation: vien-quay 3.2s linear infinite; }
     .vien-chay:hover::after { background: rgb(var(--surface-2)); }
   }
+  /* UD-1: hộp mở khoá Sao — quầng vàng "thở", vệt sáng lướt qua nút, nhãn giảm giá nhún nhẹ, dải ưu đãi trượt lên.
+     Giảm chuyển động → mọi thứ đứng yên, vẫn có viền vàng. */
+  .hop-sao { box-shadow: 0 0 0 1px rgb(var(--gold) / 0.35), 0 10px 40px -12px rgb(var(--gold) / 0.45); }
+  .nut-sang { position: relative; overflow: hidden; }
+  .nut-sang::after {
+    content: ""; position: absolute; top: 0; bottom: 0; left: -60%; width: 45%; pointer-events: none;
+    background: linear-gradient(105deg, transparent, rgb(255 255 255 / 0.55), transparent); transform: skewX(-18deg); opacity: 0;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .hop-sao { animation: hop-sao-tho 2.8s ease-in-out infinite; }
+    .nut-sang::after { animation: nut-luot 3.4s ease-in-out 0.8s infinite; }
+    .ud-nhan { animation: ud-nhun 2.2s ease-in-out infinite; }
+    .ud-hien { animation: hien-dan 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .ud-thanh { animation: ud-thanh-day 1.1s cubic-bezier(0.22, 1, 0.36, 1) both; transform-origin: left; }
+  }
   /* CTA-1: trò "Đoán số" — lật thẻ (mặt sau xoay 180°), sao lấp lánh khi đoán đúng. */
   .lat-3d { perspective: 900px; }
   .lat-mat { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
@@ -239,6 +254,10 @@
 .la-so-giay .eyebrow { color: var(--ls-mo); }
 .la-so g[role="button"]:focus-visible > rect:first-child { stroke: var(--ls-nhan); stroke-width: 3; }
 
+@keyframes hop-sao-tho { 50% { box-shadow: 0 0 0 1px rgb(var(--gold) / 0.75), 0 14px 54px -8px rgb(var(--gold) / 0.7); } }
+@keyframes nut-luot { 0% { left: -60%; opacity: 0; } 12% { opacity: 1; } 38%, 100% { left: 130%; opacity: 0; } }
+@keyframes ud-nhun { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+@keyframes ud-thanh-day { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes sao-troi { to { transform: translateY(300px); } }
 @keyframes vien-quay { to { transform: rotate(360deg); } }
 @keyframes lap-lanh { 0% { opacity: 0; transform: translate(0, 0) scale(0.2); } 40% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1); } }
