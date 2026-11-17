@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/button";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { goiYThanhKhoa } from "@/lib/loi-sao";
+import { ConSuat, DemNguoc } from "@/components/sao/UuDai";
+import { loiTietKiem, type UuDai } from "@/lib/uu-dai";
 import { useMucSao } from "@/lib/muc-sao";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
@@ -45,6 +47,7 @@ interface BaoCao {
   /** EN-ALL: bản Anh — tên hiển thị của mã trong báo cáo (lib/ten-hien.ts). */
   ten_hien?: TenHien;
   phi: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null;
+    /** UD-1: đợt ưu đãi có hạn đang áp dụng (sao = giá ưu đãi). */ uu_dai?: UuDai;
     /** SAO-V: chương bạn bè tặng (đọc thêm một chương sau các chương miễn phí). */ chuong_tang?: number; chuong_tang_ma?: string };
 }
 
@@ -59,7 +62,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [goc, setGoc] = useState(false);
-  const [phi, setPhi] = useState<{ thu: boolean; gia: number } | null>(null);
+  const [phi, setPhi] = useState<{ thu: boolean; gia: number; uu_dai?: UuDai } | null>(null);
   const { c: cg, en } = useChuGiaoDien();
   const { c: cbc } = useChuBaoCao();
   // Báo cáo chờ mở gắn với NGƯỜI (dữ liệu sinh), không với lựa chọn trường phái — các công tắc phái không lưu qua lượt
@@ -78,6 +81,8 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
   // Chỉ nhận phản hồi của lượt gọi mới nhất — đổi đầu vào (vd cách tính Đường đời) khi một lượt cũ còn bay thì lượt cũ
   // về muộn không được ghi đè báo cáo mới.
   const luot = useRef(0);
+  const bcRef = useRef<BaoCao | null>(null);
+  bcRef.current = bc;
   const tai = async (moKhoa = false, tuDong = false, xemTruocTuDong = false) => {
     const so = ++luot.current;
     setDang(true); setLoi(null);
@@ -86,14 +91,25 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
       ghiChoMo(duongDan, nguoi);   // đi đăng nhập / nạp rồi quay lại → tự mở đúng báo cáo này
     }
     try {
-      const d = await postJson<BaoCao>(duongDan, than ?? { la_so: laSo }, moKhoa ? { "x-mo-khoa": "1" } : {});
+      // UD-1: gửi kèm giá người dùng đang thấy — ưu đãi hết giữa chừng thì máy chủ không trừ theo giá cao hơn.
+      const giaThay = bcRef.current?.phi?.sao;
+      const d = await postJson<BaoCao>(duongDan, than ?? { la_so: laSo }, moKhoa ? { "x-mo-khoa": "1", ...(giaThay ? { "x-gia-thay": String(giaThay) } : {}) } : {});
       if (so !== luot.current) return;
       setBc(d);
       if (moKhoa || !d.so_khoa) xoaChoMo();
       if (moKhoa && d.phi.ly_do === "da_tru_sao") ghi("unlock_succeeded", { mo_dun: d.mo_dun, so_sao: d.phi.sao });
       // Bản xem trước tự tải (bản đồ con số) đo riêng, không làm phồng tỉ lệ paywall của các mảng bấm mới mở.
       else if (d.so_khoa) ghi("paywall_viewed", { mo_dun: d.mo_dun, kind: xemTruocTuDong ? "luan_giai_tu_dong" : "luan_giai_toan_bo" });
-    } catch (e) { if (so === luot.current) setLoi(e instanceof Error && !en ? e.message : cg("lg.loi")); }
+    } catch (e) {
+      if (so !== luot.current) return;
+      const m = e instanceof Error ? e.message : "";
+      setLoi(m && !en ? m : cg("lg.loi"));
+      // Giá vừa đổi (ưu đãi kết thúc) → tải lại bản xem trước để thanh mở khoá hiện đúng giá mới; giữ lời báo.
+      if (moKhoa && m.startsWith("Ưu đãi vừa kết thúc")) {
+        const moi = await postJson<BaoCao>(duongDan, than ?? { la_so: laSo }).catch(() => null);
+        if (moi && so === luot.current) setBc(moi);
+      }
+    }
     finally { if (so === luot.current) setDang(false); }
   };
   // CTA-1: báo trạng thái báo cáo cho nút Sao ở khối "Đọc tiếp" cuối trang — nút đó gọi đúng hàm mở của báo cáo này.
@@ -134,8 +150,9 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
           <p className="font-serif text-xl">{cg("lg.tieu_de", { ten })}</p>
           <p className="text-sm text-fg-muted" data-testid="gia-luan-giai">
             {cg("lg.mo_ta")}{" "}
-            {phi?.thu ? <>chương đầu miễn phí, toàn bộ <b className="text-gold">{phi.gia} Sao</b>, xem lại trong ngày không mất thêm</> : cg("lg.mien_phi")}{cg("lg.khong_luu")}
+            {phi?.thu ? <>chương đầu miễn phí, toàn bộ <b className="text-gold">{phi.gia} Sao</b>{phi.uu_dai && <> <s className="text-fg-faint">{phi.uu_dai.gia_goc} Sao</s> <span className="text-gold/90">({loiTietKiem(phi.uu_dai).toLowerCase()})</span></>}, xem lại trong ngày không mất thêm</> : cg("lg.mien_phi")}{cg("lg.khong_luu")}
           </p>
+          {!en && phi?.thu && phi.uu_dai && <span className="mt-2 block"><DemNguoc hetLuc={phi.uu_dai.het_luc} /></span>}
           {/* Trục 1 (báo cáo UX mục 9): đang miễn phí thì nói trước, trung tính, Sao là gì + giá dự kiến (lấy từ API phí,
               không ghi cứng). Không đếm ngược, không doạ. */}
           {!en && phi && !phi.thu && phi.gia > 0 && (
@@ -178,7 +195,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
           )}
           <Button variant="ghost" size="sm" onClick={() => window.print()}><Printer aria-hidden /> {cg("lg.in")}</Button>
         </>}
-        phanKhoa={bc.so_khoa ? <PhanKhoa bc={bc as unknown as BaoCao} dang={dang} loi={loi} moKhoa={() => void tai(true)} /> : null}
+        phanKhoa={bc.so_khoa ? <PhanKhoa bc={bc as unknown as BaoCao} dang={dang} loi={loi} moKhoa={() => void tai(true)} lamMoi={() => void tai()} /> : null}
         chanTrang={!en && !bc.so_khoa && banLuu ? (
           <div className="mt-6">
             <LuuBaiLuan moDun={bc.mo_dun} tieuDe={`${tenLuu} — ${hs?.ho_ten ?? "hồ sơ của bạn"}`} noiDung={banLuu}
@@ -234,7 +251,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
           </section>
         ))}
       </div>
-      {bc.so_khoa ? <PhanKhoa bc={bc} dang={dang} loi={loi} moKhoa={() => void tai(true)} /> : null}
+      {bc.so_khoa ? <PhanKhoa bc={bc} dang={dang} loi={loi} moKhoa={() => void tai(true)} lamMoi={() => void tai()} /> : null}
       <p className="mt-8 border-t border-line pt-4 text-sm text-fg-faint">{bc.ket}</p>
       {tang}
     </article>
@@ -242,12 +259,13 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
 }
 
 /** Phần chương bị khoá: tiến độ đọc, mỗi chương một thẻ (điểm nhấn đã tính + câu hỏi mở), nút mở dính đáy màn hình. */
-function PhanKhoa({ bc, dang, loi, moKhoa }: { bc: BaoCao; dang: boolean; loi: string | null; moKhoa: () => void }) {
+function PhanKhoa({ bc, dang, loi, moKhoa, lamMoi }: { bc: BaoCao; dang: boolean; loi: string | null; moKhoa: () => void;
+  /** UD-1: đồng hồ ưu đãi về 0 → tải lại bản xem trước để giá về giá thường. */ lamMoi: () => void }) {
   const khoa = bc.chuong.filter((c): c is ChuongKhoa => c.khoa === true);
   const daDoc = bc.chuong.length - khoa.length;
   const phut = khoa.reduce((t, c) => t + c.moi_xem.phut_doc, 0);
   const soCau = khoa.reduce((t, c) => t + (c.moi_xem.cau_tra_loi?.length ?? 0), 0);
-  const { sao, so_du, dang_nhap, thuong_chao_mung } = bc.phi;
+  const { sao, so_du, dang_nhap, thuong_chao_mung, uu_dai: ud } = bc.phi;
   const muc = useMucSao();
   // Cửa Sao v2: giá trị trước ("Đọc tiếp N chương"), rồi lối rẻ nhất — gồm lối miễn phí (quà + mời bạn) khi đủ.
   const goiY = goiYThanhKhoa({ sao, dangNhap: Boolean(dang_nhap), soDu: so_du, thuongChaoMung: thuong_chao_mung, moiBan: muc?.moi_ban ?? 0 });
@@ -300,14 +318,31 @@ function PhanKhoa({ bc, dang, loi, moKhoa }: { bc: BaoCao; dang: boolean; loi: s
         ))}
       </ol>
       <div className="sticky bottom-[calc(4.5rem+env(safe-area-inset-bottom))] z-10 mt-6 md:bottom-4">
-        <div className="glass flex flex-col gap-3 rounded-2xl border border-gold/40 bg-surface/95 p-4 shadow-card backdrop-blur-md sm:flex-row sm:items-center">
-          <div className="flex-1 text-sm">
-            <p className="font-medium text-fg">Đọc tiếp {khoa.length} chương còn lại <span className="font-normal text-fg-muted">· {sao} Sao</span></p>
-            <p className="mt-0.5 flex items-start gap-1.5 text-fg-muted" data-testid="lg-goi-y">{!dang_nhap && <Gift className="mt-0.5 size-3.5 shrink-0 text-gold" aria-hidden />}{goiY}</p>
+        <div className="glass hop-sao rounded-2xl border border-gold/50 bg-surface/95 p-4 backdrop-blur-md" data-testid="lg-hop-mo">
+          {ud && (
+            <div className="ud-hien mb-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-gold/20 pb-3" data-testid="lg-uu-dai">
+              <span className="text-xs font-semibold uppercase tracking-wider text-cinnabar">{ud.ten}</span>
+              <DemNguoc hetLuc={ud.het_luc} khiHet={lamMoi} />
+              <ConSuat u={ud} className="min-w-40 flex-1 sm:max-w-56" />
+            </div>
+          )}
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="flex-1 text-sm">
+              <p className="font-medium text-fg">
+                Đọc tiếp {khoa.length} chương còn lại <span className="font-normal text-fg-muted">· </span>
+                {ud ? <span className="whitespace-nowrap">
+                  <span className="font-semibold text-gold">{sao} Sao</span>{" "}
+                  <s className="font-normal text-fg-faint" aria-label={`Giá thường ${ud.gia_goc} Sao`}>{ud.gia_goc} Sao</s>{" "}
+                  <span className="ud-nhan inline-block rounded-full bg-cinnabar/15 px-2 py-0.5 text-xs font-semibold text-cinnabar">−{ud.giam_pt}%</span>
+                </span> : <span className="font-normal text-fg-muted">{sao} Sao</span>}
+              </p>
+              {ud && <p className="mt-0.5 text-xs text-gold/90" data-testid="lg-tiet-kiem">{loiTietKiem(ud)}</p>}
+              <p className="mt-0.5 flex items-start gap-1.5 text-fg-muted" data-testid="lg-goi-y">{!dang_nhap && <Gift className="mt-0.5 size-3.5 shrink-0 text-gold" aria-hidden />}{goiY}</p>
+            </div>
+            <Button onClick={moKhoa} disabled={dang} data-testid="lg-mo-khoa" className="nut-sang">
+              <Sparkles aria-hidden /> {dang ? "Đang mở…" : `Mở toàn bộ · ${sao} Sao`}
+            </Button>
           </div>
-          <Button onClick={moKhoa} disabled={dang} data-testid="lg-mo-khoa">
-            <Sparkles aria-hidden /> {dang ? "Đang mở…" : `Mở toàn bộ · ${sao} Sao`}
-          </Button>
         </div>
         {loi && <p role="alert" className="mt-2 text-sm text-cinnabar">{loi}</p>}
       </div>

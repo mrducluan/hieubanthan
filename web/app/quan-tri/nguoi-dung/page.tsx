@@ -37,9 +37,9 @@ export default async function Page() {
           <h2 className="text-lg">Sổ Sao</h2>
           <p className="mt-1 text-sm text-fg-muted">
             Tra theo email khi người dùng nhờ hỗ trợ. Mỗi lần tra đều ghi nhật ký. Điều chỉnh = thêm một dòng có lý do
-            (không sửa số dư, không xoá dòng cũ).
+            (không sửa số dư, không xoá dòng cũ).{chu ? " Chủ sở hữu đọc trọn mọi Luận giải toàn bộ không cần Sao; muốn thử luồng trừ Sao thì bấm \"Ví của tôi\" rồi tự cộng (tối đa ±1000 mỗi bút toán)." : ""}
           </p>
-          <SoSao duocDieuChinh={chu} />
+          <SoSao duocDieuChinh={chu} emailToi={p.user.email ?? null} />
         </Card>
       )}
     </div>

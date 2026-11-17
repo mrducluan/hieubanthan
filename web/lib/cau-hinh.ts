@@ -103,6 +103,20 @@ export const CAI_DAT: readonly CaiDat[] = [
     ten: "Giá riêng: Thời gian tới (năm)", moTa: "0 = theo giá chung." },
   { khoa: "luan_giai.gia_sao.chan_dung", nhom: "Luận giải toàn bộ", loai: "so", min: 0, max: 300, macDinh: 0,
     ten: "Giá riêng: Chân dung tổng hợp", moTa: "0 = theo giá chung." },
+  // UD-1: đợt ưu đãi CÓ HẠN THẬT cho Luận giải toàn bộ (docs/UU-DAI-CO-HAN.md). Giá gạch = giá thường ở trên; đồng hồ đếm
+  // tới đúng hạn chót; "còn N suất" đếm từ sổ Sao. Thiếu hạn chót / quá hạn / hết suất → tự tắt, giá về giá thường.
+  { khoa: "luan_giai.uu_dai.bat", nhom: "Ưu đãi có hạn", loai: "bat_tat", macDinh: false,
+    ten: "Chạy đợt ưu đãi", moTa: "Bật = mọi Luận giải toàn bộ giảm theo mức bên dưới cho tới hết ngày hạn chót (hoặc hết suất). Phải điền hạn chót thì ưu đãi mới chạy. Hết hạn giá tự về giá thường — đừng dời hạn liên tục, người dùng sẽ hết tin đồng hồ." },
+  { khoa: "luan_giai.uu_dai.ten", nhom: "Ưu đãi có hạn", loai: "chu", toiDa: 40, macDinh: "Ưu đãi mở bán",
+    ten: "Tên đợt ưu đãi", moTa: "Hiện trên dải ưu đãi, vd \"Ưu đãi mở bán\", \"Đón Tết Đinh Mùi\"." },
+  { khoa: "luan_giai.uu_dai.giam_pt", nhom: "Ưu đãi có hạn", loai: "so", min: 0, max: 50, macDinh: 30,
+    ten: "Mức giảm (%)", moTa: "Tính trên giá thường của từng báo cáo, làm tròn Sao (99 Sao giảm 30% → 69 Sao). Tối đa 50%. 0 = tạm dừng." },
+  { khoa: "luan_giai.uu_dai.het_han", nhom: "Ưu đãi có hạn", loai: "chu", toiDa: 10, macDinh: "",
+    ten: "Hạn chót (năm-tháng-ngày)", moTa: "Dạng 2026-11-30. Ưu đãi chạy tới 23:59 ngày này theo giờ Việt Nam. Để trống hoặc sai dạng = không có ưu đãi." },
+  { khoa: "luan_giai.uu_dai.so_suat", nhom: "Ưu đãi có hạn", loai: "so", min: 0, max: 100000, macDinh: 0,
+    ten: "Số suất ưu đãi", moTa: "0 = không giới hạn suất (chỉ theo hạn chót). Lớn hơn 0 = trang hiện \"còn N suất\" đếm thật từ số lượt đã mở bằng giá ưu đãi; hết suất thì ưu đãi dừng. Cần điền mã đợt bên dưới." },
+  { khoa: "luan_giai.uu_dai.ma", nhom: "Ưu đãi có hạn", loai: "chu", toiDa: 12, macDinh: "",
+    ten: "Mã đợt (để đếm suất)", moTa: "2–12 chữ thường / số, không dấu, vd mb2611. Mỗi đợt mới đặt một mã mới để bộ đếm suất bắt đầu lại từ 0." },
   { khoa: "luan_giai.chuong_mien_phi", nhom: "Luận giải toàn bộ", loai: "so", min: 0, max: 3, macDinh: 1,
     ten: "Số chương xem miễn phí", moTa: "Khi đang thu Sao: ai cũng đọc trọn N chương đầu; chương sau hiện tiêu đề + điểm nhấn + câu hỏi, mở bằng Sao." },
   // EN-AI: lớp phân loại AI cho câu gõ tự do tiếng Anh (Bát tự, Tử vi). Cần CẢ env engine HOI_PHAN_LOAI_AI=1 lẫn công tắc này.
