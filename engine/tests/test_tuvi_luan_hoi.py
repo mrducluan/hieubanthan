@@ -246,3 +246,17 @@ def test_d1_cau_mau_mien_phi_o_chuong_1(cac_bc):
         assert all(m[k] == g[k] for k in g)
         assert m["con"] == sum(len(c["luan_hoi"]["tra_loi"]) for c in bc["chuong"] if "luan_hoi" in c) - 1
         assert sum("cau_mau" in c for c in bc["chuong"]) == 1
+
+
+def test_nguoi_quanh_khong_hai_the_trung_loi():
+    """Chủ dự án báo 2026-11-17: thẻ Sếp và thẻ Cha mẹ ra cùng một câu (cùng đọc cung Phụ Mẫu). Mỗi người một lời."""
+    for la in la_1000()[:300]:
+        ls = tom_tat(la)
+        cc = tvd.cham_cung(ls)
+        ds = [lh.nguoi(ls, cc, ma, "nam") for ma in kb.vai()]
+        for truong in ("chan_dung", "song_chung"):
+            loi = [n[truong] for n in ds if n[truong]]
+            assert len(loi) == len(set(loi)), (truong, [x for x in loi if loi.count(x) > 1])
+        sep, cm = next(n for n in ds if n["ma"] == "sep"), next(n for n in ds if n["ma"] == "cha_me")
+        assert not set(sep["ban_voi_ho"] + sep["ho_voi_ban"]) & set(cm["ban_voi_ho"] + cm["ho_voi_ban"])
+        assert all("Quan Lộc" in c for c in sep["can_cu"][1:])

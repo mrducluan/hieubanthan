@@ -36,8 +36,8 @@
       "nhom": "Quan Sát"
     },
     "nguoi_ngoai": {
-      "ten": "Cấp dưới, khách hàng",
-      "goi": "cấp dưới, khách hàng",
+      "ten": "Người dưới, lớp sau",
+      "goi": "người dưới, lớp sau",
       "chuong": "quan_he",
       "nhom": "Thực Thương"
     }
@@ -115,10 +115,10 @@
       "vua": "Sếp với bạn ở mức vừa phải: có yêu cầu nhưng không đè."
     },
     "Thực Thương": {
-      "hop": "Bạn dạy dỗ, dẫn dắt người dưới tốt: cấp dưới, học trò, khách hàng là nơi tài của bạn có chỗ dùng.",
+      "hop": "Bạn dạy dỗ, dẫn dắt người dưới tốt: đàn em, học trò, cấp dưới là nơi tài của bạn có chỗ dùng.",
       "nang": "Bạn dồn quá nhiều sức cho người dưới và cho việc thể hiện, tới mức tự hao mình.",
       "mo": "Bạn ít nói ra, ít dạy lại; người dưới khó hiểu bạn muốn gì.",
-      "vua": "Bạn với cấp dưới, khách hàng ở mức thường: rõ việc là êm."
+      "vua": "Bạn với người dưới, lớp sau ở mức thường: rõ việc là êm."
     },
     "Tài": {
       "hop": "Bạn nắm và điều khiển được tiền bạc, công việc; người phụ thuộc vào bạn được nhờ.",
