@@ -67,6 +67,14 @@ export interface LichNgay {
   nam: number; can_chi: string; tet: string; tet_sau: string; so_ngay: number; thang_nhuan: number | null;
   thang: ThangAmNgay[]; tiet_khi: TietKhi[]; chu_thich: string;
 }
+/** Năm âm chứa ngày dương `iso` (ngày trước Tết thuộc năm âm trước) — cho lịch trên trang Xem ngày tốt. */
+export async function lichNgayChoNgay(iso: string): Promise<LichNgay | null> {
+  const y = Number(iso.slice(0, 4));
+  const d = await lichNgayCongKhai(y);
+  if (d && iso < d.tet) return lichNgayCongKhai(y - 1);
+  return d;
+}
+
 export async function lichNgayCongKhai(nam: number): Promise<LichNgay | null> {
   if (nam < 1901 || nam > 2098) return null;
   try {

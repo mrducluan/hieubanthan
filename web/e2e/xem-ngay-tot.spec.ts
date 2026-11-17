@@ -31,8 +31,15 @@ test("trang một ngày: HTML máy chủ có H1 + Kim Quỹ, trực Khai, giờ 
   // Trang con: breadcrumb đúng đường dẫn hiển thị, không lặp FAQ của trang chính
   expect(html).toContain('"name":"Tháng 10/2026"');
   expect(html).not.toContain('"@type":"FAQPage"');
-  // Lịch tháng: ô hôm đó được đánh dấu, bấm sang ngày mai
-  await expect(page.locator('[aria-current="date"]')).toContainText("13");
+  // LA-UI: lịch năm âm mới (thay lưới tháng cũ) mở sẵn đúng ngày đang xem, ô ngày là link, thẻ ngày báo "đang xem"
+  const lich = page.getByTestId("lich-am-nam");
+  await expect(page.getByTestId("lich-thang")).toHaveCount(0);
+  await expect(lich.locator('a[data-chon="1"]')).toHaveAttribute("data-ngay", "2026-10-13");
+  await expect(lich.getByTestId("lich-am-dang-xem")).toBeVisible();
+  // bấm ô khác: chọn tại chỗ (không rời trang), thẻ đổi sang link mở ngày đó
+  await lich.locator('a[data-ngay="2026-10-20"]').click();
+  await expect(page).toHaveURL(/\/xem-ngay-tot\/2026-10-13$/);
+  await expect(lich.getByTestId("lich-am-mo-ngay")).toHaveAttribute("href", "/xem-ngay-tot/2026-10-20");
   await page.getByTestId("ngay-mai").click();
   await expect(page).toHaveURL(/\/xem-ngay-tot\/2026-10-14$/);
   await expect(page.getByTestId("ky-dan-gian")).toContainText("Nguyệt Kỵ");
@@ -55,7 +62,14 @@ test("có hồ sơ: hiện quan hệ tuổi; tìm ngày cưới hỏi bỏ ngày
 test("trang tháng + trang hôm nay + noindex ngoài cửa sổ + 404 sai dạng", async ({ page, request }) => {
   await page.goto("/xem-ngay-tot/thang-11-2026");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Lịch ngày tốt tháng 11/2026");
-  await expect(page.getByTestId("lich-thang").locator("ol a")).toHaveCount(30);
+  // LA-UI: lịch năm âm mới thay lưới tháng cũ; ô ngày là link tới trang ngày (giữ liên kết nội bộ tháng → ngày).
+  const lich = page.getByTestId("lich-am-nam");
+  await expect(lich).toBeVisible();
+  await expect(page.getByTestId("lich-thang")).toHaveCount(0);
+  expect(await lich.getByTestId("lich-am-luoi").locator("a[href^='/xem-ngay-tot/2026-']").count()).toBeGreaterThanOrEqual(29);
+  // mở sẵn trong tháng 11/2026 (hôm nay nếu đang ở tháng này, không thì ngày 15)
+  await expect(lich.getByTestId("lich-am-the-ngay")).toContainText(/\/11\/2026/);
+  await expect(page.getByTestId("thang-ke").getByRole("link", { name: "Tháng sau" })).toHaveAttribute("href", "/xem-ngay-tot/thang-12-2026");
   await expect(page.getByTestId("ngay-dep-thang").locator("li").first()).toBeVisible();
   const html = await (await request.get("/xem-ngay-tot")).text();
   expect(html).toMatch(/<h1[^>]*>Xem ngày tốt hôm nay<\/h1>/);

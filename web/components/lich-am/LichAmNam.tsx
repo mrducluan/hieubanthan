@@ -6,7 +6,7 @@
 // Mượn của B dải vạch theo ngày âm cho thẻ năm, của C ô tra theo ngày dương. Mọi dữ kiện do engine tính
 // (`/v1/lich/nam-ngay/{năm}`): web chỉ vẽ, không tự đổi lịch. `homNay` do máy chủ truyền (giờ Việt Nam) → không lệch hydrate.
 // Đo: chart_interacted{mo_dun: "lich_am", kind: chon_thang | xem_nam | chon_ngay | tra_ngay | hom_nay | mo_ngay}.
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "@/components/khung/Lien";
 import { ghi } from "@/lib/do-luong";
@@ -25,14 +25,18 @@ const ghiDo = (kind: string, them: Record<string, unknown> = {}) => ghi("chart_i
 
 type Vi = { t: number; n: number };   // chỉ số tháng trong d.thang, chỉ số ngày trong tháng
 
-export function LichAmNam({ d, homNay, className }: { d: LichNgay; homNay: string; className?: string }) {
+/** `chon`: ngày mở sẵn (mặc định hôm nay). `dangXem`: ngày của trang đang đọc (Xem ngày tốt) — thẻ ngày không link lại chính
+ *  nó. `lienKet`: ô ngày là link tới trang ngày (giữ liên kết nội bộ tháng → ngày của lịch cũ; bấm thường vẫn chọn tại chỗ). */
+export function LichAmNam({ d, homNay, className, chon: ngayMo, dangXem, lienKet }: {
+  d: LichNgay; homNay: string; className?: string; chon?: string; dangXem?: string; lienKet?: boolean;
+}) {
   const viTri = useMemo(() => {
     const m = new Map<string, Vi>();
     d.thang.forEach((t, i) => t.ngay.forEach((n, j) => m.set(n.d, { t: i, n: j })));
     return m;
   }, [d]);
   const coHomNay = viTri.has(homNay);
-  const [vi, setVi] = useState<Vi>(() => viTri.get(homNay) ?? { t: 0, n: 0 });
+  const [vi, setVi] = useState<Vi>(() => (ngayMo ? viTri.get(ngayMo) : undefined) ?? viTri.get(homNay) ?? { t: 0, n: 0 });
   const [che, setChe] = useState<"thang" | "nam">("thang");
   const dai = useRef<HTMLDivElement>(null);
   const thang = d.thang[vi.t]!, ngay = thang.ngay[vi.n]!;
@@ -133,10 +137,10 @@ export function LichAmNam({ d, homNay, className }: { d: LichNgay; homNay: strin
               </div>
               <ol className="grid grid-cols-7 gap-[3px] sm:gap-[5px]" data-testid="lich-am-luoi">
                 {Array.from({ length: dau }, (_, i) => <li key={`r${i}`} aria-hidden />)}
-                {thang.ngay.map((n, j) => <ONgay key={n.d} n={n} chon={j === vi.n} nay={n.d === homNay} onClick={() => chon({ t: vi.t, n: j }, "chon_ngay")} />)}
+                {thang.ngay.map((n, j) => <ONgay key={n.d} n={n} chon={j === vi.n} nay={n.d === homNay} lienKet={lienKet} onClick={() => chon({ t: vi.t, n: j }, "chon_ngay")} />)}
               </ol>
             </div>
-            <TheNgayAm n={ngay} thang={thang} nam={d} nay={ngay.d === homNay} tiet={tiet.get(ngay.d)} truoc={() => buoc(-1)} sau={() => buoc(1)}
+            <TheNgayAm n={ngay} thang={thang} nam={d} nay={ngay.d === homNay} dangXem={ngay.d === dangXem} tiet={tiet.get(ngay.d)} truoc={() => buoc(-1)} sau={() => buoc(1)}
               dauNam={vi.t === 0 && vi.n === 0} cuoiNam={vi.t === d.thang.length - 1 && vi.n === thang.ngay.length - 1} />
           </div>
 
@@ -175,13 +179,13 @@ export function LichAmNam({ d, homNay, className }: { d: LichNgay; homNay: strin
   );
 }
 
-function ONgay({ n, chon, nay, onClick }: { n: NgayAm; chon: boolean; nay: boolean; onClick: () => void }) {
+function ONgay({ n, chon, nay, lienKet, onClick }: { n: NgayAm; chon: boolean; nay: boolean; lienKet?: boolean; onClick: () => void }) {
   const dauThangDuong = n.d.endsWith("-01");
   const nhan = `${ngayAmChu(n.a)} âm lịch, ${THU_DAI[n.thu]} ${dmy(n.d)}, ${n.hd ? "hoàng đạo" : "hắc đạo"}${n.dep ? ", ngày đẹp" : ""}`
     + `${n.le?.length ? ", " + n.le.join(", ") : ""}${n.tiet ? `, tiết ${n.tiet}` : ""}${nay ? ", hôm nay" : ""}`;
   return (
     <li>
-      <button type="button" onClick={onClick} aria-pressed={chon} aria-current={nay ? "date" : undefined} aria-label={nhan} data-ngay={n.d}
+      <Nut lienKet={lienKet} href={duongNgay(n.d)} onClick={onClick} chon={chon} nay={nay} nhan={nhan} d={n.d}
         className={`relative flex min-h-[3.75rem] w-full flex-col items-center justify-center rounded-xl border px-0.5 pb-3 pt-4 transition-colors sm:min-h-[4.25rem]
           ${chon ? "border-fg bg-surface-2" : n.le?.length ? "border-gold/40 bg-gold/[0.06] hover:border-gold/70" : "border-line/55 bg-bg/30 hover:border-fg-muted/50"}
           ${nay ? "shadow-[inset_0_0_0_1.5px_rgb(var(--gold))]" : ""}`}>
@@ -196,13 +200,26 @@ function ONgay({ n, chon, nay, onClick }: { n: NgayAm; chon: boolean; nay: boole
           {n.tiet ? <span className="h-[3px] w-2.5 rounded bg-moon" /> : null}
         </span>
         {n.dep && <span className="absolute bottom-0.5 right-1 text-[11px] leading-none text-jade" aria-hidden>✦</span>}
-      </button>
+      </Nut>
     </li>
   );
 }
 
-function TheNgayAm({ n, thang, nam, nay, tiet, truoc, sau, dauNam, cuoiNam }: {
-  n: NgayAm; thang: ThangAmNgay; nam: LichNgay; nay: boolean; tiet?: { ten: string; nghia: string; gio: string };
+/** Ô ngày: nút (mặc định) hoặc link tới trang ngày — bấm thường vẫn chọn tại chỗ, bấm kèm Ctrl/Cmd/giữa mở trang ngày. */
+function Nut({ lienKet, href, onClick, chon, nay, nhan, d, className, children }: {
+  lienKet?: boolean; href: string; onClick: () => void; chon: boolean; nay: boolean; nhan: string; d: string; className: string; children: ReactNode;
+}) {
+  if (!lienKet) {
+    return <button type="button" onClick={onClick} aria-pressed={chon} aria-current={nay ? "date" : undefined} aria-label={nhan} data-ngay={d} className={className}>{children}</button>;
+  }
+  return (
+    <Link href={href} aria-label={nhan} aria-current={nay ? "date" : undefined} data-ngay={d} data-chon={chon ? "1" : undefined} className={className}
+      onClick={(e) => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return; e.preventDefault(); onClick(); }}>{children}</Link>
+  );
+}
+
+function TheNgayAm({ n, thang, nam, nay, dangXem, tiet, truoc, sau, dauNam, cuoiNam }: {
+  n: NgayAm; thang: ThangAmNgay; nam: LichNgay; nay: boolean; dangXem?: boolean; tiet?: { ten: string; nghia: string; gio: string };
   truoc: () => void; sau: () => void; dauNam: boolean; cuoiNam: boolean;
 }) {
   return (
@@ -221,8 +238,12 @@ function TheNgayAm({ n, thang, nam, nay, tiet, truoc, sau, dauNam, cuoiNam }: {
         <dt className="text-fg-faint">Trực</dt><dd>{n.tr}</dd>
         {n.ky?.length ? <><dt className="text-fg-faint">Dân gian kiêng</dt><dd>{n.ky.join(", ")}<span className="block text-xs text-fg-muted">Tập quán, để tham khảo.</span></dd></> : null}
       </dl>
-      <Link href={duongNgay(n.d)} onClick={() => ghiDo("mo_ngay")} data-testid="lich-am-mo-ngay"
-        className="mt-3.5 flex min-h-11 items-center justify-center gap-1.5 rounded-full bg-gold px-4 text-sm font-semibold text-bg hover:brightness-105">Giờ tốt, việc nên làm <ArrowRight className="size-4" aria-hidden /></Link>
+      {dangXem ? (
+        <p className="mt-3.5 flex min-h-11 items-center justify-center rounded-full border border-gold/45 px-4 text-sm text-gold" data-testid="lich-am-dang-xem">Bạn đang xem ngày này</p>
+      ) : (
+        <Link href={duongNgay(n.d)} onClick={() => ghiDo("mo_ngay")} data-testid="lich-am-mo-ngay"
+          className="mt-3.5 flex min-h-11 items-center justify-center gap-1.5 rounded-full bg-gold px-4 text-sm font-semibold text-bg hover:brightness-105">Giờ tốt, việc nên làm <ArrowRight className="size-4" aria-hidden /></Link>
+      )}
       <div className="mt-2 flex gap-2">
         <button type="button" onClick={truoc} disabled={dauNam} className="min-h-11 flex-1 rounded-full border border-line text-[13px] text-fg-muted enabled:hover:text-fg disabled:opacity-35">‹ Ngày trước</button>
         <button type="button" onClick={sau} disabled={cuoiNam} className="min-h-11 flex-1 rounded-full border border-line text-[13px] text-fg-muted enabled:hover:text-fg disabled:opacity-35">Ngày sau ›</button>

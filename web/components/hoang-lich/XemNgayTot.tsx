@@ -17,6 +17,8 @@ import {
 } from "@/lib/hoang-lich";
 import { useChuLich } from "./chu-lich";
 import { useDuong } from "@/components/khung/NgonNgu";
+import { LichAmNam } from "@/components/lich-am/LichAmNam";
+import type { LichNgay } from "@/lib/lich-am";
 
 export function LichThang({ t, chon }: { t: ThangLich; chon?: string }) {
   const { c, en, ma, thangNam } = useChuLich();
@@ -134,7 +136,8 @@ function ChonNgay({ dsViec, tu, tuoi }: { dsViec: { ma: string; ten: string }[];
   );
 }
 
-export function XemNgayTot({ banDau, thang }: { banDau: NgayTot; thang: ThangLich | null }) {
+/** `lichAm` (bản Việt): lịch năm âm mới (LA-UI) thay lưới tháng cũ; không có (bản Anh / engine cũ) → giữ `LichThang`. */
+export function XemNgayTot({ banDau, thang, lichAm }: { banDau: NgayTot; thang: ThangLich | null; lichAm?: LichNgay | null }) {
   const { c, en } = useChuLich();
   const hoSo = useHoSo();
   const [d, setD] = useState<NgayTot>(banDau);
@@ -158,7 +161,8 @@ export function XemNgayTot({ banDau, thang }: { banDau: NgayTot; thang: ThangLic
       <TheNgay d={d} />
       <ChonNgay dsViec={banDau.danh_sach_viec} tu={banDau.ngay >= homNay ? banDau.ngay : homNay} tuoi={tuoi} />
       <ChonNgayNhieu tu={banDau.ngay >= homNay ? banDau.ngay : homNay} />
-      {thang && <LichThang t={thang} chon={banDau.ngay} />}
+      {lichAm && !en ? <LichAmNam d={lichAm} homNay={homNay} chon={banDau.ngay} dangXem={banDau.ngay} lienKet />
+        : thang && <LichThang t={thang} chon={banDau.ngay} />}
       <CuoiBaiDoc moDun="xem_ngay" cauHoi={c("cuoi.hoi")} khongCta={en} />
     </div>
   );

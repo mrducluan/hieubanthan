@@ -8,6 +8,7 @@ import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { XemNgayTot } from "@/components/hoang-lich/XemNgayTot";
 import { NgayTotTheoViec } from "@/components/hoang-lich/NgayTotTheoViec";
 import { homNayVN, ngayTotCongKhai, thangCongKhai } from "@/lib/hoang-lich";
+import { lichNgayChoNgay } from "@/lib/lich-am";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { metaTrang } from "@/lib/seo";
 import { ND_XEM_NGAY } from "./noi-dung";
@@ -27,7 +28,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page() {
   const { en, c } = await chuLichMayChu();
   const iso = homNayVN();
-  const [d, t] = await Promise.all([ngayTotCongKhai(iso), thangCongKhai(Number(iso.slice(0, 4)), Number(iso.slice(5, 7)))]);
+  const [d, t, lichAm] = await Promise.all([ngayTotCongKhai(iso), thangCongKhai(Number(iso.slice(0, 4)), Number(iso.slice(5, 7))),
+    en ? null : lichNgayChoNgay(iso)]);
   if (!d) throw new Error("engine lịch không phản hồi");   // → error.tsx, mã 5xx (không index trang lỗi)
   if (en) {
     return (
@@ -46,7 +48,7 @@ export default async function Page() {
       <div className="mx-auto max-w-3xl">
         <TieuDeTrang nho={CHU_XEM_NGAY["dau.nhan_tren"]!.mac_dinh} lon="Xem ngày tốt hôm nay"
           mo_ta="Ngày hoàng đạo hay hắc đạo, giờ tốt, việc sách lịch ghi nên làm và nên kiêng — và ngày này có xung tuổi bạn không." />
-        <XemNgayTot banDau={d} thang={t} />
+        <XemNgayTot banDau={d} thang={t} lichAm={lichAm} />
         <p className="mt-4 text-xs text-fg-faint">Đường dẫn cố định của ngày này: <Link href={`/xem-ngay-tot/${iso}`} className="text-gold underline">/xem-ngay-tot/{iso}</Link></p>
         <TomTatNam kieu="ngay" ngay={iso} gonDong tieuDe={`Hôm nay ${iso.split("-").reverse().join("/")} tốt hay xấu?`} nhanLink="Xem đủ giờ tốt, việc nên làm của ngày này" />
         <NgayTotTheoViec className="mt-10" />
