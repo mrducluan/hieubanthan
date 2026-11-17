@@ -3,7 +3,7 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-17 (LH-1 + LH-2 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-17 (TK-1 mục 4ax; LH-1 + LH-2 + LH-3 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
 
 ### 4aw. LH-1 — "Luận theo câu hỏi" cho Luận giải Tử vi (2026-11-17, `docs/LUAN-GIAI-DOI-SONG.md` mục 11)
 
@@ -57,6 +57,13 @@
 - [ ] (Tuỳ chọn) Hội viên năm / Hỏi chuyên gia: công tắc bán vẫn do anh bật ở `/quan-tri/cai-dat`; tệp SQL chỉ đặt giá.
 - [ ] Sau 4 tuần: `/quan-tri/doanh-thu` → tỉ lệ từng gói. Gói Ba lần xem dưới 20 % số đơn thì báo em hạ gói lẻ xuống 79.000 ₫.
 - [ ] (Quyết định) Nối cổng Sao cho Xem lá số 2 người / Nhà của bạn / Chọn ngày cho cả nhà; gói ghép "Trọn bộ 2027"; "Lì xì báo cáo Tết" — mục 8 của tài liệu.
+
+### 4ax. TK-1 — sách cần bổ sung cho 7 mảng (2026-11-17, `docs/THONG-KE-SACH-VA-DE-XUAT-NAP.md`)
+
+- [x] (Đã chọn A, 17/11/2026) Đọc mục 3 và chọn phương án bản quyền **A / B / C** cho sách hiện đại (em khuyên A: anh mua sách, em đọc và rút quy tắc, không chép câu vào repo công khai).
+- [x] (Đã làm cả 5 việc — TK-2) Chọn việc làm trước trong 5 việc em tự làm được (mục 4, việc 1–5): đối chiếu Chaldea với Cheiro · chỉ tay phương Tây · 60 trụ ngày × giờ · Legge cho `/en/i-ching` · bài từ Dịch Lâm.
+- [ ] Gửi lên Drive (PDF bôi đen được chữ, mỗi tệp dưới 10 MB), xếp theo ưu tiên: **Thẩm Thị Huyền Không Học** bản đủ + **Trạch Vận Tân Án** · Dương Trạch Tam Yếu / Bát Trạch Minh Kính / Địa Lý Ngũ Quyết chữ Hán · ba bộ bình chú **Từ Lạc Ngô** · Bốc Phệ Chính Tông · Tương Lý Hành Chân · Mệnh Lý Ước Ngôn · Toàn Thư quyển 4.
+- [ ] (Nếu chọn A / B) mua và gửi: Phillips *The Complete Book of Numerology* · Goodwin *Numerology: The Complete Guide* · Lương Nhược Du *飛星紫微斗數* · Thiên Lương *Tử vi nghiệm lý* · Thiệu Vĩ Hoa *Dự đoán theo tứ trụ*.
 
 ### 4as. PT-NG1 — nguồn tri thức Tarot · Phong thuỷ · Huyền Không còn thiếu (2026-11-12, `docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md`)
 

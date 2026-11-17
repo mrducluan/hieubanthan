@@ -17,6 +17,7 @@ from app import ngon_ngu
 from app.kb import nap, sach_ghi as sg
 
 SACH = {"tu_vi_dau_so_toan_thu": "Tử Vi Đẩu Số Toàn Thư", "tam_menh_thong_hoi": "Tam Mệnh Thông Hội",
+        "tam_menh_thong_hoi_du_bo": "Tam Mệnh Thông Hội",
         "uyen_hai_tu_binh": "Uyên Hải Tử Bình", "than_tuong_toan_bien": "Thần Tướng Toàn Biên",
         "lieu_trang_tuong_phap": "Liễu Trang tướng pháp", "duong_trach_thap_thu": "Dương Trạch Thập Thư",
         "nhan_tuong_co_thu": "sách tướng xưa", **sg.TEN_SACH_TOM_Y}
@@ -197,7 +198,27 @@ def battu(ls: dict, mo_rong: dict, tuoi: int | None = None, gioi: str | None = N
     """Thần sát có trong lá số (mỗi sao tối đa 2 câu) · bốn thập thần sách bàn riêng (khi lộ ở hàng can) · nét của hành
     ngày sinh · phần cơ thể sách gắn với hành ấy (+ câu "gặp hành khắc đang mạnh" khi hành khắc ngày sinh đúng là hành
     nhiều điểm nhất). `gioi` = "nam" / "nu" để chọn câu sách nói riêng một giới."""
-    return khoi(battu_nhom(ls, mo_rong, gioi), tuoi)
+    ng = battu_ngay_gio(ls)
+    return khoi(([("ngay_gio", "Ngày và giờ sinh", ng)] if ng else []) + battu_nhom(ls, mo_rong, gioi), tuoi)
+
+
+_CAN_HAN, _CHI_HAN_BT = "甲乙丙丁戊己庚辛壬癸", "子丑寅卯辰巳午未申酉戌亥"
+
+
+def battu_ngay_gio(ls: dict) -> list[tuple[dict, str]]:
+    """TK-2 việc 3: bài ca chung của Tam Mệnh Thông Hội quyển 8–9 cho đúng can ngày × chi giờ của lá số (KB
+    `battu_ngay_gio.json`). Sách chia mục theo TRỤ giờ (Ngũ Thử Độn từ can ngày) → chỉ chọn khi trụ giờ của lá số đúng trụ
+    giờ sách ghi; sinh dạ Tý (trụ giờ lấy can của ngày sau) thường lệch → không chọn. Chỉ khối lá số, không vào hỏi đáp."""
+    from app.calc import battu as _bt  # noqa: PLC0415
+    try:
+        ngay, gio = ls["tru"][2], ls["tru"][3]
+        tru = _CAN_HAN[_bt.CAN.index(gio["can"])] + _CHI_HAN_BT[_bt.CHI.index(gio["chi"])]
+    except (KeyError, IndexError, ValueError):
+        return []
+    m = (_kb("battu_ngay_gio.json").get("muc") or {}).get(f"{ngay['can']}|{gio['chi']}")
+    if not m or m.get("bo") or m.get("tru_gio") != tru:
+        return []
+    return [(m, f"Sinh ngày {ngay['can']} giờ {gio['chi']}")]
 
 
 def battu_nhom(ls: dict, mo_rong: dict, gioi: str | None = None) -> list[tuple[str, str, list[tuple[dict, str]]]]:

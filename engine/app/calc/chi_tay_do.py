@@ -138,3 +138,18 @@ def do_tay(diem: list, ty_le: float, tay: str) -> dict:
     so_do = {"dai_long": 1.0, "rong_long": _r(rong), "ngon": ngon, "tro_ap_ut": _r(ngon["tro"] / ngon["ap_ut"])}
     nhan = [_nhan(ngon["giua"], "ngon", ng), _nhan(so_do["rong_long"], "long", ng), _nhan(so_do["tro_ap_ut"], "tro_ap_ut", ng)]
     return {"hop_le": True, "loi": None, "so_do": so_do, "nhan": nhan, "cung": chieu_cung(diem)}
+
+
+def nhan_tay(so_do: dict) -> dict:
+    """TK-2 — phái Tây: ba nhãn từ số đo đã có (`do_tay`), ngưỡng KB `chi_tay_tay_kb.do_tay.nguong` (dải "vừa", can_doi_chieu).
+    Trục: ngón giữa / dài lòng bàn tay (Benham: ngón dài / ngắn) · rộng / dài lòng bàn tay (Cheiro: tay vuông / dài) · ngón trỏ /
+    ngón áp út (Benham: Jupiter / Apollo). `to_hop` = "long_x.ngon_y" khi cả hai trục lòng và ngón đều ra khỏi dải vừa —
+    chỉ gọi tên hình dáng, không gắn nguyên tố. Thiếu khoá → KeyError."""
+    from app.kb import chi_tay_tay_kb
+
+    ng = chi_tay_tay_kb.do_tay_cfg()["nguong"]
+    nhan = [_nhan(float(so_do["ngon"]["giua"]), "ngon", ng), _nhan(float(so_do["rong_long"]), "long", ng),
+            _nhan(float(so_do["tro_ap_ut"]), "tro_ap_ut", ng)]
+    n_ngon, n_long = nhan[0], nhan[1]
+    to_hop = None if n_ngon["vua"] or n_long["vua"] else f"{n_long['ma']}.{n_ngon['ma']}"
+    return {"nhan": nhan, "to_hop": to_hop}

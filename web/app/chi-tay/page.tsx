@@ -12,15 +12,17 @@ import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { DoHinhPhu } from "@/components/nhan-tuong/DoHinhPhu";
 import { ChonVanTay } from "@/components/chi-tay/ChonVanTay";
 import { ChupBanTay } from "@/components/chi-tay/ChupBanTay";
+import { CongTacPhai, TheoPhai } from "@/components/chi-tay/PhaiChiTay";
+import { ChonChiTayTay, MucTayView } from "@/components/chi-tay/ChonChiTayTay";
 import { goiLd, ldDuongDan, ldTrangWeb, metaTrang, urlDayDu } from "@/lib/seo";
 import { duongDanCongCu } from "@/lib/duong-dan";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { anhDoHinh } from "@/lib/do-hinh";
-import { anhVan, DUONG_CHI_TAY, layThuVienChiTay, tachCau } from "@/lib/chi-tay";
+import { anhVan, DUONG_CHI_TAY, layThuVienChiTay, layThuVienChiTayTay, tachCau, type ThuVienChiTayTay } from "@/lib/chi-tay";
 
 const MAC = {
-  tieuDe: "Xem chỉ tay theo sách xưa: hơn 60 hình vân tay có chú giải",
-  moTa: "Tự soi bàn tay theo Thần Tướng Toàn Biên: tám cung trên bản khắc gỗ và trên ảnh tay bạn (ảnh không rời máy), hơn 60 hình vân kèm nguyên văn, lời dễ hiểu.",
+  tieuDe: "Xem chỉ tay: sách tướng xưa và chỉ tay phương Tây",
+  moTa: "Tự soi bàn tay theo Thần Tướng Toàn Biên (tám cung, hơn 60 hình vân) hoặc theo chỉ tay phương Tây của Cheiro, Benham (dáng tay, các gò, đường chỉ). Ảnh không rời máy.",
 };
 const NHAN: Record<string, string> = { A: "Sách ghi", B: "Nên chú ý", C: "Ghi chép xưa" };
 
@@ -29,19 +31,20 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [tv, nd] = await Promise.all([layThuVienChiTay(), layNoiDungTrang(DUONG_CHI_TAY)]);
+  const [tv, nd, tvTay] = await Promise.all([layThuVienChiTay(), layNoiDungTrang(DUONG_CHI_TAY), layThuVienChiTayTay()]);
   const h1 = nd.dau.h1 ?? "Xem chỉ tay theo sách xưa";
   const dd = [...duongDanCongCu("/nhan-tuong", "Nhân tướng"), { ten: "Xem chỉ tay", duong: DUONG_CHI_TAY }];   // chỉ tay thuộc mảng Nhân tướng
   const tl = `Sách tướng xưa xem bàn tay theo tám cung bát quái (mỗi cung một mảng đời: cha, mẹ, vợ chồng, nhà cửa, công danh, tổ nghiệp)
     và theo hình vân. ${tv.nguon_hien_thi} khắc 72 hình vân, mỗi hình một bài thơ bốn câu. Bạn tự soi tay mình,
     chọn hình giống tay mình, trang này đọc nguyên văn và nói lại bằng lời thường. Nếu chụp ảnh lòng bàn tay, ảnh chỉ xử lý trên
-    máy bạn — chỉ 21 toạ độ điểm mốc gửi lên để đo và đặt tám cung lên đúng tay bạn, không lưu gì lên máy chủ.`
+    máy bạn — chỉ 21 toạ độ điểm mốc gửi lên để đo và đặt tám cung lên đúng tay bạn, không lưu gì lên máy chủ.${tvTay
+      ? " Trang cũng có cách xem chỉ tay phương Tây theo sách Cheiro (1894) và Benham (1900): dáng bàn tay, các gò, các đường chỉ. Đường Sinh dài hay ngắn không nói bạn sống bao lâu." : ""}`
     .replace(/\s+/g, " ");
   const theoChuDe = tv.chu_de.map((c) => ({ ...c, van: tv.van.filter((v) => v.chu_de === c.ma) })).filter((c) => c.van.length);
   return (
     <div className="mx-auto max-w-5xl">
       <JsonLd data={goiLd(
-        ldTrangWeb({ duong: DUONG_CHI_TAY, ten: h1, tomTat: MAC.moTa, about: ["Xem chỉ tay", "Nhân tướng học", "Thần Tướng Toàn Biên"] }),
+        ldTrangWeb({ duong: DUONG_CHI_TAY, ten: h1, tomTat: MAC.moTa, about: ["Xem chỉ tay", "Nhân tướng học", "Thần Tướng Toàn Biên", ...(tvTay ? ["Chỉ tay phương Tây"] : [])] }),
         ldDuongDan(dd),
         ...(tv.do_hinh ? [{ "@type": "ImageObject", contentUrl: urlDayDu(anhDoHinh(tv.do_hinh.tep)), width: tv.do_hinh.rong,
           height: tv.do_hinh.cao, caption: `${tv.do_hinh.ten} (${tv.do_hinh.ten_han}) — ${tv.do_hinh.nguon_hien_thi}` }] : []),
@@ -51,7 +54,11 @@ export default async function Page() {
       <KhoiCms ds={nd.khoi.tren} duong={DUONG_CHI_TAY} viTri="tren" className="mb-6" />
       <div className="mb-8"><TraLoiNhanh chu={tl} /></div>
 
+      {tvTay && <CongTacPhai />}
+
       <ChupBanTay />
+
+      <TheoPhai tay={tvTay ? <PhanTay tv={tvTay} /> : null} dong={<>
 
       {tv.do_hinh && (
         <section aria-labelledby="tam-cung" className="mb-12">
@@ -70,7 +77,6 @@ export default async function Page() {
         <ChonVanTay van={tv.van} chuDe={tv.chu_de} tenCung={Object.fromEntries((tv.do_hinh?.diem ?? []).map((p) => [p.id, p.ten]))} duongChi={tv.duong_chi} />
       </section>
 
-      <KhoiCms ds={nd.khoi.duoi} duong={DUONG_CHI_TAY} viTri="duoi" className="mb-10" />
 
       <section aria-labelledby="thu-vien">
         <h2 id="thu-vien" className="text-2xl">Thư viện {tv.van.length} hình vân tay trong sách</h2>
@@ -113,11 +119,75 @@ export default async function Page() {
         <p className="mt-8 text-sm text-fg-faint">{tv.cau_ket}</p>
       </section>
 
+      </>} />
+
+      <KhoiCms ds={nd.khoi.duoi} duong={DUONG_CHI_TAY} viTri="duoi" className="mb-10" />
+
       <p className="mt-10 text-sm text-fg-muted">
         Đọc thêm: <Link href="/nhan-tuong" className="text-gold underline">Soi gương theo sách xưa</Link> ·{" "}
         <Link href="/nhan-tuong/do-hinh" className="text-gold underline">Đồ hình nhân tướng</Link>
       </p>
       <KhoiCms ds={nd.khoi.cuoi} duong={DUONG_CHI_TAY} viTri="cuoi" className="mt-10" />
     </div>
+  );
+}
+
+/** TK-2 — phần chỉ tay phương Tây: tự soi (client) + thư viện đầy đủ dựng ở máy chủ (gập), nguồn công khai. */
+function PhanTay({ tv }: { tv: ThuVienChiTayTay }) {
+  return (
+    <>
+      <section aria-labelledby="tu-soi-tay" className="mb-12">
+        <h2 id="tu-soi-tay" className="mb-2 text-2xl">Chỉ tay phương Tây: tự soi bàn tay của bạn</h2>
+        <p className="mb-4 text-fg-muted">{tv.gioi_thieu}</p>
+        <ChonChiTayTay tv={tv} />
+      </section>
+
+      <section aria-labelledby="thu-vien-tay" className="mb-10">
+        <h2 id="thu-vien-tay" className="text-2xl">Dáng tay, các gò và đường chỉ theo sách chỉ tay phương Tây</h2>
+        <p className="mt-2 text-sm text-fg-muted">
+          Theo {tv.nguon_hien_thi.join(" và ")}. Câu tiếng Anh là nguyên văn sách (bấm «Nguyên văn» để đọc); lời tiếng Việt do ban
+          biên tập viết lại cho dễ hiểu. Những phần sách dùng để đoán quãng đời, bệnh tật hay phẩm hạnh không đưa vào.
+        </p>
+        <details className="mt-4 rounded-2xl border border-line/70 p-4" data-testid="thu-vien-tay">
+          <summary className="cursor-pointer text-fg">Bảy dáng bàn tay</summary>
+          <ul className="mt-3 space-y-3">
+            {tv.dang_tay.lua_chon.map((d) => (
+              <li key={d.ma}><h3 className="text-base text-fg">{d.ten}</h3><p className="text-xs text-fg-muted">{d.mo_ta}</p><MucTayView m={d} nho /></li>
+            ))}
+          </ul>
+        </details>
+        <details className="mt-3 rounded-2xl border border-line/70 p-4">
+          <summary className="cursor-pointer text-fg">Bảy gò trên lòng bàn tay</summary>
+          <ul className="mt-3 space-y-4">
+            {tv.go.muc.map((g) => (
+              <li key={g.ma}>
+                <h3 className="text-base text-fg">{g.ten}</h3>
+                <p className="text-xs text-fg-muted">{g.vi_tri}</p>
+                <div className="mt-1 space-y-2"><MucTayView m={g.day} nho /><MucTayView m={g.trung} nho /></div>
+              </li>
+            ))}
+          </ul>
+        </details>
+        <details className="mt-3 rounded-2xl border border-line/70 p-4">
+          <summary className="cursor-pointer text-fg">Các đường chỉ</summary>
+          {tv.luu_y_do_dai && <div className="mt-3 text-sm"><p className="font-medium text-fg">{tv.luu_y_do_dai.ten}</p><MucTayView m={tv.luu_y_do_dai} nho /></div>}
+          <ul className="mt-3 space-y-4">
+            {tv.duong.map((du) => (
+              <li key={du.ma}>
+                <h3 className="text-base text-fg">{du.ten}</h3>
+                <p className="text-xs text-fg-muted">{du.vi_tri}</p>
+                {du.cau.flatMap((c) => c.lua_chon).map((l) => (
+                  <div key={l.ma} className="mt-2"><p className="text-sm text-fg">{l.ten}</p><MucTayView m={l} nho /></div>
+                ))}
+              </li>
+            ))}
+          </ul>
+        </details>
+        {tv.khong_dua_vao.length > 0 && (
+          <p className="mt-4 text-xs text-fg-faint">Không đưa vào: {tv.khong_dua_vao.map((k) => `${k.ten} (${k.ly_do})`).join("; ")}.</p>
+        )}
+        <p className="mt-3 text-sm text-fg-faint">{tv.cau_ket}</p>
+      </section>
+    </>
   );
 }

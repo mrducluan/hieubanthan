@@ -36,6 +36,8 @@ export interface DocQueKq {
     tieu_de: string; han: string; dich: string; y?: string | null; nom_na?: string | null; thoan?: string | null; chu?: boolean;
     /** KT-TT: Tiểu tượng của hào + lời Trình Di, Chu Hy (engine trích từ bản dịch Ngô Tất Tố; web chỉ hiện). */
     tieu_tuong?: { han: string; dich: string } | null; trinh?: string | null; chu_hy?: string | null; nguoi_dich?: string | null;
+    /** TK-2 việc 4: bản dịch James Legge (1882) — chỉ bản Anh, chỉ quẻ đã qua bộ kiểm cấu trúc (engine quyết). */
+    legge?: { dich: string; nguoi_dich: string } | null;
   }[];
   goc_nhin: { chinh: string; nghia_ly: GocNhin; mai_hoa: GocNhinMaiHoa | null; luc_hao: GocNhinLucHao | null };
   ung_ky: { chi: string; ly_do: string; ngay_gan_nhat: string; sau_bao_nhieu_ngay: number }[];
@@ -46,6 +48,8 @@ export interface DocQueKq {
   y_dinh_chung?: string | null; goi_mo?: GoiMo | null;
   /** WS-5: câu Tăng San Bốc Dịch của chương ứng với việc được hỏi (engine cũ chưa có → khối tự ẩn). */
   sach_xua?: CauSachXua[];
+  /** TK-2: bài từ «Tiêu Thị Dịch Lâm» của quẻ bản → quẻ biến (nguyên văn; engine cũ / bài nặng → không có). */
+  dich_lam?: { han: string; tu: string; den: string; co_bien: boolean } | null;
   /** KD-V3: gói trả lời theo việc (engine): kiểu câu, vai, nghiêng, xu hướng hào làm chủ, dụng thần theo việc. Chỉ hiển thị. */
   tra_loi?: { kieu?: string; vai?: string; nghieng?: string; nhan_nghieng?: string; nhan_tag?: string | null; nguon_tag?: string | null;
     khac_chieu?: string[]; dung_than?: { chinh?: string; ten?: string }; van_ai?: string } | null;
@@ -167,6 +171,14 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
       {/* ---- tầng học thuật: gập ---- */}
       <ViSao canCu={dq.can_cu.map((c) => `${c.tieu_de}: ${c.noi_dung}`)} thuatNgu={thuatNgu} />
       <div className="space-y-2">
+        {dq.dich_lam && (
+          <Gap id={`${id}-dich-lam`} Icon={BookOpen} tieuDe={c("dq.dich_lam_tieu_de")} testId="dich-lam"
+            onMo={() => ghi("chart_interacted", { mo_dun: "kinhdich", kind: "mo_dich_lam" })}>
+            <p className="text-fg-muted">{c(dq.dich_lam.co_bien ? "dq.dich_lam_bien" : "dq.dich_lam_tinh", { tu: dq.dich_lam.tu, den: dq.dich_lam.den })}</p>
+            <p className="mt-2 font-serif text-base leading-relaxed text-fg" lang="zh-Hant">{dq.dich_lam.han}</p>
+            <p className="mt-2 text-xs text-fg-faint">{c("dq.dich_lam_chan")}</p>
+          </Gap>
+        )}
         <Gap id={`${id}-goc-nhin`} Icon={Layers} tieuDe={c("dq.ba_cach", { n: String(cac.length) })} testId="goc-nhin"
           onMo={() => ghi("chart_interacted", { mo_dun: "kinhdich", kind: "mo_goc_nhin" })}>
           <div className="space-y-3">
@@ -218,6 +230,9 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
                   <p className="font-semibold text-fg">{l.chu ? c("dq.loi_chu") : ""}{l.tieu_de}</p>
                   <p className="text-fg-muted" style={{ fontFamily: "var(--font-han), serif" }}>「{l.han}」</p>
                   <p className="text-fg-muted">{l.dich}{l.y ? ` — ${l.y}` : ""}</p>
+                  {l.legge?.dich && (
+                    <p className="text-fg-faint" data-testid="loi-legge">{c("dq.legge", { x: l.legge.nguoi_dich })}{l.legge.dich}</p>
+                  )}
                   {l.thoan && <p className="text-fg-faint">{c("dq.thoan")}{l.thoan}</p>}
                   {l.nom_na && <p className="text-fg-faint">{c("dq.nom_na")}{l.nom_na}</p>}
                   {l.tieu_tuong && (

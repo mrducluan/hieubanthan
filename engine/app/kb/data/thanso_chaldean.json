@@ -110,259 +110,448 @@
    "bieu_tuong": "Bánh xe vận hội",
    "xu_huong": "Theo truyền thống Chaldea, số kép này được mô tả bằng hình bánh xe quay vòng: thăng trầm luân phiên và năng lực bắt đầu lại sau mỗi vòng. Thường gắn với lòng tự tin và được người khác nhớ tên.",
    "mat_toi": "Dễ dựa vào hoàn cảnh thuận lợi mà lơ là chuẩn bị cho lúc bánh xe đổi chiều.",
-   "cau_tu_soi": "Khi một kế hoạch đổ vỡ, bạn có bắt tay làm lại trong vòng một tuần không?"
+   "cau_tu_soi": "Khi một kế hoạch đổ vỡ, bạn có bắt tay làm lại trong vòng một tuần không?",
+   "trich": {
+    "en": "It is a number of honour, of faith and self-confidence, of rise and fall; one's name will be known for good or evil, according to one's desires.",
+    "chuong": "XXXI"
+   }
   },
   "11": {
    "bieu_tuong": "Bàn tay nắm chặt",
    "xu_huong": "Theo truyền thống, số kép này được tả bằng hình bàn tay nắm chặt hay con sư tử bị ghìm: sức mạnh có sẵn nhưng đang bị giữ lại. Chủ đề là học cách tin người đúng chỗ và nói rõ điều mình muốn.",
    "mat_toi": "Dễ nghi ngờ người khác quá mức hoặc ngược lại, tin vội vào lời hứa đẹp.",
-   "cau_tu_soi": "Bạn có kiểm tra lại một lời hứa quan trọng bằng văn bản trước khi dựa vào nó không?"
+   "cau_tu_soi": "Bạn có kiểm tra lại một lời hứa quan trọng bằng văn bản trước khi dựa vào nó không?",
+   "trich": {
+    "en": "Gives warning of \"hidden dangers, trial and treachery from others.\"",
+    "chuong": "XII"
+   }
   },
   "12": {
    "bieu_tuong": "Người hi sinh",
    "xu_huong": "Số kép này thường được mô tả bằng hình ảnh người tự nguyện gác nhu cầu riêng để phục vụ mục tiêu của người khác. Chủ đề truyền thống là học cách phân biệt giúp đỡ và bị lợi dụng.",
    "mat_toi": "Dễ nhận phần thiệt về mình rồi thấy tủi thân mà không nói ra.",
-   "cau_tu_soi": "Tháng này bạn có nói 'không' với một yêu cầu làm thêm không công không?"
+   "cau_tu_soi": "Tháng này bạn có nói 'không' với một yêu cầu làm thêm không công không?",
+   "trich": {
+    "en": "The symbolism of this number is suffering and anxiety of mind. It is also indicated as \"the Sacrifice\" or \"the Victim\".",
+    "chuong": "XXXI"
+   }
   },
   "13": {
    "bieu_tuong": "Mùa chuyển giao",
    "xu_huong": "Truyền thống Chaldea gắn số kép này với sự thay đổi kế hoạch, chỗ ở hay cách sống: cái cũ khép lại để cái mới có chỗ. Thường được đọc như lời mời chủ động dọn dẹp thay vì níu giữ.",
    "mat_toi": "Dễ đổi mới vội vàng, bỏ cả những thứ còn giá trị chỉ vì thấy chán.",
-   "cau_tu_soi": "Bạn có giữ một thói quen hay đồ vật đã không còn dùng hơn một năm không?"
+   "cau_tu_soi": "Bạn có giữ một thói quen hay đồ vật đã không còn dùng hơn một năm không?",
+   "trich": {
+    "en": "It is a symbol of \"Power\" which if wrongly used will wreak destruction upon itself.",
+    "chuong": "XIII"
+   }
   },
   "14": {
    "bieu_tuong": "Dòng chảy kết nối",
    "xu_huong": "Số kép này thường được mô tả là chuyển động không ngừng, gặp gỡ và kết hợp người với việc, hợp với buôn bán, trao đổi, đi lại. Chủ đề là giữ được sự thận trọng khi mọi thứ trôi nhanh.",
    "mat_toi": "Dễ đặt cược vào lời người khác mà không tự tìm hiểu kỹ.",
-   "cau_tu_soi": "Lần gần nhất bạn đồng ý tham gia một việc góp vốn hay góp sức, bạn có tự đọc kỹ điều kiện trước không?"
+   "cau_tu_soi": "Lần gần nhất bạn đồng ý tham gia một việc góp vốn hay góp sức, bạn có tự đọc kỹ điều kiện trước không?",
+   "trich": {
+    "en": "If this number comes out in calculations of future events the person should be warned to act with caution and prudence.",
+    "chuong": "XIII"
+   }
   },
   "15": {
    "bieu_tuong": "Sức hút của lời nói",
    "xu_huong": "Theo truyền thống, số kép này gắn với tài ăn nói, duyên dáng và sức thuyết phục, được người khác sẵn lòng giúp đỡ. Thường được mô tả như sức hút có thể dùng để nâng người hoặc để chiều ý mình.",
    "mat_toi": "Dễ dùng sự khéo léo để lấy điều mình muốn mà quên hỏi người kia có thật sự đồng ý.",
-   "cau_tu_soi": "Tuần qua bạn có thuyết phục ai làm điều họ còn lưỡng lự không?"
+   "cau_tu_soi": "Tuần qua bạn có thuyết phục ai làm điều họ còn lưỡng lự không?",
+   "trich": {
+    "en": "It is peculiarly associated with \"good talkers,\" often with eloquence, gifts of Music and Art and a dramatic personality.",
+    "chuong": "XIII"
+   }
   },
   "16": {
    "bieu_tuong": "Toà tháp đổi mới",
    "xu_huong": "Truyền thống Chaldea tả số kép này bằng hình toà tháp bị sét đánh: một cấu trúc cũ không còn hợp phải nhường chỗ. Thường được đọc như chủ đề xây lại trên nền móng thật hơn, khiêm tốn hơn.",
    "mat_toi": "Dễ bám vào kế hoạch đã định dù nhiều dấu hiệu cho thấy nó cần điều chỉnh.",
-   "cau_tu_soi": "Bạn có đang tiếp tục một kế hoạch chỉ vì đã lỡ bỏ công sức vào đó không?"
+   "cau_tu_soi": "Bạn có đang tiếp tục một kế hoạch chỉ vì đã lỡ bỏ công sức vào đó không?",
+   "trich": {
+    "en": "It is also called \"the Shattered Citadel.\"",
+    "chuong": "XIII"
+   }
   },
   "17": {
    "bieu_tuong": "Ngôi sao dẫn lối",
    "xu_huong": "Số kép này được truyền thống gọi là ngôi sao của các nhà thông thái: tinh thần vững vàng, vượt qua thử thách để để lại dấu ấn. Thường gắn với sự kiên định và mong muốn được nhớ đến.",
    "mat_toi": "Dễ quá bận tâm về hình ảnh lâu dài mà bỏ qua người bên cạnh hôm nay.",
-   "cau_tu_soi": "Tuần này bạn có dành một buổi trọn vẹn cho người thân mà không xem điện thoại không?"
+   "cau_tu_soi": "Tuần này bạn có dành một buổi trọn vẹn cho người thân mà không xem điện thoại không?",
+   "trich": {
+    "en": "It is also called \"the Star of the Magi\".",
+    "chuong": "XIII"
+   }
   },
   "18": {
    "bieu_tuong": "Mặt trăng và hai bờ",
    "xu_huong": "Theo truyền thống, số kép này mang hình mặt trăng soi hai bờ: giằng co giữa ham muốn vật chất và đời sống tinh thần. Chủ đề là nhận ra mâu thuẫn bên trong trước khi nó thành xung đột bên ngoài.",
    "mat_toi": "Dễ hiểu lầm người thân và giữ kín điều không vừa ý đến lúc bùng ra.",
-   "cau_tu_soi": "Gần đây bạn có giận ai mà chưa nói rõ lý do với họ không?"
+   "cau_tu_soi": "Gần đây bạn có giận ai mà chưa nói rõ lý do với họ không?",
+   "trich": {
+    "en": "It generally associates a person with bitter quarrels, even family ones, also with war, social upheavals, revolutions.",
+    "chuong": "XIII"
+   }
   },
   "19": {
    "bieu_tuong": "Mặt trời rạng",
    "xu_huong": "Số kép này được truyền thống gọi là hoàng tử của trời: ánh sáng, sự ghi nhận và niềm vui khi công sức được nhìn thấy. Thường được mô tả là thuận cho việc đặt mục tiêu rõ và theo tới cùng.",
    "mat_toi": "Dễ tự mãn khi được khen và ngại nghe lời phê bình.",
-   "cau_tu_soi": "Lần gần nhất được góp ý, bạn có hỏi thêm chi tiết thay vì giải thích lại không?"
+   "cau_tu_soi": "Lần gần nhất được góp ý, bạn có hỏi thêm chi tiết thay vì giải thích lại không?",
+   "trich": {
+    "en": "It is a number promising happiness, success, esteem and honour.",
+    "chuong": "XIII"
+   }
   },
   "20": {
    "bieu_tuong": "Lời gọi thức tỉnh",
    "xu_huong": "Truyền thống Chaldea gắn số kép này với sự thức tỉnh: một lời gọi hướng tới mục đích mới, kế hoạch mới. Thường được đọc là thời điểm hợp để xem lại điều mình thật sự muốn theo đuổi.",
    "mat_toi": "Dễ nghe thấy lời gọi nhưng trì hoãn vì chờ hoàn cảnh hoàn hảo.",
-   "cau_tu_soi": "Bạn có một dự định đã nghĩ tới hơn nửa năm mà chưa làm bước đầu tiên không?"
+   "cau_tu_soi": "Bạn có một dự định đã nghĩ tới hơn nửa năm mà chưa làm bước đầu tiên không?",
+   "trich": {
+    "en": "The awakening of new purpose, new plans, new ambitions, the call to action.",
+    "chuong": "XIII"
+   }
   },
   "21": {
    "bieu_tuong": "Vương miện chín muồi",
    "xu_huong": "Số kép này thường được mô tả bằng hình vương miện của sự trưởng thành: thành quả đến sau một chặng đường dài và nhiều thử thách. Chủ đề là sự kiên nhẫn và tin vào quá trình.",
    "mat_toi": "Dễ nghĩ mình đã đến đích rồi dừng học hỏi.",
-   "cau_tu_soi": "Tháng này bạn có học một kỹ năng mới ngoài công việc quen thuộc không?"
+   "cau_tu_soi": "Tháng này bạn có học một kỹ năng mới ngoài công việc quen thuộc không?",
+   "trich": {
+    "en": "It means victory after a long fight.",
+    "chuong": "XIII"
+   }
   },
   "22": {
    "bieu_tuong": "Người lữ hành mải mơ",
    "xu_huong": "Theo truyền thống, số kép này mang hình người đi đường mải mơ mộng, đặt niềm tin vào người khác mà quên nhìn đường. Chủ đề là giữ lý tưởng nhưng vẫn tự kiểm tra thực tế.",
    "mat_toi": "Dễ để người khác quyết thay những việc quan trọng của mình.",
-   "cau_tu_soi": "Bạn có tự xem lại các khoản chi tiêu của gia đình tháng này không?"
+   "cau_tu_soi": "Bạn có tự xem lại các khoản chi tiêu của gia đình tháng này không?",
+   "trich": {
+    "en": "A dreamer of dreams who awakens only when surrounded by danger.",
+    "chuong": "XIII"
+   }
   },
   "23": {
    "bieu_tuong": "Ngôi sao Sư tử",
    "xu_huong": "Số kép này được truyền thống gọi là ngôi sao hoàng gia của Sư tử: được người có vị trí nâng đỡ và thuận cho kế hoạch riêng. Thường gắn với sự tự tin khi trình bày ý tưởng.",
    "mat_toi": "Dễ trông chờ người khác mở đường mà ít tự chuẩn bị.",
-   "cau_tu_soi": "Lần gần nhất có cơ hội trình bày ý tưởng, bạn có chuẩn bị trước bằng giấy tờ không?"
+   "cau_tu_soi": "Lần gần nhất có cơ hội trình bày ý tưởng, bạn có chuẩn bị trước bằng giấy tờ không?",
+   "trich": {
+    "en": "This number is called \"the Royal Star of the Lion\".",
+    "chuong": "XIII"
+   }
   },
   "24": {
    "bieu_tuong": "Sự nâng đỡ",
    "xu_huong": "Truyền thống Chaldea gắn số kép này với tình cảm, sự sáng tạo và sự giúp đỡ từ người đi trước. Thường được mô tả là quan hệ tốt mở ra cánh cửa mà nỗ lực một mình khó mở.",
    "mat_toi": "Dễ dựa vào quan hệ mà quên vun đắp năng lực thật.",
-   "cau_tu_soi": "Tuần qua bạn có cảm ơn cụ thể một người đã giúp mình không?"
+   "cau_tu_soi": "Tuần qua bạn có cảm ơn cụ thể một người đã giúp mình không?",
+   "trich": {
+    "en": "It promises the assistance and association of those of rank and position with one's plans.",
+    "chuong": "XIII"
+   }
   },
   "25": {
    "bieu_tuong": "Sức mạnh từ trải nghiệm",
    "xu_huong": "Số kép này thường được mô tả là sức mạnh hình thành qua quan sát và trải nghiệm, kể cả những lần vấp. Chủ đề là biến bài học cũ thành sự vững vàng mới.",
    "mat_toi": "Dễ ôm mãi ký ức không vui và kể lại nó nhiều lần.",
-   "cau_tu_soi": "Bạn có ghi lại điều rút ra được sau một lần làm hỏng việc gần đây không?"
+   "cau_tu_soi": "Bạn có ghi lại điều rút ra được sau một lần làm hỏng việc gần đây không?",
+   "trich": {
+    "en": "This is a number denoting strength gained through experience.",
+    "chuong": "XXXI"
+   }
   },
   "26": {
    "bieu_tuong": "Bài học hợp tác",
    "xu_huong": "Theo truyền thống, số kép này nhắc tới những liên kết làm ăn hay hợp tác cần được cân nhắc kỹ. Thường được đọc như chủ đề chọn người cùng làm và nói rõ trách nhiệm từ đầu.",
    "mat_toi": "Dễ nhận lời góp sức vì nể nang mà không đặt điều kiện rõ.",
-   "cau_tu_soi": "Lần gần nhất làm việc nhóm, bạn có thống nhất ai làm gì bằng lời rõ ràng không?"
+   "cau_tu_soi": "Lần gần nhất làm việc nhóm, bạn có thống nhất ai làm gì bằng lời rõ ràng không?",
+   "trich": {
+    "en": "If it comes out in connection with future events one should carefully consider the path one is treading.",
+    "chuong": "XIII"
+   }
   },
   "27": {
    "bieu_tuong": "Quyền trượng",
    "xu_huong": "Số kép này được truyền thống tả bằng hình quyền trượng: uy tín đến từ suy nghĩ độc lập và sức sáng tạo của chính mình. Thường được mô tả là thuận khi tin vào kế hoạch riêng đã cân nhắc.",
    "mat_toi": "Dễ cứng nhắc, cho rằng cách của mình là cách duy nhất.",
-   "cau_tu_soi": "Tuần này bạn có thử làm một việc quen theo cách người khác gợi ý không?"
+   "cau_tu_soi": "Tuần này bạn có thử làm một việc quen theo cách người khác gợi ý không?",
+   "trich": {
+    "en": "Persons with this \"compound\" number at their back should carry out their own ideas and plans.",
+    "chuong": "XIII"
+   }
   },
   "28": {
    "bieu_tuong": "Mâu thuẫn và lòng tin",
    "xu_huong": "Truyền thống Chaldea gắn số kép này với những mâu thuẫn: khởi đầu hứa hẹn nhưng cần thận trọng khi đặt niềm tin. Chủ đề là xây dựng lại bằng chính sức mình thay vì trông vào người khác.",
    "mat_toi": "Dễ đặt cả kế hoạch vào lời hứa của một người.",
-   "cau_tu_soi": "Bạn có một phương án dự phòng cho việc quan trọng đang phụ thuộc vào người khác không?"
+   "cau_tu_soi": "Bạn có một phương án dự phòng cho việc quan trọng đang phụ thuộc vào người khác không?",
+   "trich": {
+    "en": "This number is full of contradictions.",
+    "chuong": "XIII"
+   }
   },
   "29": {
    "bieu_tuong": "Thử thách lòng tin",
    "xu_huong": "Số kép này thường được mô tả bằng sự không chắc chắn trong quan hệ và những lúc khó phân biệt thật giả. Theo truyền thống, chủ đề là học cách lắng nghe trực giác và hỏi thẳng thay vì đoán.",
    "mat_toi": "Dễ suy diễn ý người khác rồi phản ứng với điều mình tưởng tượng.",
-   "cau_tu_soi": "Lần gần nhất thấy nghi ngờ ai, bạn có hỏi thẳng người đó không?"
+   "cau_tu_soi": "Lần gần nhất thấy nghi ngờ ai, bạn có hỏi thẳng người đó không?",
+   "trich": {
+    "en": "Uncertainties, treachery, and deception of others.",
+    "chuong": "XIII"
+   }
   },
   "30": {
    "bieu_tuong": "Suy ngẫm",
    "xu_huong": "Theo truyền thống, số kép này gắn với tư duy suy xét, nhìn lại và đặt trí tuệ lên trên vật chất. Người mang số này thường được mô tả là thích đứng ngoài quan sát hơn tranh giành.",
    "mat_toi": "Dễ xa cách, khiến người thân thấy khó tới gần.",
-   "cau_tu_soi": "Tuần qua bạn có chủ động rủ ai đi gặp mặt không?"
+   "cau_tu_soi": "Tuần qua bạn có chủ động rủ ai đi gặp mặt không?",
+   "trich": {
+    "en": "This is a number of thoughtful deduction, retrospection.",
+    "chuong": "XIII"
+   }
   },
   "31": {
    "bieu_tuong": "Ẩn sĩ tự đủ",
    "xu_huong": "Số kép này được truyền thống tả bằng hình người tự đủ, sống theo nguyên tắc riêng và ít cần đám đông. Chủ đề là cân bằng giữa độc lập và kết nối.",
    "mat_toi": "Dễ khép mình đến mức bỏ lỡ sự hỗ trợ đang có sẵn.",
-   "cau_tu_soi": "Tháng này bạn có từ chối nhiều hơn hai lời mời tụ họp không?"
+   "cau_tu_soi": "Tháng này bạn có từ chối nhiều hơn hai lời mời tụ họp không?",
+   "trich": {
+    "en": "Lonely, and isolated from his fellows.",
+    "chuong": "XIII"
+   }
   },
   "32": {
    "bieu_tuong": "Lời nói kết nối",
    "xu_huong": "Truyền thống Chaldea gắn số kép này với sức mạnh giao tiếp và khả năng gắn kết nhiều người quanh một ý tưởng. Thường được mô tả là thuận khi giữ vững nhận định của chính mình.",
    "mat_toi": "Dễ bị cuốn theo ý số đông mà quên điều mình đã nghĩ kỹ.",
-   "cau_tu_soi": "Lần gần nhất cả nhóm phản đối ý bạn, bạn có giữ ý đó kèm lý lẽ không?"
+   "cau_tu_soi": "Lần gần nhất cả nhóm phản đối ý bạn, bạn có giữ ý đó kèm lý lẽ không?",
+   "trich": {
+    "en": "This number has a magical power.",
+    "chuong": "XIII"
+   }
   },
   "33": {
    "bieu_tuong": "Tiếng vọng của sự nâng đỡ",
    "xu_huong": "Theo truyền thống, số kép này không có sắc thái riêng mà mang lại tinh thần của sự nâng đỡ và tình cảm ấm áp. Thường được đọc như chủ đề trao đi sự giúp đỡ mình từng nhận.",
    "mat_toi": "Dễ giúp người theo cảm hứng rồi bỏ dở khi bận.",
-   "cau_tu_soi": "Bạn có giữ đúng một lời hứa giúp đỡ nhỏ trong tháng này không?"
+   "cau_tu_soi": "Bạn có giữ đúng một lời hứa giúp đỡ nhỏ trong tháng này không?",
+   "trich": {
+    "en": "It promises the assistance and association of those of rank and position with one's plans.",
+    "chuong": "XIII",
+    "theo": "24"
+   }
   },
   "34": {
    "bieu_tuong": "Tiếng vọng của trải nghiệm",
    "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần sức mạnh từ trải nghiệm. Thường được đọc như chủ đề chia sẻ bài học của mình để người đi sau bớt vấp.",
    "mat_toi": "Dễ khuyên người khác quá nhiều khi họ chỉ cần được nghe.",
-   "cau_tu_soi": "Lần gần nhất có người tâm sự, bạn có nghe hết mà không chen lời khuyên không?"
+   "cau_tu_soi": "Lần gần nhất có người tâm sự, bạn có nghe hết mà không chen lời khuyên không?",
+   "trich": {
+    "en": "This is a number denoting strength gained through experience.",
+    "chuong": "XXXI",
+    "theo": "25"
+   }
   },
   "35": {
    "bieu_tuong": "Tiếng vọng của hợp tác",
    "xu_huong": "Theo truyền thống, số kép này mang lại chủ đề cân nhắc kỹ trong các mối liên kết. Thường được đọc như lời nhắc giữ ranh giới rõ trong việc tiền bạc với người quen.",
    "mat_toi": "Dễ trộn lẫn tình cảm và việc làm ăn đến mức khó nói chuyện thẳng.",
-   "cau_tu_soi": "Bạn có cho người quen mượn đồ hay tiền mà chưa hẹn ngày trả không?"
+   "cau_tu_soi": "Bạn có cho người quen mượn đồ hay tiền mà chưa hẹn ngày trả không?",
+   "trich": {
+    "en": "If it comes out in connection with future events one should carefully consider the path one is treading.",
+    "chuong": "XIII",
+    "theo": "26"
+   }
   },
   "36": {
    "bieu_tuong": "Tiếng vọng của quyền trượng",
    "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần quyền trượng: uy tín từ suy nghĩ độc lập. Thường được mô tả là thuận cho việc đi xa, học hỏi ngoài vùng quen thuộc.",
    "mat_toi": "Dễ cảm thấy cô đơn ở vị trí dẫn đầu mà không nói ra.",
-   "cau_tu_soi": "Năm nay bạn có đi đến một nơi mới chỉ để học hỏi không?"
+   "cau_tu_soi": "Năm nay bạn có đi đến một nơi mới chỉ để học hỏi không?",
+   "trich": {
+    "en": "Persons with this \"compound\" number at their back should carry out their own ideas and plans.",
+    "chuong": "XIII",
+    "theo": "27"
+   }
   },
   "37": {
    "bieu_tuong": "Tình bạn hoà hợp",
    "xu_huong": "Theo truyền thống Chaldea, số kép này gắn với tình bạn tốt, tình cảm hoà hợp và sự hợp tác giữa hai người. Thường được mô tả là thuận khi làm việc theo cặp hơn làm một mình.",
    "mat_toi": "Dễ phụ thuộc vào một người bạn thân mà ít mở rộng quan hệ khác.",
-   "cau_tu_soi": "Tháng này bạn có làm quen thêm một người mới ngoài nhóm bạn quen không?"
+   "cau_tu_soi": "Tháng này bạn có làm quen thêm một người mới ngoài nhóm bạn quen không?",
+   "trich": {
+    "en": "It is also good for partnerships.",
+    "chuong": "XIII"
+   }
   },
   "38": {
    "bieu_tuong": "Tiếng vọng của lòng tin",
    "xu_huong": "Số kép này được truyền thống xếp cùng chủ đề thử thách lòng tin. Thường được đọc như lời nhắc nói rõ kỳ vọng trong quan hệ thay vì chờ người khác tự hiểu.",
    "mat_toi": "Dễ thất vọng vì người khác không đoán ra điều mình cần.",
-   "cau_tu_soi": "Tuần qua bạn có nói rõ một mong muốn với người thân thay vì chờ họ tự nhận ra không?"
+   "cau_tu_soi": "Tuần qua bạn có nói rõ một mong muốn với người thân thay vì chờ họ tự nhận ra không?",
+   "trich": {
+    "en": "Uncertainties, treachery, and deception of others.",
+    "chuong": "XIII",
+    "theo": "29"
+   }
   },
   "39": {
    "bieu_tuong": "Tiếng vọng của suy ngẫm",
    "xu_huong": "Theo truyền thống, số kép này mang tinh thần suy xét và nhìn lại. Thường được mô tả là hợp với việc viết, nghiên cứu hay sắp xếp lại suy nghĩ.",
    "mat_toi": "Dễ nghĩ quá lâu mà lỡ thời điểm hành động.",
-   "cau_tu_soi": "Bạn có một quyết định đã cân nhắc hơn một tháng mà chưa chốt không?"
+   "cau_tu_soi": "Bạn có một quyết định đã cân nhắc hơn một tháng mà chưa chốt không?",
+   "trich": {
+    "en": "This is a number of thoughtful deduction, retrospection.",
+    "chuong": "XIII",
+    "theo": "30"
+   }
   },
   "40": {
    "bieu_tuong": "Tiếng vọng của sự tự đủ",
    "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần người tự đủ. Thường được đọc như chủ đề giữ nhịp sống riêng giữa nhiều đòi hỏi bên ngoài.",
    "mat_toi": "Dễ coi việc nhờ giúp là yếu đuối.",
-   "cau_tu_soi": "Tuần qua bạn có nhờ ai một việc nhỏ mà mình hoàn toàn tự làm được không?"
+   "cau_tu_soi": "Tuần qua bạn có nhờ ai một việc nhỏ mà mình hoàn toàn tự làm được không?",
+   "trich": {
+    "en": "Lonely, and isolated from his fellows.",
+    "chuong": "XIII",
+    "theo": "31"
+   }
   },
   "41": {
    "bieu_tuong": "Tiếng vọng của lời nói",
    "xu_huong": "Theo truyền thống, số kép này mang sức mạnh giao tiếp và khả năng tập hợp người. Thường được mô tả là thuận cho việc dạy, nói trước đám đông hay viết cho nhiều người đọc.",
    "mat_toi": "Dễ nói nhiều hơn làm, khiến lời nói mất sức nặng.",
-   "cau_tu_soi": "Tháng này bạn có làm xong điều mình đã tuyên bố trước mọi người không?"
+   "cau_tu_soi": "Tháng này bạn có làm xong điều mình đã tuyên bố trước mọi người không?",
+   "trich": {
+    "en": "This number has a magical power.",
+    "chuong": "XIII",
+    "theo": "32"
+   }
   },
   "42": {
    "bieu_tuong": "Tiếng vọng của tình cảm",
    "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần tình cảm và sự nâng đỡ. Thường được đọc như chủ đề chăm sóc các mối quan hệ lâu năm.",
    "mat_toi": "Dễ coi sự quan tâm của người thân là điều đương nhiên.",
-   "cau_tu_soi": "Tuần này bạn có gọi điện hỏi thăm một người lâu rồi chưa liên lạc không?"
+   "cau_tu_soi": "Tuần này bạn có gọi điện hỏi thăm một người lâu rồi chưa liên lạc không?",
+   "trich": {
+    "en": "It promises the assistance and association of those of rank and position with one's plans.",
+    "chuong": "XIII",
+    "theo": "24"
+   }
   },
   "43": {
    "bieu_tuong": "Biến chuyển lớn",
    "xu_huong": "Truyền thống Chaldea gắn số kép này với sự xáo trộn và cách mạng: trật tự cũ bị đặt câu hỏi. Thường được đọc như chủ đề dám thay đổi cách làm khi cách cũ không còn hiệu quả.",
    "mat_toi": "Dễ phá bỏ mọi thứ một lúc thay vì đổi từng phần.",
-   "cau_tu_soi": "Lần gần nhất muốn thay đổi, bạn có chia thành từng bước nhỏ không?"
+   "cau_tu_soi": "Lần gần nhất muốn thay đổi, bạn có chia thành từng bước nhỏ không?",
+   "trich": {
+    "en": "This is an unfortunate number.",
+    "chuong": "XIII"
+   }
   },
   "44": {
    "bieu_tuong": "Nền móng được thử",
    "xu_huong": "Số kép này theo truyền thống được xếp gần chủ đề hợp tác cần cân nhắc. Thường được đọc như lời nhắc kiểm tra lại nền móng của một việc trước khi xây thêm.",
    "mat_toi": "Dễ mở rộng quá nhanh khi phần cốt lõi còn lỏng lẻo.",
-   "cau_tu_soi": "Bạn có rà lại những việc đang dang dở trước khi nhận thêm việc mới không?"
+   "cau_tu_soi": "Bạn có rà lại những việc đang dang dở trước khi nhận thêm việc mới không?",
+   "trich": {
+    "en": "If it comes out in connection with future events one should carefully consider the path one is treading.",
+    "chuong": "XIII",
+    "theo": "26"
+   }
   },
   "45": {
    "bieu_tuong": "Tiếng vọng của uy tín",
    "xu_huong": "Theo truyền thống, số kép này mang tinh thần quyền trượng: uy tín được xây bằng sự nhất quán. Thường được mô tả là thuận khi giữ đúng lời đã nói qua thời gian dài.",
    "mat_toi": "Dễ khắt khe với người không theo kịp tiêu chuẩn của mình.",
-   "cau_tu_soi": "Tuần qua bạn có kiên nhẫn hướng dẫn lại cho ai một việc họ làm chưa đúng không?"
+   "cau_tu_soi": "Tuần qua bạn có kiên nhẫn hướng dẫn lại cho ai một việc họ làm chưa đúng không?",
+   "trich": {
+    "en": "Persons with this \"compound\" number at their back should carry out their own ideas and plans.",
+    "chuong": "XIII",
+    "theo": "27"
+   }
   },
   "46": {
    "bieu_tuong": "Tiếng vọng của tình bạn",
    "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần tình bạn và hợp tác hoà hợp. Thường được đọc như chủ đề cùng làm thì nhẹ hơn làm một mình.",
    "mat_toi": "Dễ né tranh luận với bạn thân dù có điều cần nói.",
-   "cau_tu_soi": "Gần đây bạn có góp ý thẳng với một người bạn thân không?"
+   "cau_tu_soi": "Gần đây bạn có góp ý thẳng với một người bạn thân không?",
+   "trich": {
+    "en": "It is also good for partnerships.",
+    "chuong": "XIII",
+    "theo": "37"
+   }
   },
   "47": {
    "bieu_tuong": "Tiếng vọng của trực giác",
    "xu_huong": "Theo truyền thống, số kép này mang chủ đề phân biệt điều thật và điều mình mong là thật. Thường được đọc như lời nhắc kiểm tra thông tin trước khi tin.",
    "mat_toi": "Dễ tin theo cảm giác ban đầu mà bỏ qua dữ kiện ngược lại.",
-   "cau_tu_soi": "Trước khi chia sẻ một tin trên mạng gần đây, bạn có kiểm tra nguồn không?"
+   "cau_tu_soi": "Trước khi chia sẻ một tin trên mạng gần đây, bạn có kiểm tra nguồn không?",
+   "trich": {
+    "en": "Uncertainties, treachery, and deception of others.",
+    "chuong": "XIII",
+    "theo": "29"
+   }
   },
   "48": {
    "bieu_tuong": "Người quan sát",
    "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần suy ngẫm. Thường được đọc như chủ đề lùi lại một bước để nhìn toàn cảnh trước khi phản ứng.",
    "mat_toi": "Dễ chỉ quan sát và nhận xét mà ngại bắt tay vào việc.",
-   "cau_tu_soi": "Tuần này bạn có tự tay làm một việc mà trước đây mình chỉ góp ý không?"
+   "cau_tu_soi": "Tuần này bạn có tự tay làm một việc mà trước đây mình chỉ góp ý không?",
+   "trich": {
+    "en": "This is a number of thoughtful deduction, retrospection.",
+    "chuong": "XIII",
+    "theo": "30"
+   }
   },
   "49": {
    "bieu_tuong": "Tiếng vọng của sự độc lập",
    "xu_huong": "Theo truyền thống, số kép này mang tinh thần người tự đủ. Thường được mô tả là thuận cho việc tự học, tự làm và tự chịu trách nhiệm về lựa chọn của mình.",
    "mat_toi": "Dễ từ chối lời khuyên chỉ vì muốn tự quyết.",
-   "cau_tu_soi": "Lần gần nhất có người góp ý đúng, bạn có làm theo không?"
+   "cau_tu_soi": "Lần gần nhất có người góp ý đúng, bạn có làm theo không?",
+   "trich": {
+    "en": "Lonely, and isolated from his fellows.",
+    "chuong": "XIII",
+    "theo": "31"
+   }
   },
   "50": {
    "bieu_tuong": "Tiếng vọng của giao tiếp",
    "xu_huong": "Số kép này được truyền thống xếp cùng tinh thần lời nói kết nối. Thường được đọc như chủ đề trao đổi ý tưởng và học từ người khác lĩnh vực.",
    "mat_toi": "Dễ phân tán vì nói chuyện với quá nhiều nơi cùng lúc.",
-   "cau_tu_soi": "Hôm nay bạn có tắt thông báo để làm trọn một việc không?"
+   "cau_tu_soi": "Hôm nay bạn có tắt thông báo để làm trọn một việc không?",
+   "trich": {
+    "en": "This number has a magical power.",
+    "chuong": "XIII",
+    "theo": "32"
+   }
   },
   "51": {
    "bieu_tuong": "Chiến binh",
    "xu_huong": "Truyền thống Chaldea gắn số kép này với hình người chiến binh: sức mạnh, sự tiến lên nhanh và dám nhận phần việc khó. Thường được mô tả là thuận cho người tự xây dựng chỗ đứng.",
    "mat_toi": "Dễ coi mọi người khác là đối thủ và gây căng thẳng không cần thiết.",
-   "cau_tu_soi": "Tuần qua bạn có tranh hơn thua với ai trong một chuyện nhỏ không?"
+   "cau_tu_soi": "Tuần qua bạn có tranh hơn thua với ai trong một chuyện nhỏ không?",
+   "trich": {
+    "en": "It represents the nature of the warrior, it promises sudden advancement in whatever one undertakes.",
+    "chuong": "XIII"
+   }
   },
   "52": {
    "bieu_tuong": "Tiếng vọng của biến chuyển",
    "xu_huong": "Số kép này được truyền thống xếp cùng chủ đề biến chuyển lớn. Thường được đọc như lời mời xem lại những thói quen đã lỗi thời và thay bằng cách làm phù hợp hơn.",
    "mat_toi": "Dễ giữ cách làm cũ chỉ vì đã quen tay.",
-   "cau_tu_soi": "Bạn có đổi một thói quen làm việc nào trong tháng này không?"
+   "cau_tu_soi": "Bạn có đổi một thói quen làm việc nào trong tháng này không?",
+   "trich": {
+    "en": "This is an unfortunate number.",
+    "chuong": "XIII",
+    "theo": "43"
+   }
   }
  }
 }

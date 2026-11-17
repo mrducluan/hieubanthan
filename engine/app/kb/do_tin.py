@@ -29,6 +29,8 @@ def _nv(kho: str, test: str, ghi_chu: str = "") -> dict:
 # tệp → {"muc": mức mặc định của tệp, "mang": mảng, "phan": {khoá gốc trong tệp: mức riêng}, "ghi_chu"}
 SO: dict[str, dict] = {
     # ---- Bát tự
+    "battu_ngay_gio.json": {"mang": "battu", **_nv("tam_menh_thong_hoi_du_bo.json", "tests/test_tk2_battu_ngay_gio.py::test_han_la_chuoi_con_kho_nguon_dung_muc",
+                                                "TK-2: 120 bài ca chung «六X日Y時斷» quyển 8–9, mỗi câu đúng mục can ngày × giờ")},
     "battu_sach_ghi.json": {"mang": "battu", **_nv("tam_menh_thong_hoi.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                 "SX-C: câu Tam Mệnh Thông Hội + Uyên Hải Tử Bình (thần sát, thập thần, lục thân, tính nết, thân thể) khớp kho nguồn")},
     "battu_dieu_hau.json": {"mang": "battu", **_nv("cung_thong_bao_giam.json", f"{_T}::test_dieu_hau_khop_nguyen_van_tung_o")},
@@ -69,6 +71,12 @@ SO: dict[str, dict] = {
     # ---- Kinh Dịch
     "kinhdich_truyen_nghia.json": {"mang": "kinhdich", **_nv(
         "chu_dich_truyen_nghia.json", f"{_T}::test_ngo_tat_to_ghep_dung_hao_va_du_do_phu", "bản dịch Ngô Tất Tố ghép theo chữ Hán")},
+    "kinhdich_dich_lam.json": {"mang": "kinhdich", **_nv(
+        "tieu_thi_dich_lam.json", "tests/test_tk2_dich_lam.py::test_kb_la_ban_cat_cua_kho_nguon_va_du_4096_bai",
+        "TK-2: 4.096 bài từ Tiêu Thị Dịch Lâm (quẻ bản → quẻ biến), nguyên văn chưa dịch; bài có chữ nặng không hiện")},
+    "kinhdich_legge.json": {"mang": "kinhdich", **_nv(
+        "kinhdich_legge_que.json", "tests/test_tk2_legge.py::test_moi_doan_la_chuoi_con_cua_nguon",
+        "TK-2 việc 4: bản dịch Anh James Legge 1882 (PD) — chỉ quẻ qua kiểm vạch âm dương + kiểm chữ hỏng; chỉ bản /en")},
     "kinhdich_hao.json": {"mang": "kinhdich", **_nv(
         "chu_dich_truyen_nghia.json", "tests/test_nguon_chu_dich_truyen_nghia.py::test_loi_que_loi_hao_trong_kb_khop_ban_tu_kho",
         "kinh văn khớp nguyên văn; phần dịch và «Hiểu đơn giản» là nháp")},
@@ -109,6 +117,11 @@ SO: dict[str, dict] = {
                                                       "SX-C: 119 kiểu hình mày, mắt, mũi, tai, miệng (bài thơ từng kiểu) khớp kho nguồn; 7 mục gắn `ngo`")},
     "nhan_tuong_lieu_trang.json": {"mang": "nhantuong", **_nv("lieu_trang_tuong_phap.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                        "SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn")},
+    "chi_tay_tay_kb.json": {"mang": "nhantuong", **_nv("chi_tay_cheiro_language_of_the_hand.json",
+                                                    "tests/test_tk2_chi_tay_tay.py::test_moi_cau_trich_la_chuoi_con_kho_nguon",
+                                                    "TK-2 chỉ tay phương Tây: câu trích tiếng Anh Cheiro 1894 + Benham 1900 (kho nguồn lớp chữ "
+                                                    "nhận dạng, can_doi_chieu) khớp từng câu; lời Việt ban biên tập; ngưỡng số đo `do_tay` "
+                                                    "giả định, can_doi_chieu; không nhóm C")},
     "chi_tay_kb.json": {"mang": "nhantuong", **_nv("than_tuong_toan_bien.json", "tests/test_chi_tay.py::test_moi_cau_la_nguyen_van",
                                              "Chỉ tay: 67 bài thơ vân tay quyển 10 + câu đồ hình tám cung («根基所屬», Luận thủ) khớp kho nguồn; "
                                              "CT-2: câu theo số đo bàn tay (`sach_do_tay`: «論手», «相指掌») + vai và lựa chọn từng cung "
@@ -132,6 +145,10 @@ SO: dict[str, dict] = {
         "thanso_meanings.json", "thanso_depth.json", "thanso_chaldean.json", "thanso_cap_so.json", "thanso_chi_so_phu.json",
         "thanso_bieu_do.json", "thanso_chan_dung.json", "thanso_linh_vuc.json", "thanso_quan_he.json", "thanso_giai_thich.json",
         "thanso_doi_chieu.json")},
+    # TK-2: số kép 10–52 có câu nguyên văn Cheiro (khoá `kep.*.trich`) — phần này lên mức có nguyên văn đối chiếu
+    "thanso_chaldean.json": {"mang": "thanso", "muc": "truyen_thong", "phan": {
+        "kep": _nv("thanso_cheiro_book_of_numbers_1926.json", "tests/test_tk2_thanso_cheiro.py::test_moi_so_kep_co_cau_sach",
+                   "TK-2: 43/43 số kép có câu Cheiro (OCR, can_doi_chieu); bảng chữ 23/26 khớp; lời Việt là tóm ý trung tính")}},
     **{f: {"mang": "thanso", "muc": "bien_tap"} for f in (
         "thanso_ban_do.json", "thanso_hom_nay.json", "thanso_noi_dau.json", "thanso_xu_ly.json", "thanso_do_thi.json",
         "bo_sung_so.json", "bo_sung_so_kep.json", "bo_sung_cap_so.json", "bo_sung_nghe.json", "bo_sung_tinh_yeu.json",

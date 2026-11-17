@@ -38,3 +38,33 @@ export function tachCau(han: string): string[] {
   for (let i = 0; i < han.length; i += n) ra.push(han.slice(i, i + n));
   return ra;
 }
+
+// ---- TK-2: chỉ tay phương Tây (Cheiro 1894, Benham 1900) — engine `/v1/chi-tay?phai=tay` ----
+export interface MucTay {
+  ma: string; ten: string; y: string; loi: string; mo_ta?: string; vi_tri?: string; ham_y?: string; viec?: string;
+  nhom?: "A" | "B"; trich?: string; nguon_hien_thi?: string; khong_doc?: boolean; loai?: string;
+}
+export interface GoTay { ma: string; ten: string; vi_tri: string; day: MucTay; trung: MucTay }
+export interface CauTay { ma: string; ten: string; lua_chon: MucTay[] }
+export interface DuongTay { ma: string; ten: string; vi_tri: string; cau: CauTay[] }
+export interface ThuVienChiTayTay {
+  phai: "tay"; ten_phai: string; gioi_thieu: string; nguon_hien_thi: string[];
+  dang_tay: { cau: string; gioi_thieu: string; lua_chon: MucTay[] };
+  go: { cau: string; gioi_thieu: string; lua_chon: { ma: string; ten: string }[]; muc: GoTay[] };
+  duong: DuongTay[]; luu_y_do_dai: MucTay | null; khong_dua_vao: { ten: string; ly_do: string }[]; cau_ket: string;
+}
+
+/** Thư viện phái Tây. Lỗi → null (trang vẫn dựng phái sách tướng xưa, không có công tắc đổi phái). */
+export async function layThuVienChiTayTay(): Promise<ThuVienChiTayTay | null> {
+  try {
+    const r = await fetch(`${ENGINE_URL}/v1/chi-tay?phai=tay`, {
+      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
+      next: { revalidate: 60 * 60 * 6 }, signal: AbortSignal.timeout(15_000),
+    });
+    if (r.ok) {
+      const j = (await r.json()) as ThuVienChiTayTay;
+      if (j?.phai === "tay" && Array.isArray(j.dang_tay?.lua_chon)) return j;
+    }
+  } catch { /* engine bận / bản cũ */ }
+  return null;
+}
