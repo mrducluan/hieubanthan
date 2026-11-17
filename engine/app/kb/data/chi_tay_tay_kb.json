@@ -1,0 +1,800 @@
+{
+ "_nguon": "Chỉ tay phương Tây theo hai sách đầu thế kỷ 20: Cheiro, Language of the Hand (1894) và William G. Benham, The Laws of Scientific Hand Reading (1900). Câu trích tiếng Anh là nguyên văn (đối chiếu kho nguồn bằng test); lời Việt do ban biên tập viết lại cho dễ hiểu. Lớp này KHÔNG nhận câu sách về sống lâu, bệnh, chết, phẩm hạnh (nhóm C bị loại hẳn).",
+ "source_id": "chi_tay_phuong_tay",
+ "school_id": "chi_tay_tay",
+ "trang_thai": "nhap_ban_bien_tap",
+ "can_doi_chieu": true,
+ "nguon": {
+  "cheiro": {
+   "hien_thi": "Cheiro, Language of the Hand (1894)",
+   "tep": "chi_tay_cheiro_language_of_the_hand"
+  },
+  "benham": {
+   "hien_thi": "William G. Benham, The Laws of Scientific Hand Reading (1900)",
+   "tep": "chi_tay_benham_laws_1900"
+  }
+ },
+ "ten_phai": "Chỉ tay phương Tây",
+ "gioi_thieu": "Phái chỉ tay phương Tây đọc bàn tay theo ba lớp: dáng bàn tay, các gò (phần thịt nổi dưới gốc ngón và ở cạnh bàn tay) và các đường chỉ. Ở đây dùng hai sách in quanh năm 1900. Bạn tự nhìn tay mình rồi chọn điều giống nhất; trang đọc lại đúng câu sách và nói bằng lời thường.",
+ "luu_y_do_dai": {
+  "ma": "luu_y_do_dai",
+  "ten": "Đường Sinh dài hay ngắn không nói bạn sống bao lâu",
+  "trich": "The Life line has been expected to perform a greater duty than it was able to do",
+  "nguon": "benham",
+  "y": "Độ dài đường Sinh không phải thước đo quãng đời. Chính Benham viết người ta đã bắt đường này gánh nhiều hơn điều nó nói được. Trang này không đọc độ dài đường Sinh, chỉ đọc dáng vòng và chỗ bắt đầu."
+ },
+ "khong_dua_vao": [
+  {
+   "ten": "Đường sức khoẻ (Hepatica, Line of Mercury)",
+   "ly_do": "hai sách chỉ đọc đường này về thể trạng, không có ích để tự soi; chuyện sức khoẻ thì hỏi bác sĩ"
+  },
+  {
+   "ten": "Độ dài, chỗ đứt, dấu đảo trên đường Sinh",
+   "ly_do": "sách dùng để đoán quãng đời và thể trạng"
+  },
+  {
+   "ten": "Mốc tuổi trên các đường",
+   "ly_do": "đoán năm xảy ra sự việc"
+  },
+  {
+   "ten": "Các chương về tội lỗi, mất trí trong sách Cheiro",
+   "ly_do": "phán xét phẩm hạnh và thể trạng người khác"
+  }
+ ],
+ "cau_ket": "Đây là cách đọc của hai cuốn sách chỉ tay in quanh năm 1900, để tham khảo và tự nhìn lại mình, không phải lời đoán riêng cho bạn.",
+ "dang_tay": {
+  "cau": "Bàn tay bạn giống dáng nào nhất?",
+  "gioi_thieu": "Cheiro chia bàn tay thành bảy dáng. Nhìn cả bàn tay: lòng bàn tay vuông hay dài, đầu ngón vuông, nhọn hay xoè.",
+  "lua_chon": [
+   {
+    "ma": "so_khai",
+    "ten": "Tay dày, ngón ngắn",
+    "trich": "the palm is always thick and coarse, and the fingers short and clumsy",
+    "nguon": "cheiro",
+    "y": "Cheiro gọi đây là dáng tay sơ khai: lòng bàn tay dày, thô, ngón ngắn. Ông xem là người sống thiên về việc tay chân, thực tế, ít bận tâm chuyện xa xôi.",
+    "nhom": "A",
+    "mo_ta": "Lòng bàn tay dày và to so với ngón; ngón ngắn, thô; ngón cái ngắn, dày."
+   },
+   {
+    "ma": "vuong",
+    "ten": "Tay vuông",
+    "trich": "People with such a hand are orderly, punctual, and precise in manner",
+    "nguon": "cheiro",
+    "y": "Dáng tay vuông, Cheiro còn gọi là bàn tay hữu dụng: người ngăn nắp, đúng giờ, làm việc theo nếp và thích điều chắc chắn.",
+    "nhom": "A",
+    "mo_ta": "Lòng bàn tay vuông ở cổ tay và ở gốc ngón; đầu ngón cũng vuông, móng ngắn."
+   },
+   {
+    "ma": "be",
+    "ten": "Tay bè (đầu ngón xoè)",
+    "trich": "the peculiar attribute that the spatulate hand has is its intense love of action, energy, and independence",
+    "nguon": "cheiro",
+    "y": "Dáng tay bè: Cheiro đọc là người ham hành động, nhiều năng lượng, thích tự mình làm theo cách riêng; hay gặp ở người thích khám phá, sáng chế.",
+    "nhom": "A",
+    "mo_ta": "Đầu ngón xoè rộng như cái thìa dẹt; lòng bàn tay rộng hẳn ở cổ tay hoặc ở gốc ngón."
+   },
+   {
+    "ma": "triet",
+    "ten": "Tay nhiều khớp (triết gia)",
+    "trich": "they are deep thinkers, careful over little matters, even in the use of little words",
+    "nguon": "cheiro",
+    "y": "Dáng tay Cheiro gọi là tay triết gia: người hay nghĩ sâu, cẩn thận từ việc nhỏ, cả trong cách dùng từng chữ; ham hiểu biết hơn ham tiền.",
+    "nhom": "A",
+    "mo_ta": "Bàn tay dài, gầy, nhiều góc cạnh; ngón nổi rõ các khớp, móng dài."
+   },
+   {
+    "ma": "non",
+    "ten": "Tay thuôn (nghệ sĩ)",
+    "trich": "The main characteristics of the conic hand are impulse and instinct",
+    "nguon": "cheiro",
+    "y": "Dáng tay thuôn: Cheiro xem nét chính là sống theo cảm hứng và trực giác, dễ rung động trước cái đẹp, nhanh thân với người khác.",
+    "nhom": "A",
+    "mo_ta": "Cỡ vừa, lòng bàn tay hơi thon về phía ngón; ngón đầy ở gốc, nhỏ dần về đầu ngón."
+   },
+   {
+    "ma": "thon",
+    "ten": "Tay thon dài (lý tưởng)",
+    "trich": "Individuals with the psychic hand have the purely visionary, idealistic nature",
+    "nguon": "cheiro",
+    "y": "Dáng tay thon dài: Cheiro đọc là người sống bằng lý tưởng và hình dung, nhạy với cái đẹp; ông cũng nói đây là dáng tay rất hiếm.",
+    "nhom": "A",
+    "mo_ta": "Bàn tay dài, hẹp, mảnh; ngón rất dài và nhọn dần, móng dài hình hạt hạnh."
+   },
+   {
+    "ma": "pha",
+    "ten": "Tay pha trộn",
+    "trich": "The mixed hand is the hand of ideas, of versatility, and generally of changeability of purpose",
+    "nguon": "cheiro",
+    "y": "Dáng tay pha trộn: nhiều ý tưởng, đa năng, dễ thích nghi với người và việc; Cheiro nhắc là cũng dễ đổi mục tiêu giữa chừng.",
+    "nhom": "A",
+    "mo_ta": "Không xếp hẳn được vào dáng nào: mỗi ngón một kiểu đầu ngón (ngón vuông, ngón nhọn, ngón bè)."
+   }
+  ]
+ },
+ "go": {
+  "cau": "Các gò trên tay bạn nổi, phẳng hay lõm?",
+  "gioi_thieu": "Khum nhẹ bàn tay, nhìn nghiêng dưới ánh sáng. Gò nào nổi cao hơn hẳn các gò khác thì chọn «Nổi rõ».",
+  "lua_chon": [
+   {
+    "ma": "day",
+    "ten": "Nổi rõ"
+   },
+   {
+    "ma": "phang",
+    "ten": "Phẳng"
+   },
+   {
+    "ma": "trung",
+    "ten": "Lõm"
+   }
+  ],
+  "muc": [
+   {
+    "ma": "jupiter",
+    "ten": "Gò Mộc tinh (Jupiter)",
+    "vi_tri": "Phần thịt nổi ngay dưới gốc ngón trỏ.",
+    "day": {
+     "ma": "jupiter_day",
+     "ten": "Gò Mộc tinh (Jupiter): nổi rõ",
+     "trich": "When developed it shows ambition, pride, enthusiasm in anything attempted, and desire for power",
+     "nguon": "cheiro",
+     "y": "Gò dưới ngón trỏ nổi rõ: Cheiro đọc là người có chí tiến thủ, tự trọng, làm gì cũng hăng hái và muốn được dẫn dắt.",
+     "nhom": "A"
+    },
+    "trung": {
+     "ma": "jupiter_trung",
+     "ten": "Gò Mộc tinh (Jupiter): lõm",
+     "trich": "depressions show weakness and absence of the qualities of",
+     "nguon": "benham",
+     "y": "Gò dưới ngón trỏ lõm: theo Benham, nét của gò này (chí tiến thủ, muốn dẫn dắt) ít nổi ở bạn.",
+     "nhom": "B",
+     "ham_y": "Nên chú ý tự đặt cho mình một mục tiêu rõ, đừng chỉ đi theo mục tiêu của người khác.",
+     "viec": "Viết ra một việc bạn muốn tự đứng ra nhận trong tháng này và nói với một người."
+    },
+    "phang": {
+     "ma": "jupiter_phang",
+     "ten": "Gò Mộc tinh (Jupiter): phẳng",
+     "y": "Gò phẳng là mức thường gặp. Sách không đọc thêm gì từ gò này.",
+     "khong_doc": true
+    }
+   },
+   {
+    "ma": "saturn",
+    "ten": "Gò Thổ tinh (Saturn)",
+    "vi_tri": "Phần thịt dưới gốc ngón giữa.",
+    "day": {
+     "ma": "saturn_day",
+     "ten": "Gò Thổ tinh (Saturn): nổi rõ",
+     "trich": "denotes love of solitude, quietness, prudence, earnestness in work, proneness to the study of somber things, and appreciation of music of a sacred or classical order",
+     "nguon": "cheiro",
+     "y": "Gò dưới ngón giữa nổi rõ: người ưa yên tĩnh, thận trọng, nghiêm túc với công việc, thích những đề tài sâu và nhạc cổ điển.",
+     "nhom": "A"
+    },
+    "trung": {
+     "ma": "saturn_trung",
+     "ten": "Gò Thổ tinh (Saturn): lõm",
+     "trich": "depressions show weakness and absence of the qualities of",
+     "nguon": "benham",
+     "y": "Gò dưới ngón giữa lõm: theo Benham, nét thận trọng, chịu ngồi yên một mình ít nổi ở bạn.",
+     "nhom": "B",
+     "ham_y": "Nên chú ý dừng lại cân nhắc trước những quyết định lớn.",
+     "viec": "Trước một khoản chi hoặc một lời hứa lớn, cho mình một đêm rồi mới trả lời."
+    },
+    "phang": {
+     "ma": "saturn_phang",
+     "ten": "Gò Thổ tinh (Saturn): phẳng",
+     "y": "Gò phẳng là mức thường gặp. Sách không đọc thêm gì từ gò này.",
+     "khong_doc": true
+    }
+   },
+   {
+    "ma": "apollo",
+    "ten": "Gò Thái Dương (Apollo)",
+    "vi_tri": "Phần thịt dưới gốc ngón áp út.",
+    "day": {
+     "ma": "apollo_day",
+     "ten": "Gò Thái Dương (Apollo): nổi rõ",
+     "trich": "it indicates an enthusiastic appreciation of all things beautiful",
+     "nguon": "cheiro",
+     "y": "Gò dưới ngón áp út nổi rõ: người say mê cái đẹp, dù có theo nghề nghệ thuật hay không; thích tranh, thơ, văn và việc cần trí tưởng tượng.",
+     "nhom": "A"
+    },
+    "trung": {
+     "ma": "apollo_trung",
+     "ten": "Gò Thái Dương (Apollo): lõm",
+     "trich": "depressions show weakness and absence of the qualities of",
+     "nguon": "benham",
+     "y": "Gò dưới ngón áp út lõm: theo Benham, nét yêu cái đẹp, thích thể hiện ít nổi ở bạn.",
+     "nhom": "B",
+     "ham_y": "Nên chú ý dành chỗ cho cái đẹp trong nếp sống hằng ngày.",
+     "viec": "Mỗi tuần dành một giờ cho một việc chỉ để thấy đẹp: nghe nhạc, xem tranh, cắm một bình hoa."
+    },
+    "phang": {
+     "ma": "apollo_phang",
+     "ten": "Gò Thái Dương (Apollo): phẳng",
+     "y": "Gò phẳng là mức thường gặp. Sách không đọc thêm gì từ gò này.",
+     "khong_doc": true
+    }
+   },
+   {
+    "ma": "mercury",
+    "ten": "Gò Thuỷ tinh (Mercury)",
+    "vi_tri": "Phần thịt dưới gốc ngón út.",
+    "day": {
+     "ma": "mercury_day",
+     "ten": "Gò Thuỷ tinh (Mercury): nổi rõ",
+     "trich": "It denotes all the mercurial qualities of life — love of change, travel, excitement, wit",
+     "nguon": "cheiro",
+     "y": "Gò dưới ngón út nổi rõ: người thích đổi mới, thích đi, lanh trí, nghĩ nhanh nói nhanh.",
+     "nhom": "A"
+    },
+    "trung": {
+     "ma": "mercury_trung",
+     "ten": "Gò Thuỷ tinh (Mercury): lõm",
+     "trich": "depressions show weakness and absence of the qualities of",
+     "nguon": "benham",
+     "y": "Gò dưới ngón út lõm: theo Benham, nét lanh lợi, nhanh ứng đối ít nổi ở bạn.",
+     "nhom": "B",
+     "ham_y": "Nên chú ý luyện cách nói gọn điều mình nghĩ.",
+     "viec": "Trước buổi họp tới, viết sẵn ba câu ngắn về điều bạn muốn nói."
+    },
+    "phang": {
+     "ma": "mercury_phang",
+     "ten": "Gò Thuỷ tinh (Mercury): phẳng",
+     "y": "Gò phẳng là mức thường gặp. Sách không đọc thêm gì từ gò này.",
+     "khong_doc": true
+    }
+   },
+   {
+    "ma": "mars",
+    "ten": "Gò Hoả tinh (Mars)",
+    "vi_tri": "Có hai chỗ: một ở dưới gò ngón trỏ, phía trong đường Sinh; một ở cạnh bàn tay, giữa gò ngón út và gò Mặt trăng. Ở đây xem chỗ thứ hai, phía cạnh bàn tay.",
+    "day": {
+     "ma": "mars_day",
+     "ten": "Gò Hoả tinh (Mars): nổi rõ",
+     "trich": "It denotes passive courage, self-control, resignation, and strength of resistance against wrong",
+     "nguon": "cheiro",
+     "y": "Gò ở cạnh bàn tay nổi rõ: Cheiro đọc là sức chịu đựng, biết tự chủ, bền gan trước điều trái ý.",
+     "nhom": "A"
+    },
+    "trung": {
+     "ma": "mars_trung",
+     "ten": "Gò Hoả tinh (Mars): lõm",
+     "trich": "depressions show weakness and absence of the qualities of",
+     "nguon": "benham",
+     "y": "Gò ở cạnh bàn tay lõm: theo Benham, nét bền gan, chịu được sức ép ít nổi ở bạn.",
+     "nhom": "B",
+     "ham_y": "Nên chú ý tập đứng vững trước việc khó thay vì bỏ ngay.",
+     "viec": "Chọn một việc đang muốn bỏ dở, làm thêm đúng mười phút nữa rồi mới quyết."
+    },
+    "phang": {
+     "ma": "mars_phang",
+     "ten": "Gò Hoả tinh (Mars): phẳng",
+     "y": "Gò phẳng là mức thường gặp. Sách không đọc thêm gì từ gò này.",
+     "khong_doc": true
+    }
+   },
+   {
+    "ma": "luna",
+    "ten": "Gò Mặt trăng (Luna)",
+    "vi_tri": "Phần thịt ở cạnh bàn tay phía ngón út, gần cổ tay, đối diện gò ngón cái.",
+    "day": {
+     "ma": "luna_day",
+     "ten": "Gò Mặt trăng (Luna): nổi rõ",
+     "trich": "It indicates refinement, imagination, love of beautiful scenery, a taste for the romantic, great ideality, and a fondness for poetry and imaginative literature",
+     "nguon": "cheiro",
+     "y": "Gò Mặt trăng nổi rõ: người giàu tưởng tượng, tinh tế, thích cảnh đẹp, lãng mạn, mê thơ văn.",
+     "nhom": "A"
+    },
+    "trung": {
+     "ma": "luna_trung",
+     "ten": "Gò Mặt trăng (Luna): lõm",
+     "trich": "depressions show weakness and absence of the qualities of",
+     "nguon": "benham",
+     "y": "Gò Mặt trăng lõm: theo Benham, nét mơ mộng, tưởng tượng ít nổi ở bạn; bạn nghiêng về điều cụ thể.",
+     "nhom": "B",
+     "ham_y": "Nên chú ý thỉnh thoảng cho phép mình hình dung xa hơn việc trước mắt.",
+     "viec": "Tối nay viết năm dòng về một nơi bạn muốn tới, không cần tính chuyện có đi được không."
+    },
+    "phang": {
+     "ma": "luna_phang",
+     "ten": "Gò Mặt trăng (Luna): phẳng",
+     "y": "Gò phẳng là mức thường gặp. Sách không đọc thêm gì từ gò này.",
+     "khong_doc": true
+    }
+   },
+   {
+    "ma": "venus",
+    "ten": "Gò Kim tinh (Venus)",
+    "vi_tri": "Phần thịt đầy ở gốc ngón cái, đường Sinh ôm quanh.",
+    "day": {
+     "ma": "venus_day",
+     "ten": "Gò Kim tinh (Venus): nổi rõ",
+     "trich": "This mount denotes affection, sympathy toward others, benevolence, a desire to please, love and worship of beauty, love of color, and melody in music",
+     "nguon": "cheiro",
+     "y": "Gò ngón cái nổi rõ: người giàu tình cảm, dễ cảm thông, hay giúp, muốn làm người khác vui, yêu cái đẹp, màu sắc và giai điệu.",
+     "nhom": "A"
+    },
+    "trung": {
+     "ma": "venus_trung",
+     "ten": "Gò Kim tinh (Venus): lõm",
+     "trich": "depressions show weakness and absence of the qualities of",
+     "nguon": "benham",
+     "y": "Gò ngón cái lõm: theo Benham, nét nồng ấm, dễ bày tỏ tình cảm ít nổi ở bạn.",
+     "nhom": "B",
+     "ham_y": "Nên chú ý nói ra sự quan tâm, vì người thân khó tự đoán.",
+     "viec": "Hôm nay nhắn cho một người thân một câu cảm ơn về một việc cụ thể."
+    },
+    "phang": {
+     "ma": "venus_phang",
+     "ten": "Gò Kim tinh (Venus): phẳng",
+     "y": "Gò phẳng là mức thường gặp. Sách không đọc thêm gì từ gò này.",
+     "khong_doc": true
+    }
+   }
+  ]
+ },
+ "duong": [
+  {
+   "ma": "sinh",
+   "ten": "Đường Sinh (Line of Life)",
+   "vi_tri": "Bắt đầu ở cạnh bàn tay dưới ngón trỏ, chạy vòng ôm lấy gò ngón cái xuống cổ tay.",
+   "cau": [
+    {
+     "ma": "sinh_cong",
+     "ten": "Đường Sinh ôm gò ngón cái rộng hay sát?",
+     "lua_chon": [
+      {
+       "ma": "sinh_cong_rong",
+       "ten": "Vòng rộng ra giữa lòng bàn tay",
+       "trich": "This subject will be ardent, full of desire and warmth, passionate, generous, sympathetic, and will attract others",
+       "nguon": "benham",
+       "y": "Đường Sinh vòng rộng, để gò ngón cái được lớn: Benham đọc là người nồng nhiệt, ấm áp, rộng rãi, dễ cảm thông và dễ thu hút người khác.",
+       "nhom": "A"
+      },
+      {
+       "ma": "sinh_cong_sat",
+       "ten": "Chạy sát gốc ngón cái",
+       "trich": "it reduces the size of the Mount of Venus, thus checking the operation of that Mount",
+       "nguon": "benham",
+       "y": "Đường Sinh chạy sát ngón cái làm gò ngón cái hẹp lại: Benham đọc là sự nồng ấm bị kìm, người dè dặt trong tình cảm.",
+       "nhom": "B",
+       "ham_y": "Nên chú ý bày tỏ sự quan tâm bằng lời và việc, đừng để người thân phải đoán.",
+       "viec": "Tuần này chủ động rủ một người thân đi ăn hoặc gọi hỏi thăm."
+      },
+      {
+       "ma": "sinh_cong_vua",
+       "ten": "Vừa phải, không rõ rộng hay sát",
+       "y": "Dáng vòng vừa phải là mức thường gặp. Sách không đọc thêm gì.",
+       "khong_doc": true
+      }
+     ]
+    },
+    {
+     "ma": "sinh_dau",
+     "ten": "Chỗ bắt đầu: đường Sinh và đường Trí thế nào?",
+     "lua_chon": [
+      {
+       "ma": "sinh_dau_dinh",
+       "ten": "Dính liền nhau một đoạn",
+       "trich": "When the line is closely connected with that of the head, life is guided by reason and intelligence",
+       "nguon": "cheiro",
+       "y": "Đường Sinh và đường Trí dính nhau ở đầu: Cheiro đọc là người sống theo lý trí, cẩn thận, nhạy với những gì đụng tới mình.",
+       "nhom": "A"
+      },
+      {
+       "ma": "sinh_dau_tach",
+       "ten": "Tách hẳn, có khe hở",
+       "trich": "When the line of Head is distinctly separated from the line of Life",
+       "nguon": "benham",
+       "y": "Hai đường tách hẳn ngay từ đầu: Benham đọc trước hết là tính tự lập, tự tin vào mình. Khe càng rộng thì càng mạnh dạn, ông nhắc là khi ấy nên hỏi thêm ý người khác trước việc lớn.",
+       "nhom": "A"
+      },
+      {
+       "ma": "sinh_dau_cao",
+       "ten": "Đường Sinh bắt đầu cao, từ gò dưới ngón trỏ",
+       "trich": "it denotes that from the earliest the life has been one of ambition",
+       "nguon": "cheiro",
+       "y": "Đường Sinh bắt đầu từ gò dưới ngón trỏ thay vì từ cạnh bàn tay: Cheiro đọc là người có chí tiến thủ từ rất sớm.",
+       "nhom": "A"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "ma": "tri",
+   "ten": "Đường Trí (Line of Head)",
+   "vi_tri": "Đường nằm ngang giữa lòng bàn tay, bắt đầu gần chỗ đường Sinh, chạy về phía cạnh bàn tay.",
+   "cau": [
+    {
+     "ma": "tri_huong",
+     "ten": "Đường Trí chạy thẳng hay dốc xuống?",
+     "lua_chon": [
+      {
+       "ma": "tri_huong_thang",
+       "ten": "Thẳng, rõ, đều",
+       "trich": "When straight, clear, and even, it denotes practical common sense and a love of material things more than those of the imagination",
+       "nguon": "cheiro",
+       "y": "Đường Trí thẳng, rõ, đều: Cheiro đọc là óc thực tế, lẽ thường vững, thích điều cụ thể hơn chuyện tưởng tượng.",
+       "nhom": "A"
+      },
+      {
+       "ma": "tri_huong_doc_nhe",
+       "ten": "Hơi dốc xuống",
+       "trich": "When the entire line has a slight slope, there is a leaning toward imaginative work",
+       "nguon": "cheiro",
+       "y": "Cả đường hơi dốc xuống: nghiêng về việc cần trí tưởng tượng, tuỳ dáng tay mà là nhạc, vẽ, viết hay sáng chế.",
+       "nhom": "A"
+      },
+      {
+       "ma": "tri_huong_doc_nhieu",
+       "ten": "Dốc hẳn về phía gò Mặt trăng",
+       "trich": "When very sloping, romance, idealism, imaginative work, and Bohemianism",
+       "nguon": "cheiro",
+       "y": "Đường Trí dốc hẳn xuống: Cheiro đọc là người lãng mạn, sống với lý tưởng và trí tưởng tượng, thích nếp sống tự do.",
+       "nhom": "A"
+      }
+     ]
+    },
+    {
+     "ma": "tri_dang",
+     "ten": "Nét của đường Trí?",
+     "lua_chon": [
+      {
+       "ma": "tri_dang_moc_xich",
+       "ten": "Gồm nhiều đoạn nhỏ như mắt xích",
+       "trich": "When linked, or made up of little pieces like a chain, it denotes want of fixity of ideas, and indecision",
+       "nguon": "cheiro",
+       "y": "Đường Trí gồm nhiều đoạn nhỏ nối nhau như mắt xích: Cheiro đọc là ý nghĩ dễ đổi, hay lưỡng lự khi phải quyết.",
+       "nhom": "B",
+       "ham_y": "Nên chú ý chốt từng việc một và ghi lại quyết định.",
+       "viec": "Với việc đang phân vân, viết hai lựa chọn ra giấy, đặt hạn chọn trong ba ngày."
+      },
+      {
+       "ma": "tri_dang_lien",
+       "ten": "Liền một nét",
+       "y": "Đường liền, rõ là dáng sách xem là thuận; không có lời riêng ngoài lời về hướng của đường.",
+       "khong_doc": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "ma": "tam",
+   "ten": "Đường Tâm (Line of Heart)",
+   "vi_tri": "Đường ngang phía trên, chạy dưới gốc các ngón, từ cạnh bàn tay phía ngón út về phía ngón trỏ.",
+   "cau": [
+    {
+     "ma": "tam_cuoi",
+     "ten": "Đầu đường Tâm phía ngón trỏ nằm ở đâu?",
+     "lua_chon": [
+      {
+       "ma": "tam_cuoi_tro",
+       "ten": "Dưới ngón trỏ",
+       "trich": "it gives the highest type of love — the pride and the worship of the heart's ideal",
+       "nguon": "cheiro",
+       "y": "Đường Tâm tới giữa gò dưới ngón trỏ: Cheiro đọc là kiểu yêu đặt người mình thương rất cao, tự hào và trân trọng người ấy.",
+       "nhom": "A"
+      },
+      {
+       "ma": "tam_cuoi_giua_hai",
+       "ten": "Giữa ngón trỏ và ngón giữa",
+       "trich": "The line rising between the first and second fingers gives a calm but deeper nature in matters of love",
+       "nguon": "cheiro",
+       "y": "Đường Tâm tới khe giữa ngón trỏ và ngón giữa: tình cảm điềm đạm mà sâu, ít phô ra nhưng bền.",
+       "nhom": "A"
+      },
+      {
+       "ma": "tam_cuoi_giua",
+       "ten": "Dưới ngón giữa",
+       "trich": "With the line of heart rising from Saturn, the subject will have more passion in his attachments, and will be more or less selfish in satisfying his affections",
+       "nguon": "cheiro",
+       "y": "Đường Tâm dừng dưới ngón giữa: Cheiro đọc là tình cảm nồng, nhưng dễ nghĩ cho phần mình trước.",
+       "nhom": "B",
+       "ham_y": "Nên chú ý hỏi người kia cần gì trước khi nói điều mình muốn.",
+       "viec": "Trong lần trò chuyện tới với người thân, hỏi một câu về mong muốn của họ và nghe hết."
+      }
+     ]
+    },
+    {
+     "ma": "tam_dang",
+     "ten": "Nét của đường Tâm?",
+     "lua_chon": [
+      {
+       "ma": "tam_dang_moc_xich",
+       "ten": "Gồm nhiều đoạn nhỏ như mắt xích",
+       "trich": "if on the line of heart it denotes weakness and changeability of affection",
+       "nguon": "cheiro",
+       "y": "Đường Tâm như chuỗi mắt xích: Cheiro đọc là tình cảm dễ đổi, lúc nồng lúc nhạt.",
+       "nhom": "B",
+       "ham_y": "Nên chú ý giữ những việc nhỏ đều đặn với người mình thương.",
+       "viec": "Chọn một thói quen nhỏ với người thân (một tin nhắn buổi tối) và giữ đủ hai tuần."
+      },
+      {
+       "ma": "tam_dang_lien",
+       "ten": "Liền một nét, rõ",
+       "y": "Cheiro viết đường Tâm nên sâu, rõ, liền nét; không có lời riêng ngoài lời về chỗ đường dừng lại.",
+       "khong_doc": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "ma": "van_menh",
+   "ten": "Đường Vận mệnh (Line of Fate)",
+   "vi_tri": "Đường dọc giữa lòng bàn tay, đi từ phía cổ tay lên phía gò dưới ngón giữa. Nhiều người không có hoặc rất mờ.",
+   "cau": [
+    {
+     "ma": "van_dau",
+     "ten": "Đường dọc giữa lòng bàn tay bắt đầu từ đâu?",
+     "lua_chon": [
+      {
+       "ma": "van_dau_co_tay",
+       "ten": "Từ cổ tay, thẳng lên ngón giữa",
+       "trich": "it is a sign of extreme good fortune and success",
+       "nguon": "cheiro",
+       "y": "Đường dọc đi thẳng từ cổ tay lên gò dưới ngón giữa: Cheiro xem là dấu rất thuận cho đường công việc. Ông cũng dặn phải xem cùng dáng tay, không đọc riêng một đường.",
+       "nhom": "A"
+      },
+      {
+       "ma": "van_dau_sinh",
+       "ten": "Từ đường Sinh",
+       "trich": "success and riches will be won by personal merit",
+       "nguon": "cheiro",
+       "y": "Đường dọc tách ra từ đường Sinh: Cheiro đọc là thành quả đến từ công sức của chính mình.",
+       "nhom": "A"
+      },
+      {
+       "ma": "van_dau_luna",
+       "ten": "Từ gò Mặt trăng (cạnh bàn tay)",
+       "trich": "fate and success will be more or less dependent on the fancy and caprice of other people",
+       "nguon": "cheiro",
+       "y": "Đường dọc đi lên từ gò Mặt trăng: Cheiro đọc là công việc ít nhiều dựa vào sự yêu thích của người khác, hay gặp ở người làm việc với công chúng.",
+       "nhom": "B",
+       "ham_y": "Nên chú ý có một nguồn thu hoặc một kỹ năng không phụ thuộc vào sự ưa thích của ai.",
+       "viec": "Ghi ra một kỹ năng bạn có thể tự bán được và dành một giờ tuần này để luyện."
+      },
+      {
+       "ma": "van_dau_khong",
+       "ten": "Không thấy đường này",
+       "trich": "People without any sign of a line of fate are often very successful",
+       "nguon": "cheiro",
+       "y": "Không có đường dọc này: Cheiro viết những người như vậy vẫn thường thành công, chỉ là nếp sống đều đều, ít khúc ngoặt.",
+       "nhom": "A"
+      }
+     ]
+    },
+    {
+     "ma": "van_dang",
+     "ten": "Nét của đường dọc ấy?",
+     "lua_chon": [
+      {
+       "ma": "van_dang_dut",
+       "ten": "Đứt quãng, không đều",
+       "trich": "When broken and irregular, the career will be uncertain",
+       "nguon": "cheiro",
+       "y": "Đường dọc đứt quãng, không đều: Cheiro đọc là đường công việc hay đổi, khó đoán trước.",
+       "nhom": "B",
+       "ham_y": "Nên chú ý để sẵn một khoản dự phòng và giữ một kỹ năng chính cho vững.",
+       "viec": "Tính xem bạn cần bao nhiêu cho ba tháng sống, và bắt đầu để riêng từ tháng này."
+      },
+      {
+       "ma": "van_dang_lien",
+       "ten": "Liền, rõ",
+       "y": "Đường liền, rõ: không có lời riêng ngoài lời về chỗ đường bắt đầu.",
+       "khong_doc": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "ma": "thai_duong",
+   "ten": "Đường Thái Dương (Line of Sun)",
+   "vi_tri": "Đường dọc đi lên gò dưới ngón áp út, song song với đường Vận mệnh. Nhiều người không có.",
+   "cau": [
+    {
+     "ma": "thai_duong_co",
+     "ten": "Bạn có đường dọc lên ngón áp út không?",
+     "lua_chon": [
+      {
+       "ma": "thai_duong_co_ro",
+       "ten": "Có, rõ",
+       "trich": "It increases the success given by a good line of fate, and gives fame and distinction to the life",
+       "nguon": "cheiro",
+       "y": "Có đường dọc rõ lên ngón áp út: Cheiro đọc là việc mình làm dễ được biết tới, thêm sức cho đường Vận mệnh.",
+       "nhom": "A"
+      },
+      {
+       "ma": "thai_duong_co_giua",
+       "ten": "Có, bắt đầu từ giữa lòng bàn tay",
+       "trich": "it promises sunshine after tears, success after difficulty",
+       "nguon": "cheiro",
+       "y": "Đường này bắt đầu từ vùng giữa lòng bàn tay: Cheiro viết là nắng sau mưa, thành quả đến sau quãng khó.",
+       "nhom": "A"
+      },
+      {
+       "ma": "thai_duong_co_khong",
+       "ten": "Không thấy",
+       "trich": "though they may work hard, will find the recognition of the world difficult to gain",
+       "nguon": "cheiro",
+       "y": "Không có đường này: Cheiro viết người có tài và chăm vẫn khó được nhiều người biết tới.",
+       "nhom": "B",
+       "ham_y": "Nên chú ý cho người khác thấy việc mình làm, đừng chỉ lặng lẽ làm.",
+       "viec": "Chọn một việc bạn làm tốt trong tháng và kể lại kết quả cho sếp hoặc khách bằng ba dòng."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "ma": "hon_nhan",
+   "ten": "Vạch tình cảm (Line of Marriage)",
+   "vi_tri": "Những vạch ngang ngắn ở cạnh bàn tay, giữa gốc ngón út và đường Tâm.",
+   "cau": [
+    {
+     "ma": "hon_nhan_dang",
+     "ten": "Vạch ngang dưới ngón út của bạn?",
+     "lua_chon": [
+      {
+       "ma": "hon_nhan_dang_dai",
+       "ten": "Một vạch dài, thẳng, rõ",
+       "trich": "The line of marriage on the Mount of Mercury should be straight, without breaks, crosses, or irregularities of any kind",
+       "nguon": "cheiro",
+       "y": "Một vạch dài, thẳng, không đứt: đây là dáng Cheiro xem là thuận cho một gắn bó lâu dài.",
+       "nhom": "A"
+      },
+      {
+       "ma": "hon_nhan_dang_ngan",
+       "ten": "Vài vạch ngắn",
+       "trich": "the short ones to deep affection or marriage contemplated",
+       "nguon": "cheiro",
+       "y": "Những vạch ngắn: Cheiro đọc là những tình cảm sâu hoặc những lần từng nghĩ tới chuyện gắn bó, không phải số lần kết hôn.",
+       "nhom": "A"
+      },
+      {
+       "ma": "hon_nhan_dang_khong",
+       "ten": "Không thấy rõ",
+       "y": "Không thấy vạch rõ thì sách không đọc gì. Điều đó không nói gì về chuyện có đôi hay không.",
+       "khong_doc": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "ma": "dai_venus",
+   "ten": "Vòng Kim tinh (Girdle of Venus)",
+   "vi_tri": "Một vòng cung (liền hoặc đứt) phía trên đường Tâm, đi từ khe ngón trỏ – ngón giữa tới khe ngón áp út – ngón út. Ít người có.",
+   "cau": [
+    {
+     "ma": "dai_venus_co",
+     "ten": "Bạn có vòng cung phía trên đường Tâm không?",
+     "lua_chon": [
+      {
+       "ma": "dai_venus_co_co",
+       "ten": "Có",
+       "trich": "Thus as a first result of a Girdle of Venus we often have intense nervous activity",
+       "nguon": "benham",
+       "y": "Có vòng cung này: Benham đọc là thần kinh rất nhạy, dễ căng và dễ bị cuốn theo cảm xúc.",
+       "nhom": "B",
+       "ham_y": "Nên chú ý giữ nhịp nghỉ đều và bớt thứ gây kích thích vào buổi tối.",
+       "viec": "Tối nay tắt màn hình trước giờ ngủ ba mươi phút."
+      },
+      {
+       "ma": "dai_venus_co_khong",
+       "ten": "Không",
+       "y": "Phần lớn bàn tay không có vòng này. Sách không đọc gì.",
+       "khong_doc": true
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "do_tay": {
+  "_ghi_chu": "Số đo từ 21 điểm mốc (CALC chi_tay_do) → ba điều hai sách có nói và điểm mốc đo được: ngón dài / ngắn so với lòng bàn tay (Benham, chương Long Fingers / Short Fingers — ông đo bằng cách gập ngón vào lòng bàn tay; ở đây đổi sang tỉ lệ ngón giữa / dài lòng bàn tay), lòng bàn tay vuông hay dài (Cheiro: tay vuông / tay dài hẹp — chỉ GỢI Ý dáng tay để người dùng tự xem, không thành lời đọc), ngón trỏ so với ngón áp út (Benham: Jupiter / Apollo). Ngưỡng là giả định, dùng chung dải với lớp sách xưa, chưa hiệu chỉnh trên ảnh thật. Dải «vừa» không gợi câu nào. Không dùng hệ bốn nguyên tố (không có trong hai sách này).",
+  "can_doi_chieu": true,
+  "nguong": {
+   "ngon_ngan": 0.91,
+   "ngon_dai": 1.07,
+   "long_dai": 0.63,
+   "long_rong": 0.77,
+   "ap_ut_dai": 0.88,
+   "tro_dai": 0.96
+  },
+  "nhan": {
+   "ngon_dai": {
+    "ma": "ngon_dai",
+    "ten": "Ngón tay dài so với lòng bàn tay",
+    "trich": "His is the mind which goes into the minutiae of everything, seeks every detail, and accepts nothing as a whole until first separated into its parts",
+    "nguon": "benham",
+    "y": "Ngón dài so với lòng bàn tay: Benham đọc là người đi vào chi tiết, xem kỹ từng phần rồi mới nhận cái toàn thể; hợp việc cần chính xác.",
+    "nhom": "A",
+    "truc": "ngon"
+   },
+   "ngon_vua": {
+    "ma": "ngon_vua",
+    "ten": "Ngón tay và lòng bàn tay cân nhau",
+    "y": "Ngón và lòng bàn tay cân nhau: mức thường gặp, không có lời riêng.",
+    "khong_doc": true,
+    "truc": "ngon"
+   },
+   "ngon_ngan": {
+    "ma": "ngon_ngan",
+    "ten": "Ngón tay ngắn so với lòng bàn tay",
+    "trich": "Instead of dealing in minutiae, they want everything considered as a whole",
+    "nguon": "benham",
+    "y": "Ngón ngắn so với lòng bàn tay: Benham đọc là người nghĩ nhanh, làm nhanh, thích nhìn cả bức tranh hơn sa vào chi tiết. Việc cần tỉ mỉ thì nên nhờ thêm một người soát lại.",
+    "nhom": "A",
+    "truc": "ngon"
+   },
+   "long_rong": {
+    "ma": "long_rong",
+    "ten": "Lòng bàn tay vuông (rộng gần bằng dài)",
+    "y": "Lòng bàn tay vuông là nét chính của dáng «Tay vuông» trong sách Cheiro. Bạn nhìn thêm đầu ngón rồi tự chọn dáng tay ở dưới.",
+    "khong_doc": true,
+    "truc": "long",
+    "goi_y_dang": [
+     "vuong",
+     "be"
+    ]
+   },
+   "long_vua": {
+    "ma": "long_vua",
+    "ten": "Lòng bàn tay cân đối",
+    "y": "Lòng bàn tay không vuông hẳn, không dài hẳn: không có lời riêng.",
+    "khong_doc": true,
+    "truc": "long",
+    "goi_y_dang": []
+   },
+   "long_dai": {
+    "ma": "long_dai",
+    "ten": "Lòng bàn tay dài, hẹp",
+    "y": "Lòng bàn tay dài, hẹp gặp ở các dáng tay dài trong sách Cheiro. Bạn nhìn thêm khớp và đầu ngón rồi tự chọn dáng tay ở dưới.",
+    "khong_doc": true,
+    "truc": "long",
+    "goi_y_dang": [
+     "triet",
+     "thon"
+    ]
+   },
+   "tro_dai": {
+    "ma": "tro_dai",
+    "ten": "Ngón trỏ dài hơn ngón áp út",
+    "trich": "When the first, or index finger, is excessively long, it denotes great pride, and a tendency to rule and domineer",
+    "nguon": "cheiro",
+    "y": "Ngón trỏ của bạn dài hơn ngón áp út. Cheiro viết ngón trỏ dài hẳn là người tự trọng cao, thích dẫn dắt và quyết thay người khác; ở mức vừa phải thì đó là sức lãnh đạo.",
+    "nhom": "B",
+    "ham_y": "Nên chú ý hỏi ý người cùng làm trước khi quyết thay họ.",
+    "viec": "Trong việc chung sắp tới, hỏi mỗi người một ý trước khi bạn chốt.",
+    "truc": "tro_ap_ut"
+   },
+   "tro_ap_ut_vua": {
+    "ma": "tro_ap_ut_vua",
+    "ten": "Ngón trỏ và ngón áp út gần bằng nhau",
+    "y": "Hai ngón gần bằng nhau: mức thường gặp, không có lời riêng.",
+    "khong_doc": true,
+    "truc": "tro_ap_ut"
+   },
+   "ap_ut_dai": {
+    "ma": "ap_ut_dai",
+    "ten": "Ngón áp út dài hơn ngón trỏ",
+    "trich": "If Apollo is longer than Jupiter, then artistic or business tastes will be in the ascendancy",
+    "nguon": "benham",
+    "y": "Ngón áp út dài hơn ngón trỏ: Benham đọc là khiếu thẩm mỹ hoặc óc làm ăn trội hơn ham muốn dẫn dắt.",
+    "nhom": "A",
+    "truc": "tro_ap_ut"
+   }
+  },
+  "to_hop": {
+   "long_rong.ngon_dai": "Lòng bàn tay vuông, ngón dài",
+   "long_rong.ngon_ngan": "Lòng bàn tay vuông, ngón ngắn",
+   "long_dai.ngon_dai": "Lòng bàn tay dài, ngón dài",
+   "long_dai.ngon_ngan": "Lòng bàn tay dài, ngón ngắn"
+  }
+ }
+}

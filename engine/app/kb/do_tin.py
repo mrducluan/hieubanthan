@@ -67,6 +67,9 @@ SO: dict[str, dict] = {
     # ---- Kinh Dịch
     "kinhdich_truyen_nghia.json": {"mang": "kinhdich", **_nv(
         "chu_dich_truyen_nghia.json", f"{_T}::test_ngo_tat_to_ghep_dung_hao_va_du_do_phu", "bản dịch Ngô Tất Tố ghép theo chữ Hán")},
+    "kinhdich_dich_lam.json": {"mang": "kinhdich", **_nv(
+        "tieu_thi_dich_lam.json", "tests/test_tk2_dich_lam.py::test_kb_la_ban_cat_cua_kho_nguon_va_du_4096_bai",
+        "TK-2: 4.096 bài từ Tiêu Thị Dịch Lâm (quẻ bản → quẻ biến), nguyên văn chưa dịch; bài có chữ nặng không hiện")},
     "kinhdich_hao.json": {"mang": "kinhdich", **_nv(
         "chu_dich_truyen_nghia.json", "tests/test_nguon_chu_dich_truyen_nghia.py::test_loi_que_loi_hao_trong_kb_khop_ban_tu_kho",
         "kinh văn khớp nguyên văn; phần dịch và «Hiểu đơn giản» là nháp")},
