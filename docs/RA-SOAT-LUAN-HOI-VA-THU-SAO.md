@@ -30,7 +30,7 @@ tri thức, giống nhau với mọi lá số, nên hiện ra không lộ gì v�
 2. **Nhãn nặng nằm sau cổng trả tiền.** "Dễ hai lần đò", "giữ tiền kém" là thứ người ta trả tiền để đọc. Lời mời chương khoá
    chỉ nêu câu hỏi, không gợi "lá số bạn có vấn đề" — giữ đúng ranh giới không doạ để bán. Đừng đổi thành câu gây lo.
 3. **Kho lời là nháp.** Bán nội dung chưa có chuyên gia soát là rủi ro uy tín. Nên đọc soát 27 câu × các nhãn trước ngày bật
-   thu Sao (việc của anh, mục 4av).
+   thu Sao (việc của anh, mục 4aw).
 
 ## 4. Đề xuất bổ sung — chờ anh chọn
 

@@ -3,9 +3,9 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-17 (LH-1 mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-17 (LH-1 + LH-2 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
 
-### 4av. LH-1 — "Luận theo câu hỏi" cho Luận giải Tử vi (2026-11-17, `docs/LUAN-GIAI-DOI-SONG.md` mục 11)
+### 4aw. LH-1 — "Luận theo câu hỏi" cho Luận giải Tử vi (2026-11-17, `docs/LUAN-GIAI-DOI-SONG.md` mục 11)
 
 - [ ] **Deploy engine TRƯỚC web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì không hiện lớp này).
 - [ ] Mở `/tu-vi` bằng hồ sơ của anh → Xem luận giải: đọc khối "Người quanh bạn" và 5 chương có "Trả lời thẳng những câu bạn
@@ -20,6 +20,13 @@
 - [ ] **Trước ngày bật thu Sao**: đọc soát 27 câu trả lời (các nhãn) của cả hai môn — đây là nội dung người dùng trả tiền để đọc.
 - [ ] (Quyết định) Chọn trong D1–D6 của `docs/RA-SOAT-LUAN-HOI-VA-THU-SAO.md`; em khuyên làm D1 (một câu trả lời mẫu miễn
   phí ở chương 1) trước.
+
+### 4av. NF-BT — biên tập 21 bài NotFair + 4 bài tuần 3 (2026-11-17, `docs/kw6t/AUDIT-NOTFAIR-2026-11-17.md`)
+
+- [ ] Merge PR → Vercel tự deploy dự án CMS (migration chạy lúc build). Kiểm nhanh sau deploy: `/blog/xem-hop-doi-theo-ngay-sinh-doc-sao-cho-tinh-tao` mở được,
+  `/blog/tai-sao-than-so-hoc-ra-2-ket-qua-khac-nhau` có 4 ảnh. Nếu bài chưa đổi: Vercel (CMS) → Logs → tìm `NF-BT:` và `KW-6T:`, chép cho em.
+- [ ] Search Console → Yêu cầu lập chỉ mục 4 bài tuần 3 + 3 đường dẫn mới đổi (hợp đôi, hợp sếp, Kinh Dịch hay Bát tự).
+- [ ] Đọc lại bài (ghi chú "NF-BT" trong "Ghi chú của Chủ biên" nói máy đã sửa gì), thêm "Góc nhìn chuyên gia" bằng lời của anh, bấm Xuất bản → "Đã duyệt".
 
 ### 4au. SEO-Q — tiêu đề blog trong CMS, hồ sơ Đức Luân, rà SEO 2.212 URL (2026-11-17, `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 9)
 
