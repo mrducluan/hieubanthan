@@ -65,3 +65,17 @@ def test_menh_ly_duong_tong_du_sau_sach():
     d = _doc("menh_ly_duong_tong")
     assert {s["ten_han"] for s in d["sach"].values()} == {"李虛中命書", "玉照定真經", "珞琭子賦注", "珞琭子三命消息賦注", "三命指迷賦", "星命總括"}
     assert all(len(t["van"]) > 500 for t in d["thien"])
+
+
+def test_hiep_ky_du_bo_chua_muc_cu_va_dich_lam_du_64_que():
+    du = _doc("hiep_ky_bien_phuong_thu_du_bo")
+    assert len(du["thien"]) >= 35
+    tat = sach_ghi.chuan("".join(t["van"] for t in du["thien"]))
+    cu = _doc("hiep_ky_bien_phuong_thu")["muc"]
+    cu = list(cu.values()) if isinstance(cu, dict) else cu
+    van = [sach_ghi.chuan(x) for m in cu for x in ([m] if isinstance(m, str) else [v for v in m.values() if isinstance(v, str)])]
+    han = [v for v in van if len(v) > 30 and all("一" <= c <= "鿿" for c in v[:20])]
+    assert han and all(v[:25] in tat for v in han), "mục Hiệp Kỷ đang dùng phải nằm trong bản đủ bộ"
+    dl = sach_ghi.chuan("".join(t["van"] for t in _doc("tieu_thi_dich_lam")["thien"]))
+    assert all(f"{q}之第" in dl for q in ("乾", "坤", "既濟", "未濟"))
+    assert len(_doc("tinh_lich_khao_nguyen")["thien"]) == 6

@@ -23,6 +23,13 @@
 - [ ] Sau 4 tuần: `/quan-tri/doanh-thu` → tỉ lệ từng gói. Gói Ba lần xem dưới 20 % số đơn thì báo em hạ gói lẻ xuống 79.000 ₫.
 - [ ] (Quyết định) Nối cổng Sao cho Xem lá số 2 người / Nhà của bạn / Chọn ngày cho cả nhà; gói ghép "Trọn bộ 2027"; "Lì xì báo cáo Tết" — mục 8 của tài liệu.
 
+### 4av. TK-1 — sách cần bổ sung cho 7 mảng (2026-11-17, `docs/THONG-KE-SACH-VA-DE-XUAT-NAP.md`)
+
+- [ ] Đọc mục 3 và chọn phương án bản quyền **A / B / C** cho sách hiện đại (em khuyên A: anh mua sách, em đọc và rút quy tắc, không chép câu vào repo công khai).
+- [ ] Chọn việc làm trước trong 5 việc em tự làm được (mục 4, việc 1–5): đối chiếu Chaldea với Cheiro · chỉ tay phương Tây · 60 trụ ngày × giờ · Legge cho `/en/i-ching` · bài từ Dịch Lâm.
+- [ ] Gửi lên Drive (PDF bôi đen được chữ, mỗi tệp dưới 10 MB), xếp theo ưu tiên: **Thẩm Thị Huyền Không Học** bản đủ + **Trạch Vận Tân Án** · Dương Trạch Tam Yếu / Bát Trạch Minh Kính / Địa Lý Ngũ Quyết chữ Hán · ba bộ bình chú **Từ Lạc Ngô** · Bốc Phệ Chính Tông · Tương Lý Hành Chân · Mệnh Lý Ước Ngôn · Toàn Thư quyển 4.
+- [ ] (Nếu chọn A / B) mua và gửi: Phillips *The Complete Book of Numerology* · Goodwin *Numerology: The Complete Guide* · Lương Nhược Du *飛星紫微斗數* · Thiên Lương *Tử vi nghiệm lý* · Thiệu Vĩ Hoa *Dự đoán theo tứ trụ*.
+
 ### 4as. PT-NG1 — nguồn tri thức Tarot · Phong thuỷ · Huyền Không còn thiếu (2026-11-12, `docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md`)
 
 - [x] Mở mạng tới Wikisource, archive.org, Gutenberg (đã duyệt 2026-11-12). Dò lại: sách Tarot của Papus, Wirth em tự tải được;

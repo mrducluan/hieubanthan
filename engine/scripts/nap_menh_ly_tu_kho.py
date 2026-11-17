@@ -21,7 +21,13 @@ BO = {
     "menh_ly_duong_tong": [
         ("KR3g0033", "", "", ""), ("KR3g0034", "", "", ""), ("KR3g0036", "", "", ""),
         ("KR3g0037", "", "", ""), ("KR3g0038", "", "", ""), ("KR3g0039", "", "", "")],
+    # đợt 2 (cùng ngày): Kinh Dịch + chọn ngày
+    "tieu_thi_dich_lam": [("KR3g0029", "焦氏易林", "Tiêu Thị Dịch Lâm", "Tiêu Diên Thọ (Hán)")],
+    "hiep_ky_bien_phuong_thu_du_bo": [("KR3g0051", "協紀辨方書", "Hiệp Kỷ Biện Phương Thư", "Doãn Lộc và các quan Khâm Thiên Giám (Thanh, 1739)")],
+    "tinh_lich_khao_nguyen": [("KR3g0050", "御定星歷考原", "Tinh Lịch Khảo Nguyên", "Lý Quang Địa (Thanh, 1713)")],
 }
+TRUONG = {"tieu_thi_dich_lam": ("kinh_dich", "sách Dịch chiêm"), "hiep_ky_bien_phuong_thu_du_bo": ("hiep_ky", "sách chọn ngày, thần sát"),
+          "tinh_lich_khao_nguyen": ("hiep_ky", "sách chọn ngày, thần sát")}
 
 
 def _tai(u: str) -> str | None:
@@ -50,7 +56,7 @@ def doc_quyen(chu: str) -> tuple[str, str, str]:
 def nap(ds: list[tuple[str, str, str, str]]) -> tuple[dict, list[dict]]:
     sach, thien = {}, []
     for kr, ten_han, ten, tac in ds:
-        for i in range(1, 60):
+        for i in range(1, 80):
             chu = _tai(f"https://raw.githubusercontent.com/kanripo/{kr}/master/{kr}_{i:03d}.txt")
             if chu is None:
                 break
@@ -62,12 +68,15 @@ def nap(ds: list[tuple[str, str, str, str]]) -> tuple[dict, list[dict]]:
 
 def main() -> None:
     from bo_dau_cau_kho_nguon import _sua as bo_dau_cau
+    import sys
     for ma, ds in BO.items():
+        if len(sys.argv) > 1 and ma not in sys.argv[1:]:
+            continue
         sach, thien = nap(ds)
-        out = {"_nguon": "、".join(s["ten_han"] for s in sach.values()) + " — sách mệnh lý (Bát tự). Cổ thư công cộng.",
+        out = {"_nguon": "、".join(s["ten_han"] for s in sach.values()) + f" — {TRUONG.get(ma, ('', 'sách mệnh lý (Bát tự)'))[1]}. Cổ thư công cộng.",
                "ban": f"Kanseki Repository (github.com/kanripo/{ds[0][0]}…), bản Văn Uyên Các Tứ khố toàn thư (WYG), lấy {NGAY} "
                       "— bản gõ lại, không chấm câu, chú chữ nhỏ viết liền; CHƯA đối chiếu bản chụp",
-               "can_doi_chieu": True, "source_id": ma, "school_id": "tu_binh", "sach": sach, "thien": thien}
+               "can_doi_chieu": True, "source_id": ma, "school_id": TRUONG.get(ma, ("tu_binh",))[0], "sach": sach, "thien": thien}
         (NGUON / f"{ma}.json").write_text(json.dumps(bo_dau_cau(out), ensure_ascii=False, indent=1) + "\n", "utf-8")
         print(ma, len(thien), "quyển,", sum(len(t["van"]) for t in thien), "chữ;", [s["ten_han"] for s in sach.values()])
 
