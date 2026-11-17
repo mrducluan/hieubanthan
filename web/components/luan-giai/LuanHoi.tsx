@@ -267,7 +267,8 @@ function LaBanNghe({ nghe, moDun }: { nghe: KieuLaBan; moDun: string }) {
     const goc = (-90 + (360 / n) * i) * (Math.PI / 180);
     return { x: 50 + 34 * Math.cos(goc), y: 50 + 34 * Math.sin(goc) };
   });
-  const nhanCap = (cap: string) => chu(cap === "chinh" ? "lh.nghe_chinh" : cap === "phu" ? "lh.nghe_phu" : "lh.nghe_khong");
+  const nhanCap = (cap: string) => nghe.nhan?.[cap === "chinh" ? "chinh" : cap === "phu" ? "phu" : "khong"]
+    || chu(cap === "chinh" ? "lh.nghe_chinh" : cap === "phu" ? "lh.nghe_phu" : "lh.nghe_khong");
   return (
     <figure className="mt-5 min-w-0 rounded-2xl border border-line/70 p-4" data-testid="lh-la-ban-nghe">
       <figcaption className="text-sm font-semibold text-fg">{chu("lh.nghe_td")}</figcaption>

@@ -2,7 +2,9 @@
 // N chương đầu giữ trọn; chương sau CHỈ còn tiêu đề + lời mời xem tiếp (điểm nhấn đã tính + câu hỏi mở) do engine
 // soạn — đoạn văn bị bỏ hẳn khỏi phản hồi (không lộ qua tab Network), không phải làm mờ bằng CSS.
 
-export type MoiXem = { diem_nhan: string; cau_hoi: string; so_doan: number; phut_doc: number };
+export type MoiXem = { diem_nhan: string; cau_hoi: string; so_doan: number; phut_doc: number;
+  /** LH-1: các CÂU HỎI chương trả lời (chỉ câu hỏi — không có câu trả lời) + số người có chân dung trong chương. */
+  cau_tra_loi?: { ma: string; cau: string }[]; so_nguoi?: number };
 export type ChuongDay = { ma: string; tieu_de: string; doan: string[]; van_ai?: string; moi_xem?: MoiXem; [k: string]: unknown };
 export type ChuongKhoa = { ma: string; tieu_de: string; khoa: true; moi_xem: MoiXem };
 export type BaoCaoDay = { chuong: ChuongDay[]; [k: string]: unknown };

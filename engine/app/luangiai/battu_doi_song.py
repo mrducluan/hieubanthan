@@ -1835,10 +1835,14 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
            tuoi=tuoi)
     # EN-2 mục 5: hộp lời theo tuổi + tình trạng (người dùng tự chọn) ở 5 chương — sau khi chọn cốt lõi (không vào cốt lõi).
     hc.ap(ds, sinh["lich"].date(), ngay_xem, sinh.get("tinh_trang"), "ds.bt", hoc)
+    # LH-2: lớp "Luận theo câu hỏi" (cùng khuôn Tử vi LH-1) — chỉ thêm trường, không đổi mức / hộp.
+    from app.luangiai import battu_luan_hoi as blh  # noqa: PLC0415 — tránh vòng import
+    nguoi_quanh = blh.ap(ds, pt, cm, dong, tgb)
     # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).
     kh.gon_bao_cao({"cot_loi": cot_loi, "chuong": ds})
     tgb_ra = [{k: v for k, v in g.items() if k != "thap_than"} for g in tgb]
     from app.luangiai import luu_y_mang as lym  # noqa: PLC0415
     luu_y_mang = lym.dung(ds, "battu", muc_mang={k: v.get("muc") for k, v in cm.items() if isinstance(v, dict)})
     return _sach({"phien_ban": PHIEN_BAN, "phai": "tu_binh", "cot_loi": cot_loi, "thoi_gian_bieu": tgb_ra, "chuong": ds,
-                  "luu_y_mang": luu_y_mang, "ngay_xem": ngay_xem.isoformat(), **kb.meta()})
+                  "luu_y_mang": luu_y_mang, **({"nguoi_quanh": nguoi_quanh} if nguoi_quanh else {}),
+                  "ngay_xem": ngay_xem.isoformat(), **kb.meta()})

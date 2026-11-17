@@ -15,7 +15,11 @@
   mạnh tay hơn hay dè hơn thì báo em — đổi một con số trong `tuvi_luan_hoi.py`, test giữ khoảng 3–12 %.
 - [ ] (Quyết định) Mục "Dân gian thường làm": em chỉ ghi tập quán phổ biến (cưới muộn, bán khoán, vía Thần Tài, dâng sao,
   chọn ngày). Anh muốn thêm / bớt tục nào thì gửi em danh sách.
-- [ ] Việc tiếp theo em đề xuất: cùng khuôn cho **Bát tự** (PR riêng), rồi bản tiếng Anh.
+- [ ] Bát tự cùng khuôn đã làm (LH-2). Mở `/bat-tu` → Xem luận giải, đọc soát như Tử vi (kho lời riêng:
+  `battu_luan_hoi_kb.json`).
+- [ ] **Trước ngày bật thu Sao**: đọc soát 27 câu trả lời (các nhãn) của cả hai môn — đây là nội dung người dùng trả tiền để đọc.
+- [ ] (Quyết định) Chọn trong D1–D6 của `docs/RA-SOAT-LUAN-HOI-VA-THU-SAO.md`; em khuyên làm D1 (một câu trả lời mẫu miễn
+  phí ở chương 1) trước.
 
 ### 4au. SEO-Q — tiêu đề blog trong CMS, hồ sơ Đức Luân, rà SEO 2.212 URL (2026-11-17, `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 9)
 

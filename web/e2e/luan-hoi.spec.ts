@@ -66,3 +66,58 @@ test("chương khoá (SAO-2): người quanh bạn chỉ còn tên + mức, lớ
   expect(ra.nguoi_quanh[1].chan_dung).toBe("BÍ MẬT");
   expect(JSON.stringify(ra.chuong[1])).not.toContain("BÍ MẬT");
 });
+
+test("Bát tự cùng khuôn: 6 người quanh bạn, la bàn nghề theo hai cách lấy dụng thần", async ({ page }) => {
+  await napHoSo(page, HO_SO_MAU);
+  await page.goto("/bat-tu");
+  const [res] = await Promise.all([
+    page.waitForResponse((r) => r.url().endsWith("/api/battu/luan-giai")),
+    page.getByRole("button", { name: "Xem luận giải" }).click(),
+  ]);
+  const bc = await res.json();
+  expect((bc.nguoi_quanh as unknown[]).length).toBe(6);
+  await expect(page.getByTestId("lg-nguoi-quanh").getByTestId("nguoi-quanh-nut")).toHaveCount(6);
+  const sn = page.getByTestId("lg-chuong-su_nghiep");
+  await sn.getByTestId("lg-mo-chuong").click();
+  await expect(sn.getByTestId("lh-cau")).toHaveCount(8);
+  await expect(sn.getByTestId("lh-hanh")).toHaveCount(5);
+  // nhãn ba mức của la bàn do engine đưa: "Cả hai cách cùng cần / Một cách cần / Không cần thêm"
+  await expect(sn.getByTestId("lh-hanh-chi-tiet")).toContainText(/Cả hai cách cùng cần|Một cách cần|Không cần thêm/);
+  await expect(sn.getByTestId("lh-hoa-giai")).toBeVisible();
+});
+
+test("lời mời chương khoá mang CÂU HỎI chương trả lời, không mang câu trả lời", () => {
+  const ch = (ma: string) => ({ ma, tieu_de: ma, doan: [], luan_hoi: { tra_loi: [{ cau: "Tôi hợp nghề gì?", tra_loi: "BÍ MẬT" }] },
+    moi_xem: { diem_nhan: "", cau_hoi: "?", so_doan: 0, phut_doc: 1, cau_tra_loi: [{ ma: "nghe_hop", cau: "Tôi hợp nghề gì?" }], so_nguoi: 1 } });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const ra = catXemTruoc({ mo_dun: "tuvi", chuong: [ch("a"), ch("su_nghiep")] } as any, 1) as any;
+  expect(ra.chuong[1].moi_xem.cau_tra_loi).toEqual([{ ma: "nghe_hop", cau: "Tôi hợp nghề gì?" }]);
+  expect(JSON.stringify(ra.chuong[1])).not.toContain("BÍ MẬT");
+});
+
+test("thẻ chương khoá hiện câu hỏi chương trả lời; bấm một câu = mở luồng Sao", async ({ page }) => {
+  const moi = { diem_nhan: "", cau_hoi: "Bạn thật sự tìm gì ở người bạn đời?", so_doan: 2, phut_doc: 3, so_nguoi: 1,
+    cau_tra_loi: [{ ma: "hanh_phuc", cau: "Hôn nhân của tôi có hạnh phúc không?" }, { ma: "ben", cau: "Tôi một đời vợ chồng hay dễ dang dở, ly dị?" }] };
+  const xemTruoc = { mo_dun: "tuvi", ket: "Kết.", trang_thai: "nhap_ai", dien_dat: "mau", so_khoa: 1,
+    chuong: [{ ma: "tong_quan", tieu_de: "Con người bạn", doan: ["Đoạn mở miễn phí."] }, { ma: "tinh_cam", tieu_de: "Tình yêu & hôn nhân", khoa: true, moi_xem: moi }],
+    phi: { sao: 99, ly_do: "xem_truoc", khoa: true, dang_nhap: false, so_du: null, thuong_chao_mung: 10 } };
+  let moKhoa = 0;
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: true, gia: 99 } }));
+  await page.route("**/api/tuvi/luan-giai", (r) => {
+    if (r.request().headers()["x-mo-khoa"] === "1") { moKhoa += 1; return r.fulfill({ status: 402, json: { error: "Đăng nhập để mở.", can: "dang_nhap", gia: 99, thuong: 10 } }); }
+    return r.fulfill({ json: xemTruoc });
+  });
+  await napHoSo(page, HO_SO_MAU);
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  const khoa = page.getByTestId("lg-phan-khoa");
+  await expect(khoa.getByTestId("lg-khoa-dan")).toContainText("trả lời thẳng 2 câu bạn hay hỏi");
+  await expect(khoa.getByTestId("lg-khoa-cau")).toContainText("Chương này trả lời");
+  await expect(khoa.getByTestId("lg-khoa-cau-nut")).toHaveCount(2);
+  await expect(khoa).toContainText("Kèm chân dung 1 người liên quan");
+  if (process.env.CHUP) await khoa.screenshot({ path: process.env.CHUP });
+  await khoa.locator('[data-testid="lg-khoa-cau-nut"][data-ma="ben"]').click();
+  await expect(page.getByTestId("hop-thoai-sao")).toBeVisible();
+  expect(moKhoa).toBe(1);
+});
+

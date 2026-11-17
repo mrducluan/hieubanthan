@@ -213,3 +213,23 @@ def test_duoi_18_tuoi_va_ban_tieng_anh_khong_co_lop_nay():
 def test_tat_dinh(cac_bc):
     lai = tvd.lap(SINH[0], NGAY_XEM)
     assert json.dumps(lai, ensure_ascii=False, sort_keys=True) == json.dumps(cac_bc[0], ensure_ascii=False, sort_keys=True)
+
+
+def test_loi_moi_chuong_khoa_chi_mang_cau_hoi():
+    """SAO-2: lời mời của chương khoá nêu các CÂU HỎI chương trả lời (chữ cố định của KB) — không câu trả lời, không nhãn."""
+    from app.luangiai import toan_bo
+    bc = toan_bo.tuvi(SINH[0], NGAY_XEM)
+    for c in bc["chuong"]:
+        m = c["moi_xem"]
+        if "luan_hoi" not in c:
+            assert "cau_tra_loi" not in m
+            continue
+        assert m["cau_tra_loi"] == [{"ma": t["ma"], "cau": t["cau"]} for t in c["luan_hoi"]["tra_loi"]] and m["so_nguoi"] == len(c["luan_hoi"]["nguoi"])
+        lo = json.dumps(m, ensure_ascii=False)
+        assert not any(t["tra_loi"] in lo or t["nhan"] in lo.split('"') for t in c["luan_hoi"]["tra_loi"])
+    bt = toan_bo.battu({"lich": dt.datetime(1990, 5, 17, 12, 30), "gioi_tinh": "nu"}, NGAY_XEM)
+    assert sum(len(c["moi_xem"].get("cau_tra_loi", [])) for c in bt["chuong"]) == 27
+    # Bài lưu vào tài khoản bị chặn ở 256 KB (migration 0017) — lớp mới không được đẩy báo cáo sát trần.
+    for x in (bc, bt):
+        assert len(json.dumps(x, ensure_ascii=False).encode()) < 190_000
+

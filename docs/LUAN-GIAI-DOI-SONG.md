@@ -699,3 +699,21 @@ cho người thuộc chương khoá (bản đồ vẫn vẽ đủ 7 nút, nút k
 **Chưa làm.** Bát tự cùng khuôn (chi ngày = phối ngẫu, thập thần → nghề, hành hai cách cho la bàn nghề); bản tiếng Anh; nối
 câu trả lời thẳng vào hỏi đáp Tử vi; sửa câu tóm tắt chương còn gượng và chương "Mảng đời nào kéo mảng đời nào" lặp mẫu câu.
 
+## 12. LH-2 — Bát tự cùng khuôn + lời mời chương khoá (2026-11-17)
+
+`engine/app/luangiai/battu_luan_hoi.py` cho ra đúng hình dạng `luan_hoi` / `nguoi_quanh` của mục 11. Khác Tử vi ở nguồn dữ kiện:
+
+| Phần | Tử vi | Bát tự |
+|---|---|---|
+| Người | sao chính của cung người ấy | thập thần: chi ngày (vợ chồng), Ấn, Tỷ Kiếp, Quan Sát, Thực Thương, sao con theo giới |
+| Hai chiều tác động | can cung phi tứ hoá | thế của nhóm với thân: đỡ · đậm quá sức · mờ · vừa |
+| Nghề | sao Quan Lộc + Mệnh | cách cục tháng sinh; thân yếu mà cách "làm chủ" thì khuyên đi bằng tay nghề trước |
+| La bàn nghề | hành của sao ba cung | hành hai cách lấy dụng thần — cùng cần / một cách cần, không chọn thay |
+| Năm chậm của mảng | `chu_y_nam.tuvi_nam_cung` | `chu_y_nam.battu_nam` |
+| Năm có duyên | Hồng Loan / Thiên Hỷ lưu | can năm là sao vợ chồng, hai cách không thấy cần lưu ý |
+
+Dấu hiệu của chương dùng cùng bộ mã với Tử vi (`loc, cat, sang, ky, sat, ham, cham, co_qua, dao, ma`) nên hoá giải và "Điểm
+đỡ / Điểm vướng" lấy từ một kho lời. Câu trả lời tra KB Bát tự trước, không có thì dùng ô chung của Tử vi.
+
+**Lời mời chương khoá** (`toan_bo._moi_xem`): thêm `cau_tra_loi` = [{mã, câu hỏi}] và `so_nguoi`. Chỉ câu hỏi; rà soát liên kết
+với thu Sao ở `docs/RA-SOAT-LUAN-HOI-VA-THU-SAO.md`.

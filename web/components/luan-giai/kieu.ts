@@ -131,6 +131,8 @@ export interface NguoiQuanh {
 export interface NamMang { nam: number; tuoi: number; muc: Muc; nhan_muc: string; y: string; hy: boolean; noi: boolean; hien_tai: boolean; can_cu: string[] }
 export interface LaBanNghe {
   hanh: { hanh: string; nganh: string; cap: "chinh" | "phu" | "" }[]; noi_bat: string | null; cau: string; can_cu: string[];
+  /** Bát tự: nhãn ba mức theo hai cách lấy dụng thần (không có → nhãn mặc định của khung). */
+  nhan?: { chinh?: string; phu?: string; khong?: string };
 }
 export interface HoaGiai {
   phat_huy: string[]; can_sua: string[]; canh_bao: string[]; dan_gian: { loi: string; duong?: string }[]; ghi_chu_dan_gian: string;

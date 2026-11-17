@@ -1,0 +1,279 @@
+{
+  "_nguon": "LH-2 (2026-11-17) — lớp 'Luận theo câu hỏi' của Luận giải Bát tự đời sống. Ban biên tập viết lại theo cách xem lục thân và nghề nghiệp của Tử Bình (Tử Bình Chân Thuyên «Luận cung phận dụng thần phối lục thân», Uyên Hải Tử Bình phần lục thân). Câu trả lời dùng chung với Tử vi nằm ở tuvi_luan_hoi_kb.json; tệp này chỉ giữ phần riêng của Bát tự. Nháp, chờ chuyên gia đọc soát.",
+  "source_id": "battu_tu_binh",
+  "school_id": "tu_binh",
+  "trang_thai": "nhap_ai",
+  "can_doi_chieu": true,
+  "vai": {
+    "phoi_ngau": {
+      "ten": "Vợ / chồng",
+      "ten_nam": "Vợ",
+      "ten_nu": "Chồng",
+      "goi": "người ấy",
+      "chuong": "tinh_cam"
+    },
+    "cha_me": {
+      "ten": "Cha mẹ",
+      "goi": "cha mẹ",
+      "chuong": "gia_dinh",
+      "nhom": "Ấn"
+    },
+    "con": {
+      "ten": "Con cái",
+      "goi": "con",
+      "chuong": "gia_dinh"
+    },
+    "anh_em": {
+      "ten": "Anh chị em, bạn bè",
+      "goi": "anh chị em, bạn bè",
+      "chuong": "gia_dinh",
+      "nhom": "Tỷ Kiếp"
+    },
+    "sep": {
+      "ten": "Sếp, bề trên",
+      "goi": "sếp",
+      "chuong": "su_nghiep",
+      "nhom": "Quan Sát"
+    },
+    "nguoi_ngoai": {
+      "ten": "Cấp dưới, khách hàng",
+      "goi": "cấp dưới, khách hàng",
+      "chuong": "quan_he",
+      "nhom": "Thực Thương"
+    }
+  },
+  "thap_than_nguoi": {
+    "Chính Quan": {
+      "kieu": "người đứng đắn, nề nếp, trọng trách nhiệm và giữ lời",
+      "song": "Tôn trọng nguyên tắc của họ; việc gì cũng nói trước, đừng để họ bị bất ngờ."
+    },
+    "Thất Sát": {
+      "kieu": "người quyết liệt, mạnh mẽ, có uy và hơi nóng",
+      "song": "Đừng đối đầu lúc họ đang căng; nói ngắn, rõ, và giữ đúng điều đã hứa."
+    },
+    "Chính Tài": {
+      "kieu": "người chăm chỉ, thực tế, biết vun vén và giữ của",
+      "song": "Minh bạch chuyện tiền bạc với họ; họ yên tâm khi mọi thứ có kế hoạch."
+    },
+    "Thiên Tài": {
+      "kieu": "người tháo vát, hào phóng, quen rộng và giỏi xoay xở",
+      "song": "Cho họ không gian giao thiệp, đổi lại hãy thống nhất rõ chuyện chi tiêu lớn."
+    },
+    "Chính Ấn": {
+      "kieu": "người hiền hậu, biết che chở, trọng học hành và nề nếp",
+      "song": "Hỏi ý họ khi phân vân; họ thấy được tin cậy thì càng hết lòng."
+    },
+    "Thiên Ấn": {
+      "kieu": "người sâu sắc, kín đáo, nghĩ nhiều và có sở thích riêng",
+      "song": "Cho họ khoảng lặng; đừng ép họ nói ngay khi chưa sẵn sàng."
+    },
+    "Thực Thần": {
+      "kieu": "người ôn hoà, biết hưởng thụ, khéo tay và dễ gần",
+      "song": "Cùng ăn, cùng chơi với họ là cách gần nhất; việc gấp thì nhắc nhẹ."
+    },
+    "Thương Quan": {
+      "kieu": "người thông minh, sắc sảo, có tài và nói thẳng",
+      "song": "Ghi nhận tài của họ trước rồi mới góp ý; đừng tranh hơn thua bằng lời."
+    },
+    "Tỷ Kiên": {
+      "kieu": "người ngang tuổi, ngang sức với bạn, độc lập và có chính kiến",
+      "song": "Đối đãi sòng phẳng như bạn bè; việc chung chia rõ phần ai nấy làm."
+    },
+    "Kiếp Tài": {
+      "kieu": "người nhanh nhẹn, giao thiệp rộng, mạnh tay trong chuyện tiền",
+      "song": "Tách rõ tiền chung và tiền riêng ngay từ đầu; khoản lớn hai người cùng quyết."
+    }
+  },
+  "chan_dung_mau": {
+    "phoi_ngau": "{vai} thường là {kieu}.",
+    "ro": "Trong lá số, {goi} có mặt rõ: đây là mối quan hệ có ảnh hưởng thật tới đời bạn.",
+    "dam": "Trong lá số, {goi} chiếm phần rất lớn: họ ảnh hưởng mạnh tới các quyết định của bạn.",
+    "mong": "Trong lá số, {goi} có mặt mờ: tình cảm vẫn có nhưng mỗi người thường tự lo phần mình.",
+    "vang": "Trong lá số, {goi} gần như vắng mặt: bạn sớm quen tự xoay xở, ít dựa vào mối quan hệ này.",
+    "con_dam": "Sao con cái trong lá số rất đậm: con chiếm phần lớn tâm sức của bạn.",
+    "con_ro": "Sao con cái trong lá số có mặt rõ: con là mối gắn bó thật và ảnh hưởng nhiều tới lựa chọn của bạn.",
+    "con_mong": "Sao con cái trong lá số mỏng: chuyện con cái đến chậm hơn dự tính, hoặc bạn và con cần thời gian mới hiểu nhau.",
+    "con_vang": "Sao con cái trong lá số mờ: chuyện con cái thường đến muộn và cần bạn chủ động nhiều hơn người khác."
+  },
+  "tac_dong": {
+    "Ấn": {
+      "hop": "Cha mẹ, nhất là mẹ, là nguồn đỡ thật cho bạn: lời khuyên và sự che chở của họ đúng thứ bạn cần.",
+      "nang": "Cha mẹ lo cho bạn nhiều tới mức bạn dễ ỷ lại hoặc thấy bị bao bọc quá.",
+      "mo": "Bạn ít được dựa vào cha mẹ; phần lớn việc đời bạn tự học lấy.",
+      "vua": "Cha mẹ ảnh hưởng tới bạn ở mức vừa phải: có nền nếp nhưng không trói buộc."
+    },
+    "Tỷ Kiếp": {
+      "hop": "Anh chị em, bạn bè tiếp sức cho bạn: có họ bạn vững hơn hẳn.",
+      "nang": "Anh chị em, bạn bè dễ kéo tiền và thời gian của bạn đi; giúp thì giúp, nhưng cần giới hạn.",
+      "mo": "Bạn ít người ngang hàng để dựa; việc khó thường phải tự gánh.",
+      "vua": "Anh chị em, bạn bè với bạn ở mức thường: lúc cần vẫn có nhau."
+    },
+    "Quan Sát": {
+      "hop": "Sếp và khuôn khổ là thứ đẩy bạn lên: có người yêu cầu cao, bạn làm tốt hơn.",
+      "nang": "Sếp và áp lực từ trên thường nặng hơn sức bạn gánh; bạn dễ căng và nhận phần thiệt.",
+      "mo": "Bạn ít chịu ai quản; hợp chỗ tự chủ hơn chỗ nhiều tầng cấp trên.",
+      "vua": "Sếp với bạn ở mức vừa phải: có yêu cầu nhưng không đè."
+    },
+    "Thực Thương": {
+      "hop": "Bạn dạy dỗ, dẫn dắt người dưới tốt: cấp dưới, học trò, khách hàng là nơi tài của bạn có chỗ dùng.",
+      "nang": "Bạn dồn quá nhiều sức cho người dưới và cho việc thể hiện, tới mức tự hao mình.",
+      "mo": "Bạn ít nói ra, ít dạy lại; người dưới khó hiểu bạn muốn gì.",
+      "vua": "Bạn với cấp dưới, khách hàng ở mức thường: rõ việc là êm."
+    },
+    "Tài": {
+      "hop": "Bạn nắm và điều khiển được tiền bạc, công việc; người phụ thuộc vào bạn được nhờ.",
+      "nang": "Tiền và trách nhiệm nuôi người khác nhiều hơn sức bạn kham; bạn dễ kiệt vì lo cho cả nhà.",
+      "mo": "Bạn ít bận tâm chuyện nắm giữ; người thân có khi thấy thiếu chỗ dựa vật chất từ bạn.",
+      "vua": "Bạn lo được phần vật chất cho người thân ở mức vừa sức."
+    },
+    "phoi_ngau": {
+      "hop": "Người ấy là chỗ đỡ cho bạn: có họ, việc của bạn thuận hơn.",
+      "nang": "Người ấy ảnh hưởng lên bạn mạnh hơn mức bạn chịu được; bạn dễ nhường tới mức mất phần mình.",
+      "mo": "Người ấy ít can dự vào đời sống riêng của bạn; hai người dễ thành mỗi người một việc.",
+      "vua": "Hai người ảnh hưởng nhau ở mức vừa phải, không ai lấn ai.",
+      "xung": "Hai người dễ va nhau ở nếp sống hằng ngày; càng ở gần càng cần luật nói chuyện rõ ràng.",
+      "hop_chi": "Hai người có sự gắn bó tự nhiên: giận nhau cũng dễ tìm về."
+    },
+    "con": {
+      "hop": "Con là niềm vui và là nơi bạn dồn tâm sức; bạn dạy con bằng chính nếp sống của mình.",
+      "nang": "Bạn lo cho con nhiều tới mức dễ làm thay; con cần khoảng để tự làm.",
+      "mo": "Bạn với con hiểu nhau chậm; cần chủ động dành thời gian riêng cho con.",
+      "vua": "Bạn với con ở mức thường: gần gũi vừa đủ.",
+      "xung": "Bạn với con dễ trái ý nhau khi con lớn; nói bằng thoả thuận thay cho mệnh lệnh."
+    }
+  },
+  "cach_nghe": {
+    "chinh_quan": {
+      "kieu": "to_chuc",
+      "viec": "việc có khuôn khổ, chức danh rõ và đường thăng tiến từng bậc",
+      "nganh": [
+        "hành chính công, quản lý",
+        "pháp chế, kiểm soát",
+        "tổ chức lớn, tập đoàn"
+      ]
+    },
+    "that_sat": {
+      "kieu": "chu",
+      "viec": "việc khó, cần quyết nhanh và chịu áp lực",
+      "nganh": [
+        "quản lý dự án, điều hành",
+        "quân đội, công an, an ninh",
+        "khởi nghiệp, kinh doanh cạnh tranh"
+      ]
+    },
+    "chinh_tai": {
+      "kieu": "to_chuc",
+      "viec": "việc làm ra tiền đều, tích luỹ bằng công sức và sự chăm chỉ",
+      "nganh": [
+        "kế toán, tài chính",
+        "quản lý vận hành, kho quỹ",
+        "kinh doanh ổn định, bán lẻ"
+      ]
+    },
+    "thien_tai": {
+      "kieu": "chu",
+      "viec": "việc xoay vốn, giao thiệp và nắm cơ hội",
+      "nganh": [
+        "kinh doanh, thương mại",
+        "bán hàng, môi giới",
+        "đầu tư, phát triển thị trường"
+      ]
+    },
+    "chinh_an": {
+      "kieu": "chuyen_mon",
+      "viec": "việc cần học sâu, bằng cấp và sự tin cậy",
+      "nganh": [
+        "giáo dục, đào tạo",
+        "y dược, chăm sóc",
+        "nghiên cứu, hành chính sự nghiệp"
+      ]
+    },
+    "thien_an": {
+      "kieu": "chuyen_mon",
+      "viec": "việc chuyên sâu, ngách hẹp, cần nghĩ độc lập",
+      "nganh": [
+        "nghiên cứu, kỹ thuật chuyên ngành",
+        "công nghệ, phân tích dữ liệu",
+        "nghệ thuật, tư vấn chuyên sâu"
+      ]
+    },
+    "thuc_than": {
+      "kieu": "chuyen_mon",
+      "viec": "việc làm bằng tay nghề và đem lại sự dễ chịu cho người khác",
+      "nganh": [
+        "ẩm thực, dịch vụ",
+        "nghề thủ công, sáng tạo",
+        "giảng dạy, chăm sóc"
+      ]
+    },
+    "thuong_quan": {
+      "kieu": "chuyen_mon",
+      "viec": "việc cần tài riêng, lời nói và ý tưởng mới",
+      "nganh": [
+        "sáng tạo, thiết kế, truyền thông",
+        "luật, diễn thuyết, đào tạo",
+        "nghề tự do, chuyên gia độc lập"
+      ]
+    },
+    "ty_kiep": {
+      "kieu": "chu",
+      "viec": "việc tự đứng tên, cùng làm với người ngang hàng",
+      "nganh": [
+        "tự kinh doanh, hùn hạp",
+        "nghề tự do, thể thao",
+        "bán hàng, việc cần sức bền"
+      ]
+    }
+  },
+  "nghe_mau": {
+    "tl": "Bạn hợp nhất với {viec}. Nhóm nghề gần nhất: {nganh}.",
+    "hanh_ca_hai": "Về ngũ hành, cả hai cách đọc lá số đều thấy bạn cần thêm hành {hanh}: nhóm ngành {nganh} là nơi bạn dễ được tiếp sức.",
+    "hanh_mot": "Về ngũ hành, hai cách đọc lá số nêu hành khác nhau: {ds}. Ngành thuộc các hành này đều đáng thử; hệ thống không chọn thay bạn.",
+    "nhan": {
+      "chinh": "Cả hai cách cùng cần",
+      "phu": "Một cách cần",
+      "khong": "Không cần thêm"
+    },
+    "than_yeu": "Sức của lá số còn mỏng, nên đi đường này bằng tay nghề hoặc làm trong một tổ chức trước; chưa nên tự đứng vốn một mình."
+  },
+  "tra_loi": {
+    "kiem_bang_gi": {
+      "chinh_tai": {
+        "tl": "Bạn hợp kiếm tiền đều bằng công việc chính: lương, thu nhập cố định, tích luỹ từng tháng.",
+        "gt": "Tiền của bạn là tiền công sức. Nguồn đều và kỷ luật để dành hợp với bạn hơn các khoản nhanh."
+      },
+      "thien_tai": {
+        "tl": "Bạn hợp kiếm tiền bằng kinh doanh, xoay vốn và nhiều nguồn cùng lúc.",
+        "gt": "Tiền của bạn đến theo đợt, từ quan hệ và cơ hội. Cần một quỹ dự phòng cho những tháng trống."
+      },
+      "thuc_thuong": {
+        "tl": "Bạn hợp kiếm tiền bằng tay nghề và sản phẩm của chính mình: càng giỏi nghề càng có tiền.",
+        "gt": "Tiền đi sau tài năng. Đầu tư vào kỹ năng và tên tuổi là cách sinh lời chắc nhất của bạn."
+      },
+      "quan_an": {
+        "tl": "Bạn hợp kiếm tiền qua vị trí và chuyên môn: lên chức, lên bậc thì thu nhập lên theo.",
+        "gt": "Lá số của bạn nghiêng về danh hơn lợi. Đừng bỏ đường nghề để chạy theo khoản nhanh."
+      }
+    },
+    "hanh_phuc": {
+      "thuan": {
+        "tl": "Có. Mảng vợ chồng trong lá số của bạn thuộc loại thuận: hôn nhân là chỗ bạn dựa được.",
+        "gt": "Điều giữ cho nó bền là hai người còn làm việc chung và còn nói chuyện được với nhau."
+      }
+    },
+    "quy_nhan": {
+      "nhieu": {
+        "tl": "Có, và nhiều. Lá số của bạn có nhiều sao quý nhân: lúc khó thường có người đưa tay.",
+        "gt": "Quý nhân đến với người chịu mở lời; cần gì hãy nói ra."
+      },
+      "co": {
+        "tl": "Có người giúp đúng lúc, không nhiều nhưng thật.",
+        "gt": "Giữ mối ấy bằng cách đáp lại khi họ cần."
+      }
+    }
+  },
+  "dong_mang": {
+    "hy": "năm sao vợ chồng tới, có duyên gặp gỡ, cưới hỏi",
+    "thuan": "hai cách đọc cùng thấy năm này đỡ cho mảng này"
+  }
+}
