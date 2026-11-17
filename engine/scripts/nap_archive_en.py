@@ -27,6 +27,14 @@ SACH: dict[str, dict] = {
         id="philosophyofnum00ball", tep="philosophyofnum00ball", sach="The Philosophy of Numbers: Their Tone and Colors",
         tac_gia="Mrs. L. Dow Balliett", mat=1929, nam=1908, ban="bản in lại 1917", mang="thanso",
         dung="gốc của thần số học Pythagoras hiện đại: bảng chữ 1–9, số tên, số ngày sinh, 11 và 22"),
+    "thanso_balliett_success_1905": dict(
+        id="howtoattainsucce00ball", tep="howtoattainsucce00ball", sach="How to Attain Success Through the Strength of Vibration",
+        tac_gia="Mrs. L. Dow Balliett", mat=1929, nam=1905, ban="bản in lại 1917", mang="thanso",
+        dung="sách đầu tiên của Balliett: cách tính số tên + số ngày sinh, ví dụ tính (11 và 22 không cộng) → ca đối chiếu"),
+    "chi_tay_saint_germain_1897": dict(
+        id="practicalpalmist00sain", tep="practicalpalmist00sain", sach="Practical Palmistry",
+        tac_gia="Comte C. de Saint-Germain", mat=1910, nam=1897, ban="bản in 1897", mang="chi_tay",
+        dung="kho tình huống minh hoạ từng dấu trên đường chỉ — đối chiếu Benham, Cheiro"),
     "thanso_balliett_day_of_wisdom_1917": dict(
         id="dayofwisdomaccor00ball", tep="dayofwisdomaccor00ball", sach="The Day of Wisdom According to Number Vibration",
         tac_gia="Mrs. L. Dow Balliett", mat=1929, nam=1917, ban="bản in 1917", mang="thanso",

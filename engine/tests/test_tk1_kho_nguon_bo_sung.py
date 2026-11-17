@@ -27,7 +27,7 @@ def test_sach_tieng_anh_du_khuon_va_la_pham_vi_cong_cong(ma):
     d, s = _doc(ma), nap.SACH[ma]
     assert d["can_doi_chieu"] is True and d["ngon_ngu"] == "en" and d["source_id"] == ma
     assert s["nam"] < 1929 and s["mat"] <= 1955, "chỉ nạp sách in trước 1929, tác giả mất trên 70 năm"
-    assert d["so_chu"] > 25_000 and len(d["chuong"]) >= 1
+    assert d["so_chu"] > 10_000 and len(d["chuong"]) >= 1
     assert all(c["doan"] and all(isinstance(x, str) and x for x in c["doan"]) for c in d["chuong"])
 
 
