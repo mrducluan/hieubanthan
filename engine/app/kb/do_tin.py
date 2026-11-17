@@ -29,6 +29,8 @@ def _nv(kho: str, test: str, ghi_chu: str = "") -> dict:
 # tệp → {"muc": mức mặc định của tệp, "mang": mảng, "phan": {khoá gốc trong tệp: mức riêng}, "ghi_chu"}
 SO: dict[str, dict] = {
     # ---- Bát tự
+    "battu_ngay_gio.json": {"mang": "battu", **_nv("tam_menh_thong_hoi_du_bo.json", "tests/test_tk2_battu_ngay_gio.py::test_han_la_chuoi_con_kho_nguon_dung_muc",
+                                                "TK-2: 120 bài ca chung «六X日Y時斷» quyển 8–9, mỗi câu đúng mục can ngày × giờ")},
     "battu_sach_ghi.json": {"mang": "battu", **_nv("tam_menh_thong_hoi.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                 "SX-C: câu Tam Mệnh Thông Hội + Uyên Hải Tử Bình (thần sát, thập thần, lục thân, tính nết, thân thể) khớp kho nguồn")},
     "battu_dieu_hau.json": {"mang": "battu", **_nv("cung_thong_bao_giam.json", f"{_T}::test_dieu_hau_khop_nguyen_van_tung_o")},

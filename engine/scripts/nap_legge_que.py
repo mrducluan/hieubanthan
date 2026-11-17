@@ -267,18 +267,22 @@ def _tu_la(van: str, dem: Counter, ocr: Counter | None = None) -> list[str]:
             la.append(w)
             continue
         t = w.lower()
+        if t in TU_DA_SOAT:
+            continue
         if not re.search(r"[aeiouy]", t):
             la.append(w)                # không nguyên âm («tt», «rn»)
             continue
-        dinh = any((t[:i] in _TU_NGAN and _biet(t[i:], dem)) or (t[i:] in _TU_NGAN and _biet(t[:i], dem))
-                   for i in (1, 2, len(t) - 2, len(t) - 1) if 0 < i < len(t))
+        def tu_that(x: str) -> bool:
+            return x in _TU_NGAN or (bool(re.search(r"[aeiouy]", x)) and dem[x] >= 50)
+        dinh = any((t[:i] in _TU_NGAN and tu_that(t[i:])) or (t[i:] in _TU_NGAN and tu_that(t[:i]))
+                   for i in (1, 2, 3, len(t) - 3, len(t) - 2, len(t) - 1) if 0 < i < len(t))
         if dinh and len(t) <= 5 and dem[t] < 20 and ocr[t] < 50:
             la.append(w)                # hai từ dính nhau do mất khoảng trắng («toa» = to a, «Ifhe» = If he)
             continue
         if _biet(t, dem):
             continue
-        if ocr[t] >= 3 and len(t) >= 4:
-            continue                    # từ dài gặp lại ≥ 3 lần trong các sách cũ
+        if ocr[t] >= 3 and len(t) >= 3:
+            continue                    # từ gặp lại ≥ 3 lần trong các sách cũ
         if w[:1].isupper() and ocr[t] >= 3:
             continue                    # tên riêng (Ho, Shang…)
         la.append(w)
@@ -316,7 +320,16 @@ def tu_vung() -> tuple[Counter, Counter]:
 
 # Từ tiếng Anh có thật nhưng chỉ gặp một lần trong cả kho nguồn tiếng Anh — đã soát bằng mắt trong ngữ cảnh câu
 # (không phải chữ thêm vào lời Legge; chỉ để bộ soát từ lạ không loại oan).
-TU_DA_SOAT = {"perchance", "headship", "bloodshed", "blamable", "hog", "assailant", "overspreading", "aprons", "jawbones"}
+TU_DA_SOAT = {
+    "perchance", "headship", "bloodshed", "blamable", "hog", "assailant", "overspreading", "aprons", "jawbones",
+    "assailed", "dispelling", "shackles", "inefficient", "unintermitting", "bravo", "boat", "fluttering", "comporting",
+    "comport", "reciprocated", "darkened", "clung", "befits", "peeping", "bedewed", "matrimonial", "overthrowing",
+    "overthrowers", "accused", "revenues", "aliment", "efficacious", "unwavering", "impels", "torrents", "punitive",
+    "binders", "tranquillity", "derisively", "enriching", "bye", "unbends", "suspending", "purslain", "uprooted",
+    "medlar", "stump", "anon", "creepers", "muddy", "shrimps", "limpid", "blush", "shame", "suppressed", "tramp",
+    "protracting", "slaughtering", "noon", "exorcists", "prescribes", "chanticleer", "subduing", "invading", "dismay",
+    "mei",
+}
 _TU_NGAN = {"a", "i", "to", "of", "in", "on", "at", "he", "if", "it", "is", "be", "as", "by", "or", "an", "we", "me",
             "my", "no", "so", "up", "do", "go", "us", "the", "and", "his", "her"}
 _KHONG_PHAI_TEN = {"in", "under", "for", "when", "the", "it", "if", "there", "of", "looking", "at", "what", "takes", "place"}
@@ -438,8 +451,14 @@ def kiem(ds: list[dict], chuong: list[dict], han: dict | None = None, kho: tuple
                 ly.append(f"{ten}:lech_ngoac")
             if van.count("‘") > len(re.findall(r"’(?![a-z])", van)) or van.count("“") != van.count("”"):
                 ly.append(f"{ten}:lech_nhay")
-            if ".." in van or " ," in van:
+            if (".." in van or " ," in van or ".," in van or re.search(r"\. [a-z]", van)
+                    or re.search(r", (There|It|He|The|If|But|Let|In|With) ", van)
+                    or any(w not in ("Heaven", "Mean") and dem[w.lower()] >= 50
+                           for w in re.findall(r"(?<=[a-z,] )([A-Z][a-z]+)", van))):
                 ly.append(f"{ten}:dau_cau_la")
+            if re.search(r"\b(Appendix|Appendixes|trigrams?|paragraphs?|Thwan|Regis|Khang|commentar\w*|the writer|Hsi says)\b"
+                         r"|\b[Ll]ines? \d", van):
+                ly.append(f"{ten}:lan_chu_thich")
         if han:
             hq = han[str(q["so"])]
             for ten, van, h in [("que_tu", qt, hq["que_tu"]["han"])] + [(f"hao_{i + 1}", v_, hq["hao"][i]["han"]) for i, v_ in enumerate(hao[:6])]:
