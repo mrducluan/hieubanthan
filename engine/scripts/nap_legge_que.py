@@ -411,6 +411,7 @@ def kiem(ds: list[dict], chuong: list[dict], han: dict | None = None, kho: tuple
     for w in TU_DA_SOAT:
         dem[w] += 2
     kw = vach_king_wen()
+    ten_rieng = {w for q in ds for t in q["_ten_ung"] for w in t.split()}
     for q in ds:
         ly = list(q.pop("_loi"))
         thu_tu = q.pop("_thu_tu", [])
@@ -453,7 +454,7 @@ def kiem(ds: list[dict], chuong: list[dict], han: dict | None = None, kho: tuple
                 ly.append(f"{ten}:lech_nhay")
             if (".." in van or " ," in van or ".," in van or re.search(r"\. [a-z]", van)
                     or re.search(r", (There|It|He|The|If|But|Let|In|With) ", van)
-                    or any(w not in ("Heaven", "Mean") and dem[w.lower()] >= 50
+                    or any(w not in ("Heaven", "Mean") and w not in ten_rieng and dem[w.lower()] >= 50
                            for w in re.findall(r"(?<=[a-z,] )([A-Z][a-z]+)", van))):
                 ly.append(f"{ten}:dau_cau_la")
             if re.search(r"\b(Appendix|Appendixes|trigrams?|paragraphs?|Thwan|Regis|Khang|commentar\w*|the writer|Hsi says)\b"
