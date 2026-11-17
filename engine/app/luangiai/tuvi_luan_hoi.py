@@ -155,7 +155,7 @@ def diem_hon_nhan(ls: dict, cc: dict) -> int:
 
 def nhan_ben(ls: dict, cc: dict) -> str:
     d = diem_hon_nhan(ls, cc)
-    return "mot_moi_ben" if d <= 0 else "ben_neu_vun" if d == 1 else "muon_moi_ben" if d <= 3 else "hai_lan_do"
+    return "mot_moi_ben" if d <= 0 else "ben_neu_vun" if d == 1 else "muon_moi_ben" if d == 2 else "hai_lan_do"
 
 
 def _diem_dao(ls: dict, cc: dict, ten: str) -> float:
@@ -164,7 +164,11 @@ def _diem_dao(ls: dict, cc: dict, ten: str) -> float:
 
 
 def nhan_nguoi_thu_ba(ls: dict, cc: dict) -> str:
-    a, b = _diem_dao(ls, cc, "Mệnh") >= NGUONG_DAO, _diem_dao(ls, cc, "Phu Thê") >= NGUONG_DAO
+    # chủ dự án 2026-11-17 ("nói mạnh tay hơn"): một phía đủ ngưỡng, HOẶC hai phía cộng lại đủ ngưỡng (nghiêng về phía nặng hơn)
+    da, db = _diem_dao(ls, cc, "Mệnh"), _diem_dao(ls, cc, "Phu Thê")
+    a, b = da >= NGUONG_DAO, db >= NGUONG_DAO
+    if not (a or b) and da + db >= NGUONG_DAO:
+        a, b = da > db, db > da
     return "ca_hai" if a and b else "phia_nguoi_ay" if b else "phia_ban" if a else "it_dau_hieu"
 
 
@@ -607,4 +611,22 @@ def ap(ds_chuong: list[dict], ls: dict, cc: dict, dong: list[dict], tgb: list[di
         if ch == "su_nghiep":
             lh["nghe"] = nghe
         c["luan_hoi"] = lh
+    dat_cau_mau(ds_chuong)
     return list(nq.values())
+
+
+CAU_MAU = ("su_nghiep", "nghe_hop")        # D1: câu trả lời mẫu cho đọc miễn phí ở chương 1
+
+
+def dat_cau_mau(ds_chuong: list[dict]) -> None:
+    """D1 — chép MỘT câu trả lời (hợp nghề gì) sang chương 1 (miễn phí) để người đọc thấy lớp này trước khi mở Sao.
+
+    Chỉ chép câu đã dựng (cùng `ma_mau`), không dựng lời mới; chương gốc giữ nguyên."""
+    if not ds_chuong:
+        return
+    goc = next((c for c in ds_chuong if c["ma"] == CAU_MAU[0] and c.get("luan_hoi")), None)
+    mau = next((t for t in (goc or {}).get("luan_hoi", {}).get("tra_loi", []) if t["ma"] == CAU_MAU[1]), None)
+    if not mau or goc is ds_chuong[0]:
+        return
+    con = sum(len(c["luan_hoi"]["tra_loi"]) for c in ds_chuong if c.get("luan_hoi")) - 1
+    ds_chuong[0]["cau_mau"] = {**mau, "tu_chuong": goc["ma"], "ten_chuong": goc.get("tieu_de", ""), "con": con}

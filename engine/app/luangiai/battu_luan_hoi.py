@@ -162,15 +162,16 @@ def diem_hon_nhan(pt: dict) -> int:
 
 def nhan_ben(pt: dict) -> str:
     d = diem_hon_nhan(pt)
-    return "mot_moi_ben" if d <= 0 else "ben_neu_vun" if d == 1 else "muon_moi_ben" if d <= 3 else "hai_lan_do"
+    return "mot_moi_ben" if d <= 0 else "ben_neu_vun" if d == 1 else "muon_moi_ben" if d == 2 else "hai_lan_do"
 
 
 def nhan_nguoi_thu_ba(pt: dict) -> str:
     g = sao_phoi_ngau(pt)
     tap = (_lo(pt, "Chính Tài") and _lo(pt, "Thiên Tài")) if pt["gioi_tinh"] == "nam" else (_lo(pt, "Chính Quan") and _lo(pt, "Thất Sát"))
     a = (_co_sat(pt, "Đào Hoa") + _co_sat(pt, "Hồng Diễm") + bool(tap)) >= 2          # phía bạn: đào hoa + sao phối ngẫu tạp
-    # người tranh: Tỷ Kiếp đậm, lộ ra từ hai thiên can trở lên, mà sao vợ chồng ít
-    b = pt["muc_do"]["Tỷ Kiếp"] == "dam" and pt["lo"].get("Tỷ Kiên", 0) + pt["lo"].get("Kiếp Tài", 0) >= 2 and pt["muc_do"][g] in ("mong", "vua")
+    # người tranh: Tỷ Kiếp đậm, lộ ra thiên can, mà sao vợ chồng ít (lộ một can thì sao vợ chồng phải mỏng hẳn)
+    lo = pt["lo"].get("Tỷ Kiên", 0) + pt["lo"].get("Kiếp Tài", 0)
+    b = pt["muc_do"]["Tỷ Kiếp"] == "dam" and ((lo >= 2 and pt["muc_do"][g] in ("mong", "vua")) or (lo >= 1 and pt["muc_do"][g] == "mong"))
     return "ca_hai" if a and b else "phia_nguoi_ay" if b else "phia_ban" if a else "it_dau_hieu"
 
 
@@ -523,4 +524,5 @@ def ap(ds_chuong: list[dict], pt: dict, cm: dict, dong: list[dict], tgb: list[di
             nhan["thi_phi"] = "thi_phi"
         c["luan_hoi"] = {"tra_loi": [x for x in tl if x["tra_loi"]], "nguoi": [nq[m] for m in NGUOI_CHUONG.get(ch, ())],
                          "hoa_giai": lh.hoa_giai(ch, tin, dm, nhan, dk), "dong_mang": dm, **({"nghe": nghe} if ch == "su_nghiep" else {})}
+    lh.dat_cau_mau(ds_chuong)
     return list(nq.values())

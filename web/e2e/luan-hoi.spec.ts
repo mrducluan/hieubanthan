@@ -20,6 +20,13 @@ test("báo cáo Tử vi có bản đồ người quanh bạn + năm chương có
   expect(co.map((c) => c.ma).sort()).toEqual(["gia_dinh", "quan_he", "su_nghiep", "tien_bac", "tinh_cam"]);
   expect((bc.nguoi_quanh as unknown[]).length).toBe(7);
 
+  // D1: chương 1 (miễn phí) có đúng một câu trả lời mẫu "hợp nghề gì", bấm nút thì mở chương Công việc.
+  const mau = page.getByTestId("lg-chuong-" + bc.chuong[0].ma).getByTestId("lh-cau-mau");
+  await expect(mau.locator('[data-testid="lh-cau"][data-ma="nghe_hop"]')).toBeVisible();
+  await expect(mau.getByTestId("lh-cau-mau-nut")).toBeVisible();
+  // … và câu mẫu còn nguyên sau khi cắt bản xem trước (chương 1 miễn phí).
+  expect((catXemTruoc(bc, 1).chuong as { cau_mau?: { ma: string } }[])[0].cau_mau?.ma).toBe("nghe_hop");
+
   // Bản đồ: 7 nút, bấm một người → khung chi tiết đổi theo, có nút tới chương.
   const bd = page.getByTestId("lg-nguoi-quanh");
   await expect(bd.getByTestId("nguoi-quanh-nut")).toHaveCount(7);

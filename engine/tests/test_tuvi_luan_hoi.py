@@ -93,6 +93,7 @@ def test_khong_doi_muc_va_hop_cua_bao_cao():
     co.pop("nguoi_quanh")
     for c in co["chuong"]:
         c.pop("luan_hoi", None)
+        c.pop("cau_mau", None)
     assert json.dumps(co, ensure_ascii=False, sort_keys=True) == json.dumps(khong, ensure_ascii=False, sort_keys=True)
 
 
@@ -156,9 +157,9 @@ def test_phan_bo_nhan_1000_la():
     for k, c in dem.items():
         assert set(c) <= set(lh.NHAN[k]), (k, c)
         assert max(c.values()) <= 820, (k, c)                      # không nhãn nào quá 82 %
-    assert 30 <= dem["ben"]["hai_lan_do"] <= 120                    # 3–12 % lá
+    assert 120 <= dem["ben"]["hai_lan_do"] <= 200                   # 12–20 % lá (chủ dự án nới 2026-11-17)
     assert dem["ben"]["mot_moi_ben"] >= 300
-    assert dem["nguoi_thu_ba"]["it_dau_hieu"] >= 700
+    assert 650 <= dem["nguoi_thu_ba"]["it_dau_hieu"] <= 780         # dấu hiệu người thứ ba 22–35 % lá
     assert dem["som_muon"]["lan_dan"] <= 150
 
 
@@ -233,3 +234,15 @@ def test_loi_moi_chuong_khoa_chi_mang_cau_hoi():
     for x in (bc, bt):
         assert len(json.dumps(x, ensure_ascii=False).encode()) < 190_000
 
+
+
+def test_d1_cau_mau_mien_phi_o_chuong_1(cac_bc):
+    """D1: chương 1 (miễn phí) mang ĐÚNG một câu trả lời chép từ chương Công việc — cùng lời, cùng mã kiểm chứng."""
+    for bc in cac_bc:
+        m = bc["chuong"][0].get("cau_mau")
+        assert m and m["ma"] == "nghe_hop" and m["tu_chuong"] == "su_nghiep" and m["ten_chuong"]
+        goc = next(c for c in bc["chuong"] if c["ma"] == "su_nghiep")["luan_hoi"]["tra_loi"]
+        g = next(t for t in goc if t["ma"] == "nghe_hop")
+        assert all(m[k] == g[k] for k in g)
+        assert m["con"] == sum(len(c["luan_hoi"]["tra_loi"]) for c in bc["chuong"] if "luan_hoi" in c) - 1
+        assert sum("cau_mau" in c for c in bc["chuong"]) == 1

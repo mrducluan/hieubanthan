@@ -682,10 +682,10 @@ dân gian. (3) Tử vi trước, Bát tự sau. (4) Ba hình cốt lõi: bản �
 **Luật nhãn chính** (cân trên 1.000 lá mẫu, `tests/test_tuvi_luan_hoi.py`):
 
 - *Bền hay dang dở* — đếm ở cung Phu Thê: sao cứng (Sát, Phá, Tham, Liêm, Cự, Vũ), sao hãm, Hoá Kỵ, sát tinh (tối đa 2), Tuần /
-  Triệt, Cô Thần / Quả Tú; trừ Hoá Lộc / Khoa, cát tinh, sao hiền sáng. ≤ 0 một mối bền (42 %) · 1 bền nếu vun (23 %) · 2–3 muộn
-  mới bền (28 %) · ≥ 4 dễ hai lần đò (6 %).
+  Triệt, Cô Thần / Quả Tú; trừ Hoá Lộc / Khoa, cát tinh, sao hiền sáng. ≤ 0 một mối bền (42 %) · 1 bền nếu vun (23 %) · 2 muộn
+  mới bền (19 %) · ≥ 3 hai lần đò (16 %; LH-3 2026-11-17, trước là ≥ 4 = 6 %).
 - *Người thứ ba* — Tham Lang / Liêm Trinh (1), Hàm Trì, Thiên Diêu (1), Hồng Loan, Thiên Hỷ (0,5) ở Mệnh (phía bạn) hoặc Phu Thê
-  (phía người ấy); từ 1,5 trở lên mới gọi tên. 81 % lá "ít dấu hiệu".
+  (phía người ấy); một phía từ 1,5 trở lên, hoặc hai phía cộng lại từ 1,5 (nghiêng về phía nặng hơn — LH-3). ~71 % lá "ít dấu hiệu".
 - *Làm chủ hay làm công* — kiểu của sao Quan Lộc (×2), sao Mệnh, Hoá Quyền; ba nhãn chia gần đều.
 - Các nhãn còn lại (giữ tiền, công danh, đi xa, học hành, quý nhân, làm ăn chung, thị phi) ghi ngay trên từng hàm `nhan_*`.
 

@@ -36,7 +36,7 @@ tri thức, giống nhau với mọi lá số, nên hiện ra không lộ gì v�
 
 | # | Việc | Khâu | Cần gì | Em khuyên |
 |---|---|---|---|---|
-| D1 | **Một câu trả lời mẫu miễn phí** ở chương 1 (ví dụ "Tôi hợp nghề gì?") để người đọc thấy chất lượng trước khi trả | NẠP | chỉ engine + web | Làm, đo bằng tỉ lệ mở Sao trước / sau |
+| D1 | **Một câu trả lời mẫu miễn phí** ở chương 1 (ví dụ "Tôi hợp nghề gì?") để người đọc thấy chất lượng trước khi trả | NẠP | chỉ engine + web | **Đã làm 2026-11-17 (LH-3)** |
 | D2 | **Hỏi đáp dùng cùng nhãn**: hỏi "tôi hợp nghề gì" trong khung chat thì trả đúng nhãn của báo cáo và dẫn tới chương | QUAY LẠI + NẠP | engine | Làm sau D1 |
 | D3 | **Trang kiến thức theo câu hỏi** ("hợp nghề gì theo Tử vi", "số hai lần đò là gì") dẫn về công cụ | THU HÚT | engine + web, ~30 trang | Làm khi có số Search Console cho cụm này |
 | D4 | **Thẻ chia sẻ "Người quanh tôi"** (chỉ tên vai + mức, không ngày sinh) | MỜI | web, mã HMAC mới | Chờ: mức của vợ/chồng, cha mẹ là chuyện riêng, dễ ngại chia sẻ |
@@ -47,3 +47,15 @@ tri thức, giống nhau với mọi lá số, nên hiện ra không lộ gì v�
 
 - Bản tiếng Anh của lớp luận (kho lời chưa dịch).
 - Thần số, Phong thuỷ, Nhân tướng, Tarot, Chỉ tay theo khuôn này (anh đã chọn Tử vi rồi Bát tự).
+
+## 6. Việc tiếp theo sau D1 (xếp theo thứ tự em khuyên)
+
+1. **Anh đọc soát kho lời** (27 câu × các nhãn, hai môn) — việc chặn ngày bật thu Sao; không ai làm thay được.
+2. **Đo D1**: sau 2 tuần so tỉ lệ `paywall_viewed → unlock_succeeded` của Tử vi / Bát tự trước và sau; xem phiếu "Đúng với
+   mình" của `ds.*.hoi.ben.hai_lan_do` và `ds.*.hoi.nguoi_thu_ba.*` — nếu < 40 % thấy đúng thì ngưỡng mới đang quá tay.
+3. **D2 — hỏi đáp dùng cùng nhãn với báo cáo** (chỉ engine): hỏi "tôi hợp nghề gì", "có hai lần đò không" trong khung chat
+   trả đúng nhãn của báo cáo và dẫn tới chương. Tránh cảnh chat nói một đằng, báo cáo nói một nẻo.
+4. **Sửa lời còn gượng**: câu tóm tắt vài chương và chương "Mảng đời nào kéo mảng đời nào" còn lặp mẫu.
+5. **D3 — trang kiến thức theo câu hỏi** khi Search Console có số cho cụm này.
+6. **Bản tiếng Anh** của lớp luận (kho lời chưa dịch) và **các môn khác** (Thần số, Phong thuỷ, Nhân tướng) theo cùng khuôn.
+7. D4, D5, D6: chờ số liệu / chờ anh sẵn sàng (xem bảng trên).

@@ -17,7 +17,7 @@ import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 import { KiemChungBai, ViSao } from "./HopNoiBat";
 import { useChuBaoCao } from "./chu-bao-cao";
-import type { HoaGiai, LaBanNghe as KieuLaBan, LuanHoi, Muc, NamMang, NguoiQuanh, TraLoiThang } from "./kieu";
+import type { CauMau as CauMauT, HoaGiai, LaBanNghe as KieuLaBan, LuanHoi, Muc, NamMang, NguoiQuanh, TraLoiThang } from "./kieu";
 
 /** Màu ba mức cho nét SVG (cùng bộ màu chip mức: lục · lam xám · hổ phách — không đỏ). */
 const MAU_MUC: Record<Muc, string> = { thuan: "rgb(111 211 181)", can_bang: "rgb(170 180 214)", can_chu_dong: "rgb(245 170 80)" };
@@ -162,14 +162,33 @@ function ChiTietNguoi({ n, thuatNgu }: { n: NguoiQuanh; thuatNgu?: ThuatNgu[] })
 }
 
 // ------------------------------------------------------------------ trả lời thẳng
-function KhoiTraLoi({ ds, thuatNgu }: { ds: TraLoiThang[]; thuatNgu?: ThuatNgu[] }) {
+/** D1 — câu trả lời mẫu ở chương 1 (miễn phí): cùng thẻ câu trả lời, thêm dòng dẫn sang các chương có lớp này. */
+export function CauMau({ mau, thuatNgu, onMo }: { mau: CauMauT; thuatNgu?: ThuatNgu[]; onMo?: (ma: string) => void }) {
+  const { c: chu } = useChuBaoCao();
+  return (
+    <div data-testid="lh-cau-mau">
+      <KhoiTraLoi ds={[mau]} thuatNgu={thuatNgu} tieuDe={chu("lh.mau_td")} />
+      <p className="mt-2 text-sm leading-relaxed text-fg-muted">
+        {chu("lh.mau_chan", { so: String(mau.con), chuong: mau.ten_chuong })}{" "}
+        {onMo && (
+          <button type="button" onClick={() => onMo(mau.tu_chuong)} data-testid="lh-cau-mau-nut"
+            className="inline-flex min-h-11 items-center font-medium text-gold underline-offset-4 hover:underline print:hidden">
+            {chu("lh.mau_nut")}
+          </button>
+        )}
+      </p>
+    </div>
+  );
+}
+
+function KhoiTraLoi({ ds, thuatNgu, tieuDe }: { ds: TraLoiThang[]; thuatNgu?: ThuatNgu[]; tieuDe?: string }) {
   const giam = useReducedMotion();
   const { c: chu } = useChuBaoCao();
   const { tyLe, phai, tat, loai = "doi_song" } = useContext(KiemChungBai);
   if (!ds.length) return null;
   return (
     <div className="mt-5" data-testid="lh-tra-loi">
-      <h4 className="text-sm font-semibold uppercase tracking-wider text-gold">{chu("lh.tra_loi_td")}</h4>
+      <h4 className="text-sm font-semibold uppercase tracking-wider text-gold">{tieuDe ?? chu("lh.tra_loi_td")}</h4>
       <ol className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
         {ds.map((t, i) => (
           <motion.li key={t.ma} data-testid="lh-cau" data-ma={t.ma} data-nhan={t.nhan}

@@ -615,7 +615,7 @@ KHOA_CHI_EN = {"slug_en", "duong_en", "ten_hien", "ho_tro"}   # ho_tro = đoạn
 # Trường SUY TỪ CHỮ (không phải dữ kiện): thuật ngữ nhận diện trong lời văn — chữ khác ngôn ngữ thì danh sách khác.
 KHOA_THEO_CHU = {"thuat_ngu", "phut_doc",   # phut_doc = số phút đọc, đếm theo chữ của ngôn ngữ
                  "sach_ghi",                  # SX-C: khối "sách xưa ghi" — lời Việt chưa dịch nên CHỈ bản Việt có (bản Anh: None)
-                 "luan_hoi", "nguoi_quanh", "cau_tra_loi", "so_nguoi"}   # LH-1: lớp "Luận theo câu hỏi" Tử vi — KB chưa có bản Anh nên CHỈ bản Việt có
+                 "luan_hoi", "nguoi_quanh", "cau_tra_loi", "so_nguoi", "cau_mau"}   # LH-1: lớp "Luận theo câu hỏi" Tử vi — KB chưa có bản Anh nên CHỈ bản Việt có
 # Danh sách CHỮ mà số phần tử được phép khác theo ngôn ngữ (biến thể tên để nhận diện thuật ngữ trong chữ ngôn ngữ đó).
 DS_CHU_TU_DO = {"bien_the", "khop"}   # khop = cụm chữ trong lời đáp để gạch nối với hình (hỏi đáp) — theo chữ của ngôn ngữ
 

@@ -11,15 +11,15 @@
 - [ ] Mở `/tu-vi` bằng hồ sơ của anh → Xem luận giải: đọc khối "Người quanh bạn" và 5 chương có "Trả lời thẳng những câu bạn
   hay hỏi". Câu nào anh thấy lệch với kinh nghiệm luận của anh thì báo em mã câu (hoặc sửa ở `/quan-tri` → Kho tri thức →
   `tuvi_luan_hoi_kb.json`, Xuất bản = PR).
-- [ ] (Quyết định) Ngưỡng nhãn nặng: hiện "dễ hai lần đò" rơi vào ~6 % lá số, "có dấu hiệu người thứ ba" ~19 %. Muốn nói
-  mạnh tay hơn hay dè hơn thì báo em — đổi một con số trong `tuvi_luan_hoi.py`, test giữ khoảng 3–12 %.
-- [ ] (Quyết định) Mục "Dân gian thường làm": em chỉ ghi tập quán phổ biến (cưới muộn, bán khoán, vía Thần Tài, dâng sao,
-  chọn ngày). Anh muốn thêm / bớt tục nào thì gửi em danh sách.
+- [x] (Quyết định 2026-11-17) Ngưỡng nhãn nặng: anh chọn **nói mạnh tay hơn** → "hai lần đò" nay ~16 % lá Tử vi / ~19 % Bát tự,
+  "có dấu hiệu người thứ ba" ~29 % / ~27 % (LH-3). Muốn chỉnh tiếp: báo em, test giữ khoảng 12–20 % và 22–35 %.
+- [x] (Quyết định 2026-11-17) Mục "Dân gian thường làm": anh duyệt danh sách hiện có.
 - [ ] Bát tự cùng khuôn đã làm (LH-2). Mở `/bat-tu` → Xem luận giải, đọc soát như Tử vi (kho lời riêng:
   `battu_luan_hoi_kb.json`).
 - [ ] **Trước ngày bật thu Sao**: đọc soát 27 câu trả lời (các nhãn) của cả hai môn — đây là nội dung người dùng trả tiền để đọc.
-- [ ] (Quyết định) Chọn trong D1–D6 của `docs/RA-SOAT-LUAN-HOI-VA-THU-SAO.md`; em khuyên làm D1 (một câu trả lời mẫu miễn
-  phí ở chương 1) trước.
+- [x] D1 đã làm (LH-3): chương 1 miễn phí có một câu trả lời mẫu "Tôi hợp nghề gì?".
+- [ ] (Quyết định) Việc tiếp theo trong D2–D6 của `docs/RA-SOAT-LUAN-HOI-VA-THU-SAO.md` mục 4–6; em khuyên D2 (hỏi đáp dùng
+  cùng nhãn với báo cáo).
 
 ### 4av. NF-BT — biên tập 21 bài NotFair + 4 bài tuần 3 (2026-11-17, `docs/kw6t/AUDIT-NOTFAIR-2026-11-17.md`)
 

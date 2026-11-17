@@ -23,7 +23,7 @@ import { HopNoiBat, KiemChungBai, ViSao } from "./HopNoiBat";
 import { GiaoThoa } from "./GiaoThoa";
 import { ChuQua } from "./ChuQua";
 import { GocNhinKhac } from "./GocNhinKhac";
-import { BanDoNguoi, LuanHoiCuoi, LuanHoiDau } from "./LuanHoi";
+import { BanDoNguoi, CauMau, LuanHoiCuoi, LuanHoiDau } from "./LuanHoi";
 import { useCachChinhBaoCao } from "@/lib/cach-chinh-battu";
 import { ChamMuc, ChuThichMuc, CotChuong, giamChuyenDong, ThanhChuongGon, useChuongDangDoc, type MucChuong } from "./MucLucChuong";
 import { useChuBaoCao } from "./chu-bao-cao";
@@ -296,6 +296,7 @@ function Chuong({ c, so, goc, moDun, thoiGian, qua = false, mo, doiMo, thamChieu
       )}
       <div id={idThan} className={cn(!mo && "hidden print:block")}>
         {c.doan_truoc && khoiDoan}
+        {c.cau_mau && <CauMau mau={c.cau_mau} thuatNgu={c.thuat_ngu} onMo={conKhoa ? undefined : moDich} />}
         {c.luan_hoi && <LuanHoiDau lh={c.luan_hoi} moDun={moDun} chuong={c.ma} thuatNgu={c.thuat_ngu} />}
         {c.than_do && <ThanhThan than={c.than_do} />}
         {c.bieu_do && <BieuDoNguHanh bd={c.bieu_do} haiCach={c.hai_cach} />}

@@ -118,7 +118,10 @@ export interface ChuongDoiSongMo {
   sao_luu?: SaoLuuNam;
   /** LH-1: lớp "Luận theo câu hỏi" (Tử vi, bản Việt) — nằm TRONG chương → khoá SAO-2 là mất. */
   luan_hoi?: LuanHoi;
+  /** D1: một câu trả lời mẫu chép từ chương Công việc, đặt ở chương 1 (miễn phí). */
+  cau_mau?: CauMau;
 }
+export type CauMau = TraLoiThang & { tu_chuong: string; ten_chuong: string; con: number };
 /** LH-1 — câu người ta hay hỏi + câu trả lời thẳng (engine dựng; web chỉ vẽ). */
 export interface TraLoiThang {
   ma: string; cau: string; tra_loi: string; giai_thich: string; nhan: string; sac: Muc; can_cu: string[]; ma_mau: string;
@@ -178,7 +181,8 @@ export const NHAN_MUC: Record<Muc, string> = { thuan: "Thuận lợi", can_bang:
 export function maMauBaoCao(bc: Pick<BaoCaoDoiSong, "cot_loi" | "chuong">): string[] {
   const ds = [...(bc.cot_loi ?? []), ...bc.chuong.flatMap((c) => (c.khoa ? []
     : [...(c.hop ?? []), ...(c.loi_hoan_canh ? [c.loi_hoan_canh] : []), ...(c.goc_nhin_khac?.y ?? []),
-      ...(c.luan_hoi?.tra_loi ?? []).map((t) => ({ ma_mau: t.ma_mau }) as Hop)]))];
+      ...(c.luan_hoi?.tra_loi ?? []).map((t) => ({ ma_mau: t.ma_mau }) as Hop),
+      ...(c.cau_mau ? [{ ma_mau: c.cau_mau.ma_mau } as Hop] : [])]))];
   return [...new Set(ds.filter((h) => !h.dang_xem_lai && h.ma_mau).map((h) => h.ma_mau!))].sort();
 }
 

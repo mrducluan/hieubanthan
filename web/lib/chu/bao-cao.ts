@@ -16,6 +16,9 @@ export const CHU_BAO_CAO = {
     en: "These books were written for readers of their own time. Treat them as culture and a mirror for reflection, not as a forecast of what will happen." },
   // LH-1 — lớp "Luận theo câu hỏi" (Tử vi, bản Việt): chữ khung; câu hỏi, câu trả lời, chân dung do engine dựng.
   "lh.tra_loi_td": { nhom: K, nhan: "Luận theo câu hỏi: tiêu đề khối trả lời", mac_dinh: "Trả lời thẳng những câu bạn hay hỏi", en: "Straight answers to the questions you came with" },
+  "lh.mau_td": { nhom: K, nhan: "Luận theo câu hỏi: tiêu đề câu trả lời mẫu ở chương 1", mac_dinh: "Một câu bạn hay hỏi, trả lời thẳng", en: "One question you came with, answered straight" },
+  "lh.mau_chan": { nhom: K, nhan: "Luận theo câu hỏi: dòng dưới câu mẫu", mac_dinh: "Câu này lấy từ chương {chuong}. Các chương sau trả lời thêm {so} câu như vậy: tình cảm, gia đình, công việc, tiền bạc, bạn bè.", en: "Taken from the chapter {chuong}. The later chapters answer {so} more questions like this." },
+  "lh.mau_nut": { nhom: K, nhan: "Luận theo câu hỏi: nút tới chương của câu mẫu", mac_dinh: "Tới chương đó", en: "Go to that chapter" },
   "lh.nguoi_td": { nhom: K, nhan: "Luận theo câu hỏi: tiêu đề người liên quan", mac_dinh: "Người liên quan trong mảng này", en: "The people in this area of life" },
   "lh.song_chung": { nhom: K, nhan: "Luận theo câu hỏi: nhãn cách đối đãi", mac_dinh: "Cách đối đãi hợp:", en: "How to get on:" },
   "lh.ban_voi_ho": { nhom: K, nhan: "Luận theo câu hỏi: nhãn bạn tác động tới họ", mac_dinh: "Bạn với họ", en: "You to them" },
