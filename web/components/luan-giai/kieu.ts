@@ -116,7 +116,26 @@ export interface ChuongDoiSongMo {
   dong_nam?: NamVanHan[]; thang_toi?: ThangToi[];
   /** EN-5.2 sao lưu năm đang xem (chương Vận hạn Tử vi) — đọc thêm, không đổi mức. */
   sao_luu?: SaoLuuNam;
+  /** LH-1: lớp "Luận theo câu hỏi" (Tử vi, bản Việt) — nằm TRONG chương → khoá SAO-2 là mất. */
+  luan_hoi?: LuanHoi;
 }
+/** LH-1 — câu người ta hay hỏi + câu trả lời thẳng (engine dựng; web chỉ vẽ). */
+export interface TraLoiThang {
+  ma: string; cau: string; tra_loi: string; giai_thich: string; nhan: string; sac: Muc; can_cu: string[]; ma_mau: string;
+}
+export interface NguoiQuanh {
+  ma: string; ten: string; muc: Muc; nhan_muc: string; tu_chuong: string;
+  chan_dung?: string; song_chung?: string; ban_voi_ho?: string[]; ho_voi_ban?: string[]; can_cu?: string[];
+  /** Chương gốc chưa mở (SAO-2): chỉ còn tên + mức. */ khoa?: boolean;
+}
+export interface NamMang { nam: number; tuoi: number; muc: Muc; nhan_muc: string; y: string; hy: boolean; noi: boolean; hien_tai: boolean; can_cu: string[] }
+export interface LaBanNghe {
+  hanh: { hanh: string; nganh: string; cap: "chinh" | "phu" | "" }[]; noi_bat: string | null; cau: string; can_cu: string[];
+}
+export interface HoaGiai {
+  phat_huy: string[]; can_sua: string[]; canh_bao: string[]; dan_gian: { loi: string; duong?: string }[]; ghi_chu_dan_gian: string;
+}
+export interface LuanHoi { tra_loi: TraLoiThang[]; nguoi: NguoiQuanh[]; hoa_giai: HoaGiai; dong_mang: NamMang[]; nghe?: LaBanNghe }
 export interface SaoLuuNam {
   nam: number; can_chi: string; kep_loc: string; loi_chu_y: string;
   muc: { ma: string; ten: string; cac_cung: string[]; loi: string; nen_lam: string }[];
@@ -136,6 +155,8 @@ export interface BaoCaoDoiSong {
   thoi_gian_bieu?: MocDaiHan[];
   /** MT-ĐS B6: khung "Cần lưu ý ở từng mảng hay hỏi" (7 mảng; dòng của chương khoá SAO-2 chỉ còn tên + mức). */
   luu_y_mang?: LuuYMang[];
+  /** LH-1: bản đồ người quanh bạn (người thuộc chương khoá SAO-2 chỉ còn tên + mức). */
+  nguoi_quanh?: NguoiQuanh[];
   /** EN-2: không biết giờ sinh — một câu engine soạn, web hiện thành dải riêng đầu bài (không phụ thuộc bản AI). */
   gio_tam?: string;
   chuong: (ChuongDoiSongMo | ChuongKhoa)[];
@@ -154,7 +175,8 @@ export const NHAN_MUC: Record<Muc, string> = { thuan: "Thuận lợi", can_bang:
 /** Mọi mã kiểm chứng trong báo cáo (để xin tỉ lệ một lần cho cả bài). */
 export function maMauBaoCao(bc: Pick<BaoCaoDoiSong, "cot_loi" | "chuong">): string[] {
   const ds = [...(bc.cot_loi ?? []), ...bc.chuong.flatMap((c) => (c.khoa ? []
-    : [...(c.hop ?? []), ...(c.loi_hoan_canh ? [c.loi_hoan_canh] : []), ...(c.goc_nhin_khac?.y ?? [])]))];
+    : [...(c.hop ?? []), ...(c.loi_hoan_canh ? [c.loi_hoan_canh] : []), ...(c.goc_nhin_khac?.y ?? []),
+      ...(c.luan_hoi?.tra_loi ?? []).map((t) => ({ ma_mau: t.ma_mau }) as Hop)]))];
   return [...new Set(ds.filter((h) => !h.dang_xem_lai && h.ma_mau).map((h) => h.ma_mau!))].sort();
 }
 

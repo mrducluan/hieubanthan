@@ -659,3 +659,43 @@ mã phải bọc provider (mặc định phái `nam_phai_viet`). Phi hoá / nh�
 gộp mọi phái theo mã (mã nhịp như `binh.-` chung cho 5 phái lưu nguyệt). `don_nhac_viec` (0018) chỉ `revoke from public`
 — trên Supabase vai trò anon/authenticated vẫn có quyền mặc định gọi (chỉ xoá mốc > 400 ngày, rủi ro thấp; nên thu hồi
 ở migration sau).
+
+## 11. LH-1 — "Luận theo câu hỏi" (2026-11-17)
+
+**Vì sao.** Đọc một bài Luận giải Tử vi thật như người trả Sao: chương đi theo 12 cung nên không trả lời câu người ta mang
+tới thầy. Chương Công việc chỉ 3 hộp (513 ký tự), không có "hợp nghề gì", "làm trái nghề thì sao", chân dung sếp; chương Tình
+yêu không nói người ấy là kiểu người nào, bền hay dang dở, có người thứ ba không; người nhà chỉ là một dòng tóm tắt.
+
+**Chủ dự án chốt (2026-11-17).** (1) Câu nhạy cảm nói thẳng như thầy xưa. (2) Hoá giải gồm cả việc làm cụ thể lẫn tập quán
+dân gian. (3) Tử vi trước, Bát tự sau. (4) Ba hình cốt lõi: bản đồ người quanh bạn, dòng mười năm từng mảng, la bàn nghề.
+
+**Cấu trúc `luan_hoi` của một chương** (`engine/app/luangiai/tuvi_luan_hoi.py`, KB `tuvi_luan_hoi_kb.json`):
+
+| Trường | Nội dung | Nguồn dữ kiện |
+|---|---|---|
+| `tra_loi` | câu hỏi → câu trả lời thẳng + giải thích + căn cứ + `ma_mau` | nhãn theo luật công khai trên `cham_cung` |
+| `nguoi` | chân dung người liên quan, cách đối đãi, bạn với họ / họ với bạn | sao chính của cung + can cung phi tứ hoá |
+| `dong_mang` | mười năm của mảng, ba mức | `chu_y_nam.tuvi_nam_cung` (năm chậm) · tứ hoá năm (năm thuận) · Hồng Loan / Thiên Hỷ lưu |
+| `nghe` | la bàn năm hành (chỉ chương Công việc) | hành của sao chính Quan Lộc, Mệnh, Tài Bạch |
+| `hoa_giai` | Phát huy · Cần sửa · Cảnh báo · Dân gian thường làm | dấu hiệu của cung → việc trong KB |
+
+**Luật nhãn chính** (cân trên 1.000 lá mẫu, `tests/test_tuvi_luan_hoi.py`):
+
+- *Bền hay dang dở* — đếm ở cung Phu Thê: sao cứng (Sát, Phá, Tham, Liêm, Cự, Vũ), sao hãm, Hoá Kỵ, sát tinh (tối đa 2), Tuần /
+  Triệt, Cô Thần / Quả Tú; trừ Hoá Lộc / Khoa, cát tinh, sao hiền sáng. ≤ 0 một mối bền (42 %) · 1 bền nếu vun (23 %) · 2–3 muộn
+  mới bền (28 %) · ≥ 4 dễ hai lần đò (6 %).
+- *Người thứ ba* — Tham Lang / Liêm Trinh (1), Hàm Trì, Thiên Diêu (1), Hồng Loan, Thiên Hỷ (0,5) ở Mệnh (phía bạn) hoặc Phu Thê
+  (phía người ấy); từ 1,5 trở lên mới gọi tên. 81 % lá "ít dấu hiệu".
+- *Làm chủ hay làm công* — kiểu của sao Quan Lộc (×2), sao Mệnh, Hoá Quyền; ba nhãn chia gần đều.
+- Các nhãn còn lại (giữ tiền, công danh, đi xa, học hành, quý nhân, làm ăn chung, thị phi) ghi ngay trên từng hàm `nhan_*`.
+
+**Ranh giới.** Nhãn là THẾ của lá số, luôn kèm điều kiện và việc nên làm; không "bạn sẽ…", không ngày tháng sự kiện, không số
+con, không tuổi thọ, không bệnh. Mục dân gian là tập quán, ghi rõ không nằm trong phép tính; không bùa, trấn yểm, vật phẩm.
+Chưa đủ 18 tuổi không nhận lớp này. Thuật ngữ chỉ ở "Vì sao nói vậy". Không đổi mức, hộp hay "Điều quan trọng nhất".
+
+**SAO-2.** `luan_hoi` nằm trong chương nên chương khoá không lộ; `nguoi_quanh` cấp báo cáo bị `catXemTruoc` cắt còn tên + mức
+cho người thuộc chương khoá (bản đồ vẫn vẽ đủ 7 nút, nút khoá có ổ khoá và dẫn tới phần mở chương).
+
+**Chưa làm.** Bát tự cùng khuôn (chi ngày = phối ngẫu, thập thần → nghề, hành hai cách cho la bàn nghề); bản tiếng Anh; nối
+câu trả lời thẳng vào hỏi đáp Tử vi; sửa câu tóm tắt chương còn gượng và chương "Mảng đời nào kéo mảng đời nào" lặp mẫu câu.
+

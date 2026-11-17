@@ -1,0 +1,1108 @@
+{
+  "_nguon": "LH-1 (2026-11-17) — lớp 'Luận theo câu hỏi' của Luận giải Tử vi đời sống. Ban biên tập viết lại theo cách đọc cung Phu Thê, Phụ Mẫu, Tử Nữ, Huynh Đệ, Nô Bộc, Thiên Di, Quan Lộc, Tài Bạch của Tử Vi Đẩu Số Toàn Thư (quyển 3) và lối Nam phái Việt; tập quán dân gian ghi theo phong tục Việt Nam (truyền khẩu). Nháp, chờ chuyên gia đọc soát.",
+  "source_id": "tuvi_vn",
+  "school_id": "nam_phai_viet",
+  "trang_thai": "nhap_ai",
+  "can_doi_chieu": true,
+  "ghi_chu_dan_gian": "Đây là tập quán dân gian, không nằm trong phép tính của lá số. Làm hay không là tuỳ nếp nhà; không cần mua vật phẩm gì, và không thay cho những việc nên làm ở trên.",
+  "ghi_chu_thang": "Đây là thế của lá số theo cách thầy xưa đọc, không phải việc đã định. Cùng một thế, người biết trước và sửa nếp sống thường đi một đường khác.",
+  "vai": {
+    "phoi_ngau": {
+      "ten": "Vợ / chồng",
+      "ten_nam": "Vợ",
+      "ten_nu": "Chồng",
+      "goi": "người ấy",
+      "cung": "Phu Thê",
+      "chuong": "tinh_cam"
+    },
+    "cha_me": {
+      "ten": "Cha mẹ",
+      "goi": "cha mẹ",
+      "cung": "Phụ Mẫu",
+      "chuong": "gia_dinh"
+    },
+    "con": {
+      "ten": "Con cái",
+      "goi": "con",
+      "cung": "Tử Nữ",
+      "chuong": "gia_dinh"
+    },
+    "anh_em": {
+      "ten": "Anh chị em",
+      "goi": "anh chị em",
+      "cung": "Huynh Đệ",
+      "chuong": "gia_dinh"
+    },
+    "sep": {
+      "ten": "Sếp, bề trên",
+      "goi": "sếp",
+      "cung": "Phụ Mẫu",
+      "chuong": "su_nghiep"
+    },
+    "ban_be": {
+      "ten": "Bạn bè, đồng nghiệp",
+      "goi": "bạn bè, đồng nghiệp",
+      "cung": "Nô Bộc",
+      "chuong": "quan_he"
+    },
+    "nguoi_ngoai": {
+      "ten": "Khách hàng, đối tác",
+      "goi": "khách hàng, đối tác",
+      "cung": "Thiên Di",
+      "chuong": "quan_he"
+    }
+  },
+  "chan_dung_mau": {
+    "ro": "{vai} thường là {kieu}.",
+    "ham": "{vai} thường là {kieu}; lúc căng thẳng dễ {ham}.",
+    "them": "Pha thêm nét {ngan}.",
+    "muon": "Nét của {goi} không lộ hẳn, mỗi giai đoạn một khác; phần hay thấy nhất là {kieu}.",
+    "khong": "Không có nét nào nổi hẳn: {goi} dễ đổi theo hoàn cảnh, nên nhìn từng giai đoạn mà đối đãi."
+  },
+  "sao_nguoi": {
+    "Tử Vi": {
+      "kieu": "người có uy, thích cầm trịch và trọng thể diện",
+      "ngan": "có uy, thích quyết",
+      "ham": "độc đoán, khó nghe góp ý",
+      "song": "Việc lớn để họ quyết phần chính; muốn góp ý thì nói riêng, đừng nói trước mặt người khác."
+    },
+    "Thiên Cơ": {
+      "kieu": "người nhanh trí, hay tính toán và lo xa",
+      "ngan": "nhanh trí, lo xa",
+      "ham": "nghĩ nhiều, hay đổi ý",
+      "song": "Nói rõ kế hoạch từ sớm và cho họ thời gian cân nhắc; đừng ép trả lời ngay."
+    },
+    "Thái Dương": {
+      "kieu": "người nhiệt tình, thẳng tính, hay lo việc chung",
+      "ngan": "nhiệt tình, thẳng",
+      "ham": "nóng nảy, lo việc ngoài hơn việc nhà",
+      "song": "Ghi nhận công sức của họ thành lời; việc cần họ làm thì hẹn giờ cụ thể."
+    },
+    "Vũ Khúc": {
+      "kieu": "người cứng cỏi, thực tế, giỏi chuyện tiền bạc nhưng ít lời ngọt",
+      "ngan": "thực tế, cứng cỏi",
+      "ham": "khô khan, cố chấp",
+      "song": "Nói với họ bằng việc và con số cụ thể; đừng đợi lời hoa mỹ, hãy nhìn việc họ làm."
+    },
+    "Thiên Đồng": {
+      "kieu": "người hiền, dễ chịu, thích yên ổn",
+      "ngan": "hiền, thích yên ổn",
+      "ham": "né việc khó, hay ỷ lại",
+      "song": "Giao việc rõ ràng, nhắc nhẹ nhàng; đừng lớn tiếng vì họ dễ thu mình lại."
+    },
+    "Liêm Trinh": {
+      "kieu": "người sắc sảo, nguyên tắc, tự trọng cao và có sức hút",
+      "ngan": "sắc sảo, tự trọng",
+      "ham": "nóng, hay ghen, dễ làm căng",
+      "song": "Giữ đúng lời hứa và rõ ràng trong mọi chuyện; đừng đùa quá trớn về lòng tự trọng của họ."
+    },
+    "Thiên Phủ": {
+      "kieu": "người chững chạc, bao dung, giỏi giữ của và thích ổn định",
+      "ngan": "chững chạc, giữ của",
+      "ham": "bảo thủ, giữ kẽ",
+      "song": "Việc lớn bàn trước với họ; tôn trọng nếp cũ, muốn đổi thì đổi từng bước."
+    },
+    "Thái Âm": {
+      "kieu": "người dịu, tinh tế, kín đáo và chăm lo cho nhà",
+      "ngan": "dịu, kín đáo",
+      "ham": "hay buồn, nghĩ ngợi, giữ trong lòng",
+      "song": "Hỏi han đều đặn, đừng đợi họ tự nói; để ý những điều nhỏ họ làm."
+    },
+    "Tham Lang": {
+      "kieu": "người hoạt bát, nhiều tài lẻ, giao thiệp rộng",
+      "ngan": "hoạt bát, quen rộng",
+      "ham": "ham vui, dễ sa đà",
+      "song": "Nói rõ ranh giới ngay từ đầu; gặp họ ở dịp vui, đông người thì dễ thân hơn là bàn việc khô."
+    },
+    "Cự Môn": {
+      "kieu": "người giỏi nói, lý lẽ sắc và hay soi kỹ",
+      "ngan": "giỏi nói, hay soi",
+      "ham": "hay cãi, đa nghi, lời nói dễ làm đau",
+      "song": "Tranh luận về việc, đừng về người; lúc căng thì viết ra thay vì nói."
+    },
+    "Thiên Tướng": {
+      "kieu": "người chu đáo, trọng công bằng, hay giúp người và chỉn chu",
+      "ngan": "chu đáo, công bằng",
+      "ham": "cả nể, thiếu quyết đoán",
+      "song": "Cùng quyết với họ; đừng bắt họ đứng giữa hai bên."
+    },
+    "Thiên Lương": {
+      "kieu": "người điềm đạm, hay che chở và thích khuyên bảo",
+      "ngan": "điềm đạm, hay che chở",
+      "ham": "hay lên lớp, cầu toàn",
+      "song": "Nghe họ khuyên hết rồi mới nói ý mình; nhờ họ góp ý là cách dễ gần nhất."
+    },
+    "Thất Sát": {
+      "kieu": "người quyết liệt, độc lập, chịu được việc nặng",
+      "ngan": "quyết liệt, độc lập",
+      "ham": "nóng, cứng, ít nhường",
+      "song": "Cho họ khoảng riêng; đừng đối đầu lúc họ đang nóng, đợi nguội rồi nói."
+    },
+    "Phá Quân": {
+      "kieu": "người dám bỏ cái cũ, thích đổi mới và khó đoán",
+      "ngan": "thích đổi mới",
+      "ham": "bốc đồng, tiêu pha mạnh tay",
+      "song": "Chuyện tiền và những thay đổi lớn nói trước với họ; đừng mong họ ngồi yên một chỗ."
+    }
+  },
+  "tac_dong": {
+    "ban_voi_ho": {
+      "Lộc": "Bạn hay đem điều thuận về cho {goi}: tiền bạc, cơ hội hoặc niềm vui thường đi từ bạn sang.",
+      "Quyền": "Bạn hay quyết thay và đặt yêu cầu cao với {goi}; họ được việc nhờ bạn nhưng cũng dễ thấy bị ép.",
+      "Khoa": "Bạn hay nói đỡ, giữ thể diện và chỉ đường cho {goi}.",
+      "Kỵ": "Bạn lo cho {goi} nhiều tới mức dễ thành giữ chặt; họ dễ thấy áp lực từ chính sự quan tâm của bạn."
+    },
+    "ho_voi_ban": {
+      "Lộc": "{Goi} hay đem điều thuận về cho bạn; có họ, việc của bạn dễ hơn.",
+      "Quyền": "{Goi} có tiếng nói mạnh với bạn, hay thúc bạn làm và quyết.",
+      "Khoa": "{Goi} nâng tiếng tăm và chỉ lối cho bạn; bạn nên hỏi ý họ khi phân vân.",
+      "Kỵ": "{Goi} là chỗ bạn nặng lòng; nhiều quyết định của bạn bị kéo theo chuyện của họ."
+    },
+    "khong": "Giữa bạn và {goi} không có đường tác động riêng nào nổi lên; hai bên ảnh hưởng nhau ở mức thường."
+  },
+  "sao_nghe": {
+    "Tử Vi": {
+      "hanh": "Thổ",
+      "kieu": "chu",
+      "viec": "việc đứng đầu, điều hành, chịu trách nhiệm cuối cùng",
+      "nganh": [
+        "quản lý, điều hành",
+        "hành chính công",
+        "tổ chức lớn, tập đoàn"
+      ]
+    },
+    "Thiên Cơ": {
+      "hanh": "Mộc",
+      "kieu": "chuyen_mon",
+      "viec": "việc cần tính toán, lên kế hoạch và xoay xở",
+      "nganh": [
+        "phân tích, kế hoạch",
+        "công nghệ, kỹ thuật",
+        "tư vấn, giáo dục"
+      ]
+    },
+    "Thái Dương": {
+      "hanh": "Hoả",
+      "kieu": "to_chuc",
+      "viec": "việc đứng trước nhiều người và lo việc chung",
+      "nganh": [
+        "giảng dạy, truyền thông",
+        "việc công, đoàn thể",
+        "y tế, ngoại giao"
+      ]
+    },
+    "Vũ Khúc": {
+      "hanh": "Kim",
+      "kieu": "chu",
+      "viec": "việc gắn với tiền và cần quyết dứt khoát",
+      "nganh": [
+        "tài chính, kế toán, ngân hàng",
+        "kinh doanh",
+        "cơ khí, kỹ thuật"
+      ]
+    },
+    "Thiên Đồng": {
+      "hanh": "Thuỷ",
+      "kieu": "to_chuc",
+      "viec": "việc chăm sóc người khác trong môi trường ổn định",
+      "nganh": [
+        "dịch vụ, chăm sóc khách hàng",
+        "giáo dục trẻ nhỏ",
+        "ẩm thực, du lịch"
+      ]
+    },
+    "Liêm Trinh": {
+      "hanh": "Hoả",
+      "kieu": "chuyen_mon",
+      "viec": "việc cần nguyên tắc, kỷ luật và con mắt sắc",
+      "nganh": [
+        "pháp luật, thanh tra",
+        "điện, điện tử",
+        "thiết kế, trình diễn"
+      ]
+    },
+    "Thiên Phủ": {
+      "hanh": "Thổ",
+      "kieu": "to_chuc",
+      "viec": "việc giữ và làm đầy những gì đã có",
+      "nganh": [
+        "quản lý tài sản, kho quỹ",
+        "ngân hàng, bất động sản",
+        "hành chính, vận hành"
+      ]
+    },
+    "Thái Âm": {
+      "hanh": "Thuỷ",
+      "kieu": "chuyen_mon",
+      "viec": "việc tỉ mỉ, cần sự tinh tế và kiên nhẫn",
+      "nganh": [
+        "tài chính, bất động sản",
+        "làm đẹp, nghệ thuật, viết",
+        "chăm sóc, điều dưỡng"
+      ]
+    },
+    "Tham Lang": {
+      "hanh": "Thuỷ",
+      "kieu": "chu",
+      "viec": "việc cần giao thiệp, thuyết phục và nhiều tài lẻ",
+      "nganh": [
+        "kinh doanh, bán hàng",
+        "giải trí, quan hệ công chúng",
+        "ẩm thực, làm đẹp"
+      ]
+    },
+    "Cự Môn": {
+      "hanh": "Thuỷ",
+      "kieu": "chuyen_mon",
+      "viec": "nghề dùng lời nói và lý lẽ",
+      "nganh": [
+        "luật, tư vấn",
+        "giảng dạy, đào tạo",
+        "bán hàng, truyền thông, nghiên cứu"
+      ]
+    },
+    "Thiên Tướng": {
+      "hanh": "Thuỷ",
+      "kieu": "to_chuc",
+      "viec": "việc phụ tá, điều phối, giữ cho mọi thứ đúng nếp",
+      "nganh": [
+        "nhân sự, hành chính",
+        "pháp chế, thư ký",
+        "dịch vụ khách hàng, thời trang"
+      ]
+    },
+    "Thiên Lương": {
+      "hanh": "Thổ",
+      "kieu": "chuyen_mon",
+      "viec": "việc che chở, chữa lành và chỉ dẫn người khác",
+      "nganh": [
+        "y dược",
+        "giáo dục, công tác xã hội",
+        "bảo hiểm, tư vấn, giám sát"
+      ]
+    },
+    "Thất Sát": {
+      "hanh": "Kim",
+      "kieu": "chu",
+      "viec": "việc khó, cần quyết nhanh và chịu áp lực",
+      "nganh": [
+        "quân đội, công an",
+        "kỹ thuật nặng, quản lý dự án",
+        "khởi nghiệp"
+      ]
+    },
+    "Phá Quân": {
+      "hanh": "Thuỷ",
+      "kieu": "chu",
+      "viec": "việc mở đường, làm mới, dọn cái cũ",
+      "nganh": [
+        "khởi nghiệp, kinh doanh mới",
+        "vận tải, xuất nhập khẩu",
+        "xây dựng, sáng tạo"
+      ]
+    }
+  },
+  "hanh_nganh": {
+    "Mộc": "giáo dục, xuất bản, gỗ – giấy, nông lâm, thời trang, dược liệu",
+    "Hoả": "điện – năng lượng, công nghệ, truyền thông, ẩm thực, làm đẹp",
+    "Thổ": "bất động sản, xây dựng, nông sản, kho vận, hành chính",
+    "Kim": "tài chính – ngân hàng, cơ khí, kim hoàn, pháp luật, máy móc",
+    "Thuỷ": "thương mại, vận tải, du lịch, thuỷ sản, dịch vụ, tư vấn"
+  },
+  "nghe_mau": {
+    "tl": "Bạn hợp nhất với {viec}. Nhóm nghề gần nhất: {nganh}.",
+    "tl_muon": "Nét nghề của bạn không lộ hẳn từ đầu, thường đổi một hai lần mới thấy chỗ hợp. Phần gần nhất là {viec}; nhóm nghề nên thử: {nganh}.",
+    "tl_khong": "Lá số không nghiêng hẳn về một nghề: bạn làm được nhiều việc, và hợp việc nào là do môi trường đầu tiên bạn bước vào.",
+    "them_menh": "Con người bạn còn hợp {viec}, nên nghề nào có cả hai phần này là vừa nhất.",
+    "hanh": "Xét ngũ hành của ba mảng con người, công việc và tiền bạc trong lá số, nhóm ngành hành {hanh} ({nganh}) nổi nhất với bạn."
+  },
+  "tin_hieu": {
+    "tinh_cam": {
+      "loc": {
+        "y": "cưới rồi dễ khá lên, người ấy đem lộc về",
+        "lam": "Việc tiền bạc, nhà cửa bàn và quyết cùng người ấy; hai người chung sức thì lộc này mới thành của để dành."
+      },
+      "quyen": {
+        "y": "trong nhà có một người nắm phần quyết",
+        "lam": "Chia rõ ai quyết việc gì; phần của ai người ấy quyết, phần chung thì hỏi nhau trước."
+      },
+      "khoa": {
+        "y": "hai người giữ thể diện cho nhau, có chuyện dễ nói lại",
+        "lam": "Giữ thói quen nói lời cảm ơn và xin lỗi thành tiếng; đó là vốn của hai người."
+      },
+      "cat": {
+        "y": "có người vun vào, gia đình hai bên đỡ",
+        "lam": "Giữ quan hệ tốt với gia đình hai bên; lúc hai người căng, có người lớn nói đỡ một câu là qua."
+      },
+      "sang": {
+        "y": "người ấy có nét tốt nổi rõ, dựa được",
+        "lam": "Nói ra điều bạn quý ở người ấy; người được ghi nhận thì càng làm tốt phần đó."
+      },
+      "ky": {
+        "y": "hay bận lòng, dễ hiểu lầm vì không nói hết ý",
+        "lam": "Mỗi tuần một buổi nói chuyện riêng, không điện thoại; giận thì hẹn giờ nói lại trong vòng một ngày."
+      },
+      "sat": {
+        "y": "hay có chuyện gấp, lời nặng chen vào giữa hai người",
+        "lam": "Đặt luật không quyết việc lớn, không nói lời dứt khoát lúc đang nóng; đợi qua một đêm."
+      },
+      "ham": {
+        "y": "người ấy dễ lệch khi gặp áp lực",
+        "lam": "Lúc người ấy căng, lùi một bước và nói sau; góp ý vào việc, đừng vào con người."
+      },
+      "cham": {
+        "y": "duyên đến chậm, giai đoạn đầu hay trắc trở",
+        "lam": "Đừng cưới cho kịp tuổi; quen đủ lâu để thấy người ấy xử lý một lần cãi nhau và một lần thiếu tiền."
+      },
+      "co_qua": {
+        "y": "có lúc thấy lẻ loi dù đang có đôi",
+        "lam": "Giữ một việc hai người làm chung đều đặn, dù nhỏ như ăn tối cùng nhau; đừng để mỗi người một thế giới."
+      },
+      "dao": {
+        "y": "có sức hút, nhiều người để ý",
+        "lam": "Nói rõ ranh giới với người khác giới ngay từ đầu; điều gì không kể được với người ấy thì đừng làm."
+      }
+    },
+    "su_nghiep": {
+      "loc": {
+        "y": "việc tự tìm đến, làm là có thu",
+        "lam": "Nhận việc khó hơn sức một chút khi có cơ hội; lộc nghề của bạn đến từ việc dám nhận."
+      },
+      "quyen": {
+        "y": "bạn nắm được phần quyết, dễ được giao cầm trịch",
+        "lam": "Xin rõ quyền hạn bằng văn bản khi nhận việc; có quyền thì bạn làm tốt hơn hẳn."
+      },
+      "khoa": {
+        "y": "có tiếng tốt trong nghề, nói ra dễ được tin",
+        "lam": "Viết, dạy hoặc chia sẻ điều mình giỏi; tiếng tăm là thứ kéo việc về cho bạn."
+      },
+      "cat": {
+        "y": "có người nâng đỡ, chỉ việc",
+        "lam": "Tìm một người đi trước để hỏi đều đặn; đừng ngại mở lời nhờ."
+      },
+      "sang": {
+        "y": "nét mạnh nghề nghiệp phát huy rõ",
+        "lam": "Chọn chỗ làm cho bạn dùng đúng sở trường mỗi ngày, kể cả khi lương ban đầu thấp hơn một chút."
+      },
+      "ky": {
+        "y": "việc hay làm bạn bận lòng, dễ mang về nhà",
+        "lam": "Mỗi ngày chốt ba việc phải xong rồi nghỉ; chuyện chỗ làm ghi ra giấy trước khi rời bàn."
+      },
+      "sat": {
+        "y": "hay có việc gấp, va chạm hoặc đổi kế hoạch giữa chừng",
+        "lam": "Luôn chừa một phần ba thời gian dự phòng; chuyện va chạm thì nói lại bằng tin nhắn ghi rõ việc."
+      },
+      "ham": {
+        "y": "dưới áp lực bạn dễ làm lệch sở trường",
+        "lam": "Khi căng, làm chậm lại một nhịp và hỏi một người ngoài cuộc trước khi quyết."
+      },
+      "cham": {
+        "y": "nghề thành muộn, phải qua vài lần đổi hướng",
+        "lam": "Đừng so tuổi nghề với người khác; mỗi lần đổi việc, giữ lại một kỹ năng mang theo được."
+      },
+      "co_qua": {
+        "y": "hay phải tự mình gánh việc",
+        "lam": "Chủ động chia việc và báo tiến độ; đừng đợi kiệt sức mới nói."
+      },
+      "ma": {
+        "y": "hợp việc phải đi lại, đổi chỗ",
+        "lam": "Đừng từ chối công tác xa, dự án ở nơi khác; cơ hội của bạn hay nằm ngoài chỗ ngồi quen."
+      }
+    },
+    "tien_bac": {
+      "loc": {
+        "y": "có nguồn thu tự tìm đến",
+        "lam": "Mỗi khoản thu thêm, cắt ngay một phần cố định sang tài khoản không đụng tới."
+      },
+      "quyen": {
+        "y": "bạn tự quyết được chuyện tiền của mình",
+        "lam": "Tự cầm sổ sách của mình; đừng giao hết cho người khác dù tin."
+      },
+      "khoa": {
+        "y": "tiền đến từ uy tín, chuyên môn",
+        "lam": "Giữ chữ tín trong mọi khoản nhỏ; uy tín là vốn kiếm tiền chính của bạn."
+      },
+      "cat": {
+        "y": "có người giúp, mách mối làm ăn",
+        "lam": "Nhớ ơn và chia phần cho người giúp; mối làm ăn của bạn đi qua con người."
+      },
+      "sang": {
+        "y": "cách kiếm tiền hợp với sở trường",
+        "lam": "Dồn sức vào đúng một cách kiếm tiền bạn giỏi nhất trước khi mở thêm cách khác."
+      },
+      "ky": {
+        "y": "hay lo về tiền, dễ quyết vì sợ thiếu",
+        "lam": "Lập bảng thu chi thật mỗi tháng; nhìn con số thay cho nỗi lo."
+      },
+      "sat": {
+        "y": "tiền vào ra thất thường, dễ hao vì vội hoặc vì nể",
+        "lam": "Khoản lớn hơn một tháng lương: đợi ba ngày rồi mới chi; cho vay thì có giấy."
+      },
+      "ham": {
+        "y": "lúc kẹt dễ chọn cách kiếm tiền không hợp mình",
+        "lam": "Lúc kẹt tiền, hỏi một người rành trước khi nhận mối lạ; lãi cao bất thường thì bỏ qua."
+      },
+      "cham": {
+        "y": "tiền đến muộn, tích từng bậc",
+        "lam": "Tích đều hằng tháng dù ít; của bạn là của dành dụm lâu, không phải của ăn nhanh."
+      },
+      "co_qua": {
+        "y": "hay phải tự lo tiền một mình",
+        "lam": "Có một quỹ dự phòng sáu tháng chi tiêu trước khi tính việc lớn."
+      }
+    },
+    "gia_dinh": {
+      "loc": {
+        "y": "người nhà đem điều thuận về",
+        "lam": "Giữ nếp gặp mặt, ăn chung; phúc nhà bạn nằm ở chỗ còn ngồi được với nhau."
+      },
+      "quyen": {
+        "y": "trong nhà có người tiếng nói mạnh",
+        "lam": "Việc chung họp lại rồi quyết; đừng để một người gánh hết lời quyết."
+      },
+      "khoa": {
+        "y": "nhà có nếp, có người để hỏi",
+        "lam": "Việc lớn hỏi ý người lớn trong nhà trước; họ cho bạn góc nhìn bạn chưa có."
+      },
+      "cat": {
+        "y": "người nhà đỡ nhau lúc cần",
+        "lam": "Mở lời nhờ sớm khi cần, và có mặt khi người nhà cần."
+      },
+      "sang": {
+        "y": "người nhà có nét tốt rõ, dựa được",
+        "lam": "Nói lời ghi nhận với người nhà; điều tốt được nói ra thì ở lại lâu."
+      },
+      "ky": {
+        "y": "chuyện nhà làm bạn nặng lòng",
+        "lam": "Chia việc nhà, việc chăm sóc ra rõ ràng; phần của mình làm trọn, phần còn lại đừng ôm."
+      },
+      "sat": {
+        "y": "trong nhà dễ to tiếng, có việc gấp",
+        "lam": "Chuyện tiền với người nhà cũng ghi lại; lúc to tiếng thì dừng, hôm sau nói tiếp."
+      },
+      "ham": {
+        "y": "người nhà dễ lệch khi gặp áp lực",
+        "lam": "Lúc người nhà căng, đừng cãi lý; đợi nguội rồi nói bằng việc cụ thể."
+      },
+      "cham": {
+        "y": "duyên với người nhà đến chậm hoặc ít ở gần",
+        "lam": "Ở xa thì gọi về theo lịch cố định; gần nhau ít nhưng đều thì vẫn ấm."
+      },
+      "co_qua": {
+        "y": "có lúc thấy một mình giữa người nhà",
+        "lam": "Chọn một người trong nhà để nói thật mọi chuyện; đừng tự chịu hết."
+      }
+    },
+    "quan_he": {
+      "loc": {
+        "y": "ra ngoài dễ gặp điều thuận, người đem mối đến",
+        "lam": "Chăm đi, chăm gặp; việc của bạn hay đến từ người quen mới."
+      },
+      "quyen": {
+        "y": "ra ngoài bạn có tiếng nói",
+        "lam": "Nhận vai đứng mũi trong nhóm; bạn dẫn thì nhóm đi nhanh hơn."
+      },
+      "khoa": {
+        "y": "người ngoài quý tiếng của bạn",
+        "lam": "Giữ lời hứa nhỏ với người ngoài; tiếng tốt đi trước mở đường cho bạn."
+      },
+      "cat": {
+        "y": "có bạn tốt, người giúp đúng lúc",
+        "lam": "Giữ liên lạc đều với vài người tốt nhất; giúp lại khi họ cần."
+      },
+      "sang": {
+        "y": "người quanh bạn có thực lực",
+        "lam": "Làm chung với người giỏi hơn mình ở một mặt; bạn học được nhanh từ họ."
+      },
+      "ky": {
+        "y": "dễ nặng lòng vì bạn bè, vì chuyện người ngoài",
+        "lam": "Giúp trong sức mình; chuyện tiền với bạn bè thì rõ ràng từ đầu."
+      },
+      "sat": {
+        "y": "dễ gặp va chạm, lời qua tiếng lại ngoài xã hội",
+        "lam": "Việc chung có thoả thuận bằng chữ; gặp lời khích thì không đáp ngay."
+      },
+      "ham": {
+        "y": "người quanh bạn dễ đổi khác khi có quyền lợi",
+        "lam": "Thử người qua việc nhỏ trước khi giao việc lớn."
+      },
+      "cham": {
+        "y": "bạn bền đến muộn, nhóm đầu hay tan",
+        "lam": "Nhóm tan thì giữ lại một hai người tốt nhất; họ hay là người giúp bạn về sau."
+      },
+      "co_qua": {
+        "y": "ít bạn thân, hay tự xoay xở",
+        "lam": "Chọn ít bạn nhưng gặp đều; một nhóm nhỏ chung sở thích là đủ."
+      },
+      "ma": {
+        "y": "hợp đi xa, đổi môi trường",
+        "lam": "Cơ hội ở nơi khác thì nên thử; bạn hợp chỗ mới hơn chỗ ngồi lâu."
+      }
+    }
+  },
+  "mac_dinh": {
+    "phat_huy": {
+      "tinh_cam": "Giữ nếp đang có: mỗi tuần một buổi dành riêng cho hai người.",
+      "su_nghiep": "Chọn một kỹ năng lõi và làm sâu thêm mỗi năm; nghề của bạn lên bằng tích luỹ đều.",
+      "tien_bac": "Giữ một cách kiếm tiền chính cho đều tay, rồi mới thêm nguồn phụ.",
+      "gia_dinh": "Giữ nếp ăn chung, gặp mặt đều; chuyện nhà êm là nhờ còn ngồi được với nhau.",
+      "quan_he": "Giữ vài mối quan hệ lâu năm cho thật kỹ thay vì quen thật rộng."
+    },
+    "can_sua": {
+      "tinh_cam": "Không có chỗ vướng lớn; điều cần giữ là đừng coi sự yên ổn là mặc nhiên.",
+      "su_nghiep": "Không có chỗ vướng lớn; điều cần tránh là ngồi yên quá lâu ở một vị trí.",
+      "tien_bac": "Không có chỗ vướng lớn; điều cần tránh là chủ quan khi tiền đang dễ.",
+      "gia_dinh": "Không có chỗ vướng lớn; điều cần giữ là có mặt vào những dịp chính của nhà.",
+      "quan_he": "Không có chỗ vướng lớn; điều cần tránh là cả tin với người mới quen."
+    }
+  },
+  "canh_bao": {
+    "nam": "Năm {nam}: nên đi chậm ở chuyện {mang}; việc lớn của mảng này dời sang năm khác nếu được.",
+    "nam_thuan": "Năm {nam}: nhịp thuận cho chuyện {mang}; việc cần làm thì nên làm trong năm này.",
+    "hai_lan_do": "Thế hôn nhân của bạn dễ dang dở ở lần đầu: tránh cưới sớm, cưới vội hoặc cưới vì áp lực gia đình.",
+    "muon_moi_ben": "Cưới trước khi hai người đi qua một lần khó khăn chung là điều nên tránh với lá số này.",
+    "phia_ban": "Bạn có duyên với người khác giới: những lúc vợ chồng xa nhau hoặc đang giận là lúc dễ sa chân nhất.",
+    "phia_nguoi_ay": "Người ấy có duyên với người khác giới: xa nhau lâu, mỗi người một nơi là điều nên tránh.",
+    "ca_hai": "Cả hai đều có duyên với người ngoài: hôn nhân này cần thoả thuận rõ về ranh giới ngay từ đầu.",
+    "giu_kem": "Tiền của bạn dễ đi nhanh hơn về: tránh đứng tên vay hộ, bảo lãnh và các khoản lời hứa lãi cao.",
+    "can_giay_to": "Làm ăn chung mà không có giấy tờ là chỗ bạn dễ mất cả tiền lẫn bạn.",
+    "thi_phi": "Ra ngoài bạn dễ gặp thị phi: tránh nói chuyện người vắng mặt và tránh ký thay người khác.",
+    "nen_o_gan": "Đi xa lập nghiệp với bạn vất vả hơn ở gần: muốn đi thì chuẩn bị quỹ dự phòng và đường lùi.",
+    "it_duyen_gan": "Ở chung với cha mẹ lâu dài dễ sinh trái ý: ở gần mà riêng nhà thường êm hơn."
+  },
+  "dan_gian": {
+    "tinh_cam": [
+      {
+        "khi": "luon",
+        "loi": "Trước khi cưới, nhiều nhà xem tuổi hai bên, chọn ngày lành tháng tốt và tránh năm Kim lâu của cô dâu.",
+        "duong": "/xem-ngay-tot"
+      },
+      {
+        "khi": "muon",
+        "loi": "Người duyên đến chậm, ông bà thường khuyên cưới sau tuổi hai mươi tám, ba mươi cho bền."
+      },
+      {
+        "khi": "hai_lan_do",
+        "loi": "Có nơi giữ tục làm lễ cưới hai lần với cùng một người, một lễ nhỏ trước và lễ chính sau, để ứng vào chữ hai lần đò."
+      },
+      {
+        "khi": "co_qua",
+        "loi": "Đầu năm đi lễ cầu duyên ở đền, chùa là nếp quen của nhiều người; coi đó là dịp tự nhắc mình mở lòng."
+      }
+    ],
+    "gia_dinh": [
+      {
+        "khi": "luon",
+        "loi": "Giỗ chạp, Tết là dịp cả nhà về một mối; nhiều nhà chia việc giỗ theo năm để không ai gánh một mình."
+      },
+      {
+        "khi": "con",
+        "loi": "Con khó nuôi, hay ốm vặt, nhiều nhà làm lễ bán khoán gửi con vào cửa chùa tới năm mười hai tuổi, hoặc nhờ người mát tay đỡ đầu."
+      },
+      {
+        "khi": "cha_me",
+        "loi": "Con ít hợp ở gần cha mẹ, dân gian có lệ nhận cha mẹ nuôi, hoặc cho con gọi cha mẹ bằng cậu mợ, chú thím."
+      }
+    ],
+    "su_nghiep": [
+      {
+        "khi": "luon",
+        "loi": "Nhận việc mới, khai trương, ký việc lớn: nhiều người chọn ngày tốt và giờ hoàng đạo.",
+        "duong": "/xem-ngay-tot"
+      },
+      {
+        "khi": "luon",
+        "loi": "Kê bàn làm việc quay về một trong bốn hướng hợp tuổi.",
+        "duong": "/phong-thuy"
+      },
+      {
+        "khi": "vuong",
+        "loi": "Người theo một nghề lâu năm thường giữ lễ giỗ tổ nghề mỗi năm, coi như dịp nhìn lại tay nghề."
+      }
+    ],
+    "tien_bac": [
+      {
+        "khi": "luon",
+        "loi": "Người buôn bán giữ lệ cúng vía Thần Tài mùng mười tháng Giêng và thắp hương ngày mùng một, ngày rằm."
+      },
+      {
+        "khi": "luon",
+        "loi": "Đầu năm chọn người hợp tuổi xông đất, mở hàng.",
+        "duong": "/tuoi-xong-dat"
+      },
+      {
+        "khi": "vuong",
+        "loi": "Năm tuổi, năm hạn, dân gian kiêng cho vay và kiêng khởi việc lớn; nhiều nhà làm lễ dâng sao đầu năm.",
+        "duong": "/xem-sao-han"
+      }
+    ],
+    "quan_he": [
+      {
+        "khi": "luon",
+        "loi": "Đi xa, nhiều người chọn ngày giờ xuất hành; đầu năm xuất hành theo hướng Hỷ thần, Tài thần.",
+        "duong": "/xem-ngay-tot"
+      },
+      {
+        "khi": "vuong",
+        "loi": "Gặp chuyện thị phi, người xưa dặn một điều nhịn chín điều lành, và đầu năm đi lễ cầu an cho nhẹ lòng."
+      }
+    ]
+  },
+  "cau": {
+    "tinh_cam": [
+      {
+        "ma": "hanh_phuc",
+        "cau": "Hôn nhân của tôi có hạnh phúc không?"
+      },
+      {
+        "ma": "nguoi_ay",
+        "cau": "Người bạn đời của tôi là người thế nào?"
+      },
+      {
+        "ma": "ben",
+        "cau": "Tôi một đời vợ chồng hay dễ dang dở, ly dị?"
+      },
+      {
+        "ma": "nguoi_thu_ba",
+        "cau": "Có chuyện ngoại tình, người thứ ba không?"
+      },
+      {
+        "ma": "som_muon",
+        "cau": "Tình duyên có lận đận không, nên cưới sớm hay muộn?"
+      }
+    ],
+    "gia_dinh": [
+      {
+        "ma": "cha_me",
+        "cau": "Tôi với cha mẹ có duyên gần không, cần lưu ý gì?"
+      },
+      {
+        "ma": "con_cai",
+        "cau": "Đường con cái của tôi thế nào?"
+      },
+      {
+        "ma": "anh_em",
+        "cau": "Anh chị em có nhờ cậy được nhau không?"
+      },
+      {
+        "ma": "tac_dong_nha",
+        "cau": "Tôi tác động gì tới người trong nhà?"
+      }
+    ],
+    "su_nghiep": [
+      {
+        "ma": "nghe_hop",
+        "cau": "Tôi hợp nghề gì?"
+      },
+      {
+        "ma": "chu_hay_cong",
+        "cau": "Tôi nên làm chủ hay làm công?"
+      },
+      {
+        "ma": "trai_nghe",
+        "cau": "Nếu làm trái nghề thì sao?"
+      },
+      {
+        "ma": "hoc_hanh",
+        "cau": "Đường học hành, bằng cấp của tôi thế nào?"
+      },
+      {
+        "ma": "sep",
+        "cau": "Sếp của tôi là người thế nào, tôi hợp kiểu sếp nào?"
+      },
+      {
+        "ma": "dong_nghiep",
+        "cau": "Đồng nghiệp, cấp dưới với tôi ra sao?"
+      },
+      {
+        "ma": "di_xa",
+        "cau": "Tôi có nên đi làm xa, đổi môi trường?"
+      },
+      {
+        "ma": "trac_tro",
+        "cau": "Công việc có gặp trắc trở gì không, vào lúc nào?"
+      }
+    ],
+    "tien_bac": [
+      {
+        "ma": "kiem_bang_gi",
+        "cau": "Tôi kiếm tiền bằng cách nào là hợp nhất?"
+      },
+      {
+        "ma": "giu_tien",
+        "cau": "Tôi có giữ được tiền không?"
+      },
+      {
+        "ma": "cong_danh",
+        "cau": "Công danh, chức vị của tôi thế nào?"
+      },
+      {
+        "ma": "kinh_doanh",
+        "cau": "Tôi nên kinh doanh hay làm lương?"
+      },
+      {
+        "ma": "giai_doan_kha",
+        "cau": "Giai đoạn nào tiền bạc của tôi khá nhất?"
+      },
+      {
+        "ma": "trac_tro",
+        "cau": "Tiền bạc có gặp trắc trở gì không, vào lúc nào?"
+      }
+    ],
+    "quan_he": [
+      {
+        "ma": "ban_be",
+        "cau": "Bạn bè của tôi có tin được không?"
+      },
+      {
+        "ma": "quy_nhan",
+        "cau": "Tôi có người giúp đỡ, có quý nhân không?"
+      },
+      {
+        "ma": "lam_an_chung",
+        "cau": "Tôi có nên làm ăn chung với người khác?"
+      },
+      {
+        "ma": "thi_phi",
+        "cau": "Ra ngoài tôi có hay gặp thị phi, kẻ chơi xấu không?"
+      }
+    ]
+  },
+  "tra_loi": {
+    "hanh_phuc": {
+      "thuan": {
+        "tl": "Có. Cung vợ chồng của bạn thuộc loại thuận: hôn nhân là chỗ bạn dựa được.",
+        "gt": "Điều giữ cho nó bền là hai người còn làm việc chung và còn nói chuyện được với nhau."
+      },
+      "can_bang": {
+        "tl": "Hạnh phúc ở mức vừa: có lúc êm, có lúc phải chịu khó vun. Được hay không là do cách hai người sống chung.",
+        "gt": "Lá số không cho sẵn một hôn nhân êm, cũng không báo đổ vỡ; phần quyết định nằm ở nếp nói chuyện hằng ngày."
+      },
+      "can_chu_dong": {
+        "tl": "Nói thẳng: đây là mảng khó của lá số. Hôn nhân của bạn cần công vun nhiều hơn người khác mới yên.",
+        "gt": "Khó không có nghĩa là hỏng. Người biết trước chỗ khó thường chọn bạn đời kỹ hơn và sống chung khéo hơn."
+      }
+    },
+    "ben": {
+      "mot_moi_ben": {
+        "tl": "Lá số thuộc nhóm một mối bền: ít dấu hiệu dang dở, cưới rồi thường ở với nhau lâu dài.",
+        "gt": "Điều cần giữ là đừng chủ quan; hôn nhân bền nhờ nếp sống chung, lá số chỉ cho nền thuận."
+      },
+      "ben_neu_vun": {
+        "tl": "Thường là một đời vợ chồng, nhưng có một hai giai đoạn sóng gió phải cùng nhau vượt.",
+        "gt": "Dấu hiệu dang dở không nhiều; chỗ cần để ý là những lần im lặng kéo dài."
+      },
+      "muon_moi_ben": {
+        "tl": "Nói thẳng: cưới sớm dễ dang dở, cưới muộn thì bền. Thầy xưa gọi là thế muộn mới yên.",
+        "gt": "Mối đầu của bạn hay không đi tới cùng; người đến sau, khi bạn đã chín hơn, mới là người ở lại."
+      },
+      "hai_lan_do": {
+        "tl": "Nói thẳng như cách thầy xưa đọc: lá số thuộc nhóm dễ hai lần đò. Cuộc hôn nhân đầu dễ dang dở, nhất là khi cưới sớm hoặc cưới vội.",
+        "gt": "Người cùng thế này mà cưới muộn, chọn người chênh tuổi rõ và giữ được nếp nói chuyện thì vẫn ở với nhau tới già."
+      }
+    },
+    "nguoi_thu_ba": {
+      "it_dau_hieu": {
+        "tl": "Ít dấu hiệu. Lá số không nổi chuyện người thứ ba, từ phía bạn lẫn phía người ấy.",
+        "gt": "Chuyện ngoài luồng nếu có thường đến từ hoàn cảnh xa nhau lâu, không phải từ tính người."
+      },
+      "phia_ban": {
+        "tl": "Có, và nghiêng về phía bạn: bạn có số đào hoa, dễ được người khác giới để ý và dễ mềm lòng.",
+        "gt": "Điều này tốt cho việc giao tiếp, nhưng trong hôn nhân nó thành chỗ phải tự giữ."
+      },
+      "phia_nguoi_ay": {
+        "tl": "Có, và nghiêng về phía người ấy: bạn đời của bạn là người có duyên, nhiều người để ý.",
+        "gt": "Không có nghĩa người ấy thay lòng; có nghĩa hai người không nên xa nhau lâu và cần nói rõ ranh giới."
+      },
+      "ca_hai": {
+        "tl": "Có, ở cả hai phía: cả bạn và người ấy đều có duyên với người ngoài. Đây là chỗ dễ sinh chuyện nhất trong hôn nhân của bạn.",
+        "gt": "Hai người cùng đào hoa thì hợp nhau lúc yêu, nhưng khi sống chung cần luật chơi rõ ràng."
+      }
+    },
+    "som_muon": {
+      "som_thuan": {
+        "tl": "Không lận đận. Duyên của bạn đến thuận, cưới sớm hay muộn đều được.",
+        "gt": "Bạn không cần đợi; gặp người hợp và hai bên gia đình thuận thì tiến tới."
+      },
+      "muon_thi_ben": {
+        "tl": "Hơi lận đận lúc đầu. Bạn hợp cưới muộn hơn bạn bè cùng lứa, khi công việc và tính nết đã ổn.",
+        "gt": "Một hai mối đầu thường là để học cách yêu; đừng coi đó là lỡ dở."
+      },
+      "lan_dan": {
+        "tl": "Có lận đận. Đường tình của bạn nhiều khúc quanh, thường qua vài mối mới yên; nên cưới muộn.",
+        "gt": "Lận đận không phải vì bạn kém duyên mà vì bạn và người ấy hay gặp nhau sai lúc."
+      }
+    },
+    "cha_me": {
+      "thuan": {
+        "tl": "Có duyên gần. Cha mẹ là chỗ dựa thật của bạn, cả về nếp nhà lẫn lúc khó.",
+        "gt": "Điều nên làm là hỏi ý cha mẹ ở các việc lớn và có mặt khi cha mẹ cần."
+      },
+      "can_bang": {
+        "tl": "Thương nhau nhưng hay khác ý. Ở gần thì nhờ được, song mỗi bên cần một khoảng riêng.",
+        "gt": "Bạn và cha mẹ hợp nhau ở việc, hay lệch nhau ở cách nói."
+      },
+      "can_chu_dong": {
+        "tl": "Nói thẳng: bạn ít duyên ở gần cha mẹ. Dễ xa nhà sớm, hoặc ở gần thì hay trái ý nhau.",
+        "gt": "Xa mà thương thường êm hơn gần mà va; lo cho cha mẹ bằng việc đều đặn thay vì ở chung."
+      }
+    },
+    "con_cai": {
+      "thuan": {
+        "tl": "Đường con cái thuận: con là niềm vui và về sau là chỗ dựa của bạn.",
+        "gt": "Con hợp với bạn; điều cần là cho con khoảng riêng để tự lớn."
+      },
+      "can_bang": {
+        "tl": "Con cái ở mức vừa: nuôi con có lúc vất vả, cần kiên nhẫn, nhưng con lớn lên tử tế.",
+        "gt": "Bạn và con hiểu nhau chậm; càng lớn con càng gần bạn hơn."
+      },
+      "can_chu_dong": {
+        "tl": "Nói thẳng: đường con cái của bạn vất vả hơn người. Con thường đến muộn, hoặc nuôi con tốn nhiều công sức và lo nghĩ.",
+        "gt": "Chuyện có con là việc của y khoa và của hai vợ chồng; lá số chỉ nói mảng này cần bạn bỏ công nhiều."
+      }
+    },
+    "anh_em": {
+      "thuan": {
+        "tl": "Nhờ cậy được. Anh chị em là chỗ dựa thực tế của bạn, cần là có.",
+        "gt": "Giữ sự sòng phẳng trong chuyện tiền để tình thân bền."
+      },
+      "can_bang": {
+        "tl": "Mỗi người một việc: thương nhau nhưng ít khi dựa hẳn vào nhau.",
+        "gt": "Gặp việc lớn vẫn có nhau; việc thường ngày thì ai lo phần nấy."
+      },
+      "can_chu_dong": {
+        "tl": "Nói thẳng: ít nhờ được. Anh chị em dễ xa cách hoặc mỗi người một hoàn cảnh, bạn thường phải tự lo.",
+        "gt": "Đừng trông vào anh em chuyện tiền bạc; giữ tình cảm ở mức gặp mặt, hỏi han là đủ êm."
+      }
+    },
+    "tac_dong_nha": {
+      "co": {
+        "tl": "Có.",
+        "gt": ""
+      },
+      "khong": {
+        "tl": "Bạn không gây tác động nào quá mạnh lên người nhà: ai sống đời nấy, ảnh hưởng nhau ở mức thường.",
+        "gt": "Điều này tốt ở chỗ bạn ít khi thành gánh nặng cho ai; chỗ cần bù là chủ động quan tâm hơn."
+      }
+    },
+    "chu_hay_cong": {
+      "lam_chu": {
+        "tl": "Bạn hợp làm chủ, hoặc ít nhất là người đứng mũi chịu sào trong phần việc của mình.",
+        "gt": "Làm công lâu dài dưới người quản chặt dễ khiến bạn bí. Nếu chưa tự làm được, hãy chọn vị trí có quyền quyết."
+      },
+      "chuyen_mon": {
+        "tl": "Bạn hợp làm người giỏi nghề hơn là làm chủ: đi sâu một chuyên môn, sống bằng tay nghề.",
+        "gt": "Bạn vẫn tự làm riêng được khi đã có tên tuổi trong nghề, theo kiểu chuyên gia độc lập."
+      },
+      "to_chuc": {
+        "tl": "Bạn hợp làm trong một tổ chức ổn định, lên từng bậc, hơn là tự ra làm riêng.",
+        "gt": "Làm chủ đòi chịu rủi ro một mình, không phải thế mạnh của bạn; nếu muốn kinh doanh thì nên có người chung vai."
+      }
+    },
+    "trai_nghe": {
+      "thuan": {
+        "tl": "Làm trái nghề bạn vẫn đứng được, vì nền công việc của lá số vững. Có điều bạn mất thời gian hơn để lên.",
+        "gt": "Dù làm gì, hãy giữ trong công việc phần {viec}; đó là chỗ bạn hơn người."
+      },
+      "can_bang": {
+        "tl": "Làm trái nghề thì sống được nhưng dễ chán và hay nhảy việc. Bạn cần ít nhất một phần công việc đúng sở trường.",
+        "gt": "Không cần bỏ nghề đang làm; hãy xin hoặc tự thêm vào việc hiện tại phần {viec}."
+      },
+      "can_chu_dong": {
+        "tl": "Nói thẳng: với lá số này làm trái nghề là vất vả nhất. Sức bạn có hạn ở mảng công việc nên càng phải chọn đúng việc.",
+        "gt": "Nếu đang trái nghề, đừng đổi đột ngột: học thêm và chuyển dần sang việc có phần {viec}."
+      }
+    },
+    "hoc_hanh": {
+      "sang": {
+        "tl": "Đường học hành sáng: bạn có số bằng cấp, thi cử thuận, càng học càng lợi cho nghề.",
+        "gt": "Nên đầu tư học cao hoặc lấy chứng chỉ nghề; với bạn, bằng cấp đổi được ra vị trí."
+      },
+      "vua": {
+        "tl": "Học được nếu kiên trì: bạn không thuộc kiểu học một biết mười, nhưng học tới đâu chắc tới đó.",
+        "gt": "Chọn ít môn và học tới nơi; một bằng cấp, chứng chỉ đúng nghề là đủ dùng."
+      },
+      "it": {
+        "tl": "Bạn học bằng làm nhiều hơn học trên lớp: đường bằng cấp không nổi, nhưng tay nghề thực tế thì lên được.",
+        "gt": "Đừng tự ti vì bằng cấp; đi học nghề, học qua việc và qua người đi trước là đường của bạn."
+      }
+    },
+    "sep": {
+      "thuan": {
+        "tl": "Bạn có duyên với cấp trên: thường gặp sếp chịu nâng đỡ, cho bạn cơ hội.",
+        "gt": "Hãy báo việc đều và xin việc khó; sếp của bạn giúp người chủ động."
+      },
+      "can_bang": {
+        "tl": "Với sếp ở mức thường: được việc thì yên, không trông được nâng đỡ đặc biệt.",
+        "gt": "Bạn lên bằng kết quả hơn là bằng quan hệ với cấp trên."
+      },
+      "can_chu_dong": {
+        "tl": "Nói thẳng: bạn ít duyên với cấp trên. Dễ gặp sếp khó tính hoặc hay bất đồng với người quản mình.",
+        "gt": "Chọn chỗ làm, hãy chọn sếp trước rồi mới chọn lương; và luôn góp ý kèm phương án."
+      }
+    },
+    "dong_nghiep": {
+      "thuan": {
+        "tl": "Đồng nghiệp, cấp dưới là điểm mạnh: bạn có người làm cùng tin được và chịu theo.",
+        "gt": "Việc lớn nên làm theo nhóm; bạn một mình thì chậm, có đội thì nhanh."
+      },
+      "can_bang": {
+        "tl": "Đồng nghiệp ở mức vừa: làm chung được, nhưng ít ai theo bạn tới cùng.",
+        "gt": "Giữ quan hệ sòng phẳng, rõ việc; đừng trông vào tình thân ở chỗ làm."
+      },
+      "can_chu_dong": {
+        "tl": "Nói thẳng: đây là chỗ bạn hay chịu thiệt. Dễ gặp đồng nghiệp, cấp dưới không hết lòng, hoặc bị nói sau lưng.",
+        "gt": "Việc quan trọng tự nắm phần chính và ghi nhận bằng văn bản; chọn người qua việc nhỏ trước."
+      }
+    },
+    "di_xa": {
+      "hop_di_xa": {
+        "tl": "Nên. Bạn hợp đi xa, đổi môi trường: ra khỏi chỗ quen bạn thường khá hơn.",
+        "gt": "Ở nơi mới bạn dễ gặp người giúp; đừng ngại công tác xa hoặc chuyển vùng."
+      },
+      "o_gan_di_duoc": {
+        "tl": "Đi cũng được, ở cũng được: xa hay gần không quyết định chuyện bạn khá hay không.",
+        "gt": "Chọn theo công việc cụ thể; lá số không đẩy bạn đi cũng không giữ bạn lại."
+      },
+      "nen_o_gan": {
+        "tl": "Nói thẳng: bạn hợp ở gần hơn. Ra ngoài, đi xa bạn dễ vất vả và gặp va chạm.",
+        "gt": "Nếu buộc phải đi, chọn nơi có người quen và chuẩn bị kỹ giấy tờ, tiền dự phòng."
+      }
+    },
+    "trac_tro": {
+      "it": {
+        "tl": "Không thấy trắc trở lớn trong mười năm tới ở mảng này.",
+        "gt": "Nhịp khá đều; việc cần làm là giữ nếp và đừng chủ quan."
+      },
+      "co": {
+        "tl": "Có. Chỗ dễ vấp: {y}.",
+        "gt": ""
+      }
+    },
+    "giu_tien": {
+      "giu_tot": {
+        "tl": "Giữ được. Bạn có số tích luỹ: tiền kiếm ra thường đọng lại thành của.",
+        "gt": "Nên chuyển dần tiền nhàn rỗi sang tài sản lâu dài như nhà đất, quỹ dài hạn."
+      },
+      "giu_vua": {
+        "tl": "Giữ được một phần: không thiếu nhưng cũng khó dư nhiều nếu không có kế hoạch.",
+        "gt": "Tự động trích một phần thu nhập ngay khi nhận; đợi cuối tháng còn mới để dành thì thường không còn."
+      },
+      "giu_kem": {
+        "tl": "Nói thẳng: bạn kiếm được nhưng giữ kém. Tiền dễ đi vì nể, vì vội hoặc vì việc bất ngờ.",
+        "gt": "Bạn cần một người hoặc một cơ chế giữ tiền hộ: tài khoản khoá kỳ hạn, tài sản đứng tên chung."
+      }
+    },
+    "cong_danh": {
+      "co_chuc": {
+        "tl": "Bạn có đường công danh: dễ được giao chức vị, có tiếng nói trong tổ chức.",
+        "gt": "Nên theo đường quản lý; nhận trách nhiệm sớm thì lên sớm."
+      },
+      "co_tieng": {
+        "tl": "Bạn có tiếng trong nghề hơn là có chức: người ta biết bạn vì làm giỏi.",
+        "gt": "Xây tên tuổi chuyên môn; chức vị nếu có sẽ theo sau tay nghề."
+      },
+      "thuc_luc": {
+        "tl": "Nói thẳng: công danh không phải mảng nổi của bạn. Bạn hợp sống bằng thực lực và thu nhập hơn là danh vị.",
+        "gt": "Đừng tiêu sức vào chuyện chức tước; dồn vào việc cho ra kết quả và ra tiền."
+      }
+    },
+    "kinh_doanh": {
+      "hop_kinh_doanh": {
+        "tl": "Bạn hợp kinh doanh, tự làm: có gan quyết và tiền làm ra theo sức mình.",
+        "gt": "Bắt đầu từ việc bạn đã rành, vốn vừa sức. Đây không phải lời khuyên đầu tư; hãy tính bằng con số thật."
+      },
+      "luong_cong_them": {
+        "tl": "Hợp nhất là giữ một công việc chính và làm thêm một nguồn phụ đúng chuyên môn.",
+        "gt": "Đừng bỏ hẳn lương để kinh doanh khi nguồn phụ chưa bằng nửa lương. Đây không phải lời khuyên đầu tư."
+      },
+      "luong_on_dinh": {
+        "tl": "Nói thẳng: bạn hợp làm lương ổn định hơn. Kinh doanh, đầu tư lớn là chỗ bạn dễ mất.",
+        "gt": "Muốn tiền sinh lời, chọn cách chậm và chắc. Đây không phải lời khuyên đầu tư; hỏi người có chuyên môn trước khi xuống tiền."
+      }
+    },
+    "giai_doan_kha": {
+      "co": {
+        "tl": "Giai đoạn thuận nhất còn ở phía trước hoặc đang đi: {ds}.",
+        "gt": "Việc lớn về tiền bạc, tài sản nên dồn vào các giai đoạn này."
+      },
+      "deu": {
+        "tl": "Không có giai đoạn nào vọt hẳn lên: tiền của bạn đi đều, tích từng bậc.",
+        "gt": "Với nhịp đều như vậy, tích luỹ kỷ luật quan trọng hơn chờ thời."
+      }
+    },
+    "ban_be": {
+      "thuan": {
+        "tl": "Tin được. Bạn có bạn tốt, chơi lâu và giúp nhau thật.",
+        "gt": "Giữ vài người bạn lâu năm cho kỹ; họ là vốn của bạn."
+      },
+      "can_bang": {
+        "tl": "Tin được có chọn lọc: bạn nhiều nhưng thân thật thì ít.",
+        "gt": "Chuyện riêng và chuyện tiền chỉ nên chia với một hai người đã qua thử thách."
+      },
+      "can_chu_dong": {
+        "tl": "Nói thẳng: bạn dễ bị bạn bè lợi dụng hoặc làm phiền. Đây là mảng phải dè dặt.",
+        "gt": "Giúp người trong sức mình; không đứng tên hộ, không cho vay khoản mình không chịu mất được."
+      }
+    },
+    "quy_nhan": {
+      "nhieu": {
+        "tl": "Có, và nhiều. Lá số của bạn có người giúp ở nhiều chặng, {ai}.",
+        "gt": "Quý nhân đến với người chịu mở lời; cần gì hãy nói ra."
+      },
+      "co": {
+        "tl": "Có người giúp đúng lúc, {ai}.",
+        "gt": "Người giúp bạn không nhiều nhưng thật; giữ mối ấy bằng cách đáp lại."
+      },
+      "tu_luc": {
+        "tl": "Nói thẳng: bạn thuộc kiểu tự lực. Ít người nâng đỡ sẵn, phần lớn do bạn tự làm ra.",
+        "gt": "Bù lại, cái gì bạn có là của bạn thật, không nợ ai; hãy chủ động đi tìm người hướng dẫn thay vì đợi."
+      }
+    },
+    "lam_an_chung": {
+      "hop_tac_duoc": {
+        "tl": "Nên. Bạn hợp làm chung: có người cùng vai thì việc của bạn lớn nhanh hơn.",
+        "gt": "Vẫn cần giấy tờ rõ từ đầu để giữ tình bạn. Lá số không nói thay việc kiểm tra đối tác."
+      },
+      "can_giay_to": {
+        "tl": "Làm chung được, với điều kiện mọi thứ rõ trên giấy: phần góp, phần chia, cách rút lui.",
+        "gt": "Chỗ dễ vỡ của bạn là lời hứa miệng. Việc pháp lý hãy hỏi luật sư."
+      },
+      "nen_tu_lam": {
+        "tl": "Nói thẳng: bạn nên tự làm hơn là hùn hạp. Làm ăn chung là chỗ bạn dễ mất cả tiền lẫn bạn.",
+        "gt": "Nếu cần người, hãy thuê hoặc hợp tác theo từng việc, đừng chung vốn dài hạn."
+      }
+    },
+    "thi_phi": {
+      "it": {
+        "tl": "Ít. Ra ngoài bạn ít khi vướng thị phi; người ta thường nói tốt về bạn.",
+        "gt": "Giữ nếp ít bàn chuyện người khác là đủ."
+      },
+      "co": {
+        "tl": "Có. Ra ngoài bạn dễ gặp lời ra tiếng vào hoặc người chơi không đẹp, nhất là khi bạn đang lên.",
+        "gt": "Đừng thanh minh với tất cả; làm rõ bằng việc và giấy tờ với người cần biết."
+      }
+    }
+  },
+  "nhan_tin_hieu": {
+    "do": "Điểm đỡ",
+    "vuong": "Điểm vướng"
+  },
+  "nam_hy": "Năm có duyên gặp gỡ, cưới hỏi trong mười năm tới: {ds}.",
+  "nam_cham": "Năm nên đi chậm: {ds}.",
+  "nam_thuan": "Năm thuận: {ds}.",
+  "quy_nhan_ai": {
+    "lon": "thường là người lớn tuổi hoặc cấp trên",
+    "ngang": "thường là bạn bè, người ngang hàng",
+    "ca_hai": "cả người trên lẫn bạn bè ngang hàng"
+  },
+  "dong_mang": {
+    "thuan": "có nguồn thuận tìm tới",
+    "can_chu_dong": "nên đi chậm, việc lớn dời lại",
+    "can_bang": "nhịp đều",
+    "hy": "có duyên gặp gỡ, cưới hỏi",
+    "quyen": "bạn nắm được phần quyết",
+    "khoa": "có tiếng tốt, việc dễ rõ ràng",
+    "noi": "mảng này nổi lên trong năm"
+  }
+}

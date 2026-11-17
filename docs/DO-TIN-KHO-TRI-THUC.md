@@ -16,7 +16,7 @@
 | Mảng | Có nguyên văn đối chiếu | Tóm ý cổ thư, chưa khớp từng câu | Tập quán / sách hiện đại tóm ý | Ban biên tập soạn | Tệp kỹ thuật |
 |---|---|---|---|---|---|
 | Bát tự | 2 | 1 |  | 3 |  |
-| Tử vi | 1 | 3 | 4 | 6 |  |
+| Tử vi | 1 | 3 | 4 | 7 |  |
 | Kinh Dịch | 2 | 2 |  | 2 |  |
 | Phong thuỷ | 2 | 2 | 1 | 3 |  |
 | Nhân tướng | 4 | 2 |  |  |  |
@@ -87,6 +87,7 @@
 | Tử vi | `tuvi_kb.json` | mau | Ban biên tập soạn |  |
 | Tử vi | `tuvi_kb.json` | giai_thich | Ban biên tập soạn |  |
 | Tử vi | `tuvi_kb.json` | doc_tung_buoc | Ban biên tập soạn |  |
+| Tử vi | `tuvi_luan_hoi_kb.json` |  | Ban biên tập soạn | lớp Luận theo câu hỏi (LH-1); tập quán dân gian ghi theo phong tục, không phải cổ thư |
 | Tử vi | `tuvi_phi_hoa_kb.json` |  | Tập quán / sách hiện đại tóm ý | phi tinh tứ hoá — trường phái hiện đại |
 | Tử vi | `tuvi_sach_ghi.json` |  | Có nguyên văn đối chiếu | SX-C: 434 câu Toàn Thư quyển 3 (sao × cung) khớp kho nguồn; lời Việt là tóm ý đã nói giảm (A / B / C) |
 | Tử vi | `tuvi_sao_luu_kb.json` |  | Tập quán / sách hiện đại tóm ý |  |

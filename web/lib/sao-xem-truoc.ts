@@ -29,6 +29,12 @@ export function catXemTruoc<T extends BaoCaoDay>(bc: T, mienPhi: number): Omit<T
         typeof r.tu_chuong === "string" && mo.has(r.tu_chuong) ? r
           : { ma: r.ma, ten: r.ten, muc: r.muc, nhan_muc: r.nhan_muc, tu_chuong: r.tu_chuong, khoa: true });
     }
+    // LH-1: bản đồ "Người quanh bạn" — người thuộc chương khoá chỉ giữ tên + mức (chân dung, tác động bỏ hẳn).
+    if (Array.isArray(bc.nguoi_quanh)) {
+      o.nguoi_quanh = (bc.nguoi_quanh as Record<string, unknown>[]).map((r) =>
+        typeof r.tu_chuong === "string" && mo.has(r.tu_chuong) ? r
+          : { ma: r.ma, ten: r.ten, muc: r.muc, nhan_muc: r.nhan_muc, tu_chuong: r.tu_chuong, khoa: true });
+    }
   }
   return out;
 }

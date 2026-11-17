@@ -3,7 +3,19 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-17 (SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-17 (LH-1 mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+
+### 4av. LH-1 — "Luận theo câu hỏi" cho Luận giải Tử vi (2026-11-17, `docs/LUAN-GIAI-DOI-SONG.md` mục 11)
+
+- [ ] **Deploy engine TRƯỚC web** (web cũ bỏ qua trường mới; web mới gặp engine cũ thì không hiện lớp này).
+- [ ] Mở `/tu-vi` bằng hồ sơ của anh → Xem luận giải: đọc khối "Người quanh bạn" và 5 chương có "Trả lời thẳng những câu bạn
+  hay hỏi". Câu nào anh thấy lệch với kinh nghiệm luận của anh thì báo em mã câu (hoặc sửa ở `/quan-tri` → Kho tri thức →
+  `tuvi_luan_hoi_kb.json`, Xuất bản = PR).
+- [ ] (Quyết định) Ngưỡng nhãn nặng: hiện "dễ hai lần đò" rơi vào ~6 % lá số, "có dấu hiệu người thứ ba" ~19 %. Muốn nói
+  mạnh tay hơn hay dè hơn thì báo em — đổi một con số trong `tuvi_luan_hoi.py`, test giữ khoảng 3–12 %.
+- [ ] (Quyết định) Mục "Dân gian thường làm": em chỉ ghi tập quán phổ biến (cưới muộn, bán khoán, vía Thần Tài, dâng sao,
+  chọn ngày). Anh muốn thêm / bớt tục nào thì gửi em danh sách.
+- [ ] Việc tiếp theo em đề xuất: cùng khuôn cho **Bát tự** (PR riêng), rồi bản tiếng Anh.
 
 ### 4au. SEO-Q — tiêu đề blog trong CMS, hồ sơ Đức Luân, rà SEO 2.212 URL (2026-11-17, `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 9)
 
