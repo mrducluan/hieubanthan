@@ -48,19 +48,26 @@ async function goi(url: string, init: RequestInit): Promise<Record<string, unkno
   }
 }
 
-/** Đổi mã xác nhận lấy access token (header secret_key, thân x-www-form-urlencoded). Lỗi → null. */
-export async function doiMa(cfg: CauHinhZalo, code: string, verifier: string): Promise<string | null> {
+/** Lỗi Zalo trả về — chỉ mã + tên lỗi (không token, không bí mật) để ghi nhật ký máy chủ khi chẩn đoán. */
+export type LoiZalo = { buoc: "doi_ma" | "nguoi_dung"; ma?: unknown; ten?: unknown };
+const loiCua = (buoc: LoiZalo["buoc"], j: Record<string, unknown> | null): LoiZalo =>
+  ({ buoc, ma: j?.error ?? (j ? "khong_ro" : "khong_goi_duoc"), ten: j?.error_name ?? j?.message });
+
+/** Đổi mã xác nhận lấy access token (header secret_key, thân x-www-form-urlencoded). */
+export async function doiMa(cfg: CauHinhZalo, code: string, verifier: string): Promise<{ token: string } | LoiZalo> {
   const j = await goi(ZALO_DOI_MA, {
     method: "POST",
     headers: { "content-type": "application/x-www-form-urlencoded", secret_key: cfg.bimat },
     body: new URLSearchParams({ app_id: cfg.appId, code, code_verifier: verifier, grant_type: "authorization_code" }),
   });
-  return typeof j?.access_token === "string" && j.access_token ? j.access_token : null;
+  return typeof j?.access_token === "string" && j.access_token ? { token: j.access_token } : loiCua("doi_ma", j);
 }
 
 /** Chỉ lấy mã người dùng (id). Không xin tên, ảnh, số điện thoại — không lưu thứ không cần. */
-export async function layMaNguoiDung(accessToken: string): Promise<string | null> {
+export async function layMaNguoiDung(accessToken: string): Promise<{ id: string } | LoiZalo> {
   const j = await goi(`${ZALO_NGUOI_DUNG}?fields=id`, { headers: { access_token: accessToken } });
   const id = j?.id;
-  return typeof id === "string" && /^\d{1,30}$/.test(id) ? id : typeof id === "number" ? String(id) : null;
+  if (typeof id === "string" && /^\d{1,30}$/.test(id)) return { id };
+  if (typeof id === "number" && Number.isSafeInteger(id)) return { id: String(id) };
+  return loiCua("nguoi_dung", j);
 }

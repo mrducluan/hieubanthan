@@ -46,3 +46,21 @@ test("thuần: Google qua hieuban.com — redirect về site, nonce gửi Google
   expect(cauHinhGoogle({ GOOGLE_CLIENT_ID: "x", GOOGLE_CLIENT_SECRET: "s" })).toBeNull();
   expect(cauHinhGoogle({})).toBeNull();
 });
+
+test("thuần: Zalo — lỗi đổi mã / lấy mã người dùng trả về bước + mã lỗi Zalo, không token", async () => {
+  const { doiMa, layMaNguoiDung } = await import("../lib/zalo");
+  const goc = globalThis.fetch;
+  const tra = (j: unknown) => { globalThis.fetch = (async () => new Response(JSON.stringify(j))) as typeof fetch; };
+  try {
+    tra({ error: -14019, error_name: "Invalid code verifier" });
+    expect(await doiMa({ appId: "123456", bimat: "x" }, "c", "v")).toEqual({ buoc: "doi_ma", ma: -14019, ten: "Invalid code verifier" });
+    tra({ access_token: "tok" });
+    expect(await doiMa({ appId: "123456", bimat: "x" }, "c", "v")).toEqual({ token: "tok" });
+    tra({ id: "1234567890", error: 0, message: "Success" });
+    expect(await layMaNguoiDung("tok")).toEqual({ id: "1234567890" });
+    tra({ error: 452, message: "Session key invalid" });
+    expect(await layMaNguoiDung("tok")).toEqual({ buoc: "nguoi_dung", ma: 452, ten: "Session key invalid" });
+  } finally {
+    globalThis.fetch = goc;
+  }
+});
