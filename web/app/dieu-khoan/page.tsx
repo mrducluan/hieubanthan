@@ -51,7 +51,7 @@ export default async function DieuKhoan() {
       noiDung: (
         <ul>
           <li>Bạn dùng được phần lớn tính năng mà không cần tài khoản. Tài khoản chỉ để lưu hồ sơ và ví Sao.</li>
-          <li>Bạn chịu trách nhiệm giữ an toàn email, số điện thoại hoặc tài khoản Google dùng để đăng nhập.</li>
+          <li>Bạn chịu trách nhiệm giữ an toàn email hoặc tài khoản (Google, Apple, Facebook, số điện thoại) dùng để đăng nhập.</li>
           <li>Bạn xoá được tài khoản bất cứ lúc nào ở mục Tài khoản. Hồ sơ, ví Sao và mã mời sẽ bị xoá theo.</li>
           <li>Chúng tôi có thể tạm khoá tài khoản vi phạm mục <Link href="#hanh-vi" className="text-gold underline">Những điều không được làm</Link>.</li>
         </ul>

@@ -514,6 +514,16 @@ mỗi lượt xem trang sinh 40–100 lượt chạy hàm vì Next.js tải trư
   "Chọn trên ảnh vệ tinh" → bấm → thấy ảnh vệ tinh, bấm mái nhà + mặt đường → hiện hướng.
 - Khoá này lộ ra trình duyệt là bình thường (Google thiết kế vậy) — an toàn nhờ giới hạn tên miền ở bước 3.
 
+
+### DN-1 — đăng nhập: tắt số điện thoại, thêm Facebook / Apple (2026-11-17) — hướng dẫn đủ ở `docs/DANG-NHAP.md`
+- [ ] Supabase → Authentication → Providers → **Phone** → tắt (nút trên web đã ẩn, nhưng phải tắt ở đây mới hết rủi ro tốn tiền SMS).
+- [ ] Facebook Login (miễn phí): tạo app ở developers.facebook.com → dán App ID + Secret vào Supabase → Vercel env
+  `NEXT_PUBLIC_DANG_NHAP` = `google,facebook` → Redeploy.
+- [ ] **Zalo** (miễn phí, DN-2): tạo app ở developers.zalo.me, Callback `https://hieuban.com/auth/zalo/callback` → Vercel env
+  `ZALO_APP_ID`, `ZALO_APP_SECRET`, thêm `zalo` vào `NEXT_PUBLIC_DANG_NHAP` → Redeploy (`docs/DANG-NHAP.md` mục 5).
+- [ ] (Để sau) Apple: Apple Developer Program 99 USD/năm → Services ID + khoá `.p8` → Supabase → thêm `apple` vào env;
+  khoá JWT của Apple hết hạn 6 tháng một lần.
+
 ## UD-1 (2026-11-17) — ưu đãi có hạn + quyền chủ sở hữu
 
 - [ ] **Cấp quyền chủ sở hữu cho tài khoản của anh** (nếu chưa): đăng nhập hieuban.com bằng email đó một lần, rồi Supabase → SQL Editor chạy
