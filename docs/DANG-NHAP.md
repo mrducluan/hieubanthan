@@ -1,4 +1,4 @@
-# DN-1 — Cách đăng nhập: Google · Apple · Facebook · email; tắt số điện thoại
+# DN-1 + DN-2 — Cách đăng nhập: Google · Zalo · Apple · Facebook · email; tắt số điện thoại
 
 Chủ dự án yêu cầu 2026-11-17: thêm đăng nhập Facebook / Apple, bỏ đăng nhập bằng số điện thoại (mỗi SMS tốn phí) — mở lại khi
 doanh thu cao. Khâu vòng tăng trưởng: **MỜI + NẠP** (tài khoản là điều kiện nhận thưởng mời, ví Sao); đo tỉ lệ
@@ -72,9 +72,39 @@ Ghi chú Apple: người dùng có thể chọn "Ẩn email" → Supabase nhận
 chạy bình thường; chỉ khi muốn gửi thư cho họ mới cần đăng ký tên miền gửi thư ở mục *Sign in with Apple for Email
 Communication*. Hiện site không gửi thư tiếp thị nên chưa cần.
 
-## 5. Em khuyên thứ tự
+## 5. Zalo (DN-2, miễn phí, ~20 phút)
+
+**Chi phí**: đăng nhập bằng Zalo (Zalo Login / Social API) không thu phí; phần tốn tiền của Zalo là tin nhắn ZNS và
+gói API Official Account — site không dùng hai thứ đó. (Môi trường của em chặn trang developers.zalo.me nên em chưa đọc
+được trang giá chính thức; khi tạo app anh xem lại, thấy chỗ nào đòi tiền thì báo em.)
+
+**Khác Google / Facebook**: Supabase không có sẵn Zalo, nên máy chủ web tự làm phần đăng nhập Zalo (`web/lib/zalo.ts`,
+`/auth/zalo`, `/auth/zalo/callback`, OAuth v4 + PKCE, không thư viện mới) rồi cấp phiên Supabase cho một tài khoản đại diện
+có email `zalo-<mã Zalo>@hieuban.com` (không có hộp thư thật, hệ thống không gửi thư tới đó). Zalo **không** trả email;
+em chỉ xin mã người dùng — không xin tên, ảnh, số điện thoại. Trang Tài khoản hiện "tài khoản Zalo" thay cho email đó.
+
+1. developers.zalo.me → đăng nhập bằng Zalo của anh → **Tạo ứng dụng** (tên "Hiểu Bản Thân", danh mục Lifestyle /
+   Giải trí, website `https://hieuban.com`).
+2. Trong ứng dụng → **Đăng nhập (Social API / Zalo Login)** → Callback URL: `https://hieuban.com/auth/zalo/callback`
+   (chỉ khai đúng một dòng này) → Lưu. Nếu có mục quyền, chỉ cần quyền cơ bản (thông tin công khai).
+3. Mục **Cài đặt / Thông tin ứng dụng**: chép **App ID** và **Khóa bí mật (Secret key)**. Bật trạng thái ứng dụng
+   **Kích hoạt / Live** (nếu Zalo đòi xác thực tên miền thì làm theo màn hình — thường là đặt một thẻ meta hoặc tệp; gửi em
+   nội dung, em thêm vào site).
+4. Vercel (dự án **web**) → Environment Variables (Production):
+   - `ZALO_APP_ID` = App ID (chỉ chữ số)
+   - `ZALO_APP_SECRET` = Secret key (bí mật — không đặt tiền tố `NEXT_PUBLIC_`)
+   - `SUPABASE_SERVICE_ROLE_KEY` phải đã có (dùng để tạo tài khoản lần đầu)
+   - `NEXT_PUBLIC_DANG_NHAP` = `google,zalo` (thêm `facebook` khi xong mục 3)
+5. Redeploy → mở hieuban.com/dang-nhap trên điện thoại → "Tiếp tục với Zalo" → cho phép → về `/tai-khoan` là xong.
+   Lỗi gì cũng quay về `/dang-nhap` với dòng "Đăng nhập chưa thành công" (không lộ chi tiết) — báo em để xem log Vercel.
+
+Lưu ý: một người đã có tài khoản bằng email / Google mà đăng nhập Zalo sẽ thành **tài khoản thứ hai** (Zalo không cho
+email để nối). Gộp tài khoản chưa làm.
+
+## 6. Em khuyên thứ tự
 
 1. Tắt Phone ở Supabase (hết rủi ro tốn tiền SMS) — ngay.
-2. Facebook — miễn phí, phần lớn người dùng Việt có sẵn tài khoản.
-3. Apple — khi lượng người dùng iPhone đủ lớn để đáng 99 USD/năm + việc gia hạn khoá; Google + email đã đăng nhập được trên
+2. Zalo — miễn phí, gần như mọi người dùng Việt có sẵn; một chạm trên điện thoại.
+3. Facebook — miễn phí.
+4. Apple — khi lượng người dùng iPhone đủ lớn để đáng 99 USD/năm + việc gia hạn khoá; Google + email đã đăng nhập được trên
    iPhone nên không gấp.

@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { coTaiKhoan, supabase } from "@/lib/supabase/trinh-duyet";
 import { cachDangNhap, type NhaCungCap } from "@/lib/dang-nhap";
+import { laEmailZalo } from "@/lib/zalo-email";
 
 /** 0912345678 / 84912345678 / +84912345678 → +84912345678; sai định dạng → null. */
 function chuanHoaSdt(s: string): string | null {
@@ -18,11 +19,14 @@ function chuanHoaSdt(s: string): string | null {
   return m ? `+84${m[1]}` : null;
 }
 
-const TEN: Record<NhaCungCap, string> = { google: "Google", apple: "Apple", facebook: "Facebook" };
+const TEN: Record<NhaCungCap, string> = { google: "Google", zalo: "Zalo", apple: "Apple", facebook: "Facebook" };
 
 function BieuTuong({ p }: { p: NhaCungCap }) {
   if (p === "google") return (
     <svg viewBox="0 0 24 24" className="size-4" aria-hidden><path fill="#EA4335" d="M12 10.2v3.9h5.5c-.2 1.3-1.6 3.8-5.5 3.8-3.3 0-6-2.7-6-6.1s2.7-6.1 6-6.1c1.9 0 3.1.8 3.8 1.5l2.6-2.5C16.8 3.2 14.6 2.2 12 2.2 6.6 2.2 2.2 6.6 2.2 12s4.4 9.8 9.8 9.8c5.7 0 9.4-4 9.4-9.6 0-.6-.1-1.1-.2-1.6H12z"/></svg>
+  );
+  if (p === "zalo") return (
+    <svg viewBox="0 0 24 24" className="size-4" aria-hidden><rect width="24" height="24" rx="6" fill="#0068FF"/><text x="12" y="15.5" textAnchor="middle" fontSize="8" fontWeight="700" fill="#fff" fontFamily="Arial, sans-serif">Zalo</text></svg>
   );
   if (p === "facebook") return (
     <svg viewBox="0 0 24 24" className="size-4" aria-hidden><path fill="#1877F2" d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg>
@@ -67,6 +71,7 @@ export function DangNhap() {
     try {
       if (kenh === "email") {
         if (!/^\S+@\S+\.\S+$/.test(email)) throw new Error("Email chưa đúng.");
+        if (laEmailZalo(email)) throw new Error("Tài khoản này đăng nhập bằng nút Zalo.");
         const { error } = await (await sb()).auth.signInWithOtp({ email, options: { emailRedirectTo: veLai() } });
         if (error) throw error;
       } else {
@@ -101,7 +106,12 @@ export function DangNhap() {
       <p className="mt-3 text-fg-muted">Đăng nhập để dùng hồ sơ trên mọi thiết bị. Không cần mật khẩu.</p>
 
       <Card className="mt-6 space-y-5">
-        {cach.oauth.map((p) => (
+        {cach.oauth.map((p) => p === "zalo" ? (
+          // DN-2: Zalo đi qua máy chủ web (Supabase không có sẵn Zalo) — điều hướng trang thật, không fetch.
+          <Button key={p} asChild variant="secondary" className="w-full" data-testid="dang-nhap-zalo">
+            <a href={`/auth/zalo?tiep=${encodeURIComponent(tiep)}`}><BieuTuong p={p} />Tiếp tục với Zalo</a>
+          </Button>
+        ) : (
           <Button key={p} variant="secondary" className="w-full" data-testid={`dang-nhap-${p}`}
             onClick={() => void sb().then((c) => c.auth.signInWithOAuth({ provider: p, options: { redirectTo: veLai() } }))
               .then((r) => { if (r.error) setLoi("Chưa mở được cách đăng nhập này, thử cách khác."); })}>

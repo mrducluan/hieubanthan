@@ -19,6 +19,7 @@ import { dangXuat, hoSoTaiKhoan, luuVaoTaiKhoan, useNguoiDung, xoaHoSoTaiKhoan, 
 import { NUOC_NGOAI, gioHienThi, luuHoSo, useHoSo, xoaHoSo, type HoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
 import { baoNhanThuong, nhanThuongSauLuu } from "@/lib/nhan-thuong";
+import { laEmailZalo } from "@/lib/zalo-email";
 
 type HoSoTK = Awaited<ReturnType<typeof hoSoTaiKhoan>>;
 
@@ -114,7 +115,7 @@ export function TaiKhoan({ emailDuLieu = null, dichVu = { hoiVien: false, chuyen
         )}
         {user && (
           <Card className="space-y-5">
-            <p className="text-sm text-fg-muted">Đang đăng nhập: <b className="text-fg">{user.email ?? user.phone}</b></p>
+            <p className="text-sm text-fg-muted">Đang đăng nhập: <b className="text-fg">{laEmailZalo(user.email) ? "tài khoản Zalo" : (user.email ?? user.phone)}</b></p>
             {tk === undefined ? <KhungTai dong={1} /> : (
               <>
                 {tk && hoSo && giongNhau(hoSo, tk) && (

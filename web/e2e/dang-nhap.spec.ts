@@ -7,4 +7,26 @@ test("thuần: mặc định chỉ Google, không số điện thoại; thứ t�
   expect(docCachDangNhap("facebook, Apple,google")).toEqual({ oauth: ["google", "apple", "facebook"], sdt: false });
   expect(docCachDangNhap("google,sdt,twitter")).toEqual({ oauth: ["google"], sdt: true });
   expect(docCachDangNhap("")).toEqual({ oauth: [], sdt: false });
+  expect(docCachDangNhap("facebook,zalo,google")).toEqual({ oauth: ["google", "zalo", "facebook"], sdt: false });
+});
+
+import { emailZalo, laEmailZalo, thachThuc, tiepAnToan, urlXinQuyen, cauHinhZalo } from "../lib/zalo";
+
+test("thuần: Zalo — PKCE đúng RFC 7636, URL xin quyền, email đại diện, ?tiep= chỉ nội bộ", () => {
+  // Ví dụ của RFC 7636 phụ lục B.
+  expect(thachThuc("dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk")).toBe("E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM");
+  const u = new URL(urlXinQuyen("123456", "https://hieuban.com/auth/zalo/callback", "abc", "xyz"));
+  expect(u.origin + u.pathname).toBe("https://oauth.zaloapp.com/v4/permission");
+  expect(u.searchParams.get("redirect_uri")).toBe("https://hieuban.com/auth/zalo/callback");
+  expect(u.searchParams.get("code_challenge")).toBe("abc");
+  expect(emailZalo("8812345")).toBe("zalo-8812345@hieuban.com");
+  expect(emailZalo("a@b")).toBeNull();
+  expect(laEmailZalo("ZALO-1@hieuban.com")).toBe(true);
+  expect(laEmailZalo("ban@gmail.com")).toBe(false);
+  expect(laEmailZalo("contact@hieuban.com")).toBe(false);
+  expect(tiepAnToan("//evil.com")).toBe("/tai-khoan");
+  expect(tiepAnToan("/\t/evil.com")).toBe("/tai-khoan");
+  expect(tiepAnToan("/hom-nay")).toBe("/hom-nay");
+  expect(cauHinhZalo({ ZALO_APP_ID: "123456", ZALO_APP_SECRET: "s" })).toEqual({ appId: "123456", bimat: "s" });
+  expect(cauHinhZalo({ ZALO_APP_ID: "abc", ZALO_APP_SECRET: "s" })).toBeNull();
 });
