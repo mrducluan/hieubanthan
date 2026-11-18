@@ -8,6 +8,13 @@ import { execFileSync } from "node:child_process";
 const truoc = process.env.VERCEL_GIT_PREVIOUS_SHA || "HEAD^";
 const nhanh = process.env.VERCEL_GIT_COMMIT_REF || "(trống)";
 console.log(`[bo-qua-build] nhánh=${nhanh} so với=${truoc}`);
+// DN-2 (2026-11-18): bấm "Redeploy" trên Vercel = dựng lại ĐÚNG commit đã deploy → mốc so trùng HEAD → trước đây bị bỏ
+// qua, nên đổi biến môi trường (nhất là NEXT_PUBLIC_*, chỉ vào bản build) không bao giờ lên site. Redeploy luôn BUILD.
+const hienTai = process.env.VERCEL_GIT_COMMIT_SHA;
+if (hienTai && truoc === hienTai) {
+  console.log("[bo-qua-build] → BUILD (Redeploy cùng commit — có thể vì đổi biến môi trường)");
+  process.exit(1);
+}
 try {
   execFileSync("git", ["diff", "--quiet", truoc, "HEAD", "--", "."], { stdio: "inherit" });
   console.log("[bo-qua-build] → bỏ qua (không có thay đổi trong web/)");

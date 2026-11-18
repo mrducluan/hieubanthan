@@ -30,3 +30,18 @@ test("thuần: Zalo — PKCE đúng RFC 7636, URL xin quyền, email đại di�
   expect(cauHinhZalo({ ZALO_APP_ID: "123456", ZALO_APP_SECRET: "s" })).toEqual({ appId: "123456", bimat: "s" });
   expect(cauHinhZalo({ ZALO_APP_ID: "abc", ZALO_APP_SECRET: "s" })).toBeNull();
 });
+
+import { bamNonce, cauHinhGoogle, urlXinQuyenGoogle } from "../lib/google-dang-nhap";
+
+test("thuần: Google qua hieuban.com — redirect về site, nonce gửi Google là sha256 hex của nonce thô, cấu hình chặt", () => {
+  const u = new URL(urlXinQuyenGoogle("123-abc.apps.googleusercontent.com", "https://hieuban.com/auth/google/callback", "ch", "st", "tho"));
+  expect(u.origin + u.pathname).toBe("https://accounts.google.com/o/oauth2/v2/auth");
+  expect(u.searchParams.get("redirect_uri")).toBe("https://hieuban.com/auth/google/callback");
+  expect(u.searchParams.get("scope")).toBe("openid email profile");
+  expect(u.searchParams.get("code_challenge_method")).toBe("S256");
+  expect(u.searchParams.get("nonce")).toBe(bamNonce("tho"));
+  expect(bamNonce("abc")).toBe("ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
+  expect(cauHinhGoogle({ GOOGLE_CLIENT_ID: "x.apps.googleusercontent.com", GOOGLE_CLIENT_SECRET: "s" })).not.toBeNull();
+  expect(cauHinhGoogle({ GOOGLE_CLIENT_ID: "x", GOOGLE_CLIENT_SECRET: "s" })).toBeNull();
+  expect(cauHinhGoogle({})).toBeNull();
+});

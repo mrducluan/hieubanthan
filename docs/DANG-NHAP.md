@@ -101,7 +101,34 @@ em chỉ xin mã người dùng — không xin tên, ảnh, số điện thoại
 Lưu ý: một người đã có tài khoản bằng email / Google mà đăng nhập Zalo sẽ thành **tài khoản thứ hai** (Zalo không cho
 email để nối). Gộp tài khoản chưa làm.
 
-## 6. Em khuyên thứ tự
+## 6. Google không lộ tên miền Supabase (DN-3)
+
+Luồng Google cũ đi qua Supabase nên màn hình chọn tài khoản ghi "to continue to <mã dự án>.supabase.co". Nay máy chủ web tự
+làm OAuth với Google (`web/lib/google-dang-nhap.ts`, `/auth/google`, `/auth/google/callback`), Google trả về
+`hieuban.com/auth/google/callback`, rồi đổi sang phiên Supabase bằng `signInWithIdToken`. Màn hình Google sẽ ghi
+**hieuban.com**; khi anh điền thương hiệu (bước 2) và được Google duyệt thì ghi **Hiểu Bản Thân** kèm logo.
+Chưa đặt env → nút Google vẫn chạy luồng cũ (không hỏng gì).
+
+1. console.cloud.google.com → đúng dự án đang dùng cho đăng nhập Supabase → **APIs & Services → Credentials** → mở
+   **OAuth 2.0 Client ID** đang dán trong Supabase → Google provider:
+   - Authorized JavaScript origins: thêm `https://hieuban.com`
+   - Authorized redirect URIs: **thêm** `https://hieuban.com/auth/google/callback` (giữ dòng supabase.co cũ) → Save.
+2. **OAuth consent screen → Branding** (Google Auth Platform): App name `Hiểu Bản Thân`, logo (avatar 512 trong
+   `docs/brand/Hieuban-Brand-Kit.zip`), Home page `https://hieuban.com`, Privacy `https://hieuban.com/chinh-sach-rieng-tu`,
+   Terms `https://hieuban.com/dieu-khoan`, Authorized domains: `hieuban.com` → Save → nếu có nút "Verify branding" thì gửi
+   (miễn phí, vài ngày). Quyền chỉ cần email, profile, openid — không phải xét duyệt quyền nhạy cảm.
+3. Vercel (dự án web) → Environment Variables (Production): `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` = **đúng** cặp
+   Client ID / Secret đang dán trong Supabase (để Supabase nhận token cùng "audience") → Redeploy.
+4. Supabase → Authentication → Providers → Google: giữ nguyên bật (luồng mới vẫn cần provider này để nhận token).
+
+Lựa chọn khác (không làm): Supabase Custom Domain `auth.hieuban.com` — cần gói Pro + phí bổ sung hằng tháng.
+
+## 7. Redeploy trên Vercel không build lại (đã sửa)
+
+Bước "Ignored Build Step" (`web/scripts/bo-qua-build.mjs`) so commit với lần deploy trước; bấm Redeploy cùng commit thì
+không có gì khác → trước đây bị bỏ qua, nên biến `NEXT_PUBLIC_*` mới không lên site. Nay Redeploy cùng commit luôn build.
+
+## 8. Em khuyên thứ tự
 
 1. Tắt Phone ở Supabase (hết rủi ro tốn tiền SMS) — ngay.
 2. Zalo — miễn phí, gần như mọi người dùng Việt có sẵn; một chạm trên điện thoại.

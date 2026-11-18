@@ -527,6 +527,10 @@ mỗi lượt xem trang sinh 40–100 lượt chạy hàm vì Next.js tải trư
   `NEXT_PUBLIC_DANG_NHAP` = `google,facebook` → Redeploy.
 - [ ] **Zalo** (miễn phí, DN-2): tạo app ở developers.zalo.me, Callback `https://hieuban.com/auth/zalo/callback` → Vercel env
   `ZALO_APP_ID`, `ZALO_APP_SECRET`, thêm `zalo` vào `NEXT_PUBLIC_DANG_NHAP` → Redeploy (`docs/DANG-NHAP.md` mục 5).
+- [ ] **Google không lộ supabase.co** (DN-3): Google Cloud → OAuth client đang dùng cho Supabase → thêm redirect
+  `https://hieuban.com/auth/google/callback` + origin `https://hieuban.com`; Branding: tên "Hiểu Bản Thân", logo, trang chủ,
+  chính sách, điều khoản; Vercel env `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` (cùng cặp trong Supabase) → Redeploy
+  (`docs/DANG-NHAP.md` mục 6).
 - [ ] (Để sau) Apple: Apple Developer Program 99 USD/năm → Services ID + khoá `.p8` → Supabase → thêm `apple` vào env;
   khoá JWT của Apple hết hạn 6 tháng một lần.
 
