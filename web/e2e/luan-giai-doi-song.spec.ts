@@ -493,7 +493,7 @@ test("EN-2: báo cáo có gio_tam (không biết giờ sinh) → dải riêng đ
   await expect(page.getByTestId("lg-gio-tam")).toHaveCount(0);
 });
 
-test("UD-2: đợt ưu đãi hiện NGAY chỗ mở khoá — cuối chương miễn phí, đầu khung Lưu ý mảng, hộp đăng nhập / nạp", async ({ page }) => {
+test("UD-3: thẻ ưu đãi nổi trượt xuống khi đọc tới chỗ khoá, thu gọn được, ẩn khi tới hộp mở khoá; hộp đăng nhập / nạp có ưu đãi", async ({ page }) => {
   const [dau, ...sau] = BC.chuong;
   const { thoi_gian_bieu: _tg, ...conLai } = BC;
   const ud = { ten: "Ưu đãi nạp", ma: "mb2611", gia: 69, gia_goc: 99, giam_pt: 30, tiet_kiem: 30,
@@ -518,19 +518,37 @@ test("UD-2: đợt ưu đãi hiện NGAY chỗ mở khoá — cuối chương mi
   await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
   const bc = page.getByTestId("luan-giai-toan-bo");
 
-  const luuY = bc.getByTestId("lg-luu-y-mang").getByTestId("ud-mo-khoa");
-  await expect(luuY).toBeVisible();
-  await expect(luuY).toContainText("Ưu đãi nạp");
-  await expect(luuY.locator("s")).toHaveText("99 Sao");
-  await expect(luuY.getByTestId("ud-con-suat")).toContainText("Còn 39/39 suất");
+  // UD-3: trong bài chỉ có mốc vô hình; thẻ ưu đãi nổi trượt xuống khi đọc tới mốc.
+  await expect(bc.getByTestId("lg-luu-y-mang").getByTestId("ud-moc")).toHaveCount(1);
+  await expect(bc.locator('[data-ud-moc="cuoi_chuong"]')).toHaveCount(1);
+  const troi = page.getByTestId("ud-troi");
+  await bc.getByTestId("lg-luu-y-mang").scrollIntoViewIfNeeded();
+  await expect(troi).toHaveAttribute("data-hien", "1");
+  const the = troi.getByTestId("ud-mo-khoa");
+  await expect(the).toBeVisible();
+  await expect(the).toContainText("Ưu đãi nạp");
+  await expect(the.locator("s")).toHaveText("99 Sao");
+  await expect(the.getByTestId("ud-con-suat")).toContainText("Còn 39/39 suất");
+  await expect(the.getByTestId("ud-dem-nguoc")).toBeVisible();
+  // Nằm dưới thanh đầu trang, không bị che.
+  const hop0 = await the.boundingBox();
+  expect(hop0!.y).toBeGreaterThanOrEqual(60);
 
-  const cuoi = bc.locator('[data-testid="ud-mo-khoa"][data-nguon="cuoi_chuong"]');
-  await expect(cuoi).toHaveCount(1);
-  await expect(cuoi.getByTestId("ud-mo-khoa-nut")).toHaveText(/Mở toàn bộ · 69 Sao/);
-  await expect(cuoi.getByTestId("ud-dem-nguoc")).toBeVisible();
+  // Thu gọn thành viên nhỏ, bấm viên mở lại.
+  await troi.getByTestId("ud-troi-thu").click();
+  await expect(troi).toHaveAttribute("data-gon", "1");
+  await troi.getByTestId("ud-troi-vien").click();
+  await expect(troi).toHaveAttribute("data-gon", "0");
+
+  // Cuộn tới hộp mở khoá cuối báo cáo → thẻ nổi ẩn (không nói hai lần).
+  await page.getByTestId("lg-phan-khoa").scrollIntoViewIfNeeded();
+  await page.getByTestId("lg-hop-mo").scrollIntoViewIfNeeded();
+  await expect(troi).toHaveAttribute("data-hien", "0");
+  await bc.getByTestId("lg-luu-y-mang").scrollIntoViewIfNeeded();
+  await expect(troi).toHaveAttribute("data-hien", "1");
 
   // Bấm ngay trong thẻ → cùng luồng mở khoá, hộp đăng nhập có dải ưu đãi.
-  await cuoi.getByTestId("ud-mo-khoa-nut").click();
+  await troi.getByTestId("ud-mo-khoa-nut").click();
   await expect.poll(() => moKhoa).toBe(1);
   const hop = page.getByTestId("hop-thoai-sao");
   await expect(hop.getByTestId("ud-hop-thoai")).toBeVisible();
