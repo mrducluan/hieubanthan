@@ -167,7 +167,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
 
   if (!phien) {
     const thuong = await layCauHinh<number>("sao.thuong.chao_mung");
-    return NextResponse.json({ error: `Đăng nhập để mở toàn bộ báo cáo (${gia} Sao).`, can: "dang_nhap", gia, thuong }, { status: 402 });
+    return NextResponse.json({ error: `Đăng nhập để mở toàn bộ báo cáo (${gia} Sao).`, can: "dang_nhap", gia, thuong, ...(uuDai ? { uu_dai: uuDai } : {}) }, { status: 402 });
   }
   if (!khoa) return NextResponse.json({ error: "Chưa cấu hình thu Sao, thử lại sau." }, { status: 503 });
 
@@ -188,7 +188,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   if (r.ket_qua === "khong_du") {
     return NextResponse.json({
       error: `Cần ${gia} Sao, ví bạn còn ${r.so_du ?? 0} Sao.`, can: "nap", gia, so_du: r.so_du ?? 0,
-      chao_mung: await chaoMungConNhan(phien),
+      chao_mung: await chaoMungConNhan(phien), ...(uuDai ? { uu_dai: uuDai } : {}),
     }, { status: 402 });
   }
   if (r.ket_qua !== "da_dung") return NextResponse.json({ error: "Chưa trừ được Sao, thử lại sau." }, { status: 400 });

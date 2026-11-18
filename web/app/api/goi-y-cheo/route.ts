@@ -6,6 +6,7 @@ import { z } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { MANG_TRANG, TRANG_BAN_THAN, type MangTrang } from "@/lib/goi-y-cheo";
 import { dangThuSao, giaLuanGiaiSao } from "@/lib/luan-giai-sao";
+import { uuDaiCho } from "@/lib/uu-dai-may-chu";
 import { mangLuanGiai } from "@/lib/luan-giai-mang";
 import { coUngHo } from "@/lib/ung-ho";
 
@@ -36,5 +37,8 @@ export async function POST(req: Request): Promise<NextResponse> {
     giaLuanGiaiSao().catch(() => 10),
   ]);
   if (!kq.ok) return kq.res;
-  return NextResponse.json({ ...(kq.body as object), thu_sao: thu, gia_sao: gia, ung_ho: coUngHo() });
+  // UD-2: đợt ưu đãi có hạn → nút Sao nói giá ưu đãi + giá thường.
+  const ud = thu ? await uuDaiCho(gia) : null;
+  return NextResponse.json({ ...(kq.body as object), thu_sao: thu, gia_sao: ud?.gia ?? gia, ung_ho: coUngHo(),
+    ...(ud ? { gia_sao_goc: ud.gia_goc, uu_dai_pt: ud.giam_pt } : {}) });
 }

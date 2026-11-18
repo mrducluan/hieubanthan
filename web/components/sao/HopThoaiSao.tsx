@@ -28,6 +28,7 @@ import { docHoiVien, hienDongHoiVien, type HoiVien } from "@/lib/thanh-toan/hoi-
 import { useMucSao } from "@/lib/muc-sao";
 import { loiKhachHetLuot, soBanCanMoi, soCau } from "@/lib/loi-sao";
 import { ThanhVi, TheHoiVien, TheMoiBan } from "@/components/sao/LoiMoSao";
+import { DaiUuDaiHop } from "@/components/sao/UuDai";
 
 type Goi = GoiHienThi;
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} ₫`;
@@ -68,6 +69,7 @@ export function HopThoaiSao() {
     <Sheet open onOpenChange={(o) => { if (!o) dong(false); }}>
       {/* Hộp nạp: thanh ví thay câu "ví còn N Sao" của máy chủ (câu đó cũ đi ngay khi nhận quà trong hộp). */}
       <SheetContent title={tieuDe} description={y.can === "nap" ? undefined : y.error} data-testid="hop-thoai-sao" data-can={y.can}>
+        {y.nguon === "luan_giai" && y.uu_dai && y.can !== "xac_nhan_sao" && <DaiUuDaiHop u={y.uu_dai} />}
         {y.can === "dang_nhap" && <DangNhapNhan y={y} />}
         {y.can === "xac_nhan_sao" && <XacNhan y={y} dong={dong} />}
         {y.can === "nap" && <HopNap y={y} xong={() => dong(true)} />}

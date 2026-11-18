@@ -18,7 +18,7 @@ const LUAN_GIAI: Record<string, { duong: string; ten: string }> = {
 };
 
 export function CtaCuoiBai({ moDun, maYDinh, goiMo }: { moDun: string; maYDinh?: string | null; goiMo?: GoiMo | null }) {
-  const [phi, setPhi] = useState<{ thu: boolean; gia: number } | null>(null);
+  const [phi, setPhi] = useState<{ thu: boolean; gia: number; uu_dai?: { gia_goc: number; giam_pt: number } } | null>(null);
   const lg = LUAN_GIAI[moDun];
   const bam = (kind: string) => ghi("chart_interacted", { mo_dun: moDun, kind: `cta_${kind}` });
   const lgKhac = Object.entries(LUAN_GIAI).filter(([k]) => k !== moDun && !(moDun === "thanso_sau" && k === "thanso")).slice(0, 2);
@@ -37,7 +37,7 @@ export function CtaCuoiBai({ moDun, maYDinh, goiMo }: { moDun: string; maYDinh?:
           className="flex items-start gap-3 rounded-2xl border border-gold/40 bg-gold/[0.06] p-4 text-sm hover:border-gold/70" data-testid="cta-luan-giai">
           <Sparkles className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
           <span><b className="block text-fg">{lg ? `Đọc trọn ${lg.ten}` : `Đọc ${lgKhac[0]?.[1].ten ?? "Bản đồ con số"}`}</b>
-            <span className="text-fg-muted">{phi?.thu ? `Chương đầu miễn phí · trọn bộ ${phi.gia} Sao, xem lại cả ngày.` : "Đang miễn phí giai đoạn ra mắt — đọc ngay."}</span></span>
+            <span className="text-fg-muted">{phi?.thu ? `Chương đầu miễn phí · trọn bộ ${phi.gia} Sao${phi.uu_dai ? ` (ưu đãi −${phi.uu_dai.giam_pt}%, giá thường ${phi.uu_dai.gia_goc} Sao)` : ""}, xem lại cả ngày.` : "Đang miễn phí giai đoạn ra mắt — đọc ngay."}</span></span>
         </Link>
         <Link href="/hop-doi" onClick={() => bam("moi_ban")} className="flex items-start gap-3 rounded-2xl border border-line/70 p-4 text-sm hover:border-gold/60" data-testid="cta-moi-ban">
           <UserPlus className="mt-0.5 size-5 shrink-0 text-jade" aria-hidden />

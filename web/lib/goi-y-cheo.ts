@@ -39,6 +39,9 @@ export const GoiYCheo = z.object({
   /** Do route web thêm: công tắc thu Sao Luận giải toàn bộ + giá, có ví/tài khoản ủng hộ không. */
   thu_sao: z.boolean().optional(),
   gia_sao: z.number().optional(),
+  /** UD-2: đợt ưu đãi có hạn — giá thường + phần trăm giảm. */
+  gia_sao_goc: z.number().optional(),
+  uu_dai_pt: z.number().optional(),
   ung_ho: z.boolean().optional(),
 });
 export type GoiYCheo = z.infer<typeof GoiYCheo>;

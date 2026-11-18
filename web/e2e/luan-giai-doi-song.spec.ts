@@ -492,3 +492,48 @@ test("EN-2: báo cáo có gio_tam (không biết giờ sinh) → dải riêng đ
   await moBaoCao(page);
   await expect(page.getByTestId("lg-gio-tam")).toHaveCount(0);
 });
+
+test("UD-2: đợt ưu đãi hiện NGAY chỗ mở khoá — cuối chương miễn phí, đầu khung Lưu ý mảng, hộp đăng nhập / nạp", async ({ page }) => {
+  const [dau, ...sau] = BC.chuong;
+  const { thoi_gian_bieu: _tg, ...conLai } = BC;
+  const ud = { ten: "Ưu đãi nạp", ma: "mb2611", gia: 69, gia_goc: 99, giam_pt: 30, tiet_kiem: 30,
+    het_luc: new Date(Date.now() + 3 * 86400_000).toISOString(), con_suat: 39, tong_suat: 39 };
+  const xemTruoc = {
+    ...conLai, cot_loi: [], so_khoa: sau.length,
+    phi: { sao: 69, ly_do: "xem_truoc", khoa: true, dang_nhap: false, so_du: null, thuong_chao_mung: 10, uu_dai: ud },
+    luu_y_mang: [{ ma: "tien_bac", ten: "Tiền bạc", muc: "can_chu_dong", khoa: true, tu_chuong: sau[0]!.ma }],
+    chuong: [dau, ...sau.map((c) => ({ ma: c.ma, tieu_de: c.tieu_de, khoa: true, moi_xem: c.moi_xem }))],
+  };
+  let moKhoa = 0;
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: true, gia: 69, uu_dai: ud } }));
+  await page.route("**/api/tuvi/luan-giai", (r) => {
+    if (r.request().headers()["x-mo-khoa"] !== "1") return r.fulfill({ json: xemTruoc });
+    moKhoa++;
+    return r.fulfill({ status: 402, json: { error: "Đăng nhập để mở toàn bộ báo cáo (69 Sao).", can: "dang_nhap", gia: 69, thuong: 10, uu_dai: ud } });
+  });
+  await page.route("**/api/kiem-chung/ty-le**", (r) => r.fulfill({ json: {} }));
+  await page.route("**/api/luan-giai/tuy-chon", (r) => r.fulfill({ json: { tu_luu_luan_giai: false } }));
+  await napHoSo(page);
+  await page.goto("/tu-vi");
+  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  const bc = page.getByTestId("luan-giai-toan-bo");
+
+  const luuY = bc.getByTestId("lg-luu-y-mang").getByTestId("ud-mo-khoa");
+  await expect(luuY).toBeVisible();
+  await expect(luuY).toContainText("Ưu đãi nạp");
+  await expect(luuY.locator("s")).toHaveText("99 Sao");
+  await expect(luuY.getByTestId("ud-con-suat")).toContainText("Còn 39/39 suất");
+
+  const cuoi = bc.locator('[data-testid="ud-mo-khoa"][data-nguon="cuoi_chuong"]');
+  await expect(cuoi).toHaveCount(1);
+  await expect(cuoi.getByTestId("ud-mo-khoa-nut")).toHaveText(/Mở toàn bộ · 69 Sao/);
+  await expect(cuoi.getByTestId("ud-dem-nguoc")).toBeVisible();
+
+  // Bấm ngay trong thẻ → cùng luồng mở khoá, hộp đăng nhập có dải ưu đãi.
+  await cuoi.getByTestId("ud-mo-khoa-nut").click();
+  await expect.poll(() => moKhoa).toBe(1);
+  const hop = page.getByTestId("hop-thoai-sao");
+  await expect(hop.getByTestId("ud-hop-thoai")).toBeVisible();
+  await expect(hop.getByTestId("ud-hop-thoai")).toContainText("Tiết kiệm 30 Sao (giảm 30%)");
+  await expect(hop.getByTestId("ud-hop-thoai").locator("s")).toHaveText("99 Sao");
+});
