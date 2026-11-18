@@ -1,7 +1,7 @@
 // DN-2 — đăng nhập bằng Zalo (Zalo Login / Social API v4, OAuth 2 + PKCE). Supabase Auth KHÔNG có sẵn Zalo nên máy chủ
 // web tự làm phần OAuth rồi cấp phiên Supabase cho một tài khoản "đại diện" (email không thật, xem emailZalo).
 // Không thêm thư viện: chỉ fetch + node:crypto. Chỉ chạy ở máy chủ (route /auth/zalo*). Hướng dẫn: docs/DANG-NHAP.md mục 6.
-import { createHash, randomBytes } from "node:crypto";
+import { createHash, createHmac, randomBytes } from "node:crypto";
 export { MIEN_EMAIL_ZALO, emailZalo, laEmailZalo } from "@/lib/zalo-email";
 
 export const ZALO_XIN_QUYEN = "https://oauth.zaloapp.com/v4/permission";
@@ -64,8 +64,15 @@ export async function doiMa(cfg: CauHinhZalo, code: string, verifier: string): P
 }
 
 /** Chỉ lấy mã người dùng (id). Không xin tên, ảnh, số điện thoại — không lưu thứ không cần. */
-export async function layMaNguoiDung(accessToken: string): Promise<{ id: string } | LoiZalo> {
-  const j = await goi(`${ZALO_NGUOI_DUNG}?fields=id`, { headers: { access_token: accessToken } });
+/** appsecret_proof = HMAC-SHA256(access_token, app secret), hex — SDK chính thức của Zalo (zalo-php-sdk) gửi kèm mọi lượt
+ *  gọi graph.zalo.me. Thiếu nó, /me có thể trả -501 dù đổi mã đã thành công (DN-2c). */
+export const bangChungBiMat = (accessToken: string, bimat: string) =>
+  createHmac("sha256", bimat).update(accessToken).digest("hex");
+
+export async function layMaNguoiDung(accessToken: string, bimat: string): Promise<{ id: string } | LoiZalo> {
+  const j = await goi(`${ZALO_NGUOI_DUNG}?fields=id`, {
+    headers: { access_token: accessToken, appsecret_proof: bangChungBiMat(accessToken, bimat) },
+  });
   const id = j?.id;
   if (typeof id === "string" && /^\d{1,30}$/.test(id)) return { id };
   if (typeof id === "number" && Number.isSafeInteger(id)) return { id: String(id) };
