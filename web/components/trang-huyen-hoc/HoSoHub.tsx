@@ -7,7 +7,7 @@ import { Check, CircleDashed, UserRound } from "lucide-react";
 import { tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
 import type { KhoaMangHH } from "@/lib/huyen-hoc";
 
-const TEN_MANG: Record<KhoaMangHH, string> = { than_so: "Thần số học", tu_vi: "Tử vi", bat_tu: "Bát tự", phong_thuy: "Phong thuỷ", kinh_dich: "Kinh Dịch", nhan_tuong: "Nhân tướng học", tarot: "Tarot" };
+const TEN_MANG: Record<KhoaMangHH, string> = { than_so: "Thần số học", tu_vi: "Tử vi", bat_tu: "Bát tự", phong_thuy: "Phong thuỷ", kinh_dich: "Kinh Dịch", nhan_tuong: "Nhân tướng học", tarot: "Tarot", ky_mon: "Kỳ Môn Độn Giáp" };
 const KHOA = Object.keys(TEN_MANG) as KhoaMangHH[];
 
 /** Trường hồ sơ còn thiếu để mở mảng này (Tử vi, Bát tự cần giờ + giới tính + nơi sinh; Phong thuỷ cần giới tính). */
@@ -46,7 +46,7 @@ export function DongHoSo({ chao, thieu: mauThieu }: { chao: string; thieu: strin
   return (
     <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-fg-muted" data-testid="dong-ho-so">
       <UserRound className="size-4 shrink-0 text-gold" aria-hidden />
-      <span className="text-fg">{thay(chao, { ten: tenGoi(h), n: String(KHOA.length - chua.length) })}</span>
+      <span className="text-fg">{thay(chao, { ten: tenGoi(h), n: String(KHOA.length - chua.length), tong: String(KHOA.length) })}</span>
       {chua.length > 0 && (
         <Link href="/tu-vi" className="inline-flex min-h-11 items-center text-gold underline-offset-4 hover:underline">
           {thay(mauThieu, { thieu: thieu.join(", "), mang: chua.map((k) => TEN_MANG[k]).join(", ") })}

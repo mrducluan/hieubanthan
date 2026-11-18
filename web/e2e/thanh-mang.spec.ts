@@ -109,8 +109,8 @@ test("mục lục cụm trên dữ liệu engine thật: đủ bài, đúng số
 
 test("menu Huyền học: 3 cụm kiến thức lớn thay 3 công cụ đã có bản theo năm ở menu Năm", () => {
   const hh = MENU_DAU_TRANG.find((m) => m.href === "/huyen-hoc")!.con.map((c) => c.href);
-  expect(hh).toHaveLength(11);
-  for (const h of ["/tu-vi/sao-o-cung", "/bat-tu/menh-theo-nam", "/tarot"]) expect(hh).toContain(h);
+  expect(hh).toHaveLength(12);                      // KM-3: thêm /ky-mon — đủ trần 12 mục con
+  for (const h of ["/tu-vi/sao-o-cung", "/bat-tu/menh-theo-nam", "/tarot", "/ky-mon"]) expect(hh).toContain(h);
   // TR-1 menu: Tarot vào menu, "64 quẻ Kinh Dịch" + "Thư viện kiến thức" rời menu (vẫn làm sáng mục cha Huyền học).
   for (const h of ["/tuoi-xong-dat", "/xem-sao-han", "/phong-thuy/huong-xau-nam", "/kinh-dich/que", "/kien-thuc"]) expect(hh).not.toContain(h);
   const huyenHoc = MENU_DAU_TRANG.find((m) => m.href === "/huyen-hoc")!;
@@ -273,6 +273,7 @@ test("menu đầu trang: bảng Huyền học có 3 cụm mới", async ({ page 
   const menu = page.getByTestId("menu-dau-trang");
   for (const t of ["Sao ở từng cung Tử vi", "Sinh năm nào mệnh gì", "Xem Tarot"]) await expect(menu.getByRole("link", { name: new RegExp(t) })).toBeVisible();
   await expect(menu.getByRole("link", { name: /Xem Tarot/ })).toHaveAttribute("href", "/tarot");
+  await expect(menu.getByRole("link", { name: /Kỳ Môn Độn Giáp/ })).toHaveAttribute("href", "/ky-mon");   // KM-3
   for (const t of [/Tuổi xông đất/, /64 quẻ Kinh Dịch/, /Thư viện kiến thức/]) await expect(menu.getByRole("link", { name: t })).toHaveCount(0);
 });
 

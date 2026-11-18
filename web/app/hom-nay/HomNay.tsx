@@ -21,6 +21,7 @@ import { ChuoiNgay } from "@/components/khung/ChuoiNgay";
 import { LaBaiDauNgay } from "@/components/khung/LaBaiDauNgay";
 import { BaLaNgay } from "@/components/khung/BaLaNgay";
 import { MucGap } from "@/components/khung/MucGap";
+import { KyMonHomNay } from "@/components/ky-mon/KyMonHomNay";
 import { TuanCuaToi } from "@/components/khung/TuanCuaToi";
 import { HaiNguoiHomNay } from "@/components/khung/HaiNguoiHomNay";
 import { gioSapToi, phutCuaNgay, type BaLa } from "@/lib/ba-la";
@@ -482,6 +483,7 @@ export function HomNay() {
             {/* Các mục xếp HAI CỘT độc lập (columns — mở một mục dài không để khoảng trống ở cột bên cạnh). */}
             <div className="gap-3 space-y-3 lg:columns-2 [&>*]:break-inside-avoid">
             {!en && <HaiNguoiHomNay hoSo={hoSo} ngay={the.ngay_xem} />}
+            {!en && <KyMonHomNay ngay={the.ngay_xem} />}
             {the.nhip_bat_tu && (en ? (
               <MucGap ma="bat_tu" testId="nhip-bat-tu" tieuDe={h("bt.tieu_de", { thap_than: ten("thap_than", the.nhip_bat_tu.thap_than) })} tomTat={the.nhip_bat_tu.y_nghia}
                 phu={h("bt.phu", { nc: ten("can", the.nhip_bat_tu.nhat_chu), cc: the.nhip_bat_tu.can_chi_ngay })}>

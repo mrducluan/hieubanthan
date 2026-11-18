@@ -81,7 +81,7 @@ export function HinhBauTroi({ className }: { className?: string }) {
   );
 }
 
-export type KieuMang = "than-so" | "tu-vi" | "kinh-dich" | "bat-tu" | "phong-thuy" | "nhan-tuong" | "tarot";
+export type KieuMang = "than-so" | "tu-vi" | "kinh-dich" | "bat-tu" | "phong-thuy" | "nhan-tuong" | "tarot" | "ky-mon";
 
 /** Hình nhỏ cho thẻ từng mảng (thay icon chung chung). */
 export function HinhMang({ kieu, className }: { kieu: KieuMang; className?: string }) {
@@ -102,6 +102,25 @@ export function HoaTietMang({ kieu }: { kieu: KieuMang }) {
     {kieu === "than-so" && <SoNho />}
     {kieu === "nhan-tuong" && <MatNho />}
     {kieu === "tarot" && <LaNho />}
+    {kieu === "ky-mon" && <BanKyMonNho />}
+  </>;
+}
+
+function BanKyMonNho() {   // KM-3: bàn chín ô (Lạc thư) — ô giữa sáng, ba ô trên là ba cửa thuận; vạch tám hướng quanh bàn
+  const o = [];
+  for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) {
+    o.push(<rect key={`${r}${c}`} x={39 + c * 14} y={19 + r * 14} width={13} height={13} rx={1.5}
+      className={r === 1 && c === 1 ? "fill-gold/40 stroke-gold" : r === 0 ? "fill-jade/25 stroke-jade/70" : "fill-none stroke-gold/45"} strokeWidth={1} />);
+  }
+  const v = Array.from({ length: 8 }, (_, i) => {
+    const g = -Math.PI / 2 + (Math.PI * i) / 4;
+    return [tron(60, 40, 31, g), tron(60, 40, 37, g)] as const;
+  });
+  return <>
+    <circle cx={60} cy={40} r={34} className="fill-none stroke-gold/30" strokeWidth={1} />
+    {v.map(([[x1, y1], [x2, y2]], i) => <line key={i} x1={x1.toFixed(1)} y1={y1.toFixed(1)} x2={x2.toFixed(1)} y2={y2.toFixed(1)}
+      className={i === 0 ? "stroke-gold" : "stroke-gold/50"} strokeWidth={i === 0 ? 2 : 1.2} strokeLinecap="round" />)}
+    {o}
   </>;
 }
 

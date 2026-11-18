@@ -24,6 +24,7 @@ export const ALT_HINH_MANG: Record<KieuMang, { vi: string; en: string }> = {
   "phong-thuy": { vi: "Hình minh hoạ la bàn phong thuỷ tám hướng xem hướng nhà hợp tuổi", en: "Illustration of an eight-direction feng shui compass" },
   "nhan-tuong": { vi: "Hình minh hoạ xem tướng mặt: gương mặt chia tam đình", en: "Illustration of a face divided into three zones for face reading" },
   tarot: { vi: "Hình minh hoạ ba lá bài Tarot trong một trải bài", en: "Illustration of three tarot cards in a spread" },
+  "ky-mon": { vi: "Hình minh hoạ bàn Kỳ Môn Độn Giáp chín ô, tám hướng", en: "Illustration of a nine-palace Qimen Dunjia board with eight directions" },
   "than-so": { vi: "Hình minh hoạ các con số thần số học", en: "Illustration of numerology numbers" },
 };
 

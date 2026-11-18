@@ -3,7 +3,17 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-17 (TK-1 mục 4ax; LH-1 + LH-2 + LH-3 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-18 (KM-0 mục 4ay; TK-1 mục 4ax; LH-1 + LH-2 + LH-3 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+
+### 4ay. KM-0 — nguồn tri thức Kỳ Môn Độn Giáp (2026-11-18, `docs/KY-MON-NGUON.md`)
+
+- [ ] Gửi lên Drive sách ở mục 4 của tài liệu (PDF bôi đen được chữ / tệp chữ, mỗi tệp dưới 10 MB), ưu tiên: **Ngự Định Kỳ Môn Bảo Giám** · **Kỳ Môn Độn Giáp Thống Tông** bản phồn thể có ghi bản in · Bí Kíp Đại Toàn chữ Hán · Cảnh Hựu Độn Giáp Phù Ứng Kinh bản đủ.
+- [x] (Đã duyệt 18/11/2026) Dùng `kinqimen` làm bộ đối chiếu sinh golden — không chạy runtime, không thêm dependency; chỗ nó làm khác sách thì ghi chú diễn giải (`docs/KY-MON-NGUON.md` mục 7).
+- [x] (Chốt 18/11/2026 theo đề xuất: sách bổ mặc định, trí nhuận là công tắc) (Quyết định — KM-1 đã có kết quả, `docs/KY-MON-NGUON.md` mục 7) Phép định cục mặc định: em đề xuất **sách bổ** (trùng 400/400 với bộ đối chiếu), trí nhuận là công tắc Trường phái. Anh không nói gì thì em giữ đề xuất này.
+- [ ] **KM-3: deploy CMS** để migration `km_3_menu_ky_mon` thêm mục "Kỳ Môn Độn Giáp" vào menu Huyền học đã lưu ở CMS (menu CMS trống thì web tự dùng mặc định mới).
+- [ ] **KM-2: deploy engine TRƯỚC web**, rồi mở `/ky-mon` đọc thử lời tám cửa và các thế bàn; câu nào anh thấy lệch thì sửa ở `/quan-tri` → Kho tri thức → `ky_mon_kb.json`.
+- [x] (Chốt 18/11/2026: vào menu Huyền học, mục thứ 12 — KM-3) (Quyết định) Trang `/ky-mon` đặt ở đâu trên menu: em đề xuất thêm vào menu "Huyền học" (đang 11 mục, còn 1 chỗ) và hub Huyền học ở bước KM-3.
+- [x] (Chốt 18/11/2026: giữ như Bát tự + công tắc) (Quyết định) Giờ 23:00–23:59 của Kỳ Môn: giữ như Bát tự (ngày giữ nguyên, giờ Tý của ngày sau) hay đổi ngày lúc 23 giờ như phần lớn phần mềm Kỳ Môn. Em đề xuất giữ như Bát tự + công tắc.
 
 ### 4aw. LH-1 — "Luận theo câu hỏi" cho Luận giải Tử vi (2026-11-17, `docs/LUAN-GIAI-DOI-SONG.md` mục 11)
 

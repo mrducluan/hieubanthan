@@ -1,4 +1,5 @@
 "use client";
+import { KyMonHuongHop } from "@/components/ky-mon/KyMonTheoNgay";
 import { SachXuaGhi, type KhoiSachGhi } from "@/components/huyen-hoc/SachXuaGhi";
 import { useChu } from "@/components/cms/DauCms";
 import { useEffect, useState } from "react";
@@ -106,6 +107,7 @@ export function PhongThuy() {
                   ? ` · ${nhom(mq.nhom)}` + t("mq.truoc_moc", { nam: String(mq.nam_tinh), moc: TEN_MOC(mocNam) })
                   : t("mq.sau", { nhom: nhom(mq.nhom), nam: String(mq.nam_tinh), moc: TEN_MOC(mocNam) })}</p>
               <LaBan quai={mq.quai} nhom={mq.nhom} bang={mq.bang_huong} huongCat={mq.huong_cat} />
+              {!en && <KyMonHuongHop huongCat={mq.huong_cat} />}
               <ChanQr nhan={t("mq.qr")} />
               {mq.co_canh_bao.map((c) => <p key={c.loai} className="mt-3 text-xs text-moon">{c.chi_tiet}</p>)}
             </div>
