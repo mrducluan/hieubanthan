@@ -44,6 +44,12 @@ SO: dict[str, dict] = {
                           "câu hỷ / kỵ khớp nguyên văn; lời đời thường là tóm ý")}},
     "bo_sung_nhat_chu.json": {"mang": "battu", "muc": "bien_tap"},
     "bo_sung_thap_than.json": {"mang": "battu", "muc": "bien_tap"},
+    # ---- Kỳ Môn
+    "ky_mon_kb.json": {"mang": "kymon", "muc": "bien_tap", "ghi_chu": "KM-2: lời đời thường về cửa, sao, thần, cách cục do ban biên tập viết", "phan": {
+        "cua": _nv("ky_mon_co_kim_do_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem", "mỗi cửa một câu «釋八門所主»"),
+        "sao": _nv("ky_mon_co_kim_do_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem", "mỗi sao một câu «釋九星所主»"),
+        "cach": _nv("ky_mon_co_kim_do_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
+                    "điều kiện từng cách thử bằng ví dụ «假令» của sách (tests/test_ky_mon_cach.py); lời đời thường là tóm ý")}},
     # ---- Tử vi
     "tuvi_sach_ghi.json": {"mang": "tuvi", **_nv("tu_vi_dau_so_toan_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                "SX-C: 434 câu Toàn Thư quyển 3 (sao × cung) khớp kho nguồn; lời Việt là tóm ý đã nói giảm (A / B / C)")},

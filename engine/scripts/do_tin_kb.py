@@ -12,7 +12,7 @@ from app.kb import do_tin
 
 DOC = Path(__file__).resolve().parent.parent.parent / "docs" / "DO-TIN-KHO-TRI-THUC.md"
 MANG = {"battu": "Bát tự", "tuvi": "Tử vi", "kinhdich": "Kinh Dịch", "phongthuy": "Phong thuỷ", "nhantuong": "Nhân tướng",
-        "tarot": "Tarot", "thanso": "Thần số", "lich": "Lịch · tuổi · tập quán", "chung": "Liên mảng · kỹ thuật"}
+        "tarot": "Tarot", "kymon": "Kỳ Môn", "thanso": "Thần số", "lich": "Lịch · tuổi · tập quán", "chung": "Liên mảng · kỹ thuật"}
 
 
 def dung() -> str:

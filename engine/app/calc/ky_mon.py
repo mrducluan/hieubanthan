@@ -204,5 +204,4 @@ def lap_ban(t: dt.datetime, utc: float = 7, phep: str = "sach_bo", gio_ty: str =
     gio = (6 * can - 5 * chi) % 60
     dc = dinh_cuc(t, utc=utc, phep=phep, ngay=ngay)
     b = ban_gio(dc["cuc"], dc["am_duong"] == "duong", gio)
-    b.pop("gio")
     return {**dc, **b, "can_chi": {"ngay": can_chi_ngay_ten(ngay), "gio": _ten_60(gio)}, "ty_muon": ty_muon, "gio_ty": gio_ty}

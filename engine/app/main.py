@@ -53,6 +53,7 @@ from app.tuvi_v2_api import router as tuvi_v2_router
 from app.nhung_api import router as nhung_router
 from app.goi_y_cheo_api import router as goi_y_cheo_router
 from app.nhan_tuong_api import router as nhan_tuong_router  # NT-1
+from app.ky_mon_api import router as ky_mon_router  # Kỳ Môn Độn Giáp (KM-2)
 from app.chi_tay_api import router as chi_tay_router  # chỉ tay (quyển 10 Toàn Biên)
 from app.chan_dung_api import router as chan_dung_router
 from app.tarot_api import router as tarot_router  # noqa: E402 — TR-1: Tarot /v1/tarot/*
@@ -185,6 +186,7 @@ app.include_router(goi_y_cheo_router)
 app.include_router(thoi_gian_toi_router)
 app.include_router(nhan_tuong_router)
 app.include_router(chi_tay_router)
+app.include_router(ky_mon_router)
 app.include_router(chan_dung_router)
 app.include_router(tarot_router)
 app.include_router(giao_thoa_router)

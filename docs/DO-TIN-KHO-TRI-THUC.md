@@ -21,6 +21,7 @@
 | Phong thuỷ | 2 | 2 | 1 | 3 |  |
 | Nhân tướng | 5 | 2 |  |  |  |
 | Tarot | 1 |  |  |  |  |
+| Kỳ Môn |  |  |  | 1 |  |
 | Thần số |  |  | 11 | 12 |  |
 | Lịch · tuổi · tập quán |  | 1 | 5 |  |  |
 | Liên mảng · kỹ thuật |  | 1 |  | 11 | 7 |
@@ -44,6 +45,9 @@
 | `kinhdich_tra_loi.json` | tinh_chat_que | `tang_san_boc_dich.json` | `test_trich_la_nguyen_van_va_kb_du_loi` |  |
 | `kinhdich_tra_loi.json` | sach_xua_viec | `tang_san_boc_dich.json` | `test_cau_la_nguyen_van_trong_dung_chuong` | WS-5: câu Tăng San Bốc Dịch theo chương ứng với việc; lời Việt là tóm ý |
 | `kinhdich_truyen_nghia.json` | (cả tệp) | `chu_dich_truyen_nghia.json` | `test_ngo_tat_to_ghep_dung_hao_va_du_do_phu` | bản dịch Ngô Tất Tố ghép theo chữ Hán |
+| `ky_mon_kb.json` | cua | `ky_mon_co_kim_do_thu.json` | `test_moi_muc_qua_bo_kiem` | mỗi cửa một câu «釋八門所主» |
+| `ky_mon_kb.json` | sao | `ky_mon_co_kim_do_thu.json` | `test_moi_muc_qua_bo_kiem` | mỗi sao một câu «釋九星所主» |
+| `ky_mon_kb.json` | cach | `ky_mon_co_kim_do_thu.json` | `test_moi_muc_qua_bo_kiem` | điều kiện từng cách thử bằng ví dụ «假令» của sách (tests/test_ky_mon_cach.py); lời đời thường là tóm ý |
 | `nhan_tuong_kb.json` | luu_nien | `than_tuong_toan_bien.json` | `test_luu_nien_nhan_tuong_khop_bai_ca_than_tuong_toan_bien` | WS-2: 20 tuổi mốc khớp tên bộ vị + thứ tự của «流年運氣部位歌»; WS-4 / KT-NT3: tuổi 10–14 sửa theo chữ sách (Nhân Luân, Địa Luân) |
 | `nhan_tuong_kb.json` | bai_ca_luu_nien | `than_tuong_toan_bien.json` | `test_moi_chang_la_nguyen_van_va_dung_thu_tu` | WS-4: bài ca cắt theo 67 chặng tuổi, phủ đủ 1–100; lời Việt là tóm ý |
 | `nhan_tuong_kieu_hinh.json` | (cả tệp) | `than_tuong_toan_bien.json` | `test_moi_muc_qua_bo_kiem` | SX-C: 119 kiểu hình mày, mắt, mũi, tai, miệng (bài thơ từng kiểu) khớp kho nguồn; 7 mục gắn `ngo` |
@@ -134,6 +138,10 @@
 | Nhân tướng | `nhan_tuong_lieu_trang.json` |  | Có nguyên văn đối chiếu | SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn |
 | Nhân tướng | `nhan_tuong_sach_ghi.json` |  | Có nguyên văn đối chiếu | SX-C: câu Thần Tướng Toàn Biên gắn với nét khảo sát + 12 cung trên mặt |
 | Tarot | `tarot_kb.json` |  | Có nguyên văn đối chiếu | câu trích khớp Waite / Mathers / Book T / Papus 1892 / Case 1920 / Ouspensky 1913; lời lớp Marseille, B.O.T.A., Thoth vẫn là tóm ý (Marseille đã soát với Mathers + Papus, B.O.T.A. ẩn chính với Case 1920) |
+| Kỳ Môn | `ky_mon_kb.json` |  | Ban biên tập soạn | KM-2: lời đời thường về cửa, sao, thần, cách cục do ban biên tập viết |
+| Kỳ Môn | `ky_mon_kb.json` | cua | Có nguyên văn đối chiếu | mỗi cửa một câu «釋八門所主» |
+| Kỳ Môn | `ky_mon_kb.json` | sao | Có nguyên văn đối chiếu | mỗi sao một câu «釋九星所主» |
+| Kỳ Môn | `ky_mon_kb.json` | cach | Có nguyên văn đối chiếu | điều kiện từng cách thử bằng ví dụ «假令» của sách (tests/test_ky_mon_cach.py); lời đời thường là tóm ý |
 | Thần số | `bo_sung_cap_so.json` |  | Ban biên tập soạn |  |
 | Thần số | `bo_sung_nam_ca_nhan.json` |  | Ban biên tập soạn |  |
 | Thần số | `bo_sung_nghe.json` |  | Ban biên tập soạn |  |
