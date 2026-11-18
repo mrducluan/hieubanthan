@@ -65,4 +65,14 @@ test.describe("Kỳ Môn Độn Giáp", () => {
     expect((await request.post("/api/ky-mon/ban", { data: { ten: "A" } })).status()).toBe(422);
     expect((await request.post("/api/ky-mon/ngay", { data: { ngay: "2026-11-18", viec: "gap_go" } })).status()).toBe(200);
   });
+
+  test("KM-3: Hôm nay có mục giờ và hướng thuận, dẫn sang /ky-mon", async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem("hbt.hoso.v1", JSON.stringify({ v: 1, ho_ten: "Nguyen An", ngay: 24, thang: 10, nam: 1988, tao_luc: new Date().toISOString() })));
+    await page.goto("/hom-nay");
+    const muc = page.getByTestId("ky-mon-hom-nay");
+    await expect(muc).toBeVisible();
+    await expect(muc).toContainText("Giờ và hướng thuận hôm nay");
+    await muc.locator("summary").click();
+    await expect(muc.getByRole("link", { name: "Chọn theo việc bạn định làm" })).toHaveAttribute("href", "/ky-mon");
+  });
 });

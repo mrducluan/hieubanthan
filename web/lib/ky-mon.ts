@@ -35,7 +35,7 @@ export interface GioNgayKM {
   hiem: { ten: string; phuong: string }[]; luu_y: string[]; viec?: { phuong: string; cua: string; noi_bat: boolean };
 }
 export interface NgayKM {
-  ngay: string; gio: GioNgayKM[];
+  ngay: string; gio: GioNgayKM[]; cach_dung: string;
   viec?: { ma: string; ten: string; mo_ta: string; ranh_gioi?: string | null; loi?: string;
     gio_tot: { chi: string; khung: string; luc: string; phuong: string; cua: string; noi_bat: boolean; ban_dem: boolean; loi: string }[] };
 }
