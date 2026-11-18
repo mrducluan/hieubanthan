@@ -347,6 +347,8 @@ def luot_goi(client=None) -> list[Luot]:
     # ---- Phong thuỷ còn lại
     g("phongthuy.danh_muc", "/v1/phongthuy/bo-cuc/danh-muc")
     g("phongthuy.cung_phi", "/v1/phongthuy/cung-phi")
+    for (na, ga, nb, gb) in ((1990, "nam", 1990, "nu"), (1988, "nam", 1992, "nu")):   # UI-HHT
+        p(f"phongthuy.hai_cung.{na}{ga}.{nb}{gb}", "/v1/phongthuy/hai-cung", {"a": {"nam": na, "gioi_tinh": ga}, "b": {"nam": nb, "gioi_tinh": gb}})
     g("phongthuy.tuoi", "/v1/phongthuy/tuoi")
     g("phongthuy.tuoi_gop", "/v1/phongthuy/tuoi-gop")
     for bc_ten, bc in (("pho", BO_CUC), ("ho", BO_CUC_HO)):
@@ -438,7 +440,7 @@ def luot_goi(client=None) -> list[Luot]:
         for s in client.get("/v1/tuvi/la-so-mau").json().get("ds", []):
             g(f"tuvi.la_so_mau.{s['slug']}", f"/v1/tuvi/la-so-mau/{s['slug']}")
         for s in client.get("/v1/phongthuy/cung-phi").json().get("cung", []):
-            g(f"phongthuy.cung_phi.{s['slug']}", f"/v1/phongthuy/cung-phi/{s['slug']}")
+            g(f"phongthuy.cung_phi.{s['slug']}", f"/v1/phongthuy/cung-phi/{s['slug']}?nam_xem=2027")
         for s in (client.get("/v1/phongthuy/tuoi-gop").json().get("tuoi") or [])[::5]:
             if isinstance(s, dict) and s.get("slug"):
                 g(f"phongthuy.tuoi_gop.{s['slug']}", f"/v1/phongthuy/tuoi-gop/{s['slug']}")
@@ -615,6 +617,7 @@ KHOA_CHI_EN = {"slug_en", "duong_en", "ten_hien", "ho_tro"}   # ho_tro = đoạn
 # Trường SUY TỪ CHỮ (không phải dữ kiện): thuật ngữ nhận diện trong lời văn — chữ khác ngôn ngữ thì danh sách khác.
 KHOA_THEO_CHU = {"thuat_ngu", "phut_doc",   # phut_doc = số phút đọc, đếm theo chữ của ngôn ngữ
                  "sach_ghi",                  # SX-C: khối "sách xưa ghi" — lời Việt chưa dịch nên CHỈ bản Việt có (bản Anh: None)
+                 "bo_sung_cung", "sach_vo_chong",   # UI-HHT: lớp tri thức thêm của trang cung phi + lệ vợ chồng (hai-cung) — KB chưa có bản Anh nên CHỈ bản Việt có
                  "luan_hoi", "nguoi_quanh", "cau_tra_loi", "so_nguoi", "cau_mau"}   # LH-1: lớp "Luận theo câu hỏi" Tử vi — KB chưa có bản Anh nên CHỈ bản Việt có
 # Danh sách CHỮ mà số phần tử được phép khác theo ngôn ngữ (biến thể tên để nhận diện thuật ngữ trong chữ ngôn ngữ đó).
 DS_CHU_TU_DO = {"bien_the", "khop"}   # khop = cụm chữ trong lời đáp để gạch nối với hình (hỏi đáp) — theo chữ của ngôn ngữ

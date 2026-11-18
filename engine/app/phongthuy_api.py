@@ -10,7 +10,7 @@ import binascii
 import datetime as _dt
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, BackgroundTasks, HTTPException
+from fastapi import APIRouter, BackgroundTasks, HTTPException, Query
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, ValidationError, field_validator, model_validator
 
 from app.calc import phongthuy as pt
@@ -359,10 +359,29 @@ def api_cung_phi_danh_sach() -> dict:
 
 
 @router.get("/cung-phi/{slug}")
-def api_cung_phi(slug: str) -> dict:
+def api_cung_phi(slug: str, nam_xem: int | None = Query(default=None, ge=1900, le=2150)) -> dict:
     if pt_tuoi.cung_tu_slug(slug) is None:
         raise HTTPException(404, detail="Không có cung phi này")
-    return {"engine_version": ENGINE_VERSION, **pt_tuoi.cung_phi(slug)}
+    return {"engine_version": ENGINE_VERSION, **pt_tuoi.cung_phi(slug, nam_xem)}
+
+
+# UI-HHT: hướng chung hai người (vợ chồng, người cùng nhà) — chỉ năm sinh + giới tính, không lưu.
+class _NguoiNam(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    nam: int = Field(ge=1900, le=2100)
+    gioi_tinh: Literal["nam", "nu"]
+
+
+class _HaiCung(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    a: _NguoiNam
+    b: _NguoiNam
+
+
+@router.post("/hai-cung")
+def api_hai_cung(inp: _HaiCung) -> dict:
+    from app.luangiai import phongthuy_cung_chi_tiet as ct  # noqa: PLC0415
+    return {"engine_version": ENGINE_VERSION, **ct.hai_cung(inp.a.nam, inp.a.gioi_tinh, inp.b.nam, inp.b.gioi_tinh)}
 
 
 # --------------------------------------------------------------------------- #

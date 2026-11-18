@@ -14,6 +14,7 @@ from app.calc import tietkhi as tk
 from app.kb import phongthuy_kb as kb
 from app.kb import ten as _ten
 from app.kb.loi import L
+from app.luangiai import phongthuy_cung_chi_tiet as _ct
 
 
 def _h(x: str) -> str:
@@ -234,7 +235,8 @@ CUNG_PHI = (  # (mệnh quái, số Lạc thư, slug) — slug kèm phương c�
 )
 _SLUG_CUNG = {s: q for q, _, s in CUNG_PHI}
 CUNG_SLUG = {q: s for q, _, s in CUNG_PHI}
-CAP_NHAT_CUNG = "2026-11-03"
+NGAY_DANG_CUNG = "2026-11-03"
+CAP_NHAT_CUNG = "2026-11-18"   # UI-HHT: thêm bo_sung_cung
 
 
 def cung_tu_slug(slug: str) -> str | None:
@@ -274,7 +276,7 @@ def muc_luc_tuoi() -> list[dict]:
     return ra
 
 
-def cung_phi(slug: str) -> dict:
+def cung_phi(slug: str, nam_xem: int | None = None) -> dict:
     q = cung_tu_slug(slug)
     if q is None:
         raise ValueError("không có cung phi này")
@@ -337,7 +339,7 @@ def cung_phi(slug: str) -> dict:
     ]
     return {
         "slug": slug, "quai": q, "so": so, "nhom": nhom, "tieu_de": tieu_de_cung(q),
-        "ngay_dang": CAP_NHAT_CUNG, "cap_nhat": CAP_NHAT_CUNG,
+        "ngay_dang": NGAY_DANG_CUNG, "cap_nhat": CAP_NHAT_CUNG,
         "mo_ta": L("pt.cung.mo_ta", "Cung phi {q} ({nhom}): 4 hướng tốt {tot}, 4 hướng nên tránh, hướng cửa, "
                    "bếp, giường, bàn làm việc theo Bát trạch và danh sách năm sinh có cung {q}.",
                    q=Q, nhom=NH, tot=_ds(_h(h["huong"]) for h in tot)),
@@ -350,4 +352,12 @@ def cung_phi(slug: str) -> dict:
         "nguon": L("pt.cung.nguon", "Bát trạch (Dương Trạch Tam Yếu) — bảng du niên; cung phi theo năm sinh và giới tính"),
         "luu_y": [kb.luu_y("bat_trach"), kb.bo_cuc()["luu_y"]],
         **{k: v for k, v in kb.meta().items() if k in ("trang_thai", "can_doi_chieu")},
+        # UI-HHT: lớp tri thức thêm (chỉ bản Việt; None ở bản khác). `nam_xem`: web gửi năm menu (có thể là năm SẮP TỚI —
+        # lời ghi ngày Lập xuân bắt đầu năm đó); không gửi → năm phong thuỷ đang đi (đổi ở Lập xuân).
+        "bo_sung_cung": _ct.chi_tiet(q, nam_xem or _nam_pt()),
     }
+
+
+def _nam_pt() -> int:
+    from app.calc import huyen_khong as hk  # noqa: PLC0415
+    return hk.nam_theo_lap_xuan(dt.datetime.now(dt.timezone.utc).replace(tzinfo=None))

@@ -13,7 +13,11 @@ import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { LaBan } from "@/components/huyen-hoc/LaBan";
 import { SachXuaNoi } from "@/components/huyen-hoc/SachXuaNoi";
-import { cungPhi, dsCungPhi, duongTuoi, type CungPhi, type HuongDuNien } from "@/lib/kien-thuc";
+import { SachXuaGhi } from "@/components/huyen-hoc/SachXuaGhi";
+import { LaBanSong } from "@/components/phong-thuy/LaBanSong";
+import { KyMonHuongHop } from "@/components/ky-mon/KyMonTheoNgay";
+import { namTuoiSeo } from "@/lib/nam";
+import { cungPhi, dsCungPhi, duongTuoi, type CungPhi, type HuongChiTiet, type HuongDuNien } from "@/lib/kien-thuc";
 import { anhBai, catMoTa, goiLd, ldAnh, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
 import { DuongDan } from "@/components/khung/DuongDan";
 import { duongDanCum } from "@/lib/duong-dan";
@@ -54,6 +58,29 @@ function The({ ten, h }: { ten: string; h: HuongDuNien }) {
   );
 }
 
+/** UI-HHT: một hướng dạng mục gập — tóm tắt luôn hiện, lời đầy đủ nằm trong HTML (bấm mới mở). */
+function MucHuong({ h, ct }: { h: HuongDuNien; ct?: HuongChiTiet }) {
+  const so = (x: number) => String(x).replace(".", ",");
+  return (
+    <details className="group rounded-xl border border-line/70 open:border-gold/40">
+      <summary className="flex cursor-pointer list-none items-center gap-3 p-3.5 [&::-webkit-details-marker]:hidden">
+        <span className={`grid size-7 shrink-0 place-items-center rounded-full text-xs font-semibold ${ct?.hang ? "bg-jade/20 text-jade" : "bg-cinnabar/10 text-cinnabar"}`}>
+          {ct?.hang ?? "×"}
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="text-fg"><b>{h.huong}</b> · {h.du_nien}</span>
+          {ct?.mot_cau && <span className="block text-sm text-fg-muted">{ct.mot_cau}</span>}
+        </span>
+        <ArrowRight className="size-4 shrink-0 text-fg-faint transition-transform group-open:rotate-90 motion-reduce:transition-none" aria-hidden />
+      </summary>
+      <div className="border-t border-line/50 px-3.5 pb-3.5 pt-2 text-sm leading-relaxed text-fg-muted">
+        <p>{h.y_nghia} <span className="text-fg-faint">Hợp cho: {h.dung_cho}.</span></p>
+        {ct && <p className="mt-1.5">Trên la bàn: {so(ct.do.tu)}°–{so(ct.do.den)}° (sơn {ct.son.join(", ")}).</p>}
+      </div>
+    </details>
+  );
+}
+
 export default async function Page({ params: thamSo }: Props) {
   const params = await thamSo;
   // Trang năm cũ một giới tính (tuoi-1990-nu): biết giới tính → 308 thẳng tới trang cung của người đó, đúng dòng năm sinh.
@@ -66,8 +93,11 @@ export default async function Page({ params: thamSo }: Props) {
   // Trang năm gộp cũ (next.config.mjs đã 308 về dòng năm; đây là lưới an toàn khi gọi thẳng route).
   const m = params.slug.match(/^(tuoi-\d{4})$/);
   if (m) permanentRedirect(duongTuoi(m[1]!));
-  const c = await cungPhi(params.slug);
+  const namXem = await namTuoiSeo();
+  const c = await cungPhi(params.slug, namXem);
   if (!c) notFound();
+  const bs = c.bo_sung_cung ?? null;
+  const ctTheo = new Map((bs?.huong ?? []).map((h) => [h.huong, h]));
   const duong = duongTuoi(c.slug);
   const nd = await layNoiDungTrang(duong, { tieu_de: c.tieu_de });   // ND-5: mẫu cụm "Hướng hợp tuổi theo cung phi"
   const anh = anhCung(c);
@@ -106,6 +136,7 @@ export default async function Page({ params: thamSo }: Props) {
           Mệnh quái số {c.so} · {c.nhom}
           {c.thong_tin.ngu_hanh && <> · hành {c.thong_tin.ngu_hanh}</>}
           {c.thong_tin.phuong && <> · phương gốc {c.thong_tin.phuong}</>}
+          {c.thong_tin.tinh_chat && <> · tính chất: {c.thong_tin.tinh_chat}</>}
           {" · "}Cập nhật <time dateTime={c.cap_nhat}>{dmy(c.cap_nhat)}</time>
         </p>
       </header>
@@ -118,19 +149,62 @@ export default async function Page({ params: thamSo }: Props) {
 
       <section className="mt-8" aria-labelledby="la-ban">
         <h2 id="la-ban" className="text-2xl">La bàn 8 hướng của cung {c.quai}</h2>
-        <div className="mt-4"><LaBan quai={c.quai} nhom={c.nhom} bang={c.bang_huong} huongCat={c.huong_tot.map((h) => h.huong)} /></div>
+        {bs ? (
+          <>
+            <p className="mt-2 text-sm text-fg-muted">Số trên ô là thứ hạng hướng tốt. Bấm từng hướng để xem hợp đặt gì, khoảng độ trên la bàn và sách xưa ghi.</p>
+            <div className="mt-4"><LaBanSong huong={bs.huong} quai={c.quai} nhom={c.nhom} namNay={bs.nam_nay} /></div>
+            {/* UI-HHT × KM-3: giờ thuận hôm nay của 4 hướng tốt (máy người đọc gọi lúc xem — không vào HTML máy chủ). */}
+            <KyMonHuongHop huongCat={c.huong_tot.map((h) => h.huong)} maDo="cung_phi"
+              tieuDe={`Hôm nay, 4 hướng tốt của cung ${c.quai} thuận vào giờ nào?`} ghiChu={"Bốn hướng tốt theo Bát trạch (thứ hạng không đổi) ghép với hướng thuận của từng canh giờ theo Kỳ Môn — chỉ để chọn lúc làm việc quan trọng."} />
+          </>
+        ) : (
+          <div className="mt-4"><LaBan quai={c.quai} nhom={c.nhom} bang={c.bang_huong} huongCat={c.huong_tot.map((h) => h.huong)} /></div>
+        )}
       </section>
+      {bs && (
+        <aside className="glass mt-6 flex flex-col items-start gap-3 rounded-2xl p-5 sm:flex-row sm:items-center" data-nosnippet="">
+          <Compass className="size-6 shrink-0 text-gold" aria-hidden />
+          <p className="flex-1 text-sm text-fg-muted">Đứng ở cửa, đo hướng nhà bằng la bàn điện thoại và xem nhà hợp cung {c.quai} tới đâu.</p>
+          <Button asChild size="sm"><Link href="/phong-thuy">Đo hướng nhà <ArrowRight aria-hidden /></Link></Button>
+        </aside>
+      )}
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-2">
-        <section aria-labelledby="huong-tot">
-          <h2 id="huong-tot" className="text-xl">4 hướng tốt (xếp từ tốt nhất)</h2>
-          <ol className="mt-3 grid gap-3">{c.huong_tot.map((h, i) => <The key={h.huong} ten={`Hướng tốt ${i + 1}`} h={h} />)}</ol>
+      {bs ? (
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          <section aria-labelledby="huong-tot">
+            <h2 id="huong-tot" className="text-xl">4 hướng tốt của cung {c.quai} (xếp từ tốt nhất)</h2>
+            <ol className="mt-3 grid gap-2">{c.huong_tot.map((h) => <li key={h.huong}><MucHuong h={h} ct={ctTheo.get(h.huong)} /></li>)}</ol>
+          </section>
+          <section aria-labelledby="huong-xau">
+            <h2 id="huong-xau" className="text-xl">4 hướng cung {c.quai} nên tránh</h2>
+            <ol className="mt-3 grid gap-2">{c.huong_xau.map((h) => <li key={h.huong}><MucHuong h={h} ct={ctTheo.get(h.huong)} /></li>)}</ol>
+          </section>
+        </div>
+      ) : (
+        <div className="mt-10 grid gap-6 sm:grid-cols-2">
+          <section aria-labelledby="huong-tot">
+            <h2 id="huong-tot" className="text-xl">4 hướng tốt (xếp từ tốt nhất)</h2>
+            <ol className="mt-3 grid gap-3">{c.huong_tot.map((h, i) => <The key={h.huong} ten={`Hướng tốt ${i + 1}`} h={h} />)}</ol>
+          </section>
+          <section aria-labelledby="huong-xau">
+            <h2 id="huong-xau" className="text-xl">4 hướng nên tránh</h2>
+            <ol className="mt-3 grid gap-3">{c.huong_xau.map((h, i) => <The key={h.huong} ten={`Hướng xấu ${i + 1}`} h={h} />)}</ol>
+          </section>
+        </div>
+      )}
+
+      {bs && (
+        <section className="mt-10 rounded-2xl border border-moon/40 bg-moon/5 p-5" aria-labelledby="nam-nay">
+          <h2 id="nam-nay" className="text-xl">Năm {bs.nam_nay.nam}: hướng tốt nào của cung {c.quai} cần giữ yên?</h2>
+          {bs.nam_nay.lap_xuan && <p className="mt-1 text-sm text-fg-faint">Năm phong thuỷ {bs.nam_nay.nam} bắt đầu từ Lập xuân {dmy(bs.nam_nay.lap_xuan)}; trước ngày đó vẫn tính theo năm {bs.nam_nay.nam - 1}.</p>}
+          <p className="mt-2 leading-relaxed text-fg-muted">{bs.nam_nay.loi}</p>
+          <p className="mt-2 text-sm text-fg-faint">
+            Hướng kiêng chung của năm {bs.nam_nay.nam} (tính từ Lập xuân): Ngũ Hoàng {bs.nam_nay.ngu_hoang}, Thái Tuế {bs.nam_nay.thai_tue},
+            Tuế Phá {bs.nam_nay.tue_pha}, Tam Sát {bs.nam_nay.tam_sat}. Xem đủ ở{" "}
+            <Link href={`/phong-thuy/huong-xau-nam/${bs.nam_nay.nam}`} className="text-gold underline">hướng xấu năm {bs.nam_nay.nam}</Link>.
+          </p>
         </section>
-        <section aria-labelledby="huong-xau">
-          <h2 id="huong-xau" className="text-xl">4 hướng nên tránh</h2>
-          <ol className="mt-3 grid gap-3">{c.huong_xau.map((h, i) => <The key={h.huong} ten={`Hướng xấu ${i + 1}`} h={h} />)}</ol>
-        </section>
-      </div>
+      )}
 
       <section className="mt-10" aria-labelledby="bo-tri">
         <h2 id="bo-tri" className="text-2xl">Cửa, bếp, giường, bàn làm việc cho người cung {c.quai}</h2>
@@ -138,7 +212,14 @@ export default async function Page({ params: thamSo }: Props) {
           {c.goi_y.map((x) => (
             <div key={x.ma} className="rounded-xl border border-line/70 p-4">
               <p className="font-medium text-fg">{x.tieu_de}: <span className="text-gold">{x.huong.join(" → ")}</span></p>
+              {bs && x.du_nien?.length ? <p className="text-xs text-fg-faint">theo thứ tự {x.du_nien.join(" → ")}</p> : null}
               <p className="mt-1 text-sm leading-relaxed text-fg-muted">{x.noi_dung}{x.nguon === "dan_gian" ? " (quan niệm dân gian)" : ""}</p>
+            </div>
+          ))}
+          {bs?.phong_khac.map((x) => (
+            <div key={x.ma} className="rounded-xl border border-line/70 p-4">
+              <p className="font-medium text-fg">{x.tieu_de}: <span className={x.ma === "ve_sinh" ? "text-fg-muted" : "text-gold"}>{x.huong.join(", ")}</span></p>
+              <p className="mt-1 text-sm leading-relaxed text-fg-muted">{x.noi_dung} {x.thuc_te}{x.nguon === "dan_gian" ? " (quan niệm dân gian)" : ""}</p>
             </div>
           ))}
         </div>
@@ -150,6 +231,12 @@ export default async function Page({ params: thamSo }: Props) {
             moTa={`Câu chép trong Dương Trạch Thập Thư (bản trong Cổ Kim Đồ Thư Tập Thành, 1725) nói về người cung ${c.quai}. Lời Việt là phần tóm ý của ban biên tập; mở từng câu để xem nguyên văn.`} />
         </div>
       ) : null}
+      {bs?.cung_menh ? (
+        <div className="mt-6">
+          <SachXuaGhi khoi={bs.cung_menh} moDun="phongthuy" tieuDe={`Những điều sách dặn người cung ${c.quai}`}
+            moTa={`${bs.cung_menh.so_muc} điều Dương Trạch Thập Thư dặn riêng người cung ${c.quai}: phòng ở, cửa, bếp, lối đi, nước… Lời Việt trước, chữ Hán sau.`} />
+        </div>
+      ) : null}
 
       <section className="mt-10" aria-labelledby="nam-sinh">
         <h2 id="nam-sinh" className="text-2xl">Năm sinh có cung {c.quai} (1960–2005)</h2>
@@ -157,6 +244,14 @@ export default async function Page({ params: thamSo }: Props) {
           Cung phi tính theo năm sinh và giới tính, mốc đầu năm là Lập xuân: sinh trước ngày Lập xuân của năm đó thì tính theo
           năm trước — xem cả bảng ở <Link href="/phong-thuy/huong-hop-tuoi" className="text-gold underline">mục lục hướng hợp tuổi</Link>.
         </p>
+        {bs && (
+          <div className="mt-3 rounded-xl border border-line/70 p-4 text-sm leading-relaxed text-fg-muted">
+            <p><b className="text-fg">Vì sao cùng năm sinh mà nam, nữ khác cung?</b> {bs.nam_nu.so_5}</p>
+            {bs.nam_nu.vi_du.length > 0 && (
+              <p className="mt-2">Ví dụ: {bs.nam_nu.vi_du.map((v) => `sinh ${v.nam} — nam cung ${v.nam_gioi}, nữ cung ${v.nu_gioi}`).join("; ")}.</p>
+            )}
+          </div>
+        )}
         <div className="mt-4 grid gap-6 sm:grid-cols-2">
           {(["nam", "nu"] as const).map((g) => (
             <div key={g}>
@@ -174,6 +269,21 @@ export default async function Page({ params: thamSo }: Props) {
           ))}
         </div>
       </section>
+
+      {bs && (
+        <section className="mt-10" aria-labelledby="vo-chong">
+          <h2 id="vo-chong" className="text-2xl">Vợ chồng khác nhóm với cung {c.quai} thì chọn hướng theo ai?</h2>
+          <p className="mt-2 leading-relaxed text-fg-muted">{bs.vo_chong.cach_lam}</p>
+          <p className="mt-2 leading-relaxed text-fg-muted">Sách xưa ghi: {bs.vo_chong.y} <span className="font-serif text-fg-faint" lang="zh-Hant">{bs.vo_chong.han}</span></p>
+          <p className="mt-3"><Link href="/phong-thuy/huong-hop-tuoi#hai-nguoi" className="text-gold underline">Nhập năm sinh hai người để xem hướng chung</Link></p>
+          {bs.quy_tac.length > 0 && (
+            <details className="mt-4 rounded-xl border border-line/70 p-4 text-sm">
+              <summary className="cursor-pointer text-fg">Hai lưu ý thực hành</summary>
+              {bs.quy_tac.map((q) => <p key={q.ma} className="mt-2 leading-relaxed text-fg-muted"><b className="text-fg">{q.tieu_de}.</b> {q.noi_dung}</p>)}
+            </details>
+          )}
+        </section>
+      )}
 
       <nav className="mt-10" aria-labelledby="cung-khac">
         <h2 id="cung-khac" className="text-xl">Cung cùng nhóm {c.nhom} (chung 4 hướng tốt)</h2>
@@ -209,6 +319,14 @@ export default async function Page({ params: thamSo }: Props) {
       </aside>
 
       <KhoiCms ds={nd.khoi.cuoi} duong={duong} viTri="cuoi" className="mt-10" />
+      {bs && (
+        <figure className="mt-10">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={anh} alt={`La bàn 8 hướng cung ${c.quai}: hướng tốt ${c.huong_tot.map((h) => h.huong).join(", ")}`}
+            width={1200} height={630} loading="lazy" className="h-auto w-full rounded-2xl border border-line/60" />
+          <figcaption className="mt-2 text-xs text-fg-faint">Ảnh tóm tắt bốn hướng tốt của cung {c.quai} — lưu hoặc gửi cho người nhà.</figcaption>
+        </figure>
+      )}
       <footer className="mt-10 border-t border-line/60 pt-5 text-xs leading-relaxed text-fg-faint">
         <p>Nguồn: {c.nguon}. Lời giải thích do Ban biên tập Hiểu Bản Thân biên soạn · Chủ biên Đức Luân duyệt xuất bản.</p>
         {c.luu_y.filter(Boolean).map((l) => <p key={l} className="mt-2">{l}</p>)}
