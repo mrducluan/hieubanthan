@@ -1,5 +1,7 @@
 // KM-2 — trang /ky-mon: bàn Kỳ Môn theo giờ. Engine lập và đọc bàn; web chỉ vẽ.
 import { expect, test } from "@playwright/test";
+import { napHoSo } from "./_hoso";
+import { conToi } from "../lib/ky-mon";
 
 test.describe("Kỳ Môn Độn Giáp", () => {
   test("HTML máy chủ đã có câu trả lời, bảng tám hướng, giải nghĩa và hỏi đáp", async ({ request }) => {
@@ -93,5 +95,66 @@ test.describe("Kỳ Môn Độn Giáp", () => {
     expect(j.hop_menh.loi).toBeTruthy();
     expect(j.gio.every((g: { hop_menh: string[] }) => Array.isArray(g.hop_menh))).toBe(true);
     expect((await request.post("/api/ky-mon/ngay", { data: { huong_hop: ["Lên"] } })).status()).toBe(422);
+  });
+});
+
+// KM-3 đợt 2 — hub Huyền học, chân trang, khối Kỳ Môn cạnh la bàn Phong thuỷ.
+test.describe("Kỳ Môn nối vào các trang", () => {
+  test("khung giờ chưa qua: khung Tý cuối ngày (23:00–01:00) vẫn còn lúc 23:40", () => {
+    expect(conToi("23:30", 23 * 60 + 40)).toBe(true);
+    expect(conToi("00:30", 0)).toBe(true);
+    expect(conToi("00:30", 60)).toBe(false);          // 01:00 — khung Tý đầu ngày đã qua
+    expect(conToi("07:30", 9 * 60 - 1)).toBe(true);   // khung Thìn 07:00–09:00, còn một phút
+    expect(conToi("07:30", 9 * 60)).toBe(false);
+  });
+
+  test("hub /huyen-hoc có thẻ Kỳ Môn; chân trang có Nhân tướng, Tarot, Kỳ Môn", async ({ page, request }) => {
+    const html = await (await request.get("/huyen-hoc")).text();
+    expect(html).toContain('data-testid="the-mang-ky_mon"');
+    expect(html).toContain("tám cách nhìn lại mình");
+    expect(html).toContain("https://en.wikipedia.org/wiki/Qimen_Dunjia");
+    await page.goto("/huyen-hoc");
+    const the = page.getByTestId("the-mang-ky_mon");
+    await expect(the).toContainText("Giờ này nên đi hướng nào?");
+    await expect(the.locator('a[href="/ky-mon"]')).toHaveCount(1);
+    await expect(the.getByTestId("chip-can")).toContainText("Không cần ngày sinh");
+    expect(await page.getByTestId("hinh-ngu-mang").locator("a").count()).toBe(8);
+    const ct = page.getByTestId("chan-trang");
+    for (const d of ["/nhan-tuong", "/tarot", "/ky-mon", "/tarot/la-bai", "/tuoi-xong-dat", "/xem-sao-han", "/doi-lich-am-duong"]) {
+      await expect(ct.locator(`a[href="${d}"]`), d).toHaveCount(1);
+    }
+  });
+
+  test("la bàn Phong thuỷ: khối 'hướng hợp mệnh thuận vào giờ nào' chỉ gửi tên hướng, chỉ nêu hướng hợp mệnh", async ({ page }) => {
+    await page.clock.setFixedTime(new Date("2026-11-18T06:00:00+07:00"));
+    await napHoSo(page);
+    let than: Record<string, unknown> | null = null;
+    page.on("request", (r) => { if (r.url().includes("/api/ky-mon/ngay") && r.method() === "POST") than = r.postDataJSON(); });
+    const mqP = page.waitForResponse((r) => r.url().includes("/api/phongthuy/menh-quai") && r.ok());
+    await page.goto("/phong-thuy");
+    const mq = (await (await mqP).json()) as { huong_cat: string[] };
+    const khoi = page.getByTestId("ky-mon-huong-hop");
+    await expect(khoi).toContainText("hướng hợp mệnh của bạn thuận vào giờ nào");
+    await expect(khoi.locator('a[href="/ky-mon"]')).toHaveCount(1);
+    // Riêng tư: chỉ tên hướng hợp mệnh + múi giờ — không năm sinh, giới tính, tên.
+    expect(than).not.toBeNull();
+    expect(Object.keys(than!).sort()).toEqual(["huong_hop", "utc"]);
+    expect([...(than!.huong_hop as string[])].sort()).toEqual([...mq.huong_cat].sort());
+    // Mỗi dòng "Giờ X (khung): hướng A, B" — chỉ nêu hướng hợp mệnh, và chỉ khung chưa qua (06:00 → không còn Tý đầu ngày, Sửu, Dần).
+    const dong = await khoi.locator("li").allInnerTexts();
+    for (const d of dong) {
+      const huong = d.split("hướng ")[1]!.split(", ").map((x) => x.trim());
+      for (const h of huong) expect(mq.huong_cat, d).toContain(h);
+      expect(d).not.toMatch(/Giờ (Sửu|Dần) /);
+    }
+  });
+
+  test("engine lỗi → khối Kỳ Môn ở Phong thuỷ tự ẩn, la bàn vẫn còn", async ({ page }) => {
+    await napHoSo(page);
+    await page.route("**/api/ky-mon/ngay", (r) => r.fulfill({ status: 500, body: "{}" }));
+    await page.goto("/phong-thuy");
+    await expect(page.getByTestId("menh-quai")).toBeVisible();
+    await page.waitForTimeout(800);
+    await expect(page.getByTestId("ky-mon-huong-hop")).toHaveCount(0);
   });
 });

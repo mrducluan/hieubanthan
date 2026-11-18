@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
-import type { NgayKM, ViecKM } from "@/lib/ky-mon";
+import { conToi, type NgayKM, type ViecKM } from "@/lib/ky-mon";
 
 const VIEC: { ma: ViecKM; ten: string }[] = [
   { ma: "gap_go", ten: "Gặp gỡ" }, { ma: "ky_ket", ten: "Ký kết, mở hàng" }, { ma: "di_xa", ten: "Đi xa" },
@@ -64,12 +64,13 @@ export function KyMonHuongHop({ huongCat }: { huongCat: string[] }) {
   const khoa = huongCat.join("|");
   useEffect(() => {
     let song = true;
-    setGio(new Date().getHours());
+    const d = new Date();
+    setGio(d.getHours() * 60 + d.getMinutes());
     void layNgay({ utc: utcMay(), huong_hop: khoa ? khoa.split("|") : [] }).then((j) => { if (song) setN(j); });
     return () => { song = false; };
   }, [khoa]);
   if (!n?.hop_menh) return null;                 // engine cũ / lỗi → không hiện
-  const con = n.gio.filter((g) => (g.hop_menh?.length ?? 0) > 0 && Number(g.khung.slice(6, 8)) > gio);
+  const con = n.gio.filter((g) => (g.hop_menh?.length ?? 0) > 0 && conToi(g.luc, gio));
   return (
     <div className="mt-4 rounded-xl border border-jade/30 bg-jade/5 p-4 text-sm" data-testid="ky-mon-huong-hop">
       <p className="text-fg">Hôm nay, hướng hợp mệnh của bạn thuận vào giờ nào?</p>

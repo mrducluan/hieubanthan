@@ -4,11 +4,11 @@
 import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { MucGap } from "@/components/khung/MucGap";
-import type { NgayKM } from "@/lib/ky-mon";
+import { conToi, type NgayKM } from "@/lib/ky-mon";
 
 /** Các khung còn lại trong ngày (kể cả khung đang đi) có hướng thuận, giờ thức trước. */
-export function khungConLai(n: NgayKM, gioMay: number): NgayKM["gio"] {
-  return n.gio.filter((g) => g.muc === "thuan" && Number(g.khung.slice(6, 8)) > gioMay);
+export function khungConLai(n: NgayKM, phutMay: number): NgayKM["gio"] {
+  return n.gio.filter((g) => g.muc === "thuan" && conToi(g.luc, phutMay));
 }
 
 export function KyMonHomNay({ ngay }: { ngay: string }) {
@@ -16,7 +16,7 @@ export function KyMonHomNay({ ngay }: { ngay: string }) {
   const [gio, setGio] = useState(0);
   useEffect(() => {
     const d = new Date();
-    setGio(d.getHours());
+    setGio(d.getHours() * 60 + d.getMinutes());
     const utc = Math.round((-d.getTimezoneOffset() / 60) * 4) / 4;
     let song = true;
     fetch("/api/ky-mon/ngay", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ ngay, utc }) })
@@ -26,7 +26,7 @@ export function KyMonHomNay({ ngay }: { ngay: string }) {
   if (!n) return null;                       // engine cũ / lỗi → mục tự ẩn
   const con = khungConLai(n, gio);
   const dau = con[0];
-  const tom = dau ? `Giờ ${dau.chi} (${dau.khung}): hướng ${dau.huong_thuan.join(", ")} đang thuận.` : "Từ giờ tới hết ngày không còn khung nào có hướng nổi bật.";
+  const tom = dau ? `Giờ ${dau.chi} (${dau.khung}): hướng ${dau.huong_thuan.join(", ")} thuận.` : "Từ giờ tới hết ngày không còn khung nào có hướng nổi bật.";
   return (
     <MucGap id="ky-mon" ma="ky_mon" testId="ky-mon-hom-nay" tieuDe="Giờ và hướng thuận hôm nay" tomTat={tom} phu="theo bàn Kỳ Môn của từng canh giờ">
       {con.length > 0 ? (

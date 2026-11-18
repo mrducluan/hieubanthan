@@ -64,3 +64,12 @@ export function layKyMonHomNay(): Promise<[BanKM, NgayKM, DanhMucKM]> {
 
 /** Vị trí của tám hướng trên lưới 3×3, Bắc ở trên (như bản đồ): số cung Lạc Thư theo từng ô, đọc trái → phải, trên → dưới. */
 export const LUOI_BAC_TREN = [6, 1, 8, 7, 5, 3, 2, 9, 4] as const;
+
+/** Khung giờ (của bài đọc ngày) chưa qua, tính theo đồng hồ máy. `luc` = mốc engine lập bàn: "00:30" là phần sau nửa đêm
+ *  của giờ Tý (hết lúc 01:00); các khung khác "01:30" … "23:30" bắt đầu trước `luc` 30 phút, dài hai tiếng → hết sau `luc`
+ *  90 phút. So bằng phút trong ngày — khung Tý cuối ngày (23:00–01:00) vẫn còn lúc 23:xx (trước so giờ "01" của khung → mất). */
+export function conToi(luc: string, phutMay: number): boolean {
+  const [h, m] = luc.split(":").map(Number);
+  const phut = (h ?? 0) * 60 + (m ?? 0);
+  return (phut === 30 ? 60 : phut + 90) > phutMay;
+}

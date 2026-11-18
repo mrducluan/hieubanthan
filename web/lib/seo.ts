@@ -42,6 +42,8 @@ export const THUC_THE = {
   "phong-thuy": { name: "Phong thuỷ", alternateName: "Feng shui", sameAs: ["https://en.wikipedia.org/wiki/Feng_shui", "https://vi.wikipedia.org/wiki/Phong_th%E1%BB%A7y", "https://www.wikidata.org/wiki/Q170537"] },
   "nhan-tuong": { name: "Nhân tướng học", alternateName: "Chinese physiognomy", sameAs: ["https://en.wikipedia.org/wiki/Physiognomy", "https://vi.wikipedia.org/wiki/Nh%C3%A2n_t%C6%B0%E1%BB%9Bng_h%E1%BB%8Dc", "https://www.wikidata.org/wiki/Q841933"] },
   tarot: { name: "Tarot", alternateName: "Tarot card reading", sameAs: ["https://en.wikipedia.org/wiki/Tarot", "https://vi.wikipedia.org/wiki/Tarot", "https://www.wikidata.org/wiki/Q126645"] },
+  // KM-3: chỉ trang Wikipedia tiếng Anh (đã có từ lâu); chưa kiểm chứng được mã Wikidata → không ghi (HTT-1: QID sai còn hại hơn thiếu).
+  "ky-mon": { name: "Kỳ Môn Độn Giáp", alternateName: "Qimen Dunjia", sameAs: ["https://en.wikipedia.org/wiki/Qimen_Dunjia"] },
   lich: { name: "Âm lịch", alternateName: "Chinese calendar", sameAs: ["https://en.wikipedia.org/wiki/Chinese_calendar", "https://www.wikidata.org/wiki/Q134032"] },
 } as const satisfies Record<MangAnh, { name: string; alternateName: string; sameAs: readonly string[] }>;
 
@@ -186,7 +188,7 @@ export function catMoTa(s: string, toiDa = 160): string {
 }
 
 /** SEO-K: ảnh đại diện bài 1200×630 có hình theo mảng (la bàn, 12 cung, quẻ, tứ trụ, vòng số, lịch) — /og vẽ. */
-export type MangAnh = "than-so" | "tu-vi" | "bat-tu" | "kinh-dich" | "phong-thuy" | "nhan-tuong" | "tarot" | "lich";
+export type MangAnh = "than-so" | "tu-vi" | "bat-tu" | "kinh-dich" | "phong-thuy" | "nhan-tuong" | "tarot" | "ky-mon" | "lich";
 export function anhBai(o: { tieuDe: string; mang?: MangAnh | null; nhan?: string; tot?: string[]; so?: string | number; hao?: number[] }): string {
   const q = new URLSearchParams({ tieu_de: o.tieuDe });
   if (o.mang) {
