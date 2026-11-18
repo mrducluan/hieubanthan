@@ -155,5 +155,5 @@ def hai_cung(nam_a: int, gioi_a: str, nam_b: int, gioi_b: str) -> dict:
                 "do để lo chuyện hai người hợp hay không hợp nhau.",
                 a=_ten.ten("nhom_trach", pt.nhom(qa)), b=_ten.ten("nhom_trach", pt.nhom(qb)))
     return {"nguoi": [na, nb], "cung_nhom": cung_nhom, "huong_chung": chung, "huong": huong, "loi": loi,
-            "sach": _vo_chong() if ngon_ngu.la_viet() else None,
+            "sach_vo_chong": _vo_chong() if ngon_ngu.la_viet() else None,   # chỉ bản Việt (KHOA_THEO_CHU)
             "luu_y": L("pt.hai_cung.luu_y", "Chỉ dùng năm sinh: ai sinh trước Lập xuân (khoảng 3–5/2) thì nhập năm trước.")}

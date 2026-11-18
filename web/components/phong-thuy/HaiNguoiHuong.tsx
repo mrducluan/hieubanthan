@@ -14,7 +14,7 @@ interface Nguoi { nam: number; gioi_tinh: "nam" | "nu"; quai: string; nhom: stri
 interface KetQua {
   nguoi: [Nguoi, Nguoi]; cung_nhom: boolean; huong_chung: string[]; loi: string; luu_y: string;
   huong: { huong: string; du_nien_a: string; du_nien_b: string; a_cat: boolean; b_cat: boolean }[];
-  sach?: { han: string; am?: string; y: string; cach_lam: string } | null;
+  sach_vo_chong?: { han: string; am?: string; y: string; cach_lam: string } | null;
 }
 
 function cung(i: number, r0: number, r1: number) {
@@ -137,11 +137,11 @@ export function HaiNguoiHuong({ duongCung }: { duongCung: Record<string, string>
                 </tbody>
               </table>
             </div>
-            {!kq.cung_nhom && kq.sach && (
+            {!kq.cung_nhom && kq.sach_vo_chong && (
               <div className="rounded-xl border border-line/70 p-4 text-sm">
                 <p className="text-fg-faint">Sách xưa ghi</p>
-                <p className="mt-1 leading-relaxed text-fg-muted">{kq.sach.y}</p>
-                <p className="mt-1 font-serif text-fg-faint" lang="zh-Hant">{kq.sach.han}</p>
+                <p className="mt-1 leading-relaxed text-fg-muted">{kq.sach_vo_chong.y}</p>
+                <p className="mt-1 font-serif text-fg-faint" lang="zh-Hant">{kq.sach_vo_chong.han}</p>
               </div>
             )}
             <p className="text-xs text-fg-faint">{kq.luu_y}</p>

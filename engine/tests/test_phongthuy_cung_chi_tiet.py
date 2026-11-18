@@ -73,7 +73,7 @@ def test_hai_cung_chung_va_lech():
     # 1990: nam Khảm (Đông), nữ Cấn (Tây) → không chung hướng tốt
     h = ct.hai_cung(1990, "nam", 1990, "nu")
     assert [x["quai"] for x in h["nguoi"]] == ["Khảm", "Cấn"] and not h["cung_nhom"] and h["huong_chung"] == []
-    assert h["sach"]["han"] and len(h["huong"]) == 8
+    assert h["sach_vo_chong"]["han"] and len(h["huong"]) == 8
     for x in h["huong"]:
         assert x["du_nien_a"] == pt.bang_huong("Khảm")[x["huong"]] and x["du_nien_b"] == pt.bang_huong("Cấn")[x["huong"]]
     # cùng nhóm Đông: Khảm + Ly → chung 4 hướng
