@@ -41,12 +41,14 @@ export function ChipMuc({ muc, nhan, className }: { muc?: Muc; nhan?: string; cl
   );
 }
 
-export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, chanTrang, kiemChung = true, nhan: nhanVao, chuongQua, moSan }: {
+export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, chanTrang, kiemChung = true, nhan: nhanVao, chuongQua, moSan, moKhoaNgay }: {
   bc: BaoCaoDoiSong; ten: string; /** hiện bản dữ liệu gốc thay bản diễn đạt AI */ goc?: boolean;
   hanhDong?: ReactNode; phanKhoa?: ReactNode; chanTrang?: ReactNode; /** tắt dòng kiểm chứng (vd bài đã lưu cũ) */ kiemChung?: boolean;
   /** Nhãn nhỏ trên tiêu đề (KC-1: mỗi mảng một tên gói). */ nhan?: string;
   /** SAO-V: mã chương bạn bè tặng — ghi "Chương này là quà của một người bạn". */ chuongQua?: string;
   /** TR-4: chương mở sẵn ngoài chương 1 (vd Tarot "Câu chuyện các lá kể" — đọc liền với câu trả lời). */ moSan?: string[];
+  /** UD-2: thẻ mở khoá (có ưu đãi) đặt ngay chỗ gặp chương khoá; trả null = giữ link "Xem các chương còn lại". */
+  moKhoaNgay?: (nguon: string) => ReactNode;
 }) {
   const tyLe = useTyLe(kiemChung ? maMauBaoCao(bc) : []);
   const { c: chu, en } = useChuBaoCao();
@@ -161,7 +163,8 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
         )}
 
         {bc.luu_y_mang && bc.luu_y_mang.length > 0 && (
-          <KhungLuuYMang ds={bc.luu_y_mang} soChuong={soChuong} tenChuong={tenChuong} onMo={(ma) => moChuong(ma, true)} />
+          <KhungLuuYMang ds={bc.luu_y_mang} soChuong={soChuong} tenChuong={tenChuong} onMo={(ma) => moChuong(ma, true)}
+            moKhoa={bc.luu_y_mang.some((r) => r.khoa) ? moKhoaNgay?.("luu_y_mang") : null} />
         )}
 
         {bc.nguoi_quanh && bc.nguoi_quanh.length > 0 && (
@@ -206,6 +209,7 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
                     thamChieu={thamChieu} soChuong={soChuong} tenChuong={tenChuong} moDich={(ma) => moChuong(ma, true)}
                     tiep={tiep ? { ma: tiep.ma, so: soChuong(tiep.ma), tieu_de: tiep.tieu_de } : null}
                     conKhoa={!tiep && doc.length < bc.chuong.length}
+                    moKhoa={!tiep && doc.length < bc.chuong.length ? moKhoaNgay?.("cuoi_chuong") : null}
                     onCuoi={c.ma === cuoi ? () => setDaCuoi(true) : undefined} />
                 );
               })}
@@ -240,7 +244,8 @@ function DongThamChieu({ hop, den, tenDen, onMo }: { hop: Hop; den: string; tenD
   );
 }
 
-function Chuong({ c, so, goc, moDun, thoiGian, qua = false, mo, doiMo, thamChieu, soChuong, tenChuong, moDich, tiep, conKhoa, onCuoi }: {
+function Chuong({ c, so, goc, moDun, thoiGian, qua = false, mo, doiMo, thamChieu, soChuong, tenChuong, moDich, tiep, conKhoa, onCuoi, moKhoa }: {
+  /** UD-2: thẻ mở khoá ưu đãi thay link "Xem các chương còn lại". */ moKhoa?: ReactNode;
   c: ChuongDoiSongMo; so: number; goc: boolean; moDun: string; thoiGian?: MocDaiHan[]; qua?: boolean;
   mo: boolean; doiMo: () => void; thamChieu: (h: Hop) => string | null;
   soChuong: (ma: string) => number; tenChuong: (ma: string) => string; moDich: (ma: string) => void;
@@ -351,7 +356,8 @@ function Chuong({ c, so, goc, moDun, thoiGian, qua = false, mo, doiMo, thamChieu
             <ArrowDown className="size-4 shrink-0 text-gold" aria-hidden />
           </button>
         )}
-        {conKhoa && (
+        {conKhoa && moKhoa}
+        {conKhoa && !moKhoa && (
           <a href="#lg-khoa" className="mt-5 flex min-h-11 items-center gap-2 rounded-xl border border-gold/40 px-4 py-2.5 text-sm text-gold hover:bg-gold/10 print:hidden">
             <LockKeyhole className="size-4" aria-hidden /> {chu("chuong_con_lai")}
           </a>
@@ -428,7 +434,8 @@ function DongThoiGian({ ds }: { ds: MocDaiHan[] }) {
 /** MT-ĐS B6 — khung "Cần lưu ý ở từng mảng hay hỏi": 7 mảng người dùng hỏi nhiều nhất, mỗi mảng mức (chip) + điều nên
  *  để ý + việc nên làm + ranh giới (bác sĩ / luật sư / không phải lời khuyên đầu tư). Dòng của chương khoá SAO-2 chỉ
  *  còn tên + mức + nút mở chương. Mọi chữ do engine gom từ chương đã chấm; web chỉ vẽ. */
-function KhungLuuYMang({ ds, soChuong, tenChuong, onMo }: {
+function KhungLuuYMang({ ds, soChuong, tenChuong, onMo, moKhoa }: {
+  /** UD-2 */ moKhoa?: ReactNode;
   ds: LuuYMang[]; soChuong: (ma: string) => number; tenChuong: (ma: string) => string; onMo: (ma: string) => void;
 }) {
   const { c: chu, nhanMuc } = useChuBaoCao();
@@ -436,6 +443,7 @@ function KhungLuuYMang({ ds, soChuong, tenChuong, onMo }: {
     <section id="lg-luu-y-mang" aria-labelledby="lg-luu-y-mang-td" className="mt-6 scroll-mt-32 lg:scroll-mt-24" data-testid="lg-luu-y-mang">
       <h3 id="lg-luu-y-mang-td" className="font-serif text-2xl">{chu("luu_y_mang")}</h3>
       <p className="mt-1 text-sm text-fg-muted">{chu("luu_y_mang_dan")}</p>
+      {moKhoa}
       <ul className="mt-3 grid grid-cols-1 gap-2 md:grid-cols-2">
         {ds.map((r) => (
           <li key={r.ma} className="rounded-xl border border-line/70 bg-bg/40 p-3" data-testid="luu-y-mang" data-ma={r.ma} data-muc={r.muc} data-khoa={r.khoa ? "1" : undefined}>

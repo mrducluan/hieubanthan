@@ -11,6 +11,9 @@ import { congDangBat, dsGoiSao, hoiVienThongTin, napDauThongTin } from "@/lib/th
 import { dongHoiVien, hienDongHoiVien } from "@/lib/thanh-toan/hoi-vien";
 import { chuaCanNapSao } from "@/lib/thanh-toan/dich-vu";
 import { NapSao } from "./NapSao";
+import { DaiUuDai } from "@/components/sao/UuDai";
+import { dangThuSao, giaLuanGiaiSao } from "@/lib/luan-giai-sao";
+import { uuDaiCho } from "@/lib/uu-dai-may-chu";
 
 const DUONG = "/nap-sao";
 
@@ -24,6 +27,8 @@ export default async function Page() {
     hoiVienThongTin(), chuaCanNapSao(),
   ]);
   const cong = congDangBat();
+  // UD-2: người đến trang nạp thấy ngay đợt ưu đãi đang chạy (đúng giá ưu đãi của Luận giải toàn bộ).
+  const uuDai = !mienPhi && (await dangThuSao().catch(() => false)) ? await uuDaiCho(await giaLuanGiaiSao().catch(() => 99)) : null;
   return (
     <div className="mx-auto max-w-3xl">
       <p className="eyebrow">Ví Sao</p>
@@ -41,6 +46,7 @@ export default async function Page() {
         thanh toán một lần, không tự gia hạn.
         </>}
       </p>
+      {uuDai && <DaiUuDai u={uuDai} className="mt-5" />}
       <p className="mt-2 text-sm"><Link href="/goi-xem" className="text-gold hover:underline" data-testid="link-goi-xem">Xem các gói xem theo nhu cầu và cách trả hợp với bạn</Link></p>
       <KhoiCms ds={nd.khoi.tren} duong={DUONG} viTri="tren" className="mt-8" />
       <NapSao goi={goi} cong={cong} giaBaoCao={giaBaoCao} napDau={napDau} mienPhi={mienPhi} />

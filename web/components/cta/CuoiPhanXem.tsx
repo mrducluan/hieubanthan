@@ -73,7 +73,9 @@ function TheGoi({ t, i, tu, bienThe, giam }: { t: TheGoiY; i: number; tu: MangTr
 
 /** Nút Sao: trang có Luận giải toàn bộ → mở đúng báo cáo đang xem (luồng SAO-2: đăng nhập / đồng ý / nạp nhanh). Trang
  *  khác → dẫn sang Luận giải toàn bộ Tử vi (12 chương). Công tắc thu Sao tắt → ghi "đang miễn phí". */
-function NutSao({ tu, thu, gia }: { tu: MangTrang; thu: boolean; gia: number }) {
+function NutSao({ tu, thu, gia, giaGoc, giamPt }: { tu: MangTrang; thu: boolean; gia: number; giaGoc?: number; giamPt?: number }) {
+  // UD-2: đang có đợt ưu đãi → nói rõ giá thường (thật) đã giảm.
+  const ud = giaGoc && giamPt ? ` (ưu đãi −${giamPt}%, giá thường ${giaGoc} Sao)` : "";
   const cua = useCuaLuanGiai();
   const c = LUAN_GIAI_CUA_TRANG[tu] ? cua : null;
   const coLuanGiai = c !== null;
@@ -83,8 +85,8 @@ function NutSao({ tu, thu, gia }: { tu: MangTrang; thu: boolean; gia: number }) 
     ? khoa > 0 ? `Mở ${khoa} chương còn lại` : thu ? "Đọc thử chương đầu · luận giải toàn bộ" : "Đọc luận giải toàn bộ"
     : "Luận giải toàn bộ Tử vi · 12 chương";
   const phu = coLuanGiai
-    ? khoa > 0 ? `${gia} Sao mở trọn · xem lại cả ngày không mất thêm` : thu ? `trọn bộ ${gia} Sao, chương đầu miễn phí` : "đang miễn phí giai đoạn ra mắt"
-    : thu ? `chương đầu miễn phí · trọn bộ ${gia} Sao` : "đang miễn phí giai đoạn ra mắt";
+    ? khoa > 0 ? `${gia} Sao mở trọn${ud} · xem lại cả ngày không mất thêm` : thu ? `trọn bộ ${gia} Sao${ud}, chương đầu miễn phí` : "đang miễn phí giai đoạn ra mắt"
+    : thu ? `chương đầu miễn phí · trọn bộ ${gia} Sao${ud}` : "đang miễn phí giai đoạn ra mắt";
   const bam = () => {
     ghi("sao_cta_clicked", { tu, so_chuong: khoa });
     if (!c) return;
@@ -165,7 +167,7 @@ export function CuoiPhanXem({ mang }: { mang: MangTrang }) {
       </ul>
 
       <div className={cn("grid gap-4", hs ? "md:grid-cols-2" : "")}>
-        <NutSao tu={mang} thu={Boolean(d.thu_sao)} gia={d.gia_sao ?? 10} />
+        <NutSao tu={mang} thu={Boolean(d.thu_sao)} gia={d.gia_sao ?? 10} giaGoc={d.gia_sao_goc} giamPt={d.uu_dai_pt} />
         {hs && (
           <div className="flex flex-col items-start gap-3 rounded-2xl border border-line/70 p-4" data-testid="cta-chia-se">
             <p className="text-sm text-fg-muted">

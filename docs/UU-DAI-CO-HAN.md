@@ -37,6 +37,10 @@ hiện dòng suất.
   Có ưu đãi: hàng trên là tên đợt + đồng hồ ngày / giờ / phút / giây + thanh "Còn 39/100 suất"; hàng dưới "Đọc tiếp N
   chương còn lại · **69 Sao** ~~99 Sao~~ −30 %" + "Tiết kiệm 30 Sao (giảm 30%)"; nút "Mở toàn bộ · 69 Sao".
 - **Khung mời đọc** (trước khi bấm đọc chương đầu): giá ưu đãi, giá thường gạch, đồng hồ.
+- **UD-2 (18/11/2026) — ưu đãi hiện ngay chỗ mở khoá** (chủ dự án: "không nên chỉ hiện ở dưới"): thẻ "Ưu đãi" có nút
+  "Mở toàn bộ · 69 Sao" thay link "Xem các chương còn lại" ở cuối chương miễn phí, và đứng đầu khung "Cần lưu ý ở từng
+  mảng hay hỏi"; hộp đăng nhập / nạp Sao có dải ưu đãi (tên đợt, đồng hồ, giá gạch, suất); `/nap-sao` có dải ưu đãi;
+  nút Sao cuối trang công cụ và thẻ "Đọc trọn…" ghi "(ưu đãi −30%, giá thường 99 Sao)".
 - **`/goi-xem`**: dải ưu đãi viền sáng chạy ở đầu trang; thẻ từng gói hiện giá ưu đãi + giá thường gạch.
 - Hộp đăng nhập / nạp nhanh tự dùng giá ưu đãi (gói gợi ý vừa đủ phần thiếu theo giá mới).
 - Đồng hồ về 0 → giao diện tự tải lại giá thường. Ưu đãi hết giữa lúc người dùng bấm mở → máy chủ **không trừ** theo giá

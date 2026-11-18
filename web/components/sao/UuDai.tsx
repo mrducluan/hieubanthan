@@ -3,7 +3,7 @@
 // giá gạch là giá thường thật, đồng hồ đếm tới hạn chót thật, số suất đếm từ sổ Sao. Hết giờ → tự ẩn và gọi `khiHet`
 // để nơi dùng tải lại giá. Chuyển động tắt khi người dùng chọn giảm chuyển động.
 import { useEffect, useState } from "react";
-import { Flame, Timer } from "lucide-react";
+import { Flame, LockKeyhole, Sparkles, Timer } from "lucide-react";
 import { conLai, loiHan, loiTietKiem, type UuDai } from "@/lib/uu-dai";
 
 const hai = (n: number) => String(n).padStart(2, "0");
@@ -85,6 +85,53 @@ export function DaiUuDai({ u, className = "" }: { u: UuDai; className?: string }
         </div>
         <DemNguoc hetLuc={u.het_luc} khiHet={() => setHet(true)} />
       </div>
+    </div>
+  );
+}
+
+/** UD-2 — thẻ "mở khoá" có ưu đãi, đặt NGAY chỗ người đọc gặp chương khoá (cuối chương miễn phí, đầu khung "Cần lưu ý ở
+ *  từng mảng"): tên đợt + đồng hồ + giá gạch + nút mở thẳng (cùng hàm "Mở toàn bộ" của báo cáo — không luồng thứ hai). */
+export function UuDaiMoKhoa({ u, khoa, dang = false, moKhoa, nguon }: {
+  u: UuDai; khoa: number; dang?: boolean; moKhoa: () => void; /** chỗ đặt — chỉ để đo */ nguon: string;
+}) {
+  const [het, setHet] = useState(false);
+  if (het) return null;
+  return (
+    <div className="vien-chay ud-hien mt-5 rounded-2xl p-[1.5px] print:hidden" data-testid="ud-mo-khoa" data-nguon={nguon}>
+      <div className="hop-sao rounded-[calc(1rem-1.5px)] bg-surface/95 p-4">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+          <span className="text-xs font-semibold uppercase tracking-wider text-cinnabar">{u.ten}</span>
+          <DemNguoc hetLuc={u.het_luc} khiHet={() => setHet(true)} />
+        </div>
+        <p className="mt-3 flex flex-wrap items-baseline gap-x-2 text-fg">
+          <LockKeyhole className="size-4 shrink-0 self-center text-gold" aria-hidden />
+          <span className="font-medium">{khoa > 0 ? `Mở ${khoa} chương còn lại` : "Mở toàn bộ báo cáo"}</span>
+          <GiaUuDai u={u} />
+        </p>
+        <p className="mt-1 text-xs text-gold/90">{loiTietKiem(u)} · {loiHan(u.het_luc)}, sau đó về {u.gia_goc} Sao.</p>
+        <ConSuat u={u} className="mt-2 max-w-xs" />
+        <button type="button" onClick={moKhoa} disabled={dang} data-testid="ud-mo-khoa-nut"
+          className="nut-sang mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-gold px-4 text-sm font-semibold text-bg hover:opacity-90 disabled:opacity-60 sm:w-auto">
+          <Sparkles className="size-4" aria-hidden /> {dang ? "Đang mở…" : `Mở toàn bộ · ${u.gia} Sao`}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/** Dải ưu đãi gọn trong hộp đăng nhập / nạp Sao: người đọc thấy ngay giá đang giảm khi quyết định nạp. */
+export function DaiUuDaiHop({ u }: { u: UuDai }) {
+  const [het, setHet] = useState(false);
+  if (het) return null;
+  return (
+    <div className="ud-hien mb-4 rounded-xl border border-cinnabar/40 bg-cinnabar/[0.06] p-3" data-testid="ud-hop-thoai">
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        <span className="text-xs font-semibold uppercase tracking-wider text-cinnabar">{u.ten}</span>
+        <DemNguoc hetLuc={u.het_luc} khiHet={() => setHet(true)} />
+      </div>
+      <p className="mt-2 text-sm text-fg">Báo cáo này đang <GiaUuDai u={u} /></p>
+      <p className="mt-0.5 text-xs text-gold/90">{loiTietKiem(u)} · {loiHan(u.het_luc)}, sau đó về {u.gia_goc} Sao.</p>
+      <ConSuat u={u} className="mt-2" />
     </div>
   );
 }

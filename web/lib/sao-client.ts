@@ -3,6 +3,7 @@
 // (components/sao/HopThoaiSao, gắn ở layout) hỏi người dùng: đăng nhập / đồng ý trừ Sao / nạp nhanh.
 // Đồng ý trừ Sao → gửi lại đúng yêu cầu kèm header x-dong-y-sao: 1 (máy chủ trừ SAU khi trả lời được).
 import { maNgonNguTrang } from "@/lib/ngon-ngu";
+import type { UuDai } from "@/lib/uu-dai";
 
 export type CanSao = "dang_nhap" | "xac_nhan_sao" | "nap";
 export type YeuCauSao = {
@@ -13,6 +14,8 @@ export type YeuCauSao = {
   chao_mung?: number | null;
   /** "hoi" = hỏi đáp vượt lượt · "luan_giai" = mở khoá báo cáo · "nhiem_vu" = khách bấm nhận Sao nhiệm vụ (SAO-3) */
   nguon: "hoi" | "luan_giai" | "nhiem_vu"; mo_dun?: string;
+  /** UD-2: đợt ưu đãi có hạn đang áp cho báo cáo này (gia = giá ưu đãi). */
+  uu_dai?: UuDai;
 };
 
 type Nghe = (y: YeuCauSao) => Promise<boolean>;
