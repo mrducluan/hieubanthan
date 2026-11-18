@@ -75,12 +75,18 @@ test("xem trước: chương đầu đọc được, chương sau khoá kèm đi
   await expect(khoa).toContainText("Bạn thật sự tìm gì ở người bạn đời?");
   await expect(khoa).toContainText("Đọc tiếp 2 chương còn lại");
   await expect(page.getByTestId("lg-goi-y")).toHaveText("Đăng nhập nhận 10 Sao — đủ mở ngay báo cáo này.");
+  // Bấm "Mở toàn bộ" khi chưa đăng nhập → đi THẲNG tới trang đăng nhập (không qua hộp thoại), kèm quà chào mừng.
   await page.getByTestId("lg-mo-khoa").click();
-  const hop = page.getByTestId("hop-thoai-sao");
-  await expect(hop).toHaveAttribute("data-can", "dang_nhap");
-  await expect(hop.getByTestId("sao-dang-nhap")).toHaveAttribute("href", "/dang-nhap?tiep=%2Ftu-vi");
+  await expect(page).toHaveURL(/\/dang-nhap\?tiep=%2Ftu-vi&tu=bao_cao&qua=10$/);
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
   // Báo cáo chờ mở lưu ở localStorage (sống qua tab mới), gắn route + lá số, có hạn.
   expect(JSON.parse((await page.evaluate(() => localStorage.getItem("lg:cho-mo")))!)).toMatchObject({ d: "/api/tuvi/luan-giai" });
+  // Bỏ dở đăng nhập, quay lại → lượt tự mở hiện HỘP (không chuyển trang lần nữa — không vòng lặp).
+  await page.goBack();
+  const hop = page.getByTestId("hop-thoai-sao");
+  await expect(hop).toHaveAttribute("data-can", "dang_nhap");
+  await expect(page).toHaveURL(/\/tu-vi$/);
+  await expect(hop.getByTestId("sao-dang-nhap")).toHaveAttribute("href", "/dang-nhap?tiep=%2Ftu-vi");
   // Bấm đóng ("để sau") → bỏ chờ, không tự bật lại khi quay về.
   await page.keyboard.press("Escape");
   expect(await page.evaluate(() => localStorage.getItem("lg:cho-mo"))).toBeNull();

@@ -33,6 +33,8 @@ export function hoiSao(y: YeuCauSao): Promise<boolean> {
 
 export const TU_DONG_Y = "sao:tu-dong-y";   // "không hỏi lại trong phiên này" (sessionStorage)
 export const QUAY_VE = "sao:quay-ve";       // trang cần quay lại sau khi nạp / đăng nhập (sessionStorage)
+/** Header đánh dấu lượt mở khoá do người dùng BẤM (không phải lượt tự mở lại) — máy chủ bỏ qua. */
+export const MO_BAM = "x-mo-bam";
 
 /** Báo cáo đang chờ mở (người dùng bấm "Mở toàn bộ" rồi đi đăng nhập / nạp): localStorage để sống qua tab mới
  *  (link trong thư) — gắn đúng route + người (dữ liệu sinh), hết hạn sau 30 phút. Người dùng bấm "Để sau" thì xoá. */
@@ -72,6 +74,18 @@ export async function fetchSao(url: string, init: RequestInit, nguon: YeuCauSao[
   if (r.status !== 402) return r;
   const d = (await r.clone().json().catch(() => null)) as Omit<YeuCauSao, "nguon"> | null;
   if (!d?.can) return r;
+  // Mở khoá báo cáo khi chưa đăng nhập: không hiện hộp thoại trung gian — đi thẳng tới trang đăng nhập (bớt một lần
+  // bấm). Báo cáo đã được ghi "chờ mở" (ghiChoMo) nên đăng nhập xong quay về tự mở đúng báo cáo này. Lời hứa không
+  // trả về để nút giữ trạng thái "Đang mở…" trong lúc chuyển trang (không loé lời báo lỗi).
+  // Chỉ khi người dùng BẤM (header MO_BAM) — lượt tự mở lại sau khi quay về vẫn hiện hộp (có "Để sau"), tránh vòng lặp
+  // chuyển trang khi người dùng bỏ dở việc đăng nhập.
+  if (d.can === "dang_nhap" && nguon === "luan_giai" && new Headers(init.headers).has(MO_BAM) && typeof window !== "undefined") {
+    const tiep = `${window.location.pathname}${window.location.search}`;
+    try { sessionStorage.setItem(QUAY_VE, tiep); } catch { /* chế độ riêng tư */ }
+    const qua = typeof d.thuong === "number" && d.thuong > 0 ? `&qua=${d.thuong}` : "";
+    window.location.assign(`/dang-nhap?tiep=${encodeURIComponent(tiep)}&tu=bao_cao${qua}`);
+    return new Promise<Response>(() => {});
+  }
   const dongY = d.can === "xac_nhan_sao" && doc(TU_DONG_Y) === "1" ? true : await hoiSao({ ...d, nguon });
   if (!dongY || d.can === "dang_nhap") return r;
   const h = new Headers(init.headers);

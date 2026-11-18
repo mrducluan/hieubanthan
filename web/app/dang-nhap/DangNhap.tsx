@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Lock, Mail, Phone } from "lucide-react";
@@ -56,6 +56,10 @@ export function DangNhap({ googleQuaSite = false }: { googleQuaSite?: boolean })
     return buoc ? `Đăng nhập Zalo chưa thành công, thử lại. (Mã: ${buoc})` : "Đăng nhập chưa thành công, thử lại.";
   });
 
+  // Đi từ cuối một trang dài (vd nút "Mở toàn bộ" dưới báo cáo) → trình duyệt giữ vị trí cuộn cũ, kẹp về đáy trang
+  // ngắn này nên người dùng thấy chân trang thay vì nút đăng nhập. Luôn mở ở đầu trang.
+  useEffect(() => { if (!window.location.hash) window.scrollTo(0, 0); }, []);
+
   if (!coTaiKhoan()) {
     return (
       <Card className="mx-auto max-w-md text-center">
@@ -71,6 +75,10 @@ export function DangNhap({ googleQuaSite = false }: { googleQuaSite?: boolean })
   // SEC-2: cấm cả khoảng trắng / tab / xuống dòng — trình duyệt bỏ tab nên "/\t/evil.com" thành "//evil.com".
   const tiepXin = params.get("tiep");
   const tiep = tiepXin && /^\/(?![/\\])[^\s\\]*$/.test(tiepXin) ? tiepXin : "/tai-khoan";
+  // Đi thẳng từ nút "Mở toàn bộ" của báo cáo (lib/sao-client): nói rõ đăng nhập xong quay về đâu + quà chào mừng.
+  const tuBaoCao = params.get("tu") === "bao_cao";
+  const quaXin = Number(params.get("qua"));
+  const qua = Number.isInteger(quaXin) && quaXin > 0 && quaXin <= 500 ? quaXin : 0;
   const veLai = () => `${window.location.origin}/auth/callback?tiep=${encodeURIComponent(tiep)}`;
 
   async function gui(e: React.FormEvent) {
@@ -110,8 +118,16 @@ export function DangNhap({ googleQuaSite = false }: { googleQuaSite?: boolean })
   return (
     <div className="mx-auto max-w-md">
       <p className="eyebrow">Tài khoản</p>
-      <h1 className="mt-2 text-4xl">Lưu hồ sơ vĩnh viễn</h1>
-      <p className="mt-3 text-fg-muted">Đăng nhập để dùng hồ sơ trên mọi thiết bị. Không cần mật khẩu.</p>
+      {tuBaoCao ? (<>
+        <h1 className="mt-2 text-3xl">Đăng nhập để đọc tiếp</h1>
+        <p className="mt-3 text-fg-muted" data-testid="dang-nhap-tu-bao-cao">
+          {qua > 0 ? <>Lưu hồ sơ vào tài khoản là nhận ngay <b className="text-gold">{qua} Sao</b>. </> : null}
+          Đăng nhập xong bạn quay lại đúng báo cáo đang đọc. Không cần mật khẩu.
+        </p>
+      </>) : (<>
+        <h1 className="mt-2 text-4xl">Lưu hồ sơ vĩnh viễn</h1>
+        <p className="mt-3 text-fg-muted">Đăng nhập để dùng hồ sơ trên mọi thiết bị. Không cần mật khẩu.</p>
+      </>)}
 
       <Card className="mt-6 space-y-5">
         {cach.oauth.map((p) => p === "zalo" || (p === "google" && googleQuaSite) ? (
