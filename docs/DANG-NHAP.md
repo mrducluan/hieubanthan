@@ -7,9 +7,9 @@ doanh thu cao. Khâu vòng tăng trưởng: **MỜI + NẠP** (tài khoản là 
 ## 1. Code đã làm
 
 - Một env công khai **`NEXT_PUBLIC_DANG_NHAP`** (dự án Vercel **web**) quyết định nút nào hiện:
-  `google,apple,facebook` — thêm `sdt` khi muốn mở lại số điện thoại. Chưa đặt = chỉ Google (+ email luôn có).
+  `google,apple,facebook` — thêm `sdt` khi muốn mở lại số điện thoại. Chưa đặt = Google + email (máy dev, CI). Đã đặt thì ô email chỉ hiện khi có `email` (DN-4, tắt 18/11/2026).
   Đọc ở `web/lib/dang-nhap.ts`, test `web/e2e/dang-nhap.spec.ts`.
-- Trang `/dang-nhap`: nút Google → Apple → Facebook, dưới là ô email nhận mã. Tab "Số điện thoại" chỉ hiện khi env có `sdt`
+- Trang `/dang-nhap`: nút Google → Zalo → Apple → Facebook; ô email nhận mã chỉ khi env có `email`. Tab "Số điện thoại" chỉ hiện khi env có `sdt`
   (mã gửi SMS vẫn giữ nguyên, không xoá).
 - Chính sách quyền riêng tư: thêm dòng nhà cung cấp đăng nhập (Google, Apple, Facebook), hiệu lực 17/11/2026.
 - Không đổi DB, không thêm thư viện: Supabase Auth đã có sẵn ba nhà cung cấp, cùng đường `/auth/callback` với Google.

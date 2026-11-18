@@ -2,12 +2,13 @@
 import { test, expect } from "@playwright/test";
 import { docCachDangNhap } from "../lib/dang-nhap";
 
-test("thuần: mặc định chỉ Google, không số điện thoại; thứ tự cố định; bỏ giá trị lạ", () => {
-  expect(docCachDangNhap(undefined)).toEqual({ oauth: ["google"], sdt: false });
-  expect(docCachDangNhap("facebook, Apple,google")).toEqual({ oauth: ["google", "apple", "facebook"], sdt: false });
-  expect(docCachDangNhap("google,sdt,twitter")).toEqual({ oauth: ["google"], sdt: true });
-  expect(docCachDangNhap("")).toEqual({ oauth: [], sdt: false });
-  expect(docCachDangNhap("facebook,zalo,google")).toEqual({ oauth: ["google", "zalo", "facebook"], sdt: false });
+test("thuần: chưa đặt env: Google + email; đã đặt: email chỉ khi ghi rõ; không số điện thoại; thứ tự cố định; bỏ giá trị lạ", () => {
+  expect(docCachDangNhap(undefined)).toEqual({ oauth: ["google"], sdt: false, email: true });
+  expect(docCachDangNhap("facebook, Apple,google")).toEqual({ oauth: ["google", "apple", "facebook"], sdt: false, email: false });
+  expect(docCachDangNhap("google,sdt,twitter")).toEqual({ oauth: ["google"], sdt: true, email: false });
+  expect(docCachDangNhap("")).toEqual({ oauth: [], sdt: false, email: false });
+  expect(docCachDangNhap("facebook,zalo,google")).toEqual({ oauth: ["google", "zalo", "facebook"], sdt: false, email: false });
+  expect(docCachDangNhap("google,EMAIL")).toEqual({ oauth: ["google"], sdt: false, email: true });
 });
 
 import { emailZalo, laEmailZalo, thachThuc, tiepAnToan, urlXinQuyen, cauHinhZalo } from "../lib/zalo";
