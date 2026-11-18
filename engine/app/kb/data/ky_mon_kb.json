@@ -824,7 +824,11 @@
     "sinh",
     "huu"
    ],
-   "dong_tu": "hẹn gặp"
+   "dong_tu": "hẹn gặp",
+   "khai_niem": [
+    "kien_quy"
+   ],
+   "linh_vuc": "kinh_doanh"
   },
   "ky_ket": {
    "ten": "Buôn bán, ký kết, mở hàng",
@@ -834,7 +838,11 @@
     "khai"
    ],
    "dong_tu": "bàn việc tiền bạc",
-   "ranh_gioi": "Đây không phải lời khuyên đầu tư hay pháp lý; hợp đồng lớn nên có luật sư đọc."
+   "ranh_gioi": "Đây không phải lời khuyên đầu tư hay pháp lý; hợp đồng lớn nên có luật sư đọc.",
+   "khai_niem": [
+    "kien_quy"
+   ],
+   "linh_vuc": "kinh_doanh"
   },
   "di_xa": {
    "ten": "Đi xa, xuất phát",
@@ -845,7 +853,11 @@
     "sinh"
    ],
    "dong_tu": "xuất phát",
-   "ranh_gioi": "Hướng tốt không thay cho việc lái xe cẩn thận và xem thời tiết."
+   "ranh_gioi": "Hướng tốt không thay cho việc lái xe cẩn thận và xem thời tiết.",
+   "khai_niem": [
+    "chinh_thao"
+   ],
+   "linh_vuc": "ke_hoach"
   },
   "giay_to": {
    "ten": "Giấy tờ, thi cử, trình bày",
@@ -854,7 +866,11 @@
     "canh",
     "khai"
    ],
-   "dong_tu": "nộp hồ sơ hoặc trình bày"
+   "dong_tu": "nộp hồ sơ hoặc trình bày",
+   "khai_niem": [
+    "thuong_thu"
+   ],
+   "linh_vuc": "hoc_hanh"
   },
   "hoa_giai": {
    "ten": "Họp mặt, hoà giải, nghỉ ngơi",
@@ -863,7 +879,11 @@
     "huu",
     "sinh"
    ],
-   "dong_tu": "hẹn nhau"
+   "dong_tu": "hẹn nhau",
+   "khai_niem": [
+    "tri_binh"
+   ],
+   "linh_vuc": "gia_dinh"
   },
   "thu_no": {
    "ten": "Thu hồi, đòi lại",
@@ -873,7 +893,11 @@
     "khai"
    ],
    "dong_tu": "nhắc khoản cần thu",
-   "ranh_gioi": "Khoản lớn hoặc có tranh chấp thì hỏi luật sư."
+   "ranh_gioi": "Khoản lớn hoặc có tranh chấp thì hỏi luật sư.",
+   "khai_niem": [
+    "ngu_liep"
+   ],
+   "linh_vuc": "tien_bac"
   },
   "tinh_tam": {
    "ten": "Làm việc sâu, giữ kín",
@@ -882,7 +906,70 @@
     "do",
     "huu"
    ],
-   "dong_tu": "ngồi làm việc"
+   "dong_tu": "ngồi làm việc",
+   "khai_niem": [
+    "an_phuc"
+   ],
+   "linh_vuc": "ca_nhan"
+  },
+  "mo_thi_truong": {
+   "ten": "Mở thị trường, tìm khách mới",
+   "mo_ta": "Chào hàng nơi mới, mở chi nhánh, nộp hồ sơ dự thầu.",
+   "cua": [
+    "khai",
+    "sinh"
+   ],
+   "dong_tu": "chào hàng nơi mới",
+   "khai_niem": [
+    "chinh_thao",
+    "kien_quy"
+   ],
+   "linh_vuc": "kinh_doanh",
+   "ranh_gioi": "Mở rộng cần có vốn và người đủ sức; đây không phải lời khuyên đầu tư."
+  },
+  "ra_mat": {
+   "ten": "Ra mắt, quảng bá, trình đề xuất",
+   "mo_ta": "Ra mắt sản phẩm, đăng quảng cáo, gửi đề xuất cho khách lớn.",
+   "cua": [
+    "canh",
+    "khai"
+   ],
+   "dong_tu": "ra mắt, giới thiệu sản phẩm",
+   "khai_niem": [
+    "thuong_thu"
+   ],
+   "linh_vuc": "kinh_doanh",
+   "ranh_gioi": "Quảng cáo phải nói đúng điều sản phẩm làm được."
+  },
+  "canh_tranh": {
+   "ten": "Cạnh tranh, giành khách",
+   "mo_ta": "Đưa ra chào giá, so sánh với đối thủ, giành lại khách đã mất.",
+   "cua": [
+    "khai",
+    "sinh"
+   ],
+   "dong_tu": "đưa chào giá, giành khách",
+   "khai_niem": [
+    "chinh_thao",
+    "gianh_lai"
+   ],
+   "linh_vuc": "kinh_doanh",
+   "ranh_gioi": "Cạnh tranh bằng sản phẩm, giá trị và dịch vụ; không phải lời khuyên pháp lý. Có tranh chấp thì hỏi luật sư.",
+   "nguyen_tac": true
+  },
+  "chinh_doi_ngu": {
+   "ten": "Chỉnh đốn đội ngũ, đào tạo",
+   "mo_ta": "Họp toàn đội, đào tạo, viết lại quy trình, chia lại việc.",
+   "cua": [
+    "huu",
+    "sinh"
+   ],
+   "dong_tu": "họp đội, sắp xếp lại việc",
+   "khai_niem": [
+    "tri_binh",
+    "thu_thanh"
+   ],
+   "linh_vuc": "kinh_doanh"
   }
  },
  "mau": {

@@ -24,7 +24,8 @@ router = APIRouter(prefix="/v1/ky-mon", tags=["ky-mon"])
 Phep = Literal["sach_bo", "tri_nhuan"]
 GioTy = Literal["da_ty", "sang_ngay"]
 Huong = Literal["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"]
-Viec = Literal["gap_go", "ky_ket", "di_xa", "giay_to", "hoa_giai", "thu_no", "tinh_tam"]
+Viec = Literal["gap_go", "ky_ket", "di_xa", "giay_to", "hoa_giai", "thu_no", "tinh_tam",
+               "mo_thi_truong", "ra_mat", "canh_tranh", "chinh_doi_ngu"]
 
 
 class _Chung(BaseModel):

@@ -158,3 +158,32 @@ test.describe("Kỳ Môn nối vào các trang", () => {
     await expect(page.getByTestId("ky-mon-huong-hop")).toHaveCount(0);
   });
 });
+
+// Kho chuyển nghĩa (2026-11-18): lời sách xưa (ra quân, giữ thành…) đọc cho đời sống ngày nay.
+test.describe("Kỳ Môn — sách xưa đọc cho ngày nay", () => {
+  test("HTML máy chủ có mục 'ra quân — ngày nay dùng vào việc gì' kèm câu sách và lĩnh vực", async ({ request }) => {
+    const html = await (await request.get("/ky-mon")).text();
+    expect(html).toContain('data-testid="km-ngay-nay"');
+    expect(html).toContain("開門宜遠行征討所向通達");
+    expect(html).toContain("Mở thị trường mới");
+    expect(html).toContain("Kinh doanh");
+    expect(html).toContain("dùng cho kinh doanh được không");
+    expect(html).not.toMatch(/đánh bại|tiêu diệt|hạ gục|chắc chắn thắng/i);
+  });
+
+  test("chọn việc 'Mở thị trường' → hướng hợp + 'Sách xưa nói gì về việc này' có lời ngày nay", async ({ page }) => {
+    await page.goto("/ky-mon");
+    const ban = page.getByTestId("ban-ky-mon");
+    await ban.getByRole("button", { name: "Mở thị trường, tìm khách mới" }).click();
+    const viec = page.getByTestId("km-viec");
+    await expect(viec).toContainText("Mở thị trường, tìm khách mới");
+    const cn = viec.getByTestId("km-chuyen-nghia");
+    await cn.locator("summary").click();
+    await expect(cn).toContainText("Chinh thảo");
+    await expect(cn).toContainText("Ngày nay (kinh doanh)");
+    await ban.getByRole("button", { name: "Cạnh tranh, giành khách" }).click();
+    await expect(viec).toContainText("Cạnh tranh, giành khách");
+    await viec.getByTestId("km-chuyen-nghia").locator("summary").click();
+    await expect(viec.getByTestId("km-chuyen-nghia")).toContainText("Tòng sinh kích tử");
+  });
+});

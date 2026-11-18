@@ -165,7 +165,7 @@ def test_route_ngay_va_danh_muc():
     j = client.post("/v1/ky-mon/ngay", json={"ngay": "2026-11-18", "viec": "di_xa"}).json()
     assert len(j["gio"]) == 13 and j["viec"]["ma"] == "di_xa" and j["viec"]["ranh_gioi"]
     d = client.get("/v1/ky-mon/danh-muc").json()
-    assert (len(d["cua"]), len(d["sao"]), len(d["than"]), len(d["cach"]), len(d["viec"])) == (8, 9, 8, 21, 7)
+    assert (len(d["cua"]), len(d["sao"]), len(d["than"]), len(d["cach"]), len(d["viec"])) == (8, 9, 8, 21, 11)   # + 4 việc kinh doanh (chuyển nghĩa 2026-11-18)
     assert all(x["sach"] for x in d["cua"]) and all(x["sach"] for x in d["cach"])
 
 

@@ -24,7 +24,7 @@
 | Kỳ Môn |  |  |  | 1 |  |
 | Thần số |  |  | 11 | 12 |  |
 | Lịch · tuổi · tập quán |  | 1 | 5 |  |  |
-| Liên mảng · kỹ thuật |  | 1 |  | 11 | 7 |
+| Liên mảng · kỹ thuật |  | 1 |  | 12 | 7 |
 
 ## Phần đã có nguyên văn đối chiếu (test khoá)
 
@@ -38,6 +38,7 @@
 | `battu_sach_ghi.json` | (cả tệp) | `tam_menh_thong_hoi.json` | `test_moi_muc_qua_bo_kiem` | SX-C: câu Tam Mệnh Thông Hội + Uyên Hải Tử Bình (thần sát, thập thần, lục thân, tính nết, thân thể) khớp kho nguồn |
 | `chi_tay_kb.json` | (cả tệp) | `than_tuong_toan_bien.json` | `test_moi_cau_la_nguyen_van` | Chỉ tay: 67 bài thơ vân tay quyển 10 + câu đồ hình tám cung («根基所屬», Luận thủ) khớp kho nguồn; CT-2: câu theo số đo bàn tay (`sach_do_tay`: «論手», «相指掌») + vai và lựa chọn từng cung (`cung_tay`: «根基所屬») qua bộ kiểm SX-C (tests/test_chi_tay_do.py); ngưỡng đo `do_tay` là giả định nhân trắc, can_doi_chieu; lời Việt nói giảm theo SX-C; 5 hình sách đoán về người vợ không đưa vào |
 | `chi_tay_tay_kb.json` | (cả tệp) | `chi_tay_cheiro_language_of_the_hand.json` | `test_moi_cau_trich_la_chuoi_con_kho_nguon` | TK-2 chỉ tay phương Tây: câu trích tiếng Anh Cheiro 1894 + Benham 1900 (kho nguồn lớp chữ nhận dạng, can_doi_chieu) khớp từng câu; lời Việt ban biên tập; ngưỡng số đo `do_tay` giả định, can_doi_chieu; không nhóm C |
+| `chuyen_nghia_kb.json` | khai_niem | `ky_mon_co_kim_do_thu.json` | `test_moi_muc_qua_bo_kiem` | mỗi khái niệm một câu sách khớp kho nguồn; nghĩa đời nay là biên tập |
 | `kinhdich_dich_lam.json` | (cả tệp) | `tieu_thi_dich_lam.json` | `test_kb_la_ban_cat_cua_kho_nguon_va_du_4096_bai` | TK-2: 4.096 bài từ Tiêu Thị Dịch Lâm (quẻ bản → quẻ biến), nguyên văn chưa dịch; bài có chữ nặng không hiện |
 | `kinhdich_hao.json` | (cả tệp) | `chu_dich_truyen_nghia.json` | `test_loi_que_loi_hao_trong_kb_khop_ban_tu_kho` | kinh văn khớp nguyên văn; phần dịch và «Hiểu đơn giản» là nháp |
 | `kinhdich_kb.json` | bat_quai | `chu_dich_truyen_nghia.json` | `test_loai_tuong_tam_quai_trich_dung_thuyet_quai` | loại tượng khớp Thuyết Quái |
@@ -174,6 +175,8 @@
 | Lịch · tuổi · tập quán | `tuoi_dan_gian_kb.json` |  | Tập quán / sách hiện đại tóm ý |  |
 | Liên mảng · kỹ thuật | `chan_dung_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `chu_y_kb.json` |  | Ban biên tập soạn |  |
+| Liên mảng · kỹ thuật | `chuyen_nghia_kb.json` |  | Ban biên tập soạn | nghĩa đời nay do ban biên tập viết |
+| Liên mảng · kỹ thuật | `chuyen_nghia_kb.json` | khai_niem | Có nguyên văn đối chiếu | mỗi khái niệm một câu sách khớp kho nguồn; nghĩa đời nay là biên tập |
 | Liên mảng · kỹ thuật | `dong_thuan_thong_ke.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `giao_thoa_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `goc_nhin.json` |  | Tệp kỹ thuật |  |

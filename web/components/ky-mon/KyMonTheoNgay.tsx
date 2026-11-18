@@ -12,6 +12,7 @@ import { conToi, type NgayKM, type ViecKM } from "@/lib/ky-mon";
 const VIEC: { ma: ViecKM; ten: string }[] = [
   { ma: "gap_go", ten: "Gặp gỡ" }, { ma: "ky_ket", ten: "Ký kết, mở hàng" }, { ma: "di_xa", ten: "Đi xa" },
   { ma: "giay_to", ten: "Giấy tờ, thi cử" }, { ma: "hoa_giai", ten: "Họp mặt, hoà giải" },
+  { ma: "mo_thi_truong", ten: "Mở thị trường" }, { ma: "ra_mat", ten: "Ra mắt, quảng bá" },
 ];
 const utcMay = () => Math.round((-new Date().getTimezoneOffset() / 60) * 4) / 4;
 

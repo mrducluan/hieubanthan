@@ -158,4 +158,41 @@ Ba điều đã chốt theo đề xuất: sách bổ mặc định; giờ 23:00�
 | Menu Huyền học | Mục "Kỳ Môn Độn Giáp" | Mục thứ 12 — menu đã đủ trần |
 | Thời gian tới | **Không ghép** | Bàn theo giờ không có phép theo tháng trong nguồn đã nạp; nguyệt gia Kỳ Môn cần sách đối chiếu trước |
 
-Còn lại: hub Huyền học, chân trang, bản tiếng Anh, và KM-4 (hỏi việc theo Kỳ Môn, cổng Sao).
+Đợt 2 (cùng ngày): hub Huyền học có thẻ mảng thứ tám Kỳ Môn; chân trang thêm Nhân tướng, Tarot, Kỳ Môn, 78 lá Tarot (ba công
+cụ tra cứu dời sang cột Kiến thức vì mỗi cột tối đa 15 link; migration dữ liệu CMS `km_3_chan_trang`); sửa lỗi khung giờ Tý cuối
+ngày bị lọc mất lúc 23:xx; e2e khối Kỳ Môn ở la bàn Phong thuỷ (chỉ gửi tên hướng).
+
+Còn lại: bản tiếng Anh (làm sau cùng), KM-4 (hỏi việc theo Kỳ Môn, cổng Sao).
+
+## 10. Sách xưa đọc cho ngày nay — kho chuyển nghĩa (2026-11-18)
+
+Chủ dự án dặn: lời sách nói chuyện ra quân, đánh giặc phải được đọc theo nghĩa tương đồng ngày nay (kinh doanh, đời sống cá
+nhân, gia đình, tiền bạc, công danh, sức khoẻ, con cái, nghề nghiệp, học hành, kế hoạch). Chủ dự án chọn: **một kho dùng chung
+mọi mảng + hỏi đáp tra kho**, thứ tự Kỳ Môn → Kinh Dịch → Bát tự → Tử vi.
+
+- **Kho** `engine/app/kb/data/chuyen_nghia_kb.json` + `app/kb/chuyen_nghia.py`: 10 khái niệm cổ, mỗi khái niệm một câu sách
+  nguyên văn (qua bộ kiểm SX-C, khớp kho nguồn), nghĩa đời nay theo từng lĩnh vực, cụm từ người dùng hay gõ (để hỏi đáp nhận
+  diện — so khớp chuỗi tất định), ranh giới theo lĩnh vực. Nghĩa đời nay là biên tập (nháp, chờ chuyên gia duyệt).
+
+  | Sách xưa | Câu sách | Ngày nay (kinh doanh) |
+  |---|---|---|
+  | Chinh thảo — ra quân đi xa | 開門宜遠行征討所向通達 | Mở thị trường mới, chào khách mới, dự thầu |
+  | Trị binh tập nghiệp | 休門宜集萬事治兵習業 | Đào tạo đội ngũ, viết lại quy trình |
+  | Kiến quý nhân, doanh tạo | 生門宜見人營造求財獲寶 | Gặp nhà đầu tư, đối tác lớn; khởi công |
+  | Ngư liệp bổ thảo | 傷門宜漁獵捕討行逢盜賊 | Thu hồi công nợ, chạy doanh số ngắn ngày |
+  | Yêu già ẩn phục | 杜門宜邀遮隱伏誅伐凶逆 | Chuẩn bị kín, giữ bí mật, giữ thị phần |
+  | Thượng thư, đột trận phá vây | 景門宜上書遣使突陣破圍 | Ra mắt, quảng bá, gửi đề xuất, thoát bế tắc |
+  | Yểm bổ đấu tụng | 驚門宜掩捕鬥訟攻擊驚恐 | Cạnh tranh trực diện, tranh chấp (có luật sư) |
+  | Đồn binh tự cố | 天柱宜屯兵自固隱跡埋形 | Giữ khách cũ, giữ dòng tiền khi thị trường xấu |
+  | Xuất báo cừu | 天衝宜出報仇 | Lấy lại khách đã rời đi bằng làm tốt hơn |
+  | Hành hình, điếu tống | 死門宜行刑誅戮弔死送葬 | Dừng dự án lỗ, thanh lý, khép việc cho gọn |
+
+  Nguyên tắc «從生擊死» (đứng ở cửa Sinh mà tiến): cạnh tranh ở chỗ mình mạnh nhất.
+- **Kỳ Môn**: thêm bốn việc — Mở thị trường, Ra mắt / quảng bá, Cạnh tranh, Chỉnh đốn đội ngũ; mọi việc (cũ + mới) trỏ khái
+  niệm cổ và lĩnh vực; bài đọc việc trả `chuyen_nghia` (khối "Sách xưa nói gì về việc này?"). Việc Cạnh tranh chỉ chọn hướng
+  có cửa Khai / Sinh (không lấy cửa hung để "đánh nhau"). Trang `/ky-mon` có mục "Sách Kỳ Môn nói chuyện ra quân — ngày nay dùng
+  vào việc gì?" dựng ở máy chủ.
+- **Ranh giới**: cạnh tranh bằng sản phẩm, giá trị, dịch vụ; không bày cách hại người khác, không hứa thắng; không phải lời
+  khuyên đầu tư hay pháp lý (test chặn "đánh bại, tiêu diệt, chắc chắn thắng, trả thù…").
+- **Tiếp theo**: Kinh Dịch (Tăng San Bốc Dịch có nhiều chương chinh chiến; quẻ Sư, Đồng Nhân…), rồi Bát tự (Thất Sát, Dương
+  Nhận), Tử vi (Thất Sát, Phá Quân) — mỗi mảng thêm khái niệm của sách mình vào cùng kho; hỏi đáp tra kho theo cụm từ đời nay.

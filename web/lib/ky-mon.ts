@@ -4,8 +4,11 @@ const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
 export const DUONG_KY_MON = "/ky-mon";
+// Khoá đệm theo bản build: danh mục (giải nghĩa) đổi theo KB của bản deploy — không giữ bản cũ tới 6 giờ sau deploy.
+const BAN_DEPLOY = (process.env.VERCEL_GIT_COMMIT_SHA ?? "").slice(0, 12);
 export type MucKM = "thuan" | "binh" | "cham";
-export const VIEC_KM = ["gap_go", "ky_ket", "di_xa", "giay_to", "hoa_giai", "thu_no", "tinh_tam"] as const;
+export const VIEC_KM = ["gap_go", "ky_ket", "di_xa", "giay_to", "hoa_giai", "thu_no", "tinh_tam",
+  "mo_thi_truong", "ra_mat", "canh_tranh", "chinh_doi_ngu"] as const;
 export type ViecKM = (typeof VIEC_KM)[number];
 export type PhepKM = "sach_bo" | "tri_nhuan";
 export type GioTyKM = "da_ty" | "sang_ngay";
@@ -18,7 +21,16 @@ export interface HuongKM {
   than: { ma: string; ten: string; tom: string; loi: string; sach: string | null };
   ky: string[]; cach: CachKM[]; hop_viec: string[]; tom: string; can_cu: string[];
 }
-export interface ViecDocKM { ma: string; ten: string; mo_ta: string; ranh_gioi?: string | null; co: boolean; phuong?: string; cung?: number; muc?: MucKM; loi: string }
+/** Kho chuyển nghĩa (dùng chung mọi mảng): khái niệm sách xưa → việc đời nay theo lĩnh vực. Engine trả; web chỉ hiển thị. */
+export interface ChuyenNghiaKM {
+  ma: string; ten_co: string; nghia: string; ranh_gioi: string; ung_dung: Record<string, string>;
+  sach: { han: string; am: string; y: string; nhom: string; ham_y?: string; viec?: string };
+  linh_vuc?: string; linh_vuc_ten?: string; hom_nay?: string | null;
+}
+export interface ViecDocKM {
+  ma: string; ten: string; mo_ta: string; ranh_gioi?: string | null; co: boolean; phuong?: string; cung?: number; muc?: MucKM; loi: string;
+  chuyen_nghia?: ChuyenNghiaKM[]; nguyen_tac?: { ten_co: string; nghia: string; sach: { han: string; am: string; y: string } };
+}
 export interface DocGioKM {
   gio: { chi: string; khung: string; can_chi: string; muc: MucKM; muc_nhan: string };
   tom_tat: string; luu_y_gio: string[]; cach_gio: CachKM[]; huong: HuongKM[]; huong_thuan: string[];
@@ -42,7 +54,8 @@ export interface NgayKM {
 export interface MucDanhMucKM { ma: string; ten: string; han?: string; hanh?: string; loai?: string; tom?: string; loi: string; nen?: string; tranh?: string; dieu_kien?: string; ten_khac?: string; sach: string | null }
 export interface DanhMucKM {
   cua: MucDanhMucKM[]; sao: MucDanhMucKM[]; than: MucDanhMucKM[]; cach: MucDanhMucKM[];
-  viec: { ma: ViecKM; ten: string; mo_ta: string }[]; sao_chung: string | null; cach_dung: string; ranh_gioi: string;
+  viec: { ma: ViecKM; ten: string; mo_ta: string; linh_vuc?: string }[]; sao_chung: string | null; cach_dung: string; ranh_gioi: string;
+  chuyen_nghia?: ChuyenNghiaKM[]; linh_vuc?: Record<string, string>;
   meta: { nguon: string };
 }
 
@@ -59,7 +72,7 @@ async function goi<T>(duong: string, than?: unknown, nho?: number): Promise<T> {
 
 /** Bàn của giờ đang đi (giờ Việt Nam) + 13 khung giờ hôm nay + danh mục giải nghĩa. */
 export function layKyMonHomNay(): Promise<[BanKM, NgayKM, DanhMucKM]> {
-  return Promise.all([goi<BanKM>("/v1/ky-mon/ban", {}), goi<NgayKM>("/v1/ky-mon/ngay", {}), goi<DanhMucKM>("/v1/ky-mon/danh-muc", undefined, 60 * 60 * 6)]);
+  return Promise.all([goi<BanKM>("/v1/ky-mon/ban", {}), goi<NgayKM>("/v1/ky-mon/ngay", {}), goi<DanhMucKM>(`/v1/ky-mon/danh-muc${BAN_DEPLOY ? `?b=${BAN_DEPLOY}` : ""}`, undefined, 60 * 60 * 6)]);
 }
 
 /** Vị trí của tám hướng trên lưới 3×3, Bắc ở trên (như bản đồ): số cung Lạc Thư theo từng ô, đọc trái → phải, trên → dưới. */

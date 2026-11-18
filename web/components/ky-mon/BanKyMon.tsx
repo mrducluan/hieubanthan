@@ -144,6 +144,27 @@ export function BanKyMon({ banDau, ngayDau, viec }: { banDau: BanKM; ngayDau: Ng
                 </>
               )}
               {ngay.viec?.loi && <p className="mt-3 text-sm text-fg-muted">{ngay.viec.loi}</p>}
+              {(d.viec.chuyen_nghia?.length ?? 0) > 0 && (
+                <details className="mt-3 rounded-xl border border-line/60 bg-bg/40 p-3 text-sm" data-testid="km-chuyen-nghia">
+                  <summary className="cursor-pointer text-fg">Sách xưa nói gì về việc này?</summary>
+                  <ul className="mt-2 space-y-3">
+                    {d.viec.chuyen_nghia!.map((c) => (
+                      <li key={c.ma}>
+                        <p className="text-fg">{c.ten_co}</p>
+                        <p className="mt-0.5 text-xs text-fg-faint"><span lang="zh-Hant" className="font-serif">{c.sach.han}</span> — {c.sach.y}</p>
+                        {c.hom_nay && <p className="mt-1">Ngày nay{c.linh_vuc_ten ? ` (${c.linh_vuc_ten.toLowerCase()})` : ""}: {c.hom_nay}</p>}
+                      </li>
+                    ))}
+                    {d.viec.nguyen_tac && (
+                      <li>
+                        <p className="text-fg">{d.viec.nguyen_tac.ten_co}</p>
+                        <p className="mt-0.5 text-xs text-fg-faint"><span lang="zh-Hant" className="font-serif">{d.viec.nguyen_tac.sach.han}</span> — {d.viec.nguyen_tac.sach.y}</p>
+                        <p className="mt-1">{d.viec.nguyen_tac.nghia}</p>
+                      </li>
+                    )}
+                  </ul>
+                </details>
+              )}
               {d.viec.ranh_gioi && <p className="mt-3 text-xs text-fg-faint">{d.viec.ranh_gioi}</p>}
             </div>
           )}

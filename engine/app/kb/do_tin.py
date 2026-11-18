@@ -50,6 +50,10 @@ SO: dict[str, dict] = {
         "sao": _nv("ky_mon_co_kim_do_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem", "mỗi sao một câu «釋九星所主»"),
         "cach": _nv("ky_mon_co_kim_do_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                     "điều kiện từng cách thử bằng ví dụ «假令» của sách (tests/test_ky_mon_cach.py); lời đời thường là tóm ý")}},
+    # ---- Liên mảng — kho chuyển nghĩa (2026-11-18): khái niệm cổ → nghĩa đời nay theo lĩnh vực
+    "chuyen_nghia_kb.json": {"mang": "chung", "muc": "bien_tap", "ghi_chu": "nghĩa đời nay do ban biên tập viết", "phan": {
+        "khai_niem": _nv("ky_mon_co_kim_do_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
+                         "mỗi khái niệm một câu sách khớp kho nguồn; nghĩa đời nay là biên tập")}},
     # ---- Tử vi
     "tuvi_sach_ghi.json": {"mang": "tuvi", **_nv("tu_vi_dau_so_toan_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                "SX-C: 434 câu Toàn Thư quyển 3 (sao × cung) khớp kho nguồn; lời Việt là tóm ý đã nói giảm (A / B / C)")},

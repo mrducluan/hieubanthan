@@ -24,6 +24,7 @@ const HOI_DAP = [
   { hoi: "Bàn này có riêng cho tôi không?", dap: "Không. Bàn Kỳ Môn theo giờ là của thời điểm: ai xem cùng giờ, cùng múi giờ đều ra một bàn. Vì vậy trang không hỏi tên hay ngày sinh. Muốn xem riêng theo ngày giờ sinh thì dùng lá số Tử vi hoặc Bát tự." },
   { hoi: "«Đi về hướng thuận» nghĩa là sao?", dap: "Hướng tính từ chỗ bạn đang đứng (nhà hoặc chỗ làm). Bạn có thể hẹn ở nơi nằm về phía ấy, xuất phát theo phía ấy, hoặc đơn giản là ngồi quay mặt về phía ấy khi làm việc." },
   { hoi: "Khác gì với xem ngày tốt?", dap: "Xem ngày tốt chọn NGÀY cho việc lớn. Kỳ Môn theo giờ đi tiếp một bước: trong ngày đã chọn, giờ nào và hướng nào hợp việc ấy. Hai cách dùng được cùng nhau." },
+  { hoi: "Sách Kỳ Môn nói chuyện ra quân, dùng cho kinh doanh được không?", dap: "Được, theo nghĩa tương đồng. Ra quân đi xa ngày nay là mở thị trường, chào khách mới; chỉnh đốn quân là đào tạo đội ngũ; dâng thư là trình đề xuất, ra mắt sản phẩm; giữ thành là giữ khách cũ và dòng tiền. Chọn việc ở la bàn để xem giờ và hướng hợp. Cạnh tranh bằng sản phẩm và giá trị; đây không phải lời khuyên đầu tư." },
   { hoi: "Vì sao có giờ ghi «nên giữ nhịp»?", dap: "Có những giờ cả bàn đứng yên hoặc lật ngược, hoặc giờ ngược với ngày. Sách dặn những giờ ấy dù có hướng tốt cũng chưa nên làm việc lớn; việc thường ngày thì vẫn làm bình thường." },
   { hoi: "Đây có phải là dự báo không?", dap: "Không. Đây là một cách sắp xếp giờ và hướng theo sách xưa, để bạn chọn lúc làm việc cho có chủ đích. Trang không nói việc sẽ thành hay hỏng; quyết định vẫn là của bạn." },
 ];
@@ -90,6 +91,29 @@ export default async function Page() {
         <p className="mt-2 text-sm text-fg-muted">Theo {dm.meta.nguon}. Câu chữ Hán là nguyên văn; lời tiếng Việt do ban biên tập viết lại cho đời sống ngày nay.</p>
         <ul className="mt-4 grid gap-3 md:grid-cols-2" data-testid="km-tam-cua-ds">{dm.cua.map((c) => <MucGiaiNghia key={c.ma} m={c} nhan={`Cửa ${c.ten}`} />)}</ul>
       </section>
+
+      {(dm.chuyen_nghia?.length ?? 0) > 0 && (
+        <section aria-labelledby="km-ngay-nay" className="mt-12" data-testid="km-ngay-nay">
+          <h2 id="km-ngay-nay" className="text-2xl">Sách Kỳ Môn nói chuyện ra quân — ngày nay dùng vào việc gì?</h2>
+          <p className="mt-2 text-sm text-fg-muted">Kỳ Môn xưa là phép chọn giờ, chọn hướng để hành quân. Mỗi việc trong sách có một việc tương đồng ngày nay: ra quân là mở thị trường, giữ thành là giữ khách và dòng tiền, dâng thư là trình đề xuất. Câu chữ Hán là nguyên văn; lời đời nay do ban biên tập viết.</p>
+          <ul className="mt-4 grid gap-3 md:grid-cols-2">
+            {dm.chuyen_nghia!.map((c) => (
+              <li key={c.ma} className="rounded-xl border border-line/70 p-3">
+                <h3 className="text-base text-fg">{c.ten_co}</h3>
+                <p className="mt-1 text-xs text-fg-faint"><span lang="zh-Hant" className="font-serif">{c.sach.han}</span> — {c.sach.y}</p>
+                <p className="mt-1.5 text-sm leading-relaxed">{c.nghia}</p>
+                <dl className="mt-2 space-y-1 text-sm">
+                  {Object.entries(c.ung_dung).map(([lv, viec]) => (
+                    <div key={lv}><dt className="inline text-fg-muted">{dm.linh_vuc?.[lv] ?? lv}: </dt><dd className="inline">{viec}</dd></div>
+                  ))}
+                </dl>
+                {c.sach.ham_y && <p className="mt-2 text-xs text-fg-faint">{c.sach.ham_y}</p>}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-xs text-fg-faint">Cạnh tranh bằng sản phẩm, giá trị và dịch vụ. Đây là cách người xưa chọn thời điểm, không phải lời khuyên đầu tư hay pháp lý; quyết định vẫn là của bạn.</p>
+        </section>
+      )}
 
       <section aria-labelledby="km-the" className="mt-12">
         <h2 id="km-the" className="text-2xl">Các thế bàn Kỳ Môn hay gặp</h2>

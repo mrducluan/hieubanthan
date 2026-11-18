@@ -17,6 +17,7 @@ import datetime as dt
 
 from app.calc import ky_mon as km
 from app.calc import ky_mon_cach as kc
+from app.kb import chuyen_nghia as cn
 from app.kb import ky_mon_kb as kb
 
 LUAT = "ky_mon_1"
@@ -139,11 +140,20 @@ def _chon_huong(doc: dict, viec: str) -> dict | None:
     return min(ung, key=lambda h: (_XEP[h["muc"]], not h["noi_bat"], uu_tien.index(h["cua"]["ma"])))
 
 
+def _chuyen_nghia(v: dict) -> dict:
+    """Lời sách xưa của việc đọc cho ngày nay (kho chuyển nghĩa dùng chung): khái niệm cổ → việc đời nay của lĩnh vực."""
+    lv = v.get("linh_vuc")
+    ra: dict = {"chuyen_nghia": [cn.doc(ma, lv) for ma in v.get("khai_niem") or []]}
+    if v.get("nguyen_tac"):
+        ra["nguyen_tac"] = cn.nguyen_tac()
+    return ra
+
+
 def _doc_viec(doc: dict, viec: str) -> dict:
     v = kb.phan("viec")[viec]
     h = _chon_huong(doc, viec)
     g = doc["gio"]
-    ra = {"ma": viec, "ten": v["ten"], "mo_ta": v["mo_ta"], "ranh_gioi": v.get("ranh_gioi")}
+    ra = {"ma": viec, "ten": v["ten"], "mo_ta": v["mo_ta"], "ranh_gioi": v.get("ranh_gioi"), **_chuyen_nghia(v)}
     if h is None:
         return {**ra, "co": False, "loi": kb.mau("viec_khong").format(gio=g["chi"], khung=g["khung"])}
     kem = kb.mau("kem_ky").format(ky=", ".join(h["ky"])) if h["ky"] and h["noi_bat"] else ""
@@ -212,6 +222,8 @@ def danh_muc() -> dict:
         "sao": _ra(kb.phan("sao"), ("ten", "han", "hanh", "tom", "loi")),
         "than": _ra(kb.phan("than"), ("ten", "han", "ten_khac", "tom", "loi")),
         "cach": [{**x, "loai": kc.CACH[x["ma"]]["loai"]} for x in _ra(kb.phan("cach"), ("ten", "han", "dieu_kien", "loi", "nen"))],
-        "viec": [{"ma": ma, "ten": v["ten"], "mo_ta": v["mo_ta"]} for ma, v in kb.phan("viec").items()],
+        "viec": [{"ma": ma, "ten": v["ten"], "mo_ta": v["mo_ta"], "linh_vuc": v.get("linh_vuc")} for ma, v in kb.phan("viec").items()],
+        # Lời sách xưa (ra quân, giữ thành, săn bắt, dâng thư…) đọc cho đời sống ngày nay — trang giải nghĩa dựng ở máy chủ.
+        "chuyen_nghia": [cn.doc(ma) for ma in cn.khai_niem()], "linh_vuc": cn.linh_vuc(),
         "sao_chung": kb.loi_sach(kb.phan("sao_chung")), "cach_dung": kb.mau("cach_dung"), "ranh_gioi": kb.mau("ranh_gioi"),
     }
