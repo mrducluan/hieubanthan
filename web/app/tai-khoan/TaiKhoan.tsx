@@ -19,6 +19,7 @@ import { dangXuat, hoSoTaiKhoan, luuVaoTaiKhoan, useNguoiDung, xoaHoSoTaiKhoan, 
 import { NUOC_NGOAI, gioHienThi, luuHoSo, useHoSo, xoaHoSo, type HoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
 import { baoNhanThuong, nhanThuongSauLuu } from "@/lib/nhan-thuong";
+import { laEmailZalo } from "@/lib/zalo-email";
 
 type HoSoTK = Awaited<ReturnType<typeof hoSoTaiKhoan>>;
 
@@ -108,13 +109,13 @@ export function TaiKhoan({ emailDuLieu = null, dichVu = { hoiVien: false, chuyen
         {coTaiKhoan() && user === null && (
           <Card className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <Cloud className="size-6 shrink-0 text-gold" aria-hidden />
-            <p className="flex-1 text-sm text-fg-muted">Đăng nhập bằng email, Google hoặc số điện thoại để giữ hồ sơ khi đổi máy.</p>
+            <p className="flex-1 text-sm text-fg-muted">Đăng nhập bằng email hoặc tài khoản Google để giữ hồ sơ khi đổi máy.</p>
             <Button asChild><Link href="/dang-nhap">Đăng nhập</Link></Button>
           </Card>
         )}
         {user && (
           <Card className="space-y-5">
-            <p className="text-sm text-fg-muted">Đang đăng nhập: <b className="text-fg">{user.email ?? user.phone}</b></p>
+            <p className="text-sm text-fg-muted">Đang đăng nhập: <b className="text-fg">{laEmailZalo(user.email) ? "tài khoản Zalo" : (user.email ?? user.phone)}</b></p>
             {tk === undefined ? <KhungTai dong={1} /> : (
               <>
                 {tk && hoSo && giongNhau(hoSo, tk) && (
