@@ -45,7 +45,7 @@ def test_nam_nay_chi_la_thoi_diem():
     tot = {h for h, d in pt.bang_huong("Khảm").items() if d in pt.CAT}
     for t in c["trung"]:
         assert t["huong"] in tot and t["sao"]
-    assert "không đổi" in c["loi"]
+    assert "không đổi" in c["loi"] and "từ Lập xuân 04/02/2027" in c["loi"] and c["lap_xuan"] == "2027-02-04"
     # 2027: Ngũ Hoàng ở Bắc = Phục Vị của Khảm → phải báo
     assert any(t["huong"] == "Bắc" and "Ngũ Hoàng" in t["sao"] for t in c["trung"])
 
@@ -89,3 +89,13 @@ def test_api_hai_cung():
     assert client.post("/v1/phongthuy/hai-cung", json={"a": {"nam": 1800, "gioi_tinh": "nam"},
                                                        "b": {"nam": 1992, "gioi_tinh": "nu"}}).status_code == 422
     assert pt_tuoi.NAM_DAU == 1960
+
+
+def test_ba_son_dung_tam_phuong_ca_8_huong():
+    # sơn giữa của mỗi phương: 4 chính phương là chi (Tý Mão Ngọ Dậu), 4 góc là quẻ (Cấn Tốn Khôn Càn)
+    giua = {"Bắc": "Tý", "Đông Bắc": "Cấn", "Đông": "Mão", "Đông Nam": "Tốn", "Nam": "Ngọ", "Tây Nam": "Khôn",
+            "Tây": "Dậu", "Tây Bắc": "Càn"}
+    for q in pt.QUAI:
+        for h in ct.chi_tiet(q, 2027)["huong"]:
+            assert h["son"][1] == giua[h["huong"]]
+            assert (h["do"]["den"] - h["do"]["tu"]) % 360 == 45

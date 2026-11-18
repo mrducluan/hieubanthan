@@ -123,7 +123,7 @@ export function mdCung(c: CungPhi): string {
       `## Vợ chồng khác nhóm với cung ${c.quai}`, "", c.bo_sung_cung.vo_chong.cach_lam, "",
       `Sách xưa ghi: ${c.bo_sung_cung.vo_chong.y} (${c.bo_sung_cung.vo_chong.han})`, "",
       "## Khoảng độ trên la bàn", "",
-      ...c.bo_sung_cung.huong.map((h) => `- ${h.huong} (${h.du_nien}): ${h.do.tu}°–${h.do.den}°, sơn ${h.son.join(", ")}`), "",
+      ...c.bo_sung_cung.huong.map((h) => `- ${h.huong} (${h.du_nien}): ${String(h.do.tu).replace(".", ",")}°–${String(h.do.den).replace(".", ",")}°, sơn ${h.son.join(", ")}`), "",
     ] : []),
     `Cung cùng nhóm ${c.nhom}: ${c.cung_cung_nhom.map((x) => `[cung ${x.quai}](${urlDayDu(duongTuoi(x.slug))})`).join(", ")}.`, "",
     "## Câu hỏi thường gặp", "", ...c.hoi_dap.flatMap((h) => [`**${h.hoi}**`, "", h.dap, ""]),

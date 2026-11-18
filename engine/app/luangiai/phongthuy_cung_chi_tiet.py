@@ -60,8 +60,17 @@ def _phong_khac(q: str) -> list[dict]:
     ]
 
 
+def _lap_xuan(nam: int) -> str:
+    import datetime as _dt  # noqa: PLC0415
+    from app.calc import tietkhi as tk  # noqa: PLC0415
+    return (tk.thoi_diem(nam, 315) + _dt.timedelta(hours=7)).date().isoformat()
+
+
 def _nam_nay(q: str, nam: int) -> dict:
+    """Năm phong thuỷ `nam` bắt đầu ở Lập xuân năm đó — lời ghi rõ ngày, vì trang có thể hiện năm SẮP TỚI (năm menu)."""
     sn = pt.sao_nam(nam)
+    lx = _lap_xuan(nam)
+    tu = f"{lx[8:10]}/{lx[5:7]}/{lx[:4]}"
     theo = {d: h for h, d in pt.bang_huong(q).items()}
     sao = {"Ngũ Hoàng": sn["ngu_hoang"], "Thái Tuế": sn["thai_tue"], "Tuế Phá": sn["tue_pha"], "Tam Sát": sn["tam_sat"]}
     trung = []
@@ -71,13 +80,13 @@ def _nam_nay(q: str, nam: int) -> dict:
         if co:
             trung.append({"huong": h, "du_nien": d, "sao": co})
     if trung:
-        loi = ("Năm {nam}, " + "; ".join(f"{t['huong']} ({t['du_nien']}) có {', '.join(t['sao'])}" for t in trung)
+        loi = ("Năm {nam} (từ Lập xuân {tu}), " + "; ".join(f"{t['huong']} ({t['du_nien']}) có {', '.join(t['sao'])}" for t in trung)
                + ". Hướng tốt vẫn là hướng tốt — sao năm chỉ nói thời điểm: năm này nên giữ yên phía đó, tránh đào "
-               "sửa, khởi công hay đặt đồ nặng mới. Thứ hạng bốn hướng không đổi.").format(nam=nam)
+               "sửa, khởi công hay đặt đồ nặng mới. Thứ hạng bốn hướng không đổi.").format(nam=nam, tu=tu)
     else:
-        loi = (f"Năm {nam}, các hướng kiêng của năm (Ngũ Hoàng, Thái Tuế, Tuế Phá, Tam Sát) không rơi vào bốn hướng tốt "
+        loi = (f"Năm {nam} (từ Lập xuân {tu}), các hướng kiêng của năm (Ngũ Hoàng, Thái Tuế, Tuế Phá, Tam Sát) không rơi vào bốn hướng tốt "
                "của cung này. Sao năm chỉ nói thời điểm, không đổi thứ hạng hướng.")
-    return {"nam": nam, "ngu_hoang": sn["ngu_hoang"], "thai_tue": sn["thai_tue"], "tue_pha": sn["tue_pha"],
+    return {"nam": nam, "lap_xuan": lx, "ngu_hoang": sn["ngu_hoang"], "thai_tue": sn["thai_tue"], "tue_pha": sn["tue_pha"],
             "tam_sat": sn["tam_sat"], "trung": trung, "loi": loi}
 
 

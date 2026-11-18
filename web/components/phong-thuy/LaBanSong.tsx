@@ -118,8 +118,10 @@ export function LaBanSong({ huong, quai, nhom, namNay, maDo = "la_ban_cung", gon
             </li>
           ))}
         </ul>
+        {/* Vùng thông báo giữ nguyên (không đổi key) để trình đọc màn hình đọc nội dung mới; khối bên trong đổi key để chạy hiệu ứng. */}
+        <div aria-live="polite">
         {h && (
-          <div key={chon} aria-live="polite" data-testid="la-ban-chi-tiet"
+          <div key={chon} data-testid="la-ban-chi-tiet"
             className={cn("mt-3 rounded-2xl border p-4 motion-safe:animate-[muc-hien_0.35s_ease-out]", h.cat ? "border-jade/40 bg-jade/5" : "border-line bg-cinnabar/5")}>
             <p className="text-sm text-fg-faint">{h.hang ? `Hướng tốt hạng ${h.hang}` : h.cat ? "Hướng tốt" : "Hướng nên tránh"}</p>
             <p className="mt-0.5 text-xl text-fg"><b>{h.huong}</b>{h.du_nien ? <> · <span className={h.cat ? "text-jade" : "text-cinnabar"}>{h.du_nien}</span></> : null}</p>
@@ -143,6 +145,7 @@ export function LaBanSong({ huong, quai, nhom, namNay, maDo = "la_ban_cung", gon
             {!h.du_nien && !h.cat && <p className="mt-2 text-sm text-fg-muted">Một trong bốn hướng nên tránh của cung {quai}.</p>}
           </div>
         )}
+        </div>
       </div>
     </div>
   );

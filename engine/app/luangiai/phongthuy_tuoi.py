@@ -352,7 +352,8 @@ def cung_phi(slug: str, nam_xem: int | None = None) -> dict:
         "nguon": L("pt.cung.nguon", "Bát trạch (Dương Trạch Tam Yếu) — bảng du niên; cung phi theo năm sinh và giới tính"),
         "luu_y": [kb.luu_y("bat_trach"), kb.bo_cuc()["luu_y"]],
         **{k: v for k, v in kb.meta().items() if k in ("trang_thai", "can_doi_chieu")},
-        # UI-HHT: lớp tri thức thêm (chỉ bản Việt; None ở bản khác). Năm xem mặc định = năm phong thuỷ hiện tại (Lập xuân).
+        # UI-HHT: lớp tri thức thêm (chỉ bản Việt; None ở bản khác). `nam_xem`: web gửi năm menu (có thể là năm SẮP TỚI —
+        # lời ghi ngày Lập xuân bắt đầu năm đó); không gửi → năm phong thuỷ đang đi (đổi ở Lập xuân).
         "bo_sung_cung": _ct.chi_tiet(q, nam_xem or _nam_pt()),
     }
 

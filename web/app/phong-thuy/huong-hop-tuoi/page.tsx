@@ -100,7 +100,7 @@ export default async function Page() {
                 <tbody>
                   {tuoi.map((t) => (
                     <tr key={t.nam} id={t.slug} className="scroll-mt-24 border-t border-line/50 target:bg-gold/10">
-                      <td className="sticky left-0 bg-surface py-2 pl-3 pr-3 text-fg"><b>{t.nam}</b> <span className="block text-xs text-fg-muted sm:inline sm:text-sm">{t.can_chi}</span></td>
+                      <td className="sticky left-0 bg-surface py-2 pl-3 pr-3 text-fg [tr:target_&]:border-l-2 [tr:target_&]:border-gold [tr:target_&]:bg-gold/10"><b>{t.nam}</b> <span className="block text-xs text-fg-muted sm:inline sm:text-sm">{t.can_chi}</span></td>
                       <td className="py-2 pr-3 text-fg-muted">{dm(t.lap_xuan)}</td>
                       <td className="py-2 pr-3"><Link href={`${duongTuoi(t.nam_gioi.slug)}#nam-${t.nam}`} className="text-gold underline decoration-gold/40 underline-offset-2">{t.nam_gioi.quai}</Link>
                         <span className="block text-xs text-fg-muted">tốt nhất {t.nam_gioi.tot[0]}, {t.nam_gioi.tot[1]}</span></td>

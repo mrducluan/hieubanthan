@@ -325,7 +325,7 @@ export interface BoSungCung {
   nam_nu: { so_5: string; vi_du: { nam: number; nam_gioi: string; nu_gioi: string }[] };
   vo_chong: { han: string; am?: string; y: string; cach_lam: string };
   phong_khac: { ma: string; tieu_de: string; huong: string[]; du_nien: string[]; noi_dung: string; thuc_te: string; nguon: string }[];
-  nam_nay: { nam: number; ngu_hoang: string; thai_tue: string; tue_pha: string; tam_sat: string;
+  nam_nay: { nam: number; lap_xuan?: string; ngu_hoang: string; thai_tue: string; tue_pha: string; tam_sat: string;
     trung: { huong: string; du_nien: string; sao: string[] }[]; loi: string };
   quy_tac: { ma: string; tieu_de: string; noi_dung: string }[];
 }

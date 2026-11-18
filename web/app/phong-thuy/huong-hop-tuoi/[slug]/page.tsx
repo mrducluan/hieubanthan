@@ -75,7 +75,6 @@ function MucHuong({ h, ct }: { h: HuongDuNien; ct?: HuongChiTiet }) {
       <div className="border-t border-line/50 px-3.5 pb-3.5 pt-2 text-sm leading-relaxed text-fg-muted">
         <p>{h.y_nghia} <span className="text-fg-faint">Hợp cho: {h.dung_cho}.</span></p>
         {ct && <p className="mt-1.5">Trên la bàn: {so(ct.do.tu)}°–{so(ct.do.den)}° (sơn {ct.son.join(", ")}).</p>}
-        {ct?.sach && <p className="mt-1.5">Sách xưa: {ct.sach.y} <span className="font-serif text-fg-faint" lang="zh-Hant">{ct.sach.han}</span></p>}
       </div>
     </details>
   );
@@ -193,6 +192,7 @@ export default async function Page({ params: thamSo }: Props) {
       {bs && (
         <section className="mt-10 rounded-2xl border border-moon/40 bg-moon/5 p-5" aria-labelledby="nam-nay">
           <h2 id="nam-nay" className="text-xl">Năm {bs.nam_nay.nam}: hướng tốt nào của cung {c.quai} cần giữ yên?</h2>
+          {bs.nam_nay.lap_xuan && <p className="mt-1 text-sm text-fg-faint">Năm phong thuỷ {bs.nam_nay.nam} bắt đầu từ Lập xuân {dmy(bs.nam_nay.lap_xuan)}; trước ngày đó vẫn tính theo năm {bs.nam_nay.nam - 1}.</p>}
           <p className="mt-2 leading-relaxed text-fg-muted">{bs.nam_nay.loi}</p>
           <p className="mt-2 text-sm text-fg-faint">
             Hướng kiêng chung của năm {bs.nam_nay.nam} (tính từ Lập xuân): Ngũ Hoàng {bs.nam_nay.ngu_hoang}, Thái Tuế {bs.nam_nay.thai_tue},
