@@ -36,7 +36,7 @@ function BieuTuong({ p }: { p: NhaCungCap }) {
   );
 }
 
-export function DangNhap() {
+export function DangNhap({ googleQuaSite = false }: { googleQuaSite?: boolean }) {
   const router = useRouter();
   const params = useSearchParams();
   const [kenh, setKenh] = useState<"email" | "sdt">("email");
@@ -106,10 +106,11 @@ export function DangNhap() {
       <p className="mt-3 text-fg-muted">Đăng nhập để dùng hồ sơ trên mọi thiết bị. Không cần mật khẩu.</p>
 
       <Card className="mt-6 space-y-5">
-        {cach.oauth.map((p) => p === "zalo" ? (
-          // DN-2: Zalo đi qua máy chủ web (Supabase không có sẵn Zalo) — điều hướng trang thật, không fetch.
-          <Button key={p} asChild variant="secondary" className="w-full" data-testid="dang-nhap-zalo">
-            <a href={`/auth/zalo?tiep=${encodeURIComponent(tiep)}`}><BieuTuong p={p} />Tiếp tục với Zalo</a>
+        {cach.oauth.map((p) => p === "zalo" || (p === "google" && googleQuaSite) ? (
+          // DN-2 Zalo / DN-3 Google: đi qua máy chủ web (Zalo: Supabase không có sẵn; Google: không lộ tên miền Supabase)
+          // — điều hướng trang thật, không fetch.
+          <Button key={p} asChild variant="secondary" className="w-full" data-testid={`dang-nhap-${p}`}>
+            <a href={`/auth/${p}?tiep=${encodeURIComponent(tiep)}`}><BieuTuong p={p} />Tiếp tục với {TEN[p]}</a>
           </Button>
         ) : (
           <Button key={p} variant="secondary" className="w-full" data-testid={`dang-nhap-${p}`}
