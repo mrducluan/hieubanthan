@@ -36,7 +36,7 @@ export async function GET(req: Request) {
 
   const dm = await doiMa(cfg, code, luu.v);
   if (!("token" in dm)) return loi(dm.buoc, { ma: dm.ma, ten: dm.ten });
-  const nd = await layMaNguoiDung(dm.token);
+  const nd = await layMaNguoiDung(dm.token, cfg.bimat);
   if (!("id" in nd)) return loi(nd.buoc, { ma: nd.ma, ten: nd.ten });
   const email = emailZalo(nd.id);
   if (!email) return loi("email");

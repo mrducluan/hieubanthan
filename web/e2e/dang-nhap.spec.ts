@@ -52,14 +52,23 @@ test("thuần: Zalo — lỗi đổi mã / lấy mã người dùng trả về b
   const goc = globalThis.fetch;
   const tra = (j: unknown) => { globalThis.fetch = (async () => new Response(JSON.stringify(j))) as typeof fetch; };
   try {
+    // appsecret_proof gửi kèm lượt gọi /me (HMAC-SHA256 hex của token bằng app secret).
+    let dau: Record<string, string> = {};
+    globalThis.fetch = (async (_u: unknown, init?: RequestInit) => {
+      dau = init?.headers as Record<string, string>; return new Response(JSON.stringify({ id: "1" }));
+    }) as typeof fetch;
+    await layMaNguoiDung("tok", "bm");
+    const { createHmac } = await import("node:crypto");
+    expect(dau.appsecret_proof).toBe(createHmac("sha256", "bm").update("tok").digest("hex"));
+    expect(dau.access_token).toBe("tok");
     tra({ error: -14019, error_name: "Invalid code verifier" });
     expect(await doiMa({ appId: "123456", bimat: "x" }, "c", "v")).toEqual({ buoc: "doi_ma", ma: -14019, ten: "Invalid code verifier" });
     tra({ access_token: "tok" });
     expect(await doiMa({ appId: "123456", bimat: "x" }, "c", "v")).toEqual({ token: "tok" });
     tra({ id: "1234567890", error: 0, message: "Success" });
-    expect(await layMaNguoiDung("tok")).toEqual({ id: "1234567890" });
+    expect(await layMaNguoiDung("tok", "bm")).toEqual({ id: "1234567890" });
     tra({ error: 452, message: "Session key invalid" });
-    expect(await layMaNguoiDung("tok")).toEqual({ buoc: "nguoi_dung", ma: 452, ten: "Session key invalid" });
+    expect(await layMaNguoiDung("tok", "bm")).toEqual({ buoc: "nguoi_dung", ma: 452, ten: "Session key invalid" });
   } finally {
     globalThis.fetch = goc;
   }

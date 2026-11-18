@@ -135,3 +135,12 @@ không có gì khác → trước đây bị bỏ qua, nên biến `NEXT_PUBLIC_
 3. Facebook — miễn phí.
 4. Apple — khi lượng người dùng iPhone đủ lớn để đáng 99 USD/năm + việc gia hạn khoá; Google + email đã đăng nhập được trên
    iPhone nên không gấp.
+
+## 9. Zalo — lỗi đã gặp (DN-2b / DN-2c, 18/11/2026)
+
+| Lỗi | Ở đâu | Nguyên nhân | Cách xử lý |
+|---|---|---|---|
+| `-14029 The application is not approved` | trang oauth.zaloapp.com | App Zalo chưa kích hoạt | Kích hoạt app ở developers.zalo.me |
+| Mã `nguoi_dung` + nhật ký `[zalo] nguoi_dung { ma: -501 … }` | sau khi đổi mã thành công | Gọi `graph.zalo.me/v2.0/me` thiếu `appsecret_proof` (SDK chính thức luôn gửi) — **hoặc** Zalo chặn máy chủ ngoài Việt Nam (Vercel chạy ở Singapore; một dự án khác gặp đúng -501 và nghi lý do này, Zalo chưa xác nhận) | DN-2c gửi `appsecret_proof = HMAC-SHA256(access_token, app secret)`. Còn -501 → hỏi hỗ trợ Zalo for Developers kèm mã lỗi + "gọi /v2.0/me từ máy chủ Singapore"; tạm ẩn nút (bỏ `zalo` khỏi `NEXT_PUBLIC_DANG_NHAP`) |
+
+Nhật ký Vercel: dự án web → Logs, lọc `[zalo]` — chỉ có tên bước + mã lỗi Zalo / Supabase, không token, không bí mật.
