@@ -46,8 +46,22 @@ def _cach_ra(c: dict) -> dict:
             **({"ky": c["ky"]} if c.get("ky") else {}), "sach": kb.loi_sach(m.get("sach")), "han": m.get("han")}
 
 
-def doc_gio(ban: dict, viec: str | None = None) -> dict:
-    """Bài đọc của MỘT giờ. `ban` = kết quả `ky_mon.lap_ban` (hoặc `ban_gio` kèm `can_chi`)."""
+PHUONG = tuple(km.QUE[k][1] for k in THU_TU_HUONG)
+
+
+def _kiem_huong_hop(huong_hop: list[str] | None) -> set[str]:
+    hop = set(huong_hop or [])
+    if hop - set(PHUONG):
+        raise ValueError("huong_hop chỉ nhận tên tám hướng")
+    return hop
+
+
+def doc_gio(ban: dict, viec: str | None = None, huong_hop: list[str] | None = None) -> dict:
+    """Bài đọc của MỘT giờ. `ban` = kết quả `ky_mon.lap_ban` (hoặc `ban_gio` kèm `can_chi`).
+
+    `huong_hop` (KM-3): các hướng hợp mệnh của người xem theo Bát trạch (web lấy từ trang Phong thuỷ, chỉ TÊN hướng —
+    không năm sinh). Chỉ đánh dấu + nói hướng nào vừa hợp mệnh vừa thuận giờ này; không đổi mức nào."""
+    hop = _kiem_huong_hop(huong_hop)
     can_ngay = (ban.get("can_chi") or {}).get("ngay", "").split(" ")[0] or None
     cach = kc.nhan_dien(ban, can_ngay=can_ngay)
     cach_gio = [c for c in cach if c["pham_vi"] == "gio"]
@@ -105,6 +119,12 @@ def doc_gio(ban: dict, viec: str | None = None) -> dict:
         "cach_dung": kb.mau("cach_dung"), "ranh_gioi": kb.mau("ranh_gioi"),
     }
     kq["gio"]["muc_nhan"] = kb.phan("muc_gio")[kq["gio"]["muc"]]
+    if huong_hop is not None:
+        for h in huong:
+            h["hop_menh"] = h["phuong"] in hop
+        chung = [h["phuong"] for h in huong if h["hop_menh"] and h["muc"] == "thuan"]
+        kq["hop_menh"] = {"chung": chung, "loi": kb.mau("hop_co").format(gio=ten_gio, ds=", ".join(chung)) if chung
+                          else kb.mau("hop_khong").format(gio=ten_gio)}
     if viec:
         kq["viec"] = _doc_viec(kq, viec)
     return kq
@@ -142,8 +162,10 @@ def moc_gio(ngay: dt.date) -> list[tuple[dt.datetime, str]]:
     return [(dt.datetime.combine(ngay, t), khung) for t, khung in moc]
 
 
-def doc_ngay(ngay: dt.date, utc: float = 7, phep: str = "sach_bo", gio_ty: str = "da_ty", viec: str | None = None) -> dict:
+def doc_ngay(ngay: dt.date, utc: float = 7, phep: str = "sach_bo", gio_ty: str = "da_ty", viec: str | None = None,
+             huong_hop: list[str] | None = None) -> dict:
     """Mười ba khung giờ của một ngày: mức của giờ, hướng thuận, thế hiếm; có `viec` thì thêm các giờ hợp việc ấy."""
+    hop = _kiem_huong_hop(huong_hop)
     gio, tot = [], []
     for t, khung in moc_gio(ngay):
         ban = km.lap_ban(t, utc=utc, phep=phep, gio_ty=gio_ty)
@@ -158,8 +180,13 @@ def doc_ngay(ngay: dt.date, utc: float = 7, phep: str = "sach_bo", gio_ty: str =
             if h is not None and h["muc"] == "thuan":
                 muc["viec"] = {"phuong": h["phuong"], "cua": h["cua"]["ten"], "noi_bat": h["noi_bat"], "ky": h["ky"]}
                 tot.append(muc)
+        if huong_hop is not None:
+            muc["hop_menh"] = [p for p in d["huong_thuan"] if p in hop]
         gio.append(muc)
     kq = {"luat": LUAT, "ngay": ngay.isoformat(), "gio": gio, "cach_dung": kb.mau("cach_dung"), "ranh_gioi": kb.mau("ranh_gioi")}
+    if huong_hop is not None:
+        co = [g for g in gio if g["hop_menh"]]
+        kq["hop_menh"] = {"gio": [g["chi"] for g in co], "loi": kb.mau("hop_ngay_co" if co else "hop_ngay_khong")}
     if viec:
         v = kb.phan("viec")[viec]
         # giờ thức (05:00–23:00) trước, trong đó giờ có «kỳ» đi cùng cửa đứng đầu; giờ đêm xếp sau

@@ -75,4 +75,23 @@ test.describe("Kỳ Môn Độn Giáp", () => {
     await muc.locator("summary").click();
     await expect(muc.getByRole("link", { name: "Chọn theo việc bạn định làm" })).toHaveAttribute("href", "/ky-mon");
   });
+
+  test("KM-3: trang ngày của Xem ngày tốt có giờ và hướng theo việc", async ({ page }) => {
+    const d = new Date(Date.now() + 7 * 3600e3 + 3 * 86400e3).toISOString().slice(0, 10);
+    await page.goto(`/xem-ngay-tot/${d}`);
+    const k = page.getByTestId("ky-mon-theo-ngay");
+    await expect(k).toContainText("Giờ và hướng theo việc");
+    await expect(k.locator("li").first()).toContainText(/Giờ .+: hướng .+, cửa /);
+    await k.getByRole("button", { name: "Đi xa" }).click();
+    await expect(k).toContainText("lái xe cẩn thận");
+  });
+
+  test("KM-3: API nhận hướng hợp mệnh", async ({ request }) => {
+    const r = await request.post("/api/ky-mon/ngay", { data: { ngay: "2026-11-18", huong_hop: ["Bắc", "Tây"] } });
+    expect(r.status()).toBe(200);
+    const j = await r.json();
+    expect(j.hop_menh.loi).toBeTruthy();
+    expect(j.gio.every((g: { hop_menh: string[] }) => Array.isArray(g.hop_menh))).toBe(true);
+    expect((await request.post("/api/ky-mon/ngay", { data: { huong_hop: ["Lên"] } })).status()).toBe(422);
+  });
 });

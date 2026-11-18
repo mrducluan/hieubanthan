@@ -23,6 +23,7 @@ router = APIRouter(prefix="/v1/ky-mon", tags=["ky-mon"])
 
 Phep = Literal["sach_bo", "tri_nhuan"]
 GioTy = Literal["da_ty", "sang_ngay"]
+Huong = Literal["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"]
 Viec = Literal["gap_go", "ky_ket", "di_xa", "giay_to", "hoa_giai", "thu_no", "tinh_tam"]
 
 
@@ -32,6 +33,7 @@ class _Chung(BaseModel):
     phep: Phep = "sach_bo"
     gio_ty: GioTy = "da_ty"
     viec: Viec | None = None
+    huong_hop: list[Huong] | None = Field(default=None, max_length=8)   # KM-3: tên hướng hợp mệnh (không năm sinh)
 
 
 class BanIn(_Chung):
@@ -62,7 +64,7 @@ def ban(d: BanIn) -> dict:
         b = km.lap_ban(t, utc=d.utc, phep=d.phep, gio_ty=d.gio_ty)
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e)) from e
-    return {"thoi_diem": t.isoformat(timespec="minutes"), "ban": b, "doc": doc.doc_gio(b, d.viec),
+    return {"thoi_diem": t.isoformat(timespec="minutes"), "ban": b, "doc": doc.doc_gio(b, d.viec, d.huong_hop),
             "tuy_chon": _tuy_chon(d), "meta": _meta()}
 
 
@@ -70,7 +72,7 @@ def ban(d: BanIn) -> dict:
 def ngay(d: NgayIn) -> dict:
     n = d.ngay or _bay_gio(d.utc).date()
     try:
-        kq = doc.doc_ngay(n, utc=d.utc, phep=d.phep, gio_ty=d.gio_ty, viec=d.viec)
+        kq = doc.doc_ngay(n, utc=d.utc, phep=d.phep, gio_ty=d.gio_ty, viec=d.viec, huong_hop=d.huong_hop)
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e)) from e
     return {**kq, "tuy_chon": _tuy_chon(d), "meta": _meta()}

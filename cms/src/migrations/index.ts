@@ -31,6 +31,7 @@ import * as migration_20261116_150000_gd_menu_nha_toi from './20261116_150000_gd
 import * as migration_20261117_090000_nf_bt_bien_tap from './20261117_090000_nf_bt_bien_tap';
 import * as migration_20261117_090000_seo_q_tieu_de_blog from './20261117_090000_seo_q_tieu_de_blog';
 import * as migration_20261117_120000_kw6t_tuan_3 from './20261117_120000_kw6t_tuan_3';
+import * as migration_20261118_090000_km_3_menu_ky_mon from './20261118_090000_km_3_menu_ky_mon';
 
 export const migrations = [
   {
@@ -197,5 +198,10 @@ export const migrations = [
     up: migration_20261117_120000_kw6t_tuan_3.up,
     down: migration_20261117_120000_kw6t_tuan_3.down,
     name: '20261117_120000_kw6t_tuan_3',
+  },
+  {
+    up: migration_20261118_090000_km_3_menu_ky_mon.up,
+    down: migration_20261118_090000_km_3_menu_ky_mon.down,
+    name: '20261118_090000_km_3_menu_ky_mon',
   },
 ];

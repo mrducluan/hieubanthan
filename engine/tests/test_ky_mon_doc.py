@@ -177,3 +177,37 @@ def test_route_tu_choi_dau_vao_sai(than):
 def test_do_tin_co_ky_mon():
     from app.kb import do_tin
     assert do_tin.SO[kb.TEP]["mang"] == "kymon"
+
+
+# ── KM-3: hướng hợp mệnh (Bát trạch) × hướng thuận của giờ ──────────────────────────────────────────────────
+def test_huong_hop_menh_chi_danh_dau_va_tom_lai_khong_doi_muc():
+    b = km.lap_ban(dt.datetime(2026, 11, 18, 10, 30))
+    goc = doc.doc_gio(b)
+    hop = ["Bắc", "Đông", "Nam", "Đông Nam"]
+    d = doc.doc_gio(b, huong_hop=hop)
+    assert [h["muc"] for h in d["huong"]] == [h["muc"] for h in goc["huong"]]          # không đổi mức nào
+    assert {h["phuong"] for h in d["huong"] if h["hop_menh"]} == set(hop)
+    x = d["hop_menh"]
+    assert x["chung"] == [h["phuong"] for h in d["huong"] if h["hop_menh"] and h["muc"] == "thuan"] == ["Bắc"]
+    assert "Bắc" in x["loi"] and not re.search(r"\d", x["loi"])
+    assert "hop_menh" not in goc and all("hop_menh" not in h for h in goc["huong"])   # không gửi thì đầu ra như cũ
+
+
+def test_huong_hop_menh_khong_co_huong_chung_va_dau_vao_la():
+    b = km.lap_ban(dt.datetime(2026, 11, 18, 10, 30))
+    d = doc.doc_gio(b, huong_hop=["Nam", "Đông"])
+    assert d["hop_menh"]["chung"] == [] and d["hop_menh"]["loi"]
+    with pytest.raises(ValueError):
+        doc.doc_gio(b, huong_hop=["Trên"])
+
+
+def test_ngay_co_huong_hop_menh_va_route():
+    n = doc.doc_ngay(dt.date(2026, 11, 18), huong_hop=["Bắc", "Tây"])
+    assert all("hop_menh" in g for g in n["gio"])
+    for g in n["gio"]:
+        assert set(g["hop_menh"]) <= set(g["huong_thuan"]) & {"Bắc", "Tây"}
+    assert n["hop_menh"]["gio"] == [g["chi"] for g in n["gio"] if g["hop_menh"]][:len(n["hop_menh"]["gio"])]
+    r = client.post("/v1/ky-mon/ban", json={"thoi_diem": "2026-11-18T10:30", "huong_hop": ["Bắc", "Đông"]})
+    assert r.status_code == 200 and r.json()["doc"]["hop_menh"]["chung"] == ["Bắc"]
+    assert client.post("/v1/ky-mon/ban", json={"huong_hop": ["Bắc"] * 9}).status_code == 422
+    assert client.post("/v1/ky-mon/ngay", json={"ngay": "2026-11-18", "huong_hop": ["Lên"]}).status_code == 422

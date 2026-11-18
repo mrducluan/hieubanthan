@@ -32,10 +32,10 @@ export interface BanKM {
 }
 export interface GioNgayKM {
   luc: string; chi: string; khung: string; can_chi: string; muc: MucKM; muc_nhan: string; huong_thuan: string[]; noi_bat: string[];
-  hiem: { ten: string; phuong: string }[]; luu_y: string[]; viec?: { phuong: string; cua: string; noi_bat: boolean };
+  hiem: { ten: string; phuong: string }[]; luu_y: string[]; hop_menh?: string[]; viec?: { phuong: string; cua: string; noi_bat: boolean };
 }
 export interface NgayKM {
-  ngay: string; gio: GioNgayKM[]; cach_dung: string;
+  ngay: string; gio: GioNgayKM[]; cach_dung: string; hop_menh?: { gio: string[]; loi: string };
   viec?: { ma: string; ten: string; mo_ta: string; ranh_gioi?: string | null; loi?: string;
     gio_tot: { chi: string; khung: string; luc: string; phuong: string; cua: string; noi_bat: boolean; ban_dem: boolean; loi: string }[] };
 }

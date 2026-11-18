@@ -899,6 +899,10 @@
   "tom_khong": "Giờ {gio} không có hướng nào nổi bật — hợp làm việc thường ngày.",
   "hiem": "Giờ này có thế hiếm «{cach}» ở hướng {phuong}.",
   "viec_gio": "Giờ {gio} ({khung}): hướng {phuong}, cửa {cua}{kem}.",
-  "viec_ngay_khong": "Hôm nay không có giờ nào thật thuận cho việc này theo bàn Kỳ Môn — nếu dời được, xem ngày kế tiếp."
+  "viec_ngay_khong": "Hôm nay không có giờ nào thật thuận cho việc này theo bàn Kỳ Môn — nếu dời được, xem ngày kế tiếp.",
+  "hop_co": "Giờ {gio}, hướng {ds} vừa là hướng hợp mệnh của bạn vừa đang thuận — nên ưu tiên phía này.",
+  "hop_khong": "Giờ {gio} chưa có hướng nào vừa hợp mệnh của bạn vừa thuận. Việc cần chọn hướng thì xem khung giờ khác trong ngày.",
+  "hop_ngay_co": "Các khung giờ dưới đây có hướng vừa hợp mệnh của bạn vừa thuận theo bàn của giờ.",
+  "hop_ngay_khong": "Hôm nay không có khung giờ nào có hướng vừa hợp mệnh của bạn vừa thuận; việc thường ngày vẫn làm bình thường."
  }
 }

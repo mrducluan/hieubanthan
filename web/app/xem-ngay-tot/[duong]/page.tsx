@@ -9,6 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { LichThang, XemNgayTot } from "@/components/hoang-lich/XemNgayTot";
 import { LichAmNam } from "@/components/lich-am/LichAmNam";
+import { KyMonTheoNgay } from "@/components/ky-mon/KyMonTheoNgay";
 import { lichNgayChoNgay } from "@/lib/lich-am";
 import { homNayVN } from "@/lib/hoang-lich";
 import { VIEC_SEO, docDuong, duongNgay, duongThang, duongViecThang, ngayDangIndex, ngayTotCongKhai, thangCongKhai, thangIndex, viecThangCongKhai, viecThangIndex } from "@/lib/hoang-lich";
@@ -113,6 +114,7 @@ export default async function Page({ params }: P) {
           <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
           <div className="mb-5"><TraLoiNhanh chu={d.tra_loi_nhanh} /></div>
           <XemNgayTot banDau={d} thang={t} lichAm={lichAm} />
+          <KyMonTheoNgay ngay={x.iso} nhan={dmy(x.iso)} />
         </div>
         {/* SEO-O: ảnh tóm tắt ngày (alt cùng nguồn với chữ trong ảnh). */}
         <AnhTomTat kieu="ngay" ngay={x.iso} />

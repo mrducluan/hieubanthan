@@ -44,6 +44,8 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/nhan-tuong", "Nhân tướng học"), mo_ta: "Tự soi gương 31 câu, bài đọc 8 chương, không cần ảnh" },
     // TR-1 menu: Tarot vào menu; 64 quẻ + Thư viện kiến thức nhường chỗ (migration tr_1_menu_tarot).
     { ...lk("/tarot", "Xem Tarot"), mo_ta: "Xáo bài, rút lá, 5 trải bài, 78 lá có nguồn" },
+    // KM-3: Kỳ Môn Độn Giáp vào menu Huyền học, mục thứ 12 (migration km_3_menu_ky_mon).
+    { ...lk("/ky-mon", "Kỳ Môn Độn Giáp"), mo_ta: "Giờ này hướng nào thuận, hợp việc gì" },
     { ...lk("/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"), mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
     // TM-1: ba công cụ có bản theo năm ở menu "Năm" nhường chỗ cho cụm kiến thức lớn (migration tm_1_menu_huyen_hoc).
     { ...lk("/tu-vi/sao-o-cung", "Sao ở từng cung Tử vi"), mo_ta: "14 chính tinh ở 12 cung: sáng hãm, sao đi cùng" },

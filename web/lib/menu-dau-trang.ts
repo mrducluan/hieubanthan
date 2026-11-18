@@ -28,6 +28,8 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     // TR-1 menu (chủ dự án chốt 2026-11-07): Tarot vào menu; "64 quẻ Kinh Dịch" + "Thư viện kiến thức" nhường chỗ
     // (vẫn ở thanh mảng Kinh Dịch, hub Huyền học, chân trang) — giữ ≤ 12 mục con.
     { href: "/tarot", ten: "Xem Tarot", mo_ta: "Xáo bài, rút lá, 5 trải bài, 78 lá có nguồn" },
+    // KM-3 (chủ dự án duyệt 2026-11-18): Kỳ Môn Độn Giáp vào menu Huyền học — mục thứ 12 (đủ trần).
+    { href: "/ky-mon", ten: "Kỳ Môn Độn Giáp", mo_ta: "Giờ này hướng nào thuận, hợp việc gì" },
     { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi", mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
     // TM-1 (chủ dự án duyệt 2026-11-03): 3 công cụ đã có bản theo năm ở menu "Năm" (hướng xấu, xông đất, sao hạn) nhường
     // chỗ cho cụm kiến thức lớn chưa có lối vào menu. Ba công cụ vẫn ở menu Năm, hub Huyền học, chân trang.

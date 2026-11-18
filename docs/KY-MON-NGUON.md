@@ -145,3 +145,17 @@ Khi anh gửi Ngự Định Kỳ Môn Bảo Giám (có bảng mẫu theo năm), 
   Câu Trần, Chu Tước chưa có câu sách riêng (kho nguồn hiện chỉ có câu cho Cửu Thiên, Cửu Địa, Thái Âm, Lục Hợp).
 - **Luật đọc** (`luangiai/ky_mon.py`, `ky_mon_1`): xét cửa trước, rồi kỳ — theo câu «如得門不得奇亦可用得奇不得門終非吉».
   Không điểm số. Giờ «nên giữ nhịp» chiếm khoảng 40 % số giờ (đúng tần suất các thế bàn của sách).
+
+## 9. KM-3 — nối vào các trang đang có (2026-11-18)
+
+Ba điều đã chốt theo đề xuất: sách bổ mặc định; giờ 23:00–23:59 giữ như Bát tự, có công tắc; `/ky-mon` vào menu Huyền học.
+
+| Nơi | Có gì | Ghi chú |
+|---|---|---|
+| Hôm nay | Mục gập "Giờ và hướng thuận hôm nay" | Theo múi giờ máy người xem; chỉ khung còn lại trong ngày |
+| Xem ngày tốt, trang một ngày | "Giờ và hướng theo việc ngày …" | Chọn việc → giờ + hướng hợp của ngày đó (giờ Việt Nam) |
+| Phong thuỷ, dưới la bàn mệnh quái | "Hôm nay, hướng hợp mệnh của bạn thuận vào giờ nào?" | Engine ghép tên hướng hợp mệnh với hướng thuận từng giờ; chỉ đánh dấu, không đổi mức |
+| Menu Huyền học | Mục "Kỳ Môn Độn Giáp" | Mục thứ 12 — menu đã đủ trần |
+| Thời gian tới | **Không ghép** | Bàn theo giờ không có phép theo tháng trong nguồn đã nạp; nguyệt gia Kỳ Môn cần sách đối chiếu trước |
+
+Còn lại: hub Huyền học, chân trang, bản tiếng Anh, và KM-4 (hỏi việc theo Kỳ Môn, cổng Sao).
