@@ -63,8 +63,8 @@ Tên tác giả em ghi theo trí nhớ, anh kiểm lại khi tìm sách.
 1. **Phép định cục mặc định**: trí nhuận (sách Tứ khố và quyển 708 trình bày) hay sách bổ (phần mềm ngày nay hay dùng).
    Em đề xuất làm cả hai, người dùng đổi được như khung Trường phái của Tử vi; chọn mặc định sau khi đọc nguyên văn.
 2. **Chuyển bàn hay phi bàn**: bảng 18 cục của Cổ Kim Đồ Thư là căn cứ; em sẽ báo bảng ấy theo lối nào khi dựng golden.
-3. **Bộ đối chiếu**: `kinqimen` (PyPI ghi MIT) chỉ để sinh golden, không chạy runtime — cần anh duyệt, em sẽ đọc tệp
-   giấy phép trước khi dùng.
+3. **Bộ đối chiếu**: `kinqimen` (PyPI ghi MIT) chỉ để sinh golden, không chạy runtime — anh đã duyệt 18/11/2026; kết
+   quả ở mục 7.
 
 ## 6. Thứ tự làm (mỗi bước một PR, anh duyệt riêng)
 
@@ -75,3 +75,56 @@ Tên tác giả em ghi theo trí nhớ, anh kiểm lại khi tìm sách.
 | KM-2 | KB tám cửa, chín sao, tám thần, cách cục (câu trích khớp kho nguồn, lời theo SX-C / CY-1) + bài đọc + trang `/ky-mon` + cụm kiến thức | Thu hút, Quay lại |
 | KM-3 | Đưa vào Hôm nay (giờ và hướng), Xem ngày tốt (giờ + hướng theo việc), la bàn Phong thuỷ, Thời gian tới | Quay lại |
 | KM-4 | Hỏi việc theo Kỳ Môn, cổng Sao, bản `/en` | Nạp Sao |
+
+## 7. KM-1 — phép lập bàn đã viết và kết quả đối chiếu (2026-11-18)
+
+Mã: `engine/app/calc/ky_mon.py` (Python thuần, tất định). Kỳ Môn **thời gia, chuyển bàn**: địa bàn theo cục, trực phù đặt
+lên cung can giờ, trực sử mỗi giờ đi một cung, chín sao – tám cửa xoay cả vòng, tám thần dương thuận âm nghịch; cung giữa
+gửi Khôn, Thiên Nhuế mang Thiên Cầm. Hai phép định cục: `sach_bo` (mặc định) và `tri_nhuan`. Lập bàn cho năm 1890–2140
+(ngoài khoảng này phép tính tiết khí của engine không còn đủ đúng).
+
+### 7.1 Đối chiếu với chính sách (nguồn chính)
+
+| Thử gì | Kết quả |
+|---|---|
+| Bảng tiết → cục (72 đề mục «tiết + nguyên» của bảng 18 cục, quyển 709–712) | Khớp 72/72 |
+| Bảng 18 cục × 60 giờ: trực phù (sao + cung), trực sử (cửa + cung), tám thần — 1.066 dòng đọc được | Tên sao và tên cửa khớp 100 %. Vị trí lệch ở 45 ô (7 ô cung của sao, 10 ô cung của cửa, 5 ô cửa, 23 ô thần) — đều là chữ chép lệch đơn lẻ của bản gõ (mỗi dòng lệch tối đa 2 ô, không theo quy luật nào), ghim từng ô ở `fixtures/golden/ky_mon_18_cuc_lech.json` |
+| Ví dụ lập bàn thứ nhất của sách (năm 1589, dương độn 9 cục, giờ Tân Tỵ) | Khớp từng cung |
+| Ví dụ thứ hai (âm độn 4 cục, giờ Mậu Dần, có đặt nhuận) | Khớp từng cung; quy tắc «vượt tới 9 ngày thì đặt nhuận, nhuận chỉ đặt sau Mang chủng / Đại tuyết» khớp số ngày sách nêu |
+
+### 7.2 Đối chiếu với bộ đối chiếu ngoài `kinqimen` (400 thời điểm 1900–2099 × hai phép)
+
+| Thử gì | Kết quả |
+|---|---|
+| Phép sách bổ: âm / dương độn, số cục, nguyên, tiết đang đi | **Trùng 400/400** |
+| Can chi ngày, can chi giờ | Trùng 396/400 — 4 ca còn lại là bộ đối chiếu tự đổi giờ sai (xem dưới) |
+| Bàn dựng từ cùng một cục: địa bàn, sao, cửa, thần — cả 800 bàn | Trùng mọi cung |
+| Can thiên bàn | Trùng, trừ 7 bàn «đứng yên có can giờ ở cung giữa» (xem dưới) |
+| Phép trí nhuận: số cục | Trùng khoảng 70 %; phần còn lại lệch **đúng một tiết, cùng nguyên** |
+
+**Chỗ bộ đối chiếu làm khác, và vì sao em không theo:**
+
+1. **Trí nhuận.** Bộ đối chiếu không giữ «nguyên nhuận»: nó lấy tiết đang đi, hễ đã qua tiết từ 9 ngày thì dùng cục của tiết
+   kế. Sách (quyển 708, «閏奇超神接氣直指») thì đếm liên tục mỗi nguyên 5 ngày từ phù đầu, để phù đầu vượt dần lên trước tiết
+   (siêu thần), tới Mang chủng hoặc Đại tuyết mà vượt từ 9 ngày thì lặp lại ba nguyên của tiết ấy (nhuận), sau đó thành
+   tiếp khí. Em làm theo sách; hai lối chỉ có thể lệch nhau một tiết và test khoá đúng điều đó. Hệ quả: **phép trí nhuận
+   mới chỉ được xác nhận bằng ví dụ của sách và các bất biến** (độ vượt −7…14 ngày, 80–100 lần đặt nhuận trong 250 năm),
+   chưa có bộ đối chiếu độc lập → khi hiện cho người dùng sẽ ghi là phép cổ, chưa đối chiếu ngoài.
+2. **Tên hai thần.** Âm độn bộ đối chiếu gọi Bạch Hổ, Huyền Vũ; bảng của sách gọi Câu Trần, Chu Tước ở cả hai độn. Engine
+   theo sách và trả kèm `than_ten_khac` để giao diện ghi chú «có sách gọi là Bạch Hổ / Huyền Vũ».
+3. **Thiên Cầm.** Bộ đối chiếu ghi Nhuế và Cầm chung một ô (có khi ghi «禽» thay «芮»); engine ghi Thiên Nhuế + cờ
+   `kem_cam` và can của cung giữa ở `thien_ban_ky`.
+4. **Bàn đứng yên có can giờ ở cung giữa** (trực phù là Nhuế / Cầm, can giờ nằm cung giữa → gửi Khôn): bộ đối chiếu để chín
+   sao đứng yên nhưng lại xoay can thiên bàn — tự mâu thuẫn, vì can thiên bàn đi theo sao. Engine để cả bàn đứng yên.
+5. **Giờ.** Bốn ca (ba ca đúng 05:00, một ca 11:45) bộ đối chiếu ra giờ Dần / Tỵ, trong khi cùng giờ đồng hồ ấy ở ngày khác
+   nó ra Mão / Ngọ. Engine: 05:00 là giờ Mão, 11:45 là giờ Ngọ.
+6. **Đổi ngày lúc 23 giờ.** Bộ đối chiếu luôn tính 23:00 sang ngày hôm sau (`gio_ty = sang_ngay`). Engine có cả hai quy ước;
+   mặc định `da_ty` (ngày giữ nguyên, giờ là Tý của ngày sau) cho khớp Bát tự của hệ thống — mục cần anh chốt khi lên
+   giao diện (đề xuất: giữ mặc định như Bát tự, có công tắc trong khung Trường phái).
+
+### 7.3 Đề xuất phép định cục mặc định
+
+**Sách bổ** làm mặc định: trùng 100 % với bộ đối chiếu, là phép phần mềm ngày nay dùng nhiều nhất, và cục luôn đi theo
+tiết khí thật (người dùng dễ kiểm). **Trí nhuận** là công tắc trong khung Trường phái, ghi rõ là phép sách cổ trình bày.
+Khi anh gửi Ngự Định Kỳ Môn Bảo Giám (có bảng mẫu theo năm), em đối chiếu thêm phép trí nhuận.
+

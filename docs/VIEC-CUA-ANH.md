@@ -9,7 +9,8 @@
 
 - [ ] Gửi lên Drive sách ở mục 4 của tài liệu (PDF bôi đen được chữ / tệp chữ, mỗi tệp dưới 10 MB), ưu tiên: **Ngự Định Kỳ Môn Bảo Giám** · **Kỳ Môn Độn Giáp Thống Tông** bản phồn thể có ghi bản in · Bí Kíp Đại Toàn chữ Hán · Cảnh Hựu Độn Giáp Phù Ứng Kinh bản đủ.
 - [x] (Đã duyệt 18/11/2026) Dùng `kinqimen` làm bộ đối chiếu sinh golden — không chạy runtime, không thêm dependency; chỗ nó làm khác sách thì ghi chú diễn giải (`docs/KY-MON-NGUON.md` mục 7).
-- [ ] (Quyết định, sau khi em báo kết quả KM-1) Phép định cục mặc định: trí nhuận hay sách bổ.
+- [ ] (Quyết định — KM-1 đã có kết quả, `docs/KY-MON-NGUON.md` mục 7) Phép định cục mặc định: em đề xuất **sách bổ** (trùng 400/400 với bộ đối chiếu), trí nhuận là công tắc Trường phái. Anh không nói gì thì em giữ đề xuất này.
+- [ ] (Quyết định) Giờ 23:00–23:59 của Kỳ Môn: giữ như Bát tự (ngày giữ nguyên, giờ Tý của ngày sau) hay đổi ngày lúc 23 giờ như phần lớn phần mềm Kỳ Môn. Em đề xuất giữ như Bát tự + công tắc.
 
 ### 4aw. LH-1 — "Luận theo câu hỏi" cho Luận giải Tử vi (2026-11-17, `docs/LUAN-GIAI-DOI-SONG.md` mục 11)
 
