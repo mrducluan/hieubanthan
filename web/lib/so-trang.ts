@@ -267,11 +267,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   } },
   // Hub Huyền học (trước 2026-10-27 là /kham-pha "Khám phá" — 308 về đây, lib/chuyen-huong.json).
   { duong: "/huyen-hoc", nhom: "tinh", ten: "Huyền học", o: O_TINH, mac_dinh: { chu: CHU_HUYEN_HOC, hinh: HINH_HUYEN_HOC,
-    tieu_de_seo: "Huyền học là gì? Bảy môn huyền học xem online miễn phí",
-    mo_ta_seo: "Huyền học và thần số học trong một hồ sơ: lá số Tử vi, Bát tự, quẻ Kinh Dịch, phong thuỷ nhà ở, nhân tướng, Tarot. Tính minh bạch, có nguồn, miễn phí.",
-    h1: "Huyền học — bảy cách nhìn lại mình",
+    tieu_de_seo: "Huyền học là gì? Tám môn huyền học xem online miễn phí",
+    mo_ta_seo: "Huyền học và thần số học trong một hồ sơ: lá số Tử vi, Bát tự, quẻ Kinh Dịch, phong thuỷ, nhân tướng, Tarot, Kỳ Môn Độn Giáp. Minh bạch, có nguồn, miễn phí.",
+    h1: "Huyền học — tám cách nhìn lại mình",
     // AIO: câu đầu định nghĩa thẳng "huyền học là gì" (≤ 45 chữ) để máy tìm kiếm / AI trích nguyên câu.
-    loi_dan: "Huyền học là những hệ thống người xưa dùng để đọc nhịp của con người và thời gian — qua con số, ngày giờ sinh, quẻ dịch, nơi ở, gương mặt và lá bài. Thần số học là cửa vào nhanh nhất; Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng đi sâu hơn; Tarot nhìn lại một việc cụ thể. Cả bảy dùng chung một hồ sơ, tính từng bước, có nguồn sách.",
+    loi_dan: "Huyền học là những hệ thống người xưa dùng để đọc nhịp của con người và thời gian — qua con số, ngày giờ sinh, quẻ dịch, nơi ở, gương mặt, lá bài, giờ và hướng. Thần số học là cửa vào nhanh nhất; Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng đi sâu hơn; Tarot nhìn lại một việc cụ thể; Kỳ Môn chọn giờ, chọn hướng trong ngày. Mảng nào cần ngày sinh thì dùng chung một hồ sơ; mọi mảng tính từng bước, có nguồn sách.",
   } },
   // NAM-1 (2026-10-30): mục lục năm + mục lục lịch âm (trước 404).
   { duong: "/nam", nhom: "tinh", ten: "Xem theo năm", o: O_TINH, mac_dinh: {
@@ -288,6 +288,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     tieu_de_seo: "Xem chỉ tay: sách tướng xưa và chỉ tay phương Tây", h1: "Xem chỉ tay theo sách xưa",
     mo_ta_seo: "Tự soi bàn tay theo Thần Tướng Toàn Biên (tám cung, hơn 60 hình vân) hoặc theo chỉ tay phương Tây của Cheiro, Benham (dáng tay, các gò, đường chỉ). Ảnh không rời máy.",
     loi_dan: "Chụp lòng bàn tay (ảnh không rời máy) để thấy tám cung trên tay mình, hoặc ngửa tay ra chỗ sáng, chọn hình vân giống tay mình để đọc sách xưa nói gì. Muốn xem theo lối phương Tây (dáng tay, các gò, đường chỉ) thì đổi trường phái ngay dưới.",
+  } },
+  { duong: "/ky-mon", nhom: "tinh", ten: "Kỳ Môn Độn Giáp", o: O_TINH, mac_dinh: {   // KM-2: bàn theo giờ
+    tieu_de_seo: "Kỳ Môn Độn Giáp: giờ này nên đi hướng nào?", h1: "Kỳ Môn Độn Giáp: giờ này nên đi hướng nào?",
+    mo_ta_seo: "Lập bàn Kỳ Môn Độn Giáp theo giờ, miễn phí: tám hướng của giờ này hướng nào thuận, hợp gặp gỡ, ký kết, đi xa hay nộp hồ sơ; giờ tốt trong ngày cho việc bạn định làm. Có giải nghĩa và câu sách xưa.",
+    loi_dan: "Mỗi hai tiếng, tám hướng quanh bạn đổi vai một lần. Xem giờ này hướng nào thuận, hợp việc gì, và hôm nay giờ nào hợp việc bạn định làm.",
   } },
   { duong: "/lich-am", nhom: "tinh", ten: "Lịch âm các năm", o: O_TINH, mac_dinh: {
     tieu_de_seo: "Lịch âm các năm: Tết, tháng nhuận, mùng 1 và rằm", h1: "Lịch âm các năm: Tết ngày nào, năm nào nhuận?",

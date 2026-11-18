@@ -16,6 +16,7 @@ from pathlib import Path
 
 NGUON = Path(__file__).resolve().parent.parent / "fixtures" / "nguon"
 NGAY = "2026-11-17"
+NGAY_RIENG = {"don_giap_dien_nghia": "2026-11-18"}   # sách nạp sau đợt TK-1
 BO = {
     "tam_menh_thong_hoi_du_bo": [("KR3g0042", "三命通會", "Tam Mệnh Thông Hội", "Vạn Dân Anh (Minh)")],
     "menh_ly_duong_tong": [
@@ -25,9 +26,12 @@ BO = {
     "tieu_thi_dich_lam": [("KR3g0029", "焦氏易林", "Tiêu Thị Dịch Lâm", "Tiêu Diên Thọ (Hán)")],
     "hiep_ky_bien_phuong_thu_du_bo": [("KR3g0051", "協紀辨方書", "Hiệp Kỷ Biện Phương Thư", "Doãn Lộc và các quan Khâm Thiên Giám (Thanh, 1739)")],
     "tinh_lich_khao_nguyen": [("KR3g0050", "御定星歷考原", "Tinh Lịch Khảo Nguyên", "Lý Quang Địa (Thanh, 1713)")],
+    # KM-0 (2026-11-18): Kỳ Môn Độn Giáp
+    "don_giap_dien_nghia": [("KR3g0048", "遁甲演義", "Độn Giáp Diễn Nghĩa", "Trình Đạo Sinh (Minh)")],
 }
 TRUONG = {"tieu_thi_dich_lam": ("kinh_dich", "sách Dịch chiêm"), "hiep_ky_bien_phuong_thu_du_bo": ("hiep_ky", "sách chọn ngày, thần sát"),
-          "tinh_lich_khao_nguyen": ("hiep_ky", "sách chọn ngày, thần sát")}
+          "tinh_lich_khao_nguyen": ("hiep_ky", "sách chọn ngày, thần sát"),
+          "don_giap_dien_nghia": ("ky_mon", "sách Kỳ Môn Độn Giáp")}
 
 
 def _tai(u: str) -> str | None:
@@ -74,7 +78,7 @@ def main() -> None:
             continue
         sach, thien = nap(ds)
         out = {"_nguon": "、".join(s["ten_han"] for s in sach.values()) + f" — {TRUONG.get(ma, ('', 'sách mệnh lý (Bát tự)'))[1]}. Cổ thư công cộng.",
-               "ban": f"Kanseki Repository (github.com/kanripo/{ds[0][0]}…), bản Văn Uyên Các Tứ khố toàn thư (WYG), lấy {NGAY} "
+               "ban": f"Kanseki Repository (github.com/kanripo/{ds[0][0]}…), bản Văn Uyên Các Tứ khố toàn thư (WYG), lấy {NGAY_RIENG.get(ma, NGAY)} "
                       "— bản gõ lại, không chấm câu, chú chữ nhỏ viết liền; CHƯA đối chiếu bản chụp",
                "can_doi_chieu": True, "source_id": ma, "school_id": TRUONG.get(ma, ("tu_binh",))[0], "sach": sach, "thien": thien}
         (NGUON / f"{ma}.json").write_text(json.dumps(bo_dau_cau(out), ensure_ascii=False, indent=1) + "\n", "utf-8")

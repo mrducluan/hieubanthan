@@ -16,15 +16,16 @@ export const DUONG_TRONG_SITE = /^\/(?![/\\])[^\s\\]*$/;   // chặn //x và /\x
 export const MENU_MAC_DINH: { ten: string; lien_ket: { nhan: string; duong_dan: string }[] }[] = [
   { ten: "Huyền học", lien_ket: [
     ["/than-so", "Thần số học"], ["/tu-vi", "Tử vi"], ["/bat-tu", "Bát tự"], ["/kinh-dich", "Kinh Dịch"],
-    ["/phong-thuy", "Phong thuỷ"], ["/hop-doi", "Hợp đôi"], ["/huyen-hoc", "Tất cả các mảng"],
+    ["/phong-thuy", "Phong thuỷ"], ["/nhan-tuong", "Nhân tướng học"], ["/tarot", "Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"],
+    ["/hop-doi", "Hợp đôi"], ["/huyen-hoc", "Tất cả các mảng"],
     ["/hom-nay", "Hôm nay của bạn"], ["/thoi-gian-toi", "Thời gian tới của bạn"], ["/nam", "Xem theo năm"],
-    ["/xem-ngay-tot", "Xem ngày tốt"], ["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"], ["/tuoi-xong-dat", "Tuổi xông đất"],
-    ["/xem-sao-han", "Sao hạn theo tuổi"], ["/doi-lich-am-duong", "Đổi lịch âm dương"],
+    ["/xem-ngay-tot", "Xem ngày tốt"], ["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"],
   ].map(([duong_dan, nhan]) => ({ nhan: nhan!, duong_dan: duong_dan! })) },
   { ten: "Kiến thức", lien_ket: [
     ["/kien-thuc", "Thư viện kiến thức"], ["/than-so/y-nghia-so", "Ý nghĩa các con số"], ["/kinh-dich/que", "64 quẻ Kinh Dịch"],
-    ["/tu-vi/chinh-tinh", "14 chính tinh Tử vi"], ["/tu-dien", "Từ điển thuật ngữ"], ["/tu-vi/la-so-mau", "Lá số mẫu"],
-    ["/phong-thuy/huong-hop-tuoi", "Hướng hợp tuổi"], ["/hop-doi/cap-so", "Số chủ đạo hợp nhau"], ["/blog", "Blog"],
+    ["/tu-vi/chinh-tinh", "14 chính tinh Tử vi"], ["/tarot/la-bai", "78 lá bài Tarot"], ["/tu-dien", "Từ điển thuật ngữ"], ["/tu-vi/la-so-mau", "Lá số mẫu"],
+    ["/phong-thuy/huong-hop-tuoi", "Hướng hợp tuổi"], ["/hop-doi/cap-so", "Số chủ đạo hợp nhau"], ["/tuoi-xong-dat", "Tuổi xông đất"],
+    ["/xem-sao-han", "Sao hạn theo tuổi"], ["/doi-lich-am-duong", "Đổi lịch âm dương"], ["/blog", "Blog"],
   ].map(([duong_dan, nhan]) => ({ nhan: nhan!, duong_dan: duong_dan! })) },
   { ten: "Về chúng tôi", lien_ket: [
     ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia", "Đội ngũ biên soạn"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"],
@@ -38,7 +39,7 @@ export const MENU_MAC_DINH: { ten: string; lien_ket: { nhan: string; duong_dan: 
 
 /** Chữ chân trang đang chạy trong code (trùng web/lib/menu-chan-trang.ts — e2e/so-lieu-ngoai.spec.ts kiểm). */
 export const CHAN_TRANG_MAC_DINH = {
-  gioi_thieu: "Năm hệ thống văn hoá — thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ — trong một hồ sơ. Cách tính minh bạch, nguồn rõ ràng, để tự soi chứ không để phán.",
+  gioi_thieu: "Thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot, Kỳ Môn — trong một hồ sơ. Cách tính minh bạch, nguồn rõ ràng, để tự soi chứ không để phán.",
   cam_ket: [
     { chu: "Hồ sơ mặc định chỉ lưu trên máy bạn", bieu_tuong: "khien" },
     { chu: "Lá số tính trên hệ thống riêng; họ tên, ngày sinh không chuyển cho bên thứ ba", bieu_tuong: "may_chu" },

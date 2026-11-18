@@ -1,0 +1,160 @@
+{
+  "_nguon": "Kho chuyển nghĩa: khái niệm trong sách xưa (ra quân, giữ thành, săn bắt, dâng thư…) và nghĩa tương đồng trong đời sống ngày nay theo từng lĩnh vực. Câu trích là nguyên văn kho nguồn; nghĩa đời nay do ban biên tập viết (nháp, chờ chuyên gia duyệt).",
+  "_trang_thai": "nhap",
+  "source_id": "chuyen_nghia",
+  "school_id": "chung",
+  "can_doi_chieu": true,
+  "_cach_dung": "Một khái niệm cổ có thể đọc theo nhiều lĩnh vực; nơi gọi chọn lĩnh vực theo câu hỏi hoặc theo việc người dùng chọn. Lời đời nay chỉ nói việc nên làm, không hứa kết quả, không bày cách hại người khác.",
+  "linh_vuc": {
+    "kinh_doanh": "Kinh doanh",
+    "ca_nhan": "Đời sống cá nhân",
+    "gia_dinh": "Gia đình",
+    "tien_bac": "Tiền bạc",
+    "cong_danh": "Công danh",
+    "suc_khoe": "Sức khoẻ",
+    "con_cai": "Con cái",
+    "nghe_nghiep": "Nghề nghiệp",
+    "hoc_hanh": "Học hành",
+    "ke_hoach": "Định hướng, lập kế hoạch"
+  },
+  "ranh_gioi": {
+    "chung": "Đây là cách người xưa chọn thời điểm, đọc để tham khảo; quyết định vẫn là của bạn.",
+    "kinh_doanh": "Cạnh tranh bằng sản phẩm, giá trị và dịch vụ; không phải lời khuyên đầu tư hay pháp lý.",
+    "tien_bac": "Không phải lời khuyên đầu tư; khoản lớn nên hỏi người có chuyên môn.",
+    "suc_khoe": "Không thay lời bác sĩ; thấy cơ thể khác thường thì đi khám.",
+    "cong_danh": "Kết quả còn tuỳ năng lực và người xét duyệt.",
+    "hoc_hanh": "Kết quả thi còn tuỳ việc ôn luyện."
+  },
+  "khai_niem": {
+    "chinh_thao": {
+      "ten_co": "Chinh thảo — ra quân đi xa",
+      "nghia": "Người xưa chọn giờ, chọn hướng để đem quân ra ngoài, tiến tới chỗ mới. Ngày nay là lúc chủ động bước ra: tìm khách mới, nơi mới, cơ hội mới.",
+      "sach": {"han": "開門宜遠行征討所向通達", "am": "Khai môn nghi viễn hành chinh thảo, sở hướng thông đạt", "y": "Cửa Khai hợp đi xa và việc cần tiến tới; hướng về đâu cũng thông.", "nhom": "A", "chu_de": "cong_viec", "nguon": "ky_mon_co_kim_do_thu"},
+      "ung_dung": {
+        "kinh_doanh": "Mở thị trường mới, chào hàng khách mới, mở chi nhánh, nộp hồ sơ dự thầu.",
+        "cong_danh": "Ứng tuyển vị trí cao hơn, nhận một dự án khó để người khác thấy năng lực của mình.",
+        "nghe_nghiep": "Bước sang ngành hay công việc mới mà bạn đã chuẩn bị kỹ.",
+        "hoc_hanh": "Đi thi, dự tuyển, nộp hồ sơ du học.",
+        "tien_bac": "Tìm thêm một nguồn thu mới từ việc mình làm được.",
+        "ke_hoach": "Làm bước đầu tiên của kế hoạch đã chín: gọi cuộc gọi đầu, gửi email đầu."
+      },
+      "tu_hien_dai": ["mở rộng thị trường", "thị trường mới", "mở chi nhánh", "chào hàng", "khách hàng mới", "đấu thầu", "dự thầu", "mở rộng kinh doanh", "xuất khẩu", "khởi nghiệp"]
+    },
+    "tri_binh": {
+      "ten_co": "Trị binh tập nghiệp — chỉnh đốn quân, luyện nghề",
+      "nghia": "Người xưa dùng giờ yên để gom quân, sắp lại hàng ngũ, tập luyện. Ngày nay là lúc sắp xếp lại bên trong: đội ngũ, quy trình, kỹ năng.",
+      "sach": {"han": "休門宜集萬事治兵習業", "am": "Hưu môn nghi tập vạn sự trị binh tập nghiệp", "y": "Cửa Hưu hợp gom việc lại, chỉnh đốn đội ngũ và luyện nghề.", "nhom": "A", "chu_de": "cong_viec", "nguon": "ky_mon_co_kim_do_thu"},
+      "ung_dung": {
+        "kinh_doanh": "Họp toàn đội, đào tạo nhân viên, viết lại quy trình, chia lại việc cho đúng người.",
+        "nghe_nghiep": "Học thêm một kỹ năng của nghề, lấy chứng chỉ còn thiếu.",
+        "hoc_hanh": "Ôn luyện có kế hoạch, sắp lại thời gian biểu học.",
+        "gia_dinh": "Họp mặt gia đình, chia lại việc nhà cho hợp sức từng người.",
+        "ca_nhan": "Nghỉ ngơi lấy lại sức, dọn lại góc làm việc và lịch của mình.",
+        "suc_khoe": "Tập đều một môn vận động vừa sức, ngủ đủ giấc."
+      },
+      "tu_hien_dai": ["đào tạo nhân viên", "chỉnh đốn", "quy trình", "họp đội", "tái cấu trúc", "sắp xếp lại", "tuyển thêm người", "ôn thi", "học thêm"]
+    },
+    "kien_quy": {
+      "ten_co": "Kiến quý nhân, doanh tạo — gặp người trên, khởi dựng",
+      "nghia": "Người xưa chọn giờ này để gặp người có quyền, có của và bắt đầu dựng nhà cửa, công trình. Ngày nay là lúc gặp người có thể giúp mình và bắt đầu xây một việc lâu dài.",
+      "sach": {"han": "生門宜見人營造求財獲寶", "am": "Sinh môn nghi kiến nhân doanh tạo cầu tài hoạch bảo", "y": "Cửa Sinh hợp gặp người, khởi dựng việc và cầu tài.", "nhom": "A", "chu_de": "tien_bac", "nguon": "ky_mon_co_kim_do_thu"},
+      "ung_dung": {
+        "kinh_doanh": "Gặp nhà đầu tư, đối tác lớn, khách hàng quan trọng; khởi công cửa hàng, xưởng, văn phòng.",
+        "cong_danh": "Gặp cấp trên để trình bày kế hoạch hoặc đề xuất tăng trách nhiệm.",
+        "tien_bac": "Bàn chuyện vốn, vay vốn, mở tài khoản tiết kiệm.",
+        "gia_dinh": "Gặp gỡ hai bên gia đình, bàn chuyện nhà cửa.",
+        "nghe_nghiep": "Tìm một người thầy hay người dẫn đường trong nghề.",
+        "ke_hoach": "Đặt nền cho một việc dài hơi: mở quỹ, khởi công, đăng ký kinh doanh."
+      },
+      "tu_hien_dai": ["gặp nhà đầu tư", "gọi vốn", "gặp đối tác", "gặp sếp", "xin tăng lương", "xin thăng chức", "vay vốn", "khai trương", "khởi công", "mở cửa hàng"]
+    },
+    "ngu_liep": {
+      "ten_co": "Ngư liệp bổ thảo — săn bắt, đuổi theo",
+      "nghia": "Người xưa dành giờ này cho việc săn, đánh bắt, đuổi theo kẻ bỏ trốn. Ngày nay là việc chạy theo một mục tiêu ngắn ngày và thu về phần của mình.",
+      "sach": {"han": "傷門宜漁獵捕討行逢盜賊", "am": "Thương môn nghi ngư liệp bổ thảo, hành phùng đạo tặc", "y": "Cửa Thương hợp việc săn đuổi, thu về; sách cũng dặn đi đường dễ gặp kẻ xấu.", "nhom": "B", "chu_de": "tien_bac", "nguon": "ky_mon_co_kim_do_thu", "ham_y": "Nên chú ý giữ tiền và giấy tờ khi ra ngoài, cảnh giác với lời mời chào bất thường.", "viec": "Kiểm lại tên người nhận trước khi chuyển khoản."},
+      "ung_dung": {
+        "kinh_doanh": "Thu hồi công nợ, chạy doanh số ngắn ngày, chốt nốt các đơn còn treo.",
+        "tien_bac": "Nhắc khoản người khác còn nợ, rà lại các khoản chi bị rò.",
+        "ca_nhan": "Dọn các việc tồn đọng, làm dứt điểm một việc đã hẹn lâu.",
+        "suc_khoe": "Tập luyện cường độ cao vừa sức, khởi động kỹ trước khi tập."
+      },
+      "tu_hien_dai": ["đòi nợ", "thu hồi công nợ", "thu nợ", "chạy doanh số", "chốt đơn", "săn khách", "săn sale"]
+    },
+    "an_phuc": {
+      "ten_co": "Yêu già ẩn phục — chặn đường, mai phục",
+      "nghia": "Người xưa dùng giờ này để giấu quân, chặn đường đối phương. Ngày nay là lúc giữ kín, chuẩn bị trong im lặng và giữ chỗ đứng của mình.",
+      "sach": {"han": "杜門宜邀遮隱伏誅伐凶逆", "am": "Đỗ môn nghi yêu già ẩn phục, tru phạt hung nghịch", "y": "Cửa Đỗ hợp chặn lại, ẩn mình, xử việc ngang trái.", "nhom": "B", "chu_de": "cong_viec", "nguon": "ky_mon_co_kim_do_thu", "ham_y": "Nên chú ý giữ kín kế hoạch chưa xong; nói sớm dễ bị người khác đi trước.", "viec": "Ghi rõ ai đã được biết kế hoạch, ai chưa cần biết."},
+      "ung_dung": {
+        "kinh_doanh": "Chuẩn bị sản phẩm mới trong kín đáo, bảo vệ bí mật kinh doanh, giữ chắc khách và thị phần đang có trước đối thủ.",
+        "ca_nhan": "Làm việc sâu, tắt thông báo, chưa công bố điều đang làm dở.",
+        "hoc_hanh": "Học một mình ở chỗ yên tĩnh, tránh xao nhãng.",
+        "ke_hoach": "Hoàn thiện kế hoạch cho chắc rồi mới công bố."
+      },
+      "tu_hien_dai": ["giữ bí mật", "chuẩn bị kín", "bảo vệ thị phần", "giữ chân khách", "bí mật kinh doanh", "chưa công bố"]
+    },
+    "thuong_thu": {
+      "ten_co": "Thượng thư, đột trận phá vây — dâng thư, phá vòng vây",
+      "nghia": "Người xưa dùng giờ này để dâng thư lên trên, cử sứ giả đi, và đánh thủng vòng vây. Ngày nay là lúc lên tiếng, trình bày, đưa sản phẩm ra công chúng và tìm lối thoát khi đang bế tắc.",
+      "sach": {"han": "景門宜上書遣使突陣破圍", "am": "Cảnh môn nghi thượng thư khiển sứ, đột trận phá vi", "y": "Cửa Cảnh hợp dâng thư, cử người đi và phá thế bị vây.", "nhom": "B", "chu_de": "giay_to", "nguon": "ky_mon_co_kim_do_thu", "ham_y": "Người xưa dặn việc lên tiếng phải có chuẩn bị; nên chú ý chuẩn bị số liệu và câu trả lời trước khi công bố.", "viec": "Viết ba ý chính muốn người nghe nhớ, đọc to một lần trước khi gửi."},
+      "ung_dung": {
+        "kinh_doanh": "Ra mắt sản phẩm, chạy chiến dịch quảng bá, gửi đề xuất cho khách lớn, đổi cách bán khi thị trường đang chững.",
+        "cong_danh": "Trình đề án, nộp báo cáo, xin ý kiến cấp trên bằng văn bản.",
+        "nghe_nghiep": "Gửi hồ sơ xin việc, đăng hồ sơ năng lực.",
+        "hoc_hanh": "Nộp bài, bảo vệ luận văn, thuyết trình.",
+        "ca_nhan": "Nói ra điều mình cần một cách rõ ràng, thay vì chờ người khác đoán."
+      },
+      "tu_hien_dai": ["ra mắt sản phẩm", "ra mắt", "quảng cáo", "quảng bá", "marketing", "truyền thông", "nộp hồ sơ", "gửi đề xuất", "thuyết trình", "bế tắc", "đổi mới"]
+    },
+    "dau_tung": {
+      "ten_co": "Yểm bổ đấu tụng — bất ngờ, tranh tụng, tấn công",
+      "nghia": "Người xưa dành giờ này cho việc đánh úp, tranh cãi ở cửa quan. Ngày nay là lúc va chạm trực diện: cạnh tranh gay gắt, tranh chấp, xử lý việc gây xôn xao.",
+      "sach": {"han": "驚門宜掩捕鬥訟攻擊驚恐", "am": "Kinh môn nghi yểm bổ đấu tụng công kích kinh khủng", "y": "Cửa Kinh hợp việc bắt bất ngờ, tranh tụng, làm đối phương giật mình.", "nhom": "B", "chu_de": "giay_to", "nguon": "ky_mon_co_kim_do_thu", "ham_y": "Đây là cửa của va chạm; nên chú ý giữ bình tĩnh và lấy lý, lấy giá trị để hơn người, đừng để mình bị cuốn vào cãi vã.", "viec": "Trước khi lên tiếng, viết ra ba điểm mình làm tốt hơn đối phương."},
+      "ung_dung": {
+        "kinh_doanh": "Cạnh tranh trực diện bằng chất lượng và giá trị, phản hồi khi bị so sánh, xử lý tranh chấp hợp đồng có luật sư bên cạnh.",
+        "cong_danh": "Bảo vệ ý kiến của mình trong cuộc họp bằng số liệu.",
+        "ca_nhan": "Nói rõ ranh giới của mình khi bị lấn, nói thẳng nhưng không lớn tiếng."
+      },
+      "tu_hien_dai": ["cạnh tranh", "đối thủ", "thắng đối thủ", "giành khách", "tranh chấp", "kiện", "khủng hoảng truyền thông", "bị so sánh"]
+    },
+    "thu_thanh": {
+      "ten_co": "Đồn binh tự cố — đóng quân giữ thành",
+      "nghia": "Người xưa có giờ để đóng quân giữ chắc chỗ mình, giấu dấu vết. Ngày nay là lúc phòng thủ: giữ khách cũ, giữ dòng tiền, chưa mở rộng.",
+      "sach": {"han": "天柱宜屯兵自固隱跡埋形", "am": "Thiên Trụ nghi đồn binh tự cố, ẩn tích mai hình", "y": "Giờ gặp sao Thiên Trụ hợp đóng quân giữ chắc chỗ mình, ẩn dấu vết.", "nhom": "A", "chu_de": "tien_bac", "nguon": "ky_mon_co_kim_do_thu"},
+      "ung_dung": {
+        "kinh_doanh": "Chăm khách cũ, giữ chất lượng, cắt khoản chi chưa cần, để dành vốn khi thị trường xấu.",
+        "tien_bac": "Giữ một khoản dự phòng, hoãn khoản chi lớn chưa gấp.",
+        "gia_dinh": "Vun vén trong nhà, ở bên người thân nhiều hơn.",
+        "ke_hoach": "Giữ nhịp hiện tại, chưa thêm việc mới."
+      },
+      "tu_hien_dai": ["giữ khách cũ", "phòng thủ", "giữ tiền", "thị trường xấu", "tiết kiệm", "cắt giảm chi phí", "giữ vững"]
+    },
+    "gianh_lai": {
+      "ten_co": "Xuất báo cừu — ra quân đòi lại",
+      "nghia": "Người xưa có giờ để ra quân lấy lại điều đã mất. Ngày nay là lúc làm lại việc từng hỏng, giành lại khách hay phần việc đã để mất — bằng việc làm tốt hơn, không nhắm vào người.",
+      "sach": {"han": "天衝宜出報仇", "am": "Thiên Xung nghi xuất báo cừu", "y": "Giờ gặp sao Thiên Xung hợp ra quân lấy lại điều đã mất.", "nhom": "A", "chu_de": "cong_viec", "nguon": "ky_mon_co_kim_do_thu"},
+      "ung_dung": {
+        "kinh_doanh": "Liên lạc lại khách cũ đã rời đi, sửa đúng chỗ khiến họ không hài lòng.",
+        "cong_danh": "Thử lại vị trí, kỳ xét duyệt đã trượt, sau khi bù chỗ còn thiếu.",
+        "hoc_hanh": "Thi lại môn chưa qua với cách ôn khác.",
+        "ca_nhan": "Làm lại một thói quen tốt đã bỏ dở."
+      },
+      "tu_hien_dai": ["giành lại thị phần", "lấy lại khách", "làm lại", "thi lại", "khách cũ quay lại"]
+    },
+    "ket_thuc": {
+      "ten_co": "Hành hình, điếu tống — xử phạt, tiễn đưa",
+      "nghia": "Người xưa dành giờ này cho việc xử phạt và việc tiễn đưa người đã khuất. Ngày nay là lúc khép lại: kết thúc việc đã hết đường, thanh lý, nói lời chia tay cho đàng hoàng.",
+      "sach": {"han": "死門宜行刑誅戮弔死送葬", "am": "Tử môn nghi hành hình tru lục, điếu tử tống táng", "y": "Cửa Tử người xưa dành cho việc xử phạt và việc tiễn đưa.", "nhom": "B", "chu_de": "cong_viec", "nguon": "ky_mon_co_kim_do_thu", "ham_y": "Nên chú ý đây là giờ của việc khép lại, không phải giờ để bắt đầu việc mới.", "viec": "Viết ra một việc cần khép lại cho gọn trong tuần này."},
+      "ung_dung": {
+        "kinh_doanh": "Dừng dự án lỗ kéo dài, thanh lý hàng tồn, đóng một điểm bán không hiệu quả.",
+        "tien_bac": "Tất toán khoản vay nhỏ, đóng tài khoản không dùng.",
+        "ca_nhan": "Khép lại một mối quan hệ hay thói quen đã làm mình mệt, cho đàng hoàng."
+      },
+      "tu_hien_dai": ["dừng dự án", "đóng cửa hàng", "thanh lý", "cắt lỗ", "kết thúc hợp đồng", "nghỉ việc"]
+    }
+  },
+  "nguyen_tac": {
+    "ten_co": "Tòng sinh kích tử — đứng ở cửa Sinh mà tiến vào cửa Tử",
+    "nghia": "Sách dặn đứng ở chỗ mạnh của mình mà tiến vào chỗ yếu của đối phương. Ngày nay: cạnh tranh ở chỗ mình giỏi nhất, đừng đối đầu ở chỗ người khác mạnh hơn.",
+    "sach": {"han": "從生擊死", "am": "Tòng sinh kích tử", "y": "Đứng ở phía cửa Sinh mà tiến về phía cửa Tử: dựa vào thế mạnh của mình mà đi.", "nhom": "B", "chu_de": "cong_viec", "nguon": "ky_mon_co_kim_do_thu", "ham_y": "Nên chú ý chọn chỗ mình mạnh để tiến, không đối đầu ở chỗ người khác đang mạnh hơn.", "viec": "Ghi ra một điều khách hàng khen mình nhiều nhất và dồn sức vào đó."}
+  }
+}

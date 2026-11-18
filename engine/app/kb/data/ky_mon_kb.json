@@ -1,0 +1,995 @@
+{
+ "_nguon": "Kỳ Môn Độn Giáp — phần Kỳ Môn của Cổ Kim Đồ Thư Tập Thành (1725): Cảnh Hựu Độn Giáp Phù Ứng Kinh (toản), Yên Ba Điếu Tẩu Ca có lời giải. Lời đời thường do ban biên tập viết; câu trích là nguyên văn.",
+ "_trang_thai": "nhap",
+ "source_id": "ky_mon_co_kim_do_thu",
+ "school_id": "ky_mon",
+ "can_doi_chieu": true,
+ "muc": {
+  "thuan": "Thuận",
+  "binh": "Bình thường",
+  "cham": "Nên chậm"
+ },
+ "muc_gio": {
+  "thuan": "Có hướng thuận",
+  "binh": "Bình thường",
+  "cham": "Giờ nên giữ nhịp"
+ },
+ "bac_sao": {
+  "thuong_cat": "sao tốt bậc trên",
+  "thu_cat": "sao tốt vừa",
+  "thu_hung": "sao nên dè dặt",
+  "dai_hung": "sao nên dè dặt nhiều"
+ },
+ "cua": {
+  "khai": {
+   "so": 6,
+   "ten": "Khai",
+   "han": "開門",
+   "hanh": "Kim",
+   "loai": "cat",
+   "tom": "Mở đường",
+   "loi": "Cửa của việc mở đầu: gặp người có tiếng nói, nhận việc, đi xa, khai trương. Việc cần người khác gật đầu thì hợp phía này.",
+   "nen": "Chủ động hẹn gặp, gửi lời đề nghị, bắt đầu việc đã chuẩn bị xong.",
+   "tranh": "Đừng dùng cho việc cần giữ kín.",
+   "sach": {
+    "han": "開門宜遠行征討所向通達",
+    "am": "Khai môn nghi viễn hành chinh thảo, sở hướng thông đạt",
+    "y": "Cửa Khai hợp đi xa và việc cần tiến tới; hướng về đâu cũng thông.",
+    "nhom": "A",
+    "chu_de": "di_lai",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "huu": {
+   "so": 1,
+   "ten": "Hưu",
+   "han": "休門",
+   "hanh": "Thuỷ",
+   "loai": "cat",
+   "tom": "Nghỉ và hoà",
+   "loi": "Cửa của nghỉ ngơi và hoà khí: họp mặt, giảng hoà, gặp người trên trong không khí nhẹ, học và luyện tập.",
+   "nen": "Hẹn cà phê, nói chuyện cho ấm lại, ôn bài, sắp xếp lại kế hoạch.",
+   "tranh": "Việc cần tốc độ và cạnh tranh gắt thì không phải lúc.",
+   "sach": {
+    "han": "休門宜集萬事治兵習業",
+    "am": "Hưu môn nghi tập vạn sự, trị binh tập nghiệp",
+    "y": "Cửa Hưu hợp gom việc lại, chỉnh đốn đội ngũ và luyện nghề.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "sinh": {
+   "so": 8,
+   "ten": "Sinh",
+   "han": "生門",
+   "hanh": "Thổ",
+   "loai": "cat",
+   "tom": "Sinh lợi",
+   "loi": "Cửa của sinh sôi: buôn bán, ký kết, bàn chuyện tiền, gặp người giúp được mình, khởi công.",
+   "nen": "Chốt đơn, bàn giá, mở hàng, gặp người có thể đỡ đầu cho việc của bạn.",
+   "tranh": "Đừng vì thấy thuận mà bỏ bước đọc kỹ giấy tờ.",
+   "sach": {
+    "han": "生門宜見貴人營造百事",
+    "am": "Sinh môn nghi kiến quý nhân, doanh tạo bách sự",
+    "y": "Cửa Sinh hợp gặp người trên và khởi dựng mọi việc.",
+    "nhom": "A",
+    "chu_de": "tien_bac",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "thuong": {
+   "so": 3,
+   "ten": "Thương",
+   "han": "傷門",
+   "hanh": "Mộc",
+   "loai": "hung",
+   "tom": "Dễ va chạm",
+   "loi": "Cửa của sức bật và va chạm: hợp vận động mạnh, thu hồi công nợ, đuổi theo việc dang dở; không hợp việc cần êm.",
+   "nen": "Tập thể thao, nhắc khoản người ta còn nợ, dọn việc tồn.",
+   "tranh": "Tránh thương lượng tế nhị, tránh lái xe vội, tránh lời nặng.",
+   "sach": {
+    "han": "傷門宜漁獵捕討行逢盜賊",
+    "am": "Thương môn nghi ngư liệp bổ thảo, hành phùng đạo tặc",
+    "y": "Cửa Thương hợp việc săn đuổi, thu về; đi đường thì sách dặn giữ của cẩn thận.",
+    "nhom": "B",
+    "chu_de": "di_lai",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý giữ đồ và giữ lời khi đi về phía này.",
+    "viec": "Ra ngoài thì để ví, điện thoại ở túi trong; việc cần bàn nhẹ nhàng dời sang giờ khác."
+   }
+  },
+  "do": {
+   "so": 4,
+   "ten": "Đỗ",
+   "han": "杜門",
+   "hanh": "Mộc",
+   "loai": "binh",
+   "tom": "Khép lại, giữ kín",
+   "loi": "Cửa khép: hợp việc cần yên tĩnh và kín đáo như nghiên cứu, viết, sửa chữa, tránh mặt một cuộc va chạm.",
+   "nen": "Tắt thông báo, làm việc sâu, giữ kế hoạch cho riêng mình thêm một nhịp.",
+   "tranh": "Việc cần nhiều người biết, cần quảng bá, cần xin ý kiến rộng thì khó trôi.",
+   "sach": {
+    "han": "杜門宜邀遮隱伏誅伐凶逆",
+    "am": "Đỗ môn nghi yêu già ẩn phục, tru phạt hung nghịch",
+    "y": "Cửa Đỗ hợp chặn lại, ẩn mình, xử việc ngang trái.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý: phía này hợp giữ và chặn hơn là mở việc mới.",
+    "viec": "Chọn một việc cần tập trung và làm trọn trong giờ này, chưa công bố vội."
+   }
+  },
+  "canh": {
+   "so": 9,
+   "ten": "Cảnh",
+   "han": "景門",
+   "hanh": "Hoả",
+   "loai": "binh",
+   "tom": "Giấy tờ, trình bày",
+   "loi": "Cửa của ánh sáng và chữ nghĩa: nộp hồ sơ, gửi thư, thuyết trình, thi cử, đăng bài. Sáng bề ngoài, nên kiểm lại nội dung.",
+   "nen": "Gửi đơn, gửi bản kế hoạch, trình bày ý tưởng, đi phỏng vấn dạng trình bày.",
+   "tranh": "Chuyện tiền lớn và việc lâu dài chưa nên chốt ở cửa này.",
+   "sach": {
+    "han": "景門宜上書遣士",
+    "am": "Cảnh môn nghi thượng thư khiển sĩ",
+    "y": "Cửa Cảnh hợp dâng thư, trình việc và cử người đi.",
+    "nhom": "A",
+    "chu_de": "giay_to",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "tu": {
+   "so": 2,
+   "ten": "Tử",
+   "han": "死門",
+   "hanh": "Thổ",
+   "loai": "hung",
+   "tom": "Khép việc cũ",
+   "loi": "Cửa tĩnh nhất trong tám cửa: hợp kết thúc, dọn dẹp, viếng người đã khuất, làm việc với đất đai cũ. Không hợp mở việc mới.",
+   "nen": "Dọn tủ, huỷ thứ không dùng, đóng một việc đã kéo dài, thăm mộ.",
+   "tranh": "Tránh khai trương, ký mới, hẹn lần đầu, xuất phát chuyến đi xa.",
+   "sach": {
+    "han": "死門宜行刑誅戮弔死送葬",
+    "am": "Tử môn nghi hành hình tru lục, điếu tử tống táng",
+    "y": "Cửa Tử người xưa dành cho việc xử phạt và việc tiễn đưa.",
+    "nhom": "B",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý: phía này hợp khép lại hơn là bắt đầu.",
+    "viec": "Chọn một việc cũ cần đóng (trả đồ, huỷ gói không dùng, dọn hộp thư) và làm xong trong giờ này."
+   }
+  },
+  "kinh": {
+   "so": 7,
+   "ten": "Kinh",
+   "han": "驚門",
+   "hanh": "Kim",
+   "loai": "hung",
+   "tom": "Dễ giật mình, tranh cãi",
+   "loi": "Cửa của tiếng động và lời qua tiếng lại: hợp rà soát, chất vấn, nói thẳng điều khó; dễ sinh lo và hiểu lầm.",
+   "nen": "Kiểm tra lỗi, rà hợp đồng, tập phản biện.",
+   "tranh": "Tránh báo tin nhạy cảm, tránh quyết định khi đang bực.",
+   "sach": {
+    "han": "驚門宜掩捕鬥訟攻擊驚恐",
+    "am": "Kinh môn nghi yểm bổ đấu tụng, công kích kinh khủng",
+    "y": "Cửa Kinh hợp việc truy bắt, tranh tụng, làm đối phương bất ngờ.",
+    "nhom": "B",
+    "chu_de": "giay_to",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý lời nói và giấy tờ khi làm việc về phía này.",
+    "viec": "Điều quan trọng thì viết ra và đọc lại một lượt trước khi gửi; chuyện tranh chấp thì hỏi luật sư."
+   }
+  }
+ },
+ "sao": {
+  "bong": {
+   "so": 1,
+   "ten": "Thiên Bồng",
+   "han": "天蓬",
+   "hanh": "Thuỷ",
+   "bac": "dai_hung",
+   "tom": "Liều và sâu",
+   "loi": "Sao của sự táo bạo và toan tính sâu. Hợp việc cần gan, nhưng dễ quá tay.",
+   "sach": {
+    "han": "春夏用之軍大勝秋冬用之有災凶",
+    "am": "Xuân hạ dụng chi quân đại thắng, thu đông dụng chi hữu tai hung",
+    "y": "Sao này mùa xuân, hạ dùng thì mạnh; mùa thu, đông thì dễ sinh chuyện.",
+    "nhom": "B",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý giữ chừng mực khi làm việc lớn dưới sao này.",
+    "viec": "Việc có rủi ro thì đặt sẵn mức dừng trước khi bắt đầu."
+   }
+  },
+  "nhue": {
+   "so": 2,
+   "ten": "Thiên Nhuế",
+   "han": "天芮",
+   "hanh": "Thổ",
+   "bac": "dai_hung",
+   "tom": "Học và kết bạn",
+   "loi": "Sao chậm, nặng. Sách xếp vào nhóm nên dè dặt cho việc lớn, nhưng hợp học hỏi và kết giao.",
+   "sach": {
+    "han": "受道結交天芮星",
+    "am": "Thụ đạo kết giao Thiên Nhuế tinh",
+    "y": "Sao Thiên Nhuế hợp việc thụ giáo và kết bạn.",
+    "nhom": "A",
+    "chu_de": "ban_be",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "xung": {
+   "so": 3,
+   "ten": "Thiên Xung",
+   "han": "天衝",
+   "hanh": "Mộc",
+   "bac": "thu_cat",
+   "tom": "Bứt lên",
+   "loi": "Sao của hành động nhanh và dứt khoát. Hợp việc cần ra tay sớm.",
+   "sach": {
+    "han": "天衝之宿星之英用時逢此主昌榮",
+    "am": "Thiên Xung chi tú tinh chi anh, dụng thời phùng thử chủ xương vinh",
+    "y": "Sao Thiên Xung là sao sáng; dùng việc gặp sao này thì hưng vượng.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "phu": {
+   "so": 4,
+   "ten": "Thiên Phụ",
+   "han": "天輔",
+   "hanh": "Mộc",
+   "bac": "thuong_cat",
+   "tom": "Thầy và lễ",
+   "loi": "Sao của học vấn và lễ nghĩa. Hợp học, dạy, xin lời khuyên, việc cần sự trang trọng.",
+   "sach": {
+    "han": "天輔之時宜設禮",
+    "am": "Thiên Phụ chi thời nghi thiết lễ",
+    "y": "Giờ có sao Thiên Phụ hợp bày lễ, làm việc trang trọng.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "cam": {
+   "so": 5,
+   "ten": "Thiên Cầm",
+   "han": "天禽",
+   "hanh": "Thổ",
+   "bac": "thuong_cat",
+   "tom": "Ở giữa, vững",
+   "loi": "Sao ở giữa, đi cùng Thiên Nhuế. Vững và được trọng, hợp việc cần sự tin cậy.",
+   "sach": {
+    "han": "上將功臣封爵祿",
+    "am": "Thượng tướng công thần phong tước lộc",
+    "y": "Sao của người có công được ghi nhận.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "tam": {
+   "so": 6,
+   "ten": "Thiên Tâm",
+   "han": "天心",
+   "hanh": "Kim",
+   "bac": "thuong_cat",
+   "tom": "Tính toán, chữa lành",
+   "loi": "Sao của mưu tính sáng suốt và việc chăm sóc. Hợp lập kế hoạch, quản lý, hỏi ý người có chuyên môn.",
+   "sach": {
+    "han": "上將提兵功百勝不宜春夏恐凶臨",
+    "am": "Thượng tướng đề binh công bách thắng, bất nghi xuân hạ khủng hung lâm",
+    "y": "Sao này cầm việc thì hay thành; riêng mùa xuân, hạ sách dặn dè dặt hơn.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý kiểm lại kế hoạch khi dùng sao này vào mùa xuân, hạ.",
+    "viec": "Trước khi chốt, nhờ một người ngoài cuộc đọc lại kế hoạch."
+   }
+  },
+  "tru": {
+   "so": 7,
+   "ten": "Thiên Trụ",
+   "han": "天柱",
+   "hanh": "Kim",
+   "bac": "thu_hung",
+   "tom": "Giữ chỗ đứng",
+   "loi": "Sao của lời nói sắc và thế thủ. Hợp giữ vững điều đang có hơn là mở rộng.",
+   "sach": {
+    "han": "天柱藏形并固守",
+    "am": "Thiên Trụ tàng hình tịnh cố thủ",
+    "y": "Sao Thiên Trụ hợp thu mình và giữ chắc.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "nham": {
+   "so": 8,
+   "ten": "Thiên Nhậm",
+   "han": "天任",
+   "hanh": "Thổ",
+   "bac": "thu_cat",
+   "tom": "Gánh vác, chúc mừng",
+   "loi": "Sao bền bỉ, chịu gánh. Hợp việc lâu dài, việc vui, nhận trách nhiệm.",
+   "sach": {
+    "han": "天任之時宜慶賀",
+    "am": "Thiên Nhậm chi thời nghi khánh hạ",
+    "y": "Giờ có sao Thiên Nhậm hợp việc chúc mừng.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "anh": {
+   "so": 9,
+   "ten": "Thiên Anh",
+   "han": "天英",
+   "hanh": "Hoả",
+   "bac": "thu_hung",
+   "tom": "Sáng, nóng",
+   "loi": "Sao rực rỡ và nóng nảy. Hợp xuất hiện, trình diễn; nên kiểm phần thực chất.",
+   "sach": {
+    "han": "天英出入事虛強",
+    "am": "Thiên Anh xuất nhập sự hư cường",
+    "y": "Sao Thiên Anh: ra vào làm việc dễ mạnh bề ngoài hơn bên trong.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  }
+ },
+ "sao_chung": {
+  "han": "時下得天輔天禽天心為上吉天任天衝為次吉",
+  "am": "Thời hạ đắc Thiên Phụ, Thiên Cầm, Thiên Tâm vi thượng cát; Thiên Nhậm, Thiên Xung vi thứ cát",
+  "y": "Giờ gặp Thiên Phụ, Thiên Cầm, Thiên Tâm là tốt nhất; Thiên Nhậm, Thiên Xung là tốt vừa.",
+  "nhom": "A",
+  "chu_de": "tong_quan",
+  "nguon": "ky_mon_co_kim_do_thu"
+ },
+ "than": {
+  "phu": {
+   "ten": "Trực Phù",
+   "han": "直符",
+   "tom": "Chỗ dựa",
+   "loi": "Thần đứng đầu của giờ. Phía này có sự che chở và người đứng ra bảo lãnh."
+  },
+  "xa": {
+   "ten": "Đằng Xà",
+   "han": "螣蛇",
+   "tom": "Rối, lo vặt",
+   "loi": "Phía này dễ có tin chưa chắc, chuyện vòng vo, giấc ngủ chập chờn. Nghe thì kiểm lại."
+  },
+  "am": {
+   "ten": "Thái Âm",
+   "han": "太陰",
+   "tom": "Kín đáo, có người giúp ngầm",
+   "loi": "Phía này hợp việc làm lặng lẽ, có người đỡ mà không lộ mặt.",
+   "sach": {
+    "han": "凡太陰六合九地宮助奇者全備用之有十分之利",
+    "am": "Phàm Thái Âm, Lục Hợp, Cửu Địa cung trợ kỳ giả, toàn bị dụng chi hữu thập phần chi lợi",
+    "y": "Thái Âm, Lục Hợp, Cửu Địa là ba thần trợ lực; đủ cả thì việc được trọn phần lợi.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "hop": {
+   "ten": "Lục Hợp",
+   "han": "六合",
+   "tom": "Hoà hợp, kết nối",
+   "loi": "Phía này hợp gặp gỡ, mai mối, hợp tác, việc cần người trung gian.",
+   "sach": {
+    "han": "凡太陰六合九地宮助奇者全備用之有十分之利",
+    "am": "Phàm Thái Âm, Lục Hợp, Cửu Địa cung trợ kỳ giả, toàn bị dụng chi hữu thập phần chi lợi",
+    "y": "Thái Âm, Lục Hợp, Cửu Địa là ba thần trợ lực; đủ cả thì việc được trọn phần lợi.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "tran": {
+   "ten": "Câu Trần",
+   "han": "勾陳",
+   "ten_khac": "Bạch Hổ",
+   "tom": "Cứng, dễ va chạm",
+   "loi": "Phía này dễ gặp sự cứng rắn và tranh chấp. Đi lại nên chậm, lời nên mềm."
+  },
+  "tuoc": {
+   "ten": "Chu Tước",
+   "han": "朱雀",
+   "ten_khac": "Huyền Vũ",
+   "tom": "Lời nói, giấy tờ",
+   "loi": "Phía này nổi chuyện ăn nói và văn bản; dễ thị phi, dễ thiếu rõ ràng. Cái gì quan trọng thì ghi lại."
+  },
+  "dia": {
+   "ten": "Cửu Địa",
+   "han": "九地",
+   "tom": "Vững, chậm",
+   "loi": "Phía này hợp giữ, tích luỹ, chờ thời.",
+   "sach": {
+    "han": "九地之下利以伏藏",
+    "am": "Cửu Địa chi hạ lợi dĩ phục tàng",
+    "y": "Dưới Cửu Địa thì lợi cho việc ẩn và cất giữ.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "thien": {
+   "ten": "Cửu Thiên",
+   "han": "九天",
+   "tom": "Vươn ra, công khai",
+   "loi": "Phía này hợp việc công khai, mở rộng, đi xa, nói lớn điều mình muốn.",
+   "sach": {
+    "han": "九天之上利以揚兵",
+    "am": "Cửu Thiên chi thượng lợi dĩ dương binh",
+    "y": "Trên Cửu Thiên thì lợi cho việc phô bày sức mạnh.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  }
+ },
+ "can": {
+  "Ất": {
+   "vai": "ky",
+   "ten": "Nhật kỳ",
+   "loi": "Một trong ba «kỳ» — can quý của bàn. Mềm, uyển chuyển, hợp việc cần khéo."
+  },
+  "Bính": {
+   "vai": "ky",
+   "ten": "Nguyệt kỳ",
+   "loi": "Một trong ba «kỳ». Sáng và mạnh, hợp việc cần quyết và cần được nhìn thấy."
+  },
+  "Đinh": {
+   "vai": "ky",
+   "ten": "Tinh kỳ",
+   "loi": "Một trong ba «kỳ». Tinh tế, hợp giấy tờ, tin nhắn, việc cần sự tinh ý."
+  },
+  "Mậu": {
+   "vai": "nghi",
+   "loi": "Nghi đứng đầu; nơi Giáp Tý ẩn. Tượng tiền vốn."
+  },
+  "Kỷ": {
+   "vai": "nghi",
+   "loi": "Nơi Giáp Tuất ẩn. Tượng toan tính riêng."
+  },
+  "Canh": {
+   "vai": "nghi",
+   "loi": "Nơi Giáp Thân ẩn. Tượng trở ngại, đối thủ."
+  },
+  "Tân": {
+   "vai": "nghi",
+   "loi": "Nơi Giáp Ngọ ẩn. Tượng sai sót cần sửa."
+  },
+  "Nhâm": {
+   "vai": "nghi",
+   "loi": "Nơi Giáp Thìn ẩn. Tượng chuyển động, đường đi."
+  },
+  "Quý": {
+   "vai": "nghi",
+   "loi": "Nơi Giáp Dần ẩn. Tượng khép lại, giăng lưới."
+  }
+ },
+ "cach": {
+  "ky_mon_hoi_hop": {
+   "ten": "Kỳ gặp cửa tốt",
+   "han": "奇門會合",
+   "dieu_kien": "Một trong ba cửa Khai, Hưu, Sinh có một «kỳ» (Ất, Bính hoặc Đinh) đi cùng.",
+   "loi": "Hướng vừa có cửa tốt vừa có «kỳ»: người xưa coi là đủ cả hai điều kiện để dùng việc.",
+   "nen": "Việc quan trọng nhất trong giờ nên hướng về phía này.",
+   "sach": {
+    "han": "如得門不得奇亦可用得奇不得門終非吉",
+    "am": "Như đắc môn bất đắc kỳ diệc khả dụng, đắc kỳ bất đắc môn chung phi cát",
+    "y": "Được cửa mà không được kỳ vẫn dùng được; được kỳ mà không được cửa thì rốt cuộc chưa tốt.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "thien_don": {
+   "ten": "Thiên độn",
+   "han": "天遁",
+   "dieu_kien": "Cửa Sinh, trên có Bính, dưới có Đinh.",
+   "loi": "Thế hiếm (chưa tới 1 trên 100 giờ): sách gọi là được ánh trăng che. Hợp việc cần tiếng nói của người trên và việc khởi dựng.",
+   "nen": "Có việc lớn đã chuẩn bị xong thì đây là lúc đáng dùng.",
+   "sach": {
+    "han": "天遁者生門與六丙月奇合臨於六丁之上為天遁此時得月精之蔽",
+    "am": "Thiên độn giả, Sinh môn dữ lục Bính nguyệt kỳ hợp, lâm ư lục Đinh chi thượng vi thiên độn, thử thời đắc nguyệt tinh chi tế",
+    "y": "Cửa Sinh cùng Bính đặt trên Đinh gọi là thiên độn — giờ được tinh hoa của trăng che chở.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "dia_don": {
+   "ten": "Địa độn",
+   "han": "地遁",
+   "dieu_kien": "Cửa Khai, trên có Ất, dưới có Kỷ.",
+   "loi": "Thế hiếm: sách gọi là được ánh mặt trời che. Hợp việc cần chỗ đứng vững: nhà đất, cất giữ, lập nền.",
+   "nen": "Việc dài hơi cần đặt nền thì nên làm trong giờ này, về phía này.",
+   "sach": {
+    "han": "地遁者開門與六乙日奇合臨於六己之上為地遁此時得日精之蔽",
+    "am": "Địa độn giả, Khai môn dữ lục Ất nhật kỳ hợp, lâm ư lục Kỷ chi thượng vi địa độn, thử thời đắc nhật tinh chi tế",
+    "y": "Cửa Khai cùng Ất đặt trên Kỷ gọi là địa độn — giờ được tinh hoa của mặt trời che chở.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "nhan_don": {
+   "ten": "Nhân độn",
+   "han": "人遁",
+   "dieu_kien": "Cửa Hưu, trên có Đinh, cùng thần Thái Âm.",
+   "loi": "Thế hiếm: sách gọi là được sao che. Hợp việc cần người: tìm cộng sự, hoà giải, kết thân.",
+   "nen": "Muốn mời ai cùng làm, muốn nối lại một mối quan hệ thì hợp lúc này.",
+   "sach": {
+    "han": "人遁者休門與六丁星奇合前二太陰中為人遁此時得星精之所蔽",
+    "am": "Nhân độn giả, Hưu môn dữ lục Đinh tinh kỳ hợp tiền nhị Thái Âm trung vi nhân độn, thử thời đắc tinh tinh chi sở tế",
+    "y": "Cửa Hưu cùng Đinh ở chỗ Thái Âm gọi là nhân độn — giờ được tinh hoa của sao che chở.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "thanh_long_phan_thu": {
+   "ten": "Rồng xanh ngoảnh đầu",
+   "han": "青龍返首",
+   "dieu_kien": "Trực phù (mang Giáp) đặt lên chỗ có Bính.",
+   "loi": "Thế thuận cho việc khởi đầu: có người dẫn đường quay lại đỡ mình.",
+   "nen": "Việc cần sự ủng hộ của người đi trước thì hướng về phía này.",
+   "sach": {
+    "han": "六甲加六丙名青龍反首凡陰陽二遁此時可造百事吉",
+    "am": "Lục Giáp gia lục Bính danh Thanh long phản thủ, phàm âm dương nhị độn thử thời khả tạo, bách sự cát",
+    "y": "Giáp đặt lên Bính gọi là rồng xanh ngoảnh đầu; giờ ấy khởi việc gì cũng thuận.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "phi_dieu_diet_huyet": {
+   "ten": "Chim bay về tổ",
+   "han": "飛鳥跌穴",
+   "dieu_kien": "Bính đặt lên chỗ Giáp của tuần đang ẩn.",
+   "loi": "Thế thuận: việc tự tìm về đúng chỗ, ít tốn sức mà được việc.",
+   "nen": "Hợp xuất phát, hợp nhận một cơ hội tự đến.",
+   "sach": {
+    "han": "六丙加六甲名飛烏跌穴陰陽二遁此時利為事出行大吉",
+    "am": "Lục Bính gia lục Giáp danh Phi ô điệt huyệt, âm dương nhị độn thử thời lợi vi sự, xuất hành đại cát",
+    "y": "Bính đặt lên Giáp gọi là chim bay về tổ; giờ ấy lợi làm việc, đi xa rất thuận.",
+    "nhom": "A",
+    "chu_de": "di_lai",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "ngoc_nu_thu_mon": {
+   "ten": "Ngọc nữ giữ cửa",
+   "han": "玉女守門",
+   "dieu_kien": "Cửa trực sử của giờ đặt lên chỗ có Đinh.",
+   "loi": "Thế hợp việc vui và việc tình cảm: tiệc, họp mặt, hẹn hò.",
+   "nen": "Hẹn gặp người thân, người thương về phía này.",
+   "sach": {
+    "han": "三奇遊六儀利以宮庭燕會喜樂之事",
+    "am": "Tam kỳ du lục nghi, lợi dĩ cung đình yến hội hỷ lạc chi sự",
+    "y": "Ba kỳ dạo trên sáu nghi thì lợi cho tiệc tùng, họp mặt, việc vui.",
+    "nhom": "A",
+    "chu_de": "tinh_duyen",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "thanh_long_dao_tau": {
+   "ten": "Rồng xanh bỏ chạy",
+   "han": "青龍逃走",
+   "dieu_kien": "Ất đặt lên Tân.",
+   "loi": "Thế người mềm gặp người cứng: dễ hụt, dễ mất phần đã cầm trong tay.",
+   "nen": "Chưa nên khởi việc mới về phía này; giữ cái đang có.",
+   "sach": {
+    "han": "六乙加六辛名青龍逃走此時不可造百事凶",
+    "am": "Lục Ất gia lục Tân danh Thanh long đào tẩu, thử thời bất khả tạo, bách sự hung",
+    "y": "Ất đặt lên Tân gọi là rồng xanh bỏ chạy; sách dặn giờ ấy chưa nên khởi việc.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý giữ phần đã có khi làm việc về phía này.",
+    "viec": "Việc mới dời sang giờ khác; giờ này rà lại thứ mình đang nắm (tiền đặt cọc, lời hứa, tài liệu)."
+   }
+  },
+  "bach_ho_xuong_cuong": {
+   "ten": "Hổ trắng lồng lên",
+   "han": "白虎猖狂",
+   "dieu_kien": "Tân đặt lên Ất.",
+   "loi": "Thế cứng lấn mềm: dễ nóng, dễ va chạm khi đi lại và khi nói.",
+   "nen": "Đi chậm, nói chậm; việc hệ trọng dời sang hướng khác.",
+   "sach": {
+    "han": "六辛加六乙名曰白虎猖狂此時不可舉動百事凶",
+    "am": "Lục Tân gia lục Ất danh viết Bạch hổ xương cuồng, thử thời bất khả cử động, bách sự hung",
+    "y": "Tân đặt lên Ất gọi là hổ trắng lồng lên; sách dặn giờ ấy chưa nên động việc.",
+    "nhom": "B",
+    "chu_de": "di_lai",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý an toàn khi đi lại và giữ bình tĩnh khi trao đổi về phía này.",
+    "viec": "Lái xe thì chạy chậm hơn thường ngày; chuyện đang căng thì hẹn nói lại sau."
+   }
+  },
+  "chu_tuoc_dau_giang": {
+   "ten": "Chim đỏ sa sông",
+   "han": "朱雀投江",
+   "dieu_kien": "Đinh đặt lên Quý.",
+   "loi": "Thế lời nói và giấy tờ dễ chìm: tin nhắn bị hiểu sai, hồ sơ thiếu sót.",
+   "nen": "Giấy tờ quan trọng đọc lại hai lần; chưa gửi vội.",
+   "sach": {
+    "han": "六丁加六癸名朱雀入江此時忌為百事",
+    "am": "Lục Đinh gia lục Quý danh Chu tước nhập giang, thử thời kỵ vi bách sự",
+    "y": "Đinh đặt lên Quý gọi là chim đỏ sa sông; sách dặn giờ ấy nên kiêng khởi việc.",
+    "nhom": "B",
+    "chu_de": "giay_to",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý văn bản và lời nhắn khi làm việc về phía này.",
+    "viec": "Trước khi gửi hồ sơ hay tin quan trọng, nhờ một người đọc lại."
+   }
+  },
+  "dang_xa_yeu_kieu": {
+   "ten": "Rắn bay quằn mình",
+   "han": "螣蛇夭矯",
+   "dieu_kien": "Quý đặt lên Đinh.",
+   "loi": "Thế rối: chuyện nhỏ thành lo lớn, tin chưa chắc làm mình bận tâm.",
+   "nen": "Tin nghe được thì kiểm lại nguồn; quyết định để sau.",
+   "sach": {
+    "han": "六癸加六丁名螣蛇夭矯此時所為不利",
+    "am": "Lục Quý gia lục Đinh danh Đằng xà yêu kiểu, thử thời sở vi bất lợi",
+    "y": "Quý đặt lên Đinh gọi là rắn bay quằn mình; sách ghi giờ ấy làm việc khó trôi.",
+    "nhom": "B",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý đừng quyết theo một tin chưa kiểm khi làm việc về phía này.",
+    "viec": "Viết ra điều đang lo, gạch điều chưa có bằng chứng, chỉ xử lý phần còn lại."
+   }
+  },
+  "huynh_nhap_bach": {
+   "ten": "Lửa vào vàng",
+   "han": "熒入太白",
+   "dieu_kien": "Bính đặt lên Canh.",
+   "loi": "Thế hai bên cùng căng rồi cùng lùi: cạnh tranh có, nhưng trở ngại sẽ tự rút.",
+   "nen": "Giữ thế, không cần đuổi theo.",
+   "sach": {
+    "han": "丙為熒惑庚為太白若熒惑入太白鬥賊必兩退還",
+    "am": "Bính vi Huỳnh Hoặc, Canh vi Thái Bạch, nhược Huỳnh Hoặc nhập Thái Bạch, đấu tặc tất lưỡng thoái hoàn",
+    "y": "Bính là sao Hoả, Canh là sao Kim; lửa vào vàng thì hai bên giằng co rồi cùng lui.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý đừng dồn sức vào một cuộc ganh đua về phía này.",
+    "viec": "Việc đang giằng co thì lùi một bước, chờ bên kia tỏ ý trước."
+   }
+  },
+  "bach_nhap_huynh": {
+   "ten": "Vàng vào lửa",
+   "han": "太白入熒",
+   "dieu_kien": "Canh đặt lên Bính.",
+   "loi": "Thế trở ngại tìm tới: có người hoặc việc chen vào kế hoạch.",
+   "nen": "Phòng trước: khoá cửa, sao lưu, xác nhận lại lịch hẹn.",
+   "sach": {
+    "han": "庚為太白丙為熒惑若太白入熒惑對敵宜防賊來",
+    "am": "Canh vi Thái Bạch, Bính vi Huỳnh Hoặc, nhược Thái Bạch nhập Huỳnh Hoặc, đối địch nghi phòng tặc lai",
+    "y": "Canh là sao Kim, Bính là sao Hoả; vàng vào lửa thì nên phòng đối phương tìm tới.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý phòng việc bất ngờ chen vào khi làm việc về phía này.",
+    "viec": "Xác nhận lại lịch hẹn, sao lưu tệp đang làm, khoá cửa trước khi đi."
+   }
+  },
+  "ky_nhap_mo": {
+   "ten": "Kỳ vào kho",
+   "han": "三奇入墓",
+   "dieu_kien": "Ất tới cung Khôn, hoặc Bính, Đinh tới cung Càn.",
+   "loi": "«Kỳ» có mặt nhưng như đèn để trong hộp: điều tốt chưa phát ra được.",
+   "nen": "Chuẩn bị thì được, ra mắt thì chờ.",
+   "sach": {
+    "han": "凡遇三奇入墓縱得吉宿奇門不可作事",
+    "am": "Phàm ngộ tam kỳ nhập mộ, túng đắc cát tú kỳ môn bất khả tác sự",
+    "y": "Gặp ba kỳ vào kho thì dù có sao tốt, cửa tốt, sách cũng dặn chưa nên làm việc lớn.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý: phía này có điều tốt nhưng chưa tới lúc dùng.",
+    "viec": "Dùng giờ này để chuẩn bị; việc ra mắt, công bố dời sang giờ khác."
+   }
+  },
+  "mon_bach": {
+   "ten": "Cửa ép cung",
+   "han": "門迫",
+   "dieu_kien": "Hành của cửa khắc hành của cung nó tới.",
+   "loi": "Cửa bị đặt sai chỗ: cửa tốt thì giảm phần tốt, cửa kém thì thêm phần vướng.",
+   "nen": "Nếu có hướng khác cùng cửa tốt thì ưu tiên hướng ấy.",
+   "sach": {
+    "han": "若吉門被迫則吉事不成凶門被迫則災尤甚",
+    "am": "Nhược cát môn bị bách tắc cát sự bất thành, hung môn bị bách tắc tai vưu thậm",
+    "y": "Cửa tốt bị ép thì việc tốt khó thành; cửa kém bị ép thì vướng thêm.",
+    "nhom": "B",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý: cửa ở phía này không phát huy được hết.",
+    "viec": "Giảm kỳ vọng cho việc làm về phía này, có phương án thứ hai."
+   }
+  },
+  "luc_nghi_kich_hinh": {
+   "ten": "Sáu nghi phạm hình",
+   "han": "六儀擊刑",
+   "dieu_kien": "Trực phù của tuần tới đúng cung «hình» với nó.",
+   "loi": "Người đứng đầu tự làm khó mình: việc đang thuận dễ hỏng vì nóng vội hoặc cố chấp.",
+   "nen": "Người cầm trịch nên nghe thêm một ý kiến trước khi quyết.",
+   "sach": {
+    "han": "六儀擊刑者謂甲子直符時加卯",
+    "am": "Lục nghi kích hình giả, vị Giáp Tý trực phù thời gia Mão",
+    "y": "Sáu nghi phạm hình là khi trực phù của tuần tới đúng chỗ ngược với nó.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý sự nóng vội của chính mình trong giờ này.",
+    "viec": "Quyết định lớn thì ngủ một đêm rồi mới trả lời."
+   }
+  },
+  "phuc_ngam": {
+   "ten": "Bàn đứng yên",
+   "han": "伏吟",
+   "dieu_kien": "Chín sao về đúng chỗ cũ, không dời.",
+   "loi": "Cả bàn không nhúc nhích: việc dễ ì, người dễ nấn ná. Hợp thu về, không hợp khởi đi.",
+   "nen": "Thu tiền, gom đồ, chốt sổ; việc mới để giờ sau.",
+   "sach": {
+    "han": "子來臨子為伏吟此時不宜用兵惟宜斂財貨",
+    "am": "Tý lai lâm Tý vi phục ngâm, thử thời bất nghi dụng binh, duy nghi liễm tài hoá",
+    "y": "Tý tới đúng Tý là bàn đứng yên; giờ ấy không hợp ra quân, chỉ hợp thu gom của cải.",
+    "nhom": "B",
+    "chu_de": "tien_bac",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý: giờ này hợp thu về hơn là mở ra.",
+    "viec": "Chốt một khoản cần thu hoặc dọn một việc tồn; chưa khởi việc mới."
+   }
+  },
+  "phan_ngam": {
+   "ten": "Bàn lật ngược",
+   "han": "反吟",
+   "dieu_kien": "Chín sao sang đúng cung đối diện.",
+   "loi": "Cả bàn đảo chiều: việc dễ đổi ý, hẹn dễ dời, đi dễ quay về.",
+   "nen": "Việc cần ổn định thì chờ; hợp buông bớt, cho đi.",
+   "sach": {
+    "han": "子來加午為反吟此時不利舉兵動眾惟利恤民散倉廩之事",
+    "am": "Tý lai gia Ngọ vi phản ngâm, thử thời bất lợi cử binh động chúng, duy lợi tuất dân tán thương lẫm chi sự",
+    "y": "Tý tới Ngọ là bàn lật ngược; giờ ấy không hợp huy động đông người, chỉ hợp giúp người và phát của trong kho.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý: việc khởi trong giờ này dễ đổi chiều.",
+    "viec": "Lịch hẹn quan trọng thì xác nhận lại một lần; hợp đem cho, quyên góp, thanh lý."
+   }
+  },
+  "cua_phuc_ngam": {
+   "ten": "Cửa đứng yên",
+   "han": "門伏吟",
+   "dieu_kien": "Tám cửa về đúng chỗ cũ.",
+   "loi": "Tám cửa không dời: người và việc đều chậm chuyển.",
+   "nen": "Kiên nhẫn; làm phần của mình cho xong.",
+   "sach": {
+    "han": "凡六甲之時直門符皆是伏吟",
+    "am": "Phàm lục Giáp chi thời trực môn phù giai thị phục ngâm",
+    "y": "Các giờ Giáp thì cửa và sao trực đều đứng yên.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "cua_phan_ngam": {
+   "ten": "Cửa lật ngược",
+   "han": "門反吟",
+   "dieu_kien": "Tám cửa sang đúng cung đối diện.",
+   "loi": "Tám cửa đảo chiều: kế hoạch dễ phải làm lại.",
+   "nen": "Chừa thời gian dự phòng; chưa ký việc dài hạn.",
+   "sach": {
+    "han": "凡門符對衝對皆是反吟",
+    "am": "Phàm môn phù đối xung đối giai thị phản ngâm",
+    "y": "Cửa và sao sang chỗ đối xung đều gọi là lật ngược.",
+    "nhom": "A",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu"
+   }
+  },
+  "ngu_bat_ngo": {
+   "ten": "Giờ ngược ngày",
+   "han": "五不遇時",
+   "dieu_kien": "Can của giờ khắc can của ngày, cùng âm hoặc cùng dương.",
+   "loi": "Giờ «ngược» với ngày: sách dặn dù có hướng tốt cũng nên bớt việc lớn.",
+   "nen": "Giờ này làm việc thường ngày; việc hệ trọng chọn giờ khác trong ngày.",
+   "sach": {
+    "han": "五不遇時者謂剛柔日相剋而損其明縱有奇門不可行",
+    "am": "Ngũ bất ngộ thời giả, vị cương nhu nhật tương khắc nhi tổn kỳ minh, túng hữu kỳ môn bất khả hành",
+    "y": "Giờ ngược với ngày thì ánh sáng của giờ bị giảm; dù có kỳ, có cửa tốt, sách cũng dặn chưa nên làm.",
+    "nhom": "B",
+    "chu_de": "tong_quan",
+    "nguon": "ky_mon_co_kim_do_thu",
+    "ham_y": "Nên chú ý: giờ này không hợp việc hệ trọng.",
+    "viec": "Dời việc quan trọng sang một giờ khác trong ngày."
+   }
+  }
+ },
+ "viec": {
+  "gap_go": {
+   "ten": "Gặp gỡ, thương lượng",
+   "mo_ta": "Gặp sếp, đối tác, phỏng vấn, xin ý kiến người đi trước.",
+   "cua": [
+    "khai",
+    "sinh",
+    "huu"
+   ],
+   "dong_tu": "hẹn gặp",
+   "khai_niem": [
+    "kien_quy"
+   ],
+   "linh_vuc": "kinh_doanh"
+  },
+  "ky_ket": {
+   "ten": "Buôn bán, ký kết, mở hàng",
+   "mo_ta": "Chốt đơn, bàn giá, khai trương, ký hợp đồng.",
+   "cua": [
+    "sinh",
+    "khai"
+   ],
+   "dong_tu": "bàn việc tiền bạc",
+   "ranh_gioi": "Đây không phải lời khuyên đầu tư hay pháp lý; hợp đồng lớn nên có luật sư đọc.",
+   "khai_niem": [
+    "kien_quy"
+   ],
+   "linh_vuc": "kinh_doanh"
+  },
+  "di_xa": {
+   "ten": "Đi xa, xuất phát",
+   "mo_ta": "Lên đường, chuyển chỗ, bắt đầu một chuyến đi.",
+   "cua": [
+    "khai",
+    "huu",
+    "sinh"
+   ],
+   "dong_tu": "xuất phát",
+   "ranh_gioi": "Hướng tốt không thay cho việc lái xe cẩn thận và xem thời tiết.",
+   "khai_niem": [
+    "chinh_thao"
+   ],
+   "linh_vuc": "ke_hoach"
+  },
+  "giay_to": {
+   "ten": "Giấy tờ, thi cử, trình bày",
+   "mo_ta": "Nộp hồ sơ, gửi thư, thuyết trình, đi thi.",
+   "cua": [
+    "canh",
+    "khai"
+   ],
+   "dong_tu": "nộp hồ sơ hoặc trình bày",
+   "khai_niem": [
+    "thuong_thu"
+   ],
+   "linh_vuc": "hoc_hanh"
+  },
+  "hoa_giai": {
+   "ten": "Họp mặt, hoà giải, nghỉ ngơi",
+   "mo_ta": "Gặp người thân, làm lành, hẹn hò, lấy lại sức.",
+   "cua": [
+    "huu",
+    "sinh"
+   ],
+   "dong_tu": "hẹn nhau",
+   "khai_niem": [
+    "tri_binh"
+   ],
+   "linh_vuc": "gia_dinh"
+  },
+  "thu_no": {
+   "ten": "Thu hồi, đòi lại",
+   "mo_ta": "Nhắc khoản người ta còn nợ, lấy lại đồ, xử việc tồn.",
+   "cua": [
+    "thuong",
+    "khai"
+   ],
+   "dong_tu": "nhắc khoản cần thu",
+   "ranh_gioi": "Khoản lớn hoặc có tranh chấp thì hỏi luật sư.",
+   "khai_niem": [
+    "ngu_liep"
+   ],
+   "linh_vuc": "tien_bac"
+  },
+  "tinh_tam": {
+   "ten": "Làm việc sâu, giữ kín",
+   "mo_ta": "Viết, nghiên cứu, sửa chữa, tránh một cuộc va chạm.",
+   "cua": [
+    "do",
+    "huu"
+   ],
+   "dong_tu": "ngồi làm việc",
+   "khai_niem": [
+    "an_phuc"
+   ],
+   "linh_vuc": "ca_nhan"
+  },
+  "mo_thi_truong": {
+   "ten": "Mở thị trường, tìm khách mới",
+   "mo_ta": "Chào hàng nơi mới, mở chi nhánh, nộp hồ sơ dự thầu.",
+   "cua": [
+    "khai",
+    "sinh"
+   ],
+   "dong_tu": "chào hàng nơi mới",
+   "khai_niem": [
+    "chinh_thao",
+    "kien_quy"
+   ],
+   "linh_vuc": "kinh_doanh",
+   "ranh_gioi": "Mở rộng cần có vốn và người đủ sức; đây không phải lời khuyên đầu tư."
+  },
+  "ra_mat": {
+   "ten": "Ra mắt, quảng bá, trình đề xuất",
+   "mo_ta": "Ra mắt sản phẩm, đăng quảng cáo, gửi đề xuất cho khách lớn.",
+   "cua": [
+    "canh",
+    "khai"
+   ],
+   "dong_tu": "ra mắt, giới thiệu sản phẩm",
+   "khai_niem": [
+    "thuong_thu"
+   ],
+   "linh_vuc": "kinh_doanh",
+   "ranh_gioi": "Quảng cáo phải nói đúng điều sản phẩm làm được."
+  },
+  "canh_tranh": {
+   "ten": "Cạnh tranh, giành khách",
+   "mo_ta": "Đưa ra chào giá, so sánh với đối thủ, giành lại khách đã mất.",
+   "cua": [
+    "khai",
+    "sinh"
+   ],
+   "dong_tu": "đưa chào giá, giành khách",
+   "khai_niem": [
+    "chinh_thao",
+    "gianh_lai"
+   ],
+   "linh_vuc": "kinh_doanh",
+   "ranh_gioi": "Cạnh tranh bằng sản phẩm, giá trị và dịch vụ; không phải lời khuyên pháp lý. Có tranh chấp thì hỏi luật sư.",
+   "nguyen_tac": true
+  },
+  "chinh_doi_ngu": {
+   "ten": "Chỉnh đốn đội ngũ, đào tạo",
+   "mo_ta": "Họp toàn đội, đào tạo, viết lại quy trình, chia lại việc.",
+   "cua": [
+    "huu",
+    "sinh"
+   ],
+   "dong_tu": "họp đội, sắp xếp lại việc",
+   "khai_niem": [
+    "tri_binh",
+    "thu_thanh"
+   ],
+   "linh_vuc": "kinh_doanh"
+  }
+ },
+ "mau": {
+  "cach_dung": "Hướng tính từ chỗ bạn đang đứng (nhà, chỗ làm). «Về phía» nghĩa là đi về hướng ấy, hẹn ở chỗ nằm về hướng ấy, hoặc ngồi quay mặt về hướng ấy khi làm việc.",
+  "ranh_gioi": "Đây là nhịp gợi ý theo sách Kỳ Môn xưa — một cách chọn giờ và hướng, không phải dự báo việc sẽ xảy ra. Quyết định vẫn là của bạn.",
+  "huong_thuan": "{phuong}: cửa {cua} — {tom}.",
+  "gio_cham": "Giờ {gio} có thế «{cach}»: {loi}",
+  "viec_co": "Muốn {dong_tu} trong giờ {gio} ({khung}) thì hướng {phuong} là hợp nhất: cửa {cua}{kem}.",
+  "viec_binh": "Giờ {gio} ({khung}) có cửa {cua} ở hướng {phuong}, nhưng phía ấy đang vướng «{vuong}» — dùng được cho việc nhỏ.",
+  "viec_khong": "Giờ {gio} ({khung}) chưa có hướng thuận cho việc này.",
+  "viec_gio_khac": "Trong hôm nay, giờ {gio} ({khung}) thuận hơn: hướng {phuong}, cửa {cua}{kem}.",
+  "kem_ky": " có thêm «kỳ» {ky}",
+  "tom_thuan": "Giờ {gio}: hướng {ds} đang thuận.",
+  "tom_khong": "Giờ {gio} không có hướng nào nổi bật — hợp làm việc thường ngày.",
+  "hiem": "Giờ này có thế hiếm «{cach}» ở hướng {phuong}.",
+  "viec_gio": "Giờ {gio} ({khung}): hướng {phuong}, cửa {cua}{kem}.",
+  "viec_ngay_khong": "Hôm nay không có giờ nào thật thuận cho việc này theo bàn Kỳ Môn — nếu dời được, xem ngày kế tiếp.",
+  "hop_co": "Giờ {gio}, hướng {ds} vừa là hướng hợp mệnh của bạn vừa đang thuận — nên ưu tiên phía này.",
+  "hop_khong": "Giờ {gio} chưa có hướng nào vừa hợp mệnh của bạn vừa thuận. Việc cần chọn hướng thì xem khung giờ khác trong ngày.",
+  "hop_ngay_co": "Các khung giờ dưới đây có hướng vừa hợp mệnh của bạn vừa thuận theo bàn của giờ.",
+  "hop_ngay_khong": "Hôm nay không có khung giờ nào có hướng vừa hợp mệnh của bạn vừa thuận; việc thường ngày vẫn làm bình thường."
+ }
+}
