@@ -58,3 +58,12 @@ nhóm C — để ở Khảo sát nhà như hiện nay).
   Images), nút đo hướng ngay sau la bàn, mục gập từng hướng (lời vẫn trong HTML máy chủ). Engine cũ thiếu
   `bo_sung_cung` → trang giữ bố cục cũ.
 - Test: `engine/tests/test_phongthuy_cung_chi_tiet.py`, `web/e2e/ui-hht.spec.ts`.
+
+## 5. Kết hợp Kỳ Môn (chủ dự án giao 2026-11-18, sau khi KM-3 vào main)
+
+Dùng lại khối `KyMonHuongHop` của KM-3 (engine `/v1/ky-mon/ngay` nhận `huong_hop` = chỉ TÊN hướng): trang cung ("Hôm nay,
+4 hướng tốt của cung X thuận vào giờ nào?"), kết quả tra năm sinh, và hướng tốt chung của hai người cùng nhóm. Kỳ Môn
+chỉ ĐÁNH DẤU canh giờ thuận, không đổi thứ hạng Bát trạch; máy người đọc gọi lúc xem (không vào HTML máy chủ).
+
+Không làm: chọn giờ động thổ / nhập trạch theo Kỳ Môn (sách đã nạp không có phép đó cho việc nhà cửa); Kỳ Môn theo tháng
+/ năm cho khối "năm nay" (nguyệt gia / niên gia chưa có nguồn đối chiếu — như KM-3).

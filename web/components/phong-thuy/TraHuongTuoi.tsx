@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { ArrowRight } from "lucide-react";
 import { LaBanSong, type HuongSong } from "@/components/phong-thuy/LaBanSong";
+import { KyMonHuongHop } from "@/components/ky-mon/KyMonTheoNgay";
 import type { DongTuoiCung } from "@/lib/kien-thuc";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
@@ -74,6 +75,8 @@ export function TraHuongTuoi({ tuoi, duongCung }: { tuoi: DongTuoiCung[]; duongC
           <div className="mt-4">
             <LaBanSong key={g.quai} huong={huong} quai={g.quai} nhom={g.nhom} maDo="la_ban_tra_tuoi" />
           </div>
+          <KyMonHuongHop huongCat={g.tot} maDo="tra_huong_tuoi" tieuDe="Hôm nay, các hướng tốt của bạn thuận vào giờ nào?"
+            ghiChu={"Bốn hướng tốt theo Bát trạch (thứ hạng không đổi) ghép với hướng thuận của từng canh giờ theo Kỳ Môn — chỉ để chọn lúc làm việc quan trọng."} />
           <Link href={`${duongCung[g.slug] ?? "#"}#${gioi}-${namTinh}`}
             className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-full border border-gold/50 px-4 text-sm text-fg hover:bg-gold/10"
             onClick={() => ghi("cross_cta_clicked", { tu: "tra_huong_tuoi", den: "cung_phi" })}>

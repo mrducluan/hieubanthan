@@ -8,6 +8,7 @@ import Link from "@/components/khung/Lien";
 import { Loader2 } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
+import { KyMonHuongHop } from "@/components/ky-mon/KyMonTheoNgay";
 
 const HUONG = ["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"];
 interface Nguoi { nam: number; gioi_tinh: "nam" | "nu"; quai: string; nhom: string; slug: string; huong_tot: string[] }
@@ -143,6 +144,10 @@ export function HaiNguoiHuong({ duongCung }: { duongCung: Record<string, string>
                 <p className="mt-1 leading-relaxed text-fg-muted">{kq.sach_vo_chong.y}</p>
                 <p className="mt-1 font-serif text-fg-faint" lang="zh-Hant">{kq.sach_vo_chong.han}</p>
               </div>
+            )}
+            {kq.huong_chung.length > 0 && (
+              <KyMonHuongHop huongCat={kq.huong_chung} maDo="hai_cung" tieuDe="Hôm nay, hướng tốt chung của hai người thuận vào giờ nào?"
+                ghiChu="Hướng tốt chung theo Bát trạch ghép với hướng thuận của từng canh giờ theo Kỳ Môn — hợp để chọn lúc cùng làm việc quan trọng." />
             )}
             <p className="text-xs text-fg-faint">{kq.luu_y}</p>
           </div>

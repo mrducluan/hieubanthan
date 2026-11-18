@@ -59,7 +59,9 @@ export function KyMonTheoNgay({ ngay, nhan }: { ngay: string; nhan: string }) {
   );
 }
 
-export function KyMonHuongHop({ huongCat }: { huongCat: string[] }) {
+/** `tieuDe` / `ghiChu`: UI-HHT dùng lại trên trang hướng hợp tuổi (cung phi, tra năm sinh, hai người) — mặc định giữ lời cũ của
+ *  la bàn mệnh quái. Kỳ Môn chỉ ĐÁNH DẤU giờ thuận của các hướng đưa vào, không đổi thứ hạng Bát trạch. */
+export function KyMonHuongHop({ huongCat, tieuDe, ghiChu, maDo }: { huongCat: string[]; tieuDe?: string; ghiChu?: string; maDo?: string }) {
   const [n, setN] = useState<NgayKM | null>(null);
   const [gio, setGio] = useState(0);
   const khoa = huongCat.join("|");
@@ -74,14 +76,14 @@ export function KyMonHuongHop({ huongCat }: { huongCat: string[] }) {
   const con = n.gio.filter((g) => (g.hop_menh?.length ?? 0) > 0 && conToi(g.luc, gio));
   return (
     <div className="mt-4 rounded-xl border border-jade/30 bg-jade/5 p-4 text-sm" data-testid="ky-mon-huong-hop">
-      <p className="text-fg">Hôm nay, hướng hợp mệnh của bạn thuận vào giờ nào?</p>
+      <p className="text-fg">{tieuDe ?? "Hôm nay, hướng hợp mệnh của bạn thuận vào giờ nào?"}</p>
       {con.length > 0 ? (
         <ul className="mt-2 space-y-1">
           {con.slice(0, 4).map((g) => <li key={g.luc}>Giờ {g.chi} <span className="text-fg-faint">({g.khung})</span>: hướng {g.hop_menh!.join(", ")}</li>)}
         </ul>
       ) : <p className="mt-2 text-fg-muted">Từ giờ tới hết ngày chưa có khung nào trùng. Việc thường ngày vẫn làm bình thường.</p>}
-      <p className="mt-2 text-xs text-fg-faint">Hướng hợp mệnh theo Bát trạch (ở trên) ghép với hướng thuận của từng canh giờ theo Kỳ Môn. Nhịp gợi ý, không phải dự báo.{" "}
-        <Link href="/ky-mon" className="text-gold hover:underline">Mở la bàn Kỳ Môn</Link></p>
+      <p className="mt-2 text-xs text-fg-faint">{ghiChu ?? "Hướng hợp mệnh theo Bát trạch (ở trên) ghép với hướng thuận của từng canh giờ theo Kỳ Môn."} Nhịp gợi ý, không phải dự báo.{" "}
+        <Link href="/ky-mon" className="text-gold hover:underline" onClick={() => maDo && ghi("cross_cta_clicked", { tu: maDo, den: "ky_mon" })}>Mở la bàn Kỳ Môn</Link></p>
     </div>
   );
 }

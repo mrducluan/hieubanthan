@@ -15,6 +15,7 @@ import { LaBan } from "@/components/huyen-hoc/LaBan";
 import { SachXuaNoi } from "@/components/huyen-hoc/SachXuaNoi";
 import { SachXuaGhi } from "@/components/huyen-hoc/SachXuaGhi";
 import { LaBanSong } from "@/components/phong-thuy/LaBanSong";
+import { KyMonHuongHop } from "@/components/ky-mon/KyMonTheoNgay";
 import { namTuoiSeo } from "@/lib/nam";
 import { cungPhi, dsCungPhi, duongTuoi, type CungPhi, type HuongChiTiet, type HuongDuNien } from "@/lib/kien-thuc";
 import { anhBai, catMoTa, goiLd, ldAnh, ldDuongDan, ldHoiDap, siteUrl, TEN_SITE, tieuDeSeo, urlDayDu } from "@/lib/seo";
@@ -152,6 +153,9 @@ export default async function Page({ params: thamSo }: Props) {
           <>
             <p className="mt-2 text-sm text-fg-muted">Số trên ô là thứ hạng hướng tốt. Bấm từng hướng để xem hợp đặt gì, khoảng độ trên la bàn và sách xưa ghi.</p>
             <div className="mt-4"><LaBanSong huong={bs.huong} quai={c.quai} nhom={c.nhom} namNay={bs.nam_nay} /></div>
+            {/* UI-HHT × KM-3: giờ thuận hôm nay của 4 hướng tốt (máy người đọc gọi lúc xem — không vào HTML máy chủ). */}
+            <KyMonHuongHop huongCat={c.huong_tot.map((h) => h.huong)} maDo="cung_phi"
+              tieuDe={`Hôm nay, 4 hướng tốt của cung ${c.quai} thuận vào giờ nào?`} ghiChu={"Bốn hướng tốt theo Bát trạch (thứ hạng không đổi) ghép với hướng thuận của từng canh giờ theo Kỳ Môn — chỉ để chọn lúc làm việc quan trọng."} />
           </>
         ) : (
           <div className="mt-4"><LaBan quai={c.quai} nhom={c.nhom} bang={c.bang_huong} huongCat={c.huong_tot.map((h) => h.huong)} /></div>

@@ -11,6 +11,7 @@ test("mục lục: chọn năm sinh + giới tính → la bàn của chính ngư
   await expect(kq).toContainText("Hướng tốt nhất Đông Nam");
   await expect(kq.getByTestId("la-ban-chi-tiet")).toContainText("Hướng tốt hạng 1");
   await expect(kq.locator('a[href="/phong-thuy/huong-hop-tuoi/cung-kham-bac#nam-1990"]')).toBeVisible();
+  await expect(kq.getByTestId("ky-mon-huong-hop")).toContainText("các hướng tốt của bạn thuận vào giờ nào");
   // đổi giới tính → la bàn vẽ lại theo cung mới, hướng chọn là hạng 1 của cung mới
   await tra.locator('[role=radio]:has-text("Nữ")').click();
   await expect(kq).toContainText("cung Cấn");
@@ -48,4 +49,6 @@ test("trang cung Khảm: la bàn sống, hướng kiêng năm, chín điều ch�
   await lb.locator('button:has-text("Bắc")').first().click();
   await expect(lb.getByTestId("la-ban-chi-tiet")).toContainText("Phục Vị");
   await expect(lb.getByTestId("la-ban-chi-tiet")).toContainText("Nhâm, Tý, Quý");
+  // UI-HHT × KM-3: giờ thuận hôm nay của 4 hướng tốt (Kỳ Môn chỉ đánh dấu, không đổi thứ hạng)
+  await expect(page.getByTestId("ky-mon-huong-hop")).toContainText("4 hướng tốt của cung Khảm thuận vào giờ nào");
 });
