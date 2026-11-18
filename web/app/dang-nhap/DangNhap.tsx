@@ -39,7 +39,8 @@ function BieuTuong({ p }: { p: NhaCungCap }) {
 export function DangNhap({ googleQuaSite = false }: { googleQuaSite?: boolean }) {
   const router = useRouter();
   const params = useSearchParams();
-  const [kenh, setKenh] = useState<"email" | "sdt">("email");
+  const cach = cachDangNhap();
+  const [kenh, setKenh] = useState<"email" | "sdt">(cach.email || !cach.sdt ? "email" : "sdt");
   const [email, setEmail] = useState("");
   const [sdt, setSdt] = useState("");
   const [ma, setMa] = useState("");
@@ -62,7 +63,6 @@ export function DangNhap({ googleQuaSite = false }: { googleQuaSite?: boolean })
   // SEC-2: cấm cả khoảng trắng / tab / xuống dòng — trình duyệt bỏ tab nên "/\t/evil.com" thành "//evil.com".
   const tiepXin = params.get("tiep");
   const tiep = tiepXin && /^\/(?![/\\])[^\s\\]*$/.test(tiepXin) ? tiepXin : "/tai-khoan";
-  const cach = cachDangNhap();
   const veLai = () => `${window.location.origin}/auth/callback?tiep=${encodeURIComponent(tiep)}`;
 
   async function gui(e: React.FormEvent) {
@@ -120,10 +120,11 @@ export function DangNhap({ googleQuaSite = false }: { googleQuaSite?: boolean })
             Tiếp tục với {TEN[p]}
           </Button>
         ))}
-        <div className="flex items-center gap-3 text-xs text-fg-faint"><span className="h-px flex-1 bg-line" />{cach.oauth.length ? "hoặc nhận mã qua email" : "nhận mã qua email"}<span className="h-px flex-1 bg-line" /></div>
+        {(cach.email || cach.sdt) && (<>
+        <div className="flex items-center gap-3 text-xs text-fg-faint"><span className="h-px flex-1 bg-line" />{(cach.oauth.length ? "hoặc " : "") + (cach.email ? "nhận mã qua email" : "nhận mã qua tin nhắn")}<span className="h-px flex-1 bg-line" /></div>
 
         <Tabs value={kenh} onValueChange={(v) => { setKenh(v as "email" | "sdt"); setDaGui(false); setMa(""); }}>
-          {cach.sdt && (
+          {cach.sdt && cach.email && (
             <TabsList className="w-full">
               <TabsTrigger value="email" className="flex-1"><Mail className="mr-1.5 inline size-3.5" aria-hidden />Email</TabsTrigger>
               <TabsTrigger value="sdt" className="flex-1"><Phone className="mr-1.5 inline size-3.5" aria-hidden />Số điện thoại</TabsTrigger>
@@ -131,10 +132,12 @@ export function DangNhap({ googleQuaSite = false }: { googleQuaSite?: boolean })
           )}
           {!daGui ? (
             <form onSubmit={gui} className="mt-5 space-y-4">
-              <TabsContent value="email" className="mt-0 space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="ban@email.com" />
-              </TabsContent>
+              {cach.email && (
+                <TabsContent value="email" className="mt-0 space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="ban@email.com" />
+                </TabsContent>
+              )}
               {cach.sdt && (
                 <TabsContent value="sdt" className="mt-0 space-y-2">
                   <Label htmlFor="sdt">Số điện thoại</Label>
@@ -155,6 +158,7 @@ export function DangNhap({ googleQuaSite = false }: { googleQuaSite?: boolean })
             </form>
           )}
         </Tabs>
+        </>)}
         {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
       </Card>
       <p className="mt-4 flex gap-1.5 text-xs text-fg-faint"><Lock className="mt-0.5 size-3.5 shrink-0" aria-hidden />

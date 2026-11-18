@@ -135,7 +135,7 @@ export function NhanQua({ ma, banDau }: { ma: string; banDau: TrangQua | null })
       ) : !tt.dang_nhap ? (
         <div className="mt-6 space-y-2">
           <Button asChild className="w-full"><Link href={`/dang-nhap?tiep=${encodeURIComponent(tiep)}`} data-testid="nhan-qua-dang-nhap"><LogIn aria-hidden /> Đăng nhập để nhận quà</Link></Button>
-          <p className="text-xs text-fg-faint">Đăng nhập bằng email hoặc Google, xong sẽ quay lại đúng trang này.</p>
+          <p className="text-xs text-fg-faint">Đăng nhập (Google, Zalo…), xong sẽ quay lại đúng trang này.</p>
         </div>
       ) : !tt.co_ho_so ? (
         <div className="mt-6 space-y-2 text-left" data-testid="nhan-qua-luu-ho-so">
