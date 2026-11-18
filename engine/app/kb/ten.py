@@ -179,6 +179,7 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "phuong": "huong", "huong_nha": "huong", "du_nien": "du_nien", "du_nien_menh": "du_nien", "du_nien_trach": "du_nien",
     "uu_tien": "du_nien", "huong_cat": "huong", "huong_tot": "huong", "huong_chung": "huong", "nam_gioi.tot": "huong",
     "nu_gioi.tot": "huong", "bang_huong": ("huong", "du_nien"), "du_nien_y": "du_nien",
+    "du_nien_a": "du_nien", "du_nien_b": "du_nien",   # UI-HHT: hướng chung hai người
     **{f"{d}.loai": "cat_hung" for d in ("Sinh Khí", "Thiên Y", "Diên Niên", "Phục Vị", "Hoạ Hại", "Lục Sát", "Ngũ Quỷ", "Tuyệt Mệnh")},
     "cuc_ten": "cuc_hk", "sao_tam": "sao_bay", "ba_thang.ten_sao": "sao_bay", "thang.ten_sao": "sao_bay",
     "trang_thai_sao.ten": "sao_bay", "trang_thai_sao.trang_thai": "trang_thai_sao", "trang_thai_son": "trang_thai_sao",

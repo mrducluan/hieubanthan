@@ -312,6 +312,22 @@ export interface CungPhi {
   tra_loi_nhanh: string; hoi_dap: { hoi: string; dap: string }[]; nguon: string; luu_y: string[]; trang_thai: string;
   /** WS-3: câu Dương Trạch Thập Thư về cung này (engine cũ chưa có → khối tự ẩn). */
   sach_xua?: CauSachXua[];
+  /** UI-HHT: lớp tri thức thêm (chỉ bản Việt; engine cũ / bản Anh → không có, trang dùng bố cục cũ). */
+  bo_sung_cung?: BoSungCung | null;
+}
+export interface HuongChiTiet {
+  huong: string; du_nien: string; cat: boolean; hang: number | null; mot_cau: string; dung: string;
+  sach: { han: string; trich?: string; y: string } | null; son: string[]; do: { tu: number; den: number };
+}
+export interface BoSungCung {
+  huong: HuongChiTiet[];
+  cung_menh: import("@/components/huyen-hoc/SachXuaGhi").KhoiSachGhi | null;
+  nam_nu: { so_5: string; vi_du: { nam: number; nam_gioi: string; nu_gioi: string }[] };
+  vo_chong: { han: string; am?: string; y: string; cach_lam: string };
+  phong_khac: { ma: string; tieu_de: string; huong: string[]; du_nien: string[]; noi_dung: string; thuc_te: string; nguon: string }[];
+  nam_nay: { nam: number; ngu_hoang: string; thai_tue: string; tue_pha: string; tam_sat: string;
+    trung: { huong: string; du_nien: string; sao: string[] }[]; loi: string };
+  quy_tac: { ma: string; tieu_de: string; noi_dung: string }[];
 }
 export const SLUG_CUNG = /^cung-[a-z-]+$/;
 export async function dsCungPhi(): Promise<{ cung: MucCungPhi[]; tuoi: DongTuoiCung[] }> {
@@ -319,8 +335,10 @@ export async function dsCungPhi(): Promise<{ cung: MucCungPhi[]; tuoi: DongTuoiC
   if (!d) noStore();
   return { cung: d?.cung ?? [], tuoi: d?.tuoi ?? [] };
 }
-export function cungPhi(slug: string): Promise<CungPhi | null> {
-  return SLUG_CUNG.test(slug) ? layTrangMot<CungPhi>(`/v1/phongthuy/cung-phi/${slug}`) : Promise.resolve(null);
+/** `namXem` = năm phong thuỷ của khối "hướng kiêng của năm" (UI-HHT; trang truyền năm menu `namTuoiSeo`). */
+export function cungPhi(slug: string, namXem?: number): Promise<CungPhi | null> {
+  return SLUG_CUNG.test(slug)
+    ? layTrangMot<CungPhi>(`/v1/phongthuy/cung-phi/${slug}${namXem ? `?nam_xem=${namXem}` : ""}`) : Promise.resolve(null);
 }
 /** @deprecated AUD-Q2 — trang năm đã gộp theo cung phi; chỉ còn cho route engine cũ trong lúc deploy lệch. */
 export async function dsTuoiHuong(): Promise<MucTuoiHuong[]> {

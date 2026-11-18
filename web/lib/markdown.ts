@@ -118,6 +118,13 @@ export function mdCung(c: CungPhi): string {
     "## 4 hướng nên tránh", "", ...c.huong_xau.map((h) => `- **${h.huong}** — ${h.du_nien}: ${h.y_nghia}`), "",
     "## Cửa, bếp, giường, bàn làm việc", "", ...c.goi_y.map((x) => `- ${x.tieu_de}: ${x.huong.join(" → ")}. ${x.noi_dung}`), "",
     `## Năm sinh có cung ${c.quai} (1960–2005, tính từ Lập xuân)`, "", `- Nam: ${ns("nam")}`, `- Nữ: ${ns("nu")}`, "",
+    ...(c.bo_sung_cung ? [
+      `## Năm ${c.bo_sung_cung.nam_nay.nam}: hướng tốt nào cần giữ yên`, "", c.bo_sung_cung.nam_nay.loi, "",
+      `## Vợ chồng khác nhóm với cung ${c.quai}`, "", c.bo_sung_cung.vo_chong.cach_lam, "",
+      `Sách xưa ghi: ${c.bo_sung_cung.vo_chong.y} (${c.bo_sung_cung.vo_chong.han})`, "",
+      "## Khoảng độ trên la bàn", "",
+      ...c.bo_sung_cung.huong.map((h) => `- ${h.huong} (${h.du_nien}): ${h.do.tu}°–${h.do.den}°, sơn ${h.son.join(", ")}`), "",
+    ] : []),
     `Cung cùng nhóm ${c.nhom}: ${c.cung_cung_nhom.map((x) => `[cung ${x.quai}](${urlDayDu(duongTuoi(x.slug))})`).join(", ")}.`, "",
     "## Câu hỏi thường gặp", "", ...c.hoi_dap.flatMap((h) => [`**${h.hoi}**`, "", h.dap, ""]),
     `Nguồn: ${c.nguon}.`, ""].join("\n");

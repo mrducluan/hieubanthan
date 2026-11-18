@@ -300,5 +300,8 @@
  "pt.thang_ten.10": "Oct",
  "pt.thang_ten.11": "Nov",
  "pt.thang_ten.12": "Dec",
- "pt.c3.gy.cua_hop_trach": "Front door: currently faces {h} ({dn}) — a good direction for this house; keep it, and keep the entrance bright and tidy"
+ "pt.c3.gy.cua_hop_trach": "Front door: currently faces {h} ({dn}) — a good direction for this house; keep it, and keep the entrance bright and tidy",
+ "pt.hai_cung.cung_nhom": "You are both in the {nhom} group, so you share all four good directions ({ds}). Face the main door and living room toward the best direction of the main earner; for a shared bed, pick a direction that is good for both.",
+ "pt.hai_cung.khac_nhom": "You are in different groups ({a} and {b}), so there is no good direction you share. The common practice: the main door follows the person who anchors the household (the one at home most, or whose name is on the house); private rooms, desks and single beds follow each person. No layout is perfect for both, and this says nothing about whether two people get along.",
+ "pt.hai_cung.luu_y": "Birth year only: if you were born before Li Chun (around 3–5 February), enter the previous year."
 }

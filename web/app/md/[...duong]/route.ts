@@ -1,5 +1,6 @@
 // Bản Markdown cho bot AI: /<đường dẫn>.md được rewrite sang /md/<đường dẫn> (next.config.mjs).
 // /index.md · /huyen-hoc.md · /kien-thuc.md · /<mảng>/<cụm>.md · /<mảng>/<cụm>/<trang>.md · /phong-thuy/huong-hop-tuoi[/<tuổi>].md · /tu-dien.md
+import { namTuoiSeo } from "@/lib/nam";
 import { CHU_DE, cungPhi, dsCumTru, dsCungPhi, duongTuoi, khoaTheoDuong, mucLuc, trang, tuDien } from "@/lib/kien-thuc";
 import { mdChuDe, mdDsTuoi, mdHuyenHoc, mdThuVien, mdTrang, mdTuDien, mdCung, TEN_MANG, traMd } from "@/lib/markdown";
 import { MANG_HH, TRA_CUU_THEM, lichHH, namNayVn } from "@/lib/huyen-hoc";
@@ -34,7 +35,7 @@ export async function GET(_req: Request, { params: thamSo }: { params: Promise<{
   }
   if (p[0] === "phong-thuy" && p[1] === "huong-hop-tuoi" && p.length <= 3) {
     if (p.length === 2) { const d = await dsCungPhi(); return traMd(mdDsTuoi(d.cung, d.tuoi), duongTuoi("huong-hop-tuoi")); }
-    const c = await cungPhi(p[2]!);   // AUD-Q2: trang cung phi (trang năm .md đã 308 về mục lục .md)
+    const c = await cungPhi(p[2]!, await namTuoiSeo());   // AUD-Q2: trang cung phi (trang năm .md đã 308 về mục lục .md)
     return c ? traMd(await voiKhoi(mdCung(c), duongTuoi(c.slug), { tieu_de: c.tieu_de }), duongTuoi(c.slug)) : KHONG_CO();
   }
   if (p[0] === "blog" && p.length === 2) {
