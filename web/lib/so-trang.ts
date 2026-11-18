@@ -289,6 +289,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Tự soi bàn tay theo Thần Tướng Toàn Biên (tám cung, hơn 60 hình vân) hoặc theo chỉ tay phương Tây của Cheiro, Benham (dáng tay, các gò, đường chỉ). Ảnh không rời máy.",
     loi_dan: "Chụp lòng bàn tay (ảnh không rời máy) để thấy tám cung trên tay mình, hoặc ngửa tay ra chỗ sáng, chọn hình vân giống tay mình để đọc sách xưa nói gì. Muốn xem theo lối phương Tây (dáng tay, các gò, đường chỉ) thì đổi trường phái ngay dưới.",
   } },
+  { duong: "/ky-mon", nhom: "tinh", ten: "Kỳ Môn Độn Giáp", o: O_TINH, mac_dinh: {   // KM-2: bàn theo giờ
+    tieu_de_seo: "Kỳ Môn Độn Giáp: giờ này nên đi hướng nào?", h1: "Kỳ Môn Độn Giáp: giờ này nên đi hướng nào?",
+    mo_ta_seo: "Lập bàn Kỳ Môn Độn Giáp theo giờ, miễn phí: tám hướng của giờ này hướng nào thuận, hợp gặp gỡ, ký kết, đi xa hay nộp hồ sơ; giờ tốt trong ngày cho việc bạn định làm. Có giải nghĩa và câu sách xưa.",
+    loi_dan: "Mỗi hai tiếng, tám hướng quanh bạn đổi vai một lần. Xem giờ này hướng nào thuận, hợp việc gì, và hôm nay giờ nào hợp việc bạn định làm.",
+  } },
   { duong: "/lich-am", nhom: "tinh", ten: "Lịch âm các năm", o: O_TINH, mac_dinh: {
     tieu_de_seo: "Lịch âm các năm: Tết, tháng nhuận, mùng 1 và rằm", h1: "Lịch âm các năm: Tết ngày nào, năm nào nhuận?",
     mo_ta_seo: "Lịch âm Việt Nam từng năm: ngày Tết, năm có tháng nhuận không, mùng 1 và rằm từng tháng ứng với dương lịch, tháng đủ hay thiếu. Kèm công cụ đổi ngày âm dương.",

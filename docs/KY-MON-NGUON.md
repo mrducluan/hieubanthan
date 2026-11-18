@@ -128,3 +128,20 @@ gửi Khôn, Thiên Nhuế mang Thiên Cầm. Hai phép định cục: `sach_bo`
 tiết khí thật (người dùng dễ kiểm). **Trí nhuận** là công tắc trong khung Trường phái, ghi rõ là phép sách cổ trình bày.
 Khi anh gửi Ngự Định Kỳ Môn Bảo Giám (có bảng mẫu theo năm), em đối chiếu thêm phép trí nhuận.
 
+
+## 8. KM-2 — cách cục, kho nghĩa và trang `/ky-mon` (2026-11-18)
+
+- **Cách cục** (`engine/app/calc/ky_mon_cach.py`): 21 cách có điều kiện rõ trong sách. Thử bằng 19 ví dụ «假令» của chính
+  sách (Phù Ứng Kinh toản + Yên Ba Điếu Tẩu Ca chú) — khớp hết. Một ví dụ bản gõ ghi tên giờ lệch («乙巳» trong khi sách
+  nói giờ Mùi của ngày Đinh / Nhâm = Đinh Mùi); test dùng giờ sách mô tả. Tần suất trên 1.080 bàn: ba độn mỗi loại khoảng
+  1 %, các cặp can gia khoảng 10 %, bàn đứng yên 22 %, lật ngược 11 %.
+- **Chỗ các sách chép khác nhau, đã chọn một và ghi lại**: tam kỳ nhập mộ lấy theo Vương Chương trong Phù Ứng Kinh
+  (Ất tới Khôn, Bính và Đinh tới Càn); lời giải Yên Ba Điếu Tẩu Ca còn chép Ất tới Càn, Đinh tới Cấn — chưa đưa vào.
+  Sáu nghi phạm hình lấy bản theo CUNG của Vương Chương (bản của Cát Hồng nói theo chi giờ).
+- **Chưa làm**: thiên phụ thời, tam trá ngũ giả, thiên võng tứ trương, các «cách» của Canh (tuế / nguyệt / nhật / thời
+  cách, phi cung, phục cung) — sách có nhưng cần thêm can năm, tháng hoặc chữ sách chưa đủ rõ để viết luật.
+- **Kho nghĩa** (`ky_mon_kb.json`): lời sách phần lớn nói chuyện ra quân; lời tiếng Việt viết lại cho việc đời thường
+  (gặp gỡ, ký kết, đi xa, giấy tờ, họp mặt, thu hồi, làm việc sâu), giữ câu chữ Hán làm gốc. Bốn thần Trực Phù, Đằng Xà,
+  Câu Trần, Chu Tước chưa có câu sách riêng (kho nguồn hiện chỉ có câu cho Cửu Thiên, Cửu Địa, Thái Âm, Lục Hợp).
+- **Luật đọc** (`luangiai/ky_mon.py`, `ky_mon_1`): xét cửa trước, rồi kỳ — theo câu «如得門不得奇亦可用得奇不得門終非吉».
+  Không điểm số. Giờ «nên giữ nhịp» chiếm khoảng 40 % số giờ (đúng tần suất các thế bàn của sách).
