@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { goiYThanhKhoa } from "@/lib/loi-sao";
-import { ConSuat, DemNguoc, UuDaiMoKhoa } from "@/components/sao/UuDai";
+import { ConSuat, DemNguoc, MocUuDai, UuDaiTroi } from "@/components/sao/UuDai";
 import { loiTietKiem, type UuDai } from "@/lib/uu-dai";
 import { useMucSao } from "@/lib/muc-sao";
 import { ghi } from "@/lib/do-luong";
@@ -184,8 +184,14 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
     const coAi = bc.chuong.some((c) => !c.khoa && c.van_ai);
     // KC-1: một khuôn cho mọi mảng — Tử vi, Bát tự, Bản đồ con số cùng component; chỉ Tử vi lưu bài (LG-ĐS).
     const tenLuu = { tuvi: "Luận giải Tử vi", battu: "Luận giải Bát tự", thanso: "Bản đồ con số" }[bc.mo_dun] ?? "Luận giải";
+    const ud = (bc as unknown as BaoCao).phi?.uu_dai;
     return (<TenHienProvider ten={[bc.ten_hien]}>
       {dau?.(bc)}
+      {/* UD-3: ưu đãi là thẻ nổi trượt xuống khi người đọc tới chỗ khoá (mốc `MocUuDai`), không chen vào bài. */}
+      {!en && (bc.so_khoa ?? 0) > 0 && ud && (
+        <UuDaiTroi u={ud} khoa={bc.so_khoa ?? 0} dang={dang} lamMoi={() => void tai()}
+          moKhoa={(nguon) => { ghi("sao_cta_clicked", { tu: `ud_${nguon}`, mo_dun: bc.mo_dun, so_chuong: bc.so_khoa }); void tai(true); }} />
+      )}
       <BaoCaoDoiSongView bc={bc} ten={ten} goc={goc} nhan={en ? cbc("nhan_mac_dinh") : bc.mo_dun === "thanso" ? "Bản đồ con số" : bc.mo_dun === "chan_dung" ? "Chân dung tổng hợp" : "Luận giải toàn bộ"} chuongQua={chuongQua}
         hanhDong={<>
           {coAi && (
@@ -195,12 +201,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
           )}
           <Button variant="ghost" size="sm" onClick={() => window.print()}><Printer aria-hidden /> {cg("lg.in")}</Button>
         </>}
-        moKhoaNgay={(nguon) => {
-          const u = (bc as unknown as BaoCao).phi?.uu_dai;
-          if (en || !bc.so_khoa || !u) return null;
-          return <UuDaiMoKhoa u={u} khoa={bc.so_khoa} dang={dang} nguon={nguon}
-            moKhoa={() => { ghi("sao_cta_clicked", { tu: `ud_${nguon}`, mo_dun: bc.mo_dun, so_chuong: bc.so_khoa }); void tai(true); }} />;
-        }}
+        moKhoaNgay={(nguon) => (!en && bc.so_khoa && (bc as unknown as BaoCao).phi?.uu_dai ? <MocUuDai nguon={nguon} /> : null)}
         phanKhoa={bc.so_khoa ? <PhanKhoa bc={bc as unknown as BaoCao} dang={dang} loi={loi} moKhoa={() => void tai(true)} lamMoi={() => void tai()} /> : null}
         chanTrang={!en && !bc.so_khoa && banLuu ? (
           <div className="mt-6">

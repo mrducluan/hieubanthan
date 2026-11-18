@@ -28,6 +28,10 @@
   :root { --tm-h: 0px; }
   html:has([data-thanh-mang][data-an="0"]) { --tm-h: 2.75rem; }
   html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--tm-h); }
+  /* UD-3: thẻ ưu đãi nổi nằm dưới thanh đầu trang + thanh mảng + (điện thoại) thanh chương của báo cáo khi đang hiện. */
+  :root { --tc-h: 0px; }
+  @media (max-width: 1023px) { html:has([data-testid="lg-thanh-chuong"][data-hien="1"]) { --tc-h: 3rem; } }
+  .ud-troi { top: calc(4rem + var(--tm-h) + var(--tc-h) + 0.5rem); transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
   body {
     @apply bg-bg text-fg font-sans antialiased;
     font-size: 16px;
