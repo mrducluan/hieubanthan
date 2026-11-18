@@ -46,7 +46,15 @@ export function DangNhap({ googleQuaSite = false }: { googleQuaSite?: boolean })
   const [ma, setMa] = useState("");
   const [daGui, setDaGui] = useState(false);
   const [dang, setDang] = useState(false);
-  const [loi, setLoi] = useState<string | null>(params.get("loi") ? "Đăng nhập chưa thành công, thử lại." : null);
+  const [loi, setLoi] = useState<string | null>(() => {
+    if (!params.get("loi")) return null;
+    // Zalo: kèm tên bước lỗi (chỉ chữ thường + gạch dưới) để chủ dự án / hỗ trợ biết lỗi ở đâu.
+    const buoc = params.get("loi") === "zalo" ? (params.get("b") ?? "").replace(/[^a-z_]/g, "").slice(0, 20) : "";
+    if (buoc === "mat_cookie" || buoc === "state")
+      return "Đăng nhập Zalo chưa xong vì trang quay về mở ở trình duyệt khác. Hãy mở hieuban.com bằng Chrome / Safari rồi bấm lại Zalo.";
+    if (buoc === "zalo_tu_choi") return "Bạn chưa cho phép đăng nhập bằng Zalo. Bấm lại nếu muốn thử tiếp.";
+    return buoc ? `Đăng nhập Zalo chưa thành công, thử lại. (Mã: ${buoc})` : "Đăng nhập chưa thành công, thử lại.";
+  });
 
   if (!coTaiKhoan()) {
     return (
