@@ -124,7 +124,7 @@ test("thẻ chương khoá hiện câu hỏi chương trả lời; bấm một c
   await expect(khoa).toContainText("Kèm chân dung 1 người liên quan");
   if (process.env.CHUP) await khoa.screenshot({ path: process.env.CHUP });
   await khoa.locator('[data-testid="lg-khoa-cau-nut"][data-ma="ben"]').click();
-  await expect(page.getByTestId("hop-thoai-sao")).toBeVisible();
+  await page.waitForURL(/\/dang-nhap\?tiep=%2Ftu-vi&tu=bao_cao&qua=10/);   // DN-5: khách → thẳng trang đăng nhập
   expect(moKhoa).toBe(1);
 });
 
