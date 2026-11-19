@@ -11,6 +11,7 @@ import { postJson } from "@/lib/goi-api";
 import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
 import { cn } from "@/lib/utils";
 import { useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
+import { ChonTrenVeTinh, coBanDoVeTinh, type LaBanHuyenKhongMap } from "@/components/huyen-hoc/ChonTrenVeTinh";
 import { tenTheo, type TenHien } from "@/lib/ten-hien";
 
 const SON_24: [string, string][] = [
@@ -115,6 +116,33 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
     finally { setDang(false); }
   };
 
+  const lapVoiDo = async (doToa: number) => {
+    const nam = Number(namXay);
+    if (!(nam >= 1864 && nam <= 2150)) { setLoi(t("hk.loi_nam")); return; }
+    setCach("do");
+    setDoLa(String(doToa));
+    setDang(true); setLoi(null);
+    try {
+      const kq = await postJson<Ban>("/api/phongthuy/huyen-khong", { nam_xay: nam, do: doToa });
+      setBan(kq);
+      setChonCung(kq.huong.quai);
+      try { luuHoSoNha({ nam_xay: nam, huong_do: (doToa + 180) % 360 }); } catch { /* bỏ qua */ }
+      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong_ve_tinh" });
+    } catch (e) { setLoi(e instanceof Error ? e.message : t("hk.loi_lap")); }
+    finally { setDang(false); }
+  };
+
+  const duLieuMap: LaBanHuyenKhongMap | null = ban ? {
+    van: ban.van,
+    toa_quai: ban.toa.quai,
+    huong_quai: ban.huong.quai,
+    cung: ban.cung.map((c) => ({ cung: c.cung, son: c.son, huong: c.huong, muc: c.y_cap?.muc })),
+    thanh_mon: [
+      ...(ban.thanh_mon?.chinh.dung_duoc ? [ban.thanh_mon.chinh.cung] : []),
+      ...(ban.thanh_mon?.phu.dung_duoc ? [ban.thanh_mon.phu.cung] : []),
+    ],
+  } : null;
+
   const tt = (n: number) => ban?.trang_thai_sao.find((x) => x.sao === n)?.trang_thai ?? "tử";
   return (
     <section aria-labelledby="tieu-de-hk" className="glass space-y-5 rounded-2xl p-5 sm:p-6">
@@ -159,6 +187,25 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
         </div>
         <Button onClick={lap} disabled={dang || namXay.length !== 4 || (cach === "do" && doLa === "")}>{dang ? t("hk.dang_lap") : t("hk.lap")}</Button>
       </div>
+      {coBanDoVeTinh() && (
+        <div className="space-y-2" data-testid="hk-ve-tinh-wrap">
+          <p className="text-xs text-fg-muted">
+            {en
+              ? "Or place the 8-palace Flying Star compass directly over your roof on satellite map (coordinates stay on your device):"
+              : "Hoặc phủ trực tiếp la bàn Huyền Không 8 cung lên mái nhà trên ảnh vệ tinh (toạ độ chỉ xử lý trên máy bạn, không lưu):"}
+          </p>
+          <ChonTrenVeTinh
+            sinh={null}
+            huyenKhong={duLieuMap}
+            chonCung={chonCung}
+            onChonCung={(c) => { setChonCung(c); ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong_map_cung" }); }}
+            onDung={(kq) => {
+              const doToa = Math.round(((kq.do_huong + 180) % 360) * 10) / 10;
+              void lapVoiDo(doToa);
+            }}
+          />
+        </div>
+      )}
       {loi && <BaoLoi loi={loi} thuLai={lap} />}
 
       {ban && (

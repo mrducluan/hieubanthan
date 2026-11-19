@@ -97,12 +97,14 @@ def _chieu(tam: int, nguon: dict) -> bool:
 
 
 def _nhap_trung(tam: int, nguon: dict, the_quai: bool) -> tuple[int, bool, dict | None]:
-    """Sao nhập trung + chiều bay. Thế quái: thay bằng thế tinh của sơn gốc; thuận nghịch VẪN theo âm dương
-    của sơn gốc (Thẩm thị)."""
+    """Sao nhập trung + chiều bay. Thế quái (Thẩm Thị Huyền Không Học): thay bằng thế tinh của sơn gốc, riêng
+    Ngũ Hoàng (sao 5) nhập trung KHÔNG thay thế tinh (giữ 5, vì trung cung không có quẻ gốc — khớp đồ bàn
+    FS_SS1_CHART_P134); thuận nghịch VẪN theo âm dương của sơn gốc."""
     son, ad = _son_goc(tam, nguon)
     if not the_quai:
         return tam, ad == "+", None
-    return THE_TINH[son], ad == "+", {"goc": tam, "the": THE_TINH[son], "thuan": ad == "+"}
+    the_so = 5 if tam == 5 else THE_TINH[son]
+    return the_so, ad == "+", {"goc": tam, "the": the_so, "thuan": ad == "+"}
 
 
 _TB = [(1, 4, 7), (2, 5, 8), (3, 6, 9)]

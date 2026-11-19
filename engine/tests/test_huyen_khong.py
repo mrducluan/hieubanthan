@@ -152,6 +152,6 @@ def test_api_do_kiem_huong_lap_the_quai():
     c = TestClient(app)
     d = c.post("/v1/phongthuy/huyen-khong", json={"nam_xay": 2008, "do": 4.0}).json()       # Tý lệch 4° → kiêm
     assert d["phep"] == "the_quai" and d["the_tinh"]["son"]["the"] == 6
-    assert d["ha_quai"]["cuc"] and d["the_quai_trang_thai"] == "chua_doi_chieu_oracle"
+    assert d["ha_quai"]["cuc"] and d["the_quai_trang_thai"] == "da_doi_chieu_tham_thi"
     d = c.post("/v1/phongthuy/huyen-khong", json={"nam_xay": 2008, "do": 2.0}).json()       # lệch 2° → hạ quái
     assert d["phep"] == "ha_quai" and "the_tinh" not in d

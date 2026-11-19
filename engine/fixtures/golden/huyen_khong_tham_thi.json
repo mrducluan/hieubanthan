@@ -1,6 +1,6 @@
 {
   "_nguon": "Đối chiếu trực tiếp từ Thẩm Thị Huyền Không Học (沈氏玄空學・上) trong fengshui-xuankong-kb — các đồ bàn Hạ Quái, Thế Quái và Thành Môn Quyết đã kiểm từng cung.",
-  "_ghi_chu_sao_5": "Phát hiện đối chiếu (FS_SS1_CHART_P134, Vận 9 Toạ Ngọ Hướng Tý Thế Quái): sách Thẩm Thị giữ nguyên Ngũ Hoàng (5) nhập trung (6-5 ở trung cung, không thay 5 bằng thế tinh của chính sơn). Engine hiện vẫn giữ quy tắc cũ (thay 5 bằng thế tinh) chờ chủ dự án chốt đổi ENGINE_VERSION.",
+  "_ghi_chu_sao_5": "Đã chuẩn hóa theo Thẩm Thị Huyền Không Học (FS_SS1_CHART_P134, ENGINE_VERSION 0.1.10): sao 5 nhập trung trong Thế Quái giữ nguyên số 5, bay thuận/nghịch theo âm dương chính sơn.",
   "ha_quai": [
     {
       "id": "FS_SS1_CHART_P134_ha_quai",
@@ -38,6 +38,23 @@
     }
   ],
   "the_quai": [
+    {
+      "id": "FS_SS1_CHART_P134_the_quai",
+      "mo_ta": "Vận 9 Toạ Ngọ Hướng Tý — Kiêm tuyến Thế Quái (sao 5 nhập trung giữ nguyên 5 theo Thẩm Thị)",
+      "nam_xay": 2024,
+      "toa": "Ngọ",
+      "cung": {
+        "Tốn": [5, 6, 8],
+        "Ly": [1, 1, 4],
+        "Khôn": [3, 8, 6],
+        "Chấn": [4, 7, 7],
+        "Trung cung": [6, 5, 9],
+        "Đoài": [8, 3, 2],
+        "Cấn": [9, 2, 3],
+        "Khảm": [2, 9, 5],
+        "Càn": [7, 4, 1]
+      }
+    },
     {
       "id": "FS_SS1_CHART_P123_124_the_quai",
       "mo_ta": "Vận 3 Toạ Tý Hướng Ngọ — Kiêm tuyến Thế Quái",

@@ -306,8 +306,8 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
     if ha:
         b["ha_quai"] = {"cuc": ha["cuc"], "cuc_ten": ha["cuc_ten"],
                         "cung": [{k: x[k] for k in ("cung", "son", "huong")} for x in ha["cung"]]}
-        # Không gói mã nguồn mở nào (MIT) lập bàn thế quái để đối chiếu — ghi rõ cho người dùng.
-        b["the_quai_trang_thai"] = "chua_doi_chieu_oracle"
+        # Đã đối chiếu trực tiếp với đồ bàn Thế Quái trong Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json).
+        b["the_quai_trang_thai"] = "da_doi_chieu_tham_thi"
         b["the_quai_y"] = phongthuy_kb.huyen_khong()["the_quai"]
     kb = phongthuy_kb.huyen_khong()
     nam_xem = inp.nam_xem or hk.nam_theo_lap_xuan(_bay_gio_utc())
