@@ -17,10 +17,10 @@
 |---|---|---|---|---|---|
 | Bát tự | 3 | 1 |  | 4 |  |
 | Tử vi | 1 | 3 | 4 | 7 |  |
-| Kinh Dịch | 4 | 2 |  | 2 |  |
+| Kinh Dịch | 4 | 2 | 1 | 2 |  |
 | Phong thuỷ | 2 | 2 | 1 | 3 |  |
 | Nhân tướng | 5 | 2 |  |  |  |
-| Tarot | 1 |  |  |  |  |
+| Tarot | 1 |  | 1 |  |  |
 | Kỳ Môn |  |  |  | 1 |  |
 | Thần số |  |  | 11 | 12 |  |
 | Lịch · tuổi · tập quán |  | 1 | 5 |  |  |
@@ -113,6 +113,7 @@
 | Kinh Dịch | `kinhdich_kb.json` | mau | Ban biên tập soạn |  |
 | Kinh Dịch | `kinhdich_kb.json` | giai_thich | Ban biên tập soạn |  |
 | Kinh Dịch | `kinhdich_legge.json` |  | Có nguyên văn đối chiếu | TK-2 việc 4: bản dịch Anh James Legge 1882 (PD) — chỉ quẻ qua kiểm vạch âm dương + kiểm chữ hỏng; chỉ bản /en |
+| Kinh Dịch | `kinhdich_luc_hao_thuc_chien.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 2B: 8 nguyên tắc Lục Hào + 5 Lục Thân thực chiến đối chiếu & trích dẫn chữ Hán có phép từ Vương Hổ Ứng & Thiệu Vĩ Hoa (iching-kb) |
 | Kinh Dịch | `kinhdich_tra_loi.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
 | Kinh Dịch | `kinhdich_tra_loi.json` | tinh_chat_que | Có nguyên văn đối chiếu |  |
 | Kinh Dịch | `kinhdich_tra_loi.json` | sach_xua_viec | Có nguyên văn đối chiếu | WS-5: câu Tăng San Bốc Dịch theo chương ứng với việc; lời Việt là tóm ý |
@@ -138,6 +139,7 @@
 | Nhân tướng | `nhan_tuong_kieu_hinh.json` |  | Có nguyên văn đối chiếu | SX-C: 119 kiểu hình mày, mắt, mũi, tai, miệng (bài thơ từng kiểu) khớp kho nguồn; 7 mục gắn `ngo` |
 | Nhân tướng | `nhan_tuong_lieu_trang.json` |  | Có nguyên văn đối chiếu | SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn |
 | Nhân tướng | `nhan_tuong_sach_ghi.json` |  | Có nguyên văn đối chiếu | SX-C: câu Thần Tướng Toàn Biên gắn với nét khảo sát + 12 cung trên mặt |
+| Tarot | `tarot_greer_nguoc.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 2B: 22 Lá Ẩn Chính ngược đối chiếu & trích dẫn có phép từ Mary K. Greer (2002), phân tích 2 mặt tích cực + tiêu cực cần chú ý |
 | Tarot | `tarot_kb.json` |  | Có nguyên văn đối chiếu | câu trích khớp Waite / Mathers / Book T / Papus 1892 / Case 1920 / Ouspensky 1913; lời lớp Marseille, B.O.T.A., Thoth vẫn là tóm ý (Marseille đã soát với Mathers + Papus, B.O.T.A. ẩn chính với Case 1920) |
 | Kỳ Môn | `ky_mon_kb.json` |  | Ban biên tập soạn | KM-2: lời đời thường về cửa, sao, thần, cách cục do ban biên tập viết |
 | Kỳ Môn | `ky_mon_kb.json` | cua | Có nguyên văn đối chiếu | mỗi cửa một câu «釋八門所主» |

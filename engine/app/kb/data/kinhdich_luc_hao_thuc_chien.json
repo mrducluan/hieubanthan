@@ -1,0 +1,135 @@
+{
+  "_nguon": "Đối chiếu và trích dẫn có phép từ kho iching-kb: Vương Hổ Ứng 'Tăng San Bốc Dịch Bình Thích' (王虎應《增刪卜易評釋》), 'Lục Hào Phân Loại Dự Đoán Ngữ' (《六爻分類預測斷語》) và Thiệu Vĩ Hoa 'Chu Dịch Dự Đoán Học' (邵偉華《周易預測學》).",
+  "_trang_thai": "da_doi_chieu_sach_goc",
+  "source_id": "kinhdich_luc_hao_thuc_chien",
+  "school_id": "luc_hao",
+  "sach_goc": [
+    "王虎應《增刪卜易評釋》(Vương Hổ Ứng — Tăng San Bốc Dịch Bình Thích)",
+    "王虎應《六爻分類預測斷語》(Vương Hổ Ứng — Lục Hào Phân Loại Dự Đoán Ngữ)",
+    "邵偉華《周易預測學》(Thiệu Vĩ Hoa — Chu Dịch Dự Đoán Học)"
+  ],
+  "nguyen_tac": {
+    "dung_nguyen_ky_cuu": {
+      "ten": "Dụng Thần · Nguyên Thần · Kỵ Thần · Cừu Thần",
+      "mat_tich_cuc": "Dụng Thần vượng tướng và có Nguyên Thần phát động tương sinh là tượng gốc rễ vững, việc hỏi có hậu thuẫn thực chất và đủ lực đi đến kết quả.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý khi chỉ thấy Dụng Thần sáng bề mặt mà Nguyên Thần bị khắc, nhập mộ hoặc Cừu Thần phát động sinh Kỵ Thần: việc tưởng thuận lúc đầu nhưng dễ hụt hơi hoặc gặp cản trở ngầm về sau.",
+      "ung_ky": "Ứng nghiệm cát vào ngày/tháng Dụng Thần hoặc Nguyên Thần đắc lệnh, xung khai chỗ hợp; ứng hung vào ngày Kỵ Thần vượng.",
+      "sach_ghi": {
+        "han": "仇神者，克元神不能生用神，反生忌神而克害用神，即為仇神。用神是事情的表面，原神才是事情的根本。",
+        "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 8) & Chu Dịch Dự Đoán Học (Thượng, Phần 3)"
+      }
+    },
+    "tuan_khong": {
+      "ten": "Tuần Không (Chân Không vs Giả Không)",
+      "mat_tich_cuc": "Nếu Dụng Thần vượng tướng, có nhật nguyệt hoặc hào động sinh phù dù gặp Tuần Không cũng chỉ là tạm trống trong tuần; đến ngày xuất không hoặc xung thực việc vẫn thành.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý nếu Hào Thế gặp Không Vong: chính bạn đang do dự, chưa quyết tâm hoặc dễ sơ suất giữa chừng. Nếu Thế và Ứng cùng Không Vong, giao dịch hoặc hợp tác rất dễ bỏ dở giữa đường, kể cả đã ký giấy tờ vẫn có nguy cơ hủy.",
+      "ung_ky": "Giả Không ứng vào ngày xuất Tuần Không hoặc ngày địa chi xung trực tiếp hào Không; Chân Không (hưu tù lại bị khắc) thì khó thành.",
+      "sach_ghi": {
+        "han": "用神逢空，勿即指為不空，畢竟為空。但此空者，乃目下旬內之空也，待至出空之日，則不空也。世應同時空亡，買賣中途而廢，即使簽約也有可能取消。",
+        "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 11) & Lục Hào Phân Loại Dự Đoán Ngữ (Phần 2)"
+      }
+    },
+    "am_dong_nhat_pha": {
+      "ten": "Nhật Thần Xung: Ám Động vs Nhật Phá",
+      "mat_tich_cuc": "Hào tĩnh vốn đang vượng tướng được Nhật Thần xung gọi là Ám Động: lực tác động nhanh, kín đáo và hiệu quả cao, thường tạo bước ngoặt bất ngờ cho việc đang hỏi.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý nếu hào tĩnh vốn đã suy yếu, hưu tù mà bị Nhật Thần xung: đó là Nhật Phá — hào mất lực hoàn toàn, làm Dụng Thần thì việc đổ vỡ, làm Nguyên Thần thì hết sức nâng đỡ.",
+      "ung_ky": "Ám Động ứng rất nhanh, thường ngay trong ngày/tuần hiện tại hoặc ngày hợp hào Ám Động.",
+      "sach_ghi": {
+        "han": "日辰為六爻之主宰，司四時之旺相。衝旺相之靜爻，既為暗動，衝衰弱之靜爻，則為日破。",
+        "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 12)"
+      }
+    },
+    "nguyet_pha": {
+      "ten": "Nguyệt Phá (Tháng Xung Hào)",
+      "mat_tich_cuc": "Hào bị Nguyệt Phá nếu được Nhật Thần lâm hoặc hợp lại, hoặc chờ sang tháng sau xuất phá / đến ngày điền thực vẫn có cửa cứu với việc dài hạn.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý với việc gấp trong tháng: hào Nguyệt Phá gặp sinh cũng khó gượng dậy ngay, còn nếu gặp thêm hào động khắc thì hung tượng càng nặng, dễ hỏng việc hoặc hao tổn.",
+      "ung_ky": "Ứng vào ngày/tháng xuất phá, ngày điền thực hoặc ngày gặp hợp.",
+      "sach_ghi": {
+        "han": "月破之爻逢生不起，逢克更兇。用神月破，填實之日不為破，逢合之日也不為破。",
+        "nguon": "Chu Dịch Dự Đoán Học (Thượng, Phần 3 & Phần 10)"
+      }
+    },
+    "hoi_dau_khac": {
+      "ten": "Hào Động Hóa Hồi Đầu Khắc",
+      "mat_tich_cuc": "Chỉ khi Kỵ Thần phát động hóa Hồi Đầu Khắc mới là cát tượng: kẻ cản trở tự triệt tiêu lực hại của chính nó.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý rất cao khi Hào Thế hoặc Dụng Thần phát động lại hóa ra hào biến quay ngược khắc mình: đây là tượng tự mình quyết định sai dẫn đến thiệt hại trực tiếp cho bản thân hoặc việc đang theo đuổi.",
+      "ung_ky": "Ứng hung mạnh vào tháng/ngày hào biến đang vượng lệnh.",
+      "sach_ghi": {
+        "han": "申金子孫持世，化午火回頭之克，乃自身與子孫同受克也。",
+        "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 10)"
+      }
+    },
+    "tien_than_thoai_than": {
+      "ten": "Hóa Tiến Thần · Hóa Thoái Thần",
+      "mat_tich_cuc": "Dụng Thần hóa Tiến Thần (như Hợi hóa Tý, Dần hóa Mão, Thìn hóa Mùi, Thân hóa Dậu...) báo hiệu thế đi lên mạnh mẽ, càng về sau càng thuận và mở rộng quy mô.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý khi Dụng Thần hóa Thoái Thần (như Mão hóa Dần, Dậu hóa Thân...): đà phát triển đang giảm dần, nhiệt huyết hoặc lợi ích thu hẹp, không nên rót thêm vốn lớn lúc này.",
+      "ung_ky": "Hóa Tiến Thần ứng vào ngày/tháng lâm Tiến Thần hoặc gặp hợp; Hóa Thoái Thần kỵ ngày lâm hoặc bị xung.",
+      "sach_ghi": {
+        "han": "斷卦定準應期決竅：化進神逢值逢合，化退神忌值忌衝。",
+        "nguon": "Chu Dịch Dự Đoán Học (Thượng, Phần 8)"
+      }
+    },
+    "luc_xung_luc_hop": {
+      "ten": "Quẻ Lục Xung & Quẻ Lục Hợp",
+      "mat_tich_cuc": "Quẻ Lục Xung rất lợi cho việc cần chấm dứt nhanh (thoát rắc rối, khỏi bệnh mới phát, bỏ thói quen xấu); Quẻ Lục Xung biến Lục Hợp là tượng tan rồi lại hợp, việc từng trục trặc nay có cơ hội nối lại.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý khi hỏi chuyện cần bền lâu (hôn nhân, hợp tác dài hạn, mua bán ổn định) mà gặp Quẻ Lục Xung (8 quẻ thuần Bát Cung + Thiên Lôi Vô Vọng, Lôi Thiên Đại Tráng): dễ biến động mạnh, khó giữ nguyên trạng.",
+      "ung_ky": "Quẻ Lục Hợp ứng khi gặp ngày xung khai; Quẻ Lục Xung ứng khi gặp ngày hợp trụ.",
+      "sach_ghi": {
+        "han": "此八宮頭一卦皆是六沖卦，再者，天雷無妄、雷天大壯亦乃六沖卦，一共十卦，其餘不是。",
+        "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 4 & Phần 14)"
+      }
+    },
+    "tu_ton_quan_quy_tri_the": {
+      "ten": "Tử Tôn Trì Thế vs Quan Quỷ Trì Thế",
+      "mat_tich_cuc": "Khi hỏi bình an, đi xa, phòng rủi ro hay giải lo mà được Tử Tôn Trì Thế vượng tướng là tượng rất yên ổn, ít gặp biến cố bất ngờ.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý khi hỏi phòng họa mà gặp Quan Quỷ Trì Thế: trong lòng còn nhiều lo âu, việc ẩn chứa rủi ro khó lường, cần đề phòng kỹ hoặc cân nhắc tạm dừng. Riêng hỏi công danh, thăng chức thì Quan Quỷ Trì Thế vượng lại là tượng tốt.",
+      "ung_ky": "Xét thêm vượng suy tại Nguyệt Kiến và Nhật Thần để định mức độ nặng nhẹ.",
+      "sach_ghi": {
+        "han": "但得子孫持世，安如泰山，當行即行；若得官鬼持世，憂慮不解，加意防之，即使當行，亦宜罷止。",
+        "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 5)"
+      }
+    }
+  },
+  "luc_than_thuc_chien": {
+    "Quan Quỷ": {
+      "mat_tich_cuc": "Hỏi công danh, xin việc, thăng chức hoặc nữ hỏi chồng: Quan Quỷ vượng tướng sinh hợp Hào Thế là tượng có vị thế, được cấp trên trọng dụng hoặc mối quan hệ có trách nhiệm.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý khi hỏi sức khỏe, bình an, kiện tụng: Quan Quỷ là tượng bệnh tật, áp lực và rắc rối pháp lý. Dụng Thần hưu tù lại động hóa Quan Quỷ là dấu hiệu cảnh báo cần kiểm tra sức khỏe hoặc rà soát rủi ro ngay.",
+      "sach_ghi": {
+        "han": "佔功名者，以官鬼爻為用神。用神休囚，動而化官鬼為兇。",
+        "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 7) & Lục Hào Phân Loại Dự Đoán Ngữ (Phần 5)"
+      }
+    },
+    "Thê Tài": {
+      "mat_tich_cuc": "Hỏi tiền bạc, kinh doanh, lương thưởng hoặc nam hỏi vợ: Thê Tài vượng tướng, có Tử Tôn phát động sinh phù và sinh hợp Hào Thế là tượng có nguồn thu thực tế, làm ăn có lãi.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý khi hỏi thi cử, học hành, xin giấy tờ: Thê Tài phát động mạnh lại khắc Phụ Mẫu, báo hiệu dễ phân tâm vì chuyện tiền bạc/tình cảm hoặc phải tốn chi phí ngoài dự tính. Nếu Thê Tài suy yếu bị Huynh Đệ khắc thì kinh doanh dễ hụt vốn.",
+      "sach_ghi": {
+        "han": "世爻空破，妻財又弱受克，買賣不景氣，漸漸蕭條。妻財發動，掏錢上學，或僥倖得名。",
+        "nguon": "Lục Hào Phân Loại Dự Đoán Ngữ (Phần 2 & Phần 4)"
+      }
+    },
+    "Phụ Mẫu": {
+      "mat_tich_cuc": "Hỏi thi cử, hợp đồng, giấy tờ, nhà cửa, xe cộ hoặc cha mẹ: Phụ Mẫu vượng tướng, không Không không Phá là tượng hồ sơ thông suốt, có người bề trên che chở.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý khi hỏi đầu tư ngắn hạn hay tìm niềm vui: Phụ Mẫu quá vượng sẽ khắc Tử Tôn (nguồn sinh tài), báo hiệu thủ tục rườm rà, vất vả lao lực mà lợi nhuận về chậm.",
+      "sach_ghi": {
+        "han": "官鬼、父母、世爻，皆不宜月破、空亡。空破休囚者，落榜無疑。",
+        "nguon": "Lục Hào Phân Loại Dự Đoán Ngữ (Phần 4)"
+      }
+    },
+    "Tử Tôn": {
+      "mat_tich_cuc": "Là phúc thần giải họa và nguồn sinh tiền bạc (Tử Tôn sinh Thê Tài): rất tốt cho kinh doanh, sáng tạo, chữa bệnh và tìm sự bình an.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý khi hỏi thăng chức, thi công chức hoặc nữ hỏi chồng: Tử Tôn phát động mạnh sẽ khắc Quan Quỷ, dễ báo hiệu bất mãn với cấp trên, muốn tự làm riêng hoặc có khoảng cách trong tình cảm.",
+      "sach_ghi": {
+        "han": "子孫、妻財同時發動，考學怕有難度。",
+        "nguon": "Lục Hào Phân Loại Dự Đoán Ngữ (Phần 4)"
+      }
+    },
+    "Huynh Đệ": {
+      "mat_tich_cuc": "Hỏi bạn bè, đồng đội hỗ trợ hoặc tìm người hợp sức chia việc nặng: Huynh Đệ vượng mà không khắc Dụng Thần cho thấy có người cùng gánh vác.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý khi hỏi cầu tài, kinh doanh hoặc nam hỏi tình cảm: Huynh Đệ là Kỵ Thần trực tiếp khắc chế hào Thê Tài — báo hiệu cạnh tranh gay gắt, hao tài tốn của, tranh chấp lợi nhuận hoặc chi tiêu phát sinh.",
+      "sach_ghi": {
+        "han": "求財者，得妻財持世，求財必得，倘若妻財爻被卦中兄弟動而克害，則防耗財爭奪。",
+        "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 4, tóm ý đối chiếu)"
+      }
+    }
+  }
+}
