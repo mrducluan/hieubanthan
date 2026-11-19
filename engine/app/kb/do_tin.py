@@ -161,6 +161,7 @@ SO: dict[str, dict] = {
                    "TK-2: 43/43 số kép có câu Cheiro (OCR, can_doi_chieu); bảng chữ 23/26 khớp; lời Việt là tóm ý trung tính")}},
     **{f: {"mang": "thanso", "muc": "bien_tap"} for f in (
         "thanso_ban_do.json", "thanso_hom_nay.json", "thanso_noi_dau.json", "thanso_xu_ly.json", "thanso_do_thi.json",
+        "thanso_phillips_kb.json",
         "bo_sung_so.json", "bo_sung_so_kep.json", "bo_sung_cap_so.json", "bo_sung_nghe.json", "bo_sung_tinh_yeu.json",
         "bo_sung_nam_ca_nhan.json", "bo_sung_no_nghiep.json")},
     # ---- Lịch, tuổi, tập quán
