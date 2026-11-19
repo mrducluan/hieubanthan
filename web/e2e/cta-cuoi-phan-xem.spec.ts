@@ -83,7 +83,7 @@ test("CTA Sao — công tắc TẮT (miễn phí): mời đọc luận giải, b
   await expect(k.getByTestId("cta-sao")).toHaveCount(0, { timeout: 30_000 });   // đã đọc trọn → không mời nữa
 });
 
-test("CTA Sao — công tắc BẬT: còn chương khoá → 'Mở N chương còn lại', bấm đi đúng luồng SAO-2 (hộp đăng nhập)", async ({ page }) => {
+test("CTA Sao — công tắc BẬT: còn chương khoá → 'Mở N chương còn lại', bấm đi đúng luồng SAO-2 (sang trang đăng nhập)", async ({ page }) => {
   await napHoSo(page);
   await page.route("**/api/goi-y-cheo", async (route) => {
     const r = await route.fetch();
@@ -112,10 +112,8 @@ test("CTA Sao — công tắc BẬT: còn chương khoá → 'Mở N chương c�
   await expect(k.getByTestId("cta-sao")).toContainText("Mở 2 chương còn lại");
   await expect(k.getByTestId("cta-sao")).toHaveAttribute("data-khoa", "2");
   await k.getByTestId("cta-sao").click();
-  await expect(page.getByTestId("hop-thoai-sao")).toHaveAttribute("data-can", "dang_nhap");
-  const ds = await suKien(page);
-  expect(ds.some((e) => e.su_kien === "sao_cta_clicked" && e.so_chuong === 2)).toBe(true);
-  expect(ds.some((e) => e.su_kien === "unlock_clicked")).toBe(true);
+  // DN-5: khách bấm mở → chuyển thẳng tới trang đăng nhập (không qua hộp thoại)
+  await page.waitForURL(/\/dang-nhap\?tiep=%2Ftu-vi&tu=bao_cao/);
 });
 
 test("thẻ Bản đồ 5 mảng: API ký không lộ ngày sinh, ảnh OG 200 PNG, mã giả bị chặn", async ({ request }) => {

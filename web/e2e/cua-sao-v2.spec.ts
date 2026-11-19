@@ -19,6 +19,13 @@ const xemTruoc = (gia: number, thuong: number | null) => ({
   phi: { sao: gia, ly_do: "xem_truoc", khoa: true, dang_nhap: false, so_du: null, thuong_chao_mung: thuong },
 });
 
+/** Bấm "Mở toàn bộ" khi chưa đăng nhập → sang thẳng /dang-nhap; quay lại → lượt tự mở hiện hộp đăng nhập. */
+async function moKhoaRoiQuayLai(page: Page, thuong: number) {
+  await page.getByTestId("lg-mo-khoa").click();
+  await expect(page).toHaveURL(new RegExp(`/dang-nhap\\?tiep=%2Ftu-vi&tu=bao_cao&qua=${thuong}$`));
+  await page.goBack();
+}
+
 async function moBaoCao(page: Page, gia: number, thuong: number) {
   await page.route("**/api/sao/muc", (r) => r.fulfill({ json: { moi_ban: 20, duoc_moi: 20, chao_mung: thuong, tran: 20 } }));
   await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: true, gia } }));
@@ -65,7 +72,7 @@ test("báo cáo (khách, giá 29, quà 10): thanh dính nói giá trị trước
   const khoa = page.getByTestId("lg-phan-khoa");
   await expect(khoa).toContainText("Đọc tiếp 2 chương còn lại");
   await expect(page.getByTestId("lg-goi-y")).toHaveText("Đăng nhập nhận 10 Sao, mời 1 bạn thêm 20 Sao — đủ mở mà không tốn đồng nào.");
-  await page.getByTestId("lg-mo-khoa").click();
+  await moKhoaRoiQuayLai(page, 10);
   const hop = page.getByTestId("hop-thoai-sao");
   await expect(hop).toHaveAttribute("data-can", "dang_nhap");
   await expect(hop.getByRole("heading", { name: "Đọc tiếp báo cáo của bạn" })).toBeVisible();
@@ -80,7 +87,7 @@ test("báo cáo (khách, giá 29, quà 10): thanh dính nói giá trị trước
 
 test("báo cáo (khách, quà đủ giá): hộp nói 'đủ mở ngay', không bày lối mời như điều kiện", async ({ page }) => {
   await moBaoCao(page, 10, 10);
-  await page.getByTestId("lg-mo-khoa").click();
+  await moKhoaRoiQuayLai(page, 10);
   const hop = page.getByTestId("hop-thoai-sao");
   await expect(hop.getByTestId("qua-dang-nhap")).toContainText("Đủ mở ngay báo cáo này.");
   await expect(hop.getByTestId("duong-mien-phi")).toContainText("cho lần sau");

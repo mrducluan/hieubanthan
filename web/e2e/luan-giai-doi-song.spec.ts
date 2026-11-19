@@ -493,7 +493,7 @@ test("EN-2: báo cáo có gio_tam (không biết giờ sinh) → dải riêng đ
   await expect(page.getByTestId("lg-gio-tam")).toHaveCount(0);
 });
 
-test("UD-3: thẻ ưu đãi nổi trượt xuống khi đọc tới chỗ khoá, thu gọn được, ẩn khi tới hộp mở khoá; hộp đăng nhập / nạp có ưu đãi", async ({ page }) => {
+test("UD-3: thẻ ưu đãi nổi trượt xuống khi đọc tới chỗ khoá, thu gọn được, ẩn khi tới hộp mở khoá; khách đi thẳng tới đăng nhập", async ({ page }) => {
   const [dau, ...sau] = BC.chuong;
   const { thoi_gian_bieu: _tg, ...conLai } = BC;
   const ud = { ten: "Ưu đãi nạp", ma: "mb2611", gia: 69, gia_goc: 99, giam_pt: 30, tiet_kiem: 30,
@@ -547,9 +547,11 @@ test("UD-3: thẻ ưu đãi nổi trượt xuống khi đọc tới chỗ khoá,
   await bc.getByTestId("lg-luu-y-mang").scrollIntoViewIfNeeded();
   await expect(troi).toHaveAttribute("data-hien", "1");
 
-  // Bấm ngay trong thẻ → cùng luồng mở khoá, hộp đăng nhập có dải ưu đãi.
+  // Bấm ngay trong thẻ → cùng luồng mở khoá: khách đi thẳng tới đăng nhập; quay lại → hộp đăng nhập có dải ưu đãi.
   await troi.getByTestId("ud-mo-khoa-nut").click();
   await expect.poll(() => moKhoa).toBe(1);
+  await expect(page).toHaveURL(/\/dang-nhap\?tiep=%2Ftu-vi&tu=bao_cao&qua=10$/);
+  await page.goBack();
   const hop = page.getByTestId("hop-thoai-sao");
   await expect(hop.getByTestId("ud-hop-thoai")).toBeVisible();
   await expect(hop.getByTestId("ud-hop-thoai")).toContainText("Tiết kiệm 30 Sao (giảm 30%)");

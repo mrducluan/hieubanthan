@@ -71,10 +71,11 @@ test("báo cáo: khách đọc chương 1 → mở khoá → đăng nhập OTP �
   expect(bc.chuong[0]!.doan!.length).toBeGreaterThan(0);
   await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(khoa.length);
 
-  // 2. Chưa đăng nhập → hộp đăng nhập; sang /dang-nhap thì hộp đóng (không đè form).
+  // 2. Chưa đăng nhập → bấm "Mở toàn bộ" đi thẳng tới /dang-nhap (không qua hộp thoại), mở ở đầu trang.
   await page.getByTestId("lg-mo-khoa").click();
-  await expect(hop(page)).toHaveAttribute("data-can", "dang_nhap");
-  await page.getByTestId("sao-dang-nhap").click();
+  await expect(page).toHaveURL(/\/dang-nhap\?tiep=%2Ftu-vi&tu=bao_cao/);
+  await expect(page.getByTestId("dang-nhap-tu-bao-cao")).toBeVisible();
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
   await expect(hop(page)).toHaveCount(0);
   await dangNhap(page, EMAIL);
   await expect(page).toHaveURL(/\/tu-vi/);
@@ -160,7 +161,10 @@ test("khách: hết lượt hỏi → mời đăng nhập; 'Để sau' ở báo 
 
   await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
   await page.getByTestId("lg-mo-khoa").click();
-  await expect(hop(page)).toHaveAttribute("data-can", "dang_nhap");
+  await expect(page).toHaveURL(/\/dang-nhap/);
+  // Bỏ dở đăng nhập, quay lại → lượt tự mở hiện hộp (không chuyển trang lần nữa) → "Để sau".
+  await page.goBack();
+  await expect(hop(page)).toHaveAttribute("data-can", "dang_nhap", { timeout: 60_000 });
   await page.keyboard.press("Escape");
   await page.reload();
   await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).waitFor();

@@ -17,7 +17,7 @@ import { loiTietKiem, type UuDai } from "@/lib/uu-dai";
 import { useMucSao } from "@/lib/muc-sao";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
-import { dangChoMo, ghiChoMo, xoaChoMo } from "@/lib/sao-client";
+import { MO_BAM, dangChoMo, ghiChoMo, xoaChoMo } from "@/lib/sao-client";
 import { dangKyCuaLuanGiai } from "@/lib/cta-sao";
 import { useHoSo } from "@/lib/hoso";
 import type { MoiXem } from "@/lib/sao-xem-truoc";
@@ -93,7 +93,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
     try {
       // UD-1: gửi kèm giá người dùng đang thấy — ưu đãi hết giữa chừng thì máy chủ không trừ theo giá cao hơn.
       const giaThay = bcRef.current?.phi?.sao;
-      const d = await postJson<BaoCao>(duongDan, than ?? { la_so: laSo }, moKhoa ? { "x-mo-khoa": "1", ...(giaThay ? { "x-gia-thay": String(giaThay) } : {}) } : {});
+      const d = await postJson<BaoCao>(duongDan, than ?? { la_so: laSo }, moKhoa ? { "x-mo-khoa": "1", ...(tuDong ? {} : { [MO_BAM]: "1" }), ...(giaThay ? { "x-gia-thay": String(giaThay) } : {}) } : {});
       if (so !== luot.current) return;
       setBc(d);
       if (moKhoa || !d.so_khoa) xoaChoMo();
