@@ -55,6 +55,7 @@
 | `nhan_tuong_lieu_trang.json` | (cả tệp) | `lieu_trang_tuong_phap.json` | `test_moi_muc_qua_bo_kiem` | SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn |
 | `nhan_tuong_sach_ghi.json` | (cả tệp) | `than_tuong_toan_bien.json` | `test_moi_muc_qua_bo_kiem` | SX-C: câu Thần Tướng Toàn Biên gắn với nét khảo sát + 12 cung trên mặt |
 | `phongthuy_cung_menh.json` | (cả tệp) | `duong_trach_thap_thu.json` | `test_cung_menh_khop_phep_tinh` | SX-C: chín điều bố trí × 8 cung (東/西四位宅圖說); phương + du niên khớp phép tính Bát trạch |
+| `phongthuy_huyen_khong.json` | to_hop_81 | `phongthuy_huyen_khong_co_thu.json` | `test_to_hop_81_sach_qua_bo_kiem_sx_c` | Gói 1A: 28 tổ hợp sao tiêu biểu có câu nguyên văn Tử Bạch Đoạn / Phi Tinh Phú qua bộ kiểm SX-C; Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json) |
 | `phongthuy_kb.json` | du_nien | `duong_trach_thap_thu.json` | `test_cau_trich_kb_la_nguyen_van` | KT-PT1: 8 du niên có câu «吉星三 / 凶星五» của Dương Trạch Thập Thư; phép tính du niên + bảng cung phi 180 năm khớp sách (test_dai_du_nien_ca_khop_phep_tinh, test_bang_cung_phi_180_nam_khop_phep_tinh); lời ý nghĩa vẫn là tóm ý |
 | `phongthuy_kb.json` | sach_xua_nha | `duong_trach_thap_thu.json` | `test_moi_cau_la_nguyen_van_kho_nguon` | WS-3: câu Dương Trạch Thập Thư cho khối «Sách xưa nói gì về nhà của bạn»; lời Việt là tóm ý |
 | `phongthuy_sach_ghi.json` | (cả tệp) | `duong_trach_thap_thu.json` | `test_moi_muc_qua_bo_kiem` | SX-C: 116 điều về thế nhà (論宅外形, 內形篇, 何知經…) khớp kho nguồn; vế 'vì sao hợp lẽ thường' là lời biên tập |
@@ -124,6 +125,7 @@
 | Phong thuỷ | `phongthuy_do_thi.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_doi_song.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_huyen_khong.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
+| Phong thuỷ | `phongthuy_huyen_khong.json` | to_hop_81 | Có nguyên văn đối chiếu | Gói 1A: 28 tổ hợp sao tiêu biểu có câu nguyên văn Tử Bạch Đoạn / Phi Tinh Phú qua bộ kiểm SX-C; Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json) |
 | Phong thuỷ | `phongthuy_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | KT-PT1: 7 dấu hiệu `bo_tri` có câu nguyên văn (`sach`); phần còn lại chưa khớp từng câu |
 | Phong thuỷ | `phongthuy_kb.json` | du_nien | Có nguyên văn đối chiếu | KT-PT1: 8 du niên có câu «吉星三 / 凶星五» của Dương Trạch Thập Thư; phép tính du niên + bảng cung phi 180 năm khớp sách (test_dai_du_nien_ca_khop_phep_tinh, test_bang_cung_phi_180_nam_khop_phep_tinh); lời ý nghĩa vẫn là tóm ý |
 | Phong thuỷ | `phongthuy_kb.json` | sach_xua_nha | Có nguyên văn đối chiếu | WS-3: câu Dương Trạch Thập Thư cho khối «Sách xưa nói gì về nhà của bạn»; lời Việt là tóm ý |

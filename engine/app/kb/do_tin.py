@@ -116,7 +116,15 @@ SO: dict[str, dict] = {
         "sach_xua_nha": _nv("duong_trach_thap_thu.json", "tests/test_ws3_sach_xua_nha.py::test_moi_cau_la_nguyen_van_kho_nguon",
                             "WS-3: câu Dương Trạch Thập Thư cho khối «Sách xưa nói gì về nhà của bạn»; lời Việt là tóm ý")},
         "ghi_chu": "KT-PT1: 7 dấu hiệu `bo_tri` có câu nguyên văn (`sach`); phần còn lại chưa khớp từng câu"},
-    "phongthuy_huyen_khong.json": {"mang": "phongthuy", "muc": "tom_y_co_thu"},
+    "phongthuy_huyen_khong.json": {
+        "mang": "phongthuy", "muc": "tom_y_co_thu",
+        "phan": {
+            "to_hop_81": _nv("phongthuy_huyen_khong_co_thu.json",
+                             "tests/test_huyen_khong_tham_thi.py::test_to_hop_81_sach_qua_bo_kiem_sx_c",
+                             "Gói 1A: 28 tổ hợp sao tiêu biểu có câu nguyên văn Tử Bạch Đoạn / Phi Tinh Phú qua bộ kiểm SX-C; "
+                             "Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json)"),
+        },
+    },
     "phongthuy_doi_song.json": {"mang": "phongthuy", "muc": "bien_tap"},
     "phongthuy_do_thi.json": {"mang": "phongthuy", "muc": "bien_tap"},
     "bo_sung_dau_hieu.json": {"mang": "phongthuy", "muc": "bien_tap"},

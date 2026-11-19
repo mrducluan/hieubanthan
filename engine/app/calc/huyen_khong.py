@@ -286,6 +286,15 @@ def to_hop_cung(son: int, huong: int, van: int, cung: str | None = None, nam: in
           "linh_vuc": dict(m["linh_vuc"]), "kich_hoat": {kk: list(v) for kk, v in m["kich_hoat"].items()}}
     if m.get("an_toan"):
         ra["an_toan"] = list(m["an_toan"])          # lời nhắc chăm nhà (lửa điện, nước, vật nhọn…), không doạ
+    if m.get("sach"):
+        from app.kb import sach_ghi as sg  # noqa: PLC0415
+        sm = m["sach"]
+        ra["sach_ghi"] = {
+            "loi": sg.loi(sm, co_am=sm.get("nhom") != "C"),
+            "nhom": sm["nhom"],
+            **({"viec": sm["viec"]} if sm.get("viec") else {}),
+            **({"cau_ket": ck} if (ck := sg.cau_ket([sm])) else {}),
+        }
     if cung and nam:
         ra["nam_chu_y"] = nam_chu_y(cung, m["kich_hoat"], int(nam))
     # Q6 luật nước vận 9 (KB quy_tac_thuc_hanh.nuoc_van_9): chỉ đặt nước nơi HƯỚNG tinh 9; sơn tinh 9 hoặc có 5 / 2 → không.
@@ -293,6 +302,41 @@ def to_hop_cung(son: int, huong: int, van: int, cung: str | None = None, nam: in
         ra["khong_dat_nuoc"] = son == 9 or 5 in (son, huong) or 2 in (son, huong)
         ra["hop_dat_nuoc"] = huong == 9 and not ra["khong_dat_nuoc"]
     return ra
+
+
+_VONG_8 = ["Khảm", "Cấn", "Chấn", "Tốn", "Ly", "Khôn", "Đoài", "Càn"]
+_HA_DO = {frozenset((1, 6)), frozenset((2, 7)), frozenset((3, 8)), frozenset((4, 9))}
+
+
+def thanh_mon(van: int, toa: str) -> dict:
+    """Thành Môn Quyết (城門訣) theo Thẩm Thị Huyền Không Học: hai cung kề bên cung Hướng (chính = hợp Hà Đồ 1-6/2-7/3-8/4-9
+    với cung Hướng, phó = cung kề còn lại). Lấy vận tinh tại cung ứng viên nhập trung, bay thuận/nghịch theo âm dương của sơn
+    cùng nguyên (địa/thiên/nhân) trong quẻ gốc của vận tinh đó (nếu vận tinh = 5 thì mượn sơn cùng nguyên của chính cung ứng
+    viên); sao bay tới cung ứng viên đúng bằng sao đương vận (`van`) → Thành Môn dùng được."""
+    t = _son(toa)
+    hq = DOI[t["quai"]]
+    so_h = QUAI[hq][0]
+    i = _VONG_8.index(hq)
+    hai = [_VONG_8[(i - 1) % 8], _VONG_8[(i + 1) % 8]]
+    chinh_q = next(q for q in hai if frozenset((so_h, QUAI[q][0])) in _HA_DO)
+    phu_q = next(q for q in hai if q != chinh_q)
+    vb = phi(van, True)
+
+    def _xet(q: str, vai: str) -> dict:
+        vt = vb[q]
+        son_cung, ad_cung = QUAI[q][2][t["nguyen"]]
+        son_goc, ad_goc = (son_cung, ad_cung) if vt == 5 else QUAI[SO_QUAI[vt]][2][t["nguyen"]]
+        thuan = ad_goc == "+"
+        sao_den = phi(vt, thuan)[q]
+        return {
+            "vai": vai, "cung": q, "phuong": QUAI[q][1], "son": son_cung,
+            "van_tinh": vt, "thuan": thuan, "sao_den": sao_den, "dung_duoc": sao_den == van,
+        }
+
+    chinh = _xet(chinh_q, "chinh")
+    phu = _xet(phu_q, "phu")
+    return {"van": van, "toa": t["son"], "huong": QUAI[hq][2][t["nguyen"]][0], "chinh": chinh, "phu": phu,
+            "co_thanh_mon": chinh["dung_duoc"] or phu["dung_duoc"]}
 
 
 def thong_quan(quai_a: str, quai_b: str) -> dict:

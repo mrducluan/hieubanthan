@@ -311,10 +311,17 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
         b["the_quai_y"] = phongthuy_kb.huyen_khong()["the_quai"]
     kb = phongthuy_kb.huyen_khong()
     nam_xem = inp.nam_xem or hk.nam_theo_lap_xuan(_bay_gio_utc())
+    cung_chi_tiet = [
+        {**c, "y_cap": hk.to_hop_cung(c["son"], c["huong"], b["van"], cung=c["cung"], nam=nam_xem)}
+        for c in b["cung"]
+    ]
+    tm = hk.thanh_mon(b["van"], toa)
     return {
         "engine_version": ENGINE_VERSION, **b,
+        "cung": cung_chi_tiet,
         "cuc_y": kb["cuc"][b["cuc"]],
         "to_hop": [{**t, **kb["to_hop"][t["ma"]]} for t in b["to_hop"]],
+        "thanh_mon": {**tm, **({"y": kb["thanh_mon"]} if kb.get("thanh_mon") else {})},
         "sao_y": kb["sao"],
         "luu_nien": hk.luu_nien(nam_xem),
         "luu_y": kb["luu_y"], "nguon": kb["_nguon"], "trang_thai": kb["trang_thai"],
