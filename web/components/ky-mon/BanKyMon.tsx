@@ -245,6 +245,17 @@ function ChiTietHuong({ h }: { h: HuongKM }) {
         <div><dt className="inline text-fg-muted">Nên: </dt><dd className="inline">{h.cua.nen}</dd></div>
         <div><dt className="inline text-fg-muted">Tránh: </dt><dd className="inline">{h.cua.tranh}</dd></div>
       </dl>
+      {h.cuu_don && h.cuu_don.length > 0 && h.cuu_don.map((cd) => (
+        <div key={cd.ma} className="mt-3 rounded-xl border border-gold/40 bg-gold/5 p-3 text-sm" data-testid="km-cuu-don">
+          <p className="font-medium text-gold">Cửu Độn · {cd.ten}</p>
+          <p className="mt-1 text-xs text-fg-muted">{cd.dieu_kien}</p>
+          <div className="mt-2 grid gap-2 text-xs sm:grid-cols-2">
+            <p className="rounded-lg bg-jade/10 p-2 leading-relaxed"><b className="text-jade">Đắc dụng:</b> {cd.mat_tich_cuc}</p>
+            <p className="rounded-lg bg-amber-500/10 p-2 leading-relaxed"><b className="text-amber-500">Nên chú ý:</b> {cd.mat_tieu_cuc_can_chu_y}</p>
+          </div>
+          {cd.sach_ghi?.han && <p className="mt-2 border-l-2 border-gold/40 pl-2 text-xs text-fg-faint">{cd.sach_ghi.han} {cd.sach_ghi.nguon ? `— ${cd.sach_ghi.nguon}` : ""}</p>}
+        </div>
+      ))}
       {h.cach.map((c) => (
         <div key={c.ma} className={cn("mt-3 rounded-xl border p-3 text-sm", c.loai === "cat" ? "border-jade/40 bg-jade/5" : "border-[rgb(245_170_80/0.4)] bg-[rgb(245_170_80/0.06)]")}>
           <p className="text-fg">{c.loai === "cat" ? "Điểm sáng" : "Nên để ý"}: {c.ten}</p>

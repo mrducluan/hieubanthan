@@ -74,7 +74,7 @@ async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocD
   // TS-V3 tầng HỌC: góp ý đúng / chưa đúng — không hỏi với câu khủng hoảng, câu ngoài phạm vi, câu cần người kia.
   const gopY = d.cau_tra_loi && !canNguoiKia && !["an_toan", "tu_choi_nhe"].includes(d.phan_loai?.xu_ly ?? "")
     ? <>
-        <GopYCauTraLoi hoSo={h} nc={{ phai, quyUoc, nguon: maCau ? "noi_dau" : "hoi_dap", linhVuc: d.phan_loai?.linh_vuc, maCau }} />
+        <GopYCauTraLoi hoSo={h} nc={{ phai: phai === "phillips" ? "pitago" : phai, quyUoc, nguon: maCau ? "noi_dau" : "hoi_dap", linhVuc: d.phan_loai?.linh_vuc, maCau }} />
         {/* TS-V3b: bình chọn phái nói đúng hơn — cùng điều kiện với góp ý (không hỏi ở câu khủng hoảng / ngoài phạm vi). */}
         <PhaiNaoDung hoSo={h} quyUoc={quyUoc} linhVuc={d.phan_loai?.linh_vuc} onDungPhai={dungPhai} />
       </>
