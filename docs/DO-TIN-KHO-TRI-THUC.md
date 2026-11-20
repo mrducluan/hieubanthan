@@ -22,7 +22,7 @@
 | Nhân tướng | 5 | 2 |  |  |  |
 | Tarot | 1 |  |  |  |  |
 | Kỳ Môn |  |  |  | 1 |  |
-| Thần số |  |  | 11 | 12 |  |
+| Thần số |  |  | 11 | 13 |  |
 | Lịch · tuổi · tập quán |  | 1 | 5 |  |  |
 | Liên mảng · kỹ thuật |  | 1 |  | 12 | 7 |
 
@@ -167,6 +167,7 @@
 | Thần số | `thanso_linh_vuc.json` |  | Tập quán / sách hiện đại tóm ý |  |
 | Thần số | `thanso_meanings.json` |  | Tập quán / sách hiện đại tóm ý |  |
 | Thần số | `thanso_noi_dau.json` |  | Ban biên tập soạn |  |
+| Thần số | `thanso_phillips_kb.json` |  | Ban biên tập soạn |  |
 | Thần số | `thanso_quan_he.json` |  | Tập quán / sách hiện đại tóm ý |  |
 | Thần số | `thanso_xu_ly.json` |  | Ban biên tập soạn |  |
 | Lịch · tuổi · tập quán | `gia_dinh_kb.json` |  | Tập quán / sách hiện đại tóm ý | GD-1: lời cặp con giáp, điều tập quán từng người — nháp |

@@ -1,0 +1,21 @@
+{
+  "_nguon": "Bộ ca chuẩn đối chiếu công thức David A. Phillips (Ruling Number 2–11 & 22/4 + 4 Đỉnh Kim Tự Tháp, xác minh từ numerology-kb p.49 & p.88–90).",
+  "so_chu_dao": [
+    {"ngay": 5, "thang": 5, "nam": 1949, "nhan": "6", "tong_goc": 33, "goc": 6, "mo_ta": "5/5/1949 = 33/6 (Phillips không giữ 33)"},
+    {"ngay": 6, "thang": 5, "nam": 1949, "nhan": "7", "tong_goc": 34, "goc": 7, "mo_ta": "5/6/1949 = 34/7"},
+    {"ngay": 7, "thang": 5, "nam": 1949, "nhan": "8", "tong_goc": 35, "goc": 8, "mo_ta": "5/7/1949 = 35/8"},
+    {"ngay": 8, "thang": 5, "nam": 1949, "nhan": "9", "tong_goc": 36, "goc": 9, "mo_ta": "5/8/1949 = 36/9"},
+    {"ngay": 9, "thang": 5, "nam": 1949, "nhan": "10", "tong_goc": 37, "goc": 1, "mo_ta": "5/9/1949 = 37/10 (Phillips dừng ở 10, không rút về 1)"},
+    {"ngay": 1, "thang": 5, "nam": 1949, "nhan": "11", "tong_goc": 29, "goc": 2, "mo_ta": "5/1/1949 = 29/11"},
+    {"ngay": 3, "thang": 5, "nam": 1940, "nhan": "22/4", "tong_goc": 22, "goc": 4, "mo_ta": "5/3/1940 = 22/4"}
+  ],
+  "kim_tu_thap": [
+    {
+      "mo_ta": "Queen Elizabeth II (21/04/1926 — ví dụ chuẩn trong Chapter 11: base 4-3-9, đỉnh 7-3-10-4, mốc tuổi 29-38-47-56)",
+      "ngay": 21, "thang": 4, "nam": 1926,
+      "chan_de": {"thang": 4, "ngay": 3, "nam": 9},
+      "dinh": [7, 3, 10, 4],
+      "tuoi": [29, 38, 47, 56]
+    }
+  ]
+}
