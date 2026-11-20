@@ -4,6 +4,8 @@
 
 export interface FuzzyMatBridge {
   provenance?: string;
+  /** Engine: ngưỡng + độ gần do ban biên tập tự đặt, không từ sách, chưa hiệu chỉnh trên ảnh thật. */
+  ghi_chu?: string;
   ngu_hanh_bridges?: {
     hanh: string;
     ten?: string;
@@ -17,6 +19,7 @@ export interface FuzzyMatBridge {
 
 export interface FuzzyTayBridge {
   provenance?: string;
+  ghi_chu?: string;
   dang_ban_tay?: {
     ma: string;
     ten: string;
@@ -107,6 +110,7 @@ export function TheNguHanhGuongMat({
           ? "Reference reading from geometric proportions measured on your device — combine with the mirror questionnaire for a full picture."
           : "Gợi ý tham khảo theo tỷ lệ hình học đo trên máy bạn — kết hợp thêm khảo sát soi gương bên dưới để đọc trọn vẹn."}
       </p>
+      {bridge?.ghi_chu && <p className="mt-1 text-[11px] text-fg-faint" data-testid="nt-fuzzy-ghi-chu">{bridge.ghi_chu}</p>}
     </div>
   );
 }
@@ -157,6 +161,7 @@ export function TheDangBanTayFuzzy({ bridge }: { bridge?: FuzzyTayBridge | null 
       <p className="mt-2.5 text-[11px] text-fg-faint">
         Gợi ý tham khảo theo tỷ lệ lòng bàn tay và ngón tay đo trên máy bạn — kết hợp thêm quan sát đường chỉ và gò tay để đọc sâu hơn.
       </p>
+      {bridge?.ghi_chu && <p className="mt-1 text-[11px] text-fg-faint" data-testid="ct-fuzzy-ghi-chu">{bridge.ghi_chu}</p>}
     </div>
   );
 }
