@@ -13,6 +13,19 @@ from app.main import app
 _VIET = re.compile(r"[ăâđêôơưàáạảãầấậẩẫằắặẳẵèéẹẻẽềếệểễìíịỉĩòóọỏõồốộổỗờớợởỡùúụủũừứựửữỳýỵỷỹ]", re.I)
 _CLIENT = TestClient(app)
 
+
+import pytest  # noqa: E402
+
+
+@pytest.fixture(autouse=True)
+def _bat_route(monkeypatch):
+    monkeypatch.setenv("DOANH_CHU_BAT", "1")
+
+
+def test_route_mac_dinh_tat(monkeypatch):
+    monkeypatch.delenv("DOANH_CHU_BAT", raising=False)
+    assert _CLIENT.post("/v1/doanh-chu/doi-ngu", json=_PAYLOAD).status_code == 404
+
 _PAYLOAD = {
     "ong_chu": {"ten": "Anh Minh (CEO)", "vai_tro": "CEO", "ngay": 15, "thang": 5, "nam": 1986, "gioi_tinh": "nam", "dong_y_tu_nguyen": True},
     "doi_ngu": [
