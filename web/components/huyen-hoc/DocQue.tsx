@@ -19,11 +19,18 @@ import { NhacToi } from "@/components/khung/NhacToi";
 import { useChuKD } from "@/components/kinh-dich/chu-kinh-dich";
 
 export interface GocNhin { muc: Muc; nhan: string; tom_tat?: string; can_cu: string[] }
+export interface ThucChienLucHaoMuc {
+  ten?: string;
+  mat_tich_cuc?: string;
+  mat_tieu_cuc_can_chu_y?: string;
+  sach_ghi?: { han?: string; nguon?: string };
+}
 export interface GocNhinLucHao extends GocNhin {
   dung_than: string | null; phuc: boolean | null; luc_thu: string[];
   hao: { vi_tri: number; dia_chi: string; ngu_hanh: string; luc_than: string; the_ung: string | null; luc_thu: string; dong: boolean; tong: string;
     hoa?: { dia_chi: string; loai: string } | null; phuc?: { luc_than: string; dia_chi: string } }[];
   ung_ky: { chi: string; ly_do: string; ngay_gan_nhat: string; sau_bao_nhieu_ngay: number }[];
+  thuc_chien_luu_y?: { dung_than?: ThucChienLucHaoMuc; nguyen_tac?: ThucChienLucHaoMuc & { ma?: string } } | null;
 }
 export interface GocNhinMaiHoa extends GocNhin { the: string; dung: string; ho: { thuong: string; ha: string }; bien: string; luu_y?: string | null }
 export interface DocQueKq {
@@ -115,6 +122,49 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
         </div>
       )}
       <div className="prose-vn space-y-2 text-[0.95rem] leading-relaxed text-fg-muted">{doanCoThuatNgu(dq.doan.join("\n\n"), thuatNgu)}</div>
+
+      {!en && gn.luc_hao?.thuc_chien_luu_y && (
+        <section className="rounded-2xl border border-gold/30 bg-surface/50 p-4 text-sm" data-testid="luc-hao-thuc-chien">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="eyebrow text-gold">Lục Hào thực chiến</span>
+            {gn.luc_hao.dung_than && (
+              <span className="rounded-full border border-gold/35 bg-gold/10 px-2.5 py-0.5 text-xs font-medium text-gold">
+                Dụng thần: {gn.luc_hao.dung_than}
+              </span>
+            )}
+            {gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.ten && (
+              <span className="rounded-full border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] px-2.5 py-0.5 text-xs font-medium text-[#f0b35c]">
+                {gn.luc_hao.thuc_chien_luu_y.nguyen_tac.ten}
+              </span>
+            )}
+          </div>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-jade/35 bg-jade/10 p-3 text-xs leading-relaxed text-fg">
+              <p className="font-semibold text-jade">Mặt thuận lợi</p>
+              {gn.luc_hao.thuc_chien_luu_y.dung_than?.mat_tich_cuc && <p className="mt-1 text-fg-muted">{gn.luc_hao.thuc_chien_luu_y.dung_than.mat_tich_cuc}</p>}
+              {gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.mat_tich_cuc && <p className="mt-1.5 border-t border-jade/20 pt-1.5 text-fg-muted">{gn.luc_hao.thuc_chien_luu_y.nguyen_tac.mat_tich_cuc}</p>}
+            </div>
+            <div className="rounded-xl border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] p-3 text-xs leading-relaxed text-fg">
+              <p className="font-semibold text-[#f0b35c]">Nên chú ý</p>
+              {gn.luc_hao.thuc_chien_luu_y.dung_than?.mat_tieu_cuc_can_chu_y && <p className="mt-1 text-fg-muted">{gn.luc_hao.thuc_chien_luu_y.dung_than.mat_tieu_cuc_can_chu_y}</p>}
+              {gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.mat_tieu_cuc_can_chu_y && <p className="mt-1.5 border-t border-[rgb(245_170_80/0.2)] pt-1.5 text-fg-muted">{gn.luc_hao.thuc_chien_luu_y.nguyen_tac.mat_tieu_cuc_can_chu_y}</p>}
+            </div>
+          </div>
+          {(gn.luc_hao.thuc_chien_luu_y.dung_than?.sach_ghi?.han || gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.sach_ghi?.han) && (
+            <details className="mt-3 rounded-xl border border-line/60 bg-bg/40 px-3 py-2 text-xs">
+              <summary className="cursor-pointer font-medium text-gold">Nguyên văn sách gốc (Vương Hổ Ứng · Thiệu Vĩ Hoa)</summary>
+              <div className="mt-2 space-y-2 border-l-2 border-gold/40 pl-2.5 text-fg-muted">
+                {gn.luc_hao.thuc_chien_luu_y.dung_than?.sach_ghi?.han && (
+                  <p><span className="font-serif text-sm text-fg" lang="zh-Hant">{gn.luc_hao.thuc_chien_luu_y.dung_than.sach_ghi.han}</span>{gn.luc_hao.thuc_chien_luu_y.dung_than.sach_ghi.nguon ? ` — ${gn.luc_hao.thuc_chien_luu_y.dung_than.sach_ghi.nguon}` : ""}</p>
+                )}
+                {gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.sach_ghi?.han && (
+                  <p><span className="font-serif text-sm text-fg" lang="zh-Hant">{gn.luc_hao.thuc_chien_luu_y.nguyen_tac.sach_ghi.han}</span>{gn.luc_hao.thuc_chien_luu_y.nguyen_tac.sach_ghi.nguon ? ` — ${gn.luc_hao.thuc_chien_luu_y.nguyen_tac.sach_ghi.nguon}` : ""}</p>
+                )}
+              </div>
+            </details>
+          )}
+        </section>
+      )}
 
       {dq.hanh_dong.length > 0 && (
         <section aria-label={c("dq.viec_aria")} className="rounded-xl border border-line/70 bg-surface/40 p-3" data-testid="hanh-dong">

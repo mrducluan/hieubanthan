@@ -25,7 +25,7 @@ export function BaoCaoTarot({ bc, tb, boLa, ten, chanTrang, cau }: { bc: Bc; tb:
     const h = hopViTri.get(i), lb = boLa[v.id];
     if (!lb) return [];
     return [{ so: i, viTri: v.ten, hoi: h?.vi_tri?.hoi ?? tb.vi_tri[i]?.hoi ?? "", la: lb, nguoc: v.nguoc, tuKhoa: h?.tu_khoa ?? (v.nguoc ? lb.tu_khoa_nguoc ?? [] : lb.tu_khoa),
-      noiDung: h?.noi_dung, viec: h?.huong_xu_ly ?? null, tuSoi: h?.cau_tu_soi ?? null }];
+      noiDung: h?.noi_dung, viec: h?.huong_xu_ly ?? null, tuSoi: h?.cau_tu_soi ?? null, greerNguoc: h?.greer_nguoc ?? null }];
   });
   const nt = bc.da_tinh.nguyen_to;
   return (

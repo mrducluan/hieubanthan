@@ -83,8 +83,8 @@ export function PhiHoaXem({ d, onChonCung, onHoi }: { d: PhiHoaOutputT; onChonCu
                       </blockquote>
                     )}
                     <div className="mt-2 grid gap-2 sm:grid-cols-2">
-                      {n.luong_phai_672.mat_tich_cuc && <p className="rounded-lg bg-jade/10 p-2 leading-relaxed text-fg"><b className="text-jade">Điểm sáng:</b> {n.luong_phai_672.mat_tich_cuc}</p>}
-                      {n.luong_phai_672.mat_tieu_cuc_can_chu_y && <p className="rounded-lg bg-amber-500/10 p-2 leading-relaxed text-fg"><b className="text-amber-500">Nên chú ý:</b> {n.luong_phai_672.mat_tieu_cuc_can_chu_y}</p>}
+                      {n.luong_phai_672.mat_tich_cuc && <p className="rounded-lg border border-jade/30 bg-jade/10 p-2 leading-relaxed text-fg"><b className="text-jade">Điểm sáng:</b> {n.luong_phai_672.mat_tich_cuc}</p>}
+                      {n.luong_phai_672.mat_tieu_cuc_can_chu_y && <p className="rounded-lg border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] p-2 leading-relaxed text-fg"><b className="text-[#f0b35c]">Nên chú ý:</b> {n.luong_phai_672.mat_tieu_cuc_can_chu_y}</p>}
                     </div>
                   </details>
                 )}

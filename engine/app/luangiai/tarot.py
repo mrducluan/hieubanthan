@@ -216,6 +216,7 @@ def _hop_la(v: dict, tb: dict, linh_vuc: str | None, pt: dict) -> dict:
         ke = "; ".join(f"{_la(pt['vi_tri'][int(k.split('_')[-1])]['id'])['ten']} ({_ten_qh(q)})" for k, q in suc["chi_tiet"])
         can_cu.append(L("tarot.can_cu.pham_gia", "Phẩm giá nguyên tố (Book T): lá {nt} bên cạnh {ke} → {suc}.", nt=_ten_nt(l['nguyen_to']), ke=ke, suc=_suc_chu(suc['suc'])))
     can_cu += _can_cu_phai(l)
+    greer_obj = None
     if nguoc:
         gr = _greer_nguoc(l["id"])
         if gr:
@@ -224,6 +225,12 @@ def _hop_la(v: dict, tb: dict, linh_vuc: str | None, pt: dict) -> dict:
             can_cu.append(L("tarot.can_cu.la_nguoc_greer",
                             "Lá ngược theo Mary K. Greer (2002, {tr}): “{trich}”",
                             tr=sg.get("trang", ""), trich=sg.get("trich", "")))
+            greer_obj = {
+                "mat_tich_cuc": gr.get("mat_tich_cuc"),
+                "mat_tieu_cuc_can_chu_y": gr.get("mat_tieu_cuc_can_chu_y"),
+                "huong_chuyen_hoa": gr.get("huong_chuyen_hoa"),
+                "sach_ghi": sg,
+            }
         else:
             can_cu.append(L("tarot.can_cu.la_nguoc", "Lá ngược đọc theo lối Waite (tính chất bị chặn / hướng vào trong); Marseille và Thoth không dùng lá ngược."))
     can_cu.append(L("tarot.can_cu.muc_hop", "Mức của hộp = lá này nghiêng về {ng} với câu 'có nên / có thành không' (lối đọc có – không của Waite), "
@@ -231,7 +238,8 @@ def _hop_la(v: dict, tb: dict, linh_vuc: str | None, pt: dict) -> dict:
     return kh.hop(_LOAI_SAC[sac], f"{vt['ten']}: {_ten(l, nguoc)}", " ".join(doan), huong_xu_ly=l["viec"], can_cu=can_cu,
                   ma=kh.ma_mau(MO_DUN, "tung_la", tb_ma(tb), vt["ma"], l["id"], "n" if nguoc else "x"), muc=_MUC_NG[ng],
                   phai="rws" if nguoc else PHAI_CHUNG, la=_tom_la(l, nguoc), vi_tri={"so": v["vi_tri"], "ma": vt["ma"], "ten": vt["ten"], "hoi": vt["hoi"]},
-                  suc=suc["suc"], tu_khoa=_tu_khoa(l, nguoc)[:3], cau_tu_soi=l["cau_tu_soi"])
+                  suc=suc["suc"], tu_khoa=_tu_khoa(l, nguoc)[:3], cau_tu_soi=l["cau_tu_soi"],
+                  **({"greer_nguoc": greer_obj} if greer_obj else {}))
 
 
 def tb_ma(tb: dict) -> str:

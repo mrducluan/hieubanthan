@@ -250,8 +250,8 @@ function ChiTietHuong({ h }: { h: HuongKM }) {
           <p className="font-medium text-gold">Cửu Độn · {cd.ten}</p>
           <p className="mt-1 text-xs text-fg-muted">{cd.dieu_kien}</p>
           <div className="mt-2 grid gap-2 text-xs sm:grid-cols-2">
-            <p className="rounded-lg bg-jade/10 p-2 leading-relaxed"><b className="text-jade">Đắc dụng:</b> {cd.mat_tich_cuc}</p>
-            <p className="rounded-lg bg-amber-500/10 p-2 leading-relaxed"><b className="text-amber-500">Nên chú ý:</b> {cd.mat_tieu_cuc_can_chu_y}</p>
+            <p className="rounded-lg border border-jade/30 bg-jade/10 p-2 leading-relaxed"><b className="text-jade">Đắc dụng:</b> {cd.mat_tich_cuc}</p>
+            <p className="rounded-lg border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] p-2 leading-relaxed"><b className="text-[#f0b35c]">Nên chú ý:</b> {cd.mat_tieu_cuc_can_chu_y}</p>
           </div>
           {cd.sach_ghi?.han && <p className="mt-2 border-l-2 border-gold/40 pl-2 text-xs text-fg-faint">{cd.sach_ghi.han} {cd.sach_ghi.nguon ? `— ${cd.sach_ghi.nguon}` : ""}</p>}
         </div>
