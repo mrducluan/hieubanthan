@@ -191,6 +191,8 @@ app.include_router(chan_dung_router)
 app.include_router(tarot_router)
 app.include_router(giao_thoa_router)
 app.include_router(sinh_nuoc_ngoai_router)
+from app.doanh_chu_api import router as doanh_chu_router  # noqa: E402 — Bậc 2 & 3 Doanh chủ
+app.include_router(doanh_chu_router)
 
 
 # --------------------------------------------------------------------------- #
