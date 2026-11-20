@@ -16,12 +16,12 @@
 | Mảng | Có nguyên văn đối chiếu | Tóm ý cổ thư, chưa khớp từng câu | Tập quán / sách hiện đại tóm ý | Ban biên tập soạn | Tệp kỹ thuật |
 |---|---|---|---|---|---|
 | Bát tự | 3 | 1 | 1 | 4 |  |
-| Tử vi | 1 | 3 | 6 | 7 |  |
+| Tử vi | 1 | 3 | 7 | 7 |  |
 | Kinh Dịch | 4 | 2 | 1 | 2 |  |
 | Phong thuỷ | 2 | 2 | 1 | 3 |  |
-| Nhân tướng | 5 | 2 |  |  |  |
+| Nhân tướng | 5 | 2 | 2 |  |  |
 | Tarot | 1 |  | 1 |  |  |
-| Kỳ Môn |  |  |  | 1 |  |
+| Kỳ Môn |  |  | 1 | 1 |  |
 | Thần số |  |  | 11 | 13 |  |
 | Lịch · tuổi · tập quán |  | 1 | 5 |  |  |
 | Liên mảng · kỹ thuật |  | 1 |  | 12 | 7 |
@@ -107,6 +107,7 @@
 | Tử vi | `tuvi_sach_ghi.json` |  | Có nguyên văn đối chiếu | SX-C: 434 câu Toàn Thư quyển 3 (sao × cung) khớp kho nguồn; lời Việt là tóm ý đã nói giảm (A / B / C) |
 | Tử vi | `tuvi_sao_luu_kb.json` |  | Tập quán / sách hiện đại tóm ý |  |
 | Tử vi | `tuvi_trung_chau_60_tinh_he.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 3: 60/60 Tinh Hệ Trung Châu trích xuất có phép từ Vương Đình Chi (Trung Châu Phái Thâm Tạo Giảng Nghĩa — ziwei-zhongzhou-kb) |
+| Tử vi | `tuvi_tu_van_thai_tue.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 4: 6 nguyên tắc cốt lõi Tử Vân (Thái Tuế Nhập Quái · Tam Đại Tiên Hậu Thiên · Giáp Cung — ziwei-ziyun-kb) |
 | Tử vi | `tuvi_y_bo_sung.json` |  | Tập quán / sách hiện đại tóm ý | rút ý lời giảng hiện đại, viết lại (TV-YBS) |
 | Kinh Dịch | `bo_sung_que.json` |  | Ban biên tập soạn |  |
 | Kinh Dịch | `kinhdich_dich_lam.json` |  | Có nguyên văn đối chiếu | TK-2: 4.096 bài từ Tiêu Thị Dịch Lâm (quẻ bản → quẻ biến), nguyên văn chưa dịch; bài có chữ nặng không hiện |
@@ -137,6 +138,7 @@
 | Phong thuỷ | `phongthuy_tam_yeu.json` |  | Tập quán / sách hiện đại tóm ý | SX-C: tóm ý Dương Trạch Tam Yếu + Bát Trạch Minh Kính qua BẢN DỊCH Việt hiện đại (chưa có nguyên văn chữ Hán trong kho nguồn); du niên 64 nhà + 64 bếp khớp phép tính |
 | Nhân tướng | `chi_tay_kb.json` |  | Có nguyên văn đối chiếu | Chỉ tay: 67 bài thơ vân tay quyển 10 + câu đồ hình tám cung («根基所屬», Luận thủ) khớp kho nguồn; CT-2: câu theo số đo bàn tay (`sach_do_tay`: «論手», «相指掌») + vai và lựa chọn từng cung (`cung_tay`: «根基所屬») qua bộ kiểm SX-C (tests/test_chi_tay_do.py); ngưỡng đo `do_tay` là giả định nhân trắc, can_doi_chieu; lời Việt nói giảm theo SX-C; 5 hình sách đoán về người vợ không đưa vào |
 | Nhân tướng | `chi_tay_tay_kb.json` |  | Có nguyên văn đối chiếu | TK-2 chỉ tay phương Tây: câu trích tiếng Anh Cheiro 1894 + Benham 1900 (kho nguồn lớp chữ nhận dạng, can_doi_chieu) khớp từng câu; lời Việt ban biên tập; ngưỡng số đo `do_tay` giả định, can_doi_chieu; không nhóm C |
+| Nhân tướng | `chitay_phuong_tay_kinh_dien.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 4: 4 Đường Chính & 7 Gò Bàn Tay 2 chiều từ Cheiro (1916), Benham (1912) & Dale (1895) (palmistry-western-kb) |
 | Nhân tướng | `nhan_tuong_do_hinh.json` |  | Tóm ý cổ thư, chưa khớp từng câu | lớp phủ đồ hình: nhãn chữ Hán đọc trên bản khắc Thần Tướng Toàn Biên; toạ độ đo trên ảnh; lời Việt rút từ KB |
 | Nhân tướng | `nhan_tuong_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | KT-NT1/2 + KT-N1 + KT-NT3: cả 70 câu trích sách (`dac_diem.*.sach`) khớp kho nguồn `nhan_tuong_co_thu.json` + `than_tuong_toan_bien.json` (Thần Tướng Toàn Biên bản Cổ Kim Đồ Thư Tập Thành, Băng Giám, Tâm Tướng Thiên, Linh Khu, 4 sách Tứ khố — tests/test_kt_nt1_kho_nguon.py); lời luận vẫn là tóm ý, trường `nguon` Ma Y / Thần Tướng Toàn Biên chỉ ghi phái |
 | Nhân tướng | `nhan_tuong_kb.json` | luu_nien | Có nguyên văn đối chiếu | WS-2: 20 tuổi mốc khớp tên bộ vị + thứ tự của «流年運氣部位歌»; WS-4 / KT-NT3: tuổi 10–14 sửa theo chữ sách (Nhân Luân, Địa Luân) |
@@ -144,8 +146,10 @@
 | Nhân tướng | `nhan_tuong_kieu_hinh.json` |  | Có nguyên văn đối chiếu | SX-C: 119 kiểu hình mày, mắt, mũi, tai, miệng (bài thơ từng kiểu) khớp kho nguồn; 7 mục gắn `ngo` |
 | Nhân tướng | `nhan_tuong_lieu_trang.json` |  | Có nguyên văn đối chiếu | SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn |
 | Nhân tướng | `nhan_tuong_sach_ghi.json` |  | Có nguyên văn đối chiếu | SX-C: câu Thần Tướng Toàn Biên gắn với nét khảo sát + 12 cung trên mặt |
+| Nhân tướng | `nhantuong_ngu_hanh_va_co_thu.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 4: 5 Hình Tướng Ngũ Hành Lillian Bridges (2012) & 150 quy tắc cổ thư Nhân Tướng (face-reading-bridges-kb, physiognomy-kb) |
 | Tarot | `tarot_greer_nguoc.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 2B: 22 Lá Ẩn Chính ngược đối chiếu & trích dẫn có phép từ Mary K. Greer (2002), phân tích 2 mặt tích cực + tiêu cực cần chú ý |
 | Tarot | `tarot_kb.json` |  | Có nguyên văn đối chiếu | câu trích khớp Waite / Mathers / Book T / Papus 1892 / Case 1920 / Ouspensky 1913; lời lớp Marseille, B.O.T.A., Thoth vẫn là tóm ý (Marseille đã soát với Mathers + Papus, B.O.T.A. ẩn chính với Case 1920) |
+| Kỳ Môn | `ky_mon_bi_kip_cuu_don.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 4: trọn bộ Cửu Độn 2 chiều trích dẫn có phép từ Kỳ Môn Độn Giáp Bí Kíp Đại Toàn Q.21 (qimen-miji-kb) |
 | Kỳ Môn | `ky_mon_kb.json` |  | Ban biên tập soạn | KM-2: lời đời thường về cửa, sao, thần, cách cục do ban biên tập viết |
 | Kỳ Môn | `ky_mon_kb.json` | cua | Có nguyên văn đối chiếu | mỗi cửa một câu «釋八門所主» |
 | Kỳ Môn | `ky_mon_kb.json` | sao | Có nguyên văn đối chiếu | mỗi sao một câu «釋九星所主» |
