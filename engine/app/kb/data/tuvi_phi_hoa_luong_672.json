@@ -242,10 +242,9 @@
       "den_cung": "Tài Bạch",
       "tu_hoa": false,
       "dieu_kien": "Can cung Mệnh phi Hoá Kỵ vào cung Tài Bạch",
-      "y_chinh": "Ham kiếm tiền, chịu khó, tính toán kỹ, việc nhỏ việc lớn đều làm. Nên chú ý sức mình: lá số yếu thì dễ lo nghĩ vì tiền, kiếm đồng nào vất vả đồng ấy — nhớ đi khám định kỳ.",
+      "y_chinh": "Ham kiếm tiền, chịu khó, tính toán kỹ, việc nhỏ việc lớn đều làm. Lá số yếu thì dễ lo nghĩ vì tiền, kiếm đồng nào vất vả đồng ấy — nên chú ý sắp xếp nghỉ ngơi kẻo quá sức.",
       "linh_vuc": [
-        "tien_bac",
-        "suc_khoe"
+        "tien_bac"
       ],
       "huong": "can_chu_y",
       "trang": "tr. 20",
@@ -2774,7 +2773,7 @@
       "den_cung": "Tài Bạch",
       "tu_hoa": false,
       "dieu_kien": "Can cung Tật Ách phi Hoá Lộc vào cung Tài Bạch",
-      "y_chinh": "Kiếm tiền từ việc nhẹ nhàng, ngại vất vả; đời sống đầy đủ, tiền đến dễ nên tiêu tuỳ hứng — nên chú ý chi tiêu.",
+      "y_chinh": "Kiếm tiền từ việc nhẹ nhàng, có khi gắn với giải trí, cái đẹp; ngại vất vả; đời sống đầy đủ, tiền đến dễ nên tiêu tuỳ hứng — nên chú ý chi tiêu.",
       "linh_vuc": [
         "tien_bac"
       ],
@@ -2982,7 +2981,7 @@
       "den_cung": "Quan Lộc",
       "tu_hoa": false,
       "dieu_kien": "Can cung Điền Trạch phi Hoá Kỵ vào cung Quan Lộc",
-      "y_chinh": "Mang trách nhiệm gia đình. Sau cưới nên ra ở riêng, và nên tách chỗ ở với chỗ buôn bán. Hợp làm công ổn định, dịch vụ, hoặc tiệm nhỏ bán đồ dùng hằng ngày. Nên chú ý dành thời gian vun đắp hôn nhân dù bận.",
+      "y_chinh": "Mang trách nhiệm gia đình. Sau cưới nên ra ở riêng, và nên tách chỗ ở với chỗ buôn bán. Vợ chồng mỗi người có khoảng việc riêng, không quá dính nhau thì lại êm hơn. Hợp làm công ổn định, dịch vụ, hoặc tiệm nhỏ bán đồ dùng hằng ngày.",
       "linh_vuc": [
         "gia_dao",
         "cong_viec",
@@ -8493,7 +8492,7 @@
       "den_cung": "Tật Ách",
       "tu_hoa": false,
       "dieu_kien": "Can cung Phụ Mẫu phi Hoá Kỵ vào cung Tật Ách",
-      "y_chinh": "Không thích học, ghét rườm rà nhưng biết giữ nếp; cha mẹ hay nhắc nhở, giám sát, bản thân cha mẹ chịu khó.",
+      "y_chinh": "Không thích học, ghét rườm rà; cha mẹ hay nhắc nhở, giám sát, bản thân cha mẹ chịu khó.",
       "linh_vuc": [
         "hoc_hanh",
         "gia_dao"

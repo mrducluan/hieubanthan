@@ -52,17 +52,6 @@ def api_ngay_tot(inp: NgayInput) -> dict:
     return H.ngay_xem(L.ngay_xem(d, inp.nam_sinh, inp.thang_sinh, inp.ngay_sinh, viec=inp.viec))
 
 
-class ThangInput(BaseModel):
-    model_config = ConfigDict(extra="forbid")
-    nam: int = Field(ge=1901, le=2099)
-    thang: int = Field(ge=1, le=12)
-
-
-@router.post("/v1/lich/thang")
-def api_thang(inp: ThangInput) -> dict:
-    return H.thang(L.thang(inp.nam, inp.thang))
-
-
 class ChonNgayInput(_NguoiXem):
     viec: MaViec
     tu: _dt.date = Field(ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))

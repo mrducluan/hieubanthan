@@ -1,21 +1,20 @@
 {
-  "_nguon": "Trích xuất và diễn giải có phép từ bộ kinh điển Chỉ Tay phương Tây: Cheiro (Palmistry for All, 1916), Mrs. J. B. Dale (Indian Palmistry, 1895) & William G. Benham (The Laws of Scientific Hand Reading, 1912) — kho palmistry-western-kb.",
-  "_trang_thai": "da_doi_chieu_sach_goc",
+  "_nguon": "Câu trích tiếng Anh nguyên văn từ hai sách thuộc phạm vi công cộng: Cheiro, Palmistry for All (1916) và Mrs. J. B. Dale, Indian Palmistry (1895) — đối chiếu với kho nguồn `fixtures/nguon/chi_tay_cheiro_palmistry_for_all.json`, `chi_tay_dale_indian_palmistry.json` (bản Project Gutenberg #20480, #52523). Lời Việt (mat_tich_cuc, mat_tieu_cuc_can_chu_y) do ban biên tập viết lại, nháp. Bản trước (Đợt 4) có 6/11 câu trích không có trong sách — RS-3 thay bằng câu có thật.",
+  "_trang_thai": "nhap_ban_bien_tap",
   "source_id": "chitay_phuong_tay_kinh_dien",
   "school_id": "western_palmistry",
   "sach_goc": [
     {"ten": "Palmistry for All", "tac_gia": "Cheiro (1916)"},
-    {"ten": "The Laws of Scientific Hand Reading", "tac_gia": "William G. Benham (1912)"},
     {"ten": "Indian Palmistry", "tac_gia": "Mrs. J. B. Dale (1895)"}
   ],
   "duong_chinh": {
     "sinh_dao": {
       "ten": "Đường Sinh Đạo (Line of Life)",
-      "mat_tich_cuc": "Đường rõ, sâu, cong rộng ôm gọn gò Kim Tinh phản ánh nền tảng sinh lực dồi dào, sức bền tốt, tinh thần cởi mở và khả năng phục hồi nhanh sau áp lực.",
-      "mat_tieu_cuc_can_chu_y": "Nên chú ý khi đường dính dài với Trí Đạo ở điểm khởi đầu: dễ thận trọng quá mức, nhạy cảm trước đánh giá của người khác và thiếu tự tin khi đứng trước bước ngoặt mới.",
+      "mat_tich_cuc": "Khi điểm khởi đầu của Đường Sinh Đạo tách nhẹ khỏi Trí Đạo, sách phương Tây tả người nghĩ độc lập, quyết nhanh và dám bước vào việc mới.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý khi đường dính dài với Trí Đạo ở điểm khởi đầu: dễ thận trọng quá mức, nhạy cảm trước đánh giá của người khác và thiếu tự tin khi đứng trước bước ngoặt mới. Thử tự quyết một việc nhỏ mỗi tuần mà không hỏi ý ai.",
       "sach_ghi": {
-        "trich": "The position of this line indicates in all cases a highly sensitive disposition, which inclines towards the side of caution and also lacks self-confidence.",
-        "nguon": "Cheiro, Palmistry for All (1916) — The Line of Head Joined to the Line of Life"
+        "trich": "The position of this line indicates in all cases a highly sensitive disposition, which inclines towards the side of caution and also lacks self-confidence",
+        "nguon": "Cheiro, Palmistry for All (1916) — Part I, Chapter II: The Line of Head joined to the Line of Life"
       }
     },
     "tri_dao": {
@@ -23,8 +22,8 @@
       "mat_tich_cuc": "Đường mạch lạc, đều nét cho thấy tư duy rõ ràng, tập trung tốt; đường thẳng thiên về thực tế logic, đường hơi cong xuống gò Thái Âm giàu óc sáng tạo và linh hoạt.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: đường quá mảnh, đứt đoạn hoặc trĩu sâu quá mức dễ đi kèm thói quen suy nghĩ vòng vo, phân tán tập trung hoặc để cảm xúc lấn át quyết định thực tế.",
       "sach_ghi": {
-        "trich": "The Line of Head gives the clearest indication of the mentality, judgment, and direction of intellectual effort.",
-        "nguon": "Cheiro, Palmistry for All (1916) — The Line of Head or the Indications of the Mentality"
+        "trich": "The direction or the termination or end of the line should, above all, be distinctly noted, for the all-important reason that this shows the direction that the Mentality is inclined to develop towards.",
+        "nguon": "Cheiro, Palmistry for All (1916) — Part I, Chapter II: The Line of Head and its Variations"
       }
     },
     "tam_dao": {
@@ -32,8 +31,8 @@
       "mat_tich_cuc": "Đường sâu, liền mạch hướng về giữa gò Mộc Tinh biểu thị tình cảm chân thành, biết tiết chế, lý tưởng đẹp và bền bỉ trong các mối quan hệ gắn bó.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: đường nhiều nhánh rối hoặc quá sát gốc ngón tay dễ khiến kỳ vọng tình cảm quá cao, dễ tổn thương khi đối phương không đáp ứng đúng hình mẫu lý tưởng.",
       "sach_ghi": {
-        "trich": "From the centre of the Mount of Jupiter, the Heart Line gives more moderation, but also great ideality, and is one of the best of the variations of this Line.",
-        "nguon": "Cheiro, Palmistry for All (1916) — The Line of Heart and Its Variations"
+        "trich": "From the centre of the Mount of Jupiter, the Heart Line gives more moderation, but also great ideality, and is one of the best of the variations of this Line that we are about to consider.",
+        "nguon": "Cheiro, Palmistry for All (1916) — Part I, Chapter VII: The Line of Heart"
       }
     },
     "dinh_menh": {
@@ -41,8 +40,8 @@
       "mat_tich_cuc": "Đường vươn thẳng rõ hướng về gò Thổ Tinh cho thấy trục sự nghiệp có định hướng, tinh thần trách nhiệm cao và càng trưởng thành càng tích lũy được vị thế vững vàng.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: đường đổi hướng nhiều đoạn hoặc mảnh mờ không phải điều xấu mà nhắc bạn hay xoay trục mục tiêu; cần chọn một trọng tâm đủ lâu để tích lũy thành quả.",
       "sach_ghi": {
-        "trich": "The Line of Destiny or Fate traces the major shifts of vocation, responsibility, and external direction across life.",
-        "nguon": "Cheiro, Palmistry for All (1916) — The Line of Destiny or Fate"
+        "trich": "Although one may never be able to explain why it is, this line undoubtedly appears to indicate at least the main events of one's career.",
+        "nguon": "Cheiro, Palmistry for All (1916) — Part I, Chapter V: The Line of Destiny or Fate"
       }
     }
   },
@@ -52,8 +51,8 @@
       "mat_tich_cuc": "Đầy đặn vừa phải cho thấy chí tiến thủ, năng lực tổ chức, bản lĩnh lãnh đạo và lòng tự trọng tích cực.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý khi gò quá trội: dễ sinh tâm lý muốn chi phối, áp đặt người xung quanh hoặc quá coi trọng danh vị bên ngoài.",
       "sach_ghi": {
-        "trich": "When large, it shows desire to dominate, to rule and command others, to lead and organise.",
-        "nguon": "Cheiro, Palmistry for All (1916) — The Mount of Jupiter and Its Meaning"
+        "trich": "When large, it shows desire to dominate, to rule and command others, to lead and organise, and to carry out some distinct object.",
+        "nguon": "Cheiro, Palmistry for All (1916) — Part II, Chapter VII: The Mount of Jupiter and its Meaning"
       }
     },
     "tho_tinh": {
@@ -61,8 +60,8 @@
       "mat_tich_cuc": "Cân đối thể hiện sự điềm tĩnh, cẩn trọng, bền chí nghiên cứu sâu và tinh thần trách nhiệm đáng tin cậy.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý khi gò quá đầy hoặc nhiều nét cắt: dễ thu mình, bi quan hoặc tự đè nặng nghĩa vụ lên vai mà thiếu sự chia sẻ.",
       "sach_ghi": {
-        "trich": "Its chief characteristics are love of solitude, prudence, quiet determination.",
-        "nguon": "Cheiro, Palmistry for All (1916) — The Mount of Saturn and Its Meaning"
+        "trich": "Its chief characteristics are love of solitude, prudence, quiet determination, the study of serious sombre things",
+        "nguon": "Cheiro, Palmistry for All (1916) — Part II, Chapter VIII: The Mount of Saturn and its Meaning"
       }
     },
     "thai_duong": {
@@ -70,8 +69,8 @@
       "mat_tich_cuc": "Nảy nở hài hòa báo hiệu gu thẩm mỹ tinh tế, sáng tạo, dễ tạo thiện cảm xã hội và ghi dấu ấn cá nhân rõ nét.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: nếu quá phóng đại dễ chạy theo hình thức hào nhoáng, nhạy cảm với lời khen chê hoặc dàn trải nhiều dự án mà thiếu độ sâu.",
       "sach_ghi": {
-        "trich": "The Mount of the Sun is found under the base of the third finger. When large or well developed it indicates artistic brilliance and public appreciation.",
-        "nguon": "Cheiro (1916) & Mrs. J. B. Dale, Indian Palmistry (1895) — Mount of Apollo"
+        "trich": "It also indicates enthusiasm for the beautiful in all things, whether one follows an artistic calling or not.",
+        "nguon": "Cheiro, Palmistry for All (1916) — Part II, Chapter IX: The Mount of the Sun and its Meaning"
       }
     },
     "thuy_tinh": {
@@ -79,17 +78,17 @@
       "mat_tich_cuc": "Phát triển tốt cho thấy khả năng giao tiếp sắc bén, óc thương mại nhạy bén, ứng biến nhanh và giỏi đàm phán.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: khi thiếu kiểm soát nguyên tắc dễ khôn lỏi, nói nhiều hơn làm hoặc chạy theo lợi ngắn hạn làm giảm độ tin cậy lâu dài.",
       "sach_ghi": {
-        "trich": "The Mount of Mercury is found under the base of the fourth finger. On a good hand it is a favourable Mount to have.",
-        "nguon": "Cheiro, Palmistry for All (1916) — The Mount of Mercury and Its Meaning"
+        "trich": "It gives quickness of brain, wit, thought, eloquence. It also relates to adaptability in science and commerce",
+        "nguon": "Cheiro, Palmistry for All (1916) — Part II, Chapter X: The Mount of Mercury and its Meaning"
       }
     },
     "kim_tinh": {
       "ten": "Gò Kim Tinh (Mount of Venus)",
-      "mat_tich_cuc": "Ấm, đàn hồi tốt biểu thị sức sống mạnh, lòng nhân ái, giàu tình cảm gia đình và khả năng tận hưởng vẻ đẹp cuộc sống.",
+      "mat_tich_cuc": "Đầy vừa phải cho thấy người giàu tình cảm, thích gần gũi, muốn làm người quanh mình vui và yêu cái đẹp.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: khi quá trội dễ thiên về cảm tính, chiều chuộng bản thân quá mức hoặc để cảm xúc chi phối ranh giới công việc.",
       "sach_ghi": {
-        "trich": "The Mount of Venus reflects vitality, warmth of affection, and emotional responsiveness.",
-        "nguon": "Cheiro, Palmistry for All (1916) — The Mount of Venus"
+        "trich": "When well-formed and not too large, it denotes a desire for love and companionship, the desire to please, worship of beauty in every form, the artistic and emotional temperament",
+        "nguon": "Cheiro, Palmistry for All (1916) — Part II, Chapter XII: The Mount of Venus and its Meaning"
       }
     },
     "hoa_tinh": {
@@ -97,8 +96,8 @@
       "mat_tich_cuc": "Vững chắc phản ánh lòng can đảm, tinh thần bảo vệ lẽ phải, khả năng chịu áp lực và kiên trì theo đuổi mục tiêu đến cùng.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: khi căng cứng quá mức dễ phản ứng nóng nảy, hiếu thắng hoặc biến tranh luận công việc thành va chạm cá nhân.",
       "sach_ghi": {
-        "trich": "This Mount has two positions on the palm; the first immediately under the upper part of the Line of Life, and the other opposite to it.",
-        "nguon": "Cheiro, Palmistry for All (1916) — The Mount of Mars"
+        "trich": "The mount of Mars shows courage; when in excess, passion; when small, temerity.",
+        "nguon": "Mrs. J. B. Dale, Indian Palmistry (1895) — References to Hand, No. 15: Plane and place of Mars"
       }
     },
     "thai_am": {
@@ -106,8 +105,8 @@
       "mat_tich_cuc": "Tròn đều cho thấy trí tưởng tượng phong phú, trực giác tinh tế, thích hợp với sáng tác, thiết kế và các ngành cần sự đồng cảm.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: khi quá lớn dễ mơ mộng xa thực tế, tâm trạng thất thường hoặc hay lo xa về những kịch bản chưa xảy ra.",
       "sach_ghi": {
-        "trich": "The Mount of the Moon, or as it is also called the Mount of Luna, is found on the base of the hand under the end of the Line of Head.",
-        "nguon": "Cheiro, Palmistry for All (1916) — The Mount of the Moon and Its Meaning"
+        "trich": "This Mount relates to everything that has to do with the imaginative faculties, the emotional artistic temperament, romance, ideality, poetry, change of scenery, travel, and such like.",
+        "nguon": "Cheiro, Palmistry for All (1916) — Part II, Chapter XI: The Mount of the Moon and its Meaning"
       }
     }
   }

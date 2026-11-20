@@ -2,7 +2,7 @@
 
 export type TenNguHanh = "Mộc" | "Hỏa" | "Thổ" | "Kim" | "Thủy";
 
-export type MucPhoiHop = "bu_khuyet_cao" | "bo_tro_on_dinh" | "can_quy_che_ro";
+export type MucPhoiHop = "bu_khuyet_cao" | "bo_tro_tot" | "can_quy_che_ro";
 
 export interface OngChuTomTat {
   ten: string;

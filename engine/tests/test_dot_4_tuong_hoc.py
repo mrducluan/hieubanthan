@@ -68,7 +68,7 @@ def test_kymon_bi_kip_cuu_don_va_nhan_dien():
         assert muc.get("mat_tich_cuc") and muc.get("mat_tieu_cuc_can_chu_y")
         sgh = muc.get("sach_ghi") or {}
         assert sgh.get("han") and sgh.get("chuong") and not sg.kiem_muc(sgh), f"Câu sách Cửu Độn sai ở {ma}"
-    _kiem_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc"))
+    _kiem_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_ghi_khac", "sach_goc"))
 
     # Kiểm thử bộ nhận diện Cửu Độn trên dữ liệu cung thực tế
     td = d4.tra_cuu_don_cung("Bính", "Đinh", "Sinh", "Cửu Thiên", 3)

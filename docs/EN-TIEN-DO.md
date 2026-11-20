@@ -524,6 +524,11 @@ khi xong GĐ 1; slug từng trang do engine sinh (`slug_en`).
      hoảng / cấp cứu tăng, chặn nhầm ≈ 0, p90 < 2 s): ghi ngày hiệu lực vào `/en/privacy` + bảng bên thứ ba bản Việt (đổi
      `NGAY_HIEU_LUC`), đặt env Render `HOI_PHAN_LOAI_AI=1`, bật `hoi.phan_loai_ai_en` ở `/quan-tri/cai-dat`.
 
+5. **Thẻ chỉ tay bản tiếng Anh — HOÃN (anh dặn 2026-11-20 "làm sau, note lại")**: thẻ `components/nhan-tuong/TheFuzzyTuong.tsx`
+   (khối 5 hình tướng Bridges, testid `ct-fuzzy-*` / `nt-fuzzy-*`) có chữ cố định chỉ tiếng Việt; engine đã trả `ghi_chu` vi/en
+   (`calc/tuong_fuzzy.py`). Khi mở `/en/face-reading` + trang chỉ tay bản Anh: đưa chữ cố định của thẻ vào catalog có chiều
+   `en`, thêm e2e bản Anh không lộ chữ Việt. Chưa làm cho tới khi anh bảo.
+
 ## 7. Nhật ký
 
 - **2026-11-10 — GĐ 0**: đọc nền đa ngôn ngữ, kiểm kê, dựng golden bản Việt + khung test tiếng Anh, hỏi 4 câu quyết định.

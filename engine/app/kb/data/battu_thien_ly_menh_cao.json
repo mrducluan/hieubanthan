@@ -21,7 +21,7 @@
     "that_sat_che_kiep_cuu_tai": {
       "ten": "Thất Sát: Chế Kiếp Cứu Tài vs Hao Tài",
       "mat_tich_cuc": "Khi Chính Tài bị Kiếp Tài vượng tranh đoạt, có Thất Sát xuất hiện chế ngự Kiếp Tài sẽ bảo vệ được nguồn tài sản và tạo uy tín lãnh đạo quyết đoán.",
-      "mat_tieu_cuc_can_chu_y": "Nên chú ý mặt tiêu cực của Thất Sát khi thân vượng Ấn nặng mà Tài nhẹ: Thất Sát lại sinh Ấn làm hao tổn Tài tinh, hoặc khi thân nhược không có Thực/Ấn hóa giải sẽ sinh áp lực lớn, tiểu nhân cản trở và dễ hao sức.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý mặt tiêu cực của Thất Sát khi thân vượng Ấn nặng mà Tài nhẹ: Thất Sát lại sinh Ấn làm hao tổn Tài tinh, hoặc khi thân nhược không có Thực/Ấn hoá giải sẽ sinh áp lực lớn, tiểu nhân cản trở và dễ hao sức.",
       "sach_ghi": {
         "nguon": "Thiên Lý Mệnh Cảo — Lục Thần Thiên",
         "tom_y": true
@@ -41,7 +41,7 @@
     "chinh_thien_an_ho_than": {
       "ten": "Chính Ấn · Thiên Ấn (Sinh Thân & Tiết Quan Sát)",
       "mat_tich_cuc": "Khi Nhật Chủ nhược có Ấn tinh sinh thân và Quan tinh sinh Ấn là tượng học thức sâu, được quý nhân che chở, càng đi vào vận Ấn/Tỷ càng vững vàng.",
-      "mat_tieu_cuc_can_chu_y": "Nên chú ý hai mặt trái: thân đã mạnh lại thêm Ấn quá dày dễ trở nên bảo thủ, ỷ lại, chậm hành động (cần Tài tinh tiết chế); ngược lại thân yếu Ấn mỏng mà gặp Tài mạnh phá Ấn (Tham Tài Hoại Ấn) thì dễ mất uy tín hoặc tổn hại sức khỏe vì chạy theo lợi trước mắt.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý hai mặt trái: thân đã mạnh lại thêm Ấn quá dày dễ trở nên bảo thủ, ỷ lại, chậm hành động (cần Tài tinh tiết chế); ngược lại thân yếu Ấn mỏng mà gặp Tài mạnh phá Ấn (Tham Tài Hoại Ấn) thì dễ mất uy tín hoặc hao sức vì chạy theo lợi trước mắt.",
       "sach_ghi": {
         "nguon": "Thiên Lý Mệnh Cảo — Lục Thần Thiên & Cách Cục Thiên",
         "tom_y": true
@@ -59,9 +59,9 @@
       "nghia_doi_thuong": "Điểm mạnh lớn nhất của một người nếu dùng quá tay hoặc quá thiếu đều dễ phản tác dụng — mấu chốt là biết tiến khi thuận và giữ sức khi gặp nhịp chậm."
     },
     "hoa_khi_cach_dieu_kien": {
-      "ten": "Hóa Khí Cách: Điều Kiện Thành & Không Thành",
-      "mat_tich_cuc": "Thiên Can tương hợp đứng liền kề và đắc Nguyệt Lệnh tương sinh không bị ngũ hành khắc chế cản đường mới thành chân Hóa Khí Cách — tượng khí thế thuần nhất, dễ làm nên việc lớn.",
-      "mat_tieu_cuc_can_chu_y": "Nên chú ý: rất nhiều người thấy Can hợp liền vội luận Hóa Khí Cách nhưng thực chất bị cách vị (không liền kề) hoặc không đắc Nguyệt Lệnh — khi đó chỉ là hợp mà không hóa, luận sai cách cục sẽ kéo theo chọn sai toàn bộ hướng phát triển.",
+      "ten": "Hoá Khí Cách: Điều Kiện Thành & Không Thành",
+      "mat_tich_cuc": "Thiên Can tương hợp đứng liền kề và đắc Nguyệt Lệnh tương sinh không bị ngũ hành khắc chế cản đường mới thành chân Hoá Khí Cách — tượng khí thế thuần nhất, dễ làm nên việc lớn.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý: rất nhiều người thấy Can hợp liền vội luận Hoá Khí Cách nhưng thực chất bị cách vị (không liền kề) hoặc không đắc Nguyệt Lệnh — khi đó chỉ là hợp mà không hoá, luận sai cách cục sẽ kéo theo chọn sai toàn bộ hướng phát triển.",
       "sach_ghi": {
         "nguon": "Thiên Lý Mệnh Cảo — Cách Cục Thiên",
         "tom_y": true

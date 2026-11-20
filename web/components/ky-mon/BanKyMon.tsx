@@ -260,6 +260,11 @@ function ChiTietHuong({ h }: { h: HuongKM }) {
               <span lang="zh-Hant">{cd.sach_ghi.han}</span> {cd.sach_ghi.nguon ? `— ${cd.sach_ghi.nguon}` : ""}
             </p>
           )}
+          {cd.sach_ghi_khac?.han && (
+            <p className="mt-1 text-xs text-fg-faint" data-testid="km-cuu-don-khac">
+              {cd.sach_ghi_khac.loi} <span lang="zh-Hant">{cd.sach_ghi_khac.han}</span>
+            </p>
+          )}
           {cd.dien_giai_theo && <p className="mt-1 text-xs text-fg-faint">Lời đời thường: {cd.dien_giai_theo}</p>}
         </div>
       ))}

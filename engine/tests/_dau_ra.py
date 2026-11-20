@@ -309,7 +309,6 @@ def luot_goi(client=None) -> list[Luot]:
         g(f"lich.ngay.{ngay}", f"/v1/lich/ngay-tot/{ngay}")
     for nam, th in ((2026, 11), (2026, 12), (2027, 1), (2027, 2), (2027, 7)):
         g(f"lich.thang.{nam}.{th}", f"/v1/lich/thang/{nam}/{th}")
-        p(f"lich.thang_post.{nam}.{th}", "/v1/lich/thang", {"nam": nam, "thang": th})
         g(f"lich.viec_dem.{nam}.{th}", f"/v1/lich/viec-thang-dem/{nam}/{th}")
         for viec in ("cuoi_hoi", "khai_truong", "nhap_trach", "dong_tho", "xuat_hanh", "mua_xe"):
             g(f"lich.viec_thang.{viec}.{nam}.{th}", f"/v1/lich/viec-thang/{viec}/{nam}/{th}")
@@ -349,8 +348,6 @@ def luot_goi(client=None) -> list[Luot]:
     g("phongthuy.cung_phi", "/v1/phongthuy/cung-phi")
     for (na, ga, nb, gb) in ((1990, "nam", 1990, "nu"), (1988, "nam", 1992, "nu")):   # UI-HHT
         p(f"phongthuy.hai_cung.{na}{ga}.{nb}{gb}", "/v1/phongthuy/hai-cung", {"a": {"nam": na, "gioi_tinh": ga}, "b": {"nam": nb, "gioi_tinh": gb}})
-    g("phongthuy.tuoi", "/v1/phongthuy/tuoi")
-    g("phongthuy.tuoi_gop", "/v1/phongthuy/tuoi-gop")
     for bc_ten, bc in (("pho", BO_CUC), ("ho", BO_CUC_HO)):
         for gn in ("sach_xua", "doi_song"):
             p(f"phongthuy.bo_cuc.{bc_ten}.{gn}", "/v1/phongthuy/bo-cuc", {"bo_cuc": bc, "sinh": _sinh(HO_SO[0]), "goc_nhin": gn})
@@ -441,12 +438,6 @@ def luot_goi(client=None) -> list[Luot]:
             g(f"tuvi.la_so_mau.{s['slug']}", f"/v1/tuvi/la-so-mau/{s['slug']}")
         for s in client.get("/v1/phongthuy/cung-phi").json().get("cung", []):
             g(f"phongthuy.cung_phi.{s['slug']}", f"/v1/phongthuy/cung-phi/{s['slug']}?nam_xem=2027")
-        for s in (client.get("/v1/phongthuy/tuoi-gop").json().get("tuoi") or [])[::5]:
-            if isinstance(s, dict) and s.get("slug"):
-                g(f"phongthuy.tuoi_gop.{s['slug']}", f"/v1/phongthuy/tuoi-gop/{s['slug']}")
-        for s in (client.get("/v1/phongthuy/tuoi").json().get("tuoi") or [])[::9]:
-            if isinstance(s, dict) and s.get("slug"):
-                g(f"phongthuy.tuoi.{s['slug']}", f"/v1/phongthuy/tuoi/{s['slug']}")
         for n in client.get("/v1/sinh-nuoc-ngoai?nam=2026").json().get("nuoc", []):
             g(f"sinh_nuoc_ngoai.{n['ma']}", f"/v1/sinh-nuoc-ngoai/{n['ma']}?nam=2026")
         for la_id in client.get("/v1/tarot/bo-bai").json().get("la", {}):

@@ -153,8 +153,11 @@ SO: dict[str, dict] = {
                               "PR #320 (2026-11-20): 81/150 quy tắc giữ lại, mỗi câu Hán khớp kho nguồn Liễu Trang tướng pháp / "
                               "Thần Tướng Toàn Biên (than_tuong_toan_bien.json); lời Việt khuôn SX-C do ban biên tập viết"),
         "quy_tac_khong_dua": {"muc": "bien_tap", "ghi_chu": "69 quy tắc không đưa ra người dùng, chỉ còn mã + lý do"}}},
-    "chitay_phuong_tay_kinh_dien.json": {"mang": "nhantuong", "muc": "truyen_thong",
-                                         "ghi_chu": "Đợt 4: 4 Đường Chính & 7 Gò Bàn Tay 2 chiều từ Cheiro (1916), Benham (1912) & Dale (1895) (palmistry-western-kb)"},
+    "chitay_phuong_tay_kinh_dien.json": {"mang": "nhantuong", **_nv("chi_tay_cheiro_palmistry_for_all.json",
+                                         "tests/test_rs3_chitay_kinh_dien.py::test_moi_cau_trich_la_chuoi_con_kho_nguon",
+                                         "RS-3: 4 đường chính + 7 gò; 11 câu trích tiếng Anh khớp kho nguồn Cheiro, Palmistry "
+                                         "for All (1916) và Dale, Indian Palmistry (1895) (chi_tay_dale_indian_palmistry.json, "
+                                         "bản Gutenberg); lời Việt hai mặt ban biên tập viết, nháp")},
     "chi_tay_tay_kb.json": {"mang": "nhantuong", **_nv("chi_tay_cheiro_language_of_the_hand.json",
                                                     "tests/test_tk2_chi_tay_tay.py::test_moi_cau_trich_la_chuoi_con_kho_nguon",
                                                     "TK-2 chỉ tay phương Tây: câu trích tiếng Anh Cheiro 1894 + Benham 1900 (kho nguồn lớp chữ "

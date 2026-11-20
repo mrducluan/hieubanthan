@@ -3,7 +3,7 @@
 // bản đồ gương mặt là nhân vật chính, khảo sát sáu bước sáng đúng vùng đang hỏi, bài đọc tám chương khuôn doi_song_1.
 // Không ảnh (ảnh chỉ để tự chấm 4 điểm trên máy, không rời máy); câu trả lời lưu trên máy; web không tính gì.
 import { useEffect, useRef, useState } from "react";
-import { ScanFace, ScanSearch } from "lucide-react";
+import { BookOpen, Hand, ScanFace, ScanSearch } from "lucide-react";
 import { useChu } from "@/components/cms/DauCms";
 import Link from "@/components/khung/Lien";
 import { DauMang } from "@/components/huyen-hoc/KhungMang";
@@ -77,7 +77,20 @@ export function NhanTuong() {
   const dungVaXem = (tl: TraLoi) => { luuTraLoi(tl); void docVoi(tl); };
 
   const dau = (
-    <DauMang Icon={ScanFace} hinh="nhan-tuong" ten={t("dau.ten")} mo_ta={t("dau.mo_ta")} />
+    <>
+      <DauMang Icon={ScanFace} hinh="nhan-tuong" ten={t("dau.ten")} mo_ta={t("dau.mo_ta")} />
+      {/* RS-2: lối vào hai trang cùng mảng ngay đầu trang (trước chỉ có một dòng ở cuối trang). */}
+      {!en && (
+        <nav aria-label="Cùng mảng Nhân tướng" className="mx-auto -mt-4 mb-8 flex max-w-5xl flex-wrap gap-2 text-sm" data-testid="nt-loi-vao">
+          <Link href="/chi-tay" className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/5 px-3 py-1.5 text-gold hover:bg-gold/10">
+            <Hand className="size-4" aria-hidden /> Xem chỉ tay theo sách xưa
+          </Link>
+          <Link href="/nhan-tuong/do-hinh" className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/5 px-3 py-1.5 text-gold hover:bg-gold/10">
+            <BookOpen className="size-4" aria-hidden /> Đồ hình tướng mặt trên bản khắc gỗ
+          </Link>
+        </nav>
+      )}
+    </>
   );
   // ANH-1: tải ảnh chân dung đứng ngay dưới đầu trang (chỉ khi chưa có bài đọc); gợi ý điền vào khảo sát trên máy.
   const anhChanDung = !bc && traLoi !== undefined && (

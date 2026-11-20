@@ -1458,7 +1458,8 @@ def chon_cot_loi(ds_chuong: list[dict], toi_da: int = 5) -> list[dict]:
 # ------------------------------------------------------------------ điểm vào
 @kh.vi_quyet_dinh
 def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = None,
-        ca_nhan: dict | None = None, ls: dict | None = None, vh: dict | None = None, y_bo_sung: bool = True) -> dict:
+        ca_nhan: dict | None = None, ls: dict | None = None, vh: dict | None = None, y_bo_sung: bool = True,
+        tom_y_phai: bool = True) -> dict:
     """`sinh` như `hoidap.tuvi.tra_loi` (+ `luu_nguyet` tuỳ chọn). → báo cáo `doi_song_1` (chưa có moi_xem / phí —
     `toan_bo.tuvi` gắn). `y_bo_sung` = nối KB ý Tử vi bổ sung (TV-YBS — `luangiai/tuvi_y_bo_sung.py`; tắt chỉ để test so
     với bản không có ý bổ sung)."""
@@ -1533,6 +1534,9 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     kh.gon_bao_cao({"cot_loi": cot_loi, "chuong": ds})
     from app.luangiai import luu_y_mang as lym  # noqa: PLC0415
     luu_y_mang = lym.dung(ds, "tuvi", muc_cung={k: v["muc"] for k, v in cc.items()})
+    if tom_y_phai:    # RS-3: nguyên tắc Tử Vân (tóm ý) khớp lá số → một dòng "Vì sao nói vậy"; không đổi mức / hộp / mã.
+        from app.luangiai import tu_van_thien_ly as tvtl  # noqa: PLC0415
+        tvtl.ap_tuvi(ds, ls, nam_am_xem, nam_am_sinh)
     return _sach({"phien_ban": PHIEN_BAN, "cot_loi": cot_loi, "thoi_gian_bieu": tgb, "chuong": ds, "luu_y_mang": luu_y_mang,
                   **({"nguoi_quanh": nguoi_quanh} if nguoi_quanh else {}),
                   "tuoi_mu": vh["tuoi_mu"], "ngay_xem": ngay_xem.isoformat(), **kb.meta()})

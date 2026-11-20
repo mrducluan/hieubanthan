@@ -17,6 +17,7 @@ export interface CachKM { ma: string; ten: string; loai: "cat" | "hung"; dieu_ki
 export interface CuuDonKM {
   ma: string; ten: string; dieu_kien: string; nghia_doi_thuong?: string; mat_tich_cuc: string; mat_tieu_cuc_can_chu_y: string;
   sach_ghi?: { han?: string; am?: string; loi?: string; nguon?: string };
+  sach_ghi_khac?: { han?: string; loi?: string; nguon?: string };
   dien_giai_theo?: string;
 }
 export interface HuongKM {

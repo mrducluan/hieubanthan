@@ -23,8 +23,9 @@ def test_ngay_tot_mac_dinh_hom_nay_va_kiem_dau_vao():
 
 
 def test_thang_va_chon_ngay():
-    j = client.post("/v1/lich/thang", json={"nam": 2026, "thang": 2}).json()
+    j = client.get("/v1/lich/thang/2026/2").json()
     assert len(j["ngay"]) == 28
+    assert client.post("/v1/lich/thang", json={"nam": 2026, "thang": 2}).status_code in (404, 405)   # RS-3: bỏ bản POST
     r = client.post("/v1/lich/chon-ngay", json={"viec": "nhap_trach", "tu": "2026-11-01", "den": "2026-12-31"})
     assert r.status_code == 200 and r.json()["viec"]["ten"] == "Về nhà mới"
     assert client.post("/v1/lich/chon-ngay", json={"viec": "nhap_trach", "tu": "2026-01-01",

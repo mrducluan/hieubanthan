@@ -112,6 +112,12 @@ export const CHU_HUYEN_HOC = {
   "chan_dung.lon": { nhom: "Chân dung tổng hợp", nhan: "Tiêu đề khối", mac_dinh: "Ba cách nhìn, một con người", toi_da: 80 },
   "chan_dung.mo": { nhom: "Chân dung tổng hợp", nhan: "Lời dẫn", mac_dinh: "Tử vi nhìn hoàn cảnh quanh bạn, Bát tự nhìn sức của chính bạn, nhân tướng nhìn điều bạn đang thấy ở mình. Đặt ba cách cạnh nhau theo từng mảng đời: mảng nào cả ba cùng thấy, mảng nào nhìn khác nhau và vì sao.", toi_da: 300 },
   "chan_dung.nut": { nhom: "Chân dung tổng hợp", nhan: "Chữ nút", mac_dinh: "Xem chân dung tổng hợp", toi_da: 40 },
+  // RS-2: lối vào gói xem + hỏi chuyên gia (thẻ chuyên gia chỉ hiện khi công tắc sao.chuyen_gia.bat bật).
+  "sau_hon.nho": { nhom: "Đọc sâu hơn", nhan: "Dòng nhỏ", mac_dinh: "Khi muốn đọc sâu hơn", toi_da: 60 },
+  "sau_hon.goi_ten": { nhom: "Đọc sâu hơn", nhan: "Gói xem — tên", mac_dinh: "Các gói xem", toi_da: 60 },
+  "sau_hon.goi_mo": { nhom: "Đọc sâu hơn", nhan: "Gói xem — lời dẫn", mac_dinh: "Mỗi gói nói rõ đọc được gì, phần nào miễn phí, phần nào cần Sao.", toi_da: 200 },
+  "sau_hon.cg_ten": { nhom: "Đọc sâu hơn", nhan: "Hỏi chuyên gia — tên", mac_dinh: "Hỏi chuyên gia", toi_da: 60 },
+  "sau_hon.cg_mo": { nhom: "Đọc sâu hơn", nhan: "Hỏi chuyên gia — lời dẫn", mac_dinh: "Một câu hỏi, người thật trả lời bằng văn bản; quá hạn hoàn tiền.", toi_da: 200 },
   "lich.nho": { nhom: "Lịch & tuổi", nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Theo lịch và tuổi dân gian", toi_da: 60 },
   "lich.lon": { nhom: "Lịch & tuổi", nhan: "Tiêu đề mục", mac_dinh: "Chọn ngày, xem tuổi, tra lịch", toi_da: 80 },
   ...Object.fromEntries(LICH.flatMap(([ten, mo], i) => [

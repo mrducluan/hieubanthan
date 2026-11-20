@@ -38,6 +38,9 @@ const MA_JS = String.raw`(function () {
     { cung: "Đoài", nhan: "Tây", deg: 270 },
     { cung: "Càn", nhan: "TB", deg: 315 }
   ];
+  // Nhãn hiển thị theo ngôn ngữ (cung giữ mã gốc để so với dữ liệu engine).
+  var NHAN = __NHAN__, CHU_VAN = __CHU_VAN__, CHU_BAC = __CHU_BAC__, CHU_TRUNG = __CHU_TRUNG__;
+  SECTORS.forEach(function (s, i) { s.nhan = NHAN[i]; });
 
   function gui(o) { o.nguon = "hbt-ve-tinh"; parent.postMessage(o, goc); }
   function r6(x) { return Math.round(x * 1e6) / 1e6; }
@@ -115,7 +118,7 @@ const MA_JS = String.raw`(function () {
       var d = sectorPath(C, C, R_IN, R_MID, sec.deg - 22.5, sec.deg + 22.5);
       var stroke = sel ? "#f7d774" : (laHuong ? "#e8c26a" : mucStroke(muc));
       var sw = sel ? "3.2" : (laHuong ? "2.2" : "1.2");
-      parts.push('<g class="hbt-sec' + (sel ? ' is-sel' : '') + '" data-cung="' + sec.cung + '" tabindex="0" role="button" aria-label="' + sec.cung + '">');
+      parts.push('<g class="hbt-sec' + (sel ? ' is-sel' : '') + '" data-cung="' + sec.cung + '" tabindex="0" role="button" aria-label="' + sec.nhan + '">');
       parts.push('<path d="' + d + '" fill="' + mucFill(muc) + '" stroke="' + stroke + '" stroke-width="' + sw + '"/>');
       var ptLbl = polar(C, C, 144, sec.deg);
       var ptNum = polar(C, C, 108, sec.deg);
@@ -134,16 +137,16 @@ const MA_JS = String.raw`(function () {
     // Trung cung
     var tc = byCung["Trung cung"] || {};
     var tcSel = hkSelected === "Trung cung";
-    parts.push('<g class="hbt-sec' + (tcSel ? ' is-sel' : '') + '" data-cung="Trung cung" tabindex="0" role="button" aria-label="Trung cung">');
+    parts.push('<g class="hbt-sec' + (tcSel ? ' is-sel' : '') + '" data-cung="Trung cung" tabindex="0" role="button" aria-label="' + CHU_TRUNG + '">');
     parts.push('<circle cx="' + C + '" cy="' + C + '" r="' + R_IN + '" fill="' + mucFill(tc.muc || "can_bang") + '" stroke="' + (tcSel ? "#f7d774" : "rgba(232,194,106,0.85)") + '" stroke-width="' + (tcSel ? "3" : "1.6") + '"/>');
-    parts.push('<text x="' + C + '" y="' + (C - 14) + '" text-anchor="middle" class="hbt-lbl">Vận ' + (hkData.van || "") + '</text>');
+    parts.push('<text x="' + C + '" y="' + (C - 14) + '" text-anchor="middle" class="hbt-lbl">' + CHU_VAN + ' ' + (hkData.van || "") + '</text>');
     if (tc.son != null && tc.huong != null) {
       parts.push('<text x="' + C + '" y="' + (C + 10) + '" text-anchor="middle" class="hbt-num">' + tc.son + ' · ' + tc.huong + '</text>');
     }
     parts.push('</g>');
     // Chữ B / N trên viền ngoài cùng
     var pN = polar(C, C, R_OUT + 12, 0);
-    parts.push('<text x="' + pN[0].toFixed(1) + '" y="' + pN[1].toFixed(1) + '" text-anchor="middle" dominant-baseline="central" class="hbt-cardinal">B</text>');
+    parts.push('<text x="' + pN[0].toFixed(1) + '" y="' + pN[1].toFixed(1) + '" text-anchor="middle" dominant-baseline="central" class="hbt-cardinal">' + CHU_BAC + '</text>');
     parts.push('</svg>');
     return parts.join("");
   }
@@ -280,12 +283,14 @@ const CHU = {
     title: "Bản đồ vệ tinh", aria: "Bản đồ vệ tinh: bấm vào mái nhà, rồi bấm mặt đường trước cửa",
     khong: "Không có bản đồ vệ tinh", ts: "language=vi&region=VN", vung: { region: "VN" },
     co: "Cỡ", mo: "Mờ", anLb: "Ẩn la bàn", hienLb: "Hiện la bàn", hud: "Điều chỉnh la bàn Huyền Không",
+    nhan: ["Bắc", "ĐB", "Đông", "ĐN", "Nam", "TN", "Tây", "TB"], van: "Vận", bac: "B", trung: "Trung cung",
   },
   en: {
     t1: "Centre of home (drag to adjust)", t2: "In front of the home (drag to adjust)",
     title: "Satellite map", aria: "Satellite map: tap the roof, then the street in front of the door",
     khong: "No satellite map", ts: "language=en", vung: {},
     co: "Size", mo: "Opacity", anLb: "Hide compass", hienLb: "Show compass", hud: "Flying Star compass controls",
+    nhan: ["N", "NE", "E", "SE", "S", "SW", "W", "NW"], van: "Period", bac: "N", trung: "Centre palace",
   },
 } as const;
 
@@ -299,6 +304,8 @@ export function GET(req: Request): Response {
   const js = MA_JS.replace("__KHOA__", JSON.stringify(khoa)).replace("__NONCE__", JSON.stringify(nonce))
     .replace("__T1__", JSON.stringify(ch.t1)).replace("__T2__", JSON.stringify(ch.t2)).replace("__VUNG__", JSON.stringify(ch.vung))
     .replace("__THAM_SO__", JSON.stringify(ch.ts))
+    .replace("__NHAN__", JSON.stringify(ch.nhan)).replace("__CHU_VAN__", JSON.stringify(ch.van))
+    .replace("__CHU_BAC__", JSON.stringify(ch.bac)).replace("__CHU_TRUNG__", JSON.stringify(ch.trung))
     .replaceAll("__AN_LB__", JSON.stringify(ch.anLb)).replaceAll("__HIEN_LB__", JSON.stringify(ch.hienLb));
   const html = `<!doctype html><html lang="${ngonNgu}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex"><title>${ch.title}</title>

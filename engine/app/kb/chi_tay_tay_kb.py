@@ -139,14 +139,41 @@ def doc(dang: str | None, go: dict[str, str] | None, duong: dict[str, str] | Non
     muc = []
     if dang and (m := _dang(dang)):
         muc.append(_ra(m, "dang_tay"))
+    da_co: set[str] = set()
     for k, v in (go or {}).items():
         if (g := _go(k)) and g.get(v):
-            muc.append(_ra(g[v], "go"))
+            muc.append(_kinh_dien(_ra(g[v], "go"), _KINH_DIEN_GO.get(k), "bay_go", da_co))
     for k, v in (duong or {}).items():
         c = _cau_duong(k)
         if c and (m := next((x for x in c["lua_chon"] if x["ma"] == f"{k}_{v}"), None)):
-            muc.append(_ra(m, "duong"))
+            du = next((d["ma"] for d in _d().get("duong") or [] if c in d["cau"]), None)
+            muc.append(_kinh_dien(_ra(m, "duong"), _KINH_DIEN_DUONG.get(du or ""), "duong_chinh", da_co))
     return {"phai": "tay", "muc": _xep(muc), "cau_ket": _d().get("cau_ket", "") if muc else ""}
+
+
+# RS-3 — gò / đường của lớp này ↔ mục kho kinh điển `chitay_phuong_tay_kinh_dien.json` (Cheiro 1916 · Dale 1895).
+_KINH_DIEN_GO = {"jupiter": "moc_tinh", "saturn": "tho_tinh", "apollo": "thai_duong", "mercury": "thuy_tinh",
+                 "mars": "hoa_tinh", "luna": "thai_am", "venus": "kim_tinh"}
+_KINH_DIEN_DUONG = {"sinh": "sinh_dao", "tri": "tri_dao", "tam": "tam_dao", "van_menh": "dinh_menh"}
+
+
+def _kinh_dien(ra: dict, ma: str | None, nhom: str, da_co: set[str]) -> dict:
+    """Gắn trường RIÊNG `kinh_dien` (hai mặt + câu sách) vào mục ĐẦU TIÊN của đường / gò đó. Chỉ bản Việt.
+    Không đổi trường cũ, không đổi thứ tự / nhóm."""
+    from app import ngon_ngu
+    from app.kb import tuong_hoc_dot4_kb
+
+    if not ma or ma in da_co or not ngon_ngu.la_viet():
+        return ra
+    m = (tuong_hoc_dot4_kb.chitay_phuong_tay().get(nhom) or {}).get(ma)
+    if not m:
+        return ra
+    da_co.add(ma)
+    sg = m.get("sach_ghi") or {}
+    ra["kinh_dien"] = {"ma": ma, "ten": m["ten"], "mat_tich_cuc": m["mat_tich_cuc"],
+                       "mat_tieu_cuc_can_chu_y": m["mat_tieu_cuc_can_chu_y"],
+                       **({"trich": sg["trich"], "nguon": sg["nguon"]} if sg.get("trich") else {})}
+    return ra
 
 
 def ket_qua_do_tay(kq: dict, tay: str) -> dict:

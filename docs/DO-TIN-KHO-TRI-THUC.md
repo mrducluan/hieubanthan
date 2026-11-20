@@ -19,7 +19,7 @@
 | Tử vi | 1 | 3 | 7 | 7 |  |
 | Kinh Dịch | 4 | 2 | 1 | 2 |  |
 | Phong thuỷ | 2 | 2 | 1 | 3 |  |
-| Nhân tướng | 5 | 2 | 2 |  |  |
+| Nhân tướng | 6 | 2 | 1 |  |  |
 | Tarot | 1 |  | 1 |  |  |
 | Kỳ Môn |  | 1 |  | 1 |  |
 | Thần số |  |  | 11 | 13 |  |
@@ -38,6 +38,7 @@
 | `battu_sach_ghi.json` | (cả tệp) | `tam_menh_thong_hoi.json` | `test_moi_muc_qua_bo_kiem` | SX-C: câu Tam Mệnh Thông Hội + Uyên Hải Tử Bình (thần sát, thập thần, lục thân, tính nết, thân thể) khớp kho nguồn |
 | `chi_tay_kb.json` | (cả tệp) | `than_tuong_toan_bien.json` | `test_moi_cau_la_nguyen_van` | Chỉ tay: 67 bài thơ vân tay quyển 10 + câu đồ hình tám cung («根基所屬», Luận thủ) khớp kho nguồn; CT-2: câu theo số đo bàn tay (`sach_do_tay`: «論手», «相指掌») + vai và lựa chọn từng cung (`cung_tay`: «根基所屬») qua bộ kiểm SX-C (tests/test_chi_tay_do.py); ngưỡng đo `do_tay` là giả định nhân trắc, can_doi_chieu; lời Việt nói giảm theo SX-C; 5 hình sách đoán về người vợ không đưa vào |
 | `chi_tay_tay_kb.json` | (cả tệp) | `chi_tay_cheiro_language_of_the_hand.json` | `test_moi_cau_trich_la_chuoi_con_kho_nguon` | TK-2 chỉ tay phương Tây: câu trích tiếng Anh Cheiro 1894 + Benham 1900 (kho nguồn lớp chữ nhận dạng, can_doi_chieu) khớp từng câu; lời Việt ban biên tập; ngưỡng số đo `do_tay` giả định, can_doi_chieu; không nhóm C |
+| `chitay_phuong_tay_kinh_dien.json` | (cả tệp) | `chi_tay_cheiro_palmistry_for_all.json` | `test_moi_cau_trich_la_chuoi_con_kho_nguon` | RS-3: 4 đường chính + 7 gò; 11 câu trích tiếng Anh khớp kho nguồn Cheiro, Palmistry for All (1916) và Dale, Indian Palmistry (1895) (chi_tay_dale_indian_palmistry.json, bản Gutenberg); lời Việt hai mặt ban biên tập viết, nháp |
 | `chuyen_nghia_kb.json` | khai_niem | `ky_mon_co_kim_do_thu.json` | `test_moi_muc_qua_bo_kiem` | mỗi khái niệm một câu sách khớp kho nguồn; nghĩa đời nay là biên tập |
 | `kinhdich_dich_lam.json` | (cả tệp) | `tieu_thi_dich_lam.json` | `test_kb_la_ban_cat_cua_kho_nguon_va_du_4096_bai` | TK-2: 4.096 bài từ Tiêu Thị Dịch Lâm (quẻ bản → quẻ biến), nguyên văn chưa dịch; bài có chữ nặng không hiện |
 | `kinhdich_hao.json` | (cả tệp) | `chu_dich_truyen_nghia.json` | `test_loi_que_loi_hao_trong_kb_khop_ban_tu_kho` | kinh văn khớp nguyên văn; phần dịch và «Hiểu đơn giản» là nháp |
@@ -139,7 +140,7 @@
 | Phong thuỷ | `phongthuy_tam_yeu.json` |  | Tập quán / sách hiện đại tóm ý | SX-C: tóm ý Dương Trạch Tam Yếu + Bát Trạch Minh Kính qua BẢN DỊCH Việt hiện đại (chưa có nguyên văn chữ Hán trong kho nguồn); du niên 64 nhà + 64 bếp khớp phép tính |
 | Nhân tướng | `chi_tay_kb.json` |  | Có nguyên văn đối chiếu | Chỉ tay: 67 bài thơ vân tay quyển 10 + câu đồ hình tám cung («根基所屬», Luận thủ) khớp kho nguồn; CT-2: câu theo số đo bàn tay (`sach_do_tay`: «論手», «相指掌») + vai và lựa chọn từng cung (`cung_tay`: «根基所屬») qua bộ kiểm SX-C (tests/test_chi_tay_do.py); ngưỡng đo `do_tay` là giả định nhân trắc, can_doi_chieu; lời Việt nói giảm theo SX-C; 5 hình sách đoán về người vợ không đưa vào |
 | Nhân tướng | `chi_tay_tay_kb.json` |  | Có nguyên văn đối chiếu | TK-2 chỉ tay phương Tây: câu trích tiếng Anh Cheiro 1894 + Benham 1900 (kho nguồn lớp chữ nhận dạng, can_doi_chieu) khớp từng câu; lời Việt ban biên tập; ngưỡng số đo `do_tay` giả định, can_doi_chieu; không nhóm C |
-| Nhân tướng | `chitay_phuong_tay_kinh_dien.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 4: 4 Đường Chính & 7 Gò Bàn Tay 2 chiều từ Cheiro (1916), Benham (1912) & Dale (1895) (palmistry-western-kb) |
+| Nhân tướng | `chitay_phuong_tay_kinh_dien.json` |  | Có nguyên văn đối chiếu | RS-3: 4 đường chính + 7 gò; 11 câu trích tiếng Anh khớp kho nguồn Cheiro, Palmistry for All (1916) và Dale, Indian Palmistry (1895) (chi_tay_dale_indian_palmistry.json, bản Gutenberg); lời Việt hai mặt ban biên tập viết, nháp |
 | Nhân tướng | `nhan_tuong_do_hinh.json` |  | Tóm ý cổ thư, chưa khớp từng câu | lớp phủ đồ hình: nhãn chữ Hán đọc trên bản khắc Thần Tướng Toàn Biên; toạ độ đo trên ảnh; lời Việt rút từ KB |
 | Nhân tướng | `nhan_tuong_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | KT-NT1/2 + KT-N1 + KT-NT3: cả 70 câu trích sách (`dac_diem.*.sach`) khớp kho nguồn `nhan_tuong_co_thu.json` + `than_tuong_toan_bien.json` (Thần Tướng Toàn Biên bản Cổ Kim Đồ Thư Tập Thành, Băng Giám, Tâm Tướng Thiên, Linh Khu, 4 sách Tứ khố — tests/test_kt_nt1_kho_nguon.py); lời luận vẫn là tóm ý, trường `nguon` Ma Y / Thần Tướng Toàn Biên chỉ ghi phái |
 | Nhân tướng | `nhan_tuong_kb.json` | luu_nien | Có nguyên văn đối chiếu | WS-2: 20 tuổi mốc khớp tên bộ vị + thứ tự của «流年運氣部位歌»; WS-4 / KT-NT3: tuổi 10–14 sửa theo chữ sách (Nhân Luân, Địa Luân) |

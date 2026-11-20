@@ -32,6 +32,12 @@ test("tự soi phương Tây: dáng tay + gò + đường chỉ → lời sách 
   await expect(kq).toContainText("Tay vuông");
   await kq.getByText("Nguyên văn").first().click();
   await expect(kq).toContainText("Cheiro, Language of the Hand (1894)");
+  // RS-3: đường / gò đang chọn có khối sách kinh điển (Cheiro 1916 · Dale 1895), câu tiếng Anh gập
+  const kd = kq.getByTestId("ct-tay-kinh-dien");
+  await expect(kd).toHaveCount(2);
+  await expect(kd.first()).toContainText("Nên chú ý");
+  await kd.first().getByText("Nguyên văn").click();
+  await expect(kd.first()).toContainText("Palmistry for All (1916)");
 });
 
 test("thư viện phương Tây có trong HTML máy chủ, không tên nội bộ", async ({ request }) => {

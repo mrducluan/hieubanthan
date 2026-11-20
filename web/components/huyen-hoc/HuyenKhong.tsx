@@ -49,6 +49,8 @@ interface Ban {
   the_tinh?: Record<"son" | "huong", { goc: number; the: number; thuan: boolean }>;
   ha_quai?: { cuc: string; cuc_ten: string };
   the_quai_y?: { y: string; luu_y: string; nguon: string };
+  the_quai_trang_thai?: string;
+  the_quai_ghi_chu?: string;
   ten_hien?: TenHien;
 }
 
@@ -239,6 +241,9 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
               </p>
               )}
               {ban.the_quai_y && <p className="mt-2 text-fg-muted">{ban.the_quai_y.y} {ban.the_quai_y.luu_y}</p>}
+              {ban.the_quai_ghi_chu && (
+                <p className="mt-2 rounded-lg bg-moon/10 px-3 py-2 text-xs text-fg-muted" data-testid="the-quai-ghi-chu">{ban.the_quai_ghi_chu}</p>
+              )}
             </div>
           )}
 

@@ -1,5 +1,5 @@
 "use client";
-// Biểu mẫu để chính nhân sự tự xác nhận đồng ý (Nghị định 13/2023/NĐ-CP) và nhận mã hóa AES-256-GCM gửi lại trưởng nhóm.
+// Biểu mẫu để chính nhân sự tự xác nhận đồng ý (Luật BVDLCN 91/2025/QH15) và nhận mã hóa AES-256-GCM gửi lại trưởng nhóm.
 import { useState } from "react";
 import { Check, Copy, Lock, ShieldCheck } from "lucide-react";
 import { CHU_DOANH_CHU } from "@/lib/chu/doanh-chu";
