@@ -79,7 +79,7 @@ export function StudioDoanhChu() {
 
   const linkMoi =
     maMoi && typeof window !== "undefined"
-      ? `${window.location.origin}/doanh-chu/moi?ma=${encodeURIComponent(maMoi)}`
+      ? `${window.location.origin}/ban-do-doi-ngu/moi?ma=${encodeURIComponent(maMoi)}`
       : "";
 
   function capNhatTuNhap(id: string, field: keyof ThanhVienTuNhapForm, value: string) {
@@ -239,6 +239,16 @@ export function StudioDoanhChu() {
 
   return (
     <div className="space-y-8">
+      {/* 3 giá trị thực chiến chạm thẳng nỗi đau vận hành của chủ doanh nghiệp */}
+      <div className="grid gap-3.5 md:grid-cols-3">
+        {CHU_DOANH_CHU.loi_ich.map((item, idx) => (
+          <div key={idx} className="glass rounded-2xl p-4">
+            <p className="text-sm font-semibold text-gold">{item.tieu_de}</p>
+            <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">{item.mo_ta}</p>
+          </div>
+        ))}
+      </div>
+
       {/* Thanh hành động nhanh: Trải nghiệm 1 chạm */}
       <div className="glass flex flex-wrap items-center justify-between gap-4 rounded-3xl p-4 sm:p-5">
         <div className="flex items-center gap-3">
@@ -246,8 +256,8 @@ export function StudioDoanhChu() {
             <Sparkles className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-sm font-medium text-fg">Muốn xem ngay Radar 5 Hành & Ma Trận 2 Chiều hoạt động thế nào?</p>
-            <p className="text-xs text-fg-muted">Thử ngay trên đội ngũ minh họa 4 vai trò (miễn phí, không cần nhập liệu).</p>
+            <p className="text-sm font-medium text-fg">{CHU_DOANH_CHU.che_do.tieu_de_thu}</p>
+            <p className="text-xs text-fg-muted">{CHU_DOANH_CHU.che_do.mo_ta_thu}</p>
           </div>
         </div>
         <button

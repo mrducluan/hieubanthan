@@ -18,7 +18,7 @@ export const COT_CHAN_TRANG: readonly CotChanTrang[] = [
   ] },
   { ten: "Về chúng tôi", ds: [
     ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia", "Đội ngũ biên soạn"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"],
-    ["/lien-he#chu-de", "Góp ý, báo lỗi"], ["/doanh-chu", "Đội ngũ Doanh chủ"], ["/tai-khoan", "Tài khoản"], ["/nap-sao", "Nạp Sao"],
+    ["/lien-he#chu-de", "Góp ý, báo lỗi"], ["/ban-do-doi-ngu", "Bản đồ đội ngũ (Chủ DN)"], ["/tai-khoan", "Tài khoản"], ["/nap-sao", "Nạp Sao"],
   ] },
   { ten: "Pháp lý", ds: [
     ["/chinh-sach-rieng-tu", "Chính sách quyền riêng tư"], ["/dieu-khoan", "Điều khoản sử dụng"],
