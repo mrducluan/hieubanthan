@@ -21,6 +21,7 @@ import { useChuKD } from "@/components/kinh-dich/chu-kinh-dich";
 export interface GocNhin { muc: Muc; nhan: string; tom_tat?: string; can_cu: string[] }
 export interface ThucChienLucHaoMuc {
   ten?: string;
+  nghia_doi_thuong?: string;
   mat_tich_cuc?: string;
   mat_tieu_cuc_can_chu_y?: string;
   sach_ghi?: { han?: string; nguon?: string };
@@ -138,6 +139,11 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
               </span>
             )}
           </div>
+          {(gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.nghia_doi_thuong || gn.luc_hao.thuc_chien_luu_y.dung_than?.nghia_doi_thuong) && (
+            <p className="mt-2.5 text-sm leading-relaxed text-fg">
+              {gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.nghia_doi_thuong ?? gn.luc_hao.thuc_chien_luu_y.dung_than?.nghia_doi_thuong}
+            </p>
+          )}
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <div className="rounded-xl border border-jade/35 bg-jade/10 p-3 text-xs leading-relaxed text-fg">
               <p className="font-semibold text-jade">Mặt thuận lợi</p>

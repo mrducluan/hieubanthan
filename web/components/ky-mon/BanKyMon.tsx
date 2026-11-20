@@ -248,6 +248,7 @@ function ChiTietHuong({ h }: { h: HuongKM }) {
       {h.cuu_don && h.cuu_don.length > 0 && h.cuu_don.map((cd) => (
         <div key={cd.ma} className="mt-3 rounded-xl border border-gold/40 bg-gold/5 p-3 text-sm" data-testid="km-cuu-don">
           <p className="font-medium text-gold">Cửu Độn · {cd.ten}</p>
+          {cd.nghia_doi_thuong && <p className="mt-1 text-sm leading-relaxed text-fg">{cd.nghia_doi_thuong}</p>}
           <p className="mt-1 text-xs text-fg-muted">{cd.dieu_kien}</p>
           <div className="mt-2 grid gap-2 text-xs sm:grid-cols-2">
             <p className="rounded-lg border border-jade/30 bg-jade/10 p-2 leading-relaxed"><b className="text-jade">Đắc dụng:</b> {cd.mat_tich_cuc}</p>

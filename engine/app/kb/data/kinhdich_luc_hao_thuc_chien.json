@@ -17,7 +17,8 @@
       "sach_ghi": {
         "han": "仇神者，克元神不能生用神，反生忌神而克害用神，即為仇神。用神是事情的表面，原神才是事情的根本。",
         "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 8) & Chu Dịch Dự Đoán Học (Thượng, Phần 3)"
-      }
+      },
+      "nghia_doi_thuong": "Muốn biết việc mình hỏi thành hay chưa, hãy nhìn thẳng vào cốt lõi sự việc, người/nguồn lực hỗ trợ và yếu tố đang cản đường thay vì ôm đồm chi tiết phụ."
     },
     "tuan_khong": {
       "ten": "Tuần Không (Chân Không vs Giả Không)",
@@ -27,7 +28,8 @@
       "sach_ghi": {
         "han": "用神逢空，勿即指為不空，畢竟為空。但此空者，乃目下旬內之空也，待至出空之日，則不空也。世應同時空亡，買賣中途而廢，即使簽約也有可能取消。",
         "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 11) & Lục Hào Phân Loại Dự Đoán Ngữ (Phần 2)"
-      }
+      },
+      "nghia_doi_thuong": "Việc hiện đang ở nhịp chờ hoặc lời hứa chưa có nền chắc trong tuần này; nếu nền tảng gốc khỏe thì qua nhịp chờ vẫn có thể chốt được."
     },
     "am_dong_nhat_pha": {
       "ten": "Nhật Thần Xung: Ám Động vs Nhật Phá",
@@ -37,7 +39,8 @@
       "sach_ghi": {
         "han": "日辰為六爻之主宰，司四時之旺相。衝旺相之靜爻，既為暗動，衝衰弱之靜爻，則為日破。",
         "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 12)"
-      }
+      },
+      "nghia_doi_thuong": "Có biến động ngầm từ tác động bên ngoài ngay hôm nay: nếu nền tảng đang mạnh thì đẩy việc chạy nhanh, còn đang yếu thì dễ rạn vỡ bất ngờ."
     },
     "nguyet_pha": {
       "ten": "Nguyệt Phá (Tháng Xung Hào)",
@@ -47,7 +50,8 @@
       "sach_ghi": {
         "han": "月破之爻逢生不起，逢克更兇。用神月破，填實之日不為破，逢合之日也不為破。",
         "nguon": "Chu Dịch Dự Đoán Học (Thượng, Phần 3 & Phần 10)"
-      }
+      },
+      "nghia_doi_thuong": "Sức đẩy của việc này trong tháng hiện tại đang bị chững lại rõ rệt — hợp để rà soát và giữ nhịp hơn là ép chốt nhanh."
     },
     "hoi_dau_khac": {
       "ten": "Hào Động Hóa Hồi Đầu Khắc",
@@ -57,7 +61,8 @@
       "sach_ghi": {
         "han": "申金子孫持世，化午火回頭之克，乃自身與子孫同受克也。",
         "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 10)"
-      }
+      },
+      "nghia_doi_thuong": "Kế hoạch nhìn lúc đầu có vẻ khởi động tốt nhưng bước triển khai tiếp theo lại tự vướng lại, cần kiểm tra kỹ điều khoản và nguồn lực dự phòng."
     },
     "tien_than_thoai_than": {
       "ten": "Hóa Tiến Thần · Hóa Thoái Thần",
@@ -67,7 +72,8 @@
       "sach_ghi": {
         "han": "斷卦定準應期決竅：化進神逢值逢合，化退神忌值忌衝。",
         "nguon": "Chu Dịch Dự Đoán Học (Thượng, Phần 8)"
-      }
+      },
+      "nghia_doi_thuong": "Nhịp tiến triển cho thấy việc đang mạnh dần lên từng bước (đáng theo tới cùng) hay đang đuối dần (nên thu gọn mục tiêu kịp lúc)."
     },
     "luc_xung_luc_hop": {
       "ten": "Quẻ Lục Xung & Quẻ Lục Hợp",
@@ -77,7 +83,8 @@
       "sach_ghi": {
         "han": "此八宮頭一卦皆是六沖卦，再者，天雷無妄、雷天大壯亦乃六沖卦，一共十卦，其餘不是。",
         "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 4 & Phần 14)"
-      }
+      },
+      "nghia_doi_thuong": "Tình thế đang nghiêng về gắn kết bền lâu hay thay đổi nhanh: việc cần tháo gỡ rắc rối thì hợp nhịp nhanh, còn việc cần ổn định dài hạn thì chuộng sự gắn kết."
     },
     "tu_ton_quan_quy_tri_the": {
       "ten": "Tử Tôn Trì Thế vs Quan Quỷ Trì Thế",
@@ -87,7 +94,8 @@
       "sach_ghi": {
         "han": "但得子孫持世，安如泰山，當行即行；若得官鬼持世，憂慮不解，加意防之，即使當行，亦宜罷止。",
         "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 5)"
-      }
+      },
+      "nghia_doi_thuong": "Tâm thế hiện tại đang nghiêng về thoải mái, bình an hay đang gánh nhiều áp lực trách nhiệm — cần khớp đúng với mục tiêu bạn đang hỏi."
     }
   },
   "luc_than_thuc_chien": {
@@ -97,7 +105,8 @@
       "sach_ghi": {
         "han": "佔功名者，以官鬼爻為用神。用神休囚，動而化官鬼為兇。",
         "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 7) & Lục Hào Phân Loại Dự Đoán Ngữ (Phần 5)"
-      }
+      },
+      "nghia_doi_thuong": "Đại diện cho công việc, chức vị, áp lực trách nhiệm hoặc người chồng trong câu hỏi tình cảm."
     },
     "Thê Tài": {
       "mat_tich_cuc": "Hỏi tiền bạc, kinh doanh, lương thưởng hoặc nam hỏi vợ: Thê Tài vượng tướng, có Tử Tôn phát động sinh phù và sinh hợp Hào Thế là tượng có nguồn thu thực tế, làm ăn có lãi.",
@@ -105,7 +114,8 @@
       "sach_ghi": {
         "han": "世爻空破，妻財又弱受克，買賣不景氣，漸漸蕭條。妻財發動，掏錢上學，或僥倖得名。",
         "nguon": "Lục Hào Phân Loại Dự Đoán Ngữ (Phần 2 & Phần 4)"
-      }
+      },
+      "nghia_doi_thuong": "Đại diện cho tiền bạc, doanh thu, khoản nợ cần thu hoặc người vợ/bạn gái trong câu hỏi tình cảm."
     },
     "Phụ Mẫu": {
       "mat_tich_cuc": "Hỏi thi cử, hợp đồng, giấy tờ, nhà cửa, xe cộ hoặc cha mẹ: Phụ Mẫu vượng tướng, không Không không Phá là tượng hồ sơ thông suốt, có người bề trên che chở.",
@@ -113,7 +123,8 @@
       "sach_ghi": {
         "han": "官鬼、父母、世爻，皆不宜月破、空亡。空破休囚者，落榜無疑。",
         "nguon": "Lục Hào Phân Loại Dự Đoán Ngữ (Phần 4)"
-      }
+      },
+      "nghia_doi_thuong": "Đại diện cho giấy tờ, hợp đồng, bằng cấp, nhà cửa, xe cộ và sự che chở từ người lớn tuổi."
     },
     "Tử Tôn": {
       "mat_tich_cuc": "Là phúc thần giải họa và nguồn sinh tiền bạc (Tử Tôn sinh Thê Tài): rất tốt cho kinh doanh, sáng tạo, chữa bệnh và tìm sự bình an.",
@@ -121,7 +132,8 @@
       "sach_ghi": {
         "han": "子孫、妻財同時發動，考學怕有難度。",
         "nguon": "Lục Hào Phân Loại Dự Đoán Ngữ (Phần 4)"
-      }
+      },
+      "nghia_doi_thuong": "Đại diện cho sự bình an, niềm vui giải tỏa lo âu, con cái, sáng tạo và nguồn sinh ra khách hàng/tiền bạc."
     },
     "Huynh Đệ": {
       "mat_tich_cuc": "Hỏi bạn bè, đồng đội hỗ trợ hoặc tìm người hợp sức chia việc nặng: Huynh Đệ vượng mà không khắc Dụng Thần cho thấy có người cùng gánh vác.",
@@ -129,7 +141,8 @@
       "sach_ghi": {
         "han": "求財者，得妻財持世，求財必得，倘若妻財爻被卦中兄弟動而克害，則防耗財爭奪。",
         "nguon": "Tăng San Bốc Dịch Bình Thích (Phần 4, tóm ý đối chiếu)"
-      }
+      },
+      "nghia_doi_thuong": "Đại diện cho bạn bè, đồng nghiệp, đối tác ngang hàng — nhưng khi hỏi chuyện tiền bạc lại là dấu hiệu cạnh tranh hoặc chia sẻ lợi nhuận."
     }
   }
 }
