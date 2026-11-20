@@ -7,8 +7,15 @@ import type { CanBangNguHanh, OngChuTomTat, ThanhVienMaTran } from "@/lib/doanh-
 
 const THU_TU_5_HANH = ["Mộc", "Hỏa", "Thổ", "Kim", "Thủy"] as const;
 
+const MAU_MAC_DINH = {
+  fill: "rgba(111, 211, 181, 0.25)",
+  stroke: "rgb(111, 211, 181)",
+  text: "text-jade",
+  bg: "bg-jade/15 border-jade/40",
+} as const;
+
 const MAU_HANH: Record<string, { fill: string; stroke: string; text: string; bg: string }> = {
-  Mộc: { fill: "rgba(111, 211, 181, 0.25)", stroke: "rgb(111, 211, 181)", text: "text-jade", bg: "bg-jade/15 border-jade/40" },
+  Mộc: MAU_MAC_DINH,
   Hỏa: { fill: "rgba(239, 138, 111, 0.25)", stroke: "rgb(239, 138, 111)", text: "text-[#ef8a6f]", bg: "bg-[#ef8a6f]/15 border-[#ef8a6f]/40" },
   Thổ: { fill: "rgba(233, 196, 106, 0.25)", stroke: "rgb(233, 196, 106)", text: "text-gold", bg: "bg-gold/15 border-gold/40" },
   Kim: { fill: "rgba(226, 232, 240, 0.22)", stroke: "rgb(226, 232, 240)", text: "text-fg", bg: "bg-surface-2/80 border-line" },
@@ -53,7 +60,7 @@ export function RadarNguHanh({
   ];
 
   const tyLeChon = Math.round((canBang.ty_le_5_hanh[hanhChon] ?? 0) * 100);
-  const mauChon = MAU_HANH[hanhChon] ?? MAU_HANH.Mộc;
+  const mauChon = MAU_HANH[hanhChon] ?? MAU_MAC_DINH;
 
   return (
     <section className="bau-troi p-5 sm:p-7">
@@ -158,7 +165,7 @@ export function RadarNguHanh({
               const laTroi = h === canBang.hanh_troi;
               const laThieu = h === canBang.hanh_thieu;
               const laDangChon = h === hanhChon;
-              const mau = MAU_HANH[h] ?? MAU_HANH.Mộc;
+              const mau = MAU_HANH[h] ?? MAU_MAC_DINH;
 
               return (
                 <g
