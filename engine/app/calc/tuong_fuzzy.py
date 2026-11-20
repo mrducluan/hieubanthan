@@ -149,6 +149,7 @@ def cau_noi_nhan_tuong(so_do: dict) -> dict:
         bridges_kb = tuong_hoc_dot4_kb.tra_ngu_hanh_bridges(hanh_chinh)
 
     return {
+        "provenance": "bien_tap_can_doi_chieu",
         "chi_so_fuzzy": chi_so,
         "ngu_hanh_bridges": {
             "hanh": hanh_chinh,
@@ -182,6 +183,7 @@ def cau_noi_chi_tay(so_do: dict) -> dict:
     conf = round(0.58 + 0.37 * (1.0 / (1.0 + math.exp(-2.0 * kc))), 2)
     m = _DANG_TAY[ma]
     return {
+        "provenance": "bien_tap_can_doi_chieu",
         "chi_so_fuzzy": chi_so,
         "dang_ban_tay": {
             "ma": ma,

@@ -127,10 +127,10 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
       {!en && gn.luc_hao?.thuc_chien_luu_y && (
         <section className="rounded-2xl border border-gold/30 bg-surface/50 p-4 text-sm" data-testid="luc-hao-thuc-chien">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="eyebrow text-gold">Lục Hào thực chiến</span>
+            <span className="eyebrow text-gold">{c("dq.lh_thuc_chien")}</span>
             {gn.luc_hao.dung_than && (
               <span className="rounded-full border border-gold/35 bg-gold/10 px-2.5 py-0.5 text-xs font-medium text-gold">
-                Dụng thần: {gn.luc_hao.dung_than}
+                {c("dq.lh_dung_than", { ten: gn.luc_hao.dung_than })}
               </span>
             )}
             {gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.ten && (
@@ -146,19 +146,19 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
           )}
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <div className="rounded-xl border border-jade/35 bg-jade/10 p-3 text-xs leading-relaxed text-fg">
-              <p className="font-semibold text-jade">Mặt thuận lợi</p>
+              <p className="font-semibold text-jade">{c("dq.lh_thuan_loi")}</p>
               {gn.luc_hao.thuc_chien_luu_y.dung_than?.mat_tich_cuc && <p className="mt-1 text-fg-muted">{gn.luc_hao.thuc_chien_luu_y.dung_than.mat_tich_cuc}</p>}
               {gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.mat_tich_cuc && <p className="mt-1.5 border-t border-jade/20 pt-1.5 text-fg-muted">{gn.luc_hao.thuc_chien_luu_y.nguyen_tac.mat_tich_cuc}</p>}
             </div>
             <div className="rounded-xl border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] p-3 text-xs leading-relaxed text-fg">
-              <p className="font-semibold text-[#f0b35c]">Nên chú ý</p>
+              <p className="font-semibold text-[#f0b35c]">{c("dq.lh_nen_chu_y")}</p>
               {gn.luc_hao.thuc_chien_luu_y.dung_than?.mat_tieu_cuc_can_chu_y && <p className="mt-1 text-fg-muted">{gn.luc_hao.thuc_chien_luu_y.dung_than.mat_tieu_cuc_can_chu_y}</p>}
               {gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.mat_tieu_cuc_can_chu_y && <p className="mt-1.5 border-t border-[rgb(245_170_80/0.2)] pt-1.5 text-fg-muted">{gn.luc_hao.thuc_chien_luu_y.nguyen_tac.mat_tieu_cuc_can_chu_y}</p>}
             </div>
           </div>
           {(gn.luc_hao.thuc_chien_luu_y.dung_than?.sach_ghi?.han || gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.sach_ghi?.han) && (
             <details className="mt-3 rounded-xl border border-line/60 bg-bg/40 px-3 py-2 text-xs">
-              <summary className="cursor-pointer font-medium text-gold">Nguyên văn sách gốc (Vương Hổ Ứng · Thiệu Vĩ Hoa)</summary>
+              <summary className="cursor-pointer font-medium text-gold">{c("dq.lh_nguyen_van")}</summary>
               <div className="mt-2 space-y-2 border-l-2 border-gold/40 pl-2.5 text-fg-muted">
                 {gn.luc_hao.thuc_chien_luu_y.dung_than?.sach_ghi?.han && (
                   <p><span className="font-serif text-sm text-fg" lang="zh-Hant">{gn.luc_hao.thuc_chien_luu_y.dung_than.sach_ghi.han}</span>{gn.luc_hao.thuc_chien_luu_y.dung_than.sach_ghi.nguon ? ` — ${gn.luc_hao.thuc_chien_luu_y.dung_than.sach_ghi.nguon}` : ""}</p>

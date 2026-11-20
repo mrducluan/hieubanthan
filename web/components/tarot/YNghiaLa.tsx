@@ -51,7 +51,7 @@ export function YNghiaLa({ muc, chon, onChon, tieuDe: tieuDeVao, ghiChu, classNa
             <span className="mt-1.5 block truncate text-[11px] text-fg-faint">{m.so + 1}. {m.viTri}</span>
             <span className="block truncate text-xs font-medium text-fg">{m.la.ten}{m.nguoc && <span className="font-normal text-[#f0b35c]">{chuLa.nguoc_nhan}</span>}</span>
             {m.nguoc && m.greerNguoc && (
-              <span className="mt-1 inline-block rounded-full border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] px-2 py-0.5 text-[10px] font-medium text-[#f0b35c]">Ngược · Greer</span>
+              <span className="mt-1 inline-block rounded-full border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] px-2 py-0.5 text-[10px] font-medium text-[#f0b35c]">{c("ynl.greer_pill")}</span>
             )}
           </button>
         ))}
@@ -72,13 +72,13 @@ export function YNghiaLa({ muc, chon, onChon, tieuDe: tieuDeVao, ghiChu, classNa
                 <div className="grid gap-2.5 sm:grid-cols-2">
                   {dang.greerNguoc.mat_tich_cuc && (
                     <div className="rounded-xl border border-jade/35 bg-jade/10 p-3 text-xs leading-relaxed text-fg">
-                      <p className="font-semibold text-jade">Điểm sáng</p>
+                      <p className="font-semibold text-jade">{c("ynl.diem_sang")}</p>
                       <p className="mt-1 text-fg-muted">{dang.greerNguoc.mat_tich_cuc}</p>
                     </div>
                   )}
                   {dang.greerNguoc.mat_tieu_cuc_can_chu_y && (
                     <div className="rounded-xl border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] p-3 text-xs leading-relaxed text-fg">
-                      <p className="font-semibold text-[#f0b35c]">Nên chú ý (Lá ngược)</p>
+                      <p className="font-semibold text-[#f0b35c]">{c("ynl.nen_chu_y_nguoc")}</p>
                       <p className="mt-1 text-fg-muted">{dang.greerNguoc.mat_tieu_cuc_can_chu_y}</p>
                     </div>
                   )}
