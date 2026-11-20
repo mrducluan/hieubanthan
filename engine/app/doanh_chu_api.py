@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import datetime as dt
-import os
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
@@ -32,6 +31,10 @@ class DoiNguIn(BaseModel):
     ong_chu: ThanhVienIn
     doi_ngu: list[ThanhVienIn] = Field(..., min_length=1, max_length=8)
     nam_xem: int = Field(..., ge=2020, le=2050)
+    cam_ket_thoa_thuan: bool = Field(
+        default=False,
+        description="Chủ doanh nghiệp xác nhận đã ký thoả thuận riêng và có đồng ý của từng thành viên trước khi nhập dữ liệu",
+    )
 
 
 def _kiem_ngay(tv: ThanhVienIn) -> None:
@@ -41,20 +44,14 @@ def _kiem_ngay(tv: ThanhVienIn) -> None:
         raise HTTPException(422, detail=f"Ngày sinh không hợp lệ: {tv.ngay}/{tv.thang}/{tv.nam}") from e
 
 
-def da_bat() -> bool:
-    """Route mặc định TẮT (404) cho tới khi chủ dự án chốt chính sách.
-
-    Nội dung gợi ý vai trò / giao chỉ tiêu cho nhân sự theo lá số đang va quy tắc CY-1/CY-2 trong CLAUDE.md
-    ("chọn / xếp hạng nhân viên theo lá số" vẫn chặn). Bật bằng env DOANH_CHU_BAT=1 sau khi duyệt.
-    """
-    return os.getenv("DOANH_CHU_BAT", "").strip() == "1"
-
-
 @router.post("/doi-ngu")
 def phan_tich_doi_ngu(inp: DoiNguIn) -> dict:
     """Phân tích Bản Đồ Cân Bằng Ngũ Hành & Ma Trận Giao Tiếp 2 chiều (không lưu dữ liệu, bắt buộc đồng ý tự nguyện)."""
-    if not da_bat():
-        raise HTTPException(404, detail="Not Found")
+    if not inp.cam_ket_thoa_thuan:
+        raise HTTPException(
+            422,
+            detail="Chủ doanh nghiệp cần xác nhận đã có thoả thuận riêng và sự đồng ý của từng thành viên (cam_ket_thoa_thuan=true).",
+        )
     _kiem_ngay(inp.ong_chu)
     for tv in inp.doi_ngu:
         _kiem_ngay(tv)

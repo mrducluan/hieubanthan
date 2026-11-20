@@ -14,18 +14,6 @@ _VIET = re.compile(r"[ăâđêôơưàáạảãầấậẩẫằắặẳẵè
 _CLIENT = TestClient(app)
 
 
-import pytest  # noqa: E402
-
-
-@pytest.fixture(autouse=True)
-def _bat_route(monkeypatch):
-    monkeypatch.setenv("DOANH_CHU_BAT", "1")
-
-
-def test_route_mac_dinh_tat(monkeypatch):
-    monkeypatch.delenv("DOANH_CHU_BAT", raising=False)
-    assert _CLIENT.post("/v1/doanh-chu/doi-ngu", json=_PAYLOAD).status_code == 404
-
 _PAYLOAD = {
     "ong_chu": {"ten": "Anh Minh (CEO)", "vai_tro": "CEO", "ngay": 15, "thang": 5, "nam": 1986, "gioi_tinh": "nam", "dong_y_tu_nguyen": True},
     "doi_ngu": [
@@ -34,6 +22,7 @@ _PAYLOAD = {
         {"ten": "Bạn Trang", "vai_tro": "Sales Lead", "ngay": 19, "thang": 8, "nam": 1995, "gioi_tinh": "nu", "dong_y_tu_nguyen": True},
     ],
     "nam_xem": 2027,
+    "cam_ket_thoa_thuan": True,
 }
 
 
@@ -92,6 +81,19 @@ def test_api_doanh_chu_kiem_rang_buoc():
     assert _CLIENT.post("/v1/doanh-chu/doi-ngu", json=empty).status_code == 422
     no_consent = {**_PAYLOAD, "doi_ngu": [{**_PAYLOAD["doi_ngu"][0], "dong_y_tu_nguyen": False}]}
     assert _CLIENT.post("/v1/doanh-chu/doi-ngu", json=no_consent).status_code == 422
+    no_agreement = {**_PAYLOAD, "cam_ket_thoa_thuan": False}
+    assert _CLIENT.post("/v1/doanh-chu/doi-ngu", json=no_agreement).status_code == 422
+
+
+def test_mien_tru_trach_nhiem_du_y():
+    from app.calc import doanh_chu
+    rg = doanh_chu.ban_do_doi_ngu(_PAYLOAD["ong_chu"], _PAYLOAD["doi_ngu"], nam_xem=2027)["ranh_gioi_phap_ly"]
+    for y in ("chủ doanh nghiệp tự nhập", "thoả thuận riêng", "91/2025", "không lưu", "tham khảo", "tự chịu trách nhiệm"):
+        assert y in rg, y
+    with ngon_ngu.dung("en"):
+        rg_en = doanh_chu.ban_do_doi_ngu(_PAYLOAD["ong_chu"], _PAYLOAD["doi_ngu"], nam_xem=2027)["ranh_gioi_phap_ly"]
+    for y in ("provided by the business owner", "separate agreement", "not stored", "sole responsibility"):
+        assert y in rg_en, y
 
 
 def test_khong_tu_vung_sang_loc_va_ranh_gioi_lap_xuan():
