@@ -172,6 +172,35 @@ export function HopDoi() {
               </Button>
             </Card>
           </div>
+          <section className="mx-auto max-w-3xl space-y-4" data-testid="hop-doi-mo-rong-bac-1">
+            {(kq.quan_he?.ma === "dong_nghiep" || kq.quan_he?.ma === "sep") && (
+              <p className="rounded-xl border border-line/70 bg-surface/40 px-4 py-3 text-xs leading-relaxed text-fg-muted" data-testid="luu-y-phap-ly-cong-viec">
+                <b className="text-fg">Lưu ý ranh giới ứng dụng:</b> Nội dung đối chiếu trong môi trường công việc chỉ dùng để tham khảo giao tiếp và văn hóa phối hợp — không dùng làm tiêu chí sàng lọc tuyển dụng hay đánh giá nhân sự.
+              </p>
+            )}
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Card className="flex flex-col justify-between border-gold/30 bg-gold/[0.04]">
+                <div>
+                  <p className="eyebrow text-gold">Nhịp 12 tháng tới</p>
+                  <p className="mt-1 font-serif text-lg text-fg">Xem Năm Mới của bạn</p>
+                  <p className="mt-1 text-sm text-fg-muted">Gộp Tử vi · Bát tự · Thần số · Ngày đẹp cho 12 tháng tới để chọn đúng nhịp mở rộng hay giữ sức.</p>
+                </div>
+                <Button asChild size="sm" variant="secondary" className="mt-4 self-start">
+                  <Link href="/thoi-gian-toi">Xem Năm Mới của tôi</Link>
+                </Button>
+              </Card>
+              <Card className="flex flex-col justify-between border-jade/30 bg-jade/[0.04]">
+                <div>
+                  <p className="eyebrow text-jade">Hội viên & Doanh chủ</p>
+                  <p className="mt-1 font-serif text-lg text-fg">Hội viên năm · Chuyên gia 24h</p>
+                  <p className="mt-1 text-sm text-fg-muted">Hạng Thường (399.000đ/năm · 15 Sao/tháng + 1 câu hỏi chuyên gia) hoặc hạng Chuyên gia (1.990.000đ/năm · 6 câu hỏi trả lời trong 24h).</p>
+                </div>
+                <Button asChild size="sm" className="mt-4 self-start">
+                  <Link href="/hoi-vien">Xem quyền lợi Hội viên</Link>
+                </Button>
+              </Card>
+            </div>
+          </section>
           <div className="mx-auto max-w-5xl"><CuoiPhanXem mang="hop_doi" /></div>
         </>
       )}
