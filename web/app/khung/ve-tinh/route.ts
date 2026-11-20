@@ -149,7 +149,7 @@ const MA_JS = String.raw`(function () {
   }
 
   function ensureOverlay() {
-    if (hkOverlay || !g || !map) return;
+    if (hkOverlay || !g || !map || typeof g.OverlayView !== "function") return;
     function HKOverlay() { this.div = null; }
     HKOverlay.prototype = new g.OverlayView();
     HKOverlay.prototype.onAdd = function () {
@@ -234,7 +234,7 @@ const MA_JS = String.raw`(function () {
       toggleBtn.textContent = hkVisible ? __AN_LB__ : __HIEN_LB__;
       if (hkOverlay) hkOverlay.draw();
     });
-    ensureOverlay();
+    try { ensureOverlay(); } catch (e) { hkOverlay = null; }
     gui({ su_kien: "san" });
     viTri();
   };

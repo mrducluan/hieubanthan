@@ -293,9 +293,11 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
                   <div>
                     <p className="eyebrow">
                       {cungChon.cung === "Trung cung" ? t("hk.trung_cung") : `${tn("cung_hk", cungChon.cung)} · ${tn("huong", cungChon.phuong)}`}
-                      {" · "}Sơn {cungChon.son} – Hướng {cungChon.huong} (Vận {cungChon.van}, Lưu niên {ban.luu_nien.cung[cungChon.cung]})
+                      {" · "}{en
+                        ? `Mountain ${cungChon.son} – Facing ${cungChon.huong} (Period ${cungChon.van}, Annual ${ban.luu_nien.cung[cungChon.cung]})`
+                        : `Sơn ${cungChon.son} – Hướng ${cungChon.huong} (Vận ${cungChon.van}, Lưu niên ${ban.luu_nien.cung[cungChon.cung]})`}
                     </p>
-                    <h3 className="mt-0.5 text-base font-medium text-fg">{yc.ten}{yc.hop_thap ? " · Hợp Thập" : ""}</h3>
+                    <h3 className="mt-0.5 text-base font-medium text-fg">{yc.ten}{yc.hop_thap ? (en ? " · Sum of Ten" : " · Hợp Thập") : ""}</h3>
                   </div>
                   <span className={cn("rounded-full border px-2.5 py-0.5 text-xs", mucMau)}>{mucNhan}</span>
                 </div>
