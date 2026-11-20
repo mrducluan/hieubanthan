@@ -191,9 +191,9 @@ export function HopDoi() {
               </Card>
               <Card className="flex flex-col justify-between border-jade/30 bg-jade/[0.04]">
                 <div>
-                  <p className="eyebrow text-jade">Hội viên & Doanh chủ</p>
-                  <p className="mt-1 font-serif text-lg text-fg">Hội viên năm · Chuyên gia 24h</p>
-                  <p className="mt-1 text-sm text-fg-muted">Hạng Thường (399.000đ/năm · 15 Sao/tháng + 1 câu hỏi chuyên gia) hoặc hạng Chuyên gia (1.990.000đ/năm · 6 câu hỏi trả lời trong 24h).</p>
+                  <p className="eyebrow text-jade">Hội viên &amp; Chuyên gia</p>
+                  <p className="mt-1 font-serif text-lg text-fg">Hội viên năm &amp; Hỏi chuyên gia</p>
+                  <p className="mt-1 text-sm text-fg-muted">Gom quyền lợi Sao hàng tháng và lượt hỏi chuyên gia trực tiếp (mức giá và trạng thái mở gói hiển thị theo cài đặt hiện hành).</p>
                 </div>
                 <Button asChild size="sm" className="mt-4 self-start">
                   <Link href="/hoi-vien">Xem quyền lợi Hội viên</Link>
