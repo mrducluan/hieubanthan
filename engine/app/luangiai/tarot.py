@@ -80,6 +80,9 @@ _GREER_CACHE: dict | None = None
 
 def _greer_nguoc(ma: str) -> dict | None:
     """Đợt 2B — tải chiều sâu Lá Ngược (22 Ẩn Chính) từ Mary K. Greer (2002)."""
+    from app.ngon_ngu import la_viet  # noqa: PLC0415
+    if not la_viet():
+        return None
     global _GREER_CACHE
     if _GREER_CACHE is None:
         import json as _json

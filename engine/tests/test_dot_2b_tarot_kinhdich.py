@@ -71,3 +71,16 @@ def test_kinhdich_luc_hao_thuc_chien_du_muc_va_giong_van():
             trich = muc.get("sach_ghi") or {}
             assert trich.get("han") and trich.get("nguon"), f"Thiếu sach_ghi ở {nhom}.{ma}"
     _kiem_sach_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc"), cho_phep_tu={"khắc"})
+
+
+def test_kinhdich_goc_nhin_luc_hao_noi_song_thuc_chien():
+    import datetime as dt
+    from app.hoidap import kinhdich as hd
+
+    out = hd.tra_loi("Món nợ này có đòi được không?", "tu_dong", gia_tri_hao=[7, 8, 9, 7, 8, 7],
+                     thoi_diem=dt.datetime(2026, 5, 10, 10, 0))
+    gn = ((out.get("doc_que") or {}).get("goc_nhin") or {}).get("luc_hao")
+    assert gn and gn.get("thuc_chien_luu_y"), "Phải nối sống được thuc_chien_luu_y vào _goc_nhin_luc_hao"
+    assert gn["thuc_chien_luu_y"]["dung_than"]["mat_tieu_cuc_can_chu_y"]
+    assert gn["thuc_chien_luu_y"]["nguyen_tac"]["sach_ghi"]["han"]
+
