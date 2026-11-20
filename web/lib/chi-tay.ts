@@ -43,6 +43,11 @@ export function tachCau(han: string): string[] {
 export interface MucTay {
   ma: string; ten: string; y: string; loi: string; mo_ta?: string; vi_tri?: string; ham_y?: string; viec?: string;
   nhom?: "A" | "B"; trich?: string; nguon_hien_thi?: string; khong_doc?: boolean; loai?: string;
+  /** RS-3 — hai mặt của đường / gò theo sách kinh điển (Cheiro 1916 · Dale 1895); chỉ bản Việt, một lần mỗi đường / gò. */
+  kinh_dien?: KinhDienTay;
+}
+export interface KinhDienTay {
+  ma: string; ten: string; mat_tich_cuc: string; mat_tieu_cuc_can_chu_y: string; trich?: string; nguon?: string;
 }
 export interface GoTay { ma: string; ten: string; vi_tri: string; day: MucTay; trung: MucTay }
 export interface CauTay { ma: string; ten: string; lua_chon: MucTay[] }

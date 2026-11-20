@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, RotateCcw, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
-import type { MucTay, ThuVienChiTayTay } from "@/lib/chi-tay";
+import type { KinhDienTay, MucTay, ThuVienChiTayTay } from "@/lib/chi-tay";
 
 const KHOA = "hbt.chi_tay_tay.v1";
 const MA = /^[a-z_]{2,20}$/;
@@ -34,6 +34,24 @@ export function MucTayView({ m, nho = false }: { m: MucTay; nho?: boolean }) {
           <summary className="cursor-pointer">Nguyên văn</summary>
           <p lang="en" className="mt-1 italic">“{m.trich}”</p>
           {m.nguon_hien_thi && <p className="mt-0.5">— {m.nguon_hien_thi}</p>}
+        </details>
+      )}
+    </div>
+  );
+}
+
+/** RS-3 — dưới mục đường / gò: hai mặt theo sách kinh điển (lời Việt trước), câu tiếng Anh gập. */
+function KinhDienView({ k }: { k: KinhDienTay }) {
+  return (
+    <div className="mt-3 rounded-xl border border-line/60 bg-surface/40 p-3 text-sm" data-testid="ct-tay-kinh-dien">
+      <p className="text-xs uppercase tracking-wide text-fg-faint">Sách kinh điển nói thêm về {k.ten}</p>
+      <p className="mt-1.5 leading-relaxed"><span className="text-fg">Mặt mạnh:</span> {k.mat_tich_cuc}</p>
+      <p className="mt-1 leading-relaxed text-fg-muted">{k.mat_tieu_cuc_can_chu_y}</p>
+      {k.trich && (
+        <details className="mt-1.5 text-xs text-fg-muted">
+          <summary className="cursor-pointer">Nguyên văn</summary>
+          <p lang="en" className="mt-1 italic">“{k.trich}”</p>
+          {k.nguon && <p className="mt-0.5">— {k.nguon}</p>}
         </details>
       )}
     </div>
@@ -188,6 +206,7 @@ export function ChonChiTayTay({ tv }: { tv: ThuVienChiTayTay }) {
             <article key={m.ma} className="rounded-2xl border border-line/70 p-4" data-testid="ct-tay-muc">
               <p className="font-medium text-fg">{m.ten}</p>
               <div className="mt-2"><MucTayView m={m} /></div>
+              {m.kinh_dien && <KinhDienView k={m.kinh_dien} />}
             </article>
           ))}
           {kq.cau_ket && <p className="text-sm text-fg-faint">{kq.cau_ket}</p>}
