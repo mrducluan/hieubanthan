@@ -21,11 +21,12 @@ import { cn } from "@/lib/utils";
 import { ChamNghieng, type AnhNghieng, type GocNghieng } from "./ChamNghieng";
 import { QuetBaGoc, type KetQuaQuet } from "./QuetBaGoc";
 import { DanhSachGoiY, type GoiYNet } from "./DanhSachGoiY";
+import { TheNguHanhGuongMat, type FuzzyMatBridge } from "./TheFuzzyTuong";
 import { Dam, useChuNhanTuong } from "./chu-nhan-tuong";
 import { useDuong } from "@/components/khung/NgonNgu";
 
 type Diem = { x: number; y: number };
-interface KqDo { goi_y: GoiYNet[]; canh_bao: string[];
+interface KqDo { goi_y: GoiYNet[]; canh_bao: string[]; fuzzy_bridge?: FuzzyMatBridge | null;
   so_do: { tam_dinh: { thuong: number; trung: number; ha: number } | null; cao_rong: number; tran_ma: number; ham_ma: number; mat_mat: number; may_khoe: number } }
 
 /** Vị trí các điểm trên KHUÔN MẶT MẪU của hình hướng dẫn (hình tĩnh, không phải số đo của ai). */
@@ -384,6 +385,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
             {kq.canh_bao.map((c, i) => <p key={i} className="mt-2 text-xs text-gold">{c}</p>)}
             <p className="mt-2 text-xs text-fg-faint">{t("do.sd_ghi")}</p>
           </div>
+          <TheNguHanhGuongMat bridge={kq.fuzzy_bridge} en={en} />
           <DanhSachGoiY key={JSON.stringify(kq.goi_y)} ks={ks} goiY={kq.goi_y} daTraLoi={daTraLoi} onGoiY={onGoiY} onXem={onXem} onDungVaXem={onDungVaXem} dangXem={dangXem} nguon="do"
             chuRong={t("do.rong")} />
         </div>

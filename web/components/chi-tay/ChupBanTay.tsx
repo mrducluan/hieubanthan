@@ -18,6 +18,7 @@ import { datCung, datTay, useChonChiTay, type Tay } from "@/lib/chi-tay-chon";
 import { usePhaiChiTay } from "@/lib/chi-tay-phai";
 import { ngaySinhIso, useHoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
+import { TheDangBanTayFuzzy, type FuzzyTayBridge } from "@/components/nhan-tuong/TheFuzzyTuong";
 
 interface LuaChonCung { ma: string; ten: string }
 export interface CungTay { ma: string; han: string; ten: string; ten_ngan?: string; vt: [number, number]; y: string; lua_chon: LuaChonCung[] }
@@ -29,6 +30,7 @@ export interface KqDoTay {
   hop_le: boolean; loi: string | null; loi_nhac?: string | null; loi_chu?: string; phai?: "tay";
   nhan?: NhanDo[]; sach_ghi?: SachGhiDo[]; cung?: CungTay[]; bo_nhom_c?: number; cau_ket?: string;
   muc?: MucTay[]; to_hop?: { ma: string; ten: string } | null; goi_y_dang?: string[];
+  fuzzy_bridge?: FuzzyTayBridge | null;
 }
 /** Tên dáng tay phái Tây (mã engine `dang_tay`) — chỉ để ghi lời gợi ý "tự xem dáng nào". */
 const TEN_DANG: Record<string, string> = { vuong: "Tay vuông", be: "Tay bè", triet: "Tay nhiều khớp", thon: "Tay thon dài" };
@@ -406,6 +408,8 @@ export function ChupBanTay() {
                   <p className="mt-2 text-xs text-fg-faint">Chỉ đo hình dáng (độ dài ngón, lòng bàn tay). Đường chỉ, độ dày gò, màu da: bạn tự nhìn.</p>
                 </div>
               )}
+
+              {kq?.hop_le && <TheDangBanTayFuzzy bridge={kq.fuzzy_bridge} />}
 
               {kq?.hop_le && (kq.sach_ghi?.length ?? 0) > 0 && (
                 <div className="rounded-2xl border border-line/70 p-4" data-testid="ct-sach-ghi">
