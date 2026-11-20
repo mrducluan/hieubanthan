@@ -299,10 +299,16 @@ def _noi_bat(loai: str, d: dict, mau: dict | None = None) -> dict:
     if d["den_tuan_triet"]:
         tt = kb.tuan_triet_ghi_chu() or L("tv2.ghi_chu_tt", _GHI_CHU_TT)
     cu = [can_cu_duong(d)] + [x for x in ((mau or {}).get("can_cu"), dich.get("can_cu")) if isinstance(x, str) and x]
-    return {"loai": loai, "duong": d, "ma_mau": (mau or {}).get("ma") or None,
-            "tieu_de": lay("tieu_de"), "nghia": lay("nghia"),
-            "viec_nen_lam": lay("viec_nen_lam"), "cau_tu_soi": lay("cau_tu_soi"), "ghi_chu_tuan_triet": tt,
-            "can_cu": list(dict.fromkeys(cu))}
+    ra = {"loai": loai, "duong": d, "ma_mau": (mau or {}).get("ma") or None,
+          "tieu_de": lay("tieu_de"), "nghia": lay("nghia"),
+          "viec_nen_lam": lay("viec_nen_lam"), "cau_tu_soi": lay("cau_tu_soi"), "ghi_chu_tuan_triet": tt,
+          "can_cu": list(dict.fromkeys(cu))}
+    if la_viet():
+        from app.kb import tuvi_phai_kb  # noqa: PLC0415
+        lp = tuvi_phai_kb.tra_phi_hoa_luong(d["tu_cung"], d["hoa"], d["den_cung"])
+        if lp:
+            ra["luong_phai_672"] = lp
+    return ra
 
 
 def chon_noi_bat(duong: list[dict]) -> list[dict]:
