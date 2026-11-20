@@ -2,9 +2,7 @@
 """Đợt 3 — Bộ tra cứu tất định cho KB Tử Vi Lương phái (672 Tượng), Trung Châu phái (60 Tinh Hệ) & Bát Tự (Thiên Lý Mệnh Cảo)."""
 from __future__ import annotations
 
-from functools import lru_cache
-
-from app.kb.nap import doc
+from app.kb.nap import doc, nho
 
 _SAO_VI_HAN = {
     "Tử Vi": "紫微", "Thiên Cơ": "天機", "Thái Dương": "太陽", "Vũ Khúc": "武曲",
@@ -26,17 +24,17 @@ _THAP_THAN_RULE = {
 }
 
 
-@lru_cache(maxsize=1)
+@nho
 def _luong() -> dict:
     return doc("tuvi_phi_hoa_luong_672.json")
 
 
-@lru_cache(maxsize=1)
+@nho
 def _trung_chau() -> dict:
     return doc("tuvi_trung_chau_60_tinh_he.json")
 
 
-@lru_cache(maxsize=1)
+@nho
 def _thien_ly() -> dict:
     return doc("battu_thien_ly_menh_cao.json")
 

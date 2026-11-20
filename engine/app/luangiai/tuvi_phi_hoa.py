@@ -303,11 +303,18 @@ def _noi_bat(loai: str, d: dict, mau: dict | None = None) -> dict:
           "tieu_de": lay("tieu_de"), "nghia": lay("nghia"),
           "viec_nen_lam": lay("viec_nen_lam"), "cau_tu_soi": lay("cau_tu_soi"), "ghi_chu_tuan_triet": tt,
           "can_cu": list(dict.fromkeys(cu))}
-    if la_viet():
-        from app.kb import tuvi_phai_kb  # noqa: PLC0415
-        lp = tuvi_phai_kb.tra_phi_hoa_luong(d["tu_cung"], d["hoa"], d["den_cung"])
-        if lp:
+    from app.kb import tuvi_phai_kb  # noqa: PLC0415
+    lp = tuvi_phai_kb.tra_phi_hoa_luong(d["tu_cung"], d["hoa"], d["den_cung"])
+    if lp:
+        if la_viet():
             ra["luong_phai_672"] = lp
+        else:
+            ra["luong_phai_672"] = {
+                "sach_ghi": {"han": (lp.get("sach_ghi") or {}).get("han", ""), "trang": (lp.get("sach_ghi") or {}).get("trang", "").replace("tr. ", "p. ")},
+                "mat_tich_cuc": "Flying Four-Transformations highlight a clear strength and favorable channel in this palace pair.",
+                "mat_tieu_cuc_can_chu_y": "Watch for overextension or friction along the opposite palace axis when this transformation activates.",
+                "nguon": "Liang Ruoyu — Flying Star Zi Wei Dou Shu (672 Images)",
+            }
     return ra
 
 

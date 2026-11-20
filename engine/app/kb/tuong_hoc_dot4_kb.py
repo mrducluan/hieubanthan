@@ -2,27 +2,25 @@
 """Đợt 4 — Bộ tra cứu tất định cho Nhân Tướng (Bridges + 150 quy tắc cổ thư), Chỉ Tay phương Tây, Kỳ Môn Cửu Độn & Tử Vi Tử Vân."""
 from __future__ import annotations
 
-from functools import lru_cache
-
-from app.kb.nap import doc
+from app.kb.nap import doc, nho
 
 
-@lru_cache(maxsize=1)
+@nho
 def nhantuong_bridges_co_thu() -> dict:
     return doc("nhantuong_ngu_hanh_va_co_thu.json")
 
 
-@lru_cache(maxsize=1)
+@nho
 def chitay_phuong_tay() -> dict:
     return doc("chitay_phuong_tay_kinh_dien.json")
 
 
-@lru_cache(maxsize=1)
+@nho
 def kymon_cuu_don() -> dict:
     return doc("ky_mon_bi_kip_cuu_don.json")
 
 
-@lru_cache(maxsize=1)
+@nho
 def tuvi_tu_van() -> dict:
     return doc("tuvi_tu_van_thai_tue.json")
 

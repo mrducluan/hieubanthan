@@ -289,14 +289,21 @@ def to_hop_cung(son: int, huong: int, van: int, cung: str | None = None, nam: in
     if m.get("an_toan"):
         ra["an_toan"] = list(m["an_toan"])          # lời nhắc chăm nhà (lửa điện, nước, vật nhọn…), không doạ
     if m.get("sach"):
+        from app import ngon_ngu  # noqa: PLC0415
         from app.kb import sach_ghi as sg  # noqa: PLC0415
         sm = m["sach"]
-        ra["sach_ghi"] = {
-            "loi": sg.loi(sm, co_am=sm.get("nhom") != "C"),
-            "nhom": sm["nhom"],
-            **({"viec": sm["viec"]} if sm.get("viec") else {}),
-            **({"cau_ket": ck} if (ck := sg.cau_ket([sm])) else {}),
-        }
+        if ngon_ngu.la_viet():
+            ra["sach_ghi"] = {
+                "loi": sg.loi(sm, co_am=sm.get("nhom") != "C"),
+                "nhom": sm["nhom"],
+                **({"viec": sm["viec"]} if sm.get("viec") else {}),
+                **({"cau_ket": ck} if (ck := sg.cau_ket([sm])) else {}),
+            }
+        else:
+            ra["sach_ghi"] = {
+                "loi": f"Classical text: \"{sm['han']}\"",
+                "nhom": sm["nhom"],
+            }
     if cung and nam:
         ra["nam_chu_y"] = nam_chu_y(cung, m["kich_hoat"], int(nam))
     # Q6 luật nước vận 9 (KB quy_tac_thuc_hanh.nuoc_van_9): chỉ đặt nước nơi HƯỚNG tinh 9; sơn tinh 9 hoặc có 5 / 2 → không.
