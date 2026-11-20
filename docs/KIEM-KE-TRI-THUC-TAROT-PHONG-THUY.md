@@ -392,3 +392,21 @@ kho nguồn và nằm trong đúng chương (không vượt tiêu đề chương
 thuận). **Không đưa**: chương Tật bệnh (bàn sinh tử), Thai dựng, Tử tự (đoán thai, con cái) — trái SK-1; giấy tờ, gia
 đình, mất đồ chưa có chương khớp. Hiện ở bài đọc quẻ (`sach_xua`, khối "Sách xưa nói gì về việc bạn hỏi" dùng chung
 `SachXuaNoi`), cả bản Anh (cùng số câu). Không đổi mức → không tăng `ENGINE_VERSION`.
+
+## 15. Đợt 11 (PT-NG6, PR #320, 2026-11-20) — sao 5 nhập trung khi thế quái: giữ 5, chờ nguyên văn
+
+PR #320 đổi chỗ khác nhau thứ 3 ở mục 7: **sao 5 nhập trung khi thế quái nay GIỮ NGUYÊN 5** (không thay bằng thế tinh),
+thuận – nghịch vẫn theo âm dương của sơn gốc → `ENGINE_VERSION` 0.1.10. Căn cứ PR dẫn: **đồ bàn tham chiếu
+`FS_SS1_CHART_P134`** (Vận 9 toạ Ngọ hướng Tý, thế quái), cùng các đồ bàn `FS_SS1_CHART_P123_124` và `FS_SS1_CHART_P175`
+— chép vào golden `engine/fixtures/golden/huyen_khong_tham_thi.json` từ bộ ghi chép `fengshui-xuankong-kb` (ghi là
+«沈氏玄空學・上»), test `engine/tests/test_huyen_khong_tham_thi.py`. Luật mới khớp cách `fengshui.skill` làm (mục 7).
+
+**Nguyên văn Thẩm Thị Huyền Không Học vẫn CHƯA có trong kho nguồn** `engine/fixtures/nguon/` (mục 4, mục 7): đồ bàn trên là
+bản chép tay của người thứ ba, chưa đối chiếu được với bản in. Chủ dự án quyết **giữ thay đổi** ngày 2026-11-20. Vì vậy:
+
+- API `/v1/phongthuy/huyen-khong` khi lập thế quái trả `the_quai_trang_thai = "chua_doi_chieu_nguyen_van"` (thay cờ
+  `da_doi_chieu_tham_thi` của bản PR ban đầu và cờ `chua_doi_chieu_oracle` cũ) kèm `the_quai_ghi_chu` (vi + en) nói rõ bàn lập
+  theo đồ bàn tham chiếu, nguyên văn sách còn chờ đối chiếu.
+- Ghi chú ở `engine/app/calc/huyen_khong.py` (`_nhap_trung`) trỏ về mục này.
+- **Khi có nguyên văn** (bản in Thẩm Thị Huyền Không Học, quyển nói thế quái): nạp vào kho nguồn, so lại chỗ sao 5 và chỗ 2
+  (tra thế tinh theo sơn gốc hay chính sơn); khớp thì đổi cờ, lệch thì sửa `_nhap_trung` + tăng `ENGINE_VERSION`.

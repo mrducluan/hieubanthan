@@ -40,7 +40,10 @@ def muc(m: dict, ve: str) -> dict:
         loi = f"{m['y']} {m['ham_y']}"
     else:
         loi = f"Hàm ý theo ghi chép xưa: {m['y']} {m['ham_y']}"
-    ra = {"ve": ve, "sach": SACH.get(m["nguon"], "sách xưa"), "loi": loi, "nhom": m["nhom"], "chu_de": m["chu_de"]}
+    sach = SACH.get(m["nguon"], "sách xưa")
+    if m.get("chuong"):                                      # nơi dẫn cụ thể (quyển / thiên / mục) khi KB có ghi
+        sach = f"{sach}, {m['chuong']}"
+    ra = {"ve": ve, "sach": sach, "loi": loi, "nhom": m["nhom"], "chu_de": m["chu_de"]}
     if m.get("tom_y"):
         ra["tom_y"] = True
     else:
@@ -290,14 +293,60 @@ def phongthuy_nhom(quai: str | None = None, dau_hieu: list[str] | None = None, c
 
 # ───────────────────────── Nhân tướng ─────────────────────────
 
-def nhan_tuong(dac_diem: list[str], tuoi: int | None = None) -> dict | None:
-    """Câu sách gắn với các nét người dùng đã chọn (`dac_diem` = mã đặc điểm) và 12 cung trên mặt mà nét ấy thuộc về."""
+CO_THU_MOI_NET = 2        # tối đa câu cổ thư (bộ quy tắc PR #320) cho một nét
+CO_THU_TOI_DA = 8         # tối đa câu cổ thư gắn với nét trong một bài đọc
+CO_THU_DAN = 4            # số điều sách dặn khi xem tướng hiện trong một bài đọc
+
+
+def _co_thu(dac_diem: list[str], gioi: str | None) -> tuple[list[tuple[dict, str]], list[tuple[dict, str]]]:
+    """Quy tắc cổ thư Thần Tướng Toàn Biên / Liễu Trang (`nhantuong_ngu_hanh_va_co_thu.json` · `quy_tac_co_thu`, đã qua bộ
+    kiểm SX-C): (1) câu gắn với nét người dùng ĐÃ XÁC NHẬN (`dac_diem` — một nét là đủ, `can_du` thì cần đủ mọi nét; `gioi`
+    chỉ khi biết đúng giới) và (2) điều sách dặn khi xem tướng (`chung`) — chọn CO_THU_DAN câu, xoay theo bộ nét (tất định)."""
+    import zlib  # noqa: PLC0415
+    try:
+        ds = _kb("nhantuong_ngu_hanh_va_co_thu.json").get("quy_tac_co_thu") or []
+    except FileNotFoundError:
+        return [], []
+    try:
+        ten_net = {k: v.get("ten") for k, v in _kb("nhan_tuong_kb.json")["dac_diem"].items()}
+    except (FileNotFoundError, KeyError):
+        ten_net = {}
+    co = set(dac_diem)
+    net, dem = [], {}
+    for m in ds:
+        if m.get("chung") or not m.get("dac_diem"):
+            continue
+        if m.get("gioi") and m["gioi"] != gioi:
+            continue
+        trung = [x for x in m["dac_diem"] if x in co]
+        if not trung or (m.get("can_du") and len(trung) < len(m["dac_diem"])):
+            continue
+        dau = trung[0]
+        if dem.get(dau, 0) >= CO_THU_MOI_NET:
+            continue
+        dem[dau] = dem.get(dau, 0) + 1
+        net.append((m, ten_net.get(dau) or "Nét bạn đã chọn"))
+    chung = [m for m in ds if m.get("chung")]
+    dan = []
+    if chung:
+        bat_dau = zlib.crc32("|".join(sorted(co)).encode("utf-8")) % len(chung)
+        dan = [(chung[(bat_dau + i) % len(chung)], "Điều sách dặn khi xem tướng") for i in range(min(CO_THU_DAN, len(chung)))]
+    return net[:CO_THU_TOI_DA], dan
+
+
+def nhan_tuong(dac_diem: list[str], tuoi: int | None = None, gioi: str | None = None) -> dict | None:
+    """Câu sách gắn với các nét người dùng đã chọn (`dac_diem` = mã đặc điểm) và 12 cung trên mặt mà nét ấy thuộc về; thêm
+    câu cổ thư Thần Tướng Toàn Biên / Liễu Trang theo nét + vài điều sách dặn khi xem tướng."""
     try:
         kb = _kb("nhan_tuong_sach_ghi.json")
     except FileNotFoundError:
         return None
     cac = [(m, m.get("ten") or "Nét bạn đã chọn") for ma in dac_diem for m in kb["dac_diem"].get(ma) or []]
-    return khoi([("net", "Về các nét bạn đã chọn", cac)], tuoi)
+    net, dan = _co_thu(dac_diem, gioi)
+    nhom = [("net", "Về các nét bạn đã chọn", cac), ("net_co_thu", "Sách xưa còn ghi về các nét ấy", net)]
+    if khoi(nhom, tuoi) is None:            # không có câu nào về chính các nét (sau lọc tuổi) → không mở khối chỉ để dặn chung
+        return None
+    return khoi(nhom + [("dan", "Sách xưa dặn khi xem tướng", dan)], tuoi)
 
 
 def _cau(cac: list[dict], tuoi: int | None, toi_da: int = 3) -> list[str]:

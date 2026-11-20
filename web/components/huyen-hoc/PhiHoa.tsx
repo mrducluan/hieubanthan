@@ -73,6 +73,19 @@ export function PhiHoaXem({ d, onChonCung, onHoi }: { d: PhiHoaOutputT; onChonCu
                 {n.viec_nen_lam && <p className="text-sm"><span className="text-jade">{t("ph.nen_lam")}</span> {n.viec_nen_lam}</p>}
                 {n.cau_tu_soi && <p className="text-sm text-moon">{t("ph.tu_soi", { cau: n.cau_tu_soi })}</p>}
                 {n.ghi_chu_tuan_triet && <p className="text-xs text-fg-faint">{n.ghi_chu_tuan_triet}</p>}
+                {n.luong_phai_672 && (
+                  <details className="rounded-xl border border-gold/25 bg-gold/5 p-3 text-xs">
+                    <summary className="cursor-pointer font-medium text-gold">{n.luong_phai_672.sach_ghi?.nhan ?? t("ph.luong_tieu_de")}</summary>
+                    {n.luong_phai_672.sach_ghi?.y_chinh && <p className="mt-2 text-sm leading-relaxed text-fg">{n.luong_phai_672.sach_ghi.y_chinh}</p>}
+                    {n.luong_phai_672.sach_ghi?.trang && (
+                      <p className="mt-2 text-[11px] text-fg-faint">— {n.luong_phai_672.nguon ?? "Liang Ruoyu"} ({n.luong_phai_672.sach_ghi.trang})</p>
+                    )}
+                    <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                      {n.luong_phai_672.mat_tich_cuc && <p className="rounded-lg border border-jade/30 bg-jade/10 p-2 leading-relaxed text-fg"><b className="text-jade">{t("ph.diem_sang")}</b> {n.luong_phai_672.mat_tich_cuc}</p>}
+                      {n.luong_phai_672.mat_tieu_cuc_can_chu_y && <p className="rounded-lg border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] p-2 leading-relaxed text-fg"><b className="text-[#f0b35c]">{t("ph.nen_chu_y")}</b> {n.luong_phai_672.mat_tieu_cuc_can_chu_y}</p>}
+                    </div>
+                  </details>
+                )}
                 <ViSao canCu={n.can_cu} nho />
 
                 <div className="mt-auto flex flex-wrap gap-2 pt-1">

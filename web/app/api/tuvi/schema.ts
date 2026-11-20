@@ -290,6 +290,14 @@ export const PhiHoaOutput = z.object({
     ghi_chu_tuan_triet: z.string().nullable().optional(),
     /** Căn cứ kỹ thuật (tên cung, sao, hoá, can) — chỉ hiện ở "Vì sao nói vậy"; lời trên thẻ là lời thường. */
     can_cu: z.array(z.string()).optional(),
+    luong_phai_672: z.object({
+      /** `y_chinh` = lời TÓM Ý của ban biên tập theo phái Lương Nhược Du (không phải nguyên văn sách — PR #320), `nhan` =
+       *  nhãn nguồn. Chỉ bản Việt có hai trường này. */
+      sach_ghi: z.object({ trang: z.string().optional(), y_chinh: z.string().optional(), nhan: z.string().optional() }).passthrough().optional(),
+      mat_tich_cuc: z.string().optional(),
+      mat_tieu_cuc_can_chu_y: z.string().optional(),
+      nguon: z.string().optional(),
+    }).nullable().optional(),
   }).passthrough()).max(8),
   luu_nien: z.object({
     nam: z.number(), can_chi: z.string(),

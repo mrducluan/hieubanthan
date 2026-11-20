@@ -165,7 +165,7 @@ def test_route_ngay_va_danh_muc():
     j = client.post("/v1/ky-mon/ngay", json={"ngay": "2026-11-18", "viec": "di_xa"}).json()
     assert len(j["gio"]) == 13 and j["viec"]["ma"] == "di_xa" and j["viec"]["ranh_gioi"]
     d = client.get("/v1/ky-mon/danh-muc").json()
-    assert (len(d["cua"]), len(d["sao"]), len(d["than"]), len(d["cach"]), len(d["viec"])) == (8, 9, 8, 21, 11)   # + 4 việc kinh doanh (chuyển nghĩa 2026-11-18)
+    assert (len(d["cua"]), len(d["sao"]), len(d["than"]), len(d["cach"]), len(d["viec"])) == (8, 9, 8, 30, 11)   # + 9 cách kinh điển (Gói 1C: Phù Ứng Kinh & Thống Tông)
     assert all(x["sach"] for x in d["cua"]) and all(x["sach"] for x in d["cach"])
 
 
@@ -183,13 +183,14 @@ def test_do_tin_co_ky_mon():
 def test_huong_hop_menh_chi_danh_dau_va_tom_lai_khong_doi_muc():
     b = km.lap_ban(dt.datetime(2026, 11, 18, 10, 30))
     goc = doc.doc_gio(b)
-    hop = ["Bắc", "Đông", "Nam", "Đông Nam"]
+    # Gói 1C: Bắc (Canh/Quý) bị Đại Cách → Đông Bắc là hướng thuận sạch trong giờ này
+    hop = ["Đông Bắc", "Đông", "Nam", "Đông Nam"]
     d = doc.doc_gio(b, huong_hop=hop)
     assert [h["muc"] for h in d["huong"]] == [h["muc"] for h in goc["huong"]]          # không đổi mức nào
     assert {h["phuong"] for h in d["huong"] if h["hop_menh"]} == set(hop)
     x = d["hop_menh"]
-    assert x["chung"] == [h["phuong"] for h in d["huong"] if h["hop_menh"] and h["muc"] == "thuan"] == ["Bắc"]
-    assert "Bắc" in x["loi"] and not re.search(r"\d", x["loi"])
+    assert x["chung"] == [h["phuong"] for h in d["huong"] if h["hop_menh"] and h["muc"] == "thuan"] == ["Đông Bắc"]
+    assert "Đông Bắc" in x["loi"] and not re.search(r"\d", x["loi"])
     assert "hop_menh" not in goc and all("hop_menh" not in h for h in goc["huong"])   # không gửi thì đầu ra như cũ
 
 
@@ -207,7 +208,7 @@ def test_ngay_co_huong_hop_menh_va_route():
     for g in n["gio"]:
         assert set(g["hop_menh"]) <= set(g["huong_thuan"]) & {"Bắc", "Tây"}
     assert n["hop_menh"]["gio"] == [g["chi"] for g in n["gio"] if g["hop_menh"]][:len(n["hop_menh"]["gio"])]
-    r = client.post("/v1/ky-mon/ban", json={"thoi_diem": "2026-11-18T10:30", "huong_hop": ["Bắc", "Đông"]})
-    assert r.status_code == 200 and r.json()["doc"]["hop_menh"]["chung"] == ["Bắc"]
+    r = client.post("/v1/ky-mon/ban", json={"thoi_diem": "2026-11-18T10:30", "huong_hop": ["Đông Bắc", "Đông"]})
+    assert r.status_code == 200 and r.json()["doc"]["hop_menh"]["chung"] == ["Đông Bắc"]
     assert client.post("/v1/ky-mon/ban", json={"huong_hop": ["Bắc"] * 9}).status_code == 422
     assert client.post("/v1/ky-mon/ngay", json={"ngay": "2026-11-18", "huong_hop": ["Lên"]}).status_code == 422

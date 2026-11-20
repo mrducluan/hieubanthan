@@ -1,0 +1,142 @@
+{
+  "_nguon": "Đối chiếu trực tiếp từ Thẩm Thị Huyền Không Học (沈氏玄空學・上) trong fengshui-xuankong-kb — các đồ bàn Hạ Quái, Thế Quái và Thành Môn Quyết đã kiểm từng cung.",
+  "_ghi_chu_sao_5": "Đã chuẩn hóa theo Thẩm Thị Huyền Không Học (FS_SS1_CHART_P134, ENGINE_VERSION 0.1.10): sao 5 nhập trung trong Thế Quái giữ nguyên số 5, bay thuận/nghịch theo âm dương chính sơn.",
+  "ha_quai": [
+    {
+      "id": "FS_SS1_CHART_P134_ha_quai",
+      "mo_ta": "Vận 9 Toạ Ngọ Hướng Tý — Chính tuyến (Hạ quái)",
+      "nam_xay": 2024,
+      "toa": "Ngọ",
+      "cung": {
+        "Tốn": [3, 6, 8],
+        "Ly": [8, 1, 4],
+        "Khôn": [1, 8, 6],
+        "Chấn": [2, 7, 7],
+        "Trung cung": [4, 5, 9],
+        "Đoài": [6, 3, 2],
+        "Cấn": [7, 2, 3],
+        "Khảm": [9, 9, 5],
+        "Càn": [5, 4, 1]
+      }
+    },
+    {
+      "id": "FS_SS1_CHART_P177_ha_quai",
+      "mo_ta": "Vận 2 Toạ Dậu Hướng Mão — Chính tuyến (Hạ quái)",
+      "nam_xay": 1884,
+      "toa": "Dậu",
+      "cung": {
+        "Tốn": [3, 1, 1],
+        "Ly": [8, 5, 6],
+        "Khôn": [1, 3, 8],
+        "Chấn": [2, 2, 9],
+        "Trung cung": [4, 9, 2],
+        "Đoài": [6, 7, 4],
+        "Cấn": [7, 6, 5],
+        "Khảm": [9, 4, 7],
+        "Càn": [5, 8, 3]
+      }
+    }
+  ],
+  "the_quai": [
+    {
+      "id": "FS_SS1_CHART_P134_the_quai",
+      "mo_ta": "Vận 9 Toạ Ngọ Hướng Tý — Kiêm tuyến Thế Quái (sao 5 nhập trung giữ nguyên 5 theo Thẩm Thị)",
+      "nam_xay": 2024,
+      "toa": "Ngọ",
+      "cung": {
+        "Tốn": [5, 6, 8],
+        "Ly": [1, 1, 4],
+        "Khôn": [3, 8, 6],
+        "Chấn": [4, 7, 7],
+        "Trung cung": [6, 5, 9],
+        "Đoài": [8, 3, 2],
+        "Cấn": [9, 2, 3],
+        "Khảm": [2, 9, 5],
+        "Càn": [7, 4, 1]
+      }
+    },
+    {
+      "id": "FS_SS1_CHART_P123_124_the_quai",
+      "mo_ta": "Vận 3 Toạ Tý Hướng Ngọ — Kiêm tuyến Thế Quái",
+      "nam_xay": 1904,
+      "toa": "Tý",
+      "cung": {
+        "Tốn": [6, 8, 2],
+        "Ly": [2, 3, 7],
+        "Khôn": [4, 1, 9],
+        "Chấn": [5, 9, 1],
+        "Trung cung": [7, 7, 3],
+        "Đoài": [9, 5, 5],
+        "Cấn": [1, 4, 6],
+        "Khảm": [3, 2, 8],
+        "Càn": [8, 6, 4]
+      }
+    },
+    {
+      "id": "FS_SS1_CHART_P175_ton_the_quai",
+      "mo_ta": "Vận 2 Toạ Tốn Hướng Càn — Thế Quái",
+      "nam_xay": 1884,
+      "toa": "Tốn",
+      "cung_mau": {
+        "Tốn": [2, 3, 1],
+        "Trung cung": [1, 2, 2],
+        "Càn": [9, 1, 3]
+      }
+    },
+    {
+      "id": "FS_SS1_CHART_P175_can_the_quai",
+      "mo_ta": "Vận 2 Toạ Càn Hướng Tốn — Thế Quái",
+      "nam_xay": 1884,
+      "toa": "Càn",
+      "cung_mau": {
+        "Tốn": [3, 2, 1],
+        "Trung cung": [2, 1, 2],
+        "Càn": [1, 9, 3]
+      }
+    }
+  ],
+  "thanh_mon": [
+    {
+      "id": "FS_SS1_P050_van6_giap",
+      "mo_ta": "Vận 6 Giáp sơn Canh hướng — Chính Thành Môn Khôn (không dùng), Phó Thành Môn Càn (không dùng)",
+      "van": 6,
+      "toa": "Giáp",
+      "chinh_cung": "Khôn",
+      "chinh_dung": false,
+      "phu_cung": "Càn",
+      "phu_dung": false
+    },
+    {
+      "id": "FS_SS1_P052_van1_nham",
+      "mo_ta": "Vận 1 Nhâm sơn Bính hướng — Chính Thìn (Tốn), Phó Mùi (Khôn), cả hai không dùng",
+      "van": 1,
+      "toa": "Nhâm",
+      "chinh_cung": "Tốn",
+      "chinh_son": "Thìn",
+      "chinh_dung": false,
+      "phu_cung": "Khôn",
+      "phu_son": "Mùi",
+      "phu_dung": false
+    },
+    {
+      "id": "FS_SS1_P052_van2_nham",
+      "mo_ta": "Vận 2 Nhâm sơn Bính hướng — Phó Thành Môn Mùi (Khôn) dùng được",
+      "van": 2,
+      "toa": "Nhâm",
+      "chinh_cung": "Tốn",
+      "chinh_dung": false,
+      "phu_cung": "Khôn",
+      "phu_dung": true
+    },
+    {
+      "id": "FS_SS1_P052_van3_nham",
+      "mo_ta": "Vận 3 Nhâm sơn Bính hướng — Chính Thành Môn Thìn (Tốn) dùng được",
+      "van": 3,
+      "toa": "Nhâm",
+      "chinh_cung": "Tốn",
+      "chinh_dung": true,
+      "phu_cung": "Khôn",
+      "phu_dung": false
+    }
+  ]
+}

@@ -16,16 +16,27 @@ import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 export const coBanDoVeTinh = () => (process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY ?? "").trim() !== "";
 
 type Diem = [number, number];
-type TinKhung = { nguon: "hbt-ve-tinh"; su_kien: "san" | "loi" | "diem" | "tim" | "vi_tri"; ma?: string; ok?: boolean; buoc?: number; tam?: Diem; truoc?: Diem };
+type TinKhung = { nguon: "hbt-ve-tinh"; su_kien: "san" | "loi" | "diem" | "tim" | "vi_tri" | "chon_cung"; ma?: string; ok?: boolean; buoc?: number; tam?: Diem; truoc?: Diem; cung?: string };
 type KetQua = KetQuaDoHuong & { khoang_cach_m: number };
+export interface LaBanHuyenKhongMap {
+  van: number;
+  toa_quai: string;
+  huong_quai: string;
+  cung: { cung: string; son: number; huong: number; muc?: string }[];
+  thanh_mon?: string[];
+}
 
 const laDiem = (x: unknown): x is Diem => Array.isArray(x) && x.length === 2 && x.every((v) => typeof v === "number" && Number.isFinite(v))
   && Math.abs(x[0] as number) <= 90 && Math.abs(x[1] as number) <= 180;
 
-export function ChonTrenVeTinh({ sinh, onDung }: {
+export function ChonTrenVeTinh({ sinh, onDung, huyenKhong, chonCung, onChonCung }: {
   sinh: Record<string, unknown> | null;
   /** Người dùng bấm "Dùng hướng này": kết quả engine + hai điểm (để điền lại hai ô toạ độ). */
   onDung: (kq: KetQua, tam: Diem, truoc: Diem) => void;
+  /** Gói 1A-Map: dữ liệu bàn Huyền Không từ engine để phủ la bàn 8 cung lên mái nhà (tuỳ chọn). */
+  huyenKhong?: LaBanHuyenKhongMap | null;
+  chonCung?: string | null;
+  onChonCung?: (cung: string) => void;
 }) {
   const [mo, setMo] = useState(false);
   const [san, setSan] = useState(false);
@@ -38,12 +49,24 @@ export function ChonTrenVeTinh({ sinh, onDung }: {
   const khung = useRef<HTMLIFrameElement>(null);
   const luot = useRef(0);
   const sinhRef = useRef(sinh);
+  const onChonCungRef = useRef(onChonCung);
   const { c: t, en, huong } = useChuPT();
   const tRef = useRef(t);
   useEffect(() => { tRef.current = t; }, [t]);
   useEffect(() => { sinhRef.current = sinh; }, [sinh]);
+  useEffect(() => { onChonCungRef.current = onChonCung; }, [onChonCung]);
 
   const lenh = (o: Record<string, unknown>) => khung.current?.contentWindow?.postMessage(o, window.location.origin);
+
+  useEffect(() => {
+    if (!mo || !san || !huyenKhong) return;
+    lenh({ lenh: "huyen_khong", ban: huyenKhong, chon: chonCung ?? huyenKhong.huong_quai });
+  }, [mo, san, huyenKhong, chonCung]);
+
+  useEffect(() => {
+    if (!mo || !san || !chonCung) return;
+    lenh({ lenh: "chon_cung", cung: chonCung });
+  }, [mo, san, chonCung]);
 
   useEffect(() => {
     if (!mo) return;
@@ -68,6 +91,8 @@ export function ChonTrenVeTinh({ sinh, onDung }: {
         setLoi(d.ok ? null : tRef.current("vt.loi_tim"));
       } else if (d.su_kien === "vi_tri" && !d.ok) {
         setLoi(tRef.current("vt.loi_vi_tri"));
+      } else if (d.su_kien === "chon_cung" && typeof d.cung === "string") {
+        onChonCungRef.current?.(d.cung);
       } else if (d.su_kien === "diem") {
         const b = Math.min(2, Math.max(0, Number(d.buoc) || 0));
         setBuoc(b);

@@ -21,13 +21,16 @@ KY_MO = {"Ất": 2, "Bính": 6, "Đinh": 6}
 # can thiên bàn gia can địa bàn → mã cách
 _CAN_GIA = {("Ất", "Tân"): "thanh_long_dao_tau", ("Tân", "Ất"): "bach_ho_xuong_cuong",
             ("Đinh", "Quý"): "chu_tuoc_dau_giang", ("Quý", "Đinh"): "dang_xa_yeu_kieu",
-            ("Bính", "Canh"): "huynh_nhap_bach", ("Canh", "Bính"): "bach_nhap_huynh"}
+            ("Bính", "Canh"): "huynh_nhap_bach", ("Canh", "Bính"): "bach_nhap_huynh",
+            ("Canh", "Quý"): "dai_cach", ("Canh", "Kỷ"): "hinh_cach", ("Canh", "Nhâm"): "tieu_cach"}
 
 CACH = {
     "ky_mon_hoi_hop": {"loai": "cat", "pham_vi": "cung", "thien": "煙波釣叟歌句解 (開休生 合 乙丙丁)"},
     "thien_don": {"loai": "cat", "pham_vi": "cung", "thien": "釋天遁甲"},
     "dia_don": {"loai": "cat", "pham_vi": "cung", "thien": "釋地遁甲"},
     "nhan_don": {"loai": "cat", "pham_vi": "cung", "thien": "釋人遁甲"},
+    "van_don": {"loai": "cat", "pham_vi": "cung", "thien": "奇門遁甲統宗 (雲遁)"},
+    "phong_don": {"loai": "cat", "pham_vi": "cung", "thien": "奇門遁甲統宗 (風遁)"},
     "thanh_long_phan_thu": {"loai": "cat", "pham_vi": "cung", "thien": "釋青龍反首"},
     "phi_dieu_diet_huyet": {"loai": "cat", "pham_vi": "cung", "thien": "釋飛烏跌穴"},
     "ngoc_nu_thu_mon": {"loai": "cat", "pham_vi": "cung", "thien": "三奇得使圖 (玉女守門)"},
@@ -37,6 +40,13 @@ CACH = {
     "dang_xa_yeu_kieu": {"loai": "hung", "pham_vi": "cung", "thien": "釋螣蛇夭矯"},
     "huynh_nhap_bach": {"loai": "hung", "pham_vi": "cung", "thien": "釋熒惑入太白"},
     "bach_nhap_huynh": {"loai": "hung", "pham_vi": "cung", "thien": "釋太白入熒惑"},
+    "thien_at_phuc_cung": {"loai": "hung", "pham_vi": "cung", "thien": "景祐遁甲符應經 (天乙伏宮格)"},
+    "thien_at_phi_cung": {"loai": "hung", "pham_vi": "cung", "thien": "景祐遁甲符應經 (天乙飛宮格)"},
+    "phuc_can_cach": {"loai": "hung", "pham_vi": "cung", "thien": "景祐遁甲符應經 / 奇門遁甲統宗 (伏干格)"},
+    "phi_can_cach": {"loai": "hung", "pham_vi": "cung", "thien": "景祐遁甲符應經 (飛干格)"},
+    "dai_cach": {"loai": "hung", "pham_vi": "cung", "thien": "景祐遁甲符應經 (大格第十八)"},
+    "hinh_cach": {"loai": "hung", "pham_vi": "cung", "thien": "景祐遁甲符應經 (刑格第十九)"},
+    "tieu_cach": {"loai": "hung", "pham_vi": "cung", "thien": "奇門遁甲統宗 (玄機賦·小格)"},
     "ky_nhap_mo": {"loai": "hung", "pham_vi": "cung", "thien": "釋三奇入墓"},
     "mon_bach": {"loai": "hung", "pham_vi": "cung", "thien": "釋門迫"},
     "luc_nghi_kich_hinh": {"loai": "hung", "pham_vi": "cung", "thien": "釋六儀擊刑"},
@@ -88,12 +98,25 @@ def nhan_dien(ban: dict, can_ngay: str | None = None) -> list[dict]:
             kq.append(_mot("dia_don", k))
         if cua == 1 and "Đinh" in tren and o["than_ma"] == "am":
             kq.append(_mot("nhan_don", k))
+        if cua in CUA_CAT and "Ất" in tren and duoi == "Tân":
+            kq.append(_mot("van_don", k))
+        if cua in CUA_CAT and "Ất" in tren and k == 4:
+            kq.append(_mot("phong_don", k))
         if k == phu["cung"] and duoi == "Bính":           # Giáp (ẩn dưới nghi của tuần, đi cùng trực phù) gia Bính
             kq.append(_mot("thanh_long_phan_thu", k))
         if "Bính" in tren and duoi == ban["tuan_nghi"] and k != phu["cung"]:
             kq.append(_mot("phi_dieu_diet_huyet", k))     # Bính gia lên chỗ Giáp của tuần đang ẩn
         if k == su["cung"] and duoi == "Đinh":
             kq.append(_mot("ngoc_nu_thu_mon", k))
+        if "Canh" in tren and duoi == ban["tuan_nghi"] and k != phu["cung"]:
+            kq.append(_mot("thien_at_phuc_cung", k))      # Canh gia lên cung gốc Trực Phù (tuan_nghi)
+        if k == phu["cung"] and duoi == "Canh":
+            kq.append(_mot("thien_at_phi_cung", k))       # Trực Phù gia lên địa bàn Canh
+        if can_ngay is not None and can_ngay != "Giáp":
+            if "Canh" in tren and duoi == can_ngay:
+                kq.append(_mot("phuc_can_cach", k))
+            if can_ngay in tren and duoi == "Canh":
+                kq.append(_mot("phi_can_cach", k))
         for tr in tren:
             if (tr, duoi) in _CAN_GIA:
                 kq.append(_mot(_CAN_GIA[(tr, duoi)], k))

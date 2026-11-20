@@ -30,10 +30,18 @@ export interface BoBai {
 /** Lá người dùng đã rút cho một vị trí. */
 export interface LaRut { id: string; nguoc: boolean }
 
+export interface GreerNguoc {
+  mat_tich_cuc?: string;
+  mat_tieu_cuc_can_chu_y?: string;
+  huong_chuyen_hoa?: string;
+  sach_ghi?: { trang?: string; tom_y?: boolean };
+}
+
 export interface HopTarot extends Hop {
   la?: LaGon; vi_tri?: { so: number; ma: string; ten: string; hoi: string }; suc?: SucLa; tu_khoa?: string[]; cau_tu_soi?: string;
   quan_he?: QuanHeNguyenTo; cap?: [number, number]; vi_tri_nhin?: number; toi?: number | null; huong?: -1 | 0 | 1;
   loai_nhip?: string; dang_trong?: boolean | null; ngu_hinh?: string | null; nghieng?: NghiengTraLoi;
+  greer_nguoc?: GreerNguoc | null;
 }
 export type NghiengTraLoi = "tien" | "dieu_kien" | "cho";
 export type YDinhTarot = "quyet_dinh" | "lua_chon" | "ket_qua" | "thoi_diem" | "cach_lam" | "ly_do" | "nguoi_khac" | "hieu_minh" | "tong_quat";

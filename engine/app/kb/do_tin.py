@@ -34,6 +34,8 @@ SO: dict[str, dict] = {
     "battu_sach_ghi.json": {"mang": "battu", **_nv("tam_menh_thong_hoi.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                 "SX-C: câu Tam Mệnh Thông Hội + Uyên Hải Tử Bình (thần sát, thập thần, lục thân, tính nết, thân thể) khớp kho nguồn")},
     "battu_dieu_hau.json": {"mang": "battu", **_nv("cung_thong_bao_giam.json", f"{_T}::test_dieu_hau_khop_nguyen_van_tung_o")},
+    "battu_thien_ly_menh_cao.json": {"mang": "battu", "muc": "truyen_thong",
+                                     "ghi_chu": "Đợt 3: 6 quy tắc Thập Thần & Cách Cục 2 chiều trích dẫn có phép từ Thiên Lý Mệnh Cảo (Vi Thiên Lý, 1934 — bazi-kb)"},
     "battu_kb.json": {"mang": "battu", "muc": "tom_y_co_thu", "phan": {
         "co_tho": _nv("uyen_hai_tu_binh.json", f"{_T}::test_co_tho_nhat_chu_khop_nguyen_van_uyen_hai"),
         "co_van_thap_than": _nv("uyen_hai_tu_binh.json", f"{_T}::test_co_van_thap_than_khop_nguyen_van_uyen_hai"),
@@ -50,6 +52,10 @@ SO: dict[str, dict] = {
         "sao": _nv("ky_mon_co_kim_do_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem", "mỗi sao một câu «釋九星所主»"),
         "cach": _nv("ky_mon_co_kim_do_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                     "điều kiện từng cách thử bằng ví dụ «假令» của sách (tests/test_ky_mon_cach.py); lời đời thường là tóm ý")}},
+    "ky_mon_bi_kip_cuu_don.json": {"mang": "kymon", "muc": "tom_y_co_thu",
+                                   "ghi_chu": "Cửu Độn: lời đời thường tóm ý theo Kỳ Môn Độn Giáp Bí Kíp Đại Toàn q.21; câu sách đi kèm "
+                                              "(`sach_ghi`) là nguyên văn Độn Giáp Diễn Nghĩa quyển 2, khớp kho nguồn don_giap_dien_nghia.json "
+                                              "qua tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem (PR #320, 2026-11-20)"},
     # ---- Liên mảng — kho chuyển nghĩa (2026-11-18): khái niệm cổ → nghĩa đời nay theo lĩnh vực
     "chuyen_nghia_kb.json": {"mang": "chung", "muc": "bien_tap", "ghi_chu": "nghĩa đời nay do ban biên tập viết", "phan": {
         "khai_niem": _nv("ky_mon_co_kim_do_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
@@ -67,6 +73,12 @@ SO: dict[str, dict] = {
         "cau": _nv("tu_vi_dau_so_toan_thu.json", "tests/test_tuvi_co_thu.py::test_nguyen_van_khop_kho_nguon_toan_thu_tung_chu",
                    "84 câu Cốt Tuỷ Phú khớp từng chữ (giản ↔ phồn); phiên âm, nghĩa là nháp; chưa so bản khắc 1600")}},
     "tuvi_phi_hoa_kb.json": {"mang": "tuvi", "muc": "truyen_thong", "ghi_chu": "phi tinh tứ hoá — trường phái hiện đại"},
+    "tuvi_phi_hoa_luong_672.json": {"mang": "tuvi", "muc": "truyen_thong",
+                                    "ghi_chu": "PR #320 (2026-11-20, phương án C): 576 tượng phi hoá — TÓM Ý của ban biên tập theo phái Lương Nhược Du (sách hiện đại còn bản quyền); không nguyên văn, giữ trang để đối chiếu"},
+    "tuvi_trung_chau_60_tinh_he.json": {"mang": "tuvi", "muc": "truyen_thong",
+                                        "ghi_chu": "PR #320 (2026-11-20, phương án C): 60 tinh hệ — TÓM Ý của ban biên tập theo Trung Châu phái (Vương Đình Chi, sách hiện đại còn bản quyền); không nguyên văn, giữ trang"},
+    "tuvi_tu_van_thai_tue.json": {"mang": "tuvi", "muc": "truyen_thong",
+                                  "ghi_chu": "Đợt 4: 6 nguyên tắc cốt lõi Tử Vân (Thái Tuế Nhập Quái · Tam Đại Tiên Hậu Thiên · Giáp Cung — ziwei-ziyun-kb)"},
     "tuvi_sao_luu_kb.json": {"mang": "tuvi", "muc": "truyen_thong"},
     "tuvi_y_bo_sung.json": {"mang": "tuvi", "muc": "truyen_thong", "ghi_chu": "rút ý lời giảng hiện đại, viết lại (TV-YBS)"},
     "tuvi_doi_song_kb.json": {"mang": "tuvi", "muc": "bien_tap"},
@@ -116,7 +128,15 @@ SO: dict[str, dict] = {
         "sach_xua_nha": _nv("duong_trach_thap_thu.json", "tests/test_ws3_sach_xua_nha.py::test_moi_cau_la_nguyen_van_kho_nguon",
                             "WS-3: câu Dương Trạch Thập Thư cho khối «Sách xưa nói gì về nhà của bạn»; lời Việt là tóm ý")},
         "ghi_chu": "KT-PT1: 7 dấu hiệu `bo_tri` có câu nguyên văn (`sach`); phần còn lại chưa khớp từng câu"},
-    "phongthuy_huyen_khong.json": {"mang": "phongthuy", "muc": "tom_y_co_thu"},
+    "phongthuy_huyen_khong.json": {
+        "mang": "phongthuy", "muc": "tom_y_co_thu",
+        "phan": {
+            "to_hop_81": _nv("phongthuy_huyen_khong_co_thu.json",
+                             "tests/test_huyen_khong_tham_thi.py::test_to_hop_81_sach_qua_bo_kiem_sx_c",
+                             "Gói 1A: 28 tổ hợp sao tiêu biểu có câu nguyên văn Tử Bạch Đoạn / Phi Tinh Phú qua bộ kiểm SX-C; "
+                             "Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json)"),
+        },
+    },
     "phongthuy_doi_song.json": {"mang": "phongthuy", "muc": "bien_tap"},
     "phongthuy_do_thi.json": {"mang": "phongthuy", "muc": "bien_tap"},
     "bo_sung_dau_hieu.json": {"mang": "phongthuy", "muc": "bien_tap"},
@@ -127,6 +147,14 @@ SO: dict[str, dict] = {
                                                       "SX-C: 119 kiểu hình mày, mắt, mũi, tai, miệng (bài thơ từng kiểu) khớp kho nguồn; 7 mục gắn `ngo`")},
     "nhan_tuong_lieu_trang.json": {"mang": "nhantuong", **_nv("lieu_trang_tuong_phap.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                        "SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn")},
+    "nhantuong_ngu_hanh_va_co_thu.json": {"mang": "nhantuong", "muc": "truyen_thong",
+                                          "ghi_chu": "Đợt 4: 5 Hình Tướng Ngũ Hành tóm ý theo Lillian Bridges (2012, còn bản quyền — không chép nguyên văn)", "phan": {
+        "quy_tac_co_thu": _nv("lieu_trang_tuong_phap.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
+                              "PR #320 (2026-11-20): 81/150 quy tắc giữ lại, mỗi câu Hán khớp kho nguồn Liễu Trang tướng pháp / "
+                              "Thần Tướng Toàn Biên (than_tuong_toan_bien.json); lời Việt khuôn SX-C do ban biên tập viết"),
+        "quy_tac_khong_dua": {"muc": "bien_tap", "ghi_chu": "69 quy tắc không đưa ra người dùng, chỉ còn mã + lý do"}}},
+    "chitay_phuong_tay_kinh_dien.json": {"mang": "nhantuong", "muc": "truyen_thong",
+                                         "ghi_chu": "Đợt 4: 4 Đường Chính & 7 Gò Bàn Tay 2 chiều từ Cheiro (1916), Benham (1912) & Dale (1895) (palmistry-western-kb)"},
     "chi_tay_tay_kb.json": {"mang": "nhantuong", **_nv("chi_tay_cheiro_language_of_the_hand.json",
                                                     "tests/test_tk2_chi_tay_tay.py::test_moi_cau_trich_la_chuoi_con_kho_nguon",
                                                     "TK-2 chỉ tay phương Tây: câu trích tiếng Anh Cheiro 1894 + Benham 1900 (kho nguồn lớp chữ "
@@ -150,6 +178,10 @@ SO: dict[str, dict] = {
     "tarot_kb.json": {"mang": "tarot", **_nv("tarot_waite_1910.json", "tests/test_tarot_nguon.py::test_moi_trich_la_nguyen_van_cua_nguon",
                                              "câu trích khớp Waite / Mathers / Book T / Papus 1892 / Case 1920 / Ouspensky 1913; lời lớp Marseille, "
                                              "B.O.T.A., Thoth vẫn là tóm ý (Marseille đã soát với Mathers + Papus, B.O.T.A. ẩn chính với Case 1920)")},
+    "tarot_greer_nguoc.json": {"mang": "tarot", "muc": "truyen_thong",
+                               "ghi_chu": "Đợt 2B: 22 Lá Ẩn Chính ngược đối chiếu & trích dẫn có phép từ Mary K. Greer (2002), phân tích 2 mặt tích cực + tiêu cực cần chú ý"},
+    "kinhdich_luc_hao_thuc_chien.json": {"mang": "kinhdich", "muc": "truyen_thong",
+                                         "ghi_chu": "Đợt 2B: 8 nguyên tắc Lục Hào + 5 Lục Thân thực chiến đối chiếu & trích dẫn chữ Hán có phép từ Vương Hổ Ứng & Thiệu Vĩ Hoa (iching-kb)"},
     # ---- Thần số (truyền thống phương Tây hiện đại — không có "cổ thư")
     **{f: {"mang": "thanso", "muc": "truyen_thong"} for f in (
         "thanso_meanings.json", "thanso_depth.json", "thanso_chaldean.json", "thanso_cap_so.json", "thanso_chi_so_phu.json",
@@ -161,6 +193,7 @@ SO: dict[str, dict] = {
                    "TK-2: 43/43 số kép có câu Cheiro (OCR, can_doi_chieu); bảng chữ 23/26 khớp; lời Việt là tóm ý trung tính")}},
     **{f: {"mang": "thanso", "muc": "bien_tap"} for f in (
         "thanso_ban_do.json", "thanso_hom_nay.json", "thanso_noi_dau.json", "thanso_xu_ly.json", "thanso_do_thi.json",
+        "thanso_phillips_kb.json",
         "bo_sung_so.json", "bo_sung_so_kep.json", "bo_sung_cap_so.json", "bo_sung_nghe.json", "bo_sung_tinh_yeu.json",
         "bo_sung_nam_ca_nhan.json", "bo_sung_no_nghiep.json")},
     # ---- Lịch, tuổi, tập quán

@@ -4,8 +4,9 @@
 Tính thuần, tất định. Quy tắc phi tinh và nhận diện tổ hợp chuyển thể từ @soul-atelier/xuankong 0.3.0
 (MIT, © 2026 Soul Atelier) — đồng thời là ORACLE sinh golden 216 trạch bàn (fixtures/golden/huyen_khong.json).
 Thế quái (kiêm hướng, lệch tâm sơn > 3°): khẩu quyết thế tinh của Thẩm thị (Thẩm Thị Huyền Không Học,
-quyển 2 — cổ thư công cộng). CHƯA có oracle độc lập cho thế quái (không gói MIT nào lập bàn thế quái) →
-kết quả gắn `chua_doi_chieu_oracle`.
+quyển 2 — cổ thư công cộng). CHƯA có oracle độc lập cho thế quái (không gói MIT nào lập bàn thế quái); từ 0.1.10 bàn
+thế quái khớp các đồ bàn tham chiếu FS_SS1_CHART_* (golden `huyen_khong_tham_thi.json`) nhưng nguyên văn sách chưa có
+trong kho nguồn → API gắn `the_quai_trang_thai = chua_doi_chieu_nguyen_van` + `the_quai_ghi_chu`.
 
 Quy ước:
 - Vận tam nguyên cửu vận, mỗi vận 20 năm, Vận 1 bắt đầu 1864 (Vận 9: 2024–2043). Năm xây theo dương lịch
@@ -97,12 +98,19 @@ def _chieu(tam: int, nguon: dict) -> bool:
 
 
 def _nhap_trung(tam: int, nguon: dict, the_quai: bool) -> tuple[int, bool, dict | None]:
-    """Sao nhập trung + chiều bay. Thế quái: thay bằng thế tinh của sơn gốc; thuận nghịch VẪN theo âm dương
-    của sơn gốc (Thẩm thị)."""
+    """Sao nhập trung + chiều bay. Thế quái (Thẩm Thị Huyền Không Học): thay bằng thế tinh của sơn gốc, riêng
+    Ngũ Hoàng (sao 5) nhập trung KHÔNG thay thế tinh (giữ 5, vì trung cung không có quẻ gốc — khớp đồ bàn
+    FS_SS1_CHART_P134); thuận nghịch VẪN theo âm dương của sơn gốc."""
+    # GHI CHÚ (PR #320, ENGINE_VERSION 0.1.10): luật "sao 5 nhập trung giữ 5 trong thế quái" theo ĐỒ BÀN THAM CHIẾU
+    # FS_SS1_CHART_P134 (Vận 9 toạ Ngọ, kèm P123–124, P175 — golden fixtures/golden/huyen_khong_tham_thi.json, chép từ bộ
+    # ghi chép fengshui-xuankong-kb). Nguyên văn Thẩm Thị Huyền Không Học CHƯA có trong kho nguồn fixtures/nguon/ (PT-NG3:
+    # các bản khác nhau ở đúng chỗ này). Chủ dự án quyết GIỮ thay đổi 2026-11-20; khi có nguyên văn phải đối chiếu lại
+    # (docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md mục 15). API vẫn gắn `the_quai_trang_thai = chua_doi_chieu_nguyen_van`.
     son, ad = _son_goc(tam, nguon)
     if not the_quai:
         return tam, ad == "+", None
-    return THE_TINH[son], ad == "+", {"goc": tam, "the": THE_TINH[son], "thuan": ad == "+"}
+    the_so = 5 if tam == 5 else THE_TINH[son]
+    return the_so, ad == "+", {"goc": tam, "the": the_so, "thuan": ad == "+"}
 
 
 _TB = [(1, 4, 7), (2, 5, 8), (3, 6, 9)]
@@ -286,6 +294,22 @@ def to_hop_cung(son: int, huong: int, van: int, cung: str | None = None, nam: in
           "linh_vuc": dict(m["linh_vuc"]), "kich_hoat": {kk: list(v) for kk, v in m["kich_hoat"].items()}}
     if m.get("an_toan"):
         ra["an_toan"] = list(m["an_toan"])          # lời nhắc chăm nhà (lửa điện, nước, vật nhọn…), không doạ
+    if m.get("sach"):
+        from app import ngon_ngu  # noqa: PLC0415
+        from app.kb import sach_ghi as sg  # noqa: PLC0415
+        sm = m["sach"]
+        if ngon_ngu.la_viet():
+            ra["sach_ghi"] = {
+                "loi": sg.loi(sm, co_am=sm.get("nhom") != "C"),
+                "nhom": sm["nhom"],
+                **({"viec": sm["viec"]} if sm.get("viec") else {}),
+                **({"cau_ket": ck} if (ck := sg.cau_ket([sm])) else {}),
+            }
+        else:
+            ra["sach_ghi"] = {
+                "loi": f"Classical text: \"{sm['han']}\"",
+                "nhom": sm["nhom"],
+            }
     if cung and nam:
         ra["nam_chu_y"] = nam_chu_y(cung, m["kich_hoat"], int(nam))
     # Q6 luật nước vận 9 (KB quy_tac_thuc_hanh.nuoc_van_9): chỉ đặt nước nơi HƯỚNG tinh 9; sơn tinh 9 hoặc có 5 / 2 → không.
@@ -293,6 +317,41 @@ def to_hop_cung(son: int, huong: int, van: int, cung: str | None = None, nam: in
         ra["khong_dat_nuoc"] = son == 9 or 5 in (son, huong) or 2 in (son, huong)
         ra["hop_dat_nuoc"] = huong == 9 and not ra["khong_dat_nuoc"]
     return ra
+
+
+_VONG_8 = ["Khảm", "Cấn", "Chấn", "Tốn", "Ly", "Khôn", "Đoài", "Càn"]
+_HA_DO = {frozenset((1, 6)), frozenset((2, 7)), frozenset((3, 8)), frozenset((4, 9))}
+
+
+def thanh_mon(van: int, toa: str) -> dict:
+    """Thành Môn Quyết (城門訣) theo Thẩm Thị Huyền Không Học: hai cung kề bên cung Hướng (chính = hợp Hà Đồ 1-6/2-7/3-8/4-9
+    với cung Hướng, phó = cung kề còn lại). Lấy vận tinh tại cung ứng viên nhập trung, bay thuận/nghịch theo âm dương của sơn
+    cùng nguyên (địa/thiên/nhân) trong quẻ gốc của vận tinh đó (nếu vận tinh = 5 thì mượn sơn cùng nguyên của chính cung ứng
+    viên); sao bay tới cung ứng viên đúng bằng sao đương vận (`van`) → Thành Môn dùng được."""
+    t = _son(toa)
+    hq = DOI[t["quai"]]
+    so_h = QUAI[hq][0]
+    i = _VONG_8.index(hq)
+    hai = [_VONG_8[(i - 1) % 8], _VONG_8[(i + 1) % 8]]
+    chinh_q = next(q for q in hai if frozenset((so_h, QUAI[q][0])) in _HA_DO)
+    phu_q = next(q for q in hai if q != chinh_q)
+    vb = phi(van, True)
+
+    def _xet(q: str, vai: str) -> dict:
+        vt = vb[q]
+        son_cung, ad_cung = QUAI[q][2][t["nguyen"]]
+        son_goc, ad_goc = (son_cung, ad_cung) if vt == 5 else QUAI[SO_QUAI[vt]][2][t["nguyen"]]
+        thuan = ad_goc == "+"
+        sao_den = phi(vt, thuan)[q]
+        return {
+            "vai": vai, "cung": q, "phuong": QUAI[q][1], "son": son_cung,
+            "van_tinh": vt, "thuan": thuan, "sao_den": sao_den, "dung_duoc": sao_den == van,
+        }
+
+    chinh = _xet(chinh_q, "chinh")
+    phu = _xet(phu_q, "phu")
+    return {"van": van, "toa": t["son"], "huong": QUAI[hq][2][t["nguyen"]][0], "chinh": chinh, "phu": phu,
+            "co_thanh_mon": chinh["dung_duoc"] or phu["dung_duoc"]}
 
 
 def thong_quan(quai_a: str, quai_b: str) -> dict:

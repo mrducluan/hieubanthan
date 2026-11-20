@@ -8,14 +8,14 @@ import { BookOpen } from "lucide-react";
 import Link from "@/components/khung/Lien";
 import { MatTruoc } from "./LaBai";
 import { slug } from "./LaNgay";
-import type { LaGon } from "@/lib/tarot-chung";
+import type { GreerNguoc, LaGon } from "@/lib/tarot-chung";
 import { cn } from "@/lib/utils";
 import { useDuong } from "@/components/khung/NgonNgu";
 import { useChuTarot } from "./chu-tarot";
 
 export interface MucLa {
   /** chỉ số vị trí trên bàn (0…) */ so: number; viTri: string; hoi: string; la: LaGon; nguoc: boolean; tuKhoa: string[];
-  noiDung?: string; viec?: string | null; tuSoi?: string | null;
+  noiDung?: string; viec?: string | null; tuSoi?: string | null; greerNguoc?: GreerNguoc | null;
 }
 
 export function YNghiaLa({ muc, chon, onChon, tieuDe: tieuDeVao, ghiChu, className }: {
@@ -50,6 +50,9 @@ export function YNghiaLa({ muc, chon, onChon, tieuDe: tieuDeVao, ghiChu, classNa
             <MatTruoc la={m.la} nguoc={m.nguoc} nhanNguoc={chuLa.nhan_nguoc} gap />
             <span className="mt-1.5 block truncate text-[11px] text-fg-faint">{m.so + 1}. {m.viTri}</span>
             <span className="block truncate text-xs font-medium text-fg">{m.la.ten}{m.nguoc && <span className="font-normal text-[#f0b35c]">{chuLa.nguoc_nhan}</span>}</span>
+            {m.nguoc && m.greerNguoc && (
+              <span className="mt-1 inline-block rounded-full border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] px-2 py-0.5 text-[10px] font-medium text-[#f0b35c]">{c("ynl.greer_pill")}</span>
+            )}
           </button>
         ))}
       </div>
@@ -64,6 +67,29 @@ export function YNghiaLa({ muc, chon, onChon, tieuDe: tieuDeVao, ghiChu, classNa
               {dang.tuKhoa.map((k) => <li key={k} className="rounded-full border border-gold/30 bg-gold/5 px-2.5 py-0.5 text-xs text-fg">{k}</li>)}
             </ul>
             {dang.noiDung && <p className="mt-3 text-[0.95rem] leading-relaxed text-fg">{dang.noiDung}</p>}
+            {dang.nguoc && dang.greerNguoc && (
+              <div className="mt-3 space-y-2.5" data-testid="tarot-greer-nguoc">
+                <div className="grid gap-2.5 sm:grid-cols-2">
+                  {dang.greerNguoc.mat_tich_cuc && (
+                    <div className="rounded-xl border border-jade/35 bg-jade/10 p-3 text-xs leading-relaxed text-fg">
+                      <p className="font-semibold text-jade">{c("ynl.diem_sang")}</p>
+                      <p className="mt-1 text-fg-muted">{dang.greerNguoc.mat_tich_cuc}</p>
+                    </div>
+                  )}
+                  {dang.greerNguoc.mat_tieu_cuc_can_chu_y && (
+                    <div className="rounded-xl border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] p-3 text-xs leading-relaxed text-fg">
+                      <p className="font-semibold text-[#f0b35c]">{c("ynl.nen_chu_y_nguoc")}</p>
+                      <p className="mt-1 text-fg-muted">{dang.greerNguoc.mat_tieu_cuc_can_chu_y}</p>
+                    </div>
+                  )}
+                </div>
+                {dang.greerNguoc.sach_ghi?.trang && (
+                  <p className="text-[11px] text-fg-faint">
+                    Tóm ý theo Mary K. Greer, The Complete Book of Tarot Reversals (2002), {dang.greerNguoc.sach_ghi.trang}
+                  </p>
+                )}
+              </div>
+            )}
             {dang.viec && <p className="mt-2 text-sm text-fg"><b className="text-gold">{c("ynl.viec")}</b> {dang.viec}</p>}
             {dang.tuSoi && <p className="mt-2 text-sm italic text-fg-muted">{c("ynl.tu_hoi")} {dang.tuSoi}</p>}
             <p className="mt-3 text-sm">

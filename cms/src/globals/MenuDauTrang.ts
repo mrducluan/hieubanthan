@@ -35,6 +35,7 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/hop-doi", "Hợp đôi thần số"), mo_ta: "Hai con số chủ đạo, không chấm điểm" },
     { ...lk("/tu-vi#hop-tham", "Xem lá số 2 người"), mo_ta: "Điểm hợp – khắc theo Tử vi, cách dung hoà" },
     { ...lk("/hop-doi/cap-so", "Số chủ đạo hợp nhau"), mo_ta: "45 cặp số, hợp ở đâu, vấp ở đâu" },
+    { ...lk("/ban-do-doi-ngu", "Bản đồ đội ngũ (Chủ DN)"), mo_ta: "Xem 5 hành đội ngũ & gợi ý phối hợp 2 chiều cho 1–8 cộng sự" },
   ] },
   { ...lk("/huyen-hoc", "Huyền học"), bieu_tuong: "la_ban", di_dong: true, con: [
     { ...lk("/tu-vi", "Tử vi"), mo_ta: "Lá số 12 cung, 3 tháng tới, định giờ sinh" },
