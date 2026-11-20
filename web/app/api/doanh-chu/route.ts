@@ -65,10 +65,10 @@ const Input = z.discriminatedUnion("che_do", [
 const DOI_NGU_MAU = {
   ong_chu: { ten: "Anh Hoàng (Mẫu)", vai_tro: "Nhà sáng lập / CEO", ngay: 15, thang: 8, nam: 1986, gioi_tinh: "nam", dong_y_tu_nguyen: true },
   doi_ngu: [
-    { ten: "Chị Minh (Mẫu)", vai_tro: "Giám đốc Vận hành", nhom_viec: "van_hanh", ngay: 10, thang: 3, nam: 1992, gioi_tinh: "nu", dong_y_tu_nguyen: true },
-    { ten: "Anh Tuấn (Mẫu)", vai_tro: "Trưởng phòng Kinh doanh", nhom_viec: "kinh_doanh", ngay: 22, thang: 11, nam: 1989, gioi_tinh: "nam", dong_y_tu_nguyen: true },
-    { ten: "Chị Lan (Mẫu)", vai_tro: "Kiểm soát Tài chính", nhom_viec: "tai_chinh", ngay: 5, thang: 1, nam: 1994, gioi_tinh: "nu", dong_y_tu_nguyen: true },
-    { ten: "Anh Khoa (Mẫu)", vai_tro: "Phát triển Sản phẩm / R&D", nhom_viec: "san_pham", ngay: 18, thang: 6, nam: 1996, gioi_tinh: "nam", dong_y_tu_nguyen: true },
+    { ten: "Chị Minh (Mẫu)", vai_tro: "Giám đốc Vận hành", ngay: 10, thang: 3, nam: 1992, gioi_tinh: "nu", dong_y_tu_nguyen: true },
+    { ten: "Anh Tuấn (Mẫu)", vai_tro: "Trưởng phòng Kinh doanh", ngay: 22, thang: 11, nam: 1989, gioi_tinh: "nam", dong_y_tu_nguyen: true },
+    { ten: "Chị Lan (Mẫu)", vai_tro: "Kiểm soát Tài chính", ngay: 5, thang: 1, nam: 1994, gioi_tinh: "nu", dong_y_tu_nguyen: true },
+    { ten: "Anh Khoa (Mẫu)", vai_tro: "Phát triển Sản phẩm / R&D", ngay: 18, thang: 6, nam: 1996, gioi_tinh: "nam", dong_y_tu_nguyen: true },
   ],
 };
 
@@ -92,12 +92,22 @@ export async function POST(req: Request): Promise<NextResponse> {
   if (parsed.data.che_do === "mau") {
     laMau = true;
     // Nhân vật mẫu giả lập 100% phía server (không phải dữ liệu cá nhân thật) → đặt cam_ket_thoa_thuan=true để qua DC-1.
-    payloadEngine = { ...DOI_NGU_MAU, nam_xem: parsed.data.nam_xem, cap_quan_ly: parsed.data.cap_quan_ly, cam_ket_thoa_thuan: true };
+    // Chỉ gửi cap_quan_ly khi khác mặc định để tránh lệch phiên bản khi Vercel deploy trước engine container.
+    payloadEngine = {
+      ...DOI_NGU_MAU,
+      nam_xem: parsed.data.nam_xem,
+      ...(parsed.data.cap_quan_ly !== "chu_dn" ? { cap_quan_ly: parsed.data.cap_quan_ly } : {}),
+      cam_ket_thoa_thuan: true,
+    };
   } else if (parsed.data.che_do === "tu_nhap") {
     const { ong_chu, doi_ngu, nam_xem, cap_quan_ly, cam_ket_thoa_thuan } = parsed.data;
     if (!ngayHopLe(ong_chu.nam, ong_chu.thang, ong_chu.ngay)) {
       return NextResponse.json({ error: loiChung("khong_hop_le", en) }, { status: 422 });
     }
+    const doiNguSach = doi_ngu.map((tv) => {
+      const { nhom_viec, ...rest } = tv;
+      return nhom_viec ? { ...rest, nhom_viec } : rest;
+    });
     for (let i = 0; i < doi_ngu.length; i++) {
       const tv = doi_ngu[i]!;
       if (!ngayHopLe(tv.nam, tv.thang, tv.ngay)) {
@@ -109,9 +119,9 @@ export async function POST(req: Request): Promise<NextResponse> {
     }
     payloadEngine = {
       ong_chu: { ...ong_chu, dong_y_tu_nguyen: true },
-      doi_ngu,
+      doi_ngu: doiNguSach,
       nam_xem,
-      cap_quan_ly,
+      ...(cap_quan_ly !== "chu_dn" ? { cap_quan_ly } : {}),
       cam_ket_thoa_thuan, // Bắt buộc do chủ doanh nghiệp tự tích xác nhận (z.literal(true)), không tự mặc định.
     };
   } else {
@@ -154,7 +164,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       ong_chu: { ...ong_chu, dong_y_tu_nguyen: true },
       doi_ngu: doiNgu,
       nam_xem,
-      cap_quan_ly,
+      ...(cap_quan_ly !== "chu_dn" ? { cap_quan_ly } : {}),
       cam_ket_thoa_thuan: true,
     };
   }
