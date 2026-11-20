@@ -25,9 +25,38 @@ export interface YeuToCotLoi {
   chi_tiet: string;
 }
 
+export type CapQuanLy = "chu_dn" | "giam_doc" | "truong_nhom";
+
+export type NhomViec = "" | "kinh_doanh" | "van_hanh" | "tai_chinh" | "san_pham" | "marketing" | "doi_ngoai";
+
+export interface KhopNhomViec {
+  ma: string;
+  ten: string;
+  muc: "thuan_luc" | "bo_sung_goc_nhin";
+  nhan: string;
+  giai_thich: string;
+}
+
+export interface GoiYGhepCap {
+  ten_a: string;
+  ten_b: string;
+  hanh_a: string;
+  hanh_b: string;
+  ly_do: string;
+}
+
+export interface GoiYCapQuanLy {
+  ma: CapQuanLy;
+  ten: string;
+  trong_tam: string;
+  hanh_dong: string;
+}
+
 export interface ThanhVienMaTran {
   ten: string;
   vai_tro_hien_tai: string;
+  nhom_viec?: string;
+  khop_nhom_viec?: KhopNhomViec | null;
   chi_so: {
     hanh_manh: string;
     duong_doi: number;
@@ -56,9 +85,11 @@ export interface KetQuaDoanhChu {
   la_du_lieu_mau?: boolean;
   provenance: string;
   nam_xem: number;
+  cap_quan_ly?: GoiYCapQuanLy;
   ong_chu: OngChuTomTat;
   can_bang_ngu_hanh: CanBangNguHanh;
   ma_tran_phoi_hop: ThanhVienMaTran[];
+  goi_y_ghep_cap?: GoiYGhepCap[];
   goi_y_quy_mo: GoiYQuyMo;
   ranh_gioi_phap_ly: string;
 }

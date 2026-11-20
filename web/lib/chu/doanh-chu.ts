@@ -66,6 +66,23 @@ export const CHU_DOANH_CHU = {
     nam: "Nam",
     nu: "Nữ",
     nam_xem_nhan: "Năm xem nhịp công việc",
+    cap_quan_ly_nhan: "Bạn đang quản lý ở vị trí nào?",
+    cap_quan_ly_ds: [
+      { ma: "chu_dn", ten: "Chủ DN / Sáng lập" },
+      { ma: "giam_doc", ten: "Giám đốc bộ phận" },
+      { ma: "truong_nhom", ten: "Trưởng nhóm / Lead" },
+    ] as const,
+    nhom_viec_ds: [
+      { ma: "", ten: "Nhóm việc chính (tùy chọn)" },
+      { ma: "kinh_doanh", ten: "Kinh doanh & Bán hàng" },
+      { ma: "van_hanh", ten: "Vận hành & Quy trình" },
+      { ma: "tai_chinh", ten: "Tài chính & Rủi ro" },
+      { ma: "san_pham", ten: "Sản phẩm / Kỹ thuật / R&D" },
+      { ma: "marketing", ten: "Marketing & Sáng tạo" },
+      { ma: "doi_ngoai", ten: "CSKH & Đối ngoại" },
+    ] as const,
+    ghep_cap_tieu_de: "Gợi ý ghép cặp cộng sự cùng chạy dự án",
+    ghep_cap_mo_ta: "Những cặp cộng sự có trục hành bổ trợ lẫn nhau — dễ tạo lực đẩy song hành cùng điểm chốt khi phối hợp chung một đầu việc.",
   },
   radar: {
     nho: "BẢN ĐỒ CÂN BẰNG 5 HÀNH CỦA CẢ NHÓM",

@@ -6,7 +6,7 @@
 import { useRef, useState } from "react";
 import { Building2, Check, Copy, Link2, Lock, Plus, Sparkles, Trash2, UserPlus, Users } from "lucide-react";
 import { CHU_DOANH_CHU } from "@/lib/chu/doanh-chu";
-import type { KetQuaDoanhChu } from "@/lib/doanh-chu";
+import type { CapQuanLy, KetQuaDoanhChu, NhomViec } from "@/lib/doanh-chu";
 import { RadarNguHanh } from "./RadarNguHanh";
 import { MaTranHaiChieu } from "./MaTranHaiChieu";
 
@@ -20,6 +20,7 @@ interface ThanhVienTuNhapForm {
   id: string;
   ten: string;
   vai_tro: string;
+  nhom_viec: NhomViec;
   ngay: string;
   thang: string;
   nam: string;
@@ -31,6 +32,7 @@ function taoThanhVienTrong(thuTu: number): ThanhVienTuNhapForm {
     id: `tv-${Date.now()}-${thuTu}`,
     ten: "",
     vai_tro: "",
+    nhom_viec: "",
     ngay: "10",
     thang: "3",
     nam: "1992",
@@ -43,6 +45,7 @@ export function StudioDoanhChu() {
   const [cheDoDangGoi, setCheDoDangGoi] = useState<"mau" | "tu_nhap" | "doi_ngu">("tu_nhap");
   const [tabBuoc2, setTabBuoc2] = useState<"tu_nhap" | "gui_link">("tu_nhap");
   const [namXem, setNamXem] = useState<number>(namMacDinh);
+  const [capQuanLy, setCapQuanLy] = useState<CapQuanLy>("chu_dn");
 
   // Bước 1: Thông tin Ông chủ
   const [tenChu, setTenChu] = useState<string>("");
@@ -54,7 +57,7 @@ export function StudioDoanhChu() {
 
   // Bước 2A: Nhập trực tiếp (theo DC-1, checkbox cam kết chưa tích sẵn)
   const [dsTuNhap, setDsTuNhap] = useState<ThanhVienTuNhapForm[]>([
-    { id: "tv-init-1", ten: "", vai_tro: "Vận hành", ngay: "10", thang: "3", nam: "1992", gioi_tinh: "nu" },
+    { id: "tv-init-1", ten: "", vai_tro: "Vận hành", nhom_viec: "van_hanh", ngay: "10", thang: "3", nam: "1992", gioi_tinh: "nu" },
   ]);
   const [camKetThoaThuan, setCamKetThoaThuan] = useState<boolean>(false);
 
@@ -177,7 +180,7 @@ export function StudioDoanhChu() {
 
       const body =
         cheDoGoi === "mau"
-          ? { che_do: "mau" as const, nam_xem: namXem }
+          ? { che_do: "mau" as const, nam_xem: namXem, cap_quan_ly: capQuanLy }
           : cheDoGoi === "tu_nhap"
             ? {
                 che_do: "tu_nhap" as const,
@@ -185,6 +188,7 @@ export function StudioDoanhChu() {
                 doi_ngu: dsTuNhap.map((tv, idx) => ({
                   ten: tv.ten.trim() || `Cộng sự #${idx + 1}`,
                   vai_tro: tv.vai_tro.trim(),
+                  nhom_viec: tv.nhom_viec,
                   ngay: Number(tv.ngay),
                   thang: Number(tv.thang),
                   nam: Number(tv.nam),
@@ -192,6 +196,7 @@ export function StudioDoanhChu() {
                   dong_y_tu_nguyen: true as const,
                 })),
                 nam_xem: namXem,
+                cap_quan_ly: capQuanLy,
                 cam_ket_thoa_thuan: true as const,
               }
             : {
@@ -200,6 +205,7 @@ export function StudioDoanhChu() {
                 ong_chu: ongChuPayload,
                 tv_tokens: dsMaTv.map((x) => x.token),
                 nam_xem: namXem,
+                cap_quan_ly: capQuanLy,
               };
 
       const r = await fetch("/api/doanh-chu", {
@@ -280,7 +286,30 @@ export function StudioDoanhChu() {
             <h2>{CHU_DOANH_CHU.buoc_nhap.buoc_1_tieu_de}</h2>
           </div>
 
-          <div className="mt-4 grid gap-3.5 sm:grid-cols-2">
+          <div className="mt-4">
+            <label className="text-xs text-fg-muted">{CHU_DOANH_CHU.buoc_nhap.cap_quan_ly_nhan}</label>
+            <div className="mt-1.5 grid grid-cols-3 gap-1.5">
+              {CHU_DOANH_CHU.buoc_nhap.cap_quan_ly_ds.map((c) => (
+                <button
+                  key={c.ma}
+                  type="button"
+                  onClick={() => {
+                    setCapQuanLy(c.ma);
+                    setVaiTroChu(c.ten);
+                  }}
+                  className={`rounded-xl border px-2 py-2 text-xs font-medium transition ${
+                    capQuanLy === c.ma
+                      ? "border-gold/60 bg-gold/15 text-gold"
+                      : "border-line/70 bg-bg/50 text-fg-muted hover:text-fg"
+                  }`}
+                >
+                  {c.ten}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-3.5 grid gap-3.5 sm:grid-cols-2">
             <div>
               <label className="text-xs text-fg-muted">{CHU_DOANH_CHU.buoc_nhap.ten_nhan}</label>
               <input
@@ -426,7 +455,7 @@ export function StudioDoanhChu() {
                         </button>
                       )}
                     </div>
-                    <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                    <div className="mt-2 grid gap-2 sm:grid-cols-3">
                       <input
                         type="text"
                         value={tv.ten}
@@ -435,11 +464,23 @@ export function StudioDoanhChu() {
                         maxLength={60}
                         className="rounded-xl border border-line bg-surface/70 px-3 py-1.5 text-xs text-fg placeholder:text-fg-faint"
                       />
+                      <select
+                        value={tv.nhom_viec}
+                        onChange={(e) => capNhatTuNhap(tv.id, "nhom_viec", e.target.value)}
+                        aria-label="Nhóm công việc chính"
+                        className="rounded-xl border border-line bg-surface/70 px-2.5 py-1.5 text-xs text-fg"
+                      >
+                        {CHU_DOANH_CHU.buoc_nhap.nhom_viec_ds.map((nv) => (
+                          <option key={nv.ma || "none"} value={nv.ma}>
+                            {nv.ten}
+                          </option>
+                        ))}
+                      </select>
                       <input
                         type="text"
                         value={tv.vai_tro}
                         onChange={(e) => capNhatTuNhap(tv.id, "vai_tro", e.target.value)}
-                        placeholder="Vai trò (VD: Vận hành, Kinh doanh)"
+                        placeholder="Chức danh (tùy chọn)"
                         maxLength={60}
                         className="rounded-xl border border-line bg-surface/70 px-3 py-1.5 text-xs text-fg placeholder:text-fg-faint"
                       />
@@ -661,7 +702,35 @@ export function StudioDoanhChu() {
             thanhVien={ketQua.ma_tran_phoi_hop}
           />
 
+          {/* Trọng tâm theo đúng cấp bậc quản lý của người xem */}
+          {ketQua.cap_quan_ly && (
+            <section className="glass rounded-3xl p-5 sm:p-6">
+              <p className="eyebrow text-jade">{ketQua.cap_quan_ly.ten}</p>
+              <h2 className="mt-1 font-serif text-xl text-fg">{ketQua.cap_quan_ly.trong_tam}</h2>
+              <p className="mt-2 text-sm leading-relaxed text-fg-muted">{ketQua.cap_quan_ly.hanh_dong}</p>
+            </section>
+          )}
+
           <MaTranHaiChieu danhSach={ketQua.ma_tran_phoi_hop} namXem={ketQua.nam_xem} />
+
+          {/* Gợi ý ghép cặp cộng sự cùng chạy dự án */}
+          {ketQua.goi_y_ghep_cap && ketQua.goi_y_ghep_cap.length > 0 && (
+            <section className="glass rounded-3xl p-5 sm:p-6">
+              <h2 className="font-serif text-xl text-fg">{CHU_DOANH_CHU.buoc_nhap.ghep_cap_tieu_de}</h2>
+              <p className="mt-1 text-xs text-fg-muted">{CHU_DOANH_CHU.buoc_nhap.ghep_cap_mo_ta}</p>
+              <div className="mt-4 grid gap-3 md:grid-cols-3">
+                {ketQua.goi_y_ghep_cap.map((c, idx) => (
+                  <div key={idx} className="rounded-2xl border border-jade/30 bg-jade/5 p-4">
+                    <p className="text-sm font-semibold text-fg">
+                      {c.ten_a} <span className="text-jade">({c.hanh_a})</span> + {c.ten_b}{" "}
+                      <span className="text-gold">({c.hanh_b})</span>
+                    </p>
+                    <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">{c.ly_do}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Gợi ý theo quy mô doanh nghiệp */}
           <section className="glass rounded-3xl p-5 sm:p-6">

@@ -24,9 +24,13 @@ const OngChuIn = z.object({
   gioi_tinh: z.enum(["nam", "nu"]).default("nam"),
 }).strict();
 
+const NhomViecZ = z.enum(["", "kinh_doanh", "van_hanh", "tai_chinh", "san_pham", "marketing", "doi_ngoai"]).default("");
+const CapQuanLyZ = z.enum(["chu_dn", "giam_doc", "truong_nhom"]).default("chu_dn");
+
 const ThanhVienTuNhapIn = z.object({
   ten: z.string().trim().min(1).max(60),
   vai_tro: z.string().trim().max(60).default(""),
+  nhom_viec: NhomViecZ,
   ngay: z.number().int().min(1).max(31),
   thang: z.number().int().min(1).max(12),
   nam: z.number().int().min(1930).max(2025),
@@ -38,6 +42,7 @@ const Input = z.discriminatedUnion("che_do", [
   z.object({
     che_do: z.literal("mau"),
     nam_xem: z.number().int().min(2020).max(2050).default(2026),
+    cap_quan_ly: CapQuanLyZ,
   }).strict(),
   z.object({
     che_do: z.literal("doi_ngu"),
@@ -45,12 +50,14 @@ const Input = z.discriminatedUnion("che_do", [
     ong_chu: OngChuIn,
     tv_tokens: z.array(z.string().trim().min(20).max(900)).min(1).max(8),
     nam_xem: z.number().int().min(2020).max(2050),
+    cap_quan_ly: CapQuanLyZ,
   }).strict(),
   z.object({
     che_do: z.literal("tu_nhap"),
     ong_chu: OngChuIn,
     doi_ngu: z.array(ThanhVienTuNhapIn).min(1).max(8),
     nam_xem: z.number().int().min(2020).max(2050),
+    cap_quan_ly: CapQuanLyZ,
     cam_ket_thoa_thuan: z.literal(true),
   }).strict(),
 ]);
@@ -58,10 +65,10 @@ const Input = z.discriminatedUnion("che_do", [
 const DOI_NGU_MAU = {
   ong_chu: { ten: "Anh Hoàng (Mẫu)", vai_tro: "Nhà sáng lập / CEO", ngay: 15, thang: 8, nam: 1986, gioi_tinh: "nam", dong_y_tu_nguyen: true },
   doi_ngu: [
-    { ten: "Chị Minh (Mẫu)", vai_tro: "Giám đốc Vận hành", ngay: 10, thang: 3, nam: 1992, gioi_tinh: "nu", dong_y_tu_nguyen: true },
-    { ten: "Anh Tuấn (Mẫu)", vai_tro: "Trưởng phòng Kinh doanh", ngay: 22, thang: 11, nam: 1989, gioi_tinh: "nam", dong_y_tu_nguyen: true },
-    { ten: "Chị Lan (Mẫu)", vai_tro: "Kiểm soát Tài chính", ngay: 5, thang: 1, nam: 1994, gioi_tinh: "nu", dong_y_tu_nguyen: true },
-    { ten: "Anh Khoa (Mẫu)", vai_tro: "Phát triển Sản phẩm / R&D", ngay: 18, thang: 6, nam: 1996, gioi_tinh: "nam", dong_y_tu_nguyen: true },
+    { ten: "Chị Minh (Mẫu)", vai_tro: "Giám đốc Vận hành", nhom_viec: "van_hanh", ngay: 10, thang: 3, nam: 1992, gioi_tinh: "nu", dong_y_tu_nguyen: true },
+    { ten: "Anh Tuấn (Mẫu)", vai_tro: "Trưởng phòng Kinh doanh", nhom_viec: "kinh_doanh", ngay: 22, thang: 11, nam: 1989, gioi_tinh: "nam", dong_y_tu_nguyen: true },
+    { ten: "Chị Lan (Mẫu)", vai_tro: "Kiểm soát Tài chính", nhom_viec: "tai_chinh", ngay: 5, thang: 1, nam: 1994, gioi_tinh: "nu", dong_y_tu_nguyen: true },
+    { ten: "Anh Khoa (Mẫu)", vai_tro: "Phát triển Sản phẩm / R&D", nhom_viec: "san_pham", ngay: 18, thang: 6, nam: 1996, gioi_tinh: "nam", dong_y_tu_nguyen: true },
   ],
 };
 
@@ -85,9 +92,9 @@ export async function POST(req: Request): Promise<NextResponse> {
   if (parsed.data.che_do === "mau") {
     laMau = true;
     // Nhân vật mẫu giả lập 100% phía server (không phải dữ liệu cá nhân thật) → đặt cam_ket_thoa_thuan=true để qua DC-1.
-    payloadEngine = { ...DOI_NGU_MAU, nam_xem: parsed.data.nam_xem, cam_ket_thoa_thuan: true };
+    payloadEngine = { ...DOI_NGU_MAU, nam_xem: parsed.data.nam_xem, cap_quan_ly: parsed.data.cap_quan_ly, cam_ket_thoa_thuan: true };
   } else if (parsed.data.che_do === "tu_nhap") {
-    const { ong_chu, doi_ngu, nam_xem, cam_ket_thoa_thuan } = parsed.data;
+    const { ong_chu, doi_ngu, nam_xem, cap_quan_ly, cam_ket_thoa_thuan } = parsed.data;
     if (!ngayHopLe(ong_chu.nam, ong_chu.thang, ong_chu.ngay)) {
       return NextResponse.json({ error: loiChung("khong_hop_le", en) }, { status: 422 });
     }
@@ -104,10 +111,11 @@ export async function POST(req: Request): Promise<NextResponse> {
       ong_chu: { ...ong_chu, dong_y_tu_nguyen: true },
       doi_ngu,
       nam_xem,
+      cap_quan_ly,
       cam_ket_thoa_thuan, // Bắt buộc do chủ doanh nghiệp tự tích xác nhận (z.literal(true)), không tự mặc định.
     };
   } else {
-    const { ma_moi, ong_chu, tv_tokens, nam_xem } = parsed.data;
+    const { ma_moi, ong_chu, tv_tokens, nam_xem, cap_quan_ly } = parsed.data;
     if (!ngayHopLe(ong_chu.nam, ong_chu.thang, ong_chu.ngay)) {
       return NextResponse.json({ error: loiChung("khong_hop_le", en) }, { status: 422 });
     }
@@ -146,6 +154,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       ong_chu: { ...ong_chu, dong_y_tu_nguyen: true },
       doi_ngu: doiNgu,
       nam_xem,
+      cap_quan_ly,
       cam_ket_thoa_thuan: true,
     };
   }
