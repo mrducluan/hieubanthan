@@ -22,7 +22,7 @@ class ThanhVienIn(BaseModel):
     thang: int = Field(..., ge=1, le=12)
     nam: int = Field(..., ge=1930, le=2025)
     gioi_tinh: str = Field(default="nam", pattern="^(nam|nu)$")
-    dong_y_tu_nguyen: bool = Field(default=False, description="Bắt buộc true cho mỗi thành viên (Nghị định 13/2023/NĐ-CP)")
+    dong_y_tu_nguyen: bool = Field(default=False, description="Bắt buộc true cho mỗi thành viên (Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15)")
 
 
 class DoiNguIn(BaseModel):
@@ -31,6 +31,10 @@ class DoiNguIn(BaseModel):
     ong_chu: ThanhVienIn
     doi_ngu: list[ThanhVienIn] = Field(..., min_length=1, max_length=8)
     nam_xem: int = Field(..., ge=2020, le=2050)
+    cam_ket_thoa_thuan: bool = Field(
+        default=False,
+        description="Chủ doanh nghiệp xác nhận đã ký thoả thuận riêng và có đồng ý của từng thành viên trước khi nhập dữ liệu",
+    )
 
 
 def _kiem_ngay(tv: ThanhVienIn) -> None:
@@ -43,11 +47,16 @@ def _kiem_ngay(tv: ThanhVienIn) -> None:
 @router.post("/doi-ngu")
 def phan_tich_doi_ngu(inp: DoiNguIn) -> dict:
     """Phân tích Bản Đồ Cân Bằng Ngũ Hành & Ma Trận Giao Tiếp 2 chiều (không lưu dữ liệu, bắt buộc đồng ý tự nguyện)."""
+    if not inp.cam_ket_thoa_thuan:
+        raise HTTPException(
+            422,
+            detail="Chủ doanh nghiệp cần xác nhận đã có thoả thuận riêng và sự đồng ý của từng thành viên (cam_ket_thoa_thuan=true).",
+        )
     _kiem_ngay(inp.ong_chu)
     for tv in inp.doi_ngu:
         _kiem_ngay(tv)
         if not tv.dong_y_tu_nguyen:
-            raise HTTPException(422, detail="Mỗi thành viên cần tự nguyện đồng ý (dong_y_tu_nguyen=true) theo Nghị định 13/2023/NĐ-CP.")
+            raise HTTPException(422, detail="Mỗi thành viên cần tự nguyện đồng ý (dong_y_tu_nguyen=true) theo Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15.")
     kq = doanh_chu.ban_do_doi_ngu(
         inp.ong_chu.model_dump(),
         [tv.model_dump() for tv in inp.doi_ngu],
