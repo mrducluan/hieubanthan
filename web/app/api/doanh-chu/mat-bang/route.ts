@@ -1,7 +1,6 @@
 // POST /api/doanh-chu/mat-bang — Proxy Kiểm tra Mặt Bằng & Khai Trương (Huyền Không + Mệnh Quái + Hoàng Lịch, Zero-PII).
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { baoLoi } from "@/lib/giam-sat";
 import { dauNguoiGoi, goiEngineDaKiem, laBanAnh, loiChung } from "@/lib/proxy";
 
 const Input = z.object({
@@ -31,24 +30,19 @@ export async function POST(req: Request): Promise<NextResponse> {
   if (!ngayHopLe(nam_sinh, thang_sinh, ngay_sinh)) {
     return NextResponse.json({ error: loiChung("khong_hop_le", en) }, { status: 422 });
   }
-  try {
-    const res = await goiEngineDaKiem("/v1/doanh-chu/mat-bang", parsed.data, dauNguoiGoi(req), en);
-    if (!res.ok) {
-      if (res.status === 404) {
-        return NextResponse.json(
-          {
-            error: en
-              ? "The Site & Opening Checklist is being updated on the server. Please try again in a few minutes."
-              : "Tính năng Kiểm tra Mặt bằng & Khai trương đang được cập nhật trên máy chủ. Vui lòng thử lại sau vài phút.",
-          },
-          { status: 503 },
-        );
-      }
-      return NextResponse.json({ error: res.error }, { status: res.status });
+  const kq = await goiEngineDaKiem(parsed.data, "/v1/doanh-chu/mat-bang", dauNguoiGoi(req));
+  if (!kq.ok) {
+    if (kq.res.status === 404) {
+      return NextResponse.json(
+        {
+          error: en
+            ? "The Site & Opening Checklist is being updated on the server. Please try again in a few minutes."
+            : "Tính năng Kiểm tra Mặt bằng & Khai trương đang được cập nhật trên máy chủ. Vui lòng thử lại sau vài phút.",
+        },
+        { status: 503 },
+      );
     }
-    return NextResponse.json(res.du_lieu, { headers: { "cache-control": "no-store" } });
-  } catch (e) {
-    baoLoi(e, { noi: "api", duong: "/api/doanh-chu/mat-bang" });
-    return NextResponse.json({ error: loiChung("ket_noi", en) }, { status: 502 });
+    return kq.res;
   }
+  return NextResponse.json(kq.body, { headers: { "cache-control": "no-store" } });
 }
