@@ -61,3 +61,24 @@ def test_battu_thien_ly_menh_cao():
         assert muc.get("mat_tich_cuc") and muc.get("mat_tieu_cuc_can_chu_y")
         assert (muc.get("sach_ghi") or {}).get("han"), f"Thiếu sach_ghi ở {ma}"
     _kiem_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc"), cho_phep={"khắc"})
+
+
+def test_tich_hop_song_tuvi_phi_hoa_va_tra_cuu():
+    from app.kb import tuvi_phai_kb
+    from app.luangiai import tuvi_phi_hoa
+
+    d = {"tu_cung": "Mệnh", "can": "Giáp", "hoa": "Lộc", "sao": "Liêm Trinh", "den_cung": "Quan Lộc",
+         "xung_cung": "Phu Thê", "tu_hoa": False, "den_tuan_triet": []}
+    nb = tuvi_phi_hoa._noi_bat("loc_nhap", {**d, "nghia": tuvi_phi_hoa.nghia_duong(d)})
+    assert nb.get("luong_phai_672"), "Phải nối sống được luong_phai_672 vào đường bay nổi bật"
+    assert nb["luong_phai_672"]["sach_ghi"]["han"]
+    assert nb["luong_phai_672"]["mat_tieu_cuc_can_chu_y"]
+
+    th1 = tuvi_phai_kb.tra_tinh_he_trung_chau(["Tử Vi"], "Tý")
+    assert th1 and th1["ma"] == "WTZ_SS_01"
+    th3 = tuvi_phai_kb.tra_tinh_he_trung_chau(["Liêm Trinh", "Thiên Phủ"], "Thìn")
+    assert th3 and th3["ma"] == "WTZ_SS_03"
+
+    tl = tuvi_phai_kb.tra_thien_ly_menh_cao("Thất Sát")
+    assert any(r["ma"] == "that_sat_che_kiep_cuu_tai" for r in tl)
+
