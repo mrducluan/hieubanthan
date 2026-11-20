@@ -194,7 +194,7 @@ def phan_tich_nhan_su(ong_chu: dict, nhan_su: dict, nam_xem: int) -> dict:
                 if (qh_chi in ("luc_xung", "tuong_hinh") or cai_toi_manh)
                 else "Duy trì nhịp phản hồi định kỳ hàng tuần để nhân sự hiểu rõ ưu tiên của ông chủ và không làm lệch trọng tâm."
             ),
-            f"Trong năm {nam_hien} (Năm cá nhân số {ns['nam_ca_nhan']}): {nhip_vi}",
+            f"Trong năm {nam_hien} (Năm cá nhân số {ns['nam_ca_nhan'][1] if isinstance(ns['nam_ca_nhan'], (list, tuple)) else ns['nam_ca_nhan']}): {nhip_vi}",
         ]
         nhan_su_luu_y = [
             f"Chủ động phát huy sở trường cốt lõi ({vt_ten.lower()}) và báo cáo kết quả ngắn gọn theo đúng mối quan tâm của người đứng đầu.",
@@ -221,7 +221,7 @@ def phan_tich_nhan_su(ong_chu: dict, nhan_su: dict, nam_xem: int) -> dict:
                 if (qh_chi in ("luc_xung", "tuong_hinh") or cai_toi_manh)
                 else "Keep a steady weekly alignment cadence so priorities stay synchronized."
             ),
-            f"Year {nam_hien} (Personal Year {ns['nam_ca_nhan']}): {nhip_en}",
+            f"Year {nam_hien} (Personal Year {ns['nam_ca_nhan'][1] if isinstance(ns['nam_ca_nhan'], (list, tuple)) else ns['nam_ca_nhan']}): {nhip_en}",
         ]
         nhan_su_luu_y = [
             f"Lean into core value creation ({vt_ten}) and communicate outcomes concisely.",
