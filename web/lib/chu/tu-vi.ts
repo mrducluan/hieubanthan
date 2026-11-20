@@ -348,7 +348,7 @@ export const CHU_TU_VI_UI = {
   "ph.chinh_cung": m(PT, "chính cung đó", "the same palace"),
   "ph.gap": m(PT, " · gặp {ds}", " · meets {ds}"),
   "ph.nen_lam": m(PT, "Nên làm:", "Try this:"),
-  "ph.luong_tieu_de": m(PT, "Sách gốc Lương phái (672 Tượng) · 2 chiều", "Liang School Source (672 Images) · 2-sided"),
+  "ph.luong_tieu_de": m(PT, "Theo cách đọc phái Phi tinh (Lương Nhược Du) — ban biên tập tóm ý", "Liang Ruoyu Flying Star school — editorial summary"),
   "ph.diem_sang": m(PT, "Điểm sáng:", "Strengths:"),
   "ph.nen_chu_y": m(PT, "Nên chú ý:", "Watch out:"),
   "ph.tu_soi": m(PT, "Tự soi: {cau}", "Reflect: {cau}"),

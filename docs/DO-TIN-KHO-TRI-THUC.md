@@ -104,10 +104,10 @@
 | Tử vi | `tuvi_kb.json` | doc_tung_buoc | Ban biên tập soạn |  |
 | Tử vi | `tuvi_luan_hoi_kb.json` |  | Ban biên tập soạn | lớp Luận theo câu hỏi (LH-1); tập quán dân gian ghi theo phong tục, không phải cổ thư |
 | Tử vi | `tuvi_phi_hoa_kb.json` |  | Tập quán / sách hiện đại tóm ý | phi tinh tứ hoá — trường phái hiện đại |
-| Tử vi | `tuvi_phi_hoa_luong_672.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 3: 577 mục Phi Tinh Tứ Hóa trích xuất có phép từ Lương Nhược Du (Thập Nhị Cung Lục Thất Nhị Tượng — ziwei-liang-kb) |
+| Tử vi | `tuvi_phi_hoa_luong_672.json` |  | Tập quán / sách hiện đại tóm ý | PR #320 (2026-11-20, phương án C): 576 tượng phi hoá — TÓM Ý của ban biên tập theo phái Lương Nhược Du (sách hiện đại còn bản quyền); không nguyên văn, giữ trang để đối chiếu |
 | Tử vi | `tuvi_sach_ghi.json` |  | Có nguyên văn đối chiếu | SX-C: 434 câu Toàn Thư quyển 3 (sao × cung) khớp kho nguồn; lời Việt là tóm ý đã nói giảm (A / B / C) |
 | Tử vi | `tuvi_sao_luu_kb.json` |  | Tập quán / sách hiện đại tóm ý |  |
-| Tử vi | `tuvi_trung_chau_60_tinh_he.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 3: 60/60 Tinh Hệ Trung Châu trích xuất có phép từ Vương Đình Chi (Trung Châu Phái Thâm Tạo Giảng Nghĩa — ziwei-zhongzhou-kb) |
+| Tử vi | `tuvi_trung_chau_60_tinh_he.json` |  | Tập quán / sách hiện đại tóm ý | PR #320 (2026-11-20, phương án C): 60 tinh hệ — TÓM Ý của ban biên tập theo Trung Châu phái (Vương Đình Chi, sách hiện đại còn bản quyền); không nguyên văn, giữ trang |
 | Tử vi | `tuvi_tu_van_thai_tue.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 4: 6 nguyên tắc cốt lõi Tử Vân (Thái Tuế Nhập Quái · Tam Đại Tiên Hậu Thiên · Giáp Cung — ziwei-ziyun-kb) |
 | Tử vi | `tuvi_y_bo_sung.json` |  | Tập quán / sách hiện đại tóm ý | rút ý lời giảng hiện đại, viết lại (TV-YBS) |
 | Kinh Dịch | `bo_sung_que.json` |  | Ban biên tập soạn |  |

@@ -75,7 +75,8 @@ export function PhiHoaXem({ d, onChonCung, onHoi }: { d: PhiHoaOutputT; onChonCu
                 {n.ghi_chu_tuan_triet && <p className="text-xs text-fg-faint">{n.ghi_chu_tuan_triet}</p>}
                 {n.luong_phai_672 && (
                   <details className="rounded-xl border border-gold/25 bg-gold/5 p-3 text-xs">
-                    <summary className="cursor-pointer font-medium text-gold">{t("ph.luong_tieu_de")}</summary>
+                    <summary className="cursor-pointer font-medium text-gold">{n.luong_phai_672.sach_ghi?.nhan ?? t("ph.luong_tieu_de")}</summary>
+                    {n.luong_phai_672.sach_ghi?.y_chinh && <p className="mt-2 text-sm leading-relaxed text-fg">{n.luong_phai_672.sach_ghi.y_chinh}</p>}
                     {n.luong_phai_672.sach_ghi?.trang && (
                       <p className="mt-2 text-[11px] text-fg-faint">— {n.luong_phai_672.nguon ?? "Liang Ruoyu"} ({n.luong_phai_672.sach_ghi.trang})</p>
                     )}

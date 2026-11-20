@@ -39,8 +39,8 @@ def test_tuvi_luong_672_tuong():
     assert kb["tong_so_tuong"] == len(kb["tuong"]) >= 570
     assert set(kb["quy_tac_hai_chieu"].keys()) == {"Lộc", "Quyền", "Khoa", "Kỵ"}
     assert "Mệnh|Lộc|Quan Lộc" in kb["tuong"]
-    assert kb["tuong"]["Mệnh|Lộc|Quan Lộc"]["sach_ghi"]["han"]
-    _kiem_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc", "tuong"))
+    assert kb["tuong"]["Mệnh|Lộc|Quan Lộc"]["y_chinh"]          # PR #320: chỉ còn lời tóm ý (không nguyên văn)
+    _kiem_giong_van(p, ("source_id", "school_id", "sach_goc"))
 
 
 def test_tuvi_trung_chau_60_tinh_he():
@@ -49,8 +49,8 @@ def test_tuvi_trung_chau_60_tinh_he():
     assert kb["tong_so_tinh_he"] == len(kb["tinh_he"]) == 60
     for th in kb["tinh_he"]:
         assert th["ma"].startswith("WTZ_SS_")
-        assert th["sach_ghi"]["han"]
-    _kiem_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc", "tinh_he"))
+        assert th["y_chinh"] and "sach_ghi" not in th          # PR #320: chỉ còn lời tóm ý (không nguyên văn)
+    _kiem_giong_van(p, ("source_id", "school_id", "sach_goc"))
 
 
 def test_battu_thien_ly_menh_cao():

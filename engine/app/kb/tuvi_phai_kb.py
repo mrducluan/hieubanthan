@@ -11,11 +11,6 @@ _SAO_VI_HAN = {
     "Thất Sát": "七殺", "Phá Quân": "破軍",
 }
 
-_CHI_VI_HAN = {
-    "Tý": "子", "Sửu": "丑", "Dần": "寅", "Mão": "卯", "Thìn": "辰", "Tỵ": "巳",
-    "Ngọ": "午", "Mùi": "未", "Thân": "申", "Dậu": "酉", "Tuất": "戌", "Hợi": "亥",
-}
-
 _THAP_THAN_RULE = {
     "Thất Sát": "that_sat_che_kiep_cuu_tai",
     "Thực Thần": "thuc_than_tuoc_tho",
@@ -39,8 +34,13 @@ def _thien_ly() -> dict:
     return doc("battu_thien_ly_menh_cao.json")
 
 
+NHAN_LUONG = "Theo cách đọc phái Phi tinh (Lương Nhược Du) — ban biên tập tóm ý"
+NHAN_TRUNG_CHAU = "Theo Tử vi Trung Châu phái (Vương Đình Chi) — ban biên tập tóm ý"
+
+
 def tra_phi_hoa_luong(tu_cung: str, hoa: str, den_cung: str | None) -> dict | None:
-    """Tra 1 tượng trong bộ 672 Tượng của Lương Nhược Du (kèm quy tắc 2 chiều của Tứ Hóa tương ứng)."""
+    """Tra 1 tượng phi hoá theo phái Lương Nhược Du. KB là lời TÓM Ý của ban biên tập (sách hiện đại còn bản quyền — không
+    giữ nguyên văn, PR #320): trả `y_chinh` + lĩnh vực + hướng + trang để đối chiếu, kèm quy tắc hai chiều của Hoá."""
     if not den_cung:
         return None
     kb = _luong()
@@ -49,35 +49,38 @@ def tra_phi_hoa_luong(tu_cung: str, hoa: str, den_cung: str | None) -> dict | No
         return None
     qt = (kb.get("quy_tac_hai_chieu") or {}).get(hoa) or {}
     return {
-        "sach_ghi": muc.get("sach_ghi"),
+        "y_chinh": muc.get("y_chinh"),
+        "linh_vuc": list(muc.get("linh_vuc") or []),
+        "huong": muc.get("huong"),
+        "trang": muc.get("trang"),
         "mat_tich_cuc": qt.get("mat_tich_cuc"),
         "mat_tieu_cuc_can_chu_y": qt.get("mat_tieu_cuc_can_chu_y"),
-        "nguon": "Lương Nhược Du — Thập Nhị Cung Lục Thất Nhị Tượng",
+        "nhan": NHAN_LUONG,
+        "nguon": "Lương Nhược Du — Thập nhị cung lục thất nhị tượng (tóm ý)",
     }
 
 
 def tra_tinh_he_trung_chau(chinh_tinh: list[str], chi: str) -> dict | None:
-    """Khớp chính tinh + Địa Chi cung Mệnh vào đúng 1 trong 60 Tinh Hệ Trung Châu của Vương Đình Chi."""
-    chi_h = _CHI_VI_HAN.get(chi)
-    if not chi_h or not chinh_tinh:
+    """Khớp chính tinh (tên Việt) + địa chi cung Mệnh (tên Việt) vào đúng 1 trong 60 tinh hệ Trung Châu (tóm ý)."""
+    if not chi or not chinh_tinh:
         return None
-    sao_h = {_SAO_VI_HAN[s] for s in chinh_tinh if s in _SAO_VI_HAN}
-    if not sao_h:
+    sao = {s for s in chinh_tinh if s in _SAO_VI_HAN}
+    if not sao:
         return None
     kb = _trung_chau()
     nt = kb.get("nguyen_tac_luan") or {}
     for th in kb.get("tinh_he") or []:
-        cung_chi = th.get("cung_chi") or ""
-        ten_han = th.get("ten_han") or ""
-        if chi_h not in cung_chi:
-            continue
-        if all(s in ten_han for s in sao_h) and sum(1 for v in _SAO_VI_HAN.values() if v in ten_han) == len(sao_h):
+        if chi in (th.get("cung_chi") or []) and set(th.get("chinh_tinh") or []) == sao:
             return {
                 "ma": th["ma"],
                 "so": th["so"],
-                "ten_han": th["ten_han"],
-                "cung_chi": cung_chi,
-                "sach_ghi": th["sach_ghi"],
+                "ten": th["ten"],
+                "cung_chi": list(th["cung_chi"]),
+                "y_chinh": th["y_chinh"],
+                "linh_vuc": list(th.get("linh_vuc") or []),
+                "huong": th.get("huong"),
+                "trang": th.get("trang"),
+                "nhan": NHAN_TRUNG_CHAU,
                 "mat_tich_cuc": nt.get("mat_tich_cuc"),
                 "mat_tieu_cuc_can_chu_y": nt.get("mat_tieu_cuc_can_chu_y"),
             }

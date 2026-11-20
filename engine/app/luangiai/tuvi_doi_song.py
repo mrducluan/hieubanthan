@@ -670,6 +670,16 @@ def _chuong_tong_quan(ls: dict, cc: dict, hoc: tuple, da_dung: set[str]) -> dict
     ch["muc"], ch["nhan_muc"] = None, None
     ch["can_cu"] += [L("tvds.cu.menh_chu", f"Mệnh chủ {ls['menh_chu']}, Thân chủ {ls['than_chu']}, {ls['cuc']}",
                        menh=_ts(ls["menh_chu"]), than=_ts(ls["than_chu"]), cuc=_tk.ten("cuc", ls["cuc"]))]
+    # PR #320 (2026-11-20): một dòng căn cứ theo tinh hệ cung Mệnh của Trung Châu phái (Vương Đình Chi — sách hiện đại còn
+    # bản quyền, KB chỉ giữ lời tóm ý của ban biên tập). Chỉ bản Việt; không đổi mức, không thành hộp.
+    # Bản Anh giữ cùng số dòng (khung dữ kiện vi ↔ en) nhưng chỉ nêu số tinh hệ — lời tóm ý chỉ có bản Việt.
+    from app.kb import tuvi_phai_kb  # noqa: PLC0415
+    menh = next((c for c in ls["cung"] if c["ten"] == "Mệnh"), None)
+    th = tuvi_phai_kb.tra_tinh_he_trung_chau([s["ten"] for s in menh["chinh_tinh"]], menh.get("chi")) if menh else None
+    if th:
+        ch["can_cu"].append(f"{th['nhan']} — tinh hệ {th['ten']}: {th['y_chinh']}" if ngon_ngu.la_viet() else
+                            f"Zhongzhou school (Wang Tingzhi) — Life-palace star group no. {th['so']} "
+                            "(editorial summary available in Vietnamese)")
     return ch
 
 
