@@ -75,6 +75,23 @@ def _la(ma: str) -> dict:
     return x
 
 
+_GREER_CACHE: dict | None = None
+
+
+def _greer_nguoc(ma: str) -> dict | None:
+    """Đợt 2B — tải chiều sâu Lá Ngược (22 Ẩn Chính) từ Mary K. Greer (2002)."""
+    from app.ngon_ngu import la_viet  # noqa: PLC0415
+    if not la_viet():
+        return None
+    global _GREER_CACHE
+    if _GREER_CACHE is None:
+        import json as _json
+        from pathlib import Path as _Path
+        p = _Path(__file__).resolve().parents[1] / "kb" / "data" / "tarot_greer_nguoc.json"
+        _GREER_CACHE = _json.loads(p.read_text("utf-8")).get("la", {}) if p.exists() else {}
+    return _GREER_CACHE.get(ma)
+
+
 def _ten(l: dict, nguoc: bool) -> str:
     return f"{l['ten']}{L('tarot.nguoc_hau_to', ' (ngược)') if nguoc else ''}"
 
@@ -200,7 +217,15 @@ def _hop_la(v: dict, tb: dict, linh_vuc: str | None, pt: dict) -> dict:
         can_cu.append(L("tarot.can_cu.pham_gia", "Phẩm giá nguyên tố (Book T): lá {nt} bên cạnh {ke} → {suc}.", nt=_ten_nt(l['nguyen_to']), ke=ke, suc=_suc_chu(suc['suc'])))
     can_cu += _can_cu_phai(l)
     if nguoc:
-        can_cu.append(L("tarot.can_cu.la_nguoc", "Lá ngược đọc theo lối Waite (tính chất bị chặn / hướng vào trong); Marseille và Thoth không dùng lá ngược."))
+        gr = _greer_nguoc(l["id"])
+        if gr:
+            doan.append(f"{gr['mat_tieu_cuc_can_chu_y']} {gr['huong_chuyen_hoa']}")
+            sg = gr.get("sach_ghi") or {}
+            can_cu.append(L("tarot.can_cu.la_nguoc_greer",
+                            "Lá ngược theo Mary K. Greer (2002, {tr}): “{trich}”",
+                            tr=sg.get("trang", ""), trich=sg.get("trich", "")))
+        else:
+            can_cu.append(L("tarot.can_cu.la_nguoc", "Lá ngược đọc theo lối Waite (tính chất bị chặn / hướng vào trong); Marseille và Thoth không dùng lá ngược."))
     can_cu.append(L("tarot.can_cu.muc_hop", "Mức của hộp = lá này nghiêng về {ng} với câu 'có nên / có thành không' (lối đọc có – không của Waite), "
                     "không tính theo sức lá bên cạnh ({suc}).", ng=_ten_ng(ng), suc=_suc_chu(suc['suc'])))
     return kh.hop(_LOAI_SAC[sac], f"{vt['ten']}: {_ten(l, nguoc)}", " ".join(doan), huong_xu_ly=l["viec"], can_cu=can_cu,
