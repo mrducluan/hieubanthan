@@ -316,12 +316,25 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
         for c in b["cung"]
     ]
     tm = hk.thanh_mon(b["van"], toa)
+    if ngon_ngu.la_viet():
+        tm_ra = {**tm, **({"y": kb["thanh_mon"]} if kb.get("thanh_mon") else {})}
+    else:
+        _q_en = {"Khảm": "Kan", "Cấn": "Gen", "Chấn": "Zhen", "Tốn": "Xun", "Ly": "Li", "Khôn": "Kun", "Đoài": "Dui", "Càn": "Qian"}
+        _h_en = {"Bắc": "North", "Đông Bắc": "Northeast", "Đông": "East", "Đông Nam": "Southeast",
+                 "Nam": "South", "Tây Nam": "Southwest", "Tây": "West", "Tây Bắc": "Northwest"}
+        import unicodedata as _ud  # noqa: PLC0415
+        _ascii = lambda s: _ud.normalize("NFD", s).encode("ascii", "ignore").decode("ascii").replace("Đ", "D").replace("đ", "d")
+        def _en_slot(x: dict) -> dict:
+            return {**x, "cung": _q_en.get(x["cung"], _ascii(x["cung"])), "phuong": _h_en.get(x["phuong"], _ascii(x["phuong"])), "son": _ascii(x["son"])}
+        tm_ra = {**tm, "toa": _ascii(tm["toa"]), "huong": _ascii(tm["huong"]),
+                 "chinh": _en_slot(tm["chinh"]), "phu": _en_slot(tm["phu"]),
+                 "y": {"ten": "Castle Gate (Cheng Men)", "mo_ta": "Adjacent palace to the Facing sector checked against the ruling period star."}}
     return {
         "engine_version": ENGINE_VERSION, **b,
         "cung": cung_chi_tiet,
         "cuc_y": kb["cuc"][b["cuc"]],
         "to_hop": [{**t, **kb["to_hop"][t["ma"]]} for t in b["to_hop"]],
-        "thanh_mon": {**tm, **({"y": kb["thanh_mon"]} if kb.get("thanh_mon") else {})},
+        "thanh_mon": tm_ra,
         "sao_y": kb["sao"],
         "luu_nien": hk.luu_nien(nam_xem),
         "luu_y": kb["luu_y"], "nguon": kb["_nguon"], "trang_thai": kb["trang_thai"],
