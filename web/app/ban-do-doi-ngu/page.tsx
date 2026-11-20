@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: CHU_DOANH_CHU.meta.tieu_de,
   description: CHU_DOANH_CHU.meta.mo_ta,
   alternates: { canonical: "/ban-do-doi-ngu" },
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 };
 
 export default function Page() {

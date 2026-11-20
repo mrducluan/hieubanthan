@@ -134,7 +134,7 @@ export function StudioDoanhChu() {
     setLoi("");
     const tok = oDanMa.trim();
     if (!tok.startsWith("dc1.") || tok.length < 30) {
-      setLoi("Mã xác nhận phải bắt đầu bằng dc1. (do cộng sự tạo từ liên kết mời ở trên).");
+      setLoi("Mã bảo mật chưa đúng định dạng — bạn nhớ chép trọn vẹn đoạn mã cộng sự gửi lại từ liên kết mời ở trên.");
       return;
     }
     if (dsMaTv.some((x) => x.token === tok)) {
