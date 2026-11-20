@@ -367,34 +367,8 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
 # --------------------------------------------------------------------------- #
 # SEO-F — trang "tuổi X hợp hướng nào" (92 trang: năm 1960–2005 × nam/nữ)
 # --------------------------------------------------------------------------- #
-@router.get("/tuoi")
-def api_tuoi_danh_sach() -> dict:
-    return {"engine_version": ENGINE_VERSION, "trang": pt_tuoi.danh_sach()}
-
-
-@router.get("/tuoi/{slug}")
-def api_tuoi(slug: str) -> dict:
-    k = pt_tuoi.tu_slug(slug)
-    if k is None:
-        raise HTTPException(404, detail="Không có trang tuổi này")
-    return {"engine_version": ENGINE_VERSION, **pt_tuoi.tuoi(*k)}
-
-
-# SEO-K: trang gộp nam + nữ (46 trang). Route cũ giữ để web/CMS bản trước deploy vẫn chạy trong lúc chuyển.
-@router.get("/tuoi-gop")
-def api_tuoi_gop_danh_sach() -> dict:
-    return {"engine_version": ENGINE_VERSION, "trang": pt_tuoi.danh_sach_gop()}
-
-
-@router.get("/tuoi-gop/{slug}")
-def api_tuoi_gop(slug: str) -> dict:
-    nam = pt_tuoi.tu_slug_gop(slug)
-    if nam is None:
-        raise HTTPException(404, detail="Không có trang tuổi này")
-    return {"engine_version": ENGINE_VERSION, **pt_tuoi.tuoi_gop(nam)}
-
-
-# AUD-Q2: 8 trang cung phi + bảng năm sinh (thay 46 trang năm; route tuoi-gop giữ cho bản web cũ trong lúc deploy).
+# AUD-Q2: 8 trang cung phi + bảng năm sinh (thay 46 trang năm). RS-3 (2026-11-20): bỏ route /tuoi, /tuoi-gop (chỉ giữ cho
+# lúc deploy lệch AUD-Q2; web không gọi nữa). Hàm `phongthuy_tuoi.tuoi / tuoi_gop` vẫn dùng cho test + script đo.
 @router.get("/cung-phi")
 def api_cung_phi_danh_sach() -> dict:
     return {"engine_version": ENGINE_VERSION, "cung": pt_tuoi.danh_sach_cung(), "tuoi": pt_tuoi.muc_luc_tuoi()}

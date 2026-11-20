@@ -160,7 +160,7 @@ export function XemNgayTot({ banDau, thang, lichAm }: { banDau: NgayTot; thang: 
     <div className="space-y-5">
       <TheNgay d={d} />
       <ChonNgay dsViec={banDau.danh_sach_viec} tu={banDau.ngay >= homNay ? banDau.ngay : homNay} tuoi={tuoi} />
-      <ChonNgayNhieu tu={banDau.ngay >= homNay ? banDau.ngay : homNay} />
+      <ChonNgayNhieu tu={banDau.ngay >= homNay ? banDau.ngay : homNay} dsViec={banDau.danh_sach_viec} />
       {lichAm && !en ? <LichAmNam d={lichAm} homNay={homNay} chon={banDau.ngay} dangXem={banDau.ngay} lienKet />
         : thang && <LichThang t={thang} chon={banDau.ngay} />}
       <CuoiBaiDoc moDun="xem_ngay" cauHoi={c("cuoi.hoi")} khongCta={en} />

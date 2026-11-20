@@ -65,17 +65,12 @@ def test_pham_vi_va_danh_sach():
         pt_tuoi.tuoi(1929, "nam")
 
 
-def test_api():
+def test_route_cu_da_bo():
+    """RS-3 (2026-11-20): /v1/phongthuy/tuoi[-gop] chỉ còn cho lúc deploy lệch AUD-Q2 — đã bỏ; trang cung phi thay."""
     c = TestClient(app)
-    r = c.get("/v1/phongthuy/tuoi/tuoi-1990-nam")
-    assert r.status_code == 200 and r.json()["menh_quai"]["quai"] == "Khảm"
-    assert r.json()["trang_thai"] and r.json()["nguon"]
-    assert c.get("/v1/phongthuy/tuoi/tuoi-1800-nam").status_code == 404
-    # Chủ dự án chốt 1960–2005 (người tìm hướng nhà/xây nhà; bỏ hai đầu ít người tìm)
-    assert c.get("/v1/phongthuy/tuoi/tuoi-1959-nam").status_code == 404
-    assert c.get("/v1/phongthuy/tuoi/tuoi-2006-nu").status_code == 404
-    ds = c.get("/v1/phongthuy/tuoi").json()["trang"]
-    assert len(ds) == 92 and {"slug", "tieu_de", "nam", "gioi_tinh", "quai"} <= set(ds[0])
+    for d in ("/v1/phongthuy/tuoi", "/v1/phongthuy/tuoi/tuoi-1990-nam", "/v1/phongthuy/tuoi-gop", "/v1/phongthuy/tuoi-gop/tuoi-1990"):
+        assert c.get(d).status_code == 404, d
+    assert c.get("/v1/phongthuy/cung-phi").status_code == 200
 
 
 def test_tro_toi_trang_menh_gi():
@@ -114,11 +109,3 @@ def test_gop_danh_sach_46_va_slug():
     assert pt_tuoi.tu_slug_gop("tuoi-1990") == 1990
     assert pt_tuoi.tu_slug_gop("tuoi-1990-nam") == 1990        # slug cũ vẫn tra được (web 308 về bản gộp)
     assert pt_tuoi.tu_slug_gop("tuoi-1959") is None
-
-
-def test_api_gop():
-    c = TestClient(app)
-    assert len(c.get("/v1/phongthuy/tuoi-gop").json()["trang"]) == 46
-    r = c.get("/v1/phongthuy/tuoi-gop/tuoi-1990").json()
-    assert r["slug"] == "tuoi-1990" and len(r["gioi"]) == 2
-    assert c.get("/v1/phongthuy/tuoi-gop/tuoi-2050").status_code == 404

@@ -60,7 +60,6 @@ def main() -> None:
         "lam_nha": {str(n): f"/v1/tuoi/lam-nha/{nam}/{n}?gon=1" for n in ns},
         "xong_dat": {str(n): f"/v1/tuoi/xong-dat/{nam}/{n}?gon=1" for n in ns},
         "nam_tuoi": {str(n): f"/v1/nam/{nam}/tuoi/{n}?gon=1" for n in ns},
-        "tuoi_huong_cu (46 trang năm, đã gộp)": {str(n): f"/v1/phongthuy/tuoi-gop/tuoi-{n}" for n in ns},
         "cung_phi (8 trang mới)": {s: f"/v1/phongthuy/cung-phi/{s}" for _, _, s in pt.CUNG_PHI},
     }
     for ten, h in ho.items():

@@ -12,10 +12,9 @@ import { dinhNgay } from "@/lib/dinh-dang";
 import { congNgay, duongNgay, type ChonNgayNhieuKq, type NgayNhieu, type ThangGiaThu } from "@/lib/hoang-lich";
 import { useChuLich } from "./chu-lich";
 
-const VIEC = [
-  { ma: "cuoi_hoi", ten: "Cưới hỏi" }, { ma: "khai_truong", ten: "Khai trương" }, { ma: "nhap_trach", ten: "Về nhà mới" },
-  { ma: "dong_tho", ten: "Động thổ" }, { ma: "ky_ket", ten: "Ký kết" },
-];
+// RS-3: chỉ MÃ việc có vai (cô dâu, người đứng tên…) nằm ở đây; tên việc lấy từ danh sách engine (`danh_sach_viec`,
+// đúng ngôn ngữ, cùng tên với khối "Chọn ngày theo việc") — không chép tên tay.
+const MA_VIEC = ["cuoi_hoi", "khai_truong", "nhap_trach", "dong_tho", "ky_ket"] as const;
 const VAI_CUOI = [
   { ma: "co_dau", ten: "Cô dâu" }, { ma: "chu_re", ten: "Chú rể" }, { ma: "bo_co_dau", ten: "Bố cô dâu" },
   { ma: "me_co_dau", ten: "Mẹ cô dâu" }, { ma: "bo_chu_re", ten: "Bố chú rể" }, { ma: "me_chu_re", ten: "Mẹ chú rể" },
@@ -72,7 +71,8 @@ function DongNgay({ n, nhan }: { n: NgayNhieu; nhan?: ThangGiaThu["nhan"] }) {
   );
 }
 
-export function ChonNgayNhieu({ tu }: { tu: string }) {
+export function ChonNgayNhieu({ tu, dsViec }: { tu: string; dsViec: { ma: string; ten: string }[] }) {
+  const VIEC = MA_VIEC.flatMap((ma) => dsViec.filter((v) => v.ma === ma));
   const { c, en, ma, thangNam } = useChuLich();
   const ten = (nhom: "v" | "r", x: { ma: string; ten: string }) => (en ? c(`nhieu.${nhom}.${x.ma}`) : x.ten);
   const [viec, setViec] = useState("cuoi_hoi");

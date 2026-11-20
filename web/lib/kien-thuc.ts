@@ -270,10 +270,6 @@ export function laSoMau(slug: string): Promise<LaSoMau | null> {
   return layTrangMot<LaSoMau>(`/v1/tuvi/la-so-mau/${encodeURIComponent(slug)}`);
 }
 
-// SEO-F → SEO-K (2026-10-21): trang "tuổi X hợp hướng nào" GỘP nam + nữ cùng năm (46 trang 1960–2005;
-// bản cũ -nam/-nu 308 về bản gộp). Engine GET /v1/phongthuy/tuoi-gop[/slug].
-export interface MucTuoiHuong { slug: string; nam: number; tieu_de: string; can_chi: string;
-  quai_nam: string; nhom_nam: string; quai_nu: string; nhom_nu: string }
 export interface HuongDuNien { huong: string; du_nien: string; y_nghia: string; dung_cho: string }
 export interface TuoiTheoGioi {
   gioi_tinh: "nam" | "nu";
@@ -281,16 +277,6 @@ export interface TuoiTheoGioi {
   huong_tot: HuongDuNien[]; huong_xau: HuongDuNien[]; bang_huong: Record<string, string>;
   goi_y: { ma: string; tieu_de: string; noi_dung: string; nguon: string; huong: string[]; du_nien: string[] }[];
   tra_loi_nhanh: string; sinh_truoc_moc: { nam_tinh: number; quai: string; nhom: string };
-}
-export interface TuoiHuong {
-  slug: string; nam: number; tieu_de: string; mo_ta: string; can_chi: string; nap_am: { ten: string; hanh: string; han: string };
-  /** SEO-J: đường dẫn trang "sinh năm X mệnh gì" (engine dựng). */
-  trang_menh?: string;
-  gioi: TuoiTheoGioi[]; huong_chung: string[];
-  moc_dau_nam: { lap_xuan: string; tet_viet: string; tet_trung: string; tet_lech: boolean };
-  sinh_truoc_moc: { nam_tinh: number; slug: string | null };
-  tra_loi_nhanh: string; hoi_dap: { hoi: string; dap: string }[]; nguon: string; luu_y: string[]; trang_thai: string;
-  ngay_dang?: string; cap_nhat?: string;
 }
 /** "huong-hop-tuoi" = trang mục lục; "tuoi-1990" = DÒNG năm trên mục lục (AUD-Q2: trang năm đã gộp theo cung phi);
  *  "cung-kham-bac"… = trang cung phi dưới mục lục. */
@@ -339,15 +325,6 @@ export async function dsCungPhi(): Promise<{ cung: MucCungPhi[]; tuoi: DongTuoiC
 export function cungPhi(slug: string, namXem?: number): Promise<CungPhi | null> {
   return SLUG_CUNG.test(slug)
     ? layTrangMot<CungPhi>(`/v1/phongthuy/cung-phi/${slug}${namXem ? `?nam_xem=${namXem}` : ""}`) : Promise.resolve(null);
-}
-/** @deprecated AUD-Q2 — trang năm đã gộp theo cung phi; chỉ còn cho route engine cũ trong lúc deploy lệch. */
-export async function dsTuoiHuong(): Promise<MucTuoiHuong[]> {
-  const d = await lay<{ trang: MucTuoiHuong[] }>("/v1/phongthuy/tuoi-gop");
-  if (!d) noStore();
-  return d?.trang ?? [];
-}
-export function tuoiHuong(slug: string): Promise<TuoiHuong | null> {
-  return SLUG_TUOI.test(slug) ? layTrangMot<TuoiHuong>(`/v1/phongthuy/tuoi-gop/${slug}`) : Promise.resolve(null);
 }
 
 // ---- EEAT-1: số trang theo chuyên gia (engine đếm từ sổ thẩm định) ----------------
