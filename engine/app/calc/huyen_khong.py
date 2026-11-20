@@ -4,8 +4,9 @@
 Tính thuần, tất định. Quy tắc phi tinh và nhận diện tổ hợp chuyển thể từ @soul-atelier/xuankong 0.3.0
 (MIT, © 2026 Soul Atelier) — đồng thời là ORACLE sinh golden 216 trạch bàn (fixtures/golden/huyen_khong.json).
 Thế quái (kiêm hướng, lệch tâm sơn > 3°): khẩu quyết thế tinh của Thẩm thị (Thẩm Thị Huyền Không Học,
-quyển 2 — cổ thư công cộng). CHƯA có oracle độc lập cho thế quái (không gói MIT nào lập bàn thế quái) →
-kết quả gắn `chua_doi_chieu_oracle`.
+quyển 2 — cổ thư công cộng). CHƯA có oracle độc lập cho thế quái (không gói MIT nào lập bàn thế quái); từ 0.1.10 bàn
+thế quái khớp các đồ bàn tham chiếu FS_SS1_CHART_* (golden `huyen_khong_tham_thi.json`) nhưng nguyên văn sách chưa có
+trong kho nguồn → API gắn `the_quai_trang_thai = chua_doi_chieu_nguyen_van` + `the_quai_ghi_chu`.
 
 Quy ước:
 - Vận tam nguyên cửu vận, mỗi vận 20 năm, Vận 1 bắt đầu 1864 (Vận 9: 2024–2043). Năm xây theo dương lịch
@@ -100,6 +101,11 @@ def _nhap_trung(tam: int, nguon: dict, the_quai: bool) -> tuple[int, bool, dict 
     """Sao nhập trung + chiều bay. Thế quái (Thẩm Thị Huyền Không Học): thay bằng thế tinh của sơn gốc, riêng
     Ngũ Hoàng (sao 5) nhập trung KHÔNG thay thế tinh (giữ 5, vì trung cung không có quẻ gốc — khớp đồ bàn
     FS_SS1_CHART_P134); thuận nghịch VẪN theo âm dương của sơn gốc."""
+    # GHI CHÚ (PR #320, ENGINE_VERSION 0.1.10): luật "sao 5 nhập trung giữ 5 trong thế quái" theo ĐỒ BÀN THAM CHIẾU
+    # FS_SS1_CHART_P134 (Vận 9 toạ Ngọ, kèm P123–124, P175 — golden fixtures/golden/huyen_khong_tham_thi.json, chép từ bộ
+    # ghi chép fengshui-xuankong-kb). Nguyên văn Thẩm Thị Huyền Không Học CHƯA có trong kho nguồn fixtures/nguon/ (PT-NG3:
+    # các bản khác nhau ở đúng chỗ này). Chủ dự án quyết GIỮ thay đổi 2026-11-20; khi có nguyên văn phải đối chiếu lại
+    # (docs/KIEM-KE-TRI-THUC-TAROT-PHONG-THUY.md mục 15). API vẫn gắn `the_quai_trang_thai = chua_doi_chieu_nguyen_van`.
     son, ad = _son_goc(tam, nguon)
     if not the_quai:
         return tam, ad == "+", None

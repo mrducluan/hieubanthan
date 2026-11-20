@@ -40,9 +40,12 @@ def test_nhantuong_bridges_va_co_thu():
         assert muc.get("mat_tich_cuc") and muc.get("mat_tieu_cuc_can_chu_y")
         sgh = muc.get("sach_ghi") or {}
         assert sgh.get("nguon") and "trich" not in sgh, f"sach_ghi sai ở {h} (TK-2: không chép nguyên văn)"
-    assert kb["tong_so_quy_tac_co_thu"] == len(kb["quy_tac_co_thu"]) == 150
+    giu, bo = kb["quy_tac_co_thu"], kb["quy_tac_khong_dua"]
+    assert kb["tong_so_quy_tac_co_thu"] == len(giu)
+    assert len(giu) + len(bo) == 150 and not {m["ma"] for m in giu} & {m["ma"] for m in bo}
+    assert all(m.get("ly_do") and set(m) == {"ma", "ly_do"} for m in bo)   # quy tắc không đưa: chỉ còn mã + lý do
     assert d4.tra_ngu_hanh_bridges("moc")["ten"].startswith("Tướng Mộc")
-    _kiem_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc", "quy_tac_co_thu"))
+    _kiem_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc", "han", "am", "chuong", "quy_tac_khong_dua"))
 
 
 def test_chitay_phuong_tay_kinh_dien():
@@ -63,7 +66,8 @@ def test_kymon_bi_kip_cuu_don_va_nhan_dien():
     assert len(kb["cuu_don"]) == 9
     for ma, muc in kb["cuu_don"].items():
         assert muc.get("mat_tich_cuc") and muc.get("mat_tieu_cuc_can_chu_y")
-        assert (muc.get("sach_ghi") or {}).get("han"), f"Thiếu chữ Hán ở {ma}"
+        sgh = muc.get("sach_ghi") or {}
+        assert sgh.get("han") and sgh.get("chuong") and not sg.kiem_muc(sgh), f"Câu sách Cửu Độn sai ở {ma}"
     _kiem_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc"))
 
     # Kiểm thử bộ nhận diện Cửu Độn trên dữ liệu cung thực tế
@@ -74,6 +78,10 @@ def test_kymon_bi_kip_cuu_don_va_nhan_dien():
     assert any(x["ma"] == "dia_don" for x in dd)
     nd = d4.tra_cuu_don_cung("Đinh", "Mậu", "Hưu", "Thái Âm", 1)
     assert any(x["ma"] == "nhan_don" for x in nd)
+    # Hiển thị: câu Hán (khớp kho nguồn) + lời Việt + nơi dẫn sách, quyển; lời đời thường ghi rõ tóm ý theo Bí Kíp.
+    for x in td:
+        assert x["sach_ghi"]["han"] and x["sach_ghi"]["loi"] and "quyển" in x["sach_ghi"]["nguon"]
+        assert "Bí Kíp" in x["dien_giai_theo"]
 
 
 def test_tuvi_tu_van_thai_tue():

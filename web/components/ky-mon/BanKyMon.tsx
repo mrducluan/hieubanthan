@@ -254,7 +254,13 @@ function ChiTietHuong({ h }: { h: HuongKM }) {
             <p className="rounded-lg border border-jade/30 bg-jade/10 p-2 leading-relaxed"><b className="text-jade">Đắc dụng:</b> {cd.mat_tich_cuc}</p>
             <p className="rounded-lg border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] p-2 leading-relaxed"><b className="text-[#f0b35c]">Nên chú ý:</b> {cd.mat_tieu_cuc_can_chu_y}</p>
           </div>
-          {cd.sach_ghi?.han && <p className="mt-2 border-l-2 border-gold/40 pl-2 text-xs text-fg-faint">{cd.sach_ghi.han} {cd.sach_ghi.nguon ? `— ${cd.sach_ghi.nguon}` : ""}</p>}
+          {cd.sach_ghi?.han && (
+            <p className="mt-2 border-l-2 border-gold/40 pl-2 text-xs text-fg-faint">
+              {cd.sach_ghi.loi && <span className="block text-fg-muted">Sách xưa ghi: {cd.sach_ghi.loi}</span>}
+              <span lang="zh-Hant">{cd.sach_ghi.han}</span> {cd.sach_ghi.nguon ? `— ${cd.sach_ghi.nguon}` : ""}
+            </p>
+          )}
+          {cd.dien_giai_theo && <p className="mt-1 text-xs text-fg-faint">Lời đời thường: {cd.dien_giai_theo}</p>}
         </div>
       ))}
       {h.cach.map((c) => (

@@ -16,7 +16,8 @@ export type GioTyKM = "da_ty" | "sang_ngay";
 export interface CachKM { ma: string; ten: string; loai: "cat" | "hung"; dieu_kien: string; loi: string; nen: string; ky?: string; sach: string | null; han?: string }
 export interface CuuDonKM {
   ma: string; ten: string; dieu_kien: string; nghia_doi_thuong?: string; mat_tich_cuc: string; mat_tieu_cuc_can_chu_y: string;
-  sach_ghi?: { han?: string; nguon?: string };
+  sach_ghi?: { han?: string; am?: string; loi?: string; nguon?: string };
+  dien_giai_theo?: string;
 }
 export interface HuongKM {
   cung: number; que: string; phuong: string; muc: MucKM; muc_nhan: string; noi_bat: boolean;

@@ -52,8 +52,10 @@ SO: dict[str, dict] = {
         "sao": _nv("ky_mon_co_kim_do_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem", "mỗi sao một câu «釋九星所主»"),
         "cach": _nv("ky_mon_co_kim_do_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                     "điều kiện từng cách thử bằng ví dụ «假令» của sách (tests/test_ky_mon_cach.py); lời đời thường là tóm ý")}},
-    "ky_mon_bi_kip_cuu_don.json": {"mang": "kymon", "muc": "truyen_thong",
-                                   "ghi_chu": "Đợt 4: trọn bộ Cửu Độn 2 chiều trích dẫn có phép từ Kỳ Môn Độn Giáp Bí Kíp Đại Toàn Q.21 (qimen-miji-kb)"},
+    "ky_mon_bi_kip_cuu_don.json": {"mang": "kymon", "muc": "tom_y_co_thu",
+                                   "ghi_chu": "Cửu Độn: lời đời thường tóm ý theo Kỳ Môn Độn Giáp Bí Kíp Đại Toàn q.21; câu sách đi kèm "
+                                              "(`sach_ghi`) là nguyên văn Độn Giáp Diễn Nghĩa quyển 2, khớp kho nguồn don_giap_dien_nghia.json "
+                                              "qua tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem (PR #320, 2026-11-20)"},
     # ---- Liên mảng — kho chuyển nghĩa (2026-11-18): khái niệm cổ → nghĩa đời nay theo lĩnh vực
     "chuyen_nghia_kb.json": {"mang": "chung", "muc": "bien_tap", "ghi_chu": "nghĩa đời nay do ban biên tập viết", "phan": {
         "khai_niem": _nv("ky_mon_co_kim_do_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
@@ -146,7 +148,11 @@ SO: dict[str, dict] = {
     "nhan_tuong_lieu_trang.json": {"mang": "nhantuong", **_nv("lieu_trang_tuong_phap.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                        "SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn")},
     "nhantuong_ngu_hanh_va_co_thu.json": {"mang": "nhantuong", "muc": "truyen_thong",
-                                          "ghi_chu": "Đợt 4: 5 Hình Tướng Ngũ Hành Lillian Bridges (2012) & 150 quy tắc cổ thư Nhân Tướng (face-reading-bridges-kb, physiognomy-kb)"},
+                                          "ghi_chu": "Đợt 4: 5 Hình Tướng Ngũ Hành tóm ý theo Lillian Bridges (2012, còn bản quyền — không chép nguyên văn)", "phan": {
+        "quy_tac_co_thu": _nv("lieu_trang_tuong_phap.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
+                              "PR #320 (2026-11-20): 81/150 quy tắc giữ lại, mỗi câu Hán khớp kho nguồn Liễu Trang tướng pháp / "
+                              "Thần Tướng Toàn Biên (than_tuong_toan_bien.json); lời Việt khuôn SX-C do ban biên tập viết"),
+        "quy_tac_khong_dua": {"muc": "bien_tap", "ghi_chu": "69 quy tắc không đưa ra người dùng, chỉ còn mã + lý do"}}},
     "chitay_phuong_tay_kinh_dien.json": {"mang": "nhantuong", "muc": "truyen_thong",
                                          "ghi_chu": "Đợt 4: 4 Đường Chính & 7 Gò Bàn Tay 2 chiều từ Cheiro (1916), Benham (1912) & Dale (1895) (palmistry-western-kb)"},
     "chi_tay_tay_kb.json": {"mang": "nhantuong", **_nv("chi_tay_cheiro_language_of_the_hand.json",

@@ -306,8 +306,14 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
     if ha:
         b["ha_quai"] = {"cuc": ha["cuc"], "cuc_ten": ha["cuc_ten"],
                         "cung": [{k: x[k] for k in ("cung", "son", "huong")} for x in ha["cung"]]}
-        # Đã đối chiếu trực tiếp với đồ bàn Thế Quái trong Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json).
-        b["the_quai_trang_thai"] = "da_doi_chieu_tham_thi"
+        # Thế quái khớp các đồ bàn tham chiếu FS_SS1_CHART_P134 / P123–124 / P175 (golden huyen_khong_tham_thi.json, chép từ
+        # bộ ghi chép fengshui-xuankong-kb), NHƯNG nguyên văn Thẩm Thị Huyền Không Học CHƯA có trong kho nguồn
+        # fixtures/nguon/ → vẫn gắn cờ chưa đối chiếu nguyên văn (chủ dự án giữ thay đổi sao 5, 2026-11-20; đối chiếu lại khi có sách).
+        b["the_quai_trang_thai"] = "chua_doi_chieu_nguyen_van"
+        b["the_quai_ghi_chu"] = L(
+            "pt.hk.the_quai_ghi_chu",
+            "Bàn thế quái lập theo đồ bàn tham chiếu của phái Thẩm thị (sao 5 nhập trung giữ nguyên 5); nguyên văn sách "
+            "Thẩm Thị Huyền Không Học chưa có trong kho nguồn của Hiểu Bản Thân nên còn chờ đối chiếu.")
         b["the_quai_y"] = phongthuy_kb.huyen_khong()["the_quai"]
     kb = phongthuy_kb.huyen_khong()
     nam_xem = inp.nam_xem or hk.nam_theo_lap_xuan(_bay_gio_utc())

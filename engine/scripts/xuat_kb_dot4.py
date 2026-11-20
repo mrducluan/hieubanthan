@@ -3,11 +3,9 @@
 from __future__ import annotations
 
 import json
-import sqlite3
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-PROJECTS = ROOT.parent
 OUT = ROOT / "engine" / "app" / "kb" / "data"
 
 BRIDGES_5_HANH = {
@@ -65,34 +63,14 @@ BRIDGES_5_HANH = {
 
 
 def main() -> None:
-    con = sqlite3.connect(PROJECTS / "physiognomy-kb" / "data" / "physiognomy_kb.sqlite")
-    rules = []
-    for rid, czh, cvi, jzh, jvi in con.execute(
-        "SELECT rule_id, condition_zh, condition_vi, judgment_zh, judgment_vi FROM rules ORDER BY rule_id"
-    ):
-        rules.append({
-            "ma": rid,
-            "dieu_kien_han": (czh or "").strip(),
-            "dieu_kien_vi": (cvi or "").strip(),
-            "luan_han": (jzh or "").strip(),
-            "luan_vi": (jvi or "").strip(),
-        })
-
-    doc = {
-        "_nguon": "Trích xuất có phép từ Lillian Pearl Bridges, Face Reading in Chinese Medicine (2nd Ed., 2012 — face-reading-bridges-kb) và 150 quy tắc cổ thư Nhân Tướng (Thần Tướng Toàn Biên · Thủy Kính Tướng Pháp — physiognomy-kb).",
-        "_trang_thai": "da_doi_chieu_sach_goc",
-        "source_id": "nhantuong_ngu_hanh_va_co_thu",
-        "school_id": "bridges_va_co_thu",
-        "sach_goc": [
-            {"ten": "Face Reading in Chinese Medicine (2nd Edition)", "tac_gia": "Lillian Pearl Bridges (2012)"},
-            {"ten": "Thần Tướng Toàn Biên · Thủy Kính Tướng Pháp", "tac_gia": "Viên Liễu Trang & cổ thư (physiognomy-kb)"},
-        ],
-        "ngu_hanh_bridges": BRIDGES_5_HANH,
-        "tong_so_quy_tac_co_thu": len(rules),
-        "quy_tac_co_thu": rules,
-    }
-    (OUT / "nhantuong_ngu_hanh_va_co_thu.json").write_text(json.dumps(doc, ensure_ascii=False, indent=2), "utf-8")
-    print("Wrote nhantuong_ngu_hanh_va_co_thu.json:", len(rules), "classical rules")
+    """Chỉ dựng lại phần Ngũ Hành Bridges. Phần cổ thư (`quy_tac_co_thu`, `quy_tac_khong_dua`) đã được ban biên tập soát
+    tay theo khuôn SX-C (PR #320, 2026-11-20) — giữ nguyên từ tệp hiện có, KHÔNG xuất lại từ cơ sở dữ liệu physiognomy-kb
+    (bản cũ chở lời đoán thô, chưa đối chiếu kho nguồn)."""
+    p = OUT / "nhantuong_ngu_hanh_va_co_thu.json"
+    doc = json.loads(p.read_text("utf-8"))
+    doc["ngu_hanh_bridges"] = BRIDGES_5_HANH
+    p.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", "utf-8")
+    print("Wrote nhantuong_ngu_hanh_va_co_thu.json:", len(doc.get("quy_tac_co_thu") or []), "classical rules (giữ nguyên)")
 
 
 if __name__ == "__main__":

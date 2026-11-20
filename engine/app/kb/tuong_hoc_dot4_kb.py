@@ -54,4 +54,19 @@ def tra_cuu_don_cung(can_thien: str, can_dia: str, cua: str, than: str, cung_so:
         khop.append("long_don")
     if can_thien == "Ất" and cua == "Sinh" and (can_dia == "Tân" or cung_so == 8):
         khop.append("ho_don")
-    return [{"ma": m, **kb[m]} for m in khop if m in kb]
+    return [_cuu_don_ra(m, kb[m]) for m in khop if m in kb]
+
+
+_TEN_SACH_KM = {"don_giap_dien_nghia": "Độn Giáp Diễn Nghĩa (遁甲演義)"}
+
+
+def _cuu_don_ra(ma: str, muc: dict) -> dict:
+    """Một cách Cửu Độn để hiển thị. `sach_ghi` của KB là mục SX-C (câu Hán là chuỗi con kho nguồn, nhóm A) → đổi sang dạng
+    hiển thị: câu Hán + phiên âm + lời Việt + nơi dẫn (sách, quyển). Lời đời thường tóm ý theo Bí Kíp ghi rõ ở `dien_giai_theo`."""
+    ra = {"ma": ma, **{k: v for k, v in muc.items() if k != "sach_ghi"}}
+    sg = muc.get("sach_ghi") or {}
+    if sg.get("han"):
+        noi = _TEN_SACH_KM.get(sg.get("nguon"), "sách xưa")
+        ra["sach_ghi"] = {"han": sg["han"], "am": sg.get("am"), "loi": sg.get("y"),
+                          "nguon": f"{noi}, {sg['chuong']}" if sg.get("chuong") else noi}
+    return ra

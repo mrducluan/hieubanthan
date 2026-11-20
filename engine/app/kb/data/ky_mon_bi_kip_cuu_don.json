@@ -1,6 +1,6 @@
 {
-  "_nguon": "Trích xuất có phép trọn bộ Cửu Độn từ 'Kỳ Môn Độn Giáp Bí Kíp Đại Toàn' (《奇門遁甲秘笈大全》, Quyển 21 — kho qimen-miji-kb). Diễn giải 2 chiều: thời điểm đắc dụng và điều nên chú ý khi ứng dụng.",
-  "_trang_thai": "da_doi_chieu_sach_goc",
+  "_nguon": "Cửu Độn: điều kiện và lời đời thường do ban biên tập tóm ý theo «Kỳ Môn Độn Giáp Bí Kíp Đại Toàn» (奇門遁甲秘笈大全), quyển 21; câu sách đi kèm (`sach_ghi`) lấy từ «Độn Giáp Diễn Nghĩa» (遁甲演義, Trình Đạo Sinh, đời Minh — cổ thư công cộng) quyển 2, là chuỗi con kho nguồn `fixtures/nguon/don_giap_dien_nghia.json`. Câu Hán ghi trong bản trước (dẫn Bí Kíp quyển 21) không tìm thấy trong kho nguồn nên đã thay (PR #320, 2026-11-20).",
+  "_trang_thai": "nhap_ban_bien_tap",
   "source_id": "ky_mon_bi_kip_cuu_don",
   "school_id": "ky_mon_bi_kip",
   "sach_goc": {
@@ -14,10 +14,16 @@
       "mat_tich_cuc": "Rất thuận cho dâng kế sách, gặp cấp trên, cầu chức vị, xuất hành giao dịch, mở đầu dự án lớn cần sự ủng hộ từ cấp cao.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý kiểm tra xem Bính Kỳ có nhập mộ hoặc Sinh Môn bị Môn Bách hay không: nếu phạm thì thế thuận giảm mạnh, không nên hành động vội.",
       "sach_ghi": {
-        "han": "丙合生門居丁上，便為天遁月光輝。不犯奇墓門迫號曰天遁。",
-        "nguon": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn — Quyển 21"
+        "han": "生門六丙合六丁此為天遁自分明",
+        "am": "Sinh môn lục Bính hợp lục Đinh, thử vi Thiên độn tự phân minh",
+        "y": "Cửa Sinh cùng Bính gặp Đinh: sách gọi đó là Thiên Độn.",
+        "nhom": "A",
+        "chu_de": "cong_viec",
+        "nguon": "don_giap_dien_nghia",
+        "chuong": "quyển 2"
       },
-      "nghia_doi_thuong": "Khung giờ và hướng cực thuận để trình bày đề xuất quan trọng, gặp cấp trên hoặc khởi động kế hoạch cần sự ủng hộ từ người có quyền quyết định."
+      "nghia_doi_thuong": "Khung giờ và hướng cực thuận để trình bày đề xuất quan trọng, gặp cấp trên hoặc khởi động kế hoạch cần sự ủng hộ từ người có quyền quyết định.",
+      "dien_giai_theo": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn, quyển 21 (ban biên tập tóm ý)"
     },
     "dia_don": {
       "ten": "Địa Độn",
@@ -25,10 +31,16 @@
       "mat_tich_cuc": "Rất tốt cho xây dựng nền tảng, tích lũy tài sản, ký kết kín đáo, bảo vệ bí mật kinh doanh và an cư lập nghiệp.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: Địa Độn hợp giữ thế kín và làm chắc gốc hơn là phô trương rầm rộ; nếu lộ sớm kế hoạch dễ giảm lợi thế che chở.",
       "sach_ghi": {
-        "han": "凡乙奇與開門合，下臨六己，得日精所蔽，不犯奇墓門迫者曰地遁。",
-        "nguon": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn — Quyển 21"
+        "han": "開門六乙合六己地遁如斯而已矣",
+        "am": "Khai môn lục Ất hợp lục Kỷ, Địa độn như tư nhi dĩ hĩ",
+        "y": "Cửa Khai cùng Ất gặp Kỷ: sách gọi đó là Địa Độn.",
+        "nhom": "A",
+        "chu_de": "cong_viec",
+        "nguon": "don_giap_dien_nghia",
+        "chuong": "quyển 2"
       },
-      "nghia_doi_thuong": "Rất hợp để âm thầm xây nền móng, chốt thỏa thuận kín đáo, cất giữ nguồn lực và chuẩn bị kỹ lưỡng trước khi công bố rộng rãi."
+      "nghia_doi_thuong": "Rất hợp để âm thầm xây nền móng, chốt thỏa thuận kín đáo, cất giữ nguồn lực và chuẩn bị kỹ lưỡng trước khi công bố rộng rãi.",
+      "dien_giai_theo": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn, quyển 21 (ban biên tập tóm ý)"
     },
     "nhan_don": {
       "ten": "Nhân Độn",
@@ -36,10 +48,16 @@
       "mat_tich_cuc": "Rất thuận cho hòa giải, đàm phán nhân sự, kết giao quý nhân, thương lượng hợp tác đôi bên cùng có lợi và cầu sự êm thấm.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: Nhân Độn thiên về mưu lược mềm và kiên nhẫn lắng nghe; nếu dùng thái độ cứng rắn đối đầu sẽ phá mất khí hòa của cách cục.",
       "sach_ghi": {
-        "han": "丁共休門合太陰，人遁星精藉照臨。",
-        "nguon": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn — Quyển 21"
+        "han": "休門六丁共太隂欲求人遁無過此",
+        "am": "Hưu môn lục Đinh cộng Thái Âm, dục cầu Nhân độn vô quá thử",
+        "y": "Cửa Hưu, Đinh cùng thần Thái Âm: sách nói muốn tìm Nhân Độn thì không ngoài thế này.",
+        "nhom": "A",
+        "chu_de": "cong_viec",
+        "nguon": "don_giap_dien_nghia",
+        "chuong": "quyển 2"
       },
-      "nghia_doi_thuong": "Thuận lợi cho việc nói chuyện mềm mỏng, hòa giải khúc mắc, đàm phán nhân sự và tìm người cộng sự đáng tin cậy."
+      "nghia_doi_thuong": "Thuận lợi cho việc nói chuyện mềm mỏng, hòa giải khúc mắc, đàm phán nhân sự và tìm người cộng sự đáng tin cậy.",
+      "dien_giai_theo": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn, quyển 21 (ban biên tập tóm ý)"
     },
     "than_don": {
       "ten": "Thần Độn",
@@ -47,10 +65,16 @@
       "mat_tich_cuc": "Lợi cho ra mắt sản phẩm, mở rộng tầm ảnh hưởng, thực hiện chiến dịch truyền thông lớn và tạo thanh thế dẫn dắt thị trường.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: khí Cửu Thiên rất mạnh và bay cao nên cần gắn với kế hoạch thực thi cụ thể, tránh chỉ dừng ở khẩu hiệu lớn mà hụt lực hậu cần.",
       "sach_ghi": {
-        "han": "凡丙奇與生門下臨九天之位，得神靈所蔽。",
-        "nguon": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn — Quyển 21"
+        "han": "丙竒與生門下臨九天之位得神靈所蔽",
+        "am": "Bính kỳ dữ Sinh môn hạ lâm Cửu Thiên chi vị, đắc thần linh sở tế",
+        "y": "Bính cùng cửa Sinh đến chỗ thần Cửu Thiên: sách gọi là được thần linh che chở (Thần Độn).",
+        "nhom": "A",
+        "chu_de": "cong_viec",
+        "nguon": "don_giap_dien_nghia",
+        "chuong": "quyển 2"
       },
-      "nghia_doi_thuong": "Thời điểm tốt để tạo tiếng vang, ra mắt sản phẩm hoặc dẫn dắt đội nhóm theo một tầm nhìn lớn — nhớ đi kèm kế hoạch thực thi sát đất."
+      "nghia_doi_thuong": "Thời điểm tốt để tạo tiếng vang, ra mắt sản phẩm hoặc dẫn dắt đội nhóm theo một tầm nhìn lớn — nhớ đi kèm kế hoạch thực thi sát đất.",
+      "dien_giai_theo": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn, quyển 21 (ban biên tập tóm ý)"
     },
     "quy_don": {
       "ten": "Quỷ Độn",
@@ -58,10 +82,16 @@
       "mat_tich_cuc": "Thích hợp cho khảo sát thị trường kín đáo, nghiên cứu đối thủ hợp pháp, củng cố nội bộ và chuẩn bị phương án dự phòng trong im lặng.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: tránh biến sự kín đáo thành mập mờ thiếu minh bạch trong nội bộ đội ngũ; mọi quyết định quan trọng vẫn cần văn bản rõ ràng.",
       "sach_ghi": {
-        "han": "凡丁奇下臨九地與休門合，得鬼神隱匿之蔽。",
-        "nguon": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn — Quyển 21"
+        "han": "鬼遁取丁竒與休門相合下臨九地之位",
+        "am": "Quỷ độn thủ Đinh kỳ dữ Hưu môn tương hợp hạ lâm Cửu Địa chi vị",
+        "y": "Đinh cùng cửa Hưu đến chỗ thần Cửu Địa: sách gọi đó là Quỷ Độn.",
+        "nhom": "A",
+        "chu_de": "cong_viec",
+        "nguon": "don_giap_dien_nghia",
+        "chuong": "quyển 2"
       },
-      "nghia_doi_thuong": "Hợp cho việc quan sát thị trường âm thầm, chuẩn bị phương án dự phòng và củng cố nội bộ trong yên lặng."
+      "nghia_doi_thuong": "Hợp cho việc quan sát thị trường âm thầm, chuẩn bị phương án dự phòng và củng cố nội bộ trong yên lặng.",
+      "dien_giai_theo": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn, quyển 21 (ban biên tập tóm ý)"
     },
     "phong_don": {
       "ten": "Phong Độn",
@@ -69,10 +99,16 @@
       "mat_tich_cuc": "Rất hợp cho truyền thông lan tỏa nhanh, nắm bắt xu hướng mới, di chuyển linh hoạt và mở rộng mạng lưới phân phối.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: thế gió đổi chiều nhanh; khi đã thuận gió cần chốt mục tiêu rõ ràng kẻo bị cuốn theo trào lưu ngắn hạn.",
       "sach_ghi": {
-        "han": "風遁則日開臨於巽，此九遁之列名，是兵家之秘。",
-        "nguon": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn — Tổng Tự & Quyển 21"
+        "han": "天上六乙合三門下臨巽宫風遁矣",
+        "am": "Thiên thượng lục Ất hợp tam môn hạ lâm Tốn cung, Phong độn hĩ",
+        "y": "Ất trên thiên bàn hợp một trong ba cửa tốt rồi đến cung Tốn: sách gọi là Phong Độn.",
+        "nhom": "A",
+        "chu_de": "cong_viec",
+        "nguon": "don_giap_dien_nghia",
+        "chuong": "quyển 2"
       },
-      "nghia_doi_thuong": "Thế gió thuận giúp truyền thông lan tỏa nhanh, di chuyển linh hoạt và mở rộng kênh tiếp cận khách hàng mới."
+      "nghia_doi_thuong": "Thế gió thuận giúp truyền thông lan tỏa nhanh, di chuyển linh hoạt và mở rộng kênh tiếp cận khách hàng mới.",
+      "dien_giai_theo": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn, quyển 21 (ban biên tập tóm ý)"
     },
     "van_don": {
       "ten": "Vân Độn",
@@ -80,10 +116,16 @@
       "mat_tich_cuc": "Thuận cho xây dựng nền tảng hỗ trợ, chăm sóc khách hàng, hợp tác nông nghiệp/bất động sản và các kế hoạch cần sự che chở bền bỉ.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: Vân Độn mang sắc thái chậm chắc; nếu quá nóng ruột đòi kết quả tức thì sẽ dễ bỏ dở ngay trước lúc thành công.",
       "sach_ghi": {
-        "han": "凡乙奇與開門合下臨坤宮不犯墓迫得雲之蔽，又曰乙奇與開門合下臨六辛。",
-        "nguon": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn — Quyển 21"
+        "han": "凡乙竒與開門合下臨坤宫不犯墓迫得雲之蔽",
+        "am": "Phàm Ất kỳ dữ Khai môn hợp hạ lâm Khôn cung, bất phạm mộ bách, đắc vân chi tế",
+        "y": "Ất cùng cửa Khai đến cung Khôn, không phạm mộ, bách: sách gọi là được mây che (Vân Độn).",
+        "nhom": "A",
+        "chu_de": "cong_viec",
+        "nguon": "don_giap_dien_nghia",
+        "chuong": "quyển 2"
       },
-      "nghia_doi_thuong": "Hợp với những việc cần sự che chở bền bỉ, chăm sóc khách hàng cũ và tích lũy từng bước vững vàng."
+      "nghia_doi_thuong": "Hợp với những việc cần sự che chở bền bỉ, chăm sóc khách hàng cũ và tích lũy từng bước vững vàng.",
+      "dien_giai_theo": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn, quyển 21 (ban biên tập tóm ý)"
     },
     "long_don": {
       "ten": "Long Độn",
@@ -91,10 +133,16 @@
       "mat_tich_cuc": "Rất tốt cho vận tải đường thủy, logistics, giao thương xa, nghiên cứu chiến lược và xử lý các tình huống cần sự linh hoạt sâu sắc.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: cung Khảm thuộc Thủy có độ biến động cao; cần kiểm tra kỹ điều khoản hợp đồng và dòng tiền trước khi xuất vốn lớn.",
       "sach_ghi": {
-        "han": "凡乙奇與休門合下臨六癸或坎宮，得龍之蔽。",
-        "nguon": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn — Quyển 21"
+        "han": "乙竒與休門相合下臨六癸或在坎得龍之蔽",
+        "am": "Ất kỳ dữ Hưu môn tương hợp hạ lâm lục Quý hoặc tại Khảm, đắc long chi tế",
+        "y": "Ất cùng cửa Hưu gặp Quý hoặc ở cung Khảm: sách gọi là được rồng che (Long Độn).",
+        "nhom": "A",
+        "chu_de": "cong_viec",
+        "nguon": "don_giap_dien_nghia",
+        "chuong": "quyển 2"
       },
-      "nghia_doi_thuong": "Thuận cho giao thương xa, vận chuyển, đàm phán linh hoạt và xử lý những bài toán cần sự khéo léo uyển chuyển."
+      "nghia_doi_thuong": "Thuận cho giao thương xa, vận chuyển, đàm phán linh hoạt và xử lý những bài toán cần sự khéo léo uyển chuyển.",
+      "dien_giai_theo": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn, quyển 21 (ban biên tập tóm ý)"
     },
     "ho_don": {
       "ten": "Hổ Độn",
@@ -102,10 +150,17 @@
       "mat_tich_cuc": "Mạnh về phòng thủ vững chắc, bảo vệ thành quả, lập quy chế kỷ luật, đàm phán vị thế cứng và giữ vững địa bàn kinh doanh.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: thế Hổ mạnh về uy lực và phòng thủ; tránh dùng thái độ quá áp đặt trong môi trường cần sự mềm dẻo sáng tạo.",
       "sach_ghi": {
-        "han": "虎得乙奇臨生門而或出於艮。",
-        "nguon": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn — Tổng Tự & Quyển 21"
+        "han": "乙竒與生門臨六辛得虎之蔽",
+        "am": "Ất kỳ dữ Sinh môn lâm lục Tân, đắc hổ chi tế",
+        "y": "Ất cùng cửa Sinh gặp Tân: sách gọi là được hổ che (Hổ Độn).",
+        "nhom": "A",
+        "chu_de": "cong_viec",
+        "nguon": "don_giap_dien_nghia",
+        "chuong": "quyển 2"
       },
-      "nghia_doi_thuong": "Mạnh về giữ vững vị thế, thiết lập kỷ luật, bảo vệ thành quả và thương lượng khi bạn cần giữ ranh giới rõ ràng."
+      "nghia_doi_thuong": "Mạnh về giữ vững vị thế, thiết lập kỷ luật, bảo vệ thành quả và thương lượng khi bạn cần giữ ranh giới rõ ràng.",
+      "dien_giai_theo": "Kỳ Môn Độn Giáp Bí Kíp Đại Toàn, quyển 21 (ban biên tập tóm ý)"
     }
-  }
+  },
+  "can_doi_chieu": true
 }

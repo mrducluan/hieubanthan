@@ -3,6 +3,16 @@
 + Mờ hóa chỉ số nhân trắc (Fuzzy Anthropometric Z-Score) + Phân loại Ngũ Hành Bridges (Nhân Tướng) & 4 Dạng Tay (Chỉ Tay).
 
 Hàm thuần, tất định, 0 GPU, 0 LLM, hỗ trợ song ngữ VI/EN sạch (không rò chữ Việt ở bản EN).
+
+GHI CHÚ ĐỘ TIN (chủ dự án giữ lớp này, 2026-11-20 — PR #320):
+- Mọi NGƯỠNG ở đây (trung bình / độ lệch của từng tỉ lệ, biên z = 0,85, công thức chấm điểm mềm 5 hình tướng, ngưỡng lòng
+  vuông 0,85 / ngón dài 0,82) và mọi con số `confidence` là do ban biên tập TỰ ĐẶT để chia nhóm — KHÔNG lấy từ sách của
+  Lillian Bridges hay sách tay phương Tây, và CHƯA hiệu chỉnh trên ảnh thật của người dùng. `confidence` là độ xa ranh giới
+  của chính các ngưỡng tự đặt, không phải xác suất đúng.
+- Lời 5 hình tướng / 4 dạng tay là tóm ý của ban biên tập (sách Bridges còn bản quyền — không chép nguyên văn).
+- Đầu ra luôn mang `do_tin = "bien_tap_tu_dat"` + `ghi_chu` (vi / en) nói đúng các điều trên.
+- Lời văn (`_NGHIA_DOI_THUONG_*`, `_DANG_TAY`) còn nằm trong tầng CALC: chuyển sang KB không gọn (hai ngôn ngữ cùng
+  bảng, test EN đọc thẳng hàm) — để nguyên, chuyển khi có đợt dọn KB Nhân tướng.
 """
 from __future__ import annotations
 
@@ -51,6 +61,17 @@ def fuzzy_zscore(val: float, mean: float, std: float, tag_thap: str, tag_vua: st
         "semantic_tag": tag,
         "confidence": round(conf, 2),
     }
+
+
+DO_TIN = "bien_tap_tu_dat"
+GHI_CHU_VI = ("Ngưỡng chia nhóm và độ tin cậy ở đây do ban biên tập Hiểu Bản Thân tự đặt, không lấy từ sách và chưa hiệu chỉnh "
+              "trên ảnh thật; chỉ để tham khảo.")
+GHI_CHU_EN = ("The grouping thresholds and confidence values here were set by the Hieuban editorial team; they do not come from "
+              "the book and have not been calibrated on real photos. For reference only.")
+
+
+def _ghi_chu() -> dict:
+    return {"do_tin": DO_TIN, "ghi_chu": GHI_CHU_VI if ngon_ngu.la_viet() else GHI_CHU_EN}
 
 
 _NGHIA_DOI_THUONG_MAT_VI = {
@@ -150,6 +171,7 @@ def cau_noi_nhan_tuong(so_do: dict) -> dict:
 
     return {
         "provenance": "bien_tap_can_doi_chieu",
+        **_ghi_chu(),
         "chi_so_fuzzy": chi_so,
         "ngu_hanh_bridges": {
             "hanh": hanh_chinh,
@@ -184,6 +206,7 @@ def cau_noi_chi_tay(so_do: dict) -> dict:
     m = _DANG_TAY[ma]
     return {
         "provenance": "bien_tap_can_doi_chieu",
+        **_ghi_chu(),
         "chi_so_fuzzy": chi_so,
         "dang_ban_tay": {
             "ma": ma,

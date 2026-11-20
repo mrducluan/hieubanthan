@@ -139,7 +139,8 @@ def test_phongthuy_theo_cung_va_dau_hieu():
 
 def test_nhan_tuong_theo_net_da_chon():
     k = sgm.nhan_tuong(["may_giao", "moi_hong", "khong_co_ma_nay"], tuoi=40)
-    assert k["so_muc"] == 2 and {m["nhom"] for m in k["nhom"][0]["muc"]} == {"A", "C"}
+    assert k["nhom"][0]["ma"] == "net" and len(k["nhom"][0]["muc"]) == 2
+    assert {m["nhom"] for m in k["nhom"][0]["muc"]} == {"A", "C"}
     assert sgm.nhan_tuong(["may_giao"], tuoi=16) is None            # chỉ có mục nhóm C → người chưa 18 không nhận gì
 
 

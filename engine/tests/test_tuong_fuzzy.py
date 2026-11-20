@@ -49,3 +49,13 @@ def test_cau_noi_chi_tay_4_dang_va_en_sach():
             kq_en = tf.cau_noi_chi_tay(sd)
             assert kq_en["dang_ban_tay"]["ma"] == ky_vong
             assert not _VIET.search(str(kq_en)), f"Rò chữ Việt ở bản EN: {kq_en}"
+
+
+def test_ghi_chu_nguong_tu_dat_ca_hai_ngon_ngu():
+    """Chủ dự án giữ lớp này (2026-11-20) với điều kiện đầu ra nói rõ ngưỡng / độ tin do ban biên tập tự đặt."""
+    sd = {"cao_rong": 1.30, "ham_ma": 0.78}
+    for kq in (tf.cau_noi_nhan_tuong(sd), tf.cau_noi_chi_tay({"rong_long": 0.9})):
+        assert kq["do_tin"] == "bien_tap_tu_dat" and "tự đặt" in kq["ghi_chu"] and "chưa hiệu chỉnh" in kq["ghi_chu"]
+    with ngon_ngu.dung("en"):
+        for kq in (tf.cau_noi_nhan_tuong(sd), tf.cau_noi_chi_tay({"rong_long": 0.9})):
+            assert "editorial" in kq["ghi_chu"] and not _VIET.search(kq["ghi_chu"])

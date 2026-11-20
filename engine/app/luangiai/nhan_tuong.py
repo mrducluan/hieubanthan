@@ -318,7 +318,7 @@ def bao_cao(tra_loi: dict | None, *, nam_sinh: dt.date | int | None = None, gioi
     kh.ap_hoc(bc, trong_so, ca_nhan)
     # SX-C: câu Thần Tướng Toàn Biên gắn với đúng các nét đã chọn (đã nói giảm; chưa đủ 18 tuổi bỏ nhóm C).
     from app.luangiai import sach_ghi_mon  # noqa: PLC0415
-    bc["sach_ghi"] = sach_ghi_mon.nhan_tuong(khop, sach_ghi_mon.tuoi_tu(nam_sinh, ngay_xem))
+    bc["sach_ghi"] = sach_ghi_mon.nhan_tuong(khop, sach_ghi_mon.tuoi_tu(nam_sinh, ngay_xem), gioi_tinh)
     return bc
 
 
