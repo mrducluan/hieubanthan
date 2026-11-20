@@ -108,6 +108,8 @@ test("Huyền Không: đánh dấu kiêm hướng → thế quái (Vận 8 toạ
   await expect(tq).toContainText("4 → 6 (thuận)");
   await expect(tq).toContainText("3 → 2 (nghịch)");
   await expect(tq).toContainText("Nếu lập hạ quái: Song tinh đáo hướng");
+  // Rà soát 2026-11-20: bàn thế quái phải kèm ghi chú "chưa đối chiếu nguyên văn" của engine.
+  await expect(tq.getByTestId("the-quai-ghi-chu")).toContainText("chờ đối chiếu");
   await expect(page.getByTestId("ban-huyen-khong").getByRole("cell", { name: /^Ly Nam: sơn tinh 1, hướng tinh 7/ })).toBeVisible();
 });
 

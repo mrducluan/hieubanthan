@@ -1,9 +1,25 @@
-// POST /api/doanh-chu/xac-nhan — nhân sự tự mở link mời trên thiết bị của mình, tự bấm đồng ý (Nghị định 13/2023/NĐ-CP)
+// POST /api/doanh-chu/xac-nhan — nhân sự tự mở link mời trên thiết bị của mình, tự bấm đồng ý (Luật BVDLCN 91/2025/QH15)
 // và nhận lại `tv_token` mã hóa AES-256-GCM (không lộ ngày sinh cho ông chủ, không lưu DB).
+import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { docLoiMoiDoiNgu, maHoaDongYThanhVien } from "@/lib/doanh-chu-ma";
-import { laBanAnh, loiChung } from "@/lib/proxy";
+import { dauNguoiGoi, laBanAnh, loiChung } from "@/lib/proxy";
+
+// Chống tạo hàng loạt mã "đã đồng ý" từ một máy: tối đa 10 mã / 10 phút mỗi người gọi trên một phiên bản máy chủ
+// (khoá = IP băm cắt ngắn, chỉ trong bộ nhớ — cùng cách /api/thanso/phan-hoi). Một người xác nhận chỉ cần một mã.
+const CUA_SO_MS = 10 * 60_000, TRAN = 10;
+const dem = new Map<string, number[]>();
+function quaTay(req: Request): boolean {
+  const ip = dauNguoiGoi(req)["x-nguoi-goi"] ?? "?";
+  const k = createHash("sha256").update(ip).digest("base64url").slice(0, 16);
+  const bay = Date.now();
+  const ds = (dem.get(k) ?? []).filter((t) => bay - t < CUA_SO_MS);
+  ds.push(bay);
+  dem.set(k, ds);
+  if (dem.size > 5000) dem.clear();
+  return ds.length > TRAN;
+}
 
 const Input = z.object({
   ma_moi: z.string().trim().min(10).max(600),
@@ -23,6 +39,12 @@ function ngayHopLe(nam: number, thang: number, ngay: number): boolean {
 
 export async function POST(req: Request): Promise<NextResponse> {
   const en = laBanAnh(req);
+  if (quaTay(req)) {
+    return NextResponse.json(
+      { error: en ? "Too many confirmations from this device. Please try again in a few minutes." : "Bạn đã xác nhận quá nhiều lần từ máy này. Thử lại sau vài phút." },
+      { status: 429 },
+    );
+  }
   const parsed = Input.safeParse(await req.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json({ error: loiChung("dau_vao", en) }, { status: 422 });

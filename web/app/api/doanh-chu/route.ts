@@ -5,15 +5,18 @@
 //     Proxy giải mã, kiểm tra đúng `nonce` & còn hạn rồi mới đặt `dong_y_tu_nguyen: true` và `cam_ket_thoa_thuan: true`.
 //   - Chế độ "tu_nhap" (theo quyết định DC-1): chủ doanh nghiệp tự nhập trực tiếp 1–8 cộng sự, BẮT BUỘC tự tích
 //     `cam_ket_thoa_thuan: true` (đã ký thoả thuận riêng & có đồng ý của từng thành viên theo Luật 91/2025/QH15)
-//     và `dong_y_tu_nguyen: true` cho từng người — proxy KHÔNG bao giờ tự mặc định true.
+//     và gửi `dong_y_tu_nguyen: true` cho từng người. Ô cam kết duy nhất trên form là lời chủ doanh nghiệp xác nhận ĐÃ có
+//     đồng ý của từng người (theo DC-1) — proxy chỉ nhận đúng giá trị true do form gửi, không tự điền.
 //   - Cổng Sao (SEC-2): đọc công tắc `luan_giai.thu_sao.doanh_chu` (mặc định TẮT → mở dùng thử; bật ở /quan-tri/cai-dat).
-import { randomUUID } from "node:crypto";
+import { createHmac } from "node:crypto";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { layCauHinh } from "@/lib/cau-hinh";
-import { chaoMungConNhan, coTaiKhoan, phienNguoiDung } from "@/lib/cua-sao";
+import { baoLoi } from "@/lib/giam-sat";
+import { biMat, chaoMungConNhan, coTaiKhoan, phienNguoiDung } from "@/lib/cua-sao";
 import { docLoiMoiDoiNgu, giaiMaDongYThanhVien } from "@/lib/doanh-chu-ma";
 import { dauNguoiGoi, goiEngineDaKiem, laBanAnh, loiChung } from "@/lib/proxy";
+import { khachDichVu } from "@/lib/thanh-toan/cong";
 
 const OngChuIn = z.object({
   ten: z.string().trim().max(60).default("Ông chủ"),
@@ -137,8 +140,11 @@ export async function POST(req: Request): Promise<NextResponse> {
       );
     }
     const doiNgu: Record<string, unknown>[] = [];
-    for (let i = 0; i < tv_tokens.length; i++) {
-      const tv = giaiMaDongYThanhVien(tv_tokens[i]!, moi.nonce);
+    // Một người chỉ được tính một lần: bỏ mã trùng (cùng chuỗi, hoặc cùng biệt danh + ngày sinh sau khi giải mã).
+    const daCo = new Set<string>();
+    const maDuyNhat = [...new Set(tv_tokens)];
+    for (let i = 0; i < maDuyNhat.length; i++) {
+      const tv = giaiMaDongYThanhVien(maDuyNhat[i]!, moi.nonce);
       if (!tv) {
         return NextResponse.json(
           {
@@ -149,6 +155,9 @@ export async function POST(req: Request): Promise<NextResponse> {
           { status: 422 },
         );
       }
+      const dauVet = `${tv.biet_danh.toLowerCase()}|${tv.ngay}|${tv.thang}|${tv.nam}`;
+      if (daCo.has(dauVet)) continue;
+      daCo.add(dauVet);
       doiNgu.push({
         ten: tv.biet_danh,
         vai_tro: tv.vai_tro,
@@ -172,7 +181,8 @@ export async function POST(req: Request): Promise<NextResponse> {
   // Cổng Sao SEC-2 (chỉ áp dụng cho đội ngũ thật khi quản trị bật công tắc `luan_giai.thu_sao.doanh_chu`, mặc định TẮT).
   let khoaTruSao: string | null = null;
   let phienTruSao: Awaited<ReturnType<typeof phienNguoiDung>> = null;
-  if (!laMau && !en && coTaiKhoan()) {
+  const bi_mat = biMat();
+  if (!laMau && !en && coTaiKhoan() && bi_mat) {
     const thuSao = await layCauHinh<boolean>("luan_giai.thu_sao.doanh_chu");
     if (thuSao) {
       const giaRieng = await layCauHinh<number>("luan_giai.gia_sao.doanh_chu");
@@ -204,7 +214,10 @@ export async function POST(req: Request): Promise<NextResponse> {
           { status: 402 },
         );
       }
-      const khoa = `doanh_chu:${randomUUID()}`;
+      // Khoá giao dịch = HMAC(bí mật máy chủ, đội ngũ + ngày giờ VN): bấm hai lần / xem lại cùng đội ngũ trong ngày không
+      // trừ thêm (dung_sao trả "da_dung" khi khoá đã có). Tiền tố "hoi:" để hoan_sao_hoi (0024) nhận khoá khi phải hoàn.
+      const ngay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
+      const khoa = `hoi:doanh_chu:${createHmac("sha256", bi_mat).update(`doanh_chu|${JSON.stringify(payloadEngine)}|${ngay}`).digest("hex").slice(0, 40)}`;
       const { data: d } = await phien.sb.rpc("dung_sao", { p_so: gia, p_khoa: khoa, p_ghi_chu: "Phân tích đội ngũ Doanh Chủ" });
       const kqTru = d as { ket_qua?: string; so_du?: number } | null;
       if (kqTru?.ket_qua !== "da_dung") {
@@ -222,7 +235,13 @@ export async function POST(req: Request): Promise<NextResponse> {
   const kq = await goiEngineDaKiem(payloadEngine, "/v1/doanh-chu/doi-ngu", dauNguoiGoi(req));
   if (!kq.ok) {
     if (khoaTruSao && phienTruSao) {
-      await phienTruSao.sb.rpc("hoan_sao_hoi", { p_khoa: khoaTruSao }).then(() => {}, () => {});
+      // hoan_sao_hoi chỉ chạy bằng service role, nhận user_id + khoá đầy đủ "dung:<uid>:hoi:…" (migration 0024).
+      const dv = khachDichVu();
+      const uid = phienTruSao.user.id;
+      const { error: loi } = dv
+        ? await dv.rpc("hoan_sao_hoi", { p_user_id: uid, p_khoa: `dung:${uid}:${khoaTruSao}` })
+        : { error: { code: "khong_co_service_role" } };
+      if (loi) baoLoi(new Error("hoan_sao_hoi"), { noi: "doanh_chu", ma: (loi as { code?: string }).code ?? "" });
     }
     return kq.res;
   }

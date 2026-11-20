@@ -1,5 +1,5 @@
 // Mã mời đội ngũ (HMAC-SHA256) và Mã xác nhận đồng ý của nhân sự (mã hóa AES-256-GCM) — CHỈ chạy phía server.
-// Tuân thủ Nghị định 13/2023/NĐ-CP & nguyên tắc không lưu dữ liệu ngày sinh trên DB (THIET-KE-UI §8):
+// Tuân thủ Luật BVDLCN 91/2025/QH15 & nguyên tắc không lưu dữ liệu ngày sinh trên DB (THIET-KE-UI §8):
 //   1. Ông chủ tạo mã mời gắn `nonce` riêng cho phiên đội ngũ (hạn 7 ngày).
 //   2. Nhân sự tự mở link trên thiết bị của mình, đọc phạm vi tham khảo giao tiếp và tự bấm đồng ý.
 //   3. Server mã hóa thông tin thành viên bằng AES-256-GCM (kèm AuthTag + AAD) → trả về `tv_token` ngắn.

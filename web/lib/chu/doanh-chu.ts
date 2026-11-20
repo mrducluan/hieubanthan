@@ -134,7 +134,7 @@ export const CHU_DOANH_CHU = {
     link_loi: "Liên kết mời không hợp lệ hoặc đã hết hạn sau 7 ngày. Bạn vui lòng nhờ trưởng nhóm gửi lại link mới.",
     nhom_label: "Nhóm mời bạn cùng tham gia:",
     cam_ket_1: "Kết quả chỉ dùng để hiểu phong cách làm việc, cải thiện giao tiếp và phối hợp ăn ý hơn — tuyệt đối không dùng để đánh giá nhân sự hay sàng lọc lao động.",
-    cam_ket_2: "Ngày sinh của bạn được mã hóa riêng và KHÔNG lưu vào cơ sở dữ liệu. Ngay cả người nhận mã cũng không nhìn thấy ngày sinh gốc của bạn.",
+    cam_ket_2: "Ngày sinh của bạn được mã hóa riêng và KHÔNG lưu vào cơ sở dữ liệu. Người nhận mã không thấy ngày sinh gốc, nhưng bản phân tích vẫn hiện cho trưởng nhóm con giáp, số đường đời và năm cá nhân của bạn.",
     tick_dong_y: "Tôi đã đọc rõ mục đích tham khảo giao tiếp và hoàn toàn tự nguyện tham gia.",
     biet_danh_nhan: "Tên hiển thị hoặc biệt danh (không bắt buộc dùng tên thật)",
     biet_danh_goi_y: "VD: Minh, An (Vận hành)…",

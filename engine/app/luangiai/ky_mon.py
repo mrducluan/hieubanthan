@@ -106,6 +106,9 @@ def doc_gio(ban: dict, viec: str | None = None, huong_hop: list[str] | None = No
             cd = tuong_hoc_dot4_kb.tra_cuu_don_cung(
                 o["thien_ban"], o["dia_ban"], cua["ten"].replace(" Môn", ""), than["ten"], k
             )
+            # Vân / Phong Độn đã nằm trong danh sách cách của hướng (calc/ky_mon_cach, cùng điều kiện) → không hiện hai lần.
+            da_co = {c["ma"] for c in muc_huong["cach"]}
+            cd = [x for x in cd if x["ma"] not in da_co]
             if cd:
                 muc_huong["cuu_don"] = cd
         huong.append(muc_huong)

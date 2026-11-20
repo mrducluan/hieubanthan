@@ -14,7 +14,7 @@ const PHONG_MUC: Record<MucPhoiHop, { badge: string; border: string; dot: string
     border: "border-jade/50 bg-jade/5",
     dot: "bg-jade",
   },
-  bo_tro_on_dinh: {
+  bo_tro_tot: {
     badge: "border-moon/40 bg-moon/15 text-moon",
     border: "border-moon/40 bg-moon/5",
     dot: "bg-moon",
@@ -68,7 +68,7 @@ export function MaTranHaiChieu({
             [
               ["tat_ca", `${CHU_DOANH_CHU.ma_tran.loc_tat_ca} (${danhSach.length})`],
               ["bu_khuyet_cao", `${CHU_DOANH_CHU.ma_tran.loc_bu_khuyet} (${demTheoMuc("bu_khuyet_cao")})`],
-              ["bo_tro_on_dinh", `${CHU_DOANH_CHU.ma_tran.loc_bo_tro} (${demTheoMuc("bo_tro_on_dinh")})`],
+              ["bo_tro_tot", `${CHU_DOANH_CHU.ma_tran.loc_bo_tro} (${demTheoMuc("bo_tro_tot")})`],
               ["can_quy_che_ro", `${CHU_DOANH_CHU.ma_tran.loc_quy_che} (${demTheoMuc("can_quy_che_ro")})`],
             ] as [BoLoc, string][]
           ).map(([ma, nhan]) => {
@@ -105,7 +105,7 @@ export function MaTranHaiChieu({
           {/* Cột trái: Danh sách cộng sự (chọn nhanh) */}
           <div className="flex gap-2.5 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible lg:pb-0">
             {danhSachLoc.map((tv, i) => {
-              const phong = PHONG_MUC[tv.muc_phoi_hop] ?? PHONG_MUC.bo_tro_on_dinh;
+              const phong = PHONG_MUC[tv.muc_phoi_hop] ?? PHONG_MUC.bo_tro_tot;
               const selected = dangChon?.ten === tv.ten && i === (danhSachLoc[chiSoChon] ? chiSoChon : 0);
               return (
                 <button
@@ -151,7 +151,7 @@ export function MaTranHaiChieu({
                     <h3 className="font-serif text-xl text-fg">{dangChon.ten}</h3>
                     <span
                       className={`rounded-full border px-2.5 py-0.5 text-xs font-medium ${
-                        (PHONG_MUC[dangChon.muc_phoi_hop] ?? PHONG_MUC.bo_tro_on_dinh).badge
+                        (PHONG_MUC[dangChon.muc_phoi_hop] ?? PHONG_MUC.bo_tro_tot).badge
                       }`}
                     >
                       {dangChon.nhan_phoi_hop}
