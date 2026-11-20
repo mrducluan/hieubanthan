@@ -242,6 +242,13 @@ def lap(ls_ban: dict, can_nam_ban: str, can_nam_kia: str, quan_he: str = MAC_DIN
     diem = None
     if ban is not None and kia is not None:
         diem = tuvi_hai_nguoi.cham_diem(ban, kia, quan_he, vao_ban, ban_vao, trong_so=trong_so, ca_nhan=ca_nhan)
+        # RS-3: Thái Tuế nhập quái (Tử Vân, tóm ý) — chi năm người ấy đặt lên lá bạn; một dòng căn cứ của tiêu chí "chi
+        # năm" khi cung ấy có Kỵ / sát hoặc Lộc. Không đổi điểm, hộp, mã.
+        from app.luangiai import tu_van_thien_ly as tvtl  # noqa: PLC0415
+        dong_tt = tvtl.thai_tue(ls_ban, lunar.can_chi_nam(int(kia["nam_am"]))[1])
+        tc_chi = next((t for t in diem["tieu_chi"] if t["ma"] == "chi" and t.get("tinh")), None)
+        if dong_tt and tc_chi is not None:
+            tc_chi["can_cu"] = list(tc_chi["can_cu"]) + [dong_tt]
         tom.insert(0, L("tv2.ht.diem", "Điểm tham khảo: {tong}/100 — {muc}.", tong=diem["tong"], muc=diem["nhan_muc"]))
     luu_y = kb.hop_tham("luu_y")
     luu_y = [s for s in luu_y if isinstance(s, str)] if isinstance(luu_y, list) and luu_y else []

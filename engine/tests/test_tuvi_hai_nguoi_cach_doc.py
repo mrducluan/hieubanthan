@@ -117,6 +117,10 @@ def test_lap_them_hop_khong_doi_diem(hai_la):
         kq = ht.lap(a, "Canh", "Nhâm", qh, ls_kia=b, ban=ban, kia=kia)
         vao_ban = ht._duong("Nhâm", a["cung"], "người kia", True)
         ban_vao = ht._duong("Canh", b["cung"], "bạn", False)
+        # RS-3: dòng căn cứ Thái Tuế nhập quái (Tử Vân, tóm ý) nối thêm vào tiêu chí "chi" — bỏ ra rồi so; điểm giữ nguyên.
+        from app.luangiai import tu_van_thien_ly as tvtl
+        for t in kq["diem"]["tieu_chi"]:
+            t["can_cu"] = [x for x in t["can_cu"] if not x.startswith(tvtl.NHAN_TU_VAN)]
         assert kq["diem"] == hn.cham_diem(ban, kia, qh, vao_ban, ban_vao)
         assert isinstance(kq["cach_doc_them"], list)
         assert all(h["ma_mau"].startswith("ds.hai.") and h["ma_mau"].endswith("." + qh) for h in kq["cach_doc_them"])

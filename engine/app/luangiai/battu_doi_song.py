@@ -1785,7 +1785,7 @@ def dong_nam_cua(sinh: dict, ngay_xem: dt.date, ls: dict | None = None) -> list[
 
 @kh.vi_quyet_dinh
 def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = None,
-        ca_nhan: dict | None = None, ls: dict | None = None) -> dict:
+        ca_nhan: dict | None = None, ls: dict | None = None, tom_y_phai: bool = True) -> dict:
     """`sinh` = {"lich": datetime giờ lịch UTC+7, "gioi_tinh": "nam"|"nu", "gio_ty"?}. → báo cáo `doi_song_1` (chưa có
     moi_xem / phí — `toan_bo.battu` gắn)."""
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
@@ -1843,6 +1843,9 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     tgb_ra = [{k: v for k, v in g.items() if k != "thap_than"} for g in tgb]
     from app.luangiai import luu_y_mang as lym  # noqa: PLC0415
     luu_y_mang = lym.dung(ds, "battu", muc_mang={k: v.get("muc") for k, v in cm.items() if isinstance(v, dict)})
+    if tom_y_phai:    # RS-3: quy tắc Thiên Lý Mệnh Cảo (tóm ý) theo cách cục → một dòng "Vì sao nói vậy"; không đổi mức.
+        from app.luangiai import tu_van_thien_ly as tvtl  # noqa: PLC0415
+        tvtl.ap_battu(ds, pt)
     return _sach({"phien_ban": PHIEN_BAN, "phai": "tu_binh", "cot_loi": cot_loi, "thoi_gian_bieu": tgb_ra, "chuong": ds,
                   "luu_y_mang": luu_y_mang, **({"nguoi_quanh": nguoi_quanh} if nguoi_quanh else {}),
                   "ngay_xem": ngay_xem.isoformat(), **kb.meta()})
