@@ -10,9 +10,11 @@ const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
 
 const So = z.union([z.number().int().min(1).max(9), z.literal(11), z.literal(22), z.literal(33)]);
+const QuanHeZ = z.enum(["nguoi_yeu", "ban_be", "dong_nghiep", "sep", "gia_dinh"]).optional();
 const Input = z.object({
   ma: z.string().min(10).max(600),
   b: z.object({ duong_doi: So, su_menh: So.optional(), linh_hon: So.optional(), nhan_cach: So.optional() }).strict(),
+  quan_he: QuanHeZ,
 }).strict();
 
 const THU_TU = ["duong_doi", "su_menh", "linh_hon", "nhan_cach"] as const;
@@ -27,7 +29,7 @@ export async function POST(req: Request): Promise<NextResponse> {
     const r = await fetch(`${ENGINE_URL}/v1/thanso/cap-so`, {
       method: "POST",
       headers: { "content-type": "application/json", ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...dauNguoiGoi(req) },
-      body: JSON.stringify({ a, b: p.data.b }),
+      body: JSON.stringify({ a, b: p.data.b, ...(p.data.quan_he ? { quan_he: p.data.quan_he } : {}) }),
       cache: "no-store",
     });
     const body: unknown = await r.json().catch(() => null);

@@ -4,7 +4,12 @@ import { docMa } from "@/lib/ma-moi";
 import { Button } from "@/components/ui/button";
 import { NhanLoiMoi } from "./NhanLoiMoi";
 
-interface Props { params: Promise<{ ma: string }> }
+interface Props {
+  params: Promise<{ ma: string }>;
+  searchParams: Promise<{ qh?: string }>;
+}
+
+const QUAN_HE_HOP_LE = new Set(["nguoi_yeu", "ban_be", "dong_nghiep", "sep", "gia_dinh"]);
 
 export async function generateMetadata({ params: thamSo }: Props): Promise<Metadata> {
   const params = await thamSo;
@@ -20,8 +25,8 @@ export async function generateMetadata({ params: thamSo }: Props): Promise<Metad
 }
 
 // Trang người được mời (docs/THIET-KE-UI.md §6.2): teaser từ mã đã ký → nhập ngày sinh → kết quả đầy đủ.
-export default async function Page({ params: thamSo }: Props) {
-  const params = await thamSo;
+export default async function Page({ params: thamSo, searchParams: thamSoTim }: Props) {
+  const [params, sp] = await Promise.all([thamSo, thamSoTim]);
   const nd = docMa(params.ma);
   if (!nd) {
     return (
@@ -32,5 +37,6 @@ export default async function Page({ params: thamSo }: Props) {
       </div>
     );
   }
-  return <NhanLoiMoi ma={params.ma} tenMoi={nd.t} soMoi={nd.so[0] ?? 0} tuKhoa={nd.k ?? null} />;
+  const qh = sp.qh && QUAN_HE_HOP_LE.has(sp.qh) ? (sp.qh as "nguoi_yeu" | "ban_be" | "dong_nghiep" | "sep" | "gia_dinh") : "nguoi_yeu";
+  return <NhanLoiMoi ma={params.ma} tenMoi={nd.t} soMoi={nd.so[0] ?? 0} tuKhoa={nd.k ?? null} quanHeBanDau={qh} />;
 }
