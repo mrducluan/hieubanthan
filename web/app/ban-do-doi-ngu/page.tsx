@@ -2,7 +2,7 @@
 // Không lưu ngày sinh trên máy chủ → noindex như /gia-dinh.
 import type { Metadata } from "next";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
-import { StudioDoanhChu } from "@/components/doanh-chu/StudioDoanhChu";
+import { KhungDieuHanh } from "@/components/doanh-chu/KhungDieuHanh";
 import { CHU_DOANH_CHU } from "@/lib/chu/doanh-chu";
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function Page() {
         mo_ta={CHU_DOANH_CHU.dau_trang.mo_ta}
       />
       <div className="mt-6">
-        <StudioDoanhChu />
+        <KhungDieuHanh />
       </div>
     </div>
   );
