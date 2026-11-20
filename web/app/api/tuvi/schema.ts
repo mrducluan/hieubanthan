@@ -291,7 +291,7 @@ export const PhiHoaOutput = z.object({
     /** Căn cứ kỹ thuật (tên cung, sao, hoá, can) — chỉ hiện ở "Vì sao nói vậy"; lời trên thẻ là lời thường. */
     can_cu: z.array(z.string()).optional(),
     luong_phai_672: z.object({
-      sach_ghi: z.object({ han: z.string(), trang: z.string().optional() }).optional(),
+      sach_ghi: z.object({ trang: z.string().optional() }).optional(),
       mat_tich_cuc: z.string().optional(),
       mat_tieu_cuc_can_chu_y: z.string().optional(),
       nguon: z.string().optional(),

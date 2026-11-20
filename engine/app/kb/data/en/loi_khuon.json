@@ -66,7 +66,7 @@
  "tarot.can_cu.vi_tri": "Position '{vt}': {hoi}.",
  "tarot.can_cu.pham_gia": "Elemental dignities (Book T): this {nt} card sits next to {ke} → {suc}.",
  "tarot.can_cu.la_nguoc": "Reversed cards are read in the Waite manner (the quality is blocked or turned inward); Marseille and Thoth readers do not use reversals.",
- "tarot.can_cu.la_nguoc_greer": "Reversed card per Mary K. Greer (2002, {tr}): \"{trich}\"",
+ "tarot.can_cu.la_nguoc_greer": "Reversed card following Mary K. Greer (The Complete Book of Tarot Reversals, 2002, {tr}) — summarised, not quoted.",
  "tarot.can_cu.muc_hop": "The level of this box = how this card leans on a 'should I / will it' question ({ng}), in the yes–no manner common to Waite readers — not by the strength of the neighbouring cards ({suc}).",
  "tarot.can_cu.nghieng_suc": "The {la} card leans {ng}; {suc}.",
  "tarot.can_cu.hinh": "Image (Waite): {hinh}",

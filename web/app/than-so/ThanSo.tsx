@@ -123,7 +123,8 @@ export function ThanSo() {
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
   const quyUoc = useQuyUocDD();
   const maTheoCau = useRef(new Map<string, string>());   // câu chuẩn → mã câu (cho góp ý gắn đúng câu nỗi đau)
-  useEffect(() => { setPhai(docPhai()); }, []);
+  // Phái Phillips mới có bản Việt (engine + PhillipsDoc chưa có lời tiếng Anh) → bản Anh không mở lựa chọn này.
+  useEffect(() => { const p = docPhai(); setPhai(en && p === "phillips" ? "pitago" : p); }, [en]);
   // TS-NOIDAU: câu bấm từ bảng nỗi đau / "hỏi tiếp" → đẩy vào khung hỏi đáp; khung hỏi đáp tự cuộn MỘT lần tới khung chờ
   // "Đang soi câu hỏi…" (trục 2 UX: hai lệnh cuộn mượt chồng nhau làm màn hình giật giữa chừng).
   function hoiCau(cau: string, maCau?: string) {
@@ -216,7 +217,7 @@ export function ThanSo() {
           )}</span>}
         moTa={<>{t("phai.mo_ta")}</>}>
         <DongPhai ten={t("phai.truong_phai")} nhan={t("phai.chon_truong_phai")} giaTri={phai} doi={doiPhai}
-          luaChon={[["pitago", t("phai.pitago")], ["phillips", t("phai.phillips")], ["chaldea", t("phai.chaldea")], ["tong_hop", t("phai.tong_hop_chon")]]}
+          luaChon={([["pitago", t("phai.pitago")], ["phillips", t("phai.phillips")], ["chaldea", t("phai.chaldea")], ["tong_hop", t("phai.tong_hop_chon")]] as [PhaiThanSo, string][]).filter(([p]) => !(en && p === "phillips"))}
           goiY={phai === "chaldea"
             ? (hoSo.ten_khac ? t("phai.ten_goi_khac", { ten: hoSo.ten_khac }) : t("phai.ten_goi", { ten: hoSo.ho_ten.trim().split(/\s+/).pop() ?? "" }))
             : phai === "phillips" ? t("phai.goi_y_phillips")

@@ -75,8 +75,9 @@ def test_kb_phillips_du_muc_va_khong_tu_cam():
 
     for nhom in ("so_chu_dao", "dinh_cao"):
         for ma, muc in kb[nhom].items():
-            trich = muc.get("sach_ghi") or {}
-            assert trich.get("trich") and trich.get("trang"), f"Thiếu sach_ghi ở {nhom}.{ma}"
+            sgh = muc.get("sach_ghi") or {}
+            # TK-2: sách còn bản quyền → chỉ dẫn trang + tóm ý, không chép nguyên văn vào repo công khai.
+            assert sgh.get("trang") and sgh.get("tom_y") and "trich" not in sgh, f"sach_ghi sai ở {nhom}.{ma}"
 
 
 def test_api_thanso_phillips():

@@ -1,5 +1,5 @@
 {
-  "_nguon": "Trích xuất có phép 6 nguyên tắc cốt lõi từ Tử Vân tiên sinh (紫雲), 'Đẩu Số Luận Mệnh' (《斗數論命》 — kho ziwei-ziyun-kb). Diễn giải 2 chiều: mặt tích cực khi đắc dụng và mặt tiêu cực nên chú ý.",
+  "_nguon": "Tóm ý theo Tử Vân tiên sinh (紫雲), 'Đẩu Số Luận Mệnh' (《斗數論命》 — kho ziwei-ziyun-kb). Diễn giải 2 chiều: mặt tích cực khi đắc dụng và mặt tiêu cực nên chú ý. Không chép nguyên văn sách (sách còn bản quyền, quyết định TK-2): mục `sach_ghi` chỉ giữ nơi dẫn (sách, trang); lời tiếng Việt là tóm ý do ban biên tập viết.",
   "_trang_thai": "da_doi_chieu_sach_goc",
   "source_id": "tuvi_tu_van_thai_tue",
   "school_id": "tu_van",
@@ -13,8 +13,8 @@
       "mat_tich_cuc": "Đặt cung Thái Tuế của đối phương (vợ/chồng, đối tác, con cái) vào đúng địa chi trên lá số bản thân để thấy rõ điểm tương trợ thực tế giữa hai người.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: không nên nhìn một lá số tách rời hoàn cảnh nhân sự xung quanh; nếu cung Thái Tuế của đối tác rơi vào cung nhiều Hóa Kỵ/sát tinh của mình thì cần chủ động phân công rõ ràng để giảm ma sát.",
       "sach_ghi": {
-        "trich": "Thái Tuế là Mậu Thìn, ba mươi chín tuổi. Can Mậu làm Tham Lang hóa Lộc, lưu Lộc tại cung Tị... tiên thiên, đại hạn và lưu niên toàn bộ được cát hóa.",
-        "nguon": "Tử Vân, Đẩu Số Luận Mệnh — tr. 43 (ziwei-ziyun-kb)"
+        "nguon": "Tử Vân, Đẩu Số Luận Mệnh — tr. 43 (ziwei-ziyun-kb)",
+        "tom_y": true
       },
       "nghia_doi_thuong": "Xem một người luôn gắn với những người sống và làm việc cạnh họ — biết rõ điểm hợp và điểm dễ va chạm với bạn đời hay đối tác sẽ giúp phối hợp êm hơn."
     },
@@ -23,8 +23,8 @@
       "mat_tich_cuc": "Khi một cung vị đồng thời được cả Tiên Thiên, Đại Hạn và Lưu Niên cùng kích hoạt cát hóa (Lộc/Quyền/Khoa), sự kiện tốt đẹp thường ứng nghiệm rất rõ nét và bền vững.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: ngược lại, nếu cả ba tầng cùng hội tụ Hóa Kỵ hoặc sát tinh vào một trục thì đây là giai đoạn thử thách cao; nên giảm tốc độ mở rộng và ưu tiên bảo toàn sức khỏe, dòng tiền.",
       "sach_ghi": {
-        "trich": "Thiên Lương hóa Lộc chiếu cung Điền trạch tiên thiên tại Sửu, làm cung vị này vốn đã có Thái Âm hóa Lộc cát hóa được dẫn động.",
-        "nguon": "Tử Vân, Đẩu Số Luận Mệnh — tr. 22 (ziwei-ziyun-kb)"
+        "nguon": "Tử Vân, Đẩu Số Luận Mệnh — tr. 22 (ziwei-ziyun-kb)",
+        "tom_y": true
       },
       "nghia_doi_thuong": "Một việc lớn thường chỉ chín muồi khi cả nền tảng bẩm sinh, chu kỳ 10 năm và nhịp của năm nay cùng hội tụ vào một hướng."
     },
@@ -33,8 +33,8 @@
       "mat_tich_cuc": "Cung được hai cát tinh hoặc song Lộc giáp hai bên giống như có hậu phương vững chắc che chở, giúp vượt qua giai đoạn khó khăn nhẹ nhàng hơn bề ngoài nhìn thấy.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: khi một cung trọng yếu (như Điền Trạch hoặc Đại Hạn) bị hai Hóa Kỵ giáp chặt hai bên, áp lực thường đến âm thầm từ hoàn cảnh xung quanh khiến bạn khó xoay xở nếu chủ quan.",
       "sach_ghi": {
-        "trich": "Thiên Đồng tiên thiên hóa Kỵ vừa vặn giáp cung Sửu đại hạn. Cung vị này chính là cung Điền trạch tiên thiên, là chỗ giấu tài.",
-        "nguon": "Tử Vân, Đẩu Số Luận Mệnh — tr. 40 (ziwei-ziyun-kb)"
+        "nguon": "Tử Vân, Đẩu Số Luận Mệnh — tr. 40 (ziwei-ziyun-kb)",
+        "tom_y": true
       },
       "nghia_doi_thuong": "Đừng chỉ nhìn đúng một mặt của vấn đề — môi trường và những yếu tố bao quanh mới là thứ âm thầm nâng đỡ hoặc gây áp lực lên bạn."
     },
@@ -43,8 +43,8 @@
       "mat_tich_cuc": "Tiên Thiên đã có Quyền/Lộc, đến Đại Hạn lại gặp thêm Hóa Quyền/Hóa Lộc chiếu về cung Tài Bạch tạo thành thế tăng trưởng mạnh về thu nhập, năng lực quản lý và quy mô sự nghiệp.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: khi Song Quyền hội tụ quá mạnh, áp lực trách nhiệm và tham vọng cũng tăng theo; cần giữ kỷ luật quản trị rủi ro và tránh tự tin quá đà.",
       "sach_ghi": {
-        "trich": "Đặc biệt là cung Tài bạch tiên thiên hóa Quyền, đến đại hạn Tân Hợi cung Tài bạch Thái Dương lại hóa Quyền, làm đại hạn này cung Tài bạch tiên hậu thiên có hai Hóa Quyền.",
-        "nguon": "Tử Vân, Đẩu Số Luận Mệnh — tr. 29 (ziwei-ziyun-kb)"
+        "nguon": "Tử Vân, Đẩu Số Luận Mệnh — tr. 29 (ziwei-ziyun-kb)",
+        "tom_y": true
       },
       "nghia_doi_thuong": "Khi cả nền tảng lẫn chu kỳ 10 năm cùng mở rộng cơ hội kiếm tiền và quản lý, thu nhập tăng nhanh nhưng áp lực trách nhiệm cũng lớn tương ứng."
     },
@@ -53,8 +53,8 @@
       "mat_tich_cuc": "Khi Lưu Niên nhập cung Phu Thê Đại Hạn mà có Lộc Tồn và Hóa Lộc tương hội, tình cảm dễ tiến triển ấm áp, thuận lợi cho gắn kết hoặc lập gia đình.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: Tử Vân luôn xem đồng thời cả cung Phúc Đức (tâm lý, cách hưởng thụ và chịu đựng của bản thân) chứ không nhìn riêng cung Phu Thê; Phúc Đức có Kỵ thường tạo bất mãn nội tâm dù bên ngoài vẫn đủ đầy.",
       "sach_ghi": {
-        "trich": "Lưu niên nhập cung Phu thê đại hạn tại cung Tuất. Cung Phu thê lưu niên tại Thân có Lộc Tồn và Tham Lang đại hạn hóa Lộc.",
-        "nguon": "Tử Vân, Đẩu Số Luận Mệnh — tr. 41 (ziwei-ziyun-kb)"
+        "nguon": "Tử Vân, Đẩu Số Luận Mệnh — tr. 41 (ziwei-ziyun-kb)",
+        "tom_y": true
       },
       "nghia_doi_thuong": "Hạnh phúc hôn nhân phụ thuộc lớn vào sự bình an trong tâm lý của chính mỗi người, chứ không nằm riêng ở việc người bạn đời ra sao."
     },
@@ -63,8 +63,8 @@
       "mat_tich_cuc": "Hiểu rõ vận hạn đang dồn lực vào công việc hay mở rộng cơ sở giúp bạn chủ động đưa năng lượng vào mục tiêu xây dựng dài hạn, tạo thành quả cụ thể.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: tránh rơi vào tâm lý thụ động chờ vận; cùng một tổ hợp sao nhưng người biết tập trung xây dựng dự án cụ thể sẽ giảm hẳn xung đột và hao tán vào chuyện vụn vặt.",
       "sach_ghi": {
-        "trich": "Anh ta tự nhiên sẽ tích cực trù tính và tiến hành xây dựng nhà hàng khác. Đợi đến khi nhà hàng mới hoàn thiện, tự nhiên không rảnh quan tâm những chuyện vụn vặt.",
-        "nguon": "Tử Vân, Đẩu Số Luận Mệnh — tr. 99 (ziwei-ziyun-kb)"
+        "nguon": "Tử Vân, Đẩu Số Luận Mệnh — tr. 99 (ziwei-ziyun-kb)",
+        "tom_y": true
       },
       "nghia_doi_thuong": "Biết trước giai đoạn nào nhiều năng lượng biến động để dồn sức vào dự án cụ thể sẽ giúp bạn tạo ra thành quả thực thay vì vướng chuyện vụn vặt."
     }

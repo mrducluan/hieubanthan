@@ -34,7 +34,7 @@ export interface GreerNguoc {
   mat_tich_cuc?: string;
   mat_tieu_cuc_can_chu_y?: string;
   huong_chuyen_hoa?: string;
-  sach_ghi?: { trich?: string; trang?: string };
+  sach_ghi?: { trang?: string; tom_y?: boolean };
 }
 
 export interface HopTarot extends Hop {

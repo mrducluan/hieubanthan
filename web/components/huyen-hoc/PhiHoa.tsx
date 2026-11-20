@@ -76,11 +76,8 @@ export function PhiHoaXem({ d, onChonCung, onHoi }: { d: PhiHoaOutputT; onChonCu
                 {n.luong_phai_672 && (
                   <details className="rounded-xl border border-gold/25 bg-gold/5 p-3 text-xs">
                     <summary className="cursor-pointer font-medium text-gold">{t("ph.luong_tieu_de")}</summary>
-                    {n.luong_phai_672.sach_ghi?.han && (
-                      <blockquote className="mt-2 border-l-2 border-gold/40 pl-2.5 leading-relaxed text-fg-muted">
-                        <p>{n.luong_phai_672.sach_ghi.han}</p>
-                        {n.luong_phai_672.sach_ghi.trang && <footer className="mt-1 text-[11px] text-fg-faint">— {n.luong_phai_672.nguon ?? "Liang Ruoyu"} ({n.luong_phai_672.sach_ghi.trang})</footer>}
-                      </blockquote>
+                    {n.luong_phai_672.sach_ghi?.trang && (
+                      <p className="mt-2 text-[11px] text-fg-faint">— {n.luong_phai_672.nguon ?? "Liang Ruoyu"} ({n.luong_phai_672.sach_ghi.trang})</p>
                     )}
                     <div className="mt-2 grid gap-2 sm:grid-cols-2">
                       {n.luong_phai_672.mat_tich_cuc && <p className="rounded-lg border border-jade/30 bg-jade/10 p-2 leading-relaxed text-fg"><b className="text-jade">{t("ph.diem_sang")}</b> {n.luong_phai_672.mat_tich_cuc}</p>}

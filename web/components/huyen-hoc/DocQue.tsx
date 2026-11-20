@@ -24,7 +24,7 @@ export interface ThucChienLucHaoMuc {
   nghia_doi_thuong?: string;
   mat_tich_cuc?: string;
   mat_tieu_cuc_can_chu_y?: string;
-  sach_ghi?: { han?: string; nguon?: string };
+  sach_ghi?: { nguon?: string; tom_y?: boolean };
 }
 export interface GocNhinLucHao extends GocNhin {
   dung_than: string | null; phuc: boolean | null; luc_thu: string[];
@@ -156,18 +156,12 @@ export function DocQue({ dq, thuatNgu, vanDayDu, onHoi, id, anKetLuan = false, t
               {gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.mat_tieu_cuc_can_chu_y && <p className="mt-1.5 border-t border-[rgb(245_170_80/0.2)] pt-1.5 text-fg-muted">{gn.luc_hao.thuc_chien_luu_y.nguyen_tac.mat_tieu_cuc_can_chu_y}</p>}
             </div>
           </div>
-          {(gn.luc_hao.thuc_chien_luu_y.dung_than?.sach_ghi?.han || gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.sach_ghi?.han) && (
-            <details className="mt-3 rounded-xl border border-line/60 bg-bg/40 px-3 py-2 text-xs">
-              <summary className="cursor-pointer font-medium text-gold">{c("dq.lh_nguyen_van")}</summary>
-              <div className="mt-2 space-y-2 border-l-2 border-gold/40 pl-2.5 text-fg-muted">
-                {gn.luc_hao.thuc_chien_luu_y.dung_than?.sach_ghi?.han && (
-                  <p><span className="font-serif text-sm text-fg" lang="zh-Hant">{gn.luc_hao.thuc_chien_luu_y.dung_than.sach_ghi.han}</span>{gn.luc_hao.thuc_chien_luu_y.dung_than.sach_ghi.nguon ? ` — ${gn.luc_hao.thuc_chien_luu_y.dung_than.sach_ghi.nguon}` : ""}</p>
-                )}
-                {gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.sach_ghi?.han && (
-                  <p><span className="font-serif text-sm text-fg" lang="zh-Hant">{gn.luc_hao.thuc_chien_luu_y.nguyen_tac.sach_ghi.han}</span>{gn.luc_hao.thuc_chien_luu_y.nguyen_tac.sach_ghi.nguon ? ` — ${gn.luc_hao.thuc_chien_luu_y.nguyen_tac.sach_ghi.nguon}` : ""}</p>
-                )}
-              </div>
-            </details>
+          {(gn.luc_hao.thuc_chien_luu_y.dung_than?.sach_ghi?.nguon || gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.sach_ghi?.nguon) && (
+            <p className="mt-3 text-[11px] text-fg-faint">
+              {c("dq.lh_nguyen_van")}:{" "}
+              {[gn.luc_hao.thuc_chien_luu_y.dung_than?.sach_ghi?.nguon, gn.luc_hao.thuc_chien_luu_y.nguyen_tac?.sach_ghi?.nguon]
+                .filter((x, i, a): x is string => !!x && a.indexOf(x) === i).join(" · ")}
+            </p>
           )}
         </section>
       )}

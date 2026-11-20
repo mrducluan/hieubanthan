@@ -68,12 +68,12 @@ const MA_JS = String.raw`(function () {
 
   function mucFill(muc) {
     if (muc === "thuan") return "rgba(45, 212, 160, 0.30)";
-    if (muc === "can_chu_dong") return "rgba(239, 98, 98, 0.30)";
+    if (muc === "can_chu_dong") return "rgba(245, 170, 80, 0.30)"; // hổ phách, không đỏ (quy ước mức của site)
     return "rgba(232, 194, 106, 0.20)";
   }
   function mucStroke(muc) {
     if (muc === "thuan") return "rgba(74, 222, 178, 0.85)";
-    if (muc === "can_chu_dong") return "rgba(248, 128, 128, 0.85)";
+    if (muc === "can_chu_dong") return "rgba(245, 170, 80, 0.85)";
     return "rgba(232, 194, 106, 0.65)";
   }
   function polar(cx, cy, r, deg) {
@@ -279,13 +279,13 @@ const CHU = {
     t1: "Tâm nhà (kéo để chỉnh)", t2: "Trước mặt nhà (kéo để chỉnh)",
     title: "Bản đồ vệ tinh", aria: "Bản đồ vệ tinh: bấm vào mái nhà, rồi bấm mặt đường trước cửa",
     khong: "Không có bản đồ vệ tinh", ts: "language=vi&region=VN", vung: { region: "VN" },
-    co: "Cỡ", mo: "Mờ", anLb: "Ẩn la bàn", hienLb: "Hiện la bàn",
+    co: "Cỡ", mo: "Mờ", anLb: "Ẩn la bàn", hienLb: "Hiện la bàn", hud: "Điều chỉnh la bàn Huyền Không",
   },
   en: {
     t1: "Centre of home (drag to adjust)", t2: "In front of the home (drag to adjust)",
     title: "Satellite map", aria: "Satellite map: tap the roof, then the street in front of the door",
     khong: "No satellite map", ts: "language=en", vung: {},
-    co: "Size", mo: "Opacity", anLb: "Hide compass", hienLb: "Show compass",
+    co: "Size", mo: "Opacity", anLb: "Hide compass", hienLb: "Show compass", hud: "Flying Star compass controls",
   },
 } as const;
 
@@ -327,7 +327,7 @@ html,body,#ban-do{height:100%;margin:0;background:#11131c;font-family:system-ui,
 </style></head>
 <body>
 <div id="ban-do" role="application" aria-label="${ch.aria}"></div>
-<div id="hk-hud" aria-label="Điều chỉnh la bàn Huyền Không">
+<div id="hk-hud" aria-label="${ch.hud}">
   <label>${ch.co}<input id="hk-r" type="range" min="6" max="36" value="14" /></label>
   <label>${ch.mo}<input id="hk-o" type="range" min="25" max="92" value="72" /></label>
   <button id="hk-toggle" type="button">${ch.anLb}</button>

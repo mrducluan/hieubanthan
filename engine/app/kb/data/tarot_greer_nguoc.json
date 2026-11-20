@@ -1,5 +1,5 @@
 {
-  "_nguon": "Đối chiếu và trích dẫn có phép từ Mary K. Greer, 'The Complete Book of Tarot Reversals' (Llewellyn Publications, 2002, tr. 51–104). Phân tích chiều sâu 2 mặt (mặt tiêu cực cần chú ý + hướng chuyển hóa tích cực) cho 22 Lá Ẩn Chính khi lên ngược.",
+  "_nguon": "Tóm ý theo Mary K. Greer, 'The Complete Book of Tarot Reversals' (Llewellyn Publications, 2002, tr. 51–104). Phân tích chiều sâu 2 mặt (mặt tiêu cực cần chú ý + hướng chuyển hóa tích cực) cho 22 Lá Ẩn Chính khi lên ngược. Không chép nguyên văn sách (sách còn bản quyền, quyết định TK-2): mục `sach_ghi` chỉ giữ nơi dẫn (sách, trang); lời tiếng Việt là tóm ý do ban biên tập viết.",
   "_trang_thai": "da_doi_chieu_sach_goc",
   "source_id": "tarot_greer_nguoc",
   "school_id": "rws",
@@ -13,176 +13,176 @@
       "mat_tieu_cuc_can_chu_y": "Nên chú ý hai thái cực: hoặc quá sợ rủi ro mà tự nhốt mình trong vùng an toàn, hoặc hành động bốc đồng, liều lĩnh mà thiếu cân nhắc hậu quả.",
       "huong_chuyen_hoa": "Mặt tích cực: lá này nhắc bạn trưởng thành hơn, nhận trách nhiệm thực tế và chuẩn bị nền tảng kỹ trước khi bước sang trang mới.",
       "sach_ghi": {
-        "trich": "The Fool Rx is about not taking risks or, at the other extreme, about taking them extravagantly and recklessly. Sometimes it suggests being careful, or that it is time to grow up and take on adult responsibilities.",
-        "trang": "tr. 52"
+        "trang": "tr. 52",
+        "tom_y": true
       }
     },
     "dai_1": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý dấu hiệu né tránh trách nhiệm, thiếu kỹ năng cần thiết cho việc đang ôm, hoặc gặp tình huống bế tắc không thể tự xoay một mình.",
       "huong_chuyen_hoa": "Mặt tích cực: nhận ra giới hạn thật giúp bạn dừng lãng phí sức, nhờ đúng người hỗ trợ hoặc buông bớt việc không còn kiểm soát được.",
       "sach_ghi": {
-        "trich": "Things may not be going as planned. Perhaps there is an intractable situation. You may have to give up your responsibility and to let a situation go.",
-        "trang": "tr. 54"
+        "trang": "tr. 54",
+        "tom_y": true
       }
     },
     "dai_2": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý sự mất kết nối với trực giác, phớt lờ cảm xúc thật của mình hoặc chỉ nhìn mọi chuyện ở bề mặt hời hợt.",
       "huong_chuyen_hoa": "Mặt tích cực: đây cũng có thể là lúc bạn bước ra khỏi vỏ bọc kín đáo để chia sẻ điều mình giữ kín lâu nay ra ngoài ánh sáng.",
       "sach_ghi": {
-        "trich": "The High Priestess Rx can signify difficulties with accessing your intuition, remembering your dreams, or knowing your own feelings.",
-        "trang": "tr. 56"
+        "trang": "tr. 56",
+        "tom_y": true
       }
     },
     "dai_3": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý xu hướng chăm sóc theo kiểu kiểm soát ngột ngạt, đòi hỏi quá mức, hoặc sa đà vào hưởng thụ, phù phiếm mà bỏ quên chiều sâu.",
       "huong_chuyen_hoa": "Mặt tích cực: bạn có quyền từ chối những khuôn mẫu gò bó không hợp với mình và tự định nghĩa lại cách nuôi dưỡng đời sống.",
       "sach_ghi": {
-        "trich": "The Empress Rx can be the devouring, smothering, demanding mother... Aspects of the negative feminine also include self-indulgence, vanity, and superficiality.",
-        "trang": "tr. 59"
+        "trang": "tr. 59",
+        "tom_y": true
       }
     },
     "dai_4": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý hình ảnh quyền lực lệch chuẩn: hoặc độc đoán, gia trưởng, bảo thủ; hoặc ngược lại là sự yếu mềm, thiếu bản lĩnh và không giữ nguyên tắc khi cần bảo vệ người khác.",
       "huong_chuyen_hoa": "Mặt tích cực: nhận diện rõ chỗ nào đang lạm quyền hay thiếu kỷ luật để xây lại trật tự công bằng và vững vàng hơn.",
       "sach_ghi": {
-        "trich": "The Emperor Rx tends to express the autocratic, self-righteous tyranny of a not-so-benevolent dictator. Or it can express its opposite—a weak-willed... leader who betrays your trust.",
-        "trang": "tr. 61"
+        "trang": "tr. 61",
+        "tom_y": true
       }
     },
     "dai_5": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý xung đột với quy tắc, tổ chức hoặc truyền thống; dễ phản kháng theo cảm tính mà chưa dựng được tiêu chuẩn thay thế đủ vững.",
       "huong_chuyen_hoa": "Mặt tích cực: lá này mở ra tư duy độc lập, dám đặt câu hỏi với lối mòn cũ để chọn giá trị sống thực sự thuộc về bạn.",
       "sach_ghi": {
-        "trich": "The Hierophant Rx can refer to questioning conventional mores, disobeying rules... You may wish to choose your own standards rather than accepting those of the 'powers that be.'",
-        "trang": "tr. 64"
+        "trang": "tr. 64",
+        "tom_y": true
       }
     },
     "dai_6": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý sự thiếu hòa hợp trong mối quan hệ, lý tưởng hóa một người không có mặt trong thực tế, hoặc do dự không dám chọn dứt khoát.",
       "huong_chuyen_hoa": "Mặt tích cực: đây là lời nhắc đối diện sự thật của mối quan hệ thay vì nuôi ảo tưởng, từ đó đưa ra lựa chọn trưởng thành.",
       "sach_ghi": {
-        "trich": "You may idealize someone (especially if they are absent), or simply the idea of a relationship. You could be in a relationship that is challenging, inharmonious, immature.",
-        "trang": "tr. 66"
+        "trang": "tr. 66",
+        "tom_y": true
       }
     },
     "dai_7": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý cảm giác mất lái, lao nhanh mà thiếu phương hướng rõ ràng, hoặc vướng vào xung đột cái tôi ngay tại ngã rẽ quan trọng.",
       "huong_chuyen_hoa": "Mặt tích cực: giảm tốc độ một nhịp để kiểm tra lại mục tiêu thật và cầm chắc tay lái trước khi tăng tốc trở lại.",
       "sach_ghi": {
-        "trich": "The Chariot Rx illustrates the story of Oedipus who, stopped at a crossroad in his chariot, kills an old man.",
-        "trang": "tr. 69"
+        "trang": "tr. 69",
+        "tom_y": true
       }
     },
     "dai_8": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý sự giằng xé nội tâm giữa lý trí và bản năng: hoặc sợ hãi cảm xúc mạnh của chính mình, hoặc liều lĩnh quá đà khi lòng chưa thật sự vững.",
       "huong_chuyen_hoa": "Mặt tích cực: thừa nhận chỗ mình đang mệt mỏi thay vì gồng cứng giúp bạn hồi phục sức bền thật sự từ bên trong.",
       "sach_ghi": {
-        "trich": "With Strength Rx you could be fearful of your passions, urges, or instincts, or, on the other hand, could be overly daring and bold.",
-        "trang": "tr. 71"
+        "trang": "tr. 71",
+        "tom_y": true
       }
     },
     "dai_9": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý hai cực đoan: sợ cô đơn đến mức bám víu quan hệ sai, hoặc thu mình cực đoan, quay lưng với gia đình, bạn bè; cũng cần cảnh giác với người dẫn đường thiếu trung thực.",
       "huong_chuyen_hoa": "Mặt tích cực: biết cân đối giữa thời gian một mình để suy ngẫm và sự kết nối lành mạnh với người đáng tin cậy.",
       "sach_ghi": {
-        "trich": "You may not want to be by yourself... Or, you can feel unsociable, avoiding close relationships. Perhaps a teacher or guru has proved false or betrayed you.",
-        "trang": "tr. 74"
+        "trang": "tr. 74",
+        "tom_y": true
       }
     },
     "dai_10": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý cảm giác bấp bênh lên xuống thất thường, kế hoạch bị chậm trễ, vướng trục trặc nhỏ lặp đi lặp lại khiến bạn sốt ruột.",
       "huong_chuyen_hoa": "Mặt tích cực: bản chất vòng xoay vẫn mở cơ hội tốt, nhưng đòi hỏi bạn kiên nhẫn vượt qua đoạn trễ thay vì bỏ cuộc giữa chừng.",
       "sach_ghi": {
-        "trich": "Traditionally the Wheel of Fortune Rx is still beneficial, but it is more unstable—like a psychological yo-yo—with hope and despondency alternating.",
-        "trang": "tr. 76"
+        "trang": "tr. 76",
+        "tom_y": true
       }
     },
     "dai_11": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý tình huống thiếu công bằng, rắc rối giấy tờ – pháp lý, hoặc chính bạn đang tự né tránh trách nhiệm với hệ quả từ lựa chọn cũ.",
       "huong_chuyen_hoa": "Mặt tích cực: đây là thời điểm rõ ràng nhất để rà soát lại mọi khoản chưa cân bằng trong công việc và quan hệ, sửa ngay từ gốc.",
       "sach_ghi": {
-        "trich": "There can be legal complications and losses, or a complete disregard for the law. You may need to adjust imbalances in your life and relationships.",
-        "trang": "tr. 79"
+        "trang": "tr. 79",
+        "tom_y": true
       }
     },
     "dai_12": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý vẻ ngoài tỏ ra sẵn sàng hy sinh hay làm vừa lòng số đông nhưng bên trong lại ẩn chứa động cơ riêng hoặc sự miễn cưỡng.",
       "huong_chuyen_hoa": "Mặt tích cực: dừng việc trì hoãn vô ích, nhìn thẳng xem mình thực sự muốn gì để chuyển từ thế chờ sang hành động có chủ đích.",
       "sach_ghi": {
-        "trich": "The Hanged Man Rx looks like he is ready for action but with nothing to do... You might want to look good and please the crowd, but there could be ulterior motives hidden behind.",
-        "trang": "tr. 82"
+        "trang": "tr. 82",
+        "tom_y": true
       }
     },
     "dai_13": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý thái độ chống cự một sự kết thúc tất yếu: càng cố trì hoãn và tự huyễn hoặc, nỗi đau càng kéo dài và cơ hội mới càng bị chặn lại.",
       "huong_chuyen_hoa": "Mặt tích cực: khi chấp nhận buông thứ đã hết vai trò, bạn giải phóng rất nhiều sức lực để bước vào chu kỳ tái sinh nhẹ nhõm hơn.",
       "sach_ghi": {
-        "trich": "Death Rx can be more difficult than the upright if you are trying to resist an inevitable change. You may be delaying or avoiding the ending of something, and thereby deluding yourself.",
-        "trang": "tr. 84"
+        "trang": "tr. 84",
+        "tom_y": true
       }
     },
     "dai_14": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý sự mất cân đối, quá đà hoặc xung đột lợi ích gây căng thẳng kéo dài, dễ ảnh hưởng trực tiếp tới sức khỏe nếu không điều chỉnh sớm.",
       "huong_chuyen_hoa": "Mặt tích cực: lá bài chỉ thẳng điểm đang lệch nhịp để bạn giảm cường độ, sắp xếp lại ưu tiên và tìm điểm dung hòa thực tế.",
       "sach_ghi": {
-        "trich": "Temperance Rx suggests that something may be out of balance, in conflict, or excessive, thereby creating stress, which, if not alleviated, could result in ill health.",
-        "trang": "tr. 87"
+        "trang": "tr. 87",
+        "tom_y": true
       }
     },
     "dai_15": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý biên độ cực đoan của lá này: ở mặt tối là buông thả hoàn toàn theo cám dỗ, thói quen độc hại hoặc sự thiếu tỉnh táo vì tham vọng.",
       "huong_chuyen_hoa": "Mặt tích cực rất mạnh: đây cũng là thời điểm tỉnh ngộ để cắt đứt dây trói buộc cũ, thoát khỏi sự phụ thuộc và lấy lại tự do.",
       "sach_ghi": {
-        "trich": "The Devil Rx can express greater extremes than any other card. At one end it is... succumbing to temptation. At the other end, you may turn away from evil and bondage.",
-        "trang": "tr. 89"
+        "trang": "tr. 89",
+        "tom_y": true
       }
     },
     "dai_16": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý nguy cơ sụp đổ âm ỉ bên dưới vỏ bọc tưởng như yên ổn vì bạn cố giữ một cấu trúc đã mục nát.",
       "huong_chuyen_hoa": "Mặt tích cực: lá ngược thường giảm nhẹ cú sốc, báo hiệu thoát hiểm trong gang tấc hoặc kịp rút lui trước khi thiệt hại trở nên nghiêm trọng.",
       "sach_ghi": {
-        "trich": "Traditionally the Tower Rx lessens the degree and impact of the upright meanings. Additionally, it can indicate narrowly averted disaster, freedom from constraints.",
-        "trang": "tr. 92"
+        "trang": "tr. 92",
+        "tom_y": true
       }
     },
     "dai_17": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý cảm giác hụt hẫng tạm thời, tự ti phủ nhận tài năng và giá trị thật của bản thân, hoặc bám vào vẻ bề ngoài hào nhoáng.",
       "huong_chuyen_hoa": "Mặt tích cực: giai đoạn trút bỏ những nhãn mác giả tạo giúp bạn nhìn thấy năng lực thật bền vững hơn của chính mình.",
       "sach_ghi": {
-        "trich": "You might shed all ideas of self that falsely depend on status, appearance, and possessions. Or... you may deny your true gifts, thinking you lack talent, grace, or beauty.",
-        "trang": "tr. 94"
+        "trang": "tr. 94",
+        "tom_y": true
       }
     },
     "dai_18": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý thói quen chối bỏ trực giác, bám chặt vào lý lẽ khô cứng khi đối mặt với sự mơ hồ, hoặc tự đẩy nỗi sợ vào bóng tối khiến tinh thần kiệt sức.",
       "huong_chuyen_hoa": "Mặt tích cực: khi dám gọi tên thẳng điều mình đang lo lắng, lớp sương dày sẽ tan nhanh và sự thật trở nên sáng rõ hơn.",
       "sach_ghi": {
-        "trich": "With the Moon Rx you may deny the unseen world, clinging to rationality, reason, literalness, and practicality, especially in the face of confusion.",
-        "trang": "tr. 97"
+        "trang": "tr. 97",
+        "tom_y": true
       }
     },
     "dai_19": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý niềm vui bị phủ mây vì tâm lý nghi ngờ hạnh phúc sẽ không bền, làm quá mức khiến mất tự nhiên, hoặc hiểu nhầm điều vốn rất rõ ràng.",
       "huong_chuyen_hoa": "Mặt tích cực: bản chất cát lành của Mặt Trời vẫn còn đó — chỉ cần bớt cầu toàn và cho phép mình tận hưởng thành quả thực tế đang có.",
       "sach_ghi": {
-        "trich": "Generally the Sun Rx is the same as the upright but either weakened slightly or overdone... Perhaps you are afraid to enjoy yourself, accept what is good, or you doubt it will last.",
-        "trang": "tr. 99"
+        "trang": "tr. 99",
+        "tom_y": true
       }
     },
     "dai_20": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý sự chần chừ trước bước chuyển lớn, né tránh quyết định dứt khoát vì tiếc lối sống cũ — càng trì hoãn càng dễ rơi vào trì trệ.",
       "huong_chuyen_hoa": "Mặt tích cực: cho mình khoảng lặng ngắn để lắng nghe tiếng gọi thật bên trong và chuẩn bị kỹ trước khi đóng lại chương cũ.",
       "sach_ghi": {
-        "trich": "Judgement Rx is about difficult transitions and resisting transformation... You might resent change, avoid decisions, or need time to adjust. If you dig in, there can be stagnation.",
-        "trang": "tr. 102"
+        "trang": "tr. 102",
+        "tom_y": true
       }
     },
     "dai_21": {
       "mat_tieu_cuc_can_chu_y": "Nên chú ý thành quả đến chậm hơn dự tính, kế hoạch đi xa gặp trắc trở, hoặc cảm giác trống rỗng bất ngờ ngay sau khi vừa hoàn thành mục tiêu lớn.",
       "huong_chuyen_hoa": "Mặt tích cực: kết quả cuối cùng vẫn tích cực dù lặng lẽ và riêng tư hơn; hãy hoàn tất nốt những chi tiết cuối để khép vòng trọn vẹn.",
       "sach_ghi": {
-        "trich": "A promotion or reward may be delayed or less than hoped for, the triumph quieter or more private. On the other hand, it can indicate the sense of emptiness that accompanies even the successful completion of a project.",
-        "trang": "tr. 104"
+        "trang": "tr. 104",
+        "tom_y": true
       }
     }
   }

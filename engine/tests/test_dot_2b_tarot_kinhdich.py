@@ -42,8 +42,8 @@ def test_tarot_greer_nguoc_du_22_an_chinh_va_trich_sach():
         ma = f"dai_{i}"
         muc = kb["la"][ma]
         assert muc.get("mat_tieu_cuc_can_chu_y") and muc.get("huong_chuyen_hoa")
-        trich = muc.get("sach_ghi") or {}
-        assert trich.get("trich") and trich.get("trang"), f"Thiếu sach_ghi ở {ma}"
+        sgh = muc.get("sach_ghi") or {}
+        assert sgh.get("trang") and sgh.get("tom_y") and "trich" not in sgh, f"sach_ghi sai ở {ma} (TK-2: không chép nguyên văn)"
     _kiem_sach_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc"))
 
 
@@ -68,8 +68,8 @@ def test_kinhdich_luc_hao_thuc_chien_du_muc_va_giong_van():
     for nhom in ("nguyen_tac", "luc_than_thuc_chien"):
         for ma, muc in kb[nhom].items():
             assert muc.get("mat_tich_cuc") and muc.get("mat_tieu_cuc_can_chu_y")
-            trich = muc.get("sach_ghi") or {}
-            assert trich.get("han") and trich.get("nguon"), f"Thiếu sach_ghi ở {nhom}.{ma}"
+            sgh = muc.get("sach_ghi") or {}
+            assert sgh.get("nguon") and "han" not in sgh, f"sach_ghi sai ở {nhom}.{ma} (TK-2: không chép nguyên văn)"
     _kiem_sach_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc"), cho_phep_tu={"khắc"})
 
 
@@ -82,5 +82,6 @@ def test_kinhdich_goc_nhin_luc_hao_noi_song_thuc_chien():
     gn = ((out.get("doc_que") or {}).get("goc_nhin") or {}).get("luc_hao")
     assert gn and gn.get("thuc_chien_luu_y"), "Phải nối sống được thuc_chien_luu_y vào _goc_nhin_luc_hao"
     assert gn["thuc_chien_luu_y"]["dung_than"]["mat_tieu_cuc_can_chu_y"]
-    assert gn["thuc_chien_luu_y"]["nguyen_tac"]["sach_ghi"]["han"]
+    assert gn["thuc_chien_luu_y"]["nguyen_tac"]["sach_ghi"]["nguon"]
+    assert "han" not in gn["thuc_chien_luu_y"]["nguyen_tac"]["sach_ghi"]
 

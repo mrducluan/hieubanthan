@@ -178,7 +178,7 @@ export const CHU_KINH_DICH_UI = {
   "dq.lh_dung_than": m(DQ, "Dụng thần: {ten}", "Significator: {ten}"),
   "dq.lh_thuan_loi": m(DQ, "Mặt thuận lợi", "Favorable side"),
   "dq.lh_nen_chu_y": m(DQ, "Nên chú ý", "Watch out"),
-  "dq.lh_nguyen_van": m(DQ, "Nguyên văn sách gốc (Vương Hổ Ứng · Thiệu Vĩ Hoa)", "Classical source (Wang Huying · Shao Weihua)"),
+  "dq.lh_nguyen_van": m(DQ, "Tóm ý theo", "Summarised from"),
   "dq.sach_xua_mo_ta": m(DQ, "Câu chép trong Tăng San Bốc Dịch, chương bàn đúng việc {viec}. Lời Việt là phần tóm ý của ban biên tập; bấm để xem nguyên văn.",
     "A passage from Zeng Shan Bu Yi, from the chapter on {viec}. The English line is our editors' summary; open it to see the original."),
   "dq.dich_lam_tieu_de": m(DQ, "Bài từ cổ của quẻ này (Tiêu Thị Dịch Lâm)", "The old verse for this hexagram (Jiaoshi Yilin)"),

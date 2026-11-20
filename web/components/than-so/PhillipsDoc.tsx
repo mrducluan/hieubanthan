@@ -11,7 +11,8 @@ import { ghi } from "@/lib/do-luong";
 import { hoTenList, type HoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
 
-interface SachGhi { trich: string; trang: string }
+// TK-2: sách còn bản quyền — engine chỉ trả nơi dẫn (trang) + cờ tóm ý, không có nguyên văn.
+interface SachGhi { trang: string; tom_y?: boolean }
 interface NghiaSCD {
   ten: string; tu_khoa: string[]; cot_loi: string; diem_manh: string; can_chu_y: string;
   nghe_phu_hop?: string; tu_soi: string; sach_ghi?: SachGhi;
@@ -152,12 +153,9 @@ export function PhillipsDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: "tong_het" |
         )}
 
         {scd.nghia.sach_ghi && (
-          <blockquote className="rounded-xl border-l-2 border-gold/70 bg-gold/[0.05] px-4 py-3 text-xs leading-relaxed text-fg-muted">
-            <p className="flex items-center gap-1.5 font-medium text-gold mb-1">
-              <BookOpen className="size-3.5" aria-hidden /> Nguyên văn sách gốc ({tacGia}, {scd.nghia.sach_ghi.trang})
-            </p>
-            <p className="italic">“{scd.nghia.sach_ghi.trich}”</p>
-          </blockquote>
+          <p className="flex items-center gap-1.5 text-xs text-fg-faint">
+            <BookOpen className="size-3.5" aria-hidden /> Tóm ý theo {tacGia}, {scd.nghia.sach_ghi.trang}
+          </p>
         )}
 
         <p className="rounded-xl border border-line/70 bg-bg/50 px-4 py-3 text-sm italic text-fg-muted">
@@ -278,10 +276,7 @@ export function PhillipsDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: "tong_het" |
               <b className="text-jade">Gợi ý hành động:</b> {dinhDangXem.nghia.goi_y}
             </p>
             {dinhDangXem.nghia.sach_ghi && (
-              <blockquote className="rounded-lg border-l-2 border-gold/60 bg-gold/[0.04] px-3.5 py-2 text-xs text-fg-muted">
-                <span className="font-medium text-gold">Sách gốc ({dinhDangXem.nghia.sach_ghi.trang}): </span>
-                <span className="italic">“{dinhDangXem.nghia.sach_ghi.trich}”</span>
-              </blockquote>
+              <p className="text-xs text-fg-faint">Tóm ý theo sách gốc, {dinhDangXem.nghia.sach_ghi.trang}</p>
             )}
           </motion.article>
         </div>

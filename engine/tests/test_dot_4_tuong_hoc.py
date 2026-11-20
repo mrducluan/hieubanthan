@@ -38,7 +38,8 @@ def test_nhantuong_bridges_va_co_thu():
     assert set(kb["ngu_hanh_bridges"].keys()) == {"thuy", "moc", "hoa", "tho", "kim"}
     for h, muc in kb["ngu_hanh_bridges"].items():
         assert muc.get("mat_tich_cuc") and muc.get("mat_tieu_cuc_can_chu_y")
-        assert (muc.get("sach_ghi") or {}).get("trich"), f"Thiếu trích dẫn ở {h}"
+        sgh = muc.get("sach_ghi") or {}
+        assert sgh.get("nguon") and "trich" not in sgh, f"sach_ghi sai ở {h} (TK-2: không chép nguyên văn)"
     assert kb["tong_so_quy_tac_co_thu"] == len(kb["quy_tac_co_thu"]) == 150
     assert d4.tra_ngu_hanh_bridges("moc")["ten"].startswith("Tướng Mộc")
     _kiem_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc", "quy_tac_co_thu"))
@@ -81,5 +82,6 @@ def test_tuvi_tu_van_thai_tue():
     assert len(kb["nguyen_tac_tu_van"]) == 6
     for ma, muc in kb["nguyen_tac_tu_van"].items():
         assert muc.get("mat_tich_cuc") and muc.get("mat_tieu_cuc_can_chu_y")
-        assert (muc.get("sach_ghi") or {}).get("trich"), f"Thiếu trích dẫn ở {ma}"
+        sgh = muc.get("sach_ghi") or {}
+        assert sgh.get("nguon") and "trich" not in sgh, f"sach_ghi sai ở {ma} (TK-2: không chép nguyên văn)"
     _kiem_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc"))

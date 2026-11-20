@@ -75,21 +75,13 @@ def _la(ma: str) -> dict:
     return x
 
 
-_GREER_CACHE: dict | None = None
-
-
 def _greer_nguoc(ma: str) -> dict | None:
     """Đợt 2B — tải chiều sâu Lá Ngược (22 Ẩn Chính) từ Mary K. Greer (2002)."""
     from app.ngon_ngu import la_viet  # noqa: PLC0415
     if not la_viet():
         return None
-    global _GREER_CACHE
-    if _GREER_CACHE is None:
-        import json as _json
-        from pathlib import Path as _Path
-        p = _Path(__file__).resolve().parents[1] / "kb" / "data" / "tarot_greer_nguoc.json"
-        _GREER_CACHE = _json.loads(p.read_text("utf-8")).get("la", {}) if p.exists() else {}
-    return _GREER_CACHE.get(ma)
+    from app.kb import nap  # noqa: PLC0415
+    return (nap.doc("tarot_greer_nguoc.json").get("la") or {}).get(ma)
 
 
 def _ten(l: dict, nguoc: bool) -> str:
@@ -223,8 +215,8 @@ def _hop_la(v: dict, tb: dict, linh_vuc: str | None, pt: dict) -> dict:
             doan.append(f"{gr['mat_tieu_cuc_can_chu_y']} {gr['huong_chuyen_hoa']}")
             sg = gr.get("sach_ghi") or {}
             can_cu.append(L("tarot.can_cu.la_nguoc_greer",
-                            "Lá ngược theo Mary K. Greer (2002, {tr}): “{trich}”",
-                            tr=sg.get("trang", ""), trich=sg.get("trich", "")))
+                            "Lá ngược theo cách đọc của Mary K. Greer (The Complete Book of Tarot Reversals, 2002, {tr}) — tóm ý, không chép nguyên văn.",
+                            tr=sg.get("trang", "")))
             greer_obj = {
                 "mat_tich_cuc": gr.get("mat_tich_cuc"),
                 "mat_tieu_cuc_can_chu_y": gr.get("mat_tieu_cuc_can_chu_y"),

@@ -15,13 +15,8 @@ Chỉ áp dụng công thức toán học công khai (không có bản quyền):
 from __future__ import annotations
 
 import datetime as _dt
-import json
-from functools import lru_cache
-from pathlib import Path
 
 from app.calc import thanso, thanso_mo_rong
-
-_KB_PATH = Path(__file__).resolve().parents[1] / "kb" / "data" / "thanso_phillips_kb.json"
 
 
 def _rut_1_9(n: int) -> int:
@@ -117,9 +112,9 @@ def bon_dinh_kim_tu_thap(d: int, m: int, y: int, nam_xem: int | None = None) -> 
     }
 
 
-@lru_cache(maxsize=1)
 def _kb() -> dict:
-    return json.loads(_KB_PATH.read_text("utf-8"))
+    from app.kb import nap  # noqa: PLC0415 — một hàm đọc KB (lớp phủ ngôn ngữ, nhớ theo ngôn ngữ)
+    return nap.doc("thanso_phillips_kb.json")
 
 
 def luan_phillips(

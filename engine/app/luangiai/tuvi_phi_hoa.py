@@ -306,11 +306,14 @@ def _noi_bat(loai: str, d: dict, mau: dict | None = None) -> dict:
     from app.kb import tuvi_phai_kb  # noqa: PLC0415
     lp = tuvi_phai_kb.tra_phi_hoa_luong(d["tu_cung"], d["hoa"], d["den_cung"])
     if lp:
+        # Nguyên văn Lương Nhược Du (sách hiện đại còn bản quyền, có câu đoán bệnh / sống chết) KHÔNG ra người dùng:
+        # chỉ giữ nơi dẫn (trang) — TK-2, SK-1, SX-C.
+        lp = {**lp, "sach_ghi": {"trang": ((lp.get("sach_ghi") or {}).get("trang") or "")}}
         if la_viet():
             ra["luong_phai_672"] = lp
         else:
             ra["luong_phai_672"] = {
-                "sach_ghi": {"han": (lp.get("sach_ghi") or {}).get("han", ""), "trang": (lp.get("sach_ghi") or {}).get("trang", "").replace("tr. ", "p. ")},
+                "sach_ghi": {"trang": lp["sach_ghi"]["trang"].replace("tr. ", "p. ")},
                 "mat_tich_cuc": "Flying Four-Transformations highlight a clear strength and favorable channel in this palace pair.",
                 "mat_tieu_cuc_can_chu_y": "Watch for overextension or friction along the opposite palace axis when this transformation activates.",
                 "nguon": "Liang Ruoyu — Flying Star Zi Wei Dou Shu (672 Images)",

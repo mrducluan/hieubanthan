@@ -17,7 +17,7 @@ BRIDGES_5_HANH = {
         "mat_tich_cuc": "Sâu sắc, khéo thích nghi, giàu trực giác và khả năng lắng nghe; càng gặp hoàn cảnh khó càng bình tĩnh tìm đường uyển chuyển để vượt qua.",
         "mat_tieu_cuc_can_chu_y": "Nên chú ý: khi mất cân bằng dễ rơi vào lo âu, do dự kéo dài, ngại đối đầu trực diện hoặc tự cô lập cảm xúc thay vì nói thẳng nhu cầu của mình.",
         "sach_ghi": {
-            "trich": "Nothing in the world is as soft and yielding as water, yet for dissolving the hard and inflexible, nothing can surpass it.",
+            "tom_y": True,
             "nguon": "Lillian Pearl Bridges, Face Reading in Chinese Medicine (2nd Ed., 2012), Ch. 6: The Water Features and Traits, tr. 160",
         },
     },
@@ -27,7 +27,7 @@ BRIDGES_5_HANH = {
         "mat_tich_cuc": "Giàu tầm nhìn, dám tiên phong, hành động dứt khoát và có năng lực tổ chức dẫn dắt tập thể vươn lên trong những giai đoạn cần tăng tốc.",
         "mat_tieu_cuc_can_chu_y": "Nên chú ý: khi quá tải dễ nóng nảy, thiếu kiên nhẫn với người chậm nhịp, ôm đồm mục tiêu hoặc tự đẩy mình vào trạng thái căng thẳng kéo dài.",
         "sach_ghi": {
-            "trich": "Wood is as forceful and determined as the wind, as supple as a spreading aspen stretching into a bright cloudless sky.",
+            "tom_y": True,
             "nguon": "Lillian Pearl Bridges, Face Reading in Chinese Medicine (2nd Ed., 2012), Ch. 7: The Wood Features and Traits, tr. 191",
         },
     },
@@ -37,7 +37,7 @@ BRIDGES_5_HANH = {
         "mat_tich_cuc": "Ấm áp, nhiệt huyết, giao tiếp lôi cuốn và có khả năng truyền cảm hứng rất mạnh; dễ kết nối con người và tạo bầu không khí tích cực.",
         "mat_tieu_cuc_can_chu_y": "Nên chú ý: cảm xúc lên xuống nhanh, dễ hứng khởi bùng cháy lúc đầu nhưng nhanh chán ở chặng bền bỉ, hoặc nói quá lời khi phấn khích.",
         "sach_ghi": {
-            "trich": "We learn very early in life how to communicate with our eyes. They reveal our silent language and this is why eyes are so fascinating. The fire element also rules the heart and expression.",
+            "tom_y": True,
             "nguon": "Lillian Pearl Bridges, Face Reading in Chinese Medicine (2nd Ed., 2012), Ch. 8: The Fire Features and Traits, tr. 221",
         },
     },
@@ -47,7 +47,7 @@ BRIDGES_5_HANH = {
         "mat_tich_cuc": "Chân thành, đáng tin cậy, chu đáo và có năng lực chăm lo, gắn kết gia đình lẫn đội ngũ; làm việc cẩn trọng, giữ chữ tín lâu dài.",
         "mat_tieu_cuc_can_chu_y": "Nên chú ý: dễ lo nghĩ quá nhiều cho người khác mà quên đặt ranh giới cho bản thân, ngại thay đổi thói quen cũ hoặc ôm chuyện vào lòng gây mệt mỏi.",
         "sach_ghi": {
-            "trich": "Earth features show nourishment, stability, and the capacity to care for others while staying grounded in practical life.",
+            "tom_y": True,
             "nguon": "Lillian Pearl Bridges, Face Reading in Chinese Medicine (2nd Ed., 2012), Ch. 9: The Earth Features and Traits, tr. 251",
         },
     },
@@ -57,7 +57,7 @@ BRIDGES_5_HANH = {
         "mat_tich_cuc": "Tự lập cao, tiêu chuẩn rõ ràng, tinh tế về thẩm mỹ và công minh trong nguyên tắc; biết giữ phẩm giá và giải quyết công việc gọn gàng.",
         "mat_tieu_cuc_can_chu_y": "Nên chú ý: dễ khắt khe với bản thân lẫn người quanh mình, ngại nhờ giúp đỡ vì sợ làm phiền, hoặc tạo cảm giác xa cách khi đặt tiêu chuẩn quá cao.",
         "sach_ghi": {
-            "trich": "Metal people certainly don't like causing other people any trouble and are quite self-sufficient.",
+            "tom_y": True,
             "nguon": "Lillian Pearl Bridges, Face Reading in Chinese Medicine (2nd Ed., 2012), Ch. 10: The Metal Features and Traits, tr. 279",
         },
     },

@@ -83,11 +83,10 @@ export function YNghiaLa({ muc, chon, onChon, tieuDe: tieuDeVao, ghiChu, classNa
                     </div>
                   )}
                 </div>
-                {dang.greerNguoc.sach_ghi?.trich && (
-                  <blockquote className="rounded-r-xl border-l-2 border-gold/50 bg-gold/5 px-3 py-2 text-xs leading-relaxed text-fg-muted">
-                    <p className="italic">“{dang.greerNguoc.sach_ghi.trich}”</p>
-                    <footer className="mt-1 text-[11px] text-fg-faint">— Mary K. Greer, The Complete Book of Tarot Reversals (2002){dang.greerNguoc.sach_ghi.trang ? `, ${dang.greerNguoc.sach_ghi.trang}` : ""}</footer>
-                  </blockquote>
+                {dang.greerNguoc.sach_ghi?.trang && (
+                  <p className="text-[11px] text-fg-faint">
+                    Tóm ý theo Mary K. Greer, The Complete Book of Tarot Reversals (2002), {dang.greerNguoc.sach_ghi.trang}
+                  </p>
                 )}
               </div>
             )}

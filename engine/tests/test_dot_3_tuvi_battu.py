@@ -59,7 +59,8 @@ def test_battu_thien_ly_menh_cao():
     assert len(kb["quy_tac_thap_than_va_cach_cuc"]) == 6
     for ma, muc in kb["quy_tac_thap_than_va_cach_cuc"].items():
         assert muc.get("mat_tich_cuc") and muc.get("mat_tieu_cuc_can_chu_y")
-        assert (muc.get("sach_ghi") or {}).get("han"), f"Thiếu sach_ghi ở {ma}"
+        sgh = muc.get("sach_ghi") or {}
+        assert sgh.get("nguon") and "han" not in sgh, f"sach_ghi sai ở {ma} (TK-2: không chép nguyên văn)"
     _kiem_giong_van(p, ("source_id", "school_id", "sach_ghi", "sach_goc"), cho_phep={"khắc"})
 
 
@@ -71,7 +72,8 @@ def test_tich_hop_song_tuvi_phi_hoa_va_tra_cuu():
          "xung_cung": "Phu Thê", "tu_hoa": False, "den_tuan_triet": []}
     nb = tuvi_phi_hoa._noi_bat("loc_nhap", {**d, "nghia": tuvi_phi_hoa.nghia_duong(d)})
     assert nb.get("luong_phai_672"), "Phải nối sống được luong_phai_672 vào đường bay nổi bật"
-    assert nb["luong_phai_672"]["sach_ghi"]["han"]
+    # Nguyên văn Lương Nhược Du không ra người dùng (TK-2 bản quyền; SK-1 — sách có câu đoán bệnh / sống chết).
+    assert nb["luong_phai_672"]["sach_ghi"]["trang"] and "han" not in nb["luong_phai_672"]["sach_ghi"]
     assert nb["luong_phai_672"]["mat_tieu_cuc_can_chu_y"]
 
     th1 = tuvi_phai_kb.tra_tinh_he_trung_chau(["Tử Vi"], "Tý")

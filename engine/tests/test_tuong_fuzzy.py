@@ -26,7 +26,7 @@ def test_cau_noi_nhan_tuong_bridges_va_en_sach():
     assert kq["ngu_hanh_bridges"]["hanh"] == "moc"
     assert kq["ngu_hanh_bridges"]["nghia_doi_thuong"]
     assert kq["ngu_hanh_bridges"]["mat_tieu_cuc_can_chu_y"]
-    assert kq["ngu_hanh_bridges"]["sach_ghi"]["trich"]
+    assert kq["ngu_hanh_bridges"]["sach_ghi"]["nguon"] and "trich" not in kq["ngu_hanh_bridges"]["sach_ghi"]
 
     with ngon_ngu.dung("en"):
         kq_en = tf.cau_noi_nhan_tuong(sd)

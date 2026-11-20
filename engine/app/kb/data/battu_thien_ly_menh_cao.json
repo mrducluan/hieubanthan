@@ -1,5 +1,5 @@
 {
-  "_nguon": "Đối chiếu và trích dẫn có phép từ Vi Thiên Lý (韋千里), 'Thiên Lý Mệnh Cảo' (《千里命稿》, 1934–1935 — kho bazi-kb). Lời diễn giải tiếng Việt chi tiết 2 chiều (mặt tích cực khi đắc dụng + mặt tiêu cực cần chú ý khi phá cách).",
+  "_nguon": "Tóm ý theo Vi Thiên Lý (韋千里), 'Thiên Lý Mệnh Cảo' (《千里命稿》, 1934–1935 — kho bazi-kb). Lời diễn giải tiếng Việt chi tiết 2 chiều (mặt tích cực khi đắc dụng + mặt tiêu cực cần chú ý khi phá cách). Không chép nguyên văn sách (sách còn bản quyền, quyết định TK-2): mục `sach_ghi` chỉ giữ nơi dẫn (sách, trang); lời tiếng Việt là tóm ý do ban biên tập viết.",
   "_trang_thai": "da_doi_chieu_sach_goc",
   "source_id": "battu_thien_ly_menh_cao",
   "school_id": "tu_binh",
@@ -13,8 +13,8 @@
       "mat_tich_cuc": "Tàng Can ẩn trong Địa Chi có thể âm thầm bổ sung ngũ hành còn thiếu trên bề mặt Thiên Can, giúp cân đối cục diện và tạo nguồn lực hậu thuẫn bền vững.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: nếu chỉ nhìn bề mặt Thiên Can mà bỏ qua Tàng Can trong Chi, rất dễ đánh giá sai độ vượng suy của Nhật Chủ và chọn nhầm Dụng Thần.",
       "sach_ghi": {
-        "han": "人元者，即地支內所藏之天干也。人元之利，可以輔助天干地支之不逮。",
-        "nguon": "Thiên Lý Mệnh Cảo — Nhân Nguyên Thiên (BZ_QLMG_0007)"
+        "nguon": "Thiên Lý Mệnh Cảo — Nhân Nguyên Thiên",
+        "tom_y": true
       },
       "nghia_doi_thuong": "Ngoài những điểm mạnh dễ thấy bên ngoài, mỗi người còn có nguồn nội lực ẩn bên trong giúp bổ sung cho phần mình đang thiếu."
     },
@@ -23,8 +23,8 @@
       "mat_tich_cuc": "Khi Chính Tài bị Kiếp Tài vượng tranh đoạt, có Thất Sát xuất hiện chế ngự Kiếp Tài sẽ bảo vệ được nguồn tài sản và tạo uy tín lãnh đạo quyết đoán.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý mặt tiêu cực của Thất Sát khi thân vượng Ấn nặng mà Tài nhẹ: Thất Sát lại sinh Ấn làm hao tổn Tài tinh, hoặc khi thân nhược không có Thực/Ấn hóa giải sẽ sinh áp lực lớn, tiểu nhân cản trở và dễ hao sức.",
       "sach_ghi": {
-        "han": "幸有丁火七殺制劫財，論其功用，制劫為第一，救財為第二。七殺之弊，耗財：日強印重財輕，即怕七殺。",
-        "nguon": "Thiên Lý Mệnh Cảo — Lục Thần Thiên (BZ_QLMG_0010)"
+        "nguon": "Thiên Lý Mệnh Cảo — Lục Thần Thiên",
+        "tom_y": true
       },
       "nghia_doi_thuong": "Khi gặp cạnh tranh tiền bạc hoặc bị chia phần, kỷ luật cứng rắn và quyết đoán đúng lúc sẽ giúp bạn bảo vệ được thành quả."
     },
@@ -33,8 +33,8 @@
       "mat_tich_cuc": "Thực Thần vượng trên nền Nhật Chủ khỏe là tượng thanh nhàn, giàu tài năng sáng tạo, ăn nói có duyên và dễ tự tạo nguồn thu bền bỉ (Thực Thần sinh Tài).",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý ba tình huống phá cách của Thực Thần: thân mạnh Thực ít lại gặp Thiên Ấn (Kiêu Thần đoạt Thực) khiến kế hoạch dễ đứt gãy; thân yếu Thực sinh Tài lại lộ Thất Sát gây kiệt sức; hoặc gặp hình xung phá hại làm giảm phúc khí.",
       "sach_ghi": {
-        "han": "食神者，一名爵星，又名壽星。食神喜行身旺地，遇梟逢比總成空。",
-        "nguon": "Thiên Lý Mệnh Cảo — Lục Thần Thiên & Cách Cục Thiên (BZ_QLMG_0011, 0016, 0020)"
+        "nguon": "Thiên Lý Mệnh Cảo — Lục Thần Thiên & Cách Cục Thiên",
+        "tom_y": true
       },
       "nghia_doi_thuong": "Năng lực sáng tạo, ăn nói có duyên và làm việc đều tay là gốc tạo thu nhập bền vững — chỉ cần tránh để lo âu hay người ngoài làm đứt mạch."
     },
@@ -43,8 +43,8 @@
       "mat_tich_cuc": "Khi Nhật Chủ nhược có Ấn tinh sinh thân và Quan tinh sinh Ấn là tượng học thức sâu, được quý nhân che chở, càng đi vào vận Ấn/Tỷ càng vững vàng.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý hai mặt trái: thân đã mạnh lại thêm Ấn quá dày dễ trở nên bảo thủ, ỷ lại, chậm hành động (cần Tài tinh tiết chế); ngược lại thân yếu Ấn mỏng mà gặp Tài mạnh phá Ấn (Tham Tài Hoại Ấn) thì dễ mất uy tín hoặc tổn hại sức khỏe vì chạy theo lợi trước mắt.",
       "sach_ghi": {
-        "han": "日干弱，有印綬生身，最喜官星生印。日干強，又有印綬生身，即喜財以制之。貪財壞印，喜行比劫之鄉。",
-        "nguon": "Thiên Lý Mệnh Cảo — Lục Thần Thiên & Cách Cục Thiên (BZ_QLMG_0012, 0020)"
+        "nguon": "Thiên Lý Mệnh Cảo — Lục Thần Thiên & Cách Cục Thiên",
+        "tom_y": true
       },
       "nghia_doi_thuong": "Kiến thức, uy tín và sự nâng đỡ từ người đi trước là điểm tựa lớn; nhưng nếu quá dựa dẫm sẽ chậm hành động, còn chạy theo lợi ngắn lại dễ tổn uy tín."
     },
@@ -53,8 +53,8 @@
       "mat_tich_cuc": "Mệnh có cách cục rõ ràng, khí thế tập trung mà không bị hình xung phá hại giúp sự nghiệp có trục chính vững chắc, dễ tạo thành tựu nổi bật đúng sở trường.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: mọi cách cục đều hỏng ở hai chữ thái quá hoặc bất cập. Ấn quá nhiều cần vận Tài để thông thoáng; Thực nhiều cần Ấn để thu liễm; nếu đại vận đi ngược Dụng Thần thì nên giữ thế thủ, tích lũy nội lực thay vì mạo hiểm mở rộng.",
       "sach_ghi": {
-        "han": "凡人秉命，必有一格。惟格有成敗，太過、不及之互異，故人有貧賤富貴之不等。",
-        "nguon": "Thiên Lý Mệnh Cảo — Cách Cục Thiên (BZ_QLMG_0014, 0020)"
+        "nguon": "Thiên Lý Mệnh Cảo — Cách Cục Thiên",
+        "tom_y": true
       },
       "nghia_doi_thuong": "Điểm mạnh lớn nhất của một người nếu dùng quá tay hoặc quá thiếu đều dễ phản tác dụng — mấu chốt là biết tiến khi thuận và giữ sức khi gặp nhịp chậm."
     },
@@ -63,8 +63,8 @@
       "mat_tich_cuc": "Thiên Can tương hợp đứng liền kề và đắc Nguyệt Lệnh tương sinh không bị ngũ hành khắc chế cản đường mới thành chân Hóa Khí Cách — tượng khí thế thuần nhất, dễ làm nên việc lớn.",
       "mat_tieu_cuc_can_chu_y": "Nên chú ý: rất nhiều người thấy Can hợp liền vội luận Hóa Khí Cách nhưng thực chất bị cách vị (không liền kề) hoặc không đắc Nguyệt Lệnh — khi đó chỉ là hợp mà không hóa, luận sai cách cục sẽ kéo theo chọn sai toàn bộ hướng phát triển.",
       "sach_ghi": {
-        "han": "化氣格之必不可成者：（一）隔位；（二）不得月令。",
-        "nguon": "Thiên Lý Mệnh Cảo — Cách Cục Thiên (BZ_QLMG_0018)"
+        "nguon": "Thiên Lý Mệnh Cảo — Cách Cục Thiên",
+        "tom_y": true
       },
       "nghia_doi_thuong": "Đừng vội kết luận một cơ hội hợp tác sẽ tạo ra bước ngoặt lớn nếu hai bên chưa thật sự đứng gần nhau và chưa gặp đúng thời điểm thuận lợi."
     }
