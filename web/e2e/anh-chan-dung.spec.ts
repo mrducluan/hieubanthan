@@ -56,6 +56,9 @@ test("đo trên ảnh (engine thật, không AI): chấm 20 điểm → gợi ý
   await expect(page.getByTestId("goi-y-vua")).toContainText("Rộng vừa");
   await expect(page.getByTestId("goi-y-con-lai")).toBeVisible();
   await expect(gy).toContainText("Dài, hẹp, thanh");
+  const fz = page.getByTestId("do-fuzzy-ngu-hanh");                                  // thẻ khí chất từ fuzzy_bridge: sach_ghi là đối tượng KB → hiện tên sách, không vỡ trang
+  await expect(fz).toBeVisible();
+  await expect(fz).toContainText("Lillian Pearl Bridges");
   await expect(gy).toContainText("Phần trán dài rõ");
   await expect(page.getByTestId("do-so-do")).toContainText("Cao / ngang gò má: 1,63");
   // thân gửi: chỉ toạ độ + tỉ lệ + đồng ý — không có ảnh

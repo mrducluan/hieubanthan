@@ -13,8 +13,21 @@ export interface FuzzyMatBridge {
     nghia_doi_thuong?: string;
     mat_tich_cuc?: string;
     mat_tieu_cuc_can_chu_y?: string;
-    sach_ghi?: string;
+    /** Engine trả mục KB dạng `{ tom_y, nguon }` (tóm ý ban biên tập + tên sách) — không phải chuỗi. */
+    sach_ghi?: SachGhiBridges | string | null;
   };
+}
+
+export interface SachGhiBridges {
+  tom_y?: boolean;
+  nguon?: string;
+}
+
+/** Chữ hiển thị của mục nguồn: chỉ nhận chuỗi; đối tượng lạ → không hiện (không đưa đối tượng vào JSX). */
+function chuSachGhi(sg: SachGhiBridges | string | null | undefined): string | null {
+  if (typeof sg === "string") return sg.trim() || null;
+  if (sg && typeof sg === "object" && typeof sg.nguon === "string") return sg.nguon.trim() || null;
+  return null;
 }
 
 export interface FuzzyTayBridge {
@@ -56,6 +69,7 @@ export function TheNguHanhGuongMat({
   const nb = bridge?.ngu_hanh_bridges;
   if (!nb) return null;
   const pct = Math.round(Math.max(0, Math.min(1, nb.confidence)) * 100);
+  const sachGhi = chuSachGhi(nb.sach_ghi);
   const tieuDe = nb.ten || (en ? TEN_HANH_EN[nb.hanh] ?? nb.hanh : TEN_HANH_VI[nb.hanh] ?? nb.hanh);
 
   return (
@@ -96,12 +110,12 @@ export function TheNguHanhGuongMat({
         </div>
       )}
 
-      {nb.sach_ghi && (
+      {sachGhi && (
         <details className="mt-2.5 text-xs text-fg-muted">
           <summary className="cursor-pointer text-gold hover:underline">
             {en ? "Source note" : "Sách tham khảo ghi"}
           </summary>
-          <p className="mt-1.5 italic leading-relaxed">{nb.sach_ghi}</p>
+          <p className="mt-1.5 italic leading-relaxed">{sachGhi}</p>
         </details>
       )}
 
