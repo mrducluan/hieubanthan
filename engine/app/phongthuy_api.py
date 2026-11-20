@@ -322,13 +322,29 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
         _q_en = {"Khảm": "Kan", "Cấn": "Gen", "Chấn": "Zhen", "Tốn": "Xun", "Ly": "Li", "Khôn": "Kun", "Đoài": "Dui", "Càn": "Qian"}
         _h_en = {"Bắc": "North", "Đông Bắc": "Northeast", "Đông": "East", "Đông Nam": "Southeast",
                  "Nam": "South", "Tây Nam": "Southwest", "Tây": "West", "Tây Bắc": "Northwest"}
-        import unicodedata as _ud  # noqa: PLC0415
-        _ascii = lambda s: _ud.normalize("NFD", s).encode("ascii", "ignore").decode("ascii").replace("Đ", "D").replace("đ", "d")
+        _m_en = {
+            "Nhâm": "Ren", "Tý": "Zi", "Quý": "Gui", "Sửu": "Chou", "Cấn": "Gen", "Dần": "Yin",
+            "Giáp": "Jia", "Mão": "Mao", "Ất": "Yi", "Thìn": "Chen", "Tốn": "Xun", "Tỵ": "Si",
+            "Bính": "Bing", "Ngọ": "Wu", "Đinh": "Ding", "Mùi": "Wei", "Khôn": "Kun", "Thân": "Shen",
+            "Canh": "Geng", "Dậu": "You", "Tân": "Xin", "Tuất": "Xu", "Càn": "Qian", "Hợi": "Hai",
+        }
         def _en_slot(x: dict) -> dict:
-            return {**x, "cung": _q_en.get(x["cung"], _ascii(x["cung"])), "phuong": _h_en.get(x["phuong"], _ascii(x["phuong"])), "son": _ascii(x["son"])}
-        tm_ra = {**tm, "toa": _ascii(tm["toa"]), "huong": _ascii(tm["huong"]),
-                 "chinh": _en_slot(tm["chinh"]), "phu": _en_slot(tm["phu"]),
-                 "y": {"ten": "Castle Gate (Cheng Men)", "mo_ta": "Adjacent palace to the Facing sector checked against the ruling period star."}}
+            return {**x, "cung": _q_en.get(x["cung"], x["cung"]), "phuong": _h_en.get(x["phuong"], x["phuong"]), "son": _m_en.get(x["son"], x["son"])}
+        tm_ra = {
+            **tm,
+            "toa": _m_en.get(tm["toa"], tm["toa"]),
+            "huong": _m_en.get(tm["huong"], tm["huong"]),
+            "chinh": _en_slot(tm["chinh"]),
+            "phu": _en_slot(tm["phu"]),
+            "y": {
+                "ten": "Castle Gate (Cheng Men)",
+                "y": "The two palaces flanking the Facing sector (primary follows He Tu pairs 1-6/2-7/3-8/4-9; secondary is the other flank). When the ruling period star flies into a Castle Gate sector, it acts as a supportive secondary intake of Qi.",
+                "chinh": "Primary Castle Gate is active in this period — stronger supportive Qi intake than the secondary gate.",
+                "phu": "Secondary Castle Gate is active in this period — usable as a secondary open entryway or pathway.",
+                "khong_dung": "Neither flanking palace receives the ruling period star in this construction period, so Castle Gate does not apply.",
+                "luu_y": "Per Shen's Xuan Kong, Castle Gate applies only when a real side door, pathway, or open intersection exists in that sector.",
+            },
+        }
     return {
         "engine_version": ENGINE_VERSION, **b,
         "cung": cung_chi_tiet,
