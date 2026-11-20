@@ -31,7 +31,7 @@ def _walk_strings(x):
         yield x
     elif isinstance(x, dict):
         for k, v in x.items():
-            if k not in ("ten", "vai_tro_hien_tai", "hanh_manh", "hanh_can_bu", "hanh_troi", "hanh_thieu"):
+            if k not in ("ten", "ten_a", "ten_b", "vai_tro_hien_tai", "hanh_manh", "hanh_can_bu", "hanh_troi", "hanh_thieu"):
                 yield from _walk_strings(v)
     elif isinstance(x, list):
         for v in x:
