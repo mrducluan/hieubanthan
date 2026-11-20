@@ -6,7 +6,7 @@ export const COT_CHAN_TRANG: readonly CotChanTrang[] = [
   { ten: "Huyền học", ds: [
     ["/than-so", "Thần số học"], ["/tu-vi", "Tử vi"], ["/bat-tu", "Bát tự"], ["/kinh-dich", "Kinh Dịch"],
     ["/phong-thuy", "Phong thuỷ"], ["/nhan-tuong", "Nhân tướng học"], ["/tarot", "Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"],
-    ["/hop-doi", "Hợp đôi"], ["/huyen-hoc", "Tất cả các mảng"],
+    ["/hop-doi", "Hợp đôi"], ["/doanh-chu", "Đội ngũ Doanh chủ"], ["/huyen-hoc", "Tất cả các mảng"],
     ["/hom-nay", "Hôm nay của bạn"], ["/thoi-gian-toi", "Thời gian tới của bạn"], ["/nam", "Xem theo năm"],
     ["/xem-ngay-tot", "Xem ngày tốt"], ["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"],
   ] },
