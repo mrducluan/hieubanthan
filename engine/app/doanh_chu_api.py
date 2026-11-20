@@ -18,6 +18,11 @@ class ThanhVienIn(BaseModel):
 
     ten: str = Field(default="", max_length=60)
     vai_tro: str = Field(default="", max_length=60)
+    nhom_viec: str = Field(
+        default="",
+        pattern="^(|kinh_doanh|van_hanh|tai_chinh|san_pham|marketing|doi_ngoai)$",
+        description="Nhóm công việc chính tùy chọn (6 nhóm chuẩn) để gợi ý phối hợp sát thực tế hơn",
+    )
     ngay: int = Field(..., ge=1, le=31)
     thang: int = Field(..., ge=1, le=12)
     nam: int = Field(..., ge=1930, le=2025)
@@ -31,6 +36,11 @@ class DoiNguIn(BaseModel):
     ong_chu: ThanhVienIn
     doi_ngu: list[ThanhVienIn] = Field(..., min_length=1, max_length=8)
     nam_xem: int = Field(..., ge=2020, le=2050)
+    cap_quan_ly: str = Field(
+        default="chu_dn",
+        pattern="^(chu_dn|giam_doc|truong_nhom)$",
+        description="Cấp quản lý của người xem: chu_dn (Chủ DN), giam_doc (Giám đốc bộ phận), truong_nhom (Trưởng nhóm)",
+    )
     cam_ket_thoa_thuan: bool = Field(
         default=False,
         description="Chủ doanh nghiệp xác nhận đã ký thoả thuận riêng và có đồng ý của từng thành viên trước khi nhập dữ liệu",
@@ -61,5 +71,6 @@ def phan_tich_doi_ngu(inp: DoiNguIn) -> dict:
         inp.ong_chu.model_dump(),
         [tv.model_dump() for tv in inp.doi_ngu],
         nam_xem=inp.nam_xem,
+        cap_quan_ly=inp.cap_quan_ly,
     )
     return {"engine_version": ENGINE_VERSION, "khong_luu_du_lieu": True, **kq}

@@ -257,6 +257,8 @@ def phan_tich_nhan_su(ong_chu: dict, nhan_su: dict, nam_xem: int) -> dict:
     return {
         "ten": nhan_su.get("ten") or ("Nhân sự" if vi else "Member"),
         "vai_tro_hien_tai": nhan_su.get("vai_tro") or "",
+        "nhom_viec": nhan_su.get("nhom_viec") or "",
+        "khop_nhom_viec": _danh_gia_nhom_viec(nhan_su.get("nhom_viec") or "", ns["hanh_manh"], vi),
         "chi_so": {
             "hanh_manh": ns["hanh_manh"],
             "duong_doi": ns["duong_doi"],
@@ -279,7 +281,150 @@ def phan_tich_nhan_su(ong_chu: dict, nhan_su: dict, nam_xem: int) -> dict:
     }
 
 
-def ban_do_doi_ngu(ong_chu: dict, doi_ngu: list[dict], nam_xem: int) -> dict:
+_NHOM_VIEC: dict[str, dict] = {
+    "kinh_doanh": {
+        "hanh": ("Hỏa", "Mộc"),
+        "vi": "Kinh doanh & Bán hàng",
+        "en": "Sales & Business Development",
+        "ho_tro_vi": "Đặt mục tiêu ngắn theo tuần và ghép thêm quy trình chăm sóc sau bán để giữ nhịp bền.",
+        "ho_tro_en": "Use weekly milestones paired with structured post-sale follow-up checklists.",
+    },
+    "van_hanh": {
+        "hanh": ("Thổ", "Kim"),
+        "vi": "Vận hành & Quy trình",
+        "en": "Operations & Process",
+        "ho_tro_vi": "Chuẩn hóa đầu mục bàn giao bằng checklist ngắn và tách rõ việc gấp với việc định kỳ.",
+        "ho_tro_en": "Anchor handoffs in concise checklists and separate urgent requests from routine flow.",
+    },
+    "tai_chinh": {
+        "hanh": ("Kim", "Thổ"),
+        "vi": "Tài chính & Kiểm soát rủi ro",
+        "en": "Finance & Risk Control",
+        "ho_tro_vi": "Áp dụng bước kiểm chéo 2 lượt cho số liệu quan trọng và thống nhất lịch chốt báo cáo cố định.",
+        "ho_tro_en": "Use two-step verification on critical numbers and a fixed reporting cadence.",
+    },
+    "san_pham": {
+        "hanh": ("Thủy", "Kim"),
+        "vi": "Sản phẩm / Kỹ thuật / R&D",
+        "en": "Product / Engineering / R&D",
+        "ho_tro_vi": "Chốt rõ phạm vi đầu ra trước khi bắt tay làm và giới hạn số lần đổi yêu cầu giữa chừng.",
+        "ho_tro_en": "Lock scope before execution and limit mid-sprint requirement shifts.",
+    },
+    "marketing": {
+        "hanh": ("Mộc", "Hỏa"),
+        "vi": "Marketing & Sáng tạo",
+        "en": "Marketing & Creative",
+        "ho_tro_vi": "Trao không gian thử nghiệm trong khung ngân sách rõ ràng và đo bằng 2–3 chỉ số cốt lõi.",
+        "ho_tro_en": "Provide room to experiment within clear budget guardrails and 2–3 core metrics.",
+    },
+    "doi_ngoai": {
+        "hanh": ("Thủy", "Thổ"),
+        "vi": "Chăm sóc khách hàng & Đối ngoại",
+        "en": "Customer Success & Partnerships",
+        "ho_tro_vi": "Quy định rõ biên độ xử lý tình huống để cộng sự chủ động giải quyết nhanh cho khách hàng.",
+        "ho_tro_en": "Define clear resolution boundaries so the member can respond quickly to partners and clients.",
+    },
+}
+
+_CAP_QUAN_LY: dict[str, dict] = {
+    "chu_dn": {
+        "vi": (
+            "Chủ doanh nghiệp / Nhà sáng lập",
+            "Bù lỗ hổng vận hành cốt lõi và giữ nhịp trụ cột",
+            "Dùng Bản đồ 5 Hành để nhìn trục hành đang mỏng của cả nhóm, ưu tiên củng cố bằng quy trình rõ và phân quyền dứt khoát cho người có mức Bù khuyết cao.",
+        ),
+        "en": (
+            "Business Owner / Founder",
+            "Balance core operational gaps and anchor key pillars",
+            "Use the 5-Element Radar to spot the team's lightest axis, reinforce it with clear processes, and delegate cleanly to high-complementarity counterparts.",
+        ),
+    },
+    "giam_doc": {
+        "vi": (
+            "Giám đốc bộ phận / Quản lý cấp trung",
+            "Cầu nối chiến lược giữa Ban Giám đốc và các nhóm thực thi",
+            "Tập trung ghép đúng cặp cộng sự trong phòng ban (người mở rộng đi cùng người giữ quy trình) và chuyển mục tiêu từ cấp trên thành đầu việc rõ ràng theo tháng.",
+        ),
+        "en": (
+            "Department Director / Mid-level Manager",
+            "Bridge executive strategy with team execution",
+            "Pair complementary teammates inside your department (expansion-minded with process-minded) and translate leadership goals into clear monthly deliverables.",
+        ),
+    },
+    "truong_nhom": {
+        "vi": (
+            "Trưởng nhóm / Team Lead",
+            "Giữ tiến độ hằng tuần, gỡ tắc nghẽn và tránh kiệt sức cho cả nhóm",
+            "Dùng cột 'Điều cần chú ý' để chọn cách giao việc và góp ý hợp phong cách từng người; chốt đầu việc gọn bằng 3 gạch đầu dòng mỗi đầu tuần.",
+        ),
+        "en": (
+            "Team Lead / Supervisor",
+            "Maintain weekly execution cadence and unblock teammates",
+            "Tailor weekly task handoffs and feedback style to each teammate's collaboration profile and close every check-in with 3 written priorities.",
+        ),
+    },
+}
+
+
+def _danh_gia_nhom_viec(nhom_viec: str, hanh_manh: str, vi: bool) -> dict | None:
+    """So khớp mang tính hỗ trợ giữa hành chính của cộng sự và nhóm công việc đang làm (tuyệt đối không đánh giá/sàng lọc)."""
+    if not nhom_viec or nhom_viec not in _NHOM_VIEC:
+        return None
+    nv = _NHOM_VIEC[nhom_viec]
+    ten_nv = nv["vi"] if vi else nv["en"]
+    if hanh_manh in nv["hanh"]:
+        return {
+            "ma": nhom_viec,
+            "ten": ten_nv,
+            "muc": "thuan_luc",
+            "nhan": "Thuận lực tự nhiên" if vi else "Natural momentum",
+            "giai_thich": (
+                f"Trục hành {hanh_manh} đồng nhịp với đặc thù mảng {ten_nv}: cộng sự dễ bắt nhịp tự nhiên, quản lý chỉ cần chốt rõ mục tiêu đầu ra."
+                if vi
+                else f"{_HANH_EN[hanh_manh]} energy aligns naturally with {ten_nv}: focus on clear outcome targets and autonomy."
+            ),
+        }
+    return {
+        "ma": nhom_viec,
+        "ten": ten_nv,
+        "muc": "bo_sung_goc_nhin",
+        "nhan": "Bổ sung góc nhìn khác biệt" if vi else "Complementary perspective",
+        "giai_thich": (
+            f"Cộng sự thiên hành {hanh_manh} khi làm mảng {ten_nv} sẽ mang lại góc nhìn cân bằng mới cho nhóm. {nv['ho_tro_vi']}"
+            if vi
+            else f"Bringing {_HANH_EN[hanh_manh]} energy into {ten_nv} adds a balancing perspective. {nv['ho_tro_en']}"
+        ),
+    }
+
+
+def _goi_y_ghep_cap(chi_tiet_ns: list[dict], vi: bool) -> list[dict]:
+    """Gợi ý tối đa 3 cặp cộng sự trong nhóm có hành bổ trợ tốt khi cùng chạy một dự án."""
+    ket_qua: list[dict] = []
+    n = len(chi_tiet_ns)
+    for i in range(n):
+        for j in range(i + 1, n):
+            a, b = chi_tiet_ns[i], chi_tiet_ns[j]
+            ha, hb = a["chi_so"]["hanh_manh"], b["chi_so"]["hanh_manh"]
+            if ha == hb:
+                continue
+            ly_do = (
+                f"Hành {ha} thiên về {_VAI_TRO_HANH[ha]['vi'][0].lower()}, kết hợp cùng hành {hb} mạnh {_VAI_TRO_HANH[hb]['vi'][0].lower()} giúp dự án vừa có lực đẩy vừa có điểm chốt."
+                if vi
+                else f"{_HANH_EN[ha]} energy pairs smoothly with {_HANH_EN[hb]}, balancing initiative with structured follow-through."
+            )
+            ket_qua.append({
+                "ten_a": a["ten"],
+                "ten_b": b["ten"],
+                "hanh_a": ha if vi else _HANH_EN[ha],
+                "hanh_b": hb if vi else _HANH_EN[hb],
+                "ly_do": ly_do,
+            })
+            if len(ket_qua) >= 3:
+                return ket_qua
+    return ket_qua
+
+
+def ban_do_doi_ngu(ong_chu: dict, doi_ngu: list[dict], nam_xem: int, cap_quan_ly: str = "chu_dn") -> dict:
     """Bậc 2 & 3 — Bản Đồ Cân Bằng Ngũ Hành & Ma Trận Giao Tiếp cho 1 Ông Chủ + 1..8 thành viên tự nguyện đồng ý."""
     vi = ngon_ngu.la_viet()
     nam_hien = nam_xem
@@ -326,9 +471,19 @@ def ban_do_doi_ngu(ong_chu: dict, doi_ngu: list[dict], nam_xem: int) -> dict:
             "doanh_nghiep_lon": "For 20–200+ organizations: use the 5-Element Balance Radar to pair growth-driven leaders with structured risk/process counterparts.",
         }
 
+    cap_ma = cap_quan_ly if cap_quan_ly in _CAP_QUAN_LY else "chu_dn"
+    cap_ten, cap_trong_tam, cap_hanh_dong = _CAP_QUAN_LY[cap_ma]["vi" if vi else "en"]
+    goi_y_cap = {
+        "ma": cap_ma,
+        "ten": cap_ten,
+        "trong_tam": cap_trong_tam,
+        "hanh_dong": cap_hanh_dong,
+    }
+
     return {
         "provenance": "bien_tap",
         "nam_xem": nam_hien,
+        "cap_quan_ly": goi_y_cap,
         "ong_chu": {
             "ten": ong_chu.get("ten") or ("Ông chủ" if vi else "Owner"),
             "hanh_manh": ceo["hanh_manh"],
@@ -338,6 +493,7 @@ def ban_do_doi_ngu(ong_chu: dict, doi_ngu: list[dict], nam_xem: int) -> dict:
         },
         "can_bang_ngu_hanh": can_bang,
         "ma_tran_phoi_hop": chi_tiet_ns,
+        "goi_y_ghep_cap": _goi_y_ghep_cap(chi_tiet_ns, vi),
         "goi_y_quy_mo": goi_y_quy_mo,
         "ranh_gioi_phap_ly": _RANH_GIOI_VI if vi else _RANH_GIOI_EN,
     }
