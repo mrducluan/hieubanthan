@@ -1,0 +1,189 @@
+{
+  "_nguon": "Tóm ý theo Mary K. Greer, 'The Complete Book of Tarot Reversals' (Llewellyn Publications, 2002, tr. 51–104). Phân tích chiều sâu 2 mặt (mặt tiêu cực cần chú ý + hướng chuyển hóa tích cực) cho 22 Lá Ẩn Chính khi lên ngược. Không chép nguyên văn sách (sách còn bản quyền, quyết định TK-2): mục `sach_ghi` chỉ giữ nơi dẫn (sách, trang); lời tiếng Việt là tóm ý do ban biên tập viết.",
+  "_trang_thai": "da_doi_chieu_sach_goc",
+  "source_id": "tarot_greer_nguoc",
+  "school_id": "rws",
+  "sach_goc": {
+    "ten": "The Complete Book of Tarot Reversals",
+    "tac_gia": "Mary K. Greer",
+    "nxb": "Llewellyn Publications (2002)"
+  },
+  "la": {
+    "dai_0": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý hai thái cực: hoặc quá sợ rủi ro mà tự nhốt mình trong vùng an toàn, hoặc hành động bốc đồng, liều lĩnh mà thiếu cân nhắc hậu quả.",
+      "huong_chuyen_hoa": "Mặt tích cực: lá này nhắc bạn trưởng thành hơn, nhận trách nhiệm thực tế và chuẩn bị nền tảng kỹ trước khi bước sang trang mới.",
+      "sach_ghi": {
+        "trang": "tr. 52",
+        "tom_y": true
+      }
+    },
+    "dai_1": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý dấu hiệu né tránh trách nhiệm, thiếu kỹ năng cần thiết cho việc đang ôm, hoặc gặp tình huống bế tắc không thể tự xoay một mình.",
+      "huong_chuyen_hoa": "Mặt tích cực: nhận ra giới hạn thật giúp bạn dừng lãng phí sức, nhờ đúng người hỗ trợ hoặc buông bớt việc không còn kiểm soát được.",
+      "sach_ghi": {
+        "trang": "tr. 54",
+        "tom_y": true
+      }
+    },
+    "dai_2": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý sự mất kết nối với trực giác, phớt lờ cảm xúc thật của mình hoặc chỉ nhìn mọi chuyện ở bề mặt hời hợt.",
+      "huong_chuyen_hoa": "Mặt tích cực: đây cũng có thể là lúc bạn bước ra khỏi vỏ bọc kín đáo để chia sẻ điều mình giữ kín lâu nay ra ngoài ánh sáng.",
+      "sach_ghi": {
+        "trang": "tr. 56",
+        "tom_y": true
+      }
+    },
+    "dai_3": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý xu hướng chăm sóc theo kiểu kiểm soát ngột ngạt, đòi hỏi quá mức, hoặc sa đà vào hưởng thụ, phù phiếm mà bỏ quên chiều sâu.",
+      "huong_chuyen_hoa": "Mặt tích cực: bạn có quyền từ chối những khuôn mẫu gò bó không hợp với mình và tự định nghĩa lại cách nuôi dưỡng đời sống.",
+      "sach_ghi": {
+        "trang": "tr. 59",
+        "tom_y": true
+      }
+    },
+    "dai_4": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý hình ảnh quyền lực lệch chuẩn: hoặc độc đoán, gia trưởng, bảo thủ; hoặc ngược lại là sự yếu mềm, thiếu bản lĩnh và không giữ nguyên tắc khi cần bảo vệ người khác.",
+      "huong_chuyen_hoa": "Mặt tích cực: nhận diện rõ chỗ nào đang lạm quyền hay thiếu kỷ luật để xây lại trật tự công bằng và vững vàng hơn.",
+      "sach_ghi": {
+        "trang": "tr. 61",
+        "tom_y": true
+      }
+    },
+    "dai_5": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý xung đột với quy tắc, tổ chức hoặc truyền thống; dễ phản kháng theo cảm tính mà chưa dựng được tiêu chuẩn thay thế đủ vững.",
+      "huong_chuyen_hoa": "Mặt tích cực: lá này mở ra tư duy độc lập, dám đặt câu hỏi với lối mòn cũ để chọn giá trị sống thực sự thuộc về bạn.",
+      "sach_ghi": {
+        "trang": "tr. 64",
+        "tom_y": true
+      }
+    },
+    "dai_6": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý sự thiếu hòa hợp trong mối quan hệ, lý tưởng hóa một người không có mặt trong thực tế, hoặc do dự không dám chọn dứt khoát.",
+      "huong_chuyen_hoa": "Mặt tích cực: đây là lời nhắc đối diện sự thật của mối quan hệ thay vì nuôi ảo tưởng, từ đó đưa ra lựa chọn trưởng thành.",
+      "sach_ghi": {
+        "trang": "tr. 66",
+        "tom_y": true
+      }
+    },
+    "dai_7": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý cảm giác mất lái, lao nhanh mà thiếu phương hướng rõ ràng, hoặc vướng vào xung đột cái tôi ngay tại ngã rẽ quan trọng.",
+      "huong_chuyen_hoa": "Mặt tích cực: giảm tốc độ một nhịp để kiểm tra lại mục tiêu thật và cầm chắc tay lái trước khi tăng tốc trở lại.",
+      "sach_ghi": {
+        "trang": "tr. 69",
+        "tom_y": true
+      }
+    },
+    "dai_8": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý sự giằng xé nội tâm giữa lý trí và bản năng: hoặc sợ hãi cảm xúc mạnh của chính mình, hoặc liều lĩnh quá đà khi lòng chưa thật sự vững.",
+      "huong_chuyen_hoa": "Mặt tích cực: thừa nhận chỗ mình đang mệt mỏi thay vì gồng cứng giúp bạn hồi phục sức bền thật sự từ bên trong.",
+      "sach_ghi": {
+        "trang": "tr. 71",
+        "tom_y": true
+      }
+    },
+    "dai_9": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý hai cực đoan: sợ cô đơn đến mức bám víu quan hệ sai, hoặc thu mình cực đoan, quay lưng với gia đình, bạn bè; cũng cần cảnh giác với người dẫn đường thiếu trung thực.",
+      "huong_chuyen_hoa": "Mặt tích cực: biết cân đối giữa thời gian một mình để suy ngẫm và sự kết nối lành mạnh với người đáng tin cậy.",
+      "sach_ghi": {
+        "trang": "tr. 74",
+        "tom_y": true
+      }
+    },
+    "dai_10": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý cảm giác bấp bênh lên xuống thất thường, kế hoạch bị chậm trễ, vướng trục trặc nhỏ lặp đi lặp lại khiến bạn sốt ruột.",
+      "huong_chuyen_hoa": "Mặt tích cực: bản chất vòng xoay vẫn mở cơ hội tốt, nhưng đòi hỏi bạn kiên nhẫn vượt qua đoạn trễ thay vì bỏ cuộc giữa chừng.",
+      "sach_ghi": {
+        "trang": "tr. 76",
+        "tom_y": true
+      }
+    },
+    "dai_11": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý tình huống thiếu công bằng, rắc rối giấy tờ – pháp lý, hoặc chính bạn đang tự né tránh trách nhiệm với hệ quả từ lựa chọn cũ.",
+      "huong_chuyen_hoa": "Mặt tích cực: đây là thời điểm rõ ràng nhất để rà soát lại mọi khoản chưa cân bằng trong công việc và quan hệ, sửa ngay từ gốc.",
+      "sach_ghi": {
+        "trang": "tr. 79",
+        "tom_y": true
+      }
+    },
+    "dai_12": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý vẻ ngoài tỏ ra sẵn sàng hy sinh hay làm vừa lòng số đông nhưng bên trong lại ẩn chứa động cơ riêng hoặc sự miễn cưỡng.",
+      "huong_chuyen_hoa": "Mặt tích cực: dừng việc trì hoãn vô ích, nhìn thẳng xem mình thực sự muốn gì để chuyển từ thế chờ sang hành động có chủ đích.",
+      "sach_ghi": {
+        "trang": "tr. 82",
+        "tom_y": true
+      }
+    },
+    "dai_13": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý thái độ chống cự một sự kết thúc tất yếu: càng cố trì hoãn và tự huyễn hoặc, nỗi đau càng kéo dài và cơ hội mới càng bị chặn lại.",
+      "huong_chuyen_hoa": "Mặt tích cực: khi chấp nhận buông thứ đã hết vai trò, bạn giải phóng rất nhiều sức lực để bước vào chu kỳ tái sinh nhẹ nhõm hơn.",
+      "sach_ghi": {
+        "trang": "tr. 84",
+        "tom_y": true
+      }
+    },
+    "dai_14": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý sự mất cân đối, quá đà hoặc xung đột lợi ích gây căng thẳng kéo dài, dễ ảnh hưởng trực tiếp tới sức khỏe nếu không điều chỉnh sớm.",
+      "huong_chuyen_hoa": "Mặt tích cực: lá bài chỉ thẳng điểm đang lệch nhịp để bạn giảm cường độ, sắp xếp lại ưu tiên và tìm điểm dung hòa thực tế.",
+      "sach_ghi": {
+        "trang": "tr. 87",
+        "tom_y": true
+      }
+    },
+    "dai_15": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý biên độ cực đoan của lá này: ở mặt tối là buông thả hoàn toàn theo cám dỗ, thói quen độc hại hoặc sự thiếu tỉnh táo vì tham vọng.",
+      "huong_chuyen_hoa": "Mặt tích cực rất mạnh: đây cũng là thời điểm tỉnh ngộ để cắt đứt dây trói buộc cũ, thoát khỏi sự phụ thuộc và lấy lại tự do.",
+      "sach_ghi": {
+        "trang": "tr. 89",
+        "tom_y": true
+      }
+    },
+    "dai_16": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý nguy cơ sụp đổ âm ỉ bên dưới vỏ bọc tưởng như yên ổn vì bạn cố giữ một cấu trúc đã mục nát.",
+      "huong_chuyen_hoa": "Mặt tích cực: lá ngược thường giảm nhẹ cú sốc, báo hiệu thoát hiểm trong gang tấc hoặc kịp rút lui trước khi thiệt hại trở nên nghiêm trọng.",
+      "sach_ghi": {
+        "trang": "tr. 92",
+        "tom_y": true
+      }
+    },
+    "dai_17": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý cảm giác hụt hẫng tạm thời, tự ti phủ nhận tài năng và giá trị thật của bản thân, hoặc bám vào vẻ bề ngoài hào nhoáng.",
+      "huong_chuyen_hoa": "Mặt tích cực: giai đoạn trút bỏ những nhãn mác giả tạo giúp bạn nhìn thấy năng lực thật bền vững hơn của chính mình.",
+      "sach_ghi": {
+        "trang": "tr. 94",
+        "tom_y": true
+      }
+    },
+    "dai_18": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý thói quen chối bỏ trực giác, bám chặt vào lý lẽ khô cứng khi đối mặt với sự mơ hồ, hoặc tự đẩy nỗi sợ vào bóng tối khiến tinh thần kiệt sức.",
+      "huong_chuyen_hoa": "Mặt tích cực: khi dám gọi tên thẳng điều mình đang lo lắng, lớp sương dày sẽ tan nhanh và sự thật trở nên sáng rõ hơn.",
+      "sach_ghi": {
+        "trang": "tr. 97",
+        "tom_y": true
+      }
+    },
+    "dai_19": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý niềm vui bị phủ mây vì tâm lý nghi ngờ hạnh phúc sẽ không bền, làm quá mức khiến mất tự nhiên, hoặc hiểu nhầm điều vốn rất rõ ràng.",
+      "huong_chuyen_hoa": "Mặt tích cực: bản chất cát lành của Mặt Trời vẫn còn đó — chỉ cần bớt cầu toàn và cho phép mình tận hưởng thành quả thực tế đang có.",
+      "sach_ghi": {
+        "trang": "tr. 99",
+        "tom_y": true
+      }
+    },
+    "dai_20": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý sự chần chừ trước bước chuyển lớn, né tránh quyết định dứt khoát vì tiếc lối sống cũ — càng trì hoãn càng dễ rơi vào trì trệ.",
+      "huong_chuyen_hoa": "Mặt tích cực: cho mình khoảng lặng ngắn để lắng nghe tiếng gọi thật bên trong và chuẩn bị kỹ trước khi đóng lại chương cũ.",
+      "sach_ghi": {
+        "trang": "tr. 102",
+        "tom_y": true
+      }
+    },
+    "dai_21": {
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý thành quả đến chậm hơn dự tính, kế hoạch đi xa gặp trắc trở, hoặc cảm giác trống rỗng bất ngờ ngay sau khi vừa hoàn thành mục tiêu lớn.",
+      "huong_chuyen_hoa": "Mặt tích cực: kết quả cuối cùng vẫn tích cực dù lặng lẽ và riêng tư hơn; hãy hoàn tất nốt những chi tiết cuối để khép vòng trọn vẹn.",
+      "sach_ghi": {
+        "trang": "tr. 104",
+        "tom_y": true
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@ import { postJson } from "@/lib/goi-api";
 import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
 import { cn } from "@/lib/utils";
 import { useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
+import { ChonTrenVeTinh, coBanDoVeTinh, type LaBanHuyenKhongMap } from "@/components/huyen-hoc/ChonTrenVeTinh";
 import { tenTheo, type TenHien } from "@/lib/ten-hien";
 
 const SON_24: [string, string][] = [
@@ -20,11 +21,26 @@ const SON_24: [string, string][] = [
   ["Canh", "Tây"], ["Dậu", "Tây"], ["Tân", "Tây"], ["Tuất", "Tây Bắc"], ["Càn", "Tây Bắc"], ["Hợi", "Tây Bắc"],
 ];
 
-interface Cung { cung: string; phuong: string; luoi: [number, number]; goc: number; van: number; son: number; huong: number }
+interface YCap {
+  ma: string; ten: string; y: string; muc: string; hop_cho: string; luu_y: string;
+  hop_thap?: boolean;
+  linh_vuc?: Record<string, string>;
+  an_toan?: string[];
+  sach_ghi?: { loi: string; nhom: string; viec?: string; cau_ket?: string };
+  nam_chu_y?: { chu_dong: number[]; thuan: number[] };
+}
+interface ThanhMonCung { vai: string; cung: string; phuong: string; son: string; van_tinh: number; thuan: boolean; sao_den: number; dung_duoc: boolean }
+interface ThanhMon {
+  van: number; toa: string; huong: string; co_thanh_mon: boolean;
+  chinh: ThanhMonCung; phu: ThanhMonCung;
+  y?: { ten: string; y: string; chinh: string; phu: string; khong_dung: string; luu_y: string };
+}
+interface Cung { cung: string; phuong: string; luoi: [number, number]; goc: number; van: number; son: number; huong: number; y_cap?: YCap }
 interface Ban {
   van: number; nam_xay: number; cuc: string; cuc_ten: string; cuc_y: { y: string; goi_y: string };
   toa: { son: string; quai: string; phuong: string }; huong: { son: string; quai: string; phuong: string };
   cung: Cung[]; to_hop: { ma: string; ten: string; nhom: string; y: string; cung?: string[] }[];
+  thanh_mon?: ThanhMon;
   trang_thai_sao: { sao: number; ten: string; trang_thai: string }[];
   sao_y: Record<string, { hanh: string; y_vuong: string; y_suy: string }>;
   luu_nien: { nam: number; tam: number; sao_tam: string; cung: Record<string, number> };
@@ -76,6 +92,7 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
   }, [doLuu, doToaGoiY]);
   const [kiem, setKiem] = useState(false);
   const [ban, setBan] = useState<Ban | null>(null);
+  const [chonCung, setChonCung] = useState<string | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
   const { c: t, en } = useChuPT();
@@ -90,12 +107,41 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
     setDang(true); setLoi(null);
     try {
       const body = { nam_xay: Number(namXay), ...(cach === "son" ? { toa, ...(kiem ? { the_quai: true } : {}) } : { do: d }) };
-      setBan(await postJson<Ban>("/api/phongthuy/huyen-khong", body));
+      const kq = await postJson<Ban>("/api/phongthuy/huyen-khong", body);
+      setBan(kq);
+      setChonCung(kq.huong.quai);
       try { luuHoSoNha({ nam_xay: nam, ...(cach === "son" ? { toa } : {}) }); } catch { /* bỏ qua */ }
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong" });
     } catch (e) { setLoi(e instanceof Error ? e.message : t("hk.loi_lap")); }
     finally { setDang(false); }
   };
+
+  const lapVoiDo = async (doToa: number) => {
+    const nam = Number(namXay);
+    if (!(nam >= 1864 && nam <= 2150)) { setLoi(t("hk.loi_nam")); return; }
+    setCach("do");
+    setDoLa(String(doToa));
+    setDang(true); setLoi(null);
+    try {
+      const kq = await postJson<Ban>("/api/phongthuy/huyen-khong", { nam_xay: nam, do: doToa });
+      setBan(kq);
+      setChonCung(kq.huong.quai);
+      try { luuHoSoNha({ nam_xay: nam, huong_do: (doToa + 180) % 360 }); } catch { /* bỏ qua */ }
+      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong_ve_tinh" });
+    } catch (e) { setLoi(e instanceof Error ? e.message : t("hk.loi_lap")); }
+    finally { setDang(false); }
+  };
+
+  const duLieuMap: LaBanHuyenKhongMap | null = ban ? {
+    van: ban.van,
+    toa_quai: ban.toa.quai,
+    huong_quai: ban.huong.quai,
+    cung: ban.cung.map((c) => ({ cung: c.cung, son: c.son, huong: c.huong, muc: c.y_cap?.muc })),
+    thanh_mon: [
+      ...(ban.thanh_mon?.chinh.dung_duoc ? [ban.thanh_mon.chinh.cung] : []),
+      ...(ban.thanh_mon?.phu.dung_duoc ? [ban.thanh_mon.phu.cung] : []),
+    ],
+  } : null;
 
   const tt = (n: number) => ban?.trang_thai_sao.find((x) => x.sao === n)?.trang_thai ?? "tử";
   return (
@@ -141,6 +187,25 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
         </div>
         <Button onClick={lap} disabled={dang || namXay.length !== 4 || (cach === "do" && doLa === "")}>{dang ? t("hk.dang_lap") : t("hk.lap")}</Button>
       </div>
+      {coBanDoVeTinh() && (
+        <div className="space-y-2" data-testid="hk-ve-tinh-wrap">
+          <p className="text-xs text-fg-muted">
+            {en
+              ? "Or place the 8-palace Flying Star compass directly over your roof on satellite map (coordinates stay on your device):"
+              : "Hoặc phủ trực tiếp la bàn Huyền Không 8 cung lên mái nhà trên ảnh vệ tinh (toạ độ chỉ xử lý trên máy bạn, không lưu):"}
+          </p>
+          <ChonTrenVeTinh
+            sinh={null}
+            huyenKhong={duLieuMap}
+            chonCung={chonCung}
+            onChonCung={(c) => { setChonCung(c); ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong_map_cung" }); }}
+            onDung={(kq) => {
+              const doToa = Math.round(((kq.do_huong + 180) % 360) * 10) / 10;
+              void lapVoiDo(doToa);
+            }}
+          />
+        </div>
+      )}
       {loi && <BaoLoi loi={loi} thuLai={lap} />}
 
       {ban && (
@@ -182,24 +247,82 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
               <div key={hang} role="row" className="contents">
             {ban.cung.filter((c) => c.luoi[0] === hang).sort((a, b) => a.luoi[1] - b.luoi[1]).map((c) => {
               const laToa = c.cung === ban.toa.quai, laHuong = c.cung === ban.huong.quai;
+              const laThanhMon = Boolean(
+                (ban.thanh_mon?.chinh.dung_duoc && ban.thanh_mon.chinh.cung === c.cung) ||
+                (ban.thanh_mon?.phu.dung_duoc && ban.thanh_mon.phu.cung === c.cung),
+              );
+              const dangChon = chonCung === c.cung;
               return (
-                <div key={c.cung} role="cell" aria-label={t("hk.o_aria", { cung: tn("cung_hk", c.cung), phuong: tn("huong", c.phuong), son: String(c.son), huong: String(c.huong), van: String(c.van), ln: String(ban.luu_nien.cung[c.cung]) })}
-                  className={cn("relative aspect-square rounded-xl border p-2", laHuong ? "border-gold/70 bg-gold/[0.07]" : laToa ? "border-moon/60 bg-moon/[0.06]" : "border-line/70 bg-bg/40")}>
+                <button key={c.cung} type="button" role="cell" aria-pressed={dangChon}
+                  onClick={() => { setChonCung(c.cung); ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong_cung" }); }}
+                  aria-label={t("hk.o_aria", { cung: tn("cung_hk", c.cung), phuong: tn("huong", c.phuong), son: String(c.son), huong: String(c.huong), van: String(c.van), ln: String(ban.luu_nien.cung[c.cung]) })}
+                  className={cn("relative aspect-square rounded-xl border p-2 text-left transition hover:border-gold/80",
+                    laHuong ? "border-gold/70 bg-gold/[0.07]" : laToa ? "border-moon/60 bg-moon/[0.06]" : "border-line/70 bg-bg/40",
+                    dangChon && "ring-2 ring-gold")}>
                   <p className="text-center text-[0.68rem] text-fg-faint">{c.cung === "Trung cung" ? t("hk.trung_cung") : `${tn("cung_hk", c.cung)} · ${tn("huong", c.phuong)}`}{laToa ? t("hk.nhan_toa") : laHuong ? t("hk.nhan_huong") : ""}</p>
                   <div className="mt-1 flex items-center justify-between px-1 font-serif text-3xl leading-none sm:text-4xl">
                     <span className={MAU_TT[tt(c.son)]} title={t("hk.son_title", { so: String(c.son), tt: ttTen(tt(c.son)) })}>{c.son}</span>
                     <span className={MAU_TT[tt(c.huong)]} title={t("hk.huong_title", { so: String(c.huong), tt: ttTen(tt(c.huong)) })}>{c.huong}</span>
                   </div>
                   <p className="mt-1 text-center font-serif text-xl text-fg-muted">{c.van}</p>
+                  {laThanhMon && (
+                    <span className="absolute bottom-1.5 left-1.5 rounded bg-jade/20 px-1 py-0.5 text-[0.58rem] font-medium text-jade">
+                      {en ? "Gate" : "Thành Môn"}
+                    </span>
+                  )}
                   <span className="absolute bottom-1.5 right-2 text-[0.65rem] text-cinnabar" title={t("hk.ln_title")}>{ban.luu_nien.cung[c.cung]}</span>
-                </div>
+                </button>
               );
             })}
               </div>
             ))}
           </div>
           <p className="text-center text-xs text-fg-faint">{t("hk.chu_giai")}
-            {" "}{t("hk.mau")} <span className="text-gold">{t("hk.tt.vuong")}</span> · <span className="text-jade">{t("hk.tt.sinh")}</span> · <span className="text-moon">{t("hk.tt.thoai")}</span> · <span className="text-fg-muted">{t("hk.tt.suy")}</span> · <span className="text-fg-faint">{t("hk.tt.tu")}</span>.</p>
+            {" "}{t("hk.mau")} <span className="text-gold">{t("hk.tt.vuong")}</span> · <span className="text-jade">{t("hk.tt.sinh")}</span> · <span className="text-moon">{t("hk.tt.thoai")}</span> · <span className="text-fg-muted">{t("hk.tt.suy")}</span> · <span className="text-fg-faint">{t("hk.tt.tu")}</span>.
+            {!en && " Bấm vào từng cung để đọc nghĩa cặp sao Sơn – Hướng."}</p>
+
+          {(() => {
+            const cungChon = ban.cung.find((x) => x.cung === chonCung);
+            const yc = cungChon?.y_cap;
+            if (!cungChon || !yc) return null;
+            const mucNhan = yc.muc === "thuan" ? (en ? "Favorable" : "Thuận") : yc.muc === "can_chu_dong" ? (en ? "Needs care" : "Cần chủ động") : (en ? "Balanced" : "Cân bằng");
+            const mucMau = yc.muc === "thuan" ? "text-jade border-jade/40 bg-jade/10" : yc.muc === "can_chu_dong" ? "text-cinnabar border-cinnabar/40 bg-cinnabar/10" : "text-moon border-moon/40 bg-moon/10";
+            return (
+              <div className="rounded-xl border border-gold/40 bg-bg/50 p-4 text-sm space-y-3" data-testid="hk-chi-tiet-cung" aria-live="polite">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <p className="eyebrow">
+                      {cungChon.cung === "Trung cung" ? t("hk.trung_cung") : `${tn("cung_hk", cungChon.cung)} · ${tn("huong", cungChon.phuong)}`}
+                      {" · "}{en
+                        ? `Mountain ${cungChon.son} – Facing ${cungChon.huong} (Period ${cungChon.van}, Annual ${ban.luu_nien.cung[cungChon.cung]})`
+                        : `Sơn ${cungChon.son} – Hướng ${cungChon.huong} (Vận ${cungChon.van}, Lưu niên ${ban.luu_nien.cung[cungChon.cung]})`}
+                    </p>
+                    <h3 className="mt-0.5 text-base font-medium text-fg">{yc.ten}{yc.hop_thap ? (en ? " · Sum of Ten" : " · Hợp Thập") : ""}</h3>
+                  </div>
+                  <span className={cn("rounded-full border px-2.5 py-0.5 text-xs", mucMau)}>{mucNhan}</span>
+                </div>
+                <p className="leading-relaxed text-fg">{yc.y}</p>
+                <div className="grid gap-2 sm:grid-cols-2 text-xs">
+                  <div className="rounded-lg border border-line/60 bg-surface/40 p-2.5">
+                    <span className="font-medium text-fg">{en ? "Suitable for: " : "Phù hợp bố trí: "}</span>
+                    <span className="text-fg-muted">{yc.hop_cho}</span>
+                  </div>
+                  <div className="rounded-lg border border-line/60 bg-surface/40 p-2.5">
+                    <span className="font-medium text-fg">{en ? "Note: " : "Lưu ý: "}</span>
+                    <span className="text-fg-muted">{yc.luu_y}</span>
+                  </div>
+                </div>
+                {yc.sach_ghi && (
+                  <div className="rounded-lg border border-line/70 bg-bg/60 p-3 text-xs space-y-1">
+                    <p className="font-medium text-gold">{en ? "Classical text:" : "Sách xưa ghi:"}</p>
+                    <p className="leading-relaxed text-fg">{yc.sach_ghi.loi}</p>
+                    {yc.sach_ghi.viec && <p className="text-fg-muted">{yc.sach_ghi.viec}</p>}
+                    {yc.sach_ghi.cau_ket && <p className="text-fg-faint">{yc.sach_ghi.cau_ket}</p>}
+                  </div>
+                )}
+              </div>
+            );
+          })()}
 
           <div className="grid gap-3 md:grid-cols-2">
             <div className="rounded-xl border border-line/70 bg-bg/40 p-4 text-sm">
@@ -219,6 +342,22 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
               ) : <p className="mt-2 text-fg-muted">{t("hk.khong_to_hop")}</p>}
             </div>
           </div>
+
+          {ban.thanh_mon && !en && (
+            <div className="rounded-xl border border-line/70 bg-bg/40 p-4 text-sm" data-testid="hk-thanh-mon">
+              <p className="eyebrow">Thành Môn Quyết (城門訣)</p>
+              <p className="mt-1.5 text-fg">
+                {ban.thanh_mon.chinh.dung_duoc ? (
+                  <>Chính Thành Môn tại <b className="text-jade">{ban.thanh_mon.chinh.cung} ({ban.thanh_mon.chinh.phuong}, sơn {ban.thanh_mon.chinh.son})</b> dùng được trong vận {ban.van}.</>
+                ) : ban.thanh_mon.phu.dung_duoc ? (
+                  <>Phó Thành Môn tại <b className="text-jade">{ban.thanh_mon.phu.cung} ({ban.thanh_mon.phu.phuong}, sơn {ban.thanh_mon.phu.son})</b> dùng được trong vận {ban.van}.</>
+                ) : (
+                  <>{ban.thanh_mon.y?.khong_dung ?? "Chưa có cung Thành Môn đương vận."}</>
+                )}
+              </p>
+              {ban.thanh_mon.y?.luu_y && <p className="mt-1.5 text-xs text-fg-muted">{ban.thanh_mon.y.luu_y}</p>}
+            </div>
+          )}
           <p className="text-xs text-fg-faint">{ban.luu_y}</p>
         </div>
       )}

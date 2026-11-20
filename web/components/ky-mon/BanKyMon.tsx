@@ -32,6 +32,7 @@ export function BanKyMon({ banDau, ngayDau, viec }: { banDau: BanKM; ngayDau: Ng
   const [ngay, setNgay] = useState(ngayDau);
   const [chonViec, setChonViec] = useState<ViecKM | null>(null);
   const [chonCung, setChonCung] = useState<number | null>(null);
+  const [chuyenSau, setChuyenSau] = useState(false);
   const [tc, setTc] = useState<TuyChon>({ phep: banDau.tuy_chon.phep, gio_ty: banDau.tuy_chon.gio_ty, utc: banDau.tuy_chon.utc });
   const [dangTai, setDangTai] = useState(false);
   const [loi, setLoi] = useState(false);
@@ -90,10 +91,16 @@ export function BanKyMon({ banDau, ngayDau, viec }: { banDau: BanKM; ngayDau: Ng
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]">
         <div>
-          <p className="mb-2 text-sm text-fg-muted" data-testid="km-gio">
-            Giờ <span className="text-fg">{d.gio.chi}</span> ({d.gio.khung}) ngày {docNgay(ngayCua(ban.thoi_diem))} ·{" "}
-            <span className={MAU[d.gio.muc].chu}>{d.gio.muc_nhan}</span>
-          </p>
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+            <p className="text-sm text-fg-muted" data-testid="km-gio">
+              Giờ <span className="text-fg">{d.gio.chi}</span> ({d.gio.khung}) ngày {docNgay(ngayCua(ban.thoi_diem))} ·{" "}
+              <span className={MAU[d.gio.muc].chu}>{d.gio.muc_nhan}</span>
+            </p>
+            <label className="flex cursor-pointer items-center gap-1.5 text-xs text-fg-muted">
+              <input type="checkbox" className="accent-[rgb(var(--gold))]" checked={chuyenSau} onChange={(e) => setChuyenSau(e.target.checked)} />
+              Hiện Sao · Thần
+            </label>
+          </div>
           <div className="grid grid-cols-3 gap-1.5" role="group" aria-label="La bàn tám hướng của giờ này, Bắc ở trên">
             {LUOI_BAC_TREN.map((k) => {
               const h = huong.get(k);
@@ -111,6 +118,11 @@ export function BanKyMon({ banDau, ngayDau, viec }: { banDau: BanKM; ngayDau: Ng
                   <span className="text-[0.7rem] uppercase tracking-wide text-fg-faint">{h.phuong}</span>
                   <span className="mt-0.5 text-lg leading-tight text-fg">{h.cua.ten}</span>
                   <span className={cn("mt-0.5 text-[0.7rem] leading-tight", MAU[h.muc].chu)}>{h.muc_nhan}{h.noi_bat ? " ★" : ""}</span>
+                  {chuyenSau && (
+                    <span className="mt-0.5 line-clamp-1 text-[0.62rem] text-fg-faint">
+                      {h.sao.ten.replace("Thiên ", "")} · {h.than.ten}
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -233,13 +245,34 @@ function ChiTietHuong({ h }: { h: HuongKM }) {
         <div><dt className="inline text-fg-muted">Nên: </dt><dd className="inline">{h.cua.nen}</dd></div>
         <div><dt className="inline text-fg-muted">Tránh: </dt><dd className="inline">{h.cua.tranh}</dd></div>
       </dl>
+      {h.cuu_don && h.cuu_don.length > 0 && h.cuu_don.map((cd) => (
+        <div key={cd.ma} className="mt-3 rounded-xl border border-gold/40 bg-gold/5 p-3 text-sm" data-testid="km-cuu-don">
+          <p className="font-medium text-gold">Cửu Độn · {cd.ten}</p>
+          {cd.nghia_doi_thuong && <p className="mt-1 text-sm leading-relaxed text-fg">{cd.nghia_doi_thuong}</p>}
+          <p className="mt-1 text-xs text-fg-muted">{cd.dieu_kien}</p>
+          <div className="mt-2 grid gap-2 text-xs sm:grid-cols-2">
+            <p className="rounded-lg border border-jade/30 bg-jade/10 p-2 leading-relaxed"><b className="text-jade">Đắc dụng:</b> {cd.mat_tich_cuc}</p>
+            <p className="rounded-lg border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] p-2 leading-relaxed"><b className="text-[#f0b35c]">Nên chú ý:</b> {cd.mat_tieu_cuc_can_chu_y}</p>
+          </div>
+          {cd.sach_ghi?.han && (
+            <p className="mt-2 border-l-2 border-gold/40 pl-2 text-xs text-fg-faint">
+              {cd.sach_ghi.loi && <span className="block text-fg-muted">Sách xưa ghi: {cd.sach_ghi.loi}</span>}
+              <span lang="zh-Hant">{cd.sach_ghi.han}</span> {cd.sach_ghi.nguon ? `— ${cd.sach_ghi.nguon}` : ""}
+            </p>
+          )}
+          {cd.dien_giai_theo && <p className="mt-1 text-xs text-fg-faint">Lời đời thường: {cd.dien_giai_theo}</p>}
+        </div>
+      ))}
       {h.cach.map((c) => (
         <div key={c.ma} className={cn("mt-3 rounded-xl border p-3 text-sm", c.loai === "cat" ? "border-jade/40 bg-jade/5" : "border-[rgb(245_170_80/0.4)] bg-[rgb(245_170_80/0.06)]")}>
           <p className="text-fg">{c.loai === "cat" ? "Điểm sáng" : "Nên để ý"}: {c.ten}</p>
           <p className="mt-1 leading-relaxed text-fg-muted">{c.loi} {c.nen}</p>
         </div>
       ))}
-      <p className="mt-3 text-sm text-fg-muted">Đi cùng: sao {h.sao.ten} ({h.sao.tom.toLowerCase()}) và thần {h.than.ten} ({h.than.tom.toLowerCase()}).</p>
+      <p className="mt-3 text-sm text-fg-muted">
+        Đi cùng: sao {h.sao.ten} ({h.sao.tom.toLowerCase()}) và thần {h.than.ten} ({h.than.tom.toLowerCase()}).
+        {h.can_cu[1] ? <span className="block mt-1 text-xs text-fg-faint">{h.can_cu[1]}</span> : null}
+      </p>
       <details className="mt-3 text-sm">
         <summary className="cursor-pointer text-fg-muted">Vì sao nói vậy</summary>
         <ul className="mt-2 space-y-1.5 text-fg-muted">

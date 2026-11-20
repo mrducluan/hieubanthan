@@ -306,15 +306,57 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
     if ha:
         b["ha_quai"] = {"cuc": ha["cuc"], "cuc_ten": ha["cuc_ten"],
                         "cung": [{k: x[k] for k in ("cung", "son", "huong")} for x in ha["cung"]]}
-        # Không gói mã nguồn mở nào (MIT) lập bàn thế quái để đối chiếu — ghi rõ cho người dùng.
-        b["the_quai_trang_thai"] = "chua_doi_chieu_oracle"
+        # Thế quái khớp các đồ bàn tham chiếu FS_SS1_CHART_P134 / P123–124 / P175 (golden huyen_khong_tham_thi.json, chép từ
+        # bộ ghi chép fengshui-xuankong-kb), NHƯNG nguyên văn Thẩm Thị Huyền Không Học CHƯA có trong kho nguồn
+        # fixtures/nguon/ → vẫn gắn cờ chưa đối chiếu nguyên văn (chủ dự án giữ thay đổi sao 5, 2026-11-20; đối chiếu lại khi có sách).
+        b["the_quai_trang_thai"] = "chua_doi_chieu_nguyen_van"
+        b["the_quai_ghi_chu"] = L(
+            "pt.hk.the_quai_ghi_chu",
+            "Bàn thế quái lập theo đồ bàn tham chiếu của phái Thẩm thị (sao 5 nhập trung giữ nguyên 5); nguyên văn sách "
+            "Thẩm Thị Huyền Không Học chưa có trong kho nguồn của Hiểu Bản Thân nên còn chờ đối chiếu.")
         b["the_quai_y"] = phongthuy_kb.huyen_khong()["the_quai"]
     kb = phongthuy_kb.huyen_khong()
     nam_xem = inp.nam_xem or hk.nam_theo_lap_xuan(_bay_gio_utc())
+    cung_chi_tiet = [
+        {**c, "y_cap": hk.to_hop_cung(c["son"], c["huong"], b["van"], cung=c["cung"], nam=nam_xem)}
+        for c in b["cung"]
+    ]
+    tm = hk.thanh_mon(b["van"], toa)
+    if ngon_ngu.la_viet():
+        tm_ra = {**tm, **({"y": kb["thanh_mon"]} if kb.get("thanh_mon") else {})}
+    else:
+        _q_en = {"Khảm": "Kan", "Cấn": "Gen", "Chấn": "Zhen", "Tốn": "Xun", "Ly": "Li", "Khôn": "Kun", "Đoài": "Dui", "Càn": "Qian"}
+        _h_en = {"Bắc": "North", "Đông Bắc": "Northeast", "Đông": "East", "Đông Nam": "Southeast",
+                 "Nam": "South", "Tây Nam": "Southwest", "Tây": "West", "Tây Bắc": "Northwest"}
+        _m_en = {
+            "Nhâm": "Ren", "Tý": "Zi", "Quý": "Gui", "Sửu": "Chou", "Cấn": "Gen", "Dần": "Yin",
+            "Giáp": "Jia", "Mão": "Mao", "Ất": "Yi", "Thìn": "Chen", "Tốn": "Xun", "Tỵ": "Si",
+            "Bính": "Bing", "Ngọ": "Wu", "Đinh": "Ding", "Mùi": "Wei", "Khôn": "Kun", "Thân": "Shen",
+            "Canh": "Geng", "Dậu": "You", "Tân": "Xin", "Tuất": "Xu", "Càn": "Qian", "Hợi": "Hai",
+        }
+        def _en_slot(x: dict) -> dict:
+            return {**x, "cung": _q_en.get(x["cung"], x["cung"]), "phuong": _h_en.get(x["phuong"], x["phuong"]), "son": _m_en.get(x["son"], x["son"])}
+        tm_ra = {
+            **tm,
+            "toa": _m_en.get(tm["toa"], tm["toa"]),
+            "huong": _m_en.get(tm["huong"], tm["huong"]),
+            "chinh": _en_slot(tm["chinh"]),
+            "phu": _en_slot(tm["phu"]),
+            "y": {
+                "ten": "Castle Gate (Cheng Men)",
+                "y": "The two palaces flanking the Facing sector (primary follows He Tu pairs 1-6/2-7/3-8/4-9; secondary is the other flank). When the ruling period star flies into a Castle Gate sector, it acts as a supportive secondary intake of Qi.",
+                "chinh": "Primary Castle Gate is active in this period — stronger supportive Qi intake than the secondary gate.",
+                "phu": "Secondary Castle Gate is active in this period — usable as a secondary open entryway or pathway.",
+                "khong_dung": "Neither flanking palace receives the ruling period star in this construction period, so Castle Gate does not apply.",
+                "luu_y": "Per Shen's Xuan Kong, Castle Gate applies only when a real side door, pathway, or open intersection exists in that sector.",
+            },
+        }
     return {
         "engine_version": ENGINE_VERSION, **b,
+        "cung": cung_chi_tiet,
         "cuc_y": kb["cuc"][b["cuc"]],
         "to_hop": [{**t, **kb["to_hop"][t["ma"]]} for t in b["to_hop"]],
+        "thanh_mon": tm_ra,
         "sao_y": kb["sao"],
         "luu_nien": hk.luu_nien(nam_xem),
         "luu_y": kb["luu_y"], "nguon": kb["_nguon"], "trang_thai": kb["trang_thai"],

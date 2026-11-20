@@ -325,6 +325,16 @@ def api_chaldea(inp: ThanSoInput) -> dict:
                                                                                  inp.quy_uoc_duong_doi)}
 
 
+@app.post("/v1/thanso/phillips")
+def api_phillips(inp: ThanSoInput) -> dict:
+    """Đợt 2A — thần số phái David A. Phillips: 11 Số Chủ Đạo (2–11 & 22/4), 4 Đỉnh Kim Tự Tháp,
+    biểu đồ ngày sinh và đối chiếu nhanh với phái Pitago. Không lưu."""
+    from app.calc import thanso_phillips as tp
+    inp.kiem_tra_ngay()
+    return {"engine_version": ENGINE_VERSION, **tp.luan_phillips(inp.ho_ten, inp.ngay, inp.thang, inp.nam,
+                                                                  inp.quy_uoc_duong_doi)}
+
+
 class TongHopInput(ThanSoInput):
     ngay_xem: _dt.date | None = Field(default=None, ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))  # trống = hôm nay (VN)
 

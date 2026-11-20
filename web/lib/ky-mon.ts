@@ -14,12 +14,17 @@ export type PhepKM = "sach_bo" | "tri_nhuan";
 export type GioTyKM = "da_ty" | "sang_ngay";
 
 export interface CachKM { ma: string; ten: string; loai: "cat" | "hung"; dieu_kien: string; loi: string; nen: string; ky?: string; sach: string | null; han?: string }
+export interface CuuDonKM {
+  ma: string; ten: string; dieu_kien: string; nghia_doi_thuong?: string; mat_tich_cuc: string; mat_tieu_cuc_can_chu_y: string;
+  sach_ghi?: { han?: string; am?: string; loi?: string; nguon?: string };
+  dien_giai_theo?: string;
+}
 export interface HuongKM {
   cung: number; que: string; phuong: string; muc: MucKM; muc_nhan: string; noi_bat: boolean;
   cua: { ma: string; ten: string; tom: string; loai: "cat" | "binh" | "hung"; loi: string; nen: string; tranh: string; sach: string | null };
   sao: { ma: string; ten: string; tom: string; loi: string; bac: string; kem_cam: boolean; sach: string | null };
   than: { ma: string; ten: string; tom: string; loi: string; sach: string | null };
-  ky: string[]; cach: CachKM[]; hop_viec: string[]; tom: string; can_cu: string[];
+  ky: string[]; cach: CachKM[]; cuu_don?: CuuDonKM[]; hop_viec: string[]; tom: string; can_cu: string[];
 }
 /** Kho chuyển nghĩa (dùng chung mọi mảng): khái niệm sách xưa → việc đời nay theo lĩnh vực. Engine trả; web chỉ hiển thị. */
 export interface ChuyenNghiaKM {

@@ -1,0 +1,1463 @@
+{
+  "_nguon": "Hai phần: (1) `ngu_hanh_bridges` — tóm ý theo Lillian Pearl Bridges, Face Reading in Chinese Medicine (2nd Ed., 2012), sách còn bản quyền: chỉ tóm ý, không chép nguyên văn. (2) `quy_tac_co_thu` — câu cổ thư công cộng (Thần Tướng Toàn Biên, thiên «Hứa Phụ tướng đức khí»; Liễu Trang tướng pháp, quyển thượng): mỗi câu Hán là chuỗi con kho nguồn `fixtures/nguon/` (bộ kiểm `kb/sach_ghi.py`), lời Việt do ban biên tập viết theo khuôn SX-C. `quy_tac_khong_dua` = quy tắc của bộ 150 ban đầu không đưa ra người dùng, kèm lý do (PR #320, 2026-11-20).",
+  "_trang_thai": "nhap_ban_bien_tap",
+  "source_id": "nhantuong_ngu_hanh_va_co_thu",
+  "school_id": "bridges_va_co_thu",
+  "sach_goc": [
+    {
+      "ten": "Face Reading in Chinese Medicine (2nd Edition)",
+      "tac_gia": "Lillian Pearl Bridges (2012)"
+    },
+    {
+      "ten": "Thần Tướng Toàn Biên (神相全編) · Liễu Trang tướng pháp (柳莊相法)",
+      "tac_gia": "Viên Trung Triệt đính chính (đời Minh) — cổ thư công cộng"
+    }
+  ],
+  "ngu_hanh_bridges": {
+    "thuy": {
+      "ten": "Tướng Thủy (Water Archetype)",
+      "dac_diem": "Trán rộng tròn, tai lớn dày, vùng cằm và nhân trung đầy đặn; ánh nhìn sâu và điềm tĩnh.",
+      "mat_tich_cuc": "Sâu sắc, khéo thích nghi, giàu trực giác và khả năng lắng nghe; càng gặp hoàn cảnh khó càng bình tĩnh tìm đường uyển chuyển để vượt qua.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý: khi mất cân bằng dễ rơi vào lo âu, do dự kéo dài, ngại đối đầu trực diện hoặc tự cô lập cảm xúc thay vì nói thẳng nhu cầu của mình.",
+      "sach_ghi": {
+        "tom_y": true,
+        "nguon": "Lillian Pearl Bridges, Face Reading in Chinese Medicine (2nd Ed., 2012), Ch. 6: The Water Features and Traits, tr. 160"
+      }
+    },
+    "moc": {
+      "ten": "Tướng Mộc (Wood Archetype)",
+      "dac_diem": "Khuôn mặt dáng chữ nhật/dài, chân mày rõ nét, sống mũi thẳng, đường hàm gọn và ánh mắt quyết đoán.",
+      "mat_tich_cuc": "Giàu tầm nhìn, dám tiên phong, hành động dứt khoát và có năng lực tổ chức dẫn dắt tập thể vươn lên trong những giai đoạn cần tăng tốc.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý: khi quá tải dễ nóng nảy, thiếu kiên nhẫn với người chậm nhịp, ôm đồm mục tiêu hoặc tự đẩy mình vào trạng thái căng thẳng kéo dài.",
+      "sach_ghi": {
+        "tom_y": true,
+        "nguon": "Lillian Pearl Bridges, Face Reading in Chinese Medicine (2nd Ed., 2012), Ch. 7: The Wood Features and Traits, tr. 191"
+      }
+    },
+    "hoa": {
+      "ten": "Tướng Hỏa (Fire Archetype)",
+      "dac_diem": "Đôi mắt sáng linh hoạt giàu biểu cảm, gò má cao gọn, nụ cười rộng và nét mặt dễ truyền năng lượng.",
+      "mat_tich_cuc": "Ấm áp, nhiệt huyết, giao tiếp lôi cuốn và có khả năng truyền cảm hứng rất mạnh; dễ kết nối con người và tạo bầu không khí tích cực.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý: cảm xúc lên xuống nhanh, dễ hứng khởi bùng cháy lúc đầu nhưng nhanh chán ở chặng bền bỉ, hoặc nói quá lời khi phấn khích.",
+      "sach_ghi": {
+        "tom_y": true,
+        "nguon": "Lillian Pearl Bridges, Face Reading in Chinese Medicine (2nd Ed., 2012), Ch. 8: The Fire Features and Traits, tr. 221"
+      }
+    },
+    "tho": {
+      "ten": "Tướng Thổ (Earth Archetype)",
+      "dac_diem": "Khuôn mặt đầy đặn cân đối, má tròn ấm, môi dày hài hòa và vùng hạ đình vững vàng.",
+      "mat_tich_cuc": "Chân thành, đáng tin cậy, chu đáo và có năng lực chăm lo, gắn kết gia đình lẫn đội ngũ; làm việc cẩn trọng, giữ chữ tín lâu dài.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý: dễ lo nghĩ quá nhiều cho người khác mà quên đặt ranh giới cho bản thân, ngại thay đổi thói quen cũ hoặc ôm chuyện vào lòng gây mệt mỏi.",
+      "sach_ghi": {
+        "tom_y": true,
+        "nguon": "Lillian Pearl Bridges, Face Reading in Chinese Medicine (2nd Ed., 2012), Ch. 9: The Earth Features and Traits, tr. 251"
+      }
+    },
+    "kim": {
+      "ten": "Tướng Kim (Metal Archetype)",
+      "dac_diem": "Đường nét khuôn mặt sắc gọn, gò má rõ, mũi cao thanh và thần thái tự chủ, ngăn nắp.",
+      "mat_tich_cuc": "Tự lập cao, tiêu chuẩn rõ ràng, tinh tế về thẩm mỹ và công minh trong nguyên tắc; biết giữ phẩm giá và giải quyết công việc gọn gàng.",
+      "mat_tieu_cuc_can_chu_y": "Nên chú ý: dễ khắt khe với bản thân lẫn người quanh mình, ngại nhờ giúp đỡ vì sợ làm phiền, hoặc tạo cảm giác xa cách khi đặt tiêu chuẩn quá cao.",
+      "sach_ghi": {
+        "tom_y": true,
+        "nguon": "Lillian Pearl Bridges, Face Reading in Chinese Medicine (2nd Ed., 2012), Ch. 10: The Metal Features and Traits, tr. 279"
+      }
+    }
+  },
+  "tong_so_quy_tac_co_thu": 81,
+  "quy_tac_co_thu": [
+    {
+      "ma": "R_SXQB_MING_p0060_s01_01",
+      "han": "丰姿異骨格奇再觀才器設施",
+      "am": "Phong tư dị cốt cách kỳ, tái quan tài khí thiết thi",
+      "y": "Dáng vẻ, cốt cách khác thường chưa đủ để kết luận; sách dặn xem tiếp tài năng và cách người ấy làm việc.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0060_s02_01",
+      "han": "既有此才器有奇形且大公無我不惟福庇於一身一家",
+      "am": "Ký hữu thử tài khí hữu kỳ hình thả đại công vô ngã, bất duy phúc tí ư nhất thân nhất gia",
+      "y": "Người vừa có tài, vừa công tâm không vì riêng mình: sách ghi phúc ấy che cho một thân một nhà và cả nhiều người quanh mình.",
+      "nhom": "A",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0060_s02_02",
+      "han": "德器不及夷吾者無足論相矣",
+      "am": "Đức khí bất cập Di Ngô giả vô túc luận tướng hĩ",
+      "y": "Sách ghi người tầm lòng, tầm việc quá hẹp thì xem tướng cũng không bàn được gì nhiều.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "ham_y": "Nên chú ý nuôi độ lượng và tầm nhìn, vì sách đặt chúng trước nét mặt.",
+      "viec": "Tuần này nhận một việc chung mà không tính phần lợi riêng.",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0060_s04_01",
+      "han": "形骸局促作事猥圖",
+      "am": "Hình hài cục xúc, tác sự ổi đồ",
+      "y": "Sách ghi dáng người co rút, gò bó thì việc làm hay vụn vặt, khó mở rộng.",
+      "nhom": "B",
+      "chu_de": "cong_viec",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "ham_y": "Nên chú ý tư thế khi đứng trước người khác — sách đặt dáng người ngang với nét mặt.",
+      "viec": "Mỗi sáng đứng thẳng lưng, thả lỏng vai hai phút trước gương.",
+      "dac_diem": [
+        "dang_khom"
+      ]
+    },
+    {
+      "ma": "R_SXQB_MING_p0060_s04_02",
+      "han": "器宇軒昂一生快順",
+      "am": "Khí vũ hiên ngang, nhất sinh khoái thuận",
+      "y": "Dáng người đĩnh đạc, rộng rãi: sách ghi một đời việc hay suôn.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "dac_diem": [
+        "dang_vung"
+      ]
+    },
+    {
+      "ma": "R_SXQB_MING_p0060_s05_01",
+      "han": "十分德器必有十分衣祿",
+      "am": "Thập phân đức khí tất hữu thập phân y lộc",
+      "y": "Sách ghi tầm lòng rộng bao nhiêu thì phần ăn mặc, bổng lộc tương xứng bấy nhiêu.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0060_s05_02",
+      "han": "論福尢必觀器而知德",
+      "am": "Luận phúc vưu tất quan khí nhi tri đức",
+      "y": "Muốn bàn chuyện phúc, sách dặn phải xem độ lượng của người trước để biết nết.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0060_s06_01",
+      "han": "器若淺兮水盈溢",
+      "am": "Khí nhược thiển hề thủy doanh dật",
+      "y": "Sách ví phúc như nước, lòng người như cái bình: bình nông mà nước nhiều thì tràn ra.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "ham_y": "Nên chú ý lúc việc thuận nhất lại là lúc cần khiêm và giữ nếp.",
+      "viec": "Khi có khoản thu lớn, để dành một phần trước rồi mới tiêu.",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0061_s01_01",
+      "han": "器淺志盈無遠識",
+      "am": "Khí thiển chí doanh vô viễn thức",
+      "y": "Sách ghi lòng hẹp mà chí kiêu thì khó nhìn xa, phúc giữ không lâu.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "ham_y": "Nên chú ý nghe thêm ý người khác trước những việc dài hơi.",
+      "viec": "Trước một kế hoạch dài, hỏi ý một người lớn tuổi hơn mình.",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0061_s01_02",
+      "han": "器淺分明由怨天",
+      "am": "Khí thiển phân minh do oán thiên",
+      "y": "Sách ghi lòng hẹp thường đến từ thói hay trách trời, trách người.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "ham_y": "Nên chú ý bớt than, nhìn vào việc mình làm được.",
+      "viec": "Tuần này mỗi lần định than, ghi thay bằng một việc nhỏ mình đã làm được.",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0061_s02_02",
+      "han": "德不稱形故也",
+      "am": "Đức bất xứng hình cố dã",
+      "y": "Sách kể chuyện người có tướng tốt mà nết không xứng thì không giữ được phúc.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "ham_y": "Nên chú ý: sách đặt nết người lên trên nét mặt.",
+      "viec": "Tuần này giữ trọn một lời hứa nhỏ với người khác.",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0061_s04_01",
+      "han": "紅紫黃光起福堂崢嶸得志喜非常",
+      "am": "Hồng tử hoàng quang khởi Phúc đường, tranh vanh đắc chí hỷ phi thường",
+      "y": "Sắc hồng, tía, vàng sáng nổi ở vùng trên mày: sách ghi là lúc đang đắc chí, có chuyện vui lớn.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "dac_diem": [
+        "sac_sang"
+      ]
+    },
+    {
+      "ma": "R_SXQB_MING_p0061_s04_02",
+      "han": "此德色也學力到涵養純則無矣",
+      "am": "Thử đức sắc dã, học lực đáo hàm dưỡng thuần tắc vô hĩ",
+      "y": "Sách ghi lúc đang thuận mà mặt lộ vẻ kiêu là còn thiếu hàm dưỡng; học tới, nết thuần thì vẻ ấy tự mất.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "ham_y": "Nên chú ý giữ khiêm lúc việc đang lên.",
+      "viec": "Lần tới được khen, nhắc tên một người đã giúp mình.",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0062_s01_01",
+      "han": "失志落落坐立欹來",
+      "am": "Thất chí lạc lạc, tọa lập khi lai",
+      "y": "Sách ghi lúc thất chí thì dáng đứng, ngồi xiêu vẹo, rũ xuống.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "ham_y": "Nên chú ý: dáng rũ kéo dài có thể là dấu đang mệt hoặc buồn lâu — nói chuyện với người tin cậy.",
+      "viec": "Tuần này kể với một người thân điều đang làm mình nặng lòng.",
+      "dac_diem": [
+        "dang_khom",
+        "net_buon"
+      ]
+    },
+    {
+      "ma": "R_SXQB_MING_p0062_s01_02",
+      "han": "落魄貧寒無媚態相中唯有此人稀",
+      "am": "Lạc phách bần hàn vô mị thái, tướng trung duy hữu thử nhân hy",
+      "y": "Sách khen người lúc túng thiếu vẫn không xu nịnh — loại người ấy hiếm.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "ham_y": "Nên chú ý giữ thẳng lưng trong lúc khó, sách xem đó là khí phách.",
+      "viec": "Khi cần nhờ việc, nói rõ điều mình cần, không nói vòng.",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0062_s02_01",
+      "han": "休嫌貌不颺白璧璞中藏",
+      "am": "Hưu hiềm mạo bất dương, bạch bích phác trung tàng",
+      "y": "Đừng chê người kém sắc: sách ví như ngọc trắng còn nằm trong đá, phải xét tâm tính bên trong.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0062_s03_01",
+      "han": "人形甚美必有甚惡人形甚惡必有甚美",
+      "am": "Nhân hình thậm mỹ tất hữu thậm ác, nhân hình thậm ác tất hữu thậm mỹ",
+      "y": "Sách ghi tướng rất đẹp thường giấu một chỗ kém, tướng rất kém thường giấu một chỗ hay.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0062_s04_01",
+      "han": "借使修德於心吉凶可易",
+      "am": "Tá sử tu đức ư tâm, cát hung khả dịch",
+      "y": "Sách ghi sửa nết trong lòng thì lành dữ trên tướng cũng đổi theo.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "ham_y": "Nên chú ý sửa từ việc nhỏ hằng ngày.",
+      "viec": "Tuần này chọn một thói quen nhỏ chưa tốt và bỏ nó.",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0062_s04_02",
+      "han": "心發善端諸福集",
+      "am": "Tâm phát thiện đoan chư phúc tập",
+      "y": "Lòng khởi điều thiện thì phúc tụ về — sách xem lòng người là gốc của tướng.",
+      "nhom": "A",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0062_s04_03",
+      "han": "心雕琢太甚生理盡矣",
+      "am": "Tâm điêu trác thái thậm, sinh lý tận hĩ",
+      "y": "Sách ghi lòng tính toán quá mức thì dù tướng đẹp, phúc vẫn giảm dần.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "ham_y": "Nên chú ý giữ thẳng thắn trong cách làm việc với người khác.",
+      "viec": "Lần tới bàn việc, nói thẳng điều mình muốn ngay từ đầu.",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0062_s04_04",
+      "han": "培養方寸生理全矣",
+      "am": "Bồi dưỡng phương thốn, sinh lý toàn hĩ",
+      "y": "Chăm nuôi tấm lòng thì dù tướng chưa đẹp, sách ghi phúc vẫn tăng.",
+      "nhom": "A",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
+      "chung": true
+    },
+    {
+      "ma": "R_SXQB_MING_p0064_s02_01",
+      "han": "眉重山林看聖賢",
+      "am": "Mi trọng Sơn lâm khán thánh hiền",
+      "y": "Mày đậm, vùng Sơn lâm ở hai bên trán đẹp: sách ghi là nét người hiền, học rộng.",
+      "nhom": "A",
+      "chu_de": "tinh_net",
+      "nguon": "than_tuong_toan_bien",
+      "chuong": "quyển 631, thiên «神相全編一 · 司空»",
+      "dac_diem": [
+        "may_thanh_dai",
+        "may_dam_ngan"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s02_06",
+      "han": "唇白多難產",
+      "am": "Thần bạch đa nan sản",
+      "y": "Sách xưa để ý sắc môi nhợt của người mẹ lúc mang thai.",
+      "nhom": "C",
+      "chu_de": "suc_khoe",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «未出腹預知貴賤»",
+      "ham_y": "Hàm ý người xưa muốn dặn: môi nhợt kéo dài là điều nên hỏi bác sĩ, nhất là khi đang mang thai.",
+      "viec": "Nếu đang mang thai, đi khám thai đúng lịch và kể với bác sĩ về sắc môi; nếu không, đi khám tổng quát khi môi nhợt kéo dài.",
+      "dac_diem": [
+        "moi_nhat"
+      ],
+      "gioi": "nu"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_15",
+      "han": "神昏氣暗必是貧窮之漢",
+      "am": "Thần hôn khí ám tất thị bần cùng chi hán",
+      "y": "Sách ghi người thần mờ, khí tối thì đường tiền bạc khó mở.",
+      "nhom": "B",
+      "chu_de": "tien_bac",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «莫道嬰兒難相一生出腹可知»",
+      "ham_y": "Nên chú ý giấc ngủ và sức, vì ánh mắt mờ thường đi cùng mệt kéo dài.",
+      "viec": "Tuần này ngủ trước 23 giờ ít nhất năm đêm.",
+      "dac_diem": [
+        "than_mo"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s03_04",
+      "han": "耳低百無一成",
+      "am": "Nhĩ đê bách vô nhất thành",
+      "y": "Sách ghi tai thấp là nét người làm nhiều việc mà ít việc đi tới cùng.",
+      "nhom": "B",
+      "chu_de": "cong_viec",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «三歲定八十»",
+      "ham_y": "Nên chú ý chọn ít việc và làm cho xong từng việc.",
+      "viec": "Tuần này chọn một việc đang dở, làm cho xong trước khi mở việc mới.",
+      "dac_diem": [
+        "tai_nho_thap"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s03_05",
+      "han": "多因生角主愚賤",
+      "am": "Đa nhân sinh giác chủ ngu tiện",
+      "y": "Sách ghi tóc mọc lấn vào góc trán là nét người chậm mở mang việc học.",
+      "nhom": "B",
+      "chu_de": "tinh_net",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «三歲定八十»",
+      "ham_y": "Nên chú ý dành thời gian học đều đặn — sách đặt chuyện học lên trên nét trán.",
+      "viec": "Mỗi ngày đọc 20 phút về nghề mình đang làm.",
+      "dac_diem": [
+        "tran_hep_thap"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s03_07",
+      "han": "小兒骨欲硬大人骨欲軟",
+      "am": "Tiểu nhi cốt dục ngạnh, đại nhân cốt dục nhuyễn",
+      "y": "Sách dặn trẻ nhỏ thì xương nên cứng, người lớn thì xương nên mềm — cùng một nét, tuổi khác thì đọc khác.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «三歲定八十»",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s01_01",
+      "han": "皮薄骨高少年死",
+      "am": "Bì bạc cốt cao thiếu niên tử",
+      "y": "Sách xưa gắn người da mỏng, xương nổi với sức bền kém thời trẻ.",
+      "nhom": "C",
+      "chu_de": "suc_ben",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «三歲定八十»",
+      "ham_y": "Hàm ý người xưa muốn dặn: người gầy, ít thịt nên chăm ăn uống, giữ sức và đi khám định kỳ.",
+      "viec": "Đi khám tổng quát mỗi năm một lần và hỏi bác sĩ về cân nặng hợp với mình.",
+      "dac_diem": [
+        "cot_tro"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s01_02",
+      "han": "皮厚骨少少年亡",
+      "am": "Bì hậu cốt thiểu thiếu niên vong",
+      "y": "Sách xưa gắn người thịt nhiều, xương chìm với sức bền thời trẻ cần giữ.",
+      "nhom": "C",
+      "chu_de": "suc_ben",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «三歲定八十»",
+      "ham_y": "Hàm ý người xưa muốn dặn: người nhiều thịt nên vận động đều để thân chắc, và đi khám định kỳ.",
+      "viec": "Đo huyết áp, đường huyết khi đi khám; mỗi tuần đi bộ nhanh ba buổi.",
+      "dac_diem": [
+        "nhuc_nhao"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s02_01",
+      "han": "不可以一美而言善",
+      "am": "Bất khả dĩ nhất mỹ nhi ngôn thiện",
+      "y": "Sách dặn không vì một nét đẹp mà vội khen, cũng không vì một nét kém mà vội chê — phải cân cả gương mặt.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «相有訣法不可亂言»",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s03_01",
+      "han": "先看形體正直氣象昂然此乃大成",
+      "am": "Tiên khán hình thể chính trực, khí tượng ngang nhiên, thử nãi đại thành",
+      "y": "Hình dáng ngay thẳng, khí sắc hiên ngang: sách ghi là người làm nên việc lớn.",
+      "nhom": "A",
+      "chu_de": "cong_viec",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «人從少長先觀童相為先骨格未成五岳六府三停可定»",
+      "dac_diem": [
+        "dang_vung"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s03_02",
+      "han": "厚者有壽",
+      "am": "Hậu giả hữu thọ",
+      "y": "Người dày dặn, xương thịt cân nhau: sách ghi là nét bền sức.",
+      "nhom": "A",
+      "chu_de": "suc_ben",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «人從少長先觀童相為先骨格未成五岳六府三停可定»",
+      "dac_diem": [
+        "cot_nhuc_can"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s03_03",
+      "han": "地削貧賤",
+      "am": "Địa tước bần tiện",
+      "y": "Sách ghi cằm gọt thì về sau đường tiền bạc khó dày.",
+      "nhom": "B",
+      "chu_de": "tien_bac",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «人從少長先觀童相為先骨格未成五岳六府三停可定»",
+      "ham_y": "Nên chú ý để dành đều cho quãng đời về sau.",
+      "viec": "Tháng này mở một khoản tiết kiệm riêng cho tuổi về sau, dù nhỏ.",
+      "dac_diem": [
+        "cam_nhon_lem"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s03_04",
+      "han": "睛黃愚玩",
+      "am": "Tinh hoàng ngu ngoan",
+      "y": "Sách xưa gắn tròng mắt ngả vàng với người chậm hiểu.",
+      "nhom": "B",
+      "chu_de": "suc_khoe",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «人從少長先觀童相為先骨格未成五岳六府三停可定»",
+      "ham_y": "Nên chú ý: ngày nay tròng mắt, da ngả vàng trước hết là dấu nên đi khám.",
+      "viec": "Nếu thấy lòng trắng mắt ngả vàng, đi khám sớm trong tuần.",
+      "dac_diem": [
+        "sac_vang_xin"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s03_05",
+      "han": "鼻小大敗",
+      "am": "Tị tiểu đại bại",
+      "y": "Sách ghi mũi nhỏ là nét người dễ vấp lớn khi làm việc lớn.",
+      "nhom": "B",
+      "chu_de": "cong_viec",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «人從少長先觀童相為先骨格未成五岳六府三停可定»",
+      "ham_y": "Nên chú ý làm việc lớn theo từng bước, có người góp ý.",
+      "viec": "Trước một quyết định lớn, viết ra ba rủi ro và hỏi một người tin cậy.",
+      "dac_diem": [
+        "song_mui_thap"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s03_07",
+      "han": "耳低反心窮志途",
+      "am": "Nhĩ đê phản tâm cùng chí đồ",
+      "y": "Sách ghi tai thấp mà vành lật là nét người hay túng, chí dễ nản.",
+      "nhom": "B",
+      "chu_de": "tien_bac",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «人從少長先觀童相為先骨格未成五岳六府三停可定»",
+      "ham_y": "Nên chú ý giữ một kế hoạch tiền bạc dài, đừng đổi hướng liên tục.",
+      "viec": "Tuần này ghi lại mọi khoản chi để thấy tiền đi đâu.",
+      "dac_diem": [
+        "tai_mong_lat"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s03_08",
+      "han": "神散多狂而淫",
+      "am": "Thần tán đa cuồng nhi dâm",
+      "y": "Sách xưa có nhắc người ánh mắt tán, không tụ thì tính dễ bốc đồng, khó giữ mình.",
+      "nhom": "C",
+      "chu_de": "tinh_net",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «人從少長先觀童相為先骨格未成五岳六府三停可定»",
+      "ham_y": "Hàm ý theo ghi chép xưa: nên tập giữ tâm yên, ít bị cuốn theo.",
+      "viec": "Mỗi ngày dành mười phút ngồi yên, không điện thoại.",
+      "dac_diem": [
+        "than_dao"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s03_09",
+      "han": "天庭不好一生不妙",
+      "am": "Thiên đình bất hảo nhất sinh bất diệu",
+      "y": "Sách ghi phần trán không đẹp thì việc cả đời khó trơn.",
+      "nhom": "B",
+      "chu_de": "cong_viec",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «人從少長先觀童相為先骨格未成五岳六府三停可定»",
+      "ham_y": "Nên chú ý bù bằng việc học và người dẫn đường.",
+      "viec": "Tìm một người đi trước trong nghề, hẹn gặp hỏi chuyện một lần trong tháng này.",
+      "dac_diem": [
+        "tran_hep_thap",
+        "tran_lom"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s04_01",
+      "han": "三歲為嬰兒相神氣不相五官",
+      "am": "Tam tuế vi anh nhi tướng thần khí bất tướng ngũ quan",
+      "y": "Sách dặn trẻ dưới ba tuổi chỉ xem thần khí, chưa xem nét mặt, vì nét còn đổi.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «嬰兒童子各有一說»",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s04_02",
+      "han": "十二歲內外為童子相五官六府三停",
+      "am": "Thập nhị tuế nội ngoại vi đồng tử tướng ngũ quan lục phủ tam đình",
+      "y": "Khoảng mười hai tuổi trở đi sách mới xem ngũ quan, lục phủ, tam đình.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «嬰兒童子各有一說»",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s05_02",
+      "han": "兩顴獨高克子刑夫",
+      "am": "Lưỡng quyền độc cao khắc tử hình phu",
+      "y": "Sách xưa có nhắc phụ nữ gò má cao vượt hẳn thì chuyện vợ chồng, con cái hay nhiều sóng.",
+      "nhom": "C",
+      "chu_de": "gia_dinh",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «柳莊近永樂乾坤賦專論女人之說»",
+      "ham_y": "Hàm ý theo ghi chép xưa: nên chú ý nhường nhịn trong nhà, việc lớn bàn cùng nhau.",
+      "viec": "Tuần này hỏi ý người bạn đời trước một quyết định chung.",
+      "dac_diem": [
+        "quyen_tro",
+        "quyen_co_thit"
+      ],
+      "gioi": "nu"
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s05_04",
+      "han": "相女之法和潤色明為妙",
+      "am": "Tướng nữ chi pháp hòa nhuận sắc minh vi diệu",
+      "y": "Xem tướng nữ, sách đặt sắc mặt hoà, nhuận, sáng lên đầu.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «閉女童女另有一相»",
+      "dac_diem": [
+        "sac_sang"
+      ],
+      "gioi": "nu"
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s05_06",
+      "han": "一世多成多賤多學少成",
+      "am": "Nhất thế đa thành đa tiện, đa học thiểu thành",
+      "y": "Sách ghi đàn ông tai không đẹp thì học nhiều mà thành ít, việc lúc được lúc hỏng.",
+      "nhom": "B",
+      "chu_de": "cong_viec",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «閉女童女另有一相»",
+      "ham_y": "Nên chú ý học sâu một thứ thay vì học rộng nhiều thứ.",
+      "viec": "Chọn một kỹ năng chính và theo nó ít nhất ba tháng.",
+      "dac_diem": [
+        "tai_mong_lat",
+        "tai_nho_thap"
+      ],
+      "gioi": "nam"
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s06_01",
+      "han": "先言三岳乃出胎腹所成",
+      "am": "Tiên ngôn tam nhạc nãi xuất thai phúc sở thành",
+      "y": "Sách dặn xem trẻ thì xem trán, mũi, cằm trước — ba phần này có từ lúc sinh, gò má thành sau.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «先言三岳乃出胎腹所成»",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s01_01",
+      "han": "南嶽高多福利",
+      "am": "Nam nhạc cao đa phúc lợi",
+      "y": "Trán cao: sách ghi nhiều phúc, ít trắc trở.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «先言三岳乃出胎腹所成»",
+      "dac_diem": [
+        "tran_cao_rong"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s01_02",
+      "han": "中岳高成大器",
+      "am": "Trung nhạc cao thành đại khí",
+      "y": "Mũi cao, thẳng: sách ghi là người làm nên việc lớn.",
+      "nhom": "A",
+      "chu_de": "cong_viec",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «先言三岳乃出胎腹所成»",
+      "dac_diem": [
+        "song_mui_thang"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s01_03",
+      "han": "北岳方圓隆滿主有大富",
+      "am": "Bắc nhạc phương viên long mãn chủ hữu đại phú",
+      "y": "Cằm vuông tròn, đầy đặn: sách ghi là nét giàu có.",
+      "nhom": "A",
+      "chu_de": "tien_bac",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «先言三岳乃出胎腹所成»",
+      "dac_diem": [
+        "cam_tron_day",
+        "cam_vuong"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s01_04",
+      "han": "天高主貴地厚主富",
+      "am": "Thiên cao chủ quý, địa hậu chủ phú",
+      "y": "Sách ghi trán cao là nét quý, cằm dày là nét giàu.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «先言三岳乃出胎腹所成»",
+      "dac_diem": [
+        "tran_cao_rong",
+        "cam_tron_day"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s01_06",
+      "han": "上岳低則妨父母",
+      "am": "Thượng nhạc đê tắc phương phụ mẫu",
+      "y": "Sách xưa có nhắc trán thấp gắn với tuổi nhỏ ít được gần cha mẹ.",
+      "nhom": "C",
+      "chu_de": "gia_dinh",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «先言三岳乃出胎腹所成»",
+      "ham_y": "Hàm ý theo ghi chép xưa: nên chú ý chăm mối dây với cha mẹ khi đã lớn.",
+      "viec": "Tuần này gọi điện hỏi thăm cha mẹ hoặc người đã nuôi mình.",
+      "dac_diem": [
+        "tran_hep_thap"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s01_07",
+      "han": "中嶽陷則敗祖基",
+      "am": "Trung nhạc hãm tắc bại tổ cơ",
+      "y": "Sách ghi phần mũi lõm, gãy thì khó giữ phần gia sản cha ông để lại.",
+      "nhom": "B",
+      "chu_de": "tien_bac",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «先言三岳乃出胎腹所成»",
+      "ham_y": "Nên chú ý không đem tài sản chung của gia đình đi mạo hiểm.",
+      "viec": "Mọi khoản liên quan tài sản gia đình, bàn và ghi giấy rõ với người nhà.",
+      "dac_diem": [
+        "son_can_thap",
+        "song_mui_lech"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s01_08",
+      "han": "下嶽削則一生貧窮",
+      "am": "Hạ nhạc tước tắc nhất sinh bần cùng",
+      "y": "Sách ghi cằm gọt thì cả đời tiền bạc hay chật vật.",
+      "nhom": "B",
+      "chu_de": "tien_bac",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «先言三岳乃出胎腹所成»",
+      "ham_y": "Nên chú ý giữ một quỹ dự phòng đủ vài tháng chi tiêu.",
+      "viec": "Tháng này tính xem quỹ dự phòng của mình đủ được mấy tháng.",
+      "dac_diem": [
+        "cam_nhon_lem"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s02_01",
+      "han": "只看神色氣肉四件為妙",
+      "am": "Chỉ khán thần sắc khí nhục tứ kiện vi diệu",
+      "y": "Xem trẻ nhỏ, sách dặn dựa vào thần, sắc, khí, thịt hơn là nét mặt, vì ngũ quan còn thay đổi.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «次看五官誠恐後來更改»",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s03_01",
+      "han": "還有一件可取或貴或富",
+      "am": "Hoàn hữu nhất kiện khả thủ, hoặc quý hoặc phú",
+      "y": "Tướng toàn nét chưa đẹp mà còn một điểm đáng lấy thì sách ghi vẫn có thể quý hoặc giàu.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «不可認真還宜動察»",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s03_02",
+      "han": "若有一面好相得一件破處既不利也",
+      "am": "Nhược hữu nhất diện hảo tướng, đắc nhất kiện phá xứ, ký bất lợi dã",
+      "y": "Sách ghi gương mặt đẹp mà có một chỗ hỏng thì chỗ hỏng ấy vẫn làm vướng.",
+      "nhom": "B",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «不可認真還宜動察»",
+      "ham_y": "Nên chú ý đúng điểm yếu của mình thay vì chỉ dựa vào điểm mạnh.",
+      "viec": "Viết ra một thói quen đang kéo mình xuống và chọn một cách bỏ nó trong tháng này.",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s03_03",
+      "han": "更宜細審聲音再察五官六府",
+      "am": "Cánh nghi tế thẩm thanh âm, tái sát ngũ quan lục phủ",
+      "y": "Sách dặn nghe kỹ giọng nói trước, rồi mới xem ngũ quan, lục phủ.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «不可認真還宜動察»",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s04_01",
+      "han": "細看一身上下並處紅痕斑點毛髮痣損",
+      "am": "Tế khán nhất thân thượng hạ tịnh xứ hồng ngân ban điểm mao phát chí tổn",
+      "y": "Sách dặn xem khắp người — vết, đốm, nốt ruồi, lông tóc — cùng với gương mặt.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «相乃仙傳要人眼力»",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s05_01",
+      "han": "今人厚薄不合古書",
+      "am": "Kim nhân hậu bạc bất hợp cổ thư",
+      "y": "Chính sách xưa dặn: người đời nay dày mỏng khác người xưa, không nên áp cứng sách cũ.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «古相多般一時難過今時氣數難依古書»",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s06_04",
+      "han": "大人欲眉輕小兒欲眉重",
+      "am": "Đại nhân dục mi khinh, tiểu nhi dục mi trọng",
+      "y": "Sách ghi người lớn thì mày nên thanh, nhẹ; mày đậm là điều sách mong ở trẻ nhỏ.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «小兒頂平眉重皮寬可言好養»",
+      "dac_diem": [
+        "may_thua"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s02_01",
+      "han": "最喜發黑耳正眼秀",
+      "am": "Tối hỷ phát hắc nhĩ chính nhãn tú",
+      "y": "Với người con gái, sách khen tóc đen, tai ngay, mắt thanh dài và gắn với đường duyên tốt.",
+      "nhom": "A",
+      "chu_de": "tinh_duyen",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «少女發黑暗長耳正可許貴夫»",
+      "dac_diem": [
+        "mat_dai_hep"
+      ],
+      "gioi": "nu"
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s02_02",
+      "han": "鳳肩鳳頸兼鳳目",
+      "am": "Phượng kiên phượng cảnh kiêm phượng mục",
+      "y": "Vai, cổ, mắt như chim phượng: sách xếp vào tướng nữ đại quý.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «少女發黑暗長耳正可許貴夫»",
+      "dac_diem": [
+        "mat_dai_hep"
+      ],
+      "gioi": "nu"
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s02_05",
+      "han": "耳反額方四度成雙",
+      "am": "Nhĩ phản ngạch phương tứ độ thành song",
+      "y": "Sách xưa có nhắc phụ nữ tai vành lật, trán vuông thì đường duyên hay đổi.",
+      "nhom": "C",
+      "chu_de": "tinh_duyen",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «少女發黑暗長耳正可許貴夫»",
+      "ham_y": "Hàm ý theo ghi chép xưa: nên chú ý tìm hiểu kỹ trước khi gắn bó và giữ lời hứa trong nhà.",
+      "viec": "Trước một quyết định lớn trong tình cảm, cho mình thêm một tuần suy nghĩ.",
+      "dac_diem": [
+        "tai_mong_lat"
+      ],
+      "gioi": "nu"
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s02_06",
+      "han": "大概欲細眉長目准圓額平為妙",
+      "am": "Đại khái dục tế mi trường mục chuẩn viên ngạch bình vi diệu",
+      "y": "Mày nhỏ, mắt dài, đầu mũi tròn, trán phẳng: sách ghi là nét đẹp.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «少女發黑暗長耳正可許貴夫»",
+      "dac_diem": [
+        "chuan_dau_tron",
+        "mat_dai_hep"
+      ],
+      "gioi": "nu"
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s03_01",
+      "han": "皆至此而皮血不潤神氣不旺必賤",
+      "am": "Giai chí thử nhi bì huyết bất nhuận thần khí bất vượng tất tiện",
+      "y": "Sách ghi lúc đã lớn mà da không tươi, thần khí không vượng là nét người khó đi lên.",
+      "nhom": "B",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «男相十六可成女相十四可定»",
+      "ham_y": "Nên chú ý ăn ngủ, vận động để da, mắt tươi lại — sách xem khí sắc đổi theo sức.",
+      "viec": "Tuần này đi bộ 30 phút mỗi ngày và ngủ đủ giấc.",
+      "dac_diem": [
+        "than_mo",
+        "sac_trang_bech"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s03_03",
+      "han": "惟忌肉肥光少血滯神衰主夭",
+      "am": "Duy kỵ nhục phì quang thiểu huyết trệ thần suy chủ yểu",
+      "y": "Sách xưa có nhắc người thịt nhiều mà sắc kém, thần mệt thì sức bền cần giữ.",
+      "nhom": "C",
+      "chu_de": "suc_ben",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «男相十六可成女相十四可定»",
+      "ham_y": "Hàm ý người xưa muốn dặn: người mệt, sắc nhợt kéo dài nên đi khám.",
+      "viec": "Đi khám tổng quát, xét nghiệm máu cơ bản trong tháng này.",
+      "dac_diem": [
+        "nhuc_nhao",
+        "than_mo"
+      ],
+      "can_du": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s03_04",
+      "han": "若神足氣壯肉實骨正是成立之人也",
+      "am": "Nhược thần túc khí tráng nhục thực cốt chính thị thành lập chi nhân dã",
+      "y": "Thần đủ, khí mạnh, thịt chắc, xương ngay: sách ghi là người tự lập thân được.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «男相十六可成女相十四可定»",
+      "dac_diem": [
+        "cot_nhuc_can",
+        "than_dinh"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s05_01",
+      "han": "額高耳反火克金父母家財總是空",
+      "am": "Ngạch cao nhĩ phản hỏa khắc kim, phụ mẫu gia tài tổng thị không",
+      "y": "Sách ghi trán cao mà tai lật thì phần gia sản cha mẹ khó giữ.",
+      "nhom": "B",
+      "chu_de": "tien_bac",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «五行貴賤難逃生克之中»",
+      "ham_y": "Nên chú ý tự gây dựng, không trông vào phần để lại.",
+      "viec": "Lập một kế hoạch tiết kiệm của riêng mình trong tháng này.",
+      "dac_diem": [
+        "tran_cao_rong",
+        "tai_mong_lat"
+      ],
+      "can_du": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s05_03",
+      "han": "口大睛清額又高定是高賢大貴豪",
+      "am": "Khẩu đại tinh thanh ngạch hựu cao, định thị cao hiền đại quý hào",
+      "y": "Mắt trong, trán cao (sách còn kể miệng rộng): sách ghi là nét người hiền tài.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «五行貴賤難逃生克之中»",
+      "dac_diem": [
+        "tran_cao_rong",
+        "than_dinh"
+      ],
+      "can_du": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s05_04",
+      "han": "鼻大口小土克水三十三四離鄉間",
+      "am": "Tị đại khẩu tiểu thổ khắc thủy, tam thập tam tứ ly hương gian",
+      "y": "Sách ghi mũi to mà miệng nhỏ thì có quãng phải rời quê lập nghiệp.",
+      "nhom": "B",
+      "chu_de": "di_lai",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «五行貴賤難逃生克之中»",
+      "ham_y": "Nên chú ý chuẩn bị kỹ khi đổi nơi ở, nơi làm.",
+      "viec": "Trước khi chuyển nơi làm, hỏi chuyện hai người đã từng làm ở đó.",
+      "dac_diem": [
+        "chuan_dau_to",
+        "mieng_nho_mong"
+      ],
+      "can_du": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s05_05",
+      "han": "五行有一克不為好相",
+      "am": "Ngũ hành hữu nhất khắc bất vi hảo tướng",
+      "y": "Sách ghi năm phần trên mặt (tai, trán, miệng, mũi) có một chỗ không hợp hành nhau thì chưa phải tướng trọn.",
+      "nhom": "B",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «五行貴賤難逃生克之中»",
+      "ham_y": "Nên chú ý: chính sách cũng dặn một nét chưa trọn thì bù bằng nết và việc làm.",
+      "viec": "Chọn một điểm yếu biết rõ của mình và tìm một người bổ khuyết.",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s05_06",
+      "han": "三停得位六府相勻五官俱正乃大富大貴之相也",
+      "am": "Tam đình đắc vị, lục phủ tương quân, ngũ quan câu chính, nãi đại phú đại quý chi tướng dã",
+      "y": "Ba phần mặt cân, sáu phủ đều, ngũ quan ngay ngắn: sách xếp vào tướng giàu sang.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «五行貴賤難逃生克之中»",
+      "dac_diem": [
+        "tam_dinh_can"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s05_07",
+      "han": "如有天倉而無地庫初榮暮敗",
+      "am": "Như hữu thiên thương nhi vô địa khố, sơ vinh mộ bại",
+      "y": "Sách ghi hai bên trán đầy mà cằm gọt thì đầu đời thuận, quãng sau cần giữ.",
+      "nhom": "B",
+      "chu_de": "tien_bac",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «五行貴賤難逃生克之中»",
+      "ham_y": "Nên chú ý để dành khi đang thuận cho quãng sau.",
+      "viec": "Mỗi tháng trích một phần thu nhập vào khoản dành cho tuổi về sau.",
+      "dac_diem": [
+        "giac_day",
+        "cam_nhon_lem"
+      ],
+      "can_du": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s05_08",
+      "han": "有地庫而欠天倉初困暮榮",
+      "am": "Hữu địa khố nhi khiếm thiên thương, sơ khốn mộ vinh",
+      "y": "Hai bên trán thiếu đầy mà cằm đầy: sách ghi đầu đời vất vả, về sau mới thuận.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «五行貴賤難逃生克之中»",
+      "dac_diem": [
+        "giac_lech",
+        "cam_tron_day"
+      ],
+      "can_du": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s05_09",
+      "han": "如有顴骨而無天倉地庫亦不好主大孤獨之相",
+      "am": "Như hữu quyền cốt nhi vô thiên thương địa khố diệc bất hảo, chủ đại cô độc chi tướng",
+      "y": "Sách ghi gò má nổi mà trán, cằm thiếu đầy thì người hay đơn độc.",
+      "nhom": "B",
+      "chu_de": "ban_be",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «五行貴賤難逃生克之中»",
+      "ham_y": "Nên chú ý giữ bạn, chủ động hẹn gặp người quen.",
+      "viec": "Tuần này hẹn một người bạn cũ đi cà phê.",
+      "dac_diem": [
+        "quyen_tro",
+        "giac_lech",
+        "cam_nhon_lem"
+      ],
+      "can_du": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s06_01",
+      "han": "如天高地厚土正顴開乃有榮有得之格",
+      "am": "Như thiên cao địa hậu thổ chính quyền khai, nãi hữu vinh hữu đắc chi cách",
+      "y": "Trán cao, cằm dày, mũi ngay (sách còn kể gò má mở): sách ghi là cách có vinh có được.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «榮枯得失»",
+      "dac_diem": [
+        "tran_cao_rong",
+        "cam_tron_day",
+        "song_mui_thang"
+      ],
+      "can_du": true
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s06_02",
+      "han": "如天庭削曰月明眉毛秀少年未必全美",
+      "am": "Như thiên đình tước, nhật nguyệt minh, mi mao tú, thiếu niên vị tất toàn mỹ",
+      "y": "Trán hẹp mà hai bên trán sáng, mày đẹp: sách ghi thời trẻ chưa trọn, từ trung niên mới thuận.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển thượng, mục «榮枯得失»",
+      "dac_diem": [
+        "tran_hep_thap",
+        "giac_day",
+        "may_thanh_dai"
+      ],
+      "can_du": true
+    },
+    {
+      "ma": "R_YLZ_QISE_RED_FIRE",
+      "han": "紅赤紫色屬火乃心之苗",
+      "am": "Hồng xích tử sắc thuộc hỏa nãi tâm chi miêu",
+      "y": "Sách xưa xếp sắc mặt hồng, đỏ, tía vào hành Hoả, gắn với tim.",
+      "nhom": "B",
+      "chu_de": "suc_khoe",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển hạ, mục «五行象說»",
+      "ham_y": "Nên chú ý: mặt đỏ ửng kéo dài là điều nên hỏi bác sĩ khi đi khám.",
+      "viec": "Đo huyết áp ở nhà vài buổi sáng, ghi lại mang theo khi đi khám.",
+      "dac_diem": [
+        "sac_do_ung"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QISE_WHITE_METAL",
+      "han": "白屬金肺之苗",
+      "am": "Bạch thuộc kim phế chi miêu",
+      "y": "Sách xưa xếp sắc mặt trắng vào hành Kim, gắn với phổi.",
+      "nhom": "B",
+      "chu_de": "suc_khoe",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển hạ, mục «五行象說»",
+      "ham_y": "Nên chú ý: mặt trắng nhợt kéo dài là điều nên kể với bác sĩ khi đi khám.",
+      "viec": "Đi khám định kỳ, hỏi bác sĩ có cần kiểm tra hô hấp, máu không.",
+      "dac_diem": [
+        "sac_trang_bech"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QISE_YELLOW_EARTH",
+      "han": "黃屬土脾之苗",
+      "am": "Hoàng thuộc thổ tỳ chi miêu",
+      "y": "Sách xưa xếp sắc mặt vàng vào hành Thổ, gắn với tỳ (đường tiêu hoá).",
+      "nhom": "B",
+      "chu_de": "suc_khoe",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển hạ, mục «五行象說»",
+      "ham_y": "Nên chú ý: sắc mặt vàng xỉn kéo dài là điều nên hỏi bác sĩ khi đi khám.",
+      "viec": "Đi khám tiêu hoá định kỳ và để ý bữa ăn đều giờ.",
+      "dac_diem": [
+        "sac_vang_xin"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QISE_BLACK_WATER",
+      "han": "黑屬水腎之苗",
+      "am": "Hắc thuộc thủy thận chi miêu",
+      "y": "Sách xưa xếp sắc mặt tối, đen vào hành Thuỷ, gắn với thận.",
+      "nhom": "B",
+      "chu_de": "suc_khoe",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển hạ, mục «五行象說»",
+      "ham_y": "Nên chú ý: sắc mặt sạm tối kéo dài là điều nên kể với bác sĩ khi đi khám.",
+      "viec": "Khi đi khám định kỳ, hỏi bác sĩ về xét nghiệm nước tiểu; uống đủ nước mỗi ngày.",
+      "dac_diem": [
+        "sac_toi_sam"
+      ]
+    },
+    {
+      "ma": "R_YLZ_QISE_GREEN_WOOD",
+      "han": "青屬木肝之苗",
+      "am": "Thanh thuộc mộc can chi miêu",
+      "y": "Sách xưa xếp sắc xanh trên mặt vào hành Mộc, gắn với gan — năm sắc ứng năm tạng là khung đọc khí sắc của sách.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển hạ, mục «五行象說»",
+      "chung": true
+    },
+    {
+      "ma": "R_YLZ_QISE_PALACE_EVENT",
+      "han": "何色發於某宮即應某事",
+      "am": "Hà sắc phát ư mỗ cung tức ứng mỗ sự",
+      "y": "Sắc nào hiện ở cung nào trên mặt thì sách đọc vào việc của cung ấy, còn xét thêm đậm nhạt, to nhỏ, hình dạng.",
+      "nhom": "A",
+      "chu_de": "tong_quan",
+      "nguon": "lieu_trang_tuong_phap",
+      "chuong": "Quyển hạ, mục «五行象說»",
+      "chung": true
+    }
+  ],
+  "quy_tac_khong_dua": [
+    {
+      "ma": "R_SXQB_MING_p0061_s02_01",
+      "ly_do": "nét sách nói không có trong khảo sát — không gắn được với người đọc (rốn)"
+    },
+    {
+      "ma": "R_SXQB_MING_p0061_s03_01",
+      "ly_do": "trùng ý với R_SXQB_MING_p0061_s02_02 (cùng đoạn sách 德不稱形); câu Hán của đoạn này kể chuyện bị giết"
+    },
+    {
+      "ma": "R_SXQB_MING_p0064_s01_01",
+      "ly_do": "chỉ là khẩu quyết vị trí bộ vị trong bài «天庭第二», không có lời luận để hiện"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s02_01",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s02_02",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s02_03",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s02_04",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s02_05",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s02_07",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s02_08",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s03_01",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s03_02",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s04_01",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s04_02",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s04_03",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s04_04",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s04_05",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s04_06",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s04_07",
+      "ly_do": "đoán nguy hiểm tính mạng người mẹ lúc sinh qua sắc mặt — lời phán sống chết; SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s04_08",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s04_09",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s04_10",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s04_11",
+      "ly_do": "đoán giới tính / ngày sinh / phúc phận của thai nhi qua mặt người mẹ — SX-C2 cấm đoán kết quả của thai"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s05_01",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s05_02",
+      "ly_do": "đoán tuổi mất của trẻ (có số tuổi cụ thể) — lời đoán số phận, không viết lại được mà không còn là phán định"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s05_03",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s05_04",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s05_05",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s05_06",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0013_s05_07",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_01",
+      "ly_do": "đoán tuổi mất của trẻ (có số tuổi cụ thể) — lời đoán số phận, không viết lại được mà không còn là phán định"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_02",
+      "ly_do": "đoán tuổi mất của trẻ (có số tuổi cụ thể) — lời đoán số phận, không viết lại được mà không còn là phán định"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_03",
+      "ly_do": "đoán tuổi mất của trẻ (có số tuổi cụ thể) — lời đoán số phận, không viết lại được mà không còn là phán định"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_04",
+      "ly_do": "đoán tuổi mất của trẻ (có số tuổi cụ thể) — lời đoán số phận, không viết lại được mà không còn là phán định"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_05",
+      "ly_do": "đoán tuổi mất của trẻ (có số tuổi cụ thể) — lời đoán số phận, không viết lại được mà không còn là phán định"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_06",
+      "ly_do": "đoán tuổi mất của trẻ (có số tuổi cụ thể) — lời đoán số phận, không viết lại được mà không còn là phán định"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_07",
+      "ly_do": "đoán tuổi mất của trẻ (có số tuổi cụ thể) — lời đoán số phận, không viết lại được mà không còn là phán định"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_08",
+      "ly_do": "đoán tuổi mất của trẻ (có số tuổi cụ thể) — lời đoán số phận, không viết lại được mà không còn là phán định"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_09",
+      "ly_do": "đoán tuổi mất của trẻ (có số tuổi cụ thể) — lời đoán số phận, không viết lại được mà không còn là phán định"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_10",
+      "ly_do": "đoán tuổi mất của trẻ (có số tuổi cụ thể) — lời đoán số phận, không viết lại được mà không còn là phán định"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_11",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_12",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_13",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s01_14",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s02_01",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s02_02",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s02_03",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s02_04",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s02_05",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s02_06",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s02_07",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s03_01",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s03_02",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s03_03",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0014_s03_06",
+      "ly_do": "không tìm thấy câu tương ứng trong Liễu Trang tướng pháp; ý (tóc mọc ở thiên đình → hiền quý) ngược câu ngay trước (tóc lấn góc trán → chậm) — nghi đọc nhầm, chờ đối chiếu bản khắc"
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s03_06",
+      "ly_do": "nét sách nói không có trong khảo sát — không gắn được với người đọc (đầu lệch nhọn)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s05_01",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác); còn đoán hình khắc mẹ cho bé gái"
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s05_03",
+      "ly_do": "khảo sát chỉ có 'giọng trầm, ấm' (nét sách khen), không có 'giọng như nam' — gắn vào sẽ sai nét"
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s05_05",
+      "ly_do": "nét sách nói không có trong khảo sát — không gắn được với người đọc (răng)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0015_s05_07",
+      "ly_do": "nét sách nói không có trong khảo sát — không gắn được với người đọc (răng); còn gán phẩm hạnh theo giới"
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s01_05",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s06_01",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s06_02",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0016_s06_03",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s01_01",
+      "ly_do": "đoán trọn đời (giàu nghèo, thành bại, dễ nuôi) của trẻ sơ sinh qua dấu hiệu lúc mới sinh — lời đoán số phận của người khác; bài đọc là người lớn tự soi mặt mình (NT-1 không xem tướng người khác)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s02_03",
+      "ly_do": "nét sách nói không có trong khảo sát — không gắn được với người đọc (vai, lưng, cổ)"
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s02_04",
+      "ly_do": "đoán số con trai — CLAUDE.md cấm đoán số con"
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s03_02",
+      "ly_do": "gán phẩm hạnh cho da mặt bóng dầu — không có cách nói giảm nào giữ được ý sách mà không còn là lời gán"
+    },
+    {
+      "ma": "R_YLZ_QING_p0017_s05_02",
+      "ly_do": "nét ghép (miệng to + trán nhọn) không có trong khảo sát; ý chính là đoán khổ ở một tuổi cụ thể"
+    }
+  ],
+  "can_doi_chieu": true
+}

@@ -35,6 +35,12 @@ def the_dung(quan_he: str) -> dict | None:
     return {**m, **meta()} if m else None
 
 
+@nap.nho
+def luc_hao_thuc_chien() -> dict:
+    """Đợt 2B — 8 nguyên tắc Lục Hào + 5 Lục Thân thực chiến (Vương Hổ Ứng & Thiệu Vĩ Hoa)."""
+    return nap.doc("kinhdich_luc_hao_thuc_chien.json")
+
+
 def dung_than(ten: str) -> dict | None:
     m = _d()["dung_than"].get(ten)
     return {**m, **meta()} if m else None

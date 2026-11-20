@@ -87,7 +87,7 @@ def doc_gio(ban: dict, viec: str | None = None, huong_hop: list[str] | None = No
                   f"Can trên {o['thien_ban']}" + (f" (kèm {o['thien_ban_ky']})" if o.get("thien_ban_ky") else "") + f", can dưới {o['dia_ban']}"]
         if than.get("ten_khac"):
             can_cu.append(f"Có sách gọi thần này là {than['ten_khac']} khi âm độn.")
-        huong.append({
+        muc_huong = {
             "cung": k, "que": o["que"], "phuong": o["phuong"], "muc": muc, "muc_nhan": muc_kb[muc], "noi_bat": noi_bat,
             "cua": {"ma": ma_cua, "ten": cua["ten"], "tom": cua["tom"], "loai": cua["loai"], "loi": cua["loi"], "nen": cua["nen"],
                     "tranh": cua["tranh"], "sach": kb.loi_sach(cua.get("sach"))},
@@ -99,7 +99,16 @@ def doc_gio(ban: dict, viec: str | None = None, huong_hop: list[str] | None = No
             "hop_viec": [] if muc == "cham" else [ma for ma, v in kb.phan("viec").items() if ma_cua in v["cua"]],
             "tom": kb.mau("huong_thuan").format(phuong=o["phuong"], cua=cua["ten"], tom=cua["tom"].lower()),
             "can_cu": can_cu,
-        })
+        }
+        from app.ngon_ngu import la_viet  # noqa: PLC0415
+        if la_viet():
+            from app.kb import tuong_hoc_dot4_kb  # noqa: PLC0415
+            cd = tuong_hoc_dot4_kb.tra_cuu_don_cung(
+                o["thien_ban"], o["dia_ban"], cua["ten"].replace(" Môn", ""), than["ten"], k
+            )
+            if cd:
+                muc_huong["cuu_don"] = cd
+        huong.append(muc_huong)
 
     thuan = sorted((h for h in huong if h["muc"] == "thuan"), key=lambda h: not h["noi_bat"])
     hiem = [{"ma": c["ma"], "ten": kb.phan("cach")[c["ma"]]["ten"], "phuong": km.QUE[c["cung"]][1],

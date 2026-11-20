@@ -222,8 +222,10 @@ def _do_thang(diem: dict, ti_le: float) -> dict:
         canh_bao.append(loi["canh_bao_quay"])
     vua = lambda c, l: l in _VUA and c != "tam_dinh"  # noqa: E731
     # Mặt quay ngang: bề ngang hai bên co giãn khác nhau → không kết luận "vừa" (chỉ giữ nét lệch rõ như trước).
+    from app.calc import tuong_fuzzy  # noqa: PLC0415
     return {"goi_y": [{"cau": c, "lua_chon": l, "do": t, "nguon": nguon, "anh": "thang", **({"vua": True} if vua(c, l) else {})}
-                      for c, l, t in goi if not (quay_ngang and vua(c, l))], "so_do": sd, "canh_bao": canh_bao}
+                      for c, l, t in goi if not (quay_ngang and vua(c, l))], "so_do": sd, "canh_bao": canh_bao,
+            "fuzzy_bridge": tuong_fuzzy.cau_noi_nhan_tuong(sd)}
 
 
 _VUA = ("vua", "can_doi")

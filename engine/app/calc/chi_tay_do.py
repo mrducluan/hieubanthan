@@ -137,7 +137,9 @@ def do_tay(diem: list, ty_le: float, tay: str) -> dict:
 
     so_do = {"dai_long": 1.0, "rong_long": _r(rong), "ngon": ngon, "tro_ap_ut": _r(ngon["tro"] / ngon["ap_ut"])}
     nhan = [_nhan(ngon["giua"], "ngon", ng), _nhan(so_do["rong_long"], "long", ng), _nhan(so_do["tro_ap_ut"], "tro_ap_ut", ng)]
-    return {"hop_le": True, "loi": None, "so_do": so_do, "nhan": nhan, "cung": chieu_cung(diem)}
+    from app.calc import tuong_fuzzy  # noqa: PLC0415
+    return {"hop_le": True, "loi": None, "so_do": so_do, "nhan": nhan, "cung": chieu_cung(diem),
+            "fuzzy_bridge": tuong_fuzzy.cau_noi_chi_tay(so_do)}
 
 
 def nhan_tay(so_do: dict) -> dict:

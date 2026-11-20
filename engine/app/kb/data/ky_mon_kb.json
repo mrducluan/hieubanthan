@@ -813,6 +813,173 @@
     "ham_y": "Nên chú ý: giờ này không hợp việc hệ trọng.",
     "viec": "Dời việc quan trọng sang một giờ khác trong ngày."
    }
+  },
+  "van_don": {
+   "ten": "Vân Độn",
+   "han": "雲遁",
+   "loai": "cat",
+   "pham_vi": "cung",
+   "dieu_kien": "Cửa tốt (Khai/Hưu/Sinh) gặp Ất thiên bàn trên Tân địa bàn.",
+   "loi": "Thế êm và có người đỡ đằng sau — hợp việc cần sự mềm mỏng, xin ý kiến hoặc nhờ người hỗ trợ kín đáo.",
+   "nen": "Trao đổi riêng, nhờ người có kinh nghiệm gỡ rối, làm việc cần sự tinh tế.",
+   "sach": {
+    "han": "雲遁休開生與乙奇合奇地盤六辛",
+    "am": "Vân Độn: Hưu Khai Sinh dữ Ất kỳ hợp kỳ, địa bàn lục Tân",
+    "y": "Vân Độn hình thành khi một trong ba cửa tốt gặp Ất kỳ trên nền Tân.",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_phu_ung_tong_tong"
+   }
+  },
+  "phong_don": {
+   "ten": "Phong Độn",
+   "han": "風遁",
+   "loai": "cat",
+   "pham_vi": "cung",
+   "dieu_kien": "Cửa tốt (Khai/Hưu/Sinh) gặp Ất thiên bàn tại cung Tốn (Đông Nam).",
+   "loi": "Thế thuận đà truyền tin — hợp truyền thông, gửi thông điệp, giới thiệu sản phẩm hoặc mở lời trước.",
+   "nen": "Đăng bài giới thiệu, gửi đề xuất, chủ động kết nối với nhiều người.",
+   "sach": {
+    "han": "風遁休開生臨乙奇地盤巽四宮",
+    "am": "Phong Độn: Hưu Khai Sinh lâm Ất kỳ, địa bàn Tốn tứ cung",
+    "y": "Phong Độn hình thành khi ba cửa tốt gặp Ất kỳ tại cung Tốn (Đông Nam).",
+    "nhom": "A",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_phu_ung_tong_tong"
+   }
+  },
+  "thien_at_phuc_cung": {
+   "ten": "Thiên Ất Phục Cung",
+   "han": "天乙伏宮格",
+   "loai": "hung",
+   "pham_vi": "cung",
+   "dieu_kien": "Canh thiên bàn rơi lên cung gốc của Trực Phù.",
+   "loi": "Thế đôi bên cùng vướng — hành động vội lúc này dễ kẹt giữa chừng, cả chủ lẫn khách đều khó xoay xở.",
+   "nen": "Giữ nguyên hiện trạng, rà lại nguồn lực trước khi đi bước tiếp theo.",
+   "sach": {
+    "han": "六庚加直符名天乙伏宮格此時戰鬥主客皆不利",
+    "am": "Lục Canh gia Trực Phù danh Thiên Ất Phục Cung cách, thử thời chiến đấu chủ khách giai bất lợi",
+    "y": "Canh trên nền Trực Phù là cách Phục Cung, sách xưa dặn lúc này cả hai phía đều chưa thuận để tiến gấp.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_phu_ung_tong_tong",
+    "ham_y": "Nên chú ý tạm lùi một nhịp thay vì ép tiến độ hay tranh phần thắng ngay.",
+    "viec": "Kiểm tra lại đầu mục còn thiếu và dời quyết định lớn sang khung giờ thoáng hơn."
+   }
+  },
+  "thien_at_phi_cung": {
+   "ten": "Thiên Ất Phi Cung",
+   "han": "天乙飛宮格",
+   "loai": "hung",
+   "pham_vi": "cung",
+   "dieu_kien": "Trực Phù rơi lên cung có Canh ở địa bàn.",
+   "loi": "Thế dễ thay đổi kế hoạch đột ngột — chuyện tưởng đã chốt vẫn có thể đổi hướng vào phút chót.",
+   "nen": "Chuẩn bị sẵn phương án dự phòng và xác nhận lại lịch hẹn trước khi di chuyển.",
+   "sach": {
+    "han": "直符加六庚是也此時主客皆不利",
+    "am": "Trực Phù gia Lục Canh thị dã, thử thời chủ khách giai bất lợi",
+    "y": "Trực Phù gặp Canh ở dưới là cách Phi Cung, sách xưa khuyên nên cẩn trọng vì hai phía đều dễ gặp trở ngại.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_phu_ung_tong_tong",
+    "ham_y": "Nên chú ý tính đến phương án dự phòng và không vội cam kết khi thông tin chưa đủ.",
+    "viec": "Nhắn xác nhận lại giờ giấc, địa điểm và điều kiện với đối tác trước khi bắt đầu."
+   }
+  },
+  "phuc_can_cach": {
+   "ten": "Phục Can Cách",
+   "han": "伏干格",
+   "loai": "hung",
+   "pham_vi": "cung",
+   "dieu_kien": "Canh thiên bàn rơi lên cung có can ngày ở địa bàn.",
+   "loi": "Thế vướng ngay từ bên trong — việc định làm dễ gặp trục trặc về người phụ trách hoặc tài liệu chuẩn bị.",
+   "nen": "Kiểm tra kỹ khâu nội bộ trước khi đưa ra ngoài làm việc với khách hay đối tác.",
+   "sach": {
+    "han": "庚臨日干伏幹格",
+    "am": "Canh lâm nhật can Phục Can cách",
+    "y": "Canh rơi lên can ngày gọi là Phục Can cách, báo hiệu dễ có cản trở từ khâu chuẩn bị.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_phu_ung_tong_tong",
+    "ham_y": "Nên chú ý rà soát lại phần việc của chính mình trước khi gặp đối phương.",
+    "viec": "Đọc lại tài liệu, số liệu một lượt và kiểm tra người phối hợp đã sẵn sàng chưa."
+   }
+  },
+  "phi_can_cach": {
+   "ten": "Phi Can Cách",
+   "han": "飛干格",
+   "loai": "hung",
+   "pham_vi": "cung",
+   "dieu_kien": "Can ngày ở thiên bàn rơi lên cung có Canh ở địa bàn.",
+   "loi": "Thế dễ va chạm trực diện — nếu đôi bên cùng cứng rắn thì cả hai đều hao sức mà không xong việc.",
+   "nen": "Giữ giọng mềm, tách cảm xúc khỏi vấn đề, hoặc chọn cách trao đổi gián tiếp qua văn bản.",
+   "sach": {
+    "han": "今日之干加六庚是也此時鬥戰主客兩傷",
+    "am": "Kim nhật chi can gia Lục Canh thị dã, thử thời đấu chiến chủ khách lưỡng thương",
+    "y": "Can ngày gặp Canh ở dưới là Phi Can cách, sách xưa dặn va chạm lúc này cả hai bên đều dễ hao sức và mất hoà khí.",
+    "nhom": "B",
+    "chu_de": "cong_viec",
+    "nguon": "ky_mon_phu_ung_tong_tong",
+    "ham_y": "Nên chú ý tránh tranh cãi thắng thua, tập trung tìm điểm chung nhỏ nhất để đi tiếp.",
+    "viec": "Viết ngắn gọn 2–3 điểm cần thống nhất và gửi trước khi họp để giảm căng thẳng."
+   }
+  },
+  "dai_cach": {
+   "ten": "Đại Cách",
+   "han": "大格",
+   "loai": "hung",
+   "pham_vi": "cung",
+   "dieu_kien": "Canh thiên bàn rơi lên Quý địa bàn.",
+   "loi": "Thế chặn đường lớn — việc khởi sự quan trọng, đi xa hoặc tìm đồ thất lạc ở phía này dễ gặp trở ngại kéo dài.",
+   "nen": "Hoãn việc khởi đầu quan trọng sang giờ khác; nếu buộc phải đi thì đi sớm và kiểm tra kỹ hành lý.",
+   "sach": {
+    "han": "六庚加六癸為大格謂天上六庚臨地下六癸此時不可舉百事",
+    "am": "Lục Canh gia Lục Quý vi Đại Cách, vị thiên thượng Lục Canh lâm địa hạ Lục Quý, thử thời bất khả cử bách sự",
+    "y": "Canh gặp Quý ở dưới là Đại Cách, sách xưa khuyên chưa nên khởi sự các việc lớn trong thế này.",
+    "nhom": "B",
+    "chu_de": "di_lai",
+    "nguon": "ky_mon_phu_ung_tong_tong",
+    "ham_y": "Nên chú ý không khởi công hay ký kết việc lớn theo phía này; đi đường giữ kỹ đồ đạc.",
+    "viec": "Kiểm tra lại giấy tờ, hành lý trước khi ra khỏi cửa và dời mốc ký kết sang giờ thuận hơn."
+   }
+  },
+  "hinh_cach": {
+   "ten": "Hình Cách",
+   "han": "刑格",
+   "loai": "hung",
+   "pham_vi": "cung",
+   "dieu_kien": "Canh thiên bàn rơi lên Kỷ địa bàn.",
+   "loi": "Thế dễ trục trặc giữa đường — chuyện di chuyển, vận chuyển hàng hoá hoặc giấy tờ thủ tục dễ bị dừng giữa chừng.",
+   "nen": "Kiểm tra xe cộ, hồ sơ thủ tục kỹ từ trước; tránh vội vàng trên đường.",
+   "sach": {
+    "han": "六庚加六己是也謂天上六庚加地下六己此時用兵主車破馬傷中道而止",
+    "am": "Lục Canh gia Lục Kỷ thị dã, vị thiên thượng Lục Canh gia địa hạ Lục Kỷ, thử thời dụng binh chủ xa phá mã thương trung đạo nhi chỉ",
+    "y": "Canh gặp Kỷ ở dưới là Hình Cách, sách xưa ví như đi đường dễ hỏng xe, phải dừng lại giữa chừng.",
+    "nhom": "B",
+    "chu_de": "di_lai",
+    "nguon": "ky_mon_phu_ung_tong_tong",
+    "ham_y": "Nên chú ý an toàn phương tiện và kiểm tra đủ giấy tờ trước khi xuất phát.",
+    "viec": "Kiểm tra lốp, xăng hoặc tình trạng xe và dự trù thêm 15–20 phút cho chặng đi."
+   }
+  },
+  "tieu_cach": {
+   "ten": "Tiểu Cách",
+   "han": "小格",
+   "loai": "hung",
+   "pham_vi": "cung",
+   "dieu_kien": "Canh thiên bàn rơi lên Nhâm địa bàn.",
+   "loi": "Thế chậm trễ nhỏ — lịch trình hoặc phản hồi từ người khác dễ bị lùi lại so với dự tính.",
+   "nen": "Chủ động nhắn nhắc nhẹ và chuẩn bị sẵn việc xen kẽ trong lúc chờ.",
+   "sach": {
+    "han": "六庚加己爲刑格加癸爲大格加壬爲上格又爲小格",
+    "am": "Lục Canh gia Kỷ vi Hình Cách, gia Quý vi Đại Cách, gia Nhâm vi Thượng Cách hựu vi Tiểu Cách",
+    "y": "Canh gặp Nhâm ở dưới gọi là Tiểu Cách, sách xưa xếp cùng nhóm cách dễ gặp trắc trở đường đi.",
+    "nhom": "B",
+    "chu_de": "di_lai",
+    "nguon": "ky_mon_phu_ung_tong_tong",
+    "ham_y": "Nên chú ý sắp xếp khoảng đệm thời gian để không bị động khi lịch bị trễ.",
+    "viec": "Xác nhận lại lịch hẹn trước 1 giờ và mang theo việc nhỏ có thể xử lý nếu phải chờ."
+   }
   }
  },
  "viec": {

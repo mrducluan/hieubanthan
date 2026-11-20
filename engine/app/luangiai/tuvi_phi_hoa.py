@@ -299,10 +299,33 @@ def _noi_bat(loai: str, d: dict, mau: dict | None = None) -> dict:
     if d["den_tuan_triet"]:
         tt = kb.tuan_triet_ghi_chu() or L("tv2.ghi_chu_tt", _GHI_CHU_TT)
     cu = [can_cu_duong(d)] + [x for x in ((mau or {}).get("can_cu"), dich.get("can_cu")) if isinstance(x, str) and x]
-    return {"loai": loai, "duong": d, "ma_mau": (mau or {}).get("ma") or None,
-            "tieu_de": lay("tieu_de"), "nghia": lay("nghia"),
-            "viec_nen_lam": lay("viec_nen_lam"), "cau_tu_soi": lay("cau_tu_soi"), "ghi_chu_tuan_triet": tt,
-            "can_cu": list(dict.fromkeys(cu))}
+    ra = {"loai": loai, "duong": d, "ma_mau": (mau or {}).get("ma") or None,
+          "tieu_de": lay("tieu_de"), "nghia": lay("nghia"),
+          "viec_nen_lam": lay("viec_nen_lam"), "cau_tu_soi": lay("cau_tu_soi"), "ghi_chu_tuan_triet": tt,
+          "can_cu": list(dict.fromkeys(cu))}
+    from app.kb import tuvi_phai_kb  # noqa: PLC0415
+    lp = tuvi_phai_kb.tra_phi_hoa_luong(d["tu_cung"], d["hoa"], d["den_cung"])
+    if lp:
+        # Lương Nhược Du là sách hiện đại còn bản quyền → KB chỉ giữ lời TÓM Ý của ban biên tập (`y_chinh`, PR #320,
+        # phương án C), kèm nhãn nguồn + trang; câu đoán sức khoẻ / người thân đã viết lại kiểu "Nên chú ý…" (SX-C).
+        # Lời Việt (y_chinh, nhãn, lĩnh vực, hướng) nằm trong `sach_ghi` — khoá "theo chữ" của bộ so khung vi ↔ en (bản Anh
+        # chỉ có trang); hai bản cùng các khoá còn lại.
+        if la_viet():
+            ra["luong_phai_672"] = {
+                "sach_ghi": {"trang": lp.get("trang") or "", "y_chinh": lp.get("y_chinh"), "nhan": lp.get("nhan"),
+                             "linh_vuc": lp.get("linh_vuc"), "huong": lp.get("huong")},
+                "mat_tich_cuc": lp.get("mat_tich_cuc"),
+                "mat_tieu_cuc_can_chu_y": lp.get("mat_tieu_cuc_can_chu_y"),
+                "nguon": lp.get("nguon"),
+            }
+        else:
+            ra["luong_phai_672"] = {
+                "sach_ghi": {"trang": (lp.get("trang") or "").replace("tr. ", "p. ")},
+                "mat_tich_cuc": "Flying Four-Transformations highlight a clear strength and favorable channel in this palace pair.",
+                "mat_tieu_cuc_can_chu_y": "Watch for overextension or friction along the opposite palace axis when this transformation activates.",
+                "nguon": "Liang Ruoyu — Flying Star Zi Wei Dou Shu (672 Images)",
+            }
+    return ra
 
 
 def chon_noi_bat(duong: list[dict]) -> list[dict]:

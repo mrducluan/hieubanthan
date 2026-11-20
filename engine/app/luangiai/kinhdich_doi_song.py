@@ -312,9 +312,30 @@ def _goc_nhin_luc_hao(pt: dict | None) -> dict | None:
                                 vt=", ".join(map(str, x["vi_tri"])) or "—")
                               + (L("kd.lh.dong", ", động {ds}", ds=", ".join(map(str, x["dong"]))) if x["dong"] else "") + ".")
     can_cu += [s[0].upper() + s[1:] + "." for s in ly if s and not s.endswith(".")]
-    return {"muc": muc, "nhan": kb.nhan_muc(muc), "dung_than": d.get("ten") if d else None, "phuc": bool(d.get("phuc")) if d else None,
-            "luc_thu": pt["luc_thu"], "hao": pt["hao"], "ung_ky": kd_hien.ung_ky(pt.get("ung_ky", [])), "ly_do": ly, "can_cu": can_cu,
-            "tom_tat": (ly[0][0].upper() + ly[0][1:]) if ly else ""}
+    ra = {"muc": muc, "nhan": kb.nhan_muc(muc), "dung_than": d.get("ten") if d else None, "phuc": bool(d.get("phuc")) if d else None,
+          "luc_thu": pt["luc_thu"], "hao": pt["hao"], "ung_ky": kd_hien.ung_ky(pt.get("ung_ky", [])), "ly_do": ly, "can_cu": can_cu,
+          "tom_tat": (ly[0][0].upper() + ly[0][1:]) if ly else ""}
+    from app.ngon_ngu import la_viet  # noqa: PLC0415
+    if la_viet():
+        from app.kb import kinhdich_kb  # noqa: PLC0415
+        tc_kb = kinhdich_kb.luc_hao_thuc_chien()
+        tc: dict = {}
+        lt_muc = (tc_kb.get("luc_than_thuc_chien") or {}).get(d.get("ten") or "")
+        if lt_muc:
+            tc["dung_than"] = lt_muc
+        nt_all = tc_kb.get("nguyen_tac") or {}
+        ma_nt = "dung_nguyen_ky_cuu"
+        if any(h.get("tuan_khong") for h in (d.get("vi_tri") or [])):
+            ma_nt = "tuan_khong"
+        elif any(h.get("nguyet_lenh") == "phá" for h in (d.get("vi_tri") or [])):
+            ma_nt = "nguyet_pha"
+        elif any(h.get("nhat_than") == "phá" for h in (d.get("vi_tri") or [])):
+            ma_nt = "am_dong_nhat_pha"
+        if ma_nt in nt_all:
+            tc["nguyen_tac"] = {"ma": ma_nt, **nt_all[ma_nt]}
+        if tc:
+            ra["thuc_chien_luu_y"] = tc
+    return ra
 
 
 def _thoi_diem(que: dict, gn: dict, chinh: str, thoi_diem: dt.datetime | dt.date | None) -> tuple[str, list[dict]]:

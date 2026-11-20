@@ -1,0 +1,1353 @@
+{
+  "_nguon": "Tóm ý theo Tử vi Trung Châu phái (Vương Đình Chi — sách giảng hiện đại còn bản quyền). Ban biên tập rút ý chính của từng tinh hệ (điều cần phân biệt khi luận) và viết lại bằng lời mình: không chép nguyên văn, không dịch sát; giữ nơi dẫn (trang). PR #320, 2026-11-20.",
+  "_trang_thai": "nhap_ban_bien_tap",
+  "tom_y": true,
+  "can_doi_chieu": true,
+  "source_id": "tuvi_trung_chau_60_tinh_he",
+  "school_id": "trung_chau",
+  "sach_goc": {
+    "ten": "Trung Châu phái Tử vi Đẩu số — giảng nghĩa nâng cao",
+    "tac_gia": "Vương Đình Chi",
+    "ghi_chu": "sách hiện đại còn bản quyền: chỉ tóm ý, không chép nguyên văn"
+  },
+  "tong_so_tinh_he": 60,
+  "nguyen_tac_luan": {
+    "mat_tich_cuc": "Trung Châu phái không luận đơn lẻ từng sao mà xem trọn bộ 60 Tinh Hệ và tương tác giữa cung gốc với cung vận hạn: gặp cát tinh trợ lực thì phát huy đúng sở trường cốt lõi của tinh hệ.",
+    "mat_tieu_cuc_can_chu_y": "Nên chú ý: cùng một tinh hệ nhưng khi gặp sát tinh, Hóa Kỵ hoặc rơi vào vận hạn không tương hợp sẽ bộc lộ rõ tính chất thiên lệch; cần xem kỹ cặp sao đối cung để điều chỉnh hành động kịp thời."
+  },
+  "tinh_he": [
+    {
+      "ma": "WTZ_SS_01",
+      "so": 1,
+      "nhom": 1,
+      "chinh_tinh": [
+        "Tử Vi"
+      ],
+      "cung_chi": [
+        "Tý",
+        "Ngọ"
+      ],
+      "ten": "Tử Vi độc toạ tại Tý, Ngọ",
+      "dieu_kien": "Cung Mệnh có Tử Vi ở cung Tý hoặc Ngọ",
+      "y_chinh": "Điểm cần nhìn là thế cân bằng giữa đời sống tinh thần (chủ kiến, sở thích riêng, khả năng quyết) và đời sống vật chất (thích hưởng thụ, giỏi tổ chức, dẫn dắt). Các sao hội vào cung quyết định mặt nào nổi lên, mặt nào lặng đi.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 42–45",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_02",
+      "so": 2,
+      "nhom": 1,
+      "chinh_tinh": [
+        "Phá Quân"
+      ],
+      "cung_chi": [
+        "Dần",
+        "Thân"
+      ],
+      "ten": "Phá Quân độc toạ tại Dần, Thân",
+      "dieu_kien": "Cung Mệnh có Phá Quân ở cung Dần hoặc Thân",
+      "y_chinh": "Đường đời thường lên xuống như yên ngựa: đang lên thì vấp, rồi lại lên. Độ chênh tuỳ việc người ấy thuận theo hay hay chống lại khuôn khổ — có người đổi việc liên tục, có người gắn một nơi cả đời.",
+      "linh_vuc": [
+        "cong_viec",
+        "tinh_net"
+      ],
+      "huong": "can_chu_y",
+      "trang": "tr. 45–47",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_03",
+      "so": 3,
+      "nhom": 1,
+      "chinh_tinh": [
+        "Liêm Trinh",
+        "Thiên Phủ"
+      ],
+      "cung_chi": [
+        "Thìn",
+        "Tuất"
+      ],
+      "ten": "Liêm Trinh Thiên Phủ tại Thìn, Tuất",
+      "dieu_kien": "Cung Mệnh có Liêm Trinh và Thiên Phủ ở cung Thìn hoặc Tuất",
+      "y_chinh": "Nét chính là tình cảm và lý trí giằng co nhau; cách các sao hội vào cung quyết định người ấy nghiêng về cảm xúc hay lý trí, và các mối quan hệ giữ nếp cũ hay hay đổi.",
+      "linh_vuc": [
+        "tinh_net",
+        "tinh_cam"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 47–50",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_04",
+      "so": 4,
+      "nhom": 1,
+      "chinh_tinh": [
+        "Thái Âm"
+      ],
+      "cung_chi": [
+        "Tỵ",
+        "Hợi"
+      ],
+      "ten": "Thái Âm độc toạ tại Tỵ, Hợi",
+      "dieu_kien": "Cung Mệnh có Thái Âm ở cung Tỵ hoặc Hợi",
+      "y_chinh": "Cần xem người ấy hướng ra ngoài hay thu vào trong: nét này đẹp nhất khi biết giữ tài năng bên trong mà vẫn đủ cởi mở, không thu mình đến mức thành tính toán.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 50–53",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_05",
+      "so": 5,
+      "nhom": 1,
+      "chinh_tinh": [
+        "Tham Lang"
+      ],
+      "cung_chi": [
+        "Tý",
+        "Ngọ"
+      ],
+      "ten": "Tham Lang độc toạ tại Tý, Ngọ",
+      "dieu_kien": "Cung Mệnh có Tham Lang ở cung Tý hoặc Ngọ",
+      "y_chinh": "Điểm cần nhìn là ham muốn mạnh hay yếu, và ham muốn nghiêng về vật chất hay tình cảm. Quá mạnh hay quá yếu đều không lợi; tốt nhất là ở mức vừa.",
+      "linh_vuc": [
+        "tinh_net",
+        "tien_bac",
+        "tinh_cam"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 53–56",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_06",
+      "so": 6,
+      "nhom": 1,
+      "chinh_tinh": [
+        "Thiên Đồng",
+        "Cự Môn"
+      ],
+      "cung_chi": [
+        "Sửu",
+        "Mùi"
+      ],
+      "ten": "Thiên Đồng Cự Môn tại Sửu, Mùi",
+      "dieu_kien": "Cung Mệnh có Thiên Đồng và Cự Môn ở cung Sửu hoặc Mùi",
+      "y_chinh": "Nét chính là đời sống cảm xúc sáng hay tối: dễ có những nỗi buồn, nghi ngại kín. Cung sửu thường nhẹ hơn cung mùi; được các sao sáng chiếu thì tâm trạng rộng mở hơn.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "can_chu_y",
+      "trang": "tr. 56–58",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_07",
+      "so": 7,
+      "nhom": 1,
+      "chinh_tinh": [
+        "Vũ Khúc",
+        "Thiên Tướng"
+      ],
+      "cung_chi": [
+        "Dần",
+        "Thân"
+      ],
+      "ten": "Vũ Khúc Thiên Tướng tại Dần, Thân",
+      "dieu_kien": "Cung Mệnh có Vũ Khúc và Thiên Tướng ở cung Dần hoặc Thân",
+      "y_chinh": "Cứng và mềm phải điều hoà: quá cứng thì dễ gãy, quá mềm thì dễ yếu, cả hai đều khiến đường đi gập ghềnh. Có Lộc, có cát tinh đỡ thì cứng mềm hài hoà, làm được việc.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 58–61",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_08",
+      "so": 8,
+      "nhom": 1,
+      "chinh_tinh": [
+        "Thái Dương",
+        "Thiên Lương"
+      ],
+      "cung_chi": [
+        "Mão",
+        "Dậu"
+      ],
+      "ten": "Thái Dương Thiên Lương tại Mão, Dậu",
+      "dieu_kien": "Cung Mệnh có Thái Dương và Thiên Lương ở cung Mão hoặc Dậu",
+      "y_chinh": "Cần phân biệt thế hoà ấm hay thế lẻ loi: sáng, được cát tinh thì hiền hoà, dễ gần; tối, gặp sao xấu thì tính độc lập quá mức, dễ xa người thân, dễ vướng thị phi.",
+      "linh_vuc": [
+        "tinh_net",
+        "gia_dao"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 61–63",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_09",
+      "so": 9,
+      "nhom": 1,
+      "chinh_tinh": [
+        "Thất Sát"
+      ],
+      "cung_chi": [
+        "Thìn",
+        "Tuất"
+      ],
+      "ten": "Thất Sát độc toạ tại Thìn, Tuất",
+      "dieu_kien": "Cung Mệnh có Thất Sát ở cung Thìn hoặc Tuất",
+      "y_chinh": "Điểm cần nhìn là lý tưởng thật hay chỉ là mộng tưởng: có lý tưởng thì chịu khó theo đuổi; dễ mơ mộng thì hay đổi hướng không cần thiết mà vẫn tưởng mình đang theo lý tưởng.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 63–66",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_10",
+      "so": 10,
+      "nhom": 1,
+      "chinh_tinh": [
+        "Thiên Cơ"
+      ],
+      "cung_chi": [
+        "Tỵ",
+        "Hợi"
+      ],
+      "ten": "Thiên Cơ độc toạ tại Tỵ, Hợi",
+      "dieu_kien": "Cung Mệnh có Thiên Cơ ở cung Tỵ hoặc Hợi",
+      "y_chinh": "Cần xem người ấy giỏi ứng biến linh hoạt hay giỏi mưu tính có kế hoạch; sao chiếu sáng thì mưu tính đi đúng đường (học thuật, thiết kế), tối thì dễ thành tính toán thủ đoạn.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 66–70",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_11",
+      "so": 11,
+      "nhom": 2,
+      "chinh_tinh": [
+        "Tử Vi",
+        "Phá Quân"
+      ],
+      "cung_chi": [
+        "Sửu",
+        "Mùi"
+      ],
+      "ten": "Tử Vi Phá Quân tại Sửu, Mùi",
+      "dieu_kien": "Cung Mệnh có Tử Vi và Phá Quân ở cung Sửu hoặc Mùi",
+      "y_chinh": "Tính thích đổi mới, dám phá cũ làm mới rất mạnh; điều cần xem là đổi mới êm hay gây xáo trộn lớn cho các mối quan hệ. Có cát tinh kề bên thì đổi mới êm, nhẹ nhàng.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 70–73",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_12",
+      "so": 12,
+      "nhom": 2,
+      "chinh_tinh": [
+        "Thiên Phủ"
+      ],
+      "cung_chi": [
+        "Mão",
+        "Dậu"
+      ],
+      "ten": "Thiên Phủ độc toạ tại Mão, Dậu",
+      "dieu_kien": "Cung Mệnh có Thiên Phủ ở cung Mão hoặc Dậu",
+      "y_chinh": "Tính thận trọng, giữ gìn, yên ổn rõ nhất; cần xem đó là sự vững vàng của người làm việc lớn hay chỉ là chặt chẽ, dè dặt trong việc nhỏ.",
+      "linh_vuc": [
+        "tinh_net",
+        "tien_bac"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 73–76",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_13",
+      "so": 13,
+      "nhom": 2,
+      "chinh_tinh": [
+        "Thái Âm"
+      ],
+      "cung_chi": [
+        "Thìn",
+        "Tuất"
+      ],
+      "ten": "Thái Âm độc toạ tại Thìn, Tuất",
+      "dieu_kien": "Cung Mệnh có Thái Âm ở cung Thìn hoặc Tuất",
+      "y_chinh": "Điểm cần nhìn là đi có mục tiêu hay bị cuốn theo: có mục tiêu thì vượt khó dễ, thiếu mục tiêu thì càng vùng vẫy càng vướng. Sách lưu ý những năm đầu đời thường khó, nên dành nhiều chăm sóc cho quan hệ với cha mẹ.",
+      "linh_vuc": [
+        "tinh_net",
+        "gia_dao"
+      ],
+      "huong": "can_chu_y",
+      "trang": "tr. 76–78",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_14",
+      "so": 14,
+      "nhom": 2,
+      "chinh_tinh": [
+        "Liêm Trinh",
+        "Tham Lang"
+      ],
+      "cung_chi": [
+        "Tỵ",
+        "Hợi"
+      ],
+      "ten": "Liêm Trinh Tham Lang tại Tỵ, Hợi",
+      "dieu_kien": "Cung Mệnh có Liêm Trinh và Tham Lang ở cung Tỵ hoặc Hợi",
+      "y_chinh": "Cần phân biệt nét tình cảm với nét ham vật chất; khi cả hai cùng mạnh thì dễ sa vào hưởng thụ, nên chú ý giữ chừng mực trong chuyện tình cảm.",
+      "linh_vuc": [
+        "tinh_net",
+        "tinh_cam"
+      ],
+      "huong": "can_chu_y",
+      "trang": "tr. 78–81",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_15",
+      "so": 15,
+      "nhom": 2,
+      "chinh_tinh": [
+        "Cự Môn"
+      ],
+      "cung_chi": [
+        "Tý",
+        "Ngọ"
+      ],
+      "ten": "Cự Môn độc toạ tại Tý, Ngọ",
+      "dieu_kien": "Cung Mệnh có Cự Môn ở cung Tý hoặc Ngọ",
+      "y_chinh": "Có Lộc, Quyền mà không gặp sát tinh thì là người giấu tài, làm nên việc lớn mà không cần ra mặt; gặp sát tinh thì dễ đa nghi, khép lòng với người. Nên chú ý đừng thích nổi bật quá.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 81–84",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_16",
+      "so": 16,
+      "nhom": 2,
+      "chinh_tinh": [
+        "Thiên Tướng"
+      ],
+      "cung_chi": [
+        "Sửu",
+        "Mùi"
+      ],
+      "ten": "Thiên Tướng độc toạ tại Sửu, Mùi",
+      "dieu_kien": "Cung Mệnh có Thiên Tướng ở cung Sửu hoặc Mùi",
+      "y_chinh": "Thường mang dáng người phụ tá, giỏi làm việc bên cạnh người khác; điều cần nhìn là khí chất thanh nhã, giữ được cái riêng, hay dễ chạy theo người có thế. Có sao văn chương đi cùng thì thanh nhã.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 84–87",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_17",
+      "so": 17,
+      "nhom": 2,
+      "chinh_tinh": [
+        "Thiên Đồng",
+        "Thiên Lương"
+      ],
+      "cung_chi": [
+        "Dần",
+        "Thân"
+      ],
+      "ten": "Thiên Đồng Thiên Lương tại Dần, Thân",
+      "dieu_kien": "Cung Mệnh có Thiên Đồng và Thiên Lương ở cung Dần hoặc Thân",
+      "y_chinh": "Cần phân biệt người lãng mạn, thích tự do với người sống theo nguyên tắc, kỷ luật; hai lối rất khác nhau nên chọn đường đi cũng khác. Nên chú ý giữ chừng mực trong tình cảm khi nét lãng mạn lấn át.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 87–89",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_18",
+      "so": 18,
+      "nhom": 2,
+      "chinh_tinh": [
+        "Vũ Khúc",
+        "Thất Sát"
+      ],
+      "cung_chi": [
+        "Mão",
+        "Dậu"
+      ],
+      "ten": "Vũ Khúc Thất Sát tại Mão, Dậu",
+      "dieu_kien": "Cung Mệnh có Vũ Khúc và Thất Sát ở cung Mão hoặc Dậu",
+      "y_chinh": "Quyết nhanh — nhưng cần xem đó là quyết đoán có cân nhắc hay chỉ là vội vàng; người quyết đoán biết chừa đường lui, người vội dễ quyết sai rồi phải chữa. Có Lộc và Tả Hữu thì nghiêng về quyết đoán.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 89–91",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_19",
+      "so": 19,
+      "nhom": 2,
+      "chinh_tinh": [
+        "Thái Dương"
+      ],
+      "cung_chi": [
+        "Thìn",
+        "Tuất"
+      ],
+      "ten": "Thái Dương độc toạ tại Thìn, Tuất",
+      "dieu_kien": "Cung Mệnh có Thái Dương ở cung Thìn hoặc Tuất",
+      "y_chinh": "Điểm cần nhìn là sức mình có bị các việc quanh mình kéo hao hay không: sao sáng, gặp Lộc Quyền Khoa thì gánh được mà vẫn thuận; sao tối, gặp sát tinh thì dễ mệt vì lo cho người khác, đường đi gập ghềnh.",
+      "linh_vuc": [
+        "tinh_net",
+        "gia_dao"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 91–94",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_20",
+      "so": 20,
+      "nhom": 2,
+      "chinh_tinh": [
+        "Thiên Cơ"
+      ],
+      "cung_chi": [
+        "Tý",
+        "Ngọ"
+      ],
+      "ten": "Thiên Cơ độc toạ tại Tý, Ngọ",
+      "dieu_kien": "Cung Mệnh có Thiên Cơ ở cung Tý hoặc Ngọ",
+      "y_chinh": "Cần phân biệt nét cứng — giỏi ứng biến, lập kế hoạch vì việc chung — với nét mềm — giỏi xoay xở vì lợi riêng. Nét cứng hợp đi mở đường; nét mềm hợp giữ gìn những gì đã có.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 94–97",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_21",
+      "so": 21,
+      "nhom": 3,
+      "chinh_tinh": [
+        "Tử Vi",
+        "Thiên Phủ"
+      ],
+      "cung_chi": [
+        "Dần",
+        "Thân"
+      ],
+      "ten": "Tử Vi Thiên Phủ tại Dần, Thân",
+      "dieu_kien": "Cung Mệnh có Tử Vi và Thiên Phủ ở cung Dần hoặc Thân",
+      "y_chinh": "Vừa muốn mở mới vừa muốn giữ nếp nên dễ giằng co; cần xem người ấy chủ động được hay bị hoàn cảnh đẩy đi. Cân bằng được thì tiến lui đều thuận; lệch thì dễ lúng túng. Sách nhắc khoảng ba mươi tuổi hay có một lần vấp — nên chú ý giữ vững lúc ấy.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 97–100",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_22",
+      "so": 22,
+      "nhom": 3,
+      "chinh_tinh": [
+        "Thái Âm"
+      ],
+      "cung_chi": [
+        "Mão",
+        "Dậu"
+      ],
+      "ten": "Thái Âm độc toạ tại Mão, Dậu",
+      "dieu_kien": "Cung Mệnh có Thái Âm ở cung Mão hoặc Dậu",
+      "y_chinh": "Điểm cần nhìn là ý chí mạnh hay yếu; ý chí yếu thì phiền muộn phần nhiều do chính mình gây ra. Nên chú ý giữ chừng mực trong tình cảm và hưởng thụ, tránh đổi môi trường khi chưa nghĩ kỹ.",
+      "linh_vuc": [
+        "tinh_net",
+        "tinh_cam"
+      ],
+      "huong": "can_chu_y",
+      "trang": "tr. 100–103",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_23",
+      "so": 23,
+      "nhom": 3,
+      "chinh_tinh": [
+        "Tham Lang"
+      ],
+      "cung_chi": [
+        "Thìn",
+        "Tuất"
+      ],
+      "ten": "Tham Lang độc toạ tại Thìn, Tuất",
+      "dieu_kien": "Cung Mệnh có Tham Lang ở cung Thìn hoặc Tuất",
+      "y_chinh": "Cần phân biệt người biết nhẫn nại với người nóng vội: thường có cơ hội đến bất ngờ, nhưng nóng vội trước khi thời tới thì dễ hỏng việc. Nên chú ý kiên nhẫn chờ đúng lúc.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 103–105",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_24",
+      "so": 24,
+      "nhom": 3,
+      "chinh_tinh": [
+        "Cự Môn"
+      ],
+      "cung_chi": [
+        "Tỵ",
+        "Hợi"
+      ],
+      "ten": "Cự Môn độc toạ tại Tỵ, Hợi",
+      "dieu_kien": "Cung Mệnh có Cự Môn ở cung Tỵ hoặc Hợi",
+      "y_chinh": "Bên ngoài và bên trong thường khác nhau nên khó đoán qua vẻ mặt; điều cần nhìn là sâu lắng, lý trí hay bốc đồng, cảm tính. Nên chú ý đừng để bị người khác xúi giục và tránh cậy tài coi thường người.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 105–108",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_25",
+      "so": 25,
+      "nhom": 3,
+      "chinh_tinh": [
+        "Liêm Trinh",
+        "Thiên Tướng"
+      ],
+      "cung_chi": [
+        "Tý",
+        "Ngọ"
+      ],
+      "ten": "Liêm Trinh Thiên Tướng tại Tý, Ngọ",
+      "dieu_kien": "Cung Mệnh có Liêm Trinh và Thiên Tướng ở cung Tý hoặc Ngọ",
+      "y_chinh": "Tình cảm sâu nhưng hoàn cảnh xung quanh thiên về vật chất, nên cần sự cứng cỏi để thích ứng. Nên chú ý khi gặp biến cố: giữ người để tâm sự, và nếu tinh thần xuống lâu thì tìm người tin cậy hoặc chuyên gia tâm lý.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "can_chu_y",
+      "trang": "tr. 108–110",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_26",
+      "so": 26,
+      "nhom": 3,
+      "chinh_tinh": [
+        "Thiên Lương"
+      ],
+      "cung_chi": [
+        "Sửu",
+        "Mùi"
+      ],
+      "ten": "Thiên Lương độc toạ tại Sửu, Mùi",
+      "dieu_kien": "Cung Mệnh có Thiên Lương ở cung Sửu hoặc Mùi",
+      "y_chinh": "Cần phân biệt chính trực — có nguyên tắc với người và với mình — với tinh tường — giỏi thấy lỗi người mà nới cho mình. Người chính trực cũng nên chú ý mềm mỏng để khỏi bị cô lập.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 110–113",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_27",
+      "so": 27,
+      "nhom": 3,
+      "chinh_tinh": [
+        "Thất Sát"
+      ],
+      "cung_chi": [
+        "Dần",
+        "Thân"
+      ],
+      "ten": "Thất Sát độc toạ tại Dần, Thân",
+      "dieu_kien": "Cung Mệnh có Thất Sát ở cung Dần hoặc Thân",
+      "y_chinh": "Cần phân biệt cái uy thật — được người kính nể — với sự kiêu cao tự tách mình. Gặp Lộc thì dễ gần hơn; gặp sát tinh mà thiếu cát tinh thì dễ lẻ loi. Nên chú ý mềm mỏng trong quan hệ gần, nhất là hôn nhân.",
+      "linh_vuc": [
+        "tinh_net",
+        "tinh_cam"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 113–116",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_28",
+      "so": 28,
+      "nhom": 3,
+      "chinh_tinh": [
+        "Thiên Đồng"
+      ],
+      "cung_chi": [
+        "Mão",
+        "Dậu"
+      ],
+      "ten": "Thiên Đồng độc toạ tại Mão, Dậu",
+      "dieu_kien": "Cung Mệnh có Thiên Đồng ở cung Mão hoặc Dậu",
+      "y_chinh": "Điểm cần nhìn là đời sống tinh thần đầy hay trống: tinh thần vững thì tự gây dựng được; thấy trống rỗng kéo dài thì nên chú ý tìm điều để gắn bó, giữ nếp sinh hoạt và chăm sức khoẻ, đi khám định kỳ.",
+      "linh_vuc": [
+        "tinh_net",
+        "suc_khoe"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 116–119",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_29",
+      "so": 29,
+      "nhom": 3,
+      "chinh_tinh": [
+        "Vũ Khúc"
+      ],
+      "cung_chi": [
+        "Thìn",
+        "Tuất"
+      ],
+      "ten": "Vũ Khúc độc toạ tại Thìn, Tuất",
+      "dieu_kien": "Cung Mệnh có Vũ Khúc ở cung Thìn hoặc Tuất",
+      "y_chinh": "Cần phân biệt người an phận, sống bằng một nghề với người chịu vươn lên đổi đời. Có Quyền mà không gặp sát tinh thì dễ thành người chủ động tiến lên; những năm đầu đời thường vất vả.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 119–123",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_30",
+      "so": 30,
+      "nhom": 3,
+      "chinh_tinh": [
+        "Thái Dương"
+      ],
+      "cung_chi": [
+        "Tỵ",
+        "Hợi"
+      ],
+      "ten": "Thái Dương độc toạ tại Tỵ, Hợi",
+      "dieu_kien": "Cung Mệnh có Thái Dương ở cung Tỵ hoặc Hợi",
+      "y_chinh": "Cần xem người ấy chủ động hay thu mình: chủ động thì tiến được và vượt khó tốt; thu mình thì càng lùi càng dễ vướng thị phi. Nên chú ý tận dụng những năm thuận để đổi cách nhìn đời.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 123–126",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_31",
+      "so": 31,
+      "nhom": 4,
+      "chinh_tinh": [
+        "Phá Quân"
+      ],
+      "cung_chi": [
+        "Tý",
+        "Ngọ"
+      ],
+      "ten": "Phá Quân độc toạ tại Tý, Ngọ",
+      "dieu_kien": "Cung Mệnh có Phá Quân ở cung Tý hoặc Ngọ",
+      "y_chinh": "Cần phân biệt người phá cách bừa — đổi chỉ để đổi, phá nhiều dựng ít — với người dám làm: không tự tìm đổi, nhưng khi tình thế buộc phải đổi thì làm dứt khoát và có mục đích. Có Lộc, Quyền, cát tinh thì nghiêng về dám làm.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 126–129",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_32",
+      "so": 32,
+      "nhom": 4,
+      "chinh_tinh": [
+        "Thiên Cơ"
+      ],
+      "cung_chi": [
+        "Sửu",
+        "Mùi"
+      ],
+      "ten": "Thiên Cơ độc toạ tại Sửu, Mùi",
+      "dieu_kien": "Cung Mệnh có Thiên Cơ ở cung Sửu hoặc Mùi",
+      "y_chinh": "Ở đây sức tự thân của sao còn yếu, nên điều cần nhìn là đi lên hay trượt xuống; có Lộc thì đi lên, thường phải rời quê mới phát; gặp sát tinh mà không có Lộc thì nên chú ý bù bằng học hỏi, nỗ lực và tận dụng năm thuận.",
+      "linh_vuc": [
+        "cong_viec",
+        "di_lai"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 129–132",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_33",
+      "so": 33,
+      "nhom": 4,
+      "chinh_tinh": [
+        "Tử Vi",
+        "Tham Lang"
+      ],
+      "cung_chi": [
+        "Mão",
+        "Dậu"
+      ],
+      "ten": "Tử Vi Tham Lang tại Mão, Dậu",
+      "dieu_kien": "Cung Mệnh có Tử Vi và Tham Lang ở cung Mão hoặc Dậu",
+      "y_chinh": "Tổ hợp nặng về ham muốn: cần phân biệt ham vật chất với ham tình cảm. Người có tính chủ động, giỏi xoay xở, nhìn đời tích cực. Nên chú ý giữ chừng mực trong tình cảm.",
+      "linh_vuc": [
+        "tinh_net",
+        "tinh_cam",
+        "tien_bac"
+      ],
+      "huong": "can_chu_y",
+      "trang": "tr. 133–135",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_34",
+      "so": 34,
+      "nhom": 4,
+      "chinh_tinh": [
+        "Cự Môn"
+      ],
+      "cung_chi": [
+        "Thìn",
+        "Tuất"
+      ],
+      "ten": "Cự Môn độc toạ tại Thìn, Tuất",
+      "dieu_kien": "Cung Mệnh có Cự Môn ở cung Thìn hoặc Tuất",
+      "y_chinh": "Cần phân biệt người được thử thách thúc lên với người hay bị cản trở. Sát tinh nặng thì nên chú ý cẩn trọng trong những năm khó, giữ lời nói để tránh thị phi, và giữ chừng mực trong tình cảm.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "can_chu_y",
+      "trang": "tr. 136–138",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_35",
+      "so": 35,
+      "nhom": 4,
+      "chinh_tinh": [
+        "Thiên Tướng"
+      ],
+      "cung_chi": [
+        "Tỵ",
+        "Hợi"
+      ],
+      "ten": "Thiên Tướng độc toạ tại Tỵ, Hợi",
+      "dieu_kien": "Cung Mệnh có Thiên Tướng ở cung Tỵ hoặc Hợi",
+      "y_chinh": "Vững vàng, kiên nhẫn, có sức mở đường nhưng khó tự đứng một mình; cần xem người ấy tự mở lối được hay thành việc nhờ người khác. Tự mở lối thì cần người phò trợ; nhờ người thì cần quý nhân.",
+      "linh_vuc": [
+        "cong_viec",
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 138–141",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_36",
+      "so": 36,
+      "nhom": 4,
+      "chinh_tinh": [
+        "Thiên Lương"
+      ],
+      "cung_chi": [
+        "Tý",
+        "Ngọ"
+      ],
+      "ten": "Thiên Lương độc toạ tại Tý, Ngọ",
+      "dieu_kien": "Cung Mệnh có Thiên Lương ở cung Tý hoặc Ngọ",
+      "y_chinh": "Cần phân biệt nét lẻ loi với nét hoà hợp: hoà hợp thì quan hệ tốt, hợp làm quản lý, kinh doanh, nhà nước; lẻ loi thì hợp chuyên môn, nghiên cứu. Nên chú ý chủ động giữ mối quan hệ với người thân.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec",
+        "gia_dao"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 141–143",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_37",
+      "so": 37,
+      "nhom": 4,
+      "chinh_tinh": [
+        "Liêm Trinh",
+        "Thất Sát"
+      ],
+      "cung_chi": [
+        "Sửu",
+        "Mùi"
+      ],
+      "ten": "Liêm Trinh Thất Sát tại Sửu, Mùi",
+      "dieu_kien": "Cung Mệnh có Liêm Trinh và Thất Sát ở cung Sửu hoặc Mùi",
+      "y_chinh": "Cần phân biệt người phấn đấu — trải nhiều vất vả rồi làm nên việc lớn — với thế cứng: dễ xa người thân, đời nhiều sóng, bôn ba nhọc. Có Lộc thì nghiêng về phấn đấu. Nên chú ý chăm mối quan hệ gia đình và giữ sức khoẻ, đi khám định kỳ.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec",
+        "suc_khoe"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 144–147",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_38",
+      "so": 38,
+      "nhom": 4,
+      "chinh_tinh": [
+        "Thiên Đồng"
+      ],
+      "cung_chi": [
+        "Thìn",
+        "Tuất"
+      ],
+      "ten": "Thiên Đồng độc toạ tại Thìn, Tuất",
+      "dieu_kien": "Cung Mệnh có Thiên Đồng ở cung Thìn hoặc Tuất",
+      "y_chinh": "Cần phân biệt người rộng rãi, bền bỉ với người chí ngắn, tiến được chút là dừng. Người rộng rãi bền sức nên đi xa; người chí ngắn nên chú ý giữ nhịp tới cuối việc.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 147–150",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_39",
+      "so": 39,
+      "nhom": 4,
+      "chinh_tinh": [
+        "Vũ Khúc",
+        "Phá Quân"
+      ],
+      "cung_chi": [
+        "Tỵ",
+        "Hợi"
+      ],
+      "ten": "Vũ Khúc Phá Quân tại Tỵ, Hợi",
+      "dieu_kien": "Cung Mệnh có Vũ Khúc và Phá Quân ở cung Tỵ hoặc Hợi",
+      "y_chinh": "Cần phân biệt người biết thích nghi — thuận thì mở được, nghịch thì dựa thế mà xoay — với người hay làm trái: thuận thì đặt mục tiêu quá cao, nghịch thì chỉ nhìn lợi trước mắt. Nên chú ý đừng đi ngược xu thế chỉ vì ý mình.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 150–153",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_40",
+      "so": 40,
+      "nhom": 4,
+      "chinh_tinh": [
+        "Thái Dương"
+      ],
+      "cung_chi": [
+        "Tý",
+        "Ngọ"
+      ],
+      "ten": "Thái Dương độc toạ tại Tý, Ngọ",
+      "dieu_kien": "Cung Mệnh có Thái Dương ở cung Tý hoặc Ngọ",
+      "y_chinh": "Cần phân biệt người vững vàng — dễ làm giàu, có của để đỡ vị thế — với người phù phiếm — bề ngoài sáng mà bên trong rỗng. Nên chú ý giữ thực chất; hôn nhân cần vun đắp.",
+      "linh_vuc": [
+        "tinh_net",
+        "tien_bac",
+        "tinh_cam"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 153–156",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_41",
+      "so": 41,
+      "nhom": 5,
+      "chinh_tinh": [
+        "Thiên Phủ"
+      ],
+      "cung_chi": [
+        "Sửu",
+        "Mùi"
+      ],
+      "ten": "Thiên Phủ độc toạ tại Sửu, Mùi",
+      "dieu_kien": "Cung Mệnh có Thiên Phủ ở cung Sửu hoặc Mùi",
+      "y_chinh": "Cần phân biệt người khiêm hoà — ngoài tròn trong vuông, vẫn có nguyên tắc, âm thầm phát triển — với người rụt rè, ngại đổi, việc teo dần lúc nào không hay. Nên chú ý dám thay đổi khi cần.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 156–159",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_42",
+      "so": 42,
+      "nhom": 5,
+      "chinh_tinh": [
+        "Thiên Cơ",
+        "Thái Âm"
+      ],
+      "cung_chi": [
+        "Dần",
+        "Thân"
+      ],
+      "ten": "Thiên Cơ Thái Âm tại Dần, Thân",
+      "dieu_kien": "Cung Mệnh có Thiên Cơ và Thái Âm ở cung Dần hoặc Thân",
+      "y_chinh": "Cần phân biệt người thiên lý trí — hợp làm phụ tá, tham mưu — với người thiên cảm xúc — có khí chất nghệ sĩ. Người thiên cảm xúc nên chú ý tránh để chuyện tình cảm làm rối lòng.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 159–163",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_43",
+      "so": 43,
+      "nhom": 5,
+      "chinh_tinh": [
+        "Tử Vi",
+        "Thiên Tướng"
+      ],
+      "cung_chi": [
+        "Thìn",
+        "Tuất"
+      ],
+      "ten": "Tử Vi Thiên Tướng tại Thìn, Tuất",
+      "dieu_kien": "Cung Mệnh có Tử Vi và Thiên Tướng ở cung Thìn hoặc Tuất",
+      "y_chinh": "Dễ có lúc vội lợi trước mắt, thiếu nghĩ xa; cần phân biệt có tình hay vô tình với người. Có Lộc thì có tình hơn. Nên chú ý giữ tình nghĩa, nghĩ đường dài, và chăm sóc sức khoẻ, hôn nhân.",
+      "linh_vuc": [
+        "tinh_net",
+        "tinh_cam"
+      ],
+      "huong": "can_chu_y",
+      "trang": "tr. 163–166",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_44",
+      "so": 44,
+      "nhom": 5,
+      "chinh_tinh": [
+        "Thiên Lương"
+      ],
+      "cung_chi": [
+        "Tỵ",
+        "Hợi"
+      ],
+      "ten": "Thiên Lương độc toạ tại Tỵ, Hợi",
+      "dieu_kien": "Cung Mệnh có Thiên Lương ở cung Tỵ hoặc Hợi",
+      "y_chinh": "Đời thường nhiều biến động; cần xem vững hay chòng chành. Có Lộc thì vững hơn dù nhiều thị phi vẫn gỡ được; gặp sao xấu thì nên chú ý giữ nhịp sống ổn định và chọn nơi gắn bó lâu dài.",
+      "linh_vuc": [
+        "tinh_net",
+        "di_lai"
+      ],
+      "huong": "can_chu_y",
+      "trang": "tr. 166–169",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_45",
+      "so": 45,
+      "nhom": 5,
+      "chinh_tinh": [
+        "Thất Sát"
+      ],
+      "cung_chi": [
+        "Tý",
+        "Ngọ"
+      ],
+      "ten": "Thất Sát độc toạ tại Tý, Ngọ",
+      "dieu_kien": "Cung Mệnh có Thất Sát ở cung Tý hoặc Ngọ",
+      "y_chinh": "Cần phân biệt người có uy — tuổi trẻ vất vả rồi phát lên — với người cứng cỏi quá mức, nhiều lo âu. Gặp sát tinh nặng thì nên chú ý những năm khó: giữ an toàn khi đi lại, gần sông nước, giữ sức khoẻ và đi khám định kỳ.",
+      "linh_vuc": [
+        "tinh_net",
+        "suc_khoe"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 169–172",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_46",
+      "so": 46,
+      "nhom": 5,
+      "chinh_tinh": [
+        "Liêm Trinh"
+      ],
+      "cung_chi": [
+        "Dần",
+        "Thân"
+      ],
+      "ten": "Liêm Trinh độc toạ tại Dần, Thân",
+      "dieu_kien": "Cung Mệnh có Liêm Trinh ở cung Dần hoặc Thân",
+      "y_chinh": "Cần phân biệt người nhạy cảm — thiên nghệ thuật, đời sống tinh thần — với người thực tế — lấy vật chất làm nền. Gặp sát tinh thì nét nhạy cảm dễ thành tự đa tình hay chạy theo thế; nên chú ý giữ thực chất.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 172–175",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_47",
+      "so": 47,
+      "nhom": 5,
+      "chinh_tinh": [
+        "Phá Quân"
+      ],
+      "cung_chi": [
+        "Thìn",
+        "Tuất"
+      ],
+      "ten": "Phá Quân độc toạ tại Thìn, Tuất",
+      "dieu_kien": "Cung Mệnh có Phá Quân ở cung Thìn hoặc Tuất",
+      "y_chinh": "Ở đây cần phân biệt thế lệch — chí lớn tài chưa theo kịp, quan hệ kém — với thế điều hoà có phúc dù đời nhiều khúc quanh. Có Lộc mới điều hoà. Nên chú ý chăm quan hệ với người thân, và giữ sức khoẻ, đi khám định kỳ.",
+      "linh_vuc": [
+        "tinh_net",
+        "suc_khoe"
+      ],
+      "huong": "can_chu_y",
+      "trang": "tr. 175–178",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_48",
+      "so": 48,
+      "nhom": 5,
+      "chinh_tinh": [
+        "Thiên Đồng"
+      ],
+      "cung_chi": [
+        "Tỵ",
+        "Hợi"
+      ],
+      "ten": "Thiên Đồng độc toạ tại Tỵ, Hợi",
+      "dieu_kien": "Cung Mệnh có Thiên Đồng ở cung Tỵ hoặc Hợi",
+      "y_chinh": "Điểm cần nhìn là ý chí mạnh hay yếu: có chút thử thách lại giúp ý chí vững; được chiều quá dễ thành nhụt chí. Nên chú ý giữ chí làm việc và cẩn trọng trong chuyện tình cảm.",
+      "linh_vuc": [
+        "tinh_net",
+        "tinh_cam"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 178–181",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_49",
+      "so": 49,
+      "nhom": 5,
+      "chinh_tinh": [
+        "Vũ Khúc",
+        "Thiên Phủ"
+      ],
+      "cung_chi": [
+        "Tý",
+        "Ngọ"
+      ],
+      "ten": "Vũ Khúc Thiên Phủ tại Tý, Ngọ",
+      "dieu_kien": "Cung Mệnh có Vũ Khúc và Thiên Phủ ở cung Tý hoặc Ngọ",
+      "y_chinh": "Cần phân biệt người chỉ giỏi tạo ra tiền với người vừa tạo ra vừa giữ được tiền. Có Lộc mà không gặp Không Kiếp thì là người quản lý tiền toàn diện.",
+      "linh_vuc": [
+        "tien_bac"
+      ],
+      "huong": "thuan",
+      "trang": "tr. 181–184",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_50",
+      "so": 50,
+      "nhom": 5,
+      "chinh_tinh": [
+        "Thái Dương",
+        "Thái Âm"
+      ],
+      "cung_chi": [
+        "Sửu",
+        "Mùi"
+      ],
+      "ten": "Thái Dương Thái Âm tại Sửu, Mùi",
+      "dieu_kien": "Cung Mệnh có Thái Dương và Thái Âm ở cung Sửu hoặc Mùi",
+      "y_chinh": "Cần phân biệt người cởi mở, sáng sủa với người trầm, khép; cũng có người lúc sáng lúc trầm. Thái Dương sáng giúp nét cởi mở nổi lên.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 184–188",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_51",
+      "so": 51,
+      "nhom": 6,
+      "chinh_tinh": [
+        "Tham Lang"
+      ],
+      "cung_chi": [
+        "Dần",
+        "Thân"
+      ],
+      "ten": "Tham Lang độc toạ tại Dần, Thân",
+      "dieu_kien": "Cung Mệnh có Tham Lang ở cung Dần hoặc Thân",
+      "y_chinh": "Ở cung Dần thường phát sớm, cung Thân phát muộn hơn; phát rồi đều nên chú ý giữ, đừng để hao. Cần xem ham muốn nghiêng về tình cảm hay vật chất; tránh việc thích nổi tiếng nhanh.",
+      "linh_vuc": [
+        "tinh_net",
+        "tien_bac"
+      ],
+      "huong": "can_chu_y",
+      "trang": "tr. 188–191",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_52",
+      "so": 52,
+      "nhom": 6,
+      "chinh_tinh": [
+        "Thiên Cơ",
+        "Cự Môn"
+      ],
+      "cung_chi": [
+        "Mão",
+        "Dậu"
+      ],
+      "ten": "Thiên Cơ Cự Môn tại Mão, Dậu",
+      "dieu_kien": "Cung Mệnh có Thiên Cơ và Cự Môn ở cung Mão hoặc Dậu",
+      "y_chinh": "Cần phân biệt người điềm đạm vững vàng với người dễ dao động, hời hợt. Có Lộc, Quyền, Khoa thì vững; gặp Hoả Linh thì nên chú ý giữ sự chín chắn.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 191–194",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_53",
+      "so": 53,
+      "nhom": 6,
+      "chinh_tinh": [
+        "Tử Vi",
+        "Thất Sát"
+      ],
+      "cung_chi": [
+        "Tỵ",
+        "Hợi"
+      ],
+      "ten": "Tử Vi Thất Sát tại Tỵ, Hợi",
+      "dieu_kien": "Cung Mệnh có Tử Vi và Thất Sát ở cung Tỵ hoặc Hợi",
+      "y_chinh": "Tổ hợp mạnh, nặng về quyền và vật chất; cần phân biệt người có uy, đi đường đàng hoàng với người dễ lấn át người khác. Có cát tinh đi kèm thì nghiêng về uy tín; nên chú ý giữ chừng mực khi có quyền.",
+      "linh_vuc": [
+        "tinh_net",
+        "cong_viec"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 194–197",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_54",
+      "so": 54,
+      "nhom": 6,
+      "chinh_tinh": [
+        "Liêm Trinh",
+        "Phá Quân"
+      ],
+      "cung_chi": [
+        "Mão",
+        "Dậu"
+      ],
+      "ten": "Liêm Trinh Phá Quân tại Mão, Dậu",
+      "dieu_kien": "Cung Mệnh có Liêm Trinh và Phá Quân ở cung Mão hoặc Dậu",
+      "y_chinh": "Hợp làm việc phục vụ chung, việc nhà nước, mở đường; cần phân biệt vì việc chung hay vì lợi riêng. Gặp sát tinh thì nên chú ý giữ giấy tờ minh bạch, tránh tranh chấp, cần thì hỏi luật sư; cẩn thận an toàn khi đi lại.",
+      "linh_vuc": [
+        "cong_viec",
+        "giay_to"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 197–200",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_55",
+      "so": 55,
+      "nhom": 6,
+      "chinh_tinh": [
+        "Thiên Phủ"
+      ],
+      "cung_chi": [
+        "Tỵ",
+        "Hợi"
+      ],
+      "ten": "Thiên Phủ độc toạ tại Tỵ, Hợi",
+      "dieu_kien": "Cung Mệnh có Thiên Phủ ở cung Tỵ hoặc Hợi",
+      "y_chinh": "Cần phân biệt người hiền hoà — âm thầm mà làm nên việc — với người hay tính toán, xoay nhiều mà ít được. Nên chú ý đừng nghĩ quá nhiều vào chi tiết nhỏ mà mất cái lớn.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 200–203",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_56",
+      "so": 56,
+      "nhom": 6,
+      "chinh_tinh": [
+        "Thiên Đồng",
+        "Thái Âm"
+      ],
+      "cung_chi": [
+        "Tý",
+        "Ngọ"
+      ],
+      "ten": "Thiên Đồng Thái Âm tại Tý, Ngọ",
+      "dieu_kien": "Cung Mệnh có Thiên Đồng và Thái Âm ở cung Tý hoặc Ngọ",
+      "y_chinh": "Cần phân biệt chí cao — chịu rèn luyện để thành công — với chí thấp, dễ nản. Nên chú ý tránh mơ mộng suông và giữ chừng mực trong hưởng thụ.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 203–206",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_57",
+      "so": 57,
+      "nhom": 6,
+      "chinh_tinh": [
+        "Vũ Khúc",
+        "Tham Lang"
+      ],
+      "cung_chi": [
+        "Sửu",
+        "Mùi"
+      ],
+      "ten": "Vũ Khúc Tham Lang tại Sửu, Mùi",
+      "dieu_kien": "Cung Mệnh có Vũ Khúc và Tham Lang ở cung Sửu hoặc Mùi",
+      "y_chinh": "Nhìn đời tích cực, ham muốn mạnh; cần phân biệt ham muốn có chừng mực — động lực tốt — với tham vọng lấn người. Có Lộc thì là cấu trúc tốt, hay có những khoản thu bất ngờ chính đáng.",
+      "linh_vuc": [
+        "tinh_net",
+        "tien_bac"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 206–209",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_58",
+      "so": 58,
+      "nhom": 6,
+      "chinh_tinh": [
+        "Thái Dương",
+        "Cự Môn"
+      ],
+      "cung_chi": [
+        "Dần",
+        "Thân"
+      ],
+      "ten": "Thái Dương Cự Môn tại Dần, Thân",
+      "dieu_kien": "Cung Mệnh có Thái Dương và Cự Môn ở cung Dần hoặc Thân",
+      "y_chinh": "Cung ít sao hỗ trợ nên cần xem người ấy được giúp hay phải đơn độc; hay hợp làm việc nơi xa quê hoặc với người ngoài. Có Lộc, Quyền, Khoa và các sao phò trợ thành đôi thì có người giúp.",
+      "linh_vuc": [
+        "cong_viec",
+        "ban_be"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 209–212",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_59",
+      "so": 59,
+      "nhom": 6,
+      "chinh_tinh": [
+        "Thiên Tướng"
+      ],
+      "cung_chi": [
+        "Mão",
+        "Dậu"
+      ],
+      "ten": "Thiên Tướng độc toạ tại Mão, Dậu",
+      "dieu_kien": "Cung Mệnh có Thiên Tướng ở cung Mão hoặc Dậu",
+      "y_chinh": "Cần phân biệt người chính trực — giúp bạn mà giữ nguyên tắc — với người vì nể nang bạn bè mà bỏ qua đúng sai. Nên chú ý giữ ranh giới khi giúp người.",
+      "linh_vuc": [
+        "tinh_net",
+        "ban_be"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 212–215",
+      "tom_y": true
+    },
+    {
+      "ma": "WTZ_SS_60",
+      "so": 60,
+      "nhom": 6,
+      "chinh_tinh": [
+        "Thiên Cơ",
+        "Thiên Lương"
+      ],
+      "cung_chi": [
+        "Thìn",
+        "Tuất"
+      ],
+      "ten": "Thiên Cơ Thiên Lương tại Thìn, Tuất",
+      "dieu_kien": "Cung Mệnh có Thiên Cơ và Thiên Lương ở cung Thìn hoặc Tuất",
+      "y_chinh": "Cần phân biệt người phán đoán sáng suốt — nhạy bén mà có nguyên tắc — với người dễ quá gắt, sắc cạnh. Có cát tinh đi kèm thì hai mặt điều hoà, thành người quyết đúng.",
+      "linh_vuc": [
+        "tinh_net"
+      ],
+      "huong": "trung_tinh",
+      "trang": "tr. 215–220",
+      "tom_y": true
+    }
+  ]
+}

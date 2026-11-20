@@ -24,6 +24,7 @@ import { BaoLoi } from "@/components/khung/BaoLoi";
 import { hoTenList, tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
 import { DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
 import { ChaldeaDoc } from "@/components/than-so/ChaldeaDoc";
+import { PhillipsDoc } from "@/components/than-so/PhillipsDoc";
 import { NoiDau } from "@/components/than-so/NoiDau";
 import { TongHopDoc } from "@/components/than-so/TongHopDoc";
 import { GopYCauTraLoi } from "@/components/hoi/GopYCauTraLoi";
@@ -42,10 +43,10 @@ import { dinhNgay } from "@/lib/dinh-dang";
 import type { DocChu } from "@/lib/chu-trang";
 import type { CHU_THAN_SO_UI } from "@/lib/chu/than-so";
 
-// TS-PHAI / TS-V3 — ba trường phái thần số + tổng hợp; lựa chọn nhớ trên máy (localStorage), mặc định Pitago như trước.
-export type PhaiThanSo = "pitago" | "chaldea" | "tong_hop";
+// TS-PHAI / TS-V3 / Đợt 2A — các trường phái thần số (Pitago, Phillips 4 Kim Tự Tháp, Chaldea, Tổng hợp).
+export type PhaiThanSo = "pitago" | "phillips" | "chaldea" | "tong_hop";
 const KHOA_PHAI = "hbt.thanso_phai";
-const CAC_PHAI: PhaiThanSo[] = ["pitago", "chaldea", "tong_hop"];
+const CAC_PHAI: PhaiThanSo[] = ["pitago", "phillips", "chaldea", "tong_hop"];
 function docPhai(): PhaiThanSo {
   try { const v = localStorage.getItem(KHOA_PHAI) as PhaiThanSo | null; return v && CAC_PHAI.includes(v) ? v : "pitago"; } catch { return "pitago"; }
 }
@@ -62,7 +63,7 @@ async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocD
   const r = await fetchSao("/api/thanso/hoi", {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, cau_hoi: cau, phai, quy_uoc_duong_doi: quyUoc }),
+    body: JSON.stringify({ ho_ten: hoTenList(h), ngay: h.ngay, thang: h.thang, nam: h.nam, cau_hoi: cau, phai: phai === "phillips" ? "pitago" : phai, quy_uoc_duong_doi: quyUoc }),
   }, "hoi");
   const d = (await r.json()) as { cau_tra_loi?: string; che_do?: string; can_them?: string[]; error?: string; thuat_ngu?: ThuatNgu[]; luot?: LuotHoi;
     cau_lien_quan?: CauLienQuan[]; phan_loai?: { linh_vuc?: string; xu_ly?: string };
@@ -73,7 +74,7 @@ async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocD
   // TS-V3 tầng HỌC: góp ý đúng / chưa đúng — không hỏi với câu khủng hoảng, câu ngoài phạm vi, câu cần người kia.
   const gopY = d.cau_tra_loi && !canNguoiKia && !["an_toan", "tu_choi_nhe"].includes(d.phan_loai?.xu_ly ?? "")
     ? <>
-        <GopYCauTraLoi hoSo={h} nc={{ phai, quyUoc, nguon: maCau ? "noi_dau" : "hoi_dap", linhVuc: d.phan_loai?.linh_vuc, maCau }} />
+        <GopYCauTraLoi hoSo={h} nc={{ phai: phai === "phillips" ? "pitago" : phai, quyUoc, nguon: maCau ? "noi_dau" : "hoi_dap", linhVuc: d.phan_loai?.linh_vuc, maCau }} />
         {/* TS-V3b: bình chọn phái nói đúng hơn — cùng điều kiện với góp ý (không hỏi ở câu khủng hoảng / ngoài phạm vi). */}
         <PhaiNaoDung hoSo={h} quyUoc={quyUoc} linhVuc={d.phan_loai?.linh_vuc} onDungPhai={dungPhai} />
       </>
@@ -122,7 +123,8 @@ export function ThanSo() {
   const [cauNgoai, setCauNgoai] = useState<{ cau: string; lan: number } | null>(null);
   const quyUoc = useQuyUocDD();
   const maTheoCau = useRef(new Map<string, string>());   // câu chuẩn → mã câu (cho góp ý gắn đúng câu nỗi đau)
-  useEffect(() => { setPhai(docPhai()); }, []);
+  // Phái Phillips mới có bản Việt (engine + PhillipsDoc chưa có lời tiếng Anh) → bản Anh không mở lựa chọn này.
+  useEffect(() => { const p = docPhai(); setPhai(en && p === "phillips" ? "pitago" : p); }, [en]);
   // TS-NOIDAU: câu bấm từ bảng nỗi đau / "hỏi tiếp" → đẩy vào khung hỏi đáp; khung hỏi đáp tự cuộn MỘT lần tới khung chờ
   // "Đang soi câu hỏi…" (trục 2 UX: hai lệnh cuộn mượt chồng nhau làm màn hình giật giữa chừng).
   function hoiCau(cau: string, maCau?: string) {
@@ -209,15 +211,16 @@ export function ThanSo() {
           Câu "cách còn lại ra số …" đã nằm trong dòng đang xem (màu trăng) nên không lặp lại ở `nhac`. */}
       <KhungPhai testId="truong-phai-than-so" tieuDe={t("phai.cach_xem")} mo={moPhai} doiMo={setMoPhai}
         tomTat={<span data-testid="dang-xem">{t("phai.dang_xem")} <b className="text-fg">{t(`phai.${phai}`)}</b>
-          {phai !== "chaldea" && <> {t("phai.so_dd")} <b className="text-fg">{quyUoc === "tung_phan" ? t("phai.rut_gon") : t("phai.cong_het")}</b></>}
-          {phai !== "chaldea" && kq.duong_doi_hai_cach?.lech && (
+          {(phai === "pitago" || phai === "tong_hop") && <> {t("phai.so_dd")} <b className="text-fg">{quyUoc === "tung_phan" ? t("phai.rut_gon") : t("phai.cong_het")}</b></>}
+          {(phai === "pitago" || phai === "tong_hop") && kq.duong_doi_hai_cach?.lech && (
             <span className="text-moon">{t("phai.cach_con_lai", { so: String(quyUoc === "tung_phan" ? kq.duong_doi_hai_cach.tong_het : kq.duong_doi_hai_cach.tung_phan) })}</span>
           )}</span>}
         moTa={<>{t("phai.mo_ta")}</>}>
         <DongPhai ten={t("phai.truong_phai")} nhan={t("phai.chon_truong_phai")} giaTri={phai} doi={doiPhai}
-          luaChon={[["pitago", t("phai.pitago")], ["chaldea", t("phai.chaldea")], ["tong_hop", t("phai.tong_hop_chon")]]}
+          luaChon={([["pitago", t("phai.pitago")], ["phillips", t("phai.phillips")], ["chaldea", t("phai.chaldea")], ["tong_hop", t("phai.tong_hop_chon")]] as [PhaiThanSo, string][]).filter(([p]) => !(en && p === "phillips"))}
           goiY={phai === "chaldea"
             ? (hoSo.ten_khac ? t("phai.ten_goi_khac", { ten: hoSo.ten_khac }) : t("phai.ten_goi", { ten: hoSo.ho_ten.trim().split(/\s+/).pop() ?? "" }))
+            : phai === "phillips" ? t("phai.goi_y_phillips")
             : phai === "tong_hop" ? t("phai.goi_y_tong_hop")
             : t("phai.goi_y_pitago")} />
         {(phai === "pitago" || phai === "tong_hop") && (
@@ -230,7 +233,8 @@ export function ThanSo() {
         )}
       </KhungPhai>
 
-      {phai === "chaldea" ? <><ChaldeaDoc hoSo={hoSo} /><BanDoConSo hoSo={hoSo} quyUoc={quyUoc} /></>
+      {phai === "phillips" ? <><PhillipsDoc hoSo={hoSo} quyUoc={quyUoc} /><BanDoConSo hoSo={hoSo} quyUoc={quyUoc} /></>
+        : phai === "chaldea" ? <><ChaldeaDoc hoSo={hoSo} /><BanDoConSo hoSo={hoSo} quyUoc={quyUoc} /></>
         : phai === "tong_hop" ? <><TongHopDoc hoSo={hoSo} quyUoc={quyUoc} /><BanDoConSo hoSo={hoSo} quyUoc={quyUoc} /></> : (<>
       <section aria-labelledby="bon-so">
         <TieuDeMuc id="bon-so" nho={c("bon_so.nho")} lon={c("bon_so.lon")} />

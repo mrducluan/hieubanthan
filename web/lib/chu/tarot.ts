@@ -109,6 +109,9 @@ export const CHU_TAROT_UI = {
   "ynl.vi_tri": m(L, "Vị trí {so} · {ten}", "Position {so} · {ten}"),
   "ynl.tu_khoa": m(L, "Từ khoá", "Keywords"),
   "ynl.viec": m(L, "Việc nhỏ nên làm:", "A small thing to do:"),
+  "ynl.greer_pill": m(L, "Ngược · Greer", "Reversed · Greer"),
+  "ynl.diem_sang": m(L, "Điểm sáng", "Bright side"),
+  "ynl.nen_chu_y_nguoc": m(L, "Nên chú ý (Lá ngược)", "Watch out (Reversed)"),
   "ynl.tu_hoi": m(L, "Tự hỏi:", "Ask yourself:"),
   "ynl.day_du": m(L, "Xem đầy đủ ý nghĩa lá {ten}", "Full meaning of {ten}"),
 
