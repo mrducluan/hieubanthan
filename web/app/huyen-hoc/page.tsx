@@ -26,6 +26,7 @@ import { apDungSeo, layDauNhieuTrang, layNoiDungTrang } from "@/lib/noi-dung-tra
 import { boNhan, taoChu } from "@/lib/chu-trang";
 import { CHU_HUYEN_HOC, SO_HOI_DAP_HUYEN_HOC } from "@/lib/chu/trang-tinh";
 import { mucSoTrang } from "@/lib/so-trang";
+import { thongTinChuyenGia } from "@/lib/chuyen-gia-may-chu";
 import { CHU_DE, dsCumTru, mucLuc } from "@/lib/kien-thuc";
 import { AnhCmsHoac } from "@/components/cms/AnhCmsHoac";
 
@@ -44,7 +45,7 @@ const ICON_LICH: LucideIcon[] = [Sun, CalendarCheck, Home, DoorOpen, Sparkles, C
 const CACH: LucideIcon[] = [ListOrdered, BookOpen, MoonStar];   // SO_CACH_HH lớp
 
 export default async function HuyenHoc() {
-  const [nd, ds] = await Promise.all([layNoiDungTrang(DUONG), mucLuc()]);
+  const [nd, ds, chuyenGia] = await Promise.all([layNoiDungTrang(DUONG), mucLuc(), thongTinChuyenGia()]);
   const c = taoChu(CHU_HUYEN_HOC, nd.chu);
   const MD = macDinh();
   const nam = namNayVn();
@@ -219,6 +220,23 @@ export default async function HuyenHoc() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* RS-2: lối vào hai trang trả phí trước đây chỉ tới được từ Nạp Sao / Tài khoản. Hỏi chuyên gia chỉ hiện khi đang mở. */}
+      <section aria-label={c("sau_hon.nho")} data-testid="khoi-sau-hon">
+        <p className="eyebrow">{c("sau_hon.nho")}</p>
+        <div className={`mt-3 grid gap-3 ${chuyenGia.bat ? "sm:grid-cols-2" : ""}`}>
+          <Link href="/goi-xem" className="glass group flex items-start gap-3 rounded-2xl p-4 hover:border-gold/50">
+            <Sparkles className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
+            <span><b className="text-fg">{c("sau_hon.goi_ten")}</b><span className="mt-1 block text-sm text-fg-muted">{c("sau_hon.goi_mo")}</span></span>
+          </Link>
+          {chuyenGia.bat && (
+            <Link href="/hoi-chuyen-gia" className="glass group flex items-start gap-3 rounded-2xl p-4 hover:border-gold/50">
+              <MessageCircleQuestion className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
+              <span><b className="text-fg">{c("sau_hon.cg_ten")}</b><span className="mt-1 block text-sm text-fg-muted">{c("sau_hon.cg_mo")}</span></span>
+            </Link>
+          )}
         </div>
       </section>
 

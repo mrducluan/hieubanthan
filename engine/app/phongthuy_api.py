@@ -325,7 +325,6 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
     if ngon_ngu.la_viet():
         tm_ra = {**tm, **({"y": kb["thanh_mon"]} if kb.get("thanh_mon") else {})}
     else:
-        _q_en = {"Khảm": "Kan", "Cấn": "Gen", "Chấn": "Zhen", "Tốn": "Xun", "Ly": "Li", "Khôn": "Kun", "Đoài": "Dui", "Càn": "Qian"}
         _h_en = {"Bắc": "North", "Đông Bắc": "Northeast", "Đông": "East", "Đông Nam": "Southeast",
                  "Nam": "South", "Tây Nam": "Southwest", "Tây": "West", "Tây Bắc": "Northwest"}
         _m_en = {
@@ -335,7 +334,8 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
             "Canh": "Geng", "Dậu": "You", "Tân": "Xin", "Tuất": "Xu", "Càn": "Qian", "Hợi": "Hai",
         }
         def _en_slot(x: dict) -> dict:
-            return {**x, "cung": _q_en.get(x["cung"], x["cung"]), "phuong": _h_en.get(x["phuong"], x["phuong"]), "son": _m_en.get(x["son"], x["son"])}
+            # `cung` là MÃ để web so với ô của bàn (giữ chữ gốc như ban.cung[].cung; kb/ten.KHOA_MA gắn tên hiển thị).
+            return {**x, "phuong": _h_en.get(x["phuong"], x["phuong"]), "son": _m_en.get(x["son"], x["son"])}
         tm_ra = {
             **tm,
             "toa": _m_en.get(tm["toa"], tm["toa"]),

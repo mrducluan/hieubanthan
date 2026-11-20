@@ -187,6 +187,7 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "to_hop.nhom": "cat_hung", "to_hop.cung": "cung_hk", "cung.cung": "cung_hk", "luu_nien.cung": "cung_hk",
     "vi_tri.cung": "huong", "phong.cung": "huong", "nam_sao_toi.cung": "huong", ".cung": "huong",
     "cap.tu": "huong", "cap.den": "huong",
+    "chinh.cung": "cung_hk", "phu.cung": "cung_hk",
     # EN-ALL GĐ 6 — Kinh Dịch (khởi quẻ, đọc quẻ, Mai Hoa, quẻ ngày riêng): cấu trúc quẻ CALC giữ tên Việt làm mã.
     **{f"{q}.ten": "que_ten" for q in ("quai_ban", "quai_bien", "quai_ho", "quai_thac", "quai_tong", "bien")}, ".ten": "que_ten",
     "thuong_quai": "quai", "ha_quai": "quai", "bat_cung.cung": "quai", "bat_cung.loai": "the_bac", "cung_ngu_hanh": "hanh",

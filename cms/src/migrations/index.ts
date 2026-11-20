@@ -33,6 +33,7 @@ import * as migration_20261117_090000_seo_q_tieu_de_blog from './20261117_090000
 import * as migration_20261117_120000_kw6t_tuan_3 from './20261117_120000_kw6t_tuan_3';
 import * as migration_20261118_090000_km_3_menu_ky_mon from './20261118_090000_km_3_menu_ky_mon';
 import * as migration_20261118_120000_km_3_chan_trang from './20261118_120000_km_3_chan_trang';
+import * as migration_20261120_120000_rs_2_chan_trang_goi_xem from './20261120_120000_rs_2_chan_trang_goi_xem';
 
 export const migrations = [
   {
@@ -209,5 +210,10 @@ export const migrations = [
     up: migration_20261118_120000_km_3_chan_trang.up,
     down: migration_20261118_120000_km_3_chan_trang.down,
     name: '20261118_120000_km_3_chan_trang',
+  },
+  {
+    up: migration_20261120_120000_rs_2_chan_trang_goi_xem.up,
+    down: migration_20261120_120000_rs_2_chan_trang_goi_xem.down,
+    name: '20261120_120000_rs_2_chan_trang_goi_xem',
   },
 ];
