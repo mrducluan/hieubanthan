@@ -1,10 +1,12 @@
 // POST /api/doanh-chu — Proxy cho Studio Doanh Chủ (/v1/doanh-chu/doi-ngu).
-// Rào chắn pháp lý (Nghị định 13/2023/NĐ-CP) & bảo mật:
-//   - Chế độ "mau": dùng 100% nhân vật giả lập phía server để ông chủ trải nghiệm Radar 5 Hành & Ma Trận 2 Chiều ngay 1-click.
-//   - Chế độ "doi_ngu": CHỈ chấp nhận các `tv_token` mã hóa AES-256-GCM đã được chính nhân sự xác nhận qua /doanh-chu/moi.
-//     Proxy tự giải mã, kiểm tra đúng `nonce` của mã mời & còn hạn, rồi CHÍNH PROXY mới đặt `dong_y_tu_nguyen: true`.
+// Tuân thủ DC-1 & Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15 (không lưu dữ liệu ngày sinh trên máy chủ):
+//   - Chế độ "mau": 100% nhân vật giả lập phía server để trải nghiệm Radar 5 Hành & Ma Trận 2 Chiều ngay 1 chạm.
+//   - Chế độ "doi_ngu": chỉ chấp nhận các `tv_token` mã hóa AES-256-GCM đã được chính nhân sự xác nhận qua /doanh-chu/moi.
+//     Proxy giải mã, kiểm tra đúng `nonce` & còn hạn rồi mới đặt `dong_y_tu_nguyen: true` và `cam_ket_thoa_thuan: true`.
+//   - Chế độ "tu_nhap" (theo quyết định DC-1): chủ doanh nghiệp tự nhập trực tiếp 1–8 cộng sự, BẮT BUỘC tự tích
+//     `cam_ket_thoa_thuan: true` (đã ký thoả thuận riêng & có đồng ý của từng thành viên theo Luật 91/2025/QH15)
+//     và `dong_y_tu_nguyen: true` cho từng người — proxy KHÔNG bao giờ tự mặc định true.
 //   - Cổng Sao (SEC-2): đọc công tắc `luan_giai.thu_sao.doanh_chu` (mặc định TẮT → mở dùng thử; bật ở /quan-tri/cai-dat).
-//     Tuyệt đối không ghi cứng giá VND.
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { z } from "zod";
@@ -22,6 +24,16 @@ const OngChuIn = z.object({
   gioi_tinh: z.enum(["nam", "nu"]).default("nam"),
 }).strict();
 
+const ThanhVienTuNhapIn = z.object({
+  ten: z.string().trim().min(1).max(60),
+  vai_tro: z.string().trim().max(60).default(""),
+  ngay: z.number().int().min(1).max(31),
+  thang: z.number().int().min(1).max(12),
+  nam: z.number().int().min(1930).max(2025),
+  gioi_tinh: z.enum(["nam", "nu"]).default("nam"),
+  dong_y_tu_nguyen: z.literal(true),
+}).strict();
+
 const Input = z.discriminatedUnion("che_do", [
   z.object({
     che_do: z.literal("mau"),
@@ -33,6 +45,13 @@ const Input = z.discriminatedUnion("che_do", [
     ong_chu: OngChuIn,
     tv_tokens: z.array(z.string().trim().min(20).max(900)).min(1).max(8),
     nam_xem: z.number().int().min(2020).max(2050),
+  }).strict(),
+  z.object({
+    che_do: z.literal("tu_nhap"),
+    ong_chu: OngChuIn,
+    doi_ngu: z.array(ThanhVienTuNhapIn).min(1).max(8),
+    nam_xem: z.number().int().min(2020).max(2050),
+    cam_ket_thoa_thuan: z.literal(true),
   }).strict(),
 ]);
 
@@ -65,7 +84,28 @@ export async function POST(req: Request): Promise<NextResponse> {
 
   if (parsed.data.che_do === "mau") {
     laMau = true;
-    payloadEngine = { ...DOI_NGU_MAU, nam_xem: parsed.data.nam_xem };
+    // Nhân vật mẫu giả lập 100% phía server (không phải dữ liệu cá nhân thật) → đặt cam_ket_thoa_thuan=true để qua DC-1.
+    payloadEngine = { ...DOI_NGU_MAU, nam_xem: parsed.data.nam_xem, cam_ket_thoa_thuan: true };
+  } else if (parsed.data.che_do === "tu_nhap") {
+    const { ong_chu, doi_ngu, nam_xem, cam_ket_thoa_thuan } = parsed.data;
+    if (!ngayHopLe(ong_chu.nam, ong_chu.thang, ong_chu.ngay)) {
+      return NextResponse.json({ error: loiChung("khong_hop_le", en) }, { status: 422 });
+    }
+    for (let i = 0; i < doi_ngu.length; i++) {
+      const tv = doi_ngu[i]!;
+      if (!ngayHopLe(tv.nam, tv.thang, tv.ngay)) {
+        return NextResponse.json(
+          { error: en ? `Invalid birth date for member #${i + 1}.` : `Ngày sinh của cộng sự #${i + 1} (${tv.ten}) không hợp lệ.` },
+          { status: 422 },
+        );
+      }
+    }
+    payloadEngine = {
+      ong_chu: { ...ong_chu, dong_y_tu_nguyen: true },
+      doi_ngu,
+      nam_xem,
+      cam_ket_thoa_thuan, // Bắt buộc do chủ doanh nghiệp tự tích xác nhận (z.literal(true)), không tự mặc định.
+    };
   } else {
     const { ma_moi, ong_chu, tv_tokens, nam_xem } = parsed.data;
     if (!ngayHopLe(ong_chu.nam, ong_chu.thang, ong_chu.ngay)) {
@@ -98,13 +138,15 @@ export async function POST(req: Request): Promise<NextResponse> {
         thang: tv.thang,
         nam: tv.nam,
         gioi_tinh: tv.gioi_tinh,
-        dong_y_tu_nguyen: true, // CHỈ proxy máy chủ mới được đặt true sau khi giải mã AES-256-GCM thành công.
+        dong_y_tu_nguyen: true, // Chỉ proxy đặt true sau khi giải mã AES-256-GCM thành công.
       });
     }
+    // Mỗi thành viên đã tự bấm đồng ý & được ký mã hóa AES-256-GCM theo đúng nonce lời mời → cam_ket_thoa_thuan=true.
     payloadEngine = {
       ong_chu: { ...ong_chu, dong_y_tu_nguyen: true },
       doi_ngu: doiNgu,
       nam_xem,
+      cam_ket_thoa_thuan: true,
     };
   }
 

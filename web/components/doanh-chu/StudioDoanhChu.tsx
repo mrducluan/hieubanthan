@@ -1,7 +1,10 @@
 "use client";
-// Studio Doanh Chủ — hỗ trợ 2 chế độ: Xem thử 1 chạm (dữ liệu mẫu) & Lập đội ngũ thật qua mã xác nhận AES-256-GCM.
-import { useState } from "react";
-import { Building2, Check, Copy, Link2, Lock, Plus, Sparkles, Trash2, Users } from "lucide-react";
+// Studio Doanh Chủ — hỗ trợ 3 chế độ:
+//   1. Xem thử 1 chạm (dữ liệu mẫu 4 vai trò giả lập phía server)
+//   2. Nhập trực tiếp 1–8 cộng sự (khi đã có thoả thuận & đồng ý theo Luật BVDLCN 91/2025/QH15 — checkbox chưa tích sẵn)
+//   3. Gửi link mời bảo mật AES-256-GCM (nhân sự tự xác nhận trên máy mình, không lộ ngày sinh cho ông chủ)
+import { useRef, useState } from "react";
+import { Building2, Check, Copy, Link2, Lock, Plus, Sparkles, Trash2, UserPlus, Users } from "lucide-react";
 import { CHU_DOANH_CHU } from "@/lib/chu/doanh-chu";
 import type { KetQuaDoanhChu } from "@/lib/doanh-chu";
 import { RadarNguHanh } from "./RadarNguHanh";
@@ -13,12 +16,35 @@ interface MaThanhVienDaThem {
   nhan: string;
 }
 
+interface ThanhVienTuNhapForm {
+  id: string;
+  ten: string;
+  vai_tro: string;
+  ngay: string;
+  thang: string;
+  nam: string;
+  gioi_tinh: "nam" | "nu";
+}
+
+function taoThanhVienTrong(thuTu: number): ThanhVienTuNhapForm {
+  return {
+    id: `tv-${Date.now()}-${thuTu}`,
+    ten: "",
+    vai_tro: "",
+    ngay: "10",
+    thang: "3",
+    nam: "1992",
+    gioi_tinh: "nam",
+  };
+}
+
 export function StudioDoanhChu() {
   const namMacDinh = Math.min(2050, Math.max(2020, new Date().getFullYear()));
-  const [cheDo, setCheDo] = useState<"mau" | "doi_ngu">("doi_ngu");
+  const [cheDoDangGoi, setCheDoDangGoi] = useState<"mau" | "tu_nhap" | "doi_ngu">("tu_nhap");
+  const [tabBuoc2, setTabBuoc2] = useState<"tu_nhap" | "gui_link">("tu_nhap");
   const [namXem, setNamXem] = useState<number>(namMacDinh);
 
-  // Thông tin Ông chủ (bước 1)
+  // Bước 1: Thông tin Ông chủ
   const [tenChu, setTenChu] = useState<string>("");
   const [vaiTroChu, setVaiTroChu] = useState<string>("Chủ doanh nghiệp");
   const [ngayChu, setNgayChu] = useState<string>("15");
@@ -26,7 +52,13 @@ export function StudioDoanhChu() {
   const [namChu, setNamChu] = useState<string>("1986");
   const [gioiTinhChu, setGioiTinhChu] = useState<"nam" | "nu">("nam");
 
-  // Bước 2: Mã mời & danh sách tv_token nhân sự tự xác nhận
+  // Bước 2A: Nhập trực tiếp (theo DC-1, checkbox cam kết chưa tích sẵn)
+  const [dsTuNhap, setDsTuNhap] = useState<ThanhVienTuNhapForm[]>([
+    { id: "tv-init-1", ten: "", vai_tro: "Vận hành", ngay: "10", thang: "3", nam: "1992", gioi_tinh: "nu" },
+  ]);
+  const [camKetThoaThuan, setCamKetThoaThuan] = useState<boolean>(false);
+
+  // Bước 2B: Link mời bảo mật AES-256-GCM
   const [tenNhom, setTenNhom] = useState<string>("Ban điều hành");
   const [maMoi, setMaMoi] = useState<string>("");
   const [dangTaoLink, setDangTaoLink] = useState<boolean>(false);
@@ -34,16 +66,35 @@ export function StudioDoanhChu() {
   const [oDanMa, setODanMa] = useState<string>("");
   const [dsMaTv, setDsMaTv] = useState<MaThanhVienDaThem[]>([]);
 
-  // Trạng thái gọi phân tích
+  // Trạng thái gọi phân tích & tự cuộn xuống kết quả
   const [dangTai, setDangTai] = useState<boolean>(false);
   const [loi, setLoi] = useState<string>("");
-  const [xacNhanSao, setXacNhanSao] = useState<{ thongBao: string; gia: number } | null>(null);
+  const [xacNhanSao, setXacNhanSao] = useState<{
+    thongBao: string;
+    gia: number;
+    cheDo: "tu_nhap" | "doi_ngu";
+  } | null>(null);
   const [ketQua, setKetQua] = useState<KetQuaDoanhChu | null>(null);
+  const refKetQua = useRef<HTMLDivElement>(null);
 
   const linkMoi =
     maMoi && typeof window !== "undefined"
       ? `${window.location.origin}/doanh-chu/moi?ma=${encodeURIComponent(maMoi)}`
       : "";
+
+  function capNhatTuNhap(id: string, field: keyof ThanhVienTuNhapForm, value: string) {
+    setDsTuNhap((prev) => prev.map((x) => (x.id === id ? { ...x, [field]: value } : x)));
+  }
+
+  function themDongTuNhap() {
+    if (dsTuNhap.length >= 8) return;
+    setDsTuNhap((prev) => [...prev, taoThanhVienTrong(prev.length + 1)]);
+  }
+
+  function xoaDongTuNhap(id: string) {
+    if (dsTuNhap.length <= 1) return;
+    setDsTuNhap((prev) => prev.filter((x) => x.id !== id));
+  }
 
   async function taoLinkMoi() {
     setLoi("");
@@ -101,29 +152,55 @@ export function StudioDoanhChu() {
     setODanMa("");
   }
 
-  async function chayPhanTich(cheDoGoi: "mau" | "doi_ngu", dongYSao = false) {
+  async function chayPhanTich(cheDoGoi: "mau" | "tu_nhap" | "doi_ngu", dongYSao = false) {
     setLoi("");
     setXacNhanSao(null);
+
+    if (cheDoGoi === "tu_nhap") {
+      if (!camKetThoaThuan) {
+        setLoi("Vui lòng tích xác nhận đã có thoả thuận riêng & sự đồng ý của từng thành viên trước khi phân tích.");
+        return;
+      }
+    }
+
     setDangTai(true);
-    setCheDo(cheDoGoi);
+    setCheDoDangGoi(cheDoGoi);
     try {
+      const ongChuPayload = {
+        ten: tenChu.trim() || "Ông chủ",
+        vai_tro: vaiTroChu.trim() || "Chủ doanh nghiệp",
+        ngay: Number(ngayChu),
+        thang: Number(thangChu),
+        nam: Number(namChu),
+        gioi_tinh: gioiTinhChu,
+      };
+
       const body =
         cheDoGoi === "mau"
           ? { che_do: "mau" as const, nam_xem: namXem }
-          : {
-              che_do: "doi_ngu" as const,
-              ma_moi: maMoi,
-              ong_chu: {
-                ten: tenChu.trim() || "Ông chủ",
-                vai_tro: vaiTroChu.trim() || "Chủ doanh nghiệp",
-                ngay: Number(ngayChu),
-                thang: Number(thangChu),
-                nam: Number(namChu),
-                gioi_tinh: gioiTinhChu,
-              },
-              tv_tokens: dsMaTv.map((x) => x.token),
-              nam_xem: namXem,
-            };
+          : cheDoGoi === "tu_nhap"
+            ? {
+                che_do: "tu_nhap" as const,
+                ong_chu: ongChuPayload,
+                doi_ngu: dsTuNhap.map((tv, idx) => ({
+                  ten: tv.ten.trim() || `Cộng sự #${idx + 1}`,
+                  vai_tro: tv.vai_tro.trim(),
+                  ngay: Number(tv.ngay),
+                  thang: Number(tv.thang),
+                  nam: Number(tv.nam),
+                  gioi_tinh: tv.gioi_tinh,
+                  dong_y_tu_nguyen: true as const,
+                })),
+                nam_xem: namXem,
+                cam_ket_thoa_thuan: true as const,
+              }
+            : {
+                che_do: "doi_ngu" as const,
+                ma_moi: maMoi,
+                ong_chu: ongChuPayload,
+                tv_tokens: dsMaTv.map((x) => x.token),
+                nam_xem: namXem,
+              };
 
       const r = await fetch("/api/doanh-chu", {
         method: "POST",
@@ -133,16 +210,26 @@ export function StudioDoanhChu() {
         },
         body: JSON.stringify(body),
       });
-      const data = (await r.json().catch(() => null)) as (KetQuaDoanhChu & { error?: string; can?: string; gia?: number }) | null;
-      if (r.status === 402 && data?.can === "xac_nhan_sao" && typeof data.gia === "number") {
-        setXacNhanSao({ thongBao: data.error ?? `Xác nhận dùng ${data.gia} Sao.`, gia: data.gia });
+      const data = (await r.json().catch(() => null)) as
+        | (KetQuaDoanhChu & { error?: string; can?: string; gia?: number })
+        | null;
+
+      if (r.status === 402 && data?.can === "xac_nhan_sao" && typeof data.gia === "number" && cheDoGoi !== "mau") {
+        setXacNhanSao({
+          thongBao: data.error ?? `Xác nhận dùng ${data.gia} Sao.`,
+          gia: data.gia,
+          cheDo: cheDoGoi,
+        });
         return;
       }
       if (!r.ok || !data || !data.can_bang_ngu_hanh) {
-        setLoi(data?.error ?? "Không thể phân tích lúc này. Kiểm tra lại ngày sinh và mã xác nhận.");
+        setLoi(data?.error ?? "Không thể phân tích lúc này. Kiểm tra lại ngày sinh và thông tin cộng sự.");
         return;
       }
       setKetQua(data);
+      requestAnimationFrame(() => {
+        refKetQua.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
     } catch {
       setLoi("Không kết nối được máy chủ.");
     } finally {
@@ -152,7 +239,7 @@ export function StudioDoanhChu() {
 
   return (
     <div className="space-y-8">
-      {/* Thanh hành động nhanh: Trải nghiệm 1 chạm vs Lập đội ngũ thật */}
+      {/* Thanh hành động nhanh: Trải nghiệm 1 chạm */}
       <div className="glass flex flex-wrap items-center justify-between gap-4 rounded-3xl p-4 sm:p-5">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-gold/35 bg-gold/10 text-gold">
@@ -160,7 +247,7 @@ export function StudioDoanhChu() {
           </div>
           <div>
             <p className="text-sm font-medium text-fg">Muốn xem ngay Radar 5 Hành & Ma Trận 2 Chiều hoạt động thế nào?</p>
-            <p className="text-xs text-fg-muted">Thử ngay trên đội ngũ minh họa 4 vai trò (không tốn lượt, không cần chờ cộng sự).</p>
+            <p className="text-xs text-fg-muted">Thử ngay trên đội ngũ minh họa 4 vai trò (miễn phí, không cần nhập liệu).</p>
           </div>
         </div>
         <button
@@ -170,12 +257,12 @@ export function StudioDoanhChu() {
           className="vien-chay inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-gold transition disabled:opacity-60"
         >
           <Sparkles className="h-4 w-4" />
-          <span>{dangTai && cheDo === "mau" ? CHU_DOANH_CHU.che_do.dang_tai_mau : CHU_DOANH_CHU.che_do.xem_mau}</span>
+          <span>{dangTai && cheDoDangGoi === "mau" ? CHU_DOANH_CHU.che_do.dang_tai_mau : CHU_DOANH_CHU.che_do.xem_mau}</span>
         </button>
       </div>
 
-      {/* Khối nhập liệu đội ngũ thật (2 bước chuẩn Nghị định 13/2023/NĐ-CP) */}
-      <div className="grid gap-5 lg:grid-cols-2">
+      {/* Khối nhập liệu 2 bước */}
+      <div className="grid gap-5 lg:grid-cols-[minmax(0,420px)_1fr]">
         {/* Bước 1: Thông tin Ông chủ */}
         <div className="glass rounded-3xl p-5 sm:p-6">
           <div className="flex items-center gap-2 text-sm font-semibold text-gold">
@@ -277,110 +364,255 @@ export function StudioDoanhChu() {
           </div>
         </div>
 
-        {/* Bước 2: Mời cộng sự tự xác nhận (Zero-PII AES-256-GCM) */}
+        {/* Bước 2: 2 Tab (Nhập trực tiếp vs Gửi link mời bảo mật AES-256-GCM) */}
         <div className="glass rounded-3xl p-5 sm:p-6">
-          <div className="flex items-center gap-2 text-sm font-semibold text-jade">
-            <Lock className="h-4 w-4" />
-            <h2>{CHU_DOANH_CHU.buoc_nhap.buoc_2_tieu_de}</h2>
-          </div>
-          <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">{CHU_DOANH_CHU.buoc_nhap.buoc_2_mo_ta}</p>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2 text-sm font-semibold text-jade">
+              <Users className="h-4 w-4" />
+              <h2>{CHU_DOANH_CHU.buoc_nhap.buoc_2_tieu_de}</h2>
+            </div>
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            <input
-              type="text"
-              value={tenNhom}
-              onChange={(e) => setTenNhom(e.target.value)}
-              placeholder={CHU_DOANH_CHU.buoc_nhap.ten_nhom_goi_y}
-              maxLength={50}
-              className="min-w-0 flex-1 rounded-xl border border-line bg-bg/70 px-3 py-2 text-sm text-fg placeholder:text-fg-faint"
-            />
-            <button
-              type="button"
-              onClick={taoLinkMoi}
-              disabled={dangTaoLink}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-jade/45 bg-jade/15 px-4 py-2 text-sm font-medium text-jade transition hover:bg-jade/25 disabled:opacity-60"
-            >
-              <Link2 className="h-4 w-4" />
-              <span>{dangTaoLink ? CHU_DOANH_CHU.buoc_nhap.dang_tao_link : CHU_DOANH_CHU.buoc_nhap.nut_tao_link}</span>
-            </button>
+            <div className="inline-flex rounded-full border border-line/70 bg-bg/60 p-1 text-xs">
+              <button
+                type="button"
+                onClick={() => setTabBuoc2("tu_nhap")}
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-medium transition ${
+                  tabBuoc2 === "tu_nhap" ? "bg-gold/20 text-gold" : "text-fg-muted hover:text-fg"
+                }`}
+              >
+                <UserPlus className="h-3.5 w-3.5" />
+                <span>{CHU_DOANH_CHU.buoc_nhap.tab_tu_nhap}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setTabBuoc2("gui_link")}
+                className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-medium transition ${
+                  tabBuoc2 === "gui_link" ? "bg-jade/20 text-jade" : "text-fg-muted hover:text-fg"
+                }`}
+              >
+                <Lock className="h-3.5 w-3.5" />
+                <span>{CHU_DOANH_CHU.buoc_nhap.tab_gui_link}</span>
+              </button>
+            </div>
           </div>
 
-          {linkMoi && (
-            <div className="mt-3 rounded-2xl border border-jade/35 bg-jade/5 p-3">
-              <div className="flex items-center justify-between gap-2">
-                <p className="truncate text-xs text-fg-muted">{linkMoi}</p>
-                <button
-                  type="button"
-                  onClick={chepLink}
-                  className="inline-flex shrink-0 items-center gap-1 rounded-full border border-jade/40 bg-surface px-3 py-1 text-xs font-medium text-jade"
-                >
-                  {daChepLink ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                  <span>{daChepLink ? CHU_DOANH_CHU.buoc_nhap.da_chep : CHU_DOANH_CHU.buoc_nhap.nut_chep_link}</span>
-                </button>
+          {tabBuoc2 === "tu_nhap" ? (
+            <div className="mt-3 space-y-3.5">
+              <p className="text-xs leading-relaxed text-fg-muted">{CHU_DOANH_CHU.buoc_nhap.tu_nhap_mo_ta}</p>
+
+              <div className="space-y-2.5">
+                {dsTuNhap.map((tv, idx) => (
+                  <div key={tv.id} className="rounded-2xl border border-line/70 bg-bg/50 p-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-medium text-gold">Cộng sự #{idx + 1}</span>
+                      {dsTuNhap.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => xoaDongTuNhap(tv.id)}
+                          className="inline-flex items-center gap-1 text-xs text-fg-faint hover:text-[#ef8a6f]"
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                          <span>{CHU_DOANH_CHU.buoc_nhap.xoa_thanh_vien}</span>
+                        </button>
+                      )}
+                    </div>
+                    <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                      <input
+                        type="text"
+                        value={tv.ten}
+                        onChange={(e) => capNhatTuNhap(tv.id, "ten", e.target.value)}
+                        placeholder={`Biệt danh (VD: Minh)`}
+                        maxLength={60}
+                        className="rounded-xl border border-line bg-surface/70 px-3 py-1.5 text-xs text-fg placeholder:text-fg-faint"
+                      />
+                      <input
+                        type="text"
+                        value={tv.vai_tro}
+                        onChange={(e) => capNhatTuNhap(tv.id, "vai_tro", e.target.value)}
+                        placeholder="Vai trò (VD: Vận hành, Kinh doanh)"
+                        maxLength={60}
+                        className="rounded-xl border border-line bg-surface/70 px-3 py-1.5 text-xs text-fg placeholder:text-fg-faint"
+                      />
+                    </div>
+                    <div className="mt-2 grid grid-cols-4 gap-2">
+                      <input
+                        type="number"
+                        min={1}
+                        max={31}
+                        value={tv.ngay}
+                        onChange={(e) => capNhatTuNhap(tv.id, "ngay", e.target.value)}
+                        aria-label="Ngày sinh"
+                        placeholder="Ngày"
+                        className="rounded-xl border border-line bg-surface/70 px-2.5 py-1.5 text-xs tabular-nums text-fg"
+                      />
+                      <input
+                        type="number"
+                        min={1}
+                        max={12}
+                        value={tv.thang}
+                        onChange={(e) => capNhatTuNhap(tv.id, "thang", e.target.value)}
+                        aria-label="Tháng sinh"
+                        placeholder="Tháng"
+                        className="rounded-xl border border-line bg-surface/70 px-2.5 py-1.5 text-xs tabular-nums text-fg"
+                      />
+                      <input
+                        type="number"
+                        min={1930}
+                        max={2025}
+                        value={tv.nam}
+                        onChange={(e) => capNhatTuNhap(tv.id, "nam", e.target.value)}
+                        aria-label="Năm sinh"
+                        placeholder="Năm"
+                        className="rounded-xl border border-line bg-surface/70 px-2.5 py-1.5 text-xs tabular-nums text-fg"
+                      />
+                      <select
+                        value={tv.gioi_tinh}
+                        onChange={(e) => capNhatTuNhap(tv.id, "gioi_tinh", e.target.value as "nam" | "nu")}
+                        aria-label="Giới tính"
+                        className="rounded-xl border border-line bg-surface/70 px-2 py-1.5 text-xs text-fg"
+                      >
+                        <option value="nam">{CHU_DOANH_CHU.buoc_nhap.nam}</option>
+                        <option value="nu">{CHU_DOANH_CHU.buoc_nhap.nu}</option>
+                      </select>
+                    </div>
+                  </div>
+                ))}
               </div>
 
-              <div className="mt-3 flex gap-2">
+              {dsTuNhap.length < 8 && (
+                <button
+                  type="button"
+                  onClick={themDongTuNhap}
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-surface/60 px-3.5 py-1.5 text-xs font-medium text-fg hover:border-gold/50 hover:text-gold"
+                >
+                  <Plus className="h-3.5 w-3.5" />
+                  <span>{CHU_DOANH_CHU.buoc_nhap.nut_them_dong} ({dsTuNhap.length}/8)</span>
+                </button>
+              )}
+
+              {/* Checkbox cam kết bắt buộc (mặc định CHƯA tích) theo Luật BVDLCN 91/2025/QH15 & DC-1 */}
+              <label className="flex cursor-pointer items-start gap-2.5 rounded-2xl border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] p-3 text-xs leading-relaxed text-[#f0b35c]">
+                <input
+                  type="checkbox"
+                  checked={camKetThoaThuan}
+                  onChange={(e) => setCamKetThoaThuan(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-gold"
+                />
+                <span>{CHU_DOANH_CHU.buoc_nhap.cam_ket_tu_nhap}</span>
+              </label>
+
+              <button
+                type="button"
+                disabled={dangTai || !camKetThoaThuan}
+                onClick={() => chayPhanTich("tu_nhap")}
+                className="w-full rounded-xl border border-gold/50 bg-gold/20 py-2.5 text-sm font-semibold text-gold transition hover:bg-gold/30 disabled:cursor-not-allowed disabled:opacity-45"
+              >
+                {dangTai && cheDoDangGoi === "tu_nhap"
+                  ? CHU_DOANH_CHU.buoc_nhap.dang_phan_tich
+                  : `${CHU_DOANH_CHU.buoc_nhap.nut_phan_tich} (${dsTuNhap.length}/8)`}
+              </button>
+            </div>
+          ) : (
+            <div className="mt-3">
+              <p className="text-xs leading-relaxed text-fg-muted">{CHU_DOANH_CHU.buoc_nhap.buoc_2_mo_ta}</p>
+
+              <div className="mt-4 flex flex-wrap gap-2">
                 <input
                   type="text"
-                  value={oDanMa}
-                  onChange={(e) => setODanMa(e.target.value)}
-                  placeholder={CHU_DOANH_CHU.buoc_nhap.dan_ma_goi_y}
-                  className="min-w-0 flex-1 rounded-xl border border-line bg-bg/80 px-3 py-2 text-xs text-fg placeholder:text-fg-faint"
+                  value={tenNhom}
+                  onChange={(e) => setTenNhom(e.target.value)}
+                  placeholder={CHU_DOANH_CHU.buoc_nhap.ten_nhom_goi_y}
+                  maxLength={50}
+                  className="min-w-0 flex-1 rounded-xl border border-line bg-bg/70 px-3 py-2 text-sm text-fg placeholder:text-fg-faint"
                 />
                 <button
                   type="button"
-                  onClick={themMaThanhVien}
-                  className="inline-flex items-center gap-1 rounded-xl border border-gold/45 bg-gold/15 px-3.5 py-2 text-xs font-medium text-gold hover:bg-gold/25"
+                  onClick={taoLinkMoi}
+                  disabled={dangTaoLink}
+                  className="inline-flex items-center gap-1.5 rounded-xl border border-jade/45 bg-jade/15 px-4 py-2 text-sm font-medium text-jade transition hover:bg-jade/25 disabled:opacity-60"
                 >
-                  <Plus className="h-3.5 w-3.5" />
-                  <span>{CHU_DOANH_CHU.buoc_nhap.nut_them_ma}</span>
+                  <Link2 className="h-4 w-4" />
+                  <span>{dangTaoLink ? CHU_DOANH_CHU.buoc_nhap.dang_tao_link : CHU_DOANH_CHU.buoc_nhap.nut_tao_link}</span>
                 </button>
               </div>
+
+              {linkMoi && (
+                <div className="mt-3 rounded-2xl border border-jade/35 bg-jade/5 p-3">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="truncate text-xs text-fg-muted">{linkMoi}</p>
+                    <button
+                      type="button"
+                      onClick={chepLink}
+                      className="inline-flex shrink-0 items-center gap-1 rounded-full border border-jade/40 bg-surface px-3 py-1 text-xs font-medium text-jade"
+                    >
+                      {daChepLink ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                      <span>{daChepLink ? CHU_DOANH_CHU.buoc_nhap.da_chep : CHU_DOANH_CHU.buoc_nhap.nut_chep_link}</span>
+                    </button>
+                  </div>
+
+                  <div className="mt-3 flex gap-2">
+                    <input
+                      type="text"
+                      value={oDanMa}
+                      onChange={(e) => setODanMa(e.target.value)}
+                      placeholder={CHU_DOANH_CHU.buoc_nhap.dan_ma_goi_y}
+                      className="min-w-0 flex-1 rounded-xl border border-line bg-bg/80 px-3 py-2 text-xs text-fg placeholder:text-fg-faint"
+                    />
+                    <button
+                      type="button"
+                      onClick={themMaThanhVien}
+                      className="inline-flex items-center gap-1 rounded-xl border border-gold/45 bg-gold/15 px-3.5 py-2 text-xs font-medium text-gold hover:bg-gold/25"
+                    >
+                      <Plus className="h-3.5 w-3.5" />
+                      <span>{CHU_DOANH_CHU.buoc_nhap.nut_them_ma}</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-3 space-y-2">
+                {dsMaTv.length === 0 ? (
+                  <p className="rounded-xl border border-line/50 bg-bg/40 p-3 text-xs text-fg-faint">
+                    {CHU_DOANH_CHU.buoc_nhap.danh_sach_trong}
+                  </p>
+                ) : (
+                  dsMaTv.map((tv) => (
+                    <div
+                      key={tv.id}
+                      className="flex items-center justify-between gap-2 rounded-xl border border-jade/30 bg-surface/70 px-3 py-2 text-xs"
+                    >
+                      <div className="flex items-center gap-2">
+                        <Users className="h-3.5 w-3.5 text-jade" />
+                        <span className="font-medium text-fg">{tv.nhan}</span>
+                        <span className="rounded-full bg-jade/15 px-2 py-0.5 text-[11px] text-jade">
+                          {CHU_DOANH_CHU.buoc_nhap.huy_hieu_xac_nhan}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setDsMaTv((prev) => prev.filter((x) => x.id !== tv.id))}
+                        className="inline-flex items-center gap-1 text-fg-faint hover:text-[#ef8a6f]"
+                        aria-label={CHU_DOANH_CHU.buoc_nhap.xoa_thanh_vien}
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
+
+              <button
+                type="button"
+                disabled={dangTai || !maMoi || dsMaTv.length === 0}
+                onClick={() => chayPhanTich("doi_ngu")}
+                className="mt-4 w-full rounded-xl border border-gold/50 bg-gold/20 py-2.5 text-sm font-semibold text-gold transition hover:bg-gold/30 disabled:cursor-not-allowed disabled:opacity-45"
+              >
+                {dangTai && cheDoDangGoi === "doi_ngu"
+                  ? CHU_DOANH_CHU.buoc_nhap.dang_phan_tich
+                  : `${CHU_DOANH_CHU.buoc_nhap.nut_phan_tich} (${dsMaTv.length}/8)`}
+              </button>
             </div>
           )}
-
-          {/* Danh sách cộng sự đã xác nhận */}
-          <div className="mt-3 space-y-2">
-            {dsMaTv.length === 0 ? (
-              <p className="rounded-xl border border-line/50 bg-bg/40 p-3 text-xs text-fg-faint">
-                {CHU_DOANH_CHU.buoc_nhap.danh_sach_trong}
-              </p>
-            ) : (
-              dsMaTv.map((tv) => (
-                <div
-                  key={tv.id}
-                  className="flex items-center justify-between gap-2 rounded-xl border border-jade/30 bg-surface/70 px-3 py-2 text-xs"
-                >
-                  <div className="flex items-center gap-2">
-                    <Users className="h-3.5 w-3.5 text-jade" />
-                    <span className="font-medium text-fg">{tv.nhan}</span>
-                    <span className="rounded-full bg-jade/15 px-2 py-0.5 text-[11px] text-jade">
-                      {CHU_DOANH_CHU.buoc_nhap.huy_hieu_xac_nhan}
-                    </span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setDsMaTv((prev) => prev.filter((x) => x.id !== tv.id))}
-                    className="inline-flex items-center gap-1 text-fg-faint hover:text-[#ef8a6f]"
-                    aria-label={CHU_DOANH_CHU.buoc_nhap.xoa_thanh_vien}
-                  >
-                    <Trash2 className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
-
-          <button
-            type="button"
-            disabled={dangTai || !maMoi || dsMaTv.length === 0}
-            onClick={() => chayPhanTich("doi_ngu")}
-            className="mt-4 w-full rounded-xl border border-gold/50 bg-gold/20 py-2.5 text-sm font-semibold text-gold transition hover:bg-gold/30 disabled:cursor-not-allowed disabled:opacity-45"
-          >
-            {dangTai && cheDo === "doi_ngu"
-              ? CHU_DOANH_CHU.buoc_nhap.dang_phan_tich
-              : `${CHU_DOANH_CHU.buoc_nhap.nut_phan_tich} (${dsMaTv.length}/8)`}
-          </button>
         </div>
       </div>
 
@@ -390,7 +622,7 @@ export function StudioDoanhChu() {
           <p className="text-sm text-fg">{xacNhanSao.thongBao}</p>
           <button
             type="button"
-            onClick={() => chayPhanTich("doi_ngu", true)}
+            onClick={() => chayPhanTich(xacNhanSao.cheDo, true)}
             className="rounded-full bg-gold px-4 py-1.5 text-xs font-semibold text-bg"
           >
             Đồng ý dùng {xacNhanSao.gia} Sao
@@ -406,7 +638,7 @@ export function StudioDoanhChu() {
 
       {/* KẾT QUẢ: Radar 5 Hành Động + Ma Trận 2 Chiều + Quy Mô + Ranh Giới Pháp Lý */}
       {ketQua && (
-        <div className="space-y-6">
+        <div ref={refKetQua} className="scroll-mt-24 space-y-6">
           {ketQua.la_du_lieu_mau && (
             <div className="rounded-2xl border border-gold/35 bg-gold/10 px-4 py-3 text-xs text-gold">
               {CHU_DOANH_CHU.che_do.nhan_mau}
@@ -436,7 +668,7 @@ export function StudioDoanhChu() {
             </div>
           </section>
 
-          {/* Ranh giới pháp lý bắt buộc (Nghị định 13/2023 + BLLĐ 2019 Điều 8) */}
+          {/* Ranh giới pháp lý bắt buộc (Luật BVDLCN 91/2025/QH15 + BLLĐ 2019 Điều 8) */}
           <aside className="rounded-2xl border border-[rgb(245_170_80/0.35)] bg-[rgb(245_170_80/0.08)] p-4 text-xs leading-relaxed text-[#f0b35c]">
             {ketQua.ranh_gioi_phap_ly}
           </aside>
