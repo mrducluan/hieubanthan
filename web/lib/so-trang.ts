@@ -243,6 +243,10 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     tieu_de_seo: "Gói xem luận giải: Tử vi, Bát tự, Thần số, năm mới", h1: "Gói xem luận giải: chọn theo điều bạn đang cần biết",
     mo_ta_seo: "Các gói xem luận giải theo nhu cầu: năm mới, lá số Tử vi trọn đời, Bát tự, bản đồ con số, chân dung tổng hợp. Chương đầu miễn phí; trả từng lần, gói nhiều lần hoặc hội viên năm.",
   } },
+  { duong: "/ban-do-doi-ngu", nhom: "cong_cu", ten: "Bản đồ Đội ngũ", o: O_TRANG_PHU, mac_dinh: {
+    tieu_de_seo: "Bản đồ Đội ngũ: giao đúng việc, giảm va chạm, lấp lỗ hổng vận hành", h1: "Hiểu đúng người cạnh mình: giao đúng việc, giảm va chạm, lấp lỗ hổng đội ngũ",
+    mo_ta_seo: "Công cụ tham khảo phối hợp đội ngũ dành cho chủ doanh nghiệp và quản lý: Radar cân bằng 5 hành, sở trường từng cộng sự và gợi ý giao tiếp 2 chiều cho 1–8 người.",
+  } },
   { duong: "/hoi-vien", nhom: "cong_cu", ten: "Hội viên năm", o: O_TRANG_PHU, mac_dinh: {
     tieu_de_seo: "Hội viên năm — mở mọi luận giải, mua một lần", h1: "Hội viên năm",
     mo_ta_seo: "Hội viên năm Hiểu Bản Thân: mở mọi chương Luận giải toàn bộ Tử vi, Bát tự, Bản đồ con số, Sao tặng mỗi tháng. Trả một lần bằng QR chuyển khoản, không tự gia hạn.",
