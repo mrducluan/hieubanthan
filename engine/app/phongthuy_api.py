@@ -515,3 +515,73 @@ def api_thang_nay(inp: ThangNayInput) -> dict:
     except ValueError as e:
         raise HTTPException(422, detail=str(e)[:300])
     return {"engine_version": ENGINE_VERSION, **r}
+
+
+# --------------------------------------------------------------------------- #
+# Dương Trạch Tam Yếu — đồ hình lý thuyết, sơ đồ 64 nhà / 64 bếp & mục lục biểu đồ (sạch BM-1)
+
+_QuaiTamYeu = Literal["Càn", "Đoài", "Ly", "Chấn", "Tốn", "Khảm", "Cấn", "Khôn"]
+
+
+@router.get("/tam-yeu/do-hinh")
+def api_tam_yeu_do_hinh() -> dict:
+    """Mục lục 10 đồ hình lý thuyết của Dương Trạch Tam Yếu (chỉ tra KB, sạch BM-1)."""
+    from app.kb import phongthuy_tam_yeu_do_hinh as dh_kb  # noqa: PLC0415
+    m = dh_kb.meta()
+    return {
+        "engine_version": ENGINE_VERSION,
+        "pham_vi": "phongthuy_tam_yeu_do_hinh",
+        "nguon_hien_thi": dh_kb.NGUON_HIEN_THI,
+        "trang_thai": m["trang_thai"],
+        "thong_ke": m["thong_ke"],
+        "do_hinh": dh_kb.danh_muc(),
+    }
+
+
+@router.get("/tam-yeu/do-hinh/{ma}")
+def api_tam_yeu_do_hinh_mot(ma: str) -> dict:
+    """Chi tiết một đồ hình lý thuyết Dương Trạch Tam Yếu kèm cấu trúc và sơ đồ Mermaid."""
+    import re  # noqa: PLC0415
+    from app.kb import phongthuy_tam_yeu_do_hinh as dh_kb  # noqa: PLC0415
+    d = dh_kb.chi_tiet(ma) if re.fullmatch(r"[a-z0-9_]{2,60}", ma) else None
+    if d is None:
+        raise HTTPException(404, detail="Không có đồ hình Dương Trạch Tam Yếu này.")
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "phongthuy_tam_yeu_do_hinh", **d}
+
+
+@router.get("/tam-yeu/so-do")
+def api_tam_yeu_so_do(
+    cua: _QuaiTamYeu = Query(..., description="Quái phương vị Cửa chính"),
+    chu: _QuaiTamYeu | None = Query(default=None, description="Quái phương vị Phòng chủ"),
+    bep: _QuaiTamYeu | None = Query(default=None, description="Quái phương vị Bếp nấu"),
+) -> dict:
+    """Tra sơ đồ lưới Cửu Cung 3×3 + Mermaid + Du Niên cho tổ hợp Cửa – Chủ – Bếp."""
+    from app.kb import phongthuy_tam_yeu_do_hinh as dh_kb  # noqa: PLC0415
+    return {
+        "engine_version": ENGINE_VERSION,
+        "pham_vi": "phongthuy_tam_yeu_do_hinh",
+        **dh_kb.so_do_cua_chu_bep(cua, chu, bep),
+    }
+
+
+@router.get("/tam-yeu/bieu-do")
+def api_tam_yeu_bieu_do(
+    loai: Literal[
+        "illustrated_diagram",
+        "floorplan_bazao",
+        "diagram_illustration",
+        "star_chart",
+        "compass_bagua_diagram",
+        "photo_illustration",
+    ] | None = Query(default=None),
+    quyen: Literal["导读卷", "卷一", "卷二", "卷三", "卷四"] | None = Query(default=None),
+    limit: int = Query(default=50, ge=1, le=100),
+    offset: int = Query(default=0, ge=0, le=500),
+) -> dict:
+    """Mục lục phân trang các biểu đồ mô tả của Dương Trạch Tam Yếu (sạch BM-1, không lộ kho nội bộ)."""
+    from app.kb import phongthuy_tam_yeu_do_hinh as dh_kb  # noqa: PLC0415
+    return {
+        "engine_version": ENGINE_VERSION,
+        "pham_vi": "phongthuy_tam_yeu_do_hinh",
+        **dh_kb.muc_luc_bieu_do(loai=loai, quyen=quyen, limit=limit, offset=offset),
+    }

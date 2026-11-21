@@ -93,3 +93,113 @@ def test_muc_luc_bieu_do_du_va_khong_anh_ban_quyen():
     for x in ml:
         assert x["trang_pdf"] > 28 and x["mo_ta_vi"].strip()
         assert ".jpg" not in x["mo_ta_vi"].lower() and ".png" not in x["mo_ta_vi"].lower()
+
+
+# ───────── API /v1/phongthuy/tam-yeu/* + kiểm lọc BM-1 đệ quy ─────────
+_FORBIDDEN_API_KEYS = {
+    "chart_id",
+    "tham_chieu_bieu_do",
+    "trang_pdf",
+    "nguon_thien",
+    "avg_conf",
+    "do_tin",
+    "can_doi_chieu",
+    "han",
+}
+_FORBIDDEN_API_SUBSTRINGS = (
+    "fengshui-yangzhai-kb",
+    ".jpg",
+    ".png",
+    ".sqlite",
+    "rapidocr",
+    "opencc",
+    "白话",
+    "白話提要",
+    "白話圖解",
+)
+
+
+def _assert_bm1_clean(obj, path: str = "$") -> None:
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            assert k not in _FORBIDDEN_API_KEYS, f"BM-1 lộ khoá nội bộ tại {path}.{k}"
+            _assert_bm1_clean(v, f"{path}.{k}")
+    elif isinstance(obj, list):
+        for i, item in enumerate(obj):
+            _assert_bm1_clean(item, f"{path}[{i}]")
+    elif isinstance(obj, str):
+        low = obj.lower()
+        for bad in _FORBIDDEN_API_SUBSTRINGS:
+            assert bad not in low, f"BM-1 lộ chuỗi nội bộ {bad!r} tại {path}: {obj[:120]}"
+
+
+def test_api_tam_yeu_do_hinh_va_chi_tiet():
+    from fastapi.testclient import TestClient
+    from app.main import app
+
+    client = TestClient(app)
+
+    r_list = client.get("/v1/phongthuy/tam-yeu/do-hinh")
+    assert r_list.status_code == 200
+    body = r_list.json()
+    assert body["engine_version"] and len(body["do_hinh"]) == 10
+    assert body["thong_ke"]["so_do_nha"] == 64 and body["thong_ke"]["so_do_bep"] == 64
+    _assert_bm1_clean(body)
+
+    r_one = client.get("/v1/phongthuy/tam-yeu/do-hinh/tam_yeu_mon_chu_tao")
+    assert r_one.status_code == 200
+    one = r_one.json()
+    assert one["mermaid"].startswith("flowchart ") and one["cau_truc"] and len(one["khac"]) == 9
+    _assert_bm1_clean(one)
+
+    assert client.get("/v1/phongthuy/tam-yeu/do-hinh/khong_ton_tai").status_code == 404
+    assert client.get("/v1/phongthuy/tam-yeu/do-hinh/BAD-UPPER!").status_code == 404
+
+
+def test_api_tam_yeu_so_do_cua_chu_bep():
+    from fastapi.testclient import TestClient
+    from app.main import app
+
+    client = TestClient(app)
+
+    # Đủ 3 điểm Cửa – Chủ – Bếp
+    r = client.get("/v1/phongthuy/tam-yeu/so-do", params={"cua": "Càn", "chu": "Đoài", "bep": "Khôn"})
+    assert r.status_code == 200
+    d = r.json()
+    assert d["so_do_nha"]["du_nien"] == pt.bang_huong("Càn")[pt.QUAI["Đoài"][1]] == "Sinh Khí"
+    assert d["so_do_bep"]["du_nien"] == pt.bang_huong("Càn")[pt.QUAI["Khôn"][1]] == "Diên Niên"
+    assert d["so_do_nha"]["tom_y"] and d["so_do_bep"]["tom_y"]
+    flat = " ".join(cell for row in d["luoi_tong_hop_3x3"] for cell in row)
+    assert "Cửa" in flat and "Chủ" in flat and "Bếp" in flat
+    assert d["mermaid_tong_hop"].startswith("flowchart ")
+    _assert_bm1_clean(d)
+
+    # Chỉ có Cửa -> trả 8 thế nhà gợi ý
+    r_cua = client.get("/v1/phongthuy/tam-yeu/so-do", params={"cua": "Ly"})
+    assert r_cua.status_code == 200
+    d_cua = r_cua.json()
+    assert len(d_cua["cac_the_nha"]) == 8
+    _assert_bm1_clean(d_cua)
+
+    # Quái sai -> 422
+    assert client.get("/v1/phongthuy/tam-yeu/so-do", params={"cua": "KhongHopLe"}).status_code == 422
+
+
+def test_api_tam_yeu_bieu_do_phan_trang_va_loc():
+    from fastapi.testclient import TestClient
+    from app.main import app
+
+    client = TestClient(app)
+    r = client.get("/v1/phongthuy/tam-yeu/bieu-do", params={"limit": 10, "offset": 5})
+    assert r.status_code == 200
+    d = r.json()
+    assert d["tong"] == 251 and len(d["bieu_do"]) == 10 and d["bieu_do"][0]["thu_tu"] == 6
+    _assert_bm1_clean(d)
+
+    r_f = client.get("/v1/phongthuy/tam-yeu/bieu-do", params={"loai": "floorplan_bazao", "limit": 100})
+    assert r_f.status_code == 200
+    df = r_f.json()
+    # 64 mặt bằng chính văn (tổng 65 floorplan_bazao trong SQLite trừ YZ_SY_C0028 ở trang hướng dẫn đọc p.28)
+    assert df["tong"] == 64 and len(df["bieu_do"]) == 64
+    _assert_bm1_clean(df)
+
