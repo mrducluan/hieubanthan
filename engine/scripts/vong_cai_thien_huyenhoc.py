@@ -171,9 +171,32 @@ def kiem_tuvi_ds_duality() -> list[str]:
     return slv_loi
 
 
+def kiem_battu_ds_duality() -> list[str]:
+    """Build-time duality & citation lint cho Bát tự đời sống (10 nhật chủ × 3 thế + source_ref)."""
+    bt_ds_path = KB_DIR / "battu_doi_song_kb.json"
+    if not bt_ds_path.exists():
+        return []
+    bt_ds = json.loads(bt_ds_path.read_text(encoding="utf-8"))
+    loi: list[str] = []
+    _duyet({k: v for k, v in bt_ds.items() if k not in ("_nguon", "source", "cum_cam", "source_ref")},
+           "battu_doi_song", loi)
+    for nc, states in (bt_ds.get("nhat_chu") or {}).items():
+        for st in ("manh", "yeu", "can_bang"):
+            o = states.get(st) or {}
+            if not (o.get("manh") and o.get("de_vap") and o.get("loi_khuyen")):
+                loi.append(f"battu_doi_song.nhat_chu.{nc}.{st}: thiếu lưỡng cực manh/de_vap/loi_khuyen")
+    for nhom_k in ("noi_bat", "hanh", "than_sat"):
+        for ma, o in (bt_ds.get(nhom_k) or {}).items():
+            ref = (o or {}).get("source_ref") if isinstance(o, dict) else None
+            if ref is not None and not (ref.get("source_id") and ref.get("han") and ref.get("am")):
+                loi.append(f"battu_doi_song.{nhom_k}.{ma}: source_ref thiếu source_id/han/am")
+    return loi
+
+
 def cmd_kiem_kb() -> int:
     kq = kiem_kb()
     kq["tuvi_ds"] = kiem_tuvi_ds_duality()
+    kq["battu_ds"] = kiem_battu_ds_duality()
     tong = 0
     for md, loi in kq.items():
         print(f"{md:10s} {'OK' if not loi else f'{len(loi)} lỗi'}")

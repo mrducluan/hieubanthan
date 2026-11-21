@@ -831,6 +831,13 @@ def _hop_muc(ma: str, muc: str, can_cu: list[str]) -> dict:
                 can_cu, _mm(ma, "muc", muc, "manh"), 0.3)
 
 
+def _can_cu_nguon(o: dict | None) -> tuple[list[str], dict]:
+    ref = (o or {}).get("source_ref")
+    if not (ref and ref.get("am") and ref.get("han")):
+        return [], {}
+    return [f"Nguồn {ref.get('ten_sach', 'cổ thư')}: «{ref['am']}» ({ref['han']})"], {"source_ref": ref}
+
+
 def _hop_than_sat(ma: str, ten: str, pt: dict) -> dict | None:
     t = pt["than_sat"].get(ten)
     o = kb.than_sat(ten)
@@ -840,9 +847,12 @@ def _hop_than_sat(ma: str, ten: str, pt: dict) -> dict | None:
     cu = [L("bt_ds.ts.cu", f"Thần sát {ten} ({t['loai']}) ở trụ {tru} — {t['y']}", ten=_ten.ten("than_sat", ten),
             loai=_ten.ten("cat_hung", t["loai"]), tru=", ".join(battu_hien._tru(mr_calc.TEN_TRU[i]) for i in t["tru"]),
             y=_y_ts(ten, t["y"]))]
+    cu_ref, them_ref = _can_cu_nguon(o)
     loai = "luu_y" if ten in _THAN_SAT_LUU_Y else "diem_manh"
-    return _hop_kb(ma, {"loai": loai, **o}, f"ts.{slug(ten)}", cu, 0.8 if loai == "diem_manh" else 1.0,
-                   L("bt_ds.ts.mac_dinh", "Một nét riêng của bạn"))
+    h = _hop_kb(ma, {"loai": loai, **o}, f"ts.{slug(ten)}", cu + cu_ref, 0.8 if loai == "diem_manh" else 1.0,
+                L("bt_ds.ts.mac_dinh", "Một nét riêng của bạn"))
+    h.update(them_ref)
+    return h
 
 
 def _chon(ma: str, cand: list[dict], hoc: tuple, da_dung: set[str], muc: str, can_cu_muc: list[str]) -> tuple:
@@ -930,12 +940,13 @@ def _chuong_tong_quan(pt: dict, cm: dict, hoc: tuple, da_dung: set[str]) -> dict
     if o and o.get("y"):
         cu = L("bt_ds.tq.noi_bat", f"Thập thần nổi nhất: {noi} ({pt['dem'][noi]} lần ở thiên can và bản khí)", tt=_tt(noi),
                so=pt["dem"][noi])
-        cand.append(_hop("diem_manh", _tieu_de(o["y"], L("bt_ds.tq.md_noi", "Nét nổi bật của bạn")), o["y"], [cu],
-                         _mm("tong_quan", "noi_bat", slug(noi), "manh"), 1.6, loi_khuyen=o.get("loi_khuyen")))
+        cu_ref, them_ref = _can_cu_nguon(o)
+        cand.append(_hop("diem_manh", _tieu_de(o["y"], L("bt_ds.tq.md_noi", "Nét nổi bật của bạn")), o["y"], [cu, *cu_ref],
+                         _mm("tong_quan", "noi_bat", slug(noi), "manh"), 1.6, loi_khuyen=o.get("loi_khuyen"), **them_ref))
         if o.get("de_vap"):
-            cand.append(_hop("luu_y", _tieu_de(o["de_vap"], L("bt_ds.tq.md_de_y", "Điều nên để ý ở chính mình")), o["de_vap"], [cu],
+            cand.append(_hop("luu_y", _tieu_de(o["de_vap"], L("bt_ds.tq.md_de_y", "Điều nên để ý ở chính mình")), o["de_vap"], [cu, *cu_ref],
                              _mm("tong_quan", "noi_bat", slug(noi), "vap"), 1.5, huong=o.get("loi_khuyen"),
-                             _cd=CHU_DE_VAP["noi_bat"].get(noi)))
+                             _cd=CHU_DE_VAP["noi_bat"].get(noi), **them_ref))
     cc = ls["dung_than"]["cach_cuc"]
     k = kb.cach(cc["ma"]) or {}
     cu_cach = L("bt_ds.tq.cu_cach_thau" if cc["thau"] else "bt_ds.tq.cu_cach",
@@ -1033,19 +1044,20 @@ def _chuong_ngu_hanh(pt: dict, cm: dict, hoc: tuple, da_dung: set[str]) -> dict:
     lon = max(THU_TU_HANH, key=lambda h: (tl[h], -THU_TU_HANH.index(h)))
     cand = []
     k = kb.hanh(lon)
+    cu_ref_lon, them_ref_lon = _can_cu_nguon(k)
     cu_diem = L("bt_ds.nh.cu_diem", "Điểm ngũ hành (thang điểm hệ thống): " + " · ".join(f"{h} {pt['diem'][h]:g}" for h in THU_TU_HANH),
                 ds=" · ".join(f"{_hanh(h)} {pt['diem'][h]:g}" for h in THU_TU_HANH))
     if tl[lon] >= NGUONG_DAM and k.get("thua"):
         cand.append(_hop("luu_y", k.get("tieu_de_thua") or L("bt_ds.nh.du_td", f"Phần đang dư: {lon}", hanh=_hanh(lon)), k["thua"],
-                         [L("bt_ds.nh.chiem", f"{lon} chiếm {_pct(tl[lon])} điểm ngũ hành", hanh=_hanh(lon), pct=_pct(tl[lon]))],
+                         [L("bt_ds.nh.chiem", f"{lon} chiếm {_pct(tl[lon])} điểm ngũ hành", hanh=_hanh(lon), pct=_pct(tl[lon])), *cu_ref_lon],
                          _mm("ngu_hanh", "thua", slug(lon), "vap"), 2.2,
-                         huong=k.get("thua_loi_khuyen")))
+                         huong=k.get("thua_loi_khuyen"), **them_ref_lon))
     else:
         nd = (L("bt_ds.nh.noi_nd_ten", f"Phần nổi nhất trong bạn là {lon}: {k['ten']}.", hanh=_hanh(lon), ten=k["ten"])
               if k.get("ten") else L("bt_ds.nh.noi_nd", f"Phần nổi nhất trong bạn là {lon}.", hanh=_hanh(lon)))
         cand.append(_hop("diem_manh", L("bt_ds.nh.noi_td", f"Phần nổi nhất: {lon}", hanh=_hanh(lon)), nd,
-                         [L("bt_ds.nh.chiem", f"{lon} chiếm {_pct(tl[lon])} điểm ngũ hành", hanh=_hanh(lon), pct=_pct(tl[lon]))],
-                         _mm("ngu_hanh", "noi", slug(lon), "manh"), 2.2))
+                         [L("bt_ds.nh.chiem", f"{lon} chiếm {_pct(tl[lon])} điểm ngũ hành", hanh=_hanh(lon), pct=_pct(tl[lon])), *cu_ref_lon],
+                         _mm("ngu_hanh", "noi", slug(lon), "manh"), 2.2, **them_ref_lon))
     for i, h in enumerate([h for h in THU_TU_HANH if pt["diem"][h] == 0][:2]):
         kh = kb.hanh(h)
         y = kh.get("thieu") or L("bt_ds.nh.thieu_nd", f"Lá số của bạn vắng hẳn {h}.", hanh=_hanh(h))
