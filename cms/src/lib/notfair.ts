@@ -40,7 +40,8 @@ export async function baiNotFair(slug: string): Promise<BaiNotFair | null> {
 
 // Ảnh chỉ tải từ máy chủ NotFair (+ miền thêm qua env NOTFAIR_ANH_MIEN, cách nhau dấu phẩy) — không cho bài từ xa
 // khiến CMS gọi tới địa chỉ tuỳ ý.
-const MIEN_ANH = () => ["notfair.co", ...(process.env.NOTFAIR_ANH_MIEN ?? "").split(",").map((x) => x.trim().toLowerCase()).filter(Boolean)];
+// RY-1: ảnh bài RankYak (media.rankyak.com) đi cùng đường tải này.
+const MIEN_ANH = () => ["notfair.co", "rankyak.com", ...(process.env.NOTFAIR_ANH_MIEN ?? "").split(",").map((x) => x.trim().toLowerCase()).filter(Boolean)];
 export function anhDuocTai(src: string): boolean {
   try {
     const u = new URL(src);
@@ -52,7 +53,7 @@ export function anhDuocTai(src: string): boolean {
 const LOAI_ANH: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/avif": "avif" };
 const TOI_DA = 5 * 1024 * 1024;
 
-async function taiAnh(src: string): Promise<{ data: Buffer; mimetype: string; name: string; size: number } | null> {
+async function taiAnh(src: string, tienTo = "notfair"): Promise<{ data: Buffer; mimetype: string; name: string; size: number } | null> {
   // SEC-2: tự đi theo chuyển hướng, mỗi bước kiểm lại miền (redirect "follow" từng cho đi ra địa chỉ tuỳ ý).
   let url = src, r: Response | null = null;
   for (let buoc = 0; buoc < 4; buoc++) {
@@ -70,21 +71,21 @@ async function taiAnh(src: string): Promise<{ data: Buffer; mimetype: string; na
   const buf = Buffer.from(await r.arrayBuffer());
   if (!buf.length || buf.length > TOI_DA) return null;
   const goc = new URL(src).pathname.split("/").filter(Boolean).pop()?.replace(/\.[a-z0-9]+$/i, "") || "anh";
-  return { data: buf, mimetype, name: `notfair-${goc.replace(/[^a-z0-9-]+/gi, "-").slice(0, 60)}-${Date.now().toString(36)}.${LOAI_ANH[mimetype]}`, size: buf.length };
+  return { data: buf, mimetype, name: `${tienTo}-${goc.replace(/[^a-z0-9-]+/gi, "-").slice(0, 60)}-${Date.now().toString(36)}.${LOAI_ANH[mimetype]}`, size: buf.length };
 }
 
 /** Một lượt nhập: kho ảnh hỏng ở ảnh đầu (khoá S3 sai, bucket thiếu…) thì các ảnh sau cũng hỏng → bỏ qua, chữ vẫn nhập. */
-type PhienAnh = { loiKho: string | null; heThong?: boolean };
+export type PhienAnh = { loiKho: string | null; heThong?: boolean; nguonAnh?: string; tienTo?: string };
 
-async function taoAnh(payload: Payload, req: PayloadRequest, phien: PhienAnh, src: string, alt: string, chuThich = ""): Promise<number | string | null> {
+export async function taoAnh(payload: Payload, req: PayloadRequest, phien: PhienAnh, src: string, alt: string, chuThich = ""): Promise<number | string | null> {
   if (phien.loiKho) return null;
-  const f = await taiAnh(src);
+  const f = await taiAnh(src, phien.tienTo);
   if (!f) return null;
   try {
     // KHÔNG truyền `req`: ảnh tạo trong giao dịch RIÊNG — lỗi kho làm Payload huỷ giao dịch, nếu dùng chung thì mất cả bài.
     const m = await payload.create({
       collection: "media", user: req.user, overrideAccess: Boolean(phien.heThong), file: f,
-      data: { alt: alt.slice(0, 160), chu_thich: chuThich.slice(0, 200) || undefined, nguon_anh: NGUON_ANH_NOTFAIR },
+      data: { alt: alt.slice(0, 160), chu_thich: chuThich.slice(0, 200) || undefined, nguon_anh: phien.nguonAnh ?? NGUON_ANH_NOTFAIR },
     });
     return m.id;
   } catch (e) {

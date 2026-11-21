@@ -280,9 +280,10 @@ export interface BaiViet {
   ghi_chu_kiem_dinh?: string | null;
   slug_cu?: string[] | null;
   /**
-   * Bài trao đổi: giữ nguyên các link của đối tác. Dòng ghi công "Authored with NotFair SEO" tự bỏ khi nhập / chuẩn hoá (BLOG-9).
+   * NotFair: bài trao đổi, giữ nguyên các link của đối tác (BLOG-9). RankYak: bài máy viết theo kế hoạch từ khoá, RankYak gửi bản cập nhật thì thành bản nháp mới (RY-1).
    */
-  nguon_goc?: ('cms' | 'notfair') | null;
+  nguon_goc?: ('cms' | 'notfair' | 'rankyak') | null;
+  rankyak_id?: number | null;
   notfair_lien_ket?: string[] | null;
   updatedAt: string;
   createdAt: string;
@@ -1675,6 +1676,7 @@ export interface BaiVietSelect<T extends boolean = true> {
   ghi_chu_kiem_dinh?: T;
   slug_cu?: T;
   nguon_goc?: T;
+  rankyak_id?: T;
   notfair_lien_ket?: T;
   updatedAt?: T;
   createdAt?: T;
