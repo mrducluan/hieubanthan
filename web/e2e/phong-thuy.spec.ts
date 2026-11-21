@@ -657,3 +657,21 @@ test("WS-3: trang cung phi có câu sách xưa, nguyên văn nằm sẵn trong H
   await sx.getByText(/Nguyên văn · Dương Trạch Thập Thư/).first().click();
   await expect(sx.getByTestId("sach-xua-han").first()).toBeVisible();
 });
+
+test("Dương Trạch Tam Yếu: vòng 24 Sơn trên la bàn + tra nhanh Cửa–Chủ–Bếp + áp dụng Hồ sơ nhà (sạch BM-1)", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/phong-thuy");
+  await expect(page.getByTestId("vong-24-son")).toBeVisible();
+  const ty = page.getByTestId("tam-yeu-cua-chu-bep");
+  await expect(ty).toBeVisible();
+  await ty.getByTestId("tam-yeu-cua-Càn").click();
+  await ty.getByTestId("tam-yeu-chu-Đoài").click();
+  await ty.getByTestId("tam-yeu-bep-Khôn").click();
+  await expect(ty.getByTestId("tam-yeu-the-nha")).toContainText("Vượng khí");
+  await expect(ty.getByTestId("tam-yeu-the-bep")).toContainText("Hoà khí gia đình");
+  await expect(ty.getByTestId("tam-yeu-bep-hop")).toBeVisible();
+  await expect(ty.getByTestId("tam-yeu-bep-tranh")).toBeVisible();
+  await expect(ty).not.toContainText(/YZ_SY_|trang_pdf|fengshui-yangzhai-kb|đã thẩm định/i);
+  await ty.getByTestId("tam-yeu-ap-dung").click();
+  await expect(ty.getByTestId("tam-yeu-ap-dung")).toContainText("Đã lưu vào Hồ sơ nhà");
+});
