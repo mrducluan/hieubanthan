@@ -119,7 +119,13 @@ SO: dict[str, dict] = {
     "phongthuy_sach_ghi.json": {"mang": "phongthuy", **_nv("duong_trach_thap_thu.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                     "SX-C: 116 điều về thế nhà (論宅外形, 內形篇, 何知經…) khớp kho nguồn; vế 'vì sao hợp lẽ thường' là lời biên tập")},
     "phongthuy_tam_yeu.json": {"mang": "phongthuy", "muc": "truyen_thong",
-                               "ghi_chu": "SX-C: tóm ý Dương Trạch Tam Yếu + Bát Trạch Minh Kính qua BẢN DỊCH Việt hiện đại (chưa có nguyên văn chữ Hán trong kho nguồn); du niên 64 nhà + 64 bếp khớp phép tính"},
+                               "ghi_chu": "SX-C: tóm ý Dương Trạch Tam Yếu + Bát Trạch Minh Kính qua BẢN DỊCH Việt hiện đại; du niên 64 nhà + 64 bếp khớp phép tính",
+                               "phan": {
+                                   "nguyen_van_doi_chieu": {"muc": "tom_y_co_thu",
+                                                            "ghi_chu": "10 câu 【原文】 khớp kho nguồn duong_trach_tam_yeu.json — kho nguồn là chữ máy nhận dạng từ bản in hiện đại (can_doi_chieu), chưa so bản khắc đời Thanh nên CHƯA phải mức nguyên văn"},
+                                   "cong_cu": {"muc": "bien_tap",
+                                               "ghi_chu": "Rà soát 2026-11-21: mức + lời công cụ Cửa – Chủ – Bếp; du niên tính bằng calc.phongthuy.cua_chu_bep (một bộ tính)"},
+                               }},
     "phongthuy_kb.json": {"mang": "phongthuy", "muc": "tom_y_co_thu", "phan": {
         "du_nien": _nv("duong_trach_thap_thu.json", "tests/test_kt_pt1_kho_nguon.py::test_cau_trich_kb_la_nguyen_van",
                        "KT-PT1: 8 du niên có câu «吉星三 / 凶星五» của Dương Trạch Thập Thư; phép tính du niên + bảng cung phi "

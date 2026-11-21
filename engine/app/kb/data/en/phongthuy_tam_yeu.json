@@ -1,0 +1,55 @@
+{
+ "_trang_thai": "bien_tap",
+ "_ghi_chu": "Rà soát 2026-11-21 — bản phủ tiếng Anh cho công cụ Cửa – Chủ – Bếp (ban biên tập viết, chờ người bản xứ duyệt). Lời sách xưa (nha / bep / minh_kinh) chỉ có bản Việt.",
+ "cong_cu": {
+  "ten_cap": {
+   "cua_chu": "Main door and main room",
+   "cua_bep": "Main door and stove",
+   "chu_bep": "Main room and stove"
+  },
+  "loi_cap": {
+   "thuan": {
+    "cua_chu": "The entrance and the main resting room support each other: the home feels easy to settle into and daily routines hold.",
+    "cua_bep": "The stove sits well with the entrance: cooking flows easily and family meals are easier to keep regular.",
+    "chu_bep": "Stove and main room suit each other: the person cooking and the person resting rarely get in each other's way."
+   },
+   "can_bang": {
+    "cua_chu": "Door and main room share the same direction of energy: steady, nothing added or taken away.",
+    "cua_bep": "The stove is neutral relative to the door: keep the kitchen clean and airy and it works well.",
+    "chu_bep": "Stove and main room are on equal terms: nothing to adjust."
+   },
+   "can_chu_dong": {
+    "cua_chu": "By this book, the door and the main room do not support each other: look after quiet and sleep in the main room, and choose a supportive side for the stove to rebalance.",
+    "cua_bep": "By this book, the stove does not yet suit the door: keep the kitchen dry, bright and tidy; when you next renovate, consider a better-suited side.",
+    "chu_bep": "By this book, the stove and the main room do not suit each other: keep cooking smells and heat out of the main room (a closed door, an extractor fan)."
+   }
+  },
+  "ket_luan": {
+   "thuan": "Door, main room and stove all support each other — by this book, a well-balanced home.",
+   "can_bang": "Some pairs suit each other, some do not — the home works fine with a few small adjustments.",
+   "can_chu_dong": "The door and main room do not support each other and the stove does not rebalance them — start with the stove position and how the main room is used."
+  },
+  "cung_nhom": {
+   "co": "All three sit in the same group (East group or West group).",
+   "khong": "The three are not all in the same East / West group."
+  },
+  "bep_loai": {
+   "hop": "Suits",
+   "tam": "Acceptable",
+   "tranh": "Better avoided"
+  },
+  "viec": {
+   "hop": "The stove is already on a supportive side: keep it there and keep the kitchen dry and bright.",
+   "xoay": "Free: turn the stove so the cook faces {huong}.",
+   "doi": "When you next renovate the kitchen: consider moving the stove to the {huong} side — it suits both the door and the main room.",
+   "doi_cua": "When you next renovate the kitchen: consider moving the stove to the {huong} side — it suits the main door.",
+   "giu": "Free: keep a door between kitchen and main room and run the extractor while cooking."
+  },
+  "can_cu": {
+   "cap": "{ten_cap}: {du_nien}.",
+   "sach_khac": "Another classic (Ten Books on Dwellings) advises the opposite — set the stove on a weaker side with its mouth facing a good direction. These are two different readings; we do not choose for you."
+  },
+  "luu_y_tham_khao": "These notes summarise classical texts named in each item and are for cultural reference only. They are not a personal prediction about your home and do not replace advice from an architect, doctor or lawyer; Hieuban (hieuban.com) accepts no legal responsibility for decisions made on the basis of this information.",
+  "nhom_c_an": "The book has {n} more strongly worded notes about this layout — shown only to readers aged 18 or over."
+ }
+}

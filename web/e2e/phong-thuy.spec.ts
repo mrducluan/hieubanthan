@@ -6,7 +6,7 @@ test("mệnh quái + la bàn + hướng hợp tuổi", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/phong-thuy");
   await expect(page.getByTestId("menh-quai")).toContainText("Khảm");
-  await expect(page.getByRole("img", { name: /La bàn 8 hướng/ })).toBeVisible();
+  await expect(page.getByRole("group", { name: /La bàn 8 hướng/ })).toBeVisible();
   // UI-PT 3: thẻ "Hành trình nhà bạn" — mệnh đã có, hướng nhà sẵn sàng (chưa đo), khảo sát sẵn sàng
   const ht = page.getByTestId("hanh-trinh-nha");
   await expect(ht).toContainText("mệnh Khảm");
@@ -656,4 +656,65 @@ test("WS-3: trang cung phi có câu sách xưa, nguyên văn nằm sẵn trong H
   await expect(sx).not.toContainText("bạn");
   await sx.getByText(/Nguyên văn · Dương Trạch Thập Thư/).first().click();
   await expect(sx.getByTestId("sach-xua-han").first()).toBeVisible();
+});
+
+test("Dương Trạch Tam Yếu: vòng 24 sơn + Cửa–Chủ–Bếp chạm trên sơ đồ, đủ ba cặp, lưu vị trí không đổi hướng nhà, bản Anh sạch chữ Việt", async ({ page }) => {
+  await napHoSo(page);
+  await page.addInitScript(() => {
+    if (window.localStorage.getItem("hbt.nha.v1")) return;   // chỉ gieo một lần — lần mở lại đọc bản đã lưu
+    window.localStorage.setItem(
+      "hbt.nha.v1",
+      JSON.stringify({
+        v: 1,
+        huong: "Đông",
+        huong_do: 92,
+        theo: "ban_cong",
+        loai_nha: "can_ho",
+        thanh_vien: [],
+        cap_nhat_luc: "2026-11-21T00:00:00.000Z",
+        bo_cuc: {
+          vi_tri: { ban_tho: "Đông", giuong_ngu: "Nam" },
+          dau_hieu: ["guong_doi_dien_giuong"],
+          da_xu_ly: ["guong_doi_dien_giuong"],
+        },
+      }),
+    );
+  });
+  await page.goto("/phong-thuy");
+  await expect(page.getByTestId("vong-24-son")).toBeVisible();
+  const ty = page.getByTestId("tam-yeu-cua-chu-bep");
+  await expect(ty).toBeVisible();
+  await ty.getByTestId("tam-yeu-o-Càn").click();       // đang đặt Cửa → tự chuyển sang Phòng chính
+  await ty.getByTestId("tam-yeu-o-Đoài").click();      // → Bếp
+  await ty.getByTestId("tam-yeu-o-Khôn").click();
+  await expect(ty.getByTestId("tam-yeu-ket-luan")).toBeVisible();
+  await expect(ty.getByTestId("tam-yeu-cap").locator("li")).toHaveCount(3);
+  await expect(ty.getByTestId("tam-yeu-cap")).toContainText("Phòng chính với bếp");
+  await expect(ty.getByTestId("tam-yeu-bep-goi-y").locator("button")).toHaveCount(8);
+  await expect(ty.getByTestId("tam-yeu-luu-y")).toContainText("không chịu trách nhiệm pháp lý");
+  await expect(ty).not.toContainText(/YZ_SY_|trang_pdf|fengshui-yangzhai-kb|Vượng khí|đã thẩm định/i);
+  await ty.getByTestId("tam-yeu-ap-dung").click();
+  await expect(ty.getByTestId("tam-yeu-ap-dung")).toContainText("Đã lưu vào hồ sơ nhà");
+  const saved = await page.evaluate(() => JSON.parse(window.localStorage.getItem("hbt.nha.v1") || "{}"));
+  expect(saved.huong).toBe("Đông");                    // hướng nhà đã đo giữ nguyên
+  expect(saved.huong_do).toBe(92);
+  expect(saved.theo).toBe("ban_cong");
+  expect(saved.bo_cuc?.vi_tri?.cua_chinh).toBe("Tây Bắc");
+  expect(saved.bo_cuc?.vi_tri?.phong_ngu_chinh).toBe("Tây");
+  expect(saved.bo_cuc?.vi_tri?.bep).toBe("Tây Nam");
+  expect(saved.bo_cuc?.vi_tri?.ban_tho).toBe("Đông");
+  expect(saved.bo_cuc?.dau_hieu).toContain("guong_doi_dien_giuong");
+  expect(saved.bo_cuc?.da_xu_ly).toContain("guong_doi_dien_giuong");
+
+  // Mở lại trang: ba chỗ tự điền từ hồ sơ nhà.
+  await page.reload();
+  await expect(page.getByTestId("tam-yeu-ket-luan")).toBeVisible();
+
+  // Bản tiếng Anh: cùng component, lời từ bản phủ tiếng Anh của engine, không lộ chữ Việt, không có khối sách xưa.
+  await page.goto("/en/feng-shui");
+  const tyEn = page.getByTestId("tam-yeu-cua-chu-bep");
+  await expect(tyEn.getByTestId("tam-yeu-ket-luan")).toBeVisible();
+  await expect(tyEn.getByTestId("tam-yeu-sach")).toHaveCount(0);
+  const chu = await tyEn.innerText();
+  expect(chu).not.toMatch(/[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i);
 });

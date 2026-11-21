@@ -18,7 +18,7 @@ from app.kb import phongthuy_kb as kbp
 from app.kb import tu_dien
 from app import ngon_ngu, nhat_ky
 from app.kb.loi import L
-from app.config import ENGINE_VERSION
+from app.config import ENGINE_VERSION, hom_nay_vn
 from app.hoidap import phongthuy as hoidap_pt
 from app.luangiai import phongthuy_bo_cuc as bo_cuc
 from app.luangiai import sach_ghi_mon
@@ -515,3 +515,32 @@ def api_thang_nay(inp: ThangNayInput) -> dict:
     except ValueError as e:
         raise HTTPException(422, detail=str(e)[:300])
     return {"engine_version": ENGINE_VERSION, **r}
+
+
+# --------------------------------------------------------------------------- #
+# Dương Trạch Tam Yếu — tra nhanh Cửa – Chủ – Bếp + vòng 24 sơn (rà soát 2026-11-21)
+
+_QuaiTamYeu = Literal["Càn", "Đoài", "Ly", "Chấn", "Tốn", "Khảm", "Cấn", "Khôn"]
+
+
+@router.get("/tam-yeu/so-do")
+def api_tam_yeu_so_do(
+    cua: _QuaiTamYeu = Query(..., description="Quái phương vị cửa chính (nhìn từ tâm nhà)"),
+    chu: _QuaiTamYeu | None = Query(default=None, description="Quái phương vị phòng chính"),
+    bep: _QuaiTamYeu | None = Query(default=None, description="Quái phương vị bếp"),
+    nam_sinh: int | None = Query(default=None, ge=1900, le=2100, description="Năm sinh người đọc — chỉ để biết có hiện ghi chép nhóm C"),
+    du_18: bool = Query(default=False, description="Người đọc tự xác nhận đã đủ 18 tuổi (khi không có năm sinh)"),
+) -> dict:
+    """Du niên ba cặp cửa–chủ, cửa–bếp, chủ–bếp (một bộ tính với báo cáo Nhà của bạn), mức theo thang chung, gợi ý
+    phía đặt bếp, việc nên làm và khối sách xưa theo khuôn SX-C (nhóm C chỉ khi người đọc đủ 18 tuổi)."""
+    from app.luangiai import phongthuy_tam_yeu as ty  # noqa: PLC0415
+    from app.luangiai import sach_ghi_mon  # noqa: PLC0415
+    tuoi = sach_ghi_mon.tuoi_tu(nam_sinh, hom_nay_vn()) if nam_sinh else (sach_ghi_mon.TUOI_NHOM_C if du_18 else None)
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "phongthuy_tam_yeu", **ty.so_do(cua, chu, bep, tuoi)}
+
+
+@router.get("/tam-yeu/la-ban-24-son")
+def api_tam_yeu_la_ban_24_son() -> dict:
+    """Vòng 24 sơn (tên, chữ Hán, quái, phương, khoảng độ) để web vẽ mặt la bàn — web không tự tính."""
+    from app.luangiai import phongthuy_tam_yeu as ty  # noqa: PLC0415
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "la_ban_24_son", **ty.la_ban_24_son()}

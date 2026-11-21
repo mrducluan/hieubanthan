@@ -13,6 +13,7 @@ import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 import { tenTheo, type TenHien } from "@/lib/ten-hien";
 import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
+import { taiSon24, type MucSon24 } from "@/lib/la-ban-24-son";
 
 // PT-V1 — đo hướng nhà bằng la bàn điện thoại. Web CHỈ đọc cảm biến và gửi số độ; engine đổi độ → hướng,
 // sơn, toạ, trạch, du niên. Luôn có ô nhập tay (máy tính, máy không có la bàn, la bàn nhiễu).
@@ -76,10 +77,10 @@ const doChuan = (d: number) => ((Math.round(d) % 360) + 360) % 360;
 
 /** Mặt la bàn. Có `onXoay` (máy tính, máy không có cảm biến): kéo xoay bằng chuột / ngón tay, bấm một chữ để đưa nó lên
  *  dưới kim, phím ← → chỉnh 1° (Shift: 15°) — hướng đang ở dưới kim là hướng mặt nhà. */
-function MatLaBan({ doHuong, laBan, onXoay }: { doHuong: number | null; laBan?: LaBanCaNhan | null; onXoay?: (d: number) => void }) {
+function MatLaBan({ doHuong, laBan, son24, onXoay }: { doHuong: number | null; laBan?: LaBanCaNhan | null; son24?: MucSon24[] | null; onXoay?: (d: number) => void }) {
   const keo = useRef<{ goc0: number; d0: number; x0: number; y0: number; da: boolean } | null>(null);
   const [dangKeo, setDangKeo] = useState(false);
-  const { c: t, quai } = useChuPT();
+  const { c: t, en, quai } = useChuPT();
   // Góc màn hình của con trỏ quanh tâm mặt la bàn: 0 = trên, theo chiều kim đồng hồ.
   const goc = (e: React.PointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -124,11 +125,17 @@ function MatLaBan({ doHuong, laBan, onXoay }: { doHuong: number | null; laBan?: 
             fill={laBan.huongCat.includes(h) ? "rgb(var(--jade) / 0.22)" : "rgb(var(--cinnabar) / 0.08)"} stroke="rgb(var(--line) / 0.6)" strokeWidth="0.5" />
         ))}
         {Array.from({ length: 24 }, (_, i) => (
-          <line key={i} x1="100" y1="10" x2="100" y2={i % 3 === 0 ? 22 : 16} stroke="rgb(var(--fg-faint))" strokeWidth={i % 3 === 0 ? 2 : 1}
+          <line key={i} x1="100" y1="8" x2="100" y2={i % 3 === 0 ? 20 : 14} stroke="rgb(var(--fg-faint))" strokeWidth={i % 3 === 0 ? 1.8 : 0.8}
             transform={`rotate(${i * 15} 100 100)`} />
         ))}
+        {son24 && son24.map((s) => (
+          <text key={s.son} x="100" y="27" textAnchor="middle" fontSize="5.2"
+            fill="rgb(var(--fg-muted))" transform={`rotate(${s.do_tam} 100 100)`}>
+            {en ? s.ky_hieu_han : s.son}
+          </text>
+        ))}
         {(["b", "d", "n", "t"] as const).map((k, i) => (
-          <text key={k} x="100" y="38" textAnchor="middle" fontSize="14" fontWeight="700"
+          <text key={k} x="100" y={son24 ? "40" : "38"} textAnchor="middle" fontSize={son24 ? "12" : "14"} fontWeight="700"
             fill={k === "b" ? "rgb(var(--cinnabar))" : "rgb(var(--fg-muted))"} transform={`rotate(${i * 90} 100 100)`}>{t(`dh.chu_${k}`)}</text>
         ))}
       </g>
@@ -149,6 +156,12 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
   luuNha?: boolean;
 }) {
   const [doSong, setDoSong] = useState<number | null>(null);
+  const [son24, setSon24] = useState<MucSon24[] | null>(null);
+  useEffect(() => {
+    let huy = false;
+    taiSon24().then((ds) => { if (!huy && ds) setSon24(ds); });
+    return () => { huy = true; };
+  }, []);
   const { c: t, en, huong, quai, nhom, duNien } = useChuPT();
   // Hai việc cùng một la bàn: đo hướng NHÀ (chốt → engine → hồ sơ nhà) · tìm hướng TỐT để kê bàn, đầu giường (chỉ đọc sống, không lưu).
   const [cheDo, setCheDo] = useState<"nha" | "ke_do">("nha");
@@ -314,7 +327,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
 
       <div className="mt-4 grid items-center gap-4 sm:grid-cols-[auto_1fr]">
         <div>
-          <MatLaBan doHuong={doSong} laBan={laBan} onXoay={dangDo ? undefined : (d) => { setDoSong(d); setNhap(String(d)); setLoi(null); }} />
+          <MatLaBan doHuong={doSong} laBan={laBan} son24={son24} onXoay={dangDo ? undefined : (d) => { setDoSong(d); setNhap(String(d)); setLoi(null); }} />
           <p className="text-center font-serif text-2xl text-gold" aria-live="polite">{doSong == null ? "—" : en ? `${Math.round(doSong)}° · ${huong(oHuong(doSong))}` : `${Math.round(doSong)}°`}</p>
           {!dangDo && (
             <p className="mx-auto max-w-[14rem] text-center text-[11px] text-fg-faint" data-testid="la-ban-keo-goi-y">
