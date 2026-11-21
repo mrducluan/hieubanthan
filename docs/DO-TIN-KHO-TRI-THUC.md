@@ -18,7 +18,7 @@
 | Bát tự | 3 | 1 | 1 | 4 |  |
 | Tử vi | 1 | 3 | 7 | 7 |  |
 | Kinh Dịch | 4 | 2 | 1 | 2 |  |
-| Phong thuỷ | 2 | 2 | 1 | 3 |  |
+| Phong thuỷ | 2 | 2 | 1 | 4 |  |
 | Nhân tướng | 6 | 2 | 1 |  |  |
 | Tarot | 1 |  | 1 |  |  |
 | Kỳ Môn |  | 1 |  | 1 |  |
@@ -137,7 +137,13 @@
 | Phong thuỷ | `phongthuy_kb.json` | du_nien | Có nguyên văn đối chiếu | KT-PT1: 8 du niên có câu «吉星三 / 凶星五» của Dương Trạch Thập Thư; phép tính du niên + bảng cung phi 180 năm khớp sách (test_dai_du_nien_ca_khop_phep_tinh, test_bang_cung_phi_180_nam_khop_phep_tinh); lời ý nghĩa vẫn là tóm ý |
 | Phong thuỷ | `phongthuy_kb.json` | sach_xua_nha | Có nguyên văn đối chiếu | WS-3: câu Dương Trạch Thập Thư cho khối «Sách xưa nói gì về nhà của bạn»; lời Việt là tóm ý |
 | Phong thuỷ | `phongthuy_sach_ghi.json` |  | Có nguyên văn đối chiếu | SX-C: 116 điều về thế nhà (論宅外形, 內形篇, 何知經…) khớp kho nguồn; vế 'vì sao hợp lẽ thường' là lời biên tập |
-| Phong thuỷ | `phongthuy_tam_yeu.json` |  | Tập quán / sách hiện đại tóm ý | SX-C: tóm ý Dương Trạch Tam Yếu + Bát Trạch Minh Kính qua BẢN DỊCH Việt hiện đại (chưa có nguyên văn chữ Hán trong kho nguồn); du niên 64 nhà + 64 bếp khớp phép tính |
+| Phong thuỷ | `phongthuy_tam_yeu.json` |  | Tập quán / sách hiện đại tóm ý | SX-C: tóm ý Dương Trạch Tam Yếu + Bát Trạch Minh Kính qua BẢN DỊCH Việt hiện đại; du niên 64 nhà + 64 bếp khớp phép tính; khối nguyen_van_doi_chieu đối chiếu kho nguồn duong_trach_tam_yeu.json (OCR can_doi_chieu) |
+| Phong thuỷ | `phongthuy_tam_yeu.json` | nguyen_van_doi_chieu | Tóm ý cổ thư, chưa khớp từng câu | 10 câu 【原文】 Triệu Cửu Phong khớp fixtures/nguon/duong_trach_tam_yeu.json (OCR + OpenCC s2t, giữ can_doi_chieu cho tới khi soát bản khắc đời Thanh) |
+| Phong thuỷ | `phongthuy_tam_yeu_do_hinh.json` |  | Ban biên tập soạn | Đồ hình lý thuyết, sơ đồ lưới 3×3 + Mermaid cho 64 thế nhà – 64 thế bếp và mục lục mô tả 251 biểu đồ Dương Trạch Tam Yếu (không ảnh bản quyền) |
+| Phong thuỷ | `phongthuy_tam_yeu_do_hinh.json` | do_hinh_ly_thuyet | Tóm ý cổ thư, chưa khớp từng câu | 10 đồ hình lý thuyết cổ điển gắn câu 【原文】 khớp fixtures/nguon/duong_trach_tam_yeu.json (OCR + OpenCC s2t, can_doi_chieu) |
+| Phong thuỷ | `phongthuy_tam_yeu_do_hinh.json` | so_do_64_nha | Tóm ý cổ thư, chưa khớp từng câu | 64 sơ đồ lưới Cửu Cung 3×3 + Mermaid (Cửa × Chủ) khớp phép tính app.calc.phongthuy.bang_huong |
+| Phong thuỷ | `phongthuy_tam_yeu_do_hinh.json` | so_do_64_bep | Tóm ý cổ thư, chưa khớp từng câu | 64 sơ đồ lưới Cửu Cung 3×3 + Mermaid (Bếp × Cửa) khớp phép tính app.calc.phongthuy.bang_huong |
+| Phong thuỷ | `phongthuy_tam_yeu_do_hinh.json` | muc_luc_bieu_do | Tập quán / sách hiện đại tóm ý | Mục lục mô tả tiếng Việt 251 biểu đồ chính văn (trỏ ID về kho riêng fengshui-yangzhai-kb, không ảnh bản quyền) |
 | Nhân tướng | `chi_tay_kb.json` |  | Có nguyên văn đối chiếu | Chỉ tay: 67 bài thơ vân tay quyển 10 + câu đồ hình tám cung («根基所屬», Luận thủ) khớp kho nguồn; CT-2: câu theo số đo bàn tay (`sach_do_tay`: «論手», «相指掌») + vai và lựa chọn từng cung (`cung_tay`: «根基所屬») qua bộ kiểm SX-C (tests/test_chi_tay_do.py); ngưỡng đo `do_tay` là giả định nhân trắc, can_doi_chieu; lời Việt nói giảm theo SX-C; 5 hình sách đoán về người vợ không đưa vào |
 | Nhân tướng | `chi_tay_tay_kb.json` |  | Có nguyên văn đối chiếu | TK-2 chỉ tay phương Tây: câu trích tiếng Anh Cheiro 1894 + Benham 1900 (kho nguồn lớp chữ nhận dạng, can_doi_chieu) khớp từng câu; lời Việt ban biên tập; ngưỡng số đo `do_tay` giả định, can_doi_chieu; không nhóm C |
 | Nhân tướng | `chitay_phuong_tay_kinh_dien.json` |  | Có nguyên văn đối chiếu | RS-3: 4 đường chính + 7 gò; 11 câu trích tiếng Anh khớp kho nguồn Cheiro, Palmistry for All (1916) và Dale, Indian Palmistry (1895) (chi_tay_dale_indian_palmistry.json, bản Gutenberg); lời Việt hai mặt ban biên tập viết, nháp |
