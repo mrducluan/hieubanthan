@@ -31,7 +31,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 1 Càn 乾 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "乾元亨利貞",
+    "dich": "Kiền: Đầu cả, hanh thông, lợi tốt, chính bền."
+   }
   },
   "2": {
    "ten": "Khôn",
@@ -49,7 +55,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 2 Khôn 坤 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "坤元亨利牝馬之貞君子有攸往先迷後得主利西南得朋東北喪朋安貞吉",
+    "dich": "Quẻ khôn: Đầu cả, hanh thông, Lợi về nết trinh của ngựa cái. Quân tử có sự đi. Trước mê, sau được. Chủ về lợi. Phía Tây Nam được bạn, phía Đông Bắc mất bạn. Yên phận giữ nết trinh thì tốt."
+   }
   },
   "3": {
    "ten": "Truân",
@@ -67,7 +79,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 3 Truân 屯 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "屯元亨利貞勿用有攸往利建侯",
+    "dich": "Truân đầu cả, hanh thông, lợi tốt, chính bền, chớ dùng có thửa đi, lợi về dựng tước hầu."
+   }
   },
   "4": {
    "ten": "Mông",
@@ -85,7 +103,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 4 Mông 蒙 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "䝉亨匪我求童䝉童䝉求我初筮告再三瀆瀆則不告利貞",
+    "dich": "Quẻ Mông hanh, chẳng phải ta tìm trẻ thơ, trẻ thơ tìm ta. Mới bói bảo: hai, ba lần nhàm, không bảo. Lợi về sự chính."
+   }
   },
   "5": {
    "ten": "Nhu",
@@ -103,7 +127,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 5 Nhu 需 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "需有孚光亨貞吉利渉大川",
+    "dich": "Quẻ Nhu, có đức tin, sáng láng, hanh thông, chính bền, tốt! Lợi sang sông lớn."
+   }
   },
   "6": {
    "ten": "Tụng",
@@ -121,7 +151,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 6 Tụng 訟 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "訟有孚窒惕中吉終凶利見大人不利渉大川",
+    "dich": "Kiện, có thật, bị lấp, phải sợ, vừa phải, tốt; theo đuổi đến chót, xấu; lợi về sự thấy người lớn, không lợi về sự sang sông lớn."
+   }
   },
   "7": {
    "ten": "Sư",
@@ -139,7 +175,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 7 Sư 師 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "師貞丈人吉无咎",
+    "dich": "Quân chính, bậc trượng nhân tốt, không lỗi."
+   }
   },
   "8": {
    "ten": "Tỷ",
@@ -157,7 +199,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 8 Tỷ 比 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "比吉原筮元永貞无咎不寧方來後夫凶",
+    "dich": "Liền nhau tốt, truy nguyên việc bói, đầu cả, lâu dài, chính bền, không lỗi! Chẳng yên mới lại, sau trễ trượng phu, hung! Lời Thoán nói rằng: Tỵ là tốt, tỵ là giáp lại, kẻ dưới thuận theo vậy; truy nguyên việc bói, đầu cả, lâu dài, chính bền, không lỗi, vì cứng giữa vậy, không yên mới lại, trên dưới ứng nhau vậy: sau trượng phu, hung, vì đạo cùng vậy."
+   }
   },
   "9": {
    "ten": "Tiểu Súc",
@@ -175,7 +223,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 9 Tiểu Súc 小畜 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "小畜亨密雲不雨自我西郊",
+    "dich": "Chứa nhỏ hanh thông, mây dầy không mưa, tự cõi tây ta. Lời thoán nói rằng: Quẻ tiểu súc, mềm được ngôi mà trên dưới ứng nó, gọi là chứa nhỏ."
+   }
   },
   "10": {
    "ten": "Lý",
@@ -193,7 +247,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 10 Lý 履 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "履虎尾不咥人亨",
+    "dich": "Xéo đuôi cọp, không cắn người, hanh!"
+   }
   },
   "11": {
    "ten": "Thái",
@@ -211,7 +271,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 11 Thái 泰 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "泰小徃大來吉亨",
+    "dich": "Quẻ Thái, nhỏ đi, lớn lại, lành tốt hanh thông."
+   }
   },
   "12": {
    "ten": "Bĩ",
@@ -229,7 +295,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 12 Bĩ 否 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "否之匪人不利君子貞大徃小來",
+    "dich": "Bỉ đây (?) chạng phải người. Chẳng lợi cho sự chính bền của đấng quân tử, lớn đi nhỏ lại."
+   }
   },
   "13": {
    "ten": "Đồng Nhân",
@@ -247,7 +319,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 13 Đồng Nhân 同人 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "同人于野亨利渉大川利君子貞",
+    "dich": "Cùng người ở đồng, hanh thông, lợi về sự sang sông lớn, lợi cho sự chính bền của đấng quân tử."
+   }
   },
   "14": {
    "ten": "Đại Hữu",
@@ -265,7 +343,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 14 Đại Hữu 大有 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "大有元亨",
+    "dich": "Quẻ Đại hữu cả lớn hanh thông."
+   }
   },
   "15": {
    "ten": "Khiêm",
@@ -301,7 +385,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 16 Dự 豫 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "豫利建侯行師",
+    "dich": "Quẻ Dự, lợi cho sự dựng nước hầu, trẩy quân."
+   }
   },
   "17": {
    "ten": "Tùy",
@@ -319,7 +409,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 17 Tùy 隨 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "隨元亨利貞无咎",
+    "dich": "Quẻ Tùy cả, lợi, trinh, không lỗi."
+   }
   },
   "18": {
    "ten": "Cổ",
@@ -337,7 +433,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 18 Cổ 蠱 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "蠱元亨利渉大川先甲三日後甲三日",
+    "dich": "Quẻ Cổ cả, hanh, lợi về sang sông lớn. Trước giáp ba ngày, sau giáp ba ngày."
+   }
   },
   "19": {
    "ten": "Lâm",
@@ -355,7 +457,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 19 Lâm 臨 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "臨元亨利貞至于八月有凶",
+    "dich": "Quẻ Lâm, cả, hanh, lợi, trinh, đến chưng tám tháng, có hung."
+   }
   },
   "20": {
    "ten": "Quan",
@@ -373,7 +481,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 20 Quan 觀 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "觀盥而不薦有孚顒若",
+    "dich": "Quẻ quan, rửa mà không cứng, có tin, dường cung kính vậy."
+   }
   },
   "21": {
    "ten": "Phệ Hạp",
@@ -391,7 +505,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 21 Phệ Hạp 噬嗑 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "噬嗑亨利用獄",
+    "dich": "Quẻ Phệ hạp hanh, lợi dùng việc ngục."
+   }
   },
   "22": {
    "ten": "Bí",
@@ -409,7 +529,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 22 Bí 賁 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "賁亨小利有攸往",
+    "dich": "Quẻ Bí hanh, hơi lợi có thửa đi,"
+   }
   },
   "23": {
    "ten": "Bác",
@@ -427,7 +553,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 23 Bác 剝 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "剝不利有攸往",
+    "dich": "Quẻ bác không lợi có thửa đi."
+   }
   },
   "24": {
    "ten": "Phục",
@@ -445,7 +577,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 24 Phục 復 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "反復其道七日來復利有攸往",
+    "dich": "Lật đi lật lại thửa đạo, bảy ngày lại trở lại, lợi có thửa đi."
+   }
   },
   "25": {
    "ten": "Vô Vọng",
@@ -463,7 +601,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 25 Vô Vọng 無妄 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "无妄元亨利貞其匪正有眚不利有攸往",
+    "dich": "Quẻ Vô Vọng cả hanh, lợi về sự chính bền; thửa chẳng chính có tội, không lợi có thửa đi."
+   }
   },
   "26": {
    "ten": "Đại Súc",
@@ -481,7 +625,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 26 Đại Súc 大畜 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "大畜利貞不家食吉利渉大川",
+    "dich": "Quẻ Đại Súc lợi về sự chính, chẳng ăn ở nhà, tốt lợi sang sông lớn."
+   }
   },
   "27": {
    "ten": "Di",
@@ -499,7 +649,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 27 Di 頤 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "頤貞吉觀頤自求口實",
+    "dich": "Quẻ Di chính tốt, xem sự nuôi, tự tìm cái thật của miệng."
+   }
   },
   "28": {
    "ten": "Đại Quá",
@@ -517,7 +673,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 28 Đại Quá 大過 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "大過棟橈利有攸徃亨",
+    "dich": "Quẻ Đại quá, cột ỏe, lợi có thửa đi, hanh."
+   }
   },
   "29": {
    "ten": "Khảm",
@@ -535,7 +697,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 29 Khảm 坎 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "習坎有孚維心亨行有尚",
+    "dich": "Quẻ Khảm kép, có tin, bui lòng, hanh, đi có chuộng."
+   }
   },
   "30": {
    "ten": "Ly",
@@ -553,7 +721,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 30 Ly 離 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "離利貞亨畜牝牛吉",
+    "dich": "Quẻ Ly vệ sự chính, hanh, nuôi trâu cái, tốt."
+   }
   },
   "31": {
    "ten": "Hàm",
@@ -571,7 +745,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 31 Hàm 咸 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "咸亨利貞取女吉",
+    "dich": "Quẻ Hàm hanh, lợi chính, lấy con gái, tốt."
+   }
   },
   "32": {
    "ten": "Hằng",
@@ -589,7 +769,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 32 Hằng 恆 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "恒亨无咎利貞利有攸徃",
+    "dich": "Quẻ Hằng hanh, lợi về sự chính, lợi có thửa đi."
+   }
   },
   "33": {
    "ten": "Độn",
@@ -607,7 +793,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 33 Độn 遯 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "遯亨小利貞",
+    "dich": "Quẻ độn hanh, nhỏ lợi trinh."
+   }
   },
   "34": {
    "ten": "Đại Tráng",
@@ -625,7 +817,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 34 Đại Tráng 大壯 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "大壯利貞",
+    "dich": "Quẻ Đại tráng lợi về sự chính."
+   }
   },
   "35": {
    "ten": "Tấn",
@@ -643,7 +841,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 35 Tấn 晉 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "晉康矦用錫馬蕃庶晝日三接",
+    "dich": "Quẻ Tấn, tước hầu yên dừng cho ngựa giậm nhiều, ban ngày ba lần tiếp."
+   }
   },
   "36": {
    "ten": "Minh Di",
@@ -661,7 +865,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 36 Minh Di 明夷 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "明夷利艱貞",
+    "dich": "Quẻ Minh di lợi về khó nhọc trinh chính."
+   }
   },
   "37": {
    "ten": "Gia Nhân",
@@ -679,7 +889,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 37 Gia Nhân 家人 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "家人利女貞",
+    "dich": "Quẻ gia nhân lợi về gái chính."
+   }
   },
   "38": {
    "ten": "Khuê",
@@ -697,7 +913,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 38 Khuê 睽 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "睽小事吉",
+    "dich": "Quẻ Khuê, việc nhỏ tốt."
+   }
   },
   "39": {
    "ten": "Kiển",
@@ -715,7 +937,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 39 Kiển 蹇 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "蹇利西南不利東北利見大人貞吉",
+    "dich": "Quẻ Kiển, lợi Tây Nam không lợi Đông Bắc, lợi về sự thấy người lớn, chính thì tốt."
+   }
   },
   "40": {
    "ten": "Giải",
@@ -733,7 +961,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 40 Giải 解 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "解利西南无所往其來復吉有攸往夙吉",
+    "dich": "Quẻ Giải lợi về phương Tây Nam, không thửa đi, thì lại lại, có thửa đi, sớm thì tốt."
+   }
   },
   "41": {
    "ten": "Tổn",
@@ -751,7 +985,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 41 Tổn 損 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "損有孚元吉无咎可貞利有攸往 曷之用二簋可用享",
+    "dich": "Quẻ Tổn, có tin, cả tốt, không lỗi, khá trinh, lợi có thửa đi. Chưng dùng gì? Hai quĩ khá dùng hưởng."
+   }
   },
   "42": {
    "ten": "Ích",
@@ -769,7 +1009,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 42 Ích 益 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "益利有攸往利渉大川",
+    "dich": "Quẻ Ích lợi có thửa đi, lợi về sang sông lớn."
+   }
   },
   "43": {
    "ten": "Quải",
@@ -787,7 +1033,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 43 Quải 夬 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "夬揚于王庭孚號有厲告自邑不利即戎利有攸往",
+    "dich": "Quẻ Quải, giơ chưng sân vua, tin gọi, có nguy. Bảo từ làng, chẳng lợi tới quân, lợi có thửa đi. Lời Thoán nói rằng: Quải là quyết vậy, cứng quyết mềm vậy, mạnh mà đẹp lòng quyết mà hòa."
+   }
   },
   "44": {
    "ten": "Cấu",
@@ -805,7 +1057,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 44 Cấu 姤 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "姤女壯勿用取女",
+    "dich": "Quẻ Cấu, con gái mạnh, chớ dùng lấy con gái."
+   }
   },
   "45": {
    "ten": "Tụy",
@@ -823,7 +1081,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 45 Tụy 萃 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "萃亨王假有廟 利見大人亨利貞 用大牲吉利有攸往",
+    "dich": "Quẻ Tụy hanh, vua đến có miếu. Lợi thấy bậc người lớn, hạnh, lợi về chính bền. Dùng con sinh, lớn, tốt, lợi có thửa đi."
+   }
   },
   "46": {
    "ten": "Thăng",
@@ -841,7 +1105,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 46 Thăng 升 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "升元亨用見大人勿恤南征吉",
+    "dich": "Quẻ Thăng, cả hanh, dùng thấy người lớn, chớ lo, đi về phương Nam tốt."
+   }
   },
   "47": {
    "ten": "Khốn",
@@ -859,7 +1129,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 47 Khốn 困 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "困亨貞大人吉无咎有言不信",
+    "dich": "Quẻ Khốn hanh, chính bền, người lớn tốt , không lỗi, có nói không tin."
+   }
   },
   "48": {
    "ten": "Tỉnh",
@@ -877,7 +1153,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 48 Tỉnh 井 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "井改邑不改井无喪无得往来井井 汔至亦未繘井羸其瓶凶",
+    "dich": "Quẻ Tỉnh, đổi làng chẳng đổi giếng, không mất không được, đi lại giếng giếng. Hầu đến, cũng chưa dong trạc đến giếng, hỏng thửa lọ, hung."
+   }
   },
   "49": {
    "ten": "Cách",
@@ -895,7 +1177,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 49 Cách 革 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "革已日乃孚元亨利貞悔亾",
+    "dich": "Quẻ Cách, hết ngày bèn tin, cả hanh lợi trinh, ăn năn mất."
+   }
   },
   "50": {
    "ten": "Đỉnh",
@@ -913,7 +1201,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 50 Đỉnh 鼎 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "鼎元吉亨",
+    "dich": "Quẻ Đỉnh, cả tốt hanh."
+   }
   },
   "51": {
    "ten": "Chấn",
@@ -931,7 +1225,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 51 Chấn 震 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "震亨震來虩虩笑言啞啞震驚百里不喪匕鬯",
+    "dich": "Quẻ Chấn hanh, sợ lại ngơm ngớp, cười nói khanh khách, nhức kinh trăm dậm, chẳng mất môi và rượu Xưởng."
+   }
   },
   "52": {
    "ten": "Cấn",
@@ -949,7 +1249,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 52 Cấn 艮 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "艮其背不獲其身行其庭不見其人无咎",
+    "dich": "Đậu thửa lưng, chẳng được thửa mình, đi thửa sân, chẳng thấy thửa người, không lỗi."
+   }
   },
   "53": {
    "ten": "Tiệm",
@@ -967,7 +1273,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 53 Tiệm 漸 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "漸女歸吉利貞",
+    "dich": "Quẻ Tiệm, con gái về, tốt, lợi về chính bền."
+   }
   },
   "54": {
    "ten": "Quy Muội",
@@ -985,7 +1297,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 54 Quy Muội 歸妹 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "歸妹征凶无攸利",
+    "dich": "Quẻ Qui muội, đi hung không thửa lợi."
+   }
   },
   "55": {
    "ten": "Phong",
@@ -1003,7 +1321,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 55 Phong 豐 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "豐亨王假之勿憂宜日中",
+    "dich": "Quẻ Phong hanh thông, vua đến đấy, chớ lo, nên mặt trời giữa."
+   }
   },
   "56": {
    "ten": "Lữ",
@@ -1021,7 +1345,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 56 Lữ 旅 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "旅小亨旅貞吉",
+    "dich": "Quẻ Lữ nhỏ hanh thông sự đi đường chính bền tốt."
+   }
   },
   "57": {
    "ten": "Tốn",
@@ -1039,7 +1369,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 57 Tốn 巽 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "巽小亨利有攸徃利見大人",
+    "dich": "Quẻ Tốn nhỏ hanh thông, lợi có thửa đi, lời thấy người lớn."
+   }
   },
   "58": {
    "ten": "Đoài",
@@ -1057,7 +1393,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 58 Đoài 兌 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "兑亨利貞",
+    "dich": "Đoái hanh lợi trinh. Dich nghĩa. - Quẻ Đoái hanh, lợi về chính bền."
+   }
   },
   "59": {
    "ten": "Hoán",
@@ -1075,7 +1417,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 59 Hoán 渙 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "渙亨王假有廟利涉大川利貞",
+    "dich": "Quẻ Hoán hanh, vua đến có miếu, lợi sang sông lớn, lợi về chính bền."
+   }
   },
   "60": {
    "ten": "Tiết",
@@ -1093,7 +1441,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 60 Tiết 節 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "節亨苦節不可貞",
+    "dich": "Quẻ Tiết hanh, sự dè dặt khổ không thể chính bền"
+   }
   },
   "61": {
    "ten": "Trung Phu",
@@ -1111,7 +1465,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 61 Trung Phu 中孚 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "中孚豚魚吉利渉大川利貞",
+    "dich": "Quẻ Trung phu: Cá lợn tốt, lợi sang sông lớn, lợi về chính bền."
+   }
   },
   "62": {
    "ten": "Tiểu Quá",
@@ -1129,7 +1489,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 62 Tiểu Quá 小過 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "小過亨利貞 可小事不可大事飛鳥遺之音不宜上宜下大吉",
+    "dich": "Quẻ Tiểu Quá hanh, lợi về chính bền Khá Việc nhỏ, chẳng khá việc lớn, chim bay để chưng tiếng, chẳng nên lên, nên xuống, cả tốt."
+   }
   },
   "63": {
    "ten": "Ký Tế",
@@ -1147,7 +1513,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 63 Ký Tế 既濟 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "既濟亨小利貞初吉終亂",
+    "dich": "Quẻ ký tế hanh, nhỏ lợi về chính bền, đầu tốt, chót loạn."
+   }
   },
   "64": {
    "ten": "Vị Tế",
@@ -1165,7 +1537,13 @@
    },
    "trich_dan": "Chu Dịch, quẻ 64 Vị Tế 未濟 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly"
+   "school_id": "nghia_ly",
+   "source_ref": {
+    "source_id": "kinh_dich_ngo_tat_to",
+    "ten_sach": "Chu Dịch Truyền Nghĩa",
+    "han": "未濟亨小狐汔濟濡其尾无攸利",
+    "dich": "Quẻ vị tế hanh, con cáo nhỏ hầu sang, ướt thửa đuôi, không thửa lợi."
+   }
   }
  },
  "bat_quai": {

@@ -193,10 +193,29 @@ def kiem_battu_ds_duality() -> list[str]:
     return loi
 
 
+def kiem_kinhdich_duality() -> list[str]:
+    """Build-time duality & citation lint cho 64 quẻ Kinh Dịch (`kinhdich_kb.json`)."""
+    kd_path = KB_DIR / "kinhdich_kb.json"
+    if not kd_path.exists():
+        return []
+    kd = json.loads(kd_path.read_text(encoding="utf-8"))
+    loi: list[str] = []
+    for i in range(1, 65):
+        k = str(i)
+        q = (kd.get("que") or {}).get(k) or {}
+        if not (q.get("y_chinh") and q.get("mat_toi") and q.get("loi_khuyen") and q.get("cau_tu_soi")):
+            loi.append(f"kinhdich.que.{k}: thiếu lưỡng cực y_chinh/mat_toi/loi_khuyen/cau_tu_soi")
+        ref = q.get("source_ref")
+        if ref is not None and not (ref.get("source_id") and ref.get("han") and ref.get("dich")):
+            loi.append(f"kinhdich.que.{k}: source_ref thiếu source_id/han/dich")
+    return loi
+
+
 def cmd_kiem_kb() -> int:
     kq = kiem_kb()
     kq["tuvi_ds"] = kiem_tuvi_ds_duality()
     kq["battu_ds"] = kiem_battu_ds_duality()
+    kq["kinhdich_ds"] = kiem_kinhdich_duality()
     tong = 0
     for md, loi in kq.items():
         print(f"{md:10s} {'OK' if not loi else f'{len(loi)} lỗi'}")
