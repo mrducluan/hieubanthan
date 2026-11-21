@@ -718,3 +718,89 @@ test("Dương Trạch Tam Yếu: vòng 24 sơn + Cửa–Chủ–Bếp chạm tr
   const chu = await tyEn.innerText();
   expect(chu).not.toMatch(/[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i);
 });
+
+test("VT-1: khung nhà theo tỉ lệ (máy tính) — nhà ống 4×20, bếp góc sau-phải ra phía Nam, lưu không đổi hướng nhà", async ({ page }) => {
+  await napHoSo(page);
+  await page.addInitScript(() => {
+    if (window.localStorage.getItem("hbt.nha.v1")) return;
+    window.localStorage.setItem("hbt.nha.v1", JSON.stringify({ v: 1, huong_do: 0, theo: "cua", thanh_vien: [], cap_nhat_luc: "2026-11-21T00:00:00.000Z" }));
+  });
+  await page.goto("/phong-thuy");
+  const vt = page.getByTestId("vi-tri-vat");
+  await vt.scrollIntoViewIfNeeded();
+  await vt.getByTestId("vi-tri-cach-khung").click();
+  await vt.getByTestId("vi-tri-rong").fill("4");
+  await vt.getByTestId("vi-tri-sau").fill("20");
+  const khung = vt.getByTestId("vi-tri-khung");
+  const bam = async (loai: string, x: number, y: number) => {
+    await vt.getByTestId(`vi-tri-dat-${loai}`).click();
+    await khung.scrollIntoViewIfNeeded();
+    const b = (await khung.boundingBox())!;
+    await page.mouse.click(b.x + b.width * x, b.y + b.height * y);
+  };
+  await bam("cua_chinh", 0.5, 0.02);
+  await bam("phong_ngu_chinh", 0.2, 0.85);
+  await bam("bep", 0.98, 0.98);
+  await vt.getByTestId("vi-tri-xem").click();
+  const kq = vt.getByTestId("vi-tri-ket-qua");
+  await expect(kq.getByTestId("vi-tri-vat-bep")).toContainText("phía Nam");
+  await expect(kq.getByTestId("vi-tri-vat-cua_chinh")).toContainText("phía Bắc");
+  await expect(kq.getByTestId("tam-yeu-ket-luan")).toBeVisible();
+  await expect(kq.getByTestId("tam-yeu-cap").locator("li")).toHaveCount(3);
+  await kq.getByTestId("vi-tri-luu").click();
+  const saved = await page.evaluate(() => JSON.parse(window.localStorage.getItem("hbt.nha.v1") || "{}"));
+  expect(saved.huong_do).toBe(0);
+  expect(saved.khung).toMatchObject({ rong: 4, sau: 20 });
+  expect(saved.bo_cuc?.vi_tri?.bep).toBe("Nam");
+  expect(saved.tang_do?.[0]?.vat?.bep?.diem).toBeTruthy();
+  // Bản tiếng Anh: cùng khối, số đo đã lưu tự nạp, kết quả không lộ chữ Việt.
+  await page.goto("/en/feng-shui");
+  const vtEn = page.getByTestId("vi-tri-vat");
+  await vtEn.scrollIntoViewIfNeeded();
+  await vtEn.getByTestId("vi-tri-cach-khung").click();
+  await vtEn.getByTestId("vi-tri-xem").click();
+  await expect(vtEn.getByTestId("vi-tri-ket-qua")).toBeVisible();
+  expect(await vtEn.innerText()).not.toMatch(/[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i);
+});
+
+const t2Pre = (kq: import("@playwright/test").Locator) => kq.getByTestId("vi-tri-kq-tang-2");
+
+test("VT-1: la bàn điện thoại (giả lập cảm biến) — trục nhà, ba chỗ, hai tầng", async ({ page }) => {
+  await napHoSo(page);
+  await page.addInitScript(() => {
+    window.localStorage.setItem("hbt.nha.v1", JSON.stringify({ v: 1, huong_do: 180, theo: "cua", thanh_vien: [], cap_nhat_luc: "2026-11-21T00:00:00.000Z" }));
+    (window as unknown as { __huong: number }).__huong = 0;
+    window.setInterval(() => {
+      const h = (window as unknown as { __huong: number }).__huong;
+      window.dispatchEvent(new DeviceOrientationEvent("deviceorientationabsolute", { alpha: (360 - h) % 360, beta: 5, gamma: 0, absolute: true }));
+    }, 30);
+  });
+  await page.goto("/phong-thuy");
+  const vt = page.getByTestId("vi-tri-vat");
+  await vt.scrollIntoViewIfNeeded();
+  await vt.getByTestId("vi-tri-cach-la_ban").click();
+  await vt.getByTestId("vi-tri-bat").click();
+  const chi = async (h: number) => { await page.evaluate((x) => { (window as unknown as { __huong: number }).__huong = x; }, h); await page.waitForTimeout(150); };
+  const ghiVat = async (id: string, h: number) => {
+    await chi(h);
+    await vt.getByTestId(id).click();
+    await expect(vt.getByTestId(id)).not.toContainText(/Đang ghi/, { timeout: 4000 });
+  };
+  await ghiVat("vi-tri-ghi-truc", 185);            // trục lệch +5°
+  await ghiVat("vi-tri-ghi-cua_chinh", 185);       // sau sửa → 180 (Nam)
+  await ghiVat("vi-tri-ghi-phong_ngu_chinh", 5);   // → 0 (Bắc)
+  await ghiVat("vi-tri-ghi-bep", 95);              // → 90 (Đông)
+  await vt.getByTestId("vi-tri-them-tang").click();
+  await ghiVat("vi-tri-ghi-cau_thang", 275);       // → 270 (Tây)
+  await ghiVat("vi-tri-ghi-phong_ngu_chinh", 95);  // → 90 (Đông)
+  await vt.getByTestId("vi-tri-xem").click();
+  const kq = vt.getByTestId("vi-tri-ket-qua");
+  await expect(kq).toContainText("lệch 5°");
+  await expect(t2Pre(kq)).toContainText("Đầu cầu thang với phòng chính");
+  await expect(kq.getByTestId("vi-tri-kq-tang-1").getByTestId("vi-tri-vat-bep")).toContainText("phía Đông");
+  await expect(kq.getByTestId("vi-tri-kq-tang-1").getByTestId("vi-tri-vat-cua_chinh")).toContainText("phía Nam");
+  const t2 = kq.getByTestId("vi-tri-kq-tang-2");
+  await expect(t2.getByTestId("vi-tri-vat-cau_thang")).toContainText("phía Tây");
+  await expect(t2.getByTestId("tam-yeu-ket-luan")).toBeVisible();
+  await expect(t2).toContainText("chưa đối chiếu với nguyên văn sách xưa");
+});

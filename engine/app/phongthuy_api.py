@@ -544,3 +544,90 @@ def api_tam_yeu_la_ban_24_son() -> dict:
     """Vòng 24 sơn (tên, chữ Hán, quái, phương, khoảng độ) để web vẽ mặt la bàn — web không tự tính."""
     from app.luangiai import phongthuy_tam_yeu as ty  # noqa: PLC0415
     return {"engine_version": ENGINE_VERSION, "pham_vi": "la_ban_24_son", **ty.la_ban_24_son()}
+
+
+# --------------------------------------------------------------------------- #
+# VT-1 — "Đứng giữa nhà, chĩa điện thoại" + khung nhà theo tỉ lệ, nhiều tầng (2026-11-21)
+
+class VatViTriInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    loai: Literal["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang"]
+    mau: list[float] | None = Field(default=None, min_length=1, max_length=120, description="Các mẫu la bàn (độ, bắc từ) khi chĩa máy")
+    sai_so: float | None = Field(default=None, ge=-1, le=360, description="iOS webkitCompassAccuracy (độ) nếu có")
+    diem: tuple[float, float] | None = Field(default=None, description="Điểm chạm trên khung tỉ lệ, chuẩn hoá 0..1 (x trái→phải, y trước→sau)")
+
+    @model_validator(mode="after")
+    def _mot_nguon(self) -> "VatViTriInput":
+        if (self.mau is None) == (self.diem is None):
+            raise ValueError("mỗi vật cần đúng một trong hai: mau (la bàn) hoặc diem (khung)")
+        if self.mau is not None and any(not (0 <= x < 360) for x in self.mau):
+            raise ValueError("số độ phải trong [0, 360)")
+        if self.diem is not None and not all(0 <= x <= 1 for x in self.diem):
+            raise ValueError("điểm phải trong khung 0..1")
+        return self
+
+
+class TangViTriInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    so: int = Field(ge=1, le=6)
+    vat: list[VatViTriInput] = Field(min_length=1, max_length=6)
+
+    @model_validator(mode="after")
+    def _khong_trung(self) -> "TangViTriInput":
+        if len({v.loai for v in self.vat}) != len(self.vat):
+            raise ValueError("mỗi loại vật chỉ một lần mỗi tầng")
+        return self
+
+
+class KhungNhaInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    rong: float = Field(gt=0, le=200)
+    sau: float = Field(gt=0, le=200)
+    luoi: list[str] | None = Field(default=None, min_length=3, max_length=12)
+
+
+class ViTriVatInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    huong_nha_do: float | None = Field(default=None, ge=0, lt=360)
+    truc_do: float | None = Field(default=None, ge=0, lt=360, description="Số độ khi áp cạnh máy dọc một bức tường dài")
+    truc_mau: list[float] | None = Field(default=None, min_length=1, max_length=120, description="Các mẫu la bàn khi đo trục (thay truc_do)")
+    khung: KhungNhaInput | None = None
+    nam_xay: int | None = Field(default=None, ge=1864, le=2150)
+    sinh: SinhInput | None = None
+    du_18: bool = False
+    tang: list[TangViTriInput] = Field(min_length=1, max_length=6)
+
+    @model_validator(mode="after")
+    def _khac_tang(self) -> "ViTriVatInput":
+        if len({t.so for t in self.tang}) != len(self.tang):
+            raise ValueError("mỗi tầng chỉ một lần")
+        if self.truc_mau is not None and any(not (0 <= x < 360) for x in self.truc_mau):
+            raise ValueError("số độ trục phải trong [0, 360)")
+        if any(v.diem is not None for t in self.tang for v in t.vat) and self.khung is None:
+            raise ValueError("có điểm trên khung thì cần kích thước khung")
+        return self
+
+
+@router.post("/vi-tri-vat")
+def api_vi_tri_vat(inp: ViTriVatInput) -> dict:
+    """Số độ la bàn (đứng giữa nhà chĩa máy) hoặc điểm trên khung tỉ lệ → phương, sơn của từng vật; Cửa – Chủ – Bếp từng
+    tầng; du niên với mệnh; sao Huyền Không. Không lưu gì."""
+    from app.luangiai import phongthuy_vi_tri as vtr  # noqa: PLC0415
+    from app.luangiai import sach_ghi_mon  # noqa: PLC0415
+    mq, tuoi = None, (sach_ghi_mon.TUOI_NHOM_C if inp.du_18 else None)
+    if inp.sinh:
+        s = inp.sinh.sinh()
+        mq = pt.menh_quai(s["nam"], s["gioi_tinh"], s["ngay"], s["moc_nam"])["quai"]
+        tuoi = sach_ghi_mon.tuoi_tu(s["ngay"] or s["nam"], hom_nay_vn())
+    from app.calc import vi_tri_vat as vt  # noqa: PLC0415
+    truc = vt.trung_binh_goc(inp.truc_mau)[0] if inp.truc_mau else inp.truc_do
+    try:
+        r = vtr.phan_tich([t.model_dump() for t in inp.tang], inp.huong_nha_do, truc,
+                          inp.khung.model_dump() if inp.khung else None, mq, inp.nam_xay, tuoi)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)[:300])
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "vi_tri_vat", **({"menh_quai": mq} if mq else {}), **r}
