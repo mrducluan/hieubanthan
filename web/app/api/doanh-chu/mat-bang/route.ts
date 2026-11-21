@@ -5,7 +5,7 @@ import { dauNguoiGoi, goiEngineDaKiem, laBanAnh, loiChung } from "@/lib/proxy";
 
 const Input = z.object({
   do_huong: z.number().min(0).lt(360),
-  nam_xay: z.number().int().min(1900).max(2043),
+  nam_xay: z.number().int().min(1864).max(2043).optional(),   // bỏ trống = không rõ năm xây → engine không lập bàn Huyền Không
   ngay_sinh: z.number().int().min(1).max(31),
   thang_sinh: z.number().int().min(1).max(12),
   nam_sinh: z.number().int().min(1930).max(2025),

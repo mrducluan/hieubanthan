@@ -18,7 +18,7 @@
 | Bát tự | 3 | 1 | 1 | 4 |  |
 | Tử vi | 1 | 3 | 7 | 7 |  |
 | Kinh Dịch | 4 | 2 | 1 | 2 |  |
-| Phong thuỷ | 2 | 2 | 1 | 3 |  |
+| Phong thuỷ | 2 | 2 | 1 | 4 |  |
 | Nhân tướng | 6 | 2 | 1 |  |  |
 | Tarot | 1 |  | 1 |  |  |
 | Kỳ Môn |  | 1 |  | 1 |  |
@@ -128,6 +128,7 @@
 | Kinh Dịch | `kinhdich_tra_loi.json` | kieu_cau | Ban biên tập soạn |  |
 | Kinh Dịch | `kinhdich_truyen_nghia.json` |  | Có nguyên văn đối chiếu | bản dịch Ngô Tất Tố ghép theo chữ Hán |
 | Phong thuỷ | `bo_sung_dau_hieu.json` |  | Ban biên tập soạn |  |
+| Phong thuỷ | `doanh_chu_mat_bang_kb.json` |  | Ban biên tập soạn | PR #329: lời đời thường công cụ Mặt bằng & Khai trương; phép tính lấy từ Huyền Không, Bát trạch, Hoàng lịch, Kỳ Môn có sẵn |
 | Phong thuỷ | `phongthuy_cung_menh.json` |  | Có nguyên văn đối chiếu | SX-C: chín điều bố trí × 8 cung (東/西四位宅圖說); phương + du niên khớp phép tính Bát trạch |
 | Phong thuỷ | `phongthuy_do_thi.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_doi_song.json` |  | Ban biên tập soạn |  |

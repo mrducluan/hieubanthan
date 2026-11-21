@@ -7,7 +7,8 @@ import datetime as dt
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
-from app.calc import doanh_chu, doanh_chu_lich, doanh_chu_mat_bang
+from app.calc import doanh_chu, doanh_chu_lich
+from app.luangiai import doanh_chu_mat_bang
 from app.config import ENGINE_VERSION
 
 router = APIRouter(prefix="/v1/doanh-chu", tags=["doanh-chu"])
@@ -111,7 +112,7 @@ class MatBangIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     do_huong: float = Field(..., ge=0.0, lt=360.0)
-    nam_xay: int = Field(..., ge=1900, le=2043)
+    nam_xay: int | None = Field(default=None, ge=1864, le=2043, description="Bỏ trống = không rõ năm xây (không lập bàn)")
     ngay_sinh: int = Field(..., ge=1, le=31)
     thang_sinh: int = Field(..., ge=1, le=12)
     nam_sinh: int = Field(..., ge=1930, le=2025)
@@ -125,7 +126,7 @@ def api_mat_bang(inp: MatBangIn) -> dict:
     try:
         dt.date(inp.nam_sinh, inp.thang_sinh, inp.ngay_sinh)
     except ValueError as e:
-        raise HTTPException(422, detail=f"Ngày sinh không hợp lệ: {inp.ngay_sinh}/{inp.thang_sinh}/{inp.nam_sinh}") from e
+        raise HTTPException(422, detail="ngay_sinh_khong_hop_le") from e
     kq = doanh_chu_mat_bang.kiem_tra_mat_bang(
         do_huong=inp.do_huong,
         nam_xay=inp.nam_xay,

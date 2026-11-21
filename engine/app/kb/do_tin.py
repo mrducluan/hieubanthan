@@ -153,6 +153,8 @@ SO: dict[str, dict] = {
                               "PR #320 (2026-11-20): 81/150 quy tắc giữ lại, mỗi câu Hán khớp kho nguồn Liễu Trang tướng pháp / "
                               "Thần Tướng Toàn Biên (than_tuong_toan_bien.json); lời Việt khuôn SX-C do ban biên tập viết"),
         "quy_tac_khong_dua": {"muc": "bien_tap", "ghi_chu": "69 quy tắc không đưa ra người dùng, chỉ còn mã + lý do"}}},
+    "doanh_chu_mat_bang_kb.json": {"mang": "phongthuy", "muc": "bien_tap",
+                                   "ghi_chu": "PR #329: lời đời thường công cụ Mặt bằng & Khai trương; phép tính lấy từ Huyền Không, Bát trạch, Hoàng lịch, Kỳ Môn có sẵn"},
     "chitay_phuong_tay_kinh_dien.json": {"mang": "nhantuong", **_nv("chi_tay_cheiro_palmistry_for_all.json",
                                          "tests/test_rs3_chitay_kinh_dien.py::test_moi_cau_trich_la_chuoi_con_kho_nguon",
                                          "RS-3: 4 đường chính + 7 gò; 11 câu trích tiếng Anh khớp kho nguồn Cheiro, Palmistry "

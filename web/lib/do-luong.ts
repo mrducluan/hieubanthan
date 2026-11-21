@@ -141,6 +141,8 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   du_ba: "number",      // BT-UI: daily_card_flipped — 1 = lá thứ ba (đã lật đủ ba lá của ngày)
   can_them: "string",   // BT-UI: ô "Bảy cách nhìn" còn thiếu gì trong hồ sơ (gio / gioi_tinh / noi_sinh)
   so_san_sang: "number", // BT-UI: số môn (trong 5 môn tính từ ngày sinh) đã sẵn sàng khi khối hiện ra
+  co_phi_tinh: "boolean", // DC-MB: kết quả Mặt bằng có lập được bàn Huyền Không (biết năm xây / khoảng năm) hay không
+  canh_bao: "string",   // DC-MB: mã cảnh báo hướng mặt bằng (khong_vong / kiem_huong / khong) — không độ, không năm
   qc: "string",         // META-QC: "meta" = phiên này (hoặc ≤ 30 ngày trước) vào từ quảng cáo Facebook / Instagram (lib/nguon-qc.ts)
 };
 const GIOI_HAN_CHUOI = 40;

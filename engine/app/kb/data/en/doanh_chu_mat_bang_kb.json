@@ -1,0 +1,70 @@
+{
+  "_trang_thai": "bien_tap",
+  "loai_hinh": {
+    "van_phong": "Office / Company",
+    "cua_hang": "Retail shop",
+    "quan_ca_phe": "Cafe / F&B",
+    "xuong_kho": "Workshop / Warehouse"
+  },
+  "khu": {
+    "thu_ngan": {
+      "ten": "Cashier / Sales counter",
+      "thuan_loi": "Place the cashier or sales desk in the {phuong} part of the floor: this sector holds a supportive money star in {van_ten}.",
+      "thuan_loi_bt": "Place the cashier or sales desk in the {phuong} part of the floor — a sector that suits the owner's Gua ({du_nien}).",
+      "nen_chu_y": "Keep the path in front of the counter clear and give it solid backing; avoid placing it under a heavy beam or facing a restroom door."
+    },
+    "giam_doc": {
+      "ten": "Owner / Director desk",
+      "thuan_loi": "The {phuong} sector holds a steady star for long sitting and decision-making — a good spot for the owner's desk.",
+      "thuan_loi_bt": "The {phuong} sector suits the owner's Gua ({du_nien}) — a good spot for the decision-making desk.",
+      "nen_chu_y": "Sit with a solid wall behind you and a clear view of the entrance, but not straight in line with the main door."
+    },
+    "phong_hop": {
+      "ten": "Meeting room / Partner table",
+      "thuan_loi": "The {phuong} sector supports discussion, negotiation and team planning.",
+      "thuan_loi_bt": "The {phuong} sector suits the owner's Gua ({du_nien}) — easier to keep talks open.",
+      "nen_chu_y": "Use neutral light, good airflow and balanced seating so negotiations feel less confrontational."
+    },
+    "khu_tinh": {
+      "ten": "Storage / Quiet zone in {nam}",
+      "thuan_loi": "The {phuong} sector suits tidy storage, filing or low-traffic use in {nam}, keeping the best space for clients and staff.",
+      "nen_chu_y": "In {nam} the annual stars 5 and 2 visit {phuong}: avoid major renovation, drilling, damp storage or clutter there."
+    }
+  },
+  "cua": {
+    "ten": "Main entrance / Reception",
+    "tot": "The entrance faces {phuong}, which suits the owner's Gua ({du_nien}): keep the sign bright, the entry clean and the light even.",
+    "xau": "The entrance faces {phuong}, which does not suit the owner's Gua ({du_nien}).",
+    "xau_bu": "Worth watching: no need to rebuild the door — balance it by turning the counter and the owner's seat toward {huong_tot}, and keep the entry bright and tidy.",
+    "sao_tinh": "In {nam} annual star {sao} visits the entrance: keep it tidy and avoid noisy drilling there this year.",
+    "sao_thuong": "Avoid racks or stock that block the view from the street.",
+    "bu_thuan": "A bright sign, a tidy entry and good lighting still help customers notice the shop and walk in."
+  },
+  "van_ten": "Period {van}",
+  "can_cu": {
+    "phi_tinh": "{phep} chart, Period {van} (built {nam_xay}); facing star {huong} · mountain star {son} in {cung}; annual star {nam}: {ln}.",
+    "bat_trach": "Eight Mansions: {phuong} is {du_nien} for the owner's Gua {quai}; annual star {nam}: {ln}.",
+    "cua": "Entrance {do}° ({son}) · Eight Mansions: {du_nien} · annual star {nam}: {ln}.",
+    "khu_tinh": "Annual stars {nam}: 5 and 2 sit in {phuong}."
+  },
+  "phep": {
+    "ha_quai": "Standard",
+    "the_quai": "Replacement-star"
+  },
+  "khong_ro_nam_xay": "The build year is unknown, so no Flying Star chart can be drawn (a building's stars depend on its build year). The suggestions below use Eight Mansions for the owner's Gua plus this year's annual stars. If you only recall a range, choose it to get the full chart.",
+  "canh_bao": {
+    "khong_vong": "Heading {do}° sits right on the border of two mountains (void line) — the chart may be entirely wrong. Step 1–2 m away from metal doors or frames and re-measure 2–3 times before fixing the layout.",
+    "kiem_huong": "Heading {do}° is {lech}° off the mountain's centre (more than 3°), so the replacement-star chart is used, as in the Feng Shui tool. That chart follows the Shen school's reference charts and is still awaiting a check against the original text."
+  },
+  "tong_quan": "{loai} {phan_nha}, sitting {toa} facing {huong} ({do}° · {phuong}). Put the cashier in {thu_ngan}, the owner's seat in {giam_doc}, and keep {tinh} quiet in {nam}.",
+  "phan_nha": {
+    "co": "built {nam_xay} (Period {van}, {cuc})",
+    "khong": "with unknown build year"
+  },
+  "ngay": {
+    "cach_chon": "Days the almanac lists as good for openings, not on its avoid list and not clashing with the owner's year; days without folk taboos or custom labels come first, shown in date order.",
+    "khong_co": "No day in the next 60 days is listed as good for an opening without clashing with your year.",
+    "gio_kem": "Supportive hours by Qi Men: {gio}."
+  },
+  "ranh_gioi": "Layout and opening-date suggestions from Flying Star, Eight Mansions, the traditional almanac and Qi Men; for space-planning reference only, not architectural, fire-safety or legal advice. No data is stored on our servers."
+}

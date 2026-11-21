@@ -13,6 +13,7 @@ import { ngayDongY, thuHoiDongY, useDongYDuLieu } from "@/lib/dong-y-du-lieu";
 import { DONG_Y_ANH_AI, DONG_Y_CHI_TAY, DONG_Y_DO_MAT, ngayDongYAnhMat } from "@/lib/dong-y-anh-mat";
 import { useDanhSachNha, useHoSoNha, xoaMoiNhaTrenMay } from "@/lib/ho-so-nha";
 import { useHoSo } from "@/lib/hoso";
+import { useMatBang, xoaMatBang } from "@/lib/mat-bang";
 import { useKyUc } from "@/lib/ky-uc";
 import { useNguoiThan, xoaTatCaNguoiThan } from "@/lib/nguoi-than";
 import { useGiaDinh, xoaCaNha } from "@/lib/gia-dinh";
@@ -45,6 +46,7 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
   const dongYTay = DONG_Y_CHI_TAY.use();
   const nha = useHoSoNha();
   const dsNha = useDanhSachNha();
+  const matBang = useMatBang();
   const nhac = useNhacViec();
   const user = useNguoiDung();
   const kyUc = useKyUc();
@@ -103,6 +105,9 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
           <Dong ten="Hồ sơ nhà (hướng, năm xây, người cùng ở, bố cục)" testId="dl-nha-may"
             trangThai={soNha ? `${soNha} căn trên máy này.` : "Không có."}
             nut={soNha ? <Button size="sm" variant="outline" className={NUT} onClick={() => { xoaMoiNhaTrenMay(); setBao("Đã xoá hồ sơ nhà trên máy này."); }}>Xoá hồ sơ nhà trên máy</Button> : undefined} />
+          <Dong ten="Hồ sơ cửa hàng (loại hình, hướng mặt tiền, năm xây) ở tab Mặt bằng và Khai trương" testId="dl-mat-bang"
+            trangThai={matBang ? "Đang lưu trên máy này — không gửi lên tài khoản." : "Không có."}
+            nut={matBang ? <Button size="sm" variant="outline" className={NUT} data-testid="dl-mat-bang-xoa" onClick={() => { xoaMatBang(); setBao("Đã xoá hồ sơ cửa hàng trên máy này."); }}>Xoá hồ sơ cửa hàng</Button> : undefined} />
           <Dong ten="Người nhà ở trang Nhà Tôi (tên gọi, vai, năm sinh, giới tính, ngày sinh nếu có)" testId="dl-gia-dinh"
             trangThai={<>{giaDinh?.length ? `${giaDinh.length} người trên máy này.` : "Không có."} <a href="/gia-dinh" className="text-gold underline" data-testid="dl-gia-dinh-mo">Mở trang Nhà Tôi</a></>}
             nut={giaDinh?.length ? <Button size="sm" variant="outline" className={NUT} onClick={() => { xoaCaNha(); setBao("Đã xoá người nhà trên máy này."); }}>Xoá người nhà trên máy</Button> : undefined} />
