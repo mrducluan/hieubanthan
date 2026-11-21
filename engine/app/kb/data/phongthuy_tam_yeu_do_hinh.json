@@ -664,7 +664,14 @@
     ]
    ],
    "mermaid": "flowchart LR\n  M[Cửa: Khảm · Bắc] -->|Ngũ Quỷ| C[Chủ: Cấn · Đông Bắc]",
-   "tham_chieu_bieu_do": []
+   "tham_chieu_bieu_do": [
+    {
+     "chart_id": "YZ_SY_C0374",
+     "trang_pdf": 374,
+     "trang_sach": 371,
+     "loai": "floorplan_bazao"
+    }
+   ]
   },
   "Khảm_Ly": {
    "ma": "Khảm_Ly",
@@ -1013,7 +1020,14 @@
     ]
    ],
    "mermaid": "flowchart LR\n  M[Cửa: Khôn · Tây Nam] -->|Sinh Khí| C[Chủ: Cấn · Đông Bắc]",
-   "tham_chieu_bieu_do": []
+   "tham_chieu_bieu_do": [
+    {
+     "chart_id": "YZ_SY_C0276",
+     "trang_pdf": 276,
+     "trang_sach": 273,
+     "loai": "floorplan_bazao"
+    }
+   ]
   },
   "Khôn_Ly": {
    "ma": "Khôn_Ly",
@@ -1710,7 +1724,14 @@
     ]
    ],
    "mermaid": "flowchart LR\n  M[Cửa: Tốn · Đông Nam] -->|Tuyệt Mệnh| C[Chủ: Cấn · Đông Bắc]",
-   "tham_chieu_bieu_do": []
+   "tham_chieu_bieu_do": [
+    {
+     "chart_id": "YZ_SY_C0478",
+     "trang_pdf": 478,
+     "trang_sach": 475,
+     "loai": "floorplan_bazao"
+    }
+   ]
   },
   "Tốn_Ly": {
    "ma": "Tốn_Ly",
@@ -2423,6 +2444,12 @@
    "mermaid": "flowchart LR\n  M[Cửa: Đoài · Tây] -->|Diên Niên| C[Chủ: Cấn · Đông Bắc]",
    "tham_chieu_bieu_do": [
     {
+     "chart_id": "YZ_SY_C0328",
+     "trang_pdf": 328,
+     "trang_sach": 325,
+     "loai": "floorplan_bazao"
+    },
+    {
      "chart_id": "YZ_SY_C0338",
      "trang_pdf": 338,
      "trang_sach": 335,
@@ -2727,7 +2754,14 @@
     ]
    ],
    "mermaid": "flowchart LR\n  M[Cửa: Cấn · Đông Bắc] -->|Diên Niên| C[Chủ: Đoài · Tây]",
-   "tham_chieu_bieu_do": []
+   "tham_chieu_bieu_do": [
+    {
+     "chart_id": "YZ_SY_C0308",
+     "trang_pdf": 308,
+     "trang_sach": 305,
+     "loai": "floorplan_bazao"
+    }
+   ]
   },
   "Cấn_Cấn": {
    "ma": "Cấn_Cấn",
@@ -3120,7 +3154,14 @@
     ]
    ],
    "mermaid": "flowchart LR\n  M[Cửa: Ly · Nam] -->|Hoạ Hại| C[Chủ: Cấn · Đông Bắc]",
-   "tham_chieu_bieu_do": []
+   "tham_chieu_bieu_do": [
+    {
+     "chart_id": "YZ_SY_C0416",
+     "trang_pdf": 416,
+     "trang_sach": 413,
+     "loai": "floorplan_bazao"
+    }
+   ]
   },
   "Ly_Ly": {
    "ma": "Ly_Ly",
@@ -3416,7 +3457,20 @@
     ]
    ],
    "mermaid": "flowchart LR\n  M[Cửa: Cấn · Đông Bắc] -->|Ngũ Quỷ · Tương khắc (Thổ khắc Thuỷ)| B[Bếp: Khảm · Bắc]",
-   "tham_chieu_bieu_do": []
+   "tham_chieu_bieu_do": [
+    {
+     "chart_id": "YZ_SY_C0590",
+     "trang_pdf": 590,
+     "trang_sach": 587,
+     "loai": "illustrated_diagram"
+    },
+    {
+     "chart_id": "YZ_SY_C0591",
+     "trang_pdf": 591,
+     "trang_sach": 588,
+     "loai": "illustrated_diagram"
+    }
+   ]
   },
   "Khảm_Ly": {
    "ma": "Khảm_Ly",
@@ -3942,7 +3996,14 @@
     ]
    ],
    "mermaid": "flowchart LR\n  M[Cửa: Đoài · Tây] -->|Tuyệt Mệnh · Tương khắc (Kim khắc Mộc)| B[Bếp: Chấn · Đông]",
-   "tham_chieu_bieu_do": []
+   "tham_chieu_bieu_do": [
+    {
+     "chart_id": "YZ_SY_C0595",
+     "trang_pdf": 595,
+     "trang_sach": 592,
+     "loai": "illustrated_diagram"
+    }
+   ]
   },
   "Chấn_Cấn": {
    "ma": "Chấn_Cấn",
@@ -4816,7 +4877,14 @@
     ]
    ],
    "mermaid": "flowchart LR\n  M[Cửa: Cấn · Đông Bắc] -->|Diên Niên · Tương sinh (Thổ sinh Kim)| B[Bếp: Đoài · Tây]",
-   "tham_chieu_bieu_do": []
+   "tham_chieu_bieu_do": [
+    {
+     "chart_id": "YZ_SY_C0590",
+     "trang_pdf": 590,
+     "trang_sach": 587,
+     "loai": "illustrated_diagram"
+    }
+   ]
   },
   "Đoài_Ly": {
    "ma": "Đoài_Ly",
@@ -4883,7 +4951,14 @@
     ]
    ],
    "mermaid": "flowchart LR\n  M[Cửa: Khảm · Bắc] -->|Ngũ Quỷ · Tương khắc (Thổ khắc Thuỷ)| B[Bếp: Cấn · Đông Bắc]",
-   "tham_chieu_bieu_do": []
+   "tham_chieu_bieu_do": [
+    {
+     "chart_id": "YZ_SY_C0569",
+     "trang_pdf": 569,
+     "trang_sach": 566,
+     "loai": "illustrated_diagram"
+    }
+   ]
   },
   "Cấn_Khôn": {
    "ma": "Cấn_Khôn",

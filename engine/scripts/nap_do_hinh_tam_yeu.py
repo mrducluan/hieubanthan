@@ -299,16 +299,27 @@ def build_do_hinh_ly_thuyet(thien_list: list[dict]) -> list[dict]:
 
 
 def build_so_do_64(tam_yeu: dict, charts_rows: list[tuple]) -> tuple[dict, dict]:
-    # Tạo map tìm chart_id theo tiêu đề/mô tả chứa cặp quẻ (nếu có)
-    han_quai_pair = {
-        "Càn": "乾", "Đoài": "兑", "Ly": "离", "Chấn": "震",
-        "Tốn": "巽", "Khảm": "坎", "Cấn": "艮", "Khôn": "坤",
+    # Tạo map tìm chart_id theo tiêu đề/mô tả chứa cặp quẻ (gồm cả giản thể, phồn thể, tượng quẻ & biến thể OCR)
+    han_quai_variants = {
+        "Càn": ("乾", "天"),
+        "Đoài": ("兑", "兌", "泽", "澤"),
+        "Ly": ("离", "離", "火"),
+        "Chấn": ("震", "雷"),
+        "Tốn": ("巽", "风", "風"),
+        "Khảm": ("坎", "水"),
+        "Cấn": ("艮", "山", "良"),
+        "Khôn": ("坤", "地"),
     }
-    han_quai_alt = {"Đoài": "兌", "Ly": "離", "Càn": "乾", "Chấn": "震", "Tốn": "巽", "Khảm": "坎", "Cấn": "艮", "Khôn": "坤"}
 
     def find_chart_refs(kind: str, a: str, b: str) -> list[dict]:
-        ha, hb = han_quai_pair[a], han_quai_pair[b]
-        pats = (f"{ha}门{hb}主", f"{ha}門{hb}主") if kind == "nha" else (f"{ha}灶配{hb}门", f"{ha}灶{hb}门", f"{ha}竈配{hb}門")
+        va, vb = han_quai_variants[a], han_quai_variants[b]
+        pats = []
+        for ha in va:
+            for hb in vb:
+                if kind == "nha":
+                    pats.extend((f"{ha}门{hb}主", f"{ha}門{hb}主"))
+                else:
+                    pats.extend((f"{ha}灶配{hb}门", f"{ha}灶{hb}门", f"{ha}竈配{hb}門", f"{ha}竈{hb}門"))
         hits = []
         for cid, pdf_p, book_p, ctype, ctitle, cdesc, vol in charts_rows:
             blob = f"{ctitle or ''} {cdesc or ''}"
