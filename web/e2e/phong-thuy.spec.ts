@@ -6,7 +6,7 @@ test("mệnh quái + la bàn + hướng hợp tuổi", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/phong-thuy");
   await expect(page.getByTestId("menh-quai")).toContainText("Khảm");
-  await expect(page.getByRole("img", { name: /La bàn 8 hướng/ })).toBeVisible();
+  await expect(page.getByRole("group", { name: /La bàn 8 hướng/ })).toBeVisible();
   // UI-PT 3: thẻ "Hành trình nhà bạn" — mệnh đã có, hướng nhà sẵn sàng (chưa đo), khảo sát sẵn sàng
   const ht = page.getByTestId("hanh-trinh-nha");
   await expect(ht).toContainText("mệnh Khảm");
