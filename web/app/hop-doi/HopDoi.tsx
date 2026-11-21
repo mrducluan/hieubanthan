@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { KetQuaHopDoi, type KetQuaHopDoiT } from "@/components/hop-doi/KetQuaHopDoi";
+import { TheChiaSeHopDoi } from "@/components/hop-doi/TheChiaSeHopDoi";
 import { NutChiaSe } from "@/components/chia-se/NutChiaSe";
 import { MocDocXong } from "@/components/khung/CuoiBaiDoc";
 import { CuoiPhanXem } from "@/components/cta/CuoiPhanXem";
@@ -145,7 +146,7 @@ export function HopDoi() {
             <p className="mb-4 mt-2 text-sm text-fg-muted">
               Gửi lời mời — người ấy tự nhập ngày sinh của họ, và cả hai cùng thấy kết quả. Tôn trọng dữ liệu của người khác.
             </p>
-            <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(ma) => `/hop-doi/${ma}`} nutTao="Tạo link mời"
+            <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(ma) => quanHe === "nguoi_yeu" ? `/hop-doi/${ma}` : `/hop-doi/${ma}?qh=${quanHe}`} nutTao="Tạo link mời"
               loiNhan={`${tenGoi(hoSo)} mời bạn xem hai người hợp nhau thế nào qua con số.`} />
           </Card>
         </div>
@@ -154,12 +155,13 @@ export function HopDoi() {
       {kq && (
         <>
           <KetQuaHopDoi kq={kq} tenA={tenGoi(hoSo)} tenB={ten.trim() ? tenGoi({ ho_ten: ten }) : "Người ấy"} />
+          <TheChiaSeHopDoi kq={kq} tenA={tenGoi(hoSo)} tenB={ten.trim() ? tenGoi({ ho_ten: ten }) : "Người ấy"} />
           <div className="mx-auto max-w-3xl"><MocDocXong moDun="hopdoi" /><GopY moDun="hopdoi" cauHoi="Phần so hai người có giúp bạn hiểu mối quan hệ này hơn?" /></div>
           <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2">
             <Card>
               <p className="font-serif text-lg">Mời người ấy xem cùng</p>
-              <p className="mb-4 mt-1 text-sm text-fg-muted">Người ấy sẽ tự nhập ngày sinh của họ để mở kết quả đầy đủ.</p>
-              <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(ma) => `/hop-doi/${ma}`} nutTao="Tạo link mời"
+              <p className="mb-4 mt-1 text-sm text-fg-muted">Người ấy mở link sẽ thấy đúng vai {QUAN_HE.find((q) => q.ma === quanHe)?.ten.toLowerCase() ?? "quan hệ"} bạn chọn và tự nhập ngày sinh để mở góc nhìn 2 chiều.</p>
+              <NutChiaSe loai="invite" hoSo={hoSo} duongDan={(ma) => quanHe === "nguoi_yeu" ? `/hop-doi/${ma}` : `/hop-doi/${ma}?qh=${quanHe}`} nutTao="Tạo link mời"
                 loiNhan={`${tenGoi(hoSo)} mời bạn xem hai người hợp nhau thế nào qua con số.`} />
             </Card>
             <Card className="flex flex-col justify-between">
@@ -174,9 +176,21 @@ export function HopDoi() {
           </div>
           <section className="mx-auto max-w-3xl space-y-4" data-testid="hop-doi-mo-rong-bac-1">
             {(kq.quan_he?.ma === "dong_nghiep" || kq.quan_he?.ma === "sep") && (
-              <p className="rounded-xl border border-line/70 bg-surface/40 px-4 py-3 text-xs leading-relaxed text-fg-muted" data-testid="luu-y-phap-ly-cong-viec">
-                <b className="text-fg">Lưu ý ranh giới ứng dụng:</b> Nội dung đối chiếu trong môi trường công việc chỉ dùng để tham khảo giao tiếp và văn hóa phối hợp — không dùng làm tiêu chí sàng lọc tuyển dụng hay đánh giá nhân sự.
-              </p>
+              <>
+                <Card className="flex flex-col justify-between gap-3 border-gold/35 bg-gold/[0.06] sm:flex-row sm:items-center" data-testid="cau-noi-ban-do-doi-ngu">
+                  <div>
+                    <p className="eyebrow text-gold">Phối hợp cả đội ngũ</p>
+                    <p className="mt-1 font-serif text-lg text-fg">Đang quản lý hoặc làm chung nhóm 2–8 người?</p>
+                    <p className="mt-1 text-sm text-fg-muted">Xem Bản đồ Đội ngũ để nhìn bức tranh cân bằng 5 hành, sở trường từng người và cách ghép cặp dự án.</p>
+                  </div>
+                  <Button asChild size="sm" className="shrink-0 self-start sm:self-center">
+                    <Link href="/ban-do-doi-ngu">Mở Bản đồ Đội ngũ</Link>
+                  </Button>
+                </Card>
+                <p className="rounded-xl border border-line/70 bg-surface/40 px-4 py-3 text-xs leading-relaxed text-fg-muted" data-testid="luu-y-phap-ly-cong-viec">
+                  <b className="text-fg">Lưu ý ranh giới ứng dụng:</b> Nội dung đối chiếu trong môi trường công việc chỉ dùng để tham khảo giao tiếp và văn hóa phối hợp — không dùng làm tiêu chí sàng lọc tuyển dụng hay đánh giá nhân sự.
+                </p>
+              </>
             )}
             <div className="grid gap-4 sm:grid-cols-2">
               <Card className="flex flex-col justify-between border-gold/30 bg-gold/[0.04]">
