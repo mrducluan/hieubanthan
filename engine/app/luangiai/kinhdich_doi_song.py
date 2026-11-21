@@ -265,9 +265,6 @@ def _goc_nhin_nghia_ly(que: dict, goi: dict, lv: str | None) -> dict:
                         han=chu["han"], dich=chu["dich"]))
     if lv and q.get("linh_vuc", {}).get(lv):
         can_cu.append(L("kd.nl.rieng_ve", "Riêng về {lv}: {y}", lv=lv_ten(lv), y=q["linh_vuc"][lv]))
-    ref = q.get("source_ref")
-    if ref and ref.get("han") and ref.get("dich") and not any(ref["han"] in c for c in can_cu):
-        can_cu.append(f"Nguồn {ref.get('ten_sach', 'Chu Dịch')}: «{ref['dich']}» ({ref['han']})")
     return {"muc": muc, "nhan": kb.nhan_muc(muc), "tom_tat": q.get("y_chinh", ""), "loi_chu": chu, "can_cu": can_cu}
 
 
