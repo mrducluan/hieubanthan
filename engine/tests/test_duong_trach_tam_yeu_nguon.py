@@ -169,6 +169,8 @@ def test_api_tam_yeu_so_do_cua_chu_bep():
     assert d["so_do_nha"]["du_nien"] == pt.bang_huong("Càn")[pt.QUAI["Đoài"][1]] == "Sinh Khí"
     assert d["so_do_bep"]["du_nien"] == pt.bang_huong("Càn")[pt.QUAI["Khôn"][1]] == "Diên Niên"
     assert d["so_do_nha"]["tom_y"] and d["so_do_bep"]["tom_y"]
+    assert d["so_do_nha"]["nhan_doi_thuong"] and d["so_do_nha"]["dien_giai_doi_thuong"]
+    assert d["so_do_bep"]["nhan_doi_thuong"] and d["so_do_bep"]["dien_giai_doi_thuong"]
     flat = " ".join(cell for row in d["luoi_tong_hop_3x3"] for cell in row)
     assert "Cửa" in flat and "Chủ" in flat and "Bếp" in flat
     assert d["mermaid_tong_hop"].startswith("flowchart ")

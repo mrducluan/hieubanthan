@@ -35,6 +35,50 @@ _KHOA_SO_DO_BEP = (
     "hanh_bep", "hanh_cua", "quan_he_ngu_hanh", "luoi_3x3", "mermaid",
 )
 
+# Diễn giải đời thường (natural meaning) cho người Việt — không dùng từ hù doạ hay thuật ngữ Hán-Việt nặng.
+_DOI_THUONG_DU_NIEN: dict[str, dict[str, str]] = {
+    "Sinh Khí": {
+        "nhan": "Rất thuận · Vượng khí",
+        "nha": "Luồng khí vào cửa hỗ trợ tốt cho phòng chủ: dễ tạo cảm giác sáng sủa, có đà phát triển công việc và tài chính.",
+        "bep": "Vị trí bếp đón mạch khí tốt từ cửa: dễ giữ nếp sinh hoạt ấm cúng, thuận cho sức khỏe và kinh tế gia đình.",
+    },
+    "Thiên Y": {
+        "nhan": "Thuận · Tốt sức khỏe",
+        "nha": "Bố cục êm dịu, thiên về nuôi dưỡng sức khỏe, giấc ngủ sâu và sự ổn định lâu dài cho người ở.",
+        "bep": "Bếp ở cung này rất hợp cho chuyện ăn uống, chăm sóc sức khỏe và phục hồi năng lượng cho cả nhà.",
+    },
+    "Diên Niên": {
+        "nhan": "Thuận · Hoà khí gia đình",
+        "nha": "Khí trường cân bằng, giúp các thành viên dễ đồng thuận, giữ hoà khí và gắn kết bền lâu.",
+        "bep": "Bếp giúp giữ nhịp sinh hoạt đều đặn, ấm êm bữa cơm nhà và tăng sự hoà hợp giữa các thế hệ.",
+    },
+    "Phục Vị": {
+        "nhan": "Bình ổn · Yên tĩnh",
+        "nha": "Không gian yên ả, hợp với sự tập trung, học tập, nghỉ ngơi và duy trì nhịp sống ổn định.",
+        "bep": "Bếp ở mức bình hoà, không xung đột với cửa; chỉ cần giữ sạch sẽ, thông thoáng là dùng tốt.",
+    },
+    "Hoạ Hại": {
+        "nhan": "Cần lưu ý nhẹ",
+        "nha": "Cửa và phòng chủ hơi lệch nhịp, dễ phát sinh việc lặt vặt hoặc cảm giác thiếu tập trung; nên ưu tiên đặt bếp vào cung tốt để cân lại.",
+        "bep": "Bếp rơi vào cung kém thuận với cửa, nên chú ý thông gió, gọn gàng hoặc chọn hướng miệng bếp quay về phương tốt.",
+    },
+    "Lục Sát": {
+        "nhan": "Cần chỉnh bố trí",
+        "nha": "Dòng khí giữa cửa và phòng chủ dễ gây xáo trộn nhịp nghỉ ngơi hoặc dễ bất đồng ý kiến; nên bố trí ánh sáng dịu và đặt bếp hợp thế nhà.",
+        "bep": "Vị trí bếp dễ gây bất tiện trong sinh hoạt chung; nếu chưa dời được bếp, nên giữ khu bếp sáng, khô ráo và ưu tiên hướng tốt cho phòng ngủ.",
+    },
+    "Ngũ Quỷ": {
+        "nhan": "Dễ căng thẳng · Nên cân bằng",
+        "nha": "Cửa và phòng chủ xung khí, dễ khiến người ở thấy mệt mỏi, nóng vội hoặc khó ngủ sâu; nên dùng bếp ở phương hợp để điều hoà lại.",
+        "bep": "Bếp đặt tại đây dễ tăng cảm giác bức bối, nóng nảy (theo sách xưa là thế hoả khí vượng); nên ưu tiên dời hoặc xoay miệng bếp về phương hợp.",
+    },
+    "Tuyệt Mệnh": {
+        "nhan": "Xung khí mạnh · Ưu tiên chỉnh",
+        "nha": "Cửa và phòng chủ trái nhóm mạnh nhất theo Bát Trạch; theo Dương Trạch Tam Yếu, ưu tiên hàng đầu là đặt bếp vào đúng phương hợp để giảm xung.",
+        "bep": "Vị trí bếp xung mạnh với cửa chính; nếu đang thiết kế mới hoặc cải tạo, nên tránh cung này và chọn một trong các cung 'Bếp hợp' gợi ý.",
+    },
+}
+
 
 @nap.nho
 def _dh() -> dict:
@@ -139,6 +183,10 @@ def so_do_cua_chu_bep(cua: str, chu: str | None = None, bep: str | None = None) 
             item = {k: sd[k] for k in _KHOA_SO_DO_NHA if k in sd}
             if key in ty_nha and ty_nha[key].get("y"):
                 item["tom_y"] = ty_nha[key]["y"]
+            dt = _DOI_THUONG_DU_NIEN.get(sd["du_nien"])
+            if dt:
+                item["nhan_doi_thuong"] = dt["nhan"]
+                item["dien_giai_doi_thuong"] = dt["nha"]
             ra["so_do_nha"] = item
 
     if bep:
@@ -148,6 +196,10 @@ def so_do_cua_chu_bep(cua: str, chu: str | None = None, bep: str | None = None) 
             item_b = {k: sd_b[k] for k in _KHOA_SO_DO_BEP if k in sd_b}
             if key_b in ty_bep and ty_bep[key_b].get("y"):
                 item_b["tom_y"] = ty_bep[key_b]["y"]
+            dt_b = _DOI_THUONG_DU_NIEN.get(sd_b["du_nien"])
+            if dt_b:
+                item_b["nhan_doi_thuong"] = dt_b["nhan"]
+                item_b["dien_giai_doi_thuong"] = dt_b["bep"]
             ra["so_do_bep"] = item_b
 
     if chu and bep and "so_do_nha" in ra and "so_do_bep" in ra:
