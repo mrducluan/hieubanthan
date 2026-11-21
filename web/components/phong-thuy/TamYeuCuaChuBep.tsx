@@ -28,7 +28,7 @@ const BIEU_TUONG = { cua: Compass, chu: Home, bep: Flame } as const;
 
 interface Cap { cap: string; ten: string; tu: string; den: string; du_nien: string; muc: Muc; loi: string }
 interface GoiYBep { quai: string; huong: string; du_nien_cua: string; du_nien_chu: string | null; loai: "hop" | "tam" | "tranh"; nhan: string }
-interface TamYeuRes {
+export interface TamYeuRes {
   cap: Cap[];
   ket_luan: { muc: Muc; loi: string } | null;
   bep_goi_y: GoiYBep[];
@@ -53,7 +53,6 @@ export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: stri
   const [loi, setLoi] = useState(false);
   const [daLuu, setDaLuu] = useState(false);
   const daDien = useRef(false);
-  const nhanMuc = (m: Muc) => (en ? c(m === "can_chu_dong" ? "sd.luu_y" : `sd.${m}`) : NHAN_MUC[m]);
 
   // Điền sẵn một lần từ hồ sơ nhà trên máy (vị trí ba chỗ đã khảo sát).
   useEffect(() => {
@@ -120,7 +119,6 @@ export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: stri
   };
 
   const nhanO = (o: string) => THU_TU.filter((k) => vt[k] === o);
-  const ketMuc = kq?.ket_luan?.muc;
 
   return (
     <section id="tam-yeu" data-testid="tam-yeu-cua-chu-bep" aria-labelledby="tam-yeu-ten" className="glass rounded-2xl p-5 sm:p-6">
@@ -179,62 +177,7 @@ export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: stri
           {dangTai && !kq && <p className="text-sm text-fg-muted">{c("ty.dang_tai")}</p>}
           {loi && <p className="text-sm text-fg-muted">{c("ty.loi")}</p>}
 
-          {kq?.ket_luan && (
-            <div data-testid="tam-yeu-ket-luan" data-muc={ketMuc} className="chip-muc rounded-xl border p-4">
-              <p className="text-xs uppercase tracking-wide opacity-80">{c("ty.ket_luan")} · {nhanMuc(kq.ket_luan.muc)}</p>
-              <p className="mt-1 text-[0.95rem] leading-relaxed">{kq.ket_luan.loi}</p>
-            </div>
-          )}
-
-          {kq && kq.cap.length > 0 && (
-            <ul className="space-y-2" data-testid="tam-yeu-cap">
-              {kq.cap.map((p) => (
-                <li key={p.cap} className="rounded-xl border border-line/70 bg-surface/40 p-3">
-                  <p className="flex flex-wrap items-center justify-between gap-2 text-sm font-medium text-fg">
-                    {p.ten}
-                    <span className="chip-muc rounded-full border px-2 py-0.5 text-xs" data-muc={p.muc}>{nhanMuc(p.muc)}</span>
-                  </p>
-                  <p className="mt-1 text-sm leading-relaxed text-fg-muted">{p.loi}</p>
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {kq && kq.viec.length > 0 && (
-            <div className="rounded-xl border border-gold/30 bg-gold/5 p-3" data-testid="tam-yeu-viec">
-              <p className="text-sm font-medium text-fg">{c("ty.viec")}</p>
-              <ul className="mt-1.5 space-y-1.5 text-sm text-fg-muted">
-                {kq.viec.map((v, i) => (
-                  <li key={i} className="flex gap-2">
-                    <span className="shrink-0 rounded-full border border-line px-1.5 text-[10px] leading-5">{c(v.chi_phi === "0" ? "ty.mien_phi" : "ty.ton_tien")}</span>
-                    <span>{v.lam}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {kq && vt.cua && (
-            <div data-testid="tam-yeu-bep-goi-y">
-              <p className="text-sm font-medium text-fg">{c("ty.bep_goi_y")}</p>
-              <div className="mt-1.5 flex flex-wrap gap-1.5">
-                {kq.bep_goi_y.map((g) => (
-                  <button key={g.quai} type="button" data-muc={MUC_LOAI_BEP[g.loai]} data-testid={`tam-yeu-bep-${g.quai}`}
-                    onClick={() => { setDang("bep"); setVt((cu) => ({ ...cu, bep: g.huong })); setDaLuu(false); }}
-                    className={cn("chip-muc rounded-full border px-2.5 py-1 text-xs", vt.bep === g.huong && "ring-1 ring-gold")}>
-                    {tenHuong(g.huong)} · {g.nhan}{vt.bep === g.huong ? ` (${c("ty.bep_dang")})` : ""}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {kq && kq.can_cu.length > 0 && (
-            <details className="text-xs text-fg-muted">
-              <summary className="cursor-pointer text-gold">{c("ty.vi_sao")}</summary>
-              <ul className="mt-1 list-disc space-y-0.5 pl-4">{kq.can_cu.map((x, i) => <li key={i}>{x}</li>)}</ul>
-            </details>
-          )}
+          {kq && <KetQuaTamYeu kq={kq} bep={vt.bep} onChonBep={vt.cua ? (h) => { setDang("bep"); setVt((cu) => ({ ...cu, bep: h })); setDaLuu(false); } : undefined} />}
 
           {vt.cua && (vt.chu || vt.bep) && (
             <div className="flex flex-wrap items-center gap-2 text-xs">
@@ -248,26 +191,103 @@ export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: stri
         </div>
       </div>
 
-      {kq && !en && (kq.sach_ghi || kq.nhom_c_an || du18) && (
-        <div className="mt-5 space-y-2" data-testid="tam-yeu-sach">
-          {kq.sach_ghi && <SachXuaGhi khoi={kq.sach_ghi} moDun="phongthuy" tieuDe={c("ty.sach_tieu_de")} />}
-          {(kq.nhom_c_an || du18) && !namSinh && (
-            <div className="rounded-xl border border-line/70 bg-surface/40 p-3 text-xs text-fg-muted" data-testid="tam-yeu-nhom-c">
-              {kq.nhom_c_an && <p>{kq.nhom_c_an.loi}</p>}
-              <label className="mt-1.5 inline-flex min-h-[36px] items-center gap-2 text-fg">
-                <input type="checkbox" checked={du18} onChange={(e) => setDu18(e.target.checked)} data-testid="tam-yeu-du-18" />
-                {c("ty.du_18_hoi")}
-              </label>
-            </div>
-          )}
-        </div>
-      )}
-
-      {kq && (
-        <p className="mt-4 text-[11px] leading-relaxed text-fg-faint" data-testid="tam-yeu-luu-y">
-          {kq.luu_y_tham_khao} {c("ty.nguon")}
-        </p>
-      )}
+      {kq && <SachTamYeu kq={kq} coNamSinh={Boolean(namSinh)} du18={du18} onDu18={setDu18} />}
     </section>
+  );
+}
+
+
+/** Phần kết quả Cửa – Chủ – Bếp (dùng chung cho tra nhanh trên sơ đồ và "Đứng giữa nhà, chĩa điện thoại"). Chỉ vẽ engine trả. */
+export function KetQuaTamYeu({ kq, bep, onChonBep }: { kq: TamYeuRes; bep?: string | null; onChonBep?: (huong: string) => void }) {
+  const { c, en, huong: tenHuong } = useChuPT();
+  const nhanMuc = (m: Muc) => (en ? c(m === "can_chu_dong" ? "sd.luu_y" : `sd.${m}`) : NHAN_MUC[m]);
+  return (
+    <>
+            {kq.ket_luan && (
+              <div data-testid="tam-yeu-ket-luan" data-muc={kq.ket_luan.muc} className="chip-muc rounded-xl border p-4">
+                <p className="text-xs uppercase tracking-wide opacity-80">{c("ty.ket_luan")} · {nhanMuc(kq.ket_luan.muc)}</p>
+                <p className="mt-1 text-[0.95rem] leading-relaxed">{kq.ket_luan.loi}</p>
+              </div>
+            )}
+
+            {kq.cap.length > 0 && (
+              <ul className="space-y-2" data-testid="tam-yeu-cap">
+                {kq.cap.map((p) => (
+                  <li key={p.cap} className="rounded-xl border border-line/70 bg-surface/40 p-3">
+                    <p className="flex flex-wrap items-center justify-between gap-2 text-sm font-medium text-fg">
+                      {p.ten}
+                      <span className="chip-muc rounded-full border px-2 py-0.5 text-xs" data-muc={p.muc}>{nhanMuc(p.muc)}</span>
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-fg-muted">{p.loi}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {kq.viec.length > 0 && (
+              <div className="rounded-xl border border-gold/30 bg-gold/5 p-3" data-testid="tam-yeu-viec">
+                <p className="text-sm font-medium text-fg">{c("ty.viec")}</p>
+                <ul className="mt-1.5 space-y-1.5 text-sm text-fg-muted">
+                  {kq.viec.map((v, i) => (
+                    <li key={i} className="flex gap-2">
+                      <span className="shrink-0 rounded-full border border-line px-1.5 text-[10px] leading-5">{c(v.chi_phi === "0" ? "ty.mien_phi" : "ty.ton_tien")}</span>
+                      <span>{v.lam}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {onChonBep && (
+              <div data-testid="tam-yeu-bep-goi-y">
+                <p className="text-sm font-medium text-fg">{c("ty.bep_goi_y")}</p>
+                <div className="mt-1.5 flex flex-wrap gap-1.5">
+                  {kq.bep_goi_y.map((g) => (
+                    <button key={g.quai} type="button" data-muc={MUC_LOAI_BEP[g.loai]} data-testid={`tam-yeu-bep-${g.quai}`}
+                      onClick={() => onChonBep(g.huong)}
+                      className={cn("chip-muc rounded-full border px-2.5 py-1 text-xs", bep === g.huong && "ring-1 ring-gold")}>
+                      {tenHuong(g.huong)} · {g.nhan}{bep === g.huong ? ` (${c("ty.bep_dang")})` : ""}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {kq.can_cu.length > 0 && (
+              <details className="text-xs text-fg-muted">
+                <summary className="cursor-pointer text-gold">{c("ty.vi_sao")}</summary>
+                <ul className="mt-1 list-disc space-y-0.5 pl-4">{kq.can_cu.map((x, i) => <li key={i}>{x}</li>)}</ul>
+              </details>
+            )}
+    </>
+  );
+}
+
+/** Khối sách xưa (SX-C, nhóm C sau cổng 18 tuổi) + lời tham khảo của Tam Yếu. */
+export function SachTamYeu({ kq, coNamSinh, du18, onDu18 }: { kq: TamYeuRes; coNamSinh: boolean; du18: boolean; onDu18: (v: boolean) => void }) {
+  const { c, en } = useChuPT();
+  return (
+    <>
+        {!en && (kq.sach_ghi || kq.nhom_c_an || du18) && (
+          <div className="mt-5 space-y-2" data-testid="tam-yeu-sach">
+            {kq.sach_ghi && <SachXuaGhi khoi={kq.sach_ghi} moDun="phongthuy" tieuDe={c("ty.sach_tieu_de")} />}
+            {(kq.nhom_c_an || du18) && !coNamSinh && (
+              <div className="rounded-xl border border-line/70 bg-surface/40 p-3 text-xs text-fg-muted" data-testid="tam-yeu-nhom-c">
+                {kq.nhom_c_an && <p>{kq.nhom_c_an.loi}</p>}
+                <label className="mt-1.5 inline-flex min-h-[36px] items-center gap-2 text-fg">
+                  <input type="checkbox" checked={du18} onChange={(e) => onDu18(e.target.checked)} data-testid="tam-yeu-du-18" />
+                  {c("ty.du_18_hoi")}
+                </label>
+              </div>
+            )}
+          </div>
+        )}
+
+        {(
+          <p className="mt-4 text-[11px] leading-relaxed text-fg-faint" data-testid="tam-yeu-luu-y">
+            {kq.luu_y_tham_khao} {c("ty.nguon")}
+          </p>
+        )}
+    </>
   );
 }

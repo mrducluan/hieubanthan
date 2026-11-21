@@ -15,6 +15,7 @@ import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { ChipPhai, DongPhai, KhungPhai, type MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { LaBan } from "@/components/huyen-hoc/LaBan";
 import { TamYeuCuaChuBep } from "@/components/phong-thuy/TamYeuCuaChuBep";
+import { DoViTriVat } from "@/components/phong-thuy/DoViTriVat";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { usePost } from "@/lib/goi-api";
 import { BaoLoi } from "@/components/khung/BaoLoi";
@@ -121,6 +122,9 @@ export function PhongThuy() {
           setDoToa(d);
           document.getElementById("huyen-khong")?.scrollIntoView({ behavior: "smooth", block: "start" });
         }} />
+      </div>
+      <div className="mx-auto mt-8 max-w-3xl scroll-mt-24">
+        <DoViTriVat sinh={sinh} />
       </div>
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24">
         {/* Căn hộ đo hướng ở ban công: hướng vừa đo không phải phía cửa căn hộ → không gợi ý cửa từ đó. */}

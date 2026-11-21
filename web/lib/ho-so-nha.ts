@@ -27,6 +27,11 @@ export const LOAI_NHA = ["nha_pho", "can_ho", "biet_thu", "nha_cap4", "khac"] as
 export type LoaiNha = (typeof LOAI_NHA)[number];
 export const TEN_LOAI_NHA: Record<LoaiNha, string> = { nha_pho: "Nhà phố", can_ho: "Chung cư", biet_thu: "Biệt thự", nha_cap4: "Nhà cấp 4", khac: "Khác" };
 
+/** VT-1: loại vật đo được khi "đứng giữa nhà, chĩa điện thoại" (khớp engine `/v1/phongthuy/vi-tri-vat`). */
+export const LOAI_VAT = ["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang"] as const;
+export type LoaiVat = (typeof LOAI_VAT)[number];
+const MauDo = z.array(z.number().min(0).lt(360)).min(1).max(30);
+
 export const HoSoNha = z.object({
   v: z.literal(1),
   /** UI-PT2 P5: mã căn khi đã "Lưu căn này để so" (khớp một mục trong danh sách căn). */
@@ -59,6 +64,21 @@ export const HoSoNha = z.object({
       ban_cong: z.tuple([z.number().int().min(0).max(11), z.number().int().min(0).max(11)]).optional(),
     }).optional(),
   }).optional(),
+  /** VT-1: "đứng giữa nhà, chĩa điện thoại" — mẫu la bàn thô (≤ 30 / vật) hoặc điểm trên khung tỉ lệ, theo tầng. Engine tính
+   *  phương / sơn; web chỉ lưu số đo người dùng đã ghi (trên máy). */
+  truc_mau: MauDo.optional(),
+  khung: z.object({
+    rong: z.number().positive().max(200),
+    sau: z.number().positive().max(200),
+    luoi: z.array(z.string().regex(/^[01]{3,12}$/)).min(3).max(12).optional(),
+  }).optional(),
+  tang_do: z.array(z.object({
+    so: z.number().int().min(1).max(6),
+    vat: z.partialRecord(z.enum(LOAI_VAT), z.object({
+      mau: MauDo.optional(),
+      diem: z.tuple([z.number().min(0).max(1), z.number().min(0).max(1)]).optional(),
+    })),
+  })).max(6).optional(),
   cap_nhat_luc: z.string(),
 });
 export type HoSoNha = z.infer<typeof HoSoNha>;

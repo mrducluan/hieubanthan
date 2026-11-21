@@ -3223,5 +3223,33 @@
   },
   "luu_y_tham_khao": "Các ý trên được rút và tóm từ sách xưa ghi ở từng mục, chỉ để tham khảo văn hoá. Đây không phải lời đoán riêng cho nhà bạn và không thay ý kiến của kiến trúc sư, bác sĩ hay luật sư; Hiểu Bản Thân (hieuban.com) không chịu trách nhiệm pháp lý về quyết định bạn đưa ra dựa trên các thông tin này.",
   "nhom_c_an": "Sách còn {n} ghi chép nặng lời hơn về thế nhà này — chỉ hiện cho người đọc từ 18 tuổi."
+ },
+ "vi_tri": {
+  "_ghi_chu": "VT-1 (2026-11-21): lời cho 'Đứng giữa nhà, chĩa điện thoại' và khung nhà theo tỉ lệ. Nháp ban biên tập.",
+  "ten": {
+   "cua_chinh": "Cửa chính",
+   "phong_ngu_chinh": "Phòng chính",
+   "bep": "Bếp",
+   "ve_sinh": "Nhà vệ sinh",
+   "ban_tho": "Bàn thờ",
+   "cau_thang": "Đầu cầu thang"
+  },
+  "lech": {
+   "ap_dung": "Ở chỗ bạn đứng, la bàn lệch {do}° so với trục nhà; mọi số đo trong nhà đã được trừ phần lệch này.",
+   "nhieu": "Chỗ bạn đứng nhiễu từ mạnh (lệch {do}° so với trục nhà): đứng cách tủ lạnh, bếp từ, khung sắt một bước rồi đo lại trục, hoặc dùng khung nhà theo tỉ lệ.",
+   "chua_truc": "Chưa đo trục nhà nên chưa trừ được nhiễu từ trong nhà. Áp cạnh điện thoại dọc một bức tường dài để kết quả chắc hơn.",
+   "chua_huong": "Chưa có hướng nhà đo ở cửa nên chưa đối chiếu được trục nhà; số đo giữ nguyên như la bàn chỉ."
+  },
+  "canh_bao": {
+   "chua_on_dinh": "Kim la bàn dao động khi đo — giữ máy nằm yên rồi chĩa lại.",
+   "sat_ranh_8": "Sát ranh phía {a} và {b}: bước lệch nửa mét rồi chĩa lại, hoặc đọc cả hai phía.",
+   "sat_ranh_son": "Sát ranh hai sơn — tên sơn chưa chắc."
+  },
+  "cua_tang": "Ở tầng trên, đầu cầu thang dẫn lên tầng được lấy làm “cửa” của tầng — đây là cách làm thường dùng ngày nay, chưa đối chiếu với nguyên văn sách xưa.",
+  "chua_du": "Tầng này cần có cửa (tầng trệt: cửa chính · tầng trên: đầu cầu thang) và ít nhất phòng chính hoặc bếp để xét Cửa – Chủ – Bếp.",
+  "ten_cap_tren": {
+   "cua_chu": "Đầu cầu thang với phòng chính",
+   "cua_bep": "Đầu cầu thang với bếp"
+  }
  }
 }

@@ -51,5 +51,32 @@
   },
   "luu_y_tham_khao": "These notes summarise classical texts named in each item and are for cultural reference only. They are not a personal prediction about your home and do not replace advice from an architect, doctor or lawyer; Hieuban (hieuban.com) accepts no legal responsibility for decisions made on the basis of this information.",
   "nhom_c_an": "The book has {n} more strongly worded notes about this layout — shown only to readers aged 18 or over."
+ },
+ "vi_tri": {
+  "ten": {
+   "cua_chinh": "Main door",
+   "phong_ngu_chinh": "Main room",
+   "bep": "Stove",
+   "ve_sinh": "Toilet",
+   "ban_tho": "Altar",
+   "cau_thang": "Top of the stairs"
+  },
+  "lech": {
+   "ap_dung": "Where you stood, the compass was off by {do}° from the house axis; every reading inside has been corrected by that amount.",
+   "nhieu": "Strong magnetic interference where you stood ({do}° off the house axis): step away from the fridge, induction hob or steel frame and measure the axis again, or use the scaled floor outline.",
+   "chua_truc": "The house axis has not been measured, so indoor interference is not corrected. Lay the edge of your phone along a long wall for a firmer result.",
+   "chua_huong": "No front-door direction yet, so the house axis cannot be checked; readings are used as the compass gave them."
+  },
+  "canh_bao": {
+   "chua_on_dinh": "The compass needle was moving while you measured — hold the phone still and point again.",
+   "sat_ranh_8": "Right on the line between {a} and {b}: step half a metre aside and point again, or read both sides.",
+   "sat_ranh_son": "Right on the line between two mountains — the mountain name is uncertain."
+  },
+  "cua_tang": "On an upper floor, the top of the stairs leading up to it is taken as that floor's “door” — a common modern practice, not yet checked against the classical texts.",
+  "chua_du": "This floor needs a door (ground floor: main door · upper floor: top of the stairs) and at least the main room or the stove to check door, room and stove.",
+  "ten_cap_tren": {
+   "cua_chu": "Top of the stairs and main room",
+   "cua_bep": "Top of the stairs and stove"
+  }
  }
 }
