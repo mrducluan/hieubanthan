@@ -122,11 +122,9 @@ export function PhongThuy() {
           document.getElementById("huyen-khong")?.scrollIntoView({ behavior: "smooth", block: "start" });
         }} />
       </div>
-      {!en && (
-        <div className="mx-auto mt-8 max-w-3xl scroll-mt-24">
-          <TamYeuCuaChuBep huongCuaGoiY={huongChot ?? hoSoNha?.huong ?? null} />
-        </div>
-      )}
+      <div className="mx-auto mt-8 max-w-3xl scroll-mt-24">
+        <TamYeuCuaChuBep huongCuaGoiY={huongChot ?? (hoSoNha?.theo === "cua" ? hoSoNha.huong : null) ?? null} />
+      </div>
       {mq?.sach_ghi && (
         <div className="mx-auto mt-8 max-w-3xl">
           <SachXuaGhi khoi={mq.sach_ghi} moDun="phongthuy" tieuDe={`Sách xưa dặn gì cho người cung ${mq.quai}`}
