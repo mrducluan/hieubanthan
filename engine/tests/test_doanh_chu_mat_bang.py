@@ -32,16 +32,31 @@ def test_mat_bang_tat_dinh_va_du_5_khu_vuc():
     kq1 = doanh_chu_mat_bang.kiem_tra_mat_bang(180.0, 2024, 15, 8, 1986, "nam", "cua_hang", d0)
     kq2 = doanh_chu_mat_bang.kiem_tra_mat_bang(180.0, 2024, 15, 8, 1986, "nam", "cua_hang", d0)
     assert kq1 == kq2
+    assert kq1["mat_bang"]["phuong_huong"] == "Nam"
+    assert kq1["mat_bang"]["son_huong"] == "Ngọ"
+    assert kq1["mat_bang"]["son_toa"] == "Tý"
+    assert kq1["mat_bang"]["canh_bao_kiem_huong"] is None
     assert len(kq1["danh_sach_khu_vuc"]) == 5
     for kv in kq1["danh_sach_khu_vuc"]:
         assert kv["thuan_loi"] and kv["nen_chu_y"]
     assert 1 <= len(kq1["ngay_khai_truong"]) <= 5
 
 
+def test_mat_bang_canh_bao_kiem_huong_vi_en():
+    d0 = dt.date(2026, 6, 1)
+    vi_kq = doanh_chu_mat_bang.kiem_tra_mat_bang(22.5, 2024, 15, 8, 1986, "nam", "cua_hang", d0)
+    assert vi_kq["mat_bang"]["canh_bao_kiem_huong"]
+    assert "Kiêm hướng" in vi_kq["mat_bang"]["canh_bao_kiem_huong"]
+    with ngon_ngu.dung("en"):
+        en_kq = doanh_chu_mat_bang.kiem_tra_mat_bang(22.5, 2024, 15, 8, 1986, "nam", "cua_hang", d0)
+    assert en_kq["mat_bang"]["canh_bao_kiem_huong"]
+    assert not _VIET.search(en_kq["mat_bang"]["canh_bao_kiem_huong"])
+
+
 def test_mat_bang_en_khong_ro_chu_viet():
     with ngon_ngu.dung("en"):
         kq = doanh_chu_mat_bang.kiem_tra_mat_bang(135.0, 2024, 15, 8, 1986, "nu", "van_phong", dt.date(2026, 6, 1))
-    leaks = [s for s in _walk_en_strings(kq, {"can_chi", "truc", "luu_y_ngay"}) if _VIET.search(s)]
+    leaks = [s for s in _walk_en_strings(kq, {"can_chi", "truc", "luu_y_ngay", "son_toa", "son_huong"}) if _VIET.search(s)]
     assert leaks == [], f"Vietnamese text leaked in EN mode: {leaks[:3]}"
 
 

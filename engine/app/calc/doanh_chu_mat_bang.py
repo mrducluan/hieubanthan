@@ -224,11 +224,26 @@ def kiem_tra_mat_bang(
             "for workspace arrangement reference only, not architectural, fire-safety, or legal advice. No data is stored."
         )
 
+    canh_bao_ma = huong_info.get("canh_bao") or toa_info.get("canh_bao")
+    if canh_bao_ma:
+        canh_bao_kiem_huong = (
+            f"Góc {round(do_huong % 360.0, 1)}° nằm sát ranh giới giữa hai sơn (Kiêm hướng / Không Vong). "
+            "Nên đứng cách cửa sắt, khung kim loại 1–2 m và đo lại la bàn 2–3 lần để lấy góc chính xác nhất trước khi chốt bố trí cố định."
+            if vi
+            else f"Heading {round(do_huong % 360.0, 1)} deg sits close to a 24-Mountain boundary (void line). "
+            "Step 1–2 m away from metal doors or frames and re-measure 2–3 times before locking fixed layout placements."
+        )
+    else:
+        canh_bao_kiem_huong = None
+
     return {
         "loai_hinh": {"ma": loai_hinh, "ten": lh_vi if vi else lh_en},
         "mat_bang": {
             "do_huong": round(do_huong % 360.0, 1),
             "phuong_huong": _p(phuong_cua),
+            "son_toa": toa_info["son"],
+            "son_huong": huong_info["son"],
+            "canh_bao_kiem_huong": canh_bao_kiem_huong,
             "nam_xay": nam_xay,
             "van": tb["van"],
             "cuc_ma": tb["cuc"],

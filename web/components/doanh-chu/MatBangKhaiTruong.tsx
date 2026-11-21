@@ -30,6 +30,9 @@ interface KetQuaMatBang {
   mat_bang: {
     do_huong: number;
     phuong_huong: string;
+    son_toa?: string;
+    son_huong?: string;
+    canh_bao_kiem_huong?: string | null;
     nam_xay: number;
     van: number;
     cuc_ma: string;
@@ -72,6 +75,7 @@ export function MatBangKhaiTruong() {
   const [loaiHinh, setLoaiHinh] = useState<LoaiHinh>("cua_hang");
   const [doHuong, setDoHuong] = useState("180");
   const [namXay, setNamXay] = useState("2024");
+  const [khongRoNamXay, setKhongRoNamXay] = useState(false);
   const [ngay, setNgay] = useState("15");
   const [thang, setThang] = useState("8");
   const [nam, setNam] = useState("1986");
@@ -161,8 +165,20 @@ export function MatBangKhaiTruong() {
 
             <div>
               <label className="mb-1 block text-xs font-medium text-fg-muted" htmlFor="mb-nam-xay">Năm xây / sửa lớn</label>
-              <input id="mb-nam-xay" inputMode="numeric" value={namXay} onChange={(e) => setNamXay(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                placeholder="2024" className="w-full rounded-lg border border-line bg-bg/70 px-3 py-2 text-sm text-fg" />
+              <input id="mb-nam-xay" inputMode="numeric" value={khongRoNamXay ? "2024" : namXay}
+                disabled={khongRoNamXay}
+                onChange={(e) => setNamXay(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                placeholder="2024" className="w-full rounded-lg border border-line bg-bg/70 px-3 py-2 text-sm text-fg disabled:opacity-60" />
+              <label className="mt-1.5 flex cursor-pointer items-center gap-1.5 text-[11px] text-fg-faint">
+                <input type="checkbox" checked={khongRoNamXay} data-testid="checkbox-khong-ro-nam-xay"
+                  onChange={(e) => {
+                    const checked = e.target.checked;
+                    setKhongRoNamXay(checked);
+                    if (checked) setNamXay("2024");
+                  }}
+                  className="size-3.5 accent-gold" />
+                <span>Không rõ năm xây (tạm tính Vận 9 hiện tại)</span>
+              </label>
             </div>
 
             <div>
@@ -209,6 +225,22 @@ export function MatBangKhaiTruong() {
               <p className="mt-1 font-serif text-xl text-fg">{kq.mat_bang.menh_quai} · {kq.mat_bang.nhom_menh}</p>
             </div>
           </div>
+
+          {kq.mat_bang.canh_bao_kiem_huong && (
+            <div data-testid="canh-bao-kiem-huong" className="flex items-start gap-2.5 rounded-2xl border border-[#f0b35c]/45 bg-[#f0b35c]/10 p-4 text-xs leading-relaxed text-fg">
+              <AlertTriangle className="mt-0.5 size-4 shrink-0 text-[#f0b35c]" aria-hidden />
+              <div>
+                <p className="font-semibold text-[#f0b35c]">Lưu ý góc đo giáp ranh (Kiêm hướng)</p>
+                <p className="mt-0.5 text-fg-muted">{kq.mat_bang.canh_bao_kiem_huong}</p>
+              </div>
+            </div>
+          )}
+
+          {khongRoNamXay && (
+            <p className="rounded-xl border border-line/70 bg-surface/40 px-3.5 py-2 text-xs text-fg-muted">
+              Đang tạm tính theo <b>Vận 9 hiện tại (2024–2043)</b> vì chưa rõ năm xây hoặc năm sửa lớn gần nhất của mặt bằng thuê.
+            </p>
+          )}
 
           <p className="rounded-2xl border border-line/80 bg-surface/50 p-4 text-sm leading-relaxed text-fg">{kq.tong_quan}</p>
 
