@@ -14,6 +14,7 @@ import { NhaCuaBan } from "@/components/huyen-hoc/NhaCuaBan";
 import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { ChipPhai, DongPhai, KhungPhai, type MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { LaBan } from "@/components/huyen-hoc/LaBan";
+import { TamYeuCuaChuBep } from "@/components/phong-thuy/TamYeuCuaChuBep";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { usePost } from "@/lib/goi-api";
 import { BaoLoi } from "@/components/khung/BaoLoi";
@@ -66,6 +67,7 @@ export function PhongThuy() {
   const ss = mq ?? (mqTruoc && mqTruoc.khoa === khoaSinh ? mqTruoc.mq : null);
   const [doToa, setDoToa] = useState<number | null>(null);
   const [doHuong, setDoHuong] = useState<number | null>(null);
+  const [huongChot, setHuongChot] = useState<string | null>(null);
   // Y6: hỏi đáp đọc hồ sơ nhà trên máy (hướng + bố cục) → "bếp nhà tôi có sao không?" trả lời theo đúng nhà; không lưu.
   const hoSoNha = useHoSoNha();
   const nhaHoi = hoSoNha && (hoSoNha.huong_do != null || hoSoNha.huong || hoSoNha.bo_cuc) ? nhaGui(hoSoNha).nha : null;
@@ -115,11 +117,16 @@ export function PhongThuy() {
       </section>
       <div className="mx-auto mt-8 max-w-3xl">
         <DoHuongDienThoai sinh={sinh} laBan={mq ? { quai: mq.quai, bang: mq.bang_huong, huongCat: mq.huong_cat, duNienY: mq.du_nien_y } : null}
-          onChot={(k) => setDoHuong(k.do_huong)} onDungToa={(d) => {
+          onChot={(k) => { setDoHuong(k.do_huong); setHuongChot(k.huong); }} onDungToa={(d) => {
           setDoToa(d);
           document.getElementById("huyen-khong")?.scrollIntoView({ behavior: "smooth", block: "start" });
         }} />
       </div>
+      {!en && (
+        <div className="mx-auto mt-8 max-w-3xl scroll-mt-24">
+          <TamYeuCuaChuBep huongCuaGoiY={huongChot ?? hoSoNha?.huong ?? null} />
+        </div>
+      )}
       {mq?.sach_ghi && (
         <div className="mx-auto mt-8 max-w-3xl">
           <SachXuaGhi khoi={mq.sach_ghi} moDun="phongthuy" tieuDe={`Sách xưa dặn gì cho người cung ${mq.quai}`}
