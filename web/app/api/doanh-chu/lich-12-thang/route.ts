@@ -8,7 +8,10 @@ const Input = z.object({
   thang: z.number().int().min(1).max(12),
   nam: z.number().int().min(1930).max(2025),
   gioi_tinh: z.enum(["nam", "nu"]).default("nam"),
-  nam_xem: z.number().int().min(2020).max(2050).default(2026),
+  // Giờ sinh "HH:MM" — bỏ trống (không biết giờ) thì engine không đọc lớp Bát tự, không đoán giờ.
+  gio: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/).optional(),
+  // Bỏ trống = 12 tháng kể từ tháng hiện tại; năm sau = từ tháng 1 của năm đó.
+  nam_xem: z.number().int().min(2020).max(2050).optional(),
   cap_quan_ly: z.enum(["chu_dn", "giam_doc", "truong_nhom"]).default("chu_dn"),
   muc_tieu: z.enum(["tang_truong", "ky_ket", "giu_tien", "ra_mat"]).default("tang_truong"),
 }).strict();

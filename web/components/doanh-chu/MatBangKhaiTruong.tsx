@@ -27,7 +27,7 @@ interface KhuVuc {
   nen_chu_y: string;
 }
 
-interface GioKyMon { khung: string; chi: string; phuong: string }
+interface GioKyMon { khung: string; chi: string; phuong: string; hop_menh?: boolean }
 
 interface NgayKhaiTruong {
   ngay: string;
@@ -453,7 +453,7 @@ export function MatBangKhaiTruong() {
                         <div className="mt-2 text-xs">
                           <p className="flex items-center gap-1 font-medium text-fg-muted"><Clock className="size-3.5" aria-hidden /> Giờ thuận (Kỳ Môn)</p>
                           <ul className="mt-0.5 space-y-0.5 text-fg">
-                            {nd.gio_ky_mon.map((g) => <li key={g.khung}>{g.chi} {g.khung} · hướng {g.phuong}</li>)}
+                            {nd.gio_ky_mon.map((g) => <li key={g.khung}>{g.chi} {g.khung} · hướng {g.phuong}{g.hop_menh && <span className="text-jade"> · hợp mệnh bạn</span>}</li>)}
                           </ul>
                         </div>
                       )}

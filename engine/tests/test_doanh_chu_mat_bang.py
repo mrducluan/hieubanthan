@@ -136,7 +136,7 @@ def test_ngay_khai_truong_tu_chon_ngay_theo_thoi_gian():
 
 
 def test_ban_anh_khong_chu_viet():
-    bo = {"can_chi", "truc", "luu_y_ngay", "ky_dan_gian", "diem_cong", "son_toa", "son_huong", "phuong_ma", "quan_he_tuoi", "am"}
+    bo = {"can_chi", "luu_y_ngay", "ky_dan_gian", "son_toa", "son_huong", "phuong_ma", "quan_he_tuoi", "am"}
     with ngon_ngu.dung("en"):
         for nx in (2024, None):
             for do in (200.0, 22.5, 135.0):
@@ -163,3 +163,39 @@ def test_api_http_nam_xay_tuy_chon_va_422():
     assert r.status_code == 200 and r.json()["mat_bang"]["co_phi_tinh"] is False
     assert c.post("/v1/doanh-chu/mat-bang", json={**base, "do_huong": 400.0}).status_code == 422
     assert c.post("/v1/doanh-chu/mat-bang", json={**base, "ngay_sinh": 31, "thang_sinh": 2}).status_code == 422
+
+
+def test_do_goc_khong_lam_tron_truoc_khi_tinh():
+    """Rà soát #329 lần 2: làm tròn trước son_tu_do có thể đẩy độ qua ranh giới sơn; 359,96° không hiện "360.0"."""
+    m = _kq(do=359.96)["mat_bang"]
+    assert m["do_huong"] == 0.0 and m["son_huong"] == hk.son_tu_do(359.96)["son"]
+    for do in (7.46, 22.46, 52.54, 187.46):
+        m = _kq(do=do)["mat_bang"]
+        assert (m["son_huong"], m["canh_bao_ma"]) == (hk.son_tu_do(do)["son"], hk.son_tu_do((do + 180) % 360)["canh_bao"])
+
+
+def test_khu_tinh_khi_sao_nam_dong_trung_cung():
+    """Năm 2031 sao năm 5 đóng Trung cung: nêu từng sao đúng chỗ, không nói "5 và 2 ghé phía Tây Nam", không bảo làm kho giữa nhà."""
+    t = _khu(_kq(tu=dt.date(2031, 6, 1)), "khu_tinh")
+    assert "số 5 ở Trung tâm" in t["nen_chu_y"] and "số 2 ở Tây Nam" in t["nen_chu_y"]
+    assert "Trung tâm" not in t["thuan_loi"] and "Khoảng giữa" in t["nen_chu_y"]
+
+
+def test_loi_khu_theo_trang_thai_that_cua_sao():
+    """Chỉ nói "sao thuận" khi sao vượng / sinh ở vận hiện tại; không thì lời Bát trạch hoặc trung tính."""
+    for do in range(0, 360, 20):
+        for nx in (1995, 2010, 2024):
+            kq = _kq(do=float(do), nam_xay=nx)
+            for ma, truc in (("thu_ngan", "huong"), ("giam_doc", "son"), ("phong_hop", "huong")):
+                x = _khu(kq, ma)
+                if "sao thuận" in x["thuan_loi"] or "sao thuận" in x["thuan_loi"].replace("có sao thuận", "sao thuận"):
+                    tb = hk.trach_ban(nx, hk.son_tu_do((do + 180) % 360)["son"],
+                                      the_quai=hk.son_tu_do((do + 180) % 360)["canh_bao"] == "kiem_huong")
+                    c = next(c for c in tb["cung"] if c["phuong"] == x["phuong_ma"])
+                    assert hk.trang_thai(c[truc], kq["mat_bang"]["van_hien_tai"]) in ("vượng", "sinh"), (do, nx, ma)
+
+
+def test_gio_ky_mon_uu_tien_huong_hop_menh():
+    for x in _kq()["ngay_khai_truong"]:
+        co = [g["hop_menh"] for g in x["gio_ky_mon"]]
+        assert co == sorted(co, reverse=True)       # giờ hợp hướng mệnh chủ đứng trước

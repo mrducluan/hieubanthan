@@ -148,3 +148,32 @@ test("KD-2c (P8) Quẻ ngày của riêng bạn: hai số tự chọn → quẻ 
   expect((await request.post("/api/kinhdich/que-rieng", { data: { so: [0, 12] } })).status()).toBe(422);
   expect((await request.post("/api/kinhdich/que-rieng", { data: { so: [7] } })).status()).toBe(422);
 });
+
+test("DC-MB: có hồ sơ cửa hàng trên máy → thẻ 'Tháng này cửa hàng của bạn' (không rõ năm xây thì không gửi năm), thẻ nhà không đổi", async ({ page }) => {
+  await napHoSo(page);
+  await page.addInitScript((v) => localStorage.setItem("hbt.mat_bang.v1", v),
+    JSON.stringify({ v: 1, loai_hinh: "cua_hang", do_huong: 180, cach_nam: "khong_ro" }));
+  const yc = page.waitForRequest((r) => r.url().includes("/api/phongthuy/thang-nay") && r.method() === "POST");
+  await page.goto("/hom-nay");
+  const body = (await yc).postDataJSON() as Record<string, unknown>;
+  expect(body).toEqual({ huong_do: 180 });
+  const the = page.getByTestId("thang-nay-cua-hang");
+  await expect(the).toBeVisible({ timeout: 15000 });
+  await expect(the).toContainText("Tháng này cửa hàng của bạn");
+  await expect(the).toContainText("phía cửa Nam");
+  await expect(the.getByRole("link", { name: /Mặt bằng/ })).toHaveAttribute("href", "/ban-do-doi-ngu");
+  // Chưa có hồ sơ nhà → thẻ nhà vẫn là lời mời đo hướng như cũ
+  await expect(page.getByTestId("thang-nay-nha-trong")).toBeVisible();
+  const sk = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []);
+  expect(sk.filter((e) => e.su_kien === "chart_interacted" && e.kind === "cua_hang_thang_nay")).toHaveLength(1);
+});
+
+test("DC-MB: hồ sơ cửa hàng biết năm xây → gửi năm xây", async ({ page }) => {
+  await napHoSo(page);
+  await page.addInitScript((v) => localStorage.setItem("hbt.mat_bang.v1", v),
+    JSON.stringify({ v: 1, loai_hinh: "cua_hang", do_huong: 90, cach_nam: "khoang", nam_xay: 2010 }));
+  const yc = page.waitForRequest((r) => r.url().includes("/api/phongthuy/thang-nay") && r.method() === "POST");
+  await page.goto("/hom-nay");
+  expect((await yc).postDataJSON()).toEqual({ huong_do: 90, nam_xay: 2010 });
+  await expect(page.getByTestId("thang-nay-cua-hang")).toBeVisible({ timeout: 15000 });
+});

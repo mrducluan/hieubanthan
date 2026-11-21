@@ -143,6 +143,8 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   so_san_sang: "number", // BT-UI: số môn (trong 5 môn tính từ ngày sinh) đã sẵn sàng khi khối hiện ra
   co_phi_tinh: "boolean", // DC-MB: kết quả Mặt bằng có lập được bàn Huyền Không (biết năm xây / khoảng năm) hay không
   canh_bao: "string",   // DC-MB: mã cảnh báo hướng mặt bằng (khong_vong / kiem_huong / khong) — không độ, không năm
+  co_gio: "boolean",    // DC-L12: Lịch 12 tháng có giờ sinh (đọc thêm lớp Bát tự) hay không — chỉ cờ
+  muc_tieu: "string",   // DC-L12: mã trọng tâm năm (tang_truong / ky_ket / giu_tien / ra_mat)
   qc: "string",         // META-QC: "meta" = phiên này (hoặc ≤ 30 ngày trước) vào từ quảng cáo Facebook / Instagram (lib/nguon-qc.ts)
 };
 const GIOI_HAN_CHUOI = 40;

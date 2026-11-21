@@ -31,7 +31,8 @@
     "khu_tinh": {
       "ten": "Kho hàng / Khu nên giữ tĩnh năm {nam}",
       "thuan_loi": "Phía {phuong} hợp làm kho gọn, tủ hồ sơ hoặc khu ít người qua lại trong năm {nam}, để dành chỗ đẹp cho khách và nhân viên.",
-      "nen_chu_y": "Năm {nam}, sao năm số 5 và số 2 ghé phía {phuong}: hạn chế sửa chữa lớn, khoan đục, để đồ ẩm mốc hay lộn xộn ở đây."
+      "nen_chu_y": "Năm {nam}, sao năm {ds}: hạn chế sửa chữa lớn, khoan đục, để đồ ẩm mốc hay lộn xộn ở những phía này.",
+      "giua": "Khoảng giữa mặt bằng nên để thoáng, không chất đồ nặng hay đặt máy móc ồn ở đó trong năm."
     }
   },
   "cua": {
@@ -43,12 +44,17 @@
     "sao_thuong": "Tránh bày kệ, hàng hoá chắn tầm nhìn của khách từ ngoài phố vào.",
     "bu_thuan": "Bảng hiệu sáng, lối vào gọn và có đèn vẫn giúp khách dễ thấy, dễ bước vào."
   },
+  "khu_trung_tinh": "Phía {phuong} là chỗ phù hợp nhất còn lại cho việc này trên mặt bằng; bố trí gọn, đủ sáng, lối đi thoáng là đủ.",
+  "khu_tinh_sao": {
+    "mot": "số {sao} ở {phuong}",
+    "noi": ", "
+  },
   "van_ten": "Vận {van}",
   "can_cu": {
     "phi_tinh": "Bàn {phep} Vận {van} (nhà xây năm {nam_xay}); sao hướng {huong} · sao sơn {son} tại cung {cung}; sao năm {nam}: {ln}.",
     "bat_trach": "Bát trạch: phía {phuong} là {du_nien} với mệnh {quai} của chủ cơ sở; sao năm {nam}: {ln}.",
     "cua": "Cửa {do}° ({son}) · Bát trạch: {du_nien} · sao năm {nam}: {ln}.",
-    "khu_tinh": "Sao năm {nam}: số 5 và số 2 đóng tại {phuong}."
+    "khu_tinh": "Sao năm {nam}: {ds}."
   },
   "phep": {
     "ha_quai": "hạ quái",

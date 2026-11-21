@@ -26,10 +26,29 @@ test("3 tab /ban-do-doi-ngu: Lịch 12 tháng → Mặt bằng (kiêm hướng �
 
   // Tab 2: Lịch Quyết Định 12 Tháng
   await page.getByTestId("tab-lich-12-thang").click();
+  // Hồ sơ không có giờ sinh → không gửi giờ; mặc định "12 tháng tới" → không gửi năm xem (engine tự lấy tháng hiện tại).
+  const yeuCauLich = page.waitForRequest((r) => r.url().includes("/api/doanh-chu/lich-12-thang") && r.method() === "POST");
   await page.getByTestId("nut-xem-lich-12-thang").click();
+  const bodyLich = (await yeuCauLich).postDataJSON() as Record<string, unknown>;
+  expect(bodyLich).not.toHaveProperty("gio");
+  expect(bodyLich).not.toHaveProperty("nam_xem");
   const kqLich = page.getByTestId("ket-qua-lich-12-thang");
   await expect(kqLich).toBeVisible({ timeout: 15000 });
   await expect(kqLich).toContainText("Tất cả 12 tháng");
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh", year: "numeric", month: "numeric" })
+    .formatToParts(new Date()).map((x) => [x.type, x.value]));
+  await expect(kqLich).toContainText(`12 tháng kể từ T${Number(p.month)}/${p.year}`);
+  await expect(kqLich.getByTestId("thieu-gio-lich-12")).toContainText("Chưa có giờ sinh");
+  await expect(kqLich.getByTestId("hai-cach-lich-12")).toHaveCount(0);
+  await expect(kqLich.getByTestId("thang-lich-12")).toHaveCount(12);
+  const thangDau = kqLich.getByTestId("thang-lich-12").first();
+  await expect(thangDau).toContainText(`Tháng ${Number(p.month)}/${p.year}`);
+  await expect(thangDau).toContainText("Tóm lại");
+  await expect(thangDau.locator("details li").first()).toBeHidden();
+  await thangDau.getByText("Vì sao nói vậy").click();
+  await expect(thangDau.locator("details li").first()).toBeVisible();
+  const sk = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []);
+  expect(sk).toContainEqual(expect.objectContaining({ su_kien: "chart_interacted", mo_dun: "doanh_chu", kind: "lich_12_xem", co_gio: false }));
 
   // Tab 3a: 200° + năm 2010 → kiêm hướng, bàn thế quái
   await page.getByTestId("tab-mat-bang").click();
@@ -73,4 +92,20 @@ test("3 tab /ban-do-doi-ngu: Lịch 12 tháng → Mặt bằng (kiêm hướng �
   await page.getByTestId("tab-mat-bang").click();
   await expect(page.locator("#mb-do")).toHaveValue("180");
   await expect(page.getByTestId("checkbox-khong-ro-nam-xay")).toBeChecked();
+});
+
+test("Lịch 12 tháng có giờ sinh: gửi giờ, đọc thêm Bát tự hai cách; 'Xem trước năm sau' bắt đầu từ tháng 1", async ({ page }) => {
+  await napHoSo(page, { ...CHU_DN, gio: "09:30" });
+  await page.goto("/ban-do-doi-ngu");
+  await page.getByTestId("tab-lich-12-thang").click();
+  const namSau = new Date().getFullYear() + 1;
+  await page.getByLabel("Khoảng xem", { exact: true }).selectOption("nam_sau");
+  const yc = page.waitForRequest((r) => r.url().includes("/api/doanh-chu/lich-12-thang") && r.method() === "POST");
+  await page.getByTestId("nut-xem-lich-12-thang").click();
+  expect((await yc).postDataJSON()).toMatchObject({ gio: "09:30", nam_xem: namSau });
+  const kq = page.getByTestId("ket-qua-lich-12-thang");
+  await expect(kq).toContainText(`12 tháng kể từ T1/${namSau}`, { timeout: 15000 });
+  await expect(kq.getByTestId("thieu-gio-lich-12")).toHaveCount(0);
+  await expect(kq.getByTestId("hai-cach-lich-12")).toContainText("Cách 1");
+  await expect(kq.getByTestId("thang-lich-12").first()).toContainText("Bát tự");
 });

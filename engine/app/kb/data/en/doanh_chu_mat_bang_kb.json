@@ -28,7 +28,8 @@
     "khu_tinh": {
       "ten": "Storage / Quiet zone in {nam}",
       "thuan_loi": "The {phuong} sector suits tidy storage, filing or low-traffic use in {nam}, keeping the best space for clients and staff.",
-      "nen_chu_y": "In {nam} the annual stars 5 and 2 visit {phuong}: avoid major renovation, drilling, damp storage or clutter there."
+      "nen_chu_y": "In {nam}, annual star {ds}: avoid major renovation, drilling, damp storage or clutter in these areas.",
+      "giua": "Keep the middle of the floor open this year: no heavy stock or noisy machines there."
     }
   },
   "cua": {
@@ -40,12 +41,17 @@
     "sao_thuong": "Avoid racks or stock that block the view from the street.",
     "bu_thuan": "A bright sign, a tidy entry and good lighting still help customers notice the shop and walk in."
   },
+  "khu_trung_tinh": "The {phuong} sector is the best remaining spot for this on the floor; keep it tidy, well lit and easy to walk through.",
+  "khu_tinh_sao": {
+    "mot": "{sao} in {phuong}",
+    "noi": ", "
+  },
   "van_ten": "Period {van}",
   "can_cu": {
     "phi_tinh": "{phep} chart, Period {van} (built {nam_xay}); facing star {huong} · mountain star {son} in {cung}; annual star {nam}: {ln}.",
     "bat_trach": "Eight Mansions: {phuong} is {du_nien} for the owner's Gua {quai}; annual star {nam}: {ln}.",
     "cua": "Entrance {do}° ({son}) · Eight Mansions: {du_nien} · annual star {nam}: {ln}.",
-    "khu_tinh": "Annual stars {nam}: 5 and 2 sit in {phuong}."
+    "khu_tinh": "Annual stars {nam}: {ds}."
   },
   "phep": {
     "ha_quai": "Standard",

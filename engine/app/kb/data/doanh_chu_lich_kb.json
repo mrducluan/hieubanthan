@@ -1,0 +1,77 @@
+{
+  "_nguon": "Ban biên tập Hiểu Bản Thân soạn lời đời thường cho công cụ Lịch quyết định 12 tháng. Mức tháng lấy từ các lớp có sẵn của 'Thời gian tới' (con giáp, phong thuỷ, Bát tự hai cách lấy dụng thần) cộng tháng cá nhân thần số; ngày tốt từ bộ chọn ngày Hoàng lịch.",
+  "_trang_thai": "nhap_ban_bien_tap",
+  "source_id": "doanh_chu_lich_kb",
+  "school_id": "tong_hop",
+  "muc_tieu": {
+    "tang_truong": {
+      "ten": "Mở rộng & tăng trưởng",
+      "mo_ta": "Ưu tiên mở kênh bán hàng, tăng sản lượng và chốt hợp tác mới."
+    },
+    "ky_ket": {
+      "ten": "Ký kết & hợp tác",
+      "mo_ta": "Ưu tiên đàm phán hợp đồng lớn, liên minh đối tác và chốt điều khoản."
+    },
+    "giu_tien": {
+      "ten": "Giữ dòng tiền & tối ưu",
+      "mo_ta": "Ưu tiên kiểm soát chi phí, thu hồi công nợ và chuẩn hoá quy trình."
+    },
+    "ra_mat": {
+      "ten": "Ra mắt sản phẩm / chi nhánh",
+      "mo_ta": "Ưu tiên lịch công bố sản phẩm, mở điểm bán mới và truyền thông."
+    }
+  },
+  "thang_ca_nhan": {
+    "1": "Khởi phát — mở đầu việc mới",
+    "2": "Liên kết — đàm phán, hợp tác",
+    "3": "Truyền thông — quảng bá, bán hàng",
+    "4": "Nền tảng — chuẩn hoá quy trình",
+    "5": "Xoay trục — linh hoạt, thử kênh mới",
+    "6": "Chăm sóc — giữ khách, gắn kết đội",
+    "7": "Rà soát — nhìn lại số liệu",
+    "8": "Thu hoạch — chốt doanh số, tài chính",
+    "9": "Khép vòng — dọn việc cũ, chuẩn bị mới"
+  },
+  "nhip": {
+    "day_manh": "Đẩy mạnh & mở rộng",
+    "can_bang": "Cân bằng & chuẩn hoá",
+    "phong_thu": "Giữ nhịp & giữ tiền"
+  },
+  "nen_lam": {
+    "day_manh": {
+      "tang_truong": "Nhiều cách xem cùng thuận: hợp đẩy chỉ tiêu bán hàng, mở kênh mới và giao mục tiêu rõ cho đội.",
+      "ky_ket": "Nhiều cách xem cùng thuận: hợp chủ động đàm phán điều khoản, gặp đối tác quan trọng và ký hợp đồng.",
+      "giu_tien": "Nhiều cách xem cùng thuận: tận dụng đà tốt để thu hồi công nợ, đàm phán lại giá vốn.",
+      "ra_mat": "Nhiều cách xem cùng thuận: hợp chốt lịch ra mắt, đẩy chiến dịch mở bán."
+    },
+    "can_bang": {
+      "_": "Tháng đều nhịp: triển khai đều tay kế hoạch đã chốt, đo hiệu quả từng tuần và điều chỉnh nhẹ theo phản hồi thực tế."
+    },
+    "phong_thu": {
+      "_": "Tháng nên đi chậm một nhịp: ưu tiên giữ dòng tiền an toàn, rà lại hợp đồng đang chạy, chuẩn hoá quy trình và chăm sóc khách cũ."
+    }
+  },
+  "chu_y": {
+    "day_manh": "Nhịp thuận dễ khiến mở quá nhiều đầu việc cùng lúc; nên chốt giới hạn ngân sách và một người chịu trách nhiệm trước khi chi.",
+    "can_bang": "Tránh dàn trải người và tiền vào thử nghiệm ngoài trọng tâm; giữ cuộc họp ngắn giữa các bộ phận để thấy sớm chỗ nghẽn.",
+    "phong_thu": "Hạn chế cam kết chi phí cố định dài hạn hay quyết định vội khi chưa đủ số liệu; việc buộc phải ký thì chọn ngày tốt trong tháng và đọc kỹ điều khoản thoát."
+  },
+  "cap": {
+    "chu_dn": "",
+    "giam_doc": " Đồng bộ lại chỉ tiêu bộ phận với ban giám đốc trong nửa đầu tháng.",
+    "truong_nhom": " Bám tiến độ từng tuần cùng các thành viên trực tiếp."
+  },
+  "thieu_gio": "Chưa có giờ sinh nên chưa đọc lớp Bát tự (tháng theo hai cách lấy dụng thần cần đủ bốn trụ). Thêm giờ sinh để lịch có thêm một cách xem.",
+  "lop_thanso": "Thần số",
+  "lop_battu": "Bát tự",
+  "bt_muc": {
+    "thuan": "Bát tự: tháng {cc} thuận theo cả hai cách lấy dụng thần.",
+    "can_bang": "Bát tự: tháng {cc} cân bằng (hai cách đọc không cùng chiều mạnh).",
+    "can_chu_dong": "Bát tự: tháng {cc} cần lưu ý theo cả hai cách lấy dụng thần."
+  },
+  "tong_quan": "12 tháng từ {tu} theo mục tiêu {muc_tieu}: tháng hợp đẩy mạnh — {dm}; tháng nên giữ nhịp, giữ tiền — {pt}.",
+  "khong_co_dm": "chưa có tháng nào hội đủ các cách xem cùng thuận",
+  "khong_co_pt": "không có tháng nào nhiều cách xem cùng nhắc chậm",
+  "canh_bao_chung": "Lịch này để sắp nhịp ưu tiên và chọn thời điểm chuẩn bị; mọi quyết định tài chính, ký kết hay đầu tư vẫn cần dựa trên số liệu kinh doanh, dòng tiền thực tế và tư vấn chuyên môn.",
+  "ranh_gioi": "Thông tin tham khảo điều hành theo Bát tự, thần số, con giáp, phong thuỷ và Hoàng lịch; không thay thế tư vấn tài chính, pháp lý hay kiểm toán, không phải lời khuyên đầu tư. Ngày giờ sinh chỉ dùng cho lượt tính này và không lưu trên máy chủ."
+}

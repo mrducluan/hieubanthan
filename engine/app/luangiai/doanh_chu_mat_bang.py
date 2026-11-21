@@ -23,7 +23,7 @@ from app.calc import phongthuy as pt
 from app.config import hom_nay_vn
 from app.kb import ten as ten_kb
 from app.kb.nap import doc, nho
-from app.luangiai import hoang_lich as hl
+from app.luangiai.doanh_chu_ngay import ngay_tot
 
 LOAI_HINH = ("van_phong", "cua_hang", "quan_ca_phe", "xuong_kho")
 DU_NIEN_TOT = ("Sinh Khí", "Thiên Y", "Diên Niên", "Phục Vị")       # thứ tự = mức hợp giảm dần
@@ -62,9 +62,10 @@ def kiem_tra_mat_bang(do_huong: float, nam_xay: int | None, ngay_sinh: int, than
     vi = ngon_ngu.la_viet()
     tu = ngay_bat_dau or hom_nay_vn()
     nam_xem = hk.nam_theo_lap_xuan(dt.datetime(tu.year, tu.month, tu.day, 5))   # 12:00 giờ VN
-    do = round(do_huong % 360.0, 1)
-    s_huong = hk.son_tu_do(do)
-    s_toa = hk.son_tu_do((do + 180.0) % 360.0)
+    goc = do_huong % 360.0                       # phép tính dùng độ gốc; chỉ làm tròn để hiển thị
+    do = round(goc, 1) % 360.0
+    s_huong = hk.son_tu_do(goc)
+    s_toa = hk.son_tu_do((goc + 180.0) % 360.0)
     cb = s_toa["canh_bao"]
     the_quai = cb == "kiem_huong"
     tb = hk.trach_ban(nam_xay, s_toa["son"], the_quai=the_quai) if nam_xay else None
@@ -89,7 +90,12 @@ def kiem_tra_mat_bang(do_huong: float, nam_xay: int | None, ngay_sinh: int, than
         chon[ma] = _chon(ngoai, da, khoa(truc))
         da.add(chon[ma]["phuong"])
     tinh = [c for c in ngoai if ln[c["cung"]] in SAO_TINH]
-    tinh_str = ", ".join(_h(c["phuong"]) for c in tinh) or _h("Trung tâm")
+    # Sao năm 5 / 2 có thể đóng Trung cung → nêu từng sao ở đúng chỗ của nó, không gộp "5 và 2 ghé phía …".
+    vi_tri = {s: next(cg for cg, v in ln.items() if v == s) for s in SAO_TINH}
+    phuong_sao = {s: _h(hk.QUAI[cg][1]) if cg != "Trung cung" else _h("Trung tâm") for s, cg in vi_tri.items()}
+    ds_sao = k["khu_tinh_sao"]["noi"].join(k["khu_tinh_sao"]["mot"].format(sao=s, phuong=phuong_sao[s]) for s in SAO_TINH)
+    giua = "Trung cung" in vi_tri.values()
+    tinh_str = ", ".join([_h(c["phuong"]) for c in tinh] + ([_h("Trung tâm")] if giua else []))
 
     def can_cu(c: dict) -> str:
         if tb:
@@ -100,17 +106,21 @@ def kiem_tra_mat_bang(do_huong: float, nam_xay: int | None, ngay_sinh: int, than
                                                quai=ten_kb.ten("quai", mq["quai"]), nam=nam_xem, ln=ln[c["cung"]])
 
     khu_vuc = []
-    for ma in ("thu_ngan", "giam_doc", "phong_hop"):
+    for ma, truc in (("thu_ngan", "huong"), ("giam_doc", "son"), ("phong_hop", "huong")):
         c, m = chon[ma], k["khu"][ma]
-        tl = (m["thuan_loi"] if tb else m["thuan_loi_bt"]).format(
-            phuong=_h(c["phuong"]), van_ten=k["van_ten"].format(van=van_nay),
-            du_nien=ten_kb.ten("du_nien", bh[c["phuong"]]))
+        # Lời và mức theo trạng thái THẬT: chỉ nói "sao thuận" khi sao vượng / sinh ở vận hiện tại; không thì theo Bát trạch;
+        # cả hai đều không → lời trung tính (phía còn lại phù hợp nhất), không khen.
+        sao_tot = bool(tb) and hang_sao(c, truc) >= _HANG_SAO["sinh"]
+        dn_tot = bh[c["phuong"]] in _HANG_DN
+        mau = m["thuan_loi"] if sao_tot else m["thuan_loi_bt"] if dn_tot else k["khu_trung_tinh"]
+        tl = mau.format(phuong=_h(c["phuong"]), van_ten=k["van_ten"].format(van=van_nay),
+                        du_nien=ten_kb.ten("du_nien", bh[c["phuong"]]))
         khu_vuc.append({"ma": ma, "ten": m["ten"], "phuong_goi_y": _h(c["phuong"]), "phuong_ma": c["phuong"],
-                        "muc": "thuan" if ln[c["cung"]] not in SAO_TINH else "can_bang",
+                        "muc": "thuan" if (sao_tot or dn_tot) and ln[c["cung"]] not in SAO_TINH else "can_bang",
                         "can_cu": can_cu(c), "thuan_loi": tl, "nen_chu_y": m["nen_chu_y"]})
 
     # Cửa chính — phía của độ hướng; du niên theo mệnh chủ cơ sở; sao năm tới khu cửa.
-    phuong_cua = pt.huong_tu_do(do)
+    phuong_cua = pt.huong_tu_do(goc)
     c_cua = next(c for c in ngoai if c["phuong"] == phuong_cua)
     dn_cua = bh[phuong_cua]
     sao_cua = ln[c_cua["cung"]]
@@ -130,9 +140,9 @@ def kiem_tra_mat_bang(do_huong: float, nam_xay: int | None, ngay_sinh: int, than
     mk = k["khu"]["khu_tinh"]
     khu_vuc.append({"ma": "khu_tinh", "ten": mk["ten"].format(nam=nam_xem), "phuong_goi_y": tinh_str,
                     "phuong_ma": ", ".join(c["phuong"] for c in tinh), "muc": "can_bang",
-                    "can_cu": k["can_cu"]["khu_tinh"].format(nam=nam_xem, phuong=tinh_str),
-                    "thuan_loi": mk["thuan_loi"].format(phuong=tinh_str, nam=nam_xem),
-                    "nen_chu_y": mk["nen_chu_y"].format(phuong=tinh_str, nam=nam_xem)})
+                    "can_cu": k["can_cu"]["khu_tinh"].format(nam=nam_xem, ds=ds_sao),
+                    "thuan_loi": mk["thuan_loi"].format(phuong=", ".join(_h(c["phuong"]) for c in tinh), nam=nam_xem),
+                    "nen_chu_y": mk["nen_chu_y"].format(ds=ds_sao, nam=nam_xem) + (" " + mk["giua"] if giua else "")})
 
     ngay = _ngay_khai_truong(tu, nam_sinh, thang_sinh, ngay_sinh, huong_tot)
 
@@ -175,20 +185,14 @@ def _ngay_khai_truong(tu: dt.date, nam_sinh: int, thang_sinh: int, ngay_sinh: in
     from app.luangiai import ky_mon  # noqa: PLC0415 — nặng (lập 13 bàn mỗi ngày), chỉ nạp khi cần
 
     k = kb()["ngay"]
-    ra = hl.chon_ngay("khai_truong", tu, tu + dt.timedelta(days=NGAY_TOI), nam_sinh, thang_sinh, ngay_sinh)["ngay"]
-    # `chon_ngay` đã xếp theo điểm cộng (hoàng đạo, trực tốt, hợp tuổi); ngày vướng kiêng dân gian / nhãn tập quán xuống sau.
-    xep = sorted(enumerate(ra), key=lambda ix: (bool(ix[1].get("ky_dan_gian")), bool(ix[1].get("nhan_tap_quan")), ix[0]))
-    nam = sorted((x for _, x in xep[:5]), key=lambda x: x["ngay"])
+    nam = ngay_tot("khai_truong", tu, tu + dt.timedelta(days=NGAY_TOI), dt.date(nam_sinh, thang_sinh, ngay_sinh), 5)
     ds = []
     for x in nam:
         d = dt.date.fromisoformat(x["ngay"])
         km = ky_mon.doc_ngay(d, viec=VIEC_KY_MON, huong_hop=huong_tot).get("viec") or {}
-        gio = [g for g in km.get("gio_tot") or [] if not g.get("ban_dem")][:2]
-        ds.append({
-            "ngay": x["ngay"], "am": x.get("am", ""), "can_chi": x.get("can_chi", ""), "truc": x.get("truc", ""),
-            "dep": bool(x.get("dep")), "hoang_dao": bool(x.get("hoang_dao")),
-            "diem_cong": list(x.get("diem_cong") or []), "quan_he_tuoi": x.get("quan_he_tuoi"),
-            "ky_dan_gian": list(x.get("ky_dan_gian") or []), "luu_y_ngay": list(x.get("nhan_tap_quan") or []),
-            "gio_ky_mon": [{"khung": g["khung"], "chi": ten_kb.ten("chi", g["chi"]), "phuong": _h(g["phuong"])} for g in gio],
-        })
+        # giờ thức; giờ có hướng thuận trùng hướng hợp mệnh chủ cơ sở đứng trước (giữ thứ tự Kỳ Môn khi hoà)
+        thuc = [g for g in km.get("gio_tot") or [] if not g.get("ban_dem")]
+        gio = sorted(thuc, key=lambda g: g["phuong"] not in huong_tot)[:2]
+        ds.append({**x, "gio_ky_mon": [{"khung": g["khung"], "chi": ten_kb.ten("chi", g["chi"]), "phuong": _h(g["phuong"]),
+                                        "hop_menh": g["phuong"] in huong_tot} for g in gio]})
     return {"ds": ds, "cach_chon": k["cach_chon"] if ds else k["khong_co"]}
