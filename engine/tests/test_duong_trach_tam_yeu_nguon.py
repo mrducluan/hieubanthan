@@ -203,3 +203,21 @@ def test_api_tam_yeu_bieu_do_phan_trang_va_loc():
     assert df["tong"] == 64 and len(df["bieu_do"]) == 64
     _assert_bm1_clean(df)
 
+
+def test_api_tam_yeu_la_ban_24_son():
+    from fastapi.testclient import TestClient
+    from app.main import app
+    from app.calc import huyen_khong as hk
+
+    client = TestClient(app)
+    r = client.get("/v1/phongthuy/tam-yeu/la-ban-24-son")
+    assert r.status_code == 200
+    d = r.json()
+    assert d["tong_son"] == 24 and len(d["son_24"]) == 24
+    assert [x["son"] for x in d["son_24"]] == hk.SON_24
+    assert d["son_24"][0]["son"] == "Tý" and d["son_24"][0]["do_tam"] == 0.0
+    assert d["son_24"][0]["do_tu"] == 352.5 and d["son_24"][0]["do_den"] == 7.5
+    assert d["son_24"][12]["son"] == "Ngọ" and d["son_24"][12]["do_tam"] == 180.0
+    _assert_bm1_clean(d)
+
+

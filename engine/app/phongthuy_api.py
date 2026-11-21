@@ -585,3 +585,14 @@ def api_tam_yeu_bieu_do(
         "pham_vi": "phongthuy_tam_yeu_do_hinh",
         **dh_kb.muc_luc_bieu_do(loai=loai, quyen=quyen, limit=limit, offset=offset),
     }
+
+
+@router.get("/tam-yeu/la-ban-24-son")
+def api_tam_yeu_la_ban_24_son() -> dict:
+    """Vòng 24 Sơn chuẩn từ engine (tên, chữ Hán một chữ, quái, hướng, khoảng độ) để UI vẽ mặt la bàn."""
+    from app.kb import phongthuy_tam_yeu_do_hinh as dh_kb  # noqa: PLC0415
+    return {
+        "engine_version": ENGINE_VERSION,
+        "pham_vi": "phongthuy_tam_yeu_do_hinh",
+        **dh_kb.la_ban_24_son(),
+    }

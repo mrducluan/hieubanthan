@@ -211,3 +211,47 @@ def muc_luc_bieu_do(
         "nguon_hien_thi": NGUON_HIEN_THI,
         "bieu_do": slice_items,
     }
+
+
+_SON_HAN: dict[str, str] = {
+    "Tý": "子", "Quý": "癸", "Sửu": "丑", "Cấn": "艮", "Dần": "寅", "Giáp": "甲",
+    "Mão": "卯", "Ất": "乙", "Thìn": "辰", "Tốn": "巽", "Tỵ": "巳", "Bính": "丙",
+    "Ngọ": "午", "Đinh": "丁", "Mùi": "未", "Khôn": "坤", "Thân": "申", "Canh": "庚",
+    "Dậu": "酉", "Tân": "辛", "Tuất": "戌", "Càn": "乾", "Hợi": "亥", "Nhâm": "壬",
+}
+_NGUYEN_TEN = ("địa", "thiên", "nhân")
+
+
+def la_ban_24_son() -> dict:
+    """Vòng 24 Sơn chuẩn từ `app.calc.huyen_khong` (tâm mỗi sơn cách nhau 15°, Tý = 0°).
+
+    Web CHỈ vẽ dữ liệu từ hàm này — không tự tính độ hay tên sơn ở trình duyệt.
+    """
+    from app.calc import huyen_khong as hk  # noqa: PLC0415
+
+    vong = []
+    for i, ten in enumerate(hk.SON_24):
+        info = hk._son(ten)
+        tam = float(i * 15)
+        tu = (tam - 7.5) % 360.0
+        den = (tam + 7.5) % 360.0
+        vong.append({
+            "stt": i,
+            "son": ten,
+            "ky_hieu_han": _SON_HAN[ten],
+            "quai": info["quai"],
+            "phuong": info["phuong"],
+            "nguyen": _NGUYEN_TEN[info["nguyen"]],
+            "am_duong": info["am_duong"],
+            "do_tam": tam,
+            "do_tu": tu,
+            "do_den": den,
+        })
+    return {
+        "nguon_hien_thi": NGUON_HIEN_THI,
+        "tong_son": len(vong),
+        "buoc_do": 15.0,
+        "nguong_kiem_huong_do": 3.0,
+        "nguong_ranh_8_huong_do": 1.0,
+        "son_24": vong,
+    }
