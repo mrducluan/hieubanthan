@@ -8,6 +8,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.calc import doanh_chu
+from app.luangiai import doanh_chu_lich, doanh_chu_mat_bang
 from app.config import ENGINE_VERSION
 
 router = APIRouter(prefix="/v1/doanh-chu", tags=["doanh-chu"])
@@ -72,5 +73,69 @@ def phan_tich_doi_ngu(inp: DoiNguIn) -> dict:
         [tv.model_dump() for tv in inp.doi_ngu],
         nam_xem=inp.nam_xem,
         cap_quan_ly=inp.cap_quan_ly,
+    )
+    return {"engine_version": ENGINE_VERSION, "khong_luu_du_lieu": True, **kq}
+
+
+class Lich12ThangIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    ngay: int = Field(..., ge=1, le=31)
+    thang: int = Field(..., ge=1, le=12)
+    nam: int = Field(..., ge=1930, le=2025)
+    gioi_tinh: str = Field(default="nam", pattern="^(nam|nu)$")
+    gio: str | None = Field(default=None, pattern=r"^([01]\d|2[0-3]):[0-5]\d$", description="Giờ sinh HH:MM; thiếu = không đọc lớp Bát tự")
+    nam_xem: int | None = Field(default=None, ge=2020, le=2050, description="Bỏ trống = 12 tháng kể từ tháng hiện tại")
+    cap_quan_ly: str = Field(default="chu_dn", pattern="^(chu_dn|giam_doc|truong_nhom)$")
+    muc_tieu: str = Field(default="tang_truong", pattern="^(tang_truong|ky_ket|giu_tien|ra_mat)$")
+
+
+@router.post("/lich-12-thang")
+def api_lich_12_thang(inp: Lich12ThangIn) -> dict:
+    """Lịch Quyết Định 12 Tháng cho Chủ DN / Quản lý (Bát Tự + Thần Số + Hoàng Lịch, không lưu dữ liệu)."""
+    try:
+        dt.date(inp.nam, inp.thang, inp.ngay)
+    except ValueError as e:
+        raise HTTPException(422, detail=f"Ngày sinh không hợp lệ: {inp.ngay}/{inp.thang}/{inp.nam}") from e
+    kq = doanh_chu_lich.lich_quyet_dinh_12_thang(
+        ngay=inp.ngay,
+        thang=inp.thang,
+        nam=inp.nam,
+        gioi_tinh=inp.gioi_tinh,
+        gio=inp.gio,
+        nam_xem=inp.nam_xem,
+        cap_quan_ly=inp.cap_quan_ly,
+        muc_tieu=inp.muc_tieu,
+    )
+    return {"engine_version": ENGINE_VERSION, "khong_luu_du_lieu": True, **kq}
+
+
+class MatBangIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    do_huong: float = Field(..., ge=0.0, lt=360.0)
+    nam_xay: int | None = Field(default=None, ge=1864, le=2043, description="Bỏ trống = không rõ năm xây (không lập bàn)")
+    ngay_sinh: int = Field(..., ge=1, le=31)
+    thang_sinh: int = Field(..., ge=1, le=12)
+    nam_sinh: int = Field(..., ge=1930, le=2025)
+    gioi_tinh: str = Field(default="nam", pattern="^(nam|nu)$")
+    loai_hinh: str = Field(default="van_phong", pattern="^(van_phong|cua_hang|quan_ca_phe|xuong_kho)$")
+
+
+@router.post("/mat-bang")
+def api_mat_bang(inp: MatBangIn) -> dict:
+    """Kiểm tra Mặt Bằng & 5 Ngày Khai Trương (Huyền Không + Mệnh Quái + Hoàng Lịch, không lưu dữ liệu)."""
+    try:
+        dt.date(inp.nam_sinh, inp.thang_sinh, inp.ngay_sinh)
+    except ValueError as e:
+        raise HTTPException(422, detail="ngay_sinh_khong_hop_le") from e
+    kq = doanh_chu_mat_bang.kiem_tra_mat_bang(
+        do_huong=inp.do_huong,
+        nam_xay=inp.nam_xay,
+        ngay_sinh=inp.ngay_sinh,
+        thang_sinh=inp.thang_sinh,
+        nam_sinh=inp.nam_sinh,
+        gioi_tinh=inp.gioi_tinh,
+        loai_hinh=inp.loai_hinh,
     )
     return {"engine_version": ENGINE_VERSION, "khong_luu_du_lieu": True, **kq}

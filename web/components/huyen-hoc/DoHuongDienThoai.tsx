@@ -138,13 +138,15 @@ function MatLaBan({ doHuong, laBan, onXoay }: { doHuong: number | null; laBan?: 
   );
 }
 
-export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
+export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true }: {
   sinh: { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
   onDungToa?: (doToa: number) => void;
   /** PT-V0: báo kết quả engine vừa đổi (độ hướng nhà) cho khung Khảo sát nhà. */
   onChot?: (kq: KetQuaDoHuong) => void;
   /** UI-PT 1: có mệnh quái → mặt la bàn tô 8 cung + đọc du niên của hướng đang quay về theo thời gian thực. */
   laBan?: LaBanCaNhan | null;
+  /** DC-MB: đo hướng MẶT BẰNG kinh doanh (không phải nhà ở) → không ghi đè hồ sơ nhà trên máy. Mặc định lưu như cũ. */
+  luuNha?: boolean;
 }) {
   const [doSong, setDoSong] = useState<number | null>(null);
   const { c: t, en, huong, quai, nhom, duNien } = useChuPT();
@@ -217,7 +219,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
   const apDungBanDo = (r: KetQuaDoHuong & { khoang_cach_m: number }) => {
     setKq(r); setKcBanDo(r.khoang_cach_m); setDoSong(r.do_huong); setLoi(null);
     onChot?.(r);
-    try { luuHoSoNha({ huong_do: r.do_huong, huong: undefined, ...(canHo ? { theo: "ban_cong" } : {}) }); } catch { /* bỏ qua */ }
+    if (luuNha) try { luuHoSoNha({ huong_do: r.do_huong, huong: undefined, ...(canHo ? { theo: "ban_cong" } : {}) }); } catch { /* bỏ qua */ }
   };
   const chotBanDo = async () => {
     const a = docToaDo(tam), b = docToaDo(truoc);
@@ -275,7 +277,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan }: {
       const r = await postJson<KetQuaDoHuong>("/api/phongthuy/do-huong", { do_huong: doHuong, ...(sinh ? { sinh } : {}) });
       setKq(r);
       onChot?.(r);
-      try { luuHoSoNha({ huong_do: r.do_huong, huong: undefined, ...(canHo ? { theo: "ban_cong" } : {}) }); } catch { /* bỏ qua */ }   // KC-2: hồ sơ nhà trên máy
+      if (luuNha) try { luuHoSoNha({ huong_do: r.do_huong, huong: undefined, ...(canHo ? { theo: "ban_cong" } : {}) }); } catch { /* bỏ qua */ }   // KC-2: hồ sơ nhà trên máy
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: dangDo ? "la_ban_dien_thoai" : "nhap_do_huong" });
     } catch (e) { setLoi(e instanceof Error ? e.message : t("dh.loi_doi")); }
     finally { setDang(false); }
