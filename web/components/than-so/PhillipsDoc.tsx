@@ -26,7 +26,7 @@ interface BaiPhillips {
   phai: "phillips"; ten_phai: string; gioi_thieu: string; ho_ten: string; ngay_sinh: string;
   sach_goc?: { ten: string; tac_gia: string; nxb: string };
   so_chu_dao: { so: number; ma: string; nhan: string; goc: number; tong_goc: number; dang_day_du: string; cach_tinh: string; nghia: NghiaSCD };
-  kim_tu_thap: { chan_de: { thang: number; ngay: number; nam: number }; dinh: DinhKTT[]; tuoi_hien_tai: number | null };
+  kim_tu_thap: { chan_de: { thang: number; ngay: number; nam: number }; dinh: DinhKTT[]; tuoi_hien_tai: number | null; tuoi_tron?: number | null };
   doi_chieu_pitago: { so_pitago: number; so_phillips: string; lech: boolean; ly_do: string | null };
   luu_y: string;
 }
@@ -37,12 +37,15 @@ const TRANG_THAI: Record<string, { nhan: string; mau: string }> = {
   sap_toi: { nhan: "Sắp tới", mau: "border-gold/50 text-gold bg-gold/10" },
 };
 
-const POS_BASE = { thang: { x: 110, y: 268 }, ngay: { x: 280, y: 268 }, nam: { x: 450, y: 268 } };
+// TS-PHAI-3: hình học sơ đồ — chân đế giãn rộng ra hai mép để cạnh Đỉnh 4 (từ Tháng lên đỉnh rồi xuống Năm) đi NGOÀI các
+// vòng Đỉnh 1, 2, 3 (trước cạnh ấy cắt ngang Đỉnh 1 và nhãn tuổi Đỉnh 3). Nhãn tuổi đặt ngay dưới vòng tròn của từng đỉnh
+// (Đỉnh 4 đặt bên phải) để không đè lên đường nối. Vòng đỉnh tô nền đặc rồi mới phủ màu chọn, đường nối không lộ qua.
+const POS_BASE = { thang: { x: 44, y: 292 }, ngay: { x: 280, y: 292 }, nam: { x: 516, y: 292 } };
 const POS_PEAK = [
-  { x: 195, y: 178 },
-  { x: 365, y: 178 },
-  { x: 280, y: 112 },
-  { x: 280, y: 44 },
+  { x: 164, y: 214 },
+  { x: 396, y: 214 },
+  { x: 280, y: 132 },
+  { x: 280, y: 36 },
 ];
 
 export function PhillipsDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: "tong_het" | "tung_phan" }) {
@@ -79,6 +82,9 @@ export function PhillipsDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: "tong_het" |
   const scd = kq.so_chu_dao;
   const ktt = kq.kim_tu_thap;
   const dinhDangXem = ktt.dinh.find((p) => p.dinh === chonDinh) ?? ktt.dinh[0]!;
+  const namSinh = hoSo.nam;
+  // TUOI-1: tuổi nói với người đọc = tuổi tròn theo sinh nhật (engine tính); engine cũ chưa có trường → không nói tuổi.
+  const tuoiNay = ktt.tuoi_tron ?? null;
   const tacGia = kq.sach_goc ? `${kq.sach_goc.tac_gia} · ${kq.sach_goc.ten}` : "David A. Phillips, Ph.D.";
 
   const saoChep = async () => {
@@ -173,7 +179,7 @@ export function PhillipsDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: "tong_het" |
         />
 
         <div className="glass rounded-2xl border border-line/70 p-4 sm:p-6">
-          <svg viewBox="0 0 560 310" className="mx-auto w-full max-w-2xl select-none" role="img" aria-label="Sơ đồ 4 Đỉnh Kim Tự Tháp Thần số học phái Phillips">
+          <svg viewBox="0 0 560 330" className="mx-auto w-full max-w-2xl select-none" role="img" aria-label="Sơ đồ 4 Đỉnh Kim Tự Tháp Thần số học phái Phillips">
             <defs>
               <linearGradient id="kttGold" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="rgb(232,194,106)" stopOpacity="0.9" />
@@ -216,18 +222,19 @@ export function PhillipsDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: "tong_het" |
                   onClick={() => { setChonDinh(p.dinh); ghi("chart_interacted", { mo_dun: "thanso", kind: "phillips_chon_dinh" }); }}
                   className="cursor-pointer" role="button" tabIndex={0} aria-label={`Đỉnh ${p.dinh}: số ${p.so}, tuổi ${p.tuoi}`}>
                   {active && (
-                    <motion.circle r="31" fill="none" stroke="rgb(74,222,178)" strokeWidth="2"
+                    <motion.circle r="31" fill="none" stroke="rgb(74,222,178)" strokeWidth="2" style={{ transformBox: "fill-box", transformOrigin: "center" }}
                       animate={{ scale: [1, 1.18, 1], opacity: [0.8, 0.2, 0.8] }}
                       transition={{ duration: 2.2, repeat: Infinity }} />
                   )}
+                  <circle r="24" fill="rgb(17,19,28)" />
                   <circle r="24"
                     fill={sel ? "rgba(232,194,106,0.22)" : active ? "rgba(74,222,178,0.16)" : "rgba(17,19,28,0.92)"}
                     stroke={sel ? "#f7d774" : active ? "#4adeb2" : "rgba(232,194,106,0.7)"}
                     strokeWidth={sel ? 3 : 2} />
                   <text y="-2" textAnchor="middle" dominantBaseline="central" className="fill-gold font-serif text-xl font-bold">{p.so}</text>
                   <text y="14" textAnchor="middle" className="fill-fg-muted text-[9px] font-medium">Đỉnh {p.dinh}</text>
-                  <text x={idx === 0 ? -34 : idx === 1 ? 34 : 36} y={idx === 3 ? -2 : 2}
-                    textAnchor={idx === 0 ? "end" : "start"} className="fill-fg-faint text-[11px]">
+                  <text x={idx === 3 ? 36 : 0} y={idx === 3 ? 4 : 42}
+                    textAnchor={idx === 3 ? "start" : "middle"} className="fill-fg-faint text-[11px]">
                     {p.tuoi}t ({p.nam})
                   </text>
                 </g>
@@ -255,13 +262,16 @@ export function PhillipsDoc({ hoSo, quyUoc }: { hoSo: HoSo; quyUoc: "tong_het" |
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
                 <p className="eyebrow text-gold">
-                  Đỉnh {dinhDangXem.dinh} · Số {dinhDangXem.so} · Mốc {dinhDangXem.tuoi} tuổi (năm {dinhDangXem.nam})
+                  Đỉnh {dinhDangXem.dinh} · Số {dinhDangXem.so} · {dinhDangXem.den_tuoi === null
+                    ? `từ ${dinhDangXem.tu_tuoi} tuổi trở đi, đỉnh ở tuổi ${dinhDangXem.tuoi} (năm ${dinhDangXem.nam})`
+                    : `từ ${dinhDangXem.tu_tuoi} đến ${dinhDangXem.tuoi} tuổi (${namSinh + dinhDangXem.tu_tuoi}–${dinhDangXem.nam})`}
                 </p>
                 <h3 className="mt-0.5 text-lg font-medium text-fg">{dinhDangXem.nghia.chu_de}</h3>
               </div>
               {dinhDangXem.trang_thai && TRANG_THAI[dinhDangXem.trang_thai] && (
                 <span className={cn("rounded-full border px-2.5 py-0.5 text-xs", TRANG_THAI[dinhDangXem.trang_thai]!.mau)}>
                   {TRANG_THAI[dinhDangXem.trang_thai]!.nhan}
+                  {dinhDangXem.trang_thai === "dang_trong" && tuoiNay !== null && ` · bạn đang ${tuoiNay} tuổi`}
                 </span>
               )}
             </div>

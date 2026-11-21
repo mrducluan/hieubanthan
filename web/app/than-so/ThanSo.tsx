@@ -43,12 +43,17 @@ import { dinhNgay } from "@/lib/dinh-dang";
 import type { DocChu } from "@/lib/chu-trang";
 import type { CHU_THAN_SO_UI } from "@/lib/chu/than-so";
 
-// TS-PHAI / TS-V3 / Đợt 2A — các trường phái thần số (Pitago, Phillips 4 Kim Tự Tháp, Chaldea, Tổng hợp).
+// TS-PHAI / TS-V3 / Đợt 2A — các trường phái thần số. TS-PHAI-3 (chủ dự án 2026-11-21): bản Việt chỉ còn Pitago (phổ
+// biến nhất ở Việt Nam) + Phillips (4 Kim Tự Tháp); Chaldea + "Tổng hợp 2 phái" ít người Việt dùng nên rời khung chọn.
+// Bản Anh (Phillips chưa có lời tiếng Anh) giữ Pitago · Chaldea · Tổng hợp — Chaldea quen thuộc ở thị trường nói tiếng Anh.
 export type PhaiThanSo = "pitago" | "phillips" | "chaldea" | "tong_hop";
 const KHOA_PHAI = "hbt.thanso_phai";
-const CAC_PHAI: PhaiThanSo[] = ["pitago", "phillips", "chaldea", "tong_hop"];
-function docPhai(): PhaiThanSo {
-  try { const v = localStorage.getItem(KHOA_PHAI) as PhaiThanSo | null; return v && CAC_PHAI.includes(v) ? v : "pitago"; } catch { return "pitago"; }
+const CAC_PHAI_VI: PhaiThanSo[] = ["pitago", "phillips"];
+const CAC_PHAI_EN: PhaiThanSo[] = ["pitago", "chaldea", "tong_hop"];
+const cacPhai = (en: boolean) => (en ? CAC_PHAI_EN : CAC_PHAI_VI);
+/** Phái đã nhớ trên máy; phái không còn trong khung chọn của ngôn ngữ này (vd Chaldea đã chọn trước đây) → Pitago. */
+function docPhai(en: boolean): PhaiThanSo {
+  try { const v = localStorage.getItem(KHOA_PHAI) as PhaiThanSo | null; return v && cacPhai(en).includes(v) ? v : "pitago"; } catch { return "pitago"; }
 }
 // EN-ALL GĐ 7: /en/numerology là rewrite của trang này (một cây component) — chữ cố định ở lib/chu/than-so.ts (chiều `en`),
 // lời bài đọc do engine trả theo ngôn ngữ. Tên phái, mô tả khung hỏi, câu gợi ý (dạng TỰ SOI, không dự đoán) đọc từ bảng.
@@ -59,7 +64,8 @@ const goiY = (t: ChuTS) => GOI_Y_KHOA.map(([k, n]) => ({ nhom: t(`goi_y.${k}`), 
 interface CauLienQuan { ma: string; tru: string; cau: string }
 
 async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocDD, hoiTiep: (c: CauLienQuan) => void,
-                         t: ChuTS, hopDoi: string, maCau?: string, dungPhai?: (p: PhaiThanSo) => void): Promise<KetQuaHoi> {
+                         t: ChuTS, hopDoi: string, maCau?: string, dungPhai?: (p: PhaiThanSo) => void,
+                         binhChonPhai = true): Promise<KetQuaHoi> {
   const r = await fetchSao("/api/thanso/hoi", {
     method: "POST",
     headers: { "content-type": "application/json" },
@@ -76,7 +82,8 @@ async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocD
     ? <>
         <GopYCauTraLoi hoSo={h} nc={{ phai: phai === "phillips" ? "pitago" : phai, quyUoc, nguon: maCau ? "noi_dau" : "hoi_dap", linhVuc: d.phan_loai?.linh_vuc, maCau }} />
         {/* TS-V3b: bình chọn phái nói đúng hơn — cùng điều kiện với góp ý (không hỏi ở câu khủng hoảng / ngoài phạm vi). */}
-        <PhaiNaoDung hoSo={h} quyUoc={quyUoc} linhVuc={d.phan_loai?.linh_vuc} onDungPhai={dungPhai} />
+        {/* TS-PHAI-3: bình chọn Pitago ↔ Chaldea chỉ còn ở bản Anh (bản Việt không còn Chaldea trong khung chọn). */}
+        {binhChonPhai && <PhaiNaoDung hoSo={h} quyUoc={quyUoc} linhVuc={d.phan_loai?.linh_vuc} onDungPhai={dungPhai} />}
       </>
     : null;
   return {
@@ -124,7 +131,7 @@ export function ThanSo() {
   const quyUoc = useQuyUocDD();
   const maTheoCau = useRef(new Map<string, string>());   // câu chuẩn → mã câu (cho góp ý gắn đúng câu nỗi đau)
   // Phái Phillips mới có bản Việt (engine + PhillipsDoc chưa có lời tiếng Anh) → bản Anh không mở lựa chọn này.
-  useEffect(() => { const p = docPhai(); setPhai(en && p === "phillips" ? "pitago" : p); }, [en]);
+  useEffect(() => { setPhai(docPhai(en)); }, [en]);
   // TS-NOIDAU: câu bấm từ bảng nỗi đau / "hỏi tiếp" → đẩy vào khung hỏi đáp; khung hỏi đáp tự cuộn MỘT lần tới khung chờ
   // "Đang soi câu hỏi…" (trục 2 UX: hai lệnh cuộn mượt chồng nhau làm màn hình giật giữa chừng).
   function hoiCau(cau: string, maCau?: string) {
@@ -217,7 +224,7 @@ export function ThanSo() {
           )}</span>}
         moTa={<>{t("phai.mo_ta")}</>}>
         <DongPhai ten={t("phai.truong_phai")} nhan={t("phai.chon_truong_phai")} giaTri={phai} doi={doiPhai}
-          luaChon={([["pitago", t("phai.pitago")], ["phillips", t("phai.phillips")], ["chaldea", t("phai.chaldea")], ["tong_hop", t("phai.tong_hop_chon")]] as [PhaiThanSo, string][]).filter(([p]) => !(en && p === "phillips"))}
+          luaChon={cacPhai(en).map((p) => [p, t(p === "tong_hop" ? "phai.tong_hop_chon" : `phai.${p}`)] as [PhaiThanSo, string])}
           goiY={phai === "chaldea"
             ? (hoSo.ten_khac ? t("phai.ten_goi_khac", { ten: hoSo.ten_khac }) : t("phai.ten_goi", { ten: hoSo.ho_ten.trim().split(/\s+/).pop() ?? "" }))
             : phai === "phillips" ? t("phai.goi_y_phillips")
@@ -335,7 +342,7 @@ export function ThanSo() {
           gui={(c) => hoiThanSo(hoSo, c, phai, quyUoc, (t) => {
             ghi("pain_point_clicked", { mo_dun: "thanso", tru: t.tru, ma_cau: t.ma, nguon: "hoi_tiep" });
             hoiCau(t.cau, t.ma);
-          }, t, dg("/hop-doi"), maTheoCau.current.get(c), doiPhai)}
+          }, t, dg("/hop-doi"), maTheoCau.current.get(c), doiPhai, en)}
         />
       </section>
 

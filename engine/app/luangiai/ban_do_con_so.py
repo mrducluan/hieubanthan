@@ -486,7 +486,7 @@ def _khuon(so: dict, ngay: int, thang: int, nam: int, ngay_xem: dt.date, quy_uoc
                       ma=kh.ma_mau("thanso", "su_nghiep", "giai_doan", str(hien["dinh"])), tu_tuoi=hien.get("tu_tuoi"), den_tuoi=hien.get("den_tuoi")))
     # CY-1: năm cá nhân có chủ đề tiền / việc (KB chu_y_kb) trong mười năm tới → "Năm nên chú ý tiền bạc, công việc hơn".
     from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
-    if ngay_xem.year - nam >= cyn.TUOI_TOI_THIEU:
+    if ngay_xem.year - nam - ((ngay_xem.month, ngay_xem.day) < (thang, ngay)) >= cyn.TUOI_TOI_THIEU:   # TUOI-1: tuổi tròn
         mangs = cyn.kb.chuong("thanso").get("su_nghiep") or []
         theo = {m: cyn.thanso_nam_nguoi(ngay, thang, m, y) for m in mangs}
         co = [m for m in mangs if theo[m]]

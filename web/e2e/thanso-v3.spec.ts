@@ -29,21 +29,6 @@ test("hai cách tính con số Đường đời: mặc định rút gọn con s�
   await expect(page.getByRole("tab", { name: "Qabalah" })).toHaveCount(0);
 });
 
-test("tổng hợp 2 phái: số lặp lại + đồ thị liên phái", async ({ page }) => {
-  await napHoSo(page, LUAN);
-  await page.goto("/than-so");
-  await page.getByTestId("truong-phai-than-so-mo").click();
-  await page.getByRole("tab", { name: "Tổng hợp 2 phái" }).click();
-  const bai = page.getByTestId("bai-tong-hop");
-  await expect(bai.getByTestId("noi-bat-6")).toContainText("5 nguồn tính độc lập");
-  await expect(bai.getByTestId("tuong-tac-linh_hon")).toContainText("Cộng hưởng");
-  await expect(bai.getByTestId("tuong-tac-ten_day_du")).toContainText("Các góc nhìn");
-  await expect(bai.getByTestId("tuong-tac-duong_doi")).toHaveCount(0);
-  await expect(bai).toContainText("cùng là một phép cộng chữ số ngày sinh");
-  const ans = await hoi(page, "Điểm mạnh cốt lõi của tôi là gì?");
-  await expect(ans).toContainText("Điểm chung giữa các phái");
-});
-
 test("góp ý chưa đúng: ghi chú chỉ gửi khi tự tích đồng ý; câu khủng hoảng không hỏi góp ý", async ({ page }) => {
   await napHoSo(page, LUAN);
   await page.goto("/than-so");

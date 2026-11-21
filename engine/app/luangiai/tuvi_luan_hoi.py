@@ -625,9 +625,12 @@ def hoa_giai(chuong: str, tin: list[str], dm: list[dict], nhan: dict[str, str], 
 
 # ------------------------------------------------------------------ ghép vào báo cáo
 def ap(ds_chuong: list[dict], ls: dict, cc: dict, dong: list[dict], tgb: list[dict], nam_am_xem: int, nam_am_sinh: int,
-       tuoi_mu: int, gioi_tinh: str | None, sao_luu: dict | None = None) -> list[dict]:
-    """Gắn `luan_hoi` vào năm chương mảng đời (sửa tại chỗ) → `nguoi_quanh` (rỗng khi không áp dụng)."""
-    if not ngon_ngu.la_viet() or tuoi_mu - 1 < TUOI_TOI_THIEU or not kb.vai():
+       tuoi_mu: int, gioi_tinh: str | None, sao_luu: dict | None = None, tuoi_tron: int | None = None) -> list[dict]:
+    """Gắn `luan_hoi` vào năm chương mảng đời (sửa tại chỗ) → `nguoi_quanh` (rỗng khi không áp dụng).
+    TUOI-1: cổng 18 tuổi xét TUỔI TRÒN theo sinh nhật (`tuoi_tron`) — "tuổi mụ − 1" chỉ là hiệu hai năm âm, người sinh cuối
+    năm chưa qua sinh nhật thứ 18 vẫn lọt. Không có ngày sinh thì dùng hiệu năm trừ thêm 1 (thận trọng)."""
+    tuoi = tuoi_tron if tuoi_tron is not None else tuoi_mu - 2
+    if not ngon_ngu.la_viet() or tuoi < TUOI_TOI_THIEU or not kb.vai():
         return []
     dmap = {g["nam"]: g for g in dong}
     nq = {ma: nguoi(ls, cc, ma, gioi_tinh) for ma in kb.vai()}

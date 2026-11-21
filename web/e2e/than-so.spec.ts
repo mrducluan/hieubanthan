@@ -191,34 +191,48 @@ test("TV-LICH: ngày lịch Việt ≠ lịch Trung Quốc → hồ sơ nhắc l
   await expect(page.getByTestId("nhac-lich-trung")).toHaveCount(0);
 });
 
-test("TS-PHAI: đổi sang phái Chaldea → 6 con số engine tính, có số kép + đối chiếu Pitago; lựa chọn được nhớ", async ({ page, request }) => {
+test("TS-PHAI-3: bản Việt chỉ còn Pitago + Phillips; Chaldea / Tổng hợp đã nhớ trước đây → về Pitago", async ({ page }) => {
   await napHoSo(page, LUAN);
+  await page.addInitScript(() => localStorage.setItem("hbt.thanso_phai", "chaldea"));
   await page.goto("/than-so");
-  const khung = page.getByTestId("truong-phai-than-so");
-  await page.getByTestId("truong-phai-than-so-mo").click();
-  await khung.getByRole("tab", { name: "Chaldea" }).click();
-  await expect(page.getByTestId("bai-chaldea")).toBeVisible();
-  const api = await (await request.post("/api/thanso/chaldea", { data: { ho_ten: ["Nguyễn Đức Luân"], ngay: 24, thang: 10, nam: 1988 } })).json();
-  for (const s of api.cac_so as { ma: string; goc: number }[]) {
-    await expect(page.getByTestId(`chaldea-${s.ma}`).getByLabel(`Số gốc ${s.goc}`)).toBeVisible();
-  }
-  await expect(page.getByTestId("chaldea-duong_doi")).toContainText("Phái Pitago: Đường đời 6");
-  await expect(page.getByRole("tab", { name: "Biểu đồ ngày sinh" })).toHaveCount(0);
-  await page.reload();
-  await expect(page.getByTestId("bai-chaldea")).toBeVisible();
-  await page.getByTestId("truong-phai-than-so-mo").click();
-  await page.getByTestId("truong-phai-than-so").getByRole("tab", { name: "Pitago" }).click();
+  await expect(page.getByTestId("dang-xem")).toContainText("Đang xem theo Pitago");
   await expect(page.getByTestId("the-duong_doi")).toBeVisible();
+  await page.getByTestId("truong-phai-than-so-mo").click();
+  const khung = page.getByTestId("truong-phai-than-so");
+  await expect(khung.getByRole("tab", { name: "Pitago" })).toBeVisible();
+  await expect(khung.getByRole("tab", { name: "Phillips (4 Kim Tự Tháp)" })).toBeVisible();
+  await expect(khung.getByRole("tab", { name: "Chaldea" })).toHaveCount(0);
+  await expect(khung.getByRole("tab", { name: "Tổng hợp 2 phái" })).toHaveCount(0);
+  // Bình chọn Pitago ↔ Chaldea không còn dưới câu trả lời bản Việt.
+  const ans = await hoi(page, "Tôi hợp nghề gì?");
+  await expect(ans).toBeVisible();
+  await expect(page.getByTestId("phai-nao-dung")).toHaveCount(0);
 });
 
-test("TS-PHAI-2: phái Chaldea → hỏi đáp bản thân trả lời bằng số Chaldea; câu năm cá nhân ghi rõ theo Pythagoras", async ({ page }) => {
-  await napHoSo(page, LUAN);
+
+test("TS-PHAI-3: Kim Tự Tháp Phillips — cạnh Đỉnh 4 không cắt vòng đỉnh khác, nêu đúng chặng tuổi đang đi", async ({ page }) => {
+  await napHoSo(page, { v: 1, ho_ten: "Nguyễn Nhật Thiên Di", ngay: 19, thang: 9, nam: 2016, tao_luc: "2026-09-30T00:00:00Z" });
+  await page.addInitScript(() => localStorage.setItem("hbt.thanso_phai", "phillips"));
   await page.goto("/than-so");
-  await page.getByTestId("truong-phai-than-so-mo").click();
-  await page.getByTestId("truong-phai-than-so").getByRole("tab", { name: "Chaldea" }).click();
-  await page.getByRole("button", { name: "Điểm mạnh cốt lõi của tôi là gì?" }).click();
-  const ans = page.getByTestId("cau-tra-loi").last();
-  await expect(ans).toContainText("theo phái Chaldea");
-  const nam = await hoi(page, "Năm nay của tôi thế nào?");
-  await expect(nam).toContainText("theo phái Pythagoras");
+  const ct = page.getByTestId("phillips-chi-tiet-dinh");
+  await expect(ct).toContainText("Đỉnh 1 · Số 1 · từ 0 đến 35 tuổi (2016–2051)");
+  await expect(ct).toContainText("Đang ở chặng này · bạn đang 10 tuổi");
+  // Hình học: đường Tháng → Đỉnh 4 → Năm phải đi ngoài vòng tròn (r = 24) của Đỉnh 1, 2, 3 và ngoài nhãn tuổi.
+  const hong = await page.evaluate(() => {
+    const svg = document.querySelector('svg[aria-label^="Sơ đồ 4 Đỉnh"]')!;
+    const tam = [...svg.querySelectorAll('g[role="button"]')].map((g) => {
+      const m = /translate\(([\d.]+),([\d.]+)\)/.exec(g.getAttribute("transform") ?? "")!;
+      return { x: Number(m[1]), y: Number(m[2]) };
+    });
+    const d = [...svg.querySelectorAll("path")].at(-1)!.getAttribute("d")!;
+    const so = d.match(/[\d.]+/g)!.map(Number);
+    const doan = [[so[0], so[1], so[2], so[3]], [so[2], so[3], so[4], so[5]]] as number[][];
+    const kc = (p: { x: number; y: number }, [x1, y1, x2, y2]: number[]) => {
+      const dx = x2! - x1!, dy = y2! - y1!;
+      const t = Math.max(0, Math.min(1, ((p.x - x1!) * dx + (p.y - y1!) * dy) / (dx * dx + dy * dy)));
+      return Math.hypot(p.x - (x1! + t * dx), p.y - (y1! + t * dy));
+    };
+    return tam.slice(0, 3).flatMap((p) => doan.map((s) => kc(p, s))).filter((k) => k < 30);
+  });
+  expect(hong).toEqual([]);
 });
