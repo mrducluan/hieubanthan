@@ -53,6 +53,8 @@ export interface Hop {
   veto?: boolean; viec?: { chi_phi: "khong_ton" | "it_tien" | "sua_chua"; lam: string }[]; an_toan?: string[];
   /** TV-YBS: ý Tử vi bổ sung gộp vào hộp đang có (cùng nội dung) — một câu + một việc; mã của hộp không đổi. */
   y_bo_sung?: { noi_dung: string; viec?: string };
+  /** Nguồn cổ thư / trường phái đã đối chiếu (Pilot). */
+  source_ref?: { source_id: string; ten_sach?: string; han?: string; am?: string; nhom?: string };
 }
 
 /** TV-YBS: khung gập "Góc nhìn khác" của một chương — 1–3 ý của một trường phái khác, mỗi ý có mã kiểm chứng + phái

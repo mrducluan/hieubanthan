@@ -259,7 +259,8 @@ def _sao_van(sao: str, cung: str, nhom: str) -> dict:
             "de_vap": m.get("de_vap") or L("tvds.sao_van.de_vap", f"Ở chuyện {t}, điều dễ vấp là: {mt}.", t=t, mt=mt),
             "loi_khuyen": m.get("loi_khuyen") or L("tvds.sao_van.loi_khuyen",
                                                    f"Nên dựa vào chỗ mạnh ({d1}) và chậm lại khi thấy mình {m1}.",
-                                                   dm=d1, mt=m1)}
+                                                   dm=d1, mt=m1),
+            "source_ref": m.get("source_ref")}
 
 
 def _hop_cung(ch: str, ten: str, cc: dict, ghep: bool) -> list[dict]:
@@ -280,14 +281,18 @@ def _hop_cung(ch: str, ten: str, cc: dict, ghep: bool) -> list[dict]:
         if s["muon"]:
             w *= 0.75
         goc = slug(s["ten"]) + hau
-        bo_manh = ds == "Bình" and cc["muc"] == "can_chu_dong"
-        if not bo_manh:
-            ra.append(_hop("diem_manh", _tieu_de(van["manh"], L("tvds.td.diem_manh_ve", f"Điểm mạnh về {t}", t=t)),
-                           van["manh"], [cu], _ma("ds", ch, goc, trang, "manh"), w if nhom == "sang" else 0.4,
-                           _cu_vi=[cu_vi]))
+        ref = van.get("source_ref")
+        cu_list = [cu]
+        if ref and ref.get("am") and ref.get("han"):
+            cu_list.append(f"Nguồn {ref.get('ten_sach', 'cổ thư')}: «{ref['am']}» ({ref['han']})")
+        them_ref = {"source_ref": ref} if ref else {}
+        w_manh = 0.3 if (ds == "Bình" and cc["muc"] == "can_chu_dong") else (w if nhom == "sang" else 0.4)
+        ra.append(_hop("diem_manh", _tieu_de(van["manh"], L("tvds.td.diem_manh_ve", f"Điểm mạnh về {t}", t=t)),
+                       van["manh"], cu_list, _ma("ds", ch, goc, trang, "manh"), w_manh,
+                       _cu_vi=[cu_vi], **them_ref))
         ra.append(_hop("luu_y", _tieu_de(van["de_vap"], L("tvds.td.de_vap_ve", f"Điều dễ vấp về {t}", t=t)),
-                       van["de_vap"], [cu], _ma("ds", ch, goc, trang, "vap"), w if nhom == "ham" else w * 0.45,
-                       huong=van["loi_khuyen"], _cu_vi=[cu_vi]))
+                       van["de_vap"], cu_list, _ma("ds", ch, goc, trang, "vap"), w if nhom == "ham" else w * 0.45,
+                       huong=van["loi_khuyen"], _cu_vi=[cu_vi], **them_ref))
     for x in cc["hoa"]:
         m = kb.hoa_linh_vuc(x["hoa"], ten) or {}
         y0, lk0 = _HOA_MAC_DINH[x["hoa"]]

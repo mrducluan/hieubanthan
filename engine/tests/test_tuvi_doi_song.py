@@ -316,7 +316,7 @@ def test_kb_loi_van_sach():
             yield x
         elif isinstance(x, dict):
             for k, v in x.items():
-                if k not in ("cum_cam", "_nguon", "source"):
+                if k not in ("cum_cam", "_nguon", "source", "source_ref"):
                     yield from chuoi(v)
         elif isinstance(x, list):
             for v in x:

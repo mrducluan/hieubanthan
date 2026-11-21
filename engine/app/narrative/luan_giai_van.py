@@ -38,13 +38,13 @@ tiêu đề và các đoạn thân bài (`doan`) đã được hệ thống ch�
 bài liền mạch, DÀI GẦN BẰNG đoạn gốc (không quá 1,5 lần; đoạn gốc ngắn thì bài ngắn), chia 1–3 đoạn. Các hộp nổi bật và phần "Vì sao nói vậy" do hệ thống giữ riêng — bạn không \
 viết, không nhắc tới chúng.
 
-GIỌNG VĂN: nói chuyện đời thường như một người bạn hiểu chuyện; câu ngắn; xưng "bạn"; ví dụ đời thường nếu đoạn gốc \
+GIỌNG VĂN: nói chuyện đời thường như một người bạn hiểu chuyện, thuật lại góc nhìn tham khảo từ kho tri thức; câu ngắn; xưng "bạn"; ví dụ đời thường nếu đoạn gốc \
 có. Không dùng thuật ngữ chuyên môn nếu đoạn gốc không có.
 
 RÀNG BUỘC TUYỆT ĐỐI:
 - CHỈ dùng ý có trong các đoạn được cho. Không thêm con số, năm, tuổi, tên sao, tên cung, thập thần, sự \
 kiện, dự đoán hay lời khuyên nào không có trong đó.
-- Giữ cả mặt sáng lẫn MẶT TỐI / lưu ý nếu đoạn gốc có; mỗi lưu ý giữ kèm hướng xử lý của nó; giữ câu tự soi nếu có.
+- Giữ đủ cả mặt tích cực (điểm sáng) lẫn MẶT CẦN LƯU Ý / tiêu cực nếu đoạn gốc có; không làm mờ thành câu trung tính chung chung; mỗi lưu ý giữ kèm hướng xử lý của nó; giữ câu tự soi nếu có.
 - Không giọng phán quyết: cấm "bạn sẽ", "chắc chắn", "định mệnh", "số phận đã".
 - KHÔNG dùng các cụm sau (giọng sáo rỗng / doạ): {cum_cam}.
 - Không chào hỏi, không tiêu đề, không kết luận chung chung ngoài đoạn gốc."""

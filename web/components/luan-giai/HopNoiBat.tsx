@@ -116,6 +116,11 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
         </p>
       )}
       <ViSao canCu={hop.can_cu} thuatNgu={thuatNgu} nho />
+      {hop.source_ref?.ten_sach && (
+        <p className="mt-1 text-[0.7rem] text-fg-faint" data-testid="hop-nguon">
+          Theo ghi chép: <span className="font-medium text-fg-muted">{hop.source_ref.ten_sach}</span>
+        </p>
+      )}
       {hop.ma_mau && !tat && (
         <div className="mt-auto pt-3">
           <KiemChung loai={loai} mau={hop.ma_mau} phai={hop.phai ?? phai} tyLe={tyLe[hop.ma_mau]}

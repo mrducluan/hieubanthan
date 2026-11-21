@@ -144,8 +144,36 @@ def kiem_kb() -> dict[str, list[str]]:
     return kq
 
 
+def kiem_tuvi_ds_duality() -> list[str]:
+    """Build-time duality & citation lint cho Pilot Tử vi đời sống (14 chính tinh × 12 cung × sáng/hãm)."""
+    tv_ds_path = KB_DIR / "tuvi_doi_song_kb.json"
+    if not tv_ds_path.exists():
+        return []
+    tv_ds = json.loads(tv_ds_path.read_text(encoding="utf-8"))
+    slv_loi: list[str] = []
+    _duyet({k: v for k, v in tv_ds.items() if k not in ("_nguon", "source", "cum_cam", "cum_chung_chung", "source_ref")},
+           "tuvi_doi_song", slv_loi)
+    for sao, cungs in (tv_ds.get("sao_linh_vuc") or {}).items():
+        for cung, states in cungs.items():
+            for st in ("sang", "ham"):
+                o = states.get(st) or {}
+                if not (o.get("manh") and o.get("de_vap") and o.get("loi_khuyen")):
+                    slv_loi.append(f"tuvi_doi_song.{sao}.{cung}.{st}: thiếu lưỡng cực manh/de_vap/loi_khuyen")
+                ref = o.get("source_ref")
+                if ref is not None:
+                    if not (ref.get("source_id") and ref.get("han") and ref.get("am")):
+                        slv_loi.append(f"tuvi_doi_song.{sao}.{cung}.{st}: source_ref thiếu source_id/han/am")
+                    nhom = ref.get("nhom")
+                    if st == "sang" and nhom != "A":
+                        slv_loi.append(f"tuvi_doi_song.{sao}.{cung}.{st}: source_ref lệch tông (sang cần nhóm A, gặp {nhom})")
+                    if st == "ham" and nhom not in ("B", "C"):
+                        slv_loi.append(f"tuvi_doi_song.{sao}.{cung}.{st}: source_ref lệch tông (ham cần nhóm B/C, gặp {nhom})")
+    return slv_loi
+
+
 def cmd_kiem_kb() -> int:
     kq = kiem_kb()
+    kq["tuvi_ds"] = kiem_tuvi_ds_duality()
     tong = 0
     for md, loi in kq.items():
         print(f"{md:10s} {'OK' if not loi else f'{len(loi)} lỗi'}")
