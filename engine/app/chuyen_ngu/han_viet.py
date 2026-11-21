@@ -54,7 +54,8 @@ Với mỗi id trong INPUT ({"goc": ..., "ban_dich": ...}), KHÔNG viết lại;
 - luong_cuc: true nếu cả "manh" và "de_vap" đều cụ thể, rõ nét, không chung chung trung tính."""
 
 
-def doc_sqlite(db_path: str | Path, table: str, *, limit: int = 20, offset: int = 0) -> dict[str, dict]:
+def doc_sqlite(db_path: str | Path, table: str, *, limit: int = 20, offset: int = 0,
+               exclude_sources: tuple[str, ...] = ("BAZI_SKILL_MD",)) -> dict[str, dict]:
     """Đọc các mục chưa dịch từ kho `*-kb/*.sqlite` (read-only) thành đầu vào chuẩn cho `chuyen_han_viet`."""
     p = Path(db_path)
     con = sqlite3.connect(f"file:{p}?mode=ro", uri=True)
@@ -64,11 +65,19 @@ def doc_sqlite(db_path: str | Path, table: str, *, limit: int = 20, offset: int 
         id_col = "section_id" if "section_id" in cols else "rule_id" if "rule_id" in cols else "entry_id"
         han_col = "text_zh_hant" if "text_zh_hant" in cols else "text_trad"
         src_col = "book_code" if "book_code" in cols else "source_code" if "source_code" in cols else None
-        where = "WHERE (translation_vi IS NULL OR trim(translation_vi) = '')" if "translation_vi" in cols else ""
+        clauses = []
+        if "translation_vi" in cols:
+            clauses.append("(translation_vi IS NULL OR trim(translation_vi) = '')")
+        params: list = []
+        if src_col and exclude_sources:
+            ph = ",".join("?" for _ in exclude_sources)
+            clauses.append(f'"{src_col}" NOT IN ({ph})')
+            params.extend(exclude_sources)
+        where = ("WHERE " + " AND ".join(clauses)) if clauses else ""
         sel_src = f'"{src_col}"' if src_col else "'co_thu' as src"
         rows = con.execute(
             f'SELECT "{id_col}" as id, "{han_col}" as han, {sel_src} as nguon FROM "{table}" {where} LIMIT ? OFFSET ?',
-            (limit, offset),
+            (*params, limit, offset),
         ).fetchall()
         return {str(r["id"]): {"han": (r["han"] or "").strip(), "nguon": str(r["nguon"] or "co_thu"), "linh_vuc": "chung"}
                 for r in rows if (r["han"] or "").strip()}

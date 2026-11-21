@@ -1393,13 +1393,7 @@
    },
    "trich_dan": "Chu Dịch, quẻ 58 Đoài 兌 (quái từ, Thoán, Đại Tượng)",
    "source_id": "chu_dich",
-   "school_id": "nghia_ly",
-   "source_ref": {
-    "source_id": "kinh_dich_ngo_tat_to",
-    "ten_sach": "Chu Dịch Truyền Nghĩa",
-    "han": "兑亨利貞",
-    "dich": "Đoái hanh lợi trinh. Dich nghĩa. - Quẻ Đoái hanh, lợi về chính bền."
-   }
+   "school_id": "nghia_ly"
   },
   "59": {
    "ten": "Hoán",
