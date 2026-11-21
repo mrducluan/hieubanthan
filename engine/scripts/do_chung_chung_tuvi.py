@@ -255,7 +255,7 @@ def kb_soat(cum: list[str]) -> dict:
     ra = {}
     for ten, khoa in LOI_LUAN.items():
         goc = json.loads((d / f"{ten}.json").read_text("utf-8"))
-        cs = list(_chuoi({k: goc[k] for k in khoa if k in goc}, bo=("ten", "ten_han", "_ghi_chu", "source_ref")))
+        cs = list(_chuoi({k: goc[k] for k in khoa if k in goc}, bo=("ten", "ten_han", "_ghi_chu")))
         ra[f"kb_{ten}_chung_chung"] = sum(bool(kb.tim_cum_cam(s, cum)) for s in cs)
         ra[f"kb_{ten}_cum_cam"] = sum(bool(kb.tim_cum_cam(s, cam)) for s in cs)
     return ra

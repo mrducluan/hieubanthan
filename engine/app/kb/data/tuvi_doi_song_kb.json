@@ -125,19 +125,7 @@
     "ham": {
      "manh": "Bạn coi trọng thể diện của anh chị em và hay muốn giữ hoà khí trong nhà, dù trong lòng có điều chưa vừa ý.",
      "de_vap": "Bạn dễ tự nhận vai người lớn trong nhóm rồi chạnh lòng khi anh chị em không nghe hay không cảm ơn.",
-     "loi_khuyen": "Lần tới có chuyện khó chịu với anh chị em, nói thẳng một câu bằng giọng bình thường thay vì im lặng giữ trong lòng.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "加羊陀火铃空劫克害有则欠和",
-      "am": "Gia Dương Đà Hoả Linh Không Kiếp khắc hại, hữu tắc khiếm hoà",
-      "y": "Khi đi cùng sao khó, anh chị em ít dựa được nhau; có nhau thì cũng dễ kém hoà.",
-      "nhom": "C",
-      "chu_de": "gia_dinh",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý giữ liên lạc đều với anh chị em, chuyện tiền bạc chung thì nói rõ từ đầu.",
-      "viec": "Gọi hỏi thăm một người anh chị em lâu chưa nói chuyện."
-     }
+     "loi_khuyen": "Lần tới có chuyện khó chịu với anh chị em, nói thẳng một câu bằng giọng bình thường thay vì im lặng giữ trong lòng."
     }
    },
    "Phu Thê": {
@@ -159,19 +147,7 @@
     "ham": {
      "manh": "Bạn nghiêm túc trong chuyện tình cảm, muốn người mình chọn đáng để tự hào và muốn giữ mối quan hệ lâu dài.",
      "de_vap": "Bạn dễ đòi hỏi người ấy phải đúng hình mẫu trong đầu mình, rồi thất vọng âm thầm khi họ không theo kịp.",
-     "loi_khuyen": "Mỗi tuần nói với người ấy một điều cụ thể bạn quý ở họ, kể cả việc nhỏ như nấu bữa cơm hay đón con.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "破军同刑剋加羊陀火铃亦刑",
-      "am": "Phá Quân đồng hình khắc, gia Dương Đà Hoả Linh diệc hình",
-      "y": "Khi đi cùng Phá Quân hoặc các sao khó, đường vợ chồng cần vun nhiều hơn người, dễ lệch nhịp nếu không nói chuyện.",
-      "nhom": "C",
-      "chu_de": "tinh_duyen",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý nói ra điều mình cần thay vì chờ người kia tự hiểu.",
-      "viec": "Hẹn một buổi tối trong tuần chỉ để hai người nói chuyện, không điện thoại."
-     }
+     "loi_khuyen": "Mỗi tuần nói với người ấy một điều cụ thể bạn quý ở họ, kể cả việc nhỏ như nấu bữa cơm hay đón con."
     }
    },
    "Tử Nữ": {
@@ -445,19 +421,7 @@
     "ham": {
      "manh": "Bạn có ý thức giữ thể diện cho gia đình và tôn trọng người lớn, dù đôi lúc không đồng ý với họ.",
      "de_vap": "Khi cha mẹ hay sếp áp đặt, bạn dễ cứng lại, giữ ý mình và tránh mặt thay vì nói chuyện.",
-     "loi_khuyen": "Khi bất đồng với người lớn, nói \"con hiểu ý bố mẹ, con xin nói thêm một điều\" rồi mới trình bày.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "紫微无克天府同亦无刑",
-      "am": "Tử Vi vô khắc, Thiên Phủ đồng diệc vô hình",
-      "y": "Sách ghi sao này ở đây thì duyên với cha mẹ êm, được nương tựa lâu; đi cùng Thiên Phủ cũng vậy.",
-      "nhom": "C",
-      "chu_de": "gia_dinh",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý đừng coi sự có mặt của cha mẹ là đương nhiên.",
-      "viec": "Về ăn một bữa cơm với cha mẹ, hoặc gọi điện nói chuyện mười lăm phút."
-     }
+     "loi_khuyen": "Khi bất đồng với người lớn, nói \"con hiểu ý bố mẹ, con xin nói thêm một điều\" rồi mới trình bày."
     }
    }
   },
@@ -509,14 +473,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天机庙旺有二人",
-      "am": "Thiên Cơ miếu vượng hữu nhị nhân",
-      "y": "Khi sao sáng, sách ghi là có anh chị em, tuy không đông.",
-      "nhom": "C",
+      "han": "陷地相背不一心",
+      "am": "Hãm địa tương bội bất nhất tâm",
+      "y": "Khi sao yếu, anh chị em dễ quay lưng, mỗi người một ý.",
+      "nhom": "B",
       "chu_de": "gia_dinh",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý nhà ít người thì càng cần giữ nhau.",
-      "viec": "Rủ anh chị em một bữa ăn hoặc một cuộc gọi chung trong tuần."
+      "ham_y": "Nên chú ý tách chuyện tiền bạc khỏi chuyện tình thân, việc chung thì ghi lại rõ.",
+      "viec": "Nếu có khoản chung với anh chị em, viết lại ai góp gì và gửi cho cả nhà cùng xem."
      }
     }
    },
@@ -567,14 +531,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天机庙旺二人",
-      "am": "Thiên Cơ miếu vượng nhị nhân",
-      "y": "Khi sao sáng, sách ghi là có con nhưng không đông.",
+      "han": "加羊陀火铃空劫全无子",
+      "am": "Gia Dương Đà Hoả Linh Không Kiếp toàn vô tử",
+      "y": "Khi đi cùng sao khó, đường con cái sách ghi là đến muộn hoặc phải bỏ nhiều công.",
       "nhom": "C",
       "chu_de": "con_cai",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý ít con thì dành cho con thời gian chứ không dồn kỳ vọng.",
-      "viec": "Dành một buổi trong tuần làm cùng con một việc con thích."
+      "ham_y": "Nên chú ý sức khoẻ sinh sản từ sớm; mong con thì nên đi khám sớm.",
+      "viec": "Nếu đang mong con, hai vợ chồng cùng đặt lịch khám tư vấn trong tháng."
      }
     }
    },
@@ -787,14 +751,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天机庙旺无刑",
-      "am": "Thiên Cơ miếu vượng vô hình",
-      "y": "Khi sao sáng, sách ghi duyên với cha mẹ yên ổn.",
+      "han": "陷地逢羊陀火铃空劫二姓寄居重拜父母或过房入赘",
+      "am": "Hãm địa phùng Dương Đà Hoả Linh Không Kiếp, nhị tính ký cư, trùng bái phụ mẫu, hoặc quá phòng nhập chuế",
+      "y": "Khi sao yếu lại gặp sao khó, sách ghi duyên nương tựa cha mẹ mỏng hơn: dễ ở nhờ họ khác, có thêm cha mẹ nuôi, hoặc về ở bên nhà vợ.",
       "nhom": "C",
       "chu_de": "gia_dinh",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý giữ nếp thăm hỏi đều, đừng đợi dịp.",
-      "viec": "Đặt lịch cố định mỗi tuần gọi về nhà một lần."
+      "ham_y": "Nên chú ý trân trọng cả những người đã nuôi dạy mình ngoài cha mẹ ruột.",
+      "viec": "Hỏi thăm một người từng cưu mang, dạy dỗ mình mà lâu rồi chưa liên lạc."
      }
     }
    }
@@ -843,19 +807,7 @@
     "ham": {
      "manh": "Bạn có lòng với anh chị em, sẵn sàng giúp dù bản thân cũng đang chật vật.",
      "de_vap": "Bạn dễ giúp đến cạn sức rồi chạnh lòng vì anh chị em coi đó là chuyện đương nhiên.",
-     "loi_khuyen": "Lần tới anh chị em nhờ, nói rõ bạn giúp được đến đâu, phần còn lại để họ tự lo.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "太阳庙旺三人",
-      "am": "Thái Dương miếu vượng tam nhân",
-      "y": "Khi sao sáng, sách ghi là có vài anh chị em.",
-      "nhom": "C",
-      "chu_de": "gia_dinh",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý mỗi người một việc nhưng vẫn giữ một dịp gặp chung.",
-      "viec": "Đề xuất với anh chị em một ngày họp mặt cố định trong năm."
-     }
+     "loi_khuyen": "Lần tới anh chị em nhờ, nói rõ bạn giúp được đến đâu, phần còn lại để họ tự lo."
     }
    },
    "Phu Thê": {
@@ -877,19 +829,7 @@
     "ham": {
      "manh": "Bạn chăm lo cho người ấy bằng việc làm cụ thể, ít nói nhưng làm nhiều.",
      "de_vap": "Bạn dễ lo hết phần nhà rồi giận ngầm vì người ấy không thấy, nhưng lại không nói ra.",
-     "loi_khuyen": "Nói với người ấy một việc bạn muốn được giúp tuần này, cụ thể như rửa bát hay đón con một hôm.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "太阳庙旺迟娶吉早娶克因妻得贵",
-      "am": "Thái Dương miếu vượng trì thú cát, tảo thú khắc, nhân thê đắc quý",
-      "y": "Khi sao sáng, lập gia đình muộn thì êm, cưới sớm thì đường vợ chồng cần vun nhiều hơn; có thể nhờ người bạn đời mà thêm vị thế.",
-      "nhom": "C",
-      "chu_de": "tinh_duyen",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý đừng cưới vì đến tuổi; đủ hiểu nhau rồi hãy quyết.",
-      "viec": "Viết ra ba điều mình cần ở một người bạn đời và xem đã nói với họ chưa."
-     }
+     "loi_khuyen": "Nói với người ấy một việc bạn muốn được giúp tuần này, cụ thể như rửa bát hay đón con một hôm."
     }
    },
    "Tử Nữ": {
@@ -905,14 +845,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "太阳入庙男三女二晚子贵",
-      "am": "Thái Dương nhập miếu nam tam nữ nhị, vãn tử quý",
-      "y": "Khi sao sáng, sách ghi con cái đủ trai gái, người con sinh muộn dễ nên người.",
+      "han": "再加羊陀火铃空劫止留一子送终",
+      "am": "Tái gia Dương Đà Hoả Linh Không Kiếp, chỉ lưu nhất tử tống chung",
+      "y": "Khi sao yếu lại gặp sao khó, đường con cái sách ghi là thưa, ít người ở gần lúc về già.",
       "nhom": "C",
       "chu_de": "con_cai",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý đừng so các con với nhau; mỗi đứa một nhịp lớn.",
-      "viec": "Khen riêng từng con một điều cụ thể trong tuần."
+      "ham_y": "Nên chú ý vun tình thân với con từ nhỏ, đừng chỉ lo phần vật chất.",
+      "viec": "Ăn một bữa không điện thoại với con và hỏi con đang lo điều gì."
      }
     }
    },
@@ -1141,19 +1081,7 @@
     "ham": {
      "manh": "Bạn có trách nhiệm với cha mẹ, thường là người lo nhiều nhất trong nhà.",
      "de_vap": "Bạn dễ ôm hết việc lo cho cha mẹ mà ít kể với anh chị em, rồi mệt mà không ai hay.",
-     "loi_khuyen": "Lập một nhóm tin nhắn với anh chị em, chia lịch thăm và lo cho cha mẹ, mỗi người một phần.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "太阳入庙无克",
-      "am": "Thái Dương nhập miếu vô khắc",
-      "y": "Khi sao sáng, sách ghi duyên với cha mẹ thuận.",
-      "nhom": "C",
-      "chu_de": "gia_dinh",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý dành thời gian cho cha, người thường ít nói ra điều mình cần.",
-      "viec": "Rủ cha làm cùng một việc nhỏ: uống cà phê, sửa đồ, đi bộ."
-     }
+     "loi_khuyen": "Lập một nhóm tin nhắn với anh chị em, chia lịch thăm và lo cho cha mẹ, mỗi người một phần."
     }
    }
   },
@@ -1205,14 +1133,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "武曲庙旺有二人不合",
-      "am": "Vũ Khúc miếu vượng hữu nhị nhân, bất hợp",
-      "y": "Khi sao sáng, sách ghi có anh chị em nhưng tính không hợp nhau.",
+      "han": "见羊陀火铃空劫孤单",
+      "am": "Kiến Dương Đà Hoả Linh Không Kiếp cô đơn",
+      "y": "Khi gặp sao khó, dễ thấy một mình, ít anh chị em để dựa.",
       "nhom": "C",
       "chu_de": "gia_dinh",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý tôn trọng khác biệt, không cần giống nhau mới thân được.",
-      "viec": "Tìm một việc chung nhỏ với anh chị em mà hai bên đều thích, làm cùng một lần."
+      "ham_y": "Nên chú ý chủ động giữ các mối thân, cả họ hàng lẫn bạn bè coi như ruột thịt.",
+      "viec": "Nhắn cho một người anh chị em họ hoặc bạn thân lâu năm, hẹn gặp trong tháng."
      }
     }
    },
@@ -1225,19 +1153,7 @@
     "ham": {
      "manh": "Bạn lo cho gia đình bằng việc làm thực tế, ít hứa hẹn nhưng giữ lời.",
      "de_vap": "Bạn dễ ít nói lời ngọt, khiến người ấy cảm thấy bạn lo toan nhiều hơn quan tâm.",
-     "loi_khuyen": "Mỗi ngày nhắn cho người ấy một câu ngắn không về việc, như \"hôm nay mình ổn không?\".",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "武曲背克宜迟娶同年夫妇也相当加吉星因妻得财",
-      "am": "Vũ Khúc bội khắc nghi trì thú, đồng niên phu phụ dã tương đương, gia cát tinh nhân thê đắc tài",
-      "y": "Sách ghi đường vợ chồng cần vun nhiều hơn người, nên lập gia đình muộn; hai người bằng tuổi thì cũng hợp, thêm sao tốt thì nhờ người bạn đời mà có thêm của.",
-      "nhom": "C",
-      "chu_de": "tinh_duyen",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý bớt cứng trong lời nói với người thân nhất.",
-      "viec": "Lần tới bất đồng, thử nhắc lại ý người kia trước khi nói ý mình."
-     }
+     "loi_khuyen": "Mỗi ngày nhắn cho người ấy một câu ngắn không về việc, như \"hôm nay mình ổn không?\"."
     }
    },
    "Tử Nữ": {
@@ -1491,19 +1407,7 @@
     "ham": {
      "manh": "Bạn tôn trọng nguyên tắc của cha mẹ, dù có lúc không đồng ý vẫn làm tròn phần mình.",
      "de_vap": "Bạn và cha mẹ dễ nói chuyện cứng với nhau, cả hai cùng thẳng nên hay va chạm.",
-     "loi_khuyen": "Khi bất đồng với cha mẹ, hạ giọng, nói chậm, và dừng lại trước khi câu chuyện thành to tiếng.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "武曲克早退祖业不刑",
-      "am": "Vũ Khúc khắc tảo, thoái tổ nghiệp bất hình",
-      "y": "Sách ghi duyên nương tựa cha mẹ mỏng hơn; rời nếp nhà, tự lập sớm thì lại êm.",
-      "nhom": "C",
-      "chu_de": "gia_dinh",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý ở riêng không có nghĩa là xa lòng; vẫn nên vun với cha mẹ.",
-      "viec": "Gửi cha mẹ một tấm ảnh hoặc một tin kể chuyện trong tuần của mình."
-     }
+     "loi_khuyen": "Khi bất đồng với cha mẹ, hạ giọng, nói chậm, và dừng lại trước khi câu chuyện thành to tiếng."
     }
    }
   },
@@ -1555,14 +1459,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天同入庙四五人",
-      "am": "Thiên Đồng nhập miếu tứ ngũ nhân",
-      "y": "Khi sao sáng, sách ghi anh chị em đông đủ.",
+      "han": "见羊陀火铃空劫忌少宜分居不和",
+      "am": "Kiến Dương Đà Hoả Linh Không Kiếp Kỵ thiểu, nghi phân cư, bất hoà",
+      "y": "Khi gặp sao khó thì anh chị em thưa hơn và kém hoà; sách khuyên ở riêng thì dễ giữ tình.",
       "nhom": "C",
       "chu_de": "gia_dinh",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý nhà đông thì dễ có người bị quên; để ý người ít nói nhất.",
-      "viec": "Hỏi thăm riêng người anh chị em ít lên tiếng nhất trong nhà."
+      "ham_y": "Nên chú ý giữ khoảng cách vừa đủ: gần quá dễ va, xa quá dễ nhạt.",
+      "viec": "Thống nhất với anh chị em một việc chung nên tách bạch, ví dụ chi phí chăm cha mẹ."
      }
     }
    },
@@ -1609,19 +1513,7 @@
     "ham": {
      "manh": "Bạn hiền với con, ít quát mắng, con không sợ bạn.",
      "de_vap": "Bạn dễ để việc dạy con cho người khác lo, đến lúc con có chuyện mới bất ngờ.",
-     "loi_khuyen": "Mỗi tuần dành một buổi xem bài vở hoặc hỏi chuyện trường lớp của con, ghi lại điều con kể.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天同庙旺五子有贵",
-      "am": "Thiên Đồng miếu vượng ngũ tử hữu quý",
-      "y": "Khi sao sáng, sách ghi con cái đông và có người nên danh.",
-      "nhom": "C",
-      "chu_de": "con_cai",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý đừng đặt chữ \"nên danh\" lên vai con; con vui khoẻ là gốc.",
-      "viec": "Hỏi con điều con thích làm nhất dạo này và cùng làm một lần."
-     }
+     "loi_khuyen": "Mỗi tuần dành một buổi xem bài vở hoặc hỏi chuyện trường lớp của con, ghi lại điều con kể."
     }
    },
    "Tài Bạch": {
@@ -1671,14 +1563,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天同入庙灾少",
-      "am": "Thiên Đồng nhập miếu tai thiểu",
-      "y": "Khi sao sáng, sách ghi ít đau ốm.",
+      "han": "巨门同心气疾太阴同加羊火血气疾天梁同加四杀心气疾",
+      "am": "Cự Môn đồng tâm khí tật, Thái Âm đồng gia Dương Hoả huyết khí tật, Thiên Lương đồng gia tứ sát tâm khí tật",
+      "y": "Cùng Cự Môn, hoặc cùng Thiên Lương thêm sao khó, sách gắn với tim và hơi thở; cùng Thái Âm thêm sao khó thì gắn với khí huyết.",
       "nhom": "C",
       "chu_de": "suc_khoe",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý vận động đều, vì nếp sống thong thả dễ thành ít động; vẫn nên khám định kỳ.",
-      "viec": "Đi bộ 30 phút ba buổi trong tuần và ghi lại."
+      "ham_y": "Nên chú ý tim mạch và hô hấp; hay hồi hộp, tức ngực, hụt hơi thì đi khám sớm.",
+      "viec": "Hẹn một lần khám tim mạch cơ bản nếu chưa từng đo điện tim."
      }
     }
    },
@@ -1853,14 +1745,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天同独守庙旺无刑",
-      "am": "Thiên Đồng độc thủ miếu vượng vô hình",
-      "y": "Khi sao sáng và đứng một mình, sách ghi duyên với cha mẹ trọn vẹn.",
+      "han": "加羊陀火铃空劫父母不全",
+      "am": "Gia Dương Đà Hoả Linh Không Kiếp phụ mẫu bất toàn",
+      "y": "Khi đi cùng sao khó, sách ghi duyên nương tựa cha mẹ mỏng hơn người, ít khi được gần đủ cả hai.",
       "nhom": "C",
       "chu_de": "gia_dinh",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý báo đáp bằng việc nhỏ hằng ngày, không cần đợi dịp lớn.",
-      "viec": "Mua cho cha mẹ một món ông bà thích ăn và ngồi ăn cùng."
+      "ham_y": "Nên chú ý quý thời gian còn có cha mẹ, và lo sức khoẻ cho ông bà khi có thể.",
+      "viec": "Chụp một tấm ảnh chung với cha mẹ trong lần gặp tới."
      }
     }
    }
@@ -1909,19 +1801,7 @@
     "ham": {
      "manh": "Bạn bênh anh chị em hết lòng khi họ bị người ngoài làm khó.",
      "de_vap": "Bạn dễ giận anh chị em vì một câu nói, rồi giữ thái độ lâu.",
-     "loi_khuyen": "Sau mỗi lần căng với anh chị em, chủ động nhắn một tin hỏi thăm trong vòng ba ngày.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "廉贞入庙二人",
-      "am": "Liêm Trinh nhập miếu nhị nhân",
-      "y": "Khi sao sáng, sách ghi nhà có ít anh chị em.",
-      "nhom": "C",
-      "chu_de": "gia_dinh",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý ít người thì mỗi mối càng quý; đừng để việc nhỏ làm xa nhau.",
-      "viec": "Gửi anh chị em một lời cảm ơn về một việc cũ họ từng giúp mình."
-     }
+     "loi_khuyen": "Sau mỗi lần căng với anh chị em, chủ động nhắn một tin hỏi thăm trong vòng ba ngày."
     }
    },
    "Phu Thê": {
@@ -1961,14 +1841,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天府同主贵子三人",
-      "am": "Thiên Phủ đồng chủ quý tử tam nhân",
-      "y": "Cùng Thiên Phủ, sách ghi có con và con dễ nên người.",
+      "han": "若贪狼破军七杀同主孤再加羊陀火铃空劫全无",
+      "am": "Nhược Tham Lang Phá Quân Thất Sát đồng chủ cô, tái gia Dương Đà Hoả Linh Không Kiếp toàn vô",
+      "y": "Khi đi cùng Tham Lang, Phá Quân hay Thất Sát thì con cái ít; thêm sao khó thì sách ghi là rất muộn, phải bỏ nhiều công.",
       "nhom": "C",
       "chu_de": "con_cai",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý dạy con sự tử tế trước thành tích.",
-      "viec": "Kể cho con nghe một lần mình sai và đã sửa thế nào."
+      "ham_y": "Nên chú ý nếu mong con thì đi khám sớm, và có con hay chưa cũng không đo giá trị một người.",
+      "viec": "Nếu đang mong con, ghi lại các câu muốn hỏi bác sĩ và đặt lịch khám."
      }
     }
    },
@@ -2117,19 +1997,7 @@
     "ham": {
      "manh": "Bạn có tham vọng, chịu làm nhiều để lên vị trí mình mong muốn.",
      "de_vap": "Muốn nhanh thì dễ tính đến đường tắt, hoặc va chạm với sếp khi thấy không công bằng.",
-     "loi_khuyen": "Với mỗi cơ hội đi nhanh, tự hỏi nếu việc này bị công khai thì mình có ổn không; không ổn thì bỏ.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "廉贞入庙武职权贵不耐久",
-      "am": "Liêm Trinh nhập miếu vũ chức quyền quý bất nại cửu",
-      "y": "Khi sao sáng, hợp việc cần kỷ luật và sức mạnh, có quyền có vị trí, nhưng sách ghi là khó giữ lâu.",
-      "nhom": "B",
-      "chu_de": "cong_viec",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý lúc đang lên thì chuẩn bị sẵn đường lùi và người kế tiếp.",
-      "viec": "Ghi ra nếu mai rời vị trí hiện tại, mình còn lại những gì: tay nghề, quan hệ, khoản để dành."
-     }
+     "loi_khuyen": "Với mỗi cơ hội đi nhanh, tự hỏi nếu việc này bị công khai thì mình có ổn không; không ổn thì bỏ."
     }
    },
    "Điền Trạch": {
@@ -2637,19 +2505,7 @@
     "ham": {
      "manh": "Bạn hiểu cảm giác của anh chị em dù họ không nói, nên thường là người đầu tiên nhận ra nhà có chuyện.",
      "de_vap": "Bạn dễ để bụng một câu nói vô tình trong bữa cơm, giận ngầm nhiều ngày mà người kia không hề biết.",
-     "loi_khuyen": "Khi một câu nói làm bạn buồn, nói lại trong vòng một ngày bằng giọng nhẹ: câu lúc nãy làm em hơi buồn.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "太阴入庙兄弟五人",
-      "am": "Thái Âm nhập miếu huynh đệ ngũ nhân",
-      "y": "Khi sao sáng, sách ghi nhà đông anh chị em, có người để nương nhau.",
-      "nhom": "C",
-      "chu_de": "gia_dinh",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý giữ liên lạc đều với anh chị em, đừng để đông mà xa.",
-      "viec": "Tuần này gọi hoặc nhắn hỏi thăm một người anh chị em lâu chưa nói chuyện."
-     }
+     "loi_khuyen": "Khi một câu nói làm bạn buồn, nói lại trong vòng một ngày bằng giọng nhẹ: câu lúc nãy làm em hơi buồn."
     }
    },
    "Phu Thê": {
@@ -2671,19 +2527,7 @@
     "ham": {
      "manh": "Bạn để ý từng thay đổi nhỏ của người ấy, nên dễ nhận ra khi họ mệt hay có chuyện ở chỗ làm.",
      "de_vap": "Lúc cãi nhau, bạn dễ thu mình lại, nghĩ nhiều hơn nói, khiến người kia không biết bạn đang buồn vì điều gì.",
-     "loi_khuyen": "Khi giận, hẹn nhau một giờ sau nói tiếp, và trong lúc đó viết ra điều bạn thật sự muốn người ấy hiểu.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "加羊陀火铃空劫耗忌不克主生离",
-      "am": "Gia Dương Đà Hoả Linh Không Kiếp Hao Kỵ, bất khắc chủ sinh ly",
-      "y": "Khi đi cùng nhiều sao khó, sách xem là đường vợ chồng cần vun nhiều hơn người, dễ có quãng xa cách.",
-      "nhom": "C",
-      "chu_de": "tinh_duyen",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý nói chuyện sớm khi thấy lệch nhịp, đừng để im lặng kéo dài.",
-      "viec": "Tuần này dành một buổi tối không điện thoại để hai người nói về một việc đang vướng."
-     }
+     "loi_khuyen": "Khi giận, hẹn nhau một giờ sau nói tiếp, và trong lúc đó viết ra điều bạn thật sự muốn người ấy hiểu."
     }
    },
    "Tử Nữ": {
@@ -2699,14 +2543,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "太阴女三男二先女后男庙旺有贵子",
-      "am": "Thái Âm nữ tam nam nhị tiên nữ hậu nam, miếu vượng hữu quý tử",
-      "y": "Sách ghi con gái thường đến trước con trai; khi sao sáng thì con dễ nên người, có danh phận.",
+      "han": "陷地减半招软弱之子或虚花不成器",
+      "am": "Hãm địa giảm bán, chiêu nhuyễn nhược chi tử, hoặc hư hoa bất thành khí",
+      "y": "Khi sao yếu, sách ghi đường con cái thưa hơn, con dễ yếu ớt hoặc chậm nên người, cha mẹ phải bỏ nhiều công.",
       "nhom": "C",
       "chu_de": "con_cai",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý dành thời gian cho con hơn là chỉ lo vật chất.",
-      "viec": "Có con thì tuần này dành một buổi chỉ để nghe con kể chuyện; chưa có thì ghi ra điều mình muốn dạy con sau này."
+      "ham_y": "Nên chú ý kiên nhẫn với con, dạy con tự lập từng việc nhỏ thay vì làm hộ.",
+      "viec": "Tuần này giao cho con một việc nhà vừa sức và để con tự làm tới cùng; đang mong con mà chậm thì nên đi khám sớm."
      }
     }
    },
@@ -2947,19 +2791,7 @@
     "ham": {
      "manh": "Bạn hiểu những điều cha mẹ khó nói ra, nên biết lúc nào nên ngồi cạnh thay vì tranh luận.",
      "de_vap": "Bạn và cha mẹ dễ hiểu lầm nhau vì ai cũng giữ trong lòng, rồi giận nhau qua những câu bóng gió.",
-     "loi_khuyen": "Khi có chuyện chưa vui với cha mẹ, chọn lúc yên, nói một câu bắt đầu bằng 'con thấy' thay vì 'bố mẹ lúc nào cũng'.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "太阴入庙无克",
-      "am": "Thái Âm nhập miếu vô khắc",
-      "y": "Khi sao sáng, sách ghi duyên với cha mẹ trọn vẹn, được nương nhờ lâu.",
-      "nhom": "C",
-      "chu_de": "gia_dinh",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý còn cha mẹ thì năng về thăm, đừng đợi dịp.",
-      "viec": "Tuần này gọi cho cha mẹ một cuộc không vì việc gì, chỉ để hỏi thăm."
-     }
+     "loi_khuyen": "Khi có chuyện chưa vui với cha mẹ, chọn lúc yên, nói một câu bắt đầu bằng 'con thấy' thay vì 'bố mẹ lúc nào cũng'."
     }
    }
   },
@@ -3059,14 +2891,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "贪狼庙旺二人早有刑克",
-      "am": "Tham Lang miếu vượng nhị nhân, tảo hữu hình khắc",
-      "y": "Sách ghi đường con cái thưa, đứa đầu thường phải bỏ nhiều công nuôi.",
+      "han": "武曲同三人先难后易",
+      "am": "Vũ Khúc đồng tam nhân, tiên nan hậu dị",
+      "y": "Khi đi cùng sao Vũ Khúc, sách ghi chuyện con cái lúc đầu khó, về sau dễ dần.",
       "nhom": "C",
       "chu_de": "con_cai",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý chăm kỹ sức khoẻ mẹ và con trong những năm đầu.",
-      "viec": "Đang mong con hoặc có con nhỏ thì tuần này đặt lịch khám định kỳ cho mẹ hoặc bé."
+      "ham_y": "Nên chú ý kiên nhẫn, đừng nản ở chặng đầu.",
+      "viec": "Tuần này ghi lại một việc nuôi dạy con đang thấy khó và hỏi kinh nghiệm một người đi trước."
      }
     }
    },
@@ -3369,19 +3201,7 @@
     "ham": {
      "manh": "Bạn để ý lời nói của người ấy rất kỹ, nên dễ nhận ra khi họ đang có điều khó nói.",
      "de_vap": "Bạn dễ nghi ngờ, đọc ra ý khác trong một câu bình thường, rồi hỏi dồn khiến người ấy thấy mệt.",
-     "loi_khuyen": "Khi một câu của người ấy làm bạn nghi, hỏi lại đúng một lần: ý anh/em là thế này phải không?",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "巨门宜年长定克欠和",
-      "am": "Cự Môn nghi niên trưởng định khắc khiếm hoà",
-      "y": "Sách ghi sao này ở cung vợ chồng thì hợp với người hơn tuổi; đường vợ chồng cần vun nhiều hơn người, dễ thiếu hoà khí.",
-      "nhom": "C",
-      "chu_de": "tinh_duyen",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý cách nói khi bất đồng: nói việc, không nói người.",
-      "viec": "Tuần này khi sắp cãi nhau, xin dừng mười phút rồi mới nói tiếp."
-     }
+     "loi_khuyen": "Khi một câu của người ấy làm bạn nghi, hỏi lại đúng một lần: ý anh/em là thế này phải không?"
     }
    },
    "Tử Nữ": {
@@ -3639,14 +3459,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "巨门陷地伤克弃祖过房",
-      "am": "Cự Môn hãm địa thương khắc khí tổ quá phòng",
-      "y": "Khi sao yếu, sách xem là ít được ở gần cha mẹ, sớm rời nhà hoặc được người khác nuôi dạy.",
+      "han": "加羊陀火铃空劫父母不周全",
+      "am": "Gia Dương Đà Hoả Linh Không Kiếp phụ mẫu bất chu toàn",
+      "y": "Khi đi cùng sao khó, sách ghi duyên với cha mẹ không trọn vẹn cả hai bên.",
       "nhom": "C",
       "chu_de": "gia_dinh",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý lời nói với cha mẹ, tránh để bất đồng thành xa cách.",
-      "viec": "Tuần này về thăm hoặc gọi cho cha mẹ, nghe là chính."
+      "ham_y": "Nên chú ý lo sức khoẻ cho cha mẹ khi còn có thể.",
+      "viec": "Tuần này hỏi cha mẹ đang uống thuốc gì, lần khám gần nhất khi nào, rồi ghi lại."
      }
     }
    }
@@ -3729,19 +3549,7 @@
     "ham": {
      "manh": "Bạn chiều người ấy, sẵn lòng nhường để giữ hoà khí trong nhà.",
      "de_vap": "Bạn dễ để người ấy hay gia đình hai bên quyết thay mình, rồi âm thầm thấy thiệt thòi.",
-     "loi_khuyen": "Với những quyết định lớn như mua nhà, đổi việc, nói ý của bạn trước khi nghe ý người khác.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "加羊陀火铃空劫刑克",
-      "am": "Gia Dương Đà Hoả Linh Không Kiếp hình khắc",
-      "y": "Khi đi cùng sao khó, sách xem là chuyện vợ chồng nhiều va chạm, cần nhường nhau hơn bình thường.",
-      "nhom": "C",
-      "chu_de": "tinh_duyen",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý chuyện nhỏ nói ngay, đừng dồn lại thành chuyện lớn.",
-      "viec": "Tuần này chọn một việc nhà hay gây cãi nhau và cùng nhau chia lại cho rõ."
-     }
+     "loi_khuyen": "Với những quyết định lớn như mua nhà, đổi việc, nói ý của bạn trước khi nghe ý người khác."
     }
    },
    "Tử Nữ": {
@@ -3753,19 +3561,7 @@
     "ham": {
      "manh": "Bạn mềm mỏng với con, con dễ nói chuyện với bạn mà không sợ bị mắng.",
      "de_vap": "Bạn dễ chiều theo đòi hỏi của con để êm chuyện, rồi khó đặt lại giới hạn.",
-     "loi_khuyen": "Khi con đòi điều bạn thấy chưa hợp, nói 'không' một lần, bình tĩnh, rồi giải thích ngắn lý do.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天相无羊陀火铃同有二子成器",
-      "am": "Thiên Tướng vô Dương Đà Hoả Linh đồng hữu nhị tử thành khí",
-      "y": "Khi không gặp sao khó, sách ghi con cái nên người, làm được việc.",
-      "nhom": "C",
-      "chu_de": "con_cai",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý làm gương cho con bằng việc mình làm, hơn là lời dạy.",
-      "viec": "Tuần này cùng con làm xong một việc từ đầu đến cuối, như nấu một bữa hay sửa một món đồ."
-     }
+     "loi_khuyen": "Khi con đòi điều bạn thấy chưa hợp, nói 'không' một lần, bình tĩnh, rồi giải thích ngắn lý do."
     }
    },
    "Tài Bạch": {
@@ -4009,14 +3805,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天相庙旺无刑紫微同无刑克",
-      "am": "Thiên Tướng miếu vượng vô hình, Tử Vi đồng vô hình khắc",
-      "y": "Khi sao sáng hoặc đi cùng sao Tử Vi, sách ghi phần cha mẹ yên ổn, được ở gần và nhờ cậy.",
+      "han": "加羊陀火铃空劫早刑",
+      "am": "Gia Dương Đà Hoả Linh Không Kiếp tảo hình",
+      "y": "Khi đi cùng sao khó, sách xem là sớm phải xa cha mẹ hoặc sớm tự lo cho mình.",
       "nhom": "C",
       "chu_de": "gia_dinh",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý đáp lại bằng sự có mặt, đừng chỉ gửi tiền.",
-      "viec": "Tuần này ăn với cha mẹ một bữa cơm không vội."
+      "ham_y": "Nên chú ý chủ động vun với cha mẹ, đừng đợi rảnh.",
+      "viec": "Tuần này đặt một lịch cố định mỗi tuần để gọi về nhà."
      }
     }
    }
@@ -4069,14 +3865,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天梁庙旺二人和顺",
-      "am": "Thiên Lương miếu vượng nhị nhân hoà thuận",
-      "y": "Khi sao sáng, sách ghi anh chị em không đông nhưng hoà thuận.",
+      "han": "或多不同胞且不和陷宫全无",
+      "am": "Hoặc đa bất đồng bào thả bất hoà, hãm cung toàn vô",
+      "y": "Sách còn ghi: có khi anh em đông nhưng khác mẹ và ít hoà; khi sao yếu thì gần như không nhờ được anh em.",
       "nhom": "C",
       "chu_de": "gia_dinh",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý giữ sự hoà thuận ấy bằng cách rõ ràng trong việc chung.",
-      "viec": "Tuần này có việc chung nào của anh chị em (giỗ, chăm cha mẹ) thì nhắn nhau chia việc cho rõ."
+      "ham_y": "Nên chú ý đừng trông đợi nhiều; giúp được thì giúp, không tính hơn thua.",
+      "viec": "Tuần này làm một việc nhỏ cho anh chị em mà không cần họ đáp lại."
      }
     }
    },
@@ -4111,19 +3907,7 @@
     "ham": {
      "manh": "Bạn bảo vệ con rất mạnh, luôn đứng về phía con khi con cần.",
      "de_vap": "Bạn dễ quyết thay con nhiều chuyện, từ chọn bạn tới chọn ngành, con khó tự đứng.",
-     "loi_khuyen": "Giao cho con một việc tự quyết hằng tuần, như chọn món ăn cuối tuần, và tôn trọng lựa chọn đó.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天同同加昌曲左右吉星有三人",
-      "am": "Thiên Đồng đồng gia Xương Khúc Tả Hữu cát tinh hữu tam nhân",
-      "y": "Khi đi cùng sao Thiên Đồng và các sao tốt, sách ghi đường con cái đông vui hơn.",
-      "nhom": "C",
-      "chu_de": "con_cai",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý chia đều sự quan tâm cho từng đứa.",
-      "viec": "Có con thì tuần này dành cho mỗi đứa mười lăm phút riêng; chưa có thì gọi hỏi thăm một đứa cháu."
-     }
+     "loi_khuyen": "Giao cho con một việc tự quyết hằng tuần, như chọn món ăn cuối tuần, và tôn trọng lựa chọn đó."
     }
    },
    "Tài Bạch": {
@@ -4305,19 +4089,7 @@
     "ham": {
      "manh": "Bạn biết tự lập sớm, ít khi phải dựa vào cha mẹ trong những việc của mình.",
      "de_vap": "Bạn và cha mẹ dễ xa nhau về khoảng cách hoặc cách nghĩ, ít khi có chuyện chung để nói.",
-     "loi_khuyen": "Mỗi tuần gửi cha mẹ một tấm ảnh hay một câu kể chuyện nhỏ trong ngày, để có chuyện nói tiếp.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "天梁陷地加羊陀火铃孤克弃祖入赘更名寄人保养免刑",
-      "am": "Thiên Lương hãm địa, gia Dương Đà Hoả Linh cô khắc, khí tổ nhập chuế, canh danh ký nhân, bảo dưỡng miễn hình",
-      "y": "Khi sao yếu lại gặp sao khó, sách xem là duyên với cha mẹ mỏng; người xưa có lệ cho con ở rể, đổi tên hoặc gửi người khác nuôi để được yên.",
-      "nhom": "C",
-      "chu_de": "gia_dinh",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý lệ xưa chỉ là cách người ta tự trấn an; điều làm được là năng qua lại với cha mẹ.",
-      "viec": "Tuần này về nhà hoặc gọi cho cha mẹ, hỏi một chuyện thời trẻ của ông bà."
-     }
+     "loi_khuyen": "Mỗi tuần gửi cha mẹ một tấm ảnh hay một câu kể chuyện nhỏ trong ngày, để có chuyện nói tiếp."
     }
    }
   },
@@ -4365,19 +4137,7 @@
     "ham": {
      "manh": "Bạn độc lập, ít phải dựa vào anh chị em, và tự lo được phần mình.",
      "de_vap": "Bạn và anh chị em dễ va chạm vì ai cũng cứng, một lần cãi to có thể làm xa nhau lâu.",
-     "loi_khuyen": "Sau một trận cãi với anh chị em, chủ động nhắn một câu hỏi thăm trong vòng ba ngày, không cần nhắc lại chuyện cũ.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "七杀主孤克",
-      "am": "Thất Sát chủ cô khắc",
-      "y": "Sách xem sao này ở cung anh em là dấu anh em ít dựa được nhau, mỗi người tự lo.",
-      "nhom": "C",
-      "chu_de": "gia_dinh",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý đừng lấy cứng đối cứng với anh chị em.",
-      "viec": "Tuần này nhường anh chị em một lần trong chuyện nhỏ đang giằng co."
-     }
+     "loi_khuyen": "Sau một trận cãi với anh chị em, chủ động nhắn một câu hỏi thăm trong vòng ba ngày, không cần nhắc lại chuyện cũ."
     }
    },
    "Phu Thê": {
@@ -4389,19 +4149,7 @@
     "ham": {
      "manh": "Bạn yêu thật lòng và dám làm nhiều thứ vì người mình thương.",
      "de_vap": "Lúc cãi nhau, bạn dễ nói nặng hoặc đòi dừng lại ngay, rồi sau đó lại hối hận.",
-     "loi_khuyen": "Thoả thuận trước với người ấy: lúc giận không ai nói chuyện dừng lại, nghỉ một tiếng rồi mới nói tiếp.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "七杀早克武曲同亦克或迟娶免刑",
-      "am": "Thất Sát tảo khắc, Vũ Khúc đồng diệc khắc, hoặc trì thú miễn hình",
-      "y": "Sách xem sao này ở cung vợ chồng là dấu cưới sớm dễ trắc trở; lập gia đình muộn thì êm hơn.",
-      "nhom": "C",
-      "chu_de": "tinh_duyen",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý đừng cưới vì nóng vội; hiểu nhau đủ lâu rồi hãy quyết.",
-      "viec": "Tuần này nói với người ấy về một khác biệt lớn giữa hai người và nghe họ nghĩ gì."
-     }
+     "loi_khuyen": "Thoả thuận trước với người ấy: lúc giận không ai nói chuyện dừng lại, nghỉ một tiếng rồi mới nói tiếp."
     }
    },
    "Tử Nữ": {
@@ -4599,19 +4347,7 @@
     "ham": {
      "manh": "Bạn tự đứng được trên đôi chân mình, không phải chờ ai che chở.",
      "de_vap": "Bạn dễ phản ứng mạnh khi cha mẹ hay sếp áp đặt, nói một câu là hai bên lạnh nhau nhiều ngày.",
-     "loi_khuyen": "Khi thấy bị áp đặt, nói 'cho con nghĩ thêm' thay vì từ chối ngay, rồi trả lời vào hôm sau.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "七杀克早离祖六亲骨肉孤独",
-      "am": "Thất Sát khắc tảo ly tổ, lục thân cốt nhục cô độc",
-      "y": "Sách xem sao này ở cung cha mẹ là dấu sớm rời nhà, sớm tự lập, ít được người thân ở bên.",
-      "nhom": "C",
-      "chu_de": "gia_dinh",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý tự lập không có nghĩa là cắt liên lạc; giữ một nhịp hỏi thăm.",
-      "viec": "Tuần này liên lạc với một người họ hàng lâu không nói chuyện."
-     }
+     "loi_khuyen": "Khi thấy bị áp đặt, nói 'cho con nghĩ thêm' thay vì từ chối ngay, rồi trả lời vào hôm sau."
     }
    }
   },
@@ -4663,14 +4399,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "加昌曲左右有三人和睦",
-      "am": "Gia Xương Khúc Tả Hữu hữu tam nhân hoà mục",
-      "y": "Khi có thêm sao văn và sao trợ giúp, sách ghi anh chị em đủ đầy và hoà thuận.",
+      "han": "陷地加杀孤单",
+      "am": "Hãm địa gia sát cô đơn",
+      "y": "Khi sao yếu lại gặp sao khó, sách ghi anh em tản mát, lúc cần ít ai ở gần.",
       "nhom": "C",
       "chu_de": "gia_dinh",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý sự hoà thuận cần được nuôi bằng những lần gặp mặt.",
-      "viec": "Tuần này rủ anh chị em một bữa ăn hoặc một cuộc gọi chung cả nhà."
+      "ham_y": "Nên chú ý xây thêm những mối thân ngoài ruột thịt.",
+      "viec": "Tuần này giúp một người bạn một việc cụ thể, không đợi họ nhờ."
      }
     }
    },
@@ -4693,19 +4429,7 @@
     "ham": {
      "manh": "Bạn dám nói thật về những gì chưa ổn trong quan hệ, không giả vờ cho êm.",
      "de_vap": "Lúc chán hay giận, bạn dễ muốn đập đi làm lại cả mối quan hệ thay vì sửa một chỗ.",
-     "loi_khuyen": "Khi thấy chán, viết ra đúng một điều cần thay đổi và bàn với người ấy chỉ điều đó thôi.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "破军男女俱克别聚主生离",
-      "am": "Phá Quân nam nữ câu khắc biệt tụ chủ sinh ly",
-      "y": "Sách xem sao này ở cung vợ chồng, nam hay nữ, đều là dấu đường hôn nhân nhiều thay đổi, dễ có quãng xa cách.",
-      "nhom": "C",
-      "chu_de": "tinh_duyen",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý cùng nhau làm mới nếp sống chung để khỏi nhàm, và nói sớm khi thấy xa nhau.",
-      "viec": "Tuần này cùng người ấy thử một việc mới chưa từng làm chung."
-     }
+     "loi_khuyen": "Khi thấy chán, viết ra đúng một điều cần thay đổi và bàn với người ấy chỉ điều đó thôi."
     }
    },
    "Tử Nữ": {
@@ -4721,14 +4445,14 @@
      "source_ref": {
       "source_id": "tu_vi_dau_so_toan_thu",
       "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "破军入庙三人刚强之子",
-      "am": "Phá Quân nhập miếu tam nhân, cương cường chi tử",
-      "y": "Khi sao sáng, sách ghi có con và con tính cứng cỏi, mạnh mẽ.",
+      "han": "无制见空劫火陀少子",
+      "am": "Vô chế kiến Không Kiếp Hoả Đà thiểu tử",
+      "y": "Khi gặp các sao khó mà không có sao nào kìm lại, sách ghi đường con cái đến chậm và ít.",
       "nhom": "C",
       "chu_de": "con_cai",
       "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý với đứa trẻ cứng cỏi, lý lẽ được việc hơn mệnh lệnh.",
-      "viec": "Tuần này khi con cãi lại, hỏi \"con nghĩ nên làm thế nào?\" trước khi quyết."
+      "ham_y": "Nên chú ý mong con thì nên đi khám sớm, cả hai người.",
+      "viec": "Đang mong con thì tuần này cùng nhau đặt lịch khám; đã có con thì ghi lại một điều con làm tốt và nói cho con biết."
      }
     }
    },
@@ -4959,19 +4683,7 @@
     "ham": {
      "manh": "Bạn tự lập, ít phụ thuộc vào cha mẹ hay cấp trên, tự lo con đường của mình.",
      "de_vap": "Quan hệ với cha mẹ hay sếp dễ có lúc rạn vì bạn làm theo ý mình mà không báo trước.",
-     "loi_khuyen": "Trước khi làm một việc lớn trái ý cha mẹ hay sếp, báo trước cho họ một câu, dù họ chưa đồng ý.",
-     "source_ref": {
-      "source_id": "tu_vi_dau_so_toan_thu",
-      "ten_sach": "Tử Vi Đẩu Số Toàn Thư",
-      "han": "破军克早离祖更名寄养免刑",
-      "am": "Phá Quân khắc tảo ly tổ, canh danh ký dưỡng miễn hình",
-      "y": "Sách xem sao này ở cung cha mẹ là dấu sớm xa nhà; người xưa có lệ đổi tên hoặc gửi nuôi nơi khác cho yên.",
-      "nhom": "C",
-      "chu_de": "gia_dinh",
-      "nguon": "tu_vi_dau_so_toan_thu",
-      "ham_y": "Nên chú ý lệ xưa không cần theo; điều giữ được là năng hỏi han cha mẹ.",
-      "viec": "Tuần này viết cho cha mẹ một tin nhắn dài hơn thường lệ, kể một chuyện vui của mình."
-     }
+     "loi_khuyen": "Trước khi làm một việc lớn trái ý cha mẹ hay sếp, báo trước cho họ một câu, dù họ chưa đồng ý."
     }
    }
   }

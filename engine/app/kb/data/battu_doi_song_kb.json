@@ -875,17 +875,7 @@
    "nhip_thieu": "Bạn dễ hụt hơi khi làm việc kéo dài.",
    "loi_khuyen_sk": "Nên tập thở, đi bộ nơi thoáng khí và giữ ấm cổ họng khi trời chuyển mùa.",
    "tieu_de_thua": "Kim nhiều: dễ cứng nhắc",
-   "tieu_de_thieu": "Thiếu Kim: khó dứt khoát",
-   "source_ref": {
-    "source_id": "uyen_hai_tu_binh",
-    "ten_sach": "Uyên Hải Tử Bình",
-    "han": "金曰从革味辛辣也主义羞恶之心仗义疏财敢勇豪杰知廉耻",
-    "am": "Kim viết tòng cách, vị tân lạt dã, chủ nghĩa; tu ố chi tâm, trượng nghĩa sơ tài, cảm dũng hào kiệt, tri liêm sỉ.",
-    "y": "Sách gắn Kim với chữ nghĩa: biết thẹn trước điều sai, trọng nghĩa nhẹ tiền, dám làm, biết liêm sỉ.",
-    "nhom": "A",
-    "chu_de": "tinh_net",
-    "nguon": "uyen_hai_tu_binh"
-   }
+   "tieu_de_thieu": "Thiếu Kim: khó dứt khoát"
   },
   "Mộc": {
    "ten": "sự lớn lên, mềm dẻo, lòng thương người",
@@ -902,17 +892,7 @@
    "nhip_thieu": "Bạn dễ cứng người vì ít vận động giãn cơ.",
    "loi_khuyen_sk": "Nên ngủ trước 23 giờ, giãn cơ mỗi ngày và cho mắt nghỉ sau mỗi giờ nhìn màn hình.",
    "tieu_de_thua": "Mộc nhiều: dễ ôm đồm",
-   "tieu_de_thieu": "Thiếu Mộc: ngại khởi đầu",
-   "source_ref": {
-    "source_id": "uyen_hai_tu_binh",
-    "ten_sach": "Uyên Hải Tử Bình",
-    "han": "木曰曲直味酸主仁惻隐之心慈祥愷悌济物利民",
-    "am": "Mộc viết khúc trực, vị toan, chủ nhân; trắc ẩn chi tâm, từ tường khải đễ, tế vật lợi dân.",
-    "y": "Sách gắn Mộc với lòng nhân: hay thương người, hiền hoà dễ gần, thích giúp đời.",
-    "nhom": "A",
-    "chu_de": "tinh_net",
-    "nguon": "uyen_hai_tu_binh"
-   }
+   "tieu_de_thieu": "Thiếu Mộc: ngại khởi đầu"
   },
   "Thủy": {
    "ten": "trí óc, sự linh hoạt, khả năng thích nghi",
@@ -929,17 +909,7 @@
    "nhip_thieu": "Bạn dễ quên uống nước khi bận.",
    "loi_khuyen_sk": "Nên uống đủ nước, giữ ấm lưng và chân, ngủ đủ giấc vào giờ cố định.",
    "tieu_de_thua": "Thủy nhiều: dễ nghĩ nhiều",
-   "tieu_de_thieu": "Thiếu Thủy: khó mềm mỏng",
-   "source_ref": {
-    "source_id": "uyen_hai_tu_binh",
-    "ten_sach": "Uyên Hải Tử Bình",
-    "han": "水曰润下味咸主智是非之心志足多谋机关深远文学聪明",
-    "am": "Thuỷ viết nhuận hạ, vị hàm, chủ trí; thị phi chi tâm, chí túc đa mưu, cơ quan thâm viễn, văn học thông minh.",
-    "y": "Sách gắn Thủy với chữ trí: biết phân phải trái, chí lớn, nhiều mưu, tính xa, học giỏi, sáng dạ.",
-    "nhom": "A",
-    "chu_de": "tinh_net",
-    "nguon": "uyen_hai_tu_binh"
-   }
+   "tieu_de_thieu": "Thiếu Thủy: khó mềm mỏng"
   },
   "Hỏa": {
    "ten": "nhiệt tình, sự hiện diện, niềm vui",
@@ -956,17 +926,7 @@
    "nhip_thieu": "Bạn dễ lạnh tay chân, uể oải vào mùa lạnh.",
    "loi_khuyen_sk": "Nên giữ nhịp làm – nghỉ đều, bớt chất kích thích buổi tối và vận động vừa sức mỗi ngày.",
    "tieu_de_thua": "Hỏa nhiều: dễ nóng vội",
-   "tieu_de_thieu": "Thiếu Hỏa: thiếu hứng khởi",
-   "source_ref": {
-    "source_id": "uyen_hai_tu_binh",
-    "ten_sach": "Uyên Hải Tử Bình",
-    "han": "火曰炎上味苦主礼辞让之心恭敬威仪质重淳朴",
-    "am": "Hoả viết viêm thượng, vị khổ, chủ lễ; từ nhượng chi tâm, cung kính uy nghi, chất trọng thuần phác.",
-    "y": "Sách gắn Hỏa với chữ lễ: biết nhường, cung kính, có dáng nghiêm, chất phác.",
-    "nhom": "A",
-    "chu_de": "tinh_net",
-    "nguon": "uyen_hai_tu_binh"
-   }
+   "tieu_de_thieu": "Thiếu Hỏa: thiếu hứng khởi"
   },
   "Thổ": {
    "ten": "sự vững vàng, chữ tín, khả năng gom giữ",
@@ -983,17 +943,7 @@
    "nhip_thieu": "Bạn dễ bỏ bữa, ăn vội khi bận.",
    "loi_khuyen_sk": "Nên ăn đúng giờ, nhai chậm, bớt ăn khuya và đi bộ nhẹ sau bữa.",
    "tieu_de_thua": "Thổ nhiều: dễ ì, chậm đổi",
-   "tieu_de_thieu": "Thiếu Thổ: thiếu điểm tựa",
-   "source_ref": {
-    "source_id": "uyen_hai_tu_binh",
-    "ten_sach": "Uyên Hải Tử Bình",
-    "han": "土曰稼穡勾陈味甘主信诚实之心敦厚至诚言行相顾",
-    "am": "Thổ viết giá sắc câu trần, vị cam, chủ tín; thành thực chi tâm, đôn hậu chí thành, ngôn hành tương cố.",
-    "y": "Sách gắn Thổ với chữ tín: thật thà, đôn hậu, nói và làm đi đôi.",
-    "nhom": "A",
-    "chu_de": "tinh_net",
-    "nguon": "uyen_hai_tu_binh"
-   }
+   "tieu_de_thieu": "Thiếu Thổ: thiếu điểm tựa"
   }
  },
  "than_sat": {
@@ -1020,17 +970,7 @@
   "Thái Cực Quý Nhân": {
    "tieu_de": "Thích hỏi vì sao",
    "y": "Bạn thích hỏi vì sao, hay tìm hiểu triết lý và ý nghĩa đằng sau mọi việc.",
-   "loi_khuyen": "Nên chọn một môn để học có hệ thống thay vì đọc rải rác.",
-   "source_ref": {
-    "source_id": "tam_menh_thong_hoi",
-    "ten_sach": "Tam Mệnh Thông Hội",
-    "han": "造化始終相保乃曰太極貴也",
-    "am": "Tạo hoá thuỷ chung tương bảo, nãi viết thái cực quý dã.",
-    "y": "Sách giải tên sao: việc có đầu có cuối, trước sau giữ được cho nhau, nên gọi là Thái Cực quý.",
-    "nhom": "A",
-    "chu_de": "tong_quan",
-    "nguon": "tam_menh_thong_hoi"
-   }
+   "loi_khuyen": "Nên chọn một môn để học có hệ thống thay vì đọc rải rác."
   },
   "Hoa Cái": {
    "tieu_de": "Làm tốt khi được ở một mình",
@@ -1050,17 +990,7 @@
   "Dịch Mã": {
    "tieu_de": "Hợp đi lại, đổi chỗ",
    "y": "Bạn hợp đi lại, đổi chỗ, làm việc gắn với di chuyển hoặc ở nhiều nơi.",
-   "loi_khuyen": "Nên chọn việc cho phép đi đây đi đó thay vì ngồi một chỗ quá lâu.",
-   "source_ref": {
-    "source_id": "tam_menh_thong_hoi",
-    "ten_sach": "Tam Mệnh Thông Hội",
-    "han": "驛馬生旺主人氣韻凝峻通變趨時平生多聲望",
-    "am": "Dịch mã sinh vượng, chủ nhân khí vận ngưng tuấn, thông biến xu thời, bình sinh đa thanh vọng.",
-    "y": "Dịch Mã gặp lúc vượng, sách tả người có phong thái, biết xoay theo thời, cả đời được nhiều tiếng tốt.",
-    "nhom": "A",
-    "chu_de": "tinh_net",
-    "nguon": "tam_menh_thong_hoi"
-   }
+   "loi_khuyen": "Nên chọn việc cho phép đi đây đi đó thay vì ngồi một chỗ quá lâu."
   },
   "Tướng Tinh": {
    "tieu_de": "Có uy khi dẫn nhóm",
@@ -1069,11 +999,11 @@
    "source_ref": {
     "source_id": "tam_menh_thong_hoi",
     "ten_sach": "Tam Mệnh Thông Hội",
-    "han": "将星者如将劄中軍也",
-    "am": "Tướng tinh giả, như tướng trát trung quân dã.",
-    "y": "Sách ví sao này như vị tướng đóng giữa đội quân — người đứng giữa mà điều việc.",
+    "han": "凡将星常欲吉星相扶貴煞加臨乃為吉慶",
+    "am": "Phàm tướng tinh thường dục cát tinh tương phù, quý sát gia lâm, nãi vi cát khánh.",
+    "y": "Sách ghi Tướng Tinh cần có sao tốt, sao quý đi cùng nâng đỡ thì mới thành điều mừng.",
     "nhom": "A",
-    "chu_de": "tong_quan",
+    "chu_de": "cong_viec",
     "nguon": "tam_menh_thong_hoi"
    }
   },
@@ -1100,32 +1030,12 @@
   "Vong Thần": {
    "tieu_de": "Dễ vướng chuyện thị phi",
    "y": "Bạn dễ bị cuốn vào chuyện thị phi hoặc tính toán quá nhiều trong quan hệ.",
-   "loi_khuyen": "Nên tránh bàn chuyện người vắng mặt và nói thẳng khi có hiểu lầm.",
-   "source_ref": {
-    "source_id": "tam_menh_thong_hoi",
-    "ten_sach": "Tam Mệnh Thông Hội",
-    "han": "吉則峻厲有威謀畧算計見事如神事不露機",
-    "am": "Cát tắc tuấn lệ hữu uy, mưu lược toán kế, kiến sự như thần, sự bất lộ cơ.",
-    "y": "Gặp thế tốt, sách tả người có sao này nghiêm, có uy, giỏi tính toán, nhìn việc rất trúng và kín kẽ.",
-    "nhom": "A",
-    "chu_de": "tinh_net",
-    "nguon": "tam_menh_thong_hoi"
-   }
+   "loi_khuyen": "Nên tránh bàn chuyện người vắng mặt và nói thẳng khi có hiểu lầm."
   },
   "Kiếp Sát": {
    "tieu_de": "Dễ hao vì việc bất ngờ",
    "y": "Bạn dễ hao tiền, hao sức vì việc bất ngờ do người khác gây ra.",
-   "loi_khuyen": "Nên ký giấy tờ rõ ràng và giữ một khoản dự phòng.",
-   "source_ref": {
-    "source_id": "tam_menh_thong_hoi",
-    "ten_sach": "Tam Mệnh Thông Hội",
-    "han": "吉則聰慧敏給才智過人事不留行胸羅萬象高明爽迅",
-    "am": "Cát tắc thông tuệ mẫn cấp, tài trí quá nhân, sự bất lưu hành, hung la vạn tượng, cao minh sảng tấn.",
-    "y": "Gặp thế tốt, sách tả người có sao này sáng dạ, nhanh nhạy, tài trí hơn người, không để việc tồn đọng, hiểu rộng và xử trí gọn.",
-    "nhom": "A",
-    "chu_de": "tinh_net",
-    "nguon": "tam_menh_thong_hoi"
-   }
+   "loi_khuyen": "Nên ký giấy tờ rõ ràng và giữ một khoản dự phòng."
   },
   "Khôi Cương": {
    "tieu_de": "Tính mạnh, nói thẳng",
@@ -1145,17 +1055,7 @@
   "Dương Nhận": {
    "tieu_de": "Dễ phản ứng mạnh khi bị chạm tự ái",
    "y": "Khi bị chạm tự ái, bạn dễ phản ứng mạnh và nhanh.",
-   "loi_khuyen": "Nên chờ qua một đêm rồi mới trả lời tin nhắn làm bạn bực.",
-   "source_ref": {
-    "source_id": "tam_menh_thong_hoi",
-    "ten_sach": "Tam Mệnh Thông Hội",
-    "han": "祿過則刃生功成當退不退則過越其分",
-    "am": "Lộc quá tắc nhận sinh, công thành đương thoái, bất thoái tắc quá việt kỳ phận.",
-    "y": "Sách giải: lộc đầy quá thì sinh ra lưỡi dao — việc đã thành thì nên lùi, không lùi là vượt quá phần mình.",
-    "nhom": "A",
-    "chu_de": "tong_quan",
-    "nguon": "tam_menh_thong_hoi"
-   }
+   "loi_khuyen": "Nên chờ qua một đêm rồi mới trả lời tin nhắn làm bạn bực."
   },
   "Cô Thần": {
    "tieu_de": "Quen tự lo, đôi khi lẻ loi",
@@ -1164,14 +1064,14 @@
    "source_ref": {
     "source_id": "tam_menh_thong_hoi",
     "ten_sach": "Tam Mệnh Thông Hội",
-    "han": "凡人命犯孤寡主形孤骨露面無和氣不利六親生旺稍可死絶尤甚",
-    "am": "Phàm nhân mệnh phạm cô quả, chủ hình cô cốt lộ, diện vô hoà khí, bất lợi lục thân, sinh vượng sảo khả, tử tuyệt vưu thậm.",
-    "y": "Sách tả người có sao này dáng gầy lộ xương, nét mặt ít tươi, ít được nương tựa người thân; gặp lúc vượng thì nhẹ, gặp lúc suy thì rõ hơn.",
+    "han": "進者為陽不利父",
+    "am": "Tiến giả vi dương, bất lợi phụ.",
+    "y": "Sách xếp sao này về phía người cha: duyên nương tựa cha mỏng hơn, dễ phải sớm tự lập.",
     "nhom": "C",
     "chu_de": "gia_dinh",
     "nguon": "tam_menh_thong_hoi",
-    "ham_y": "Nên chú ý chủ động giữ các mối thân, đừng đợi người khác tìm mình.",
-    "viec": "Tuần này gọi cho một người thân lâu chưa nói chuyện, hỏi thăm trước."
+    "ham_y": "Nên chú ý chủ động vun với cha, dù ở xa.",
+    "viec": "Tuần này hỏi cha một chuyện thời trẻ của ông và ngồi nghe hết."
    }
   },
   "Quả Tú": {
@@ -1181,30 +1081,20 @@
    "source_ref": {
     "source_id": "tam_menh_thong_hoi",
     "ten_sach": "Tam Mệnh Thông Hội",
-    "han": "女命生於夫絶之位而遇寡宿屢嫁不能偕老",
-    "am": "Nữ mệnh sinh ư phu tuyệt chi vị nhi ngộ quả tú, lũ giá bất năng giai lão.",
-    "y": "Sách ghi khi sao chỉ bạn đời ở thế yếu mà gặp thêm sao này thì đường vợ chồng cần vun nhiều hơn người, dễ lệch nhịp nếu không nói chuyện.",
+    "han": "退者為陰不利母",
+    "am": "Thoái giả vi âm, bất lợi mẫu.",
+    "y": "Sách xếp sao này về phía người mẹ: duyên nương tựa mẹ mỏng hơn, dễ phải sớm tự lo.",
     "nhom": "C",
-    "chu_de": "tinh_duyen",
+    "chu_de": "gia_dinh",
     "nguon": "tam_menh_thong_hoi",
-    "ham_y": "Nên chú ý nói ra điều mình chưa vừa ý sớm, đừng để dồn.",
-    "viec": "Tuần này hẹn người bạn đời một buổi chỉ có hai người, không điện thoại."
+    "ham_y": "Nên chú ý chủ động vun với mẹ và để ý sức khoẻ của mẹ.",
+    "viec": "Tuần này đưa mẹ đi ăn hoặc gọi hỏi thăm, nhắc mẹ đi khám định kỳ."
    }
   },
   "Lộc Thần": {
    "tieu_de": "Tự lo được cho mình",
    "y": "Bạn có nền tự lực: dù khởi đầu ít, bạn vẫn tự lo được cho mình.",
-   "loi_khuyen": "Nên đầu tư vào tay nghề, đó là nguồn thu bền nhất của bạn.",
-   "source_ref": {
-    "source_id": "tam_menh_thong_hoi",
-    "ten_sach": "Tam Mệnh Thông Hội",
-    "han": "祿爵祿也當得勢而享乃謂之祿",
-    "am": "Lộc, tước lộc dã; đương đắc thế nhi hưởng, nãi vị chi lộc.",
-    "y": "Sách giải: Lộc là bổng lộc — đúng lúc được thế mà hưởng thì gọi là Lộc.",
-    "nhom": "A",
-    "chu_de": "tien_bac",
-    "nguon": "tam_menh_thong_hoi"
-   }
+   "loi_khuyen": "Nên đầu tư vào tay nghề, đó là nguồn thu bền nhất của bạn."
   },
   "Kim Dư": {
    "tieu_de": "Hay được nâng đỡ",
@@ -1228,11 +1118,11 @@
    "source_ref": {
     "source_id": "tam_menh_thong_hoi",
     "ten_sach": "Tam Mệnh Thông Hội",
-    "han": "夫徳者利物濟人掩㓙作善之謂也",
-    "am": "Phù đức giả, lợi vật tế nhân, yểm hung tác thiện chi vị dã.",
-    "y": "Sách giải: 'đức' là làm lợi cho vật, giúp người, che điều dữ, làm điều lành.",
+    "han": "天徳者五行福徳之辰若人遇之主登台輔之位",
+    "am": "Thiên đức giả, ngũ hành phúc đức chi thần, nhược nhân ngộ chi, chủ đăng thai phụ chi vị.",
+    "y": "Sách gọi Thiên Đức là sao phúc đức; người có sao này dễ lên tới vị trí giúp việc lớn.",
     "nhom": "A",
-    "chu_de": "tong_quan",
+    "chu_de": "cong_viec",
     "nguon": "tam_menh_thong_hoi"
    }
   },

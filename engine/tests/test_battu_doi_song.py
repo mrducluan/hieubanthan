@@ -421,21 +421,22 @@ def test_kb_loi_van_sach():
     d = kb._d()
     cum = kb.cum_cam()
 
-    def chuoi(x):
+    def chuoi(x, skip_tn=False):
         if isinstance(x, str):
-            yield x
+            yield x, skip_tn
         elif isinstance(x, dict):
             for k, v in x.items():
-                if k not in ("cum_cam", "_nguon", "source", "hy", "ky", "source_ref"):
-                    yield from chuoi(v)
+                if k not in ("cum_cam", "_nguon", "source", "hy", "ky"):
+                    yield from chuoi(v, skip_tn or k == "source_ref")
         elif isinstance(x, list):
             for v in x:
-                yield from chuoi(v)
+                yield from chuoi(v, skip_tn)
 
-    for s in chuoi(d):
+    for s, skip_tn in chuoi(d):
         assert not kb_tv.tim_cum_cam(s, cum), (kb_tv.tim_cum_cam(s, cum), s)
         assert not kb_tv.tim_cum_cam(s, DOA), s
-        assert not THUAT_NGU.search(s), s
+        if not skip_tn:
+            assert not THUAT_NGU.search(s), s
         assert not any(b in s.lower() for b in BENH if b not in ("sẽ bị", "bạn có bị")), s
 
 
