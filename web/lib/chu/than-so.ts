@@ -46,7 +46,7 @@ export const CHU_THAN_SO_UI = {
   "phai.rut_gon": m(P, "rút gọn con số", "reducing each part"),
   "phai.cong_het": m(P, "cộng hết chữ số", "adding every digit"),
   "phai.cach_con_lai": m(P, " · cách còn lại ra số {so}", " · the other method gives {so}"),
-  "phai.mo_ta": m(P, "Có hai cách đọc tên và ngày sinh. Pitago phổ biến nhất ở Việt Nam. Chaldea đọc tên theo âm và coi trọng tên thường gọi. “Tổng hợp” cho thấy chỗ hai cách cùng chỉ ra.", "There are two ways to read a name and birth date. Pythagorean is the most widely used. Chaldean reads names by sound and gives weight to the name people call you. “Both schools” shows where the two point the same way."),
+  "phai.mo_ta": m(P, "Có hai cách đọc ngày sinh. Pitago phổ biến nhất ở Việt Nam: 4 con số cốt lõi từ tên và ngày sinh. Phillips đọc Số Chủ Đạo và 4 Đỉnh Kim Tự Tháp — bốn mốc tuổi chuyển giai đoạn, mỗi mốc cách nhau 9 năm.", "There are two ways to read a name and birth date. Pythagorean is the most widely used. Chaldean reads names by sound and gives weight to the name people call you. “Both schools” shows where the two point the same way."),
   "phai.truong_phai": m(P, "Trường phái", "School"),
   "phai.chon_truong_phai": m(P, "Chọn trường phái thần số", "Choose a numerology school"),
   "phai.ten_goi_khac": m(P, "Đang dùng tên gọi “{ten}”.", "Using the name “{ten}”."),

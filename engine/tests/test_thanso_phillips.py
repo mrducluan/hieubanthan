@@ -89,3 +89,12 @@ def test_api_thanso_phillips():
     assert d["doi_chieu_pitago"]["lech"] is True
     assert d["doi_chieu_pitago"]["so_pitago"] == 1
     assert len(d["kim_tu_thap"]["dinh"]) == 4
+
+
+def test_tuoi1_tuoi_tron_theo_sinh_nhat():
+    """TUOI-1: chặng đỉnh theo năm (quy ước Phillips), tuổi nói với người đọc theo sinh nhật."""
+    k = tp.bon_dinh_kim_tu_thap(19, 9, 2016, nam_xem=2026, ngay_xem=dt.date(2026, 11, 21))
+    assert (k["tuoi_hien_tai"], k["tuoi_tron"]) == (10, 10)
+    assert k["dinh"][0]["trang_thai"] == "dang_trong" and (k["dinh"][0]["tu_tuoi"], k["dinh"][0]["tuoi"]) == (0, 35)
+    k = tp.bon_dinh_kim_tu_thap(25, 12, 2016, nam_xem=2026, ngay_xem=dt.date(2026, 11, 21))
+    assert (k["tuoi_hien_tai"], k["tuoi_tron"]) == (10, 9)

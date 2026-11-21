@@ -48,13 +48,3 @@ test("câu hợp đôi từ bảng → mời sang mục Hợp đôi, không gợ
   await expect(ans.getByTestId("hoi-tiep")).toHaveCount(0);
 });
 
-test("Chaldea: giao điểm hai phái khi ngày sinh 19", async ({ page }) => {
-  await napHoSo(page, { ...LUAN, ho_ten: "Nguyễn Văn An", ngay: 19, thang: 5, nam: 1990 });
-  await page.addInitScript(() => localStorage.setItem("hbt.thanso_phai", "chaldea"));
-  await page.goto("/than-so");
-  const gd = page.getByTestId("giao-diem");
-  await expect(gd).toContainText("Pitago: nợ nghiệp 19");
-  await expect(gd).toContainText("Chaldea: kép 19");
-  // Bảng nỗi đau vẫn có ở phái Chaldea.
-  await expect(page.getByTestId("noi-dau")).toBeVisible();
-});

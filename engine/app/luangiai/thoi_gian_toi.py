@@ -543,7 +543,8 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
                     hop3.append(_gan(x, nguon))
     # CY-1: năm cá nhân của năm đích có chủ đề một mảng đời (KB chu_y_kb) → lời nhắc chủ động (không cần giờ sinh)
     from app.luangiai import chu_y_nam as cyn  # noqa: PLC0415
-    if nam - ngay_sinh.year >= cyn.TUOI_TOI_THIEU:
+    # TUOI-1: tuổi tròn tại đầu năm đích (trước: hiệu năm — người chưa qua sinh nhật thứ 18 vẫn nhận hộp chú ý)
+    if nam - ngay_sinh.year - ((1, 1) < (ngay_sinh.month, ngay_sinh.day)) >= cyn.TUOI_TOI_THIEU:
         theo_ts = {m: cyn.thanso_nam({nam: so_nam}, m) for m in cyn.MANG_VAN_HAN}
         co_ts = [m for m, v in theo_ts.items() if v]
         if co_ts:

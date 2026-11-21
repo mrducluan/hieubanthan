@@ -10,7 +10,7 @@ test("Qabalah đã bỏ: không còn tab, Cây của hai người, chữ của n
   await napHoSo(page, LUAN);
   await page.goto("/than-so");
   await page.getByTestId("truong-phai-than-so-mo").click();
-  await expect(page.getByRole("tab", { name: "Tổng hợp 2 phái" })).toBeVisible();
+  await expect(page.getByRole("tab", { name: "Phillips (4 Kim Tự Tháp)" })).toBeVisible();
   await expect(page.getByRole("tab", { name: "Qabalah" })).toHaveCount(0);
   for (const duong of ["/api/thanso/kabbalah", "/api/thanso/cay-hai-nguoi", "/api/thanso/bao-cao-ba-phai"]) {
     expect((await request.post(duong, { data: {} })).status()).toBe(404);
@@ -35,31 +35,6 @@ test("thẻ hôm nay: số nổi bật khớp engine, link chia sẻ mang số n
   expect(nd).toMatchObject({ s: 6 });
   expect(nd).not.toHaveProperty("hn");
   expect(JSON.stringify(nd)).not.toMatch(/1988|Nguyễn/);
-});
-
-test("phái nào nói đúng: 2 phái, phiếu thứ 7 → gợi ý Chaldea, dùng làm phái chính, mời mở bản đồ con số", async ({ page }) => {
-  await napHoSo(page, LUAN);
-  await page.addInitScript(() => {
-    if (!sessionStorage.getItem("da_nap_phieu")) {
-      localStorage.setItem("hbt.thanso_phieu", JSON.stringify({ pitago: 2, chaldea: 4 }));
-      sessionStorage.setItem("da_nap_phieu", "1");
-    }
-  });
-  await page.goto("/than-so");
-  const ans = await hoi(page, "Tôi hợp nghề gì?");
-  const phieu = ans.getByTestId("phai-nao-dung");
-  await expect(phieu.getByTestId("bau-pitago")).toContainText("Đường đời 6");
-  await expect(phieu.getByTestId("bau-chaldea")).toContainText("Số tên gọi");
-  await expect(phieu.getByTestId("bau-kabbalah")).toHaveCount(0);
-  await phieu.getByTestId("bau-chaldea").click();
-  await expect(phieu.getByTestId("goi-y-phai")).toContainText("Chaldea (5/7");
-  const suKien = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []);
-  const bau = suKien.filter((e) => e.su_kien === "school_voted");
-  expect(bau.at(-1)).toMatchObject({ phai: "chaldea", lan: 7 });
-  expect(JSON.stringify(bau)).not.toMatch(/Luân|1988|nghề/);
-  await expect(phieu.getByRole("link", { name: "Xem bản đồ con số đầy đủ" })).toHaveAttribute("href", "#ban-do-con-so");
-  await phieu.getByRole("button", { name: "Dùng Chaldea làm phái chính" }).click();
-  await expect(page.getByTestId("dang-xem")).toContainText("Đang xem theo Chaldea");
 });
 
 test("bản đồ con số: Tổng quan hiện ngay sau 4 số cốt lõi; đủ 4 chương khi miễn phí; đổi cách tính → tải lại", async ({ page }) => {

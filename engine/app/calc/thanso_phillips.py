@@ -61,7 +61,8 @@ def so_chu_dao(d: int, m: int, y: int) -> dict:
     }
 
 
-def bon_dinh_kim_tu_thap(d: int, m: int, y: int, nam_xem: int | None = None) -> dict:
+def bon_dinh_kim_tu_thap(d: int, m: int, y: int, nam_xem: int | None = None,
+                         ngay_xem: _dt.date | None = None) -> dict:
     """Bốn Đỉnh Kim Tự Tháp Phillips: 3 chân đế (tháng, ngày, năm), 4 đỉnh và 4 mốc tuổi (cách nhau 9 năm)."""
     scd = so_chu_dao(d, m, y)
     b1, b2, b3 = _rut_1_9(m), _rut_1_9(d), _rut_1_9(y)
@@ -105,10 +106,18 @@ def bon_dinh_kim_tu_thap(d: int, m: int, y: int, nam_xem: int | None = None) -> 
             "trang_thai": tt,
         })
 
+    # TUOI-1: chặng đỉnh xét theo NĂM (quy ước Phillips: mốc đỉnh rơi đúng năm cá nhân 9) — `tuoi_hien_tai` = năm xem −
+    # năm sinh. Tuổi để NÓI với người đọc là tuổi tròn theo sinh nhật tại `ngay_xem` (người sinh tháng 12 xem tháng 11
+    # còn kém một tuổi so với hiệu năm).
+    tuoi_tron = None
+    if ngay_xem is not None:
+        tuoi_tron = ngay_xem.year - y - ((ngay_xem.month, ngay_xem.day) < (m, d))
     return {
         "chan_de": {"thang": b1, "ngay": b2, "nam": b3},
         "dinh": dinh_list,
         "tuoi_hien_tai": tuoi_hien_tai,
+        "tuoi_tron": tuoi_tron,
+        "nam_xem": nam_xem,
     }
 
 
@@ -126,10 +135,12 @@ def luan_phillips(
     nam_xem: int | None = None,
 ) -> dict:
     """Bài đọc hoàn chỉnh theo trường phái Phillips (Số Chủ Đạo + 4 Đỉnh Kim Tự Tháp + Biểu đồ ngày sinh + Đối chiếu Pitago)."""
-    nam_hien_tai = nam_xem or _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).year
+    hom_nay = _dt.datetime.now(_dt.timezone(_dt.timedelta(hours=7))).date()
+    nam_hien_tai = nam_xem or hom_nay.year
+    ngay_xem = hom_nay if nam_hien_tai == hom_nay.year else _dt.date(nam_hien_tai, 12, 31)
     kb = _kb()
     scd = so_chu_dao(d, m, y)
-    ktt = bon_dinh_kim_tu_thap(d, m, y, nam_xem=nam_hien_tai)
+    ktt = bon_dinh_kim_tu_thap(d, m, y, nam_xem=nam_hien_tai, ngay_xem=ngay_xem)
     bieu_do = thanso_mo_rong.bieu_do_ngay_sinh(d, m, y)
     dd_pitago = thanso.duong_doi(d, m, y, quy_uoc_pitago, giu_master=True)
 

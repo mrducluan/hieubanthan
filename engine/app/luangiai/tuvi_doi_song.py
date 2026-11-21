@@ -1529,7 +1529,8 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     # EN-2 mục 5: hộp lời theo tuổi + tình trạng (người dùng tự chọn) ở 5 chương — sau khi chọn cốt lõi (không vào cốt lõi).
     hc.ap(ds, sinh["ngay"], ngay_xem, sinh.get("tinh_trang"), "ds", hoc)
     # LH-1: lớp "Luận theo câu hỏi" (trả lời thẳng · người quanh bạn · hoá giải · dòng mười năm từng mảng) — không đổi mức.
-    nguoi_quanh = lhoi.ap(ds, ls, cc, dong, tgb, nam_am_xem, nam_am_sinh, vh["tuoi_mu"], sinh.get("gioi_tinh"), sl)
+    nguoi_quanh = lhoi.ap(ds, ls, cc, dong, tgb, nam_am_xem, nam_am_sinh, vh["tuoi_mu"], sinh.get("gioi_tinh"), sl,
+                          tuoi_tron=hc.tuoi_tron(sinh["ngay"], ngay_xem))
     # Trục 1: thân hộp không lặp tiêu đề · một mã một hộp đầy đủ · đoạn thân không chép hộp (chỉ cắt câu đã có).
     kh.gon_bao_cao({"cot_loi": cot_loi, "chuong": ds})
     from app.luangiai import luu_y_mang as lym  # noqa: PLC0415
