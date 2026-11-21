@@ -658,8 +658,25 @@ test("WS-3: trang cung phi có câu sách xưa, nguyên văn nằm sẵn trong H
   await expect(sx.getByTestId("sach-xua-han").first()).toBeVisible();
 });
 
-test("Dương Trạch Tam Yếu: vòng 24 Sơn trên la bàn + tra nhanh Cửa–Chủ–Bếp + áp dụng Hồ sơ nhà (sạch BM-1)", async ({ page }) => {
+test("Dương Trạch Tam Yếu: vòng 24 Sơn trên la bàn + tra nhanh Cửa–Chủ–Bếp + áp dụng Hồ sơ nhà (giữ nguyên khảo sát cũ & sạch BM-1)", async ({ page }) => {
   await napHoSo(page);
+  await page.addInitScript(() => {
+    window.localStorage.setItem(
+      "hbt.nha.v1",
+      JSON.stringify({
+        v: 1,
+        huong: "Đông",
+        theo: "ban_cong",
+        thanh_vien: [],
+        cap_nhat_luc: "2026-11-21T00:00:00.000Z",
+        bo_cuc: {
+          vi_tri: { ban_tho: "Đông", giuong_ngu: "Nam" },
+          dau_hieu: ["guong_doi_dien_giuong"],
+          da_xu_ly: ["guong_doi_dien_giuong"],
+        },
+      }),
+    );
+  });
   await page.goto("/phong-thuy");
   await expect(page.getByTestId("vong-24-son")).toBeVisible();
   const ty = page.getByTestId("tam-yeu-cua-chu-bep");
@@ -674,4 +691,18 @@ test("Dương Trạch Tam Yếu: vòng 24 Sơn trên la bàn + tra nhanh Cửa�
   await expect(ty).not.toContainText(/YZ_SY_|trang_pdf|fengshui-yangzhai-kb|đã thẩm định/i);
   await ty.getByTestId("tam-yeu-ap-dung").click();
   await expect(ty.getByTestId("tam-yeu-ap-dung")).toContainText("Đã lưu vào Hồ sơ nhà");
+  const saved = await page.evaluate(() => JSON.parse(window.localStorage.getItem("hbt.nha.v1") || "{}"));
+  expect(saved.huong).toBe("Tây Bắc");
+  expect(saved.bo_cuc?.vi_tri?.phong_ngu_chinh).toBe("Tây");
+  expect(saved.bo_cuc?.vi_tri?.bep).toBe("Tây Nam");
+  expect(saved.bo_cuc?.vi_tri?.ban_tho).toBe("Đông");
+  expect(saved.bo_cuc?.dau_hieu).toContain("guong_doi_dien_giuong");
+  expect(saved.bo_cuc?.da_xu_ly).toContain("guong_doi_dien_giuong");
+  // Bản tiếng Anh (/en/phong-thuy): khối Tam Yếu hiển thị đầy đủ bằng tiếng Anh, sạch BM-1.
+  await page.goto("/en/phong-thuy");
+  const tyEn = page.getByTestId("tam-yeu-cua-chu-bep");
+  await expect(tyEn).toBeVisible();
+  await expect(tyEn).toContainText("Quick Door – Master – Stove Layout Check");
+  await expect(tyEn.getByTestId("tam-yeu-the-nha")).toContainText("Vitality");
+  await expect(tyEn).not.toContainText(/YZ_SY_|trang_pdf|fengshui-yangzhai-kb/i);
 });
