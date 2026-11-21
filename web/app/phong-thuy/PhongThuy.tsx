@@ -123,7 +123,9 @@ export function PhongThuy() {
         }} />
       </div>
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24">
-        <TamYeuCuaChuBep huongCuaGoiY={huongChot ?? (hoSoNha?.theo === "cua" ? hoSoNha.huong : null) ?? null} />
+        {/* Căn hộ đo hướng ở ban công: hướng vừa đo không phải phía cửa căn hộ → không gợi ý cửa từ đó. */}
+        <TamYeuCuaChuBep huongCuaGoiY={hoSoNha?.loai_nha === "can_ho" || hoSoNha?.theo === "ban_cong" ? null : huongChot}
+          namSinh={hoSo?.nam ?? null} />
       </div>
       {mq?.sach_ghi && (
         <div className="mx-auto mt-8 max-w-3xl">

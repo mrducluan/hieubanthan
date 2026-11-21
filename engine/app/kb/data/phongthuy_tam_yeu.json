@@ -3096,8 +3096,6 @@
    "ten": "Sơ đồ Tam Yếu: Cửa – Chủ – Bếp",
    "han": "三者何門主竈是也門乃由之路主乃冒之所竈乃食之方",
    "nguon_thien": 1,
-   "quyen": "導讀卷",
-   "trang_pdf": 55,
    "tom_y_vi": "Ba điểm quyết định của dương trạch là Cửa chính (lối khí vào), Phòng chủ (gian cao rộng làm trọng tâm) và Bếp (nguồn nuôi dưỡng). Luận nhà lấy Cửa làm mốc để xác định du niên tới Chủ và Bếp; ưu tiên Cửa–Chủ tương sinh cùng nhóm Đông/Tây, sau đó đặt Bếp hợp với Cửa và Chủ."
   },
   {
@@ -3105,8 +3103,6 @@
    "ten": "Đồ hình Hà Đồ và số sinh thành Ngũ Hành",
    "han": "一六水二七火三八木四九金五十土",
    "nguon_thien": 2,
-   "quyen": "導讀卷",
-   "trang_pdf": 71,
    "tom_y_vi": "Hà Đồ đặt nền cho quan hệ số – phương – ngũ hành: 1–6 thuộc Thuỷ (Bắc), 2–7 thuộc Hoả (Nam), 3–8 thuộc Mộc (Đông), 4–9 thuộc Kim (Tây), 5–10 thuộc Thổ (Trung cung)."
   },
   {
@@ -3114,8 +3110,6 @@
    "ten": "Đồ hình Lạc Thư Cửu Cung",
    "han": "戴九履一左三右七二四爲肩六八爲足",
    "nguon_thien": 3,
-   "quyen": "卷一",
-   "trang_pdf": 75,
    "tom_y_vi": "Lạc Thư phân bố chín số quanh Trung Cung (số 5): đội 9 (Nam), đạp 1 (Bắc), trái 3 (Đông), phải 7 (Tây), vai 4–2 (Đông Nam – Tây Nam), chân 8–6 (Đông Bắc – Tây Bắc). Tổng mỗi hàng, cột, đường chéo đều bằng 15."
   },
   {
@@ -3123,8 +3117,6 @@
    "ten": "Đồ hình Hậu Thiên Bát Quái và 8 phương vị",
    "han": "將羅盤旋於天井十字正中心定準二十四山向看主在某宮某字",
    "nguon_thien": 22,
-   "quyen": "卷一",
-   "trang_pdf": 131,
    "tom_y_vi": "Đặt la bàn tại giao điểm chữ thập giữa sân (hoặc tâm nhà) để định 8 cung Hậu Thiên Bát Quái: Khảm Bắc (Thuỷ), Ly Nam (Hoả), Chấn Đông (Mộc), Tốn Đông Nam (Mộc), Càn Tây Bắc (Kim), Đoài Tây (Kim), Cấn Đông Bắc (Thổ), Khôn Tây Nam (Thổ)."
   },
   {
@@ -3132,8 +3124,6 @@
    "ten": "Sơ đồ phân nhóm Đông Tứ Trạch và Tây Tứ Trạch",
    "han": "乾坤艮兌四宅同東四卦交不可逢",
    "nguon_thien": 7,
-   "quyen": "卷一",
-   "trang_pdf": 89,
    "tom_y_vi": "Tám quẻ chia làm hai nhóm tương hợp: Đông Tứ (Khảm, Ly, Chấn, Tốn) và Tây Tứ (Càn, Khôn, Cấn, Đoài). Cửa và Chủ cùng một nhóm thì gặp 4 du niên tốt (Sinh Khí, Diên Niên, Thiên Y, Phục Vị); lẫn hai nhóm thì rơi vào 4 du niên xấu."
   },
   {
@@ -3141,8 +3131,6 @@
    "ten": "Biểu đồ Cửu Tinh Đại Du Niên và Ngũ Hành sao",
    "han": "乾爲伏位即輔弼二木星也其星吉凶無定主吉彼亦吉主凶彼亦凶",
    "nguon_thien": 10,
-   "quyen": "卷一",
-   "trang_pdf": 99,
    "tom_y_vi": "Ánh xạ 8 Du Niên với Cửu Tinh và Ngũ Hành: Sinh Khí (Tham Lang – Mộc, Đại Cát), Diên Niên (Vũ Khúc – Kim, Cát), Thiên Y (Cự Môn – Thổ, Cát), Phục Vị (Phụ Bật – Mộc, Tiểu Cát tuỳ chủ), Hoạ Hại (Lộc Tồn – Thổ, Hung), Lục Sát (Văn Khúc – Thuỷ, Hung), Ngũ Quỷ (Liêm Trinh – Hoả, Hung), Tuyệt Mệnh (Phá Quân – Kim, Đại Hung)."
   },
   {
@@ -3150,8 +3138,6 @@
    "ten": "Sơ đồ 4 loại nhà theo lớp gian: Tĩnh – Động – Biến – Hoá Trạch",
    "han": "陽宅有靜動變化四宅世人多不留心不能分清故致相混一院爲靜宅",
    "nguon_thien": 25,
-   "quyen": "卷一",
-   "trang_pdf": 137,
    "tom_y_vi": "Phân loại nhà theo số lớp gian có tường vách ngăn từ trước ra sau: 1 lớp là Tĩnh Trạch (khởi Du Niên trực tiếp từ Cửa), 2–5 lớp là Động Trạch (dùng Chính Ngũ Hành phiên tinh theo từng lớp), 6–10 lớp là Biến Trạch, 11–15 lớp là Hoá Trạch."
   },
   {
@@ -3159,8 +3145,6 @@
    "ten": "Sơ đồ vòng Chính Ngũ Hành phiên tinh của Động Trạch",
    "han": "動宅至五層而止故番星只宜用正五行如巨門生武曲",
    "nguon_thien": 19,
-   "quyen": "卷一",
-   "trang_pdf": 120,
    "tom_y_vi": "Trong Động Trạch (2–5 lớp gian), sao truyền từ lớp trước sang lớp sau theo vòng tương sinh Chính Ngũ Hành: Cự Môn (Thổ) → Vũ Khúc (Kim) → Văn Khúc (Thuỷ) → Tham Lang (Mộc) → Liêm Trinh (Hoả) → Cự Môn (Thổ)."
   },
   {
@@ -3168,8 +3152,6 @@
    "ten": "Sơ đồ Khai Môn – Phóng Thuỷ (Bốn chính hướng & bốn duy hướng)",
    "han": "開門放水凡是子午卯酉四正向放水能歸正庫者固好",
    "nguon_thien": 52,
-   "quyen": "卷一",
-   "trang_pdf": 195,
    "tom_y_vi": "Nguyên tắc thoát nước (phóng thuỷ) cho đại trạch / công sở: bốn chính hướng Tý–Ngọ–Mão–Dậu ưu tiên quy chính khố (hoặc phương suy Ất–Tân–Đinh–Quý bên phải); bốn duy hướng Càn–Khôn–Cấn–Tốn dùng tá khố tiêu thuỷ bên trái để không xung phá dưỡng vị."
   },
   {
@@ -3177,9 +3159,69 @@
    "ten": "Sơ đồ bố trí nhà vệ sinh trấn phương hung",
    "han": "廁所宜安五鬼方諸事順利次安六煞方亦大吉",
    "nguon_thien": 51,
-   "quyen": "卷一",
-   "trang_pdf": 194,
    "tom_y_vi": "Nguyên tắc 'toạ hung hướng cát' cho khu vệ sinh: ưu tiên đặt tại phương Ngũ Quỷ, thứ đến Lục Sát, rồi Hoạ Hại / Tuyệt Mệnh để lấy uế trấn hung; tránh đặt khu vệ sinh vào bốn phương cát (Sinh Khí, Diên Niên, Thiên Y, Phục Vị)."
   }
- ]
+ ],
+ "cong_cu": {
+  "_ghi_chu": "Lời công cụ 'Tra nhanh Cửa – Chủ – Bếp' (rà soát 2026-11-21): mức theo thang chung, lời đời thường, gợi ý bếp, việc nên làm, câu tham khảo. Nháp ban biên tập.",
+  "muc_du_nien": {
+   "Sinh Khí": "thuan",
+   "Thiên Y": "thuan",
+   "Diên Niên": "thuan",
+   "Phục Vị": "can_bang",
+   "Hoạ Hại": "can_chu_dong",
+   "Lục Sát": "can_chu_dong",
+   "Ngũ Quỷ": "can_chu_dong",
+   "Tuyệt Mệnh": "can_chu_dong"
+  },
+  "ten_cap": {
+   "cua_chu": "Cửa chính với phòng chính",
+   "cua_bep": "Cửa chính với bếp",
+   "chu_bep": "Phòng chính với bếp"
+  },
+  "loi_cap": {
+   "thuan": {
+    "cua_chu": "Lối vào và chỗ nghỉ chính đỡ nhau: vào nhà là thấy muốn ở lại, dễ giữ nếp sinh hoạt.",
+    "cua_bep": "Bếp hợp với lối vào: việc bếp núc thuận tay, bữa cơm nhà dễ giữ đều.",
+    "chu_bep": "Bếp và phòng chính hợp nhau: người chăm bếp và người nghỉ ngơi ít vướng nhau."
+   },
+   "can_bang": {
+    "cua_chu": "Cửa và phòng chính cùng một phía khí: yên, không thêm không bớt.",
+    "cua_bep": "Bếp ở mức bình thường so với cửa: giữ khu bếp sạch, thoáng là dùng tốt.",
+    "chu_bep": "Bếp và phòng chính ngang nhau: không có gì phải chỉnh."
+   },
+   "can_chu_dong": {
+    "cua_chu": "Cửa và phòng chính không đỡ nhau theo sách này: để ý giấc ngủ và sự yên tĩnh của phòng chính, nên chọn bếp ở phía hợp để cân lại.",
+    "cua_bep": "Bếp chưa hợp với cửa theo sách này: giữ khu bếp khô, sáng, gọn; khi có dịp sửa bếp thì cân nhắc một phía hợp hơn.",
+    "chu_bep": "Bếp và phòng chính chưa hợp nhau theo sách này: giữ mùi bếp, hơi nóng không lan vào phòng chính (cửa ngăn, hút mùi)."
+   }
+  },
+  "ket_luan": {
+   "thuan": "Ba chỗ cửa, phòng chính và bếp đỡ nhau — theo sách này là thế nhà thuận.",
+   "can_bang": "Có chỗ hợp, có chỗ chưa hợp — nhà dùng được, chỉ cần chỉnh vài việc nhỏ.",
+   "can_chu_dong": "Cửa và phòng chính chưa đỡ nhau, bếp cũng chưa cân lại được — nên ưu tiên chỉnh vị trí bếp và nếp dùng phòng chính."
+  },
+  "cung_nhom": {
+   "co": "Cả ba chỗ cùng một nhóm (Đông tứ trạch hoặc Tây tứ trạch).",
+   "khong": "Ba chỗ không cùng một nhóm Đông / Tây tứ trạch."
+  },
+  "bep_loai": {
+   "hop": "Hợp",
+   "tam": "Tạm được",
+   "tranh": "Nên tránh"
+  },
+  "viec": {
+   "hop": "Bếp đang ở phía hợp: giữ nguyên, giữ khu bếp khô và sáng.",
+   "xoay": "Không tốn tiền: xoay miệng bếp (chỗ người đứng nấu nhìn ra) về phía {huong}.",
+   "doi": "Khi có dịp sửa bếp: cân nhắc dời bếp sang phía {huong} — phía hợp với cả cửa và phòng chính.",
+   "doi_cua": "Khi có dịp sửa bếp: cân nhắc dời bếp sang phía {huong} — phía hợp với cửa chính.",
+   "giu": "Không tốn tiền: giữ cửa ngăn giữa bếp và phòng chính, bật hút mùi khi nấu."
+  },
+  "can_cu": {
+   "cap": "{ten_cap}: {du_nien}.",
+   "sach_khac": "Một sách khác (Dương Trạch Thập Thư) lại dặn đặt bếp ở phía kém và quay miệng bếp về phía tốt — đây là hai cách đọc khác nhau, hệ thống không chọn thay bạn."
+  },
+  "luu_y_tham_khao": "Các ý trên được rút và tóm từ sách xưa ghi ở từng mục, chỉ để tham khảo văn hoá. Đây không phải lời đoán riêng cho nhà bạn và không thay ý kiến của kiến trúc sư, bác sĩ hay luật sư; Hiểu Bản Thân (hieuban.com) không chịu trách nhiệm pháp lý về quyết định bạn đưa ra dựa trên các thông tin này.",
+  "nhom_c_an": "Sách còn {n} ghi chép nặng lời hơn về thế nhà này — chỉ hiện cho người đọc từ 18 tuổi."
+ }
 }

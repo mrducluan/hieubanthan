@@ -1,504 +1,272 @@
 "use client";
-// Dương Trạch Tam Yếu — Công cụ tra nhanh Cửa – Chủ – Bếp (3 chạm, không cần đăng nhập).
-// Tái sử dụng lưới 3×3 của `SoDoNha`; đồng bộ hai chiều với `HoSoNha` (đọc sẵn nếu đã lưu, 1 chạm áp dụng vào hồ sơ nhà).
-// Web CHỈ vẽ dữ liệu engine trả từ `/api/phongthuy/tam-yeu/*`, không tự tính Du Niên.
+// Tra nhanh Cửa – Chủ – Bếp theo Dương Trạch Tam Yếu (rà soát 2026-11-21).
+// Người dùng chạm thẳng ô trên sơ đồ 3×3 (Bắc ở trên, như SoDoNha) theo thứ tự Cửa → Phòng chính → Bếp. Web CHỈ vẽ:
+// du niên, mức (thang chung), lời, gợi ý phía đặt bếp, việc nên làm, khối sách xưa đều do engine trả
+// (`/api/phongthuy/tam-yeu/so-do`). Nhóm C (SX-C) chỉ hiện khi engine biết người đọc đủ 18 tuổi (năm sinh trong hồ sơ,
+// hoặc người đọc tự xác nhận) — luôn kèm nguồn sách, câu kết và lời tham khảo.
+// "Lưu vị trí vào hồ sơ nhà" chỉ ghi `bo_cuc.vi_tri` (cua_chinh, phong_ngu_chinh, bep) — KHÔNG đụng hướng nhà đã đo.
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, BookOpen, Check, ChevronDown, Compass, Flame, Home } from "lucide-react";
-import { useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
-import { SoDoNha, type PhongTrenSoDo } from "@/components/huyen-hoc/SoDoNha";
-import type { Muc } from "@/components/luan-giai/kieu";
+import { Check, Compass, Flame, Home } from "lucide-react";
+import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
+import { LUOI_9 } from "@/components/huyen-hoc/SoDoNha";
+import { SachXuaGhi, type KhoiSachGhi } from "@/components/huyen-hoc/SachXuaGhi";
+import { NHAN_MUC, type Muc } from "@/components/luan-giai/kieu";
 import { ghi } from "@/lib/do-luong";
 import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
+import { urlTheoNgonNgu } from "@/lib/ngon-ngu";
 import { cn } from "@/lib/utils";
 
-const QUAI_DS = [
-  { quai: "Khảm", huong: "Bắc" },
-  { quai: "Cấn", huong: "Đông Bắc" },
-  { quai: "Chấn", huong: "Đông" },
-  { quai: "Tốn", huong: "Đông Nam" },
-  { quai: "Ly", huong: "Nam" },
-  { quai: "Khôn", huong: "Tây Nam" },
-  { quai: "Đoài", huong: "Tây" },
-  { quai: "Càn", huong: "Tây Bắc" },
-] as const;
-
-type Quai8 = (typeof QUAI_DS)[number]["quai"];
-type Huong8 = (typeof QUAI_DS)[number]["huong"];
-
-const QUAI_TU_HUONG: Record<string, Quai8> = Object.fromEntries(QUAI_DS.map((x) => [x.huong, x.quai])) as Record<string, Quai8>;
-const HUONG_TU_QUAI: Record<Quai8, Huong8> = {
-  Khảm: "Bắc",
-  Cấn: "Đông Bắc",
-  Chấn: "Đông",
-  Tốn: "Đông Nam",
-  Ly: "Nam",
-  Khôn: "Tây Nam",
-  Đoài: "Tây",
-  Càn: "Tây Bắc",
+// Tên quái của 8 phương (bảng tên, không phải phép tính) — engine nhận quái.
+const QUAI_CUA_HUONG: Record<string, string> = {
+  "Bắc": "Khảm", "Đông Bắc": "Cấn", "Đông": "Chấn", "Đông Nam": "Tốn",
+  "Nam": "Ly", "Tây Nam": "Khôn", "Tây": "Đoài", "Tây Bắc": "Càn",
 };
-const DU_NIEN_CAT = new Set(["Sinh Khí", "Thiên Y", "Diên Niên", "Phục Vị"]);
+type Cho = "cua" | "chu" | "bep";
+const THU_TU: Cho[] = ["cua", "chu", "bep"];
+const KHOA_VI_TRI: Record<Cho, "cua_chinh" | "phong_ngu_chinh" | "bep"> = { cua: "cua_chinh", chu: "phong_ngu_chinh", bep: "bep" };
+const BIEU_TUONG = { cua: Compass, chu: Home, bep: Flame } as const;
 
-const EN_DU_NIEN_MEANING: Record<string, { label: string; house: string; stove: string }> = {
-  "Sinh Khí": { label: "Very supportive · Vitality", house: "Door-to-master flow supports momentum, clarity, and career/financial growth.", stove: "Stove sector welcomes supportive flow for warmth and household prosperity." },
-  "Thiên Y": { label: "Supportive · Health & rest", house: "Gentle, restorative layout favoring restful sleep and steady well-being.", stove: "Great stove placement for nourishment, recovery, and everyday health." },
-  "Diên Niên": { label: "Supportive · Harmony", house: "Balanced energy that helps household members stay aligned and harmonious.", stove: "Supports steady daily rhythm and warm family relationships." },
-  "Phục Vị": { label: "Steady · Calm focus", house: "Quiet, grounded sector suited to study, reflection, and calm routines.", stove: "Neutral and steady; keep the kitchen bright, clean, and well-ventilated." },
-  "Hoạ Hại": { label: "Mild friction", house: "Minor door–master mismatch; prioritize placing the stove in a supportive sector.", stove: "Less supportive stove sector; keep it tidy, airy, or face the stove mouth well." },
-  "Lục Sát": { label: "Needs layout balance", house: "Flow between door and master room can feel restless; soften lighting and balance via stove placement.", stove: "Can add minor friction to shared routines; keep dry, well-lit, and prioritize bedroom direction." },
-  "Ngũ Quỷ": { label: "High tension · Balance advised", house: "Clashing sectors can feel tiring or hurried; use a supportive stove sector to settle the layout.", stove: "Strong fire clash; when renovating, prefer one of the suggested supportive stove sectors." },
-  "Tuyệt Mệnh": { label: "Strong clash · Priority fix", house: "Strongest East/West group mismatch; per Yangzhai Sanyao, placing the stove in a supportive sector is the first adjustment.", stove: "Clashes strongly with the main door; prefer one of the suggested supportive stove sectors." },
-};
-
-interface SoDoNhaRes {
-  ma: string; cua: string; chu: string; huong_cua: string; huong_chu: string;
-  du_nien: string; cung_nhom: boolean; quan_he_ngu_hanh: string;
-  bep_hop: string[]; bep_nen_tranh: string[]; tom_y?: string;
-  nhan_doi_thuong?: string; dien_giai_doi_thuong?: string;
-}
-interface SoDoBepRes {
-  ma: string; bep: string; cua: string; huong_bep: string; huong_cua: string;
-  du_nien: string; hanh_bep: string; hanh_cua: string; quan_he_ngu_hanh: string; tom_y?: string;
-  nhan_doi_thuong?: string; dien_giai_doi_thuong?: string;
-}
+interface Cap { cap: string; ten: string; tu: string; den: string; du_nien: string; muc: Muc; loi: string }
+interface GoiYBep { quai: string; huong: string; du_nien_cua: string; du_nien_chu: string | null; loai: "hop" | "tam" | "tranh"; nhan: string }
 interface TamYeuRes {
-  cua: string;
-  nguon_hien_thi: string;
-  so_do_nha?: SoDoNhaRes;
-  so_do_bep?: SoDoBepRes;
-}
-interface DoHinhItem {
-  ma: string; ten: string; ten_han: string; nhom: string; mo_ta: string;
-}
-interface DoHinhChiTiet extends DoHinhItem {
-  cau_truc?: Record<string, unknown>;
-  mermaid?: string;
+  cap: Cap[];
+  ket_luan: { muc: Muc; loi: string } | null;
+  bep_goi_y: GoiYBep[];
+  viec: { chi_phi: "0" | "co"; lam: string }[];
+  can_cu: string[];
+  sach_ghi: KhoiSachGhi | null;
+  luu_y_tham_khao: string;
+  nhom_c_an?: { so: number; loi: string };
 }
 
-function mucTuDuNien(dn?: string | null): Muc | null {
-  if (!dn) return null;
-  return DU_NIEN_CAT.has(dn) ? "thuan" : "can_chu_dong";
-}
+const MUC_LOAI_BEP: Record<GoiYBep["loai"], Muc> = { hop: "thuan", tam: "can_bang", tranh: "can_chu_dong" };
 
-function hienGiaTriCauTruc(val: unknown): string {
-  if (typeof val === "string" || typeof val === "number" || typeof val === "boolean") return String(val);
-  if (Array.isArray(val)) {
-    return val
-      .map((item) => {
-        if (Array.isArray(item)) return `[${item.join(" · ")}]`;
-        if (item && typeof item === "object") {
-          return Object.values(item as Record<string, unknown>).join(" · ");
-        }
-        return String(item);
-      })
-      .join(" | ");
-  }
-  return "";
-}
-
-export function TamYeuCuaChuBep({ huongCuaGoiY }: { huongCuaGoiY?: string | null }) {
-  const { en, huong: tenHuong, duNien: tenDuNien, quai: tenQuai } = useChuPT();
+export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: string | null; namSinh?: number | null }) {
+  const { c, en, huong: tenHuong } = useChuPT();
   const hoSoNha = useHoSoNha();
-  const [cua, setCua] = useState<Quai8>("Càn");
-  const [chu, setChu] = useState<Quai8>("Đoài");
-  const [bep, setBep] = useState<Quai8>("Khôn");
+  const [vt, setVt] = useState<Record<Cho, string | null>>({ cua: null, chu: null, bep: null });
+  const [dang, setDang] = useState<Cho>("cua");
+  const [tuHoSo, setTuHoSo] = useState(false);
+  const [du18, setDu18] = useState(false);
   const [kq, setKq] = useState<TamYeuRes | null>(null);
   const [dangTai, setDangTai] = useState(false);
-  const [loi, setLoi] = useState<string | null>(null);
+  const [loi, setLoi] = useState(false);
   const [daLuu, setDaLuu] = useState(false);
-  const [doHinh, setDoHinh] = useState<DoHinhItem[] | null>(null);
-  const [moDoHinh, setMoDoHinh] = useState(false);
-  const [chiTietMa, setChiTietMa] = useState<string | null>(null);
-  const [chiTietCache, setChiTietCache] = useState<Record<string, DoHinhChiTiet>>({});
-  const daDienHoSo = useRef(false);
+  const daDien = useRef(false);
+  const nhanMuc = (m: Muc) => (en ? c(m === "can_chu_dong" ? "sd.luu_y" : `sd.${m}`) : NHAN_MUC[m]);
 
-  // Tự điền sẵn từ Hồ sơ nhà trên máy (một lần duy nhất; chỉ lấy hướng Cửa khi theo === "cua", không lấy hướng ban công).
+  // Điền sẵn một lần từ hồ sơ nhà trên máy (vị trí ba chỗ đã khảo sát).
   useEffect(() => {
-    if (daDienHoSo.current || !hoSoNha) return;
-    daDienHoSo.current = true;
-    if (hoSoNha.theo === "cua" && hoSoNha.huong && QUAI_TU_HUONG[hoSoNha.huong]) setCua(QUAI_TU_HUONG[hoSoNha.huong]!);
-    const vt = hoSoNha.bo_cuc?.vi_tri;
-    if (vt?.phong_ngu_chinh && QUAI_TU_HUONG[vt.phong_ngu_chinh]) setChu(QUAI_TU_HUONG[vt.phong_ngu_chinh]!);
-    if (vt?.bep && QUAI_TU_HUONG[vt.bep]) setBep(QUAI_TU_HUONG[vt.bep]!);
+    if (daDien.current || !hoSoNha) return;
+    daDien.current = true;
+    const v = hoSoNha.bo_cuc?.vi_tri as Record<string, string | undefined> | undefined;
+    const lay = (k: string) => (v?.[k] && QUAI_CUA_HUONG[v[k]!] ? v[k]! : null);
+    const moi = { cua: lay("cua_chinh"), chu: lay("phong_ngu_chinh"), bep: lay("bep") };
+    if (moi.cua) {
+      setVt(moi);
+      setTuHoSo(true);
+      setDang(moi.chu ? "bep" : "chu");
+    }
   }, [hoSoNha]);
 
-  // Nếu người dùng vừa đo hướng nhà xong ở La Bàn → tự đồng bộ quái Cửa chính.
+  // Vừa đo hướng nhà (nhà có cửa ở mặt trước, không phải căn hộ) → gợi ý cửa ở phía đó, chỉ khi chưa đặt cửa.
   useEffect(() => {
-    if (huongCuaGoiY && QUAI_TU_HUONG[huongCuaGoiY]) {
-      setCua(QUAI_TU_HUONG[huongCuaGoiY]!);
-    }
+    if (!huongCuaGoiY || !QUAI_CUA_HUONG[huongCuaGoiY]) return;
+    setVt((cu) => (cu.cua ? cu : { ...cu, cua: huongCuaGoiY }));
+    setDang((d) => (d === "cua" ? "chu" : d));
   }, [huongCuaGoiY]);
 
   useEffect(() => {
+    if (!vt.cua) { setKq(null); return; }
     let huy = false;
     setDangTai(true);
-    setLoi(null);
-    const q = new URLSearchParams({ cua, chu, bep });
-    fetch(`/api/phongthuy/tam-yeu/so-do?${q.toString()}`)
-      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("fail"))))
-      .then((d: TamYeuRes) => {
-        if (!huy) setKq(d);
-      })
-      .catch(() => {
-        if (!huy) setLoi("Chưa tra được sơ đồ Tam Yếu lúc này. Thử chọn lại sau ít giây.");
-      })
-      .finally(() => {
-        if (!huy) setDangTai(false);
-      });
+    setLoi(false);
+    const q = new URLSearchParams({ cua: QUAI_CUA_HUONG[vt.cua]! });
+    if (vt.chu) q.set("chu", QUAI_CUA_HUONG[vt.chu]!);
+    if (vt.bep) q.set("bep", QUAI_CUA_HUONG[vt.bep]!);
+    if (namSinh) q.set("nam_sinh", String(namSinh));
+    else if (du18) q.set("du_18", "1");
+    fetch(urlTheoNgonNgu(`/api/phongthuy/tam-yeu/so-do?${q.toString()}`))
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("loi"))))
+      .then((d: TamYeuRes) => { if (!huy) setKq(d); })
+      .catch(() => { if (!huy) setLoi(true); })
+      .finally(() => { if (!huy) setDangTai(false); });
     return () => { huy = true; };
-  }, [cua, chu, bep]);
+  }, [vt.cua, vt.chu, vt.bep, namSinh, du18]);
 
-  const chonMuc = (loai: "cua" | "chu" | "bep", val: string) => {
-    const q = (val in HUONG_TU_QUAI ? val : null) as Quai8 | null;
-    if (!q) return;
+  const dat = (o: string) => {
+    if (!QUAI_CUA_HUONG[o]) return;
     setDaLuu(false);
-    if (loai === "cua") setCua(q);
-    else if (loai === "chu") setChu(q);
-    else setBep(q);
-    ghi("chart_interacted", {
-      mo_dun: "phongthuy",
-      kind: "tam_yeu_so_do",
-      cua: loai === "cua" ? q : cua,
-      chu: loai === "chu" ? q : chu,
-      bep: loai === "bep" ? q : bep,
-    });
+    setVt((cu) => ({ ...cu, [dang]: o }));
+    ghi("chart_interacted", { mo_dun: "phongthuy", kind: "tam_yeu_dat", cho: dang });
+    const tiep = THU_TU[THU_TU.indexOf(dang) + 1];
+    if (tiep && !vt[tiep]) setDang(tiep);
   };
 
-  const apDungVaoHoSoNha = () => {
+  const luu = () => {
+    const cu = (hoSoNha?.bo_cuc?.vi_tri ?? {}) as Record<string, string | undefined>;
+    const khac = THU_TU.filter((k) => vt[k] && cu[KHOA_VI_TRI[k]] && cu[KHOA_VI_TRI[k]] !== vt[k]);
+    if (khac.length) {
+      const moTaCu = khac.map((k) => `${c(`ty.${k}`)}: ${tenHuong(cu[KHOA_VI_TRI[k]]!)}`).join(", ");
+      if (!window.confirm(c("ty.luu_hoi", { cu: moTaCu }))) return;
+    }
+    const moi: Record<string, string> = {};
+    for (const k of THU_TU) if (vt[k]) moi[KHOA_VI_TRI[k]] = vt[k]!;
     try {
-      luuHoSoNha({
-        huong: HUONG_TU_QUAI[cua],
-        bo_cuc: {
-          ...(hoSoNha?.bo_cuc ?? {}),
-          vi_tri: {
-            ...(hoSoNha?.bo_cuc?.vi_tri ?? {}),
-            phong_ngu_chinh: HUONG_TU_QUAI[chu],
-            bep: HUONG_TU_QUAI[bep],
-          },
-        },
-      });
+      luuHoSoNha({ bo_cuc: { ...(hoSoNha?.bo_cuc ?? {}), vi_tri: { ...(hoSoNha?.bo_cuc?.vi_tri ?? {}), ...moi } } } as Parameters<typeof luuHoSoNha>[0]);
       setDaLuu(true);
-      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "tam_yeu_ap_dung_ho_so", cua, chu, bep });
-      document.getElementById("nha-cua-ban")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    } catch {
-      /* chế độ riêng tư */
-    }
+      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "tam_yeu_luu" });
+    } catch { /* chế độ riêng tư */ }
   };
 
-  const taiDoHinh = () => {
-    const next = !moDoHinh;
-    setMoDoHinh(next);
-    if (next && !doHinh) {
-      fetch("/api/phongthuy/tam-yeu/do-hinh")
-        .then((r) => (r.ok ? r.json() : null))
-        .then((d) => { if (d?.do_hinh) setDoHinh(d.do_hinh as DoHinhItem[]); })
-        .catch(() => null);
-      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "tam_yeu_do_hinh_mo" });
-    }
-  };
-
-  const xemChiTietDoHinh = (ma: string) => {
-    if (chiTietMa === ma) { setChiTietMa(null); return; }
-    setChiTietMa(ma);
-    if (!chiTietCache[ma]) {
-      fetch(`/api/phongthuy/tam-yeu/do-hinh?ma=${encodeURIComponent(ma)}`)
-        .then((r) => (r.ok ? r.json() : null))
-        .then((d) => {
-          if (d?.ma) setChiTietCache((prev) => ({ ...prev, [ma]: d as DoHinhChiTiet }));
-        })
-        .catch(() => null);
-      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "tam_yeu_do_hinh_chi_tiet", ma });
-    }
-  };
-
-  const nha = kq?.so_do_nha;
-  const sdBep = kq?.so_do_bep;
-  const phong: PhongTrenSoDo[] = [
-    { cung: HUONG_TU_QUAI[cua], ten: en ? `Door (${tenQuai(cua)})` : `Cửa (${cua})`, muc: "can_bang" },
-    { cung: HUONG_TU_QUAI[chu], ten: en ? `Master (${tenQuai(chu)})` : `Phòng chủ (${chu})`, muc: mucTuDuNien(nha?.du_nien) },
-    { cung: HUONG_TU_QUAI[bep], ten: en ? `Stove (${tenQuai(bep)})` : `Bếp (${bep})`, muc: mucTuDuNien(sdBep?.du_nien) },
-  ];
-  const duNienMap: Record<string, string | null> = {};
-  if (nha) duNienMap[nha.huong_chu] = nha.du_nien;
-  if (sdBep) duNienMap[sdBep.huong_bep] = sdBep.du_nien;
-  const nhaEn = nha ? EN_DU_NIEN_MEANING[nha.du_nien] : undefined;
-  const bepEn = sdBep ? EN_DU_NIEN_MEANING[sdBep.du_nien] : undefined;
+  const nhanO = (o: string) => THU_TU.filter((k) => vt[k] === o);
+  const ketMuc = kq?.ket_luan?.muc;
 
   return (
-    <section
-      id="tam-yeu"
-      aria-label={en ? "Yangzhai Sanyao — Door, Master Room & Stove Layout" : "Dương Trạch Tam Yếu — Sơ đồ Cửa, Chủ, Bếp"}
-      data-testid="tam-yeu-cua-chu-bep"
-      className="glass rounded-2xl p-5 sm:p-6"
-    >
-      <div className="flex flex-wrap items-start justify-between gap-2">
+    <section id="tam-yeu" data-testid="tam-yeu-cua-chu-bep" aria-labelledby="tam-yeu-ten" className="glass rounded-2xl p-5 sm:p-6">
+      <p className="text-xs uppercase tracking-wider text-gold">{c("ty.nhan")}</p>
+      <h2 id="tam-yeu-ten" className="mt-1 font-serif text-xl text-fg sm:text-2xl">{c("ty.ten")}</h2>
+      <p className="mt-1 text-sm text-fg-muted"><ChuB chu={c("ty.mo_ta")} /></p>
+
+      <div className="mt-4 grid items-start gap-5 md:grid-cols-[minmax(0,20rem)_1fr]">
         <div>
-          <p className="text-xs uppercase tracking-wider text-gold">
-            {en ? "Yangzhai Sanyao · Zhao Jiufeng (Qing)" : "Dương Trạch Tam Yếu · Triệu Cửu Phong"}
-          </p>
-          <h2 className="mt-1 text-xl font-semibold text-fg sm:text-2xl">
-            {en ? "Quick Door – Master – Stove Layout Check" : "Tra nhanh thế nhà Cửa – Chủ – Bếp"}
-          </h2>
-          <p className="mt-1 text-sm text-fg-muted">
-            {en ? (
-              <>Pick your <b>Main Door</b>, <b>Master Room</b>, and <b>Stove</b> sectors (no sign-in required) to preview the 3×3 Nine-Palace grid and recommended stove sectors.</>
-            ) : (
-              <>Chọn vị trí <b>Cửa chính</b>, <b>Phòng chủ</b> và <b>Bếp nấu</b> theo 8 phương (dùng ngay không cần đăng nhập) để xem sơ đồ Cửu Cung 3×3 và gợi ý đặt bếp.</>
-            )}
-          </p>
-        </div>
-        <button
-          type="button"
-          onClick={taiDoHinh}
-          className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs text-fg-muted transition-colors hover:border-gold hover:text-fg"
-        >
-          <BookOpen className="size-3.5 text-gold" aria-hidden />
-          {moDoHinh
-            ? (en ? "Hide 10 classical diagrams" : "Ẩn 10 đồ hình cổ")
-            : (en ? "View 10 classical diagrams" : "Xem 10 đồ hình lý thuyết")}
-        </button>
-      </div>
-
-      {/* Bộ chọn 3 chạm: Cửa – Chủ – Bếp */}
-      <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        {(
-          [
-            { key: "cua" as const, label: en ? "1. Main Door (Men)" : "1. Cửa chính (Môn)", val: cua, icon: Compass },
-            { key: "chu" as const, label: en ? "2. Master Room (Zhu)" : "2. Phòng chủ (phòng chính/ngủ chính)", val: chu, icon: Home },
-            { key: "bep" as const, label: en ? "3. Stove (Zao)" : "3. Bếp nấu (Táo)", val: bep, icon: Flame },
-          ]
-        ).map(({ key, label, val, icon: Icon }) => (
-          <div key={key} className="rounded-xl border border-line/70 bg-surface/40 p-3">
-            <p className="mb-2 flex items-center gap-1.5 text-xs font-medium text-fg">
-              <Icon className="size-3.5 text-gold" aria-hidden /> {label}
-            </p>
-            <div className="grid grid-cols-2 gap-1">
-              {QUAI_DS.map((q) => {
-                const active = val === q.quai;
-                return (
-                  <button
-                    key={q.quai}
-                    type="button"
-                    aria-pressed={active}
-                    data-testid={`tam-yeu-${key}-${q.quai}`}
-                    onClick={() => chonMuc(key, q.quai)}
-                    className={cn(
-                      "rounded-lg border px-2 py-1 text-left text-xs transition-colors motion-reduce:transition-none",
-                      active
-                        ? "border-gold bg-gold/15 font-medium text-fg"
-                        : "border-line/60 text-fg-muted hover:border-line hover:text-fg"
-                    )}
-                  >
-                    <span>{en ? tenQuai(q.quai) : q.quai}</span>
-                    <span className="ml-1 text-[10px] text-fg-faint">({en ? tenHuong(q.huong) : q.huong})</span>
-                  </button>
-                );
-              })}
-            </div>
+          {/* Chọn chỗ đang đặt */}
+          <div className="mb-2 flex flex-wrap items-center gap-1.5 text-xs" role="radiogroup" aria-label={c("ty.dang_dat")}>
+            <span className="text-fg-muted">{c("ty.dang_dat")}</span>
+            {THU_TU.map((k) => {
+              const Icon = BIEU_TUONG[k];
+              return (
+                <button key={k} type="button" role="radio" aria-checked={dang === k} data-testid={`tam-yeu-che-do-${k}`}
+                  onClick={() => setDang(k)}
+                  className={cn("inline-flex min-h-[36px] items-center gap-1 rounded-full border px-2.5 py-1",
+                    dang === k ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg")}>
+                  <Icon className="size-3.5 text-gold" aria-hidden /> {c(`ty.${k}`)}
+                  {vt[k] && <span className="text-fg-faint">· {tenHuong(vt[k])}</span>}
+                </button>
+              );
+            })}
           </div>
-        ))}
-      </div>
-
-      {loi && <p className="mt-4 text-sm text-cinnabar">{en ? "Could not load the Three-Essentials layout right now. Please retry." : loi}</p>}
-
-      {/* Lưới Cửu Cung 3×3 (tái sử dụng SoDoNha) + Giải nghĩa đời thường trước, học thuật gập sau */}
-      <div className="mt-5 grid items-start gap-5 md:grid-cols-[minmax(0,22rem)_1fr]">
-        <SoDoNha
-          phong={phong}
-          huongNha={HUONG_TU_QUAI[cua]}
-          duNien={duNienMap}
-          tieuDe={en ? `Layout: Door ${tenQuai(cua)}, Master ${tenQuai(chu)}, Stove ${tenQuai(bep)}` : `Sơ đồ Tam Yếu: Cửa ${cua}, Chủ ${chu}, Bếp ${bep}`}
-          className="mx-auto"
-        />
+          <p className="mb-2 text-xs text-fg-faint">{c("ty.goi_y_cham", { cho: c(`ty.${dang}`).toLowerCase() })}</p>
+          {/* Sơ đồ 3×3 — Bắc ở trên */}
+          <div className="grid grid-cols-3 gap-1" data-testid="tam-yeu-luoi">
+            {LUOI_9.map((o) => {
+              const giua = o === "Trung cung";
+              const ds = nhanO(o);
+              const datTen = ds.map((k) => c(`ty.${k}`)).join(", ");
+              if (giua) {
+                return <div key={o} className="flex min-h-[4.2rem] items-center justify-center rounded-lg border border-line/50 bg-surface-2/30 text-[10px] text-fg-faint">{c("ty.tam")}</div>;
+              }
+              return (
+                <button key={o} type="button" data-testid={`tam-yeu-o-${QUAI_CUA_HUONG[o]}`} onClick={() => dat(o)}
+                  aria-label={c("ty.o_aria", { huong: tenHuong(o), dat: datTen ? ` — ${datTen}` : "" })}
+                  className={cn("flex min-h-[4.2rem] flex-col rounded-lg border p-1.5 text-left transition-colors motion-reduce:transition-none",
+                    ds.length ? "border-gold/60 bg-gold/10" : "border-line/60 bg-bg/30 hover:border-gold/50")}>
+                  <span className="text-[10px] uppercase leading-none tracking-wide text-fg-faint">{tenHuong(o)}</span>
+                  <span className="mt-auto space-y-0.5 pt-1">
+                    {ds.map((k) => {
+                      const Icon = BIEU_TUONG[k];
+                      return <span key={k} className="flex items-center gap-1 text-[11px] font-semibold leading-tight text-fg"><Icon className="size-3 text-gold" aria-hidden />{c(`ty.${k}`)}</span>;
+                    })}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+          {tuHoSo && <p className="mt-2 text-[11px] text-fg-faint">{c("ty.tu_ho_so")}</p>}
+        </div>
 
         <div className="space-y-3" aria-live="polite">
-          {dangTai && !kq && <p className="text-sm text-fg-muted">{en ? "Calculating layout from engine…" : "Đang tra sơ đồ từ máy tính toán…"}</p>}
+          {dangTai && !kq && <p className="text-sm text-fg-muted">{c("ty.dang_tai")}</p>}
+          {loi && <p className="text-sm text-fg-muted">{c("ty.loi")}</p>}
 
-          {nha && (
-            <div data-testid="tam-yeu-the-nha" className={cn("rounded-xl border p-4", nha.cung_nhom ? "border-jade/40 bg-jade/5" : "border-cinnabar/35 bg-cinnabar/5")}>
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm font-semibold text-fg">
-                  {en
-                    ? `House pairing: Door ${tenQuai(nha.cua)} (${tenHuong(nha.huong_cua)}) → Master ${tenQuai(nha.chu)} (${tenHuong(nha.huong_chu)})`
-                    : `Thế nhà: Cửa ${nha.cua} (${nha.huong_cua}) → Chủ ${nha.chu} (${nha.huong_chu})`}
-                </p>
-                <span className={cn("rounded-full px-2.5 py-0.5 text-xs font-medium", nha.cung_nhom ? "bg-jade/15 text-jade" : "bg-cinnabar/15 text-cinnabar")}>
-                  {en ? (nhaEn?.label ?? tenDuNien(nha.du_nien)) : (nha.nhan_doi_thuong ?? nha.du_nien)}
-                </span>
-              </div>
-              {en ? (
-                nhaEn && <p className="mt-2 text-sm leading-relaxed text-fg">{nhaEn.house}</p>
-              ) : (
-                <>
-                  {nha.dien_giai_doi_thuong && <p className="mt-2 text-sm leading-relaxed text-fg">{nha.dien_giai_doi_thuong}</p>}
-                  {nha.tom_y && <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">Theo sách xưa: {nha.tom_y}</p>}
-                </>
-              )}
-
-              {nha.bep_hop.length > 0 && (
-                <div className="mt-2.5 flex flex-wrap items-center gap-1.5 text-xs" data-testid="tam-yeu-bep-hop">
-                  <span className="text-fg-muted">{en ? "Supportive stove:" : "Bếp hợp:"}</span>
-                  {nha.bep_hop.map((q) => (
-                    <button
-                      key={q}
-                      type="button"
-                      onClick={() => chonMuc("bep", q)}
-                      className={cn(
-                        "rounded-full border px-2 py-0.5 transition-colors",
-                        bep === q ? "border-jade bg-jade/20 font-medium text-jade" : "border-jade/40 text-jade hover:bg-jade/10"
-                      )}
-                    >
-                      {en ? `${tenQuai(q)} (${tenHuong(HUONG_TU_QUAI[q as Quai8] ?? q)})` : `${q} (${HUONG_TU_QUAI[q as Quai8] ?? q})`}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {nha.bep_nen_tranh.length > 0 && (
-                <div className="mt-1.5 flex flex-wrap items-center gap-1.5 text-xs" data-testid="tam-yeu-bep-tranh">
-                  <span className="text-fg-muted">{en ? "Stove to avoid:" : "Bếp nên tránh:"}</span>
-                  {nha.bep_nen_tranh.map((q) => (
-                    <button
-                      key={q}
-                      type="button"
-                      onClick={() => chonMuc("bep", q)}
-                      className={cn(
-                        "rounded-full border px-2 py-0.5 transition-colors",
-                        bep === q ? "border-cinnabar bg-cinnabar/20 font-medium text-cinnabar" : "border-cinnabar/35 text-cinnabar hover:bg-cinnabar/10"
-                      )}
-                    >
-                      {en ? `${tenQuai(q)} (${tenHuong(HUONG_TU_QUAI[q as Quai8] ?? q)})` : `${q} (${HUONG_TU_QUAI[q as Quai8] ?? q})`}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              <details className="mt-2.5 text-xs text-fg-muted">
-                <summary className="cursor-pointer text-gold">
-                  {en ? `Why this reading (${tenDuNien(nha.du_nien)} · Eight Mansions)` : "Vì sao nói vậy (Bát Trạch & Ngũ Hành)"}
-                </summary>
-                <p className="mt-1 leading-relaxed">
-                  {en
-                    ? (nha.cung_nhom ? "Door and Master room belong to the same East/West group." : "Door and Master room belong to opposite East/West groups.")
-                    : <>{nha.cung_nhom ? "Cửa và Phòng chủ cùng nhóm Đông/Tây Tứ Trạch" : "Cửa và Phòng chủ khác nhóm Đông/Tây Tứ Trạch"} · Quan hệ ngũ hành: <b>{nha.quan_he_ngu_hanh}</b>.</>}
-                </p>
-              </details>
+          {kq?.ket_luan && (
+            <div data-testid="tam-yeu-ket-luan" data-muc={ketMuc} className="chip-muc rounded-xl border p-4">
+              <p className="text-xs uppercase tracking-wide opacity-80">{c("ty.ket_luan")} · {nhanMuc(kq.ket_luan.muc)}</p>
+              <p className="mt-1 text-[0.95rem] leading-relaxed">{kq.ket_luan.loi}</p>
             </div>
           )}
 
-          {sdBep && (
-            <div data-testid="tam-yeu-the-bep" className={cn("rounded-xl border p-4", DU_NIEN_CAT.has(sdBep.du_nien) ? "border-jade/35 bg-jade/5" : "border-line bg-surface/40")}>
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm font-semibold text-fg">
-                  {en
-                    ? `Stove pairing: Stove ${tenQuai(sdBep.bep)} (${tenHuong(sdBep.huong_bep)}) with Door ${tenQuai(sdBep.cua)}`
-                    : `Thế bếp: Bếp ${sdBep.bep} (${sdBep.huong_bep}) phối Cửa ${sdBep.cua}`}
-                </p>
-                <span className={cn("rounded-full px-2.5 py-0.5 text-xs font-medium", DU_NIEN_CAT.has(sdBep.du_nien) ? "bg-jade/15 text-jade" : "bg-cinnabar/15 text-cinnabar")}>
-                  {en ? (bepEn?.label ?? tenDuNien(sdBep.du_nien)) : (sdBep.nhan_doi_thuong ?? sdBep.du_nien)}
-                </span>
-              </div>
-              {en ? (
-                bepEn && <p className="mt-2 text-sm leading-relaxed text-fg">{bepEn.stove}</p>
-              ) : (
-                <>
-                  {sdBep.dien_giai_doi_thuong && <p className="mt-2 text-sm leading-relaxed text-fg">{sdBep.dien_giai_doi_thuong}</p>}
-                  {sdBep.tom_y && <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">Theo sách xưa: {sdBep.tom_y}</p>}
-                </>
-              )}
-              <details className="mt-2 text-xs text-fg-muted">
-                <summary className="cursor-pointer text-gold">
-                  {en ? `Why this reading (${tenDuNien(sdBep.du_nien)} · Five Elements)` : `Vì sao nói vậy (${sdBep.du_nien} · Ngũ Hành)`}
-                </summary>
-                <p className="mt-1">
-                  {en
-                    ? `Classical star: ${tenDuNien(sdBep.du_nien)}.`
-                    : `Bếp hành ${sdBep.hanh_bep} · Cửa hành ${sdBep.hanh_cua} · ${sdBep.quan_he_ngu_hanh}.`}
-                </p>
-              </details>
+          {kq && kq.cap.length > 0 && (
+            <ul className="space-y-2" data-testid="tam-yeu-cap">
+              {kq.cap.map((p) => (
+                <li key={p.cap} className="rounded-xl border border-line/70 bg-surface/40 p-3">
+                  <p className="flex flex-wrap items-center justify-between gap-2 text-sm font-medium text-fg">
+                    {p.ten}
+                    <span className="chip-muc rounded-full border px-2 py-0.5 text-xs" data-muc={p.muc}>{nhanMuc(p.muc)}</span>
+                  </p>
+                  <p className="mt-1 text-sm leading-relaxed text-fg-muted">{p.loi}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {kq && kq.viec.length > 0 && (
+            <div className="rounded-xl border border-gold/30 bg-gold/5 p-3" data-testid="tam-yeu-viec">
+              <p className="text-sm font-medium text-fg">{c("ty.viec")}</p>
+              <ul className="mt-1.5 space-y-1.5 text-sm text-fg-muted">
+                {kq.viec.map((v, i) => (
+                  <li key={i} className="flex gap-2">
+                    <span className="shrink-0 rounded-full border border-line px-1.5 text-[10px] leading-5">{c(v.chi_phi === "0" ? "ty.mien_phi" : "ty.ton_tien")}</span>
+                    <span>{v.lam}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 
-          {/* CTA 1 chạm: lưu vào Hồ sơ nhà + dẫn xuống báo cáo đầy đủ Nhà của bạn */}
-          <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-gold/30 bg-gold/5 px-4 py-3 text-xs">
-            <span className="text-fg-muted">
-              {en ? (
-                <>Combine this layout with <b>all family members</b>, <b>construction period (Flying Stars)</b>, and <b>3-month forecast</b>:</>
-              ) : (
-                <>Ghép tổ hợp này với <b>tuổi cả gia đình</b>, <b>năm xây (Huyền Không)</b> và <b>3 tháng tới</b>:</>
-              )}
-            </span>
-            <button
-              type="button"
-              data-testid="tam-yeu-ap-dung"
-              onClick={apDungVaoHoSoNha}
-              className="inline-flex items-center gap-1 rounded-full border border-gold/60 bg-gold/15 px-3 py-1 font-medium text-gold transition-colors hover:bg-gold/25"
-            >
-              {daLuu ? (
-                <><Check className="size-3.5" aria-hidden /> {en ? "Saved to House Profile" : "Đã lưu vào Hồ sơ nhà"}</>
-              ) : (
-                <>{en ? "Save to House Profile & View Report" : "Lưu vào Hồ sơ nhà & Xem báo cáo"} <ArrowDown className="size-3.5" aria-hidden /></>
-              )}
-            </button>
-          </div>
+          {kq && vt.cua && (
+            <div data-testid="tam-yeu-bep-goi-y">
+              <p className="text-sm font-medium text-fg">{c("ty.bep_goi_y")}</p>
+              <div className="mt-1.5 flex flex-wrap gap-1.5">
+                {kq.bep_goi_y.map((g) => (
+                  <button key={g.quai} type="button" data-muc={MUC_LOAI_BEP[g.loai]} data-testid={`tam-yeu-bep-${g.quai}`}
+                    onClick={() => { setDang("bep"); setVt((cu) => ({ ...cu, bep: g.huong })); setDaLuu(false); }}
+                    className={cn("chip-muc rounded-full border px-2.5 py-1 text-xs", vt.bep === g.huong && "ring-1 ring-gold")}>
+                    {tenHuong(g.huong)} · {g.nhan}{vt.bep === g.huong ? ` (${c("ty.bep_dang")})` : ""}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
-          <p className="text-[11px] leading-relaxed text-fg-faint">
-            {en
-              ? "Reference: Yangzhai Sanyao (Zhao Jiufeng, Qing dynasty) — spatial layout guidance only, not fortune-telling and no ritual objects required."
-              : `Nguồn: ${kq?.nguon_hien_thi ?? "Dương Trạch Tam Yếu (Triệu Cửu Phong, đời Thanh)"} — mang tính tham khảo bố trí không gian, không phải lời phán hung cát và không cần mua vật phẩm hoá giải.`}
-          </p>
+          {kq && kq.can_cu.length > 0 && (
+            <details className="text-xs text-fg-muted">
+              <summary className="cursor-pointer text-gold">{c("ty.vi_sao")}</summary>
+              <ul className="mt-1 list-disc space-y-0.5 pl-4">{kq.can_cu.map((x, i) => <li key={i}>{x}</li>)}</ul>
+            </details>
+          )}
+
+          {vt.cua && (vt.chu || vt.bep) && (
+            <div className="flex flex-wrap items-center gap-2 text-xs">
+              <button type="button" data-testid="tam-yeu-ap-dung" onClick={luu}
+                className="inline-flex min-h-[40px] items-center gap-1 rounded-full border border-gold/60 bg-gold/15 px-3 py-1 font-medium text-gold hover:bg-gold/25">
+                {daLuu ? <><Check className="size-3.5" aria-hidden /> {c("ty.da_luu")}</> : c("ty.luu")}
+              </button>
+              <span className="text-fg-faint">{c("ty.luu_ghi_chu")}</span>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Ngăn 10 đồ hình lý thuyết cổ — bấm từng thẻ để xem cấu trúc chi tiết từ engine */}
-      {moDoHinh && (
-        <div className="mt-5 border-t border-line pt-4" data-testid="tam-yeu-do-hinh-list">
-          <p className="mb-3 text-xs font-medium uppercase tracking-wider text-fg-muted">
-            10 đồ hình lý thuyết nền tảng · bấm từng đồ hình để xem cấu trúc
-          </p>
-          {!doHinh ? (
-            <p className="text-xs text-fg-muted">Đang tải danh mục đồ hình…</p>
-          ) : (
-            <div className="grid gap-2.5 sm:grid-cols-2">
-              {doHinh.map((item) => {
-                const dangMo = chiTietMa === item.ma;
-                const ct = chiTietCache[item.ma];
-                return (
-                  <div key={item.ma} className={cn("rounded-xl border p-3 transition-colors", dangMo ? "border-gold/60 bg-gold/5" : "border-line/70 bg-surface/40")}>
-                    <button
-                      type="button"
-                      onClick={() => xemChiTietDoHinh(item.ma)}
-                      aria-expanded={dangMo}
-                      className="flex w-full items-start justify-between gap-2 text-left"
-                    >
-                      <div>
-                        <p className="text-sm font-medium text-fg">{item.ten}</p>
-                        <p className="mt-0.5 text-[11px] text-gold" lang="zh-Hant">{item.ten_han}</p>
-                      </div>
-                      <ChevronDown className={cn("mt-0.5 size-4 shrink-0 text-fg-muted transition-transform motion-reduce:transition-none", dangMo && "rotate-180")} aria-hidden />
-                    </button>
-                    <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">{item.mo_ta}</p>
-                    {dangMo && (
-                      <div className="mt-2.5 border-t border-line/60 pt-2 text-xs text-fg-muted">
-                        {!ct ? (
-                          <p>Đang tải cấu trúc đồ hình…</p>
-                        ) : ct.cau_truc ? (
-                          <ul className="space-y-1">
-                            {Object.entries(ct.cau_truc).map(([k, v]) => (
-                              <li key={k}>
-                                <span className="font-medium text-fg">{k.replace(/_/g, " ")}:</span>{" "}
-                                <span>{hienGiaTriCauTruc(v)}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : null}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+      {kq && !en && (kq.sach_ghi || kq.nhom_c_an || du18) && (
+        <div className="mt-5 space-y-2" data-testid="tam-yeu-sach">
+          {kq.sach_ghi && <SachXuaGhi khoi={kq.sach_ghi} moDun="phongthuy" tieuDe={c("ty.sach_tieu_de")} />}
+          {(kq.nhom_c_an || du18) && !namSinh && (
+            <div className="rounded-xl border border-line/70 bg-surface/40 p-3 text-xs text-fg-muted" data-testid="tam-yeu-nhom-c">
+              {kq.nhom_c_an && <p>{kq.nhom_c_an.loi}</p>}
+              <label className="mt-1.5 inline-flex min-h-[36px] items-center gap-2 text-fg">
+                <input type="checkbox" checked={du18} onChange={(e) => setDu18(e.target.checked)} data-testid="tam-yeu-du-18" />
+                {c("ty.du_18_hoi")}
+              </label>
             </div>
           )}
         </div>
+      )}
+
+      {kq && (
+        <p className="mt-4 text-[11px] leading-relaxed text-fg-faint" data-testid="tam-yeu-luu-y">
+          {kq.luu_y_tham_khao} {c("ty.nguon")}
+        </p>
       )}
     </section>
   );

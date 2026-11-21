@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Kiểm chứng kho nguồn & đồ hình Dương Trạch Tam Yếu (Triệu Cửu Phong, đời Thanh):
-- fixtures/nguon/duong_trach_tam_yeu.json: chỉ gồm 【原文】 phồn thể, bỏ dấu câu hiện đại (CT-1), không lọt bạch thoại hiện đại.
-- phongthuy_tam_yeu.json["nguyen_van_doi_chieu"] và phongthuy_tam_yeu_do_hinh.json["do_hinh_ly_thuyet"]:
-  mọi câu `han` phải là chuỗi con khớp nguyên văn của kho nguồn.
-- phongthuy_tam_yeu_do_hinh.json["so_do_64_nha"] & ["so_do_64_bep"]:
-  đủ 64 + 64 sơ đồ lưới 3×3 và Mermaid, du niên khớp 100% phép tính app.calc.phongthuy.bang_huong.
+"""Kho nguồn + công cụ Dương Trạch Tam Yếu (Triệu Cửu Phong, đời Thanh) — rà soát 2026-11-21.
+
+- fixtures/nguon/duong_trach_tam_yeu.json: chỉ khối 【原文】 phồn thể, không dấu câu hiện đại, không số trang / quyển
+  "dẫn đọc" của bản in hiện đại, chặn các lỗi máy nhận dạng chữ đã biết (良/艮, 醜/丑, 髮/發, 佔/占, 天亡/夭亡).
+- phongthuy_tam_yeu.json["nguyen_van_doi_chieu"]: câu `han` là chuỗi con kho nguồn.
+- /v1/phongthuy/tam-yeu/so-do: một bộ tính với calc.phongthuy.cua_chu_bep (đủ ba cặp), mức thang chung, nhóm C SX-C
+  chỉ khi người đọc đủ 18 tuổi, luôn có câu tham khảo; bản tiếng Anh không lộ chữ Việt.
 """
 from __future__ import annotations
 
@@ -12,15 +13,20 @@ import json
 import re
 from pathlib import Path
 
+import pytest
+from fastapi.testclient import TestClient
+
 from app.calc import phongthuy as pt
+from app.main import app
 
 GOC = Path(__file__).resolve().parents[1]
 NGUON = json.loads((GOC / "fixtures" / "nguon" / "duong_trach_tam_yeu.json").read_text("utf-8"))
 TAM_YEU = json.loads((GOC / "app" / "kb" / "data" / "phongthuy_tam_yeu.json").read_text("utf-8"))
-DO_HINH = json.loads((GOC / "app" / "kb" / "data" / "phongthuy_tam_yeu_do_hinh.json").read_text("utf-8"))
 
 RE_DAU_CAU = re.compile(r"[。，、；：！？「」『』（）《》【】“”‘’—…·,.!?;:()\[\]]")
 FLAT_BY_SO = {t["so"]: t["van"].replace("\n", "") for t in NGUON["thien"]}
+TOAN_VAN = "".join(FLAT_BY_SO.values())
+client = TestClient(app)
 
 
 def test_fixture_duong_trach_tam_yeu_sach_se_khong_dau_cau():
@@ -28,7 +34,7 @@ def test_fixture_duong_trach_tam_yeu_sach_se_khong_dau_cau():
     assert NGUON["can_doi_chieu"] is True
     assert NGUON["chuyen_phon_the_opencc"] is True
     assert len(NGUON["thien"]) >= 200
-    quyens = {t["quyen"] for t in NGUON["thien"]}
+    quyens = {t["quyen"] for t in NGUON["thien"] if t["quyen"]}
     assert {"卷一", "卷二", "卷三", "卷四"} <= quyens
     bad_ocr = ("武麴", "文麴", "武典星", "夫日", "斷日", "故日", "犯坎良", "配良門", "良竈", "某官某字", "兇")
     for t in NGUON["thien"]:
@@ -51,175 +57,134 @@ def test_tam_yeu_nguyen_van_doi_chieu_khop_kho_nguon():
         assert not RE_DAU_CAU.search(m["han"]), m["ma"]
 
 
-def test_do_hinh_ly_thuyet_khop_nguyen_van():
-    ds = DO_HINH["do_hinh_ly_thuyet"]
-    assert len(ds) == 10
-    for d in ds:
-        so = d["nguon_thien"]
-        assert so in FLAT_BY_SO, d["ma"]
-        assert d["han"] in FLAT_BY_SO[so], (d["ma"], d["han"])
-        assert d["mermaid"].startswith("flowchart "), d["ma"]
-        assert d["cau_truc"] and d["mo_ta"].strip(), d["ma"]
+def test_tam_yeu_nguyen_van_doi_chieu_khop_kho_nguon():
+    muc = TAM_YEU["nguyen_van_doi_chieu"]
+    assert len(muc) == 10
+    for m in muc:
+        so = m["nguon_thien"]
+        assert so in FLAT_BY_SO, m["ma"]
+        assert m["han"] in FLAT_BY_SO[so], (m["ma"], m["han"])
+        assert not RE_DAU_CAU.search(m["han"]), m["ma"]
 
 
-def test_so_do_64_nha_va_64_bep_khop_phep_tinh():
-    quai = list(pt.QUAI)
-    expected = {f"{a}_{b}" for a in quai for b in quai}
-    assert set(DO_HINH["so_do_64_nha"]) == expected
-    assert set(DO_HINH["so_do_64_bep"]) == expected
-
-    for k, m in DO_HINH["so_do_64_nha"].items():
-        cua, chu = k.split("_")
-        assert m["du_nien"] == pt.bang_huong(cua)[pt.QUAI[chu][1]], k
-        assert len(m["luoi_3x3"]) == 3 and all(len(row) == 3 for row in m["luoi_3x3"]), k
-        flat_grid = " ".join(cell for row in m["luoi_3x3"] for cell in row)
-        assert "Cửa" in flat_grid and "Chủ" in flat_grid, k
-        assert m["mermaid"].startswith("flowchart "), k
-
-    for k, m in DO_HINH["so_do_64_bep"].items():
-        bep, cua = k.split("_")
-        assert m["du_nien"] == pt.bang_huong(cua)[pt.QUAI[bep][1]], k
-        assert len(m["luoi_3x3"]) == 3 and all(len(row) == 3 for row in m["luoi_3x3"]), k
-        flat_grid = " ".join(cell for row in m["luoi_3x3"] for cell in row)
-        assert "Cửa" in flat_grid and "Bếp" in flat_grid, k
-        assert m["mermaid"].startswith("flowchart "), k
+def test_fixture_khong_mang_cau_truc_ban_in_hien_dai():
+    for t in NGUON["thien"]:
+        assert "trang_pdf" not in t and "trang_sach" not in t, t["so"]
+        assert "頁" not in t["ten"] and t["quyen"] != "導讀卷", t["so"]
+    assert "/Users/" not in (GOC / "scripts" / "nap_nguon_duong_trach_tam_yeu.py").read_text("utf-8")
 
 
-def test_muc_luc_bieu_do_du_va_khong_anh_ban_quyen():
-    ml = DO_HINH["muc_luc_bieu_do"]
-    assert len(ml) == 251
-    ids = [x["chart_id"] for x in ml]
-    assert len(set(ids)) == 251
-    for x in ml:
-        assert x["trang_pdf"] > 28 and x["mo_ta_vi"].strip()
-        assert ".jpg" not in x["mo_ta_vi"].lower() and ".png" not in x["mo_ta_vi"].lower()
+@pytest.mark.parametrize("sai", [
+    r"(?<=[坤兌震乾坎離巽])良", r"(?<![賢淳循忠馬才不])良(?=[土命主坤])", "醜", "已酉", "亥子丑", "天亡", "佔", "髮長", "長髮",
+    "戊已", "己已",
+])
+def test_khong_con_loi_nhan_dang_chu(sai):
+    if sai == "亥子丑":
+        assert "亥子醜" not in TOAN_VAN
+        return
+    if sai == "醜":   # 醜 đúng nghĩa "xấu" (醜聲, 可醜) giữ; chỉ cấm khi đứng trong bộ tam hợp địa chi
+        assert not re.search(r"[巳酉亥子]醜", TOAN_VAN)
+        return
+    assert not re.search(sai, TOAN_VAN), re.findall(r".{0,4}" + sai + r".{0,4}", TOAN_VAN)[:5]
 
 
-# ───────── API /v1/phongthuy/tam-yeu/* + kiểm lọc BM-1 đệ quy ─────────
-_FORBIDDEN_API_KEYS = {
-    "chart_id",
-    "tham_chieu_bieu_do",
-    "trang_pdf",
-    "nguon_thien",
-    "avg_conf",
-    "do_tin",
-    "can_doi_chieu",
-    "han",
-}
-_FORBIDDEN_API_SUBSTRINGS = (
-    "fengshui-yangzhai-kb",
-    ".jpg",
-    ".png",
-    ".sqlite",
-    "rapidocr",
-    "opencc",
-    "白话",
-    "白話提要",
-    "白話圖解",
-)
+# ───────── API /v1/phongthuy/tam-yeu/* ─────────
+_CAM_KHOA = {"chart_id", "trang_pdf", "trang_sach", "nguon_thien", "avg_conf", "can_doi_chieu", "luoi_3x3", "mermaid"}
+_CAM_CHUOI = ("fengshui-yangzhai-kb", ".sqlite", "rapidocr", "opencc", "白話", "/users/")
 
 
-def _assert_bm1_clean(obj, path: str = "$") -> None:
+def _sach(obj, path="$"):
     if isinstance(obj, dict):
         for k, v in obj.items():
-            assert k not in _FORBIDDEN_API_KEYS, f"BM-1 lộ khoá nội bộ tại {path}.{k}"
-            _assert_bm1_clean(v, f"{path}.{k}")
+            assert k not in _CAM_KHOA, f"lộ khoá nội bộ {path}.{k}"
+            _sach(v, f"{path}.{k}")
     elif isinstance(obj, list):
-        for i, item in enumerate(obj):
-            _assert_bm1_clean(item, f"{path}[{i}]")
+        for i, x in enumerate(obj):
+            _sach(x, f"{path}[{i}]")
     elif isinstance(obj, str):
-        low = obj.lower()
-        for bad in _FORBIDDEN_API_SUBSTRINGS:
-            assert bad not in low, f"BM-1 lộ chuỗi nội bộ {bad!r} tại {path}: {obj[:120]}"
+        for bad in _CAM_CHUOI:
+            assert bad not in obj.lower(), f"lộ {bad!r} tại {path}"
 
 
-def test_api_tam_yeu_do_hinh_va_chi_tiet():
-    from fastapi.testclient import TestClient
-    from app.main import app
-
-    client = TestClient(app)
-
-    r_list = client.get("/v1/phongthuy/tam-yeu/do-hinh")
-    assert r_list.status_code == 200
-    body = r_list.json()
-    assert body["engine_version"] and len(body["do_hinh"]) == 10
-    assert body["thong_ke"]["so_do_nha"] == 64 and body["thong_ke"]["so_do_bep"] == 64
-    _assert_bm1_clean(body)
-
-    r_one = client.get("/v1/phongthuy/tam-yeu/do-hinh/tam_yeu_mon_chu_tao")
-    assert r_one.status_code == 200
-    one = r_one.json()
-    assert one["mermaid"].startswith("flowchart ") and one["cau_truc"] and len(one["khac"]) == 9
-    _assert_bm1_clean(one)
-
-    assert client.get("/v1/phongthuy/tam-yeu/do-hinh/khong_ton_tai").status_code == 404
-    assert client.get("/v1/phongthuy/tam-yeu/do-hinh/BAD-UPPER!").status_code == 404
+def test_route_cu_da_go():
+    assert client.get("/v1/phongthuy/tam-yeu/do-hinh").status_code == 404
+    assert client.get("/v1/phongthuy/tam-yeu/bieu-do").status_code == 404
 
 
-def test_api_tam_yeu_so_do_cua_chu_bep():
-    from fastapi.testclient import TestClient
-    from app.main import app
-
-    client = TestClient(app)
-
-    # Đủ 3 điểm Cửa – Chủ – Bếp
-    r = client.get("/v1/phongthuy/tam-yeu/so-do", params={"cua": "Càn", "chu": "Đoài", "bep": "Khôn"})
-    assert r.status_code == 200
-    d = r.json()
-    assert d["so_do_nha"]["du_nien"] == pt.bang_huong("Càn")[pt.QUAI["Đoài"][1]] == "Sinh Khí"
-    assert d["so_do_bep"]["du_nien"] == pt.bang_huong("Càn")[pt.QUAI["Khôn"][1]] == "Diên Niên"
-    assert d["so_do_nha"]["tom_y"] and d["so_do_bep"]["tom_y"]
-    assert d["so_do_nha"]["nhan_doi_thuong"] and d["so_do_nha"]["dien_giai_doi_thuong"]
-    assert d["so_do_bep"]["nhan_doi_thuong"] and d["so_do_bep"]["dien_giai_doi_thuong"]
-    flat = " ".join(cell for row in d["luoi_tong_hop_3x3"] for cell in row)
-    assert "Cửa" in flat and "Chủ" in flat and "Bếp" in flat
-    assert d["mermaid_tong_hop"].startswith("flowchart ")
-    _assert_bm1_clean(d)
-
-    # Chỉ có Cửa -> trả 8 thế nhà gợi ý
-    r_cua = client.get("/v1/phongthuy/tam-yeu/so-do", params={"cua": "Ly"})
-    assert r_cua.status_code == 200
-    d_cua = r_cua.json()
-    assert len(d_cua["cac_the_nha"]) == 8
-    _assert_bm1_clean(d_cua)
-
-    # Quái sai -> 422
-    assert client.get("/v1/phongthuy/tam-yeu/so-do", params={"cua": "KhongHopLe"}).status_code == 422
+@pytest.mark.parametrize("cua", list(pt.QUAI))
+@pytest.mark.parametrize("chu", list(pt.QUAI))
+def test_so_do_mot_bo_tinh_du_ba_cap(cua, chu):
+    bep = "Ly"
+    d = client.get("/v1/phongthuy/tam-yeu/so-do", params={"cua": cua, "chu": chu, "bep": bep}).json()
+    goc = pt.cua_chu_bep(pt.QUAI[cua][1], pt.QUAI[chu][1], pt.QUAI[bep][1])
+    assert [c["du_nien"] for c in d["cap"]] == [c["du_nien"] for c in goc["cap"]]
+    assert [c["cap"] for c in d["cap"]] == ["cua_chu", "cua_bep", "chu_bep"]
+    assert all(c["muc"] in ("thuan", "can_bang", "can_chu_dong") for c in d["cap"])
+    assert d["ket_luan"]["muc"] in ("thuan", "can_bang", "can_chu_dong")
+    assert d["cung_nhom"] == goc["cung_nhom"]
+    assert len(d["bep_goi_y"]) == 8 and d["luu_y_tham_khao"]
+    assert any(v["chi_phi"] == "0" for v in d["viec"])
+    _sach(d)
 
 
-def test_api_tam_yeu_bieu_do_phan_trang_va_loc():
-    from fastapi.testclient import TestClient
-    from app.main import app
-
-    client = TestClient(app)
-    r = client.get("/v1/phongthuy/tam-yeu/bieu-do", params={"limit": 10, "offset": 5})
-    assert r.status_code == 200
-    d = r.json()
-    assert d["tong"] == 251 and len(d["bieu_do"]) == 10 and d["bieu_do"][0]["thu_tu"] == 6
-    _assert_bm1_clean(d)
-
-    r_f = client.get("/v1/phongthuy/tam-yeu/bieu-do", params={"loai": "floorplan_bazao", "limit": 100})
-    assert r_f.status_code == 200
-    df = r_f.json()
-    # 64 mặt bằng chính văn (tổng 65 floorplan_bazao trong SQLite trừ YZ_SY_C0028 ở trang hướng dẫn đọc p.28)
-    assert df["tong"] == 64 and len(df["bieu_do"]) == 64
-    _assert_bm1_clean(df)
+def test_bep_goi_y_hop_la_cat_voi_ca_cua_va_chu():
+    d = client.get("/v1/phongthuy/tam-yeu/so-do", params={"cua": "Càn", "chu": "Đoài"}).json()
+    for g in d["bep_goi_y"]:
+        cat = (g["du_nien_cua"] in pt.CAT) + (g["du_nien_chu"] in pt.CAT)
+        assert g["loai"] == {2: "hop", 1: "tam", 0: "tranh"}[cat]
 
 
-def test_api_tam_yeu_la_ban_24_son():
-    from fastapi.testclient import TestClient
-    from app.main import app
+def _nhom_c(d):
+    return [m for n in (d.get("sach_ghi") or {}).get("nhom", []) for m in n["muc"] if m["nhom"] == "C"]
+
+
+def test_nhom_c_chi_hien_khi_du_18_tuoi_va_theo_khuon_sx_c():
+    q = {"cua": "Khảm", "chu": "Ly", "bep": "Khôn"}
+    khach = client.get("/v1/phongthuy/tam-yeu/so-do", params=q).json()
+    assert not _nhom_c(khach)
+    if khach.get("nhom_c_an"):
+        assert khach["nhom_c_an"]["so"] > 0
+    nho = client.get("/v1/phongthuy/tam-yeu/so-do", params={**q, "nam_sinh": 2015}).json()
+    assert not _nhom_c(nho) and "nhom_c_an" not in nho          # dưới 18: không mời mở
+    lon = client.get("/v1/phongthuy/tam-yeu/so-do", params={**q, "du_18": "true"}).json()
+    lon2 = client.get("/v1/phongthuy/tam-yeu/so-do", params={**q, "nam_sinh": 1980}).json()
+    assert _nhom_c(lon) == _nhom_c(lon2)
+    for m in _nhom_c(lon):
+        assert m["loi"].startswith("Hàm ý theo ghi chép xưa"), m
+        assert m["sach"]
+    if _nhom_c(lon):
+        assert lon["sach_ghi"]["cau_ket"] and lon["luu_y_tham_khao"]
+
+
+def test_co_it_nhat_mot_to_hop_co_nhom_c_de_kiem_cong_18():
+    co = 0
+    for c in pt.QUAI:
+        for ch in pt.QUAI:
+            d = client.get("/v1/phongthuy/tam-yeu/so-do", params={"cua": c, "chu": ch, "du_18": "true"}).json()
+            co += bool(_nhom_c(d))
+    assert co > 0
+
+
+_VIET = re.compile(r"[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]", re.I)
+
+
+def test_ban_tieng_anh_khong_lo_chu_viet():
+    d = client.get("/v1/phongthuy/tam-yeu/so-do", params={"cua": "Càn", "chu": "Khảm", "bep": "Ly"},
+                   headers={"x-ngon-ngu": "en"}).json()
+    chu = [d["ket_luan"]["loi"], d["luu_y_tham_khao"], *d["can_cu"]] + [c["loi"] for c in d["cap"]] + \
+        [c["ten"] for c in d["cap"]] + [v["lam"] for v in d["viec"]] + [g["nhan"] for g in d["bep_goi_y"]]
+    for t in chu:
+        assert not _VIET.search(t), t
+    assert d["sach_ghi"] is None
+
+
+def test_la_ban_24_son():
     from app.calc import huyen_khong as hk
-
-    client = TestClient(app)
-    r = client.get("/v1/phongthuy/tam-yeu/la-ban-24-son")
-    assert r.status_code == 200
-    d = r.json()
-    assert d["tong_son"] == 24 and len(d["son_24"]) == 24
+    d = client.get("/v1/phongthuy/tam-yeu/la-ban-24-son").json()
     assert [x["son"] for x in d["son_24"]] == hk.SON_24
-    assert d["son_24"][0]["son"] == "Tý" and d["son_24"][0]["do_tam"] == 0.0
-    assert d["son_24"][0]["do_tu"] == 352.5 and d["son_24"][0]["do_den"] == 7.5
-    assert d["son_24"][12]["son"] == "Ngọ" and d["son_24"][12]["do_tam"] == 180.0
-    _assert_bm1_clean(d)
-
-
+    assert d["son_24"][0]["do_tam"] == 0.0 and d["son_24"][0]["do_tu"] == 352.5 and d["son_24"][12]["do_tam"] == 180.0
+    assert d["nguong"] == {"kiem_huong": 3.0, "khong_vong": 0.5, "ranh_8_huong": 1.0}
+    for x in d["son_24"]:
+        assert hk.son_tu_do(x["do_tam"])["son"] == x["son"]
+        assert pt.do_huong(x["do_tam"])["son_huong"] == x["son"]
+    _sach(d)

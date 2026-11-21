@@ -12,7 +12,7 @@ import type { BangChu, MucChu } from "@/lib/chu-trang";
 const m = (nhom: string, mac_dinh: string, en: string, toi_da = 700): MucChu => ({ nhom, nhan: mac_dinh.slice(0, 80), mac_dinh, en, toi_da });
 
 const P = "Trang", LB = "La bàn", HT = "Hành trình", SC = "So hai căn", DH = "Đo hướng", CL = "Cách làm", VT = "Vệ tinh",
-  NC = "Nhà của bạn", SD = "Sơ đồ", KS = "Khảo sát", HN = "Hỏi nhanh", HK = "Huyền Không", HS = "Hồ sơ nhà";
+  NC = "Nhà của bạn", SD = "Sơ đồ", TY = "Cửa – Chủ – Bếp", KS = "Khảo sát", HN = "Hỏi nhanh", HK = "Huyền Không", HS = "Hồ sơ nhà";
 
 export const CHU_PHONG_THUY_UI = {
   // ---------------------------------------------------------------- trang (app/phong-thuy/PhongThuy.tsx)
@@ -64,6 +64,38 @@ export const CHU_PHONG_THUY_UI = {
   "lb.aria": m(LB, "La bàn 8 hướng cho mệnh {quai}", "Eight-direction compass for the {quai} Kua"),
   "lb.cat": m(LB, "Hướng cát", "Good directions"),
   "lb.hung": m(LB, "Hướng hung", "Weaker directions"),
+  "lb.an_24": m(LB, "Ẩn vòng 24 sơn", "Hide the 24 Mountains"),
+  "lb.hien_24": m(LB, "Hiện vòng 24 sơn", "Show the 24 Mountains"),
+  "lb.ba_son": m(LB, "3 sơn", "3 Mountains"),
+  "lb.o_aria": m(LB, "{huong}: {du_nien}", "{huong}: {du_nien}"),
+  // ---------------------------------------------------------------- Tra nhanh Cửa – Chủ – Bếp (components/phong-thuy/TamYeuCuaChuBep)
+  "ty.nhan": m(TY, "Dương Trạch Tam Yếu · ba chỗ cốt yếu của nhà", "Three Essentials of the Home (a Qing-dynasty classic)"),
+  "ty.ten": m(TY, "Cửa chính, phòng chính và bếp có đỡ nhau không?", "Do your main door, main room and stove support each other?"),
+  "ty.mo_ta": m(TY, "Chọn *phía của cửa chính*, *phòng chính* và *bếp* nhìn từ giữa nhà. Không cần đăng nhập.", "Pick the side of the house — seen from its centre — where the *main door*, *main room* and *stove* are. No sign-in needed."),
+  "ty.dang_dat": m(TY, "Đang đặt:", "Placing:"),
+  "ty.cua": m(TY, "Cửa chính", "Main door"),
+  "ty.chu": m(TY, "Phòng chính", "Main room"),
+  "ty.bep": m(TY, "Bếp", "Stove"),
+  "ty.goi_y_cham": m(TY, "Chạm một ô trên sơ đồ để đặt {cho}.", "Tap a square on the plan to place the {cho}."),
+  "ty.tam": m(TY, "Giữa nhà", "Centre"),
+  "ty.o_aria": m(TY, "Phía {huong}{dat}", "{huong} side{dat}"),
+  "ty.tu_ho_so": m(TY, "Đã lấy vị trí từ hồ sơ nhà trên máy.", "Positions taken from the house profile on this device."),
+  "ty.dang_tai": m(TY, "Đang tra…", "Loading…"),
+  "ty.loi": m(TY, "Chưa tra được lúc này. Thử chọn lại sau ít giây.", "Could not load this right now. Please try again in a few seconds."),
+  "ty.ket_luan": m(TY, "Tóm lại", "In short"),
+  "ty.bep_goi_y": m(TY, "Bếp đặt phía nào thì hợp?", "Which side suits the stove?"),
+  "ty.bep_dang": m(TY, "đang đặt", "current"),
+  "ty.viec": m(TY, "Nên làm", "What to do"),
+  "ty.mien_phi": m(TY, "0 đồng", "Free"),
+  "ty.ton_tien": m(TY, "Khi sửa nhà", "When renovating"),
+  "ty.vi_sao": m(TY, "Vì sao nói vậy", "Why we say this"),
+  "ty.luu": m(TY, "Lưu vị trí vào hồ sơ nhà", "Save positions to my house profile"),
+  "ty.da_luu": m(TY, "Đã lưu vào hồ sơ nhà", "Saved to your house profile"),
+  "ty.luu_hoi": m(TY, "Hồ sơ nhà đang ghi vị trí khác ({cu}). Thay bằng vị trí vừa chọn?", "Your house profile has different positions ({cu}). Replace them with these?"),
+  "ty.luu_ghi_chu": m(TY, "Chỉ lưu vị trí ba chỗ, không đổi hướng nhà đã đo.", "Only the three positions are saved; your measured house direction is unchanged."),
+  "ty.sach_tieu_de": m(TY, "Sách xưa ghi gì về thế nhà này", "What the classics say about this layout"),
+  "ty.du_18_hoi": m(TY, "Tôi đủ 18 tuổi — xem cả các ghi chép này", "I am 18 or over — show these notes too"),
+  "ty.nguon": m(TY, "Theo Dương Trạch Tam Yếu (Triệu Cửu Phong, đời Thanh). Không cần mua vật phẩm hoá giải.", "Based on the Three Essentials of the Home (Zhao Jiufeng, Qing dynasty). No “cure” objects needed."),
 
   // ---------------------------------------------------------------- hồ sơ nhà (lib/ho-so-nha)
   "hs.nha_cua_ban": m(HS, "nhà của bạn", "your home"),

@@ -68,6 +68,11 @@ def _son(ten: str) -> dict:
     raise ValueError(f"Không có sơn '{ten}' trong 24 sơn")
 
 
+def thong_tin_son(ten: str) -> dict:
+    """Quái, phương, nguyên (0 địa · 1 thiên · 2 nhân), âm dương của một sơn — bảng công khai cho la bàn 24 sơn."""
+    return _son(ten)
+
+
 def phi(tam: int, thuan: bool) -> dict[str, int]:
     return {c: _w(tam + i if thuan else tam - i) for i, c in enumerate(LO_TRINH)}
 

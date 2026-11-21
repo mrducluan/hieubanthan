@@ -37,7 +37,7 @@ export function LaBan({ quai, nhom, bang, huongCat }: { quai: string; nhom: stri
 
   return (
     <figure className="mx-auto w-full max-w-sm">
-      <svg viewBox="0 0 200 200" role="img" aria-label={c("lb.aria", { quai: tq(quai) })} className="h-auto w-full select-none">
+      <svg viewBox="0 0 200 200" role="group" aria-label={c("lb.aria", { quai: tq(quai) })} className="h-auto w-full select-none">
         {/* Vòng 24 Sơn ngoài cùng (chỉ vẽ khi dữ liệu từ engine đã sẵn sàng và đang bật) */}
         {hien24 && son24 && (
           <g data-testid="vong-24-son">
@@ -46,6 +46,8 @@ export function LaBan({ quai, nhom, bang, huongCat }: { quai: string; nhom: stri
               const a = ((s.do_tam - 90) * Math.PI) / 180;
               const aBien = ((s.do_tu - 90) * Math.PI) / 180;
               const cat = huongCat.includes(s.phuong);
+              // Nửa dưới vòng: lật thêm 180° để chữ không lộn ngược.
+              const xoay = s.do_tam > 90 && s.do_tam < 270 ? s.do_tam + 180 : s.do_tam;
               return (
                 <g key={s.son}>
                   <line
@@ -53,10 +55,10 @@ export function LaBan({ quai, nhom, bang, huongCat }: { quai: string; nhom: stri
                     x2={(100 + 98 * Math.cos(aBien)).toFixed(2)} y2={(100 + 98 * Math.sin(aBien)).toFixed(2)}
                     stroke="rgb(var(--line))" strokeWidth={s.stt % 3 === 0 ? "0.7" : "0.35"} />
                   <text
-                    x={(100 + 91.2 * Math.cos(a)).toFixed(2)} y={(100 + 91.2 * Math.sin(a) + 1.6).toFixed(2)}
-                    textAnchor="middle" fontSize="4.6"
+                    x={(100 + 91.2 * Math.cos(a)).toFixed(2)} y={(100 + 91.2 * Math.sin(a)).toFixed(2)}
+                    textAnchor="middle" dominantBaseline="middle" fontSize="5.6"
                     fill={cat ? "rgb(var(--jade))" : "rgb(var(--fg-faint))"}
-                    transform={`rotate(${s.do_tam} ${(100 + 91.2 * Math.cos(a)).toFixed(2)} ${(100 + 91.2 * Math.sin(a)).toFixed(2)})`}>
+                    transform={`rotate(${xoay} ${(100 + 91.2 * Math.cos(a)).toFixed(2)} ${(100 + 91.2 * Math.sin(a)).toFixed(2)})`}>
                     {en ? s.ky_hieu_han : s.son}
                   </text>
                 </g>
@@ -71,7 +73,7 @@ export function LaBan({ quai, nhom, bang, huongCat }: { quai: string; nhom: stri
           const rChu = hien24 && son24 ? 62 : 76;
           const dangChon = chon === h;
           return (
-            <g key={h} role="button" tabIndex={0} aria-pressed={dangChon}
+            <g key={h} role="button" tabIndex={0} aria-pressed={dangChon} aria-label={c("lb.o_aria", { huong: huong(h), du_nien: duNien(bang[h]) })}
               className="cursor-pointer outline-none [&:focus-visible>path]:stroke-gold"
               onClick={() => bam(h)}
               onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); bam(h); } }}>
@@ -94,15 +96,15 @@ export function LaBan({ quai, nhom, bang, huongCat }: { quai: string; nhom: stri
         {son24 && (
           <button type="button" onClick={() => setHien24((v) => !v)}
             className="rounded-full border border-line px-2 py-0.5 text-[11px] text-fg-muted hover:border-gold hover:text-fg">
-            {en ? (hien24 ? "Hide 24 Mountains" : "Show 24 Mountains") : (hien24 ? "Ẩn vòng 24 Sơn" : "Hiện vòng 24 Sơn")}
+            {c(hien24 ? "lb.an_24" : "lb.hien_24")}
           </button>
         )}
       </figcaption>
       {chon && (
         <div className="mt-2 rounded-xl border border-line bg-surface/60 px-3 py-2 text-center text-xs text-fg-muted" aria-live="polite">
-          <b className="text-fg">{huong(chon)}</b> · <span className={huongCat.includes(chon) ? "text-jade" : "text-cinnabar"}>{duNien(bang[chon], false)}</span>
+          <b className="text-fg">{huong(chon)}</b> · <span className={huongCat.includes(chon) ? "text-jade" : "text-fg-muted"}>{duNien(bang[chon], false)}</span>
           {sonTheoHuong.length > 0 && (
-            <span> · {en ? "3 Mountains" : "3 sơn"}: {sonTheoHuong.map((s) => `${s.son} (${s.do_tam}°)`).join(", ")}</span>
+            <span> · {c("lb.ba_son")}: {sonTheoHuong.map((s) => `${en ? s.ky_hieu_han : s.son} (${s.do_tam}°)`).join(", ")}</span>
           )}
         </div>
       )}

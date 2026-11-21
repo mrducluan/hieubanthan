@@ -1,4 +1,5 @@
-// GET /api/phongthuy/tam-yeu/so-do — sơ đồ Cửa – Chủ – Bếp (Dương Trạch Tam Yếu) từ engine.
+// GET /api/phongthuy/tam-yeu/so-do — tra nhanh Cửa – Chủ – Bếp (Dương Trạch Tam Yếu) từ engine. Web chỉ kiểm đầu vào.
+// `nam_sinh` (năm sinh người đọc, chỉ để engine biết có hiện ghi chép nhóm C — SX-C) → không cache chung.
 import { engineTheoReq } from "@/lib/proxy";
 import { NextResponse } from "next/server";
 
@@ -11,21 +12,27 @@ export async function GET(req: Request): Promise<NextResponse> {
   const cua = sp.get("cua") ?? "";
   const chu = sp.get("chu");
   const bep = sp.get("bep");
-  if (!QUAI_HOP_LE.has(cua) || (chu && !QUAI_HOP_LE.has(chu)) || (bep && !QUAI_HOP_LE.has(bep))) {
-    return NextResponse.json({ error: "Quái phương vị không hợp lệ." }, { status: 422 });
+  const namSinh = sp.get("nam_sinh");
+  const du18 = sp.get("du_18") === "1";
+  if (!QUAI_HOP_LE.has(cua) || (chu && !QUAI_HOP_LE.has(chu)) || (bep && !QUAI_HOP_LE.has(bep))
+      || (namSinh && !/^(19|20)\d\d$/.test(namSinh))) {
+    return NextResponse.json({ error: "Đầu vào không hợp lệ." }, { status: 422 });
   }
   const q = new URLSearchParams({ cua });
   if (chu) q.set("chu", chu);
   if (bep) q.set("bep", bep);
+  if (namSinh) q.set("nam_sinh", namSinh);
+  if (du18) q.set("du_18", "true");
+  const rieng = Boolean(namSinh || du18);
   try {
     const nn = engineTheoReq(req, `/v1/phongthuy/tam-yeu/so-do?${q.toString()}`);
     const r = await fetch(`${ENGINE_URL}${nn.duong}`, {
       headers: { ...(ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {}), ...nn.dau },
-      next: { revalidate: 86_400 },
+      ...(rieng ? { cache: "no-store" as const } : { next: { revalidate: 86_400 } }),
     });
     if (!r.ok) return NextResponse.json({ error: "Chưa tra được sơ đồ Tam Yếu." }, { status: 502 });
     return NextResponse.json(await r.json(), {
-      headers: { "cache-control": "public, max-age=3600, s-maxage=86400", vary: "x-ngon-ngu" },
+      headers: { "cache-control": rieng ? "private, no-store" : "public, max-age=3600, s-maxage=86400" },
     });
   } catch {
     return NextResponse.json({ error: "Chưa tra được sơ đồ Tam Yếu." }, { status: 502 });

@@ -15,7 +15,6 @@ import sqlite3
 import sys
 from pathlib import Path
 
-DEFAULT_DB = Path("/Users/mrducluan/aicoworker/openclaw/workspace-main/projects/fengshui-yangzhai-kb/data/fengshui_yangzhai_kb.sqlite")
 DEFAULT_OUT = Path(__file__).resolve().parents[1] / "fixtures" / "nguon" / "duong_trach_tam_yeu.json"
 
 # Ranh giới bắt đầu và kết thúc đoạn 【原文】 trong cột text_zh_hant (OpenCC phồn thể)
@@ -49,13 +48,27 @@ OCR_OPENCC_FIXES: list[tuple[str, str]] = [
     ("良竈", "艮竈"),
     ("某官某字", "某宮某字"),
     ("兇", "凶"),
+    # Rà soát 2026-11-21: OpenCC / OCR đọc sai chữ thường gặp trong sách phong thuỷ.
+    ("已酉醜", "巳酉丑"),
+    ("已酉丑", "巳酉丑"),
+    ("亥子醜", "亥子丑"),
+    ("戊已", "戊己"),
+    ("己已", "己巳"),
+    ("巽已", "巽巳"),
+    ("髮長", "發長"),
+    ("長髮", "長發"),
+    ("佔", "占"),
+    ("天亡", "夭亡"),
 ]
+
+# 艮 bị OCR đọc thành 良 khi đứng cạnh tên quái / 土 / 命 / 主 (không đụng 賢良, 不良, 忠良…).
+_RE_LUONG_CAN = re.compile(r"(?<=[坤兌震乾坎離巽])良|(?<![賢淳循忠馬才不])良(?=[土命主坤])")
 
 
 def chuan_hoa_co_van(text: str) -> str:
     for bad, good in OCR_OPENCC_FIXES:
         text = text.replace(bad, good)
-    return text
+    return _RE_LUONG_CAN.sub("艮", text)
 
 
 def tach_nguyen_van(text_hant: str) -> list[str]:
@@ -109,19 +122,23 @@ def build_fixture(db_path: Path, out_path: Path) -> dict:
         if not blocks:
             continue
         van = "\n".join(blocks)
+        for bad, good in (("天\n亡", "夭\n亡"), ("已\n酉", "巳\n酉")):   # lỗi nằm vắt qua hai dòng
+            van = van.replace(bad, good)
         q_label = QUYEN_MAP.get(volume or "", volume or "")
-        vol_counts[q_label] = vol_counts.get(q_label, 0) + 1
+        if q_label == "導讀卷":
+            # Phần "dẫn đọc" là cách xếp của bản in hiện đại, không phải quyển của Triệu Cửu Phong → không ghi quyển.
+            q_label = None
+        vol_counts[q_label or "chua_ro"] = vol_counts.get(q_label or "chua_ro", 0) + 1
         if avg_conf is not None:
             confs.append(float(avg_conf))
             if float(avg_conf) < 0.90:
-                low_conf_pages.append({"trang_pdf": pdf_page, "trang_sach": book_page, "avg_conf": round(float(avg_conf), 4)})
-        ten = f"陽宅三要 · {q_label} · 第{book_page or pdf_page}頁"
+                low_conf_pages.append({"so": len(thien) + 1, "avg_conf": round(float(avg_conf), 4)})
+        # Không ghi số trang / cách chia trang của bản in hiện đại (rà soát 2026-11-21).
+        ten = f"陽宅三要 · {q_label}" if q_label else "陽宅三要"
         thien.append(
             {
                 "so": len(thien) + 1,
                 "quyen": q_label,
-                "trang_pdf": pdf_page,
-                "trang_sach": book_page,
                 "ten": ten,
                 "avg_conf": round(float(avg_conf), 4) if avg_conf is not None else None,
                 "van": van,
@@ -162,7 +179,9 @@ def build_fixture(db_path: Path, out_path: Path) -> dict:
 
 
 if __name__ == "__main__":
-    db = Path(sys.argv[1]) if len(sys.argv) > 1 else DEFAULT_DB
+    if len(sys.argv) < 2:
+        sys.exit("Cách dùng: python scripts/nap_nguon_duong_trach_tam_yeu.py <tệp sqlite kho riêng> [tệp ra]")
+    db = Path(sys.argv[1])
     out = Path(sys.argv[2]) if len(sys.argv) > 2 else DEFAULT_OUT
     data = build_fixture(db, out)
     st = data["thong_ke"]

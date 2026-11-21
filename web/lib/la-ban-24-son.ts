@@ -1,3 +1,4 @@
+import { urlTheoNgonNgu } from "@/lib/ngon-ngu";
 // Tải vòng 24 Sơn chuẩn từ engine (cache một promise duy nhất ở module; lỗi thì bỏ qua nhẹ nhàng, la bàn vẫn chạy).
 export interface MucSon24 {
   stt: number;
@@ -22,7 +23,7 @@ export function son24DaCo(): MucSon24[] | null {
 export function taiSon24(): Promise<MucSon24[] | null> {
   if (_cache) return Promise.resolve(_cache);
   if (!_dangTai) {
-    _dangTai = fetch("/api/phongthuy/tam-yeu/la-ban-24-son")
+    _dangTai = fetch(urlTheoNgonNgu("/api/phongthuy/tam-yeu/la-ban-24-son"))
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
         if (d && Array.isArray(d.son_24) && d.son_24.length === 24) {

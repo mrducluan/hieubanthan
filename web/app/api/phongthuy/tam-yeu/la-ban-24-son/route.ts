@@ -14,7 +14,7 @@ export async function GET(req: Request): Promise<NextResponse> {
     });
     if (!r.ok) return NextResponse.json({ error: "Chưa tải được vòng 24 Sơn." }, { status: 502 });
     return NextResponse.json(await r.json(), {
-      headers: { "cache-control": "public, max-age=3600, s-maxage=86400", vary: "x-ngon-ngu" },
+      headers: { "cache-control": "public, max-age=3600, s-maxage=86400" },
     });
   } catch {
     return NextResponse.json({ error: "Chưa tải được vòng 24 Sơn." }, { status: 502 });
