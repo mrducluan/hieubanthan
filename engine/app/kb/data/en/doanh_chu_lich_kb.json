@@ -1,0 +1,74 @@
+{
+  "_trang_thai": "bien_tap",
+  "muc_tieu": {
+    "tang_truong": {
+      "ten": "Growth & expansion",
+      "mo_ta": "Focus on new sales channels, higher output and new partnerships."
+    },
+    "ky_ket": {
+      "ten": "Signing & partnerships",
+      "mo_ta": "Focus on major contract talks, alliances and closing terms."
+    },
+    "giu_tien": {
+      "ten": "Cashflow & efficiency",
+      "mo_ta": "Focus on cost control, collecting receivables and tidier processes."
+    },
+    "ra_mat": {
+      "ten": "Product / branch launch",
+      "mo_ta": "Focus on launch dates, new locations and marketing."
+    }
+  },
+  "thang_ca_nhan": {
+    "1": "Start — open new work",
+    "2": "Alliance — negotiate and align",
+    "3": "Visibility — market and sell",
+    "4": "Foundation — build systems",
+    "5": "Pivot — adapt, test new channels",
+    "6": "Care — keep clients and team close",
+    "7": "Review — look back at the numbers",
+    "8": "Harvest — close deals, manage capital",
+    "9": "Completion — clear old work, prepare"
+  },
+  "nhip": {
+    "day_manh": "Push & expand",
+    "can_bang": "Steady & consolidate",
+    "phong_thu": "Slow down & protect cash"
+  },
+  "nen_lam": {
+    "day_manh": {
+      "tang_truong": "Several readings agree: a good window to push sales targets, open channels and give the team clear goals.",
+      "ky_ket": "Several readings agree: a good window to negotiate terms, meet key partners and sign.",
+      "giu_tien": "Several readings agree: use the momentum to collect receivables and renegotiate costs.",
+      "ra_mat": "Several readings agree: a good window to lock launch dates and push the opening campaign."
+    },
+    "can_bang": {
+      "_": "An even month: carry out the agreed plan steadily, track results weekly and adjust lightly."
+    },
+    "phong_thu": {
+      "_": "A month to slow down a step: protect cashflow, review running contracts, tidy processes and look after existing clients."
+    }
+  },
+  "chu_y": {
+    "day_manh": "Good momentum invites too many projects at once; cap the budget and name one owner before spending.",
+    "can_bang": "Avoid spreading people and money over side experiments; keep short cross-team check-ins to spot bottlenecks early.",
+    "phong_thu": "Avoid long fixed-cost commitments or rushed decisions without numbers; if a signing cannot wait, use a good date this month and read the exit clauses."
+  },
+  "cap": {
+    "chu_dn": "",
+    "giam_doc": " Re-align department targets with leadership in the first half of the month.",
+    "truong_nhom": " Track progress weekly with your direct team."
+  },
+  "thieu_gio": "No birth time yet, so the BaZi layer is skipped (the two useful-element methods need all four pillars). Add your birth time for one more reading.",
+  "lop_thanso": "Numerology",
+  "lop_battu": "BaZi",
+  "bt_muc": {
+    "thuan": "BaZi: month {cc} is favourable under both useful-element methods.",
+    "can_bang": "BaZi: month {cc} is balanced (the two methods do not lean the same way strongly).",
+    "can_chu_dong": "BaZi: month {cc} needs care under both useful-element methods."
+  },
+  "tong_quan": "12 months from {tu} for {muc_tieu}: months to push — {dm}; months to slow down and protect cash — {pt}.",
+  "khong_co_dm": "no month where the readings all agree",
+  "khong_co_pt": "no month where several readings ask to slow down",
+  "canh_bao_chung": "Use this calendar to pace priorities and preparation; every financial, signing or investment decision still needs real business numbers, actual cashflow and professional advice.",
+  "ranh_gioi": "A cultural pacing reference from BaZi, numerology, the zodiac, feng shui and the traditional almanac; not financial, legal or accounting advice, and not investment advice. Birth data is used only for this calculation and never stored."
+}

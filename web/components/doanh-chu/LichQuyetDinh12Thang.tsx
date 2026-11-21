@@ -1,13 +1,15 @@
 "use client";
 // Lịch Quyết Định 12 Tháng cho Chủ DN / Quản lý — Bát Tự Lưu Nguyệt + Thần Số + Hoàng Lịch (Zero-PII).
 import { useEffect, useState } from "react";
-import { AlertTriangle, CalendarDays, CheckCircle2, Compass, Shield, Sparkles } from "lucide-react";
-import { useHoSo } from "@/lib/hoso";
+import { AlertTriangle, CalendarDays, CheckCircle2, Clock, Compass, Shield, Sparkles } from "lucide-react";
+import { ghi } from "@/lib/do-luong";
+import { gioHienThi, useHoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
 
 type CapQuanLy = "chu_dn" | "giam_doc" | "truong_nhom";
 type MucTieu = "tang_truong" | "ky_ket" | "giu_tien" | "ra_mat";
 type NhipThang = "day_manh" | "can_bang" | "phong_thu";
+type LoaiLop = "thuan" | "can_bang" | "trung";
 
 interface NgayDep {
   ngay: string;
@@ -16,11 +18,24 @@ interface NgayDep {
   truc: string;
   dep: boolean;
   hoang_dao: boolean;
+  diem_cong?: string[];
+  quan_he_tuoi?: string | null;
+  ky_dan_gian?: string[];
   luu_y_ngay?: string[];
+}
+
+interface LopThang {
+  ma: string;
+  nhan: string;
+  tieu?: string;
+  loi?: string;
+  loai: LoaiLop;
 }
 
 interface ThangQuyetDinh {
   thang: number;
+  nam: number;
+  nhan_thang: string;
   can_chi_thang: string;
   hanh_thang: string;
   thang_ca_nhan: number;
@@ -29,22 +44,50 @@ interface ThangQuyetDinh {
   nhan_nhip: string;
   nen_lam: string;
   nen_chu_y: string;
+  tom_lai?: string;
+  lop?: LopThang[];
+  can_cu?: string[];
   ngay_dep: NgayDep[];
 }
 
 interface KetQuaLich12 {
+  tu_thang: string;
   nam_xem: number;
   muc_tieu: { ma: string; ten: string; mo_ta: string };
-  ho_so_nguoi_xem: { nhat_chu_hanh: string; hanh_can_bu: string[]; duong_doi: number; nam_ca_nhan: number };
+  ho_so_nguoi_xem: {
+    duong_doi: number;
+    nam_ca_nhan: number;
+    co_gio: boolean;
+    thieu_gio: string | null;
+    nhat_chu_hanh?: string;
+    dung_than_hai_cach?: { cach_1: string[]; cach_2: string[] };
+  };
   tong_quan_nam: {
-    thang_day_manh: number[];
-    thang_phong_thu: number[];
+    thang_day_manh: string[];
+    thang_phong_thu: string[];
     nhan_dinh_nam: string;
     canh_bao_chung: string;
   };
   muoi_hai_thang: ThangQuyetDinh[];
   ranh_gioi_phap_ly: string;
 }
+
+/** Chấm màu từng lớp: thuận = lục, cân bằng = hổ phách, trung tính = xám (không dùng đỏ). */
+const CHAM_LOP: Record<LoaiLop, string> = {
+  thuan: "bg-jade",
+  can_bang: "bg-[#f0b35c]",
+  trung: "bg-fg-faint",
+};
+
+/** Nhãn quan hệ chi ngày ↔ tuổi do engine trả (mã) → chữ ngắn; mã lạ thì không hiện. */
+const HOP_TUOI: Record<string, string> = {
+  tam_hop: "Tam hợp tuổi",
+  luc_hop: "Lục hợp tuổi",
+};
+const CHU_Y_TUOI: Record<string, string> = {
+  hai: "Hại tuổi",
+  xung: "Xung tuổi",
+};
 
 const MUC_TIEU_OPT: { ma: MucTieu; ten: string }[] = [
   { ma: "tang_truong", ten: "Mở rộng & Tăng trưởng" },
@@ -67,12 +110,13 @@ function formatNgayVN(iso: string): string {
 
 export function LichQuyetDinh12Thang() {
   const hoSo = useHoSo();
-  const namMacDinh = Math.min(2050, Math.max(2020, new Date().getFullYear()));
+  const namSau = Math.min(2050, Math.max(2020, new Date().getFullYear() + 1));
   const [ngay, setNgay] = useState("15");
   const [thang, setThang] = useState("8");
   const [nam, setNam] = useState("1986");
   const [gioiTinh, setGioiTinh] = useState<"nam" | "nu">("nam");
-  const [namXem, setNamXem] = useState(namMacDinh);
+  // "toi" = 12 tháng kể từ tháng này (engine tự chọn mốc); "nam_sau" = từ tháng 1 năm sau.
+  const [khung, setKhung] = useState<"toi" | "nam_sau">("toi");
   const [capQL, setCapQL] = useState<CapQuanLy>("chu_dn");
   const [mucTieu, setMucTieu] = useState<MucTieu>("tang_truong");
   const [loc, setLoc] = useState<"tat_ca" | NhipThang>("tat_ca");
@@ -90,6 +134,12 @@ export function LichQuyetDinh12Thang() {
     }
   }, [hoSo]);
 
+  // Giờ sinh chỉ lấy từ hồ sơ khi người dùng thật sự biết giờ (không gửi giờ đại diện 12:00 của "Không biết giờ").
+  // Ngày sinh trong form phải trùng hồ sơ thì mới kèm giờ (người dùng gõ ngày khác = xem cho người khác).
+  const gioHoSo = gioHienThi(hoSo);
+  const cungNguoi = !!hoSo && String(hoSo.ngay) === ngay && String(hoSo.thang) === thang && String(hoSo.nam) === nam;
+  const gio = cungNguoi && gioHoSo && /^([01]\d|2[0-3]):[0-5]\d$/.test(gioHoSo) ? gioHoSo : undefined;
+
   async function xemLich(e: React.FormEvent) {
     e.preventDefault();
     setDangTinh(true);
@@ -103,7 +153,8 @@ export function LichQuyetDinh12Thang() {
           thang: Number(thang),
           nam: Number(nam),
           gioi_tinh: gioiTinh,
-          nam_xem: namXem,
+          ...(gio ? { gio } : {}),
+          ...(khung === "nam_sau" ? { nam_xem: namSau } : {}),
           cap_quan_ly: capQL,
           muc_tieu: mucTieu,
         }),
@@ -114,6 +165,7 @@ export function LichQuyetDinh12Thang() {
         return;
       }
       setKq(data);
+      ghi("chart_interacted", { mo_dun: "doanh_chu", kind: "lich_12_xem", co_gio: !!data.ho_so_nguoi_xem?.co_gio, muc_tieu: mucTieu });
     } catch {
       setLoi("Không kết nối được máy tính toán. Vui lòng thử lại sau giây lát.");
     } finally {
@@ -122,6 +174,7 @@ export function LichQuyetDinh12Thang() {
   }
 
   const dsLoc = kq ? kq.muoi_hai_thang.filter((t) => loc === "tat_ca" || t.nhip_thang === loc) : [];
+  const hs = kq?.ho_so_nguoi_xem;
 
   return (
     <div className="space-y-8" data-testid="lich-quyet-dinh-12-thang">
@@ -133,8 +186,9 @@ export function LichQuyetDinh12Thang() {
           Nhìn trước 12 tháng: tháng nào nên đẩy mạnh, tháng nào nên giữ tiền
         </h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-fg-muted">
-          Gộp Lưu Nguyệt Bát Tự, Tháng cá nhân và ngày đẹp Hoàng Lịch để lên nhịp kinh doanh cả năm,
-          chọn sẵn 3 khung ngày thuận lợi ký kết hoặc ra mắt mỗi tháng. Ngày sinh chỉ dùng để tính, không lưu lại.
+          Gộp tháng cá nhân thần số, con giáp tháng, sao tháng phong thuỷ, ngày đẹp hoàng lịch — và Bát tự khi có giờ sinh —
+          để lên nhịp kinh doanh 12 tháng, chọn sẵn vài ngày thuận lợi ký kết hoặc ra mắt mỗi tháng.
+          Ngày sinh chỉ dùng để tính, không lưu lại.
         </p>
 
         <form onSubmit={(e) => void xemLich(e)} className="mt-5 space-y-4">
@@ -149,21 +203,23 @@ export function LichQuyetDinh12Thang() {
                 <input aria-label="Năm sinh" inputMode="numeric" value={nam} onChange={(e) => setNam(e.target.value.replace(/\D/g, "").slice(0, 4))}
                   placeholder="Năm" className="rounded-lg border border-line bg-bg/70 px-2.5 py-2 text-center text-sm text-fg" />
               </div>
+              <p className="mt-1 text-[11px] text-fg-faint">
+                {gio ? `Giờ sinh từ hồ sơ: ${gio} (đọc thêm Bát tự)` : "Chưa có giờ sinh trong hồ sơ: lịch chưa đọc lớp Bát tự"}
+              </p>
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-medium text-fg-muted" htmlFor="l12-gt">Giới tính &amp; Năm xem</label>
+              <label className="mb-1 block text-xs font-medium text-fg-muted" htmlFor="l12-gt">Giới tính &amp; Khoảng xem</label>
               <div className="grid grid-cols-2 gap-1.5">
                 <select id="l12-gt" value={gioiTinh} onChange={(e) => setGioiTinh(e.target.value as "nam" | "nu")}
                   className="rounded-lg border border-line bg-bg/70 px-2.5 py-2 text-sm text-fg">
                   <option value="nam">Nam</option>
                   <option value="nu">Nữ</option>
                 </select>
-                <select aria-label="Năm xem" value={namXem} onChange={(e) => setNamXem(Number(e.target.value))}
+                <select aria-label="Khoảng xem" value={khung} onChange={(e) => setKhung(e.target.value as "toi" | "nam_sau")}
                   className="rounded-lg border border-line bg-bg/70 px-2.5 py-2 text-sm text-fg">
-                  {[namMacDinh, namMacDinh + 1, namMacDinh + 2].map((y) => (
-                    <option key={y} value={y}>Năm {y}</option>
-                  ))}
+                  <option value="toi">12 tháng tới</option>
+                  <option value="nam_sau">Xem trước năm {namSau}</option>
                 </select>
               </div>
             </div>
@@ -177,7 +233,7 @@ export function LichQuyetDinh12Thang() {
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-medium text-fg-muted" htmlFor="l12-mt">Trọng tâm năm</label>
+              <label className="mb-1 block text-xs font-medium text-fg-muted" htmlFor="l12-mt">Trọng tâm</label>
               <select id="l12-mt" value={mucTieu} onChange={(e) => setMucTieu(e.target.value as MucTieu)}
                 className="w-full rounded-lg border border-line bg-bg/70 px-3 py-2 text-sm text-fg">
                 {MUC_TIEU_OPT.map((m) => <option key={m.ma} value={m.ma}>{m.ten}</option>)}
@@ -190,37 +246,62 @@ export function LichQuyetDinh12Thang() {
           <button type="submit" disabled={dangTinh} data-testid="nut-xem-lich-12-thang"
             className="inline-flex items-center gap-2 rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-bg transition-opacity hover:opacity-90 disabled:opacity-60">
             <Sparkles className="size-4" aria-hidden />
-            {dangTinh ? "Đang lập lịch 12 tháng…" : `Lập Lịch Quyết Định năm ${namXem}`}
+            {dangTinh ? "Đang lập lịch 12 tháng…" : khung === "nam_sau" ? `Lập Lịch Quyết Định năm ${namSau}` : "Lập Lịch Quyết Định 12 tháng tới"}
           </button>
         </form>
       </section>
 
-      {kq && (
+      {kq && hs && (
         <div className="space-y-6" data-testid="ket-qua-lich-12-thang">
+          <p className="text-sm text-fg-muted">
+            12 tháng kể từ <b className="text-fg">{kq.tu_thang}</b> · trọng tâm {kq.muc_tieu.ten.toLowerCase()}
+          </p>
+
+          {hs.thieu_gio && (
+            <p data-testid="thieu-gio-lich-12" className="flex items-start gap-2 rounded-xl border border-[#f0b35c]/35 bg-[#f0b35c]/[0.06] px-4 py-3 text-xs leading-relaxed text-fg">
+              <Clock className="mt-0.5 size-3.5 shrink-0 text-[#f0b35c]" aria-hidden />
+              <span>{hs.thieu_gio}</span>
+            </p>
+          )}
+
           <div className="grid gap-3 sm:grid-cols-3">
             <div className="rounded-2xl border border-jade/35 bg-jade/[0.06] p-4">
               <p className="text-xs font-medium text-jade">Tháng thuận lợi đẩy mạnh</p>
               <p className="mt-1 font-serif text-xl text-fg">
-                {kq.tong_quan_nam.thang_day_manh.length > 0
-                  ? kq.tong_quan_nam.thang_day_manh.map((m) => `T${m}`).join(" · ")
-                  : "Nhịp đều cả năm"}
+                {kq.tong_quan_nam.thang_day_manh.length > 0 ? kq.tong_quan_nam.thang_day_manh.join(" · ") : "Nhịp đều cả 12 tháng"}
               </p>
             </div>
             <div className="rounded-2xl border border-[#f0b35c]/35 bg-[#f0b35c]/[0.06] p-4">
-              <p className="text-xs font-medium text-[#f0b35c]">Tháng nên phòng thủ &amp; giữ tiền</p>
+              <p className="text-xs font-medium text-[#f0b35c]">Tháng nên giữ nhịp &amp; giữ tiền</p>
               <p className="mt-1 font-serif text-xl text-fg">
-                {kq.tong_quan_nam.thang_phong_thu.length > 0
-                  ? kq.tong_quan_nam.thang_phong_thu.map((m) => `T${m}`).join(" · ")
-                  : "Không có tháng xung mạnh"}
+                {kq.tong_quan_nam.thang_phong_thu.length > 0 ? kq.tong_quan_nam.thang_phong_thu.join(" · ") : "Không có tháng nhiều cách cùng nhắc chậm"}
               </p>
             </div>
             <div className="rounded-2xl border border-gold/35 bg-gold/[0.06] p-4">
-              <p className="text-xs font-medium text-gold">Trục cá nhân năm {kq.nam_xem}</p>
+              <p className="text-xs font-medium text-gold">Trục cá nhân</p>
               <p className="mt-1 font-serif text-xl text-fg">
-                Nhật chủ {kq.ho_so_nguoi_xem.nhat_chu_hanh} · Năm số {kq.ho_so_nguoi_xem.nam_ca_nhan}
+                Đường đời {hs.duong_doi} · Năm cá nhân {hs.nam_ca_nhan}
               </p>
+              {hs.nhat_chu_hanh && <p className="mt-1 text-xs text-fg-muted">Nhật chủ hành {hs.nhat_chu_hanh}</p>}
             </div>
           </div>
+
+          {hs.dung_than_hai_cach && (
+            <div className="rounded-2xl border border-line/80 bg-surface/50 p-4 text-xs leading-relaxed text-fg" data-testid="hai-cach-lich-12">
+              <p className="font-medium text-fg">Hành nên bổ sung — Bát tự đọc theo hai cách</p>
+              <ul className="mt-2 grid gap-2 sm:grid-cols-2">
+                <li className="rounded-xl border border-line/60 bg-bg/40 px-3 py-2">
+                  <span className="text-fg-muted">Cách 1 (cân sức mạnh – yếu):</span>{" "}
+                  <b>{hs.dung_than_hai_cach.cach_1.join(", ") || "—"}</b>
+                </li>
+                <li className="rounded-xl border border-line/60 bg-bg/40 px-3 py-2">
+                  <span className="text-fg-muted">Cách 2 (theo tháng sinh):</span>{" "}
+                  <b>{hs.dung_than_hai_cach.cach_2.join(", ") || "—"}</b>
+                </li>
+              </ul>
+              <p className="mt-2 text-fg-faint">Hai cách có thể khác nhau; hệ thống không chọn thay bạn.</p>
+            </div>
+          )}
 
           <div className="rounded-2xl border border-line/80 bg-surface/50 p-4 text-sm leading-relaxed text-fg">
             <p>{kq.tong_quan_nam.nhan_dinh_nam}</p>
@@ -232,7 +313,7 @@ export function LichQuyetDinh12Thang() {
               ["tat_ca", "Tất cả 12 tháng"],
               ["day_manh", "Đẩy mạnh"],
               ["can_bang", "Cân bằng"],
-              ["phong_thu", "Phòng thủ"],
+              ["phong_thu", "Giữ nhịp"],
             ] as const).map(([ma, ten]) => (
               <button key={ma} type="button" onClick={() => setLoc(ma)} aria-pressed={loc === ma}
                 className={cn("rounded-full border px-3.5 py-1.5 text-xs transition-colors",
@@ -251,17 +332,19 @@ export function LichQuyetDinh12Thang() {
                     ? "border-[#f0b35c]/40 bg-[#f0b35c]/15 text-[#f0b35c]"
                     : "border-moon/40 bg-moon/15 text-moon";
               return (
-                <article key={t.thang} className="flex flex-col justify-between rounded-2xl border border-line/80 bg-surface/40 p-4">
+                <article key={t.nhan_thang} data-testid="thang-lich-12" className="flex flex-col justify-between rounded-2xl border border-line/80 bg-surface/40 p-4">
                   <div>
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <p className="font-serif text-lg text-fg">Tháng {t.thang}/{kq.nam_xem}</p>
+                        <p className="font-serif text-lg text-fg">Tháng {t.thang}/{t.nam}</p>
                         <p className="text-xs text-fg-faint">{t.can_chi_thang} ({t.hanh_thang}) · Tháng cá nhân {t.thang_ca_nhan}</p>
                       </div>
                       <span className={cn("rounded-full border px-2.5 py-0.5 text-[11px] font-medium", badgeCls)}>
                         {t.nhan_nhip}
                       </span>
                     </div>
+
+                    {t.tom_lai && <p className="mt-3 text-sm leading-relaxed text-fg">{t.tom_lai}</p>}
 
                     <div className="mt-3 space-y-2.5 text-xs leading-relaxed">
                       <p className="flex items-start gap-1.5 text-fg">
@@ -273,23 +356,61 @@ export function LichQuyetDinh12Thang() {
                         <span><b className="text-[#f0b35c]">Nên chú ý:</b> {t.nen_chu_y}</span>
                       </p>
                     </div>
+
+                    {t.lop && t.lop.length > 0 && (
+                      <ul className="mt-3 space-y-1.5 border-t border-line/60 pt-3 text-xs leading-relaxed" aria-label="Các cách xem tháng">
+                        {t.lop.map((l) => (
+                          <li key={l.ma} className="flex items-start gap-2">
+                            <span className={cn("mt-1.5 size-2 shrink-0 rounded-full", CHAM_LOP[l.loai] ?? CHAM_LOP.trung)} aria-hidden />
+                            <span>
+                              <b className="text-fg">{l.nhan}:</b>{" "}
+                              <span className="text-fg-muted">{[l.tieu, l.loi].filter(Boolean).join(". ")}</span>
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {t.can_cu && t.can_cu.length > 0 && (
+                      <details className="mt-3 text-xs">
+                        <summary className="cursor-pointer text-fg-faint hover:text-fg">Vì sao nói vậy</summary>
+                        <ul className="mt-1.5 list-disc space-y-1 pl-4 text-fg-muted">
+                          {t.can_cu.map((c, i) => <li key={i}>{c}</li>)}
+                        </ul>
+                      </details>
+                    )}
                   </div>
 
                   {t.ngay_dep.length > 0 && (
                     <div className="mt-4 border-t border-line/60 pt-3">
                       <p className="flex items-center gap-1 text-[11px] font-medium uppercase tracking-wide text-gold">
-                        <Compass className="size-3" aria-hidden /> Ngày đẹp tham khảo
+                        <Compass className="size-3" aria-hidden /> Ngày tham khảo
                       </p>
-                      <ul className="mt-1.5 space-y-1 text-xs text-fg-muted">
-                        {t.ngay_dep.map((nd) => (
-                          <li key={nd.ngay} className="flex flex-wrap items-center justify-between gap-1">
-                            <span className="font-medium text-fg">{formatNgayVN(nd.ngay)} <span className="font-normal text-fg-faint">(Âm {nd.am})</span></span>
-                            <span className="truncate text-[11px]">
-                              {nd.can_chi} · Trực {nd.truc}
-                              {nd.luu_y_ngay && nd.luu_y_ngay.length > 0 ? ` · Lưu ý: ${nd.luu_y_ngay.join(", ")}` : ""}
-                            </span>
-                          </li>
-                        ))}
+                      <ul className="mt-1.5 space-y-2 text-xs text-fg-muted">
+                        {t.ngay_dep.map((nd) => {
+                          const hop = nd.quan_he_tuoi ? HOP_TUOI[nd.quan_he_tuoi] : undefined;
+                          const chuYTuoi = nd.quan_he_tuoi ? CHU_Y_TUOI[nd.quan_he_tuoi] : undefined;
+                          const chuY = [...(nd.ky_dan_gian ?? []), ...(nd.luu_y_ngay ?? []), ...(chuYTuoi ? [chuYTuoi] : [])];
+                          return (
+                            <li key={nd.ngay}>
+                              <div className="flex flex-wrap items-center justify-between gap-1">
+                                <span className="font-medium text-fg">{formatNgayVN(nd.ngay)} <span className="font-normal text-fg-faint">(Âm {nd.am})</span></span>
+                                <span className="text-[11px]">{nd.can_chi} · Trực {nd.truc}</span>
+                              </div>
+                              <div className="mt-1 flex flex-wrap gap-1">
+                                {nd.dep && <span className="rounded-full border border-jade/40 bg-jade/10 px-2 py-0.5 text-[10px] text-jade">Ngày đẹp</span>}
+                                {nd.hoang_dao && <span className="rounded-full border border-jade/40 bg-jade/10 px-2 py-0.5 text-[10px] text-jade">Hoàng đạo</span>}
+                                {hop && <span className="rounded-full border border-jade/40 bg-jade/10 px-2 py-0.5 text-[10px] text-jade">{hop}</span>}
+                                {(nd.diem_cong ?? []).map((d) => (
+                                  <span key={d} className="rounded-full border border-line px-2 py-0.5 text-[10px] text-fg-muted">{d}</span>
+                                ))}
+                                {chuY.map((c) => (
+                                  <span key={c} className="rounded-full border border-[#f0b35c]/40 bg-[#f0b35c]/10 px-2 py-0.5 text-[10px] text-[#f0b35c]">Lưu ý: {c}</span>
+                                ))}
+                              </div>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   )}
