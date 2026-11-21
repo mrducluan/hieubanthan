@@ -21,6 +21,8 @@ import { linkXemTruoc, webUrl } from "../lib/web";
 import { coKhoaNotFair, dsNotFair, nguonNotFair, nhapBaiNotFair } from "../lib/notfair";
 import { chuanHoaMotBai, chuanHoaTatCaNotFair, dsBaiNotFairCms } from "../lib/chuan-hoa-notfair";
 import { tuDongNotFair } from "../lib/tu-dong-notfair";
+import { docSuKien, dungBiMatRankYak, nhapBaiRankYak, tenHeader, tuDongRankYak, xuLyBaiRankYak } from "../lib/rankyak";
+import { after } from "next/server";
 import { dungBiMatChung } from "../lib/bi-mat-chung";
 
 export const MANG = [
@@ -193,6 +195,49 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
         if (!dungBiMatChung(req.headers.get("x-cms-bi-mat"))) return Response.json({ loi: "Không có quyền" }, { status: 401 });
         try {
           return Response.json({ ok: true, ...(await tuDongNotFair(req.payload, req)) });
+        } catch (e) {
+          return Response.json({ loi: (e as Error).message }, { status: 502 });
+        }
+      },
+    },
+    {
+      // RY-1: webhook "Next.js connection" của RankYak (dán URL https://cms.hieuban.com/api/bai-viet/rankyak vào RankYak).
+      // Bí mật RANKYAK_WEBHOOK_SECRET trong một header. Ghi bản nháp ngay, trả 200; chuẩn hoá + tự xuất bản chạy SAU khi
+      // trả lời (`after`) để RankYak không chờ quá lâu rồi gửi lại. Lỗi ghi bài → 502 để RankYak tự gửi lại (tới 3 ngày).
+      path: "/rankyak", method: "post",
+      handler: async (req) => {
+        if (!process.env.RANKYAK_WEBHOOK_SECRET?.trim()) return Response.json({ loi: "CMS chưa đặt RANKYAK_WEBHOOK_SECRET." }, { status: 503 });
+        if (!dungBiMatRankYak(req.headers)) {
+          console.warn("[rankyak] từ chối: bí mật không khớp; header nhận được:", tenHeader(req.headers).join(","));
+          return Response.json({ loi: "Sai bí mật webhook." }, { status: 401 });
+        }
+        const body = typeof req.json === "function" ? await req.json().catch(() => null) : null;
+        const sk = docSuKien(body);
+        if (!sk.article) return Response.json({ ok: true, event: sk.event });   // lượt thử khi bấm Save
+        if (sk.event && !/^article\.(published|updated|created)$/.test(sk.event)) return Response.json({ ok: true, bo_qua: sk.event });
+        try {
+          const n = await nhapBaiRankYak(req.payload, req, sk.article);
+          const payload = req.payload, idRy = sk.article.id;
+          const sau = async () => {
+            try { console.log("[rankyak] xử lý", JSON.stringify({ rankyak_id: idRy, ...(await xuLyBaiRankYak(payload, undefined, n, idRy)) })); }
+            catch (e) { console.error("[rankyak] chuẩn hoá lỗi", idRy, (e as Error)?.message); }
+          };
+          // Ngoài phạm vi một yêu cầu Next (test gọi thẳng handler) `after` ném lỗi → chạy luôn.
+          try { after(sau); } catch { await sau(); }
+          return Response.json({ ok: true, id: n.id, moi: n.moi, status: "draft" });
+        } catch (e) {
+          console.error("[rankyak] nhập lỗi", (e as Error)?.message);
+          return Response.json({ loi: (e as Error).message }, { status: 502 });
+        }
+      },
+    },
+    {
+      // RY-1: cron ngày của web (bí mật chung) → kéo bài RankYak còn thiếu (webhook lỡ) bằng RANKYAK_API_KEY.
+      path: "/tu-dong-rankyak", method: "post",
+      handler: async (req) => {
+        if (!dungBiMatChung(req.headers.get("x-cms-bi-mat"))) return Response.json({ loi: "Không có quyền" }, { status: 401 });
+        try {
+          return Response.json({ ok: true, ...(await tuDongRankYak(req.payload, req)) });
         } catch (e) {
           return Response.json({ loi: (e as Error).message }, { status: 502 });
         }
@@ -462,10 +507,15 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     { name: "slug_cu", type: "text", hasMany: true, admin: { hidden: true, readOnly: true } },
     {
       name: "nguon_goc", label: "Nguồn bài", type: "select", defaultValue: "cms", access: { read: truongNoiBo, update: () => false },
-      options: [{ label: "Viết trong CMS", value: "cms" }, { label: "Nhập từ NotFair (bài trao đổi)", value: "notfair" }],
-      admin: { position: "sidebar", readOnly: true, condition: (d) => d?.nguon_goc === "notfair",
-        description: "Bài trao đổi: giữ nguyên các link của đối tác. Dòng ghi công \"Authored with NotFair SEO\" tự bỏ khi nhập / chuẩn hoá (BLOG-9)." },
+      options: [{ label: "Viết trong CMS", value: "cms" }, { label: "Nhập từ NotFair (bài trao đổi)", value: "notfair" },
+        { label: "Nhận từ RankYak", value: "rankyak" }],
+      admin: { position: "sidebar", readOnly: true, condition: (d) => d?.nguon_goc === "notfair" || d?.nguon_goc === "rankyak",
+        description: "NotFair: bài trao đổi, giữ nguyên các link của đối tác (BLOG-9). RankYak: bài máy viết theo kế hoạch từ khoá, "
+          + "RankYak gửi bản cập nhật thì thành bản nháp mới (RY-1)." },
     },
+    // RY-1: mã bài bên RankYak — bản cập nhật (`article.updated`) ghi đúng bài này, không tạo trùng. Không sửa tay.
+    { name: "rankyak_id", type: "number", index: true, access: { read: truongNoiBo, update: () => false },
+      admin: { hidden: true, readOnly: true } },
     // Link ra ngoài của bản NotFair gốc — kiểm định cảnh báo khi bị xoá (BLOG-3). Ghi lúc nhập, không sửa tay.
     { name: "notfair_lien_ket", type: "text", hasMany: true, access: { read: truongNoiBo, update: () => false },
       admin: { hidden: true, readOnly: true } },

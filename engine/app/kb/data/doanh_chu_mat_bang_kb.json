@@ -1,0 +1,79 @@
+{
+  "_nguon": "Ban biên tập Hiểu Bản Thân soạn lời đời thường cho công cụ Mặt bằng & Khai trương. Phép tính lấy từ bàn Huyền Không (trach_ban), Bát trạch (menh_quai, bang_huong), sao lưu niên và bộ chọn ngày Hoàng lịch có sẵn; Kỳ Môn chỉ dùng cho giờ trong ngày khai trương.",
+  "_trang_thai": "nhap_ban_bien_tap",
+  "source_id": "doanh_chu_mat_bang_kb",
+  "school_id": "huyen_khong_bat_trach",
+  "loai_hinh": {
+    "van_phong": "Văn phòng / Công ty",
+    "cua_hang": "Cửa hàng / Bán lẻ",
+    "quan_ca_phe": "Quán cà phê / F&B",
+    "xuong_kho": "Xưởng sản xuất / Kho"
+  },
+  "khu": {
+    "thu_ngan": {
+      "ten": "Quầy thu ngân / Khu chốt đơn",
+      "thuan_loi": "Đặt quầy thu ngân hoặc bàn giao dịch ở phía {phuong} của mặt bằng: phía này đang có sao thuận cho dòng tiền trong {van_ten}.",
+      "thuan_loi_bt": "Đặt quầy thu ngân hoặc bàn giao dịch ở phía {phuong} — phía hợp với mệnh của chủ cơ sở ({du_nien}).",
+      "nen_chu_y": "Giữ lối đi trước quầy thông thoáng, lưng quầy có tường hoặc vách tựa vững; tránh đặt ngay dưới xà ngang hoặc đối diện thẳng cửa nhà vệ sinh."
+    },
+    "giam_doc": {
+      "ten": "Bàn Giám đốc / Chủ cơ sở",
+      "thuan_loi": "Phía {phuong} có sao thuận cho người ngồi lâu và ra quyết định — hợp làm chỗ ngồi của chủ cơ sở.",
+      "thuan_loi_bt": "Phía {phuong} hợp mệnh của chủ cơ sở ({du_nien}) — hợp làm chỗ ngồi ra quyết định.",
+      "nen_chu_y": "Ưu tiên ngồi lưng tựa tường vững, nhìn bao quát được cửa ra vào nhưng không ngồi thẳng trục cửa chính."
+    },
+    "phong_hop": {
+      "ten": "Phòng họp / Bàn tiếp đối tác",
+      "thuan_loi": "Phía {phuong} thuận cho trao đổi, thương lượng và lên kế hoạch nhóm.",
+      "thuan_loi_bt": "Phía {phuong} hợp mệnh của chủ cơ sở ({du_nien}) — dễ giữ không khí trao đổi cởi mở.",
+      "nen_chu_y": "Ánh sáng trung tính, thông gió tốt, ghế bố trí cân đối để buổi đàm phán bớt cảm giác đối đầu."
+    },
+    "khu_tinh": {
+      "ten": "Kho hàng / Khu nên giữ tĩnh năm {nam}",
+      "thuan_loi": "Phía {phuong} hợp làm kho gọn, tủ hồ sơ hoặc khu ít người qua lại trong năm {nam}, để dành chỗ đẹp cho khách và nhân viên.",
+      "nen_chu_y": "Năm {nam}, sao năm {ds}: hạn chế sửa chữa lớn, khoan đục, để đồ ẩm mốc hay lộn xộn ở những phía này.",
+      "giua": "Khoảng giữa mặt bằng nên để thoáng, không chất đồ nặng hay đặt máy móc ồn ở đó trong năm."
+    }
+  },
+  "cua": {
+    "ten": "Cửa chính / Khu đón khách",
+    "tot": "Cửa quay về {phuong} hợp mệnh của chủ cơ sở ({du_nien}): giữ bảng hiệu sáng, lối vào sạch và ánh sáng tự nhiên đều.",
+    "xau": "Cửa quay về {phuong} chưa hợp mệnh của chủ cơ sở ({du_nien}).",
+    "xau_bu": "Nên chú ý: không cần đục sửa cửa — bù bằng cách đặt quầy và chỗ ngồi của chủ quay về {huong_tot}; giữ lối vào sáng, gọn.",
+    "sao_tinh": "Năm {nam}, sao năm số {sao} ghé khu cửa: giữ cửa gọn, tránh khoan đục ồn ào ở khu này trong năm.",
+    "sao_thuong": "Tránh bày kệ, hàng hoá chắn tầm nhìn của khách từ ngoài phố vào.",
+    "bu_thuan": "Bảng hiệu sáng, lối vào gọn và có đèn vẫn giúp khách dễ thấy, dễ bước vào."
+  },
+  "khu_trung_tinh": "Phía {phuong} là chỗ phù hợp nhất còn lại cho việc này trên mặt bằng; bố trí gọn, đủ sáng, lối đi thoáng là đủ.",
+  "khu_tinh_sao": {
+    "mot": "số {sao} ở {phuong}",
+    "noi": ", "
+  },
+  "van_ten": "Vận {van}",
+  "can_cu": {
+    "phi_tinh": "Bàn {phep} Vận {van} (nhà xây năm {nam_xay}); sao hướng {huong} · sao sơn {son} tại cung {cung}; sao năm {nam}: {ln}.",
+    "bat_trach": "Bát trạch: phía {phuong} là {du_nien} với mệnh {quai} của chủ cơ sở; sao năm {nam}: {ln}.",
+    "cua": "Cửa {do}° ({son}) · Bát trạch: {du_nien} · sao năm {nam}: {ln}.",
+    "khu_tinh": "Sao năm {nam}: {ds}."
+  },
+  "phep": {
+    "ha_quai": "hạ quái",
+    "the_quai": "thế quái"
+  },
+  "khong_ro_nam_xay": "Không rõ năm xây nên chưa lập được bàn Huyền Không (sao của nhà phụ thuộc năm xây). Gợi ý dưới đây dựa trên Bát trạch theo mệnh chủ cơ sở và sao của năm. Nếu chỉ nhớ khoảng năm, hãy chọn khoảng ấy để có bàn đủ.",
+  "canh_bao": {
+    "khong_vong": "Hướng {do}° nằm sát ranh giới hai sơn (không vong) — bàn có thể sai hoàn toàn. Nên đứng cách cửa sắt, khung kim loại 1–2 m và đo lại 2–3 lần trước khi chốt bố trí cố định.",
+    "kiem_huong": "Hướng {do}° lệch {lech}° so với chính sơn (kiêm hướng, quá 3°) nên bàn được lập theo thế quái, như công cụ Phong thuỷ. Bàn thế quái theo đồ bàn tham chiếu phái Thẩm thị, còn chờ đối chiếu nguyên văn sách."
+  },
+  "tong_quan": "Mặt bằng {loai} {phan_nha}, toạ {toa} hướng {huong} ({do}° · {phuong}). Ưu tiên quầy thu ngân ở {thu_ngan}, chỗ ngồi của chủ ở {giam_doc}, giữ yên phía {tinh} trong năm {nam}.",
+  "phan_nha": {
+    "co": "xây năm {nam_xay} (Vận {van}, cục {cuc})",
+    "khong": "chưa rõ năm xây"
+  },
+  "ngay": {
+    "cach_chon": "Ngày có việc khai trương trong mục Nên của sách lịch, không nằm trong mục Kiêng, không xung tuổi chủ cơ sở; ưu tiên ngày không vướng kiêng dân gian và nhãn tập quán, xếp theo thứ tự thời gian.",
+    "khong_co": "Trong 60 ngày tới chưa có ngày nào sách lịch ghi hợp khai trương mà không xung tuổi bạn.",
+    "gio_kem": "Giờ thuận theo Kỳ Môn: {gio}."
+  },
+  "ranh_gioi": "Gợi ý bố trí mặt bằng và chọn ngày khai trương theo Huyền Không, Bát trạch, Hoàng lịch và Kỳ Môn; chỉ để tham khảo sắp xếp không gian, không thay thế tiêu chuẩn thiết kế kiến trúc, phòng cháy chữa cháy hay tư vấn pháp lý. Dữ liệu không lưu trên máy chủ."
+}

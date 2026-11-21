@@ -15,7 +15,7 @@
 
 | Mảng | Có nguyên văn đối chiếu | Tóm ý cổ thư, chưa khớp từng câu | Tập quán / sách hiện đại tóm ý | Ban biên tập soạn | Tệp kỹ thuật |
 |---|---|---|---|---|---|
-| Bát tự | 3 | 1 | 1 | 4 |  |
+| Bát tự | 3 | 1 | 1 | 5 |  |
 | Tử vi | 1 | 3 | 7 | 7 |  |
 | Kinh Dịch | 4 | 2 | 1 | 2 |  |
 | Phong thuỷ | 2 | 2 | 1 | 4 |  |
@@ -87,6 +87,7 @@
 | Bát tự | `battu_thien_ly_menh_cao.json` |  | Tập quán / sách hiện đại tóm ý | Đợt 3: 6 quy tắc Thập Thần & Cách Cục 2 chiều trích dẫn có phép từ Thiên Lý Mệnh Cảo (Vi Thiên Lý, 1934 — bazi-kb) |
 | Bát tự | `bo_sung_nhat_chu.json` |  | Ban biên tập soạn |  |
 | Bát tự | `bo_sung_thap_than.json` |  | Ban biên tập soạn |  |
+| Bát tự | `doanh_chu_lich_kb.json` |  | Ban biên tập soạn | PR #328: lời đời thường Lịch quyết định 12 tháng; mức tháng từ các lớp của Thời gian tới + tháng cá nhân |
 | Tử vi | `bo_sung_cung.json` |  | Ban biên tập soạn |  |
 | Tử vi | `bo_sung_hoa_cung.json` |  | Ban biên tập soạn |  |
 | Tử vi | `bo_sung_sao.json` |  | Ban biên tập soạn |  |
@@ -128,6 +129,7 @@
 | Kinh Dịch | `kinhdich_tra_loi.json` | kieu_cau | Ban biên tập soạn |  |
 | Kinh Dịch | `kinhdich_truyen_nghia.json` |  | Có nguyên văn đối chiếu | bản dịch Ngô Tất Tố ghép theo chữ Hán |
 | Phong thuỷ | `bo_sung_dau_hieu.json` |  | Ban biên tập soạn |  |
+| Phong thuỷ | `doanh_chu_mat_bang_kb.json` |  | Ban biên tập soạn | PR #329: lời đời thường công cụ Mặt bằng & Khai trương; phép tính lấy từ Huyền Không, Bát trạch, Hoàng lịch, Kỳ Môn có sẵn |
 | Phong thuỷ | `phongthuy_cung_menh.json` |  | Có nguyên văn đối chiếu | SX-C: chín điều bố trí × 8 cung (東/西四位宅圖說); phương + du niên khớp phép tính Bát trạch |
 | Phong thuỷ | `phongthuy_do_thi.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_doi_song.json` |  | Ban biên tập soạn |  |

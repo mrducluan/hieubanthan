@@ -3,7 +3,7 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-18 (KM-0 mục 4ay; TK-1 mục 4ax; LH-1 + LH-2 + LH-3 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-21 (RY-1 mục 4az; KM-0 mục 4ay; TK-1 mục 4ax; LH-1 + LH-2 + LH-3 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
 
 ### 4ay. KM-0 — nguồn tri thức Kỳ Môn Độn Giáp (2026-11-18, `docs/KY-MON-NGUON.md`)
 
@@ -30,6 +30,17 @@
 - [x] D1 đã làm (LH-3): chương 1 miễn phí có một câu trả lời mẫu "Tôi hợp nghề gì?".
 - [ ] (Quyết định) Việc tiếp theo trong D2–D6 của `docs/RA-SOAT-LUAN-HOI-VA-THU-SAO.md` mục 4–6; em khuyên D2 (hỏi đáp dùng
   cùng nhãn với báo cáo).
+
+### 4az. RY-1 — kết nối RankYak (2026-11-21)
+Bài RankYak vào CMS như bài NotFair: nháp → chuẩn hoá SEO → tự xuất bản khi ≥ 85 điểm (BLOG-10), chữ ký "Ban biên tập".
+- [ ] Vercel → dự án **CMS** (không phải web) → Settings → Environment Variables → thêm `RANKYAK_WEBHOOK_SECRET` (nút "Copy
+  secret" ở kết nối Next.js) và `RANKYAK_API_KEY` (Developer zone → API key) → Redeploy (migration `ry_1_rankyak` tự chạy).
+- [ ] RankYak → Settings → Integrations → Next.js → Edit settings → Webhook URL: `https://cms.hieuban.com/api/bai-viet/rankyak`
+  → Save. RankYak gửi lượt thử; hiện "connected" là xong. **Không** bật webhook ở Developer zone (bài sẽ tới hai lần).
+- [ ] Để **tắt** "Publish articles as draft" bên RankYak (CMS tự quyết nháp / xuất bản theo điểm).
+- [ ] Vì khoá đã gửi qua chat: khi tiện, bấm Regenerate API key / kết nối lại rồi cập nhật hai biến trên.
+- Bài không đạt điểm nằm ở CMS → Bài viết, nguồn "Nhận từ RankYak", ghi chú `BLOG-10: chưa tự xuất bản: …`.
+- Lỗi xem ở Vercel (CMS) → Logs, tìm `[rankyak]`.
 
 ### 4av. NF-BT — biên tập 21 bài NotFair + 4 bài tuần 3 (2026-11-17, `docs/kw6t/AUDIT-NOTFAIR-2026-11-17.md`)
 

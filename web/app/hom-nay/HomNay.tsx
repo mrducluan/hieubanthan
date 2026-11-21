@@ -465,6 +465,7 @@ export function HomNay() {
               mayChu={ttChuoi === null ? undefined : ttChuoi.tai_khoan && ttChuoi.dang_nhap && ttChuoi.san_sang ? ttChuoi.thang_truoc ?? null : null} /></div>
             <div className="empty:hidden"><NhacHomNay homNay={the.ngay_xem} /></div>
             <div className="empty:hidden"><ThangNayNha /></div>
+            <div className="empty:hidden"><ThangNayNha cuaHang /></div>
             <div className="empty:hidden"><ViecTuanNha /></div>
             <div className="empty:hidden"><MoiCaiApp noi="hom_nay" /></div>
             </div>}

@@ -191,12 +191,15 @@ export async function donDuLieuHoc(dv: SupabaseClient): Promise<{ ok: boolean; k
 /** BLOG-9d: nhờ CMS nhập + chuẩn hoá bài NotFair MỚI (CMS làm, web chỉ gọi); BLOG-10: bài đạt điểm kiểm định thì CMS
  *  tự xuất bản, không đạt thì thành nháp chờ Chủ biên. Chưa nối CMS → bỏ qua. Có trần
  *  thời gian để cron ngày (60 giây) không bị cắt; bài còn lại để ngày sau. Lỗi không làm hỏng các việc khác của cron. */
-export async function tuDongNotFairCms(conMs: number): Promise<Record<string, unknown>> {
+/** RY-1: cùng đường, gọi CMS kéo bài RankYak còn thiếu (webhook lỡ). CMS chưa có RANKYAK_API_KEY → CMS trả co_khoa=false. */
+export const tuDongRankYakCms = (conMs: number) => tuDongNotFairCms(conMs, "tu-dong-rankyak");
+
+export async function tuDongNotFairCms(conMs: number, duong = "tu-dong-notfair"): Promise<Record<string, unknown>> {
   const goc = (process.env.CMS_URL || "").replace(/\/+$/, ""), bi = process.env.CMS_WEBHOOK_SECRET;
   if (!goc || !bi) return { bo_qua: "chua_noi_cms" };
   if (conMs < 20_000) return { bo_qua: "het_gio" };
   try {
-    const r = await fetch(`${goc}/api/bai-viet/tu-dong-notfair`, {
+    const r = await fetch(`${goc}/api/bai-viet/${duong}`, {
       method: "POST", headers: { "x-cms-bi-mat": bi }, signal: AbortSignal.timeout(Math.min(conMs - 5_000, 40_000)),
     });
     const d = await r.json().catch(() => ({})) as { moi?: { slug: string; diem: number; xuat_ban?: boolean; ly_do?: string; loi?: string }[];

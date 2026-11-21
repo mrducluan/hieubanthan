@@ -4,7 +4,7 @@
 import { NextResponse } from "next/server";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
 import { capiCron } from "@/lib/meta-capi";
-import { capSaoHoiVien, donDuLieuHoc, dungKhoaCron, guiNhacNgay, tuDongNotFairCms } from "@/lib/cron";
+import { capSaoHoiVien, donDuLieuHoc, dungKhoaCron, guiNhacNgay, tuDongNotFairCms, tuDongRankYakCms } from "@/lib/cron";
 
 export const maxDuration = 60;
 
@@ -21,5 +21,8 @@ export async function GET(req: Request) {
   const blog = await tuDongNotFairCms(55_000 - (Date.now() - bat));
   // BLOG-9e: ghi kết quả nhập bài ra log Vercel (chỉ slug + điểm / lý do bỏ qua — không bí mật, không dữ liệu người dùng).
   console.log("[cron hang-ngay] blog", JSON.stringify(blog));
-  return NextResponse.json({ nhac, don: don.ket_qua, hoi_vien, meta, blog }, { status: don.ok ? 200 : 502 });
+  // RY-1: bài RankYak đến bằng webhook; cron chỉ vớt bài webhook lỡ (thời gian còn lại).
+  const rankyak = await tuDongRankYakCms(55_000 - (Date.now() - bat));
+  console.log("[cron hang-ngay] rankyak", JSON.stringify(rankyak));
+  return NextResponse.json({ nhac, don: don.ket_qua, hoi_vien, meta, blog, rankyak }, { status: don.ok ? 200 : 502 });
 }
