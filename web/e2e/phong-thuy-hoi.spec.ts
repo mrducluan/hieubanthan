@@ -67,3 +67,36 @@ test("Hỏi gì xem nấy: gọi API thật khi có HoSoNha, prefill KhungChat, 
   await page.getByTestId("hoi-gi-hoi-tiep").click();
   await expect(page.locator("#hoi-phong-thuy textarea")).toHaveValue(/Cửa chính nhà tôi/);
 });
+
+test("Phase 2: Huyền Không ▶ Khởi Bàn (reduced-motion) & 4 lớp sao + La bàn trung bình góc 359°/1° → 0°", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await napHoSo(page);
+  await page.goto("/phong-thuy");
+
+  // 1. Huyền Không Khởi Bàn + 4 layer toggles
+  const hk = page.locator("#huyen-khong");
+  await hk.getByRole("button", { name: "Lập bàn" }).click();
+  await expect(hk.getByTestId("hk-khoi-ban")).toBeVisible();
+  await hk.getByTestId("hk-khoi-ban").click();
+  await expect(hk.getByTestId("hk-lop-van")).toBeChecked();
+  await expect(hk.getByTestId("hk-lop-ln")).toBeChecked();
+  await hk.getByTestId("hk-lop-ln").uncheck();
+  await expect(hk.getByTestId("hk-lop-ln")).not.toBeChecked();
+
+  // 2. La bàn cảm biến giả lập 359° và 1° → trung bình góc tuần hoàn phải ra 0° (không phải 180°)
+  await page.getByTestId("do-huong").getByRole("button", { name: /Đo bằng la bàn điện thoại/i }).click();
+  await expect(async () => {
+    await page.evaluate(() => {
+      const evName = "ondeviceorientationabsolute" in window ? "deviceorientationabsolute" : "deviceorientation";
+      const fire = (heading: number) => {
+        const ev = new DeviceOrientationEvent(evName, { alpha: (360 - heading) % 360, absolute: true });
+        window.dispatchEvent(ev);
+      };
+      fire(359);
+      fire(1);
+    });
+    await expect(page.getByTestId("la-ban-do-so")).toContainText("0°", { timeout: 500 });
+  }).toPass();
+  await expect(page.getByTestId("la-ban-sai-so")).toContainText("±");
+  await expect(page.getByTestId("la-ban-doi-chieu-ve-tinh")).toBeVisible();
+});
