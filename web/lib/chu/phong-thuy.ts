@@ -632,4 +632,21 @@ export const CHU_PHONG_THUY_UI = {
   "hk.goi_y": m(HK, "Gợi ý: {x}", "Suggestion: {x}"),
   "hk.to_hop": m(HK, "Tổ hợp trong bàn", "Star combinations in the chart"),
   "hk.khong_to_hop": m(HK, "Không có tổ hợp đặc biệt.", "No special combinations."),
+
+  // ---------------------------------------------------------------- Hỏi gì xem nấy (HoiGiXemNay.tsx)
+  "hg.eyebrow": m(P, "HỎI GÌ XEM NẤY · CHỌN ĐÚNG NHU CẦU", "ASK BY QUESTION · PICK WHAT YOU NEED"),
+  "hg.tieu_de": m(P, "Bạn đang băn khoăn điều gì về ngôi nhà?", "What do you want to check about this home?"),
+  "hg.mo_ta": m(P, "Chọn đúng câu hỏi bên dưới để xem kết luận ngay. Thiếu dữ liệu nào, trang sẽ mở gọn bước nhập ngay tại chỗ.", "Pick a question below for a direct answer. If any detail is missing, we will ask only for that step."),
+  "hg.bach_thoai": m(P, "Bạch thoại (dễ hiểu)", "Plain language"),
+  "hg.thieu_huong": m(P, "Chưa có độ hướng cửa — bấm để đo la bàn hoặc chấm trên ảnh vệ tinh.", "Door direction not set yet — click to measure with compass or satellite map."),
+  "hg.thieu_sinh": m(P, "Chưa có năm sinh & giới tính — bấm để tính mệnh quái hợp hướng.", "Birth year & gender missing — click to compute your Kua compatibility."),
+  "hg.do_ngay": m(P, "Đo hướng cửa ngay", "Measure door direction"),
+  "hg.nhap_sinh": m(P, "Nhập năm sinh", "Add birth info"),
+  "hg.viec_lam": m(P, "Việc nên làm (ưu tiên 0đ):", "What to do first (zero-cost priority):"),
+  "hg.vi_sao": m(P, "Vì sao nói vậy? (Mở La Kinh & căn cứ)", "Why? (Open chart & classical sources)"),
+  "hg.nguon": m(P, "Nguồn & căn cứ:", "Sources & basis:"),
+  "hg.mo_la_kinh": m(P, "Xem cung này trên La Kinh Huyền Không", "Highlight this palace on Flying Star chart"),
+  "hg.hoi_tiep": m(P, "Hỏi tiếp chuyên sâu", "Ask follow-up"),
+  "hg.toan_canh": m(P, "Hoặc cuộn xuống xem đầy đủ 5 phần chi tiết bên dưới", "Or scroll down for all detailed sections below"),
+  "hg.dang_hoan_thien": m(P, "Đang hoàn thiện", "In progress"),
 } satisfies BangChu;

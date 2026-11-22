@@ -60,7 +60,7 @@ const MAU_TT: Record<string, string> = {
 /** Mã trạng thái sao (engine trả chữ Việt) → khoá bảng chữ `hk.tt.<…>`. */
 const KHOA_TT: Record<string, string> = { "vượng": "vuong", "sinh": "sinh", "thoái": "thoai", "suy": "suy", "tử": "tu" };
 
-export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
+export function HuyenKhong({ doToaGoiY, cungGoiY }: { doToaGoiY?: number | null; cungGoiY?: string | null } = {}) {
   const [namXay, setNamXay] = useState("2024");
   const [cach, setCach] = useState<"son" | "do">("son");
   const [toa, setToa] = useState("Tý");
@@ -95,6 +95,9 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
   const [kiem, setKiem] = useState(false);
   const [ban, setBan] = useState<Ban | null>(null);
   const [chonCung, setChonCung] = useState<string | null>(null);
+  useEffect(() => {
+    if (cungGoiY && ban?.cung.some((c) => c.cung === cungGoiY)) setChonCung(cungGoiY);
+  }, [cungGoiY, ban]);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
   const { c: t, en } = useChuPT();
