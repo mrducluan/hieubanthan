@@ -9,6 +9,7 @@ import { KhungChat } from "@/components/hoi/KhungChat";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { BangTuTru, DaiVanLuuNien, DungThan, NguGiacNguHanh, VongDiaChi } from "@/components/huyen-hoc/BatTuTrucQuan";
 import { DauMang } from "@/components/huyen-hoc/KhungMang";
+import { NutXuongForm } from "@/components/huyen-hoc/NutXuongForm";
 import { MoiLapLaSo } from "@/components/huyen-hoc/MoiLapLaSo";
 import { ChipPhai, DongGhiChu, DongPhai, KhungPhai, type PhaiDangDung } from "@/components/huyen-hoc/KhungPhai";
 import { DoiChieuCach } from "@/components/huyen-hoc/DoiChieuCach";
@@ -95,7 +96,7 @@ export function BatTu() {
 
   useBatDauDoc("battu", Boolean(ls));
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Layers} hinh="bat-tu" ten={cb("dau.ten")} mo_ta={cb("dau.mo_ta")} />;
+  const dau = <DauMang Icon={Layers} hinh="bat-tu" ten={cb("dau.ten")} mo_ta={cb("dau.mo_ta")}>{!en && <NutXuongForm moDun="battu" />}</DauMang>;
   if (hoSo === undefined) return <div>{dau}<KhungTai nhan={cb("dang_tai")} /></div>;
   const lnDung = ln && ln.nam === namXem ? ln : null;
   // EN-ALL: mã (can, chi, hành, thập thần, thần sát…) giữ chữ Việt làm khoá; HIỆN qua `ten_hien` của phản hồi (bản Việt: nguyên mã).
@@ -304,8 +305,6 @@ export function BatTu() {
             <div className="-mt-2 overflow-hidden rounded-[1.25rem] shadow-card"><ChanLaSo giaoDien={giaoDien} tieuDe={cb("chan.tieu_de")} duong={d("/bat-tu")} /></div>
           </div>
         )}
-        {ls && <SachXuaNoi ds={ls.sach_xua} moDun="battu" />}
-        {ls && !en && <SachXuaGhi khoi={ls.sach_ghi} moDun="battu" tieuDe="Sách xưa ghi gì về các sao và hành của bạn" />}
         {ls?.co_canh_bao.map((c) => <p key={c.loai} className="text-xs text-moon">{CO_CO_LOI.has(c.loai) ? cb(`co.${c.loai}`) : c.chi_tiet}</p>)}
       </section>
 
@@ -316,12 +315,21 @@ export function BatTu() {
       {laSo && ls && (
         <section id="luan-giai" aria-label={cb("aria.luan_giai")} className="mt-10 scroll-mt-24">
           <CachChinhBatTu.Provider value={{ cach: cachChinh }}>
-            <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten={cb("luan_giai.ten")} />
+            <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten={cb("luan_giai.ten")} moDun="battu" tuMo />
           </CachChinhBatTu.Provider>
           {/* EN-ALL: bản Anh chưa có lối đi chéo mảng (các mảng khác chưa mở) → bỏ khối CTA, giữ mốc đọc xong + góp ý. */}
           <CuoiBaiDoc moDun="battu" cauHoi={cb("luan_giai.cau_hoi")} khongCta={en} />
         </section>
       )}
+
+      {/* CRO-1: "Sách xưa" dời xuống dưới bài luận — người mới vào từ quảng cáo đọc lời đời thường (chương 1) trước,
+          nguyên văn cổ thư sau. */}
+      {ls && (ls.sach_xua?.length || (!en && ls.sach_ghi)) ? (
+        <section aria-label="Sách xưa" className="mt-10 space-y-4">
+          <SachXuaNoi ds={ls.sach_xua} moDun="battu" />
+          {!en && <SachXuaGhi khoi={ls.sach_ghi} moDun="battu" tieuDe="Sách xưa ghi gì về các sao và hành của bạn" />}
+        </section>
+      ) : null}
 
       <section ref={chatRef} aria-label={cb("aria.hoi")} className="mt-10 scroll-mt-24">
         <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || cb("hoi.tieu_de")}</h2>

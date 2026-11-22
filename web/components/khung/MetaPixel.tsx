@@ -23,6 +23,11 @@ const BAT = META_BAT;
 
 type CuaSoFb = Window & { fbq?: (...a: unknown[]) => void; __hbt_fb_tat?: boolean; __hbt_fb_nap?: () => void };
 
+// CRO-1: chỉ TẢI fbevents.js trên hieuban.com — localhost, bản preview *.vercel.app không gửi gì về Meta (trước đây ~30 %
+// sự kiện của dataset đến từ http://localhost/, kể cả 4 Purchase thử). Hàng đợi fbq vẫn dựng ở mọi nơi để test đọc được;
+// e2e (NEXT_PUBLIC_E2E=1, mọi yêu cầu tới Meta đều bị chặn) mới cho tải ở localhost.
+const MOI_TEN_MIEN = process.env.NEXT_PUBLIC_E2E === "1";
+
 // Chạy một lần mỗi lượt tải trang. Cùng luật với lamSachUrl (regex lấy thẳng từ lib, không chép tay).
 const KHOI_DONG = `!function(w,d){if(w.fbq)return;var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
 if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];n.disablePushState=!0;
@@ -36,7 +41,7 @@ for(var i=0;i<p.length;i++)if(ma.test(p[i])||(p[i-1]==='qua'&&qua.test(p[i])))co
 var q=new URLSearchParams(location.search);if(q.has('the')||q.has('ma'))co=true;
 if(!co)n('track','PageView');
 var ev=['pointerdown','keydown','touchstart','scroll','wheel'],go=false,t,nc=d.currentScript&&d.currentScript.nonce;
-function nap(){if(go||w.__hbt_fb_tat)return;go=true;clearTimeout(t);ev.forEach(function(e){removeEventListener(e,nap)});
+function nap(){if(go||w.__hbt_fb_tat||!(${MOI_TEN_MIEN}||/^(www\\.)?hieuban\\.com$/.test(location.hostname)))return;go=true;clearTimeout(t);ev.forEach(function(e){removeEventListener(e,nap)});
 var s=d.createElement('script');s.async=true;s.src='https://connect.facebook.net/en_US/fbevents.js';if(nc)s.setAttribute('nonce',nc);d.head.appendChild(s);}
 w.__hbt_fb_nap=nap;ev.forEach(function(e){addEventListener(e,nap,{passive:true})});
 function hen(){t=setTimeout(nap,8000);}

@@ -1594,6 +1594,29 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - Chữ quảng cáo: không ngầm nói biết đặc điểm riêng của người xem ("Bạn đang buồn chuyện tình cảm?") — chính sách Meta; nên viết "Xem lá số
   Tử vi của bạn", "Năm 2027 của tuổi …".
 
+## CRO-1. Quảng cáo → nạp Sao: 0 đơn sau 1,23 triệu ₫ (2026-11-22, `docs/CRO-1-QUANG-CAO-NAP-SAO.md`)
+
+Code đã sửa trong PR CRO-1 (lỗi hộp thoại Thần số, giá bằng ₫, đăng nhập trong app Facebook, Bát tự, thanh mở khoá, gói 59k,
+pixel chặn localhost, AddToCart). Việc của anh, theo thứ tự:
+- [ ] **CR-1.** Merge PR → Vercel deploy web.
+- [ ] **CR-2.** Supabase → SQL Editor → chạy **`supabase/migrations/0040_goi_lan_dau.sql`** (sau 0039). Kiểm: `/quan-tri` thẻ Migration có 0040.
+- [ ] **CR-3.** `/quan-tri/cai-dat` → nhóm "Nạp Sao" → **bật "Bán gói Lần đầu (59.000 ₫ / 59 Sao)"**. Bật luôn "Tặng Sao lần nạp đầu" nếu chưa.
+- [ ] **CR-4.** Vercel (web) env `NEXT_PUBLIC_DANG_NHAP`: để **`facebook,zalo,google`** (Facebook đứng đầu khi khách mở trong app
+  Facebook/Instagram — Google bị chặn trong trình duyệt nhúng). Zalo cần `ZALO_APP_ID` + `ZALO_APP_SECRET` (docs/DANG-NHAP.md). Redeploy.
+- [ ] **CR-5.** Làm MQ-1, MQ-2 ở mục META-QC dưới (migration 0038 + `META_CAPI_TOKEN`) — hiện API chuyển đổi chưa từng gửi sự kiện nào.
+- [ ] **CR-6.** Events Manager → tạo **Custom Conversion "Lead – hieuban"** (sự kiện Lead, URL chứa `hieuban.com`) — loại sự kiện thử cũ.
+  Mở tab **Diagnostics** (đang báo 2 lỗi) xem là gì, gửi em nếu cần sửa code.
+- [ ] **CR-7.** Ads Manager — chiến dịch "BAT TU|CTW" (đang tối ưu Lượt xem trang đích → Meta mang người bấm cho vui):
+  1. Tạo chiến dịch mới mục tiêu **Leads (hoặc Sales)**, vị trí chuyển đổi **Website**, sự kiện **Lead – hieuban**.
+  2. Hai nhóm quảng cáo: **/bat-tu** (quảng cáo HB|Bát Tự|01) và **/than-so** (quảng cáo Than-so) — không chung một nhóm.
+  3. Vị trí: Feed + Reels + Stories của Facebook và Instagram; **bỏ Audience Network, cột phải, Threads**.
+  4. Ngân sách 60k/ngày tìm khách mới + 30k/ngày chạy lại (bước 5). Tắt chiến dịch LPV cũ khi chiến dịch mới chạy được 3 ngày.
+  5. Chiến dịch chạy lại: đối tượng tuỳ chỉnh từ pixel = **ReadingCompleted hoặc Lead 30 ngày**, loại **Purchase 180 ngày**; nội dung
+     "Chương 2 bài đọc của bạn đang chờ" + giá thật (69 Sao ≈ 59.000 ₫ với gói Lần đầu, hết 30/11).
+  6. Khi AddToCart (bấm "Mở toàn bộ") đạt ≥ 50/tuần → thử tối ưu theo **AddToCart**; khi Purchase ≥ 25–50/tuần → theo **Purchase**.
+- [ ] **CR-8.** Video: nói lời hứa cụ thể trong 3 giây đầu ("Bạn là số mấy?", "Mệnh bạn thiếu hành gì?") — người xem chỉ ở lại 11–13 giây.
+- [ ] **CR-9.** Sau 7 ngày gửi em: chi phí / Lead, số AddToCart, InitiateCheckout, Purchase theo nhóm quảng cáo.
+
 ## LA-UI / NS-QT / GD-1 (2026-11-16) — lịch âm mới + hai đề xuất chờ anh quyết
 - **Deploy engine trước web** cho lịch âm mới (web gọi route mới `/v1/lich/nam-ngay/{năm}`; engine cũ thì trang chỉ thiếu khối lịch, không lỗi).
 - [x] **NS-QT** — đã làm theo đề xuất (môi trường đã mở `download.geonames.org`). Còn tuỳ anh: migration (số sau 0039) `ho_so.mui_gio` để đồng bộ nơi sinh nước ngoài lên tài khoản (hiện chỉ lưu trên máy).

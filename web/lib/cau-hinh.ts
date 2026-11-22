@@ -41,6 +41,9 @@ export const CAI_DAT: readonly CaiDat[] = [
   // SAO-ND (migration 0027): thiết kế lần nạp đầu — SQL đọc cùng khoá (tao_don_nap / goi_sao_dang_ban / nd_tang_cho_don).
   { khoa: "sao.goi_khoi_dau.bat", nhom: "Nạp Sao", loai: "bat_tat", macDinh: false,
     ten: "Bán gói Khởi đầu (19.000 ₫ / 19 Sao)", moTa: "Gói nhỏ từ thời giá 29 Sao — ở giá 99 Sao không còn đủ mở báo cáo nào, nên để TẮT (GIA-99). Tắt = ẩn và máy chủ từ chối tạo đơn gói này." },
+  // CRO-1 (migration 0040): gói 59.000 ₫ / 59 Sao — cùng 10 Sao chào mừng vừa đủ báo cáo ưu đãi 69 Sao.
+  { khoa: "sao.goi_lan_dau.bat", nhom: "Nạp Sao", loai: "bat_tat", macDinh: false,
+    ten: "Bán gói Lần đầu (59.000 ₫ / 59 Sao)", moTa: "Chỉ tài khoản CHƯA từng nạp mới thấy và mua được (máy chủ kiểm lúc tạo đơn). Cộng 10 Sao chào mừng là đủ 69 Sao. Tắt = ẩn và máy chủ từ chối tạo đơn gói này." },
   { khoa: "sao.nap_dau.bat", nhom: "Nạp Sao", loai: "bat_tat", macDinh: false,
     ten: "Tặng Sao lần nạp đầu", moTa: "Bật = đơn nạp thành công ĐẦU TIÊN của mỗi tài khoản được cộng thêm % số Sao của gói, dưới dạng Sao tặng (hạn 365 ngày). Một lần mỗi tài khoản; hoàn tiền đơn đó → tự thu hồi. Hoa hồng người mời vẫn tính trên Sao của gói." },
   { khoa: "sao.nap_dau.phan_tram", nhom: "Nạp Sao", loai: "so", min: 0, max: 100, macDinh: 20,

@@ -5,6 +5,7 @@ import Link from "@/components/khung/Lien";
 import { useEffect, useState } from "react";
 import { Gift, HeartHandshake, Sparkles, UserPlus } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
+import { giaVnd } from "@/lib/loi-sao";
 import { mangLuanGiai } from "@/lib/luan-giai-mang";
 import { GoiMoCheo, type GoiMo } from "./GoiMoCheo";
 
@@ -37,7 +38,7 @@ export function CtaCuoiBai({ moDun, maYDinh, goiMo }: { moDun: string; maYDinh?:
           className="flex items-start gap-3 rounded-2xl border border-gold/40 bg-gold/[0.06] p-4 text-sm hover:border-gold/70" data-testid="cta-luan-giai">
           <Sparkles className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
           <span><b className="block text-fg">{lg ? `Đọc trọn ${lg.ten}` : `Đọc ${lgKhac[0]?.[1].ten ?? "Bản đồ con số"}`}</b>
-            <span className="text-fg-muted">{phi?.thu ? `Chương đầu miễn phí · trọn bộ ${phi.gia} Sao${phi.uu_dai ? ` (ưu đãi −${phi.uu_dai.giam_pt}%, giá thường ${phi.uu_dai.gia_goc} Sao)` : ""}, xem lại cả ngày.` : "Đang miễn phí giai đoạn ra mắt — đọc ngay."}</span></span>
+            <span className="text-fg-muted">{phi?.thu ? `Chương đầu miễn phí · trọn bộ ${phi.gia} Sao (≈ ${giaVnd(phi.gia)})${phi.uu_dai ? ` (ưu đãi −${phi.uu_dai.giam_pt}%, giá thường ${phi.uu_dai.gia_goc} Sao)` : ""}, xem lại cả ngày.` : "Đang miễn phí giai đoạn ra mắt — đọc ngay."}</span></span>
         </Link>
         <Link href="/hop-doi" onClick={() => bam("moi_ban")} className="flex items-start gap-3 rounded-2xl border border-line/70 p-4 text-sm hover:border-gold/60" data-testid="cta-moi-ban">
           <UserPlus className="mt-0.5 size-5 shrink-0 text-jade" aria-hidden />
