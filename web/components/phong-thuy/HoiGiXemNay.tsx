@@ -1,15 +1,33 @@
 "use client";
-// Approach B — "Hỏi gì xem nấy" (Question-Intent-First): ánh xạ trực tiếp sang các intent của engine
-// (`hoidap/phongthuy.py`, `Y_DINH`, `huyen-khong`, `do-huong`) + nhúng Lazy Intake & mở thẳng tới La Kinh 24 Sơn.
-import { useState } from "react";
+// Approach B — "Hỏi gì xem nấy" (Question-Intent-First): ánh xạ sang các intent của engine
+// (`hoidap/phongthuy.py`, `Y_DINH`, `huyen-khong`, `do-huong`) + gọi API thật khi có dữ liệu nhà (`HoSoNha`),
+// nhúng Lazy Intake khi thiếu dữ liệu & mở thẳng tới La Kinh 24 Sơn / KhungChat.
+import { useEffect, useState } from "react";
 import { ArrowDown, CheckCircle2, Clock, Compass, HelpCircle, MessageSquare, Sparkles, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { postJson } from "@/lib/goi-api";
 import { ghi } from "@/lib/do-luong";
 import { useHoSoNha } from "@/lib/ho-so-nha";
 import { useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 import { cn } from "@/lib/utils";
+import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
 
 export type MaIntentPT = "cua_chinh" | "bo_cuc" | "gia_dinh" | "han_nam" | "so_sanh" | "mo_quan";
+type SinhPayload = { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
+
+interface DoHuongRes {
+  do_huong: number; huong: string; son_huong: string;
+  trach: { quai: string; nhom: string };
+  du_nien?: { du_nien: string; cat: boolean };
+  canh_bao_y?: string | null;
+}
+interface HuyenKhongRes {
+  van: number; cuc_ten: string;
+  toa: { son: string; quai: string; phuong: string };
+  huong: { son: string; quai: string; phuong: string };
+  luu_nien: { nam: number; tam: number; sao_tam: string };
+  cuc_y?: { y: string; goi_y: string };
+}
 
 interface MucHoi {
   ma: MaIntentPT;
@@ -21,7 +39,7 @@ interface MucHoi {
   can_sinh?: boolean;
   neo_la_ban?: string;
   cung_mac_dinh?: string;
-  ket_luan_vi: string; ket_luan_en: string;
+  ket_luan_chung_vi: string; ket_luan_chung_en: string;
   viec_vi: string[]; viec_en: string[];
   vi_sao_bach_thoai_vi: string; vi_sao_bach_thoai_en: string;
   vi_sao_hoc_thuat_vi: string; vi_sao_hoc_thuat_en: string;
@@ -37,12 +55,12 @@ const DANH_SACH_HOI: MucHoi[] = [
     goi_y_vi: "Đối chiếu Bát Trạch + Huyền Không",
     goi_y_en: "Kua + Flying Star check",
     trang_thai: "san_sang",
-    badge_vi: "✓ Sẵn sàng", badge_en: "✓ Ready",
+    badge_vi: "Sẵn sàng", badge_en: "Ready",
     can_huong: true, can_sinh: true,
     neo_la_ban: "#do-huong",
     cung_mac_dinh: "Ly",
-    ket_luan_vi: "✓ Kiểm tra độ hợp Trạch–Mệnh và sao Đương Vượng tại cửa chính (theo hồ sơ nhà trên máy bạn).",
-    ket_luan_en: "✓ Checks Kua–House compatibility and timely Flying Stars at your main door.",
+    ket_luan_chung_vi: "Hướng dẫn chung (chưa phải kết quả nhà bạn): đo độ cửa chính để hệ thống đối chiếu Trạch–Mệnh và Huyền Không.",
+    ket_luan_chung_en: "General guide (not your home's verdict yet): measure your door degrees to compute Kua & Flying Stars.",
     viec_vi: [
       "0đ (Việc tuần): Giữ lối vào cửa chính sáng, gọn, không để giày dép hoặc tủ cao chắn khí.",
       "Nếu lệch tâm sơn > 3° (Kiêm hướng): Bấm đo lại 3 lần hoặc đối chiếu trên ảnh vệ tinh trước khi chốt."
@@ -53,8 +71,8 @@ const DANH_SACH_HOI: MucHoi[] = [
     ],
     vi_sao_bach_thoai_vi: "Cửa chính là nơi đón khí vào nhà. Khi biết chính xác độ la bàn và năm xây/dọn vào, hệ thống đối chiếu đồng thời tuổi chủ nhà (Bát Trạch) và sao tốt/xấu tại cửa (Huyền Không).",
     vi_sao_bach_thoai_en: "The main door brings energy into the home. With an accurate degree and move-in year, we check both your Kua match and the Flying Stars at the door.",
-    vi_sao_hoc_thuat_vi: "Định tuyến engine `/v1/phongthuy/do-huong` + `/v1/phongthuy/huyen-khong`: kiểm ranh sơn ±0.5° (không vong), >3° (kiêm hướng → Thế Quái), và du niên tại cung hướng.",
-    vi_sao_hoc_thuat_en: "Routes to `/v1/phongthuy/do-huong` + `/v1/phongthuy/huyen-khong`: checks ±0.5° void boundary, >3° replacement-star threshold, and Ba Zhai facing sector.",
+    vi_sao_hoc_thuat_vi: "Định tuyến engine `/api/phongthuy/do-huong` + `/api/phongthuy/huyen-khong`: kiểm ranh sơn ±0.5° (không vong), >3° (kiêm hướng → Thế Quái), và du niên tại cung hướng.",
+    vi_sao_hoc_thuat_en: "Routes to `/api/phongthuy/do-huong` + `/api/phongthuy/huyen-khong`: checks ±0.5° void boundary, >3° replacement-star threshold, and Ba Zhai facing sector.",
     nguon_vi: "Dương Trạch Tam Yếu (Du niên) · Thẩm Thị Huyền Không Học (Sơn–Hướng tinh).",
     nguon_en: "Yang Zhai San Yao (Eight Mansions) · Shen's Xuan Kong (Mountain & Facing Stars).",
     cau_hoi_chat_vi: "Cửa chính nhà tôi hướng hiện tại có hợp tuổi và vận nhà không?",
@@ -67,11 +85,11 @@ const DANH_SACH_HOI: MucHoi[] = [
     goi_y_vi: "Khảo sát 23 dấu hiệu & trần mức Veto",
     goi_y_en: "23 layout signs & veto cap",
     trang_thai: "san_sang",
-    badge_vi: "✓ Sẵn sàng", badge_en: "✓ Ready",
+    badge_vi: "Sẵn sàng", badge_en: "Ready",
     neo_la_ban: "#khao-sat-nha",
     cung_mac_dinh: "Trung cung",
-    ket_luan_vi: "⚠ Ưu tiên rà các lỗi Veto (WC Trung cung, Xuyên đường sát, Bếp–Cửa xung) trước khi bàn tới sao đẹp.",
-    ket_luan_en: "⚠ Check severe layout vetoes (center WC, door-to-balcony alignment) before optimizing stars.",
+    ket_luan_chung_vi: "Nguyên tắc chung: rà các lỗi Veto (WC Trung cung, Xuyên đường sát, Bếp–Cửa xung) ở mục Khảo sát nhà bên dưới trước khi bàn tới sao đẹp.",
+    ket_luan_chung_en: "General rule: check severe layout vetoes (center WC, door-to-balcony alignment) below before optimizing stars.",
     viec_vi: [
       "0đ: Kéo rèm nhẹ / đặt bình phong nếu cửa chính thông thẳng ban công (Xuyên đường sát).",
       "Chung cư: Hệ thống tự ẩn các gợi ý đập phá kết cấu (_giu_can_ho), chỉ giữ cách kê xếp 0đ."
@@ -96,12 +114,12 @@ const DANH_SACH_HOI: MucHoi[] = [
     goi_y_vi: "Hợp cung chung & hành Thông quan",
     goi_y_en: "Shared sectors & bridging element",
     trang_thai: "san_sang",
-    badge_vi: "✓ Sẵn sàng", badge_en: "✓ Ready",
+    badge_vi: "Sẵn sàng", badge_en: "Ready",
     can_sinh: true,
     neo_la_ban: "#nha-cua-ban",
     cung_mac_dinh: "Khảm",
-    ket_luan_vi: "✓ Dùng hướng cửa theo trụ cột, phòng ngủ riêng xoay theo từng người và dùng hành Thông quan điều hòa.",
-    ket_luan_en: "✓ Align the main door to the household lead, bedrooms per person, and balance via a bridging element.",
+    ket_luan_chung_vi: "Nguyên tắc phối hợp: dùng hướng cửa theo trụ cột, phòng ngủ riêng xoay theo từng người và dùng hành Thông quan điều hòa.",
+    ket_luan_chung_en: "General approach: align the main door to the household lead, bedrooms per person, and balance via a bridging element.",
     viec_vi: [
       "Nhập thêm năm sinh các thành viên ở mục Nhà của bạn để tính cung chung (`huong_chung`).",
       "Nếu Đông Tứ & Tây Tứ trái nhóm: giữ cửa chính hợp trụ cột, điều chỉnh hướng đầu giường ở phòng riêng."
@@ -126,12 +144,12 @@ const DANH_SACH_HOI: MucHoi[] = [
     goi_y_vi: "Lưu niên Tử Bạch + Thái Tuế + Kim Lâu/Hoang Ốc",
     goi_y_en: "Annual stars + Tai Sui + Folk renovation ages",
     trang_thai: "san_sang",
-    badge_vi: "✓ Sẵn sàng", badge_en: "✓ Ready",
+    badge_vi: "Sẵn sàng", badge_en: "Ready",
     can_huong: true, can_sinh: true,
     neo_la_ban: "#huyen-khong",
     cung_mac_dinh: "Ly",
-    ket_luan_vi: "⚠ Tránh khoan đục, sửa lớn tại cung có Ngũ Hoàng (5) & Thái Tuế lưu niên (tính từ Lập Xuân).",
-    ket_luan_en: "⚠ Avoid heavy drilling or renovation in the annual Five Yellow & Tai Sui sectors (from Start of Spring).",
+    ket_luan_chung_vi: "Nguyên tắc lưu niên: tránh khoan đục, sửa lớn tại cung có Ngũ Hoàng (5) & Thái Tuế năm nay (tính từ Lập Xuân).",
+    ket_luan_chung_en: "Annual rule: avoid heavy drilling or renovation in the annual Five Yellow & Tai Sui sectors (from Start of Spring).",
     viec_vi: [
       "0đ: Giữ cung có sao 5 Vàng / 2 Đen yên tĩnh, sạch thoáng; tránh gõ đập ồn ào.",
       "Xem tuổi làm nhà (Kim Lâu / Hoang Ốc / Tam Tai): tham khảo theo quan niệm dân gian Việt."
@@ -156,10 +174,10 @@ const DANH_SACH_HOI: MucHoi[] = [
     goi_y_vi: "Lưu tới 3 căn & đối chiếu Veto vs Sửa được",
     goi_y_en: "Save up to 3 homes & compare",
     trang_thai: "san_sang",
-    badge_vi: "✓ Sẵn sàng", badge_en: "✓ Ready",
+    badge_vi: "Sẵn sàng", badge_en: "Ready",
     neo_la_ban: "#hanh-trinh-nha",
-    ket_luan_vi: "✓ Lưu từng căn vào Hành trình nhà (tối đa 3 căn) để đặt cạnh nhau đối chiếu lỗi kết cấu vs lỗi bài trí.",
-    ket_luan_en: "✓ Save each candidate (up to 3 homes) to compare structural vetoes vs easy fixes side by side.",
+    ket_luan_chung_vi: "Cách so sánh: lưu từng căn vào Hành trình nhà (tối đa 3 căn) để đặt cạnh nhau đối chiếu lỗi kết cấu vs lỗi bài trí.",
+    ket_luan_chung_en: "How to compare: save each candidate (up to 3 homes) to compare structural vetoes vs easy fixes side by side.",
     viec_vi: [
       "Lưu căn 1 (hiện tại hoặc căn A), bấm 'Nhà khác' hoặc 'Lưu để so' rồi nhập căn B.",
       "Ưu tiên loại căn dính lỗi kết cấu khó sửa (WC Trung cung, khuyết góc lớn) trước khi xét hướng."
@@ -184,11 +202,11 @@ const DANH_SACH_HOI: MucHoi[] = [
     goi_y_vi: "Thành Môn (sẵn sàng) + Hoàng Lịch (đang hoàn thiện)",
     goi_y_en: "Castle Gate (ready) + Almanac (in progress)",
     trang_thai: "pending",
-    badge_vi: "⏳ Đang hoàn thiện", badge_en: "⏳ In progress",
+    badge_vi: "Đang hoàn thiện", badge_en: "In progress",
     neo_la_ban: "#huyen-khong",
     cung_mac_dinh: "Cấn",
-    ket_luan_vi: "⏳ Phần tìm vị trí Thành Môn (cửa phụ / quầy thu ngân) đã chạy trên La Kinh; phần xếp hạng ngày khai trương đang hoàn thiện.",
-    ket_luan_en: "⏳ Castle Gate (cashier/side-door) detection is live on the Flying Star chart; opening-date ranking is currently being finalized.",
+    ket_luan_chung_vi: "Phần tìm vị trí Thành Môn (cửa phụ / quầy thu ngân) đã chạy trên La Kinh; phần xếp hạng ngày khai trương đang hoàn thiện.",
+    ket_luan_chung_en: "Castle Gate (cashier/side-door) detection is live on the Flying Star chart; opening-date ranking is currently being finalized.",
     viec_vi: [
       "Mở La Kinh Huyền Không bên dưới để xem huy hiệu 'Thành Môn' (cung vượng tài phụ trợ cửa chính).",
       "Lịch chọn ngày khai trương (`hoang_lich.chon_ngay`) đang chờ hoàn tất rà soát kỹ thuật trước khi bật chính thức."
@@ -209,11 +227,11 @@ const DANH_SACH_HOI: MucHoi[] = [
 ];
 
 export function HoiGiXemNay({
-  coSinh,
+  sinh,
   onChonCung,
   onHoiTiep,
 }: {
-  coSinh: boolean;
+  sinh: SinhPayload;
   onChonCung?: (cung: string) => void;
   onHoiTiep?: (cauHoi: string) => void;
 }) {
@@ -221,8 +239,38 @@ export function HoiGiXemNay({
   const { c: t, en } = useChuPT();
   const [chon, setChon] = useState<MaIntentPT>("cua_chinh");
   const [bachThoai, setBachThoai] = useState(true);
+  const [doHuongKQ, setDoHuongKQ] = useState<DoHuongRes | null>(null);
+  const [hkKQ, setHkKQ] = useState<HuyenKhongRes | null>(null);
 
   const coHuong = Boolean(nha && (nha.huong_do != null || nha.huong));
+  const coSinh = Boolean(sinh);
+  const sinhKey = sinh ? `${sinh.birth_date}|${sinh.gender}|${sinh.moc_nam ?? "lap_xuan"}` : "";
+
+  // Gọi engine thật khi có dữ liệu nhà trên máy (HoSoNha) để hiển thị kết luận thực tế cho cua_chinh & han_nam.
+  useEffect(() => {
+    let huy = false;
+    if (nha?.huong_do != null) {
+      postJson<DoHuongRes>("/api/phongthuy/do-huong", {
+        do_huong: nha.huong_do,
+        ...(sinh ? { sinh } : {}),
+      }).then((kq) => { if (!huy) setDoHuongKQ(kq); }).catch(() => { if (!huy) setDoHuongKQ(null); });
+    } else {
+      setDoHuongKQ(null);
+    }
+
+    if (nha?.nam_xay && (nha.huong_do != null || nha.toa)) {
+      const doToa = nha.huong_do != null ? Math.round(((nha.huong_do + 180) % 360) * 10) / 10 : undefined;
+      postJson<HuyenKhongRes>("/api/phongthuy/huyen-khong", {
+        nam_xay: nha.nam_xay,
+        ...(doToa != null ? { do: doToa } : { toa: nha.toa }),
+      }).then((kq) => { if (!huy) setHkKQ(kq); }).catch(() => { if (!huy) setHkKQ(null); });
+    } else {
+      setHkKQ(null);
+    }
+    return () => { huy = true; };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [nha?.huong_do, nha?.nam_xay, nha?.toa, sinhKey]);
+
   const muc = DANH_SACH_HOI.find((x) => x.ma === chon) ?? DANH_SACH_HOI[0]!;
   const thieuHuong = Boolean(muc.can_huong && !coHuong);
   const thieuSinh = Boolean(muc.can_sinh && !coSinh);
@@ -233,7 +281,8 @@ export function HoiGiXemNay({
   };
 
   const moLaKinh = () => {
-    if (muc.cung_mac_dinh && onChonCung) onChonCung(muc.cung_mac_dinh);
+    const cungDich = (chon === "cua_chinh" && hkKQ?.huong.quai) ? hkKQ.huong.quai : muc.cung_mac_dinh;
+    if (cungDich && onChonCung) onChonCung(cungDich);
     const el = document.getElementById(muc.neo_la_ban?.replace("#", "") || "huyen-khong");
     el?.scrollIntoView({ behavior: "smooth", block: "start" });
     ghi("chart_interacted", { mo_dun: "phongthuy", kind: "hoi_gi_mo_la_kinh", intent: muc.ma });
@@ -308,13 +357,40 @@ export function HoiGiXemNay({
         })}
       </div>
 
-      {/* Thẻ trả lời trực diện + Lazy Intake */}
+      {/* Thẻ trả lời trực diện + kết quả tính thật từ Engine (nếu đủ dữ liệu) + Lazy Intake */}
       <div className="mt-4 rounded-xl border border-line/80 bg-bg/50 p-4 space-y-3" data-testid="hoi-gi-ket-qua" aria-live="polite">
-        <div className="flex flex-wrap items-center justify-between gap-2">
+        {chon === "cua_chinh" && doHuongKQ ? (
+          <div className="rounded-lg border border-jade/40 bg-jade/10 p-3 text-xs space-y-1" data-testid="hoi-gi-ket-qua-thuc">
+            <p className="text-sm font-medium text-fg">
+              {doHuongKQ.du_nien?.cat ? "✓ " : "⚠ "}
+              {en
+                ? `Measured door: ${doHuongKQ.do_huong}° (${doHuongKQ.huong} · ${doHuongKQ.son_huong})`
+                : `Hướng cửa đã đo: ${doHuongKQ.do_huong}° (${doHuongKQ.huong} · sơn ${doHuongKQ.son_huong})`}
+              {doHuongKQ.du_nien ? ` — ${doHuongKQ.du_nien.du_nien}` : ""}
+            </p>
+            {hkKQ && (
+              <p className="text-fg-muted">
+                {en
+                  ? `Flying Stars Period ${hkKQ.van}: ${hkKQ.cuc_ten} · Facing ${hkKQ.huong.quai}.`
+                  : `Huyền Không Vận ${hkKQ.van}: ${hkKQ.cuc_ten} · Hướng ${hkKQ.huong.quai}.`}
+              </p>
+            )}
+            {doHuongKQ.canh_bao_y && <p className="text-moon">{doHuongKQ.canh_bao_y}</p>}
+          </div>
+        ) : chon === "han_nam" && hkKQ ? (
+          <div className="rounded-lg border border-gold/40 bg-gold/10 p-3 text-xs space-y-1" data-testid="hoi-gi-ket-qua-thuc">
+            <p className="text-sm font-medium text-fg">
+              {en
+                ? `Annual ${hkKQ.luu_nien.nam}: ${hkKQ.luu_nien.sao_tam} in Centre · Period ${hkKQ.van} (${hkKQ.cuc_ten})`
+                : `Lưu niên ${hkKQ.luu_nien.nam}: ${hkKQ.luu_nien.sao_tam} nhập trung · Vận ${hkKQ.van} (${hkKQ.cuc_ten})`}
+            </p>
+            {hkKQ.cuc_y && <p className="text-fg-muted">{hkKQ.cuc_y.goi_y}</p>}
+          </div>
+        ) : (
           <p className="text-sm font-medium text-fg">
-            {en ? muc.ket_luan_en : muc.ket_luan_vi}
+            {en ? muc.ket_luan_chung_en : muc.ket_luan_chung_vi}
           </p>
-        </div>
+        )}
 
         {(thieuHuong || thieuSinh) && (
           <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-moon/40 bg-moon/10 px-3 py-2 text-xs text-fg" data-testid="hoi-gi-lazy-intake">

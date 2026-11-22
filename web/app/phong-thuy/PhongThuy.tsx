@@ -70,6 +70,7 @@ export function PhongThuy() {
   const [doToa, setDoToa] = useState<number | null>(null);
   const [doHuong, setDoHuong] = useState<number | null>(null);
   const [cungGoiY, setCungGoiY] = useState<string | null>(null);
+  const [cauDienSan, setCauDienSan] = useState<{ cau: string; lan: number } | null>(null);
   const [huongChot, setHuongChot] = useState<string | null>(null);
   // Y6: hỏi đáp đọc hồ sơ nhà trên máy (hướng + bố cục) → "bếp nhà tôi có sao không?" trả lời theo đúng nhà; không lưu.
   const hoSoNha = useHoSoNha();
@@ -84,9 +85,12 @@ export function PhongThuy() {
     <div>
       {dau}
       <HoiGiXemNay
-        coSinh={Boolean(sinh)}
+        sinh={sinh}
         onChonCung={(cung) => setCungGoiY(cung)}
-        onHoiTiep={() => document.getElementById("hoi-phong-thuy")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+        onHoiTiep={(cau) => {
+          setCauDienSan((p) => ({ cau, lan: (p?.lan ?? 0) + 1 }));
+          document.getElementById("hoi-phong-thuy")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }}
       />
       <div className="mx-auto mb-6 max-w-3xl" id="hanh-trinh-nha"><HanhTrinhNha mq={mq ? { quai: mq.quai, nhom: mq.nhom, so: mq.so } : null} coSinh={Boolean(sinh)} sinh={sinh} /></div>
       <section aria-label={t("aria.menh_quai")} id="menh-quai" className="mx-auto max-w-3xl scroll-mt-24 space-y-3">
@@ -157,6 +161,7 @@ export function PhongThuy() {
             loiChao={nhaHoi ? t("hoi.loi_chao_nha") : t("hoi.loi_chao")}
             goiY={GOI_Y}
             nhanO={t("hoi.nhan_o")}
+            cauDienSan={cauDienSan}
             gui={(cau) => hoiMang("/api/phongthuy/hoi", { cau_hoi: cau, ...(sinh ? { sinh } : {}), ...(nhaHoi ? { nha: nhaHoi } : {}) })}
           />
       </section>

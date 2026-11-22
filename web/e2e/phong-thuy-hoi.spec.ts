@@ -43,3 +43,27 @@ test("Hỏi gì xem nấy: bản tiếng Anh /en/feng-shui", async ({ page }) =>
   await expect(page.getByTestId("hoi-gi-intent-mo_quan")).toContainText("In progress");
   await expect(page.getByTestId("hoi-gi-ket-qua")).toContainText("being finalized");
 });
+
+test("Hỏi gì xem nấy: gọi API thật khi có HoSoNha, prefill KhungChat, giữ 1 H1 & thứ tự TRẢ LỜI NHANH", async ({ page }) => {
+  await napHoSo(page);
+  await page.addInitScript(() => {
+    localStorage.setItem("hbt.nha.v1", JSON.stringify({ v: 1, huong_do: 180, nam_xay: 2024, loai_nha: "nha_pho", cap_nhat_luc: "2026-11-22T00:00:00Z" }));
+  });
+  await page.goto("/phong-thuy");
+
+  await expect(page.getByTestId("hoi-gi-ket-qua-thuc")).toContainText("180°");
+  await expect(page.getByTestId("hoi-gi-ket-qua-thuc")).toContainText("Nam");
+
+  const seoCheck = await page.evaluate(() => {
+    const h1s = document.querySelectorAll("h1").length;
+    const html = document.body.innerHTML.toLowerCase();
+    const quickIdx = html.indexOf("trả lời nhanh");
+    const hoiIdx = html.indexOf("hoi-gi-xem-nay");
+    return { h1s, quickBeforeHoi: quickIdx !== -1 && hoiIdx !== -1 && quickIdx < hoiIdx };
+  });
+  expect(seoCheck.h1s).toBe(1);
+  expect(seoCheck.quickBeforeHoi).toBe(true);
+
+  await page.getByTestId("hoi-gi-hoi-tiep").click();
+  await expect(page.locator("#hoi-phong-thuy textarea")).toHaveValue(/Cửa chính nhà tôi/);
+});
