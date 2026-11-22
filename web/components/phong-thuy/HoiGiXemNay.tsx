@@ -3,13 +3,17 @@
 // (`hoidap/phongthuy.py`, `Y_DINH`, `huyen-khong`, `do-huong`) + gọi API thật khi có dữ liệu nhà (`HoSoNha`),
 // nhúng Lazy Intake khi thiếu dữ liệu & mở thẳng tới La Kinh 24 Sơn / KhungChat.
 import { useEffect, useState } from "react";
-import { ArrowDown, CheckCircle2, Clock, Compass, HelpCircle, MessageSquare, Sparkles, TriangleAlert } from "lucide-react";
+import { ArrowDown, CheckCircle2, Clock, Compass, HelpCircle, MapPin, MessageSquare, Smartphone, Sparkles, TriangleAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { postJson } from "@/lib/goi-api";
 import { ghi } from "@/lib/do-luong";
-import { useHoSoNha } from "@/lib/ho-so-nha";
+import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
 import { useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 import { gopTenHien, tenTheo, type TenHien } from "@/lib/ten-hien";
+import { MatLaBan, timSonTaiDo } from "@/components/huyen-hoc/DoHuongDienThoai";
+import { taiSon24, type MucSon24 } from "@/lib/la-ban-24-son";
+import type { TrangThaiCamBien } from "@/lib/la-kinh/use-la-ban-cam-bien";
 import { cn } from "@/lib/utils";
 import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
 
@@ -231,10 +235,14 @@ const DANH_SACH_HOI: MucHoi[] = [
 
 export function HoiGiXemNay({
   sinh,
+  camBien,
+  onChotHuong,
   onChonCung,
   onHoiTiep,
 }: {
   sinh: SinhPayload;
+  camBien?: TrangThaiCamBien;
+  onChotHuong?: (kq: { do_huong: number; huong: string }) => void;
   onChonCung?: (cung: string) => void;
   onHoiTiep?: (cauHoi: string) => void;
 }) {
@@ -244,6 +252,34 @@ export function HoiGiXemNay({
   const [bachThoai, setBachThoai] = useState(true);
   const [doHuongKQ, setDoHuongKQ] = useState<DoHuongRes | null>(null);
   const [hkKQ, setHkKQ] = useState<HuyenKhongRes | null>(null);
+  const [son24, setSon24] = useState<MucSon24[] | null>(null);
+  const [moNhanh, setMoNhanh] = useState(false);
+  const [doNhanh, setDoNhanh] = useState<number>(180);
+  const [nhapDo, setNhapDo] = useState("180");
+  const [namXayNhap, setNamXayNhap] = useState("2024");
+  const [dangChot, setDangChot] = useState(false);
+  const [loiNhanh, setLoiNhanh] = useState<string | null>(null);
+
+  useEffect(() => {
+    let huy = false;
+    taiSon24().then((ds) => { if (!huy && ds) setSon24(ds); });
+    return () => { huy = true; };
+  }, []);
+
+  useEffect(() => {
+    if (nha?.huong_do != null) {
+      setDoNhanh(nha.huong_do);
+      setNhapDo(String(Math.round(nha.huong_do)));
+    }
+    if (nha?.nam_xay) setNamXayNhap(String(nha.nam_xay));
+  }, [nha?.huong_do, nha?.nam_xay]);
+
+  useEffect(() => {
+    if (camBien?.ketQua && moNhanh) {
+      setDoNhanh(camBien.ketQua.mean);
+      setNhapDo(String(Math.round(camBien.ketQua.mean)));
+    }
+  }, [camBien?.ketQua, moNhanh]);
 
   const coHuong = Boolean(nha && (nha.huong_do != null || nha.huong));
   const coSinh = Boolean(sinh);
@@ -278,6 +314,52 @@ export function HoiGiXemNay({
   const thieuHuong = Boolean(muc.can_huong && !coHuong);
   const thieuSinh = Boolean(muc.can_sinh && !coSinh);
   const tn = tenTheo(gopTenHien(doHuongKQ?.ten_hien, hkKQ?.ten_hien), en);
+  const thieuNamXay = Boolean((chon === "cua_chinh" || chon === "han_nam") && !nha?.nam_xay);
+  const sonNhanh = timSonTaiDo(son24, doNhanh);
+
+  const chotNhanh = async () => {
+    const parsed = Number(nhapDo.replace(",", "."));
+    const d = Number.isFinite(parsed) && nhapDo.trim() !== "" ? parsed : doNhanh;
+    if (!(d >= 0 && d < 360)) {
+      setLoiNhanh(en ? "Enter a degree between 0 and 359.9." : "Nhập số độ từ 0 đến dưới 360.");
+      return;
+    }
+    setDangChot(true);
+    setLoiNhanh(null);
+    try {
+      const kq = await postJson<DoHuongRes>("/api/phongthuy/do-huong", {
+        do_huong: d,
+        ...(sinh ? { sinh } : {}),
+      });
+      setDoHuongKQ(kq);
+      const namParsed = Number(namXayNhap);
+      const namHopLe = Number.isInteger(namParsed) && namParsed >= 1900 && namParsed <= 2100 ? namParsed : undefined;
+      try {
+        luuHoSoNha({
+          huong_do: kq.do_huong,
+          huong: undefined,
+          ...(namHopLe && !nha?.nam_xay ? { nam_xay: namHopLe } : {}),
+        });
+      } catch { /* bỏ qua */ }
+      onChotHuong?.({ do_huong: kq.do_huong, huong: kq.huong });
+      setMoNhanh(false);
+      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "hoi_gi_chot_la_kinh", do_huong: kq.do_huong });
+    } catch (e) {
+      setLoiNhanh(e instanceof Error ? e.message : (en ? "Failed to compute direction." : "Không tính được hướng."));
+    } finally {
+      setDangChot(false);
+    }
+  };
+
+  const luuNamNhanh = () => {
+    const namParsed = Number(namXayNhap);
+    if (!(Number.isInteger(namParsed) && namParsed >= 1900 && namParsed <= 2100)) {
+      setLoiNhanh(en ? "Enter a valid build/move-in year (1900–2100)." : "Nhập năm xây/dọn vào hợp lệ (1900–2100).");
+      return;
+    }
+    setLoiNhanh(null);
+    try { luuHoSoNha({ nam_xay: namParsed }); } catch { /* bỏ qua */ }
+  };
 
   const chonMuc = (ma: MaIntentPT) => {
     setChon(ma);
@@ -396,23 +478,43 @@ export function HoiGiXemNay({
           </p>
         )}
 
-        {(thieuHuong || thieuSinh) && (
+        {(thieuHuong || thieuSinh || thieuNamXay) && (
           <div className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-moon/40 bg-moon/10 px-3 py-2 text-xs text-fg" data-testid="hoi-gi-lazy-intake">
             <div className="flex items-center gap-2">
               <TriangleAlert className="size-4 shrink-0 text-moon" aria-hidden />
               <span>
-                {thieuHuong ? t("hg.thieu_huong") : t("hg.thieu_sinh")}
+                {thieuHuong
+                  ? t("hg.thieu_huong")
+                  : thieuNamXay
+                    ? (en ? "Add your house build/move-in year to calculate Flying Stars:" : "Bổ sung năm xây / nhập trạch để lập Huyền Không ngay:")
+                    : t("hg.thieu_sinh")}
               </span>
             </div>
-            <div className="flex flex-wrap gap-1.5">
-              {thieuHuong && (
-                <a
-                  href="#do-huong"
+            <div className="flex flex-wrap items-center gap-1.5">
+              {muc.can_huong && (
+                <button
+                  type="button"
+                  onClick={() => setMoNhanh((v) => !v)}
+                  data-testid="hoi-gi-bat-la-kinh"
                   className="inline-flex items-center gap-1 rounded-full border border-gold/60 bg-gold/15 px-2.5 py-1 font-medium text-gold hover:bg-gold/25"
                 >
                   <Compass className="size-3" aria-hidden />
-                  {t("hg.do_ngay")}
-                </a>
+                  {moNhanh ? (en ? "Hide Quick Compass" : "Thu gọn La Kinh") : t("hg.do_ngay")}
+                </button>
+              )}
+              {thieuNamXay && !moNhanh && (
+                <div className="inline-flex items-center gap-1">
+                  <Input
+                    aria-label={en ? "Quick build year" : "Năm xây nhanh (Hỏi gì xem nấy)"}
+                    value={namXayNhap}
+                    onChange={(e) => setNamXayNhap(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                    className="h-7 w-20 text-xs"
+                    data-testid="hoi-la-kinh-nam-xay"
+                  />
+                  <Button type="button" size="sm" variant="secondary" onClick={luuNamNhanh} className="h-7 px-2 text-xs" data-testid="hoi-la-kinh-luu-nam">
+                    {en ? "Apply" : "Áp dụng"}
+                  </Button>
+                </div>
               )}
               {thieuSinh && (
                 <a
@@ -422,6 +524,84 @@ export function HoiGiXemNay({
                   {t("hg.nhap_sinh")}
                 </a>
               )}
+            </div>
+          </div>
+        )}
+
+        {muc.can_huong && moNhanh && (
+          <div className="rounded-xl border border-gold/40 bg-surface/50 p-3.5 space-y-3" data-testid="hoi-la-kinh-panel">
+            <div className="grid items-center gap-4 sm:grid-cols-[auto_1fr]">
+              <div>
+                <MatLaBan
+                  compact
+                  doHuong={doNhanh}
+                  saiSoDo={camBien?.ketQua?.saiSoDo ?? 0}
+                  son24={son24}
+                  onXoay={(d) => {
+                    setDoNhanh(d);
+                    setNhapDo(String(Math.round(d)));
+                    setLoiNhanh(null);
+                  }}
+                />
+                <p className="mt-1 text-center font-serif text-lg text-gold" data-testid="hoi-la-kinh-do-so">
+                  {Math.round(doNhanh)}°
+                  {sonNhanh ? <span className="ml-1.5 text-xs font-sans text-fg-muted">· {en ? sonNhanh.ky_hieu_han : sonNhanh.son} ({sonNhanh.nguyen})</span> : null}
+                </p>
+              </div>
+              <div className="space-y-2.5 text-xs">
+                <p className="text-fg-muted">
+                  {en
+                    ? "Rotate the 24-Mountain dial, measure with your phone compass, or enter degrees directly to compute Kua & Flying Stars right here."
+                    : "Xoay mặt La Kinh 24 sơn, bấm đo bằng cảm biến điện thoại hoặc nhập số độ để tính Bát Trạch & Huyền Không ngay tại đây."}
+                </p>
+                {camBien?.dangDo && camBien.ketQua && (
+                  <p className="text-[11px] text-fg-muted" data-testid="hoi-la-kinh-on-dinh">
+                    {en ? `Stability (R): ${camBien.ketQua.onDinhPct}% · ±${camBien.ketQua.saiSoDo}°` : `Độ ổn định (R): ${camBien.ketQua.onDinhPct}% · ±${camBien.ketQua.saiSoDo}°`}
+                    {!camBien.ketQua.phang ? (en ? " · Hold phone flatter" : " · Giữ máy phẳng hơn") : ""}
+                  </p>
+                )}
+                <div className="flex flex-wrap items-center gap-2">
+                  {camBien && (
+                    <Button type="button" size="sm" variant="secondary" onClick={() => void camBien.batDau()} data-testid="hoi-la-kinh-cam-bien">
+                      <Smartphone className="mr-1 size-3.5" aria-hidden />
+                      {camBien.dangDo ? (en ? "Sampling..." : "Đang đo...") : (en ? "Phone compass" : "Đo điện thoại")}
+                    </Button>
+                  )}
+                  <Input
+                    aria-label={en ? "Door degree" : "Độ hướng cửa"}
+                    inputMode="decimal"
+                    value={nhapDo}
+                    onChange={(e) => {
+                      const val = e.target.value.replace(/[^\d.,]/g, "").slice(0, 6);
+                      setNhapDo(val);
+                      const num = Number(val.replace(",", "."));
+                      if (val !== "" && Number.isFinite(num) && num >= 0 && num < 360) setDoNhanh(num);
+                    }}
+                    className="h-8 w-24 text-xs"
+                    data-testid="hoi-la-kinh-nhap"
+                  />
+                  {thieuNamXay && (
+                    <Input
+                      aria-label={en ? "Quick build year" : "Năm xây nhanh (Hỏi gì xem nấy)"}
+                      value={namXayNhap}
+                      onChange={(e) => setNamXayNhap(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                      placeholder="2024"
+                      className="h-8 w-20 text-xs"
+                      data-testid="hoi-la-kinh-nam-xay"
+                    />
+                  )}
+                  <Button type="button" size="sm" onClick={() => void chotNhanh()} disabled={dangChot} data-testid="hoi-la-kinh-chot">
+                    {dangChot ? (en ? "Saving..." : "Đang tính...") : (en ? "Lock direction" : "Chốt hướng")}
+                  </Button>
+                </div>
+                <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-fg-faint">
+                  <span>{en ? "Magnetic north may drift indoors." : "Cảm biến đo Bắc từ; nên đối chiếu ảnh vệ tinh."}</span>
+                  <a href="#do-huong" className="inline-flex items-center gap-1 text-gold hover:underline">
+                    <MapPin className="size-3" aria-hidden /> {en ? "Satellite cross-check" : "Chấm ảnh vệ tinh"}
+                  </a>
+                </div>
+                {(loiNhanh || camBien?.loi) && <p className="text-cinnabar">{loiNhanh ?? camBien?.loi}</p>}
+              </div>
             </div>
           </div>
         )}

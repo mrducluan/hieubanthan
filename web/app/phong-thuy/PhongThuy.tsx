@@ -26,6 +26,7 @@ import { nhaGui, useHoSoNha } from "@/lib/ho-so-nha";
 import { ChanQr } from "@/components/khung/ChanQr";
 import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 import { TenHienProvider } from "@/components/khung/TenHien";
+import { useLaBanCamBien } from "@/lib/la-kinh/use-la-ban-cam-bien";
 import type { TenHien } from "@/lib/ten-hien";
 
 interface MenhQuai {
@@ -72,6 +73,12 @@ export function PhongThuy() {
   const [cungGoiY, setCungGoiY] = useState<string | null>(null);
   const [cauDienSan, setCauDienSan] = useState<{ cau: string; lan: number } | null>(null);
   const [huongChot, setHuongChot] = useState<string | null>(null);
+  const camBienChung = useLaBanCamBien(undefined, {
+    khongLaBan: t("dh.loi_khong_la_ban"),
+    quyenBiTuChoi: t("dh.loi_quyen"),
+    loiXinQuyen: t("dh.loi_xin_quyen"),
+    khongTra: t("dh.loi_khong_tra"),
+  });
   // Y6: hỏi đáp đọc hồ sơ nhà trên máy (hướng + bố cục) → "bếp nhà tôi có sao không?" trả lời theo đúng nhà; không lưu.
   const hoSoNha = useHoSoNha();
   const nhaHoi = hoSoNha && (hoSoNha.huong_do != null || hoSoNha.huong || hoSoNha.bo_cuc) ? nhaGui(hoSoNha).nha : null;
@@ -86,6 +93,12 @@ export function PhongThuy() {
       {dau}
       <HoiGiXemNay
         sinh={sinh}
+        camBien={camBienChung}
+        onChotHuong={(k) => {
+          setDoHuong(k.do_huong);
+          setHuongChot(k.huong);
+          setDoToa(Math.round(((k.do_huong + 180) % 360) * 10) / 10);
+        }}
         onChonCung={(cung) => setCungGoiY(cung)}
         onHoiTiep={(cau) => {
           setCauDienSan((p) => ({ cau, lan: (p?.lan ?? 0) + 1 }));
@@ -128,11 +141,17 @@ export function PhongThuy() {
           )}
       </section>
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="do-huong">
-        <DoHuongDienThoai sinh={sinh} laBan={mq ? { quai: mq.quai, bang: mq.bang_huong, huongCat: mq.huong_cat, duNienY: mq.du_nien_y } : null}
-          onChot={(k) => { setDoHuong(k.do_huong); setHuongChot(k.huong); }} onDungToa={(d) => {
-          setDoToa(d);
-          document.getElementById("huyen-khong")?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }} />
+        <DoHuongDienThoai
+          sinh={sinh}
+          camBienNgoai={camBienChung}
+          doBenNgoai={doHuong}
+          laBan={mq ? { quai: mq.quai, bang: mq.bang_huong, huongCat: mq.huong_cat, duNienY: mq.du_nien_y } : null}
+          onChot={(k) => { setDoHuong(k.do_huong); setHuongChot(k.huong); }}
+          onDungToa={(d) => {
+            setDoToa(d);
+            document.getElementById("huyen-khong")?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+        />
       </div>
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24">
         <DoViTriVat sinh={sinh} />

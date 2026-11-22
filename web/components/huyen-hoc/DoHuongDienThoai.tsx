@@ -401,8 +401,8 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
           {doSong != null && (
             <div className="mx-auto mt-1.5 max-w-[16.5rem] rounded-xl border border-line/70 bg-bg/40 px-2.5 py-1.5 text-[11px] text-fg-muted space-y-0.5" data-testid="la-ban-hud">
               <div className="flex items-center justify-between gap-2">
-                <span>{en ? "Facing / Sitting" : "Hướng / Tọa"}</span>
-                <b className="text-fg">{Math.round(doSong)}° / {(Math.round(doSong) + 180) % 360}°</b>
+                <span>{en ? "Sitting (back)" : "Tọa (lưng nhà)"}</span>
+                <b className="text-fg">{(Math.round(doSong) + 180) % 360}°</b>
               </div>
               {sonSong && (
                 <div className="flex items-center justify-between gap-2">

@@ -100,3 +100,39 @@ test("Phase 2: Huyền Không ▶ Khởi Bàn (reduced-motion) & 4 lớp sao + L
   await expect(page.getByTestId("la-ban-sai-so")).toContainText("±");
   await expect(page.getByTestId("la-ban-doi-chieu-ve-tinh")).toBeVisible();
 });
+
+test("Phase 3: HoiGiXemNay Inline Quick La Kinh -> cảm biến 180° -> Chốt tại chỗ -> cập nhật Huyền Không & DoHuong", async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem("hbt.hoso.v1", JSON.stringify({
+      v: 1, ho_ten: "Test", ngay: 17, thang: 5, nam: 1990, gio: "12:30", gioi_tinh: "nam", noi_sinh: "ha-noi", tao_luc: "2026-09-30T00:00:00Z",
+    }));
+    localStorage.removeItem("hbt.nha.v1");
+  });
+  await page.goto("/phong-thuy");
+
+  // Chưa có HoSoNha -> hiện Lazy Intake & nút mở La Kinh nhanh
+  await expect(page.getByTestId("hoi-gi-lazy-intake")).toBeVisible();
+  await page.getByTestId("hoi-gi-bat-la-kinh").click();
+  await expect(page.getByTestId("hoi-la-kinh-panel")).toBeVisible();
+  await expect(page.getByTestId("mini-la-ban-keo")).toBeVisible();
+
+  // Bật đo điện thoại & bắn sự kiện cảm biến 90° (Đông · sơn Mão)
+  await page.getByTestId("hoi-la-kinh-cam-bien").click();
+  await expect(async () => {
+    await page.evaluate(() => {
+      const evName = "ondeviceorientationabsolute" in window ? "deviceorientationabsolute" : "deviceorientation";
+      window.dispatchEvent(new DeviceOrientationEvent(evName, { alpha: 270, beta: 3, gamma: -2, absolute: true }));
+    });
+    await expect(page.getByTestId("hoi-la-kinh-do-so")).toContainText("90°", { timeout: 500 });
+  }).toPass();
+  await expect(page.getByTestId("hoi-la-kinh-on-dinh")).toContainText("%");
+
+  // Nhập năm xây 2024 và Chốt ngay trong HoiGiXemNay
+  await page.getByTestId("hoi-la-kinh-nam-xay").fill("2024");
+  await page.getByTestId("hoi-la-kinh-chot").click();
+
+  await expect(page.getByTestId("hoi-gi-ket-qua-thuc")).toContainText("90°");
+  await expect(page.getByTestId("hoi-gi-ket-qua-thuc")).toContainText("Mão");
+  await expect(page.getByTestId("hoi-gi-ket-qua-thuc")).toContainText("Vận 9");
+  await expect(page.getByTestId("la-ban-do-so")).toContainText("90°");
+});
