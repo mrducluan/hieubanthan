@@ -325,7 +325,7 @@ export function BatTu() {
       {/* CRO-1: "Sách xưa" dời xuống dưới bài luận — người mới vào từ quảng cáo đọc lời đời thường (chương 1) trước,
           nguyên văn cổ thư sau. */}
       {ls && (ls.sach_xua?.length || (!en && ls.sach_ghi)) ? (
-        <section aria-label="Sách xưa" className="mt-10 space-y-4">
+        <section aria-label={en ? "Classical texts" : "Sách xưa"} className="mt-10 space-y-4">
           <SachXuaNoi ds={ls.sach_xua} moDun="battu" />
           {!en && <SachXuaGhi khoi={ls.sach_ghi} moDun="battu" tieuDe="Sách xưa ghi gì về các sao và hành của bạn" />}
         </section>

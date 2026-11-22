@@ -86,7 +86,7 @@ test("Bát tự: dòng 10 năm hai cách + 12 tháng tới theo tiết", async (
   const BC = FX_BT.bao_cao;
   const c = vh(BC);
   await mo(page, "bat-tu", BC);
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible();   // CRO-1: Bát tự tự mở chương 1 (không còn nút mở)
   const ch = page.getByTestId("lg-chuong-van_han");
   await ch.getByTestId("lg-mo-chuong").click();
   const dong = ch.getByTestId("dong-muoi-nam");
@@ -107,7 +107,7 @@ test("Bát tự: dòng 10 năm hai cách + 12 tháng tới theo tiết", async (
 test("điện thoại 360px: dòng 10 năm cuộn trong khung riêng, trang không cuộn ngang", async ({ page }) => {
   await page.setViewportSize({ width: 360, height: 780 });
   await mo(page, "bat-tu", FX_BT.bao_cao);
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible();   // CRO-1: Bát tự tự mở chương 1 (không còn nút mở)
   await page.getByTestId("lg-chuong-van_han").getByTestId("lg-mo-chuong").click();
   const dong = page.getByTestId("dong-muoi-nam");
   await dong.scrollIntoViewIfNeeded();
