@@ -303,6 +303,8 @@ export interface Media {
    * Ảnh tự vẽ/tự chụp ghi "Hiểu Bản Thân". Ảnh lấy nơi khác phải có quyền dùng.
    */
   nguon_anh?: string | null;
+  prefix?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -1723,6 +1725,8 @@ export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   chu_thich?: T;
   nguon_anh?: T;
+  prefix?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;

@@ -59,7 +59,13 @@ export const BIEU_TUONG_CAM_KET = [
 
 /** Chữ chân trang: chặn vùng cấm, liên hệ gõ tay, tên nội bộ, tự nhận thẩm định (luật chung kiem-dinh.ts). */
 const kiemChanTrang: GlobalBeforeChangeHook = ({ data }) => {
-  const thieu = thieuTru(data.cot);
+  // Hook này chạy TRƯỚC bước kiểm từng ô của Payload: còn liên kết sai (đường dẫn lạ, thiếu bài / chuyên mục) thì để bước kiểm
+  // ô báo lỗi cụ thể của nó, không đè bằng lỗi "thiếu trang trụ".
+  const lk = (Array.isArray(data.cot) ? data.cot : []).flatMap((c: { lien_ket?: unknown }) => (Array.isArray(c?.lien_ket) ? c.lien_ket : [])) as
+    { loai?: string; duong_dan?: unknown; bai?: unknown; chuyen_muc?: unknown }[];
+  const hopLe = lk.every((l) => ((l?.loai ?? "duong_dan") === "duong_dan" ? typeof l?.duong_dan === "string" && DUONG_TRONG_SITE.test(l.duong_dan)
+    : l?.loai === "bai" ? l.bai != null : l?.chuyen_muc != null));
+  const thieu = hopLe ? thieuTru(data.cot) : [];
   if (thieu.length) throw new APIError(`Chưa lưu được — chân trang phải có đủ trang trụ các môn huyền học (tốt cho SEO). Còn thiếu: ${thieu.join(", ")}`, 400, null, true);
   const th = (data.thuong_hieu ?? {}) as { gioi_thieu?: string; cam_ket?: { chu?: string }[] };
   const van = [th.gioi_thieu, ...(th.cam_ket ?? []).map((c) => c?.chu), data.mien_tru, data.nhan_ung_ho]
