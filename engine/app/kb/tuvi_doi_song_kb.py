@@ -60,11 +60,14 @@ def ten_doi_thuong(cung: str) -> str | None:
 
 
 def sao_linh_vuc(sao: str, cung: str, nhom: str) -> dict | None:
-    """nhom = "sang" | "ham" → {"manh", "de_vap", "loi_khuyen"} (ô nào thiếu thì thiếu)."""
+    """nhom = "sang" | "ham" → {"manh", "de_vap", "loi_khuyen", "source_ref"?} (ô nào thiếu thì thiếu)."""
     m = _muc(_lay("sao_linh_vuc", sao, cung, nhom))
     if not m:
         return None
-    return {k: _chuoi(m.get(k)) for k in ("manh", "de_vap", "loi_khuyen")}
+    ra = {k: _chuoi(m.get(k)) for k in ("manh", "de_vap", "loi_khuyen")}
+    if isinstance(m.get("source_ref"), dict):
+        ra["source_ref"] = m["source_ref"]
+    return ra
 
 
 def hoa_linh_vuc(hoa: str, cung: str) -> dict | None:

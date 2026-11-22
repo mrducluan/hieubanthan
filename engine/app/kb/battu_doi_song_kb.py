@@ -52,7 +52,12 @@ def _muc(x) -> dict | None:
 
 
 def _chuoi_hoa(m: dict | None, *khoa: str) -> dict | None:
-    return {k: _chuoi(m.get(k)) for k in khoa} if m else None
+    if not m:
+        return None
+    ra = {k: _chuoi(m.get(k)) for k in khoa}
+    if isinstance(m.get("source_ref"), dict):
+        ra["source_ref"] = m["source_ref"]
+    return ra
 
 
 def meta() -> dict:
@@ -107,7 +112,10 @@ def cach(ma: str) -> dict | None:
 
 def hanh(h: str) -> dict:
     m = _muc(_lay("hanh", h)) or {}
-    return {k: _chuoi(v) for k, v in m.items()}
+    ra = {k: _chuoi(v) for k, v in m.items() if k != "source_ref"}
+    if isinstance(m.get("source_ref"), dict):
+        ra["source_ref"] = m["source_ref"]
+    return ra
 
 
 def ngoai_cach(ma: str) -> dict | None:

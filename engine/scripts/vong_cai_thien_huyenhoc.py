@@ -146,6 +146,7 @@ def kiem_kb() -> dict[str, list[str]]:
 
 def kiem_tuvi_ds_duality() -> list[str]:
     """Build-time duality & citation lint cho Pilot Tử vi đời sống (14 chính tinh × 12 cung × sáng/hãm)."""
+    from app.luangiai import sach_ghi_mon as sgm  # noqa: PLC0415
     tv_ds_path = KB_DIR / "tuvi_doi_song_kb.json"
     if not tv_ds_path.exists():
         return []
@@ -166,8 +167,10 @@ def kiem_tuvi_ds_duality() -> list[str]:
                     nhom = ref.get("nhom")
                     if st == "sang" and nhom != "A":
                         slv_loi.append(f"tuvi_doi_song.{sao}.{cung}.{st}: source_ref lệch tông (sang cần nhóm A, gặp {nhom})")
-                    if st == "ham" and nhom not in ("B", "C"):
-                        slv_loi.append(f"tuvi_doi_song.{sao}.{cung}.{st}: source_ref lệch tông (ham cần nhóm B/C, gặp {nhom})")
+                    if st == "ham" and nhom != "B":
+                        slv_loi.append(f"tuvi_doi_song.{sao}.{cung}.{st}: source_ref lệch tông/nhóm C tĩnh (ham cần nhóm B, gặp {nhom})")
+                    if ref.get("han") and not sgm._dieu_kien_dat(ref["han"], sao, {sao}, set(), None):
+                        slv_loi.append(f"tuvi_doi_song.{sao}.{cung}.{st}: source_ref có điều kiện sao phụ/địa chi không gắn tĩnh được")
     return slv_loi
 
 
@@ -188,8 +191,11 @@ def kiem_battu_ds_duality() -> list[str]:
     for nhom_k in ("noi_bat", "hanh", "than_sat"):
         for ma, o in (bt_ds.get(nhom_k) or {}).items():
             ref = (o or {}).get("source_ref") if isinstance(o, dict) else None
-            if ref is not None and not (ref.get("source_id") and ref.get("han") and ref.get("am")):
-                loi.append(f"battu_doi_song.{nhom_k}.{ma}: source_ref thiếu source_id/han/am")
+            if ref is not None:
+                if not (ref.get("source_id") and ref.get("han") and ref.get("am")):
+                    loi.append(f"battu_doi_song.{nhom_k}.{ma}: source_ref thiếu source_id/han/am")
+                if ref.get("nhom") == "C":
+                    loi.append(f"battu_doi_song.{nhom_k}.{ma}: source_ref không gắn tĩnh nhóm C (cần lọc tuổi < 18)")
     return loi
 
 

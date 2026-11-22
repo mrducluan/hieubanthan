@@ -74,16 +74,52 @@ def test_kiem_han_viet_chan_thieu_va_nhay_cam():
     assert "cum_cam" in mas or "cam_tu_sach_ghi" in mas
 
 
-def test_doc_sqlite_tam(tmp_path: Path):
+def test_doc_sqlite_allowlist_va_blocklist(tmp_path: Path):
     db = tmp_path / "sample.sqlite"
     con = sqlite3.connect(db)
-    con.execute("CREATE TABLE rules (rule_id TEXT, book_code TEXT, text_zh_hant TEXT, translation_vi TEXT)")
-    con.execute("INSERT INTO rules VALUES ('r1', 'b1', '為人忠厚', NULL)")
-    con.execute("INSERT INTO rules VALUES ('r2', 'b1', '已翻譯', 'Đã dịch')")
+    con.execute("CREATE TABLE rules (rule_id TEXT, source_code TEXT, text_zh_hant TEXT, translation_vi TEXT)")
+    con.execute("INSERT INTO rules VALUES ('r1', 'BAZI_QLMG_HANS', '為人忠厚', NULL)")
+    con.execute("INSERT INTO rules VALUES ('r2', 'BAZI_SKILL_MD', '現代筆記', NULL)")
+    con.execute("INSERT INTO rules VALUES ('r3', 'FXF_NOTES_NEWTON', '現代註釋', NULL)")
+    con.execute("INSERT INTO rules VALUES ('r4', 'BAZI_QLMG_HANS', '已翻譯', 'Đã dịch')")
     con.commit()
     con.close()
 
     rows = han_viet.doc_sqlite(db, "rules", limit=10)
     assert list(rows.keys()) == ["r1"]
     assert rows["r1"]["han"] == "為人忠厚"
-    assert rows["r1"]["nguon"] == "b1"
+    assert rows["r1"]["nguon"] == "BAZI_QLMG_HANS"
+
+    # Explicit allow_sources overrides default
+    rows_explicit = han_viet.doc_sqlite(db, "rules", limit=10, allow_sources=("BAZI_QLMG_HANS",))
+    assert list(rows_explicit.keys()) == ["r1"]
+
+
+def test_han_nang_va_uoc_luong():
+    ok_item = {
+        "am": "Thử",
+        "nghia_sat": "Thử",
+        "nature_meaning": "Bạn cần giữ nhịp ổn định hơn khi gặp biến động.",
+        "manh": "Giúp bạn rèn sức bền trước thay đổi.",
+        "de_vap": "Dễ mệt mỏi nếu gồng quá lâu.",
+        "loi_khuyen": "Nghỉ ngơi đúng giờ trong tuần này.",
+        "nhom": "A",
+    }
+    # Chữ Hán nặng (刑) không được gắn nhom="A"
+    loi = han_viet.kiem_han_viet(ok_item, han_goc="刑剋孤寡")
+    assert any(l["ma"] == "han_nang_sai_nhom" for l in loi)
+
+    # Trong chuyen_han_viet, mục có chữ Hán nặng tự gắn cờ _can_duyet_nhom_c
+    kq = han_viet.chuyen_han_viet(
+        {"nang_1": {"han": "孤寡刑剋", "nguon": "BAZI_QLMG_HANS", "linh_vuc": "chung"}},
+        goi=_mock_goi,
+        kiem_dinh=True,
+    )
+    assert kq["ket_qua"]["nang_1"].get("_can_duyet_nhom_c") is True
+
+    uoc = han_viet.uoc_luong_chi_phi({"a": {"han": "為人忠厚老成"}, "b": {"han": "天機入命"}}, kiem_dinh=True)
+    assert uoc["so_muc"] == 2
+    assert uoc["so_lo"] == 1
+    assert uoc["so_luot"] == 3
+    assert uoc["token_vao_uoc_luong"] > 0
+    assert uoc["chi_phi_usd_uoc_luong"] >= 0

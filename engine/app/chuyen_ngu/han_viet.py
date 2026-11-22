@@ -25,6 +25,23 @@ LO = 20
 DIEM_DAT = 0.9
 DOA = ("đoản mệnh", "chết", "ung thư", "tai nạn", "phá sản", "ly hôn", "tự tử", "bệnh nặng")
 
+# Allowlist cổ thư đã xác minh trong các kho `projects/*-kb/data/*.sqlite`.
+NGUON_CO_THU_MAC_DINH: frozenset[str] = frozenset({
+    "BAZI_QLMG_HANS",
+    "CLASSICAL_FXD", "CLASSICAL_FXF", "CLASSICAL_XKMZ", "CLASSICAL_ZBD",
+    "SHENSHI_XUANKONG_SHANG_BAIHEMING", "YOU_ZHAIYUN_XINAN_1928",
+    "YANGZHAI_SANYAO_CHENZIMING",
+    "SWH_ZYYCX_SHANG", "SWH_ZYYCX_XIA",
+    "WHY_FLYCDY", "WHY_FLZYYF", "WHY_JFFYY", "WHY_LXSW", "WHY_ZSBYS",
+    "LRY_127_V_HANT", "LRY_672_HANS", "LRY_672_HANT_SCAN",
+    "WTZ_SHENZAO_HANS", "WTZ_ANXING_HANS",
+})
+
+# Blocklist nguồn ghi chú hiện đại / skill markdown / case study — tuyệt đối không đưa vào pipeline cổ thư.
+NGUON_HIEN_DAI_LOAI: frozenset[str] = frozenset({
+    "BAZI_SKILL_MD", "BAZI_CASES_JSON", "VOIDFORALL_FS_SKILL", "FXF_NOTES_NEWTON",
+})
+
 QUY_TAC_1 = """Bạn là chuyên gia Hán Nôm và biên tập viên chuyển thể ngôn ngữ tự nhiên cho website chiêm nghiệm văn hoá hieuban.com.
 Với mỗi mục trong INPUT ({id: {"han": nguyên văn chữ Hán, "nguon": tên sách, "linh_vuc": lĩnh vực}}), hãy trả về JSON {id: {...}} gồm ĐÚNG 6 trường:
 - "am": phiên âm Hán-Việt chuẩn xác của nguyên văn "han".
@@ -55,8 +72,15 @@ Với mỗi id trong INPUT ({"goc": ..., "ban_dich": ...}), KHÔNG viết lại;
 
 
 def doc_sqlite(db_path: str | Path, table: str, *, limit: int = 20, offset: int = 0,
-               exclude_sources: tuple[str, ...] = ("BAZI_SKILL_MD",)) -> dict[str, dict]:
-    """Đọc các mục chưa dịch từ kho `*-kb/*.sqlite` (read-only) thành đầu vào chuẩn cho `chuyen_han_viet`."""
+               allow_sources: tuple[str, ...] | None = None,
+               only_classical: bool = True) -> dict[str, dict]:
+    """Đọc các mục chưa dịch từ kho `*-kb/*.sqlite` (read-only) thành đầu vào chuẩn cho `chuyen_han_viet`.
+
+    Mặc định (`only_classical=True`):
+    - Luôn loại trừ `NGUON_HIEN_DAI_LOAI` (skill markdown, case study, ghi chú hiện đại).
+    - Nếu bảng có mã nguồn khớp `NGUON_CO_THU_MAC_DINH`, chỉ lấy các mã thuộc allowlist cổ thư đó.
+    - Có thể truyền `allow_sources=("...",)` để khoá chặt đúng một hoặc vài bộ cổ thư.
+    """
     p = Path(db_path)
     con = sqlite3.connect(f"file:{p}?mode=ro", uri=True)
     con.row_factory = sqlite3.Row
@@ -69,10 +93,26 @@ def doc_sqlite(db_path: str | Path, table: str, *, limit: int = 20, offset: int 
         if "translation_vi" in cols:
             clauses.append("(translation_vi IS NULL OR trim(translation_vi) = '')")
         params: list = []
-        if src_col and exclude_sources:
-            ph = ",".join("?" for _ in exclude_sources)
-            clauses.append(f'"{src_col}" NOT IN ({ph})')
-            params.extend(exclude_sources)
+        if src_col:
+            if allow_sources:
+                ph = ",".join("?" for _ in allow_sources)
+                clauses.append(f'"{src_col}" IN ({ph})')
+                params.extend(allow_sources)
+            elif only_classical:
+                distinct_srcs = {
+                    str(r[0]) for r in con.execute(f'SELECT DISTINCT "{src_col}" FROM "{table}"').fetchall()
+                    if r[0] is not None
+                }
+                if distinct_srcs & NGUON_CO_THU_MAC_DINH:
+                    allowed = sorted(distinct_srcs & NGUON_CO_THU_MAC_DINH)
+                    ph = ",".join("?" for _ in allowed)
+                    clauses.append(f'"{src_col}" IN ({ph})')
+                    params.extend(allowed)
+                elif NGUON_HIEN_DAI_LOAI:
+                    blocked = sorted(NGUON_HIEN_DAI_LOAI)
+                    ph = ",".join("?" for _ in blocked)
+                    clauses.append(f'"{src_col}" NOT IN ({ph})')
+                    params.extend(blocked)
         where = ("WHERE " + " AND ".join(clauses)) if clauses else ""
         sel_src = f'"{src_col}"' if src_col else "'co_thu' as src"
         rows = con.execute(
@@ -85,14 +125,42 @@ def doc_sqlite(db_path: str | Path, table: str, *, limit: int = 20, offset: int 
         con.close()
 
 
+def uoc_luong_chi_phi(muc_goc: dict[str, dict], *, kiem_dinh: bool = True,
+                      gia_vao_1m: float = 0.5, gia_ra_1m: float = 1.5) -> dict:
+    """Ước lượng số lô, token đầu vào/đầu ra và chi phí USD (tham khảo) trước khi chạy LLM thật."""
+    so_muc = len(muc_goc)
+    so_lo = (so_muc + LO - 1) // LO if so_muc else 0
+    ky_tu_han = sum(len((v.get("han") or "")) for v in muc_goc.values())
+    # Ước lượng bảo thủ: 1 chữ Hán ~ 1.5 token; prompt hệ thống ~ 650 token/lô; đầu ra ~ 220 token/mục.
+    tok_vao_1 = int(ky_tu_han * 1.5 + so_lo * 650)
+    tok_ra_1 = so_muc * 220
+    tok_vao_2 = tok_ra_1 + so_lo * 450
+    tok_ra_2 = so_muc * 220
+    tok_vao_3 = (tok_vao_1 + tok_ra_2 + so_lo * 450) if kiem_dinh else 0
+    tok_ra_3 = (so_muc * 70) if kiem_dinh else 0
+    tong_vao = tok_vao_1 + tok_vao_2 + tok_vao_3
+    tong_ra = tok_ra_1 + tok_ra_2 + tok_ra_3
+    usd = round((tong_vao / 1_000_000) * gia_vao_1m + (tong_ra / 1_000_000) * gia_ra_1m, 4)
+    return {
+        "so_muc": so_muc,
+        "so_lo": so_lo,
+        "so_luot": 3 if kiem_dinh else 2,
+        "token_vao_uoc_luong": tong_vao,
+        "token_ra_uoc_luong": tong_ra,
+        "chi_phi_usd_uoc_luong": usd,
+    }
+
+
 def _parse_json(raw: str) -> dict:
     s = (raw or "").strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
     o = json.loads(s)
     return o if isinstance(o, dict) else {}
 
 
-def kiem_han_viet(item: dict) -> list[dict]:
-    """Bộ kiểm luật cố định cho một mục đã chuyển thể (không cần LLM)."""
+def kiem_han_viet(item: dict, *, han_goc: str = "") -> list[dict]:
+    """Bộ kiểm luật cố định cho một mục đã chuyển thể (không cần LLM).
+    Kết hợp `cum_cam`, `DOA`, `cum_chung_chung`, `sach_ghi._CAM_TU`, `kiem_ai`, và kiểm chữ Hán nặng `sach_ghi._HAN_NANG`.
+    """
     loi: list[dict] = []
     thieu = [k for k in ("am", "nghia_sat", "nature_meaning", "manh", "de_vap", "loi_khuyen")
              if not isinstance(item.get(k), str) or not item[k].strip()]
@@ -115,6 +183,9 @@ def kiem_han_viet(item: dict) -> list[dict]:
         for c in kiem_ai.CAM + kiem_ai.VAT_PHAM:
             if re.search(r"(?<!\w)" + re.escape(c.lower()) + r"(?!\w)", thap):
                 loi.append({"ma": "kiem_ai", "chi_tiet": f"{fld}: {c}"})
+    # Nếu nguyên văn có chữ Hán nặng (SX-C _HAN_NANG), không được gắn nhãn nhom="A" (khen nguyên ý).
+    if han_goc and sg._HAN_NANG.search(han_goc) and item.get("nhom") == "A":
+        loi.append({"ma": "han_nang_sai_nhom", "chi_tiet": "nguyên văn chứa chữ Hán nặng (_HAN_NANG), cần xem xét nhóm B/C"})
     return loi
 
 
@@ -189,14 +260,17 @@ def chuyen_han_viet(muc_goc: dict[str, dict], *, goi: Callable, kiem_dinh: bool 
         if not item:
             loi[k] = [{"ma": "thieu", "chi_tiet": "AI không trả kết quả"}]
             continue
-        l = kiem_han_viet(item) + loi_kd.get(k, [])
+        han_goc = muc_goc[k].get("han", "")
+        l = kiem_han_viet(item, han_goc=han_goc) + loi_kd.get(k, [])
         if l:
             loi[k] = l
         else:
+            can_duyet_c = bool(han_goc and sg._HAN_NANG.search(han_goc))
             ket_qua[k] = {
                 "_trang_thai": "nhap_may",
-                "han": muc_goc[k].get("han", ""),
+                "han": han_goc,
                 "nguon": muc_goc[k].get("nguon", ""),
+                **({"_can_duyet_nhom_c": True} if can_duyet_c else {}),
                 **item,
             }
     so = {"tong": len(khoa), "qua": len(ket_qua),

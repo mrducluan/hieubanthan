@@ -831,11 +831,11 @@ def _hop_muc(ma: str, muc: str, can_cu: list[str]) -> dict:
                 can_cu, _mm(ma, "muc", muc, "manh"), 0.3)
 
 
-def _can_cu_nguon(o: dict | None) -> tuple[list[str], dict]:
-    ref = (o or {}).get("source_ref")
+def _can_cu_nguon(o: dict | None, kem_nguon: bool = False) -> tuple[list[str], dict]:
+    ref = (o or {}).get("source_ref") if (kem_nguon and ngon_ngu.la_viet()) else None
     if not (ref and ref.get("am") and ref.get("han")):
         return [], {}
-    return [f"Nguồn {ref.get('ten_sach', 'cổ thư')}: «{ref['am']}» ({ref['han']})"], {"source_ref": ref}
+    return [], {"source_ref": ref}
 
 
 def _hop_than_sat(ma: str, ten: str, pt: dict) -> dict | None:

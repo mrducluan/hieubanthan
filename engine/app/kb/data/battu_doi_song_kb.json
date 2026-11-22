@@ -1060,36 +1060,12 @@
   "Cô Thần": {
    "tieu_de": "Quen tự lo, đôi khi lẻ loi",
    "y": "Bạn quen tự lo, có lúc thấy lẻ loi ngay cả khi ở giữa người thân.",
-   "loi_khuyen": "Nên chủ động hẹn người thân những buổi gặp nhỏ, đều đặn.",
-   "source_ref": {
-    "source_id": "tam_menh_thong_hoi",
-    "ten_sach": "Tam Mệnh Thông Hội",
-    "han": "進者為陽不利父",
-    "am": "Tiến giả vi dương, bất lợi phụ.",
-    "y": "Sách xếp sao này về phía người cha: duyên nương tựa cha mỏng hơn, dễ phải sớm tự lập.",
-    "nhom": "C",
-    "chu_de": "gia_dinh",
-    "nguon": "tam_menh_thong_hoi",
-    "ham_y": "Nên chú ý chủ động vun với cha, dù ở xa.",
-    "viec": "Tuần này hỏi cha một chuyện thời trẻ của ông và ngồi nghe hết."
-   }
+   "loi_khuyen": "Nên chủ động hẹn người thân những buổi gặp nhỏ, đều đặn."
   },
   "Quả Tú": {
    "tieu_de": "Độc lập, ngại mở lòng",
    "y": "Bạn độc lập, quen tự xoay xở và đôi khi ngại mở lòng.",
-   "loi_khuyen": "Nên kể cho người thân nghe chuyện của bạn, dù là chuyện nhỏ.",
-   "source_ref": {
-    "source_id": "tam_menh_thong_hoi",
-    "ten_sach": "Tam Mệnh Thông Hội",
-    "han": "退者為陰不利母",
-    "am": "Thoái giả vi âm, bất lợi mẫu.",
-    "y": "Sách xếp sao này về phía người mẹ: duyên nương tựa mẹ mỏng hơn, dễ phải sớm tự lo.",
-    "nhom": "C",
-    "chu_de": "gia_dinh",
-    "nguon": "tam_menh_thong_hoi",
-    "ham_y": "Nên chú ý chủ động vun với mẹ và để ý sức khoẻ của mẹ.",
-    "viec": "Tuần này đưa mẹ đi ăn hoặc gọi hỏi thăm, nhắc mẹ đi khám định kỳ."
-   }
+   "loi_khuyen": "Nên kể cho người thân nghe chuyện của bạn, dù là chuyện nhỏ."
   },
   "Lộc Thần": {
    "tieu_de": "Tự lo được cho mình",
