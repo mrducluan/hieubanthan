@@ -130,13 +130,24 @@ def test_kiem_han_viet_chan_loi_dau_va_nfd():
     sai_dau = {
         "am": "Thử nghiệm",
         "nghia_sat": "Dịch nghĩa cũa câu này",
-        "nature_meaning": "Bạn củng cần giữ bình tĩnh.",
+        "nature_meaning": "Bạn cần giử bình tĩnh.",
         "manh": "Sáng dạ.",
         "de_vap": "Dễ vội.",
         "loi_khuyen": "Nghỉ 5 phút.",
     }
     mas = {l["ma"] for l in han_viet.kiem_han_viet(sai_dau)}
     assert "loi_dau_viet" in mas
+
+    # Từ tiếng Việt hợp lệ ("củng cố", "đả thông", "vẩn vơ") KHÔNG được bị chặn nhầm
+    hop_le = {
+        "am": "Thử nghiệm",
+        "nghia_sat": "Củng cố nền tảng và đả thông bế tắc.",
+        "nature_meaning": "Bạn nên củng cố thói quen nền để tránh nghĩ vẩn vơ.",
+        "manh": "Giúp củng cố sự tin cậy.",
+        "de_vap": "Dễ mất tập trung nếu suy nghĩ vẩn vơ.",
+        "loi_khuyen": "Viết ra một việc cần củng cố trong tuần này.",
+    }
+    assert han_viet.kiem_han_viet(hop_le) == []
 
     nfd_item = {
         "am": unicodedata.normalize("NFD", "Thử nghiệm"),

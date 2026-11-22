@@ -158,9 +158,10 @@ def _parse_json(raw: str) -> dict:
     return o if isinstance(o, dict) else {}
 
 
-# Lỗi dấu thanh tiếng Việt phổ biến (lẫn hỏi/ngã/nặng/sắc) & rác OCR dễ làm lệch nghĩa.
+# Chỉ chặn các dạng sai dấu chắc chắn KHÔNG phải từ tiếng Việt hợp lệ & rác OCR rõ ràng
+# (tránh chặn nhầm từ hợp lệ như "củng cố", "đả kích", "vẩn vơ", "dậm chân").
 _LOI_DAU_VIET = re.compile(
-    r"\b(cũa|nghỉa|củng|mổi|vẩn|chử|giử|giửa|hõi|đả|lổi|chạng|dậm)\b|\(\?\)|\s[,.;:!?]",
+    r"\b(cũa|nghỉa|giử|giửa|hõi|lổi|mổi|chạng)\b|\(\?\)|\s[,.;:!?]",
     re.IGNORECASE,
 )
 
