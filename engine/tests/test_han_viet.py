@@ -123,3 +123,28 @@ def test_han_nang_va_uoc_luong():
     assert uoc["so_luot"] == 3
     assert uoc["token_vao_uoc_luong"] > 0
     assert uoc["chi_phi_usd_uoc_luong"] >= 0
+
+
+def test_kiem_han_viet_chan_loi_dau_va_nfd():
+    import unicodedata
+    sai_dau = {
+        "am": "Thử nghiệm",
+        "nghia_sat": "Dịch nghĩa cũa câu này",
+        "nature_meaning": "Bạn củng cần giữ bình tĩnh.",
+        "manh": "Sáng dạ.",
+        "de_vap": "Dễ vội.",
+        "loi_khuyen": "Nghỉ 5 phút.",
+    }
+    mas = {l["ma"] for l in han_viet.kiem_han_viet(sai_dau)}
+    assert "loi_dau_viet" in mas
+
+    nfd_item = {
+        "am": unicodedata.normalize("NFD", "Thử nghiệm"),
+        "nghia_sat": "Dịch sát nghĩa",
+        "nature_meaning": "Giữ nhịp sống đều đặn.",
+        "manh": "Kiên trì.",
+        "de_vap": "Hơi chậm.",
+        "loi_khuyen": "Đặt hẹn giờ.",
+    }
+    mas2 = {l["ma"] for l in han_viet.kiem_han_viet(nfd_item)}
+    assert "unicode_nfd" in mas2

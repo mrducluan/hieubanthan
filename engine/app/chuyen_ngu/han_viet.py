@@ -14,6 +14,7 @@ from __future__ import annotations
 import json
 import re
 import sqlite3
+import unicodedata
 from collections.abc import Callable
 from pathlib import Path
 
@@ -157,9 +158,17 @@ def _parse_json(raw: str) -> dict:
     return o if isinstance(o, dict) else {}
 
 
+# Lỗi dấu thanh tiếng Việt phổ biến (lẫn hỏi/ngã/nặng/sắc) & rác OCR dễ làm lệch nghĩa.
+_LOI_DAU_VIET = re.compile(
+    r"\b(cũa|nghỉa|củng|mổi|vẩn|chử|giử|giửa|hõi|đả|lổi|chạng|dậm)\b|\(\?\)|\s[,.;:!?]",
+    re.IGNORECASE,
+)
+
+
 def kiem_han_viet(item: dict, *, han_goc: str = "") -> list[dict]:
     """Bộ kiểm luật cố định cho một mục đã chuyển thể (không cần LLM).
-    Kết hợp `cum_cam`, `DOA`, `cum_chung_chung`, `sach_ghi._CAM_TU`, `kiem_ai`, và kiểm chữ Hán nặng `sach_ghi._HAN_NANG`.
+    Kết hợp `cum_cam`, `DOA`, `cum_chung_chung`, `sach_ghi._CAM_TU`, `kiem_ai`,
+    kiểm chuẩn Unicode NFC + dấu thanh tiếng Việt, và kiểm chữ Hán nặng `sach_ghi._HAN_NANG`.
     """
     loi: list[dict] = []
     thieu = [k for k in ("am", "nghia_sat", "nature_meaning", "manh", "de_vap", "loi_khuyen")
@@ -169,6 +178,13 @@ def kiem_han_viet(item: dict, *, han_goc: str = "") -> list[dict]:
 
     cum_cam = kb_tv.cum_cam()
     chung_chung = kb_tv.cum_chung_chung()
+    for fld in ("am", "nghia_sat", "nature_meaning", "manh", "de_vap", "loi_khuyen"):
+        txt = item[fld]
+        if txt != unicodedata.normalize("NFC", txt):
+            loi.append({"ma": "unicode_nfd", "chi_tiet": f"{fld}: chứa dấu tổ hợp NFD (cần chuẩn hoá NFC)"})
+        m_dau = _LOI_DAU_VIET.search(txt)
+        if m_dau:
+            loi.append({"ma": "loi_dau_viet", "chi_tiet": f"{fld}: nghi sai dấu/chính tả ({m_dau.group(0)!r})"})
     for fld in ("nature_meaning", "manh", "de_vap", "loi_khuyen"):
         txt = item[fld]
         hits = kb_tv.tim_cum_cam(txt, cum_cam) + kb_tv.tim_cum_cam(txt, DOA)
