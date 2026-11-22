@@ -98,11 +98,21 @@ def _d(a: tuple[float, float], b: tuple[float, float]) -> float:
     return math.hypot(a[0] - b[0], a[1] - b[1])
 
 
-def do_mat(diem: dict, ti_le: float, nghieng: list[dict] | None = None) -> dict:
-    """→ {goi_y: [{cau, lua_chon, do, nguon, anh}], so_do: {...}, canh_bao: [...]}. Sai / thiếu điểm → ValueError (lời tiếng
-    Việt). `nghieng` (ANH-4, tuỳ chọn, ≤ 2): [{goc: nghieng_trai|nghieng_phai, diem, ti_le}] — xem `_ghep_nghieng`."""
+# Các câu phi-ảnh (không thể đo từ ảnh tĩnh: giọng nói, dáng đi, cốt nhục, chẩm cốt) — UI hỏi trong popup phụ.
+CAU_HOI_PHI_ANH: tuple[str, ...] = ("giong", "dang", "cot_nhuc", "cham_cot")
+
+
+def do_mat(diem: dict, ti_le: float, nghieng: list[dict] | None = None,
+           dac_trung_3d: dict[str, float] | None = None) -> dict:
+    """→ {goi_y: [{cau, lua_chon, do, nguon, anh}], so_do: {...}, canh_bao: [...], cau_hoi_phi_anh: [...]}. Sai / thiếu
+    điểm → ValueError (lời tiếng Việt). `nghieng` (ANH-4, tuỳ chọn, ≤ 2): [{goc: nghieng_trai|nghieng_phai, diem, ti_le}].
+    `dac_trung_3d` (tuỳ chọn): chỉ số 3D / ROI từ lưới điểm mặt trên trình duyệt để bổ sung gợi ý khảo sát."""
     kq = _do_thang(diem, ti_le)
-    return _ghep_nghieng(kq, nghieng or [])
+    kq = _ghep_nghieng(kq, nghieng or [])
+    if dac_trung_3d:
+        kq = _ghep_dac_trung_3d(kq, dac_trung_3d)
+    kq["cau_hoi_phi_anh"] = list(CAU_HOI_PHI_ANH)
+    return kq
 
 
 def _do_thang(diem: dict, ti_le: float) -> dict:
@@ -414,3 +424,239 @@ def _ghep_nghieng(kq: dict, nghieng: list[dict]) -> dict:
         ten = {m: c["hoi"].rstrip("?") for m, c in kb.cau_hoi_theo_ma().items()}
         kq["canh_bao"].append(kb.do_anh()["loi"]["canh_bao_hai_nghieng"].format(cau=", ".join(ten.get(c, c) for c in sorted(lech))))
     return kq
+
+
+# ------------------------------------------------------------------ CV-UPGRADE: chỉ số 3D & pixel ROI
+def _ghep_dac_trung_3d(kq: dict, dac_trung_3d: dict[str, float]) -> dict:
+    """Bổ sung gợi ý khảo sát từ đặc trưng 3D (độ sâu z, tỉ lệ mắt/mũi/môi/cằm/mày/biểu cảm) và pixel ROI (sắc da,
+    lệ đường, sắc môi, nếp trán — gắn độ tin thấp trung thực). Không trùng lặp với `goi_y` hình học đã có."""
+    d3: dict[str, float] = {}
+    for k, v in dac_trung_3d.items():
+        try:
+            fv = float(v)
+        except (TypeError, ValueError) as e:
+            raise ValueError(f"Chỉ số 3D {k} không phải số hợp lệ") from e
+        if not math.isfinite(fv):
+            raise ValueError(f"Chỉ số 3D {k} phải là số hữu hạn")
+        d3[k] = fv
+
+    vi = ngon_ngu.la_viet()
+    nguon_3d = "Đo 3D từ lưới điểm mặt trên thiết bị (tham khảo)" if vi else "On-device 3D face mesh measurement (reference)"
+    nguon_roi = ("Ước lượng vùng ảnh trên thiết bị (độ tin thấp — phụ thuộc ánh sáng)" if vi
+                 else "On-device pixel ROI estimate (low confidence — lighting dependent)")
+    hop_le_kb = {c["ma"]: {l["ma"] for l in c["lua_chon"]} for c in kb.cau_hoi()}
+
+    def _hien_co(cau: str) -> dict | None:
+        return next((g for g in kq["goi_y"] if g["cau"] == cau), None)
+
+    def _them_3d(cau: str, lua: str, mo_ta_vi: str, mo_ta_en: str, *, roi: bool = False, ghi_de_vua: bool = False) -> None:
+        if cau not in hop_le_kb or lua not in hop_le_kb[cau]:
+            return
+        cu = _hien_co(cau)
+        if cu is not None:
+            if ghi_de_vua and cu.get("vua"):
+                kq["goi_y"] = [g for g in kq["goi_y"] if g["cau"] != cau]
+            else:
+                return
+        kq["goi_y"].append({
+            "cau": cau,
+            "lua_chon": lua,
+            "do": mo_ta_vi if vi else mo_ta_en,
+            "nguon": nguon_roi if roi else nguon_3d,
+            "anh": "3d",
+            "do_tin": "thap" if roi else "trung_binh",
+        })
+
+    # 1. Điền Trạch (khoảng mày – mắt)
+    dt_val = d3.get("dien_trach", d3.get("dien_trach_ratio"))
+    if dt_val is not None:
+        if dt_val < 0.65:
+            _them_3d("dien_trach", "hep", f"Khoảng cách mày – mắt đo 3D hẹp ({_so(dt_val)}).",
+                     f"3D brow-to-eye gap is narrow ({_so(dt_val)}).")
+        elif dt_val >= 1.20:
+            _them_3d("dien_trach", "rong_day", f"Khoảng cách mày – mắt đo 3D rộng đầy ({_so(dt_val)}).",
+                     f"3D brow-to-eye gap is wide and open ({_so(dt_val)}).")
+
+    # 2. Hình mắt (chỉ bổ sung nếu chưa có hoặc đang là 'vua')
+    if "eye_aspect_ratio" in d3:
+        ear = d3["eye_aspect_ratio"]
+        if ear < 0.25:
+            _them_3d("mat_hinh", "dai_hep", f"Tỉ lệ mở mắt đo 3D dài hẹp (EAR {_so(ear)}).",
+                     f"3D eye aspect ratio indicates elongated eyes (EAR {_so(ear)}).", ghi_de_vua=True)
+        elif ear > 0.37:
+            _them_3d("mat_hinh", "tron_to", f"Tỉ lệ mở mắt đo 3D tròn to (EAR {_so(ear)}).",
+                     f"3D eye aspect ratio indicates round, wide eyes (EAR {_so(ear)}).", ghi_de_vua=True)
+
+    # 3. Tam Bạch (lộ tròng trắng dưới/trên mống mắt)
+    if "tam_bach_duoi" in d3 or "tam_bach_tren" in d3:
+        tbd, tbt = d3.get("tam_bach_duoi", 0.0), d3.get("tam_bach_tren", 0.0)
+        if tbd >= 0.18:
+            _them_3d("tam_bach", "duoi", f"Ước lượng khoảng trắng dưới mống mắt rõ ({_so(tbd)}).",
+                     f"Estimated visible sclera below iris ({_so(tbd)}).")
+        elif tbt >= 0.18:
+            _them_3d("tam_bach", "tren", f"Ước lượng khoảng trắng trên mống mắt rõ ({_so(tbt)}).",
+                     f"Estimated visible sclera above iris ({_so(tbt)}).")
+        else:
+            _them_3d("tam_bach", "khong", "Không thấy dấu hiệu lộ tròng trắng trên hoặc dưới mống mắt.",
+                     "No visible sclera exposure above or below the iris.")
+
+    # 4. Sơn Căn (độ cao gốc mũi theo trục z)
+    if "son_can_z" in d3:
+        scz = d3["son_can_z"]
+        if scz >= 0.04:
+            _them_3d("son_can", "cao_lien", f"Độ nổi 3D gốc mũi cao liền ({_so(scz)}).",
+                     f"3D nasal root depth is elevated and continuous ({_so(scz)}).")
+        elif scz <= -0.03:
+            _them_3d("son_can", "thap_gay", f"Độ nổi 3D gốc mũi thấp gãy ({_so(scz)}).",
+                     f"3D nasal root depth is recessed ({_so(scz)}).")
+
+    # 5. Sống mũi (nếu chưa kết luận lệch / chưa có từ ảnh nghiêng)
+    if _hien_co("song_mui") is None:
+        if "song_mui_go" in d3 and d3["song_mui_go"] >= 0.035:
+            _them_3d("song_mui", "go", f"Độ gồ 3D sống mũi rõ ({_so(d3['song_mui_go'])}).",
+                     f"3D nasal bridge convexity shows a noticeable bump ({_so(d3['song_mui_go'])}).")
+        elif "song_mui_z" in d3:
+            smz = d3["song_mui_z"]
+            if smz >= 0.14:
+                _them_3d("song_mui", "thang_cao", f"Độ nổi 3D sống mũi thẳng cao ({_so(smz)}).",
+                         f"3D nasal bridge projection is straight and high ({_so(smz)}).")
+            elif smz <= 0.06:
+                _them_3d("song_mui", "thap", f"Độ nổi 3D sống mũi thấp ({_so(smz)}).",
+                         f"3D nasal bridge projection is low ({_so(smz)}).")
+
+    # 6. Chuẩn Đầu (đầu mũi)
+    if "chuan_dau_ratio" in d3:
+        cdr = d3["chuan_dau_ratio"]
+        if cdr >= 0.52:
+            _them_3d("chuan_dau", "to_tho", f"Tỉ lệ đầu mũi đo 3D to rộng ({_so(cdr)}).",
+                     f"3D nose tip ratio is broad ({_so(cdr)}).")
+        elif cdr >= 0.36:
+            _them_3d("chuan_dau", "tron_day", f"Tỉ lệ đầu mũi đo 3D tròn đầy ({_so(cdr)}).",
+                     f"3D nose tip ratio is rounded and full ({_so(cdr)}).")
+        elif cdr <= 0.30:
+            _them_3d("chuan_dau", "nhon_mong", f"Tỉ lệ đầu mũi đo 3D thon nhọn ({_so(cdr)}).",
+                     f"3D nose tip ratio is narrow and pointed ({_so(cdr)}).")
+
+    # 7. Lưỡng Quyền (gò má theo trục z)
+    if "luong_quyen_z" in d3:
+        lqz = d3["luong_quyen_z"]
+        if lqz >= 0.06:
+            _them_3d("luong_quyen", "cao_co_thit", f"Độ nổi 3D gò má cao đầy ({_so(lqz)}).",
+                     f"3D cheekbone projection is high and full ({_so(lqz)}).")
+        elif lqz <= -0.02:
+            _them_3d("luong_quyen", "thap_phang", f"Độ nổi 3D gò má thấp phẳng ({_so(lqz)}).",
+                     f"3D cheekbone projection is flat ({_so(lqz)}).")
+
+    # 8. Miệng (độ dày môi — chỉ bổ sung nếu chưa có hoặc đang là 'vua')
+    if "moi_day_ratio" in d3:
+        mdr = d3["moi_day_ratio"]
+        if mdr >= 0.34:
+            _them_3d("mieng", "moi_day", f"Tỉ lệ độ dày môi đo 3D đầy đặn ({_so(mdr)}).",
+                     f"3D lip fullness ratio indicates full lips ({_so(mdr)}).", ghi_de_vua=True)
+        elif mdr <= 0.20:
+            _them_3d("mieng", "nho_mong", f"Tỉ lệ độ dày môi đo 3D mỏng gọn ({_so(mdr)}).",
+                     f"3D lip fullness ratio indicates thin lips ({_so(mdr)}).", ghi_de_vua=True)
+
+    # 9. Cằm (bề rộng cằm)
+    if "cam_width_ratio" in d3:
+        cwr = d3["cam_width_ratio"]
+        if cwr >= 0.55:
+            _them_3d("cam", "vuong_rong", f"Tỉ lệ bề rộng cằm đo 3D vuông rộng ({_so(cwr)}).",
+                     f"3D chin width ratio is square and broad ({_so(cwr)}).")
+        elif cwr <= 0.36:
+            _them_3d("cam", "nhon_lem", f"Tỉ lệ bề rộng cằm đo 3D nhọn thon ({_so(cwr)}).",
+                     f"3D chin width ratio is narrow and tapered ({_so(cwr)}).")
+        else:
+            _them_3d("cam", "tron_day", f"Tỉ lệ bề rộng cằm đo 3D tròn đầy ({_so(cwr)}).",
+                     f"3D chin width ratio is rounded and balanced ({_so(cwr)}).")
+
+    # 10. Lông mày (nếu chưa có 'giao_nhau')
+    if _hien_co("long_may") is None:
+        if "may_density" in d3 and d3["may_density"] < 0.18:
+            _them_3d("long_may", "thua_nhat", f"Mật độ vùng lông mày ước lượng thưa nhạt ({_so(d3['may_density'])}).",
+                     f"Estimated brow density is light and sparse ({_so(d3['may_density'])}).")
+        elif "may_dai_ratio" in d3:
+            md = d3["may_dai_ratio"]
+            if md >= 1.32:
+                _them_3d("long_may", "thanh_dai", f"Tỉ lệ chiều dài lông mày đo 3D thanh dài ({_so(md)}).",
+                         f"3D brow length ratio is long and slender ({_so(md)}).")
+            elif md <= 1.05:
+                _them_3d("long_may", "dam_ngan", f"Tỉ lệ chiều dài lông mày đo 3D ngắn gọn ({_so(md)}).",
+                         f"3D brow length ratio is short and compact ({_so(md)}).")
+
+    # 11. Trán (độ lồi 3D — nếu chưa có 'hep_thap' hoặc từ ảnh nghiêng)
+    if _hien_co("tran") is None and "tran_convexity_z" in d3:
+        tcz = d3["tran_convexity_z"]
+        if tcz >= 0.05:
+            _them_3d("tran", "cao_rong_day", f"Độ lồi 3D vùng trán đầy đặn ({_so(tcz)}).",
+                     f"3D forehead convexity is full and rounded ({_so(tcz)}).")
+        elif tcz <= -0.02:
+            _them_3d("tran", "lom_giua", f"Độ lồi 3D vùng trán hơi lõm giữa ({_so(tcz)}).",
+                     f"3D forehead convexity is slightly recessed ({_so(tcz)}).")
+
+    # 12. Nét mặt / biểu cảm
+    if "net_mat_smile" in d3 and d3["net_mat_smile"] >= 0.12:
+        _them_3d("net_mat", "de_gan", f"Biểu cảm đo 3D nhẹ nhàng, dễ gần ({_so(d3['net_mat_smile'])}).",
+                 f"3D expression cues look relaxed and approachable ({_so(d3['net_mat_smile'])}).")
+    elif "net_mat_smile" in d3 and d3["net_mat_smile"] <= -0.12:
+        _them_3d("net_mat", "buon_met", f"Biểu cảm đo 3D hơi trầm hoặc mệt ({_so(d3['net_mat_smile'])}).",
+                 f"3D expression cues look subdued or tired ({_so(d3['net_mat_smile'])}).")
+    elif "net_mat_brow_down" in d3 and d3["net_mat_brow_down"] >= 0.18:
+        _them_3d("net_mat", "nghiem", f"Vùng mày hơi cau nhẹ, nét mặt nghiêm ({_so(d3['net_mat_brow_down'])}).",
+                 f"3D brow tension cues look serious and focused ({_so(d3['net_mat_brow_down'])}).")
+
+    # 13. Sắc tổng (pixel ROI — độ tin thấp trung thực)
+    if any(k in d3 for k in ("sac_da_cr", "sac_da_luma", "sac_da_cb")):
+        cr, luma, cb = d3.get("sac_da_cr"), d3.get("sac_da_luma"), d3.get("sac_da_cb")
+        if cr is not None and cr >= 150:
+            _them_3d("sac_tong", "do_ung", "Vùng da mẫu có sắc thiên đỏ (ước lượng ảnh, phụ thuộc ánh sáng).",
+                     "Sampled skin ROI trends reddish (lighting-dependent estimate).", roi=True)
+        elif luma is not None and cb is not None and luma >= 175 and cb >= 118:
+            _them_3d("sac_tong", "trang_bech", "Vùng da mẫu sáng nhạt (ước lượng ảnh, phụ thuộc ánh sáng).",
+                     "Sampled skin ROI trends pale (lighting-dependent estimate).", roi=True)
+        elif luma is not None and luma <= 105:
+            _them_3d("sac_tong", "toi_sam", "Vùng da mẫu hơi tối sẫm (ước lượng ảnh, phụ thuộc ánh sáng).",
+                     "Sampled skin ROI trends dim or shadowed (lighting-dependent estimate).", roi=True)
+        elif cb is not None and cb <= 108:
+            _them_3d("sac_tong", "vang_xin", "Vùng da mẫu hơi ngả vàng xỉn (ước lượng ảnh, phụ thuộc ánh sáng).",
+                     "Sampled skin ROI trends dull yellow (lighting-dependent estimate).", roi=True)
+        else:
+            _them_3d("sac_tong", "sang_nhuan", "Vùng da mẫu sáng đều (ước lượng ảnh, phụ thuộc ánh sáng).",
+                     "Sampled skin ROI looks even and bright (lighting-dependent estimate).", roi=True)
+
+    # 14. Lệ Đường (vùng dưới mắt — pixel ROI)
+    if "le_duong_delta" in d3:
+        ld = d3["le_duong_delta"]
+        if ld >= 22:
+            _them_3d("le_duong", "tham_quang", f"Độ chênh sáng vùng dưới mắt cao ({_so(ld)}, phụ thuộc ánh sáng).",
+                     f"Under-eye luminance contrast is elevated ({_so(ld)}, lighting dependent).", roi=True)
+        elif ld <= 10:
+            _them_3d("le_duong", "day_tuoi", f"Vùng dưới mắt đều màu với má ({_so(ld)}, phụ thuộc ánh sáng).",
+                     f"Under-eye tone is even with cheek ROI ({_so(ld)}, lighting dependent).", roi=True)
+
+    # 15. Sắc môi (pixel ROI)
+    if "moi_cr" in d3:
+        mcr = d3["moi_cr"]
+        if mcr >= 14:
+            _them_3d("moi_sac", "hong_nhuan", f"Độ hồng vùng môi rõ ({_so(mcr)}, phụ thuộc ánh sáng).",
+                     f"Lip redness contrast is healthy ({_so(mcr)}, lighting dependent).", roi=True)
+        elif mcr <= 5:
+            _them_3d("moi_sac", "nhat_kho", f"Sắc môi hơi nhạt ({_so(mcr)}, phụ thuộc ánh sáng).",
+                     f"Lip redness contrast is low ({_so(mcr)}, lighting dependent).", roi=True)
+
+    # 16. Nếp trán (pixel ROI edge density)
+    if "nep_tran_edge" in d3:
+        nte = d3["nep_tran_edge"]
+        if nte <= 0.06:
+            _them_3d("nep_tran", "khong", f"Mật độ đường nét vùng trán rất thấp ({_so(nte)}, phụ thuộc độ nét ảnh).",
+                     f"Forehead edge density is minimal ({_so(nte)}, image-quality dependent).", roi=True)
+        elif nte <= 0.16:
+            _them_3d("nep_tran", "vai_nep_lien", f"Có vài đường nét ngang mảnh trên trán ({_so(nte)}, phụ thuộc độ nét ảnh).",
+                     f"Moderate forehead line density ({_so(nte)}, image-quality dependent).", roi=True)
+        else:
+            _them_3d("nep_tran", "nhieu_dut", f"Mật độ đường nét vùng trán nhiều ({_so(nte)}, phụ thuộc độ nét ảnh).",
+                     f"Elevated forehead line density ({_so(nte)}, image-quality dependent).", roi=True)
+
+    kq["so_do"]["dac_trung_3d"] = {k: round(v, 4) for k, v in d3.items()}
+    return kq
+

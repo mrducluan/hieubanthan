@@ -13,6 +13,7 @@
 from __future__ import annotations
 
 import datetime as _dt
+import math
 from typing import Literal
 
 from fastapi import APIRouter, HTTPException
@@ -54,6 +55,7 @@ class LuanGiaiNTInput(BaseModel):
     ngay_xem: _dt.date | None = None
     # Tướng và lá số: tuỳ chọn, cùng đầu vào lá số Bát tự (web gửi khi hồ sơ có giờ sinh).
     la_so: TuanTrietInput | None = None
+    so_do_mat: dict | None = None
     trong_so: dict[_MaMau, _Phieu] | None = Field(default=None, max_length=5000)
     ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
 
@@ -107,6 +109,19 @@ class DoMatInput(BaseModel):
     ti_le: float = Field(ge=0.2, le=5)
     dong_y: bool
     nghieng: list[_Nghieng] = Field(default_factory=list, max_length=2)
+    dac_trung_3d: dict[str, float] | None = Field(default=None, max_length=40)
+
+    @field_validator("dac_trung_3d")
+    @classmethod
+    def _d3(cls, v):
+        if v is None:
+            return v
+        for k, val in v.items():
+            if not isinstance(k, str) or not (1 <= len(k) <= 40):
+                raise ValueError("tên chỉ số 3D không hợp lệ")
+            if not math.isfinite(val):
+                raise ValueError(f"chỉ số 3D {k} phải là số hữu hạn")
+        return v
 
     @field_validator("nghieng")
     @classmethod
@@ -180,7 +195,7 @@ def api_khao_sat() -> dict:
 def api_luan_giai(inp: LuanGiaiNTInput) -> dict:
     ns = inp.ngay_sinh or inp.nam_sinh
     bc = nt.bao_cao(inp.tra_loi, nam_sinh=ns, gioi_tinh=inp.gioi_tinh, ngay_xem=inp.ngay_xem, battu=_battu(inp),
-                    trong_so=inp.trong_so, ca_nhan=inp.ca_nhan)
+                    trong_so=inp.trong_so, ca_nhan=inp.ca_nhan, so_do_mat=inp.so_do_mat)
     return {"engine_version": ENGINE_VERSION, "pham_vi": "nhan_tuong_doi_song", **bc}
 
 
@@ -202,7 +217,8 @@ def api_do_anh(inp: DoAnhInput) -> dict:
 def api_do_mat(inp: DoMatInput) -> dict:
     try:
         kq = calc_do.do_mat({k: v.model_dump() for k, v in inp.diem.items()}, inp.ti_le,
-                            [{"goc": n.goc, "ti_le": n.ti_le, "diem": {k: v.model_dump() for k, v in n.diem.items()}} for n in inp.nghieng])
+                            [{"goc": n.goc, "ti_le": n.ti_le, "diem": {k: v.model_dump() for k, v in n.diem.items()}} for n in inp.nghieng],
+                            dac_trung_3d=inp.dac_trung_3d)
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
     return {"engine_version": ENGINE_VERSION, "pham_vi": "nhan_tuong_do_mat", "can_xac_nhan": True, **kq}

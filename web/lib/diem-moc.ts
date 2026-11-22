@@ -140,3 +140,46 @@ export function timChanToc(luoi: { x: number; y: number }[], a: Anh): Diem | nul
   }
   return null;
 }
+
+/**
+ * Ước lượng giải phẫu vị trí chân tóc khi `timChanToc` trả về `null` (ví dụ: tóc mái che trán, hói, ảnh thiếu tương phản).
+ * Đi tiếp ~16% chiều dài trục cằm (152) → đỉnh trán (10) lên phía trên mốc 10, giữ trong [0.02, 0.98] và luôn cao hơn mốc 10.
+ */
+export function uocLuongChanToc(luoi: { x: number; y: number }[], w: number, h: number): Diem | null {
+  if (luoi.length < 468 || !(w > 0 && h > 0)) return null;
+  const dinh = luoi[10]!, cam = luoi[152]!;
+  const dx = (dinh.x - cam.x) * w;
+  const dy = (dinh.y - cam.y) * h;
+  if (Math.hypot(dx, dy) < 10) return null;
+  const rawX = (dinh.x * w + 0.16 * dx) / w;
+  const rawY = (dinh.y * h + 0.16 * dy) / h;
+  const x = Math.min(0.98, Math.max(0.02, rawX));
+  const maxY = dinh.y > 0.02 ? dinh.y - 0.002 : Math.max(0.005, dinh.y - 0.001);
+  const y = Math.min(maxY, Math.min(0.98, Math.max(0.02, rawY)));
+  return { x, y };
+}
+
+/**
+ * Kiểm tra điểm chạm `p` có nằm trong vùng gương mặt hợp lệ (bounding box các mốc khuôn mặt đã nhận diện, nới rộng
+ * 35% hai bên cho tai, 35% lên trên cho chân tóc, 15% xuống dưới cho cằm) để tránh chạm nhầm ra nền ảnh.
+ */
+export function trongVungMat(p: Diem, diem: Record<string, Diem>): boolean {
+  const core = Object.entries(diem)
+    .filter(([k]) => k !== "dinh_tai" && k !== "dai_tai")
+    .map(([, v]) => v);
+  const ds = core.length >= 4 ? core : Object.values(diem);
+  if (ds.length < 4) return true;
+  const x0 = Math.min(...ds.map((q) => q.x));
+  const x1 = Math.max(...ds.map((q) => q.x));
+  const y0 = Math.min(...ds.map((q) => q.y));
+  const y1 = Math.max(...ds.map((q) => q.y));
+  const bw = x1 - x0;
+  const bh = y1 - y0;
+  if (bw <= 0 || bh <= 0) return true;
+  return (
+    p.x >= x0 - bw * 0.35 &&
+    p.x <= x1 + bw * 0.35 &&
+    p.y >= y0 - bh * 0.35 &&
+    p.y <= y1 + bh * 0.15
+  );
+}

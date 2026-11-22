@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
 import { urlAnhSach } from "@/lib/anh-tren-may";
 import { DONG_Y_DO_MAT, ngayDongYAnhMat } from "@/lib/dong-y-anh-mat";
+import { trongVungMat } from "@/lib/diem-moc";
 import type { KetQuaTim } from "@/lib/diem-moc-tu-dong";
 import { postJson } from "@/lib/goi-api";
 import type { DiemDo, KhaoSat, TraLoi } from "@/lib/nhan-tuong";
@@ -26,8 +27,13 @@ import { Dam, useChuNhanTuong } from "./chu-nhan-tuong";
 import { useDuong } from "@/components/khung/NgonNgu";
 
 type Diem = { x: number; y: number };
-interface KqDo { goi_y: GoiYNet[]; canh_bao: string[]; fuzzy_bridge?: FuzzyMatBridge | null;
-  so_do: { tam_dinh: { thuong: number; trung: number; ha: number } | null; cao_rong: number; tran_ma: number; ham_ma: number; mat_mat: number; may_khoe: number } }
+export interface KqDo {
+  goi_y: GoiYNet[];
+  canh_bao: string[];
+  fuzzy_bridge?: FuzzyMatBridge | null;
+  cau_hoi_phi_anh?: string[];
+  so_do: { tam_dinh: { thuong: number; trung: number; ha: number } | null; cao_rong: number; tran_ma: number; ham_ma: number; mat_mat: number; may_khoe: number };
+}
 
 /** Vị trí các điểm trên KHUÔN MẶT MẪU của hình hướng dẫn (hình tĩnh, không phải số đo của ai). */
 const MAU: Record<string, [number, number]> = {
@@ -70,8 +76,9 @@ function HinhMau({ dang, da }: { dang: string | null; da: Set<string> }) {
   );
 }
 
-export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem }: {
-  ks: KhaoSat; daTraLoi: TraLoi; onGoiY: (tl: TraLoi) => void; onXem: () => void; onDungVaXem?: (tl: TraLoi) => void; dangXem?: boolean;
+export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, onXongDo, dangXem }: {
+  ks: KhaoSat; daTraLoi: TraLoi; onGoiY: (tl: TraLoi) => void; onXem: () => void; onDungVaXem?: (tl: TraLoi) => void;
+  onXongDo?: (kq: KqDo, goiYTraLoi: TraLoi) => void; dangXem?: boolean;
 }) {
   const { t, en } = useChuNhanTuong();
   const d = useDuong();
@@ -81,11 +88,13 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
   const [tiLe, setTiLe] = useState<number | null>(null);
   const [diem, setDiem] = useState<Record<string, Diem>>({});
   const [dang, setDang] = useState<string | null>(null);
+  const [chonThuCong, setChonThuCong] = useState(false);
   const [keo, setKeo] = useState<string | null>(null);
   const [tick, setTick] = useState(false);
   const dongY = DONG_Y_DO_MAT.use();
   const [tinh, setTinh] = useState(false);
   const [kq, setKq] = useState<KqDo | null>(null);
+  const [dacTrung3d, setDacTrung3d] = useState<Record<string, number> | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [tim, setTim] = useState<TrangThaiTim>(null);
   const [canXem, setCanXem] = useState<string[]>([]);
@@ -114,7 +123,10 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
   urlRef.current = url;
   useEffect(() => () => { if (urlRef.current) URL.revokeObjectURL(urlRef.current); }, []);
 
-  const tiepTheo = useCallback((d: Record<string, Diem>) => dsDiem.find((p) => !d[p.ma])?.ma ?? null, [dsDiem]);
+  const tiepTheo = useCallback(
+    (d: Record<string, Diem>, chiBatBuoc = false) => dsDiem.find((p) => !d[p.ma] && (!chiBatBuoc || p.bat_buoc))?.ma ?? null,
+    [dsDiem],
+  );
   const chonAnh = async (f: File | undefined) => {
     if (!f || !f.type.startsWith("image/")) return;
     const u = await urlAnhSach(f);
@@ -122,7 +134,8 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
     if (urlRef.current) URL.revokeObjectURL(urlRef.current);
     urlRef.current = u;
     luotTim.current++;
-    setUrl(u); setTiLe(null); setDiem({}); setKq(null); setLoi(null); setDang(dsDiem[0]?.ma ?? null); setTim(null); setCanXem([]); setVungPhong(null);
+    setUrl(u); setTiLe(null); setDiem({}); setKq(null); setDacTrung3d(null); setLoi(null);
+    setDang(dsDiem[0]?.ma ?? null); setChonThuCong(false); setTim(null); setCanXem([]); setVungPhong(null);
     ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat_chon_anh" });
   };
   // Tự tìm điểm mốc trên máy. Chấm người dùng đã đặt trong lúc chờ được GIỮ (không bị đè).
@@ -134,14 +147,17 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
     if (luot !== luotTim.current) return;
     setTim(r.trang_thai);
     if (r.trang_thai !== "xong") {
+      setDacTrung3d(null);
       ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat_tu_tim", ket_qua: r.trang_thai });
       return;
     }
     const xem = ["chan_toc", ...r.thieu].filter((m, i, a) => a.indexOf(m) === i);
     setCanXem(xem);
+    setDacTrung3d(r.dac_trung_3d ?? null);
     setDiem((d) => (deLai ? { ...r.diem } : { ...r.diem, ...d }));
     setVungPhong(vungMat(r.diem)); setPhong(true);
     setDang(r.thieu[0] ?? null);
+    setChonThuCong(false);
     ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat_tu_tim", ket_qua: "xong", so_diem: Object.keys(r.diem).length });
   };
   const viTri = (e: { clientX: number; clientY: number }): Diem | null => {
@@ -168,10 +184,20 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
     if (g) { setKeo(g); setDang(g); e.currentTarget.setPointerCapture(e.pointerId); return; }
     const p = viTri(e);
     if (!p || !dang) return;
+    // Khi máy đã nhận diện xong mặt: chặn chạm nhầm ra nền ảnh hoặc tự đặt điểm tuỳ chọn (vd. đỉnh tai) khi người dùng chưa chủ động chọn.
+    if (tim === "xong") {
+      if (!chonThuCong && (!batBuoc.includes(dang) || Boolean(diem[dang]))) return;
+      if (!trongVungMat(p, diem)) return;
+    }
     const moi = { ...diem, [dang]: p };
     setCanXem((c) => c.filter((m) => m !== dang));
     setDiem(moi); setKq(null);
-    setDang(tiepTheo(moi) ?? dang);
+    if (tim === "xong") {
+      setDang(tiepTheo(moi, true));
+      setChonThuCong(false);
+    } else {
+      setDang(tiepTheo(moi) ?? dang);
+    }
   };
   const di = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!keo) return;
@@ -193,7 +219,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
     const cuoi = daDat[daDat.length - 1];
     if (!cuoi) return;
     const { [cuoi]: _bo, ...con } = diem;
-    setDiem(con); setDang(cuoi); setKq(null);
+    setDiem(con); setDang(cuoi); setChonThuCong(true); setKq(null);
   };
 
   const daDat = useMemo(() => new Set(Object.keys(diem)), [diem]);
@@ -208,8 +234,22 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
     setTinh(true); setLoi(null); setKq(null);
     try {
       const ng = nghiengDu.map(([goc, a]) => ({ goc, diem: a.diem, ti_le: Number(a.tiLe!.toFixed(4)) }));
-      const r = await postJson<KqDo>("/api/nhan-tuong/do-mat", { diem, ti_le: Number(tiLe.toFixed(4)), dong_y: true, ...(ng.length ? { nghieng: ng } : {}) });
+      const r = await postJson<KqDo>("/api/nhan-tuong/do-mat", {
+        diem,
+        ti_le: Number(tiLe.toFixed(4)),
+        dong_y: true,
+        ...(ng.length ? { nghieng: ng } : {}),
+        ...(dacTrung3d && Object.keys(dacTrung3d).length > 0 ? { dac_trung_3d: dacTrung3d } : {}),
+      });
       setKq(r);
+      if (onXongDo) {
+        const cauMap = Object.fromEntries(ks.cau_hoi.map((c) => [c.ma, c]));
+        const goiYTraLoi: TraLoi = { ...daTraLoi };
+        for (const x of r.goi_y) {
+          if (cauMap[x.cau]?.lua_chon.some((l) => l.ma === x.lua_chon)) goiYTraLoi[x.cau] = x.lua_chon;
+        }
+        onXongDo(r, goiYTraLoi);
+      }
       ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat", so_goi_y: r.goi_y.length, so_diem: Object.keys(diem).length, so_anh_nghieng: nghiengDu.length });
     } catch (e) { setLoi(e instanceof Error ? e.message : t("do.loi_do")); } finally { setTinh(false); }
   };
@@ -293,14 +333,14 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
               <Button size="sm" variant="ghost" onClick={() => { if (anhRef.current) void tuTim(anhRef.current, true); }} disabled={tim === "dang" || !tiLe} data-testid="do-tu-tim"><ScanFace aria-hidden /> {t("do.tu_tim_lai")}</Button>
               {vungPhong && <Button size="sm" variant="ghost" onClick={() => setPhong((v) => !v)} data-testid="do-phong">{phong ? t("do.xem_ca_anh") : t("do.phong_mat")}</Button>}
               <Button size="sm" variant="ghost" onClick={boLuot} disabled={!daDat.size}><Undo2 aria-hidden /> {t("do.bo_diem")}</Button>
-              <Button size="sm" variant="ghost" onClick={() => { luotTim.current++; setDiem({}); setDang(dsDiem[0]?.ma ?? null); setKq(null); setTim(null); setCanXem([]); setVungPhong(null); }} disabled={!daDat.size}><RotateCcw aria-hidden /> {t("do.cham_tay")}</Button>
+              <Button size="sm" variant="ghost" onClick={() => { luotTim.current++; setDiem({}); setDang(dsDiem[0]?.ma ?? null); setChonThuCong(false); setKq(null); setDacTrung3d(null); setTim(null); setCanXem([]); setVungPhong(null); }} disabled={!daDat.size}><RotateCcw aria-hidden /> {t("do.cham_tay")}</Button>
               <Button size="sm" variant="ghost" onClick={moQuet} data-testid="quet-lai"><ScanFace aria-hidden /> {t("do.quet_lai")}</Button>
               <label className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg">
                 <ImagePlus className="size-3.5" aria-hidden /> {t("do.doi_anh")}
                 <input type="file" accept="image/*" className="sr-only" onChange={(e) => { void chonAnh(e.target.files?.[0]); e.target.value = ""; }} />
               </label>
               <button type="button" aria-label={t("do.bo_anh")} className="ml-auto inline-flex items-center gap-1 text-fg-faint hover:text-fg"
-                onClick={() => { luotTim.current++; if (url) URL.revokeObjectURL(url); setUrl(null); setDiem({}); setKq(null); setTim(null); setCanXem([]); setVungPhong(null); }}><X className="size-3.5" aria-hidden /> {t("do.bo_anh")}</button>
+                onClick={() => { luotTim.current++; if (url) URL.revokeObjectURL(url); setUrl(null); setDiem({}); setKq(null); setDacTrung3d(null); setChonThuCong(false); setTim(null); setCanXem([]); setVungPhong(null); }}><X className="size-3.5" aria-hidden /> {t("do.bo_anh")}</button>
             </div>
           </div>
           <aside className="space-y-3">
@@ -317,7 +357,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
             <ol className="grid max-h-48 grid-cols-2 gap-1 overflow-auto text-[11px] lg:max-h-none lg:grid-cols-1" aria-label={t("do.cac_diem")}>
               {dsDiem.map((p, i) => (
                 <li key={p.ma}>
-                  <button type="button" onClick={() => setDang(p.ma)} aria-current={p.ma === dang ? "step" : undefined}
+                  <button type="button" onClick={() => { setDang(p.ma); setChonThuCong(true); }} aria-current={p.ma === dang ? "step" : undefined}
                     className={cn("flex w-full items-center gap-1.5 rounded-md px-1.5 py-0.5 text-left", p.ma === dang ? "bg-gold/15 text-fg" : "text-fg-muted hover:bg-surface/60")}>
                     <span className={cn("grid size-4 shrink-0 place-items-center rounded-full border text-[9px]", diem[p.ma] ? "border-jade text-jade" : "border-line")}>{diem[p.ma] ? "✓" : i + 1}</span>
                     <span className="truncate">{p.ten}</span>
@@ -347,7 +387,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem
           <Dam s={t("do.tt_mo")} />{" "}
           {t("do.tt_rut")} · <Link href={`${d("/chinh-sach-rieng-tu")}#anh-mat`} className="text-gold underline underline-offset-2">{t("do.tt_chinh_sach")}</Link>.
         </p> : <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">
-          Ảnh <b className="text-fg">không rời máy bạn</b>. Điểm mốc do máy bạn tự tìm ngay trong trình duyệt hoặc do bạn chấm. Chỉ toạ độ các điểm đó (ảnh chính diện, và ảnh nghiêng nếu bạn thêm) cùng tỉ lệ khung ảnh được gửi tới máy chủ tính toán của Hiểu Bản Thân <b className="text-fg">một lượt</b> để đo tỉ lệ theo sách tướng; không lưu, không chuyển cho bên thứ ba, không dùng để nhận ra bạn. Ảnh phải là của chính bạn, bạn đủ 18 tuổi.
+          Ảnh <b className="text-fg">không rời máy bạn</b>. Điểm mốc do máy bạn tự tìm ngay trong trình duyệt hoặc do bạn chấm. Chỉ toạ độ các điểm đó (ảnh chính diện, ảnh nghiêng nếu bạn thêm), tỉ lệ hình học 3D và chỉ số sắc thái vùng da (dạng số, không có ảnh) được gửi tới máy chủ tính toán của Hiểu Bản Thân <b className="text-fg">một lượt</b> để đo tỉ lệ theo sách tướng; không lưu, không chuyển cho bên thứ ba, không dùng để nhận ra bạn. Ảnh phải là của chính bạn, bạn đủ 18 tuổi.
           Rút thoả thuận ở đây hoặc ở <Link href="/tai-khoan#du-lieu-cua-toi" className="text-gold underline underline-offset-2">Dữ liệu của tôi</Link> · <Link href="/chinh-sach-rieng-tu#anh-mat" className="text-gold underline underline-offset-2">Chính sách riêng tư</Link>.
         </p>}
         {dongY ? (

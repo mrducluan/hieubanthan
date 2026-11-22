@@ -6,12 +6,16 @@ import { goiEngine } from "@/lib/proxy";
 
 const So01 = z.number().finite().min(0).max(1);
 
+const So = z.number().finite();
+
 const Input = z.object({
   dong_y: z.literal(true),
-  phai: z.enum(["dong", "tay"]).optional(),   // TK-2: "tay" → ba nhãn + câu sách chỉ tay phương Tây
+  phai: z.enum(["dong", "tay", "hop_nhat"]).optional(),   // TK-2: "tay" → phương Tây; "hop_nhat" → hợp nhất Đông–Tây
   tay: z.enum(["trai", "phai"]),
   ty_le: z.number().finite().min(0.1).max(10),
   diem: z.array(z.tuple([So01, So01])).length(21),
+  diem_3d: z.array(z.tuple([So, So, So])).length(21).optional(),
+  duong_chi_goi_y: z.record(z.string(), z.unknown()).optional(),
   ngay_sinh: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
 }).strict();
 

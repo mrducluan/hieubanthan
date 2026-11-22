@@ -2,8 +2,8 @@
 // NT-1 — trang công cụ Nhân tướng học (chủ dự án giao 2026-11-06). Phương án UI đã chọn: "Gương soi có hướng dẫn" —
 // bản đồ gương mặt là nhân vật chính, khảo sát sáu bước sáng đúng vùng đang hỏi, bài đọc tám chương khuôn doi_song_1.
 // Không ảnh (ảnh chỉ để tự chấm 4 điểm trên máy, không rời máy); câu trả lời lưu trên máy; web không tính gì.
-import { useEffect, useRef, useState } from "react";
-import { BookOpen, Hand, ScanFace, ScanSearch } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { BookOpen, ChevronDown, Hand, ScanFace, ScanSearch } from "lucide-react";
 import { useChu } from "@/components/cms/DauCms";
 import Link from "@/components/khung/Lien";
 import { DauMang } from "@/components/huyen-hoc/KhungMang";
@@ -16,6 +16,7 @@ import { BanDoMat } from "@/components/nhan-tuong/BanDoMat";
 import { BaoCaoNhanTuong } from "@/components/nhan-tuong/BaoCaoNhanTuong";
 import { AnhChanDung } from "@/components/nhan-tuong/AnhChanDung";
 import { KhaoSatGuong } from "@/components/nhan-tuong/KhaoSatGuong";
+import { MA_CAU_PHI_ANH, PopupCauHoiPhu } from "@/components/nhan-tuong/PopupCauHoiPhu";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
 import { hoiMang } from "@/lib/hoi-mang";
@@ -50,6 +51,10 @@ export function NhanTuong() {
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
   const [vungHoi, setVungHoi] = useState<string[]>([]);
+  const [moPopup, setMoPopup] = useState(false);
+  const [tlChoPopup, setTlChoPopup] = useState<TraLoi | null>(null);
+  const [soDoMat, setSoDoMat] = useState<Record<string, unknown> | null>(null);
+  const [daDoTuAnh, setDaDoTuAnh] = useState(false);
   const refBaiDoc = useRef<HTMLDivElement>(null);
   useEffect(() => {
     fetch(urlTheoNgonNgu("/api/nhan-tuong/khao-sat")).then((r) => (r.ok ? r.json() : Promise.reject(new Error("x")))).then((d) => setKs(d as KhaoSat))
@@ -58,15 +63,20 @@ export function NhanTuong() {
   useBatDauDoc("nhantuong", Boolean(bc));
   const soCau = demTraLoi(traLoi);
   const namSinh = hoSo?.nam && hoSo.nam >= 1900 ? hoSo.nam : undefined;
+  const cauPhiAnh = useMemo(
+    () => (ks?.cau_hoi ?? []).filter((q) => (MA_CAU_PHI_ANH as readonly string[]).includes(q.ma)),
+    [ks],
+  );
 
   // NT-2: `tl` truyền thẳng khi vừa điền từ số đo ảnh (state traLoi chưa kịp cập nhật).
-  const docVoi = async (tl: TraLoi | undefined) => {
+  const docVoi = async (tl: TraLoi | undefined, soDo?: Record<string, unknown> | null) => {
     if (!tl || dang) return;
     setDang(true); setLoi(null);
     try {
       const laSo = laSoTuHoSo(hoSo);
+      const sd = soDo ?? soDoMat;
       const body = { tra_loi: tl, ...(hoSo?.nam && hoSo.thang && hoSo.ngay && hoSo.am == null ? { ngay_sinh: `${hoSo.nam}-${String(hoSo.thang).padStart(2, "0")}-${String(hoSo.ngay).padStart(2, "0")}` } : namSinh ? { nam_sinh: namSinh } : {}),
-        ...(hoSo?.gioi_tinh ? { gioi_tinh: hoSo.gioi_tinh } : {}), ...(laSo ? { la_so: laSo } : {}) };
+        ...(hoSo?.gioi_tinh ? { gioi_tinh: hoSo.gioi_tinh } : {}), ...(laSo ? { la_so: laSo } : {}), ...(sd ? { so_do_mat: sd } : {}) };
       const d = await postJson<Bc>("/api/nhan-tuong/luan-giai", body);
       setBc(d);
       ghi("chart_interacted", { mo_dun: "nhantuong", kind: "bai_doc", so_cau: demTraLoi(tl), ngu_hinh: d.da_tinh?.ngu_hinh?.hinh });
@@ -74,7 +84,27 @@ export function NhanTuong() {
     } catch (e) { setLoi(e instanceof Error ? e.message : t("loi.doc")); } finally { setDang(false); }
   };
   const xemBaiDoc = () => void docVoi(traLoi);
-  const dungVaXem = (tl: TraLoi) => { luuTraLoi(tl); void docVoi(tl); };
+  // Sau khi đo ảnh xong: tự điền câu đo được → nếu còn câu phi hình ảnh (giọng nói, dáng đi…) chưa trả lời thì mở Pop-up gọn;
+  // ngược lại vào thẳng bài đọc Đông – Tây mà không bắt người dùng làm khảo sát thủ công.
+  const dungVaXem = (tl: TraLoi, soDo?: Record<string, unknown> | null) => {
+    luuTraLoi(tl);
+    setDaDoTuAnh(true);
+    if (soDo) setSoDoMat(soDo);
+    const conThieuPhiAnh = cauPhiAnh.some((q) => !tl[q.ma] || tl[q.ma] === "khong_chac");
+    if (conThieuPhiAnh && cauPhiAnh.length > 0) {
+      setTlChoPopup(tl);
+      setMoPopup(true);
+      return;
+    }
+    void docVoi(tl, soDo);
+  };
+  const xongPopup = (boSung: TraLoi) => {
+    const gop: TraLoi = { ...(tlChoPopup ?? traLoi ?? {}), ...boSung };
+    setMoPopup(false);
+    setTlChoPopup(null);
+    luuTraLoi(gop);
+    void docVoi(gop);
+  };
 
   const dau = (
     <>
@@ -94,7 +124,9 @@ export function NhanTuong() {
   );
   // ANH-1: tải ảnh chân dung đứng ngay dưới đầu trang (chỉ khi chưa có bài đọc); gợi ý điền vào khảo sát trên máy.
   const anhChanDung = !bc && traLoi !== undefined && (
-    <AnhChanDung ks={ks} daTraLoi={traLoi} onGoiY={luuTraLoi} onXem={xemBaiDoc} onDungVaXem={dungVaXem} dangXem={dang} />
+    <AnhChanDung ks={ks} daTraLoi={traLoi} onGoiY={luuTraLoi} onXem={xemBaiDoc} onDungVaXem={dungVaXem}
+      onXongDo={(kqDo, goiY) => { setSoDoMat(kqDo.so_do as Record<string, unknown>); setDaDoTuAnh(true); if (Object.keys(goiY).length) luuTraLoi({ ...traLoi, ...goiY }); }}
+      dangXem={dang} />
   );
   // Khối bản đồ không cần dữ liệu người dùng → render cả ở máy chủ (HTML có sẵn hình + lời dẫn khi chờ hồ sơ / lúc không JS).
   const banDo = !bc && (
@@ -110,10 +142,10 @@ export function NhanTuong() {
                 {soCau > 0 && <Button onClick={xemBaiDoc} disabled={dang} size="sm" data-testid="nut-xem-lai-bai-doc">{dang ? t("ban_do.dang_doc") : t("ban_do.xem_lai", { so: String(soCau) })}</Button>}
               </div>
             ) : <div className="space-y-3 text-sm text-fg-muted">
-              <p>Sách tướng xưa chia mặt thành <b className="text-fg">ba phần</b> (trán – mũi – cằm), <b className="text-fg">năm quan</b> (mày, mắt, tai, mũi, miệng) và <b className="text-fg">mười hai cung</b> — mỗi vùng gắn với một mảng đời: trán là công việc, mũi là tiền bạc, đuôi mắt là đôi lứa, cằm là hậu vận.</p>
-              <p>Bạn tự soi gương và chọn điều mình thấy; trang không nhận diện tự động. Mỗi tuổi sách lại xem ở một vùng (<b className="text-fg">100 vị trí lưu niên</b>) — có năm sinh trong hồ sơ, bài đọc sẽ chỉ vùng của năm nay.</p>
-              <p className="text-xs text-fg-faint">Gương mặt trên hình vẽ giản lược, không phải mặt của ai. Màu sẽ hiện sau khi bạn trả lời.</p>
-              {soCau > 0 && <Button onClick={xemBaiDoc} disabled={dang} size="sm" data-testid="nut-xem-lai-bai-doc">{dang ? "Đang đọc…" : `Xem bài đọc với ${soCau} câu đã trả lời`}</Button>}
+              <p>Hệ thống kết hợp <b className="text-fg">Nhân tướng Đông phương</b> (ba đình, ngũ quan, mười hai cung, 100 vị trí lưu niên) và <b className="text-fg">Nhân tướng Ngũ Hành Phương Tây</b> (Lillian Bridges) — tự động đo 478 điểm mốc 3D ngay trên máy bạn.</p>
+              <p>Quét gương mặt hoặc tải ảnh ở trên để hệ thống tự tính hầu hết các nét tướng mà không cần trả lời khảo sát thủ công; chỉ giọng nói và dáng đi (không có trong ảnh) sẽ hiện hộp hỏi nhanh tuỳ chọn.</p>
+              <p className="text-xs text-fg-faint">Ảnh chỉ xử lý ngay trong trình duyệt, không gửi đi đâu. Màu trên bản đồ hiện sau khi đo hoặc trả lời.</p>
+              {soCau > 0 && <Button onClick={xemBaiDoc} disabled={dang} size="sm" data-testid="nut-xem-lai-bai-doc">{dang ? "Đang đọc…" : `Xem bài đọc Đông – Tây (${soCau} nét đã tính)`}</Button>}
             </div>}
           </div>
         </section>
@@ -126,14 +158,36 @@ export function NhanTuong() {
       {anhChanDung}
       {banDo}
 
+      <PopupCauHoiPhu
+        mo={moPopup}
+        cauHoi={cauPhiAnh}
+        traLoiHienTai={tlChoPopup ?? traLoi}
+        soCauTuDong={demTraLoi(tlChoPopup ?? traLoi)}
+        en={en}
+        dangTai={dang}
+        onXong={xongPopup}
+        onDong={() => setMoPopup(false)}
+      />
+
       <section aria-labelledby="khao-sat" id="khao-sat" className="mx-auto mb-10 max-w-5xl scroll-mt-24">
-        <TieuDeMuc id="khao-sat" nho={c("khao_sat.nho")} lon={c("khao_sat.lon")} />
-        {loiKs && <BaoLoi loi={loiKs} thuLai={() => location.reload()} />}
-        {!ks && !loiKs && <KhungTai />}
-        {ks && (
+        {daDoTuAnh || bc ? (
+          <details className="group rounded-2xl border border-line/70 bg-surface/40 p-4 sm:p-5" data-testid="khao-sat-thu-gon">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-2 text-sm font-medium text-fg">
+              <span>{en ? "Optional: Edit or inspect individual facial traits manually" : "Tuỳ chọn: Xem lại hoặc chỉnh tay từng nét trong khảo sát"}</span>
+              <ChevronDown className="size-4 text-fg-faint transition-transform group-open:rotate-180" aria-hidden />
+            </summary>
+            <div className="mt-4">
+              {loiKs && <BaoLoi loi={loiKs} thuLai={() => location.reload()} />}
+              {!ks && !loiKs && <KhungTai />}
+              {ks && <KhaoSatGuong ks={ks} traLoi={traLoi} onXong={xemBaiDoc} dangTai={dang} />}
+            </div>
+          </details>
+        ) : (
           <>
-            {bc && <p className="mb-3 text-sm text-fg-muted">{t("ks.doi_tra_loi")}</p>}
-            <KhaoSatGuong ks={ks} traLoi={traLoi} onXong={xemBaiDoc} dangTai={dang} />
+            <TieuDeMuc id="khao-sat" nho={c("khao_sat.nho")} lon={c("khao_sat.lon")} />
+            {loiKs && <BaoLoi loi={loiKs} thuLai={() => location.reload()} />}
+            {!ks && !loiKs && <KhungTai />}
+            {ks && <KhaoSatGuong ks={ks} traLoi={traLoi} onXong={xemBaiDoc} dangTai={dang} />}
           </>
         )}
         {loi && <div className="mt-4"><BaoLoi loi={loi} thuLai={xemBaiDoc} /></div>}

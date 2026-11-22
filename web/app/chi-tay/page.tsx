@@ -21,8 +21,8 @@ import { anhDoHinh } from "@/lib/do-hinh";
 import { anhVan, DUONG_CHI_TAY, layThuVienChiTay, layThuVienChiTayTay, tachCau, type ThuVienChiTayTay } from "@/lib/chi-tay";
 
 const MAC = {
-  tieuDe: "Xem chỉ tay: sách tướng xưa và chỉ tay phương Tây",
-  moTa: "Tự soi bàn tay theo Thần Tướng Toàn Biên (tám cung, hơn 60 hình vân) hoặc theo chỉ tay phương Tây của Cheiro, Benham (dáng tay, các gò, đường chỉ). Ảnh không rời máy.",
+  tieuDe: "Xem chỉ tay hợp nhất Đông – Tây: chụp cả hai tay trên máy",
+  moTa: "Chụp hoặc tải cả hai bàn tay (trái Tiên Thiên, phải Hậu Thiên) ngay trên trình duyệt để đo 21 điểm 3D, quét đường chỉ tay và nhận luận giải hợp nhất Thần Tướng Toàn Biên + Cheiro, Benham, Dale, Baughan. Ảnh không rời máy.",
 };
 const NHAN: Record<string, string> = { A: "Sách ghi", B: "Nên chú ý", C: "Ghi chép xưa" };
 

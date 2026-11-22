@@ -69,6 +69,33 @@ export function BaoCaoNhanTuong({ bc, boVi, ten, chanTrang }: { bc: Bc; boVi: Re
               <p className="mt-1 text-xs text-fg-faint">{t("bc.bai_ca_ghi")}</p>
             </div>
           )}
+          {bc.da_tinh.phuong_tay_bridges && (
+            <div className="mt-4 rounded-xl border border-gold/35 bg-gold/[0.05] p-3.5 text-sm" data-testid="nt-phuong-tay-bridges">
+              <p className="text-xs font-semibold uppercase tracking-wide text-gold">
+                {en ? "East–West Physiognomy Synthesis · Five Elements (Lillian Bridges)" : "Hợp nhất Đông – Tây · Ngũ Hành Nhân Tướng (Lillian Bridges)"}
+              </p>
+              <p className="mt-1 font-medium text-fg">
+                {en
+                  ? (bc.da_tinh.phuong_tay_bridges.ten_en || bc.da_tinh.phuong_tay_bridges.ten || bc.da_tinh.phuong_tay_bridges.hanh)
+                  : (bc.da_tinh.phuong_tay_bridges.ten_vi || bc.da_tinh.phuong_tay_bridges.ten || bc.da_tinh.phuong_tay_bridges.hanh)}
+              </p>
+              {bc.da_tinh.phuong_tay_bridges.nghia_doi_thuong && (
+                <p className="mt-1 leading-relaxed text-fg-muted">{bc.da_tinh.phuong_tay_bridges.nghia_doi_thuong}</p>
+              )}
+              {bc.da_tinh.phuong_tay_bridges.mat_tich_cuc && (
+                <p className="mt-1 text-xs text-jade"><b className="font-medium">{en ? "Strengths: " : "Điểm mạnh: "}</b>{bc.da_tinh.phuong_tay_bridges.mat_tich_cuc}</p>
+              )}
+              {bc.da_tinh.phuong_tay_bridges.mat_tieu_cuc && (
+                <p className="mt-0.5 text-xs text-fg-muted"><b className="font-medium text-gold">{en ? "Growth focus: " : "Cần cân bằng: "}</b>{bc.da_tinh.phuong_tay_bridges.mat_tieu_cuc}</p>
+              )}
+              {bc.da_tinh.phuong_tay_bridges.dong_thuan_dong_tay && (
+                <p className="mt-1.5 border-t border-line/50 pt-1.5 text-xs text-fg-muted">{bc.da_tinh.phuong_tay_bridges.dong_thuan_dong_tay}</p>
+              )}
+              {bc.da_tinh.phuong_tay_bridges.nguon && (
+                <p className="mt-1 text-[11px] text-fg-faint">{bc.da_tinh.phuong_tay_bridges.nguon}</p>
+              )}
+            </div>
+          )}
         </div>
       </div>
       <BaoCaoDoiSongView bc={bc} ten={ten} nhan={t("bc.nhan")}

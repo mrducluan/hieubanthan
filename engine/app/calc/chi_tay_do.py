@@ -155,3 +155,174 @@ def nhan_tay(so_do: dict) -> dict:
     n_ngon, n_long = nhan[0], nhan[1]
     to_hop = None if n_ngon["vua"] or n_long["vua"] else f"{n_long['ma']}.{n_ngon['ma']}"
     return {"nhan": nhan, "to_hop": to_hop}
+
+
+def _d3(a: tuple[float, float, float], b: tuple[float, float, float]) -> float:
+    return math.sqrt((a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2)
+
+
+def _diem_3d_hop_le(diem_3d) -> list[tuple[float, float, float]] | None:
+    if not isinstance(diem_3d, (list, tuple)) or len(diem_3d) != SO_DIEM:
+        return None
+    ra: list[tuple[float, float, float]] = []
+    for v in diem_3d:
+        try:
+            if len(v) != 3:
+                return None
+            x, y, z = float(v[0]), float(v[1]), float(v[2])
+        except (TypeError, ValueError):
+            return None
+        if not (math.isfinite(x) and math.isfinite(y) and math.isfinite(z)):
+            return None
+        ra.append((x, y, z))
+    return ra
+
+
+def _tinh_chi_so_3d(p3: list[tuple[float, float, float]]) -> dict | None:
+    """Tính độ khum lòng bàn tay (3D cupping) và tỉ lệ ngón giữa 3D từ 21 điểm worldLandmarks."""
+    rong_3d = _d3(p3[5], p3[17])
+    dai_long_3d = _d3(p3[0], p3[9])
+    if rong_3d < 1e-6 or dai_long_3d < 1e-6:
+        return None
+    # Mặt phẳng (0, 5, 17): pháp tuyến n = (p5 - p0) x (p17 - p0)
+    u = (p3[5][0] - p3[0][0], p3[5][1] - p3[0][1], p3[5][2] - p3[0][2])
+    v = (p3[17][0] - p3[0][0], p3[17][1] - p3[0][1], p3[17][2] - p3[0][2])
+    nx = u[1] * v[2] - u[2] * v[1]
+    ny = u[2] * v[0] - u[0] * v[2]
+    nz = u[0] * v[1] - u[1] * v[0]
+    n_len = math.sqrt(nx * nx + ny * ny + nz * nz)
+    if n_len < 1e-9:
+        return None
+    # Khoảng cách từ gốc ngón giữa (9) và gốc ngón áp út (13) tới mặt phẳng lòng bàn tay
+    dist9 = abs((p3[9][0] - p3[0][0]) * nx + (p3[9][1] - p3[0][1]) * ny + (p3[9][2] - p3[0][2]) * nz) / n_len
+    dist13 = abs((p3[13][0] - p3[0][0]) * nx + (p3[13][1] - p3[0][1]) * ny + (p3[13][2] - p3[0][2]) * nz) / n_len
+    do_khum = _r(((dist9 + dist13) * 0.5) / rong_3d)
+    ngon_giua_3d = sum(_d3(p3[i], p3[j]) for i, j in zip(NGON["giua"], NGON["giua"][1:]))
+    return {
+        "do_khum_long": do_khum,
+        "ty_le_ngon_giua_3d": _r(ngon_giua_3d / dai_long_3d),
+    }
+
+
+def _lam_sach_duong_chi(raw: dict | None) -> dict | None:
+    if not isinstance(raw, dict):
+        return None
+    ra: dict = {"do_tin": "goi_y_tham_khao"}
+    if isinstance(raw.get("do_ro_tong"), (int, float)) and math.isfinite(raw["do_ro_tong"]):
+        ra["do_ro_tong"] = _r(min(1.0, max(0.0, float(raw["do_ro_tong"]))))
+    for ten in ("tam_dao", "tri_dao", "sinh_dao"):
+        muc = raw.get(ten)
+        if isinstance(muc, dict):
+            s = {}
+            for k in ("do_ro", "chieu_dai_uoc_luong", "do_cong"):
+                v = muc.get(k)
+                if isinstance(v, (int, float)) and math.isfinite(v):
+                    s[k] = _r(min(1.0, max(0.0, float(v))))
+            if s:
+                ra[ten] = s
+    return ra if len(ra) > 1 else None
+
+
+def do_tay_mo_rong(
+    diem: list,
+    ty_le: float,
+    tay: str,
+    diem_3d: list | None = None,
+    duong_chi_goi_y: dict | None = None,
+) -> dict:
+    """Mở rộng `do_tay` với góc mở ngón cái, tỉ lệ 3 đốt ngón giữa, độ khum 3D (worldLandmarks) và tín hiệu đường chỉ CV."""
+    kq = do_tay(diem, ty_le, tay)
+    if not kq["hop_le"]:
+        return kq
+
+    p = _diem(diem, ty_le)
+    assert p is not None
+    q, _ = _khung(p)
+
+    # Góc mở ngón cái: góc giữa vector (1→2) và trục (0→5)
+    v12 = (q[2][0] - q[1][0], q[2][1] - q[1][1])
+    v05 = (q[5][0] - q[0][0], q[5][1] - q[0][1])
+    n12 = math.hypot(v12[0], v12[1])
+    n05 = math.hypot(v05[0], v05[1])
+    goc_ngon_cai = 0.0
+    if n12 > 1e-6 and n05 > 1e-6:
+        cos_a = max(-1.0, min(1.0, (v12[0] * v05[0] + v12[1] * v05[1]) / (n12 * n05)))
+        goc_ngon_cai = round(math.degrees(math.acos(cos_a)), 1)
+
+    # Tỉ lệ 3 đốt ngón giữa (9→10 gốc, 10→11 giữa, 11→12 đầu)
+    d_goc, d_giua, d_dau = _d(q[9], q[10]), _d(q[10], q[11]), _d(q[11], q[12])
+    tong_giua = max(d_goc + d_giua + d_dau, 1e-6)
+    dot_ngon_giua = {
+        "dot_goc": _r(d_goc / tong_giua),
+        "dot_giua": _r(d_giua / tong_giua),
+        "dot_dau": _r(d_dau / tong_giua),
+    }
+
+    so_do = {
+        **kq["so_do"],
+        "goc_ngon_cai": goc_ngon_cai,
+        "dot_ngon_giua": dot_ngon_giua,
+    }
+
+    p3 = _diem_3d_hop_le(diem_3d)
+    if p3 is not None:
+        chi_so_3d = _tinh_chi_so_3d(p3)
+        if chi_so_3d is not None:
+            so_do["chi_so_3d"] = chi_so_3d
+
+    duong_sach = _lam_sach_duong_chi(duong_chi_goi_y)
+    return {
+        **kq,
+        "so_do": so_do,
+        **({"duong_chi_goi_y": duong_sach} if duong_sach is not None else {}),
+    }
+
+
+def so_sanh_hai_tay(kq_trai: dict | None, kq_phai: dict | None) -> dict | None:
+    """So sánh Tay Trái (Tiên Thiên · bản tính gốc) và Tay Phải (Hậu Thiên · hiện tại & hành động)."""
+    if not kq_trai or not kq_phai or not kq_trai.get("hop_le") or not kq_phai.get("hop_le"):
+        return None
+    sd_t, sd_p = kq_trai["so_do"], kq_phai["so_do"]
+    chenh_rong = _r(float(sd_p["rong_long"]) - float(sd_t["rong_long"]))
+    chenh_ngon = _r(float(sd_p["ngon"]["giua"]) - float(sd_t["ngon"]["giua"]))
+    chenh_2d4d = _r(float(sd_p["tro_ap_ut"]) - float(sd_t["tro_ap_ut"]))
+
+    dt_t = (kq_trai.get("fuzzy_bridge") or {}).get("dang_ban_tay") or {}
+    dt_p = (kq_phai.get("fuzzy_bridge") or {}).get("dang_ban_tay") or {}
+    hanh_t, hanh_p = dt_t.get("ma"), dt_p.get("ma")
+    ten_t, ten_p = dt_t.get("ten", ""), dt_p.get("ten", "")
+    chuyen_dich = bool(hanh_t and hanh_p and hanh_t != hanh_p)
+
+    # Độ tương đồng tỷ lệ 0..1
+    sai_lech = abs(chenh_rong) + abs(chenh_ngon) + abs(chenh_2d4d)
+    tuong_dong = _r(max(0.0, min(1.0, 1.0 - sai_lech * 1.5)))
+
+    if chuyen_dich:
+        nhan_xet = (
+            f"Tay trái (Tiên Thiên) thiên về {ten_t}, trong khi tay phải (Hậu Thiên) nghiêng sang {ten_p}. "
+            "Sự dịch chuyển này gợi ý bạn đã chủ động rèn luyện hoặc điều chỉnh cách ứng xử theo môi trường hiện tại."
+        )
+    elif sai_lech <= 0.08:
+        nhan_xet = (
+            f"Hai bàn tay có tỉ lệ rất cân xứng và cùng thuộc nhóm {ten_t or 'cân đối'}. "
+            "Bản tính tự nhiên (Tiên Thiên) và cách bạn hành động hiện tại (Hậu Thiên) khá nhất quán."
+        )
+    else:
+        nhan_xet = (
+            f"Cả hai tay cùng thuộc nhóm {ten_t or 'cân đối'}, có sai khác nhẹ ở tỉ lệ lòng và ngón tay — "
+            "phản ánh sự thích nghi tự nhiên giữa nền tảng sẵn có và thói quen thực hành hàng ngày."
+        )
+
+    return {
+        "chenh_rong_long": chenh_rong,
+        "chenh_ngon_giua": chenh_ngon,
+        "chenh_tro_ap_ut": chenh_2d4d,
+        "hanh_trai": hanh_t,
+        "hanh_phai": hanh_p,
+        "ten_hanh_trai": ten_t,
+        "ten_hanh_phai": ten_p,
+        "chuyen_dich_hanh": chuyen_dich,
+        "muc_tuong_dong": tuong_dong,
+        "nhan_xet": nhan_xet,
+        "do_tin": "bien_tap_tu_dat",
+    }
