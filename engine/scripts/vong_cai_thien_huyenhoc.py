@@ -162,8 +162,8 @@ def kiem_tuvi_ds_duality() -> list[str]:
                     slv_loi.append(f"tuvi_doi_song.{sao}.{cung}.{st}: thiếu lưỡng cực manh/de_vap/loi_khuyen")
                 ref = o.get("source_ref")
                 if ref is not None:
-                    if not (ref.get("source_id") and ref.get("han") and ref.get("am")):
-                        slv_loi.append(f"tuvi_doi_song.{sao}.{cung}.{st}: source_ref thiếu source_id/han/am")
+                    if not (ref.get("source_id") and ref.get("ten_sach") and ref.get("han") and ref.get("am")):
+                        slv_loi.append(f"tuvi_doi_song.{sao}.{cung}.{st}: source_ref thiếu source_id/ten_sach/han/am")
                     nhom = ref.get("nhom")
                     if st == "sang" and nhom != "A":
                         slv_loi.append(f"tuvi_doi_song.{sao}.{cung}.{st}: source_ref lệch tông (sang cần nhóm A, gặp {nhom})")
@@ -192,8 +192,8 @@ def kiem_battu_ds_duality() -> list[str]:
         for ma, o in (bt_ds.get(nhom_k) or {}).items():
             ref = (o or {}).get("source_ref") if isinstance(o, dict) else None
             if ref is not None:
-                if not (ref.get("source_id") and ref.get("han") and ref.get("am")):
-                    loi.append(f"battu_doi_song.{nhom_k}.{ma}: source_ref thiếu source_id/han/am")
+                if not (ref.get("source_id") and ref.get("ten_sach") and ref.get("han") and ref.get("am")):
+                    loi.append(f"battu_doi_song.{nhom_k}.{ma}: source_ref thiếu source_id/ten_sach/han/am")
                 if ref.get("nhom") == "C":
                     loi.append(f"battu_doi_song.{nhom_k}.{ma}: source_ref không gắn tĩnh nhóm C (cần lọc tuổi < 18)")
     return loi
@@ -212,8 +212,8 @@ def kiem_kinhdich_duality() -> list[str]:
         if not (q.get("y_chinh") and q.get("mat_toi") and q.get("loi_khuyen") and q.get("cau_tu_soi")):
             loi.append(f"kinhdich.que.{k}: thiếu lưỡng cực y_chinh/mat_toi/loi_khuyen/cau_tu_soi")
         ref = q.get("source_ref")
-        if ref is not None and not (ref.get("source_id") and ref.get("han") and ref.get("dich")):
-            loi.append(f"kinhdich.que.{k}: source_ref thiếu source_id/han/dich")
+        if ref is not None and not (ref.get("source_id") and ref.get("ten_sach") and ref.get("han") and ref.get("dich")):
+            loi.append(f"kinhdich.que.{k}: source_ref thiếu source_id/ten_sach/han/dich")
     return loi
 
 
