@@ -25,7 +25,7 @@ const lk = (duong_dan: string, nhan: string): Lk => ({ nhan, duong_dan });
 
 export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; con: (Lk & { mo_ta: string })[] })[] = [
   { ...lk("/ban-than", "Bản thân"), bieu_tuong: "lap_lanh", di_dong: true, con: [
-    { ...lk("/than-so", "Thần số học"), mo_ta: "Bốn số cốt lõi, Bản đồ con số, năm cá nhân" },
+    // MENU-TS: Thần số học chuyển sang Huyền học (migration menu_ts_huyen_hoc).
     { ...lk("/hom-nay", "Hôm nay của bạn"), mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
     { ...lk("/xem-ngay-tot", "Xem ngày tốt"), mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
     // GD-MENU: hồ sơ gia đình "Nhà Tôi" thuộc cụm Bản thân (migration gd_menu_nha_toi).
@@ -38,6 +38,8 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/ban-do-doi-ngu", "Bản đồ đội ngũ (Chủ DN)"), mo_ta: "Xem 5 hành đội ngũ & gợi ý phối hợp 2 chiều cho 1–8 cộng sự" },
   ] },
   { ...lk("/huyen-hoc", "Huyền học"), bieu_tuong: "la_ban", di_dong: true, con: [
+    // MENU-TS: Thần số học đứng đầu; "Tuổi làm nhà, cưới hỏi" nhường chỗ (migration menu_ts_huyen_hoc).
+    { ...lk("/than-so", "Thần số học"), mo_ta: "Bốn số cốt lõi, Bản đồ con số, năm cá nhân" },
     { ...lk("/tu-vi", "Tử vi"), mo_ta: "Lá số 12 cung, 3 tháng tới, định giờ sinh" },
     { ...lk("/bat-tu", "Bát tự"), mo_ta: "Tứ trụ, ngũ hành, thập thần" },
     { ...lk("/kinh-dich", "Kinh Dịch"), mo_ta: "Gieo 3 đồng xu, quẻ đầu ngày, lời hào" },
@@ -47,7 +49,6 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/tarot", "Xem Tarot"), mo_ta: "Xáo bài, rút lá, 5 trải bài, 78 lá có nguồn" },
     // KM-3: Kỳ Môn Độn Giáp vào menu Huyền học, mục thứ 12 (migration km_3_menu_ky_mon).
     { ...lk("/ky-mon", "Kỳ Môn Độn Giáp"), mo_ta: "Giờ này hướng nào thuận, hợp việc gì" },
-    { ...lk("/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"), mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
     // TM-1: ba công cụ có bản theo năm ở menu "Năm" nhường chỗ cho cụm kiến thức lớn (migration tm_1_menu_huyen_hoc).
     { ...lk("/tu-vi/sao-o-cung", "Sao ở từng cung Tử vi"), mo_ta: "14 chính tinh ở 12 cung: sáng hãm, sao đi cùng" },
     { ...lk("/bat-tu/menh-theo-nam", "Sinh năm nào mệnh gì"), mo_ta: "Can chi, nạp âm, màu hợp, tuổi hợp 1950–2027" },

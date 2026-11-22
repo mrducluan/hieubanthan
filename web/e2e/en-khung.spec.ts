@@ -78,7 +78,7 @@ test.describe("trên trình duyệt", () => {
     await expect(nav.getByRole("link", { name: "Me", exact: true })).toBeVisible();
     // EN-ALL GĐ 3d: Bát tự mở bản Anh → mục cha "Chinese Metaphysics" có ≥ 2 con (BaZi, Tarot), Tarot nằm trong bảng thả xuống;
     // mục cha sáng khi đang ở trang Tarot.
-    await expect(nav.getByRole("link", { name: "Chinese Metaphysics" })).toHaveAttribute("aria-current", "page");
+    await expect(nav.getByRole("link", { name: "Metaphysics", exact: true })).toHaveAttribute("aria-current", "page");
     const thanh = page.locator("[data-thanh-mang=tarot]:visible"); // lúc tải dần React giữ tạm 2 thanh (bản đệm + bản đếm)
     await expect(thanh).toBeVisible();
     await expect(thanh.locator("[data-muc=la_bai]")).toHaveAttribute("aria-current", /page|location/);
@@ -93,7 +93,8 @@ test.describe("trên trình duyệt", () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/en/numerology");
     const tab = page.locator("[data-thanh-duoi]");
-    await expect(tab.getByRole("link", { name: "Me", exact: true })).toHaveAttribute("aria-current", "page");
+    // MENU-TS: Numerology thuộc mục cha Huyền học ("Metaphysics"), không còn dưới "Me".
+    await expect(tab.getByRole("link", { name: "Metaphysics", exact: true })).toHaveAttribute("aria-current", "page");
     await page.getByTestId("nut-menu").click();
     const dd = page.getByTestId("menu-di-dong");
     await expect(dd.getByRole("link", { name: "Tarot" })).toBeVisible();

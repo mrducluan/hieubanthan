@@ -115,6 +115,13 @@ test("menu Huyền học: 3 cụm kiến thức lớn thay 3 công cụ đã có
   for (const h of ["/tuoi-xong-dat", "/xem-sao-han", "/phong-thuy/huong-xau-nam", "/kinh-dich/que", "/kien-thuc"]) expect(hh).not.toContain(h);
   const huyenHoc = MENU_DAU_TRANG.find((m) => m.href === "/huyen-hoc")!;
   for (const d of ["/tarot", "/tarot/la-bai/thap", "/kinh-dich/que/can", "/kien-thuc"]) expect(dangOMuc(d, huyenHoc), d).toBe(true);
+  // MENU-TS (2026-11-22): Thần số học đứng đầu Huyền học, rời Bản thân; Tuổi làm nhà rời menu nhưng vẫn sáng mục cha.
+  expect(hh[0]).toBe("/than-so");
+  expect(hh).not.toContain("/xem-tuoi-lam-nha");
+  const banThan = MENU_DAU_TRANG.find((m) => m.href === "/ban-than")!;
+  expect(banThan.con.map((c) => c.href)).not.toContain("/than-so");
+  for (const d of ["/than-so", "/than-so/y-nghia-so/so-7", "/xem-tuoi-lam-nha"]) expect(dangOMuc(d, huyenHoc), d).toBe(true);
+  expect(dangOMuc("/than-so", banThan)).toBe(false);
   const nam = MENU_DAU_TRANG.find((m) => m.href === "/nam/{nam}")!.con.map((c) => c.href);
   for (const h of ["/tuoi-xong-dat/{nam}", "/xem-sao-han/{nam}", "/phong-thuy/huong-xau-nam/{nam}"]) expect(nam).toContain(h);
 });
@@ -274,6 +281,7 @@ test("menu đầu trang: bảng Huyền học có 3 cụm mới", async ({ page 
   for (const t of ["Sao ở từng cung Tử vi", "Sinh năm nào mệnh gì", "Xem Tarot"]) await expect(menu.getByRole("link", { name: new RegExp(t) })).toBeVisible();
   await expect(menu.getByRole("link", { name: /Xem Tarot/ })).toHaveAttribute("href", "/tarot");
   await expect(menu.getByRole("link", { name: /Kỳ Môn Độn Giáp/ })).toHaveAttribute("href", "/ky-mon");   // KM-3
+  await expect(menu.getByRole("link", { name: /Thần số học/ })).toHaveAttribute("href", "/than-so");   // MENU-TS
   for (const t of [/Tuổi xông đất/, /64 quẻ Kinh Dịch/, /Thư viện kiến thức/]) await expect(menu.getByRole("link", { name: t })).toHaveCount(0);
 });
 

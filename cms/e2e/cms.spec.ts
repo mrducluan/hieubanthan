@@ -493,8 +493,14 @@ test("Giao diện website: menu chân trang, dải thông báo, banner, bài m�
   // link ngoài bị CMS từ chối
   expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h,
     data: { cot: [{ ten: "Xấu", lien_ket: [{ nhan: "x", loai: "duong_dan", duong_dan: "//evil.vn" }] }] } })).status()).toBe(400);
+  // FOOTER-2: thiếu trang trụ của các môn huyền học → CMS không cho lưu
   expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h, data: { cot: [
-    { ten: "Đọc gì hôm nay", lien_ket: [{ nhan: "Bài số 7 nổi bật", loai: "bai", bai: bai.id }, { nhan: "Tử vi", loai: "duong_dan", duong_dan: "/tu-vi" }] },
+    { ten: "Thiếu trụ", lien_ket: [{ nhan: "Tử vi", loai: "duong_dan", duong_dan: "/tu-vi" }] },
+  ] } })).status()).toBe(400);
+  const tru = ["/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot", "/ky-mon", "/hop-doi", "/huyen-hoc"]
+    .map((d) => ({ nhan: `Trụ ${d}`, loai: "duong_dan", duong_dan: d }));
+  expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h, data: { cot: [
+    { ten: "Đọc gì hôm nay", lien_ket: [{ nhan: "Bài số 7 nổi bật", loai: "bai", bai: bai.id }, ...tru] },
     { ten: "Pháp lý", lien_ket: [{ nhan: "Điều khoản", loai: "duong_dan", duong_dan: "/dieu-khoan" }] },
   ] } })).ok()).toBeTruthy();
   expect((await request.post(`${CMS}/api/globals/trang-chu`, { headers: h, data: {

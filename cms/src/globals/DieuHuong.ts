@@ -9,31 +9,32 @@ import { APIError, type Field, type GlobalBeforeChangeHook, type GlobalConfig } 
 import { ai, chiChuBien, truongChuBien } from "../access";
 import { lamMoiGlobal } from "../hooks/lamMoiWeb";
 import { chuanHoaDuLieu, kiemRanhGioi } from "../kiem-dinh/kiem-dinh";
+import { thieuTru } from "../lib/tru-chan-trang";
 
 /** Đường dẫn trong site: bắt đầu bằng "/", không có khoảng trắng, không "//" (chặn link sang trang khác giả làm nội bộ). */
 export const DUONG_TRONG_SITE = /^\/(?![/\\])[^\s\\]*$/;   // chặn //x và /\x (trình duyệt hiểu là link ngoài)
 
+// FOOTER-2: 4 cột theo cụm từ khoá (Huyền học · Lịch & tuổi · Kiến thức · Về chúng tôi) — trùng web/lib/menu-chan-trang.ts.
 export const MENU_MAC_DINH: { ten: string; lien_ket: { nhan: string; duong_dan: string }[] }[] = [
   { ten: "Huyền học", lien_ket: [
-    ["/than-so", "Thần số học"], ["/tu-vi", "Tử vi"], ["/bat-tu", "Bát tự"], ["/kinh-dich", "Kinh Dịch"],
-    ["/phong-thuy", "Phong thuỷ"], ["/nhan-tuong", "Nhân tướng học"], ["/tarot", "Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"],
-    ["/hop-doi", "Hợp đôi"], ["/huyen-hoc", "Tất cả các mảng"],
-    ["/hom-nay", "Hôm nay của bạn"], ["/thoi-gian-toi", "Thời gian tới của bạn"], ["/nam", "Xem theo năm"],
-    ["/xem-ngay-tot", "Xem ngày tốt"], ["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"],
+    ["/than-so", "Thần số học"], ["/tu-vi", "Xem Tử vi"], ["/bat-tu", "Xem Bát tự (Tứ trụ)"], ["/kinh-dich", "Gieo quẻ Kinh Dịch"],
+    ["/phong-thuy", "Phong thuỷ nhà ở"], ["/nhan-tuong", "Xem tướng mặt"], ["/tarot", "Xem bài Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"],
+    ["/hop-doi", "Xem hợp đôi"], ["/huyen-hoc", "Tất cả các môn huyền học"],
+  ].map(([duong_dan, nhan]) => ({ nhan: nhan!, duong_dan: duong_dan! })) },
+  { ten: "Lịch & tuổi", lien_ket: [
+    ["/xem-ngay-tot", "Xem ngày tốt"], ["/lich-am", "Lịch âm các năm"], ["/doi-lich-am-duong", "Đổi lịch âm dương"], ["/nam", "Năm nay con gì, mệnh gì"],
+    ["/bat-tu/menh-theo-nam", "Sinh năm nào mệnh gì"], ["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"], ["/tuoi-xong-dat", "Tuổi xông đất"], ["/xem-sao-han", "Sao hạn theo tuổi"],
+    ["/phong-thuy/huong-hop-tuoi", "Hướng nhà hợp tuổi"], ["/phong-thuy/huong-xau-nam", "Hướng xấu theo năm"],
   ].map(([duong_dan, nhan]) => ({ nhan: nhan!, duong_dan: duong_dan! })) },
   { ten: "Kiến thức", lien_ket: [
-    ["/kien-thuc", "Thư viện kiến thức"], ["/than-so/y-nghia-so", "Ý nghĩa các con số"], ["/kinh-dich/que", "64 quẻ Kinh Dịch"],
-    ["/tu-vi/chinh-tinh", "14 chính tinh Tử vi"], ["/tarot/la-bai", "78 lá bài Tarot"], ["/tu-dien", "Từ điển thuật ngữ"], ["/tu-vi/la-so-mau", "Lá số mẫu"],
-    ["/phong-thuy/huong-hop-tuoi", "Hướng hợp tuổi"], ["/hop-doi/cap-so", "Số chủ đạo hợp nhau"], ["/tuoi-xong-dat", "Tuổi xông đất"],
-    ["/xem-sao-han", "Sao hạn theo tuổi"], ["/doi-lich-am-duong", "Đổi lịch âm dương"], ["/blog", "Blog"],
+    ["/than-so/y-nghia-so", "Ý nghĩa các con số"], ["/tu-vi/chinh-tinh", "14 chính tinh Tử vi"], ["/bat-tu/thap-than", "Thập thần Bát tự"], ["/kinh-dich/que", "64 quẻ Kinh Dịch"],
+    ["/phong-thuy/dau-hieu", "Dấu hiệu phong thuỷ trong nhà"], ["/nhan-tuong/bo-vi", "Bộ vị tướng mặt"], ["/tarot/la-bai", "78 lá bài Tarot"], ["/hop-doi/cap-so", "Số chủ đạo hợp nhau"],
+    ["/tu-dien", "Từ điển thuật ngữ"], ["/kien-thuc", "Thư viện kiến thức"], ["/blog", "Blog"],
   ].map(([duong_dan, nhan]) => ({ nhan: nhan!, duong_dan: duong_dan! })) },
   { ten: "Về chúng tôi", lien_ket: [
-    ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia", "Đội ngũ biên soạn"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"],
-    ["/lien-he", "Liên hệ"], ["/lien-he#chu-de", "Góp ý, báo lỗi"], ["/ban-do-doi-ngu", "Bản đồ đội ngũ (Chủ DN)"], ["/tai-khoan", "Tài khoản"], ["/nap-sao", "Nạp Sao"], ["/goi-xem", "Các gói xem"],
-  ].map(([duong_dan, nhan]) => ({ nhan: nhan!, duong_dan: duong_dan! })) },
-  { ten: "Pháp lý", lien_ket: [
-    ["/chinh-sach-rieng-tu", "Chính sách quyền riêng tư"], ["/dieu-khoan", "Điều khoản sử dụng"],
-    ["/mien-tru-trach-nhiem", "Miễn trừ trách nhiệm"], ["/chinh-sach-rieng-tu#quyen", "Yêu cầu về dữ liệu cá nhân"],
+    ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia", "Đội ngũ biên soạn"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/lien-he", "Liên hệ"],
+    ["/goi-xem", "Các gói xem"], ["/chinh-sach-rieng-tu", "Chính sách quyền riêng tư"], ["/dieu-khoan", "Điều khoản sử dụng"], ["/mien-tru-trach-nhiem", "Miễn trừ trách nhiệm"],
+    ["/chinh-sach-rieng-tu#quyen", "Yêu cầu về dữ liệu cá nhân"],
   ].map(([duong_dan, nhan]) => ({ nhan: nhan!, duong_dan: duong_dan! })) },
 ];
 
@@ -58,6 +59,14 @@ export const BIEU_TUONG_CAM_KET = [
 
 /** Chữ chân trang: chặn vùng cấm, liên hệ gõ tay, tên nội bộ, tự nhận thẩm định (luật chung kiem-dinh.ts). */
 const kiemChanTrang: GlobalBeforeChangeHook = ({ data }) => {
+  // Hook này chạy TRƯỚC bước kiểm từng ô của Payload: còn liên kết sai (đường dẫn lạ, thiếu bài / chuyên mục) thì để bước kiểm
+  // ô báo lỗi cụ thể của nó, không đè bằng lỗi "thiếu trang trụ".
+  const lk = (Array.isArray(data.cot) ? data.cot : []).flatMap((c: { lien_ket?: unknown }) => (Array.isArray(c?.lien_ket) ? c.lien_ket : [])) as
+    { loai?: string; duong_dan?: unknown; bai?: unknown; chuyen_muc?: unknown }[];
+  const hopLe = lk.every((l) => ((l?.loai ?? "duong_dan") === "duong_dan" ? typeof l?.duong_dan === "string" && DUONG_TRONG_SITE.test(l.duong_dan)
+    : l?.loai === "bai" ? l.bai != null : l?.chuyen_muc != null));
+  const thieu = hopLe ? thieuTru(data.cot) : [];
+  if (thieu.length) throw new APIError(`Chưa lưu được — chân trang phải có đủ trang trụ các môn huyền học (tốt cho SEO). Còn thiếu: ${thieu.join(", ")}`, 400, null, true);
   const th = (data.thuong_hieu ?? {}) as { gioi_thieu?: string; cam_ket?: { chu?: string }[] };
   const van = [th.gioi_thieu, ...(th.cam_ket ?? []).map((c) => c?.chu), data.mien_tru, data.nhan_ung_ho]
     .filter((x): x is string => typeof x === "string").join("\n");

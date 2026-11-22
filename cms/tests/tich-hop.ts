@@ -5,6 +5,7 @@ import assert from "node:assert/strict";
 import { getPayload, type Payload } from "payload";
 import config from "../src/payload.config";
 import { MENU_MAC_DINH } from "../src/globals/DieuHuong";
+import { TRU_CHAN_TRANG } from "../src/lib/tru-chan-trang";
 import { vaiTro } from "../src/access";
 import { buocHienTai, docCookie, maTotp, tuBase32 } from "../src/lib/totp";
 import { dongBoSoTrang, kiemSoTrang } from "../src/lib/so-trang";
@@ -387,8 +388,8 @@ await ca("nút Kiểm trùng (POST /api/bai-viet/kiem-trung): cộng tác viên 
 
 await ca("Điều hướng chân trang: mặc định 4 cột; link ngoài/thiếu bài bị chặn; chỉ Chủ biên sửa; bài → slug khi đọc", async () => {
   const g = await payload.findGlobal({ slug: "dieu-huong" }) as unknown as { cot: { ten: string; lien_ket: { duong_dan: string }[] }[] };
-  assert.deepEqual(g.cot.map((c) => c.ten), ["Huyền học", "Kiến thức", "Về chúng tôi", "Pháp lý"]);
-  assert.ok(g.cot[1]!.lien_ket.some((l) => l.duong_dan === "/blog"));
+  assert.deepEqual(g.cot.map((c) => c.ten), ["Huyền học", "Lịch & tuổi", "Kiến thức", "Về chúng tôi"]);   // FOOTER-2
+  assert.ok(g.cot[2]!.lien_ket.some((l) => l.duong_dan === "/blog"));
   const cot = (lien_ket: unknown[]) => ({ cot: [{ ten: "Thử", lien_ket }] }) as never;
   for (const xau of ["//evil.vn", "/\\evil.vn", "https://evil.vn", "javascript:alert(1)", "tu-vi"]) {
     await nem(() => payload.updateGlobal({ slug: "dieu-huong", user: chuBien, overrideAccess: false,
@@ -398,10 +399,14 @@ await ca("Điều hướng chân trang: mặc định 4 cột; link ngoài/thi�
     data: cot([{ nhan: "x", loai: "bai" }]) }), /không hợp lệ.*Bài viết/);
   await nem(() => payload.updateGlobal({ slug: "dieu-huong", user: bienTap, overrideAccess: false,
     data: cot([{ nhan: "x", loai: "duong_dan", duong_dan: "/tu-vi" }]) }), /permission|quyền|Forbidden/i);
+  // FOOTER-2: thiếu trang trụ nào của các môn huyền học → không lưu được (sửa tay từng làm rơi 5 môn).
+  await nem(() => payload.updateGlobal({ slug: "dieu-huong", user: chuBien, overrideAccess: false,
+    data: cot([{ nhan: "Tử vi", loai: "duong_dan", duong_dan: "/tu-vi" }]) }), /thiếu.*\/than-so/);
+  const tru = TRU_CHAN_TRANG.map((d) => ({ nhan: d, loai: "duong_dan", duong_dan: d }));
   const b = await payload.create({ collection: "bai-viet", overrideAccess: true, data: { ...baiSach(`${dau}-menu`), _status: "published" } as never });
   tao.push({ collection: "bai-viet", id: b.id });
   await payload.updateGlobal({ slug: "dieu-huong", user: chuBien, overrideAccess: false,
-    data: cot([{ nhan: "Bài hay", loai: "bai", bai: b.id }, { nhan: "Tử vi", loai: "duong_dan", duong_dan: "/tu-vi" }]) });
+    data: cot([{ nhan: "Bài hay", loai: "bai", bai: b.id }, ...tru]) });
   const doc = await payload.findGlobal({ slug: "dieu-huong", depth: 1, overrideAccess: false }) as unknown as
     { cot: { lien_ket: { bai?: { slug: string } }[] }[] };
   assert.equal(doc.cot[0]!.lien_ket[0]!.bai!.slug, `${dau}-menu`);
