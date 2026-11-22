@@ -102,7 +102,7 @@ test("đầu trang: một cú bấm 'Đọc luận giải đời thường' vừ
   await page.goto("/bat-tu");
   const nut = page.getByTestId("bat-tu-den-luan-giai");
   await expect(nut).toBeVisible();
-  await expect(page.getByTestId("luan-giai-toan-bo")).toHaveCount(0);
+  // CRO-1: bản Việt tự tải chương đầu khi có lá số — nút đầu trang chỉ còn việc cuộn tới bài luận.
   await nut.click();
   await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });
 });

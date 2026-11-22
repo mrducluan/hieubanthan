@@ -315,7 +315,7 @@ export function BatTu() {
       {laSo && ls && (
         <section id="luan-giai" aria-label={cb("aria.luan_giai")} className="mt-10 scroll-mt-24">
           <CachChinhBatTu.Provider value={{ cach: cachChinh }}>
-            <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten={cb("luan_giai.ten")} moDun="battu" tuMo />
+            <LuanGiaiToanBo duongDan="/api/battu/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten={cb("luan_giai.ten")} moDun="battu" tuMo={!en} />
           </CachChinhBatTu.Provider>
           {/* EN-ALL: bản Anh chưa có lối đi chéo mảng (các mảng khác chưa mở) → bỏ khối CTA, giữ mốc đọc xong + góp ý. */}
           <CuoiBaiDoc moDun="battu" cauHoi={cb("luan_giai.cau_hoi")} khongCta={en} />
