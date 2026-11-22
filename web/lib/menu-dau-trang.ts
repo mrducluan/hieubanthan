@@ -6,7 +6,7 @@ export type MucMenu = { href: string; ten: string; bieu_tuong: BieuTuong; di_don
 
 export const MENU_DAU_TRANG: MucMenu[] = [
   { href: "/ban-than", ten: "Bản thân", bieu_tuong: "lap_lanh", di_dong: true, con: [
-    { href: "/than-so", ten: "Thần số học", mo_ta: "Bốn số cốt lõi, Bản đồ con số, năm cá nhân" },
+    // MENU-TS (chủ dự án 2026-11-22): "Thần số học" chuyển sang Huyền học (URL /than-so giữ nguyên).
     { href: "/hom-nay", ten: "Hôm nay của bạn", mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
     { href: "/xem-ngay-tot", ten: "Xem ngày tốt", mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
     // GD-MENU (chủ dự án duyệt 2026-11-16): hồ sơ gia đình "Nhà Tôi" thuộc cụm Bản thân (không cần tài khoản, tab đầu ở điện thoại).
@@ -19,6 +19,10 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/ban-do-doi-ngu", ten: "Bản đồ đội ngũ (Chủ DN)", mo_ta: "Xem 5 hành đội ngũ & gợi ý phối hợp 2 chiều cho 1–8 cộng sự" },
   ] },
   { href: "/huyen-hoc", ten: "Huyền học", bieu_tuong: "la_ban", di_dong: true, con: [
+    // MENU-TS (chủ dự án 2026-11-22): Thần số học đứng đầu menu Huyền học (cửa vào như hub /huyen-hoc, breadcrumb TM-1
+    // vốn đã là "Trang chủ › Huyền học › Thần số học"). "Tuổi làm nhà, cưới hỏi" nhường chỗ (≤ 12 mục con) — vẫn có bản
+    // theo năm ở menu "Năm", hub Huyền học, chân trang; trang gốc vẫn làm sáng mục cha (THUOC_THEM).
+    { href: "/than-so", ten: "Thần số học", mo_ta: "Bốn số cốt lõi, Bản đồ con số, năm cá nhân" },
     { href: "/tu-vi", ten: "Tử vi", mo_ta: "Lá số 12 cung, 3 tháng tới, định giờ sinh" },
     { href: "/bat-tu", ten: "Bát tự", mo_ta: "Tứ trụ, ngũ hành, thập thần" },
     { href: "/kinh-dich", ten: "Kinh Dịch", mo_ta: "Gieo 3 đồng xu, quẻ đầu ngày, lời hào" },
@@ -31,7 +35,6 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/tarot", ten: "Xem Tarot", mo_ta: "Xáo bài, rút lá, 5 trải bài, 78 lá có nguồn" },
     // KM-3 (chủ dự án duyệt 2026-11-18): Kỳ Môn Độn Giáp vào menu Huyền học — mục thứ 12 (đủ trần).
     { href: "/ky-mon", ten: "Kỳ Môn Độn Giáp", mo_ta: "Giờ này hướng nào thuận, hợp việc gì" },
-    { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà, cưới hỏi", mo_ta: "Kim lâu, Hoang ốc, Tam tai, năm thuận" },
     // TM-1 (chủ dự án duyệt 2026-11-03): 3 công cụ đã có bản theo năm ở menu "Năm" (hướng xấu, xông đất, sao hạn) nhường
     // chỗ cho cụm kiến thức lớn chưa có lối vào menu. Ba công cụ vẫn ở menu Năm, hub Huyền học, chân trang.
     { href: "/tu-vi/sao-o-cung", ten: "Sao ở từng cung Tử vi", mo_ta: "14 chính tinh ở 12 cung: sáng hãm, sao đi cùng" },
@@ -63,7 +66,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
 
 /** TM-1: trang thuộc một mục cha nhưng không có dòng menu con riêng (vd /xem-sao-han, /tuoi-xong-dat — menu con của chúng
  *  nằm ở "Năm" dưới dạng /…/{nam}, nhưng trang gốc là công cụ của hub Huyền học). Chỉ dùng để làm sáng mục cha. */
-const THUOC_THEM: Record<string, string[]> = { "/tai-khoan": ["/dang-nhap"], "/huyen-hoc": ["/xem-sao-han", "/tuoi-xong-dat", "/kien-thuc", "/kinh-dich/que", "/sinh-o-nuoc-ngoai"] };   // TR-1 menu: thư viện + 64 quẻ rời menu nhưng vẫn thuộc Huyền học
+const THUOC_THEM: Record<string, string[]> = { "/tai-khoan": ["/dang-nhap"], "/huyen-hoc": ["/xem-sao-han", "/tuoi-xong-dat", "/xem-tuoi-lam-nha", "/kien-thuc", "/kinh-dich/que", "/sinh-o-nuoc-ngoai"] };   // TR-1 menu: thư viện + 64 quẻ rời menu nhưng vẫn thuộc Huyền học
 const duongCua = (m: Pick<MucMenu, "href" | "con">) => [m.href, ...m.con.map((c) => c.href), ...(THUOC_THEM[m.href] ?? [])];
 
 /** Đang ở mục này: trùng đường dẫn mục cha hoặc một menu con (vd /tu-vi/... → "Huyền học"); /tai-khoan gồm cả /dang-nhap. */
