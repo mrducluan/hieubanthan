@@ -59,6 +59,8 @@ export function GiaUuDai({ u, lon = false }: { u: UuDai; lon?: boolean }) {
 export function ConSuat({ u, className = "" }: { u: UuDai; className?: string }) {
   if (u.con_suat === null || u.tong_suat === null) return null;
   const daDung = u.tong_suat - u.con_suat;
+  // CRO-1: chưa ai dùng suất nào thì "Còn 39/39" chỉ báo "chưa ai mua" — không hiện (hạn chót vẫn hiện).
+  if (daDung <= 0) return null;
   return (
     <span className={`block ${className}`} data-testid="ud-con-suat">
       <span className="flex items-center gap-1.5 text-xs text-fg-muted">

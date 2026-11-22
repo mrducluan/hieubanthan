@@ -99,8 +99,7 @@ test("báo cáo: khách đọc chương 1 → mở khoá → đăng nhập OTP �
   expect((await so(EMAIL)).dem("dung")).toBe(1);
 
   // 5. Bát tự: ví 0, đã nhận quà → nạp nhanh (cổng giả) → /nap-sao/ket-qua → tự về /bat-tu → tự mở, trừ 10.
-  await page.goto("/bat-tu");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await page.goto("/bat-tu");   // CRO-1: chương 1 tự mở, nút "Mở toàn bộ" hiện thẳng
   await page.getByTestId("lg-mo-khoa").click();
   await expect(page.getByTestId("nap-nhanh")).toBeVisible();
   await expect(page.getByTestId("nhan-chao-mung")).toHaveCount(0);

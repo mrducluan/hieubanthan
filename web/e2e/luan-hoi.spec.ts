@@ -76,10 +76,10 @@ test("chương khoá (SAO-2): người quanh bạn chỉ còn tên + mức, lớ
 
 test("Bát tự cùng khuôn: 6 người quanh bạn, la bàn nghề theo hai cách lấy dụng thần", async ({ page }) => {
   await napHoSo(page, HO_SO_MAU);
-  await page.goto("/bat-tu");
+  // CRO-1: Bát tự tự tải chương 1 khi có lá số — chờ lượt gọi đó (không còn nút mở).
   const [res] = await Promise.all([
     page.waitForResponse((r) => r.url().endsWith("/api/battu/luan-giai")),
-    page.getByRole("button", { name: "Xem luận giải" }).click(),
+    page.goto("/bat-tu"),
   ]);
   const bc = await res.json();
   expect((bc.nguoi_quanh as unknown[]).length).toBe(6);

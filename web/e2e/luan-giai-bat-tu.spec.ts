@@ -21,7 +21,7 @@ async function moBaoCao(page: Page, bc: object = BC) {
   await page.route("**/api/luan-giai/luu", (r) => { goi.luu!.push(r.request()); return r.fulfill({ json: { id: "bai-bt" } }); });
   await napHoSo(page);
   await page.goto("/bat-tu");
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible();   // CRO-1: Bát tự tự mở chương 1 (không còn nút mở)
   await expect(page.getByTestId("luan-giai-toan-bo")).toHaveAttribute("data-phien-ban", "doi_song_1");
   return goi;
 }
@@ -122,7 +122,7 @@ test("Bát tự SAO-2: chương 1 đọc được (kèm thanh sức tự thân),
   await page.route("**/api/luan-giai/tuy-chon", (r) => r.fulfill({ json: { tu_luu_luan_giai: false } }));
   await napHoSo(page);
   await page.goto("/bat-tu");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible();   // CRO-1: Bát tự tự mở chương 1 (không còn nút mở)
   const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc.getByTestId("lg-chuong-tong_quan")).toContainText(dau!.tom_tat!);
   await expect(bc.getByTestId("thanh-than")).toBeVisible();

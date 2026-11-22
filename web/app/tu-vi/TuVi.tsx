@@ -19,6 +19,7 @@ import { CungSaoMenh } from "@/components/huyen-hoc/CungSaoMenh";
 import { ChiTietCung } from "@/components/huyen-hoc/ChiTietCung";
 import { DaiHanNhay, DongHoaHan } from "@/components/huyen-hoc/HanLaSo";
 import { DauMang } from "@/components/huyen-hoc/KhungMang";
+import { NutXuongForm } from "@/components/huyen-hoc/NutXuongForm";
 import { MoiLapLaSo } from "@/components/huyen-hoc/MoiLapLaSo";
 import { LuanGiaiToanBo } from "@/components/huyen-hoc/LuanGiaiToanBo";
 import { LuuNguyet } from "@/components/huyen-hoc/LuuNguyet";
@@ -164,7 +165,7 @@ export function TuVi() {
   // EN-ALL: mã (cung…) giữ chữ Việt làm khoá; HIỆN qua `ten_hien` của phản hồi (bản Việt: nguyên mã).
   const tenMa = tenTheo(gopTenHien(ls?.ten_hien, vh?.ten_hien), en);
   // Tiêu đề trang render cả lúc chờ hồ sơ → HTML phía máy chủ có <h1> + mô tả (SEO).
-  const dau = <DauMang Icon={Orbit} hinh="tu-vi" ten={ct("dau.ten")} mo_ta={ct("dau.mo_ta")} />;
+  const dau = <DauMang Icon={Orbit} hinh="tu-vi" ten={ct("dau.ten")} mo_ta={ct("dau.mo_ta")}>{!en && <NutXuongForm moDun="tuvi" />}</DauMang>;
   if (hoSo === undefined) return <div>{dau}<KhungTai /></div>;
   return (
     <TenHienProvider ten={[ls?.ten_hien, vh?.ten_hien, lnm?.ten_hien]}>

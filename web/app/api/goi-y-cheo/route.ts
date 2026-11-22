@@ -30,11 +30,13 @@ const Input = z.object({
 export async function POST(req: Request): Promise<NextResponse> {
   const p = Input.safeParse(await req.json().catch(() => null));
   if (!p.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
+  // Nút Sao của khối này mời đọc báo cáo của chính trang (Thần số / Tử vi / Bát tự); trang khác dẫn sang /tu-vi.
+  // CRO-1: giá cũng theo đúng báo cáo đó (giá riêng từng báo cáo) — trước lấy giá chung nên /than-so ghi hai giá khác nhau.
+  const moDun = (p.data.mang_hien_tai === TRANG_BAN_THAN ? null : mangLuanGiai(p.data.mang_hien_tai as MangTrang)) ?? "tuvi";
   const [kq, thu, gia] = await Promise.all([
     goiEngineDaKiem(p.data, "/v1/goi-y-cheo", dauNguoiGoi(req)),
-    // Nút Sao của khối này mời đọc báo cáo của chính trang (Thần số / Tử vi / Bát tự); trang khác dẫn sang /tu-vi.
-    dangThuSao((p.data.mang_hien_tai === TRANG_BAN_THAN ? null : mangLuanGiai(p.data.mang_hien_tai as MangTrang)) ?? "tuvi").catch(() => false),
-    giaLuanGiaiSao().catch(() => 10),
+    dangThuSao(moDun).catch(() => false),
+    giaLuanGiaiSao(moDun).catch(() => 10),
   ]);
   if (!kq.ok) return kq.res;
   // UD-2: đợt ưu đãi có hạn → nút Sao nói giá ưu đãi + giá thường.

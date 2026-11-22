@@ -15,7 +15,7 @@ const Vao = z.union([
 ]);
 
 const LOI: Record<string, [string, number]> = {
-  goi_khong_hop_le: ["Gói này không còn bán.", 422],
+  goi_khong_hop_le: ["Gói này không còn bán cho tài khoản của bạn (gói Lần đầu chỉ dành cho lần nạp đầu). Bạn chọn gói khác giúp nhé.", 422],
   cong_khong_hop_le: ["Cổng thanh toán chưa sẵn sàng.", 503],
   qua_nhieu_don: ["Bạn đang có nhiều đơn chờ thanh toán. Hoàn tất hoặc chờ 15 phút rồi thử lại.", 429],
   chua_mo: ["Hạng hội viên này chưa mở bán.", 503],

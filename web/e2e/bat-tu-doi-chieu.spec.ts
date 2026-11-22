@@ -42,7 +42,7 @@ test("kể lại các năm đã qua theo đúng cách 2 → kết luận cách 2
   await kl.getByRole("button", { name: /làm cách chính/ }).click();
   await expect(khoi.getByTestId("dc-cach_2")).toContainText("cách chính của bạn");
   // Báo cáo: dải thời gian hiện mức theo cách bạn chọn ở những giai đoạn hai cách khác nhau
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible();   // CRO-1: Bát tự tự mở chương 1 (không còn nút mở)
   const khac = FX.bao_cao.thoi_gian_bieu.filter((m) => m.hai_cach_khac);
   expect(khac.length).toBeGreaterThan(0);
   await expect(page.getByTestId("dong-thoi-gian").getByTestId("muc-cach-chinh")).toHaveCount(khac.length);

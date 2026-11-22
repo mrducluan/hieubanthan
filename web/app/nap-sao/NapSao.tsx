@@ -7,24 +7,26 @@ import Link from "@/components/khung/Lien";
 import { Check, Gift, Loader2, LockKeyhole, QrCode, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
-import { metaDongY } from "@/lib/meta-pixel";
+import { datGiaTriMeta, metaDongY } from "@/lib/meta-pixel";
 import { lopCot } from "@/lib/luoi";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import {
-  dongNapDau, giaMoiLanXem, goiMacDinh, hienNapDau, saoTangLanDau, soBaoCao, thuocTinhNap, tietKiemPhanTram, type GoiHienThi, type NapDau,
+  dongNapDau, giaMoiLanXem, locGoiLanDau, goiMacDinh, hienNapDau, saoTangLanDau, soBaoCao, thuocTinhNap, tietKiemPhanTram, type GoiHienThi, type NapDau,
 } from "@/lib/thanh-toan/nap-dau";
 
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} ₫`;
 
-export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau, mienPhi = false }: {
+export function NapSao({ goi: goiDu, cong, giaBaoCao, napDau: napDauBanDau, mienPhi = false }: {
   goi: GoiHienThi[]; cong: "pay2s" | "gia" | null; giaBaoCao: number; napDau: NapDau | null;
   /** Không chỗ nào đang trừ Sao (máy chủ đọc công tắc) — chỉ để đo tỉ lệ rời trang theo trạng thái này. */
   mienPhi?: boolean;
 }) {
   // Rà UX mục 8: cổng chưa mở → không chọn sẵn gói nào (không có dấu ✓ dẫn tới ngõ cụt).
-  const [chon, setChon] = useState(cong ? goiMacDinh(goi)?.ma ?? "" : "");
+  const [chon, setChon] = useState(cong ? goiMacDinh(goiDu)?.ma ?? "" : "");
   const [token, setToken] = useState<string | null | undefined>(undefined);
   const [napDau, setNapDau] = useState<NapDau | null>(napDauBanDau);
+  // CRO-1: tài khoản đã từng nạp không thấy gói Lần đầu (máy chủ cũng từ chối tạo đơn).
+  const goi = locGoiLanDau(goiDu, napDau);
   const [daHoi, setDaHoi] = useState(false);   // đã hỏi "lần đầu" của tài khoản đang đăng nhập (tránh hiện rồi tắt)
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
@@ -49,6 +51,7 @@ export function NapSao({ goi, cong, giaBaoCao, napDau: napDauBanDau, mienPhi = f
   async function nap() {
     if (!token) return;
     setDang(true); setLoi(null);
+    datGiaTriMeta(goi?.find((x) => x.ma === chon)?.gia_vnd);   // CRO-1: InitiateCheckout có value
     ghi("checkout_started", thuocTinhNap(chon, napDau));
     try {
       const r = await fetch("/api/thanh-toan/tao-don", {

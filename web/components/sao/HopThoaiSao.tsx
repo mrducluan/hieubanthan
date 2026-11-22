@@ -7,6 +7,7 @@
 // Giọng: nói rõ giá trị người dùng nhận được và cái giá, không doạ, không đếm ngược giả, luôn có lối "để sau".
 // Cửa Sao v2 "Ba lối mở" (docs/CUA-SAO-V2.md): thanh ví + ba thẻ ngang hàng — Đọc ngay (QR, một gói vừa đủ) · Miễn phí,
 // mời bạn (gửi ngay trong hộp, con số thật từ cài đặt) · Hội viên năm (khi bật). Câu chữ: lib/loi-sao.ts.
+import { cachDangNhap } from "@/lib/dang-nhap";
 import { useEffect, useRef, useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
 import Link from "@/components/khung/Lien";
@@ -15,7 +16,7 @@ import { ChevronDown, Gift, Loader2, QrCode, Sparkles, UserPlus, Zap } from "luc
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
-import { metaDongY } from "@/lib/meta-pixel";
+import { datGiaTriMeta, metaDongY } from "@/lib/meta-pixel";
 import { QUAY_VE, TU_DONG_Y, dangKyHopThoaiSao, xoaChoMo, type YeuCauSao } from "@/lib/sao-client";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { useHoSo } from "@/lib/hoso";
@@ -78,6 +79,15 @@ export function HopThoaiSao() {
   );
 }
 
+const TEN_NCC: Record<string, string> = { google: "Google", zalo: "Zalo", facebook: "Facebook", apple: "Apple" };
+/** CRO-1: liệt kê đúng cách đăng nhập đang mở (env NEXT_PUBLIC_DANG_NHAP) — trước ghi cứng "Email hoặc Google". */
+function tenCachDangNhap(): string {
+  const c = cachDangNhap();
+  const ds = [...c.oauth.map((p) => TEN_NCC[p]), ...(c.email ? ["email"] : []), ...(c.sdt ? ["số điện thoại"] : [])];
+  if (ds.length <= 1) return `Đăng nhập bằng ${ds[0] ?? "Google"}`;
+  return `Đăng nhập bằng ${ds.slice(0, -1).join(", ")} hoặc ${ds[ds.length - 1]}`;
+}
+
 function DangNhapNhan({ y }: { y: YeuCauSao }) {
   const tiep = typeof window === "undefined" ? "/" : duongHienTai();
   const muc = useMucSao();
@@ -116,7 +126,7 @@ function DangNhapNhan({ y }: { y: YeuCauSao }) {
       <Button asChild className="w-full" onClick={() => ghiPhien(QUAY_VE, tiep)}>
         <Link href={`/dang-nhap?tiep=${encodeURIComponent(tiep)}`} data-testid="sao-dang-nhap">{nut}</Link>
       </Button>
-      <p className="text-xs text-fg-faint">Email hoặc Google, không cần mật khẩu. Hồ sơ của bạn vẫn có thể chỉ lưu trên máy.
+      <p className="text-xs text-fg-faint">{tenCachDangNhap()}, không cần mật khẩu. Hồ sơ của bạn vẫn có thể chỉ lưu trên máy.
         {hoi && y.tran ? ` Không vội thì ngày mai bạn lại có ${y.tran} câu miễn phí.` : ""}</p>
     </div>
   );
@@ -286,6 +296,7 @@ export function NapNhanh({ can = 0, kind = "nap", nguon = "luan_giai", giaCau, m
   async function nap() {
     setDang(true); setLoi(null);
     ghi("sao_prompt_answered", { kind, ket_qua: "nap", nguon });
+    datGiaTriMeta(ds?.find((x) => x.ma === chon)?.gia_vnd);   // CRO-1: InitiateCheckout có value
     ghi("checkout_started", { ...thuocTinhNap(chon, napDau), nguon: "nap_nhanh" });
     try {
       const sb = await supabase();
