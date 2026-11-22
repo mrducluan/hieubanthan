@@ -2,27 +2,31 @@
 // cms/src/globals/DieuHuong.ts — e2e/so-lieu-ngoai.spec.ts kiểm hai bản khớp nhau.
 export type CotChanTrang = { ten: string; ds: readonly (readonly [string, string])[] };
 
+// FOOTER-2 (chủ dự án 2026-11-22): 4 cột theo CỤM TỪ KHOÁ — Huyền học (trang trụ, chữ link = cách người ta tìm) · Lịch &
+// tuổi (từ khoá mùa vụ / theo năm) · Kiến thức (mỗi môn một cụm lớn) · Về chúng tôi (E-E-A-T + pháp lý). Bỏ link trùng URL
+// (#neo), trang noindex (Tài khoản, Nạp Sao), trang đã có ở menu đầu (Hôm nay, Thời gian tới, Bản đồ đội ngũ).
+// TRU_CHAN_TRANG: CMS không cho lưu chân trang thiếu trang trụ nào (cms/src/globals/DieuHuong.ts `thieuTru`).
+export const TRU_CHAN_TRANG = ["/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot", "/ky-mon", "/hop-doi", "/huyen-hoc"] as const;
 export const COT_CHAN_TRANG: readonly CotChanTrang[] = [
   { ten: "Huyền học", ds: [
-    ["/than-so", "Thần số học"], ["/tu-vi", "Tử vi"], ["/bat-tu", "Bát tự"], ["/kinh-dich", "Kinh Dịch"],
-    ["/phong-thuy", "Phong thuỷ"], ["/nhan-tuong", "Nhân tướng học"], ["/tarot", "Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"],
-    ["/hop-doi", "Hợp đôi"], ["/huyen-hoc", "Tất cả các mảng"],
-    ["/hom-nay", "Hôm nay của bạn"], ["/thoi-gian-toi", "Thời gian tới của bạn"], ["/nam", "Xem theo năm"],
-    ["/xem-ngay-tot", "Xem ngày tốt"], ["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"],
+    ["/than-so", "Thần số học"], ["/tu-vi", "Xem Tử vi"], ["/bat-tu", "Xem Bát tự (Tứ trụ)"], ["/kinh-dich", "Gieo quẻ Kinh Dịch"],
+    ["/phong-thuy", "Phong thuỷ nhà ở"], ["/nhan-tuong", "Xem tướng mặt"], ["/tarot", "Xem bài Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"],
+    ["/hop-doi", "Xem hợp đôi"], ["/huyen-hoc", "Tất cả các môn huyền học"],
+  ] },
+  { ten: "Lịch & tuổi", ds: [
+    ["/xem-ngay-tot", "Xem ngày tốt"], ["/lich-am", "Lịch âm các năm"], ["/doi-lich-am-duong", "Đổi lịch âm dương"], ["/nam", "Năm nay con gì, mệnh gì"],
+    ["/bat-tu/menh-theo-nam", "Sinh năm nào mệnh gì"], ["/xem-tuoi-lam-nha", "Tuổi làm nhà, cưới hỏi"], ["/tuoi-xong-dat", "Tuổi xông đất"], ["/xem-sao-han", "Sao hạn theo tuổi"],
+    ["/phong-thuy/huong-hop-tuoi", "Hướng nhà hợp tuổi"], ["/phong-thuy/huong-xau-nam", "Hướng xấu theo năm"],
   ] },
   { ten: "Kiến thức", ds: [
-    ["/kien-thuc", "Thư viện kiến thức"], ["/than-so/y-nghia-so", "Ý nghĩa các con số"], ["/kinh-dich/que", "64 quẻ Kinh Dịch"],
-    ["/tu-vi/chinh-tinh", "14 chính tinh Tử vi"], ["/tarot/la-bai", "78 lá bài Tarot"], ["/tu-dien", "Từ điển thuật ngữ"], ["/tu-vi/la-so-mau", "Lá số mẫu"],
-    ["/phong-thuy/huong-hop-tuoi", "Hướng hợp tuổi"], ["/hop-doi/cap-so", "Số chủ đạo hợp nhau"], ["/tuoi-xong-dat", "Tuổi xông đất"],
-    ["/xem-sao-han", "Sao hạn theo tuổi"], ["/doi-lich-am-duong", "Đổi lịch âm dương"], ["/blog", "Blog"],
+    ["/than-so/y-nghia-so", "Ý nghĩa các con số"], ["/tu-vi/chinh-tinh", "14 chính tinh Tử vi"], ["/bat-tu/thap-than", "Thập thần Bát tự"], ["/kinh-dich/que", "64 quẻ Kinh Dịch"],
+    ["/phong-thuy/dau-hieu", "Dấu hiệu phong thuỷ trong nhà"], ["/nhan-tuong/bo-vi", "Bộ vị tướng mặt"], ["/tarot/la-bai", "78 lá bài Tarot"], ["/hop-doi/cap-so", "Số chủ đạo hợp nhau"],
+    ["/tu-dien", "Từ điển thuật ngữ"], ["/kien-thuc", "Thư viện kiến thức"], ["/blog", "Blog"],
   ] },
   { ten: "Về chúng tôi", ds: [
-    ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia", "Đội ngũ biên soạn"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/gioi-thieu#nguon", "Nguồn tri thức"], ["/lien-he", "Liên hệ"],
-    ["/lien-he#chu-de", "Góp ý, báo lỗi"], ["/ban-do-doi-ngu", "Bản đồ đội ngũ (Chủ DN)"], ["/tai-khoan", "Tài khoản"], ["/nap-sao", "Nạp Sao"], ["/goi-xem", "Các gói xem"],
-  ] },
-  { ten: "Pháp lý", ds: [
-    ["/chinh-sach-rieng-tu", "Chính sách quyền riêng tư"], ["/dieu-khoan", "Điều khoản sử dụng"],
-    ["/mien-tru-trach-nhiem", "Miễn trừ trách nhiệm"], ["/chinh-sach-rieng-tu#quyen", "Yêu cầu về dữ liệu cá nhân"],
+    ["/gioi-thieu", "Giới thiệu & phương pháp"], ["/tac-gia", "Đội ngũ biên soạn"], ["/tac-gia/duc-luan", "Chủ biên Đức Luân"], ["/lien-he", "Liên hệ"],
+    ["/goi-xem", "Các gói xem"], ["/chinh-sach-rieng-tu", "Chính sách quyền riêng tư"], ["/dieu-khoan", "Điều khoản sử dụng"], ["/mien-tru-trach-nhiem", "Miễn trừ trách nhiệm"],
+    ["/chinh-sach-rieng-tu#quyen", "Yêu cầu về dữ liệu cá nhân"],
   ] },
 ];
 

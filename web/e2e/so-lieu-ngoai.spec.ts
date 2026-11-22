@@ -6,7 +6,7 @@ import { test, expect } from "@playwright/test";
 import { docKhoaDichVu, kyJwt, locCoHoi, type DongGsc } from "../lib/so-lieu-ngoai";
 import { CAI_DAT, chuanHoa, giaTriHieuLuc } from "../lib/cau-hinh";
 import { timToanKho } from "../lib/kb-tim";
-import { CAM_KET_CHAN_TRANG, COT_CHAN_TRANG, GIOI_THIEU_CHAN_TRANG, MIEN_TRU_CHAN_TRANG, NHAN_UNG_HO_CHAN_TRANG } from "../lib/menu-chan-trang";
+import { CAM_KET_CHAN_TRANG, COT_CHAN_TRANG, GIOI_THIEU_CHAN_TRANG, MIEN_TRU_CHAN_TRANG, NHAN_UNG_HO_CHAN_TRANG, TRU_CHAN_TRANG } from "../lib/menu-chan-trang";
 import { chuChanTrang } from "../lib/cms";
 import { boNamMenu, dangOMuc, MENU_DAU_TRANG, mucDangO, thayNamMenu } from "../lib/menu-dau-trang";
 
@@ -73,6 +73,14 @@ test("menu chân trang mặc định của web trùng MENU_MAC_DINH trong CMS (C
   }));
   expect(cot.length).toBe(4);
   expect(cot).toEqual(COT_CHAN_TRANG.map((c) => ({ ten: c.ten, ds: c.ds.map(([a, b]) => [a, b]) })));
+  // FOOTER-2: đủ trang trụ; danh sách trụ của web trùng bộ kiểm CMS (cms/src/lib/tru-chan-trang.ts).
+  const coLink = new Set(COT_CHAN_TRANG.flatMap((c) => c.ds.map(([h]) => h)));
+  for (const d of TRU_CHAN_TRANG) expect(coLink.has(d), d).toBe(true);
+  const truCms = readFileSync(path.join(__dirname, "..", "..", "cms", "src", "lib", "tru-chan-trang.ts"), "utf8");
+  expect([...truCms.slice(truCms.indexOf("TRU_CHAN_TRANG = ["), truCms.indexOf("] as const")).matchAll(/"([^"]+)"/g)].map((m) => m[1])).toEqual([...TRU_CHAN_TRANG]);
+  // Không link trùng URL, không trang noindex.
+  expect(coLink.size).toBe(COT_CHAN_TRANG.reduce((n, c) => n + c.ds.length, 0));
+  for (const d of ["/tai-khoan", "/nap-sao", "/lien-he#chu-de", "/gioi-thieu#nguon"]) expect(coLink.has(d), d).toBe(false);
 });
 
 test("menu đầu trang mặc định của web trùng MENU_DAU_MAC_DINH trong CMS; mục cha sáng theo menu con", () => {

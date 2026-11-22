@@ -36,7 +36,7 @@ import * as migration_20261118_120000_km_3_chan_trang from './20261118_120000_km
 import * as migration_20261120_120000_rs_2_chan_trang_goi_xem from './20261120_120000_rs_2_chan_trang_goi_xem';
 import * as migration_20261121_005103_ry_1_rankyak from './20261121_005103_ry_1_rankyak';
 import * as migration_20261122_090000_menu_ts_huyen_hoc from './20261122_090000_menu_ts_huyen_hoc';
-import * as migration_20261122_100000_chan_trang_du_mang from './20261122_100000_chan_trang_du_mang';
+import * as migration_20261122_100000_chan_trang_cum_tu_khoa from './20261122_100000_chan_trang_cum_tu_khoa';
 
 export const migrations = [
   {
@@ -230,8 +230,8 @@ export const migrations = [
     name: '20261122_090000_menu_ts_huyen_hoc'
   },
   {
-    up: migration_20261122_100000_chan_trang_du_mang.up,
-    down: migration_20261122_100000_chan_trang_du_mang.down,
-    name: '20261122_100000_chan_trang_du_mang'
+    up: migration_20261122_100000_chan_trang_cum_tu_khoa.up,
+    down: migration_20261122_100000_chan_trang_cum_tu_khoa.down,
+    name: '20261122_100000_chan_trang_cum_tu_khoa'
   },
 ];
