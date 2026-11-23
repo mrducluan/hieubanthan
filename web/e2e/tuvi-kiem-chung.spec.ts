@@ -20,7 +20,9 @@ async function mock(page: Page) {
 }
 
 async function moKhoi(page: Page, nut: RegExp, testId: string) {
-  if (!(await page.getByTestId(testId).isVisible().catch(() => false))) await page.getByRole("button", { name: nut }).click();
+  // CRO-2: Tử vi tự hiện bài luận (chương "Năm nay & 3 tháng tới", "Đường bay tứ hoá") → chỉ lấy nút của khối mở rộng.
+  const nutKhoi = page.locator('button[aria-controls^="noi-dung-"]').filter({ hasText: nut });
+  if (!(await page.getByTestId(testId).isVisible().catch(() => false))) await nutKhoi.click();
   await expect(page.getByTestId(testId)).toBeVisible();
 }
 

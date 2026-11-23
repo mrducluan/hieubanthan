@@ -59,7 +59,12 @@ test("Gate 1 ở mảng Tử vi: bắt đầu khi lá số hiện, đọc xong k
   await expect(page.getByTestId("la-so-tu-vi")).toBeVisible();
   await expect.poll(async () => dem(await suKien(page), "reading_started", "tuvi")).toBe(1);
   expect(dem(await suKien(page), "reading_completed", "tuvi")).toBe(0);
+  // CRO-2: Tử vi tự tải bài luận → "đọc xong" cần mở chương cuối đọc được rồi cuộn hết (lib/doc-xong-cho), như Bát tự.
+  const bc = page.getByTestId("luan-giai-toan-bo");
+  await expect(bc).toBeVisible({ timeout: 60_000 });
+  await bc.getByTestId("lg-mo-chuong").last().click();
   await page.getByTestId("doc-xong-tuvi").scrollIntoViewIfNeeded();
+  await page.mouse.wheel(0, 50);
   // Đọc xong cần: thấy mốc cuối + đã cuộn + ở lại ≥ 10 giây (không đếm khi vừa mở đã thấy cuối trang).
   await page.waitForTimeout(3_000);
   expect(dem(await suKien(page), "reading_completed", "tuvi")).toBe(0);
