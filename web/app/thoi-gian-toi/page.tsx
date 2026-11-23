@@ -14,7 +14,7 @@ import { ngonNguMayChu } from "@/lib/ngon-ngu-may-chu";
 import { metaCongCuEn } from "@/lib/en/seo";
 import { ThoiGianToi } from "./ThoiGianToi";
 
-type P = { searchParams: Promise<{ nam?: string }> };
+type P = { searchParams: Promise<{ nam?: string; kw?: string }> };
 
 export async function generateMetadata(): Promise<Metadata> {
   // EN-ALL GĐ 8: /en/year-ahead là rewrite của trang này — metadata bản Anh từ lib/so-trang-en.ts.
@@ -24,12 +24,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page(p: P) {
-  const [{ nam }, n, { ngonNgu }] = await Promise.all([p.searchParams, namThoiGianToi(), ngonNguMayChu()]);
+  const [{ nam, kw }, n, { ngonNgu }] = await Promise.all([p.searchParams, namThoiGianToi(), ngonNguMayChu()]);
   const en = ngonNgu === "en";
   const hoi = /^\d{4}$/.test(nam ?? "") ? Number(nam) : null;
   const banDau = hoi && n.cac_nam.includes(hoi) ? hoi : n.mac_dinh;
   return (
-    <TrangCongCu duong={ND_THOI_GIAN_TOI.duong}>
+    <TrangCongCu duong={ND_THOI_GIAN_TOI.duong} kw={en ? undefined : kw}
+      gia={en ? undefined : { moDun: "thoi_gian", mienPhi: "3 tháng tới và tóm tắt năm" }}>
       <div className="mx-auto max-w-5xl">
         {en ? <TieuDeTrang nho={CHU_THOI_GIAN_TOI["dau.nhan_tren"]!.en!} lon="Your year ahead"
           mo_ta="The next 3 months, the next 12 months and the whole year — read from your own birth date through numerology, Zi Wei Dou Shu, BaZi and the customs tied to your age. Plain words on which months to push ahead and which to take slowly." />

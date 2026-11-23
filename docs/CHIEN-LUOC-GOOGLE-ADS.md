@@ -69,9 +69,9 @@ tắt tài sản tự động / mở rộng URL / gợi ý tự áp dụng · m�
 
 | Chiến dịch | Nhóm quảng cáo | Trang đích | Ngân sách GĐ1 |
 |---|---|---|---|
-| S-TuVi | lập lá số tử vi · lá số tử vi trọn đời · luận giải tử vi chi tiết | `/tu-vi?kw=tron-doi` | 30k |
-| S-BatTu | xem bát tự theo ngày giờ sinh · lá số tứ trụ · mệnh thiếu hành gì | `/bat-tu?kw=thieu-hanh` | 25k |
-| S-ThanSo | thần số học theo tên và ngày sinh · tra cứu thần số học · con số chủ đạo | `/than-so` | 25k |
+| S-TuVi | lập lá số tử vi · lá số tử vi trọn đời (`kw=tron-doi`) · luận giải tử vi chi tiết (`kw=luan-giai`) | `/tu-vi?kw=…` | 30k |
+| S-BatTu | mệnh thiếu hành gì (`kw=thieu-hanh`) · xem bát tự theo ngày giờ sinh · lá số tứ trụ (`kw=tu-tru`) | `/bat-tu?kw=…` | 25k |
+| S-ThanSo | thần số học theo tên và ngày sinh · tra cứu thần số học · con số chủ đạo | `/than-so?kw=ngay-sinh` | 25k |
 | S-2027 | tử vi 2027 theo ngày sinh · vận hạn 2027 của tôi | `/thoi-gian-toi?nam=2027&kw=2027` | 40k |
 | S-2027-Tuoi (rẻ, lấy tệp) | tử vi 2027 tuổi … · tuổi xông đất 2027 · sao hạn 2027 · tuổi làm nhà 2027 | `/nam/2027/tuoi-{năm}` · `/tuoi-xong-dat/2027` · `/xem-sao-han/2027` · `/xem-tuoi-lam-nha/2027` | 10k (tăng ở GĐ2) |
 | S-ThuongHieu | hieuban, hiểu bản thân | `/` | 5k |
@@ -220,7 +220,19 @@ Ba lần xem 249.000 ₫ (≈ 83.000 ₫ mỗi lần) · Cả nhà 499.000 ₫ �
 **Hình ảnh** (không chữ chèn lên ảnh): lá số 12 cung · năm cột ngũ hành + la bàn mờ · vòng số 1–9 · dải 12 tháng 2027 chấm
 lục/vàng/hổ phách (không đỏ) · tay cầm điện thoại mở lá số · bàn trà Tết có bánh chưng, cành mai.
 
-## 10. Cần anh quyết
+## 10. Đã quyết (23/11/2026) — code đã làm
+
+1. Cookie quảng cáo đo lường (`ad_storage`, `ad_user_data`) bật theo lựa chọn cookie như GA4. **Quảng cáo cá nhân hoá (tiếp thị
+   lại) TẮT** — không cần cho tối ưu giá thầu; bật bằng `NEXT_PUBLIC_QC_CA_NHAN_HOA=1` ở giai đoạn 3 nếu Google cho dùng danh sách.
+2. Migration 0041 `google_don` lưu gclid / gbraid / wbraid cùng đơn (95 ngày); tệp chuyển đổi offline `/api/qc/google-offline`.
+3. Email tài khoản **băm SHA-256** gửi Meta (API chuyển đổi) và Google (cột Email của tệp offline) — không email gốc, bỏ email đại
+   diện Zalo, chỉ khi người dùng chưa tắt cookie đo lường; tắt bằng `META_CAPI_EMAIL=0` / `GOOGLE_OFFLINE_EMAIL=0`.
+4. `dataLayer` (`hbt_lead`, `hbt_xem`, `hbt_mo_khoa`, `hbt_thanh_toan`, `hbt_da_mo`, `purchase`, `hbt_nap`), `qc=google` cho PostHog,
+   tiêu đề theo `?kw=`, dòng giá màn đầu, nút từ trang xông đất sang `/thoi-gian-toi`, Chính sách riêng tư (hiệu lực 23/11/2026).
+
+Việc anh làm trong Google Ads / GTM / Vercel: `docs/VIEC-CUA-ANH.md` mục **QC-G**.
+
+## 11. (cũ) Câu hỏi đã gửi anh
 
 1. G0-1: bật `ad_storage` + `ad_user_data` mặc định (giống GA4), `ad_personalization` giữ tắt.
 2. G0-4: migration lưu gclid cùng đơn nạp để gửi Purchase từ máy chủ.

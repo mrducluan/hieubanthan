@@ -4,6 +4,7 @@
 import { NextResponse } from "next/server";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
 import { capiCron } from "@/lib/meta-capi";
+import { googleCron } from "@/lib/google-offline";
 import { capSaoHoiVien, donDuLieuHoc, dungKhoaCron, guiNhacNgay, tuDongNotFairCms, tuDongRankYakCms } from "@/lib/cron";
 
 export const maxDuration = 60;
@@ -17,6 +18,7 @@ export async function GET(req: Request) {
   const nhac = await guiNhacNgay(dv);
   const hoi_vien = await capSaoHoiVien(dv);   // SAO-HV: Sao tháng cho hội viên chưa mở trang trong tháng
   const meta = await capiCron(dv).catch(() => null);   // META-CAPI: gửi lại đơn chưa gửi được, xoá dòng > 8 ngày
+  const google = await googleCron(dv).catch(() => null);   // QC-G: xoá mã lượt bấm Google > 95 ngày
   // BLOG-9d: chạy CUỐI, dùng thời gian còn lại (trần hàm 60 giây) — nhập + chuẩn hoá bài NotFair mới (đạt điểm → tự xuất bản, BLOG-10).
   const blog = await tuDongNotFairCms(55_000 - (Date.now() - bat));
   // BLOG-9e: ghi kết quả nhập bài ra log Vercel (chỉ slug + điểm / lý do bỏ qua — không bí mật, không dữ liệu người dùng).
@@ -24,5 +26,5 @@ export async function GET(req: Request) {
   // RY-1: bài RankYak đến bằng webhook; cron chỉ vớt bài webhook lỡ (thời gian còn lại).
   const rankyak = await tuDongRankYakCms(55_000 - (Date.now() - bat));
   console.log("[cron hang-ngay] rankyak", JSON.stringify(rankyak));
-  return NextResponse.json({ nhac, don: don.ket_qua, hoi_vien, meta, blog, rankyak }, { status: don.ok ? 200 : 502 });
+  return NextResponse.json({ nhac, don: don.ket_qua, hoi_vien, meta, google, blog, rankyak }, { status: don.ok ? 200 : 502 });
 }

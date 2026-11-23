@@ -25,14 +25,38 @@ import { banAnh } from "@/lib/duong-en";
 import { ldDuongDanEn } from "@/lib/en/seo";
 import Link from "@/components/khung/Lien";
 import { ArrowRight } from "lucide-react";
+import { dauTheoKw } from "@/lib/kw-qc";
+import { dangThuSao, giaLuanGiaiSao } from "@/lib/luan-giai-sao";
+import { uuDaiCho } from "@/lib/uu-dai-may-chu";
+import { loiHan } from "@/lib/uu-dai";
+import { giaVnd } from "@/lib/loi-sao";
 
-export async function TrangCongCu({ duong, mang, truoc, sau, children }: {
-  /** Mảng cho "Bài viết liên quan" (không có → không hiện khối này). */ duong: string; mang?: string; truoc?: ReactNode; sau?: ReactNode; children: ReactNode;
+/** QC-G: một dòng giá thật ở màn đầu ("Miễn phí: … · Bản đầy đủ: N Sao ≈ N.000 ₫") — chỉ khi đang thu Sao báo cáo này,
+ *  để giá trong quảng cáo khớp trang. Lỗi đọc cấu hình → không hiện (không bao giờ ghi sai giá). */
+async function loiDongGia(moDun: string, mienPhi: string): Promise<string | null> {
+  try {
+    if (!(await dangThuSao(moDun))) return null;
+    const goc = await giaLuanGiaiSao(moDun);
+    if (!(goc > 0)) return null;
+    const u = await uuDaiCho(goc);
+    const giaDu = u ? `${u.gia} Sao (≈ ${giaVnd(u.gia)}, giá thường ${goc} Sao, ưu đãi ${loiHan(u.het_luc)})` : `${goc} Sao (≈ ${giaVnd(goc)})`;
+    return `Miễn phí: ${mienPhi}. Bản đầy đủ: ${giaDu}.`;
+  } catch { return null; }
+}
+
+export async function TrangCongCu({ duong, mang, truoc, sau, kw, gia, children }: {
+  /** Mảng cho "Bài viết liên quan" (không có → không hiện khối này). */ duong: string; mang?: string; truoc?: ReactNode; sau?: ReactNode;
+  /** QC-G: mã nhóm quảng cáo (?kw=) → tiêu đề khớp từ khoá (danh sách cố định lib/kw-qc.ts). */ kw?: string;
+  /** QC-G: dòng giá ở màn đầu — mã báo cáo + phần miễn phí; chỉ hiện khi đang thu Sao báo cáo đó. */ gia?: { moDun: string; mienPhi: string };
+  children: ReactNode;
 }) {
   // EN-ALL GĐ 3d: URL Anh được proxy rewrite về trang Việt này (`x-ngon-ngu: en`) → khung bản Anh: không CMS (chưa có
   // localization — GĐ 10), không bài viết (blog tiếng Việt), chữ từ lib/so-trang-en.ts + bảng chữ của URL (chiều `en`).
   if ((await ngonNguMayChu()).ngonNgu === "en") return <TrangCongCuEn duong={duong} truoc={truoc} sau={sau}>{children}</TrangCongCuEn>;
-  const [nd, dauCum, lapCms] = await Promise.all([layNoiDungTrang(duong), layDauNhieuTrang(dsCumTru(duong).map((x) => x.duong)), boLap()]);
+  const [nd0, dauCum, lapCms, dongGia] = await Promise.all([layNoiDungTrang(duong), layDauNhieuTrang(dsCumTru(duong).map((x) => x.duong)), boLap(),
+    gia ? loiDongGia(gia.moDun, gia.mienPhi) : Promise.resolve(null)]);
+  const theoKw = dauTheoKw(duong, kw);
+  const nd = theoKw ? { ...nd0, dau: { ...nd0.dau, h1: theoKw.h1, loiDan: theoKw.loiDan } } : nd0;
   const lapTuyChon = { ...lapCms, uuTien: nd.loiDiTiep };
   // CTA-2: link đã hiện ở khối "Kiến thức {mảng}" (cụm + thẻ bù của nó) → khối bài viết bên dưới không bù lặp lại.
   const cum = dsCumTru(duong).map((x) => x.duong);
@@ -54,7 +78,10 @@ export async function TrangCongCu({ duong, mang, truoc, sau, children }: {
       </>}
       {truoc}
       <DauCms h1={nd.dau.h1} loiDan={nd.dau.loiDan} kieuChu={nd.dau.kieuChu} bang={bang} chu={locChu(bang, nd.chu)} traLoi={traLoi}
-        khoiTren={nd.khoi.tren.length ? <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" /> : null}>
+        khoiTren={nd.khoi.tren.length || dongGia ? <div className="space-y-4">
+          {dongGia && <p className="max-w-2xl text-sm text-fg-muted" data-testid="dong-gia-dau">{dongGia}</p>}
+          {nd.khoi.tren.length > 0 && <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" />}
+        </div> : null}>
         {children}
       </DauCms>
       <KhoiCms ds={nd.khoi.duoi} duong={duong} viTri="duoi" className="mx-auto mt-12 max-w-5xl" />

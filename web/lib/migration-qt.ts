@@ -37,6 +37,7 @@ export const MIGRATION: readonly Migration[] = [
   { so: "0038", ten: "API chuyển đổi Meta (mã cookie theo đơn)", dau: { bang: "meta_don" } },
   { so: "0039", ten: "Nhà Tôi (người nhà) trong tài khoản", dau: { bang: "gia_dinh" } },
   { so: "0040", ten: "Gói Lần đầu 59.000 ₫ (mỗi tài khoản một lần)", dau: { ham: "goi_lan_dau_duoc_mua" } },
+  { so: "0041", ten: "Chuyển đổi offline Google Ads (mã lượt bấm theo đơn)", dau: { bang: "google_don" } },
 ];
 
 /** Công tắc / số ở /quan-tri/cai-dat chỉ có tác dụng khi các migration này đã chạy (tiền tố khoá → số migration). */

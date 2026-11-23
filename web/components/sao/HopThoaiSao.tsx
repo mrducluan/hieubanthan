@@ -7,6 +7,7 @@
 // Giọng: nói rõ giá trị người dùng nhận được và cái giá, không doạ, không đếm ngược giả, luôn có lối "để sau".
 // Cửa Sao v2 "Ba lối mở" (docs/CUA-SAO-V2.md): thanh ví + ba thẻ ngang hàng — Đọc ngay (QR, một gói vừa đủ) · Miễn phí,
 // mời bạn (gửi ngay trong hộp, con số thật từ cài đặt) · Hội viên năm (khi bật). Câu chữ: lib/loi-sao.ts.
+import { layMaGoogle } from "@/lib/google-qc";
 import { cachDangNhap } from "@/lib/dang-nhap";
 import { useEffect, useRef, useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
@@ -304,7 +305,7 @@ export function NapNhanh({ can = 0, kind = "nap", nguon = "luan_giai", giaCau, m
       if (!token) { window.location.href = `/dang-nhap?tiep=${encodeURIComponent(duongHienTai())}`; return; }
       ghiPhien(QUAY_VE, duongHienTai());
       const r = await fetch("/api/thanh-toan/tao-don", {
-        method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${token}` }, body: JSON.stringify({ goi: chon, meta: metaDongY() }),
+        method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${token}` }, body: JSON.stringify({ goi: chon, meta: metaDongY(), google: layMaGoogle() }),
       });
       const j = (await r.json().catch(() => ({}))) as { checkoutUrl?: string; error?: string };
       if (!r.ok || !j.checkoutUrl) throw new Error(j.error ?? "Chưa tạo được đơn.");

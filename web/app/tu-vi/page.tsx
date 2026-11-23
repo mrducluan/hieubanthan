@@ -15,8 +15,10 @@ export async function generateMetadata(): Promise<Metadata> {
   return apDungSeo(metaMacDinh(DUONG), await layNoiDungTrang(DUONG));
 }
 
-export default async function Page() {
+export default async function Page(p: { searchParams: Promise<{ kw?: string }> }) {
   // Ảnh lá số mẫu có chữ Việt in sẵn → bản Anh không hiện (EN-ALL).
-  const en = (await ngonNguMayChu()).ngonNgu === "en";
-  return <TrangCongCu duong={DUONG} mang="tu_vi" sau={en ? undefined : <AnhLaSoMau />}><TuVi /></TrangCongCu>;
+  const [{ kw }, { ngonNgu }] = await Promise.all([p.searchParams, ngonNguMayChu()]);
+  const en = ngonNgu === "en";
+  return <TrangCongCu duong={DUONG} mang="tu_vi" kw={en ? undefined : kw} gia={en ? undefined : { moDun: "tuvi", mienPhi: "lá số 12 cung và chương đầu" }}
+    sau={en ? undefined : <AnhLaSoMau />}><TuVi /></TrangCongCu>;
 }

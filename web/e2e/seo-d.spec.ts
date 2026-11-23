@@ -67,7 +67,8 @@ test("cookie: GTM nạp ngay, đo lường bật mặc định (chưa hỏi khi 
   await expect(hop).toBeVisible();
   await hop.getByRole("button", { name: "Từ chối" }).click();
   await expect(hop).toBeHidden();
-  await expect.poll(dongY).toContain('"update",{"analytics_storage":"denied"}');
+  // QC-G: quảng cáo đo lường theo cùng lựa chọn; cá nhân hoá luôn denied (trừ khi bật NEXT_PUBLIC_QC_CA_NHAN_HOA)
+  await expect.poll(dongY).toContain('"update",{"analytics_storage":"denied","ad_storage":"denied","ad_user_data":"denied","ad_personalization":"denied"}');
   expect(await page.evaluate(() => localStorage.getItem("hbt.dong-y-cookie.v1"))).toBe("tu_choi");
   // từ chối thì lần mở sau vẫn denied ngay từ đầu
   await page.reload();
@@ -75,7 +76,7 @@ test("cookie: GTM nạp ngay, đo lường bật mặc định (chưa hỏi khi 
   await expect(page.getByTestId("chan-trang")).toHaveCount(1);
   await page.getByTestId("chan-trang").getByRole("button", { name: "Tuỳ chọn cookie" }).click();
   await hop.getByRole("button", { name: "Đồng ý" }).click();
-  await expect.poll(dongY).toContain('"update",{"analytics_storage":"granted"}');
+  await expect.poll(dongY).toContain('"update",{"analytics_storage":"granted","ad_storage":"granted","ad_user_data":"granted","ad_personalization":"denied"}');
 });
 
 test("trang công cụ: HTML máy chủ có <h1>, phần giới thiệu + hỏi đáp, schema WebPage/FAQ/Breadcrumb, ảnh OG", async ({ request }) => {

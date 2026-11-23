@@ -2,6 +2,7 @@
 // Chọn gói → POST /api/thanh-toan/tao-don (kèm access token) → chuyển sang trang thanh toán của cổng.
 // SAO-ND (0027): mỗi gói ghi giá VND + "≈ N báo cáo"; công tắc tặng lần nạp đầu bật và người xem chưa từng nạp → một
 // dòng trung tính + số Sao tặng của từng gói (không đếm ngược, không giới hạn suất, không gạch giá).
+import { layMaGoogle } from "@/lib/google-qc";
 import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { Check, Gift, Loader2, LockKeyhole, QrCode, Sparkles } from "lucide-react";
@@ -56,7 +57,7 @@ export function NapSao({ goi: goiDu, cong, giaBaoCao, napDau: napDauBanDau, mien
     try {
       const r = await fetch("/api/thanh-toan/tao-don", {
         method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
-        body: JSON.stringify({ goi: chon, meta: metaDongY() }),
+        body: JSON.stringify({ goi: chon, meta: metaDongY(), google: layMaGoogle() }),
       });
       const j = (await r.json().catch(() => ({}))) as { checkoutUrl?: string; error?: string };
       if (!r.ok || !j.checkoutUrl) throw new Error(j.error ?? "Chưa tạo được đơn.");

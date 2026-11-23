@@ -1617,6 +1617,37 @@ pixel chặn localhost, AddToCart). Việc của anh, theo thứ tự:
 - [ ] **CR-8.** Video: nói lời hứa cụ thể trong 3 giây đầu ("Bạn là số mấy?", "Mệnh bạn thiếu hành gì?") — người xem chỉ ở lại 11–13 giây.
 - [ ] **CR-9.** Sau 7 ngày gửi em: chi phí / Lead, số AddToCart, InitiateCheckout, Purchase theo nhóm quảng cáo.
 
+## QC-G. Google Ads: đo chuyển đổi + gclid + email băm (2026-11-23, `docs/CHIEN-LUOC-GOOGLE-ADS.md`)
+
+Code đã có (anh quyết 23/11): cookie quảng cáo đo lường bật theo lựa chọn cookie (như GA4), quảng cáo cá nhân hoá TẮT; gclid
+lưu trên máy 90 ngày rồi kèm đơn nạp (bảng `google_don`, migration **0041**); sự kiện đẩy vào `dataLayer`; email tài khoản băm
+SHA-256 gửi Meta (API chuyển đổi) và Google (tệp offline); tiêu đề trang theo `?kw=`; dòng giá ở màn đầu (chỉ khi thu Sao).
+
+- [ ] **QG-1.** Chạy migration **0041** (`supabase/migrations/0041_google_don.sql`) trong Supabase → SQL Editor. Kiểm ở `/quan-tri` thẻ "Migration".
+- [ ] **QG-2.** Google Ads → Mục tiêu → Chuyển đổi → **Tạo**: (a) "Nạp Sao" — loại **Nhập (Import) → Lượt nhấp (Other data sources / CRM)**,
+  đếm **Mọi**, giá trị **dùng giá trị khác nhau**, đặt **Chính**; (b) "Tạo hồ sơ" — loại **Trang web, tự cài thẻ** (lấy Conversion ID +
+  Label), đếm **Một**, giá trị 5.000 ₫, đặt **Chính** cho giai đoạn 1; (c) "Bấm mở khoá", "Bắt đầu nạp" — như (b) nhưng **Phụ**.
+  Không tạo thêm chuyển đổi "Nạp Sao" kiểu thẻ web (sẽ đếm hai lần với bản offline) — sự kiện `hbt_nap` chỉ để GA4.
+- [ ] **QG-3.** GTM (container GTM-KNZL39CS):
+  1. Thẻ **Conversion Linker** — trigger All Pages.
+  2. Biến lớp dữ liệu: `value`, `currency`, `mo_dun`, `goi`.
+  3. Trigger **Sự kiện tuỳ chỉnh**: `hbt_lead`, `hbt_mo_khoa`, `hbt_thanh_toan` (và `hbt_xem`, `hbt_da_mo` nếu muốn quan sát).
+  4. Thẻ **Google Ads Conversion Tracking** cho mỗi trigger trên (Conversion ID + Label ở QG-2; giá trị = biến `value`, tiền tệ = `currency`).
+  5. GA4: thẻ sự kiện `purchase` dùng dữ liệu thương mại điện tử của lớp dữ liệu (đã đẩy đúng chuẩn GA4).
+  6. Xem trước bằng **Tag Assistant** với `https://hieuban.com/bat-tu?gclid=TEST_GCLID_12345` → thấy thẻ chạy, rồi **Gửi** phiên bản.
+- [ ] **QG-4.** Vercel (dự án web) đặt env rồi Redeploy:
+  - `GOOGLE_OFFLINE_USER` (tên tuỳ ý) + `GOOGLE_OFFLINE_PASS` (chuỗi ngẫu nhiên ≥ 16 ký tự).
+  - `GOOGLE_OFFLINE_TEN` = đúng tên chuyển đổi offline ở QG-2a (mặc định "Nap Sao" — đặt tên đó cho khỏi đặt env).
+  - Tuỳ chọn: `GOOGLE_OFFLINE_EMAIL=0` / `META_CAPI_EMAIL=0` nếu muốn tắt gửi email băm; `NEXT_PUBLIC_QC_CA_NHAN_HOA=1` chỉ khi
+    chạy tiếp thị lại (giai đoạn 3) và Google không chặn danh sách.
+- [ ] **QG-5.** Google Ads → Chuyển đổi → **Tải lên** → **Lịch** → nguồn **HTTPS**: URL `https://hieuban.com/api/qc/google-offline`,
+  tên người dùng / mật khẩu = QG-4, chạy **hằng ngày**. Lần đầu bấm "Xem trước" — nếu Google báo cột `Email` không hợp lệ thì đặt
+  `GOOGLE_OFFLINE_EMAIL=0` (tệp bỏ cột Email, vẫn ghép bằng gclid).
+- [ ] **QG-6.** Bật **Tự động gắn thẻ (auto-tagging)** trong Google Ads (Cài đặt tài khoản) — cần để có gclid. URL cuối cùng của
+  từng nhóm quảng cáo thêm `?kw=<mã>` theo bảng ở `docs/CHIEN-LUOC-GOOGLE-ADS.md` mục 3 (mã lạ thì trang giữ tiêu đề gốc).
+- [ ] **QG-7.** Luật sư xem: email băm SHA-256 gửi Meta + Google (Luật 91/2025 vẫn coi là dữ liệu cá nhân) — Chính sách riêng tư
+  đã ghi (hiệu lực 23/11/2026), chưa đổi phiên bản đồng ý dữ liệu; hỏi có cần hỏi đồng ý riêng không.
+
 ## LA-UI / NS-QT / GD-1 (2026-11-16) — lịch âm mới + hai đề xuất chờ anh quyết
 - **Deploy engine trước web** cho lịch âm mới (web gọi route mới `/v1/lich/nam-ngay/{năm}`; engine cũ thì trang chỉ thiếu khối lịch, không lỗi).
 - [x] **NS-QT** — đã làm theo đề xuất (môi trường đã mở `download.geonames.org`). Còn tuỳ anh: migration (số sau 0039) `ho_so.mui_gio` để đồng bộ nơi sinh nước ngoài lên tài khoản (hiện chỉ lưu trên máy).

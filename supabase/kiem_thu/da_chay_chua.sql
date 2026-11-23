@@ -59,6 +59,8 @@ select * from (values
                                              and pg_get_constraintdef(oid) like '%pay2s%')),
   ('0038 API chuyển đổi Meta (mã cookie theo đơn)', exists (select 1 from information_schema.tables
                                            where table_schema = 'public' and table_name = 'meta_don')),
-  ('0040 gói Lần đầu 59.000 ₫',  exists (select 1 from pg_proc where proname = 'goi_lan_dau_duoc_mua'))
+  ('0040 gói Lần đầu 59.000 ₫',  exists (select 1 from pg_proc where proname = 'goi_lan_dau_duoc_mua')),
+  ('0041 chuyển đổi offline Google Ads (mã lượt bấm theo đơn)', exists (select 1 from information_schema.tables
+                                           where table_schema = 'public' and table_name = 'google_don'))
 ) as t(migration, da_chay)
 order by 1;

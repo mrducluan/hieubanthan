@@ -61,6 +61,10 @@ export default async function Page(p: P) {
         <p className="mt-2 leading-relaxed text-fg">{d.tra_loi_nhanh}</p>
         {!en && <NutChiaSeXongDat nam={n} canChi={d.nam.can_chi} nho className="mt-4" />}
       </section>
+      {/* QC-G: khách đến từ quảng cáo "tuổi xông đất" → lối sang bài đọc năm của chính họ (trang thu Sao mùa Tết). */}
+      {!en && <p className="mt-4"><Link href={`/thoi-gian-toi?nam=${n}`} data-testid="xd-sang-thoi-gian-toi"
+        className="inline-flex min-h-11 items-center rounded-full border border-gold/50 px-4 py-2 text-sm text-gold hover:bg-gold/10">
+        Xem năm {n} của riêng bạn theo ngày sinh →</Link></p>}
 
       <section className="mt-6 grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border border-line/70 p-4 text-sm">

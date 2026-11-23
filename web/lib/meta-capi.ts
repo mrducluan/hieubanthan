@@ -1,13 +1,15 @@
 // META-CAPI (chủ dự án duyệt 2026-11-16) — API chuyển đổi của Meta cho đơn nạp Sao / hội viên. CHỈ chạy ở MÁY CHỦ.
 // Vì sao: Pixel trên trình duyệt hụt lượt mua khi người mua chặn quảng cáo, dùng iPhone, hoặc đóng tab trước khi trang
 // kết quả kịp tải. Máy chủ gửi Purchase khi cổng thanh toán báo ĐÃ TRẢ, cùng event_id `don-<mã>` với Pixel → Meta khử trùng.
-// Riêng tư: chỉ gửi mã cookie Meta (_fbp, _fbc) + IP + user agent (Meta cần để khớp lượt bấm quảng cáo) — KHÔNG email, tên,
-// ngày sinh. Chỉ khi người mua chưa tắt cookie đo lường (trình duyệt báo lúc bấm nạp). Gửi xong xoá IP + user agent; cron
+// Riêng tư: gửi mã cookie Meta (_fbp, _fbc) + IP + user agent (Meta cần để khớp lượt bấm quảng cáo) + (QC-G, chủ dự án quyết
+// 2026-11-23) EMAIL tài khoản thật đã chuẩn hoá và BĂM SHA-256 (không gửi email gốc; bỏ email đại diện Zalo; tắt bằng env
+// META_CAPI_EMAIL=0) — KHÔNG tên, ngày sinh. Chỉ khi người mua chưa tắt cookie đo lường (trình duyệt báo lúc bấm nạp). Gửi xong xoá IP + user agent; cron
 // xoá mọi dòng > 8 ngày (Meta chỉ nhận sự kiện ≤ 7 ngày). Bật bằng env META_CAPI_TOKEN (Events Manager → Settings →
 // Conversions API → Generate access token). META_CAPI_TEST_CODE (tuỳ chọn) để thử ở mục "Test events".
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { META_BAT, META_PIXEL_ID } from "@/lib/meta-id";
 import { siteUrl } from "@/lib/seo";
+import { choGuiEmail, emailBamCuaNguoi } from "@/lib/google-offline";
 
 const FBP = /^fb\.[0-9]\.[0-9]{10,16}\.[0-9]{1,30}$/;
 const FBC = /^fb\.[0-9]\.[0-9]{10,16}\.[A-Za-z0-9_-]{1,400}$/;
@@ -53,17 +55,18 @@ export async function ghiMetaDon(dv: SupabaseClient | null, maDon: number, req: 
   if (error) console.error("[meta-capi] ghi", error.code ?? "loi");
 }
 
-type Don = { ma_don: number; so_tien: number; loai?: string | null; trang_thai: string; tra_luc: string | null };
+type Don = { ma_don: number; so_tien: number; loai?: string | null; trang_thai: string; tra_luc: string | null; user_id?: string | null };
 type Dong = { ma_don: number; fbp: string | null; fbc: string | null; ip: string | null; ua: string | null };
 
 /** Gói sự kiện Purchase gửi Meta (hàm thuần → test được). */
-export function goiPurchase(don: Don, d: Dong, testCode?: string): Record<string, unknown> {
+export function goiPurchase(don: Don, d: Dong, testCode?: string, emBam?: string | null): Record<string, unknown> {
   const luc = don.tra_luc ? Math.floor(Date.parse(don.tra_luc) / 1000) : Math.floor(Date.now() / 1000);
-  const user_data: Record<string, string> = {};
+  const user_data: Record<string, string | string[]> = {};
   if (d.fbp) user_data.fbp = d.fbp;
   if (d.fbc) user_data.fbc = d.fbc;
   if (d.ip) user_data.client_ip_address = d.ip;
   if (d.ua) user_data.client_user_agent = d.ua;
+  if (emBam && /^[0-9a-f]{64}$/.test(emBam)) user_data.em = [emBam];
   return {
     data: [{
       event_name: "Purchase",
@@ -86,7 +89,7 @@ export async function guiCapiDon(dv: SupabaseClient | null, maDon: number): Prom
     const { data: dong } = await dv.from("meta_don").update({ da_gui: new Date().toISOString() })
       .eq("ma_don", maDon).is("da_gui", null).select("ma_don,fbp,fbc,ip,ua").maybeSingle();
     if (!dong) return "bo_qua";
-    const { data: don } = await dv.from("don_nap").select("ma_don,so_tien,loai,trang_thai,tra_luc").eq("ma_don", maDon).maybeSingle();
+    const { data: don } = await dv.from("don_nap").select("ma_don,so_tien,loai,trang_thai,tra_luc,user_id").eq("ma_don", maDon).maybeSingle();
     if (!don || (don as Don).trang_thai !== "da_tra") {
       await dv.from("meta_don").update({ da_gui: null }).eq("ma_don", maDon);
       return "bo_qua";
@@ -94,7 +97,8 @@ export async function guiCapiDon(dv: SupabaseClient | null, maDon: number): Prom
     const testCode = (process.env.META_CAPI_TEST_CODE ?? "").trim() || undefined;
     const r = await fetch(`https://graph.facebook.com/${PHIEN_BAN}/${META_PIXEL_ID}/events?access_token=${encodeURIComponent(token())}`, {
       method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify(goiPurchase(don as Don, dong as Dong, testCode)),
+      body: JSON.stringify(goiPurchase(don as Don, dong as Dong, testCode,
+        choGuiEmail("META_CAPI_EMAIL") ? await emailBamCuaNguoi(dv, (don as Don).user_id) : null)),
       signal: AbortSignal.timeout(HAN_GUI_MS), cache: "no-store",
     });
     if (!r.ok) {
