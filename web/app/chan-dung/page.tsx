@@ -20,11 +20,14 @@ export async function generateMetadata(): Promise<Metadata> {
     duong: ND_CHAN_DUNG.duong }), ND_CHAN_DUNG.duong), await layNoiDungTrang(ND_CHAN_DUNG.duong));
 }
 
-export default async function Page() {
+type P = { searchParams: Promise<{ kw?: string }> };
+
+export default async function Page(p: P) {
   // EN-ALL GĐ 8: chữ đầu trang theo ngôn ngữ (bản Việt giữ đúng chữ cũ).
-  const en = (await ngonNguMayChu()).ngonNgu === "en";
+  const [{ kw }, { ngonNgu }] = await Promise.all([p.searchParams, ngonNguMayChu()]);
+  const en = ngonNgu === "en";
   return (
-    <TrangCongCu duong={ND_CHAN_DUNG.duong}
+    <TrangCongCu duong={ND_CHAN_DUNG.duong} kw={en ? undefined : kw}
       gia={en ? undefined : { moDun: "chan_dung", mienPhi: "ma trận ba cách nhìn và chương đầu" }}>
       <div className="mx-auto max-w-5xl">
         {en ? <TieuDeTrang nho={CHU_CHAN_DUNG["dau.nhan_tren"]!.en!} lon="Your combined portrait"

@@ -171,6 +171,8 @@ test("/tu-vi có hồ sơ: chương 1 tự tải (không cần bấm), nút đ�
   const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc).toBeVisible({ timeout: 60_000 });
   await expect(page.getByTestId("tu-vi-den-luan-giai")).toHaveAttribute("href", "#luan-giai");
+  await expect(page.getByTestId("tu-vi-den-hoi")).toHaveAttribute("href", "#hoi-tu-vi");
+  await expect(page.locator("#hoi-tu-vi")).toHaveCount(1);
   const sach = page.getByTestId("sach-ghi").or(page.getByTestId("sach-xua")).first();
   await expect(sach).toBeAttached();
   const [yBc, ySach] = await Promise.all([bc.evaluate((e) => e.getBoundingClientRect().top + scrollY), sach.evaluate((e) => e.getBoundingClientRect().top + scrollY)]);

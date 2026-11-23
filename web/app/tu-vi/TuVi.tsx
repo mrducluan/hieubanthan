@@ -190,6 +190,8 @@ export function TuVi() {
               </a>
             </Button>
             <span className="text-xs text-fg-faint">{ct("nut.doc_luan_giai_phu")}</span>
+            <a href="#hoi-tu-vi" className="text-sm text-gold underline underline-offset-4" data-testid="tu-vi-den-hoi"
+              onClick={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "den_hoi" })}>{ct("nut.hoi_la_so")}</a>
           </div>
         )}
         {laSo && !ls && !loi && <KhungTai dong={6} />}
@@ -348,7 +350,7 @@ export function TuVi() {
         </section>
       ) : null}
 
-      <section ref={chatRef} aria-label={ct("aria.hoi")} className="mt-10 scroll-mt-24">
+      <section ref={chatRef} id="hoi-tu-vi" aria-label={ct("aria.hoi")} className="mt-10 scroll-mt-24">
         <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || ct("hoi.tieu_de")}</h2>
         {/* HD-CS đợt 2 (hướng C): "Xem trên lá số" trong câu trả lời chọn đúng cung trên lá số phía trên. */}
         <HanhDongTrucQuan.Provider value={laSo && ls ? { xemCung: xemTrenLaSo } : {}}>

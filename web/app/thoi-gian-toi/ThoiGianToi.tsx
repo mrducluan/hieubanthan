@@ -12,6 +12,7 @@ import { laSoTuHoSo, ngaySinhIso, tenGoi, useHoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
 import { useChuThoiGian } from "@/components/chan-dung/chu-chan-dung";
 import { Dam } from "@/components/nhan-tuong/chu-nhan-tuong";
+import { KeHoachThang } from "@/components/thoi-gian/KeHoachThang";
 
 // EN-ALL GĐ 8: /en/year-ahead là rewrite của trang này — chữ ở lib/chu/chan-dung.ts (CHU_THOI_GIAN_UI), chương do engine trả.
 
@@ -50,6 +51,9 @@ export function ThoiGianToi({ cacNam, namBanDau }: { cacNam: number[]; /** ?nam=
             : <button type="button" onClick={() => setBoSung(true)} className="mt-2 text-gold underline underline-offset-4">{t("tg.bo_sung_nut")}</button>}
         </div>
       )}
+      {/* KH-1: câu người ta mang tới nhất — "việc tôi định làm thì tháng nào hợp?" — trả lời ngay, miễn phí, trước bài đọc. */}
+      {!en && <KeHoachThang ten={tenGoi(hs)} than={than} />}
+      <div id="bai-doc-thoi-gian" className="scroll-mt-24" />
       <LuanGiaiToanBo key={JSON.stringify(than)} duongDan="/api/thoi-gian-toi" laSo={than} than={than} ten={t("tg.ten")}
         moDun="thoi_gian" tuMo />
       <CuoiBaiDoc moDun="thoi_gian" khongCta={en} />
