@@ -47,9 +47,36 @@ Làm xong dòng nào thì đánh `[x]` (hoặc nhắn em). Các mục cũ hơn n
   2. **"Tao ho so"**: chọn **Trang web** → **Tự cài thẻ (manual)**. Đếm: **Một lượt**. Giá trị cố định 5.000 ₫. Đặt **Chính**.
      Chép lại **Conversion ID + Conversion Label** (dùng ở B5).
   3. **"Bam mo khoa"** và **"Bat dau nap"**: như số 2 nhưng đặt **Phụ (Secondary)**; mỗi cái chép ID + Label.
-- [ ] **B5. Gắn thẻ trong Google Tag Manager** (container GTM-KNZL39CS). Phần này nhiều bước, anh nhắn em khi tới đây, em hướng
-  dẫn từng màn hình (hoặc anh cấp em quyền xem GTM). Tóm tắt: 1 thẻ Conversion Linker + 3 thẻ chuyển đổi gắn với sự kiện
-  `hbt_lead`, `hbt_mo_khoa`, `hbt_thanh_toan` → Xem trước bằng Tag Assistant → **Gửi (Submit)**.
+- [ ] **B5. Gắn thẻ trong Google Tag Manager** (container GTM-KNZL39CS). Cần sẵn từ B4: **Conversion ID** (dạng
+  `AW-123456789`, chung cho cả 3 chuyển đổi — chỉ lấy phần số khi GTM hỏi) và **Label** riêng của "Tao ho so",
+  "Bam mo khoa", "Bat dau nap". Thấy ở Google Ads → chuyển đổi đó → **Thiết lập thẻ → Dùng Google Tag Manager**.
+  1. Vào tagmanager.google.com → chọn container **GTM-KNZL39CS** (Workspace mặc định).
+  2. **Biến** (Variables) → mục "Biến do người dùng xác định" → **Mới** → loại **Biến lớp dữ liệu** (Data Layer Variable):
+     - Tên `DLV - value`, ô "Tên biến lớp dữ liệu" gõ `value` → Lưu.
+     - Tên `DLV - currency`, ô đó gõ `currency` → Lưu.
+  3. **Trình kích hoạt** (Triggers) → **Mới** → loại **Sự kiện tuỳ chỉnh** (Custom Event), "Kích hoạt trên: Tất cả sự kiện
+     tuỳ chỉnh". Tạo 3 cái, tên sự kiện gõ đúng từng chữ (chữ thường, có gạch dưới):
+     - `TK - hbt_lead` → tên sự kiện `hbt_lead`
+     - `TK - hbt_mo_khoa` → `hbt_mo_khoa`
+     - `TK - hbt_thanh_toan` → `hbt_thanh_toan`
+  4. **Thẻ** (Tags) → **Mới**:
+     - **Trình liên kết chuyển đổi** (Conversion Linker): loại "Conversion Linker", trình kích hoạt **Initialization - All
+       Pages** (có sẵn). Đã có thẻ này rồi thì bỏ qua.
+     - **Ads - Tao ho so**: loại **Google Ads Conversion Tracking** → Conversion ID (phần số), Conversion Label của "Tao ho so",
+       để trống ô Giá trị (Google lấy 5.000 ₫ đặt ở B4), trình kích hoạt `TK - hbt_lead`.
+     - **Ads - Bam mo khoa**: cùng loại, ID + Label "Bam mo khoa", Conversion Value `{{DLV - value}}`, Currency Code
+       `{{DLV - currency}}`, trình kích hoạt `TK - hbt_mo_khoa`.
+     - **Ads - Bat dau nap**: như trên, Label "Bat dau nap", trình kích hoạt `TK - hbt_thanh_toan`.
+     - Mục "Cài đặt đồng ý" (Consent settings) của các thẻ: để **Không cần thêm sự đồng ý** — site đã tự gửi lựa chọn cookie
+       trước khi GTM chạy, thẻ Google Ads tự tuân theo.
+     - **KHÔNG** tạo thẻ cho "Nap Sao": số đơn đã trả đi bằng tệp tải theo lịch (B6); thêm thẻ trên trình duyệt sẽ đếm hai lần.
+  5. **Xem trước** (Preview, góc trên phải) → gõ `https://hieuban.com/than-so` → Connect. Mở bằng **cửa sổ ẩn danh**
+     (sự kiện "Tao ho so" chỉ bắn một lần mỗi máy). Nhập tên + ngày sinh → bấm xem → ở tab Tag Assistant thấy sự kiện
+     `hbt_lead` và thẻ **Ads - Tao ho so** ở mục "Tags Fired" là đúng. Hai thẻ còn lại chỉ bắn khi đã bật thu Sao (bấm
+     "Mở toàn bộ" / chọn gói nạp) — chưa bật thì bỏ qua, không phải lỗi.
+  6. **Gửi** (Submit) → Tên phiên bản `QC-G chuyen doi Google Ads` → **Xuất bản** (Publish).
+  7. Sau 1–3 ngày: Google Ads → Chuyển đổi → trạng thái chuyển từ "Chưa xác minh" sang **"Đang ghi nhận"**. Vẫn chưa thì
+     chụp màn hình gửi em.
 - [ ] **B6. Lên lịch cho Google tự tải số đơn mỗi ngày.** Google Ads → Mục tiêu → Chuyển đổi → **Tải lên (Uploads)** → tab
   **Lịch (Schedules)** → **+**:
   - Nguồn: **HTTPS**
