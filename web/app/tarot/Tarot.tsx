@@ -358,7 +358,9 @@ export function Tarot() {
             <Button variant="secondary" onClick={lamLai} data-testid="nut-trai-bai-moi"><RotateCcw aria-hidden /> {t("nut.trai_bai_moi")}</Button>
             {!en && bc.hieu_cau && bc.hieu_cau.co_cau && !bc.hieu_cau.chan && (
               <NutChiaSeTarot traiBai={bc.da_tinh.trai_bai} la={bc.da_tinh.vi_tri.map((v) => ({ id: v.id, nguoc: v.nguoc }))}
-                yDinh={bc.hieu_cau.y_dinh} viec={bc.hieu_cau.viec} linhVuc={bc.hieu_cau.linh_vuc} />
+                yDinh={bc.hieu_cau.y_dinh} viec={bc.hieu_cau.viec} linhVuc={bc.hieu_cau.linh_vuc}
+                nhanNghieng={bc.hieu_cau.nghieng ? ({ tien: "nên tiến", dieu_kien: "được nếu có điều kiện", cho: "nên chờ thêm" } as const)[bc.hieu_cau.nghieng.nghieng] : null}
+                nhanViec={bc.hieu_cau.nhan_viec} />
             )}
           </div>
           <div className="mt-6"><CuoiBaiDoc moDun="tarot" cauHoi={t("cuoi.hoi")} khongCta={en} /></div>

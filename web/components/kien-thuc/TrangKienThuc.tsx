@@ -2,6 +2,7 @@
 // Cấu trúc GEO: tiêu đề = câu hỏi người ta tìm · đoạn "trả lời nhanh" đứng đầu · mục có tiêu đề · hỏi đáp · nguồn ·
 // ngày cập nhật · nhãn đã thẩm định (BM-1: bài chưa duyệt không gắn nhãn) · liên kết nội bộ. Schema: Article + FAQPage + BreadcrumbList.
 // EEAT-1: dòng tác giả / chủ biên / thẩm định + Person; trang đã thẩm định có WebPage.reviewedBy + lastReviewed.
+import { NutChiaSeTrang } from "@/components/chia-se/NutChiaSeTrang";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound, permanentRedirect } from "next/navigation";
@@ -221,6 +222,7 @@ export async function TrangKienThucView(params: Thamso) {
           {!nhap && <span className="inline-flex items-center gap-1 rounded-full border border-jade/40 px-2.5 py-0.5 text-jade"><ShieldCheck className="size-3.5" aria-hidden /> {t.tac_gia ? c("bai.chuyen_gia_bien_soan") : c("bai.da_tham_dinh")}</span>}
         </div>
         <DongTacGia chu_bien={t.chu_bien} tac_gia={t.tac_gia} tham_dinh={t.tham_dinh} duyet_xuat_ban={t.duyet_xuat_ban} />
+        <NutChiaSeTrang tieuDe={t.tieu_de} traLoi={t.tra_loi_nhanh} className="mt-4" />
       </header>
 
       {/* AUD-1 (2026-11): "Trả lời nhanh" đứng ngay dưới tiêu đề — trước hình + dải QR — để máy tìm kiếm / AI gặp câu

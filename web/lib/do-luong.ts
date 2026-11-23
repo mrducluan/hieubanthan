@@ -58,6 +58,8 @@ export type SuKien =
   // CTA-2: khối thẻ cuối trang (Kiến thức {mảng}, Bài viết liên quan, Đọc tiếp…) — thấy khối (lap=0) / thấy từng thẻ bù
   // (lap=1, den = đường dẫn thẻ) / bấm thẻ (lap=1 thẻ bù, 0 = thẻ thật). Chỉ mã khối + đường dẫn trong site.
   | "end_cta_viewed" | "end_cta_clicked"
+  // HCS-1: hộp chia sẻ chung — mở hộp / bấm một kênh (mã kênh + kết quả + mã lời nhắn), không bao giờ chữ lời nhắn hay link
+  | "share_sheet_opened" | "share_target"
   // TM-1: bấm thanh mảng (dải điều hướng dưới menu chính) — tu = mã mảng của thanh, den = mã mục, trang = đường dẫn đang xem
   | "nav_bar_clicked";
 
@@ -145,6 +147,7 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   canh_bao: "string",   // DC-MB: mã cảnh báo hướng mặt bằng (khong_vong / kiem_huong / khong) — không độ, không năm
   co_gio: "boolean",    // DC-L12: Lịch 12 tháng có giờ sinh (đọc thêm lớp Bát tự) hay không — chỉ cờ
   muc_tieu: "string",   // DC-L12: mã trọng tâm năm (tang_truong / ky_ket / giu_tien / ra_mat)
+  kenh: "string",       // HCS-1: share_target — zalo / messenger / facebook / anh / chep / luu_anh / khac
   qc: "string",         // META-QC: "meta" = phiên này (hoặc ≤ 30 ngày trước) vào từ quảng cáo Facebook / Instagram (lib/nguon-qc.ts)
 };
 const GIOI_HAN_CHUOI = 40;

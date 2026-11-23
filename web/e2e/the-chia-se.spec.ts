@@ -86,6 +86,7 @@ test("Xem lá số 2 người → Chia sẻ thẻ điểm → trang nhận → l
   const tu = u.searchParams.get("tu")!;
   expect(tu).toMatch(/^hp\.[0-9a-f]{10}$/);
   expect(await page.getByTestId("tai-anh-the-hai").getAttribute("href")).toContain("&khung=doc");
+  await page.getByTestId("kenh-chep").click();   // HCS-1: share_created đo khi người dùng gửi
   expect((await suKien(page)).some((e) => e.su_kien === "share_created" && e.kind === "hai_nguoi" && e.ma_moi === tu)).toBe(true);
 
   // Người nhận (máy khác, chưa có hồ sơ)

@@ -3,13 +3,12 @@
 // mang ?tu=hn.<ngẫu nhiên> (đo referral_signup, Gate 2) + &the=<mã> (ảnh xem trước khi dán vào Zalo/Messenger).
 import { useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
-import { Check, Download, Share2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { postJson } from "@/lib/goi-api";
 import { hoTenList, tenGoi, type HoSo } from "@/lib/hoso";
 import { ghi, maNgauNhien } from "@/lib/do-luong";
 import { docQuyUocDD } from "@/lib/quy-uoc-dd";
-import { ChepTay, guiHoacChep } from "@/components/chia-se/GuiLink";
+import { HopGui, NutRuBan } from "@/components/chia-se/HopChiaSe";
+import { CTA_CHIA_SE, loiNhanThe } from "@/lib/loi-nhan-chia-se";
 
 /** Mã ?tu= của link (ngẫu nhiên, không định danh) — tạo trước để ghi share_created ngay lúc bấm. */
 export const maMoiNgay = () => `hn.${maNgauNhien(10)}`;
@@ -27,46 +26,40 @@ export async function taoLinkNgay(hoSo: HoSo, tu = maMoiNgay()): Promise<{ url: 
   return { url: u.toString(), ma, tu };
 }
 
-export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false }: {
-  hoSo: HoSo; soNgay: number; chuDe?: string; className?: string; nho?: boolean;
+export function NutChiaSeNgay({ hoSo, soNgay, chuDe, className = "", nho = false, kind = "the_ngay", testId = "chia-se-the-ngay" }: {
+  hoSo: HoSo; soNgay: number; chuDe?: string; className?: string; nho?: boolean; kind?: "the_ngay" | "hom_nay"; testId?: string;
 }) {
+  const [mo, setMo] = useState(false);
   const [dang, setDang] = useState(false);
-  const [ma, setMa] = useState<string | null>(null);
-  const [tuDaTao, setTuDaTao] = useState<string | null>(null);
-  const [daChep, setDaChep] = useState(false);
-  const [chepTay, setChepTay] = useState<string | null>(null);   // máy không cho chép → hiện link để chép tay
+  const [gui, setGui] = useState<{ url: string; ma: string | null; tu: string } | null>(null);
   const c = useChuChung();
+  const cta = CTA_CHIA_SE.ngay;
 
   async function chiaSe() {
-    setDang(true); setChepTay(null);
+    setMo(true);
+    if (gui) return;
+    setDang(true);
     try {
       const tu = maMoiNgay();
-      ghi("share_created", { kind: "the_ngay", ma_moi: tu });
-      const { url, ma: m } = await taoLinkNgay(hoSo, tu);
-      setMa(m);
-      setTuDaTao(tu);
-      const chu = `Hôm nay là Ngày cá nhân ${soNgay} của mình${chuDe ? ` — ${chuDe}` : ""}. Còn bạn hôm nay là ngày mấy?`;
-      const kq = await guiHoacChep({ title: "Hôm nay của bạn", text: chu, url }, `${chu} ${url}`);
-      if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2500); }
-      else if (kq === "khong_duoc") setChepTay(url);
+      ghi("share_created", { kind, ma_moi: tu });
+      setGui(await taoLinkNgay(hoSo, tu));
     } finally {
       setDang(false);
     }
   }
 
   return (
-    <div className={`flex flex-wrap items-center gap-2 ${className}`}>
-      <Button size={nho ? "sm" : "md"} variant="secondary" onClick={() => void chiaSe()} disabled={dang} data-testid="chia-se-the-ngay">
-        {daChep ? <Check aria-hidden /> : <Share2 aria-hidden />}{daChep ? c("chia_se.da_chep") : dang ? c("chia_se.dang_tao") : c("chia_se.the_ngay")}
-      </Button>
-      {/* TCS-1: bản dọc 1080×1350 + mã QR trỏ đúng link vừa chia sẻ (?tu=). */}
-      {ma && (
-        <a href={`/og/ngay?ma=${encodeURIComponent(ma)}&khung=doc${tuDaTao ? `&tu=${tuDaTao}` : ""}`} download="hom-nay-cua-toi.png"
-          className="inline-flex items-center gap-1.5 text-sm text-fg-muted hover:text-fg" data-testid="tai-anh-the-ngay">
-          <Download className="size-4" aria-hidden /> {c("chia_se.tai_story")}
-        </a>
-      )}
-      {chepTay && <ChepTay url={chepTay} className="w-full" />}
+    <div className={className}>
+      <NutRuBan nhan={c("chia_se.the_ngay")} phu={cta.phu} nho={nho} dang={dang} onClick={() => void chiaSe()} testId={testId} />
+      <HopGui mo={mo} onMoChange={setMo} tieuDeHop="Gửi thẻ hôm nay" dang={dang}
+        gui={gui && {
+          kind, url: gui.url, tu: gui.tu, tieuDe: "Hôm nay của bạn",
+          // TCS-1: ảnh dọc 1080×1350 + mã QR trỏ đúng link vừa chia sẻ (?tu=).
+          anh: gui.ma ? `/og/ngay?ma=${encodeURIComponent(gui.ma)}&tu=${gui.tu}` : null,
+          anhDoc: gui.ma ? `/og/ngay?ma=${encodeURIComponent(gui.ma)}&khung=doc&tu=${gui.tu}` : null,
+          tenTep: "hom-nay-cua-toi.png", testIdAnh: "tai-anh-the-ngay",
+          loiNhan: loiNhanThe("ngay", { so: soNgay, tuKhoa: chuDe }),
+        }} />
     </div>
   );
 }

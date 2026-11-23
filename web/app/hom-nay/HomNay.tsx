@@ -32,7 +32,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "@/components/khung/Lien";
 import {
   ArrowDown, BookOpen, Briefcase, CalendarDays, CalendarHeart, Clock, Hexagon, Coffee, Dumbbell, Globe2, Handshake, Heart, Home, LifeBuoy,
-  MoonStar, Palette, Plane, Rocket, Share2, Sparkles, Sunrise, Wallet, type LucideIcon,
+  MoonStar, Palette, Plane, Rocket, Sparkles, Sunrise, Wallet, type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -40,8 +40,7 @@ import { KhungTai } from "@/components/khung/TieuDe";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { tenGoi, useHoSo } from "@/lib/hoso";
 import { ghi } from "@/lib/do-luong";
-import { maMoiNgay, taoLinkNgay } from "@/components/chia-se/NutChiaSeNgay";
-import { ChepTay, guiHoacChep } from "@/components/chia-se/GuiLink";
+import { NutChiaSeNgay } from "@/components/chia-se/NutChiaSeNgay";
 import { SoNoiBatNgay } from "@/components/than-so/SoNoiBatNgay";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { VongGio } from "@/components/hoang-lich/VongGio";
@@ -167,8 +166,6 @@ export function HomNay() {
   const [loi, setLoi] = useState<string | null>(null);
   const [chuoi, setChuoi] = useState<{ so: number; batDauLai: boolean } | null>(null);
   const [ttChuoi, setTtChuoi] = useState<TrangThaiChuoi | null>(null);
-  const [daChep, setDaChep] = useState(false);
-  const [chepTay, setChepTay] = useState<string | null>(null);   // máy không cho chép tự động → hiện link chép tay
   const daGhi = useRef(false);
   const [chon, setChon] = useState<string[]>([]);
   const [duDinh, setDuDinh] = useState("");
@@ -246,20 +243,6 @@ export function HomNay() {
     return () => { huy = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- taiThe chỉ đọc hoSo
   }, [hoSo]);
-
-  async function chiaSe() {
-    if (!the || !hoSo) return;
-    // ?tu=hn.<ngẫu nhiên>: bạn bè mở link → GhiVaoTrang nhớ mã → hồ sơ đầu tiên tính referral_signup (Gate 2, K).
-    // NHIP-1: link mang thêm &the=<mã ký> → Zalo/Messenger hiện ảnh "Hôm nay {tên} là Ngày cá nhân N — còn bạn?".
-    const tu = maMoiNgay();
-    ghi("share_created", { kind: "hom_nay", ma_moi: tu });
-    const { url } = await taoLinkNgay(hoSo, tu);
-    const chu = `Hôm nay là Ngày cá nhân ${the.ngay_ca_nhan.so} của mình — ${boTienTo(the.ngay_ca_nhan.nghia)} Xem ngày của bạn:`;
-    setChepTay(null);
-    const kq = await guiHoacChep({ title: "Hôm nay của bạn", text: chu, url }, `${chu} ${url}`);
-    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2500); }
-    else if (kq === "khong_duoc") setChepTay(url);
-  }
 
   useBatDauDoc("hom_nay", Boolean(the));
   const sapToi = the?.ba_la && phut !== null ? gioSapToi(the.ba_la.thoi_khac.gio, phut) : null;
@@ -353,10 +336,10 @@ export function HomNay() {
             </div>
             <SoNoiBatNgay hoSo={hoSo} />
             <div className="flex flex-wrap items-center gap-2 border-t border-line/60 pt-4">
-              {!en && <Button size="sm" variant="secondary" className="min-h-10" onClick={() => void chiaSe()} data-testid="chia-se-the-hom-nay"><Share2 aria-hidden />{daChep ? "Đã chép link" : "Chia sẻ thẻ hôm nay"}</Button>}
+              {!en && <NutChiaSeNgay hoSo={hoSo} soNgay={the.ngay_ca_nhan.so} chuDe={boTienTo(the.ngay_ca_nhan.nghia).replace(/\.$/, "").toLowerCase()}
+                kind="hom_nay" testId="chia-se-the-hom-nay" nho />}
               <a href="#y-dinh" className="vung-cham inline-flex min-h-10 items-center gap-1.5 rounded-full px-3 text-sm text-gold hover:underline">{`${h("the.y_dinh")} `}<ArrowDown className="size-4" aria-hidden /></a>
             </div>
-            {chepTay && <ChepTay url={chepTay} />}
           </Card>
 
           <section id="y-dinh" aria-labelledby="y-dinh-h" className="order-3 glass scroll-mt-24 space-y-4 rounded-2xl p-5" data-testid="y-dinh">

@@ -79,7 +79,8 @@ test("Bản thân: huy hiệu đã đạt có nút Chia sẻ → link /the/huy-h
   await expect(hh.getByTestId("hh-chuoi_may_7")).toHaveAttribute("data-dat", "1");
   await expect(hh.getByTestId("chia-se-hh-doc_5_mang")).toHaveCount(0);
   await hh.getByTestId("chia-se-hh-chuoi_may_7").click();
-  await expect(hh.getByTestId("chia-se-hh-chuoi_may_7")).toContainText("Đã chép link");
+  await page.getByTestId("hop-chia-se").getByTestId("kenh-chep").click();   // HCS-1: hộp chia sẻ chung
+  await expect(page.getByTestId("bao-chia-se")).toBeVisible();
   const chep = await page.evaluate(() => navigator.clipboard.readText());
   expect(chep).toContain("Ghé 7 ngày liền");
   const url = new URL(chep.slice(chep.indexOf("http")));
@@ -89,7 +90,7 @@ test("Bản thân: huy hiệu đã đạt có nút Chia sẻ → link /the/huy-h
   expect(url.searchParams.get("gt")).toBeNull();   // chưa đăng nhập → không mã mời
   for (const s of ["1990", "Luân", "17/5"]) expect(chep).not.toContain(s);   // thẻ không mang tên / ngày sinh
   expect(await suKien(page)).toContainEqual(expect.objectContaining({ su_kien: "share_created", kind: "huy_hieu", ma_moi: tu, co_ma: false }));
-  const tai = hh.getByTestId("tai-anh-hh-chuoi_may_7");
+  const tai = page.getByTestId("tai-anh-hh-chuoi_may_7");
   await expect(tai).toHaveAttribute("href", `/og/huy-hieu?ma=chuoi_may_7&tu=${tu}&khung=doc`);
 });
 

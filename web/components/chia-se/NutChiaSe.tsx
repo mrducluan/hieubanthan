@@ -4,9 +4,8 @@ import { useChuChung } from "@/components/cms/ChuChung";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { useMaCuaToi } from "@/lib/sao";
 import { DongThuongMoi } from "@/components/chia-se/DongThuongMoi";
-import { ChepTay, chepLink, guiHoacChep } from "@/components/chia-se/GuiLink";
-import { Check, Copy, Share2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { BangGui, NutRuBan } from "@/components/chia-se/HopChiaSe";
+import { CTA_CHIA_SE, loiNhanThe } from "@/lib/loi-nhan-chia-se";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { hoTenList, tenGoi, type HoSo } from "@/lib/hoso";
@@ -25,14 +24,12 @@ interface Props {
   onDaTao?: (ma: string) => void;
 }
 
-// Tạo link có ký (chỉ tên hiển thị + con số), rồi chia sẻ bằng Web Share API hoặc sao chép.
+// Tạo link có ký (chỉ tên hiển thị + con số), rồi gửi qua hộp chia sẻ chung (BangGui — HCS-1).
 export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Props) {
   const [ten, setTen] = useState(tenGoi(hoSo));
-  const [link, setLink] = useState<string | null>(null);
+  const [gui, setGui] = useState<{ link: string; ma: string; so: number | null; tuKhoa: string | null } | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
-  const [daChep, setDaChep] = useState(false);
-  const [khongChep, setKhongChep] = useState(false);   // máy không cho chép tự động → nhắc chép tay
   const c = useChuChung();
   const nguoiDung = useNguoiDung();
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
@@ -40,14 +37,13 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
   async function tao() {
     setDang(true); setLoi(null);
     try {
-      const { ma } = await postJson<{ ma: string }>("/api/chia-se/tao", {
+      const { ma, duong_doi, tu_khoa } = await postJson<{ ma: string; duong_doi?: number | null; tu_khoa?: string | null }>("/api/chia-se/tao", {
         ten_hien_thi: ten.trim() || tenGoi(hoSo), ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam,
         quy_uoc_duong_doi: docQuyUocDD(),
       });
       const u = new URL(duongDan(ma), window.location.origin);
       if (maCuaToi) u.searchParams.set("gt", maCuaToi);   // người được mời tạo tài khoản → cả hai nhận Sao
-      const url = u.toString();
-      setLink(url);
+      setGui({ link: u.toString(), ma, so: duong_doi ?? null, tuKhoa: tu_khoa ?? null });
       ghi("share_created", { kind: loai, ma_moi: maMoiTuToken(ma), co_ma: Boolean(maCuaToi) });
       onDaTao?.(ma);
     } catch (e) {
@@ -57,21 +53,8 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
     }
   }
 
-  async function chiaSe() {
-    if (!link) return;
-    const kq = await guiHoacChep({ title: "Hiểu Bản Thân", text: loiNhan, url: link });
-    setKhongChep(kq === "khong_duoc");
-    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
-  }
-
-  async function chep() {
-    if (!link) return;
-    const kq = await chepLink(link);
-    setKhongChep(kq === "khong_duoc");
-    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
-  }
-
-  if (!link) {
+  if (!gui) {
+    const cta = CTA_CHIA_SE[loai];
     return (
       <div className="space-y-3">
         <div className="space-y-2">
@@ -80,20 +63,17 @@ export function NutChiaSe({ hoSo, duongDan, nutTao, loai, loiNhan, onDaTao }: Pr
         </div>
         <p className="text-xs text-fg-faint">Link chỉ hiện tên hiển thị và các con số của bạn — không có ngày sinh. Hết hạn sau 90 ngày.</p>
         {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
-        <Button onClick={tao} disabled={dang} className="w-full"><Share2 aria-hidden /> {dang ? c("chia_se.dang_tao") : nutTao}</Button>
+        <NutRuBan nhan={dang ? c("chia_se.dang_tao") : nutTao} phu={cta.phu} dang={dang} onClick={() => void tao()} className="w-full" testId="tao-link-chia-se" />
         <DongThuongMoi dangNhap={nguoiDung === undefined ? undefined : Boolean(nguoiDung)} />
       </div>
     );
   }
+  const anh = `/og?ma=${encodeURIComponent(gui.ma)}${loai === "invite" ? "&kieu=moi" : ""}`;
   return (
-    <div className="space-y-3">
-      <div className="flex gap-2">
-        <Input readOnly value={link} aria-label="Link chia sẻ" onFocus={(e) => e.currentTarget.select()} className="text-sm" />
-        <Button variant="secondary" size="icon" onClick={chep} aria-label={c("chia_se.chep_link")}>{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
-      </div>
-      {khongChep && <ChepTay />}
-      <Button onClick={chiaSe} className="w-full"><Share2 aria-hidden /> {c("chia_se.gui")}</Button>
+    <BangGui kind={loai} url={gui.link} tu={maMoiTuToken(gui.ma)} tieuDe="Hiểu Bản Thân" anh={anh} anhDoc={`${anh}&khung=doc`}
+      tenTep={loai === "invite" ? "loi-moi-hop-doi.png" : "the-hieu-ban-than.png"}
+      loiNhan={[...loiNhanThe(loai, { so: gui.so, tuKhoa: gui.tuKhoa }), ...(loiNhan ? [{ ma: `${loai}.trang`, chu: loiNhan }] : [])]}>
       <DongThuongMoi dangNhap={nguoiDung === undefined ? undefined : Boolean(nguoiDung)} />
-    </div>
+    </BangGui>
   );
 }

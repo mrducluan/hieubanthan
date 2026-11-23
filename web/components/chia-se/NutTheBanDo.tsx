@@ -3,8 +3,7 @@
 // hiển thị + nhãn, không ngày sinh). Link /the/ban-do/<mã>?tu=bd.<…> (người nhận chơi "Đoán số" rồi được mời tự xem);
 // ảnh /og/ban-do (dọc 1080×1350 cho story là bản chính khi tải) có mã QR + hieuban.com.
 import { useState } from "react";
-import { useChuChung } from "@/components/cms/ChuChung";
-import { Check, Copy, Download, Share2, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,7 +15,8 @@ import { docQuyUocDD } from "@/lib/quy-uoc-dd";
 import { useMaCuaToi } from "@/lib/sao";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { DongThuongMoi } from "@/components/chia-se/DongThuongMoi";
-import { ChepTay, chepLink, guiHoacChep } from "@/components/chia-se/GuiLink";
+import { BangGui } from "@/components/chia-se/HopChiaSe";
+import { loiNhanThe } from "@/lib/loi-nhan-chia-se";
 import { bienThe, dien, manhBanDo } from "@/lib/the-ban-do";
 import type { NoiDungMaBanDo } from "@/lib/ma-moi";
 
@@ -33,13 +33,10 @@ export function NutTheBanDo({ onMo }: { onMo: () => void }) {
 }
 
 export function KhungTheBanDo({ hoSo, tu }: { hoSo: HoSo; tu: string }) {
-  const c = useChuChung();
   const [ten, setTen] = useState(tenGoi(hoSo).slice(0, 24));
   const [kq, setKq] = useState<{ ma: string; tu: string; bien_the: string; the: The; link: string } | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
-  const [daChep, setDaChep] = useState(false);
-  const [khongChep, setKhongChep] = useState(false);   // máy không cho chép tự động → nhắc chép tay
   const nguoiDung = useNguoiDung();
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
 
@@ -65,20 +62,6 @@ export function KhungTheBanDo({ hoSo, tu }: { hoSo: HoSo; tu: string }) {
     }
   }
 
-  async function chep() {
-    if (!kq) return;
-    const ket = await chepLink(kq.link);
-    setKhongChep(ket === "khong_duoc");
-    if (ket === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
-  }
-  async function chiaSe() {
-    if (!kq) return;
-    const bt = bienThe(kq.the.b);
-    const ket = await guiHoacChep({ title: dien(bt.tieuDe, kq.the.t), text: bt.loiMoi, url: kq.link });
-    setKhongChep(ket === "khong_duoc");
-    if (ket === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
-  }
-
   return (
     <section className="w-full space-y-4 rounded-2xl border border-gold/30 bg-gold/[0.04] p-4" aria-labelledby="tao-ban-do" data-testid="khung-the-ban-do">
       <h3 id="tao-ban-do" className="font-sans text-[1.02rem] font-semibold text-fg">Thẻ Bản đồ 5 mảng của bạn</h3>
@@ -102,25 +85,11 @@ export function KhungTheBanDo({ hoSo, tu }: { hoSo: HoSo; tu: string }) {
         <div className="space-y-3">
           <TheBanDo tieuDe={dien(bienThe(kq.the.b).tieuDe, kq.the.t)} manh={manhBanDo(kq.the)} loiMoi={bienThe(kq.the.b).loiMoi}
             testId="xem-truoc-ban-do" />
-          <div className="flex gap-2">
-            <Input readOnly value={kq.link} aria-label="Link thẻ bản đồ" onFocus={(e) => e.currentTarget.select()} className="text-sm" data-testid="link-the-ban-do" />
-            <Button variant="secondary" size="icon" onClick={() => void chep()} aria-label={c("chia_se.chep_link")}>{daChep ? <Check aria-hidden /> : <Copy aria-hidden />}</Button>
-          </div>
-          {khongChep && <ChepTay />}
-          <div className="flex flex-wrap gap-2">
-            <Button size="sm" onClick={() => void chiaSe()}><Share2 aria-hidden /> Gửi bạn bè đoán thử</Button>
-            <Button asChild size="sm" variant="outline">
-              <a href={`/og/ban-do?ma=${encodeURIComponent(kq.ma)}&khung=doc`} download="ban-do-5-mang.png" data-testid="tai-anh-ban-do"
-                onClick={() => ghi("share_created", { kind: "ban_do_anh", ma_moi: kq.tu, bien_the: kq.bien_the, tu, co_ma: false /* ảnh: mã QR không mang ?gt= */ })}>
-                <Download aria-hidden /> Tải ảnh story
-              </a>
-            </Button>
-            <Button asChild size="sm" variant="ghost">
-              <a href={`/og/ban-do?ma=${encodeURIComponent(kq.ma)}`} download="ban-do-5-mang-ngang.png">
-                <Download aria-hidden /> Ảnh ngang
-              </a>
-            </Button>
-          </div>
+          <BangGui kind="ban_do" url={kq.link} tu={kq.tu} tieuDe={dien(bienThe(kq.the.b).tieuDe, kq.the.t)}
+            anh={`/og/ban-do?ma=${encodeURIComponent(kq.ma)}`} anhDoc={`/og/ban-do?ma=${encodeURIComponent(kq.ma)}&khung=doc`}
+            tenTep="ban-do-5-mang.png" testIdLink="link-the-ban-do" testIdAnh="tai-anh-ban-do"
+            onLuuAnh={() => ghi("share_created", { kind: "ban_do_anh", ma_moi: kq.tu, bien_the: kq.bien_the, tu, co_ma: false /* ảnh: mã QR không mang ?gt= */ })}
+            loiNhan={[{ ma: `bd.${kq.bien_the}`, chu: bienThe(kq.the.b).loiMoi }, ...loiNhanThe("ban_do")]} />
           <DongThuongMoi dangNhap={nguoiDung === undefined ? undefined : Boolean(nguoiDung)} />
         </div>
       )}

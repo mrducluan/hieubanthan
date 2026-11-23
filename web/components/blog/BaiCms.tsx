@@ -2,6 +2,7 @@
 // hỏi đáp (FAQPage) → nguồn → chữ ký biên soạn (thu gọn) → mời dùng công cụ → đọc tiếp. Thân bài là HTML CMS đã lọc lại ở web (lib/cms-html.ts).
 // Chữ ký theo EEAT-1 / BM-1 / DX-1 (components/blog/KhungKyBai.tsx, đặt ở CUỐI bài): chưa có chuyên gia đọc → "Ban biên tập …
 // · Chủ biên duyệt xuất bản" (author = Organization); chỉ khi CMS ghi "tác giả"/"thẩm định" (có xác nhận, có ngày) mới đứng tên người.
+import { NutChiaSeTrang } from "@/components/chia-se/NutChiaSeTrang";
 import { duongBlog } from "@/lib/blog-gop";
 import Link from "@/components/khung/Lien";
 import { CalendarDays, Clock, Eye } from "lucide-react";
@@ -116,6 +117,7 @@ export function BaiCms({ bai, tn, lienQuan, nhap, lapCms }: {
         {sua && sua !== xb && <span>· Cập nhật <time dateTime={bai.updatedAt}>{ngayVN(sua)}</time></span>}
         <span className="inline-flex items-center gap-1"><Clock className="size-3.5" aria-hidden />{phutDoc(bai.noi_dung_html)} phút đọc</span>
       </div>
+      <NutChiaSeTrang tieuDe={bai.tieu_de} traLoi={bai.mo_ta_ngan} className="mt-4" />
 
       {anh && (
         // eslint-disable-next-line @next/next/no-img-element

@@ -173,10 +173,11 @@ test("thẻ 'Tháng của tôi': máy chủ ký (engine tính tháng cá nhân) 
   await expect(tk).toBeVisible({ timeout: 45_000 });
   await expect(tk.getByTestId("tong-ket-thang-nay")).toHaveCount(0);   // Bản thân đã có nhịp tháng này ở khối trên
   await tk.getByTestId("tong-ket-chia-se").click();
-  await expect(tk.getByTestId("tong-ket-chia-se")).toContainText("Đã chép link", { timeout: 20_000 });
+  await page.getByTestId("hop-chia-se").getByTestId("kenh-chep").click({ timeout: 20_000 });   // HCS-1: hộp chia sẻ chung
+  await expect(page.getByTestId("bao-chia-se")).toBeVisible();
   const chep = await page.evaluate(() => navigator.clipboard.readText());
   const { thang, nam } = thangTruoc(homNayVn());
-  expect(chep).toContain(`Tháng ${thang} mình ghé Hôm nay 5 buổi sáng.`);
+  expect(chep).toContain(`Tháng ${thang} của mình: 5 buổi sáng dừng lại xem ngày`);
   const url = new URL(chep.slice(chep.indexOf("http")));
   expect(url.pathname).toMatch(/^\/the\/thang\/[A-Za-z0-9_-]+\.[A-Za-z0-9_-]{16}$/);
   const tu = url.searchParams.get("tu")!;
@@ -191,7 +192,7 @@ test("thẻ 'Tháng của tôi': máy chủ ký (engine tính tháng cá nhân) 
     expect(r.status(), q).toBe(200);
     expect(r.headers()["content-type"], q).toContain("image/png");
   }
-  await expect(tk.getByTestId("tong-ket-tai-anh")).toHaveAttribute("href", `/og/thang?ma=${encodeURIComponent(ma)}&tu=${tu}&khung=doc`);
+  await expect(page.getByTestId("tong-ket-tai-anh")).toHaveAttribute("href", `/og/thang?ma=${encodeURIComponent(ma)}&tu=${tu}&khung=doc`);
   // Trang nhận: noindex, lịch 5 ngày sáng, tháng cá nhân, CTA mang ?tu, không ngày sinh / chuỗi / huy hiệu
   const html = await (await request.get(url.pathname + url.search)).text();
   expect(html).toMatch(/<meta name="robots" content="noindex/);

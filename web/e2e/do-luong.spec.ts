@@ -83,6 +83,7 @@ test("Gate 2 — link Hôm nay mang mã: người gửi share_created, bạn bè
   await page.evaluate(() => { Object.defineProperty(navigator, "share", { value: undefined, configurable: true }); });
   await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
   await page.getByTestId("chia-se-the-hom-nay").click();
+  await page.getByTestId("hop-chia-se").getByTestId("kenh-chep").click();   // HCS-1: hộp chia sẻ chung
   const tao = (await suKien(page)).find((e) => e.su_kien === "share_created");
   expect(tao).toMatchObject({ kind: "hom_nay" });
   const ma = String(tao?.ma_moi);

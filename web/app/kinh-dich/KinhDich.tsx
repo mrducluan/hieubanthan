@@ -288,7 +288,7 @@ export function KinhDich() {
           )}
           {giaTri && !en && (
             <div className="mt-3 flex flex-wrap items-center gap-2">
-              <NutChiaSeQue giaTri={giaTri} chuDe={d.chu_de?.ma ?? null} idSuffix={`-${idDq}`} />
+              <NutChiaSeQue giaTri={giaTri} chuDe={d.chu_de?.ma ?? null} tenChuDe={d.chu_de?.ten ?? null} tenQue={que.quai_ban.ten} idSuffix={`-${idDq}`} />
             </div>
           )}
         </div>
