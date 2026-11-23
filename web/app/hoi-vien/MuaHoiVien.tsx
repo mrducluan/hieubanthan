@@ -5,6 +5,7 @@
 //   dài → "Đang dùng" · đang thường xem thẻ Chuyên gia → Nâng hạng (giá do SQL tính, đã trừ phần còn lại) · đang Chuyên gia
 //   xem thẻ thường → không nút (hạ hạng khi hết hạn). Tạo đơn: POST /api/thanh-toan/tao-don {loai: "hoi_vien", hang}.
 // Không đếm ngược, không "ưu đãi", không gạch giá, không nhãn "phổ biến" — nhãn thẻ Chuyên gia nói đúng điều khác biệt.
+import { layMaGoogle } from "@/lib/google-qc";
 import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { CheckCircle2, Clock, Loader2, MessageCircleQuestion, QrCode, UserRound } from "lucide-react";
@@ -44,7 +45,7 @@ export function ChonHangHoiVien({ cong, hang: ds, hanChung }: { cong: "pay2s" | 
       try { sessionStorage.setItem(QUAY_VE, "/tai-khoan#hoi-vien"); } catch { /* riêng tư */ }
       const r = await fetch("/api/thanh-toan/tao-don", {
         method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
-        body: JSON.stringify({ loai: "hoi_vien", hang: h, meta: metaDongY() }),
+        body: JSON.stringify({ loai: "hoi_vien", hang: h, meta: metaDongY(), google: layMaGoogle() }),
       });
       const j = (await r.json().catch(() => ({}))) as { checkoutUrl?: string; error?: string };
       if (!r.ok || !j.checkoutUrl) throw new Error(j.error ?? "Chưa tạo được đơn.");

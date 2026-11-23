@@ -10,3 +10,9 @@ export const KHOA_DONG_Y = "hbt.dong-y-cookie.v1";
  *  người dùng vẫn tắt được ở "Tuỳ chọn cookie" (chân trang). Bật lại (NEXT_PUBLIC_HOI_DONG_Y_COOKIE=1) khi web vượt
  *  ~100.000 người dùng/tháng. */
 export const HOI_DONG_Y = process.env.NEXT_PUBLIC_HOI_DONG_Y_COOKIE === "1";
+/** QC-G (chủ dự án quyết 2026-11-23): quảng cáo CÁ NHÂN HOÁ (tiếp thị lại) — mặc định TẮT. Đo chuyển đổi + tối ưu giá thầu
+ *  chỉ cần ad_storage + ad_user_data (bật theo lựa chọn cookie như GA4). Bật (NEXT_PUBLIC_QC_CA_NHAN_HOA=1) khi chạy tiếp thị
+ *  lại và Google không chặn danh sách (site xếp nhóm tâm linh / khó khăn cá nhân có thể bị hạn chế). */
+export const QC_CA_NHAN_HOA = process.env.NEXT_PUBLIC_QC_CA_NHAN_HOA === "1";
+/** Khoá localStorage giữ mã lượt bấm quảng cáo Google (gclid / gbraid / wbraid) — đặt trong đoạn khởi động GTM. */
+export const KHOA_GCLID = "hbt.gclid";

@@ -65,6 +65,8 @@ let giaTriCho: number | null = null;
 export function datGiaTriMeta(vnd: number | null | undefined): void {
   giaTriCho = typeof vnd === "number" && Number.isFinite(vnd) && vnd > 0 ? Math.round(vnd) : null;
 }
+/** QC-G: xem (không lấy) giá trị đang chờ — ghi() đưa cùng số cho dataLayer Google trước khi Meta dùng rồi xoá. */
+export function xemGiaTriMeta(): number | null { return giaTriCho; }
 function layGiaTri(): { value: number; currency: "VND" } | Record<string, never> {
   const v = giaTriCho; giaTriCho = null;
   return v ? { value: v, currency: "VND" } : {};

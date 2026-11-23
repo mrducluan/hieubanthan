@@ -14,6 +14,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return apDungSeo(metaMacDinh(DUONG), await layNoiDungTrang(DUONG));
 }
 
-export default function Page() {
-  return <TrangCongCu duong={DUONG} mang="bat_tu"><BatTu /></TrangCongCu>;
+export default async function Page(p: { searchParams: Promise<{ kw?: string }> }) {
+  const [{ kw }, { ngonNgu }] = await Promise.all([p.searchParams, ngonNguMayChu()]);
+  const en = ngonNgu === "en";
+  return <TrangCongCu duong={DUONG} mang="bat_tu" kw={en ? undefined : kw} gia={en ? undefined : { moDun: "battu", mienPhi: "tứ trụ, năm hành và chương đầu" }}><BatTu /></TrangCongCu>;
 }

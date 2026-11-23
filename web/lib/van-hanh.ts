@@ -48,4 +48,4 @@ export function vanHanh(): VanHanh {
 
 export const DANG_CAP_NHAT = "đang cập nhật";
 /** Ngày hiệu lực của bộ chính sách hiện hành — đổi khi sửa nội dung trang pháp lý. */
-export const NGAY_HIEU_LUC = "17/11/2026";
+export const NGAY_HIEU_LUC = "23/11/2026";

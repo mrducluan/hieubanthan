@@ -8,6 +8,7 @@ import { congDangBat, khachDichVu, khachNguoiMua } from "@/lib/thanh-toan/cong";
 import { cauHinhPay2s, maPay2s, taoLink } from "@/lib/thanh-toan/pay2s";
 import { siteUrl } from "@/lib/seo";
 import { ghiMetaDon } from "@/lib/meta-capi";
+import { ghiGoogleDon } from "@/lib/google-offline";
 
 const Vao = z.union([
   z.object({ goi: z.string().regex(/^[a-z0-9_]{2,30}$/) }),
@@ -49,6 +50,8 @@ export async function POST(req: Request) {
   }
 
   await ghiMetaDon(khachDichVu(), d.ma_don, req, dongYMeta);
+  // QC-G: mã lượt bấm quảng cáo Google (gclid…) — trình duyệt chỉ gửi khi người mua chưa tắt cookie đo lường (cùng cờ meta).
+  await ghiGoogleDon(khachDichVu(), d.ma_don, (tho as { google?: unknown } | null)?.google as never, dongYMeta);
   const ketQua = `${siteUrl()}/nap-sao/ket-qua?ma=${d.ma_don}`;
   const loai = hoiVien ? "hoi_vien" : "sao";
   if (cong === "gia") {
