@@ -10,18 +10,19 @@ import { caoDinhTren } from "@/lib/thanh-mang";
 
 const CHON = '[data-testid="moi-lap-la-so"]';
 
-export function NutXuongForm({ moDun, nhan = "Nhập ngày giờ sinh · xem ngay" }: { moDun: string; nhan?: string }) {
+/** `chon`: khối ô nhập cần đưa tới (mặc định khối mời lập lá số; Thời gian tới dùng khung nhập hồ sơ riêng — CRO-2). */
+export function NutXuongForm({ moDun, nhan = "Nhập ngày giờ sinh · xem ngay", chon = CHON }: { moDun: string; nhan?: string; chon?: string }) {
   const [co, setCo] = useState(false);
   useEffect(() => {
-    const xet = () => setCo(Boolean(document.querySelector(CHON)));
+    const xet = () => setCo(Boolean(document.querySelector(chon)));
     xet();
     const mo = new MutationObserver(xet);
     mo.observe(document.body, { childList: true, subtree: true });
     return () => mo.disconnect();
-  }, []);
+  }, [chon]);
   if (!co) return null;
   const bam = () => {
-    const el = document.querySelector<HTMLElement>(CHON);
+    const el = document.querySelector<HTMLElement>(chon);
     if (!el) return;
     ghi("chart_interacted", { mo_dun: moDun, kind: "nut_xuong_form" });
     const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;

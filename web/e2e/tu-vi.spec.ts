@@ -79,7 +79,7 @@ test("độ sáng sao: mặc định Nam phái, chuyển được sang phái Tru
 test("luận giải toàn bộ theo chương (miễn phí thử nghiệm)", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const bc = page.getByTestId("luan-giai-toan-bo");
   // LG-ĐS: engine trả bản "đời sống" (docs/LUAN-GIAI-DOI-SONG.md) — 13 chương (VH-1: + Vận hạn), có Điều quan trọng nhất + dòng thời gian.
   await expect(bc).toHaveAttribute("data-phien-ban", "doi_song_1");
@@ -120,7 +120,7 @@ test("luận giải có AI diễn đạt: hiện bản AI, chuyển được san
     ],
   } }));
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc.getByTestId("dien-dat-ai")).toContainText("giữ bản gốc");
   await expect(bc).toContainText("Bài AI viết lại.");
@@ -169,6 +169,10 @@ test("TV-NHUAN3: sinh nửa đầu tháng nhuận → có lựa chọn \"Cả th
 test("giá luận giải: công tắc thu Sao mặc định tắt → miễn phí, không đòi đăng nhập", async ({ page, request }) => {
   const r = await request.get("/api/luan-giai/phi");
   expect(await r.json()).toEqual({ thu: false, gia: 99 });
+  // CRO-2: Tử vi tự tải chương 1 — giữ lượt tải đầu lại để kiểm khung chờ (dòng giá), rồi cho đi tiếp tới engine thật.
+  let tha!: () => void;
+  const cho = new Promise<void>((x) => { tha = x; });
+  await page.route("**/api/tuvi/luan-giai", async (r) => { await cho; await r.continue(); });
   await napHoSo(page);
   await page.goto("/tu-vi");
   await expect(page.getByTestId("gia-luan-giai")).toContainText("miễn phí");
@@ -177,7 +181,7 @@ test("giá luận giải: công tắc thu Sao mặc định tắt → miễn ph�
   await expect(du).toContainText("dự kiến 99 Sao");
   await expect(du.getByRole("link", { name: "Sao là gì?" })).toHaveAttribute("href", "/dieu-khoan#sao");
   for (const cam of ["chỉ còn", "sắp hết", "nhanh tay"]) await expect(du).not.toContainText(cam);
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  tha();
   await expect(page.getByTestId("luan-giai-toan-bo")).toContainText("Con người bạn");
 });
 

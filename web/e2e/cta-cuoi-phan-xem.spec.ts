@@ -71,16 +71,13 @@ test("thiếu giờ sinh: thẻ Tử vi mời thêm giờ", async ({ request }) 
   expect(tv.cta).toContain("giờ sinh");
 });
 
-test("CTA Sao — công tắc TẮT (miễn phí): mời đọc luận giải, bấm thì tải báo cáo rồi tự ẩn", async ({ page }) => {
+test("CTA Sao — công tắc TẮT (miễn phí): Tử vi tự tải trọn báo cáo → khối cuối trang không mời đọc luận giải nữa", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/tu-vi");
+  // CRO-2: chương 1 tự tải; công tắc tắt = trọn bài, không còn chương khoá → thẻ Sao tự ẩn (đã đọc trọn → không mời).
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });
   const k = await khoiCta(page);
-  const nut = k.getByTestId("cta-sao");
-  await expect(nut).toContainText("Đọc luận giải toàn bộ");
-  await expect(nut).toContainText("đang miễn phí");
-  await nut.click();
-  await expect.poll(async () => (await suKien(page)).some((e) => e.su_kien === "sao_cta_clicked" && e.tu === "tu_vi")).toBe(true);
-  await expect(k.getByTestId("cta-sao")).toHaveCount(0, { timeout: 30_000 });   // đã đọc trọn → không mời nữa
+  await expect(k.getByTestId("cta-sao")).toHaveCount(0, { timeout: 30_000 });
 });
 
 test("CTA Sao — công tắc BẬT: còn chương khoá → 'Mở N chương còn lại', bấm đi đúng luồng SAO-2 (sang trang đăng nhập)", async ({ page }) => {
@@ -105,10 +102,7 @@ test("CTA Sao — công tắc BẬT: còn chương khoá → 'Mở N chương c�
   });
   await page.goto("/tu-vi");
   const k = await khoiCta(page);
-  const nut = k.getByTestId("cta-sao");
-  await expect(nut).toContainText("Đọc thử chương đầu");   // khác nhãn nút chính của Luận giải (không trùng tên trên một trang)
-  await expect(nut).toContainText("trọn bộ 10 Sao");
-  await nut.click();                                                  // tải bản xem trước
+  // CRO-2: bản xem trước đã tự tải → thẻ Sao mời thẳng phần còn khoá (không còn bước "Đọc thử chương đầu").
   await expect(k.getByTestId("cta-sao")).toContainText("Mở 2 chương còn lại");
   await expect(k.getByTestId("cta-sao")).toHaveAttribute("data-khoa", "2");
   await k.getByTestId("cta-sao").click();

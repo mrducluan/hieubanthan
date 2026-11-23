@@ -34,7 +34,7 @@ async function moBaoCao(page: Page, gia: number, thuong: number) {
     : r.fulfill({ json: xemTruoc(gia, thuong) }));
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
 }
 
 test("thuần: phép tính + câu chữ ba lối mở", () => {
@@ -135,7 +135,7 @@ test("nạp (ví thiếu): ba lối — Đọc ngay (một gói vừa đủ + QR
     : r.fulfill({ json: { ...xemTruoc(29, null), phi: { sao: 29, ly_do: "xem_truoc", khoa: true, dang_nhap: true, so_du: 10, thuong_chao_mung: null } } }));
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   await page.getByTestId("lg-mo-khoa").click();
   const hop = page.getByTestId("hop-thoai-sao");
   await expect(hop).toHaveAttribute("data-can", "nap");
@@ -169,7 +169,7 @@ test("nạp khi CHƯA nhận quà chào mừng: gói gợi ý + số bạn cần
     : r.fulfill({ json: { ...xemTruoc(gia, null), phi: { sao: gia, ly_do: "xem_truoc", khoa: true, dang_nhap: true, so_du: 0, thuong_chao_mung: null } } }));
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   await page.getByTestId("lg-mo-khoa").click();
   const hop = page.getByTestId("hop-thoai-sao");
   await expect(hop.getByTestId("nhan-chao-mung")).toBeVisible();
@@ -179,7 +179,7 @@ test("nạp khi CHƯA nhận quà chào mừng: gói gợi ý + số bạn cần
   await page.keyboard.press("Escape");
   gia = 10;
   await page.reload();
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   await page.getByTestId("lg-mo-khoa").click();
   await expect(hop.getByTestId("nhan-chao-mung")).toBeVisible();
   await expect(hop.getByTestId("nap-nhanh")).toHaveCount(0);

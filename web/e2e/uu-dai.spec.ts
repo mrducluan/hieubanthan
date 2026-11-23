@@ -44,7 +44,11 @@ test("thanh mở khoá: có ưu đãi → giá gạch, tiết kiệm, đồng h�
   let giaThay: string | undefined;
   await page.route("**/api/sao/muc", (r) => r.fulfill({ json: { moi_ban: 33, duoc_moi: 33, chao_mung: 10, tran: 20 } }));
   await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: true, gia: 69, uu_dai: u } }));
-  await page.route("**/api/tuvi/luan-giai", (r) => {
+  // CRO-2: Tử vi tự tải chương 1 — giữ lượt tải đầu lại để kiểm dòng giá của khung chờ, rồi mới trả bài.
+  let tha!: () => void;
+  const cho = new Promise<void>((x) => { tha = x; });
+  await page.route("**/api/tuvi/luan-giai", async (r) => {
+    await cho;
     const h = r.request().headers();
     if (h["x-mo-khoa"] === "1") { giaThay = h["x-gia-thay"]; return r.fulfill({ status: 402, json: { error: "Đăng nhập để mở toàn bộ báo cáo (69 Sao).", can: "dang_nhap", gia: 69, thuong: 10 } }); }
     return r.fulfill({ json: xemTruoc(u) });
@@ -53,7 +57,8 @@ test("thanh mở khoá: có ưu đãi → giá gạch, tiết kiệm, đồng h�
   await page.goto("/tu-vi");
   await expect(page.getByTestId("gia-luan-giai")).toContainText("69 Sao");
   await expect(page.getByTestId("gia-luan-giai").locator("s")).toHaveText("99 Sao");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  tha();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const hop = page.getByTestId("lg-hop-mo");
   await expect(hop).toBeVisible();
   await expect(hop.locator("s")).toHaveText("99 Sao");
@@ -71,7 +76,7 @@ test("không có ưu đãi → không gạch giá, không đồng hồ, không d
   await page.route("**/api/tuvi/luan-giai", (r) => r.fulfill({ json: xemTruoc(null) }));
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const hop = page.getByTestId("lg-hop-mo");
   await expect(hop).toContainText("99 Sao");
   await expect(hop.locator("s")).toHaveCount(0);

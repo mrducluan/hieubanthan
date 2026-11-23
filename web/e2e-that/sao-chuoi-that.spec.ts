@@ -63,7 +63,7 @@ test("báo cáo: khách đọc chương 1 → mở khoá → đăng nhập OTP �
   // 1. Bản xem trước: chương khoá KHÔNG có đoạn văn trong phản hồi mạng.
   const xemTruoc = page.waitForResponse((r) => r.url().endsWith("/api/tuvi/luan-giai") && r.status() === 200);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const bc = (await (await xemTruoc).json()) as { chuong: { khoa?: boolean; doan?: string[]; van_ai?: string; moi_xem?: { cau_hoi: string } }[] };
   const khoa = bc.chuong.filter((c) => c.khoa);
   expect(khoa.length).toBeGreaterThan(2);
@@ -93,7 +93,7 @@ test("báo cáo: khách đọc chương 1 → mở khoá → đăng nhập OTP �
 
   // 4. Xem lại trong ngày → đầy đủ ngay, không trừ lần hai.
   await page.reload();
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 90_000 });
   await expect(page.getByTestId("lg-phan-khoa")).toHaveCount(0);
   expect((await so(EMAIL)).dem("dung")).toBe(1);
@@ -158,7 +158,7 @@ test("khách: hết lượt hỏi → mời đăng nhập; 'Để sau' ở báo 
   await page.keyboard.press("Escape");
   await expect(hop(page)).toHaveCount(0);
 
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   await page.getByTestId("lg-mo-khoa").click();
   await expect(page).toHaveURL(/\/dang-nhap/);
   // Bỏ dở đăng nhập, quay lại → lượt tự mở hiện hộp (không chuyển trang lần nữa) → "Để sau".
@@ -166,7 +166,7 @@ test("khách: hết lượt hỏi → mời đăng nhập; 'Để sau' ở báo 
   await expect(hop(page)).toHaveAttribute("data-can", "dang_nhap", { timeout: 60_000 });
   await page.keyboard.press("Escape");
   await page.reload();
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).waitFor();
+  await page.getByTestId("luan-giai-toan-bo").waitFor({ timeout: 90_000 });   // CRO-2: chương 1 tự tải sau khi tải lại
   await page.waitForTimeout(3_000);
   await expect(hop(page)).toHaveCount(0);
 });

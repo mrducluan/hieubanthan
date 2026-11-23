@@ -9,12 +9,12 @@ type C = { ma: string; khoa?: boolean; goc_nhin_khac?: { y: Y[] }; hop?: { y_bo_
 
 test("Góc nhìn khác gập sẵn, mở ra có ghi chú tham khảo + kiểm chứng theo phái riêng; đo chỉ mã", async ({ page }) => {
   await napHoSo(page);
-  await page.goto("/tu-vi");
-  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
+  // CRO-2: Tử vi tự tải chương 1 khi có lá số — chờ lượt gọi đó (không còn nút mở).
   const [res] = await Promise.all([
     page.waitForResponse((r) => r.url().endsWith("/api/tuvi/luan-giai")),
-    page.getByRole("button", { name: "Xem luận giải" }).click(),
+    page.goto("/tu-vi"),
   ]);
+  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
   expect(res.status()).toBe(200);
   const bc = await res.json();
   const mo = (bc.chuong as C[]).filter((c) => !c.khoa);

@@ -7,7 +7,7 @@ import { napHoSo } from "./_hoso";
 test("Ý5: bấm Đúng ở hộp giao thoa → ghi hàng Q7 với loai_hoi giao_thoa (mọi mức, kể cả thuận)", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc).toHaveAttribute("data-phien-ban", "doi_song_1");
   await page.route("**/api/kiem-chung", (route) => route.fulfill({ json: { ok: true } }));

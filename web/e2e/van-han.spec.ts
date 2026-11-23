@@ -47,7 +47,7 @@ test("Tử vi: dòng 10 năm — năm nay, cờ dân gian, bấm năm cần lưu
   const BC = FX_TV.bao_cao;
   const c = vh(BC);
   await mo(page, "tu-vi", BC);
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const ch = page.getByTestId("lg-chuong-van_han");
   await expect(ch.getByRole("heading", { level: 3 })).toContainText("Mười năm tới & điều nên tránh (vận hạn)");
   await expect(ch.getByTestId("chip-muc")).toHaveCount(0);
@@ -127,7 +127,7 @@ test("SAO-2: chương Vận hạn khoá chỉ hiện tiêu đề + lời mời, 
   const BC = FX_TV.bao_cao as unknown as BaoCaoDay;
   const xem = { ...catXemTruoc(BC, 1), phi: { sao: 10, ly_do: "xem_truoc", khoa: true, dang_nhap: true, so_du: 20 } };
   await mo(page, "tu-vi", xem, true);
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   await expect(page.getByTestId("lg-chuong-khoa")).toHaveCount(12);
   await expect(page.getByTestId("dong-muoi-nam")).toHaveCount(0);
   const khoa = page.getByTestId("lg-chuong-khoa").filter({ hasText: "Mười năm tới & điều nên tránh (vận hạn)" });
@@ -150,7 +150,7 @@ test("EN-5.2 Tử vi: sao lưu năm hiện trong chương Vận hạn, tên sao 
   const BC = structuredClone(FX_TV.bao_cao) as unknown as { chuong: Record<string, unknown>[] };
   BC.chuong.find((c) => c.ma === "van_han")!.sao_luu = SAO_LUU;
   await mo(page, "tu-vi", BC);
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const ch = page.getByTestId("lg-chuong-van_han");
   await ch.getByTestId("lg-mo-chuong").click();
   const k = ch.getByTestId("sao-luu-nam");

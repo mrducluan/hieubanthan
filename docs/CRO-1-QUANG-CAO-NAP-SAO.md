@@ -55,3 +55,17 @@ duyệt khác là mất hồ sơ + báo cáo chờ mở. Đồng hồ đếm ng�
 
 KPI 4 tuần: chi phí / Lead ≤ 4.000 ₫; Lead → InitiateCheckout ≥ 15 %; InitiateCheckout → Purchase ≥ 30 %.
 Việc của chủ dự án (Ads Manager, env, migration): `docs/VIEC-CUA-ANH.md` mục CRO-1.
+
+## 5. CRO-2 (2026-11-23) — áp cho các money page còn lại
+
+Rà 5 trang có báo cáo thu Sao (/than-so, /bat-tu, /tu-vi, /thoi-gian-toi, /chan-dung). Phần chung của CRO-1 (luồng mở khoá,
+giá ≈ ₫, thanh dính đáy, dòng tin cậy, AddToCart, "Không biết giờ") nằm trong `LuanGiaiToanBo` / `NhapHoSo` nên đã áp cho mọi
+trang; dòng giá màn đầu + `?kw=` của QC-G (#341) đã có ở 4 trang. Còn thiếu và đã sửa:
+
+| Trang | Thiếu | Sửa |
+|---|---|---|
+| /tu-vi | Phải bấm "Xem luận giải" mới có chương 1; bài luận nằm dưới lá số + 4 khối nâng cao (~6 màn điện thoại); "Sách xưa" chắn trước bài luận | Chương 1 tự tải (`tuMo`, như Bát tự; bản Anh giữ nút); nút "Đọc luận giải đời thường ↓" ngay đầu lá số (`tu-vi-den-luan-giai`, đo `chart_interacted{kind=den_luan_giai}`); "Sách xưa" dời xuống dưới bài luận |
+| /chan-dung | Không có dòng giá màn đầu; điện thoại không thấy chỗ nhập | `gia` (QC-G) + nút "Nhập ngày giờ sinh · xem ngay" |
+| /thoi-gian-toi | Điện thoại không thấy chỗ nhập | Nút "Nhập ngày sinh · xem ngay" (`NutXuongForm` nhận `chon`) |
+
+Tự tải chương 1 là bản xem trước (không `x-mo-khoa`) — không bao giờ trừ Sao; đo `paywall_viewed{kind=luan_giai_tu_dong}`.

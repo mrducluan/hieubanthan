@@ -104,7 +104,7 @@ test("báo cáo: hỏi công tắc đúng mảng; chương được tặng ghi c
   });
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   expect(moDunPhi).toBe("tuvi");
   const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc).toContainText("Đoạn được tặng.");
@@ -130,7 +130,7 @@ test("nút tặng: hết lượt 30 ngày → câu trung tính, không có nút"
   await page.route("**/api/qua", (r) => r.fulfill({ json: { bat: true, tran: 3, da_gui_30_ngay: 3, co_the_tang: true } }));
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const tang = page.getByTestId("tang-chuong");
   await expect(tang).toContainText("Bạn đã gửi đủ 3 quà trong 30 ngày qua");
   await expect(tang.getByTestId("tang-chuong-nut")).toHaveCount(0);
