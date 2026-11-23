@@ -23,6 +23,13 @@ export const DAU_KW: Record<string, Record<string, DauKw>> = {
   "/thoi-gian-toi": {
     "2027": { h1: "Năm 2027 của riêng bạn",
       loiDan: "Chỉ cần tên và ngày sinh: 3 tháng tới và tóm tắt năm 2027 đọc miễn phí, tháng nào nên đẩy mạnh, tháng nào nên đi chậm." },
+    // CRO-2 / KH-1: nhóm quảng cáo "tháng nào tốt để …" → khối "Bạn định làm gì trong 12 tháng tới?" ngay đầu trang.
+    "thang-tot": { h1: "Tháng nào hợp để đổi việc, mua nhà, cưới hỏi?",
+      loiDan: "Chọn việc bạn định làm: xem tháng hợp nhất trong 12 tháng tới và ngày nên đặt việc chính, theo chính ngày sinh của bạn. Miễn phí." },
+  },
+  "/chan-dung": {
+    "tong-hop": { h1: "Chân dung bạn qua Tử vi, Bát tự và tướng mặt",
+      loiDan: "Ba cách xem đặt cạnh nhau theo từng mảng đời: chỗ cùng thấy, chỗ nhìn khác nhau và vì sao. Chương đầu đọc miễn phí." },
   },
 };
 

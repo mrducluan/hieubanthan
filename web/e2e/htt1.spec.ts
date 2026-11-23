@@ -9,7 +9,7 @@ const VI = /[ăâđêôơưàáảãạèéẻẽẹìíỉĩịòóỏõọùú
 test("giao thoa (vi): bấm Đúng với mình ≥ 2 hộp → engine ghép điểm chung, hộp giao thoa có nút kiểm chứng", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc).toHaveAttribute("data-phien-ban", "doi_song_1");
   await expect(page.getByTestId("giao-thoa")).toHaveCount(0);

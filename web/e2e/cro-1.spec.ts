@@ -158,3 +158,38 @@ test("thanh mở khoá dính đáy: hiện khi đọc qua đầu bài, ẩn khi 
   await page.getByTestId("lg-phan-khoa").scrollIntoViewIfNeeded();
   await expect(thanh).toHaveAttribute("data-hien", "0");
 });
+
+// CRO-2 (2026-11-23) — áp CRO-1 cho các money page còn lại: Tử vi tự mở chương 1 + nút đầu lá số xuống bài luận + Sách xưa
+// dưới bài luận; Chân dung + Thời gian tới có nút xuống ô nhập trên điện thoại.
+test("/tu-vi có hồ sơ: chương 1 tự tải (không cần bấm), nút đầu lá số trỏ #luan-giai, Sách xưa nằm DƯỚI bài luận", async ({ page }) => {
+  await napHoSo(page);
+  const [res] = await Promise.all([
+    page.waitForResponse((r) => r.url().endsWith("/api/tuvi/luan-giai")),
+    page.goto("/tu-vi"),
+  ]);
+  expect(res.request().headers()["x-mo-khoa"]).toBeUndefined();   // tự tải là bản xem trước, không bao giờ trừ Sao
+  const bc = page.getByTestId("luan-giai-toan-bo");
+  await expect(bc).toBeVisible({ timeout: 60_000 });
+  await expect(page.getByTestId("tu-vi-den-luan-giai")).toHaveAttribute("href", "#luan-giai");
+  await expect(page.getByTestId("tu-vi-den-hoi")).toHaveAttribute("href", "#hoi-tu-vi");
+  await expect(page.locator("#hoi-tu-vi")).toHaveCount(1);
+  const sach = page.getByTestId("sach-ghi").or(page.getByTestId("sach-xua")).first();
+  await expect(sach).toBeAttached();
+  const [yBc, ySach] = await Promise.all([bc.evaluate((e) => e.getBoundingClientRect().top + scrollY), sach.evaluate((e) => e.getBoundingClientRect().top + scrollY)]);
+  expect(ySach).toBeGreaterThan(yBc);
+});
+
+for (const [duong, chon] of [["/chan-dung", "moi-lap-la-so"], ["/thoi-gian-toi", "tgt-nhap"]] as const) {
+  test(`${duong} điện thoại chưa có hồ sơ: nút xuống ô nhập ở màn đầu, bấm thì ô nhập vào màn hình`, async ({ browser }) => {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+    const page = await ctx.newPage();
+    await page.goto(duong);
+    const nut = page.getByTestId("nut-xuong-form");
+    await expect(nut).toBeVisible();
+    const hop = await nut.boundingBox();
+    expect(hop && hop.y + hop.height).toBeLessThan(844);
+    await nut.click();
+    await expect(page.getByTestId(chon).locator("input").first()).toBeInViewport();
+    await ctx.close();
+  });
+}

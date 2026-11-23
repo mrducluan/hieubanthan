@@ -1,0 +1,121 @@
+{
+  "_nguon": "KH-1 (2026-11-23) — 'Việc bạn định làm: tháng nào hợp' trên /thoi-gian-toi. Nháp ban biên tập. Mỗi việc chỉ trỏ tới dữ kiện ĐÃ CÓ: tháng cá nhân thần số (so_hop lấy đúng chữ hop_de trong thanso_ban_do.thang_hop), việc của sách lịch (hoang_lich_kb.viec, chọn ngày bằng chon_ngay), kiêng theo năm (Kim lâu, tuổi làm nhà — calc.tuoi_dan_gian). Không điểm số, không phán.",
+  "source": {"id": "kh1_bien_tap", "ten": "Ban biên tập Hiểu Bản Thân — ghép từ thanso_ban_do, hoang_lich_kb, tuoi_dan_gian"},
+  "source_id": "kh1_bien_tap",
+  "school_id": "tong_hop",
+  "trang_thai": "nhap_ai",
+  "nhip": {
+    "thuan": "Hợp nhất",
+    "duoc": "Được",
+    "binh": "Bình thường",
+    "can_nhac": "Cân nhắc kỹ",
+    "cham": "Nên đi chậm"
+  },
+  "dau": {
+    "thanso": "tháng cá nhân {so} hợp {hop}",
+    "con_giap": "tháng {chi_thang} hợp tuổi {chi_tuoi}",
+    "tuvi": "Tử vi tháng thuận",
+    "battu": "Bát tự tháng thuận"
+  },
+  "cham": {
+    "con_giap": "tháng {chi_thang} xung tuổi {chi_tuoi}",
+    "tuvi": "Tử vi tháng cần lưu ý",
+    "battu": "Bát tự tháng cần lưu ý",
+    "khong_ngay": "sách lịch không có ngày hợp việc này"
+  },
+  "cau": {
+    "tra_loi": "{viec} trong 12 tháng tới: tháng hợp nhất là {thang}.",
+    "tra_loi_duoc": "{viec} trong 12 tháng tới: chưa có tháng nào hội đủ hai điểm thuận; các tháng được là {thang}.",
+    "tra_loi_khong": "{viec} trong 12 tháng tới: không tháng nào nổi hẳn lên — cứ chọn tháng thuận tiện cho bạn và đặt việc chính vào ngày sách lịch ghi hợp.",
+    "ngay": "Ngày nên đặt việc chính trong {thang}: {ds}.",
+    "lui": "Nếu được, lùi việc chính khỏi {thang} ({ly_do}).",
+    "cach_xep": "Mỗi tháng đếm các cách xem cùng nói thuận hay cùng nhắc chậm — không cộng điểm. Hợp nhất: từ hai điểm thuận trở lên và không điểm nhắc chậm. Nên đi chậm: có điểm nhắc chậm và không điểm thuận.",
+    "thieu_gio": "Đang xem theo ngày sinh (thần số, con giáp, sách lịch). Thêm giờ sinh, giới tính, nơi sinh để mỗi tháng có thêm Tử vi và Bát tự.",
+    "ket": "Đây là nhịp gợi ý để bạn tự sắp việc. Quyết định vẫn dựa trên điều kiện thực tế của bạn."
+  },
+  "viec": {
+    "doi_viec": {
+      "ten": "Đổi việc, nhận việc mới",
+      "cau_hoi": "Tháng nào hợp để đổi việc?",
+      "so_hop": {"5": "thay đổi công việc", "1": "bắt đầu việc mới"},
+      "viec_lich": "ky_ket",
+      "viec_lam": ["Cập nhật hồ sơ và hỏi trước hai người đang làm ở nơi bạn nhắm tới.", "Chỉ báo nghỉ chỗ cũ khi đã có thư mời bằng văn bản.", "Giữ khoản dự phòng đủ ba tháng chi tiêu cho giai đoạn chuyển."],
+      "ranh_gioi": ""
+    },
+    "khoi_su": {
+      "ten": "Mở kinh doanh, khai trương",
+      "cau_hoi": "Tháng nào hợp để khai trương?",
+      "so_hop": {"1": "bắt đầu việc mới", "3": "giới thiệu bản thân"},
+      "viec_lich": "khai_truong",
+      "viec_lam": ["Chạy thử nhỏ với vài khách quen trước ngày mở chính thức.", "Tính sẵn số tiền đủ chạy sáu tháng đầu chưa có lãi.", "Hỏi kỹ giấy phép, thuế trước khi treo biển."],
+      "ranh_gioi": "Đây không phải lời khuyên đầu tư."
+    },
+    "ky_ket": {
+      "ten": "Ký hợp đồng, bàn lương, chốt việc lớn",
+      "cau_hoi": "Tháng nào hợp để ký hợp đồng, bàn lương?",
+      "so_hop": {"8": "chốt hợp đồng, bàn chuyện tiền", "2": "đàm phán mềm"},
+      "viec_lich": "ky_ket",
+      "viec_lam": ["Đọc trọn hợp đồng một lần vào buổi sáng, khi đầu óc tỉnh.", "Ghi ra ba điều bạn không nhượng bộ trước buổi bàn.", "Hẹn thêm một ngày suy nghĩ với điều khoản bạn chưa hiểu."],
+      "ranh_gioi": "Đây không phải lời khuyên pháp lý; điều khoản lớn nên hỏi luật sư."
+    },
+    "mua_nha": {
+      "ten": "Mua nhà, về nhà mới",
+      "cau_hoi": "Tháng nào hợp để mua nhà, về nhà mới?",
+      "so_hop": {"4": "sắp xếp tài chính", "6": "lo cho nhà cửa"},
+      "viec_lich": "nhap_trach",
+      "viec_lam": ["Kiểm tra giấy tờ pháp lý của căn nhà trước khi đặt cọc.", "Tính khoản trả góp hằng tháng không quá phần thu nhập bạn thấy dễ thở.", "Xem nhà vào hai giờ khác nhau trong ngày."],
+      "ranh_gioi": "Đây không phải lời khuyên đầu tư hay pháp lý."
+    },
+    "xay_nha": {
+      "ten": "Làm nhà, sửa nhà lớn",
+      "cau_hoi": "Tháng nào hợp để làm nhà, sửa nhà?",
+      "so_hop": {"4": "sắp xếp tài chính, làm kỹ việc đang dở", "6": "lo cho nhà cửa"},
+      "viec_lich": "dong_tho",
+      "kiem_nam": "lam_nha",
+      "viec_lam": ["Xin giấy phép xây dựng trước khi chọn ngày động thổ.", "Chốt bản vẽ và dự toán trước, cộng thêm khoản dư cho phát sinh.", "Hỏi kỹ sư kết cấu trước khi đập tường hay đổ thêm tầng."],
+      "ranh_gioi": "Việc kết cấu, giấy phép hỏi kỹ sư và cơ quan cấp phép."
+    },
+    "cuoi_hoi": {
+      "ten": "Cưới hỏi",
+      "cau_hoi": "Tháng nào hợp để cưới?",
+      "so_hop": {"6": "cam kết trong quan hệ", "2": "vun đắp quan hệ"},
+      "viec_lich": "cuoi_hoi",
+      "kiem_nam": "kim_lau",
+      "viec_lam": ["Hai bên gia đình gặp nhau sớm để thống nhất lễ nghi.", "Nói rõ với nhau chuyện tiền bạc chung trước ngày cưới.", "Chốt ngày khi cả hai người cùng thấy thuận; lịch là để tham khảo."],
+      "ranh_gioi": ""
+    },
+    "di_xa": {
+      "ten": "Đi xa, du học, xuất ngoại",
+      "cau_hoi": "Tháng nào hợp để đi xa, du học?",
+      "so_hop": {"5": "đi xa, thử điều mới"},
+      "viec_lich": "xuat_hanh",
+      "viec_lam": ["Làm giấy tờ, visa sớm hơn hạn ít nhất một tháng.", "Chụp lưu bản sao giấy tờ vào điện thoại và gửi một người thân.", "Tìm hiểu trước nơi ở và người liên hệ ở nơi đến."],
+      "ranh_gioi": ""
+    },
+    "hoc_thi": {
+      "ten": "Học, thi cử, học thêm kỹ năng",
+      "cau_hoi": "Tháng nào hợp để bắt đầu học, ôn thi?",
+      "so_hop": {"7": "học sâu, nghiên cứu", "4": "học kỹ năng nền"},
+      "viec_lich": "nhap_hoc",
+      "viec_lam": ["Chia mục tiêu thành từng tuần, ghi lịch ôn cố định.", "Làm thử một đề hoặc bài kiểm tra ngay tuần đầu để biết mình đang ở đâu.", "Ngủ đủ trước ngày thi hơn là thức khuya ôn thêm."],
+      "ranh_gioi": "Kết quả thi do việc ôn tập của bạn quyết định."
+    },
+    "mua_xe": {
+      "ten": "Mua xe, tài sản lớn",
+      "cau_hoi": "Tháng nào hợp để mua xe?",
+      "so_hop": {"4": "sắp xếp tài chính", "8": "chốt hợp đồng"},
+      "viec_lich": "mua_xe",
+      "viec_lam": ["So giá ở ít nhất ba nơi trước khi đặt cọc.", "Tính đủ chi phí nuôi xe hằng tháng (gửi, xăng, bảo hiểm).", "Lái thử và đọc kỹ điều khoản bảo hành."],
+      "ranh_gioi": "Đây không phải lời khuyên đầu tư."
+    }
+  },
+  "nam": {
+    "kim_lau_nu": "Năm âm {nam} bạn {tuoi} tuổi mụ, phạm Kim lâu — dân gian thường tránh cưới năm này, nhiều nhà mượn tuổi hoặc dời sang năm sau.",
+    "kim_lau_nu_khong": "Năm âm {nam} bạn {tuoi} tuổi mụ, không phạm Kim lâu.",
+    "kim_lau_nam": "Dân gian xét Kim lâu khi cưới theo tuổi cô dâu; với chú rể không xét.",
+    "kim_lau_thieu": "Dân gian xét Kim lâu khi cưới theo tuổi mụ của cô dâu — chọn giới tính trong hồ sơ để xem.",
+    "lam_nha_xau": "Năm âm {nam} bạn {tuoi} tuổi mụ, rơi vào {xau} — dân gian thường tránh làm nhà năm này hoặc mượn tuổi người thân đứng tên.",
+    "lam_nha_tot": "Năm âm {nam} bạn {tuoi} tuổi mụ, không phạm Kim lâu, Hoang ốc xấu hay Tam tai khi làm nhà.",
+    "tap_quan": "Đây là tập quán dân gian, không nằm trong phép tính tháng ở trên."
+  }
+}

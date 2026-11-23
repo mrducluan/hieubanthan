@@ -107,7 +107,7 @@ async function moHopNap(page: Page, napDau: object | null) {
     } }));
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   await page.getByTestId("lg-mo-khoa").click();
   const hop = page.getByTestId("hop-thoai-sao");
   await expect(hop).toHaveAttribute("data-can", "nap");

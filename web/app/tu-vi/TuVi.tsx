@@ -6,7 +6,7 @@ import { useChu } from "@/components/cms/DauCms";
 import { useChuChung } from "@/components/cms/ChuChung";
 import Link from "@/components/khung/Lien";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { CalendarClock, ChevronDown, ChevronLeft, ChevronRight, Clock3, Download, HeartHandshake, Moon, Orbit, ScrollText, SlidersHorizontal, Waypoints } from "lucide-react";
+import { ArrowDown, CalendarClock, ChevronDown, ChevronLeft, ChevronRight, Clock3, Download, HeartHandshake, Moon, Orbit, ScrollText, SlidersHorizontal, Waypoints } from "lucide-react";
 import type { ChartInputVao, LaSoOutputT, LuuNguyetOutputT, PhaiLuuNguyet, VanHanOutputT } from "@/app/api/tuvi/schema";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { HanhDongTrucQuan } from "@/components/hoi/TrucQuan";
@@ -179,6 +179,21 @@ export function TuVi() {
         {laSo && <p className="text-sm text-fg-faint">
           {ct("la_so_mau.moi")} <Link href={d("/tu-vi/la-so-mau")} className="text-gold underline">{ct("la_so_mau.link")}</Link>{ct("la_so_mau.sau")}
         </p>}
+        {/* CRO-2 (như Bát tự CRO-1): bài luận đời thường nằm dưới lá số + 4 khối nâng cao (~6 màn hình điện thoại) — một nút
+            ngay đầu lá số đưa người mới vào thẳng chương 1 (đã tự tải). Chỉ lá số của chính mình, chỉ bản Việt. */}
+        {ls && !nt && !en && (
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <Button asChild size="lg">
+              <a href="#luan-giai" data-testid="tu-vi-den-luan-giai"
+                onClick={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "den_luan_giai" })}>
+                {ct("nut.doc_luan_giai")} <ArrowDown aria-hidden />
+              </a>
+            </Button>
+            <span className="text-xs text-fg-faint">{ct("nut.doc_luan_giai_phu")}</span>
+            <a href="#hoi-tu-vi" className="text-sm text-gold underline underline-offset-4" data-testid="tu-vi-den-hoi"
+              onClick={() => ghi("chart_interacted", { mo_dun: "tuvi", kind: "den_hoi" })}>{ct("nut.hoi_la_so")}</a>
+          </div>
+        )}
         {laSo && !ls && !loi && <KhungTai dong={6} />}
         {loi && <BaoLoi loi={loi} thuLai={thuLai} />}
         {ls && (
@@ -310,8 +325,6 @@ export function TuVi() {
             )}
             <ChuGiai />
             {ls.cach_cuc && <CachCuc ds={ls.cach_cuc} luuY={ls.cach_cuc_luu_y} onHoi={hoi} />}
-            {!nt && <SachXuaNoi ds={ls.sach_xua} moDun="tuvi" />}
-            {!nt && <SachXuaGhi khoi={ls.sach_ghi} moDun="tuvi" tieuDe="Sách xưa ghi gì về từng cung của bạn" />}
             {ls.co_canh_bao.length > 0 && (
               <p className="text-xs text-fg-faint">{ls.co_canh_bao.map((c) => (CO_CO_LOI.has(c.loai) ? ct(`co.${c.loai}`) : c.chi_tiet)).join(" ")}</p>
             )}
@@ -321,14 +334,23 @@ export function TuVi() {
 
       {/* NT-1: luận giải toàn bộ (trả Sao, lưu bài, góp ý) chỉ cho lá số của chính người dùng. */}
       {laSo && ls && !nt && (
-        <section aria-label={ct("aria.luan_giai")} className="mt-10">
-          <LuanGiaiToanBo duongDan="/api/tuvi/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten={ct("luan_giai.ten")} />
+        <section id="luan-giai" aria-label={ct("aria.luan_giai")} className="mt-10 scroll-mt-24">
+          {/* CRO-2: chương 1 tự mở như Bát tự (CRO-1) — bản Anh giữ nút mở. */}
+          <LuanGiaiToanBo duongDan="/api/tuvi/luan-giai" laSo={kemTinhTrang(laSo, hoSo)} ten={ct("luan_giai.ten")} moDun="tuvi" tuMo={!en} />
           {/* EN-ALL: bản Anh chưa có lối đi chéo mảng → bỏ khối CTA, giữ mốc đọc xong + góp ý (như Bát tự). */}
           <CuoiBaiDoc moDun="tuvi" cauHoi={ct("luan_giai.cau_hoi")} khongCta={en} />
         </section>
       )}
 
-      <section ref={chatRef} aria-label={ct("aria.hoi")} className="mt-10 scroll-mt-24">
+      {/* CRO-2: "Sách xưa" dời xuống dưới bài luận (như Bát tự CRO-1) — người mới đọc lời đời thường trước, nguyên văn sau. */}
+      {ls && !nt && (ls.sach_xua?.length || ls.sach_ghi) ? (
+        <section aria-label={en ? "Classical texts" : "Sách xưa"} className="mt-10 space-y-4">
+          <SachXuaNoi ds={ls.sach_xua} moDun="tuvi" />
+          <SachXuaGhi khoi={ls.sach_ghi} moDun="tuvi" tieuDe="Sách xưa ghi gì về từng cung của bạn" />
+        </section>
+      ) : null}
+
+      <section ref={chatRef} id="hoi-tu-vi" aria-label={ct("aria.hoi")} className="mt-10 scroll-mt-24">
         <h2 className="mb-4 text-2xl sm:text-3xl">{c("hoi.tieu_de") || ct("hoi.tieu_de")}</h2>
         {/* HD-CS đợt 2 (hướng C): "Xem trên lá số" trong câu trả lời chọn đúng cung trên lá số phía trên. */}
         <HanhDongTrucQuan.Provider value={laSo && ls ? { xemCung: xemTrenLaSo } : {}}>

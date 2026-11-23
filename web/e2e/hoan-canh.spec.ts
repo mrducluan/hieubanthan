@@ -13,16 +13,15 @@ test("chọn tình trạng → lưu trên máy, gửi kèm lá số, báo cáo c
   await expect(tt).toHaveValue("");
   await expect(page.getByTestId("tinh-trang-ghi-chu")).toContainText("máy chủ không lưu");
   await tt.selectOption("co_doi");
-  await page.getByRole("button", { name: "Lập lá số của tôi" }).click();
-  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
-  const h = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1")!));
-  expect(h.tinh_trang).toBe("co_doi");
-
+  // CRO-2: lập lá số xong Tử vi tự tải chương 1 — chờ chính lượt gọi đó (không còn nút mở).
   const [req, res] = await Promise.all([
     page.waitForRequest((r) => r.url().endsWith("/api/tuvi/luan-giai") && r.method() === "POST"),
     page.waitForResponse((r) => r.url().endsWith("/api/tuvi/luan-giai")),
-    page.getByRole("button", { name: "Xem luận giải" }).click(),
+    page.getByRole("button", { name: "Lập lá số của tôi" }).click(),
   ]);
+  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
+  const h = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.hoso.v1")!));
+  expect(h.tinh_trang).toBe("co_doi");
   expect(req.postDataJSON().la_so.tinh_trang).toBe("co_doi");
   expect(res.status()).toBe(200);
   const bc = await res.json();

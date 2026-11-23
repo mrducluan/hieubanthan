@@ -27,7 +27,7 @@ async function giaLapLuanGiai(page: Page, moKhoa: (route: Parameters<Parameters<
   await page.route("**/api/tuvi/luan-giai", (r) => r.request().headers()["x-mo-khoa"] === "1" ? moKhoa(r) : r.fulfill({ json: XEM_TRUOC }));
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
 }
 
 test("thuần: cắt bản xem trước bỏ hẳn đoạn văn chương khoá; dòng lượt hỏi", () => {

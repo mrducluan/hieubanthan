@@ -23,7 +23,7 @@
 | Tarot | 1 |  | 1 |  |  |
 | Kỳ Môn |  | 1 |  | 1 |  |
 | Thần số |  |  | 11 | 13 |  |
-| Lịch · tuổi · tập quán |  | 1 | 5 |  |  |
+| Lịch · tuổi · tập quán |  | 1 | 5 | 1 |  |
 | Liên mảng · kỹ thuật |  | 1 |  | 12 | 7 |
 
 ## Phần đã có nguyên văn đối chiếu (test khoá)
@@ -189,6 +189,7 @@
 | Thần số | `thanso_xu_ly.json` |  | Ban biên tập soạn |  |
 | Lịch · tuổi · tập quán | `gia_dinh_kb.json` |  | Tập quán / sách hiện đại tóm ý | GD-1: lời cặp con giáp, điều tập quán từng người — nháp |
 | Lịch · tuổi · tập quán | `hoang_lich_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | bảng nghi / kỵ theo sách lịch; tên Việt + nghĩa là nháp |
+| Lịch · tuổi · tập quán | `ke_hoach_thang_kb.json` |  | Ban biên tập soạn | KH-1: việc định làm ↔ số tháng cá nhân / việc sách lịch — nháp |
 | Lịch · tuổi · tập quán | `nam_tong_quan_kb.json` |  | Tập quán / sách hiện đại tóm ý |  |
 | Lịch · tuổi · tập quán | `sao_han_kb.json` |  | Tập quán / sách hiện đại tóm ý |  |
 | Lịch · tuổi · tập quán | `thoi_gian_lop_kb.json` |  | Tập quán / sách hiện đại tóm ý |  |

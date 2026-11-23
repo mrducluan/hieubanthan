@@ -9,12 +9,12 @@ type C = { ma: string; luan_hoi?: { tra_loi: TL[]; nguoi: { ma: string }[]; dong
 
 test("báo cáo Tử vi có bản đồ người quanh bạn + năm chương có câu trả lời thẳng", async ({ page }) => {
   await napHoSo(page, HO_SO_MAU);
-  await page.goto("/tu-vi");
-  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
+  // CRO-2: Tử vi tự tải chương 1 khi có lá số — chờ lượt gọi đó (không còn nút mở).
   const [res] = await Promise.all([
     page.waitForResponse((r) => r.url().endsWith("/api/tuvi/luan-giai")),
-    page.getByRole("button", { name: "Xem luận giải" }).click(),
+    page.goto("/tu-vi"),
   ]);
+  await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
   const bc = await res.json();
   const co = (bc.chuong as C[]).filter((c) => c.luan_hoi);
   expect(co.map((c) => c.ma).sort()).toEqual(["gia_dinh", "quan_he", "su_nghiep", "tien_bac", "tinh_cam"]);
@@ -116,7 +116,7 @@ test("thẻ chương khoá hiện câu hỏi chương trả lời; bấm một c
   });
   await napHoSo(page, HO_SO_MAU);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const khoa = page.getByTestId("lg-phan-khoa");
   await expect(khoa.getByTestId("lg-khoa-dan")).toContainText("trả lời thẳng 2 câu bạn hay hỏi");
   await expect(khoa.getByTestId("lg-khoa-cau")).toContainText("Chương này trả lời");
