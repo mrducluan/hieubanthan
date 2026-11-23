@@ -95,7 +95,7 @@ Cách làm:
   kéo chấm lệch → đồng ý `dm1` → engine đo như ANH-2 (không đổi API). Nút "Tự tìm lại", "Chấm tay từ đầu".
 - Tự phục vụ: `scripts/chep-mediapipe.mjs` (predev / prebuild) chép wasm từ node_modules + mô hình `web/mo-hinh/` (kiểm SHA-256,
   `lib/bo-do-mat.json`) vào `public/mediapipe/<phiên bản>/` (không vào git); proxy bỏ qua `/mediapipe/`; cache 1 năm.
-- **Số liệu hiệu năng của thư viện**: bản 1.2.2 tự gửi số liệu sử dụng về máy chủ của nhà phát triển (`odml.pa.googleapis.com`).
+- **Số liệu hiệu năng của thư viện**: bản 1.2.x tự gửi số liệu sử dụng về máy chủ của nhà phát triển (`odml.pa.googleapis.com`).
   CSP `connect-src` không có tên miền đó → trình duyệt chặn; e2e kiểm không yêu cầu nào ra ngoài trong lúc đo. Thêm tên miền
   Google vào `CSP_THEM_MIEN` thì phải xem lại điểm này.
 - Ngưỡng: "trên rộng dưới nhọn" 0,18 → **0,26** (đo theo viền mặt, trán ≈ 0,95–1,0 gò má, hàm ≈ 0,75–0,80 → mặt trung bình đã
