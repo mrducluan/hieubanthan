@@ -54,7 +54,6 @@ export function NhanTuong() {
   const [moPopup, setMoPopup] = useState(false);
   const [tlChoPopup, setTlChoPopup] = useState<TraLoi | null>(null);
   const [soDoMat, setSoDoMat] = useState<Record<string, unknown> | null>(null);
-  const [daDoTuAnh, setDaDoTuAnh] = useState(false);
   const refBaiDoc = useRef<HTMLDivElement>(null);
   useEffect(() => {
     fetch(urlTheoNgonNgu("/api/nhan-tuong/khao-sat")).then((r) => (r.ok ? r.json() : Promise.reject(new Error("x")))).then((d) => setKs(d as KhaoSat))
@@ -67,6 +66,14 @@ export function NhanTuong() {
     () => (ks?.cau_hoi ?? []).filter((q) => (MA_CAU_PHI_ANH as readonly string[]).includes(q.ma)),
     [ks],
   );
+  const soCauPhiAnhThieu = useMemo(
+    () => cauPhiAnh.filter((q) => !traLoi?.[q.ma] || traLoi[q.ma] === "khong_chac").length,
+    [cauPhiAnh, traLoi],
+  );
+  const moCauHoiPhu = () => {
+    setTlChoPopup(traLoi ?? {});
+    setMoPopup(true);
+  };
 
   // NT-2: `tl` truyền thẳng khi vừa điền từ số đo ảnh (state traLoi chưa kịp cập nhật).
   const docVoi = async (tl: TraLoi | undefined, soDo?: Record<string, unknown> | null) => {
@@ -84,18 +91,11 @@ export function NhanTuong() {
     } catch (e) { setLoi(e instanceof Error ? e.message : t("loi.doc")); } finally { setDang(false); }
   };
   const xemBaiDoc = () => void docVoi(traLoi);
-  // Sau khi đo ảnh xong: tự điền câu đo được → nếu còn câu phi hình ảnh (giọng nói, dáng đi…) chưa trả lời thì mở Pop-up gọn;
-  // ngược lại vào thẳng bài đọc Đông – Tây mà không bắt người dùng làm khảo sát thủ công.
+  // Nút 1-click "Dùng N nét và xem bài đọc": lưu lựa chọn đã xác nhận và vào thẳng bài đọc Đông – Tây không chặn modal.
+  // 4 câu phi hình ảnh (giọng nói, dáng đi, cốt nhục, chẩm cốt) hiện thành lối bổ sung nhanh tuỳ chọn ngay trên báo cáo.
   const dungVaXem = (tl: TraLoi, soDo?: Record<string, unknown> | null) => {
     luuTraLoi(tl);
-    setDaDoTuAnh(true);
     if (soDo) setSoDoMat(soDo);
-    const conThieuPhiAnh = cauPhiAnh.some((q) => !tl[q.ma] || tl[q.ma] === "khong_chac");
-    if (conThieuPhiAnh && cauPhiAnh.length > 0) {
-      setTlChoPopup(tl);
-      setMoPopup(true);
-      return;
-    }
     void docVoi(tl, soDo);
   };
   const xongPopup = (boSung: TraLoi) => {
@@ -125,7 +125,8 @@ export function NhanTuong() {
   // ANH-1: tải ảnh chân dung đứng ngay dưới đầu trang (chỉ khi chưa có bài đọc); gợi ý điền vào khảo sát trên máy.
   const anhChanDung = !bc && traLoi !== undefined && (
     <AnhChanDung ks={ks} daTraLoi={traLoi} onGoiY={luuTraLoi} onXem={xemBaiDoc} onDungVaXem={dungVaXem}
-      onXongDo={(kqDo, goiY) => { setSoDoMat(kqDo.so_do as Record<string, unknown>); setDaDoTuAnh(true); if (Object.keys(goiY).length) luuTraLoi({ ...traLoi, ...goiY }); }}
+      onXongDo={(kqDo) => { setSoDoMat(kqDo.so_do as Record<string, unknown>); }}
+      onMoCauHoiPhu={moCauHoiPhu} soCauPhiAnhThieu={soCauPhiAnhThieu}
       dangXem={dang} />
   );
   // Khối bản đồ không cần dữ liệu người dùng → render cả ở máy chủ (HTML có sẵn hình + lời dẫn khi chờ hồ sơ / lúc không JS).
@@ -170,7 +171,7 @@ export function NhanTuong() {
       />
 
       <section aria-labelledby="khao-sat" id="khao-sat" className="mx-auto mb-10 max-w-5xl scroll-mt-24">
-        {daDoTuAnh || bc ? (
+        {bc ? (
           <details className="group rounded-2xl border border-line/70 bg-surface/40 p-4 sm:p-5" data-testid="khao-sat-thu-gon">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-2 text-sm font-medium text-fg">
               <span>{en ? "Optional: Edit or inspect individual facial traits manually" : "Tuỳ chọn: Xem lại hoặc chỉnh tay từng nét trong khảo sát"}</span>
@@ -196,7 +197,8 @@ export function NhanTuong() {
       {bc && ks && (
         <section ref={refBaiDoc} aria-labelledby="bai-doc" id="bai-doc" className="mx-auto mb-10 max-w-5xl scroll-mt-24">
           <TieuDeMuc id="bai-doc" nho={c("bai_doc.nho")} lon={c("bai_doc.lon")} />
-          <BaoCaoNhanTuong bc={bc} boVi={ks.bo_vi} ten={hoSo?.ho_ten?.trim() ? hoSo.ho_ten : t("ten_ban")} />
+          <BaoCaoNhanTuong bc={bc} boVi={ks.bo_vi} ten={hoSo?.ho_ten?.trim() ? hoSo.ho_ten : t("ten_ban")}
+            onMoCauHoiPhu={moCauHoiPhu} soCauPhiAnhThieu={soCauPhiAnhThieu} />
           <div className="mt-6">
             <CuoiBaiDoc moDun="nhantuong" cauHoi={t("cuoi.hoi")} khongCta={en} />
           </div>

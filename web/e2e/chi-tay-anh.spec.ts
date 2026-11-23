@@ -203,3 +203,28 @@ test("engine thật: /api/chi-tay/do-tay đo 21 điểm → hợp lệ, có cung
   const r2 = await request.post("/api/chi-tay/doc", { data: { cung: { ly: c0.lua_chon[0]!.ma } } });
   expect(r2.status()).toBe(200);
 });
+
+test("hai bàn tay song song (engine thật): tải cả Trái + Phải → so sánh Tiên Thiên/Hậu Thiên, 4 đường, 7 Gò đối chiếu Bát Quái và 3 chỉ số hình học", async ({ page }) => {
+  const DIEM_PHAI: [number, number][] = DIEM.map(([x, y]) => [Number((1 - x).toFixed(4)), y]);
+  await moTrang(page, { diem_trai: DIEM, diem_phai: DIEM_PHAI });
+  await page.getByTestId("ct-dong-y").check();
+
+  // Tải Tay Trái (đang active)
+  await page.getByTestId("ct-input-tai").setInputFiles({ name: "tay-trai.webp", mimeType: "image/webp", buffer: ANH });
+  await expect(page.getByTestId("ct-tong-hop-dong-tay")).toBeVisible({ timeout: 15_000 });
+
+  // Chuyển sang Tay Phải và tải ảnh Tay Phải song song (không ghi đè Tay Trái)
+  await page.getByTestId("ct-tay-phai").click();
+  await page.getByTestId("ct-input-tai").setInputFiles({ name: "tay-phai.webp", mimeType: "image/webp", buffer: ANH });
+
+  await expect(page.getByTestId("ct-so-sanh-hai-tay")).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByTestId("ct-so-sanh-hai-tay")).toContainText("Tiên Thiên");
+  await expect(page.getByTestId("ct-chi-so-mo-rong")).toBeVisible();
+  await expect(page.getByTestId("ct-chi-so-mo-rong")).toContainText("ngón cái");
+  await expect(page.getByTestId("ct-duong-kinh-dien")).toContainText("Đường Sự Nghiệp");
+
+  const bayGo = page.getByTestId("ct-bay-go-dong-tay");
+  await bayGo.locator("> summary").click();
+  await expect(bayGo).toContainText("Gò Mộc Tinh");
+  await expect(bayGo).toContainText("cung Tốn");
+});

@@ -76,9 +76,13 @@ function HinhMau({ dang, da }: { dang: string | null; da: Set<string> }) {
   );
 }
 
-export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, onXongDo, dangXem }: {
-  ks: KhaoSat; daTraLoi: TraLoi; onGoiY: (tl: TraLoi) => void; onXem: () => void; onDungVaXem?: (tl: TraLoi) => void;
-  onXongDo?: (kq: KqDo, goiYTraLoi: TraLoi) => void; dangXem?: boolean;
+export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, onXongDo, onMoCauHoiPhu, soCauPhiAnhThieu, dangXem }: {
+  ks: KhaoSat; daTraLoi: TraLoi; onGoiY: (tl: TraLoi) => void; onXem: () => void;
+  onDungVaXem?: (tl: TraLoi, soDo?: Record<string, unknown> | null) => void;
+  onXongDo?: (kq: KqDo) => void;
+  onMoCauHoiPhu?: () => void;
+  soCauPhiAnhThieu?: number;
+  dangXem?: boolean;
 }) {
   const { t, en } = useChuNhanTuong();
   const d = useDuong();
@@ -242,14 +246,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, onXongD
         ...(dacTrung3d && Object.keys(dacTrung3d).length > 0 ? { dac_trung_3d: dacTrung3d } : {}),
       });
       setKq(r);
-      if (onXongDo) {
-        const cauMap = Object.fromEntries(ks.cau_hoi.map((c) => [c.ma, c]));
-        const goiYTraLoi: TraLoi = { ...daTraLoi };
-        for (const x of r.goi_y) {
-          if (cauMap[x.cau]?.lua_chon.some((l) => l.ma === x.lua_chon)) goiYTraLoi[x.cau] = x.lua_chon;
-        }
-        onXongDo(r, goiYTraLoi);
-      }
+      onXongDo?.(r);
       ghi("chart_interacted", { mo_dun: "nhantuong", kind: "do_mat", so_goi_y: r.goi_y.length, so_diem: Object.keys(diem).length, so_anh_nghieng: nghiengDu.length });
     } catch (e) { setLoi(e instanceof Error ? e.message : t("do.loi_do")); } finally { setTinh(false); }
   };
@@ -319,11 +316,11 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, onXongD
                 <ScanFace className="mr-1 inline size-3.5 text-jade" aria-hidden />
                 {en ? <>
                   {t("do.tu_tim_xong", { so: String(Object.keys(diem).length) })}
-                  {canXem.includes("chan_toc") && <> <b className="text-gold">{t("do.chan_toc_nhan")}</b> {t("do.chan_toc_ghi")}</>}
+                  {canXem.includes("chan_toc") && <> <b className="text-gold">{t("do.chan_toc_nhan")}</b> {dacTrung3d?.chan_toc_uoc_luong === 1 ? t("do.chan_toc_uoc_luong") : t("do.chan_toc_ghi")}</>}
                   {" "}{t("do.tai_ghi")}
                 </> : <>
                 Máy bạn đã tự đặt {Object.keys(diem).length} điểm (ảnh không gửi đi đâu). Xem lại từng chấm, kéo chấm nào lệch.
-                {canXem.includes("chan_toc") && <> <b className="text-gold">Chân tóc (điểm 1, viền nét đứt)</b> được dò theo màu tóc — kiểm kỹ, nhất là khi tóc mái hoặc hói.</>}
+                {canXem.includes("chan_toc") && <> <b className="text-gold">Chân tóc (điểm 1, viền nét đứt)</b> {dacTrung3d?.chan_toc_uoc_luong === 1 ? t("do.chan_toc_uoc_luong") : t("do.chan_toc_ghi")}</>}
                 {" "}Tai không bắt buộc: bấm “Đỉnh tai” trong danh sách để chấm thêm.
                 </>}
               </p>
@@ -426,7 +423,10 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, onXongD
             <p className="mt-2 text-xs text-fg-faint">{t("do.sd_ghi")}</p>
           </div>
           <TheNguHanhGuongMat bridge={kq.fuzzy_bridge} en={en} />
-          <DanhSachGoiY key={JSON.stringify(kq.goi_y)} ks={ks} goiY={kq.goi_y} daTraLoi={daTraLoi} onGoiY={onGoiY} onXem={onXem} onDungVaXem={onDungVaXem} dangXem={dangXem} nguon="do"
+          <DanhSachGoiY key={JSON.stringify(kq.goi_y)} ks={ks} goiY={kq.goi_y} daTraLoi={daTraLoi} onGoiY={onGoiY} onXem={onXem}
+            onDungVaXem={onDungVaXem ? (tl) => onDungVaXem(tl, kq.so_do as Record<string, unknown>) : undefined}
+            onMoCauHoiPhu={onMoCauHoiPhu} soCauPhiAnhThieu={soCauPhiAnhThieu}
+            dangXem={dangXem} nguon="do"
             chuRong={t("do.rong")} />
         </div>
       )}

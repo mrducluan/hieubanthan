@@ -41,6 +41,7 @@ export interface PhuongTayBridges {
   mat_tich_cuc?: string;
   mat_tieu_cuc?: string;
   dong_thuan_dong_tay?: string;
+  trang_thai_dong_thuan?: "dong_thuan" | "bo_tro";
   nguon?: string;
   do_tin?: string;
   ghi_chu?: string;

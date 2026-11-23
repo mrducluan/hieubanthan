@@ -11,11 +11,18 @@ import type { KhaoSat, TraLoi } from "@/lib/nhan-tuong";
 import { cn } from "@/lib/utils";
 import { useChuNhanTuong } from "./chu-nhan-tuong";
 
-export interface GoiYNet { cau: string; lua_chon: string; do_tin?: number; do?: string; vua?: boolean }
+export interface GoiYNet {
+  cau: string;
+  lua_chon: string;
+  do_tin?: number | "thap" | "trung_binh" | "cao";
+  do?: string;
+  vua?: boolean;
+  anh?: string;
+}
 
-export function DanhSachGoiY({ ks, goiY, luuY, daTraLoi, onGoiY, onXem, onDungVaXem, dangXem, nguon, chuRong }: {
+export function DanhSachGoiY({ ks, goiY, luuY, daTraLoi, onGoiY, onXem, onDungVaXem, onMoCauHoiPhu, soCauPhiAnhThieu, dangXem, nguon, chuRong }: {
   ks: KhaoSat; goiY: GoiYNet[]; luuY?: string[]; daTraLoi: TraLoi; onGoiY: (tl: TraLoi) => void; onXem: () => void;
-  onDungVaXem?: (tl: TraLoi) => void; dangXem?: boolean;
+  onDungVaXem?: (tl: TraLoi) => void; onMoCauHoiPhu?: () => void; soCauPhiAnhThieu?: number; dangXem?: boolean;
   /** "do" = hệ thống đo · "ai" = máy AI gợi ý (mã đo lường). */ nguon: "do" | "ai"; chuRong?: string;
 }) {
   const { t, en } = useChuNhanTuong();
@@ -44,6 +51,16 @@ export function DanhSachGoiY({ ks, goiY, luuY, daTraLoi, onGoiY, onXem, onDungVa
           <span>
             <span className="text-fg-muted">{c.hoi}</span> <b className="text-fg">{nhan}</b>
             {typeof x.do_tin === "number" && <span className="text-xs text-fg-faint"> ({Math.round(x.do_tin * 100)}%)</span>}
+            {x.do_tin === "thap" && (
+              <span className="ml-1.5 inline-block rounded-full border border-amber-500/40 bg-amber-500/10 px-1.5 py-0.5 align-middle text-[10px] font-medium text-amber-300">
+                {t("gy.badge_roi")}
+              </span>
+            )}
+            {x.anh === "3d" && x.do_tin === "trung_binh" && (
+              <span className="ml-1.5 inline-block rounded-full border border-jade/40 bg-jade/10 px-1.5 py-0.5 align-middle text-[10px] font-medium text-jade">
+                {t("gy.badge_3d")}
+              </span>
+            )}
             {x.do && <span className="mt-1 block text-xs leading-snug text-fg-faint">{x.do}</span>}
           </span>
         </label>
@@ -89,6 +106,12 @@ export function DanhSachGoiY({ ks, goiY, luuY, daTraLoi, onGoiY, onXem, onDungVa
                 <Button onClick={onXem} disabled={dangXem} data-testid={nguon === "do" ? "do-xem-bai-doc" : "anh-xem-bai-doc"}>{dangXem ? t("gy.dang_doc") : t("gy.xem_ngay")}</Button>
                 <a href="#khao-sat" className="text-sm text-gold underline underline-offset-4">{t("gy.tra_loi_net")}</a>
               </>}
+            {onMoCauHoiPhu && (soCauPhiAnhThieu ?? 0) > 0 && (
+              <button type="button" onClick={onMoCauHoiPhu} data-testid="gy-mo-popup-phi-anh"
+                className="ml-auto rounded-full border border-gold/40 bg-gold/[0.06] px-3 py-1.5 text-xs text-gold hover:bg-gold/15">
+                {t("gy.bo_sung_phi_anh", { so: String(soCauPhiAnhThieu) })}
+              </button>
+            )}
           </div>
         </>
       )}

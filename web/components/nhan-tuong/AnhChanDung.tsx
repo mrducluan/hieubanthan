@@ -13,9 +13,13 @@ import { Dam, useChuNhanTuong } from "./chu-nhan-tuong";
 
 // EN-ALL GĐ 8: bản Anh chỉ có cách đo trên máy; gửi ảnh cho máy AI TẮT ở bản Anh (chủ dự án chốt, EN-TIEN-DO mục 1).
 
-export function AnhChanDung({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, onXongDo, dangXem }: {
-  ks: KhaoSat | null; daTraLoi: TraLoi; onGoiY: (tl: TraLoi) => void; onXem: () => void; onDungVaXem?: (tl: TraLoi) => void;
-  onXongDo?: (kq: KqDo, goiYTraLoi: TraLoi) => void; dangXem?: boolean;
+export function AnhChanDung({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, onXongDo, onMoCauHoiPhu, soCauPhiAnhThieu, dangXem }: {
+  ks: KhaoSat | null; daTraLoi: TraLoi; onGoiY: (tl: TraLoi) => void; onXem: () => void;
+  onDungVaXem?: (tl: TraLoi, soDo?: Record<string, unknown> | null) => void;
+  onXongDo?: (kq: KqDo) => void;
+  onMoCauHoiPhu?: () => void;
+  soCauPhiAnhThieu?: number;
+  dangXem?: boolean;
 }) {
   const { t, en } = useChuNhanTuong();
   const [bat, setBat] = useState<boolean | null>(null);
@@ -39,7 +43,7 @@ export function AnhChanDung({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, onXongDo
           Quét 3 góc hoặc chọn ảnh chân dung — máy bạn tự tìm 478 điểm mốc 3D và trích xuất tỷ lệ tam đình, ngũ quan, sắc thái ngay trong trình duyệt (vài giây). Hệ thống tự điền các nét đo được và hợp nhất luận giải Đông – Tây; chỉ câu phi hình ảnh (giọng nói, dáng đi) mới hiện pop-up hỏi nhanh. Ảnh không gửi đi đâu, không lưu ảnh.
         </p>
         </>}
-        <div className="mt-5">{ks ? <DoMatTrenAnh ks={ks} daTraLoi={daTraLoi} onGoiY={onGoiY} onXem={onXem} onDungVaXem={onDungVaXem} onXongDo={onXongDo} dangXem={dangXem} /> : null}</div>
+        <div className="mt-5">{ks ? <DoMatTrenAnh ks={ks} daTraLoi={daTraLoi} onGoiY={onGoiY} onXem={onXem} onDungVaXem={onDungVaXem} onXongDo={onXongDo} onMoCauHoiPhu={onMoCauHoiPhu} soCauPhiAnhThieu={soCauPhiAnhThieu} dangXem={dangXem} /> : null}</div>
         {bat && !en && ks && (
           <details className="group mt-5 rounded-2xl border border-line/70 bg-bg/40 p-4" data-testid="anh-ai-khoi">
             <summary className="flex cursor-pointer list-none items-center gap-2 text-sm font-medium text-fg">

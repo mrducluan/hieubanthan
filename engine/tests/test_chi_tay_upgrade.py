@@ -106,7 +106,11 @@ def test_route_do_tay_hop_nhat_va_tuong_thich_nguoc(client):
     assert j["luan_giai_dong"]["hop_le"] is True
     assert len(j["luan_giai_dong"]["cung"]) == 9
     assert j["luan_giai_tay"]["hop_le"] is True
-    assert len(j["luan_giai_tay"]["duong_kinh_dien"]) == 3
+    assert len(j["luan_giai_tay"]["duong_kinh_dien"]) == 4
+    assert {d["ma"] for d in j["luan_giai_tay"]["duong_kinh_dien"]} == {"tam_dao", "tri_dao", "sinh_dao", "dinh_menh"}
+    assert len(j["luan_giai_tay"]["bay_go_kinh_dien"]) == 7
+    assert all(g["cung_dong"] and g["han_dong"] and g["ten_cung_dong"] for g in j["luan_giai_tay"]["bay_go_kinh_dien"])
+    assert {c["ma"] for c in j["luan_giai_tay"]["chi_so_mo_rong"]} == {"goc_ngon_cai", "dot_ngon_giua", "do_khum_long_3d"}
     assert j["tong_hop_dong_tay"]["do_tin"]["duong_chi_cv"] == "goi_y_tham_khao"
 
     # Reject diem_3d sai số điểm

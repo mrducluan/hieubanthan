@@ -75,6 +75,14 @@ test("đo trên ảnh (engine thật, không AI): chấm 20 điểm → gợi ý
   await expect(page.getByTestId("cau-khuon_mat").getByRole("button", { name: "Dài, hẹp, thanh" })).toHaveAttribute("aria-pressed", "true");
   await page.getByTestId("do-xem-bai-doc").click();
   await expect(page.getByTestId("bao-cao-nhan-tuong")).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByTestId("nt-phuong-tay-bridges")).toBeVisible();
+  // Lối bổ sung nhanh 4 câu phi hình ảnh (giọng nói, dáng đi, cốt nhục, chẩm cốt) không chặn luồng 1-click
+  await page.getByTestId("nt-mo-popup-phi-anh").click();
+  await expect(page.getByTestId("popup-cau-hoi-phu")).toBeVisible();
+  await page.getByTestId("popup-opt-giong-tram_vang").click();
+  await page.getByTestId("popup-xac-nhan").click();
+  await expect(page.getByTestId("popup-cau-hoi-phu")).toHaveCount(0);
+  await expect(page.getByTestId("bao-cao-nhan-tuong")).toBeVisible();
 });
 
 test("đo trên ảnh: điểm sai thứ tự → lời báo đúng điểm của engine; kéo chỉnh điểm sửa được", async ({ page }) => {

@@ -5,7 +5,7 @@
 // MediaPipe Hand Landmarker chạy trên trình duyệt → 21 toạ độ 2D + 3D worldLandmarks + tín hiệu đường chỉ ROI tham khảo
 // → gửi `/api/chi-tay/luan-giai-hai-tay` (dự phòng `/api/chi-tay/do-tay`) sau thoả thuận `ct1`.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { AlertTriangle, Camera, Check, Eye, EyeOff, Hand, ImagePlus, Loader2, RotateCcw, ShieldCheck, Sparkles, Sun, X } from "lucide-react";
+import { ArrowLeftRight, Camera, Check, Compass, Eye, EyeOff, Hand, ImagePlus, Loader2, RotateCcw, ShieldCheck, Sparkles, Sun, X } from "lucide-react";
 import Link from "@/components/khung/Lien";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
@@ -30,12 +30,24 @@ interface DuongKinhDien {
   tin_hieu_cv?: { do_ro?: number; chieu_dai_uoc_luong?: number; do_cong?: number };
   do_tin_cv?: string;
 }
+interface GoKinhDien {
+  ma: string; ten: string; mat_tich_cuc: string; mat_tieu_cuc_can_chu_y: string;
+  cung_dong?: string | null; han_dong?: string | null; ten_cung_dong?: string | null; vi_tri?: string | null;
+  trich?: string; nguon?: string;
+}
+interface ChiSoMoRongItem {
+  ma: string; nhom: string; ten: string;
+  gia_tri: number | { dot_goc: number; dot_giua: number; dot_dau: number };
+  y: string; luu_y?: string; do_tin?: string;
+}
 export interface KqDoTay {
   hop_le: boolean; loi: string | null; loi_nhac?: string | null; loi_chu?: string; phai?: "tay" | "hop_nhat";
   nhan?: NhanDo[]; sach_ghi?: SachGhiDo[]; cung?: CungTay[]; bo_nhom_c?: number; cau_ket?: string;
   muc?: MucTay[]; to_hop?: { ma: string; ten: string } | null; goi_y_dang?: string[];
   fuzzy_bridge?: FuzzyTayBridge | null;
   duong_kinh_dien?: DuongKinhDien[];
+  bay_go_kinh_dien?: GoKinhDien[];
+  chi_so_mo_rong?: ChiSoMoRongItem[];
   truong_phai?: string[];
 }
 interface TomTatMotTayApi {
@@ -66,7 +78,12 @@ interface LuanGiaiHaiTayApi {
   tay_phai?: TomTatMotTayApi | null;
   so_sanh_hai_tay?: SoSanhHaiTayApi | null;
   luan_giai_dong?: KqDoTay | null;
-  luan_giai_tay?: (KqDoTay & { duong_kinh_dien?: DuongKinhDien[]; truong_phai?: string[] }) | null;
+  luan_giai_tay?: (KqDoTay & {
+    duong_kinh_dien?: DuongKinhDien[];
+    bay_go_kinh_dien?: GoKinhDien[];
+    chi_so_mo_rong?: ChiSoMoRongItem[];
+    truong_phai?: string[];
+  }) | null;
   tong_hop_dong_tay?: {
     tom_tat: string;
     diem_chung: string[];
@@ -118,10 +135,13 @@ const tenNgan = (c: CungTay) => c.ten_ngan ?? /\(([^)]+)\)\s*$/.exec(c.ten)?.[1]
 const CHO_MOC_THU = process.env.NODE_ENV !== "production" || process.env.NEXT_PUBLIC_E2E === "1";
 function mocThu(tyLe: number, tay: Tay): KetQuaTimTay | null {
   if (!CHO_MOC_THU || typeof window === "undefined") return null;
-  const h = (window as unknown as { __ctTest?: { diem?: DiemTay[]; ty_le?: number; trang_thai?: string } }).__ctTest;
+  const h = (window as unknown as {
+    __ctTest?: { diem?: DiemTay[]; diem_trai?: DiemTay[]; diem_phai?: DiemTay[]; ty_le?: number; trang_thai?: string };
+  }).__ctTest;
   if (!h) return null;
-  if (h.diem?.length === 21) {
-    return { trang_thai: "xong", diem: h.diem, ty_le: h.ty_le ?? tyLe, tay_mp: tay === "trai" ? "Left" : "Right" };
+  const ds = (tay === "trai" ? h.diem_trai : h.diem_phai) ?? h.diem;
+  if (ds?.length === 21) {
+    return { trang_thai: "xong", diem: ds, ty_le: h.ty_le ?? tyLe, tay_mp: tay === "trai" ? "Left" : "Right" };
   }
   return { trang_thai: (["khong_thay", "nhieu_tay", "ngoai_khung", "loi"] as const).find((t) => t === h.trang_thai) ?? "loi" };
 }
@@ -227,99 +247,63 @@ export function ChupBanTay() {
       } : {}),
     });
 
+    const targetTay: Tay = (tayUuTien === "trai" && coTrai) || !coPhai ? "trai" : "phai";
+    const stTarget = targetTay === "trai" ? traiState : phaiState;
+
     try {
-      // Ưu tiên gọi API hợp nhất 2 tay Đông – Tây
-      const r = await fetch("/api/chi-tay/luan-giai-hai-tay", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          dong_y: true,
-          ...(coTrai ? { trai: payloadMot(traiState) } : {}),
-          ...(coPhai ? { phai: payloadMot(phaiState) } : {}),
-          ...(hs ? { ngay_sinh: ngaySinhIso(hs) } : {}),
-        }),
-      });
-
-      if (l !== luotApi.current) return;
-
-      if (r.ok) {
-        const d = (await r.json()) as LuanGiaiHaiTayApi;
-        setHaiTayApi(d);
-
-        // Đồng bộ kết quả per-hand để vẽ cung và báo lỗi riêng từng tay
-        setHaiTay((prev) => {
-          const next = { ...prev };
-          if (d.tay_trai) {
-            next.trai = {
-              ...prev.trai,
-              kq: {
-                hop_le: d.tay_trai.hop_le,
-                loi: d.tay_trai.loi,
-                loi_nhac: d.tay_trai.loi_nhac,
-                cung: d.tay_trai.cung,
-                nhan: phai === "tay" ? d.tay_trai.nhan_tay : d.tay_trai.nhan_dong,
-                fuzzy_bridge: d.tay_trai.fuzzy_bridge,
-              },
-              loi: null,
-            };
-          }
-          if (d.tay_phai) {
-            next.phai = {
-              ...prev.phai,
-              kq: {
-                hop_le: d.tay_phai.hop_le,
-                loi: d.tay_phai.loi,
-                loi_nhac: d.tay_phai.loi_nhac,
-                cung: d.tay_phai.cung,
-                nhan: phai === "tay" ? d.tay_phai.nhan_tay : d.tay_phai.nhan_dong,
-                fuzzy_bridge: d.tay_phai.fuzzy_bridge,
-              },
-              loi: null,
-            };
-          }
-          return next;
-        });
-
-        const hopLeNhat = d.tay_phai?.hop_le || d.tay_trai?.hop_le;
-        if (hopLeNhat) {
-          ghi("chart_interacted", {
-            mo_dun: "chitay",
-            kind: "chup_tay_xong",
-            tay: coTrai && coPhai ? "hai_tay" : tayUuTien,
-            phai,
-            so_cung: (d.tay_phai?.cung?.length ?? d.tay_trai?.cung?.length ?? 0),
-          });
-        }
-        return;
-      }
-
-      // Dự phòng mượt về `/api/chi-tay/do-tay` nếu route 2 tay chưa sẵn sàng
-      const targetTay: Tay = (tayUuTien === "trai" && coTrai) || !coPhai ? "trai" : "phai";
-      const st = targetTay === "trai" ? traiState : phaiState;
-      const rFb = await fetch("/api/chi-tay/do-tay", {
+      // Bước 1: Luôn đo từng bàn tay qua `/api/chi-tay/do-tay` để giữ trọn hợp đồng kiểm tra hợp lệ & vị trí cung
+      const rDo = await fetch("/api/chi-tay/do-tay", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           dong_y: true,
           ...(phai === "tay" ? { phai } : {}),
           tay: targetTay,
-          ty_le: Number((st.tyLe ?? 0.75).toFixed(4)),
-          diem: st.diem!,
+          ...payloadMot(stTarget),
           ...(hs ? { ngay_sinh: ngaySinhIso(hs) } : {}),
         }),
       });
-      const dFb = (await rFb.json().catch(() => ({}))) as KqDoTay & { error?: string };
+      const dDo = (await rDo.json().catch(() => ({}))) as KqDoTay & { error?: string };
       if (l !== luotApi.current) return;
-      if (!rFb.ok) throw new Error(dFb.error ?? "Máy chủ đang bận, bạn thử lại sau ít phút.");
-      setHaiTayApi(null);
-      capNhatTay(targetTay, { kq: dFb, loi: null });
-      if (dFb.hop_le) {
+      if (!rDo.ok) throw new Error(dDo.error ?? "Máy chủ đang bận, bạn thử lại sau ít phút.");
+
+      capNhatTay(targetTay, { kq: dDo, loi: null });
+
+      if (dDo.hop_le) {
         ghi("chart_interacted", {
           mo_dun: "chitay", kind: "chup_tay_xong", tay: targetTay, phai,
-          so_cung: dFb.cung?.length ?? 0, so_nhan: dFb.nhan?.length ?? 0, so_sach: dFb.sach_ghi?.length ?? 0,
+          so_cung: dDo.cung?.length ?? 0, so_nhan: dDo.nhan?.length ?? 0, so_sach: dDo.sach_ghi?.length ?? 0,
         });
       } else {
-        ghi("chart_interacted", { mo_dun: "chitay", kind: "chup_tay_loi", ket_qua: dFb.loi ?? "khong_hop_le" });
+        ghi("chart_interacted", { mo_dun: "chitay", kind: "chup_tay_loi", ket_qua: dDo.loi ?? "khong_hop_le" });
+      }
+
+      // Bước 2: Lấy hợp nhất Đông – Tây (7 Gò, 4 Đường, Góc ngón cái, 3 đốt ngón tay, 3D) + so sánh 2 tay nếu có
+      const traiHopLe = targetTay === "trai" ? dDo.hop_le : Boolean(traiState.kq?.hop_le);
+      const phaiHopLe = targetTay === "phai" ? dDo.hop_le : Boolean(phaiState.kq?.hop_le);
+      if (!traiHopLe && !phaiHopLe) {
+        setHaiTayApi(null);
+        return;
+      }
+
+      try {
+        const rHop = await fetch("/api/chi-tay/luan-giai-hai-tay", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            dong_y: true,
+            ...(coTrai && traiHopLe ? { trai: payloadMot(traiState) } : {}),
+            ...(coPhai && phaiHopLe ? { phai: payloadMot(phaiState) } : {}),
+            ...(hs ? { ngay_sinh: ngaySinhIso(hs) } : {}),
+          }),
+        });
+        if (l !== luotApi.current) return;
+        if (rHop.ok) {
+          const dHop = (await rHop.json()) as LuanGiaiHaiTayApi;
+          setHaiTayApi(dHop);
+        }
+      } catch {
+        // Không làm gián đoạn kết quả đo đơn tay nếu bước tổng hợp phụ không sẵn sàng
       }
     } catch (e) {
       if (l !== luotApi.current) return;
@@ -329,6 +313,22 @@ export function ChupBanTay() {
       if (l === luotApi.current) setDangDo(false);
     }
   }, [capNhatTay, hs, phai]);
+
+  const doiBenTay = useCallback((tu: Tay) => {
+    const sang: Tay = tu === "trai" ? "phai" : "trai";
+    const src = haiTayRef.current[tu];
+    if (!src.url || !src.diem || !src.tyLe) return;
+    if (urlRefs.current[sang]) URL.revokeObjectURL(urlRefs.current[sang]!);
+    urlRefs.current[sang] = src.url;
+    urlRefs.current[tu] = null;
+    const chuyen: TrangThaiMotTay = { ...src, kq: null, loi: null };
+    const nextTrai = sang === "trai" ? chuyen : { ...RONG_MOT_TAY };
+    const nextPhai = sang === "phai" ? chuyen : { ...RONG_MOT_TAY };
+    setMo(null);
+    datTay(sang);
+    setHaiTay({ trai: nextTrai, phai: nextPhai });
+    void goiDoHaiTay(nextTrai, nextPhai, sang);
+  }, [goiDoHaiTay]);
 
   const boMotTay = useCallback((t: Tay) => {
     luotTim.current[t]++;
@@ -445,8 +445,13 @@ export function ChupBanTay() {
     if (lc) ghi("chart_interacted", { mo_dun: "chitay", kind: "cung_tay", cung: c.ma, lua_chon: lc });
   };
 
-  const kqDong = haiTayApi?.luan_giai_dong ?? (phai !== "tay" ? stActive.kq : null);
-  const kqTay = haiTayApi?.luan_giai_tay ?? (phai === "tay" ? stActive.kq : null);
+  const coCaHaiTayHopLe = Boolean(haiTay.trai.kq?.hop_le && haiTay.phai.kq?.hop_le);
+  const kqDong = coCaHaiTayHopLe
+    ? (haiTayApi?.luan_giai_dong ?? (phai !== "tay" ? stActive.kq : null))
+    : (phai !== "tay" ? stActive.kq : (haiTayApi?.luan_giai_dong ?? null));
+  const kqTay = phai === "tay"
+    ? (haiTayApi?.luan_giai_tay ?? stActive.kq)
+    : (haiTayApi?.luan_giai_tay ?? null);
   const soSanh = haiTayApi?.so_sanh_hai_tay ?? null;
   const tongHop = haiTayApi?.tong_hop_dong_tay ?? null;
   const fuzzyBridge = kqTay?.fuzzy_bridge ?? stActive.kq?.fuzzy_bridge ?? null;
@@ -456,17 +461,11 @@ export function ChupBanTay() {
     const isActive = t === tayActive;
     const chupRef = t === "trai" ? inChupTrai : inChupPhai;
     const taiRef = t === "trai" ? inTaiTrai : inTaiPhai;
-    const canhBaoLechTay = Boolean(
-      st.tayMp && ((t === "trai" && st.tayMp === "Right") || (t === "phai" && st.tayMp === "Left")),
-    );
     const cungSlot = st.kq?.hop_le ? st.kq.cung ?? [] : [];
-    const coPolyline = Boolean(
-      st.duongChi && (
-        st.duongChi.polylines.tam_dao.length > 1 ||
-        st.duongChi.polylines.tri_dao.length > 1 ||
-        st.duongChi.polylines.sinh_dao.length > 1
-      ),
-    );
+    const roTam = Boolean(st.duongChi && st.duongChi.tam_dao.do_ro >= 0.18 && st.duongChi.polylines.tam_dao.length > 1);
+    const roTri = Boolean(st.duongChi && st.duongChi.tri_dao.do_ro >= 0.18 && st.duongChi.polylines.tri_dao.length > 1);
+    const roSinh = Boolean(st.duongChi && st.duongChi.sinh_dao.do_ro >= 0.18 && st.duongChi.polylines.sinh_dao.length > 1);
+    const coPolyline = roTam || roTri || roSinh;
 
     return (
       <div
@@ -528,7 +527,7 @@ export function ChupBanTay() {
                 alt={`Ảnh lòng ${MO_TA_TAY[t].tenNgan} bạn chọn (chỉ hiện trên máy)`}
                 draggable={false}
                 className="block h-auto w-full select-none rounded-xl border border-line"
-                onLoad={(e) => { const i = e.currentTarget; if (i.naturalWidth && i.naturalHeight) void timTay(t, i); }}
+                onLoad={(e) => { const i = e.currentTarget; if (i.naturalWidth && i.naturalHeight && !haiTayRef.current[t].diem) void timTay(t, i); }}
               />
               {st.diem && st.tyLe && (
                 <svg
@@ -555,9 +554,9 @@ export function ChupBanTay() {
                   ))}
                   {hienDuongChi && coPolyline && st.duongChi && (
                     <g fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.8} strokeOpacity={0.78}>
-                      <polyline points={diemPolyline(st.duongChi.polylines.tam_dao, st.tyLe)} stroke="#f59e0b" strokeDasharray="1.8 1.2" />
-                      <polyline points={diemPolyline(st.duongChi.polylines.tri_dao, st.tyLe)} stroke="#38bdf8" strokeDasharray="1.8 1.2" />
-                      <polyline points={diemPolyline(st.duongChi.polylines.sinh_dao, st.tyLe)} stroke="#34d399" strokeDasharray="1.8 1.2" />
+                      {roTam && <polyline points={diemPolyline(st.duongChi.polylines.tam_dao, st.tyLe)} stroke="#f59e0b" strokeDasharray="1.8 1.2" />}
+                      {roTri && <polyline points={diemPolyline(st.duongChi.polylines.tri_dao, st.tyLe)} stroke="#38bdf8" strokeDasharray="1.8 1.2" />}
+                      {roSinh && <polyline points={diemPolyline(st.duongChi.polylines.sinh_dao, st.tyLe)} stroke="#34d399" strokeDasharray="1.8 1.2" />}
                     </g>
                   )}
                 </svg>
@@ -606,21 +605,26 @@ export function ChupBanTay() {
               )}
             </div>
 
-            {canhBaoLechTay && (
-              <p className="mt-2 flex items-start gap-1.5 rounded-lg border border-amber-500/40 bg-amber-500/10 p-2 text-[11px] leading-snug text-amber-200" data-testid={`ct-canh-bao-tay-${t}`}>
-                <AlertTriangle className="mt-0.5 size-3.5 shrink-0 text-amber-400" aria-hidden />
-                <span>
-                  Máy nhận diện ảnh này có thể là {t === "trai" ? "tay phải" : "tay trái"}. Nếu chụp bằng camera trước (lật gương) thì không sao; nếu nhầm tay, bạn đổi sang ô bên cạnh.
-                </span>
-              </p>
-            )}
-
             {((st.tim && st.tim !== "dang") || (st.kq && !st.kq.hop_le) || st.loi) && (
               <div className="mt-2 rounded-xl border border-gold/40 bg-gold/[0.06] p-2.5 text-xs" role="alert" data-testid={isActive ? "ct-loi" : `ct-loi-${t}`}>
                 <p>{st.tim && st.tim !== "dang" ? LOI_TIM[st.tim] : st.kq && !st.kq.hop_le ? loiAnh(st.kq) : st.loi}</p>
-                <Button size="sm" variant="outline" className="mt-2 min-h-[36px]" onClick={() => { boMotTay(t); chupRef.current?.click(); }} data-testid={isActive ? "ct-chup-lai" : `ct-chup-lai-${t}`}>
-                  <RotateCcw aria-hidden /> Chụp lại
-                </Button>
+                {st.tim === "loi" && (
+                  <p className="mt-1.5">
+                    <a href="#tu-soi" className="font-medium text-gold underline underline-offset-2">
+                      Tự soi theo hình vẽ trong sách ở dưới ↓
+                    </a>
+                  </p>
+                )}
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <Button size="sm" variant="outline" className="min-h-[36px]" onClick={() => { boMotTay(t); chupRef.current?.click(); }} data-testid={isActive ? "ct-chup-lai" : `ct-chup-lai-${t}`}>
+                    <RotateCcw aria-hidden /> Chụp lại
+                  </Button>
+                  {st.kq?.loi === "mu_ban_tay" && st.diem && (
+                    <Button size="sm" variant="ghost" className="min-h-[36px] text-gold" onClick={(e) => { e.stopPropagation(); doiBenTay(t); }} data-testid={`ct-doi-ben-${t}`}>
+                      <ArrowLeftRight aria-hidden /> Đổi sang ô {t === "trai" ? "Tay Phải" : "Tay Trái"}
+                    </Button>
+                  )}
+                </div>
               </div>
             )}
 
@@ -944,21 +948,39 @@ export function ChupBanTay() {
                 )}
 
                 {kqTay?.hop_le && (kqTay.duong_kinh_dien?.length ?? 0) > 0 && (
-                  <div className="rounded-2xl border border-line/70 bg-bg/50 p-4">
-                    <p className="text-sm font-semibold text-fg">Ba đường chỉ kinh điển (Cheiro · Dale)</p>
+                  <div className="rounded-2xl border border-line/70 bg-bg/50 p-4" data-testid="ct-duong-kinh-dien">
+                    <p className="text-sm font-semibold text-fg">Bốn đường chỉ kinh điển (Cheiro · Dale)</p>
                     <ul className="mt-2 space-y-2.5 text-xs leading-relaxed">
                       {kqTay.duong_kinh_dien!.map((dk) => (
                         <li key={dk.ma} className="rounded-xl border border-line/50 p-2.5">
                           <div className="flex flex-wrap items-center justify-between gap-1">
                             <span className="font-semibold text-fg">{dk.ten}</span>
-                            {dk.tin_hieu_cv?.do_ro !== undefined && (
-                              <span className="rounded-full border border-gold/40 bg-gold/10 px-2 py-0.5 text-[10px] text-gold">
-                                Độ rõ ảnh ~{Math.round(dk.tin_hieu_cv.do_ro * 100)}% (tham khảo)
+                            {dk.tin_hieu_cv?.do_ro !== undefined ? (
+                              <span className={cn(
+                                "rounded-full border px-2 py-0.5 text-[10px]",
+                                dk.tin_hieu_cv.do_ro >= 0.18
+                                  ? "border-gold/40 bg-gold/10 text-gold"
+                                  : "border-line bg-surface/60 text-fg-faint",
+                              )}>
+                                {dk.tin_hieu_cv.do_ro >= 0.18
+                                  ? `Độ rõ ảnh ~${Math.round(dk.tin_hieu_cv.do_ro * 100)}% (tham khảo)`
+                                  : "Mờ trên ảnh · tự soi tay thật"}
+                              </span>
+                            ) : (
+                              <span className="rounded-full border border-line bg-surface/60 px-2 py-0.5 text-[10px] text-fg-faint">
+                                Tự soi trên tay thật
                               </span>
                             )}
                           </div>
                           <p className="mt-1 text-fg-muted">{dk.mat_tich_cuc}</p>
                           <p className="mt-1 text-fg-faint">{dk.mat_tieu_cuc_can_chu_y}</p>
+                          {dk.trich && (
+                            <details className="mt-1 text-[11px] text-fg-faint">
+                              <summary className="cursor-pointer text-gold/80 hover:underline">Nguyên văn sách cổ</summary>
+                              <p lang="en" className="mt-1 italic">“{dk.trich}”</p>
+                              {dk.nguon && <p className="mt-0.5">— {dk.nguon}</p>}
+                            </details>
+                          )}
                         </li>
                       ))}
                     </ul>
@@ -966,6 +988,97 @@ export function ChupBanTay() {
                 )}
               </div>
             </div>
+
+            {/* Chỉ số hình học mở rộng & 3D (Góc mở ngón cái · 3 đốt ngón giữa · Độ khum 3D Minh Đường) */}
+            {kqTay?.hop_le && (kqTay.chi_so_mo_rong?.length ?? 0) > 0 && (
+              <div className="rounded-2xl border border-line/70 bg-bg/50 p-4" data-testid="ct-chi-so-mo-rong">
+                <p className="text-sm font-semibold text-fg">Chỉ số hình học mở rộng &amp; 3D (Cheiro · Benham · Minh Đường)</p>
+                <div className="mt-3 grid gap-3 md:grid-cols-3">
+                  {kqTay.chi_so_mo_rong!.map((cs) => {
+                    const dot = typeof cs.gia_tri === "object" && cs.gia_tri !== null ? cs.gia_tri : null;
+                    return (
+                      <div key={cs.ma} className="rounded-xl border border-line/60 bg-surface/40 p-3 text-xs leading-relaxed">
+                        <p className="font-semibold text-fg">{cs.ten}</p>
+                        {dot && (
+                          <div className="mt-2">
+                            <div className="flex h-2 overflow-hidden rounded-full bg-bg">
+                              <span style={{ width: `${Math.round(dot.dot_dau * 100)}%` }} className="bg-sky-400" title="Đốt đầu (trực giác)" />
+                              <span style={{ width: `${Math.round(dot.dot_giua * 100)}%` }} className="bg-gold" title="Đốt giữa (lý trí)" />
+                              <span style={{ width: `${Math.round(dot.dot_goc * 100)}%` }} className="bg-jade" title="Đốt gốc (thực tiễn)" />
+                            </div>
+                            <p className="mt-1 flex justify-between text-[10px] tabular-nums text-fg-faint">
+                              <span>Đầu {Math.round(dot.dot_dau * 100)}%</span>
+                              <span>Giữa {Math.round(dot.dot_giua * 100)}%</span>
+                              <span>Gốc {Math.round(dot.dot_goc * 100)}%</span>
+                            </p>
+                          </div>
+                        )}
+                        <p className="mt-1.5 text-fg-muted">{cs.y}</p>
+                        {cs.luu_y && <p className="mt-1 text-[11px] text-fg-faint">{cs.luu_y}</p>}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Đối chiếu 7 Gò Tây Phương ↔ Bát Quái Đông Phương */}
+            {kqTay?.hop_le && (kqTay.bay_go_kinh_dien?.length ?? 0) > 0 && (
+              <details className="group rounded-2xl border border-line/70 bg-bg/50 p-4" data-testid="ct-bay-go-dong-tay">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-2 text-sm font-semibold text-fg">
+                  <span className="inline-flex items-center gap-1.5">
+                    <Compass className="size-4 text-gold" aria-hidden />
+                    Đối chiếu 7 Gò Tây Phương (Cheiro · Dale) ↔ Bát Quái Đông Phương
+                  </span>
+                  <span className="text-xs font-normal text-gold group-open:hidden">Mở xem 7 gò ↓</span>
+                  <span className="hidden text-xs font-normal text-fg-faint group-open:inline">Thu gọn ↑</span>
+                </summary>
+                <p className="mt-2 text-xs text-fg-muted">
+                  Bảng đối chiếu vùng giải phẫu giữa 7 Gò Tây phương và Bát Quái Đông phương do ban biên tập lập để tiện tra cứu (sách cổ hai phái không ghi chéo nhau). Chạm nút “Soi” để mở đúng cung tương ứng trên ảnh tay của bạn.
+                </p>
+                <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {kqTay.bay_go_kinh_dien!.map((g) => {
+                    const coCungTrenAnh = Boolean(g.cung_dong && cung.some((c) => c.ma === g.cung_dong));
+                    return (
+                      <div key={g.ma} className="flex flex-col rounded-xl border border-line/60 bg-surface/40 p-3 text-xs leading-relaxed">
+                        <div className="flex items-start justify-between gap-2">
+                          <div>
+                            <p className="font-semibold text-fg">{g.ten}</p>
+                            {g.vi_tri && <p className="text-[11px] text-fg-faint">{g.vi_tri}</p>}
+                          </div>
+                          {g.han_dong && (
+                            coCungTrenAnh ? (
+                              <button
+                                type="button"
+                                onClick={() => setMo(g.cung_dong!)}
+                                className="shrink-0 rounded-full border border-gold/50 bg-gold/10 px-2 py-0.5 text-[11px] text-gold hover:bg-gold/20"
+                                title={`Mở ${g.ten_cung_dong ?? ""} trên ảnh`}
+                              >
+                                <span lang="zh-Hant" className="font-serif">{g.han_dong}</span> · Soi
+                              </button>
+                            ) : (
+                              <span className="shrink-0 rounded-full border border-line px-2 py-0.5 text-[11px] text-fg-muted">
+                                <span lang="zh-Hant" className="font-serif">{g.han_dong}</span>
+                              </span>
+                            )
+                          )}
+                        </div>
+                        {g.ten_cung_dong && <p className="mt-1 text-[11px] text-jade">Đông phương: {g.ten_cung_dong}</p>}
+                        <p className="mt-1.5 text-fg-muted">{g.mat_tich_cuc}</p>
+                        <p className="mt-1 text-fg-faint">{g.mat_tieu_cuc_can_chu_y}</p>
+                        {g.trich && (
+                          <details className="mt-auto pt-1.5 text-[11px] text-fg-faint">
+                            <summary className="cursor-pointer text-gold/80 hover:underline">Nguyên văn</summary>
+                            <p lang="en" className="mt-1 italic">“{g.trich}”</p>
+                            {g.nguon && <p className="mt-0.5">— {g.nguon}</p>}
+                          </details>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </details>
+            )}
 
             {soDaChon > 0 && (
               <a

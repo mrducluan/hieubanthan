@@ -193,6 +193,81 @@ def _tuoi(ngay_sinh: _dt.date | None) -> int | None:
     return hoan_canh.tuoi_tron(ngay_sinh, config.hom_nay_vn()) if ngay_sinh else None
 
 
+_DOI_CHIEU_GO_CUNG: dict[str, tuple[str, str]] = {
+    # Ánh xạ biên tập theo vùng giải phẫu lòng bàn tay giữa 7 Gò Tây phương và Bát Quái trong `chi_tay_kb.cung_tay`
+    "moc_tinh": ("ton", "Dưới ngón trỏ"),
+    "tho_tinh": ("ly", "Dưới ngón giữa"),
+    "thai_duong": ("khon", "Dưới ngón áp út"),
+    "thuy_tinh": ("khon", "Dưới ngón út"),
+    "kim_tinh": ("can_co", "Bầu ngón cái"),
+    "hoa_tinh": ("minh_duong", "Hai mép và giữa lòng tay"),
+    "thai_am": ("can", "Góc dưới mép ngón út"),
+}
+
+
+def _giai_nghia_hinh_hoc_mo_rong(so_do: dict | None) -> list[dict]:
+    """Diễn giải 3 chỉ số hình học/3D mở rộng (góc mở ngón cái, 3 đốt ngón giữa, độ khum lòng bàn tay 3D).
+    Mọi ngưỡng đều do ban biên tập tự đặt để tham khảo (Cheiro/Benham & Minh Đường Đông phương)."""
+    if not isinstance(so_do, dict):
+        return []
+    ra: list[dict] = []
+
+    goc = so_do.get("goc_ngon_cai")
+    if isinstance(goc, (int, float)):
+        if goc >= 48.0:
+            nhom, ten = "mo_rong", f"Góc mở ngón cái rộng (~{goc:.0f}°)"
+            y = "Theo Cheiro/Benham, ngón cái mở thoáng gợi ý tính cách cởi mở, độc lập, sẵn sàng khởi xướng và phóng khoáng trong cách cho đi."
+            luu_y = "Nên chú ý: giữ kỷ luật kế hoạch để tránh dàn trải nguồn lực khi hứng thú dâng cao (lưu ý: góc đo còn phụ thuộc tư thế xoè tay lúc chụp)."
+        elif goc <= 30.0:
+            nhom, ten = "khep_than_trong", f"Góc mở ngón cái gọn (~{goc:.0f}°)"
+            y = "Ngón cái khép gần lòng bàn tay gợi ý sự kín đáo, thận trọng, coi trọng nguyên tắc và suy xét kỹ trước khi cam kết."
+            luu_y = "Nên chú ý: đôi khi cho phép mình thử phương án mới sớm hơn một nhịp (lưu ý: nếu lúc chụp bạn khép ngón cái, hãy chụp lại khi thả lỏng tự nhiên)."
+        else:
+            nhom, ten = "can_bang", f"Góc mở ngón cái cân bằng (~{goc:.0f}°)"
+            y = "Độ mở ngón cái ở khoảng hài hòa: biết giữ chừng mực giữa sự tự chủ hành động và thái độ thận trọng thực tế."
+            luu_y = "Góc đo phụ thuộc một phần vào tư thế xoè tay khi chụp — đọc kết hợp với chiều dài ngón và hình lòng bàn tay."
+        ra.append({"ma": "goc_ngon_cai", "nhom": nhom, "ten": ten, "gia_tri": round(float(goc), 1), "y": y, "luu_y": luu_y, "do_tin": "bien_tap_tu_dat"})
+
+    dot = so_do.get("dot_ngon_giua")
+    if isinstance(dot, dict) and all(isinstance(dot.get(k), (int, float)) for k in ("dot_goc", "dot_giua", "dot_dau")):
+        dg, dgi, dd = float(dot["dot_goc"]), float(dot["dot_giua"]), float(dot["dot_dau"])
+        chenh = max(dg, dgi, dd) - min(dg, dgi, dd)
+        if chenh <= 0.05:
+            nhom, ten = "can_bang", "Ba đốt ngón giữa cân đối"
+            y = "Theo hệ ba thế giới của Benham, ba đốt đều nhau cho thấy nhịp phối hợp cân bằng giữa trực giác (đốt đầu), tổ chức logic (đốt giữa) và thực tiễn đời sống (đốt gốc)."
+        elif dg >= dgi and dg >= dd:
+            nhom, ten = "dot_goc_troi", f"Đốt gốc ngón giữa nổi trội ({round(dg * 100)}%)"
+            y = "Đốt gốc trội thiên về năng lực thực thi bền bỉ, ưa kết quả cụ thể, coi trọng sự ổn định vật chất và đời sống thiết thực."
+        elif dgi >= dg and dgi >= dd:
+            nhom, ten = "dot_giua_troi", f"Đốt giữa ngón giữa nổi trội ({round(dgi * 100)}%)"
+            y = "Đốt giữa trội thiên về tư duy hệ thống, tổ chức, sắp xếp quy trình và khả năng phân tích thực tế có phương pháp."
+        else:
+            nhom, ten = "dot_dau_troi", f"Đốt đầu ngón giữa nổi trội ({round(dd * 100)}%)"
+            y = "Đốt đầu trội thiên về trực giác, ý tưởng tinh thần, sức tưởng tượng và nhạy cảm với giá trị học thuật hoặc nghệ thuật."
+        ra.append({
+            "ma": "dot_ngon_giua", "nhom": nhom, "ten": ten,
+            "gia_tri": {"dot_goc": round(dg, 3), "dot_giua": round(dgi, 3), "dot_dau": round(dd, 3)},
+            "y": y,
+            "luu_y": "Tỉ lệ 3 đốt đo từ khớp 9–10–11–12 trên ảnh phẳng; nếu ngón tay hơi cong về phía camera, đốt đầu có thể ngắn hơn thực tế.",
+            "do_tin": "bien_tap_tu_dat",
+        })
+
+    c3 = so_do.get("chi_so_3d")
+    if isinstance(c3, dict) and isinstance(c3.get("do_khum_long"), (int, float)):
+        khum = float(c3["do_khum_long"])
+        if khum >= 0.09:
+            nhom, ten = "minh_duong_trung", f"Lòng bàn tay 3D hơi khum sâu ({khum:.2f})"
+            y = "Độ sâu 3D cho thấy vùng Minh Đường hơi trũng — sách Đông ví như thế tụ khí, dễ giữ nội lực và tích lũy lâu dài nếu lòng tay mềm ấm."
+            luu_y = "Lưu ý: độ khum 3D thay đổi theo tư thế căng hay thả lỏng bàn tay lúc chụp ảnh."
+        else:
+            nhom, ten = "minh_duong_phang", f"Lòng bàn tay 3D mở thoáng ({khum:.2f})"
+            y = "Lòng bàn tay mở phẳng thoáng gợi ý phong cách thẳng thắn, dễ bộc lộ năng lượng ra ngoài và ưa giải quyết việc trực diện."
+            luu_y = "Nên chú ý: kết hợp tự chạm lòng tay thật để xem độ đàn hồi da và thịt ở Minh Đường."
+        ra.append({"ma": "do_khum_long_3d", "nhom": nhom, "ten": ten, "gia_tri": round(khum, 3), "y": y, "luu_y": luu_y, "do_tin": "bien_tap_tu_dat"})
+
+    return ra
+
+
 def _ghep_tay_phuong_tay(kq: dict, tay: str) -> dict:
     """Ghép luận giải phương Tây: Cheiro (1894, 1916) · Benham (1900) · Dale (1895) · Baughan / 4 nguyên tố."""
     co_ban = kb_tay.ket_qua_do_tay(kq, tay)
@@ -202,7 +277,7 @@ def _ghep_tay_phuong_tay(kq: dict, tay: str) -> dict:
 
     duong_chi_cv = kq.get("duong_chi_goi_y")
     goi_y_duong_kinh_dien = []
-    for ma_duong in ("tam_dao", "tri_dao", "sinh_dao"):
+    for ma_duong in ("tam_dao", "tri_dao", "sinh_dao", "dinh_menh"):
         muc = duong_kd.get(ma_duong)
         if not muc:
             continue
@@ -217,11 +292,37 @@ def _ghep_tay_phuong_tay(kq: dict, tay: str) -> dict:
             **({"tin_hieu_cv": tin_hieu, "do_tin_cv": "goi_y_tham_khao"} if tin_hieu else {}),
         })
 
+    cung_dong_kb = kb.cung_tay()
+    bay_go_kinh_dien = []
+    for ma_go in ("moc_tinh", "tho_tinh", "thai_duong", "thuy_tinh", "kim_tinh", "hoa_tinh", "thai_am"):
+        muc_go = go_kd.get(ma_go)
+        if not muc_go:
+            continue
+        sg = muc_go.get("sach_ghi") or {}
+        ma_cung, vi_tri = _DOI_CHIEU_GO_CUNG.get(ma_go, (None, None))
+        cung_info = cung_dong_kb.get(ma_cung) if ma_cung else None
+        bay_go_kinh_dien.append({
+            "ma": ma_go,
+            "ten": muc_go["ten"],
+            "mat_tich_cuc": muc_go["mat_tich_cuc"],
+            "mat_tieu_cuc_can_chu_y": muc_go["mat_tieu_cuc_can_chu_y"],
+            "cung_dong": ma_cung,
+            "han_dong": cung_info.get("han") if cung_info else None,
+            "ten_cung_dong": cung_info.get("ten") if cung_info else None,
+            "vi_tri": vi_tri,
+            "do_tin_doi_chieu": "bien_tap_doi_chieu_vi_tri",
+            **({"trich": sg["trich"], "nguon": sg["nguon"]} if sg.get("trich") else {}),
+        })
+
+    chi_so_mo_rong = _giai_nghia_hinh_hoc_mo_rong(kq.get("so_do"))
+
     return {
         **co_ban,
         "fuzzy_bridge": kq.get("fuzzy_bridge"),
         "duong_kinh_dien": goi_y_duong_kinh_dien,
-        "so_go_kinh_dien": len(go_kd),
+        "bay_go_kinh_dien": bay_go_kinh_dien,
+        "so_go_kinh_dien": len(bay_go_kinh_dien),
+        "chi_so_mo_rong": chi_so_mo_rong,
         "truong_phai": [
             "Cheiro (Language of the Hand, 1894 · Palmistry for All, 1916)",
             "William G. Benham (The Laws of Scientific Hand Reading, 1900)",
