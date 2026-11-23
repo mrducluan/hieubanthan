@@ -1,17 +1,21 @@
 // ANH-3 + CT-2 — chép bộ tìm điểm mốc gương mặt + bàn tay vào public/mediapipe/<phiên bản>/ để site TỰ PHỤC VỤ (không gọi máy chủ ngoài lúc
 // chạy; CSP connect-src chỉ có 'self'). Chạy trước `next dev` / `next build` (predev, prebuild). Tệp sinh ra không vào git.
 import { createHash } from "node:crypto";
-import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const goc = join(dirname(fileURLToPath(import.meta.url)), "..");
-const cfg = JSON.parse(readFileSync(join(goc, "lib/bo-do-mat.json"), "utf8"));
+const duongCfg = join(goc, "lib/bo-do-mat.json");
+const cfg = JSON.parse(readFileSync(duongCfg, "utf8"));
 const goi = join(goc, "node_modules/@mediapipe/tasks-vision");
 const ban = JSON.parse(readFileSync(join(goi, "package.json"), "utf8")).version;
+// Phiên bản gói (khoá bởi package-lock) là nguồn thật. Dependabot chỉ nâng package.json nên tự đồng bộ lib/bo-do-mat.json
+// (client đọc phien_ban từ đó để dựng đường dẫn /mediapipe/<phiên bản>/). Mã băm mô hình bên dưới vẫn được kiểm như cũ.
 if (ban !== cfg.phien_ban) {
-  console.error(`[chep-mediapipe] @mediapipe/tasks-vision đang là ${ban} nhưng lib/bo-do-mat.json ghi ${cfg.phien_ban} — sửa phien_ban cho khớp.`);
-  process.exit(1);
+  console.warn(`[chep-mediapipe] đồng bộ lib/bo-do-mat.json: phien_ban ${cfg.phien_ban} → ${ban} (theo @mediapipe/tasks-vision đã cài). Nhớ commit thay đổi này.`);
+  cfg.phien_ban = ban;
+  writeFileSync(duongCfg, JSON.stringify(cfg, null, 2) + "\n");
 }
 // Mô hình gương mặt (ANH-3) + bàn tay (CT-2): kiểm mã băm từng tệp trước khi chép.
 const dsMoHinh = [{ mo_hinh: cfg.mo_hinh, sha256: cfg.sha256 }, ...(cfg.tay ? [cfg.tay] : [])];
