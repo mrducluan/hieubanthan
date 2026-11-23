@@ -6,11 +6,11 @@
 // miễn phí, không giải thưởng, không khoá lá sau nút chia sẻ, không đếm ngược; chữ không "trúng / thưởng / quay".
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
-import { Check, Clock, Copy, Download, Send, Share2, Sparkles } from "lucide-react";
+import { Clock, Sparkles } from "lucide-react";
 import Link from "@/components/khung/Lien";
-import { Button } from "@/components/ui/button";
 import { MatSau, MatTruoc } from "@/components/tarot/LaBai";
-import { ChepTay, chepLink, guiHoacChep } from "@/components/chia-se/GuiLink";
+import { HopGui, NutRuBan } from "@/components/chia-se/HopChiaSe";
+import { CTA_CHIA_SE, loiNhanThe } from "@/lib/loi-nhan-chia-se";
 import { cn } from "@/lib/utils";
 import { boChuGiai } from "@/lib/ten-hien";
 import { ghi } from "@/lib/do-luong";
@@ -55,8 +55,7 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày", tenH
   const [the, setThe] = useState<{ ma: string; tu: string } | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
-  const [daChep, setDaChep] = useState(false);
-  const [chepTay, setChepTay] = useState(false);
+  const [moHop, setMoHop] = useState(false);
   const noiDung = useRef<HTMLDivElement>(null);
   const nguoiDung = useNguoiDung();
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
@@ -99,10 +98,6 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày", tenH
     }, giam ? 0 : 700);
   }
 
-  const baoChep = (kq: string) => {
-    setChepTay(kq === "khong_duoc");
-    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2500); }
-  };
   // Riêng tư: tên lá Tarot riêng chỉ vào lời nhắn soạn sẵn khi engine cho phép (lá băm có muối) — như trên thẻ.
   const loiNhan = `Ba lá của mình hôm nay: ${baLa.chia_se_tarot ? `${tarot.ten} · ` : ""}ngày ${so.so}${tk.que ? ` · quẻ ${tk.que.ten}` : ""}. Còn ba lá của bạn?`;
   // Link dựng lúc GỬI (không nhớ sẵn): mã mời ?gt= về muộn sau lần bấm đầu vẫn được gắn.
@@ -123,8 +118,7 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày", tenH
         setThe(t);
         ghi("share_created", { kind: "ba_la", ma_moi: tu, co_ma: Boolean(maCuaToi) });
       }
-      const link = linkThe(t);
-      baoChep(await guiHoacChep({ title: "Ba lá của ngày", text: loiNhan, url: link }, `${loiNhan} ${link}`));
+      setMoHop(true);   // HCS-1: hộp chia sẻ chung
     } catch (e) {
       setLoi(e instanceof Error ? e.message : "Chưa tạo được thẻ.");
     } finally {
@@ -237,21 +231,17 @@ export function BaLaNgay({ baLa, ngay, hoSo, tieuDe = "Ba lá của ngày", tenH
           </dl>
           {!en && <>
           <div className="mt-3 flex flex-wrap items-center gap-2">
-            <Button size="sm" onClick={() => void chiaSe()} disabled={dang} data-testid="ba-la-chia-se">
-              {daChep ? <Check aria-hidden /> : the ? <Send aria-hidden /> : <Share2 aria-hidden />}{daChep ? "Đã chép link" : dang ? "Đang tạo…" : "Chia sẻ ba lá"}
-            </Button>
-            {the && (
-              <>
-                <Button size="sm" variant="secondary" onClick={() => void chepLink(linkThe(the)).then(baoChep)}><Copy aria-hidden /> Chép link</Button>
-                <Button size="sm" variant="secondary" asChild>
-                  <a href={`/og/ba-la?ma=${encodeURIComponent(the.ma)}&khung=doc`} download="ba-la-hom-nay.png" data-testid="ba-la-tai-anh"
-                    onClick={() => ghi("share_created", { kind: "ba_la_anh", ma_moi: the.tu })}><Download aria-hidden /> Tải ảnh</a>
-                </Button>
-              </>
-            )}
+            <NutRuBan nhan={dang ? "Đang tạo…" : CTA_CHIA_SE.ba_la.nhan} nho dang={dang} onClick={() => void chiaSe()} testId="ba-la-chia-se" />
           </div>
           {loi && <p role="alert" className="mt-2 text-sm text-cinnabar">{loi}</p>}
-          {chepTay && the && <ChepTay url={linkThe(the)} className="mt-2" />}
+          <HopGui mo={moHop} onMoChange={setMoHop} tieuDeHop="Gửi ba lá của bạn"
+            gui={the && {
+              kind: "ba_la", url: linkThe(the), tu: the.tu, tieuDe: "Ba lá của ngày",
+              anh: `/og/ba-la?ma=${encodeURIComponent(the.ma)}`, anhDoc: `/og/ba-la?ma=${encodeURIComponent(the.ma)}&khung=doc`,
+              tenTep: "ba-la-hom-nay.png", testIdAnh: "ba-la-tai-anh",
+              onLuuAnh: () => ghi("share_created", { kind: "ba_la_anh", ma_moi: the.tu }),
+              loiNhan: [{ ma: "bl.cu", chu: loiNhan }, ...loiNhanThe("ba_la", { so: so.so, ten: tk.que?.ten ?? null })],
+            }} />
           <p className="mt-2 text-xs text-fg-faint">{baLa.chia_se_tarot
             ? "Thẻ chia sẻ chỉ có tên hiển thị, ba lá và ngày xem — không có ngày sinh."
             : "Thẻ chia sẻ có tên hiển thị, con số và quẻ của ngày; lá Tarot riêng của bạn nằm úp trên thẻ. Không có ngày sinh."}</p>

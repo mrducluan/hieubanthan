@@ -4,9 +4,10 @@
 // (ảnh /og đã có QR + hieuban.com — TCS-1). Đổi tên hiển thị trên thẻ vẫn ở /chia-se.
 import { useMemo, useState } from "react";
 import Link from "@/components/khung/Lien";
-import { Check, Copy, Download, Layers, QrCode, Send, Share2 } from "lucide-react";
+import { Layers, QrCode, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ChepTay, chepLink, guiHoacChep } from "@/components/chia-se/GuiLink";
+import { HopGui, NutRuBan } from "@/components/chia-se/HopChiaSe";
+import { CTA_CHIA_SE, loiNhanThe } from "@/lib/loi-nhan-chia-se";
 import { hoTenList, tenGoi, type HoSo } from "@/lib/hoso";
 import { postJson } from "@/lib/goi-api";
 import { docQuyUocDD } from "@/lib/quy-uoc-dd";
@@ -21,11 +22,10 @@ export function ChiaSeTheHoSo({ hoSo, soDuongDoi, onMatSau, matSauMo = false }: 
   const [da, setDa] = useState<{ ma: string } | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
-  const [daChep, setDaChep] = useState(false);
-  const [chepTay, setChepTay] = useState(false);
+  const [mo, setMo] = useState(false);
+  const [so, setSo] = useState<{ dd: number | null; k: string | null }>({ dd: soDuongDoi ?? null, k: null });
   const nguoiDung = useNguoiDung();
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
-  const loiNhan = `Con số đường đời của ${tenGoi(hoSo)}${soDuongDoi ? ` là ${soDuongDoi}` : ""}. Còn bạn?`;
 
   // Link dựng lúc DÙNG (không nhớ sẵn): mã mời ?gt= về muộn sau lần bấm đầu vẫn được gắn — bạn tạo tài khoản → cả hai nhận Sao.
   const linkThe = (ma: string) => {
@@ -40,25 +40,17 @@ export function ChiaSeTheHoSo({ hoSo, soDuongDoi, onMatSau, matSauMo = false }: 
     try { return maHoaQr(link); } catch { try { return maHoaQr(`${GOC_QR}/`); } catch { return null; } }
   }, [link]);
 
-  function baoChep(kq: string) {
-    setChepTay(kq === "khong_duoc");
-    if (kq === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
-  }
-
   async function tao() {
     setDang(true); setLoi(null);
     try {
-      const { ma } = await postJson<{ ma: string }>("/api/chia-se/tao", {
+      const { ma, duong_doi, tu_khoa } = await postJson<{ ma: string; duong_doi?: number | null; tu_khoa?: string | null }>("/api/chia-se/tao", {
         ten_hien_thi: tenGoi(hoSo), ho_ten: hoTenList(hoSo), ngay: hoSo.ngay, thang: hoSo.thang, nam: hoSo.nam,
         quy_uoc_duong_doi: docQuyUocDD(),
       });
       setDa({ ma });
-      const link = linkThe(ma);
+      setSo({ dd: duong_doi ?? soDuongDoi ?? null, k: tu_khoa ?? null });
       ghi("share_created", { kind: "card", ma_moi: maMoiTuToken(ma), co_ma: Boolean(maCuaToi), nguon: "ban_than" });
-      // Điện thoại: mở luôn hộp chia sẻ của máy; máy tính: khung QR + nút hiện ra là đủ (không tự chép).
-      if (typeof navigator.share === "function") {
-        try { await navigator.share({ title: "Hiểu Bản Thân", text: loiNhan, url: link }); } catch { /* huỷ / hết "cú bấm" → dùng nút bên dưới */ }
-      }
+      setMo(true);   // HCS-1: mở hộp chia sẻ chung (ảnh xem trước, lời nhắn, Zalo / Messenger / Facebook)
     } catch (e) {
       setLoi(e instanceof Error ? e.message : "Chưa tạo được link.");
     } finally {
@@ -77,9 +69,7 @@ export function ChiaSeTheHoSo({ hoSo, soDuongDoi, onMatSau, matSauMo = false }: 
     return (
       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2" data-testid="chia-se-the-ho-so">
         <p className="min-w-0 flex-1 text-xs text-fg-faint">Thẻ chỉ có tên và bốn con số — không có ngày sinh.</p>
-        <Button size="sm" onClick={() => void tao()} disabled={dang} data-testid="nut-chia-se-the">
-          <Share2 aria-hidden /> {dang ? "Đang tạo…" : "Chia sẻ thẻ"}
-        </Button>
+        <NutRuBan nhan={dang ? "Đang tạo…" : CTA_CHIA_SE.card.nhan} nho dang={dang} onClick={() => void tao()} testId="nut-chia-se-the" />
         {loi && <p role="alert" className="w-full text-sm text-cinnabar">{loi}</p>}
         {matSau}
       </div>
@@ -100,23 +90,17 @@ export function ChiaSeTheHoSo({ hoSo, soDuongDoi, onMatSau, matSauMo = false }: 
         <div className="min-w-0 flex-1 space-y-2">
           <p className="flex items-center gap-1.5 text-sm text-fg"><QrCode className="size-4 shrink-0 text-gold" aria-hidden /> Đưa bạn bè quét để xem thẻ</p>
           <p className="text-xs text-fg-muted">Bạn ấy thấy bốn con số của bạn và tự xem số của mình. Link hết hạn sau 90 ngày.</p>
-          <div className="flex flex-wrap gap-2">
-            <Button size="sm" onClick={() => void guiHoacChep({ title: "Hiểu Bản Thân", text: loiNhan, url: link }).then(baoChep)} data-testid="gui-the-ho-so">
-              <Send aria-hidden /> Gửi link
-            </Button>
-            <Button size="sm" variant="secondary" onClick={() => void chepLink(link).then(baoChep)} data-testid="chep-the-ho-so">
-              {daChep ? <Check aria-hidden /> : <Copy aria-hidden />}{daChep ? "Đã chép" : "Chép link"}
-            </Button>
-            <Button size="sm" variant="secondary" asChild>
-              <a href={`/og?ma=${encodeURIComponent(da.ma)}&khung=doc`} download="the-hieu-ban-than.png" data-testid="tai-anh-the-ho-so"
-                onClick={() => ghi("share_created", { kind: "card_anh", nguon: "ban_than" })}>
-                <Download aria-hidden /> Tải ảnh
-              </a>
-            </Button>
-          </div>
+          <Button size="sm" onClick={() => setMo(true)} data-testid="gui-the-ho-so"><Send aria-hidden /> Gửi cho bạn bè</Button>
         </div>
       </div>
-      {chepTay && <ChepTay url={link} />}
+      <HopGui mo={mo} onMoChange={setMo} tieuDeHop="Gửi thẻ của bạn"
+        gui={{
+          kind: "card", url: link, tu: maMoiTuToken(da.ma), tieuDe: "Hiểu Bản Thân",
+          anh: `/og?ma=${encodeURIComponent(da.ma)}`, anhDoc: `/og?ma=${encodeURIComponent(da.ma)}&khung=doc`,
+          tenTep: "the-hieu-ban-than.png", testIdAnh: "tai-anh-the-ho-so", testIdLink: "link-the-ho-so",
+          onLuuAnh: () => ghi("share_created", { kind: "card_anh", nguon: "ban_than" }),
+          loiNhan: loiNhanThe("card", { so: so.dd, tuKhoa: so.k }),
+        }} />
       {matSau}
       <p className="text-xs text-fg-faint">
         Ảnh tải về có sẵn mã QR, hợp đăng story. <Link href="/chia-se" className="text-gold hover:underline">Đổi tên hiển thị trên thẻ</Link>

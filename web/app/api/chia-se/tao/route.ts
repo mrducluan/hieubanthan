@@ -35,7 +35,9 @@ export async function POST(req: Request): Promise<NextResponse> {
     const kq = (await r.json()) as LuanGiaiResult;
     const so = kq.cac_vi_tri.map((v) => v.gia_tri);
     const k = kq.cac_vi_tri.find((v) => v.vi_tri === "duong_doi")?.nghia?.tu_khoa;
-    return NextResponse.json({ ma: kyMa({ t: ten_hien_thi, so, ...(k ? { k } : {}) }) });
+    // HCS-1: trả thêm số đường đời + từ khoá (đã có trong mã) để hộp chia sẻ soạn lời nhắn — không thêm dữ liệu mới.
+    const dd = kq.cac_vi_tri.find((v) => v.vi_tri === "duong_doi")?.gia_tri ?? null;
+    return NextResponse.json({ ma: kyMa({ t: ten_hien_thi, so, ...(k ? { k } : {}) }), duong_doi: dd, tu_khoa: k ?? null });
   } catch (e) {
     // fetch hỏng (engine không trả lời) là TypeError; còn lại (ký mã, thiếu khoá…) → câu chung. Chi tiết chỉ vào log.
     return traLoiChiaSe(e, "tao", e instanceof TypeError ? "Không kết nối được máy tính toán. Thử lại sau." : LOI_TAO_LINK);

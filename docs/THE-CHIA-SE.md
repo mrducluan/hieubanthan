@@ -5,6 +5,9 @@ Khâu vòng tăng trưởng: **MỜI** (chính) — mọi ảnh rời khỏi sit
 `share_clicked` → `referral_signup` (Gate 2, K-factor). Chỉ số: số `referral_signup` theo tiền tố `tu`
 (`/quan-tri/tang-truong`), tỉ lệ `share_clicked / share_created` theo `kind`.
 
+Giao diện GỬI (ảnh xem trước, lời nhắn soạn sẵn, kênh Zalo / Messenger / Facebook / Gửi ảnh) dùng chung cho mọi thẻ từ
+HCS-1 (2026-11-23): `docs/HOP-CHIA-SE.md`.
+
 ## Quy tắc chung
 
 - **Dữ liệu trên thẻ chỉ từ mã có ký HMAC** (`lib/ma-moi.ts`, khoá `LOI_MOI_SECRET`, mỗi loại một tiền tố miền riêng:

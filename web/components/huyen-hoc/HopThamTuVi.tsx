@@ -318,7 +318,7 @@ function KetQuaHopTham({ kq, yeuCau, vaoNT, onHoi, onLai }: {
           </Button>
         )}
         {/* EN-ALL: thẻ chia sẻ (ảnh chữ Việt — GĐ 9) và Hợp đôi chưa có bản Anh → bản Anh không hiện hai lối này. */}
-        {d && yeuCau && !en && <NutChiaSeHai yeuCau={yeuCau} />}
+        {d && yeuCau && !en && <NutChiaSeHai yeuCau={yeuCau} diem={d.tong} muc={d.nhan_muc} />}
         <Button size="sm" variant="secondary" onClick={onLai}>{c("ht.xem_khac")}</Button>
         {!en && <Button asChild size="sm" variant="ghost">
           <Link href="/hop-doi"><Send aria-hidden /> {c("ht.gui_tu_xem")}</Link>

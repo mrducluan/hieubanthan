@@ -28,7 +28,8 @@ test("thẻ hôm nay: số nổi bật khớp engine, link chia sẻ mang số n
   await expect(page.getByTestId("so-noi-bat-ngay")).toContainText("6");
   await expect(page.getByTestId("so-noi-bat-ngay")).toContainText("hai phái");
   await page.getByTestId("chia-se-the-hom-nay").click();
-  await expect(page.getByTestId("the-hom-nay").getByRole("button", { name: "Đã chép link" })).toBeVisible();
+  await page.getByTestId("hop-chia-se").getByTestId("kenh-chep").click();   // HCS-1: hộp chia sẻ chung
+  await expect(page.getByTestId("bao-chia-se")).toBeVisible();
   const chep = await page.evaluate(() => navigator.clipboard.readText());
   const ma = new URL(chep.slice(chep.indexOf("http"))).searchParams.get("the")!;
   const nd = JSON.parse(Buffer.from(ma.split(".")[0]!, "base64url").toString("utf8")) as Record<string, unknown>;

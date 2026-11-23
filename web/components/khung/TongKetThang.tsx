@@ -9,9 +9,9 @@
 //   Sao chỉ sống khi báo cáo đang mount nên ở đây không trừ Sao, chỉ dẫn đường; thu_sao tắt → "đang miễn phí".
 import { useEffect, useRef, useState } from "react";
 import Link from "@/components/khung/Lien";
-import { ArrowRight, BookOpen, Check, Download, Share2, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ChepTay, guiHoacChep } from "@/components/chia-se/GuiLink";
+import { ArrowRight, BookOpen, X } from "lucide-react";
+import { HopGui, NutRuBan } from "@/components/chia-se/HopChiaSe";
+import { CTA_CHIA_SE, loiNhanThe } from "@/lib/loi-nhan-chia-se";
 import { ghi, maNgauNhien } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
 import { tenGoi, type HoSo } from "@/lib/hoso";
@@ -82,8 +82,7 @@ export function TongKetThang({ hoSo, homNay, mayChu, thangNay, noi, className = 
   const [phi, setPhi] = useState<{ thu: boolean; gia: number } | null>(null);
   const [the, setThe] = useState<{ ma: string; tu: string; url: string } | null>(null);
   const [dang, setDang] = useState(false);
-  const [daChep, setDaChep] = useState(false);
-  const [chepTay, setChepTay] = useState<string | null>(null);
+  const [moHop, setMoHop] = useState(false);
   const daDo = useRef(false);
   const nguoiDung = useNguoiDung();
   const maCuaToi = useMaCuaToi(Boolean(nguoiDung));
@@ -107,7 +106,7 @@ export function TongKetThang({ hoSo, homNay, mayChu, thangNay, noi, className = 
   const dongLai = () => { ghiDaDong(tk.nam, tk.thang); setDong(`${tk.nam}-${String(tk.thang).padStart(2, "0")}`); ghi("recap_closed", { so_thang: tk.thang, so_ngay: tk.so_ngay }); };
 
   async function chiaSe() {
-    setDang(true); setChepTay(null);
+    setDang(true);
     try {
       let t = the;
       if (!t) {
@@ -121,11 +120,8 @@ export function TongKetThang({ hoSo, homNay, mayChu, thangNay, noi, className = 
         setThe(t);
         ghi("share_created", { kind: "thang", ma_moi: tu, co_ma: Boolean(maCuaToi) });
       }
-      const chu = `Tháng ${tk.thang} mình ghé Hôm nay ${tk.so_ngay} buổi sáng. Còn tháng này của bạn là tháng mấy?`;
-      const kqGui = await guiHoacChep({ title: "Tháng của tôi", text: chu, url: t.url }, `${chu} ${t.url}`);
-      if (kqGui === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2500); }
-      else if (kqGui === "khong_duoc") setChepTay(t.url);
-    } catch { setChepTay(null); }
+      setMoHop(true);   // HCS-1: hộp chia sẻ chung
+    } catch { /* lỗi ký mã: nút vẫn ở đó để thử lại */ }
     finally { setDang(false); }
   }
 
@@ -158,18 +154,16 @@ export function TongKetThang({ hoSo, homNay, mayChu, thangNay, noi, className = 
             </p>
           )}
           <div className="flex flex-wrap items-center gap-2 pt-1">
-            <Button size="sm" variant="secondary" onClick={() => void chiaSe()} disabled={dang} data-testid="tong-ket-chia-se">
-              {daChep ? <Check aria-hidden /> : <Share2 aria-hidden />}{daChep ? "Đã chép link" : dang ? "Đang tạo…" : "Chia sẻ tháng của tôi"}
-            </Button>
-            {the && (
-              <a href={`/og/thang?ma=${encodeURIComponent(the.ma)}&tu=${the.tu}&khung=doc`} download={`thang-${tk.thang}-cua-toi.png`}
-                onClick={() => ghi("share_created", { kind: "thang_anh", ma_moi: the.tu, co_ma: false })}
-                className="inline-flex items-center gap-1.5 text-sm text-fg-muted hover:text-fg" data-testid="tong-ket-tai-anh">
-                <Download className="size-4" aria-hidden /> Tải ảnh
-              </a>
-            )}
+            <NutRuBan nhan={dang ? "Đang tạo…" : CTA_CHIA_SE.thang.nhan} nho dang={dang} onClick={() => void chiaSe()} testId="tong-ket-chia-se" />
           </div>
-          {chepTay && <ChepTay url={chepTay} className="w-full" />}
+          <HopGui mo={moHop} onMoChange={setMoHop} tieuDeHop={`Tháng ${tk.thang} của tôi`}
+            gui={the && {
+              kind: "thang", url: the.url, tu: the.tu, tieuDe: "Tháng của tôi",
+              anh: `/og/thang?ma=${encodeURIComponent(the.ma)}&tu=${the.tu}`, anhDoc: `/og/thang?ma=${encodeURIComponent(the.ma)}&tu=${the.tu}&khung=doc`,
+              tenTep: `thang-${tk.thang}-cua-toi.png`, testIdAnh: "tong-ket-tai-anh",
+              onLuuAnh: () => ghi("share_created", { kind: "thang_anh", ma_moi: the.tu, co_ma: false }),
+              loiNhan: loiNhanThe("thang", { thang: tk.thang, soNgayGhe: tk.so_ngay, so: thangNay?.so ?? null }),
+            }} />
           <Link href="/than-so#ban-do-con-so" onClick={() => ghi("sao_cta_clicked", { tu: "tong_ket", so_chuong: 3 })}
             className="mt-1 flex items-center justify-between gap-3 rounded-xl border border-gold/40 bg-gold/5 px-4 py-3 hover:border-gold" data-testid="tong-ket-12-thang">
             <span className="flex items-start gap-2">

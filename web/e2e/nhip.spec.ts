@@ -23,7 +23,9 @@ test("chia sẻ thẻ ngày: link /hom-nay mang tu + the, ảnh tải được, 
   await page.addInitScript(() => { (navigator as unknown as { share?: unknown }).share = undefined; });
   await page.goto("/");
   await page.getByTestId("chia-se-the-ngay").click();
-  await expect(page.getByTestId("chia-se-the-ngay")).toContainText("Đã chép link");
+  // HCS-1: hộp chia sẻ chung — chép lời nhắn + link.
+  await page.getByTestId("hop-chia-se").getByTestId("kenh-chep").click();
+  await expect(page.getByTestId("bao-chia-se")).toBeVisible();
   const chep = await page.evaluate(() => navigator.clipboard.readText());
   const url = new URL(chep.slice(chep.indexOf("http")));
   expect(url.pathname).toBe("/hom-nay");

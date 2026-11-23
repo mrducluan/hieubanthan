@@ -6,15 +6,15 @@
 //  · Ý 2: "Chia sẻ" thẻ câu trả lời (lib/the-hoi.ts — chỉ dữ liệu danh mục cố định + câu hỏi chuẩn, không câu gõ / ngày sinh).
 import { useState, type ReactNode } from "react";
 import Link from "@/components/khung/Lien";
-import { BookmarkCheck, BookmarkPlus, Check, Copy, Download, Heart, Info, Share2 } from "lucide-react";
+import { BookmarkCheck, BookmarkPlus, Heart, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { laMangThe, tuKhoi } from "@/lib/the-hoi";
-import { ChepTay, chepLink, guiHoacChep } from "@/components/chia-se/GuiLink";
+import { BangGui, NutRuBan } from "@/components/chia-se/HopChiaSe";
+import { CTA_CHIA_SE, loiNhanThe } from "@/lib/loi-nhan-chia-se";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { doanCoThuatNgu, KhungGiaiNghia } from "@/components/hoi/ThuatNgu";
 import { ViSao } from "@/components/luan-giai/HopNoiBat";
@@ -187,21 +187,14 @@ function NutChiaSe({ ds, moDun, maMoi: maCuaToi }: { ds?: KhoiTrucQuan[]; moDun:
   const [the, setThe] = useState<{ ma: string; tu: string; link: string } | null>(null);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
-  const [daChep, setDaChep] = useState(false);
-  const [chepLoi, setChepLoi] = useState(false);
   if (!laMangThe(moDun)) return null;
   const khoi = ds?.find((k) => (k as CoCauChuan).cau_chuan && tuKhoi(k));
   if (!khoi) return null;
   const cau = (khoi as CoCauChuan).cau_chuan!;
   const gon = tuKhoi(khoi)!;
 
-  async function guiLink(link: string) {
-    const kq = await guiHoacChep({ title: "Hiểu Bản Thân", text: `Mình vừa hỏi “${cau}” — bạn hỏi thử câu này về chính bạn:`, url: link });
-    if (kq === "da_chep") { setChepLoi(false); setDaChep(true); setTimeout(() => setDaChep(false), 2000); }
-    else setChepLoi(kq === "khong_duoc");
-  }
   async function tao() {
-    if (the) { await guiLink(the.link); return; }
+    if (the) return;
     setDang(true); setLoi(null);
     try {
       const { ma, tu } = await postJson<{ ma: string; tu: string }>("/api/chia-se/hoi", { mang: moDun, cau, khoi: gon });
@@ -210,7 +203,6 @@ function NutChiaSe({ ds, moDun, maMoi: maCuaToi }: { ds?: KhoiTrucQuan[]; moDun:
       if (maCuaToi) u.searchParams.set("gt", maCuaToi);
       setThe({ ma, tu, link: u.toString() });
       ghi("share_created", { kind: "hoi", ma_moi: tu, kieu: gon.t });
-      await guiLink(u.toString());
     } catch (e) {
       setLoi(e instanceof Error ? e.message : "Chưa tạo được thẻ.");
     } finally {
@@ -219,27 +211,14 @@ function NutChiaSe({ ds, moDun, maMoi: maCuaToi }: { ds?: KhoiTrucQuan[]; moDun:
   }
   return (
     <div className={cn("flex flex-col gap-2", the && "w-full")}>
-      <Button size="sm" variant="secondary" onClick={() => void tao()} disabled={dang} data-testid="chia-se-tra-loi" className="self-start">
-        <Share2 aria-hidden /> {dang ? c("chia_se.dang_tao") : "Chia sẻ"}
-      </Button>
+      {!the && <NutRuBan nhan={dang ? c("chia_se.dang_tao") : CTA_CHIA_SE.hoi.nhan} nho dang={dang} onClick={() => void tao()} testId="chia-se-tra-loi" className="self-start" />}
       {loi && <p role="alert" className="text-xs text-cinnabar">{loi}</p>}
       {the && (
-        <div className="w-full space-y-2 rounded-xl border border-gold/30 bg-gold/[0.05] p-3" data-testid="the-tra-loi">
+        <div className="w-full space-y-3 rounded-xl border border-gold/30 bg-gold/[0.05] p-3" data-testid="the-tra-loi">
           <p className="text-xs text-fg-muted">Thẻ chỉ có câu hỏi và hình — không ngày sinh, không lời trả lời. Người nhận bấm là hỏi được câu này về chính họ.</p>
-          <div className="flex gap-2">
-            <Input readOnly value={the.link} aria-label="Link thẻ câu trả lời" onFocus={(e) => e.currentTarget.select()} className="text-sm" data-testid="link-the-hoi" />
-            <Button variant="secondary" size="icon" aria-label={c("chia_se.chep_link")}
-              onClick={async () => { if ((await chepLink(the.link)) === "da_chep") { setDaChep(true); setTimeout(() => setDaChep(false), 2000); } else setChepLoi(true); }}>
-              {daChep ? <Check aria-hidden /> : <Copy aria-hidden />}
-            </Button>
-          </div>
-          {chepLoi && <ChepTay />}
-          <Button asChild size="sm" variant="outline">
-            <a href={`/og/hoi?ma=${encodeURIComponent(the.ma)}&khung=doc`} download="cau-hoi-cua-toi.png"
-              onClick={() => ghi("share_created", { kind: "hoi_anh", ma_moi: the.tu })}>
-              <Download aria-hidden /> {c("chia_se.tai_story")}
-            </a>
-          </Button>
+          <BangGui kind="hoi" url={the.link} tu={the.tu} tieuDe="Hiểu Bản Thân" testIdLink="link-the-hoi" testIdAnh="tai-anh-the-hoi"
+            anh={`/og/hoi?ma=${encodeURIComponent(the.ma)}`} anhDoc={`/og/hoi?ma=${encodeURIComponent(the.ma)}&khung=doc`} tenTep="cau-hoi-cua-toi.png"
+            onLuuAnh={() => ghi("share_created", { kind: "hoi_anh", ma_moi: the.tu })} loiNhan={loiNhanThe("hoi", { ten: cau })} />
         </div>
       )}
     </div>
