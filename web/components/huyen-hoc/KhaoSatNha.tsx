@@ -165,7 +165,32 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     }
   }, [nhaLuu, doHuongGoiY]);
 
-  const bamO = (r: number, c: number) => {
+  // SD-1: khối sơ đồ nhà theo tỉ lệ vừa lưu câu trả lời Có / Không cho dấu hiệu nó gợi ý (hồ sơ nhà: `tu_so_do`,
+  // `khai_khong`) → ô tích ở đây theo ngay, để lần "Xem luận bố cục" kế tiếp không ghi đè mất câu trả lời ấy.
+  const khoaSoDo = `${(nhaLuu?.bo_cuc?.tu_so_do ?? []).join(",")}|${(nhaLuu?.bo_cuc?.khai_khong ?? []).join(",")}`;
+  const soDoTruoc = useRef<{ khoa: string; tu: string[] } | null>(null);
+  useEffect(() => {
+    if (nhaLuu === undefined) return;
+    const b = nhaLuu?.bo_cuc;
+    const tu = b?.tu_so_do ?? [];
+    const truoc = soDoTruoc.current;
+    soDoTruoc.current = { khoa: khoaSoDo, tu };
+    if (!truoc || truoc.khoa === khoaSoDo) return;            // lần đầu: khối điền hồ sơ ở trên đã lo
+    const dangCo = b?.dau_hieu ?? [];
+    const them = tu.filter((m) => !truoc.tu.includes(m));
+    const bo = [...truoc.tu.filter((m) => !tu.includes(m) && !dangCo.includes(m)), ...(b?.khai_khong ?? []).filter((m) => !dangCo.includes(m))];
+    const khong = (b?.khai_khong ?? []).filter((m) => !dangCo.includes(m));
+    setDau((s) => {
+      if (them.every((m) => s.has(m)) && !bo.some((m) => s.has(m))) return s;
+      const n = new Set(s); them.forEach((m) => n.add(m)); bo.forEach((m) => n.delete(m)); return n;
+    });
+    setKhongCo((s) => {
+      if (khong.every((m) => s.has(m)) && !them.some((m) => s.has(m))) return s;
+      const n = new Set(s); khong.forEach((m) => n.add(m)); them.forEach((m) => n.delete(m)); return n;
+    });
+  }, [khoaSoDo, nhaLuu]);
+
+  const bamO =(r: number, c: number) => {
     if (cheDo === "to") { setLuoi((l) => l.map((row, i) => row.map((v, j) => (i === r && j === c ? !v : v)))); return; }
     setOPhong((o) => {
       const m = { ...o };

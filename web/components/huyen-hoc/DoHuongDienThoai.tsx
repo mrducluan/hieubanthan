@@ -106,7 +106,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
     : app ? t("dh.loi_app_nhung", { app: TEN_APP[app] }) : t("dh.loi_khong_tra");
 
   /** Bỏ lần đo dở / phiếu chưa chốt (người dùng đổi cách nhập, đổi chế độ, đo lại từ đầu). */
-  const boPhieu = () => { luot.current += 1; lan1.current = null; buocRef.current = 1; setBuoc(1); setPhieu(null); setDoGiu(null); };
+  const boPhieu = () => { luot.current += 1; lan1.current = null; buocRef.current = 1; setBuoc(1); setPhieu(null); setDoGiu(null); setDang(false); };
   const dungCamBien = () => {
     luot.current += 1;
     if (cheDo === "ke_do" && cam.doSong != null) setDoTay(cam.doSong);   // giữ hướng đang đọc để xem tiếp nhãn du niên
@@ -150,7 +150,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
     } catch (e) {
       if (g === luot.current && conSong.current) setLoi(e instanceof Error ? e.message : t("dh.loi_do"));
     } finally {
-      if (conSong.current) { setDang(false); setDoGiu(null); }
+      if (conSong.current && g === luot.current) { setDang(false); setDoGiu(null); }   // lượt đã bị thay thì nơi thay tự dọn
     }
   };
   const chotPhieu = () => {
@@ -312,7 +312,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
           {laBan && (
             <p className="mt-1 text-center text-[11px] text-fg-faint">
               <span className="mr-1 inline-block size-2 rounded-sm bg-jade/40 align-middle" />{t("dh.chu_tot", { quai: quai(laBan.quai) })}
-              <span className="ml-2 mr-1 inline-block size-2 rounded-sm border border-line bg-fg-faint/10 align-middle" />{t("dh.chu_xau")}
+              <span className="ml-2 mr-1 inline-block size-2 rounded-sm border border-line bg-line/30 align-middle" />{t("dh.chu_xau")}
             </p>
           )}
         </div>
