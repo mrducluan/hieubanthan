@@ -26,6 +26,8 @@ _SANG = {"Miếu", "Vượng", "Đắc"}
 _CUNG_TV = ("Mệnh", "Phu Thê", "Tài Bạch", "Quan Lộc", "Tật Ách", "Phúc Đức", "Thiên Di", "Điền Trạch", "Nô Bộc", "Tử Nữ",
             "Huynh Đệ", "Phụ Mẫu")
 _KHI_TV = {"sang": "khi sao sáng", "ham": "khi sao ở thế yếu"}
+_MIEU = {"Miếu", "Vượng"}
+_MIEU_HAN = __import__("re").compile(r"(?<!不)(?:入庙|庙旺|旺庙|庙乐|入旺|庙地|旺地|旺宫)")
 
 
 def _kb(ten: str) -> dict:
@@ -36,6 +38,8 @@ def muc(m: dict, ve: str) -> dict:
     """Một mục hiển thị. Phiên âm chỉ kèm nhóm A (âm Hán Việt của câu nặng đọc lên vẫn nặng)."""
     if m["nhom"] == "A":
         loi = m["y"]
+    elif m.get("sat"):                                       # SX-C3: nhóm B / C nói sát nguyên văn + lời dặn
+        loi = f"{m['y']} {m['ham_y']}"
     elif m["nhom"] == "B":
         loi = f"{m['y']} {m['ham_y']}"
     else:
@@ -48,8 +52,10 @@ def muc(m: dict, ve: str) -> dict:
         ra["tom_y"] = True
     else:
         ra["han"] = m["han"]
-        if m["nhom"] == "A":
+        if m["nhom"] == "A" or m.get("sat"):                 # SX-C3: câu nói sát nguyên văn kèm cả âm Hán Việt
             ra["am"] = m["am"]
+        if m.get("sat"):
+            ra["nguyen_van"] = True
     if m.get("viec"):
         ra["viec"] = m["viec"]
     if m.get("ngay_nay"):                                    # điều sách dặn áp vào nhà ngày nay thế nào (Phong thuỷ)
@@ -128,6 +134,9 @@ def _dieu_kien_dat(han: str, sao: str, ten_sao: set[str], hoa: set[str], chi: st
     Câu không nêu điều kiện nào → đạt."""
     if not _chi_dat(han, chi):
         return False
+    # SX-D: "单居 / 独守 / 独坐" (sao đứng một mình) → cung không có chính tinh nào khác.
+    if _re.search(r"单居|独守|独坐|单守", han) and ten_sao & (set(_CHINH_HAN.values()) - {sao}):
+        return False
     s = _CHI_CUNG.sub("　", han)
     for h, ten in _CHINH_HAN.items():
         for m in list(_re.finditer(h, s)):
@@ -173,13 +182,29 @@ def tuvi_nhom(cung: list[dict]) -> list[tuple[str, str, list[tuple[dict, str]]]]
         hoa = {s["tu_hoa"] for s in sao_cung if s.get("tu_hoa")}
         cac: list[tuple[dict, str]] = []
         for s in sao_cung:
-            tt = _trang_thai(s.get("do_sang_nam_phai"))
-            for m in (kb.get(s["ten"]) or {}).get(ten) or []:
-                k = m.get("khi", "chung")
-                if (k == "chung" or k == tt) and _dieu_kien_dat(m["han"], s["ten"], ten_sao, hoa, c.get("chi")):
-                    cac.append((m, f"Sao {s['ten']} ở cung {ten}" + (f" · {_KHI_TV[k]}" if k in _KHI_TV else "")))
+            cac += chon_tuvi_sao(s["ten"], ten, s.get("do_sang_nam_phai"), ten_sao, hoa, c.get("chi"), kb)
         nhom.append((ten, f"Cung {ten}", cac))
     return nhom
+
+
+def chon_tuvi_sao(sao: str, cung: str, do_sang: str | None, ten_sao: set[str], hoa: set[str], chi: str | None,
+                  kb: dict | None = None) -> list[tuple[dict, str]]:
+    """MỘT bộ chọn câu Toàn Thư cho một sao ở một cung — dùng chung khối "Sách xưa ghi" của lá số và hộp luận của báo cáo
+    đời sống (`luangiai/sach_hop.py`). Câu chọn khi `khi` khớp độ sáng Nam phái (sao "Bình" chỉ nhận `chung`) và mọi
+    điều kiện câu sách nêu kèm đúng với cung (`_dieu_kien_dat`)."""
+    kb = kb if kb is not None else _kb("tuvi_sach_ghi.json")["muc"]
+    tt = _trang_thai(do_sang)
+    ra = []
+    for m in (kb.get(sao) or {}).get(cung) or []:
+        k = m.get("khi", "chung")
+        # SX-D: chính câu sách nói "nhập miếu / miếu vượng" mà không nói vế hãm → chỉ khi sao Miếu / Vượng (Đắc, Bình chưa
+        # tới); chỉ nói vế hãm → chỉ khi sao Hãm. Câu nói cả hai vế (庙旺…陷地…) giữ như `khi` ghi.
+        mieu, ham = bool(_MIEU_HAN.search(m["han"])), "陷" in m["han"]
+        if (mieu and not ham and do_sang not in _MIEU) or (ham and not mieu and do_sang != "Hãm"):
+            continue
+        if (k == "chung" or k == tt) and _dieu_kien_dat(m["han"], sao, ten_sao, hoa, chi):
+            ra.append((m, f"Sao {sao} ở cung {cung}" + (f" · {_KHI_TV[k]}" if k in _KHI_TV else "")))
+    return ra
 
 
 # ───────────────────────── Bát tự ─────────────────────────

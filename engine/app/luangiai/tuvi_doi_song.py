@@ -284,10 +284,10 @@ def _hop_cung(ch: str, ten: str, cc: dict, ghep: bool) -> list[dict]:
         if not bo_manh:
             ra.append(_hop("diem_manh", _tieu_de(van["manh"], L("tvds.td.diem_manh_ve", f"Điểm mạnh về {t}", t=t)),
                            van["manh"], [cu], _ma("ds", ch, goc, trang, "manh"), w if nhom == "sang" else 0.4,
-                           _cu_vi=[cu_vi]))
+                           _cu_vi=[cu_vi], _sao=None if s["muon"] else (s["ten"], ten, ds, nhom)))
         ra.append(_hop("luu_y", _tieu_de(van["de_vap"], L("tvds.td.de_vap_ve", f"Điều dễ vấp về {t}", t=t)),
                        van["de_vap"], [cu], _ma("ds", ch, goc, trang, "vap"), w if nhom == "ham" else w * 0.45,
-                       huong=van["loi_khuyen"], _cu_vi=[cu_vi]))
+                       huong=van["loi_khuyen"], _cu_vi=[cu_vi], _sao=None if s["muon"] else (s["ten"], ten, ds, nhom)))
     for x in cc["hoa"]:
         m = kb.hoa_linh_vuc(x["hoa"], ten) or {}
         y0, lk0 = _HOA_MAC_DINH[x["hoa"]]
@@ -1535,6 +1535,10 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     kh.gon_bao_cao({"cot_loi": cot_loi, "chuong": ds})
     from app.luangiai import luu_y_mang as lym  # noqa: PLC0415
     luu_y_mang = lym.dung(ds, "tuvi", muc_cung={k: v["muc"] for k, v in cc.items()})
+    # SX-D (2026-11-24): câu Toàn Thư của đúng sao × cung × độ sáng gắn vào hộp luận (một bộ chọn với khối lá số) — chỉ
+    # thêm trường `sach` của hộp; mức, nội dung, mã kiểm chứng không đổi.
+    from app.luangiai import sach_hop  # noqa: PLC0415
+    sach_hop.gan_tuvi(ds, ls, hc.tuoi_tron(sinh["ngay"], ngay_xem))
     if tom_y_phai:    # RS-3: nguyên tắc Tử Vân (tóm ý) khớp lá số → một dòng "Vì sao nói vậy"; không đổi mức / hộp / mã.
         from app.luangiai import tu_van_thien_ly as tvtl  # noqa: PLC0415
         tvtl.ap_tuvi(ds, ls, nam_am_xem, nam_am_sinh)

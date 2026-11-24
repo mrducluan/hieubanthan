@@ -45,7 +45,11 @@
      "y": "Có anh chị lớn tuổi hơn để nương tựa.",
      "nhom": "A",
      "chu_de": "gia_dinh",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "ham",
+      "khac": "Sách xưa nói có anh chị lớn tuổi để nương tựa — tức là bạn được người đi trước che chở; lời ở trên nói bạn tự nhận vai người lớn trong nhóm — tức là bạn phải đứng ra gánh thay."
+     }
     },
     {
      "khi": "ham",
@@ -111,7 +115,11 @@
      "y": "Tiền của đủ đầy, kho rương không thiếu.",
      "nhom": "A",
      "chu_de": "tien_bac",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "ham",
+      "khac": "Sách xưa nói tiền của đủ đầy — tức là kho rương không thiếu; lời ở trên nói khi tiền chưa dư vẫn chi giữ hình ảnh — tức là tiền thường đang chật."
+     }
     },
     {
      "khi": "ham",
@@ -179,7 +187,11 @@
      "y": "Người giúp việc, cộng sự đông và đắc lực, giúp mình làm ra của.",
      "nhom": "A",
      "chu_de": "ban_be",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "ham",
+      "khac": "Sách xưa nói người giúp việc, cộng sự đông và đắc lực — tức là có nhiều người giúp mình làm ra của; lời ở trên nói quanh bạn ít người giúp được việc lớn — tức là chỉ có vài người thân quý."
+     }
     },
     {
      "khi": "ham",
@@ -703,7 +715,11 @@
      "chu_de": "suc_khoe",
      "ham_y": "Nên chú ý giấc ngủ, huyết áp; nhức đầu lặp lại nhiều thì đi khám.",
      "viec": "Đo huyết áp ba buổi sáng trong tuần và ghi lại; cao hoặc thất thường thì đi khám.",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói sao này gắn với vùng đầu — tức là hay nhức đầu khi trời trở; lời ở trên nói sách gắn với mắt và nhịp tim — tức là một phần cơ thể khác."
+     }
     },
     {
      "khi": "ham",
@@ -1021,7 +1037,11 @@
      "y": "Khi sao sáng thì người giúp việc không ít, gọi một tiếng nhiều người thưa; cùng Thiên Phủ thì người làm càng đông.",
      "nhom": "A",
      "chu_de": "ban_be",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói người giúp việc không ít, gọi một tiếng nhiều người thưa — tức là dễ có người theo; lời ở trên nói bạn khó giữ người lâu — tức là người làm cùng hay rời đi."
+     }
     },
     {
      "khi": "ham",
@@ -1065,7 +1085,11 @@
      "y": "Khi sao sáng và đứng một mình thì được thừa hưởng cơ nghiệp lớn của ông cha.",
      "nhom": "A",
      "chu_de": "nha_cua",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói được thừa hưởng cơ nghiệp lớn của ông cha — tức là nhờ của cải tổ tiên để lại; lời ở trên nói của để dành vững dần nhờ tích luỹ có kế hoạch — tức là tự bạn gây dựng."
+     }
     },
     {
      "khi": "ham",
@@ -1328,7 +1352,11 @@
      "y": "Khi sao sáng thì việc chữ nghĩa hay điều hành đều hợp, không gặp sao khó là tốt; cùng Cự Môn thì bắt đầu nhỏ, về sau lớn dần.",
      "nhom": "A",
      "chu_de": "cong_viec",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói việc chữ nghĩa hay điều hành đều hợp — tức là bạn đứng được cả vai cần quyết đoán; lời ở trên nói bạn ngại việc khó, ngại vị trí có áp lực."
+     }
     }
    ],
    "Điền Trạch": [
@@ -1372,7 +1400,11 @@
      "chu_de": "tong_quan",
      "ham_y": "Nên chú ý tách điều lo được khỏi điều không lo được.",
      "viec": "Viết ra ba điều đang lo, đánh dấu điều nào mình làm gì được ngay trong tuần.",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "ham",
+      "khac": "Sách xưa nói lo nhiều vui ít — tức là trong lòng hay nặng trĩu; lời ở trên nói bạn dễ buông xuôi, nghĩ thôi kệ — tức là bỏ qua, không lo nghĩ."
+     }
     }
    ],
    "Phụ Mẫu": [
@@ -1463,12 +1495,16 @@
      "khi": "chung",
      "han": "廉贞三度作新郎",
      "am": "Liêm Trinh tam độ tác tân lang",
-     "y": "Sách ví sao này ở đây là đường vợ chồng không êm ngay từ đầu, cần vun nhiều hơn người.",
+     "y": "Sách ví đường vợ chồng dễ phải bắt đầu lại hơn một lần, cần vun nhiều hơn người.",
      "nhom": "C",
      "chu_de": "tinh_duyen",
      "ham_y": "Nên chú ý chậm lại ở bước quyết định, và đã chọn thì học cách sửa thay vì bỏ.",
      "viec": "Cùng người ấy thống nhất một \"luật cãi nhau\": không nhắc chuyện cũ, không bỏ đi giữa chừng.",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói đường vợ chồng dễ phải bắt đầu lại hơn một lần — tức là khó trọn một lần; lời ở trên nói bạn chung thuỷ, mong giữ trọn — tức là một lòng bền lâu."
+     }
     },
     {
      "khi": "sang",
@@ -1852,7 +1888,11 @@
      "y": "Cùng Liêm Trinh hay Vũ Khúc thì kiếm tiền nơi phố chợ sầm uất, làm được nhà buôn lớn.",
      "nhom": "A",
      "chu_de": "di_lai",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói kiếm tiền nơi phố chợ sầm uất, làm được buôn bán lớn; lời ở trên nói ra ngoài bạn ngại thử môi trường mới, chỉ muốn ở chỗ quen."
+     }
     }
    ],
    "Nô Bộc": [
@@ -1990,7 +2030,7 @@
      "khi": "ham",
      "han": "更遇羊陀火铃酒色邪淫下贱夭折",
      "am": "Cánh ngộ Dương Đà Hoả Linh, tửu sắc tà dâm, hạ tiện yểu chiết",
-     "y": "Khi sao yếu lại đi cùng các sao khó, sách gắn với nếp sống dễ sa vào rượu chè, tình cảm nhiều ngả, phải tự thân làm nhiều và sức bền về lâu dài chưa dày.",
+     "y": "Khi sao yếu lại đi cùng các sao khó, sách gắn với nếp sống dễ sa vào rượu chè, tình cảm nhiều ngả, dễ bị người coi nhẹ và sức bền về lâu dài chưa dày.",
      "nhom": "C",
      "chu_de": "suc_ben",
      "ham_y": "Nên chú ý giữ nếp sống điều độ và rõ ràng trong quan hệ; điều người xưa dặn ở đây là giữ sức.",
@@ -2420,7 +2460,11 @@
      "y": "Khi sao sáng lại gặp sao Hoả, sao Linh, sách ghi hợp nghề cần quyết đoán, xông pha, nắm được quyền lớn.",
      "nhom": "A",
      "chu_de": "cong_viec",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói hợp nghề cần quyết đoán, xông pha, nắm quyền lớn; lời ở trên nói hợp bán hàng, dịch vụ — tức là việc cần làm người khác thích mình."
+     }
     },
     {
      "khi": "ham",
@@ -2488,7 +2532,11 @@
      "chu_de": "gia_dinh",
      "ham_y": "Nên chú ý giữ sợi dây với cha mẹ ruột dù ở xa hay đã có gia đình riêng.",
      "viec": "Tuần này gửi cho cha mẹ một tấm ảnh hoặc lời nhắn kể mình đang làm gì.",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "ham",
+      "khac": "Sách xưa nói sớm rời nhà cha mẹ, có khi sống với cha mẹ nuôi hay bên nhà vợ — tức là ít ở gần cha mẹ; lời ở trên nói bạn nói chuyện thoải mái nên cha mẹ thấy gần — tức là gần gũi, thân thiết."
+     }
     },
     {
      "khi": "sang",
@@ -2571,7 +2619,11 @@
      "chu_de": "tinh_duyen",
      "ham_y": "Nên chú ý cách nói khi bất đồng: nói việc, không nói người.",
      "viec": "Tuần này khi sắp cãi nhau, xin dừng mười phút rồi mới nói tiếp.",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói đường vợ chồng dễ thiếu hoà khí, cần vun nhiều — tức là hai người hay lệch nhau; lời ở trên nói hai người gỡ được gần như mọi chuyện bằng cách ngồi nói — tức là khá dễ hoà."
+     }
     },
     {
      "khi": "sang",
@@ -2709,7 +2761,11 @@
      "y": "Khi sao sáng, sách ghi làm nghề cần quyết đoán, kỷ luật thì có quyền có vị; theo việc sách vở giấy tờ lại khó bền.",
      "nhom": "A",
      "chu_de": "cong_viec",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói hợp việc cần quyết đoán, kỷ luật, còn việc sách vở khó bền — tức là hợp việc xông pha hơn bàn giấy; lời ở trên nói hợp nghề sống bằng lời và lý như luật, giáo dục, nghiên cứu — tức là việc chữ nghĩa."
+     }
     },
     {
      "khi": "ham",
@@ -3071,7 +3127,11 @@
      "chu_de": "gia_dinh",
      "ham_y": "Nên chú ý chủ động vun với cha mẹ, đừng đợi rảnh.",
      "viec": "Tuần này đặt một lịch cố định mỗi tuần để gọi về nhà.",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "ham",
+      "khac": "Sách xưa nói sớm phải xa cha mẹ, sớm tự lo cho mình — tức là ít ở bên cha mẹ; lời ở trên nói bạn đứng giữa cha mẹ và người trong nhà, nói đỡ bên này bên kia — tức là ở sát cha mẹ hằng ngày."
+     }
     }
    ]
   },
@@ -3216,7 +3276,11 @@
      "y": "Sách ghi nhiều người giúp việc và họ làm cho mình khá lên; đi cùng sao Thiên Đồng thì có người trung thành giữ nhà.",
      "nhom": "A",
      "chu_de": "ban_be",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói nhiều người giúp việc và họ làm cho mình khá lên — tức là được người dưới đỡ; lời ở trên nói ai cũng dựa vào bạn mà ít ai đỡ lại — tức là bạn phải gánh thay cho người khác."
+     }
     },
     {
      "khi": "chung",
@@ -3641,7 +3705,11 @@
      "y": "Khi sao ở cung Tý, Ngọ, sách ghi tích được nhiều vàng bạc, của quý; ở cung Thìn, Tuất tiền tài cũng thịnh.",
      "nhom": "A",
      "chu_de": "tien_bac",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói tích được nhiều vàng bạc, của quý — tức là giữ và dồn được của; lời ở trên nói tiền vào ra mạnh, dễ chi lớn cho ý tưởng mới trước khi sinh lời — tức là khó giữ tiền lại."
+     }
     },
     {
      "khi": "ham",
@@ -3730,7 +3798,7 @@
      "khi": "sang",
      "han": "破军庙旺武职轩胜",
      "am": "Phá Quân miếu vượng võ chức hiên thắng",
-     "y": "Khi sao sáng, sách ghi hợp nghề cần xông pha, mở đường, làm thì nổi trội.",
+     "y": "Khi sao sáng, sách ghi hợp nghề võ, nghề cần sức và kỷ luật, làm thì nổi trội.",
      "nhom": "A",
      "chu_de": "cong_viec",
      "nguon": "tu_vi_dau_so_toan_thu"
@@ -3755,7 +3823,11 @@
      "y": "Khi sao ở cung Tý, Ngọ, sách ghi giữ được nhà đất ông bà và làm cho thịnh, có điều nhà đất có năm tăng có năm giảm.",
      "nhom": "A",
      "chu_de": "nha_cua",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói giữ được nhà đất ông bà và làm cho thịnh — tức là nhờ của tổ tiên để lại mà gìn giữ; lời ở trên nói hay sửa nhà, chuyển nhà nhiều lần — tức là chỗ ở thay đổi, chưa ở yên."
+     }
     },
     {
      "khi": "ham",
@@ -3788,7 +3860,11 @@
      "y": "Khi đi cùng sao Tử Vi, sách ghi lòng được yên vui.",
      "nhom": "A",
      "chu_de": "tong_quan",
-     "nguon": "tu_vi_dau_so_toan_thu"
+     "nguon": "tu_vi_dau_so_toan_thu",
+     "doi_chieu": {
+      "o": "sang",
+      "khac": "Sách xưa nói khi đi cùng sao lớn thì lòng được yên vui — tức là trong lòng an ổn; lời ở trên nói khó yên với những gì đang có — tức là luôn thấy cần đổi một điều gì đó."
+     }
     }
    ],
    "Phụ Mẫu": [

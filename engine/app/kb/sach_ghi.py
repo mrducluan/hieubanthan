@@ -10,12 +10,23 @@ Chủ dự án chốt: lấy HẾT nội dung có ích của sách, kể cả c�
                                                                nói giảm, nói vòng, luôn kèm việc giữ gìn; không số tuổi,
                                                                không tên bệnh hiểm nghèo, không gán cho người đọc.
 
+SX-C3 (chủ dự án đổi 2026-11-24) — nhóm B và C nay NÓI SÁT NGUYÊN VĂN: người đọc được biết sách ghi đúng điều gì.
+  · mục B / C đã viết lại mang cờ `sat: true` — khi đó `y` là nghĩa SÁT chữ Hán (thuật lại sách, không nói với người đọc
+    "bạn sẽ…"), hiển thị kèm âm Hán Việt và câu kết "lời trích nguyên văn — Hiểu Bản Thân chỉ trích lại, không chịu trách
+    nhiệm pháp lý về nội dung của sách";
+  · chỉ nhóm PHÁN RẤT NẶNG vẫn nói giảm thành lời dặn giữ gìn (`_CAM_SAT`): chết / yểu / thọ ngắn → "nên khám sức khoẻ
+    thường xuyên"; tai nạn, thương tật → "nhớ cẩn thận khi đi lại"; người thân mất → "chăm sóc sức khoẻ người ấy"; đoán thai
+    → "khám thai đúng lịch"; bệnh hiểm nghèo → bộ phận + đi khám; tù ngục → "cẩn thận giấy tờ, pháp luật";
+  · giữ nguyên: người chưa đủ 18 tuổi không nhận nhóm C; nhóm C không vào tiêu đề, tóm tắt, thẻ chia sẻ, thông báo đẩy,
+    lời nhắc AI; câu hỏi trực tiếp về tuổi thọ / bệnh và khủng hoảng vẫn qua cổng an toàn riêng.
+
 Mỗi mục là một dict phẳng:
   han     nguyên văn chữ Hán, KHÔNG dấu câu, là chuỗi con của kho nguồn `nguon` (≤ 80 chữ)
   am      phiên âm Hán Việt của đúng câu ấy
   y       nghĩa tiếng Việt ĐÃ nói giảm (1–2 câu, lời đời thường, không thuật ngữ)
   nhom    "A" | "B" | "C"
   chu_de  một mã trong CHU_DE
+  sat     (B, C — SX-C3) `true` = `y` là nghĩa SÁT chữ Hán; chỉ nhóm phán rất nặng nói giảm (xem `_CAM_SAT`)
   ham_y   (B, C bắt buộc) câu "Nên chú ý …" / điều người xưa muốn dặn
   viec    (B, C bắt buộc) một việc nhỏ làm được ngay; chủ đề sức khoẻ / sức bền phải có ý đi khám
   nguon   tên tệp kho nguồn (không đuôi), vd "than_tuong_toan_bien"
@@ -63,13 +74,24 @@ _CAM_CUM = ("đoản mệnh", "đoản thọ", "tổn thọ", "giảm thọ", "m
 # Tên riêng mang chữ "nặng" (tên sao, tên du niên, thần sát) — bỏ ra trước khi soi chữ nặng.
 _TEN_RIENG = re.compile(r"破軍|破军|七殺|七杀|絕命|绝命|天刑|劫殺|劫杀|劫煞|病符|弔客|吊客|喪門|丧门|亡神|孤辰|寡宿|六煞|五鬼|禍害|祸害|"
                         r"化忌|忌星|地劫|羊刃|陽刃|阳刃|白虎|官符|死符|歲破|岁破|大耗|小耗|災煞|灾煞|傷官|伤官|七煞|天哭|破碎|截路")
-_GIOI_HAN = {"han": 80, "y": 260, "ham_y": 200, "viec": 200}
+_GIOI_HAN = {"han": 80, "y": 280, "ham_y": 200, "viec": 200}
+# SX-C3: `sat` nói sát nguyên văn — chỉ còn cấm nhóm phán rất nặng + lời gán cho người đọc + vật phẩm.
+_CAM_SAT_TU = re.compile(r"(?<![\wÀ-ỹ])(chết|yểu|giết|ngục|dâm|mù|què|điên|bùa|ngải)(?![\wÀ-ỹ])", re.I)
+_CAM_SAT = ("đoản mệnh", "đoản thọ", "tổn thọ", "giảm thọ", "tuổi thọ", "thọ yểu", "mất sớm", "năm mất", "tự tử", "tự sát",
+            "sảy thai", "đoạ thai", "khó sinh", "tuyệt tự", "tuyệt tử", "tuyệt hậu", "ung thư", "đột quỵ", "suy thận",
+            "tù tội", "ngồi tù", "hạ tiện", "đê tiện", "ăn mày", "ăn xin", "tàn tật", "tật nguyền", "lăng loàn",
+            "giải hạn", "cúng sao", "trấn yểm", "vật phẩm", "chắc chắn", "bạn sẽ", "sẽ bị", "sẽ gặp", "sẽ mất", "sẽ mắc",
+            "số bạn", "đoán bệnh")
 
 # Sách chỉ có bản dịch hiện đại → chỉ tóm ý (mục `tom_y: true`); tên hiển thị một chỗ.
 TEN_SACH_TOM_Y = {"duong_trach_tam_yeu": "Dương Trạch Tam Yếu", "bat_trach_minh_kinh": "Bát Trạch Minh Kính"}
 
 # Lời khung (một chỗ): môn nào cũng dùng đúng ba khuôn này.
 CAU_KET = "Đây là ghi chép của người xưa, đọc để tham khảo và giữ gìn, không phải lời đoán riêng cho bạn."
+# SX-C3: khối có câu nhóm B / C nói sát nguyên văn → câu kết nêu rõ đây là lời trích, ai chịu trách nhiệm về nội dung.
+CAU_KET_TRICH = ("Các câu trên là lời trích nguyên văn từ sách xưa. Hiểu Bản Thân chỉ trích lại để bạn tham khảo: đó là "
+                 "ghi chép của người xưa, không phải lời đoán riêng cho bạn, và Hiểu Bản Thân không chịu trách nhiệm pháp "
+                 "lý về nội dung của sách.")
 CAU_KET_SUC_KHOE = "Chuyện sức khoẻ thì nghe bác sĩ, không nghe sách tướng số."
 
 
@@ -147,10 +169,17 @@ def kiem_muc(m: dict, vi_tri: str = "") -> list[str]:
         for k in ("ham_y", "viec"):
             if not m.get(k):
                 them(f"nhóm {m['nhom']} thiếu `{k}`")
+    if m.get("sat") is not None and m.get("sat") is not True:
+        them("`sat` chỉ nhận giá trị true")
+    if m.get("sat") and m["nhom"] == "A":
+        them("`sat` chỉ dùng cho nhóm B / C")
     if m["chu_de"] in _CAN_KHAM and m["nhom"] in ("B", "C") and "khám" not in ((m.get("viec") or "") + (m.get("ham_y") or "")).lower():
         them("chủ đề sức khoẻ / sức bền phải có ý đi khám trong `viec` hoặc `ham_y`")
     for k in ("y", "ham_y", "viec"):
         t = (m.get(k) or "")
+        if k == "y" and m.get("sat"):                       # SX-C3: nghĩa sát — chỉ cấm nhóm phán rất nặng
+            loi += [f"{vi_tri}: {x}" if vi_tri else x for x in kiem_sat(t)]
+            continue
         if (x := _CAM_TU.search(t)):
             them(f"`{k}` có từ chưa nói giảm: «{x.group()}»")
         for c in _CAM_CUM:
@@ -158,6 +187,17 @@ def kiem_muc(m: dict, vi_tri: str = "") -> list[str]:
                 them(f"`{k}` có cụm chưa nói giảm: «{c}»")
         if re.search(r"[一-鿿]", t):
             them(f"`{k}` còn chữ Hán")
+    return loi
+
+
+def kiem_sat(t: str) -> list[str]:
+    """SX-C3 — luật cho nghĩa sát nguyên văn: được nói thẳng điều sách chê; chỉ nhóm phán rất nặng phải nói giảm."""
+    loi = []
+    if (x := _CAM_SAT_TU.search(t or "")):
+        loi.append(f"`sat` có từ phải nói giảm: «{x.group()}»")
+    loi += [f"`sat` có cụm phải nói giảm: «{c}»" for c in _CAM_SAT if c in (t or "").lower()]
+    if re.search(r"[一-鿿]", t or ""):
+        loi.append("`sat` còn chữ Hán")
     return loi
 
 
@@ -206,6 +246,8 @@ def loi(m: dict, co_am: bool = True) -> str:
     am = f" ({m['am'].rstrip('.')})" if co_am and m.get("am") else ""
     if m["nhom"] == "A":
         return f"Sách xưa ghi «{m['han']}»{am} — {m['y']}"
+    if m.get("sat"):                                         # SX-C3: nói sát nguyên văn
+        return f"Sách xưa ghi nguyên văn «{m['han']}»{am} — nghĩa là: {m['y']} {m['ham_y']}"
     if m["nhom"] == "B":
         return f"Sách xưa ghi «{m['han']}»{am} — {m['y']} {m['ham_y']}"
     return f"Sách xưa có nhắc «{m['han']}»{am}. Hàm ý theo ghi chép xưa: {m['y']} {m['ham_y']}"
@@ -214,7 +256,9 @@ def loi(m: dict, co_am: bool = True) -> str:
 def cau_ket(cac: list[dict]) -> str:
     """Câu kết của một khối: có mục nhóm C → câu "ghi chép của người xưa"; có chủ đề sức khoẻ → thêm câu bác sĩ."""
     ra = []
-    if any(m["nhom"] == "C" for m in cac):
+    if any(m["nhom"] in ("B", "C") and m.get("sat") for m in cac):
+        ra.append(CAU_KET_TRICH)
+    elif any(m["nhom"] == "C" for m in cac):
         ra.append(CAU_KET)
     if any(m["chu_de"] in _CAN_KHAM for m in cac):
         ra.append(CAU_KET_SUC_KHOE)

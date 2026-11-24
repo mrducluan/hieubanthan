@@ -75,6 +75,17 @@ Next.js 16 App Router (React 19) + TypeScript strict / Supabase (Postgres, Auth,
   viết lại, không chép lời bản dịch. Bùa, trấn yểm, vật phẩm: không nạp vào lời. **Thai sản, trẻ nhỏ, tên chứng hay gặp (SX-C2, chủ dự án 2026-11-15)**: lời sách xưa ĐƯỢC đưa vào ở mọi mảng nhưng chỉ dạng gợi ý giữ gìn — "lúc mang thai nên khám đúng lịch", "nên khám để sớm nhận ra chứng … hay gặp ở phần này" — không đoán kết quả của thai (sảy thai, khó sinh, sinh đôi…), không bệnh hiểm nghèo, không "sẽ bị / dễ mắc" (`sach_ghi._CAM_CUM`). **Câu hỏi trực
   tiếp** "sống tới bao nhiêu tuổi / năm nào mất / có bị <bệnh> không" và khủng hoảng **giữ nguyên cổng cũ** (SK-1b, an toàn).
   Kế hoạch + bảng nói giảm: `docs/KE-HOACH-NAP-SACH-XUA.md`.
+  **SX-C3 (chủ dự án đổi 2026-11-24, thay phần "nói giảm" của nhóm B và C ở trên)**: câu sách nhóm B (tiền, việc, đi lại,
+  kiện tụng, tình cảm) và C (bệnh, sống chết, thai, con cái, người thân) nay **NÓI SÁT NGUYÊN VĂN** — mục mang `sat: true`,
+  `y` là nghĩa sát chữ Hán (thuật lại sách: "Sách xưa ghi nguyên văn «…» (âm) — nghĩa là: …"), kèm câu kết **"lời trích
+  nguyên văn từ sách xưa — Hiểu Bản Thân chỉ trích lại, không phải lời đoán riêng cho bạn, không chịu trách nhiệm pháp lý
+  về nội dung của sách"** (`sach_ghi.CAU_KET_TRICH`). Được nói thẳng: nghèo, hao tài, mất cơ nghiệp, cô độc, thị phi,
+  kiện tụng, lận đận, xa cha mẹ, vợ chồng xung khắc / lập gia đình hơn một lần, muộn / ít con, bộ phận hay yếu. **Vẫn nói
+  giảm chỉ nhóm phán rất nặng** (`sach_ghi._CAM_SAT`): chết / yểu / thọ ngắn → "nên khám sức khoẻ thường xuyên"; tai nạn,
+  thương tật → "nhớ cẩn thận khi đi lại"; người thân mất do "khắc" → "quan tâm, chăm sóc sức khoẻ người ấy"; đoán thai →
+  "khám thai đúng lịch"; bệnh hiểm nghèo → bộ phận + đi khám; tù ngục → "cẩn thận giấy tờ, pháp luật". Giữ nguyên: người
+  chưa đủ 18 tuổi / chưa rõ tuổi không nhận nhóm C; nhóm C không vào tiêu đề, tóm tắt, thẻ chia sẻ, thông báo đẩy, lời
+  nhắc AI; câu hỏi trực tiếp về tuổi thọ / bệnh và khủng hoảng vẫn qua cổng an toàn (SK-1b); hệ thống vẫn không tự phán.
 - Đổi lịch âm: thuật toán Hồ Ngọc Đức, xử lý múi giờ VN trước 1975
 - Ranh giới giờ Tý: **ĐÃ CHỐT `SWITCH_AT_0000`** (quyết định người vận hành,
   2026-08-15) — sinh 23:00–23:59 thuộc ngày hôm đó, giờ Tý. Hằng

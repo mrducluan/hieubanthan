@@ -86,7 +86,7 @@ def _loc_c(chon: list[dict], tuoi: int | None) -> tuple[list[dict], int]:
 def _sach(m: dict) -> dict:
     """Một câu sách (theo số đo / theo cung) cho người dùng: không `han_kho`, phiên âm chỉ ở nhóm A (như `_mot`)."""
     ra = {k: m[k] for k in ("ma", "han", "nhom", "chu_de", "y")}
-    if m["nhom"] == "A":
+    if m["nhom"] == "A" or m.get("sat"):                # SX-C3: câu nói sát nguyên văn kèm âm Hán Việt
         ra["am"] = m["am"]
     for k in ("ham_y", "viec"):
         if m.get(k):

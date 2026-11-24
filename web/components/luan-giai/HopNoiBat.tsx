@@ -10,7 +10,7 @@ import { doanCoThuatNgu, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 import type { BangTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
 import { useChuBaoCao } from "./chu-bao-cao";
-import { TEN_CHI_PHI, type HangLop, type Hop, type LoaiHop } from "./kieu";
+import { TEN_CHI_PHI, type HangLop, type Hop, type LoaiHop, type SachHop } from "./kieu";
 
 /** Nhãn bản Việt (giữ để nơi khác dùng); hiển thị đọc theo ngôn ngữ qua `useChuBaoCao` (khoá loai.<loại>). */
 export const LOAI_HOP: Record<LoaiHop, { nhan: string; Icon: LucideIcon }> = {
@@ -33,11 +33,11 @@ export function ngayDuong(iso: string): string {
   return m ? `${Number(m[3])}/${Number(m[2])}/${m[1]}` : iso;
 }
 
-export function ViSao({ canCu, thuatNgu, nho = false }: { canCu?: string[]; thuatNgu?: ThuatNgu[]; nho?: boolean }) {
+export function ViSao({ canCu, thuatNgu, nho = false, sach }: { canCu?: string[]; thuatNgu?: ThuatNgu[]; nho?: boolean; sach?: SachHop[] }) {
   const [mo, setMo] = useState(false);
   const id = useId();
   const c = useChuChung();
-  if (!canCu?.length) return null;
+  if (!canCu?.length && !sach?.length) return null;
   return (
     <div className="mt-2" data-testid="vi-sao">
       <button type="button" aria-expanded={mo} aria-controls={id} onClick={() => setMo((v) => !v)}
@@ -47,8 +47,25 @@ export function ViSao({ canCu, thuatNgu, nho = false }: { canCu?: string[]; thua
       </button>
       <div id={id} hidden={!mo} className="mt-1.5 space-y-1 border-l-2 border-line pl-3 text-xs leading-relaxed text-fg-faint print:block"
         data-testid="can-cu">
-        {doanCoThuatNgu(canCu.join("\n\n"), thuatNgu)}
+        {canCu?.length ? doanCoThuatNgu(canCu.join("\n\n"), thuatNgu) : null}
+        {sach?.map((x) => <CauSach key={x.han ?? x.loi} x={x} />)}
       </div>
+    </div>
+  );
+}
+
+/** SX-D: một câu sách xưa đi kèm hộp — nguồn · nguyên văn (âm Hán Việt chỉ nhóm A) · lời đã nói giảm · việc · chỗ sách
+ *  nói khác lời của hộp · câu kết (nhóm C / sức khoẻ). Chữ thường, không màu đỏ. */
+function CauSach({ x }: { x: SachHop }) {
+  const { c: chu } = useChuBaoCao();
+  return (
+    <div className="mt-2 border-t border-line/60 pt-2 text-fg-muted" data-testid="hop-sach" data-nhom={x.nhom}>
+      <p className="font-semibold text-fg-faint">{chu("sach_xua")} · {x.sach}</p>
+      {x.han && <p className="mt-0.5 font-han">«{x.han}»{x.am ? ` (${x.am})` : ""}</p>}
+      <p className="mt-0.5">{x.loi}</p>
+      {x.viec && <p className="mt-0.5"><b className="font-semibold">{chu("thu")}</b> {x.viec}</p>}
+      {x.khac && <p className="mt-1" data-testid="hop-sach-khac"><b className="font-semibold">{chu("sach_khac")}</b> {x.khac}</p>}
+      {x.cau_ket && <p className="mt-0.5 italic">{x.cau_ket}</p>}
     </div>
   );
 }
@@ -115,7 +132,7 @@ export function HopNoiBat({ hop, thuatNgu, className }: { hop: Hop; thuatNgu?: T
           <CalendarClock className="size-3.5 shrink-0" aria-hidden /> {khoang}
         </p>
       )}
-      <ViSao canCu={hop.can_cu} thuatNgu={thuatNgu} nho />
+      <ViSao canCu={hop.can_cu} thuatNgu={thuatNgu} nho sach={hop.sach} />
       {hop.ma_mau && !tat && (
         <div className="mt-auto pt-3">
           <KiemChung loai={loai} mau={hop.ma_mau} phai={hop.phai ?? phai} tyLe={tyLe[hop.ma_mau]}
