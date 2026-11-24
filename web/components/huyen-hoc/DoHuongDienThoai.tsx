@@ -281,8 +281,8 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
   const tn = tenTheo(kq?.ten_hien, en);
   const loiHien = loi ?? loiCam;
   return (
-    <section className="glass rounded-2xl p-5" aria-labelledby="do-huong" data-testid="do-huong" data-pha={cam.pha}>
-      <h2 id="do-huong" className="flex items-center gap-2 text-xl"><Navigation className="size-5 text-gold" aria-hidden /> {cheDo === "nha" ? t("dh.tieu_de_nha") : t("dh.tieu_de_ke")}</h2>
+    <section className="glass rounded-2xl p-5" aria-labelledby="do-huong-tieu-de" data-testid="do-huong" data-pha={cam.pha}>
+      <h2 id="do-huong-tieu-de" className="flex items-center gap-2 text-xl"><Navigation className="size-5 text-gold" aria-hidden /> {cheDo === "nha" ? t("dh.tieu_de_nha") : t("dh.tieu_de_ke")}</h2>
       {laBan && (
         <div className="mt-2 flex flex-wrap gap-1.5" role="group" aria-label={t("dh.dung_de")}>
           {([["nha", t("dh.che_do_nha")], ["ke_do", t("dh.che_do_ke")]] as const).map(([m, nhan]) => (
