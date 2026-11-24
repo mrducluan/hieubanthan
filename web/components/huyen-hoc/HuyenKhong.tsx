@@ -60,34 +60,37 @@ const MAU_TT: Record<string, string> = {
 /** Mã trạng thái sao (engine trả chữ Việt) → khoá bảng chữ `hk.tt.<…>`. */
 const KHOA_TT: Record<string, string> = { "vượng": "vuong", "sinh": "sinh", "thoái": "thoai", "suy": "suy", "tử": "tu" };
 
-const LUOSHU_CUNG_ORDER = ["Trung cung", "Càn", "Đoài", "Cấn", "Ly", "Khảm", "Khôn", "Chấn", "Tốn"];
+/** Bốn lớp số trong mỗi ô, theo thứ tự hiện khi bấm "Xem từng lớp" (chỉ là thứ tự HIỂN THỊ — số do engine trả). */
+const LOP = ["van", "son", "huong", "ln"] as const;
+type Lop = (typeof LOP)[number];
 
-export function HuyenKhong({ doToaGoiY, cungGoiY }: { doToaGoiY?: number | null; cungGoiY?: string | null } = {}) {
+export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
   const [namXay, setNamXay] = useState("2024");
   const [cach, setCach] = useState<"son" | "do">("son");
   const [toa, setToa] = useState("Tý");
   const [doLa, setDoLa] = useState("");
   const [lop, setLop] = useState({ van: true, son: true, huong: true, ln: true });
-  const [buocBay, setBuocBay] = useState(9);
+  // Số lớp đã hiện (4 = đủ). "Xem từng lớp" hiện lần lượt vận → sơn → hướng → năm; không mô phỏng đường bay.
+  const [buocLop, setBuocLop] = useState(LOP.length);
+  const [daXemLop, setDaXemLop] = useState(false);
   const timerRef = useRef<number | null>(null);
   useEffect(() => () => { if (timerRef.current != null) window.clearInterval(timerRef.current); }, []);
 
-  const khoiBan = () => {
-    if (timerRef.current != null) window.clearInterval(timerRef.current);
-    const reduced = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) { setBuocBay(9); return; }
-    setBuocBay(1);
-    let step = 1;
-    timerRef.current = window.setInterval(() => {
-      step += 1;
-      setBuocBay(step);
-      if (step >= 9 && timerRef.current != null) {
-        window.clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-    }, 200);
+  const xemTungLop = () => {
+    if (timerRef.current != null) { window.clearInterval(timerRef.current); timerRef.current = null; }
     ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong_khoi_ban" });
+    setDaXemLop(true);
+    const giam = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (giam) { setBuocLop(LOP.length); return; }
+    let buoc = 1;
+    setBuocLop(buoc);
+    timerRef.current = window.setInterval(() => {
+      buoc += 1;
+      setBuocLop(buoc);
+      if (buoc >= LOP.length && timerRef.current != null) { window.clearInterval(timerRef.current); timerRef.current = null; }
+    }, 600);
   };
+  const hienLop = (k: Lop) => lop[k] && LOP.indexOf(k) < buocLop;
   // PT-V1: độ toạ đo bằng la bàn điện thoại → điền sẵn vào ô "Nhập độ la bàn".
   useEffect(() => {
     if (doToaGoiY == null) return;
@@ -118,9 +121,6 @@ export function HuyenKhong({ doToaGoiY, cungGoiY }: { doToaGoiY?: number | null;
   const [kiem, setKiem] = useState(false);
   const [ban, setBan] = useState<Ban | null>(null);
   const [chonCung, setChonCung] = useState<string | null>(null);
-  useEffect(() => {
-    if (cungGoiY && ban?.cung.some((c) => c.cung === cungGoiY)) setChonCung(cungGoiY);
-  }, [cungGoiY, ban]);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
   const { c: t, en } = useChuPT();
@@ -273,29 +273,21 @@ export function HuyenKhong({ doToaGoiY, cungGoiY }: { doToaGoiY?: number | null;
             </div>
           )}
 
-          {/* Thanh điều khiển Khởi Bàn (Lạc Thư) & 4 lớp sao */}
+          {/* Bật / tắt bốn lớp số + xem lần lượt từng lớp (chỉ đổi cách hiển thị số engine đã trả) */}
           <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-line/60 bg-bg/30 px-3 py-2 text-xs" data-testid="hk-thanh-dieu-khien">
-            <Button type="button" size="sm" variant="outline" onClick={khoiBan} data-testid="hk-khoi-ban">
-              {buocBay < 9 ? (en ? `Casting ${buocBay}/9…` : `Đang bay ${buocBay}/9…`) : (en ? "▶ Cast Chart (Luoshu)" : "▶ Khởi Bàn (Lạc Thư)")}
+            <Button type="button" size="sm" variant="outline" onClick={xemTungLop} data-testid="hk-khoi-ban">
+              {buocLop < LOP.length ? t("hk.lop_dang", { n: String(buocLop), tong: String(LOP.length) }) : t("hk.lop_xem")}
             </Button>
-            <div className="flex flex-wrap items-center gap-3 text-fg-muted">
-              {([
-                ["van", en ? "Period" : "Vận bàn"],
-                ["son", en ? "Mountain" : "Sơn tinh"],
-                ["huong", en ? "Facing" : "Hướng tinh"],
-                ["ln", en ? "Annual" : "Lưu niên"],
-              ] as const).map(([k, nhan]) => (
-                <label key={k} className="inline-flex cursor-pointer items-center gap-1.5">
-                  <input
-                    type="checkbox"
-                    checked={lop[k]}
-                    onChange={(e) => setLop((p) => ({ ...p, [k]: e.target.checked }))}
-                    data-testid={`hk-lop-${k}`}
-                  />
-                  <span>{nhan}</span>
+            <div className="flex flex-wrap items-center gap-x-3 text-fg-muted">
+              {LOP.map((k) => (
+                <label key={k} className="inline-flex min-h-9 cursor-pointer items-center gap-1.5">
+                  <input type="checkbox" className="size-4 accent-[rgb(var(--gold))]" checked={lop[k]}
+                    onChange={(e) => setLop((p) => ({ ...p, [k]: e.target.checked }))} data-testid={`hk-lop-${k}`} />
+                  <span>{t(`hk.lop.${k}`)}</span>
                 </label>
               ))}
             </div>
+            <p className="sr-only" role="status" data-testid="hk-lop-trang-thai">{daXemLop && buocLop >= LOP.length ? t("hk.lop_du") : ""}</p>
           </div>
 
           <div className="mx-auto grid max-w-md grid-cols-3 gap-1.5" role="table" aria-label={t("hk.ban_aria")}>
@@ -308,29 +300,32 @@ export function HuyenKhong({ doToaGoiY, cungGoiY }: { doToaGoiY?: number | null;
                 (ban.thanh_mon?.phu.dung_duoc && ban.thanh_mon.phu.cung === c.cung),
               );
               const dangChon = chonCung === c.cung;
-              const sttBay = LUOSHU_CUNG_ORDER.indexOf(c.cung);
-              const daBay = sttBay < buocBay;
-              const dangBay = sttBay === buocBay - 1 && buocBay < 9;
+              // Nhãn đọc màn hình chỉ nêu lớp đang hiện (lớp đang ẩn không đọc ra).
+              const tenO = { cung: tn("cung_hk", c.cung), phuong: tn("huong", c.phuong) };
+              const so: Record<Lop, string> = { son: String(c.son), huong: String(c.huong), van: String(c.van), ln: String(ban.luu_nien.cung[c.cung]) };
+              const duLop = LOP.every(hienLop);
+              const nhanO = duLop
+                ? t("hk.o_aria", { ...tenO, ...so })
+                : t("hk.o_khung", { ...tenO, ds: (["son", "huong", "van", "ln"] as const).filter(hienLop).map((k) => t(`hk.o_p.${k}`, { so: so[k] })).join(", ") });
               return (
                 <button key={c.cung} type="button" role="cell" aria-pressed={dangChon}
                   onClick={() => { setChonCung(c.cung); ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong_cung" }); }}
-                  aria-label={t("hk.o_aria", { cung: tn("cung_hk", c.cung), phuong: tn("huong", c.phuong), son: String(c.son), huong: String(c.huong), van: String(c.van), ln: String(ban.luu_nien.cung[c.cung]) })}
+                  aria-label={nhanO}
                   className={cn("relative aspect-square rounded-xl border p-2 text-left transition motion-reduce:transition-none hover:border-gold/80",
                     laHuong ? "border-gold/70 bg-gold/[0.07]" : laToa ? "border-moon/60 bg-moon/[0.06]" : "border-line/70 bg-bg/40",
-                    dangBay && "border-gold bg-gold/15",
                     dangChon && "ring-2 ring-gold")}>
                   <p className="text-center text-[0.68rem] text-fg-faint">{c.cung === "Trung cung" ? t("hk.trung_cung") : `${tn("cung_hk", c.cung)} · ${tn("huong", c.phuong)}`}{laToa ? t("hk.nhan_toa") : laHuong ? t("hk.nhan_huong") : ""}</p>
                   <div className="mt-1 flex items-center justify-between px-1 font-serif text-3xl leading-none sm:text-4xl">
-                    <span className={cn(MAU_TT[tt(c.son)], (!daBay || !lop.son) && "opacity-15")} title={t("hk.son_title", { so: String(c.son), tt: ttTen(tt(c.son)) })}>{c.son}</span>
-                    <span className={cn(MAU_TT[tt(c.huong)], (!daBay || !lop.huong) && "opacity-15")} title={t("hk.huong_title", { so: String(c.huong), tt: ttTen(tt(c.huong)) })}>{c.huong}</span>
+                    <span className={cn(MAU_TT[tt(c.son)], !hienLop("son") && "invisible")} title={t("hk.son_title", { so: String(c.son), tt: ttTen(tt(c.son)) })}>{c.son}</span>
+                    <span className={cn(MAU_TT[tt(c.huong)], !hienLop("huong") && "invisible")} title={t("hk.huong_title", { so: String(c.huong), tt: ttTen(tt(c.huong)) })}>{c.huong}</span>
                   </div>
-                  <p className={cn("mt-1 text-center font-serif text-xl text-fg-muted", (!daBay || !lop.van) && "opacity-15")}>{c.van}</p>
+                  <p className={cn("mt-1 text-center font-serif text-xl text-fg-muted", !hienLop("van") && "invisible")}>{c.van}</p>
                   {laThanhMon && (
                     <span className="absolute bottom-1.5 left-1.5 rounded bg-jade/20 px-1 py-0.5 text-[0.58rem] font-medium text-jade">
                       {en ? "Gate" : "Thành Môn"}
                     </span>
                   )}
-                  <span className={cn("absolute bottom-1.5 right-2 text-[0.65rem] text-cinnabar", (!daBay || !lop.ln) && "opacity-15")} title={t("hk.ln_title")}>{ban.luu_nien.cung[c.cung]}</span>
+                  <span className={cn("absolute bottom-1.5 right-2 text-[0.65rem] text-cinnabar", !hienLop("ln") && "invisible")} title={t("hk.ln_title")}>{ban.luu_nien.cung[c.cung]}</span>
                 </button>
               );
             })}

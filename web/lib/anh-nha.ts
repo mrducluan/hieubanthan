@@ -1,7 +1,8 @@
 // PT-V2 — "Để máy đọc ảnh": thu nhỏ ảnh nhà NGAY TRÊN TRÌNH DUYỆT trước khi gửi (cạnh dài ≤ 1280 px, JPEG ~0,82,
-// ≤ ~1 MB base64, ≤ 3 ảnh). Vẽ lại qua canvas nên EXIF (toạ độ GPS, máy ảnh, giờ chụp) tự rơi; hướng xoay EXIF được
+// ≤ ~1 MB base64, ≤ 6 ảnh, tổng ≤ 3,6 triệu ký tự). Vẽ lại qua canvas nên EXIF (toạ độ GPS, máy ảnh, giờ chụp) tự rơi; hướng xoay EXIF được
 // áp trước khi vẽ (`imageOrientation: "from-image"`). Không lưu gì — chuỗi base64 chỉ sống trong lượt gọi.
-// Phần thuần (không DOM) tách riêng để kiểm được: kichThuocThuNho, boTienToData, tongKichThuoc.
+// Phần thuần (không DOM) tách riêng để kiểm được: tranBase64MoiAnh, kichThuocThuNho, boTienToData, tongKichThuoc.
+// Tệp này phải nạp được trong Node (test): không import alias `@/`, DOM chỉ dùng BÊN TRONG hàm.
 
 export const CANH_DAI_TOI_DA = 1280;
 export const CHAT_LUONG_JPEG = 0.82;
@@ -14,7 +15,8 @@ export interface AnhGui { du_lieu: string; loai: LoaiAnh }
 
 /** Trần base64 cho mỗi ảnh khi gửi `soAnh` ảnh (1..6) để tổng không bao giờ vượt `DOC_ANH_TONG` (4.000.000). */
 export function tranBase64MoiAnh(soAnh: number): number {
-  const n = Math.max(1, Math.min(SO_ANH_TOI_DA, Math.round(soAnh)));
+  const so = Number.isFinite(soAnh) ? Math.round(soAnh) : 1;       // NaN / vô cực → coi như 1 ảnh (không trả NaN)
+  const n = Math.max(1, Math.min(SO_ANH_TOI_DA, so));
   return Math.min(BASE64_TOI_DA, Math.floor(TONG_BASE64_AN_TOAN / n));
 }
 

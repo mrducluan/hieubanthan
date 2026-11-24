@@ -63,12 +63,16 @@ interface BaoCao {
     veto_da_xac_nhan?: { ma: string; tieu_de: string }[]; goc_nhin?: GocNhin };
 }
 /** 11 ý định chung (KB y_dinh_chung.json của engine) — chỉ mã để chọn; nhãn ở bảng chữ (`nc.y.<mã>`); engine tra đồ thị. */
-const Y_DINH = ["nha_cua", "kinh_doanh_tien", "cong_viec", "tinh_cam", "gia_dinh", "suc_khoe", "hoc_hanh", "quan_he", "di_xa", "thoi_diem", "ban_than"] as const;
+export const Y_DINH = ["nha_cua", "kinh_doanh_tien", "cong_viec", "tinh_cam", "gia_dinh", "suc_khoe", "hoc_hanh", "quan_he", "di_xa", "thoi_diem", "ban_than"] as const;
 
 const HUONG8 = ["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"];
 const VAI: ThanhVien["vai"][] = ["vo", "chong", "con", "cha_me", "khac"];
 
-export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: number | null }) {
+export function NhaCuaBan({ sinh, doHuongGoiY, yDinhGoiY }: {
+  sinh: Sinh; doHuongGoiY: number | null;
+  /** HG-1: câu hỏi người dùng vừa chọn ở thẻ "Hỏi gì xem nấy" → chọn sẵn điều băn khoăn tương ứng (đổi tay vẫn được). */
+  yDinhGoiY?: (typeof Y_DINH)[number] | null;
+}) {
   const [doHuong, setDoHuong] = useState("");
   const [huong, setHuong] = useState("");
   const [theo, setTheo] = useState<"cua" | "ban_cong">("cua");
@@ -78,6 +82,7 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
   const [yDinh, setYDinh] = useState<string | null>(null);
+  useEffect(() => { if (yDinhGoiY) setYDinh(yDinhGoiY); }, [yDinhGoiY]);
   // UI-PT 4 (Y7): bài đọc TRƯỚC khi bấm "Tôi đã xử lý" một dấu hiệu lớn → so trước–sau theo chương.
   const [soSanh, setSoSanh] = useState<{ truoc: BaoCao; ma: string; tieu_de: string } | null>(null);
   // UI-PT2 P7: đầu vào của bài đọc đang hiện — máy chủ đọc lại rồi ký thẻ chia sẻ (không ký ở trình duyệt).
