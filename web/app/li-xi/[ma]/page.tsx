@@ -17,10 +17,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const moTa = d.co && d.loi_chuc
     ? `“${d.loi_chuc}” — Mở bao lì xì để đọc trọn Báo cáo Năm Đinh Mùi 2027 của riêng bạn.`
     : "Mở bao lì xì để đọc trọn Báo cáo Năm Đinh Mùi 2027 trên Hiểu Bản Thân.";
-  const qs = new URLSearchParams({ mau: d.mau_thiep ?? "do_son" });
-  if (d.ten_nguoi_tang) qs.set("ten", d.ten_nguoi_tang);
-  if (d.loi_chuc) qs.set("chuc", d.loi_chuc);
-  const og = `${siteUrl()}/og/li-xi?${qs.toString()}`;
+  const og = d.co && MA_LI_XI_RE.test(ma)
+    ? `${siteUrl()}/og/li-xi?ma=${encodeURIComponent(ma)}`
+    : `${siteUrl()}/og/li-xi?mau=do_son`;
   return {
     title: tieuDe,
     description: moTa,

@@ -1,19 +1,20 @@
-// GET /og/li-xi?mau=do_son&ten=…&chuc=… — Thẻ chia sẻ Zalo/Facebook 1200×630 cho Bao Lì Xì Báo Cáo Tết Đinh Mùi 2027.
-// Zero-PII: chỉ hiện tên hiển thị người tặng (tuỳ chọn) + lời chúc đã lọc, tuyệt đối không ngày sinh / dữ liệu người nhận.
+// GET /og/li-xi?ma=… (hoặc ?mau=do_son cho ảnh mặc định của /li-xi-tet-2027) — Thẻ chia sẻ Zalo/Facebook 1200×630.
+// Chống lạm dụng: KHÔNG nhận tên / lời chúc tự do từ query string — mọi chữ cá nhân hoá đọc từ DB theo mã `ma` hợp lệ.
+// Zero-PII: chỉ hiện tên hiển thị người tặng (tuỳ chọn) + lời chúc đã lọc trong DB, tuyệt đối không ngày sinh.
 import { ImageResponse } from "next/og";
 import { napPhong } from "@/lib/og-chung";
-import { mauThiepTheoMa } from "@/lib/li-xi-tet";
+import { docLiXi } from "@/lib/li-xi-may-chu";
+import { MA_LI_XI_RE, mauThiepTheoMa } from "@/lib/li-xi-tet";
 
 export const runtime = "nodejs";
 
-const lamSach = (v: string | null, max: number) =>
-  (v ?? "").replace(/https?:\/\/\S+|@\S+|\b0\d{8,10}\b/gi, "").replace(/\s+/g, " ").trim().slice(0, max);
-
 export async function GET(req: Request) {
   const url = new URL(req.url);
-  const thiep = mauThiepTheoMa(url.searchParams.get("mau"));
-  const ten = lamSach(url.searchParams.get("ten"), 40);
-  const chuc = lamSach(url.searchParams.get("chuc"), 120) ||
+  const ma = url.searchParams.get("ma") ?? "";
+  const d = MA_LI_XI_RE.test(ma) ? await docLiXi(ma) : { co: false };
+  const thiep = mauThiepTheoMa(d.co ? d.mau_thiep : url.searchParams.get("mau"));
+  const ten = d.co && d.ten_nguoi_tang ? d.ten_nguoi_tang.trim().slice(0, 40) : "";
+  const chuc = (d.co && d.loi_chuc ? d.loi_chuc.trim().slice(0, 120) : "") ||
     "Chúc năm Đinh Mùi 2027 vạn sự hanh thông, tâm an trí sáng, mọi quyết định lớn đều đúng thời điểm.";
   const fonts = await napPhong();
 
@@ -31,7 +32,6 @@ export async function GET(req: Request) {
           padding: 44,
         }}
       >
-        {/* Viền ép kim kép */}
         <div
           style={{
             display: "flex",

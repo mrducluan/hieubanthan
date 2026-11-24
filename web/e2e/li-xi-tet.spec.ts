@@ -62,8 +62,8 @@ test("/li-xi/[ma]: noindex, mở bao 3D hiện thiệp & nút nhận, mã lạ b
   await expect(page.getByTestId("lx-khong-co")).toBeVisible();
 });
 
-test("/og/li-xi trả ảnh PNG 200 & robots.txt chặn /li-xi/", async ({ request }) => {
-  const og = await request.get("/og/li-xi?mau=do_son&ten=Anh%20Minh&chuc=Chuc%20nam%20moi%202027");
+test("/og/li-xi trả ảnh PNG 200 (không nhận chữ tự do qua query) & robots.txt chặn /li-xi/", async ({ request }) => {
+  const og = await request.get("/og/li-xi?mau=do_son");
   expect(og.status()).toBe(200);
   expect(og.headers()["content-type"]).toContain("image/png");
 
