@@ -87,6 +87,20 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
   useEffect(() => { if (doHuongGoiY != null) setDoHuong(String(doHuongGoiY)); }, [doHuongGoiY]);
   // KC-2: hồ sơ nhà lưu trên máy điền sẵn một lần (người dùng đổi tay thì giữ tay).
   const nhaLuu = useHoSoNha();
+  // Đồng bộ khi người dùng vừa đo hướng hoặc nhập năm xây ở phần trên (Hỏi gì xem nấy / Đo hướng) sau khi trang đã mở:
+  // chỉ điền khi ô đang trống, không ghi đè số người dùng đã gõ tay.
+  const huongDoLuu = nhaLuu?.huong_do, huongLuu = nhaLuu?.huong, namXayLuu = nhaLuu?.nam_xay, theoLuu = nhaLuu?.theo;
+  useEffect(() => {
+    if (doHuongGoiY != null) return;
+    if (huongDoLuu != null) setDoHuong((c) => (c === "" ? String(huongDoLuu) : c));
+    else if (huongLuu) setHuong((c) => (c === "" ? huongLuu : c));
+  }, [huongDoLuu, huongLuu, doHuongGoiY]);
+  useEffect(() => {
+    if (namXayLuu != null) setNamXay((c) => (c === "" ? String(namXayLuu) : c));
+  }, [namXayLuu]);
+  useEffect(() => {
+    if (theoLuu) setTheo(theoLuu);
+  }, [theoLuu]);
   // UI-PT2 P5: điền lại khi đổi CĂN đang xem (id khác) — người dùng gõ tay trong cùng một căn thì giữ tay.
   const daDien = useRef<string | null>(null);
   useEffect(() => {

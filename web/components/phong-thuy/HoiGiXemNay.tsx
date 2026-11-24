@@ -311,6 +311,7 @@ export function HoiGiXemNay({
   }, [nha?.huong_do, nha?.nam_xay, nha?.toa, sinhKey]);
 
   const muc = DANH_SACH_HOI.find((x) => x.ma === chon) ?? DANH_SACH_HOI[0]!;
+  const canHo = nha?.loai_nha === "can_ho";
   const thieuHuong = Boolean(muc.can_huong && !coHuong);
   const thieuSinh = Boolean(muc.can_sinh && !coSinh);
   const tn = tenTheo(gopTenHien(doHuongKQ?.ten_hien, hkKQ?.ten_hien), en);
@@ -338,6 +339,7 @@ export function HoiGiXemNay({
         luuHoSoNha({
           huong_do: kq.do_huong,
           huong: undefined,
+          ...(canHo ? { theo: "ban_cong" } : {}),
           ...(namHopLe && !nha?.nam_xay ? { nam_xay: namHopLe } : {}),
         });
       } catch { /* bỏ qua */ }
@@ -550,9 +552,13 @@ export function HoiGiXemNay({
               </div>
               <div className="space-y-2.5 text-xs">
                 <p className="text-fg-muted">
-                  {en
-                    ? "Rotate the 24-Mountain dial, measure with your phone compass, or enter degrees directly to compute Kua & Flying Stars right here."
-                    : "Xoay mặt La Kinh 24 sơn, bấm đo bằng cảm biến điện thoại hoặc nhập số độ để tính Bát Trạch & Huyền Không ngay tại đây."}
+                  {canHo
+                    ? (en
+                      ? "Apartment: measure facing out from your largest balcony (or use satellite map) to lock direction & Flying Stars right here."
+                      : "Chung cư: đứng ở ban công lớn nhất nhìn ra ngoài (hoặc chấm ảnh vệ tinh) để chốt hướng & Huyền Không ngay tại đây.")
+                    : (en
+                      ? "Rotate the 24-Mountain dial, measure with your phone compass, or enter degrees directly to compute Kua & Flying Stars right here."
+                      : "Xoay mặt La Kinh 24 sơn, bấm đo bằng cảm biến điện thoại hoặc nhập số độ để tính Bát Trạch & Huyền Không ngay tại đây.")}
                 </p>
                 {camBien?.dangDo && camBien.ketQua && (
                   <p className="text-[11px] text-fg-muted" data-testid="hoi-la-kinh-on-dinh">
@@ -636,6 +642,16 @@ export function HoiGiXemNay({
               <Compass className="mr-1.5 size-3.5" aria-hidden />
               {t("hg.mo_la_kinh")}
             </Button>
+          )}
+          {chon === "bo_cuc" && (
+            <a
+              href="#vi-tri-vat"
+              data-testid="hoi-gi-do-vi-tri-vat"
+              className="inline-flex h-8 items-center gap-1.5 rounded-full border border-gold/50 bg-gold/10 px-3 text-xs font-medium text-gold hover:bg-gold/20"
+            >
+              <Smartphone className="size-3.5" aria-hidden />
+              {en ? "Stand in center & point phone" : "Đứng giữa nhà, chĩa điện thoại"}
+            </a>
           )}
           {onHoiTiep && (
             <Button
