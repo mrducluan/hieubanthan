@@ -203,8 +203,7 @@ async function docTho(): Promise<Record<string, unknown>> {
 }
 
 export const TAG_CAU_HINH = "cau-hinh";
-// Q-I3 (Phương án A): tăng TTL lên 300s (vẫn revalidateTag(TAG_CAU_HINH) ngay lập tức khi quản trị lưu cài đặt).
-const docCache = unstable_cache(docTho, ["cau-hinh-cong-khai"], { revalidate: 300, tags: [TAG_CAU_HINH] });
+const docCache = unstable_cache(docTho, ["cau-hinh-cong-khai"], { revalidate: 60, tags: [TAG_CAU_HINH] });
 
 /** Giá trị thô đang lưu (chưa áp mặc định) — trang quản trị dùng để biết khoá nào đã đặt. */
 export async function cauHinhDaLuu(): Promise<Record<string, unknown>> {
