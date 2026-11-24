@@ -168,18 +168,20 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
   // SD-1: khối sơ đồ nhà theo tỉ lệ vừa lưu câu trả lời Có / Không cho dấu hiệu nó gợi ý (hồ sơ nhà: `tu_so_do`,
   // `khai_khong`) → ô tích ở đây theo ngay, để lần "Xem luận bố cục" kế tiếp không ghi đè mất câu trả lời ấy.
   const khoaSoDo = `${(nhaLuu?.bo_cuc?.tu_so_do ?? []).join(",")}|${(nhaLuu?.bo_cuc?.khai_khong ?? []).join(",")}`;
-  const soDoTruoc = useRef<{ khoa: string; tu: string[] } | null>(null);
+  const soDoTruoc = useRef<{ khoa: string; tu: string[]; khong: string[] } | null>(null);
   useEffect(() => {
     if (nhaLuu === undefined) return;
     const b = nhaLuu?.bo_cuc;
     const tu = b?.tu_so_do ?? [];
-    const truoc = soDoTruoc.current;
-    soDoTruoc.current = { khoa: khoaSoDo, tu };
-    if (!truoc || truoc.khoa === khoaSoDo) return;            // lần đầu: khối điền hồ sơ ở trên đã lo
     const dangCo = b?.dau_hieu ?? [];
+    const khongLuu = (b?.khai_khong ?? []).filter((m) => !dangCo.includes(m));
+    const truoc = soDoTruoc.current;
+    soDoTruoc.current = { khoa: khoaSoDo, tu, khong: khongLuu };
+    if (!truoc || truoc.khoa === khoaSoDo) return;            // lần đầu: khối điền hồ sơ ở trên đã lo
+    // Chỉ theo phần VỪA đổi trong hồ sơ (không đụng ô người dùng mới tích tay mà chưa lưu).
     const them = tu.filter((m) => !truoc.tu.includes(m));
-    const bo = [...truoc.tu.filter((m) => !tu.includes(m) && !dangCo.includes(m)), ...(b?.khai_khong ?? []).filter((m) => !dangCo.includes(m))];
-    const khong = (b?.khai_khong ?? []).filter((m) => !dangCo.includes(m));
+    const khong = khongLuu.filter((m) => !truoc.khong.includes(m));
+    const bo = [...truoc.tu.filter((m) => !tu.includes(m) && !dangCo.includes(m)), ...khong];
     setDau((s) => {
       if (them.every((m) => s.has(m)) && !bo.some((m) => s.has(m))) return s;
       const n = new Set(s); them.forEach((m) => n.add(m)); bo.forEach((m) => n.delete(m)); return n;

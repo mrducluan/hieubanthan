@@ -145,7 +145,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
       if (g !== luot.current || !conSong.current) return;
       if (!hai) lan1.current = k.lan;
       setPhieu(r); setDoTay(doHienThi(r.do_huong)); setNhap("");
-      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "do_giu_yen", on_dinh: r.do.can_hieu_chinh ? "hieu_chinh" : r.do.on_dinh, so_mau_nhom: nhomSoMau(k.lan.mau.length) });
+      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "do_giu_yen", on_dinh: r.do.on_dinh, hieu_chinh: r.do.can_hieu_chinh ? 1 : 0, so_mau_nhom: nhomSoMau(k.lan.mau.length) });
       if (r.hai_lan) ghi("chart_interacted", { mo_dun: "phongthuy", kind: "do_hai_lan", nhieu: r.hai_lan.nhieu ? 1 : 0 });
     } catch (e) {
       if (g === luot.current && conSong.current) setLoi(e instanceof Error ? e.message : t("dh.loi_do"));
@@ -426,7 +426,7 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
           <p className="text-xs text-fg-faint">{kq.luu_y}</p>
           <div className="flex flex-wrap gap-2">
             {onDungToa && (
-              <Button size="sm" variant="secondary" onClick={() => onDungToa(kq.do_toa)}>{t("dh.dung_toa", { do: String(kq.do_toa) })}</Button>
+              <Button size="sm" variant="secondary" className="h-auto min-h-9 whitespace-normal py-1.5 text-left" onClick={() => onDungToa(kq.do_toa)}>{t("dh.dung_toa", { do: String(kq.do_toa) })}</Button>
             )}
             {neoVe && (
               <Button size="sm" onClick={() => veCauTraLoi()} data-testid="do-huong-ve-cau-tra-loi"><CornerLeftUp aria-hidden /> {t("dh.ve_cau_tra_loi")}</Button>

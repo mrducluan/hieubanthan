@@ -79,7 +79,7 @@ export function PhieuDo({ r, dang, onChot, onDoLai, onDoLan2, onMoBanDo }: {
           <Button onClick={onChot} disabled={dang} data-testid="phieu-chot"><Compass aria-hidden /> {t("dh.chot")}</Button>
         )}
         {duoc && onDoLan2 && (
-          <Button variant="secondary" onClick={onDoLan2} disabled={dang} data-testid="phieu-do-lan-2"><Footprints aria-hidden /> {t("dh.do_lan_2")}</Button>
+          <Button variant="secondary" onClick={onDoLan2} disabled={dang} data-testid="phieu-do-lan-2" className="h-auto min-h-11 whitespace-normal py-2 text-left"><Footprints aria-hidden /> {t("dh.do_lan_2")}</Button>
         )}
         <Button variant={duoc ? "ghost" : "secondary"} onClick={onDoLai} disabled={dang} data-testid="phieu-do-lai"><RotateCcw aria-hidden /> {t("dh.do_lai")}</Button>
         {hai?.nhieu && (

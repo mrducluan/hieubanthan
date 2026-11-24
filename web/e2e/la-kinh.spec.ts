@@ -154,7 +154,7 @@ test("đo hai điểm: lần hai lệch 20° → báo nhiễu, chặn Chốt, d�
   // đo lại từ đầu, lần hai gần trùng → engine gộp, chốt được
   await phieu.getByTestId("phieu-do-lai").click();
   await ban(page, [180, 180.2, 179.8]);
-  await expect(o.getByTestId("la-ban-giu-yen")).toBeEnabled();
+  await expect(o.getByTestId("la-ban-do-so")).toContainText("180°");
   phieu = await giuYen(page);
   await phieu.getByTestId("phieu-do-lan-2").click();
   await expect(o).toHaveAttribute("data-pha", "ngam");
@@ -187,7 +187,7 @@ test("máy dựng đứng: nhắc đặt phẳng, chưa cho đo; không có số
   const o = await moTrang(page);
   await ngam(page, [90]);
   await ban(page, [90], { beta: 80 });
-  await expect(o.getByTestId("la-ban-dang-ngam")).toContainText("nằm phẳng");
+  await expect(o.getByTestId("la-ban-dang-ngam")).toContainText("dựng quá");
   await expect(o.getByTestId("la-ban-giu-yen")).toBeDisabled();
   await o.getByTestId("la-ban-dung").click();
   await expect(o).toHaveAttribute("data-pha", "nghi");
