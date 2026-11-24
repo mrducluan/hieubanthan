@@ -12,6 +12,7 @@ import { danhMucDoHinh } from "@/lib/do-hinh";
 import { duongCuoiHoi, duongNam, duongNamTuoi, duongSinhCon, namTuoiIndex, namTuoiSeo } from "@/lib/nam";
 import { dsNuocSitemap, duongSinhNN } from "@/lib/sinh-nuoc-ngoai";
 import { NAM_SINH_SEO, duongHanNam, duongLamNha, duongLamNhaNam, duongSaoHanNam, duongXongDat, duongXongDatNam, lamNhaIndex, namAmHienTai, xongDatIndex } from "@/lib/tuoi-dan-gian";
+import { duongHoiDap, TINH_HUONG_HOI_DAP } from "@/lib/hoi-dap-mau";
 
 export const revalidate = 21600;
 
@@ -93,5 +94,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...nhomTheoMang(blog.filter((p) => !p.noindex)).map((g) => ({ url: urlDayDu(duongMangBlog(g.mang)), changeFrequency: "weekly" as const, priority: 0.5 })),
     // SEO-K: /blog/trang/2…n (trang 1 = /blog nằm trong TINH).
     ...Array.from({ length: soTrang(blog.length) - 1 }, (_, i) => ({ url: urlDayDu(duongTrangSo("/blog", i + 2)), changeFrequency: "weekly" as const, priority: 0.3 })),
+    // GĐ 3: thư viện Hỏi – Đáp tình huống đa hệ thống (/hoi-dap + 12 tình huống minh hoạ tổng hợp).
+    { url: urlDayDu("/hoi-dap"), changeFrequency: "weekly" as const, priority: 0.8 },
+    ...TINH_HUONG_HOI_DAP.map((t) => ({
+      url: urlDayDu(duongHoiDap(t.slug)), lastModified: t.ngayCapNhat, changeFrequency: "monthly" as const, priority: 0.7,
+    })),
   ];
 }

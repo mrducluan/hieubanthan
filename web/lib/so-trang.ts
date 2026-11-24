@@ -322,6 +322,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     tieu_de_seo: "Từ điển thuật ngữ Tử vi, Bát tự, Kinh Dịch, Phong thuỷ", h1: "Từ điển thuật ngữ — nói cho dễ hiểu",
     mo_ta_seo: "Hơn 200 thuật ngữ huyền học giải nghĩa bằng ngôn ngữ đời thường: cung Mệnh, Hoá Kỵ, nhật chủ, dụng thần, hào động, quẻ biến, sơn tinh, hướng tinh, số đường đời…",
   } },
+  { duong: "/hoi-dap", nhom: "tinh", ten: "Thư viện Hỏi – Đáp tình huống đa hệ", o: O_TINH, mac_dinh: {
+    tieu_de_seo: "Thư viện Hỏi – Đáp tình huống đa hệ: Tử vi · Bát tự · Thần số · Kinh Dịch · Phong thuỷ",
+    h1: "Thư viện Hỏi – Đáp tình huống đa hệ",
+    mo_ta_seo: "12 tình huống minh hoạ tổng hợp được phân tích đa góc nhìn (Tử vi, Bát tự, Thần số học, Kinh Dịch, Phong thuỷ) bởi Ban biên tập Hiểu Bản Thân: công việc, tài chính, gia đình, nhà cửa, nhịp nghỉ.",
+  } },
   { duong: "/phong-thuy/huong-hop-tuoi", nhom: "tinh", ten: "Hướng hợp tuổi", o: O_TINH, mac_dinh: {
     tieu_de_seo: "Hướng hợp tuổi: tuổi nào hợp hướng nào (1960–2005)", h1: "Tuổi nào hợp hướng nào?",
     mo_ta_seo: "Tra hướng nhà, hướng bếp, hướng giường hợp tuổi theo Bát trạch cho nam và nữ sinh từ 1960 đến 2005: mệnh quái, 4 hướng tốt, 4 hướng nên tránh.",
@@ -443,6 +448,8 @@ const MAU_CUM_GOC: readonly MauCumTrang[] = [
     bien: ["nam", "can_chi"], chu: CHU_HAN_NAM_CON },
   // Hồ sơ chuyên gia giữ trong code (E-E-A-T) — cụm chỉ cho đặt khối quanh hồ sơ.
   { mau_duong: "/tac-gia/{slug}", nhom: "cong_cu_con", ten: "Hồ sơ chuyên gia", o: ["khoi_cuoi"], nguon_kb: null, bien: ["slug"] },
+  // GĐ3 — Tình huống Hỏi – Đáp đa hệ minh hoạ (Ban biên tập Hiểu Bản Thân).
+  { mau_duong: "/hoi-dap/{slug}", nhom: "cong_cu_con", ten: "Hỏi – Đáp tình huống · từng bài", o: O_CUM, nguon_kb: null, bien: ["slug", "tieu_de"] },
 ];
 export const MAU_CUM: readonly MauCumTrang[] = MAU_CUM_GOC.map((m) => (m.mau_duong === "/tac-gia/{slug}" ? m : { ...m, hinh: HINH_CUM }));
 
