@@ -115,7 +115,7 @@ export default async function Page(p: P) {
           <Link href={L(`/thoi-gian-toi?nam=${n}`)!} className="inline-flex rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-bg" data-testid="nut-ca-nhan">{c("ca_nhan.nut", bien)}</Link>
           {!en && n === 2027 && (
             <Link href="/li-xi-tet-2027" className="inline-flex rounded-full border border-gold/50 px-5 py-2.5 text-sm font-medium text-gold hover:bg-gold/10" data-testid="nut-li-xi-2027">
-              Tặng Bao Lì Xì Báo Cáo 2027 →
+              Tặng LÌ XÌ TẾT 2027 →
             </Link>
           )}
         </div>

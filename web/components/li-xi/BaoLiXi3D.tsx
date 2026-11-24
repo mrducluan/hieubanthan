@@ -1,12 +1,17 @@
 "use client";
-// LX-2027 — Bao Lì Xì 3D thủ công Tết Đinh Mùi 2027 (4 chất liệu: Đỏ Son Hoàng Kim, Mai Vàng Phú Quý, Ngọc Bích An Khang,
-// Đêm Giao Thừa). Dùng motion/react sẵn có, 0 CDN ngoài, sạch CSP-2, tôn trọng prefers-reduced-motion.
+// LX-2027 — Bao Lì Xì 3D thủ công LÌ XÌ TẾT 2027 (4 chất liệu giấy × 4 hoạ tiết Tết = 16 tổ hợp).
+// Tích hợp texture giấy gấm đồng xu cổ, cành hoa mai/hoa đào, biểu trưng Linh Vật Đinh Mùi 2027, con dấu triện son,
+// hiệu ứng hoa rơi nhẹ (bật/tắt) và pháo hoa bung tia khi mở bao. Sạch CSP-2, 0 CDN ngoài, 0 hydration warning.
+import { useId } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Sparkles } from "lucide-react";
-import { mauThiepTheoMa, type MauThiep } from "@/lib/li-xi-tet";
+import { hoaTietTheoMa, mauThiepTheoMa, type HoaTietTet, type MauThiep } from "@/lib/li-xi-tet";
+import { BieuTrungDinhMui, CanhHoaRoi, CanhHoaXuan, ConDauTrien, PhaoHoaXuan, TextureGamCo } from "./HoaTietTet";
 
 interface Props {
   mauThiep: MauThiep;
+  hoaTiet?: HoaTietTet;
+  hoaRoi?: boolean;
   tenNguoiTang?: string | null;
   loiChuc?: string | null;
   daMo: boolean;
@@ -15,25 +20,35 @@ interface Props {
   compact?: boolean;
 }
 
-/** Cánh hoa mai 5 cánh vẽ bằng SVG nội dòng (nhẹ, sắc nét ở mọi mật độ điểm ảnh). */
-function HoaMai({ className, color }: { className?: string; color: string }) {
-  return (
-    <svg viewBox="0 0 40 40" className={className} aria-hidden>
-      {[0, 72, 144, 216, 288].map((deg) => (
-        <ellipse key={deg} cx="20" cy="10" rx="5.5" ry="8" fill={color} fillOpacity="0.22" transform={`rotate(${deg} 20 20)`} />
-      ))}
-      <circle cx="20" cy="20" r="3" fill={color} fillOpacity="0.45" />
-    </svg>
-  );
-}
-
-export function BaoLiXi3D({ mauThiep, tenNguoiTang, loiChuc, daMo, onMo, nhanNut = "Mở Bao Lì Xì Đinh Mùi 2027", compact = false }: Props) {
+export function BaoLiXi3D({
+  mauThiep,
+  hoaTiet,
+  hoaRoi = true,
+  tenNguoiTang,
+  loiChuc,
+  daMo,
+  onMo,
+  nhanNut = "Mở Bao LÌ XÌ TẾT 2027",
+  compact = false,
+}: Props) {
   const giam = useReducedMotion();
+  const patId = useId();
   const t = mauThiepTheoMa(mauThiep);
+  const hoa = hoaTietTheoMa(hoaTiet, mauThiep);
+  const mauCanh = hoa === "hoa_dao" ? "#fda4af" : hoa === "hoa_mai" ? "#fde047" : t.mauCanhHoa;
   const chucHien = (loiChuc ?? "").trim() || "Chúc năm Đinh Mùi 2027 vạn sự hanh thông, tâm an trí sáng, mọi quyết định lớn đều đúng thời điểm.";
 
   return (
     <div className={`relative mx-auto w-full ${compact ? "max-w-sm" : "max-w-md"} select-none`} data-testid="bao-li-xi-3d">
+      {/* Pháo hoa bung tia vàng kim ngay khoảnh khắc mở bao lì xì */}
+      {daMo && (
+        <div className="pointer-events-none absolute -inset-4 z-30 overflow-visible" aria-hidden data-testid="lx-phao-hoa">
+          <PhaoHoaXuan color={t.nhan} bungNo className="absolute -left-2 -top-2 size-24" />
+          <PhaoHoaXuan color="#fda4af" bungNo className="absolute -right-2 top-2 size-20" />
+          <PhaoHoaXuan color="#fde047" bungNo className="absolute right-8 -top-5 size-16" />
+        </div>
+      )}
+
       {/* Thiệp lời chúc trượt lên khi mở bao */}
       <motion.div
         initial={false}
@@ -43,9 +58,9 @@ export function BaoLiXi3D({ mauThiep, tenNguoiTang, loiChuc, daMo, onMo, nhanNut
         className={`relative z-20 mx-3 rounded-2xl border p-5 shadow-2xl ${daMo ? "mb-[-20px]" : "pointer-events-none h-0 overflow-hidden border-0 p-0"}`}
         style={{ background: "#fffaf0", borderColor: t.vien, color: "#2b1610" }}
       >
-        <div className="flex items-center justify-between text-[11px] font-medium uppercase tracking-[0.2em]" style={{ color: "#9a3412" }}>
-          <span>Thiệp Chúc Xuân Đinh Mùi</span>
-          <span>2027</span>
+        <div className="flex items-center justify-between gap-2">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#9a3412]">Thiệp LÌ XÌ TẾT 2027</span>
+          <ConDauTrien />
         </div>
         <p className="mt-3 font-serif text-lg leading-relaxed text-[#2b1610]">“{chucHien}”</p>
         <p className="mt-3 text-right text-xs font-medium text-[#7c2d12]">
@@ -57,17 +72,47 @@ export function BaoLiXi3D({ mauThiep, tenNguoiTang, loiChuc, daMo, onMo, nhanNut
       <div
         className="relative overflow-hidden rounded-3xl border-2 shadow-2xl"
         style={{
-          background: `radial-gradient(circle at 25% 15%, ${t.nenChinh}, ${t.nenPhu} 80%)`,
+          background: `radial-gradient(circle at 25% 15%, ${t.nenChinh}, ${t.nenPhu} 82%)`,
           borderColor: t.vien,
           color: t.chu,
         }}
       >
-        {/* Hoạ tiết góc ép kim + hoa mai */}
-        <HoaMai className="pointer-events-none absolute -right-4 -top-4 size-24" color={t.nhan} />
-        <HoaMai className="pointer-events-none absolute -bottom-5 -left-5 size-28 opacity-75" color={t.nhan} />
-        <div className="pointer-events-none absolute inset-2.5 rounded-2xl border opacity-40" style={{ borderColor: t.vien }} />
+        {/* Texture giấy gấm đồng xu cổ */}
+        <TextureGamCo id={`gam-${patId}`} color={t.vien} />
 
-        {/* Nắp bao lì xì lật khi mở */}
+        {/* Hiệu ứng cánh hoa mai / hoa đào rơi nhẹ */}
+        {hoaRoi && <CanhHoaRoi mau={mauCanh} />}
+
+        {/* Hoạ tiết Tết theo lựa chọn (4 kiểu) */}
+        {hoa === "hoa_mai" && (
+          <>
+            <CanhHoaXuan loai="mai" className="pointer-events-none absolute -right-2 -top-1 size-32 opacity-90" />
+            <CanhHoaXuan loai="mai" className="pointer-events-none absolute -bottom-2 -left-2 size-28 rotate-180 opacity-75" />
+          </>
+        )}
+        {hoa === "hoa_dao" && (
+          <>
+            <CanhHoaXuan loai="dao" className="pointer-events-none absolute -right-2 -top-1 size-32 opacity-90" />
+            <CanhHoaXuan loai="dao" className="pointer-events-none absolute -bottom-2 -left-2 size-28 rotate-180 opacity-75" />
+          </>
+        )}
+        {hoa === "linh_vat" && (
+          <>
+            <BieuTrungDinhMui color={t.nhan} className="pointer-events-none absolute -right-5 top-16 size-32 opacity-30" />
+            <CanhHoaXuan loai="mai" className="pointer-events-none absolute -bottom-3 -left-3 size-24 rotate-180 opacity-65" />
+          </>
+        )}
+        {hoa === "phao_hoa" && (
+          <>
+            <PhaoHoaXuan color={t.nhan} className="pointer-events-none absolute -right-3 -top-3 size-28 opacity-75" />
+            <PhaoHoaXuan color="#fda4af" className="pointer-events-none absolute -bottom-3 -left-3 size-24 opacity-60" />
+          </>
+        )}
+
+        {/* Khung viền kép ép kim */}
+        <div className="pointer-events-none absolute inset-2.5 rounded-2xl border opacity-45" style={{ borderColor: t.vien }} />
+
+        {/* Nắp bao lì xì lật 3D khi mở */}
         <motion.div
           initial={false}
           animate={daMo ? { rotateX: 165, opacity: 0.35 } : { rotateX: 0, opacity: 1 }}
@@ -79,16 +124,20 @@ export function BaoLiXi3D({ mauThiep, tenNguoiTang, loiChuc, daMo, onMo, nhanNut
           }}
           className="relative z-10 flex flex-col items-center rounded-b-[44%] px-6 pb-8 pt-6 text-center shadow-md"
         >
-          <p className="text-[11px] font-medium uppercase tracking-[0.28em]" style={{ color: t.nhan }}>
-            Xuân Đinh Mùi · 2027
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em]" style={{ color: t.nhan }}>
+            LÌ XÌ TẾT · ĐINH MÙI 2027
           </p>
           <p className="mt-1 font-serif text-xl font-semibold">
-            {tenNguoiTang?.trim() ? `${tenNguoiTang.trim()} lì xì bạn` : "Lì Xì Báo Cáo Năm 2027"}
+            {tenNguoiTang?.trim() ? `${tenNguoiTang.trim()} lì xì bạn` : "LÌ XÌ TẾT 2027"}
           </p>
         </motion.div>
 
-        {/* Con dấu sáp vàng / Nút mở bao */}
-        <div className="relative z-10 flex flex-col items-center px-6 pb-8 pt-6 text-center">
+        {/* Huy hiệu Linh Vật Đinh Mùi (khi chưa mở ở chế độ linh_vat) + Nút Mở con dấu sáp vàng */}
+        <div className="relative z-10 flex flex-col items-center px-6 pb-7 pt-5 text-center">
+          {!daMo && hoa === "linh_vat" && (
+            <BieuTrungDinhMui color={t.nhan} className="mb-3 size-16 opacity-90" />
+          )}
+
           {!daMo ? (
             <button
               type="button"
@@ -110,10 +159,14 @@ export function BaoLiXi3D({ mauThiep, tenNguoiTang, loiChuc, daMo, onMo, nhanNut
             </div>
           )}
 
-          <p className="mt-4 text-xs opacity-85">
+          <p className="mt-4 text-xs opacity-90">
             {!daMo ? nhanNut : "Trọn bộ Báo cáo Năm Đinh Mùi 2027 (Tử vi · Bát tự · Thần số · 9 việc lớn)"}
           </p>
-          <p className="mt-1 text-[11px] opacity-65">hieuban.com · Văn hoá tham khảo & tự soi</p>
+          <div className="mt-2.5 flex items-center gap-2 text-[11px] opacity-75">
+            <span>hieuban.com</span>
+            <span>·</span>
+            <span>Đinh Mùi Thiên Hà Thuỷ</span>
+          </div>
         </div>
       </div>
     </div>

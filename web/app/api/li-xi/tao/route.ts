@@ -67,7 +67,7 @@ export async function POST(req: Request) {
       orderId: ma,
       orderInfo: ma,
       amount: d.so_tien_vnd,
-      tenDon: `Hiểu Bản Thân · Lì xì Báo cáo Tết 2027 (${so_bao} bao)`,
+      tenDon: `Hiểu Bản Thân · LÌ XÌ TẾT 2027 (${so_bao} bao)`,
       redirectUrl: ve,
       ipnUrl: `${siteUrl()}/api/thanh-toan/webhook/pay2s`,
     });

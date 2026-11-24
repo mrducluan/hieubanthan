@@ -1,4 +1,4 @@
-// LX-2027 — Kiểm thử E2E cho Lì Xì Báo Cáo Tết Đinh Mùi 2027 (/li-xi-tet-2027, /li-xi/[ma], /og/li-xi, robots.txt).
+// LX-2027 — Kiểm thử E2E cho LÌ XÌ TẾT 2027 (/li-xi-tet-2027, /li-xi/[ma], /og/li-xi 3 khổ Social, robots.txt).
 import { test, expect } from "@playwright/test";
 import { kiemLoiChuc } from "../lib/li-xi-tet";
 
@@ -12,21 +12,35 @@ test("thuần: kiemLoiChuc chặn SĐT, email, link và chuỗi > 160 ký tự",
   expect(kiemLoiChuc("a".repeat(161))).toMatch(/160/);
 });
 
-test("/li-xi-tet-2027: 0 vi phạm CSP, chọn 4 mẫu thiệp & 3 gói 99k/249k/399k, mở thử Bao Lì Xì 3D, chặn SĐT khi mua", async ({ page }) => {
+test("/li-xi-tet-2027: 0 vi phạm CSP, 4 chất liệu × 4 hoạ tiết, hoa rơi & pháo hoa khi mở, 3 nút tải ảnh Social", async ({ page }) => {
   const vp: string[] = [];
   page.on("console", (m) => { if (/Content Security Policy/i.test(m.text())) vp.push(m.text()); });
   await page.route("**/api/li-xi/thong-tin", (r) => r.fulfill({ json: TT_BAT }));
 
   await page.goto("/li-xi-tet-2027");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("Lì Xì Báo Cáo Tết 2027");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("LÌ XÌ TẾT 2027");
   await expect(page.getByTestId("goi-lx-1")).toContainText("99.000 ₫");
   await expect(page.getByTestId("goi-lx-3")).toContainText("249.000 ₫");
   await expect(page.getByTestId("goi-lx-5")).toContainText("399.000 ₫");
+  await expect(page.getByTestId("lx-hoa-roi")).toBeVisible();
 
-  // Đổi chất liệu sang Ngọc Bích & bấm mở thử Bao Lì Xì 3D
+  // Tắt rồi bật lại hoa rơi
+  await page.getByTestId("nut-hoa-roi").click();
+  await expect(page.getByTestId("lx-hoa-roi")).toHaveCount(0);
+  await page.getByTestId("nut-hoa-roi").click();
+  await expect(page.getByTestId("lx-hoa-roi")).toBeVisible();
+
+  // Đổi chất liệu + hoạ tiết Hoa Đào + kiểm link tải ảnh Social cập nhật theo lựa chọn
   await page.getByTestId("mau-ngoc_bich").click();
+  await page.getByTestId("hoa-hoa_dao").click();
+  await expect(page.getByTestId("tai-social-doc")).toHaveAttribute("href", /khung=doc&mau=ngoc_bich&hoa=hoa_dao/);
+  await expect(page.getByTestId("tai-social-vuong")).toHaveAttribute("href", /khung=vuong/);
+  await expect(page.getByTestId("tai-social-ngang")).toHaveAttribute("href", /khung=ngang/);
+
+  // Bấm mở thử Bao Lì Xì 3D → hiện thiệp & pháo hoa
   await page.getByTestId("nut-mo-li-xi").click();
   await expect(page.getByTestId("bao-li-xi-3d")).toContainText("Đã mở bao lì xì");
+  await expect(page.getByTestId("lx-phao-hoa")).toBeVisible();
 
   // Nhập SĐT vào lời chúc → báo lỗi trước khi chuyển đăng nhập
   await page.locator("#lx-chuc").fill("Gọi 0912345678 nhận quà");
@@ -40,14 +54,15 @@ test("/li-xi-tet-2027: 0 vi phạm CSP, chọn 4 mẫu thiệp & 3 gói 99k/249k
   expect(vp).toEqual([]);
 });
 
-test("/li-xi-tet-2027 khi công tắc tắt: ẩn nút thanh toán, vẫn cho xem thử Bao Lì Xì 3D", async ({ page }) => {
+test("/li-xi-tet-2027 khi công tắc tắt: ẩn nút thanh toán, vẫn cho xem thử Bao Lì Xì 3D & tải ảnh Social", async ({ page }) => {
   await page.route("**/api/li-xi/thong-tin", (r) => r.fulfill({ json: TT_TAT }));
   await page.goto("/li-xi-tet-2027");
   await expect(page.getByTestId("lx-chua-mo")).toBeVisible();
   await expect(page.getByTestId("lx-nut-mua")).toHaveCount(0);
+  await expect(page.getByTestId("lx-social-studio")).toBeVisible();
 });
 
-test("/li-xi/[ma]: noindex, mở bao 3D hiện thiệp & nút nhận, mã lạ báo không tìm thấy", async ({ page }) => {
+test("/li-xi/[ma]: noindex, mở bao 3D hiện thiệp & pháo hoa, mã lạ báo không tìm thấy", async ({ page }) => {
   const ma = "abcdef123456";
   await page.route(`**/api/li-xi/${ma}`, (r) => r.fulfill({
     json: { co: true, ma, ten_nguoi_tang: "Anh Minh", loi_chuc: "Chúc năm mới bình an", mau_thiep: "mai_vang", nam: 2027, trang_thai: "san_sang", het_han: "2027-03-31", con_han: true },
@@ -56,16 +71,23 @@ test("/li-xi/[ma]: noindex, mở bao 3D hiện thiệp & nút nhận, mã lạ b
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
   await page.getByTestId("nut-mo-li-xi").click();
   await expect(page.getByTestId("lx-hop-nhan")).toBeVisible();
+  await expect(page.getByTestId("lx-phao-hoa")).toBeVisible();
   await expect(page.getByTestId("bao-li-xi-3d")).toContainText("Chúc năm mới bình an");
 
   await page.goto("/li-xi/ma-khong-hop-le");
   await expect(page.getByTestId("lx-khong-co")).toBeVisible();
 });
 
-test("/og/li-xi trả ảnh PNG 200 (không nhận chữ tự do qua query) & robots.txt chặn /li-xi/", async ({ request }) => {
-  const og = await request.get("/og/li-xi?mau=do_son");
-  expect(og.status()).toBe(200);
-  expect(og.headers()["content-type"]).toContain("image/png");
+test("/og/li-xi trả ảnh PNG 200 đủ 3 khổ (ngang / vuong / doc) & robots.txt chặn /li-xi/", async ({ request }) => {
+  for (const [khung, mau, hoa] of [
+    ["ngang", "do_son", "linh_vat"],
+    ["vuong", "mai_vang", "hoa_mai"],
+    ["doc", "ngoc_bich", "hoa_dao"],
+  ] as const) {
+    const og = await request.get(`/og/li-xi?khung=${khung}&mau=${mau}&hoa=${hoa}`);
+    expect(og.status(), `Khổ ${khung} phải trả 200`).toBe(200);
+    expect(og.headers()["content-type"]).toContain("image/png");
+  }
 
   const rb = await (await request.get("/robots.txt")).text();
   expect(rb).toContain("/li-xi/");

@@ -12,11 +12,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { ma } = await params;
   const d = MA_LI_XI_RE.test(ma) ? await docLiXi(ma) : { co: false };
   const tieuDe = d.co && d.ten_nguoi_tang
-    ? `${d.ten_nguoi_tang} gửi bạn Bao Lì Xì Tết Đinh Mùi 2027`
-    : "Bạn nhận được một Bao Lì Xì Báo Cáo Tết 2027";
+    ? `${d.ten_nguoi_tang} gửi bạn LÌ XÌ TẾT 2027`
+    : "Bạn nhận được một Bao LÌ XÌ TẾT 2027";
   const moTa = d.co && d.loi_chuc
     ? `“${d.loi_chuc}” — Mở bao lì xì để đọc trọn Báo cáo Năm Đinh Mùi 2027 của riêng bạn.`
-    : "Mở bao lì xì để đọc trọn Báo cáo Năm Đinh Mùi 2027 trên Hiểu Bản Thân.";
+    : "Mở bao LÌ XÌ TẾT 2027 để đọc trọn Báo cáo Năm Đinh Mùi 2027 trên Hiểu Bản Thân.";
   const og = d.co && MA_LI_XI_RE.test(ma)
     ? `${siteUrl()}/og/li-xi?ma=${encodeURIComponent(ma)}`
     : `${siteUrl()}/og/li-xi?mau=do_son`;

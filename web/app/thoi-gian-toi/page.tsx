@@ -46,7 +46,7 @@ export default async function Page(p: P) {
             <p>Thông tin chung của từng năm (Tết, Tam tai, tuổi làm nhà, xông đất):{" "}
               {n.cac_nam.map((x, i) => <span key={x}>{i > 0 && " · "}<Link href={duongNam(x)} className="text-gold underline">năm {x}</Link></span>)}.</p>
             <p>Muốn gửi tặng trọn bản đồ năm Đinh Mùi 2027 cho người thân, bạn bè?{" "}
-              <Link href="/li-xi-tet-2027" className="text-gold underline" data-testid="link-li-xi-tet-2027">Gửi Bao Lì Xì Tết 2027 →</Link></p>
+              <Link href="/li-xi-tet-2027" className="text-gold underline" data-testid="link-li-xi-tet-2027">Gửi LÌ XÌ TẾT 2027 →</Link></p>
           </div>
         )}
       </div>

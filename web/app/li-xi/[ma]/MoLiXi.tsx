@@ -6,7 +6,7 @@
 import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { useRouter } from "next/navigation";
-import { ArrowRight, CheckCircle2, Gift, Loader2, LogIn } from "lucide-react";
+import { ArrowRight, CheckCircle2, Download, Gift, Loader2, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ghi } from "@/lib/do-luong";
@@ -86,9 +86,9 @@ export function MoLiXi({ ma, banDau }: { ma: string; banDau: BaoLiXiCongKhai }) 
   return (
     <div className="mx-auto max-w-4xl space-y-10">
       <section className="space-y-6 text-center">
-        <p className="text-xs font-medium uppercase tracking-[0.24em] text-gold">Phong Bao Xuân Đinh Mùi · 2027</p>
+        <p className="text-xs font-medium uppercase tracking-[0.24em] text-gold">LÌ XÌ TẾT 2027 · XUÂN ĐINH MÙI</p>
         <h1 className="font-serif text-3xl font-semibold text-fg sm:text-4xl">
-          {bao.ten_nguoi_tang ? `${bao.ten_nguoi_tang} gửi tặng bạn một Bao Lì Xì` : "Bạn nhận được một Bao Lì Xì Tết 2027"}
+          {bao.ten_nguoi_tang ? `${bao.ten_nguoi_tang} gửi tặng bạn LÌ XÌ TẾT 2027` : "Bạn nhận được một Bao LÌ XÌ TẾT 2027"}
         </h1>
 
         <BaoLiXi3D
@@ -119,6 +119,11 @@ export function MoLiXi({ ma, banDau }: { ma: string; banDau: BaoLiXiCongKhai }) 
                     <Link href="/li-xi-tet-2027">
                       <Gift className="size-4" aria-hidden /> Gửi Lì Xì Đáp Lễ
                     </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="ghost">
+                    <a href={`/og/li-xi?khung=doc&ma=${encodeURIComponent(ma)}&tai=1`} download={`li-xi-tet-2027-${ma}-story.png`}>
+                      <Download className="size-4" aria-hidden /> Tải ảnh Story 9:16
+                    </a>
                   </Button>
                 </div>
               </div>
