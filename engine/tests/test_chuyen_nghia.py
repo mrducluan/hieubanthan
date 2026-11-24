@@ -54,7 +54,11 @@ def _chu(x):
 
 def test_loi_khong_phan_khong_hieu_chien():
     cum_cam = json.loads((DATA / "tuvi_doi_song_kb.json").read_text("utf-8"))["cum_cam"]
+    sat = {m["y"] for _, m in sg.cac_muc(KB) if m.get("sat")}            # SX-C3: nghĩa sát nguyên văn — luật riêng `kiem_sat`
     for t in _chu(KB):
+        if t in sat:
+            assert not sg.kiem_sat(t), t
+            continue
         tl = t.lower()
         assert not [c for c in CAM if c in tl], t
         assert not [c for c in cum_cam if c in tl], t
