@@ -77,3 +77,12 @@ def test_route_422():
     assert client.post(p, json={"do_huong": 10, "mau_2": [10]}).status_code == 422
     assert client.post(p, json={"mau": [1.0] * 241}).status_code == 422
     assert client.post(p, json={"mau": [10], "sai_so": -5}).status_code == 422
+
+
+def test_ban_anh_co_loi_tieng_anh():
+    import re
+    h = {"x-ngon-ngu": "en"}
+    d = client.post("/v1/phongthuy/do-huong", json={"mau": [180, 180.2], "mau_2": [200, 200.2], "sai_so": -1}, headers=h).json()
+    viet = re.compile(r"[ăâđêôơưáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ]", re.I)
+    assert not viet.search(d["do"]["loi"]) and not viet.search(d["hai_lan"]["loi"])
+    assert "figure-8" in d["do"]["loi"]
