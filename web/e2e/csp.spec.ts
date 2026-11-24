@@ -13,16 +13,16 @@ function ghiViPham(page: Page): string[] {
   return vp;
 }
 
-test("Q-I3 phân vùng thuần: allowlist trang công khai, bypass cookie đăng nhập / nháp / ?kw= / /en / lời mời cá nhân", () => {
-  for (const ok of ["/", "/than-so", "/tu-vi", "/than-so/y-nghia-so/so-7", "/phong-thuy/huong-hop-tuoi/cung-kham-bac", "/hop-doi", "/hop-doi/cap-so/so-chu-dao-1-va-2", "/ban-do-doi-ngu", "/goi-xem", "/tu-dien"]) {
+test("Q-I3 phân vùng thuần: allowlist trang công khai, loại trừ /goi-xem & trang theo giờ/ngày, bypass cookie đăng nhập / nháp / ?kw=", () => {
+  for (const ok of ["/", "/than-so", "/tu-vi", "/than-so/y-nghia-so/so-7", "/phong-thuy/huong-hop-tuoi/cung-kham-bac", "/hop-doi", "/hop-doi/cap-so/so-chu-dao-1-va-2", "/ban-do-doi-ngu", "/tu-dien"]) {
     expect(laDuongCongKhaiCache(ok), ok).toBe(true);
     expect(coTheCacheCongKhai({ method: "GET", pathname: ok, search: "", cookieNames: [] }), ok).toBe(true);
   }
-  for (const no of ["/quan-tri", "/quan-tri/cai-dat", "/tai-khoan", "/nap-sao", "/hoi-vien", "/ban-than", "/hoi-chuyen-gia", "/dang-nhap", "/hop-doi/abc123", "/ban-do-doi-ngu/moi", "/en", "/en/numerology"]) {
+  for (const no of ["/quan-tri", "/quan-tri/cai-dat", "/tai-khoan", "/nap-sao", "/hoi-vien", "/ban-than", "/goi-xem", "/hom-nay", "/xem-ngay-tot", "/ky-mon", "/thoi-gian-toi", "/hoi-chuyen-gia", "/dang-nhap", "/hop-doi/abc123", "/ban-do-doi-ngu/moi", "/en", "/en/numerology"]) {
     expect(laDuongCongKhaiCache(no), no).toBe(false);
     expect(coTheCacheCongKhai({ method: "GET", pathname: no, search: "", cookieNames: [] }), no).toBe(false);
   }
-  // Bypass khi có query (?kw=), cookie Supabase, draftMode, cookie hbt-goi-y-en, trình duyệt chỉ tiếng Anh hoặc non-GET.
+  // Bypass khi có query (?kw=), cookie Supabase, draftMode, trình duyệt chỉ tiếng Anh hoặc non-GET.
   expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "?kw=ngay-sinh", cookieNames: [] })).toBe(false);
   expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: ["sb-xyz-auth-token.0"] })).toBe(false);
   expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: ["__prerender_bypass"] })).toBe(false);
@@ -33,7 +33,7 @@ test("Q-I3 phân vùng thuần: allowlist trang công khai, bypass cookie đăng
   expect(coTheCacheCongKhai({ method: "POST", pathname: "/than-so", search: "", cookieNames: [] })).toBe(false);
 });
 
-test("Vùng 1 (public-edge): trang công khai vãng lai có Edge CDN Cache + CSP chặt không nonce", async ({ request }) => {
+test("Vùng 1 (public-edge & public-bypass): trang công khai vãng lai có Edge CDN Cache; bypass giữ CSP đồng nhất không nonce + private, no-store", async ({ request }) => {
   for (const duong of ["/", "/than-so", "/tu-vi", "/than-so/y-nghia-so/so-7"]) {
     const r = await request.get(duong, { headers: { "accept-language": "vi-VN,vi;q=0.9" } });
     expect(r.status(), duong).toBe(200);
@@ -46,16 +46,22 @@ test("Vùng 1 (public-edge): trang công khai vãng lai có Edge CDN Cache + CSP
     expect(csp, duong).toContain("frame-ancestors 'self'");
     expect(csp, duong).toMatch(/connect-src [^;]*'self'/);
   }
-});
-
-test("Vùng 2 (private-nonce): trang nhạy cảm & người đã đăng nhập có nonce mới mỗi lượt + strict-dynamic, script Next mang đúng nonce", async ({ request }) => {
+  // Bypass (cookie đăng nhập / ?kw=): không cache Edge (private, no-store) và vẫn giữ CSP đồng nhất theo đường dẫn (tránh lệch nonce vs HTML cache).
   for (const [duong, headers] of [
-    ["/nap-sao", {}],
     ["/than-so/y-nghia-so/so-7", { cookie: "sb-test-auth-token=1" }],
     ["/than-so?kw=ngay-sinh", {}],
   ] as const) {
-    const a = await request.get(duong, { headers });
-    const b = await request.get(duong, { headers });
+    const r = await request.get(duong, { headers });
+    expect(r.headers()["x-hbt-cache-zone"], duong).toBe("public-bypass");
+    expect(r.headers()["vercel-cdn-cache-control"], duong).toBe("private, no-store");
+    expect(r.headers()["content-security-policy"] ?? "", duong).not.toContain("'nonce-");
+  }
+});
+
+test("Vùng 2 (private-nonce): trang nhạy cảm & bảng giá có nonce mới mỗi lượt + strict-dynamic, script Next mang đúng nonce", async ({ request }) => {
+  for (const duong of ["/nap-sao", "/goi-xem", "/hoi-vien"]) {
+    const a = await request.get(duong);
+    const b = await request.get(duong);
     expect(a.headers()["x-hbt-cache-zone"], duong).toBe("private-nonce");
     expect(a.headers()["vercel-cdn-cache-control"], duong).toBeUndefined();
     const csp = a.headers()["content-security-policy"] ?? "";
