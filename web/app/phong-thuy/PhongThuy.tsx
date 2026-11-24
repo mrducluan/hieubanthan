@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Compass } from "lucide-react";
 import { DoHuongDienThoai } from "@/components/huyen-hoc/DoHuongDienThoai";
 import { HanhTrinhNha } from "@/components/huyen-hoc/HanhTrinhNha";
-import { HoiGiXemNay } from "@/components/phong-thuy/HoiGiXemNay";
+import { HoiGiXemNay, type MaCau } from "@/components/phong-thuy/HoiGiXemNay";
 import { KhaoSatNha } from "@/components/huyen-hoc/KhaoSatNha";
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
@@ -26,7 +26,6 @@ import { nhaGui, useHoSoNha } from "@/lib/ho-so-nha";
 import { ChanQr } from "@/components/khung/ChanQr";
 import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 import { TenHienProvider } from "@/components/khung/TenHien";
-import { useLaBanCamBien } from "@/lib/la-kinh/use-la-ban-cam-bien";
 import type { TenHien } from "@/lib/ten-hien";
 
 interface MenhQuai {
@@ -42,6 +41,11 @@ interface MenhQuai {
 }
 
 const MOC: MocNam[] = ["lap_xuan", "tet_viet", "tet_trung"];
+
+/** HG-1: câu hỏi đang chọn ở thẻ "Hỏi gì xem nấy" → điều băn khoăn chọn sẵn ở "Nhà của bạn" (mã có sẵn trong đồ thị ý định). */
+const Y_DINH_THEO_CAU: Record<MaCau, "nha_cua" | "gia_dinh" | "thoi_diem" | "kinh_doanh_tien"> = {
+  cua_chinh: "nha_cua", bo_cuc: "nha_cua", so_sanh: "nha_cua", gia_dinh: "gia_dinh", han_nam: "thoi_diem", mo_quan: "kinh_doanh_tien",
+};
 
 /** Câu gợi ý hỏi đáp — chữ ở bảng lib/chu/phong-thuy.ts (bản Anh: câu đã thử định tuyến đúng chủ đề ở engine). */
 const GOI_Y_KHOA = [
@@ -70,15 +74,9 @@ export function PhongThuy() {
   const ss = mq ?? (mqTruoc && mqTruoc.khoa === khoaSinh ? mqTruoc.mq : null);
   const [doToa, setDoToa] = useState<number | null>(null);
   const [doHuong, setDoHuong] = useState<number | null>(null);
-  const [cungGoiY, setCungGoiY] = useState<string | null>(null);
+  const [cauChon, setCauChon] = useState<MaCau | null>(null);
   const [cauDienSan, setCauDienSan] = useState<{ cau: string; lan: number } | null>(null);
   const [huongChot, setHuongChot] = useState<string | null>(null);
-  const camBienChung = useLaBanCamBien(undefined, {
-    khongLaBan: t("dh.loi_khong_la_ban"),
-    quyenBiTuChoi: t("dh.loi_quyen"),
-    loiXinQuyen: t("dh.loi_xin_quyen"),
-    khongTra: t("dh.loi_khong_tra"),
-  });
   // Y6: hỏi đáp đọc hồ sơ nhà trên máy (hướng + bố cục) → "bếp nhà tôi có sao không?" trả lời theo đúng nhà; không lưu.
   const hoSoNha = useHoSoNha();
   const nhaHoi = hoSoNha && (hoSoNha.huong_do != null || hoSoNha.huong || hoSoNha.bo_cuc) ? nhaGui(hoSoNha).nha : null;
@@ -93,17 +91,9 @@ export function PhongThuy() {
       {dau}
       <HoiGiXemNay
         sinh={sinh}
-        camBien={camBienChung}
-        onChotHuong={(k) => {
-          setDoHuong(k.do_huong);
-          setHuongChot(k.huong);
-          setDoToa(Math.round(((k.do_huong + 180) % 360) * 10) / 10);
-        }}
-        onChonCung={(cung) => setCungGoiY(cung)}
-        onHoiTiep={(cau) => {
-          setCauDienSan((p) => ({ cau, lan: (p?.lan ?? 0) + 1 }));
-          document.getElementById("hoi-phong-thuy")?.scrollIntoView({ behavior: "smooth", block: "start" });
-        }}
+        onChon={setCauChon}
+        // KhungChat tự cuộn tới ô hỏi khi nhận câu điền sẵn — không cuộn thêm ở đây.
+        onHoiTiep={(cau) => setCauDienSan((p) => ({ cau, lan: (p?.lan ?? 0) + 1 }))}
       />
       <div className="mx-auto mb-6 max-w-3xl" id="hanh-trinh-nha"><HanhTrinhNha mq={mq ? { quai: mq.quai, nhom: mq.nhom, so: mq.so } : null} coSinh={Boolean(sinh)} sinh={sinh} /></div>
       <section aria-label={t("aria.menh_quai")} id="menh-quai" className="mx-auto max-w-3xl scroll-mt-24 space-y-3">
@@ -143,13 +133,13 @@ export function PhongThuy() {
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="do-huong">
         <DoHuongDienThoai
           sinh={sinh}
-          camBienNgoai={camBienChung}
-          doBenNgoai={doHuong}
           laBan={mq ? { quai: mq.quai, bang: mq.bang_huong, huongCat: mq.huong_cat, duNienY: mq.du_nien_y } : null}
-          onChot={(k) => { setDoHuong(k.do_huong); setHuongChot(k.huong); }}
+          // Độ toạ do engine trả (`do_toa`) — web không tự cộng 180°.
+          onChot={(k) => { setDoHuong(k.do_huong); setHuongChot(k.huong); setDoToa(k.do_toa); }}
           onDungToa={(d) => {
             setDoToa(d);
-            document.getElementById("huyen-khong")?.scrollIntoView({ behavior: "smooth", block: "start" });
+            const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+            document.getElementById("huyen-khong")?.scrollIntoView({ behavior: giam ? "auto" : "smooth", block: "start" });
           }}
         />
       </div>
@@ -167,9 +157,9 @@ export function PhongThuy() {
             moTa="Chín điều bố trí chép trong sách Bát trạch đời Minh cho đúng cung mệnh của bạn: phòng ở, cửa, lối đi, bếp, giếng. Đọc để tham khảo; nhà ngày nay áp dụng được tới đâu thì ghi rõ ở từng điều." />
         </div>
       )}
-      <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="nha-cua-ban"><NhaCuaBan sinh={sinh} doHuongGoiY={doHuong} /></div>
+      <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="nha-cua-ban"><NhaCuaBan sinh={sinh} doHuongGoiY={doHuong} yDinhGoiY={cauChon ? Y_DINH_THEO_CAU[cauChon] : null} /></div>
       <div className="mx-auto mt-8 max-w-5xl scroll-mt-24" id="khao-sat-nha"><KhaoSatNha sinh={sinh} doHuongGoiY={doHuong} /></div>
-      <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="huyen-khong"><HuyenKhong doToaGoiY={doToa} cungGoiY={cungGoiY} /></div>
+      <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="huyen-khong"><HuyenKhong doToaGoiY={doToa} /></div>
       {/* EN-ALL: bản Anh chưa có lối đi chéo mảng → bỏ khối CTA, giữ mốc đọc xong + góp ý (như Bát tự, Tử vi). */}
       {mq && <div className="mx-auto max-w-3xl"><CuoiBaiDoc moDun="phongthuy" cauHoi={t("cuoi.cau_hoi")} maYDinh="nha_cua" khongCta={en} /></div>}
 

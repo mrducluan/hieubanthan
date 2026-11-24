@@ -1,121 +1,169 @@
 "use client";
+// LK-1 — đọc la bàn điện thoại. Bộ nghe cảm biến CHỈ tồn tại trong lúc ngắm / đo: dừng khi đo xong, khi bấm Dừng, khi
+// rời trang, khi tab bị ẩn, khi máy không trả số nào sau 2,5 giây. Lúc ngắm chỉ đưa ra số NGUYÊN đã làm mượt để vẽ kim
+// (≤ ~8 lần / giây, bỏ qua khi số không đổi). Một lần đo = "giữ yên 1,5 giây": thu MẪU THÔ rồi trả cho nơi gọi gửi
+// engine — hook không tính số độ được chốt.
 import { useCallback, useEffect, useRef, useState } from "react";
-import { hopNhatLaBan, type KetQuaHopNhat, type MauCamBien } from "@/lib/la-kinh/hop-nhat";
+import {
+  THOI_GIAN_GIU_MS, TOI_DA_MAU, doHienThi, giaiMa, kimMuot, lamTronMau, saiSoXauNhat, type MauGiaiMa, type SuKienTho,
+} from "@/lib/la-kinh/hop-nhat";
 
-type SuKienLaBan = DeviceOrientationEvent & {
-  webkitCompassHeading?: number;
-  webkitCompassAccuracy?: number;
-};
-type CoXinQuyen = typeof DeviceOrientationEvent & {
-  requestPermission?: () => Promise<"granted" | "denied">;
-};
+export type LoiCamBien = "khong_la_ban" | "quyen" | "xin_quyen" | "khong_tra";
+/** nghi: không nghe cảm biến · ngam: kim chạy theo máy · giu: đang thu mẫu 1,5 giây. */
+export type PhaCamBien = "nghi" | "ngam" | "giu";
+/** Mẫu thô của MỘT lần đo (gửi engine nguyên vẹn). `sai_so`: iOS webkitCompassAccuracy xấu nhất đã thấy (âm = chưa hiệu chỉnh). */
+export interface LanDo { mau: number[]; sai_so?: number }
+/** ok: có mẫu · nghieng: suốt lúc đo máy dựng quá nên không thu được mẫu nào · khong: máy không trả số · null: bị huỷ. */
+export type KetQuaGiu = { loai: "ok"; lan: LanDo } | { loai: "nghieng" } | { loai: "khong" } | null;
 
-function doTuSuKien(e: SuKienLaBan, tuyetDoi: boolean): number | null {
-  if (typeof e.webkitCompassHeading === "number") return e.webkitCompassHeading;
-  if ((tuyetDoi || e.absolute) && typeof e.alpha === "number") return (360 - e.alpha) % 360;
-  return null;
+type CoXinQuyen = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<"granted" | "denied"> };
+interface DangThu {
+  mau: number[]; saiSo: number | null; coNghieng: boolean;
+  xong: (k: KetQuaGiu) => void; hen: number; nhip: number;
 }
 
-export interface TrangThaiCamBien {
-  dangDo: boolean;
-  ketQua: KetQuaHopNhat | null;
-  loi: string | null;
-  batDau: () => Promise<void>;
-  dung: () => void;
+const NHIP_VE_MS = 125;          // ≤ 8 lần cập nhật giao diện mỗi giây
+const CHO_SO_DAU_MS = 2500;      // quá lâu không có số nào → coi như máy không có la bàn
+const SO_MAU_KIM = 5;            // kim lúc ngắm = trung bình vòng của bấy nhiêu mẫu gần nhất (chỉ để vẽ)
+
+function gocManHinh(): number {
+  try {
+    const a = window.screen?.orientation?.angle;
+    if (typeof a === "number") return a;
+    const cu = (window as unknown as { orientation?: unknown }).orientation;
+    return typeof cu === "number" ? cu : 0;
+  } catch { return 0; }
 }
 
-/** Một listener DeviceOrientationEvent duy nhất (có rAF throttle + lọc MAD 15 mẫu) dùng chung cho cả trang. */
-export function useLaBanCamBien(
-  onDocDuoc?: (kq: KetQuaHopNhat) => void,
-  thongBao?: {
-    khongLaBan: string;
-    quyenBiTuChoi: string;
-    loiXinQuyen: string;
-    khongTra: string;
-  },
-): TrangThaiCamBien {
-  const [dangDo, setDangDo] = useState(false);
-  const [ketQua, setKetQua] = useState<KetQuaHopNhat | null>(null);
-  const [loi, setLoi] = useState<string | null>(null);
-  const mauRef = useRef<MauCamBien[]>([]);
-  const huyRef = useRef<(() => void) | null>(null);
-  const rafRef = useRef<number | null>(null);
-  const pendingRef = useRef<KetQuaHopNhat | null>(null);
-  const onDocRef = useRef(onDocDuoc);
-  onDocRef.current = onDocDuoc;
+export function useLaBanCamBien() {
+  const [pha, setPha] = useState<PhaCamBien>("nghi");
+  const [doSong, setDoSong] = useState<number | null>(null);
+  const [nghieng, setNghieng] = useState(false);
+  const [tienDo, setTienDo] = useState(0);
+  const [loi, setLoi] = useState<LoiCamBien | null>(null);
 
-  const dung = useCallback(() => {
-    huyRef.current?.();
-    huyRef.current = null;
-    if (rafRef.current != null && typeof cancelAnimationFrame !== "undefined") {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
+  const theHe = useRef(0);                       // tăng mỗi lần bắt đầu / dừng → kết quả `await` cũ tự bỏ
+  const conSong = useRef(true);
+  const phaRef = useRef<PhaCamBien>("nghi");
+  const go = useRef<(() => void) | null>(null);  // gỡ bộ nghe + hẹn giờ của lượt đang chạy
+  const thu = useRef<DangThu | null>(null);
+  const cuoi = useRef<MauGiaiMa | null>(null);   // sự kiện mới nhất (kể cả nghiêng)
+  const gan = useRef<number[]>([]);
+  const daVe = useRef<{ luc: number; do: number | null; nghieng: boolean }>({ luc: -Infinity, do: null, nghieng: false });
+
+  const datPha = useCallback((p: PhaCamBien) => { phaRef.current = p; if (conSong.current) setPha(p); }, []);
+
+  /** Gỡ bộ nghe; lần đo dở (nếu có) kết thúc với `ketQua`. */
+  const ngat = useCallback((ketQua: (t: DangThu) => KetQuaGiu) => {
+    theHe.current += 1;
+    go.current?.();
+    go.current = null;
+    const t = thu.current;
+    thu.current = null;
+    if (t) {
+      window.clearTimeout(t.hen);
+      window.clearInterval(t.nhip);
+      t.xong(ketQua(t));
     }
-    setDangDo(false);
-  }, []);
+    datPha("nghi");
+    if (conSong.current) { setTienDo(0); setNghieng(false); }
+  }, [datPha]);
 
-  useEffect(() => () => dung(), [dung]);
+  const dung = useCallback(() => ngat(() => null), [ngat]);
 
-  const batDau = useCallback(async () => {
-    dung();
-    setLoi(null);
-    mauRef.current = [];
-    setKetQua(null);
-    if (typeof window === "undefined" || !("DeviceOrientationEvent" in window)) {
-      setLoi(thongBao?.khongLaBan ?? "Thiết bị hoặc trình duyệt không hỗ trợ la bàn.");
-      return;
-    }
+  useEffect(() => {
+    conSong.current = true;
+    return () => { conSong.current = false; ngat(() => null); };
+  }, [ngat]);
+
+  /** Bắt đầu ngắm: xin quyền (iOS), gắn bộ nghe. Trả true khi kim đã sẵn sàng chạy. */
+  const batDau = useCallback(async (): Promise<boolean> => {
+    ngat(() => null);
+    const luot = theHe.current;
+    cuoi.current = null; gan.current = []; daVe.current = { luc: -Infinity, do: null, nghieng: false };
+    setLoi(null); setDoSong(null);
+    if (typeof window === "undefined" || !("DeviceOrientationEvent" in window)) { setLoi("khong_la_ban"); return false; }
     const DOE = window.DeviceOrientationEvent as CoXinQuyen;
     if (typeof DOE.requestPermission === "function") {
-      try {
-        if ((await DOE.requestPermission()) !== "granted") {
-          setLoi(thongBao?.quyenBiTuChoi ?? "Chưa được cấp quyền cảm biến la bàn.");
-          return;
-        }
-      } catch {
-        setLoi(thongBao?.loiXinQuyen ?? "Không xin được quyền cảm biến.");
-        return;
+      let quyen: string;
+      try { quyen = await DOE.requestPermission(); }
+      catch {
+        if (luot === theHe.current && conSong.current) setLoi("xin_quyen");
+        return false;
       }
+      if (luot !== theHe.current || !conSong.current) return false;   // đã bấm lại / rời trang giữa lúc chờ
+      if (quyen !== "granted") { setLoi("quyen"); return false; }
     }
-    const coTuyetDoi = "ondeviceorientationabsolute" in window;
-    const ten = coTuyetDoi ? "deviceorientationabsolute" : "deviceorientation";
-    let nhan = false;
+    const tuyetDoi = "ondeviceorientationabsolute" in window && typeof DOE.requestPermission !== "function";
+    const ten = tuyetDoi ? "deviceorientationabsolute" : "deviceorientation";
+    let daNhan = false;
     const nghe = (e: Event) => {
-      const ev = e as SuKienLaBan;
-      const d = doTuSuKien(ev, coTuyetDoi);
-      if (d == null) return;
-      nhan = true;
-      const acc = typeof ev.webkitCompassAccuracy === "number" && ev.webkitCompassAccuracy > 0 ? ev.webkitCompassAccuracy : null;
-      mauRef.current = [
-        ...mauRef.current.slice(-14),
-        { deg: d, accuracy: acc, beta: ev.beta ?? null, gamma: ev.gamma ?? null },
-      ];
-      const kq = hopNhatLaBan(mauRef.current);
-      pendingRef.current = kq;
-      if (rafRef.current == null && typeof requestAnimationFrame !== "undefined") {
-        rafRef.current = requestAnimationFrame(() => {
-          rafRef.current = null;
-          const cur = pendingRef.current;
-          if (cur) {
-            setKetQua(cur);
-            onDocRef.current?.(cur);
-          }
-        });
-      } else if (typeof requestAnimationFrame === "undefined") {
-        setKetQua(kq);
-        onDocRef.current?.(kq);
+      const m = giaiMa(e as unknown as SuKienTho, tuyetDoi, gocManHinh());
+      if (!m) return;
+      daNhan = true;
+      cuoi.current = m;
+      const t = thu.current;
+      if (t) {
+        t.saiSo = saiSoXauNhat(t.saiSo, m.saiSo);
+        if (m.nghieng) t.coNghieng = true;
+        else if (t.mau.length < TOI_DA_MAU) t.mau.push(lamTronMau(m.do));
       }
+      if (!m.nghieng) gan.current = [...gan.current.slice(-(SO_MAU_KIM - 1)), m.do];
+      const k = kimMuot(gan.current);
+      const hien = k == null ? null : doHienThi(k);
+      const v = daVe.current, luc = performance.now();
+      if (luc - v.luc < NHIP_VE_MS || (hien === v.do && m.nghieng === v.nghieng)) return;
+      daVe.current = { luc, do: hien, nghieng: m.nghieng };
+      if (hien != null) setDoSong(hien);
+      setNghieng(m.nghieng);
     };
+    const khiAn = () => { if (document.hidden) ngat(() => null); };
+    const cho = window.setTimeout(() => {
+      if (daNhan || luot !== theHe.current) return;
+      ngat(() => ({ loai: "khong" }));
+      if (conSong.current) setLoi("khong_tra");
+    }, CHO_SO_DAU_MS);
     window.addEventListener(ten, nghe);
-    const timer = window.setTimeout(() => {
-      if (!nhan) setLoi(thongBao?.khongTra ?? "Cảm biến không trả về số độ.");
-    }, 2500);
-    huyRef.current = () => {
+    document.addEventListener("visibilitychange", khiAn);
+    go.current = () => {
       window.removeEventListener(ten, nghe);
-      window.clearTimeout(timer);
+      document.removeEventListener("visibilitychange", khiAn);
+      window.clearTimeout(cho);
     };
-    setDangDo(true);
-  }, [dung, thongBao]);
+    datPha("ngam");
+    return true;
+  }, [ngat, datPha]);
 
-  return { dangDo, ketQua, loi, batDau, dung };
+  /** "Giữ yên 1,5 giây": thu mẫu thô rồi DỪNG cảm biến. Chỉ gọi được khi đang ngắm. */
+  const giuYen = useCallback((): Promise<KetQuaGiu> => {
+    if (phaRef.current !== "ngam" || thu.current) return Promise.resolve(null);
+    return new Promise<KetQuaGiu>((xong) => {
+      const t0 = performance.now();
+      const c = cuoi.current;
+      const ketThuc = () => ngat((t) => {
+        if (t.mau.length) {
+          const ss = t.saiSo == null ? undefined : t.saiSo < 0 ? -1 : Math.min(360, t.saiSo);
+          return { loai: "ok", lan: { mau: t.mau, ...(ss === undefined ? {} : { sai_so: ss }) } };
+        }
+        return { loai: t.coNghieng ? "nghieng" : "khong" };
+      });
+      thu.current = {
+        // Số đang thấy lúc bấm là mẫu đầu (máy đứng yên có khi không bắn thêm sự kiện nào) — trừ khi máy đang dựng.
+        mau: c && !c.nghieng ? [lamTronMau(c.do)] : [],
+        saiSo: c ? c.saiSo : null,
+        coNghieng: Boolean(c?.nghieng),
+        xong,
+        hen: window.setTimeout(ketThuc, THOI_GIAN_GIU_MS),
+        nhip: window.setInterval(() => {
+          if (conSong.current) setTienDo(Math.min(1, (performance.now() - t0) / THOI_GIAN_GIU_MS));
+        }, NHIP_VE_MS),
+      };
+      setTienDo(0);
+      datPha("giu");
+    });
+  }, [ngat, datPha]);
+
+  return { pha, doSong, nghieng, tienDo, loi, batDau, giuYen, dung };
 }
+
+export type TrangThaiCamBien = ReturnType<typeof useLaBanCamBien>;

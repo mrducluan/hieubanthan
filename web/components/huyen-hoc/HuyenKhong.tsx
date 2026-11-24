@@ -71,7 +71,7 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
   const [doLa, setDoLa] = useState("");
   const [lop, setLop] = useState({ van: true, son: true, huong: true, ln: true });
   // Số lớp đã hiện (4 = đủ). "Xem từng lớp" hiện lần lượt vận → sơn → hướng → năm; không mô phỏng đường bay.
-  const [buocLop, setBuocLop] = useState(LOP.length);
+  const [buocLop, setBuocLop] = useState<number>(LOP.length);
   const [daXemLop, setDaXemLop] = useState(false);
   const timerRef = useRef<number | null>(null);
   useEffect(() => () => { if (timerRef.current != null) window.clearInterval(timerRef.current); }, []);

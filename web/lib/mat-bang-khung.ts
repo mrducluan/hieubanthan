@@ -1,22 +1,14 @@
-// Thuật toán hình học thuần cho Sơ đồ nhà tỉ lệ (Mini-CAD Blueprint — DoViTriVat.tsx):
-// 1. Kích thước phòng mặc định (rộng × sâu bằng mét, tự co theo khung nhà), kẹp hộp hiển thị trong biên nhà nhưng giữ nguyên tâm `diem` (0..1) để tương thích 100% với engine `/v1/phongthuy/vi-tri-vat`.
-// 2. Hướng mở cửa phòng (`truoc` | `phai` | `sau` | `trai`) -> toạ độ bản lề, cánh cửa + cung mở cửa 90°, và quy đổi ra độ la bàn thật khi biết `huongNhaDo`.
-// 3. Tâm nhà (trọng tâm phần diện tích xây dựng khi bỏ ô chữ L) + 8 phương la bàn.
-// 4. Suy luận tự động dấu hiệu bố cục trên mặt bằng (`wc_giua_nha`, `cua_doi_nhau`, `bep_doi_cua`, `bep_wc`, `nha_chu_l`).
+// Hình học HIỂN THỊ cho sơ đồ nhà theo tỉ lệ (DoViTriVat.tsx) — tệp thuần, nạp được trong Node (test), không import `@/`.
+// Web chỉ VẼ: hộp phòng mặc định, kẹp hộp trong tường, phía cửa trên bản vẽ, dời điểm bằng bàn phím.
+// Tâm nhà, phương của từng chỗ và mọi dấu hiệu bố cục do MÁY CHỦ TÍNH TOÁN trả (`khung.tam`, `dau_hieu_goi_y`) — không tính ở đây.
+// `diem` (0..1) là thứ duy nhất gửi đi; `kich_thuoc` / `huong_cua` chỉ gửi khi người dùng TỰ chỉnh.
 
 export type LoaiVatKhung = "cua_chinh" | "phong_ngu_chinh" | "bep" | "ve_sinh" | "ban_tho" | "cau_thang";
 export type HuongCua = "truoc" | "phai" | "sau" | "trai";
 
 export const THU_TU_HUONG_CUA: readonly HuongCua[] = ["truoc", "phai", "sau", "trai"] as const;
-
-export const GOC_CUC_BO_CUA: Record<HuongCua, number> = {
-  truoc: 0,
-  phai: 90,
-  sau: 180,
-  trai: 270,
-};
-
-const HUONG8 = ["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] as const;
+/** Chỗ có "cửa phòng" để vẽ ký hiệu cửa (bàn thờ, cầu thang, cửa chính không có). */
+export const PHONG_CO_CUA: readonly LoaiVatKhung[] = ["phong_ngu_chinh", "bep", "ve_sinh"] as const;
 
 /** Kích thước chuẩn (rộng × sâu, mét) theo loại phòng/vật — tự co theo khung nhà nếu nhà hẹp. */
 const KICH_THUOC_CHUAN: Record<LoaiVatKhung, [number, number]> = {
@@ -59,14 +51,6 @@ export function huongCuaMacDinh(loai: LoaiVatKhung, diem: [number, number]): Huo
 export function xoayHuongCua(h: HuongCua, buoc = 1): HuongCua {
   const idx = THU_TU_HUONG_CUA.indexOf(h);
   return THU_TU_HUONG_CUA[(idx + buoc + 4) % 4]!;
-}
-
-/** Đổi hướng cửa trên bản vẽ (`truoc/phai/sau/trai`) + độ hướng mặt tiền nhà (`huongNhaDo`) sang độ la bàn (0..360) và tên 8 hướng. */
-export function doLaBanCua(huongCua: HuongCua, huongNhaDo: number | null): { do: number | null; phuong: string | null } {
-  if (huongNhaDo == null) return { do: null, phuong: null };
-  const d = (huongNhaDo + GOC_CUC_BO_CUA[huongCua] + 360) % 360;
-  const phuong = HUONG8[Math.floor(((d + 22.5) % 360) / 45)]!;
-  return { do: Math.round(d), phuong };
 }
 
 export interface HopPhongKhung {
@@ -112,108 +96,17 @@ export function tinhHopPhong(
   return { x0, y0, w, h, cx, cy, diem, huongCua: hc, cuaX, cuaY };
 }
 
-/** Tâm nhà chuẩn hoá (0..1) theo lưới `luoi` (true = phần có xây). Nếu không bỏ ô nào thì tâm = (0.5, 0.5). */
-export function tamNhaKhung(luoi: boolean[][] | null): [number, number] {
-  if (!luoi || !luoi.length) return [0.5, 0.5];
-  const nH = luoi.length;
-  const nC = luoi[0]?.length || 1;
-  let sx = 0, sy = 0, dem = 0;
-  for (let r = 0; r < nH; r++) {
-    for (let c = 0; c < nC; c++) {
-      if (luoi[r]?.[c]) {
-        sx += (c + 0.5) / nC;
-        sy += (r + 0.5) / nH;
-        dem++;
-      }
-    }
-  }
-  return dem > 0 ? [Math.round((sx / dem) * 1000) / 1000, Math.round((sy / dem) * 1000) / 1000] : [0.5, 0.5];
+const lam3 = (n: number) => Math.round(n * 1000) / 1000;
+
+/** Dời điểm (0..1) đi `dxM` × `dyM` mét trên khung `rong × sau`, kẹp trong khung. Dùng cho phím mũi tên. */
+export function dichDiem(diem: [number, number], dxM: number, dyM: number, rongNha: number, sauNha: number): [number, number] {
+  const x = Math.min(1, Math.max(0, diem[0] + dxM / rongNha));
+  const y = Math.min(1, Math.max(0, diem[1] + dyM / sauNha));
+  return [lam3(x), lam3(y)];
 }
 
-export interface VatTrenKhung {
-  diem?: [number, number];
-  kich_thuoc?: [number, number];
-  huong_cua?: HuongCua;
-}
-
-/** Tự động suy luận dấu hiệu phong thuỷ từ sơ đồ khung phòng + hướng cửa đã vẽ:
- *  - `wc_giua_nha`: Tâm hoặc vùng nhà vệ sinh rơi vào vùng Trung cung (1/3 giữa nhà).
- *  - `nha_chu_l`: Bỏ bớt từ 2 ô góc trở lên trên lưới 4×4 (khuyết góc ≥ 12.5% diện tích).
- *  - `cua_doi_nhau`: Hai phòng có cửa mở đối diện trực tiếp nhau (cùng trục ngang hoặc dọc và nhìn vào nhau).
- *  - `bep_doi_cua`: Cửa chính và Bếp nhìn thẳng vào nhau trên cùng trục.
- *  - `bep_wc`: Bếp và Nhà vệ sinh nằm sát vách nhau hoặc cửa mở thẳng vào nhau. */
-export function suyDauHieuTuKhung(
-  doHienTai: Partial<Record<LoaiVatKhung, VatTrenKhung>>,
-  rongNha: number,
-  sauNha: number,
-  luoi: boolean[][] | null,
-): string[] {
-  const kq = new Set<string>();
-  const hop: Partial<Record<LoaiVatKhung, HopPhongKhung>> = {};
-  for (const [k, v] of Object.entries(doHienTai) as [LoaiVatKhung, VatTrenKhung][]) {
-    if (v?.diem) {
-      hop[k] = tinhHopPhong(k, v.diem, rongNha, sauNha, v.kich_thuoc, v.huong_cua);
-    }
-  }
-
-  // 1. Nhà chữ L / khuyết góc
-  if (luoi) {
-    const bo = luoi.flat().filter((v) => !v).length;
-    if (bo >= 2) kq.add("nha_chu_l");
-  }
-
-  // 2. WC giữa nhà (Trung cung: x trong [1/3, 2/3] và y trong [1/3, 2/3])
-  const wc = hop.ve_sinh;
-  if (wc) {
-    const nx = wc.diem[0], ny = wc.diem[1];
-    if (nx >= 1 / 3 && nx <= 2 / 3 && ny >= 1 / 3 && ny <= 2 / 3) {
-      kq.add("wc_giua_nha");
-    }
-  }
-
-  // Hàm kiểm tra hai cửa a và b đối diện nhau
-  const doiCua = (a: HopPhongKhung, b: HopPhongKhung): boolean => {
-    const dungSai = Math.max(0.9, Math.min(rongNha, sauNha) * 0.22);
-    // Trục trái - phải: a mở sang phải, b ở bên phải mở sang trái, cùng tầm y
-    if (a.huongCua === "phai" && b.huongCua === "trai" && a.cuaX <= b.cuaX + 0.3 && Math.abs(a.cuaY - b.cuaY) <= dungSai) return true;
-    if (a.huongCua === "trai" && b.huongCua === "phai" && b.cuaX <= a.cuaX + 0.3 && Math.abs(a.cuaY - b.cuaY) <= dungSai) return true;
-    // Trục trước - sau: a mở ra sau, b ở phía sau mở ra trước, cùng tầm x
-    if (a.huongCua === "sau" && b.huongCua === "truoc" && a.cuaY <= b.cuaY + 0.3 && Math.abs(a.cuaX - b.cuaX) <= dungSai) return true;
-    if (a.huongCua === "truoc" && b.huongCua === "sau" && b.cuaY <= a.cuaY + 0.3 && Math.abs(a.cuaX - b.cuaX) <= dungSai) return true;
-    return false;
-  };
-
-  // 3. Hai cửa phòng đối thẳng nhau
-  const dsPhong = (["phong_ngu_chinh", "bep", "ve_sinh", "ban_tho"] as LoaiVatKhung[])
-    .map((k) => hop[k])
-    .filter((x): x is HopPhongKhung => Boolean(x));
-  for (let i = 0; i < dsPhong.length; i++) {
-    for (let j = i + 1; j < dsPhong.length; j++) {
-      if (doiCua(dsPhong[i]!, dsPhong[j]!)) {
-        kq.add("cua_doi_nhau");
-      }
-    }
-  }
-
-  // 4. Bếp nhìn thẳng ra cửa chính (`bep_doi_cua`)
-  const cua = hop.cua_chinh;
-  const bep = hop.bep;
-  if (cua && bep) {
-    const cungTrucX = Math.abs(cua.cx - bep.cx) <= Math.max(1.0, rongNha * 0.24);
-    if ((cungTrucX && bep.huongCua === "truoc" && cua.cy < bep.cy) || doiCua(cua, bep)) {
-      kq.add("bep_doi_cua");
-    }
-  }
-
-  // 5. Bếp sát / chung vách nhà vệ sinh hoặc cửa bếp đối cửa WC (`bep_wc`)
-  if (bep && wc) {
-    const gapX = Math.max(0, Math.max(bep.x0 - (wc.x0 + wc.w), wc.x0 - (bep.x0 + bep.w)));
-    const gapY = Math.max(0, Math.max(bep.y0 - (wc.y0 + wc.h), wc.y0 - (bep.y0 + bep.h)));
-    const chungVach = (gapX <= 0.35 && gapY <= 0.2) || (gapY <= 0.35 && gapX <= 0.2);
-    if (chungVach || doiCua(bep, wc)) {
-      kq.add("bep_wc");
-    }
-  }
-
-  return [...kq];
+/** Vị trí tương đối trên bản vẽ (chỉ để ĐỌC nhãn cho người dùng bàn phím / trình đọc màn hình — không phải phương la bàn). */
+export function viTriTuongDoi(diem: [number, number]): { doc: "truoc" | "giua" | "sau"; ngang: "trai" | "giua" | "phai" } {
+  const ba = <A, B, C>(v: number, a: A, b: B, c: C): A | B | C => (v < 1 / 3 ? a : v < 2 / 3 ? b : c);
+  return { doc: ba(diem[1], "truoc", "giua", "sau"), ngang: ba(diem[0], "trai", "giua", "phai") };
 }
