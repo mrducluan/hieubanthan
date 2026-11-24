@@ -94,15 +94,18 @@ def goi_y_dau_hieu(vat: list[dict], rong: float, sau: float, luoi: list[str] | N
         them("nha_chu_l")
 
     co_hop = {k: hop(tuple(x["diem"]), tuple(x["kich_thuoc"]), rong, sau) for k, x in v.items() if x.get("kich_thuoc")}
+    # Luật về CỬA chỉ cần phía cửa người dùng đã đặt; chưa chỉnh kích thước thì coi cửa nằm ngay tại điểm đặt phòng
+    # (không mượn kích thước máy tự điền). Luật chung vách thì bắt buộc có kích thước người dùng chỉnh.
+    hop_cua = {k: co_hop.get(k) or hop(tuple(x["diem"]), (0.1, 0.1), rong, sau) for k, x in v.items()}
     dung_sai = max(0.6, min(rong, sau) * 0.15)
-    co_cua = [k for k in PHONG_CO_CUA if k in co_hop and v[k].get("huong_cua")]
+    co_cua = [k for k in PHONG_CO_CUA if k in v and v[k].get("huong_cua")]
     for i, a in enumerate(co_cua):
         for b in co_cua[i + 1:]:
-            if doi_cua(co_hop[a], v[a]["huong_cua"], co_hop[b], v[b]["huong_cua"], dung_sai):
+            if doi_cua(hop_cua[a], v[a]["huong_cua"], hop_cua[b], v[b]["huong_cua"], dung_sai):
                 them("bep_wc" if {a, b} == {"bep", "ve_sinh"} else "cua_doi_nhau", a, b)
     # bếp nhìn thẳng ra cửa chính: cửa bếp mở về phía cửa chính và cửa chính nằm trước mặt cửa bếp
-    if "bep" in co_hop and v["bep"].get("huong_cua") and v.get("cua_chinh"):
-        bx, by = _cua(co_hop["bep"], v["bep"]["huong_cua"])
+    if "bep" in v and v["bep"].get("huong_cua") and v.get("cua_chinh"):
+        bx, by = _cua(hop_cua["bep"], v["bep"]["huong_cua"])
         cx, cy = v["cua_chinh"]["diem"][0] * rong, v["cua_chinh"]["diem"][1] * sau
         h = v["bep"]["huong_cua"]
         truoc_mat = ((h == "truoc" and cy <= by and abs(cx - bx) <= dung_sai) or (h == "sau" and cy >= by and abs(cx - bx) <= dung_sai)

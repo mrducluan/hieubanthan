@@ -573,7 +573,7 @@ test("PT-V2: Để máy đọc ảnh — đồng ý không tích sẵn, ảnh th
   const dongY = da.getByTestId("doc-anh-dong-y");
   await expect(nut).toBeDisabled();                                        // chưa ảnh, chưa đồng ý
   await expect(dongY).not.toBeChecked();                                   // KHÔNG tích sẵn
-  await da.getByLabel("Chọn 1–3 ảnh để máy đọc (không lưu)").setInputFiles({ name: "goc.png", mimeType: "image/png", buffer: PNG_1 });
+  await da.getByLabel("Chọn 1–6 ảnh để máy đọc (không lưu)").setInputFiles({ name: "goc.png", mimeType: "image/png", buffer: PNG_1 });
   await expect(da.getByRole("img", { name: "Ảnh 1 bạn chọn (chỉ hiện trên máy)" })).toHaveAttribute("src", /^blob:/);
   await expect(nut).toBeDisabled();                                        // có ảnh nhưng chưa đồng ý → vẫn tắt
   await dongY.check();
@@ -639,7 +639,7 @@ test("PT-V2: máy đọc ảnh chưa bật (chưa đặt khoá) → câu thườ
   await page.route("**/api/phongthuy/doc-anh", (r) => r.fulfill({ json: { da_bat: false, ly_do_tat: "chua_dat_khoa", dau_hieu: [], phong_doan: [], luu_y: [], can_xac_nhan: true } }));
   await page.goto("/phong-thuy");
   const da = page.getByTestId("khao-sat-nha").getByTestId("doc-anh-nha");
-  await da.getByLabel("Chọn 1–3 ảnh để máy đọc (không lưu)").setInputFiles({ name: "goc.png", mimeType: "image/png", buffer: PNG_1 });
+  await da.getByLabel("Chọn 1–6 ảnh để máy đọc (không lưu)").setInputFiles({ name: "goc.png", mimeType: "image/png", buffer: PNG_1 });
   await da.getByTestId("doc-anh-dong-y").check();
   await da.getByTestId("doc-anh-nut").click();
   await expect(da.getByTestId("doc-anh-thong-bao")).toHaveText("Máy đọc ảnh chưa bật trên bản này — bạn tích tay các ô bên dưới nhé.");

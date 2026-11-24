@@ -43,6 +43,14 @@ def test_khong_suy_tu_gia_tri_may_tu_dien():
     assert _ma(vat) == []
 
 
+def test_luat_cua_chi_can_phia_cua_nguoi_dung_dat():
+    # người dùng xoay cửa hai phòng mà chưa chỉnh kích thước → luật cửa vẫn chạy (cửa tính tại điểm đặt phòng)
+    vat = [{"loai": "phong_ngu_chinh", "diem": (0.2, 0.3), "huong_cua": "phai"}, {"loai": "bep", "diem": (0.8, 0.3), "huong_cua": "trai"}]
+    assert _ma(vat) == ["cua_doi_nhau"]
+    # nhưng luật chung vách thì không (cần kích thước người dùng chỉnh)
+    assert "bep_wc" not in _ma([{"loai": "bep", "diem": (0.3, 0.9)}, {"loai": "ve_sinh", "diem": (0.4, 0.9)}])
+
+
 def test_cua_doi_nhau_khi_nguoi_dung_dat_huong_cua():
     vat = [{"loai": "phong_ngu_chinh", "diem": (0.2, 0.3), "kich_thuoc": (1.6, 3), "huong_cua": "phai"},
            {"loai": "bep", "diem": (0.8, 0.3), "kich_thuoc": (1.6, 3), "huong_cua": "trai"}]
