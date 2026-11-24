@@ -26,7 +26,7 @@ CAM_THEM = ("ly hôn", "chia tay", "bệnh", "ung thư", "tai hoạ", "nên lấ
             "muộn chồng", "muộn vợ", "già rồi", "hết thời", "vòng tay", "đá phong thuỷ", "cúng", "giải hạn")
 
 
-@pytest.mark.parametrize("tuoi, nhom", [(17, None), (18, "t18_24"), (24, "t18_24"), (25, "t25_44"), (44, "t25_44"),
+@pytest.mark.parametrize("tuoi, nhom", [(15, None), (16, "t18_24"), (17, "t18_24"), (18, "t18_24"), (24, "t18_24"), (25, "t25_44"), (44, "t25_44"),
                                         (45, "t45_59"), (59, "t45_59"), (60, "t60"), (95, "t60")])
 def test_nhom_tuoi(tuoi, nhom):
     assert hc.nhom_tuoi(tuoi) == nhom
@@ -86,7 +86,7 @@ def test_tinh_trang_doi_loi_tinh_cam():
 
 
 def test_hop_duoi_18_khong_co():
-    assert hc.hop("tinh_cam", "thuan", dt.date(2010, 1, 1), XEM, "doc_than", "ds") is None
+    assert hc.hop("tinh_cam", "thuan", dt.date(2012, 1, 1), XEM, "doc_than", "ds") is None   # TUOI-16: 14 tuổi
 
 
 def test_hop_ma_mau_hop_le_sql_va_khong_mang_tinh_trang():

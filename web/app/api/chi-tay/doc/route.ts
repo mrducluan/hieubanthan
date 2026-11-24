@@ -1,5 +1,5 @@
 // POST /api/chi-tay/doc — các hình vân người dùng TỰ CHỌN (mã) + lựa chọn tự quan sát từng cung trên ảnh tay (CT-2, mã) +
-// ngày sinh tuỳ chọn (chỉ để biết đủ 18 tuổi) → lời sách xưa. Phải có ít nhất một trong `van`, `cung`.
+// ngày sinh tuỳ chọn (chỉ để biết đủ 16 tuổi) → lời sách xưa. Phải có ít nhất một trong `van`, `cung`.
 // TK-2: `phai: "tay"` → dáng tay / gò / đường chỉ phương Tây (Cheiro, Benham).
 import { z } from "zod";
 import { goiEngine } from "@/lib/proxy";

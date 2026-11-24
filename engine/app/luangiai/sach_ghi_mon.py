@@ -13,7 +13,7 @@ gìn. Người chưa đủ 18 tuổi không nhận mục nhóm C. Chỉ bản ti
 """
 from __future__ import annotations
 
-from app import ngon_ngu
+from app import config, ngon_ngu
 from app.kb import nap, sach_ghi as sg
 
 SACH = {"tu_vi_dau_so_toan_thu": "Tử Vi Đẩu Số Toàn Thư", "tam_menh_thong_hoi": "Tam Mệnh Thông Hội",
@@ -21,7 +21,7 @@ SACH = {"tu_vi_dau_so_toan_thu": "Tử Vi Đẩu Số Toàn Thư", "tam_menh_tho
         "uyen_hai_tu_binh": "Uyên Hải Tử Bình", "than_tuong_toan_bien": "Thần Tướng Toàn Biên",
         "lieu_trang_tuong_phap": "Liễu Trang tướng pháp", "duong_trach_thap_thu": "Dương Trạch Thập Thư",
         "nhan_tuong_co_thu": "sách tướng xưa", **sg.TEN_SACH_TOM_Y}
-TUOI_NHOM_C = 18
+TUOI_NHOM_C = config.TUOI_NGUOI_LON          # TUOI-16
 _SANG = {"Miếu", "Vượng", "Đắc"}
 _CUNG_TV = ("Mệnh", "Phu Thê", "Tài Bạch", "Quan Lộc", "Tật Ách", "Phúc Đức", "Thiên Di", "Điền Trạch", "Nô Bộc", "Tử Nữ",
             "Huynh Đệ", "Phụ Mẫu")

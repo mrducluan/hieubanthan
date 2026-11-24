@@ -25,7 +25,7 @@ from app.luangiai import tuvi_luan_hoi as lh
 from app.luangiai.doi_song_chung import _ma, slug
 
 _TEP = "battu_luan_hoi_kb.json"
-TUOI_TOI_THIEU = 18
+TUOI_TOI_THIEU = __import__("app.config", fromlist=["x"]).TUOI_NGUOI_LON   # TUOI-16
 SO_NAM = 10
 CHUONG = ("tinh_cam", "gia_dinh", "su_nghiep", "tien_bac", "quan_he")
 MANG_CYN = {"tinh_cam": "tinh_cam", "gia_dinh": "gia_dao", "su_nghiep": "cong_viec", "tien_bac": "tien_bac", "quan_he": "ban_be"}

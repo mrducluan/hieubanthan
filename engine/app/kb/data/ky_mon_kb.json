@@ -91,12 +91,13 @@
    "sach": {
     "han": "傷門宜漁獵捕討行逢盜賊",
     "am": "Thương môn nghi ngư liệp bổ thảo, hành phùng đạo tặc",
-    "y": "Cửa Thương hợp việc săn đuổi, thu về; đi đường thì sách dặn giữ của cẩn thận.",
+    "y": "Sách ghi: cửa Thương hợp việc đánh cá, săn bắn, truy bắt, đánh dẹp; ra đi thì gặp trộm cướp.",
     "nhom": "B",
     "chu_de": "di_lai",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý giữ đồ và giữ lời khi đi về phía này.",
-    "viec": "Ra ngoài thì để ví, điện thoại ở túi trong; việc cần bàn nhẹ nhàng dời sang giờ khác."
+    "viec": "Ra ngoài thì để ví, điện thoại ở túi trong; việc cần bàn nhẹ nhàng dời sang giờ khác.",
+    "sat": true
    }
   },
   "do": {
@@ -112,12 +113,13 @@
    "sach": {
     "han": "杜門宜邀遮隱伏誅伐凶逆",
     "am": "Đỗ môn nghi yêu già ẩn phục, tru phạt hung nghịch",
-    "y": "Cửa Đỗ hợp chặn lại, ẩn mình, xử việc ngang trái.",
+    "y": "Sách ghi: cửa Đỗ hợp việc chặn đường, mai phục, ẩn nấp, đánh dẹp trừng trị kẻ hung nghịch.",
     "nhom": "B",
     "chu_de": "cong_viec",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý: phía này hợp giữ và chặn hơn là mở việc mới.",
-    "viec": "Chọn một việc cần tập trung và làm trọn trong giờ này, chưa công bố vội."
+    "viec": "Chọn một việc cần tập trung và làm trọn trong giờ này, chưa công bố vội.",
+    "sat": true
    }
   },
   "canh": {
@@ -152,12 +154,13 @@
    "sach": {
     "han": "死門宜行刑誅戮弔死送葬",
     "am": "Tử môn nghi hành hình tru lục, điếu tử tống táng",
-    "y": "Cửa Tử người xưa dành cho việc xử phạt và việc tiễn đưa.",
+    "y": "Sách ghi: cửa Tử hợp việc xử phạt, trừng trị kẻ có tội, viếng người mất, đưa tang.",
     "nhom": "B",
     "chu_de": "tong_quan",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý: phía này hợp khép lại hơn là bắt đầu.",
-    "viec": "Chọn một việc cũ cần đóng (trả đồ, huỷ gói không dùng, dọn hộp thư) và làm xong trong giờ này."
+    "viec": "Chọn một việc cũ cần đóng (trả đồ, huỷ gói không dùng, dọn hộp thư) và làm xong trong giờ này.",
+    "sat": true
    }
   },
   "kinh": {
@@ -173,12 +176,13 @@
    "sach": {
     "han": "驚門宜掩捕鬥訟攻擊驚恐",
     "am": "Kinh môn nghi yểm bổ đấu tụng, công kích kinh khủng",
-    "y": "Cửa Kinh hợp việc truy bắt, tranh tụng, làm đối phương bất ngờ.",
+    "y": "Sách ghi: cửa Kinh hợp việc đánh úp bắt người, tranh tụng, tấn công, làm cho địch kinh hãi.",
     "nhom": "B",
     "chu_de": "giay_to",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý lời nói và giấy tờ khi làm việc về phía này.",
-    "viec": "Điều quan trọng thì viết ra và đọc lại một lượt trước khi gửi; chuyện tranh chấp thì hỏi luật sư."
+    "viec": "Điều quan trọng thì viết ra và đọc lại một lượt trước khi gửi; chuyện tranh chấp thì hỏi luật sư.",
+    "sat": true
    }
   }
  },
@@ -194,12 +198,13 @@
    "sach": {
     "han": "春夏用之軍大勝秋冬用之有災凶",
     "am": "Xuân hạ dụng chi quân đại thắng, thu đông dụng chi hữu tai hung",
-    "y": "Sao này mùa xuân, hạ dùng thì mạnh; mùa thu, đông thì dễ sinh chuyện.",
+    "y": "Sách ghi: mùa xuân, mùa hạ dùng sao này thì quân thắng lớn; mùa thu, mùa đông dùng thì gặp tai hoạ.",
     "nhom": "B",
     "chu_de": "tong_quan",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý giữ chừng mực khi làm việc lớn dưới sao này.",
-    "viec": "Việc có rủi ro thì đặt sẵn mức dừng trước khi bắt đầu."
+    "viec": "Việc có rủi ro thì đặt sẵn mức dừng trước khi bắt đầu.",
+    "sat": true
    }
   },
   "nhue": {
@@ -281,12 +286,13 @@
    "sach": {
     "han": "上將提兵功百勝不宜春夏恐凶臨",
     "am": "Thượng tướng đề binh công bách thắng, bất nghi xuân hạ khủng hung lâm",
-    "y": "Sao này cầm việc thì hay thành; riêng mùa xuân, hạ sách dặn dè dặt hơn.",
+    "y": "Sách ghi: thượng tướng cầm quân dưới sao này thì trăm trận trăm thắng, nhưng không hợp mùa xuân, hạ, e điều dữ kéo tới.",
     "nhom": "B",
     "chu_de": "cong_viec",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý kiểm lại kế hoạch khi dùng sao này vào mùa xuân, hạ.",
-    "viec": "Trước khi chốt, nhờ một người ngoài cuộc đọc lại kế hoạch."
+    "viec": "Trước khi chốt, nhờ một người ngoài cuộc đọc lại kế hoạch.",
+    "sat": true
    }
   },
   "tru": {
@@ -589,12 +595,13 @@
    "sach": {
     "han": "六乙加六辛名青龍逃走此時不可造百事凶",
     "am": "Lục Ất gia lục Tân danh Thanh long đào tẩu, thử thời bất khả tạo, bách sự hung",
-    "y": "Ất đặt lên Tân gọi là rồng xanh bỏ chạy; sách dặn giờ ấy chưa nên khởi việc.",
+    "y": "Sách ghi: Ất trên gặp Tân dưới gọi là 'Thanh Long đào tẩu' (rồng xanh bỏ chạy); giờ ấy không được khởi tạo, trăm việc đều xấu.",
     "nhom": "B",
     "chu_de": "cong_viec",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý giữ phần đã có khi làm việc về phía này.",
-    "viec": "Việc mới dời sang giờ khác; giờ này rà lại thứ mình đang nắm (tiền đặt cọc, lời hứa, tài liệu)."
+    "viec": "Việc mới dời sang giờ khác; giờ này rà lại thứ mình đang nắm (tiền đặt cọc, lời hứa, tài liệu).",
+    "sat": true
    }
   },
   "bach_ho_xuong_cuong": {
@@ -606,12 +613,13 @@
    "sach": {
     "han": "六辛加六乙名曰白虎猖狂此時不可舉動百事凶",
     "am": "Lục Tân gia lục Ất danh viết Bạch hổ xương cuồng, thử thời bất khả cử động, bách sự hung",
-    "y": "Tân đặt lên Ất gọi là hổ trắng lồng lên; sách dặn giờ ấy chưa nên động việc.",
+    "y": "Sách ghi: Tân trên gặp Ất dưới gọi là 'Bạch Hổ xương cuồng' (hổ trắng lồng lên); giờ ấy không được hành động, trăm việc đều xấu.",
     "nhom": "B",
     "chu_de": "di_lai",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý an toàn khi đi lại và giữ bình tĩnh khi trao đổi về phía này.",
-    "viec": "Lái xe thì chạy chậm hơn thường ngày; chuyện đang căng thì hẹn nói lại sau."
+    "viec": "Lái xe thì chạy chậm hơn thường ngày; chuyện đang căng thì hẹn nói lại sau.",
+    "sat": true
    }
   },
   "chu_tuoc_dau_giang": {
@@ -623,12 +631,13 @@
    "sach": {
     "han": "六丁加六癸名朱雀入江此時忌為百事",
     "am": "Lục Đinh gia lục Quý danh Chu tước nhập giang, thử thời kỵ vi bách sự",
-    "y": "Đinh đặt lên Quý gọi là chim đỏ sa sông; sách dặn giờ ấy nên kiêng khởi việc.",
+    "y": "Sách ghi: Đinh trên gặp Quý dưới gọi là 'Chu Tước nhập giang' (chim đỏ sa xuống sông); giờ ấy kiêng làm mọi việc.",
     "nhom": "B",
     "chu_de": "giay_to",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý văn bản và lời nhắn khi làm việc về phía này.",
-    "viec": "Trước khi gửi hồ sơ hay tin quan trọng, nhờ một người đọc lại."
+    "viec": "Trước khi gửi hồ sơ hay tin quan trọng, nhờ một người đọc lại.",
+    "sat": true
    }
   },
   "dang_xa_yeu_kieu": {
@@ -640,12 +649,13 @@
    "sach": {
     "han": "六癸加六丁名螣蛇夭矯此時所為不利",
     "am": "Lục Quý gia lục Đinh danh Đằng xà yêu kiểu, thử thời sở vi bất lợi",
-    "y": "Quý đặt lên Đinh gọi là rắn bay quằn mình; sách ghi giờ ấy làm việc khó trôi.",
+    "y": "Sách ghi: Quý trên gặp Đinh dưới gọi là 'Đằng Xà' uốn lượn (rắn bay quằn mình); giờ ấy làm việc gì cũng bất lợi.",
     "nhom": "B",
     "chu_de": "tong_quan",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý đừng quyết theo một tin chưa kiểm khi làm việc về phía này.",
-    "viec": "Viết ra điều đang lo, gạch điều chưa có bằng chứng, chỉ xử lý phần còn lại."
+    "viec": "Viết ra điều đang lo, gạch điều chưa có bằng chứng, chỉ xử lý phần còn lại.",
+    "sat": true
    }
   },
   "huynh_nhap_bach": {
@@ -657,12 +667,13 @@
    "sach": {
     "han": "丙為熒惑庚為太白若熒惑入太白鬥賊必兩退還",
     "am": "Bính vi Huỳnh Hoặc, Canh vi Thái Bạch, nhược Huỳnh Hoặc nhập Thái Bạch, đấu tặc tất lưỡng thoái hoàn",
-    "y": "Bính là sao Hoả, Canh là sao Kim; lửa vào vàng thì hai bên giằng co rồi cùng lui.",
+    "y": "Sách ghi: Bính là Huỳnh Hoặc (sao Hoả), Canh là Thái Bạch (sao Kim); Huỳnh Hoặc vào Thái Bạch (Bính trên Canh) thì đánh với giặc ắt hai bên đều lui về.",
     "nhom": "B",
     "chu_de": "cong_viec",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý đừng dồn sức vào một cuộc ganh đua về phía này.",
-    "viec": "Việc đang giằng co thì lùi một bước, chờ bên kia tỏ ý trước."
+    "viec": "Việc đang giằng co thì lùi một bước, chờ bên kia tỏ ý trước.",
+    "sat": true
    }
   },
   "bach_nhap_huynh": {
@@ -674,12 +685,13 @@
    "sach": {
     "han": "庚為太白丙為熒惑若太白入熒惑對敵宜防賊來",
     "am": "Canh vi Thái Bạch, Bính vi Huỳnh Hoặc, nhược Thái Bạch nhập Huỳnh Hoặc, đối địch nghi phòng tặc lai",
-    "y": "Canh là sao Kim, Bính là sao Hoả; vàng vào lửa thì nên phòng đối phương tìm tới.",
+    "y": "Sách ghi: Canh là Thái Bạch, Bính là Huỳnh Hoặc; Thái Bạch vào Huỳnh Hoặc (Canh trên Bính) thì khi đối địch nên phòng giặc kéo tới.",
     "nhom": "B",
     "chu_de": "cong_viec",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý phòng việc bất ngờ chen vào khi làm việc về phía này.",
-    "viec": "Xác nhận lại lịch hẹn, sao lưu tệp đang làm, khoá cửa trước khi đi."
+    "viec": "Xác nhận lại lịch hẹn, sao lưu tệp đang làm, khoá cửa trước khi đi.",
+    "sat": true
    }
   },
   "ky_nhap_mo": {
@@ -691,12 +703,13 @@
    "sach": {
     "han": "凡遇三奇入墓縱得吉宿奇門不可作事",
     "am": "Phàm ngộ tam kỳ nhập mộ, túng đắc cát tú kỳ môn bất khả tác sự",
-    "y": "Gặp ba kỳ vào kho thì dù có sao tốt, cửa tốt, sách cũng dặn chưa nên làm việc lớn.",
+    "y": "Sách ghi: hễ gặp ba kỳ vào mộ (kho) thì dù được sao tốt, cửa tốt cũng không được làm việc.",
     "nhom": "B",
     "chu_de": "cong_viec",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý: phía này có điều tốt nhưng chưa tới lúc dùng.",
-    "viec": "Dùng giờ này để chuẩn bị; việc ra mắt, công bố dời sang giờ khác."
+    "viec": "Dùng giờ này để chuẩn bị; việc ra mắt, công bố dời sang giờ khác.",
+    "sat": true
    }
   },
   "mon_bach": {
@@ -708,12 +721,13 @@
    "sach": {
     "han": "若吉門被迫則吉事不成凶門被迫則災尤甚",
     "am": "Nhược cát môn bị bách tắc cát sự bất thành, hung môn bị bách tắc tai vưu thậm",
-    "y": "Cửa tốt bị ép thì việc tốt khó thành; cửa kém bị ép thì vướng thêm.",
+    "y": "Sách ghi: cửa tốt bị cung ép thì việc tốt không thành; cửa xấu bị cung ép thì tai hoạ càng nặng thêm.",
     "nhom": "B",
     "chu_de": "tong_quan",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý: cửa ở phía này không phát huy được hết.",
-    "viec": "Giảm kỳ vọng cho việc làm về phía này, có phương án thứ hai."
+    "viec": "Giảm kỳ vọng cho việc làm về phía này, có phương án thứ hai.",
+    "sat": true
    }
   },
   "luc_nghi_kich_hinh": {
@@ -725,12 +739,13 @@
    "sach": {
     "han": "六儀擊刑者謂甲子直符時加卯",
     "am": "Lục nghi kích hình giả, vị Giáp Tý trực phù thời gia Mão",
-    "y": "Sáu nghi phạm hình là khi trực phù của tuần tới đúng chỗ ngược với nó.",
+    "y": "Sách ghi: sáu nghi phạm hình là như trực phù tuần Giáp Tý trong giờ ấy rơi vào cung Mão (Tý hình Mão).",
     "nhom": "B",
     "chu_de": "cong_viec",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý sự nóng vội của chính mình trong giờ này.",
-    "viec": "Quyết định lớn thì ngủ một đêm rồi mới trả lời."
+    "viec": "Quyết định lớn thì ngủ một đêm rồi mới trả lời.",
+    "sat": true
    }
   },
   "phuc_ngam": {
@@ -742,12 +757,13 @@
    "sach": {
     "han": "子來臨子為伏吟此時不宜用兵惟宜斂財貨",
     "am": "Tý lai lâm Tý vi phục ngâm, thử thời bất nghi dụng binh, duy nghi liễm tài hoá",
-    "y": "Tý tới đúng Tý là bàn đứng yên; giờ ấy không hợp ra quân, chỉ hợp thu gom của cải.",
+    "y": "Sách ghi: Tý tới đúng Tý là phục ngâm (bàn đứng yên); giờ ấy không nên dụng binh, chỉ nên thu gom tiền của, hàng hoá.",
     "nhom": "B",
     "chu_de": "tien_bac",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý: giờ này hợp thu về hơn là mở ra.",
-    "viec": "Chốt một khoản cần thu hoặc dọn một việc tồn; chưa khởi việc mới."
+    "viec": "Chốt một khoản cần thu hoặc dọn một việc tồn; chưa khởi việc mới.",
+    "sat": true
    }
   },
   "phan_ngam": {
@@ -759,12 +775,13 @@
    "sach": {
     "han": "子來加午為反吟此時不利舉兵動眾惟利恤民散倉廩之事",
     "am": "Tý lai gia Ngọ vi phản ngâm, thử thời bất lợi cử binh động chúng, duy lợi tuất dân tán thương lẫm chi sự",
-    "y": "Tý tới Ngọ là bàn lật ngược; giờ ấy không hợp huy động đông người, chỉ hợp giúp người và phát của trong kho.",
+    "y": "Sách ghi: Tý tới đặt lên Ngọ là phản ngâm (bàn lật ngược); giờ ấy không lợi khởi binh, động đến đông người, chỉ lợi việc thương dân, mở kho phát thóc.",
     "nhom": "B",
     "chu_de": "cong_viec",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý: việc khởi trong giờ này dễ đổi chiều.",
-    "viec": "Lịch hẹn quan trọng thì xác nhận lại một lần; hợp đem cho, quyên góp, thanh lý."
+    "viec": "Lịch hẹn quan trọng thì xác nhận lại một lần; hợp đem cho, quyên góp, thanh lý.",
+    "sat": true
    }
   },
   "cua_phuc_ngam": {
@@ -806,12 +823,13 @@
    "sach": {
     "han": "五不遇時者謂剛柔日相剋而損其明縱有奇門不可行",
     "am": "Ngũ bất ngộ thời giả, vị cương nhu nhật tương khắc nhi tổn kỳ minh, túng hữu kỳ môn bất khả hành",
-    "y": "Giờ ngược với ngày thì ánh sáng của giờ bị giảm; dù có kỳ, có cửa tốt, sách cũng dặn chưa nên làm.",
+    "y": "Sách ghi: giờ 'ngũ bất ngộ' là giờ có can khắc can ngày cùng tính cương nhu, làm tổn ánh sáng của ngày; dù có kỳ, có cửa tốt cũng không được đi.",
     "nhom": "B",
     "chu_de": "tong_quan",
     "nguon": "ky_mon_co_kim_do_thu",
     "ham_y": "Nên chú ý: giờ này không hợp việc hệ trọng.",
-    "viec": "Dời việc quan trọng sang một giờ khác trong ngày."
+    "viec": "Dời việc quan trọng sang một giờ khác trong ngày.",
+    "sat": true
    }
   },
   "van_don": {
@@ -859,12 +877,13 @@
    "sach": {
     "han": "六庚加直符名天乙伏宮格此時戰鬥主客皆不利",
     "am": "Lục Canh gia Trực Phù danh Thiên Ất Phục Cung cách, thử thời chiến đấu chủ khách giai bất lợi",
-    "y": "Canh trên nền Trực Phù là cách Phục Cung, sách xưa dặn lúc này cả hai phía đều chưa thuận để tiến gấp.",
+    "y": "Sách ghi: Canh đặt lên Trực Phù gọi là cách 'Thiên Ất phục cung'; giờ ấy đánh nhau thì chủ lẫn khách đều bất lợi.",
     "nhom": "B",
     "chu_de": "cong_viec",
     "nguon": "ky_mon_phu_ung_tong_tong",
     "ham_y": "Nên chú ý tạm lùi một nhịp thay vì ép tiến độ hay tranh phần thắng ngay.",
-    "viec": "Kiểm tra lại đầu mục còn thiếu và dời quyết định lớn sang khung giờ thoáng hơn."
+    "viec": "Kiểm tra lại đầu mục còn thiếu và dời quyết định lớn sang khung giờ thoáng hơn.",
+    "sat": true
    }
   },
   "thien_at_phi_cung": {
@@ -878,12 +897,13 @@
    "sach": {
     "han": "直符加六庚是也此時主客皆不利",
     "am": "Trực Phù gia Lục Canh thị dã, thử thời chủ khách giai bất lợi",
-    "y": "Trực Phù gặp Canh ở dưới là cách Phi Cung, sách xưa khuyên nên cẩn trọng vì hai phía đều dễ gặp trở ngại.",
+    "y": "Sách ghi: Trực Phù đặt lên Canh (cách Phi Cung) thì giờ ấy chủ lẫn khách đều bất lợi.",
     "nhom": "B",
     "chu_de": "cong_viec",
     "nguon": "ky_mon_phu_ung_tong_tong",
     "ham_y": "Nên chú ý tính đến phương án dự phòng và không vội cam kết khi thông tin chưa đủ.",
-    "viec": "Nhắn xác nhận lại giờ giấc, địa điểm và điều kiện với đối tác trước khi bắt đầu."
+    "viec": "Nhắn xác nhận lại giờ giấc, địa điểm và điều kiện với đối tác trước khi bắt đầu.",
+    "sat": true
    }
   },
   "phuc_can_cach": {
@@ -897,12 +917,13 @@
    "sach": {
     "han": "庚臨日干伏幹格",
     "am": "Canh lâm nhật can Phục Can cách",
-    "y": "Canh rơi lên can ngày gọi là Phục Can cách, báo hiệu dễ có cản trở từ khâu chuẩn bị.",
+    "y": "Sách ghi: Canh rơi lên can ngày là cách Phục Can.",
     "nhom": "B",
     "chu_de": "cong_viec",
     "nguon": "ky_mon_phu_ung_tong_tong",
     "ham_y": "Nên chú ý rà soát lại phần việc của chính mình trước khi gặp đối phương.",
-    "viec": "Đọc lại tài liệu, số liệu một lượt và kiểm tra người phối hợp đã sẵn sàng chưa."
+    "viec": "Đọc lại tài liệu, số liệu một lượt và kiểm tra người phối hợp đã sẵn sàng chưa.",
+    "sat": true
    }
   },
   "phi_can_cach": {
@@ -916,12 +937,13 @@
    "sach": {
     "han": "今日之干加六庚是也此時鬥戰主客兩傷",
     "am": "Kim nhật chi can gia Lục Canh thị dã, thử thời đấu chiến chủ khách lưỡng thương",
-    "y": "Can ngày gặp Canh ở dưới là Phi Can cách, sách xưa dặn va chạm lúc này cả hai bên đều dễ hao sức và mất hoà khí.",
+    "y": "Sách ghi: can ngày đặt lên Canh (cách Phi Can) thì giờ ấy đánh nhau, chủ lẫn khách cả hai đều bị thiệt hại.",
     "nhom": "B",
     "chu_de": "cong_viec",
     "nguon": "ky_mon_phu_ung_tong_tong",
     "ham_y": "Nên chú ý tránh tranh cãi thắng thua, tập trung tìm điểm chung nhỏ nhất để đi tiếp.",
-    "viec": "Viết ngắn gọn 2–3 điểm cần thống nhất và gửi trước khi họp để giảm căng thẳng."
+    "viec": "Viết ngắn gọn 2–3 điểm cần thống nhất và gửi trước khi họp để giảm căng thẳng.",
+    "sat": true
    }
   },
   "dai_cach": {
@@ -935,12 +957,13 @@
    "sach": {
     "han": "六庚加六癸為大格謂天上六庚臨地下六癸此時不可舉百事",
     "am": "Lục Canh gia Lục Quý vi Đại Cách, vị thiên thượng Lục Canh lâm địa hạ Lục Quý, thử thời bất khả cử bách sự",
-    "y": "Canh gặp Quý ở dưới là Đại Cách, sách xưa khuyên chưa nên khởi sự các việc lớn trong thế này.",
+    "y": "Sách ghi: Canh trên gặp Quý dưới là Đại Cách, tức Canh ở thiên bàn rơi lên Quý ở địa bàn; giờ ấy không được khởi bất cứ việc gì.",
     "nhom": "B",
     "chu_de": "di_lai",
     "nguon": "ky_mon_phu_ung_tong_tong",
     "ham_y": "Nên chú ý không khởi công hay ký kết việc lớn theo phía này; đi đường giữ kỹ đồ đạc.",
-    "viec": "Kiểm tra lại giấy tờ, hành lý trước khi ra khỏi cửa và dời mốc ký kết sang giờ thuận hơn."
+    "viec": "Kiểm tra lại giấy tờ, hành lý trước khi ra khỏi cửa và dời mốc ký kết sang giờ thuận hơn.",
+    "sat": true
    }
   },
   "hinh_cach": {
@@ -954,12 +977,13 @@
    "sach": {
     "han": "六庚加六己是也謂天上六庚加地下六己此時用兵主車破馬傷中道而止",
     "am": "Lục Canh gia Lục Kỷ thị dã, vị thiên thượng Lục Canh gia địa hạ Lục Kỷ, thử thời dụng binh chủ xa phá mã thương trung đạo nhi chỉ",
-    "y": "Canh gặp Kỷ ở dưới là Hình Cách, sách xưa ví như đi đường dễ hỏng xe, phải dừng lại giữa chừng.",
+    "y": "Sách ghi: Canh trên gặp Kỷ dưới (Canh thiên bàn rơi lên Kỷ địa bàn) là Hình Cách; giờ ấy dụng binh thì xe vỡ, ngựa hư, nửa đường phải dừng; sách dặn nhớ cẩn thận khi đi lại.",
     "nhom": "B",
     "chu_de": "di_lai",
     "nguon": "ky_mon_phu_ung_tong_tong",
     "ham_y": "Nên chú ý an toàn phương tiện và kiểm tra đủ giấy tờ trước khi xuất phát.",
-    "viec": "Kiểm tra lốp, xăng hoặc tình trạng xe và dự trù thêm 15–20 phút cho chặng đi."
+    "viec": "Kiểm tra lốp, xăng hoặc tình trạng xe và dự trù thêm 15–20 phút cho chặng đi.",
+    "sat": true
    }
   },
   "tieu_cach": {
@@ -973,12 +997,13 @@
    "sach": {
     "han": "六庚加己爲刑格加癸爲大格加壬爲上格又爲小格",
     "am": "Lục Canh gia Kỷ vi Hình Cách, gia Quý vi Đại Cách, gia Nhâm vi Thượng Cách hựu vi Tiểu Cách",
-    "y": "Canh gặp Nhâm ở dưới gọi là Tiểu Cách, sách xưa xếp cùng nhóm cách dễ gặp trắc trở đường đi.",
+    "y": "Sách ghi: Canh đặt lên Kỷ là Hình Cách, đặt lên Quý là Đại Cách, đặt lên Nhâm là Thượng Cách, cũng gọi là Tiểu Cách.",
     "nhom": "B",
     "chu_de": "di_lai",
     "nguon": "ky_mon_phu_ung_tong_tong",
     "ham_y": "Nên chú ý sắp xếp khoảng đệm thời gian để không bị động khi lịch bị trễ.",
-    "viec": "Xác nhận lại lịch hẹn trước 1 giờ và mang theo việc nhỏ có thể xử lý nếu phải chờ."
+    "viec": "Xác nhận lại lịch hẹn trước 1 giờ và mang theo việc nhỏ có thể xử lý nếu phải chờ.",
+    "sat": true
    }
   }
  },

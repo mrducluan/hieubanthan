@@ -127,12 +127,13 @@
       "sach": {
         "han": "傷門宜漁獵捕討行逢盜賊",
         "am": "Thương môn nghi ngư liệp bổ thảo, hành phùng đạo tặc",
-        "y": "Cửa Thương hợp việc săn đuổi, thu về; sách cũng dặn đi đường dễ gặp kẻ xấu.",
+        "y": "Sách ghi: cửa Thương hợp việc đánh cá, săn bắn, truy bắt, đánh dẹp; ra đi thì gặp trộm cướp.",
         "nhom": "B",
         "chu_de": "tien_bac",
         "nguon": "ky_mon_co_kim_do_thu",
         "ham_y": "Nên chú ý giữ tiền và giấy tờ khi ra ngoài, cảnh giác với lời mời chào bất thường.",
-        "viec": "Kiểm lại tên người nhận trước khi chuyển khoản."
+        "viec": "Kiểm lại tên người nhận trước khi chuyển khoản.",
+        "sat": true
       },
       "ung_dung": {
         "kinh_doanh": "Thu hồi công nợ, chạy doanh số ngắn ngày, chốt nốt các đơn còn treo.",
@@ -156,12 +157,13 @@
       "sach": {
         "han": "杜門宜邀遮隱伏誅伐凶逆",
         "am": "Đỗ môn nghi yêu già ẩn phục, tru phạt hung nghịch",
-        "y": "Cửa Đỗ hợp chặn lại, ẩn mình, xử việc ngang trái.",
+        "y": "Sách ghi: cửa Đỗ hợp việc chặn đường, mai phục, ẩn nấp, đánh dẹp trừng trị kẻ hung nghịch.",
         "nhom": "B",
         "chu_de": "cong_viec",
         "nguon": "ky_mon_co_kim_do_thu",
         "ham_y": "Nên chú ý giữ kín kế hoạch chưa xong; nói sớm dễ bị người khác đi trước.",
-        "viec": "Ghi rõ ai đã được biết kế hoạch, ai chưa cần biết."
+        "viec": "Ghi rõ ai đã được biết kế hoạch, ai chưa cần biết.",
+        "sat": true
       },
       "ung_dung": {
         "kinh_doanh": "Chuẩn bị sản phẩm mới trong kín đáo, bảo vệ bí mật kinh doanh, giữ chắc khách và thị phần đang có trước đối thủ.",
@@ -184,12 +186,13 @@
       "sach": {
         "han": "景門宜上書遣使突陣破圍",
         "am": "Cảnh môn nghi thượng thư khiển sứ, đột trận phá vi",
-        "y": "Cửa Cảnh hợp dâng thư, cử người đi và phá thế bị vây.",
+        "y": "Sách ghi: cửa Cảnh hợp việc dâng thư, sai sứ đi, xông vào trận, phá vòng vây.",
         "nhom": "B",
         "chu_de": "giay_to",
         "nguon": "ky_mon_co_kim_do_thu",
         "ham_y": "Người xưa dặn việc lên tiếng phải có chuẩn bị; nên chú ý chuẩn bị số liệu và câu trả lời trước khi công bố.",
-        "viec": "Viết ba ý chính muốn người nghe nhớ, đọc to một lần trước khi gửi."
+        "viec": "Viết ba ý chính muốn người nghe nhớ, đọc to một lần trước khi gửi.",
+        "sat": true
       },
       "ung_dung": {
         "kinh_doanh": "Ra mắt sản phẩm, chạy chiến dịch quảng bá, gửi đề xuất cho khách lớn, đổi cách bán khi thị trường đang chững.",
@@ -218,12 +221,13 @@
       "sach": {
         "han": "驚門宜掩捕鬥訟攻擊驚恐",
         "am": "Kinh môn nghi yểm bổ đấu tụng công kích kinh khủng",
-        "y": "Cửa Kinh hợp việc bắt bất ngờ, tranh tụng, làm đối phương giật mình.",
+        "y": "Sách ghi: cửa Kinh hợp việc đánh úp bắt người, tranh tụng, tấn công, làm cho địch kinh hãi.",
         "nhom": "B",
         "chu_de": "giay_to",
         "nguon": "ky_mon_co_kim_do_thu",
         "ham_y": "Đây là cửa của va chạm; nên chú ý giữ bình tĩnh và lấy lý, lấy giá trị để hơn người, đừng để mình bị cuốn vào cãi vã.",
-        "viec": "Trước khi lên tiếng, viết ra ba điểm mình làm tốt hơn đối phương."
+        "viec": "Trước khi lên tiếng, viết ra ba điểm mình làm tốt hơn đối phương.",
+        "sat": true
       },
       "ung_dung": {
         "kinh_doanh": "Cạnh tranh trực diện bằng chất lượng và giá trị, phản hồi khi bị so sánh, xử lý tranh chấp hợp đồng có luật sư bên cạnh.",
@@ -299,12 +303,13 @@
       "sach": {
         "han": "死門宜行刑誅戮弔死送葬",
         "am": "Tử môn nghi hành hình tru lục, điếu tử tống táng",
-        "y": "Cửa Tử người xưa dành cho việc xử phạt và việc tiễn đưa.",
+        "y": "Sách ghi: cửa Tử hợp việc xử phạt, trừng trị kẻ có tội, viếng người mất, đưa tang.",
         "nhom": "B",
         "chu_de": "cong_viec",
         "nguon": "ky_mon_co_kim_do_thu",
         "ham_y": "Nên chú ý đây là giờ của việc khép lại, không phải giờ để bắt đầu việc mới.",
-        "viec": "Viết ra một việc cần khép lại cho gọn trong tuần này."
+        "viec": "Viết ra một việc cần khép lại cho gọn trong tuần này.",
+        "sat": true
       },
       "ung_dung": {
         "kinh_doanh": "Dừng dự án lỗ kéo dài, thanh lý hàng tồn, đóng một điểm bán không hiệu quả.",
@@ -374,12 +379,13 @@
       "sach": {
         "han": "直符加六庚是也此時主客皆不利",
         "am": "Trực Phù gia Lục Canh thị dã, thử thời chủ khách giai bất lợi",
-        "y": "Trực Phù gặp Canh ở dưới là cách Phi Cung, sách xưa khuyên nên cẩn trọng vì hai phía đều dễ gặp trở ngại.",
+        "y": "Sách ghi: Trực Phù đặt lên Canh (cách Phi Cung) thì giờ ấy chủ lẫn khách đều bất lợi.",
         "nhom": "B",
         "chu_de": "cong_viec",
         "nguon": "ky_mon_phu_ung_tong_tong",
         "ham_y": "Nên chú ý tính đến phương án dự phòng và không vội cam kết khi thông tin chưa đủ.",
-        "viec": "Nhắn xác nhận lại giờ giấc, địa điểm và điều kiện với đối tác trước khi bắt đầu."
+        "viec": "Nhắn xác nhận lại giờ giấc, địa điểm và điều kiện với đối tác trước khi bắt đầu.",
+        "sat": true
       },
       "ung_dung": {
         "kinh_doanh": "Chuẩn bị phương án B cho cuộc đàm phán, không đặt toàn bộ kỳ vọng vào một đầu mối.",
@@ -399,12 +405,13 @@
       "sach": {
         "han": "六庚加六癸為大格謂天上六庚臨地下六癸此時不可舉百事",
         "am": "Lục Canh gia Lục Quý vi Đại Cách, vị thiên thượng Lục Canh lâm địa hạ Lục Quý, thử thời bất khả cử bách sự",
-        "y": "Canh gặp Quý ở dưới là Đại Cách, sách xưa khuyên chưa nên khởi sự các việc lớn trong thế này.",
+        "y": "Sách ghi: Canh trên gặp Quý dưới là Đại Cách, tức Canh ở thiên bàn rơi lên Quý ở địa bàn; giờ ấy không được khởi bất cứ việc gì.",
         "nhom": "B",
         "chu_de": "di_lai",
         "nguon": "ky_mon_phu_ung_tong_tong",
         "ham_y": "Nên chú ý không khởi công hay ký kết việc lớn theo phía này; đi đường giữ kỹ đồ đạc.",
-        "viec": "Kiểm tra lại giấy tờ, hành lý trước khi ra khỏi cửa và dời mốc ký kết sang giờ thuận hơn."
+        "viec": "Kiểm tra lại giấy tờ, hành lý trước khi ra khỏi cửa và dời mốc ký kết sang giờ thuận hơn.",
+        "sat": true
       },
       "ung_dung": {
         "kinh_doanh": "Tạm hoãn ký hợp đồng lớn hoặc khai trương, dành thời gian soát lại điều khoản.",
@@ -424,12 +431,13 @@
       "sach": {
         "han": "六庚加六己是也謂天上六庚加地下六己此時用兵主車破馬傷中道而止",
         "am": "Lục Canh gia Lục Kỷ thị dã, vị thiên thượng Lục Canh gia địa hạ Lục Kỷ, thử thời dụng binh chủ xa phá mã thương trung đạo nhi chỉ",
-        "y": "Canh gặp Kỷ ở dưới là Hình Cách, sách xưa ví như đi đường dễ hỏng xe, phải dừng lại giữa chừng.",
+        "y": "Sách ghi: Canh trên gặp Kỷ dưới (Canh thiên bàn rơi lên Kỷ địa bàn) là Hình Cách; giờ ấy dụng binh thì xe vỡ, ngựa hư, nửa đường phải dừng; sách dặn nhớ cẩn thận khi đi lại.",
         "nhom": "B",
         "chu_de": "di_lai",
         "nguon": "ky_mon_phu_ung_tong_tong",
         "ham_y": "Nên chú ý an toàn phương tiện và kiểm tra đủ giấy tờ trước khi xuất phát.",
-        "viec": "Kiểm tra lốp, xăng hoặc tình trạng xe và dự trù thêm 15–20 phút cho chặng đi."
+        "viec": "Kiểm tra lốp, xăng hoặc tình trạng xe và dự trù thêm 15–20 phút cho chặng đi.",
+        "sat": true
       },
       "ung_dung": {
         "kinh_doanh": "Kiểm tra kỹ khâu giao vận, đóng gói và chứng từ xuất nhập trước khi xuất hàng.",
@@ -451,12 +459,13 @@
     "sach": {
       "han": "從生擊死",
       "am": "Tòng sinh kích tử",
-      "y": "Đứng ở phía cửa Sinh mà tiến về phía cửa Tử: dựa vào thế mạnh của mình mà đi.",
+      "y": "Sách dạy: đứng từ phía cửa Sinh mà đánh về phía cửa Tử.",
       "nhom": "B",
       "chu_de": "cong_viec",
       "nguon": "ky_mon_co_kim_do_thu",
       "ham_y": "Nên chú ý chọn chỗ mình mạnh để tiến, không đối đầu ở chỗ người khác đang mạnh hơn.",
-      "viec": "Ghi ra một điều khách hàng khen mình nhiều nhất và dồn sức vào đó."
+      "viec": "Ghi ra một điều khách hàng khen mình nhiều nhất và dồn sức vào đó.",
+      "sat": true
     }
   }
 }

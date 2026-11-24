@@ -200,6 +200,19 @@ class HourConfidence(str, Enum):
 TY_EDGE_WINDOW = (23, 1)       # 23:00–00:59
 
 
+# TUOI-16 (chủ dự án đổi 2026-11-24, thay ngưỡng 18): từ 16 tuổi tròn là NGƯỜI LỚN — tự đọc bài luận của mình, nhận đủ
+# lớp "Luận theo câu hỏi", hộp hoàn cảnh, hộp "Năm nên chú ý", câu sách nhóm C (SX-C3). Dưới 16 tuổi: bài đọc mặc định do CHA MẸ
+# hoặc người lớn đọc hộ — engine phân vai `vai_doc = "cha_me"`, lời viết cho người lớn đọc về đứa trẻ. Một hằng duy nhất.
+TUOI_NGUOI_LON = 16
+
+
+def vai_doc(tuoi: int | None) -> str | None:
+    """Ai đọc bài luận: "ban_than" (≥ 16 tuổi tròn) · "cha_me" (< 16 — người lớn đọc hộ) · None (chưa biết tuổi)."""
+    if tuoi is None:
+        return None
+    return "ban_than" if tuoi >= TUOI_NGUOI_LON else "cha_me"
+
+
 def hom_nay_vn() -> date:
     """Ngày hiện tại theo giờ Việt Nam (UTC+7). EN-1: máy chủ chạy UTC — `date.today()` lệch một ngày từ 0 giờ tới
     7 giờ sáng giờ VN (ngày/năm cá nhân, quẻ, nhịp sai một ngày). Mọi ngày mặc định của engine dùng hàm này."""

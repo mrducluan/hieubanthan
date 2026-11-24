@@ -93,20 +93,21 @@
       "ma": "R_SXQB_MING_p0060_s02_02",
       "han": "德器不及夷吾者無足論相矣",
       "am": "Đức khí bất cập Di Ngô giả vô túc luận tướng hĩ",
-      "y": "Sách ghi người tầm lòng, tầm việc quá hẹp thì xem tướng cũng không bàn được gì nhiều.",
+      "y": "Sách ghi: người có đức lượng không bằng Di Ngô (Quản Trọng) thì không đáng để bàn chuyện tướng.",
       "nhom": "B",
       "chu_de": "tinh_net",
       "nguon": "than_tuong_toan_bien",
       "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
       "ham_y": "Nên chú ý nuôi độ lượng và tầm nhìn, vì sách đặt chúng trước nét mặt.",
       "viec": "Tuần này nhận một việc chung mà không tính phần lợi riêng.",
-      "chung": true
+      "chung": true,
+      "sat": true
     },
     {
       "ma": "R_SXQB_MING_p0060_s04_01",
       "han": "形骸局促作事猥圖",
       "am": "Hình hài cục xúc, tác sự ổi đồ",
-      "y": "Sách ghi dáng người co rút, gò bó thì việc làm hay vụn vặt, khó mở rộng.",
+      "y": "Sách ghi: dáng người co rút, gò bó thì làm việc gì cũng toan tính hèn mọn, vụn vặt.",
       "nhom": "B",
       "chu_de": "cong_viec",
       "nguon": "than_tuong_toan_bien",
@@ -115,7 +116,8 @@
       "viec": "Mỗi sáng đứng thẳng lưng, thả lỏng vai hai phút trước gương.",
       "dac_diem": [
         "dang_khom"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_SXQB_MING_p0060_s04_02",
@@ -156,53 +158,57 @@
       "ma": "R_SXQB_MING_p0060_s06_01",
       "han": "器若淺兮水盈溢",
       "am": "Khí nhược thiển hề thủy doanh dật",
-      "y": "Sách ví phúc như nước, lòng người như cái bình: bình nông mà nước nhiều thì tràn ra.",
+      "y": "Sách ghi: cái bình (lòng người) mà nông thì nước (phúc) đầy sẽ tràn ra.",
       "nhom": "B",
       "chu_de": "tinh_net",
       "nguon": "than_tuong_toan_bien",
       "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
       "ham_y": "Nên chú ý lúc việc thuận nhất lại là lúc cần khiêm và giữ nếp.",
       "viec": "Khi có khoản thu lớn, để dành một phần trước rồi mới tiêu.",
-      "chung": true
+      "chung": true,
+      "sat": true
     },
     {
       "ma": "R_SXQB_MING_p0061_s01_01",
       "han": "器淺志盈無遠識",
       "am": "Khí thiển chí doanh vô viễn thức",
-      "y": "Sách ghi lòng hẹp mà chí kiêu thì khó nhìn xa, phúc giữ không lâu.",
+      "y": "Sách ghi: lòng hẹp mà chí kiêu đầy thì không có tầm nhìn xa.",
       "nhom": "B",
       "chu_de": "tinh_net",
       "nguon": "than_tuong_toan_bien",
       "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
       "ham_y": "Nên chú ý nghe thêm ý người khác trước những việc dài hơi.",
       "viec": "Trước một kế hoạch dài, hỏi ý một người lớn tuổi hơn mình.",
-      "chung": true
+      "chung": true,
+      "sat": true
     },
     {
       "ma": "R_SXQB_MING_p0061_s01_02",
       "han": "器淺分明由怨天",
       "am": "Khí thiển phân minh do oán thiên",
-      "y": "Sách ghi lòng hẹp thường đến từ thói hay trách trời, trách người.",
+      "y": "Sách ghi: lòng hẹp, rõ ràng là do hay oán trời.",
       "nhom": "B",
       "chu_de": "tinh_net",
       "nguon": "than_tuong_toan_bien",
       "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
       "ham_y": "Nên chú ý bớt than, nhìn vào việc mình làm được.",
       "viec": "Tuần này mỗi lần định than, ghi thay bằng một việc nhỏ mình đã làm được.",
-      "chung": true
+      "chung": true,
+      "sat": true
     },
     {
       "ma": "R_SXQB_MING_p0061_s02_02",
       "han": "德不稱形故也",
       "am": "Đức bất xứng hình cố dã",
-      "y": "Sách kể chuyện người có tướng tốt mà nết không xứng thì không giữ được phúc.",
+      "y": "Sách ghi: (không giữ được phúc) là vì đức không xứng với tướng mạo.",
       "nhom": "B",
       "chu_de": "tinh_net",
       "nguon": "than_tuong_toan_bien",
       "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
       "ham_y": "Nên chú ý: sách đặt nết người lên trên nét mặt.",
       "viec": "Tuần này giữ trọn một lời hứa nhỏ với người khác.",
-      "chung": true
+      "chung": true,
+      "sat": true
     },
     {
       "ma": "R_SXQB_MING_p0061_s04_01",
@@ -221,20 +227,21 @@
       "ma": "R_SXQB_MING_p0061_s04_02",
       "han": "此德色也學力到涵養純則無矣",
       "am": "Thử đức sắc dã, học lực đáo hàm dưỡng thuần tắc vô hĩ",
-      "y": "Sách ghi lúc đang thuận mà mặt lộ vẻ kiêu là còn thiếu hàm dưỡng; học tới, nết thuần thì vẻ ấy tự mất.",
+      "y": "Sách ghi: đó là sắc mặt lộ vẻ đắc ý; học hành đến nơi, hàm dưỡng thuần thục thì sẽ không còn.",
       "nhom": "B",
       "chu_de": "tinh_net",
       "nguon": "than_tuong_toan_bien",
       "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
       "ham_y": "Nên chú ý giữ khiêm lúc việc đang lên.",
       "viec": "Lần tới được khen, nhắc tên một người đã giúp mình.",
-      "chung": true
+      "chung": true,
+      "sat": true
     },
     {
       "ma": "R_SXQB_MING_p0062_s01_01",
       "han": "失志落落坐立欹來",
       "am": "Thất chí lạc lạc, tọa lập khi lai",
-      "y": "Sách ghi lúc thất chí thì dáng đứng, ngồi xiêu vẹo, rũ xuống.",
+      "y": "Sách ghi: lúc thất chí thì buồn bã rời rạc, ngồi đứng xiêu vẹo.",
       "nhom": "B",
       "chu_de": "tinh_net",
       "nguon": "than_tuong_toan_bien",
@@ -244,20 +251,22 @@
       "dac_diem": [
         "dang_khom",
         "net_buon"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_SXQB_MING_p0062_s01_02",
       "han": "落魄貧寒無媚態相中唯有此人稀",
       "am": "Lạc phách bần hàn vô mị thái, tướng trung duy hữu thử nhân hy",
-      "y": "Sách khen người lúc túng thiếu vẫn không xu nịnh — loại người ấy hiếm.",
+      "y": "Sách ghi: lúc sa cơ nghèo lạnh mà không có dáng xu nịnh, người như thế trong tướng thuật rất hiếm.",
       "nhom": "B",
       "chu_de": "tinh_net",
       "nguon": "than_tuong_toan_bien",
       "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
       "ham_y": "Nên chú ý giữ thẳng lưng trong lúc khó, sách xem đó là khí phách.",
       "viec": "Khi cần nhờ việc, nói rõ điều mình cần, không nói vòng.",
-      "chung": true
+      "chung": true,
+      "sat": true
     },
     {
       "ma": "R_SXQB_MING_p0062_s02_01",
@@ -285,14 +294,15 @@
       "ma": "R_SXQB_MING_p0062_s04_01",
       "han": "借使修德於心吉凶可易",
       "am": "Tá sử tu đức ư tâm, cát hung khả dịch",
-      "y": "Sách ghi sửa nết trong lòng thì lành dữ trên tướng cũng đổi theo.",
+      "y": "Sách ghi: giả như tu sửa đức trong lòng thì lành dữ có thể đổi được.",
       "nhom": "B",
       "chu_de": "tinh_net",
       "nguon": "than_tuong_toan_bien",
       "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
       "ham_y": "Nên chú ý sửa từ việc nhỏ hằng ngày.",
       "viec": "Tuần này chọn một thói quen nhỏ chưa tốt và bỏ nó.",
-      "chung": true
+      "chung": true,
+      "sat": true
     },
     {
       "ma": "R_SXQB_MING_p0062_s04_02",
@@ -309,14 +319,15 @@
       "ma": "R_SXQB_MING_p0062_s04_03",
       "han": "心雕琢太甚生理盡矣",
       "am": "Tâm điêu trác thái thậm, sinh lý tận hĩ",
-      "y": "Sách ghi lòng tính toán quá mức thì dù tướng đẹp, phúc vẫn giảm dần.",
+      "y": "Sách ghi: lòng chạm trổ, tính toán quá mức thì lẽ sống tận rồi.",
       "nhom": "B",
       "chu_de": "tinh_net",
       "nguon": "than_tuong_toan_bien",
       "chuong": "quyển 631, thiên «神相全編一 · 許負相德器第五»",
       "ham_y": "Nên chú ý giữ thẳng thắn trong cách làm việc với người khác.",
       "viec": "Lần tới bàn việc, nói thẳng điều mình muốn ngay từ đầu.",
-      "chung": true
+      "chung": true,
+      "sat": true
     },
     {
       "ma": "R_SXQB_MING_p0062_s04_04",
@@ -347,7 +358,7 @@
       "ma": "R_YLZ_QING_p0013_s02_06",
       "han": "唇白多難產",
       "am": "Thần bạch đa nan sản",
-      "y": "Sách xưa để ý sắc môi nhợt của người mẹ lúc mang thai.",
+      "y": "Sách ghi: môi trắng nhợt thì lúc sinh nở nhiều trắc trở; sách dặn lúc mang thai nên khám đúng lịch.",
       "nhom": "C",
       "chu_de": "suc_khoe",
       "nguon": "lieu_trang_tuong_phap",
@@ -357,13 +368,14 @@
       "dac_diem": [
         "moi_nhat"
       ],
-      "gioi": "nu"
+      "gioi": "nu",
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0014_s01_15",
       "han": "神昏氣暗必是貧窮之漢",
       "am": "Thần hôn khí ám tất thị bần cùng chi hán",
-      "y": "Sách ghi người thần mờ, khí tối thì đường tiền bạc khó mở.",
+      "y": "Sách ghi: thần mờ, khí tối thì ắt là người nghèo túng.",
       "nhom": "B",
       "chu_de": "tien_bac",
       "nguon": "lieu_trang_tuong_phap",
@@ -372,13 +384,14 @@
       "viec": "Tuần này ngủ trước 23 giờ ít nhất năm đêm.",
       "dac_diem": [
         "than_mo"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0014_s03_04",
       "han": "耳低百無一成",
       "am": "Nhĩ đê bách vô nhất thành",
-      "y": "Sách ghi tai thấp là nét người làm nhiều việc mà ít việc đi tới cùng.",
+      "y": "Sách ghi: tai thấp thì trăm việc không thành một.",
       "nhom": "B",
       "chu_de": "cong_viec",
       "nguon": "lieu_trang_tuong_phap",
@@ -387,13 +400,14 @@
       "viec": "Tuần này chọn một việc đang dở, làm cho xong trước khi mở việc mới.",
       "dac_diem": [
         "tai_nho_thap"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0014_s03_05",
       "han": "多因生角主愚賤",
       "am": "Đa nhân sinh giác chủ ngu tiện",
-      "y": "Sách ghi tóc mọc lấn vào góc trán là nét người chậm mở mang việc học.",
+      "y": "Sách ghi: phần nhiều do mọc 'sừng' (tóc lấn góc trán) mà chủ ngu kém, dễ bị người coi nhẹ.",
       "nhom": "B",
       "chu_de": "tinh_net",
       "nguon": "lieu_trang_tuong_phap",
@@ -402,7 +416,8 @@
       "viec": "Mỗi ngày đọc 20 phút về nghề mình đang làm.",
       "dac_diem": [
         "tran_hep_thap"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0014_s03_07",
@@ -419,7 +434,7 @@
       "ma": "R_YLZ_QING_p0015_s01_01",
       "han": "皮薄骨高少年死",
       "am": "Bì bạc cốt cao thiếu niên tử",
-      "y": "Sách xưa gắn người da mỏng, xương nổi với sức bền kém thời trẻ.",
+      "y": "Sách ghi: da mỏng, xương nhô cao thì sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ từ lúc còn trẻ.",
       "nhom": "C",
       "chu_de": "suc_ben",
       "nguon": "lieu_trang_tuong_phap",
@@ -428,13 +443,14 @@
       "viec": "Đi khám tổng quát mỗi năm một lần và hỏi bác sĩ về cân nặng hợp với mình.",
       "dac_diem": [
         "cot_tro"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0015_s01_02",
       "han": "皮厚骨少少年亡",
       "am": "Bì hậu cốt thiểu thiếu niên vong",
-      "y": "Sách xưa gắn người thịt nhiều, xương chìm với sức bền thời trẻ cần giữ.",
+      "y": "Sách ghi: da dày, xương ít thì sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ từ lúc còn trẻ.",
       "nhom": "C",
       "chu_de": "suc_ben",
       "nguon": "lieu_trang_tuong_phap",
@@ -443,7 +459,8 @@
       "viec": "Đo huyết áp, đường huyết khi đi khám; mỗi tuần đi bộ nhanh ba buổi.",
       "dac_diem": [
         "nhuc_nhao"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0015_s02_01",
@@ -486,7 +503,7 @@
       "ma": "R_YLZ_QING_p0015_s03_03",
       "han": "地削貧賤",
       "am": "Địa tước bần tiện",
-      "y": "Sách ghi cằm gọt thì về sau đường tiền bạc khó dày.",
+      "y": "Sách ghi: cằm (Địa) gọt thì nghèo, dễ bị người coi nhẹ.",
       "nhom": "B",
       "chu_de": "tien_bac",
       "nguon": "lieu_trang_tuong_phap",
@@ -495,13 +512,14 @@
       "viec": "Tháng này mở một khoản tiết kiệm riêng cho tuổi về sau, dù nhỏ.",
       "dac_diem": [
         "cam_nhon_lem"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0015_s03_04",
       "han": "睛黃愚玩",
       "am": "Tinh hoàng ngu ngoan",
-      "y": "Sách xưa gắn tròng mắt ngả vàng với người chậm hiểu.",
+      "y": "Sách ghi: tròng mắt vàng thì ngu, ương bướng; ngày nay mắt ngả vàng thì nên đi khám.",
       "nhom": "B",
       "chu_de": "suc_khoe",
       "nguon": "lieu_trang_tuong_phap",
@@ -510,13 +528,14 @@
       "viec": "Nếu thấy lòng trắng mắt ngả vàng, đi khám sớm trong tuần.",
       "dac_diem": [
         "sac_vang_xin"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0015_s03_05",
       "han": "鼻小大敗",
       "am": "Tị tiểu đại bại",
-      "y": "Sách ghi mũi nhỏ là nét người dễ vấp lớn khi làm việc lớn.",
+      "y": "Sách ghi: mũi nhỏ thì thất bại lớn.",
       "nhom": "B",
       "chu_de": "cong_viec",
       "nguon": "lieu_trang_tuong_phap",
@@ -525,13 +544,14 @@
       "viec": "Trước một quyết định lớn, viết ra ba rủi ro và hỏi một người tin cậy.",
       "dac_diem": [
         "song_mui_thap"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0015_s03_07",
       "han": "耳低反心窮志途",
       "am": "Nhĩ đê phản tâm cùng chí đồ",
-      "y": "Sách ghi tai thấp mà vành lật là nét người hay túng, chí dễ nản.",
+      "y": "Sách ghi: tai thấp, vành lật ngược thì lòng túng quẫn, đường chí hướng cùng bế.",
       "nhom": "B",
       "chu_de": "tien_bac",
       "nguon": "lieu_trang_tuong_phap",
@@ -540,13 +560,14 @@
       "viec": "Tuần này ghi lại mọi khoản chi để thấy tiền đi đâu.",
       "dac_diem": [
         "tai_mong_lat"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0015_s03_08",
       "han": "神散多狂而淫",
       "am": "Thần tán đa cuồng nhi dâm",
-      "y": "Sách xưa có nhắc người ánh mắt tán, không tụ thì tính dễ bốc đồng, khó giữ mình.",
+      "y": "Sách ghi: thần tán loạn thì nhiều cuồng; sách dặn giữ nếp sống chừng mực trong chuyện tình cảm.",
       "nhom": "C",
       "chu_de": "tinh_net",
       "nguon": "lieu_trang_tuong_phap",
@@ -555,13 +576,14 @@
       "viec": "Mỗi ngày dành mười phút ngồi yên, không điện thoại.",
       "dac_diem": [
         "than_dao"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0015_s03_09",
       "han": "天庭不好一生不妙",
       "am": "Thiên đình bất hảo nhất sinh bất diệu",
-      "y": "Sách ghi phần trán không đẹp thì việc cả đời khó trơn.",
+      "y": "Sách ghi: thiên đình (trán) không tốt thì cả đời không hay.",
       "nhom": "B",
       "chu_de": "cong_viec",
       "nguon": "lieu_trang_tuong_phap",
@@ -571,7 +593,8 @@
       "dac_diem": [
         "tran_hep_thap",
         "tran_lom"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0015_s04_01",
@@ -599,7 +622,7 @@
       "ma": "R_YLZ_QING_p0015_s05_02",
       "han": "兩顴獨高克子刑夫",
       "am": "Lưỡng quyền độc cao khắc tử hình phu",
-      "y": "Sách xưa có nhắc phụ nữ gò má cao vượt hẳn thì chuyện vợ chồng, con cái hay nhiều sóng.",
+      "y": "Sách ghi: hai gò má riêng cao vượt thì sách dặn nên quan tâm, chăm sóc sức khoẻ con và chồng nhiều hơn.",
       "nhom": "C",
       "chu_de": "gia_dinh",
       "nguon": "lieu_trang_tuong_phap",
@@ -610,7 +633,8 @@
         "quyen_tro",
         "quyen_co_thit"
       ],
-      "gioi": "nu"
+      "gioi": "nu",
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0015_s05_04",
@@ -630,7 +654,7 @@
       "ma": "R_YLZ_QING_p0015_s05_06",
       "han": "一世多成多賤多學少成",
       "am": "Nhất thế đa thành đa tiện, đa học thiểu thành",
-      "y": "Sách ghi đàn ông tai không đẹp thì học nhiều mà thành ít, việc lúc được lúc hỏng.",
+      "y": "Sách ghi: cả đời nhiều lần thành, nhiều lần sa sút, bị coi nhẹ; học nhiều mà thành ít.",
       "nhom": "B",
       "chu_de": "cong_viec",
       "nguon": "lieu_trang_tuong_phap",
@@ -641,7 +665,8 @@
         "tai_mong_lat",
         "tai_nho_thap"
       ],
-      "gioi": "nam"
+      "gioi": "nam",
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0015_s06_01",
@@ -712,7 +737,7 @@
       "ma": "R_YLZ_QING_p0016_s01_06",
       "han": "上岳低則妨父母",
       "am": "Thượng nhạc đê tắc phương phụ mẫu",
-      "y": "Sách xưa có nhắc trán thấp gắn với tuổi nhỏ ít được gần cha mẹ.",
+      "y": "Sách ghi: trán (Thượng Nhạc) thấp thì sách dặn nên quan tâm, chăm sóc sức khoẻ cha mẹ nhiều hơn.",
       "nhom": "C",
       "chu_de": "gia_dinh",
       "nguon": "lieu_trang_tuong_phap",
@@ -721,13 +746,14 @@
       "viec": "Tuần này gọi điện hỏi thăm cha mẹ hoặc người đã nuôi mình.",
       "dac_diem": [
         "tran_hep_thap"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0016_s01_07",
       "han": "中嶽陷則敗祖基",
       "am": "Trung nhạc hãm tắc bại tổ cơ",
-      "y": "Sách ghi phần mũi lõm, gãy thì khó giữ phần gia sản cha ông để lại.",
+      "y": "Sách ghi: mũi (Trung Nhạc) lõm thì làm bại cơ nghiệp tổ tiên.",
       "nhom": "B",
       "chu_de": "tien_bac",
       "nguon": "lieu_trang_tuong_phap",
@@ -737,13 +763,14 @@
       "dac_diem": [
         "son_can_thap",
         "song_mui_lech"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0016_s01_08",
       "han": "下嶽削則一生貧窮",
       "am": "Hạ nhạc tước tắc nhất sinh bần cùng",
-      "y": "Sách ghi cằm gọt thì cả đời tiền bạc hay chật vật.",
+      "y": "Sách ghi: cằm (Hạ Nhạc) gọt thì cả đời nghèo túng.",
       "nhom": "B",
       "chu_de": "tien_bac",
       "nguon": "lieu_trang_tuong_phap",
@@ -752,7 +779,8 @@
       "viec": "Tháng này tính xem quỹ dự phòng của mình đủ được mấy tháng.",
       "dac_diem": [
         "cam_nhon_lem"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0016_s02_01",
@@ -780,14 +808,15 @@
       "ma": "R_YLZ_QING_p0016_s03_02",
       "han": "若有一面好相得一件破處既不利也",
       "am": "Nhược hữu nhất diện hảo tướng, đắc nhất kiện phá xứ, ký bất lợi dã",
-      "y": "Sách ghi gương mặt đẹp mà có một chỗ hỏng thì chỗ hỏng ấy vẫn làm vướng.",
+      "y": "Sách ghi: nếu có cả gương mặt tướng tốt mà mắc một chỗ hỏng thì vẫn là không lợi.",
       "nhom": "B",
       "chu_de": "tong_quan",
       "nguon": "lieu_trang_tuong_phap",
       "chuong": "Quyển thượng, mục «不可認真還宜動察»",
       "ham_y": "Nên chú ý đúng điểm yếu của mình thay vì chỉ dựa vào điểm mạnh.",
       "viec": "Viết ra một thói quen đang kéo mình xuống và chọn một cách bỏ nó trong tháng này.",
-      "chung": true
+      "chung": true,
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0016_s03_03",
@@ -867,7 +896,7 @@
       "ma": "R_YLZ_QING_p0017_s02_05",
       "han": "耳反額方四度成雙",
       "am": "Nhĩ phản ngạch phương tứ độ thành song",
-      "y": "Sách xưa có nhắc phụ nữ tai vành lật, trán vuông thì đường duyên hay đổi.",
+      "y": "Sách ghi: tai lật mà trán vuông thì lập gia đình hơn một lần, đến bốn lần.",
       "nhom": "C",
       "chu_de": "tinh_duyen",
       "nguon": "lieu_trang_tuong_phap",
@@ -877,7 +906,8 @@
       "dac_diem": [
         "tai_mong_lat"
       ],
-      "gioi": "nu"
+      "gioi": "nu",
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0017_s02_06",
@@ -898,7 +928,7 @@
       "ma": "R_YLZ_QING_p0017_s03_01",
       "han": "皆至此而皮血不潤神氣不旺必賤",
       "am": "Giai chí thử nhi bì huyết bất nhuận thần khí bất vượng tất tiện",
-      "y": "Sách ghi lúc đã lớn mà da không tươi, thần khí không vượng là nét người khó đi lên.",
+      "y": "Sách ghi: đến tuổi ấy mà da và máu không tươi nhuận, thần khí không vượng thì ắt bị người coi nhẹ, địa vị thấp.",
       "nhom": "B",
       "chu_de": "tong_quan",
       "nguon": "lieu_trang_tuong_phap",
@@ -908,13 +938,14 @@
       "dac_diem": [
         "than_mo",
         "sac_trang_bech"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0017_s03_03",
       "han": "惟忌肉肥光少血滯神衰主夭",
       "am": "Duy kỵ nhục phì quang thiểu huyết trệ thần suy chủ yểu",
-      "y": "Sách xưa có nhắc người thịt nhiều mà sắc kém, thần mệt thì sức bền cần giữ.",
+      "y": "Sách ghi: chỉ kỵ thịt béo mà ít ánh sáng, máu trệ, thần suy; sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ.",
       "nhom": "C",
       "chu_de": "suc_ben",
       "nguon": "lieu_trang_tuong_phap",
@@ -925,7 +956,8 @@
         "nhuc_nhao",
         "than_mo"
       ],
-      "can_du": true
+      "can_du": true,
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0017_s03_04",
@@ -945,7 +977,7 @@
       "ma": "R_YLZ_QING_p0017_s05_01",
       "han": "額高耳反火克金父母家財總是空",
       "am": "Ngạch cao nhĩ phản hỏa khắc kim, phụ mẫu gia tài tổng thị không",
-      "y": "Sách ghi trán cao mà tai lật thì phần gia sản cha mẹ khó giữ.",
+      "y": "Sách ghi: trán cao mà tai lật là Hoả khắc Kim, gia tài của cha mẹ rốt cuộc đều trống không.",
       "nhom": "B",
       "chu_de": "tien_bac",
       "nguon": "lieu_trang_tuong_phap",
@@ -956,7 +988,8 @@
         "tran_cao_rong",
         "tai_mong_lat"
       ],
-      "can_du": true
+      "can_du": true,
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0017_s05_03",
@@ -977,7 +1010,7 @@
       "ma": "R_YLZ_QING_p0017_s05_04",
       "han": "鼻大口小土克水三十三四離鄉間",
       "am": "Tị đại khẩu tiểu thổ khắc thủy, tam thập tam tứ ly hương gian",
-      "y": "Sách ghi mũi to mà miệng nhỏ thì có quãng phải rời quê lập nghiệp.",
+      "y": "Sách ghi: mũi to mà miệng nhỏ là Thổ khắc Thuỷ, khoảng ba mươi ba, ba mươi bốn tuổi phải rời quê.",
       "nhom": "B",
       "chu_de": "di_lai",
       "nguon": "lieu_trang_tuong_phap",
@@ -988,20 +1021,22 @@
         "chuan_dau_to",
         "mieng_nho_mong"
       ],
-      "can_du": true
+      "can_du": true,
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0017_s05_05",
       "han": "五行有一克不為好相",
       "am": "Ngũ hành hữu nhất khắc bất vi hảo tướng",
-      "y": "Sách ghi năm phần trên mặt (tai, trán, miệng, mũi) có một chỗ không hợp hành nhau thì chưa phải tướng trọn.",
+      "y": "Sách ghi: năm hành (trên mặt) có một chỗ khắc nhau thì không phải tướng tốt.",
       "nhom": "B",
       "chu_de": "tong_quan",
       "nguon": "lieu_trang_tuong_phap",
       "chuong": "Quyển thượng, mục «五行貴賤難逃生克之中»",
       "ham_y": "Nên chú ý: chính sách cũng dặn một nét chưa trọn thì bù bằng nết và việc làm.",
       "viec": "Chọn một điểm yếu biết rõ của mình và tìm một người bổ khuyết.",
-      "chung": true
+      "chung": true,
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0017_s05_06",
@@ -1020,7 +1055,7 @@
       "ma": "R_YLZ_QING_p0017_s05_07",
       "han": "如有天倉而無地庫初榮暮敗",
       "am": "Như hữu thiên thương nhi vô địa khố, sơ vinh mộ bại",
-      "y": "Sách ghi hai bên trán đầy mà cằm gọt thì đầu đời thuận, quãng sau cần giữ.",
+      "y": "Sách ghi: nếu có góc trán (Thiên Thương) đầy mà thiếu hàm dưới (Địa Khố) thì đầu đời vinh hiển, về già sa sút.",
       "nhom": "B",
       "chu_de": "tien_bac",
       "nguon": "lieu_trang_tuong_phap",
@@ -1031,7 +1066,8 @@
         "giac_day",
         "cam_nhon_lem"
       ],
-      "can_du": true
+      "can_du": true,
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0017_s05_08",
@@ -1052,7 +1088,7 @@
       "ma": "R_YLZ_QING_p0017_s05_09",
       "han": "如有顴骨而無天倉地庫亦不好主大孤獨之相",
       "am": "Như hữu quyền cốt nhi vô thiên thương địa khố diệc bất hảo, chủ đại cô độc chi tướng",
-      "y": "Sách ghi gò má nổi mà trán, cằm thiếu đầy thì người hay đơn độc.",
+      "y": "Sách ghi: nếu có gò má nổi mà không có Thiên Thương, Địa Khố cũng là không tốt, là tướng rất cô độc.",
       "nhom": "B",
       "chu_de": "ban_be",
       "nguon": "lieu_trang_tuong_phap",
@@ -1064,7 +1100,8 @@
         "giac_lech",
         "cam_nhon_lem"
       ],
-      "can_du": true
+      "can_du": true,
+      "sat": true
     },
     {
       "ma": "R_YLZ_QING_p0017_s06_01",
@@ -1102,7 +1139,7 @@
       "ma": "R_YLZ_QISE_RED_FIRE",
       "han": "紅赤紫色屬火乃心之苗",
       "am": "Hồng xích tử sắc thuộc hỏa nãi tâm chi miêu",
-      "y": "Sách xưa xếp sắc mặt hồng, đỏ, tía vào hành Hoả, gắn với tim.",
+      "y": "Sách ghi: sắc hồng, đỏ, tía thuộc Hoả, là mầm của tim.",
       "nhom": "B",
       "chu_de": "suc_khoe",
       "nguon": "lieu_trang_tuong_phap",
@@ -1111,13 +1148,14 @@
       "viec": "Đo huyết áp ở nhà vài buổi sáng, ghi lại mang theo khi đi khám.",
       "dac_diem": [
         "sac_do_ung"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QISE_WHITE_METAL",
       "han": "白屬金肺之苗",
       "am": "Bạch thuộc kim phế chi miêu",
-      "y": "Sách xưa xếp sắc mặt trắng vào hành Kim, gắn với phổi.",
+      "y": "Sách ghi: sắc trắng thuộc Kim, là mầm của phổi.",
       "nhom": "B",
       "chu_de": "suc_khoe",
       "nguon": "lieu_trang_tuong_phap",
@@ -1126,13 +1164,14 @@
       "viec": "Đi khám định kỳ, hỏi bác sĩ có cần kiểm tra hô hấp, máu không.",
       "dac_diem": [
         "sac_trang_bech"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QISE_YELLOW_EARTH",
       "han": "黃屬土脾之苗",
       "am": "Hoàng thuộc thổ tỳ chi miêu",
-      "y": "Sách xưa xếp sắc mặt vàng vào hành Thổ, gắn với tỳ (đường tiêu hoá).",
+      "y": "Sách ghi: sắc vàng thuộc Thổ, là mầm của tỳ.",
       "nhom": "B",
       "chu_de": "suc_khoe",
       "nguon": "lieu_trang_tuong_phap",
@@ -1141,13 +1180,14 @@
       "viec": "Đi khám tiêu hoá định kỳ và để ý bữa ăn đều giờ.",
       "dac_diem": [
         "sac_vang_xin"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QISE_BLACK_WATER",
       "han": "黑屬水腎之苗",
       "am": "Hắc thuộc thủy thận chi miêu",
-      "y": "Sách xưa xếp sắc mặt tối, đen vào hành Thuỷ, gắn với thận.",
+      "y": "Sách ghi: sắc đen thuộc Thuỷ, là mầm của thận.",
       "nhom": "B",
       "chu_de": "suc_khoe",
       "nguon": "lieu_trang_tuong_phap",
@@ -1156,7 +1196,8 @@
       "viec": "Khi đi khám định kỳ, hỏi bác sĩ về xét nghiệm nước tiểu; uống đủ nước mỗi ngày.",
       "dac_diem": [
         "sac_toi_sam"
-      ]
+      ],
+      "sat": true
     },
     {
       "ma": "R_YLZ_QISE_GREEN_WOOD",

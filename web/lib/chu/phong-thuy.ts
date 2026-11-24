@@ -94,7 +94,7 @@ export const CHU_PHONG_THUY_UI = {
   "ty.luu_hoi": m(TY, "Hồ sơ nhà đang ghi vị trí khác ({cu}). Thay bằng vị trí vừa chọn?", "Your house profile has different positions ({cu}). Replace them with these?"),
   "ty.luu_ghi_chu": m(TY, "Chỉ lưu vị trí ba chỗ, không đổi hướng nhà đã đo.", "Only the three positions are saved; your measured house direction is unchanged."),
   "ty.sach_tieu_de": m(TY, "Sách xưa ghi gì về thế nhà này", "What the classics say about this layout"),
-  "ty.du_18_hoi": m(TY, "Tôi đủ 18 tuổi — xem cả các ghi chép này", "I am 18 or over — show these notes too"),
+  "ty.du_18_hoi": m(TY, "Tôi đủ 16 tuổi — xem cả các ghi chép này", "I am 16 or over — show these notes too"),
   "ty.nguon": m(TY, "Theo Dương Trạch Tam Yếu (Triệu Cửu Phong, đời Thanh). Không cần mua vật phẩm hoá giải.", "Based on the Three Essentials of the Home (Zhao Jiufeng, Qing dynasty). No “cure” objects needed."),
   // ---------------------------------------------------------------- VT-1 "Đứng giữa nhà, chĩa điện thoại" (components/phong-thuy/DoViTriVat)
   "dv.nhan": m(DV, "Đo vị trí thật trong nhà", "Measure where things really are"),

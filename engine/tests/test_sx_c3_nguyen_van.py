@@ -37,8 +37,8 @@ def test_khuon_hien_thi_va_cau_ket():
 
 
 def test_nhom_c_van_khong_toi_nguoi_duoi_18():
-    assert sm._loc([(MAU, "x")], 17) == [] and sm._loc([(MAU, "x")], None) == []
-    assert sm._loc([(MAU, "x")], 18)
+    assert sm._loc([(MAU, "x")], 15) == [] and sm._loc([(MAU, "x")], None) == []
+    assert sm._loc([(MAU, "x")], 16)       # TUOI-16
 
 
 def test_moi_muc_sat_trong_kb_qua_bo_kiem():

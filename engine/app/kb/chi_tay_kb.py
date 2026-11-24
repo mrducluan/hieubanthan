@@ -14,7 +14,7 @@ from app.kb import sach_ghi
 
 TEP = "chi_tay_kb.json"
 NGUON_HIEN_THI = "Thần Tướng Toàn Biên, quyển 10, bản khắc đời Minh"   # BM-1: kiểu sách, không nơi lấy ảnh
-TUOI_NHOM_C = 18
+TUOI_NHOM_C = __import__("app.config", fromlist=["x"]).TUOI_NGUOI_LON   # TUOI-16
 _KHOA_VAN = ("ma", "ten", "ten_han", "am_ten", "anh", "rong", "cao", "han", "y", "nhom", "chu_de")
 
 
@@ -48,8 +48,8 @@ def chu_de() -> list[dict]:
 
 def _mot(m: dict) -> dict:
     """Một vân cho thư viện: thêm câu hiển thị theo khuôn SX-C. Phiên âm chỉ ở nhóm A (âm câu nặng đọc lên vẫn nặng)."""
-    ra = {k: m[k] for k in _KHOA_VAN if not (k == "am_ten" and m["nhom"] == "C")}
-    if m["nhom"] == "A":
+    ra = {k: m[k] for k in _KHOA_VAN if not (k == "am_ten" and m["nhom"] == "C" and not m.get("sat"))}
+    if m["nhom"] == "A" or m.get("sat"):                # SX-C3: câu nói sát nguyên văn kèm âm Hán Việt
         ra["am"] = m["am"]
     for k in ("ham_y", "viec"):
         if m.get(k):

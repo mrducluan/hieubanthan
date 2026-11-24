@@ -1,5 +1,5 @@
 // EN-2 mục 5 — tình trạng (độc thân / có đôi) người dùng TỰ CHỌN, chỉ lưu trên máy, đi kèm lá số tới engine để báo cáo
-// đời sống chọn lời ở chương Tình yêu / Gia đình. Người dưới 18 tuổi không được hỏi.
+// đời sống chọn lời ở chương Tình yêu / Gia đình. Người dưới 16 tuổi không được hỏi (TUOI-16).
 import { test, expect } from "@playwright/test";
 import { HO_SO_MAU, napHoSo } from "./_hoso";
 
@@ -63,7 +63,7 @@ test("bỏ chọn tình trạng → xoá khỏi hồ sơ, không gửi", async (
   expect(h.tinh_trang).toBeUndefined();
 });
 
-test("người dưới 18 tuổi không được hỏi tình trạng", async ({ page }) => {
+test("người dưới 16 tuổi không được hỏi tình trạng", async ({ page }) => {
   await napHoSo(page, { ...THIEU_NOI_SINH, nam: new Date().getFullYear() - 14 });
   await page.goto("/tu-vi");
   await expect(page.getByLabel("Nơi sinh")).toBeVisible();

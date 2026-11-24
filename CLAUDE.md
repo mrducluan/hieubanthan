@@ -86,6 +86,11 @@ Next.js 16 App Router (React 19) + TypeScript strict / Supabase (Postgres, Auth,
   "khám thai đúng lịch"; bệnh hiểm nghèo → bộ phận + đi khám; tù ngục → "cẩn thận giấy tờ, pháp luật". Giữ nguyên: người
   chưa đủ 18 tuổi / chưa rõ tuổi không nhận nhóm C; nhóm C không vào tiêu đề, tóm tắt, thẻ chia sẻ, thông báo đẩy, lời
   nhắc AI; câu hỏi trực tiếp về tuổi thọ / bệnh và khủng hoảng vẫn qua cổng an toàn (SK-1b); hệ thống vẫn không tự phán.
+- **TUOI-16 (chủ dự án đổi 2026-11-24, thay mọi ngưỡng "18 tuổi" của phần luận giải)**: từ **16 tuổi tròn** là người lớn —
+  tự đọc bài luận của mình, nhận nhóm C (SX-C3), lớp "Luận theo câu hỏi" (LH-1), hộp hoàn cảnh, hộp "Năm nên chú ý", câu hỏi
+  tình trạng tình cảm. Dưới 16: engine phân vai `vai_doc = "cha_me"` — bài viết cho cha mẹ / người lớn đọc hộ (dải
+  `loi_vai_doc` đầu bài, lời Vận hạn ô `nho`), nhóm C vẫn không hiện. Một hằng `config.TUOI_NGUOI_LON` + `config.vai_doc()`.
+  Ngưỡng 18 của thoả thuận ảnh gương mặt / dữ liệu sinh trắc **giữ nguyên** (pháp lý, không phải luận giải).
 - Đổi lịch âm: thuật toán Hồ Ngọc Đức, xử lý múi giờ VN trước 1975
 - Ranh giới giờ Tý: **ĐÃ CHỐT `SWITCH_AT_0000`** (quyết định người vận hành,
   2026-08-15) — sinh 23:00–23:59 thuộc ngày hôm đó, giờ Tý. Hằng

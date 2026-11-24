@@ -577,12 +577,13 @@
       "sach": {
         "han": "鬪牛煞起犯官刑",
         "am": "Đấu ngưu sát khởi phạm quan hình",
-        "y": "Cặp Nhị Hắc và Tam Bích tạo thế Mộc lấn Thổ, sách xưa gọi là Đấu Ngưu, dễ sinh lời qua tiếng lại và vướng tranh chấp.",
+        "y": "Sách ghi: sát Đấu Ngưu (Nhị Hắc gặp Tam Bích) nổi lên thì vướng chuyện quan, kiện tụng; sách dặn nên cẩn thận giấy tờ, chuyện pháp luật.",
         "nhom": "B",
         "chu_de": "gia_dinh",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý giữ hoà khí trong nhà và trao đổi rõ ràng bằng văn bản khi làm việc chung.",
-        "viec": "Giữ góc này đủ sáng, thoáng khí; tránh bàn chuyện căng thẳng khi mọi người đang mệt."
+        "viec": "Giữ góc này đủ sáng, thoáng khí; tránh bàn chuyện căng thẳng khi mọi người đang mệt.",
+        "sat": true
       }
     },
     "2-4": {
@@ -642,12 +643,13 @@
       "sach": {
         "han": "二五交加而損主亦且重病",
         "am": "Nhị Ngũ giao gia nhi tổn chủ diệc thả trọng bệnh",
-        "y": "Cặp Nhị Hắc gặp Ngũ Hoàng thường được sách xưa nhắc là nặng nề về sức khoẻ và sự yên ổn của người ở.",
+        "y": "Sách ghi: sao Nhị (Nhị Hắc) và sao Ngũ (Ngũ Hoàng) chồng lên nhau thì hại người chủ nhà, lại thêm bệnh nặng; sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ.",
         "nhom": "C",
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý giữ gìn sức khoẻ, tránh đặt phòng ngủ chính hay bếp lâu dài ở phía này.",
-        "viec": "Giữ khu vực này khô thoáng, ít xáo trộn và sắp xếp lịch khám sức khoẻ định kỳ cho người trong nhà."
+        "viec": "Giữ khu vực này khô thoáng, ít xáo trộn và sắp xếp lịch khám sức khoẻ định kỳ cho người trong nhà.",
+        "sat": true
       }
     },
     "2-6": {
@@ -828,12 +830,13 @@
       "sach": {
         "han": "鬪牛煞起犯官刑",
         "am": "Đấu ngưu sát khởi phạm quan hình",
-        "y": "Cặp Nhị Hắc và Tam Bích tạo thế Mộc lấn Thổ, sách xưa gọi là Đấu Ngưu, dễ sinh lời qua tiếng lại và vướng tranh chấp.",
+        "y": "Sách ghi: sát Đấu Ngưu (Nhị Hắc gặp Tam Bích) nổi lên thì vướng chuyện quan, kiện tụng; sách dặn nên cẩn thận giấy tờ, chuyện pháp luật.",
         "nhom": "B",
         "chu_de": "gia_dinh",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý giữ hoà khí trong nhà và trao đổi rõ ràng bằng văn bản khi làm việc chung.",
-        "viec": "Giữ góc này đủ sáng, thoáng khí; tránh bàn chuyện căng thẳng khi mọi người đang mệt."
+        "viec": "Giữ góc này đủ sáng, thoáng khí; tránh bàn chuyện căng thẳng khi mọi người đang mệt.",
+        "sat": true
       }
     },
     "3-3": {
@@ -896,12 +899,13 @@
       "sach": {
         "han": "碧綠風魔他處廉貞莫見",
         "am": "Bích Lục phong ma, tha xứ Liêm Trinh mạc kiến",
-        "y": "Hai sao hành Mộc Tam Bích và Tứ Lục gặp nhau khiến tâm trí dễ xao động, nhiều suy nghĩ rối khi không có điểm tựa.",
+        "y": "Sách ghi: Tam Bích, Tứ Lục gặp nhau là thế 'phong ma', tâm trí dễ rối loạn; ở cung khác thì chớ để gặp Liêm Trinh (Ngũ Hoàng).",
         "nhom": "B",
         "chu_de": "tinh_net",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý giữ lịch sinh hoạt rõ ràng, tránh ôm quá nhiều việc cùng lúc khiến tinh thần căng thẳng.",
-        "viec": "Giữ không gian gọn gàng, bớt đồ lộn xộn và đặt giờ nghỉ cố định mỗi ngày."
+        "viec": "Giữ không gian gọn gàng, bớt đồ lộn xộn và đặt giờ nghỉ cố định mỗi ngày.",
+        "sat": true
       }
     },
     "3-5": {
@@ -992,12 +996,13 @@
       "sach": {
         "han": "三七迭臨而被盜更見官刑",
         "am": "Tam Thất điệt lâm nhi bị đạo cánh kiến quan hình",
-        "y": "Cặp Tam Bích gặp Thất Xích thường được sách xưa nhắc về chuyện mất mát đồ đạc và tranh chấp giấy tờ.",
+        "y": "Sách ghi: sao Tam (Tam Bích) và sao Thất (Thất Xích) chồng lên nhau thì bị trộm cướp, lại vướng chuyện quan; sách dặn nên cẩn thận giấy tờ, chuyện pháp luật.",
         "nhom": "B",
         "chu_de": "giay_to",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý an ninh cửa nẻo và đọc kỹ điều khoản trước khi ký kết ở phía này.",
-        "viec": "Kiểm tra khoá cửa, cất giấy tờ quan trọng ở nơi an toàn và giữ lời khi trao đổi công việc."
+        "viec": "Kiểm tra khoá cửa, cất giấy tờ quan trọng ở nơi an toàn và giữ lời khi trao đổi công việc.",
+        "sat": true
       }
     },
     "3-8": {
@@ -1028,12 +1033,13 @@
       "sach": {
         "han": "八三之遇更惡",
         "am": "Bát Tam chi ngộ cánh ác",
-        "y": "Mộc Tam Bích lấn Thổ Bát Bạch, sách xưa nhắc sự va chạm dễ làm người trẻ bốc đồng hoặc hao sức.",
+        "y": "Sách ghi: sao Bát (Bát Bạch) gặp sao Tam (Tam Bích) thì càng xấu hơn.",
         "nhom": "B",
         "chu_de": "gia_dinh",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý giữ nhịp sinh hoạt điềm tĩnh, tránh để khu vực này bừa bộn gây bức bối.",
-        "viec": "Dọn gọn đồ đạc thừa, dùng ánh sáng ấm và khuyến khích giao tiếp nhẹ nhàng trong gia đình."
+        "viec": "Dọn gọn đồ đạc thừa, dùng ánh sáng ấm và khuyến khích giao tiếp nhẹ nhàng trong gia đình.",
+        "sat": true
       }
     },
     "3-9": {
@@ -1158,12 +1164,13 @@
       "sach": {
         "han": "碧綠風魔他處廉貞莫見",
         "am": "Bích Lục phong ma, tha xứ Liêm Trinh mạc kiến",
-        "y": "Hai sao hành Mộc Tam Bích và Tứ Lục gặp nhau khiến tâm trí dễ xao động, nhiều suy nghĩ rối khi không có điểm tựa.",
+        "y": "Sách ghi: Tam Bích, Tứ Lục gặp nhau là thế 'phong ma', tâm trí dễ rối loạn; ở cung khác thì chớ để gặp Liêm Trinh (Ngũ Hoàng).",
         "nhom": "B",
         "chu_de": "tinh_net",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý giữ lịch sinh hoạt rõ ràng, tránh ôm quá nhiều việc cùng lúc khiến tinh thần căng thẳng.",
-        "viec": "Giữ không gian gọn gàng, bớt đồ lộn xộn và đặt giờ nghỉ cố định mỗi ngày."
+        "viec": "Giữ không gian gọn gàng, bớt đồ lộn xộn và đặt giờ nghỉ cố định mỗi ngày.",
+        "sat": true
       }
     },
     "4-4": {
@@ -1304,12 +1311,13 @@
       "sach": {
         "han": "八會四而小口損生",
         "am": "Bát hội Tứ nhi tiểu khẩu tổn sinh",
-        "y": "Mộc Tứ Lục lấn Thổ Bát Bạch, sách xưa nhắc cần để ý hơn tới trẻ nhỏ và người trẻ tuổi trong nhà.",
+        "y": "Sách ghi: sao Bát (Bát Bạch) gặp sao Tứ (Tứ Lục) thì trẻ nhỏ trong nhà bị tổn hại; sách dặn nên chăm con kỹ lúc còn nhỏ, khám sức khoẻ cho trẻ đều đặn.",
         "nhom": "C",
         "chu_de": "gia_dinh",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý không gian vui chơi, nghỉ ngơi của trẻ nhỏ cần gọn gàng, an toàn và đủ ánh sáng.",
-        "viec": "Kiểm tra an toàn đồ đạc, góc bàn ở khu vực này và cho trẻ khám định kỳ đều đặn."
+        "viec": "Kiểm tra an toàn đồ đạc, góc bàn ở khu vực này và cho trẻ khám định kỳ đều đặn.",
+        "sat": true
       }
     },
     "4-9": {
@@ -1402,12 +1410,13 @@
       "sach": {
         "han": "二五交加而損主亦且重病",
         "am": "Nhị Ngũ giao gia nhi tổn chủ diệc thả trọng bệnh",
-        "y": "Cặp Nhị Hắc gặp Ngũ Hoàng thường được sách xưa nhắc là nặng nề về sức khoẻ và sự yên ổn của người ở.",
+        "y": "Sách ghi: sao Nhị (Nhị Hắc) và sao Ngũ (Ngũ Hoàng) chồng lên nhau thì hại người chủ nhà, lại thêm bệnh nặng; sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ.",
         "nhom": "C",
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý giữ gìn sức khoẻ, tránh đặt phòng ngủ chính hay bếp lâu dài ở phía này.",
-        "viec": "Giữ khu vực này khô thoáng, ít xáo trộn và sắp xếp lịch khám sức khoẻ định kỳ cho người trong nhà."
+        "viec": "Giữ khu vực này khô thoáng, ít xáo trộn và sắp xếp lịch khám sức khoẻ định kỳ cho người trong nhà.",
+        "sat": true
       }
     },
     "5-3": {
@@ -1605,12 +1614,13 @@
       "sach": {
         "han": "紫黃毒藥鄰宮兌口休嘗",
         "am": "Tử Hoàng độc dược, lân cung Đoài khẩu hưu thường",
-        "y": "Hoả Cửu Tử sinh Thổ Ngũ Hoàng làm tính nóng và trì trệ tăng lên, sách xưa dặn cẩn trọng chuyện ăn uống và sức khoẻ.",
+        "y": "Sách ghi: Cửu Tử gặp Ngũ Hoàng là thế 'thuốc độc', ở cung kề Đoài (cửa miệng) thì chớ nếm — ý dặn cẩn thận đồ ăn thức uống; có dấu hiệu ngộ độc thì đi khám ngay.",
         "nhom": "C",
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý vệ sinh an toàn thực phẩm và tránh đặt bếp hoặc nơi ăn uống ẩm nóng ở phía này.",
-        "viec": "Giữ khu vực này sạch sẽ, thoáng mát, ăn uống điều độ và đi khám định kỳ khi tiêu hoá không ổn."
+        "viec": "Giữ khu vực này sạch sẽ, thoáng mát, ăn uống điều độ và đi khám định kỳ khi tiêu hoá không ổn.",
+        "sat": true
       }
     },
     "6-1": {
@@ -1812,12 +1822,13 @@
       "sach": {
         "han": "交劍煞臨多劫掠",
         "am": "Giao kiếm sát lâm đa kiếp lược",
-        "y": "Hai sao hành Kim là Lục Bạch và Thất Xích gặp nhau tạo thế va chạm mạnh, dễ căng thẳng hoặc hao hụt.",
+        "y": "Sách ghi: sát Giao Kiếm (Lục Bạch gặp Thất Xích) tới thì hay bị cướp bóc, tranh đoạt.",
         "nhom": "B",
         "chu_de": "nha_cua",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý cất gọn vật sắc nhọn, giữ khoá cửa chắc và tránh tranh luận gay gắt ở góc này.",
-        "viec": "Bớt bày đồ kim loại sắc cạnh, khoá kỹ cửa phụ và giữ không gian gọn gàng, dịu mắt."
+        "viec": "Bớt bày đồ kim loại sắc cạnh, khoá kỹ cửa phụ và giữ không gian gọn gàng, dịu mắt.",
+        "sat": true
       }
     },
     "6-8": {
@@ -1887,12 +1898,13 @@
       "sach": {
         "han": "六共九而長房血症",
         "am": "Lục cộng Cửu nhi trưởng phòng huyết chứng",
-        "y": "Hoả Cửu Tử lấn Kim Lục Bạch, sách xưa nhắc người trụ cột trong nhà dễ căng thẳng, mệt đầu hoặc vấn đề tuần hoàn.",
+        "y": "Sách ghi: sao Lục (Lục Bạch) cùng sao Cửu (Cửu Tử) thì nhánh con trưởng mắc chứng về máu; nên đi khám định kỳ.",
         "nhom": "C",
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý giảm áp lực, tránh để khu vực này quá bí nóng và để ý sức khoẻ tim mạch, huyết áp.",
-        "viec": "Giữ phòng thoáng mát, nghỉ ngơi điều độ và đi khám sức khoẻ định kỳ khi thấy hay đau đầu hoặc mệt mỏi."
+        "viec": "Giữ phòng thoáng mát, nghỉ ngơi điều độ và đi khám sức khoẻ định kỳ khi thấy hay đau đầu hoặc mệt mỏi.",
+        "sat": true
       }
     },
     "7-1": {
@@ -1987,12 +1999,13 @@
       "sach": {
         "han": "三七迭臨而被盜更見官刑",
         "am": "Tam Thất điệt lâm nhi bị đạo cánh kiến quan hình",
-        "y": "Cặp Tam Bích gặp Thất Xích thường được sách xưa nhắc về chuyện mất mát đồ đạc và tranh chấp giấy tờ.",
+        "y": "Sách ghi: sao Tam (Tam Bích) và sao Thất (Thất Xích) chồng lên nhau thì bị trộm cướp, lại vướng chuyện quan; sách dặn nên cẩn thận giấy tờ, chuyện pháp luật.",
         "nhom": "B",
         "chu_de": "giay_to",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý an ninh cửa nẻo và đọc kỹ điều khoản trước khi ký kết ở phía này.",
-        "viec": "Kiểm tra khoá cửa, cất giấy tờ quan trọng ở nơi an toàn và giữ lời khi trao đổi công việc."
+        "viec": "Kiểm tra khoá cửa, cất giấy tờ quan trọng ở nơi an toàn và giữ lời khi trao đổi công việc.",
+        "sat": true
       }
     },
     "7-4": {
@@ -2083,12 +2096,13 @@
       "sach": {
         "han": "交劍煞臨多劫掠",
         "am": "Giao kiếm sát lâm đa kiếp lược",
-        "y": "Hai sao hành Kim là Lục Bạch và Thất Xích gặp nhau tạo thế va chạm mạnh, dễ căng thẳng hoặc hao hụt.",
+        "y": "Sách ghi: sát Giao Kiếm (Lục Bạch gặp Thất Xích) tới thì hay bị cướp bóc, tranh đoạt.",
         "nhom": "B",
         "chu_de": "nha_cua",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý cất gọn vật sắc nhọn, giữ khoá cửa chắc và tránh tranh luận gay gắt ở góc này.",
-        "viec": "Bớt bày đồ kim loại sắc cạnh, khoá kỹ cửa phụ và giữ không gian gọn gàng, dịu mắt."
+        "viec": "Bớt bày đồ kim loại sắc cạnh, khoá kỹ cửa phụ và giữ không gian gọn gàng, dịu mắt.",
+        "sat": true
       }
     },
     "7-7": {
@@ -2178,12 +2192,13 @@
       "sach": {
         "han": "七九穿途常遭回祿之灾",
         "am": "Thất Cửu xuyên đồ, thường tao hồi lộc chi tai",
-        "y": "Cặp Thất Xích và Cửu Tử gặp nhau mang tính Hoả lấn Kim, sách xưa nhắc về nguy cơ nóng nực và sự cố lửa điện.",
+        "y": "Sách ghi: sao Thất (Thất Xích) và sao Cửu (Cửu Tử) đi xuyên qua nhau thì thường gặp hoả hoạn; sách dặn nên cẩn thận lửa, điện.",
         "nhom": "B",
         "chu_de": "nha_cua",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý an toàn điện, bếp nấu và thông gió ở khu vực này.",
-        "viec": "Kiểm tra dây điện, ổ cắm, không dồn thiết bị toả nhiệt cùng một góc và giữ lối thoát hiểm thoáng."
+        "viec": "Kiểm tra dây điện, ổ cắm, không dồn thiết bị toả nhiệt cùng một góc và giữ lối thoát hiểm thoáng.",
+        "sat": true
       }
     },
     "8-1": {
@@ -2266,12 +2281,13 @@
       "sach": {
         "han": "八三之遇更惡",
         "am": "Bát Tam chi ngộ cánh ác",
-        "y": "Mộc Tam Bích lấn Thổ Bát Bạch, sách xưa nhắc sự va chạm dễ làm người trẻ bốc đồng hoặc hao sức.",
+        "y": "Sách ghi: sao Bát (Bát Bạch) gặp sao Tam (Tam Bích) thì càng xấu hơn.",
         "nhom": "B",
         "chu_de": "gia_dinh",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý giữ nhịp sinh hoạt điềm tĩnh, tránh để khu vực này bừa bộn gây bức bối.",
-        "viec": "Dọn gọn đồ đạc thừa, dùng ánh sáng ấm và khuyến khích giao tiếp nhẹ nhàng trong gia đình."
+        "viec": "Dọn gọn đồ đạc thừa, dùng ánh sáng ấm và khuyến khích giao tiếp nhẹ nhàng trong gia đình.",
+        "sat": true
       }
     },
     "8-4": {
@@ -2302,12 +2318,13 @@
       "sach": {
         "han": "八會四而小口損生",
         "am": "Bát hội Tứ nhi tiểu khẩu tổn sinh",
-        "y": "Mộc Tứ Lục lấn Thổ Bát Bạch, sách xưa nhắc cần để ý hơn tới trẻ nhỏ và người trẻ tuổi trong nhà.",
+        "y": "Sách ghi: sao Bát (Bát Bạch) gặp sao Tứ (Tứ Lục) thì trẻ nhỏ trong nhà bị tổn hại; sách dặn nên chăm con kỹ lúc còn nhỏ, khám sức khoẻ cho trẻ đều đặn.",
         "nhom": "C",
         "chu_de": "gia_dinh",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý không gian vui chơi, nghỉ ngơi của trẻ nhỏ cần gọn gàng, an toàn và đủ ánh sáng.",
-        "viec": "Kiểm tra an toàn đồ đạc, góc bàn ở khu vực này và cho trẻ khám định kỳ đều đặn."
+        "viec": "Kiểm tra an toàn đồ đạc, góc bàn ở khu vực này và cho trẻ khám định kỳ đều đặn.",
+        "sat": true
       }
     },
     "8-5": {
@@ -2613,12 +2630,13 @@
       "sach": {
         "han": "紫黃毒藥鄰宮兌口休嘗",
         "am": "Tử Hoàng độc dược, lân cung Đoài khẩu hưu thường",
-        "y": "Hoả Cửu Tử sinh Thổ Ngũ Hoàng làm tính nóng và trì trệ tăng lên, sách xưa dặn cẩn trọng chuyện ăn uống và sức khoẻ.",
+        "y": "Sách ghi: Cửu Tử gặp Ngũ Hoàng là thế 'thuốc độc', ở cung kề Đoài (cửa miệng) thì chớ nếm — ý dặn cẩn thận đồ ăn thức uống; có dấu hiệu ngộ độc thì đi khám ngay.",
         "nhom": "C",
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý vệ sinh an toàn thực phẩm và tránh đặt bếp hoặc nơi ăn uống ẩm nóng ở phía này.",
-        "viec": "Giữ khu vực này sạch sẽ, thoáng mát, ăn uống điều độ và đi khám định kỳ khi tiêu hoá không ổn."
+        "viec": "Giữ khu vực này sạch sẽ, thoáng mát, ăn uống điều độ và đi khám định kỳ khi tiêu hoá không ổn.",
+        "sat": true
       }
     },
     "9-6": {
@@ -2653,12 +2671,13 @@
       "sach": {
         "han": "六共九而長房血症",
         "am": "Lục cộng Cửu nhi trưởng phòng huyết chứng",
-        "y": "Hoả Cửu Tử lấn Kim Lục Bạch, sách xưa nhắc người trụ cột trong nhà dễ căng thẳng, mệt đầu hoặc vấn đề tuần hoàn.",
+        "y": "Sách ghi: sao Lục (Lục Bạch) cùng sao Cửu (Cửu Tử) thì nhánh con trưởng mắc chứng về máu; nên đi khám định kỳ.",
         "nhom": "C",
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý giảm áp lực, tránh để khu vực này quá bí nóng và để ý sức khoẻ tim mạch, huyết áp.",
-        "viec": "Giữ phòng thoáng mát, nghỉ ngơi điều độ và đi khám sức khoẻ định kỳ khi thấy hay đau đầu hoặc mệt mỏi."
+        "viec": "Giữ phòng thoáng mát, nghỉ ngơi điều độ và đi khám sức khoẻ định kỳ khi thấy hay đau đầu hoặc mệt mỏi.",
+        "sat": true
       }
     },
     "9-7": {
@@ -2693,12 +2712,13 @@
       "sach": {
         "han": "七九穿途常遭回祿之灾",
         "am": "Thất Cửu xuyên đồ, thường tao hồi lộc chi tai",
-        "y": "Cặp Thất Xích và Cửu Tử gặp nhau mang tính Hoả lấn Kim, sách xưa nhắc về nguy cơ nóng nực và sự cố lửa điện.",
+        "y": "Sách ghi: sao Thất (Thất Xích) và sao Cửu (Cửu Tử) đi xuyên qua nhau thì thường gặp hoả hoạn; sách dặn nên cẩn thận lửa, điện.",
         "nhom": "B",
         "chu_de": "nha_cua",
         "nguon": "phongthuy_huyen_khong_co_thu",
         "ham_y": "Nên chú ý an toàn điện, bếp nấu và thông gió ở khu vực này.",
-        "viec": "Kiểm tra dây điện, ổ cắm, không dồn thiết bị toả nhiệt cùng một góc và giữ lối thoát hiểm thoáng."
+        "viec": "Kiểm tra dây điện, ổ cắm, không dồn thiết bị toả nhiệt cùng một góc và giữ lối thoát hiểm thoáng.",
+        "sat": true
       }
     },
     "9-8": {

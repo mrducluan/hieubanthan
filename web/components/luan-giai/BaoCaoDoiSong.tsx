@@ -147,6 +147,12 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
           {hanhDong && <div className="-ml-3 flex w-full flex-wrap gap-1 sm:ml-0 sm:w-auto sm:justify-end sm:gap-2 print:hidden" data-testid="lg-hanh-dong">{hanhDong}</div>}
         </header>
 
+        {bc.vai_doc === "cha_me" && bc.loi_vai_doc && (
+          <p role="note" className="mt-4 rounded-xl border border-gold/30 bg-gold/5 px-4 py-3 text-sm text-fg-muted" data-testid="lg-vai-doc">
+            {bc.loi_vai_doc}
+          </p>
+        )}
+
         {bc.gio_tam && (
           <p role="note" className="mt-4 rounded-xl border border-gold/30 bg-gold/5 px-4 py-3 text-sm text-fg-muted" data-testid="lg-gio-tam">
             {bc.gio_tam}

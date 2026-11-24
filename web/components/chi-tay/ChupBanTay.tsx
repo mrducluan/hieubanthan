@@ -426,8 +426,8 @@ export function ChupBanTay() {
               )}
               {kq?.hop_le && (kq.bo_nhom_c ?? 0) > 0 && (
                 <p className="text-xs text-fg-muted">
-                  {hs ? `${kq.bo_nhom_c} câu sách theo dáng tay này chỉ dành cho người từ 18 tuổi, nên không hiện ở đây.`
-                    : `${kq.bo_nhom_c} câu sách theo dáng tay này chỉ hiện khi biết bạn đã đủ 18 tuổi — lưu hồ sơ (ngày sinh) để xem đủ.`}
+                  {hs ? `${kq.bo_nhom_c} câu sách theo dáng tay này chỉ dành cho người từ 16 tuổi, nên không hiện ở đây.`
+                    : `${kq.bo_nhom_c} câu sách theo dáng tay này chỉ hiện khi biết bạn đã đủ 16 tuổi — lưu hồ sơ (ngày sinh) để xem đủ.`}
                 </p>
               )}
               {kq?.hop_le && kq.phai === "tay" && (kq.to_hop || (kq.goi_y_dang?.length ?? 0) > 0) && (

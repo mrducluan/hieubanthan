@@ -172,6 +172,10 @@ export interface BaoCaoDoiSong {
   nguoi_quanh?: NguoiQuanh[];
   /** EN-2: không biết giờ sinh — một câu engine soạn, web hiện thành dải riêng đầu bài (không phụ thuộc bản AI). */
   gio_tam?: string;
+  /** TUOI-16: ai đọc bài — "cha_me" khi người được xem chưa đủ 16 tuổi tròn (người lớn đọc hộ); `loi_vai_doc` là câu
+   *  engine soạn, web hiện thành dải đầu bài. */
+  vai_doc?: "ban_than" | "cha_me";
+  loi_vai_doc?: string;
   chuong: (ChuongDoiSongMo | ChuongKhoa)[];
   phi?: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null;
     /** SAO-V: chương bạn bè tặng. */ chuong_tang?: number; chuong_tang_ma?: string };

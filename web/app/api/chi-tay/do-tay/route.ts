@@ -1,5 +1,5 @@
 // POST /api/chi-tay/do-tay — CT-2: 21 toạ độ điểm mốc bàn tay (0..1, máy người dùng tự tìm — ẢNH KHÔNG gửi lên) + tỉ lệ khung
-// ảnh + tay (trái/phải) + ngày sinh tuỳ chọn (chỉ để biết đủ 18 tuổi) → engine đo tỉ lệ bàn tay / ngón, toạ độ tám cung trên
+// ảnh + tay (trái/phải) + ngày sinh tuỳ chọn (chỉ để biết đủ 16 tuổi) → engine đo tỉ lệ bàn tay / ngón, toạ độ tám cung trên
 // ảnh của người dùng, câu sách theo số đo. Bắt buộc `dong_y: true` (thoả thuận ct1). Không lưu, không log thân yêu cầu.
 import { z } from "zod";
 import { goiEngine } from "@/lib/proxy";

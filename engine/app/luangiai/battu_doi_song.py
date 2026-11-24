@@ -1846,6 +1846,6 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
     if tom_y_phai:    # RS-3: quy tắc Thiên Lý Mệnh Cảo (tóm ý) theo cách cục → một dòng "Vì sao nói vậy"; không đổi mức.
         from app.luangiai import tu_van_thien_ly as tvtl  # noqa: PLC0415
         tvtl.ap_battu(ds, pt)
-    return _sach({"phien_ban": PHIEN_BAN, "phai": "tu_binh", "cot_loi": cot_loi, "thoi_gian_bieu": tgb_ra, "chuong": ds,
+    return _sach({"phien_ban": PHIEN_BAN, "phai": "tu_binh", **dsc.vai_doc(tuoi), "cot_loi": cot_loi, "thoi_gian_bieu": tgb_ra, "chuong": ds,
                   "luu_y_mang": luu_y_mang, **({"nguoi_quanh": nguoi_quanh} if nguoi_quanh else {}),
                   "ngay_xem": ngay_xem.isoformat(), **kb.meta()})

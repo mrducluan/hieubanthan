@@ -111,12 +111,11 @@ def test_ba_nhom_hien_dung_khuon_va_tre_khong_nhan_nhom_c():
     assert {m["nhom"] for m in muc} == {"A", "B", "C"}
     for m in muc:
         assert m["han"] and m["sach"] == "Tử Vi Đẩu Số Toàn Thư"
-        if m["nhom"] == "C":
-            assert m["loi"].startswith("Hàm ý theo ghi chép xưa: ") and m.get("viec") and "am" not in m
-        if m["nhom"] == "B":
-            assert "Nên chú ý" in m["loi"] and "am" not in m
-        assert not sg.kiem_loi(m["loi"]), m["loi"]
-    assert sg.CAU_KET in k["cau_ket"] and sg.CAU_KET_SUC_KHOE in k["cau_ket"]
+        if m["nhom"] in ("B", "C"):          # SX-C3: nói sát nguyên văn, kèm âm Hán Việt
+            assert m.get("nguyen_van") and m.get("am") and m.get("viec"), m
+        else:
+            assert not sg.kiem_loi(m["loi"]), m["loi"]
+    assert sg.CAU_KET_TRICH in k["cau_ket"] and sg.CAU_KET_SUC_KHOE in k["cau_ket"]
     tre = sgm.tuvi(cung, tuoi=15)
     assert "C" not in {m["nhom"] for n in tre["nhom"] for m in n["muc"]}
     assert tre["so_muc"] < k["so_muc"]
@@ -141,7 +140,7 @@ def test_nhan_tuong_theo_net_da_chon():
     k = sgm.nhan_tuong(["may_giao", "moi_hong", "khong_co_ma_nay"], tuoi=40)
     assert k["nhom"][0]["ma"] == "net" and len(k["nhom"][0]["muc"]) == 2
     assert {m["nhom"] for m in k["nhom"][0]["muc"]} == {"A", "C"}
-    assert sgm.nhan_tuong(["may_giao"], tuoi=16) is None            # chỉ có mục nhóm C → người chưa 18 không nhận gì
+    assert sgm.nhan_tuong(["may_giao"], tuoi=15) is None            # chỉ có mục nhóm C → người chưa đủ 16 (TUOI-16) không nhận gì
 
 
 def test_route_co_khoi_sach_ghi_va_khong_doi_truong_cu():
@@ -183,8 +182,8 @@ def test_kieu_hinh_nhom_c_khong_hien_cho_nguoi_chua_18():
     c = next(m for ds in kb.values() for m in ds if m["nhom"] == "C")
     lon = sgm.nt_kieu_hinh(f"{c['ten_viet']} là gì", tuoi=30)
     nho = sgm.nt_kieu_hinh(f"{c['ten_viet']} là gì", tuoi=15)
-    assert "Hàm ý theo ghi chép xưa" in lon["loi"] and c["han"] in lon["loi"]
-    assert "Hàm ý theo ghi chép xưa" not in nho["loi"] and c["han"] not in nho["loi"] and c["nhan_dang"] in nho["loi"]
+    assert "nguyên văn" in lon["loi"] and c["han"] in lon["loi"]          # SX-C3
+    assert "nguyên văn" not in nho["loi"] and c["han"] not in nho["loi"] and c["nhan_dang"] in nho["loi"]
 
 
 def test_tam_yeu_du_64_nha_64_bep_va_du_nien_khop_phep_tinh():
@@ -233,6 +232,9 @@ def test_do_hinh_nhom_b_c_khong_hien_phien_am():
             assert not sg.kiem_loi(p["y"]), p["id"]
 
 
+SACH_DUOC_NOI = ("khắc", "tai hoạ", "phá sản", "xui", "xui xẻo", "số phận")
+
+
 def test_loi_sach_khong_cum_giong_ai_hay_chung_chung():
     """Lời sách xưa đi vào bài đọc và hỏi đáp → cùng luật giọng văn với lời luận (`cum_cam`, cụm chung chung)."""
     from app.kb import tuvi_doi_song_kb as kds
@@ -241,7 +243,9 @@ def test_loi_sach_khong_cum_giong_ai_hay_chung_chung():
         for vt, m in sg.cac_muc(json.loads((DATA / ten).read_text("utf-8"))):
             for k in ("y", "ham_y", "viec"):
                 t = m.get(k) or ""
-                assert not kds.tim_cum_cam(t, cam) and not kds.tim_cum_cam(t, cum), (ten, vt, k)
+                # SX-C3: nghĩa sát nguyên văn được giữ chữ của sách (khắc, tai hoạ, phá sản…) — vẫn cấm giọng AI / chung chung
+                cam_k = [c for c in cam if c not in SACH_DUOC_NOI] if (k == "y" and m.get("sat")) else cam
+                assert not kds.tim_cum_cam(t, cam_k) and not kds.tim_cum_cam(t, cum), (ten, vt, k)
 
 
 def test_khi_sac_toan_bien_q13():
@@ -253,7 +257,7 @@ def test_khi_sac_toan_bien_q13():
         for m in kb[ma]:
             if m["nhom"] == "C":
                 assert "khám" in m["viec"], ma
-        assert "C" not in {m["nhom"] for n in sgm.nhan_tuong([ma], 16)["nhom"] for m in n["muc"]}
+        assert "C" not in {m["nhom"] for n in sgm.nhan_tuong([ma], 15)["nhom"] for m in n["muc"]}
     assert kb["than_sac_gat"]
 
 
@@ -265,4 +269,4 @@ def test_xuong_thit_dang_giong_ngu_hinh_toan_bien():
                "mat_tron", "mat_hoa", "mat_tho", "giong_tram", "giong_cao_nhanh", "giong_nho_yeu"):
         assert kb[ma], ma
     assert [m["nhom"] for m in kb["nhuc_nhao"]] == ["C"] and "khám" in kb["nhuc_nhao"][0]["viec"]
-    assert sgm.nhan_tuong(["nhuc_nhao"], 17) is None                  # chỉ có câu nhóm C → người chưa đủ 18 không có khối
+    assert sgm.nhan_tuong(["nhuc_nhao"], 15) is None                  # chỉ có câu nhóm C → người chưa đủ 16 không có khối

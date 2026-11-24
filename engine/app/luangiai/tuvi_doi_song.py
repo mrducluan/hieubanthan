@@ -1544,4 +1544,5 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = Non
         tvtl.ap_tuvi(ds, ls, nam_am_xem, nam_am_sinh)
     return _sach({"phien_ban": PHIEN_BAN, "cot_loi": cot_loi, "thoi_gian_bieu": tgb, "chuong": ds, "luu_y_mang": luu_y_mang,
                   **({"nguoi_quanh": nguoi_quanh} if nguoi_quanh else {}),
-                  "tuoi_mu": vh["tuoi_mu"], "ngay_xem": ngay_xem.isoformat(), **kb.meta()})
+                  "tuoi_mu": vh["tuoi_mu"], "ngay_xem": ngay_xem.isoformat(),
+                  **dsc.vai_doc(hc.tuoi_tron(sinh["ngay"], ngay_xem)), **kb.meta()})

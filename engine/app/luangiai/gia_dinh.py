@@ -58,13 +58,16 @@ def nhom_cap(va: str, vb: str) -> str:
     return "anh_em" if da == db else "gia_dinh"
 
 
+_LON = __import__("app.config", fromlist=["x"]).TUOI_NGUOI_LON   # TUOI-16
+
+
 def _duoi_18(ngay_sinh: str | None, nam_am: int, nam: int) -> bool:
     if ngay_sinh:
         from app.config import hom_nay_vn  # noqa: PLC0415
         ns, hn = dt.date.fromisoformat(ngay_sinh), hom_nay_vn()
         moc = hn if hn.year == nam else dt.date(nam, 1, 1)
-        return moc.year - ns.year - ((moc.month, moc.day) < (ns.month, ns.day)) < 18
-    return (nam - nam_am) <= 18
+        return moc.year - ns.year - ((moc.month, moc.day) < (ns.month, ns.day)) < _LON
+    return (nam - nam_am) <= _LON
 
 
 def _mot(p: dict, nam: int) -> dict:
@@ -267,7 +270,7 @@ def _lich_nha(ds: list[dict], nam: int) -> dict:
         for x in ds:
             tt = t.pham_tam_tai(x["con_giap"], chi_y)
             qh = t.quan_he_chi(x["con_giap"], chi_y)
-            lon = (y - x["nam_am"]) > 18   # TUOI-1: không biết đã qua sinh nhật 18 chưa → chưa tính là người lớn
+            lon = (y - x["nam_am"]) > _LON   # TUOI-1: không biết đã qua sinh nhật 18 chưa → chưa tính là người lớn
             if tt:
                 muc.append({"id": x["id"], "ma": "tam_tai", "nhan": k["nhan"]["tam_tai"].format(n=tt), "nguoi_lon": lon})
             if qh in ("trung", "xung"):
@@ -275,7 +278,7 @@ def _lich_nha(ds: list[dict], nam: int) -> dict:
         hang.append({"nam": y, "can_chi": f"{can_y} {chi_y}", "muc": muc,
                      "so_nguoi_lon": len({m["id"] for m in muc if m["nguoi_lon"]})})
     it = min(r["so_nguoi_lon"] for r in hang)
-    co_lon = any((nam - x["nam_am"]) > 18 for x in ds)
+    co_lon = any((nam - x["nam_am"]) > _LON for x in ds)
     nhe = next((r for r in hang if r["so_nguoi_lon"] == it), None) if co_lon and it == 0 else None
     return {"nam": hang, "nam_nhe": nhe["nam"] if nhe else None,
             "goi_y": k["nhe"].format(nam=nhe["nam"], cc=nhe["can_chi"]) if nhe else k["deu"], "ghi_chu": k["ghi_chu"]}

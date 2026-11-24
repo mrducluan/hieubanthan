@@ -82,11 +82,16 @@ def test_loi_viet_khong_tho_khong_phan():
             yield x
     from app.kb import tuvi_doi_song_kb as kds
     cum = kds.cum_cam() + kds.cum_chung_chung()
+    SAT = {m["y"] for _, m in sg.cac_muc(KB) if m.get("sat")}
     for t in chu(KB):
+        if t in SAT:                       # SX-C3: nghĩa sát nguyên văn của câu sách — chỉ cấm nhóm phán rất nặng
+            assert not sg.kiem_sat(t), t
+            continue
         assert not cam.search(t), t
-        assert not [e for e in sg.kiem_loi(t)], t
+        assert not [e for e in sg.kiem_loi(t)], t   # SX-C3: nghĩa sát nguyên văn
     for t in chu(KB, bo=("han", "am", "_nguon", "dieu_kien")):          # điều kiện của cách = phần "Vì sao", được dùng thuật ngữ
-        assert not kds.tim_cum_cam(t, cum), t
+        if t not in SAT:                                                 # SX-C3: lời trích sát nguyên văn giữ chữ của sách
+            assert not kds.tim_cum_cam(t, cum), t
 
 
 def test_luat_muc_tren_moi_ban():
