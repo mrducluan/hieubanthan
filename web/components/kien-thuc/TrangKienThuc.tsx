@@ -42,6 +42,7 @@ function anhKienThuc(t: TrangKienThuc, duongCum: string) {
     tieuDe: t.tieu_de, mang: mangTheoDuong(duongCum),
     ...(mh?.kieu === "so" ? { so: mh.so } : mh?.kieu === "cap_so" ? { so: `${mh.a}` } : {}),
     ...(mh?.kieu === "que" ? { hao: mh.hao } : {}),
+    ...(mh?.kieu === "la_bai" ? { la: mh.id } : {}),
   });
 }
 

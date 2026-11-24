@@ -189,7 +189,7 @@ export function catMoTa(s: string, toiDa = 160): string {
 
 /** SEO-K: ảnh đại diện bài 1200×630 có hình theo mảng (la bàn, 12 cung, quẻ, tứ trụ, vòng số, lịch) — /og vẽ. */
 export type MangAnh = "than-so" | "tu-vi" | "bat-tu" | "kinh-dich" | "phong-thuy" | "nhan-tuong" | "tarot" | "ky-mon" | "lich";
-export function anhBai(o: { tieuDe: string; mang?: MangAnh | null; nhan?: string; tot?: string[]; so?: string | number; hao?: number[] }): string {
+export function anhBai(o: { tieuDe: string; mang?: MangAnh | null; nhan?: string; tot?: string[]; so?: string | number; hao?: number[]; la?: string }): string {
   const q = new URLSearchParams({ tieu_de: o.tieuDe });
   if (o.mang) {
     q.set("mang", o.mang);
@@ -197,6 +197,7 @@ export function anhBai(o: { tieuDe: string; mang?: MangAnh | null; nhan?: string
     if (o.tot?.length) q.set("tot", o.tot.join(","));
     if (o.so !== undefined) q.set("so", String(o.so));
     if (o.hao?.length === 6) q.set("hao", o.hao.join(""));
+    if (o.la) q.set("la", o.la);   // mã lá Tarot → ảnh chia sẻ vẽ đúng tranh lá bài
   }
   return `/og?${q.toString()}`;
 }

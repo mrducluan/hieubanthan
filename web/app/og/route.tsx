@@ -7,7 +7,7 @@
 import type { ReactElement } from "react";
 import { ImageResponse } from "next/og";
 import { docMa, tuTuMa, type NoiDungMa } from "@/lib/ma-moi";
-import { bam, ChanQr, CO_ANH, khungTuThamSo, MAU, napPhong, saoRai } from "@/lib/og-chung";
+import { anhLaOg, bam, ChanQr, CO_ANH, khungTuThamSo, MAU, napPhong, saoRai } from "@/lib/og-chung";
 import { GOC_QR, urlQr } from "@/lib/the-chia-se";
 import { HinhMang, MANG_HINH, NHAN_MANG, type MangHinh } from "./hinh";
 
@@ -171,13 +171,19 @@ function TheKienThuc({ tieuDe, qr, W, H, en = false }: { tieuDe: string; qr: str
 
 /** SEO-K: ảnh đại diện bài có hình theo mảng (la bàn tô hướng tốt, 12 cung, 6 hào, tứ trụ, vòng số, lịch) — chỉ tham
  *  số công khai, không dữ liệu cá nhân; vẫn có QR + tên miền như mọi ảnh (TCS-1). */
-function TheMang({ mang, tieuDe, nhan, tot, so, hao, qr, W, H }: {
-  mang: MangHinh; tieuDe: string; nhan: string; tot: string[]; so: string; hao: number[]; qr: string; W: number; H: number;
+function TheMang({ mang, tieuDe, nhan, tot, so, hao, tranh, qr, W, H }: {
+  mang: MangHinh; tieuDe: string; nhan: string; tot: string[]; so: string; hao: number[]; tranh?: string | null; qr: string; W: number; H: number;
 }) {
   return (
     <div style={{ width: "100%", height: "100%", display: "flex", position: "relative",
       background: `radial-gradient(circle at 78% 50%, #2a2350 0%, ${MAU.nen} 60%)`, color: MAU.chu, fontFamily: "Sans" }}>
-      <HinhMang mang={mang} tot={tot} so={so || "?"} hao={hao} />
+      {tranh ? (
+        // Trang một lá Tarot: tranh Rider–Waite 1909 của đúng lá (thay hình ba lá bài chung).
+        <div style={{ display: "flex", position: "absolute", left: 930 - 150, top: 315 - 250, width: 300, height: 500, borderRadius: 14, border: "4px solid #E9C46A", overflow: "hidden" }}>
+          {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
+          <img src={tranh} width={292} height={492} style={{ objectFit: "cover" }} />
+        </div>
+      ) : <HinhMang mang={mang} tot={tot} so={so || "?"} hao={hao} />}
       <div style={{ position: "absolute", left: 64, top: 70, width: 600, display: "flex", flexDirection: "column" }}>
         <div style={{ display: "flex", fontSize: 24, letterSpacing: 5, color: MAU.vang, textTransform: "uppercase" }}>{NHAN_MANG[mang]}</div>
         <div style={{ display: "flex", fontSize: tieuDe.length > 70 ? 44 : tieuDe.length > 45 ? 52 : 60, marginTop: 22, fontFamily: "Serif", lineHeight: 1.18 }}>
@@ -221,6 +227,7 @@ export async function GET(req: Request) {
         tot={(url.searchParams.get("tot") ?? "").split(",").map((x) => x.trim()).filter(Boolean).slice(0, 8)}
         so={(url.searchParams.get("so") ?? "").replace(/[^0-9]/g, "").slice(0, 2)}
         hao={(url.searchParams.get("hao") ?? "").replace(/[^01]/g, "").slice(0, 6).split("").map(Number)}
+        tranh={mang === "tarot" ? await anhLaOg(url.searchParams.get("la") ?? "") : null}
         qr={GOC_QR} W={co.width} H={co.height} />
     ) : <TheKienThuc tieuDe={tieuDe} qr={url.searchParams.get("lang") === "en" ? `${GOC_QR}/en` : GOC_QR} W={co.width} H={co.height} en={url.searchParams.get("lang") === "en"} />;
   }
