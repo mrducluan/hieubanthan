@@ -189,7 +189,7 @@ export async function GET(req: Request) {
                 {hoa === "hoa_dao" && <SvgHoaXuan loai="dao" size={260} />}
                 {hoa === "phao_hoa" && <SvgPhaoHoa color={thiep.nhan} size={260} />}
                 <div style={{ display: "flex", fontSize: 22, color: thiep.nhan, letterSpacing: 3, fontWeight: 700 }}>
-                  {hoa === "linh_vat" ? "KIM DƯƠNG ĐINH MÙI" : hoa === "hoa_mai" ? "MAI VÀNG PHÚ QUÝ" : hoa === "hoa_dao" ? "ĐÀO XUÂN AN KHANG" : "PHÁO HOA GIAO THỪA"}
+                  {hoa === "linh_vat" ? "LINH VẬT ĐINH MÙI" : hoa === "hoa_mai" ? "MAI VÀNG PHÚ QUÝ" : hoa === "hoa_dao" ? "ĐÀO XUÂN AN KHANG" : "PHÁO HOA GIAO THỪA"}
                 </div>
               </div>
             )}
@@ -249,7 +249,7 @@ export async function GET(req: Request) {
                 {hoa === "hoa_dao" && <SvgHoaXuan loai="dao" size={vuong ? 190 : 148} />}
                 {hoa === "phao_hoa" && <SvgPhaoHoa color={thiep.nhan} size={vuong ? 190 : 148} />}
                 <div style={{ display: "flex", fontSize: 14, color: thiep.nhan, letterSpacing: 2, fontWeight: 700, textAlign: "center" }}>
-                  {hoa === "linh_vat" ? "KIM DƯƠNG ĐINH MÙI" : hoa === "hoa_mai" ? "MAI VÀNG PHÚ QUÝ" : hoa === "hoa_dao" ? "ĐÀO XUÂN AN KHANG" : "PHÁO HOA GIAO THỪA"}
+                  {hoa === "linh_vat" ? "LINH VẬT ĐINH MÙI" : hoa === "hoa_mai" ? "MAI VÀNG PHÚ QUÝ" : hoa === "hoa_dao" ? "ĐÀO XUÂN AN KHANG" : "PHÁO HOA GIAO THỪA"}
                 </div>
               </div>
             )}
@@ -291,7 +291,12 @@ export async function GET(req: Request) {
       width,
       height,
       fonts,
-      ...(tai ? { headers: { "content-disposition": `attachment; filename="li-xi-tet-2027-${khung}.png"` } } : {}),
+      headers: {
+        "cache-control": d.co
+          ? "private, max-age=300"
+          : "public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400",
+        ...(tai ? { "content-disposition": `attachment; filename="li-xi-tet-2027-${khung}.png"` } : {}),
+      },
     },
   );
   return img;

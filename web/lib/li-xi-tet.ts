@@ -78,7 +78,7 @@ export const DANH_SACH_MAU_THIEP: ThongTinMauThiep[] = [
 ];
 
 export const DANH_SACH_HOA_TIET: { ma: HoaTietTet; ten: string; moTa: string }[] = [
-  { ma: "linh_vat", ten: "Linh Vật Đinh Mùi", moTa: "Biểu trưng Kim Dương 2027" },
+  { ma: "linh_vat", ten: "Linh Vật Đinh Mùi", moTa: "Biểu trưng Đinh Mùi 2027" },
   { ma: "hoa_mai", ten: "Cành Hoa Mai", moTa: "Mai vàng 5 cánh phương Nam" },
   { ma: "hoa_dao", ten: "Cành Hoa Đào", moTa: "Đào phớt thắm sắc xuân Bắc" },
   { ma: "phao_hoa", ten: "Pháo Hoa Xuân", moTa: "Ánh kim đêm Giao Thừa" },
