@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = tinhHuongTheoSlug(slug);
   if (!t) return {};
   return metaTrang({
-    tieuDe: `${t.cauHoi.slice(0, 62)}`,
+    tieuDe: t.cauHoi,
     moTa: t.tomTat,
     duong: duongHoiDap(t.slug),
   });

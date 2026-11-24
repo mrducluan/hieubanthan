@@ -20,6 +20,7 @@ test("thuần: cả 12 tình huống minh hoạ đều vượt qua bộ lọc an
     ].join(" ");
     const kq = kiemTraLoi(toanVan);
     expect(kq.chan, `Slug ${t.slug} bị chặn: ${kq.chan.join(", ")}`).toEqual([]);
+    expect(kq.canh_bao, `Slug ${t.slug} bị cảnh báo: ${kq.canh_bao.join(", ")}`).toEqual([]);
   }
 });
 
