@@ -1,0 +1,177 @@
+{
+ "_trang_thai": "bien_tap",
+ "thieu": {
+  "huong": "We need to know which way the house faces (measure with a compass or pick it on the satellite view).",
+  "sinh": "We need your birth year and gender (taken from your profile).",
+  "nguoi_2": "We need the birth year and gender of the person you live with.",
+  "dau_hieu": "Answer the yes / no questions below to see whether your home has anything to deal with first."
+ },
+ "luu_y": "Feng shui here is a cultural lens for arranging a home sensibly — it does not replace an architect, promises no wealth and recommends no objects to buy.",
+ "cau_hoi": {
+  "cua_chinh": {
+   "tieu_de": "Does my main door direction suit me?",
+   "mo_ta": "Compares the door direction with your birth year, with things to do.",
+   "cau_chat": "Does my main door's current direction suit my birth year?",
+   "chung": "Whether a door direction suits you depends on your birth year: everyone has four supportive directions and four weaker ones. Measure the door and we compare it with yours.",
+   "viec": [
+    "Keep the entrance bright and clear — no tall cabinets or shoes blocking the door.",
+    "An existing door does not need changing: the bed-head and desk directions make up for most of it."
+   ],
+   "vi_sao": [
+    "Eight Mansions splits the eight directions into four supportive and four weaker ones by each person's Kua number; the main door is checked first."
+   ],
+   "nguon": "Yang Zhai Shi Shu (Great Wandering Year verse) · Ba Zhai Ming Jing.",
+   "lien_ket": [
+    {
+     "nhan": "Measure the facing direction"
+    },
+    {
+     "nhan": "Your four supportive directions"
+    }
+   ]
+  },
+  "bo_cuc": {
+   "tieu_de": "Is there anything in my home to deal with first?",
+   "mo_ta": "Four major form-and-layout points — checked before directions.",
+   "cau_chat": "Is there any layout issue in my home I should deal with first?",
+   "chung": "Form is the foundation: if any of the four major points below is present, deal with it first, then look at directions and timing.",
+   "viec": [
+    "Answer four yes / no questions; for each 'yes' you get one no-cost thing to do right away."
+   ],
+   "vi_sao": [
+    "This page follows 'form is the foundation, formula is the rhythm': a confirmed major sign keeps the related part at 'Balanced' until it is handled."
+   ],
+   "nguon": "Zang Shu · Yang Zhai Shi Shu · Vietnamese folk practice.",
+   "lien_ket": [
+    {
+     "nhan": "Survey all 23 signs"
+    },
+    {
+     "nhan": "Let the system read room photos"
+    },
+    {
+     "nhan": "Stand in the middle, point your phone"
+    }
+   ]
+  },
+  "gia_dinh": {
+   "tieu_de": "We have different Kua groups — how do we arrange the home?",
+   "mo_ta": "Find directions that suit both, or how to split when there is none.",
+   "cau_chat": "My partner and I have different Kua groups — how should we arrange the home?",
+   "chung": "Two people in different groups is very common. Look for a shared direction first; if there is none, split: door and stove follow one person, bed-head and desk follow the other.",
+   "viec": [
+    "Enter the birth year and gender of the person you live with to see your shared directions."
+   ],
+   "vi_sao": [
+    "Each person has a Kua; two Kua in the same group (East or West) share all four supportive directions."
+   ],
+   "nguon": "Yang Zhai Shi Shu (couples of different groups).",
+   "lien_ket": [
+    {
+     "nhan": "Supportive directions by birth year"
+    },
+    {
+     "nhan": "Your Home (add household members)"
+    }
+   ]
+  },
+  "han_nam": {
+   "tieu_de": "Which side of the home should stay undisturbed this year?",
+   "mo_ta": "Sides to avoid drilling or renovating this year; how your age sits for building work.",
+   "cau_chat": "Which side of my home should I avoid renovating this year?",
+   "viec": [
+    "Drilling needed on a quiet side: move it to next year if you can; if not, keep it short — a few days, not weeks.",
+    "Small jobs that do not touch walls or floors (painting, lights, moving furniture) need no avoidance."
+   ],
+   "vi_sao": [
+    "The annual stars move every year at Li Chun; the sides holding stars 5 and 2, and the Three Killings side, are traditionally left undisturbed."
+   ],
+   "nguon": "Xie Ji Bian Fang Shu (annual stars, Three Killings).",
+   "lien_ket": [
+    {
+     "nhan": "Sides to avoid renovating in {nam}"
+    },
+    {
+     "nhan": "Building-age check"
+    }
+   ]
+  },
+  "so_sanh": {
+   "tieu_de": "Choosing between two homes — how do I compare?",
+   "mo_ta": "Save each home and view them side by side: levels and floor diagram, no score.",
+   "cau_chat": "I am choosing between two homes — what should I compare?",
+   "chung": "Compare in this order: which home has fewer major points to fix → whose door direction suits the owner better → where bedroom and stove fall. There is no total score; you see each part side by side.",
+   "viec": [
+    "Measure and survey the first home, name it, then tap 'View another home' to add the second.",
+    "Open 'Compare two homes' once both are saved."
+   ],
+   "vi_sao": [
+    "Major form issues are harder to fix than directions, so they are compared first."
+   ],
+   "nguon": "The page's 'form first, formula second' principle.",
+   "lien_ket": [
+    {
+     "nhan": "Your home journey (add a home, compare two)"
+    }
+   ]
+  },
+  "mo_quan": {
+   "tieu_de": "Opening a shop — what should I look at?",
+   "mo_ta": "There is a dedicated tool for business premises and opening dates.",
+   "cau_chat": "I am about to open a shop — how should I look at the premises and the opening date?",
+   "chung": "For business premises three things matter: where the door and the till go, where the owner sits, and the opening date. A dedicated tool handles this using the premises' facing and the owner's birth year.",
+   "viec": [
+    "Open 'Premises & Opening' to measure the facing and see where the three areas should go.",
+    "Pick an opening date by birth year in the day-selection tool."
+   ],
+   "vi_sao": [
+    "Same Eight Mansions and flying-star maths as a home, but focused on door, till and the owner's seat."
+   ],
+   "nguon": "Yang Zhai San Yao (door – master – stove), applied to premises.",
+   "lien_ket": [
+    {
+     "nhan": "Premises & Opening"
+    },
+    {
+     "nhan": "Opening-day selection"
+    }
+   ]
+  }
+ },
+ "mau": {
+  "cua.chua_tuoi": "The house faces {huong} ({do}°) — {nhom}. Add your birth year to see how well this suits you.",
+  "cua.chua_do": "The house faces {huong} — {nhom}. Measure the exact degree for a closer check (near a boundary the result can change).",
+  "cua.hop": "The door faces {huong}, one of your four supportive directions — {y}",
+  "cua.khong_hop": "The door faces {huong}, which is not one of your four supportive directions. An existing door does not need changing: make up for it with the bed-head and desk directions.",
+  "cua.cung_nhom": "House: {nhom_nha}. You: {nhom_menh}. Same group.",
+  "cua.khac_nhom": "House: {nhom_nha}. You: {nhom_menh}. Different groups — choose a bedroom and desk on a side that suits you.",
+  "cua.huong_hop": "Your four supportive directions: {ds}.",
+  "cua.viec_bu": "Point the bed-head or desk towards one of: {ds}.",
+  "cua.tran": "The home has points to deal with first ({ds}), so this part stays at 'Balanced' at most until they are handled.",
+  "cua.sao": "Built / moved in {nam_xay}: Period {van}; the door side holds the star pair {son}–{sao_huong}.",
+  "cua.sao_y": "About the star pair at the door: {y}",
+  "bc.co_lon": "There are {n} point(s) to deal with first: {ds}.",
+  "bc.khong_lon": "None of the four major points is present — the foundation is sound. Now directions and timing matter.",
+  "bc.con_nho": "There are also {n} smaller point(s) to keep an eye on: {ds}.",
+  "bc.chua_du": "{n} of {tong} questions answered — answer the rest to be sure of the foundation.",
+  "bc.viec": "{ten}: {lam}",
+  "gd.thieu": "Your supportive directions: {ds}. Add the person you live with to find shared ones.",
+  "gd.viec.cung_nhom": "Same group: choose door, bed-head and desk from the four shared directions.",
+  "gd.viec.co_chung": "Prioritise the shared direction(s) ({ds}) for the bed-head.",
+  "gd.viec.khong_chung": "No shared direction: door and stove follow the home's owner; bed-head follows whoever sleeps worse; each desk follows its own person.",
+  "gd.nguoi": "{ten}: {quai}, {nhom} — supportive: {ds}.",
+  "gd.ban": "You",
+  "gd.nguoi_2": "Household member",
+  "hn.tra_loi": "In {nam} ({can_chi}), keep the {p5} and {p2} sides of the home undisturbed: avoid drilling, digging or major repairs there.",
+  "hn.tra_loi_trung": "In {nam} ({can_chi}), keep the centre of the home and the {p2} side undisturbed: avoid drilling or major repairs there.",
+  "hn.tam_sat": "The {p} side should also be left alone this year (Three Killings).",
+  "hn.thai_tue": "The {p} side (Tai Sui) and the opposite {pha} side (Sui Po): tradition avoids starting work facing these two.",
+  "hn.moc": "The year runs from Li Chun (around 4 February), not from 1 January.",
+  "hn.phong": "In your home, the {p} side holds the {phong}.",
+  "hn.tuoi": "Your age for building work in {nam_am}: {y}",
+  "hn.nhan.5": "keep quiet",
+  "hn.nhan.2": "keep quiet",
+  "hn.nhan.tam_sat": "no groundwork",
+  "noi": ", "
+ }
+}

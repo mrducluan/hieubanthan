@@ -30,6 +30,9 @@ export const TEN_LOAI_NHA: Record<LoaiNha, string> = { nha_pho: "Nhà phố", ca
 /** VT-1: loại vật đo được khi "đứng giữa nhà, chĩa điện thoại" (khớp engine `/v1/phongthuy/vi-tri-vat`). */
 export const LOAI_VAT = ["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang"] as const;
 export type LoaiVat = (typeof LOAI_VAT)[number];
+/** Hướng cửa phòng / hướng nhìn của vật trong khung nhà (theo mặt bản vẽ: truoc = nhìn ra mặt tiền, phai = vách phải, sau = nhìn về hậu, trai = vách trái). */
+export const HUONG_CUA_KHUNG = ["truoc", "phai", "sau", "trai"] as const;
+export type HuongCuaKhung = (typeof HUONG_CUA_KHUNG)[number];
 const MauDo = z.array(z.number().min(0).lt(360)).min(1).max(30);
 
 export const HoSoNha = z.object({
@@ -58,6 +61,9 @@ export const HoSoNha = z.object({
     khai_khong: z.array(z.string().max(40)).max(40).optional(),
     /** UI-PT 4: dấu hiệu người dùng bấm "Tôi đã xử lý" — gửi engine `co: false` (thắng suy luận từ mặt bằng), Khảo sát không tích lại. */
     da_xu_ly: z.array(z.string().max(40)).optional(),
+    /** SD-1: mã trong `dau_hieu` đến từ gợi ý của sơ đồ nhà theo tỉ lệ mà người dùng đã bấm "Có" — để khi sơ đồ đổi và gợi ý
+     *  không còn, khối sơ đồ gỡ đúng các mã nó từng thêm (không đụng mã người dùng tích tay ở Khảo sát). */
+    tu_so_do: z.array(z.string().max(40)).max(40).optional(),
     mat_bang: z.object({
       luoi: z.array(z.string().regex(/^[01]{3,12}$/)).min(3).max(12),
       phong: z.record(z.string().max(30), z.tuple([z.number().int().min(0).max(11), z.number().int().min(0).max(11)])).optional(),
@@ -77,6 +83,14 @@ export const HoSoNha = z.object({
     vat: z.partialRecord(z.enum(LOAI_VAT), z.object({
       mau: MauDo.optional(),
       diem: z.tuple([z.number().min(0).max(1), z.number().min(0).max(1)]).optional(),
+      /** Kích thước khung phòng / vật (rộng × sâu, đơn vị mét) trên sơ đồ tỉ lệ. */
+      kich_thuoc: z.tuple([z.number().min(0.4).max(100), z.number().min(0.4).max(100)]).optional(),
+      /** Hướng cửa phòng / mặt nhìn của vật trên bản vẽ (truoc = mặt tiền, phai, sau, trai). */
+      huong_cua: z.enum(HUONG_CUA_KHUNG).optional(),
+      /** SD-1: người dùng TỰ chỉnh kích thước / TỰ xoay cửa (không phải giá trị máy tự điền). Chỉ khi cờ bật thì
+       *  `kich_thuoc` / `huong_cua` mới được gửi đi tính; hồ sơ cũ không có cờ = coi như máy tự điền. */
+      tu_dat_kt: z.boolean().optional(),
+      tu_dat_cua: z.boolean().optional(),
     })),
   })).max(6).optional(),
   cap_nhat_luc: z.string(),

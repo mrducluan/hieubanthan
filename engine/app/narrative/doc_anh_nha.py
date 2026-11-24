@@ -28,6 +28,9 @@ LOAI_ANH = ("image/jpeg", "image/png", "image/webp")
 TOI_DA_DAU_HIEU, TOI_DA_PHONG, TOI_DA_LUU_Y = 8, 3, 3
 NGUONG_DO_TIN = 0.35
 DAI_LY_DO, DAI_LUU_Y = 200, 160
+# Ba góc nên có ảnh (Cửa – Chủ – Bếp): chưa thấy trong lô ảnh thì web gợi ý chụp thêm. Chỉ là lời nhắc, không phải kết luận.
+GOC_NEN_CO = ("cua_chinh", "bep", "phong_ngu_chinh")
+TOKEN_NEN, TOKEN_MOI_ANH, TOKEN_TRAN = 500, 160, 1500   # 6 ảnh × (phòng + vài dấu hiệu có lý do) không vừa 700 token cũ
 
 _log = logging.getLogger("hbt.doc_anh")
 
@@ -42,9 +45,11 @@ QUY TẮC:
 - CHỈ dùng đúng mã trong danh mục. Không tự đặt mã mới.
 - CHỈ ghi điều nhìn thấy. Không suy đoán phần ngoài khung ảnh. Không phán tốt / xấu, không nhắc phong thuỷ, không khuyên.
 - Mỗi dấu hiệu: "co" = true nếu thấy có, false nếu thấy RÕ là không có; không rõ thì bỏ qua. "do_tin" 0–1. \
-"ly_do" là một câu ngắn tiếng Việt mô tả điều thấy trong ảnh (không link, không số điện thoại).
+"ly_do" là một câu ngắn tiếng Việt mô tả điều thấy trong ảnh (không link, không số điện thoại). \
+"anh_so" là số thứ tự ảnh (bắt đầu từ 1) nơi nhìn thấy rõ nhất dấu hiệu đó; không chắc ảnh nào thì bỏ trường này.
+- "anh": với TỪNG ảnh, cho biết ảnh đó chụp phòng nào trong danh mục phòng ("so" = số thứ tự ảnh); không rõ thì bỏ ảnh đó.
 - Trả về JSON THUẦN theo đúng mẫu, không thêm chữ ngoài JSON:
-{"dau_hieu":[{"ma":"...","co":true,"do_tin":0.0,"ly_do":"..."}],"phong":[{"phong":"...","do_tin":0.0}],"luu_y":["..."]}
+{"dau_hieu":[{"ma":"...","co":true,"do_tin":0.0,"ly_do":"...","anh_so":1}],"anh":[{"so":1,"phong":"...","do_tin":0.0}],"luu_y":["..."]}
 - "luu_y": tối đa 3 câu ngắn về chất lượng ảnh (tối, mờ, chỉ thấy một phần) nếu cần, không thì để [].
 
 DANH MỤC DẤU HIỆU (mã — câu hỏi tương ứng):
@@ -69,8 +74,12 @@ def dung_prompt(yc: dict) -> list[dict]:
         goi_y.append(f"Loại nhà: {str(yc['loai_nha'])[:30]}.")
     if yc.get("y_dinh"):
         goi_y.append(f"Người gửi đang quan tâm chuyện: {str(yc['y_dinh'])[:30]} (chỉ để biết nên nhìn kỹ chỗ nào).")
-    noi_dung: list[dict] = [{"type": "text", "text": " ".join(goi_y) + " Hãy ghi nhận dấu hiệu nhìn thấy trong các ảnh sau."}]
-    for a in yc["anh"]:
+    so_anh = len(yc["anh"])
+    nhan_dau = f"Hãy ghi nhận dấu hiệu nhìn thấy trong {so_anh} ảnh sau. Ảnh 1 ngay bên dưới:"
+    noi_dung: list[dict] = [{"type": "text", "text": (" ".join(goi_y) + " " + nhan_dau).strip()}]
+    for i, a in enumerate(yc["anh"], start=1):
+        if i > 1:
+            noi_dung.append({"type": "text", "text": f"Ảnh {i}:"})
         noi_dung.append({"type": "image_url", "image_url": {"url": f"data:{a['loai']};base64,{a['du_lieu']}"}})
     return [{"role": "system", "content": _he_thong()}, {"role": "user", "content": noi_dung}]
 
@@ -125,12 +134,33 @@ def _loc_cau(x, dai: int) -> str:
     return s[:dai].rstrip()
 
 
-def hau_xu_ly(tho: dict) -> dict:
+def _anh_so(x, so_anh: int) -> int | None:
+    if isinstance(x, bool) or x is None:
+        return None
+    try:
+        v = int(x)
+    except (TypeError, ValueError):
+        return None
+    return v if 1 <= v <= so_anh else None
+
+
+def hau_xu_ly(tho: dict, so_anh: int = 1) -> dict:
     """Tất định: chỉ giữ mã / phòng có trong danh mục, kẹp độ tin 0..1, bỏ < NGUONG_DO_TIN, lọc lý do, sắp giảm, cắt số lượng.
-    Mã trùng → giữ bản độ tin cao nhất. Khoá có mặt nhưng sai kiểu (không phải danh sách) → ValueError (mô hình không theo mẫu)."""
-    for k in ("dau_hieu", "phong", "luu_y"):
+    Mã trùng → giữ bản độ tin cao nhất. `anh_so` ngoài phạm vi 1..so_anh thì bỏ (không kẹp). Khoá có mặt nhưng sai kiểu → ValueError."""
+    for k in ("dau_hieu", "phong", "anh", "luu_y"):
         if tho.get(k) is not None and not isinstance(tho[k], list):
             raise ValueError(f"{k}_khong_phai_danh_sach")
+    # Phòng của TỪNG ảnh (mỗi ảnh một phòng, bản độ tin cao nhất); số ảnh ngoài phạm vi / phòng lạ → bỏ.
+    anh_phong: dict[int, dict] = {}
+    for x in tho.get("anh") or []:
+        if not isinstance(x, dict) or x.get("phong") not in TEN_PHONG:
+            continue
+        so, tin = _anh_so(x.get("so"), so_anh), _do_tin(x.get("do_tin"))
+        if so is None or tin is None or tin < NGUONG_DO_TIN:
+            continue
+        if so not in anh_phong or tin > anh_phong[so]["do_tin"]:
+            anh_phong[so] = {"so": so, "phong": x["phong"], "do_tin": tin}
+
     dh: dict[str, dict] = {}
     for x in tho.get("dau_hieu") or []:
         if not isinstance(x, dict) or x.get("ma") not in DAU_HIEU:
@@ -138,7 +168,12 @@ def hau_xu_ly(tho: dict) -> dict:
         tin = _do_tin(x.get("do_tin"))
         if tin is None or tin < NGUONG_DO_TIN:
             continue
-        muc = {"ma": x["ma"], "co": _co(x.get("co")), "do_tin": tin, "ly_do": _loc_cau(x.get("ly_do"), DAI_LY_DO)}
+        anh_idx = _anh_so(x.get("anh_so"), so_anh)
+        muc: dict = {"ma": x["ma"], "co": _co(x.get("co")), "do_tin": tin, "ly_do": _loc_cau(x.get("ly_do"), DAI_LY_DO)}
+        if anh_idx is not None:
+            muc["anh_so"] = anh_idx
+            if anh_idx in anh_phong:
+                muc["phong"] = anh_phong[anh_idx]["phong"]
         if x["ma"] not in dh or tin > dh[x["ma"]]["do_tin"]:
             dh[x["ma"]] = muc
     dau_hieu = sorted(dh.values(), key=lambda m: -m["do_tin"])[:TOI_DA_DAU_HIEU]
@@ -151,7 +186,11 @@ def hau_xu_ly(tho: dict) -> dict:
         if tin is None or tin < NGUONG_DO_TIN:
             continue
         ph[x["phong"]] = max(tin, ph.get(x["phong"], 0.0))
+    for a in anh_phong.values():                       # mô hình chỉ trả phòng theo từng ảnh → vẫn có danh sách phòng chung
+        ph[a["phong"]] = max(a["do_tin"], ph.get(a["phong"], 0.0))
     phong = [{"phong": p, "do_tin": t} for p, t in sorted(ph.items(), key=lambda kv: -kv[1])[:TOI_DA_PHONG]]
+    da_thay = set(ph)
+    goc_thieu = [p for p in GOC_NEN_CO if p not in da_thay]
 
     luu_y = []
     for x in tho.get("luu_y") or []:
@@ -160,7 +199,12 @@ def hau_xu_ly(tho: dict) -> dict:
             luu_y.append(s)
         if len(luu_y) >= TOI_DA_LUU_Y:
             break
-    return {"da_bat": True, "ly_do_tat": None, "dau_hieu": dau_hieu, "phong_doan": phong, "luu_y": luu_y, "can_xac_nhan": True}
+    return {"da_bat": True, "ly_do_tat": None, "dau_hieu": dau_hieu, "phong_doan": phong,
+            "anh": [anh_phong[k] for k in sorted(anh_phong)], "goc_thieu": goc_thieu, "luu_y": luu_y, "can_xac_nhan": True}
+
+
+def tran_token(so_anh: int) -> int:
+    return min(TOKEN_TRAN, TOKEN_NEN + TOKEN_MOI_ANH * max(1, so_anh))
 
 
 def doc_anh(yc: dict) -> dict:
@@ -178,12 +222,12 @@ def doc_anh(yc: dict) -> dict:
         with httpx.Client(timeout=45) as c:
             r = c.post(OPENROUTER_URL,
                        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-                       json={"model": model, "temperature": 0.1, "max_tokens": 700,
+                       json={"model": model, "temperature": 0.1, "max_tokens": tran_token(len(yc["anh"])),
                              "response_format": {"type": "json_object"},
                              "messages": dung_prompt(yc)})
             r.raise_for_status()
             van = r.json()["choices"][0]["message"]["content"]
-        return hau_xu_ly(_boc_json(van))
+        return hau_xu_ly(_boc_json(van), so_anh=len(yc.get("anh") or []))
     except Exception as e:  # noqa: BLE001 — chỉ ghi LOẠI lỗi; không log body, không log ảnh, không đẩy Sentry
         _log.warning("doc_anh_nha: loi_dich_vu (%s)", type(e).__name__)
         return _tat("loi_dich_vu")

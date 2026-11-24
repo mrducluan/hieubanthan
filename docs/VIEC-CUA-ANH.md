@@ -12,6 +12,16 @@
 
 Làm xong dòng nào thì đánh `[x]` (hoặc nhắn em). Các mục cũ hơn nằm bên dưới đường kẻ.
 
+### 0. Phong thuỷ PT-V3 (PR #352) — sau khi merge
+
+- [ ] **PT1. Deploy engine (Render) TRƯỚC, rồi mới tới web (Vercel).** Web mới gọi route mới của engine (`/hoi-gi`, `/do-huong` nhận mẫu).
+- [ ] **PT2. Thử la bàn trên điện thoại thật** (em không có máy thật): iPhone Safari, Android Chrome, và mở trong Zalo / Facebook.
+  Vào `/phong-thuy` → "Đo bằng la bàn điện thoại" → "Giữ yên và đo" → có phiếu đo → Chốt. Thử thêm: xoay ngang máy, đo sát cửa sắt
+  (phải báo rung / lệch), "Đo thêm một lần ở chỗ khác". Chỗ nào số sai hoặc không ra số, nhắn em kèm loại máy.
+- [ ] **PT3. Thử máy đọc ảnh với 4–6 ảnh thật** (cần `OPENROUTER_API_KEY` trên Render — đã có): xem phòng từng ảnh có đúng không,
+  ảnh bằng chứng có đúng tấm không. Chi phí mỗi lượt tăng theo số ảnh; nếu thấy tốn, báo em hạ trần xuống 4.
+- [ ] **PT4. Đóng bốn PR nháp cũ** #336, #337, #346, #351 (PR #352 đã gồm cả bốn). PR #335 (Bát tự) chưa soát.
+
 ### A. Quảng cáo Facebook — làm cho xong (đang dở)
 
 - [ ] **A1.** Đặt `META_CAPI_TOKEN` trên Vercel (dự án web), Production → Redeploy. (Lấy ở Events Manager → pixel Hieuban → Settings

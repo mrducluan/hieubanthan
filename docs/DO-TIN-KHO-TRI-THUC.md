@@ -18,7 +18,7 @@
 | Bát tự | 3 | 1 | 1 | 5 |  |
 | Tử vi | 1 | 3 | 7 | 7 |  |
 | Kinh Dịch | 4 | 2 | 1 | 2 |  |
-| Phong thuỷ | 2 | 2 | 1 | 4 |  |
+| Phong thuỷ | 2 | 2 | 1 | 5 |  |
 | Nhân tướng | 6 | 2 | 1 | 1 |  |
 | Tarot | 1 |  | 1 |  |  |
 | Kỳ Môn |  | 1 |  | 1 |  |
@@ -133,6 +133,7 @@
 | Phong thuỷ | `phongthuy_cung_menh.json` |  | Có nguyên văn đối chiếu | SX-C: chín điều bố trí × 8 cung (東/西四位宅圖說); phương + du niên khớp phép tính Bát trạch |
 | Phong thuỷ | `phongthuy_do_thi.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_doi_song.json` |  | Ban biên tập soạn |  |
+| Phong thuỷ | `phongthuy_hoi_gi_kb.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_huyen_khong.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
 | Phong thuỷ | `phongthuy_huyen_khong.json` | to_hop_81 | Có nguyên văn đối chiếu | Gói 1A: 28 tổ hợp sao tiêu biểu có câu nguyên văn Tử Bạch Đoạn / Phi Tinh Phú qua bộ kiểm SX-C; Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json) |
 | Phong thuỷ | `phongthuy_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | KT-PT1: 7 dấu hiệu `bo_tri` có câu nguyên văn (`sach`); phần còn lại chưa khớp từng câu |

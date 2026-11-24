@@ -85,6 +85,8 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - run: npm ci
       - run: npm run typecheck
+      - name: Test đơn vị (node --test, hàm thuần trong lib/)
+        run: npm test
       - run: npm run build
 
   # Migration Supabase trên Postgres thật: lên 3 vòng → xuống → lên lại, rồi gọi thử hàm Sao / quản trị / thanh toán
