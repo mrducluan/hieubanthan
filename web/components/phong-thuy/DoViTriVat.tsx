@@ -23,6 +23,7 @@ import {
   type HopPhongKhung,
 } from "@/lib/mat-bang-khung";
 import { layQuayLai, ngheQuayLai, veCauTraLoi } from "@/lib/quay-lai-hoi-gi";
+import { giaiMa, nguonSuKien, type SuKienTho } from "@/lib/la-kinh/hop-nhat";
 import { tenTheo, type TenHien } from "@/lib/ten-hien";
 import { cn } from "@/lib/utils";
 
@@ -76,14 +77,15 @@ const MAU_PHONG: Record<LoaiVat, { fill: string; stroke: string }> = {
   cau_thang: { fill: "rgba(148, 163, 184, 0.22)", stroke: "rgb(203, 213, 225)" },
 };
 
-type SuKien = DeviceOrientationEvent & { webkitCompassHeading?: number; webkitCompassAccuracy?: number };
 type CoXinQuyen = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<"granted" | "denied"> };
 
-/** Độ la bàn của cạnh trên máy khi cầm nằm ngang (iOS cho sẵn; Android: 360 − alpha tuyệt đối). Chỉ đọc cảm biến. */
-function docDo(e: SuKien, tuyetDoi: boolean): number | null {
-  if (typeof e.webkitCompassHeading === "number") return e.webkitCompassHeading;
-  if ((tuyetDoi || e.absolute) && typeof e.alpha === "number") return (360 - e.alpha) % 360;
-  return null;
+function gocManHinh(): number {
+  try {
+    const a = window.screen?.orientation?.angle;
+    if (typeof a === "number") return a;
+    const cu = (window as unknown as { orientation?: unknown }).orientation;
+    return typeof cu === "number" ? cu : 0;
+  } catch { return 0; }
 }
 /** Độ rung của dãy mẫu gần nhất (chênh lớn nhất so với mẫu đầu, theo vòng) — chỉ để hiện chỉ báo, máy chủ mới chấm. */
 function doRung(ds: number[]): number {
@@ -282,22 +284,32 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
       if (!duoc) { setLoi(c("dv.quyen")); return; }
     }
     if (huy.current) return;                           // đã nghe rồi
-    const tuyetDoi = "ondeviceorientationabsolute" in window;
-    const ten = tuyetDoi ? "deviceorientationabsolute" : "deviceorientation";
+    // Cùng bộ giải mã với la bàn đo hướng nhà (lib/la-kinh): nghe CẢ HAI loại sự kiện, chỉ đọc sự kiện tuyệt đối / iOS —
+    // sự kiện tương đối (alpha tính từ lúc mở trang) bị bỏ, đọc vào là lệch tuỳ ý so với Bắc.
+    const coTuyetDoi = "ondeviceorientationabsolute" in window;
     let nhan = false;
+    let daThayTuyetDoi = false;
     const nghe = (ev: Event) => {
-      const e = ev as SuKien;
-      const d = docDo(e, tuyetDoi);
-      if (d == null) return;
+      const e = ev as unknown as SuKienTho;
+      const nguon = nguonSuKien(ev.type, e, daThayTuyetDoi);
+      if (!nguon) return;
+      if (ev.type === "deviceorientationabsolute") daThayTuyetDoi = true;
+      const m = giaiMa(e, nguon === "tuyet_doi", gocManHinh());
+      if (!m) return;
       nhan = true;
-      setDoSong(d);
-      setNghieng(typeof e.beta === "number" && Math.abs(e.beta) > 60);
-      mauSong.current = [...mauSong.current.slice(-19), d];
-      if (typeof e.webkitCompassAccuracy === "number") saiSo.current = e.webkitCompassAccuracy;
-      gom.current?.push(d);
+      setDoSong(m.do);
+      setNghieng(m.nghieng);
+      if (m.nghieng) return;
+      mauSong.current = [...mauSong.current.slice(-19), m.do];
+      if (m.saiSo != null) saiSo.current = m.saiSo;
+      gom.current?.push(m.do);
     };
-    window.addEventListener(ten, nghe);
-    huy.current = () => window.removeEventListener(ten, nghe);
+    if (coTuyetDoi) window.addEventListener("deviceorientationabsolute", nghe);
+    window.addEventListener("deviceorientation", nghe);
+    huy.current = () => {
+      window.removeEventListener("deviceorientationabsolute", nghe);
+      window.removeEventListener("deviceorientation", nghe);
+    };
     setBat(true);
     henGio(() => { if (!nhan) { setLoi(c("dv.khong_cam_bien")); setCheDo("khung"); } }, 2500);
   }, [c, henGio]);

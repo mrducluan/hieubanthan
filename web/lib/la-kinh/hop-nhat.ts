@@ -79,6 +79,19 @@ export function giaiMa(e: SuKienTho, tuyetDoi: boolean, gocManHinh = 0): MauGiai
   return { do: chuanDo(h + goc), nghieng, saiSo: null };
 }
 
+/** Chọn sự kiện nào được đọc khi nghe CẢ HAI loại (`deviceorientationabsolute` và `deviceorientation`).
+ *  - iOS: `deviceorientation` có `webkitCompassHeading` (đã tính từ Bắc) → "ios".
+ *  - `deviceorientationabsolute` (Android Chrome, WebView): alpha tính từ Bắc từ → "tuyet_doi".
+ *  - `deviceorientation` tự khai `absolute: true` (trình duyệt không có sự kiện tuyệt đối riêng) → "tuyet_doi", NHƯNG chỉ
+ *    khi chưa thấy sự kiện tuyệt đối riêng nào — tránh trộn hai nguồn khác cách hợp nhất cảm biến.
+ *  - Còn lại (alpha TƯƠNG ĐỐI, tính từ lúc mở trang — Chrome từ bản 50) → null: đọc vào là lệch tuỳ ý so với Bắc. */
+export function nguonSuKien(loai: string, e: SuKienTho, daThayTuyetDoi: boolean): "ios" | "tuyet_doi" | null {
+  if (typeof e.webkitCompassHeading === "number" && Number.isFinite(e.webkitCompassHeading)) return "ios";
+  if (loai === "deviceorientationabsolute") return "tuyet_doi";
+  if (loai === "deviceorientation" && e.absolute === true && !daThayTuyetDoi) return "tuyet_doi";
+  return null;
+}
+
 /** Sai số iOS "xấu nhất" đã thấy trong một lần đo: âm (chưa hiệu chỉnh) xấu hơn mọi số dương; còn lại lấy số lớn hơn. */
 export function saiSoXauNhat(cu: number | null, moi: number | null): number | null {
   if (moi == null) return cu;

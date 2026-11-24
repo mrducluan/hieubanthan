@@ -149,7 +149,7 @@ test("Gia đình: nhập năm sinh + giới tính người ở cùng → bảng 
   await expect(kq.getByTestId("hoi-gi-hai-nguoi")).toHaveCount(0);
 
   // Thiếu giới tính → báo ngay cạnh ô, chưa gọi.
-  await form.getByTestId("hoi-gi-n2-nam").fill("1992");
+  await form.getByTestId("hoi-gi-n2-nam-sinh").fill("1992");
   await form.getByTestId("hoi-gi-n2-xem").click();
   await expect(form.getByRole("alert")).toBeVisible();
 

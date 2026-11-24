@@ -235,3 +235,31 @@ test("bản tiếng Anh /en/feng-shui: nút, phiếu đo và lời engine đều
   const chu = await phieu.innerText();
   expect(chu).not.toMatch(/[ăâđêôơưáàảãạấầẩẫậắằẳẵặéèẻẽẹếềểễệíìỉĩịóòỏõọốồổỗộớờởỡợúùủũụứừửữựýỳỷỹỵ]/i);
 });
+
+test("Chrome có requestPermission + bắn cả sự kiện TƯƠNG ĐỐI lệch 24°: chỉ đọc sự kiện tuyệt đối (lỗi 160° ↔ 184°)", async ({ page }) => {
+  // Lỗi thật trên hieuban.com: thấy `DeviceOrientationEvent.requestPermission` thì mã cũ coi là iOS, chỉ nghe
+  // `deviceorientation` (alpha tương đối) → web báo 160° khi la bàn của máy báo 184°.
+  await page.addInitScript(() => {
+    const D = window.DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> };
+    if (D && typeof D.requestPermission !== "function") D.requestPermission = () => Promise.resolve("granted");
+  });
+  const o = await moTrang(page);
+  await expect(async () => {
+    if ((await o.getAttribute("data-pha")) !== "ngam") await o.getByTestId("la-ban-bat-dau").click({ timeout: 2_000 });
+    await expect(o).toHaveAttribute("data-pha", "ngam", { timeout: 1_500 });
+  }).toPass();
+  await page.evaluate(() => {
+    const w = window as unknown as { __ban?: number };
+    if (w.__ban) window.clearInterval(w.__ban);
+    w.__ban = window.setInterval(() => {
+      window.dispatchEvent(new DeviceOrientationEvent("deviceorientationabsolute", { alpha: 176, beta: 1, gamma: 0, absolute: true }));
+      window.dispatchEvent(new DeviceOrientationEvent("deviceorientation", { alpha: 200, beta: 1, gamma: 0, absolute: false }));
+    }, 25);
+  });
+  await expect(o.getByTestId("la-ban-giu-yen")).toBeEnabled();
+  const guiDi = page.waitForRequest((r) => r.url().includes("/api/phongthuy/do-huong") && r.method() === "POST");
+  const phieu = await giuYen(page);
+  const than = (await guiDi).postDataJSON() as { mau: number[] };
+  expect(than.mau.every((x) => Math.abs(x - 184) < 0.5)).toBe(true);   // không mẫu nào 160°
+  await expect(phieu.getByTestId("phieu-do-so")).toContainText("184");
+});
