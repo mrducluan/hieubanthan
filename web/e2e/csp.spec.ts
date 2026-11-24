@@ -54,6 +54,20 @@ test("Q-I3: trang SEO công khai dùng CSP tĩnh (không nonce) + CDN-Cache-Cont
   const coQuery = await request.get("/than-so/y-nghia-so/so-7?utm_source=test");
   expect(coQuery.headers()["cdn-cache-control"]).toBeUndefined();
   expect(coQuery.headers()["content-security-policy"]).toMatch(/'nonce-/);
+
+  // Yêu cầu RSC / prefetch nội bộ → thoát CDN cache HTML (tránh lẫn RSC flight payload với HTML)
+  const rsc = await request.get("/than-so/y-nghia-so/so-7", { headers: { "next-router-prefetch": "1", accept: "text/x-component" } });
+  expect(rsc.headers()["cdn-cache-control"]).toBeUndefined();
+
+  // Trang ngày (/xem-ngay-tot/*) dùng TTL động ngắn (≤ 1800s, swr 60s) để không giữ nhãn "Hôm nay" qua nửa đêm
+  const ngay = await request.get("/xem-ngay-tot/2026-11-25");
+  expect(ngay.headers()["cdn-cache-control"]).toMatch(/^public, s-maxage=\d+, stale-while-revalidate=60$/);
+
+  // Bất biến HTML theo cookie / Accept-Language trên trang SEO cached (chống cache poisoning Việt ↔ Anh)
+  const htmlVi = await (await request.get("/than-so/y-nghia-so/so-7", { headers: { "accept-language": "vi-VN,vi;q=0.9" } })).text();
+  const htmlEn = await (await request.get("/than-so/y-nghia-so/so-7", { headers: { "accept-language": "en-US,en;q=0.9", cookie: "hbt-goi-y-en=1" } })).text();
+  expect(htmlEn).not.toContain("goi-y-tieng-anh");
+  expect(htmlVi).not.toContain("goi-y-tieng-anh");
 });
 
 for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/than-so/y-nghia-so/so-7",

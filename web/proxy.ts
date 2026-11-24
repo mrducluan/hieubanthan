@@ -11,7 +11,7 @@ import { dichRewrite, suaDuongLac } from "@/lib/duong-en";
 import { createServerClient } from "@supabase/ssr";
 import { SITE_CHINH } from "@/lib/seo";
 import { taoCsp, taoCspTinh, taoNonce } from "@/lib/csp";
-import { CDN_CACHE_SEO, duocCacheSeo } from "@/lib/cache-seo";
+import { duocCacheSeo, headerCacheSeo } from "@/lib/cache-seo";
 
 type CookieMoi = { name: string; value: string; options?: Parameters<NextResponse["cookies"]["set"]>[2] };
 
@@ -68,12 +68,22 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
     req.cookies.get("__next_preview_data") ||
     req.cookies.get("hbt-xem-truoc"),
   );
+  // Chỉ cache tài liệu HTML đầy đủ — bỏ qua yêu cầu RSC / prefetch của Next App Router để tránh lẫn payload.
+  const laRsc = Boolean(
+    req.headers.get("rsc") ||
+    req.headers.get("next-router-prefetch") ||
+    req.headers.get("next-router-state-tree") ||
+    req.headers.get("next-router-segment-prefetch") ||
+    (req.headers.get("accept") ?? "").includes("text/x-component"),
+  );
   const cacheSeo = !tiengAnh && !quanTri && duocCacheSeo({
     method: req.method,
     pathname,
     search: req.nextUrl.search,
     coCookieNhap,
+    laRsc,
     vercelEnv: process.env.VERCEL_ENV,
+    choPreview: process.env.Q_I3_CACHE_PREVIEW === "1",
     tatCache: process.env.Q_I3_CACHE_SEO === "0",
   });
   const nonce = cacheSeo ? null : taoNonce();
@@ -103,8 +113,9 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
   }
   res.headers.set("content-security-policy", csp);
   if (cacheSeo) {
-    res.headers.set("cdn-cache-control", CDN_CACHE_SEO);
-    res.headers.set("vercel-cdn-cache-control", CDN_CACHE_SEO);
+    const cacheVal = headerCacheSeo(pathname);
+    res.headers.set("cdn-cache-control", cacheVal);
+    res.headers.set("vercel-cdn-cache-control", cacheVal);
   }
   if (tiengAnh) { res.headers.set("content-language", langHtml(maEn)); res.headers.append("vary", "Accept-Language"); }
   cookieMoi.forEach((c) => res.cookies.set(c.name, c.value, c.options));
