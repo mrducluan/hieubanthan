@@ -14,6 +14,7 @@ import { CauTraLoi } from "@/components/hoi/CauTraLoi";
 import { useMaCuaToi } from "@/lib/sao";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
+import { LoiMoiChuyenGiaTuDong } from "@/components/chuyen-gia/LoiMoiChuyenGia";
 
 export interface KetQuaHoi {
   van?: string;
@@ -283,6 +284,16 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO: nhanOVao, goiY
           </Button>
         </form>
         {dieuKhienDuoi && <div className="mt-3">{dieuKhienDuoi}</div>}
+        {!hd.en && (
+          <div className="mt-3 empty:hidden">
+            <LoiMoiChuyenGiaTuDong
+              moDun={moDun}
+              kichHoat={!dang && (daHoi.length >= 2 || tin.some((t) => t.ai === "he" && Boolean(t.hoiLai)))}
+              goiYCau={daHoi[daHoi.length - 1]?.van}
+              nguon={`chat_${moDun}`}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

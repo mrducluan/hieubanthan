@@ -51,7 +51,85 @@ export async function hoiVienConLuot(sb: SupabaseClient): Promise<number | null>
 }
 
 export interface DongSo { ten: string; gia_tri: string }
-export interface BangSo { mang: MangCg; dong: DongSo[]; ghi_chu: string | null; tho: unknown }
+export interface DoiChieuMang { mang: MangCg; ten: string; dong: DongSo[]; ghi_chu: string | null }
+export interface BangSo {
+  mang: MangCg;
+  dong: DongSo[];
+  ghi_chu: string | null;
+  tho: unknown;
+  /** Co-Pilot GĐ 2: đối chiếu nhanh các hệ thống bổ trợ (chỉ khi người hỏi đã đồng ý chia sẻ hồ sơ). */
+  doi_chieu?: DoiChieuMang[];
+  /** Khung gợi ý 3 phần chuẩn hành nghề (chuyên gia tự biên tập trước khi gửi, không gọi LLM tự bịa). */
+  khung_tra_loi?: string;
+}
+
+const TEN_MANG_NHO: Record<MangCg, string> = {
+  than_so: "Thần số học",
+  tu_vi: "Tử vi",
+  bat_tu: "Bát tự",
+  kinh_dich: "Kinh Dịch",
+  phong_thuy: "Phong thuỷ",
+};
+
+const MANG_BO_TRO: Record<MangCg, MangCg[]> = {
+  tu_vi: ["bat_tu", "than_so"],
+  bat_tu: ["tu_vi", "than_so"],
+  than_so: ["bat_tu", "phong_thuy"],
+  phong_thuy: ["bat_tu", "than_so"],
+  kinh_dich: ["than_so", "bat_tu"],
+};
+
+function taoKhungTraLoi(mangChinh: MangCg, chinh: BangSo, boTro: DoiChieuMang[]): string {
+  const dongChinh = chinh.dong.slice(0, 4).map((d) => `- ${d.ten}: ${d.gia_tri}`).join("\n");
+  const dongCheo = boTro
+    .map((b) => {
+      const tom = b.dong.slice(0, 2).map((d) => `${d.ten}: ${d.gia_tri}`).join(" · ");
+      return tom ? `- Đối chiếu ${b.ten}: ${tom}` : "";
+    })
+    .filter(Boolean)
+    .join("\n");
+  return [
+    `1. Căn cứ từ ${TEN_MANG_NHO[mangChinh]}:`,
+    dongChinh || "- (Ghi ngắn gọn dấu hiệu cốt lõi từ câu hỏi)",
+    ...(dongCheo ? ["", "Đối chiếu chéo đa hệ thống:", dongCheo] : []),
+    "",
+    "2. Gợi ý hướng đi & việc nên làm:",
+    "- (Nêu 2–3 hành động thực tế gắn với bối cảnh câu hỏi)",
+    "",
+    "3. Điều nên lưu ý / tránh vội vàng:",
+    "- (Nhắc điểm cần cẩn trọng, giữ giọng khách quan, không phán định mệnh)",
+  ].join("\n");
+}
+
+const HAN_BO_TRO_MS = 8_000;
+
+function voiHan<T>(p: Promise<T>, ms: number, macDinh: T): Promise<T> {
+  return new Promise((resolve) => {
+    const t = setTimeout(() => resolve(macDinh), ms);
+    p.then((v) => { clearTimeout(t); resolve(v); }, () => { clearTimeout(t); resolve(macDinh); });
+  });
+}
+
+/** Co-Pilot GĐ 2: Hồ sơ Đa Mảng 1 trang — chạy song song mảng chính + các mảng bổ trợ từ ảnh chụp hồ sơ
+ *  (chỉ khi người hỏi đã đồng ý chia sẻ). Lỗi hoặc chậm quá 8 giây ở mảng bổ trợ không làm hỏng mảng chính. */
+export async function benhAnDaMang(mangChinh: MangCg, hs: HoSoCg | null): Promise<BangSo> {
+  const chinh = await bangSoChuyenGia(mangChinh, hs);
+  if (!hs) return { ...chinh, doi_chieu: [], khung_tra_loi: taoKhungTraLoi(mangChinh, chinh, []) };
+  const dsBoTro = MANG_BO_TRO[mangChinh] ?? [];
+  const kqBoTro = await Promise.all(
+    dsBoTro.map((m) =>
+      voiHan<DoiChieuMang | null>(
+        bangSoChuyenGia(m, hs).then((b) =>
+          b.dong.length > 0 ? { mang: m, ten: TEN_MANG_NHO[m], dong: b.dong.slice(0, 4), ghi_chu: b.ghi_chu } : null,
+        ),
+        HAN_BO_TRO_MS,
+        null,
+      ),
+    ),
+  );
+  const doi_chieu = kqBoTro.filter((x): x is DoiChieuMang => x !== null);
+  return { ...chinh, doi_chieu, khung_tra_loi: taoKhungTraLoi(mangChinh, chinh, doi_chieu) };
+}
 
 const ten = (x: unknown): string => (x && typeof x === "object" && "ten" in x ? String((x as { ten: unknown }).ten) : String(x ?? ""));
 const canChi = (x: unknown): string => (x && typeof x === "object" ? `${(x as { can?: unknown }).can ?? ""} ${(x as { chi?: unknown }).chi ?? ""}`.trim() : String(x ?? ""));
