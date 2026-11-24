@@ -5,7 +5,14 @@
 export const MAU_THIEP = ["do_son", "mai_vang", "ngoc_bich", "dem_giao_thua"] as const;
 export type MauThiep = (typeof MAU_THIEP)[number];
 
-export const HOA_TIET_TET = ["linh_vat", "hoa_mai", "hoa_dao", "phao_hoa"] as const;
+export const HOA_TIET_TET = [
+  "linh_vat",
+  "linh_vat_son_mai",
+  "linh_vat_thanh_lich",
+  "hoa_mai",
+  "hoa_dao",
+  "phao_hoa",
+] as const;
 export type HoaTietTet = (typeof HOA_TIET_TET)[number];
 
 export const KHUNG_SOCIAL = ["doc", "vuong", "ngang"] as const;
@@ -77,12 +84,60 @@ export const DANH_SACH_MAU_THIEP: ThongTinMauThiep[] = [
   },
 ];
 
-export const DANH_SACH_HOA_TIET: { ma: HoaTietTet; ten: string; moTa: string }[] = [
-  { ma: "linh_vat", ten: "Linh Vật Đinh Mùi", moTa: "Biểu trưng Đinh Mùi 2027" },
-  { ma: "hoa_mai", ten: "Cành Hoa Mai", moTa: "Mai vàng 5 cánh phương Nam" },
-  { ma: "hoa_dao", ten: "Cành Hoa Đào", moTa: "Đào phớt thắm sắc xuân Bắc" },
-  { ma: "phao_hoa", ten: "Pháo Hoa Xuân", moTa: "Ánh kim đêm Giao Thừa" },
+export interface ThongTinHoaTiet {
+  ma: HoaTietTet;
+  ten: string;
+  moTa: string;
+  nhanSocial: string;
+  anh: string | null;
+}
+
+export const DANH_SACH_HOA_TIET: ThongTinHoaTiet[] = [
+  {
+    ma: "linh_vat",
+    ten: "Linh Vật Ép Kim 24K",
+    moTa: "Phù điêu Dê Vàng trên gấm chữ Vạn",
+    nhanSocial: "LINH VẬT ĐINH MÙI · ÉP KIM 24K",
+    anh: "/li-xi/linh-vat-ep-kim.jpg",
+  },
+  {
+    ma: "linh_vat_son_mai",
+    ten: "Linh Vật Sơn Mài",
+    moTa: "Khắc gỗ hoàng kim & sóng Thiên Hà Thuỷ",
+    nhanSocial: "LINH VẬT ĐINH MÙI · SƠN MÀI",
+    anh: "/li-xi/linh-vat-son-mai.jpg",
+  },
+  {
+    ma: "linh_vat_thanh_lich",
+    ten: "Linh Vật Thanh Lịch",
+    moTa: "Dê Vàng tối giản sang trọng hiện đại",
+    nhanSocial: "LINH VẬT ĐINH MÙI · THANH LỊCH",
+    anh: "/li-xi/linh-vat-thanh-lich.jpg",
+  },
+  {
+    ma: "hoa_mai",
+    ten: "Cành Hoa Mai",
+    moTa: "Mai vàng nhiều lớp cánh phương Nam",
+    nhanSocial: "MAI VÀNG PHÚ QUÝ",
+    anh: "/li-xi/hoa-mai-vang.jpg",
+  },
+  {
+    ma: "hoa_dao",
+    ten: "Cành Hoa Đào",
+    moTa: "Đào bích nhung hồng trên gấm ngọc",
+    nhanSocial: "ĐÀO XUÂN AN KHANG",
+    anh: "/li-xi/hoa-dao-bich.jpg",
+  },
+  {
+    ma: "phao_hoa",
+    ten: "Pháo Hoa Xuân",
+    moTa: "Ánh kim rực rỡ đêm Giao Thừa",
+    nhanSocial: "PHÁO HOA GIAO THỪA",
+    anh: null,
+  },
 ];
+
+export const ANH_NEN_GAM_EP_KIM = "/li-xi/nen-gam-ep-kim.jpg";
 
 export const DANH_SACH_KHUNG_SOCIAL: { ma: KhungSocial; ten: string; kichThuoc: string; dungCho: string }[] = [
   { ma: "doc", ten: "Story 9:16", kichThuoc: "1080×1920", dungCho: "Instagram / FB / TikTok / Zalo Story" },
@@ -93,10 +148,30 @@ export const DANH_SACH_KHUNG_SOCIAL: { ma: KhungSocial; ten: string; kichThuoc: 
 export const mauThiepTheoMa = (ma?: string | null): ThongTinMauThiep =>
   DANH_SACH_MAU_THIEP.find((x) => x.ma === ma) ?? DANH_SACH_MAU_THIEP[0]!;
 
-export const hoaTietTheoMa = (ma?: string | null, mau?: MauThiep): HoaTietTet => {
-  if (ma && (HOA_TIET_TET as readonly string[]).includes(ma)) return ma as HoaTietTet;
-  return mauThiepTheoMa(mau).hoaMacDinh;
+export const thongTinHoaTiet = (ma?: string | null, mau?: MauThiep): ThongTinHoaTiet => {
+  const macDinh = mauThiepTheoMa(mau).hoaMacDinh;
+  return DANH_SACH_HOA_TIET.find((x) => x.ma === ma) ??
+    DANH_SACH_HOA_TIET.find((x) => x.ma === macDinh) ??
+    DANH_SACH_HOA_TIET[0]!;
 };
+
+export const hoaTietTheoMa = (ma?: string | null, mau?: MauThiep): HoaTietTet =>
+  thongTinHoaTiet(ma, mau).ma;
+
+/**
+ * Băm tất định từ mã bao lì xì `ma` (12–16 ký tự hex) → xoay vòng qua các mẫu Linh Vật & Hoa Xuân
+ * để mỗi bao lì xì trong combo 3 / 5 bao có một vẻ đẹp riêng mà 100% không dùng Math.random khi SSR.
+ */
+export function hoaTietTuMaBao(maBao?: string | null, mau?: MauThiep): HoaTietTet {
+  if (!maBao) return mauThiepTheoMa(mau).hoaMacDinh;
+  if (mau === "ngoc_bich") return "hoa_dao";
+  if (mau === "mai_vang") return "hoa_mai";
+  if (mau === "dem_giao_thua") return "phao_hoa";
+  const dsLinhVat: HoaTietTet[] = ["linh_vat", "linh_vat_son_mai", "linh_vat_thanh_lich"];
+  let sum = 0;
+  for (let i = 0; i < maBao.length; i++) sum = (sum * 31 + maBao.charCodeAt(i)) >>> 0;
+  return dsLinhVat[sum % dsLinhVat.length]!;
+}
 
 export const LOI_CHUC_MAU = [
   "Chúc bạn năm Đinh Mùi 2027 vạn sự hanh thông, tâm an trí sáng, mọi quyết định lớn đều đúng thời điểm.",

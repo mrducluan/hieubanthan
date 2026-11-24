@@ -1,9 +1,12 @@
 "use client";
-// LX-2027 — Giao diện LÌ XÌ TẾT 2027: 4 chất liệu giấy × 4 hoạ tiết Tết (16 tổ hợp), hiệu ứng hoa rơi & pháo hoa khi mở,
-// chọn gói 1 / 3 / 5 bao, thanh toán Pay2S, quản lý bao đã mua và tải ảnh chia sẻ Social 3 khổ (Story 9:16 · Post 1:1 · Link 16:9).
+// LX-2027 — Giao diện LÌ XÌ TẾT 2027:
+//   - Công tắc "Phối ngẫu nhiên may mắn 🎲" hoặc "Tự chọn theo ý bạn (Custom)"
+//   - 4 chất liệu giấy Tết × 6 hoạ tiết nghệ thuật (3 mẫu Linh Vật Đinh Mùi 2027 + Hoa Mai Vàng + Hoa Đào Bích + Pháo Hoa Xuân)
+//   - Bật/tắt Nền Gấm Ép Kim 24K & Hoa xuân rơi
+//   - Chọn gói 1 / 3 / 5 bao, thanh toán Pay2S, quản lý bao đã mua và tải ảnh chia sẻ Social 3 khổ (Story 9:16 · Post 1:1 · Link 16:9).
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, Copy, Download, Flower2, Gift, Loader2, QrCode, Share2, Sparkles } from "lucide-react";
+import { Check, Copy, Dices, Download, Flower2, Gift, Layers, Loader2, QrCode, Share2, SlidersHorizontal, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input, Textarea } from "@/components/ui/input";
@@ -15,10 +18,13 @@ import {
   DANH_SACH_KHUNG_SOCIAL,
   DANH_SACH_MAU_THIEP,
   dinhDangVnd,
+  HOA_TIET_TET,
   kiemLoiChuc,
   LOI_CHUC_MAU,
+  MAU_THIEP,
   mauThiepTheoMa,
   taiAnhSocialLiXi,
+  thongTinHoaTiet,
   type BaoLiXiCuaToi,
   type HoaTietTet,
   type KhungSocial,
@@ -35,13 +41,25 @@ const TRANG_THAI_NHAN: Record<string, { chu: string; lop: string }> = {
   hoan: { chu: "Đã hoàn", lop: "text-fg-faint" },
 };
 
+/** Các tổ hợp phối sẵn đẹp nhất để nút "Đổi mẫu ngẫu nhiên 🎲" xoay vòng hoặc lấy ngẫu nhiên. */
+const TO_HOP_GOI_Y: { mau: MauThiep; hoa: HoaTietTet; nenGam: boolean; nhan: string }[] = [
+  { mau: "do_son", hoa: "linh_vat", nenGam: true, nhan: "Gấm Đỏ Son × Linh Vật Ép Kim 24K" },
+  { mau: "do_son", hoa: "linh_vat_son_mai", nenGam: true, nhan: "Gấm Đỏ Son × Linh Vật Sơn Mài Hoàng Kim" },
+  { mau: "do_son", hoa: "linh_vat_thanh_lich", nenGam: false, nhan: "Đỏ Son Tối Giản × Linh Vật Thanh Lịch" },
+  { mau: "mai_vang", hoa: "hoa_mai", nenGam: true, nhan: "Lụa Mai Vàng × Cành Mai Phương Nam" },
+  { mau: "ngoc_bich", hoa: "hoa_dao", nenGam: true, nhan: "Men Ngọc Bích × Đào Bích Miền Bắc" },
+  { mau: "dem_giao_thua", hoa: "phao_hoa", nenGam: false, nhan: "Đêm Giao Thừa × Pháo Hoa Xuân" },
+];
+
 export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
   const router = useRouter();
   const [tt, setTt] = useState<ThongTinLiXi>(banDau);
   const [token, setToken] = useState<string | null>(null);
   const [soBao, setSoBao] = useState<1 | 3 | 5>(3);
+  const [tuChon, setTuChon] = useState(true);
   const [mau, setMau] = useState<MauThiep>("do_son");
   const [hoa, setHoa] = useState<HoaTietTet>("linh_vat");
+  const [nenGam, setNenGam] = useState(true);
   const [hoaRoi, setHoaRoi] = useState(true);
   const [ten, setTen] = useState("");
   const [chuc, setChuc] = useState(LOI_CHUC_MAU[0]!);
@@ -54,12 +72,13 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
   useEffect(() => {
     try {
       const nhap = JSON.parse(sessionStorage.getItem(KHOA_NHAP) ?? "null") as {
-        soBao?: 1 | 3 | 5; mau?: MauThiep; hoa?: HoaTietTet; ten?: string; chuc?: string;
+        soBao?: 1 | 3 | 5; mau?: MauThiep; hoa?: HoaTietTet; nenGam?: boolean; ten?: string; chuc?: string;
       } | null;
       if (nhap) {
         if (nhap.soBao === 1 || nhap.soBao === 3 || nhap.soBao === 5) setSoBao(nhap.soBao);
-        if (nhap.mau) setMau(nhap.mau);
-        if (nhap.hoa) setHoa(nhap.hoa);
+        if (nhap.mau && (MAU_THIEP as readonly string[]).includes(nhap.mau)) setMau(nhap.mau);
+        if (nhap.hoa && (HOA_TIET_TET as readonly string[]).includes(nhap.hoa)) setHoa(nhap.hoa);
+        if (typeof nhap.nenGam === "boolean") setNenGam(nhap.nenGam);
         if (typeof nhap.ten === "string") setTen(nhap.ten);
         if (typeof nhap.chuc === "string") setChuc(nhap.chuc);
       }
@@ -83,7 +102,19 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
 
   function chonMau(m: MauThiep) {
     setMau(m);
-    setHoa(mauThiepTheoMa(m).hoaMacDinh);
+    if (m === "mai_vang" || m === "ngoc_bich" || m === "dem_giao_thua") {
+      setHoa(mauThiepTheoMa(m).hoaMacDinh);
+    } else if (!hoa.startsWith("linh_vat")) {
+      setHoa("linh_vat");
+    }
+  }
+
+  function doiNgauNhien() {
+    const khac = TO_HOP_GOI_Y.filter((x) => !(x.mau === mau && x.hoa === hoa));
+    const pick = khac[Math.floor(Math.random() * khac.length)] ?? TO_HOP_GOI_Y[0]!;
+    setMau(pick.mau);
+    setHoa(pick.hoa);
+    setNenGam(pick.nenGam);
   }
 
   const goiDs = [
@@ -98,7 +129,7 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
     const loiChuc = kiemLoiChuc(chuc);
     if (loiChuc) { setLoi(loiChuc); return; }
     if (!token) {
-      try { sessionStorage.setItem(KHOA_NHAP, JSON.stringify({ soBao, mau, hoa, ten, chuc })); } catch { /* bỏ qua */ }
+      try { sessionStorage.setItem(KHOA_NHAP, JSON.stringify({ soBao, mau, hoa, nenGam, ten, chuc })); } catch { /* bỏ qua */ }
       router.push("/dang-nhap?tiep=%2Fli-xi-tet-2027");
       return;
     }
@@ -136,7 +167,7 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
   }
 
   function linkAnhSocial(khung: KhungSocial, maBao?: string) {
-    const qs = new URLSearchParams({ khung, mau, hoa, tai: "1" });
+    const qs = new URLSearchParams({ khung, mau, hoa, gam: nenGam ? "1" : "0", tai: "1" });
     if (maBao) qs.set("ma", maBao);
     return `/og/li-xi?${qs.toString()}`;
   }
@@ -163,24 +194,33 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
     await chepLink(b.ma);
   }
 
+  const ttHoaDangChon = thongTinHoaTiet(hoa, mau);
+
   return (
     <div className="space-y-8">
       <div className="grid items-start gap-8 lg:grid-cols-12">
-        {/* Cột trái: Bao Lì Xì 3D + điều khiển hoa rơi + tải ảnh Social */}
+        {/* Cột trái: Bao Lì Xì 3D + điều khiển nền gấm / hoa rơi / đổi ngẫu nhiên + tải ảnh Social */}
         <div className="space-y-4 lg:col-span-5">
           <BaoLiXi3D
             mauThiep={mau}
             hoaTiet={hoa}
             hoaRoi={hoaRoi}
+            nenGam={nenGam}
             tenNguoiTang={ten}
             loiChuc={chuc}
             daMo={moThu}
             onMo={() => setMoThu(true)}
             nhanNut="Bấm thử để xem hiệu ứng mở bao & pháo hoa"
           />
-          <div className="flex flex-wrap justify-center gap-2">
+          <div className="flex flex-wrap justify-center gap-1.5">
+            <Button type="button" size="sm" variant="secondary" onClick={doiNgauNhien} data-testid="nut-ngau-nhien">
+              <Dices className="size-3.5 text-gold" aria-hidden /> Đổi mẫu ngẫu nhiên
+            </Button>
             <Button type="button" size="sm" variant="ghost" onClick={() => setMoThu((v) => !v)} data-testid="nut-thu-dong-mo">
-              <Sparkles className="size-3.5" aria-hidden /> {moThu ? "Đóng lại xem mặt ngoài" : "Mở thử & bắn pháo hoa"}
+              <Sparkles className="size-3.5" aria-hidden /> {moThu ? "Đóng lại" : "Mở thử"}
+            </Button>
+            <Button type="button" size="sm" variant="ghost" onClick={() => setNenGam((v) => !v)} data-testid="nut-nen-gam">
+              <Layers className="size-3.5" aria-hidden /> Nền gấm: {nenGam ? "Bật" : "Tắt"}
             </Button>
             <Button type="button" size="sm" variant="ghost" onClick={() => setHoaRoi((v) => !v)} data-testid="nut-hoa-roi">
               <Flower2 className="size-3.5" aria-hidden /> Hoa rơi: {hoaRoi ? "Bật" : "Tắt"}
@@ -191,7 +231,7 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
           <Card className="space-y-2.5 border-gold/25 bg-gold/[0.03] p-4" data-testid="lx-social-studio">
             <p className="text-xs font-semibold text-gold">Tải ảnh LÌ XÌ TẾT 2027 đăng Social (miễn phí)</p>
             <p className="text-[11px] leading-relaxed text-fg-muted">
-              Xuất ngay ảnh PNG sắc nét theo chất liệu &amp; hoạ tiết bạn đang chọn để đăng Story, Facebook hoặc gửi Zalo.
+              Xuất ngay ảnh PNG sắc nét theo mẫu <b>{mauThiepTheoMa(mau).ten} × {ttHoaDangChon.ten}</b> để đăng Story, Facebook hoặc gửi Zalo.
             </p>
             <div className="grid grid-cols-3 gap-2 pt-1">
               {DANH_SACH_KHUNG_SOCIAL.map((k) => (
@@ -219,45 +259,116 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
           </Card>
         </div>
 
-        {/* Cột phải: Tuỳ biến Chất liệu × Hoạ tiết + Chọn gói + Thanh toán */}
+        {/* Cột phải: Công tắc Ngẫu nhiên / Tự chọn Custom + Chất liệu × 6 Hoạ tiết + Chọn gói + Thanh toán */}
         <Card className="space-y-6 border-gold/25 lg:col-span-7" data-testid="lx-form">
-          <div className="space-y-2.5">
-            <p className="text-sm font-medium text-fg">1. Chọn chất liệu giấy Tết</p>
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-              {DANH_SACH_MAU_THIEP.map((m) => (
-                <button
-                  key={m.ma}
-                  type="button"
-                  onClick={() => chonMau(m.ma)}
-                  aria-pressed={mau === m.ma}
-                  data-testid={`mau-${m.ma}`}
-                  className={`flex flex-col items-start gap-1.5 rounded-xl border p-2.5 text-left transition-colors ${mau === m.ma ? "border-gold bg-gold/10" : "border-line/70 hover:border-gold/40"}`}
-                >
-                  <span className="h-5 w-full rounded-md border" style={{ background: `linear-gradient(135deg, ${m.nenChinh}, ${m.nenPhu})`, borderColor: m.vien }} />
-                  <span className="text-xs font-medium text-fg">{m.ten}</span>
-                </button>
-              ))}
+          {/* Thanh công tắc chế độ thiết kế: Tự chọn (Custom) vs Phối ngẫu nhiên may mắn */}
+          <div className="flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-line/70 bg-bg-2/40 p-3">
+            <div className="space-y-0.5">
+              <p className="text-xs font-semibold text-fg">Chế độ thiết kế phong bao</p>
+              <p className="text-[11px] text-fg-muted">
+                {tuChon
+                  ? "Tự chọn chất liệu gấm, mẫu Linh Vật Đinh Mùi & hoa xuân theo gu của bạn"
+                  : `Đang phối ngẫu nhiên may mắn: ${mauThiepTheoMa(mau).ten} × ${ttHoaDangChon.ten}`}
+              </p>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={() => { setTuChon(false); doiNgauNhien(); }}
+                aria-pressed={!tuChon}
+                data-testid="che-do-ngau-nhien"
+                className={`inline-flex items-center gap-1 rounded-xl border px-3 py-1.5 text-xs font-medium transition-colors ${!tuChon ? "border-gold bg-gold/15 text-gold" : "border-line/70 text-fg-muted hover:text-fg"}`}
+              >
+                <Dices className="size-3.5" aria-hidden /> Ngẫu nhiên
+              </button>
+              <button
+                type="button"
+                onClick={() => setTuChon(true)}
+                aria-pressed={tuChon}
+                data-testid="che-do-tu-chon"
+                className={`inline-flex items-center gap-1 rounded-xl border px-3 py-1.5 text-xs font-medium transition-colors ${tuChon ? "border-gold bg-gold/15 text-gold" : "border-line/70 text-fg-muted hover:text-fg"}`}
+              >
+                <SlidersHorizontal className="size-3.5" aria-hidden /> Tự chọn (Custom)
+              </button>
             </div>
           </div>
 
-          <div className="space-y-2.5">
-            <p className="text-sm font-medium text-fg">2. Chọn hoạ tiết mặt bao (Linh vật · Hoa xuân · Pháo hoa)</p>
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-              {DANH_SACH_HOA_TIET.map((h) => (
-                <button
-                  key={h.ma}
-                  type="button"
-                  onClick={() => setHoa(h.ma)}
-                  aria-pressed={hoa === h.ma}
-                  data-testid={`hoa-${h.ma}`}
-                  className={`flex flex-col items-start gap-0.5 rounded-xl border p-2.5 text-left transition-colors ${hoa === h.ma ? "border-gold bg-gold/10" : "border-line/70 hover:border-gold/40"}`}
-                >
-                  <span className="text-xs font-medium text-fg">{h.ten}</span>
-                  <span className="text-[10px] text-fg-muted">{h.moTa}</span>
-                </button>
-              ))}
+          {tuChon ? (
+            <>
+              <div className="space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium text-fg">1. Chọn chất liệu giấy Tết</p>
+                  <label className="inline-flex cursor-pointer items-center gap-1.5 text-xs text-fg-muted">
+                    <input
+                      type="checkbox"
+                      checked={nenGam}
+                      onChange={(e) => setNenGam(e.target.checked)}
+                      className="accent-gold"
+                    />
+                    Phủ vân gấm ép kim 24K
+                  </label>
+                </div>
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+                  {DANH_SACH_MAU_THIEP.map((m) => (
+                    <button
+                      key={m.ma}
+                      type="button"
+                      onClick={() => chonMau(m.ma)}
+                      aria-pressed={mau === m.ma}
+                      data-testid={`mau-${m.ma}`}
+                      className={`flex flex-col items-start gap-1.5 rounded-xl border p-2.5 text-left transition-colors ${mau === m.ma ? "border-gold bg-gold/10" : "border-line/70 hover:border-gold/40"}`}
+                    >
+                      <span className="h-5 w-full rounded-md border" style={{ background: `linear-gradient(135deg, ${m.nenChinh}, ${m.nenPhu})`, borderColor: m.vien }} />
+                      <span className="text-xs font-medium text-fg">{m.ten}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-2.5">
+                <p className="text-sm font-medium text-fg">2. Chọn tranh Linh Vật Đinh Mùi 2027 &amp; Hoa Xuân</p>
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+                  {DANH_SACH_HOA_TIET.map((h) => (
+                    <button
+                      key={h.ma}
+                      type="button"
+                      onClick={() => setHoa(h.ma)}
+                      aria-pressed={hoa === h.ma}
+                      data-testid={`hoa-${h.ma}`}
+                      className={`flex items-center gap-2.5 rounded-xl border p-2 text-left transition-colors ${hoa === h.ma ? "border-gold bg-gold/10" : "border-line/70 hover:border-gold/40"}`}
+                    >
+                      {h.anh ? (
+                        <img src={h.anh} alt={h.ten} className="size-11 shrink-0 rounded-lg border border-gold/40 object-cover" />
+                      ) : (
+                        <span className="flex size-11 shrink-0 items-center justify-center rounded-lg border border-gold/40 bg-bg-2 text-gold">
+                          <Sparkles className="size-5" aria-hidden />
+                        </span>
+                      )}
+                      <div className="min-w-0">
+                        <p className="truncate text-xs font-medium text-fg">{h.ten}</p>
+                        <p className="line-clamp-2 text-[10px] leading-tight text-fg-muted">{h.moTa}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="flex items-center justify-between gap-3 rounded-2xl border border-gold/30 bg-gold/[0.04] p-4" data-testid="hop-ngau-nhien">
+              <div className="flex items-center gap-3">
+                {ttHoaDangChon.anh && (
+                  <img src={ttHoaDangChon.anh} alt={ttHoaDangChon.ten} className="size-14 rounded-xl border border-gold/50 object-cover" />
+                )}
+                <div>
+                  <p className="text-xs font-semibold text-gold">{mauThiepTheoMa(mau).ten} · {ttHoaDangChon.ten}</p>
+                  <p className="text-xs text-fg-muted">{ttHoaDangChon.moTa} · {nenGam ? "Có vân gấm ép kim" : "Nền lụa trơn thanh lịch"}</p>
+                </div>
+              </div>
+              <Button type="button" size="sm" variant="outline" onClick={doiNgauNhien}>
+                <Dices className="size-4 text-gold" aria-hidden /> Bốc mẫu khác
+              </Button>
             </div>
-          </div>
+          )}
 
           <div className="space-y-2.5">
             <p className="text-sm font-medium text-fg">3. Chọn số lượng Bao Lì Xì</p>
@@ -324,7 +435,7 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
           ) : (
             <div className="rounded-xl border border-gold/25 bg-gold/[0.05] p-4 text-sm text-fg-muted" data-testid="lx-chua-mo">
               <p className="font-medium text-fg">Chương trình LÌ XÌ TẾT 2027 đang chuẩn bị mở bán</p>
-              <p className="mt-1 text-xs">Bạn có thể thử 16 tổ hợp Bao Lì Xì 3D và tải ảnh chia sẻ Social ở bên trái. Khi mở bán, mỗi đơn thanh toán qua VietQR sẽ sinh ngay link lì xì để gửi qua Zalo/Facebook.</p>
+              <p className="mt-1 text-xs">Bạn có thể tự chọn hoặc bấm <b>Đổi mẫu ngẫu nhiên</b> giữa 3 mẫu Linh Vật Đinh Mùi, Hoa Mai, Hoa Đào &amp; tải ảnh chia sẻ Social ở bên trái. Khi mở bán, mỗi đơn thanh toán qua VietQR sẽ sinh ngay link lì xì để gửi qua Zalo/Facebook.</p>
             </div>
           )}
         </Card>

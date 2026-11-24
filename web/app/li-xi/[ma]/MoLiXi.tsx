@@ -13,7 +13,7 @@ import { ghi } from "@/lib/do-luong";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { BaoLiXi3D } from "@/components/li-xi/BaoLiXi3D";
 import { BanDoTet2027 } from "@/components/li-xi/BanDoTet2027";
-import type { BaoLiXiCongKhai } from "@/lib/li-xi-tet";
+import { hoaTietTuMaBao, type BaoLiXiCongKhai } from "@/lib/li-xi-tet";
 
 export function MoLiXi({ ma, banDau }: { ma: string; banDau: BaoLiXiCongKhai }) {
   const router = useRouter();
@@ -93,6 +93,7 @@ export function MoLiXi({ ma, banDau }: { ma: string; banDau: BaoLiXiCongKhai }) 
 
         <BaoLiXi3D
           mauThiep={bao.mau_thiep ?? "do_son"}
+          hoaTiet={hoaTietTuMaBao(ma, bao.mau_thiep)}
           tenNguoiTang={bao.ten_nguoi_tang}
           loiChuc={bao.loi_chuc}
           daMo={daMo}
