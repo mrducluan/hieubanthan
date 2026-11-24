@@ -38,7 +38,7 @@ export const MIGRATION: readonly Migration[] = [
   { so: "0039", ten: "Nhà Tôi (người nhà) trong tài khoản", dau: { bang: "gia_dinh" } },
   { so: "0040", ten: "Gói Lần đầu 59.000 ₫ (mỗi tài khoản một lần)", dau: { ham: "goi_lan_dau_duoc_mua" } },
   { so: "0041", ten: "Chuyển đổi offline Google Ads (mã lượt bấm theo đơn)", dau: { bang: "google_don" } },
-  { so: "0042", ten: "Lì xì Báo cáo Tết 2027", dau: { bang: "li_xi_tet" } },
+  { so: "0042", ten: "LÌ XÌ TẾT 2027", dau: { bang: "li_xi_tet" } },
 ];
 
 /** Công tắc / số ở /quan-tri/cai-dat chỉ có tác dụng khi các migration này đã chạy (tiền tố khoá → số migration). */

@@ -1,4 +1,4 @@
-// LX-2027 — hàm phía MÁY CHỦ cho Lì xì Báo cáo Tết 2027 (migration 0042_li_xi_tet.sql).
+// LX-2027 — hàm phía MÁY CHỦ cho LÌ XÌ TẾT 2027 (migration 0042_li_xi_tet.sql).
 import { createClient } from "@supabase/supabase-js";
 import { congDangBat } from "@/lib/thanh-toan/cong";
 import { MA_LI_XI_RE, type BaoLiXiCongKhai, type ThongTinLiXi } from "@/lib/li-xi-tet";

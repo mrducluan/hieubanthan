@@ -1,4 +1,4 @@
-// POST /api/li-xi/tao — tạo đơn Lì xì Báo cáo Tết 2027 (loai='li_xi' qua Pay2S hoặc cổng giả).
+// POST /api/li-xi/tao — tạo đơn LÌ XÌ TẾT 2027 (loai='li_xi' qua Pay2S hoặc cổng giả).
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { congDangBat, khachDichVu, khachNguoiMua } from "@/lib/thanh-toan/cong";
@@ -15,7 +15,7 @@ const Vao = z.object({
 
 const LOI: Record<string, [string, number]> = {
   chua_dang_nhap: ["Hãy đăng nhập để mua Lì xì Tết 2027.", 401],
-  chua_mo: ["Chương trình Lì xì Báo cáo Tết 2027 chưa mở bán.", 503],
+  chua_mo: ["Chương trình LÌ XÌ TẾT 2027 chưa mở bán.", 503],
   cong_khong_hop_le: ["Cổng thanh toán chưa sẵn sàng.", 503],
   goi_khong_hop_le: ["Gói Lì xì không hợp lệ.", 422],
   mau_khong_hop_le: ["Mẫu thiệp không hợp lệ.", 422],

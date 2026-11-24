@@ -1,4 +1,4 @@
-// LX-2027 — Bản đồ 6 mảng giá trị thiết thực của Báo cáo Tết Đinh Mùi 2027 (toàn bộ do Engine 5 tầng tính tất định).
+// LX-2027 — Bản đồ 6 mảng giá trị thiết thực trong LÌ XÌ TẾT 2027 (toàn bộ do Engine 5 tầng tính tất định).
 import { Briefcase, CalendarCheck2, Coins, Compass, HeartHandshake, HeartPulse } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
@@ -41,7 +41,7 @@ export function BanDoTet2027() {
       <div className="space-y-1">
         <p className="text-xs font-medium uppercase tracking-widest text-gold">Giá trị thiết thực cho người nhận</p>
         <h2 className="font-serif text-2xl font-semibold text-fg">
-          6 phần hành động cụ thể trong Báo cáo Tết Đinh Mùi 2027
+          6 phần hành động cụ thể trong LÌ XÌ TẾT 2027 (Báo cáo Năm Đinh Mùi)
         </h2>
         <p className="text-sm text-fg-muted">
           Toàn bộ tính trực tiếp theo ngày giờ sinh riêng của người nhận qua Engine 5 tầng tất định (không văn mẫu chung chung, không phán định mệnh).

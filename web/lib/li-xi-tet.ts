@@ -151,3 +151,33 @@ export function kiemLoiChuc(s: string): string | null {
   if (/(https?:\/\/|@|\b0\d{8,10}\b)/i.test(t)) return "Lời chúc không chứa đường dẫn, email hoặc số điện thoại.";
   return null;
 }
+
+/**
+ * Tải hoặc chia sẻ ảnh PNG LÌ XÌ TẾT 2027 tương thích cả Desktop lẫn Zalo / Facebook In-App WebView trên iOS/Android:
+ * - Nếu thiết bị hỗ trợ Web Share Level 2 (navigator.canShare({ files })) trên mobile → mở sheet chia sẻ/lưu ảnh gốc của OS;
+ * - Ngược lại → tải qua Blob objectURL (hoặc mở tab ảnh nếu WebView chặn a[download]).
+ */
+export async function taiAnhSocialLiXi(url: string, tenFile: string): Promise<void> {
+  if (typeof window === "undefined") return;
+  try {
+    const r = await fetch(url, { cache: "no-store" });
+    if (!r.ok) throw new Error("bad_status");
+    const blob = await r.blob();
+    const file = new File([blob], tenFile, { type: "image/png" });
+    const laMobile = /iPhone|iPad|iPod|Android|Zalo|FBAN|FBAV/i.test(navigator.userAgent);
+    if (laMobile && typeof navigator.canShare === "function" && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], title: "LÌ XÌ TẾT 2027" });
+      return;
+    }
+    const objUrl = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = objUrl;
+    a.download = tenFile;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(objUrl), 5_000);
+  } catch {
+    window.open(url, "_blank", "noopener,noreferrer");
+  }
+}

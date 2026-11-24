@@ -1,5 +1,5 @@
 // GET /api/li-xi/[ma] — xem thông tin công khai (Zero-PII) của 1 bao lì xì.
-// POST /api/li-xi/[ma] — người nhận đăng nhập & mở khoá quyền đọc trọn báo cáo Tết 2027 (/thoi-gian-toi).
+// POST /api/li-xi/[ma] — người nhận đăng nhập & mở khoá quyền đọc trọn Báo cáo Năm 2027 (/thoi-gian-toi) từ LÌ XÌ TẾT 2027.
 import { NextResponse } from "next/server";
 import { khachNguoiMua } from "@/lib/thanh-toan/cong";
 import { docLiXi } from "@/lib/li-xi-may-chu";

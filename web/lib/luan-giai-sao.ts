@@ -152,7 +152,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     return NextResponse.json({ ...(kq.body as object), phi: { sao: 0, ly_do: "hoi_vien" } });
   }
 
-  // LX-2027 (0042): người đã nhận Bao Lì Xì Báo cáo Tết 2027 → mở trọn báo cáo /thoi-gian-toi không trừ Sao.
+  // LX-2027 (0042): người đã nhận Bao LÌ XÌ TẾT 2027 → mở trọn báo cáo /thoi-gian-toi không trừ Sao.
   if (phien && moDun === "thoi_gian" && (await coQuyenLiXi(phien))) {
     const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));
     return kq.ok ? NextResponse.json({ ...(kq.body as object), phi: { sao: 0, ly_do: "li_xi_2027" } }) : kq.res;

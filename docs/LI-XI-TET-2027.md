@@ -1,4 +1,4 @@
-# Lì Xì Báo Cáo Tết Đinh Mùi 2027 (LX-2027)
+# LÌ XÌ TẾT 2027 — Phong bao Xuân Đinh Mùi (LX-2027)
 
 > **Trạng thái:** Chủ dự án duyệt Migration `0042_li_xi_tet.sql` + thang giá `99k / 249k / 399k` (24/11/2026).
 > **Khâu tăng trưởng:** NẠP (doanh thu tiền mặt mùa Tết 12/2026–02/2027) + MỜI (viral 1 người mua kéo 1–5 người nhận mới) + QUAY LẠI.

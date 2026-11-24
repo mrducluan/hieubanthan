@@ -18,6 +18,7 @@ import {
   kiemLoiChuc,
   LOI_CHUC_MAU,
   mauThiepTheoMa,
+  taiAnhSocialLiXi,
   type BaoLiXiCuaToi,
   type HoaTietTet,
   type KhungSocial,
@@ -198,7 +199,13 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
                   key={k.ma}
                   href={linkAnhSocial(k.ma)}
                   download={`li-xi-tet-2027-${k.ma}.png`}
-                  onClick={() => ghi("share_created", { kind: "li_xi_anh", khung: k.ma, mau, hoa })}
+                  onClick={(e) => {
+                    ghi("share_created", { kind: "li_xi_anh", khung: k.ma, mau, hoa });
+                    if (/Zalo|FBAN|FBAV/i.test(navigator.userAgent)) {
+                      e.preventDefault();
+                      void taiAnhSocialLiXi(linkAnhSocial(k.ma), `li-xi-tet-2027-${k.ma}.png`);
+                    }
+                  }}
                   data-testid={`tai-social-${k.ma}`}
                   className="flex flex-col items-center gap-0.5 rounded-xl border border-line/70 px-2 py-2 text-center text-[11px] transition-colors hover:border-gold hover:bg-gold/10"
                 >

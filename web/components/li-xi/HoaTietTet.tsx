@@ -1,6 +1,6 @@
 "use client";
 // LX-2027 — Bộ chất liệu đồ hoạ Tết Đinh Mùi 2027 bằng SVG thuần (0 CDN ngoài, 0 Math.random khi SSR, sạch CSP):
-// Texture giấy gấm đồng xu cổ · Cành Hoa Mai Vàng / Hoa Đào Hồng · Biểu trưng Linh Vật Đinh Mùi 2027 (Kim Dương) ·
+// Texture giấy gấm đồng xu cổ · Cành Hoa Mai Vàng / Hoa Đào Hồng · Biểu trưng Linh Vật Đinh Mùi 2027 (Dê Vàng Thiên Hà Thuỷ) ·
 // Con dấu triện son · Pháo hoa bung tia · 12 cánh hoa rơi nhẹ.
 import type { CSSProperties } from "react";
 
@@ -71,7 +71,7 @@ export function CanhHoaXuan({
   );
 }
 
-/** Biểu trưng Linh Vật Đinh Mùi 2027 (Kim Dương — Thiên Hà Thuỷ) phong cách khắc gỗ mạ vàng tối giản. */
+/** Biểu trưng Linh Vật Đinh Mùi 2027 (Dê Vàng — Thiên Hà Thuỷ) phong cách khắc gỗ mạ vàng tối giản. */
 export function BieuTrungDinhMui({ color, className }: { color: string; className?: string }) {
   return (
     <svg viewBox="0 0 120 120" className={className} aria-hidden>
@@ -81,7 +81,7 @@ export function BieuTrungDinhMui({ color, className }: { color: string; classNam
       {/* Sóng Thiên Hà Thuỷ phía dưới */}
       <path d="M22,82 Q35,74 48,82 T74,82 T98,82" fill="none" stroke={color} strokeWidth="1.5" strokeOpacity="0.7" />
       <path d="M28,90 Q42,83 56,90 T88,90" fill="none" stroke={color} strokeWidth="1.1" strokeOpacity="0.5" />
-      {/* Hình bóng đầu Linh Dương / Kim Dương Đinh Mùi uốn sừng cân đối */}
+      {/* Hình bóng đầu Linh Vật Dê Đinh Mùi uốn sừng cân đối */}
       <path
         d="M44,44 C36,30 22,28 20,40 C19,48 27,52 33,47 C36,44 37,39 34,37"
         fill="none"
