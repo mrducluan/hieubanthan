@@ -129,4 +129,8 @@ test("GĐ 2: /hoi-chuyen-gia chỉ nhận ?mang= (không nhận ?cau= qua URL đ
   await expect(page.locator("main")).toContainText("Luật TMĐT 122/2025");
   expect(await page.locator("main").innerText()).not.toMatch(CUM_THUC_EP);
   expect(vp).toEqual([]);
+
+  // Trang /tac-gia có lối dẫn tới /hop-tac-chuyen-gia
+  await page.goto("/tac-gia");
+  await expect(page.locator('a[href="/hop-tac-chuyen-gia"]')).toBeVisible();
 });

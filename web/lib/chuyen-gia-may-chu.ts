@@ -101,22 +101,31 @@ function taoKhungTraLoi(mangChinh: MangCg, chinh: BangSo, boTro: DoiChieuMang[])
   ].join("\n");
 }
 
-/** Co-Pilot GĐ 2: Bệnh án Đa Hệ Thống 1 trang — chạy song song mảng chính + các mảng bổ trợ từ ảnh chụp hồ sơ
- *  (chỉ khi người hỏi đã đồng ý chia sẻ). Lỗi ở mảng bổ trợ không làm hỏng mảng chính. */
+const HAN_BO_TRO_MS = 8_000;
+
+function voiHan<T>(p: Promise<T>, ms: number, macDinh: T): Promise<T> {
+  return new Promise((resolve) => {
+    const t = setTimeout(() => resolve(macDinh), ms);
+    p.then((v) => { clearTimeout(t); resolve(v); }, () => { clearTimeout(t); resolve(macDinh); });
+  });
+}
+
+/** Co-Pilot GĐ 2: Hồ sơ Đa Mảng 1 trang — chạy song song mảng chính + các mảng bổ trợ từ ảnh chụp hồ sơ
+ *  (chỉ khi người hỏi đã đồng ý chia sẻ). Lỗi hoặc chậm quá 8 giây ở mảng bổ trợ không làm hỏng mảng chính. */
 export async function benhAnDaMang(mangChinh: MangCg, hs: HoSoCg | null): Promise<BangSo> {
   const chinh = await bangSoChuyenGia(mangChinh, hs);
   if (!hs) return { ...chinh, doi_chieu: [], khung_tra_loi: taoKhungTraLoi(mangChinh, chinh, []) };
   const dsBoTro = MANG_BO_TRO[mangChinh] ?? [];
   const kqBoTro = await Promise.all(
-    dsBoTro.map(async (m): Promise<DoiChieuMang | null> => {
-      try {
-        const b = await bangSoChuyenGia(m, hs);
-        if (b.dong.length === 0) return null;
-        return { mang: m, ten: TEN_MANG_NHO[m], dong: b.dong.slice(0, 4), ghi_chu: b.ghi_chu };
-      } catch {
-        return null;
-      }
-    }),
+    dsBoTro.map((m) =>
+      voiHan<DoiChieuMang | null>(
+        bangSoChuyenGia(m, hs).then((b) =>
+          b.dong.length > 0 ? { mang: m, ten: TEN_MANG_NHO[m], dong: b.dong.slice(0, 4), ghi_chu: b.ghi_chu } : null,
+        ),
+        HAN_BO_TRO_MS,
+        null,
+      ),
+    ),
   );
   const doi_chieu = kqBoTro.filter((x): x is DoiChieuMang => x !== null);
   return { ...chinh, doi_chieu, khung_tra_loi: taoKhungTraLoi(mangChinh, chinh, doi_chieu) };

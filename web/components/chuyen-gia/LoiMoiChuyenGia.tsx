@@ -1,7 +1,8 @@
 "use client";
-// GĐ 2 — Nối luồng AI → Escalate to Expert: đặt cuối báo cáo hoặc khung hỏi đáp để người dùng chuyển câu hỏi phức tạp
-// sang chuyên gia thật với mảng đã chọn sẵn (?mang=...). Chỉ hiện khi `bat = true` (công tắc Hỏi chuyên gia đang mở).
-// Nội dung gợi ý câu hỏi (nếu có) đi qua sessionStorage trên máy, KHÔNG bao giờ đưa lên URL (Luật 91/2025).
+// GĐ 2 — Nối luồng AI → Escalate to Expert (Smart Escalation): chỉ hiện khi công tắc Hỏi chuyên gia đang bật (`bat = true`)
+// và người dùng đã hỏi sâu (≥ 2 câu) hoặc AI gặp câu phức tạp (`hoiLai`).
+// Nội dung gợi ý câu hỏi đi qua sessionStorage trên máy, KHÔNG bao giờ đưa lên URL (Luật 91/2025).
+import { useEffect, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { ArrowRight, UserCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,41 @@ import { ghi } from "@/lib/do-luong";
 import { TEN_MANG_CG, type MangCg } from "@/lib/chuyen-gia-hoi";
 
 const KHOA_NHAP = "cg:nhap";
+
+const BAN_DO_MANG: Record<string, MangCg> = {
+  thanso: "than_so",
+  than_so: "than_so",
+  tuvi: "tu_vi",
+  tu_vi: "tu_vi",
+  battu: "bat_tu",
+  bat_tu: "bat_tu",
+  kinhdich: "kinh_dich",
+  kinh_dich: "kinh_dich",
+  phongthuy: "phong_thuy",
+  phong_thuy: "phong_thuy",
+};
+
+export function mangCgTuMoDun(moDun: string): MangCg | null {
+  return BAN_DO_MANG[moDun] ?? null;
+}
+
+// Cache một lần theo phiên trình duyệt để không gọi lặp /api/chuyen-gia/thong-tin trên mỗi lượt chat.
+let _cgBatCache: boolean | null = null;
+let _cgBatPromise: Promise<boolean> | null = null;
+
+function kiemCongTacChuyenGia(): Promise<boolean> {
+  if (_cgBatCache !== null) return Promise.resolve(_cgBatCache);
+  if (!_cgBatPromise) {
+    _cgBatPromise = fetch("/api/chuyen-gia/thong-tin", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d: { bat?: boolean } | null) => {
+        _cgBatCache = d?.bat === true;
+        return _cgBatCache;
+      })
+      .catch(() => false);
+  }
+  return _cgBatPromise;
+}
 
 export function LoiMoiChuyenGia({ mang, bat, goiYCau, nguon }: { mang: MangCg; bat: boolean; goiYCau?: string; nguon?: string }) {
   if (!bat) return null;
@@ -42,4 +78,20 @@ export function LoiMoiChuyenGia({ mang, bat, goiYCau, nguon }: { mang: MangCg; b
       </Button>
     </div>
   );
+}
+
+/** Chỉ kiểm công tắc chuyên gia KHI điều kiện Smart Escalation đã thoả (`kichHoat = true`), không gọi mạng lúc mới mở trang. */
+export function LoiMoiChuyenGiaTuDong({ moDun, kichHoat, goiYCau, nguon }: { moDun: string; kichHoat: boolean; goiYCau?: string; nguon?: string }) {
+  const mang = mangCgTuMoDun(moDun);
+  const [bat, setBat] = useState(false);
+
+  useEffect(() => {
+    if (!kichHoat || !mang) return;
+    let huy = false;
+    void kiemCongTacChuyenGia().then((ok) => { if (!huy) setBat(ok); });
+    return () => { huy = true; };
+  }, [kichHoat, mang]);
+
+  if (!kichHoat || !mang || !bat) return null;
+  return <LoiMoiChuyenGia mang={mang} bat={bat} goiYCau={goiYCau} nguon={nguon} />;
 }
