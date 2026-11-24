@@ -1,117 +1,108 @@
-// Thuật toán hợp nhất mẫu cảm biến La Kinh (Circular Mean + Wrapped MAD Outlier Rejection + Phone Flatness).
-// Lưu ý: độ ổn định (R%) đo mức độ ít rung của cảm biến, KHÔNG chứng minh hết nhiễu từ trường hay độ lệch Bắc từ vs Bắc thật.
+// LK-1 — phần THUẦN của la bàn điện thoại: giải mã cảm biến (alpha / beta / gamma → hướng đầu máy), làm mượt KIM lúc
+// ngắm và chuẩn hoá số để vẽ. KHÔNG tính số độ được chốt: mẫu thô gửi engine (`/api/phongthuy/do-huong` nhận `mau`),
+// engine tính trung bình, độ rung, mức ổn định, so hai lần đo. Tệp này không import alias `@/` (test node đọc thẳng).
 
-export interface MauCamBien {
-  deg: number;
-  /** webkitCompassAccuracy trên iOS (độ); null/undefined trên Android/Desktop. */
-  accuracy?: number | null;
-  beta?: number | null;
-  gamma?: number | null;
+const RAD = Math.PI / 180;
+
+/** Máy dựng quá mức này (|beta| hoặc |gamma|, độ) → mẫu bị coi là "nghiêng": không thu, giao diện nhắc đặt máy phẳng. */
+export const NGUONG_NGHIENG = 60;
+/** Một lần đo "giữ yên" kéo dài bấy nhiêu mili giây, tối đa bấy nhiêu mẫu (khớp trần của engine). */
+export const THOI_GIAN_GIU_MS = 1500;
+export const TOI_DA_MAU = 240;
+
+/** Đưa góc về [0, 360). */
+export function chuanDo(d: number): number {
+  const r = ((d % 360) + 360) % 360;
+  return r >= 360 ? 0 : r;   // −1e-13 % 360 + 360 có thể ra đúng 360 do làm tròn số thực
 }
 
-export interface KetQuaHopNhat {
-  mean: number;
-  std: number;
-  /** Mean Resultant Length R (0..1) — thước đo độ tụ của các mẫu góc. */
-  R: number;
-  /** Phần trăm ổn định (0..100). */
-  onDinhPct: number;
-  /** Sai số ước lượng hiển thị (±σ° hoặc iOS accuracy nếu lớn hơn). */
-  saiSoDo: number;
-  /** Số mẫu ngoại lai bị loại bởi bộ lọc MAD tuần hoàn. */
-  soLoaiBo: number;
-  /** Điện thoại có đang giữ đủ phẳng (< 25° nghiêng) hay không. */
-  phang: boolean;
-  gocNghieng: number;
-}
-
-/** Hiệu góc có dấu trong [-180, 180] giữa `a` và `b`. */
+/** Hiệu góc có dấu a − b trong [−180, 180). */
 export function hieuGoc(a: number, b: number): number {
   return ((((a - b) % 360) + 540) % 360) - 180;
 }
 
-/** Kiểm tra độ phẳng của điện thoại khi đo la bàn (tránh sai lệch trục từ kế khi cầm dốc). */
-export function kiemTraPhang(
-  beta?: number | null,
-  gamma?: number | null,
-  nguongDo = 25,
-): { phang: boolean; gocNghieng: number } {
-  if (typeof beta !== "number" && typeof gamma !== "number") {
-    return { phang: true, gocNghieng: 0 };
-  }
-  const b = typeof beta === "number" && Number.isFinite(beta) ? Math.abs(beta) : 0;
-  const g = typeof gamma === "number" && Number.isFinite(gamma) ? Math.abs(gamma) : 0;
-  const gocNghieng = Math.round(Math.max(b, g) * 10) / 10;
-  return { phang: gocNghieng <= nguongDo, gocNghieng };
+/** Số độ NGUYÊN để hiện (0–359): làm tròn TRƯỚC rồi mới chuẩn hoá — 359,6° hiện "0", không bao giờ "360". */
+export function doHienThi(d: number): number {
+  return chuanDo(Math.round(d));
 }
 
-function trungVi(nums: number[]): number {
-  if (!nums.length) return 0;
-  const sorted = [...nums].sort((a, b) => a - b);
-  const mid = Math.floor(sorted.length / 2);
-  return sorted.length % 2 === 1 ? sorted[mid]! : (sorted[mid - 1]! + sorted[mid]!) / 2;
+/** Mẫu thô gửi engine: 2 chữ số thập phân, luôn trong [0, 360) (359,996 → 0, không phải 360). */
+export function lamTronMau(d: number): number {
+  const r = Math.round(chuanDo(d) * 100) / 100;
+  return r >= 360 ? 0 : r;
 }
 
-function tinhVong(samples: MauCamBien[]): { mean: number; R: number; std: number } {
-  let sumS = 0;
-  let sumC = 0;
-  let sumW = 0;
-  for (const s of samples) {
-    const w = typeof s.accuracy === "number" && s.accuracy > 0 ? 1 / Math.max(1, s.accuracy) : 1;
-    const rad = (s.deg * Math.PI) / 180;
-    sumS += w * Math.sin(rad);
-    sumC += w * Math.cos(rad);
-    sumW += w;
-  }
-  if (sumW <= 0) return { mean: 0, R: 0, std: 0 };
-  const sMean = sumS / sumW;
-  const cMean = sumC / sumW;
-  const mean = ((Math.atan2(sMean, cMean) * 180) / Math.PI + 360) % 360;
-  const R = Math.min(1, Math.max(1e-9, Math.hypot(sMean, cMean)));
-  const std = (Math.sqrt(-2 * Math.log(R)) * 180) / Math.PI;
-  return {
-    mean: Math.round(mean * 10) / 10,
-    R: Math.round(R * 1000) / 1000,
-    std: Math.round(std * 10) / 10,
-  };
+/** Hướng la bàn (0 = Bắc, theo chiều kim) của CẠNH TRÊN máy, chiếu xuống mặt phẳng ngang.
+ *  Ma trận quay của đặc tả DeviceOrientation (R = Rz(alpha)·Rx(beta)·Ry(gamma), trục đất: x Đông, y Bắc, z lên trời);
+ *  cạnh trên máy là trục y của máy = cột thứ hai của R = (−sinα·cosβ, cosα·cosβ, sinβ) → hướng = atan2(Đông, Bắc).
+ *  Khi |beta| < 90° kết quả đúng bằng 360 − alpha (gamma không làm đổi hướng cạnh trên); quá 90° (máy ngả ra sau) hướng lật
+ *  180° — chỗ công thức "360 − alpha" sai. Máy dựng đứng (cosβ ≈ 0) không xác định được → null. */
+export function huongDinhMay(alpha: number, beta: number, gamma: number): number | null {
+  if (![alpha, beta, gamma].every((x) => Number.isFinite(x))) return null;
+  const cX = Math.cos(beta * RAD);
+  if (Math.abs(cX) < 1e-6) return null;
+  const dong = -Math.sin(alpha * RAD) * cX;
+  const bac = Math.cos(alpha * RAD) * cX;
+  return chuanDo(Math.atan2(dong, bac) / RAD);
 }
 
-/** Hợp nhất chuỗi mẫu cảm biến với lọc ngoại lai MAD tuần hoàn & trọng số độ chính xác. */
-export function hopNhatLaBan(samples: MauCamBien[]): KetQuaHopNhat {
-  if (!samples.length) {
-    return { mean: 0, std: 0, R: 0, onDinhPct: 0, saiSoDo: 0, soLoaiBo: 0, phang: true, gocNghieng: 0 };
-  }
-  const banDau = tinhVong(samples);
-  let giu = samples;
-  if (samples.length >= 4) {
-    const lechs = samples.map((s) => Math.abs(hieuGoc(s.deg, banDau.mean)));
-    const mad = trungVi(lechs);
-    const nguong = Math.max(5, 2.5 * 1.4826 * mad);
-    const loc = samples.filter((_, i) => lechs[i]! <= nguong);
-    if (loc.length >= 2) giu = loc;
-  }
-
-  const sau = tinhVong(giu);
-  const accs = giu
-    .map((s) => s.accuracy)
-    .filter((a): a is number => typeof a === "number" && Number.isFinite(a) && a > 0);
-  const accTrungVi = accs.length ? trungVi(accs) : 0;
-  const cuoi = giu[giu.length - 1]!;
-  const doPhang = kiemTraPhang(cuoi.beta, cuoi.gamma);
-
-  return {
-    mean: sau.mean,
-    std: sau.std,
-    R: sau.R,
-    onDinhPct: Math.round(sau.R * 100),
-    saiSoDo: Math.round(Math.max(sau.std, accTrungVi) * 10) / 10,
-    soLoaiBo: samples.length - giu.length,
-    phang: doPhang.phang,
-    gocNghieng: doPhang.gocNghieng,
-  };
+/** Các trường của sự kiện cảm biến mà bộ giải mã cần (iOS có thêm hai trường webkit*). */
+export interface SuKienThô {
+  alpha?: number | null; beta?: number | null; gamma?: number | null; absolute?: boolean;
+  webkitCompassHeading?: number | null; webkitCompassAccuracy?: number | null;
+}
+export interface MauGiaiMa {
+  /** Hướng (độ, bắc từ) của cạnh trên MÀN HÌNH đang cầm — đã cộng góc xoay màn hình. */
+  do: number;
+  /** Máy dựng quá `NGUONG_NGHIENG` → không thu mẫu này. */
+  nghieng: boolean;
+  /** iOS `webkitCompassAccuracy` NGUYÊN GỐC (âm = la bàn chưa hiệu chỉnh); máy khác: null. */
+  saiSo: number | null;
 }
 
-export function trungBinhGoc(angles: number[]): { mean: number; std: number } {
-  const kq = hopNhatLaBan(angles.map((deg) => ({ deg })));
-  return { mean: kq.mean, std: kq.std };
+/** Sự kiện cảm biến → hướng đầu máy. `tuyetDoi`: sự kiện là `deviceorientationabsolute`. `gocManHinh`:
+ *  `screen.orientation.angle` (máy xoay ngang thì cạnh trên màn hình lệch cạnh trên máy đúng bấy nhiêu độ).
+ *  Sự kiện không tuyệt đối (alpha tính từ lúc mở trang, không phải từ Bắc) → null. */
+export function giaiMa(e: SuKienThô, tuyetDoi: boolean, gocManHinh = 0): MauGiaiMa | null {
+  const goc = Number.isFinite(gocManHinh) ? gocManHinh : 0;
+  const b = typeof e.beta === "number" && Number.isFinite(e.beta) ? e.beta : 0;
+  const g = typeof e.gamma === "number" && Number.isFinite(e.gamma) ? e.gamma : 0;
+  const nghieng = Math.abs(b) > NGUONG_NGHIENG || Math.abs(g) > NGUONG_NGHIENG;
+  if (typeof e.webkitCompassHeading === "number" && Number.isFinite(e.webkitCompassHeading)) {
+    // iOS đã bù nghiêng sẵn; chỉ cộng góc xoay màn hình.
+    const ss = typeof e.webkitCompassAccuracy === "number" && Number.isFinite(e.webkitCompassAccuracy) ? e.webkitCompassAccuracy : null;
+    return { do: chuanDo(e.webkitCompassHeading + goc), nghieng, saiSo: ss };
+  }
+  if (!(tuyetDoi || e.absolute === true) || typeof e.alpha !== "number") return null;
+  const h = huongDinhMay(e.alpha, b, g);
+  if (h == null) return null;
+  return { do: chuanDo(h + goc), nghieng, saiSo: null };
+}
+
+/** Sai số iOS "xấu nhất" đã thấy trong một lần đo: âm (chưa hiệu chỉnh) xấu hơn mọi số dương; còn lại lấy số lớn hơn. */
+export function saiSoXauNhat(cu: number | null, moi: number | null): number | null {
+  if (moi == null) return cu;
+  if (cu == null) return moi;
+  if (cu < 0 || moi < 0) return -1;
+  return Math.max(cu, moi);
+}
+
+/** Trung bình vòng của vài mẫu gần nhất — CHỈ để kim đỡ giật lúc ngắm (không phải số được chốt). Rỗng → null. */
+export function kimMuot(mau: readonly number[]): number | null {
+  if (!mau.length) return null;
+  let s = 0, c = 0;
+  for (const d of mau) { s += Math.sin(d * RAD); c += Math.cos(d * RAD); }
+  if (Math.hypot(s, c) < 1e-9) return chuanDo(mau[mau.length - 1]!);   // các mẫu triệt tiêu nhau: lấy mẫu mới nhất
+  return chuanDo(Math.atan2(s, c) / RAD);
+}
+
+/** Góc quay "không gói" cho CSS: đi từ góc đang vẽ `truoc` (có thể > 360 hay âm) tới `dich` theo đường ngắn nhất —
+ *  359° → 0° quay 1°, không quay ngược cả vòng. */
+export function gocLienTuc(truoc: number, dich: number): number {
+  return truoc + hieuGoc(dich, truoc);
+}
+
+/** Nhóm số mẫu để đo lường (không gửi con số thật). */
+export function nhomSoMau(n: number): "it" | "vua" | "nhieu" {
+  return n < 20 ? "it" : n < 80 ? "vua" : "nhieu";
 }
