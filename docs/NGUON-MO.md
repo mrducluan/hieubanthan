@@ -23,7 +23,7 @@
 | TuViMCP (© 2026 Manh Ha Nguyen) | Danh mục cách cục Tử vi để đối chiếu | MIT |
 | opencode-tianji 0.6.0 | Bản số hoá nguyên văn Chu Dịch (quái từ, hào từ) | MIT |
 | anko-ki-maya (Mahesh Koria) | Khung mục chân dung thần số (không chép nội dung) | MIT |
-| @mediapipe/tasks-vision 1.2.2 (Google) + mô hình Face Landmarker float16 v1 | ANH-3: tìm điểm mốc gương mặt NGAY TRÊN MÁY người dùng (WebAssembly, tự phục vụ ở `/mediapipe/`, `web/lib/diem-moc-tu-dong.ts`); chỉ ra toạ độ, phép đo vẫn ở engine | Apache-2.0 — chạy runtime trong trình duyệt. Thư viện có đoạn gửi số liệu hiệu năng về Google: CSP `connect-src` không mở tên miền đó → bị chặn, không gì rời máy |
+| @mediapipe/tasks-vision 1.2.3 (Google) + mô hình Face Landmarker float16 v1 | ANH-3: tìm điểm mốc gương mặt NGAY TRÊN MÁY người dùng (WebAssembly, tự phục vụ ở `/mediapipe/`, `web/lib/diem-moc-tu-dong.ts`); chỉ ra toạ độ, phép đo vẫn ở engine | Apache-2.0 — chạy runtime trong trình duyệt. Thư viện có đoạn gửi số liệu hiệu năng về Google: CSP `connect-src` không mở tên miền đó → bị chặn, không gì rời máy |
 | GeoNames `cities15000` (geonames.org), tải 2026-11-16 | NS-QT: gợi ý nơi sinh ngoài Việt Nam (tên, tên khác Latin, bang, nước, toạ độ, mã vùng IANA) — `engine/app/calc/data/dia_danh.json`, dựng bằng `engine/scripts/nap_geonames.py` | **CC BY 4.0 — bắt buộc ghi công**: dòng "Dữ liệu địa danh: GeoNames (CC BY 4.0)" ở trang Giới thiệu, mục nguồn |
 | aov.cc | Oracle đối chiếu lá số khi phát triển | Không chạy runtime |
 | Cổ thư (ctext.org) | Nguyên văn Kinh Dịch, Tử Vi Đẩu Số Toàn Thư, Tử Bình Chân Thuyên… | Phạm vi công cộng; ctext cấm cào tự động |
