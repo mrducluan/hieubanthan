@@ -219,6 +219,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     const khongCoGui = [...khongCo].filter((m) => !dau.has(m));
     const khaiKhong = [...new Set([...daXuLy, ...khongCoGui])];
     const tuAnhGui = [...tuAnh].filter((m) => dau.has(m));
+    const tuSoDoGiu = (nhaLuu?.bo_cuc?.tu_so_do ?? []).filter((m) => dau.has(m));
     if (d == null && !huong && Object.keys(viTri).length === 0 && dau.size === 0 && !mb) {
       setLoi(t("ks.loi_thieu")); return;
     }
@@ -243,6 +244,8 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
         luuHoSoNha({ ...(d != null ? { huong_do: d } : {}), ...(loaiNha ? { loai_nha: loaiNha as "can_ho" } : {}),
           bo_cuc: { vi_tri: viTri, huong_do: hd, dau_hieu: [...dau], ...(tuAnhGui.length ? { tu_anh: tuAnhGui } : {}),
             ...(khongCoGui.length ? { khai_khong: khongCoGui } : {}),
+            // SD-1: giữ dấu vết "mã này đến từ sơ đồ nhà" (chỉ mã còn đang tích) để khối sơ đồ gỡ được khi sơ đồ đổi.
+            ...(tuSoDoGiu.length ? { tu_so_do: tuSoDoGiu } : {}),
             ...(daXuLy.length ? { da_xu_ly: daXuLy } : {}), ...(mb ? { mat_bang: mb } : {}) } });
       } catch { /* bỏ qua */ }
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "khao_sat_nha", co_mat_bang: Boolean(mb), loai_nha: loaiNha, goc_nhin: gocNhin });

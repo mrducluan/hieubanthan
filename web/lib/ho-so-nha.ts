@@ -61,6 +61,9 @@ export const HoSoNha = z.object({
     khai_khong: z.array(z.string().max(40)).max(40).optional(),
     /** UI-PT 4: dấu hiệu người dùng bấm "Tôi đã xử lý" — gửi engine `co: false` (thắng suy luận từ mặt bằng), Khảo sát không tích lại. */
     da_xu_ly: z.array(z.string().max(40)).optional(),
+    /** SD-1: mã trong `dau_hieu` đến từ gợi ý của sơ đồ nhà theo tỉ lệ mà người dùng đã bấm "Có" — để khi sơ đồ đổi và gợi ý
+     *  không còn, khối sơ đồ gỡ đúng các mã nó từng thêm (không đụng mã người dùng tích tay ở Khảo sát). */
+    tu_so_do: z.array(z.string().max(40)).max(40).optional(),
     mat_bang: z.object({
       luoi: z.array(z.string().regex(/^[01]{3,12}$/)).min(3).max(12),
       phong: z.record(z.string().max(30), z.tuple([z.number().int().min(0).max(11), z.number().int().min(0).max(11)])).optional(),
@@ -84,6 +87,10 @@ export const HoSoNha = z.object({
       kich_thuoc: z.tuple([z.number().min(0.4).max(100), z.number().min(0.4).max(100)]).optional(),
       /** Hướng cửa phòng / mặt nhìn của vật trên bản vẽ (truoc = mặt tiền, phai, sau, trai). */
       huong_cua: z.enum(HUONG_CUA_KHUNG).optional(),
+      /** SD-1: người dùng TỰ chỉnh kích thước / TỰ xoay cửa (không phải giá trị máy tự điền). Chỉ khi cờ bật thì
+       *  `kich_thuoc` / `huong_cua` mới được gửi đi tính; hồ sơ cũ không có cờ = coi như máy tự điền. */
+      tu_dat_kt: z.boolean().optional(),
+      tu_dat_cua: z.boolean().optional(),
     })),
   })).max(6).optional(),
   cap_nhat_luc: z.string(),

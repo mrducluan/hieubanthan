@@ -47,7 +47,7 @@ export function huongDinhMay(alpha: number, beta: number, gamma: number): number
 }
 
 /** Các trường của sự kiện cảm biến mà bộ giải mã cần (iOS có thêm hai trường webkit*). */
-export interface SuKienThô {
+export interface SuKienTho {
   alpha?: number | null; beta?: number | null; gamma?: number | null; absolute?: boolean;
   webkitCompassHeading?: number | null; webkitCompassAccuracy?: number | null;
 }
@@ -63,7 +63,7 @@ export interface MauGiaiMa {
 /** Sự kiện cảm biến → hướng đầu máy. `tuyetDoi`: sự kiện là `deviceorientationabsolute`. `gocManHinh`:
  *  `screen.orientation.angle` (máy xoay ngang thì cạnh trên màn hình lệch cạnh trên máy đúng bấy nhiêu độ).
  *  Sự kiện không tuyệt đối (alpha tính từ lúc mở trang, không phải từ Bắc) → null. */
-export function giaiMa(e: SuKienThô, tuyetDoi: boolean, gocManHinh = 0): MauGiaiMa | null {
+export function giaiMa(e: SuKienTho, tuyetDoi: boolean, gocManHinh = 0): MauGiaiMa | null {
   const goc = Number.isFinite(gocManHinh) ? gocManHinh : 0;
   const b = typeof e.beta === "number" && Number.isFinite(e.beta) ? e.beta : 0;
   const g = typeof e.gamma === "number" && Number.isFinite(e.gamma) ? e.gamma : 0;

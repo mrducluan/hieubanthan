@@ -66,7 +66,6 @@ export function DocAnhNha({ cauHoi, tenPhong, loaiNha, yDinh, anhGoiY, dau, daTr
 
   // Danh sách ảnh hiện tại: MỘT đường ghi (datAnh) cập nhật cả ref lẫn state → hàm xử lý đọc ref, không cần updater có tác dụng phụ.
   const anhRef = useRef<AnhChon[]>([]);
-  const kqRef = useRef<KetQua | null>(null);
   const soId = useRef(0);
   const urlSong = useRef<Set<string>>(new Set());
   const song = useRef(true);
@@ -88,7 +87,6 @@ export function DocAnhNha({ cauHoi, tenPhong, loaiNha, yDinh, anhGoiY, dau, daTr
 
   // Thu hồi `blob:` không còn ai dùng (không nằm trong danh sách đang chọn, cũng không nằm trong bản chụp của kết quả).
   useEffect(() => {
-    kqRef.current = kq;
     const can = new Set<string>([...anh.map((a) => a.url), ...(kq?.gui ?? []).map((a) => a.url)]);
     for (const u of [...urlSong.current]) if (!can.has(u)) { URL.revokeObjectURL(u); urlSong.current.delete(u); }
   }, [anh, kq]);
@@ -372,14 +370,16 @@ export function DocAnhNha({ cauHoi, tenPhong, loaiNha, yDinh, anhGoiY, dau, daTr
           {anh.map((a, i) => {
             const p = phongCuaAnh.get(a.id);
             return (
-              <li key={a.id} className="relative w-16" data-anh-id={a.id}>
-                {/* eslint-disable-next-line @next/next/no-img-element -- ảnh blob trên máy người dùng, không qua next/image */}
-                <img src={a.url} alt={t("da.anh_alt", { so: String(i + 1) })} className="size-16 rounded-lg border border-line object-cover" />
-                <span className="absolute left-0.5 top-[2.9rem] rounded bg-bg/85 px-1 text-[10px] font-medium text-fg" aria-hidden>#{i + 1}</span>
-                <button type="button" onClick={() => bo(a.id)} disabled={dang} aria-label={t("da.bo_anh", { so: String(i + 1) })}
-                  className="absolute -right-2.5 -top-2.5 inline-flex size-9 items-center justify-center text-fg-faint hover:text-fg disabled:opacity-40">
-                  <span className="rounded-full border border-line bg-bg p-0.5"><X className="size-3" aria-hidden /></span>
-                </button>
+              <li key={a.id} className="w-16" data-anh-id={a.id}>
+                <div className="relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- ảnh blob trên máy người dùng, không qua next/image */}
+                  <img src={a.url} alt={t("da.anh_alt", { so: String(i + 1) })} className="size-16 rounded-lg border border-line object-cover" />
+                  <span className="absolute bottom-0.5 left-0.5 rounded bg-bg/85 px-1 text-[10px] font-medium text-fg" aria-hidden>#{i + 1}</span>
+                  <button type="button" onClick={() => bo(a.id)} disabled={dang} aria-label={t("da.bo_anh", { so: String(i + 1) })}
+                    className="absolute -right-2.5 -top-2.5 inline-flex size-9 items-center justify-center text-fg-faint hover:text-fg disabled:opacity-40">
+                    <span className="rounded-full border border-line bg-bg p-0.5"><X className="size-3" aria-hidden /></span>
+                  </button>
+                </div>
                 {p && <span className="mt-1 block truncate rounded-full border border-gold/40 px-1 text-center text-[10px] text-gold" title={tenPhong[p]} data-testid="doc-anh-chip-phong">{tenPhong[p]}</span>}
               </li>
             );
