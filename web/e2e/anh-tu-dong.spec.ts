@@ -92,8 +92,12 @@ test.describe("trình duyệt thật + bộ đo thật", () => {
     await page.getByTestId("do-tinh").click();
     await expect(page.getByTestId("do-so-do")).toBeVisible({ timeout: 20_000 });
     const t = than[0]!;
-    expect(Object.keys(t).sort()).toEqual(["diem", "dong_y", "ti_le"]);
+    expect(Object.keys(t).sort()).toEqual(["dac_trung_3d", "diem", "dong_y", "ti_le"]);
     expect(Object.keys(t.diem as object)).toHaveLength(20);
+    const d3 = t.dac_trung_3d as Record<string, unknown>;
+    expect(Object.keys(d3).length).toBeGreaterThan(5);
+    expect(Object.values(d3).every((v) => typeof v === "number" && Number.isFinite(v))).toBe(true);
+    expect(JSON.stringify(t)).not.toContain("base64");
     expect(t.ti_le).toBeCloseTo(820 / 1024, 3);
     // bộ đo tự phục vụ + số liệu hiệu năng của nó bị CSP chặn → không có yêu cầu nào tới máy chủ ngoài (trừ đo lường trang: PostHog, Google, Meta Pixel — không mang ảnh)
     expect(ngoai.filter((o) => !o.includes("posthog") && !o.includes("google-analytics") && !o.includes("googletagmanager") && !o.includes("facebook"))).toEqual([]);
@@ -103,7 +107,7 @@ test.describe("trình duyệt thật + bộ đo thật", () => {
     test.skip(!anh, "không tải được ảnh mẫu công khai (mạng CI)");
     test.setTimeout(120_000);
     await napHoSo(page);
-    await page.addInitScript(() => localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm1", luc: "2026-11-06T01:00:00Z" })));
+    await page.addInitScript(() => localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm2", luc: "2026-11-06T01:00:00Z" })));
     await page.goto("/nhan-tuong");
     await page.getByTestId("do-input").setInputFiles({ name: "chan-dung.jpg", mimeType: "image/jpeg", buffer: anh! });
     const gy = page.getByTestId("do-goi-y");

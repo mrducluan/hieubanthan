@@ -12,7 +12,10 @@ import { BanDoMat } from "./BanDoMat";
 import { useChuNhanTuong } from "./chu-nhan-tuong";
 import { TEN_HINH, type BaoCaoNhanTuong as Bc, type BoVi, type VungMat } from "@/lib/nhan-tuong";
 
-export function BaoCaoNhanTuong({ bc, boVi, ten, chanTrang }: { bc: Bc; boVi: Record<string, BoVi>; ten: string; chanTrang?: React.ReactNode }) {
+export function BaoCaoNhanTuong({ bc, boVi, ten, chanTrang, onMoCauHoiPhu, soCauPhiAnhThieu }: {
+  bc: Bc; boVi: Record<string, BoVi>; ten: string; chanTrang?: React.ReactNode;
+  onMoCauHoiPhu?: () => void; soCauPhiAnhThieu?: number;
+}) {
   const { t, en } = useChuNhanTuong();
   // EN-ALL GĐ 8: tên hành theo ngôn ngữ (bản Việt: đúng TEN_HINH cũ).
   const hinh = (k: string) => (en ? t(`hanh.${k}`) || k : TEN_HINH[k]);
@@ -67,6 +70,52 @@ export function BaoCaoNhanTuong({ bc, boVi, ten, chanTrang }: { bc: Bc; boVi: Re
               <p className="mt-1 leading-relaxed">{namNay.bai_ca.y}</p>
               <p lang="zh-Hant" className="mt-1 font-serif text-fg-muted">«{namNay.bai_ca.han}»</p>
               <p className="mt-1 text-xs text-fg-faint">{t("bc.bai_ca_ghi")}</p>
+            </div>
+          )}
+          {bc.da_tinh.phuong_tay_bridges && (
+            <div className="mt-4 rounded-xl border border-gold/35 bg-gold/[0.05] p-3.5 text-sm" data-testid="nt-phuong-tay-bridges">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-xs font-semibold uppercase tracking-wide text-gold">
+                  {t("bc.bridges_tieu_de")}
+                </p>
+                {bc.da_tinh.phuong_tay_bridges.trang_thai_dong_thuan && (
+                  <span className="rounded-full border border-jade/40 bg-jade/10 px-2 py-0.5 text-[10px] font-medium text-jade">
+                    {bc.da_tinh.phuong_tay_bridges.trang_thai_dong_thuan === "dong_thuan"
+                      ? t("bc.bridges_dong_thuan")
+                      : t("bc.bridges_bo_tro")}
+                  </span>
+                )}
+              </div>
+              <p className="mt-1 font-medium text-fg">
+                {en
+                  ? (bc.da_tinh.phuong_tay_bridges.ten_en || bc.da_tinh.phuong_tay_bridges.ten || bc.da_tinh.phuong_tay_bridges.hanh)
+                  : (bc.da_tinh.phuong_tay_bridges.ten_vi || bc.da_tinh.phuong_tay_bridges.ten || bc.da_tinh.phuong_tay_bridges.hanh)}
+              </p>
+              {bc.da_tinh.phuong_tay_bridges.nghia_doi_thuong && (
+                <p className="mt-1 leading-relaxed text-fg-muted">{bc.da_tinh.phuong_tay_bridges.nghia_doi_thuong}</p>
+              )}
+              {bc.da_tinh.phuong_tay_bridges.mat_tich_cuc && (
+                <p className="mt-1 text-xs text-jade"><b className="font-medium">{t("bc.bridges_manh")}</b>{bc.da_tinh.phuong_tay_bridges.mat_tich_cuc}</p>
+              )}
+              {bc.da_tinh.phuong_tay_bridges.mat_tieu_cuc && (
+                <p className="mt-0.5 text-xs text-fg-muted"><b className="font-medium text-gold">{t("bc.bridges_can_bang")}</b>{bc.da_tinh.phuong_tay_bridges.mat_tieu_cuc}</p>
+              )}
+              {bc.da_tinh.phuong_tay_bridges.dong_thuan_dong_tay && (
+                <p className="mt-1.5 border-t border-line/50 pt-1.5 text-xs text-fg-muted">{bc.da_tinh.phuong_tay_bridges.dong_thuan_dong_tay}</p>
+              )}
+              {bc.da_tinh.phuong_tay_bridges.nguon && (
+                <p className="mt-1 text-[11px] text-fg-faint">{bc.da_tinh.phuong_tay_bridges.nguon}</p>
+              )}
+            </div>
+          )}
+          {onMoCauHoiPhu && (soCauPhiAnhThieu ?? 0) > 0 && (
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-line/70 bg-bg/50 px-3.5 py-2.5 text-xs" data-testid="nt-goi-y-phi-anh">
+              <span className="text-fg-muted">
+                {t("bc.phi_anh_goi_y", { so: String(soCauPhiAnhThieu) })}
+              </span>
+              <Button type="button" size="sm" variant="outline" onClick={onMoCauHoiPhu} data-testid="nt-mo-popup-phi-anh">
+                {t("bc.phi_anh_nut")}
+              </Button>
             </div>
           )}
         </div>

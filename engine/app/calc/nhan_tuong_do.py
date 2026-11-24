@@ -18,6 +18,7 @@ from app.calc import nhan_tuong as nt
 from app import ngon_ngu
 from app.kb import nhan_tuong_kb as kb
 from app.kb.loi import L
+from app.kb.nap import doc, nho
 
 # Câu khảo sát đo được từ hình học + các lựa chọn hàm này có thể gợi ý.
 # NT-2: nét nằm trong khoảng thường → lựa chọn "vừa" (`vua` / `can_doi`, cờ `vua: True`) — ảnh đo được thì trả lời luôn,
@@ -98,11 +99,21 @@ def _d(a: tuple[float, float], b: tuple[float, float]) -> float:
     return math.hypot(a[0] - b[0], a[1] - b[1])
 
 
-def do_mat(diem: dict, ti_le: float, nghieng: list[dict] | None = None) -> dict:
-    """→ {goi_y: [{cau, lua_chon, do, nguon, anh}], so_do: {...}, canh_bao: [...]}. Sai / thiếu điểm → ValueError (lời tiếng
-    Việt). `nghieng` (ANH-4, tuỳ chọn, ≤ 2): [{goc: nghieng_trai|nghieng_phai, diem, ti_le}] — xem `_ghep_nghieng`."""
+# Các câu phi-ảnh (không thể đo từ ảnh tĩnh: giọng nói, dáng đi, cốt nhục, chẩm cốt) — UI hỏi trong popup phụ.
+CAU_HOI_PHI_ANH: tuple[str, ...] = ("giong", "dang", "cot_nhuc", "cham_cot")
+
+
+def do_mat(diem: dict, ti_le: float, nghieng: list[dict] | None = None,
+           dac_trung_3d: dict[str, float] | None = None) -> dict:
+    """→ {goi_y: [{cau, lua_chon, do, nguon, anh}], so_do: {...}, canh_bao: [...], cau_hoi_phi_anh: [...]}. Sai / thiếu
+    điểm → ValueError (lời tiếng Việt). `nghieng` (ANH-4, tuỳ chọn, ≤ 2): [{goc: nghieng_trai|nghieng_phai, diem, ti_le}].
+    `dac_trung_3d` (tuỳ chọn): chỉ số 3D / ROI từ lưới điểm mặt trên trình duyệt để bổ sung gợi ý khảo sát."""
     kq = _do_thang(diem, ti_le)
-    return _ghep_nghieng(kq, nghieng or [])
+    kq = _ghep_nghieng(kq, nghieng or [])
+    if dac_trung_3d:
+        kq = _ghep_dac_trung_3d(kq, dac_trung_3d)
+    kq["cau_hoi_phi_anh"] = list(CAU_HOI_PHI_ANH)
+    return kq
 
 
 def _do_thang(diem: dict, ti_le: float) -> dict:
@@ -413,4 +424,182 @@ def _ghep_nghieng(kq: dict, nghieng: list[dict]) -> dict:
     if lech:
         ten = {m: c["hoi"].rstrip("?") for m, c in kb.cau_hoi_theo_ma().items()}
         kq["canh_bao"].append(kb.do_anh()["loi"]["canh_bao_hai_nghieng"].format(cau=", ".join(ten.get(c, c) for c in sorted(lech))))
+    return kq
+
+
+# ------------------------------------------------------------------ CV-UPGRADE: chỉ số 3D & pixel ROI
+@nho
+def kb_do_anh() -> dict:
+    """Ngưỡng + lời của phép đo ước lượng trên ảnh (KB `tuong_do_anh_kb.json`, bản phủ tiếng Anh ở `en/`)."""
+    return doc("tuong_do_anh_kb.json")
+
+
+def _ghep_dac_trung_3d(kq: dict, dac_trung_3d: dict[str, float]) -> dict:
+    """Bổ sung gợi ý khảo sát từ đặc trưng 3D (độ sâu z TƯƠNG ĐỐI của lưới điểm, tỉ lệ mắt / mũi / môi / cằm / mày, biểu
+    cảm) và thống kê vùng ảnh (sắc da, lệ đường, sắc môi, nếp trán — độ tin thấp). Không ghi đè gợi ý hình học đã có.
+    Ngưỡng + lời ở KB. Mọi gợi ý là ƯỚC LƯỢNG: người dùng xác nhận / chọn lại từng nét trước khi dùng.
+    Sắc da: ảnh quá tối / quá sáng → KHÔNG gợi ý (máy không tách được màu da tự nhiên với ánh đèn — không gán nhãn
+    "tối sẫm" / "trắng bệch" theo độ sáng tuyệt đối), chỉ thêm lời mời tự chọn."""
+    d3: dict[str, float] = {}
+    for k, v in dac_trung_3d.items():
+        try:
+            fv = float(v)
+        except (TypeError, ValueError) as e:
+            raise ValueError(f"Chỉ số 3D {k} không phải số hợp lệ") from e
+        if not math.isfinite(fv):
+            raise ValueError(f"Chỉ số 3D {k} phải là số hữu hạn")
+        d3[k] = fv
+
+    k3 = kb_do_anh()["nhan_tuong"]
+    N, loi, nguon = k3["nguong"], k3["loi"], k3["nguon"]
+    hop_le_kb = {c["ma"]: {l["ma"] for l in c["lua_chon"]} for c in kb.cau_hoi()}
+
+    def _hien_co(cau: str) -> dict | None:
+        return next((g for g in kq["goi_y"] if g["cau"] == cau), None)
+
+    def _them(cau: str, lua: str, so: float | None = None, *, roi: bool = False, ghi_de_vua: bool = False) -> None:
+        if cau not in hop_le_kb or lua not in hop_le_kb[cau]:
+            return
+        cu = _hien_co(cau)
+        if cu is not None:
+            if ghi_de_vua and cu.get("vua"):
+                kq["goi_y"] = [g for g in kq["goi_y"] if g["cau"] != cau]
+            else:
+                return
+        kq["goi_y"].append({
+            "cau": cau, "lua_chon": lua,
+            "do": loi[f"{cau}.{lua}"].format(so=_so(so) if so is not None else ""),
+            "nguon": nguon["roi" if roi else "3d"], "anh": "3d",
+            "do_tin": "thap" if roi else "trung_binh",
+        })
+
+    # 1. Điền Trạch (khoảng mày – mắt)
+    v = d3.get("dien_trach", d3.get("dien_trach_ratio"))
+    if v is not None:
+        if v < N["dien_trach"]["hep"]:
+            _them("dien_trach", "hep", v)
+        elif v >= N["dien_trach"]["rong_day"]:
+            _them("dien_trach", "rong_day", v)
+
+    # 2. Hình mắt (chỉ bổ sung nếu chưa có hoặc đang là 'vừa')
+    if (v := d3.get("eye_aspect_ratio")) is not None:
+        if v < N["mat_hinh"]["dai_hep"]:
+            _them("mat_hinh", "dai_hep", v, ghi_de_vua=True)
+        elif v > N["mat_hinh"]["tron_to"]:
+            _them("mat_hinh", "tron_to", v, ghi_de_vua=True)
+
+    # 3. Tam Bạch (lộ tròng trắng dưới / trên mống mắt)
+    if "tam_bach_duoi" in d3 or "tam_bach_tren" in d3:
+        tbd, tbt = d3.get("tam_bach_duoi", 0.0), d3.get("tam_bach_tren", 0.0)
+        if tbd >= N["tam_bach"]:
+            _them("tam_bach", "duoi", tbd)
+        elif tbt >= N["tam_bach"]:
+            _them("tam_bach", "tren", tbt)
+        else:
+            _them("tam_bach", "khong")
+
+    # 4. Sơn Căn (độ nổi tương đối của gốc mũi theo trục z)
+    if (v := d3.get("son_can_z")) is not None:
+        if v >= N["son_can"]["cao_lien"]:
+            _them("son_can", "cao_lien", v)
+        elif v <= N["son_can"]["thap_gay"]:
+            _them("son_can", "thap_gay", v)
+
+    # 5. Sống mũi (nếu chưa có kết luận từ ảnh thẳng / ảnh nghiêng)
+    if _hien_co("song_mui") is None:
+        if d3.get("song_mui_go", 0.0) >= N["song_mui"]["go"] and "song_mui_go" in d3:
+            _them("song_mui", "go", d3["song_mui_go"])
+        elif (v := d3.get("song_mui_z")) is not None:
+            if v >= N["song_mui"]["thang_cao"]:
+                _them("song_mui", "thang_cao", v)
+            elif v <= N["song_mui"]["thap"]:
+                _them("song_mui", "thap", v)
+
+    # 6. Chuẩn Đầu (đầu mũi)
+    if (v := d3.get("chuan_dau_ratio")) is not None:
+        if v >= N["chuan_dau"]["to_tho"]:
+            _them("chuan_dau", "to_tho", v)
+        elif v >= N["chuan_dau"]["tron_day"]:
+            _them("chuan_dau", "tron_day", v)
+        elif v <= N["chuan_dau"]["nhon_mong"]:
+            _them("chuan_dau", "nhon_mong", v)
+
+    # 7. Lưỡng Quyền (gò má theo trục z tương đối)
+    if (v := d3.get("luong_quyen_z")) is not None:
+        if v >= N["luong_quyen"]["cao_co_thit"]:
+            _them("luong_quyen", "cao_co_thit", v)
+        elif v <= N["luong_quyen"]["thap_phang"]:
+            _them("luong_quyen", "thap_phang", v)
+
+    # 8. Miệng (độ dày môi)
+    if (v := d3.get("moi_day_ratio")) is not None:
+        if v >= N["mieng"]["moi_day"]:
+            _them("mieng", "moi_day", v, ghi_de_vua=True)
+        elif v <= N["mieng"]["nho_mong"]:
+            _them("mieng", "nho_mong", v, ghi_de_vua=True)
+
+    # 9. Cằm (bề rộng cằm)
+    if (v := d3.get("cam_width_ratio")) is not None:
+        _them("cam", "vuong_rong" if v >= N["cam"]["vuong_rong"] else "nhon_lem" if v <= N["cam"]["nhon_lem"] else "tron_day", v)
+
+    # 10. Lông mày (nếu chưa có 'giao nhau')
+    if _hien_co("long_may") is None:
+        if "may_density" in d3 and d3["may_density"] < N["long_may"]["thua_nhat"]:
+            _them("long_may", "thua_nhat", d3["may_density"])
+        elif (v := d3.get("may_dai_ratio")) is not None:
+            if v >= N["long_may"]["thanh_dai"]:
+                _them("long_may", "thanh_dai", v)
+            elif v <= N["long_may"]["dam_ngan"]:
+                _them("long_may", "dam_ngan", v)
+
+    # 11. Trán (độ lồi tương đối)
+    if _hien_co("tran") is None and (v := d3.get("tran_convexity_z")) is not None:
+        if v >= N["tran"]["cao_rong_day"]:
+            _them("tran", "cao_rong_day", v)
+        elif v <= N["tran"]["lom_giua"]:
+            _them("tran", "lom_giua", v)
+
+    # 12. Nét mặt — biểu cảm của ĐÚNG tấm ảnh này (độ tin thấp: một lần chụp không phải nét mặt thường ngày)
+    cuoi = d3.get("net_mat_smile")
+    if cuoi is not None and cuoi >= N["net_mat"]["cuoi"]:
+        _them("net_mat", "de_gan", cuoi, roi=True)
+    elif cuoi is not None and cuoi <= -N["net_mat"]["cuoi"]:
+        _them("net_mat", "buon_met", cuoi, roi=True)
+    elif d3.get("net_mat_brow_down", 0.0) >= N["net_mat"]["cau_may"] and "net_mat_brow_down" in d3:
+        _them("net_mat", "nghiem", d3["net_mat_brow_down"], roi=True)
+
+    # 13. Sắc tổng (thống kê vùng má) — chỉ trong dải sáng vừa; ngoài dải thì mời tự chọn
+    if any(x in d3 for x in ("sac_da_cr", "sac_da_luma", "sac_da_cb")):
+        cr, luma, cb = d3.get("sac_da_cr"), d3.get("sac_da_luma"), d3.get("sac_da_cb")
+        ns = N["sac_tong"]
+        if luma is not None and (luma <= ns["luma_toi"] or luma >= ns["luma_sang"]):
+            if _hien_co("sac_tong") is None:
+                kq["canh_bao"].append(k3["canh_bao"]["sac_ngoai_dai"])
+        elif cr is not None and cr >= ns["do_ung_cr"]:
+            _them("sac_tong", "do_ung", roi=True)
+        elif cb is not None and cb <= ns["vang_xin_cb"]:
+            _them("sac_tong", "vang_xin", roi=True)
+        else:
+            _them("sac_tong", "sang_nhuan", roi=True)
+
+    # 14. Lệ Đường (vùng dưới mắt so với má)
+    if (v := d3.get("le_duong_delta")) is not None:
+        if v >= N["le_duong"]["tham_quang"]:
+            _them("le_duong", "tham_quang", v, roi=True)
+        elif v <= N["le_duong"]["day_tuoi"]:
+            _them("le_duong", "day_tuoi", v, roi=True)
+
+    # 15. Sắc môi (so với da quanh môi)
+    if (v := d3.get("moi_cr")) is not None:
+        if v >= N["moi_sac"]["hong_nhuan"]:
+            _them("moi_sac", "hong_nhuan", v, roi=True)
+        elif v <= N["moi_sac"]["nhat_kho"]:
+            _them("moi_sac", "nhat_kho", v, roi=True)
+
+    # 16. Nếp trán (mật độ nét vùng trán)
+    if (v := d3.get("nep_tran_edge")) is not None:
+        _them("nep_tran", "khong" if v <= N["nep_tran"]["khong"] else "vai_nep_lien" if v <= N["nep_tran"]["vai_nep_lien"] else "nhieu_dut",
+              v, roi=True)
+
+    kq["so_do"]["dac_trung_3d"] = {k: round(v, 4) for k, v in d3.items()}
     return kq

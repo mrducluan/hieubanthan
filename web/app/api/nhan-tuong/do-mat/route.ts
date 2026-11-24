@@ -14,6 +14,7 @@ const Input = z.object({
   ti_le: z.number().min(0.2).max(5),
   dong_y: z.literal(true),
   nghieng: z.array(Nghieng).max(2).optional(),
+  dac_trung_3d: z.record(z.string().regex(/^[a-z0-9_]{2,32}$/), z.number().finite()).refine((o) => Object.keys(o).length <= 40).optional(),
 }).strict();
 
 export function POST(req: Request) {

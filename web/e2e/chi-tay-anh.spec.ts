@@ -1,5 +1,5 @@
 // CT-2 — chụp lòng bàn tay ở /chi-tay. CI không có camera, bộ tìm điểm mốc cần WebAssembly + mô hình → test phần tất định:
-// (1) cổng thoả thuận ct1 (nút chụp / tải khoá tới khi tích ô), (2) route /api/chi-tay/do-tay từ chối khi thiếu `dong_y`,
+// (1) cổng thoả thuận ct2 (nút chụp / tải khoá tới khi tích ô), (2) route /api/chi-tay/do-tay từ chối khi thiếu `dong_y`,
 // (3) luồng đầy đủ với 21 điểm dựng sẵn qua móc `window.__ctTest` (chỉ có ở bản dev / bản build e2e `NEXT_PUBLIC_E2E=1`) và
 // phản hồi engine giả theo hợp đồng `docs/CHI-TAY-ANH.md`: vòng cung hiện trên ảnh, chạm cung → lựa chọn, chọn rồi "Xem sách
 // xưa nói gì" gửi kèm `cung`; trên máy chỉ nhớ MÃ, không toạ độ, không ảnh.
@@ -40,7 +40,7 @@ async function moTrang(page: Page, moc: unknown) {
   await expect(page.getByTestId("chup-ban-tay")).toBeVisible();
 }
 
-test("chụp lòng bàn tay: nút chụp / tải khoá tới khi tích thoả thuận ct1", async ({ page }) => {
+test("chụp lòng bàn tay: nút chụp / tải khoá tới khi tích thoả thuận ct2", async ({ page }) => {
   await page.goto("/chi-tay");
   const khoi = page.getByTestId("chup-ban-tay");
   // khối chụp đứng TRƯỚC đồ hình sách
@@ -113,7 +113,7 @@ test("chụp lòng bàn tay (móc 21 điểm + engine giả): vòng cung trên �
   const luu = await page.evaluate(() => localStorage.getItem("hbt.chi_tay.v1"));
   expect(JSON.parse(luu!)).toMatchObject({ cung: { ly: "day" }, van: [] });
   expect(luu).not.toContain("0.");
-  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.dong_y_chi_tay.v1") ?? "null")?.phien_ban)).toBe("ct1");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.dong_y_chi_tay.v1") ?? "null")?.phien_ban)).toBe("ct2");
 
   // khối "Xem sách xưa nói gì" phía dưới gửi kèm cung (không cần chọn vân)
   await expect(page.getByTestId("chon-tom-tat")).toContainText("1 cung trên ảnh tay");
@@ -202,4 +202,86 @@ test("engine thật: /api/chi-tay/do-tay đo 21 điểm → hợp lệ, có cung
   const c0 = d.cung.find((c) => c.ma === "ly")!;
   const r2 = await request.post("/api/chi-tay/doc", { data: { cung: { ly: c0.lua_chon[0]!.ma } } });
   expect(r2.status()).toBe(200);
+});
+
+test("hai bàn tay song song (engine thật): tải cả Trái + Phải → so sánh Tiên Thiên/Hậu Thiên, 4 đường, 7 Gò đối chiếu Bát Quái và 3 chỉ số hình học", async ({ page }) => {
+  const DIEM_PHAI: [number, number][] = DIEM.map(([x, y]) => [Number((1 - x).toFixed(4)), y]);
+  await moTrang(page, { diem_trai: DIEM, diem_phai: DIEM_PHAI });
+  await page.getByTestId("ct-dong-y").check();
+
+  // Tải Tay Trái (đang active)
+  await page.getByTestId("ct-input-tai").setInputFiles({ name: "tay-trai.webp", mimeType: "image/webp", buffer: ANH });
+  await expect(page.getByTestId("ct-tong-hop-dong-tay")).toBeVisible({ timeout: 15_000 });
+
+  // Chuyển sang Tay Phải và tải ảnh Tay Phải song song (không ghi đè Tay Trái)
+  await page.getByTestId("ct-tay-phai").click();
+  await page.getByTestId("ct-input-tai").setInputFiles({ name: "tay-phai.webp", mimeType: "image/webp", buffer: ANH });
+
+  await expect(page.getByTestId("ct-so-sanh-hai-tay")).toBeVisible({ timeout: 15_000 });
+  await expect(page.getByTestId("ct-so-sanh-hai-tay")).toContainText("Tiên Thiên");
+  await expect(page.getByTestId("ct-chi-so-mo-rong")).toBeVisible();
+  await expect(page.getByTestId("ct-chi-so-mo-rong")).toContainText("ngón cái");
+  await expect(page.getByTestId("ct-duong-kinh-dien")).toContainText("Đường Sự Nghiệp");
+
+  const bayGo = page.getByTestId("ct-bay-go-dong-tay");
+  await bayGo.locator("> summary").click();
+  await expect(bayGo).toContainText("Gò Mộc Tinh");
+  await expect(bayGo).toContainText("cung Tốn");
+});
+
+// PR #338 — đường chỉ máy dò là ước lượng: người dùng báo "Chưa khớp" → ẩn lớp phủ của tay đó + lượt đo lại KHÔNG gửi tín hiệu.
+test("ba đường chỉ máy dò: thân gửi chỉ có con số (không polylines); 'Chưa khớp' → ẩn đường, đo lại không kèm tín hiệu, sự kiện chỉ mã", async ({ page, request }) => {
+  const DUONG = (y: number): [number, number][] => [[0.36, y], [0.44, y - 0.01], [0.52, y - 0.015], [0.6, y - 0.01]];
+  const CV = {
+    do_ro_tong: 0.5,
+    tam_dao: { do_ro: 0.6, chieu_dai_uoc_luong: 0.7, do_cong: 0.2 },
+    tri_dao: { do_ro: 0.5, chieu_dai_uoc_luong: 0.6, do_cong: 0.3 },
+    sinh_dao: { do_ro: 0.4, chieu_dai_uoc_luong: 0.8, do_cong: 0.5 },
+    polylines: { tam_dao: DUONG(0.62), tri_dao: DUONG(0.68), sinh_dao: DUONG(0.76) },
+    do_tin: "goi_y_tham_khao",
+  };
+  const doTay: Record<string, unknown>[] = [], haiTay: Record<string, unknown>[] = [];
+  await page.route("**/api/chi-tay/do-tay", async (route) => { doTay.push(route.request().postDataJSON()); await route.fulfill({ json: KQ_DO }); });
+  await page.route("**/api/chi-tay/luan-giai-hai-tay", async (route) => { haiTay.push(route.request().postDataJSON()); await route.fulfill({ json: {} }); });
+  await moTrang(page, { diem: DIEM, duong_chi: CV });
+  await page.getByTestId("ct-dong-y").check();
+  await page.getByTestId("ct-input-tai").setInputFiles({ name: "tay.webp", mimeType: "image/webp", buffer: ANH });
+  await expect(page.getByTestId("ct-cung")).toHaveCount(3);
+  await expect(page.getByTestId("ct-xuong").locator("polyline")).toHaveCount(3);
+  const hoi = page.getByTestId("ct-duong-phan-hoi-trai");
+  await expect(hoi).toContainText("Đường máy vẽ có khớp tay bạn không?");
+
+  // lượt đầu: tín hiệu ba đường là CON SỐ, không gửi nét vẽ
+  expect(doTay).toHaveLength(1);
+  const g = doTay[0]!.duong_chi_goi_y as Record<string, unknown>;
+  expect(Object.keys(g).sort()).toEqual(["do_ro_tong", "do_tin", "sinh_dao", "tam_dao", "tri_dao"]);
+  expect(JSON.stringify(doTay[0])).not.toContain("polylines");
+  await expect.poll(() => haiTay.length).toBe(1);
+  expect((haiTay[0]!.trai as Record<string, unknown>).duong_chi_goi_y).toBeTruthy();
+
+  await page.getByTestId("ct-duong-chua-khop-trai").click();
+  await expect(hoi).toContainText("Đã ẩn đường máy vẽ. Bạn tự soi ba đường ở phần Tự soi bên dưới.");
+  await expect(hoi.locator("a")).toHaveAttribute("href", "#tu-soi");
+  await expect(page.locator("#tu-soi")).toHaveCount(1);
+  await expect(page.getByTestId("ct-xuong").locator("polyline")).toHaveCount(0);
+  await expect(page.getByTestId("ct-xuong").locator("circle")).toHaveCount(21);     // điểm mốc vẫn còn
+  await expect.poll(() => doTay.length).toBe(2);
+  expect(doTay[1]).not.toHaveProperty("duong_chi_goi_y");
+  await expect.poll(() => haiTay.length).toBe(2);
+  expect(haiTay[1]!.trai).not.toHaveProperty("duong_chi_goi_y");
+  const sk = (await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []))
+    .filter((e) => e.kind === "duong_cv_phan_hoi");
+  expect(sk).toHaveLength(1);
+  expect(sk[0]).toMatchObject({ su_kien: "chart_interacted", mo_dun: "chitay", muc: "chua_khop", tay: "trai" });
+
+  // route: schema chặt — nét vẽ, khoá lạ, số ngoài 0..1 đều bị từ chối trước khi tới engine
+  const { polylines: _bo, ...so } = CV;
+  void _bo;
+  const than = (d: unknown) => ({ dong_y: true, tay: "trai", ty_le: 0.75, diem: DIEM, duong_chi_goi_y: d });
+  expect((await request.post("/api/chi-tay/do-tay", { data: than(CV) })).status()).toBe(422);
+  expect((await request.post("/api/chi-tay/do-tay", { data: than({ ...so, ghi_chu: "chữ tự do" }) })).status()).toBe(422);
+  expect((await request.post("/api/chi-tay/do-tay", { data: than({ ...so, tam_dao: { ...so.tam_dao, do_ro: 7 } }) })).status()).toBe(422);
+  expect((await request.post("/api/chi-tay/do-tay", { data: than({ ...so, do_tin: "chac_chan" }) })).status()).toBe(422);
+  expect((await request.post("/api/chi-tay/luan-giai-hai-tay", { data: { dong_y: true, trai: { ty_le: 0.75, diem: DIEM, duong_chi_goi_y: CV } } })).status()).toBe(422);
+  expect((await request.post("/api/chi-tay/do-tay", { data: than(so) })).status()).not.toBe(422);
 });

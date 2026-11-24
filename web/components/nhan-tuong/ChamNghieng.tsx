@@ -1,7 +1,7 @@
 "use client";
 // ANH-4 — một ảnh NGHIÊNG (tuỳ chọn) cho phép đo: người dùng chấm 9 điểm trên ĐƯỜNG VIỀN mặt (+ 2 điểm tai tuỳ chọn) theo
 // hình mẫu nhìn nghiêng. Ảnh chỉ hiện bằng `blob:` trên máy, không tải lên; chỉ toạ độ 0..1 + tỉ lệ khung đi theo lượt đo của
-// ảnh chính diện (cùng thoả thuận dm1). Không tự tìm điểm: bộ tìm điểm mốc chỉ chắc với ảnh chính diện, ảnh nghiêng ~90° thì
+// ảnh chính diện (cùng thoả thuận dm2). Không tự tìm điểm: bộ tìm điểm mốc chỉ chắc với ảnh chính diện, ảnh nghiêng ~90° thì
 // không thấy đủ mặt. Web không tính gì — engine `do_nghieng` đo góc, độ nhô.
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ImagePlus, RotateCcw, Undo2, X } from "lucide-react";

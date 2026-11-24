@@ -1,0 +1,278 @@
+{
+ "_nguon": "Ban biên tập Hiểu Bản Thân. Ngưỡng và lời của phép đo ước lượng trên ảnh (lưới điểm mặt 3D, thống kê vùng ảnh, 21 điểm bàn tay). Mọi ngưỡng do ban biên tập tự đặt, chưa hiệu chỉnh trên ảnh thật; độ sâu z của lưới điểm từ MỘT ảnh là ước lượng tương đối của mô hình, không phải số đo thật.",
+ "_trang_thai": "nhap_ban_bien_tap",
+ "source_id": "tuong_do_anh_kb",
+ "school_id": "bien_tap_do_anh",
+ "can_doi_chieu": true,
+ "nhan_tuong": {
+  "nguon": {
+   "3d": "Ước lượng 3D tương đối từ lưới điểm mặt trên thiết bị (tham khảo — bạn chỉnh lại nếu chưa đúng)",
+   "roi": "Ước lượng vùng ảnh trên thiết bị (độ tin thấp — phụ thuộc ánh sáng; bạn chỉnh lại nếu chưa đúng)"
+  },
+  "nguong": {
+   "dien_trach": {
+    "hep": 0.65,
+    "rong_day": 1.2
+   },
+   "mat_hinh": {
+    "dai_hep": 0.25,
+    "tron_to": 0.37
+   },
+   "tam_bach": 0.18,
+   "son_can": {
+    "cao_lien": 0.04,
+    "thap_gay": -0.03
+   },
+   "song_mui": {
+    "go": 0.035,
+    "thang_cao": 0.14,
+    "thap": 0.06
+   },
+   "chuan_dau": {
+    "to_tho": 0.52,
+    "tron_day": 0.36,
+    "nhon_mong": 0.3
+   },
+   "luong_quyen": {
+    "cao_co_thit": 0.06,
+    "thap_phang": -0.02
+   },
+   "mieng": {
+    "moi_day": 0.34,
+    "nho_mong": 0.2
+   },
+   "cam": {
+    "vuong_rong": 0.55,
+    "nhon_lem": 0.36
+   },
+   "long_may": {
+    "thua_nhat": 0.18,
+    "thanh_dai": 1.32,
+    "dam_ngan": 1.05
+   },
+   "tran": {
+    "cao_rong_day": 0.05,
+    "lom_giua": -0.02
+   },
+   "net_mat": {
+    "cuoi": 0.12,
+    "cau_may": 0.18
+   },
+   "sac_tong": {
+    "luma_toi": 105,
+    "luma_sang": 175,
+    "do_ung_cr": 150,
+    "vang_xin_cb": 108
+   },
+   "le_duong": {
+    "tham_quang": 22,
+    "day_tuoi": 10
+   },
+   "moi_sac": {
+    "hong_nhuan": 14,
+    "nhat_kho": 5
+   },
+   "nep_tran": {
+    "khong": 0.06,
+    "vai_nep_lien": 0.16
+   }
+  },
+  "loi": {
+   "dien_trach.hep": "Khoảng cách mày – mắt đo 3D hẹp ({so}).",
+   "dien_trach.rong_day": "Khoảng cách mày – mắt đo 3D rộng đầy ({so}).",
+   "mat_hinh.dai_hep": "Tỉ lệ mở mắt đo 3D dài hẹp (EAR {so}).",
+   "mat_hinh.tron_to": "Tỉ lệ mở mắt đo 3D tròn to (EAR {so}).",
+   "tam_bach.duoi": "Ước lượng khoảng trắng dưới mống mắt rõ ({so}).",
+   "tam_bach.tren": "Ước lượng khoảng trắng trên mống mắt rõ ({so}).",
+   "tam_bach.khong": "Không thấy dấu hiệu lộ tròng trắng trên hoặc dưới mống mắt.",
+   "son_can.cao_lien": "Độ nổi 3D gốc mũi cao liền ({so}).",
+   "son_can.thap_gay": "Độ nổi 3D gốc mũi thấp gãy ({so}).",
+   "song_mui.go": "Độ gồ 3D sống mũi rõ ({so}).",
+   "song_mui.thang_cao": "Độ nổi 3D sống mũi thẳng cao ({so}).",
+   "song_mui.thap": "Độ nổi 3D sống mũi thấp ({so}).",
+   "chuan_dau.to_tho": "Tỉ lệ đầu mũi đo 3D to rộng ({so}).",
+   "chuan_dau.tron_day": "Tỉ lệ đầu mũi đo 3D tròn đầy ({so}).",
+   "chuan_dau.nhon_mong": "Tỉ lệ đầu mũi đo 3D thon nhọn ({so}).",
+   "luong_quyen.cao_co_thit": "Độ nổi 3D gò má cao đầy ({so}).",
+   "luong_quyen.thap_phang": "Độ nổi 3D gò má thấp phẳng ({so}).",
+   "mieng.moi_day": "Tỉ lệ độ dày môi đo 3D đầy đặn ({so}).",
+   "mieng.nho_mong": "Tỉ lệ độ dày môi đo 3D mỏng gọn ({so}).",
+   "cam.vuong_rong": "Tỉ lệ bề rộng cằm đo 3D vuông rộng ({so}).",
+   "cam.nhon_lem": "Tỉ lệ bề rộng cằm đo 3D nhọn thon ({so}).",
+   "cam.tron_day": "Tỉ lệ bề rộng cằm đo 3D tròn đầy ({so}).",
+   "long_may.thua_nhat": "Mật độ vùng lông mày ước lượng thưa nhạt ({so}).",
+   "long_may.thanh_dai": "Tỉ lệ chiều dài lông mày đo 3D thanh dài ({so}).",
+   "long_may.dam_ngan": "Tỉ lệ chiều dài lông mày đo 3D ngắn gọn ({so}).",
+   "tran.cao_rong_day": "Độ lồi 3D vùng trán đầy đặn ({so}).",
+   "tran.lom_giua": "Độ lồi 3D vùng trán hơi lõm giữa ({so}).",
+   "net_mat.de_gan": "Biểu cảm đo 3D nhẹ nhàng, dễ gần ({so}).",
+   "net_mat.buon_met": "Biểu cảm đo 3D hơi trầm hoặc mệt ({so}).",
+   "net_mat.nghiem": "Vùng mày hơi cau nhẹ, nét mặt nghiêm ({so}).",
+   "sac_tong.do_ung": "Vùng da mẫu có sắc thiên đỏ (ước lượng ảnh, phụ thuộc ánh sáng).",
+   "sac_tong.vang_xin": "Vùng da mẫu hơi ngả vàng xỉn (ước lượng ảnh, phụ thuộc ánh sáng).",
+   "sac_tong.sang_nhuan": "Vùng da mẫu sáng đều (ước lượng ảnh, phụ thuộc ánh sáng).",
+   "le_duong.tham_quang": "Độ chênh sáng vùng dưới mắt cao ({so}, phụ thuộc ánh sáng).",
+   "le_duong.day_tuoi": "Vùng dưới mắt đều màu với má ({so}, phụ thuộc ánh sáng).",
+   "moi_sac.hong_nhuan": "Độ hồng vùng môi rõ ({so}, phụ thuộc ánh sáng).",
+   "moi_sac.nhat_kho": "Sắc môi hơi nhạt ({so}, phụ thuộc ánh sáng).",
+   "nep_tran.khong": "Mật độ đường nét vùng trán rất thấp ({so}, phụ thuộc độ nét ảnh).",
+   "nep_tran.vai_nep_lien": "Có vài đường nét ngang mảnh trên trán ({so}, phụ thuộc độ nét ảnh).",
+   "nep_tran.nhieu_dut": "Mật độ đường nét vùng trán nhiều ({so}, phụ thuộc độ nét ảnh)."
+  },
+  "canh_bao": {
+   "sac_ngoai_dai": "Ảnh quá tối hoặc quá sáng nên máy không ước lượng sắc da (máy không tách được màu da tự nhiên với ánh đèn). Bạn tự chọn ở câu sắc mặt nhé."
+  },
+  "bridges": {
+   "nguon": "Lillian Bridges — Face Reading in Chinese Medicine (tóm ý biên tập)",
+   "tieu_de": "Hai cách đọc ngũ hành: {ten}",
+   "dong_thuan": "Hai cách đọc cùng hướng: Ngũ Hình cổ truyền ({ten_dong}) và cách chia năm hành theo số đo của Lillian Bridges ({ten}) cùng chỉ về hành {hanh}.",
+   "bo_tro_pha": "Hai cách đọc bổ trợ nhau: Ngũ Hình cổ truyền cho thấy dáng mặt pha nhiều nét, còn cách chia theo số đo của Lillian Bridges nổi bật hướng {ten}.",
+   "bo_tro": "Hai cách đọc bổ trợ nhau: Ngũ Hình cổ truyền nghiêng về {ten_dong}, còn cách chia theo số đo của Lillian Bridges nổi bật {ten} — hai cách bổ sung sắc thái cho nhau.",
+   "hanh_en": {
+    "thuy": {
+     "ten_en": "Water Archetype",
+     "hanh_en": "Water",
+     "mat_tich_cuc": "Perceptive, adaptable, and calm under pressure; listens deeply and finds flexible paths through complexity.",
+     "mat_tieu_cuc": "Watch for lingering hesitation, quiet worry, or withdrawing emotionally instead of voicing needs directly."
+    },
+    "moc": {
+     "ten_en": "Wood Archetype",
+     "hanh_en": "Wood",
+     "mat_tich_cuc": "Forward-looking, decisive, and action-oriented; natural at organizing momentum and driving projects ahead.",
+     "mat_tieu_cuc": "Watch for impatience with slower pacing, overcommitting to goals, or running into sustained tension."
+    },
+    "hoa": {
+     "ten_en": "Fire Archetype",
+     "hanh_en": "Fire",
+     "mat_tich_cuc": "Warm, expressive, and energizing; connects easily with people and sparks enthusiasm around new ideas.",
+     "mat_tieu_cuc": "Watch for quick mood swings, losing steam on repetitive follow-through, or overpromising in excitement."
+    },
+    "tho": {
+     "ten_en": "Earth Archetype",
+     "hanh_en": "Earth",
+     "mat_tich_cuc": "Steady, reliable, and supportive; builds trust over time and keeps teams and family grounded.",
+     "mat_tieu_cuc": "Watch for taking on others' worries at the expense of personal boundaries or resisting helpful routine shifts."
+    },
+    "kim": {
+     "ten_en": "Metal Archetype",
+     "hanh_en": "Metal",
+     "mat_tich_cuc": "Self-reliant, structured, and discerning; holds clear standards and executes work with precision.",
+     "mat_tieu_cuc": "Watch for being overly strict with yourself or others, hesitating to ask for help, or seeming distant."
+    }
+   }
+  }
+ },
+ "chi_tay": {
+  "go_cung": {
+   "moc_tinh": [
+    "ton",
+    "Dưới ngón trỏ"
+   ],
+   "tho_tinh": [
+    "ly",
+    "Dưới ngón giữa"
+   ],
+   "thai_duong": [
+    "khon",
+    "Dưới ngón áp út"
+   ],
+   "thuy_tinh": [
+    "khon",
+    "Dưới ngón út"
+   ],
+   "kim_tinh": [
+    "can_co",
+    "Bầu ngón cái"
+   ],
+   "hoa_tinh": [
+    "minh_duong",
+    "Hai mép và giữa lòng tay"
+   ],
+   "thai_am": [
+    "can",
+    "Góc dưới mép ngón út"
+   ]
+  },
+  "nguong": {
+   "goc_ngon_cai": {
+    "rong": 48.0,
+    "gon": 30.0
+   },
+   "dot_can_bang": 0.05,
+   "khum_sau": 0.09,
+   "so_sanh_can_xung": 0.08
+  },
+  "hinh_hoc": {
+   "goc_ngon_cai": {
+    "mo_rong": {
+     "ten": "Góc mở ngón cái rộng (~{so}°)",
+     "y": "Theo Cheiro/Benham, ngón cái mở thoáng gợi ý tính cách cởi mở, độc lập, sẵn sàng khởi xướng và phóng khoáng trong cách cho đi.",
+     "luu_y": "Nên chú ý: giữ kỷ luật kế hoạch để tránh dàn trải nguồn lực khi hứng thú dâng cao (lưu ý: góc đo còn phụ thuộc tư thế xoè tay lúc chụp)."
+    },
+    "khep_than_trong": {
+     "ten": "Góc mở ngón cái gọn (~{so}°)",
+     "y": "Ngón cái khép gần lòng bàn tay gợi ý sự kín đáo, thận trọng, coi trọng nguyên tắc và suy xét kỹ trước khi cam kết.",
+     "luu_y": "Nên chú ý: đôi khi cho phép mình thử phương án mới sớm hơn một nhịp (lưu ý: nếu lúc chụp bạn khép ngón cái, hãy chụp lại khi thả lỏng tự nhiên)."
+    },
+    "can_bang": {
+     "ten": "Góc mở ngón cái cân bằng (~{so}°)",
+     "y": "Độ mở ngón cái ở khoảng hài hòa: biết giữ chừng mực giữa sự tự chủ hành động và thái độ thận trọng thực tế.",
+     "luu_y": "Góc đo phụ thuộc một phần vào tư thế xoè tay khi chụp — đọc kết hợp với chiều dài ngón và hình lòng bàn tay."
+    }
+   },
+   "dot_ngon_giua": {
+    "can_bang": {
+     "ten": "Ba đốt ngón giữa cân đối",
+     "y": "Theo hệ ba thế giới của Benham, ba đốt đều nhau cho thấy nhịp phối hợp cân bằng giữa trực giác (đốt đầu), tổ chức logic (đốt giữa) và thực tiễn đời sống (đốt gốc)."
+    },
+    "dot_goc_troi": {
+     "ten": "Đốt gốc ngón giữa nổi trội ({so}%)",
+     "y": "Đốt gốc trội thiên về năng lực thực thi bền bỉ, ưa kết quả cụ thể, coi trọng sự ổn định vật chất và đời sống thiết thực."
+    },
+    "dot_giua_troi": {
+     "ten": "Đốt giữa ngón giữa nổi trội ({so}%)",
+     "y": "Đốt giữa trội thiên về tư duy hệ thống, tổ chức, sắp xếp quy trình và khả năng phân tích thực tế có phương pháp."
+    },
+    "dot_dau_troi": {
+     "ten": "Đốt đầu ngón giữa nổi trội ({so}%)",
+     "y": "Đốt đầu trội thiên về trực giác, ý tưởng tinh thần, sức tưởng tượng và nhạy cảm với giá trị học thuật hoặc nghệ thuật."
+    },
+    "luu_y": "Tỉ lệ 3 đốt đo từ khớp 9–10–11–12 trên ảnh phẳng; nếu ngón tay hơi cong về phía camera, đốt đầu có thể ngắn hơn thực tế."
+   },
+   "do_khum_long_3d": {
+    "minh_duong_trung": {
+     "ten": "Lòng bàn tay 3D hơi khum sâu ({so})",
+     "y": "Độ sâu 3D cho thấy vùng Minh Đường hơi trũng — sách Đông ví như thế tụ khí, dễ giữ nội lực và tích lũy lâu dài nếu lòng tay mềm ấm.",
+     "luu_y": "Lưu ý: độ khum 3D thay đổi theo tư thế căng hay thả lỏng bàn tay lúc chụp ảnh."
+    },
+    "minh_duong_phang": {
+     "ten": "Lòng bàn tay 3D mở thoáng ({so})",
+     "y": "Lòng bàn tay mở phẳng thoáng gợi ý phong cách thẳng thắn, dễ bộc lộ năng lượng ra ngoài và ưa giải quyết việc trực diện.",
+     "luu_y": "Nên chú ý: kết hợp tự chạm lòng tay thật để xem độ đàn hồi da và thịt ở Minh Đường."
+    }
+   }
+  },
+  "truong_phai": [
+   "Cheiro (Language of the Hand, 1894 · Palmistry for All, 1916)",
+   "William G. Benham (The Laws of Scientific Hand Reading, 1900)",
+   "Mrs. J. B. Dale (Indian Palmistry, 1895)",
+   "Rosa Baughan / Hệ 4 Nguyên Tố (Thổ · Khí · Hỏa · Thủy — phân nhóm biên tập)"
+  ],
+  "tong_hop": {
+   "dong": "Tướng tay phương Đông (Thần Tướng Toàn Biên) ghi nhận nổi bật: {ds}.",
+   "tay_nhom": "Chỉ tay phương Tây xếp nhóm tỉ lệ gần với {ten}.",
+   "tay_to_hop": "Tổ hợp tỉ lệ Cheiro/Benham: {ten}.",
+   "can_doi": "Tỉ lệ bàn tay nằm trong dải cân đối ở cả hệ Đông (Thần Tướng Toàn Biên) và hệ Tây (Cheiro · Benham).",
+   "ghi_chu": "Tỉ lệ lòng bàn tay, ngón tay và vị trí 8 cung được đo trực tiếp từ 21 điểm mốc trên ảnh của bạn. Phân nhóm 4 Nguyên Tố (Thổ/Khí/Hỏa/Thủy) là ngưỡng biên tập tự đặt để tham khảo; ",
+   "ghi_chu_cv": "tín hiệu 3 đường chỉ (Tâm/Trí/Sinh Đạo) máy dò từ ảnh chỉ là ước lượng — bạn bấm \"Chưa khớp\" nếu đường vẽ lệch tay thật, và tự soi ba đường ở phần Tự soi.",
+   "ghi_chu_khong_cv": "đường chỉ, độ đầy gò và sắc da cần bạn tự quan sát thêm trên tay thật."
+  },
+  "so_sanh": {
+   "chuyen_dich": "Tay trái (Tiên Thiên) thiên về {ten_t}, trong khi tay phải (Hậu Thiên) nghiêng sang {ten_p}. Sự dịch chuyển này gợi ý bạn đã chủ động rèn luyện hoặc điều chỉnh cách ứng xử theo môi trường hiện tại.",
+   "can_xung": "Hai bàn tay có tỉ lệ rất cân xứng và cùng thuộc nhóm {ten}. Bản tính tự nhiên (Tiên Thiên) và cách bạn hành động hiện tại (Hậu Thiên) khá nhất quán.",
+   "lech_nhe": "Cả hai tay cùng thuộc nhóm {ten}, có sai khác nhẹ ở tỉ lệ lòng và ngón tay — phản ánh sự thích nghi tự nhiên giữa nền tảng sẵn có và thói quen thực hành hàng ngày.",
+   "nhom_mac_dinh": "cân đối",
+   "luu_y": "Chênh lệch giữa hai tay đo trên ảnh còn phụ thuộc góc chụp và độ xoè ngón; nên chụp hai tay cùng tư thế, cùng ánh sáng. Nếu thấy chưa đúng, bạn chụp lại hoặc tự soi."
+  }
+ }
+}

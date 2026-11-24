@@ -67,7 +67,7 @@ test("đo trên ảnh (engine thật, không AI): chấm 20 điểm → gợi ý
   expect(Object.keys(t).sort()).toEqual(["diem", "dong_y", "ti_le"]);
   expect(Object.keys(t.diem as object)).toHaveLength(20);
   expect(JSON.stringify(t)).not.toContain("base64");
-  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.dong_y_do_mat.v1") ?? "null")?.phien_ban)).toBe("dm1");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.dong_y_do_mat.v1") ?? "null")?.phien_ban)).toBe("dm2");
   await page.getByTestId("do-dung").click();
   const soDien = (await page.getByTestId("do-da-dung").textContent())?.match(/Đã điền (\d+) nét/)?.[1];
   expect(Number(soDien)).toBeGreaterThan(5);
@@ -75,11 +75,57 @@ test("đo trên ảnh (engine thật, không AI): chấm 20 điểm → gợi ý
   await expect(page.getByTestId("cau-khuon_mat").getByRole("button", { name: "Dài, hẹp, thanh" })).toHaveAttribute("aria-pressed", "true");
   await page.getByTestId("do-xem-bai-doc").click();
   await expect(page.getByTestId("bao-cao-nhan-tuong")).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByTestId("nt-phuong-tay-bridges")).toBeVisible();
+  // Lối bổ sung nhanh 4 câu phi hình ảnh (giọng nói, dáng đi, cốt nhục, chẩm cốt) không chặn luồng 1-click
+  await page.getByTestId("nt-mo-popup-phi-anh").click();
+  await expect(page.getByTestId("popup-cau-hoi-phu")).toBeVisible();
+  await page.getByTestId("popup-opt-giong-tram_vang").click();
+  await page.getByTestId("popup-xac-nhan").click();
+  await expect(page.getByTestId("popup-cau-hoi-phu")).toHaveCount(0);
+  await expect(page.getByTestId("bao-cao-nhan-tuong")).toBeVisible();
+});
+
+// PR #338 — tương tác hai chiều: nét máy đo chưa đúng thì người dùng CHỌN LẠI ngay trong thẻ; lựa chọn đã chỉnh là thứ được điền.
+test("đo trên ảnh: 'Chưa đúng — chọn lại' → thẻ hiện lựa chọn mới + 'bạn đã chỉnh', sự kiện chỉ mang mã, khảo sát nhận lựa chọn đã chỉnh", async ({ page }) => {
+  await napHoSo(page);
+  await page.addInitScript(() => localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm2", luc: "2026-11-24T01:00:00Z" })));
+  await page.goto("/nhan-tuong");
+  await page.getByTestId("do-input").setInputFiles(TEP);
+  await chamDu(page);
+  await page.getByTestId("do-tinh").click();
+  const the = page.locator("[data-testid=goi-y-the][data-cau=khuon_mat]");
+  await expect(the).toBeVisible({ timeout: 20_000 });
+  await expect(the.getByTestId("goi-y-nhan")).toHaveText("Dài, hẹp, thanh");
+  await expect(the).toHaveAttribute("data-chinh", "0");
+  await the.getByTestId("goi-y-chua-dung").click();
+  const ds = the.getByTestId("goi-y-lua-chon");
+  await expect(ds.locator("[aria-checked=true]")).toContainText("Dài, hẹp, thanh");
+  await expect(ds.locator("[aria-checked=true]")).toContainText("máy đo");
+  const khac = ds.locator("[role=radio][aria-checked=false]").first();
+  const maMoi = (await khac.getAttribute("data-ma"))!, nhanMoi = (await khac.textContent())!.trim();
+  await khac.click();
+  await expect(the.getByTestId("goi-y-lua-chon")).toHaveCount(0);                    // chọn xong danh sách tự đóng
+  await expect(the.getByTestId("goi-y-nhan")).toHaveText(nhanMoi);
+  await expect(the.getByTestId("goi-y-da-chinh")).toHaveText("bạn đã chỉnh");
+  await expect(the.locator("input[type=checkbox]")).toBeChecked();
+  const sk = (await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []))
+    .filter((e) => e.su_kien === "chart_interacted" && e.kind === "do_mat_chinh");
+  expect(sk).toHaveLength(1);
+  expect(sk[0]).toMatchObject({ mo_dun: "nhantuong", cau: "khuon_mat", nguoi: maMoi });
+  expect(sk[0]!.may).toMatch(/^[a-z0-9_]+$/);                                        // chỉ MÃ — không nhãn, không chữ người dùng
+  expect(sk[0]!.may).not.toBe(maMoi);
+  expect(["thap", "trung_binh", "cao", "so", "khong"]).toContain(sk[0]!.do_tin);
+  expect(JSON.stringify(sk[0])).not.toContain(nhanMoi);
+  await page.getByTestId("do-dung").click();
+  await expect(page.getByTestId("do-da-dung")).toBeVisible();
+  await expect(page.getByTestId("cau-khuon_mat").getByRole("button", { name: nhanMoi, exact: true })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByTestId("cau-khuon_mat").getByRole("button", { name: "Dài, hẹp, thanh" })).toHaveAttribute("aria-pressed", "false");
+  expect(await page.evaluate((m) => JSON.stringify(JSON.parse(localStorage.getItem("hbt.nhan_tuong.v1") ?? "{}")).includes(m), maMoi)).toBe(true);
 });
 
 test("đo trên ảnh: điểm sai thứ tự → lời báo đúng điểm của engine; kéo chỉnh điểm sửa được", async ({ page }) => {
   await napHoSo(page);
-  await page.addInitScript(() => localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm1", luc: "2026-11-06T01:00:00Z" })));
+  await page.addInitScript(() => localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm2", luc: "2026-11-06T01:00:00Z" })));
   await page.goto("/nhan-tuong");
   await page.getByTestId("do-input").setInputFiles(TEP);
   const sai = MAT.map(([x, y], i) => (i === 0 ? [0.5, 0.9] as [number, number] : [x, y] as [number, number]));   // chân tóc dưới cằm
@@ -103,7 +149,7 @@ const NGHIENG: [number, number][] = [[0.50, 0.15], [0.56, 0.24], [0.55, 0.33], [
 
 test("ảnh nghiêng (tuỳ chọn): chấm 9 điểm đường viền → gửi kèm lượt đo → gợi ý trán gồ; thiếu điểm thì không gửi", async ({ page }) => {
   await napHoSo(page);
-  await page.addInitScript(() => localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm1", luc: "2026-11-06T01:00:00Z" })));
+  await page.addInitScript(() => localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm2", luc: "2026-11-06T01:00:00Z" })));
   const than: Record<string, unknown>[] = [];
   page.on("request", (q) => { if (q.url().includes("/api/nhan-tuong/do-mat")) than.push(q.postDataJSON()); });
   await page.goto("/nhan-tuong");
@@ -166,7 +212,7 @@ test("Dữ liệu của tôi liệt kê hai thoả thuận và rút từng cái"
   await napHoSo(page);
   await page.addInitScript(() => {
     localStorage.setItem("hbt.dong_y_anh_mat.v1", JSON.stringify({ phien_ban: "am1", luc: "2026-11-06T01:00:00Z" }));
-    localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm1", luc: "2026-11-06T01:00:00Z" }));
+    localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm2", luc: "2026-11-06T01:00:00Z" }));
   });
   await page.goto("/tai-khoan");
   await expect(page.getByTestId("dl-do-mat")).toContainText("Đã đồng ý ngày");
