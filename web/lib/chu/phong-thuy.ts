@@ -165,7 +165,7 @@ export const CHU_PHONG_THUY_UI = {
   "dv.luoi_cuu_cung": m(DV, "Tâm nhà & 8 phương", "Center & 8 sectors"),
   "dv.tam_nha": m(DV, "TÂM", "CENTER"),
   "dv.meo_keo": m(DV, "Chạm để đặt hoặc chọn phòng · kéo để dời vị trí · kéo góc phải-dưới để chỉnh rộng × sâu · bấm Xoay cửa để đổi hướng mở cửa.", "Tap to place or select a room · drag to move · drag the bottom-right corner to resize · tap Rotate door to change door direction."),
-  "dv.phat_hien": m(DV, "Phát hiện trên sơ đồ:", "Detected on floor plan:"),
+  "dv.phat_hien": m(DV, "Gợi ý phát hiện trên sơ đồ (tích để xác nhận vào Khảo sát nhà):", "Suggested signs from floor plan (tick to confirm for Home survey):"),
   "dv.dh.wc_giua_nha": m(DV, "Nhà vệ sinh nằm gần Trung cung (giữa nhà)", "Toilet sits near the Center (Trung Cung)"),
   "dv.dh.cua_doi_nhau": m(DV, "Hai cửa phòng mở đối diện nhau", "Two room doors directly face each other"),
   "dv.dh.bep_doi_cua": m(DV, "Bếp nhìn thẳng ra Cửa chính", "Stove faces straight toward the Main door"),

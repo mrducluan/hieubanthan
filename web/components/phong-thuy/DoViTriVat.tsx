@@ -134,6 +134,7 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
   const [dangChon, setDangChon] = useState<LoaiVat | null>(null);
   const [boLuoi, setBoLuoi] = useState(false);
   const [hienCuuCung, setHienCuuCung] = useState(true);
+  const [xacNhanDauHieu, setXacNhanDauHieu] = useState<Set<string>>(new Set());
   const [du18, setDu18] = useState(false);
   const [kq, setKq] = useState<ViTriKq | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
@@ -433,8 +434,9 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
     const t1 = kq?.tang.find((t) => t.so === 1);
     const viTri: Record<string, string> = {};
     for (const v of t1?.vat ?? []) if (v.loai !== "cau_thang") viTri[v.loai] = v.phuong;
-    const daXuLy = new Set([...(hoSo?.bo_cuc?.da_xu_ly ?? []), ...(hoSo?.bo_cuc?.khai_khong ?? [])]);
-    const dauHieuMoi = [...new Set([...(hoSo?.bo_cuc?.dau_hieu ?? []), ...dauHieuPhatHien.filter((m) => !daXuLy.has(m))])];
+    // Chỉ lưu các dấu hiệu phát hiện trên sơ đồ mà người dùng ĐÃ TỰ TÍCH xác nhận (không tự ý ghi đè bộ luật).
+    const daXacNhan = dauHieuPhatHien.filter((m) => xacNhanDauHieu.has(m));
+    const dauHieuMoi = daXacNhan.length ? [...new Set([...(hoSo?.bo_cuc?.dau_hieu ?? []), ...daXacNhan])] : [];
     try {
       luuHoSoNha({
         tang_do: Object.entries(doTang).filter(([so, t]) => Number(so) <= soTang && Object.keys(t).length)
@@ -714,21 +716,31 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
                         {hop.w}×{hop.h}m
                       </text>
                     )}
-                    {/* Tay nắm kéo chỉnh kích thước ở góc phải-dưới khi đang chọn */}
+                    {/* Tay nắm kéo chỉnh kích thước ở góc phải-dưới khi đang chọn (kèm vùng chạm rộng hơn cho mobile) */}
                     {isSelected && !boLuoi && (
-                      <rect
-                        x={hop.x0 + hop.w - handleSize / 2}
-                        y={hop.y0 + hop.h - handleSize / 2}
-                        width={handleSize}
-                        height={handleSize}
-                        rx={handleSize * 0.2}
-                        fill="#facc15"
-                        stroke="rgb(var(--bg))"
-                        strokeWidth={strokeCoBan * 0.6}
-                        className="cursor-nwse-resize"
-                        data-testid={`vi-tri-resize-${loai}`}
-                        onPointerDown={(e) => batDauResize(e, loai, hop)}
-                      />
+                      <g>
+                        <rect
+                          x={hop.x0 + hop.w - handleSize * 1.1}
+                          y={hop.y0 + hop.h - handleSize * 1.1}
+                          width={handleSize * 2.2}
+                          height={handleSize * 2.2}
+                          fill="transparent"
+                          className="cursor-nwse-resize"
+                          data-testid={`vi-tri-resize-${loai}`}
+                          onPointerDown={(e) => batDauResize(e, loai, hop)}
+                        />
+                        <rect
+                          x={hop.x0 + hop.w - handleSize / 2}
+                          y={hop.y0 + hop.h - handleSize / 2}
+                          width={handleSize}
+                          height={handleSize}
+                          rx={handleSize * 0.2}
+                          fill="#facc15"
+                          stroke="rgb(var(--bg))"
+                          strokeWidth={strokeCoBan * 0.6}
+                          pointerEvents="none"
+                        />
+                      </g>
                     )}
                   </g>
                 );
@@ -785,15 +797,33 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
             </div>
           )}
 
-          {/* Cảnh báo tự động suy ra từ sơ đồ khung phòng & hướng cửa */}
+          {/* Gợi ý dấu hiệu từ sơ đồ khung phòng & hướng cửa (người dùng tự tích mới xác nhận) */}
           {dauHieuPhatHien.length > 0 && (
             <div data-testid="vi-tri-phat-hien" className="rounded-xl border border-gold/30 bg-gold/5 p-3 text-xs">
               <p className="flex items-center gap-1.5 font-medium text-gold">
                 <AlertTriangle className="size-3.5" aria-hidden /> {c("dv.phat_hien")}
               </p>
-              <ul className="mt-1.5 space-y-1 text-fg-muted">
+              <ul className="mt-1.5 space-y-1.5 text-fg-muted">
                 {dauHieuPhatHien.map((ma) => (
-                  <li key={ma}>• {c(`dv.dh.${ma}`)}</li>
+                  <li key={ma}>
+                    <label className="inline-flex cursor-pointer items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={xacNhanDauHieu.has(ma)}
+                        data-testid={`vi-tri-xn-${ma}`}
+                        onChange={(e) =>
+                          setXacNhanDauHieu((s) => {
+                            const n = new Set(s);
+                            if (e.target.checked) n.add(ma);
+                            else n.delete(ma);
+                            return n;
+                          })
+                        }
+                        className="size-3.5 accent-[rgb(var(--gold))]"
+                      />
+                      <span>{c(`dv.dh.${ma}`)}</span>
+                    </label>
+                  </li>
                 ))}
               </ul>
             </div>
