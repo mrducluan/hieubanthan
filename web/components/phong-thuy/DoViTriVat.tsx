@@ -1,19 +1,35 @@
 "use client";
-// VT-1 — "Đứng giữa nhà, chĩa điện thoại" (+ khung nhà theo tỉ lệ khi máy không có la bàn), nhiều tầng.
+// VT-1 — "Đứng giữa nhà, chĩa điện thoại" (+ sơ đồ mặt bằng tỉ lệ tương tác Mini-CAD khi dùng máy tính), nhiều tầng.
 // Web CHỈ đọc cảm biến / điểm chạm rồi gửi số thô (mẫu la bàn, toạ độ 0..1) lên engine `/api/phongthuy/vi-tri-vat`:
 // engine lấy trung bình góc, trừ nhiễu theo trục nhà, đổi ra phương / sơn, xét Cửa – Chủ – Bếp từng tầng, du niên với mệnh,
-// sao Huyền Không. Số đo chỉ lưu TRÊN MÁY (hồ sơ nhà) khi người dùng bấm Lưu.
+// sao Huyền Không. Số đo & bố trí khung phòng chỉ lưu TRÊN MÁY (hồ sơ nhà) khi người dùng bấm Lưu.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Check, Compass, Layers, Plus, Ruler, Trash2 } from "lucide-react";
+import { AlertTriangle, Check, Compass, Crosshair, Layers, Minus, Plus, RotateCw, Ruler, Trash2, Undo2, X } from "lucide-react";
 import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 import { KetQuaTamYeu, SachTamYeu, type TamYeuRes } from "@/components/phong-thuy/TamYeuCuaChuBep";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
-import { luuHoSoNha, useHoSoNha, type LoaiVat } from "@/lib/ho-so-nha";
+import { luuHoSoNha, useHoSoNha, type HuongCuaKhung, type LoaiVat } from "@/lib/ho-so-nha";
+import {
+  doLaBanCua,
+  huongCuaMacDinh,
+  kichThuocMacDinh,
+  suyDauHieuTuKhung,
+  tamNhaKhung,
+  tinhHopPhong,
+  xoayHuongCua,
+  type HopPhongKhung,
+} from "@/lib/mat-bang-khung";
 import { tenTheo, type TenHien } from "@/lib/ten-hien";
 import { cn } from "@/lib/utils";
 
-type DoVat = { mau?: number[]; diem?: [number, number]; sai_so?: number };
+type DoVat = {
+  mau?: number[];
+  diem?: [number, number];
+  sai_so?: number;
+  kich_thuoc?: [number, number];
+  huong_cua?: HuongCuaKhung;
+};
 type TangDo = Partial<Record<LoaiVat, DoVat>>;
 
 interface VatKq {
@@ -35,6 +51,16 @@ const THOI_GIAN_GHI = 1200;            // ms lấy mẫu mỗi lần ghi
 const TOI_DA_MAU = 30;                 // giữ ≤ 30 mẫu / vật (đủ để engine lấy trung bình, hồ sơ máy nhẹ)
 const LUOI_N = 4;                      // lưới bỏ phần không xây (nhà chữ L…)
 
+/** Bảng màu ngữ nghĩa nhẹ cho từng loại phòng trên bản vẽ mặt bằng (nền tối). */
+const MAU_PHONG: Record<LoaiVat, { fill: string; stroke: string; door: string }> = {
+  cua_chinh: { fill: "rgba(234, 179, 8, 0.24)", stroke: "rgba(250, 204, 21, 0.95)", door: "#facc15" },
+  phong_ngu_chinh: { fill: "rgba(99, 102, 241, 0.22)", stroke: "rgba(129, 140, 248, 0.9)", door: "#a5b4fc" },
+  bep: { fill: "rgba(249, 115, 22, 0.22)", stroke: "rgba(251, 146, 60, 0.9)", door: "#fdba74" },
+  ve_sinh: { fill: "rgba(20, 184, 166, 0.22)", stroke: "rgba(45, 212, 191, 0.9)", door: "#5eead4" },
+  ban_tho: { fill: "rgba(192, 132, 252, 0.22)", stroke: "rgba(216, 180, 254, 0.9)", door: "#e9d5ff" },
+  cau_thang: { fill: "rgba(148, 163, 184, 0.22)", stroke: "rgba(203, 213, 225, 0.9)", door: "#e2e8f0" },
+};
+
 type SuKien = DeviceOrientationEvent & { webkitCompassHeading?: number; webkitCompassAccuracy?: number };
 type CoXinQuyen = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<"granted" | "denied"> };
 
@@ -52,8 +78,48 @@ function doRung(ds: number[]): number {
 }
 const thuGon = (ds: number[]) => (ds.length <= TOI_DA_MAU ? ds : Array.from({ length: TOI_DA_MAU }, (_, i) => ds[Math.floor((i * ds.length) / TOI_DA_MAU)]!));
 
+/** Vẽ ký hiệu kiến trúc cánh cửa + cung mở 90° trên cạnh tương ứng của hộp phòng. */
+function KyHieuCua({ hop, mau, strokeW }: { hop: HopPhongKhung; mau: string; strokeW: number }) {
+  const { x0, y0, w, h, cx, cy, huongCua } = hop;
+  const banKinh = Math.min(0.85, Math.max(0.32, Math.min(w, h) * 0.42));
+  // Bản lề (hx, hy), đầu cánh mở (lx, ly), đầu khung cửa đối diện (ex, ey), cung quét 90° từ đầu cánh về đầu khung.
+  let hx = cx, hy = y0, lx = cx, ly = y0 - banKinh, ex = cx + banKinh, ey = y0;
+  let sweep = 1;
+  if (huongCua === "truoc") {
+    hx = cx - banKinh / 2; hy = y0;
+    ex = cx + banKinh / 2; ey = y0;
+    lx = hx; ly = y0 - banKinh;
+    sweep = 1;
+  } else if (huongCua === "sau") {
+    hx = cx + banKinh / 2; hy = y0 + h;
+    ex = cx - banKinh / 2; ey = y0 + h;
+    lx = hx; ly = y0 + h + banKinh;
+    sweep = 1;
+  } else if (huongCua === "phai") {
+    hx = x0 + w; hy = cy - banKinh / 2;
+    ex = x0 + w; ey = cy + banKinh / 2;
+    lx = x0 + w + banKinh; ly = hy;
+    sweep = 1;
+  } else {
+    hx = x0; hy = cy + banKinh / 2;
+    ex = x0; ey = cy - banKinh / 2;
+    lx = x0 - banKinh; ly = hy;
+    sweep = 1;
+  }
+  return (
+    <g pointerEvents="none">
+      {/* Khoảng hở tường tại vị trí cửa */}
+      <line x1={hx} y1={hy} x2={ex} y2={ey} stroke="rgb(var(--bg))" strokeWidth={strokeW * 2.2} strokeLinecap="butt" />
+      {/* Cánh cửa mở 90° */}
+      <line x1={hx} y1={hy} x2={lx} y2={ly} stroke={mau} strokeWidth={strokeW * 1.4} strokeLinecap="round" />
+      {/* Cung mở cửa 90° */}
+      <path d={`M ${lx} ${ly} A ${banKinh} ${banKinh} 0 0 ${sweep} ${ex} ${ey}`} fill="none" stroke={mau} strokeWidth={strokeW * 0.9} strokeDasharray={`${strokeW * 2} ${strokeW * 1.5}`} />
+    </g>
+  );
+}
+
 export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam" | "nu"; moc_nam?: string } | null }) {
-  const { c, en } = useChuPT();
+  const { c, en, huong: tenHuong } = useChuPT();
   const hoSo = useHoSoNha();
   const huongNha = hoSo?.huong_do ?? null;
 
@@ -61,16 +127,27 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
   const [soTang, setSoTang] = useState(1);
   const [tang, setTang] = useState(1);
   const [doTang, setDoTang] = useState<Record<number, TangDo>>({});
+  const [lichSu, setLichSu] = useState<Record<number, TangDo>[]>([]);
   const [truc, setTruc] = useState<number[] | null>(null);
   const [khung, setKhung] = useState<{ rong: number; sau: number; luoi: boolean[][] | null }>({ rong: 5, sau: 15, luoi: null });
   const [dangDat, setDangDat] = useState<LoaiVat>("cua_chinh");
+  const [dangChon, setDangChon] = useState<LoaiVat | null>(null);
   const [boLuoi, setBoLuoi] = useState(false);
+  const [hienCuuCung, setHienCuuCung] = useState(true);
+  const [xacNhanDauHieu, setXacNhanDauHieu] = useState<Set<string>>(new Set());
   const [du18, setDu18] = useState(false);
   const [kq, setKq] = useState<ViTriKq | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dangTinh, setDangTinh] = useState(false);
   const [daLuu, setDaLuu] = useState(false);
   const daNap = useRef(false);
+
+  // Kéo dời / kéo giãn phòng trên SVG
+  const keoRef = useRef<
+    | { loai: LoaiVat; kieu: "move"; dx: number; dy: number; daLuuUndo: boolean }
+    | { loai: LoaiVat; kieu: "resize"; x0: number; y0: number; daLuuUndo: boolean }
+    | null
+  >(null);
 
   // la bàn
   const [bat, setBat] = useState(false);
@@ -106,6 +183,21 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
   }, [hoSo]);
 
   useEffect(() => () => huy.current?.(), []);
+
+  const dayUndo = useCallback((banCu: Record<number, TangDo>) => {
+    setLichSu((s) => [...s.slice(-14), banCu]);
+  }, []);
+
+  const hoanTac = () => {
+    setLichSu((s) => {
+      if (!s.length) return s;
+      const cuoi = s[s.length - 1]!;
+      setDoTang(cuoi);
+      setKq(null);
+      setDaLuu(false);
+      return s.slice(0, -1);
+    });
+  };
 
   const batLaBan = useCallback(async () => {
     setLoi(null);
@@ -146,7 +238,10 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
       const mau = thuGon(ds.map((d) => Math.round(d * 10) / 10));
       setKq(null); setDaLuu(false);
       if (cho === "truc") setTruc(mau);
-      else setDoTang((cu) => ({ ...cu, [tang]: { ...(cu[tang] ?? {}), [cho]: { mau, ...(saiSo.current != null ? { sai_so: saiSo.current } : {}) } } }));
+      else setDoTang((cu) => {
+        dayUndo(cu);
+        return { ...cu, [tang]: { ...(cu[tang] ?? {}), [cho]: { mau, ...(saiSo.current != null ? { sai_so: saiSo.current } : {}) } } };
+      });
       try { navigator.vibrate?.(30); } catch { /* không hỗ trợ */ }
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "vi_tri_ghi", cho, cach: "la_ban" });
     }, THOI_GIAN_GHI);
@@ -154,17 +249,56 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
 
   const xoaVat = (l: LoaiVat) => {
     setKq(null); setDaLuu(false);
-    setDoTang((cu) => { const t = { ...(cu[tang] ?? {}) }; delete t[l]; return { ...cu, [tang]: t }; });
+    setDoTang((cu) => {
+      dayUndo(cu);
+      const t = { ...(cu[tang] ?? {}) };
+      delete t[l];
+      return { ...cu, [tang]: t };
+    });
+    if (dangChon === l) setDangChon(null);
+    setDangDat(l);
   };
 
-  // ---- khung tỉ lệ
+  const xoaTangHienTai = () => {
+    if (!Object.keys(doTang[tang] ?? {}).length) return;
+    setKq(null); setDaLuu(false);
+    setDoTang((cu) => {
+      dayUndo(cu);
+      return { ...cu, [tang]: {} };
+    });
+    setDangChon(null);
+    setDangDat(VAT_TANG(tang)[0]!);
+  };
+
+  const capNhatVatKhung = (l: LoaiVat, sua: (cu: DoVat) => DoVat, coUndo = true) => {
+    setKq(null); setDaLuu(false);
+    setDoTang((cu) => {
+      const vCu = cu[tang]?.[l];
+      if (!vCu) return cu;
+      if (coUndo) dayUndo(cu);
+      return { ...cu, [tang]: { ...(cu[tang] ?? {}), [l]: sua(vCu) } };
+    });
+  };
+
+  // ---- khung tỉ lệ Mini-CAD
   const svgRef = useRef<SVGSVGElement>(null);
-  const datDiem = (ev: React.PointerEvent<SVGSVGElement>) => {
+  const toaDoSvg = (ev: React.PointerEvent<SVGElement>) => {
     const svg = svgRef.current;
     const m = svg?.getScreenCTM();
-    if (!svg || !m) return;
+    if (!svg || !m) return null;
     const p = new DOMPoint(ev.clientX, ev.clientY).matrixTransform(m.inverse());
-    const x = Math.min(1, Math.max(0, p.x / khung.rong)), y = Math.min(1, Math.max(0, p.y / khung.sau));
+    return {
+      mx: Math.min(khung.rong, Math.max(0, p.x)),
+      my: Math.min(khung.sau, Math.max(0, p.y)),
+      x: Math.min(1, Math.max(0, p.x / khung.rong)),
+      y: Math.min(1, Math.max(0, p.y / khung.sau)),
+    };
+  };
+
+  const datDiem = (ev: React.PointerEvent<SVGSVGElement>) => {
+    const pt = toaDoSvg(ev);
+    if (!pt) return;
+    const { x, y } = pt;
     if (boLuoi) {
       const r = Math.min(LUOI_N - 1, Math.floor(y * LUOI_N)), col = Math.min(LUOI_N - 1, Math.floor(x * LUOI_N));
       setKhung((k) => {
@@ -175,12 +309,72 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
       setKq(null);
       return;
     }
+    const diem: [number, number] = [Math.round(x * 1000) / 1000, Math.round(y * 1000) / 1000];
     setKq(null); setDaLuu(false);
-    setDoTang((cu) => ({ ...cu, [tang]: { ...(cu[tang] ?? {}), [dangDat]: { diem: [Math.round(x * 1000) / 1000, Math.round(y * 1000) / 1000] } } }));
+    const vCu = doTang[tang]?.[dangDat];
+    const kt = vCu?.kich_thuoc ?? kichThuocMacDinh(dangDat, khung.rong, khung.sau);
+    const hc = vCu?.huong_cua ?? huongCuaMacDinh(dangDat, diem);
+    setDoTang((cu) => {
+      dayUndo(cu);
+      return { ...cu, [tang]: { ...(cu[tang] ?? {}), [dangDat]: { ...vCu, diem, kich_thuoc: kt, huong_cua: hc } } };
+    });
+    setDangChon(dangDat);
     ghi("chart_interacted", { mo_dun: "phongthuy", kind: "vi_tri_ghi", cho: dangDat, cach: "khung" });
     const ds = VAT_TANG(tang);
     const tiep = ds[ds.indexOf(dangDat) + 1];
     if (tiep && !doTang[tang]?.[tiep]) setDangDat(tiep);
+  };
+
+  const batDauKeo = (ev: React.PointerEvent<SVGGElement>, loai: LoaiVat, hop: HopPhongKhung) => {
+    // Nếu đang ở chế độ bỏ ô chữ L hoặc đang cầm 1 vật CHƯA ĐẶT trên sàn → để sự kiện nổi lên SVG đặt vật mới ngay tại chỗ chạm.
+    if (boLuoi || !doHienTai[dangDat]?.diem) return;
+    ev.stopPropagation();
+    const pt = toaDoSvg(ev);
+    if (!pt) return;
+    setDangChon(loai);
+    setDangDat(loai);
+    keoRef.current = { loai, kieu: "move", dx: pt.mx - hop.cx, dy: pt.my - hop.cy, daLuuUndo: false };
+    try { svgRef.current?.setPointerCapture(ev.pointerId); } catch { /* bỏ qua */ }
+  };
+
+  const batDauResize = (ev: React.PointerEvent<SVGRectElement>, loai: LoaiVat, hop: HopPhongKhung) => {
+    if (boLuoi) return;
+    ev.stopPropagation();
+    setDangChon(loai);
+    setDangDat(loai);
+    keoRef.current = { loai, kieu: "resize", x0: hop.x0, y0: hop.y0, daLuuUndo: false };
+    try { svgRef.current?.setPointerCapture(ev.pointerId); } catch { /* bỏ qua */ }
+  };
+
+  const diChuyenKeo = (ev: React.PointerEvent<SVGSVGElement>) => {
+    const k = keoRef.current;
+    if (!k) return;
+    const pt = toaDoSvg(ev);
+    if (!pt) return;
+    if (k.kieu === "move") {
+      const nx = Math.min(1, Math.max(0, (pt.mx - k.dx) / khung.rong));
+      const ny = Math.min(1, Math.max(0, (pt.my - k.dy) / khung.sau));
+      const diem: [number, number] = [Math.round(nx * 1000) / 1000, Math.round(ny * 1000) / 1000];
+      capNhatVatKhung(k.loai, (v) => ({ ...v, diem }), !k.daLuuUndo);
+      k.daLuuUndo = true;
+    } else {
+      const nw = Math.round(Math.min(khung.rong, Math.max(0.6, pt.mx - k.x0)) * 10) / 10;
+      const nh = Math.round(Math.min(khung.sau, Math.max(0.5, pt.my - k.y0)) * 10) / 10;
+      const nx = Math.min(1, Math.max(0, (k.x0 + nw / 2) / khung.rong));
+      const ny = Math.min(1, Math.max(0, (k.y0 + nh / 2) / khung.sau));
+      capNhatVatKhung(
+        k.loai,
+        (v) => ({ ...v, kich_thuoc: [nw, nh], diem: [Math.round(nx * 1000) / 1000, Math.round(ny * 1000) / 1000] }),
+        !k.daLuuUndo,
+      );
+      k.daLuuUndo = true;
+    }
+  };
+
+  const ketThucKeo = (ev: React.PointerEvent<SVGSVGElement>) => {
+    if (!keoRef.current) return;
+    keoRef.current = null;
+    try { svgRef.current?.releasePointerCapture(ev.pointerId); } catch { /* bỏ qua */ }
   };
 
   const luoiGui = useMemo(() => {
@@ -189,6 +383,23 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
   }, [khung.luoi]);
 
   const coGi = Object.values(doTang).some((t) => Object.keys(t).length > 0);
+  const doHienTai = doTang[tang] ?? {};
+
+  const hopCacPhong = useMemo(() => {
+    return (Object.entries(doHienTai) as [LoaiVat, DoVat][])
+      .filter(([, v]) => v.diem)
+      .map(([loai, v]) => ({
+        loai,
+        hop: tinhHopPhong(loai, v.diem!, khung.rong, khung.sau, v.kich_thuoc, v.huong_cua),
+      }));
+  }, [doHienTai, khung.rong, khung.sau]);
+
+  const dauHieuPhatHien = useMemo(
+    () => (cheDo === "khung" ? suyDauHieuTuKhung(doHienTai, khung.rong, khung.sau, khung.luoi) : []),
+    [cheDo, doHienTai, khung.rong, khung.sau, khung.luoi],
+  );
+
+  const tamNha = useMemo(() => tamNhaKhung(khung.luoi), [khung.luoi]);
 
   const xem = async () => {
     setDangTinh(true); setLoi(null);
@@ -223,13 +434,24 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
     const t1 = kq?.tang.find((t) => t.so === 1);
     const viTri: Record<string, string> = {};
     for (const v of t1?.vat ?? []) if (v.loai !== "cau_thang") viTri[v.loai] = v.phuong;
+    // Chỉ lưu các dấu hiệu phát hiện trên sơ đồ mà người dùng ĐÃ TỰ TÍCH xác nhận (không tự ý ghi đè bộ luật).
+    const daXacNhan = dauHieuPhatHien.filter((m) => xacNhanDauHieu.has(m));
+    const dauHieuMoi = daXacNhan.length ? [...new Set([...(hoSo?.bo_cuc?.dau_hieu ?? []), ...daXacNhan])] : [];
     try {
       luuHoSoNha({
         tang_do: Object.entries(doTang).filter(([so, t]) => Number(so) <= soTang && Object.keys(t).length)
           .map(([so, t]) => ({ so: Number(so), vat: t })),
         ...(truc ? { truc_mau: truc } : {}),
         khung: { rong: khung.rong, sau: khung.sau, ...(luoiGui ? { luoi: luoiGui } : {}) },
-        ...(Object.keys(viTri).length ? { bo_cuc: { ...(hoSo?.bo_cuc ?? {}), vi_tri: { ...(hoSo?.bo_cuc?.vi_tri ?? {}), ...viTri } } } : {}),
+        ...(Object.keys(viTri).length || dauHieuMoi.length
+          ? {
+              bo_cuc: {
+                ...(hoSo?.bo_cuc ?? {}),
+                ...(Object.keys(viTri).length ? { vi_tri: { ...(hoSo?.bo_cuc?.vi_tri ?? {}), ...viTri } } : {}),
+                ...(dauHieuMoi.length ? { dau_hieu: dauHieuMoi } : {}),
+              },
+            }
+          : {}),
       });
       setDaLuu(true);
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "vi_tri_luu" });
@@ -238,9 +460,14 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
 
   const tenKq = tenTheo(kq?.ten_hien, en);
   const vatTang = VAT_TANG(tang);
-  const doHienTai = doTang[tang] ?? {};
   const rung = doRung(mauSong.current);
   const mucRung = rung <= 3 ? "on_dinh" : rung <= 8 ? "hoi_rung" : "nhieu";
+
+  const chonHienTai = dangChon && doHienTai[dangChon]?.diem ? dangChon : null;
+  const hopChon = chonHienTai ? hopCacPhong.find((x) => x.loai === chonHienTai)?.hop ?? null : null;
+  const huongCuaLaBan = hopChon ? doLaBanCua(hopChon.huongCua, huongNha) : null;
+  const donViSvg = Math.max(khung.rong, khung.sau);
+  const strokeCoBan = donViSvg / 180;
 
   return (
     <section id="vi-tri-vat" aria-labelledby="vi-tri-vat-ten" data-testid="vi-tri-vat" className="glass rounded-2xl p-5 sm:p-6">
@@ -263,13 +490,13 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
         <Layers className="size-3.5 text-gold" aria-hidden />
         {Array.from({ length: soTang }, (_, i) => i + 1).map((so) => (
           <button key={so} type="button" role="tab" aria-selected={tang === so} data-testid={`vi-tri-tang-${so}`}
-            onClick={() => { setTang(so); setDangDat(VAT_TANG(so)[0]!); }}
+            onClick={() => { setTang(so); setDangDat(VAT_TANG(so)[0]!); setDangChon(null); }}
             className={cn("min-h-[36px] rounded-full border px-3 py-1", tang === so ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg")}>
             {c("dv.tang", { so: String(so) })}
           </button>
         ))}
         {soTang < 6 && (
-          <button type="button" data-testid="vi-tri-them-tang" onClick={() => { setSoTang(soTang + 1); setTang(soTang + 1); setDangDat("cau_thang"); }}
+          <button type="button" data-testid="vi-tri-them-tang" onClick={() => { setSoTang(soTang + 1); setTang(soTang + 1); setDangDat("cau_thang"); setDangChon(null); }}
             className="inline-flex min-h-[36px] items-center gap-1 rounded-full border border-dashed border-line px-3 py-1 text-fg-muted hover:text-fg">
             <Plus className="size-3.5" aria-hidden /> {c("dv.them_tang")}
           </button>
@@ -327,6 +554,8 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
         <div className="mt-4 space-y-3">
           {huongNha == null && <p className="rounded-xl border border-line/70 bg-surface/40 p-3 text-sm text-fg-muted" data-testid="vi-tri-can-huong">{c("dv.can_huong")}</p>}
           <p className="text-xs text-fg-muted">{c("dv.khung_hd")}</p>
+
+          {/* Thanh kích thước & tùy chọn mặt bằng */}
           <div className="flex flex-wrap items-end gap-3 text-sm">
             {(["rong", "sau"] as const).map((k) => (
               <label key={k} className="flex flex-col gap-1 text-xs text-fg-muted">
@@ -340,49 +569,265 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
               <input type="checkbox" checked={boLuoi} onChange={(e) => setBoLuoi(e.target.checked)} data-testid="vi-tri-bo-luoi" />
               {c("dv.khong_vuong")}
             </label>
+            <button type="button" aria-pressed={hienCuuCung} data-testid="vi-tri-luoi-cuu-cung" onClick={() => setHienCuuCung((x) => !x)}
+              className={cn("inline-flex min-h-[36px] items-center gap-1.5 rounded-full border px-3 py-1 text-xs",
+                hienCuuCung ? "border-gold/60 bg-gold/10 text-gold" : "border-line text-fg-muted hover:text-fg")}>
+              <Crosshair className="size-3.5" aria-hidden /> {c("dv.luoi_cuu_cung")}
+            </button>
           </div>
-          <div className="flex flex-wrap items-center gap-1.5 text-xs">
-            <span className="text-fg-muted">{c("dv.dang_dat")}</span>
-            {vatTang.map((l) => (
-              <button key={l} type="button" aria-pressed={dangDat === l && !boLuoi} data-testid={`vi-tri-dat-${l}`}
-                onClick={() => { setDangDat(l); setBoLuoi(false); }}
-                className={cn("min-h-[36px] rounded-full border px-2.5 py-1", dangDat === l && !boLuoi ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg",
-                  doHienTai[l] && "font-medium")}>
-                {c(`dv.ten.${l}`)}{doHienTai[l] ? " ✓" : ""}
+
+          {/* Thanh chọn phòng + nút Xoá nhanh từng phòng + Hoàn tác / Xoá tầng */}
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="text-fg-muted">{c("dv.dang_dat")}</span>
+              {vatTang.map((l) => {
+                const daDat = Boolean(doHienTai[l]?.diem);
+                const dangActive = dangDat === l && !boLuoi;
+                return (
+                  <span key={l} className={cn(
+                    "inline-flex min-h-[36px] items-center rounded-full border transition-colors",
+                    dangActive ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg",
+                    daDat && "font-medium",
+                  )}>
+                    <button type="button" aria-pressed={dangActive} data-testid={`vi-tri-dat-${l}`}
+                      onClick={() => { setDangDat(l); setBoLuoi(false); if (daDat) setDangChon(l); }}
+                      className="inline-flex min-h-[34px] items-center gap-1.5 px-2.5 py-1">
+                      <span className="size-2 rounded-sm" style={{ backgroundColor: MAU_PHONG[l].stroke }} aria-hidden />
+                      {c(`dv.ten.${l}`)}{daDat ? " ✓" : ""}
+                    </button>
+                    {daDat && (
+                      <button type="button" data-testid={`vi-tri-xoa-chip-${l}`} onClick={() => xoaVat(l)}
+                        aria-label={`${c("dv.xoa")} ${c(`dv.ten.${l}`)}`}
+                        className="mr-1 inline-flex size-6 items-center justify-center rounded-full text-fg-faint hover:bg-surface/80 hover:text-fg">
+                        <X className="size-3.5" aria-hidden />
+                      </button>
+                    )}
+                  </span>
+                );
+              })}
+            </div>
+            <div className="flex items-center gap-1.5">
+              <button type="button" disabled={!lichSu.length} onClick={hoanTac} data-testid="vi-tri-hoan-tac"
+                className="inline-flex min-h-[34px] items-center gap-1 rounded-full border border-line px-2.5 py-1 text-xs text-fg-muted hover:text-fg disabled:opacity-40">
+                <Undo2 className="size-3.5" aria-hidden /> {c("dv.hoan_tac")}
               </button>
-            ))}
+              <button type="button" disabled={!Object.keys(doHienTai).length} onClick={xoaTangHienTai} data-testid="vi-tri-xoa-tang"
+                className="inline-flex min-h-[34px] items-center gap-1 rounded-full border border-line px-2.5 py-1 text-xs text-fg-muted hover:text-fg disabled:opacity-40">
+                <Trash2 className="size-3.5" aria-hidden /> {c("dv.xoa_tang")}
+              </button>
+            </div>
           </div>
-          <div className="mx-auto w-full max-w-md">
-            <p className="text-center text-[11px] uppercase tracking-wide text-gold">{c("dv.mat_truoc")}{huongNha != null ? ` · ${Math.round(huongNha)}°` : ""}</p>
+
+          <p className="text-[11px] text-fg-faint">{c("dv.meo_keo")}</p>
+
+          {/* Bản vẽ mặt bằng tỉ lệ tương tác (Mini-CAD Blueprint) */}
+          <div className="mx-auto w-full max-w-lg rounded-2xl border border-line/60 bg-bg/50 p-3 sm:p-4">
+            <p className="mb-1.5 text-center text-[11px] font-medium uppercase tracking-wider text-gold">
+              ▲ {c("dv.mat_truoc")}{huongNha != null ? ` · ${Math.round(huongNha)}°` : ""} · {khung.rong}m × {khung.sau}m
+            </p>
             <svg ref={svgRef} viewBox={`0 0 ${khung.rong} ${khung.sau}`} preserveAspectRatio="xMidYMid meet" data-testid="vi-tri-khung"
-              className="mx-auto block touch-none select-none"
-              style={{ aspectRatio: `${khung.rong} / ${khung.sau}`, width: `min(100%, calc(60vh * ${khung.rong / khung.sau}))` }}
-              onPointerDown={datDiem} role="group" aria-label={c("dv.khung_hd")}>
-              <rect x={0} y={0} width={khung.rong} height={khung.sau} fill="rgb(var(--surface) / 0.5)" stroke="rgb(var(--gold) / 0.7)" strokeWidth={Math.max(khung.rong, khung.sau) / 150} />
+              className="mx-auto block touch-none select-none overflow-visible"
+              style={{ aspectRatio: `${khung.rong} / ${khung.sau}`, width: `min(100%, calc(62vh * ${khung.rong / khung.sau}))` }}
+              onPointerDown={datDiem}
+              onPointerMove={diChuyenKeo}
+              onPointerUp={ketThucKeo}
+              onPointerCancel={ketThucKeo}
+              role="group" aria-label={c("dv.khung_hd")}>
+              <defs>
+                <pattern id="luoi-1m" width="1" height="1" patternUnits="userSpaceOnUse">
+                  <path d="M 1 0 L 0 0 0 1" fill="none" stroke="rgb(var(--line) / 0.25)" strokeWidth={strokeCoBan * 0.45} />
+                </pattern>
+              </defs>
+
+              {/* Nền mặt bằng & lưới 1m */}
+              <rect x={0} y={0} width={khung.rong} height={khung.sau} fill="rgb(var(--surface) / 0.55)" />
+              <rect x={0} y={0} width={khung.rong} height={khung.sau} fill="url(#luoi-1m)" pointerEvents="none" />
+
+              {/* Các ô khuyết (nhà chữ L) */}
               {khung.luoi && khung.luoi.map((row, i) => row.map((v, j) => !v ? (
                 <rect key={`${i}-${j}`} x={(j * khung.rong) / LUOI_N} y={(i * khung.sau) / LUOI_N} width={khung.rong / LUOI_N} height={khung.sau / LUOI_N}
-                  fill="rgb(var(--bg))" stroke="rgb(var(--line) / 0.5)" strokeWidth={Math.max(khung.rong, khung.sau) / 300} />
+                  fill="rgb(var(--bg))" stroke="rgb(var(--line) / 0.5)" strokeWidth={strokeCoBan * 0.6} />
               ) : null))}
+
+              {/* Lưới 4×4 khi đang bỏ phần không xây */}
               {boLuoi && Array.from({ length: LUOI_N - 1 }, (_, i) => i + 1).map((i) => (
-                <g key={i} stroke="rgb(var(--line) / 0.7)" strokeWidth={Math.max(khung.rong, khung.sau) / 300} strokeDasharray="0.3 0.3">
+                <g key={i} stroke="rgb(var(--gold) / 0.45)" strokeWidth={strokeCoBan * 0.7} strokeDasharray={`${strokeCoBan * 3} ${strokeCoBan * 2}`} pointerEvents="none">
                   <line x1={(i * khung.rong) / LUOI_N} y1={0} x2={(i * khung.rong) / LUOI_N} y2={khung.sau} />
                   <line x1={0} y1={(i * khung.sau) / LUOI_N} x2={khung.rong} y2={(i * khung.sau) / LUOI_N} />
                 </g>
               ))}
-              {(Object.entries(doHienTai) as [LoaiVat, DoVat][]).filter(([, v]) => v.diem).map(([l, v]) => {
-                const nho = Math.min(khung.rong, khung.sau), r = nho / 16;
-                const x = v.diem![0], y = v.diem![1];
-                const neo = x < 0.34 ? "start" : x > 0.66 ? "end" : "middle";
+
+              {/* Lớp Tâm nhà & 8 phương / Trung cung */}
+              {hienCuuCung && (
+                <g pointerEvents="none" opacity={0.65}>
+                  {/* Vùng 1/3 Trung cung */}
+                  <rect x={khung.rong / 3} y={khung.sau / 3} width={khung.rong / 3} height={khung.sau / 3}
+                    fill="rgb(var(--gold) / 0.04)" stroke="rgb(var(--gold) / 0.3)" strokeWidth={strokeCoBan * 0.55} strokeDasharray={`${strokeCoBan * 2.5} ${strokeCoBan * 2.5}`} />
+                  {/* 8 tia chia 8 phương từ Tâm nhà */}
+                  {[22.5, 67.5, 112.5, 157.5, 202.5, 247.5, 292.5, 337.5].map((deg) => {
+                    const rad = (deg * Math.PI) / 180;
+                    const tx = tamNha[0] * khung.rong, ty = tamNha[1] * khung.sau;
+                    const R = donViSvg * 1.1;
+                    return (
+                      <line key={deg} x1={tx} y1={ty} x2={tx + Math.sin(rad) * R} y2={ty - Math.cos(rad) * R}
+                        stroke="rgb(var(--gold) / 0.18)" strokeWidth={strokeCoBan * 0.45} clipPath="url(#bien-nha)" />
+                    );
+                  })}
+                  <clipPath id="bien-nha"><rect x={0} y={0} width={khung.rong} height={khung.sau} /></clipPath>
+                  {/* Tâm nhà */}
+                  <circle cx={tamNha[0] * khung.rong} cy={tamNha[1] * khung.sau} r={strokeCoBan * 2.2} fill="none" stroke="rgb(var(--gold) / 0.75)" strokeWidth={strokeCoBan * 0.7} />
+                  <circle cx={tamNha[0] * khung.rong} cy={tamNha[1] * khung.sau} r={strokeCoBan * 0.7} fill="rgb(var(--gold))" />
+                </g>
+              )}
+
+              {/* Đường bao tường nhà */}
+              <rect x={0} y={0} width={khung.rong} height={khung.sau} fill="none" stroke="rgb(var(--gold) / 0.75)" strokeWidth={strokeCoBan * 1.2} pointerEvents="none" />
+
+              {/* Các hộp phòng / vật dụng + ký hiệu mở cửa + tay kéo chỉnh kích thước */}
+              {hopCacPhong.map(({ loai, hop }) => {
+                const mau = MAU_PHONG[loai];
+                const isSelected = chonHienTai === loai;
+                const fontSize = Math.max(0.28, Math.min(0.62, Math.min(hop.w * 0.24, hop.h * 0.32, donViSvg / 24)));
+                const handleSize = Math.max(0.26, Math.min(0.5, donViSvg / 32));
+                const nhanNgan = c(`dv.tat.${loai}`);
+                const hienKt = hop.h >= fontSize * 2.6 && hop.w >= fontSize * 3.2;
                 return (
-                  <g key={l}>
-                    <circle cx={x * khung.rong} cy={y * khung.sau} r={r} fill="rgb(var(--gold))" />
-                    <text x={x * khung.rong} y={y * khung.sau + (y < 0.1 ? r * 3 : -r * 1.6)} textAnchor={neo} fontSize={nho / 9}
-                      fill="rgb(var(--fg))">{c(`dv.ten.${l}`)}</text>
+                  <g key={loai} data-testid={`vi-tri-hop-${loai}`}
+                    className={cn(!boLuoi && "cursor-grab active:cursor-grabbing")}
+                    onPointerDown={(e) => batDauKeo(e, loai, hop)}>
+                    {/* Khung phòng */}
+                    <rect x={hop.x0} y={hop.y0} width={hop.w} height={hop.h} rx={strokeCoBan * 1.5}
+                      fill={mau.fill}
+                      stroke={isSelected ? "#facc15" : mau.stroke}
+                      strokeWidth={isSelected ? strokeCoBan * 1.6 : strokeCoBan * 0.95} />
+                    {/* Ký hiệu cửa & cung mở cửa 90° */}
+                    <KyHieuCua hop={hop} mau={mau.door} strokeW={strokeCoBan} />
+                    {/* Tên phòng & kích thước căn giữa gọn trong hộp (không đè chữ) */}
+                    <text x={hop.cx} y={hienKt ? hop.cy - fontSize * 0.25 : hop.cy + fontSize * 0.34}
+                      textAnchor="middle" fontSize={fontSize} fontWeight={600}
+                      fill="rgb(var(--fg))" pointerEvents="none"
+                      style={{ paintOrder: "stroke", stroke: "rgb(var(--bg) / 0.85)", strokeWidth: fontSize * 0.22 }}>
+                      {nhanNgan}
+                    </text>
+                    {hienKt && (
+                      <text x={hop.cx} y={hop.cy + fontSize * 0.95}
+                        textAnchor="middle" fontSize={fontSize * 0.68}
+                        fill="rgb(var(--fg-muted))" pointerEvents="none">
+                        {hop.w}×{hop.h}m
+                      </text>
+                    )}
+                    {/* Tay nắm kéo chỉnh kích thước ở góc phải-dưới khi đang chọn (kèm vùng chạm rộng hơn cho mobile) */}
+                    {isSelected && !boLuoi && (
+                      <g>
+                        <rect
+                          x={hop.x0 + hop.w - handleSize * 1.1}
+                          y={hop.y0 + hop.h - handleSize * 1.1}
+                          width={handleSize * 2.2}
+                          height={handleSize * 2.2}
+                          fill="transparent"
+                          className="cursor-nwse-resize"
+                          data-testid={`vi-tri-resize-${loai}`}
+                          onPointerDown={(e) => batDauResize(e, loai, hop)}
+                        />
+                        <rect
+                          x={hop.x0 + hop.w - handleSize / 2}
+                          y={hop.y0 + hop.h - handleSize / 2}
+                          width={handleSize}
+                          height={handleSize}
+                          rx={handleSize * 0.2}
+                          fill="#facc15"
+                          stroke="rgb(var(--bg))"
+                          strokeWidth={strokeCoBan * 0.6}
+                          pointerEvents="none"
+                        />
+                      </g>
+                    )}
                   </g>
                 );
               })}
             </svg>
           </div>
+
+          {/* Thanh điều chỉnh phòng đang chọn: Xoay hướng cửa, Chỉnh Rộng × Sâu, Xoá */}
+          {chonHienTai && hopChon && (
+            <div data-testid="vi-tri-chinh-phong" className="rounded-xl border border-gold/40 bg-surface/60 p-3 text-xs">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="size-2.5 rounded-sm" style={{ backgroundColor: MAU_PHONG[chonHienTai].stroke }} aria-hidden />
+                  <span className="font-medium text-fg">{c(`dv.ten.${chonHienTai}`)}</span>
+                  <span className="rounded-full border border-line bg-bg/50 px-2 py-0.5 text-fg-muted" data-testid="vi-tri-huong-cua-nhan">
+                    {c("dv.cua_mo", { huong: c(`dv.cua_huong.${hopChon.huongCua}`) })}
+                    {huongCuaLaBan?.do != null && huongCuaLaBan.phuong ? ` · ${huongCuaLaBan.do}° (${tenHuong(huongCuaLaBan.phuong)})` : ""}
+                  </span>
+                </div>
+                <button type="button" data-testid="vi-tri-xoa-chon" onClick={() => xoaVat(chonHienTai)}
+                  className="inline-flex min-h-[32px] items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:border-red-400/60 hover:text-fg">
+                  <Trash2 className="size-3.5" aria-hidden /> {c("dv.xoa")}
+                </button>
+              </div>
+              <div className="mt-2.5 flex flex-wrap items-center gap-2.5">
+                <button type="button" data-testid="vi-tri-xoay-cua"
+                  onClick={() => capNhatVatKhung(chonHienTai, (v) => ({ ...v, huong_cua: xoayHuongCua(hopChon.huongCua) }))}
+                  className="inline-flex min-h-[36px] items-center gap-1.5 rounded-full border border-gold/60 bg-gold/15 px-3 py-1 font-medium text-gold hover:bg-gold/25">
+                  <RotateCw className="size-3.5" aria-hidden /> {c("dv.xoay_cua")}
+                </button>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-fg-muted">{c("dv.kich_thuoc_phong")}</span>
+                  <span className="inline-flex items-center gap-1 rounded-full border border-line bg-bg/40 px-1.5 py-0.5">
+                    <button type="button" aria-label={`− ${c("dv.rong")}`} data-testid="vi-tri-phong-rong-giam"
+                      onClick={() => capNhatVatKhung(chonHienTai, (v) => ({ ...v, kich_thuoc: [Math.max(0.5, Math.round((hopChon.w - 0.5) * 10) / 10), hopChon.h] }))}
+                      className="inline-flex size-6 items-center justify-center rounded-full hover:bg-surface"><Minus className="size-3" /></button>
+                    <span className="min-w-[3.2rem] text-center font-medium text-fg" data-testid="vi-tri-phong-rong">{hopChon.w}m</span>
+                    <button type="button" aria-label={`+ ${c("dv.rong")}`} data-testid="vi-tri-phong-rong-tang"
+                      onClick={() => capNhatVatKhung(chonHienTai, (v) => ({ ...v, kich_thuoc: [Math.min(khung.rong, Math.round((hopChon.w + 0.5) * 10) / 10), hopChon.h] }))}
+                      className="inline-flex size-6 items-center justify-center rounded-full hover:bg-surface"><Plus className="size-3" /></button>
+                  </span>
+                  <span className="text-fg-faint">×</span>
+                  <span className="inline-flex items-center gap-1 rounded-full border border-line bg-bg/40 px-1.5 py-0.5">
+                    <button type="button" aria-label={`− ${c("dv.sau")}`} data-testid="vi-tri-phong-sau-giam"
+                      onClick={() => capNhatVatKhung(chonHienTai, (v) => ({ ...v, kich_thuoc: [hopChon.w, Math.max(0.5, Math.round((hopChon.h - 0.5) * 10) / 10)] }))}
+                      className="inline-flex size-6 items-center justify-center rounded-full hover:bg-surface"><Minus className="size-3" /></button>
+                    <span className="min-w-[3.2rem] text-center font-medium text-fg" data-testid="vi-tri-phong-sau">{hopChon.h}m</span>
+                    <button type="button" aria-label={`+ ${c("dv.sau")}`} data-testid="vi-tri-phong-sau-tang"
+                      onClick={() => capNhatVatKhung(chonHienTai, (v) => ({ ...v, kich_thuoc: [hopChon.w, Math.min(khung.sau, Math.round((hopChon.h + 0.5) * 10) / 10)] }))}
+                      className="inline-flex size-6 items-center justify-center rounded-full hover:bg-surface"><Plus className="size-3" /></button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Gợi ý dấu hiệu từ sơ đồ khung phòng & hướng cửa (người dùng tự tích mới xác nhận) */}
+          {dauHieuPhatHien.length > 0 && (
+            <div data-testid="vi-tri-phat-hien" className="rounded-xl border border-gold/30 bg-gold/5 p-3 text-xs">
+              <p className="flex items-center gap-1.5 font-medium text-gold">
+                <AlertTriangle className="size-3.5" aria-hidden /> {c("dv.phat_hien")}
+              </p>
+              <ul className="mt-1.5 space-y-1.5 text-fg-muted">
+                {dauHieuPhatHien.map((ma) => (
+                  <li key={ma}>
+                    <label className="inline-flex cursor-pointer items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={xacNhanDauHieu.has(ma)}
+                        data-testid={`vi-tri-xn-${ma}`}
+                        onChange={(e) =>
+                          setXacNhanDauHieu((s) => {
+                            const n = new Set(s);
+                            if (e.target.checked) n.add(ma);
+                            else n.delete(ma);
+                            return n;
+                          })
+                        }
+                        className="size-3.5 accent-[rgb(var(--gold))]"
+                      />
+                      <span>{c(`dv.dh.${ma}`)}</span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       )}
 
@@ -439,4 +884,3 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
     </section>
   );
 }
-
