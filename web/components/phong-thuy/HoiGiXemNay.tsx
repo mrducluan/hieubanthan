@@ -644,14 +644,25 @@ export function HoiGiXemNay({
             </Button>
           )}
           {chon === "bo_cuc" && (
-            <a
-              href="#vi-tri-vat"
-              data-testid="hoi-gi-do-vi-tri-vat"
-              className="inline-flex h-8 items-center gap-1.5 rounded-full border border-gold/50 bg-gold/10 px-3 text-xs font-medium text-gold hover:bg-gold/20"
-            >
-              <Smartphone className="size-3.5" aria-hidden />
-              {en ? "Stand in center & point phone" : "Đứng giữa nhà, chĩa điện thoại"}
-            </a>
+            <>
+              <a
+                href="#vi-tri-vat"
+                data-testid="hoi-gi-do-vi-tri-vat"
+                className="inline-flex h-8 items-center gap-1.5 rounded-full border border-gold/50 bg-gold/10 px-3 text-xs font-medium text-gold hover:bg-gold/20"
+              >
+                <Smartphone className="size-3.5" aria-hidden />
+                {en ? "Stand in center & point phone" : "Đứng giữa nhà, chĩa điện thoại"}
+              </a>
+              {!en && (
+                <a
+                  href="#doc-anh-nha"
+                  data-testid="hoi-gi-doc-anh-nha"
+                  className="inline-flex h-8 items-center gap-1.5 rounded-full border border-line bg-surface/60 px-3 text-xs font-medium text-fg hover:border-gold/50"
+                >
+                  Để máy đọc 1–6 ảnh góc nhà
+                </a>
+              )}
+            </>
           )}
           {onHoiTiep && (
             <Button
