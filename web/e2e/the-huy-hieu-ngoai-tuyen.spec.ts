@@ -88,7 +88,8 @@ test("Bản thân: huy hiệu đã đạt có nút Chia sẻ → link /the/huy-h
   const tu = url.searchParams.get("tu")!;
   expect(tu).toMatch(/^hh\.[0-9a-f]{10}$/);
   expect(url.searchParams.get("gt")).toBeNull();   // chưa đăng nhập → không mã mời
-  for (const s of ["1990", "Luân", "17/5"]) expect(chep).not.toContain(s);   // thẻ không mang tên / ngày sinh
+  const khongMa = chep.replace(tu, "");            // bỏ mã hex ngẫu nhiên (đã kiểm ở trên) tránh trùng ngẫu nhiên "1990"
+  for (const s of ["1990", "Luân", "17/5"]) expect(khongMa).not.toContain(s);   // thẻ không mang tên / ngày sinh
   expect(await suKien(page)).toContainEqual(expect.objectContaining({ su_kien: "share_created", kind: "huy_hieu", ma_moi: tu, co_ma: false }));
   const tai = page.getByTestId("tai-anh-hh-chuoi_may_7");
   await expect(tai).toHaveAttribute("href", `/og/huy-hieu?ma=chuoi_may_7&tu=${tu}&khung=doc`);

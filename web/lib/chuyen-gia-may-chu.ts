@@ -51,7 +51,81 @@ export async function hoiVienConLuot(sb: SupabaseClient): Promise<number | null>
 }
 
 export interface DongSo { ten: string; gia_tri: string }
-export interface BangSo { mang: MangCg; dong: DongSo[]; ghi_chu: string | null; tho: unknown }
+export interface DoiChieuMang { mang: MangCg; ten: string; dong: DongSo[]; ghi_chu: string | null }
+export interface BangSo {
+  mang: MangCg;
+  dong: DongSo[];
+  ghi_chu: string | null;
+  tho: unknown;
+  /** Co-Pilot GĐ 2: đối chiếu nhanh các hệ thống bổ trợ (chỉ khi người hỏi đã đồng ý chia sẻ hồ sơ). */
+  doi_chieu?: DoiChieuMang[];
+  /** Khung gợi ý 3 phần chuẩn hành nghề (chuyên gia tự biên tập trước khi gửi, không gọi LLM tự bịa). */
+  khung_tra_loi?: string;
+}
+
+const TEN_MANG_NHO: Record<MangCg, string> = {
+  than_so: "Thần số học",
+  tu_vi: "Tử vi",
+  bat_tu: "Bát tự",
+  kinh_dich: "Kinh Dịch",
+  phong_thuy: "Phong thuỷ",
+};
+
+const MANG_BO_TRO: Record<MangCg, MangCg[]> = {
+  tu_vi: ["bat_tu", "than_so"],
+  bat_tu: ["tu_vi", "than_so"],
+  than_so: ["bat_tu", "phong_thuy"],
+  phong_thuy: ["bat_tu", "than_so"],
+  kinh_dich: [],   // Kinh Dịch đọc theo quẻ gieo, không theo hồ sơ — không tính thêm dữ liệu sinh của người hỏi
+};
+
+/** Khung 3 phần cho chuyên gia tự viết. CHỈ tiêu đề + chỗ trống — KHÔNG chép số liệu hồ sơ (ngày sinh âm, tứ trụ…) vào
+ *  câu trả lời: câu trả lời lưu lâu dài trong khi ảnh chụp hồ sơ tự xoá sau 30 ngày (0029). Chỗ trống "[…]" bị
+ *  kiemTraLoi chặn gửi. Bảng số + đối chiếu vẫn hiện bên cạnh để chuyên gia đọc. */
+function taoKhungTraLoi(mangChinh: MangCg, boTro: DoiChieuMang[]): string {
+  return [
+    `1. Điều ${TEN_MANG_NHO[mangChinh]} cho thấy về câu bạn hỏi:`,
+    "[Viết 2–3 câu đời thường, không dán số liệu kỹ thuật]",
+    ...(boTro.length ? ["", `Nhìn thêm từ ${boTro.map((b) => b.ten).join(", ")}:`, "[Ghi chỗ các cách xem cùng thấy hoặc khác nhau — bỏ dòng này nếu không cần]"] : []),
+    "",
+    "2. Việc nên làm:",
+    "[Nêu 2–3 việc cụ thể, làm được ngay]",
+    "",
+    "3. Điều nên để ý:",
+    "[Nhắc điểm cần cẩn trọng, nói khách quan; sức khoẻ thì kèm lời đi khám]",
+  ].join("\n");
+}
+
+const HAN_BO_TRO_MS = 8_000;
+
+function voiHan<T>(p: Promise<T>, ms: number, macDinh: T): Promise<T> {
+  return new Promise((resolve) => {
+    const t = setTimeout(() => resolve(macDinh), ms);
+    p.then((v) => { clearTimeout(t); resolve(v); }, () => { clearTimeout(t); resolve(macDinh); });
+  });
+}
+
+/** Co-Pilot GĐ 2: Hồ sơ Đa Mảng 1 trang — chạy song song mảng chính + các mảng bổ trợ từ ảnh chụp hồ sơ
+ *  (chỉ khi người hỏi đã đồng ý chia sẻ). Lỗi hoặc chậm quá 8 giây ở mảng bổ trợ không làm hỏng mảng chính. */
+export async function benhAnDaMang(mangChinh: MangCg, hs: HoSoCg | null): Promise<BangSo> {
+  const chinh = await bangSoChuyenGia(mangChinh, hs);
+  if (!hs) return { ...chinh, doi_chieu: [], khung_tra_loi: taoKhungTraLoi(mangChinh, []) };
+  const dsBoTro = MANG_BO_TRO[mangChinh] ?? [];
+  const kqBoTro = await Promise.all(
+    dsBoTro.map((m) =>
+      voiHan<DoiChieuMang | null>(
+        // Không có số (thiếu giờ, giới tính, engine lỗi) vẫn trả về ô có ghi chú — chuyên gia biết vì sao thiếu.
+        bangSoChuyenGia(m, hs).then((b) =>
+          b.dong.length > 0 || b.ghi_chu ? { mang: m, ten: TEN_MANG_NHO[m], dong: b.dong.slice(0, 4), ghi_chu: b.ghi_chu } : null,
+        ),
+        HAN_BO_TRO_MS,
+        null,
+      ),
+    ),
+  );
+  const doi_chieu = kqBoTro.filter((x): x is DoiChieuMang => x !== null);
+  return { ...chinh, doi_chieu, khung_tra_loi: taoKhungTraLoi(mangChinh, doi_chieu.filter((d) => d.dong.length > 0)) };
+}
 
 const ten = (x: unknown): string => (x && typeof x === "object" && "ten" in x ? String((x as { ten: unknown }).ten) : String(x ?? ""));
 const canChi = (x: unknown): string => (x && typeof x === "object" ? `${(x as { can?: unknown }).can ?? ""} ${(x as { chi?: unknown }).chi ?? ""}`.trim() : String(x ?? ""));

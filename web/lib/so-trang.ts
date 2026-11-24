@@ -314,6 +314,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Lập bàn Kỳ Môn Độn Giáp theo giờ, miễn phí: tám hướng của giờ này hướng nào thuận, hợp gặp gỡ, ký kết, đi xa hay nộp hồ sơ; giờ tốt trong ngày cho việc bạn định làm. Có giải nghĩa và câu sách xưa.",
     loi_dan: "Mỗi hai tiếng, tám hướng quanh bạn đổi vai một lần. Xem giờ này hướng nào thuận, hợp việc gì, và hôm nay giờ nào hợp việc bạn định làm.",
   } },
+  { duong: "/li-xi-tet-2027", nhom: "tinh", ten: "LÌ XÌ TẾT 2027", o: O_TINH, mac_dinh: {   // LX-2027 (0042)
+    tieu_de_seo: "LÌ XÌ TẾT 2027 — Phong bao Đinh Mùi mở trọn Báo cáo Năm 2027", h1: "LÌ XÌ TẾT 2027",
+    mo_ta_seo: "Tặng bạn bè, người thân, đối tác Bao LÌ XÌ TẾT 2027 (chọn chất liệu gấm lụa, hoa mai, hoa đào, linh vật Đinh Mùi, pháo hoa) mở trọn Báo cáo Năm 2027 cá nhân hoá. Người nhận tự nhập ngày sinh, riêng tư tuyệt đối.",
+    loi_dan: "Một phong bao tinh tế thay lời chúc đầu xuân: chọn chất liệu gấm lụa, hoạ tiết hoa mai – hoa đào – Linh Vật Đinh Mùi và pháo hoa; người nhận tự mở bao, tự nhập ngày giờ sinh để đọc trọn bản đồ 12 tháng năm 2027.",
+  } },
   { duong: "/lich-am", nhom: "tinh", ten: "Lịch âm các năm", o: O_TINH, mac_dinh: {
     tieu_de_seo: "Lịch âm các năm: Tết, tháng nhuận, mùng 1 và rằm", h1: "Lịch âm các năm: Tết ngày nào, năm nào nhuận?",
     mo_ta_seo: "Lịch âm Việt Nam từng năm: ngày Tết, năm có tháng nhuận không, mùng 1 và rằm từng tháng ứng với dương lịch, tháng đủ hay thiếu. Kèm công cụ đổi ngày âm dương.",

@@ -13,6 +13,7 @@ import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { KhungTai, TieuDeMuc } from "@/components/khung/TieuDe";
 import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
 import { KhungChat, type KetQuaHoi } from "@/components/hoi/KhungChat";
+import { laDacBiet } from "@/lib/hoi-mang";
 import type { KhoiTrucQuan } from "@/components/hoi/TrucQuan";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { DaiDoi } from "@/components/than-so/DaiDoi";
@@ -88,6 +89,7 @@ async function hoiThanSo(h: HoSo, cau: string, phai: PhaiThanSo, quyUoc: QuyUocD
     : null;
   return {
     van: d.cau_tra_loi,
+    dacBiet: laDacBiet(d.phan_loai?.xu_ly),
     thuatNgu: d.thuat_ngu,
     trucQuan: d.truc_quan,
     hoiLai: d.hoi_lai,

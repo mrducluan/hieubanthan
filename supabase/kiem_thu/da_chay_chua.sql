@@ -61,6 +61,7 @@ select * from (values
                                            where table_schema = 'public' and table_name = 'meta_don')),
   ('0040 gói Lần đầu 59.000 ₫',  exists (select 1 from pg_proc where proname = 'goi_lan_dau_duoc_mua')),
   ('0041 chuyển đổi offline Google Ads (mã lượt bấm theo đơn)', exists (select 1 from information_schema.tables
-                                           where table_schema = 'public' and table_name = 'google_don'))
+                                           where table_schema = 'public' and table_name = 'google_don')),
+  ('0042 Lì xì Tết 2027 (một bao = một người)', exists (select 1 from pg_proc where proname = 'li_xi_dung'))
 ) as t(migration, da_chay)
 order by 1;

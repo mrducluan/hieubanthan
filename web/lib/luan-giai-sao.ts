@@ -17,6 +17,7 @@ import { mangLuanGiai } from "@/lib/luan-giai-mang";
 import { congDangBat } from "@/lib/thanh-toan/cong";
 import { uuDaiCho } from "@/lib/uu-dai-may-chu";
 import { dauGhiChu } from "@/lib/uu-dai";
+import { namThoiGianToi } from "@/lib/nam";
 
 /** Giá mặc định; QT-2: chủ sở hữu đổi ở /quan-tri/cai-dat (khoá luan_giai.gia_sao). */
 export const GIA_LUAN_GIAI_SAO = 99;   // GIA-99: chủ dự án chốt 16/11/2026 (trước 29); câu hỏi vượt lượt 5 Sao
@@ -67,6 +68,25 @@ async function laHoiVien(phien: NonNullable<Awaited<ReturnType<typeof phienNguoi
     const { data, error } = await phien.sb.rpc("hoi_vien_hieu_luc");
     return !error && data === true;
   } catch { return false; }
+}
+
+/** LX-2027 (0042, LX-QUYEN): quyền đọc báo cáo Thời gian tới bằng bao lì xì đã nhận. Một bao = MỘT người: khoá hồ sơ là
+ *  HMAC(bí mật máy chủ, ngày sinh) — DB không thấy ngày sinh, người dùng không tự tính được khoá để gọi thẳng hàm SQL.
+ *  Năm đọc = năm trong yêu cầu (trang luôn gửi), thiếu thì năm mặc định của trang. Chưa chạy 0042 / lỗi → null. */
+async function liXiCho(phien: NonNullable<Awaited<ReturnType<typeof phienNguoiDung>>>, d: Record<string, unknown>, biMatMay: string):
+    Promise<{ khoa: string; nam: number; daGan: boolean; con: number } | null> {
+  const ngaySinh = typeof d.ngay_sinh === "string" ? d.ngay_sinh : null;
+  if (!ngaySinh) return null;
+  let nam = typeof d.nam === "number" ? d.nam : null;
+  if (nam === null) { const n = await namThoiGianToi(); nam = n.mac_dinh ?? n.cac_nam[0] ?? null; }
+  if (nam === null) return null;
+  const khoa = `lx:${createHmac("sha256", biMatMay).update(`li_xi|${ngaySinh}`).digest("hex").slice(0, 40)}`;
+  try {
+    const { data, error } = await phien.sb.rpc("li_xi_trang_thai", { p_khoa: khoa, p_nam: nam });
+    if (error || !data) return null;
+    const t = data as { da_gan?: boolean; con?: number };
+    return { khoa, nam, daGan: t.da_gan === true, con: Number(t.con) || 0 };
+  } catch { return null; }
 }
 
 /** QT-CSH: chủ sở hữu (bảng vai_tro_quan_tri, migration 0010) đọc trọn mọi báo cáo, không trừ Sao — để tự soát nội dung
@@ -149,6 +169,22 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     const { data } = await phien.sb.from("so_cai_sao").select("id").eq("khoa", `dung:${phien.user.id}:${khoa}`).limit(1);
     daMo = Boolean(data?.length);
   }
+  // LX-2027 (0042, LX-QUYEN): hồ sơ đã gắn một bao lì xì → đọc trọn báo cáo năm đó, không trừ Sao. Còn bao chưa gắn mà
+  // người dùng BẤM mở (và chưa trả Sao mở báo cáo này hôm nay) → dùng bao (không trừ Sao) cho đúng hồ sơ này. Chỉ xem trước → báo còn bao để giao diện nói rõ.
+  const lx = moDun === "thoi_gian" && phien && bi_mat ? await liXiCho(phien, parsed.data as Record<string, unknown>, bi_mat) : null;
+  if (lx && phien && (lx.daGan || (lx.con > 0 && moKhoa && !daMo))) {
+    const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));
+    if (!kq.ok) return kq.res;                                // engine lỗi → chưa dùng bao
+    if (!lx.daGan) {
+      const { data } = await phien.sb.rpc("li_xi_dung", { p_khoa: lx.khoa, p_nam: lx.nam });
+      const r = (data ?? {}) as { ket_qua?: string };
+      if (r.ket_qua !== "da_dung" && r.ket_qua !== "da_gan") {
+        return NextResponse.json({ error: "Chưa dùng được bao lì xì, thử lại sau ít phút." }, { status: 409 });
+      }
+    }
+    return NextResponse.json({ ...(kq.body as object), phi: { sao: 0, ly_do: "li_xi", li_xi_nam: lx.nam } });
+  }
+
   if (!daMo && !moKhoa) {
     // Quà của bạn bè: thêm đúng một chương sau các chương miễn phí (chương mienPhi + 1), cùng đường cắt + diễn đạt AI.
     const tang = await chuongDuocTang(phien, moDun);
@@ -162,6 +198,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     return NextResponse.json({ ...ban, phi: { sao: gia, ly_do: "xem_truoc", khoa: ban.so_khoa > 0, dang_nhap: Boolean(phien), so_du: soDu,
       thuong_chao_mung: phien ? null : await layCauHinh<number>("sao.thuong.chao_mung"),
       ...(uuDai ? { uu_dai: uuDai } : {}),
+      ...(lx && lx.con > 0 ? { li_xi: lx.con, li_xi_nam: lx.nam } : {}),
       ...(maTang ? { chuong_tang: 1, chuong_tang_ma: maTang } : {}) } });
   }
 

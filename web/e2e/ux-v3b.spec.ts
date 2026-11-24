@@ -172,7 +172,10 @@ test.describe("điện thoại", () => {
   test("#24 nhãn chữ hoa (eyebrow) ≥ 12px, sáng hơn chữ mờ; trang chủ + kiến thức không tràn ngang", async ({ page }) => {
     for (const duong of ["/", "/kien-thuc"]) {
       await page.goto(duong);
-      const co = await page.locator(".eyebrow").evaluateAll((ds) => ds.map((e) => parseFloat(getComputedStyle(e).fontSize)));
+      await page.locator(".eyebrow").first().waitFor();
+      // Tìm + đọc cỡ chữ trong cùng một lượt: trang vẽ lại giữa hai bước làm phần tử rời trang → cỡ chữ rỗng (NaN).
+      const co = await page.evaluate(() =>
+        [...document.querySelectorAll(".eyebrow")].map((e) => parseFloat(getComputedStyle(e).fontSize)));
       expect(co.length).toBeGreaterThan(0);
       expect(Math.min(...co)).toBeGreaterThanOrEqual(12);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);

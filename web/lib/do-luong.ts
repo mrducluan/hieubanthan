@@ -16,6 +16,7 @@ export type SuKien =
   | "advisor_question_started" | "advisor_question_completed" | "feedback_submitted"
   | "credit_earned" | "chart_interacted" | "daily_viewed"
   | "checkout_viewed" | "checkout_started" | "payment_succeeded"
+  | "gift_purchased" | "gift_claimed" | "gift_used"
   // SAO-2: phễu xem trước → chạm khoá → mở khoá / nạp
   | "paywall_viewed" | "unlock_clicked" | "unlock_succeeded" | "quota_reached" | "sao_prompt_answered"
   // TS-PHAI: đổi trường phái thần số · HN-2: người dùng nêu ý định trong ngày (chỉ mã ý định, không gửi câu gõ)
