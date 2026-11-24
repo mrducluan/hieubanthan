@@ -4,18 +4,30 @@
 // ở bất kỳ vị trí nào trong Accept-Language, và chưa tắt dải";
 // máy chủ chọn link đích theo đường dẫn đang mở (bảng trang có bản Anh, header x-duong-dan) nên dải có ngay trong HTML;
 // tắt = cookie 180 ngày. Không chuyển hướng.
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 
 const COOKIE = "hbt-goi-y-en";
 
-export function GoiYTiengAnh({ href }: { href: string }) {
-  const [an, setAn] = useState(false);
-  if (an) return null;
+/** Q-I3: trên trang SEO công khai được cache CDN, `tuDongClient = true` để tự kiểm `navigator.languages` + cookie ở
+ *  trình duyệt (tránh cá nhân hoá HTML theo Accept-Language/cookie trên bản cache chung). */
+export function GoiYTiengAnh({ href, tuDongClient = false }: { href: string; tuDongClient?: boolean }) {
+  const [hien, setHien] = useState(!tuDongClient);
+
+  useEffect(() => {
+    if (!tuDongClient) return;
+    const ds = (navigator.languages?.length ? navigator.languages : [navigator.language]).map((x) => x.toLowerCase());
+    const uuTien = ds[0] ?? "";
+    const coVi = ds.some((x) => x === "vi" || x.startsWith("vi-"));
+    const daTat = document.cookie.split(";").some((c) => c.trim().startsWith(`${COOKIE}=`));
+    if (uuTien.startsWith("en") && !coVi && !daTat) setHien(true);
+  }, [tuDongClient]);
+
+  if (!hien) return null;
   const tat = () => {
     document.cookie = `${COOKIE}=1; path=/; max-age=${180 * 86400}; samesite=lax`;
-    setAn(true);
+    setHien(false);
     ghi("chart_interacted", { kind: "goi_y_en_tat" });
   };
   return (

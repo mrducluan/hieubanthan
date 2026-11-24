@@ -138,21 +138,26 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
     );
   }
   const chuChung = await chuChungCms();
-  // HTT-1: trình duyệt ưu tiên tiếng Anh (thẻ đầu của Accept-Language), KHÔNG kê tiếng Việt ở bất kỳ vị trí nào (người Việt
-  // dùng Chrome tiếng Anh thường vẫn có "vi" trong danh sách → đọc được bản Việt, không mời) và chưa tắt dải → mời đọc bản /en
-  // (không chuyển hướng). Chỉ ở trang CÓ bản Anh (banTiengAnh) — không hiện ở trang quản trị / thẻ chia sẻ / trang không có bản dịch.
-  const ngonNguTrinhDuyet = (hd.get("accept-language") ?? "").toLowerCase();
-  const uuTien = ngonNguTrinhDuyet.split(",")[0]?.trim() ?? "";
-  const coTiengViet = /(^|,)\s*vi(-[a-z]{2})?\s*(;|,|$)/.test(ngonNguTrinhDuyet);
+  // Q-I3: trên trang SEO công khai được cache CDN (`x-cache-seo: 1`), KHÔNG đọc Accept-Language hay cookies() trong SSR
+  // để tránh rò rỉ / nhiễm cache giữa người dùng Việt và Anh — GoiYTiengAnh tự kiểm phía trình duyệt (tuDongClient).
+  const cacheSeo = hd.get("x-cache-seo") === "1";
   const duongDangMo = (hd.get("x-duong-dan") ?? "").replace(/\/+$/, "") || "/";
   const hrefEn = banTiengAnh(duongDangMo);
-  const goiYEn = Boolean(hrefEn) && uuTien.startsWith("en") && !coTiengViet && !(await cookies()).get("hbt-goi-y-en");
+  let goiYEn = false;
+  if (!cacheSeo && hrefEn) {
+    // HTT-1: trình duyệt ưu tiên tiếng Anh (thẻ đầu của Accept-Language), KHÔNG kê tiếng Việt ở bất kỳ vị trí nào
+    // và chưa tắt dải → mời đọc bản /en (không chuyển hướng).
+    const ngonNguTrinhDuyet = (hd.get("accept-language") ?? "").toLowerCase();
+    const uuTien = ngonNguTrinhDuyet.split(",")[0]?.trim() ?? "";
+    const coTiengViet = /(^|,)\s*vi(-[a-z]{2})?\s*(;|,|$)/.test(ngonNguTrinhDuyet);
+    goiYEn = uuTien.startsWith("en") && !coTiengViet && !(await cookies()).get("hbt-goi-y-en");
+  }
   return (
     <html lang="vi" className={`${display.variable} ${displayNghieng.variable} ${body.variable} ${han.variable}`}>
       <DauXacMinh />
       <body>
         <GtmNoScript />
-        {goiYEn && hrefEn && <GoiYTiengAnh href={hrefEn} />}
+        {hrefEn && (cacheSeo ? <GoiYTiengAnh href={hrefEn} tuDongClient /> : goiYEn && <GoiYTiengAnh href={hrefEn} />)}
         {/* SEO-N: WebApplication của cả site (url = trang chủ) chỉ phát ở trang chủ — phát mọi trang là bảo máy tìm kiếm
             "ứng dụng Tử vi nằm ở trang chủ". Trang công cụ có WebApplication của riêng nó. */}
         <JsonLd data={duongDangMo === "/" ? goiLd(ldToChuc(), ldWebsite(), ldUngDung()) : goiLd(ldToChuc(), ldWebsite())} />
@@ -161,7 +166,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           Bỏ qua điều hướng
         </a>
         {/* Nội dung từ CMS chạy song song, không chặn byte đầu của trang khi CMS chậm (audit 2026-10-12). */}
-        <Suspense fallback={null}><XemNhap /></Suspense>
+        {!cacheSeo && <Suspense fallback={null}><XemNhap /></Suspense>}
         <Suspense fallback={null}><ThongBaoSite /></Suspense>
         <Suspense fallback={<ThanhTren />}><ThanhTrenCms /></Suspense>
         {/* TM-1: thanh mảng (chỉ hiện ở trang của 6 mảng) — hiện ngay, số trang mỗi cụm điền vào khi engine trả. */}

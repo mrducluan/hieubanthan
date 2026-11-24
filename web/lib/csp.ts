@@ -15,7 +15,7 @@ function goc(url: string | undefined): string | null {
   try { return new URL(url).origin; } catch { return null; }
 }
 
-export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production"): string {
+function xayCsp(scriptSrc: string, dev: boolean): string {
   const supabase = goc(process.env.NEXT_PUBLIC_SUPABASE_URL);
   const posthog = goc(process.env.NEXT_PUBLIC_POSTHOG_HOST) ?? "https://us.i.posthog.com";
   // GTM chạy trên mọi trang (chủ dự án chốt 2026-10-09): mở đủ tên miền của hệ Google mà thẻ GTM hay gọi —
@@ -35,7 +35,7 @@ export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production
     ...(dev ? ["ws:", "http://localhost:*"] : [])];
   return [
     "default-src 'self'",
-    `script-src 'nonce-${nonce}' 'strict-dynamic' 'self' https: 'unsafe-inline' 'wasm-unsafe-eval'${dev ? " 'unsafe-eval'" : ""}`,
+    scriptSrc,
     `style-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://fonts.googleapis.com`,
     // notfair.co: ảnh nằm trong thân bài blog NotFair (ảnh bìa đi qua /_next/image = 'self').
     // CMS: ảnh bài viết nằm ở CMS (CMS_URL) hoặc kho ảnh của CMS (CMS_ANH_URL, vd Supabase Storage công khai).
@@ -52,6 +52,30 @@ export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production
     "form-action 'self'",
     ...(dev ? [] : ["upgrade-insecure-requests"]),
   ].join("; ");
+}
+
+export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production"): string {
+  return xayCsp(
+    `script-src 'nonce-${nonce}' 'strict-dynamic' 'self' https: 'unsafe-inline' 'wasm-unsafe-eval'${dev ? " 'unsafe-eval'" : ""}`,
+    dev,
+  );
+}
+
+/** Q-I3: CSP tĩnh cho trang SEO công khai được cache HTML trên Vercel CDN (không có nonce theo lượt tải để tránh
+ *  lệch nonce giữa header và HTML đã cache). Giữ nguyên mọi hàng rào connect-src, object-src 'none', frame-ancestors,
+ *  base-uri, form-action; script-src chỉ mở host allowlist cụ thể (KHÔNG wildcard https:, KHÔNG 'unsafe-eval'). */
+export function taoCspTinh(dev = process.env.NODE_ENV !== "production"): string {
+  const them = (process.env.CSP_THEM_MIEN ?? "").split(",").map((x) => goc(x.trim())).filter((x): x is string => Boolean(x));
+  const scriptHosts = [
+    "'self'", "'unsafe-inline'", "'wasm-unsafe-eval'",
+    "https://www.googletagmanager.com", "https://*.googletagmanager.com",
+    "https://*.google-analytics.com", "https://*.googleadservices.com",
+    "https://*.doubleclick.net", "https://www.google.com", "https://*.gstatic.com",
+    "https://connect.facebook.net",
+    ...them,
+    ...(dev ? ["'unsafe-eval'"] : []),
+  ].join(" ");
+  return xayCsp(`script-src ${scriptHosts}`, dev);
 }
 
 /** Nonce 128 bit, base64. Chạy được ở cả Edge lẫn Node (proxy.ts). */

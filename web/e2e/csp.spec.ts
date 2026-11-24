@@ -10,9 +10,9 @@ function ghiViPham(page: Page): string[] {
   return vp;
 }
 
-test("header CSP có nonce mới mỗi lượt + script-src strict-dynamic, script của Next mang đúng nonce", async ({ request }) => {
-  const a = await request.get("/than-so/y-nghia-so/so-7");
-  const b = await request.get("/than-so/y-nghia-so/so-7");
+test("trang công cụ/tài khoản giữ CSP-2: nonce mới mỗi lượt + strict-dynamic, không CDN cache, script mang đúng nonce", async ({ request }) => {
+  const a = await request.get("/than-so");
+  const b = await request.get("/than-so");
   const csp = a.headers()["content-security-policy"] ?? "";
   const nonce = /'nonce-([A-Za-z0-9+/=]+)'/.exec(csp)?.[1];
   expect(nonce).toBeTruthy();
@@ -20,11 +20,40 @@ test("header CSP có nonce mới mỗi lượt + script-src strict-dynamic, scri
   expect(csp).toContain("object-src 'none'");
   expect(csp).toContain("frame-ancestors 'self'");
   expect(csp).toMatch(/connect-src [^;]*'self'/);
+  expect(a.headers()["cdn-cache-control"]).toBeUndefined();
+  expect(a.headers()["vercel-cdn-cache-control"]).toBeUndefined();
   expect(b.headers()["content-security-policy"]).not.toContain(nonce!);      // mỗi lượt một nonce
   const html = await a.text();
   const scripts = [...html.matchAll(/<script(?![^>]*application\/ld\+json)([^>]*)>/g)].map((m) => m[1]!);
   expect(scripts.length).toBeGreaterThan(0);
   for (const s of scripts) expect(s).toContain(`nonce="${nonce}"`);
+});
+
+test("Q-I3: trang SEO công khai dùng CSP tĩnh (không nonce) + CDN-Cache-Control + không Set-Cookie; nháp/query tự thoát cache", async ({ request }) => {
+  for (const duong of ["/than-so/y-nghia-so/so-7", "/phong-thuy/huong-hop-tuoi/cung-kham-bac", "/tu-dien", "/blog"]) {
+    const r = await request.get(duong);
+    expect(r.status()).toBe(200);
+    const csp = r.headers()["content-security-policy"] ?? "";
+    expect(csp).not.toMatch(/'nonce-/);
+    expect(csp).not.toContain("'strict-dynamic'");
+    expect(csp).not.toMatch(/script-src [^;]*\shttps:(?:\s|;|$)/);
+    expect(csp).toContain("object-src 'none'");
+    expect(csp).toContain("frame-ancestors 'self'");
+    expect(csp).toMatch(/connect-src [^;]*'self'/);
+    expect(r.headers()["cdn-cache-control"]).toContain("public, s-maxage=3600");
+    expect(r.headers()["vercel-cdn-cache-control"]).toContain("public, s-maxage=3600");
+    expect(r.headers()["set-cookie"]).toBeUndefined();
+  }
+  // Chế độ xem nháp (__prerender_bypass / hbt-xem-truoc) hoặc có query string → thoát CDN cache, quay về nonce CSP-2
+  for (const ck of ["__prerender_bypass=1", "hbt-xem-truoc=1"]) {
+    const nhap = await request.get("/than-so/y-nghia-so/so-7", { headers: { cookie: ck } });
+    expect(nhap.headers()["cdn-cache-control"]).toBeUndefined();
+    expect(nhap.headers()["content-security-policy"]).toMatch(/'nonce-/);
+  }
+
+  const coQuery = await request.get("/than-so/y-nghia-so/so-7?utm_source=test");
+  expect(coQuery.headers()["cdn-cache-control"]).toBeUndefined();
+  expect(coQuery.headers()["content-security-policy"]).toMatch(/'nonce-/);
 });
 
 for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/than-so/y-nghia-so/so-7",
