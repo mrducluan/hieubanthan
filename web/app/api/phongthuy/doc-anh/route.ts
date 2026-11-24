@@ -17,10 +17,11 @@ const Anh = z.object({
   loai: z.enum(["image/jpeg", "image/png", "image/webp"]),
 }).strict();
 const Input = z.object({
-  anh: z.array(Anh).min(1).max(3),
+  anh: z.array(Anh).min(1).max(6),
   goc: z.string().trim().max(60).nullable().optional(),
   loai_nha: z.enum(["nha_pho", "can_ho", "biet_thu", "nha_cap4", "khac"]).nullable().optional(),
   y_dinh: z.string().regex(/^[a-z_]{3,30}$/).nullable().optional(),
+  ngon_ngu: z.enum(["vi", "en"]).optional(),
 }).strict();
 
 export async function POST(req: Request): Promise<NextResponse> {

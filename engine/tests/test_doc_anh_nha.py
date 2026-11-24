@@ -220,12 +220,43 @@ def test_route_422_khi_anh_sai(monkeypatch):
     r = client.post("/v1/phongthuy/doc-anh", json=_yc(anh=[{"du_lieu": vua, "loai": "image/png"}] * 3))
     assert r.status_code == 422                                                     # tổng > 4.000.000
     assert client.post("/v1/phongthuy/doc-anh", json=_yc(anh=[])).status_code == 422
-    assert client.post("/v1/phongthuy/doc-anh", json=_yc(anh=[{"du_lieu": ANH_B64, "loai": "image/jpeg"}] * 4)).status_code == 422
+    assert client.post("/v1/phongthuy/doc-anh", json=_yc(anh=[{"du_lieu": ANH_B64, "loai": "image/jpeg"}] * 7)).status_code == 422
     assert client.post("/v1/phongthuy/doc-anh", json=_yc(anh=[{"du_lieu": "kh@ng-ph@i-base64!!", "loai": "image/jpeg"}])).status_code == 422
     assert client.post("/v1/phongthuy/doc-anh", json=_yc(anh=[{"du_lieu": "data:image/jpeg;base64," + ANH_B64, "loai": "image/jpeg"}])).status_code == 422
     assert client.post("/v1/phongthuy/doc-anh", json=_yc(anh=[{"du_lieu": ANH_B64, "loai": "image/gif"}])).status_code == 422
     assert client.post("/v1/phongthuy/doc-anh", json=_yc(goc="x" * 61)).status_code == 422
+    assert client.post("/v1/phongthuy/doc-anh", json=_yc(ngon_ngu="fr")).status_code == 422
     assert client.post("/v1/phongthuy/doc-anh", json=_yc(them=1)).status_code == 422
+
+
+def test_anh_so_bang_chung_va_6_anh_va_ngon_ngu_en(co_khoa, monkeypatch):
+    ghi: list = []
+    tra = {
+        "dau_hieu": [
+            {"ma": "guong_giuong", "co": True, "do_tin": 0.9, "ly_do": "Large mirror facing bed.", "anh_so": 2},
+            {"ma": "xa_ngang", "co": True, "do_tin": 0.8, "ly_do": "Overhead beam.", "anh_so": 99},
+            {"ma": "duong_dam", "co": True, "do_tin": 0.7, "ly_do": "Road aligned.", "anh_so": 0},
+        ],
+        "phong": [{"phong": "phong_ngu_chinh", "do_tin": 0.9}],
+        "luu_y": ["Slightly dim lighting."],
+    }
+    _gia_client(monkeypatch, json.dumps(tra), ghi)
+    r = client.post("/v1/phongthuy/doc-anh", json=_yc(
+        anh=[{"du_lieu": ANH_B64, "loai": "image/jpeg"}] * 6,
+        ngon_ngu="en",
+    ))
+    assert r.status_code == 200, r.text
+    d = r.json()
+    by_ma = {x["ma"]: x for x in d["dau_hieu"]}
+    # anh_so hợp lệ (1..6) được giữ; ngoài phạm vi (99, 0) bị bỏ (KHÔNG kẹp về ảnh gần nhất)
+    assert by_ma["guong_giuong"]["anh_so"] == 2
+    assert "anh_so" not in by_ma["xa_ngang"]
+    assert "anh_so" not in by_ma["duong_dam"]
+    # prompt EN yêu cầu viết ly_do và luu_y bằng tiếng Anh và có nhãn Photo 2..6
+    he_thong = ghi[0]["json"]["messages"][0]["content"]
+    assert "English" in he_thong
+    nd = ghi[0]["json"]["messages"][1]["content"]
+    assert any(p.get("type") == "text" and "Photo 2" in p.get("text", "") for p in nd)
 
 
 def test_route_can_khoa_engine(monkeypatch):
