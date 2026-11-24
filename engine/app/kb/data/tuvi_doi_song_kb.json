@@ -226,7 +226,7 @@
     },
     "ham": {
      "manh": "Bạn để ý được nhiều chi tiết người khác bỏ qua và luôn có sẵn phương án dự phòng.",
-     "de_vap": "Bạn dễ nghĩ đi nghĩ lại một việc, lo trước những điều chưa xảy ra, rồi chần chừ không bắt tay vào làm.",
+     "de_vap": "Bạn dễ nóng vội, nghĩ ra cách mới là muốn làm ngay, rồi đổi ý giữa chừng khi gặp chuyện chưa vừa.",
      "loi_khuyen": "Khi thấy mình nghĩ quá lâu, đặt hạn chót 24 giờ để chọn, rồi làm bước đầu tiên ngay trong ngày."
     }
    },
@@ -427,7 +427,7 @@
    "Tật Ách": {
     "sang": {
      "manh": "Bạn có sức bền, làm nhiều vẫn vui, và biết lấy lại sức nhanh nếu chịu nghỉ.",
-     "de_vap": "Bạn dễ làm quá sức vì không nỡ từ chối; sách xưa gắn mảng này với đôi mắt và nhịp tim, nên chăm sóc phòng ngừa.",
+     "de_vap": "Bạn dễ làm quá sức vì không nỡ từ chối; sách xưa gắn mảng này với vùng đầu, đôi mắt và nhịp tim, nên chăm sóc phòng ngừa.",
      "loi_khuyen": "Khám định kỳ mỗi năm, nghỉ mắt 5 phút sau mỗi giờ nhìn màn hình, và ngủ đủ bảy tiếng mỗi đêm."
     },
     "ham": {
@@ -474,7 +474,7 @@
    },
    "Điền Trạch": {
     "sang": {
-     "manh": "Nhà bạn thường sáng sủa, cửa mở đón khách, và tài sản bạn có là nhờ chính công sức làm việc.",
+     "manh": "Nhà bạn thường sáng sủa, cửa mở đón khách, và bạn thường được nhờ phần nhà đất hay chỗ dựa của cha ông để lại, việc của bạn là giữ gìn và vun thêm.",
      "de_vap": "Nhà đông khách, bạn dễ tốn nhiều cho tiếp đãi và ít có góc yên tĩnh của riêng mình.",
      "loi_khuyen": "Giữ một góc nhỏ trong nhà chỉ cho bạn, mỗi tối ngồi đó mười phút không ai làm phiền."
     },
@@ -706,7 +706,7 @@
    },
    "Tài Bạch": {
     "sang": {
-     "manh": "Tiền của bạn đến đều đặn, ít khi thiếu hụt lớn, và bạn biết tiêu cho những niềm vui đáng tiền.",
+     "manh": "Tiền của bạn thường do chính tay bạn gây dựng từ đầu, đến chậm mà chắc, càng về sau càng khá.",
      "de_vap": "Bạn dễ tiêu cho niềm vui nhỏ hằng ngày như cà phê, ăn uống, đồ xinh, cộng lại thành khoản lớn.",
      "loi_khuyen": "Đặt một hạn mức tiêu vặt mỗi tuần, chuyển sẵn vào một ví riêng, hết là dừng."
     },
@@ -743,7 +743,7 @@
    "Nô Bộc": {
     "sang": {
      "manh": "Bạn có nhiều bạn vui vẻ, đồng nghiệp dễ chịu, ai cũng muốn làm việc cạnh bạn.",
-     "de_vap": "Bạn bè đông nhưng ít người cùng làm việc lớn, nên lúc cần hợp sức thì thiếu người chịu khó.",
+     "de_vap": "Có người giúp được việc nên bạn dễ giao hết rồi ít tự kiểm lại, đến lúc có sai sót mới biết.",
      "loi_khuyen": "Khi cần làm việc lớn, chọn người theo việc họ đã làm được, đừng chọn chỉ vì ngồi cùng thấy vui."
     },
     "ham": {
@@ -894,7 +894,7 @@
     },
     "ham": {
      "manh": "Bạn trung thành với người mình tin, sẵn sàng giúp bạn bè lúc khó.",
-     "de_vap": "Bạn dễ bị kéo vào mâu thuẫn của người khác, đứng về một phe rồi mang tiếng.",
+     "de_vap": "Người làm dưới tay bạn dễ đến rồi đi, phải qua nhiều năm bạn mới có vài người theo bền.",
      "loi_khuyen": "Khi bạn bè kể xấu về ai, nghe thôi, không kể lại và không đứng ra phân xử."
     }
    },
@@ -912,7 +912,7 @@
    },
    "Điền Trạch": {
     "sang": {
-     "manh": "Bạn lo nhà cửa, tài sản kỹ, giấy tờ rõ ràng, nên của cải giữ được lâu.",
+     "manh": "Bạn lo nhà cửa kỹ, giấy tờ rõ ràng, nên phần tài sản do chính bạn gây dựng được giữ chắc.",
      "de_vap": "Bạn dễ căng thẳng với người cùng ở vì những nguyên tắc nhỏ trong nhà.",
      "loi_khuyen": "Họp gia đình ngắn, thống nhất năm quy tắc chung trong nhà, ngoài năm điều đó thì để mọi người tự do."
     },
@@ -950,7 +950,7 @@
   "Thiên Phủ": {
    "Mệnh": {
     "sang": {
-     "manh": "Bạn điềm tĩnh, đáng tin, biết giữ gìn, và người khác yên tâm khi giao việc hay giao tiền cho bạn.",
+     "manh": "Bạn ôn hoà, sáng dạ, hiểu biết rộng và xoay xở khéo, nên người khác yên tâm khi giao việc hay giao tiền cho bạn.",
      "de_vap": "Bạn dễ chọn chỗ an toàn quá lâu, bỏ qua cơ hội vì ngại thay đổi.",
      "loi_khuyen": "Mỗi quý thử một việc mới nhỏ trong công việc hay cuộc sống, với mức rủi ro bạn chấp nhận được."
     },
@@ -1034,7 +1034,7 @@
    },
    "Nô Bộc": {
     "sang": {
-     "manh": "Bạn có những người bạn đáng tin, ít nhưng bền, lúc cần là có.",
+     "manh": "Người làm cùng với bạn đắc lực, bạn nói một lời là có người theo và làm tới nơi.",
      "de_vap": "Bạn dễ chỉ chơi với nhóm quen, ít mở rộng nên lúc cần cơ hội mới thì thiếu người giới thiệu.",
      "loi_khuyen": "Mỗi tháng nhận lời một buổi gặp gỡ với người ngoài nhóm quen của mình."
     },
@@ -1174,13 +1174,13 @@
     },
     "ham": {
      "manh": "Bạn quan sát kỹ trước khi bước vào chỗ mới, nên ít khi nói hớ hay làm phật lòng ai.",
-     "de_vap": "Đi xa hay đổi môi trường, bạn dễ thấy lạc lõng, nhớ nhà, và rút về một góc thay vì làm quen.",
+     "de_vap": "Ra ngoài bạn dễ vướng lời qua tiếng lại, một câu nói vô tình cũng có thể bị hiểu sai rồi bàn tán.",
      "loi_khuyen": "Mỗi lần tới nơi mới, chủ động bắt chuyện với một người trước, kể cả chỉ là hỏi chỗ ăn trưa gần đó."
     }
    },
    "Nô Bộc": {
     "sang": {
-     "manh": "Bạn ít bạn nhưng bạn nào cũng thân, và nhiều người tìm tới bạn để tâm sự lúc họ rối.",
+     "manh": "Người giúp việc, người làm cùng bạn được việc và đông đủ, lại hay tìm tới bạn để tâm sự lúc họ rối.",
      "de_vap": "Bạn nghe chuyện của người khác nhiều tới mức kiệt sức, mà lại ít khi kể chuyện của mình.",
      "loi_khuyen": "Khi một người bạn gọi tâm sự lúc bạn đã mệt, nói thật: mai mình gọi lại nghe cậu kể kỹ hơn nhé."
     },
@@ -1192,13 +1192,13 @@
    },
    "Quan Lộc": {
     "sang": {
-     "manh": "Trong công việc, bạn tỉ mỉ, có mắt thẩm mỹ, hợp những việc cần chăm chút như thiết kế, chăm sóc khách, sổ sách.",
+     "manh": "Trong công việc, bạn tỉ mỉ, có mắt thẩm mỹ, dễ được người trên trọng và giao cho vị trí có chức phận.",
      "de_vap": "Bạn làm tốt mà ít khi nói ra, nên dễ bị bỏ qua lúc xét tăng lương hay giao việc lớn.",
      "loi_khuyen": "Cuối mỗi tháng gửi sếp vài dòng tóm tắt những việc bạn đã làm xong và kết quả cụ thể."
     },
     "ham": {
      "manh": "Bạn làm việc cẩn thận, ít sai sót vặt, hợp những việc âm thầm cần sự chính xác.",
-     "de_vap": "Khi bị góp ý trước mặt người khác, bạn dễ chùng xuống cả ngày và mất hứng với việc đang làm.",
+     "de_vap": "Bạn dễ tự tin quá mà ít chịu nghe góp ý, nên có lúc việc đang suôn sẻ lại đổ giữa chừng.",
      "loi_khuyen": "Khi sếp góp ý, ghi lại đúng một điều cần sửa, cảm ơn, rồi để chuyện cảm xúc tới lúc về nhà mới nghĩ."
     }
    },
@@ -1655,7 +1655,7 @@
    "Phúc Đức": {
     "sang": {
      "manh": "Bạn thấy yên lòng khi sống đúng với lẽ phải, và ít khi phải day dứt vì việc mình làm.",
-     "de_vap": "Bạn dễ ôm phần trách nhiệm cho cả nhà, cả nhóm, nên ít khi cho phép mình nghỉ thật sự.",
+     "de_vap": "Đời bạn khá thong thả, nên đôi khi bạn ngại bắt tay vào một việc mới dù biết là nên làm.",
      "loi_khuyen": "Mỗi tháng có một ngày không nhận lời giúp ai, chỉ làm việc mình thích."
     },
     "ham": {
@@ -1758,7 +1758,7 @@
     },
     "ham": {
      "manh": "Bạn thích đi đây đó, học hỏi được nhiều điều từ những nơi xa.",
-     "de_vap": "Bạn dễ thấy lẻ loi khi ở xa nhà, sống khép kín, ít người để chia sẻ.",
+     "de_vap": "Ở nơi xa bạn hay ngại mở lời nhờ ai, nên có khi bỏ lỡ người đi trước sẵn lòng chỉ bảo mình.",
      "loi_khuyen": "Ở nơi mới, tham gia một nhóm sinh hoạt đều đặn, như câu lạc bộ đọc sách hay nhóm chạy bộ."
     }
    },
@@ -1827,7 +1827,7 @@
    "Mệnh": {
     "sang": {
      "manh": "Bạn quyết đoán, gặp việc khó là xắn tay làm ngay, và chịu được áp lực mà nhiều người né.",
-     "de_vap": "Bạn dễ quyết nhanh khi chưa đủ thông tin, rồi phải sửa lại, tốn công hơn chờ thêm một ngày.",
+     "de_vap": "Bạn nóng tính, vui giận thất thường; với việc lớn lại hay đắn đo tới lui, khiến người khác khó đoán ý bạn.",
      "loi_khuyen": "Với quyết định lớn, đặt luật cho mình: hỏi ý một người hiểu việc và ngủ qua một đêm rồi mới chốt."
     },
     "ham": {
@@ -1911,7 +1911,7 @@
    "Nô Bộc": {
     "sang": {
      "manh": "Bạn dẫn được nhóm, đồng nghiệp hay cấp dưới thường theo bạn vì bạn dám nhận việc khó.",
-     "de_vap": "Bạn dễ đòi người khác làm nhanh và mạnh như mình, rồi bực khi họ không theo kịp.",
+     "de_vap": "Người làm cùng hay cấp dưới có khi cứng đầu, không chịu nghe, và tiền chung dễ hao nếu bạn không giữ sổ rõ ràng.",
      "loi_khuyen": "Khi giao việc cho người khác, hỏi họ cần bao lâu và cùng chốt một thời hạn cả hai thấy được."
     },
     "ham": {
@@ -2685,7 +2685,7 @@
   }
  },
  "van_han": {
-  "_nguon": "VH-1 (2026-10-21) — chương 'Vận hạn & điều nên tránh', nháp AI viết lời đời thường. Khoá: ky_nhap/ky_chieu/loc_nhap.<Cung> (nhan = vế sau tiêu đề 'Năm N: …', mang = mảng đời) + tre (18–34 tuổi) / lon (từ 35 tuổi) {y, tranh, lam}; nho = dưới 18 tuổi (lời cho cha mẹ); co = cờ tập quán dân gian theo chi năm sinh. Không vật phẩm, không giải hạn, không tên bệnh; năm nên chú ý sức khoẻ nói bằng lời phòng ngừa ở chương Sức khoẻ (SK-1, luangiai/suc_khoe_nam.py).",
+  "_nguon": "VH-1 (2026-10-21) — chương 'Vận hạn & điều nên tránh', nháp AI viết lời đời thường. Khoá: ky_nhap/ky_chieu/loc_nhap.<Cung> (nhan = vế sau tiêu đề 'Năm N: …', mang = mảng đời) + tre (16–34 tuổi) / lon (từ 35 tuổi) {y, tranh, lam}; nho = dưới 16 tuổi (lời cho cha mẹ — TUOI-16); co = cờ tập quán dân gian theo chi năm sinh. Không vật phẩm, không giải hạn, không tên bệnh; năm nên chú ý sức khoẻ nói bằng lời phòng ngừa ở chương Sức khoẻ (SK-1, luangiai/suc_khoe_nam.py).",
   "source_id": "tuvi_vn",
   "school_id": "nam_phai_viet",
   "ky_nhap": {

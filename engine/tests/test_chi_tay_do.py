@@ -234,8 +234,8 @@ def test_doc_theo_cung():
     r = kb.doc([], 30, {"chan": "trung", "ly": "day"})
     assert [m["ma"] for m in r["muc_cung"]] == ["ly-cao", "chan-ham"] and r["bo_nhom_c"] == 0
     c = r["muc_cung"][1]
-    assert "am" not in c and c["loi"].startswith("Sách xưa có nhắc «低陷此宮妻有剋». Hàm ý")
-    assert r["cau_ket"].startswith(sach_ghi.CAU_KET)
+    assert c["am"] and c["loi"].startswith("Sách xưa ghi nguyên văn «低陷此宮妻有剋»")      # SX-C3
+    assert r["cau_ket"].startswith(sach_ghi.CAU_KET_TRICH)
     r = kb.doc([], 30, {"can_co": "van_cat"})                                  # một lựa chọn → hai câu (B rồi C)
     assert [m["ma"] for m in r["muc_cung"]] == ["can-co-ban-co", "can-co-phi-cham"]
     assert kb.doc([], 30, {"ly": "van_cat"})["muc_cung"][0]["ma"] == "ly-ham"   # sách gộp "trũng" với "vân phá"

@@ -30,7 +30,7 @@ export const HoSo = z.object({
   /** TV-V2: "unknown" = không biết giờ → `gio` là giờ đại diện 12:00 chỉ để an tạm lá số; Tử vi mở khối định giờ 12 canh. */
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).optional(),
   /** EN-2 mục 5: tình trạng NGƯỜI DÙNG TỰ CHỌN (không suy đoán) — chỉ để chọn lời ở chương tình yêu / gia đình. CHỈ lưu
-   *  trên máy (không đồng bộ tài khoản, engine không lưu); bỏ chọn = xoá trường. Chỉ hỏi người từ 18 tuổi. */
+   *  trên máy (không đồng bộ tài khoản, engine không lưu); bỏ chọn = xoá trường. Chỉ hỏi người từ 16 tuổi (TUOI-16). */
   tinh_trang: z.enum(["doc_than", "co_doi"]).optional(),
   /** Người dùng nhập theo lịch nào; ngày/tháng/năm ở trên LUÔN là dương lịch (engine đổi). */
   lich_nhap: z.enum(["duong", "am"]).optional(),

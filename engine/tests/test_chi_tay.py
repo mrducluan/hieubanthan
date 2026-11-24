@@ -89,9 +89,10 @@ def test_doc_bo_nhom_c_khi_chua_ro_tuoi():
     assert [m["ma"] for m in r["muc"]] == [a] and r["bo_nhom_c"] == 1
     assert kb.doc([c, a], 15)["bo_nhom_c"] == 1
     r = kb.doc([c, a], 30)
-    assert [m["ma"] for m in r["muc"]] == [a, c] and r["cau_ket"].startswith(sach_ghi.CAU_KET)
-    assert "am" not in r["muc"][1]                                   # nhóm C không phiên âm
-    assert r["muc"][1]["loi"].startswith("Sách xưa có nhắc")
+    # SX-C3 (2026-11-24): nhóm C nói sát nguyên văn — kèm âm Hán Việt và câu kết "chỉ trích lại"
+    assert [m["ma"] for m in r["muc"]] == [a, c] and r["cau_ket"].startswith(sach_ghi.CAU_KET_TRICH)
+    assert r["muc"][1]["am"]
+    assert r["muc"][1]["loi"].startswith("Sách xưa ghi nguyên văn")
 
 
 def test_khong_dua_vao_6_hinh_doan_nguoi_khac():
@@ -113,7 +114,9 @@ def test_route_thu_vien(may):
     assert len(j["van"]) == 66 and j["do_hinh"]["ma"] == "bat-quai-ban-tay"
     chu = json.dumps(j, ensure_ascii=False)
     assert not re.search(r"wikisource|sqlite|drive|SXQB|YLZ|\.png|han_kho|_nguon", chu, re.I)
-    assert all("am" not in v for v in j["van"] if v["nhom"] != "A") and all(v["am"] for v in j["van"] if v["nhom"] == "A")
+    # SX-C3: câu A và câu B / C nói sát nguyên văn (`sat`) có âm Hán Việt; câu chưa viết lại thì không
+    assert all(v["am"] for v in j["van"] if v["nhom"] == "A")
+    assert all(v["loi"].startswith("Sách xưa ghi nguyên văn") for v in j["van"] if v["nhom"] != "A" and v.get("am"))
 
 
 def test_route_doc(may):
@@ -128,7 +131,7 @@ def test_route_doc(may):
 def test_thu_vien_cau_ket_suc_khoe_va_nhom_c_khong_am():
     tv = kb.thu_vien()
     assert sach_ghi.CAU_KET_SUC_KHOE in tv["cau_ket"]
-    assert all("am_ten" not in v and "am" not in v for v in tv["van"] if v["nhom"] == "C")
+    assert all(v["loi"].startswith("Sách xưa ghi nguyên văn") for v in tv["van"] if v["nhom"] == "C" and v.get("am"))   # SX-C3
     assert all(v.get("a_phu_dinh") is None for v in tv["van"])          # cờ duyệt nội bộ không ra API
 
 

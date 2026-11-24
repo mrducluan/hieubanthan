@@ -224,3 +224,19 @@ def test_tu_quai_tren_trang_que_la_nguyen_van():
                 assert _re.sub(r"[，。\s]", "", t["nguyen_van"]) in van, k
                 co += 1
     assert co == 64
+
+
+def test_quai_tu_ngo_tat_to_du_64_que_khop_kho_nguon():
+    """SX-D (2026-11-24): quái từ của bản dịch Ngô Tất Tố — đủ 64 quẻ, chữ Hán đúng kinh văn của CHÍNH quẻ ấy trong kho
+    nguồn (bản ghép cũ thiếu quẻ 15, cụt nửa đầu quẻ 24); lời Thoán không còn dính vào quái từ (quẻ 8, 9, 43)."""
+    ng = json.loads((GOC / "fixtures/nguon/chu_dich_truyen_nghia.json").read_text("utf-8"))["que"]
+    kb = json.loads((GOC / "app/kb/data/kinhdich_truyen_nghia.json").read_text("utf-8"))["que"]
+    for n in range(1, 65):
+        kinh = "".join(d["kinh"] for d in ng[str(n)]["doan"] if d["loai"] == "quai_tu")
+        q = kb[str(n)]["quai_tu"]
+        assert _c(q["han"]) == _c(kinh), n
+        assert q.get("am"), n
+        for k in ("am", "dich"):
+            assert not re.search(r"[Tt]hoán (viết|nói rằng)", q.get(k) or ""), (n, k)
+        if not q.get("dich"):
+            assert q.get("ghi_chu"), n          # thiếu lời dịch phải nói rõ vì sao

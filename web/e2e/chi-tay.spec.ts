@@ -15,7 +15,7 @@ test("chỉ tay: đồ hình tám cung + chọn vân đọc sách xưa", async (
   await expect(kq).toContainText("拜相紋");
   // chưa có hồ sơ (không biết tuổi) → không hiện lời nhóm C
   await expect(kq).not.toContainText("色慾紋");
-  await expect(kq).toContainText("đủ 18 tuổi");
+  await expect(kq).toContainText("đủ 16 tuổi");
 });
 
 test("chỉ tay: thư viện có trong HTML máy chủ, không tên nội bộ", async ({ request }) => {

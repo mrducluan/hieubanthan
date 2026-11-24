@@ -96,7 +96,7 @@ const TEN_PHAN_DS: Record<string, string> = {
   thieu: "thiếu", van: "đại vận", nam: "năm nay", hien_tai: "đang đi", tiep: "kế tiếp", phoi: "cung phối ngẫu",
   // VH-1 (ds.van_han.* / ds.bt.van_han.*)
   ky_nhap: "Kỵ năm nhập", ky_chieu: "Kỵ năm chiếu", loc_nhap: "Lộc năm nhập", song_loc: "song Lộc", tre: "tuổi trẻ",
-  lon: "từ 35 tuổi", nho: "dưới 18 tuổi", can: "năm cần lưu ý", giu_nhip: "năm nên giữ nhịp", don_suc: "năm đáng dồn sức",
+  lon: "từ 35 tuổi", nho: "dưới 16 tuổi", can: "năm cần lưu ý", giu_nhip: "năm nên giữ nhịp", don_suc: "năm đáng dồn sức",
   thang: "12 tháng tới", cham: "có tháng nên chậm",
   // TV-YBS đợt 4 (ds.hai.<ý>.<ai>.<quan hệ>)
   ban: "lá của bạn", kia: "lá người ấy", nguoi_yeu: "người yêu", vo_chong: "vợ chồng",

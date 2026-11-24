@@ -126,10 +126,26 @@ def _sach(x):
 # ------------------------------------------------------------------ VH-1: vận hạn 10 năm (dùng chung Tử vi + Bát tự)
 SO_NAM_VAN_HAN = 10
 NAM_GAN_COT_LOI = 3                      # năm "Cần lưu ý" trong 3 năm tới (kể cả năm nay) → một hộp ở "Điều quan trọng nhất"
-TUOI_VH_NHO, TUOI_VH_LON = 18, 35        # < 18: lời cho trẻ (cha mẹ đọc) · 18–34: tuổi trẻ · ≥ 35: tuổi lớn
+TUOI_VH_NHO, TUOI_VH_LON = __import__("app.config", fromlist=["x"]).TUOI_NGUOI_LON, 35  # TUOI-16: < 16 lời cho cha mẹ đọc · 16–34: tuổi trẻ · ≥ 35: tuổi lớn
 CO_DAN_GIAN = ("nam_tuoi", "xung_tuoi", "va_tuoi", "tam_tai")
 NHAN_CO = {"nam_tuoi": "năm tuổi", "xung_tuoi": "năm xung tuổi", "va_tuoi": "năm va tuổi", "tam_tai": "năm tam tai",
            "xung_ngay": "dễ xáo trộn chỗ ở", "hinh_ngay": "dễ va chạm với người gần"}
+
+
+def vai_doc(tuoi: int | None) -> dict:
+    """TUOI-16: ai đọc bài luận — `vai_doc` ("ban_than" | "cha_me") + `loi_vai_doc` (một câu đầu bài) khi người được xem
+    chưa đủ 16 tuổi tròn: bài viết cho cha mẹ / người lớn đọc hộ về đứa trẻ (lời "Năm nay", "Vận hạn" đã dùng ô `nho`)."""
+    from app import config  # noqa: PLC0415
+    v = config.vai_doc(tuoi)
+    if v is None:
+        return {}
+    if v == "ban_than":
+        return {"vai_doc": v}
+    return {"vai_doc": v, "loi_vai_doc": L(
+        "ds.vai_doc.cha_me",
+        f"Bài này dành cho cha mẹ hoặc người lớn đọc hộ: người được xem chưa đủ {config.TUOI_NGUOI_LON} tuổi. Các lời "
+        "khuyên nên hiểu là việc người lớn giúp con làm; những ghi chép nặng lời của sách xưa không hiện ở bài này.",
+        tuoi=config.TUOI_NGUOI_LON)}
 
 
 def nhan_co(ma: str) -> str:

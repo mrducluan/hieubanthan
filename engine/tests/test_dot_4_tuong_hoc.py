@@ -26,7 +26,11 @@ def _kiem_giong_van(path: Path, bo_qua: tuple[str, ...]) -> None:
             for v in x:
                 yield from _walk(v)
 
+    sat = {m["y"] for _, m in sg.cac_muc(kb) if m.get("sat")}            # SX-C3: nghĩa sát nguyên văn — luật riêng `kiem_sat`
     for s in _walk(kb):
+        if s in sat:
+            assert not sg.kiem_sat(s), f"{path.name} lỗi kiểm lời: {s}"
+            continue
         assert not sg.kiem_loi(s), f"{path.name} lỗi kiểm lời: {s}"
         assert not kds.tim_cum_cam(s, cam), f"{path.name} từ cấm: {s} -> {kds.tim_cum_cam(s, cam)}"
         assert not kds.tim_cum_cam(s, cum), f"{path.name} cụm chung chung: {s} -> {kds.tim_cum_cam(s, cum)}"

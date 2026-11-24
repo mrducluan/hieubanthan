@@ -39,9 +39,12 @@ test("SX-C Tử vi: khối 'Sách xưa ghi gì về từng cung' gập sẵn, m�
   await expect(k.locator("ol li")).toHaveCount(0);
   await k.getByTestId("sach-ghi-nhom").first().click();
   await expect(k.locator("ol li").first()).toContainText("Tử Vi Đẩu Số Toàn Thư");
-  await expect(k).toContainText("Đây là ghi chép của người xưa");
-  // nhóm C không hiện phiên âm (âm câu nặng đọc lên vẫn nặng)
-  for (const li of await k.locator("li[data-nhom=C]").all()) await expect(li.locator("span.italic")).toHaveCount(0);
+  // SX-C3: câu kết "chỉ trích lại, không chịu trách nhiệm pháp lý"
+  await expect(k).toContainText("không chịu trách nhiệm pháp lý");
+  // nhóm C chỉ hiện phiên âm khi là câu trích sát nguyên văn (SX-C3)
+  for (const li of await k.locator("li[data-nhom=C]").all()) {
+    if (!/nguyên văn/.test(await li.innerText())) await expect(li.locator("span.italic")).toHaveCount(0);
+  }
 });
 
 test("SX-C Bát tự + Phong thuỷ: khối sách xưa có ở lá số Bát tự và ở mệnh quái", async ({ page }) => {

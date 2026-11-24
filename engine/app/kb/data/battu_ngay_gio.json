@@ -8,26 +8,28 @@
   "Giáp|Tý": {
    "han": "六甲日生甲子時敗中印綬官生至月通木氣不尋常反此而言虚名利",
    "am": "Lục Giáp nhật sinh Giáp Tý thời, bại trung ấn thụ quan sinh chí, nguyệt thông mộc khí bất tầm thường, phản thử nhi ngôn hư danh lợi.",
-   "y": "Sách tả giờ này có người đỡ, có việc tìm tới; tháng sinh tiếp sức thì hơn người, không thì dễ được tiếng mà ít thực.",
+   "y": "Sách ghi: ngày Giáp sinh giờ Giáp Tý, ở đất bại mà có Ấn thụ, có Quan tới sinh; tháng thông khí Mộc thì không tầm thường, ngược lại thì danh lợi chỉ là hão.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý biến cái tiếng thành việc có kết quả đo được.",
    "viec": "Tuần này chọn một việc đang được khen nhưng chưa xong, làm xong một phần cụ thể.",
    "tru_gio": "甲子",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Giáp|Sửu": {
    "han": "六甲日生時乙丑刼財羊刃不宜有柱中逢火帶辛金制伏和平貴亦久",
    "am": "Lục Giáp nhật sinh thời Ất Sửu, kiếp tài dương nhận bất nghi hữu, trụ trung phùng hoả đới tân kim, chế phục hoà bình quý diệc cửu.",
-   "y": "Sách nói giờ này mang tính tranh phần, cứng cỏi, để nguyên thì không hay; có thứ kìm lại thì tính ấy hoà dịu và sự nể trọng giữ được lâu.",
+   "y": "Sách ghi: ngày Giáp sinh giờ Ất Sửu có Kiếp Tài, Dương Nhận là không nên; trong trụ gặp Hoả kèm Tân Kim chế phục cho hoà bình thì quý và bền lâu.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý lúc tranh phần với người khác, nhất là chuyện tiền chung.",
    "viec": "Tuần này việc gì góp tiền chung với người khác, ghi rõ phần của mỗi người.",
    "tru_gio": "乙丑",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Giáp|Dần": {
    "han": "六甲日生時丙寅時居日禄坐食神旺壬不見無刑破福壽康寧富貴人",
@@ -43,14 +45,15 @@
   "Giáp|Mão": {
    "han": "六甲日生時丁卯傷官羊刃眞當惱縱然月氣有扶持未免為人性不好",
    "am": "Lục Giáp nhật sinh thời Đinh Mão, thương quan dương nhận chân đương não, túng nhiên nguyệt khí hữu phù trì, vị miễn vi nhân tính bất hảo.",
-   "y": "Sách nói giờ này mang hai thế cứng cùng lúc nên dễ phiền lòng; dù tháng sinh có đỡ, tính người vẫn dễ gắt.",
+   "y": "Sách ghi: ngày Giáp sinh giờ Đinh Mão, Thương Quan với Dương Nhận thật đáng phiền; dù khí tháng có nâng đỡ, người vẫn khó tránh tính không tốt.",
    "nhom": "B",
    "chu_de": "tinh_net",
    "ham_y": "Nên chú ý cách nói lúc không vừa ý, nhất là với người trên.",
    "viec": "Tuần này khi định phản bác ai, hỏi lại một câu cho rõ ý họ rồi mới nói.",
    "tru_gio": "丁卯",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Giáp|Thìn": {
    "han": "六甲日生時戊辰天財坐庫㑹滋身富商巨賈田園盛月帶辛金名利成",
@@ -65,26 +68,28 @@
   "Giáp|Tỵ": {
    "han": "六甲日生時己巳病中財物實難任月通火氣方為貴若是身衰亦不禁",
    "am": "Lục Giáp nhật sinh thời Kỷ Tỵ, bệnh trung tài vật thực nan nhiệm, nguyệt thông hoả khí phương vi quý, nhược thị thân suy diệc bất cấm.",
-   "y": "Sách nói giờ này sinh vào lúc sức yếu, có của mà khó gánh; tháng sinh có lửa tiếp thì mới quý, thân yếu thì không giữ nổi.",
+   "y": "Sách ghi: ngày Giáp sinh giờ Kỷ Tỵ, ở đất bệnh mà có tiền của thì thật khó gánh; tháng thông khí Hoả mới quý, nếu thân suy thì không kham nổi.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý đừng ôm việc, ôm tiền quá sức mình.",
    "viec": "Tuần này liệt kê các khoản mình đang gánh, bỏ bớt hoặc chia lại một khoản.",
    "tru_gio": "己巳",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Giáp|Ngọ": {
    "han": "六甲日生時庚午死處又遭鬼當頭丁丙不逢生再弱忙忙貧苦度春秋",
    "am": "Lục Giáp nhật sinh thời Canh Ngọ, tử xứ hựu tao quỷ đương đầu, Đinh Bính bất phùng sinh tái nhược, mang mang bần khổ độ xuân thu.",
-   "y": "Sách nói giờ này sinh vào chỗ yếu lại có sức ép đè đầu; lá số không có lửa đỡ thì dễ bận rộn, chật vật quanh năm.",
+   "y": "Sách ghi: ngày Giáp sinh giờ Canh Ngọ, ở đất suy lại có Thất Sát đè đầu; không gặp Đinh, Bính, thân lại yếu thì bận rộn, nghèo khổ qua năm tháng.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý đừng để áp lực bên ngoài lấy hết sức; cần một chỗ dựa vững.",
    "viec": "Tuần này chọn một người đáng tin, nói rõ việc đang đè nặng và xin một lời góp ý.",
    "tru_gio": "庚午",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Giáp|Mùi": {
    "han": "六甲日生辛未時官星坐貴最為竒月逢金氣須榮貴財禄相停敢斷之",
@@ -99,14 +104,15 @@
   "Giáp|Thân": {
    "han": "六甲生時遇壬申明傷暗鬼坐其身柱無丙戊秋冬旺坎壈飄流無定人",
    "am": "Lục Giáp sinh thời ngộ Nhâm Thân, minh thương ám quỷ toạ kỳ thân, trụ vô Bính Mậu thu đông vượng, khảm lẫm phiêu lưu vô định nhân.",
-   "y": "Sách nói giờ này có sức ép cả rõ lẫn ngầm đè lên mình; sinh thu đông mà lá số không có thứ đỡ thì dễ trôi nổi, khó yên một chỗ.",
+   "y": "Sách ghi: ngày Giáp sinh giờ Nhâm Thân, có tổn hại ngoài sáng, có Sát ngầm ngồi lên thân; trụ không có Bính, Mậu mà sinh mùa thu đông thì lận đận, trôi nổi không định.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý đừng đổi chỗ, đổi việc chỉ vì đang bị ép.",
    "viec": "Tuần này trước khi quyết rời việc hay chuyển nơi, viết ra ba điều mình được và mất.",
    "tru_gio": "壬申",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Giáp|Dậu": {
    "han": "六甲日生時癸酉暗官明印未希竒柱中有火無刑破元命胎生貴可知",
@@ -122,38 +128,41 @@
   "Giáp|Tuất": {
    "han": "六甲日生時甲戌木遭火局氣不舒為人好善福平常父母並傷誠可歔",
    "am": "Lục Giáp nhật sinh thời Giáp Tuất, mộc tao hoả cục khí bất thư, vi nhân hiếu thiện phúc bình thường, phụ mẫu tịnh thương thành khả hư.",
-   "y": "Sách tả người sinh giờ này hiền, thích làm điều tốt, phúc ở mức vừa; sách còn nhắc duyên nương tựa cha mẹ mỏng hơn người.",
+   "y": "Sách ghi: ngày Giáp sinh giờ Giáp Tuất, Mộc gặp cục Hoả, khí không thông; người hiền, thích làm điều thiện, phúc bình thường; về cha mẹ, sách dặn nên quan tâm, chăm sóc sức khoẻ cha mẹ nhiều hơn.",
    "nhom": "C",
    "chu_de": "gia_dinh",
    "ham_y": "Nên chú ý vun với cha mẹ khi còn có thể, và sớm tự đứng trên chân mình.",
    "viec": "Tuần này gọi cho cha mẹ một cuộc không nhân dịp gì, hỏi thăm và nhắc lịch khám định kỳ.",
    "tru_gio": "甲戌",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Giáp|Hợi": {
    "han": "六甲日生時乙亥羊刃反傷為禍害財官辛戊不相逢只恐功名不亨㤗",
    "am": "Lục Giáp nhật sinh thời Ất Hợi, dương nhận phản thương vi hoạ hại, tài quan Tân Mậu bất tương phùng, chỉ khủng công danh bất hanh thái.",
-   "y": "Sách nói giờ này có thế cứng quay lại làm khó chính mình; không gặp sao tiền, sao quan thì đường công danh khó suôn.",
+   "y": "Sách ghi: ngày Giáp sinh giờ Ất Hợi, Dương Nhận quay lại thành hoạ hại; không gặp Tài, Quan (Mậu, Tân) thì e công danh không hanh thông.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý sức bướng của chính mình trong việc làm.",
    "viec": "Tuần này nhận một góp ý về công việc mà không cãi lại, thử làm theo một lần.",
    "tru_gio": "乙亥",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Ất|Tý": {
    "han": "六乙日生時丙子傷官坐貴福不全柱中不見官刑破方是平生貴禄縁",
    "am": "Lục Ất nhật sinh thời Bính Tý, thương quan toạ quý phúc bất toàn, trụ trung bất kiến quan hình phá, phương thị bình sinh quý lộc duyên.",
-   "y": "Sách nói giờ này giỏi giang, có quý nhân nhưng phúc chưa trọn; lá số không có thứ va chạm với sao quan thì mới có đường thăng tiến bền.",
+   "y": "Sách ghi: ngày Ất sinh giờ Bính Tý, Thương Quan ngồi trên quý nhân nhưng phúc không trọn; trong trụ không thấy Quan bị hình, phá thì mới có duyên quý lộc cả đời.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý cách mình nói với cấp trên và người có chức.",
    "viec": "Tuần này góp ý cho cấp trên bằng câu hỏi thay vì chê thẳng.",
    "tru_gio": "丙子",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Ất|Sửu": {
    "han": "六乙日生時丁丑食神相助遇財官月通金氣化為福",
@@ -168,14 +177,15 @@
   "Ất|Dần": {
    "han": "六乙日生時戊寅敗財背禄實傷身有心無力多成敗止是平常衣禄人",
    "am": "Lục Ất nhật sinh thời Mậu Dần, bại tài bội lộc thực thương thân, hữu tâm vô lực đa thành bại, chỉ thị bình thường y lộc nhân.",
-   "y": "Sách nói giờ này dễ hao tiền, lệch với lộc, có lòng mà thiếu sức, việc làm nửa thành nửa dở; đời sống ở mức bình thường.",
+   "y": "Sách ghi: ngày Ất sinh giờ Mậu Dần, tiền bại, lộc trái, thật hại thân; có lòng mà không có sức, nhiều lần thành rồi bại, chỉ là người cơm áo bình thường.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý làm từng việc cho xong trước khi mở việc mới.",
    "viec": "Tuần này chọn một việc dở dang, làm cho xong rồi mới nhận việc khác.",
    "tru_gio": "戊寅",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Ất|Mão": {
    "han": "六乙日生逢己卯時居日禄財臨好旺通木氣貴無疑酉土辛重亦可惱",
@@ -190,26 +200,28 @@
   "Ất|Thìn": {
    "han": "六乙日生時庚辰水白金清化象真壬從辛酉通官貴却防目疾減精神",
    "am": "Lục Ất nhật sinh thời Canh Thìn, thuỷ bạch kim thanh hoá tượng chân, nhâm tòng Tân Dậu thông quan quý, khước phòng mục tật giảm tinh thần.",
-   "y": "Sách tả người sinh giờ này thanh tú, có đường quan quý; sách còn nhắc nên giữ đôi mắt và sức tinh thần.",
+   "y": "Sách ghi: ngày Ất sinh giờ Canh Thìn, Thuỷ trắng Kim trong, hoá tượng thật; theo Tân Dậu thì thông đường quan quý, nhưng phải phòng bệnh mắt, tinh thần sút kém — nên đi khám mắt định kỳ.",
    "nhom": "C",
    "chu_de": "suc_khoe",
    "ham_y": "Nên chú ý cho mắt nghỉ khi làm việc lâu với màn hình, ngủ đủ giấc.",
    "viec": "Hẹn đi khám mắt định kỳ nếu đã hơn một năm chưa khám.",
    "tru_gio": "庚辰",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Ất|Tỵ": {
    "han": "六乙日生時辛巳金木交爭主不仁有化月中身旺貴不通無化恐傷人",
    "am": "Lục Ất nhật sinh thời Tân Tỵ, kim mộc giao tranh chủ bất nhân, hữu hoá nguyệt trung thân vượng quý, bất thông vô hoá khủng thương nhân.",
-   "y": "Sách nói giờ này hai thế giằng co nên tính dễ cứng với người; tháng sinh hoà được hai thế ấy và thân vững thì quý, không thì dễ làm người khác buồn lòng.",
+   "y": "Sách ghi: ngày Ất sinh giờ Tân Tỵ, Kim Mộc giao tranh nên tính bất nhân; có hoá, tháng sinh thân vượng thì quý; không thông, không hoá thì e làm tổn hại người.",
    "nhom": "B",
    "chu_de": "tinh_net",
    "ham_y": "Nên chú ý lời nói khi đang căng thẳng.",
    "viec": "Tuần này nếu lỡ nói nặng với ai, nhắn một câu xin lỗi trong ngày.",
    "tru_gio": "辛巳",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Ất|Ngọ": {
    "han": "六乙日生時壬午印綬生身財食聚月通水木禄豐盈不通月氣平常數",
@@ -224,14 +236,15 @@
   "Ất|Mùi": {
    "han": "六乙日生時癸未入墓之中遇倒傷馬劣財微食見尅一生衣禄主平常",
    "am": "Lục Ất nhật sinh thời Quý Mùi, nhập mộ chi trung ngộ đảo thương, mã liệt tài vi thực kiến khắc, nhất sinh y lộc chủ bình thường.",
-   "y": "Sách nói giờ này sinh vào chỗ kín, nguồn ăn bị lấn, tiền mỏng; đời sống ở mức đủ ăn đủ mặc.",
+   "y": "Sách ghi: ngày Ất sinh giờ Quý Mùi, vào mộ lại gặp thế bị đảo, Mã kém, tiền mỏng, Thực Thần bị khắc; cả đời cơm áo chỉ ở mức bình thường.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý nguồn thu chính, đừng để việc phụ lấn mất.",
    "viec": "Tuần này ghi lại mỗi khoản thu trong tháng đến từ đâu, xem nguồn nào đáng giữ.",
    "tru_gio": "癸未",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Ất|Thân": {
    "han": "六乙日生時甲申官星得印位生成月中通氣無衝破必定榮華仕路人",
@@ -247,38 +260,41 @@
   "Ất|Dậu": {
    "han": "六乙日生時乙酉得逢金局火為竒用神遇木重重見鬼絶壽傷反無依",
    "am": "Lục Ất nhật sinh thời Ất Dậu, đắc phùng kim cục hoả vi kỳ, dụng thần ngộ mộc trùng trùng kiến, quỷ tuyệt thọ thương phản vô y.",
-   "y": "Sách nói giờ này nếu lá số có Kim kết thành khối mà có lửa đỡ thì hay; còn gặp nhiều Mộc thì sách gắn với sức bền về lâu dài chưa dày, ít chỗ dựa.",
+   "y": "Sách ghi: ngày Ất sinh giờ Ất Dậu, gặp cục Kim có Hoả là hay; nếu dụng thần gặp Mộc trùng trùng thì không nơi nương tựa — sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ.",
    "nhom": "C",
    "chu_de": "suc_ben",
    "ham_y": "Nên chú ý giữ sức, đừng làm quá giờ nhiều ngày liền.",
    "viec": "Đặt lịch khám sức khoẻ tổng quát trong năm nay nếu chưa khám.",
    "tru_gio": "乙酉",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Ất|Tuất": {
    "han": "六乙日生時丙戌鬼敗臨身有損傷若不氣通身旺月孤貧勞碌苦難當",
    "am": "Lục Ất nhật sinh thời Bính Tuất, quỷ bại lâm thân hữu tổn thương, nhược bất khí thông thân vượng nguyệt, cô bần lao lục khổ nan đương.",
-   "y": "Sách nói giờ này có sức ép đè và hao tổn; không sinh tháng thân vững thì dễ vất vả, ít người đỡ, tiền chật.",
+   "y": "Sách ghi: ngày Ất sinh giờ Bính Tuất, Sát bại đến thân, có hao tổn; nếu không thông khí, không sinh tháng thân vượng thì cô đơn, nghèo, vất vả, khổ không chịu nổi.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý đừng ôm mọi việc một mình; giữ vài mối người thân tin.",
    "viec": "Tuần này nhờ một người giúp một việc nhỏ thay vì tự làm hết.",
    "tru_gio": "丙戌",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Ất|Hợi": {
    "han": "六乙日生丁亥時食神印綬亦奇哉月氣水土無財貴切忌傷妻與子灾",
    "am": "Lục Ất nhật sinh Đinh Hợi thời, thực thần ấn thụ diệc kỳ tai, nguyệt khí thuỷ thổ vô tài quý, thiết kỵ thương thê dữ tử tai.",
-   "y": "Sách khen giờ này có sao hưởng thụ và sao che chở; sách còn dặn kỹ chuyện bạn đời và con, cần giữ gìn cho người nhà.",
+   "y": "Sách ghi: ngày Ất sinh giờ Đinh Hợi có Thực Thần, Ấn thụ cũng là hay; khí tháng Thuỷ Thổ thì không có tài quý; rất kỵ chuyện vợ con gặp hoạ — sách dặn nên quan tâm, chăm sóc sức khoẻ vợ con nhiều hơn.",
    "nhom": "C",
    "chu_de": "gia_dinh",
    "ham_y": "Nên chú ý dành thời gian và để ý sức khoẻ của bạn đời, của con.",
    "viec": "Tuần này nhắc người nhà một lịch khám định kỳ còn bỏ dở.",
    "tru_gio": "丁亥",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Bính|Tý": {
    "han": "六丙日生時戊子財官生旺遇食神月氣相扶為最貴身衰無倚是常人",
@@ -293,14 +309,15 @@
   "Bính|Sửu": {
    "han": "六丙日生時己丑官鬼相傷禄不成若見申庚併乙旺不求財禄過平生",
    "am": "Lục Bính nhật sinh thời Kỷ Sửu, quan quỷ tương thương lộc bất thành, nhược kiến Thân canh tính ất vượng, bất cầu tài lộc quá bình sinh.",
-   "y": "Sách nói giờ này sao quan bị lấn nên lộc khó thành; lá số có Kim, Mộc vững thì sống bình thường, không ham cầu tiền lộc.",
+   "y": "Sách ghi: ngày Bính sinh giờ Kỷ Sửu, Quan và Sát làm tổn nhau nên lộc không thành; nếu thấy Thân, Canh cùng Ất vượng thì không cầu tài lộc mà sống qua một đời bình thường.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý đừng lấy chức danh làm thước đo mình.",
    "viec": "Tuần này viết ra một việc mình làm tốt mà không cần ai công nhận.",
    "tru_gio": "己丑",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Bính|Dần": {
    "han": "六丙日生時庚寅學堂生氣助其身運中有合通金局必是榮華富貴人",
@@ -315,26 +332,28 @@
   "Bính|Mão": {
    "han": "六丙日生時辛卯旺木雙妻為人巧不旺化水死鄉中色慾隨身多愛好",
    "am": "Lục Bính nhật sinh thời Tân Mão, vượng mộc song thê vi nhân xảo, bất vượng hoá thuỷ tử hương trung, sắc dục tuỳ thân đa ái hảo.",
-   "y": "Sách tả người sinh giờ này khéo, đa tình, nhiều sở thích, đường tình cảm nhiều ngả.",
+   "y": "Sách ghi: ngày Bính sinh giờ Tân Mão, Mộc vượng thì có hai vợ, người khéo léo; Mộc không vượng, hoá Thuỷ ở đất suy thì ham sắc theo người, nhiều thứ ưa thích.",
    "nhom": "B",
    "chu_de": "tinh_duyen",
    "ham_y": "Nên chú ý rõ ràng trong các mối quan hệ, đừng để người khác hiểu lầm.",
    "viec": "Tuần này nếu đang mập mờ với ai, nói rõ một lần mình muốn gì.",
    "tru_gio": "辛卯",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Bính|Thìn": {
    "han": "六丙日生時壬辰煞星坐庫火難親身强反主為官貴如弱定為貧夭人",
    "am": "Lục Bính nhật sinh thời Nhâm Thìn, sát tinh toạ khố hoả nan thân, thân cường phản chủ vi quan quý, như nhược định vi bần yểu nhân.",
-   "y": "Sách nói giờ này có sức ép nằm trong kho; thân vững thì lại làm nên chức quý; thân yếu thì sách gắn với tiền chật và sức bền về lâu dài chưa dày.",
+   "y": "Sách ghi: ngày Bính sinh giờ Nhâm Thìn, Sát tinh ngồi kho, Hoả khó gần; thân mạnh lại làm quan quý, thân yếu thì nghèo — sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ.",
    "nhom": "C",
    "chu_de": "suc_ben",
    "ham_y": "Nên chú ý nuôi sức khoẻ làm gốc trước khi gánh việc lớn.",
    "viec": "Đi khám sức khoẻ định kỳ và giữ giờ ngủ đều trong tháng này.",
    "tru_gio": "壬辰",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Bính|Tỵ": {
    "han": "六丙日生時癸巳日禄歸時又遇官不見己寅壬癸月功名唾手得何難",
@@ -348,15 +367,16 @@
   },
   "Bính|Ngọ": {
    "han": "六丙日生時甲午格入伏晶要見土樂逢戊巳最為祥火炎太過多辛苦",
-   "am": "Lục Bính nhật sinh thời Giáp Ngọ, cách nhập phục tinh yếu kiến thổ, lạc phùng Mậu Tỵ tối vi tường, hoả viêm thái quá đa tân khổ.",
-   "y": "Sách nói giờ này lửa rất mạnh, cần có đất giữ lại ánh sáng; gặp đất thì tốt lành, lửa quá thì nhiều vất vả.",
+   "am": "Lục Bính nhật sinh thời Giáp Ngọ, cách nhập phục tinh yếu kiến thổ, lạc phùng Mậu Kỷ tối vi tường, hoả viêm thái quá đa tân khổ.",
+   "y": "Sách ghi: ngày Bính sinh giờ Giáp Ngọ, cách cần thấy Thổ để giấu ánh sáng; gặp Mậu, Kỷ là tốt nhất, còn Hoả bốc quá thì nhiều vất vả.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý đừng để nhiệt tình đốt hết sức; có lúc phải dừng.",
    "viec": "Tuần này chọn một buổi không làm gì, nghỉ thật.",
    "tru_gio": "甲午",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Bính|Mùi": {
    "han": "六丙日生時乙未火月生人多富貴乙為正印局中逢不見財星方可慰",
@@ -371,26 +391,28 @@
   "Bính|Thân": {
    "han": "六丙日生時丙申身衰財破比肩分暗中鬼旺七煞地無救何能家道殷",
    "am": "Lục Bính nhật sinh thời Bính Thân, thân suy tài phá tỷ kiên phân, ám trung quỷ vượng thất sát địa, vô cứu hà năng gia đạo ân.",
-   "y": "Sách nói giờ này thân yếu, tiền dễ hao và bị chia phần, lại có sức ép ngầm; không có thứ đỡ thì khó dựng nhà khá giả.",
+   "y": "Sách ghi: ngày Bính sinh giờ Bính Thân, thân suy, tiền bị phá, Tỷ Kiên chia phần; ngầm có Sát vượng ở đất Thất Sát, không có gì cứu thì làm sao gia đạo giàu có.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý tiền chung, tiền cho anh em bạn bè vay.",
    "viec": "Tuần này ghi lại các khoản đang cho vay hoặc góp chung, hẹn ngày đối chiếu.",
    "tru_gio": "丙申",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Bính|Dậu": {
    "han": "六丙日生時丁酉刃生身死為灾咎柱中無救定然凶就財棄命難長壽",
    "am": "Lục Bính nhật sinh thời Đinh Dậu, nhận sinh thân tử vi tai cữu, trụ trung vô cứu định nhiên hung, tựu tài khí mệnh nan trường thọ.",
-   "y": "Sách nói giờ này thân sinh vào chỗ yếu, dễ gặp trắc trở nếu lá số không có thứ đỡ; sách gắn với sức bền chưa dày khi chạy theo tiền mà quên giữ thân.",
+   "y": "Sách ghi: ngày Bính sinh giờ Đinh Dậu, Dương Nhận sinh mà thân ở đất suy, sinh tai hoạ; trong trụ không có gì cứu thì ắt xấu, theo Tài mà bỏ thân — sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ.",
    "nhom": "C",
    "chu_de": "suc_ben",
    "ham_y": "Nên chú ý đừng đánh đổi sức khoẻ lấy tiền.",
    "viec": "Tuần này đặt giờ dừng làm mỗi tối, và lên lịch khám tổng quát.",
    "tru_gio": "丁酉",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Bính|Tuất": {
    "han": "六丙日生時戊戌火局之中遇食神月氣火通為福壽不通逢吉亦常人",
@@ -405,26 +427,28 @@
   "Bính|Hợi": {
    "han": "六丙日生時己亥亥中壬旺被巳傷若通月氣方為貴寅卯不逢主泛常",
    "am": "Lục Bính nhật sinh thời Kỷ Hợi, Hợi trung nhâm vượng bị kỷ thương, nhược thông nguyệt khí phương vi quý, Dần Mão bất phùng chủ phiếm thường.",
-   "y": "Sách nói giờ này có sức ép mạnh đè lên mình; tháng sinh tiếp sức thì quý, không gặp Mộc đỡ thì ở mức thường.",
+   "y": "Sách ghi: ngày Bính sinh giờ Kỷ Hợi, Nhâm trong Hợi vượng nhưng bị Kỷ làm tổn; thông khí tháng mới quý, không gặp Dần, Mão thì tầm thường.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý tìm người đỡ, người hướng dẫn trong việc làm.",
    "viec": "Tuần này hỏi một người đi trước một câu về việc mình đang vướng.",
    "tru_gio": "己亥",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Đinh|Tý": {
    "han": "六丁日生時庚子身衰鬼旺暗中藏月無救助多貧夭得坐身强又吉昌",
    "am": "Lục Đinh nhật sinh thời Canh Tý, thân suy quỷ vượng ám trung tàng, nguyệt vô cứu trợ đa bần yểu, đắc toạ thân cường hựu cát xương.",
-   "y": "Sách nói giờ này thân yếu, sức ép ngầm mạnh; tháng sinh không đỡ thì sách gắn với tiền chật và sức bền chưa dày; thân vững thì lại tốt.",
+   "y": "Sách ghi: ngày Đinh sinh giờ Canh Tý, thân suy, Sát vượng ẩn bên trong; tháng không cứu thì phần nhiều nghèo — sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ; được thân mạnh thì lại tốt đẹp, hưng thịnh.",
    "nhom": "C",
    "chu_de": "suc_ben",
    "ham_y": "Nên chú ý nuôi sức trước, mọi việc sau.",
    "viec": "Tháng này sắp xếp đi khám tổng quát và giữ một môn vận động nhẹ.",
    "tru_gio": "庚子",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Đinh|Sửu": {
    "han": "六丁日生時辛丑庫中財榖多陳朽身無依倚不為㐫有托妻賢而富厚",
@@ -450,14 +474,15 @@
   "Đinh|Mão": {
    "han": "六丁日生時癸卯鬼旺身衰困不禁倚托月通方論福不然貧下苦悲心",
    "am": "Lục Đinh nhật sinh thời Quý Mão, quỷ vượng thân suy khốn bất cấm, ỷ thác nguyệt thông phương luận phúc, bất nhiên bần hạ khổ bi tâm.",
-   "y": "Sách nói giờ này thân yếu, sức ép mạnh, dễ thấy bị bó; có chỗ dựa thì có phúc, không thì dễ chật vật, buồn lòng.",
+   "y": "Sách ghi: ngày Đinh sinh giờ Quý Mão, Sát vượng, thân suy, khốn đốn không chịu nổi; nhờ được tháng thông khí mới bàn tới phúc, không thì nghèo, thấp kém, khổ và buồn lòng.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý tìm chỗ dựa vững: một nghề chắc, một người tin.",
    "viec": "Tuần này dành hai giờ học thêm một kỹ năng cho nghề chính.",
    "tru_gio": "癸卯",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Đinh|Thìn": {
    "han": "六丁日生時甲辰官星得位印生身不通月氣平為福有倚扶同禄貴人",
@@ -472,14 +497,15 @@
   "Đinh|Tỵ": {
    "han": "六丁日生時乙巳傷官暗裏㑹梟神東方運地成虚秀金水之鄉禄貴人",
    "am": "Lục Đinh nhật sinh thời Ất Tỵ, thương quan ám lý hội kiêu thần, đông phương vận địa thành hư tú, kim thuỷ chi hương lộc quý nhân.",
-   "y": "Sách nói giờ này có tài nhưng dễ ngạo; tới vận phương Đông thì giỏi mà ít thành, tới vận Kim Thủy thì có lộc quý.",
+   "y": "Sách ghi: ngày Đinh sinh giờ Ất Tỵ, Thương Quan ngầm hội với Kiêu thần; vận phương Đông thì chỉ đẹp hão, vận đất Kim, Thuỷ thì có lộc, là người quý.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý biến cái giỏi thành sản phẩm cụ thể.",
    "viec": "Tuần này làm xong một việc nhỏ có kết quả người khác nhìn thấy được.",
    "tru_gio": "乙巳",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Đinh|Ngọ": {
    "han": "六丁日生逢丙午日禄喜居時上遇柱中䑕兔癸無傷少年騰逹青雲路",
@@ -505,14 +531,15 @@
   "Đinh|Thân": {
    "han": "六丁日生時戊申天元背禄敗其身月無救助財難發只是平常衣禄人",
    "am": "Lục Đinh nhật sinh thời Mậu Thân, thiên nguyên bội lộc bại kỳ thân, nguyệt vô cứu trợ tài nan phát, chỉ thị bình thường y lộc nhân.",
-   "y": "Sách nói giờ này lệch với lộc, thân dễ hao; tháng sinh không đỡ thì tiền khó lên, đời sống ở mức bình thường.",
+   "y": "Sách ghi: ngày Đinh sinh giờ Mậu Thân, thiên nguyên trái lộc, làm bại thân; tháng không cứu giúp thì tiền khó phát, chỉ là người cơm áo bình thường.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý giữ nghề chính thay vì tìm nhiều đường phụ.",
    "viec": "Tuần này bỏ bớt một khoản chi nhỏ lặp lại, chuyển sang để dành.",
    "tru_gio": "戊申",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Đinh|Dậu": {
    "han": "六丁日生時己酉學堂遇貴格誠稀妻子有氣食神旺無破無刑方是竒",
@@ -528,14 +555,15 @@
   "Đinh|Tuất": {
    "han": "六丁日生時庚戌墓中逢敗難成福若無救助鬼來傷財帛不聚傷其目",
    "am": "Lục Đinh nhật sinh thời Canh Tuất, mộ trung phùng bại nan thành phúc, nhược vô cứu trợ quỷ lai thương, tài bạch bất tụ thương kỳ mục.",
-   "y": "Sách nói giờ này phúc khó thành, tiền khó tụ nếu không có thứ đỡ; sách còn gắn với đôi mắt cần giữ gìn.",
+   "y": "Sách ghi: ngày Đinh sinh giờ Canh Tuất, trong mộ gặp bại nên phúc khó thành; không có cứu thì Sát tới làm tổn, tiền của không tụ, hại đến mắt — nên đi khám mắt định kỳ.",
    "nhom": "C",
    "chu_de": "suc_khoe",
    "ham_y": "Nên chú ý giữ mắt và giữ tiền: chi tiêu có kế hoạch.",
    "viec": "Đi khám mắt định kỳ; tuần này ghi chép chi tiêu bảy ngày.",
    "tru_gio": "庚戌",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Đinh|Hợi": {
    "han": "六丁日生時辛亥財官雙羙印長生若通月氣極高貴月不通兮名利輕",
@@ -550,38 +578,41 @@
   "Mậu|Tý": {
    "han": "六戊日生時壬子月通四季墓中財若交身化為真火水旺運鄉忌目灾",
    "am": "Lục Mậu nhật sinh thời Nhâm Tý, nguyệt thông tứ quý mộ trung tài, nhược giao thân hoá vi chân hoả, thuỷ vượng vận hương kỵ mục tai.",
-   "y": "Sách nói giờ này có tiền nằm trong kho nếu sinh tháng cuối mùa; sách nhắc khi tới vận nước nhiều thì nên giữ gìn đôi mắt.",
+   "y": "Sách ghi: ngày Mậu sinh giờ Nhâm Tý, tháng thông tứ quý thì có tiền trong kho; nếu hợp với thân hoá thành Hoả thật; tới vận đất Thuỷ vượng thì kỵ bệnh mắt — nên đi khám mắt định kỳ.",
    "nhom": "C",
    "chu_de": "suc_khoe",
    "ham_y": "Nên chú ý cho mắt nghỉ, đeo kính bảo vệ khi cần.",
    "viec": "Đi khám mắt định kỳ trong năm nay.",
    "tru_gio": "壬子",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Mậu|Sửu": {
    "han": "六戊日生時癸丑却去從妻成配偶為人性巧甚聰明尤好風流嗜花酒",
    "am": "Lục Mậu nhật sinh thời Quý Sửu, khước khứ tòng thê thành phối ngẫu, vi nhân tính xảo thậm thông minh, vưu hiếu phong lưu thị hoa tửu.",
-   "y": "Sách tả người sinh giờ này khéo, rất thông minh, gắn bó với bạn đời; nhưng ưa phong lưu, thích tiệc tùng rượu chè.",
+   "y": "Sách ghi: ngày Mậu sinh giờ Quý Sửu thì theo vợ thành đôi; người tính khéo, rất thông minh, càng ham phong lưu, mê sắc và rượu.",
    "nhom": "B",
    "chu_de": "tinh_duyen",
    "ham_y": "Nên chú ý chừng mực với rượu và các cuộc vui.",
    "viec": "Tuần này đặt cho mình một giới hạn số ly mỗi lần đi tiệc và giữ đúng.",
    "tru_gio": "癸丑",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Mậu|Dần": {
    "han": "六戊日生時甲寅病中又被鬼傷身月氣若通身旺吉日干衰弱夭亡人",
    "am": "Lục Mậu nhật sinh thời Giáp Dần, bệnh trung hựu bị quỷ thương thân, nguyệt khí nhược thông thân vượng cát, nhật can suy nhược yểu vong nhân.",
-   "y": "Sách nói giờ này sinh vào chỗ yếu lại có sức ép; tháng sinh tiếp sức thì tốt, thân yếu thì sách gắn với sức bền về lâu dài chưa dày.",
+   "y": "Sách ghi: ngày Mậu sinh giờ Giáp Dần, ở đất bệnh lại bị Sát làm tổn thân; khí tháng thông, thân vượng thì tốt; can ngày suy yếu thì sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ.",
    "nhom": "C",
    "chu_de": "suc_ben",
    "ham_y": "Nên chú ý giữ sức, đừng gánh việc quá khả năng.",
    "viec": "Đặt lịch khám sức khoẻ tổng quát và ngủ đủ bảy tiếng mỗi đêm trong tuần này.",
    "tru_gio": "甲寅",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Mậu|Mão": {
    "han": "六戊日生時乙卯四柱傷官不見好辛甲弗逢衝害無管取功名直到老",
@@ -617,26 +648,28 @@
   "Mậu|Ngọ": {
    "han": "六戊日生時戊午為人兇狠性多剛月中化火居官吉破害刑衝却是良",
    "am": "Lục Mậu nhật sinh thời Mậu Ngọ, vi nhân hung ngận tính đa cương, nguyệt trung hoá hoả cư quan cát, phá hại hình xung khước thị lương.",
-   "y": "Sách tả người sinh giờ này cứng, dễ nóng; tháng sinh hoá được lửa thì làm quan tốt; lá số có va chạm lại thành hay vì tính cứng được mài bớt.",
+   "y": "Sách ghi: ngày Mậu sinh giờ Mậu Ngọ, người hung dữ, tính phần nhiều cứng; tháng hoá Hoả thì làm quan tốt; gặp phá, hại, hình, xung lại là hay.",
    "nhom": "B",
    "chu_de": "tinh_net",
    "ham_y": "Nên chú ý cơn nóng khi bị trái ý.",
    "viec": "Tuần này khi bực, đợi một đêm mới trả lời tin nhắn.",
    "tru_gio": "戊午",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Mậu|Mùi": {
    "han": "六戊日生時己未羊刃偏官不怕衝但是為人多性狠平生衣禄亦無凶",
    "am": "Lục Mậu nhật sinh thời Kỷ Mùi, dương nhận thiên quan bất phạ xung, đãn thị vi nhân đa tính ngận, bình sinh y lộc diệc vô hung.",
-   "y": "Sách tả giờ này cứng cỏi, không sợ va chạm; tính dễ gắt nhưng đời sống đủ, không có gì xấu.",
+   "y": "Sách ghi: ngày Mậu sinh giờ Kỷ Mùi, Dương Nhận và Thiên Quan không sợ xung; chỉ có điều người tính phần nhiều hung dữ, cả đời cơm áo cũng không có gì xấu.",
    "nhom": "B",
    "chu_de": "tinh_net",
    "ham_y": "Nên chú ý giọng nói khi làm việc với người dưới.",
    "viec": "Tuần này khen một người làm cùng một câu cụ thể.",
    "tru_gio": "己未",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Mậu|Thân": {
    "han": "六戊日生時庚申干上食神喜相親不見卯寅兼甲丙何憂玉帶不榮身",
@@ -651,14 +684,15 @@
   "Mậu|Dậu": {
    "han": "六戊日生時辛酉傷官暴敗怕時逢柱中縱有財星助有子不成命早終",
    "am": "Lục Mậu nhật sinh thời Tân Dậu, thương quan bạo bại phạ thời phùng, trụ trung túng hữu tài tinh trợ, hữu tử bất thành mệnh tảo chung.",
-   "y": "Sách nói giờ này dễ hao bại bất ngờ; dù có tiền đỡ, sách vẫn nhắc đường con cái đến muộn hoặc phải bỏ nhiều công, và nên giữ gìn sức bền.",
+   "y": "Sách ghi: ngày Mậu sinh giờ Tân Dậu, Thương Quan, bạo bại, sợ gặp giờ này; dù trong trụ có Tài tinh giúp, có con mà khó nuôi — sách dặn nên chăm con kỹ lúc còn nhỏ, và nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ.",
    "nhom": "C",
    "chu_de": "con_cai",
    "ham_y": "Nên chú ý sức khoẻ của mình và chuyện con cái; mong con thì nên đi khám sớm.",
    "viec": "Đặt lịch khám sức khoẻ tổng quát cho mình trong năm nay.",
    "tru_gio": "辛酉",
    "quyen": 8,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Mậu|Tuất": {
    "han": "六戊日生時壬戌身居正位見天財若生秋月通身旺萬貫家資不用猜",
@@ -715,14 +749,15 @@
   "Kỷ|Mão": {
    "han": "六巳日生時丁卯支干暗鬼梟虚神柱中有助方為福無助難為顯達人",
    "am": "Lục Kỷ nhật sinh thời Đinh Mão, chi can ám quỷ kiêu hư thần, trụ trung hữu trợ phương vi phúc, vô trợ nan vi hiển đạt nhân.",
-   "y": "Sách nói giờ này có sức ép ngầm; lá số có người đỡ thì có phúc, không có thì khó hiển đạt.",
+   "y": "Sách ghi: ngày Kỷ sinh giờ Đinh Mão, can chi có Sát ngầm, Kiêu thần hão; trong trụ có giúp mới là phúc, không có thì khó thành người hiển đạt.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý tìm người đỡ đầu trong nghề.",
    "viec": "Tuần này nhắn hỏi thăm một người từng giúp mình trong nghề.",
    "tru_gio": "丁卯",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Kỷ|Thìn": {
    "han": "六巳日生時戊辰其身得位遇財神田園富貴多誠信甲乙提綱祿貴人",
@@ -767,26 +802,28 @@
   "Kỷ|Thân": {
    "han": "六巳日生時壬申損敗天元氣不全若失天元無倚托非窮即夭命難延",
    "am": "Lục Kỷ nhật sinh thời Nhâm Thân, tổn bại thiên nguyên khí bất toàn, nhược thất thiên nguyên vô ỷ thác, phi cùng tức yểu mệnh nan diên.",
-   "y": "Sách nói giờ này khí của thân dễ hao; không có chỗ dựa thì sách gắn với tiền chật và sức bền về lâu dài chưa dày.",
+   "y": "Sách ghi: ngày Kỷ sinh giờ Nhâm Thân, tổn bại, khí thiên nguyên không đủ; mất thiên nguyên, không nơi nương tựa thì nghèo cùng — sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ.",
    "nhom": "C",
    "chu_de": "suc_ben",
    "ham_y": "Nên chú ý dựng nền sức khoẻ và một khoản để dành.",
    "viec": "Tháng này đi khám tổng quát và mở một khoản để dành tự động, dù nhỏ.",
    "tru_gio": "壬申",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Kỷ|Dậu": {
    "han": "六已日生時癸酉沐浴之鄕水土渾財食支藏多聚散身衰失地壽難存",
    "am": "Lục Kỷ nhật sinh thời Quý Dậu, mộc dục chi hương thuỷ thổ hồn, tài thực chi tàng đa tụ tán, thân suy thất địa thọ nan tồn.",
-   "y": "Sách nói giờ này thân như ở chỗ nước đục, tiền và miếng ăn lúc tụ lúc tan; thân yếu thì sách gắn với sức bền chưa dày.",
+   "y": "Sách ghi: ngày Kỷ sinh giờ Quý Dậu, ở đất Mộc Dục, Thuỷ Thổ lẫn đục; Tài và Thực tàng trong chi nên nhiều lần tụ tán; thân suy mất đất thì sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ.",
    "nhom": "C",
    "chu_de": "suc_ben",
    "ham_y": "Nên chú ý giữ tiền ổn định và nuôi sức.",
    "viec": "Đặt lịch khám sức khoẻ định kỳ và ghi chi tiêu trong một tuần.",
    "tru_gio": "癸酉",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Kỷ|Tuất": {
    "han": "六巳日生時甲戌妻從夫化為真土如通月氣祿源深反此而言平常取",
@@ -801,50 +838,54 @@
   "Kỷ|Hợi": {
    "han": "六巳日生時乙亥官藏煞見未為奇逢金制煞方為吉身不旺兮㐫可知",
    "am": "Lục Kỷ nhật sinh thời Ất Hợi, quan tàng sát kiến vị vi kỳ, phùng kim chế sát phương vi cát, thân bất vượng hề hung khả tri.",
-   "y": "Sách nói giờ này sức ép lộ ra mà sao quan nằm ẩn; có Kim kìm thì tốt, thân không vững thì dễ gặp việc trái.",
+   "y": "Sách ghi: ngày Kỷ sinh giờ Ất Hợi, Quan ẩn mà Sát lộ chưa phải là hay; gặp Kim chế Sát mới tốt, thân không vượng thì điều dữ là thấy trước được.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý giữ sức khi áp lực công việc tăng.",
    "viec": "Tuần này chia việc lớn đang làm thành ba phần nhỏ, xong từng phần.",
    "tru_gio": "乙亥",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Canh|Tý": {
    "han": "六庚日生時丙子身鬼俱衰退神强有托榮華無托賤鬼逢生旺壽難長",
    "am": "Lục Canh nhật sinh thời Bính Tý, thân quỷ câu suy thoái thần cường, hữu thác vinh hoa vô thác tiện, quỷ phùng sinh vượng thọ nan trường.",
-   "y": "Sách nói giờ này thân và sức ép đều yếu; có chỗ dựa thì vinh hiển, không có thì vất vả; sức ép gặp lúc mạnh thì sách gắn với sức bền chưa dày.",
+   "y": "Sách ghi: ngày Canh sinh giờ Bính Tý, thân và Sát đều suy, thần lùi mạnh; có chỗ dựa thì vinh hoa, không có thì dễ bị người coi nhẹ; Sát gặp đất sinh vượng thì sách dặn nên khám sức khoẻ thường xuyên, giữ nếp sống điều độ.",
    "nhom": "C",
    "chu_de": "suc_ben",
    "ham_y": "Nên chú ý dựng chỗ dựa vững và giữ sức.",
    "viec": "Đặt lịch đi khám định kỳ; tuần này ngủ trước 23 giờ ba đêm.",
    "tru_gio": "丙子",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Canh|Sửu": {
    "han": "六庚日生時丁丑貴地逢官火太輕木火運通軒冕客不通獨立只虚名",
    "am": "Lục Canh nhật sinh thời Đinh Sửu, quý địa phùng quan hoả thái khinh, mộc hoả vận thông hiên miện khách, bất thông độc lập chỉ hư danh.",
-   "y": "Sách nói giờ này ở chỗ quý gặp quan nhưng lửa nhẹ; tới vận Mộc, Hỏa thì làm quan, không thì một mình gánh, chỉ được tiếng.",
+   "y": "Sách ghi: ngày Canh sinh giờ Đinh Sửu, ở đất quý gặp Quan nhưng Hoả quá nhẹ; vận Mộc, Hoả thông thì làm quan, không thông thì đứng một mình, chỉ có danh hão.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý kết thêm người cùng làm, đừng đứng một mình.",
    "viec": "Tuần này rủ một người cùng làm một việc mình định làm một mình.",
    "tru_gio": "丁丑",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Canh|Dần": {
    "han": "六庚日生時庚寅火生金絶福虧人月通從革或秋降却作皇家柱石臣",
    "am": "Lục Canh nhật sinh thời Canh Dần, hoả sinh kim tuyệt phúc khuy nhân, nguyệt thông tòng cách hoặc thu giáng, khước tác hoàng gia trụ thạch thần.",
-   "y": "Sách nói giờ này sức thân dễ đuối nên phúc vơi; sinh tháng Kim hay mùa thu thì lại thành người trụ cột.",
+   "y": "Sách ghi: ngày Canh sinh giờ Canh Dần, Hoả sinh mà Kim tuyệt, phúc khuyết; tháng thông cách Tòng Cách hoặc sinh mùa thu thì lại thành bề tôi trụ cột của nhà vua.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý chọn môi trường hợp sức mình.",
    "viec": "Tuần này ghi ra hai nơi, hai việc mình làm tốt nhất và vì sao.",
    "tru_gio": "戊寅",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Canh|Mão": {
    "han": "六庚日生時己夘胎生元命發因妻柱中有托逢庚旺財祿豐盈福壽齊",
@@ -869,14 +910,15 @@
   "Canh|Tỵ": {
    "han": "六庚日生時辛巳偏官合刃自身生為人剛毅妻財損運到金鄕貴祿亨",
    "am": "Lục Canh nhật sinh thời Tân Tỵ, thiên quan hợp nhận tự thân sinh, vi nhân cương nghị thê tài tổn, vận đáo kim hương quý lộc hanh.",
-   "y": "Sách tả người sinh giờ này cứng cỏi, quả quyết; sách nhắc tiền bạc và đường vợ chồng cần giữ gìn hơn; tới vận Kim thì có lộc quý.",
+   "y": "Sách ghi: ngày Canh sinh giờ Tân Tỵ, Thiên Quan hợp Dương Nhận, tự thân sinh; người cương nghị, tiền bạc hao tổn, với vợ sách dặn nên quan tâm, chăm sóc sức khoẻ vợ nhiều hơn; vận tới đất Kim thì quý lộc hanh thông.",
    "nhom": "C",
    "chu_de": "gia_dinh",
    "ham_y": "Nên chú ý bàn bạc với bạn đời trước những khoản chi lớn.",
    "viec": "Tuần này cùng bạn đời xem lại một khoản chi lớn sắp tới.",
    "tru_gio": "辛巳",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Canh|Ngọ": {
    "han": "六庚日生時壬午官印福宫聚食神金土助身須顯貴月逢火旺命難通",
@@ -921,26 +963,28 @@
   "Canh|Tuất": {
    "han": "六庚日生時丙戌金火持爭事不祥身旺月通印綬吉不通無救禍難當",
    "am": "Lục Canh nhật sinh thời Bính Tuất, kim hoả trì tranh sự bất tường, thân vượng nguyệt thông ấn thụ cát, bất thông vô cứu hoạ nan đương.",
-   "y": "Sách nói giờ này Kim và lửa giằng co nên việc không yên; thân vững, có người che chở thì tốt, không thì khó đỡ nổi rắc rối.",
+   "y": "Sách ghi: ngày Canh sinh giờ Bính Tuất, Kim Hoả giằng co, việc chẳng lành; thân vượng, tháng thông, có Ấn thì tốt; không thông, không cứu thì hoạ khó đỡ.",
    "nhom": "B",
    "chu_de": "giay_to",
    "ham_y": "Nên chú ý tránh dính vào tranh chấp không phải của mình.",
    "viec": "Tuần này việc gì có tranh cãi, ghi lại bằng văn bản; cần thì hỏi luật sư.",
    "tru_gio": "丙戌",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Canh|Hợi": {
    "han": "六庚日生時丁亥官星失地自身衰不通月氣難成福若見魁罡却妙哉",
    "am": "Lục Canh nhật sinh thời Đinh Hợi, quan tinh thất địa tự thân suy, bất thông nguyệt khí nan thành phúc, nhược kiến khôi cương khước diệu tai.",
-   "y": "Sách nói giờ này sao quan mất chỗ, thân yếu; tháng sinh không tiếp thì phúc khó thành; lá số có thế đặc biệt lại hay.",
+   "y": "Sách ghi: ngày Canh sinh giờ Đinh Hợi, Quan tinh mất đất, thân suy; không thông khí tháng thì phúc khó thành; nếu thấy Khôi Cương lại là hay.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý xây nền nghề vững trước khi mong chức.",
    "viec": "Tuần này đăng ký một buổi học ngắn cho nghề chính.",
    "tru_gio": "丁亥",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Tân|Tý": {
    "han": "六辛日生時戊子印綬學堂坐食神",
@@ -955,14 +999,15 @@
   "Tân|Sửu": {
    "han": "六辛日生時己丑金土持爭勢不安年月財官相救助免交貧困受饑寒",
    "am": "Lục Tân nhật sinh thời Kỷ Sửu, kim thổ trì tranh thế bất an, niên nguyệt tài quan tương cứu trợ, miễn giao bần khốn thụ cơ hàn.",
-   "y": "Sách nói giờ này hai thế giằng co nên khó yên; năm, tháng sinh có tiền và quan đỡ thì khỏi cảnh túng thiếu.",
+   "y": "Sách ghi: ngày Tân sinh giờ Kỷ Sửu, Kim Thổ giằng co, thế không yên; năm, tháng có Tài, Quan cứu giúp thì khỏi cảnh nghèo khốn, đói rét.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý dựng một nguồn đỡ đều đặn.",
    "viec": "Tuần này mở hoặc nạp thêm một khoản tiền dự phòng.",
    "tru_gio": "己丑",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Tân|Dần": {
    "han": "六辛日生時庚寅財旺生官遇貴神金木局中通月氣必為榮貴富豪人",
@@ -977,26 +1022,28 @@
   "Tân|Mão": {
    "han": "六辛日生時辛夘妻子難為遇比肩秋産冬生貧下格丙臨寅馬却當權",
    "am": "Lục Tân nhật sinh thời Tân Mão, thê tử nan vi ngộ tỷ kiên, thu sản đông sinh bần hạ cách, bính lâm dần mã khước đương quyền.",
-   "y": "Sách nói giờ này dễ có người chia phần, đường bạn đời con cái cần vun nhiều hơn người; sinh thu đông thì tiền chật; gặp lửa thì lại có quyền.",
+   "y": "Sách ghi: ngày Tân sinh giờ Tân Mão, gặp Tỷ Kiên nên khó bề vợ con; sinh mùa thu đông là cách nghèo, thấp kém; có Bính lâm Dần (Mã) thì lại nắm quyền.",
    "nhom": "C",
    "chu_de": "gia_dinh",
    "ham_y": "Nên chú ý thời gian dành cho bạn đời và con.",
    "viec": "Tuần này dành một buổi trọn vẹn cho người nhà, tắt điện thoại.",
    "tru_gio": "辛卯",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Tân|Thìn": {
    "han": "六辛日生時壬辰傷官傷盡倍精神四柱火虚防尅害九流技藝卜醫人",
    "am": "Lục Tân nhật sinh thời Nhâm Thìn, thương quan thương tận bội tinh thần, tứ trụ hoả hư phòng khắc hại, cửu lưu kỹ nghệ bốc y nhân.",
-   "y": "Sách tả giờ này tinh thần sung, khéo tay nghề; lá số thiếu lửa thì nên đề phòng va chạm; hợp các nghề chuyên môn, nghề thầy.",
+   "y": "Sách ghi: ngày Tân sinh giờ Nhâm Thìn, Thương Quan thương tận, tinh thần gấp bội; bốn trụ Hoả hư thì phải phòng khắc hại; là người làm nghề kỹ nghệ, bói toán, thầy thuốc.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý chọn nghề có tay nghề rõ, đừng chạy theo chức.",
    "viec": "Tuần này luyện một kỹ năng của nghề chính thêm một giờ.",
    "tru_gio": "壬辰",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Tân|Tỵ": {
    "han": "六辛日生時癸巳貴氣無傷官印强月氣有通兼倚托早年榮貴姓名香",
@@ -1012,14 +1059,15 @@
   "Tân|Ngọ": {
    "han": "六辛日逢甲午時暗鬼梟神真可畏若無倚托反勞生莫道六辛逢馬貴",
    "am": "Lục Tân nhật phùng Giáp Ngọ thời, ám quỷ kiêu thần chân khả uý, nhược vô ỷ thác phản lao sinh, mạc đạo lục Tân phùng mã quý.",
-   "y": "Sách nói giờ này có sức ép ngầm, đáng dè chừng; không có chỗ dựa thì vất vả, đừng tưởng gặp giờ đẹp là quý.",
+   "y": "Sách ghi: ngày Tân gặp giờ Giáp Ngọ, Sát ngầm và Kiêu thần thật đáng sợ; không có nơi dựa thì sống vất vả, đừng nói ngày Tân gặp Mã là quý.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý dựng chỗ dựa trước khi nhận việc lớn.",
    "viec": "Tuần này hỏi rõ phạm vi việc mới trước khi nhận.",
    "tru_gio": "甲午",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Tân|Mùi": {
    "han": "六辛日生時乙未火木相成金不畏月通金氣與春榮財旺生官身自貴",
@@ -1044,14 +1092,15 @@
   "Tân|Dậu": {
    "han": "六辛日生時丁酉鬼破祿元禍百端倚托身强方斷吉月通制伏是偏官",
    "am": "Lục Tân nhật sinh thời Đinh Dậu, quỷ phá lộc nguyên hoạ bách đoan, ỷ thác thân cường phương đoạn cát, nguyệt thông chế phục thị thiên quan.",
-   "y": "Sách nói giờ này sức ép phá vào lộc, sinh nhiều chuyện rắc rối; thân vững, có chỗ dựa thì tốt; tháng sinh kìm được thì sức ép ấy thành quyền.",
+   "y": "Sách ghi: ngày Tân sinh giờ Đinh Dậu, Sát phá lộc nguyên, hoạ đủ trăm mối; có chỗ dựa, thân mạnh mới đoán là tốt; tháng thông chế phục được thì thành Thiên Quan.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý giữ mình khỏi tranh chấp vô ích.",
    "viec": "Tuần này việc gì liên quan tiền và giấy tờ, giữ bản viết rõ ràng.",
    "tru_gio": "丁酉",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Tân|Tuất": {
    "han": "六辛日生時戊戌印綬生身坐祿堂有托福人難靠祖不通月氣是平常",
@@ -1066,26 +1115,28 @@
   "Tân|Hợi": {
    "han": "六辛日生時己亥背祿剝官反破傷如作飛天祿馬貴失時無合空忙忙",
    "am": "Lục Tân nhật sinh thời Kỷ Hợi, bội lộc bác quan phản phá thương, như tác phi thiên lộc mã quý, thất thời vô hợp không mang mang.",
-   "y": "Sách nói giờ này lệch lộc, sao quan bị lấn; thành thế đặc biệt thì quý, lỡ thời không có người hợp thì bận rộn mà không được gì.",
+   "y": "Sách ghi: ngày Tân sinh giờ Kỷ Hợi, trái lộc, Quan bị lột, lại phá thương; nếu thành cách Phi thiên lộc mã thì quý, lỡ thời không hợp thì bận rộn uổng công.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý chọn đúng thời điểm, đừng chạy việc lúc chưa có người cùng làm.",
    "viec": "Tuần này hoãn một việc lớn tới khi có ít nhất một người cùng làm.",
    "tru_gio": "己亥",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Nhâm|Tý": {
    "han": "六壬日生時庚子子上明庚暗損傷火土月中仍主吉不通兇狠只平常",
    "am": "Lục Nhâm nhật sinh thời Canh Tý, tử thượng minh canh ám tổn thương, hoả thổ nguyệt trung nhưng chủ cát, bất thông hung ngận chỉ bình thường.",
-   "y": "Sách nói giờ này có điều hao ngầm; sinh tháng Hỏa, Thổ thì vẫn tốt; không thì tính dễ gắt, đời sống bình thường.",
+   "y": "Sách ghi: ngày Nhâm sinh giờ Canh Tý, trên Tý có Canh lộ, ngầm có tổn hại; sinh tháng Hoả, Thổ vẫn tốt; không thông thì tính hung dữ, chỉ ở mức bình thường.",
    "nhom": "B",
    "chu_de": "tinh_net",
    "ham_y": "Nên chú ý cơn nóng trong lời nói.",
    "viec": "Tuần này khi tranh luận, nói chậm lại và hạ giọng.",
    "tru_gio": "庚子",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Nhâm|Sửu": {
    "han": "六壬日生時辛丑下有官星上印綬如通月氣運西南官印扶身人清秀",
@@ -1110,14 +1161,15 @@
   "Nhâm|Mão": {
    "han": "六壬日生時癸夘引歸死地勢難安刼財煞刃見傷鬼倚托若無常命看",
    "am": "Lục Nhâm nhật sinh thời Quý Mão, dẫn quy tử địa thế nan an, kiếp tài sát nhận kiến thương quỷ, ỷ thác nhược vô thường mệnh khán.",
-   "y": "Sách nói giờ này thân dễ đuối, thế khó yên, có người tranh phần, có sức ép; không chỗ dựa thì ở mức bình thường.",
+   "y": "Sách ghi: ngày Nhâm sinh giờ Quý Mão, dẫn về đất suy nên thế khó yên; có Kiếp Tài, Sát, Nhận, thấy Thương Quan, Sát; không nơi dựa thì chỉ xem là mệnh thường.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý tiền góp chung và người tranh phần.",
    "viec": "Tuần này rà lại một khoản đang chia với người khác, ghi rõ bằng văn bản.",
    "tru_gio": "癸卯",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Nhâm|Thìn": {
    "han": "六壬日生時甲辰壬騎龍背坐食神柱中有托無刑害必是榮華富貴人",
@@ -1133,14 +1185,15 @@
   "Nhâm|Tỵ": {
    "han": "六壬日生時乙巳身絶有財不聚財進神暗鬼來相尅透己相刑是禍胎",
    "am": "Lục Nhâm nhật sinh thời Ất Tỵ, thân tuyệt hữu tài bất tụ tài, tiến thần ám quỷ lai tương khắc, thấu kỷ tương hình thị hoạ thai.",
-   "y": "Sách nói giờ này thân yếu, có tiền mà không giữ được, có sức ép ngầm lấn vào; lá số lộ Kỷ thì nhiều rắc rối.",
+   "y": "Sách ghi: ngày Nhâm sinh giờ Ất Tỵ, thân ở đất tuyệt, có tiền mà không tụ; tiến thần và Sát ngầm tới khắc, lộ Kỷ tương hình là mầm hoạ.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý giữ tiền: tiền vào phải có chỗ để.",
    "viec": "Tuần này chia lương thành ba khoản: chi tiêu, để dành, dự phòng.",
    "tru_gio": "乙巳",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Nhâm|Ngọ": {
    "han": "六壬日生時丙午聚財之地坐胞胎月逢金水須富貴棄命從來是就財",
@@ -1165,38 +1218,41 @@
   "Nhâm|Thân": {
    "han": "六壬日生時戊申長生之地鬼傷身身强制伏為髙命反此定知貧薄人",
    "am": "Lục Nhâm nhật sinh thời Mậu Thân, trường sinh chi địa quỷ thương thân, thân cường chế phục vi cao mệnh, phản thử định tri bần bạc nhân.",
-   "y": "Sách nói giờ này ở chỗ sinh sôi mà có sức ép; thân vững kìm được thì mệnh cao, không thì tiền mỏng.",
+   "y": "Sách ghi: ngày Nhâm sinh giờ Mậu Thân, ở đất Trường Sinh mà Sát làm tổn thân; thân mạnh chế phục được thì mệnh cao, ngược lại ắt là người nghèo mỏng.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý dựng sức trước khi nhận áp lực mới.",
    "viec": "Tuần này từ chối một việc ngoài sức bằng lời lẽ rõ ràng.",
    "tru_gio": "戊申",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Nhâm|Dậu": {
    "han": "六壬日生時己酉明官暗印有扶持月通身旺人淸貴猶恐戀花貪酒巵",
    "am": "Lục Nhâm nhật sinh thời Kỷ Dậu, minh quan ám ấn hữu phù trì, nguyệt thông thân vượng nhân thanh quý, do khủng luyến hoa tham tửu chi.",
-   "y": "Sách khen giờ này có quan có sao che chở đỡ, tháng sinh tiếp sức thì thanh quý; chỉ e ham vui, ham rượu.",
+   "y": "Sách ghi: ngày Nhâm sinh giờ Kỷ Dậu, Quan lộ, Ấn ngầm nâng đỡ; tháng thông, thân vượng thì người thanh quý, chỉ e mê sắc, ham chén rượu.",
    "nhom": "B",
    "chu_de": "tinh_net",
    "ham_y": "Nên chú ý chừng mực trong tiệc tùng và các mối quen.",
    "viec": "Tuần này giữ hai tối không rượu.",
    "tru_gio": "己酉",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Nhâm|Tuất": {
    "han": "六壬日生時庚戌身臨財庫却為魔明庚暗戌相刑尅財祿生平聚散多",
    "am": "Lục Nhâm nhật sinh thời Canh Tuất, thân lâm tài khố khước vi ma, minh canh ám tuất tương hình khắc, tài lộc sinh bình tụ tán đa.",
-   "y": "Sách nói giờ này ngồi trên kho tiền mà lại thành phiền; có va chạm nên tiền lộc cả đời lúc tụ lúc tan.",
+   "y": "Sách ghi: ngày Nhâm sinh giờ Canh Tuất, thân ngồi trên kho Tài mà lại thành phiền; Canh lộ, Tuất ngầm hình khắc nhau nên tài lộc cả đời nhiều lần tụ tán.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý giữ một khoản không động tới.",
    "viec": "Tuần này đặt lệnh chuyển tự động một phần thu nhập sang tài khoản để dành.",
    "tru_gio": "庚戌",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Nhâm|Hợi": {
    "han": "六壬日逢辛亥時印祿相隨最是奇財官不見無衝破得路青雲報爾知",
@@ -1222,26 +1278,28 @@
   "Quý|Sửu": {
    "han": "六癸日生時癸丑支中暗鬼有刑傷月通身旺防妻損丑巳遥合貴異常",
    "am": "Lục Quý nhật sinh thời Quý Sửu, chi trung ám quỷ hữu hình thương, nguyệt thông thân vượng phòng thê tổn, Sửu Tỵ dao hợp quý dị thường.",
-   "y": "Sách nói giờ này có sức ép ngầm; tháng sinh tiếp sức, thân vững thì sách nhắc đường vợ chồng cần vun nhiều hơn; lá số có thế hợp đặc biệt thì quý lạ.",
+   "y": "Sách ghi: ngày Quý sinh giờ Quý Sửu, trong chi có Sát ngầm, có hình thương; tháng thông, thân vượng thì phòng vợ bị tổn — sách dặn nên quan tâm, chăm sóc sức khoẻ vợ nhiều hơn; Sửu Tỵ hợp xa thì quý khác thường.",
    "nhom": "C",
    "chu_de": "gia_dinh",
    "ham_y": "Nên chú ý lắng nghe bạn đời nhiều hơn.",
    "viec": "Tuần này hỏi bạn đời một việc họ đang lo và chỉ nghe, chưa góp ý.",
    "tru_gio": "癸丑",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Quý|Dần": {
    "han": "六癸日生時甲寅刃復官祿减精神柱中無有庚申字刑合財官是貴人",
    "am": "Lục Quý nhật sinh thời Giáp Dần, nhận phục quan lộc giảm tinh thần, trụ trung vô hữu Canh Thân tự, hình hợp tài quan thị quý nhân.",
-   "y": "Sách nói giờ này sức lộc quan bị hao bớt; lá số không có Canh, Thân thì nhờ thế hợp mà thành người có tiền có quan.",
+   "y": "Sách ghi: ngày Quý sinh giờ Giáp Dần, Nhận lại thêm, quan lộc giảm, tinh thần sút; trụ không có chữ Canh, Thân thì hình hợp ra Tài, Quan, là người quý.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý giữ sức tinh thần, đừng để việc làm cạn người.",
    "viec": "Tuần này chọn một buổi chiều không họp, làm việc cần tập trung nhất.",
    "tru_gio": "甲寅",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Quý|Mão": {
    "han": "六癸日生乙夘時長生之地遇食神若無午酉兼辛巳福壽雙全祿位人",
@@ -1266,14 +1324,15 @@
   "Quý|Tỵ": {
    "han": "六癸日生時丁巳貴地逢財遇暗官有托就看財祿盛無依必定福偏殘",
    "am": "Lục Quý nhật sinh thời Đinh Tỵ, quý địa phùng tài ngộ ám quan, hữu thác tựu khán tài lộc thịnh, vô y tất định phúc thiên tàn.",
-   "y": "Sách nói giờ này ở chỗ quý gặp tiền, có quan ẩn; có chỗ dựa thì tiền lộc thịnh, không thì phúc khuyết.",
+   "y": "Sách ghi: ngày Quý sinh giờ Đinh Tỵ, ở đất quý gặp Tài, gặp Quan ngầm; có chỗ dựa thì tài lộc thịnh, không có thì phúc ắt lệch, khuyết.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý dựng chỗ dựa: nghề vững, người tin.",
    "viec": "Tuần này liên lạc lại với một người từng giúp mình.",
    "tru_gio": "丁巳",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Quý|Ngọ": {
    "han": "六癸日生時戊午化火臨時帝旺鄕運喜東南木火地為官清正祿榮昌",
@@ -1288,14 +1347,15 @@
   "Quý|Mùi": {
    "han": "六癸日生時癸未鬼旺身衰福不齊月氣不通無救助平常衣祿有相虧",
    "am": "Lục Quý nhật sinh thời Quý Mùi, quỷ vượng thân suy phúc bất tề, nguyệt khí bất thông vô cứu trợ, bình thường y lộc hữu tương khuy.",
-   "y": "Sách nói giờ này sức ép mạnh, thân yếu, phúc chưa đủ; tháng sinh không tiếp, không ai đỡ thì đời sống bình thường, có lúc thiếu.",
+   "y": "Sách ghi: ngày Quý sinh giờ Quý Mùi, Sát vượng thân suy, phúc không đều; khí tháng không thông, không ai cứu giúp thì cơm áo bình thường, có lúc thiếu hụt.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý giữ một khoản dự phòng.",
    "viec": "Tuần này tính xem khoản dự phòng đủ mấy tháng chi tiêu.",
    "tru_gio": "己未",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Quý|Thân": {
    "han": "六癸日生時庚申官星印旺在其支柱中無巳丙寅巳自有榮華富貴時",
@@ -1310,26 +1370,28 @@
   "Quý|Dậu": {
    "han": "六癸日生時辛酉自身失地更何有支中明暗被辛傷無助利名終不就",
    "am": "Lục Quý nhật sinh thời Tân Dậu, tự thân thất địa cánh hà hữu, chi trung minh ám bị tân thương, vô trợ lợi danh chung bất tựu.",
-   "y": "Sách nói giờ này thân mất chỗ đứng, bị lấn cả rõ lẫn ngầm; không người đỡ thì danh lợi khó thành.",
+   "y": "Sách ghi: ngày Quý sinh giờ Tân Dậu, thân mất đất còn có gì; trong chi cả sáng lẫn ngầm bị Tân làm tổn, không ai giúp thì danh lợi rốt cuộc không thành.",
    "nhom": "B",
    "chu_de": "cong_viec",
    "ham_y": "Nên chú ý tìm môi trường có người hướng dẫn.",
    "viec": "Tuần này xin một buổi trao đổi với người đi trước trong nghề.",
    "tru_gio": "辛酉",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Quý|Tuất": {
    "han": "六癸日生時壬戌支内正官生財庫月兼有救貴多成倚托若無終不富",
    "am": "Lục Quý nhật sinh thời Nhâm Tuất, chi nội chính quan sinh tài khố, nguyệt kiêm hữu cứu quý đa thành, ỷ thác nhược vô chung bất phú.",
-   "y": "Sách tả giờ này có sao quan sinh kho tiền; tháng sinh có người đỡ thì nhiều việc thành; không có chỗ dựa thì khó giàu.",
+   "y": "Sách ghi: ngày Quý sinh giờ Nhâm Tuất, trong chi có Chính Quan sinh kho Tài; tháng có cứu thì quý, nhiều việc thành; không có chỗ dựa thì rốt cuộc không giàu.",
    "nhom": "B",
    "chu_de": "tien_bac",
    "ham_y": "Nên chú ý dựng nền tiền vững từ nghề chính.",
    "viec": "Tuần này ghi ra nguồn thu chính và một việc làm nó vững hơn.",
    "tru_gio": "壬戌",
    "quyen": 9,
-   "nguon": "tam_menh_thong_hoi_du_bo"
+   "nguon": "tam_menh_thong_hoi_du_bo",
+   "sat": true
   },
   "Quý|Hợi": {
    "han": "六癸日生時癸亥祿馬飛天臨旺神不見官星兼惹絆必為貴格異常人",

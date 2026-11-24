@@ -30,7 +30,7 @@ CHUONG_THEO_TINH_TRANG = ("tinh_cam", "gia_dinh")
 MUC = ("thuan", "can_bang", "can_chu_dong")
 NHOM = ("t18_24", "t25_44", "t45_59", "t60")
 TINH_TRANG = ("doc_than", "co_doi", "chua_noi")
-TUOI_TOI_THIEU = 18
+TUOI_TOI_THIEU = __import__("app.config", fromlist=["x"]).TUOI_NGUOI_LON   # TUOI-16
 BAC_SI = "Đây là lời nhắc chăm sóc, không thay lời bác sĩ."
 
 _KB = Path(__file__).resolve().parents[1] / "kb" / "data" / "hoan_canh_kb.json"

@@ -946,8 +946,8 @@ export function ChupBanTay() {
 
                 {kqDong?.hop_le && (kqDong.bo_nhom_c ?? 0) > 0 && (
                   <p className="text-xs text-fg-muted">
-                    {hs ? `${kqDong.bo_nhom_c} câu sách theo dáng tay này chỉ dành cho người từ 18 tuổi, nên không hiện ở đây.`
-                      : `${kqDong.bo_nhom_c} câu sách theo dáng tay này chỉ hiện khi biết bạn đã đủ 18 tuổi — lưu hồ sơ (ngày sinh) để xem đủ.`}
+                    {hs ? `${kqDong.bo_nhom_c} câu sách theo dáng tay này chỉ dành cho người từ 16 tuổi, nên không hiện ở đây.`
+                      : `${kqDong.bo_nhom_c} câu sách theo dáng tay này chỉ hiện khi biết bạn đã đủ 16 tuổi — lưu hồ sơ (ngày sinh) để xem đủ.`}
                   </p>
                 )}
               </div>

@@ -94,6 +94,8 @@ export const CHU_BAO_CAO = {
   "nen_lam": { nhom: K, nhan: "Nhãn việc nên làm (khung theo mảng)", mac_dinh: "Nên làm:", en: "Do:" },
   "nen": { nhom: K, nhan: "Nhãn hướng xử lý trong hộp", mac_dinh: "Nên:", en: "Try:" },
   "thu": { nhom: K, nhan: "Nhãn việc thêm trong hộp", mac_dinh: "Thử:", en: "Also try:" },
+  "sach_xua": { nhom: K, nhan: "Nhãn câu sách xưa đi kèm hộp (trong Vì sao nói vậy)", mac_dinh: "Sách xưa ghi", en: "Classical text" },
+  "sach_khac": { nhom: K, nhan: "Nhãn khi sách xưa nói khác lời của hộp", mac_dinh: "Sách và lời ở trên nói khác nhau:", en: "The book and the reading above differ:" },
   "xu_ly_truoc": { nhom: K, nhan: "Nhãn hộp cần xử lý trước", mac_dinh: "Xử lý trước", en: "Deal with first" },
   "ngay_duong": { nhom: K, nhan: "Khoảng ngày dương lịch của hộp", mac_dinh: "{tu} – {den} dương lịch", en: "{tu} – {den}" },
   "nam_ds": { nhom: K, nhan: "Các năm của hộp", mac_dinh: "Năm {ds}", en: "Years {ds}" },

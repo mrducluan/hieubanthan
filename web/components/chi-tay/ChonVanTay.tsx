@@ -1,7 +1,7 @@
 "use client";
 // Chỉ tay — người dùng TỰ SOI bàn tay mình, chọn hình vân giống tay mình (lọc theo chủ đề) → engine trả lời sách xưa theo
 // khuôn SX-C. Khối này không đụng ảnh; chỉ gửi MÃ vân + MÃ lựa chọn từng cung (CT-2: người dùng chọn ở khối "Chụp lòng bàn
-// tay" đầu trang) + ngày sinh trong hồ sơ trên máy (để biết đã đủ 18 tuổi — chưa rõ thì engine bỏ nhóm C). Lựa chọn nhớ trên
+// tay" đầu trang) + ngày sinh trong hồ sơ trên máy (để biết đã đủ 16 tuổi — chưa rõ thì engine bỏ nhóm C). Lựa chọn nhớ trên
 // máy (hbt.chi_tay.v1, lib/chi-tay-chon — dùng chung với khối chụp ảnh). Web chỉ hiển thị.
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, Maximize2, RotateCcw, X } from "lucide-react";
@@ -168,8 +168,8 @@ export function ChonVanTay({ van, chuDe, tenCung = {}, duongChi }: { van: VanTay
           )}
           {kq.bo_nhom_c > 0 && (
             <p className="text-sm text-fg-muted">
-              {hs ? `${kq.bo_nhom_c} mục bạn chọn có lời sách chỉ dành cho người từ 18 tuổi, nên không hiện ở đây.`
-                : `${kq.bo_nhom_c} mục bạn chọn có lời sách chỉ hiện khi biết bạn đã đủ 18 tuổi — lưu hồ sơ (ngày sinh) để xem đủ.`}
+              {hs ? `${kq.bo_nhom_c} mục bạn chọn có lời sách chỉ dành cho người từ 16 tuổi, nên không hiện ở đây.`
+                : `${kq.bo_nhom_c} mục bạn chọn có lời sách chỉ hiện khi biết bạn đã đủ 16 tuổi — lưu hồ sơ (ngày sinh) để xem đủ.`}
             </p>
           )}
           {kq.cau_ket && <p className="text-sm text-fg-faint">{kq.cau_ket}</p>}

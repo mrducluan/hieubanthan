@@ -32,7 +32,7 @@ export function SachXuaGhi({ khoi, moDun, tieuDe, moTa }: {
           <ScrollText className="size-5 text-gold" aria-hidden /> {tieuDe}
         </h2>
         <p className="mt-1 text-sm text-fg-muted">
-          {moTa ?? `${khoi.so_muc} câu trong sách xưa ứng với đúng dữ kiện của bạn. Sách khen thì ghi nguyên ý; sách chê thì chuyển thành điều nên chú ý; chuyện nặng thì chỉ nêu hàm ý để giữ gìn.`}
+          {moTa ?? `${khoi.so_muc} câu trong sách xưa ứng với đúng dữ kiện của bạn. Câu sách được trích sát nguyên văn, kèm điều nên chú ý; riêng lời phán rất nặng được nói giảm thành lời dặn giữ gìn.`}
         </p>
       </div>
       <ul className="space-y-2">

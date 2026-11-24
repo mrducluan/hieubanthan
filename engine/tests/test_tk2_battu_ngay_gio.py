@@ -85,6 +85,9 @@ def test_moi_muc_qua_bo_kiem_va_giong_van():
         assert m["nguon"] == "tam_menh_thong_hoi_du_bo"
         for f in ("y", "ham_y", "viec"):
             t = m.get(f) or ""
+            if f == "y" and m.get("sat"):          # SX-C3: nghĩa sát giữ chữ của sách (khắc…), chỉ cấm giọng AI / chung chung
+                assert not kds.tim_cum_cam(t, cum) and not sg.kiem_sat(t), (k, f)
+                continue
             assert not kds.tim_cum_cam(t, cam) and not kds.tim_cum_cam(t, cum), (k, f)
         if m["nhom"] == "C":
             assert m["chu_de"] in ("suc_khoe", "suc_ben", "gia_dinh", "con_cai"), k

@@ -36,6 +36,9 @@ def doc(ma: str, lv: str | None = None) -> dict:
     k = khai_niem()[ma]
     s = k["sach"]
     sach = {x: s[x] for x in ("han", "am", "y", "nhom", "ham_y", "viec") if s.get(x)}
+    if s.get("sat"):                         # SX-C3: lời trích nguyên văn → câu kết nêu rõ chỉ trích lại
+        from app.kb import sach_ghi  # noqa: PLC0415
+        sach |= {"nguyen_van": True, "cau_ket": sach_ghi.CAU_KET_TRICH}
     ra = {"ma": ma, "ten_co": k["ten_co"], "nghia": k["nghia"], "sach": sach,
           "ung_dung": dict(k.get("ung_dung") or {}), "ranh_gioi": ranh_gioi(lv)}
     if lv:

@@ -45,11 +45,11 @@ def test_bai_doc_chon_dung_net_va_loc_nhom_c():
     co_thu = next(n for n in k["nhom"] if n["ma"] == "net_co_thu")["muc"]
     assert any(m["nhom"] == "C" and "khám" in (m["loi"] + m.get("viec", "")) for m in co_thu)
     assert all("quyển" in m["sach"] or "Quyển" in m["sach"] for m in co_thu)
-    for tuoi in (16, None):                                              # chưa đủ 18 hoặc chưa rõ tuổi → không nhóm C
+    for tuoi in (15, None):                                              # chưa đủ 16 (TUOI-16) hoặc chưa rõ tuổi → không nhóm C
         k = sgm.nhan_tuong(["cot_tro", "tran_cao_rong"], tuoi=tuoi)
         assert all(m["nhom"] != "C" for n in k["nhom"] for m in n["muc"])
-    assert sgm.nhan_tuong(["cot_tro"], tuoi=16) is None or all(
-        m["nhom"] != "C" for n in sgm.nhan_tuong(["cot_tro"], tuoi=16)["nhom"] for m in n["muc"])
+    assert sgm.nhan_tuong(["cot_tro"], tuoi=15) is None or all(
+        m["nhom"] != "C" for n in sgm.nhan_tuong(["cot_tro"], tuoi=15)["nhom"] for m in n["muc"])
 
 
 def test_gioi_va_can_du():

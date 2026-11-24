@@ -28,7 +28,7 @@
  "tu_choi.goi_y.dau_tu": "Keep an emergency fund and do not put everything into one place; this is not investment advice. You can look at the years to take more care with money in your own reading.",
  "tu_choi.goi_y.so_con_ten": "You can ask about the children or love side of your own reading — it can show timing and what to prepare for, not a number or a name.",
  "tu_choi.goi_y.the_thao": "Treat match and election results as something to watch for fun, and keep money out of it.",
-  "tu_choi.goi_y.vat_pham": "There is no need to buy charms, crystals or rituals to change your luck — keep your money for what matters and stay away from gambles.",
+ "tu_choi.goi_y.vat_pham": "There is no need to buy charms, crystals or rituals to change your luck — keep your money for what matters and stay away from gambles.",
  "an_toan.dan_huong": "This touches on spirits, curses or the departed — something tarot and numerology do not read. If a loss is behind the question, I am sorry. A counsellor, a faith community you trust, or simply a close friend will help more here than any card.",
  "an_toan.suc_khoe_nhac": "This is a note about pace and habits, not medical advice.",
  "tarot.ten_bai": "Your spread",
@@ -289,5 +289,6 @@
  "kd.sach_xua.y.xuat_hanh": "For travel, the book takes your line (Self) as the traveller. A strong line is favourable; moving and changing well, especially into Offspring, is better still.",
  "kd.sach_xua.y.tranh_chap": "When worried about a dispute, the book says that if the Offspring line is moving or sits on your line, the matter is unlikely to grow large.",
  "kd.sach_xua.y.nha_cua": "For building or buying a home, the book looks at the house line (Parent) and your line: both strong, moving and changing well, means a settled home and smooth work.",
- "pt.hk.the_quai_ghi_chu": "The replacement-star (Ti Gua) chart follows the reference charts of the Shen school (star 5 entering the centre stays 5); the original text of Shen's Xuan Kong Studies is not yet in our source library, so this rule is still awaiting verification."
+ "pt.hk.the_quai_ghi_chu": "The replacement-star (Ti Gua) chart follows the reference charts of the Shen school (star 5 entering the centre stays 5); the original text of Shen's Xuan Kong Studies is not yet in our source library, so this rule is still awaiting verification.",
+ "ds.vai_doc.cha_me": "This reading is meant for a parent or another adult reading on the child's behalf: the person in the chart is under {tuoi}. Read the advice as things an adult can help the child do; the classical texts' harsher notes are left out here."
 }

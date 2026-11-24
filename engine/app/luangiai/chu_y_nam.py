@@ -27,7 +27,7 @@ from app.kb.loi import L, danh_sach
 
 SO_NAM = 10
 TOI_DA_NAM = 3
-TUOI_TOI_THIEU = 18          # dưới 18 tuổi: không hộp chú ý (lời cho trẻ đã có ở chương Vận hạn)
+TUOI_TOI_THIEU = __import__("app.config", fromlist=["x"]).TUOI_NGUOI_LON   # TUOI-16: dưới 16 tuổi: không hộp chú ý (lời cho trẻ đã có ở chương Vận hạn)
 _DIEM = {"ky_nhap": 2, "ky_chieu": 1, "luu_nien": 1, "dai_han": 1, "ky_dai_han": 1, "sao_luu": 1}
 NGUONG_TUVI = 2
 _LOP_NAM = {"ky_nhap", "ky_chieu", "luu_nien", "sao_luu"}     # lý do của riêng một năm (không phải lớp mười năm)

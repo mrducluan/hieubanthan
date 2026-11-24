@@ -2,7 +2,7 @@
 // Tra nhanh Cửa – Chủ – Bếp theo Dương Trạch Tam Yếu (rà soát 2026-11-21).
 // Người dùng chạm thẳng ô trên sơ đồ 3×3 (Bắc ở trên, như SoDoNha) theo thứ tự Cửa → Phòng chính → Bếp. Web CHỈ vẽ:
 // du niên, mức (thang chung), lời, gợi ý phía đặt bếp, việc nên làm, khối sách xưa đều do engine trả
-// (`/api/phongthuy/tam-yeu/so-do`). Nhóm C (SX-C) chỉ hiện khi engine biết người đọc đủ 18 tuổi (năm sinh trong hồ sơ,
+// (`/api/phongthuy/tam-yeu/so-do`). Nhóm C (SX-C) chỉ hiện khi engine biết người đọc đủ 16 tuổi (TUOI-16) (năm sinh trong hồ sơ,
 // hoặc người đọc tự xác nhận) — luôn kèm nguồn sách, câu kết và lời tham khảo.
 // "Lưu vị trí vào hồ sơ nhà" chỉ ghi `bo_cuc.vi_tri` (cua_chinh, phong_ngu_chinh, bep) — KHÔNG đụng hướng nhà đã đo.
 import { useEffect, useRef, useState } from "react";
@@ -263,7 +263,7 @@ export function KetQuaTamYeu({ kq, bep, onChonBep }: { kq: TamYeuRes; bep?: stri
   );
 }
 
-/** Khối sách xưa (SX-C, nhóm C sau cổng 18 tuổi) + lời tham khảo của Tam Yếu. */
+/** Khối sách xưa (SX-C, nhóm C sau cổng 16 tuổi) + lời tham khảo của Tam Yếu. */
 export function SachTamYeu({ kq, coNamSinh, du18, onDu18 }: { kq: TamYeuRes; coNamSinh: boolean; du18: boolean; onDu18: (v: boolean) => void }) {
   const { c, en } = useChuPT();
   return (

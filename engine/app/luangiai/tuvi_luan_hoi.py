@@ -35,7 +35,7 @@ TEN_MANG = {"tinh_cam": "tình cảm", "gia_dinh": "gia đình", "su_nghiep": "c
 NGUOI_CHUONG = {"tinh_cam": ("phoi_ngau",), "gia_dinh": ("cha_me", "con", "anh_em"), "su_nghiep": ("sep",),
                 "quan_he": ("ban_be", "nguoi_ngoai")}
 SO_NAM = 10
-TUOI_TOI_THIEU = 18
+TUOI_TOI_THIEU = __import__("app.config", fromlist=["x"]).TUOI_NGUOI_LON   # TUOI-16
 SANG = ("Miếu", "Vượng", "Đắc")
 # Sao sách xưa coi là "cứng" ở cung vợ chồng (duyên muộn, dễ trắc trở) và sao "hiền" (êm).
 SAO_CUNG_PT = ("Thất Sát", "Phá Quân", "Tham Lang", "Liêm Trinh", "Cự Môn", "Vũ Khúc")

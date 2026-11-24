@@ -52,20 +52,20 @@ interface KetQuaDoi {
 // ĐY-1: chưa có đồng ý xử lý dữ liệu (lib/dong-y-du-lieu) → khối đồng ý ngắn ngay trên nút, nút thành "Đồng ý và xem kết
 // quả", và KHÔNG gửi gì lên máy chủ (kể cả xem trước đổi lịch) cho tới khi người dùng bấm. Đã đồng ý → nút như cũ + dòng
 // "Bạn đã đồng ý · Thu hồi" (thu hồi = xoá đồng ý + hồ sơ trên máy). Không modal che trang, không ô tích sẵn.
-/** EN-2 mục 5: chỉ hỏi tình trạng người đủ 18 tuổi tròn (review T1: so đủ ngày/tháng/năm — không thu dữ liệu của người
+/** EN-2 mục 5: chỉ hỏi tình trạng người đủ 16 tuổi tròn (TUOI-16, trước 18) (review T1: so đủ ngày/tháng/năm — không thu dữ liệu của người
  *  17 tuổi sinh cuối năm). Chỉ lọc hiển thị; lời theo tuổi do engine chọn. */
-function du18(nam: number, thang: number, ngay: number): boolean {
+function duNguoiLon(nam: number, thang: number, ngay: number): boolean {
   if (!(nam > 1900 && thang >= 1 && thang <= 12 && ngay >= 1 && ngay <= 31)) return false;
   const h = new Date();
   const tuoi = h.getFullYear() - nam - ((h.getMonth() + 1 < thang || (h.getMonth() + 1 === thang && h.getDate() < ngay)) ? 1 : 0);
-  return tuoi >= 18;
+  return tuoi >= 16;               // TUOI-16: khớp `config.TUOI_NGUOI_LON` của engine
 }
 
 /** Ô đang gõ có thể là ngày ÂM (đi sau ngày dương ~1 tháng): cộng một tháng trước khi so — nghiêng về không hỏi sớm. Lúc
  *  lưu dùng ngày dương đã đổi (`dg`). */
-function du18Nhap(lich: "duong" | "am", nam: number, thang: number, ngay: number): boolean {
-  if (lich !== "am") return du18(nam, thang, ngay);
-  return thang >= 12 ? du18(nam + 1, 1, ngay) : du18(nam, thang + 1, ngay);
+function duNguoiLonNhap(lich: "duong" | "am", nam: number, thang: number, ngay: number): boolean {
+  if (lich !== "am") return duNguoiLon(nam, thang, ngay);
+  return thang >= 12 ? duNguoiLon(nam + 1, 1, ngay) : duNguoiLon(nam, thang + 1, ngay);
 }
 
 export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
@@ -206,7 +206,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
       ...(nuocNgoai && utcNoiSinh !== "" ? { utc_noi_sinh: Number(utcNoiSinh) } : {}),
       ...(nuocNgoai && muiGio ? { mui_gio: muiGio } : {}),
       ...(canVung && (vung === "north" || vung === "south") ? { vung } : {}),
-      ...((tinhTrang === "doc_than" || tinhTrang === "co_doi") && du18(dg.nam, dg.thang, dg.ngay) ? { tinh_trang: tinhTrang } : {}),
+      ...((tinhTrang === "doc_than" || tinhTrang === "co_doi") && duNguoiLon(dg.nam, dg.thang, dg.ngay) ? { tinh_trang: tinhTrang } : {}),
       ...(macDinh?.tao_luc ? { tao_luc: macDinh.tao_luc } : {}),
     });
     if (!macDinh) {
@@ -423,7 +423,7 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
                 </Select>
               </div>
             )}
-            {can === "day_du" && du18Nhap(lich, Number(nam) || 0, Number(thang) || 0, Number(ngay) || 0) && (
+            {can === "day_du" && duNguoiLonNhap(lich, Number(nam) || 0, Number(thang) || 0, Number(ngay) || 0) && (
               <div className="space-y-2 sm:col-span-2">
                 <Label htmlFor="tinh-trang">{g("hs.tinh_trang")}</Label>
                 <Select id="tinh-trang" value={tinhTrang} onChange={(e) => setTinhTrang(e.target.value)}>
