@@ -68,6 +68,14 @@ test("Q-I3: trang SEO công khai dùng CSP tĩnh (không nonce) + CDN-Cache-Cont
   const htmlEn = await (await request.get("/than-so/y-nghia-so/so-7", { headers: { "accept-language": "en-US,en;q=0.9", cookie: "hbt-goi-y-en=1" } })).text();
   expect(htmlEn).not.toContain("goi-y-tieng-anh");
   expect(htmlVi).not.toContain("goi-y-tieng-anh");
+  const mainVi = /<main[\s\S]*?<\/main>/.exec(htmlVi)?.[0];
+  const mainEn = /<main[\s\S]*?<\/main>/.exec(htmlEn)?.[0];
+  expect(mainVi).toBeTruthy();
+  expect(mainEn).toBe(mainVi);
+
+  // Slug không tồn tại trên đường dẫn allowlist vẫn trả đúng HTTP 404
+  const khongCo = await request.get("/than-so/y-nghia-so/khong-ton-tai-999");
+  expect(khongCo.status()).toBe(404);
 });
 
 for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/than-so/y-nghia-so/so-7",
