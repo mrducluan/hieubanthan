@@ -225,38 +225,45 @@ def test_route_422_khi_anh_sai(monkeypatch):
     assert client.post("/v1/phongthuy/doc-anh", json=_yc(anh=[{"du_lieu": "data:image/jpeg;base64," + ANH_B64, "loai": "image/jpeg"}])).status_code == 422
     assert client.post("/v1/phongthuy/doc-anh", json=_yc(anh=[{"du_lieu": ANH_B64, "loai": "image/gif"}])).status_code == 422
     assert client.post("/v1/phongthuy/doc-anh", json=_yc(goc="x" * 61)).status_code == 422
-    assert client.post("/v1/phongthuy/doc-anh", json=_yc(ngon_ngu="fr")).status_code == 422
     assert client.post("/v1/phongthuy/doc-anh", json=_yc(them=1)).status_code == 422
 
 
-def test_anh_so_bang_chung_va_6_anh_va_ngon_ngu_en(co_khoa, monkeypatch):
+def test_anh_so_bang_chung_va_phong_tung_anh(co_khoa, monkeypatch):
     ghi: list = []
     tra = {
         "dau_hieu": [
-            {"ma": "guong_giuong", "co": True, "do_tin": 0.9, "ly_do": "Large mirror facing bed.", "anh_so": 2},
-            {"ma": "xa_ngang", "co": True, "do_tin": 0.8, "ly_do": "Overhead beam.", "anh_so": 99},
-            {"ma": "duong_dam", "co": True, "do_tin": 0.7, "ly_do": "Road aligned.", "anh_so": 0},
+            {"ma": "guong_giuong", "co": True, "do_tin": 0.9, "ly_do": "Gương lớn đối diện giường.", "anh_so": 2},
+            {"ma": "xa_ngang", "co": True, "do_tin": 0.8, "ly_do": "Xà ngang phía trên.", "anh_so": 99},
+            {"ma": "duong_dam", "co": True, "do_tin": 0.7, "ly_do": "Đường thẳng vào cửa.", "anh_so": 0},
+            {"ma": "bep_wc", "co": True, "do_tin": 0.6, "ly_do": "Bếp sát cửa nhà vệ sinh.", "anh_so": 3},
         ],
-        "phong": [{"phong": "phong_ngu_chinh", "do_tin": 0.9}],
-        "luu_y": ["Slightly dim lighting."],
+        "anh": [{"so": 2, "phong": "phong_ngu_chinh", "do_tin": 0.9}, {"so": 3, "phong": "bep", "do_tin": 0.8},
+                {"so": 3, "phong": "ve_sinh", "do_tin": 0.5}, {"so": 9, "phong": "bep", "do_tin": 0.9},
+                {"so": 1, "phong": "phong_la", "do_tin": 0.9}, {"so": 4, "phong": "ban_tho", "do_tin": 0.1}],
+        "luu_y": ["Ảnh hơi tối."],
     }
     _gia_client(monkeypatch, json.dumps(tra), ghi)
-    r = client.post("/v1/phongthuy/doc-anh", json=_yc(
-        anh=[{"du_lieu": ANH_B64, "loai": "image/jpeg"}] * 6,
-        ngon_ngu="en",
-    ))
+    r = client.post("/v1/phongthuy/doc-anh", json=_yc(anh=[{"du_lieu": ANH_B64, "loai": "image/jpeg"}] * 6))
     assert r.status_code == 200, r.text
     d = r.json()
     by_ma = {x["ma"]: x for x in d["dau_hieu"]}
     # anh_so hợp lệ (1..6) được giữ; ngoài phạm vi (99, 0) bị bỏ (KHÔNG kẹp về ảnh gần nhất)
-    assert by_ma["guong_giuong"]["anh_so"] == 2
-    assert "anh_so" not in by_ma["xa_ngang"]
+    assert by_ma["guong_giuong"]["anh_so"] == 2 and by_ma["guong_giuong"]["phong"] == "phong_ngu_chinh"
+    assert "anh_so" not in by_ma["xa_ngang"] and "phong" not in by_ma["xa_ngang"]
     assert "anh_so" not in by_ma["duong_dam"]
-    # prompt EN yêu cầu viết ly_do và luu_y bằng tiếng Anh và có nhãn Photo 2..6
-    he_thong = ghi[0]["json"]["messages"][0]["content"]
-    assert "English" in he_thong
+    assert by_ma["bep_wc"]["phong"] == "bep"                       # ảnh 3: giữ phòng có độ tin cao hơn
+    # phòng từng ảnh: bỏ số ảnh ngoài phạm vi, phòng lạ, độ tin thấp
+    assert d["anh"] == [{"so": 2, "phong": "phong_ngu_chinh", "do_tin": 0.9}, {"so": 3, "phong": "bep", "do_tin": 0.8}]
+    assert d["goc_thieu"] == ["cua_chinh"]                         # đã thấy bếp + phòng ngủ, chưa thấy cửa chính
     nd = ghi[0]["json"]["messages"][1]["content"]
-    assert any(p.get("type") == "text" and "Photo 2" in p.get("text", "") for p in nd)
+    assert any(p.get("type") == "text" and "Ảnh 6" in p.get("text", "") for p in nd)
+    # 6 ảnh cần trần token cao hơn 1 ảnh (trước cố định 700 → JSON dễ bị cắt cụt)
+    assert ghi[0]["json"]["max_tokens"] == da.tran_token(6) > da.tran_token(1) >= 600
+
+
+def test_khong_con_tham_so_ngon_ngu():
+    # bản /en cam kết không gửi ảnh ra dịch vụ AI → route không nhận `ngon_ngu` (extra="forbid")
+    assert client.post("/v1/phongthuy/doc-anh", json=_yc(ngon_ngu="en")).status_code == 422
 
 
 def test_route_can_khoa_engine(monkeypatch):

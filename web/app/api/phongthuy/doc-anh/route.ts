@@ -1,4 +1,4 @@
-// POST /api/phongthuy/doc-anh — PT-V2 "Để máy đọc ảnh": chuyển tiếp 1–3 ảnh nhà (base64, đã thu nhỏ trên trình duyệt)
+// POST /api/phongthuy/doc-anh — PT-V2 "Để máy đọc ảnh": chuyển tiếp 1–6 ảnh nhà (base64, đã thu nhỏ trên trình duyệt)
 // tới engine → engine gọi mô hình thị giác qua lớp narrative và trả dấu hiệu GỢI Ý (`can_xac_nhan: true`); người dùng
 // xác nhận rồi hệ thống mới luận. Chỉ đi khi người dùng tự tích đồng ý ở giao diện. Máy chủ web KHÔNG lưu, KHÔNG log
 // thân yêu cầu (không Sentry body — lib/giam-sat đã bỏ request.data). Trần: mỗi ảnh ≤ 1.600.000 ký tự, tổng ≤ 4.000.000.
@@ -21,7 +21,6 @@ const Input = z.object({
   goc: z.string().trim().max(60).nullable().optional(),
   loai_nha: z.enum(["nha_pho", "can_ho", "biet_thu", "nha_cap4", "khac"]).nullable().optional(),
   y_dinh: z.string().regex(/^[a-z_]{3,30}$/).nullable().optional(),
-  ngon_ngu: z.enum(["vi", "en"]).optional(),
 }).strict();
 
 export async function POST(req: Request): Promise<NextResponse> {

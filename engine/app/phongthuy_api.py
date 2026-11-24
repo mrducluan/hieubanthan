@@ -69,11 +69,57 @@ def api_menh_quai(inp: SinhInput) -> dict:
 
 
 class DoHuongInput(BaseModel):
-    """PT-V1 — độ HƯỚNG nhà đo bằng la bàn (điện thoại hoặc la bàn thật); kèm năm sinh thì xét du niên."""
+    """PT-V1 — độ HƯỚNG nhà đo bằng la bàn (điện thoại hoặc la bàn thật); kèm năm sinh thì xét du niên.
+    LK-1: thay vì một số độ, web gửi MẪU la bàn thô (`mau`, lấy lúc giữ yên máy) — engine tính trung bình vòng, độ rung,
+    mức ổn định (một bộ tính với VT-1). `mau_2` = lần đo thứ hai ở chỗ khác để bắt nhiễu sắt thép."""
     model_config = ConfigDict(extra="forbid")
 
-    do_huong: float = Field(ge=0, lt=360, description="Độ của hướng nhà (mặt nhìn ra), 0 = chính Bắc")
+    do_huong: float | None = Field(default=None, ge=0, lt=360, description="Độ của hướng nhà (mặt nhìn ra), 0 = chính Bắc")
+    mau: list[float] | None = Field(default=None, min_length=1, max_length=240, description="Mẫu la bàn thô (độ, bắc từ)")
+    sai_so: float | None = Field(default=None, ge=-1, le=360, description="iOS webkitCompassAccuracy (độ); −1 = chưa hiệu chỉnh")
+    mau_2: list[float] | None = Field(default=None, min_length=1, max_length=240, description="Lần đo thứ hai ở chỗ khác")
+    sai_so_2: float | None = Field(default=None, ge=-1, le=360)
     sinh: SinhInput | None = None
+
+    @model_validator(mode="after")
+    def _mot_nguon(self) -> "DoHuongInput":
+        if (self.do_huong is None) == (self.mau is None):
+            raise ValueError("cần đúng một trong hai: do_huong hoặc mau")
+        if self.mau is None and (self.mau_2 is not None or self.sai_so is not None or self.sai_so_2 is not None):
+            raise ValueError("mau_2 / sai_so chỉ đi cùng mau")
+        if any(not (0 <= x < 360) for x in (self.mau or []) + (self.mau_2 or [])):
+            raise ValueError("số độ phải trong [0, 360)")
+        return self
+
+
+LOI_DO = {
+    "on": "Máy giữ yên tốt (rung ±{rung}°). Đây là độ rung của cảm biến, chưa phải độ chính xác — sắt thép gần cửa vẫn có thể làm lệch.",
+    "giu_yen": "Số còn rung ±{rung}° — giữ máy yên hơn rồi đo lại sẽ chắc hơn.",
+    "do_lai": "Số rung ±{rung}° — nhiều quá để tin. Lùi xa cửa sắt, xe, tủ lạnh rồi đo lại.",
+    "hieu_chinh": "La bàn của máy chưa được hiệu chỉnh. Cầm máy vẽ hình số 8 trong không khí vài lần rồi đo lại.",
+}
+LOI_HAI_LAN = {
+    "khop": "Hai lần đo lệch nhau {lech}° — khớp. Lấy trung bình hai lần.",
+    "nhieu": "Hai lần đo lệch nhau {lech}° — có thể gần chỗ đo có sắt thép hoặc thiết bị điện. Đừng chốt số này: đo lại ở chỗ thoáng hơn, hoặc dùng cách chọn trên ảnh vệ tinh.",
+}
+
+
+def _do_tu_mau(inp: DoHuongInput) -> tuple[float, dict, dict | None]:
+    """(số độ dùng để tính, khối `do`, khối `hai_lan` hoặc None)."""
+    from app.calc import vi_tri_vat as vt  # noqa: PLC0415
+    do = vt.do_tu_mau(inp.mau, inp.sai_so)
+    hai = None
+    if inp.mau_2 is not None:
+        hai = vt.so_hai_lan(inp.mau, inp.mau_2, inp.sai_so, inp.sai_so_2)
+        ma = "nhieu" if hai["nhieu"] else "khop"
+        hai["loi"] = L(f"pt.do.hai_lan.{ma}", LOI_HAI_LAN[ma], lech=hai["lech"])
+        if hai["nhieu"]:
+            do = {**do, "on_dinh": "do_lai"}
+        else:
+            do = {**do, "do": hai["do"]}
+    ma = "hieu_chinh" if do["can_hieu_chinh"] else do["on_dinh"]
+    do["loi"] = L(f"pt.do.rung.{ma}", LOI_DO[ma], rung=do["rung"])
+    return do["do"], do, hai
 
 
 CANH_BAO_DO = {
@@ -87,12 +133,21 @@ CANH_BAO_DO = {
 def api_do_huong(inp: DoHuongInput) -> dict:
     """Đổi độ la bàn → hướng/sơn/toạ/trạch (+ du niên hướng đó với người xem). La bàn điện thoại chịu
     nhiễu từ (thép, loa, máy tính) — luôn cho sửa tay và khuyên đo lại vài lần."""
-    r = pt.do_huong(inp.do_huong)
+    do_khoi, hai_lan = None, None
+    if inp.mau is not None:
+        do_so, do_khoi, hai_lan = _do_tu_mau(inp)
+    else:
+        do_so = inp.do_huong
+    r = pt.do_huong(do_so)
     ra = {"engine_version": ENGINE_VERSION, **r,
           "canh_bao_y": L(f"pt.do.{r['canh_bao']}", CANH_BAO_DO[r["canh_bao"]]) if r["canh_bao"] in CANH_BAO_DO else None,
           "luu_y": L("pt.do.luu_y", "Độ đo bằng điện thoại là độ từ (bắc từ), lệch bắc thật khoảng 1° ở Việt Nam — không đáng kể "
                      "với 8 hướng, nhưng đáng kể khi sát ranh sơn. Đứng ở cửa chính, quay lưng vào nhà, giữ điện "
                      "thoại nằm ngang, tránh xa xe, cột thép, loa.")}
+    if do_khoi is not None:
+        ra["do"] = do_khoi
+    if hai_lan is not None:
+        ra["hai_lan"] = hai_lan
     if inp.sinh:
         s = inp.sinh.sinh()
         mq = pt.menh_quai(s["nam"], s["gioi_tinh"], s["ngay"], s["moc_nam"])
@@ -197,7 +252,6 @@ class DocAnhInput(BaseModel):
     goc: Annotated[str, StringConstraints(strip_whitespace=True, max_length=60)] | None = Field(default=None, description="Gợi ý góc chụp, vd 'phòng khách'")
     loai_nha: Annotated[str, StringConstraints(strip_whitespace=True, max_length=30)] | None = None
     y_dinh: Annotated[str, StringConstraints(strip_whitespace=True, max_length=40)] | None = None
-    ngon_ngu: Literal["vi", "en"] = "vi"
 
     @model_validator(mode="after")
     def _tong(self) -> "DocAnhInput":
@@ -212,8 +266,7 @@ def api_doc_anh(inp: DocAnhInput) -> dict:
     `da_bat: false, ly_do_tat: chua_dat_khoa` (không lỗi 5xx); hết lượt RL-1 → `het_luot`; lỗi dịch vụ → `loi_dich_vu`."""
     from app.narrative import doc_anh_nha  # noqa: PLC0415
     r = doc_anh_nha.doc_anh({"anh": [{"du_lieu": a.du_lieu, "loai": a.loai} for a in inp.anh],
-                             "goc": inp.goc, "loai_nha": inp.loai_nha, "y_dinh": inp.y_dinh,
-                             "ngon_ngu": inp.ngon_ngu})
+                             "goc": inp.goc, "loai_nha": inp.loai_nha, "y_dinh": inp.y_dinh})
     return {"engine_version": ENGINE_VERSION, **r}
 
 
@@ -549,6 +602,49 @@ def api_tam_yeu_la_ban_24_son() -> dict:
 
 
 # --------------------------------------------------------------------------- #
+# HG-1 — "Hỏi gì xem nấy": sáu câu hỏi → câu trả lời riêng từ hồ sơ nhà (RULES `luangiai/phongthuy_hoi_gi.py`)
+
+class _NhaHoiGi(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    huong_do: float | None = Field(default=None, ge=0, lt=360)
+    huong: Literal["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] | None = None
+    nam_xay: int | None = Field(default=None, ge=1864, le=2150)
+    loai_nha: Literal["nha_pho", "can_ho", "biet_thu", "nha_cap4", "khac"] | None = None
+    bo_cuc: _BoCuc | None = None
+
+
+class HoiGiInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    ma: Literal["cua_chinh", "bo_cuc", "gia_dinh", "han_nam", "so_sanh", "mo_quan"]
+    nha: _NhaHoiGi | None = None
+    sinh: SinhInput | None = None
+    nguoi_2: _NguoiNam | None = None
+    ngay_xem: _dt.date | None = None
+
+
+@router.get("/hoi-gi")
+def api_hoi_gi_danh_muc() -> dict:
+    from app.luangiai import phongthuy_hoi_gi as hg  # noqa: PLC0415
+    return {"engine_version": ENGINE_VERSION, **hg.danh_muc()}
+
+
+@router.post("/hoi-gi")
+def api_hoi_gi(inp: HoiGiInput) -> dict:
+    """Trả lời một trong sáu câu hỏi từ dữ kiện người dùng đã có (hướng, năm xây, dấu hiệu đã khai, năm sinh). Thiếu gì
+    thì nêu ở `thieu` — không đoán thay. Không lưu gì; đầu ra không mang ngày sinh."""
+    from app.luangiai import phongthuy_hoi_gi as hg  # noqa: PLC0415
+    nha = inp.nha.model_dump(exclude_none=True) if inp.nha else {}
+    try:
+        r = hg.tra_loi(inp.ma, nha, inp.sinh.sinh() if inp.sinh else None,
+                       inp.nguoi_2.model_dump() if inp.nguoi_2 else None, inp.ngay_xem or hom_nay_vn())
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)[:300])
+    return {"engine_version": ENGINE_VERSION, **r}
+
+
+# --------------------------------------------------------------------------- #
 # VT-1 — "Đứng giữa nhà, chĩa điện thoại" + khung nhà theo tỉ lệ, nhiều tầng (2026-11-21)
 
 class VatViTriInput(BaseModel):
@@ -558,11 +654,18 @@ class VatViTriInput(BaseModel):
     mau: list[float] | None = Field(default=None, min_length=1, max_length=120, description="Các mẫu la bàn (độ, bắc từ) khi chĩa máy")
     sai_so: float | None = Field(default=None, ge=-1, le=360, description="iOS webkitCompassAccuracy (độ) nếu có")
     diem: tuple[float, float] | None = Field(default=None, description="Điểm chạm trên khung tỉ lệ, chuẩn hoá 0..1 (x trái→phải, y trước→sau)")
+    # SD-1: chỉ gửi khi người dùng TỰ CHỈNH trên sơ đồ (giá trị máy tự điền không phải dữ kiện)
+    kich_thuoc: tuple[float, float] | None = Field(default=None, description="Rộng × sâu (mét) của phòng trên sơ đồ")
+    huong_cua: Literal["truoc", "phai", "sau", "trai"] | None = Field(default=None, description="Cửa phòng mở về phía nào của nhà")
 
     @model_validator(mode="after")
     def _mot_nguon(self) -> "VatViTriInput":
         if (self.mau is None) == (self.diem is None):
             raise ValueError("mỗi vật cần đúng một trong hai: mau (la bàn) hoặc diem (khung)")
+        if self.diem is None and (self.kich_thuoc is not None or self.huong_cua is not None):
+            raise ValueError("kich_thuoc / huong_cua chỉ đi với điểm trên khung")
+        if self.kich_thuoc is not None and not all(0.3 <= x <= 200 for x in self.kich_thuoc):
+            raise ValueError("kích thước phòng phải trong 0,3–200 m")
         if self.mau is not None and any(not (0 <= x < 360) for x in self.mau):
             raise ValueError("số độ phải trong [0, 360)")
         if self.diem is not None and not all(0 <= x <= 1 for x in self.diem):
@@ -627,9 +730,28 @@ def api_vi_tri_vat(inp: ViTriVatInput) -> dict:
         tuoi = sach_ghi_mon.tuoi_tu(s["ngay"] or s["nam"], hom_nay_vn())
     from app.calc import vi_tri_vat as vt  # noqa: PLC0415
     truc = vt.trung_binh_goc(inp.truc_mau)[0] if inp.truc_mau else inp.truc_do
+    _RIENG_SO_DO = ("kich_thuoc", "huong_cua")
     try:
-        r = vtr.phan_tich([t.model_dump() for t in inp.tang], inp.huong_nha_do, truc,
+        r = vtr.phan_tich([{"so": t.so, "vat": [{k: x for k, x in v.model_dump().items() if k not in _RIENG_SO_DO} for v in t.vat]}
+                           for t in inp.tang], inp.huong_nha_do, truc,
                           inp.khung.model_dump() if inp.khung else None, mq, inp.nam_xay, tuoi)
+        them = _goi_y_so_do(inp)
     except ValueError as e:
         raise HTTPException(422, detail=str(e)[:300])
-    return {"engine_version": ENGINE_VERSION, "pham_vi": "vi_tri_vat", **({"menh_quai": mq} if mq else {}), **r}
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "vi_tri_vat", **({"menh_quai": mq} if mq else {}), **r, **them}
+
+
+def _goi_y_so_do(inp: "ViTriVatInput") -> dict:
+    """SD-1: có sơ đồ theo tỉ lệ → tâm nhà + dấu hiệu GỢI Ý (người dùng xác nhận rồi mới vào bố cục). Không sơ đồ → {}."""
+    if inp.khung is None or not any(v.diem is not None for t in inp.tang for v in t.vat):
+        return {}
+    from app.calc import mat_bang_khung as mk  # noqa: PLC0415
+    veto = bo_cuc.dau_hieu_veto()
+    ds: list[dict] = []
+    for t in sorted(inp.tang, key=lambda x: x.so):
+        vat = [v.model_dump(exclude_none=True) for v in t.vat if v.diem is not None]
+        for g in mk.goi_y_dau_hieu(vat, inp.khung.rong, inp.khung.sau, inp.khung.luoi if t.so == 1 else None):
+            if not any(x["ma"] == g["ma"] for x in ds):
+                ds.append({"ma": g["ma"], "hoi": bo_cuc.hoi(g["ma"]), "tang": t.so, "can": g["can"],
+                           "nen_xu_ly_truoc": g["ma"] in veto, "trang": bo_cuc.duong_trang(g["ma"])})
+    return {"khung": {"tam": list(mk.tam_khung(inp.khung.luoi))}, "dau_hieu_goi_y": ds}

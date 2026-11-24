@@ -145,6 +145,7 @@ SO: dict[str, dict] = {
     },
     "phongthuy_doi_song.json": {"mang": "phongthuy", "muc": "bien_tap"},
     "phongthuy_do_thi.json": {"mang": "phongthuy", "muc": "bien_tap"},
+    "phongthuy_hoi_gi_kb.json": {"mang": "phongthuy", "muc": "bien_tap"},
     "bo_sung_dau_hieu.json": {"mang": "phongthuy", "muc": "bien_tap"},
     # ---- Nhân tướng · Tarot
     "nhan_tuong_sach_ghi.json": {"mang": "nhantuong", **_nv("than_tuong_toan_bien.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",

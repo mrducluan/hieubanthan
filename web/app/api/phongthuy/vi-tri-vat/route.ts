@@ -9,6 +9,9 @@ const Vat = z.object({
   mau: z.array(Do).min(1).max(120).optional(),
   sai_so: z.number().min(-1).max(360).optional(),
   diem: z.tuple([z.number().min(0).max(1), z.number().min(0).max(1)]).optional(),
+  // SD-1: chỉ gửi khi người dùng TỰ CHỈNH trên sơ đồ — engine dùng để gợi ý dấu hiệu (web không tự suy)
+  kich_thuoc: z.tuple([z.number().min(0.3).max(200), z.number().min(0.3).max(200)]).optional(),
+  huong_cua: z.enum(["truoc", "phai", "sau", "trai"]).optional(),
 }).strict();
 const Input = z.object({
   huong_nha_do: Do.optional(),
