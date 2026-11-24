@@ -21,7 +21,7 @@ import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
 // Mô tả trang chủ ≤ 160 ký tự (mô tả site dài hơn vẫn dùng cho schema/llms.txt).
-// SEO-GEO (2026-11-24): tách hẳn từ khoá "thần số học" khỏi Title trang chủ để /than-so sở hữu toàn bộ intent
+// SEO-1 (chủ dự án chốt 2026-11-24, sửa SEO-N): trang chủ không mang tên môn nào — tránh ăn thịt từ khoá; /than-so sở hữu
 // "Xem thần số học online miễn phí", trang chủ đứng tên THƯƠNG HIỆU + định vị đa môn huyền học. CMS vẫn ghi đè được.
 const TIEU_DE_CHU = "Hiểu Bản Thân — Huyền học & thấu hiểu bản thân miễn phí";
 const MO_TA_CHU = "Thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot: tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.";
