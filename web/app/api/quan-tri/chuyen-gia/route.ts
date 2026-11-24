@@ -6,7 +6,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { congApi, loiSql } from "@/lib/quan-tri-api";
-import { bangSoChuyenGia } from "@/lib/chuyen-gia-may-chu";
+import { benhAnDaMang } from "@/lib/chuyen-gia-may-chu";
 import { MANG_CG, TRA_LOI_TOI_DA, type HoSoCg, type MangCg } from "@/lib/chuyen-gia-hoi";
 
 const Vao = z.discriminatedUnion("viec", [
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     if (error) return loiSql(error);
     const c = data as { mang?: string; ho_so?: HoSoCg | null } | null;
     if (!c || !MANG_CG.includes(c.mang as MangCg)) return NextResponse.json({ error: "Không thấy câu hỏi." }, { status: 404 });
-    return NextResponse.json(await bangSoChuyenGia(c.mang as MangCg, c.ho_so ?? null));
+    return NextResponse.json(await benhAnDaMang(c.mang as MangCg, c.ho_so ?? null));
   }
   const { data, error } = v.viec === "tra_loi" ? await p.sb.rpc("tra_loi_cau_hoi", { p_id: v.id, p_tra_loi: v.tra_loi })
     : v.viec === "hoan" ? await p.sb.rpc("hoan_cau_hoi", { p_id: v.id, p_ly_do: v.ly_do })

@@ -110,3 +110,23 @@ test("/tai-khoan/cau-hoi: trạng thái, hạn trung tính, câu trả lời + �
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
   expect(guiLen).toEqual([]);
 });
+
+test("GĐ 2: /hoi-chuyen-gia chỉ nhận ?mang= (không nhận ?cau= qua URL để bảo vệ riêng tư) + /hop-tac-chuyen-gia noindex, đủ demo Co-Pilot", async ({ page }) => {
+  await giaLap(page, BAT);
+  await page.goto("/hoi-chuyen-gia?mang=tu_vi&cau=KhongDuocDienQuaUrl");
+  await expect(page.getByTestId("cg-form")).toBeVisible();
+  await expect(page.getByLabel("Câu hỏi cho chuyên gia")).toHaveValue("");
+
+  // Trang tuyển Founding Masters /hop-tac-chuyen-gia (giữ noindex chờ chủ dự án + luật sư duyệt)
+  const vp: string[] = [];
+  page.on("console", (m) => { if (/Content Security Policy/i.test(m.text())) vp.push(m.text()); });
+  await page.goto("/hop-tac-chuyen-gia");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("80%");
+  await expect(page.getByTestId("demo-copilot")).toBeVisible();
+  await expect(page.locator("main")).toContainText("NĐ 52/2024");
+  await expect(page.locator("main")).toContainText("NĐ 252/2026");
+  await expect(page.locator("main")).toContainText("Luật TMĐT 122/2025");
+  expect(await page.locator("main").innerText()).not.toMatch(CUM_THUC_EP);
+  expect(vp).toEqual([]);
+});

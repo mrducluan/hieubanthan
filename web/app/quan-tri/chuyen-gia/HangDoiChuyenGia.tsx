@@ -3,7 +3,7 @@
 // + ô trả lời có KIỂM TRƯỚC KHI GỬI (lib/chuyen-gia-hoi.kiemTraLoi + luật cố định của engine qua /api/quan-tri/ai viec "kiem") —
 // mục CHẶN khoá nút gửi; cảnh báo chỉ nhắc. Chủ sở hữu có nút Hoàn (nhập lý do) sau khi đã chuyển tiền ngoài hệ thống.
 import { useState } from "react";
-import { AlertTriangle, Calculator, Loader2, Send, Undo2 } from "lucide-react";
+import { AlertTriangle, Calculator, FileText, Loader2, Send, Undo2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input, Textarea } from "@/components/ui/input";
@@ -15,7 +15,8 @@ export interface CauQT {
   trang_thai: TrangThaiCg; qua_han: boolean; thanh_toan_luc: string | null; han_tra_loi: string | null; tra_loi: string | null;
   tra_loi_luc: string | null; danh_gia: number | null; hoan_luc: string | null; ly_do_hoan: string | null; tao_luc: string; email: string | null;
 }
-interface BangSo { dong: { ten: string; gia_tri: string }[]; ghi_chu: string | null; tho: unknown }
+interface DoiChieu { mang: MangCg; ten: string; dong: { ten: string; gia_tri: string }[]; ghi_chu: string | null }
+interface BangSo { dong: { ten: string; gia_tri: string }[]; ghi_chu: string | null; tho: unknown; doi_chieu?: DoiChieu[]; khung_tra_loi?: string }
 
 const ngayGio = (s: string) =>
   new Intl.DateTimeFormat("vi-VN", { dateStyle: "short", timeStyle: "short", timeZone: "Asia/Ho_Chi_Minh" }).format(new Date(s));
@@ -102,15 +103,35 @@ function MotCau({ c, chuSoHuu }: { c: CauQT; chuSoHuu: boolean }) {
             {hs.gio_sinh ? ` · ${hs.gio_sinh}${hs.do_tin_gio === "approx" ? " (ước chừng)" : ""}` : hs.do_tin_gio === "unknown" ? " · không rõ giờ" : " · không có giờ"}
             {hs.gioi_tinh ? ` · ${hs.gioi_tinh === "nam" ? "nam" : "nữ"}` : " · không có giới tính"}{hs.noi_sinh ? ` · ${hs.noi_sinh}` : ""}</p>
         ) : <p className="text-fg-muted">Người hỏi không chia sẻ hồ sơ (hoặc đã quá 30 ngày) — trả lời theo câu chữ.</p>}
-        {hs && c.mang !== "kinh_dich" && !bang && (
+        {hs && !bang && (
           <Button size="sm" variant="secondary" className="mt-2" onClick={() => void tinh()} disabled={dangTinh} data-testid="qt-cg-tinh">
-            {dangTinh ? <Loader2 className="animate-spin" aria-hidden /> : <Calculator aria-hidden />} Tính số (engine)
+            {dangTinh ? <Loader2 className="animate-spin" aria-hidden /> : <Calculator aria-hidden />} Lập hồ sơ đa mảng (Co-Pilot)
           </Button>
         )}
         {bang && (
-          <div className="mt-2 space-y-1" data-testid="qt-cg-bang">
-            {bang.dong.map((d) => <p key={d.ten}><span className="text-fg-muted">{d.ten}:</span> {d.gia_tri}</p>)}
-            {bang.ghi_chu && <p className="text-xs text-gold">{bang.ghi_chu}</p>}
+          <div className="mt-2 space-y-3" data-testid="qt-cg-bang">
+            <div className="space-y-1">
+              {bang.dong.map((d) => <p key={d.ten}><span className="text-fg-muted">{d.ten}:</span> {d.gia_tri}</p>)}
+              {bang.ghi_chu && <p className="text-xs text-gold">{bang.ghi_chu}</p>}
+            </div>
+            {bang.doi_chieu && bang.doi_chieu.length > 0 && (
+              <div className="grid gap-2 border-t border-line/50 pt-2 sm:grid-cols-2" data-testid="qt-cg-doi-chieu">
+                {bang.doi_chieu.map((b) => (
+                  <div key={b.mang} className="rounded-lg border border-line/50 bg-bg-2/40 p-2.5 text-xs">
+                    <p className="font-medium text-gold">Đối chiếu · {b.ten}</p>
+                    <div className="mt-1 space-y-0.5">
+                      {b.dong.map((d) => <p key={d.ten}><span className="text-fg-muted">{d.ten}:</span> {d.gia_tri}</p>)}
+                    </div>
+                    {b.ghi_chu && <p className="mt-1 text-fg-faint">{b.ghi_chu}</p>}
+                  </div>
+                ))}
+              </div>
+            )}
+            {choTraLoi && bang.khung_tra_loi && (
+              <Button size="sm" variant="outline" onClick={() => setTl((cu) => (cu.trim() ? `${cu.trim()}\n\n${bang.khung_tra_loi}` : bang.khung_tra_loi!))} data-testid="qt-cg-chen-khung">
+                <FileText aria-hidden /> Chèn khung trả lời 3 phần
+              </Button>
+            )}
             {bang.tho != null && <details className="text-xs text-fg-faint"><summary>Dữ liệu thô</summary><pre className="overflow-x-auto">{JSON.stringify(bang.tho, null, 1)}</pre></details>}
           </div>
         )}
