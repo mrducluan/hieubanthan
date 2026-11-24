@@ -69,6 +69,15 @@ async function laHoiVien(phien: NonNullable<Awaited<ReturnType<typeof phienNguoi
   } catch { return false; }
 }
 
+/** LX-2027 (0042): người nhận Bao Lì Xì Tết 2027 được mở trọn báo cáo /thoi-gian-toi không trừ Sao.
+ *  Chưa chạy 0042 / lỗi → false (không mở nhầm). */
+async function coQuyenLiXi(phien: NonNullable<Awaited<ReturnType<typeof phienNguoiDung>>>): Promise<boolean> {
+  try {
+    const { data, error } = await phien.sb.rpc("li_xi_hieu_luc");
+    return !error && data === true;
+  } catch { return false; }
+}
+
 /** QT-CSH: chủ sở hữu (bảng vai_tro_quan_tri, migration 0010) đọc trọn mọi báo cáo, không trừ Sao — để tự soát nội dung
  *  người dùng trả tiền mới thấy. Chỉ cần đăng nhập đúng tài khoản (không đòi MFA: chỉ là quyền ĐỌC báo cáo của chính
  *  hồ sơ mình nhập). Lỗi / chưa chạy 0010 → false. */
@@ -141,6 +150,12 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     if (!kq.ok) return kq.res;
     await phien.sb.rpc("hoi_vien_ghi_mo", { p_khoa: khoa }).then(() => undefined, () => undefined);
     return NextResponse.json({ ...(kq.body as object), phi: { sao: 0, ly_do: "hoi_vien" } });
+  }
+
+  // LX-2027 (0042): người đã nhận Bao LÌ XÌ TẾT 2027 → mở trọn báo cáo /thoi-gian-toi không trừ Sao.
+  if (phien && moDun === "thoi_gian" && (await coQuyenLiXi(phien))) {
+    const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));
+    return kq.ok ? NextResponse.json({ ...(kq.body as object), phi: { sao: 0, ly_do: "li_xi_2027" } }) : kq.res;
   }
 
   // Đã mở hôm nay? (RLS: người dùng đọc được sổ Sao của chính mình.)

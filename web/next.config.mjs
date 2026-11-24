@@ -71,7 +71,7 @@ const nextConfig = {
   htmlLimitedBots: /^(?!.*(?:googlebot|google-inspectiontool))(?=.*(?:bot|crawl|spider|slurp|preview|facebookexternalhit|facebookcatalog|embedly|whatsapp|zalo|google-extended|googleother|mediapartners-google|adsbot-google|storebot-google|anthropic|claude|perplexity|cohere|bytespider|meta-externalagent|ia_archiver|vkshare|yeti))/i,
   // Ảnh thẻ chia sẻ (/og) đọc font OFL từ assets/fonts — đưa vào gói deploy. (Next 15: instrumentation.ts bật sẵn.)
   // TR-5: ảnh thẻ Tarot / Ba lá vẽ tranh lá thật (JPEG nhỏ trong assets/tarot — bộ dựng ảnh không đọc webp).
-  outputFileTracingIncludes: { "/og": ["./assets/fonts/**"], "/og/tarot": ["./assets/fonts/**", "./assets/tarot/**"], "/og/ba-la": ["./assets/fonts/**", "./assets/tarot/**"] },
+  outputFileTracingIncludes: { "/og": ["./assets/fonts/**"], "/og/tarot": ["./assets/fonts/**", "./assets/tarot/**"], "/og/ba-la": ["./assets/fonts/**", "./assets/tarot/**"], "/og/li-xi": ["./assets/fonts/**", "./public/li-xi/**"] },
   // Blog: ảnh bìa bài NotFair đi qua tối ưu ảnh của Next (/_next/image).
   images: {
     remotePatterns: [

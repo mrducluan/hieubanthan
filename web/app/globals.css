@@ -376,3 +376,26 @@
 @keyframes ky-xo { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 details[open] > .khung-ky-noi-dung { animation: ky-xo 0.18s ease-out; }
 @media (prefers-reduced-motion: reduce) { details[open] > .khung-ky-noi-dung { animation: none; } }
+
+/* LX-2027: hiệu ứng cánh hoa mai / hoa đào rơi và pháo hoa bung tia khi mở LÌ XÌ TẾT 2027 (sạch CSP, tôn trọng giảm chuyển động). */
+@keyframes lx-hoa-roi {
+  0% { transform: translate3d(0, -12%, 0) rotate(0deg); opacity: 0; }
+  12% { opacity: 0.92; }
+  85% { opacity: 0.85; }
+  100% { transform: translate3d(26px, 118%, 0) rotate(260deg); opacity: 0; }
+}
+@keyframes lx-phao-bung {
+  0% { transform: scale(0.25); opacity: 0; }
+  25% { opacity: 1; }
+  100% { transform: scale(1.22); opacity: 0; }
+}
+@keyframes lx-lap-lanh {
+  0%, 100% { opacity: 0.45; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+.lx-canh-roi { animation: lx-hoa-roi var(--lx-dur, 7s) linear var(--lx-delay, 0s) infinite; will-change: transform, opacity; }
+.lx-phao-no { animation: lx-phao-bung 1.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; transform-origin: center; }
+.lx-sao-nhay { animation: lx-lap-lanh 2.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .lx-canh-roi, .lx-phao-no, .lx-sao-nhay { animation: none !important; opacity: 0.7; }
+}

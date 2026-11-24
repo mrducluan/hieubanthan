@@ -111,7 +111,14 @@ export default async function Page(p: P) {
       {L("/thoi-gian-toi") && <section className="mt-8 rounded-2xl border border-line bg-surface/40 p-5" aria-labelledby="ca-nhan" data-nosnippet="">
         <h2 id="ca-nhan" className="text-xl">{c("ca_nhan.tieu_de", bien)}</h2>
         <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{c("ca_nhan.mo_ta", bien)}</p>
-        <Link href={L(`/thoi-gian-toi?nam=${n}`)!} className="mt-3 inline-flex rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-bg" data-testid="nut-ca-nhan">{c("ca_nhan.nut", bien)}</Link>
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <Link href={L(`/thoi-gian-toi?nam=${n}`)!} className="inline-flex rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-bg" data-testid="nut-ca-nhan">{c("ca_nhan.nut", bien)}</Link>
+          {!en && n === 2027 && (
+            <Link href="/li-xi-tet-2027" className="inline-flex rounded-full border border-gold/50 px-5 py-2.5 text-sm font-medium text-gold hover:bg-gold/10" data-testid="nut-li-xi-2027">
+              Tặng LÌ XÌ TẾT 2027 →
+            </Link>
+          )}
+        </div>
       </section>}
 
       <section className="mt-8" aria-labelledby="tra">
