@@ -72,18 +72,21 @@ const tuNd = (nd: NoiDungCongCu, tieu_de_seo: string, chu: BangChu): MucSoTrang 
 
 export const SO_TRANG: readonly MucSoTrang[] = [
   // ---------------- A · trang công cụ (hằng ND trong app/<mảng>/page.tsx)
-  { duong: "/than-so", nhom: "cong_cu", ten: "Thần số học", o: O_CONG_CU, mac_dinh: { tra_loi_nhanh: {"hoi": "Tra cứu thần số học ở đây được gì?", "dap": "Nhập họ tên và ngày sinh, bạn có số chủ đạo (đường đời), số sứ mệnh, linh hồn, nhân cách, biểu đồ ngày sinh và năm cá nhân, mỗi số kèm cách tính từng bước để tự kiểm. Có hai cách cộng đường đời và hai trường phái Pitago, Chaldea. Miễn phí, không cần tài khoản.", "lien_ket": [{"href": "/than-so/y-nghia-so", "ten": "Ý nghĩa các con số"}, {"href": "/than-so/nam-ca-nhan", "ten": "Năm cá nhân 1–9"}]}, chu: CHU_THAN_SO,
-    tieu_de_seo: "Tra cứu thần số học online: số chủ đạo theo ngày sinh",
-    mo_ta_seo: "Tra cứu thần số học miễn phí theo họ tên và ngày sinh: số chủ đạo, sứ mệnh, linh hồn, nhân cách có cách tính từng bước, năm cá nhân, biểu đồ ngày sinh.",
+  { duong: "/than-so", nhom: "cong_cu", ten: "Thần số học", o: O_CONG_CU, mac_dinh: { tra_loi_nhanh: {"hoi": "Xem thần số học online ở đây được gì?", "dap": "Nhập họ tên và ngày sinh, bạn có ngay số chủ đạo (đường đời), số sứ mệnh, linh hồn, nhân cách, biểu đồ ngày sinh và năm cá nhân, mỗi số kèm cách tính từng bước để tự kiểm. Có hai cách cộng đường đời và trường phái Pitago, Phillips (4 Kim Tự Tháp). Miễn phí, không cần tài khoản.", "lien_ket": [{"href": "/than-so/y-nghia-so", "ten": "Ý nghĩa 12 con số"}, {"href": "/than-so/nam-ca-nhan", "ten": "Năm cá nhân 1–9"}]}, chu: CHU_THAN_SO,
+    tieu_de_seo: "Xem thần số học online miễn phí: tra số chủ đạo",
+    mo_ta_seo: "Xem thần số học online miễn phí theo họ tên và ngày sinh: tính số chủ đạo, sứ mệnh, linh hồn, nhân cách từng bước, biểu đồ ngày sinh và năm cá nhân.",
     doan: [
       "Nhập họ tên khai sinh và ngày sinh (dương lịch, hoặc âm lịch để hệ thống đổi giúp). Máy tính ra số đường đời, số sứ mệnh, số linh hồn, số nhân cách — mỗi con số hiện rõ từng bước cộng rút gọn, giữ số cái 11, 22, 33.",
       "Mỗi con số có ba phần: diễn giải từ kho tri thức có ghi nguồn (kèm mặt tối, không chỉ lời hay), phần kiểm chứng để bạn tích những nét đúng với mình, và cách tính từng bước để tự kiểm lại. Ngoài bốn số cốt lõi còn có dải đời (đỉnh cao, thử thách), năm và tháng cá nhân, biểu đồ ngày sinh và mũi tên, nợ nghiệp.",
       "Hồ sơ lưu trên máy bạn; máy chủ chỉ tính rồi bỏ, không lưu ngày sinh. Đây là nội dung văn hoá để tham khảo, không phải lời tiên đoán.",
     ],
     hoi_dap: [
-      { hoi: "Số đường đời tính thế nào?", dap: "Có hai cách. Mặc định là rút gọn con số: cộng riêng ngày, tháng, năm cho gọn rồi mới cộng lại. Cách thứ hai là cộng một lượt mọi chữ số của ngày sinh. Cả hai đều giữ nguyên 11, 22, 33 (số cái). Hai cách có khi ra hai số khác nhau; trang kết quả báo rõ và cho bạn chọn, kèm từng bước cộng để tự kiểm." },
+      { hoi: "Số đường đời (số chủ đạo) tính thế nào?", dap: "Có hai cách. Mặc định là rút gọn con số: cộng riêng ngày, tháng, năm cho gọn rồi mới cộng lại. Cách thứ hai là cộng một lượt mọi chữ số của ngày sinh. Cả hai đều giữ nguyên 11, 22, 33 (số cái). Hai cách có khi ra hai số khác nhau; trang kết quả báo rõ và cho bạn chọn, kèm từng bước cộng để tự kiểm." },
       { hoi: "Có cần họ tên đầy đủ không?", dap: "Có, để tính số sứ mệnh, linh hồn và nhân cách theo bảng chữ cái Pythagoras. Nên dùng họ tên khai sinh, có dấu hay không dấu đều được." },
       { hoi: "Ngày sinh âm lịch thì sao?", dap: "Bạn nhập âm lịch, hệ thống đổi sang dương lịch theo âm lịch Việt Nam rồi mới tính." },
+      { hoi: "Số chủ đạo 11, 22, 33 (Master Numbers) khác gì các số 1–9?", dap: "11, 22, 33 là ba số cái (Master Numbers) không rút gọn tiếp khi cộng đường đời. Chúng mang biên độ lớn hơn số gốc (2, 4, 6) nhưng cũng đi kèm áp lực rèn luyện cao hơn; khi chưa đủ trải nghiệm, người mang số cái thường sống gần với số gốc." },
+      { hoi: "Năm cá nhân trong thần số học tính như thế nào?", dap: "Cộng rút gọn ngày sinh + tháng sinh + năm dương lịch đang xem về một chữ số từ 1 đến 9. Năm cá nhân chạy theo chu kỳ 9 năm liên tiếp, đổi vào ngày 1/1 dương lịch." },
+      { hoi: "Trường phái Pitago và David Phillips khác nhau chỗ nào?", dap: "Cả hai đều dùng bảng chữ cái Pythagoras cho họ tên, nhưng David Phillips nhấn mạnh biểu đồ ngày sinh, mũi tên cá tính và 4 Kim Tự Tháp (đỉnh cao cuộc đời), đồng thời tính số chủ đạo từ 2 đến 11 và 22/4. Trang cho bạn chuyển qua lại giữa hai phái để tự đối chiếu." },
       { hoi: "Thần số học có dự đoán tương lai không?", dap: "Không. Con số chỉ gợi một khung để nhìn lại bản thân; mọi diễn giải đều kèm mặt tối và câu hỏi tự soi, không phán số phận." },
     ],
     lien_ket: [{ href: "/than-so/y-nghia-so", ten: "Ý nghĩa 12 con số" }, { href: "/than-so/nghe-nghiep", ten: "Số chủ đạo hợp nghề gì" }, { href: "/than-so/nam-ca-nhan", ten: "Năm cá nhân 1–9" }, { href: "/than-so/no-nghiep", ten: "Nợ nghiệp" }, { href: "/than-so/so-kep", ten: "Số kép Chaldea" }, { href: "/hop-doi", ten: "Hợp đôi" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
@@ -114,6 +117,9 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Hợp đôi có chấm điểm phần trăm không?", dap: "Không. Điểm số hợp/khắc dễ gây hiểu lầm; trang chỉ nêu chỗ hoà, chỗ va và việc nên cùng làm. Muốn có điểm tham khảo thì dùng khối “Xem lá số 2 người” ở trang Tử vi — điểm ở đó cộng từ các luật hợp – khắc có sẵn trong sách Tử vi và lịch cổ." },
       { hoi: "Ngày sinh người kia có bị lưu lại không?", dap: "Không. Ngày sinh chỉ dùng để tính rồi bỏ. Vui lòng chỉ nhập khi người đó biết và đồng ý." },
       { hoi: "Xem hợp đôi đồng nghiệp hay sếp khác gì người yêu?", dap: "Cùng một cặp số nhưng cách đọc khác: mỗi loại quan hệ có phần diễn giải riêng về cách phối hợp, giao tiếp, ranh giới." },
+      { hoi: "Chỉ có ngày sinh mà chưa biết họ tên đầy đủ có xem hợp đôi được không?", dap: "Được. Chỉ cần ngày sinh của hai người là hệ thống đã so được cặp số chủ đạo (đường đời) và nhịp năm cá nhân song song; thêm họ tên để xem sâu hơn tương tác Linh hồn và Sứ mệnh." },
+      { hoi: "Hai số chủ đạo đối lập nhau có nghĩa là không nên ở bên nhau?", dap: "Không. Đối lập chỉ cho thấy hai người khác nhịp tự nhiên (ví dụ một người thích ổn định, một người thích dịch chuyển). Biết trước chỗ dễ va giúp cả hai đặt quy ước sớm thay vì đoán ý nhau." },
+      { hoi: "Có thể gửi link để người ấy tự nhập ngày sinh không?", dap: "Có. Bạn tạo link mời ngay trên trang kết quả — link chỉ mang tên hiển thị và con số của bạn, không lộ ngày sinh của bạn trong đường dẫn." },
     ],
     lien_ket: [{ href: "/than-so", ten: "Thần số học của bạn" }, { href: "/hop-doi/cap-so", ten: "Số chủ đạo nào hợp nhau" }, { href: "/than-so/tinh-yeu", ten: "Số chủ đạo trong tình yêu" }, { href: "/than-so/y-nghia-so", ten: "Ý nghĩa 12 con số" }],
   } },
@@ -169,6 +175,9 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Nên hỏi Kinh Dịch thế nào?", dap: "Hỏi một việc cụ thể, rõ ràng, liên quan đến lựa chọn của chính bạn (ví dụ: có nên nhận lời mời làm việc này không), tránh câu hỏi có/không về số phận." },
       { hoi: "Ba cách gieo khác nhau thế nào?", dap: "Máy gieo mô phỏng ba đồng xu; Mai Hoa lấy quẻ theo năm, tháng, ngày âm và giờ lúc hỏi (chọn được âm lịch Việt Nam hoặc Trung Quốc); tự gieo là bạn tung xu thật rồi nhập. Cách đọc lời quẻ giống nhau." },
       { hoi: "Không có hào động thì đọc thế nào?", dap: "Lời chủ là quái từ của quẻ, kèm Thoán truyện dịch nghĩa." },
+      { hoi: "Có nhiều hào động cùng lúc thì ưu tiên hào nào?", dap: "Theo phép Chu Hy: 1 hào động xem hào đó; 2 hào động xem cả hai và trọng hào trên; 3 hào động đối chiếu quái từ quẻ chủ và quẻ biến. Hệ thống tự áp quy tắc này và nêu rõ hào trọng tâm." },
+      { hoi: "Có nên gieo lại nhiều lần cho cùng một câu hỏi không?", dap: "Không nên. Theo tinh thần quẻ Sơn Thuỷ Mông (“sơ phệ cáo, tái tam độc”), hỏi lặp lại khi chưa có thông tin mới chỉ làm nhiễu suy nghĩ; hãy chờ tình huống thực tế thay đổi rồi mới xem tiếp." },
+      { hoi: "Gieo quẻ Kinh Dịch online có mất phí hay lưu câu hỏi không?", dap: "Miễn phí và không cần tài khoản. Câu hỏi chỉ được lưu ẩn danh (đã bỏ tên, số liên lạc, không gắn tài khoản) để cải thiện cách trả lời; không công khai, và lời của bạn không được đưa vào lời nhắc AI." },
     ],
     lien_ket: [{ href: "/kinh-dich/que", ten: "64 quẻ Kinh Dịch" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
   } },
@@ -184,6 +193,9 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Tuổi tôi hợp hướng nào?", dap: "Nhập năm sinh và giới tính, trang tính mệnh quái và liệt kê bốn hướng cát (Sinh Khí, Thiên Y, Diên Niên, Phục Vị) cùng bốn hướng hung. Sinh đầu năm dương lịch thì mốc đầu năm quan trọng: mặc định Lập xuân, bạn chọn được Tết âm lịch (lịch Việt hoặc Trung Quốc) và xem đổi mốc có làm khác mệnh quái không." },
       { hoi: "Đo hướng nhà thế nào cho đúng?", dap: "Đứng ở cửa chính nhìn thẳng ra ngoài, để điện thoại nằm ngang, tránh xa kim loại; trang dùng la bàn của máy và cho nhập độ tay nếu cần." },
       { hoi: "Có cần mua vật phẩm phong thuỷ không?", dap: "Không. Trang chỉ nêu cách bố trí và quan niệm, không giới thiệu vật phẩm." },
+      { hoi: "Chung cư thì tính hướng nhà theo cửa chính hay ban công?", dap: "Cả hai quan điểm đều tồn tại trong thực hành: cửa chính là lối đi và nạp khí sinh hoạt, ban công là nơi đón sáng và gió. Công cụ cho bạn đo và đối chiếu cả hai để ưu tiên bố cục ánh sáng, thông gió và công năng thực tế." },
+      { hoi: "Nhà không hợp hướng tuổi theo Bát trạch thì phải làm sao?", dap: "Không cần đập sửa hay lo lắng. Trong phong thuỷ truyền thống, có thể xoay hướng bếp, bàn làm việc hoặc đầu giường về phương cát theo tuổi, đồng thời giữ lối vào thông thoáng và sạch sẽ." },
+      { hoi: "Bát trạch và Huyền Không Phi Tinh khác nhau thế nào?", dap: "Bát trạch xét cố định theo tuổi và giới tính gia chủ; Huyền Không Phi Tinh xét theo độ số cửa chính và vận 20 năm của ngôi nhà (hiện là Vận 9). Kết hợp cả hai giúp nhìn rõ cả người ở lẫn không gian." },
     ],
     lien_ket: [{ href: "/phong-thuy/huong-xau-nam", ten: "Hướng xấu theo năm" }, { href: "/xem-tuoi-lam-nha", ten: "Tuổi làm nhà" }, { href: "/phong-thuy/huong-hop-tuoi", ten: "Tuổi nào hợp hướng nào (1960–2005)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ phong thuỷ" }, { href: "/huyen-hoc", ten: "Các hệ thống khác" }],
   } },
@@ -201,6 +213,8 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Xem tướng có chính xác không?", dap: "Tướng pháp nói về xu hướng và thói quen, không nói trước điều gì sẽ xảy ra. Mỗi hộp có nút ‘Đúng với mình / Chưa đúng’ để bạn tự chấm; nét nào sách xưa gọi là ‘cần lưu ý’ đều kèm việc nên làm." },
       { hoi: "Có xem tướng cho người khác được không?", dap: "Không. Nhìn mặt mà xét người là bất công với họ; trang chỉ đọc tướng của chính người tự quan sát và không giúp chọn nhân viên, đối tác hay bạn đời theo tướng." },
       { hoi: "Phần sức khoẻ có đoán bệnh không?", dap: "Không. Nội Kinh gắn từng vùng mặt với một hệ cơ quan; trang chỉ nhắc chăm sóc và đi khám định kỳ, luôn kèm câu không thay lời bác sĩ." },
+      { hoi: "Tam đình và Ngũ quan trên gương mặt là gì?", dap: "Tam đình là ba tầng dọc trên mặt: Thượng đình (trán), Trung đình (mày đến mũi) và Hạ đình (mũi đến cằm). Ngũ quan gồm Tai, Mày, Mắt, Mũi và Miệng — năm vùng chính sách tướng cổ dùng để quan sát khí chất và nhịp sống." },
+      { hoi: "Tướng mặt có thay đổi theo thời gian không?", dap: "Có. Sách xưa gọi là “tướng tuỳ tâm sinh”: giấc ngủ, cảm xúc, căng thẳng và thói quen sinh hoạt đều in dấu lên thần sắc và nếp mặt. Vì vậy mỗi chương đều gợi ý việc nhỏ 0 đồng để tự quan sát lại sau ba tháng." },
     ],
     lien_ket: [{ href: "/nhan-tuong/bo-vi", ten: "Bộ vị gương mặt" }, { href: "/bat-tu", ten: "Bát tự (hành cần bù)" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }, { href: "/huyen-hoc", ten: "Các hệ thống khác" }],
   } },
@@ -218,6 +232,8 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Lá ngược nghĩa là gì?", dap: "Lá rút ra bị lộn đầu. Theo lối Waite, lá ngược là tính chất của lá đang bị chặn, yếu đi hoặc hướng vào trong — không phải dấu hiệu xấu. Marseille và Thoth không dùng lá ngược mà đọc bằng lá bên cạnh; bạn chọn dùng hay không khi xáo." },
       { hoi: "Máy có chọn lá theo câu hỏi không?", dap: "Không. Máy chỉ xáo (theo hạt giống từ nhịp tay bạn, hoặc ngẫu nhiên thật); lá nào vào vị trí nào là do chính bạn rút từ quạt. Câu hỏi chỉ dùng để bài đọc nói đúng chuyện, không lưu trên máy chủ." },
       { hoi: "Có xem cho người khác được không?", dap: "Không. Lá bài không nói được người khác đang nghĩ gì hay làm gì; hỏi theo hướng “tôi nên làm gì với chuyện này” thì trải bài trả lời được." },
+      { hoi: "Nên chọn trải bài 1 lá, 3 lá hay Celtic Cross 10 lá?", dap: "Chọn 1 lá để kiểm tra nhanh tâm thế trong ngày; 3 lá cho một tình huống cụ thể (bối cảnh – trở ngại – lời khuyên hoặc hai lựa chọn); 5 lá hoặc Celtic Cross 10 lá khi cần bóc tách nhiều lớp nguyên nhân của một quyết định lớn." },
+      { hoi: "Nên đặt câu hỏi Tarot như thế nào để bài đọc rõ ý?", dap: "Nên dùng câu hỏi mở gắn với hành động của chính bạn (ví dụ: “Tôi cần chú ý điều gì nếu chuyển sang vị trí này?”), tránh câu hỏi thụ động kiểu “Có/Không” hay “Số tôi có giàu không?”." },
     ],
     lien_ket: [{ href: "/tarot/la-bai", ten: "Ý nghĩa 78 lá bài" }, { href: "/kinh-dich", ten: "Kinh Dịch (gieo quẻ cho một việc)" }, { href: "/nhan-tuong", ten: "Nhân tướng học (lá đại diện)" }, { href: "/huyen-hoc", ten: "Các hệ thống khác" }],
   } },
@@ -244,8 +260,8 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Các gói xem luận giải theo nhu cầu: năm mới, lá số Tử vi trọn đời, Bát tự, bản đồ con số, chân dung tổng hợp. Chương đầu miễn phí; trả từng lần, gói nhiều lần hoặc hội viên năm.",
   } },
   { duong: "/ban-do-doi-ngu", nhom: "cong_cu", ten: "Bản đồ Đội ngũ", o: O_TRANG_PHU, mac_dinh: {
-    tieu_de_seo: "Bản đồ Đội ngũ: giao đúng việc, giảm va chạm, lấp lỗ hổng vận hành", h1: "Hiểu đúng người cạnh mình: giao đúng việc, giảm va chạm, lấp lỗ hổng đội ngũ",
-    mo_ta_seo: "Công cụ tham khảo phối hợp đội ngũ dành cho chủ doanh nghiệp và quản lý: Radar cân bằng 5 hành, sở trường từng cộng sự và gợi ý giao tiếp 2 chiều cho 1–8 người.",
+    tieu_de_seo: "Bản đồ Đội ngũ: hiểu sở trường & phối hợp nhóm", h1: "Hiểu đúng người cạnh mình: giao đúng việc, giảm va chạm, lấp lỗ hổng đội ngũ",
+    mo_ta_seo: "Bản đồ Đội ngũ B2B cho chủ doanh nghiệp và quản lý: Radar cân bằng 5 hành, sở trường từng cộng sự và gợi ý phối hợp 2 chiều cho 1–8 người.",
   } },
   { duong: "/hoi-vien", nhom: "cong_cu", ten: "Hội viên năm", o: O_TRANG_PHU, mac_dinh: {
     tieu_de_seo: "Hội viên năm — mở mọi luận giải, mua một lần", h1: "Hội viên năm",
@@ -264,7 +280,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
 
   // ---------------- B · trang tĩnh / giới thiệu
   { duong: "/", nhom: "tinh", ten: "Trang chủ", o: O_TINH, mac_dinh: {
-    tieu_de_seo: "Hiểu Bản Thân — Thần số học và huyền học online miễn phí", h1: "Bạn là số mấy?",
+    tieu_de_seo: "Hiểu Bản Thân — Huyền học & thấu hiểu bản thân miễn phí", h1: "Bạn là số mấy?",
     loi_dan: "Nhập tên và ngày sinh. 30 giây sau bạn biết mình mạnh ở đâu, hay vấp ở đâu, và *năm nay nên dồn sức vào việc gì*.",
     chu: CHU_TRANG_CHU, hinh: HINH_TRANG_CHU,
     mo_ta_seo: "Thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot: tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.",
@@ -289,8 +305,8 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     loi_dan: "Bản khắc gỗ giữ nguyên, phủ thêm điểm chú giải: chạm vào chữ khắc để đọc âm Hán Việt và nghĩa bằng lời thường.",
   } },
   { duong: "/chi-tay", nhom: "tinh", ten: "Xem chỉ tay theo sách xưa", o: O_TINH, mac_dinh: {   // chỉ tay quyển 10 Toàn Biên
-    tieu_de_seo: "Xem chỉ tay: sách tướng xưa và chỉ tay phương Tây", h1: "Xem chỉ tay theo sách xưa",
-    mo_ta_seo: "Tự soi bàn tay theo Thần Tướng Toàn Biên (tám cung, hơn 60 hình vân) hoặc theo chỉ tay phương Tây của Cheiro, Benham (dáng tay, các gò, đường chỉ). Ảnh không rời máy.",
+    tieu_de_seo: "Xem chỉ tay online: sách tướng xưa & phương Tây", h1: "Xem chỉ tay theo sách xưa",
+    mo_ta_seo: "Xem chỉ tay Đông – Tây miễn phí: chụp lòng bàn tay ngay trên trình duyệt (ảnh không rời máy) để đo tám cung, 60+ hình vân Thần Tướng Toàn Biên và chỉ tay Cheiro.",
     loi_dan: "Chụp lòng bàn tay (ảnh không rời máy) để thấy tám cung trên tay mình, hoặc ngửa tay ra chỗ sáng, chọn hình vân giống tay mình để đọc sách xưa nói gì. Muốn xem theo lối phương Tây (dáng tay, các gò, đường chỉ) thì đổi trường phái ngay dưới.",
   } },
   { duong: "/ky-mon", nhom: "tinh", ten: "Kỳ Môn Độn Giáp", o: O_TINH, mac_dinh: {   // KM-2: bàn theo giờ

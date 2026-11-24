@@ -5,6 +5,7 @@ import { thanhCua } from "@/lib/thanh-mang";
 import { banViet } from "@/lib/duong-en";
 import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { camNangPillar } from "@/lib/cam-nang-pillar";
 import { ldThucTheEn } from "@/lib/en/seo";
 import { TEN_MANG_SILO, truCua } from "@/lib/kien-thuc";
 import { anhBai, goiLd, ldAnh, ldDuongDan, ldHoiDap, ldThucThe, mangTheoDuong, siteUrl, urlDayDu } from "@/lib/seo";
@@ -58,11 +59,13 @@ export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [], 
       </section>
     );
   }
+  const cn = camNangPillar(duong);
   return (
     <section aria-labelledby="gioi-thieu-cong-cu" className="mx-auto mt-12 max-w-3xl border-t border-line/50 pt-8 text-fg-muted md:mt-16 md:pt-10">
       <JsonLd data={goiLd(
         { "@type": "WebPage", "@id": `${urlDayDu(duong)}#trang`, url: urlDayDu(duong), name: ten, description: moTa,
           inLanguage: "vi-VN", isPartOf: { "@id": `${siteUrl()}/#website` },
+          ...(cn ? { dateModified: cn.capNhat } : {}),
           about: [ldThucThe(mangTheoDuong(duong)), { "@type": "Thing", name: ten }].filter(Boolean),
           mainEntity: { "@id": `${urlDayDu(duong)}#ung-dung` },
           primaryImageOfPage: ldAnh(anhBai({ tieuDe: ten, mang: mangTheoDuong(duong) }), ten) },
@@ -79,8 +82,69 @@ export function GioiThieuCongCu({ duong, ten, moTa, doan, hoiDap, lienKet = [], 
           { ten, duong }])]),
         ldHoiDap(hoiDap),
       )} />
-      <h2 id="gioi-thieu-cong-cu" className="text-2xl text-fg">{nhan.tieuDe || `Về công cụ ${ten}`}</h2>
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 id="gioi-thieu-cong-cu" className="text-2xl text-fg">{nhan.tieuDe || `Về công cụ ${ten}`}</h2>
+        {cn && (
+          <p className="text-xs text-fg-faint">
+            Cập nhật <time dateTime={cn.capNhat}>{cn.capNhat.split("-").reverse().join("/")}</time>
+          </p>
+        )}
+      </div>
       <div className="mt-3 space-y-3 leading-relaxed">{doan.map((p) => <p key={p}>{p}</p>)}</div>
+      {cn && (
+        <div className="mt-8 space-y-6" data-testid="cam-nang-pillar">
+          <div>
+            <h3 className="text-xl text-fg">{cn.tieuDe}</h3>
+            <p className="mt-2 leading-relaxed">{cn.tomTat}</p>
+            <ul className="mt-3 list-disc space-y-2 pl-5 leading-relaxed">
+              {cn.muc.map((m) => (
+                <li key={m.ten}>
+                  <strong className="text-fg">{m.ten}</strong>: {m.yNghia}
+                  {m.href && <>{" "}<Link href={m.href} className="text-gold underline-offset-4 hover:underline">Xem chi tiết →</Link></>}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {cn.bang && (
+            <div>
+              <h3 className="text-xl text-fg">{cn.bang.tieuDe}</h3>
+              <div className="mt-3 overflow-x-auto rounded-xl border border-line/70">
+                <table className="w-full border-collapse text-left text-sm">
+                  <thead>
+                    <tr className="border-b border-line/70 bg-surface/40 text-fg">
+                      {cn.bang.cot.map((c) => <th key={c} className="px-3 py-2.5 font-medium">{c}</th>)}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-line/50">
+                    {cn.bang.hang.map((row) => (
+                      <tr key={row[0]}>
+                        {row.map((cell, idx) => (
+                          <td key={`${row[0]}-${idx}`} className={idx === 0 ? "px-3 py-2.5 font-medium text-fg" : "px-3 py-2.5"}>{cell}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+          {cn.trangCon && (
+            <nav aria-label={cn.trangCon.tieuDe}>
+              <h3 className="text-xl text-fg">{cn.trangCon.tieuDe}</h3>
+              <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                {cn.trangCon.ds.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} className="flex flex-col rounded-xl border border-line/70 px-3 py-2 text-sm transition-colors hover:border-gold/60 hover:text-fg">
+                      <span className="font-medium text-fg">{item.ten}</span>
+                      {item.phu && <span className="text-xs text-fg-faint">{item.phu}</span>}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
+        </div>
+      )}
       <h3 className="mt-8 text-xl text-fg">{nhan.hoiDap || "Câu hỏi thường gặp"}</h3>
       <dl className="mt-3 space-y-4">
         {hoiDap.map((h) => (

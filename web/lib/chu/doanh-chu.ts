@@ -3,8 +3,8 @@
 
 export const CHU_DOANH_CHU = {
   meta: {
-    tieu_de: "Bản đồ Đội ngũ: giao đúng việc, giảm va chạm, lấp lỗ hổng vận hành — Hiểu Bản Thân",
-    mo_ta: "Công cụ tham khảo phối hợp đội ngũ dành cho chủ doanh nghiệp & quản lý: xem Radar cân bằng 5 hành, sở trường từng cộng sự và gợi ý giao tiếp 2 chiều cho 1–8 người.",
+    tieu_de: "Bản đồ Đội ngũ: hiểu sở trường & phối hợp nhóm",
+    mo_ta: "Bản đồ Đội ngũ B2B cho chủ doanh nghiệp và quản lý: Radar cân bằng 5 hành, sở trường từng cộng sự và gợi ý phối hợp 2 chiều cho 1–8 người.",
     moi_tieu_de: "Xác nhận tham gia Bản đồ Đội ngũ — Hiểu Bản Thân",
     moi_mo_ta: "Tự nguyện xác nhận tham gia xem phong cách phối hợp đội ngũ. Ngày sinh của bạn được mã hóa riêng, không lưu trên máy chủ.",
   },

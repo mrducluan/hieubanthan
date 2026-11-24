@@ -7,6 +7,8 @@
 // 'wasm-unsafe-eval' (ANH-3): chỉ cho phép DỊCH WebAssembly (bộ tìm điểm mốc gương mặt chạy trên máy, tệp tự phục vụ ở
 // /mediapipe/) — không mở eval() của JavaScript. Bộ đó có sẵn đoạn gửi số liệu hiệu năng về nhà phát triển: connect-src không có
 // tên miền đó nên trình duyệt chặn, không gì rời máy (e2e/anh-tu-dong.spec.ts kiểm).
+// Q-I3 (cache HTML ở CDN): trang công khai không query dùng nonce ỔN ĐỊNH theo (bản deploy, đường dẫn) — `nonceOnDinh` —
+// để HTML đã cache và header CSP cùng một nonce; trang khác nonce ngẫu nhiên mỗi lượt (`taoNonce`).
 // Style giữ 'unsafe-inline' (next/font, motion dùng style nội dòng; rủi ro thấp hơn script nhiều).
 
 /** Origin từ biến môi trường (bỏ qua giá trị rỗng/sai). */
@@ -59,4 +61,24 @@ export function taoNonce(): string {
   const b = new Uint8Array(16);
   crypto.getRandomValues(b);
   return btoa(String.fromCharCode(...b));
+}
+
+/** Bí mật ký nonce ổn định: env riêng, rồi bí mật máy chủ sẵn có. Ngoài Vercel (máy dev, CI) dùng chuỗi cố định để test
+ *  được; trên Vercel mà thiếu → null (không cache HTML, nonce ngẫu nhiên như cũ). */
+function biMatNonce(): string | null {
+  const s = process.env.CSP_NONCE_SECRET || process.env.LOI_MOI_SECRET || process.env.SAO_KHOA_SECRET;
+  if (s && s.length >= 16) return s;
+  return process.env.VERCEL ? null : "hbt-csp-nonce-khong-phai-vercel";
+}
+
+/** Nonce ổn định = HMAC(bí mật, mã bản deploy | đường dẫn), 128 bit. Cache CDN của Vercel tách theo bản deploy (deploy
+ *  mới xoá cache), nên HTML cache và header luôn cùng nonce. Ai đọc trang cũng thấy nonce — giống mọi nonce — nhưng chữ
+ *  chèn vào trang (XSS) không biết trước nonce của bản deploy kế tiếp, và thuộc tính sự kiện / javascript: vẫn bị chặn. */
+export async function nonceOnDinh(duong: string): Promise<string | null> {
+  const bm = biMatNonce();
+  if (!bm) return null;
+  const ban = process.env.VERCEL_DEPLOYMENT_ID || process.env.VERCEL_GIT_COMMIT_SHA || process.env.NEXT_BUILD_ID || "local";
+  const k = await crypto.subtle.importKey("raw", new TextEncoder().encode(bm), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const sig = new Uint8Array(await crypto.subtle.sign("HMAC", k, new TextEncoder().encode(`csp|${ban}|${duong}`)));
+  return btoa(String.fromCharCode(...sig.subarray(0, 16)));
 }

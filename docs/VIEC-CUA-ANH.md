@@ -342,7 +342,7 @@ Bài RankYak vào CMS như bài NotFair: nháp → chuẩn hoá SEO → tự xu�
 - [ ] **Search Console → Kiểm tra URL** cho `https://hieuban.com/` và 7 trang dịch vụ (`/tu-vi`, `/bat-tu`, `/than-so`, `/kinh-dich`, `/phong-thuy`, `/nhan-tuong`, `/tarot`) → "Yêu cầu lập chỉ mục" sau khi deploy (để Google đọc tiêu đề mới sớm).
 - [ ] Sau 2–4 tuần: Hiệu suất → truy vấn chứa "tử vi" → tab Trang: `/tu-vi` phải nhận phần lớn hiển thị thay cho trang chủ. Gửi em file xuất nếu chưa đổi.
 - [x] 6 đề xuất SEO-N — mục 1–5 đã làm (SEO-N2, 10/11).
-- [ ] (Quyết định, 19–26/11) **Q-I3 cache HTML**: xem Thống kê thu thập → thời gian phản hồi trung bình; > 1.000 ms thì chọn cách A ở `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 4.3 (bỏ nonce riêng trang kiến thức), < 600 ms thì giữ nguyên.
+- [ ] (Sau deploy, 24/11) **Q-I3 đã làm** (giữ CSP-2, nonce ổn định — CLAUDE.md dòng 2026-11-24). Anh kiểm: mở hieuban.com/tu-vi hai lần ở cửa sổ ẩn danh → DevTools › Network › tài liệu đầu tiên phải có `x-vercel-cache: HIT` lần hai; trang không bị trắng / lỗi CSP. Sau 2 tuần gửi em ảnh Thống kê thu thập (thời gian phản hồi trung bình) để so trước – sau. Nếu thấy trang trắng hoặc lỗi: báo em, em tắt cache bằng một PR nhỏ (rút allowlist).
 - [ ] **Liên kết ngoài**: bài trên fanpage / diễn đàn / bài khách trỏ thẳng `https://hieuban.com/tu-vi` (chữ "xem tử vi online", "lá số tử vi"), `/bat-tu`, `/than-so` — không trỏ hết về trang chủ.
 - [ ] Đặt env `MXH_FACEBOOK`, `MXH_YOUTUBE`… (Vercel, dự án web) cho các kênh thật → Google nối thương hiệu "hieuban" với site, dễ hiện sitelinks.
 - [ ] Sau 4 tuần: Search Console → Hiệu suất → Truy vấn, gửi em file xuất để đối chiếu bảng từ khoá (mục 4.1) với số thật.

@@ -21,9 +21,9 @@ import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
 // Mô tả trang chủ ≤ 160 ký tự (mô tả site dài hơn vẫn dùng cho schema/llms.txt).
-// SEO-N (2026-11-10, thay tiêu đề SEO-K): trang chủ đứng tên THƯƠNG HIỆU + thần số (cửa chính); "Tử vi", "Bát tự" để
-// cho trang công cụ của chính nó — trước đó trang chủ tranh từ khoá với /tu-vi, /bat-tu. CMS vẫn ghi đè được.
-const TIEU_DE_CHU = "Hiểu Bản Thân — Thần số học và huyền học online miễn phí";
+// SEO-1 (chủ dự án chốt 2026-11-24, sửa SEO-N): trang chủ không mang tên môn nào — tránh ăn thịt từ khoá; /than-so sở hữu
+// "Xem thần số học online miễn phí", trang chủ đứng tên THƯƠNG HIỆU + định vị đa môn huyền học. CMS vẫn ghi đè được.
+const TIEU_DE_CHU = "Hiểu Bản Thân — Huyền học & thấu hiểu bản thân miễn phí";
 const MO_TA_CHU = "Thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot: tính toán minh bạch, diễn giải có nguồn, câu hỏi để tự soi. Miễn phí.";
 const META: Metadata = {
   title: { absolute: TIEU_DE_CHU },
