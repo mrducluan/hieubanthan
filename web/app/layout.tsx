@@ -62,7 +62,7 @@ const han = Noto_Serif_TC({ weight: ["600"], subsets: ["latin"], variable: "--fo
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl()),
-  title: { default: "Hiểu Bản Thân — Thần số học và huyền học online miễn phí", template: "%s · Hiểu Bản Thân" },
+  title: { default: "Hiểu Bản Thân — Huyền học & thấu hiểu bản thân miễn phí", template: "%s · Hiểu Bản Thân" },
   description: MO_TA_SITE,
   applicationName: TEN_SITE,
   category: "lifestyle",

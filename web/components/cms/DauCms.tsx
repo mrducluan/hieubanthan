@@ -21,14 +21,14 @@ export function DauCms({ h1 = null, loiDan = null, kieuChu = null, khoiTren = nu
   return <Ctx.Provider value={{ h1, loiDan, kieuChu, khoiTren, bang, chu, traLoi }}>{children}</Ctx.Provider>;
 }
 
-/** SEO-N (GEO): câu hỏi + câu trả lời 40–60 chữ ngay dưới H1 — nằm trong <details> (chữ có trong HTML máy chủ cho
- *  Google / bot AI đọc, nhưng gập lại để form nhập vẫn ở màn đầu). Link chỉ trong site. */
+/** SEO-N (GEO): câu hỏi + câu trả lời 40–60 chữ ngay dưới H1 — mở sẵn (open) để Google / AI Overview trích nguyên câu
+ *  mà không bị giảm trọng số nội dung ẩn, người dùng vẫn gập lại được nếu muốn. Link chỉ trong site. */
 export function TraLoiNhanhDau({ className = "mt-4" }: { className?: string }) {
   const t = useDauCms().traLoi;
   const { c } = useChuGiaoDien();
   if (!t) return null;
   return (
-    <details className={`${className} group max-w-2xl rounded-xl border border-gold/25 bg-gold/[0.04] px-4 py-2.5 text-sm`} data-testid="tra-loi-nhanh-dau">
+    <details open className={`${className} group max-w-2xl rounded-xl border border-gold/25 bg-gold/[0.04] px-4 py-2.5 text-sm`} data-testid="tra-loi-nhanh-dau">
       <summary className="cursor-pointer list-none py-1 text-fg [&::-webkit-details-marker]:hidden">
         <span className="eyebrow mr-2">{c("dau.tra_loi_nhanh")}</span>{t.hoi}
         <span aria-hidden className="ml-1 inline-block text-fg-faint transition-transform group-open:rotate-180">⌄</span>

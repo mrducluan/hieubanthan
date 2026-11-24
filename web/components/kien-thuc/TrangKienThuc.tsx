@@ -97,11 +97,11 @@ async function metaGoc(params: Thamso): Promise<Metadata> {
 
 /** Trang kiến thức một mục KB (QH-URL: /{mảng}/{cụm}/{trang}); route của từng mảng chỉ đổi đường dẫn → khoá chủ đề. */
 /** Lời mời cuối trang theo loại trang — câu hỏi người đọc chỉ trả lời được bằng dữ liệu của chính mình. */
-// SEO-N: chữ nút mời theo trang dịch vụ đích.
+// SEO-N / SEO-GEO: chữ liên kết ngược từ ~600 trang con về trang trụ (pillar) khớp đúng từ khoá mục tiêu.
 const NUT_CONG_CU: Record<string, string> = {
-  "/tu-vi": "Lập lá số Tử vi của tôi", "/bat-tu": "Lập lá số Bát tự của tôi", "/than-so": "Tính thần số học của tôi",
-  "/hop-doi": "Xem hợp đôi của tôi", "/kinh-dich": "Gieo quẻ Kinh Dịch", "/phong-thuy": "Xem phong thuỷ nhà tôi",
-  "/nhan-tuong": "Xem tướng mặt của tôi", "/tarot": "Rút bài Tarot của tôi",
+  "/tu-vi": "Xem Tử vi online miễn phí", "/bat-tu": "Xem Bát tự online miễn phí", "/than-so": "Xem thần số học online miễn phí",
+  "/hop-doi": "Xem hợp đôi theo ngày sinh", "/kinh-dich": "Gieo quẻ Kinh Dịch online", "/phong-thuy": "Xem hướng nhà hợp tuổi",
+  "/nhan-tuong": "Xem tướng mặt online", "/tarot": "Xem Tarot online miễn phí",
 };
 const LOI_MOI: Partial<Record<string, string>> = {
   sao_cung: "Trên lá số của bạn, sao này nằm ở cung nào, sáng hay hãm, năm nào được hoá? Nhập ngày giờ sinh để xem — có từng bước an sao.",
