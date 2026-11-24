@@ -8,6 +8,7 @@ import { CHU_HUYEN_HOC, SO_HOI_DAP_HUYEN_HOC } from "@/lib/chu/trang-tinh";
 import { mucSoTrang } from "@/lib/so-trang";
 import { boNhan, taoChu } from "@/lib/chu-trang";
 import { taoLlmsTxt } from "@/lib/llms";
+import { taoPricingMd } from "@/lib/pricing-md";
 import { urlDayDu } from "@/lib/seo";
 import { baiCms, tinhNangCms } from "@/lib/cms";
 import { htmlSangMd, locHtmlCms } from "@/lib/cms-html";
@@ -29,6 +30,7 @@ export async function GET(_req: Request, { params: thamSo }: { params: Promise<{
   const params = await thamSo;
   const p = params.duong.map(decodeURIComponent);
   if (p.length === 1 && p[0] === "index") return traMd(await taoLlmsTxt(), "/");
+  if (p.length === 1 && (p[0] === "pricing" || p[0] === "goi-xem")) return traMd(await taoPricingMd(), "/goi-xem");
   if (p.length === 1 && p[0] === "tu-dien") {
     const d = await tuDien();
     return d ? traMd(mdTuDien(d.muc, TEN_MANG), "/tu-dien") : KHONG_CO();
