@@ -109,7 +109,7 @@ def trang_bo_vi(ma: str, slug: str) -> dict:
 
 
 TRANG = {"bo_vi": (ds_bo_vi, trang_bo_vi)}
-TEN_NGAN = {"bo_vi": lambda ten: ten.split(" (")[0]}
+TEN_NGAN = {"bo_vi": lambda ma: kb.bo_vi()[ma]["ten"].split(" (")[0] if ma in kb.bo_vi() else ma}
 
 
 def y_chinh_en(t: dict, so: int) -> list[str] | None:
