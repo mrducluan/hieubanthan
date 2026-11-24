@@ -100,3 +100,96 @@ test("Phase 2: Huyền Không ▶ Khởi Bàn (reduced-motion) & 4 lớp sao + L
   await expect(page.getByTestId("la-ban-sai-so")).toContainText("±");
   await expect(page.getByTestId("la-ban-doi-chieu-ve-tinh")).toBeVisible();
 });
+
+test("Phase 3: HoiGiXemNay Inline Quick La Kinh -> cảm biến 180° -> Chốt tại chỗ -> cập nhật Huyền Không & DoHuong", async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem("hbt.hoso.v1", JSON.stringify({
+      v: 1, ho_ten: "Test", ngay: 17, thang: 5, nam: 1990, gio: "12:30", gioi_tinh: "nam", noi_sinh: "ha-noi", tao_luc: "2026-09-30T00:00:00Z",
+    }));
+    localStorage.removeItem("hbt.nha.v1");
+  });
+  await page.goto("/phong-thuy");
+
+  // Chưa có HoSoNha -> hiện Lazy Intake & nút mở La Kinh nhanh
+  await expect(page.getByTestId("hoi-gi-lazy-intake")).toBeVisible();
+  await page.getByTestId("hoi-gi-bat-la-kinh").click();
+  await expect(page.getByTestId("hoi-la-kinh-panel")).toBeVisible();
+  await expect(page.getByTestId("mini-la-ban-keo")).toBeVisible();
+
+  // Bật đo điện thoại & bắn sự kiện cảm biến 90° (Đông · sơn Mão)
+  await page.getByTestId("hoi-la-kinh-cam-bien").click();
+  await expect(async () => {
+    await page.evaluate(() => {
+      const evName = "ondeviceorientationabsolute" in window ? "deviceorientationabsolute" : "deviceorientation";
+      window.dispatchEvent(new DeviceOrientationEvent(evName, { alpha: 270, beta: 3, gamma: -2, absolute: true }));
+    });
+    await expect(page.getByTestId("hoi-la-kinh-do-so")).toContainText("90°", { timeout: 500 });
+  }).toPass();
+  await expect(page.getByTestId("hoi-la-kinh-on-dinh")).toContainText("%");
+
+  // Nhập năm xây 2024 và Chốt ngay trong HoiGiXemNay
+  await page.getByTestId("hoi-la-kinh-nam-xay").fill("2024");
+  await page.getByTestId("hoi-la-kinh-chot").click();
+
+  await expect(page.getByTestId("hoi-gi-ket-qua-thuc")).toContainText("90°");
+  await expect(page.getByTestId("hoi-gi-ket-qua-thuc")).toContainText("Mão");
+  await expect(page.getByTestId("hoi-gi-ket-qua-thuc")).toContainText("Vận 9");
+  await expect(page.getByTestId("la-ban-do-so")).toContainText("90°");
+});
+
+test("User-Agent Audit: Chốt ở HoiGiXemNay -> mở khoá ngay DoViTriVat (không reload) + đồng bộ Chung cư/NhaCuaBan + lưu vị trí vật giữ nguyên hướng", async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem("hbt.hoso.v1", JSON.stringify({
+      v: 1, ho_ten: "Test", ngay: 17, thang: 5, nam: 1990, gio: "12:30", gioi_tinh: "nam", noi_sinh: "ha-noi", tao_luc: "2026-09-30T00:00:00Z",
+    }));
+    localStorage.removeItem("hbt.nha.v1");
+  });
+  await page.goto("/phong-thuy");
+
+  // 1. Lúc mới vào chưa có hướng nhà: khối Đo vị trí thật trong nhà (DoViTriVat) ở chế độ khung tỉ lệ nhắc "Cần hướng nhà trước"
+  const vt = page.getByTestId("vi-tri-vat");
+  await expect(vt).toBeVisible();
+  await vt.getByTestId("vi-tri-cach-khung").click();
+  await expect(vt.getByTestId("vi-tri-can-huong")).toBeVisible();
+
+  // 2. Người dùng chọn loại nhà "Chung cư" ở Hành trình nhà rồi mở La Kinh nhanh ở HoiGiXemNay
+  await page.getByTestId("loai-nha-can_ho").click();
+  await page.getByTestId("hoi-gi-bat-la-kinh").click();
+  await expect(page.getByTestId("hoi-la-kinh-panel")).toContainText(/ban công/i);
+
+  // 3. Nhập 180° (Nam · Ngọ) và năm xây 2018 -> bấm Chốt hướng ngay trong HoiGiXemNay (không reload trang)
+  await page.getByTestId("hoi-la-kinh-nhap").fill("180");
+  await page.getByTestId("hoi-la-kinh-nam-xay").fill("2018");
+  await page.getByTestId("hoi-la-kinh-chot").click();
+
+  // 4. Kiểm chứng đồng bộ tức thời:
+  // - Kết luận thực tế hiện 180° · Ngọ · Vận 8
+  await expect(page.getByTestId("hoi-gi-ket-qua-thuc")).toContainText("180°");
+  await expect(page.getByTestId("hoi-gi-ket-qua-thuc")).toContainText("Ngọ");
+  await expect(page.getByTestId("hoi-gi-ket-qua-thuc")).toContainText("Vận 8");
+  // - DoViTriVat tự mất cảnh báo "Cần hướng nhà trước" và hiện "Mặt trước · 180°"
+  await expect(vt.getByTestId("vi-tri-can-huong")).toHaveCount(0);
+  await expect(vt).toContainText("180°");
+  // - NhaCuaBan tự điền sẵn năm xây 2018 và độ hướng 180
+  await expect(page.locator("#nha-cua-ban").getByLabel(/Năm xây|Build/i)).toHaveValue("2018");
+
+  // 5. Người dùng chạm đặt Cửa chính, Phòng chính, Bếp trên khung tỉ lệ DoViTriVat rồi bấm Xem & Lưu -> huong_do vẫn giữ nguyên 180°
+  const khung = vt.getByTestId("vi-tri-khung");
+  await khung.click({ position: { x: 80, y: 20 } });   // cửa chính
+  await khung.click({ position: { x: 80, y: 120 } });  // phòng chính
+  await khung.click({ position: { x: 80, y: 200 } });  // bếp
+  await vt.getByTestId("vi-tri-xem").click();
+  await expect(vt.getByTestId("vi-tri-ket-qua")).toBeVisible();
+  await vt.getByTestId("vi-tri-luu").click();
+
+  const hoSoNha = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nha.v1") || "{}"));
+  expect(hoSoNha.huong_do).toBe(180);
+  expect(hoSoNha.theo).toBe("ban_cong");
+  expect(hoSoNha.nam_xay).toBe(2018);
+  expect(hoSoNha.bo_cuc?.vi_tri?.bep).toBeTruthy();
+
+  // 6. Chuyển sang intent "Nhà có phạm lỗi nặng (Loan Đầu / Bếp / WC) không?" -> có nút dẫn thẳng xuống #vi-tri-vat
+  await page.getByTestId("hoi-gi-intent-bo_cuc").click();
+  await expect(page.getByTestId("hoi-gi-do-vi-tri-vat")).toHaveAttribute("href", "#vi-tri-vat");
+});
+
