@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-24.04  # ghim: ubuntu-latest = 26.04 (11/2026) chưa có Playwright 1.56 + pg_dump 17 ghi SET transaction_timeout PG16 không hiểu
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - name: Đợi Vercel deploy
