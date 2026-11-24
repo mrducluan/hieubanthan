@@ -30,6 +30,9 @@ export const TEN_LOAI_NHA: Record<LoaiNha, string> = { nha_pho: "Nhà phố", ca
 /** VT-1: loại vật đo được khi "đứng giữa nhà, chĩa điện thoại" (khớp engine `/v1/phongthuy/vi-tri-vat`). */
 export const LOAI_VAT = ["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang"] as const;
 export type LoaiVat = (typeof LOAI_VAT)[number];
+/** Hướng cửa phòng / hướng nhìn của vật trong khung nhà (theo mặt bản vẽ: truoc = nhìn ra mặt tiền, phai = vách phải, sau = nhìn về hậu, trai = vách trái). */
+export const HUONG_CUA_KHUNG = ["truoc", "phai", "sau", "trai"] as const;
+export type HuongCuaKhung = (typeof HUONG_CUA_KHUNG)[number];
 const MauDo = z.array(z.number().min(0).lt(360)).min(1).max(30);
 
 export const HoSoNha = z.object({
@@ -77,6 +80,10 @@ export const HoSoNha = z.object({
     vat: z.partialRecord(z.enum(LOAI_VAT), z.object({
       mau: MauDo.optional(),
       diem: z.tuple([z.number().min(0).max(1), z.number().min(0).max(1)]).optional(),
+      /** Kích thước khung phòng / vật (rộng × sâu, đơn vị mét) trên sơ đồ tỉ lệ. */
+      kich_thuoc: z.tuple([z.number().min(0.4).max(100), z.number().min(0.4).max(100)]).optional(),
+      /** Hướng cửa phòng / mặt nhìn của vật trên bản vẽ (truoc = mặt tiền, phai, sau, trai). */
+      huong_cua: z.enum(HUONG_CUA_KHUNG).optional(),
     })),
   })).max(6).optional(),
   cap_nhat_luc: z.string(),
