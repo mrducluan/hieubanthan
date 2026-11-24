@@ -28,19 +28,19 @@ const MAC = {
 const HOI_DAP_CHI_TAY = [
   {
     hoi: "Xem chỉ tay nên xem tay trái hay tay phải?",
-    dap: "Theo truyền thống Đông – Tây, tay không thuận (thường là tay trái) phản ánh nền tảng bẩm sinh (Tiên Thiên), còn tay thuận (thường là tay phải) phản ánh thói quen, lựa chọn và sự thay đổi hiện tại (Hậu Thiên). Công cụ hỗ trợ soi và đối chiếu cả hai bàn tay.",
+    dap: "Công cụ đọc tay trái là phần Tiên Thiên (nền sẵn có) và tay phải là phần Hậu Thiên (thói quen, lựa chọn đã bồi đắp), rồi đặt hai tay cạnh nhau để bạn tự so. Chỉ tay phương Tây thường đọc tay không thuận là nền, tay thuận là hiện tại.",
   },
   {
     hoi: "Ảnh chụp lòng bàn tay có bị gửi lên máy chủ hay lưu lại không?",
-    dap: "Không. Toàn bộ quá trình nhận diện 21 điểm mốc và quét tín hiệu đường chỉ chạy trực tiếp trên trình duyệt của bạn; ảnh gốc không rời khỏi thiết bị và không lưu trên máy chủ.",
+    dap: "Ảnh không rời máy. Việc tìm 21 điểm mốc bàn tay và dò đường chỉ chạy ngay trên trình duyệt; chỉ các con số đo (toạ độ, tỉ lệ) được gửi đi tính khi bạn đồng ý, và không lưu lại.",
   },
   {
-    hoi: "Đường Sinh Đạo ngắn có nghĩa là tuổi thọ ngắn không?",
-    dap: "Không. Trong chỉ tay học hiện đại lẫn sách Cheiro/Benham, đường Sinh phản ánh nhịp sinh lực, lối sống và khả năng phục hồi, tuyệt đối không phải thước đo tuổi thọ hay lời chẩn đoán sức khoẻ.",
+    hoi: "Đường Sinh ngắn có phải là tuổi thọ ngắn không?",
+    dap: "Một số sách cũ có gắn độ dài đường Sinh với tuổi thọ, nhưng Hiểu Bản Thân không đọc tuổi thọ hay sức khoẻ từ đường chỉ: đường Sinh chỉ được nói như nhịp sinh lực và lối sống. Lo về sức khoẻ thì nên đi khám, không dựa vào chỉ tay.",
   },
   {
     hoi: "Chỉ tay sách tướng xưa (phương Đông) khác gì chỉ tay phương Tây?",
-    dap: "Sách tướng xưa như Thần Tướng Toàn Biên đọc bàn tay theo tám cung Bát Quái và hệ thống 72 hình vân khắc gỗ. Chỉ tay phương Tây (Cheiro, Benham) tập trung vào dáng bàn tay theo 4 nguyên tố, các gò (Kim Tinh, Mộc Tinh, Thổ Tinh…) và các đường chỉ chính.",
+    dap: "Sách tướng xưa như Thần Tướng Toàn Biên đọc bàn tay theo tám cung Bát Quái và các hình vân khắc gỗ (trang này có hơn 60 hình). Chỉ tay phương Tây (Cheiro, Benham) đọc dáng bàn tay và ngón, các gò (Kim Tinh, Mộc Tinh, Thổ Tinh…) và các đường chỉ chính.",
   },
   {
     hoi: "Đường chỉ tay có thay đổi theo thời gian không?",

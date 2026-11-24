@@ -1,11 +1,8 @@
-// CSP-2 + Q-I3 (Phương án C — 2 vùng bảo mật):
-// - Vùng 1 (public-edge): allowlist trang công khai cho khách vãng lai & bot tìm kiếm/AI → Edge CDN Cache
-//   (Vercel-CDN-Cache-Control / CDN-Cache-Control: public, s-maxage=300, stale-while-revalidate=3600) + CSP host-allowlist
-//   (không nonce, vẫn chặn object-src/frame-ancestors/connect-src).
-// - Vùng 2 (private-nonce): tài khoản, thanh toán (/nap-sao, /hoi-vien, /tai-khoan, /ban-than, /quan-tri), ?kw=, /en,
-//   hoặc request có cookie đăng nhập / chế độ nháp → nonce 128-bit mới mỗi lượt + 'strict-dynamic' + chặn XSS chèn tay.
+// CSP-2 + Q-I3: MỌI trang có nonce + 'strict-dynamic'. Trang công khai không query: nonce ổn định theo (bản deploy, đường
+// dẫn) để HTML cache ở CDN khớp header; khách vãng lai được ghi cache (hết hạn trước nửa đêm giờ VN). Trang khác (tài
+// khoản, thanh toán, ?kw=, /en…): nonce mới mỗi lượt, không cache. Script chèn không nonce bị chặn ở cả hai loại.
 import { test, expect, type Page } from "@playwright/test";
-import { coTheCacheCongKhai, laDuongCongKhaiCache } from "../lib/vung-cache-cong-khai";
+import { coTheCacheCongKhai, headerCacheEdge, laDuongCongKhaiCache } from "../lib/vung-cache-cong-khai";
 
 function ghiViPham(page: Page): string[] {
   const vp: string[] = [];
@@ -26,27 +23,43 @@ test("Q-I3 phân vùng thuần: allowlist trang công khai, loại trừ /goi-xe
   expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "?kw=ngay-sinh", cookieNames: [] })).toBe(false);
   expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: ["sb-xyz-auth-token.0"] })).toBe(false);
   expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: ["__prerender_bypass"] })).toBe(false);
-  expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: ["hbt-nhap-pham-vi"] })).toBe(false);
+  expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: ["hbt-xem-truoc"] })).toBe(false);
   expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: ["hbt-goi-y-en"] })).toBe(true);
   expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: [], acceptLanguage: "en-US,en;q=0.9" })).toBe(false);
   expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: [], acceptLanguage: "en-US,vi;q=0.8" })).toBe(true);
   expect(coTheCacheCongKhai({ method: "POST", pathname: "/than-so", search: "", cookieNames: [] })).toBe(false);
 });
 
-test("Vùng 1 (public-edge & public-bypass): trang công khai vãng lai có Edge CDN Cache; bypass giữ CSP đồng nhất không nonce + private, no-store", async ({ request }) => {
+test("headerCacheEdge: bản cache (kể cả bản cũ) không sống qua nửa đêm giờ Việt Nam", () => {
+  const vn = (h: number, m: number) => Date.UTC(2026, 10, 24, h - 7, m);   // giờ VN → ms UTC
+  expect(headerCacheEdge(vn(10, 0))).toBe("public, s-maxage=300, stale-while-revalidate=3600");
+  expect(headerCacheEdge(vn(23, 30))).toBe("public, s-maxage=300, stale-while-revalidate=1500");
+  expect(headerCacheEdge(vn(23, 57))).toBe("public, s-maxage=180");
+  expect(headerCacheEdge(vn(23, 59) + 30_000)).toBeNull();
+});
+
+test("Trang công khai: nonce ổn định theo đường dẫn, script Next mang đúng nonce, khách vãng lai được cache; có cookie / query thì không ghi cache", async ({ request }) => {
   for (const duong of ["/", "/than-so", "/tu-vi", "/than-so/y-nghia-so/so-7"]) {
     const r = await request.get(duong, { headers: { "accept-language": "vi-VN,vi;q=0.9" } });
     expect(r.status(), duong).toBe(200);
     expect(r.headers()["x-hbt-cache-zone"], duong).toBe("public-edge");
-    expect(r.headers()["vercel-cdn-cache-control"], duong).toContain("s-maxage=300");
-    expect(r.headers()["cdn-cache-control"], duong).toContain("stale-while-revalidate=3600");
+    expect(r.headers()["vercel-cdn-cache-control"], duong).toMatch(/^public, s-maxage=\d+/);
+    expect(r.headers()["cdn-cache-control"], duong).toMatch(/^public, s-maxage=\d+/);
     const csp = r.headers()["content-security-policy"] ?? "";
-    expect(csp, duong).not.toContain("'nonce-");
+    const nonce = /'nonce-([A-Za-z0-9+/=]+)'/.exec(csp)?.[1];
+    expect(nonce, duong).toBeTruthy();
+    expect(csp, duong).toContain("'strict-dynamic'");
+    const r2 = await request.get(duong, { headers: { cookie: "sb-test-auth-token=1" } });   // người đăng nhập: cùng nonce
+    expect(r2.headers()["content-security-policy"], duong).toContain(`'nonce-${nonce}'`);
+    const html = await r.text();
+    const scripts = [...html.matchAll(/<script(?![^>]*application\/ld\+json)([^>]*)>/g)].map((m) => m[1]!);
+    expect(scripts.length, duong).toBeGreaterThan(0);
+    for (const s of scripts) expect(s, duong).toContain(`nonce="${nonce}"`);
     expect(csp, duong).toContain("object-src 'none'");
     expect(csp, duong).toContain("frame-ancestors 'self'");
     expect(csp, duong).toMatch(/connect-src [^;]*'self'/);
   }
-  // Bypass (cookie đăng nhập / ?kw=): không cache Edge (private, no-store) và vẫn giữ CSP đồng nhất theo đường dẫn (tránh lệch nonce vs HTML cache).
+  // Bypass (cookie đăng nhập / ?kw=): không ghi cache (private, no-store); CSP vẫn có nonce.
   for (const [duong, headers] of [
     ["/than-so/y-nghia-so/so-7", { cookie: "sb-test-auth-token=1" }],
     ["/than-so?kw=ngay-sinh", {}],
@@ -54,7 +67,7 @@ test("Vùng 1 (public-edge & public-bypass): trang công khai vãng lai có Edge
     const r = await request.get(duong, { headers });
     expect(r.headers()["x-hbt-cache-zone"], duong).toBe("public-bypass");
     expect(r.headers()["vercel-cdn-cache-control"], duong).toBe("private, no-store");
-    expect(r.headers()["content-security-policy"] ?? "", duong).not.toContain("'nonce-");
+    expect(r.headers()["content-security-policy"] ?? "", duong).toContain("'strict-dynamic'");
   }
 });
 
@@ -110,15 +123,17 @@ test("CSP mở cho hệ Google mà thẻ GTM hay gọi (Analytics, Ads, DoubleCl
   expect(csp).toMatch(/frame-src [^;]*tagassistant\.google\.com/);
 });
 
-test("Vùng 2 (private-nonce): script chèn không có nonce (giả lập XSS) bị trình duyệt chặn", async ({ page }) => {
-  await page.goto("/nap-sao");
-  const chay = await page.evaluate(async () => {
-    const w = window as unknown as { __xss?: number };
-    const s = document.createElement("div");
-    s.innerHTML = "<img src=x onerror=\"window.__xss=1\">";
-    document.body.appendChild(s);
-    await new Promise((r) => setTimeout(r, 300));
-    return w.__xss ?? 0;
+for (const duong of ["/", "/blog", "/nap-sao"]) {
+  test(`script chèn không có nonce (giả lập XSS) bị trình duyệt chặn: ${duong}`, async ({ page }) => {
+    await page.goto(duong);
+    const chay = await page.evaluate(async () => {
+      const w = window as unknown as { __xss?: number };
+      const s = document.createElement("div");
+      s.innerHTML = "<img src=x onerror=\"window.__xss=1\">";
+      document.body.appendChild(s);
+      await new Promise((r) => setTimeout(r, 300));
+      return w.__xss ?? 0;
+    });
+    expect(chay).toBe(0);
   });
-  expect(chay).toBe(0);
-});
+}

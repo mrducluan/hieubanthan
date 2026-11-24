@@ -45,7 +45,7 @@ export const CAM_NANG_PILLAR: Record<string, CamNangPillar> = {
     ],
     bang: {
       tieuDe: "So sánh các trường phái & cách tính thần số học",
-      cot: ["Tiêu chí", "Pitago (Pythagoras)", "Phillips (4 Kim Tự Tháp)", "Chaldea"],
+      cot: ["Tiêu chí", "Pitago (Pythagoras)", "Phillips (4 Kim Tự Tháp)", "Chaldea (để so sánh)"],
       hang: [
         ["Bảng chữ cái", "1–9 (A=1…I=9, lặp tuần hoàn)", "Dùng khung Pitago cho họ tên", "1–8 (bỏ số 9 trong gán chữ cái)"],
         ["Số chủ đạo", "1–9 và số cái 11, 22, 33", "2–11 và 22/4 (cộng tổng chữ số)", "Chú trọng số kép 10–52 trước khi rút gọn"],
@@ -154,7 +154,7 @@ export const CAM_NANG_PILLAR: Record<string, CamNangPillar> = {
       { ten: "Cung phi & Bát trạch theo tuổi", yNghia: "Từ năm sinh và giới tính xác định Đông Tứ Mệnh hay Tây Tứ Mệnh, từ đó chia 4 hướng cát (Sinh Khí, Thiên Y, Diên Niên, Phục Vị) và 4 hướng hung.", href: "/phong-thuy/huong-hop-tuoi" },
       { ten: "Huyền Không Phi Tinh theo vận", yNghia: "Đo độ số cửa chính để lập tinh bàn 9 cung theo vận nhà (hiện là Vận 9, 2024–2043), thấy nơi tụ khí và nơi cần giữ tĩnh." },
       { ten: "Hướng xấu lưu niên trong năm", yNghia: "Xác định phương Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng và Nhị Hắc của năm hiện tại để tránh động thổ hay sửa chữa lớn phía đó.", href: "/phong-thuy/huong-xau-nam" },
-      { ten: "Khảo sát bố cục từng phòng", yNghia: "Kiểm tra 23 dấu hiệu thực tế (cửa thông nhau, gương đối giường, xà ngang, bếp – chậu rửa…) kèm giải pháp điều chỉnh không tốn tiền.", href: "/phong-thuy/dau-hieu-nha-o" },
+      { ten: "Khảo sát bố cục từng phòng", yNghia: "Kiểm tra các dấu hiệu thực tế (cửa thông nhau, gương đối giường, xà ngang, bếp – chậu rửa…) kèm giải pháp điều chỉnh không tốn tiền.", href: "/phong-thuy/dau-hieu" },
     ],
     bang: {
       tieuDe: "So sánh Bát trạch và Huyền Không Phi Tinh",
@@ -213,7 +213,7 @@ export const CAM_NANG_PILLAR: Record<string, CamNangPillar> = {
   "/nhan-tuong": {
     capNhat: "2026-11-24",
     tieuDe: "Ba hệ quy chiếu chính trong Nhân tướng học cổ điển",
-    tomTat: "Bài đọc tự quan sát trước gương kết hợp Ma Y Thần Tướng, Băng Giám và Hoàng Đế Nội Kinh qua bốn lớp:",
+    tomTat: "Bài đọc tự quan sát trước gương, đối chiếu Thần Tướng Toàn Biên, Băng Giám và Linh Khu (Hoàng Đế Nội Kinh) qua bốn lớp:",
     muc: [
       { ten: "Tam đình (Thượng – Trung – Hạ đình)", yNghia: "Chia gương mặt thành ba phần trán, mũi–gò má và miệng–cằm để quan sát nhịp phát triển tiền vận, trung vận và hậu vận." },
       { ten: "Ngũ quan (Tai, Mày, Mắt, Mũi, Miệng)", yNghia: "Năm vùng biểu đạt chính về khả năng lắng nghe, khí chất, thần thái, ý chí và cách giao tiếp.", href: "/nhan-tuong/bo-vi" },
@@ -237,7 +237,7 @@ export const CAM_NANG_PILLAR: Record<string, CamNangPillar> = {
       hang: [
         ["Rider-Waite-Smith", "A. E. Waite (1910)", "Hình ảnh tường minh, đọc xuôi/ngược theo từng vị trí"],
         ["Golden Dawn / Thoth", "S. L. MacGregor Mathers & A. Crowley", "Phẩm giá nguyên tố giữa các lá liền kề, decan hoàng đạo"],
-        ["Tarot de Marseille", "Truyền thống Pháp cổ", "Hướng nhìn nhân vật, cấu trúc số học, không dùng lá ngược"],
+        ["Tarot de Marseille", "Truyền thống Pháp cổ", "Hướng nhìn nhân vật, cấu trúc số học; thường không đọc lá ngược"],
         ["B.O.T.A.", "Paul Foster Case", "Tâm lý học biểu tượng, soi nếp nghĩ và tiềm thức người hỏi"],
       ],
     },

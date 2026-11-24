@@ -29,7 +29,7 @@ const HOI_DAP_DOI_NGU = [
   },
   {
     hoi: "Radar 5 hành đội ngũ cho biết điều gì về vận hành?",
-    dap: "Mỗi hành đại diện cho một nhóm năng lực vận hành: Mộc (khởi xướng & mở rộng), Hoả (truyền lửa & kinh doanh), Thổ (ổn định & hậu cần), Kim (quy trình, kiểm soát & tài chính), Thuỷ (phân tích, chiến lược & thích ứng). Nhìn biểu đồ giúp bạn biết nhóm đang mạnh trục nào và cần bù bằng quy trình hay vai trò bổ trợ nào.",
+    dap: "Mỗi hành ứng với một nhóm vai trò vận hành: Kim (tài chính, pháp chế, rủi ro), Mộc (mở rộng thị trường, chiến lược, dự án mới), Thuỷ (đối ngoại, thương lượng, phân tích), Hoả (kinh doanh tuyến đầu, truyền thông, truyền lửa), Thổ (vận hành, quy trình, giữ khách). Nhìn biểu đồ giúp bạn biết nhóm đang mạnh trục nào và cần bù bằng quy trình hay vai trò bổ trợ nào.",
   },
   {
     hoi: "Ngoài Radar 5 hành, trang còn hỗ trợ gì cho chủ doanh nghiệp?",
@@ -37,16 +37,17 @@ const HOI_DAP_DOI_NGU = [
   },
   {
     hoi: "Sử dụng Bản đồ Đội ngũ có mất phí hay cần tài khoản không?",
-    dap: "Bạn có thể bấm xem thử ngay đội ngũ mẫu 4 vai trò hoặc chạy bản đồ cho nhóm của mình mà không cần tạo tài khoản.",
+    dap: "Xem đội ngũ mẫu 4 vai trò luôn miễn phí, không cần tài khoản. Chạy bản đồ cho đội ngũ thật hiện đang mở dùng thử; khi bắt đầu tính bằng Sao, số Sao hiện rõ trước khi bạn bấm xem.",
   },
 ];
 
+// Vai trò theo hành: chép nguyên văn từ engine `calc/doanh_chu._VAI_TRO_HANH` (một nguồn — sửa ở engine thì sửa cả đây).
 const BANG_5_HANH = [
-  ["Mộc", "Khởi xướng & mở rộng", "Phát triển sản phẩm mới, mở thị trường", "Thiếu dễ ì trệ; dư dễ dàn trải quá nhiều dự án"],
-  ["Hoả", "Truyền lửa & kết nối", "Bán hàng, đối ngoại, giữ tinh thần nhóm", "Thiếu dễ trầm lắng; dư dễ nóng vội, đốt giai đoạn"],
-  ["Thổ", "Ổn định & hậu cần", "Vận hành lõi, giữ khách, điều phối nội bộ", "Thiếu dễ rời rạc; dư dễ bảo thủ, ngại đổi mới"],
-  ["Kim", "Quy trình & kỷ luật", "Tài chính, kiểm soát rủi ro, chuẩn hoá SOP", "Thiếu dễ lỏng lẻo số liệu; dư dễ cứng nhắc, chậm quyết"],
-  ["Thuỷ", "Chiến lược & linh hoạt", "Nghiên cứu, phân tích dữ liệu, xử lý biến động", "Thiếu dễ thiếu tầm nhìn dài; dư dễ do dự, đổi hướng liên tục"],
+  ["Kim", "Kiểm soát tài chính · Pháp chế · Quản trị rủi ro", "Giữ kỷ luật ngân sách, chuẩn hoá tiêu chuẩn chất lượng và ra quyết định tỉnh táo bằng số liệu."],
+  ["Mộc", "Mở rộng thị trường · Chiến lược · Phát triển dự án mới", "Tạo đà tăng trưởng, dám tiên phong khai phá sản phẩm hoặc chi nhánh mới cho doanh nghiệp."],
+  ["Thuỷ", "Đối ngoại · Thương lượng · R&D & Phân tích dữ liệu", "Linh hoạt xoay chuyển tình thế, giỏi đàm phán khách hàng khó và đọc nhanh biến động thị trường."],
+  ["Hoả", "Kinh doanh tuyến đầu · Truyền thông · Truyền lửa đội nhóm", "Tạo năng lượng tích cực, chốt đơn nhanh, xây dựng thương hiệu và kết nối tinh thần tập thể."],
+  ["Thổ", "Vận hành · Quy trình · Giữ chân khách hàng & Hậu cần", "Đảm bảo bộ máy chạy đều tay, giữ chữ tín giao hàng đúng hẹn và ổn định nội bộ dài hạn."],
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -107,16 +108,15 @@ export default async function Page() {
           <p className="text-xs text-fg-faint">Cập nhật <time dateTime={CAP_NHAT}>24/11/2026</time></p>
         </div>
         <p className="mt-3 leading-relaxed">
-          Khi gom nhiều cá nhân vào một nhóm vận hành, va chạm thường đến từ sự lệch nhịp giữa người thiên mở rộng và người thiên kiểm soát. Bảng dưới đây tóm tắt cách đọc 5 hành trong bối cảnh doanh nghiệp nhỏ và vừa:
+          Khi gom nhiều cá nhân vào một nhóm vận hành, va chạm thường đến từ sự lệch nhịp giữa người thiên mở rộng và người thiên kiểm soát. Bảng dưới đây là cách công cụ gợi ý vai trò theo hành nổi trội của từng người — gợi ý tham khảo để phân việc, không dùng để chấm điểm hay tuyển chọn người:
         </p>
         <div className="mt-4 overflow-x-auto rounded-xl border border-line/70">
           <table className="w-full border-collapse text-left text-sm">
             <thead>
               <tr className="border-b border-line/70 bg-surface/40 text-fg">
                 <th className="px-3 py-2.5 font-medium">Hành</th>
-                <th className="px-3 py-2.5 font-medium">Trục năng lực</th>
                 <th className="px-3 py-2.5 font-medium">Vai trò thường hợp</th>
-                <th className="px-3 py-2.5 font-medium">Lưu ý khi thiếu hoặc dư</th>
+                <th className="px-3 py-2.5 font-medium">Điểm mạnh khi giao đúng việc</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-line/50">
@@ -125,7 +125,6 @@ export default async function Page() {
                   <td className="px-3 py-2.5 font-medium text-fg">{r[0]}</td>
                   <td className="px-3 py-2.5">{r[1]}</td>
                   <td className="px-3 py-2.5">{r[2]}</td>
-                  <td className="px-3 py-2.5">{r[3]}</td>
                 </tr>
               ))}
             </tbody>

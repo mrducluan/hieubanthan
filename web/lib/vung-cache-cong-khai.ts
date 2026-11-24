@@ -1,8 +1,9 @@
 // Q-I3 — Phân vùng bảo mật & Edge CDN Cache HTML (Phương án C: 2 vùng).
-// Vùng 1 (public-edge): allowlist tường minh các trang trụ, trang kiến thức, blog, lịch, từ điển, pháp lý dành cho
-// khách vãng lai & bot tìm kiếm/AI → cache HTML tại Vercel Edge (s-maxage=300, SWR=3600), CSP host-allowlist (không nonce).
-// Vùng 2 (private-nonce): mọi trang tài khoản, thanh toán, quản trị, lời mời cá nhân, hoặc request có cookie đăng nhập /
-// chế độ nháp / tham số query → giữ nguyên 100% CSP-2 per-request nonce + Cache-Control: private, no-store.
+// Vùng 1 (public-edge): allowlist tường minh trang trụ, kiến thức, blog, lịch, từ điển, pháp lý → cache HTML ở CDN Vercel
+// (tối đa 5 phút + phục vụ bản cũ trong lúc làm mới ≤ 1 giờ, KHÔNG BAO GIỜ vượt qua nửa đêm giờ Việt Nam — trang lịch, "hôm
+// nay" đổi theo ngày). CSP vẫn là CSP-2 có nonce, nonce ổn định theo (bản deploy, đường dẫn) — xem `nonceOnDinh`.
+// Vùng 2 (private-nonce): tài khoản, thanh toán, quản trị, lời mời, /en → nonce ngẫu nhiên mỗi lượt, không cache.
+// Trang công khai có query (?kw=, ?fbclid=…) hoặc cookie đăng nhập / xem nháp → không ghi vào cache (public-bypass).
 
 const DUONG_CHINH_XAC = new Set([
   "/",
@@ -62,7 +63,7 @@ const COOKIE_BO_QUA_CACHE = [
   /^sb-.*-auth-token/i, // Supabase session cookie (mọi chunk .0, .1…)
   /^__prerender_bypass$/, // Next.js draft mode
   /^__next_preview_data$/,
-  /^hbt-nhap-pham-vi$/, // SEC-2 CMS preview scope
+  /^hbt-xem-truoc$/, // SEC-2: cookie phạm vi xem trước CMS (COOKIE_PHAM_VI)
 ];
 
 /** Chuẩn hoá đường dẫn (bỏ dấu / thừa cuối, giữ "/" gốc). */
@@ -109,4 +110,21 @@ export function coTheCacheCongKhai(input: KiemTraCacheInput): boolean {
   return true;
 }
 
-export const HEADER_CACHE_EDGE = "public, s-maxage=300, stale-while-revalidate=3600";
+const S_MAXAGE = 300;
+const SWR = 3600;
+
+/** Giây còn lại tới 00:00 giờ Việt Nam (UTC+7, không giờ mùa hè). */
+function giayToiNuaDemVn(nowMs: number): number {
+  const ngay = 86_400_000, lech = 7 * 3_600_000;
+  return Math.floor((ngay - ((nowMs + lech) % ngay)) / 1000);
+}
+
+/** Cache-Control cho CDN: bản cache (kể cả bản cũ phục vụ trong lúc làm mới) hết hạn trước nửa đêm giờ Việt Nam.
+ *  Còn dưới 60 giây tới nửa đêm → null (không cache lượt này). */
+export function headerCacheEdge(nowMs = Date.now()): string | null {
+  const con = giayToiNuaDemVn(nowMs);
+  if (con < 60) return null;
+  const sMaxage = Math.min(S_MAXAGE, con);
+  const swr = Math.min(SWR, con - sMaxage);
+  return `public, s-maxage=${sMaxage}${swr > 0 ? `, stale-while-revalidate=${swr}` : ""}`;
+}

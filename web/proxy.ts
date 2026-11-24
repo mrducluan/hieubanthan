@@ -10,8 +10,8 @@ import { langHtml, maNgonNguEn } from "@/lib/ngon-ngu";
 import { dichRewrite, suaDuongLac } from "@/lib/duong-en";
 import { createServerClient } from "@supabase/ssr";
 import { SITE_CHINH } from "@/lib/seo";
-import { taoCsp, taoCspCongKhai, taoNonce } from "@/lib/csp";
-import { coTheCacheCongKhai, HEADER_CACHE_EDGE, laDuongCongKhaiCache } from "@/lib/vung-cache-cong-khai";
+import { nonceOnDinh, taoCsp, taoNonce } from "@/lib/csp";
+import { coTheCacheCongKhai, headerCacheEdge, laDuongCongKhaiCache } from "@/lib/vung-cache-cong-khai";
 
 type CookieMoi = { name: string; value: string; options?: Parameters<NextResponse["cookies"]["set"]>[2] };
 
@@ -60,26 +60,25 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
   // URL Anh đã mở mà KHÔNG có trang riêng dưới app/en → hiển thị chính trang Việt tương ứng (một cây component), ngôn ngữ đi
   // theo header. Bảng `lib/duong-en.json` là nguồn duy nhất; trang chưa mở không rewrite (404 tiếng Anh).
   const dichVi = tiengAnh ? dichRewrite(pathname) : null;
-  // Q-I3 (Phương án C — 2 vùng bảo mật theo ĐƯỜNG DẪN):
-  // - Đường dẫn trong allowlist công khai (laDuongCongKhaiCache): LUÔN dùng taoCspCongKhai() (không nonce) để KHÔNG BAO GIỜ
-  //   xảy ra lệch nonce header vs HTML đã cache tại Edge khi người dùng có cookie truy cập cùng URL.
-  //   Nếu coTheCacheCongKhai() = true → gắn Vercel-CDN-Cache-Control / CDN-Cache-Control (s-maxage=300, SWR=3600).
-  //   Nếu bypass (cookie đăng nhập / draft / ?kw= / trình duyệt chỉ tiếng Anh) → gắn private, no-store.
-  // - Đường dẫn nhạy cảm (/quan-tri, /tai-khoan, /nap-sao, /hoi-vien, /ban-than, /goi-xem, /hop-doi/<mã>, /en…):
-  //   LUÔN dùng CSP-2 per-request nonce + 'strict-dynamic' + không cache Edge.
+  // Q-I3 — cache HTML trang công khai ở CDN mà vẫn giữ CSP-2 (nonce + 'strict-dynamic'):
+  // - Trang công khai KHÔNG query: nonce ổn định theo (bản deploy, đường dẫn) cho MỌI lượt (kể cả người đã đăng nhập —
+  //   CDN có thể trả bản đã cache cho họ, header phải khớp nonce trong HTML đó). Chỉ khách vãng lai mới được ghi vào cache.
+  // - Còn lại (có query, /en, quản trị, tài khoản, thanh toán…): nonce ngẫu nhiên mỗi lượt, không cache.
   const duongCongKhai = !quanTri && !tiengAnh && laDuongCongKhaiCache(pathname);
-  const cacheCongKhai = duongCongKhai && coTheCacheCongKhai({
+  const khongQuery = !req.nextUrl.search || req.nextUrl.search === "?";
+  const nonceCoDinh = duongCongKhai && khongQuery ? await nonceOnDinh(pathname) : null;
+  const ghiCache = nonceCoDinh ? coTheCacheCongKhai({
     method: req.method,
     pathname,
     search: req.nextUrl.search,
     cookieNames: req.cookies.getAll().map((c) => c.name),
     acceptLanguage: req.headers.get("accept-language"),
-  });
-  const nonce = duongCongKhai ? null : taoNonce();
-  const csp = nonce ? taoCsp(nonce) : taoCspCongKhai();
+  }) : false;
+  const headerCache = ghiCache ? headerCacheEdge() : null;
+  const nonce = nonceCoDinh ?? taoNonce();
+  const csp = taoCsp(nonce);
   const dau = new Headers(req.headers);   // chép SAU khi làm mới phiên → cookie mới đi kèm request
-  if (nonce) dau.set("x-nonce", nonce);
-  else dau.delete("x-nonce");
+  dau.set("x-nonce", nonce);
   dau.set("content-security-policy", csp);
   // QTE: bản tiếng Anh ở /en — layout đọc `x-ngon-ngu` để dựng khung tiếng Anh; route API chuyển tiếp header này tới engine.
   // Ý7: biến thể thị trường (en-us) theo Accept-Language — chỉ khi engine có bản phủ; còn lại "en".
@@ -96,10 +95,11 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
     res = NextResponse.next({ request: { headers: dau } });
   }
   res.headers.set("content-security-policy", csp);
-  if (cacheCongKhai) {
-    // Vercel Edge ưu tiên Vercel-CDN-Cache-Control / CDN-Cache-Control kể cả khi Next SSR đặt Cache-Control mặc định.
-    res.headers.set("vercel-cdn-cache-control", HEADER_CACHE_EDGE);
-    res.headers.set("cdn-cache-control", HEADER_CACHE_EDGE);
+  if (headerCache) {
+    // CDN Vercel ưu tiên Vercel-CDN-Cache-Control / CDN-Cache-Control hơn Cache-Control mặc định của Next (trình duyệt vẫn
+    // không cache). Deploy mới = khoá cache mới (cache tách theo bản deploy).
+    res.headers.set("vercel-cdn-cache-control", headerCache);
+    res.headers.set("cdn-cache-control", headerCache);
     res.headers.set("x-hbt-cache-zone", "public-edge");
   } else if (duongCongKhai) {
     res.headers.set("vercel-cdn-cache-control", "private, no-store");

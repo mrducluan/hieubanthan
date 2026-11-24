@@ -177,7 +177,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
       { hoi: "Không có hào động thì đọc thế nào?", dap: "Lời chủ là quái từ của quẻ, kèm Thoán truyện dịch nghĩa." },
       { hoi: "Có nhiều hào động cùng lúc thì ưu tiên hào nào?", dap: "Theo phép Chu Hy: 1 hào động xem hào đó; 2 hào động xem cả hai và trọng hào trên; 3 hào động đối chiếu quái từ quẻ chủ và quẻ biến. Hệ thống tự áp quy tắc này và nêu rõ hào trọng tâm." },
       { hoi: "Có nên gieo lại nhiều lần cho cùng một câu hỏi không?", dap: "Không nên. Theo tinh thần quẻ Sơn Thuỷ Mông (“sơ phệ cáo, tái tam độc”), hỏi lặp lại khi chưa có thông tin mới chỉ làm nhiễu suy nghĩ; hãy chờ tình huống thực tế thay đổi rồi mới xem tiếp." },
-      { hoi: "Gieo quẻ Kinh Dịch online có mất phí hay lưu câu hỏi không?", dap: "Miễn phí và không cần tài khoản. Câu hỏi của bạn chỉ dùng để đối chiếu bối cảnh lúc đọc quẻ, không công khai và không gửi cho bên thứ ba." },
+      { hoi: "Gieo quẻ Kinh Dịch online có mất phí hay lưu câu hỏi không?", dap: "Miễn phí và không cần tài khoản. Câu hỏi chỉ được lưu ẩn danh (đã bỏ tên, số liên lạc, không gắn tài khoản) để cải thiện cách trả lời; không công khai, và lời của bạn không được đưa vào lời nhắc AI." },
     ],
     lien_ket: [{ href: "/kinh-dich/que", ten: "64 quẻ Kinh Dịch" }, { href: "/tu-dien", ten: "Từ điển thuật ngữ" }],
   } },
