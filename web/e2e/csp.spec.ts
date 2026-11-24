@@ -1,8 +1,11 @@
-// CSP-2 — Content-Security-Policy đầy đủ: script chỉ chạy khi mang nonce của lượt tải trang (hoặc do script có nonce
-// nạp — 'strict-dynamic'). Script lạ chèn vào trang (XSS) hay từ tên miền lạ đều bị chặn; dữ liệu chỉ gửi được tới
-// các máy chủ trong connect-src. Kiểm: header có nonce mới mỗi lượt, script của Next mang nonce, các trang chính chạy
-// không có vi phạm CSP nào, GTM (nạp mọi trang) vẫn chạy, và một script chèn không nonce thì bị chặn thật.
+// CSP-2 + Q-I3 (Phương án C — 2 vùng bảo mật):
+// - Vùng 1 (public-edge): allowlist trang công khai cho khách vãng lai & bot tìm kiếm/AI → Edge CDN Cache
+//   (Vercel-CDN-Cache-Control / CDN-Cache-Control: public, s-maxage=300, stale-while-revalidate=3600) + CSP host-allowlist
+//   (không nonce, vẫn chặn object-src/frame-ancestors/connect-src).
+// - Vùng 2 (private-nonce): tài khoản, thanh toán (/nap-sao, /hoi-vien, /tai-khoan, /ban-than, /quan-tri), ?kw=, /en,
+//   hoặc request có cookie đăng nhập / chế độ nháp → nonce 128-bit mới mỗi lượt + 'strict-dynamic' + chặn XSS chèn tay.
 import { test, expect, type Page } from "@playwright/test";
+import { coTheCacheCongKhai, laDuongCongKhaiCache } from "../lib/vung-cache-cong-khai";
 
 function ghiViPham(page: Page): string[] {
   const vp: string[] = [];
@@ -10,25 +13,68 @@ function ghiViPham(page: Page): string[] {
   return vp;
 }
 
-test("header CSP có nonce mới mỗi lượt + script-src strict-dynamic, script của Next mang đúng nonce", async ({ request }) => {
-  const a = await request.get("/than-so/y-nghia-so/so-7");
-  const b = await request.get("/than-so/y-nghia-so/so-7");
-  const csp = a.headers()["content-security-policy"] ?? "";
-  const nonce = /'nonce-([A-Za-z0-9+/=]+)'/.exec(csp)?.[1];
-  expect(nonce).toBeTruthy();
-  expect(csp).toContain("'strict-dynamic'");
-  expect(csp).toContain("object-src 'none'");
-  expect(csp).toContain("frame-ancestors 'self'");
-  expect(csp).toMatch(/connect-src [^;]*'self'/);
-  expect(b.headers()["content-security-policy"]).not.toContain(nonce!);      // mỗi lượt một nonce
-  const html = await a.text();
-  const scripts = [...html.matchAll(/<script(?![^>]*application\/ld\+json)([^>]*)>/g)].map((m) => m[1]!);
-  expect(scripts.length).toBeGreaterThan(0);
-  for (const s of scripts) expect(s).toContain(`nonce="${nonce}"`);
+test("Q-I3 phân vùng thuần: allowlist trang công khai, bypass cookie đăng nhập / nháp / ?kw= / /en / lời mời cá nhân", () => {
+  for (const ok of ["/", "/than-so", "/tu-vi", "/than-so/y-nghia-so/so-7", "/phong-thuy/huong-hop-tuoi/cung-kham-bac", "/hop-doi", "/hop-doi/cap-so/so-chu-dao-1-va-2", "/ban-do-doi-ngu", "/goi-xem", "/tu-dien"]) {
+    expect(laDuongCongKhaiCache(ok), ok).toBe(true);
+    expect(coTheCacheCongKhai({ method: "GET", pathname: ok, search: "", cookieNames: [] }), ok).toBe(true);
+  }
+  for (const no of ["/quan-tri", "/quan-tri/cai-dat", "/tai-khoan", "/nap-sao", "/hoi-vien", "/ban-than", "/hoi-chuyen-gia", "/dang-nhap", "/hop-doi/abc123", "/ban-do-doi-ngu/moi", "/en", "/en/numerology"]) {
+    expect(laDuongCongKhaiCache(no), no).toBe(false);
+    expect(coTheCacheCongKhai({ method: "GET", pathname: no, search: "", cookieNames: [] }), no).toBe(false);
+  }
+  // Bypass khi có query (?kw=), cookie Supabase, draftMode, cookie hbt-goi-y-en, trình duyệt chỉ tiếng Anh hoặc non-GET.
+  expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "?kw=ngay-sinh", cookieNames: [] })).toBe(false);
+  expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: ["sb-xyz-auth-token.0"] })).toBe(false);
+  expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: ["__prerender_bypass"] })).toBe(false);
+  expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: ["hbt-nhap-pham-vi"] })).toBe(false);
+  expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: ["hbt-goi-y-en"] })).toBe(true);
+  expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: [], acceptLanguage: "en-US,en;q=0.9" })).toBe(false);
+  expect(coTheCacheCongKhai({ method: "GET", pathname: "/than-so", search: "", cookieNames: [], acceptLanguage: "en-US,vi;q=0.8" })).toBe(true);
+  expect(coTheCacheCongKhai({ method: "POST", pathname: "/than-so", search: "", cookieNames: [] })).toBe(false);
+});
+
+test("Vùng 1 (public-edge): trang công khai vãng lai có Edge CDN Cache + CSP chặt không nonce", async ({ request }) => {
+  for (const duong of ["/", "/than-so", "/tu-vi", "/than-so/y-nghia-so/so-7"]) {
+    const r = await request.get(duong, { headers: { "accept-language": "vi-VN,vi;q=0.9" } });
+    expect(r.status(), duong).toBe(200);
+    expect(r.headers()["x-hbt-cache-zone"], duong).toBe("public-edge");
+    expect(r.headers()["vercel-cdn-cache-control"], duong).toContain("s-maxage=300");
+    expect(r.headers()["cdn-cache-control"], duong).toContain("stale-while-revalidate=3600");
+    const csp = r.headers()["content-security-policy"] ?? "";
+    expect(csp, duong).not.toContain("'nonce-");
+    expect(csp, duong).toContain("object-src 'none'");
+    expect(csp, duong).toContain("frame-ancestors 'self'");
+    expect(csp, duong).toMatch(/connect-src [^;]*'self'/);
+  }
+});
+
+test("Vùng 2 (private-nonce): trang nhạy cảm & người đã đăng nhập có nonce mới mỗi lượt + strict-dynamic, script Next mang đúng nonce", async ({ request }) => {
+  for (const [duong, headers] of [
+    ["/nap-sao", {}],
+    ["/than-so/y-nghia-so/so-7", { cookie: "sb-test-auth-token=1" }],
+    ["/than-so?kw=ngay-sinh", {}],
+  ] as const) {
+    const a = await request.get(duong, { headers });
+    const b = await request.get(duong, { headers });
+    expect(a.headers()["x-hbt-cache-zone"], duong).toBe("private-nonce");
+    expect(a.headers()["vercel-cdn-cache-control"], duong).toBeUndefined();
+    const csp = a.headers()["content-security-policy"] ?? "";
+    const nonce = /'nonce-([A-Za-z0-9+/=]+)'/.exec(csp)?.[1];
+    expect(nonce, duong).toBeTruthy();
+    expect(csp, duong).toContain("'strict-dynamic'");
+    expect(csp, duong).toContain("object-src 'none'");
+    expect(csp, duong).toContain("frame-ancestors 'self'");
+    expect(csp, duong).toMatch(/connect-src [^;]*'self'/);
+    expect(b.headers()["content-security-policy"], duong).not.toContain(nonce!);
+    const html = await a.text();
+    const scripts = [...html.matchAll(/<script(?![^>]*application\/ld\+json)([^>]*)>/g)].map((m) => m[1]!);
+    expect(scripts.length, duong).toBeGreaterThan(0);
+    for (const s of scripts) expect(s, duong).toContain(`nonce="${nonce}"`);
+  }
 });
 
 for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/than-so/y-nghia-so/so-7",
-  "/phong-thuy/huong-hop-tuoi/cung-kham-bac", "/tu-dien"]) {
+  "/phong-thuy/huong-hop-tuoi/cung-kham-bac", "/tu-dien", "/nap-sao"]) {
   test(`không vi phạm CSP: ${duong}`, async ({ page }) => {
     const vp = ghiViPham(page);
     await page.goto(duong);
@@ -38,7 +84,7 @@ for (const duong of ["/", "/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong
   });
 }
 
-test("GTM nạp khi người dùng tương tác (PERF-2; không chờ đồng ý): đoạn khởi động có nonce + gtm.js chạy được, không vi phạm CSP", async ({ page }) => {
+test("GTM nạp khi người dùng tương tác (PERF-2; không chờ đồng ý): gtm.js chạy được, không vi phạm CSP", async ({ page }) => {
   const vp = ghiViPham(page);
   await page.route(/googletagmanager\.com/, (r) => r.fulfill({ status: 200, contentType: "text/javascript", body: "window.__gtm_da_tai=1;" }));
   await page.goto("/");
@@ -58,8 +104,8 @@ test("CSP mở cho hệ Google mà thẻ GTM hay gọi (Analytics, Ads, DoubleCl
   expect(csp).toMatch(/frame-src [^;]*tagassistant\.google\.com/);
 });
 
-test("script chèn không có nonce (giả lập XSS) bị trình duyệt chặn", async ({ page }) => {
-  await page.goto("/");
+test("Vùng 2 (private-nonce): script chèn không có nonce (giả lập XSS) bị trình duyệt chặn", async ({ page }) => {
+  await page.goto("/nap-sao");
   const chay = await page.evaluate(async () => {
     const w = window as unknown as { __xss?: number };
     const s = document.createElement("div");

@@ -10,7 +10,8 @@ import { langHtml, maNgonNguEn } from "@/lib/ngon-ngu";
 import { dichRewrite, suaDuongLac } from "@/lib/duong-en";
 import { createServerClient } from "@supabase/ssr";
 import { SITE_CHINH } from "@/lib/seo";
-import { taoCsp, taoNonce } from "@/lib/csp";
+import { taoCsp, taoCspCongKhai, taoNonce } from "@/lib/csp";
+import { coTheCacheCongKhai, HEADER_CACHE_EDGE } from "@/lib/vung-cache-cong-khai";
 
 type CookieMoi = { name: string; value: string; options?: Parameters<NextResponse["cookies"]["set"]>[2] };
 
@@ -59,10 +60,21 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
   // URL Anh đã mở mà KHÔNG có trang riêng dưới app/en → hiển thị chính trang Việt tương ứng (một cây component), ngôn ngữ đi
   // theo header. Bảng `lib/duong-en.json` là nguồn duy nhất; trang chưa mở không rewrite (404 tiếng Anh).
   const dichVi = tiengAnh ? dichRewrite(pathname) : null;
-  const nonce = taoNonce();
-  const csp = taoCsp(nonce);
+  // Q-I3 (Phương án C — 2 vùng bảo mật):
+  // - Vùng 1 (public-edge): khách vãng lai & bot vào allowlist công khai → CSP host-allowlist (không nonce) + cache HTML tại Edge.
+  // - Vùng 2 (private-nonce): quản trị, tài khoản, thanh toán, lời mời cá nhân, người đã đăng nhập, ?kw=, /en → CSP-2 nonce + no-store.
+  const cacheCongKhai = !quanTri && !tiengAnh && coTheCacheCongKhai({
+    method: req.method,
+    pathname,
+    search: req.nextUrl.search,
+    cookieNames: req.cookies.getAll().map((c) => c.name),
+    acceptLanguage: req.headers.get("accept-language"),
+  });
+  const nonce = cacheCongKhai ? null : taoNonce();
+  const csp = nonce ? taoCsp(nonce) : taoCspCongKhai();
   const dau = new Headers(req.headers);   // chép SAU khi làm mới phiên → cookie mới đi kèm request
-  dau.set("x-nonce", nonce);
+  if (nonce) dau.set("x-nonce", nonce);
+  else dau.delete("x-nonce");
   dau.set("content-security-policy", csp);
   // QTE: bản tiếng Anh ở /en — layout đọc `x-ngon-ngu` để dựng khung tiếng Anh; route API chuyển tiếp header này tới engine.
   // Ý7: biến thể thị trường (en-us) theo Accept-Language — chỉ khi engine có bản phủ; còn lại "en".
@@ -79,6 +91,14 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
     res = NextResponse.next({ request: { headers: dau } });
   }
   res.headers.set("content-security-policy", csp);
+  if (cacheCongKhai) {
+    // Vercel Edge ưu tiên Vercel-CDN-Cache-Control / CDN-Cache-Control kể cả khi Next SSR đặt Cache-Control mặc định.
+    res.headers.set("vercel-cdn-cache-control", HEADER_CACHE_EDGE);
+    res.headers.set("cdn-cache-control", HEADER_CACHE_EDGE);
+    res.headers.set("x-hbt-cache-zone", "public-edge");
+  } else {
+    res.headers.set("x-hbt-cache-zone", "private-nonce");
+  }
   if (tiengAnh) { res.headers.set("content-language", langHtml(maEn)); res.headers.append("vary", "Accept-Language"); }
   cookieMoi.forEach((c) => res.cookies.set(c.name, c.value, c.options));
   if (quanTri) {
