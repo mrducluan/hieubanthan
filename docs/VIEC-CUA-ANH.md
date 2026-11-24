@@ -3,14 +3,27 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-23 (việc mới nhất ở ngay dưới; RY-1 mục 4az; KM-0 mục 4ay; TK-1 mục 4ax; LH-1 + LH-2 + LH-3 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-25 (việc mới nhất ở ngay dưới — soát + sửa #347 #348 #350 #353; RY-1 mục 4az; KM-0 mục 4ay; TK-1 mục 4ax; LH-1 + LH-2 + LH-3 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
 
 
 ---
 
-## ⭐ VIỆC MỚI NHẤT — làm từ trên xuống (cập nhật 23/11/2026)
+## ⭐ VIỆC MỚI NHẤT — làm từ trên xuống (cập nhật 25/11/2026)
 
 Làm xong dòng nào thì đánh `[x]` (hoặc nhắn em). Các mục cũ hơn nằm bên dưới đường kẻ.
+
+### 00. Bốn PR #347 #348 #350 #353 — đã soát và gộp vào một PR mới (25/11/2026, `docs/RA-SOAT-PR-347-353.md`)
+
+- [ ] **Đóng 4 PR cũ** #347, #348, #350, #353 sau khi PR gộp được merge (PR gộp đã gồm phần dùng được của #348, #350, #353; #347 không dùng — lý do ở tài liệu).
+- [ ] **Lì xì Tết 2027 (LX-2027)** — theo thứ tự:
+  1. Supabase → SQL Editor → chạy `supabase/migrations/0042_li_xi_tet.sql` (SAU 0041). Bản cũ trong PR #350 ghi sai cột tiền nên không bán được đơn nào; bản này đã chạy thử trọn vòng.
+  2. Lì xì CHỈ mở bán khi báo cáo Thời gian tới đang thu Sao (`luan_giai.thu_sao` bật, có cổng Pay2S) — không bán quà cho thứ ai cũng đọc miễn phí.
+  3. `/quan-tri/cai-dat` → nhóm "LÌ XÌ TẾT 2027" → bật "Mở bán". Thử một đơn 99.000 ₫ thật bằng tài khoản thử: trả tiền → trang kết quả báo "bao sẵn sàng" → chép link → mở bằng tài khoản thứ hai → Nhận → vào `/thoi-gian-toi?nam=2027` → bấm "Mở bằng bao lì xì".
+  4. Hoàn tiền một đơn lì xì: CHỈ ở SQL Editor, sau khi đã chuyển trả tiền ngoài: `select hoan_don_li_xi(<mã đơn>, 'lý do');` (đơn có bao đã được nhận thì không hoàn được). Không dùng `hoan_don_nap` cho đơn lì xì.
+  5. Có lời chúc tự viết khả nghi (lừa đảo dù đã qua bộ lọc): SQL Editor `update li_xi_tet set loi_chuc = null, ten_nguoi_tang = null where ma = '<mã>';`.
+- [ ] **Trang mời cộng tác chuyên gia** `/hop-tac-chuyen-gia` (đã hiện link ở `/tac-gia`): đọc lại con số **"tới 80% tiền câu hỏi (sau phí thanh toán)"** — em giữ theo PR #348; nếu chưa chốt thì nhắn em sửa. Hợp đồng cộng tác + khấu trừ thuế: nhờ luật sư / kế toán (em đã bỏ các số nghị định trên trang vì chưa kiểm được).
+- [ ] **12 tình huống hỏi đáp (HD-TH)**: sau khi deploy CMS, vào CMS → Bài viết → 12 bài nháp "Gửi duyệt" (ghi chú HD-TH). Bài còn mỏng (điểm 64–70): muốn đăng thì nhắn em gắn một lá số mẫu do engine tính cho từng bài (hướng ở tài liệu mục 4), hoặc anh tự viết thêm rồi bấm Xuất bản.
+- [ ] (Quyết định) **Cache trang SEO (Q-I3)**: em đề xuất KHÔNG dùng cách của #347; nếu muốn kéo TTFB cho Googlebot thì duyệt dự án "dựng tĩnh trang kiến thức" (tài liệu mục 5).
 
 ### 0. Phong thuỷ PT-V3 (PR #352) — sau khi merge
 

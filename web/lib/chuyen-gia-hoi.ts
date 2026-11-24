@@ -97,6 +97,8 @@ export function kiemTraLoi(van: string): KetQuaKiem {
   const hung = CHAN_HUNG.filter((c) => coCum(t, c));
   if (hung.length) chan.push(`Phán hung / sống chết / xổ số (cấm): ${hung.map((x) => `"${x}"`).join(", ")}.`);
   if (LIEN_HE.test(t)) chan.push("Có link, email, số điện thoại hoặc kênh liên hệ ngoài — mọi trao đổi ở trong trang.");
+  // Khung trả lời 3 phần (Co-Pilot) có chỗ trống "[…]" — gửi khi còn chỗ trống là gửi khung chưa viết cho người trả tiền.
+  if (/\[(Viết|Ghi|Nêu|Nhắc)[^\]]*\]/.test(t)) chan.push("Còn chỗ trống trong khung trả lời (đoạn trong ngoặc vuông) — viết nội dung hoặc xoá dòng đó.");
   const phan = CANH_BAO_PHAN.filter((c) => coCum(t, c));
   if (phan.length) canh_bao.push(`Giọng phán định / vật phẩm: ${phan.map((x) => `"${x}"`).join(", ")} — đổi sang "thường được mô tả là", "nên cân nhắc".`);
   return { chan, canh_bao };

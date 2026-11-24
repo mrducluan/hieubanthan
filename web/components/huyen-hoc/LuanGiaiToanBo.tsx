@@ -50,7 +50,8 @@ interface BaoCao {
   ten_hien?: TenHien;
   phi: { sao: number; ly_do: string; so_du?: number | null; khoa?: boolean; dang_nhap?: boolean; thuong_chao_mung?: number | null;
     /** UD-1: đợt ưu đãi có hạn đang áp dụng (sao = giá ưu đãi). */ uu_dai?: UuDai;
-    /** SAO-V: chương bạn bè tặng (đọc thêm một chương sau các chương miễn phí). */ chuong_tang?: number; chuong_tang_ma?: string };
+    /** SAO-V: chương bạn bè tặng (đọc thêm một chương sau các chương miễn phí). */ chuong_tang?: number; chuong_tang_ma?: string;
+    /** LX-2027: số bao lì xì đã nhận, chưa dùng, mở được báo cáo năm `li_xi_nam` (Thời gian tới). */ li_xi?: number; li_xi_nam?: number };
 }
 
 /** Đã mở toàn bộ bằng Sao (hôm nay) → được tặng bạn bè một chương. */
@@ -102,6 +103,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
       setBc(d);
       if (moKhoa || !d.so_khoa) xoaChoMo();
       if (moKhoa && d.phi.ly_do === "da_tru_sao") ghi("unlock_succeeded", { mo_dun: d.mo_dun, so_sao: d.phi.sao });
+      else if (moKhoa && d.phi.ly_do === "li_xi") ghi("unlock_succeeded", { mo_dun: d.mo_dun, so_sao: 0, kind: "li_xi" });
       // Bản xem trước tự tải (bản đồ con số) đo riêng, không làm phồng tỉ lệ paywall của các mảng bấm mới mở.
       else if (d.so_khoa) ghi("paywall_viewed", { mo_dun: d.mo_dun, kind: xemTruocTuDong ? "luan_giai_tu_dong" : "luan_giai_toan_bo" });
     } catch (e) {
@@ -193,7 +195,19 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
       {dau?.(bc)}
       {/* CRO-1: không có đợt ưu đãi thì vẫn có lối mở sớm — thanh nhỏ dính đáy màn hình sau khi đọc qua đầu bài
           (trước đây nút mua chỉ hiện ở cuối, ~màn thứ 11 trên điện thoại). */}
-      {!en && (bc.so_khoa ?? 0) > 0 && !ud && (bc as unknown as BaoCao).phi && (
+      {!en && (bc.so_khoa ?? 0) > 0 && ((bc as unknown as BaoCao).phi?.li_xi ?? 0) > 0 && (
+        <div className="mb-4 flex flex-col gap-3 rounded-2xl border border-gold/40 bg-gold/[0.06] p-4 sm:flex-row sm:items-center" data-testid="dung-li-xi">
+          <Gift className="size-6 shrink-0 text-gold" aria-hidden />
+          <p className="flex-1 text-sm text-fg">
+            Bạn có <b>{(bc as unknown as BaoCao).phi!.li_xi} bao lì xì Tết {(bc as unknown as BaoCao).phi!.li_xi_nam}</b>. Mở trọn báo cáo này bằng một bao, không tốn Sao.
+            <span className="block text-xs text-fg-muted">Một bao dùng cho một người: người có ngày sinh đang xem. Mở rồi thì đọc lại cả năm không mất thêm.</span>
+          </p>
+          <Button onClick={() => { ghi("gift_used", { mo_dun: bc.mo_dun }); void tai(true); }} disabled={dang} data-testid="nut-dung-li-xi">
+            <Gift aria-hidden /> Mở bằng bao lì xì
+          </Button>
+        </div>
+      )}
+      {!en && (bc.so_khoa ?? 0) > 0 && !ud && !((bc as unknown as BaoCao).phi?.li_xi) && (bc as unknown as BaoCao).phi && (
         <ThanhMoDay sao={(bc as unknown as BaoCao).phi!.sao} khoa={bc.so_khoa ?? 0} dang={dang}
           moKhoa={() => { ghi("sao_cta_clicked", { tu: "thanh_day", mo_dun: bc.mo_dun, so_chuong: bc.so_khoa }); void tai(true); }} />
       )}

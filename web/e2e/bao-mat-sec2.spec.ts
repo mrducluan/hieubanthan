@@ -13,6 +13,10 @@ test("URL đo lường không mang mã thẻ", () => {
   expect(lamSachUrl("https://hieuban.com/hop-doi/cap-so")).toBe("https://hieuban.com/hop-doi/cap-so");
   expect(lamSachUrl("/tu-vi/sao-o-cung/tu-vi-cung-menh")).toBe("/tu-vi/sao-o-cung/tu-vi-cung-menh");
   expect(lamSachUrl("$direct")).toBe("$direct");
+  // LX-2027: mã bao lì xì chưa nhận + đường quay về sau đăng nhập không lọt lên đo lường.
+  expect(lamSachUrl("https://hieuban.com/li-xi/abcdef1234567890")).toBe("https://hieuban.com/li-xi/:ma");
+  expect(lamSachUrl("/dang-nhap?tiep=%2Fli-xi%2Fabcdef1234567890")).toBe("/dang-nhap?tiep=%2Fli-xi%2F%3Ama");
+  expect(lamSachUrl("/li-xi-tet-2027")).toBe("/li-xi-tet-2027");
 });
 
 test("đích ?tiep= chỉ trong site", () => {

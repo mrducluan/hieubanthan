@@ -74,3 +74,19 @@ test("KW-6T tuần 3: đủ 4 bài, slug không trùng lô trước, mỗi bài 
     }
   }
 });
+
+// HD-TH (#353): 12 tình huống minh hoạ là NHÁP chờ Chủ biên viết dày thêm — chưa đòi điểm 85, nhưng không được có lỗi chặn,
+// không link ra ngoài site, không còn các chỗ sai dữ kiện đã soát.
+const dsHd: BaiKhoiTao[] = docThuMuc(new URL("hoi-dap-tinh-huong/", THU_MUC));
+test("HD-TH: 12 bài nháp, không lỗi chặn, link trong site, đã sửa dữ kiện sai", () => {
+  assert.equal(dsHd.length, 12);
+  for (const b of dsHd) {
+    const kq = kiemDinhBai({ ...b, noi_dung: noiDungLexical(b.html), ky_ten: "ban_bien_tap" });
+    assert.deepEqual(kq.muc.filter((m) => m.muc_do === "loi" || m.chan).map((m) => `${b.slug} ${m.ma}`), []);
+    for (const m of b.html.matchAll(/href="([^"]+)"/g)) assert.match(m[1]!, /^\/[a-z0-9\-/#?=&.]*$/, m[1]);
+    const chu = JSON.stringify(b);
+    for (const sai of ["Biểu đạt", "Lưu niên 12 tháng", "đại vận mới trong Tử vi", "lăng kính", "Hợp đôi đa hệ thống", "4 hệ thống",
+      "ưu tiên người đứng tên"]) assert.ok(!chu.includes(sai), `${b.slug}: còn "${sai}"`);
+    assert.match(b.html, /Tình huống minh hoạ tổng hợp/);
+  }
+});

@@ -14,6 +14,8 @@ import { CauTraLoi } from "@/components/hoi/CauTraLoi";
 import { useMaCuaToi } from "@/lib/sao";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
+import { LoiMoiChuyenGiaTuDong } from "@/components/chuyen-gia/LoiMoiChuyenGia";
+import { nenMoiChuyenGia } from "@/lib/moi-chuyen-gia";
 
 export interface KetQuaHoi {
   van?: string;
@@ -39,6 +41,8 @@ export interface KetQuaHoi {
   hoiLai?: { cau: string; chon: string[] } | null;
   /** EN-ALL GĐ 3d — đoạn hỗ trợ mềm (engine `ho_tro`, chỉ bản Anh): hiện trong khung dịu TRÊN câu trả lời. */
   hoTro?: string;
+  /** Câu khủng hoảng / từ chối / dẫn hướng (engine phan_loai.xu_ly không phải trả lời thường): không bao giờ mời mua. */
+  dacBiet?: boolean;
 }
 
 interface Tin extends KetQuaHoi {
@@ -283,6 +287,16 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO: nhanOVao, goiY
           </Button>
         </form>
         {dieuKhienDuoi && <div className="mt-3">{dieuKhienDuoi}</div>}
+        {!hd.en && (
+          <div className="mt-3 empty:hidden">
+            <LoiMoiChuyenGiaTuDong
+              moDun={moDun}
+              kichHoat={nenMoiChuyenGia(tin, dang)}
+              goiYCau={daHoi[daHoi.length - 1]?.van}
+              nguon={`chat_${moDun}`}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
