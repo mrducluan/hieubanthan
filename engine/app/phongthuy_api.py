@@ -189,19 +189,20 @@ DOC_ANH_MOT_ANH, DOC_ANH_TONG = 1_600_000, 4_000_000
 
 
 class DocAnhInput(BaseModel):
-    """PT-V2 — gửi 1..3 ảnh nhà cho lớp đọc ảnh (tầng NARRATIVE, `narrative/doc_anh_nha.py`). Kết quả chỉ là NHÃN cần người
+    """PT-V2 — gửi 1..6 ảnh nhà cho lớp đọc ảnh (tầng NARRATIVE, `narrative/doc_anh_nha.py`). Kết quả chỉ là NHÃN cần người
     dùng xác nhận (`can_xac_nhan`); web ghép vào bố cục với `nguon: anh` sau khi người dùng bấm Đúng."""
     model_config = ConfigDict(extra="forbid")
 
-    anh: list[AnhVao] = Field(min_length=1, max_length=3)
+    anh: list[AnhVao] = Field(min_length=1, max_length=6)
     goc: Annotated[str, StringConstraints(strip_whitespace=True, max_length=60)] | None = Field(default=None, description="Gợi ý góc chụp, vd 'phòng khách'")
     loai_nha: Annotated[str, StringConstraints(strip_whitespace=True, max_length=30)] | None = None
     y_dinh: Annotated[str, StringConstraints(strip_whitespace=True, max_length=40)] | None = None
+    ngon_ngu: Literal["vi", "en"] = "vi"
 
     @model_validator(mode="after")
     def _tong(self) -> "DocAnhInput":
         if sum(len(a.du_lieu) for a in self.anh) > DOC_ANH_TONG:
-            raise ValueError("Tổng dung lượng ảnh quá lớn — gửi tối đa 3 ảnh, mỗi ảnh đã thu nhỏ.")
+            raise ValueError("Tổng dung lượng ảnh quá lớn — gửi tối đa 6 ảnh, mỗi ảnh đã thu nhỏ.")
         return self
 
 
@@ -211,7 +212,8 @@ def api_doc_anh(inp: DocAnhInput) -> dict:
     `da_bat: false, ly_do_tat: chua_dat_khoa` (không lỗi 5xx); hết lượt RL-1 → `het_luot`; lỗi dịch vụ → `loi_dich_vu`."""
     from app.narrative import doc_anh_nha  # noqa: PLC0415
     r = doc_anh_nha.doc_anh({"anh": [{"du_lieu": a.du_lieu, "loai": a.loai} for a in inp.anh],
-                             "goc": inp.goc, "loai_nha": inp.loai_nha, "y_dinh": inp.y_dinh})
+                             "goc": inp.goc, "loai_nha": inp.loai_nha, "y_dinh": inp.y_dinh,
+                             "ngon_ngu": inp.ngon_ngu})
     return {"engine_version": ENGINE_VERSION, **r}
 
 
