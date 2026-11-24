@@ -9,6 +9,7 @@ import { postJson } from "@/lib/goi-api";
 import { ghi } from "@/lib/do-luong";
 import { useHoSoNha } from "@/lib/ho-so-nha";
 import { useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
+import { gopTenHien, tenTheo, type TenHien } from "@/lib/ten-hien";
 import { cn } from "@/lib/utils";
 import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
 
@@ -20,13 +21,15 @@ interface DoHuongRes {
   trach: { quai: string; nhom: string };
   du_nien?: { du_nien: string; cat: boolean };
   canh_bao_y?: string | null;
+  ten_hien?: TenHien;
 }
 interface HuyenKhongRes {
-  van: number; cuc_ten: string;
+  van: number; cuc: string; cuc_ten: string;
   toa: { son: string; quai: string; phuong: string };
   huong: { son: string; quai: string; phuong: string };
   luu_nien: { nam: number; tam: number; sao_tam: string };
   cuc_y?: { y: string; goi_y: string };
+  ten_hien?: TenHien;
 }
 
 interface MucHoi {
@@ -274,6 +277,7 @@ export function HoiGiXemNay({
   const muc = DANH_SACH_HOI.find((x) => x.ma === chon) ?? DANH_SACH_HOI[0]!;
   const thieuHuong = Boolean(muc.can_huong && !coHuong);
   const thieuSinh = Boolean(muc.can_sinh && !coSinh);
+  const tn = tenTheo(gopTenHien(doHuongKQ?.ten_hien, hkKQ?.ten_hien), en);
 
   const chonMuc = (ma: MaIntentPT) => {
     setChon(ma);
@@ -364,14 +368,14 @@ export function HoiGiXemNay({
             <p className="text-sm font-medium text-fg">
               {doHuongKQ.du_nien?.cat ? "✓ " : "⚠ "}
               {en
-                ? `Measured door: ${doHuongKQ.do_huong}° (${doHuongKQ.huong} · ${doHuongKQ.son_huong})`
+                ? `Measured door: ${doHuongKQ.do_huong}° (${tn("huong", doHuongKQ.huong)} · ${tn("son", doHuongKQ.son_huong)})`
                 : `Hướng cửa đã đo: ${doHuongKQ.do_huong}° (${doHuongKQ.huong} · sơn ${doHuongKQ.son_huong})`}
-              {doHuongKQ.du_nien ? ` — ${doHuongKQ.du_nien.du_nien}` : ""}
+              {doHuongKQ.du_nien ? ` — ${tn("du_nien", doHuongKQ.du_nien.du_nien)}` : ""}
             </p>
             {hkKQ && (
               <p className="text-fg-muted">
                 {en
-                  ? `Flying Stars Period ${hkKQ.van}: ${hkKQ.cuc_ten} · Facing ${hkKQ.huong.quai}.`
+                  ? `Flying Stars Period ${hkKQ.van}: ${tn("cuc_hk", hkKQ.cuc)} · Facing ${tn("quai", hkKQ.huong.quai)}.`
                   : `Huyền Không Vận ${hkKQ.van}: ${hkKQ.cuc_ten} · Hướng ${hkKQ.huong.quai}.`}
               </p>
             )}
@@ -381,7 +385,7 @@ export function HoiGiXemNay({
           <div className="rounded-lg border border-gold/40 bg-gold/10 p-3 text-xs space-y-1" data-testid="hoi-gi-ket-qua-thuc">
             <p className="text-sm font-medium text-fg">
               {en
-                ? `Annual ${hkKQ.luu_nien.nam}: ${hkKQ.luu_nien.sao_tam} in Centre · Period ${hkKQ.van} (${hkKQ.cuc_ten})`
+                ? `Annual ${hkKQ.luu_nien.nam}: ${tn("sao_bay", hkKQ.luu_nien.sao_tam)} in Centre · Period ${hkKQ.van} (${tn("cuc_hk", hkKQ.cuc)})`
                 : `Lưu niên ${hkKQ.luu_nien.nam}: ${hkKQ.luu_nien.sao_tam} nhập trung · Vận ${hkKQ.van} (${hkKQ.cuc_ten})`}
             </p>
             {hkKQ.cuc_y && <p className="text-fg-muted">{hkKQ.cuc_y.goi_y}</p>}
