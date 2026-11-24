@@ -130,7 +130,7 @@ test("GĐ 2: /hoi-chuyen-gia chỉ nhận ?mang= (không nhận ?cau= qua URL đ
   expect(await page.locator("main").innerText()).not.toMatch(CUM_THUC_EP);
   expect(vp).toEqual([]);
 
-  // Trang /tac-gia có lối dẫn tới /hop-tac-chuyen-gia
+  // Trang /tac-gia mặc định ẩn lối dẫn tới /hop-tac-chuyen-gia cho tới khi bật NEXT_PUBLIC_MO_HOP_TAC_CG=1
   await page.goto("/tac-gia");
-  await expect(page.locator('a[href="/hop-tac-chuyen-gia"]')).toBeVisible();
+  await expect(page.locator('a[href="/hop-tac-chuyen-gia"]')).toHaveCount(0);
 });
