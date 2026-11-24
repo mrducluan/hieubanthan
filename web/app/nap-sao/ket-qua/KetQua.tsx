@@ -14,6 +14,8 @@ import { maDonQuayVe } from "@/lib/thanh-toan/ma-don";
 type Don = { ma_don: number; sao: number; so_tien: number; trang_thai: string; loai?: string };
 /** SAO-HV (0028): đơn hội viên năm trả xong → về thẻ hội viên ở Tài khoản (không có Sao để "nhận"). */
 const laHoiVien = (d: Don | null) => d?.loai === "hoi_vien";
+/** LX-2027 (0042): đơn Lì xì trả xong → về trang lì xì để gửi link (không có Sao để "nhận"). */
+const laLiXi = (d: Don | null) => d?.loai === "li_xi";
 const HOI_TOI_DA = 100; // ~5 phút, 3 giây/lần
 
 export function KetQua() {
@@ -72,7 +74,11 @@ export function KetQua() {
   const huy = p.get("huy") === "1" || (kq !== null && kq !== "0");
   return (
     <div className="glass mt-8 space-y-4 rounded-2xl p-6" data-testid="ket-qua-nap" data-trang-thai={don.trang_thai}>
-      {don.trang_thai === "da_tra" && laHoiVien(don) ? (
+      {don.trang_thai === "da_tra" && laLiXi(don) ? (
+        <><CheckCircle2 className="mx-auto size-10 text-jade" aria-hidden />
+          <p className="text-lg text-fg" data-testid="li-xi-san-sang">Bao lì xì đã sẵn sàng. Cảm ơn bạn!</p>
+          <p className="text-sm text-fg-muted">Vào trang Lì xì Tết 2027 để chép link từng bao và gửi qua Zalo, Messenger. Mỗi bao mở báo cáo năm 2027 cho một người.</p></>
+      ) : don.trang_thai === "da_tra" && laHoiVien(don) ? (
         <><CheckCircle2 className="mx-auto size-10 text-jade" aria-hidden />
           <p className="text-lg text-fg" data-testid="hoi-vien-kich-hoat">Hội viên năm đã kích hoạt. Cảm ơn bạn!</p>
           <p className="text-sm text-fg-muted">Mọi chương Luận giải toàn bộ đã mở cho bạn; Sao tặng hằng tháng và lượt hỏi chuyên gia xem ở thẻ hội viên trong Tài khoản. Mua một lần, không tự gia hạn.</p></>
@@ -81,7 +87,7 @@ export function KetQua() {
           <p className="text-lg text-fg">Đã nhận {don.sao} Sao. Cảm ơn bạn!</p></>
       ) : don.trang_thai === "cho" && !huy ? (
         <><Clock className="mx-auto size-10 text-gold" aria-hidden />
-          <p className="text-fg">{het ? "Chưa thấy tiền về. Nếu bạn đã chuyển khoản, Sao sẽ được cộng khi ngân hàng báo (thường vài phút)." : "Đang chờ ngân hàng báo tiền về…"}</p></>
+          <p className="text-fg">{het ? (laLiXi(don) ? "Chưa thấy tiền về. Nếu bạn đã chuyển khoản, bao lì xì sẽ sẵn sàng khi ngân hàng báo (thường vài phút)." : "Chưa thấy tiền về. Nếu bạn đã chuyển khoản, Sao sẽ được cộng khi ngân hàng báo (thường vài phút).") : "Đang chờ ngân hàng báo tiền về…"}</p></>
       ) : (
         <><XCircle className="mx-auto size-10 text-fg-faint" aria-hidden />
           <p className="text-fg">{don.trang_thai === "hoan" ? "Đơn đã được hoàn tiền." : don.trang_thai === "sai_tien" ? "Số tiền chuyển không khớp gói — ban quản trị sẽ liên hệ đối soát." : "Đơn đã huỷ. Bạn chưa bị trừ tiền."}</p></>
@@ -91,7 +97,9 @@ export function KetQua() {
         {quayVe && don.trang_thai === "da_tra" && (
           <Button asChild data-testid="quay-ve"><Link href={quayVe}>Quay lại xem tiếp</Link></Button>
         )}
-        {laHoiVien(don) ? (
+        {laLiXi(don) ? (
+          <Button asChild><Link href="/li-xi-tet-2027#bao-da-tao">Gửi bao lì xì</Link></Button>
+        ) : laHoiVien(don) ? (
           <Button asChild variant={quayVe && don.trang_thai === "da_tra" ? "secondary" : undefined}><Link href="/tai-khoan#hoi-vien">Xem thẻ hội viên</Link></Button>
         ) : (<>
           <Button asChild variant={quayVe && don.trang_thai === "da_tra" ? "secondary" : undefined}><Link href="/tai-khoan#sao">Xem ví Sao</Link></Button>

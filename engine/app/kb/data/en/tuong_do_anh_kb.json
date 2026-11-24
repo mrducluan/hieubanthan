@@ -1,0 +1,61 @@
+{
+ "_trang_thai": "bien_tap",
+ "nhan_tuong": {
+  "nguon": {
+   "3d": "On-device relative 3D estimate from the face mesh (reference — change it if it looks wrong)",
+   "roi": "On-device image-region estimate (low confidence — lighting dependent; change it if it looks wrong)"
+  },
+  "loi": {
+   "dien_trach.hep": "3D brow-to-eye gap is narrow ({so}).",
+   "dien_trach.rong_day": "3D brow-to-eye gap is wide and open ({so}).",
+   "mat_hinh.dai_hep": "3D eye aspect ratio indicates elongated eyes (EAR {so}).",
+   "mat_hinh.tron_to": "3D eye aspect ratio indicates round, wide eyes (EAR {so}).",
+   "tam_bach.duoi": "Estimated visible sclera below iris ({so}).",
+   "tam_bach.tren": "Estimated visible sclera above iris ({so}).",
+   "tam_bach.khong": "No visible sclera exposure above or below the iris.",
+   "son_can.cao_lien": "3D nasal root depth is elevated and continuous ({so}).",
+   "son_can.thap_gay": "3D nasal root depth is recessed ({so}).",
+   "song_mui.go": "3D nasal bridge convexity shows a noticeable bump ({so}).",
+   "song_mui.thang_cao": "3D nasal bridge projection is straight and high ({so}).",
+   "song_mui.thap": "3D nasal bridge projection is low ({so}).",
+   "chuan_dau.to_tho": "3D nose tip ratio is broad ({so}).",
+   "chuan_dau.tron_day": "3D nose tip ratio is rounded and full ({so}).",
+   "chuan_dau.nhon_mong": "3D nose tip ratio is narrow and pointed ({so}).",
+   "luong_quyen.cao_co_thit": "3D cheekbone projection is high and full ({so}).",
+   "luong_quyen.thap_phang": "3D cheekbone projection is flat ({so}).",
+   "mieng.moi_day": "3D lip fullness ratio indicates full lips ({so}).",
+   "mieng.nho_mong": "3D lip fullness ratio indicates thin lips ({so}).",
+   "cam.vuong_rong": "3D chin width ratio is square and broad ({so}).",
+   "cam.nhon_lem": "3D chin width ratio is narrow and tapered ({so}).",
+   "cam.tron_day": "3D chin width ratio is rounded and balanced ({so}).",
+   "long_may.thua_nhat": "Estimated brow density is light and sparse ({so}).",
+   "long_may.thanh_dai": "3D brow length ratio is long and slender ({so}).",
+   "long_may.dam_ngan": "3D brow length ratio is short and compact ({so}).",
+   "tran.cao_rong_day": "3D forehead convexity is full and rounded ({so}).",
+   "tran.lom_giua": "3D forehead convexity is slightly recessed ({so}).",
+   "net_mat.de_gan": "3D expression cues look relaxed and approachable ({so}).",
+   "net_mat.buon_met": "3D expression cues look subdued or tired ({so}).",
+   "net_mat.nghiem": "3D brow tension cues look serious and focused ({so}).",
+   "sac_tong.do_ung": "Sampled skin ROI trends reddish (lighting-dependent estimate).",
+   "sac_tong.vang_xin": "Sampled skin ROI trends dull yellow (lighting-dependent estimate).",
+   "sac_tong.sang_nhuan": "Sampled skin ROI looks even and bright (lighting-dependent estimate).",
+   "le_duong.tham_quang": "Under-eye luminance contrast is elevated ({so}, lighting dependent).",
+   "le_duong.day_tuoi": "Under-eye tone is even with cheek ROI ({so}, lighting dependent).",
+   "moi_sac.hong_nhuan": "Lip redness contrast is healthy ({so}, lighting dependent).",
+   "moi_sac.nhat_kho": "Lip redness contrast is low ({so}, lighting dependent).",
+   "nep_tran.khong": "Forehead edge density is minimal ({so}, image-quality dependent).",
+   "nep_tran.vai_nep_lien": "Moderate forehead line density ({so}, image-quality dependent).",
+   "nep_tran.nhieu_dut": "Elevated forehead line density ({so}, image-quality dependent)."
+  },
+  "canh_bao": {
+   "sac_ngoai_dai": "The photo is too dark or too bright, so no complexion estimate was made (the device cannot separate natural skin tone from lighting). Please choose the complexion answer yourself."
+  },
+  "bridges": {
+   "nguon": "Lillian Bridges — Face Reading in Chinese Medicine (editorial summary)",
+   "tieu_de": "Two five-element readings: {ten}",
+   "dong_thuan": "Both readings agree: the Classical Five Shapes ({ten_dong}) and Lillian Bridges' measurement-based grouping ({ten}) point to the {hanh} element.",
+   "bo_tro_pha": "The two readings complement each other: the Classical Five Shapes show a blended form, while Lillian Bridges' measurement-based grouping highlights {ten}.",
+   "bo_tro": "The two readings complement each other: the Classical Five Shapes lean toward {ten_dong}, while Lillian Bridges' measurement-based grouping highlights {ten} — each adds nuance."
+  }
+ }
+}

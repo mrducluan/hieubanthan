@@ -32,11 +32,25 @@ export interface ChuongNhanTuong extends ChuongDoiSongMo {
   thieu?: string | null;
   luu_nien?: { nam_nay: LuuNienVi; toi: LuuNienVi[]; tuoi_mu: number; nam_am_xem: number };
 }
+export interface PhuongTayBridges {
+  hanh: string;
+  ten?: string;
+  ten_vi?: string;
+  ten_en?: string;
+  nghia_doi_thuong?: string;
+  mat_tich_cuc?: string;
+  mat_tieu_cuc?: string;
+  dong_thuan_dong_tay?: string;
+  trang_thai_dong_thuan?: "dong_thuan" | "bo_tro";
+  nguon?: string;
+  do_tin?: string;
+  ghi_chu?: string;
+}
 export interface BaoCaoNhanTuong extends BaoCaoDoiSong {
   ten: string; thieu: string[];
   chuong: ChuongNhanTuong[];
   da_tinh: { so_cau: number; so_dac_diem: number; dac_diem: string[]; ngu_hinh: { hinh: string; ten: string | null; diem: Record<string, number>; troi: string[] };
-    ban_do: Record<string, MucVung>; ngay_xem: string };
+    ban_do: Record<string, MucVung>; ngay_xem: string; phuong_tay_bridges?: PhuongTayBridges | null };
 }
 
 export function docTraLoi(): TraLoi {

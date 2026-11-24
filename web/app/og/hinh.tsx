@@ -136,7 +136,7 @@ export function HinhMang({ mang, tot, so, hao }: { mang: MangHinh; tot: string[]
 /** TR-1: ba lá bài xoè quạt, lá giữa ngửa có ngôi sao (hình trang trí, không phải tranh của bộ bài nào). */
 function BaLaBai() {
   return (
-    <svg width={260} height={260} viewBox="0 0 120 120">
+    <svg width={380} height={380} viewBox="0 0 120 120" style={{ position: "absolute", left: CX - 190, top: CY - 190 }}>
       <rect x={20} y={28} width={40} height={64} rx={5} transform="rotate(-18 40 60)" fill="#141230" stroke="#E9C46A" strokeWidth={1.8} />
       <rect x={60} y={28} width={40} height={64} rx={5} transform="rotate(18 80 60)" fill="#141230" stroke="#E9C46A" strokeWidth={1.8} />
       <rect x={40} y={20} width={40} height={66} rx={5} fill="#f3ead6" stroke="#E9C46A" strokeWidth={2.2} />
@@ -149,7 +149,7 @@ function BaLaBai() {
 /** NT-1: gương mặt giản lược với ba vạch tam đình (hình trang trí, không phải mặt ai). */
 function GuongMat() {
   return (
-    <svg width={260} height={260} viewBox="0 0 120 120">
+    <svg width={380} height={380} viewBox="0 0 120 120" style={{ position: "absolute", left: CX - 190, top: CY - 190 }}>
       <path d="M60,8 C36,8 22,30 22,52 C22,76 42,98 60,98 C78,98 98,76 98,52 C98,30 84,8 60,8 Z" fill="none" stroke="#E9C46A" strokeWidth={2.2} />
       <path d="M24,38 H96 M24,62 H96" stroke="#6FD3B5" strokeWidth={1.4} strokeDasharray="3 4" />
       <path d="M38,44 Q46,38 54,44 M66,44 Q74,38 82,44" fill="none" stroke="#E9C46A" strokeWidth={2.4} strokeLinecap="round" />

@@ -16,6 +16,7 @@ export type SuKien =
   | "advisor_question_started" | "advisor_question_completed" | "feedback_submitted"
   | "credit_earned" | "chart_interacted" | "daily_viewed"
   | "checkout_viewed" | "checkout_started" | "payment_succeeded"
+  | "gift_purchased" | "gift_claimed" | "gift_used"
   // SAO-2: phễu xem trước → chạm khoá → mở khoá / nạp
   | "paywall_viewed" | "unlock_clicked" | "unlock_succeeded" | "quota_reached" | "sao_prompt_answered"
   // TS-PHAI: đổi trường phái thần số · HN-2: người dùng nêu ý định trong ngày (chỉ mã ý định, không gửi câu gõ)
@@ -121,6 +122,18 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   co_anh: "number",     // UI-PT2 P6: 1 = có chọn ảnh góc nhà (chỉ trên máy)
   so_anh: "number",     // PT-V2: số ảnh gửi máy đọc (1–3) — không bao giờ là ảnh hay tên tệp
   so_dau_hieu: "number", // PT-V2: số dấu hiệu máy gợi ý
+  // PT-V3 — chỉ mã / cờ / số đếm; không bao giờ số độ la bàn, toạ độ, năm xây hay chữ người dùng gõ.
+  rieng: "number",      // HG-1: 1 = câu trả lời đã dựa trên dữ kiện của người dùng
+  thieu: "string",      // HG-1: mã thứ còn thiếu nối bằng "+" (huong+sinh)
+  co: "number",         // HG-1: trả lời nhanh có (1) / không (0) cho một mã dấu hiệu
+  on_dinh: "string",    // LK-1: on / giu_yen / do_lai (mức engine trả)
+  so_mau_nhom: "string", // LK-1: it / vua / nhieu (nhóm số mẫu, không phải con số)
+  hieu_chinh: "number", // LK-1: 1 = máy báo la bàn chưa hiệu chỉnh
+  nhieu: "number",      // LK-1: 1 = hai lần đo lệch nhau (nghi nhiễu sắt)
+  hai_lan: "number",    // LK-1: 1 = hướng chốt từ hai lần đo
+  cach: "string",       // VT-1: la_ban / khung
+  cho: "string",        // VT-1: mã vật vừa ghi (cua_chinh, bep…)
+  so_tang: "number", co_truc: "boolean",
   // NT-1: Nhân tướng học — chỉ MÃ: số câu đã trả lời, lựa chọn tam đình máy đo, ngũ hình, số gợi ý từ ảnh (không chữ người dùng)
   lua_chon: "string", ngu_hinh: "string", so_goi_y: "number",
   so_diem: "number",    // ANH-2: số điểm mốc người dùng đã chấm khi đo trên ảnh (chỉ con số, không toạ độ)
@@ -148,6 +161,12 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   canh_bao: "string",   // DC-MB: mã cảnh báo hướng mặt bằng (khong_vong / kiem_huong / khong) — không độ, không năm
   co_gio: "boolean",    // DC-L12: Lịch 12 tháng có giờ sinh (đọc thêm lớp Bát tự) hay không — chỉ cờ
   muc_tieu: "string",   // DC-L12: mã trọng tâm năm (tang_truong / ky_ket / giu_tien / ra_mat)
+  // PR #338 (tương tác hai chiều với phép đo ước lượng): người dùng báo "chưa đúng" — CHỈ MÃ trong danh mục engine.
+  cau: "string",        // do_mat_chinh: mã câu khảo sát Nhân tướng được chỉnh
+  may: "string",        // do_mat_chinh: mã lựa chọn MÁY đo ra
+  nguoi: "string",      // do_mat_chinh: mã lựa chọn NGƯỜI DÙNG chọn lại
+  do_tin: "string",     // do_mat_chinh: thap / trung_binh / cao / so (máy trả con số) / khong
+  tay: "string",        // chỉ tay: trai / phai (duong_cv_phan_hoi, chup_tay…)
   kenh: "string",       // HCS-1: share_target — zalo / messenger / facebook / anh / chep / luu_anh / khac
   qc: "string",         // META-QC / QC-G: "meta" | "google" = phiên này (hoặc ≤ 30 ngày trước) vào từ quảng cáo Facebook / Instagram (lib/nguon-qc.ts)
 };

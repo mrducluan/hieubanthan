@@ -41,21 +41,21 @@ test("robots khai 2 sitemap; sitemap ngày đúng cửa sổ; /blog/trang/1 → 
 
 test("trang chủ + blog có tiêu đề chứa từ khoá; WebSite có keywords", async ({ request }) => {
   const html = await (await request.get("/")).text();
-  expect(html).toContain("<title>Hiểu Bản Thân — Thần số học và huyền học online miễn phí</title>");
+  expect(html).toContain("<title>Hiểu Bản Thân — Huyền học &amp; thấu hiểu bản thân miễn phí</title>");
   expect(html).toContain('"alternateName":["hieuban.com","Hieuban","Hieu Ban Than","Hiểu Bản"]');
   const blog = await (await request.get("/blog")).text();
   expect(blog).toMatch(/<title>Blog thần số học, Tử vi, phong thuỷ, Kinh Dịch/);
 });
 
-// SEO-N (2026-11-10): tìm "tử vi hieuban" Google trả trang chủ — trang dịch vụ phải tự đứng tên từ khoá + thương hiệu,
-// trang chủ không tranh từ "Tử vi"; WebApplication của site chỉ ở trang chủ.
+// SEO-N (2026-11-10) & SEO-GEO (2026-11-24): trang dịch vụ tự đứng tên từ khoá + thương hiệu,
+// trang chủ không tranh từ "Tử vi", "Bát tự", "Thần số học"; WebApplication của site chỉ ở trang chủ.
 test("SEO-N: trang dịch vụ có từ khoá + thương hiệu trong tiêu đề; trang chủ không tranh từ khoá", async ({ request }) => {
   const chu = await (await request.get("/")).text();
   const tieuDeChu = /<title>([^<]*)<\/title>/.exec(chu)?.[1] ?? "";
   expect(tieuDeChu).toContain("Hiểu Bản Thân");
-  expect(tieuDeChu).not.toMatch(/Tử vi|Bát tự/);
+  expect(tieuDeChu).not.toMatch(/Tử vi|Bát tự|Thần số học/i);
   expect(chu).toMatch(/"@type":"WebApplication","@id":"[^"]*\/#ung-dung"/);
-  for (const [duong, tu] of [["/tu-vi", "Xem Tử vi"], ["/bat-tu", "Xem Bát tự"], ["/kinh-dich", "Gieo quẻ Kinh Dịch"], ["/phong-thuy", "Xem hướng nhà hợp tuổi"], ["/than-so", "Tra cứu thần số học"]] as const) {
+  for (const [duong, tu] of [["/tu-vi", "Xem Tử vi"], ["/bat-tu", "Xem Bát tự"], ["/kinh-dich", "Gieo quẻ Kinh Dịch"], ["/phong-thuy", "Xem hướng nhà hợp tuổi"], ["/than-so", "Xem thần số học"]] as const) {
     const html = await (await request.get(duong)).text();
     const t = /<title>([^<]*)<\/title>/.exec(html)?.[1] ?? "";
     expect(t.startsWith(tu), `${duong}: ${t}`).toBe(true);
@@ -177,4 +177,36 @@ test("SEO-P: tiêu đề trả lời câu hỏi, 12 con giáp ngày, năm nhuậ
   expect(menh).toContain("Câu hỏi tự soi cho người sinh năm 2019");
   const tt = await (await request.get("/bat-tu/thap-than")).text();
   expect(tt).toContain("<title>Thập thần trong Bát tự là gì?");
+});
+
+// SEO-GEO (2026-11-24): Cẩm nang GEO mở trên trang trụ, bảng so sánh, link trực tiếp trang con, <time>,
+// schema đầy đủ trên /ban-do-doi-ngu + /chi-tay, /pricing.md động và anchor ngược chuẩn từ khoá.
+test("SEO-GEO: cẩm nang pillar mở, /ban-do-doi-ngu & /chi-tay đủ schema, /pricing.md hoạt động, anchor ngược chuẩn", async ({ request }) => {
+  for (const [duong, con] of [
+    ["/than-so", "/than-so/y-nghia-so/so-7"],
+    ["/tu-vi", "/tu-vi/chinh-tinh/sao-tu-vi"],
+    ["/bat-tu", "/bat-tu/nhat-chu/nhat-chu-giap"],
+    ["/phong-thuy", "/phong-thuy/huong-hop-tuoi/cung-kham-bac"],
+  ] as const) {
+    const html = await (await request.get(duong)).text();
+    expect(html, duong).toContain('data-testid="cam-nang-pillar"');
+    expect(html, duong).toContain("<time dateTime=");
+    expect(html, duong).toContain("<table");
+    expect(html, duong).toContain(`href="${con}"`);
+  }
+  for (const duong of ["/ban-do-doi-ngu", "/chi-tay"] as const) {
+    const html = await (await request.get(duong)).text();
+    const t = (/<title>([^<]*)<\/title>/.exec(html)?.[1] ?? "").replace(/&amp;/g, "&");
+    expect(t, duong).toContain("· Hiểu Bản Thân");
+    expect(t.length, `${duong}: ${t}`).toBeLessThanOrEqual(70);
+    expect(html, duong).toContain('"@type":"WebApplication"');
+    expect(html, duong).toContain('"@type":"FAQPage"');
+    expect(html, duong).toContain('"@type":"BreadcrumbList"');
+  }
+  const md = await request.get("/pricing.md");
+  expect(md.status()).toBe(200);
+  expect(md.headers()["content-type"]).toContain("text/markdown");
+  expect(await md.text()).toContain("/goi-xem");
+  const so7 = await (await request.get("/than-so/y-nghia-so/so-7")).text();
+  expect(so7).toContain("Xem thần số học online miễn phí");
 });

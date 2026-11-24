@@ -29,7 +29,12 @@ export interface HoiMangRes {
   ten_hien?: TenHien;
   error?: string;
   luot?: LuotHoi;
+  phan_loai?: { xu_ly?: string; [k: string]: unknown };
 }
+
+/** Câu khủng hoảng / từ chối / dẫn hướng tâm linh (engine `chung.DAC_BIET` + từ chối cứng). */
+export const XU_LY_DAC_BIET = ["an_toan", "tu_choi", "tu_choi_nhe", "dan_huong"];
+export const laDacBiet = (xu?: string) => Boolean(xu && XU_LY_DAC_BIET.includes(xu));
 
 /** SAO-2: máy chủ báo lượt miễn phí còn lại / Sao vừa trừ → một dòng nhỏ dưới câu trả lời. */
 export type LuotHoi = { con_lai: number; tran: number; tai_khoan: boolean } | { sao_da_tru: number; so_du: number | null };
@@ -62,6 +67,7 @@ export async function hoiMang<T extends HoiMangRes>(
     hoiTiep: d.hoi_tiep,
     hoiLai: d.hoi_lai,
     hoTro: d.ho_tro || undefined,
+    dacBiet: laDacBiet(d.phan_loai?.xu_ly),
     canCu: d.can_cu?.length ? d.can_cu : undefined,
     phu: phu?.(d),
     canhBao: d.co_canh_bao?.filter((c) => !boQuaCanhBao.includes(c.loai)).map((c) => c.chi_tiet),

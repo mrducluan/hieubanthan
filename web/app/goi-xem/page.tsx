@@ -22,7 +22,11 @@ const DUONG = "/goi-xem";
 const vnd = (n: number) => `${n.toLocaleString("vi-VN")} ₫`;
 
 export async function generateMetadata(): Promise<Metadata> {
-  return apDungSeo(metaMacDinh(DUONG), await layNoiDungTrang(DUONG));
+  const base = metaMacDinh(DUONG);
+  return apDungSeo(
+    { ...base, alternates: { ...base.alternates, types: { "text/markdown": "/pricing.md" } } },
+    await layNoiDungTrang(DUONG),
+  );
 }
 
 export default async function Page() {

@@ -32,6 +32,47 @@ SO_NAM_TOI = 3
 TEN_HANH = {"kim": "Kim", "moc": "Mộc", "thuy": "Thủy", "hoa": "Hỏa", "tho": "Thổ"}
 _TZ = config.TZ_LICH_AM["viet"]
 
+def _phuong_tay_bridges(nh: dict, so_do_mat: dict | None = None) -> dict | None:
+    """Cách chia năm hành theo SỐ ĐO của Lillian Bridges, đặt cạnh Ngũ Hình cổ truyền. CHỈ có khi có số đo trên ảnh
+    (`so_do_mat`): không có số đo thì không có phép chia thứ hai để mà so — không tự lấy hành của Ngũ Hình rồi ghi
+    "hai cách cùng hướng". Lời + mẫu câu ở KB `tuong_do_anh_kb.json` (bản phủ tiếng Anh)."""
+    from app.calc import tuong_fuzzy  # noqa: PLC0415
+    from app.calc.nhan_tuong_do import kb_do_anh  # noqa: PLC0415
+    from app.kb import tuong_hoc_dot4_kb  # noqa: PLC0415
+
+    fuzzy = tuong_fuzzy.cau_noi_nhan_tuong(so_do_mat) if so_do_mat else None
+    if not fuzzy:
+        return None
+    vi = ngon_ngu.la_viet()
+    kbb = kb_do_anh()["nhan_tuong"]["bridges"]
+    hanh = fuzzy["ngu_hanh_bridges"]["hanh"]
+    b_kb = tuong_hoc_dot4_kb.tra_ngu_hanh_bridges(hanh) or {}
+    b_en = (kbb.get("hanh_en") or {}).get(hanh) or {}  # tên + lời tiếng Anh của năm hành (chỉ bản Anh dùng)
+    ten_en = b_en.get("ten_en", "")
+    ten_vi = b_kb.get("ten") or f"Tướng {TEN_HANH[hanh]}"
+    ten = ten_vi if vi else ten_en
+    nghia = (tuong_fuzzy._NGHIA_DOI_THUONG_MAT_VI[hanh] if vi else tuong_fuzzy._NGHIA_DOI_THUONG_MAT_EN[hanh])
+    tich_cuc = (b_kb.get("mat_tich_cuc") or nghia) if vi else b_en.get("mat_tich_cuc", nghia)
+    tieu_cuc = (b_kb.get("mat_tieu_cuc_can_chu_y") or "") if vi else b_en.get("mat_tieu_cuc", "")
+
+    hanh_dong = nh.get("hinh")
+    kb_dong = kb.ngu_hinh().get(hanh_dong) or kb.ngu_hinh()["pha"]
+    ten_dong = kb_dong.get("ten", str(hanh_dong))
+    if hanh_dong == hanh:
+        trang_thai, mau = "dong_thuan", "dong_thuan"
+    elif hanh_dong not in TEN_HANH:
+        trang_thai, mau = "bo_tro", "bo_tro_pha"
+    else:
+        trang_thai, mau = "bo_tro", "bo_tro"
+    dong_thuan = kbb[mau].format(ten_dong=ten_dong, ten=ten, hanh=TEN_HANH[hanh] if vi else b_en.get("hanh_en", ""))
+    return {
+        "hanh": hanh, "ten_vi": ten_vi, "ten_en": ten_en,
+        "tieu_de": kbb["tieu_de"].format(ten=ten),
+        "nghia_doi_thuong": nghia, "mat_tich_cuc": tich_cuc, "mat_tieu_cuc": tieu_cuc,
+        "dong_thuan_dong_tay": dong_thuan, "trang_thai_dong_thuan": trang_thai,
+        "do_tin": tuong_fuzzy.DO_TIN, "nguon": kbb["nguon"], "fuzzy_bridge": fuzzy,
+    }
+
 
 # ------------------------------------------------------------------ tiện ích
 def _nam_am(d: dt.date) -> int:
@@ -83,7 +124,7 @@ def _ten_bo_vi(ma: str) -> str:
 
 
 # ------------------------------------------------------------------ từng chương
-def _chuong_tong_quan(tl: dict, khop: list[str], nh: dict) -> dict:
+def _chuong_tong_quan(tl: dict, khop: list[str], nh: dict, pt_bridges: dict | None = None) -> dict:
     kbh = kb.ngu_hinh().get(nh["hinh"]) or kb.ngu_hinh()["pha"]
     diem = ", ".join(f"{_tn.ten('hanh', TEN_HANH[h])} {d}" for h, d in nh["diem"].items() if d)
     hop_nh = kh.hop("cot_loi", L("nt.dang_mat", "Dáng mặt: {ten}", ten=kbh['ten']), kbh["loi"], huong_xu_ly=kbh.get("viec"),
@@ -93,12 +134,25 @@ def _chuong_tong_quan(tl: dict, khop: list[str], nh: dict) -> dict:
                             L("nt.sach_hop", "Sách: {y} ({ten})", ten=kb.ten_nguon(kbh.get('nguon')), y=kbh['hop'])],
                     ma=kh.ma_mau(MO_DUN, "tong_quan", "ngu_hinh", nh["hinh"]), phai="tam_dinh_ngu_quan", bo_vi="khuon_mat",
                     vung="toan_mat", hanh=kbh.get("hanh"))
+    hop_dau = [hop_nh]
+    if pt_bridges:
+        from app.calc import tuong_fuzzy  # noqa: PLC0415
+        vi = ngon_ngu.la_viet()
+        tieu_de_dt = pt_bridges["tieu_de"]
+        noi_dung_dt = f"{pt_bridges['dong_thuan_dong_tay']} {pt_bridges['nghia_doi_thuong']} {pt_bridges['mat_tich_cuc']}".strip()
+        hop_dau.append(kh.hop(
+            "cot_loi", tieu_de_dt, noi_dung_dt,
+            huong_xu_ly=pt_bridges.get("mat_tieu_cuc") or None,
+            can_cu=[pt_bridges["nguon"], tuong_fuzzy.GHI_CHU_VI if vi else tuong_fuzzy.GHI_CHU_EN],
+            ma=kh.ma_mau(MO_DUN, "tong_quan", "dong_tay", pt_bridges["hanh"]),
+            phai=PHAI_CHUNG, bo_vi="khuon_mat", vung="toan_mat", hanh=pt_bridges["hanh"],
+        ))
     hop, doan, muc = _chuong_tu_dac_diem("tong_quan", khop, tl)
     c = kb.chuong()["tong_quan"]
     so = len(tl)
     tom_tat = kb.mau("muc_chuong", muc) if muc else kb.mau("khong_dau_hieu")
     return kh.chuong("tong_quan", c["tieu_de"], [str(kb.mau("mo_dau")).replace("{so}", str(so)), *doan],
-                     hop=[hop_nh, *hop][:TOI_DA_HOP + 1], muc=muc, tom_tat=tom_tat, cau_hoi=c["cau_hoi"],
+                     hop=[*hop_dau, *hop][:TOI_DA_HOP + len(hop_dau)], muc=muc, tom_tat=tom_tat, cau_hoi=c["cau_hoi"],
                      cau_tu_soi=L("nt.soi.tong_quan", "Trong những nét sách xưa gọi là 'thuận', nét nào bạn đã thật sự dùng được trong năm qua?"))
 
 
@@ -276,14 +330,16 @@ def _chuong_loi_khuyen(tl: dict, khop: list[str]) -> dict:
 # ------------------------------------------------------------------ báo cáo
 def bao_cao(tra_loi: dict | None, *, nam_sinh: dt.date | int | None = None, gioi_tinh: str | None = None,
             ngay_xem: dt.date | None = None, battu: dict | None = None, trong_so: dict | None = None,
-            ca_nhan: dict | None = None) -> dict:
-    """Báo cáo khuôn `doi_song_1`. `battu` = kết quả `battu_doi_song.phan_tich` (chỉ đọc `cach_1/cach_2.hanh`) — tuỳ chọn."""
+            ca_nhan: dict | None = None, so_do_mat: dict | None = None) -> dict:
+    """Báo cáo khuôn `doi_song_1`. `battu` = kết quả `battu_doi_song.phan_tich` (chỉ đọc `cach_1/cach_2.hanh`) — tuỳ chọn.
+    `so_do_mat` = số đo hình học từ `nhan_tuong_do.do_mat` (tuỳ chọn) để ghép cầu nối Ngũ Hành Lillian Bridges."""
     ngay_xem = ngay_xem or config.hom_nay_vn()
     tl = calc.tra_loi_sach(tra_loi)
     khop = calc.khop_dac_diem(tl)
     nh = calc.ngu_hinh(tl)
+    pt_bridges = _phuong_tay_bridges(nh, so_do_mat)
     chuong = [
-        _chuong_tong_quan(tl, khop, nh),
+        _chuong_tong_quan(tl, khop, nh, pt_bridges),
         _chuong_thuong("con_nguoi", tl, khop, L("nt.soi.con_nguoi", "Người thân thiết nhất sẽ gật đầu với nét nào, lắc đầu với nét nào?"), co_muc=False),
         _chuong_thuong("cong_viec_tien", tl, khop, L("nt.soi.cong_viec_tien", "Nét 'giữ của' hay 'tiêu nhanh' — tháng vừa rồi bạn thấy mình ở đâu?")),
         _chuong_thuong("tinh_cam_gia_dinh", tl, khop, L("nt.soi.tinh_cam", "Một người trong nhà mà bạn đã lâu chưa nhìn thẳng vào mắt — là ai?")),
@@ -313,6 +369,7 @@ def bao_cao(tra_loi: dict | None, *, nam_sinh: dt.date | int | None = None, gioi
           "ten": L("nt.ten_bao_cao", "Gương mặt của bạn"), "cot_loi": cot_loi, "chuong": chuong, "ket": str(kb.mau("ket")),
           "thieu": [c["thieu"] for c in chuong if c.get("thieu")],
           "da_tinh": {"so_cau": len(tl), "so_dac_diem": len(khop), "dac_diem": khop, "ngu_hinh": {**nh, "ten": (kb.ngu_hinh().get(nh["hinh"]) or {}).get("ten")},
+                      **({"phuong_tay_bridges": pt_bridges} if pt_bridges else {}),  # chỉ khi có số đo trên ảnh
                       "ban_do": {v: calc.gop_muc([x for x in ds if x != "trung_tinh"]) or "trung_tinh" for v, ds in ban_do.items()},
                       "ngay_xem": ngay_xem.isoformat()}}
     kh.ap_hoc(bc, trong_so, ca_nhan)
@@ -320,6 +377,9 @@ def bao_cao(tra_loi: dict | None, *, nam_sinh: dt.date | int | None = None, gioi
     from app.luangiai import sach_ghi_mon  # noqa: PLC0415
     bc["sach_ghi"] = sach_ghi_mon.nhan_tuong(khop, sach_ghi_mon.tuoi_tu(nam_sinh, ngay_xem), gioi_tinh)
     return bc
+
+
+luan_giai = bao_cao
 
 
 # ------------------------------------------------------------------ khảo sát (cho web)

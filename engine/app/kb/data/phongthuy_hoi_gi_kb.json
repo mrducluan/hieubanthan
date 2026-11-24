@@ -1,0 +1,215 @@
+{
+ "_nguon": "HG-1 — 'Hỏi gì xem nấy' của trang Phong thuỷ: tên câu hỏi, lời dẫn, mẫu câu trả lời. Câu trả lời riêng dựng bởi luangiai/phongthuy_hoi_gi.py từ phép tính có sẵn; tệp này chỉ giữ CHỮ.",
+ "source_id": "duong_trach_tam_yeu",
+ "school_id": "bat_trach_huyen_khong",
+ "trang_thai": "nhap_bien_tap",
+ "thu_tu": [
+  "cua_chinh",
+  "bo_cuc",
+  "gia_dinh",
+  "han_nam",
+  "so_sanh",
+  "mo_quan"
+ ],
+ "thieu": {
+  "huong": "Cần biết nhà quay về phía nào (đo bằng la bàn hoặc chọn trên ảnh vệ tinh).",
+  "sinh": "Cần năm sinh và giới tính của bạn (lấy từ hồ sơ).",
+  "nguoi_2": "Cần năm sinh và giới tính của người ở cùng.",
+  "dau_hieu": "Trả lời mấy câu có / không bên dưới để biết nhà bạn có điểm nào nên xử lý trước."
+ },
+ "luu_y": "Phong thuỷ ở đây là góc nhìn văn hoá để bố trí nhà hợp lý hơn — không thay kiến trúc sư, không hứa tài lộc, không giới thiệu vật phẩm.",
+ "cau_hoi": {
+  "cua_chinh": {
+   "tieu_de": "Cửa chính quay hướng này có hợp với tôi không?",
+   "mo_ta": "So hướng cửa với tuổi của bạn, kèm việc nên làm.",
+   "can": [
+    "huong",
+    "sinh"
+   ],
+   "cau_chat": "Cửa chính nhà tôi quay hướng hiện tại có hợp tuổi tôi không?",
+   "chung": "Hướng cửa hợp hay không tuỳ tuổi từng người: mỗi người có bốn hướng hợp và bốn hướng kém hơn. Đo hướng cửa rồi hệ thống so với tuổi bạn.",
+   "viec": [
+    "Giữ lối vào sáng, gọn, không để tủ cao hay giày dép chắn ngay cửa.",
+    "Cửa đã xây thì không cần đổi: hướng đầu giường và bàn làm việc bù được phần lớn."
+   ],
+   "vi_sao": [
+    "Bát trạch chia tám hướng thành bốn hướng hợp và bốn hướng kém theo cung phi (mệnh quái) của từng người; cửa chính là hướng được xét đầu tiên."
+   ],
+   "nguon": "Dương Trạch Thập Thư (Đại du niên ca) · Bát Trạch Minh Kính.",
+   "lien_ket": [
+    {
+     "nhan": "Đo hướng nhà",
+     "neo": "do-huong"
+    },
+    {
+     "nhan": "Bốn hướng hợp tuổi bạn",
+     "neo": "menh-quai"
+    }
+   ]
+  },
+  "bo_cuc": {
+   "tieu_de": "Nhà tôi có điểm nào nên xử lý trước không?",
+   "mo_ta": "Bốn điểm lớn về hình thế và bố trí — xem trước khi bàn tới hướng.",
+   "can": [
+    "dau_hieu"
+   ],
+   "cau_chat": "Nhà tôi có điểm bố trí nào nên xử lý trước không?",
+   "chung": "Hình thế là nền: bốn điểm lớn dưới đây nếu có thì nên xử lý trước, rồi mới tới chuyện hướng và thời điểm.",
+   "viec": [
+    "Trả lời bốn câu có / không; điểm nào có, hệ thống đưa một việc không tốn tiền để làm ngay."
+   ],
+   "vi_sao": [
+    "Trang này theo nguyên tắc 'hình thế là nền, lý khí là nhịp': dấu hiệu lớn đã xác nhận giữ mức của phần liên quan ở 'Cân bằng' cho tới khi xử lý."
+   ],
+   "nguon": "Táng Thư · Dương Trạch Thập Thư · phong thuỷ dân gian Việt Nam.",
+   "lien_ket": [
+    {
+     "nhan": "Khảo sát đủ 23 dấu hiệu",
+     "neo": "khao-sat-nha"
+    },
+    {
+     "nhan": "Để máy đọc ảnh góc nhà",
+     "neo": "doc-anh-nha"
+    },
+    {
+     "nhan": "Đứng giữa nhà, chĩa điện thoại",
+     "neo": "vi-tri-vat"
+    }
+   ]
+  },
+  "gia_dinh": {
+   "tieu_de": "Vợ chồng khác mệnh thì bố trí thế nào?",
+   "mo_ta": "Tìm hướng hợp cả hai, hoặc cách chia khi không có hướng chung.",
+   "can": [
+    "sinh",
+    "nguoi_2"
+   ],
+   "cau_chat": "Vợ chồng tôi khác mệnh thì bố trí nhà thế nào?",
+   "chung": "Hai người khác nhóm mệnh là chuyện rất thường gặp. Cách làm: tìm hướng hợp cả hai trước; không có thì chia — cửa và bếp theo một người, đầu giường và bàn làm việc theo người kia.",
+   "viec": [
+    "Nhập năm sinh và giới tính của người ở cùng để xem hai người có hướng chung nào."
+   ],
+   "vi_sao": [
+    "Mỗi người một cung phi; hai cung cùng nhóm (Đông tứ hoặc Tây tứ) thì dùng chung được cả bốn hướng hợp."
+   ],
+   "nguon": "Dương Trạch Thập Thư (lệ vợ chồng khác mệnh).",
+   "lien_ket": [
+    {
+     "nhan": "Hướng hợp tuổi theo năm sinh",
+     "duong": "/phong-thuy/huong-hop-tuoi"
+    },
+    {
+     "nhan": "Nhà của bạn (thêm người ở cùng)",
+     "neo": "nha-cua-ban"
+    }
+   ]
+  },
+  "han_nam": {
+   "tieu_de": "Năm nay phía nào của nhà nên giữ yên?",
+   "mo_ta": "Phía nên tránh đục phá, sửa chữa trong năm; tuổi bạn làm nhà năm nay thế nào.",
+   "can": [],
+   "cau_chat": "Năm nay phía nào trong nhà tôi không nên sửa chữa?",
+   "chung": "",
+   "viec": [
+    "Việc cần khoan đục ở phía nên giữ yên: dời sang năm sau nếu được; không dời được thì làm gọn trong vài ngày, không kéo dài.",
+    "Sửa nhỏ không đụng tường, sàn (sơn lại, thay đèn, kê đồ) thì không cần kiêng."
+   ],
+   "vi_sao": [
+    "Sao bay của năm đổi vị trí mỗi năm từ tiết Lập xuân; phía có sao số 5 và số 2, cùng phía Tam sát, theo sách xưa nên tránh động thổ."
+   ],
+   "nguon": "Hiệp Kỷ Biện Phương Thư (tử bạch năm, Tam sát).",
+   "lien_ket": [
+    {
+     "nhan": "Hướng nên tránh sửa năm {nam}",
+     "duong": "/phong-thuy/huong-xau-nam/{nam}"
+    },
+    {
+     "nhan": "Xem tuổi làm nhà",
+     "duong": "/xem-tuoi-lam-nha"
+    }
+   ]
+  },
+  "so_sanh": {
+   "tieu_de": "Đang chọn giữa hai căn, xem thế nào?",
+   "mo_ta": "Lưu từng căn rồi đặt cạnh nhau: mức từng phần và sơ đồ, không chấm điểm.",
+   "can": [],
+   "cau_chat": "Tôi đang chọn giữa hai căn nhà, nên so những điểm nào?",
+   "chung": "So theo thứ tự: căn nào có ít điểm lớn phải xử lý hơn → hướng cửa căn nào hợp người đứng tên hơn → phòng ngủ, bếp căn nào rơi vào phía hợp hơn. Hệ thống không chấm điểm tổng; bạn thấy từng phần cạnh nhau.",
+   "viec": [
+    "Đo hướng và khảo sát căn thứ nhất, đặt tên rồi bấm 'Xem nhà khác' để thêm căn thứ hai.",
+    "Mở 'So hai căn' khi đã có đủ hai căn."
+   ],
+   "vi_sao": [
+    "Điểm lớn về hình thế (đường đâm thẳng, nhà vệ sinh giữa nhà…) khó sửa hơn hướng, nên được so trước."
+   ],
+   "nguon": "Nguyên tắc 'hình thế là nền, lý khí là nhịp' của trang.",
+   "lien_ket": [
+    {
+     "nhan": "Hành trình nhà bạn (thêm căn, so hai căn)",
+     "neo": "hanh-trinh-nha"
+    }
+   ]
+  },
+  "mo_quan": {
+   "tieu_de": "Mở quán, cửa hàng thì xem gì?",
+   "mo_ta": "Đã có công cụ riêng cho mặt bằng kinh doanh và ngày khai trương.",
+   "can": [],
+   "cau_chat": "Tôi sắp mở cửa hàng, nên xem mặt bằng và ngày khai trương thế nào?",
+   "chung": "Mặt bằng kinh doanh xem ba việc: cửa và quầy thu ngân đặt phía nào, chỗ ngồi của chủ, và ngày khai trương. Phần này có công cụ riêng, dùng hướng mặt bằng và tuổi chủ cửa hàng.",
+   "viec": [
+    "Mở 'Mặt bằng & Khai trương' để đo hướng mặt bằng và xem ba khu nên đặt ở đâu.",
+    "Chọn ngày khai trương theo tuổi ở 'Xem ngày tốt'."
+   ],
+   "vi_sao": [
+    "Cùng phép tính Bát trạch và sao bay của nhà ở, nhưng trọng tâm là cửa, quầy và chỗ ngồi của chủ."
+   ],
+   "nguon": "Dương Trạch Tam Yếu (cửa – chủ – bếp), áp cho mặt bằng kinh doanh.",
+   "lien_ket": [
+    {
+     "nhan": "Mặt bằng & Khai trương",
+     "duong": "/doanh-chu"
+    },
+    {
+     "nhan": "Xem ngày tốt khai trương",
+     "duong": "/xem-ngay-tot"
+    }
+   ]
+  }
+ },
+ "mau": {
+  "cua.chua_tuoi": "Nhà quay về hướng {huong} ({do}°), thuộc {nhom}. Thêm năm sinh để biết hướng này hợp bạn tới đâu.",
+  "cua.chua_do": "Nhà quay về hướng {huong}, thuộc {nhom}. Đo số độ để kiểm tra kỹ hơn (sát ranh hai hướng thì kết quả có thể đổi).",
+  "cua.hop": "Cửa quay về {huong} là một trong bốn hướng hợp với bạn — {y}",
+  "cua.khong_hop": "Cửa quay về {huong} không nằm trong bốn hướng hợp với bạn. Cửa đã có thì không cần đổi: bù bằng hướng đầu giường và bàn làm việc.",
+  "cua.cung_nhom": "Nhà thuộc {nhom_nha}, bạn thuộc {nhom_menh} — cùng nhóm.",
+  "cua.khac_nhom": "Nhà thuộc {nhom_nha}, bạn thuộc {nhom_menh} — khác nhóm; chọn phòng ngủ và bàn làm việc ở phía hợp với bạn để bù.",
+  "cua.huong_hop": "Bốn hướng hợp với bạn: {ds}.",
+  "cua.viec_bu": "Kê đầu giường hoặc bàn làm việc quay về một trong các hướng: {ds}.",
+  "cua.tran": "Nhà đang có điểm nên xử lý trước ({ds}) nên phần này tối đa ở mức 'Cân bằng' cho tới khi xử lý.",
+  "cua.sao": "Nhà xây / dọn vào năm {nam_xay} thuộc vận {van}; phía cửa có cặp sao {son}–{sao_huong}.",
+  "cua.sao_y": "Về cặp sao ở phía cửa: {y}",
+  "bc.co_lon": "Có {n} điểm nên xử lý trước: {ds}.",
+  "bc.khong_lon": "Bốn điểm lớn đều không có — phần nền của nhà ổn. Giờ mới tới chuyện hướng và thời điểm.",
+  "bc.con_nho": "Ngoài ra có {n} điểm nhỏ nên để ý: {ds}.",
+  "bc.chua_du": "Mới trả lời {n} / {tong} câu — trả lời nốt để chắc phần nền.",
+  "bc.viec": "{ten}: {lam}",
+  "gd.thieu": "Hướng hợp với bạn: {ds}. Thêm người ở cùng để tìm hướng chung.",
+  "gd.viec.cung_nhom": "Hai người cùng nhóm: cửa, đầu giường, bàn làm việc đều chọn trong bốn hướng chung.",
+  "gd.viec.co_chung": "Ưu tiên hướng chung ({ds}) cho đầu giường của hai người.",
+  "gd.viec.khong_chung": "Không có hướng chung: cửa và bếp theo người đứng tên nhà; đầu giường theo người ngủ kém hơn; bàn làm việc mỗi người theo hướng của mình.",
+  "gd.nguoi": "{ten}: {quai}, {nhom} — hướng hợp: {ds}.",
+  "gd.ban": "Bạn",
+  "gd.nguoi_2": "Người ở cùng",
+  "hn.tra_loi": "Năm {nam} ({can_chi}), nên giữ yên phía {p5} và phía {p2} của nhà: tránh khoan đục, đào móng, sửa lớn ở hai phía này.",
+  "hn.tra_loi_trung": "Năm {nam} ({can_chi}), nên giữ yên phần giữa nhà và phía {p2}: tránh khoan đục, sửa lớn ở đó.",
+  "hn.tam_sat": "Phía {p} cũng nên tránh động thổ trong năm (Tam sát).",
+  "hn.thai_tue": "Phía {p} (Thái Tuế) và phía đối diện {pha} (Tuế Phá): dân gian thường tránh khởi công quay mặt về hai phía này.",
+  "hn.moc": "Năm tính từ tiết Lập xuân (khoảng 4/2 dương lịch), không phải từ 1/1.",
+  "hn.phong": "Ở nhà bạn, phía {p} là {phong}.",
+  "hn.tuoi": "Tuổi bạn làm nhà năm {nam_am}: {y}",
+  "hn.nhan.5": "nên giữ yên",
+  "hn.nhan.2": "nên giữ yên",
+  "hn.nhan.tam_sat": "tránh động thổ",
+  "noi": ", "
+ }
+}

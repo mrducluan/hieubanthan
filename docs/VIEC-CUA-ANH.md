@@ -3,14 +3,37 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-23 (việc mới nhất ở ngay dưới; RY-1 mục 4az; KM-0 mục 4ay; TK-1 mục 4ax; LH-1 + LH-2 + LH-3 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-25 (việc mới nhất ở ngay dưới — soát + sửa #347 #348 #350 #353; RY-1 mục 4az; KM-0 mục 4ay; TK-1 mục 4ax; LH-1 + LH-2 + LH-3 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
 
 
 ---
 
-## ⭐ VIỆC MỚI NHẤT — làm từ trên xuống (cập nhật 23/11/2026)
+## ⭐ VIỆC MỚI NHẤT — làm từ trên xuống (cập nhật 25/11/2026)
 
 Làm xong dòng nào thì đánh `[x]` (hoặc nhắn em). Các mục cũ hơn nằm bên dưới đường kẻ.
+
+### 00. Bốn PR #347 #348 #350 #353 — đã soát và gộp vào một PR mới (25/11/2026, `docs/RA-SOAT-PR-347-353.md`)
+
+- [ ] **Đóng 4 PR cũ** #347, #348, #350, #353 sau khi PR gộp được merge (PR gộp đã gồm phần dùng được của #348, #350, #353; #347 không dùng — lý do ở tài liệu).
+- [ ] **Lì xì Tết 2027 (LX-2027)** — theo thứ tự:
+  1. Supabase → SQL Editor → chạy `supabase/migrations/0042_li_xi_tet.sql` (SAU 0041). Bản cũ trong PR #350 ghi sai cột tiền nên không bán được đơn nào; bản này đã chạy thử trọn vòng.
+  2. Lì xì CHỈ mở bán khi báo cáo Thời gian tới đang thu Sao (`luan_giai.thu_sao` bật, có cổng Pay2S) — không bán quà cho thứ ai cũng đọc miễn phí.
+  3. `/quan-tri/cai-dat` → nhóm "LÌ XÌ TẾT 2027" → bật "Mở bán". Thử một đơn 99.000 ₫ thật bằng tài khoản thử: trả tiền → trang kết quả báo "bao sẵn sàng" → chép link → mở bằng tài khoản thứ hai → Nhận → vào `/thoi-gian-toi?nam=2027` → bấm "Mở bằng bao lì xì".
+  4. Hoàn tiền một đơn lì xì: CHỈ ở SQL Editor, sau khi đã chuyển trả tiền ngoài: `select hoan_don_li_xi(<mã đơn>, 'lý do');` (đơn có bao đã được nhận thì không hoàn được). Không dùng `hoan_don_nap` cho đơn lì xì.
+  5. Có lời chúc tự viết khả nghi (lừa đảo dù đã qua bộ lọc): SQL Editor `update li_xi_tet set loi_chuc = null, ten_nguoi_tang = null where ma = '<mã>';`.
+- [ ] **Trang mời cộng tác chuyên gia** `/hop-tac-chuyen-gia` (đã hiện link ở `/tac-gia`): đọc lại con số **"tới 80% tiền câu hỏi (sau phí thanh toán)"** — em giữ theo PR #348; nếu chưa chốt thì nhắn em sửa. Hợp đồng cộng tác + khấu trừ thuế: nhờ luật sư / kế toán (em đã bỏ các số nghị định trên trang vì chưa kiểm được).
+- [ ] **12 tình huống hỏi đáp (HD-TH)**: sau khi deploy CMS, vào CMS → Bài viết → 12 bài nháp "Gửi duyệt" (ghi chú HD-TH). Bài còn mỏng (điểm 64–70): muốn đăng thì nhắn em gắn một lá số mẫu do engine tính cho từng bài (hướng ở tài liệu mục 4), hoặc anh tự viết thêm rồi bấm Xuất bản.
+- [ ] Đóng PR #347 (cache CDN): Q-I3 đã làm bằng nonce ổn định (CLAUDE.md dòng 2026-11-24), không cần #347 nữa.
+
+### 0. Phong thuỷ PT-V3 (PR #352) — sau khi merge
+
+- [ ] **PT1. Deploy engine (Render) TRƯỚC, rồi mới tới web (Vercel).** Web mới gọi route mới của engine (`/hoi-gi`, `/do-huong` nhận mẫu).
+- [ ] **PT2. Thử la bàn trên điện thoại thật** (em không có máy thật): iPhone Safari, Android Chrome, và mở trong Zalo / Facebook.
+  Vào `/phong-thuy` → "Đo bằng la bàn điện thoại" → "Giữ yên và đo" → có phiếu đo → Chốt. Thử thêm: xoay ngang máy, đo sát cửa sắt
+  (phải báo rung / lệch), "Đo thêm một lần ở chỗ khác". Chỗ nào số sai hoặc không ra số, nhắn em kèm loại máy.
+- [ ] **PT3. Thử máy đọc ảnh với 4–6 ảnh thật** (cần `OPENROUTER_API_KEY` trên Render — đã có): xem phòng từng ảnh có đúng không,
+  ảnh bằng chứng có đúng tấm không. Chi phí mỗi lượt tăng theo số ảnh; nếu thấy tốn, báo em hạ trần xuống 4.
+- [ ] **PT4. Đóng bốn PR nháp cũ** #336, #337, #346, #351 (PR #352 đã gồm cả bốn). PR #335 (Bát tự) chưa soát.
 
 ### A. Quảng cáo Facebook — làm cho xong (đang dở)
 
@@ -332,7 +355,7 @@ Bài RankYak vào CMS như bài NotFair: nháp → chuẩn hoá SEO → tự xu�
 - [ ] **Search Console → Kiểm tra URL** cho `https://hieuban.com/` và 7 trang dịch vụ (`/tu-vi`, `/bat-tu`, `/than-so`, `/kinh-dich`, `/phong-thuy`, `/nhan-tuong`, `/tarot`) → "Yêu cầu lập chỉ mục" sau khi deploy (để Google đọc tiêu đề mới sớm).
 - [ ] Sau 2–4 tuần: Hiệu suất → truy vấn chứa "tử vi" → tab Trang: `/tu-vi` phải nhận phần lớn hiển thị thay cho trang chủ. Gửi em file xuất nếu chưa đổi.
 - [x] 6 đề xuất SEO-N — mục 1–5 đã làm (SEO-N2, 10/11).
-- [ ] (Quyết định, 19–26/11) **Q-I3 cache HTML**: xem Thống kê thu thập → thời gian phản hồi trung bình; > 1.000 ms thì chọn cách A ở `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 4.3 (bỏ nonce riêng trang kiến thức), < 600 ms thì giữ nguyên.
+- [ ] (Sau deploy, 24/11) **Q-I3 đã làm** (giữ CSP-2, nonce ổn định — CLAUDE.md dòng 2026-11-24). Anh kiểm: mở hieuban.com/tu-vi hai lần ở cửa sổ ẩn danh → DevTools › Network › tài liệu đầu tiên phải có `x-vercel-cache: HIT` lần hai; trang không bị trắng / lỗi CSP. Sau 2 tuần gửi em ảnh Thống kê thu thập (thời gian phản hồi trung bình) để so trước – sau. Nếu thấy trang trắng hoặc lỗi: báo em, em tắt cache bằng một PR nhỏ (rút allowlist).
 - [ ] **Liên kết ngoài**: bài trên fanpage / diễn đàn / bài khách trỏ thẳng `https://hieuban.com/tu-vi` (chữ "xem tử vi online", "lá số tử vi"), `/bat-tu`, `/than-so` — không trỏ hết về trang chủ.
 - [ ] Đặt env `MXH_FACEBOOK`, `MXH_YOUTUBE`… (Vercel, dự án web) cho các kênh thật → Google nối thương hiệu "hieuban" với site, dễ hiện sitelinks.
 - [ ] Sau 4 tuần: Search Console → Hiệu suất → Truy vấn, gửi em file xuất để đối chiếu bảng từ khoá (mục 4.1) với số thật.

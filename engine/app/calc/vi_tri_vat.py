@@ -79,3 +79,40 @@ def vi_tri(do: float) -> dict:
     s = hk.son_tu_do(d)
     return {"do": round(d, 2), "phuong": phuong, "quai": pt.HUONG_QUAI[phuong], "son": s["son"],
             "sat_ranh_8": sat, "sat_ranh_son": s["canh_bao"] == "khong_vong"}
+
+
+# --------------------------------------------------------------------------- #
+# LK-1 — đo HƯỚNG NHÀ bằng chuỗi mẫu la bàn thô (web gửi mẫu, engine tính — một bộ tính với VT-1)
+# --------------------------------------------------------------------------- #
+NGUONG_GIU_YEN = 3.0         # σ ≤ 3° ổn · 3–6° nên giữ yên · > 6° đo lại (cùng thang với NGUONG_DAO_DONG)
+NGUONG_SAI_SO = 20.0         # iOS webkitCompassAccuracy quá mức này (hoặc âm = chưa hiệu chỉnh) → cần hiệu chỉnh la bàn
+NGUONG_HAI_LAN = 5.0         # hai lần đo ở hai chỗ lệch nhau quá mức này → nghi nhiễu từ tại chỗ (sắt thép, thiết bị điện)
+
+
+def do_tu_mau(mau: list[float], sai_so: float | None = None) -> dict:
+    """Một lần đo = nhiều mẫu la bàn (độ, bắc từ) lấy trong lúc giữ yên máy.
+    Trả số độ (làm tròn 0,1°, luôn trong [0, 360)), độ rung (σ vòng), mức ổn định và cờ cần hiệu chỉnh.
+    `sai_so` < 0: iOS báo la bàn CHƯA hiệu chỉnh — không bao giờ coi là mẫu tốt."""
+    if any(not (0 <= x < 360) for x in mau):
+        raise ValueError("số độ phải trong [0, 360)")
+    tb, lech = trung_binh_goc(mau)
+    do = round(tb, 1) % 360.0
+    can_hieu_chinh = sai_so is not None and (sai_so < 0 or sai_so > NGUONG_SAI_SO)
+    muc = "do_lai" if lech > NGUONG_DAO_DONG or can_hieu_chinh else "giu_yen" if lech > NGUONG_GIU_YEN else "on"
+    return {"do": do, "rung": round(lech, 1), "so_mau": len(mau), "on_dinh": muc, "can_hieu_chinh": can_hieu_chinh}
+
+
+def hieu_goc(a: float, b: float) -> float:
+    """Hiệu có dấu a − b trong (−180, 180]."""
+    d = (a - b) % 360.0
+    return d - 360.0 if d > 180.0 else d
+
+
+def so_hai_lan(mau_1: list[float], mau_2: list[float], sai_so_1: float | None = None, sai_so_2: float | None = None) -> dict:
+    """Đo hai chỗ (vd ngay cửa, rồi lùi ra 2 m): la bàn chỉ đáng tin khi hai lần gần trùng nhau.
+    Lệch ≤ NGUONG_HAI_LAN → lấy trung bình vòng của hai lần; lệch hơn → `nhieu`, KHÔNG gộp (không biết lần nào đúng)."""
+    a, b = do_tu_mau(mau_1, sai_so_1), do_tu_mau(mau_2, sai_so_2)
+    lech = abs(hieu_goc(a["do"], b["do"]))
+    nhieu = lech > NGUONG_HAI_LAN
+    do = None if nhieu else round(trung_binh_goc([a["do"], b["do"]])[0], 1) % 360.0
+    return {"lan": [a, b], "lech": round(lech, 1), "nhieu": nhieu, "do": do}

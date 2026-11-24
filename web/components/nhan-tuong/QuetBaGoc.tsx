@@ -2,7 +2,7 @@
 // QBG-1 — "Quét 3 góc như Face ID": mở camera ngay trong trang, máy người dùng tự nhận góc mặt (bộ tìm điểm mốc chạy trong
 // trình duyệt, lib/quet-mat-bo-do) và TỰ CHỤP khi đúng góc: nhìn thẳng → quay trái → quay phải. Trong lúc giữ yên, giữ lại
 // khung NÉT NHẤT. Khung hình KHÔNG ghi hình, KHÔNG gửi đi: ảnh chụp chỉ thành tệp trong bộ nhớ trình duyệt rồi đi vào luồng cũ
-// (ảnh thẳng → tự tìm 20 điểm ANH-3; ảnh nghiêng → chấm đường viền ANH-4) → chỉ toạ độ đi tới engine sau thoả thuận dm1.
+// (ảnh thẳng → tự tìm 20 điểm ANH-3; ảnh nghiêng → chấm đường viền ANH-4) → chỉ toạ độ đi tới engine sau thoả thuận dm2.
 // Bộ đo không nạp được → vẫn quét được bằng nút chụp (người dùng tự canh góc theo hướng dẫn).
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Camera, Check, ChevronsLeft, ChevronsRight, Loader2, RefreshCcw, SkipForward, X } from "lucide-react";

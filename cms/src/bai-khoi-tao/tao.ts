@@ -43,6 +43,20 @@ export const LO_KW6T_T3: LoBai = {
   xuatBan: true,
 };
 
+/** HD-TH (#353, chủ dự án giao em chọn hướng 25/11/2026): 12 tình huống hỏi đáp minh hoạ (trước nằm trong một tệp TS của
+ *  web và tự lên sitemap) → BÀI NHÁP "Gửi duyệt", KHÔNG tự xuất bản. Đã sửa 5 lỗi dữ kiện soát được; Chủ biên đọc, gắn lá số
+ *  mẫu do engine tính (bước tiếp theo, docs/RA-SOAT-PR-347-353.md), thêm ảnh rồi mới xuất bản. */
+export const LO_HOI_DAP: LoBai = {
+  thuMuc: path.join(THU_MUC, "hoi-dap-tinh-huong"),
+  nguonAnh: "Ban biên tập Hiểu Bản Thân vẽ minh hoạ (tình huống hỏi đáp)",
+  ghiChu: "HD-TH: tình huống minh hoạ tổng hợp (không phải chuyện người thật), chuyển từ PR #353. Đã sửa: Tử vi gọi đại hạn, "
+    + "lưu nguyệt (không phải lưu niên 12 tháng), Sứ mệnh (không có chỉ số Biểu đạt), hướng vợ chồng tính cho từng người, "
+    + "«hoà vi quý» là Luận Ngữ, tháng đại lợi chỉ là tập quán. Trước khi xuất bản: gắn một lá số mẫu do engine tính để bài có "
+    + "dữ kiện riêng, thêm ảnh bìa, đọc lại giọng.",
+  nhan: "HD-TH",
+  xuatBan: false,
+};
+
 export function docBaiKhoiTao(lo: LoBai = LO_BLOG6): BaiKhoiTao[] {
   if (!existsSync(lo.thuMuc)) return [];
   return readdirSync(lo.thuMuc).filter((f) => f.endsWith(".json")).sort()

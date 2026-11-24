@@ -165,7 +165,34 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     }
   }, [nhaLuu, doHuongGoiY]);
 
-  const bamO = (r: number, c: number) => {
+  // SD-1: khối sơ đồ nhà theo tỉ lệ vừa lưu câu trả lời Có / Không cho dấu hiệu nó gợi ý (hồ sơ nhà: `tu_so_do`,
+  // `khai_khong`) → ô tích ở đây theo ngay, để lần "Xem luận bố cục" kế tiếp không ghi đè mất câu trả lời ấy.
+  const khoaSoDo = `${(nhaLuu?.bo_cuc?.tu_so_do ?? []).join(",")}|${(nhaLuu?.bo_cuc?.khai_khong ?? []).join(",")}`;
+  const soDoTruoc = useRef<{ khoa: string; tu: string[]; khong: string[] } | null>(null);
+  useEffect(() => {
+    if (nhaLuu === undefined) return;
+    const b = nhaLuu?.bo_cuc;
+    const tu = b?.tu_so_do ?? [];
+    const dangCo = b?.dau_hieu ?? [];
+    const khongLuu = (b?.khai_khong ?? []).filter((m) => !dangCo.includes(m));
+    const truoc = soDoTruoc.current;
+    soDoTruoc.current = { khoa: khoaSoDo, tu, khong: khongLuu };
+    if (!truoc || truoc.khoa === khoaSoDo) return;            // lần đầu: khối điền hồ sơ ở trên đã lo
+    // Chỉ theo phần VỪA đổi trong hồ sơ (không đụng ô người dùng mới tích tay mà chưa lưu).
+    const them = tu.filter((m) => !truoc.tu.includes(m));
+    const khong = khongLuu.filter((m) => !truoc.khong.includes(m));
+    const bo = [...truoc.tu.filter((m) => !tu.includes(m) && !dangCo.includes(m)), ...khong];
+    setDau((s) => {
+      if (them.every((m) => s.has(m)) && !bo.some((m) => s.has(m))) return s;
+      const n = new Set(s); them.forEach((m) => n.add(m)); bo.forEach((m) => n.delete(m)); return n;
+    });
+    setKhongCo((s) => {
+      if (khong.every((m) => s.has(m)) && !them.some((m) => s.has(m))) return s;
+      const n = new Set(s); khong.forEach((m) => n.add(m)); them.forEach((m) => n.delete(m)); return n;
+    });
+  }, [khoaSoDo, nhaLuu]);
+
+  const bamO =(r: number, c: number) => {
     if (cheDo === "to") { setLuoi((l) => l.map((row, i) => row.map((v, j) => (i === r && j === c ? !v : v)))); return; }
     setOPhong((o) => {
       const m = { ...o };
@@ -219,6 +246,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     const khongCoGui = [...khongCo].filter((m) => !dau.has(m));
     const khaiKhong = [...new Set([...daXuLy, ...khongCoGui])];
     const tuAnhGui = [...tuAnh].filter((m) => dau.has(m));
+    const tuSoDoGiu = (nhaLuu?.bo_cuc?.tu_so_do ?? []).filter((m) => dau.has(m));
     if (d == null && !huong && Object.keys(viTri).length === 0 && dau.size === 0 && !mb) {
       setLoi(t("ks.loi_thieu")); return;
     }
@@ -243,6 +271,8 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
         luuHoSoNha({ ...(d != null ? { huong_do: d } : {}), ...(loaiNha ? { loai_nha: loaiNha as "can_ho" } : {}),
           bo_cuc: { vi_tri: viTri, huong_do: hd, dau_hieu: [...dau], ...(tuAnhGui.length ? { tu_anh: tuAnhGui } : {}),
             ...(khongCoGui.length ? { khai_khong: khongCoGui } : {}),
+            // SD-1: giữ dấu vết "mã này đến từ sơ đồ nhà" (chỉ mã còn đang tích) để khối sơ đồ gỡ được khi sơ đồ đổi.
+            ...(tuSoDoGiu.length ? { tu_so_do: tuSoDoGiu } : {}),
             ...(daXuLy.length ? { da_xu_ly: daXuLy } : {}), ...(mb ? { mat_bang: mb } : {}) } });
       } catch { /* bỏ qua */ }
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "khao_sat_nha", co_mat_bang: Boolean(mb), loai_nha: loaiNha, goc_nhin: gocNhin });

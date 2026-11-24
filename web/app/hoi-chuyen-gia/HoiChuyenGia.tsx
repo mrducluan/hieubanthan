@@ -47,8 +47,16 @@ export function HoiChuyenGia({ banDau, nguoi }: { banDau: ThongTinCg; nguoi?: Re
 
   useEffect(() => {
     try {
+      const q = new URLSearchParams(window.location.search);
+      const qMang = q.get("mang") as MangCg | null;
       const v = JSON.parse(sessionStorage.getItem(KHOA_NHAP) ?? "null") as { mang?: MangCg; cau?: string } | null;
-      if (v?.cau) { setCau(v.cau.slice(0, CAU_HOI_TOI_DA)); if (v.mang && MANG_CG.includes(v.mang)) setMang(v.mang); }
+      if (v?.cau) {
+        setCau(v.cau.slice(0, CAU_HOI_TOI_DA));
+        if (v.mang && MANG_CG.includes(v.mang)) setMang(v.mang);
+      } else if (qMang && MANG_CG.includes(qMang)) {
+        // GĐ 2: chỉ nhận ?mang= qua URL (không đưa nội dung câu hỏi lên URL để tránh rò rỉ sang analytics/log theo Luật 91/2025).
+        setMang(qMang);
+      }
     } catch { /* bỏ qua */ }
     void supabase().then(async (sb) => {
       const tk = (await sb?.auth.getSession())?.data.session?.access_token ?? null;

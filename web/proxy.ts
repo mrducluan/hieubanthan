@@ -10,7 +10,8 @@ import { langHtml, maNgonNguEn } from "@/lib/ngon-ngu";
 import { dichRewrite, suaDuongLac } from "@/lib/duong-en";
 import { createServerClient } from "@supabase/ssr";
 import { SITE_CHINH } from "@/lib/seo";
-import { taoCsp, taoNonce } from "@/lib/csp";
+import { nonceOnDinh, taoCsp, taoNonce } from "@/lib/csp";
+import { coTheCacheCongKhai, headerCacheEdge, laDuongCongKhaiCache } from "@/lib/vung-cache-cong-khai";
 
 type CookieMoi = { name: string; value: string; options?: Parameters<NextResponse["cookies"]["set"]>[2] };
 
@@ -59,7 +60,22 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
   // URL Anh đã mở mà KHÔNG có trang riêng dưới app/en → hiển thị chính trang Việt tương ứng (một cây component), ngôn ngữ đi
   // theo header. Bảng `lib/duong-en.json` là nguồn duy nhất; trang chưa mở không rewrite (404 tiếng Anh).
   const dichVi = tiengAnh ? dichRewrite(pathname) : null;
-  const nonce = taoNonce();
+  // Q-I3 — cache HTML trang công khai ở CDN mà vẫn giữ CSP-2 (nonce + 'strict-dynamic'):
+  // - Trang công khai KHÔNG query: nonce ổn định theo (bản deploy, đường dẫn) cho MỌI lượt (kể cả người đã đăng nhập —
+  //   CDN có thể trả bản đã cache cho họ, header phải khớp nonce trong HTML đó). Chỉ khách vãng lai mới được ghi vào cache.
+  // - Còn lại (có query, /en, quản trị, tài khoản, thanh toán…): nonce ngẫu nhiên mỗi lượt, không cache.
+  const duongCongKhai = !quanTri && !tiengAnh && laDuongCongKhaiCache(pathname);
+  const khongQuery = !req.nextUrl.search || req.nextUrl.search === "?";
+  const nonceCoDinh = duongCongKhai && khongQuery ? await nonceOnDinh(pathname) : null;
+  const ghiCache = nonceCoDinh ? coTheCacheCongKhai({
+    method: req.method,
+    pathname,
+    search: req.nextUrl.search,
+    cookieNames: req.cookies.getAll().map((c) => c.name),
+    acceptLanguage: req.headers.get("accept-language"),
+  }) : false;
+  const headerCache = ghiCache ? headerCacheEdge() : null;
+  const nonce = nonceCoDinh ?? taoNonce();
   const csp = taoCsp(nonce);
   const dau = new Headers(req.headers);   // chép SAU khi làm mới phiên → cookie mới đi kèm request
   dau.set("x-nonce", nonce);
@@ -79,6 +95,19 @@ export async function proxy(req: NextRequest): Promise<NextResponse> {
     res = NextResponse.next({ request: { headers: dau } });
   }
   res.headers.set("content-security-policy", csp);
+  if (headerCache) {
+    // CDN Vercel ưu tiên Vercel-CDN-Cache-Control / CDN-Cache-Control hơn Cache-Control mặc định của Next (trình duyệt vẫn
+    // không cache). Deploy mới = khoá cache mới (cache tách theo bản deploy).
+    res.headers.set("vercel-cdn-cache-control", headerCache);
+    res.headers.set("cdn-cache-control", headerCache);
+    res.headers.set("x-hbt-cache-zone", "public-edge");
+  } else if (duongCongKhai) {
+    res.headers.set("vercel-cdn-cache-control", "private, no-store");
+    res.headers.set("cdn-cache-control", "private, no-store");
+    res.headers.set("x-hbt-cache-zone", "public-bypass");
+  } else {
+    res.headers.set("x-hbt-cache-zone", "private-nonce");
+  }
   if (tiengAnh) { res.headers.set("content-language", langHtml(maEn)); res.headers.append("vary", "Accept-Language"); }
   cookieMoi.forEach((c) => res.cookies.set(c.name, c.value, c.options));
   if (quanTri) {

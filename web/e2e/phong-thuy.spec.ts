@@ -139,18 +139,20 @@ test("PT-V1: đo hướng nhà — nhập tay và la bàn điện thoại (giả
   await expect(kq).toContainText("Càn");
   await expect(kq).toContainText("Sinh Khí");
 
-  // Giả lập la bàn Android: alpha tuyệt đối 180 → hướng 180° (Nam)
-  await o.getByRole("button", { name: "Đo bằng la bàn điện thoại" }).click();
-  // Trang gắn bộ nghe cảm biến SAU cú bấm (effect) → phát sự kiện lại tới khi mặt la bàn nhận (phát một lần là chạy đua).
+  // LK-1: la bàn Android giả lập quanh 180° (Nam) → ngắm (đọc sống) → "Giữ yên và đo" (web gửi MẪU THÔ, engine tính) → Chốt.
+  // Chi tiết (rung, hiệu chỉnh, đo hai điểm) kiểm ở e2e/la-kinh.spec.ts.
   await expect(async () => {
-    await page.evaluate(() => {
-      const ten = "ondeviceorientationabsolute" in window ? "deviceorientationabsolute" : "deviceorientation";
-      window.dispatchEvent(new DeviceOrientationEvent(ten, { alpha: 180, beta: 0, gamma: 0, absolute: true }));
-    });
-    await expect(o.getByText("180°")).toBeVisible({ timeout: 1_000 });
+    if ((await o.getAttribute("data-pha")) !== "ngam") await o.getByTestId("la-ban-bat-dau").click({ timeout: 2_000 });
+    await expect(o).toHaveAttribute("data-pha", "ngam", { timeout: 1_500 });
   }).toPass();
+  await page.evaluate(() => {
+    const ten = "ondeviceorientationabsolute" in window ? "deviceorientationabsolute" : "deviceorientation";
+    window.setInterval(() => window.dispatchEvent(new DeviceOrientationEvent(ten, { alpha: 180, beta: 0, gamma: 0, absolute: true })), 25);
+  });
   await expect(o.getByTestId("la-ban-song")).toContainText("Diên Niên");       // Nam với Khảm, đọc theo thời gian thực
-  await o.getByRole("button", { name: "Chốt hướng này" }).click();
+  await o.getByTestId("la-ban-giu-yen").click();
+  await expect(o.getByTestId("phieu-do")).toBeVisible({ timeout: 20_000 });
+  await o.getByTestId("phieu-chot").click();
   await expect(kq).toContainText("Nam");
   await expect(kq).toContainText("sơn Ngọ");
   await kq.getByRole("button", { name: /lập bàn Huyền Không/ }).click();
@@ -571,7 +573,7 @@ test("PT-V2: Để máy đọc ảnh — đồng ý không tích sẵn, ảnh th
   const dongY = da.getByTestId("doc-anh-dong-y");
   await expect(nut).toBeDisabled();                                        // chưa ảnh, chưa đồng ý
   await expect(dongY).not.toBeChecked();                                   // KHÔNG tích sẵn
-  await da.getByLabel("Chọn 1–3 ảnh để máy đọc (không lưu)").setInputFiles({ name: "goc.png", mimeType: "image/png", buffer: PNG_1 });
+  await da.getByLabel("Chọn 1–6 ảnh để máy đọc (không lưu)").setInputFiles({ name: "goc.png", mimeType: "image/png", buffer: PNG_1 });
   await expect(da.getByRole("img", { name: "Ảnh 1 bạn chọn (chỉ hiện trên máy)" })).toHaveAttribute("src", /^blob:/);
   await expect(nut).toBeDisabled();                                        // có ảnh nhưng chưa đồng ý → vẫn tắt
   await dongY.check();
@@ -637,7 +639,7 @@ test("PT-V2: máy đọc ảnh chưa bật (chưa đặt khoá) → câu thườ
   await page.route("**/api/phongthuy/doc-anh", (r) => r.fulfill({ json: { da_bat: false, ly_do_tat: "chua_dat_khoa", dau_hieu: [], phong_doan: [], luu_y: [], can_xac_nhan: true } }));
   await page.goto("/phong-thuy");
   const da = page.getByTestId("khao-sat-nha").getByTestId("doc-anh-nha");
-  await da.getByLabel("Chọn 1–3 ảnh để máy đọc (không lưu)").setInputFiles({ name: "goc.png", mimeType: "image/png", buffer: PNG_1 });
+  await da.getByLabel("Chọn 1–6 ảnh để máy đọc (không lưu)").setInputFiles({ name: "goc.png", mimeType: "image/png", buffer: PNG_1 });
   await da.getByTestId("doc-anh-dong-y").check();
   await da.getByTestId("doc-anh-nut").click();
   await expect(da.getByTestId("doc-anh-thong-bao")).toHaveText("Máy đọc ảnh chưa bật trên bản này — bạn tích tay các ô bên dưới nhé.");

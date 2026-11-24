@@ -2,19 +2,19 @@
  "_ghi_chu": "SEO-L4 — ngày đăng / sửa thật của từng trang kiến thức. KHÔNG sửa tay: chạy `python scripts/ngay_cap_nhat.py` sau khi sửa KB hoặc mã dựng trang.",
  "trang": {
   "bo_vi/an-duong": {
-   "bam": "f1b71b737ad5a81b",
+   "bam": "22f55adf1d136cdf",
    "dang": "2026-11-06",
-   "sua": "2026-11-15"
+   "sua": "2026-11-24"
   },
   "bo_vi/chuan-dau": {
-   "bam": "125981161a9a71ad",
+   "bam": "11f8fc35dd9a469e",
    "dang": "2026-11-06",
-   "sua": "2026-11-15"
+   "sua": "2026-11-24"
   },
   "bo_vi/dia-cac": {
-   "bam": "56af9c43cfc11655",
+   "bam": "1ac675c15e86e7cf",
    "dang": "2026-11-06",
-   "sua": "2026-11-15"
+   "sua": "2026-11-24"
   },
   "bo_vi/dien-trach": {
    "bam": "c18a2bfcdd3a5a32",
@@ -27,14 +27,14 @@
    "sua": "2026-11-15"
   },
   "bo_vi/lan-dai": {
-   "bam": "4b19cc3e1ff67633",
+   "bam": "6e373f682cf949c5",
    "dang": "2026-11-06",
-   "sua": "2026-11-15"
+   "sua": "2026-11-24"
   },
   "bo_vi/le-duong": {
-   "bam": "50c59c8f78b65bd6",
+   "bam": "52de615c56e1d454",
    "dang": "2026-11-06",
-   "sua": "2026-11-13"
+   "sua": "2026-11-24"
   },
   "bo_vi/long-may": {
    "bam": "c02071fc631ced91",
@@ -47,14 +47,14 @@
    "sua": "2026-11-15"
   },
   "bo_vi/mat": {
-   "bam": "a443d6b3959440fc",
+   "bam": "20813ed5657a0eed",
    "dang": "2026-11-06",
-   "sua": "2026-11-15"
+   "sua": "2026-11-24"
   },
   "bo_vi/mieng": {
-   "bam": "c5517766134726ec",
+   "bam": "f93ee0fd6b1d0a20",
    "dang": "2026-11-06",
-   "sua": "2026-11-15"
+   "sua": "2026-11-24"
   },
   "bo_vi/ngu-vi": {
    "bam": "6174cc685aeaaea1",
@@ -62,44 +62,44 @@
    "sua": "2026-11-14"
   },
   "bo_vi/nhan-trung": {
-   "bam": "887e59c5fa5155ec",
+   "bam": "d08ec9c19e8d922d",
    "dang": "2026-11-06",
-   "sua": "2026-11-15"
+   "sua": "2026-11-24"
   },
   "bo_vi/nhat-giac": {
-   "bam": "00acb8208268392e",
+   "bam": "61e25bc037e265d4",
    "dang": "2026-11-06",
-   "sua": "2026-11-15"
+   "sua": "2026-11-24"
   },
   "bo_vi/nien-thuong": {
-   "bam": "b5dacf58f0324165",
+   "bam": "6409828f8ce750db",
    "dang": "2026-11-06",
-   "sua": "2026-11-14"
+   "sua": "2026-11-24"
   },
   "bo_vi/no-boc": {
-   "bam": "5a93b9e081b9837a",
+   "bam": "72cdbffe789b63db",
    "dang": "2026-11-06",
-   "sua": "2026-11-15"
+   "sua": "2026-11-24"
   },
   "bo_vi/phap-lenh": {
-   "bam": "95776c045e93dd6c",
+   "bam": "8239d77977c94cf6",
    "dang": "2026-11-06",
-   "sua": "2026-11-14"
+   "sua": "2026-11-24"
   },
   "bo_vi/son-can": {
-   "bam": "cacb98d4ad3460d5",
+   "bam": "3f53bb9855896187",
    "dang": "2026-11-06",
-   "sua": "2026-11-15"
+   "sua": "2026-11-24"
   },
   "bo_vi/tai": {
-   "bam": "ba387856db1acca2",
+   "bam": "797139585952a23e",
    "dang": "2026-11-06",
-   "sua": "2026-11-15"
+   "sua": "2026-11-24"
   },
   "bo_vi/thien-dinh": {
-   "bam": "782c0d45a5d5bec2",
+   "bam": "25818adc7aca2e57",
    "dang": "2026-11-06",
-   "sua": "2026-11-15"
+   "sua": "2026-11-24"
   },
   "bo_vi/thien-thuong": {
    "bam": "4e20d8c102c533ce",
@@ -107,24 +107,24 @@
    "sua": "2026-11-14"
   },
   "bo_vi/thien-trung": {
-   "bam": "d3737aab1b81e7b9",
+   "bam": "9575c8f97cc5a87d",
    "dang": "2026-11-06",
-   "sua": "2026-11-14"
+   "sua": "2026-11-24"
   },
   "bo_vi/thua-tuong": {
-   "bam": "d860abc683a7b9af",
+   "bam": "38197b0124ee1a62",
    "dang": "2026-11-06",
-   "sua": "2026-11-14"
+   "sua": "2026-11-24"
   },
   "bo_vi/trung-chinh": {
-   "bam": "0304365cbacc7740",
+   "bam": "30ddff7f8609ed84",
    "dang": "2026-11-06",
-   "sua": "2026-11-14"
+   "sua": "2026-11-24"
   },
   "bo_vi/tu-khong": {
-   "bam": "7ff8efb613453f9b",
+   "bam": "f64f1bca9aec89bb",
    "dang": "2026-11-06",
-   "sua": "2026-11-14"
+   "sua": "2026-11-24"
   },
   "cap_so/so-chu-dao-1-va-1": {
    "bam": "b08231b4f9749b2d",

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Đợt 4 — Bộ tra cứu tất định cho Nhân Tướng (Bridges + 150 quy tắc cổ thư), Chỉ Tay phương Tây, Kỳ Môn Cửu Độn & Tử Vi Tử Vân."""
+"""Đợt 4 — Bộ tra cứu tất định cho Nhân Tướng (Bridges + 81 quy tắc cổ thư đạt chuẩn SX-C), Chỉ Tay phương Tây, Kỳ Môn Cửu Độn & Tử Vi Tử Vân."""
 from __future__ import annotations
 
 from app.kb.nap import doc, nho

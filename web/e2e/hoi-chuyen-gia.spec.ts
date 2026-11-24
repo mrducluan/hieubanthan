@@ -110,3 +110,23 @@ test("/tai-khoan/cau-hoi: trạng thái, hạn trung tính, câu trả lời + �
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
   expect(guiLen).toEqual([]);
 });
+
+test("GĐ 2: /hoi-chuyen-gia chỉ nhận ?mang= (không nhận ?cau= qua URL để bảo vệ riêng tư) + /hop-tac-chuyen-gia noindex, đủ demo Co-Pilot", async ({ page }) => {
+  await giaLap(page, BAT);
+  await page.goto("/hoi-chuyen-gia?mang=tu_vi&cau=KhongDuocDienQuaUrl");
+  await expect(page.getByTestId("cg-form")).toBeVisible();
+  await expect(page.getByLabel("Câu hỏi cho chuyên gia")).toHaveValue("");
+
+  // CG-2: trang mời cộng tác — noindex, không số nghị định, không số liệu lá số giả, có lối vào từ /tac-gia.
+  const vp: string[] = [];
+  page.on("console", (m) => { if (/Content Security Policy/i.test(m.text())) vp.push(m.text()); });
+  await page.goto("/hop-tac-chuyen-gia");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  await expect(page.getByTestId("demo-copilot")).toBeVisible();
+  const chu = await page.locator("main").innerText();
+  expect(chu).not.toMatch(/NĐ \d|Nghị định|Founding|Co-Pilot|Miếu|Thuỷ Nhị Cục/);
+  expect(chu).not.toMatch(CUM_THUC_EP);
+  expect(vp).toEqual([]);
+  await page.goto("/tac-gia");
+  await expect(page.locator('a[href="/hop-tac-chuyen-gia"]')).toHaveCount(1);
+});

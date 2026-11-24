@@ -40,6 +40,17 @@ export default async function Page() {
           </li>
         ))}
       </ul>
+      {(
+        <div className="mt-6 rounded-2xl border border-gold/25 bg-gold/[0.04] p-5">
+          <p className="text-sm font-medium text-fg">Cộng tác chuyên gia</p>
+          <p className="mt-1 text-sm text-fg-muted">
+            Bạn làm nghề nghiêm túc về Tử vi, Bát tự, Phong thuỷ, Kinh Dịch hoặc Thần số học? Cùng viết, thẩm định bài và trả lời câu hỏi của khách.
+          </p>
+          <Link href="/hop-tac-chuyen-gia" className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-gold underline-offset-4 hover:underline">
+            Xem cách cộng tác <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </div>
+      )}
       <KhoiCms ds={nd.khoi.cuoi} duong="/tac-gia" viTri="cuoi" className="mt-10" />
     </div>
   );

@@ -14,6 +14,7 @@ const Input = z.object({
   nam_sinh: z.number().int().min(1900).max(2100).optional(),
   gioi_tinh: z.enum(["nam", "nu"]).optional(),
   la_so: LaSoVao.optional(),
+  so_do_mat: z.record(z.string(), z.unknown()).optional(),
 }).strict();
 
 export async function POST(req: Request) {
