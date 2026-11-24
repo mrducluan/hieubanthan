@@ -146,7 +146,7 @@ export function Nguoi2Khoi({ thanhVien, hienTai, onChon }: {
       <div className="flex flex-wrap items-end gap-2">
         <label className="space-y-1 text-xs text-fg-muted">
           <span className="block">{t("hg.n2.nam")}</span>
-          <Input inputMode="numeric" value={nam} className="h-10 w-24 px-3 text-sm" data-testid="hoi-gi-n2-nam"
+          <Input inputMode="numeric" value={nam} className="h-10 w-24 px-3 text-sm" data-testid="hoi-gi-n2-nam-sinh"
             aria-invalid={loi || undefined} aria-describedby={loi ? "hoi-gi-n2-loi" : undefined}
             onChange={(e) => setNam(e.target.value.replace(/\D/g, "").slice(0, 4))} />
         </label>

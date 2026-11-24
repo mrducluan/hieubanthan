@@ -314,7 +314,7 @@ export const CHU_PHONG_THUY_UI = {
   "dh.hop_dat": m(DH, " Hợp đặt: {x}.", " Suits: {x}."),
   "dh.nut_do": m(DH, "Đo bằng la bàn điện thoại", "Use the phone's compass"),
   "dh.dang_doi": m(DH, "Đang đổi…", "Converting…"),
-  "dh.chot_do": m(DH, "Chốt hướng {do}°", "Use {do}° ({huong})"),
+  "dh.chot_do": m(DH, "Chốt hướng {do}°", "Use {do}°"),
   "dh.chot": m(DH, "Chốt hướng này", "Set this direction"),
   "dh.ke_dung": m(DH, "Dừng ở hướng ghi đúng việc bạn cần (Sinh Khí · Diên Niên · Thiên Y · Phục Vị) rồi kê theo đó. Muốn lưu hướng NHÀ, chuyển lại “Đo hướng nhà”.",
     "Stop at the direction that matches what you need (Sheng Qi · Yan Nian · Tian Yi · Fu Wei) and place it that way. To save the HOME's direction, switch back to “Find the home's direction”."),
@@ -358,7 +358,7 @@ export const CHU_PHONG_THUY_UI = {
   "dh.nha_khac_nhom": m(DH, "nhà khác nhóm với mệnh của bạn — Bát trạch gợi ý bù bằng vị trí cửa, bếp, giường theo hướng tốt của bạn.", "the home is in the other group from your Kua — Eight Mansions suggests making up for it by placing the door, stove and bed toward your good directions."),
   "dh.dung_toa": m(DH, "Dùng toạ {do}° để lập bàn Huyền Không", "Use {do}° for the Flying Star chart"),
   // LK-1: đo "giữ yên 1,5 giây" (mẫu thô → engine tính), đo hai điểm bắt nhiễu sắt, phiếu đo trước khi chốt
-  "dh.do_so": m(DH, "{do}°", "{do}° · {huong}"),
+  "dh.do_so": m(DH, "{do}°", "{do}°"),
   "dh.ngam_hd": m(DH, "Đặt máy nằm phẳng, đầu máy chĩa thẳng ra ngoài. Kim đứng yên thì bấm đo.", "Lay the phone flat with its top edge pointing straight out. When the dial settles, tap measure."),
   "dh.nut_giu_yen": m(DH, "Giữ yên và đo (1,5 giây)", "Hold still and measure (1.5 s)"),
   "dh.dang_giu": m(DH, "Đang đo — giữ yên máy…", "Measuring — keep the phone still…"),

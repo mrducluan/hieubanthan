@@ -5,7 +5,7 @@
 // engine — hook không tính số độ được chốt.
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
-  THOI_GIAN_GIU_MS, TOI_DA_MAU, doHienThi, giaiMa, kimMuot, lamTronMau, saiSoXauNhat, type MauGiaiMa, type SuKienTho,
+  THOI_GIAN_GIU_MS, TOI_DA_MAU, doHienThi, giaiMa, kimMuot, lamTronMau, nguonSuKien, saiSoXauNhat, type MauGiaiMa, type SuKienTho,
 } from "@/lib/la-kinh/hop-nhat";
 
 export type LoiCamBien = "khong_la_ban" | "quyen" | "xin_quyen" | "khong_tra";
@@ -94,11 +94,18 @@ export function useLaBanCamBien() {
       if (luot !== theHe.current || !conSong.current) return false;   // đã bấm lại / rời trang giữa lúc chờ
       if (quyen !== "granted") { setLoi("quyen"); return false; }
     }
-    const tuyetDoi = "ondeviceorientationabsolute" in window && typeof DOE.requestPermission !== "function";
-    const ten = tuyetDoi ? "deviceorientationabsolute" : "deviceorientation";
+    // Nghe CẢ HAI loại sự kiện: `deviceorientationabsolute` (Android: alpha tính từ Bắc) và `deviceorientation` (iOS: có
+    // `webkitCompassHeading`). Không đoán hệ máy qua `requestPermission` — Chrome mới cũng có hàm này, đoán nhầm là mất số.
+    // `nguonSuKien` chọn: sự kiện tương đối (alpha tính từ lúc mở trang) bị bỏ — đọc nó là lệch tuỳ ý so với Bắc.
+    const coTuyetDoi = "ondeviceorientationabsolute" in window;
     let daNhan = false;
+    let daThayTuyetDoi = false;
     const nghe = (e: Event) => {
-      const m = giaiMa(e as unknown as SuKienTho, tuyetDoi, gocManHinh());
+      const sk = e as unknown as SuKienTho;
+      const nguon = nguonSuKien(e.type, sk, daThayTuyetDoi);
+      if (!nguon) return;
+      if (e.type === "deviceorientationabsolute") daThayTuyetDoi = true;
+      const m = giaiMa(sk, nguon === "tuyet_doi", gocManHinh());
       if (!m) return;
       daNhan = true;
       cuoi.current = m;
@@ -123,10 +130,12 @@ export function useLaBanCamBien() {
       ngat(() => ({ loai: "khong" }));
       if (conSong.current) setLoi("khong_tra");
     }, CHO_SO_DAU_MS);
-    window.addEventListener(ten, nghe);
+    if (coTuyetDoi) window.addEventListener("deviceorientationabsolute", nghe);
+    window.addEventListener("deviceorientation", nghe);
     document.addEventListener("visibilitychange", khiAn);
     go.current = () => {
-      window.removeEventListener(ten, nghe);
+      window.removeEventListener("deviceorientationabsolute", nghe);
+      window.removeEventListener("deviceorientation", nghe);
       document.removeEventListener("visibilitychange", khiAn);
       window.clearTimeout(cho);
     };
