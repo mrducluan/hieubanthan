@@ -34,7 +34,7 @@ async function moBaoCao(page: Page, opts: { bc?: object; tuyChon?: object | numb
   await page.route("**/api/luan-giai/luu", (r) => { goi.luu!.push(r.request()); return r.fulfill({ json: { id: "bai-1" } }); });
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   await expect(page.getByTestId("luan-giai-toan-bo")).toHaveAttribute("data-phien-ban", "doi_song_1");
   return goi;
 }
@@ -308,7 +308,7 @@ async function moBaoCaoKhoa(page: Page, bc: object) {
   await page.route("**/api/luan-giai/tuy-chon", (r) => r.fulfill({ json: { tu_luu_luan_giai: false } }));
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
 }
 
 test("KC-1: Bản đồ con số dùng cùng khuôn đời sống (hộp, tóm tắt, Vì sao nói vậy), không dòng thời gian đại hạn", async ({ page }) => {
@@ -497,7 +497,7 @@ test("UD-3: thẻ ưu đãi nổi trượt xuống khi đọc tới chỗ khoá,
   const [dau, ...sau] = BC.chuong;
   const { thoi_gian_bieu: _tg, ...conLai } = BC;
   const ud = { ten: "Ưu đãi nạp", ma: "mb2611", gia: 69, gia_goc: 99, giam_pt: 30, tiet_kiem: 30,
-    het_luc: new Date(Date.now() + 3 * 86400_000).toISOString(), con_suat: 39, tong_suat: 39 };
+    het_luc: new Date(Date.now() + 3 * 86400_000).toISOString(), con_suat: 27, tong_suat: 39 };   // CRO-1: đã có người dùng suất (chưa ai dùng thì dòng suất ẩn)
   const xemTruoc = {
     ...conLai, cot_loi: [], so_khoa: sau.length,
     phi: { sao: 69, ly_do: "xem_truoc", khoa: true, dang_nhap: false, so_du: null, thuong_chao_mung: 10, uu_dai: ud },
@@ -515,7 +515,7 @@ test("UD-3: thẻ ưu đãi nổi trượt xuống khi đọc tới chỗ khoá,
   await page.route("**/api/luan-giai/tuy-chon", (r) => r.fulfill({ json: { tu_luu_luan_giai: false } }));
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const bc = page.getByTestId("luan-giai-toan-bo");
 
   // UD-3: trong bài chỉ có mốc vô hình; thẻ ưu đãi nổi trượt xuống khi đọc tới mốc.
@@ -528,7 +528,7 @@ test("UD-3: thẻ ưu đãi nổi trượt xuống khi đọc tới chỗ khoá,
   await expect(the).toBeVisible();
   await expect(the).toContainText("Ưu đãi nạp");
   await expect(the.locator("s")).toHaveText("99 Sao");
-  await expect(the.getByTestId("ud-con-suat")).toContainText("Còn 39/39 suất");
+  await expect(the.getByTestId("ud-con-suat")).toContainText("Còn 27/39 suất");
   await expect(the.getByTestId("ud-dem-nguoc")).toBeVisible();
   // Nằm dưới thanh đầu trang, không bị che.
   const hop0 = await the.boundingBox();

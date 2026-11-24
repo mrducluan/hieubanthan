@@ -190,7 +190,7 @@ export function ThanSo() {
   if (hoSo === null) {
     return (
       <div className="mx-auto max-w-lg">
-        <TieuDeTrang nho={c("dau.nhan_tren")} lon={c("dau.chua_ho_so")} />
+        <TieuDeTrang nho={c("dau.nhan_tren")} lon={c("dau.chua_ho_so")} mo_ta={c("dau.chua_ho_so_dan")} />
         <Card><NhapHoSo onXong={() => setNghiThuc("dang")} /></Card>
       </div>
     );

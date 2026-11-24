@@ -50,7 +50,7 @@ test("3 tháng tới (NHIP-2) vừa màn hình 360px, không tràn ngang", async
   await mock(page);
   await page.goto("/tu-vi");
   await expect(page.getByRole("group", { name: /Lá số Tử vi/ })).toBeVisible();
-  await page.getByRole("button", { name: /3 tháng tới/ }).click();
+  await page.locator('button[aria-controls="noi-dung-nhip-3-thang"]').click();   // CRO-2: trỏ đúng nút khối (chương báo cáo tự hiện có tên trùng chữ)
   await expect(page.getByTestId("the-thang")).toHaveCount(3);
   await expect(page.getByTestId("vong-cung-thang").first()).toBeVisible();
   const tran = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
@@ -67,7 +67,7 @@ test("4 khối TV-V2 hiện, chỉ gọi engine khi mở, không có giọng do�
   expect(Object.values(goi).every((g) => g.length === 0)).toBe(true);
 
   // Đường bay tứ hoá
-  await page.getByRole("button", { name: /Đường bay tứ hoá/ }).click();
+  await page.locator('button[aria-controls="noi-dung-phi-hoa"]').click();   // CRO-2: trỏ đúng nút khối (chương báo cáo tự hiện có tên trùng chữ)
   const ph = page.getByTestId("phi-hoa-noi-bat");
   const nb0 = PHI_HOA.noi_bat[0]!;
   await expect(ph).toContainText(nb0.tieu_de);
@@ -83,7 +83,7 @@ test("4 khối TV-V2 hiện, chỉ gọi engine khi mở, không có giọng do�
   expect(goi["phi-hoa"]!.at(-1)!.postDataJSON()).toMatchObject({ la_so: { birth_time: "12:30" }, nam_xem: expect.any(Number) });
 
   // 3 tháng tới
-  await page.getByRole("button", { name: /3 tháng tới/ }).click();
+  await page.locator('button[aria-controls="noi-dung-nhip-3-thang"]').click();   // CRO-2: trỏ đúng nút khối (chương báo cáo tự hiện có tên trùng chữ)
   const the = page.getByTestId("the-thang");
   await expect(the).toHaveCount(3);
   for (const [k, t] of NHIP.thang.entries()) await expect(the.nth(k)).toContainText(NHAN_MUC[t.muc]!);

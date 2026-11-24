@@ -10,6 +10,7 @@ import { CHU_CHAN_DUNG } from "@/lib/chu/cong-cu";
 import { ND_CHAN_DUNG } from "./noi-dung";
 import { ngonNguMayChu } from "@/lib/ngon-ngu-may-chu";
 import { metaCongCuEn } from "@/lib/en/seo";
+import { NutXuongForm } from "@/components/huyen-hoc/NutXuongForm";
 import { ChanDung } from "./ChanDung";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -19,16 +20,22 @@ export async function generateMetadata(): Promise<Metadata> {
     duong: ND_CHAN_DUNG.duong }), ND_CHAN_DUNG.duong), await layNoiDungTrang(ND_CHAN_DUNG.duong));
 }
 
-export default async function Page() {
+type P = { searchParams: Promise<{ kw?: string }> };
+
+export default async function Page(p: P) {
   // EN-ALL GĐ 8: chữ đầu trang theo ngôn ngữ (bản Việt giữ đúng chữ cũ).
-  const en = (await ngonNguMayChu()).ngonNgu === "en";
+  const [{ kw }, { ngonNgu }] = await Promise.all([p.searchParams, ngonNguMayChu()]);
+  const en = ngonNgu === "en";
   return (
-    <TrangCongCu duong={ND_CHAN_DUNG.duong}>
+    <TrangCongCu duong={ND_CHAN_DUNG.duong} kw={en ? undefined : kw}
+      gia={en ? undefined : { moDun: "chan_dung", mienPhi: "ma trận ba cách nhìn và chương đầu" }}>
       <div className="mx-auto max-w-5xl">
         {en ? <TieuDeTrang nho={CHU_CHAN_DUNG["dau.nhan_tren"]!.en!} lon="Your combined portrait"
           mo_ta="Your Zi Wei Dou Shu chart, your BaZi chart and what you see in your own face, side by side for each area of life: where all three agree, where they see different sides, and why. No scores, no ranking." />
           : <TieuDeTrang nho={CHU_CHAN_DUNG["dau.nhan_tren"]!.mac_dinh} lon="Chân dung tổng hợp của bạn"
           mo_ta="Lá số Tử vi, lá số Bát tự và điều bạn tự thấy trên gương mặt — đặt cạnh nhau theo từng mảng đời. Mảng nào ba cách cùng thấy, mảng nào nhìn khác nhau và vì sao. Không cộng điểm, không xếp hạng." />}
+        {/* CRO-2: điện thoại chưa có lá số — khối nhập nằm dưới màn đầu, một nút đưa xuống ô đầu tiên (tự ẩn khi đã có). */}
+        {!en && <div className="-mt-5 mb-5"><NutXuongForm moDun="chan_dung" /></div>}
         <ChanDung />
       </div>
     </TrangCongCu>

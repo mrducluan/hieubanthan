@@ -292,6 +292,10 @@ test("thẻ Quẻ của tôi: mã ký chỉ có 6 hào + tên quẻ + chủ đ�
   expect(g[2]).toBe("778779");
   expect(g[3]).toBe("Lý");
   expect(g[4]).toBe("Đoài");
+  // HCS-1: share_created đo khi người dùng GỬI (bấm kênh đầu tiên) — thẻ tạo sẵn rồi đổi tên không đếm hai lần.
+  expect((await suKien(page)).filter((e) => e.su_kien === "share_created" && e.kind === "que")).toHaveLength(0);
+  await ans.getByTestId("kenh-chep").click();
+  await ans.getByTestId("kenh-chep").click();
   expect((await suKien(page)).filter((e) => e.su_kien === "share_created" && e.kind === "que")).toHaveLength(1);
   const html = await (await request.get(`/the/que/${ma}`)).text();
   expect(html).toContain("Quẻ của Lan");

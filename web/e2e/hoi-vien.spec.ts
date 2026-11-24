@@ -148,7 +148,7 @@ test("báo cáo với phi.ly_do = hoi_vien: đầy đủ, không nút mở khoá
   } }));
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   const bc = page.getByTestId("luan-giai-toan-bo");
   await expect(bc).toContainText("Chương tình cảm mở nhờ hội viên.");
   await expect(bc).toContainText("Chương vận hạn mở nhờ hội viên.");
@@ -174,7 +174,7 @@ async function hopNap(page: Page, hoi_vien: object | null) {
     } }));
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   await page.getByTestId("lg-mo-khoa").click();
   const hop = page.getByTestId("hop-thoai-sao");
   await expect(hop).toHaveAttribute("data-can", "nap");

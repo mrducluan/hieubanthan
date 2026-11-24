@@ -2,6 +2,7 @@
 // Engine cũ (lệch deploy) chưa trả câu → khối tự ẩn. EN-ALL: `en` = nhãn theo bảng lib/chu/kien-thuc.ts chiều `en`.
 import { taoChu } from "@/lib/chu-trang";
 import { CHU_KIEN_THUC } from "@/lib/chu/kien-thuc";
+import { NutChiaSeTrang } from "@/components/chia-se/NutChiaSeTrang";
 
 export function TraLoiNhanh({ chu, en = false }: { chu?: string | null; en?: boolean }) {
   if (!chu) return null;
@@ -10,6 +11,8 @@ export function TraLoiNhanh({ chu, en = false }: { chu?: string | null; en?: boo
     <section aria-label={nhan} className="rounded-2xl border border-gold/30 bg-gold/5 p-5" data-testid="tra-loi-nhanh">
       <p className="eyebrow">{nhan}</p>
       <p className="mt-2 leading-relaxed text-fg">{chu}</p>
+      {/* HCS-1: gửi trang kèm câu trả lời ngắn này làm lời nhắn (chưa có bản Anh của hộp chia sẻ). */}
+      {!en && <NutChiaSeTrang traLoi={chu} className="mt-3" />}
     </section>
   );
 }

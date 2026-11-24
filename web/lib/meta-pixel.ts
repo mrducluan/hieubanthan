@@ -9,7 +9,8 @@
 //   reading_started{mo_dun}    → ViewContent {content_category: mảng}   (một lần mỗi mảng mỗi phiên)
 //   reading_completed{mo_dun}  → ReadingCompleted (tuỳ chỉnh)            (một lần mỗi mảng mỗi phiên)
 //   advisor_question_completed → QuestionAnswered (tuỳ chỉnh)            (một lần mỗi mảng mỗi phiên)
-//   checkout_started{kind,goi} → InitiateCheckout {content_type, content_ids}
+//   unlock_clicked{kind=bam}   → AddToCart {content_category: mảng, value ≈ VND} (CRO-1: bậc giữa Lead → Purchase để tối ưu; một lần mỗi mảng mỗi phiên)
+//   checkout_started{kind,goi} → InitiateCheckout {content_type, content_ids, value VND của gói} (CRO-1: thêm value)
 //   unlock_succeeded{mo_dun}   → UnlockChapter (tuỳ chỉnh)
 //   trang kết quả đơn đã trả   → Purchase {value VND, content_type} (eventID don-<mã> = API chuyển đổi máy chủ) + Subscribe (hội viên)
 import { coMaTrongUrl } from "@/lib/lam-sach-url";
@@ -58,11 +59,24 @@ export function metaLead(): void {
   f("track", "Lead");
 }
 
+/** CRO-1: giá trị (VND) đi kèm sự kiện kế tiếp (AddToCart / InitiateCheckout). PostHog cố ý KHÔNG nhận số tiền, nên nơi
+ *  gọi đặt giá trị riêng cho Meta ngay trước ghi(); dùng một lần rồi xoá. */
+let giaTriCho: number | null = null;
+export function datGiaTriMeta(vnd: number | null | undefined): void {
+  giaTriCho = typeof vnd === "number" && Number.isFinite(vnd) && vnd > 0 ? Math.round(vnd) : null;
+}
+/** QC-G: xem (không lấy) giá trị đang chờ — ghi() đưa cùng số cho dataLayer Google trước khi Meta dùng rồi xoá. */
+export function xemGiaTriMeta(): number | null { return giaTriCho; }
+function layGiaTri(): { value: number; currency: "VND" } | Record<string, never> {
+  const v = giaTriCho; giaTriCho = null;
+  return v ? { value: v, currency: "VND" } : {};
+}
+
 /** Nối sự kiện PostHog (đã qua bộ lọc thuộc tính) sang sự kiện Meta. Sự kiện không có trong bảng → bỏ qua. */
 export function metaSuKien(suKien: string, p: Record<string, string | number | boolean>): void {
   if (suKien === "profile_created") return metaLead();
   const f = sanSang();
-  if (!f) return;
+  if (!f) { if (suKien === "checkout_started" || suKien === "unlock_clicked") giaTriCho = null; return; }
   const mang = ma(p.mo_dun);
   switch (suKien) {
     case "reading_started":
@@ -76,7 +90,12 @@ export function metaSuKien(suKien: string, p: Record<string, string | number | b
       return;
     case "checkout_started": {
       const goi = ma(p.goi);
-      f("track", "InitiateCheckout", { content_type: ma(p.kind) ?? "sao", ...(goi ? { content_ids: [goi] } : {}), currency: "VND" });
+      f("track", "InitiateCheckout", { content_type: ma(p.kind) ?? "sao", ...(goi ? { content_ids: [goi] } : {}), ...layGiaTri(), currency: "VND" });
+      return;
+    }
+    case "unlock_clicked": {
+      const gt = layGiaTri();
+      if (p.kind === "bam" && mang && motLanPhien(`mo.${mang}`)) f("track", "AddToCart", { content_category: mang, content_type: "product", ...gt });
       return;
     }
     case "unlock_succeeded":

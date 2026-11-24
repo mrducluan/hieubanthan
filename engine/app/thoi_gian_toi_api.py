@@ -69,3 +69,39 @@ def api_thoi_gian_toi_nam() -> dict:
     """Năm chọn được (năm âm đang đi + năm tới) và năm mặc định (năm tới khi Tết sau còn ≤ 120 ngày) — web chỉ hiện."""
     hom_nay = _dt.datetime.now(_VN).date()
     return {"cac_nam": T.cac_nam(hom_nay), "mac_dinh": T.nam_mac_dinh(hom_nay)}
+
+
+# ---- KH-1 (2026-11-23): "Việc bạn định làm: tháng nào hợp" — danh mục việc cố định, 12 tháng tới, không lưu.
+from app.luangiai import ke_hoach_thang as KH  # noqa: E402
+
+_MA_KH = Literal["doi_viec", "khoi_su", "ky_ket", "mua_nha", "xay_nha", "cuoi_hoi", "di_xa", "hoc_thi", "mua_xe"]
+
+
+class KeHoachInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    ke_hoach: _MA_KH
+    ngay_sinh: _dt.date = Field(ge=_dt.date(1900, 1, 1), le=_dt.date(2100, 12, 31))
+    gioi_tinh: Literal["nam", "nu"] | None = None
+    la_so: TuanTrietInput | None = None
+    ngay_xem: _dt.date | None = None
+
+
+@router.get("/v1/thoi-gian-toi/ke-hoach")
+def api_ke_hoach_danh_muc() -> dict:
+    return {"viec": KH.danh_muc()}
+
+
+@router.post("/v1/thoi-gian-toi/ke-hoach")
+def api_ke_hoach(inp: KeHoachInput) -> dict:
+    hom_nay = inp.ngay_xem or _dt.datetime.now(_VN).date()
+    if inp.ngay_sinh > hom_nay:
+        raise HTTPException(422, detail="Ngày sinh phải trước hôm nay")
+    gioi_tinh = inp.gioi_tinh or (inp.la_so.gender if inp.la_so else None)
+    try:
+        kq = KH.lap(inp.ke_hoach, inp.ngay_sinh, hom_nay, gioi_tinh, **KH.sinh_tu_la_so(inp.la_so))
+    except tuvi_an_sao.AnSaoLoi as e:
+        raise _loi_an_sao(e)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e))
+    return {"engine_version": ENGINE_VERSION, **kq}

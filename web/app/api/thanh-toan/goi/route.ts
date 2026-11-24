@@ -5,6 +5,7 @@
 import { NextResponse } from "next/server";
 import { layCauHinh } from "@/lib/cau-hinh";
 import { congDangBat, dsGoiSao, hoiVienThongTin, napDauThongTin } from "@/lib/thanh-toan/cong";
+import { locGoiLanDau } from "@/lib/thanh-toan/nap-dau";
 
 export const dynamic = "force-dynamic";
 
@@ -12,6 +13,7 @@ export async function GET(req: Request) {
   const [goi, nap_dau, gia_bao_cao, hoi_vien] = await Promise.all([
     dsGoiSao(), napDauThongTin(req), layCauHinh<number>("luan_giai.gia_sao").catch(() => 10), hoiVienThongTin(req),
   ]);
-  return NextResponse.json({ goi, cong: congDangBat(), gia_bao_cao, nap_dau, hoi_vien },
+  // CRO-1: gói Lần đầu chỉ cho tài khoản chưa từng nạp — ẩn khi biết chắc đã nạp (SQL vẫn chặn lúc tạo đơn).
+  return NextResponse.json({ goi: locGoiLanDau(goi, nap_dau as { lan_dau: boolean | null } | null), cong: congDangBat(), gia_bao_cao, nap_dau, hoi_vien },
     { headers: { "cache-control": "private, no-store" } });
 }

@@ -3,7 +3,95 @@
 > Các việc dưới đây cần quyền tài khoản (Vercel, Render, Supabase, GoDaddy, Google…) nên em không tự làm được.
 > **Mỗi phiên làm việc mới, Claude đọc file này và nhắc anh những mục chưa đánh dấu `[x]`.**
 > Làm xong mục nào, anh đánh `[x]` (hoặc nhắn em đánh hộ).
-> Cập nhật lần cuối: 2026-11-21 (RY-1 mục 4az; KM-0 mục 4ay; TK-1 mục 4ax; LH-1 + LH-2 + LH-3 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+> Cập nhật lần cuối: 2026-11-23 (việc mới nhất ở ngay dưới; RY-1 mục 4az; KM-0 mục 4ay; TK-1 mục 4ax; LH-1 + LH-2 + LH-3 mục 4aw; NF-BT mục 4av; SEO-Q mục 4au; SEO-P mục 4at; WS-2 + WS-1 + PT-NG1 mục 4as; KT-TT mục 4ar; PAY2S-1 mục 4aq; trước đó KW-6T 4ap, BT-UI 4ak, SEO-N 4al, BLOG-10 4am, TR-5 4an, SEO-O 4ao).
+
+
+---
+
+## ⭐ VIỆC MỚI NHẤT — làm từ trên xuống (cập nhật 23/11/2026)
+
+Làm xong dòng nào thì đánh `[x]` (hoặc nhắn em). Các mục cũ hơn nằm bên dưới đường kẻ.
+
+### A. Quảng cáo Facebook — làm cho xong (đang dở)
+
+- [ ] **A1.** Đặt `META_CAPI_TOKEN` trên Vercel (dự án web), Production → Redeploy. (Lấy ở Events Manager → pixel Hieuban → Settings
+  → Conversions API → Generate access token.)
+- [ ] **A2.** Thử: đặt thêm `META_CAPI_TEST_CODE` = mã ở tab Test events → Redeploy → nạp một gói nhỏ → thấy **Purchase** có cả
+  Browser và Server. Thử xong **xoá** `META_CAPI_TEST_CODE` → Redeploy.
+- [ ] **A3.** Events Manager → pixel Hieuban → Settings → **Traffic permissions** → chỉ cho phép `hieuban.com` (chặn localhost,
+  bản thử *.vercel.app).
+- [ ] **A4.** Business Settings → Brand safety → Domains → hieuban.com → **Verify** (cách "meta-tag", thẻ đã có sẵn trên web).
+- [ ] **A5.** Vercel env `NEXT_PUBLIC_DANG_NHAP` = `facebook,zalo,google` → Redeploy (khách mở trong app Facebook thấy nút
+  Facebook đầu tiên).
+- [ ] **A6.** Sau 7 ngày chạy theo Lead: gửi em chi phí / Lead, số AddToCart, InitiateCheckout, Purchase theo nhóm quảng cáo.
+
+### B. Google Ads — chuẩn bị trước, chạy từ 01/12
+
+- [ ] **B1. Chạy migration 0041.** Supabase → SQL Editor → dán nội dung `supabase/migrations/0041_google_don.sql` → Run.
+  Kiểm: `/quan-tri` → thẻ "Migration Supabase" có dòng 0041.
+- [ ] **B2. Tạo mật khẩu cho tệp chuyển đổi** (Google dùng để tải số đơn đã trả về). Cách tạo, chọn một:
+  - Máy Mac: mở **Terminal**, gõ `openssl rand -base64 24` → Enter → ra một chuỗi 32 ký tự, đó là mật khẩu.
+  - Hoặc trình quản lý mật khẩu (Chrome, 1Password, Bitwarden…) → "Tạo mật khẩu" → độ dài 24, có chữ hoa, chữ thường, số.
+  - Tên đăng nhập: tự đặt, ví dụ `gads-hieuban`.
+
+  **Có, anh lưu lại cả hai** (tên + mật khẩu) vào trình quản lý mật khẩu — sẽ dán ở hai chỗ: B3 (Vercel) và B6 (Google Ads).
+  Không gửi em, không dán vào chat. Lỡ quên thì tạo cặp mới và sửa lại ở cả hai chỗ.
+- [ ] **B3. Đặt biến trên Vercel** (dự án **web**) → Settings → Environment Variables, chọn Production:
+  - `GOOGLE_OFFLINE_USER` = tên ở B2
+  - `GOOGLE_OFFLINE_PASS` = mật khẩu ở B2
+
+  → Save → Deployments → Redeploy.
+- [ ] **B4. Tạo chuyển đổi trong Google Ads** → Mục tiêu (Goals) → Chuyển đổi (Conversions) → **+ Hành động chuyển đổi mới**:
+  1. **"Nap Sao"** (gõ đúng như vậy, không dấu): chọn **Nhập (Import)** → **Các nguồn dữ liệu khác / CRM** → **Lượt nhấp
+     (clicks)**. Đếm: **Mọi lượt**. Giá trị: **dùng giá trị khác nhau cho mỗi chuyển đổi**. Đặt **Chính (Primary)**.
+  2. **"Tao ho so"**: chọn **Trang web** → **Tự cài thẻ (manual)**. Đếm: **Một lượt**. Giá trị cố định 5.000 ₫. Đặt **Chính**.
+     Chép lại **Conversion ID + Conversion Label** (dùng ở B5).
+  3. **"Bam mo khoa"** và **"Bat dau nap"**: như số 2 nhưng đặt **Phụ (Secondary)**; mỗi cái chép ID + Label.
+- [ ] **B5. Gắn thẻ trong Google Tag Manager** (container GTM-KNZL39CS). Cần sẵn từ B4: **Conversion ID** (dạng
+  `AW-123456789`, chung cho cả 3 chuyển đổi — chỉ lấy phần số khi GTM hỏi) và **Label** riêng của "Tao ho so",
+  "Bam mo khoa", "Bat dau nap". Thấy ở Google Ads → chuyển đổi đó → **Thiết lập thẻ → Dùng Google Tag Manager**.
+  1. Vào tagmanager.google.com → chọn container **GTM-KNZL39CS** (Workspace mặc định).
+  2. **Biến** (Variables) → mục "Biến do người dùng xác định" → **Mới** → loại **Biến lớp dữ liệu** (Data Layer Variable):
+     - Tên `DLV - value`, ô "Tên biến lớp dữ liệu" gõ `value` → Lưu.
+     - Tên `DLV - currency`, ô đó gõ `currency` → Lưu.
+  3. **Trình kích hoạt** (Triggers) → **Mới** → loại **Sự kiện tuỳ chỉnh** (Custom Event), "Kích hoạt trên: Tất cả sự kiện
+     tuỳ chỉnh". Tạo 3 cái, tên sự kiện gõ đúng từng chữ (chữ thường, có gạch dưới):
+     - `TK - hbt_lead` → tên sự kiện `hbt_lead`
+     - `TK - hbt_mo_khoa` → `hbt_mo_khoa`
+     - `TK - hbt_thanh_toan` → `hbt_thanh_toan`
+  4. **Thẻ** (Tags) → **Mới**:
+     - **Trình liên kết chuyển đổi** (Conversion Linker): loại "Conversion Linker", trình kích hoạt **Initialization - All
+       Pages** (có sẵn). Đã có thẻ này rồi thì bỏ qua.
+     - **Ads - Tao ho so**: loại **Google Ads Conversion Tracking** → Conversion ID (phần số), Conversion Label của "Tao ho so",
+       để trống ô Giá trị (Google lấy 5.000 ₫ đặt ở B4), trình kích hoạt `TK - hbt_lead`.
+     - **Ads - Bam mo khoa**: cùng loại, ID + Label "Bam mo khoa", Conversion Value `{{DLV - value}}`, Currency Code
+       `{{DLV - currency}}`, trình kích hoạt `TK - hbt_mo_khoa`.
+     - **Ads - Bat dau nap**: như trên, Label "Bat dau nap", trình kích hoạt `TK - hbt_thanh_toan`.
+     - Mục "Cài đặt đồng ý" (Consent settings) của các thẻ: để **Không cần thêm sự đồng ý** — site đã tự gửi lựa chọn cookie
+       trước khi GTM chạy, thẻ Google Ads tự tuân theo.
+     - **KHÔNG** tạo thẻ cho "Nap Sao": số đơn đã trả đi bằng tệp tải theo lịch (B6); thêm thẻ trên trình duyệt sẽ đếm hai lần.
+  5. **Xem trước** (Preview, góc trên phải) → gõ `https://hieuban.com/than-so` → Connect. Mở bằng **cửa sổ ẩn danh**
+     (sự kiện "Tao ho so" chỉ bắn một lần mỗi máy). Nhập tên + ngày sinh → bấm xem → ở tab Tag Assistant thấy sự kiện
+     `hbt_lead` và thẻ **Ads - Tao ho so** ở mục "Tags Fired" là đúng. Hai thẻ còn lại chỉ bắn khi đã bật thu Sao (bấm
+     "Mở toàn bộ" / chọn gói nạp) — chưa bật thì bỏ qua, không phải lỗi.
+  6. **Gửi** (Submit) → Tên phiên bản `QC-G chuyen doi Google Ads` → **Xuất bản** (Publish).
+  7. Sau 1–3 ngày: Google Ads → Chuyển đổi → trạng thái chuyển từ "Chưa xác minh" sang **"Đang ghi nhận"**. Vẫn chưa thì
+     chụp màn hình gửi em.
+- [ ] **B6. Lên lịch cho Google tự tải số đơn mỗi ngày.** Google Ads → Mục tiêu → Chuyển đổi → **Tải lên (Uploads)** → tab
+  **Lịch (Schedules)** → **+**:
+  - Nguồn: **HTTPS**
+  - URL: `https://hieuban.com/api/qc/google-offline`
+  - Tên người dùng + Mật khẩu: đúng cặp ở B2
+  - Tần suất: **Hằng ngày**, giờ tuỳ (vd 9:00)
+
+  → bấm **Xem trước (Preview)**. Thấy bảng có tiêu đề "Google Click ID…" (có thể chưa có dòng nào vì chưa có đơn từ Google) là
+  đúng → **Lưu**. Nếu Google báo cột **Email** không hợp lệ: thêm biến Vercel `GOOGLE_OFFLINE_EMAIL` = `0` → Redeploy → thử lại.
+- [ ] **B7. Bật Tự động gắn thẻ**: Google Ads → Quản trị (Admin) → Cài đặt tài khoản → **Tự động gắn thẻ (Auto-tagging)** → Bật.
+- [ ] **B8. Tạo chiến dịch** theo `docs/CHIEN-LUOC-GOOGLE-ADS.md` (mục 3, 4, 8): chỉ Mạng Tìm kiếm, khớp chính xác + cụm từ,
+  ~135.000 ₫/ngày, chạy từ **01/12**. URL cuối mỗi nhóm quảng cáo thêm `?kw=…` như bảng mục 3.
+- [ ] **B9. Hỏi luật sư** (không gấp): gửi email đã mã hoá (SHA-256) cho Meta + Google có cần xin đồng ý riêng không.
+
+---
 
 ### 4ay. KM-0 — nguồn tri thức Kỳ Môn Độn Giáp (2026-11-18, `docs/KY-MON-NGUON.md`)
 
@@ -1593,6 +1681,32 @@ CTA-1, VH-1 trong CLAUDE.md). Việc của anh:
 - [ ] **MQ-7.** Pixel Hieuban → Settings → tắt **Automatic advanced matching** (bật thì Meta tự đọc ô nhập như email — trái Chính sách riêng tư).
 - Chữ quảng cáo: không ngầm nói biết đặc điểm riêng của người xem ("Bạn đang buồn chuyện tình cảm?") — chính sách Meta; nên viết "Xem lá số
   Tử vi của bạn", "Năm 2027 của tuổi …".
+
+## CRO-1. Quảng cáo → nạp Sao: 0 đơn sau 1,23 triệu ₫ (2026-11-22, `docs/CRO-1-QUANG-CAO-NAP-SAO.md`)
+
+Code đã sửa trong PR CRO-1 (lỗi hộp thoại Thần số, giá bằng ₫, đăng nhập trong app Facebook, Bát tự, thanh mở khoá, gói 59k,
+pixel chặn localhost, AddToCart). Việc của anh, theo thứ tự:
+- [x] **CR-1.** Merge PR → Vercel deploy web.
+- [x] **CR-2.** Supabase → SQL Editor → chạy **`supabase/migrations/0040_goi_lan_dau.sql`** (sau 0039). Kiểm: `/quan-tri` thẻ Migration có 0040.
+- [x] **CR-3.** `/quan-tri/cai-dat` → nhóm "Nạp Sao" → **bật "Bán gói Lần đầu (59.000 ₫ / 59 Sao)"**. Bật luôn "Tặng Sao lần nạp đầu" nếu chưa.
+- [ ] **CR-4.** Vercel (web) env `NEXT_PUBLIC_DANG_NHAP`: để **`facebook,zalo,google`** (Facebook đứng đầu khi khách mở trong app
+  Facebook/Instagram — Google bị chặn trong trình duyệt nhúng). Zalo cần `ZALO_APP_ID` + `ZALO_APP_SECRET` (docs/DANG-NHAP.md). Redeploy.
+- [ ] **CR-5.** Làm MQ-1, MQ-2 ở mục META-QC dưới (migration 0038 + `META_CAPI_TOKEN`) — hiện API chuyển đổi chưa từng gửi sự kiện nào.
+- [ ] **CR-6.** Events Manager → tạo **Custom Conversion "Lead – hieuban"** (sự kiện Lead, URL chứa `hieuban.com`) — loại sự kiện thử cũ.
+  Mở tab **Diagnostics** (đang báo 2 lỗi) xem là gì, gửi em nếu cần sửa code.
+- [x] **CR-7.** Ads Manager — chiến dịch "BAT TU|CTW" (đang tối ưu Lượt xem trang đích → Meta mang người bấm cho vui):
+  1. Tạo chiến dịch mới mục tiêu **Leads (hoặc Sales)**, vị trí chuyển đổi **Website**, sự kiện **Lead – hieuban**.
+  2. Hai nhóm quảng cáo: **/bat-tu** (quảng cáo HB|Bát Tự|01) và **/than-so** (quảng cáo Than-so) — không chung một nhóm.
+  3. Vị trí: Feed + Reels + Stories của Facebook và Instagram; **bỏ Audience Network, cột phải, Threads**.
+  4. Ngân sách 60k/ngày tìm khách mới + 30k/ngày chạy lại (bước 5). Tắt chiến dịch LPV cũ khi chiến dịch mới chạy được 3 ngày.
+  5. Chiến dịch chạy lại: đối tượng tuỳ chỉnh từ pixel = **ReadingCompleted hoặc Lead 30 ngày**, loại **Purchase 180 ngày**; nội dung
+     "Chương 2 bài đọc của bạn đang chờ" + giá thật (69 Sao ≈ 59.000 ₫ với gói Lần đầu, hết 30/11).
+  6. Khi AddToCart (bấm "Mở toàn bộ") đạt ≥ 50/tuần → thử tối ưu theo **AddToCart**; khi Purchase ≥ 25–50/tuần → theo **Purchase**.
+- [ ] **CR-8.** Video: nói lời hứa cụ thể trong 3 giây đầu ("Bạn là số mấy?", "Mệnh bạn thiếu hành gì?") — người xem chỉ ở lại 11–13 giây.
+- [ ] **CR-9.** Sau 7 ngày gửi em: chi phí / Lead, số AddToCart, InitiateCheckout, Purchase theo nhóm quảng cáo.
+
+## QC-G. Google Ads (2026-11-23)
+Đã chuyển lên đầu trang, mục **"VIỆC MỚI NHẤT"**.
 
 ## LA-UI / NS-QT / GD-1 (2026-11-16) — lịch âm mới + hai đề xuất chờ anh quyết
 - **Deploy engine trước web** cho lịch âm mới (web gọi route mới `/v1/lich/nam-ngay/{năm}`; engine cũ thì trang chỉ thiếu khối lịch, không lỗi).

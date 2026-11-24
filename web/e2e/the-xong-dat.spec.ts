@@ -19,7 +19,8 @@ test("trang Tết 2027: ảnh chia sẻ là thẻ xông đất; nút chia sẻ c
   await page.addInitScript(() => { (navigator as unknown as { share?: unknown }).share = undefined; });
   await page.goto("/tuoi-xong-dat/2027");
   await page.getByTestId("chia-se-xong-dat").click();
-  await expect(page.getByTestId("chia-se-xong-dat")).toContainText("Đã chép link");
+  await page.getByTestId("hop-chia-se").getByTestId("kenh-chep").click();   // HCS-1: hộp chia sẻ chung
+  await expect(page.getByTestId("bao-chia-se")).toBeVisible();
   const chep = await page.evaluate(() => navigator.clipboard.readText());
   expect(chep).toContain("Tết Đinh Mùi 2027");
   const url = new URL(chep.slice(chep.indexOf("http")));
@@ -43,7 +44,8 @@ test("công cụ: sau khi xem, chia sẻ thẻ năm — lời và link không ma
   await form.getByRole("button", { name: "Xem ngay" }).click();
   await expect(page.getByTestId("ket-qua-xong-dat")).toBeVisible();
   await page.getByTestId("chia-se-xong-dat").click();
-  await expect(page.getByTestId("chia-se-xong-dat")).toContainText("Đã chép link");
+  await page.getByTestId("hop-chia-se").getByTestId("kenh-chep").click();   // HCS-1: hộp chia sẻ chung
+  await expect(page.getByTestId("bao-chia-se")).toBeVisible();
   const chep = await page.evaluate(() => navigator.clipboard.readText());
   expect(chep).toMatch(/\/tuoi-xong-dat\/2027\?tu=xd\.[0-9a-f]{10}$/);
   for (const s of ["1983", "Quý Hợi", "Hợi"]) expect(chep).not.toContain(s);

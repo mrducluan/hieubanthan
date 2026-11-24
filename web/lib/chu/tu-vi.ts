@@ -21,6 +21,10 @@ export const CHU_TU_VI_UI = {
   "aria.la_so": m(T, "Lá số", "Chart"),
   "aria.luan_giai": m(T, "Luận giải toàn bộ", "Full reading"),
   "aria.hoi": m(T, "Hỏi Tử vi", "Ask about Zi Wei Dou Shu"),
+  // CRO-2: nút đầu lá số xuống bài luận đời thường (lá số + 4 khối nâng cao dài ~6 màn hình điện thoại).
+  "nut.doc_luan_giai": m(T, "Đọc luận giải đời thường", "Read your plain-language reading"),
+  "nut.doc_luan_giai_phu": m(T, "Chương đầu đọc ngay, lời thường — không cần biết thuật ngữ.", "The first chapter opens right away, in plain words — no jargon needed."),
+  "nut.hoi_la_so": m(T, "Hỏi một câu về lá số ↓", "Ask a question about your chart ↓"),
   "la_so_mau.moi": m(T, "Mới làm quen Tử vi?", "New to Zi Wei Dou Shu?"),
   "la_so_mau.link": m(T, "Xem 6 lá số mẫu được đọc từng bước", "See 6 sample charts read step by step"),
   "la_so_mau.sau": m(T, ", có giải nghĩa từng thuật ngữ.", ", with every term explained."),

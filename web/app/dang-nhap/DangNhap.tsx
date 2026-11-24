@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { coTaiKhoan, supabase } from "@/lib/supabase/trinh-duyet";
 import { cachDangNhap, type NhaCungCap } from "@/lib/dang-nhap";
 import { laEmailZalo } from "@/lib/zalo-email";
+import { appNhung, xepNhaCungCap, type AppNhung } from "@/lib/trinh-duyet-nhung";
 
 /** 0912345678 / 84912345678 / +84912345678 → +84912345678; sai định dạng → null. */
 function chuanHoaSdt(s: string): string | null {
@@ -56,6 +57,9 @@ export function DangNhap({ googleQuaSite = false }: { googleQuaSite?: boolean })
     return buoc ? `Đăng nhập Zalo chưa thành công, thử lại. (Mã: ${buoc})` : "Đăng nhập chưa thành công, thử lại.";
   });
 
+  // CRO-1: đang trong app Facebook / Instagram / Zalo → xếp nút đi được ngay lên đầu (đọc UA sau khi gắn trang).
+  const [app, setApp] = useState<AppNhung>(null);
+  useEffect(() => { setApp(appNhung(navigator.userAgent)); }, []);
   // Đi từ cuối một trang dài (vd nút "Mở toàn bộ" dưới báo cáo) → trình duyệt giữ vị trí cuộn cũ, kẹp về đáy trang
   // ngắn này nên người dùng thấy chân trang thay vì nút đăng nhập. Luôn mở ở đầu trang.
   useEffect(() => { if (!window.location.hash) window.scrollTo(0, 0); }, []);
@@ -130,7 +134,13 @@ export function DangNhap({ googleQuaSite = false }: { googleQuaSite?: boolean })
       </>)}
 
       <Card className="mt-6 space-y-5">
-        {cach.oauth.map((p) => p === "zalo" || (p === "google" && googleQuaSite) ? (
+        {app && app !== "zalo" && cach.oauth.includes("google") && (
+          <p className="rounded-xl border border-gold/30 bg-gold/5 px-3 py-2 text-xs text-fg-muted" data-testid="dang-nhap-trong-app">
+            Bạn đang mở trong ứng dụng {app === "instagram" ? "Instagram" : "Facebook"}: Google thường không cho đăng nhập ở đây.
+            {cach.oauth.includes("facebook") ? " Bấm “Tiếp tục với Facebook” là xong ngay." : " Bấm ⋯ ở góc màn hình → “Mở trong trình duyệt” rồi đăng nhập."}
+          </p>
+        )}
+        {xepNhaCungCap(cach.oauth, app).map((p) => p === "zalo" || (p === "google" && googleQuaSite) ? (
           // DN-2 Zalo / DN-3 Google: đi qua máy chủ web (Zalo: Supabase không có sẵn; Google: không lộ tên miền Supabase)
           // — điều hướng trang thật, không fetch.
           <Button key={p} asChild variant="secondary" className="w-full" data-testid={`dang-nhap-${p}`}>

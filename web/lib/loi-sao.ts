@@ -81,3 +81,10 @@ export function loiNguoiNhan(d: { chaoMung: number; duocMoi: number; coMa: boole
   const sau = d.thu && d.gia > 0 && tong >= d.gia ? " — đủ mở một Luận giải toàn bộ." : d.thu && d.gia > 0 ? " — để mở luận giải, hỏi thêm câu." : ".";
   return `${dau} ${tong} Sao${chiTiet}${sau}`;
 }
+
+/** CRO-1: số tiền tương ứng để người đọc hiểu "Sao" là bao nhiêu — gói nhỏ nhất 1.000 ₫ / Sao (gói lớn rẻ hơn), nên ghi "≈".
+ *  Dấu chấm phân nghìn kiểu Việt viết tay (không phụ thuộc ICU của máy chủ / trình duyệt → không lệch hydrate). */
+export function giaVnd(sao: number): string {
+  const so = String(Math.max(0, Math.round(sao)) * 1000).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return `${so} ₫`;
+}

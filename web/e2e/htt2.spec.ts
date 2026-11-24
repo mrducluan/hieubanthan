@@ -34,7 +34,7 @@ test("bát tự: người sinh Tokyo / Việt Nam không thấy công tắc Mùa
 test("giao thoa: công tắc AI diễn đạt mặc định tắt → web không gửi dien_dat, không có đoạn AI", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Xem luận giải" }).click();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible({ timeout: 60_000 });   // CRO-2: Tử vi tự mở chương 1 (không còn nút)
   await expect(page.getByTestId("luan-giai-toan-bo")).toHaveAttribute("data-phien-ban", "doi_song_1");
   const goi = page.waitForRequest((r) => r.url().endsWith("/api/giao-thoa") && r.method() === "POST");
   await page.evaluate(() => {

@@ -5,7 +5,8 @@
 import type { PostHog } from "posthog-js";
 import { ghiMangDaXem } from "@/lib/huy-hieu";
 import { choRanh } from "@/lib/cho-ranh";
-import { metaSuKien } from "@/lib/meta-pixel";
+import { metaSuKien, xemGiaTriMeta } from "@/lib/meta-pixel";
+import { googleSuKien } from "@/lib/google-qc";
 import { docNguonQc } from "@/lib/nguon-qc";
 import { lamSachUrl } from "@/lib/lam-sach-url";
 
@@ -58,6 +59,8 @@ export type SuKien =
   // CTA-2: khối thẻ cuối trang (Kiến thức {mảng}, Bài viết liên quan, Đọc tiếp…) — thấy khối (lap=0) / thấy từng thẻ bù
   // (lap=1, den = đường dẫn thẻ) / bấm thẻ (lap=1 thẻ bù, 0 = thẻ thật). Chỉ mã khối + đường dẫn trong site.
   | "end_cta_viewed" | "end_cta_clicked"
+  // HCS-1: hộp chia sẻ chung — mở hộp / bấm một kênh (mã kênh + kết quả + mã lời nhắn), không bao giờ chữ lời nhắn hay link
+  | "share_sheet_opened" | "share_target"
   // TM-1: bấm thanh mảng (dải điều hướng dưới menu chính) — tu = mã mảng của thanh, den = mã mục, trang = đường dẫn đang xem
   | "nav_bar_clicked";
 
@@ -151,7 +154,8 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   nguoi: "string",      // do_mat_chinh: mã lựa chọn NGƯỜI DÙNG chọn lại
   do_tin: "string",     // do_mat_chinh: thap / trung_binh / cao / so (máy trả con số) / khong
   tay: "string",        // chỉ tay: trai / phai (duong_cv_phan_hoi, chup_tay…)
-  qc: "string",         // META-QC: "meta" = phiên này (hoặc ≤ 30 ngày trước) vào từ quảng cáo Facebook / Instagram (lib/nguon-qc.ts)
+  kenh: "string",       // HCS-1: share_target — zalo / messenger / facebook / anh / chep / luu_anh / khac
+  qc: "string",         // META-QC / QC-G: "meta" | "google" = phiên này (hoặc ≤ 30 ngày trước) vào từ quảng cáo Facebook / Instagram (lib/nguon-qc.ts)
 };
 const GIOI_HAN_CHUOI = 40;
 /** Khoá được dài hơn 40 ký tự (mã tất định có cấu trúc). */
@@ -217,7 +221,9 @@ export function ghi(su_kien: SuKien, p: Record<string, unknown> = {}): void {
     (window as unknown as { __hbt_su_kien?: unknown[] }).__hbt_su_kien ??= [];
     (window as unknown as { __hbt_su_kien: unknown[] }).__hbt_su_kien.push({ su_kien, ...props });
   }
+  const vnd = xemGiaTriMeta();   // giá trị đơn chờ (CRO-1) — chỉ cho Meta + Google, PostHog không nhận số tiền
   metaSuKien(su_kien, props);   // Meta Pixel: bảng sự kiện ở lib/meta-pixel.ts
+  if (typeof window !== "undefined") googleSuKien(su_kien, props, vnd);   // QC-G: dataLayer cho thẻ Google Ads (GTM)
   void nap().then((p2) => p2?.capture(su_kien, props));
 }
 

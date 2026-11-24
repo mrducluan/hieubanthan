@@ -36,6 +36,8 @@ export const MIGRATION: readonly Migration[] = [
   { so: "0034", ten: "Phiếu kiểm chứng theo ngôn ngữ (lệch bản dịch)", dau: { bang: "kiem_chung_phieu", cot: "ngon_ngu" } },
   { so: "0038", ten: "API chuyển đổi Meta (mã cookie theo đơn)", dau: { bang: "meta_don" } },
   { so: "0039", ten: "Nhà Tôi (người nhà) trong tài khoản", dau: { bang: "gia_dinh" } },
+  { so: "0040", ten: "Gói Lần đầu 59.000 ₫ (mỗi tài khoản một lần)", dau: { ham: "goi_lan_dau_duoc_mua" } },
+  { so: "0041", ten: "Chuyển đổi offline Google Ads (mã lượt bấm theo đơn)", dau: { bang: "google_don" } },
 ];
 
 /** Công tắc / số ở /quan-tri/cai-dat chỉ có tác dụng khi các migration này đã chạy (tiền tố khoá → số migration). */
@@ -46,6 +48,7 @@ const CAN: [string, string[]][] = [
   ["sao.qua.", ["0025"]],
   ["sao.gian_lan.", ["0026"]],
   ["sao.goi_khoi_dau.", ["0027"]],
+  ["sao.goi_lan_dau.", ["0040"]],
   ["sao.nap_dau.", ["0027"]],
   ["sao.hoi_vien.", ["0028"]],
   ["sao.chuyen_gia.", ["0028", "0029"]],

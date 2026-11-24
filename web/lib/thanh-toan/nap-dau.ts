@@ -7,6 +7,14 @@ export type GoiHienThi = { ma: string; ten: string; gia_vnd: number; sao: number
 
 /** Mã gói khởi đầu (19.000 ₫ / 19 Sao, từ thời giá 29 Sao; GIA-99 để tắt) — không chọn sẵn ở trang nạp, chỉ gợi ý khi nó là gói nhỏ nhất đủ dùng. */
 export const GOI_KHOI_DAU = "khoi_dau";
+/** CRO-1 (migration 0040): gói "Lần đầu" 59.000 ₫ / 59 Sao — chỉ tài khoản chưa từng nạp (SQL kiểm lúc tạo đơn). */
+export const GOI_LAN_DAU = "lan_dau";
+/** Gói nhỏ đặc biệt: không chọn sẵn ở /nap-sao, không phải "gói đích" của gợi ý nâng gói. */
+export const laGoiDacBiet = (ma: string) => ma === GOI_KHOI_DAU || ma === GOI_LAN_DAU;
+/** Bỏ gói Lần đầu khỏi danh sách khi biết chắc tài khoản đã từng nạp (lan_dau === false). Khách / chưa biết → giữ. */
+export function locGoiLanDau<G extends { ma: string }>(ds: readonly G[], nd: { lan_dau: boolean | null } | null | undefined): G[] {
+  return nd?.lan_dau === false ? ds.filter((g) => g.ma !== GOI_LAN_DAU) : [...ds];
+}
 
 export const saoTangLanDau = (sao: number, phanTram: number) =>
   phanTram > 0 ? Math.floor((sao * Math.min(phanTram, 100)) / 100) : 0;
@@ -27,12 +35,12 @@ export const dongNapDau = (nd: NapDau) =>
 /** Gói gợi ý trong hộp nạp nhanh: gói rẻ nhất có đủ số Sao còn thiếu; không gói nào đủ → gói có nhãn → gói đầu. */
 export function goiGoiY<G extends GoiHienThi>(ds: readonly G[], can: number): G | undefined {
   const du = ds.filter((g) => g.sao >= can).sort((a, b) => a.gia_vnd - b.gia_vnd)[0];
-  return du ?? ds.find((g) => g.nhan && g.ma !== GOI_KHOI_DAU) ?? ds[0];
+  return du ?? ds.find((g) => g.nhan && !laGoiDacBiet(g.ma)) ?? ds[0];
 }
 
 /** Gói chọn sẵn ở /nap-sao: gói có nhãn (vd "Phổ biến") nhưng không phải gói khởi đầu — giữ mặc định cũ khi thêm gói nhỏ. */
 export function goiMacDinh<G extends GoiHienThi>(ds: readonly G[]): G | undefined {
-  return ds.find((g) => g.nhan && g.ma !== GOI_KHOI_DAU) ?? ds[0];
+  return ds.find((g) => g.nhan && !laGoiDacBiet(g.ma)) ?? ds[0];
 }
 
 /** Thuộc tính đo checkout_started: mã gói + lần đầu (1/0; chưa biết thì bỏ). Không số tiền, không định danh. */
@@ -63,7 +71,7 @@ export function giaMoiLanXem(g: GoiHienThi, giaBaoCao: number): number | null {
 export function goiNangCap<G extends GoiHienThi>(ds: readonly G[], chon: string, giaBaoCao: number):
   { goi: G; themVnd: number; baoCao: number; moiLan: number | null } | null {
   const c = ds.find((g) => g.ma === chon);
-  const dich = ds.find((g) => g.nhan && g.ma !== GOI_KHOI_DAU);
+  const dich = ds.find((g) => g.nhan && !laGoiDacBiet(g.ma));
   if (!c || !dich || dich.ma === c.ma || dich.gia_vnd <= c.gia_vnd || c.sao <= 0 || dich.sao <= 0) return null;
   if (dich.gia_vnd / dich.sao > (c.gia_vnd / c.sao) * 0.95) return null;
   return { goi: dich, themVnd: dich.gia_vnd - c.gia_vnd, baoCao: soBaoCao(dich.sao, giaBaoCao), moiLan: giaMoiLanXem(dich, giaBaoCao) };

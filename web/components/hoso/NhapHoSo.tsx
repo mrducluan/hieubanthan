@@ -327,6 +327,13 @@ export function NhapHoSo({ macDinh, nutGui, can, onXong, className }: Props) {
                   <Label htmlFor="gio-sinh">{c("ho_so.gio_sinh")}</Label>
                   <Input id="gio-sinh" type="time" value={gio} disabled={doTin === "unknown"}
                     onChange={(e) => { setGio(e.target.value); if (e.target.value && doTin === "unknown") setDoTin("approx"); }} />
+                  {/* CRO-1: "Không biết giờ" thấy ngay — trước nằm trong danh sách thả xuống bên cạnh, người không nhớ giờ
+                      thường dừng ở ô giờ. Cùng trạng thái với ô chọn độ chính xác. */}
+                  <button type="button" aria-pressed={doTin === "unknown"} data-testid="nut-khong-biet-gio"
+                    onClick={() => { if (doTin === "unknown") setDoTin("exact"); else { setDoTin("unknown"); setGio(""); } }}
+                    className={`inline-flex min-h-9 items-center rounded-full border px-3 text-xs ${doTin === "unknown" ? "border-gold/70 bg-gold/10 text-gold" : "border-line text-fg-muted hover:border-gold/50 hover:text-fg"}`}>
+                    {doTin === "unknown" ? "✓ " : ""}{g("hs.do_tin_unknown")}
+                  </button>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="do-tin-gio">{g("hs.do_tin")}</Label>

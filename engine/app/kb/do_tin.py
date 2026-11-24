@@ -218,6 +218,7 @@ SO: dict[str, dict] = {
     "nam_tong_quan_kb.json": {"mang": "lich", "muc": "truyen_thong"},
     "gia_dinh_kb.json": {"mang": "lich", "muc": "truyen_thong", "ghi_chu": "GD-1: lời cặp con giáp, điều tập quán từng người — nháp"},
     "thoi_gian_lop_kb.json": {"mang": "lich", "muc": "truyen_thong"},
+    "ke_hoach_thang_kb.json": {"mang": "lich", "muc": "bien_tap", "ghi_chu": "KH-1: việc định làm ↔ số tháng cá nhân / việc sách lịch — nháp"},
     # ---- Liên mảng (lời ghép, ranh giới, mẫu câu)
     "suc_khoe_kb.json": {"mang": "chung", "muc": "tom_y_co_thu", "ghi_chu": "hành ↔ tạng phủ theo Nội Kinh; tên bệnh hay gặp là kiến thức phổ thông (SK-2)"},
     **{f: {"mang": "chung", "muc": "bien_tap"} for f in (

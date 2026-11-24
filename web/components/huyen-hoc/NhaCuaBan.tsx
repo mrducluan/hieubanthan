@@ -232,7 +232,7 @@ export function NhaCuaBan({ sinh, doHuongGoiY }: { sinh: Sinh; doHuongGoiY: numb
       {bc && <TenHienProvider ten={[bc.ten_hien]}><BaoCaoNha bc={bc} soSanh={soSanh} onDaXuLy={daXuLy} onHoanTac={hoanTac} dang={dang} /></TenHienProvider>}
       {/* EN-ALL GĐ 5: bản Anh chưa có tài khoản / thẻ chia sẻ (GĐ 9) → không hiện lưu nhà vào tài khoản, thẻ nhà. */}
       {bc && !en && <LuuNhaTaiKhoan />}
-      {bc && yeuCau && !en && <NutChiaSeNha yeuCau={yeuCau} loaiNha={nhaLuu?.loai_nha ?? null} />}
+      {bc && yeuCau && !en && <NutChiaSeNha yeuCau={yeuCau} loaiNha={nhaLuu?.loai_nha ?? null} huong={bc.da_tinh.huong_nha} />}
     </section>
   );
 }

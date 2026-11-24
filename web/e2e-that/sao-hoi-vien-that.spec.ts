@@ -94,7 +94,7 @@ test("mua hội viên (cổng giả) → báo cáo mở trọn không trừ Sao 
   // 3. Luận giải toàn bộ đang thu Sao: hội viên nhận trọn báo cáo ngay ở lượt đầu, không trừ Sao, không chương khoá.
   const phanHoi = page.waitForResponse((r) => r.url().endsWith("/api/tuvi/luan-giai") && r.status() === 200);
   await page.goto("/tu-vi");
-  await page.getByRole("button", { name: "Đọc miễn phí chương đầu" }).click();
+  // CRO-2: Tử vi tự tải chương 1 — chờ lượt gọi đó (không còn nút mở).
   const bc = (await (await phanHoi).json()) as { so_khoa?: number; phi: { sao: number; ly_do: string }; chuong: { khoa?: boolean; doan?: string[] }[] };
   expect(bc.phi).toEqual({ sao: 0, ly_do: "hoi_vien" });
   expect(bc.so_khoa ?? 0).toBe(0);

@@ -7,15 +7,17 @@
 // components/luan-giai/BaoCaoDoiSong; báo cáo khác (Bản đồ con số thần số) giữ cách hiện cũ bên dưới.
 import Link from "@/components/khung/Lien";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { BookOpenText, Clock, Gift, LockKeyhole, Printer, Sparkles } from "lucide-react";
+import { createPortal } from "react-dom";
+import { BookOpenText, Clock, Gift, LockKeyhole, Printer, ShieldCheck, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { KhungTai } from "@/components/khung/TieuDe";
-import { goiYThanhKhoa } from "@/lib/loi-sao";
+import { giaVnd, goiYThanhKhoa } from "@/lib/loi-sao";
 import { ConSuat, DemNguoc, MocUuDai, UuDaiTroi } from "@/components/sao/UuDai";
 import { loiTietKiem, type UuDai } from "@/lib/uu-dai";
 import { useMucSao } from "@/lib/muc-sao";
 import { ghi } from "@/lib/do-luong";
+import { datGiaTriMeta } from "@/lib/meta-pixel";
 import { postJson } from "@/lib/goi-api";
 import { MO_BAM, dangChoMo, ghiChoMo, xoaChoMo } from "@/lib/sao-client";
 import { dangKyCuaLuanGiai } from "@/lib/cta-sao";
@@ -87,6 +89,8 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
     const so = ++luot.current;
     setDang(true); setLoi(null);
     if (moKhoa) {
+      const saoThay = bcRef.current?.phi?.sao;
+      if (saoThay) datGiaTriMeta(saoThay * 1000);   // CRO-1: AddToCart mang giá trị ≈ VND (Meta), PostHog không nhận số tiền
       ghi("unlock_clicked", { mo_dun: moDun ?? (duongDan.includes("battu") ? "battu" : "tuvi"), kind: tuDong ? "tu_dong" : "bam" });
       ghiChoMo(duongDan, nguoi);   // đi đăng nhập / nạp rồi quay lại → tự mở đúng báo cáo này
     }
@@ -150,7 +154,7 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
           <p className="font-serif text-xl">{cg("lg.tieu_de", { ten })}</p>
           <p className="text-sm text-fg-muted" data-testid="gia-luan-giai">
             {cg("lg.mo_ta")}{" "}
-            {phi?.thu ? <>chương đầu miễn phí, toàn bộ <b className="text-gold">{phi.gia} Sao</b>{phi.uu_dai && <> <s className="text-fg-faint">{phi.uu_dai.gia_goc} Sao</s> <span className="text-gold/90">({loiTietKiem(phi.uu_dai).toLowerCase()})</span></>}, xem lại trong ngày không mất thêm</> : cg("lg.mien_phi")}{cg("lg.khong_luu")}
+            {phi?.thu ? <>chương đầu miễn phí, toàn bộ <b className="text-gold">{phi.gia} Sao</b> <span className="whitespace-nowrap text-fg-faint">(≈ {giaVnd(phi.gia)})</span>{phi.uu_dai && <> <s className="text-fg-faint">{phi.uu_dai.gia_goc} Sao</s> <span className="text-gold/90">({loiTietKiem(phi.uu_dai).toLowerCase()})</span></>}, xem lại trong ngày không mất thêm</> : cg("lg.mien_phi")}{cg("lg.khong_luu")}
           </p>
           {!en && phi?.thu && phi.uu_dai && <span className="mt-2 block"><DemNguoc hetLuc={phi.uu_dai.het_luc} /></span>}
           {/* Trục 1 (báo cáo UX mục 9): đang miễn phí thì nói trước, trung tính, Sao là gì + giá dự kiến (lấy từ API phí,
@@ -187,6 +191,12 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
     const ud = (bc as unknown as BaoCao).phi?.uu_dai;
     return (<TenHienProvider ten={[bc.ten_hien]}>
       {dau?.(bc)}
+      {/* CRO-1: không có đợt ưu đãi thì vẫn có lối mở sớm — thanh nhỏ dính đáy màn hình sau khi đọc qua đầu bài
+          (trước đây nút mua chỉ hiện ở cuối, ~màn thứ 11 trên điện thoại). */}
+      {!en && (bc.so_khoa ?? 0) > 0 && !ud && (bc as unknown as BaoCao).phi && (
+        <ThanhMoDay sao={(bc as unknown as BaoCao).phi!.sao} khoa={bc.so_khoa ?? 0} dang={dang}
+          moKhoa={() => { ghi("sao_cta_clicked", { tu: "thanh_day", mo_dun: bc.mo_dun, so_chuong: bc.so_khoa }); void tai(true); }} />
+      )}
       {/* UD-3: ưu đãi là thẻ nổi trượt xuống khi người đọc tới chỗ khoá (mốc `MocUuDai`), không chen vào bài. */}
       {!en && (bc.so_khoa ?? 0) > 0 && ud && (
         <UuDaiTroi u={ud} khoa={bc.so_khoa ?? 0} dang={dang} lamMoi={() => void tai()}
@@ -215,6 +225,10 @@ export function LuanGiaiToanBo({ duongDan, laSo, ten, than, moDun, tuMo = false,
   }
   return (
     <article className="glass rounded-2xl p-5 sm:p-8 print:bg-white print:text-black" data-testid="luan-giai-toan-bo">
+      {!en && (bc.so_khoa ?? 0) > 0 && bc.phi && !bc.phi.uu_dai && (
+        <ThanhMoDay sao={bc.phi.sao} khoa={bc.so_khoa ?? 0} dang={dang}
+          moKhoa={() => { ghi("sao_cta_clicked", { tu: "thanh_day", mo_dun: bc.mo_dun, so_chuong: bc.so_khoa }); void tai(true); }} />
+      )}
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="eyebrow">Luận giải toàn bộ</p>
@@ -342,6 +356,7 @@ function PhanKhoa({ bc, dang, loi, moKhoa, lamMoi }: { bc: BaoCao; dang: boolean
                   <s className="font-normal text-fg-faint" aria-label={`Giá thường ${ud.gia_goc} Sao`}>{ud.gia_goc} Sao</s>{" "}
                   <span className="ud-nhan inline-block rounded-full bg-cinnabar/15 px-2 py-0.5 text-xs font-semibold text-cinnabar">−{ud.giam_pt}%</span>
                 </span> : <span className="font-normal text-fg-muted">{sao} Sao</span>}
+                {" "}<span className="whitespace-nowrap text-xs font-normal text-fg-faint" data-testid="lg-gia-vnd">(≈ {giaVnd(sao)})</span>
               </p>
               {ud && <p className="mt-0.5 text-xs text-gold/90" data-testid="lg-tiet-kiem">{loiTietKiem(ud)}</p>}
               <p className="mt-0.5 flex items-start gap-1.5 text-fg-muted" data-testid="lg-goi-y">{!dang_nhap && <Gift className="mt-0.5 size-3.5 shrink-0 text-gold" aria-hidden />}{goiY}</p>
@@ -352,7 +367,59 @@ function PhanKhoa({ bc, dang, loi, moKhoa, lamMoi }: { bc: BaoCao; dang: boolean
           </div>
         </div>
         {loi && <p role="alert" className="mt-2 text-sm text-cinnabar">{loi}</p>}
+        <p className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[11px] text-fg-faint" data-testid="lg-tin-cay">
+          <span className="inline-flex items-center gap-1"><ShieldCheck className="size-3.5 text-jade" aria-hidden />Chuyển khoản QR ngân hàng, không lưu thẻ</span>
+          <Link href="/dieu-khoan#sao" className="hover:text-fg">Nạp nhầm, chưa dùng Sao: hoàn tiền trong 7 ngày</Link>
+          <Link href="/lien-he" className="underline underline-offset-4 hover:text-fg">Cần hỗ trợ</Link>
+        </p>
       </div>
     </section>
+  );
+}
+
+/** CRO-1 — thanh mở khoá dính đáy màn hình: hiện khi người đọc đã cuộn qua đầu bài hơn một màn hình, ẩn khi hộp mở khoá
+ *  cuối báo cáo (`lg-hop-mo`) đã trong màn hình (không nói hai lần) và khi cuộn ngược lên đầu. Một dòng, không che bài:
+ *  bản điện thoại nằm trên tab dưới. Nút là cùng hàm mở khoá của báo cáo. Không đếm ngược, không doạ. */
+function ThanhMoDay({ sao, khoa, dang, moKhoa }: { sao: number; khoa: number; dang: boolean; moKhoa: () => void }) {
+  const [hien, setHien] = useState(false);
+  const moc = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    let khung = 0;
+    const xet = () => {
+      khung = 0;
+      const h = window.innerHeight;
+      const dau = moc.current?.getBoundingClientRect();
+      const hop = document.querySelector<HTMLElement>('[data-testid="lg-phan-khoa"]')?.getBoundingClientRect();
+      const hopHien = hop ? hop.top < h : false;
+      setHien(Boolean(dau && dau.top < -h) && !hopHien);
+    };
+    const len = () => { if (!khung) khung = requestAnimationFrame(xet); };
+    xet();
+    window.addEventListener("scroll", len, { passive: true });
+    window.addEventListener("resize", len);
+    return () => { window.removeEventListener("scroll", len); window.removeEventListener("resize", len); if (khung) cancelAnimationFrame(khung); };
+  }, []);
+  // Gắn vào body: cha có backdrop-filter (khung kính) làm `position: fixed` bám theo cha thay vì màn hình.
+  const [goc, setGoc] = useState<HTMLElement | null>(null);
+  useEffect(() => { setGoc(document.body); }, []);
+  const thanh = (
+      <div data-testid="lg-thanh-day" data-hien={hien ? "1" : "0"} aria-hidden={!hien}
+        className={`fixed inset-x-0 bottom-[calc(4.5rem+env(safe-area-inset-bottom))] z-20 flex justify-center px-3 transition-[transform,opacity] duration-300 motion-reduce:transition-none md:bottom-4 print:hidden ${hien ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0"}`}>
+        <div className="glass flex w-full max-w-xl items-center gap-3 rounded-2xl border border-gold/50 bg-surface/95 px-3 py-2 shadow-lg backdrop-blur-md">
+          <p className="min-w-0 flex-1 text-xs leading-snug text-fg-muted sm:text-sm">
+            <span className="font-medium text-fg">Đọc tiếp {khoa} chương</span> · <span className="text-gold">{sao} Sao</span>{" "}
+            <span className="whitespace-nowrap text-fg-faint">(≈ {giaVnd(sao)})</span>
+          </p>
+          <Button size="sm" onClick={moKhoa} disabled={dang} tabIndex={hien ? 0 : -1} data-testid="lg-thanh-day-nut" className="nut-sang shrink-0">
+            <Sparkles aria-hidden /> {dang ? "Đang mở…" : "Mở toàn bộ"}
+          </Button>
+        </div>
+      </div>
+  );
+  return (
+    <>
+      <span ref={moc} aria-hidden className="block h-0" />
+      {goc && createPortal(thanh, goc)}
+    </>
   );
 }

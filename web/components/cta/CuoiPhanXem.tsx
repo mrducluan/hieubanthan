@@ -14,6 +14,7 @@ import { UngHoThe } from "@/components/ung-ho/UngHoThe";
 import { ghi } from "@/lib/do-luong";
 import { EASE } from "@/lib/chuyen-dong";
 import { cuonToiLuanGiai, useCuaLuanGiai } from "@/lib/cta-sao";
+import { giaVnd } from "@/lib/loi-sao";
 import { chiSoNgay, GoiYCheo, LUAN_GIAI_CUA_TRANG, TIEU_DE_KHOI, yeuCauGoiY, type MangTrang, type TheGoiY } from "@/lib/goi-y-cheo";
 import { useHoSo } from "@/lib/hoso";
 import { useQuyUocDD } from "@/lib/quy-uoc-dd";
@@ -85,8 +86,8 @@ function NutSao({ tu, thu, gia, giaGoc, giamPt }: { tu: MangTrang; thu: boolean;
     ? khoa > 0 ? `Mở ${khoa} chương còn lại` : thu ? "Đọc thử chương đầu · luận giải toàn bộ" : "Đọc luận giải toàn bộ"
     : "Luận giải toàn bộ Tử vi · 12 chương";
   const phu = coLuanGiai
-    ? khoa > 0 ? `${gia} Sao mở trọn${ud} · xem lại cả ngày không mất thêm` : thu ? `trọn bộ ${gia} Sao${ud}, chương đầu miễn phí` : "đang miễn phí giai đoạn ra mắt"
-    : thu ? `chương đầu miễn phí · trọn bộ ${gia} Sao${ud}` : "đang miễn phí giai đoạn ra mắt";
+    ? khoa > 0 ? `${gia} Sao (≈ ${giaVnd(gia)}) mở trọn${ud} · xem lại cả ngày không mất thêm` : thu ? `trọn bộ ${gia} Sao (≈ ${giaVnd(gia)})${ud}, chương đầu miễn phí` : "đang miễn phí giai đoạn ra mắt"
+    : thu ? `chương đầu miễn phí · trọn bộ ${gia} Sao (≈ ${giaVnd(gia)})${ud}` : "đang miễn phí giai đoạn ra mắt";
   const bam = () => {
     ghi("sao_cta_clicked", { tu, so_chuong: khoa });
     if (!c) return;

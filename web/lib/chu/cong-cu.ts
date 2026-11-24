@@ -140,7 +140,8 @@ export const CHU_TAROT = gopBang(mangHuyenHoc(true, "Tarot · 4 trường phái 
 export const CHU_THAN_SO = gopBang(KHUNG, {
   "dau.nhan_tren": { nhom: DAU, nhan: "Dòng nhỏ trên tiêu đề (chưa có hồ sơ)", mac_dinh: "Thần số học", en: "Numerology", toi_da: 60 },
   "dau.dang_tai": { nhom: DAU, nhan: "Tiêu đề lúc đang tải", mac_dinh: "Thần số học theo họ tên và ngày sinh", en: "Numerology from your name and date of birth", toi_da: 120 },
-  "dau.chua_ho_so": { nhom: DAU, nhan: "Tiêu đề khi chưa có hồ sơ (trên ô nhập)", mac_dinh: "Nhập tên và ngày sinh để bắt đầu", en: "Enter your name and date of birth to begin", toi_da: 120 },
+  "dau.chua_ho_so": { nhom: DAU, nhan: "Tiêu đề khi chưa có hồ sơ (trên ô nhập)", mac_dinh: "Bạn là số mấy? Xem ngay điểm mạnh, điểm mù của bạn", en: "Enter your name and date of birth to begin", toi_da: 120 },
+  "dau.chua_ho_so_dan": { nhom: DAU, nhan: "Lời dẫn khi chưa có hồ sơ (dưới tiêu đề)", mac_dinh: "30 giây, miễn phí: bốn con số cốt lõi, ba điểm mạnh, ba điểm mù và năm nay nên dồn sức vào đâu.", en: "30 seconds, free: your four core numbers, three strengths, three blind spots and where to put your energy this year.", toi_da: 240 },
   "ket_qua.nhan_tren": { nhom: "Kết quả", nhan: "Dòng nhỏ trên tên người dùng", mac_dinh: "Thần số học của bạn", en: "Your numerology", toi_da: 60 },
   "bon_so.nho": { nhom: "Kết quả", nhan: "Mục bốn số — dòng nhỏ", mac_dinh: "Bốn con số cốt lõi", en: "Your four core numbers", toi_da: 60 },
   "bon_so.lon": { nhom: "Kết quả", nhan: "Mục bốn số — tiêu đề", mac_dinh: "Bốn con số nói gì về bạn", en: "What your four numbers say about you", toi_da: 120 },

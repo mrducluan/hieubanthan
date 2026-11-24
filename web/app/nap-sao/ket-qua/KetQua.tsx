@@ -6,6 +6,7 @@ import { CheckCircle2, Clock, Loader2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
 import { metaPurchase } from "@/lib/meta-pixel";
+import { googlePurchase } from "@/lib/google-qc";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { QUAY_VE } from "@/lib/sao-client";
 import { maDonQuayVe } from "@/lib/thanh-toan/ma-don";
@@ -51,6 +52,7 @@ export function KetQua() {
         if (!daGhi) {
           ghi("payment_succeeded", { so_sao: d.sao, kind: d.loai ?? "sao" });
           metaPurchase(d.so_tien, d.ma_don, d.loai ?? "sao");   // Meta Pixel: Purchase (mỗi đơn một lần, cùng khoá với payment_succeeded)
+          googlePurchase(d.so_tien, d.ma_don, d.loai ?? "sao");   // QC-G: dataLayer → GA4 purchase + thẻ Google Ads
           if (d.loai === "hoi_vien") ghi("membership_activated", { kind: "hoi_vien" });
         }
         return;
