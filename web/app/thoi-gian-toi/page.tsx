@@ -41,8 +41,14 @@ export default async function Page(p: P) {
         {!en && <div className="-mt-5 mb-5"><NutXuongForm moDun="thoi_gian" nhan="Nhập ngày sinh · xem ngay" chon={'[data-testid="tgt-nhap"]'} /></div>}
         <ThoiGianToi cacNam={n.cac_nam} namBanDau={banDau} />
         {/* EN-ALL GĐ 8: trang năm (/nam) chưa mở bản Anh → bản Anh không có dòng link này. */}
-        {!en && <p className="mt-8 text-sm text-fg-muted">Thông tin chung của từng năm (Tết, Tam tai, tuổi làm nhà, xông đất):{" "}
-          {n.cac_nam.map((x, i) => <span key={x}>{i > 0 && " · "}<Link href={duongNam(x)} className="text-gold underline">năm {x}</Link></span>)}.</p>}
+        {!en && (
+          <div className="mt-8 space-y-2 text-sm text-fg-muted">
+            <p>Thông tin chung của từng năm (Tết, Tam tai, tuổi làm nhà, xông đất):{" "}
+              {n.cac_nam.map((x, i) => <span key={x}>{i > 0 && " · "}<Link href={duongNam(x)} className="text-gold underline">năm {x}</Link></span>)}.</p>
+            <p>Muốn gửi tặng trọn bản đồ năm Đinh Mùi 2027 cho người thân, bạn bè?{" "}
+              <Link href="/li-xi-tet-2027" className="text-gold underline" data-testid="link-li-xi-tet-2027">Gửi Bao Lì Xì Tết 2027 →</Link></p>
+          </div>
+        )}
       </div>
     </TrangCongCu>
   );

@@ -159,6 +159,15 @@ export const CAI_DAT: readonly CaiDat[] = [
   { khoa: "sao.hoi_vien.cg.han_gio", nhom: "Hội viên năm", loai: "so", min: 1, max: 168, macDinh: 24,
     ten: "Hạn trả lời ưu tiên (giờ, hạng Chuyên gia)", moTa: "Áp cho mọi câu hỏi của hội viên Chuyên gia (cả câu trả tiền lẻ). Không dài hơn hạn chung của Hỏi chuyên gia." },
   // (sao.chuyen_gia.gia_vnd khai một lần ở khối SAO-CG phía trên — hội viên hoàn tiền trừ theo giá đó cho câu đã dùng.)
+  // ---- LX-2027 (0042) ---- Lì xì Báo cáo Tết Đinh Mùi 2027: bán quyền mở trọn báo cáo /thoi-gian-toi 2027 bằng VND (Pay2S).
+  { khoa: "sao.li_xi.bat", nhom: "Lì xì Tết 2027", loai: "bat_tat", macDinh: false,
+    ten: "Mở bán Lì xì Báo cáo Tết 2027", moTa: "Bật = trang /li-xi-tet-2027 hiện nút thanh toán Pay2S và máy chủ nhận tạo đơn 1 / 3 / 5 bao. Tắt = ẩn nút mua, các bao đã bán vẫn mở nhận bình thường tới 31/03/2027." },
+  { khoa: "sao.li_xi.gia_1", nhom: "Lì xì Tết 2027", loai: "so", min: 20000, max: 5000000, macDinh: 99000,
+    ten: "Giá gói 1 Bao Lì Xì (₫)", moTa: "Mở trọn Báo cáo Năm 2027 cho 1 người nhận (người nhận tự nhập ngày sinh)." },
+  { khoa: "sao.li_xi.gia_3", nhom: "Lì xì Tết 2027", loai: "so", min: 50000, max: 10000000, macDinh: 249000,
+    ten: "Giá Combo 3 Bao Gia Đình (₫)", moTa: "Sinh 3 đường dẫn bao lì xì độc lập cho 3 người nhận khác nhau." },
+  { khoa: "sao.li_xi.gia_5", nhom: "Lì xì Tết 2027", loai: "so", min: 80000, max: 20000000, macDinh: 399000,
+    ten: "Giá Combo 5 Bao Doanh Nghiệp (₫)", moTa: "Sinh 5 đường dẫn bao lì xì độc lập để tặng nhóm hoặc đối tác." },
 ];
 
 export const caiDat = (khoa: string) => CAI_DAT.find((c) => c.khoa === khoa);
