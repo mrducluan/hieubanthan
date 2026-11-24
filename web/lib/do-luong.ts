@@ -145,6 +145,12 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   canh_bao: "string",   // DC-MB: mã cảnh báo hướng mặt bằng (khong_vong / kiem_huong / khong) — không độ, không năm
   co_gio: "boolean",    // DC-L12: Lịch 12 tháng có giờ sinh (đọc thêm lớp Bát tự) hay không — chỉ cờ
   muc_tieu: "string",   // DC-L12: mã trọng tâm năm (tang_truong / ky_ket / giu_tien / ra_mat)
+  // PR #338 (tương tác hai chiều với phép đo ước lượng): người dùng báo "chưa đúng" — CHỈ MÃ trong danh mục engine.
+  cau: "string",        // do_mat_chinh: mã câu khảo sát Nhân tướng được chỉnh
+  may: "string",        // do_mat_chinh: mã lựa chọn MÁY đo ra
+  nguoi: "string",      // do_mat_chinh: mã lựa chọn NGƯỜI DÙNG chọn lại
+  do_tin: "string",     // do_mat_chinh: thap / trung_binh / cao / so (máy trả con số) / khong
+  tay: "string",        // chỉ tay: trai / phai (duong_cv_phan_hoi, chup_tay…)
   qc: "string",         // META-QC: "meta" = phiên này (hoặc ≤ 30 ngày trước) vào từ quảng cáo Facebook / Instagram (lib/nguon-qc.ts)
 };
 const GIOI_HAN_CHUOI = 40;

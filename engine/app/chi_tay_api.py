@@ -23,7 +23,7 @@ from app.calc import chi_tay_do
 from app.config import ENGINE_VERSION
 from app.kb import chi_tay_kb as kb
 from app.kb import chi_tay_tay_kb as kb_tay
-from app.kb import tuong_hoc_dot4_kb
+from app.luangiai import chi_tay_hop_nhat as hn
 from app.luangiai import hoan_canh
 
 router = APIRouter(prefix="/v1/chi-tay", tags=["chi-tay"])
@@ -193,219 +193,6 @@ def _tuoi(ngay_sinh: _dt.date | None) -> int | None:
     return hoan_canh.tuoi_tron(ngay_sinh, config.hom_nay_vn()) if ngay_sinh else None
 
 
-_DOI_CHIEU_GO_CUNG: dict[str, tuple[str, str]] = {
-    # Ánh xạ biên tập theo vùng giải phẫu lòng bàn tay giữa 7 Gò Tây phương và Bát Quái trong `chi_tay_kb.cung_tay`
-    "moc_tinh": ("ton", "Dưới ngón trỏ"),
-    "tho_tinh": ("ly", "Dưới ngón giữa"),
-    "thai_duong": ("khon", "Dưới ngón áp út"),
-    "thuy_tinh": ("khon", "Dưới ngón út"),
-    "kim_tinh": ("can_co", "Bầu ngón cái"),
-    "hoa_tinh": ("minh_duong", "Hai mép và giữa lòng tay"),
-    "thai_am": ("can", "Góc dưới mép ngón út"),
-}
-
-
-def _giai_nghia_hinh_hoc_mo_rong(so_do: dict | None) -> list[dict]:
-    """Diễn giải 3 chỉ số hình học/3D mở rộng (góc mở ngón cái, 3 đốt ngón giữa, độ khum lòng bàn tay 3D).
-    Mọi ngưỡng đều do ban biên tập tự đặt để tham khảo (Cheiro/Benham & Minh Đường Đông phương)."""
-    if not isinstance(so_do, dict):
-        return []
-    ra: list[dict] = []
-
-    goc = so_do.get("goc_ngon_cai")
-    if isinstance(goc, (int, float)):
-        if goc >= 48.0:
-            nhom, ten = "mo_rong", f"Góc mở ngón cái rộng (~{goc:.0f}°)"
-            y = "Theo Cheiro/Benham, ngón cái mở thoáng gợi ý tính cách cởi mở, độc lập, sẵn sàng khởi xướng và phóng khoáng trong cách cho đi."
-            luu_y = "Nên chú ý: giữ kỷ luật kế hoạch để tránh dàn trải nguồn lực khi hứng thú dâng cao (lưu ý: góc đo còn phụ thuộc tư thế xoè tay lúc chụp)."
-        elif goc <= 30.0:
-            nhom, ten = "khep_than_trong", f"Góc mở ngón cái gọn (~{goc:.0f}°)"
-            y = "Ngón cái khép gần lòng bàn tay gợi ý sự kín đáo, thận trọng, coi trọng nguyên tắc và suy xét kỹ trước khi cam kết."
-            luu_y = "Nên chú ý: đôi khi cho phép mình thử phương án mới sớm hơn một nhịp (lưu ý: nếu lúc chụp bạn khép ngón cái, hãy chụp lại khi thả lỏng tự nhiên)."
-        else:
-            nhom, ten = "can_bang", f"Góc mở ngón cái cân bằng (~{goc:.0f}°)"
-            y = "Độ mở ngón cái ở khoảng hài hòa: biết giữ chừng mực giữa sự tự chủ hành động và thái độ thận trọng thực tế."
-            luu_y = "Góc đo phụ thuộc một phần vào tư thế xoè tay khi chụp — đọc kết hợp với chiều dài ngón và hình lòng bàn tay."
-        ra.append({"ma": "goc_ngon_cai", "nhom": nhom, "ten": ten, "gia_tri": round(float(goc), 1), "y": y, "luu_y": luu_y, "do_tin": "bien_tap_tu_dat"})
-
-    dot = so_do.get("dot_ngon_giua")
-    if isinstance(dot, dict) and all(isinstance(dot.get(k), (int, float)) for k in ("dot_goc", "dot_giua", "dot_dau")):
-        dg, dgi, dd = float(dot["dot_goc"]), float(dot["dot_giua"]), float(dot["dot_dau"])
-        chenh = max(dg, dgi, dd) - min(dg, dgi, dd)
-        if chenh <= 0.05:
-            nhom, ten = "can_bang", "Ba đốt ngón giữa cân đối"
-            y = "Theo hệ ba thế giới của Benham, ba đốt đều nhau cho thấy nhịp phối hợp cân bằng giữa trực giác (đốt đầu), tổ chức logic (đốt giữa) và thực tiễn đời sống (đốt gốc)."
-        elif dg >= dgi and dg >= dd:
-            nhom, ten = "dot_goc_troi", f"Đốt gốc ngón giữa nổi trội ({round(dg * 100)}%)"
-            y = "Đốt gốc trội thiên về năng lực thực thi bền bỉ, ưa kết quả cụ thể, coi trọng sự ổn định vật chất và đời sống thiết thực."
-        elif dgi >= dg and dgi >= dd:
-            nhom, ten = "dot_giua_troi", f"Đốt giữa ngón giữa nổi trội ({round(dgi * 100)}%)"
-            y = "Đốt giữa trội thiên về tư duy hệ thống, tổ chức, sắp xếp quy trình và khả năng phân tích thực tế có phương pháp."
-        else:
-            nhom, ten = "dot_dau_troi", f"Đốt đầu ngón giữa nổi trội ({round(dd * 100)}%)"
-            y = "Đốt đầu trội thiên về trực giác, ý tưởng tinh thần, sức tưởng tượng và nhạy cảm với giá trị học thuật hoặc nghệ thuật."
-        ra.append({
-            "ma": "dot_ngon_giua", "nhom": nhom, "ten": ten,
-            "gia_tri": {"dot_goc": round(dg, 3), "dot_giua": round(dgi, 3), "dot_dau": round(dd, 3)},
-            "y": y,
-            "luu_y": "Tỉ lệ 3 đốt đo từ khớp 9–10–11–12 trên ảnh phẳng; nếu ngón tay hơi cong về phía camera, đốt đầu có thể ngắn hơn thực tế.",
-            "do_tin": "bien_tap_tu_dat",
-        })
-
-    c3 = so_do.get("chi_so_3d")
-    if isinstance(c3, dict) and isinstance(c3.get("do_khum_long"), (int, float)):
-        khum = float(c3["do_khum_long"])
-        if khum >= 0.09:
-            nhom, ten = "minh_duong_trung", f"Lòng bàn tay 3D hơi khum sâu ({khum:.2f})"
-            y = "Độ sâu 3D cho thấy vùng Minh Đường hơi trũng — sách Đông ví như thế tụ khí, dễ giữ nội lực và tích lũy lâu dài nếu lòng tay mềm ấm."
-            luu_y = "Lưu ý: độ khum 3D thay đổi theo tư thế căng hay thả lỏng bàn tay lúc chụp ảnh."
-        else:
-            nhom, ten = "minh_duong_phang", f"Lòng bàn tay 3D mở thoáng ({khum:.2f})"
-            y = "Lòng bàn tay mở phẳng thoáng gợi ý phong cách thẳng thắn, dễ bộc lộ năng lượng ra ngoài và ưa giải quyết việc trực diện."
-            luu_y = "Nên chú ý: kết hợp tự chạm lòng tay thật để xem độ đàn hồi da và thịt ở Minh Đường."
-        ra.append({"ma": "do_khum_long_3d", "nhom": nhom, "ten": ten, "gia_tri": round(khum, 3), "y": y, "luu_y": luu_y, "do_tin": "bien_tap_tu_dat"})
-
-    return ra
-
-
-def _ghep_tay_phuong_tay(kq: dict, tay: str) -> dict:
-    """Ghép luận giải phương Tây: Cheiro (1894, 1916) · Benham (1900) · Dale (1895) · Baughan / 4 nguyên tố."""
-    co_ban = kb_tay.ket_qua_do_tay(kq, tay)
-    kinh_dien = tuong_hoc_dot4_kb.chitay_phuong_tay()
-    duong_kd = kinh_dien.get("duong_chinh") or {}
-    go_kd = kinh_dien.get("bay_go") or {}
-
-    duong_chi_cv = kq.get("duong_chi_goi_y")
-    goi_y_duong_kinh_dien = []
-    for ma_duong in ("tam_dao", "tri_dao", "sinh_dao", "dinh_menh"):
-        muc = duong_kd.get(ma_duong)
-        if not muc:
-            continue
-        sg = muc.get("sach_ghi") or {}
-        tin_hieu = (duong_chi_cv or {}).get(ma_duong) if isinstance(duong_chi_cv, dict) else None
-        goi_y_duong_kinh_dien.append({
-            "ma": ma_duong,
-            "ten": muc["ten"],
-            "mat_tich_cuc": muc["mat_tich_cuc"],
-            "mat_tieu_cuc_can_chu_y": muc["mat_tieu_cuc_can_chu_y"],
-            **({"trich": sg["trich"], "nguon": sg["nguon"]} if sg.get("trich") else {}),
-            **({"tin_hieu_cv": tin_hieu, "do_tin_cv": "goi_y_tham_khao"} if tin_hieu else {}),
-        })
-
-    cung_dong_kb = kb.cung_tay()
-    bay_go_kinh_dien = []
-    for ma_go in ("moc_tinh", "tho_tinh", "thai_duong", "thuy_tinh", "kim_tinh", "hoa_tinh", "thai_am"):
-        muc_go = go_kd.get(ma_go)
-        if not muc_go:
-            continue
-        sg = muc_go.get("sach_ghi") or {}
-        ma_cung, vi_tri = _DOI_CHIEU_GO_CUNG.get(ma_go, (None, None))
-        cung_info = cung_dong_kb.get(ma_cung) if ma_cung else None
-        bay_go_kinh_dien.append({
-            "ma": ma_go,
-            "ten": muc_go["ten"],
-            "mat_tich_cuc": muc_go["mat_tich_cuc"],
-            "mat_tieu_cuc_can_chu_y": muc_go["mat_tieu_cuc_can_chu_y"],
-            "cung_dong": ma_cung,
-            "han_dong": cung_info.get("han") if cung_info else None,
-            "ten_cung_dong": cung_info.get("ten") if cung_info else None,
-            "vi_tri": vi_tri,
-            "do_tin_doi_chieu": "bien_tap_doi_chieu_vi_tri",
-            **({"trich": sg["trich"], "nguon": sg["nguon"]} if sg.get("trich") else {}),
-        })
-
-    chi_so_mo_rong = _giai_nghia_hinh_hoc_mo_rong(kq.get("so_do"))
-
-    return {
-        **co_ban,
-        "fuzzy_bridge": kq.get("fuzzy_bridge"),
-        "duong_kinh_dien": goi_y_duong_kinh_dien,
-        "bay_go_kinh_dien": bay_go_kinh_dien,
-        "so_go_kinh_dien": len(bay_go_kinh_dien),
-        "chi_so_mo_rong": chi_so_mo_rong,
-        "truong_phai": [
-            "Cheiro (Language of the Hand, 1894 · Palmistry for All, 1916)",
-            "William G. Benham (The Laws of Scientific Hand Reading, 1900)",
-            "Mrs. J. B. Dale (Indian Palmistry, 1895)",
-            "Rosa Baughan / Hệ 4 Nguyên Tố (Thổ · Khí · Hỏa · Thủy — phân nhóm biên tập)",
-        ],
-    }
-
-
-def _tong_hop_dong_tay(
-    dong: dict | None,
-    tay_pt: dict | None,
-    so_sanh: dict | None,
-    co_cv_duong_chi: bool,
-) -> dict:
-    diem_chung: list[str] = []
-    if dong and dong.get("hop_le"):
-        nhan_lech = [n["ten"] for n in dong.get("nhan") or [] if not n.get("vua")]
-        if nhan_lech:
-            diem_chung.append(f"Tướng tay phương Đông (Thần Tướng Toàn Biên) ghi nhận nổi bật: {', '.join(nhan_lech)}.")
-    if tay_pt and tay_pt.get("hop_le"):
-        dt = (tay_pt.get("fuzzy_bridge") or {}).get("dang_ban_tay") or {}
-        if dt.get("ten"):
-            diem_chung.append(f"Chỉ tay phương Tây xếp nhóm tỉ lệ gần với {dt['ten']}.")
-        if tay_pt.get("to_hop") and tay_pt["to_hop"].get("ten"):
-            diem_chung.append(f"Tổ hợp tỉ lệ Cheiro/Benham: {tay_pt['to_hop']['ten']}.")
-    if so_sanh and so_sanh.get("nhan_xet"):
-        diem_chung.append(so_sanh["nhan_xet"])
-
-    tom_tat = (
-        " ".join(diem_chung)
-        if diem_chung
-        else "Tỉ lệ bàn tay nằm trong dải cân đối ở cả hệ Đông (Thần Tướng Toàn Biên) và hệ Tây (Cheiro · Benham)."
-    )
-    ghi_chu = (
-        "Tỉ lệ lòng bàn tay, ngón tay và vị trí 8 cung được đo trực tiếp từ 21 điểm mốc trên ảnh của bạn. "
-        "Phân nhóm 4 Nguyên Tố (Thổ/Khí/Hỏa/Thủy) là ngưỡng biên tập tự đặt để tham khảo; "
-        + ("tín hiệu 3 đường chỉ (Tâm/Trí/Sinh Đạo) trích từ ảnh chỉ là gợi ý tham khảo, không thay thế mắt bạn tự soi."
-           if co_cv_duong_chi
-           else "đường chỉ, độ đầy gò và sắc da cần bạn tự quan sát thêm trên tay thật.")
-    )
-    return {
-        "tom_tat": tom_tat,
-        "diem_chung": diem_chung,
-        "do_tin": {
-            "hinh_hoc": "do_truc_tiep_21_diem",
-            "bon_nguyen_to": "bien_tap_tu_dat",
-            "duong_chi_cv": "goi_y_tham_khao" if co_cv_duong_chi else "khong_co",
-        },
-        "ghi_chu": ghi_chu,
-    }
-
-
-def _tom_tat_mot_tay(kq: dict, tay: str, tuoi: int | None) -> dict:
-    dong = kb.ket_qua_do_tay(kq, tay, tuoi)
-    if not kq["hop_le"]:
-        return {
-            "tay": tay,
-            "hop_le": False,
-            "loi": dong["loi"],
-            "loi_nhac": dong["loi_nhac"],
-            "so_do": None,
-            "nhan_dong": [],
-            "nhan_tay": [],
-            "cung": [],
-            "fuzzy_bridge": None,
-            "duong_chi_goi_y": None,
-        }
-    pt = kb_tay.ket_qua_do_tay(kq, tay)
-    return {
-        "tay": tay,
-        "hop_le": True,
-        "loi": None,
-        "loi_nhac": None,
-        "so_do": kq["so_do"],
-        "nhan_dong": dong["nhan"],
-        "nhan_tay": pt["nhan"],
-        "cung": dong["cung"],
-        "fuzzy_bridge": kq.get("fuzzy_bridge"),
-        "duong_chi_goi_y": kq.get("duong_chi_goi_y"),
-    }
-
-
 @router.get("")
 def api_thu_vien(phai: Phai = Query("dong")) -> dict:
     if phai == "tay":
@@ -442,8 +229,8 @@ def api_do_tay(inp: DoTayIn) -> dict:
     # phai == "hop_nhat": hợp nhất Đông + Tây
     tuoi = _tuoi(inp.ngay_sinh)
     dong = kb.ket_qua_do_tay(kq, inp.tay, tuoi)
-    tay_pt = _ghep_tay_phuong_tay(kq, inp.tay)
-    tong_hop = _tong_hop_dong_tay(dong, tay_pt, None, bool(kq.get("duong_chi_goi_y")))
+    tay_pt = hn.ghep_tay_phuong_tay(kq, inp.tay)
+    tong_hop = hn.tong_hop_dong_tay(dong, tay_pt, None, bool(kq.get("duong_chi_goi_y")))
     return {
         "engine_version": ENGINE_VERSION,
         "pham_vi": "chi_tay",
@@ -488,9 +275,9 @@ def api_luan_giai_hai_tay(inp: LuanGiaiHaiTayIn) -> dict:
         else None
     )
 
-    tay_trai_ra = _tom_tat_mot_tay(kq_trai, "trai", tuoi) if kq_trai is not None else None
-    tay_phai_ra = _tom_tat_mot_tay(kq_phai, "phai", tuoi) if kq_phai is not None else None
-    so_sanh = chi_tay_do.so_sanh_hai_tay(kq_trai, kq_phai)
+    tay_trai_ra = hn.tom_tat_mot_tay(kq_trai, "trai", tuoi) if kq_trai is not None else None
+    tay_phai_ra = hn.tom_tat_mot_tay(kq_phai, "phai", tuoi) if kq_phai is not None else None
+    so_sanh = hn.so_sanh_hai_tay(kq_trai, kq_phai)
 
     # Chọn bàn tay chính để xuất luận giải Đông & Tây (ưu tiên tay hợp lệ; nếu cả 2 hợp lệ ưu tiên tay phải Hậu Thiên)
     if kq_phai and kq_phai.get("hop_le"):
@@ -506,9 +293,9 @@ def api_luan_giai_hai_tay(inp: LuanGiaiHaiTayIn) -> dict:
     if inp.van or inp.cung or inp.duong:
         dong["tu_soi"] = kb.doc(inp.van, tuoi, inp.cung, inp.duong)
 
-    tay_pt = _ghep_tay_phuong_tay(kq_chinh, tay_chinh)
+    tay_pt = hn.ghep_tay_phuong_tay(kq_chinh, tay_chinh)
     co_cv = bool((kq_trai and kq_trai.get("duong_chi_goi_y")) or (kq_phai and kq_phai.get("duong_chi_goi_y")))
-    tong_hop = _tong_hop_dong_tay(dong, tay_pt, so_sanh, co_cv)
+    tong_hop = hn.tong_hop_dong_tay(dong, tay_pt, so_sanh, co_cv)
 
     return {
         "engine_version": ENGINE_VERSION,

@@ -40,7 +40,7 @@ export function AnhChanDung({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, onXongDo
         <p className="eyebrow text-gold">Từ ảnh của bạn · ảnh không rời máy</p>
         <h2 id="anh-chan-dung" className="mt-2 font-serif text-2xl leading-tight sm:text-3xl">Tải ảnh chân dung — <span className="text-gradient-gold">hệ thống tự đo</span>, bạn xác nhận</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-fg-muted sm:text-base">
-          Quét 3 góc hoặc chọn ảnh chân dung — máy bạn tự tìm 478 điểm mốc 3D và trích xuất tỷ lệ tam đình, ngũ quan, sắc thái ngay trong trình duyệt (vài giây). Hệ thống tự điền các nét đo được và hợp nhất luận giải Đông – Tây; chỉ câu phi hình ảnh (giọng nói, dáng đi) mới hiện pop-up hỏi nhanh. Ảnh không gửi đi đâu, không lưu ảnh.
+          Quét 3 góc hoặc chọn ảnh chân dung — máy bạn tự tìm 478 điểm mốc 3D và trích xuất tỷ lệ tam đình, ngũ quan, sắc thái ngay trong trình duyệt (vài giây). Hệ thống tự điền các nét đo được và hợp nhất luận giải Đông – Tây; chỉ câu phi hình ảnh (giọng nói, dáng đi) mới hiện pop-up hỏi nhanh. Ảnh không gửi đi đâu, không chấm điểm, không lưu ảnh.
         </p>
         </>}
         <div className="mt-5">{ks ? <DoMatTrenAnh ks={ks} daTraLoi={daTraLoi} onGoiY={onGoiY} onXem={onXem} onDungVaXem={onDungVaXem} onXongDo={onXongDo} onMoCauHoiPhu={onMoCauHoiPhu} soCauPhiAnhThieu={soCauPhiAnhThieu} dangXem={dangXem} /> : null}</div>

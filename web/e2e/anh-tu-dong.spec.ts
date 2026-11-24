@@ -107,7 +107,7 @@ test.describe("trình duyệt thật + bộ đo thật", () => {
     test.skip(!anh, "không tải được ảnh mẫu công khai (mạng CI)");
     test.setTimeout(120_000);
     await napHoSo(page);
-    await page.addInitScript(() => localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm1", luc: "2026-11-06T01:00:00Z" })));
+    await page.addInitScript(() => localStorage.setItem("hbt.dong_y_do_mat.v1", JSON.stringify({ phien_ban: "dm2", luc: "2026-11-06T01:00:00Z" })));
     await page.goto("/nhan-tuong");
     await page.getByTestId("do-input").setInputFiles({ name: "chan-dung.jpg", mimeType: "image/jpeg", buffer: anh! });
     const gy = page.getByTestId("do-goi-y");

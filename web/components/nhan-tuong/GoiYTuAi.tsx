@@ -1,7 +1,7 @@
 "use client";
 // ANH-1 — "Cho máy AI xem thêm" (tuỳ chọn, CHỈ hiện khi người vận hành đã bật ở engine): ≤ 3 ảnh (chính diện + nghiêng trái /
 // phải) đi qua máy chủ tới dịch vụ AI nhận diện bên thứ ba MỘT lượt để gợi ý thêm những nét phép đo hình học không làm được
-// (sắc da, nếp, ánh mắt…). Thoả thuận RIÊNG `am1` (khác mục đích với phép đo `dm1`). Thu nhỏ + bỏ EXIF trên máy (lib/anh-nha),
+// (sắc da, nếp, ánh mắt…). Thoả thuận RIÊNG `am1` (khác mục đích với phép đo `dm2`). Thu nhỏ + bỏ EXIF trên máy (lib/anh-nha),
 // đếm mặt bằng FaceDetector của trình duyệt khi có. Không lưu ảnh; gợi ý người dùng tự xác nhận.
 import { useEffect, useRef, useState } from "react";
 import { Check, ImagePlus, ScanFace, ShieldCheck, X } from "lucide-react";

@@ -1,7 +1,7 @@
 // CT-2 — tìm 21 điểm mốc BÀN TAY ngay trên máy người dùng (MediaPipe Hand Landmarker, WebAssembly, tệp tự phục vụ ở
 // /mediapipe/<phiên bản>/ như bộ gương mặt ANH-3). Ảnh không rời máy; chỉ ra toạ độ 0..1 của 21 điểm (thứ tự MediaPipe Hand:
 // 0 cổ tay, 1–4 ngón cái, 5–8 trỏ, 9–12 giữa, 13–16 áp út, 17–20 út) + worldLandmarks 3D + tín hiệu đường chỉ ROI tham khảo
-// + tỉ lệ khung ảnh → web gửi engine `/v1/chi-tay/do-tay` hoặc `/v1/chi-tay/luan-giai-hai-tay` sau thoả thuận `ct1`.
+// + tỉ lệ khung ảnh → web gửi engine `/v1/chi-tay/do-tay` hoặc `/v1/chi-tay/luan-giai-hai-tay` sau thoả thuận `ct2`.
 // Chỉ nạp khi người dùng đã chọn ảnh (import động — trang khác không tải gì thêm).
 import cfg from "./bo-do-mat.json";
 import { trichXuatDuongChi, type KetQuaDuongChiCV } from "./duong-chi-tay-cv";

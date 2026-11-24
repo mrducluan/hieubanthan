@@ -278,51 +278,21 @@ def do_tay_mo_rong(
     }
 
 
-def so_sanh_hai_tay(kq_trai: dict | None, kq_phai: dict | None) -> dict | None:
-    """So sánh Tay Trái (Tiên Thiên · bản tính gốc) và Tay Phải (Hậu Thiên · hiện tại & hành động)."""
+def chenh_hai_tay(kq_trai: dict | None, kq_phai: dict | None) -> dict | None:
+    """Số chênh giữa tay trái và tay phải (chỉ SỐ + mã nhóm; lời ở `luangiai.chi_tay_hop_nhat.so_sanh_hai_tay`)."""
     if not kq_trai or not kq_phai or not kq_trai.get("hop_le") or not kq_phai.get("hop_le"):
         return None
     sd_t, sd_p = kq_trai["so_do"], kq_phai["so_do"]
     chenh_rong = _r(float(sd_p["rong_long"]) - float(sd_t["rong_long"]))
     chenh_ngon = _r(float(sd_p["ngon"]["giua"]) - float(sd_t["ngon"]["giua"]))
     chenh_2d4d = _r(float(sd_p["tro_ap_ut"]) - float(sd_t["tro_ap_ut"]))
-
     dt_t = (kq_trai.get("fuzzy_bridge") or {}).get("dang_ban_tay") or {}
     dt_p = (kq_phai.get("fuzzy_bridge") or {}).get("dang_ban_tay") or {}
     hanh_t, hanh_p = dt_t.get("ma"), dt_p.get("ma")
-    ten_t, ten_p = dt_t.get("ten", ""), dt_p.get("ten", "")
-    chuyen_dich = bool(hanh_t and hanh_p and hanh_t != hanh_p)
-
-    # Độ tương đồng tỷ lệ 0..1
-    sai_lech = abs(chenh_rong) + abs(chenh_ngon) + abs(chenh_2d4d)
-    tuong_dong = _r(max(0.0, min(1.0, 1.0 - sai_lech * 1.5)))
-
-    if chuyen_dich:
-        nhan_xet = (
-            f"Tay trái (Tiên Thiên) thiên về {ten_t}, trong khi tay phải (Hậu Thiên) nghiêng sang {ten_p}. "
-            "Sự dịch chuyển này gợi ý bạn đã chủ động rèn luyện hoặc điều chỉnh cách ứng xử theo môi trường hiện tại."
-        )
-    elif sai_lech <= 0.08:
-        nhan_xet = (
-            f"Hai bàn tay có tỉ lệ rất cân xứng và cùng thuộc nhóm {ten_t or 'cân đối'}. "
-            "Bản tính tự nhiên (Tiên Thiên) và cách bạn hành động hiện tại (Hậu Thiên) khá nhất quán."
-        )
-    else:
-        nhan_xet = (
-            f"Cả hai tay cùng thuộc nhóm {ten_t or 'cân đối'}, có sai khác nhẹ ở tỉ lệ lòng và ngón tay — "
-            "phản ánh sự thích nghi tự nhiên giữa nền tảng sẵn có và thói quen thực hành hàng ngày."
-        )
-
     return {
-        "chenh_rong_long": chenh_rong,
-        "chenh_ngon_giua": chenh_ngon,
-        "chenh_tro_ap_ut": chenh_2d4d,
-        "hanh_trai": hanh_t,
-        "hanh_phai": hanh_p,
-        "ten_hanh_trai": ten_t,
-        "ten_hanh_phai": ten_p,
-        "chuyen_dich_hanh": chuyen_dich,
-        "muc_tuong_dong": tuong_dong,
-        "nhan_xet": nhan_xet,
-        "do_tin": "bien_tap_tu_dat",
+        "chenh_rong_long": chenh_rong, "chenh_ngon_giua": chenh_ngon, "chenh_tro_ap_ut": chenh_2d4d,
+        "hanh_trai": hanh_t, "hanh_phai": hanh_p,
+        "ten_hanh_trai": dt_t.get("ten", ""), "ten_hanh_phai": dt_p.get("ten", ""),
+        "chuyen_dich_hanh": bool(hanh_t and hanh_p and hanh_t != hanh_p),
+        "tong_chenh": abs(chenh_rong) + abs(chenh_ngon) + abs(chenh_2d4d),
     }

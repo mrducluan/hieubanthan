@@ -91,10 +91,10 @@ export function DuLieuCuaToi({ emailDuLieu }: { emailDuLieu: string | null }) {
           <Dong ten="Đồng ý gửi ngày giờ sinh đi tính (không lưu khi chưa đăng nhập)" testId="dl-dong-y"
             trangThai={dongY ? `Đã đồng ý ngày ${ngayDongY(dongY) ?? "—"}` : dongY === null ? "Chưa đồng ý — form hồ sơ sẽ hỏi khi bạn bấm xem." : "…"}
             nut={dongY ? <Button size="sm" variant="outline" className={NUT} onClick={() => setHoiThuHoi(true)}>Thu hồi</Button> : undefined} />
-          <Dong ten="Thoả thuận đo gương mặt trên ảnh — chỉ gửi toạ độ điểm bạn chấm, ảnh không rời máy (Nhân tướng học)" testId="dl-do-mat"
+          <Dong ten="Thoả thuận đo gương mặt trên ảnh — gửi toạ độ điểm mốc và tối đa 40 chỉ số máy bạn tính từ ảnh, ảnh không rời máy (Nhân tướng học)" testId="dl-do-mat"
             trangThai={dongYDo ? `Đã đồng ý ngày ${ngayDongYAnhMat(dongYDo) ?? "—"}.` : "Chưa đồng ý — trang Nhân tướng học hỏi khi bạn bấm đo."}
             nut={dongYDo ? <Button size="sm" variant="outline" className={NUT} data-testid="dl-do-mat-rut" onClick={() => { DONG_Y_DO_MAT.thuHoi(); setBao("Đã rút thoả thuận đo gương mặt trên ảnh."); }}>Rút thoả thuận</Button> : undefined} />
-          <Dong ten="Thoả thuận đo bàn tay trên ảnh — chỉ gửi 21 toạ độ điểm mốc, ảnh không rời máy (Xem chỉ tay)" testId="dl-chi-tay"
+          <Dong ten="Thoả thuận đo bàn tay trên ảnh — gửi 21 điểm mốc mỗi bàn tay và tín hiệu ước lượng ba đường chỉ, ảnh không rời máy (Xem chỉ tay)" testId="dl-chi-tay"
             trangThai={dongYTay ? `Đã đồng ý ngày ${ngayDongYAnhMat(dongYTay) ?? "—"}.` : "Chưa đồng ý — trang Xem chỉ tay hỏi khi bạn chọn ảnh bàn tay."}
             nut={dongYTay ? <Button size="sm" variant="outline" className={NUT} data-testid="dl-chi-tay-rut" onClick={() => { DONG_Y_CHI_TAY.thuHoi(); setBao("Đã rút thoả thuận đo bàn tay trên ảnh."); }}>Rút thoả thuận</Button> : undefined} />
           <Dong ten="Thoả thuận gửi ảnh gương mặt cho máy AI gợi ý nét mặt (Nhân tướng học; ảnh không lưu)" testId="dl-anh-mat"

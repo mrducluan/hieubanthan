@@ -7,6 +7,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.calc import chi_tay_do as ctd
+from app.luangiai import chi_tay_hop_nhat as hn
 from app.kb import chi_tay_kb as kb_dong
 from app.main import app
 from tests import test_chi_tay_do as _mau
@@ -63,7 +64,7 @@ def test_so_sanh_hai_tay_can_xung_va_chuyen_dich_nguyen_to():
     # Hai tay cùng hình dáng → tương đồng cao, không chuyển dịch hành
     trai = ctd.do_tay_mo_rong(_mau._anh(_mau._tay(), "trai"), 0.75, "trai")
     phai = ctd.do_tay_mo_rong(_mau._anh(_mau._tay(), "phai"), 0.75, "phai")
-    ss = ctd.so_sanh_hai_tay(trai, phai)
+    ss = hn.so_sanh_hai_tay(trai, phai)
     assert ss is not None
     assert ss["chuyen_dich_hanh"] is False
     assert ss["muc_tuong_dong"] >= 0.95
@@ -73,7 +74,7 @@ def test_so_sanh_hai_tay_can_xung_va_chuyen_dich_nguyen_to():
     # Tay trái lòng dài + ngón dài (Thủy), tay phải lòng rộng vuông + ngón ngắn (Thổ) → chuyển dịch hành
     trai_thuy = ctd.do_tay_mo_rong(_mau._anh(_mau._tay(ngon=1.15, ngang=0.85), "trai"), 0.75, "trai")
     phai_tho = ctd.do_tay_mo_rong(_mau._anh(_mau._tay(ngon=0.78, ngang=1.28), "phai"), 0.75, "phai")
-    ss2 = ctd.so_sanh_hai_tay(trai_thuy, phai_tho)
+    ss2 = hn.so_sanh_hai_tay(trai_thuy, phai_tho)
     assert ss2 is not None
     assert ss2["chuyen_dich_hanh"] is True
     assert ss2["hanh_trai"] != ss2["hanh_phai"]
@@ -81,8 +82,8 @@ def test_so_sanh_hai_tay_can_xung_va_chuyen_dich_nguyen_to():
     assert ss2["chenh_ngon_giua"] < 0
 
     # Thiếu 1 tay hoặc tay lỗi → None
-    assert ctd.so_sanh_hai_tay(trai, None) is None
-    assert ctd.so_sanh_hai_tay({"hop_le": False}, phai) is None
+    assert hn.so_sanh_hai_tay(trai, None) is None
+    assert hn.so_sanh_hai_tay({"hop_le": False}, phai) is None
 
 
 def test_route_do_tay_hop_nhat_va_tuong_thich_nguoc(client):

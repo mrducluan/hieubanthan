@@ -153,6 +153,8 @@ SO: dict[str, dict] = {
                                                       "SX-C: 119 kiểu hình mày, mắt, mũi, tai, miệng (bài thơ từng kiểu) khớp kho nguồn; 7 mục gắn `ngo`")},
     "nhan_tuong_lieu_trang.json": {"mang": "nhantuong", **_nv("lieu_trang_tuong_phap.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                        "SX-C: Liễu Trang tướng pháp — kho nguồn là bản gõ chưa hiệu đính (can_doi_chieu), chỉ trích câu ngắn")},
+    "tuong_do_anh_kb.json": {"mang": "nhantuong", "muc": "bien_tap",
+                             "ghi_chu": "PR #338: ngưỡng + lời phép đo ước lượng trên ảnh (mặt 3D, vùng ảnh, bàn tay) — ban biên tập tự đặt, chưa hiệu chỉnh trên ảnh thật"},
     "nhantuong_ngu_hanh_va_co_thu.json": {"mang": "nhantuong", "muc": "truyen_thong",
                                           "ghi_chu": "Đợt 4: 5 Hình Tướng Ngũ Hành tóm ý theo Lillian Bridges (2012, còn bản quyền — không chép nguyên văn)", "phan": {
         "quy_tac_co_thu": _nv("lieu_trang_tuong_phap.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",

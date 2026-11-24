@@ -120,8 +120,6 @@ def test_auto_compute_full_3d_valid_and_no_duplicates():
     ({"net_mat_smile": -0.15}, "net_mat", "buon_met"),
     ({"net_mat_smile": 0.0, "net_mat_brow_down": 0.22}, "net_mat", "nghiem"),
     ({"sac_da_cr": 155.0, "sac_da_luma": 140.0, "sac_da_cb": 115.0}, "sac_tong", "do_ung"),
-    ({"sac_da_cr": 130.0, "sac_da_luma": 182.0, "sac_da_cb": 122.0}, "sac_tong", "trang_bech"),
-    ({"sac_da_cr": 130.0, "sac_da_luma": 98.0, "sac_da_cb": 115.0}, "sac_tong", "toi_sam"),
     ({"sac_da_cr": 130.0, "sac_da_luma": 140.0, "sac_da_cb": 102.0}, "sac_tong", "vang_xin"),
     ({"le_duong_delta": 26.0}, "le_duong", "tham_quang"),
     ({"moi_cr": 3.5}, "moi_sac", "nhat_kho"),
@@ -171,20 +169,13 @@ def test_api_do_mat_with_3d_and_validation():
 
 
 def test_east_west_bridges_merge_and_so_do_mat():
-    # Without so_do_mat: derives Bridges element from Eastern ngu_hinh (TL_DAY -> tho)
+    # Không có số đo trên ảnh → KHÔNG có phép chia thứ hai để so: không hộp, không "cùng hướng" tự so với chính mình.
     bc1 = nt.luan_giai(TL_DAY, nam_sinh=1988, gioi_tinh="nam", ngay_xem=XEM)
-    pt1 = bc1["da_tinh"]["phuong_tay_bridges"]
-    assert pt1["hanh"] == "tho"
-    assert pt1["trang_thai_dong_thuan"] == "dong_thuan"
-    assert "fuzzy_bridge" not in pt1
-    assert pt1["do_tin"] == "bien_tap_tu_dat"
-    assert "Lillian Bridges" in pt1["nguon"]
-    assert kh.kiem_giong_van(bc1) == []
-
-    # Highlight box injected into tong_quan after Dáng mặt
+    assert "phuong_tay_bridges" not in bc1["da_tinh"]
     tq = next(c for c in bc1["chuong"] if c["ma"] == "tong_quan")
     assert tq["hop"][0]["tieu_de"].startswith("Dáng mặt")
-    assert any("Đông – Tây" in h["tieu_de"] for h in tq["hop"])
+    assert not any("dong_tay" in (h.get("ma_mau") or "") for h in tq["hop"])
+    assert kh.kiem_giong_van(bc1) == []
 
     # With so_do_mat (elongated face -> moc), Eastern=tho vs Western=moc -> bo_tro
     so_do_moc = {"cao_rong": 1.55, "tran_ma": 0.86, "ham_ma": 0.80, "may_khoe": 0.92}
@@ -197,6 +188,9 @@ def test_east_west_bridges_merge_and_so_do_mat():
     assert pt2["hanh"] == "moc"
     assert pt2["trang_thai_dong_thuan"] == "bo_tro"
     assert pt2["fuzzy_bridge"]["ngu_hanh_bridges"]["hanh"] == "moc"
+    assert pt2["do_tin"] == "bien_tap_tu_dat" and "Lillian Bridges" in pt2["nguon"]
+    tq2 = next(c for c in body["chuong"] if c["ma"] == "tong_quan")
+    assert any(h["tieu_de"].startswith("Hai cách đọc ngũ hành") for h in tq2["hop"])
     assert kh.kiem_giong_van(body) == []
 
     # Deterministic
@@ -221,8 +215,7 @@ def test_en_parity_zero_vietnamese_leak():
     r_en = client.post("/v1/nhan-tuong/luan-giai", json={"tra_loi": TL_DAY, "nam_sinh": 1988, "gioi_tinh": "nam", "ngay_xem": XEM.isoformat()}, headers={"x-ngon-ngu": "en"})
     assert r_vi.status_code == 200 and r_en.status_code == 200
     bc_vi, bc_en = r_vi.json(), r_en.json()
-    assert dr.loi_en(bc_en["da_tinh"]["phuong_tay_bridges"]) == []
-    assert dr.loi_en(bc_en["chuong"][0]["hop"][1]) == []
+    assert "phuong_tay_bridges" not in bc_en["da_tinh"]
     assert dr.khung(bc_vi) == dr.khung(bc_en)
 
     # 3. bao_cao with so_do_mat in EN has zero Vietnamese leak in Bridges + East-West box
@@ -232,4 +225,27 @@ def test_en_parity_zero_vietnamese_leak():
     bc_en_sd = r_en_sd.json()
     assert dr.loi_en(bc_en_sd["da_tinh"]["phuong_tay_bridges"]) == []
     assert dr.loi_en(bc_en_sd["chuong"][0]["hop"][1]) == []
-    assert "East–West" in next(c for c in bc_en_sd["chuong"] if c["ma"] == "tong_quan")["hop"][1]["tieu_de"]
+    assert "Two five-element readings" in next(c for c in bc_en_sd["chuong"] if c["ma"] == "tong_quan")["hop"][1]["tieu_de"]
+
+
+def test_sac_da_ngoai_dai_sang_khong_gan_nhan():
+    """Ảnh quá tối / quá sáng: máy không tách được màu da với ánh đèn → không gợi ý sắc (không gán "tối sẫm" /
+    "trắng bệch" theo độ sáng tuyệt đối), chỉ mời người dùng tự chọn."""
+    for luma in (98.0, 182.0):
+        kq = do.do_mat(_diem_mau(), 1.0, dac_trung_3d={"sac_da_cr": 130.0, "sac_da_luma": luma, "sac_da_cb": 118.0})
+        assert not any(g["cau"] == "sac_tong" for g in kq["goi_y"])
+        assert any("sắc da" in c for c in kq["canh_bao"])
+
+
+def test_loi_va_nguong_do_anh_o_kb():
+    """Lời + ngưỡng phép đo ước lượng nằm ở KB (vi + en), không viết cứng trong mã; mọi gợi ý 3D mang độ tin."""
+    kbd = do.kb_do_anh()["nhan_tuong"]
+    hop_le = {c["ma"]: {l["ma"] for l in do.kb.cau_hoi()[i]["lua_chon"]} for i, c in enumerate(do.kb.cau_hoi())}
+    for khoa in kbd["loi"]:
+        cau, lua = khoa.split(".")
+        assert lua in hop_le[cau], khoa
+    with ngon_ngu.dung("en"):
+        en = do.kb_do_anh()["nhan_tuong"]
+    assert set(en["loi"]) == set(kbd["loi"]) and en["loi"] != kbd["loi"]
+    kq = do.do_mat(_diem_mau(), 1.0, dac_trung_3d=FULL_3D)
+    assert all(g["do_tin"] in ("thap", "trung_binh") for g in kq["goi_y"] if g.get("anh") == "3d")

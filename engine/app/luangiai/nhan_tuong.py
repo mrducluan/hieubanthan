@@ -32,106 +32,46 @@ SO_NAM_TOI = 3
 TEN_HANH = {"kim": "Kim", "moc": "Mộc", "thuy": "Thủy", "hoa": "Hỏa", "tho": "Thổ"}
 _TZ = config.TZ_LICH_AM["viet"]
 
-_BRIDGES_EN: dict[str, dict[str, str]] = {
-    "thuy": {
-        "ten_en": "Water Archetype",
-        "hanh_en": "Water",
-        "mat_tich_cuc": "Perceptive, adaptable, and calm under pressure; listens deeply and finds flexible paths through complexity.",
-        "mat_tieu_cuc": "Watch for lingering hesitation, quiet worry, or withdrawing emotionally instead of voicing needs directly.",
-    },
-    "moc": {
-        "ten_en": "Wood Archetype",
-        "hanh_en": "Wood",
-        "mat_tich_cuc": "Forward-looking, decisive, and action-oriented; natural at organizing momentum and driving projects ahead.",
-        "mat_tieu_cuc": "Watch for impatience with slower pacing, overcommitting to goals, or running into sustained tension.",
-    },
-    "hoa": {
-        "ten_en": "Fire Archetype",
-        "hanh_en": "Fire",
-        "mat_tich_cuc": "Warm, expressive, and energizing; connects easily with people and sparks enthusiasm around new ideas.",
-        "mat_tieu_cuc": "Watch for quick mood swings, losing steam on repetitive follow-through, or overpromising in excitement.",
-    },
-    "tho": {
-        "ten_en": "Earth Archetype",
-        "hanh_en": "Earth",
-        "mat_tich_cuc": "Steady, reliable, and supportive; builds trust over time and keeps teams and family grounded.",
-        "mat_tieu_cuc": "Watch for taking on others' worries at the expense of personal boundaries or resisting helpful routine shifts.",
-    },
-    "kim": {
-        "ten_en": "Metal Archetype",
-        "hanh_en": "Metal",
-        "mat_tich_cuc": "Self-reliant, structured, and discerning; holds clear standards and executes work with precision.",
-        "mat_tieu_cuc": "Watch for being overly strict with yourself or others, hesitating to ask for help, or seeming distant.",
-    },
-}
-
-
-def _phuong_tay_bridges(nh: dict, so_do_mat: dict | None = None) -> dict:
-    """Tổng hợp góc nhìn Ngũ Hành Lillian Bridges (phương Tây / Y học cổ truyền) và đối chiếu Đông – Tây."""
+def _phuong_tay_bridges(nh: dict, so_do_mat: dict | None = None) -> dict | None:
+    """Cách chia năm hành theo SỐ ĐO của Lillian Bridges, đặt cạnh Ngũ Hình cổ truyền. CHỈ có khi có số đo trên ảnh
+    (`so_do_mat`): không có số đo thì không có phép chia thứ hai để mà so — không tự lấy hành của Ngũ Hình rồi ghi
+    "hai cách cùng hướng". Lời + mẫu câu ở KB `tuong_do_anh_kb.json` (bản phủ tiếng Anh)."""
     from app.calc import tuong_fuzzy  # noqa: PLC0415
+    from app.calc.nhan_tuong_do import kb_do_anh  # noqa: PLC0415
     from app.kb import tuong_hoc_dot4_kb  # noqa: PLC0415
 
-    vi = ngon_ngu.la_viet()
     fuzzy = tuong_fuzzy.cau_noi_nhan_tuong(so_do_mat) if so_do_mat else None
-    if fuzzy:
-        hanh = fuzzy["ngu_hanh_bridges"]["hanh"]
-    elif nh.get("hinh") in TEN_HANH:
-        hanh = nh["hinh"]
-    elif nh.get("troi") and nh["troi"][0] in TEN_HANH:
-        hanh = nh["troi"][0]
-    else:
-        hanh = "tho"
-
+    if not fuzzy:
+        return None
+    vi = ngon_ngu.la_viet()
+    kbb = kb_do_anh()["nhan_tuong"]["bridges"]
+    hanh = fuzzy["ngu_hanh_bridges"]["hanh"]
     b_kb = tuong_hoc_dot4_kb.tra_ngu_hanh_bridges(hanh) or {}
-    b_en = _BRIDGES_EN[hanh]
-    ten_vi = b_kb.get("ten") or f"Tướng {TEN_HANH[hanh]} ({b_en['ten_en']})"
-    ten_en = b_en["ten_en"]
+    b_en = (kbb.get("hanh_en") or {}).get(hanh) or {}  # tên + lời tiếng Anh của năm hành (chỉ bản Anh dùng)
+    ten_en = b_en.get("ten_en", "")
+    ten_vi = b_kb.get("ten") or f"Tướng {TEN_HANH[hanh]}"
+    ten = ten_vi if vi else ten_en
     nghia = (tuong_fuzzy._NGHIA_DOI_THUONG_MAT_VI[hanh] if vi else tuong_fuzzy._NGHIA_DOI_THUONG_MAT_EN[hanh])
-    tich_cuc = (b_kb.get("mat_tich_cuc") or nghia) if vi else b_en["mat_tich_cuc"]
-    tieu_cuc = (b_kb.get("mat_tieu_cuc_can_chu_y") or "") if vi else b_en["mat_tieu_cuc"]
-    nguon = ("Lillian Bridges — Face Reading in Chinese Medicine (tóm ý biên tập)" if vi
-             else "Lillian Bridges — Face Reading in Chinese Medicine (editorial summary)")
+    tich_cuc = (b_kb.get("mat_tich_cuc") or nghia) if vi else b_en.get("mat_tich_cuc", nghia)
+    tieu_cuc = (b_kb.get("mat_tieu_cuc_can_chu_y") or "") if vi else b_en.get("mat_tieu_cuc", "")
 
     hanh_dong = nh.get("hinh")
     kb_dong = kb.ngu_hinh().get(hanh_dong) or kb.ngu_hinh()["pha"]
     ten_dong = kb_dong.get("ten", str(hanh_dong))
     if hanh_dong == hanh:
-        trang_thai = "dong_thuan"
-        dong_thuan = (
-            f"Đông – Tây đồng thuận: cả Ngũ Hình cổ truyền ({ten_dong}) và Ngũ Hành Lillian Bridges ({ten_vi}) cùng chỉ về hành {TEN_HANH[hanh]}."
-            if vi else
-            f"East–West alignment: both Classical Five-Shape ({ten_dong}) and Lillian Bridges ({ten_en}) point to the {b_en['hanh_en']} element."
-        )
+        trang_thai, mau = "dong_thuan", "dong_thuan"
     elif hanh_dong not in TEN_HANH:
-        trang_thai = "bo_tro"
-        dong_thuan = (
-            f"Đông – Tây bổ trợ: Ngũ Hình cổ truyền cho thấy dáng mặt pha nhiều nét, trong khi góc nhìn Lillian Bridges nổi bật hướng {ten_vi}."
-            if vi else
-            f"East–West complement: Classical Five-Shape shows a blended form, while the Lillian Bridges lens highlights {ten_en}."
-        )
+        trang_thai, mau = "bo_tro", "bo_tro_pha"
     else:
-        trang_thai = "bo_tro"
-        dong_thuan = (
-            f"Đông – Tây bổ trợ: Ngũ Hình cổ truyền nghiêng về {ten_dong}, còn góc nhìn Lillian Bridges nổi bật {ten_vi} — hai hệ bổ sung sắc thái cho nhau."
-            if vi else
-            f"East–West complement: Classical Five-Shape leans toward {ten_dong}, while Lillian Bridges highlights {ten_en} — both lenses add nuance."
-        )
-
-    kq = {
-        "hanh": hanh,
-        "ten_vi": ten_vi,
-        "ten_en": ten_en,
-        "nghia_doi_thuong": nghia,
-        "mat_tich_cuc": tich_cuc,
-        "mat_tieu_cuc": tieu_cuc,
-        "dong_thuan_dong_tay": dong_thuan,
-        "trang_thai_dong_thuan": trang_thai,
-        "do_tin": tuong_fuzzy.DO_TIN,
-        "nguon": nguon,
+        trang_thai, mau = "bo_tro", "bo_tro"
+    dong_thuan = kbb[mau].format(ten_dong=ten_dong, ten=ten, hanh=TEN_HANH[hanh] if vi else b_en.get("hanh_en", ""))
+    return {
+        "hanh": hanh, "ten_vi": ten_vi, "ten_en": ten_en,
+        "tieu_de": kbb["tieu_de"].format(ten=ten),
+        "nghia_doi_thuong": nghia, "mat_tich_cuc": tich_cuc, "mat_tieu_cuc": tieu_cuc,
+        "dong_thuan_dong_tay": dong_thuan, "trang_thai_dong_thuan": trang_thai,
+        "do_tin": tuong_fuzzy.DO_TIN, "nguon": kbb["nguon"], "fuzzy_bridge": fuzzy,
     }
-    if fuzzy is not None:
-        kq["fuzzy_bridge"] = fuzzy
-    return kq
 
 
 # ------------------------------------------------------------------ tiện ích
@@ -198,8 +138,7 @@ def _chuong_tong_quan(tl: dict, khop: list[str], nh: dict, pt_bridges: dict | No
     if pt_bridges:
         from app.calc import tuong_fuzzy  # noqa: PLC0415
         vi = ngon_ngu.la_viet()
-        ten_b = pt_bridges["ten_vi"] if vi else pt_bridges["ten_en"]
-        tieu_de_dt = f"Góc nhìn Đông – Tây: {ten_b}" if vi else f"East–West Synthesis: {ten_b}"
+        tieu_de_dt = pt_bridges["tieu_de"]
         noi_dung_dt = f"{pt_bridges['dong_thuan_dong_tay']} {pt_bridges['nghia_doi_thuong']} {pt_bridges['mat_tich_cuc']}".strip()
         hop_dau.append(kh.hop(
             "cot_loi", tieu_de_dt, noi_dung_dt,
@@ -430,7 +369,7 @@ def bao_cao(tra_loi: dict | None, *, nam_sinh: dt.date | int | None = None, gioi
           "ten": L("nt.ten_bao_cao", "Gương mặt của bạn"), "cot_loi": cot_loi, "chuong": chuong, "ket": str(kb.mau("ket")),
           "thieu": [c["thieu"] for c in chuong if c.get("thieu")],
           "da_tinh": {"so_cau": len(tl), "so_dac_diem": len(khop), "dac_diem": khop, "ngu_hinh": {**nh, "ten": (kb.ngu_hinh().get(nh["hinh"]) or {}).get("ten")},
-                      "phuong_tay_bridges": pt_bridges,
+                      **({"phuong_tay_bridges": pt_bridges} if pt_bridges else {}),  # chỉ khi có số đo trên ảnh
                       "ban_do": {v: calc.gop_muc([x for x in ds if x != "trung_tinh"]) or "trung_tinh" for v, ds in ban_do.items()},
                       "ngay_xem": ngay_xem.isoformat()}}
     kh.ap_hoc(bc, trong_so, ca_nhan)

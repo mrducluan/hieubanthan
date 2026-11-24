@@ -3,7 +3,7 @@
 // Tay Trái (Tiên Thiên · Bản tính gốc) và Tay Phải (Hậu Thiên · Hiện tại & hành động).
 // Ảnh chỉ hiện bằng `blob:` trên máy (giải mã lại qua canvas — xoay đúng chiều, bỏ EXIF), KHÔNG tải lên.
 // MediaPipe Hand Landmarker chạy trên trình duyệt → 21 toạ độ 2D + 3D worldLandmarks + tín hiệu đường chỉ ROI tham khảo
-// → gửi `/api/chi-tay/luan-giai-hai-tay` (dự phòng `/api/chi-tay/do-tay`) sau thoả thuận `ct1`.
+// → gửi `/api/chi-tay/luan-giai-hai-tay` (dự phòng `/api/chi-tay/do-tay`) sau thoả thuận `ct2`.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeftRight, Camera, Check, Compass, Eye, EyeOff, Hand, ImagePlus, Loader2, RotateCcw, ShieldCheck, Sparkles, Sun, X } from "lucide-react";
 import Link from "@/components/khung/Lien";
@@ -99,13 +99,15 @@ interface TrangThaiMotTay {
   diem3d: DiemTay3D[] | null;
   tayMp: "Left" | "Right" | null;
   duongChi: KetQuaDuongChiCV | null;
+  /** PR #338: người dùng trả lời "Đường máy vẽ có khớp tay bạn không?" — "chua_khop" → ẩn lớp phủ + KHÔNG gửi tín hiệu đường chỉ của tay này. */
+  duongPhanHoi: null | "khop" | "chua_khop";
   tim: null | "dang" | Exclude<KetQuaTimTay["trang_thai"], "xong">;
   kq: KqDoTay | null;
   loi: string | null;
 }
 
 const RONG_MOT_TAY: TrangThaiMotTay = {
-  url: null, tyLe: null, diem: null, diem3d: null, tayMp: null, duongChi: null, tim: null, kq: null, loi: null,
+  url: null, tyLe: null, diem: null, diem3d: null, tayMp: null, duongChi: null, duongPhanHoi: null, tim: null, kq: null, loi: null,
 };
 
 const TEN_DANG: Record<string, string> = { vuong: "Tay vuông", be: "Tay bè", triet: "Tay nhiều khớp", thon: "Tay thon dài" };
@@ -136,12 +138,12 @@ const CHO_MOC_THU = process.env.NODE_ENV !== "production" || process.env.NEXT_PU
 function mocThu(tyLe: number, tay: Tay): KetQuaTimTay | null {
   if (!CHO_MOC_THU || typeof window === "undefined") return null;
   const h = (window as unknown as {
-    __ctTest?: { diem?: DiemTay[]; diem_trai?: DiemTay[]; diem_phai?: DiemTay[]; ty_le?: number; trang_thai?: string };
+    __ctTest?: { diem?: DiemTay[]; diem_trai?: DiemTay[]; diem_phai?: DiemTay[]; ty_le?: number; trang_thai?: string; duong_chi?: KetQuaDuongChiCV };
   }).__ctTest;
   if (!h) return null;
   const ds = (tay === "trai" ? h.diem_trai : h.diem_phai) ?? h.diem;
   if (ds?.length === 21) {
-    return { trang_thai: "xong", diem: ds, ty_le: h.ty_le ?? tyLe, tay_mp: tay === "trai" ? "Left" : "Right" };
+    return { trang_thai: "xong", diem: ds, ty_le: h.ty_le ?? tyLe, tay_mp: tay === "trai" ? "Left" : "Right", ...(h.duong_chi ? { duong_chi_goi_y: h.duong_chi } : {}) };
   }
   return { trang_thai: (["khong_thay", "nhieu_tay", "ngoai_khung", "loi"] as const).find((t) => t === h.trang_thai) ?? "loi" };
 }
@@ -236,7 +238,8 @@ export function ChupBanTay() {
       ty_le: Number((s.tyLe ?? 0.75).toFixed(4)),
       diem: s.diem!,
       ...(s.diem3d ? { diem_3d: s.diem3d } : {}),
-      ...(s.duongChi ? {
+      // Chỉ ba bộ con số (không gửi `polylines`); tay người dùng báo "Chưa khớp" thì không gửi tín hiệu đường chỉ.
+      ...(s.duongChi && s.duongPhanHoi !== "chua_khop" ? {
         duong_chi_goi_y: {
           do_ro_tong: s.duongChi.do_ro_tong,
           tam_dao: s.duongChi.tam_dao,
@@ -346,6 +349,17 @@ export function ChupBanTay() {
     }
   }, [goiDoHaiTay]);
 
+  const phanHoiDuong = useCallback((t: Tay, muc: "khop" | "chua_khop") => {
+    if (haiTayRef.current[t].duongPhanHoi === muc) return;
+    ghi("chart_interacted", { mo_dun: "chitay", kind: "duong_cv_phan_hoi", muc, tay: t });
+    const updated: TrangThaiMotTay = { ...haiTayRef.current[t], duongPhanHoi: muc };
+    const nextTrai = t === "trai" ? updated : haiTayRef.current.trai;
+    const nextPhai = t === "phai" ? updated : haiTayRef.current.phai;
+    setHaiTay({ trai: nextTrai, phai: nextPhai });
+    // "Chưa khớp" → đo lại KHÔNG kèm tín hiệu đường chỉ của tay này (lời dựa trên tín hiệu ấy cũng mất theo).
+    if (muc === "chua_khop") void goiDoHaiTay(nextTrai, nextPhai, t);
+  }, [goiDoHaiTay]);
+
   const boTatCa = useCallback(() => {
     luotTim.current.trai++;
     luotTim.current.phai++;
@@ -381,7 +395,7 @@ export function ChupBanTay() {
   const timTay = async (t: Tay, img: HTMLImageElement) => {
     const l = ++luotTim.current[t];
     const tl = img.naturalWidth / img.naturalHeight;
-    capNhatTay(t, { tyLe: tl, tim: "dang", diem: null, diem3d: null, duongChi: null, kq: null, loi: null });
+    capNhatTay(t, { tyLe: tl, tim: "dang", diem: null, diem3d: null, duongChi: null, duongPhanHoi: null, kq: null, loi: null });
     let r = mocThu(tl, t);
     if (!r) {
       try {
@@ -466,6 +480,7 @@ export function ChupBanTay() {
     const roTri = Boolean(st.duongChi && st.duongChi.tri_dao.do_ro >= 0.18 && st.duongChi.polylines.tri_dao.length > 1);
     const roSinh = Boolean(st.duongChi && st.duongChi.sinh_dao.do_ro >= 0.18 && st.duongChi.polylines.sinh_dao.length > 1);
     const coPolyline = roTam || roTri || roSinh;
+    const duongSai = st.duongPhanHoi === "chua_khop";
 
     return (
       <div
@@ -552,7 +567,7 @@ export function ChupBanTay() {
                   {st.diem.map(([x, y], i) => (
                     <circle key={i} cx={x * st.tyLe! * 100} cy={y * 100} r={0.65} fill="white" fillOpacity={0.55} />
                   ))}
-                  {hienDuongChi && coPolyline && st.duongChi && (
+                  {hienDuongChi && coPolyline && !duongSai && st.duongChi && (
                     <g fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth={0.8} strokeOpacity={0.78}>
                       {roTam && <polyline points={diemPolyline(st.duongChi.polylines.tam_dao, st.tyLe)} stroke="#f59e0b" strokeDasharray="1.8 1.2" />}
                       {roTri && <polyline points={diemPolyline(st.duongChi.polylines.tri_dao, st.tyLe)} stroke="#38bdf8" strokeDasharray="1.8 1.2" />}
@@ -625,6 +640,32 @@ export function ChupBanTay() {
                     </Button>
                   )}
                 </div>
+              </div>
+            )}
+
+            {coPolyline && st.duongChi && (
+              <div className="mt-2 rounded-xl border border-line/70 bg-bg/60 px-3 py-2 text-xs text-fg-muted" data-testid={`ct-duong-phan-hoi-${t}`} data-muc={st.duongPhanHoi ?? ""}>
+                {duongSai ? (
+                  <p role="status">
+                    Đã ẩn đường máy vẽ. Bạn tự soi ba đường ở phần{" "}
+                    <a href="#tu-soi" className="font-medium text-gold underline underline-offset-2" onClick={(e) => e.stopPropagation()}>Tự soi bên dưới</a>.
+                  </p>
+                ) : (
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span>Đường máy vẽ có khớp tay bạn không?</span>
+                    <button type="button" aria-pressed={st.duongPhanHoi === "khop"} data-testid={`ct-duong-khop-${t}`}
+                      onClick={(e) => { e.stopPropagation(); phanHoiDuong(t, "khop"); }}
+                      className={cn("min-h-[36px] rounded-full border px-3", st.duongPhanHoi === "khop" ? "border-jade/60 bg-jade/10 text-jade" : "border-line text-fg hover:border-gold/50")}>
+                      Khớp
+                    </button>
+                    <button type="button" data-testid={`ct-duong-chua-khop-${t}`}
+                      onClick={(e) => { e.stopPropagation(); phanHoiDuong(t, "chua_khop"); }}
+                      className="min-h-[36px] rounded-full border border-line px-3 text-fg hover:border-gold/50">
+                      Chưa khớp
+                    </button>
+                    <span className="basis-full text-[11px] text-fg-faint">Đường này do máy bạn dò từ ảnh, chỉ là ước lượng để tham khảo.</span>
+                  </div>
+                )}
               </div>
             )}
 
@@ -718,7 +759,7 @@ export function ChupBanTay() {
                 <ShieldCheck className="size-4 text-gold" aria-hidden /> Thoả thuận đo bàn tay trên ảnh
               </p>
               <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">
-                Ảnh chỉ xử lý trên máy bạn; chỉ 21 toạ độ điểm mốc 2D/3D, tỉ lệ khung ảnh và chỉ số đường chỉ tham khảo (dạng số, không có ảnh) được gửi lên để đo, không lưu, không dùng để
+                Ảnh chỉ xử lý trên máy bạn, không rời máy. Thứ được gửi lên máy chủ tính toán một lượt để đo: 21 điểm mốc 2D và 3D của mỗi bàn tay (tối đa hai bàn tay), tỉ lệ khung ảnh và tín hiệu ước lượng ba đường chỉ do máy bạn dò (độ rõ, độ dài, độ cong) — chỉ con số, không có ảnh; không lưu, không chuyển cho bên thứ ba, không dùng để
                 nhận ra bạn. Rút thoả thuận ở đây hoặc ở <Link href="/tai-khoan#du-lieu-cua-toi" className="text-gold underline underline-offset-2">Dữ liệu của tôi</Link> ·{" "}
                 <Link href="/chinh-sach-rieng-tu#anh-mat" className="text-gold underline underline-offset-2">Chính sách riêng tư</Link>.
               </p>
@@ -730,7 +771,7 @@ export function ChupBanTay() {
                   onChange={(e) => setTick(e.target.checked)}
                   data-testid="ct-dong-y"
                 />
-                <span>Tôi đồng ý: ảnh chỉ xử lý trên máy tôi; chỉ 21 toạ độ điểm mốc bàn tay được gửi lên để đo, không lưu.</span>
+                <span>Tôi đồng ý: ảnh chỉ xử lý trên máy tôi; điểm mốc bàn tay và tín hiệu ước lượng ba đường chỉ (chỉ con số) được gửi lên để đo, không lưu.</span>
               </label>
               {!duocChon && <p className="mt-1 text-xs text-fg-faint">Tích ô đồng ý ở trên để chụp hoặc tải ảnh.</p>}
             </div>
@@ -750,7 +791,7 @@ export function ChupBanTay() {
         </div>
 
         {/* Chú giải 3 đường chỉ gợi ý CV */}
-        {coBatKyAnh && hienDuongChi && (haiTay.trai.duongChi || haiTay.phai.duongChi) && (
+        {coBatKyAnh && hienDuongChi && ((haiTay.trai.duongChi && haiTay.trai.duongPhanHoi !== "chua_khop") || (haiTay.phai.duongChi && haiTay.phai.duongPhanHoi !== "chua_khop")) && (
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-fg-muted">
             <span className="font-medium text-fg">Gợi ý đường chỉ (tham khảo):</span>
             <span className="inline-flex items-center gap-1"><span className="inline-block h-0.5 w-4 bg-amber-400" /> Tâm Đạo</span>

@@ -1,5 +1,5 @@
 // ANH-3 — tìm điểm mốc gương mặt TỰ ĐỘNG, ngay trên máy người dùng (WebAssembly, tệp tự phục vụ ở /mediapipe/<phiên bản>/).
-// Ảnh không rời máy; chỉ ra toạ độ 0..1 các điểm mốc như khi người dùng tự chấm → web gửi engine (sau thoả thuận dm1) như cũ.
+// Ảnh không rời máy; chỉ ra toạ độ 0..1 các điểm mốc như khi người dùng tự chấm → web gửi engine (sau thoả thuận dm2) như cũ.
 // Chỉ nạp khi người dùng đã chọn ảnh (import động — trang khác không tải gì thêm). Mọi phép đo tướng vẫn ở engine.
 import cfg from "./bo-do-mat.json";
 import { trichXuatDacTrung3D, type BlendshapeItem, type Diem3D } from "./dac-trung-mat-3d";

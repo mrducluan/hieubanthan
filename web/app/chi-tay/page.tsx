@@ -1,7 +1,7 @@
 // Xem chỉ tay theo sách xưa — Thần Tướng Toàn Biên quyển 10. Đồ hình tám cung bàn tay (lớp phủ chú giải trên bản khắc gỗ)
 // + công cụ tự soi: người dùng chọn hình vân giống tay mình → lời sách theo khuôn SX-C. Thư viện đủ hình (số hình do engine trả) render ở máy chủ
 // (Google, bot AI đọc được không cần JS). Engine lỗi → 5xx. Web chỉ hiển thị.
-// CT-2: khối "Chụp lòng bàn tay" đầu trang — ảnh chỉ xử lý trên máy người dùng, chỉ 21 toạ độ điểm mốc gửi engine (ChupBanTay).
+// CT-2: khối "Chụp lòng bàn tay" đầu trang — ảnh chỉ xử lý trên máy người dùng, chỉ điểm mốc 2D + 3D và tín hiệu ước lượng ba đường chỉ (con số) gửi engine (ChupBanTay).
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -37,7 +37,7 @@ export default async function Page() {
   const tl = `Sách tướng xưa xem bàn tay theo tám cung bát quái (mỗi cung một mảng đời: cha, mẹ, vợ chồng, nhà cửa, công danh, tổ nghiệp)
     và theo hình vân. ${tv.nguon_hien_thi} khắc 72 hình vân, mỗi hình một bài thơ bốn câu. Bạn tự soi tay mình,
     chọn hình giống tay mình, trang này đọc nguyên văn và nói lại bằng lời thường. Nếu chụp ảnh lòng bàn tay, ảnh chỉ xử lý trên
-    máy bạn — chỉ 21 toạ độ điểm mốc gửi lên để đo và đặt tám cung lên đúng tay bạn, không lưu gì lên máy chủ.${tvTay
+    máy bạn — chỉ điểm mốc bàn tay và tín hiệu ước lượng ba đường chỉ (dạng số) gửi lên để đo và đặt tám cung lên đúng tay bạn, không lưu gì lên máy chủ.${tvTay
       ? " Trang cũng có cách xem chỉ tay phương Tây theo sách Cheiro (1894) và Benham (1900): dáng bàn tay, các gò, các đường chỉ. Đường Sinh dài hay ngắn không nói bạn sống bao lâu." : ""}`
     .replace(/\s+/g, " ");
   const theoChuDe = tv.chu_de.map((c) => ({ ...c, van: tv.van.filter((v) => v.chu_de === c.ma) })).filter((c) => c.van.length);

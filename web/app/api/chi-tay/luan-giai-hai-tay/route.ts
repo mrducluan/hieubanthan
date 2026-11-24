@@ -5,12 +5,22 @@ import { goiEngine } from "@/lib/proxy";
 
 const So01 = z.number().finite().min(0).max(1);
 const So = z.number().finite();
+// Tín hiệu ước lượng ba đường chỉ do máy người dùng dò (lib/duong-chi-tay-cv.ts `KetQuaDuongChiCV`) — CHỈ con số 0..1, schema chặt.
+// `polylines` (nét vẽ lớp phủ) không được gửi lên: engine không dùng, ít dữ liệu hơn là tốt hơn → có thì bị từ chối (strict).
+const TinHieuDuong = z.object({ do_ro: So01, chieu_dai_uoc_luong: So01, do_cong: So01 }).strict();
+const DuongChiGoiY = z.object({
+  do_ro_tong: So01,
+  tam_dao: TinHieuDuong,
+  tri_dao: TinHieuDuong,
+  sinh_dao: TinHieuDuong,
+  do_tin: z.literal("goi_y_tham_khao"),
+}).strict();
 
 const MotTay = z.object({
   ty_le: z.number().finite().min(0.1).max(10),
   diem: z.array(z.tuple([So01, So01])).length(21),
   diem_3d: z.array(z.tuple([So, So, So])).length(21).optional(),
-  duong_chi_goi_y: z.record(z.string(), z.unknown()).optional(),
+  duong_chi_goi_y: DuongChiGoiY.optional(),
 }).strict();
 
 const Input = z.object({

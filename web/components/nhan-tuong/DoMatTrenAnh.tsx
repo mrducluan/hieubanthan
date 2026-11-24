@@ -4,7 +4,7 @@
 // mũi tên để nhích), web gửi toạ độ chuẩn hoá 0..1 + tỉ lệ khung ảnh tới engine `/v1/nhan-tuong/do-mat`: CALC xoay theo
 // đường hai đuôi mắt, đo tỉ lệ "tam đình ngũ nhãn", gợi ý lựa chọn khảo sát → người dùng xác nhận → bài đọc. Web không tính
 // gì: hình hướng dẫn là hình tĩnh (khuôn mặt mẫu), không đo. Điểm mốc gương mặt vẫn là dữ liệu nhạy cảm → thoả thuận
-// `dm1` (không tích sẵn, rút được) trước khi gửi; không lưu ở đâu.
+// `dm2` (không tích sẵn, rút được) trước khi gửi; không lưu ở đâu.
 // ANH-3: chọn ảnh xong, máy người dùng TỰ TÌM điểm mốc (lib/diem-moc-tu-dong — chạy trong trình duyệt, ảnh không đi đâu) và
 // đặt sẵn các chấm; người dùng chỉ xem lại, kéo chấm lệch. Không tìm được → chấm tay như cũ.
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -384,7 +384,7 @@ export function DoMatTrenAnh({ ks, daTraLoi, onGoiY, onXem, onDungVaXem, onXongD
           <Dam s={t("do.tt_mo")} />{" "}
           {t("do.tt_rut")} · <Link href={`${d("/chinh-sach-rieng-tu")}#anh-mat`} className="text-gold underline underline-offset-2">{t("do.tt_chinh_sach")}</Link>.
         </p> : <p className="mt-1.5 text-xs leading-relaxed text-fg-muted">
-          Ảnh <b className="text-fg">không rời máy bạn</b>. Điểm mốc do máy bạn tự tìm ngay trong trình duyệt hoặc do bạn chấm. Chỉ toạ độ các điểm đó (ảnh chính diện, ảnh nghiêng nếu bạn thêm), tỉ lệ hình học 3D và chỉ số sắc thái vùng da (dạng số, không có ảnh) được gửi tới máy chủ tính toán của Hiểu Bản Thân <b className="text-fg">một lượt</b> để đo tỉ lệ theo sách tướng; không lưu, không chuyển cho bên thứ ba, không dùng để nhận ra bạn. Ảnh phải là của chính bạn, bạn đủ 18 tuổi.
+          Ảnh <b className="text-fg">không rời máy bạn</b>. Điểm mốc do máy bạn tự tìm ngay trong trình duyệt hoặc do bạn chấm. Thứ được gửi tới máy chủ tính toán của Hiểu Bản Thân <b className="text-fg">một lượt</b> để đo theo sách tướng: toạ độ các điểm đó (ảnh chính diện, và ảnh nghiêng nếu bạn thêm), tỉ lệ khung ảnh và tối đa 40 chỉ số do máy bạn tính từ ảnh (độ nổi tương đối của mũi, gò má, trán; biểu cảm lúc chụp; thống kê màu vùng má, dưới mắt, môi; độ nét vùng trán) — chỉ con số, không có ảnh; máy chủ không lưu, không chuyển cho bên thứ ba, không dùng để nhận ra bạn. Ảnh phải là của chính bạn, bạn đủ 18 tuổi.
           Rút thoả thuận ở đây hoặc ở <Link href="/tai-khoan#du-lieu-cua-toi" className="text-gold underline underline-offset-2">Dữ liệu của tôi</Link> · <Link href="/chinh-sach-rieng-tu#anh-mat" className="text-gold underline underline-offset-2">Chính sách riêng tư</Link>.
         </p>}
         {dongY ? (
