@@ -13,9 +13,19 @@ import { ghi } from "@/lib/do-luong";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { BaoLiXi3D } from "@/components/li-xi/BaoLiXi3D";
 import { BanDoTet2027 } from "@/components/li-xi/BanDoTet2027";
-import { hoaTietTuMaBao, type BaoLiXiCongKhai } from "@/lib/li-xi-tet";
+import { hoaTietTuMaBao, type BaoLiXiCongKhai, type HoaTietTet } from "@/lib/li-xi-tet";
 
-export function MoLiXi({ ma, banDau }: { ma: string; banDau: BaoLiXiCongKhai }) {
+export function MoLiXi({
+  ma,
+  banDau,
+  hoaTiet,
+  nenGam = true,
+}: {
+  ma: string;
+  banDau: BaoLiXiCongKhai;
+  hoaTiet?: HoaTietTet;
+  nenGam?: boolean;
+}) {
   const router = useRouter();
   const [bao, setBao] = useState<BaoLiXiCongKhai>(banDau);
   const [daMo, setDaMo] = useState(false);
@@ -93,7 +103,8 @@ export function MoLiXi({ ma, banDau }: { ma: string; banDau: BaoLiXiCongKhai }) 
 
         <BaoLiXi3D
           mauThiep={bao.mau_thiep ?? "do_son"}
-          hoaTiet={hoaTietTuMaBao(ma, bao.mau_thiep)}
+          hoaTiet={hoaTiet ?? hoaTietTuMaBao(ma, bao.mau_thiep)}
+          nenGam={nenGam}
           tenNguoiTang={bao.ten_nguoi_tang}
           loiChuc={bao.loi_chuc}
           daMo={daMo}

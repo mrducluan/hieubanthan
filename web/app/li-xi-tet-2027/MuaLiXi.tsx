@@ -162,8 +162,13 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
     }
   }
 
-  function linkBao(ma: string) {
-    return `${typeof window !== "undefined" ? window.location.origin : "https://hieuban.com"}/li-xi/${ma}`;
+  function linkBao(ma: string, hoaBao?: HoaTietTet) {
+    const base = `${typeof window !== "undefined" ? window.location.origin : "https://hieuban.com"}/li-xi/${ma}`;
+    const qs = new URLSearchParams();
+    if (hoaBao ?? hoa) qs.set("hoa", hoaBao ?? hoa);
+    if (!nenGam) qs.set("gam", "0");
+    const s = qs.toString();
+    return s ? `${base}?${s}` : base;
   }
 
   function linkAnhSocial(khung: KhungSocial, maBao?: string) {
