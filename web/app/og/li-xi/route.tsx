@@ -164,20 +164,53 @@ export async function GET(req: Request) {
               display: "flex",
               flexDirection: doc ? "column" : "row",
               alignItems: "center",
-              justifyContent: "space-between",
-              gap: doc ? 44 : 36,
-              marginTop: doc ? 24 : 0,
-              marginBottom: doc ? 24 : 0,
+              justifyContent: doc ? "center" : "space-between",
+              gap: doc ? 48 : 36,
+              width: "100%",
             }}
           >
-            <div style={{ display: "flex", flexDirection: "column", gap: doc ? 28 : 18, flex: 1 }}>
+            {/* Cụm đồ hoạ Tết nổi bật (Story 9:16 đưa lên trên làm tâm điểm; 1:1 & 16:9 đặt bên phải) */}
+            {doc && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 18,
+                  padding: "36px 44px",
+                  borderRadius: 28,
+                  border: `2px solid ${thiep.vien}`,
+                  background: "rgba(0,0,0,0.22)",
+                }}
+              >
+                {hoa === "linh_vat" && <SvgLinhVat color={thiep.nhan} size={260} />}
+                {hoa === "hoa_mai" && <SvgHoaXuan loai="mai" size={260} />}
+                {hoa === "hoa_dao" && <SvgHoaXuan loai="dao" size={260} />}
+                {hoa === "phao_hoa" && <SvgPhaoHoa color={thiep.nhan} size={260} />}
+                <div style={{ display: "flex", fontSize: 22, color: thiep.nhan, letterSpacing: 3, fontWeight: 700 }}>
+                  {hoa === "linh_vat" ? "KIM DƯƠNG ĐINH MÙI" : hoa === "hoa_mai" ? "MAI VÀNG PHÚ QUÝ" : hoa === "hoa_dao" ? "ĐÀO XUÂN AN KHANG" : "PHÁO HOA GIAO THỪA"}
+                </div>
+              </div>
+            )}
+
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: doc ? "center" : "flex-start",
+                gap: doc ? 28 : 20,
+                width: doc ? "100%" : vuong ? 560 : 760,
+              }}
+            >
               <div
                 style={{
                   display: "flex",
                   fontFamily: "Serif",
-                  fontSize: doc ? 72 : vuong ? 58 : 52,
-                  lineHeight: 1.15,
+                  fontSize: doc ? 68 : vuong ? 56 : 50,
+                  lineHeight: 1.18,
                   color: thiep.chu,
+                  textAlign: doc ? "center" : "left",
                 }}
               >
                 {ten ? `${ten} gửi bạn Bao Lì Xì Tết 2027` : "Mở Bao LÌ XÌ TẾT 2027 của bạn"}
@@ -185,38 +218,41 @@ export async function GET(req: Request) {
               <div
                 style={{
                   display: "flex",
-                  fontSize: doc ? 34 : vuong ? 30 : 25,
+                  fontSize: doc ? 34 : vuong ? 28 : 24,
                   lineHeight: 1.48,
                   color: thiep.chu,
                   opacity: 0.92,
+                  textAlign: doc ? "center" : "left",
                 }}
               >
                 “{chuc}”
               </div>
             </div>
 
-            {/* Cụm đồ hoạ Tết nổi bật (Linh Vật Đinh Mùi + Hoa Mai/Đào + Pháo Hoa) */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 14,
-                padding: doc ? 32 : 20,
-                borderRadius: 24,
-                border: `1.5px solid ${thiep.vien}`,
-                background: "rgba(0,0,0,0.18)",
-              }}
-            >
-              {hoa === "linh_vat" && <SvgLinhVat color={thiep.nhan} size={doc ? 240 : vuong ? 200 : 156} />}
-              {hoa === "hoa_mai" && <SvgHoaXuan loai="mai" size={doc ? 240 : vuong ? 200 : 156} />}
-              {hoa === "hoa_dao" && <SvgHoaXuan loai="dao" size={doc ? 240 : vuong ? 200 : 156} />}
-              {hoa === "phao_hoa" && <SvgPhaoHoa color={thiep.nhan} size={doc ? 240 : vuong ? 200 : 156} />}
-              <div style={{ display: "flex", fontSize: doc ? 22 : 15, color: thiep.nhan, letterSpacing: 2 }}>
-                {hoa === "linh_vat" ? "KIM DƯƠNG ĐINH MÙI" : hoa === "hoa_mai" ? "MAI VÀNG PHÚ QUÝ" : hoa === "hoa_dao" ? "ĐÀO XUÂN AN KHANG" : "PHÁO HOA GIAO THỪA"}
+            {!doc && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 14,
+                  padding: vuong ? 26 : 20,
+                  borderRadius: 24,
+                  border: `1.5px solid ${thiep.vien}`,
+                  background: "rgba(0,0,0,0.22)",
+                  width: vuong ? 290 : 250,
+                }}
+              >
+                {hoa === "linh_vat" && <SvgLinhVat color={thiep.nhan} size={vuong ? 190 : 148} />}
+                {hoa === "hoa_mai" && <SvgHoaXuan loai="mai" size={vuong ? 190 : 148} />}
+                {hoa === "hoa_dao" && <SvgHoaXuan loai="dao" size={vuong ? 190 : 148} />}
+                {hoa === "phao_hoa" && <SvgPhaoHoa color={thiep.nhan} size={vuong ? 190 : 148} />}
+                <div style={{ display: "flex", fontSize: 14, color: thiep.nhan, letterSpacing: 2, fontWeight: 700, textAlign: "center" }}>
+                  {hoa === "linh_vat" ? "KIM DƯƠNG ĐINH MÙI" : hoa === "hoa_mai" ? "MAI VÀNG PHÚ QUÝ" : hoa === "hoa_dao" ? "ĐÀO XUÂN AN KHANG" : "PHÁO HOA GIAO THỪA"}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Hàng dưới: Điểm nhấn Báo cáo 2027 + CTA */}
