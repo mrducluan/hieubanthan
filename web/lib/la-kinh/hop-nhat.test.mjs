@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  chuanDo, doHienThi, giaiMa, gocLienTuc, hieuGoc, huongDinhMay, kimMuot, lamTronMau, nhomSoMau, saiSoXauNhat,
+  chuanDo, doHienThi, giaiMa, nguonSuKien, gocLienTuc, hieuGoc, huongDinhMay, kimMuot, lamTronMau, nhomSoMau, saiSoXauNhat,
 } from "./hop-nhat.ts";
 
 const gan = (a, b, sai = 1e-6) => assert.ok(Math.abs(hieuGoc(a, b)) <= sai, `${a} phải gần ${b}`);
@@ -113,4 +113,27 @@ test("nhomSoMau: chỉ ra nhóm, không ra con số", () => {
   assert.equal(nhomSoMau(1), "it");
   assert.equal(nhomSoMau(40), "vua");
   assert.equal(nhomSoMau(240), "nhieu");
+});
+
+test("nguonSuKien: Chrome Android — sự kiện tuyệt đối được đọc, sự kiện tương đối (absolute false) bị bỏ", () => {
+  // Lỗi đã gặp trên hieuban.com: Chrome mới có DeviceOrientationEvent.requestPermission nên mã cũ tưởng là iOS và chỉ nghe
+  // `deviceorientation` — alpha tương đối, lệch tuỳ ý so với la bàn của máy.
+  assert.equal(nguonSuKien("deviceorientationabsolute", { alpha: 180, beta: 0, gamma: 0, absolute: true }, false), "tuyet_doi");
+  assert.equal(nguonSuKien("deviceorientation", { alpha: 156, beta: 0, gamma: 0, absolute: false }, true), null);
+  assert.equal(nguonSuKien("deviceorientation", { alpha: 156, beta: 0, gamma: 0 }, false), null);
+});
+
+test("nguonSuKien: iOS đọc webkitCompassHeading; trình duyệt chỉ có deviceorientation tự khai tuyệt đối thì vẫn đọc", () => {
+  assert.equal(nguonSuKien("deviceorientation", { alpha: 10, webkitCompassHeading: 184 }, false), "ios");
+  assert.equal(nguonSuKien("deviceorientation", { alpha: 176, absolute: true }, false), "tuyet_doi");
+  // Đã có sự kiện tuyệt đối riêng thì không trộn thêm nguồn thứ hai.
+  assert.equal(nguonSuKien("deviceorientation", { alpha: 176, absolute: true }, true), null);
+});
+
+test("Chuỗi đầy đủ: máy quay về 184° (Nam) — sự kiện tương đối alpha bất kỳ không làm đổi số đọc", () => {
+  const tuyetDoi = { alpha: 176, beta: 2, gamma: -1, absolute: true };   // 360 − 176 = 184
+  const tuongDoi = { alpha: 200, beta: 2, gamma: -1, absolute: false };  // đọc nhầm sẽ ra 160
+  const doc = (loai, e) => { const n = nguonSuKien(loai, e, true); return n ? giaiMa(e, n === "tuyet_doi", 0) : null; };
+  assert.equal(Math.round(doc("deviceorientationabsolute", tuyetDoi).do), 184);
+  assert.equal(doc("deviceorientation", tuongDoi), null);
 });

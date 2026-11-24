@@ -122,6 +122,18 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   co_anh: "number",     // UI-PT2 P6: 1 = có chọn ảnh góc nhà (chỉ trên máy)
   so_anh: "number",     // PT-V2: số ảnh gửi máy đọc (1–3) — không bao giờ là ảnh hay tên tệp
   so_dau_hieu: "number", // PT-V2: số dấu hiệu máy gợi ý
+  // PT-V3 — chỉ mã / cờ / số đếm; không bao giờ số độ la bàn, toạ độ, năm xây hay chữ người dùng gõ.
+  rieng: "number",      // HG-1: 1 = câu trả lời đã dựa trên dữ kiện của người dùng
+  thieu: "string",      // HG-1: mã thứ còn thiếu nối bằng "+" (huong+sinh)
+  co: "number",         // HG-1: trả lời nhanh có (1) / không (0) cho một mã dấu hiệu
+  on_dinh: "string",    // LK-1: on / giu_yen / do_lai (mức engine trả)
+  so_mau_nhom: "string", // LK-1: it / vua / nhieu (nhóm số mẫu, không phải con số)
+  hieu_chinh: "number", // LK-1: 1 = máy báo la bàn chưa hiệu chỉnh
+  nhieu: "number",      // LK-1: 1 = hai lần đo lệch nhau (nghi nhiễu sắt)
+  hai_lan: "number",    // LK-1: 1 = hướng chốt từ hai lần đo
+  cach: "string",       // VT-1: la_ban / khung
+  cho: "string",        // VT-1: mã vật vừa ghi (cua_chinh, bep…)
+  so_tang: "number", co_truc: "boolean",
   // NT-1: Nhân tướng học — chỉ MÃ: số câu đã trả lời, lựa chọn tam đình máy đo, ngũ hình, số gợi ý từ ảnh (không chữ người dùng)
   lua_chon: "string", ngu_hinh: "string", so_goi_y: "number",
   so_diem: "number",    // ANH-2: số điểm mốc người dùng đã chấm khi đo trên ảnh (chỉ con số, không toạ độ)

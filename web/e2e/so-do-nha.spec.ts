@@ -130,14 +130,24 @@ test("SD-1: gợi ý dấu hiệu đến từ engine, cửa / kích thước ch�
   // 7. Kéo chuột dời nhà vệ sinh: một lần kéo = một bước hoàn tác
   await vt.getByTestId("vi-tri-dat-ve_sinh").click();
   const hopWc = vt.getByTestId("vi-tri-hop-ve_sinh");
+  // Đưa hộp vào GIỮA màn hình trước khi kéo (hộp sát mép dưới thì chuột kéo xuống ra ngoài khung nhìn, không dời được).
+  await hopWc.evaluate((el) => el.scrollIntoView({ block: "center" }));
   const wc0 = (await hopWc.locator("rect").first().boundingBox())!;
+  const wcTrong = await hopWc.locator("rect").first().evaluate((r) =>
+    r.getBoundingClientRect().y - (r as SVGElement).ownerSVGElement!.getBoundingClientRect().y);
   await page.mouse.move(wc0.x + wc0.width / 2, wc0.y + wc0.height / 2);
   await page.mouse.down();
   await page.mouse.move(wc0.x + wc0.width / 2, wc0.y + wc0.height / 2 + 40, { steps: 5 });
   await page.mouse.up();
-  expect((await hopWc.locator("rect").first().boundingBox())!.y).toBeGreaterThan(wc0.y + 15);
+  await expect.poll(async () => (await hopWc.locator("rect").first().boundingBox())!.y).toBeGreaterThan(wc0.y + 15);
   await vt.getByTestId("vi-tri-hoan-tac").click();
-  await expect.poll(async () => Math.abs((await hopWc.locator("rect").first().boundingBox())!.y - wc0.y)).toBeLessThan(1);
+  // So vị trí TƯƠNG ĐỐI với khung sơ đồ (bấm Hoàn tác có thể cuộn trang).
+  const yTrongKhung = () => hopWc.locator("rect").first().evaluate((r) => {
+    const svg = (r as SVGElement).ownerSVGElement!;
+    return r.getBoundingClientRect().y - svg.getBoundingClientRect().y;
+  });
+  await expect.poll(yTrongKhung).toBeLessThan(wcTrong + 1);
+  expect(await yTrongKhung()).toBeGreaterThan(wcTrong - 1);
 });
 
 test("SD-1: nhà bỏ ô (chữ L) — tâm nhà chỉ hiện sau khi engine trả; một chỗ nằm đúng giữa nhà thì báo ngay cạnh sơ đồ", async ({ page }) => {

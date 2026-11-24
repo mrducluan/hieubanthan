@@ -72,3 +72,5 @@ là đường Mỹ → Singapore, render ~0,15–0,2 giây; mọi lượt `x-ver
 Kết luận: lợi ích #347 gần như bằng không mà giá bảo mật là thật → đóng. Nếu muốn kéo thời gian phản hồi cho Googlebot
 (trung bình 673 ms ở Search Console), hướng đúng là dự án riêng "dựng tĩnh trang kiến thức", ước 2–3 ngày, cần chủ dự án
 duyệt vì đổi CSP-2 cho nhóm trang đó.
+
+**Cập nhật 24/11/2026**: main đã làm Q-I3 bằng **nonce ổn định** (HMAC theo bản deploy + đường dẫn, giữ `'strict-dynamic'`) — xử lý đúng lý do bác #347 (mất nonce cả phiên). Hướng "dựng tĩnh" không cần nữa; #347 chỉ còn việc đóng.

@@ -23,7 +23,7 @@ Làm xong dòng nào thì đánh `[x]` (hoặc nhắn em). Các mục cũ hơn n
   5. Có lời chúc tự viết khả nghi (lừa đảo dù đã qua bộ lọc): SQL Editor `update li_xi_tet set loi_chuc = null, ten_nguoi_tang = null where ma = '<mã>';`.
 - [ ] **Trang mời cộng tác chuyên gia** `/hop-tac-chuyen-gia` (đã hiện link ở `/tac-gia`): đọc lại con số **"tới 80% tiền câu hỏi (sau phí thanh toán)"** — em giữ theo PR #348; nếu chưa chốt thì nhắn em sửa. Hợp đồng cộng tác + khấu trừ thuế: nhờ luật sư / kế toán (em đã bỏ các số nghị định trên trang vì chưa kiểm được).
 - [ ] **12 tình huống hỏi đáp (HD-TH)**: sau khi deploy CMS, vào CMS → Bài viết → 12 bài nháp "Gửi duyệt" (ghi chú HD-TH). Bài còn mỏng (điểm 64–70): muốn đăng thì nhắn em gắn một lá số mẫu do engine tính cho từng bài (hướng ở tài liệu mục 4), hoặc anh tự viết thêm rồi bấm Xuất bản.
-- [ ] (Quyết định) **Cache trang SEO (Q-I3)**: em đề xuất KHÔNG dùng cách của #347; nếu muốn kéo TTFB cho Googlebot thì duyệt dự án "dựng tĩnh trang kiến thức" (tài liệu mục 5).
+- [ ] Đóng PR #347 (cache CDN): Q-I3 đã làm bằng nonce ổn định (CLAUDE.md dòng 2026-11-24), không cần #347 nữa.
 
 ### 0. Phong thuỷ PT-V3 (PR #352) — sau khi merge
 
@@ -355,7 +355,7 @@ Bài RankYak vào CMS như bài NotFair: nháp → chuẩn hoá SEO → tự xu�
 - [ ] **Search Console → Kiểm tra URL** cho `https://hieuban.com/` và 7 trang dịch vụ (`/tu-vi`, `/bat-tu`, `/than-so`, `/kinh-dich`, `/phong-thuy`, `/nhan-tuong`, `/tarot`) → "Yêu cầu lập chỉ mục" sau khi deploy (để Google đọc tiêu đề mới sớm).
 - [ ] Sau 2–4 tuần: Hiệu suất → truy vấn chứa "tử vi" → tab Trang: `/tu-vi` phải nhận phần lớn hiển thị thay cho trang chủ. Gửi em file xuất nếu chưa đổi.
 - [x] 6 đề xuất SEO-N — mục 1–5 đã làm (SEO-N2, 10/11).
-- [ ] (Quyết định, 19–26/11) **Q-I3 cache HTML**: xem Thống kê thu thập → thời gian phản hồi trung bình; > 1.000 ms thì chọn cách A ở `docs/AUDIT-SEO-TRANG-DICH-VU-2026-11.md` mục 4.3 (bỏ nonce riêng trang kiến thức), < 600 ms thì giữ nguyên.
+- [ ] (Sau deploy, 24/11) **Q-I3 đã làm** (giữ CSP-2, nonce ổn định — CLAUDE.md dòng 2026-11-24). Anh kiểm: mở hieuban.com/tu-vi hai lần ở cửa sổ ẩn danh → DevTools › Network › tài liệu đầu tiên phải có `x-vercel-cache: HIT` lần hai; trang không bị trắng / lỗi CSP. Sau 2 tuần gửi em ảnh Thống kê thu thập (thời gian phản hồi trung bình) để so trước – sau. Nếu thấy trang trắng hoặc lỗi: báo em, em tắt cache bằng một PR nhỏ (rút allowlist).
 - [ ] **Liên kết ngoài**: bài trên fanpage / diễn đàn / bài khách trỏ thẳng `https://hieuban.com/tu-vi` (chữ "xem tử vi online", "lá số tử vi"), `/bat-tu`, `/than-so` — không trỏ hết về trang chủ.
 - [ ] Đặt env `MXH_FACEBOOK`, `MXH_YOUTUBE`… (Vercel, dự án web) cho các kênh thật → Google nối thương hiệu "hieuban" với site, dễ hiện sitelinks.
 - [ ] Sau 4 tuần: Search Console → Hiệu suất → Truy vấn, gửi em file xuất để đối chiếu bảng từ khoá (mục 4.1) với số thật.

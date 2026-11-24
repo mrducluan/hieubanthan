@@ -14,16 +14,43 @@ import { ChonVanTay } from "@/components/chi-tay/ChonVanTay";
 import { ChupBanTay } from "@/components/chi-tay/ChupBanTay";
 import { CongTacPhai, TheoPhai } from "@/components/chi-tay/PhaiChiTay";
 import { ChonChiTayTay, MucTayView } from "@/components/chi-tay/ChonChiTayTay";
-import { goiLd, ldDuongDan, ldTrangWeb, metaTrang, urlDayDu } from "@/lib/seo";
+import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
 import { duongDanCongCu } from "@/lib/duong-dan";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { anhDoHinh } from "@/lib/do-hinh";
 import { anhVan, DUONG_CHI_TAY, layThuVienChiTay, layThuVienChiTayTay, tachCau, type ThuVienChiTayTay } from "@/lib/chi-tay";
 
+const CAP_NHAT = "2026-11-24";
 const MAC = {
-  tieuDe: "Xem chỉ tay hợp nhất Đông – Tây: chụp cả hai tay trên máy",
-  moTa: "Chụp hoặc tải cả hai bàn tay (trái Tiên Thiên, phải Hậu Thiên) ngay trên trình duyệt để đo 21 điểm 3D, quét đường chỉ tay và nhận luận giải hợp nhất Thần Tướng Toàn Biên + Cheiro, Benham, Dale, Baughan. Ảnh không rời máy.",
+  tieuDe: "Xem chỉ tay online: sách tướng xưa & phương Tây",
+  moTa: "Xem chỉ tay Đông – Tây miễn phí: chụp lòng bàn tay ngay trên trình duyệt (ảnh không rời máy) để đo tám cung, 60+ hình vân Thần Tướng Toàn Biên và chỉ tay Cheiro.",
 };
+const HOI_DAP_CHI_TAY = [
+  {
+    hoi: "Xem chỉ tay nên xem tay trái hay tay phải?",
+    dap: "Công cụ đọc tay trái là phần Tiên Thiên (nền sẵn có) và tay phải là phần Hậu Thiên (thói quen, lựa chọn đã bồi đắp), rồi đặt hai tay cạnh nhau để bạn tự so. Chỉ tay phương Tây thường đọc tay không thuận là nền, tay thuận là hiện tại.",
+  },
+  {
+    hoi: "Ảnh chụp lòng bàn tay có bị gửi lên máy chủ hay lưu lại không?",
+    dap: "Ảnh không rời máy. Việc tìm 21 điểm mốc bàn tay và dò đường chỉ chạy ngay trên trình duyệt; chỉ các con số đo (toạ độ, tỉ lệ) được gửi đi tính khi bạn đồng ý, và không lưu lại.",
+  },
+  {
+    hoi: "Đường Sinh ngắn có phải là tuổi thọ ngắn không?",
+    dap: "Một số sách cũ có gắn độ dài đường Sinh với tuổi thọ, nhưng Hiểu Bản Thân không đọc tuổi thọ hay sức khoẻ từ đường chỉ: đường Sinh chỉ được nói như nhịp sinh lực và lối sống. Lo về sức khoẻ thì nên đi khám, không dựa vào chỉ tay.",
+  },
+  {
+    hoi: "Chỉ tay sách tướng xưa (phương Đông) khác gì chỉ tay phương Tây?",
+    dap: "Sách tướng xưa như Thần Tướng Toàn Biên đọc bàn tay theo tám cung Bát Quái và các hình vân khắc gỗ (trang này có hơn 60 hình). Chỉ tay phương Tây (Cheiro, Benham) đọc dáng bàn tay và ngón, các gò (Kim Tinh, Mộc Tinh, Thổ Tinh…) và các đường chỉ chính.",
+  },
+  {
+    hoi: "Đường chỉ tay có thay đổi theo thời gian không?",
+    dap: "Có. Các đường phụ và độ rõ nét trên lòng bàn tay thay đổi theo công việc, mức độ căng thẳng và thói quen sinh hoạt. Do đó kết quả chỉ nên dùng để tự quan sát ở thời điểm hiện tại.",
+  },
+  {
+    hoi: "Không muốn chụp ảnh thì có xem chỉ tay được không?",
+    dap: "Được. Bạn có thể tự soi lòng bàn tay ngoài chỗ sáng và chọn trực tiếp hình vân hoặc dáng tay, các gò tương ứng ngay trong thư viện minh hoạ bên dưới.",
+  },
+];
 const NHAN: Record<string, string> = { A: "Sách ghi", B: "Nên chú ý", C: "Ghi chép xưa" };
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -44,8 +71,27 @@ export default async function Page() {
   return (
     <div className="mx-auto max-w-5xl">
       <JsonLd data={goiLd(
-        ldTrangWeb({ duong: DUONG_CHI_TAY, ten: h1, tomTat: MAC.moTa, about: ["Xem chỉ tay", "Nhân tướng học", "Thần Tướng Toàn Biên", ...(tvTay ? ["Chỉ tay phương Tây"] : [])] }),
+        {
+          ...ldTrangWeb({ duong: DUONG_CHI_TAY, ten: h1, tomTat: MAC.moTa, about: ["Xem chỉ tay", "Nhân tướng học", "Thần Tướng Toàn Biên", ...(tvTay ? ["Chỉ tay phương Tây"] : [])] }),
+          dateModified: CAP_NHAT,
+          mainEntity: { "@id": `${urlDayDu(DUONG_CHI_TAY)}#ung-dung` },
+        },
+        {
+          "@type": "WebApplication",
+          "@id": `${urlDayDu(DUONG_CHI_TAY)}#ung-dung`,
+          name: h1,
+          url: urlDayDu(DUONG_CHI_TAY),
+          description: MAC.moTa,
+          applicationCategory: "LifestyleApplication",
+          operatingSystem: "Web",
+          inLanguage: "vi-VN",
+          isAccessibleForFree: true,
+          offers: { "@type": "Offer", price: "0", priceCurrency: "VND" },
+          publisher: { "@id": `${siteUrl()}/#to-chuc` },
+          isPartOf: { "@id": `${siteUrl()}/#website` },
+        },
         ldDuongDan(dd),
+        ldHoiDap(HOI_DAP_CHI_TAY),
         ...(tv.do_hinh ? [{ "@type": "ImageObject", contentUrl: urlDayDu(anhDoHinh(tv.do_hinh.tep)), width: tv.do_hinh.rong,
           height: tv.do_hinh.cao, caption: `${tv.do_hinh.ten} (${tv.do_hinh.ten_han}) — ${tv.do_hinh.nguon_hien_thi}` }] : []),
       )} />
@@ -123,8 +169,23 @@ export default async function Page() {
 
       <KhoiCms ds={nd.khoi.duoi} duong={DUONG_CHI_TAY} viTri="duoi" className="mb-10" />
 
+      <section aria-labelledby="hoi-dap-chi-tay" className="mx-auto mt-12 max-w-3xl border-t border-line/50 pt-8 text-fg-muted">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 id="hoi-dap-chi-tay" className="text-2xl text-fg">Câu hỏi thường gặp khi xem chỉ tay</h2>
+          <p className="text-xs text-fg-faint">Cập nhật <time dateTime={CAP_NHAT}>24/11/2026</time></p>
+        </div>
+        <dl className="mt-4 space-y-4">
+          {HOI_DAP_CHI_TAY.map((h) => (
+            <div key={h.hoi}>
+              <dt className="font-medium text-fg">{h.hoi}</dt>
+              <dd className="mt-1 leading-relaxed">{h.dap}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       <p className="mt-10 text-sm text-fg-muted">
-        Đọc thêm: <Link href="/nhan-tuong" className="text-gold underline">Soi gương theo sách xưa</Link> ·{" "}
+        Đọc thêm: <Link href="/nhan-tuong" className="text-gold underline">Xem tướng mặt online</Link> ·{" "}
         <Link href="/nhan-tuong/do-hinh" className="text-gold underline">Đồ hình nhân tướng</Link>
       </p>
       <KhoiCms ds={nd.khoi.cuoi} duong={DUONG_CHI_TAY} viTri="cuoi" className="mt-10" />
