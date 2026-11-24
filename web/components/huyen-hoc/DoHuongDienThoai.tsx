@@ -1,6 +1,6 @@
 "use client";
 import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ClipboardPaste, Compass, ExternalLink, MapPin, Navigation, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,9 +14,13 @@ import { cn } from "@/lib/utils";
 import { tenTheo, type TenHien } from "@/lib/ten-hien";
 import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 import { taiSon24, type MucSon24 } from "@/lib/la-ban-24-son";
+import { trungBinhGoc } from "@/lib/la-kinh/hop-nhat";
+import { useLaBanCamBien, type TrangThaiCamBien } from "@/lib/la-kinh/use-la-ban-cam-bien";
 
 // PT-V1 — đo hướng nhà bằng la bàn điện thoại. Web CHỈ đọc cảm biến và gửi số độ; engine đổi độ → hướng,
 // sơn, toạ, trạch, du niên. Luôn có ô nhập tay (máy tính, máy không có la bàn, la bàn nhiễu).
+
+export { trungBinhGoc };
 
 export interface KetQuaDoHuong {
   do_huong: number; huong: string; son_huong: string; do_toa: number; toa: string; son_toa: string;
@@ -29,7 +33,15 @@ export interface KetQuaDoHuong {
   ten_hien?: TenHien;
 }
 
-type SuKienLaBan = DeviceOrientationEvent & { webkitCompassHeading?: number };
+/** Tìm mục 24 Sơn từ dữ liệu engine (`taiSon24`) ứng với số độ `deg` (không hardcode bảng). */
+export function timSonTaiDo(son24: MucSon24[] | null, deg: number | null): MucSon24 | null {
+  if (!son24 || deg == null) return null;
+  const d = ((deg % 360) + 360) % 360;
+  return (
+    son24.find((s) => (s.do_tu <= s.do_den ? d >= s.do_tu && d < s.do_den : d >= s.do_tu || d < s.do_den)) ??
+    null
+  );
+}
 
 /** UI-PT 1 "la bàn sống": bảng 8 hướng → du niên của mệnh quái + nghĩa / "dùng cho" (engine `/menh-quai` trả, KB du_nien). */
 export interface LaBanCaNhan {
@@ -57,17 +69,16 @@ export function docToaDo(s: string): [number, number] | null {
   }
   return null;
 }
-type CoXinQuyen = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<"granted" | "denied"> };
-
-/** Độ hướng từ sự kiện cảm biến: iOS cho sẵn webkitCompassHeading; Android cho alpha tuyệt đối (ngược chiều kim). */
-function doTuSuKien(e: SuKienLaBan, tuyetDoi: boolean): number | null {
-  if (typeof e.webkitCompassHeading === "number") return e.webkitCompassHeading;
-  if ((tuyetDoi || e.absolute) && typeof e.alpha === "number") return (360 - e.alpha) % 360;
-  return null;
-}
-
 function cungLaBan(i: number, r0: number, r1: number) {
   const a0 = ((i * 45 - 22.5 - 90) * Math.PI) / 180, a1 = ((i * 45 + 22.5 - 90) * Math.PI) / 180;
+  const p = (r: number, a: number) => `${100 + r * Math.cos(a)} ${100 + r * Math.sin(a)}`;
+  return `M ${p(r0, a0)} L ${p(r1, a0)} A ${r1} ${r1} 0 0 1 ${p(r1, a1)} L ${p(r0, a1)} A ${r0} ${r0} 0 0 0 ${p(r0, a0)} Z`;
+}
+
+function cungSon(doTu: number, doDen: number, r0: number, r1: number) {
+  const span = ((doDen - doTu + 360) % 360) || 15;
+  const a0 = ((doTu - 90) * Math.PI) / 180;
+  const a1 = ((doTu + span - 90) * Math.PI) / 180;
   const p = (r: number, a: number) => `${100 + r * Math.cos(a)} ${100 + r * Math.sin(a)}`;
   return `M ${p(r0, a0)} L ${p(r1, a0)} A ${r1} ${r1} 0 0 1 ${p(r1, a1)} L ${p(r0, a1)} A ${r0} ${r0} 0 0 0 ${p(r0, a0)} Z`;
 }
@@ -75,13 +86,12 @@ function cungLaBan(i: number, r0: number, r1: number) {
 /** Độ nguyên 0–359 (chỉ để hiển thị / kéo mặt la bàn; engine vẫn đổi độ → hướng, sơn khi Chốt). */
 const doChuan = (d: number) => ((Math.round(d) % 360) + 360) % 360;
 
-/** Mặt la bàn. Có `onXoay` (máy tính, máy không có cảm biến): kéo xoay bằng chuột / ngón tay, bấm một chữ để đưa nó lên
- *  dưới kim, phím ← → chỉnh 1° (Shift: 15°) — hướng đang ở dưới kim là hướng mặt nhà. */
-function MatLaBan({ doHuong, laBan, son24, onXoay }: { doHuong: number | null; laBan?: LaBanCaNhan | null; son24?: MucSon24[] | null; onXoay?: (d: number) => void }) {
+/** Mặt La Kinh 3 vòng (24 Sơn + Tam Nguyên Long từ engine `taiSon24` + 8 Quái/Bát Trạch). */
+export function MatLaBan({ doHuong, saiSoDo = 0, laBan, son24, compact = false, onXoay }: { doHuong: number | null; saiSoDo?: number; laBan?: LaBanCaNhan | null; son24?: MucSon24[] | null; compact?: boolean; onXoay?: (d: number) => void }) {
   const keo = useRef<{ goc0: number; d0: number; x0: number; y0: number; da: boolean } | null>(null);
   const [dangKeo, setDangKeo] = useState(false);
   const { c: t, en, quai } = useChuPT();
-  // Góc màn hình của con trỏ quanh tâm mặt la bàn: 0 = trên, theo chiều kim đồng hồ.
+  const sonHienTai = timSonTaiDo(son24 ?? null, doHuong);
   const goc = (e: React.PointerEvent<SVGSVGElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     return (Math.atan2(e.clientX - (r.left + r.width / 2), r.top + r.height / 2 - e.clientY) * 180) / Math.PI;
@@ -90,7 +100,7 @@ function MatLaBan({ doHuong, laBan, son24, onXoay }: { doHuong: number | null; l
   const tuongTac = onXoay ? {
     role: "slider" as const, tabIndex: 0, "aria-valuemin": 0, "aria-valuemax": 359, "aria-valuenow": doHuong == null ? undefined : doChuan(doHuong),
     "aria-label": t("dh.keo_aria"), "aria-valuetext": doHuong == null ? t("dh.chua_chon") : t("dh.do", { do: String(doChuan(doHuong)) }),
-    "data-testid": "la-ban-keo",
+    "data-testid": compact ? "mini-la-ban-keo" : "la-ban-keo",
     onPointerDown: (e: React.PointerEvent<SVGSVGElement>) => {
       e.currentTarget.setPointerCapture(e.pointerId);
       keo.current = { goc0: goc(e), d0: doHuong ?? 0, x0: e.clientX, y0: e.clientY, da: false };
@@ -100,12 +110,12 @@ function MatLaBan({ doHuong, laBan, son24, onXoay }: { doHuong: number | null; l
       const k = keo.current;
       if (!k) return;
       if (!k.da && Math.hypot(e.clientX - k.x0, e.clientY - k.y0) > 4) k.da = true;
-      if (k.da) onXoay(doChuan(k.d0 - (goc(e) - k.goc0)));   // mặt la bàn đi theo tay
+      if (k.da) onXoay(doChuan(k.d0 - (goc(e) - k.goc0)));
     },
     onPointerUp: (e: React.PointerEvent<SVGSVGElement>) => {
       const k = keo.current;
       keo.current = null; setDangKeo(false);
-      if (k && !k.da) onXoay(doChuan(k.d0 + goc(e)));        // bấm một điểm → đưa hướng đó lên dưới kim
+      if (k && !k.da) onXoay(doChuan(k.d0 + goc(e)));
     },
     onPointerCancel: () => { keo.current = null; setDangKeo(false); },
     onKeyDown: (e: React.KeyboardEvent<SVGSVGElement>) => {
@@ -116,36 +126,74 @@ function MatLaBan({ doHuong, laBan, son24, onXoay }: { doHuong: number | null; l
     },
   } : { role: "img" as const, "aria-label": ten };
   return (
-    <svg viewBox="0 0 200 200" className={cn("mx-auto h-48 w-48", onXoay && "cursor-grab touch-none rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold", dangKeo && "cursor-grabbing")}
+    <svg viewBox="0 0 200 200" className={cn("mx-auto", compact ? "h-40 w-40" : "h-52 w-52", onXoay && "cursor-grab touch-none rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold", dangKeo && "cursor-grabbing")}
       {...tuongTac}>
-      <circle cx="100" cy="100" r="94" fill="rgb(var(--surface))" stroke="rgb(var(--line))" />
-      <g style={{ transform: `rotate(${-(doHuong ?? 0)}deg)`, transformOrigin: "100px 100px", transition: dangKeo ? "none" : "transform 0.15s linear" }}>
+      <circle cx="100" cy="100" r="95" fill="rgb(var(--surface))" stroke="rgb(var(--line))" />
+      <circle cx="100" cy="100" r="74" fill="none" stroke="rgb(var(--line) / 0.45)" strokeWidth="0.6" />
+      <circle cx="100" cy="100" r="58" fill="none" stroke="rgb(var(--line) / 0.45)" strokeWidth="0.6" />
+      <g style={{ transform: `rotate(${-(doHuong ?? 0)}deg)`, transformOrigin: "100px 100px", transition: dangKeo ? "none" : "transform 0.16s ease-out" }} className="motion-reduce:!transition-none">
+        {son24 && son24.map((s) => {
+          const active = sonHienTai?.son === s.son;
+          const isThien = s.nguyen.toLowerCase().includes("thiên");
+          const isDia = s.nguyen.toLowerCase().includes("địa");
+          const tint = isThien ? "rgb(var(--gold) / 0.08)" : isDia ? "rgb(var(--moon) / 0.08)" : "rgb(var(--jade) / 0.08)";
+          return (
+            <g key={`vong-${s.son}`}>
+              <path
+                d={cungSon(s.do_tu, s.do_den, 58, 74)}
+                fill={active ? "rgb(var(--gold) / 0.28)" : tint}
+                stroke={active ? "rgb(var(--gold) / 0.85)" : "rgb(var(--line) / 0.35)"}
+                strokeWidth={active ? "1" : "0.4"}
+              />
+              {active && (
+                <path d={cungSon(s.do_tu, s.do_den, 74, 93)} fill="rgb(var(--gold) / 0.16)" stroke="rgb(var(--gold) / 0.7)" strokeWidth="0.7" />
+              )}
+            </g>
+          );
+        })}
         {laBan && HUONG8.map((h, i) => (
-          <path key={h} d={cungLaBan(i, 44, 88)} data-testid="la-ban-cung" data-cat={laBan.huongCat.includes(h)}
-            fill={laBan.huongCat.includes(h) ? "rgb(var(--jade) / 0.22)" : "rgb(var(--cinnabar) / 0.08)"} stroke="rgb(var(--line) / 0.6)" strokeWidth="0.5" />
+          <path key={h} d={cungLaBan(i, 36, 58)} data-testid="la-ban-cung" data-cat={laBan.huongCat.includes(h)}
+            fill={laBan.huongCat.includes(h) ? "rgb(var(--jade) / 0.24)" : "rgb(var(--cinnabar) / 0.09)"} stroke="rgb(var(--line) / 0.55)" strokeWidth="0.5" />
         ))}
-        {Array.from({ length: 24 }, (_, i) => (
-          <line key={i} x1="100" y1="8" x2="100" y2={i % 3 === 0 ? 20 : 14} stroke="rgb(var(--fg-faint))" strokeWidth={i % 3 === 0 ? 1.8 : 0.8}
-            transform={`rotate(${i * 15} 100 100)`} />
-        ))}
-        {son24 && son24.map((s) => (
-          <text key={s.son} x="100" y="27" textAnchor="middle" fontSize="5.2"
-            fill="rgb(var(--fg-muted))" transform={`rotate(${s.do_tam} 100 100)`}>
-            {en ? s.ky_hieu_han : s.son}
-          </text>
-        ))}
+        {Array.from({ length: 72 }, (_, i) => {
+          const deg = i * 5;
+          const is45 = deg % 45 === 0;
+          const is15 = deg % 15 === 0;
+          return (
+            <line key={i} x1="100" y1="6" x2="100" y2={is45 ? 16 : is15 ? 13 : 9.5}
+              stroke={is45 ? "rgb(var(--fg-muted))" : "rgb(var(--fg-faint))"}
+              strokeWidth={is45 ? 1.5 : is15 ? 0.9 : 0.45}
+              transform={`rotate(${deg} 100 100)`} />
+          );
+        })}
+        {son24 && son24.map((s) => {
+          const active = sonHienTai?.son === s.son;
+          return (
+            <text key={s.son} x="100" y="25" textAnchor="middle" fontSize={active ? "6.1" : "5.2"} fontWeight={active ? "700" : "500"}
+              fill={active ? "rgb(var(--gold))" : "rgb(var(--fg-muted))"} transform={`rotate(${s.do_tam} 100 100)`}>
+              {en ? s.ky_hieu_han : s.son}
+            </text>
+          );
+        })}
         {(["b", "d", "n", "t"] as const).map((k, i) => (
-          <text key={k} x="100" y={son24 ? "40" : "38"} textAnchor="middle" fontSize={son24 ? "12" : "14"} fontWeight="700"
+          <text key={k} x="100" y={son24 ? "50" : "42"} textAnchor="middle" fontSize={son24 ? "10.5" : "13"} fontWeight="700"
             fill={k === "b" ? "rgb(var(--cinnabar))" : "rgb(var(--fg-muted))"} transform={`rotate(${i * 90} 100 100)`}>{t(`dh.chu_${k}`)}</text>
         ))}
       </g>
-      <path d="M100 30 L108 100 L100 92 L92 100 Z" fill="rgb(var(--gold))" />
-      <circle cx="100" cy="100" r="4" fill="rgb(var(--gold))" />
+      <path d="M100 28 L107 100 L100 92 L93 100 Z" fill="rgb(var(--gold))" pointerEvents="none" />
+      <circle cx="100" cy="100" r="4.5" fill="rgb(var(--gold))" pointerEvents="none" />
+      {saiSoDo > 0 && (() => {
+        const half = Math.min(30, Math.max(1, saiSoDo));
+        const a0 = ((-half - 90) * Math.PI) / 180;
+        const a1 = ((half - 90) * Math.PI) / 180;
+        const p = (r: number, a: number) => `${100 + r * Math.cos(a)} ${100 + r * Math.sin(a)}`;
+        return <path d={`M 100 100 L ${p(94, a0)} A 94 94 0 0 1 ${p(94, a1)} Z`} fill="rgb(var(--moon) / 0.22)" stroke="rgb(var(--moon) / 0.5)" strokeWidth="0.6" pointerEvents="none" />;
+      })()}
     </svg>
   );
 }
 
-export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true }: {
+export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true, camBienNgoai, doBenNgoai }: {
   sinh: { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
   onDungToa?: (doToa: number) => void;
   /** PT-V0: báo kết quả engine vừa đổi (độ hướng nhà) cho khung Khảo sát nhà. */
@@ -154,15 +202,44 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
   laBan?: LaBanCaNhan | null;
   /** DC-MB: đo hướng MẶT BẰNG kinh doanh (không phải nhà ở) → không ghi đè hồ sơ nhà trên máy. Mặc định lưu như cũ. */
   luuNha?: boolean;
+  /** Chia sẻ 1 listener cảm biến duy nhất từ PhongThuy.tsx. */
+  camBienNgoai?: TrangThaiCamBien;
+  /** Đồng bộ số độ khi người dùng chốt từ La Kinh nhanh ở HoiGiXemNay. */
+  doBenNgoai?: number | null;
 }) {
   const [doSong, setDoSong] = useState<number | null>(null);
+  const [saiSoCamBien, setSaiSoCamBien] = useState<number>(0);
+  const [canhBaoSong, setCanhBaoSong] = useState<string | null>(null);
   const [son24, setSon24] = useState<MucSon24[] | null>(null);
   useEffect(() => {
     let huy = false;
     taiSon24().then((ds) => { if (!huy && ds) setSon24(ds); });
     return () => { huy = true; };
   }, []);
+  useEffect(() => {
+    if (doBenNgoai != null) {
+      setDoSong(doBenNgoai);
+      setNhap(String(Math.round(doBenNgoai)));
+    }
+  }, [doBenNgoai]);
   const { c: t, en, huong, quai, nhom, duNien } = useChuPT();
+  const camBienRieng = useLaBanCamBien(undefined, {
+    khongLaBan: t("dh.loi_khong_la_ban"),
+    quyenBiTuChoi: t("dh.loi_quyen"),
+    loiXinQuyen: t("dh.loi_xin_quyen"),
+    khongTra: t("dh.loi_khong_tra"),
+  });
+  const camBien = camBienNgoai ?? camBienRieng;
+  const dangDo = camBien.dangDo;
+  useEffect(() => {
+    if (camBien.ketQua) {
+      setDoSong(camBien.ketQua.mean);
+      setSaiSoCamBien(camBien.ketQua.saiSoDo);
+    }
+  }, [camBien.ketQua]);
+  useEffect(() => {
+    if (camBien.loi) setLoi(camBien.loi);
+  }, [camBien.loi]);
   // Hai việc cùng một la bàn: đo hướng NHÀ (chốt → engine → hồ sơ nhà) · tìm hướng TỐT để kê bàn, đầu giường (chỉ đọc sống, không lưu).
   const [cheDo, setCheDo] = useState<"nha" | "ke_do">("nha");
   // UI-PT2 A: loại nhà (hồ sơ nhà trên máy) → căn hộ đo ở ban công / bản đồ, lưu `theo: ban_cong`.
@@ -191,14 +268,13 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
     { enableHighAccuracy: true, timeout: 15_000, maximumAge: 0 });
   };
   const hSong = doSong == null ? null : oHuong(doSong);
+  const sonSong = timSonTaiDo(son24, doSong);
   const dnSong = hSong && laBan ? laBan.bang[hSong] ?? null : null;
   const ySong = dnSong && laBan?.duNienY ? laBan.duNienY[dnSong] ?? null : null;
-  const [dangDo, setDangDo] = useState(false);
   const [nhap, setNhap] = useState("");
   const [kq, setKq] = useState<KetQuaDoHuong | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
-  const huy = useRef<(() => void) | null>(null);
   // Q3: hướng từ hai điểm bản đồ (tâm nhà → điểm trước mặt nhà) — cho căn hộ không đo được la bàn ở cửa.
   const [moBanDo, setMoBanDo] = useState(false);
   const [tam, setTam] = useState("");
@@ -255,34 +331,22 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
     finally { setDang(false); }
   };
 
-  useEffect(() => () => huy.current?.(), []);
+  useEffect(() => {
+    if (doSong == null || cheDo !== "nha") { setCanhBaoSong(null); return; }
+    let huyReq = false;
+    const tId = window.setTimeout(() => {
+      postJson<KetQuaDoHuong>("/api/phongthuy/do-huong", { do_huong: doSong })
+        .then((r) => { if (!huyReq) setCanhBaoSong(r.canh_bao_y ?? null); })
+        .catch(() => { if (!huyReq) setCanhBaoSong(null); });
+    }, 300);
+    return () => { huyReq = true; window.clearTimeout(tId); };
+  }, [doSong, cheDo]);
 
-  const batDau = useCallback(async () => {
+  const batDau = () => {
     setLoi(null);
-    if (typeof window === "undefined" || !("DeviceOrientationEvent" in window)) {
-      setLoi(t("dh.loi_khong_la_ban"));
-      return;
-    }
-    const DOE = window.DeviceOrientationEvent as CoXinQuyen;
-    if (typeof DOE.requestPermission === "function") {
-      try {
-        if ((await DOE.requestPermission()) !== "granted") { setLoi(t("dh.loi_quyen")); return; }
-      } catch { setLoi(t("dh.loi_xin_quyen")); return; }
-    }
-    const coTuyetDoi = "ondeviceorientationabsolute" in window;
-    const ten = coTuyetDoi ? "deviceorientationabsolute" : "deviceorientation";
-    let nhan = false;
-    const nghe = (e: Event) => {
-      const d = doTuSuKien(e as SuKienLaBan, coTuyetDoi);
-      if (d != null) { nhan = true; setDoSong(d); }
-    };
-    window.addEventListener(ten, nghe);
-    huy.current = () => window.removeEventListener(ten, nghe);
-    setDangDo(true);
-    window.setTimeout(() => {
-      if (!nhan) { setLoi(t("dh.loi_khong_tra")); }
-    }, 2500);
-  }, [t]);
+    setSaiSoCamBien(0);
+    void camBien.batDau();
+  };
 
   const chot = async (doHuong: number) => {
     setDang(true); setLoi(null);
@@ -325,10 +389,52 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
 
       {cheDo === "nha" && <CachLam viec={canHo ? "do_huong_can_ho" : "do_huong"} className="mt-2" />}
 
-      <div className="mt-4 grid items-center gap-4 sm:grid-cols-[auto_1fr]">
+      <div className="mt-4 grid items-start gap-4 sm:grid-cols-[auto_1fr]">
         <div>
-          <MatLaBan doHuong={doSong} laBan={laBan} son24={son24} onXoay={dangDo ? undefined : (d) => { setDoSong(d); setNhap(String(d)); setLoi(null); }} />
-          <p className="text-center font-serif text-2xl text-gold" aria-live="polite">{doSong == null ? "—" : en ? `${Math.round(doSong)}° · ${huong(oHuong(doSong))}` : `${Math.round(doSong)}°`}</p>
+          <MatLaBan doHuong={doSong} saiSoDo={saiSoCamBien} laBan={laBan} son24={son24} onXoay={dangDo ? undefined : (d) => { setDoSong(d); setSaiSoCamBien(0); setNhap(String(d)); setLoi(null); }} />
+          <p className="text-center font-serif text-2xl text-gold" aria-live="polite" data-testid="la-ban-do-so">
+            {doSong == null ? "—" : en ? `${Math.round(doSong)}° · ${huong(oHuong(doSong))}` : `${Math.round(doSong)}°`}
+            {doSong != null && saiSoCamBien > 0 && (
+              <span className="ml-1.5 text-xs font-sans text-moon" data-testid="la-ban-sai-so">±{saiSoCamBien}°</span>
+            )}
+          </p>
+          {doSong != null && (
+            <div className="mx-auto mt-1.5 max-w-[16.5rem] rounded-xl border border-line/70 bg-bg/40 px-2.5 py-1.5 text-[11px] text-fg-muted space-y-0.5" data-testid="la-ban-hud">
+              <div className="flex items-center justify-between gap-2">
+                <span>{en ? "Sitting (back)" : "Tọa (lưng nhà)"}</span>
+                <b className="text-fg">{(Math.round(doSong) + 180) % 360}°</b>
+              </div>
+              {sonSong && (
+                <div className="flex items-center justify-between gap-2">
+                  <span>{en ? "24-Mountain" : "24 Sơn · Nguyên"}</span>
+                  <b className="text-gold">{en ? sonSong.ky_hieu_han : sonSong.son} · {sonSong.nguyen}</b>
+                </div>
+              )}
+              {dangDo && camBien.ketQua && (
+                <div className="flex items-center justify-between gap-2">
+                  <span>{en ? "Sensor stability" : "Độ ổn định (R)"}</span>
+                  <b className={camBien.ketQua.onDinhPct >= 85 ? "text-jade" : "text-moon"}>
+                    {camBien.ketQua.onDinhPct}%{camBien.ketQua.soLoaiBo > 0 ? (en ? ` (-${camBien.ketQua.soLoaiBo} spike)` : ` (lọc ${camBien.ketQua.soLoaiBo} nhiễu)`) : ""}
+                  </b>
+                </div>
+              )}
+              {dangDo && camBien.ketQua && !camBien.ketQua.phang && (
+                <p className="text-moon font-medium">
+                  {en ? `Tilt ${camBien.ketQua.gocNghieng}° — hold phone flatter` : `Máy nghiêng ${camBien.ketQua.gocNghieng}° — giữ máy phẳng hơn`}
+                </p>
+              )}
+              {dangDo && (
+                <p className="text-[10px] text-fg-faint leading-tight">
+                  {en ? "Magnetic north may drift indoors; cross-check satellite for true north." : "Cảm biến đo Bắc từ (dễ nhiễu sắt thép trong nhà); đối chiếu vệ tinh để kiểm Bắc thật."}
+                </p>
+              )}
+            </div>
+          )}
+          {canhBaoSong && (
+            <p className="mx-auto mt-1 max-w-[16rem] rounded-lg border border-moon/40 bg-moon/10 px-2 py-1 text-center text-[11px] text-moon" data-testid="la-ban-canh-bao-song">
+              {canhBaoSong}
+            </p>
+          )}
           {!dangDo && (
             <p className="mx-auto max-w-[14rem] text-center text-[11px] text-fg-faint" data-testid="la-ban-keo-goi-y">
               {doSong == null ? t("dh.biet_huong") : ""}{t("dh.keo_goi_y")}
@@ -354,15 +460,27 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
             <div className="flex flex-wrap gap-2">
               <Button onClick={batDau} variant="secondary"><Smartphone aria-hidden /> {t("dh.nut_do")}</Button>
               {cheDo === "nha" && doSong != null && (
-                <Button onClick={() => chot(doSong)} disabled={dang} data-testid="chot-la-ban-keo">
-                  <Compass aria-hidden /> {dang ? t("dh.dang_doi") : t("dh.chot_do", { do: en ? `${Math.round(doSong)}° (${huong(oHuong(doSong))})` : String(Math.round(doSong)) })}
-                </Button>
+                <>
+                  <Button onClick={() => chot(doSong)} disabled={dang} data-testid="chot-la-ban-keo">
+                    <Compass aria-hidden /> {dang ? t("dh.dang_doi") : t("dh.chot_do", { do: en ? `${Math.round(doSong)}° (${huong(oHuong(doSong))})` : String(Math.round(doSong)) })}
+                  </Button>
+                  <Button type="button" variant="outline" size="sm" onClick={moBanDoVeTinh} data-testid="la-ban-doi-chieu-ve-tinh">
+                    <MapPin className="mr-1 size-3.5" aria-hidden /> {en ? "Cross-check satellite" : "Đối chiếu ảnh vệ tinh"}
+                  </Button>
+                </>
               )}
             </div>
           ) : cheDo === "nha" ? (
-            <Button onClick={() => doSong != null && chot(doSong)} disabled={doSong == null || dang}>
-              <Compass aria-hidden /> {dang ? t("dh.dang_doi") : t("dh.chot")}
-            </Button>
+            <div className="flex flex-wrap gap-2">
+              <Button onClick={() => doSong != null && chot(doSong)} disabled={doSong == null || dang}>
+                <Compass aria-hidden /> {dang ? t("dh.dang_doi") : t("dh.chot")}
+              </Button>
+              {doSong != null && (
+                <Button type="button" variant="outline" size="sm" onClick={moBanDoVeTinh} data-testid="la-ban-doi-chieu-ve-tinh">
+                  <MapPin className="mr-1 size-3.5" aria-hidden /> {en ? "Cross-check satellite" : "Đối chiếu ảnh vệ tinh"}
+                </Button>
+              )}
+            </div>
           ) : (
             <p className="text-xs text-fg-faint">{t("dh.ke_dung")}</p>
           )}
