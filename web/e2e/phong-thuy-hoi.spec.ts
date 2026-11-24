@@ -246,4 +246,59 @@ test("PT-V2 v2: Đọc tối đa 6 ảnh + thumbnail bằng chứng anh_so + xo�
   await expect(da.getByTestId("doc-anh-bang-chung-xa_ngang")).toHaveCount(0);
 });
 
+test("Sơ đồ mặt bằng Mini-CAD v2: vẽ hộp phòng, xoay hướng cửa 90°, chỉnh kích thước, xoá chip ×, hoàn tác & tự phát hiện lỗi bố cục", async ({ page }) => {
+  await page.addInitScript(() => {
+    window.localStorage.setItem(
+      "hbt.nha.v1",
+      JSON.stringify({ v: 1, huong_do: 180, theo: "cua", thanh_vien: [], cap_nhat_luc: "2026-11-24T00:00:00.000Z" }),
+    );
+  });
+  await page.goto("/phong-thuy");
+  const vt = page.getByTestId("vi-tri-vat");
+  await vt.scrollIntoViewIfNeeded();
+  await vt.getByTestId("vi-tri-cach-khung").click();
+
+  const khung = vt.getByTestId("vi-tri-khung");
+  const bam = async (loai: string, x: number, y: number) => {
+    await vt.getByTestId(`vi-tri-dat-${loai}`).click();
+    await khung.scrollIntoViewIfNeeded();
+    const b = (await khung.boundingBox())!;
+    await page.mouse.click(b.x + b.width * x, b.y + b.height * y);
+  };
+
+  // 1. Đặt Cửa chính, Phòng chính, WC giữa nhà (0.5, 0.5)
+  await bam("cua_chinh", 0.5, 0.05);
+  await bam("phong_ngu_chinh", 0.25, 0.35);
+  await bam("ve_sinh", 0.5, 0.5);
+
+  await expect(vt.getByTestId("vi-tri-hop-cua_chinh")).toBeVisible();
+  await expect(vt.getByTestId("vi-tri-hop-phong_ngu_chinh")).toBeVisible();
+  await expect(vt.getByTestId("vi-tri-hop-ve_sinh")).toBeVisible();
+
+  // 2. Tự động phát hiện WC giữa nhà
+  await expect(vt.getByTestId("vi-tri-phat-hien")).toContainText("Trung cung");
+
+  // 3. Chỉnh Phòng chính: xoay hướng cửa 90° & tăng/giảm kích thước (m)
+  await vt.getByTestId("vi-tri-dat-phong_ngu_chinh").click();
+  await expect(vt.getByTestId("vi-tri-chinh-phong")).toBeVisible();
+  const huongTruoc = await vt.getByTestId("vi-tri-huong-cua-nhan").innerText();
+  await vt.getByTestId("vi-tri-xoay-cua").click();
+  await expect(vt.getByTestId("vi-tri-huong-cua-nhan")).not.toHaveText(huongTruoc);
+
+  const rongTruoc = await vt.getByTestId("vi-tri-phong-rong").innerText();
+  await vt.getByTestId("vi-tri-phong-rong-tang").click();
+  await expect(vt.getByTestId("vi-tri-phong-rong")).not.toHaveText(rongTruoc);
+
+  // 4. Xoá Nhà vệ sinh bằng nút × ngay trên chip -> biến mất khỏi sơ đồ -> Hoàn tác -> hiện lại
+  await vt.getByTestId("vi-tri-xoa-chip-ve_sinh").click();
+  await expect(vt.getByTestId("vi-tri-hop-ve_sinh")).toHaveCount(0);
+  await vt.getByTestId("vi-tri-hoan-tac").click();
+  await expect(vt.getByTestId("vi-tri-hop-ve_sinh")).toBeVisible();
+
+  // 5. Xoá tầng -> sạch toàn bộ hộp phòng
+  await vt.getByTestId("vi-tri-xoa-tang").click();
+  await expect(vt.getByTestId("vi-tri-hop-cua_chinh")).toHaveCount(0);
+  await expect(vt.getByTestId("vi-tri-hop-phong_ngu_chinh")).toHaveCount(0);
+});
+
 
