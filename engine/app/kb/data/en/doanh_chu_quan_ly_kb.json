@@ -108,7 +108,8 @@
       "van_de": "Two key people are both good, but meetings with both get tense",
       "goc_nhin": "{ten_a} leans toward growth and wants speed; {ten_b} leans toward control and wants certainty at each step. Both are right from their side.",
       "mo_loi": "\"The first 15 minutes are for {ten_a} to propose; the next 15 are for {ten_b} to check risks. No cutting in across the two parts.\"",
-      "viec": "Split the meeting into two timed parts; the final call belongs to one person named in advance."
+      "viec": "Split the meeting into two timed parts; the final call belongs to one person named in advance.",
+      "goc_nhin_an": "The growth-minded person wants speed; the control-minded person wants certainty at each step. Both are right, from opposite sides."
     },
     "nguoi_om_viec": {
       "van_de": "Your most dedicated person keeps taking on too much",
@@ -284,5 +285,27 @@
     "hanh_troi": "Fire",
     "hanh_thieu": "Earth",
     "pha": "transition"
-  }
+  },
+  "ke_hoach_mau": [
+    {
+      "tuan": "Week 1",
+      "tieu_de": "Cover the team's thinnest axis",
+      "y": "Pick one small habit for the element the team lacks."
+    },
+    {
+      "tuan": "Week 2",
+      "tieu_de": "Hand the right task to the right person",
+      "y": "Give one whole task that fits their strength, with a report date."
+    },
+    {
+      "tuan": "Week 3",
+      "tieu_de": "Keep the team from tilting one way",
+      "y": "Each month try one new thing or add one checking step."
+    },
+    {
+      "tuan": "Week 4",
+      "tieu_de": "Talk privately with each person",
+      "y": "15 minutes each: just listen and note it down, promise nothing yet."
+    }
+  ]
 }

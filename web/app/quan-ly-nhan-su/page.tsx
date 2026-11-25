@@ -4,37 +4,21 @@
 // `GET /v1/doanh-chu/tinh-huong`) — web không viết cứng tri thức. Chỉ để phối hợp và trao đổi — không tuyển chọn, đánh giá,
 // xếp lương, kỷ luật (Bộ luật Lao động cấm phân biệt đối xử). Không nêu tên bài trắc nghiệm của tổ chức khác (Luật Quảng cáo).
 import type { Metadata } from "next";
-import Link from "@/components/khung/Lien";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { DuongDan } from "@/components/khung/DuongDan";
 import { KhungDieuHanh } from "@/components/doanh-chu/KhungDieuHanh";
+import { CtaCuoiQuanLy } from "@/components/doanh-chu/CtaCuoiQuanLy";
+import { AnhQuanLy } from "@/components/seo/AnhQuanLy";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { CHU_DOANH_CHU } from "@/lib/chu/doanh-chu";
 import { apDungSeo, layNoiDungTrang, metaMacDinh } from "@/lib/noi-dung-trang";
-import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, siteUrl, urlDayDu } from "@/lib/seo";
+import { layDanhMucQuanLy } from "@/lib/quan-ly-danh-muc";
+import { hinhQL, urlHinhQL } from "@/lib/quan-ly-hinh";
+import { goiLd, ldAnh, ldDuongDan, ldHoiDap, ldTrangWeb, siteUrl, urlDayDu } from "@/lib/seo";
 
 const DUONG = "/quan-ly-nhan-su";
 const CAP_NHAT = "2026-11-25";
-const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
-const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
-
-interface DanhMuc {
-  tinh_huong: { ma: string; van_de: string; goc_nhin: string; mo_loi: string; viec: string }[];
-  vai_tro_hanh: { hanh: string; vai_tro: string; gia_tri: string }[];
-}
-
-async function layDanhMuc(): Promise<DanhMuc | null> {
-  try {
-    const r = await fetch(`${ENGINE_URL}/v1/doanh-chu/tinh-huong`, {
-      headers: ENGINE_API_KEY ? { "x-engine-key": ENGINE_API_KEY } : {},
-      next: { revalidate: 60 * 60 * 24 }, signal: AbortSignal.timeout(10_000),
-    });
-    return r.ok ? ((await r.json()) as DanhMuc) : null;
-  } catch {
-    return null; // engine bận → trang vẫn có công cụ, chỉ thiếu phần đọc thêm
-  }
-}
 
 const HOI_DAP = [
   {
@@ -81,7 +65,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [nd, dm] = await Promise.all([layNoiDungTrang(DUONG), layDanhMuc()]);
+  const [nd, dm] = await Promise.all([layNoiDungTrang(DUONG), layDanhMucQuanLy()]);
   const h1 = nd.dau.h1 ?? CHU_DOANH_CHU.dau_trang.lon;
   const dd = [{ ten: "Trang chủ", duong: "/" }, { ten: "Quản lý nhân sự", duong: DUONG }];
   return (
@@ -95,6 +79,7 @@ export default async function Page() {
             about: ["Quản lý nhân sự", "Ngũ hành", "Bát tự", "Thần số học", "Phối hợp đội nhóm"],
           }),
           dateModified: CAP_NHAT,
+          primaryImageOfPage: ldAnh(urlHinhQL("quy-trinh"), hinhQL("quy-trinh", null)?.chuThich ?? h1),
           mainEntity: { "@id": `${urlDayDu(DUONG)}#ung-dung` },
         },
         {
@@ -125,14 +110,24 @@ export default async function Page() {
 
       <section aria-labelledby="cam-nang-quan-ly" className="mx-auto mt-14 max-w-3xl border-t border-line/50 pt-8 text-fg-muted">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <h2 id="cam-nang-quan-ly" className="text-2xl text-fg">Năm trục làm việc trong một đội ngũ</h2>
+          <h2 id="cam-nang-quan-ly" className="text-2xl text-fg">Cách dùng bản đồ quản lý nhân sự trong ba bước</h2>
           <p className="text-xs text-fg-faint">Cập nhật <time dateTime={CAP_NHAT}>25/11/2026</time></p>
         </div>
+        <p className="mt-3 leading-relaxed">
+          Công cụ nhận ngày sinh của 1–8 người và trả lại ba thứ: biểu đồ 5 hành của cả nhóm, thẻ phối hợp cho từng người và
+          kế hoạch 30 ngày. Bạn có thể tự nhập, hoặc gửi link để mỗi người tự điền trên máy của họ — họ nhận bản &quot;Cách làm
+          việc của bạn&quot;, còn bạn không thấy ngày sinh của họ.
+        </p>
+        <AnhQuanLy kieu="van-phong" dm={dm} />
+        <AnhQuanLy kieu="quy-trinh" dm={dm} />
+
+        <h2 className="mt-10 text-2xl text-fg">Năm trục làm việc trong một đội ngũ</h2>
         <p className="mt-3 leading-relaxed">
           Va chạm trong nhóm thường không do ai kém cố gắng, mà do người thiên mở rộng và người thiên kiểm soát làm việc theo
           hai nhịp khác nhau. Bảng dưới là cách công cụ gợi ý vai trò theo hành nổi trội — để chia việc và trao đổi, không để
           xếp hạng người:
         </p>
+        <AnhQuanLy kieu="ngu-hanh" dm={dm} />
         {dm && (
           <div className="mt-4 overflow-x-auto rounded-xl border border-line/70">
             <table className="w-full border-collapse text-left text-sm">
@@ -156,12 +151,29 @@ export default async function Page() {
           </div>
         )}
 
+        {dm && dm.ke_hoach_mau.length > 0 && (
+          <>
+            <h2 className="mt-10 text-2xl text-fg">Kế hoạch 30 ngày cho người quản lý</h2>
+            <p className="mt-2 leading-relaxed">
+              Kế hoạch chia thành bốn tuần. Dưới đây là khung chung; khi chạy cho nhóm thật, mỗi việc gắn với đúng người trong
+              nhóm kèm lý do vì sao chọn việc đó.
+            </p>
+            <AnhQuanLy kieu="ke-hoach" dm={dm} />
+            <ol className="mt-3 space-y-2 leading-relaxed" data-testid="ke-hoach-mau">
+              {dm.ke_hoach_mau.map((t) => (
+                <li key={t.tuan}><strong className="text-fg">{t.tuan} — {t.tieu_de}.</strong> {t.y}</li>
+              ))}
+            </ol>
+          </>
+        )}
+
         {dm && (
           <>
             <h2 className="mt-10 text-2xl text-fg">Tình huống quản lý nhân sự hay gặp và câu mở lời mẫu</h2>
             <p className="mt-2 leading-relaxed">
               Khi chạy bản đồ cho nhóm của bạn, công cụ chỉ chọn những tình huống khớp với dữ liệu nhóm đó. Dưới đây là toàn bộ kho:
             </p>
+            <AnhQuanLy kieu="tinh-huong" dm={dm} />
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               {dm.tinh_huong.map((t) => (
                 <article key={t.ma} className="rounded-xl border border-line/60 bg-surface/30 p-4">
@@ -207,15 +219,9 @@ export default async function Page() {
             </div>
           ))}
         </dl>
-        <p className="mt-6 text-sm">
-          Đọc thêm:{" "}
-          <Link href="/bat-tu" className="text-gold underline">Xem Bát tự online</Link> ·{" "}
-          <Link href="/than-so" className="text-gold underline">Thần số học</Link> ·{" "}
-          <Link href="/hop-doi" className="text-gold underline">Xem hợp đôi đồng nghiệp</Link> ·{" "}
-          <Link href="/phong-thuy" className="text-gold underline">Phong thuỷ văn phòng</Link> ·{" "}
-          <Link href="/goi-xem" className="text-gold underline">Các gói xem luận giải</Link>
-        </p>
       </section>
+
+      <CtaCuoiQuanLy duong={DUONG} />
     </div>
   );
 }

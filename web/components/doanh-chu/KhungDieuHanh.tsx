@@ -18,6 +18,9 @@ export function KhungDieuHanh() {
       const h = window.location.hash;
       if (h === "#lich-12-thang") setTab("lich_12");
       else if (h === "#mat-bang") setTab("mat_bang");
+      else return;
+      // Khối này không có phần tử mang đúng id của neo → tự cuộn tới công cụ (nút CTA cuối trang, link từ blog).
+      requestAnimationFrame(() => document.getElementById("cong-cu-dieu-hanh")?.scrollIntoView({ behavior: "smooth", block: "start" }));
     };
     const theoSuKien = (e: Event) => {
       const t = (e as CustomEvent<TabDieuHanh>).detail;

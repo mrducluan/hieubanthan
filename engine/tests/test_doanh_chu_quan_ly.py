@@ -182,3 +182,40 @@ def test_api_ca_nhan_va_danh_muc():
     assert len(dm["tinh_huong"]) == 7 and len(dm["vai_tro_hanh"]) == 5
     for t in dm["tinh_huong"]:
         assert "{" not in t["goc_nhin"] + t["mo_loi"]
+
+
+# ── Kho công khai (trang /quan-ly-nhan-su): câu phải đọc trơn, không lặp chữ, có kế hoạch mẫu 4 tuần để vẽ hình ──
+_LAP = re.compile(r"\b((?:\w+\s+){1,3}\w+)\s+\1\b", re.I)          # cùng một cụm 2–4 chữ liền nhau hai lần
+_DAU_CAU = re.compile(r"(?:^|[.!?]\s+|[“\"]\s*)([^\W\d_])", re.U)   # chữ cái đầu câu / đầu lời trích
+
+
+def _dau_cau_viet_thuong(s: str) -> list[str]:
+    return [m.group(1) for m in _DAU_CAU.finditer(s) if m.group(1) != m.group(1).upper()]
+
+
+def test_kho_cong_khai_doc_tron_ca_hai_ngon_ngu():
+    for lang in ("vi", "en"):
+        with ngon_ngu.dung(lang):
+            dm = ql.danh_muc()
+        assert len(dm["tinh_huong"]) == 7
+        for t in dm["tinh_huong"]:
+            for k in ("van_de", "goc_nhin", "mo_loi", "viec"):
+                s = t[k]
+                assert not _LAP.search(s), (lang, t["ma"], k, s)             # "người thiên mở rộng thiên mở rộng"
+                assert not _dau_cau_viet_thuong(s), (lang, t["ma"], k, s)    # câu mở đầu bằng chữ thường
+                assert "{" not in s, (lang, t["ma"], k, s)
+
+
+def test_ke_hoach_mau_4_tuan_de_ve_hinh():
+    for lang in ("vi", "en"):
+        with ngon_ngu.dung(lang):
+            km = ql.danh_muc()["ke_hoach_mau"]
+        assert [x["tuan"] for x in km] == (["Tuần 1", "Tuần 2", "Tuần 3", "Tuần 4"] if lang == "vi" else ["Week 1", "Week 2", "Week 3", "Week 4"])
+        for x in km:
+            assert 8 <= len(x["tieu_de"]) <= 46 and 20 <= len(x["y"]) <= 90, x    # vừa khung ảnh, không cắt giữa câu
+            assert not _LAP.search(x["tieu_de"] + " " + x["y"]), x
+            if lang == "en":
+                assert not _VIET.search(x["tieu_de"] + x["y"]), x
+        toan = " ".join((x["tieu_de"] + " " + x["y"]).lower() for x in km)
+        for tu in _CAM:
+            assert tu not in toan, tu

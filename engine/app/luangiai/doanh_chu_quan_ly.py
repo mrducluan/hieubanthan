@@ -10,6 +10,8 @@ Chỉ ĐỌC kết quả `calc.doanh_chu.ban_do_doi_ngu` (một bộ tính) rồ
 Ranh giới: gợi ý phối hợp và trao đổi — không dùng tuyển chọn, đánh giá, xếp lương, kỷ luật (test chặn từ vựng)."""
 from __future__ import annotations
 
+import re
+
 from app import ngon_ngu
 from app.calc import doanh_chu as dc
 from app.kb.nap import doc, nho
@@ -191,12 +193,22 @@ def ca_nhan(ngay: int, thang: int, nam: int, gioi_tinh: str, nam_xem: int) -> di
     }
 
 
+_DAU_CAU = re.compile(r"(^|[.!?]\s+|[“\"]\s*)([^\W\d_])", re.U)
+
+
+def _hoa_dau(s: str) -> str:
+    """Viết hoa chữ đầu câu / đầu lời trích — bản ẩn danh thay tên người bằng cụm chữ thường ("người ấy")."""
+    return _DAU_CAU.sub(lambda m: m.group(1) + m.group(2).upper(), s)
+
+
 def danh_muc() -> dict:
-    """Kho tình huống (bản ẩn danh) + vai trò 5 hành — cho trang công khai /quan-ly-nhan-su."""
+    """Kho tình huống (bản ẩn danh) + vai trò 5 hành + kế hoạch mẫu 4 tuần — cho trang công khai /quan-ly-nhan-su
+    và ảnh minh hoạ của trang (một nguồn: web không viết cứng tri thức)."""
     vi = ngon_ngu.la_viet()
     an = kb()["an_danh"]
-    th = [{"ma": ma, "van_de": m["van_de"], "goc_nhin": _dien(m["goc_nhin"], **an), "mo_loi": _dien(m["mo_loi"], **an),
-           "viec": m["viec"]} for ma, m in kb()["tinh_huong"].items() if ma != "giu_nhip"]
+    th = [{"ma": ma, "van_de": m["van_de"], "goc_nhin": _hoa_dau(_dien(m.get("goc_nhin_an") or m["goc_nhin"], **an)),
+           "mo_loi": _hoa_dau(_dien(m["mo_loi"], **an)), "viec": m["viec"]}
+          for ma, m in kb()["tinh_huong"].items() if ma != "giu_nhip"]
     vt = [{"hanh": _hanh(h), "vai_tro": dc._VAI_TRO_HANH[h]["vi" if vi else "en"][0],
            "gia_tri": dc._VAI_TRO_HANH[h]["vi" if vi else "en"][1]} for h in dc.HANH_5]
-    return {"tinh_huong": th, "vai_tro_hanh": vt}
+    return {"tinh_huong": th, "vai_tro_hanh": vt, "ke_hoach_mau": [dict(x) for x in kb()["ke_hoach_mau"]]}
