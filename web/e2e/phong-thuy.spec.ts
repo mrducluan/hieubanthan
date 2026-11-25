@@ -466,11 +466,12 @@ test("UI-PT2 B/C + TY-2 đợt 2: ảnh bản vẽ làm nền sơ đồ tỉ l�
   await ve.getByTestId("vi-tri-cach-khung").click();
   await ve.getByLabel("Ảnh bản vẽ nhà làm nền cho sơ đồ (chỉ hiện trên máy)").setInputFiles({ name: "mat-bang.png", mimeType: "image/png", buffer: PNG_1 });
   await expect(ve.getByTestId("vi-tri-anh-dieu-khien")).toContainText("không tải lên");
-  await expect(ve.locator("img[src^='blob:']")).toHaveCount(1);        // ảnh là blob trên máy, không có URL máy chủ
+  await expect(ve.getByTestId("vi-tri-anh-canvas")).toHaveCount(1);   // ảnh vẽ lên canvas trên máy — không có đường dẫn ảnh nào
+  await expect(ve.locator("img")).toHaveCount(0);
   await ve.getByRole("button", { name: "Xoay ảnh bản vẽ 90 độ" }).click();
-  await expect(ve.locator("img[src^='blob:']")).toHaveAttribute("style", /rotate\(90deg\)/);
+  await expect(ve.getByTestId("vi-tri-anh-canvas")).toHaveAttribute("data-xoay", "90");
   await ve.getByRole("button", { name: "Bỏ ảnh" }).click();
-  await expect(ve.locator("img[src^='blob:']")).toHaveCount(0);
+  await expect(ve.getByTestId("vi-tri-anh-canvas")).toHaveCount(0);
   // P6: hỏi nhanh theo ý định — sức khoẻ → câu đầu là xà ngang; "Có" tích ô dấu hiệu, "Không" bỏ tích
   const hn = ks.getByTestId("hoi-nhanh-anh");
   await hn.getByTestId("hoi-nhanh-suc_khoe").click();

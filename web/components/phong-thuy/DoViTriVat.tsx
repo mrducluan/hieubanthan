@@ -183,16 +183,34 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
   const [khung, setKhung] = useState<{ rong: number; sau: number; luoi: boolean[][] | null; tuLuoiCu?: boolean }>({ rong: 5, sau: 15, luoi: null });
   // TY-2 đợt 2: ảnh bản vẽ / mặt bằng (chụp hoặc chọn từ máy) đặt DƯỚI sơ đồ để chạm theo — blob trên trình duyệt,
   // không gửi đi, không lưu (tải lại trang là mất).
-  const [anhNen, setAnhNen] = useState<{ url: string; xoay: number; mo: number } | null>(null);
-  const anhRef = useRef<string | null>(null);
-  useEffect(() => () => { if (anhRef.current) URL.revokeObjectURL(anhRef.current); }, []);
+  // Vẽ lên <canvas> bằng createImageBitmap — không tạo đường dẫn ảnh nào (không blob:, không src).
+  const [anhNen, setAnhNen] = useState<{ anh: ImageBitmap; xoay: number; mo: number } | null>(null);
+  const canvasAnh = useRef<HTMLCanvasElement>(null);
+  useEffect(() => () => { anhNen?.anh.close(); }, [anhNen?.anh]);
   const chonAnhNen = (f: File | undefined) => {
-    if (anhRef.current) URL.revokeObjectURL(anhRef.current);
-    if (!f) { anhRef.current = null; setAnhNen(null); return; }
-    const url = URL.createObjectURL(f);
-    anhRef.current = url; setAnhNen({ url, xoay: 0, mo: 0.55 });
+    if (!f) { setAnhNen(null); return; }
+    createImageBitmap(f)
+      .then((anh) => { if (song.current) setAnhNen({ anh, xoay: 0, mo: 0.55 }); else anh.close(); })
+      .catch(() => setAnhNen(null));
     ghi("chart_interacted", { mo_dun: "phongthuy", kind: "anh_mat_bang_nen", cach: "khung" });
   };
+  useEffect(() => {
+    const cv = canvasAnh.current;
+    if (!cv || !anhNen) return;
+    const { anh, xoay } = anhNen;
+    const dung = xoay % 180 !== 0;
+    cv.width = dung ? anh.height : anh.width;
+    cv.height = dung ? anh.width : anh.height;
+    const g = cv.getContext("2d");
+    if (!g) return;
+    g.clearRect(0, 0, cv.width, cv.height);
+    g.save();
+    g.translate(cv.width / 2, cv.height / 2);
+    g.rotate((xoay * Math.PI) / 180);
+    g.drawImage(anh, -anh.width / 2, -anh.height / 2);
+    g.restore();
+  }, [anhNen]);
+
   const [dangDat, setDangDat] = useState<LoaiVat>("cua_chinh");
   const [dangChon, setDangChon] = useState<LoaiVat | null>(null);
   const [tieuDiem, setTieuDiem] = useState<LoaiVat | null>(null);
@@ -798,11 +816,9 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
               ▲ {c("dv.mat_truoc")}{huongNha != null ? ` · ${Math.round(huongNha)}°` : ""} · {khung.rong}m × {khung.sau}m
             </p>
             <div className="relative mx-auto" style={{ aspectRatio: `${khung.rong} / ${khung.sau}`, width: `min(100%, calc(62vh * ${khung.rong / khung.sau}))` }}>
-            {anhNen && anhNen.url.startsWith("blob:") && (
-              // Chỉ nhận đường dẫn blob: do URL.createObjectURL tạo từ tệp người dùng chọn — không bao giờ là chuỗi gõ tay.
-              // eslint-disable-next-line @next/next/no-img-element -- ảnh blob trên máy người dùng, không qua next/image
-              <img src={anhNen.url} alt="" aria-hidden className="pointer-events-none absolute inset-0 size-full object-contain"
-                style={{ opacity: anhNen.mo, transform: `rotate(${anhNen.xoay}deg)` }} />
+            {anhNen && (
+              <canvas ref={canvasAnh} aria-hidden data-testid="vi-tri-anh-canvas" data-xoay={anhNen.xoay}
+                className="pointer-events-none absolute inset-0 size-full object-contain" style={{ opacity: anhNen.mo }} />
             )}
             <svg ref={svgRef} viewBox={`0 0 ${khung.rong} ${khung.sau}`} preserveAspectRatio="xMidYMid meet" data-testid="vi-tri-khung"
               className="relative block size-full touch-none select-none overflow-visible"
