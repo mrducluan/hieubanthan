@@ -13,8 +13,8 @@ import { KhoiCms } from "@/components/cms/KhoiCms";
 import { anhBai, goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang } from "@/lib/seo";
 import { docNamBang, duongHanNam, duongLamNhaNam, duongSaoHanNam, duongXongDatNam, namAmHienTai } from "@/lib/tuoi-dan-gian";
 import { duongCuoiHoi, duongNam, duongNamTuoi, duongSinhCon, namCongKhai, namIndex } from "@/lib/nam";
-import { duongLichAm, lichNgayCongKhai } from "@/lib/lich-am";
-import { LichAmNam } from "@/components/lich-am/LichAmNam";
+import { duongLichAm, lichNgayChoNgay, lichNgayCongKhai } from "@/lib/lich-am";
+import { LichAmTheoTab } from "@/components/lich-am/LichAmTheoTab";
 import { homNayVN } from "@/lib/hoang-lich";
 import { duongThang } from "@/lib/hoang-lich";
 import { duongTrang, slugEnCua } from "@/lib/kien-thuc";
@@ -44,7 +44,8 @@ async function metaGoc(p: P): Promise<Metadata> {
 export default async function Page(p: P) {
   const n = docNamBang((await p.params).nam);
   if (!n) notFound();
-  const [d, lich] = await Promise.all([namCongKhai(n), lichNgayCongKhai(n)]);
+  const homNayIso = homNayVN();
+  const [d, lich, lichNay] = await Promise.all([namCongKhai(n), lichNgayCongKhai(n), lichNgayChoNgay(homNayIso)]);
   if (!d) throw new Error("engine không phản hồi");
   const { ngonNgu } = await ngonNguMayChu(), { c: t, p: tp, en } = chuNamTuoi(ngonNgu), ten = tenTheo(d.ten_hien, en);
   const duong = duongNam(n), bien = { nam: String(n), can_chi: d.can_chi };
@@ -106,7 +107,7 @@ export default async function Page(p: P) {
       </section>
 
       {/* LA-UI: lịch cả năm âm (chỉ bản Việt) — sau câu trả lời nhanh + 12 ô dữ kiện của năm. */}
-      {!en && lich && <LichAmNam d={lich} homNay={homNayVN()} className="mt-6" />}
+      {!en && lich && <LichAmTheoTab hienTai={lichNay} namXem={lich} nam={n} homNay={homNayIso} className="mt-6" />}
 
       {L("/thoi-gian-toi") && <section className="mt-8 rounded-2xl border border-line bg-surface/40 p-5" aria-labelledby="ca-nhan" data-nosnippet="">
         <h2 id="ca-nhan" className="text-xl">{c("ca_nhan.tieu_de", bien)}</h2>

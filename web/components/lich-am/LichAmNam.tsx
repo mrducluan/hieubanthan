@@ -27,8 +27,10 @@ type Vi = { t: number; n: number };   // chỉ số tháng trong d.thang, chỉ 
 
 /** `chon`: ngày mở sẵn (mặc định hôm nay). `dangXem`: ngày của trang đang đọc (Xem ngày tốt) — thẻ ngày không link lại chính
  *  nó. `lienKet`: ô ngày là link tới trang ngày (giữ liên kết nội bộ tháng → ngày của lịch cũ; bấm thường vẫn chọn tại chỗ). */
-export function LichAmNam({ d, homNay, className, chon: ngayMo, dangXem, lienKet }: {
+export function LichAmNam({ d, homNay, className, chon: ngayMo, dangXem, lienKet, cheBanDau = "thang", anNutChe }: {
   d: LichNgay; homNay: string; className?: string; chon?: string; dangXem?: string; lienKet?: boolean;
+  /** Cách xem lúc mở (mặc định từng tháng). */ cheBanDau?: "thang" | "nam";
+  /** Ẩn nút "Tháng | Cả năm" (khi bên ngoài đã có tab chọn năm; trong cách xem tháng có nút "← Cả năm" quay lại). */ anNutChe?: boolean;
 }) {
   const viTri = useMemo(() => {
     const m = new Map<string, Vi>();
@@ -37,7 +39,7 @@ export function LichAmNam({ d, homNay, className, chon: ngayMo, dangXem, lienKet
   }, [d]);
   const coHomNay = viTri.has(homNay);
   const [vi, setVi] = useState<Vi>(() => (ngayMo ? viTri.get(ngayMo) : undefined) ?? viTri.get(homNay) ?? { t: 0, n: 0 });
-  const [che, setChe] = useState<"thang" | "nam">("thang");
+  const [che, setChe] = useState<"thang" | "nam">(cheBanDau);
   const dai = useRef<HTMLDivElement>(null);
   const thang = d.thang[vi.t]!, ngay = thang.ngay[vi.n]!;
   const tiet = useMemo(() => new Map(d.tiet_khi.map((x) => [x.ngay, x])), [d]);
@@ -69,6 +71,10 @@ export function LichAmNam({ d, homNay, className, chon: ngayMo, dangXem, lienKet
           <p className="mt-1 text-xs tabular-nums text-fg-faint">{dmy(d.tet)} → {dmy(d.thang[d.thang.length - 1]!.cuoi)} · {d.so_ngay} ngày · {d.thang.length} tháng âm{d.thang_nhuan ? ` · nhuận tháng ${d.thang_nhuan}` : ""}</p>
         </div>
         <div className="flex w-full items-center justify-between gap-2 sm:w-auto">
+          {anNutChe ? (che === "thang" && cheBanDau === "nam" && (
+            <button type="button" onClick={() => { setChe("nam"); ghiDo("xem_nam"); }} data-testid="lich-am-ve-ca-nam"
+              className="min-h-11 whitespace-nowrap rounded-full border border-line px-4 text-sm text-fg-muted hover:text-fg">← Cả năm</button>
+          )) : (
           <div className="inline-flex rounded-full border border-line bg-bg/60 p-[3px]" role="group" aria-label="Cách xem lịch">
             {([["thang", "Tháng"], ["nam", "Cả năm"]] as const).map(([k, ten]) => (
               <button key={k} type="button" aria-pressed={che === k} data-testid={`lich-am-che-${k}`}
@@ -76,6 +82,7 @@ export function LichAmNam({ d, homNay, className, chon: ngayMo, dangXem, lienKet
                 className={`min-h-11 rounded-full px-4 text-sm sm:min-h-9 ${che === k ? "bg-surface-2 text-fg shadow-[inset_0_0_0_1px_rgb(var(--gold)/0.45)]" : "text-fg-muted hover:text-fg"}`}>{ten}</button>
             ))}
           </div>
+          )}
           {coHomNay && (
             <button type="button" onClick={() => { const v = viTri.get(homNay)!; chon(v, "hom_nay"); }} data-testid="lich-am-hom-nay"
               className="min-h-11 whitespace-nowrap rounded-full border border-gold/50 px-4 text-sm text-gold hover:bg-gold/10">Hôm nay</button>
