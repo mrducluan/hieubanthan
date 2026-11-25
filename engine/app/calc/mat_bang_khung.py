@@ -182,3 +182,40 @@ def goi_y_dau_hieu(vat: list[dict], rong: float, sau: float, luoi: list[str] | N
     if "bep" in co_hop and "ve_sinh" in co_hop and chung_vach(co_hop["bep"], co_hop["ve_sinh"]):
         them("bep_wc", "bep", "ve_sinh")
     return kq
+
+
+# ------------------------------------------------------------------ TY-2 gói 2: sân / giếng trời chia nhà thành lớp
+TOI_DA_SAN = 14                 # 15 lớp là trần của sách (hoá trạch)
+
+
+def khoi_lop(san: list[tuple[float, float]]) -> list[tuple[float, float]]:
+    """Các dải sân / giếng trời (y0, y1 theo chiều sâu, 0..1, nằm trọn bên trong nhà) chia nhà thành các dãy (lớp) từ
+    mặt trước vào. Trả các dãy (y0, y1). Dải chồng nhau, chạm mép nhà hoặc quá 14 dải → ValueError."""
+    if len(san) > TOI_DA_SAN:
+        raise ValueError("Tối đa 14 sân / giếng trời")
+    ds = sorted((float(a), float(b)) for a, b in san)
+    truoc = 0.0
+    khoi = []
+    for a, b in ds:
+        if not (0 < a < b < 1):
+            raise ValueError("Sân / giếng trời phải nằm trong nhà (không chạm mặt trước, mặt sau)")
+        if a <= truoc and khoi:
+            raise ValueError("Các sân / giếng trời chồng lên nhau")
+        khoi.append((truoc, a))
+        truoc = b
+    khoi.append((truoc, 1.0))
+    return khoi
+
+
+def lop_cua(diem: tuple[float, float], san: list[tuple[float, float]]) -> int | None:
+    """Lớp (1 = dãy trước) chứa điểm; điểm nằm trong một sân → None."""
+    for i, (a, b) in enumerate(khoi_lop(san), 1):
+        if a <= diem[1] <= b:
+            return i
+    return None
+
+
+def san_gan(diem: tuple[float, float], san: list[tuple[float, float]]) -> int:
+    """Chỉ số (0-based, theo thứ tự từ trước vào) của sân gần điểm nhất theo chiều sâu."""
+    ds = sorted(san)
+    return min(range(len(ds)), key=lambda i: abs((ds[i][0] + ds[i][1]) / 2 - diem[1]))

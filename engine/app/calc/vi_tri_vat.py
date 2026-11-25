@@ -60,9 +60,16 @@ def do_tu_khung(rong: float, sau: float, x: float, y: float, huong_nha_do: float
         cy, cx = tr / len(o), tc / len(o[0])
     else:
         cx, cy = 0.5, 0.5
-    dx, dy = (x - cx) * rong, (cy - y) * sau              # dy > 0: về phía trước
+    return do_tu_tam(rong, sau, (cx, cy), x, y, huong_nha_do)
+
+
+def do_tu_tam(rong: float, sau: float, tam: tuple[float, float], x: float, y: float, huong_nha_do: float) -> float:
+    """Như `do_tu_khung` nhưng nhìn từ một tâm (x, y 0..1) bất kỳ — TY-2 gói 2: la bàn đặt giữa từng sân (Tam Yếu)."""
+    if not (rong > 0 and sau > 0) or not (0 <= x <= 1 and 0 <= y <= 1):
+        raise ValueError("Khung nhà hoặc điểm không hợp lệ")
+    dx, dy = (x - tam[0]) * rong, (tam[1] - y) * sau      # dy > 0: về phía trước
     if math.hypot(dx, dy) < 0.05:
-        raise ValueError("Điểm trùng tâm nhà — không biết phía nào")
+        raise ValueError("Điểm trùng tâm đo — không biết phía nào")
     return round(_chuan(huong_nha_do + math.degrees(math.atan2(dx, dy))), 4)
 
 

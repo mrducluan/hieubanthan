@@ -483,7 +483,7 @@ def _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan) -> dict:
 
 
 # ----------------------------------------------------------------------------- chương 3
-def _chuong_tung_phong(mq, huong, b, bc_luan, bo_cuc_in, tvs=None, tuoi=None) -> dict:  # noqa: C901
+def _chuong_tung_phong(mq, huong, b, bc_luan, bo_cuc_in, tvs=None, tuoi=None, nhieu_lop=None) -> dict:  # noqa: C901
     c = {"ma": "tung_phong", **kb.chuong("tung_phong"), "muc": None, "nhan_muc": None, "hop": [], "doan": [], "can_cu": [],
          "phong": [], "goi_y_phong": [], "cua_chu_bep": None}
     bang = pt.bang_huong(mq["quai"]) if mq else (pt.bang_huong(pt.trach(huong)["quai"]) if huong else None)
@@ -523,6 +523,9 @@ def _chuong_tung_phong(mq, huong, b, bc_luan, bo_cuc_in, tvs=None, tuoi=None) ->
                                  ds="; ".join(f"{x['cap']} {_dnt(x['du_nien'])}" for x in ccb["cap"])))
             if h_ty:
                 c["hop"].append(h_ty)
+            h_nl = _hop_nhieu_lop(bc_luan, nhieu_lop)
+            if h_nl:
+                c["hop"].append(h_nl)
             elif xau:
                 c["hop"].append(_hop("loi_khuyen", L("pt.c3.ccb.td", "Cửa, phòng ngủ, bếp chưa cùng nhịp"),
                                      L("pt.c3.ccb.nd", "Cặp {ds} đang ở du niên kém. Phần dễ đổi nhất là miệng bếp và đầu giường — quay về phía hợp với bạn.",
@@ -872,6 +875,25 @@ def _hop_tam_yeu(c: dict, mq: dict | None, bc_luan: dict, tvs: list[dict], tuoi:
     return h
 
 
+def _hop_nhieu_lop(bc_luan: dict, nl: dict | None) -> dict | None:
+    """TY-2 gói 2 — nhà nhiều lớp (Tam Yếu) trong chương Từng phòng: sao rơi vào dãy nhà chính + lớp hợp làm nhà chính.
+    Một bộ tính với công cụ (`phongthuy_tam_yeu.nhieu_lop`). Chỉ khi người dùng khai ≥ 2 lớp và lớp nhà chính; không đổi mức
+    chương (Q1)."""
+    if not nl or nl.get("so_lop", 1) < 2 or not nl.get("lop_chu"):
+        return None
+    from app.luangiai import phongthuy_tam_yeu as ty  # noqa: PLC0415
+    vt = {v["phong"]: v["cung"] for v in bc_luan["da_tinh"]["vi_tri"]}
+    cua, chu = vt.get("cua_chinh"), vt.get("phong_ngu_chinh")
+    if not cua or not chu or "Trung cung" in (cua, chu) or nl["lop_chu"] > nl["so_lop"]:
+        return None
+    r = ty.nhieu_lop(pt.HUONG_QUAI[cua], pt.HUONG_QUAI[chu], nl["so_lop"], nl["lop_chu"])
+    if not r.get("lop_chu"):
+        return None
+    loai = "diem_manh" if r["lop_chu"]["muc"] == "thuan" else "loi_khuyen" if r["lop_chu"]["muc"] == "can_bang" else "luu_y"
+    nd = r["loi_lop_chu"] + (" " + r["loi_nen_cao"] if r.get("loi_nen_cao") else "") + (" " + r["ap_sat"] if r.get("ap_sat") else "")
+    return _hop(loai, r["ten_loai"], nd, None, can_cu=r["can_cu"] + [r["quy_uoc"]])
+
+
 def _hop_quan_sat(chon: list[str], tuoi: int | None) -> list[dict]:
     """TY-2: điều người dùng tự tích ở "Nhìn quanh nhà" → tối đa hai hộp ở chương Ngôi nhà (điều sách khen · điều sách dặn
     để ý), câu sách trong `sach` (khuôn SX-C, cổng tuổi). Tiêu đề cố định (không mang lời nhóm C); không đổi mức chương."""
@@ -913,7 +935,7 @@ def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None
     c2 = _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan)
     from app.luangiai import sach_ghi_mon as _sm  # noqa: PLC0415
     tuoi = _sm.tuoi_tu((sinh.get("ngay") or sinh.get("nam")) if sinh else None, ngay_xem)
-    c3 = _chuong_tung_phong(mq, huong, b, bc_luan, nha.get("bo_cuc"), tvs, tuoi)
+    c3 = _chuong_tung_phong(mq, huong, b, bc_luan, nha.get("bo_cuc"), tvs, tuoi, nha.get("nhieu_lop"))
     c4 = _chuong_nam_nay(mq, sinh, huong, b, bc_luan, ngay_xem)
     c5 = _chuong_viec_nen_lam(c1, c2, c3, c4)
     if nha.get("quan_sat") and ngon_ngu.la_viet():

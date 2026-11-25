@@ -472,6 +472,14 @@ class NhaInput(BaseModel):
     bo_cuc: _BoCuc | None = None
     # TY-2: mã điều người dùng tự tích ở "Nhìn quanh nhà" (Dương Trạch Thập Thư) — chỉ mã, lưu trên máy người dùng.
     quan_sat: list[Annotated[str, StringConstraints(pattern=r"^[a-z_]{3,40}$")]] = Field(default_factory=list, max_length=60)
+    # TY-2 gói 2: nhà nhiều lớp (số lớp từ cổng vào, lớp có dãy nhà chính) — khai ở công cụ Cửa – Chủ – Bếp, lưu trên máy.
+    nhieu_lop: "_NhieuLopNha | None" = None
+
+
+class _NhieuLopNha(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    so_lop: int = Field(ge=1, le=15)
+    lop_chu: int | None = Field(default=None, ge=1, le=15)
 
 
 class ThanhVienInput(SinhInput):
@@ -733,6 +741,15 @@ class KhungNhaInput(BaseModel):
     rong: float = Field(gt=0, le=200)
     sau: float = Field(gt=0, le=200)
     luoi: list[str] | None = Field(default=None, min_length=3, max_length=12)
+    # TY-2 gói 2: dải sân / giếng trời (y0, y1 theo chiều sâu, 0..1) — engine đếm lớp, đo Cửa – Chủ – Bếp theo từng sân.
+    san: list[tuple[float, float]] | None = Field(default=None, max_length=14)
+
+    @model_validator(mode="after")
+    def _san(self) -> "KhungNhaInput":
+        if self.san:
+            from app.calc import mat_bang_khung as mk  # noqa: PLC0415
+            mk.khoi_lop(self.san)
+        return self
 
 
 class ViTriVatInput(BaseModel):

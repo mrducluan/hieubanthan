@@ -3392,6 +3392,9 @@
   "ten_cap_tren": {
    "cua_chu": "Đầu cầu thang với phòng chính",
    "cua_bep": "Đầu cầu thang với bếp"
+  },
+  "theo_san": {
+   "ghi_chu": "Nhà nhiều sân: sách đặt la bàn riêng ở từng sân — giữa sân ngay sau cổng để lấy phía cửa, giữa sân trước dãy nhà chính để lấy phía phòng chính, giữa sân gần bếp để lấy phía bếp. Kết quả dưới đây đo theo cách đó; số lớp và dãy nhà chính lấy từ các sân bạn đánh dấu."
   }
  }
 }

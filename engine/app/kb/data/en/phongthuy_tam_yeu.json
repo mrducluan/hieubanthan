@@ -136,6 +136,9 @@
   "ten_cap_tren": {
    "cua_chu": "Top of the stairs and main room",
    "cua_bep": "Top of the stairs and stove"
+  },
+  "theo_san": {
+   "ghi_chu": "Home with several courtyards: the book takes a separate compass reading in each courtyard — in the courtyard just inside the gate for the door, in the courtyard in front of the main building for the main room, and in the courtyard nearest the stove for the stove. The result below follows that method; the number of rows and the main building come from the courtyards you marked."
   }
  }
 }
