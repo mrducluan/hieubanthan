@@ -130,17 +130,17 @@ function NguoiCungO() {
         </ul>
       )}
       {ds.length < TOI_DA_NGUOI && (
-        <form className="flex flex-wrap items-center gap-1.5" onSubmit={(e) => { e.preventDefault(); them(); }}>
-          <Select value={vai} onChange={(e) => setVai(e.target.value as ThanhVien["vai"])} aria-label={t("nc.vai_aria")} className="h-9 w-28 text-xs">
+        <form className="grid grid-cols-3 items-center gap-1.5 sm:grid-cols-[8rem_7rem_6rem_auto]" onSubmit={(e) => { e.preventDefault(); them(); }}>
+          <Select value={vai} onChange={(e) => setVai(e.target.value as ThanhVien["vai"])} aria-label={t("nc.vai_aria")} className="h-9 pl-3 pr-8 text-xs">
             {VAI.map((m) => <option key={m} value={m}>{t(`nc.vai.${m}`)}</option>)}
           </Select>
           <Input inputMode="numeric" value={nam} onChange={(e) => setNam(e.target.value.replace(/\D/g, "").slice(0, 4))}
-            placeholder={t("nc.nam_sinh")} aria-label={t("nc.nam_sinh_aria", { so: String(ds.length + 1) })} className="h-9 w-24 text-xs" data-testid="nguoi-nam" />
-          <Select value={gioi} onChange={(e) => setGioi(e.target.value as "nam" | "nu")} aria-label={t("nc.gioi_aria")} className="h-9 w-20 text-xs">
+            placeholder={t("nc.nam_sinh")} aria-label={t("nc.nam_sinh_aria", { so: String(ds.length + 1) })} className="h-9 text-xs" data-testid="nguoi-nam" />
+          <Select value={gioi} onChange={(e) => setGioi(e.target.value as "nam" | "nu")} aria-label={t("nc.gioi_aria")} className="h-9 pl-3 pr-8 text-xs">
             <option value="nam">{t("nc.nam")}</option><option value="nu">{t("nc.nu")}</option>
           </Select>
           <button type="submit" disabled={nam.length !== 4} data-testid="nguoi-them"
-            className="inline-flex min-h-9 items-center gap-1 rounded-full border border-gold/60 px-3 text-xs text-gold disabled:opacity-40">
+            className="col-span-3 inline-flex min-h-9 items-center justify-center gap-1 rounded-full border border-gold/60 px-3 text-xs text-gold disabled:opacity-40 sm:col-span-1 sm:justify-self-start">
             <Plus className="size-3.5" aria-hidden /> {t("nc.them")}</button>
         </form>
       )}

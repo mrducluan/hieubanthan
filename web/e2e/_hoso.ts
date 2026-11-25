@@ -47,9 +47,9 @@ export async function napNha(page: Page, nha: Record<string, unknown>) {
 }
 
 /** PT-NHA: chốt hướng nhà qua ô "nhập độ" của khối Đo hướng nhà (engine trả hướng → hồ sơ nhà → thẻ "Nhà của tôi" hiện). */
-export async function chotHuong(page: Page, doHuong: number, nhanO = "Độ đo được", nhanNut = "Xem") {
+export async function chotHuong(page: Page, doHuong: number, nhanO = "Độ hướng nhà", nhanNut = "Xem") {
   const o = page.getByTestId("do-huong");
-  await o.getByLabel(nhanO).fill(String(doHuong));
+  await o.getByLabel(nhanO, { exact: true }).fill(String(doHuong));
   await o.getByRole("button", { name: nhanNut, exact: true }).click();
   await page.getByTestId("the-nha-cua-toi").waitFor({ timeout: 20_000 });
 }

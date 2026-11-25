@@ -484,7 +484,8 @@ test("UI-PT2 A/B: chọn Chung cư → hướng dẫn căn hộ + Cách làm; GP
   expect(hs.loai_nha).toBe("can_ho");
   expect(hs.theo).toBe("ban_cong");                                   // căn hộ → hướng lưu là hướng ban công
   await expect(page.getByTestId("hk-can-ho")).toBeVisible();
-  await expect(page.getByTestId("khao-sat-nha").getByLabel("Loại nhà")).toHaveValue("can_ho");   // Khảo sát đọc cùng hồ sơ nhà
+  await expect(page.getByTestId("khao-sat-nha").getByTestId("dong-nha-ks")).toContainText("Chung cư");   // Khảo sát đọc cùng hồ sơ nhà
+  await expect(page.getByTestId("the-nha-cua-toi").getByTestId("nt-theo-ban_cong")).toHaveAttribute("aria-checked", "true");
 });
 
 test("UI-PT2 B/C + TY-2 đợt 2 + gói 3: ảnh bản vẽ làm nền sơ đồ tỉ lệ (chỉ trên máy), căn ảnh theo khung + Chụp một góc, trả lời 3 câu → tích đúng ô dấu hiệu", async ({ page }) => {
@@ -656,6 +657,7 @@ const KQ_DOC_ANH = {
 
 test("PT-V2: Để máy đọc ảnh — đồng ý không tích sẵn, ảnh thu nhỏ trên máy, Đúng / Không đồng bộ ô tích, bố cục gửi nguon anh", async ({ page }) => {
   await napHoSo(page);
+  await napNha(page, { huong_do: 180, huong: "Nam" });                       // PT-NHA: hướng từ "Nhà của tôi"
   const goiDoc: Record<string, unknown>[] = [];
   const goiBoCuc: Record<string, unknown>[] = [];
   await page.route("**/api/phongthuy/doc-anh", async (r) => { goiDoc.push(r.request().postDataJSON()); await r.fulfill({ json: KQ_DOC_ANH }); });
