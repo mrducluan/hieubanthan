@@ -18,7 +18,7 @@ from app.kb import nap
 from app.kb import ten as _ten
 from app.luangiai import phongthuy_tam_yeu as ty
 
-LOAI = ("cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang")
+LOAI = ("cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang", "ban_cong")
 
 
 def _kb() -> dict:
@@ -86,16 +86,63 @@ def phan_tich(tang: list[dict], huong_nha_do: float | None = None, truc_do: floa
         if t["so"] > 1:
             o["ghi_chu_cua"] = kb["cua_tang"]
         if cua and (chu or bep):
-            o["tam_yeu"] = ty.so_do(cua["quai"], chu["quai"] if chu else None, bep["quai"] if bep else None, tuoi)
+            q = lambda k: theo[k]["quai"] if k in theo and theo[k]["phuong"] != "Trung cung" else None  # noqa: E731
+            o["tam_yeu"] = ty.so_do(cua["quai"], chu["quai"] if chu else None, bep["quai"] if bep else None, tuoi,
+                                    ve_sinh=q("ve_sinh"), ban_tho=q("ban_tho"), menh=menh_quai, nhieu_tang=len(tang) > 1,
+                                    cua_sat_ranh=cua.get("sat_ranh_8") if t["so"] == 1 else None)
             if t["so"] > 1:                     # tầng trên: "cửa" là đầu cầu thang — gọi đúng tên
                 for c in o["tam_yeu"]["cap"]:
                     c["ten"] = kb["ten_cap_tren"].get(c["cap"], c["ten"])
         else:
             o["chua_du"] = kb["chua_du"]
+        if t["so"] == 1 and khung and khung.get("san") and huong_nha_do is not None:
+            ts = _theo_san(t["vat"], khung, huong_nha_do, menh_quai, tuoi)
+            if ts:
+                o["theo_san"] = ts
         ra_tang.append(o)
     ra = {"lech": lech, "tang": ra_tang, "luu_y_tham_khao": ty._cc()["luu_y_tham_khao"]}
     if ban:
         ra["huyen_khong"] = {"van": ban["van"], "cuc": ban["cuc"], "cuc_ten": ban["cuc_ten"], "phep": ban["phep"]}
     if not ngon_ngu.la_viet():
         ra.get("huyen_khong", {}).pop("cuc_ten", None)
+    return ra
+
+
+
+def _theo_san(vat: list[dict], khung: dict, huong_nha_do: float, menh_quai: str | None, tuoi: int | None) -> dict | None:
+    """TY-2 gói 2 — nhà nhiều sân: đo Cửa – Chủ – Bếp như sách dặn (Tam Yếu đoạn 23, 160–161 «各具一太極»): cửa nhìn
+    từ giữa sân ngay sau dãy có cửa, phòng chính nhìn từ giữa sân ngay trước dãy nhà chính, bếp từ giữa sân gần bếp nhất.
+    Số lớp = số dãy do sân chia; dãy nhà chính = dãy có phòng chính. Cần cửa chính có điểm trên khung."""
+    from app.calc import mat_bang_khung as mk  # noqa: PLC0415
+    from app.calc import phongthuy as _pt  # noqa: PLC0415
+    diem = {v["loai"]: tuple(v["diem"]) for v in vat if v.get("diem") is not None}
+    if "cua_chinh" not in diem:
+        return None
+    san = sorted(tuple(x) for x in khung["san"])
+    khoi = mk.khoi_lop(san)
+    lop_cua = mk.lop_cua(diem["cua_chinh"], san)
+    lop_chu = mk.lop_cua(diem["phong_ngu_chinh"], san) if "phong_ngu_chinh" in diem else None
+    chon = {"cua": min(len(san), lop_cua or 1) - 1}
+    if "phong_ngu_chinh" in diem:
+        chon["chu"] = max(0, (lop_chu or 1) - 2) if lop_chu else mk.san_gan(diem["phong_ngu_chinh"], san)
+    if "bep" in diem:
+        chon["bep"] = mk.san_gan(diem["bep"], san)
+    ma = {"cua": "cua_chinh", "chu": "phong_ngu_chinh", "bep": "bep"}
+    quai: dict[str, str | None] = {}
+    for k, i in chon.items():
+        a, b = san[i]
+        try:
+            do = vt.do_tu_tam(khung["rong"], khung["sau"], (0.5, (a + b) / 2), *diem[ma[k]], huong_nha_do)
+            quai[k] = _pt.HUONG_QUAI[_pt.huong_tu_do(do)]
+        except ValueError:                                  # điểm nằm ngay giữa sân dùng để đo
+            quai[k] = None
+    if not quai.get("cua"):
+        return None
+    kb = _kb()["theo_san"]
+    ra = {"so_lop": len(khoi), "lop_chu": lop_chu, "quai": {"cua": quai["cua"], "chu": quai.get("chu"), "bep": quai.get("bep")},
+          "huong": {k: (_pt.QUAI[q][1] if q else None) for k, q in quai.items()},
+          "san_do": {k: i + 1 for k, i in chon.items()}, "ghi_chu": kb["ghi_chu"]}
+    ra["tam_yeu"] = ty.so_do(quai["cua"], quai.get("chu"), quai.get("bep"), tuoi, menh=menh_quai)
+    if quai.get("chu"):
+        ra["nhieu_lop"] = ty.nhieu_lop(quai["cua"], quai["chu"], len(khoi), lop_chu)
     return ra

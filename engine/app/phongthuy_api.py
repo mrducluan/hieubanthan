@@ -470,6 +470,16 @@ class NhaInput(BaseModel):
     toa: str | None = Field(default=None, max_length=10)
     theo: Literal["cua", "ban_cong"] = "cua"
     bo_cuc: _BoCuc | None = None
+    # TY-2: mã điều người dùng tự tích ở "Nhìn quanh nhà" (Dương Trạch Thập Thư) — chỉ mã, lưu trên máy người dùng.
+    quan_sat: list[Annotated[str, StringConstraints(pattern=r"^[a-z_]{3,40}$")]] = Field(default_factory=list, max_length=60)
+    # TY-2 gói 2: nhà nhiều lớp (số lớp từ cổng vào, lớp có dãy nhà chính) — khai ở công cụ Cửa – Chủ – Bếp, lưu trên máy.
+    nhieu_lop: "_NhieuLopNha | None" = None
+
+
+class _NhieuLopNha(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    so_lop: int = Field(ge=1, le=15)
+    lop_chu: int | None = Field(default=None, ge=1, le=15)
 
 
 class ThanhVienInput(SinhInput):
@@ -584,14 +594,53 @@ def api_tam_yeu_so_do(
     chu: _QuaiTamYeu | None = Query(default=None, description="Quái phương vị phòng chính"),
     bep: _QuaiTamYeu | None = Query(default=None, description="Quái phương vị bếp"),
     nam_sinh: int | None = Query(default=None, ge=1900, le=2100, description="Năm sinh người đọc — chỉ để biết có hiện ghi chép nhóm C"),
-    du_18: bool = Query(default=False, description="Người đọc tự xác nhận đã đủ 18 tuổi (khi không có năm sinh)"),
+    du_18: bool = Query(default=False, description="Người đọc tự xác nhận đã đủ 16 tuổi (khi không có năm sinh)"),
+    gioi_tinh: Literal["nam", "nu"] | None = Query(default=None, description="TY-2: cùng năm sinh → mệnh quái người chủ (Minh Kính)"),
+    ve_sinh: _QuaiTamYeu | None = Query(default=None, description="TY-2: quái phương vị nhà vệ sinh (hồ sơ nhà)"),
+    ban_tho: _QuaiTamYeu | None = Query(default=None, description="TY-2: quái phương vị bàn thờ (hồ sơ nhà)"),
+    so_lop: int | None = Query(default=None, ge=1, le=15, description="TY-2 đợt 3: số lớp từ cổng vào (1 = một sân)"),
+    lop_chu: int | None = Query(default=None, ge=1, le=15, description="TY-2 đợt 3: lớp có dãy nhà chính (cao, lớn nhất)"),
+    cua_lech: bool | None = Query(default=None, description="TY-2 đợt 3: cổng lệch một bên — bỏ trống thì engine tự suy"),
 ) -> dict:
     """Du niên ba cặp cửa–chủ, cửa–bếp, chủ–bếp (một bộ tính với báo cáo Nhà của bạn), mức theo thang chung, gợi ý
-    phía đặt bếp, việc nên làm và khối sách xưa theo khuôn SX-C (nhóm C chỉ khi người đọc đủ 18 tuổi)."""
+    phía đặt bếp, việc nên làm và khối sách xưa theo khuôn SX-C (nhóm C chỉ khi người đọc đủ 16 tuổi). TY-2: thêm
+    tên thế nhà, nhãn sách cho tám chỗ đặt bếp, nguyên tắc Tam Yếu / điều Minh Kính có điều kiện đúng với nhà này."""
+    from app.calc import phongthuy as pt  # noqa: PLC0415
     from app.luangiai import phongthuy_tam_yeu as ty  # noqa: PLC0415
     from app.luangiai import sach_ghi_mon  # noqa: PLC0415
     tuoi = sach_ghi_mon.tuoi_tu(nam_sinh, hom_nay_vn()) if nam_sinh else (sach_ghi_mon.TUOI_NHOM_C if du_18 else None)
-    return {"engine_version": ENGINE_VERSION, "pham_vi": "phongthuy_tam_yeu", **ty.so_do(cua, chu, bep, tuoi)}
+    menh = pt.menh_quai(nam_sinh, gioi_tinh)["quai"] if nam_sinh and gioi_tinh else None
+    try:
+        r = ty.so_do(cua, chu, bep, tuoi, ve_sinh=ve_sinh, ban_tho=ban_tho, menh=menh, so_lop=so_lop, lop_chu=lop_chu, cua_lech=cua_lech)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)[:300])
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "phongthuy_tam_yeu", **r}
+
+
+class QuanSatInput(BaseModel):
+    """TY-2 — "Nhìn quanh nhà": mã điều người dùng tự tích (không chữ, không địa chỉ). Không lưu."""
+    model_config = ConfigDict(extra="forbid")
+
+    chon: list[Annotated[str, StringConstraints(pattern=r"^[a-z_]{3,40}$")]] = Field(default_factory=list, max_length=60)
+    nam_sinh: int | None = Field(default=None, ge=1900, le=2100)
+    du_18: bool = False
+
+
+@router.get("/quan-sat")
+def api_quan_sat_ds() -> dict:
+    """Câu hỏi quan sát quanh nhà theo nhóm (điều Dương Trạch Thập Thư chưa gắn dấu hiệu trong nhà). Chỉ bản Việt."""
+    from app.luangiai import phongthuy_quan_sat as qs  # noqa: PLC0415
+    return {"engine_version": ENGINE_VERSION, **qs.danh_sach()}
+
+
+@router.post("/quan-sat")
+def api_quan_sat(inp: QuanSatInput) -> dict:
+    """Điều đã tích → câu sách xưa theo khuôn SX-C (nhóm C chỉ khi người đọc đủ 16 tuổi). Không đổi mức nào."""
+    from app.luangiai import phongthuy_quan_sat as qs  # noqa: PLC0415
+    from app.luangiai import sach_ghi_mon  # noqa: PLC0415
+    tuoi = (sach_ghi_mon.tuoi_tu(inp.nam_sinh, hom_nay_vn()) if inp.nam_sinh
+            else (sach_ghi_mon.TUOI_NHOM_C if inp.du_18 else None))
+    return {"engine_version": ENGINE_VERSION, **qs.doc(inp.chon, tuoi)}
 
 
 @router.get("/tam-yeu/la-ban-24-son")
@@ -650,7 +699,7 @@ def api_hoi_gi(inp: HoiGiInput) -> dict:
 class VatViTriInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    loai: Literal["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang"]
+    loai: Literal["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang", "ban_cong"]
     mau: list[float] | None = Field(default=None, min_length=1, max_length=120, description="Các mẫu la bàn (độ, bắc từ) khi chĩa máy")
     sai_so: float | None = Field(default=None, ge=-1, le=360, description="iOS webkitCompassAccuracy (độ) nếu có")
     diem: tuple[float, float] | None = Field(default=None, description="Điểm chạm trên khung tỉ lệ, chuẩn hoá 0..1 (x trái→phải, y trước→sau)")
@@ -677,7 +726,7 @@ class TangViTriInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     so: int = Field(ge=1, le=6)
-    vat: list[VatViTriInput] = Field(min_length=1, max_length=6)
+    vat: list[VatViTriInput] = Field(min_length=1, max_length=7)
 
     @model_validator(mode="after")
     def _khong_trung(self) -> "TangViTriInput":
@@ -692,6 +741,15 @@ class KhungNhaInput(BaseModel):
     rong: float = Field(gt=0, le=200)
     sau: float = Field(gt=0, le=200)
     luoi: list[str] | None = Field(default=None, min_length=3, max_length=12)
+    # TY-2 gói 2: dải sân / giếng trời (y0, y1 theo chiều sâu, 0..1) — engine đếm lớp, đo Cửa – Chủ – Bếp theo từng sân.
+    san: list[tuple[float, float]] | None = Field(default=None, max_length=14)
+
+    @model_validator(mode="after")
+    def _san(self) -> "KhungNhaInput":
+        if self.san:
+            from app.calc import mat_bang_khung as mk  # noqa: PLC0415
+            mk.khoi_lop(self.san)
+        return self
 
 
 class ViTriVatInput(BaseModel):

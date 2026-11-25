@@ -3,7 +3,7 @@
 // Tâm nhà, phương của từng chỗ và mọi dấu hiệu bố cục do MÁY CHỦ TÍNH TOÁN trả (`khung.tam`, `dau_hieu_goi_y`) — không tính ở đây.
 // `diem` (0..1) là thứ duy nhất gửi đi; `kich_thuoc` / `huong_cua` chỉ gửi khi người dùng TỰ chỉnh.
 
-export type LoaiVatKhung = "cua_chinh" | "phong_ngu_chinh" | "bep" | "ve_sinh" | "ban_tho" | "cau_thang";
+export type LoaiVatKhung = "cua_chinh" | "phong_ngu_chinh" | "bep" | "ve_sinh" | "ban_tho" | "cau_thang" | "ban_cong";
 export type HuongCua = "truoc" | "phai" | "sau" | "trai";
 
 export const THU_TU_HUONG_CUA: readonly HuongCua[] = ["truoc", "phai", "sau", "trai"] as const;
@@ -18,6 +18,7 @@ const KICH_THUOC_CHUAN: Record<LoaiVatKhung, [number, number]> = {
   ve_sinh: [1.6, 2.0],
   ban_tho: [1.3, 1.0],
   cau_thang: [1.8, 2.4],
+  ban_cong: [2.4, 1.0],
 };
 
 /** Kích thước mặc định hợp lý theo khung nhà (rộng × sâu, mét). */
@@ -109,4 +110,42 @@ export function dichDiem(diem: [number, number], dxM: number, dyM: number, rongN
 export function viTriTuongDoi(diem: [number, number]): { doc: "truoc" | "giua" | "sau"; ngang: "trai" | "giua" | "phai" } {
   const ba = <A, B, C>(v: number, a: A, b: B, c: C): A | B | C => (v < 1 / 3 ? a : v < 2 / 3 ? b : c);
   return { doc: ba(diem[1], "truoc", "giua", "sau"), ngang: ba(diem[0], "trai", "giua", "phai") };
+}
+
+// ---------------------------------------------------------------- TY-2 đợt 2: MỘT bản vẽ
+type DiemOV = [number, number];
+interface HoSoLuoiCu {
+  bo_cuc?: { mat_bang?: { luoi: string[]; phong?: Record<string, DiemOV>; ban_cong?: DiemOV }; [k: string]: unknown };
+  khung?: { rong: number; sau: number; luoi?: string[]; tu_luoi_cu?: boolean };
+  tang_do?: { so: number; vat: Record<string, { mau?: number[]; diem?: DiemOV; [k: string]: unknown } | undefined> }[];
+  [k: string]: unknown;
+}
+/** Hồ sơ nhà cũ có lưới vẽ tay (`bo_cuc.mat_bang`, ô (hàng, cột)) → sơ đồ tỉ lệ của "Đứng giữa nhà": khung rộng = số cột,
+ *  sâu = số hàng (mỗi ô tạm 1 m — cùng giả định ô vuông của lưới cũ, nên phương các phòng engine tính không đổi), lưới giữ
+ *  phần không xây, ô phòng → tâm ô (0..1) của tầng trệt. Chỉ đổi cách GHI dữ kiện người dùng đã vẽ — không tính phương.
+ *  Đã có sơ đồ → chỉ bỏ lưới cũ. Chỗ không có trên sơ đồ (phòng làm việc) bỏ; chỗ đã đo bằng la bàn (mau) giữ nguyên. */
+export function luoiCuSangSoDo<T extends HoSoLuoiCu>(h: T, loaiVat: readonly string[]): T {
+  const mb = h.bo_cuc?.mat_bang;
+  if (!mb || !h.bo_cuc) return h;
+  const { mat_bang: _bo, ...boCuc } = h.bo_cuc;
+  void _bo;
+  const coSoDo = Boolean(h.khung) || (h.tang_do ?? []).some((t) => Object.values(t.vat).some((v) => v?.diem));
+  if (coSoDo) return { ...h, bo_cuc: boCuc };
+  const hang = mb.luoi.length, cot = mb.luoi[0]?.length ?? 0;
+  if (hang < 3 || cot < 3) return { ...h, bo_cuc: boCuc };
+  const o: Record<string, DiemOV> = { ...(mb.phong ?? {}), ...(mb.ban_cong ? { ban_cong: mb.ban_cong } : {}) };
+  const tang1 = h.tang_do?.find((t) => t.so === 1);
+  const vat: Record<string, { mau?: number[]; diem?: DiemOV; [k: string]: unknown } | undefined> = { ...(tang1?.vat ?? {}) };
+  for (const [ma, [r, c]] of Object.entries(o)) {
+    if (!loaiVat.includes(ma) || r >= hang || c >= cot || vat[ma]?.mau) continue;
+    vat[ma] = { diem: [Math.round(((c + 0.5) / cot) * 1000) / 1000, Math.round(((r + 0.5) / hang) * 1000) / 1000] };
+  }
+  const luoi = mb.luoi.map((r) => r.replace(/[#xX]/g, "1").replace(/[^1]/g, "0"));
+  const kin = luoi.every((row) => !row.includes("0"));
+  return {
+    ...h,
+    bo_cuc: boCuc,
+    khung: { rong: cot, sau: hang, ...(kin ? {} : { luoi }), tu_luoi_cu: true },
+    ...(Object.keys(vat).length ? { tang_do: [...(h.tang_do ?? []).filter((t) => t.so !== 1), { so: 1, vat }].sort((a, b) => a.so - b.so) } : {}),
+  };
 }

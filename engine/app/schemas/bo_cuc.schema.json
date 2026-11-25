@@ -112,6 +112,75 @@
    ],
    "title": "MatBang",
    "type": "object"
+  },
+  "SoDo": {
+   "additionalProperties": false,
+   "description": "TY-2 đợt 2 — sơ đồ nhà theo tỉ lệ của \"Đứng giữa nhà\" (tầng trệt): khung rộng × sâu (mét), lưới bỏ phần không xây,\nđiểm (x trái → phải, y trước → sau, 0..1) của từng chỗ. Thay lưới vẽ tay `mat_bang` (giữ cho hồ sơ / bản gọi cũ).",
+   "properties": {
+    "rong": {
+     "exclusiveMinimum": 0,
+     "maximum": 200,
+     "title": "Rong",
+     "type": "number"
+    },
+    "sau": {
+     "exclusiveMinimum": 0,
+     "maximum": 200,
+     "title": "Sau",
+     "type": "number"
+    },
+    "luoi": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "maxItems": 12,
+       "minItems": 3,
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Luoi"
+    },
+    "vat": {
+     "additionalProperties": {
+      "maxItems": 2,
+      "minItems": 2,
+      "prefixItems": [
+       {
+        "type": "number"
+       },
+       {
+        "type": "number"
+       }
+      ],
+      "type": "array"
+     },
+     "propertyNames": {
+      "enum": [
+       "cua_chinh",
+       "phong_ngu_chinh",
+       "bep",
+       "ve_sinh",
+       "ban_tho",
+       "cau_thang",
+       "ban_cong"
+      ]
+     },
+     "title": "Vat",
+     "type": "object"
+    }
+   },
+   "required": [
+    "rong",
+    "sau"
+   ],
+   "title": "SoDo",
+   "type": "object"
   }
  },
  "additionalProperties": false,
@@ -271,6 +340,18 @@
    ],
    "default": null,
    "description": "Q2: mặt bằng vẽ tay — suy vị trí phòng, WC giữa nhà, khuyết góc, cửa thông ban công"
+  },
+  "so_do": {
+   "anyOf": [
+    {
+     "$ref": "#/$defs/SoDo"
+    },
+    {
+     "type": "null"
+    }
+   ],
+   "default": null,
+   "description": "TY-2: sơ đồ nhà theo tỉ lệ (thắng `mat_bang` khi có cả hai)"
   }
  },
  "title": "BoCuc",

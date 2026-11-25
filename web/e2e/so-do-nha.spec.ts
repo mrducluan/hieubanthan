@@ -66,19 +66,17 @@ test("SD-1: gợi ý dấu hiệu đến từ engine, cửa / kích thước ch�
   const nhanCua = vt.getByTestId("vi-tri-huong-cua-nhan");
   await expect(nhanCua).toContainText("Cửa mở");
   expect(await nhanCua.innerText()).not.toMatch(/\d/);
-  await expect(vt.getByTestId("vi-tri-ket-qua")).toHaveCount(0);          // số đo đổi → kết quả cũ hết đúng
-  await vt.getByTestId("vi-tri-xem").click();
-  await expect(vt.getByTestId("vi-tri-ket-qua")).toBeVisible();
-  expect(than).toHaveLength(2);
+  // TY-2 gói 2 "thử dời bếp": đã có kết quả → số đo đổi thì TỰ tính lại (không cần bấm Xem); kết quả cũ hiện mờ tới khi xong.
+  await expect.poll(() => than.length).toBe(2);
+  await expect(vt.getByTestId("vi-tri-ket-qua")).toHaveAttribute("data-cu", "0");
   expect(vatGui(1, "bep").huong_cua).toMatch(/^(truoc|phai|sau|trai)$/);
   expect(vatGui(1, "bep").kich_thuoc).toBeUndefined();
   expect(vatGui(1, "ve_sinh").huong_cua).toBeUndefined();
 
   // 4. Bấm + chiều rộng bếp → từ giờ kích thước bếp mới được gửi
   await vt.getByTestId("vi-tri-phong-rong-tang").click();
-  await vt.getByTestId("vi-tri-xem").click();
-  await expect(vt.getByTestId("vi-tri-ket-qua")).toBeVisible();
-  expect(than).toHaveLength(3);
+  await expect.poll(() => than.length).toBe(3);
+  await expect(vt.getByTestId("vi-tri-ket-qua")).toHaveAttribute("data-cu", "0");
   expect(vatGui(2, "bep").kich_thuoc).toHaveLength(2);
   expect(vatGui(2, "ve_sinh").kich_thuoc).toBeUndefined();
 
@@ -117,7 +115,7 @@ test("SD-1: gợi ý dấu hiệu đến từ engine, cửa / kích thước ch�
   await page.keyboard.press("ArrowRight");
   await page.keyboard.press("ArrowRight");
   await expect.poll(async () => (await hopBep.locator("rect").first().boundingBox())!.x).toBeGreaterThan(truoc.x + 2);
-  await expect(vt.getByTestId("vi-tri-ket-qua")).toHaveCount(0);
+  await expect(vt.getByTestId("vi-tri-ket-qua")).toHaveAttribute("data-cu", "0");      // tự tính lại sau tràng phím
   await vt.getByTestId("vi-tri-hoan-tac").click();
   await expect.poll(async () => Math.abs((await hopBep.locator("rect").first().boundingBox())!.x - truoc.x)).toBeLessThan(1);
   // Delete bỏ phòng; Hoàn tác hiện lại
@@ -181,9 +179,104 @@ test("SD-1: nhà bỏ ô (chữ L) — tâm nhà chỉ hiện sau khi engine tr�
   await expect(vt.getByTestId("vi-tri-ket-qua")).toBeVisible();
   await expect(vt.getByTestId("vi-tri-tam")).toHaveAttribute("data-nguon", "may_chu");
   await expect(vt.getByTestId("vi-tri-tam-can-xem")).toHaveCount(0);
-  // đổi lưới → tâm cũ hết dùng được
-  await cham(0.1, 0.05);
+  // đổi lưới → tâm cũ hết dùng được; đã có kết quả nên máy tự tính lại → tâm mới của lưới mới.
+  // (Đưa sơ đồ vào giữa màn hình trước: góc trên sát mép trên thì thanh đầu trang dính che mất điểm chạm.)
+  await khung.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  const bk = (await khung.boundingBox())!;
+  await page.mouse.click(bk.x + bk.width * 0.1, bk.y + bk.height * 0.05);
   await expect(vt.getByTestId("vi-tri-tam")).toHaveCount(0);
+  await expect(vt.getByTestId("vi-tri-tam")).toHaveAttribute("data-nguon", "may_chu");
+});
+
+test("TY-2 gói 2: sân / giếng trời chia lớp, đo theo từng sân (engine), dời bếp tự tính lại + trước – sau, Lưu số lớp", async ({ page }) => {
+  await napHoSo(page);
+  await napNha(page);
+  const than: (Than & { khung?: { san?: [number, number][] } })[] = [];
+  await page.route("**/api/phongthuy/vi-tri-vat", async (r) => { than.push(r.request().postDataJSON() as Than); await r.continue(); });
+  await page.goto("/phong-thuy");
+  const vt = page.getByTestId("vi-tri-vat");
+  await vt.scrollIntoViewIfNeeded();
+  await vt.getByTestId("vi-tri-cach-khung").click();
+  await vt.getByTestId("vi-tri-rong").fill("6");
+  await vt.getByTestId("vi-tri-sau").fill("20");
+  const khung = vt.getByTestId("vi-tri-khung");
+  const cham = async (x: number, y: number) => {
+    await khung.evaluate((el) => el.scrollIntoView({ block: "center" }));     // thanh đầu trang dính không che điểm chạm
+    const b = (await khung.boundingBox())!;
+    await page.mouse.click(b.x + b.width * x, b.y + b.height * y);
+  };
+  for (const [loai, x, y] of [["cua_chinh", 0.5, 0.02], ["phong_ngu_chinh", 0.5, 0.88], ["bep", 0.15, 0.55]] as const) {
+    await vt.getByTestId(`vi-tri-dat-${loai}`).click();
+    await cham(x, y);
+    await expect(vt.getByTestId(`vi-tri-hop-${loai}`)).toBeVisible();
+  }
+  // Chế độ sân: chạm hai chỗ → hai dải, nhãn "Lớp 1…3" chỉ để vẽ
+  await vt.getByTestId("vi-tri-che-do-san").click();
+  await expect(vt.getByTestId("vi-tri-che-do-san")).toHaveAttribute("aria-pressed", "true");
+  await cham(0.3, 0.35);
+  await expect(vt.getByTestId("vi-tri-san-1")).toBeVisible();
+  await expect(vt.getByTestId("vi-tri-san-chon")).toContainText("1.2m");
+  await cham(0.3, 0.70);
+  await expect(vt.getByTestId("vi-tri-san-2")).toBeVisible();
+  await expect(vt.getByTestId("vi-tri-lop-ve-3")).toBeVisible();
+  // Bàn phím: dời sân 2 xuống rồi Hoàn tác
+  await vt.getByTestId("vi-tri-san-2").focus();
+  await page.keyboard.press("ArrowDown");
+  await vt.getByTestId("vi-tri-hoan-tac").click();
+
+  await vt.getByTestId("vi-tri-xem").click();
+  const ts = vt.getByTestId("vi-tri-theo-san");
+  await expect(ts).toBeVisible();
+  expect(than[0]!.khung!.san).toHaveLength(2);
+  expect(than[0]!.khung!.san![0]![0]).toBeGreaterThan(0.3);
+  await expect(ts.getByTestId("vi-tri-theo-san-so-lop")).toContainText("3 lớp");
+  await expect(ts.getByTestId("vi-tri-theo-san-lop-chu")).toContainText("lớp 3");
+  await expect(ts.getByTestId("vi-tri-theo-san-cua")).toContainText("phía Nam");
+  await expect(ts.getByTestId("vi-tri-theo-san-chu")).toContainText("phía Bắc");
+  await expect(ts.getByTestId("tam-yeu-lop-1")).toContainText("Diên Niên");
+  await expect(ts.getByTestId("tam-yeu-lop-2")).toContainText("Lục Sát");
+  await expect(ts.getByTestId("tam-yeu-lop-3")).toContainText("Sinh Khí");
+  await expect(vt.getByTestId("vi-tri-san-do-cua")).toHaveCount(1);
+  const sauXem = than.length;
+
+  // Dời bếp sang phải bằng chuột (một lần kéo): không bấm Xem, kết quả tự tính lại đúng MỘT lần sau khi thả tay
+  await vt.getByTestId("vi-tri-dat-bep").click();
+  await expect(vt.getByTestId("vi-tri-che-do-san")).toHaveAttribute("aria-pressed", "false");
+  const hopBep = vt.getByTestId("vi-tri-hop-bep");
+  await hopBep.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  const b0 = (await hopBep.locator("rect").first().boundingBox())!;
+  const bk = (await khung.boundingBox())!;
+  await page.mouse.move(b0.x + b0.width / 2, b0.y + b0.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(b0.x + b0.width / 2 + bk.width * 0.7, b0.y + b0.height / 2, { steps: 8 });
+  await page.waitForTimeout(700);                      // giữ tay lâu hơn thời gian chờ: chưa được gửi
+  expect(than.length).toBe(sauXem);
+  await page.mouse.up();
+  await expect.poll(() => than.length).toBe(sauXem + 1);
+  await expect(vt.getByTestId("vi-tri-ket-qua")).toHaveAttribute("data-cu", "0");
+  const tsMoi = than[than.length - 1]!.tang[0]!.vat.find((v) => v.loai === "bep")!;
+  expect(tsMoi.diem![0]).toBeGreaterThan(0.6);
+  await expect(vt.getByTestId("vi-tri-truoc-sau")).toContainText("Trước: Thuận lợi → Bây giờ: Cân bằng");
+  // Hoàn tác ngay trên dòng trước – sau → bếp về chỗ cũ, tự tính lại
+  await vt.getByTestId("vi-tri-truoc-sau-hoan-tac").click();
+  await expect.poll(() => than.length).toBe(sauXem + 2);
+  await expect(vt.getByTestId("vi-tri-truoc-sau")).toContainText("Bây giờ: Thuận lợi");
+
+  // Lưu → hồ sơ nhà có dải sân + số lớp / dãy nhà chính do engine đếm
+  await expect(vt.getByTestId("vi-tri-luu")).toBeEnabled();
+  await vt.getByTestId("vi-tri-luu").click();
+  const nha = await docNha(page);
+  expect(nha.khung.san).toHaveLength(2);
+  expect(nha.nhieu_lop).toEqual({ so_lop: 3, lop_chu: 3 });
+
+  // 360px: không tràn ngang
+  await page.setViewportSize({ width: 360, height: 740 });
+  await vt.getByTestId("vi-tri-che-do-san").click();
+  await vt.getByTestId("vi-tri-san-1").focus();
+  await page.keyboard.press("Enter");
+  await expect(vt.getByTestId("vi-tri-san-chon")).toBeVisible();
+  const tran = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(tran).toBeLessThanOrEqual(0);
 });
 
 test("SD-1: 360px — sơ đồ và thanh chỉnh phòng không làm trang tràn ngang", async ({ page }) => {

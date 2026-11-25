@@ -5,7 +5,7 @@
 import { useEffect, useState } from "react";
 import { Select } from "@/components/ui/input";
 import { ChipMuc } from "@/components/luan-giai/BaoCaoDoiSong";
-import type { Hop, Muc } from "@/components/luan-giai/kieu";
+import { NHAN_MUC, type Hop, type Muc } from "@/components/luan-giai/kieu";
 import { SoDoNha } from "@/components/huyen-hoc/SoDoNha";
 import { chonCan, nhaGui, tenCan, tenLoaiNha, type CanDaLuu } from "@/lib/ho-so-nha";
 import { useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
@@ -17,7 +17,9 @@ import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
 
 export type SinhSo = { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
 interface ChuongNgan { ma: string; tieu_de: string; muc: Muc | null; nhan_muc: string | null; tom_tat?: string; tran_muc?: unknown;
-  phong?: { ten: string; cung: string; muc: Muc; du_nien: string | null }[] }
+  phong?: { ten: string; cung: string; muc: Muc; du_nien: string | null }[];
+  /** TY-2: Cửa – Chủ – Bếp (Dương Trạch Tam Yếu) — kết luận + tên thế nhà, so hai căn cạnh nhau. */
+  tam_yeu?: { ket_luan: { muc: Muc; loi: string }; the_nha?: { ten: string } } }
 interface BaoCaoNgan { cot_loi: Hop[]; chuong: ChuongNgan[]; da_tinh: { huong_nha: string | null; veto_da_xac_nhan?: { tieu_de: string }[] }; ten_hien?: Record<string, Record<string, string>> }
 
 function CotCan({ c, i, sinh, gocNhin }: { c: CanDaLuu; i: number; sinh: SinhSo; gocNhin: string }) {
@@ -51,6 +53,12 @@ function CotCan({ c, i, sinh, gocNhin }: { c: CanDaLuu; i: number; sinh: SinhSo;
             {bc.chuong.filter((x) => x.muc).map((x) => (
               <li key={x.ma} className="flex items-center justify-between gap-2"><span className="text-fg-muted">{x.tieu_de}</span><ChipMuc muc={x.muc!} nhan={x.nhan_muc ?? undefined} /></li>
             ))}
+            {tp?.tam_yeu && (
+              <li className="flex items-center justify-between gap-2" data-testid="so-can-tam-yeu">
+                <span className="text-fg-muted">{t("sc.tam_yeu")}{tp.tam_yeu.the_nha ? <span className="block text-[11px] text-fg-faint">{tp.tam_yeu.the_nha.ten}</span> : null}</span>
+                <ChipMuc muc={tp.tam_yeu.ket_luan.muc} nhan={en ? undefined : NHAN_MUC[tp.tam_yeu.ket_luan.muc]} />
+              </li>
+            )}
           </ul>
           {(bc.da_tinh.veto_da_xac_nhan?.length ?? 0) > 0 && (
             <p className="mt-1.5 text-xs text-moon">{t("sc.xu_ly_truoc", { ds: bc.da_tinh.veto_da_xac_nhan!.map((v) => v.tieu_de.toLowerCase()).join(", ") })}</p>

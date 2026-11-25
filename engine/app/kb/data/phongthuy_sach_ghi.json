@@ -106,7 +106,11 @@
    "y": "Chỗ cây cỏ không mọc nổi thì sách dặn không làm nhà — đất như vậy thường cằn hoặc thiếu nước.",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "dat",
+    "hoi": "Đất quanh nhà cây cỏ không mọc được"
+   }
   },
   {
    "ma": "doanh_trai_chien_dia_cu",
@@ -132,7 +136,11 @@
    "y": "Không làm nhà ngay giữa đường nước chảy — mưa lớn là chỗ nước dồn về, dễ ngập và xói nền.",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "nuoc",
+    "hoi": "Nhà nằm ngay trên lối nước chảy (khe, lạch, đường thoát nước)"
+   }
   },
   {
    "ma": "song_nui_dam_thang",
@@ -145,7 +153,11 @@
    "y": "Không làm nhà ở chỗ sống núi đâm thẳng xuống — gió lùa mạnh, nước và đất đá trên dốc đổ về.",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "dat",
+    "hoi": "Nhà ở chỗ sống núi, sườn đồi đâm thẳng xuống"
+   }
   },
   {
    "ma": "doi_cong_trai_giam",
@@ -161,7 +173,11 @@
    "ham_y": "Nên chú ý cảm giác yên tâm của cả nhà khi cửa nhìn thẳng sang một nơi nặng nề.",
    "viec": "Trồng một hàng cây hoặc treo rèm ở phía cửa sổ nhìn thẳng sang để che tầm mắt.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Nhà đối diện cổng trại giam"
+   }
   },
   {
    "ma": "cay_huong_ve_nha",
@@ -177,7 +193,11 @@
    "ham_y": "Nên chú ý dáng nghiêng của cây lớn quanh nhà, nhất là cây đã nghiêng hẳn một bên.",
    "viec": "Đi một vòng xem cây nào nghiêng, cành nào khô; tỉa bớt hoặc chống đỡ trước mùa mưa bão.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "dat",
+    "hoi": "Cây lớn quanh nhà ngả nghiêng rõ rệt (về phía nhà hoặc ra ngoài)"
+   }
   },
   {
    "ma": "dat_khuyet_theo_phuong",
@@ -209,7 +229,11 @@
    "ham_y": "Nên chú ý cách lấy sáng, lấy gió khi mảnh đất nông theo chiều nam – bắc.",
    "viec": "Ghi lại giờ nào trong ngày phòng chính có nắng; phòng nào cả ngày không nắng thì dọn đồ che cửa sổ hoặc mở thêm ô thoáng.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "dat",
+    "hoi": "Mảnh đất dài hẹp rõ rệt (dài theo nam – bắc hoặc đông – tây)"
+   }
   },
   {
    "ma": "dat_nhuan_sang",
@@ -225,7 +249,11 @@
    "ham_y": "Nên chú ý độ tươi của đất và cây quanh nhà — cây sống khoẻ là dấu đất và nước ổn.",
    "viec": "Trồng thử vài chậu cây dễ sống quanh nhà; cây nào cũng còi thì xem lại đất, nước và nắng.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "dat",
+    "hoi": "Đất quanh nhà khô cằn, xám xịt"
+   }
   },
   {
    "ma": "trai_thap_phai_cao",
@@ -257,7 +285,11 @@
    "ham_y": "Nên chú ý nhà cũ thấp lọt giữa hai nhà mới cao: dễ thiếu nắng, đọng nước, tường chung phải chịu lực.",
    "viec": "Kiểm tra tường chung, mái và máng nước giáp hai nhà bên; thấy nứt, thấm thì nhờ thợ xem sớm.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Nhà mình cũ, nằm giữa hai nhà mới xây"
+   }
   },
   {
    "ma": "bon_phia_giao_xung",
@@ -321,7 +353,11 @@
    "ham_y": "Nên chú ý vật cứng, màu gắt nằm ngay tầm mắt và lối đi trước cửa.",
    "viec": "Dời tảng đá, trụ bê tông thừa ra khỏi lối cửa, hoặc trồng cây bụi che bớt.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Trước cửa có tảng đá đỏ hoặc trắng dựng đứng"
+   }
   },
   {
    "ma": "dat_sau_nhon_duoi",
@@ -369,7 +405,11 @@
    "ham_y": "Nên chú ý tiếng nước róc rách, tiếng cống, tiếng máy bơm dội vào nhà suốt ngày đêm.",
    "viec": "Tìm nguồn tiếng nước (ống rò, máng xối, cống hở) để sửa, hoặc đóng kín cửa phía ấy khi ngủ.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Trước cửa nghe tiếng nước róc rách, rền rĩ suốt ngày"
+   }
   },
   {
    "ma": "hai_ao_truoc_cua",
@@ -401,7 +441,11 @@
    "ham_y": "Nên chú ý chỗ nước rỉ quanh nhà và việc chăm mắt, đi khám mắt định kỳ.",
    "viec": "Tìm chỗ nước rỉ ở tường, mái, bờ kè để xử lý; ai hay mỏi mắt thì đặt lịch khám mắt.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Trước cửa hoặc sau nhà có chỗ nước rỉ nhỏ giọt"
+   }
   },
   {
    "ma": "nui_tron_bang_truoc_cua",
@@ -414,7 +458,11 @@
    "y": "Trước cửa trông ra ngọn núi, quả đồi tròn bằng thì sách cho là lành — tầm nhìn êm, không có gì chĩa vào nhà.",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Trước cửa trông ra đồi, núi tròn đều"
+   }
   },
   {
    "ma": "ranh_nuoc_chu_bat",
@@ -430,7 +478,11 @@
    "ham_y": "Nên chú ý đường thoát nước quanh nhà: gom về một mối cho dễ kiểm soát, đừng để chảy tản mỗi nơi một ít.",
    "viec": "Sau trận mưa, đi xem nước thoát ra những hướng nào; khơi lại để nước gom về một rãnh chính.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "nuoc",
+    "hoi": "Rãnh nước trước sau nhà chia hai ngả"
+   }
   },
   {
    "ma": "gieng_doi_cua",
@@ -462,7 +514,11 @@
    "ham_y": "Nên chú ý sự cân đối của cửa chính — cánh lệch, tường lệch thì cửa mau xệ và nhìn mất cân.",
    "viec": "Đo lại hai cánh cửa và hai bên tường; cánh nào xệ, lệch thì chỉnh bản lề cho đều.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Hai cánh cửa, hoặc hai mảng tường hai bên cửa, to nhỏ lệch nhau"
+   }
   },
   {
    "ma": "canh_cong_cao_hon_tuong",
@@ -478,7 +534,11 @@
    "ham_y": "Nên chú ý độ vững của cổng khi cánh cao vượt tường rào.",
    "viec": "Kiểm tra bản lề, trụ cổng trước mùa mưa bão; cổng quá cao so với tường thì gia cố trụ.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Cánh cổng cao vượt tường rào hai bên"
+   }
   },
   {
    "ma": "ho_nuoc_o_cua",
@@ -494,7 +554,11 @@
    "ham_y": "Nên chú ý vũng nước đọng ngay lối ra vào.",
    "viec": "Lấp hoặc khơi thông vũng nước trước cửa; làm dốc nhẹ cho nước chảy đi.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Ngay cửa có hố nước đọng"
+   }
   },
   {
    "ma": "cay_lon_chan_cua",
@@ -574,7 +638,11 @@
    "ham_y": "Nên chú ý đường nước thải, nước mưa chảy thẳng qua lối cửa chính.",
    "viec": "Dẫn rãnh thoát nước vòng sang bên hông thay vì chảy qua ngưỡng cửa; đặt một khoản để dành tự động mỗi tháng.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Nước chảy ra ngay dưới ngưỡng cửa"
+   }
   },
   {
    "ma": "cua_sat_gieng",
@@ -622,7 +690,11 @@
    "ham_y": "Nên chú ý dòng nước mưa, mương rãnh chảy thẳng về phía cửa.",
    "viec": "Đắp gờ hoặc khơi rãnh cho nước rẽ sang bên trước khi tới cửa; mỗi ngày dành mười phút nói chuyện bình tĩnh với con.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Mương, rãnh nước chảy thẳng vào cửa"
+   }
   },
   {
    "ma": "cua_kho_huong_cua",
@@ -638,7 +710,11 @@
    "ham_y": "Nên chú ý chuột bọ, bụi mốc từ kho chứa bay thẳng vào nhà; ốm thì đi khám.",
    "viec": "Xoay cửa kho sang hướng khác hoặc luôn đóng kín; dọn kho mỗi mùa. Ho, dị ứng kéo dài thì đi khám.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Cửa nhà kho, kho hàng mở thẳng về phía cửa nhà"
+   }
   },
   {
    "ma": "nha_doc_truoc_cua",
@@ -654,7 +730,11 @@
    "ham_y": "Nên chú ý tầm nhìn trước cửa bị dãy nhà dọc chắn và chĩa vào.",
    "viec": "Trồng hàng cây hoặc làm giàn leo che đầu dãy nhà ấy; lập một khoản tiết kiệm trích tự động đầu tháng.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Một dãy nhà nằm dọc, đầu hồi chĩa vào trước cửa"
+   }
   },
   {
    "ma": "lieu_ru_truoc_cua",
@@ -702,7 +782,11 @@
    "ham_y": "Nên chú ý an toàn lửa, điện trong nhà.",
    "viec": "Kiểm tra ổ điện, dây điện cũ và van bình ga; để một bình chữa cháy nhỏ gần bếp.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "nuoc",
+    "hoi": "Phía nam nhà có hố trũng"
+   }
   },
   {
    "ma": "ao_ho_dong_nam",
@@ -718,7 +802,11 @@
    "ham_y": "Nên chú ý giấy tờ nhà đất, ranh giới với hàng xóm.",
    "viec": "Soát lại sổ đỏ, mốc ranh giới và các thoả thuận miệng; việc quan trọng thì ghi thành văn bản, cần thì hỏi luật sư.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "nuoc",
+    "hoi": "Phía đông nam nhà có ao, hố trũng"
+   }
   },
   {
    "ma": "nui_nghieng_nuoc_quay",
@@ -734,7 +822,11 @@
    "ham_y": "Nên chú ý thế đất dốc tuột, không có chỗ nào ôm lấy nhà.",
    "viec": "Trồng hàng cây, đắp bờ ở phía đất dốc tuột để giữ đất, giữ nước; đặt một khoản để dành tự động.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "dat",
+    "hoi": "Đồi núi quanh nhà nghiêng lệch, dòng nước quay lưng đi"
+   }
   },
   {
    "ma": "nui_tron_chau_ve",
@@ -747,7 +839,11 @@
    "y": "Các ngọn núi tròn đầy, sáng sủa đều hướng về che chở cho nhà: sách xem là thế đất của nhà giàu bền.",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "dat",
+    "hoi": "Đồi núi tròn đầy che phía sau và hai bên nhà"
+   }
   },
   {
    "ma": "nui_but_truoc_mat",
@@ -760,7 +856,11 @@
    "y": "Ngay trước mặt nhà nổi lên một ngọn núi thanh tú như cây bút: sách xem là thế đất của nhà có người học hành thành đạt.",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Trước mặt có ngọn núi thanh, nhọn như ngòi bút"
+   }
   },
   {
    "ma": "nui_lop_cao_lop_thap",
@@ -776,7 +876,11 @@
    "ham_y": "Nên chú ý thế đất, dãy nhà quanh mình đang thấp dần, trống dần về một phía.",
    "viec": "Phía nào trống trải, đất thấp dần thì trồng một hàng cây cao làm chỗ che gió.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "dat",
+    "hoi": "Đồi núi quanh nhà xếp nhiều lớp cao thấp"
+   }
   },
   {
    "ma": "truoc_ao_sau_ao",
@@ -840,7 +944,11 @@
    "ham_y": "Nên chú ý tìm nguồn thu mới thay vì chỉ giữ cái đang có; nước quanh nhà cũng đừng để tù.",
    "viec": "Thay nước bể, khơi rãnh đọng quanh nhà; viết ra một nguồn thu nhỏ có thể thử trong tháng này.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "nuoc",
+    "hoi": "Quanh nhà không có dòng nước sống chảy tới"
+   }
   },
   {
    "ma": "san_truoc_doc_tuot",
@@ -1046,7 +1154,11 @@
    "y": "Hai bên nhà có mương nước dài chảy đều thì sách khen là về lâu dài con cháu đủ phúc lộc, sáng dạ hơn đời trước.",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "nuoc",
+    "hoi": "Hai bên nhà có mương nước dài"
+   }
   },
   {
    "ma": "ao_phia_tay",
@@ -1062,7 +1174,11 @@
    "ham_y": "Nên chú ý nắng chiều hắt từ mặt nước phía tây và hơi ẩm vào nhà.",
    "viec": "Trồng hàng cây giữa ao và nhà ở phía tây; che rèm buổi chiều cho phòng phía ấy.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "nuoc",
+    "hoi": "Phía tây nhà có ao"
+   }
   },
   {
    "ma": "nui_lon_phia_dong",
@@ -1078,7 +1194,11 @@
    "ham_y": "Nên chú ý nắng buổi sáng khi phía đông nhà bị núi hay nhà cao che kín.",
    "viec": "Xem buổi sáng phòng nào còn nắng thì dùng làm chỗ ăn sáng, chỗ ngồi chung của cả nhà.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "dat",
+    "hoi": "Phía đông nhà có núi lớn (hoặc khối nhà rất cao) che kín"
+   }
   },
   {
    "ma": "cay_hai_ben_truoc_nha",
@@ -1136,7 +1256,11 @@
    "y": "Con đường chạy ngang đông – tây trước cửa thì cứ để người qua lại, đừng rào chắn cắt lối; sách xem đường chạy ngang trước cửa, không đâm vào nhà, là yên ổn.",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Đường chạy ngang trước cửa, không đâm thẳng vào nhà"
+   }
   },
   {
    "ma": "nuoc_dai_ngoc",
@@ -1181,7 +1305,11 @@
    "ham_y": "Nên chú ý bờ ao, bờ mương có cây rủ che khuất mép nước, trẻ dễ lại gần.",
    "viec": "Dựng rào quanh bờ nước gần nhà và tỉa cây che khuất mép bờ.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "nuoc",
+    "hoi": "Tre, cây ngả rủ xuống mép nước gần nhà"
+   }
   },
   {
    "ma": "cay_rong_ruot_truoc_cua",
@@ -1213,7 +1341,11 @@
    "ham_y": "Nên chú ý bụi và lối đi gồ ghề trước cửa, nhất là khi nhà có người mang thai; khám thai đều theo lịch.",
    "viec": "Dọn hoặc phủ bạt đống đất, vật liệu trước cửa; người mang thai đi khám đúng hẹn.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Trước mặt nhà có đống đất mới đắp"
+   }
   },
   {
    "ma": "duong_uon_truoc_mat",
@@ -1226,7 +1358,11 @@
    "y": "Trước mặt nhà có con đường uốn khúc quanh co như nét chữ thì sách khen là nhà nhiều của, nhiều thóc — đường cong thì xe đi chậm, không đâm thẳng vào nhà.",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Con đường trước mặt nhà uốn khúc"
+   }
   },
   {
    "ma": "nha_duoi_tan_cay_lon",
@@ -1258,7 +1394,11 @@
    "ham_y": "Nên chú ý lối cửa gồ ghề, thiếu sáng làm người nhà hay giật mình.",
    "viec": "Nhặt dọn đá vụn, lát phẳng lối cửa và lắp một bóng đèn ở đó.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Đá vụn lổn nhổn ngay lối vào cửa"
+   }
   },
   {
    "ma": "nha_hoang_truoc_mat",
@@ -1274,7 +1414,11 @@
    "ham_y": "Nên chú ý ranh giới, an ninh với căn nhà bỏ hoang sát bên.",
    "viec": "Chụp ảnh hiện trạng ranh giới với nhà hoang; có việc chung thì báo tổ dân phố bằng văn bản, cần thì hỏi luật sư.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Ngay trước mặt là căn nhà hoang, đổ nát"
+   }
   },
   {
    "ma": "cua_la_cho_thong_khi",
@@ -1377,7 +1521,11 @@
    "ham_y": "Nên chú ý gió lùa, tiếng ồn và sự kín đáo khi hai bên nhà đều là hẻm hẹp; mất ngủ, bồn chồn kéo dài thì đi khám.",
    "viec": "Đóng kín cửa sổ phía hẻm ban đêm, treo rèm dày; ngủ kém nhiều tuần liền thì đi khám.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Hai bên nhà là hai con hẻm hẹp chạy dọc"
+   }
   },
   {
    "ma": "nuoc_hai_ben_gom_mot",
@@ -1390,7 +1538,11 @@
    "y": "Nước hai bên sườn nhà không nên thoát thành hai ngả riêng; nên gom lại chảy ngang phía trước rồi xuôi về một bên mà đi.",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "nuoc",
+    "hoi": "Nước hai bên nhà gom về một lối thoát"
+   }
   },
   {
    "ma": "khong_mo_cua_ben_phai",
@@ -1406,7 +1558,11 @@
    "ham_y": "Nên chú ý gió lùa từ cửa phụ bên phải vào chỗ nghỉ, nhất là phòng của người mới sinh; sau sinh nên khám lại đúng hẹn.",
    "viec": "Đóng cửa phụ bên phải khi không dùng, kê giường tránh luồng gió từ cửa ấy; người mới sinh đi khám lại đúng hẹn.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Có cửa mở ở đầu bên phải nhà (nhìn từ trong ra)"
+   }
   },
   {
    "ma": "coi_gia_cho_rung",
@@ -1464,7 +1620,11 @@
    "y": "Làm nhà xưa nay có thứ tự: từ trong ra ngoài, bắt đầu từ gian nhà chính.",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "xay_sua",
+    "hoi": "Đang định xây nhà mới"
+   }
   },
   {
    "ma": "lam_hai_day_ben_truoc",
@@ -1480,7 +1640,11 @@
    "ham_y": "Nên chú ý phần chung của cả nhà phải có trước phần riêng của từng người.",
    "viec": "Khi sửa nhà, làm phòng sinh hoạt chung trước; chuyện chia phần giữa anh em thì ghi rõ thành văn bản.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "xay_sua",
+    "hoi": "Định làm các dãy nhà phía trước trước khi làm nhà chính"
+   }
   },
   {
    "ma": "san_trong_cung_la_khoang_thoang",
@@ -1506,7 +1670,11 @@
    "y": "Bếp nấu nên đặt ở nửa bên trái nhà, không nên đặt bên phải (nhìn từ trong nhà ra).",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Bếp nấu ở nửa bên trái nhà (nhìn từ trong ra)"
+   }
   },
   {
    "ma": "xay_tuong_rao_truoc",
@@ -1522,7 +1690,11 @@
    "ham_y": "Nên chú ý thứ tự thi công: việc bao quanh làm sau cùng.",
    "viec": "Lập bảng thứ tự các hạng mục trước khi khởi công; tường rào và cổng để cuối.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "xay_sua",
+    "hoi": "Định xây tường rào trước khi làm nhà"
+   }
   },
   {
    "ma": "nha_nho_sau_nha",
@@ -1538,7 +1710,11 @@
    "ham_y": "Nên chú ý căn nhà phụ phía sau thường thấp, bí, thiếu sáng — không hợp làm chỗ ngủ lâu dài.",
    "viec": "Căn phụ sau nhà nếu có người ở thì mở thêm cửa sổ, lắp quạt thông gió và kiểm tra chỗ thấm dột.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Có căn nhà nhỏ dựng sát phía sau nhà"
+   }
   },
   {
    "ma": "nha_chu_dinh",
@@ -1567,7 +1743,11 @@
    "y": "Dựng nhà mà dãy trước thấp, dãy sau cao thì sách khen là phát tài lộc, hưng vượng — dãy sau cao hơn thì không bị dãy trước che nắng gió.",
    "nhom": "A",
    "chu_de": "nha_cua",
-   "nguon": "duong_trach_thap_thu"
+   "nguon": "duong_trach_thap_thu",
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Nhà nhiều dãy: dãy trước thấp, dãy sau cao"
+   }
   },
   {
    "ma": "chai_noi_sau_nha",
@@ -1583,7 +1763,11 @@
    "ham_y": "Nên chú ý chái cơi nới phía sau: mối nối mái hay dột, kết cấu tạm dễ sập.",
    "viec": "Kiểm tra mối nối giữa mái chính và mái chái, cột chống của chái; thấy võng, nứt thì gia cố ngay.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Có mái chái cơi nối dính liền phía sau nhà"
+   }
   },
   {
    "ma": "kho_sau_nha",
@@ -1599,7 +1783,11 @@
    "ham_y": "Nên chú ý kho chứa phía sau chắn mất gió và lối thoát phía sau nhà.",
    "viec": "Dọn bớt đồ trong kho sau nhà, chừa một lối đi thông ra phía sau.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Có nhà kho phía sau nhà"
+   }
   },
   {
    "ma": "do_nua_nha",
@@ -1615,7 +1803,11 @@
    "ham_y": "Nên chú ý phần nhà dỡ dở, để hở lâu ngày.",
    "viec": "Phần nhà đã dỡ thì che chắn, chống đỡ ngay; lên lịch làm cho xong, đừng để dở qua mùa mưa.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "xay_sua",
+    "hoi": "Đang ở mà định dỡ nửa bên hoặc khúc giữa nhà"
+   }
   },
   {
    "ma": "nuoc_mai_xoi_cua",
@@ -1631,7 +1823,11 @@
    "ham_y": "Nên chú ý máng xối, góc mái đổ nước thẳng vào cửa; tai nghe kém thì đi khám.",
    "viec": "Lắp máng và ống dẫn để nước mái không xối vào cửa; ai nghe kém dần thì đi khám tai.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "truoc_cua",
+    "hoi": "Nước từ góc mái xối thẳng vào cửa"
+   }
   },
   {
    "ma": "loi_cong_chia_thang",
@@ -1663,7 +1859,11 @@
    "ham_y": "Nên chú ý an ninh ở cổng sau, nơi khuất mắt.",
    "viec": "Lắp khoá tốt và đèn cảm ứng ở cổng sau; tối nào cũng kiểm tra đã khoá chưa.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Có cổng xe mở ở phía sau nhà"
+   }
   },
   {
    "ma": "gieng_troi_dong_nuoc",
@@ -1695,7 +1895,11 @@
    "ham_y": "Nên chú ý kết cấu khi xây phòng, chòi phía trên cổng và giấy phép xây dựng.",
    "viec": "Kiểm tra giấy phép và độ chịu lực của trụ cổng trước khi cơi nới phía trên; cần thì hỏi kỹ sư, luật sư.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Có lầu, phòng dựng trên cổng nhà"
+   }
   },
   {
    "ma": "goc_nha_lan_duong",
@@ -1711,7 +1915,11 @@
    "ham_y": "Nên chú ý mái hiên, bậc thềm, góc tường lấn ra phần đường chung.",
    "viec": "Đo lại ranh đất theo sổ; phần nào lấn ra lối chung thì thu vào trước khi bị nhắc.",
    "nguon": "duong_trach_thap_thu",
-   "sat": true
+   "sat": true,
+   "quan_sat": {
+    "nhom": "quanh_nha",
+    "hoi": "Góc nhà lấn ra đường"
+   }
   },
   {
    "ma": "do_tre_phoi_dem",
@@ -1875,5 +2083,23 @@
    "viec": "Xem bếp nhà mình đang ở phía nào trong khảo sát nhà; nếu bếp chiếm phía tốt, ưu tiên kê giường, bàn làm việc về phía tốt còn lại.",
    "sat": true
   }
- ]
+ ],
+ "quan_sat_nhom": {
+  "_ghi_chu": "TY-2 (2026-11-25): điều Dương Trạch Thập Thư không gắn với dấu hiệu trong nhà → câu hỏi quan sát quanh nhà; người dùng tích thì mới hiện câu sách (khuôn SX-C). Không đổi mức nào.",
+  "truoc_cua": "Trước cửa nhà",
+  "quanh_nha": "Hai bên, phía sau và cổng",
+  "nuoc": "Nước quanh nhà",
+  "dat": "Đất, cây và đồi núi",
+  "xay_sua": "Khi xây, sửa nhà"
+ },
+ "quan_sat_hop": {
+  "diem_manh": {
+   "tieu_de": "Quanh nhà có điều sách xưa khen",
+   "noi_dung": "Bạn đã ghi nhận quanh nhà: {ds}. Dương Trạch Thập Thư xếp những điều này vào phía lành; giữ cho chúng sạch, thoáng như hiện có."
+  },
+  "luu_y": {
+   "tieu_de": "Quanh nhà có điều sách xưa dặn để ý",
+   "noi_dung": "Bạn đã ghi nhận quanh nhà: {ds}. Dương Trạch Thập Thư dặn để ý những điều này; phần dưới nói rõ sách ghi gì và việc nhỏ có thể làm."
+  }
+ }
 }

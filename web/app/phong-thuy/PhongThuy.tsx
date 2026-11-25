@@ -16,6 +16,7 @@ import { DauMang, XinThemDuLieu } from "@/components/huyen-hoc/KhungMang";
 import { ChipPhai, DongPhai, KhungPhai, type MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { LaBan } from "@/components/huyen-hoc/LaBan";
 import { TamYeuCuaChuBep } from "@/components/phong-thuy/TamYeuCuaChuBep";
+import { QuanSatQuanhNha } from "@/components/phong-thuy/QuanSatQuanhNha";
 import { DoViTriVat } from "@/components/phong-thuy/DoViTriVat";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { usePost } from "@/lib/goi-api";
@@ -149,8 +150,9 @@ export function PhongThuy() {
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24">
         {/* Căn hộ đo hướng ở ban công: hướng vừa đo không phải phía cửa căn hộ → không gợi ý cửa từ đó. */}
         <TamYeuCuaChuBep huongCuaGoiY={hoSoNha?.loai_nha === "can_ho" || hoSoNha?.theo === "ban_cong" ? null : huongChot}
-          namSinh={hoSo?.nam ?? null} />
+          namSinh={hoSo?.nam ?? null} gioiTinh={hoSo?.gioi_tinh ?? null} />
       </div>
+      {!en && <div className="mx-auto mt-8 max-w-3xl scroll-mt-24"><QuanSatQuanhNha namSinh={hoSo?.nam ?? null} /></div>}
       {mq?.sach_ghi && (
         <div className="mx-auto mt-8 max-w-3xl">
           <SachXuaGhi khoi={mq.sach_ghi} moDun="phongthuy" tieuDe={`Sách xưa dặn gì cho người cung ${mq.quai}`}

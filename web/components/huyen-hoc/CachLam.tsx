@@ -7,7 +7,7 @@ import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 import { useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 
-export type ViecHuongDan = "do_huong" | "do_huong_can_ho" | "ve_mat_bang" | "dat_phong" | "ban_do" | "ban_do_may_tinh";
+export type ViecHuongDan = "do_huong" | "do_huong_can_ho" | "dat_phong" | "ban_do" | "ban_do_may_tinh";
 
 const NET = { fill: "none", stroke: "currentColor", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
 
@@ -19,8 +19,6 @@ function Hinh({ ma }: { ma: string }) {
     case "dien_thoai": return <svg viewBox="0 0 48 48" aria-hidden><rect x="10" y="20" width="28" height="14" rx="3" {...NET} /><path d="M24 20v-8M20 12h8" {...NET} /><circle cx="24" cy="27" r="2" fill="currentColor" /></svg>;
     case "ban_cong": return <svg viewBox="0 0 48 48" aria-hidden><path d="M6 40h36M10 40V22h28v18M14 22v-8h20v8" {...NET} /><path d="M18 30h12" {...NET} /></svg>;
     case "ban_do": return <svg viewBox="0 0 48 48" aria-hidden><path d="M8 12l10-4 12 4 10-4v28l-10 4-12-4-10 4z" {...NET} /><path d="M18 8v28M30 12v28" {...NET} /><circle cx="24" cy="22" r="3" fill="currentColor" /></svg>;
-    case "luoi": return <svg viewBox="0 0 48 48" aria-hidden><rect x="8" y="8" width="32" height="32" rx="2" {...NET} /><path d="M8 19h32M8 29h32M19 8v32M29 8v32" {...NET} /><rect x="19" y="19" width="10" height="10" fill="currentColor" fillOpacity=".35" /></svg>;
-    case "to": return <svg viewBox="0 0 48 48" aria-hidden><rect x="8" y="8" width="32" height="32" rx="2" {...NET} /><path d="M8 19h32M8 29h32M19 8v32M29 8v32" {...NET} /><rect x="8" y="8" width="21" height="21" fill="currentColor" fillOpacity=".3" /><rect x="8" y="29" width="32" height="11" fill="currentColor" fillOpacity=".3" /></svg>;
     case "phong": return <svg viewBox="0 0 48 48" aria-hidden><rect x="8" y="8" width="32" height="32" rx="2" {...NET} /><path d="M8 19h32M8 29h32M19 8v32M29 8v32" {...NET} /><path d="M12 16h4M31 36h6M22 26h4" {...NET} /></svg>;
     case "tam": return <svg viewBox="0 0 48 48" aria-hidden><rect x="8" y="10" width="32" height="28" rx="2" {...NET} /><circle cx="24" cy="24" r="3" fill="currentColor" /><path d="M24 14v6M24 28v6M14 24h6M28 24h6" {...NET} /></svg>;
     case "mat": return <svg viewBox="0 0 48 48" aria-hidden><path d="M6 24s7-10 18-10 18 10 18 10-7 10-18 10S6 24 6 24z" {...NET} /><circle cx="24" cy="24" r="4" {...NET} /></svg>;
@@ -33,7 +31,6 @@ function Hinh({ ma }: { ma: string }) {
 const BUOC: Record<ViecHuongDan, { hinh: string[]; luu_y?: boolean }> = {
   do_huong: { hinh: ["cua", "lung", "dien_thoai"], luu_y: true },
   do_huong_can_ho: { hinh: ["ban_cong", "dien_thoai", "ban_do"], luu_y: true },
-  ve_mat_bang: { hinh: ["luoi", "to", "phong"] },
   dat_phong: { hinh: ["tam", "phong", "danh_dau"] },
   ban_do: { hinh: ["tam", "ban_do", "mat"], luu_y: true },
   ban_do_may_tinh: { hinh: ["ban_do", "tam", "mat"], luu_y: true },

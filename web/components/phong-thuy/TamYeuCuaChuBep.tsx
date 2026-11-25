@@ -9,7 +9,9 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Compass, Flame, Home } from "lucide-react";
 import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 import { LUOI_9 } from "@/components/huyen-hoc/SoDoNha";
-import { SachXuaGhi, type KhoiSachGhi } from "@/components/huyen-hoc/SachXuaGhi";
+import { SachXuaGhi, type KhoiSachGhi, type MucSachGhi } from "@/components/huyen-hoc/SachXuaGhi";
+import { DoHinhTamYeu } from "@/components/phong-thuy/DoHinhTamYeu";
+import { KetQuaNhieuLop, NhapNhieuLop, type LuaChonLop, type NhieuLopRes } from "@/components/phong-thuy/NhaNhieuLop";
 import { NHAN_MUC, type Muc } from "@/components/luan-giai/kieu";
 import { ghi } from "@/lib/do-luong";
 import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
@@ -27,21 +29,34 @@ const KHOA_VI_TRI: Record<Cho, "cua_chinh" | "phong_ngu_chinh" | "bep"> = { cua:
 const BIEU_TUONG = { cua: Compass, chu: Home, bep: Flame } as const;
 
 interface Cap { cap: string; ten: string; tu: string; den: string; du_nien: string; muc: Muc; loi: string }
-interface GoiYBep { quai: string; huong: string; du_nien_cua: string; du_nien_chu: string | null; loai: "hop" | "tam" | "tranh"; nhan: string }
+interface GoiYBep {
+  quai: string; huong: string; du_nien_cua: string; du_nien_chu: string | null; loai: "hop" | "tam" | "tranh"; nhan: string;
+  /** TY-2: nhãn của chính sách cho thế nhà này (chỉ khi có phòng chính). */
+  sach?: "hop" | "tranh"; sach_nhan?: string;
+}
 export interface TamYeuRes {
+  huong?: { cua: string; chu: string | null; bep: string | null };
+  /** TY-2 (chỉ bản Việt): tên thế nhà theo sách, phía đặt bếp ra thế "ba tốt". */
+  the_nha?: { du_nien: string; ten: string; tuong: string | null; ba_tot: string[] };
+  /** TY-2: ba chỗ đặt bếp theo điều nhà đang cần (tính từ cửa). */
+  bep_dieu_can?: { tieu_de: string; ds: { du_nien: string; quai: string; huong: string; viec: string }[] };
   cap: Cap[];
   ket_luan: { muc: Muc; loi: string } | null;
   bep_goi_y: GoiYBep[];
   viec: { chi_phi: "0" | "co"; lam: string }[];
   can_cu: string[];
   sach_ghi: KhoiSachGhi | null;
+  /** Gói 1: tối đa 3 điều sách đáng xem trước (engine chọn — nhóm B trước, không nhóm C). */
+  sach_noi_bat?: MucSachGhi[];
   luu_y_tham_khao: string;
   nhom_c_an?: { so: number; loi: string };
+  /** TY-2 đợt 3: nhà nhiều lớp (chỉ khi gửi `so_lop` và có phòng chính). */
+  nhieu_lop?: NhieuLopRes;
 }
 
 const MUC_LOAI_BEP: Record<GoiYBep["loai"], Muc> = { hop: "thuan", tam: "can_bang", tranh: "can_chu_dong" };
 
-export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: string | null; namSinh?: number | null }) {
+export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh, gioiTinh }: { huongCuaGoiY?: string | null; namSinh?: number | null; gioiTinh?: "nam" | "nu" | null }) {
   const { c, en, huong: tenHuong } = useChuPT();
   const hoSoNha = useHoSoNha();
   const [vt, setVt] = useState<Record<Cho, string | null>>({ cua: null, chu: null, bep: null });
@@ -52,6 +67,7 @@ export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: stri
   const [dangTai, setDangTai] = useState(false);
   const [loi, setLoi] = useState(false);
   const [daLuu, setDaLuu] = useState(false);
+  const [lop, setLop] = useState<LuaChonLop | null>(null);
   const daDien = useRef(false);
 
   // Điền sẵn một lần từ hồ sơ nhà trên máy (vị trí ba chỗ đã khảo sát).
@@ -61,6 +77,7 @@ export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: stri
     const v = hoSoNha.bo_cuc?.vi_tri as Record<string, string | undefined> | undefined;
     const lay = (k: string) => (v?.[k] && QUAI_CUA_HUONG[v[k]!] ? v[k]! : null);
     const moi = { cua: lay("cua_chinh"), chu: lay("phong_ngu_chinh"), bep: lay("bep") };
+    if (hoSoNha.nhieu_lop) setLop(hoSoNha.nhieu_lop);
     if (moi.cua) {
       setVt(moi);
       setTuHoSo(true);
@@ -75,6 +92,11 @@ export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: stri
     setDang((d) => (d === "cua" ? "chu" : d));
   }, [huongCuaGoiY]);
 
+  const vtHoSo = hoSoNha?.bo_cuc?.vi_tri as Record<string, string | undefined> | undefined;
+  const viTriPhu = {
+    ve_sinh: vtHoSo?.ve_sinh ? QUAI_CUA_HUONG[vtHoSo.ve_sinh] : undefined,
+    ban_tho: vtHoSo?.ban_tho ? QUAI_CUA_HUONG[vtHoSo.ban_tho] : undefined,
+  };
   useEffect(() => {
     if (!vt.cua) { setKq(null); return; }
     let huy = false;
@@ -85,13 +107,22 @@ export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: stri
     if (vt.bep) q.set("bep", QUAI_CUA_HUONG[vt.bep]!);
     if (namSinh) q.set("nam_sinh", String(namSinh));
     else if (du18) q.set("du_18", "1");
+    // TY-2: mệnh người chủ (engine tính từ năm sinh + giới tính) và WC, bàn thờ trong hồ sơ nhà → điều sách đúng với nhà này.
+    if (namSinh && gioiTinh) q.set("gioi_tinh", gioiTinh);
+    if (viTriPhu.ve_sinh) q.set("ve_sinh", viTriPhu.ve_sinh);
+    if (viTriPhu.ban_tho) q.set("ban_tho", viTriPhu.ban_tho);
+    // TY-2 đợt 3: nhà nhiều lớp — engine đếm sao theo lớp (cần phòng chính).
+    if (lop && vt.chu) {
+      q.set("so_lop", String(lop.so_lop));
+      if (lop.lop_chu) q.set("lop_chu", String(lop.lop_chu));
+    }
     fetch(urlTheoNgonNgu(`/api/phongthuy/tam-yeu/so-do?${q.toString()}`))
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error("loi"))))
       .then((d: TamYeuRes) => { if (!huy) setKq(d); })
       .catch(() => { if (!huy) setLoi(true); })
       .finally(() => { if (!huy) setDangTai(false); });
     return () => { huy = true; };
-  }, [vt.cua, vt.chu, vt.bep, namSinh, du18]);
+  }, [vt.cua, vt.chu, vt.bep, namSinh, du18, gioiTinh, viTriPhu.ve_sinh, viTriPhu.ban_tho, lop]);
 
   const dat = (o: string) => {
     if (!QUAI_CUA_HUONG[o]) return;
@@ -112,7 +143,8 @@ export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: stri
     const moi: Record<string, string> = {};
     for (const k of THU_TU) if (vt[k]) moi[KHOA_VI_TRI[k]] = vt[k]!;
     try {
-      luuHoSoNha({ bo_cuc: { ...(hoSoNha?.bo_cuc ?? {}), vi_tri: { ...(hoSoNha?.bo_cuc?.vi_tri ?? {}), ...moi } } } as Parameters<typeof luuHoSoNha>[0]);
+      luuHoSoNha({ bo_cuc: { ...(hoSoNha?.bo_cuc ?? {}), vi_tri: { ...(hoSoNha?.bo_cuc?.vi_tri ?? {}), ...moi } },
+        nhieu_lop: lop ?? undefined } as Parameters<typeof luuHoSoNha>[0]);
       setDaLuu(true);
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "tam_yeu_luu" });
     } catch { /* chế độ riêng tư */ }
@@ -171,12 +203,17 @@ export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: stri
             })}
           </div>
           {tuHoSo && <p className="mt-2 text-[11px] text-fg-faint">{c("ty.tu_ho_so")}</p>}
+          {vt.chu && <NhapNhieuLop gia={lop} onDoi={(g) => {
+            setLop(g); setDaLuu(false);
+            if (g) ghi("chart_interacted", { mo_dun: "phongthuy", kind: "tam_yeu_nhieu_lop", so_lop: g.so_lop, co_lop_chu: Boolean(g.lop_chu) });
+          }} />}
         </div>
 
         <div className="space-y-3" aria-live="polite">
           {dangTai && !kq && <p className="text-sm text-fg-muted">{c("ty.dang_tai")}</p>}
           {loi && <p className="text-sm text-fg-muted">{c("ty.loi")}</p>}
 
+          {kq?.nhieu_lop && <KetQuaNhieuLop nl={kq.nhieu_lop} />}
           {kq && <KetQuaTamYeu kq={kq} bep={vt.bep} onChonBep={vt.cua ? (h) => { setDang("bep"); setVt((cu) => ({ ...cu, bep: h })); setDaLuu(false); } : undefined} />}
 
           {vt.cua && (vt.chu || vt.bep) && (
@@ -199,10 +236,20 @@ export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh }: { huongCuaGoiY?: stri
 
 /** Phần kết quả Cửa – Chủ – Bếp (dùng chung cho tra nhanh trên sơ đồ và "Đứng giữa nhà, chĩa điện thoại"). Chỉ vẽ engine trả. */
 export function KetQuaTamYeu({ kq, bep, onChonBep }: { kq: TamYeuRes; bep?: string | null; onChonBep?: (huong: string) => void }) {
-  const { c, en, huong: tenHuong } = useChuPT();
+  const { c, en, huong: tenHuong, duNien } = useChuPT();
   const nhanMuc = (m: Muc) => (en ? c(m === "can_chu_dong" ? "sd.luu_y" : `sd.${m}`) : NHAN_MUC[m]);
   return (
     <>
+            {kq.the_nha && (
+              <div className="rounded-xl border border-gold/30 bg-gold/5 p-3 text-sm" data-testid="tam-yeu-the-nha">
+                <p className="text-xs uppercase tracking-wide text-gold">{c("ty.the_nha")}</p>
+                <p className="mt-1 font-medium text-fg">{kq.the_nha.ten}</p>
+                {kq.the_nha.tuong && <p className="mt-0.5 text-fg-muted">{kq.the_nha.tuong}</p>}
+                {kq.the_nha.ba_tot.length > 0 && <p className="mt-1 text-fg-muted">{c("ty.ba_tot", { ds: kq.the_nha.ba_tot.map((q) => tenHuong(kq.bep_goi_y.find((g) => g.quai === q)?.huong)).join(", ") })}</p>}
+              </div>
+            )}
+            {kq.huong && kq.cap.length > 0 && <DoHinhTamYeu huong={kq.huong} cap={kq.cap} />}
+
             {kq.ket_luan && (
               <div data-testid="tam-yeu-ket-luan" data-muc={kq.ket_luan.muc} className="chip-muc rounded-xl border p-4">
                 <p className="text-xs uppercase tracking-wide opacity-80">{c("ty.ket_luan")} · {nhanMuc(kq.ket_luan.muc)}</p>
@@ -246,10 +293,21 @@ export function KetQuaTamYeu({ kq, bep, onChonBep }: { kq: TamYeuRes; bep?: stri
                     <button key={g.quai} type="button" data-muc={MUC_LOAI_BEP[g.loai]} data-testid={`tam-yeu-bep-${g.quai}`}
                       onClick={() => onChonBep(g.huong)}
                       className={cn("chip-muc rounded-full border px-2.5 py-1 text-xs", bep === g.huong && "ring-1 ring-gold")}>
-                      {tenHuong(g.huong)} · {g.nhan}{bep === g.huong ? ` (${c("ty.bep_dang")})` : ""}
+                      {tenHuong(g.huong)} · {g.nhan}{g.sach_nhan ? ` · ${g.sach_nhan}` : ""}{bep === g.huong ? ` (${c("ty.bep_dang")})` : ""}
                     </button>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {kq.bep_dieu_can && kq.bep_dieu_can.ds.length > 0 && (
+              <div className="text-sm" data-testid="tam-yeu-dieu-can">
+                <p className="font-medium text-fg">{kq.bep_dieu_can.tieu_de}</p>
+                <ul className="mt-1 space-y-1 text-fg-muted">
+                  {kq.bep_dieu_can.ds.map((x) => (
+                    <li key={x.du_nien} className="flex flex-wrap gap-x-2"><span>{x.viec}</span><span className="text-fg">→ {c("ty.bep")} {tenHuong(x.huong).toLowerCase()} ({duNien(x.du_nien)})</span></li>
+                  ))}
+                </ul>
               </div>
             )}
 
@@ -270,6 +328,20 @@ export function SachTamYeu({ kq, coNamSinh, du18, onDu18 }: { kq: TamYeuRes; coN
     <>
         {!en && (kq.sach_ghi || kq.nhom_c_an || du18) && (
           <div className="mt-5 space-y-2" data-testid="tam-yeu-sach">
+            {kq.sach_noi_bat && kq.sach_noi_bat.length > 0 && (
+              <div className="rounded-xl border border-gold/40 bg-gold/5 p-4" data-testid="tam-yeu-sach-noi-bat">
+                <p className="text-xs uppercase tracking-wide text-gold">{c("ty.noi_bat")}</p>
+                <ol className="mt-2 space-y-2 text-sm">
+                  {kq.sach_noi_bat.map((m, i) => (
+                    <li key={i}>
+                      <p className="text-fg">{m.loi}</p>
+                      {m.viec && <p className="mt-0.5 text-fg-muted">{c("ty.viec_nho")} {m.viec}</p>}
+                      <p className="mt-0.5 text-[11px] text-fg-faint">{m.ve}</p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
             {kq.sach_ghi && <SachXuaGhi khoi={kq.sach_ghi} moDun="phongthuy" tieuDe={c("ty.sach_tieu_de")} />}
             {(kq.nhom_c_an || du18) && !coNamSinh && (
               <div className="rounded-xl border border-line/70 bg-surface/40 p-3 text-xs text-fg-muted" data-testid="tam-yeu-nhom-c">

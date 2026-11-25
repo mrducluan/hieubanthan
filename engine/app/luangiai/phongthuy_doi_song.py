@@ -483,7 +483,7 @@ def _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan) -> dict:
 
 
 # ----------------------------------------------------------------------------- chương 3
-def _chuong_tung_phong(mq, huong, b, bc_luan, bo_cuc_in) -> dict:  # noqa: C901
+def _chuong_tung_phong(mq, huong, b, bc_luan, bo_cuc_in, tvs=None, tuoi=None, nhieu_lop=None) -> dict:  # noqa: C901
     c = {"ma": "tung_phong", **kb.chuong("tung_phong"), "muc": None, "nhan_muc": None, "hop": [], "doan": [], "can_cu": [],
          "phong": [], "goi_y_phong": [], "cua_chu_bep": None}
     bang = pt.bang_huong(mq["quai"]) if mq else (pt.bang_huong(pt.trach(huong)["quai"]) if huong else None)
@@ -515,15 +515,21 @@ def _chuong_tung_phong(mq, huong, b, bc_luan, bo_cuc_in) -> dict:  # noqa: C901
                                      L("pt.c3.hop_nd", "{ten} ở phía {cung} ({dn}) là chỗ hợp. Giữ nguyên.", ten=v['ten'], cung=_h(v['cung']), dn=_dnt(dn))))
         c["muc"] = _gop_muc(*mucs)
         ccb = bc_luan["da_tinh"]["cua_chu_bep"]
+        h_ty = _hop_tam_yeu(c, mq, bc_luan, tvs or [], tuoi) if ccb and ccb["cap"] else None
         if ccb:
             c["cua_chu_bep"] = ccb
             xau = [x for x in ccb["cap"] if not x["cat"]]
             c["can_cu"].append(L("pt.c3.cc.ccb", "Cửa – chủ – bếp (Dương Trạch Tam Yếu): {ds}.",
                                  ds="; ".join(f"{x['cap']} {_dnt(x['du_nien'])}" for x in ccb["cap"])))
-            if xau:
+            if h_ty:
+                c["hop"].append(h_ty)
+            elif xau:
                 c["hop"].append(_hop("loi_khuyen", L("pt.c3.ccb.td", "Cửa, phòng ngủ, bếp chưa cùng nhịp"),
                                      L("pt.c3.ccb.nd", "Cặp {ds} đang ở du niên kém. Phần dễ đổi nhất là miệng bếp và đầu giường — quay về phía hợp với bạn.",
                                        ds=_ds(x['cap'] for x in xau))))
+            h_nl = _hop_nhieu_lop(bc_luan, nhieu_lop)
+            if h_nl:
+                c["hop"].append(h_nl)
         dau_tien = True
         for d in sorted(bc_luan["dien_giai"]["dau_hieu"], key=lambda d: not d.get("veto")):
             if not d["tot"]:
@@ -805,6 +811,109 @@ def _theo_y_dinh(ma: str | None, chuong: list[dict], bc_luan: dict | None, huong
             "loi": L("pt.yd.loi", "Nhịp từng năm theo sách xưa chỉ nói lúc nào nên chủ động hơn với phòng đó — nền vẫn là ánh sáng, gió, lối đi và các dấu hiệu bên trên.")}
 
 
+# ----------------------------------------------------------------------------- TY-2: hộp Tam Yếu của chương 3
+# Phòng của báo cáo ↔ điều Minh Kính nói về chỗ đó (câu sách đi cùng hộp phòng, như SX-D).
+_MK_PHONG = {"bep": ("be_bep_phia_xau", "bep_de_phia_tot", "tien_bac_cua_bep", "bep_bon_cho_kieng", "mieng_bep_bi_xoc"),
+             "phong_ngu_chinh": ("dau_giuong_sinh_khi", "phong_chinh_nhuong", "doi_giuong_de_nhat", "giuong_duoi_xa"),
+             "ve_sinh": ("nha_ve_sinh",), "ban_tho": ("ban_tho_phia_tot",),
+             "cua_chinh": ("cong_chinh_hop_hai_be", "cong_xau_kho_doi", "cong_cung_nhom_nha")}
+SACH_MOI_HOP = 4
+
+
+def _hop_tam_yeu(c: dict, mq: dict | None, bc_luan: dict, tvs: list[dict], tuoi: int | None) -> dict | None:
+    """Hộp "Cửa, phòng chính và bếp" theo Dương Trạch Tam Yếu (một bộ tính với công cụ `/tam-yeu/so-do`): kết luận + thế nhà
+    + việc nên làm; câu sách (nhóm C sau cổng tuổi, SX-C) đi kèm trong `sach`. Điều Minh Kính về từng phòng gắn vào hộp của
+    phòng đó. Không đổi mức chương (Q1: mức do dấu hiệu + du niên với người ở). Chỉ bản Việt."""
+    from app.luangiai import phongthuy_tam_yeu as ty  # noqa: PLC0415
+    from app.luangiai import sach_ghi_mon as sm  # noqa: PLC0415
+    from app.luangiai import sach_hop  # noqa: PLC0415
+    vt = {v["phong"]: v["cung"] for v in bc_luan["da_tinh"]["vi_tri"]}
+
+    def q(k: str) -> str | None:
+        p = vt.get(k)
+        return pt.HUONG_QUAI.get(p) if p and p != "Trung cung" else None
+
+    cua = q("cua_chinh")
+    if not cua:
+        return None
+    dh = [d["ma"] for d in bc_luan["dien_giai"]["dau_hieu"]]
+    them = {"ve_sinh": q("ve_sinh"), "ban_tho": q("ban_tho"), "menh": mq["quai"] if mq else None,
+            "khac_nhom_nguoi": any(t.get("cung_nhom_voi_chu") is False for t in tvs)}
+    r = ty.so_do(cua, q("phong_ngu_chinh"), q("bep"), tuoi, dau_hieu=dh, **them)
+    if not r["ket_luan"]:
+        return None
+    vi = ngon_ngu.la_viet()
+    if vi:          # dữ liệu vẽ đồ hình (web bản Việt) — mã quái / phương là chữ Việt nên bản Anh không mang
+        c["tam_yeu"] = {k: r[k] for k in ("cua", "chu", "bep", "huong", "cap", "ket_luan", "the_nha", "bep_dieu_can") if r.get(k)}
+    # Tiêu đề giữ đúng chữ hộp cũ khi có cặp kém → mã kiểm chứng cũ (phiếu đã có) không đổi.
+    if r["ket_luan"]["muc"] == "thuan":
+        loai, td = "diem_manh", L("pt.c3.ty.td_thuan", "Cửa, phòng chính và bếp đỡ nhau")
+    else:
+        loai, td = "loi_khuyen", L("pt.c3.ccb.td", "Cửa, phòng ngủ, bếp chưa cùng nhịp")
+    nd = r["ket_luan"]["loi"]
+    tn = r.get("the_nha") if vi else None
+    if tn:
+        nd += " " + tn["ten"] + "." + (" " + tn["tuong"] if tn.get("tuong") else "")
+    viec = r["viec"][0]["lam"] if r["viec"] else None
+    # Câu sách cùng một bộ chọn với khối "Sách xưa ghi" của công cụ, qua cổng tuổi (SX-C): thế nhà + bếp, nguyên tắc Tam
+    # Yếu → hộp này; điều Minh Kính về từng phòng → hộp của phòng đó (không có hộp phòng thì về hộp này).
+    nhom = ({ma: sm._loc(cac, tuoi) for ma, _, cac in sm.phongthuy_nhom(dau_hieu=dh, cua=cua, chu=q("phong_ngu_chinh"),
+                                                                          bep=q("bep"), them=them)} if vi else {})
+    sach_ty = [sach_hop.muc_hop(m, ve) for m, ve in nhom.get("cua_chu_bep", [])[:2] + nhom.get("tam_yeu_nguyen_tac", [])[:2]]
+    h = _hop(loai, td, nd, viec, can_cu=r["can_cu"], sach=sach_ty[:SACH_MOI_HOP] or None)
+    mk = {m["ma"]: sach_hop.muc_hop(m, ve) for m, ve in nhom.get("minh_kinh", [])}
+    ten_phong = {v["phong"]: v["ten"] for v in bc_luan["da_tinh"]["vi_tri"]}
+    for phong, cac in _MK_PHONG.items():
+        ds = [mk[ma] for ma in cac if ma in mk]
+        if not ds:
+            continue
+        hp = next((x for x in c["hop"] if ten_phong.get(phong) and x["tieu_de"].startswith(ten_phong[phong] + " —")), None)
+        if hp is not None:
+            hp["sach"] = (hp.get("sach") or []) + ds[:2]
+        elif len(h.get("sach") or []) < SACH_MOI_HOP + 2:
+            h["sach"] = (h.get("sach") or []) + ds[:1]
+    return h
+
+
+def _hop_nhieu_lop(bc_luan: dict, nl: dict | None) -> dict | None:
+    """TY-2 gói 2 — nhà nhiều lớp (Tam Yếu) trong chương Từng phòng: sao rơi vào dãy nhà chính + lớp hợp làm nhà chính.
+    Một bộ tính với công cụ (`phongthuy_tam_yeu.nhieu_lop`). Chỉ khi người dùng khai ≥ 2 lớp và lớp nhà chính; không đổi mức
+    chương (Q1)."""
+    if not nl or nl.get("so_lop", 1) < 2 or not nl.get("lop_chu"):
+        return None
+    from app.luangiai import phongthuy_tam_yeu as ty  # noqa: PLC0415
+    vt = {v["phong"]: v["cung"] for v in bc_luan["da_tinh"]["vi_tri"]}
+    cua, chu = vt.get("cua_chinh"), vt.get("phong_ngu_chinh")
+    if not cua or not chu or "Trung cung" in (cua, chu) or nl["lop_chu"] > nl["so_lop"]:
+        return None
+    r = ty.nhieu_lop(pt.HUONG_QUAI[cua], pt.HUONG_QUAI[chu], nl["so_lop"], nl["lop_chu"])
+    if not r.get("lop_chu"):
+        return None
+    loai = "diem_manh" if r["lop_chu"]["muc"] == "thuan" else "loi_khuyen" if r["lop_chu"]["muc"] == "can_bang" else "luu_y"
+    nd = r["loi_lop_chu"] + (" " + r["loi_nen_cao"] if r.get("loi_nen_cao") else "") + (" " + r["ap_sat"] if r.get("ap_sat") else "")
+    return _hop(loai, r["ten_loai"], nd, None, can_cu=r["can_cu"] + [r["quy_uoc"]])
+
+
+def _hop_quan_sat(chon: list[str], tuoi: int | None) -> list[dict]:
+    """TY-2: điều người dùng tự tích ở "Nhìn quanh nhà" → tối đa hai hộp ở chương Ngôi nhà (điều sách khen · điều sách dặn
+    để ý), câu sách trong `sach` (khuôn SX-C, cổng tuổi). Tiêu đề cố định (không mang lời nhóm C); không đổi mức chương."""
+    from app.luangiai import phongthuy_quan_sat as qs  # noqa: PLC0415
+    from app.luangiai import sach_ghi_mon as sm  # noqa: PLC0415
+    from app.luangiai import sach_hop  # noqa: PLC0415
+    cap = [(m, ve) for _, _, cac in qs.cap(chon) for m, ve in cac]
+    kbq = qs._kb()["quan_sat_hop"]
+    ra = []
+    for loai, nh in (("diem_manh", ("A",)), ("luu_y", ("B", "C"))):
+        cac = [(m, ve) for m, ve in cap if m["nhom"] in nh]
+        if not cac:
+            continue
+        hien = sm._loc(cac, tuoi)
+        viec = next((m["viec"] for m, _ in hien if m.get("viec")), None)
+        nd = kbq[loai]["noi_dung"].format(ds="; ".join(ve[:1].lower() + ve[1:] for _, ve in cac))
+        ra.append(_hop(loai, kbq[loai]["tieu_de"], nd, viec, sach=[sach_hop.muc_hop(m, ve) for m, ve in hien[:SACH_MOI_HOP]] or None))
+    return ra
+
+
 @kh.vi_quyet_dinh
 def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None, ngay_xem: dt.date | None = None,
               goc_nhin: str = "sach_xua", y_dinh: str | None = None) -> dict:
@@ -824,9 +933,13 @@ def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None
     tvs = _thanh_vien(mq, thanh_vien or [])
     c1 = _chuong_ban_hop_huong(mq)
     c2 = _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan)
-    c3 = _chuong_tung_phong(mq, huong, b, bc_luan, nha.get("bo_cuc"))
+    from app.luangiai import sach_ghi_mon as _sm  # noqa: PLC0415
+    tuoi = _sm.tuoi_tu((sinh.get("ngay") or sinh.get("nam")) if sinh else None, ngay_xem)
+    c3 = _chuong_tung_phong(mq, huong, b, bc_luan, nha.get("bo_cuc"), tvs, tuoi, nha.get("nhieu_lop"))
     c4 = _chuong_nam_nay(mq, sinh, huong, b, bc_luan, ngay_xem)
     c5 = _chuong_viec_nen_lam(c1, c2, c3, c4)
+    if nha.get("quan_sat") and ngon_ngu.la_viet():
+        c2["hop"] += _hop_quan_sat(nha["quan_sat"], tuoi)
     for c in (c1, c2, c3, c4, c5):          # HỌC-ĐS: mã kiểm chứng ds.phongthuy.<chương>.<loại>.<tiêu đề>
         kh.gan_ma_mau(c, "phongthuy")
     veto = _veto(bc_luan)
@@ -870,7 +983,6 @@ def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None
     for c in (c1, c2, c3, c4, c5):
         _thuong_chuong(c)
     # PT-NG5: mỗi chương thêm một câu cổ thư đã đối chiếu nguyên văn vào "Vì sao nói vậy" (không đổi mức / lời).
-    from app import ngon_ngu  # noqa: PLC0415
     for c, mang in ((c1, "bat_trach"), (c2, "loan_dau"), (c3, "duong_trach"), (c4, "lich_nam")):
         c["can_cu"] = list(c.get("can_cu") or []) + kbp.sach_xua(mang, viet=ngon_ngu.la_viet())
     chuong = [{k: v for k, v in c.items() if v is not None} for c in (c1, c2, c3, c4, c5)]

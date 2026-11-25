@@ -5,19 +5,19 @@
 import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { SachXuaGhi, type KhoiSachGhi } from "@/components/huyen-hoc/SachXuaGhi";
 import { useEffect, useRef, useState } from "react";
-import { Check, ClipboardList, Home, X } from "lucide-react";
+import Link from "@/components/khung/Lien";
+import { Check, ClipboardList, Home, Ruler, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
-import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
+import { luuHoSoNha, soDoGui, useHoSoNha } from "@/lib/ho-so-nha";
 import { datGocNhin, TEN_GOC_NHIN, useGocNhin, type GocNhin } from "@/lib/goc-nhin-pt";
 import { cn } from "@/lib/utils";
 import { SoDoNha } from "@/components/huyen-hoc/SoDoNha";
 import { CachLam } from "@/components/huyen-hoc/CachLam";
 import { HoiNhanhAnh } from "@/components/huyen-hoc/HoiNhanhAnh";
 import { DocAnhNha } from "@/components/huyen-hoc/DocAnhNha";
-import { ImagePlus, RotateCw } from "lucide-react";
 import { ChanQr } from "@/components/khung/ChanQr";
 import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 import { TenHienProvider } from "@/components/khung/TenHien";
@@ -34,10 +34,14 @@ interface DanhMuc {
 interface ViTri { phong: string; ten: string; cung: string; du_nien_menh: string | null; du_nien_trach: string | null; nen: "cat" | "hung"; hop: boolean | null }
 interface Viec { chi_phi: "khong_ton" | "it_tien" | "sua_chua"; lam: string }
 interface MatBangKq {
-  tam: number[]; tam_o: number[]; tam_ngoai_nha: boolean; so_o: number; khuyet_goc: string[]; dau_hieu_suy_ra: string[];
+  /** TY-2 đợt 2: "so_do" = đọc từ sơ đồ tỉ lệ (tam = x, y 0..1); không có = lưới vẽ tay cũ (tam_o, so_o theo ô). */
+  nguon?: "so_do";
+  tam: number[]; tam_o?: number[]; tam_ngoai_nha: boolean; so_o?: number; khuyet_goc: string[]; dau_hieu_suy_ra: string[];
   o_9: { hang: number; cot: number; ti_le: number; phuong: string | null; khuyet: boolean }[];
-  phuong_phong: Record<string, { o: number[]; phuong: string | null; trung_cung: boolean }>;
+  phuong_phong: Record<string, { o?: number[]; diem?: number[]; phuong: string | null; trung_cung: boolean }>;
   wc_trung_cung: boolean; cua_thong_ban_cong: { lech_do: number; thang_hang: boolean } | null; canh_bao: string[];
+  /** Gói 1 (SD-1): dấu hiệu sơ đồ GỢI Ý — chưa luận cho tới khi người dùng xác nhận. */
+  dau_hieu_goi_y?: { ma: string; hoi: string }[];
 }
 interface KetQua {
   /** Q1 / Q2 / Q4 / Q5 / Q6 */
@@ -71,11 +75,8 @@ const HUONG8 = ["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Na
 const NHOM_DH = ["ngoai_canh", "hinh_nha", "trong_nha"] as const;
 const NGUON = new Set(["co_thu", "dan_gian"]);
 const LOAI_NHA = ["", "can_ho", "nha_pho", "biet_thu", "nha_cap4", "khac"] as const;
-// Q2: lưới vẽ mặt bằng 6×6 — hàng trên = mặt trước nhà (phía hướng nhà). Chế độ: tô ô / đặt phòng / ban công.
-const N = 6;
-const LUOI_TRONG = Array.from({ length: N }, () => Array.from({ length: N }, () => false));
-// Nhãn ô vẽ / mức chi phí: bảng chữ `ks.ve.<mã>`, `ks.cp.<mã>`.
-const PHONG_VE = ["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "phong_lam_viec", "ban_cong"] as const;
+// TY-2 đợt 2: MỘT bản vẽ — Khảo sát nhà đọc sơ đồ tỉ lệ của "Đứng giữa nhà" (hồ sơ nhà: `khung` + điểm tầng trệt), không còn
+// lưới 6×6 riêng. Nhãn chỗ trên sơ đồ: bảng chữ `dv.ten.<mã>`; mức chi phí `ks.cp.<mã>`.
 
 export function KhaoSatNha({ sinh, doHuongGoiY }: {
   sinh: { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
@@ -102,23 +103,6 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
   const [loaiNha, setLoaiNha] = useState("");
   const gocNhin = useGocNhin();
   const { c: t, en, huong: tenHuong } = useChuPT();
-  // Q2: mặt bằng vẽ tay (tuỳ chọn) — ô tô + ô đại diện phòng + ô ban công; chỉ gửi khi có ≥ 2 ô tô.
-  const [veMb, setVeMb] = useState(false);
-  const [luoi, setLuoi] = useState<boolean[][]>(LUOI_TRONG);
-  const [cheDo, setCheDo] = useState<string>("to");
-  const [oPhong, setOPhong] = useState<Record<string, [number, number]>>({});
-  // UI-PT2 B: ảnh mặt bằng (chụp / tải từ máy) đặt DƯỚI lưới để tô theo — chỉ là nền trên trình duyệt, không gửi đi, không lưu.
-  const [anhNen, setAnhNen] = useState<{ url: string; xoay: number; mo: number } | null>(null);
-  const anhRef = useRef<string | null>(null);
-  useEffect(() => () => { if (anhRef.current) URL.revokeObjectURL(anhRef.current); }, []);
-  const chonAnhNen = (f: File | undefined) => {
-    if (anhRef.current) URL.revokeObjectURL(anhRef.current);
-    if (!f) { anhRef.current = null; setAnhNen(null); return; }
-    const url = URL.createObjectURL(f);
-    anhRef.current = url; setAnhNen({ url, xoay: 0, mo: 0.55 }); setVeMb(true);
-    ghi("chart_interacted", { mo_dun: "phongthuy", kind: "anh_mat_bang_nen" });
-  };
-
   useEffect(() => {
     fetch(urlTheoNgonNgu("/api/phongthuy/bo-cuc/danh-muc")).then((r) => (r.ok ? r.json() : null)).then(setDm).catch(() => setDm(null));
   }, []);
@@ -154,15 +138,6 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     if (b?.huong_do || doiCan) setHuongDo(Object.fromEntries(Object.entries(b?.huong_do ?? {}).map(([k, v]) => [k, String(v)])));
     if (nhaLuu.loai_nha) setLoaiNha(nhaLuu.loai_nha);
     if (doiCan) setKq(null);
-    if (b?.mat_bang && b.mat_bang.luoi.length === N && b.mat_bang.luoi.every((r) => r.length === N)) {
-      setVeMb(true);
-      setLuoi(b.mat_bang.luoi.map((r) => [...r].map((c) => c === "1")));
-      const o: Record<string, [number, number]> = { ...(b.mat_bang.phong ?? {}) } as Record<string, [number, number]>;
-      if (b.mat_bang.ban_cong) o.ban_cong = b.mat_bang.ban_cong;
-      setOPhong(o);
-    } else if (doiCan) {
-      setVeMb(false); setLuoi(LUOI_TRONG); setOPhong({});
-    }
   }, [nhaLuu, doHuongGoiY]);
 
   // SD-1: khối sơ đồ nhà theo tỉ lệ vừa lưu câu trả lời Có / Không cho dấu hiệu nó gợi ý (hồ sơ nhà: `tu_so_do`,
@@ -191,21 +166,6 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
       const n = new Set(s); khong.forEach((m) => n.add(m)); them.forEach((m) => n.delete(m)); return n;
     });
   }, [khoaSoDo, nhaLuu]);
-
-  const bamO =(r: number, c: number) => {
-    if (cheDo === "to") { setLuoi((l) => l.map((row, i) => row.map((v, j) => (i === r && j === c ? !v : v)))); return; }
-    setOPhong((o) => {
-      const m = { ...o };
-      if (m[cheDo]?.[0] === r && m[cheDo]?.[1] === c) delete m[cheDo]; else m[cheDo] = [r, c];
-      return m;
-    });
-    if (!luoi[r]![c]) setLuoi((l) => l.map((row, i) => row.map((v, j) => (i === r && j === c ? true : v))));
-  };
-  const matBang = () => {
-    if (!veMb || luoi.flat().filter(Boolean).length < 2) return null;
-    const { ban_cong, ...phong } = oPhong;
-    return { luoi: luoi.map((row) => row.map((v) => (v ? "1" : "0")).join("")), ...(Object.keys(phong).length ? { phong } : {}), ...(ban_cong ? { ban_cong } : {}) };
-  };
 
   // PT-V2: người dùng xác nhận một gợi ý từ ảnh. Đúng → tích ô + đánh dấu "từ ảnh"; Không → bỏ tích + khai rõ không có.
   const xacNhanAnh = (ma: string, dung: boolean) => {
@@ -240,14 +200,14 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
       if (!(x >= 0 && x < 360)) { setLoi(t("ks.loi_do_vat")); return; }
       hd[k] = x;
     }
-    const mb = matBang();
+    const soDo = soDoGui(nhaLuu);
     const daXuLy = (nhaLuu?.bo_cuc?.da_xu_ly ?? []).filter((m) => !dau.has(m));   // tích lại = chưa xử lý nữa
     // PT-V2: "Không" cho gợi ý từ ảnh → co:false như đã xử lý (người dùng khai rõ); không trùng mã đã tích.
     const khongCoGui = [...khongCo].filter((m) => !dau.has(m));
     const khaiKhong = [...new Set([...daXuLy, ...khongCoGui])];
     const tuAnhGui = [...tuAnh].filter((m) => dau.has(m));
     const tuSoDoGiu = (nhaLuu?.bo_cuc?.tu_so_do ?? []).filter((m) => dau.has(m));
-    if (d == null && !huong && Object.keys(viTri).length === 0 && dau.size === 0 && !mb) {
+    if (d == null && !huong && Object.keys(viTri).length === 0 && dau.size === 0 && !soDo) {
       setLoi(t("ks.loi_thieu")); return;
     }
     setDang(true);
@@ -261,7 +221,8 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
           dau_hieu: Object.fromEntries([
             ...[...dau].map((m) => [m, tuAnh.has(m) ? { co: true, nguon: "anh", xac_nhan: true } : { co: true, nguon: "nguoi_dung" }]),
             ...khaiKhong.map((m) => [m, { co: false, nguon: "nguoi_dung" }])]),
-          ...(mb ? { mat_bang: mb } : {}),
+          // TY-2 đợt 2: phương phòng, Trung cung, khuyết góc, cửa thông ban công — engine đọc từ sơ đồ (phòng khai tay ở lưới 3×3 thắng).
+          ...(soDo ? { so_do: soDo } : {}),
         },
         goc_nhin: gocNhin,
         ...(sinh ? { sinh } : {}),
@@ -273,9 +234,9 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
             ...(khongCoGui.length ? { khai_khong: khongCoGui } : {}),
             // SD-1: giữ dấu vết "mã này đến từ sơ đồ nhà" (chỉ mã còn đang tích) để khối sơ đồ gỡ được khi sơ đồ đổi.
             ...(tuSoDoGiu.length ? { tu_so_do: tuSoDoGiu } : {}),
-            ...(daXuLy.length ? { da_xu_ly: daXuLy } : {}), ...(mb ? { mat_bang: mb } : {}) } });
+            ...(daXuLy.length ? { da_xu_ly: daXuLy } : {}) } });
       } catch { /* bỏ qua */ }
-      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "khao_sat_nha", co_mat_bang: Boolean(mb), loai_nha: loaiNha, goc_nhin: gocNhin });
+      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "khao_sat_nha", co_mat_bang: Boolean(soDo), loai_nha: loaiNha, goc_nhin: gocNhin });
     } catch (e) { setLoi(e instanceof Error ? e.message : t("ks.loi_luan")); }
     finally { setDang(false); }
   };
@@ -315,58 +276,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
             <CachLam viec="dat_phong" className="mt-2" />
           </div>
 
-          <div data-testid="ve-mat-bang">
-            <label className="flex items-center gap-2 text-sm font-medium text-fg">
-              <input type="checkbox" className="size-4 accent-[rgb(var(--gold))]" checked={veMb} onChange={(e) => setVeMb(e.target.checked)} />
-              {t("ks.ve_nhan")}
-            </label>
-            {veMb && (
-              <div className="mt-2 space-y-2">
-                <p className="text-xs text-fg-muted"><ChuB chu={t("ks.ve_hd")} lop="text-fg" /></p>
-                <CachLam viec="ve_mat_bang" />
-                <div className="flex flex-wrap items-center gap-2 text-xs" data-testid="anh-mat-bang">
-                  <label className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg">
-                    <ImagePlus className="size-3.5" aria-hidden /> {anhNen ? t("ks.anh_doi") : t("ks.anh_dat")}
-                    <input type="file" accept="image/*" className="sr-only" aria-label={t("ks.anh_aria")} onChange={(e) => chonAnhNen(e.target.files?.[0])} />
-                  </label>
-                  {anhNen && (
-                    <>
-                      <button type="button" onClick={() => setAnhNen((a) => a && { ...a, xoay: (a.xoay + 90) % 360 })} className="inline-flex items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg" aria-label={t("ks.xoay_aria")}><RotateCw className="size-3.5" aria-hidden /> {t("ks.xoay")}</button>
-                      <label className="inline-flex items-center gap-1.5 text-fg-muted">{t("ks.ro")} <input type="range" min={0.2} max={0.9} step={0.05} value={anhNen.mo} onChange={(e) => setAnhNen((a) => a && { ...a, mo: Number(e.target.value) })} aria-label={t("ks.ro_aria")} className="w-20 accent-[rgb(var(--gold))]" /></label>
-                      <button type="button" onClick={() => chonAnhNen(undefined)} className="text-fg-faint hover:text-fg">{t("ks.bo_anh")}</button>
-                    </>
-                  )}
-                  <span className="text-fg-faint">{t("ks.anh_tren_may")}</span>
-                </div>
-                <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label={t("ks.che_do_aria")}>
-                  {(["to", ...PHONG_VE] as string[]).map((m) => (
-                    <button key={m} type="button" role="radio" aria-checked={cheDo === m} onClick={() => setCheDo(m)}
-                      className={cn("rounded-full border px-2.5 py-1 text-xs", cheDo === m ? "border-gold bg-gold/15 text-fg" : "border-line text-fg-muted hover:text-fg")}>
-                      {t(`ks.ve.${m}`)}{m !== "to" && oPhong[m] ? " ✓" : ""}
-                    </button>
-                  ))}
-                </div>
-                <div className="relative w-fit overflow-hidden rounded-lg">
-                {anhNen && (
-                  // eslint-disable-next-line @next/next/no-img-element -- ảnh blob trên máy người dùng, không qua next/image
-                  <img src={anhNen.url} alt="" aria-hidden className="pointer-events-none absolute inset-0 size-full object-contain"
-                    style={{ opacity: anhNen.mo, transform: `rotate(${anhNen.xoay}deg)` }} />
-                )}
-                <div className={cn("relative grid w-fit grid-cols-6 gap-0.5 rounded-lg border border-line/70 p-1", anhNen && "bg-transparent")} aria-label={t("ks.luoi_aria")}>
-                  {luoi.map((row, r) => row.map((v, c) => {
-                    const nhan = Object.entries(oPhong).filter(([, o]) => o[0] === r && o[1] === c).map(([k]) => ((PHONG_VE as readonly string[]).includes(k) ? t(`ks.ve.${k}`) : k));
-                    return (
-                      <button key={`${r}-${c}`} type="button" onClick={() => bamO(r, c)} aria-label={`${t("ks.o_aria", { r: String(r + 1), c: String(c + 1) })}${v ? t("ks.o_da_to") : ""}${nhan.length ? `: ${nhan.join(", ")}` : ""}`}
-                        aria-pressed={v} className={cn("flex size-10 items-center justify-center rounded text-[10px] leading-none sm:size-11", v ? "bg-gold/25 text-fg" : anhNen ? "bg-bg/10 text-fg-faint" : "bg-bg/40 text-fg-faint", nhan.length && "ring-1 ring-gold")}>
-                        {nhan.join("·") || (r === 0 ? "▲" : "")}
-                      </button>
-                    );
-                  }))}
-                </div>
-                </div>
-              </div>
-            )}
-          </div>
+          <SoDoTomTat soDo={soDoGui(nhaLuu)} />
 
           <div>
             <p className="text-sm font-medium text-fg">{t("ks.b2")}</p>
@@ -442,12 +352,13 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
         {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
       </div>
 
-      {kq && <TenHienProvider ten={[kq.ten_hien]}><KetQuaBoCuc kq={kq} /></TenHienProvider>}
+      {kq && <TenHienProvider ten={[kq.ten_hien]}><KetQuaBoCuc kq={kq} daTra={new Set([...dau, ...khongCo])}
+        onGoiY={(ma, co) => { if (co) tichO(ma, true); else setKhongCo((x) => new Set(x).add(ma)); }} /></TenHienProvider>}
     </section>
   );
 }
 
-function KetQuaBoCuc({ kq }: { kq: KetQua }) {
+function KetQuaBoCuc({ kq, daTra, onGoiY }: { kq: KetQua; daTra: Set<string>; onGoiY: (ma: string, co: boolean) => void }) {
   const d = kq.da_tinh;
   const giai = Object.fromEntries(kq.dien_giai.vi_tri.map((x) => [x.phong, x]));
   const { c: t, en, huong, quai, nhom, duNien } = useChuPT();
@@ -550,7 +461,9 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
         <div data-testid="kq-mat-bang">
           <p className="eyebrow">{t("ks.mat_bang")}</p>
           <p className="mt-1 text-sm text-fg-muted">
-            {t("ks.mb_tom_tat", { so: String(kq.mat_bang.so_o), r: String(kq.mat_bang.tam_o[0]! + 1), c: String(kq.mat_bang.tam_o[1]! + 1) })}{kq.mat_bang.tam_ngoai_nha ? t("ks.mb_ngoai") : ""}.
+            {kq.mat_bang.nguon === "so_do" || !kq.mat_bang.tam_o
+              ? t("ks.mb_so_do")
+              : t("ks.mb_tom_tat", { so: String(kq.mat_bang.so_o), r: String(kq.mat_bang.tam_o[0]! + 1), c: String(kq.mat_bang.tam_o[1]! + 1) })}{kq.mat_bang.tam_ngoai_nha ? t("ks.mb_ngoai") : ""}.
             {kq.mat_bang.khuyet_goc.length ? t("ks.mb_khuyet", { ds: kq.mat_bang.khuyet_goc.map((x) => huong(x)).join(", ") }) : t("ks.mb_khong_khuyet")}
             {kq.mat_bang.wc_trung_cung ? t("ks.mb_wc") : ""}
             {kq.mat_bang.cua_thong_ban_cong?.thang_hang ? t("ks.mb_ban_cong") : ""}
@@ -563,6 +476,20 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
             ))}
           </div>
           {kq.mat_bang.canh_bao.map((c) => <p key={c} className="mt-1 text-xs text-fg-faint">{c}</p>)}
+          {(kq.mat_bang.dau_hieu_goi_y ?? []).filter((g) => !daTra.has(g.ma)).length > 0 && (
+            <div className="mt-3 rounded-xl border border-gold/40 bg-gold/5 p-3 text-sm" data-testid="ks-so-do-goi-y">
+              <p className="text-xs text-fg-muted">{t("ks.so_do_goi_y")}</p>
+              <ul className="mt-1.5 space-y-1.5">
+                {(kq.mat_bang.dau_hieu_goi_y ?? []).filter((g) => !daTra.has(g.ma)).map((g) => (
+                  <li key={g.ma} className="flex flex-wrap items-center gap-2" data-testid={`ks-goi-y-${g.ma}`}>
+                    <span className="text-fg">{g.hoi}</span>
+                    <button type="button" className="min-h-[32px] rounded-full border border-gold/60 px-2.5 text-xs text-gold" onClick={() => onGoiY(g.ma, true)}>{t("ks.goi_y_co")}</button>
+                    <button type="button" className="min-h-[32px] rounded-full border border-line px-2.5 text-xs text-fg-muted" onClick={() => onGoiY(g.ma, false)}>{t("ks.goi_y_khong")}</button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       )}
 
@@ -571,6 +498,25 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
         <ul className="mt-1 list-disc space-y-1 pl-5 text-sm text-fg-muted">{kq.tu_soi.map((c) => <li key={c}>{c}</li>)}</ul>
       </div>
       <p className="text-xs text-fg-faint">{kq.luu_y}</p>
+    </div>
+  );
+}
+
+/** TY-2 đợt 2: tóm tắt sơ đồ nhà đang dùng (từ "Đứng giữa nhà") + lối sang vẽ / sửa. Web không tính gì — chỉ đếm chỗ đã đặt. */
+function SoDoTomTat({ soDo }: { soDo: ReturnType<typeof soDoGui> }) {
+  const { c: t } = useChuPT();
+  const cho = soDo ? Object.keys(soDo.vat) : [];
+  return (
+    <div className="rounded-xl border border-line/70 bg-surface/40 p-3 text-sm" data-testid="ks-so-do">
+      <p className="flex items-center gap-2 font-medium text-fg"><Ruler className="size-4 text-gold" aria-hidden /> {t("ks.so_do_ten")}</p>
+      <p className="mt-1 text-xs text-fg-muted">
+        {soDo
+          ? <ChuB chu={t("ks.so_do_co", { rong: String(soDo.rong), sau: String(soDo.sau), ds: cho.map((k) => t(`dv.ten.${k}`)).join(", ") })} lop="text-fg" />
+          : <ChuB chu={t("ks.so_do_chua")} lop="text-fg" />}
+      </p>
+      <Link href="#vi-tri-vat" className="mt-2 inline-flex min-h-[36px] items-center text-xs text-gold underline-offset-2 hover:underline" data-testid="ks-so-do-mo">
+        {soDo ? t("ks.so_do_sua") : t("ks.so_do_ve")}
+      </Link>
     </div>
   );
 }

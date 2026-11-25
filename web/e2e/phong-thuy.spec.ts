@@ -207,28 +207,39 @@ test("KC-2: hồ sơ nhà lưu trên máy sau khi đọc → Hôm nay có thẻ 
   await expect(page.getByLabel("Năm xây hoặc nhập trạch")).toHaveValue("2008");
 });
 
-test("Q2/Q1/Q4/Q5/Q6: vẽ mặt bằng → suy WC giữa nhà + cửa thông ban công (xử lý trước), căn hộ áp luật, việc theo chi phí, đổi góc nhìn", async ({ page }) => {
+test("Q2/Q1/Q4/Q5/Q6 + TY-2 đợt 2: hồ sơ lưới cũ tự thành sơ đồ → suy WC giữa nhà + cửa thông ban công, căn hộ áp luật, việc theo chi phí, đổi góc nhìn", async ({ page }) => {
   await napHoSo(page);
+  // Hồ sơ nhà kiểu cũ: lưới vẽ tay 6×6 tô kín, cửa hàng 1 cột 3, WC hàng 3 cột 3, ban công hàng 6 cột 3.
+  await page.addInitScript(() => {
+    if (window.localStorage.getItem("hbt.nha.v1")) return;
+    window.localStorage.setItem("hbt.nha.v1", JSON.stringify({ v: 1, huong_do: 180, theo: "cua", thanh_vien: [], cap_nhat_luc: "2026-11-20T00:00:00.000Z",
+      bo_cuc: { mat_bang: { luoi: Array(6).fill("111111"), phong: { cua_chinh: [0, 2], ve_sinh: [2, 2] }, ban_cong: [5, 2] } } }));
+  });
   await page.goto("/phong-thuy");
   const ks = page.getByTestId("khao-sat-nha");
   await ks.getByRole("textbox", { name: "Độ hướng nhà khảo sát" }).fill("180");
   await ks.getByLabel("Loại nhà").selectOption("can_ho");
-  await ks.getByLabel(/Vẽ mặt bằng/).check();
-  const ve = ks.getByTestId("ve-mat-bang");
-  // tô cả 6×6 bằng cách bấm từng ô (chế độ "Tô ô")
-  for (let r = 0; r < 6; r++) for (let c = 0; c < 6; c++) await ve.getByRole("button", { name: `Ô hàng ${r + 1} cột ${c + 1}` }).click();
-  await ve.getByRole("radio", { name: "Cửa" }).click();
-  await ve.getByRole("button", { name: /^Ô hàng 1 cột 3/ }).click();
-  await ve.getByRole("radio", { name: "WC" }).click();
-  await ve.getByRole("button", { name: /^Ô hàng 3 cột 3/ }).click();
-  await ve.getByRole("radio", { name: "Ban công" }).click();
-  await ve.getByRole("button", { name: /^Ô hàng 6 cột 3/ }).click();
+  // Khảo sát không còn lưới riêng — đọc sơ đồ của "Đứng giữa nhà" (chuyển từ lưới cũ)
+  await expect(ks.getByTestId("ve-mat-bang")).toHaveCount(0);
+  await expect(ks.getByTestId("ks-so-do")).toContainText("Cửa chính, Nhà vệ sinh, Ban công");
+  const vtMoi = page.getByTestId("vi-tri-vat");
+  await vtMoi.getByTestId("vi-tri-cach-khung").click();
+  await expect(vtMoi.getByTestId("vi-tri-tu-luoi-cu")).toBeVisible();
+  await expect(vtMoi.getByTestId("vi-tri-hop-ban_cong")).toBeVisible();
   await ks.getByLabel(/Giường hoặc bàn làm việc nằm ngay dưới xà ngang/).check();
   await ks.getByRole("button", { name: "Xem luận bố cục" }).click();
   const kq = page.getByTestId("ket-qua-bo-cuc");
   await expect(kq.getByTestId("kq-mat-bang")).toContainText("Nhà vệ sinh ở vùng giữa nhà");
   await expect(kq.getByTestId("kq-mat-bang")).toContainText("Cửa chính nhìn thẳng ra ban công");
-  await expect(kq.getByTestId("dau-hieu-wc_giua_nha")).toContainText("suy từ mặt bằng");
+  await expect(kq.getByTestId("kq-mat-bang")).toContainText("Đọc từ sơ đồ nhà theo tỉ lệ");
+  // Gói 1 (SD-1): sơ đồ chỉ GỢI Ý — chưa xác nhận thì không luận; bấm Có rồi xem lại mới tính.
+  await expect(kq.getByTestId("dau-hieu-wc_giua_nha")).toHaveCount(0);
+  const goiY = kq.getByTestId("ks-so-do-goi-y");
+  await goiY.getByTestId("ks-goi-y-wc_giua_nha").getByRole("button", { name: "Có" }).click();
+  await goiY.getByTestId("ks-goi-y-cua_thong_ban_cong").getByRole("button", { name: "Có" }).click();
+  await expect(goiY).toHaveCount(0);
+  await ks.getByRole("button", { name: "Xem luận bố cục" }).click();
+  await expect(kq.getByTestId("dau-hieu-wc_giua_nha")).toBeVisible();
   await expect(kq.getByTestId("so-do-nha")).toContainText("Nhà vệ sinh");                         // UI-PT 2: sơ đồ 3×3 tô màu
   await expect(kq.getByTestId("dau-hieu-veto").first()).toBeVisible();
   await expect(kq.getByTestId("dau-hieu-xa_ngang").getByTestId("dau-hieu-viec")).toContainText("0 đồng");
@@ -241,7 +252,9 @@ test("Q2/Q1/Q4/Q5/Q6: vẽ mặt bằng → suy WC giữa nhà + cửa thông ba
   // Hồ sơ nhà trên máy có mặt bằng + loại nhà → "Nhà của bạn" đọc kèm: trần mức, việc theo chi phí, ý định
   const hs = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nha.v1") ?? "null"));
   expect(hs.loai_nha).toBe("can_ho");
-  expect(hs.bo_cuc.mat_bang.luoi).toHaveLength(6);
+  expect(hs.bo_cuc.mat_bang).toBeUndefined();
+  expect(hs.khung).toMatchObject({ rong: 6, sau: 6, tu_luoi_cu: true });
+  expect(hs.tang_do[0].vat.ban_cong.diem).toEqual([0.417, 0.917]);
   const nha = page.getByTestId("nha-cua-ban");
   await nha.getByLabel("Năm xây hoặc năm dọn vào").fill("2008");
   await nha.getByTestId("nha-y-dinh").getByRole("radio", { name: "Sức khoẻ, giấc ngủ" }).click();
@@ -451,21 +464,79 @@ test("UI-PT2 A/B: chọn Chung cư → hướng dẫn căn hộ + Cách làm; GP
   await expect(page.getByTestId("khao-sat-nha").getByLabel("Loại nhà")).toHaveValue("can_ho");   // Khảo sát đọc cùng hồ sơ nhà
 });
 
-test("UI-PT2 B/C: ảnh mặt bằng làm nền lưới (chỉ trên máy) + Chụp một góc, trả lời 3 câu → tích đúng ô dấu hiệu", async ({ page }) => {
+test("UI-PT2 B/C + TY-2 đợt 2 + gói 3: ảnh bản vẽ làm nền sơ đồ tỉ lệ (chỉ trên máy), căn ảnh theo khung + Chụp một góc, trả lời 3 câu → tích đúng ô dấu hiệu", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/phong-thuy");
   const ks = page.getByTestId("khao-sat-nha");
-  await ks.getByLabel(/Vẽ mặt bằng/).check();
-  const ve = ks.getByTestId("ve-mat-bang");
-  await ve.getByTestId("cach-lam-ve_mat_bang").getByTestId("cach-lam-mo").click();
-  await expect(ve).toContainText("Hàng trên cùng là mặt trước nhà");
-  await ve.getByLabel("Ảnh mặt bằng làm nền (chỉ hiện trên máy)").setInputFiles({ name: "mat-bang.png", mimeType: "image/png", buffer: PNG_1 });
-  await expect(ve.getByTestId("anh-mat-bang")).toContainText("Đổi ảnh mặt bằng");
-  await expect(ve.locator("img[src^='blob:']")).toHaveCount(1);        // ảnh là blob trên máy, không có URL máy chủ
-  await ve.getByRole("button", { name: "Xoay ảnh 90 độ" }).click();
-  await expect(ve.locator("img[src^='blob:']")).toHaveAttribute("style", /rotate\(90deg\)/);
-  await ve.getByRole("button", { name: "Bỏ ảnh" }).click();
+  await expect(ks.getByTestId("ks-so-do")).toContainText("Chưa có sơ đồ");
+  const ve = page.getByTestId("vi-tri-vat");
+  await ve.getByTestId("vi-tri-cach-khung").click();
+  // Ảnh bản vẽ giả 120×200 (khung chữ nhật trên nền trắng) dựng ngay trong trình duyệt
+  const pngBanVe = Buffer.from(await page.evaluate(async () => {
+    const cv = new OffscreenCanvas(120, 200);
+    const g = cv.getContext("2d")!;
+    g.fillStyle = "#fff"; g.fillRect(0, 0, 120, 200);
+    g.strokeStyle = "#000"; g.lineWidth = 3; g.strokeRect(20, 20, 80, 160);
+    const b = await cv.convertToBlob({ type: "image/png" });
+    const u8 = new Uint8Array(await b.arrayBuffer());
+    let s = ""; u8.forEach((x) => { s += String.fromCharCode(x); });
+    return btoa(s);
+  }), "base64");
+  await ve.getByLabel("Ảnh bản vẽ nhà làm nền cho sơ đồ (chỉ hiện trên máy)").setInputFiles({ name: "mat-bang.png", mimeType: "image/png", buffer: pngBanVe });
+  await expect(ve.getByTestId("vi-tri-anh-dieu-khien")).toContainText("không tải lên");
+  const canvas = ve.getByTestId("vi-tri-anh-canvas");
+  await expect(canvas).toHaveCount(1);   // ảnh vẽ lên canvas trên máy — không có đường dẫn ảnh nào
   await expect(ve.locator("img")).toHaveCount(0);
+  await expect(canvas).toHaveAttribute("data-can", "0");
+  // TY-2 gói 3: căn ảnh theo khung bằng hai lần chạm — lần chạm không đặt phòng
+  const chamVung = async (x: number, y: number) => {
+    const vung = ve.getByTestId("vi-tri-anh-can-vung");
+    await vung.evaluate((el) => el.scrollIntoView({ block: "center" }));
+    const b = (await vung.boundingBox())!;
+    await page.mouse.click(b.x + b.width * x, b.y + b.height * y);
+  };
+  await ve.getByTestId("vi-tri-anh-can").click();
+  await expect(ve.getByTestId("vi-tri-anh-can-buoc")).toHaveAttribute("data-buoc", "1");
+  await chamVung(0.17, 0.1);
+  await expect(ve.getByTestId("vi-tri-anh-can-buoc")).toHaveAttribute("data-buoc", "2");
+  await expect(ve.getByTestId("vi-tri-anh-can-p1")).toBeVisible();
+  await chamVung(0.12, 0.05);                                   // lên trên – sang trái góc đầu → báo, vẫn ở bước 2
+  await expect(ve.getByTestId("vi-tri-anh-can-loi")).toBeVisible();
+  await expect(ve.getByTestId("vi-tri-anh-can-buoc")).toHaveAttribute("data-buoc", "2");
+  await chamVung(0.83, 0.9);
+  await expect(ve.getByTestId("vi-tri-anh-can-buoc")).toHaveCount(0);
+  await expect(canvas).toHaveAttribute("data-can", "1");
+  const bien = (await canvas.evaluate((el) => (el as HTMLElement).style.transform)).match(/^scale\(([\d.]+), ([\d.]+)\) translate\((-[\d.]+)%, (-[\d.]+)%\)$/);
+  expect(bien).not.toBeNull();
+  const [sx, sy, tx, ty] = bien!.slice(1).map(Number);
+  expect(sx).toBeGreaterThan(1.45); expect(sx).toBeLessThan(1.6);    // ≈ 1 / (0.83 − 0.17)
+  expect(sy).toBeGreaterThan(1.2); expect(sy).toBeLessThan(1.3);     // ≈ 1 / (0.9 − 0.1)
+  expect(tx).toBeGreaterThan(-19); expect(tx).toBeLessThan(-15);
+  expect(ty).toBeGreaterThan(-12); expect(ty).toBeLessThan(-8);
+  await expect(ve.locator('[data-testid^="vi-tri-hop-"]')).toHaveCount(0);   // không phòng nào được đặt bởi các lần chạm căn
+  // Bắt đầu căn lại rồi Esc → trả phép căn cũ
+  await ve.getByTestId("vi-tri-anh-can").click();
+  await expect(canvas).toHaveAttribute("data-can", "0");                     // đang căn: ảnh hiện nguyên vẹn
+  await page.keyboard.press("Escape");
+  await expect(ve.getByTestId("vi-tri-anh-can-vung")).toHaveCount(0);
+  await expect(canvas).toHaveAttribute("data-can", "1");
+  // Bỏ căn
+  await ve.getByTestId("vi-tri-anh-bo-can").click();
+  await expect(canvas).toHaveAttribute("data-can", "0");
+  expect(await canvas.evaluate((el) => (el as HTMLElement).style.transform)).toBe("");
+  // Bàn phím: Enter chọn chỗ con trỏ, mũi tên dời; xoay ảnh thì bỏ căn
+  await ve.getByTestId("vi-tri-anh-can").click();
+  await expect(ve.getByTestId("vi-tri-anh-can-vung")).toBeFocused();
+  await page.keyboard.press("Enter");
+  for (let i = 0; i < 6; i++) await page.keyboard.press("Shift+ArrowRight");
+  for (let i = 0; i < 6; i++) await page.keyboard.press("Shift+ArrowDown");
+  await page.keyboard.press("Enter");
+  await expect(canvas).toHaveAttribute("data-can", "1");
+  await ve.getByRole("button", { name: "Xoay ảnh bản vẽ 90 độ" }).click();
+  await expect(canvas).toHaveAttribute("data-xoay", "90");
+  await expect(canvas).toHaveAttribute("data-can", "0");
+  await ve.getByRole("button", { name: "Bỏ ảnh" }).click();
+  await expect(ve.getByTestId("vi-tri-anh-canvas")).toHaveCount(0);
   // P6: hỏi nhanh theo ý định — sức khoẻ → câu đầu là xà ngang; "Có" tích ô dấu hiệu, "Không" bỏ tích
   const hn = ks.getByTestId("hoi-nhanh-anh");
   await hn.getByTestId("hoi-nhanh-suc_khoe").click();
@@ -693,8 +764,23 @@ test("Dương Trạch Tam Yếu: vòng 24 sơn + Cửa–Chủ–Bếp chạm tr
   await expect(ty.getByTestId("tam-yeu-cap").locator("li")).toHaveCount(3);
   await expect(ty.getByTestId("tam-yeu-cap")).toContainText("Phòng chính với bếp");
   await expect(ty.getByTestId("tam-yeu-bep-goi-y").locator("button")).toHaveCount(8);
+  // TY-2: thế nhà theo sách + đồ hình vẽ lại từ kết quả tính (ba đường nối) + bếp theo điều nhà đang cần.
+  await expect(ty.getByTestId("tam-yeu-the-nha")).toContainText("Sinh Khí");
+  await expect(ty.getByTestId("tam-yeu-do-hinh")).toBeVisible();
+  for (const cap of ["cua_chu", "cua_bep", "chu_bep"]) await expect(ty.getByTestId(`tam-yeu-do-hinh-${cap}`)).toHaveCount(1);
+  await expect(ty.getByTestId("tam-yeu-dieu-can").locator("li")).toHaveCount(3);
+  await expect(ty.getByTestId("tam-yeu-sach")).toContainText("Dương Trạch Tam Yếu: những nguyên tắc đúng với nhà bạn");
+  await expect(ty.getByTestId("tam-yeu-sach-noi-bat").locator("li")).toHaveCount(3);     // gói 1: 3 điều đáng xem trước
   await expect(ty.getByTestId("tam-yeu-luu-y")).toContainText("không chịu trách nhiệm pháp lý");
   await expect(ty).not.toContainText(/YZ_SY_|trang_pdf|fengshui-yangzhai-kb|Vượng khí|đã thẩm định/i);
+  // TY-2 đợt 3: nhà nhiều lớp — 8 lớp, nhà chính lớp 6 → engine đếm sao từng lớp (biến trạch), web chỉ vẽ.
+  await ty.getByTestId("tam-yeu-so-lop").selectOption("8");
+  await ty.getByTestId("tam-yeu-lop-chu").selectOption("6");
+  const nl = ty.getByTestId("tam-yeu-nhieu-lop");
+  await expect(nl).toContainText("Biến trạch (8 lớp)");
+  await expect(nl.locator("ol > li")).toHaveCount(8);
+  await expect(nl.getByTestId("tam-yeu-lop-chu-loi")).toContainText("Dãy nhà chính ở lớp 6");
+  await expect(nl).toContainText("Quy ước của Hiểu Bản Thân");
   await ty.getByTestId("tam-yeu-ap-dung").click();
   await expect(ty.getByTestId("tam-yeu-ap-dung")).toContainText("Đã lưu vào hồ sơ nhà");
   const saved = await page.evaluate(() => JSON.parse(window.localStorage.getItem("hbt.nha.v1") || "{}"));
@@ -707,6 +793,7 @@ test("Dương Trạch Tam Yếu: vòng 24 sơn + Cửa–Chủ–Bếp chạm tr
   expect(saved.bo_cuc?.vi_tri?.ban_tho).toBe("Đông");
   expect(saved.bo_cuc?.dau_hieu).toContain("guong_doi_dien_giuong");
   expect(saved.bo_cuc?.da_xu_ly).toContain("guong_doi_dien_giuong");
+  expect(saved.nhieu_lop).toEqual({ so_lop: 8, lop_chu: 6 });
 
   // Mở lại trang: ba chỗ tự điền từ hồ sơ nhà.
   await page.reload();
@@ -717,8 +804,27 @@ test("Dương Trạch Tam Yếu: vòng 24 sơn + Cửa–Chủ–Bếp chạm tr
   const tyEn = page.getByTestId("tam-yeu-cua-chu-bep");
   await expect(tyEn.getByTestId("tam-yeu-ket-luan")).toBeVisible();
   await expect(tyEn.getByTestId("tam-yeu-sach")).toHaveCount(0);
+  await expect(tyEn.getByTestId("tam-yeu-the-nha")).toHaveCount(0);
+  await expect(tyEn.getByTestId("tam-yeu-nhieu-lop")).toContainText("Changing house (8 rows)");
+  await expect(page.getByTestId("quan-sat-quanh-nha")).toHaveCount(0);
   const chu = await tyEn.innerText();
   expect(chu).not.toMatch(/[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i);
+});
+
+test("TY-2: Nhìn quanh nhà — tích điều quan sát, câu sách Thập Thư hiện, chỉ mã được lưu trong hồ sơ nhà", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/phong-thuy");
+  const qs = page.getByTestId("quan-sat-quanh-nha");
+  await qs.scrollIntoViewIfNeeded();
+  await expect(qs.getByTestId("quan-sat-nhom-truoc_cua")).toBeVisible();
+  await qs.getByTestId("quan-sat-nhom-truoc_cua").locator("summary").click();
+  await qs.getByTestId("quan-sat-duong_uon_truoc_mat").check();
+  await qs.getByTestId("quan-sat-tieng_nuoc_ren").check();
+  await expect(qs.getByText("Sách xưa ghi gì về những điều bạn đã tích")).toBeVisible();
+  await expect(qs).toContainText("Dương Trạch Thập Thư");
+  const saved = await page.evaluate(() => JSON.parse(window.localStorage.getItem("hbt.nha.v1") || "{}"));
+  expect(saved.quan_sat).toEqual(expect.arrayContaining(["duong_uon_truoc_mat", "tieng_nuoc_ren"]));
+  expect(JSON.stringify(saved)).not.toMatch(/Con đường|róc rách/);   // chỉ mã, không chữ
 });
 
 test("VT-1: khung nhà theo tỉ lệ (máy tính) — nhà ống 4×20, bếp góc sau-phải ra phía Nam, lưu không đổi hướng nhà", async ({ page }) => {

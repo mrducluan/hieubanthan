@@ -50,7 +50,65 @@
    "sach_khac": "Another classic (Ten Books on Dwellings) advises the opposite — set the stove on a weaker side with its mouth facing a good direction. These are two different readings; we do not choose for you."
   },
   "luu_y_tham_khao": "These notes summarise classical texts named in each item and are for cultural reference only. They are not a personal prediction about your home and do not replace advice from an architect, doctor or lawyer; Hieuban (hieuban.com) accepts no legal responsibility for decisions made on the basis of this information.",
-  "nhom_c_an": "The book has {n} more strongly worded notes about this layout — shown only to readers aged 16 or over."
+  "nhom_c_an": "The book has {n} more strongly worded notes about this layout — shown only to readers aged 16 or over.",
+  "viec_tuan_tieu_de": "The stove sits on a side the Yangzhai Sanyao advises against",
+  "nhieu_lop": {
+   "tieu_de": "Multi-courtyard homes: the star on the main building",
+   "loai": {
+    "tinh": {
+     "ten": "Still house (one courtyard)",
+     "y": "One courtyard, one row of buildings: the book reads Door – Main room – Stove as above and does not count stars by row."
+    },
+    "dong": {
+     "ten": "Moving house ({n} rows)",
+     "y": "Two to five rows: the book counts stars from the gate inwards; each row's star is produced by the element of the row before. Read the star of the row where the main (tallest) building stands."
+    },
+    "bien": {
+     "ten": "Changing house ({n} rows)",
+     "y": "Six to ten rows: counted like a moving house, but Metal, Wood and Earth may come in pairs — two stars of the same element side by side."
+    },
+    "hoa": {
+     "ten": "Transforming house ({n} rows)",
+     "y": "Eleven rows or more: the book counts with the He Tu and Luo Shu numbers. Hieuban does not calculate this yet."
+    }
+   },
+   "sao": {
+    "Sinh Khí": "Tan Lang",
+    "Thiên Y": "Ju Men",
+    "Diên Niên": "Wu Qu",
+    "Phục Vị": "Fu Bi",
+    "Hoạ Hại": "Lu Cun",
+    "Lục Sát": "Wen Qu",
+    "Ngũ Quỷ": "Lian Zhen",
+    "Tuyệt Mệnh": "Po Jun"
+   },
+   "quan_he": {
+    "ty_hoa": "same element as the main building's side",
+    "sao_sinh_cung": "feeding the main building's side",
+    "cung_sinh_sao": "fed by the main building's side",
+    "sao_khac_cung": "clashing with the main building's side",
+    "cung_khac_sao": "held down by the main building's side"
+   },
+   "lop_chu": {
+    "thuan": "The main building, in row {so}, gets the star {sao} ({du_nien}), {quan_he}. The book sees this as favourable: a good star in the right place.",
+    "can_bang": "The main building, in row {so}, gets the star {sao} ({du_nien}), {quan_he}. One side favourable, one side not — the book treats it as ordinary.",
+    "can_chu_dong": "The main building, in row {so}, gets the star {sao} ({du_nien}), {quan_he}. Worth attention: the book suggests moving the height and main living space to a row with a better star when you next renovate."
+   },
+   "chua_lop_chu": "Choose the row with the main (tallest, largest) building to see which star falls on it.",
+   "nen_cao": "Rows that suit the main building (good star, element in harmony with its side): {ds}.",
+   "khong_nen_cao": "No row has both a good star and an element in harmony with the main building's side — keep the main building as it is and mind the Door – Main room – Stove pairs above.",
+   "lop_ten": "row {so}",
+   "ap_sat": "The door and the main building do not suit each other, but a good star falls on the main building. The book calls this a good star holding the clash down: the early years are often smooth, and the door–main clash shows only over time. Worth fixing the door–main pair gradually (entrance, main room) when you can.",
+   "quy_uoc": "Hieuban's convention (the book was written for old multi-courtyard houses, not today's townhouses): row 1 is the gate or front door; each further building with its own roof, separated by a courtyard or light well, adds one row. A house under one roof with no inner courtyard is a still house. For homes with several courtyards, the book takes a separate compass reading in the courtyard inside the gate (for the door), in the main courtyard (for the main room) and in the kitchen yard (for the stove); this tool measures all three from the centre of the whole property, so the door or stove side may differ from the book's method — the row-by-row stars still follow the book's count.",
+   "cua_lech": "Gate set to one side: the first row's star is counted from the gate's side.",
+   "bay_lop": "Seven-row house: the book only gives an example for row 6; the pairing at row 7 follows the book's rule (seven rows pair two elements).",
+   "can_cu": {
+    "dau": "Row 1 (gate): the you nian from the {tu} side to the facing side {huong} is {du_nien}.",
+    "day": "Stars by row: {ds}.",
+    "luat_dong": "Moving house: each row's star is produced by the element of the row before (Earth → Metal → Water → Wood → Fire → Earth), one star per element.",
+    "luat_bien": "Changing house: Metal, Wood and Earth come in pairs (Fu Bi – Tan Lang, Lu Cun – Ju Men, Wu Qu – Po Jun); six rows pair one element, seven two, eight or more all three."
+   }
+  }
  },
  "vi_tri": {
   "ten": {
@@ -59,7 +117,8 @@
    "bep": "Stove",
    "ve_sinh": "Toilet",
    "ban_tho": "Altar",
-   "cau_thang": "Top of the stairs"
+   "cau_thang": "Top of the stairs",
+   "ban_cong": "Balcony or large back window"
   },
   "lech": {
    "ap_dung": "Where you stood, the compass was off by {do}° from the house axis; every reading inside has been corrected by that amount.",
@@ -77,6 +136,9 @@
   "ten_cap_tren": {
    "cua_chu": "Top of the stairs and main room",
    "cua_bep": "Top of the stairs and stove"
+  },
+  "theo_san": {
+   "ghi_chu": "Home with several courtyards: the book takes a separate compass reading in each courtyard — in the courtyard just inside the gate for the door, in the courtyard in front of the main building for the main room, and in the courtyard nearest the stove for the stove. The result below follows that method; the number of rows and the main building come from the courtyards you marked."
   }
  }
 }
