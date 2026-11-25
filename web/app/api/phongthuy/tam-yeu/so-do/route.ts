@@ -14,7 +14,13 @@ export async function GET(req: Request): Promise<NextResponse> {
   const bep = sp.get("bep");
   const namSinh = sp.get("nam_sinh");
   const du18 = sp.get("du_18") === "1";
+  // TY-2: giới tính (cùng năm sinh → mệnh người chủ, engine tính), phía WC / bàn thờ trong hồ sơ nhà.
+  const gioi = sp.get("gioi_tinh");
+  const veSinh = sp.get("ve_sinh");
+  const banTho = sp.get("ban_tho");
   if (!QUAI_HOP_LE.has(cua) || (chu && !QUAI_HOP_LE.has(chu)) || (bep && !QUAI_HOP_LE.has(bep))
+      || (veSinh && !QUAI_HOP_LE.has(veSinh)) || (banTho && !QUAI_HOP_LE.has(banTho))
+      || (gioi && gioi !== "nam" && gioi !== "nu")
       || (namSinh && !/^(19|20)\d\d$/.test(namSinh))) {
     return NextResponse.json({ error: "Đầu vào không hợp lệ." }, { status: 422 });
   }
@@ -23,7 +29,10 @@ export async function GET(req: Request): Promise<NextResponse> {
   if (bep) q.set("bep", bep);
   if (namSinh) q.set("nam_sinh", namSinh);
   if (du18) q.set("du_18", "true");
-  const rieng = Boolean(namSinh || du18);
+  if (gioi && namSinh) q.set("gioi_tinh", gioi);
+  if (veSinh) q.set("ve_sinh", veSinh);
+  if (banTho) q.set("ban_tho", banTho);
+  const rieng = Boolean(namSinh || du18 || veSinh || banTho);
   try {
     const nn = engineTheoReq(req, `/v1/phongthuy/tam-yeu/so-do?${q.toString()}`);
     const r = await fetch(`${ENGINE_URL}${nn.duong}`, {

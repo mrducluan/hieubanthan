@@ -3222,7 +3222,89 @@
    "sach_khac": "Một sách khác (Dương Trạch Thập Thư) lại dặn đặt bếp ở phía kém và quay miệng bếp về phía tốt — đây là hai cách đọc khác nhau, hệ thống không chọn thay bạn."
   },
   "luu_y_tham_khao": "Các ý trên được rút và tóm từ sách xưa ghi ở từng mục, chỉ để tham khảo văn hoá. Đây không phải lời đoán riêng cho nhà bạn và không thay ý kiến của kiến trúc sư, bác sĩ hay luật sư; Hiểu Bản Thân (hieuban.com) không chịu trách nhiệm pháp lý về quyết định bạn đưa ra dựa trên các thông tin này.",
-  "nhom_c_an": "Sách còn {n} ghi chép nặng lời hơn về thế nhà này — chỉ hiện cho người đọc từ 16 tuổi."
+  "nhom_c_an": "Sách còn {n} ghi chép nặng lời hơn về thế nhà này — chỉ hiện cho người đọc từ 16 tuổi.",
+  "nhom_ten": {
+   "dong": "nhóm Đông",
+   "tay": "nhóm Tây"
+  },
+  "quan_he_hanh": {
+   "cung_hanh": "cùng hành — sách cho là tốt nhất",
+   "nuoi_nhau": "hai hành nuôi nhau — sách cho là tốt nhì",
+   "choi_nhau": "hai hành chọi nhau — sách cho là chỉ còn tốt ít"
+  },
+  "am_duong": {
+   "duong": "dương",
+   "am": "âm"
+  },
+  "dieu_can": {
+   "Thiên Y": "Nhà thưa người, hay ốm, mong chuyện cưới hỏi",
+   "Sinh Khí": "Học hành, công danh chậm, túng thiếu",
+   "Diên Niên": "Kém sức bền, khó giữ tiền"
+  },
+  "dieu_can_tieu_de": "Sách chỉ ba chỗ đặt bếp theo điều nhà đang cần",
+  "the_nha": {
+   "ten": "Theo sách, nhà bạn là thế nhà {dn}",
+   "tuong": "Sách gọi thế cửa – phòng chính này là «{tuong}»."
+  },
+  "bep_sach": {
+   "hop": "sách chọn",
+   "tranh": "sách dặn tránh"
+  },
+  "ap": {
+   "_ghi_chu": "TY-2 (2026-11-25): câu 'ở nhà bạn' đi kèm nguyên tắc Tam Yếu / điều Minh Kính khi điều kiện đúng (luật ở luangiai/phongthuy_tam_yeu.py). Nháp ban biên tập; chỉ nêu dữ kiện đã tính, không thêm ý của sách.",
+   "ten_nhom_nguyen_tac": "Dương Trạch Tam Yếu: những nguyên tắc đúng với nhà bạn",
+   "ten_nhom_minh_kinh": "Bát Trạch Minh Kính dặn thêm (sách này lấy mệnh người chủ làm gốc)",
+   "khong_co": "không có phía nào vừa bù vừa hợp",
+   "cho_cua": "cửa chính phía {h}",
+   "cho_chu": "phòng chính phía {h}",
+   "cho_bep": "bếp phía {h}",
+   "tam_yeu": "Ba chỗ của nhà bạn: {ds}.",
+   "hai_nhom": "Ở nhà bạn: cửa phía {cua} thuộc {n1}, phòng chính phía {chu} thuộc {n2} — hai chỗ khác nhóm.",
+   "du_nien_tot": "Ở nhà bạn: cửa với phòng chính là {dn}.",
+   "sao_dung_cho": "Ở nhà bạn: {dn} thuộc hành {hs}, rơi vào phía {h} thuộc hành {hc} — {qh}.",
+   "hang_dau": "Ở nhà bạn: nhà {n} được {dn} giữa cửa và phòng chính — đúng thế sách xếp vào hàng đầu.",
+   "du_nien_xau": "Ở nhà bạn: {ds}.",
+   "cung_mem": "Ở nhà bạn: cửa phía {cua} và phòng chính phía {chu} cùng {tinh}.{hien} Phía đặt bếp vừa bù được vừa không chọi cửa: {bu}.",
+   "cung_mem_bep_bu": " Bếp phía {h} đang có tính ngược lại, đúng cách bù của sách.",
+   "cung_mem_bep_chua": " Bếp phía {h} chưa bù được.",
+   "ba_tot_co": "Ở nhà bạn: ba cặp ra đủ Sinh Khí, Diên Niên, Thiên Y — đúng thế nhà ba tốt.",
+   "ba_tot_dat": "Ở nhà bạn: đặt bếp phía {ds} thì ba cặp ra đủ Sinh Khí, Diên Niên, Thiên Y — thế nhà ba tốt.",
+   "bep_nuoi": "Ở nhà bạn: bếp phía {h}, là {dn} so với cửa.",
+   "bep_khac_nhom": "Ở nhà bạn: bếp phía {h} thuộc {nb}, cửa thuộc {nc}.",
+   "chinh_phu": "Ở nhà bạn: cửa – bếp là {cb}, phòng chính – bếp là {hb}; theo sách, cặp cửa – bếp nặng hơn.",
+   "cho_phu": "Ở nhà bạn: miệng bếp quay về một trong các phía {ds} (phía tốt tính từ cửa).",
+   "dieu_can": "Với cửa nhà bạn — {ds}.",
+   "wc_ngu_quy": "Ở nhà bạn: nhà vệ sinh phía {h} là {dn} so với cửa — đúng chỗ sách khen nhất cho nhà vệ sinh.",
+   "wc_luc_sat": "Ở nhà bạn: nhà vệ sinh phía {h} là {dn} so với cửa — chỗ sách khen thứ hai cho nhà vệ sinh.",
+   "wc_xau": "Ở nhà bạn: nhà vệ sinh phía {h} là {dn} so với cửa — đúng ý sách (đặt ở phía xấu).",
+   "wc_tot": "Ở nhà bạn: nhà vệ sinh phía {h} là {dn} so với cửa — rơi vào phía tốt; sách nói chỉ bớt tốt, không hại.",
+   "menh_cung_nhom": "Ở nhà bạn: mệnh {q} thuộc {nm}, cùng nhóm với nhà — sách cho thêm phần tốt.",
+   "menh_khac_nhom": "Ở nhà bạn: mệnh {q} thuộc {nm}, nhà thuộc {nn}. Phía hợp mệnh để kê đầu giường, quay miệng bếp: {ds}.",
+   "truoc_nha": "Bạn đã khai trước nhà có đường hoặc dòng nước — đúng loại thế sách dặn để ý.",
+   "mk_cong": "Ở nhà bạn: cửa phía {h} là {dn} với mệnh bạn.",
+   "mk_cong_xau": "Ở nhà bạn: cửa phía {h} là {dn} với mệnh bạn — sách chỉ cách bù bằng cửa phòng quay về phía tốt.",
+   "mk_khac_nhom": "Ở nhà bạn: mệnh thuộc {nm}, nhà thuộc {nn}.",
+   "mk_theo_menh": "Ở nhà bạn: các phía hợp mệnh là {ds}.",
+   "mk_dau_giuong": "Ở nhà bạn: phía Sinh Khí của mệnh bạn là {h}.",
+   "mk_phong_chinh": "Ở nhà bạn: phòng chính phía {h} là {dn} với mệnh bạn.",
+   "mk_doi_giuong": "Ở nhà bạn: phía hợp mệnh để quay đầu giường là {ds}.",
+   "mk_than_bep": "Ở nhà bạn: bếp phía {h} là {dn} với mệnh bạn — sách này xét thân bếp theo mệnh, khác Tam Yếu xét theo cửa.",
+   "mk_bep_de_tot": "Ở nhà bạn: thân bếp đang ở phía {h}, là {dn} của mệnh bạn.",
+   "mk_cua_lo": "Ở nhà bạn: các phía tốt của mệnh để quay miệng bếp: {ds}.",
+   "mk_wc": "Ở nhà bạn: nhà vệ sinh phía {h} là {dn} với mệnh bạn.",
+   "mk_tho": "Ở nhà bạn: bàn thờ phía {h} là {dn} với mệnh bạn.",
+   "mk_cong_nhom": "Ở nhà bạn: cửa phía {cua} và phòng chính phía {chu} khác nhóm.",
+   "mk_bo_cuc_tranh": "Ở nhà bạn: cửa phía {cua} với phòng chính phía {chu} là {dn}.",
+   "mk_nguoi_khac_nhom": "Ở nhà bạn: người cùng nhà có mệnh khác nhóm nhau.",
+   "mk_xa": "Bạn đã khai trong nhà có xà ngang.",
+   "mk_bep_kieng": "Bạn đã khai bếp đối cửa hoặc sát nhà vệ sinh.",
+   "mk_mieng_bep": "Bạn đã khai bếp đối thẳng cửa.",
+   "mk_cua_doi": "Bạn đã khai trước cửa có đường đâm thẳng hoặc ngã ba.",
+   "mk_nhieu_cua": "Bạn đã khai trong nhà có cửa đối thẳng nhau.",
+   "mk_nen": "Bạn đã khai nhà không vuông (chữ L, khuyết góc).",
+   "mk_tang": "Nhà bạn có nhiều tầng."
+  },
+  "viec_tuan_tieu_de": "Bếp chưa hợp với cửa theo Dương Trạch Tam Yếu"
  },
  "vi_tri": {
   "_ghi_chu": "VT-1 (2026-11-21): lời cho 'Đứng giữa nhà, chĩa điện thoại' và khung nhà theo tỉ lệ. Nháp ban biên tập.",

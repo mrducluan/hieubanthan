@@ -45,6 +45,8 @@ export const LuanGiaiPTZ = z.object({
     toa: z.string().max(10).optional(),
     theo: z.enum(["cua", "ban_cong"]).optional(),
     bo_cuc: BoCucZ.optional(),
+    // TY-2: mã điều đã tích ở "Nhìn quanh nhà" (Dương Trạch Thập Thư) — engine kiểm danh mục.
+    quan_sat: z.array(z.string().regex(/^[a-z_]{3,40}$/)).max(60).optional(),
   }).strict(),
   thanh_vien: z.array(SinhZ.extend({ vai: z.enum(["vo", "chong", "con", "cha_me", "khac"]).optional() }).strict()).max(6).optional(),
   ngay_xem: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),

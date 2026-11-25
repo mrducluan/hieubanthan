@@ -70,6 +70,8 @@ export const HoSoNha = z.object({
       ban_cong: z.tuple([z.number().int().min(0).max(11), z.number().int().min(0).max(11)]).optional(),
     }).optional(),
   }).optional(),
+  /** TY-2: mã điều người dùng tự tích ở "Nhìn quanh nhà" (Dương Trạch Thập Thư) — chỉ mã, không chữ, không địa chỉ. */
+  quan_sat: z.array(z.string().regex(/^[a-z_]{3,40}$/)).max(60).optional(),
   /** VT-1: "đứng giữa nhà, chĩa điện thoại" — mẫu la bàn thô (≤ 30 / vật) hoặc điểm trên khung tỉ lệ, theo tầng. Engine tính
    *  phương / sơn; web chỉ lưu số đo người dùng đã ghi (trên máy). */
   truc_mau: MauDo.optional(),
@@ -181,7 +183,7 @@ export function boCucGui(n: HoSoNha | null | undefined, huong?: { huong_do?: num
 /** Toàn bộ đầu vào `nha` + `thanh_vien` cho /api/phongthuy/luan-giai từ một hồ sơ nhà (so hai căn, thẻ chia sẻ). */
 export function nhaGui(n: HoSoNha): { nha: Record<string, unknown>; thanh_vien?: { vai: string; birth_year: number; gender: "nam" | "nu" }[] } {
   const bo_cuc = boCucGui(n);
-  const nha = { ...(nhaTuHoSo(n) ?? { theo: n.theo }), ...(bo_cuc ? { bo_cuc } : {}) };
+  const nha = { ...(nhaTuHoSo(n) ?? { theo: n.theo }), ...(bo_cuc ? { bo_cuc } : {}), ...(n.quan_sat?.length ? { quan_sat: n.quan_sat } : {}) };
   const tv = n.thanh_vien.map((x) => ({ vai: x.vai, birth_year: x.nam, gender: x.gioi_tinh }));
   return { nha, ...(tv.length ? { thanh_vien: tv } : {}) };
 }

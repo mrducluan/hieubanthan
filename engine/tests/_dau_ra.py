@@ -610,6 +610,7 @@ KHOA_THEO_CHU = {"thuat_ngu", "phut_doc",   # phut_doc = số phút đọc, đ�
                  "sach_ghi",                  # SX-C: khối "sách xưa ghi" — lời Việt chưa dịch nên CHỈ bản Việt có (bản Anh: None)
                  "bo_sung_cung", "sach_vo_chong",   # UI-HHT: lớp tri thức thêm của trang cung phi + lệ vợ chồng (hai-cung) — KB chưa có bản Anh nên CHỈ bản Việt có
                  "luan_hoi", "nguoi_quanh", "cau_tra_loi", "so_nguoi", "cau_mau",
+                 "tam_yeu",   # TY-2: dữ liệu vẽ đồ hình Cửa – Chủ – Bếp ở chương Từng phòng (mã quái / phương) — CHỈ bản Việt vẽ
                  "sach"}   # SX-D: câu Toàn Thư đi cùng hộp luận — lời Việt chưa dịch nên CHỈ bản Việt có   # LH-1: lớp "Luận theo câu hỏi" Tử vi — KB chưa có bản Anh nên CHỈ bản Việt có
 # Danh sách CHỮ mà số phần tử được phép khác theo ngôn ngữ (biến thể tên để nhận diện thuật ngữ trong chữ ngôn ngữ đó).
 DS_CHU_TU_DO = {"bien_the", "khop"}   # khop = cụm chữ trong lời đáp để gạch nối với hình (hỏi đáp) — theo chữ của ngôn ngữ

@@ -693,6 +693,12 @@ test("Dương Trạch Tam Yếu: vòng 24 sơn + Cửa–Chủ–Bếp chạm tr
   await expect(ty.getByTestId("tam-yeu-cap").locator("li")).toHaveCount(3);
   await expect(ty.getByTestId("tam-yeu-cap")).toContainText("Phòng chính với bếp");
   await expect(ty.getByTestId("tam-yeu-bep-goi-y").locator("button")).toHaveCount(8);
+  // TY-2: thế nhà theo sách + đồ hình vẽ lại từ kết quả tính (ba đường nối) + bếp theo điều nhà đang cần.
+  await expect(ty.getByTestId("tam-yeu-the-nha")).toContainText("Sinh Khí");
+  await expect(ty.getByTestId("tam-yeu-do-hinh")).toBeVisible();
+  for (const cap of ["cua_chu", "cua_bep", "chu_bep"]) await expect(ty.getByTestId(`tam-yeu-do-hinh-${cap}`)).toHaveCount(1);
+  await expect(ty.getByTestId("tam-yeu-dieu-can").locator("li")).toHaveCount(3);
+  await expect(ty.getByTestId("tam-yeu-sach")).toContainText("Dương Trạch Tam Yếu: những nguyên tắc đúng với nhà bạn");
   await expect(ty.getByTestId("tam-yeu-luu-y")).toContainText("không chịu trách nhiệm pháp lý");
   await expect(ty).not.toContainText(/YZ_SY_|trang_pdf|fengshui-yangzhai-kb|Vượng khí|đã thẩm định/i);
   await ty.getByTestId("tam-yeu-ap-dung").click();
@@ -717,8 +723,26 @@ test("Dương Trạch Tam Yếu: vòng 24 sơn + Cửa–Chủ–Bếp chạm tr
   const tyEn = page.getByTestId("tam-yeu-cua-chu-bep");
   await expect(tyEn.getByTestId("tam-yeu-ket-luan")).toBeVisible();
   await expect(tyEn.getByTestId("tam-yeu-sach")).toHaveCount(0);
+  await expect(tyEn.getByTestId("tam-yeu-the-nha")).toHaveCount(0);
+  await expect(page.getByTestId("quan-sat-quanh-nha")).toHaveCount(0);
   const chu = await tyEn.innerText();
   expect(chu).not.toMatch(/[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i);
+});
+
+test("TY-2: Nhìn quanh nhà — tích điều quan sát, câu sách Thập Thư hiện, chỉ mã được lưu trong hồ sơ nhà", async ({ page }) => {
+  await napHoSo(page);
+  await page.goto("/phong-thuy");
+  const qs = page.getByTestId("quan-sat-quanh-nha");
+  await qs.scrollIntoViewIfNeeded();
+  await expect(qs.getByTestId("quan-sat-nhom-truoc_cua")).toBeVisible();
+  await qs.getByTestId("quan-sat-nhom-truoc_cua").locator("summary").click();
+  await qs.getByTestId("quan-sat-duong_uon_truoc_mat").check();
+  await qs.getByTestId("quan-sat-tieng_nuoc_ren").check();
+  await expect(qs.getByText("Sách xưa ghi gì về những điều bạn đã tích")).toBeVisible();
+  await expect(qs).toContainText("Dương Trạch Thập Thư");
+  const saved = await page.evaluate(() => JSON.parse(window.localStorage.getItem("hbt.nha.v1") || "{}"));
+  expect(saved.quan_sat).toEqual(expect.arrayContaining(["duong_uon_truoc_mat", "tieng_nuoc_ren"]));
+  expect(JSON.stringify(saved)).not.toMatch(/Con đường|róc rách/);   // chỉ mã, không chữ
 });
 
 test("VT-1: khung nhà theo tỉ lệ (máy tính) — nhà ống 4×20, bếp góc sau-phải ra phía Nam, lưu không đổi hướng nhà", async ({ page }) => {

@@ -281,13 +281,16 @@ def battu_nhom(ls: dict, mo_rong: dict, gioi: str | None = None) -> list[tuple[s
 # ───────────────────────── Phong thuỷ ─────────────────────────
 
 def phongthuy(quai: str | None = None, dau_hieu: list[str] | None = None, cua: str | None = None, chu: str | None = None,
-              bep: str | None = None, tuoi: int | None = None) -> dict | None:
-    """Điều sách dặn theo cung mệnh · theo dấu hiệu ĐÃ XÁC NHẬN của nhà · theo cặp cửa – chủ, bếp – cửa (khi KB có)."""
-    return khoi(phongthuy_nhom(quai, dau_hieu, cua, chu, bep), tuoi)
+              bep: str | None = None, tuoi: int | None = None, them: dict | None = None) -> dict | None:
+    """Điều sách dặn theo cung mệnh · theo dấu hiệu ĐÃ XÁC NHẬN của nhà · theo cặp cửa – chủ, bếp – cửa (khi KB có).
+    `them` (TY-2) = dữ kiện thêm của nhà cho nguyên tắc Tam Yếu / điều Minh Kính có điều kiện (`phongthuy_tam_yeu.nhom_sach`):
+    {ve_sinh, ban_tho, menh, khac_nhom_nguoi, nhieu_tang} — không có thì không thêm hai nhóm ấy."""
+    return khoi(phongthuy_nhom(quai, dau_hieu, cua, chu, bep, them), tuoi)
 
 
 def phongthuy_nhom(quai: str | None = None, dau_hieu: list[str] | None = None, cua: str | None = None,
-                   chu: str | None = None, bep: str | None = None) -> list[tuple[str, str, list[tuple[dict, str]]]]:
+                   chu: str | None = None, bep: str | None = None,
+                   them: dict | None = None) -> list[tuple[str, str, list[tuple[dict, str]]]]:
     """Phần chọn câu của `phongthuy` — dùng chung cho khối mệnh quái / khảo sát nhà và hỏi đáp."""
     nhom = []
     if quai:
@@ -313,6 +316,9 @@ def phongthuy_nhom(quai: str | None = None, dau_hieu: list[str] | None = None, c
             if bep:   # Dương Trạch Thập Thư (火唵說): bếp ở phương kém, nhường phương tốt
                 cac += [(m, "Chỗ đặt bếp") for m in _kb("phongthuy_sach_ghi.json")["dieu"] if m.get("kem") == "bep"]
             nhom.append(("cua_chu_bep", "Cửa, phòng chính và bếp", cac))
+    if cua and them is not None:          # TY-2: nguyên tắc Tam Yếu + điều Minh Kính có điều kiện đúng với nhà này
+        from app.luangiai import phongthuy_tam_yeu as _ty  # noqa: PLC0415
+        nhom += _ty.nhom_sach(cua, chu, bep, dau_hieu=dau_hieu, **them)
     return nhom
 
 

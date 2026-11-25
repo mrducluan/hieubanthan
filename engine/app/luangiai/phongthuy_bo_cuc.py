@@ -189,8 +189,13 @@ def _sach_ghi(b: "BoCuc", dau_hieu: list[str], sinh: dict | None) -> dict | None
 
     tuoi = sach_ghi_mon.tuoi_tu((sinh.get("ngay") or sinh.get("nam")) if sinh else None, config.hom_nay_vn())
     # Chín điều theo cung mệnh đã hiện ở khối mệnh quái (`/v1/phongthuy/menh-quai`) — ở đây chỉ dấu hiệu + cửa, phòng chính, bếp.
+    menh = None
+    if sinh and sinh.get("gioi_tinh") in ("nam", "nu") and sinh.get("nam"):
+        menh = pt.menh_quai(sinh["nam"], sinh["gioi_tinh"], sinh.get("ngay"), sinh.get("moc_nam", "lap_xuan"))["quai"]
+    # TY-2: nguyên tắc Tam Yếu / điều Minh Kính có điều kiện (WC, bàn thờ, mệnh người chủ, dấu hiệu đã xác nhận).
+    them = {"ve_sinh": quai("ve_sinh"), "ban_tho": quai("ban_tho"), "menh": menh}
     return sach_ghi_mon.phongthuy(dau_hieu=dau_hieu, cua=quai("cua_chinh"), chu=quai("phong_ngu_chinh"), bep=quai("bep"),
-                                  tuoi=tuoi)
+                                  tuoi=tuoi, them=them)
 
 
 @ngon_ngu.theo_viet
@@ -290,6 +295,32 @@ def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
     }
 
 
+TAM_YEU_BEP = "tam_yeu_bep"
+
+
+def _viec_tam_yeu(bo_cuc: dict) -> dict | None:
+    """TY-2: bếp đặt ở phía Dương Trạch Tam Yếu dặn tránh (so với cửa và phòng chính) → việc 0 đồng của công cụ Tam Yếu
+    (xoay miệng bếp). Một bộ tính với `/tam-yeu/so-do`. Không có cửa / bếp, hoặc bếp đã hợp → None."""
+    vt = bo_cuc.get("vi_tri") or {}
+
+    def q(k: str) -> str | None:
+        p = vt.get(k)
+        return pt.HUONG_QUAI.get(p) if p and p != "Trung cung" else None
+
+    cua, chu, bep = q("cua_chinh"), q("phong_ngu_chinh"), q("bep")
+    if not (cua and bep):
+        return None
+    from app.luangiai import phongthuy_tam_yeu as ty  # noqa: PLC0415
+    loai = next(g["loai"] for g in ty._goi_y_bep(cua, chu) if g["quai"] == bep)
+    if loai != "tranh":
+        return None
+    r = ty.so_do(cua, chu, bep, None)
+    lam = next((v["lam"] for v in r["viec"] if v["chi_phi"] == "0"), None)
+    if not lam:
+        return None
+    return {"tieu_de": ty._cc()["viec_tuan_tieu_de"], "lam": lam}
+
+
 def viec_tuan(dau_hieu: list[str], da_xu_ly: list[str], loai_nha: str | None, ngay, bo_cuc: dict | None = None) -> dict:
     """Y4 — "Việc 0 đồng tuần này" (thẻ Hôm nay): mỗi tuần (ISO, thứ Hai → Chủ nhật) MỘT việc không tốn tiền từ dấu hiệu
     người dùng đã khai mà chưa đánh dấu đã xử lý. Ưu tiên nhóm nên xử lý trước (veto) — còn veto thì chỉ xoay trong veto;
@@ -303,7 +334,11 @@ def viec_tuan(dau_hieu: list[str], da_xu_ly: list[str], loai_nha: str | None, ng
     bo = set(da_xu_ly)
     co = [ma for ma in DAU_HIEU if ma in set(dau_hieu) and ma not in bo]
     veto = dau_hieu_veto()
-    nhom = ([m for m in co if m in veto] or [m for m in co if not DAU_HIEU[m].get("tot")] or co)
+    ty_viec = _viec_tam_yeu(bo_cuc) if bo_cuc is not None else None
+    # TY-2: bếp ở phía Tam Yếu dặn tránh (so với cửa / phòng chính) → thêm một việc 0 đồng (xoay miệng bếp) vào vòng xoay
+    # cùng các dấu hiệu cần để ý; dấu hiệu nhóm nên xử lý trước (veto) vẫn đứng riêng.
+    nhom = ([m for m in co if m in veto] or [m for m in co if not DAU_HIEU[m].get("tot")] + ([TAM_YEU_BEP] if ty_viec else [])
+            or co)
     nam, tuan, _ = ngay.isocalendar()
     dau_tuan = ngay - _dt.timedelta(days=ngay.weekday())
     ra = {"tuan": f"{nam}-W{tuan:02d}", "tu_ngay": dau_tuan.isoformat(), "den_ngay": (dau_tuan + _dt.timedelta(days=6)).isoformat(),
@@ -312,6 +347,11 @@ def viec_tuan(dau_hieu: list[str], da_xu_ly: list[str], loai_nha: str | None, ng
         ra["ly_do"] = "da_xu_ly_het" if dau_hieu else "chua_khai"
         return ra
     ma = nhom[(dau_tuan.toordinal() // 7) % len(nhom)]      # số tuần liên tục từ thứ Hai — không nhảy ở năm 52/53 tuần
+    if ma == TAM_YEU_BEP:
+        from app.luangiai.doi_song_khuon import ma_mau  # noqa: PLC0415
+        ra["viec"] = {**ty_viec, "ma": ma, "veto": False, "tot": False, "trang": "/phong-thuy#tam-yeu",
+                      "ma_mau": ma_mau("phongthuy", "viec_tuan", ma), "phai": "bat_trach_huyen_khong"}
+        return ra
     m = kb.bo_tri(ma)
     v0 = next((v["lam"] for v in _viec_cho(ma, m, loai_nha) if v["chi_phi"] == "khong_ton"), m["goi_y"])
     from app.luangiai.doi_song_khuon import ma_mau  # noqa: PLC0415

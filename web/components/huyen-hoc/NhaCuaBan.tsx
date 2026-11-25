@@ -23,6 +23,7 @@ import { GoiMoCheo, type GoiMo } from "@/components/khung/GoiMoCheo";
 import { NhacToi } from "@/components/khung/NhacToi";
 import { datGocNhin, TEN_GOC_NHIN, useGocNhin, type GocNhin } from "@/lib/goc-nhin-pt";
 import { SoDoNha } from "@/components/huyen-hoc/SoDoNha";
+import { DoHinhTamYeu, type CapDoHinh } from "@/components/phong-thuy/DoHinhTamYeu";
 import { NHAN_MUC } from "@/components/luan-giai/kieu";
 import { boCucGui, type HoSoNha } from "@/lib/ho-so-nha";
 import { NutChiaSeNha } from "@/components/chia-se/NutChiaSeNha";
@@ -46,6 +47,8 @@ interface Chuong {
   /** Q5: cùng việc ấy xếp theo chi phí · Q1: trần mức vì dấu hiệu lớn chưa xử lý. */
   hanh_dong_chi_phi?: { ma: string; nhan: string; viec: string[] }[];
   tran_muc?: { muc_toi_da: Muc; ly_do: string[]; giai_thich: string };
+  /** TY-2: Cửa – Chủ – Bếp theo Dương Trạch Tam Yếu (một bộ tính với công cụ tra nhanh) — để vẽ đồ hình. */
+  tam_yeu?: { huong: { cua: string; chu: string | null; bep: string | null }; cap: CapDoHinh[]; ket_luan: { muc: Muc; loi: string } };
 }
 /** Đồ thị tri thức theo ý định (thay Apache AGE): phòng cần nhìn, dấu hiệu nên rà, năm sao tới phía phòng. */
 interface TheoYDinh {
@@ -139,7 +142,8 @@ export function NhaCuaBan({ sinh, doHuongGoiY, yDinhGoiY }: {
       const bo_cuc = boCucGui(nhaDung, d != null ? { huong_do: d } : huong ? { huong } : {});
       const yc = {
         ...(sinh ? { sinh } : {}),
-        nha: { ...(d != null ? { huong_do: d } : huong ? { huong } : {}), ...(nx != null ? { nam_xay: nx } : {}), theo, ...(bo_cuc ? { bo_cuc } : {}) },
+        nha: { ...(d != null ? { huong_do: d } : huong ? { huong } : {}), ...(nx != null ? { nam_xay: nx } : {}), theo, ...(bo_cuc ? { bo_cuc } : {}),
+          ...(nhaDung?.quan_sat?.length ? { quan_sat: nhaDung.quan_sat } : {}) },
         ...(thanh_vien.length ? { thanh_vien } : {}),
         goc_nhin: gocNhin, ...(yDinh ? { y_dinh: yDinh } : {}),
       };
@@ -392,8 +396,11 @@ function ChuongNha({ c, so, huongNha }: { c: Chuong; so: number; huongNha?: stri
         <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">{c.hop.map((h, k) => <HopNoiBat key={`${h.loai}-${k}`} hop={h} />)}</div>
       )}
       {c.phong && c.phong.length > 0 && (
-        <SoDoNha className="mt-3" huongNha={huongNha} duNien={Object.fromEntries(c.phong.map((p) => [p.cung, p.du_nien]))}
+        <div className="mt-3 flex flex-wrap items-start gap-4">
+        <SoDoNha huongNha={huongNha} duNien={Object.fromEntries(c.phong.map((p) => [p.cung, p.du_nien]))}
           phong={c.phong.map((p) => ({ cung: p.cung, ten: p.ten, muc: p.muc }))} />
+        {c.tam_yeu && c.tam_yeu.cap.length > 0 && <DoHinhTamYeu huong={c.tam_yeu.huong} cap={c.tam_yeu.cap} />}
+        </div>
       )}
       {c.phong && c.phong.length > 0 && <ChanQr className="max-w-sm" nhan={t("nc.qr")} />}
       {c.phong && c.phong.length > 0 && (
