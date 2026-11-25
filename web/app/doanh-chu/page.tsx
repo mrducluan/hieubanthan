@@ -1,6 +1,6 @@
-// Chuyển hướng vĩnh viễn từ URL cũ /doanh-chu sang URL dễ hiểu /ban-do-doi-ngu (không gãy link đã chia sẻ).
+// Chuyển hướng vĩnh viễn 1 bước từ URL cũ /doanh-chu sang /quan-ly-nhan-su (tránh chuỗi redirect 2 bước).
 import { permanentRedirect } from "next/navigation";
 
 export default function Page() {
-  permanentRedirect("/ban-do-doi-ngu");
+  permanentRedirect("/quan-ly-nhan-su");
 }

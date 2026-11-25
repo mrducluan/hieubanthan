@@ -16,7 +16,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/hop-doi", ten: "Hợp đôi thần số", mo_ta: "Hai con số chủ đạo, không chấm điểm" },
     { href: "/tu-vi#hop-tham", ten: "Xem lá số 2 người", mo_ta: "Điểm hợp – khắc theo Tử vi, cách dung hoà" },
     { href: "/hop-doi/cap-so", ten: "Số chủ đạo hợp nhau", mo_ta: "45 cặp số, hợp ở đâu, vấp ở đâu" },
-    { href: "/ban-do-doi-ngu", ten: "Bản đồ đội ngũ (Chủ DN)", mo_ta: "Xem 5 hành đội ngũ & gợi ý phối hợp 2 chiều cho 1–8 cộng sự" },
+    { href: "/quan-ly-nhan-su", ten: "Quản lý nhân sự (Chủ DN)", mo_ta: "Hiểu tính cách nhân viên theo 5 hành & phối hợp 2 chiều cho 1–8 cộng sự" },
   ] },
   { href: "/huyen-hoc", ten: "Huyền học", bieu_tuong: "la_ban", di_dong: true, con: [
     // MENU-TS (chủ dự án 2026-11-22): Thần số học đứng đầu menu Huyền học (cửa vào như hub /huyen-hoc, breadcrumb TM-1

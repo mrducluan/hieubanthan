@@ -38,7 +38,7 @@ export const GOI_XEM: readonly GoiXem[] = [
     hoi: "Tôi với người ấy hợp ở đâu, cần dung hoà ở đâu?",
     nhan: ["Điểm tham khảo 0–100 theo 5 tiêu chí", "Lời riêng cho 8 kiểu quan hệ: người yêu, vợ chồng, đối tác, sếp…"],
     chuong: null, can: "Ngày sinh hai người", nut: "Xem lá số 2 người" },
-  { ma: "doanh_chu", mang: "Bát tự · Thần số", maGia: null, duong: "/ban-do-doi-ngu", ten: "Bản đồ Đội ngũ (Chủ DN · 1–8 cộng sự)",
+  { ma: "doanh_chu", mang: "Bát tự · Thần số", maGia: null, duong: "/quan-ly-nhan-su", ten: "Quản lý nhân sự & Bản đồ Đội ngũ (Chủ DN · 1–8 cộng sự)",
     hoi: "Đội ngũ đang mạnh ở đâu, mỏng ở đâu và phối hợp với từng cộng sự thế nào cho ăn ý?",
     nhan: ["Bản đồ Radar 5 hành chỉ rõ thế mạnh tập thể & lỗ hổng vận hành cần bù", "Gợi ý phối hợp 2 chiều kèm 6 góc nhìn thực tế & câu mở lời khi bất đồng", "Thử ngay đội ngũ mẫu 1 chạm hoặc gửi link bảo mật để cộng sự tự điền (không lưu ngày sinh)"],
     chuong: null, can: "Ngày sinh của bạn và 1–8 cộng sự (có đồng ý)", nut: "Mở Bản đồ Đội ngũ" },

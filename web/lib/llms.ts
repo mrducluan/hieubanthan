@@ -64,7 +64,7 @@ export async function taoLlmsTxt(): Promise<string> {
     `- [Tarot](${urlDayDu("/tarot")}): tự xáo, rút từ 78 lá theo 4 trường phái (Waite, Golden Dawn, Marseille, B.O.T.A.); 78 lá tại ${urlDayDu("/tarot/la-bai")}.`,
     `- [Nhân tướng học](${urlDayDu("/nhan-tuong")}): tự soi gương 31 câu (Tam đình, Ngũ quan, 12 cung); bộ vị tại ${urlDayDu("/nhan-tuong/bo-vi")}.`,
     `- [Xem chỉ tay](${urlDayDu("/chi-tay")}): soi lòng bàn tay trên máy (ảnh không rời máy) — tám cung, 60+ hình vân & chỉ tay Cheiro.`,
-    `- [Bản đồ Đội ngũ](${urlDayDu("/ban-do-doi-ngu")}): Radar 5 hành & phối hợp 2 chiều cho 1–8 cộng sự (chủ DN & quản lý).`,
+    `- [Quản lý nhân sự & Bản đồ Đội ngũ](${urlDayDu("/quan-ly-nhan-su")}): Hiểu tính cách nhân viên theo 5 hành & phối hợp 2 chiều cho 1–8 cộng sự (chủ DN & quản lý).`,
     `- [Gói xem & Bảng giá](${urlDayDu("/goi-xem")}): phần miễn phí, mức Sao, hội viên năm và hoàn tiền.`,
     `- [Kỳ Môn Độn Giáp](${urlDayDu("/ky-mon")}): giờ này hướng nào thuận, hợp việc gì; không cần ngày sinh.`,
     `- [Xem tuổi làm nhà, cưới hỏi](${urlDayDu("/xem-tuoi-lam-nha")}): tuổi mụ có phạm Kim lâu, Hoang ốc, Tam tai không, năm thuận gần nhất; trang theo năm sinh dạng ${urlDayDu(`/xem-tuoi-lam-nha/${nam}/tuoi-1990`)}, bảng mọi tuổi một năm dạng ${urlDayDu(`/xem-tuoi-lam-nha/${nam}`)}.`,

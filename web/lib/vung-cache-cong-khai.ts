@@ -16,7 +16,7 @@ const DUONG_CHINH_XAC = new Set([
   "/tarot",
   "/hop-doi",
   "/chi-tay",
-  "/ban-do-doi-ngu",
+  "/quan-ly-nhan-su",
   "/huyen-hoc",
   "/kien-thuc",
   "/tu-dien",

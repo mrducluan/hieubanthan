@@ -180,8 +180,8 @@ test("SEO-P: tiêu đề trả lời câu hỏi, 12 con giáp ngày, năm nhuậ
 });
 
 // SEO-GEO (2026-11-24): Cẩm nang GEO mở trên trang trụ, bảng so sánh, link trực tiếp trang con, <time>,
-// schema đầy đủ trên /ban-do-doi-ngu + /chi-tay, /pricing.md động và anchor ngược chuẩn từ khoá.
-test("SEO-GEO: cẩm nang pillar mở, /ban-do-doi-ngu & /chi-tay đủ schema, /pricing.md hoạt động, anchor ngược chuẩn", async ({ request }) => {
+// schema đầy đủ trên /quan-ly-nhan-su + /chi-tay, /pricing.md động và anchor ngược chuẩn từ khoá.
+test("SEO-GEO: cẩm nang pillar mở, /quan-ly-nhan-su & /chi-tay đủ schema, /pricing.md hoạt động, anchor ngược chuẩn", async ({ request }) => {
   for (const [duong, con] of [
     ["/than-so", "/than-so/y-nghia-so/so-7"],
     ["/tu-vi", "/tu-vi/chinh-tinh/sao-tu-vi"],
@@ -194,7 +194,7 @@ test("SEO-GEO: cẩm nang pillar mở, /ban-do-doi-ngu & /chi-tay đủ schema, 
     expect(html, duong).toContain("<table");
     expect(html, duong).toContain(`href="${con}"`);
   }
-  for (const duong of ["/ban-do-doi-ngu", "/chi-tay"] as const) {
+  for (const duong of ["/quan-ly-nhan-su", "/chi-tay"] as const) {
     const html = await (await request.get(duong)).text();
     const t = (/<title>([^<]*)<\/title>/.exec(html)?.[1] ?? "").replace(/&amp;/g, "&");
     expect(t, duong).toContain("· Hiểu Bản Thân");

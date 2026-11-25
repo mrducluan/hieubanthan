@@ -1,10 +1,23 @@
-// E2E /ban-do-doi-ngu: chip "Bổ trợ ổn định" của Bản đồ đội ngũ + bộ 3 tab điều hành (Đội ngũ · Lịch 12 tháng · Mặt bằng).
+// E2E /quan-ly-nhan-su: 308 redirect 1 bước từ /ban-do-doi-ngu & /doanh-chu + chip "Bổ trợ ổn định" + bộ 3 tab điều hành.
 import { expect, test } from "@playwright/test";
 import { napHoSo } from "./_hoso";
 
+test("308 redirect 1 bước từ URL cũ /ban-do-doi-ngu & /doanh-chu sang /quan-ly-nhan-su (giữ nguyên ?ma=, ?utm_source=, gclid)", async ({ request }) => {
+  for (const [cu, dich] of [
+    ["/ban-do-doi-ngu?utm_source=google&gclid=abc", "/quan-ly-nhan-su?utm_source=google&gclid=abc"],
+    ["/ban-do-doi-ngu/moi?ma=abc123", "/quan-ly-nhan-su/moi?ma=abc123"],
+    ["/doanh-chu?utm_source=fb", "/quan-ly-nhan-su?utm_source=fb"],
+    ["/doanh-chu/moi?ma=abc123", "/quan-ly-nhan-su/moi?ma=abc123"],
+  ] as const) {
+    const r = await request.get(cu, { maxRedirects: 0 });
+    expect(r.status(), cu).toBe(308);
+    expect(r.headers()["location"], cu).toBe(dich);
+  }
+});
+
 // Rà soát 2026-11-20: engine trả muc_phoi_hop "bo_tro_tot", web từng lọc theo "bo_tro_on_dinh" → chip luôn 0 người.
-test("Bản đồ đội ngũ mẫu: chip 'Bổ trợ ổn định' đếm đúng người và lọc ra danh sách", async ({ page }) => {
-  await page.goto("/ban-do-doi-ngu");
+test("Bản đồ nhân sự mẫu: chip 'Bổ trợ ổn định' đếm đúng người và lọc ra danh sách", async ({ page }) => {
+  await page.goto("/quan-ly-nhan-su");
   await page.getByRole("button", { name: /Xem thử đội ngũ mẫu/ }).click();
   const chip = page.getByRole("tab", { name: /^Bổ trợ ổn định \(\d+\)$/ });
   await expect(chip).toBeVisible({ timeout: 20_000 });
@@ -16,9 +29,9 @@ test("Bản đồ đội ngũ mẫu: chip 'Bổ trợ ổn định' đếm đún
 
 const CHU_DN = { v: 1, ho_ten: "Nguyễn Đức Luân", ngay: 15, thang: 8, nam: 1986, gioi_tinh: "nam" as const, tao_luc: "2026-09-30T00:00:00Z" };
 
-test("3 tab /ban-do-doi-ngu: Lịch 12 tháng → Mặt bằng (kiêm hướng · không vong · không rõ năm xây · hồ sơ cửa hàng)", async ({ page }) => {
+test("3 tab /quan-ly-nhan-su: Lịch 12 tháng → Mặt bằng (kiêm hướng · không vong · không rõ năm xây · hồ sơ cửa hàng)", async ({ page }) => {
   await napHoSo(page, CHU_DN);
-  await page.goto("/ban-do-doi-ngu");
+  await page.goto("/quan-ly-nhan-su");
 
   await expect(page.getByTestId("tab-ban-do-doi-ngu")).toHaveAttribute("aria-selected", "true");
   await expect(page.getByTestId("tab-lich-12-thang")).toBeVisible();
@@ -96,7 +109,7 @@ test("3 tab /ban-do-doi-ngu: Lịch 12 tháng → Mặt bằng (kiêm hướng �
 
 test("Lịch 12 tháng có giờ sinh: gửi giờ, đọc thêm Bát tự hai cách; 'Xem trước năm sau' bắt đầu từ tháng 1", async ({ page }) => {
   await napHoSo(page, { ...CHU_DN, gio: "09:30" });
-  await page.goto("/ban-do-doi-ngu");
+  await page.goto("/quan-ly-nhan-su");
   await page.getByTestId("tab-lich-12-thang").click();
   const namSau = new Date().getFullYear() + 1;
   await page.getByLabel("Khoảng xem", { exact: true }).selectOption("nam_sau");

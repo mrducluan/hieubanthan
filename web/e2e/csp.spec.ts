@@ -11,11 +11,11 @@ function ghiViPham(page: Page): string[] {
 }
 
 test("Q-I3 phân vùng thuần: allowlist trang công khai, loại trừ /goi-xem & trang theo giờ/ngày, bypass cookie đăng nhập / nháp / ?kw=", () => {
-  for (const ok of ["/", "/than-so", "/tu-vi", "/than-so/y-nghia-so/so-7", "/phong-thuy/huong-hop-tuoi/cung-kham-bac", "/hop-doi", "/hop-doi/cap-so/so-chu-dao-1-va-2", "/ban-do-doi-ngu", "/tu-dien"]) {
+  for (const ok of ["/", "/than-so", "/tu-vi", "/than-so/y-nghia-so/so-7", "/phong-thuy/huong-hop-tuoi/cung-kham-bac", "/hop-doi", "/hop-doi/cap-so/so-chu-dao-1-va-2", "/quan-ly-nhan-su", "/tu-dien"]) {
     expect(laDuongCongKhaiCache(ok), ok).toBe(true);
     expect(coTheCacheCongKhai({ method: "GET", pathname: ok, search: "", cookieNames: [] }), ok).toBe(true);
   }
-  for (const no of ["/quan-tri", "/quan-tri/cai-dat", "/tai-khoan", "/nap-sao", "/hoi-vien", "/ban-than", "/goi-xem", "/hom-nay", "/xem-ngay-tot", "/ky-mon", "/thoi-gian-toi", "/hoi-chuyen-gia", "/dang-nhap", "/hop-doi/abc123", "/ban-do-doi-ngu/moi", "/en", "/en/numerology"]) {
+  for (const no of ["/quan-tri", "/quan-tri/cai-dat", "/tai-khoan", "/nap-sao", "/hoi-vien", "/ban-than", "/goi-xem", "/hom-nay", "/xem-ngay-tot", "/ky-mon", "/thoi-gian-toi", "/hoi-chuyen-gia", "/dang-nhap", "/hop-doi/abc123", "/quan-ly-nhan-su/moi", "/ban-do-doi-ngu/moi", "/en", "/en/numerology"]) {
     expect(laDuongCongKhaiCache(no), no).toBe(false);
     expect(coTheCacheCongKhai({ method: "GET", pathname: no, search: "", cookieNames: [] }), no).toBe(false);
   }
