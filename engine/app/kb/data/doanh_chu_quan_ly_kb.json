@@ -111,7 +111,8 @@
       "van_de": "Hai người chủ chốt đều giỏi nhưng họp chung là căng",
       "goc_nhin": "{ten_a} thiên mở rộng, muốn chạy nhanh; {ten_b} thiên kiểm soát, muốn chắc từng bước. Hai người đúng ở hai phía.",
       "mo_loi": "“15 phút đầu để {ten_a} nêu phương án, 15 phút sau để {ten_b} rà rủi ro. Không cắt lời nhau giữa hai phần.”",
-      "viec": "Tách cuộc họp thành hai phần có giờ rõ ràng; quyết định cuối do một người được giao trước."
+      "viec": "Tách cuộc họp thành hai phần có giờ rõ ràng; quyết định cuối do một người được giao trước.",
+      "goc_nhin_an": "Người thiên mở rộng muốn chạy nhanh; người thiên kiểm soát muốn chắc từng bước. Hai người đúng ở hai phía."
     },
     "nguoi_om_viec": {
       "van_de": "Người tận tâm nhất lại hay ôm việc tới quá tải",
@@ -287,5 +288,27 @@
     "hanh_troi": "Hỏa",
     "hanh_thieu": "Thổ",
     "pha": "chuyển dịch"
-  }
+  },
+  "ke_hoach_mau": [
+    {
+      "tuan": "Tuần 1",
+      "tieu_de": "Bù trục mỏng nhất của nhóm",
+      "y": "Chọn một thói quen nhỏ cho hành nhóm đang thiếu."
+    },
+    {
+      "tuan": "Tuần 2",
+      "tieu_de": "Giao đúng việc cho đúng người",
+      "y": "Giao trọn một đầu việc đúng sở trường, hẹn báo kết quả."
+    },
+    {
+      "tuan": "Tuần 3",
+      "tieu_de": "Giữ nhóm không dồn một phía",
+      "y": "Mỗi tháng thử một việc mới hoặc thêm một bước kiểm."
+    },
+    {
+      "tuan": "Tuần 4",
+      "tieu_de": "Nói chuyện riêng với từng người",
+      "y": "15 phút mỗi người, chỉ nghe và ghi lại, chưa hứa gì."
+    }
+  ]
 }

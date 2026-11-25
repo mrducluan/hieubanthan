@@ -161,3 +161,52 @@ test("QLNS-1: người được mời xác nhận xong nhận bản 'Cách làm 
   await expect(cn.getByRole("link", { name: /4 con số/ })).toHaveAttribute("href", "/than-so");
   await expect(cn.getByRole("link", { name: /Lập bản đồ cho nhóm/ })).toHaveAttribute("href", "/quan-ly-nhan-su");
 });
+
+// QLNS-2/3 (2026-11-25): hình minh hoạ có alt thật (PNG do route /og/quan-ly vẽ) + khối CTA cuối trang có link sang trang khác.
+test("hình minh hoạ: 5 hình, alt đủ nghĩa, ảnh tải được là PNG 1200×630", async ({ page, request }) => {
+  await page.goto("/quan-ly-nhan-su");
+  const hinh = page.locator("figure[data-testid^='anh-ql-'] img");
+  await expect(hinh).toHaveCount(5);
+  const ds = await hinh.evaluateAll((xs) => xs.map((x) => ({ src: (x as HTMLImageElement).getAttribute("src")!, alt: (x as HTMLImageElement).alt })));
+  for (const h of ds) {
+    expect(h.alt.length, h.src).toBeGreaterThan(60);
+    expect(h.alt.length, h.src).toBeLessThanOrEqual(300);
+    const r = await request.get(h.src);
+    expect(r.status(), h.src).toBe(200);
+    expect(r.headers()["content-type"]).toContain("image/png");
+    const b = await r.body();
+    expect(b.readUInt32BE(16), `${h.src} rộng`).toBe(1200);
+    expect(b.readUInt32BE(20), `${h.src} cao`).toBe(630);
+  }
+  // alt khớp chữ trong ảnh: ảnh năm hành nêu đủ tên năm hành, ảnh kế hoạch nêu bốn tuần
+  const nam = ds.find((h) => h.src.includes("ngu-hanh"))!.alt;
+  for (const t of ["Mộc", "Hỏa", "Thổ", "Kim", "Thủy"]) expect(nam).toContain(t);
+  expect(ds.find((h) => h.src.includes("ke-hoach"))!.alt).toContain("Tuần 1");
+  expect((await request.get("/og/quan-ly?hinh=khong-co")).status()).toBe(404);
+});
+
+test("CTA cuối trang: lời mời chạy bản đồ + lưới lối đi tiếp sang các trang trụ, chữ link rõ nghĩa", async ({ page }) => {
+  await page.goto("/quan-ly-nhan-su");
+  const khoi = page.getByTestId("cta-cuoi-quan-ly");
+  await expect(khoi.getByTestId("cta-chay-ban-do").getByRole("link", { name: /Chạy bản đồ cho nhóm của tôi/ })).toHaveAttribute("href", "#cong-cu-dieu-hanh");
+  const the = khoi.locator("nav li[data-the-lap]");
+  expect(await the.count()).toBeGreaterThanOrEqual(8);
+  const hrefs = await the.locator("a").evaluateAll((xs) => xs.map((x) => (x as HTMLAnchorElement).getAttribute("href")!));
+  for (const h of ["/bat-tu", "/than-so", "/hop-doi", "/thoi-gian-toi", "/xem-ngay-tot", "/phong-thuy", "/tu-vi", "/goi-xem"]) expect(hrefs).toContain(h);
+  expect(hrefs.some((h) => /^\/nam\/\d{4}$/.test(h))).toBe(true);
+  expect(new Set(hrefs).size).toBe(hrefs.length);                       // không link lặp
+  for (const t of await the.locator("a").allInnerTexts()) expect(t.trim().length).toBeGreaterThan(12);   // không có chữ link kiểu "xem thêm"
+  // Nút "Xem lịch 12 tháng" mở đúng tab + cuộn tới công cụ
+  await khoi.getByRole("link", { name: /Xem lịch 12 tháng của cả đội/ }).click();
+  await expect(page.getByTestId("tab-lich-12-thang")).toHaveAttribute("aria-selected", "true");
+});
+
+test("kho công khai: câu tình huống viết hoa đầu câu, không lặp chữ", async ({ page }) => {
+  await page.goto("/quan-ly-nhan-su");
+  const t = await page.locator("article h3").locator("xpath=following-sibling::p[1]").allInnerTexts();
+  expect(t.length).toBeGreaterThanOrEqual(7);
+  for (const s of t) {
+    expect(s.trim()[0], s).toBe(s.trim()[0]!.toUpperCase());
+    expect(s).not.toMatch(/\b((?:\p{L}+\s+){1,3}\p{L}+)\s+\1\b/iu);
+  }
+});
