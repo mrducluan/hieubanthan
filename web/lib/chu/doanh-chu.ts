@@ -10,7 +10,7 @@ export const CHU_DOANH_CHU = {
   },
   dau_trang: {
     nho: "Phối hợp đội ngũ · Dành cho chủ doanh nghiệp & quản lý",
-    lon: "Hiểu đúng người cạnh mình: giao đúng việc, giảm va chạm, lấp lỗ hổng đội ngũ",
+    lon: "Bản đồ Đội ngũ: hiểu sở trường & phối hợp nhóm",
     mo_ta: "Trong 2 phút, nhìn rõ nhóm bạn đang mạnh ở đâu, thiếu trục vận hành nào, và cách phối hợp 2 chiều hiệu quả nhất giữa bạn với 1–8 cộng sự chủ chốt. Dữ liệu không lưu trên máy chủ.",
   },
   loi_ich: [

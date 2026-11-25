@@ -15,10 +15,12 @@ import { NAM_SINH_SEO, duongHanNam, duongLamNha, duongLamNhaNam, duongSaoHanNam,
 
 export const revalidate = 21600;
 
+const NGAY_CAP_NHAT_TINH = "2026-11-25";
+
 const TINH: [string, number][] = [
   ["/", 1], ["/kien-thuc", 0.9], ["/tu-dien", 0.8], ["/tu-vi/la-so-mau", 0.8], ["/blog", 0.6], ["/huyen-hoc", 0.8], ["/than-so", 0.9], ["/hom-nay", 0.7], ["/xem-ngay-tot", 0.9], ["/xem-tuoi-lam-nha", 0.8], ["/tuoi-xong-dat", 0.8], ["/xem-sao-han", 0.7], ["/phong-thuy/huong-xau-nam", 0.8], ["/hop-doi", 0.8],
   ["/tu-vi", 0.9], ["/bat-tu", 0.9], ["/kinh-dich", 0.9], ["/phong-thuy", 0.9], ["/nhan-tuong", 0.8], ["/tarot", 0.8],   // SEO-N: trang dịch vụ
-  ["/doi-lich-am-duong", 0.7], ["/sinh-o-nuoc-ngoai", 0.7], ["/nam", 0.8], ["/lich-am", 0.6], ["/nhan-tuong/do-hinh", 0.6], ["/chi-tay", 0.7], ["/ky-mon", 0.8], ["/thoi-gian-toi", 0.8], ["/li-xi-tet-2027", 0.8], ["/goi-xem", 0.6], ["/chan-dung", 0.8], ["/gioi-thieu", 0.5], ["/tac-gia", 0.4], ["/tac-gia/duc-luan", 0.6], ["/lien-he", 0.4], ["/chinh-sach-rieng-tu", 0.3], ["/dieu-khoan", 0.3], ["/mien-tru-trach-nhiem", 0.3],
+  ["/doi-lich-am-duong", 0.7], ["/sinh-o-nuoc-ngoai", 0.7], ["/nam", 0.8], ["/lich-am", 0.6], ["/nhan-tuong/do-hinh", 0.6], ["/chi-tay", 0.8], ["/ban-do-doi-ngu", 0.8], ["/ky-mon", 0.8], ["/thoi-gian-toi", 0.8], ["/li-xi-tet-2027", 0.8], ["/goi-xem", 0.7], ["/chan-dung", 0.8], ["/gioi-thieu", 0.5], ["/tac-gia", 0.4], ["/tac-gia/duc-luan", 0.6], ["/lien-he", 0.4], ["/chinh-sach-rieng-tu", 0.3], ["/dieu-khoan", 0.3], ["/mien-tru-trach-nhiem", 0.3],
 ];
 
 function thangSitemap(): string[] {
@@ -38,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...suKien.filter((t) => !t.noindex && !daHetHan(t)).map((t) => ({
       url: urlDayDu(`/su-kien/${t.slug}`), lastModified: t.updatedAt, changeFrequency: "weekly" as const, priority: 0.6,
     })),
-    ...TINH.map(([d, p]) => ({ url: urlDayDu(d), changeFrequency: "weekly" as const, priority: p })),
+    ...TINH.map(([d, p]) => ({ url: urlDayDu(d), lastModified: NGAY_CAP_NHAT_TINH, changeFrequency: "weekly" as const, priority: p })),
     ...Object.values(CHU_DE).map((c) => ({ url: urlDayDu(c.duong), changeFrequency: "weekly" as const, priority: 0.8 })),
     { url: urlDayDu("/phong-thuy/huong-hop-tuoi"), changeFrequency: "monthly" as const, priority: 0.8 },
     // HL-1: lịch ngày tốt theo tháng — đúng cửa sổ index của trang tháng (trang ngày được link từ lịch tháng).

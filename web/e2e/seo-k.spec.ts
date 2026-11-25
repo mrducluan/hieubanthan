@@ -210,3 +210,29 @@ test("SEO-GEO: cẩm nang pillar mở, /ban-do-doi-ngu & /chi-tay đủ schema, 
   const so7 = await (await request.get("/than-so/y-nghia-so/so-7")).text();
   expect(so7).toContain("Xem thần số học online miễn phí");
 });
+
+test("SEO-P0/P1: mọi trang trụ & money page có <title> + canonical ngay trong <head> (cả Chrome lẫn Googlebot), / có hreflang + link /chi-tay, sitemap có /ban-do-doi-ngu + lastmod", async ({ request }) => {
+  const uas = [
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+  ];
+  for (const duong of ["/", "/tu-vi", "/than-so", "/bat-tu", "/phong-thuy", "/kinh-dich", "/nhan-tuong", "/tarot", "/hop-doi", "/chi-tay", "/ban-do-doi-ngu", "/goi-xem"] as const) {
+    for (const ua of uas) {
+      const html = await (await request.get(duong, { headers: { "user-agent": ua } })).text();
+      const head = html.slice(0, html.indexOf("</head>"));
+      expect(head, `${duong} (${ua.slice(0, 20)})`).toMatch(/<title>[^<]+<\/title>/);
+      expect(head, `${duong} (${ua.slice(0, 20)})`).toMatch(/rel="canonical"/);
+      expect(head, `${duong} (${ua.slice(0, 20)})`).toMatch(/name="description"/);
+    }
+  }
+  const home = await (await request.get("/")).text();
+  const homeHead = home.slice(0, home.indexOf("</head>"));
+  expect(homeHead).toMatch(/hrefLang="en"[^>]*href="[^"]*\/en"/i);
+  expect(homeHead).toMatch(/hrefLang="vi"[^>]*href="[^"]+"/i);
+  expect(homeHead).toMatch(/hrefLang="x-default"[^>]*href="[^"]+"/i);
+  expect(home).toContain('href="/chi-tay"');
+  expect(home).toContain('href="/ban-do-doi-ngu"');
+  const sm = await (await request.get("/sitemap.xml")).text();
+  expect(sm).toContain("/ban-do-doi-ngu</loc>");
+  expect(sm).toMatch(/\/tu-vi<\/loc>\s*<lastmod>20\d\d-\d\d-\d\d<\/lastmod>/);
+});

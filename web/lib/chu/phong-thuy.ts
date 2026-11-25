@@ -16,7 +16,7 @@ const P = "Trang", LB = "La bàn", HT = "Hành trình", SC = "So hai căn", DH =
 
 export const CHU_PHONG_THUY_UI = {
   // ---------------------------------------------------------------- trang (app/phong-thuy/PhongThuy.tsx)
-  "dau.ten": m(P, "Xem phong thuỷ: nhà này có hợp bạn không?", "Feng shui for your home: does this house suit you?"),
+  "dau.ten": m(P, "Xem phong thuỷ nhà ở & hướng nhà hợp tuổi", "Feng shui for your home: does this house suit you?"),
   "dau.mo_ta": m(P, "Nhà bạn đang ở — hay căn định mua — có hợp bạn không, và nếu chỉ kê lại một món đồ thì kê gì? Nhập năm sinh, đo hướng cửa bằng điện thoại, trang đọc cho bạn bằng lời thường: bạn hợp phía nào, từng phòng nên đặt gì, tháng nào nên sửa. Phần sách vở (du niên, phi tinh) gập lại cho ai muốn mở. Không giới thiệu vật phẩm “hoá giải”.",
     "Does the home you live in — or the one you are about to buy — suit you, and if you could move just one thing, what should it be? Add your birth year, take the door direction with your phone, and get a plain-English reading: which directions suit you, what goes where room by room, and which months are good for repairs. The technical layer (the eight directions, Flying Stars) is folded away for anyone who wants it. We never sell “cure” objects."),
   "moc.lap_xuan": m(P, "Lập xuân", "Start of Spring"),
