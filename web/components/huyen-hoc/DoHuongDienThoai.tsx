@@ -5,7 +5,7 @@ import { ClipboardPaste, Compass, CornerLeftUp, ExternalLink, Hand, LocateFixed,
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { postJson } from "@/lib/goi-api";
-import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
+import { laHuong8, luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
 import { CachLam } from "@/components/huyen-hoc/CachLam";
 import { ChonTrenVeTinh } from "@/components/huyen-hoc/ChonTrenVeTinh";
 import { ghi } from "@/lib/do-luong";
@@ -117,7 +117,9 @@ export function DoHuongDienThoai({ sinh, onDungToa, onChot, laBan, luuNha = true
   const apDung = (r: KetQuaDoHuong) => {
     setKq(r); setDoTay(doHienThi(r.do_huong)); setLoi(null);
     onChot?.(r);
-    if (luuNha) try { luuHoSoNha({ huong_do: r.do_huong, huong: undefined, ...(canHo ? { theo: "ban_cong" } : {}) }); } catch { /* bỏ qua */ }   // KC-2
+    // KC-2 · PT-NHA: lưu số độ + TÊN hướng engine vừa trả (thẻ "Nhà của tôi" hiện tên, web không tự chia ô 45°); bỏ toạ
+    // sơn chọn tay cũ ở Huyền Không để mọi khối cùng một hướng.
+    if (luuNha) try { luuHoSoNha({ huong_do: r.do_huong, huong: laHuong8(r.huong) ? r.huong : undefined, toa: undefined, ...(canHo ? { theo: "ban_cong" } : {}) }); } catch { /* bỏ qua */ }
   };
 
   // ------------------------------------------------------------------ la bàn điện thoại

@@ -20,6 +20,7 @@ const Input = z.object({
     huong_do: z.number().min(0).lt(360).optional(),
     huong: z.enum(HUONG).optional(),
     nam_xay: z.number().int().min(1864).max(2150).optional(),
+    van_xay: z.number().int().min(1).max(9).optional(),   // PT-NHA: chỉ nhớ khoảng năm xây → vận
     loai_nha: z.enum(["nha_pho", "can_ho", "biet_thu", "nha_cap4", "khac"]).optional(),
     bo_cuc: z.object({
       dau_hieu: z.record(z.string().regex(/^[a-z0-9_]{2,40}$/), DauHieu).optional(),

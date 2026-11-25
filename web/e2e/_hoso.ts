@@ -38,3 +38,18 @@ export async function chonNoiSinh(page: Page, id: string, go: string, ten: strin
   await muc.click();
   await page.getByTestId(`${id}-noi-da-chon`).waitFor({ timeout: 10_000 });
 }
+
+/** PT-NHA: đặt sẵn hồ sơ nhà trên máy (như người dùng đã chốt hướng ở "Đo hướng nhà" + điền thẻ "Nhà của tôi"). Chỉ đặt khi
+ *  máy chưa có — tải lại trang trong test không ghi đè thay đổi người dùng vừa làm. */
+export async function napNha(page: Page, nha: Record<string, unknown>) {
+  const hs = { v: 1, theo: "cua", thanh_vien: [], cap_nhat_luc: "2026-11-20T00:00:00.000Z", ...nha };
+  await page.addInitScript((h) => { if (!localStorage.getItem("hbt.nha.v1")) localStorage.setItem("hbt.nha.v1", h); }, JSON.stringify(hs));
+}
+
+/** PT-NHA: chốt hướng nhà qua ô "nhập độ" của khối Đo hướng nhà (engine trả hướng → hồ sơ nhà → thẻ "Nhà của tôi" hiện). */
+export async function chotHuong(page: Page, doHuong: number, nhanO = "Độ hướng nhà", nhanNut = "Xem") {
+  const o = page.getByTestId("do-huong");
+  await o.getByLabel(nhanO, { exact: true }).fill(String(doHuong));
+  await o.getByRole("button", { name: nhanNut, exact: true }).click();
+  await page.getByTestId("the-nha-cua-toi").waitFor({ timeout: 20_000 });
+}

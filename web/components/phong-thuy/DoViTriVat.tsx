@@ -15,7 +15,7 @@ import { KetQuaNhieuLop, type NhieuLopRes } from "@/components/phong-thuy/NhaNhi
 import { NHAN_MUC, type Muc } from "@/components/luan-giai/kieu";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
-import { luuHoSoNha, useHoSoNha, type HoSoNha, type HuongCuaKhung, type LoaiVat } from "@/lib/ho-so-nha";
+import { luuHoSoNha, namXayGui, useHoSoNha, type HoSoNha, type HuongCuaKhung, type LoaiVat } from "@/lib/ho-so-nha";
 import {
   PHONG_CO_CUA,
   dichDiem,
@@ -774,7 +774,7 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
         ...(truc ? { truc_mau: truc } : {}),
         ...(coDiem ? { khung: { rong: khung.rong, sau: khung.sau, ...(luoiGui ? { luoi: luoiGui } : {}),
           ...(cheDo === "khung" && san.length ? { san } : {}) } } : {}),
-        ...(hoSo?.nam_xay ? { nam_xay: hoSo.nam_xay } : {}),
+        ...namXayGui(hoSo),
         ...(sinh ? { sinh } : {}),
         ...(du18 ? { du_18: true } : {}),
       });

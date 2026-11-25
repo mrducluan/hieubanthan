@@ -138,6 +138,7 @@
  "pt.c2.phia_hop_nha": "The sides that suit the house are {ds}. Add your birth year to compare with your own Kua.",
  "pt.c2.cc.hk": "Flying Stars Period {van}, sitting {toa} facing {huong}: formation {cuc}; facing palace ({phuong}) mountain star {son} – facing star {hh} ({ten}), the facing star is currently {tt}.",
  "pt.c2.cc.cap": "Star pair at the door: {y}",
+ "pt.c2.cua_van_xay": "Front door, by the home's building Period {van}: {muc}",
  "pt.c2.cua_nam_xay": "Front door, by the year the home was built ({nam}): {muc}",
  "pt.c2.theo_nam_xay": "By building year: {y} Suggestion: {g}",
  "pt.c2.tv_khac": "{vai}, Kua {q}, suits {h}",

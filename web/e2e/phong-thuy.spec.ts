@@ -1,6 +1,6 @@
 // Phong thuỷ (HH-4): hồ sơ → mệnh quái + la bàn → hỏi.
 import { test, expect } from "@playwright/test";
-import { hoi, napHoSo } from "./_hoso";
+import { chotHuong, hoi, napHoSo, napNha } from "./_hoso";
 
 test("mệnh quái + la bàn + hướng hợp tuổi", async ({ page }) => {
   await napHoSo(page);
@@ -21,11 +21,19 @@ test("mệnh quái + la bàn + hướng hợp tuổi", async ({ page }) => {
 test("PT-ĐS: Nhà của bạn — đọc bằng lời thường, 5 chương, người cùng ở khác nhóm, phần sách vở gập", async ({ page }) => {
   await napHoSo(page);                                   // nam 17/05/1990 → mệnh Khảm (Đông tứ)
   await page.goto("/phong-thuy");
+  // PT-NHA: chốt hướng một lần ở "Đo hướng nhà" → thẻ "Nhà của tôi" hỏi nốt năm xây, người cùng ở; khối dưới dùng chung.
+  await chotHuong(page, 180);
+  const the = page.getByTestId("the-nha-cua-toi");
+  await expect(the).toContainText("Đã chốt 180° — nhà hướng Nam");
+  await expect(the.getByTestId("nt-tien-do")).toContainText("Thêm 3 điều");
+  await the.getByTestId("nt-nam").getByTestId("nam-nhap").fill("2008");
+  await the.getByTestId("nt-nam").getByTestId("nam-luu").click();
+  await the.getByTestId("nguoi-nam").fill("1992");                    // mặc định: Vợ · Nữ
+  await the.getByTestId("nguoi-them").click();
+  await expect(the.getByTestId("nt-tien-do")).toContainText("Thêm 1 điều");   // còn loại nhà (bỏ qua được)
   const nha = page.getByTestId("nha-cua-ban");
-  await nha.getByLabel("Độ hướng nhà cho bài đọc").fill("180");
-  await nha.getByLabel("Năm xây hoặc năm dọn vào").fill("2008");
-  await nha.getByRole("button", { name: "Thêm người cùng ở" }).click();
-  await nha.getByLabel("Năm sinh người cùng ở 1").fill("1992");
+  await expect(nha.getByTestId("dong-nha-nc")).toContainText("Nam 180° · 2008 · 1 người cùng ở");
+  await expect(nha.getByLabel("Độ hướng nhà cho bài đọc")).toHaveCount(0);   // khối không còn ô nhập chung
   await nha.getByRole("button", { name: "Đọc nhà của tôi" }).click();
   const bc = nha.getByTestId("bao-cao-nha");
   await expect(bc).toBeVisible();
@@ -73,24 +81,29 @@ test("bố trí dân gian ghi rõ nguồn", async ({ page }) => {
 
 test("Huyền Không: năm 2008, toạ Tý → Song tinh đáo hướng, Thất tinh chân đả kiếp", async ({ page }) => {
   await page.goto("/phong-thuy");
-  await page.getByLabel("Năm xây hoặc nhập trạch").fill("2008");
-  await page.getByLabel("Toạ sơn (lưng nhà)").selectOption("Tý");
-  await page.getByRole("button", { name: "Lập bàn" }).click();
+  // PT-NHA: không còn năm mặc định "2024" — chưa có năm thì không lập bàn, chỉ hỏi năm ngay ở dòng đầu khối.
+  const hk = page.getByTestId("dong-nha-hk");
+  await expect(hk).toContainText("cần năm xây");
+  await expect(page.getByTestId("ban-huyen-khong")).toHaveCount(0);
+  await hk.getByTestId("nam-nhap").fill("2008");
+  await hk.getByTestId("nam-luu").click();
+  await page.getByLabel("Toạ sơn (lưng nhà)").selectOption("Tý");           // chưa đo hướng → chọn toạ sơn; đủ là tự lập
   const ban = page.getByTestId("ban-huyen-khong");
   await expect(ban).toContainText("Song tinh đáo hướng");
   await expect(ban).toContainText("Thất tinh chân đả kiếp");
   await expect(ban.getByRole("cell", { name: /^Ly Nam: sơn tinh 8, hướng tinh 8, vận tinh 3/ })).toBeVisible();
 });
 
-test("Huyền Không: nhập độ la bàn sát ranh giới → cảnh báo kiêm hướng; năm sai → báo rõ, không gửi", async ({ page }) => {
+test("Huyền Không: hướng nhà 170° (toạ 350°, sát ranh giới) → cảnh báo kiêm hướng; năm sai → báo rõ, không gửi", async ({ page }) => {
+  await napNha(page, { huong_do: 170, huong: "Nam" });                       // engine tự đổi hướng 170° → toạ 350°
   await page.goto("/phong-thuy");
-  await page.getByLabel("Năm xây hoặc nhập trạch").fill("1800");
-  await page.getByRole("button", { name: "Lập bàn" }).click();
-  await expect(page.getByRole("alert").filter({ hasText: "1864–2150" })).toBeVisible();
-  await page.getByLabel("Năm xây hoặc nhập trạch").fill("2008");
-  await page.getByLabel("Nhập độ la bàn").check();
-  await page.getByLabel("Độ la bàn của toạ").fill("350");
-  await page.getByRole("button", { name: "Lập bàn" }).click();
+  const hk = page.getByTestId("dong-nha-hk");
+  await hk.getByTestId("nam-nhap").fill("1800");
+  await hk.getByTestId("nam-luu").click();
+  await expect(hk.getByRole("alert").filter({ hasText: "1864–2150" })).toBeVisible();
+  await expect(page.getByTestId("ban-huyen-khong")).toHaveCount(0);
+  await hk.getByTestId("nam-nhap").fill("2008");
+  await hk.getByTestId("nam-luu").click();
   const ban = page.getByTestId("ban-huyen-khong");
   await expect(ban).toContainText("kiêm hướng");
   await expect(ban).toContainText("tính từ Lập xuân");
@@ -99,11 +112,11 @@ test("Huyền Không: nhập độ la bàn sát ranh giới → cảnh báo kiê
 });
 
 test("Huyền Không: đánh dấu kiêm hướng → thế quái (Vận 8 toạ Tý: sơn tinh 4 → 6, hướng tinh 3 → 2)", async ({ page }) => {
+  await napNha(page, { nam_xay: 2008 });
   await page.goto("/phong-thuy");
-  await page.getByLabel("Năm xây hoặc nhập trạch").fill("2008");
   await page.getByLabel("Toạ sơn (lưng nhà)").selectOption("Tý");
+  await expect(page.getByTestId("ban-huyen-khong")).toBeVisible();
   await page.getByLabel(/kiêm hướng/).check();
-  await page.getByRole("button", { name: "Lập bàn" }).click();
   const tq = page.getByTestId("the-quai");
   await expect(tq).toContainText("4 → 6 (thuận)");
   await expect(tq).toContainText("3 → 2 (nghịch)");
@@ -155,15 +168,24 @@ test("PT-V1: đo hướng nhà — nhập tay và la bàn điện thoại (giả
   await o.getByTestId("phieu-chot").click();
   await expect(kq).toContainText("Nam");
   await expect(kq).toContainText("sơn Ngọ");
+  // PT-NHA: hướng vừa chốt vào hồ sơ nhà → thẻ "Nhà của tôi" + Huyền Không dùng ngay, chỉ còn hỏi năm xây
+  await expect(page.getByTestId("the-nha-cua-toi")).toContainText("nhà hướng Nam");
   await kq.getByRole("button", { name: /lập bàn Huyền Không/ }).click();
-  await expect(page.getByLabel("Độ la bàn của toạ")).toHaveValue("0");
+  const hk = page.getByTestId("dong-nha-hk");
+  await expect(hk).toContainText("Nam 180°");
+  await hk.getByTestId("nam-khoang-8").click();                              // chỉ nhớ khoảng năm → vận 8
+  await expect(page.getByTestId("ban-huyen-khong")).toContainText("Vận 8");
+  const hs = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nha.v1") ?? "null"));
+  expect(hs).toMatchObject({ huong_do: 180, huong: "Nam", van_xay: 8 });
+  expect(hs.nam_xay).toBeUndefined();
 });
 
 test("PT-V0: khảo sát nhà — đặt phòng trên sơ đồ 9 phương, đánh dấu dấu hiệu → luận Bát trạch + kho tình huống", async ({ page }) => {
   await napHoSo(page);                                   // nam 1990 → mệnh Khảm
+  await napNha(page, { huong_do: 180, huong: "Nam" });
   await page.goto("/phong-thuy");
   const ks = page.getByTestId("khao-sat-nha");
-  await ks.getByRole("textbox", { name: "Độ hướng nhà khảo sát" }).fill("180");
+  await expect(ks.getByTestId("dong-nha-ks")).toContainText("Nam 180°");    // PT-NHA: hướng lấy từ "Nhà của tôi"
   await ks.getByRole("radio", { name: /^Bếp/ }).click();
   await ks.getByRole("button", { name: "Đặt Bếp ở phía Tây", exact: true }).click();
   await ks.getByRole("radio", { name: /^Bàn thờ/ }).click();
@@ -185,13 +207,14 @@ test("PT-V0: khảo sát nhà — đặt phòng trên sơ đồ 9 phương, đá
 test("KC-2: hồ sơ nhà lưu trên máy sau khi đọc → Hôm nay có thẻ Tháng này nhà bạn; mốc nhắc tháng thuận hiện ở Hôm nay", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/phong-thuy");
+  await chotHuong(page, 180);
   const nha = page.getByTestId("nha-cua-ban");
-  await nha.getByLabel("Độ hướng nhà cho bài đọc").fill("180");
-  await nha.getByLabel("Năm xây hoặc năm dọn vào").fill("2008");
+  await nha.getByTestId("dong-nha-nc").getByTestId("nam-nhap").fill("2008");     // thiếu năm → chọn ngay ở dòng đầu khối
+  await nha.getByTestId("dong-nha-nc").getByTestId("nam-luu").click();
   await nha.getByRole("button", { name: "Đọc nhà của tôi" }).click();
   await expect(nha.getByTestId("bao-cao-nha")).toBeVisible();
   const hs = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nha.v1") ?? "null"));
-  expect(hs).toMatchObject({ v: 1, huong_do: 180, nam_xay: 2008, theo: "cua" });
+  expect(hs).toMatchObject({ v: 1, huong_do: 180, huong: "Nam", nam_xay: 2008, theo: "cua" });
   await expect(nha.getByTestId("goi-mo-cheo")).toHaveAttribute("data-ma", "nha_cua");
   const thuan = nha.getByTestId("nha-ba-thang").getByTestId("nhac-toi").first();
   if (await thuan.count()) {
@@ -202,9 +225,9 @@ test("KC-2: hồ sơ nhà lưu trên máy sau khi đọc → Hôm nay có thẻ 
   await expect(the).toBeVisible();
   await expect(the).toContainText("phía cửa Nam");
   await expect(the.getByTestId("chip-muc")).toBeVisible();
-  // Huyền Không điền sẵn năm xây từ hồ sơ nhà
+  // Huyền Không tự lập bàn từ hồ sơ nhà (năm 2008, hướng 180°) — không phải nhập lại
   await page.goto("/phong-thuy");
-  await expect(page.getByLabel("Năm xây hoặc nhập trạch")).toHaveValue("2008");
+  await expect(page.getByTestId("ban-huyen-khong")).toContainText("Vận 8");
 });
 
 test("Q2/Q1/Q4/Q5/Q6 + TY-2 đợt 2: hồ sơ lưới cũ tự thành sơ đồ → suy WC giữa nhà + cửa thông ban công, căn hộ áp luật, việc theo chi phí, đổi góc nhìn", async ({ page }) => {
@@ -212,13 +235,12 @@ test("Q2/Q1/Q4/Q5/Q6 + TY-2 đợt 2: hồ sơ lưới cũ tự thành sơ đồ
   // Hồ sơ nhà kiểu cũ: lưới vẽ tay 6×6 tô kín, cửa hàng 1 cột 3, WC hàng 3 cột 3, ban công hàng 6 cột 3.
   await page.addInitScript(() => {
     if (window.localStorage.getItem("hbt.nha.v1")) return;
-    window.localStorage.setItem("hbt.nha.v1", JSON.stringify({ v: 1, huong_do: 180, theo: "cua", thanh_vien: [], cap_nhat_luc: "2026-11-20T00:00:00.000Z",
+    window.localStorage.setItem("hbt.nha.v1", JSON.stringify({ v: 1, huong_do: 180, theo: "cua", loai_nha: "can_ho", thanh_vien: [], cap_nhat_luc: "2026-11-20T00:00:00.000Z",
       bo_cuc: { mat_bang: { luoi: Array(6).fill("111111"), phong: { cua_chinh: [0, 2], ve_sinh: [2, 2] }, ban_cong: [5, 2] } } }));
   });
   await page.goto("/phong-thuy");
   const ks = page.getByTestId("khao-sat-nha");
-  await ks.getByRole("textbox", { name: "Độ hướng nhà khảo sát" }).fill("180");
-  await ks.getByLabel("Loại nhà").selectOption("can_ho");
+  await expect(ks.getByTestId("dong-nha-ks")).toContainText("180° · Chung cư");
   // Khảo sát không còn lưới riêng — đọc sơ đồ của "Đứng giữa nhà" (chuyển từ lưới cũ)
   await expect(ks.getByTestId("ve-mat-bang")).toHaveCount(0);
   await expect(ks.getByTestId("ks-so-do")).toContainText("Cửa chính, Nhà vệ sinh, Ban công");
@@ -256,7 +278,8 @@ test("Q2/Q1/Q4/Q5/Q6 + TY-2 đợt 2: hồ sơ lưới cũ tự thành sơ đồ
   expect(hs.khung).toMatchObject({ rong: 6, sau: 6, tu_luoi_cu: true });
   expect(hs.tang_do[0].vat.ban_cong.diem).toEqual([0.417, 0.917]);
   const nha = page.getByTestId("nha-cua-ban");
-  await nha.getByLabel("Năm xây hoặc năm dọn vào").fill("2008");
+  await nha.getByTestId("dong-nha-nc").getByTestId("nam-nhap").fill("2008");
+  await nha.getByTestId("dong-nha-nc").getByTestId("nam-luu").click();
   await nha.getByTestId("nha-y-dinh").getByRole("radio", { name: "Sức khoẻ, giấc ngủ" }).click();
   await nha.getByRole("button", { name: "Đọc nhà của tôi" }).click();
   await expect(nha.getByTestId("bao-cao-nha")).toBeVisible();
@@ -461,7 +484,8 @@ test("UI-PT2 A/B: chọn Chung cư → hướng dẫn căn hộ + Cách làm; GP
   expect(hs.loai_nha).toBe("can_ho");
   expect(hs.theo).toBe("ban_cong");                                   // căn hộ → hướng lưu là hướng ban công
   await expect(page.getByTestId("hk-can-ho")).toBeVisible();
-  await expect(page.getByTestId("khao-sat-nha").getByLabel("Loại nhà")).toHaveValue("can_ho");   // Khảo sát đọc cùng hồ sơ nhà
+  await expect(page.getByTestId("khao-sat-nha").getByTestId("dong-nha-ks")).toContainText("Chung cư");   // Khảo sát đọc cùng hồ sơ nhà
+  await expect(page.getByTestId("the-nha-cua-toi").getByTestId("nt-theo-ban_cong")).toHaveAttribute("aria-checked", "true");
 });
 
 test("UI-PT2 B/C + TY-2 đợt 2 + gói 3: ảnh bản vẽ làm nền sơ đồ tỉ lệ (chỉ trên máy), căn ảnh theo khung + Chụp một góc, trả lời 3 câu → tích đúng ô dấu hiệu", async ({ page }) => {
@@ -583,7 +607,7 @@ test("UI-PT2 D/E: lưu hai căn → So hai căn hai cột không điểm số; C
   await ht.getByTestId("can-0").click();
   expect((await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nha.v1") ?? "null"))).huong_do).toBe(180);
   const nha = page.getByTestId("nha-cua-ban");
-  await expect(nha.getByLabel("Độ hướng nhà cho bài đọc")).toHaveValue("180");
+  await expect(nha.getByTestId("dong-nha-nc")).toContainText("180°");
 
   // P7: thẻ chia sẻ nhà từ bài đọc
   await nha.getByRole("button", { name: "Đọc nhà của tôi" }).click();
@@ -633,6 +657,7 @@ const KQ_DOC_ANH = {
 
 test("PT-V2: Để máy đọc ảnh — đồng ý không tích sẵn, ảnh thu nhỏ trên máy, Đúng / Không đồng bộ ô tích, bố cục gửi nguon anh", async ({ page }) => {
   await napHoSo(page);
+  await napNha(page, { huong_do: 180, huong: "Nam" });                       // PT-NHA: hướng từ "Nhà của tôi"
   const goiDoc: Record<string, unknown>[] = [];
   const goiBoCuc: Record<string, unknown>[] = [];
   await page.route("**/api/phongthuy/doc-anh", async (r) => { goiDoc.push(r.request().postDataJSON()); await r.fulfill({ json: KQ_DOC_ANH }); });
@@ -685,7 +710,6 @@ test("PT-V2: Để máy đọc ảnh — đồng ý không tích sẵn, ảnh th
   await da.getByTestId("doc-anh-dung-xa_ngang").click();
   await expect(ks.getByTestId("chip-tu-anh-xa_ngang")).toBeVisible();
   // Xem luận bố cục → engine nhận xa_ngang nguon anh đã xác nhận, be_ca khai rõ không có; không có ảnh trong thân
-  await ks.getByRole("textbox", { name: "Độ hướng nhà khảo sát" }).fill("180");
   await ks.getByRole("button", { name: "Xem luận bố cục" }).click();
   await expect.poll(() => goiBoCuc.length).toBe(1);
   const bc = goiBoCuc[0] as { bo_cuc: { dau_hieu: Record<string, { co: boolean; nguon: string; xac_nhan?: boolean }> } };

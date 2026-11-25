@@ -25,6 +25,7 @@ const Input = z.object({
     san: z.array(z.tuple([z.number().min(0).max(1), z.number().min(0).max(1)])).max(14).optional(),
   }).strict().optional(),
   nam_xay: z.number().int().min(1864).max(2150).optional(),
+  van_xay: z.number().int().min(1).max(9).optional(),   // PT-NHA: chỉ nhớ khoảng năm xây → vận
   sinh: z.object({
     birth_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     gender: z.enum(["nam", "nu"]),

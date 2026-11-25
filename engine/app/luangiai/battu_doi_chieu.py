@@ -67,6 +67,21 @@ def _cu(nhan: str, m1: str, m2: str) -> list[str]:
               nhan=nhan, muc_1=kb.nhan_muc(m1), muc_2=kb.nhan_muc(m2))]
 
 
+def khung(pt: dict) -> dict:
+    """Phần dùng chung với Bản đồ lá số (BD-1): tên + mô tả hai cách, lựa chọn trả lời, luật so, lời kết luận (KB)."""
+    cach = {}
+    for c in ("cach_1", "cach_2"):
+        o = kb.doi_chieu(c) or {}
+        hanh = ", ".join(_ten.ten("hanh", h) for h in pt[c]["hanh"]) or L("battu.doi_chieu.hanh_thieu", "hành đang thiếu")
+        cach[c] = {"ten": o.get("ten") or _CACH_MAC_DINH[c]["ten"],
+                   "mo_ta": (o.get("mo_ta") or _CACH_MAC_DINH[c]["mo_ta"]).format(hanh=hanh),
+                   "hanh": pt[c]["hanh"]}
+    lc = kb.doi_chieu("lua_chon") or {}
+    kl = kb.doi_chieu("ket_luan") or {}
+    return {"cach": cach, "lua_chon": [{"ma": m, "nhan": lc.get(m) or _LUA_CHON_MAC_DINH[m]} for m in LUA_CHON],
+            "luat": dict(LUAT), "ket_luan": {k: kl.get(k) or v for k, v in _KET_LUAN_MAC_DINH.items()}}
+
+
 def lap(sinh: dict, ngay_xem: dt.date | None = None) -> dict:
     """`sinh` như `battu_doi_song.lap`. → câu hỏi nhìn lại + mức từng cách + luật so + lời kết luận (KB)."""
     ngay_xem = ngay_xem or dt.datetime.now(dt.timezone(dt.timedelta(hours=7))).date()
@@ -120,22 +135,11 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None) -> dict:
         ly_do = "it_nam_qua" if so_nam_qua < 6 else "hai_cach_trung"
         cau = []
 
-    cach = {}
-    for c in ("cach_1", "cach_2"):
-        o = kb.doi_chieu(c) or {}
-        hanh = ", ".join(_ten.ten("hanh", h) for h in pt[c]["hanh"]) or L("battu.doi_chieu.hanh_thieu", "hành đang thiếu")
-        cach[c] = {"ten": o.get("ten") or _CACH_MAC_DINH[c]["ten"],
-                   "mo_ta": (o.get("mo_ta") or _CACH_MAC_DINH[c]["mo_ta"]).format(hanh=hanh),
-                   "hanh": pt[c]["hanh"]}
-    lc = kb.doi_chieu("lua_chon") or {}
-    kl = kb.doi_chieu("ket_luan") or {}
+    k = khung(pt)
     ld = kb.doi_chieu("ly_do") or {}
     return {
         "phien_ban": PHIEN_BAN, "chon": None, "co_cau_hoi": bool(cau), "ly_do": ly_do,
         "loi_ly_do": (ld.get(ly_do) or _LY_DO_MAC_DINH[ly_do]) if ly_do else None,
-        "cach": cach, "cau": cau,
-        "lua_chon": [{"ma": m, "nhan": lc.get(m) or _LUA_CHON_MAC_DINH[m]} for m in LUA_CHON],
-        "luat": dict(LUAT),
-        "ket_luan": {k: kl.get(k) or v for k, v in _KET_LUAN_MAC_DINH.items()},
+        "cach": k["cach"], "cau": cau, "lua_chon": k["lua_chon"], "luat": k["luat"], "ket_luan": k["ket_luan"],
         "cach_cuc": pt["cach_2"]["ma"], "than": pt["than"], "ngay_xem": ngay_xem.isoformat(), **kb.meta(),
     }

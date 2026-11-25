@@ -20,6 +20,7 @@ import { HoiNhanhAnh } from "@/components/huyen-hoc/HoiNhanhAnh";
 import { DocAnhNha } from "@/components/huyen-hoc/DocAnhNha";
 import { ChanQr } from "@/components/khung/ChanQr";
 import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
+import { DongNha } from "@/components/phong-thuy/NhaCuaToi";
 import { TenHienProvider } from "@/components/khung/TenHien";
 import { urlTheoNgonNgu } from "@/lib/ngon-ngu";
 import { useDuong } from "@/components/khung/NgonNgu";
@@ -70,21 +71,16 @@ interface KetQua {
 
 // Lưới 3×3 theo bản đồ: Bắc ở trên, Đông bên phải.
 const LUOI = ["Tây Bắc", "Bắc", "Đông Bắc", "Tây", "Trung cung", "Đông", "Tây Nam", "Nam", "Đông Nam"];
-const HUONG8 = ["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"];
 // Nhãn ở bảng chữ lib/chu/phong-thuy.ts: nhóm dấu hiệu `ks.nhom.<mã>`, nguồn `ks.nguon.<mã>`, loại nhà `ks.loai.<mã>`.
 const NHOM_DH = ["ngoai_canh", "hinh_nha", "trong_nha"] as const;
 const NGUON = new Set(["co_thu", "dan_gian"]);
-const LOAI_NHA = ["", "can_ho", "nha_pho", "biet_thu", "nha_cap4", "khac"] as const;
 // TY-2 đợt 2: MỘT bản vẽ — Khảo sát nhà đọc sơ đồ tỉ lệ của "Đứng giữa nhà" (hồ sơ nhà: `khung` + điểm tầng trệt), không còn
 // lưới 6×6 riêng. Nhãn chỗ trên sơ đồ: bảng chữ `dv.ten.<mã>`; mức chi phí `ks.cp.<mã>`.
 
-export function KhaoSatNha({ sinh, doHuongGoiY }: {
+export function KhaoSatNha({ sinh }: {
   sinh: { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
-  doHuongGoiY: number | null;
 }) {
   const [dm, setDm] = useState<DanhMuc | null>(null);
-  const [huong, setHuong] = useState<string>("");
-  const [doNha, setDoNha] = useState("");
   const [viTri, setViTri] = useState<Record<string, string>>({});
   const [phongChon, setPhongChon] = useState("cua_chinh");
   const [dau, setDau] = useState<Set<string>>(new Set());
@@ -100,25 +96,17 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
   const [kq, setKq] = useState<KetQua | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
-  const [loaiNha, setLoaiNha] = useState("");
   const gocNhin = useGocNhin();
   const { c: t, en, huong: tenHuong } = useChuPT();
   useEffect(() => {
     fetch(urlTheoNgonNgu("/api/phongthuy/bo-cuc/danh-muc")).then((r) => (r.ok ? r.json() : null)).then(setDm).catch(() => setDm(null));
   }, []);
-  useEffect(() => { if (doHuongGoiY != null) setDoNha(String(doHuongGoiY)); }, [doHuongGoiY]);
   // KC-2: bố cục đã khai lần trước (hồ sơ nhà trên máy) điền sẵn một lần.
   const nhaLuu = useHoSoNha();
-  // UI-PT2 P5: điền lại khi đổi CĂN đang xem (id khác); UI-PT2 A: loại nhà luôn theo hồ sơ nhà (chọn ở Hành trình).
+  // PT-NHA: hướng nhà + loại nhà chỉ đọc từ hồ sơ nhà (thẻ "Nhà của tôi") — khối này không còn ô nhập riêng.
+  // UI-PT2 P5: bố cục điền lại khi đổi CĂN đang xem (id khác).
   const daDien = useRef<string | null>(null);
-  useEffect(() => { if (nhaLuu?.loai_nha) setLoaiNha(nhaLuu.loai_nha); }, [nhaLuu?.loai_nha]);
-  // Hướng nhà vừa có trong hồ sơ nhà (đo / nhập ở phần trên) sau lần điền đầu → ô hướng còn trống thì điền, không bắt nhập lại.
-  const huongDoLuu = nhaLuu?.huong_do, huongLuu = nhaLuu?.huong;
-  useEffect(() => {
-    if (doHuongGoiY != null) return;
-    if (huongDoLuu != null) setDoNha((c) => (c === "" ? String(huongDoLuu) : c));
-    else if (huongLuu) setHuong((c) => (c === "" ? huongLuu : c));
-  }, [huongDoLuu, huongLuu, doHuongGoiY]);
+  const loaiNha = nhaLuu?.loai_nha ?? "";
   useEffect(() => {
     const khoa = nhaLuu ? `${nhaLuu.id ?? "_"}` : null;
     if (!nhaLuu || daDien.current === khoa) return;
@@ -126,7 +114,6 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
     const lanDau = daDien.current === null;
     daDien.current = khoa;
     if (!lanDau && !doiCan) return;
-    if (nhaLuu.huong_do != null && doHuongGoiY == null) setDoNha(String(nhaLuu.huong_do)); else if (nhaLuu.huong && doHuongGoiY == null) setHuong(nhaLuu.huong);
     const b = nhaLuu.bo_cuc;
     if (b?.vi_tri || doiCan) setViTri(b?.vi_tri ?? {});
     if (b?.dau_hieu || doiCan) setDau(new Set(b?.dau_hieu ?? []));
@@ -136,9 +123,8 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
       setDaTraLoi({});
     }
     if (b?.huong_do || doiCan) setHuongDo(Object.fromEntries(Object.entries(b?.huong_do ?? {}).map(([k, v]) => [k, String(v)])));
-    if (nhaLuu.loai_nha) setLoaiNha(nhaLuu.loai_nha);
     if (doiCan) setKq(null);
-  }, [nhaLuu, doHuongGoiY]);
+  }, [nhaLuu]);
 
   // SD-1: khối sơ đồ nhà theo tỉ lệ vừa lưu câu trả lời Có / Không cho dấu hiệu nó gợi ý (hồ sơ nhà: `tu_so_do`,
   // `khai_khong`) → ô tích ở đây theo ngay, để lần "Xem luận bố cục" kế tiếp không ghi đè mất câu trả lời ấy.
@@ -191,8 +177,8 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
   const gui = async () => {
     setLoi(null);
     const so = (s: string) => (s.trim() === "" ? null : Number(s.replace(",", ".")));
-    const d = so(doNha);
-    if (d != null && !(d >= 0 && d < 360)) { setLoi(t("ks.loi_do")); return; }
+    const d = nhaLuu?.huong_do ?? null;
+    const huong = d == null ? nhaLuu?.huong ?? "" : "";
     const hd: Record<string, number> = {};
     for (const [k, v] of Object.entries(huongDo)) {
       const x = so(v);
@@ -229,7 +215,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
       });
       setKq(r);
       try {
-        luuHoSoNha({ ...(d != null ? { huong_do: d } : {}), ...(loaiNha ? { loai_nha: loaiNha as "can_ho" } : {}),
+        luuHoSoNha({
           bo_cuc: { vi_tri: viTri, huong_do: hd, dau_hieu: [...dau], ...(tuAnhGui.length ? { tu_anh: tuAnhGui } : {}),
             ...(khongCoGui.length ? { khai_khong: khongCoGui } : {}),
             // SD-1: giữ dấu vết "mã này đến từ sơ đồ nhà" (chỉ mã còn đang tích) để khối sơ đồ gỡ được khi sơ đồ đổi.
@@ -252,20 +238,7 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
         <div className="space-y-4">
           <div>
             <p className="text-sm font-medium text-fg">{t("ks.b1")}</p>
-            <div className="mt-2 flex flex-wrap items-center gap-2">
-              <Input aria-label={t("ks.do_aria")} inputMode="decimal" placeholder={t("ks.do_vi_du")} className="w-40"
-                value={doNha} onChange={(e) => setDoNha(e.target.value.replace(/[^\d.,]/g, "").slice(0, 6))} />
-              <span className="text-xs text-fg-faint">{t("ks.hoac")}</span>
-              <select aria-label={t("ks.huong_aria")} value={huong} onChange={(e) => setHuong(e.target.value)} disabled={doNha.trim() !== ""}
-                className="h-10 rounded-full border border-line bg-surface/60 px-3 text-sm disabled:opacity-50">
-                <option value="">{t("ks.chon_huong")}</option>
-                {HUONG8.map((h) => <option key={h} value={h}>{tenHuong(h)}</option>)}
-              </select>
-              <select aria-label={t("ks.loai_aria")} value={loaiNha} onChange={(e) => setLoaiNha(e.target.value)}
-                className="h-10 rounded-full border border-line bg-surface/60 px-3 text-sm">
-                {LOAI_NHA.map((v) => <option key={v} value={v}>{t(`ks.loai.${v || "chon"}`)}</option>)}
-              </select>
-            </div>
+            <div className="mt-2"><DongNha testId="dong-nha-ks" /></div>
             <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-fg-faint">
               <span>{t("ks.giai_thich")}</span>
               {(Object.keys(TEN_GOC_NHIN) as GocNhin[]).map((g) => (

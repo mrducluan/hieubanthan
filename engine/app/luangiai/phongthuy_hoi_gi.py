@@ -146,10 +146,11 @@ def _cua_chinh(r: dict, nha: dict, sinh: dict | None) -> dict:
         r["muc"] = "can_bang"
         r["y"].append({"nhan": "tran", "noi_dung": _m("cua.tran", ds=_noi(_ten_dau_hieu(m) for m in veto))})
     r["vi_sao"].append(f"{_ten.ten('quai', mq['quai'])} · {_h(huong)} → {_ten.ten('du_nien', dn['du_nien'])}")
-    b = ds._trach_ban(nha, do, huong) if nha.get("nam_xay") else None     # KHÔNG có năm xây thì không lập bàn (không đoán)
+    b = ds._trach_ban(nha, do, huong) if (nha.get("nam_xay") or nha.get("van_xay")) else None   # không có năm / vận xây thì không lập bàn (không đoán)
     if b:
         c = b["cung_map"][b["huong"]["quai"]]
-        r["vi_sao"].append(_m("cua.sao", nam_xay=b["nam_xay"], van=b["van"], son=c["son"], sao_huong=c["huong"]))
+        r["vi_sao"].append(_m("cua.sao_van", van=b["van"], son=c["son"], sao_huong=c["huong"]) if b.get("nam_uoc")
+                           else _m("cua.sao", nam_xay=b["nam_xay"], van=b["van"], son=c["son"], sao_huong=c["huong"]))
         if (b.get("cap_huong") or {}).get("y"):
             r["vi_sao"].append(_m("cua.sao_y", y=b["cap_huong"]["y"]))
         r["da_tinh"]["van"] = b["van"]

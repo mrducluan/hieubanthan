@@ -86,8 +86,18 @@ def _huong_nha(nha: dict) -> tuple[str | None, float | None]:
     return (h, None) if h else (None, None)
 
 
+def _nam_xay(nha: dict) -> tuple[int | None, bool]:
+    """(năm dùng để lập bàn, có phải năm ĐẠI DIỆN của vận không). PT-NHA: người dùng chỉ nhớ khoảng năm → `van_xay`;
+    bàn sao chỉ phụ thuộc vận nên lấy năm đầu vận để lập, lời nói "vận …" chứ không nêu năm."""
+    if nha.get("nam_xay"):
+        return int(nha["nam_xay"]), False
+    if nha.get("van_xay"):
+        return hk.nam_dau_van(int(nha["van_xay"])), True
+    return None, False
+
+
 def _trach_ban(nha: dict, do: float | None, huong: str | None, nam_xem: int | None = None) -> dict | None:
-    nam_xay = nha.get("nam_xay")
+    nam_xay, uoc = _nam_xay(nha)
     if not nam_xay:
         return None
     if nha.get("toa"):
@@ -105,6 +115,7 @@ def _trach_ban(nha: dict, do: float | None, huong: str | None, nam_xem: int | No
         return None
     cung = {c["cung"]: c for c in b["cung"]}
     b["cung_map"] = cung
+    b["nam_uoc"] = uoc
     qh, qt = b["huong"]["quai"], b["toa"]["quai"]
     b["cap_huong"] = hk.to_hop_cung(cung[qh]["son"], cung[qh]["huong"], b["van"], cung=qh, nam=nam_xem)
     b["cap_toa"] = hk.to_hop_cung(cung[qt]["son"], cung[qt]["huong"], b["van"], cung=qt, nam=nam_xem)
@@ -441,7 +452,9 @@ def _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan) -> dict:
         lv = ch.get("linh_vuc") or {}
         than_cua = " ".join(x for x in (lv.get("tien_bac"), lv.get("gia_dao")) if x) or ch["y"]
         can_cu.append(L("pt.c2.cc.cap", "Cặp sao phía cửa: {y}", y=ch['y']))
-        c["hop"].append(_hop(loai, L("pt.c2.cua_nam_xay", "Phía cửa theo năm xây {nam}: {muc}", nam=b['nam_xay'], muc=kb.nhan_muc(ch['muc'])), than_cua,
+        tieu = (L("pt.c2.cua_van_xay", "Phía cửa theo vận {van} của ngôi nhà: {muc}", van=b['van'], muc=kb.nhan_muc(ch['muc'])) if b.get("nam_uoc")
+                else L("pt.c2.cua_nam_xay", "Phía cửa theo năm xây {nam}: {muc}", nam=b['nam_xay'], muc=kb.nhan_muc(ch['muc'])))
+        c["hop"].append(_hop(loai, tieu, than_cua,
                              (ch.get("luu_y") or None) if loai == "luu_y" else None))
         kcuc = (kbp.huyen_khong().get("cuc") or {}).get(b["cuc"], {})
         if kcuc:
@@ -975,7 +988,7 @@ def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None
     thieu = [x for x, ok in (("sinh", bool(mq)), ("huong", bool(huong)), ("nam_xay", bool(b)), ("bo_cuc", bool(bc_luan))) if not ok]
     da_tinh = {"menh_quai": {k: mq[k] for k in ("quai", "so", "nhom", "nam_tinh", "moc_nam")} if mq else None,
                "huong_nha": huong, "do_huong": do, "trach": pt.trach(huong) if huong else None,
-               "huyen_khong": ({"van": b["van"], "nam_xay": b["nam_xay"], "cuc": b["cuc"], "cuc_ten": b["cuc_ten"], "toa": b["toa"]["son"],
+               "huyen_khong": ({"van": b["van"], "nam_xay": None if b.get("nam_uoc") else b["nam_xay"], "cuc": b["cuc"], "cuc_ten": b["cuc_ten"], "toa": b["toa"]["son"],
                                 "huong": b["huong"]["son"], "cap_huong": b["cap_huong"], "cap_toa": b["cap_toa"],
                                 "cung": [{k: x[k] for k in ("cung", "phuong", "van", "son", "huong")} for x in b["cung"]]} if b else None),
                "thanh_vien": tvs, "ngay_xem": ngay_xem.isoformat()}

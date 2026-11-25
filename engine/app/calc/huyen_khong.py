@@ -81,6 +81,20 @@ def van_cua_nam(nam: int) -> int:
     return (nam - 1864) // 20 % 9 + 1
 
 
+def nam_dau_van(van: int) -> int:
+    """Năm đầu của vận `van` trong tam nguyên 1864–2043 (vận 1 = 1864, vận 9 = 2024). Dùng khi người dùng chỉ nhớ KHOẢNG
+    năm xây: bàn sao của nhà chỉ phụ thuộc vận (20 năm), không phụ thuộc năm cụ thể (`van_cua_nam(nam_dau_van(v)) == v`)."""
+    if isinstance(van, bool) or not (isinstance(van, int) and 1 <= van <= 9):
+        raise ValueError("vận phải từ 1 đến 9")
+    return 1864 + (van - 1) * 20
+
+
+def khoang_van(van: int) -> tuple[int, int]:
+    """(năm đầu, năm cuối) của vận trong tam nguyên 1864–2043."""
+    d = nam_dau_van(van)
+    return d, d + 19
+
+
 def son_tu_do(do: float) -> dict:
     """Độ la bàn (0 = chính Bắc) → sơn; cờ `kiem_huong` khi lệch tâm sơn > 3° (dùng thế quái), `khong_vong`
     khi sát ranh giới hai sơn (±0.5°)."""
