@@ -44,6 +44,9 @@ SO: dict[str, dict] = {
         "cach": {"muc": "tom_y_co_thu", "ghi_chu": "ba cách Thất Sát / Chính Ấn / Thiên Ấn đã khớp «Luận dụng thần» (Q5)"},
         "ngoai_cach": _nv("tu_binh_chan_thuyen.json", "tests/test_battu_ngoai_cach.py::test_trich_la_nguyen_van",
                           "câu hỷ / kỵ khớp nguyên văn; lời đời thường là tóm ý")}},
+    "battu_ban_do_kb.json": {"mang": "battu", "muc": "bien_tap", "ghi_chu": "BD-1 Bản đồ Bát tự: lời ô, quan hệ, năm — ban biên tập", "phan": {
+        "trich": _nv("tam_menh_thong_hoi_du_bo.json", "tests/test_battu_ban_do.py::test_tuoi_theo_sach_va_nam_that",
+                     "ba câu nguyên văn về tuổi của từng trụ")}},
     "bo_sung_nhat_chu.json": {"mang": "battu", "muc": "bien_tap"},
     "bo_sung_thap_than.json": {"mang": "battu", "muc": "bien_tap"},
     # ---- Kỳ Môn

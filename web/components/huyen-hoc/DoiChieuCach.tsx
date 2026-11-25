@@ -3,14 +3,14 @@
 // năm / giai đoạn đã qua mà hai cách nói khác nhau; người dùng tự kể năm đó ra sao, mỗi câu trả lời lật ra "mỗi cách đã
 // nói gì". Đủ câu → lời kết luận (engine soạn) + người dùng có thể chọn một cách làm chính (chỉ đổi chỗ nhấn trong báo
 // cáo, không đổi phép tính). Câu trả lời và lựa chọn chỉ lưu trên máy; PostHog chỉ nhận số câu khớp + mã cách cục.
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Check, RotateCcw, Scale } from "lucide-react";
 import { ChipMuc } from "@/components/luan-giai/BaoCaoDoiSong";
 import { Button } from "@/components/ui/button";
 import { ghi } from "@/lib/do-luong";
 import { usePost } from "@/lib/goi-api";
-import { docLa, ghiLa, ketQua, khoaLaSo, useCachChinh, type Cach, type DoiChieuCach as DC, type TraLoi } from "@/lib/cach-chinh-battu";
+import { ghiLa, ketQua, khoaLaSo, useCachChinh, useTraLoi, type Cach, type DoiChieuCach as DC, type TraLoi } from "@/lib/cach-chinh-battu";
 import { cn } from "@/lib/utils";
 import { ChuNhan } from "@/components/cms/ChuNhan";
 import { useChuBatTu } from "@/components/huyen-hoc/chu-bat-tu";
@@ -21,10 +21,9 @@ export function DoiChieuCach({ laSo }: { laSo: LaSo }) {
   const { data } = usePost<DC>("/api/battu/doi-chieu-cach", { la_so: laSo });
   const khoa = khoaLaSo(laSo);
   const chinh = useCachChinh(khoa);
-  const [traLoi, setTraLoi] = useState<Record<string, TraLoi>>({});
+  const traLoi = useTraLoi(khoa);
   const giam = useReducedMotion();
   const { c: cb, en } = useChuBatTu();
-  useEffect(() => { setTraLoi(docLa(khoa).tra_loi); }, [khoa]);
 
   const kq = useMemo(() => (data?.co_cau_hoi ? ketQua(data, traLoi) : null), [data, traLoi]);
   const dangHoi = data?.cau.find((c) => !traLoi[c.ma]);
@@ -41,7 +40,6 @@ export function DoiChieuCach({ laSo }: { laSo: LaSo }) {
 
   const tra = (ma: string, t: TraLoi) => {
     const moi = { ...traLoi, [ma]: t };
-    setTraLoi(moi);
     ghiLa(khoa, { tra_loi: moi, ...(chinh ? { chinh } : {}) });
     const r = ketQua(data, moi);
     if (r.ma && !data.cau.some((c) => !moi[c.ma])) {
@@ -53,7 +51,7 @@ export function DoiChieuCach({ laSo }: { laSo: LaSo }) {
     ghiLa(khoa, { tra_loi: traLoi, ...(c ? { chinh: c } : {}) });
     ghi("chart_interacted", { kind: "battu_cach_chinh", ket_qua: c ?? "bo_chon", cach_cuc: data.cach_cuc });
   };
-  const lamLai = () => { setTraLoi({}); ghiLa(khoa, { tra_loi: {}, ...(chinh ? { chinh } : {}) }); };
+  const lamLai = () => { ghiLa(khoa, { tra_loi: {}, ...(chinh ? { chinh } : {}) }); };
   const nghieng: Cach | null = kq?.ma === "cach_1" || kq?.ma === "nghieng_1" ? "cach_1"
     : kq?.ma === "cach_2" || kq?.ma === "nghieng_2" ? "cach_2" : null;
   const nhanTL = (t: TraLoi) => data.lua_chon.find((x) => x.ma === t)?.nhan ?? t;

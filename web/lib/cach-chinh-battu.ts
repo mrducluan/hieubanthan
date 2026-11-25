@@ -23,7 +23,7 @@ export interface DoiChieuCach {
 export interface KetQuaDoiChieu { khop_1: number; khop_2: number; so_cau: number; ma: keyof DoiChieuCach["ket_luan"] | null }
 
 /** Đếm số câu khớp từng cách (bỏ "không nhớ"); `ma` = khoá lời kết luận khi đủ `luat.toi_thieu` câu, chưa đủ → null. */
-export function ketQua(dc: Pick<DoiChieuCach, "cau" | "luat">, traLoi: Record<string, TraLoi>): KetQuaDoiChieu {
+export function ketQua(dc: { cau: Pick<CauDoiChieu, "ma" | "cach_1" | "cach_2">[]; luat: DoiChieuCach["luat"] }, traLoi: Record<string, TraLoi>): KetQuaDoiChieu {
   let khop_1 = 0, khop_2 = 0, so_cau = 0;
   for (const c of dc.cau) {
     const t = traLoi[c.ma];
@@ -86,3 +86,19 @@ export function useCachChinh(khoa: string | null): Cach | undefined {
 /** Báo cáo Bát tự đời sống đọc cách chính qua context (trang Bát tự bọc quanh luận giải). */
 export const CachChinhBatTu = createContext<{ cach?: Cach; ten?: Record<Cach, string> }>({});
 export const useCachChinhBaoCao = () => useContext(CachChinhBatTu);
+
+/** Câu trả lời năm đã qua của lá số đang xem — nghe thay đổi từ mọi nơi ghi (khối "Cách nào đúng" và Bản đồ lá số dùng
+ *  chung mã `nam.YYYY`, trả lời ở chỗ này thì chỗ kia thấy ngay). */
+export function useTraLoi(khoa: string | null): Record<string, TraLoi> {
+  const [t, setT] = useState<Record<string, TraLoi>>({});
+  useEffect(() => {
+    setT(docLa(khoa).tra_loi);
+    const nghe = (e: Event) => {
+      const d = (e as CustomEvent<{ khoa: string; moi: MotLa }>).detail;
+      if (d.khoa === khoa) setT(d.moi.tra_loi);
+    };
+    window.addEventListener(SU_KIEN, nghe);
+    return () => window.removeEventListener(SU_KIEN, nghe);
+  }, [khoa]);
+  return t;
+}

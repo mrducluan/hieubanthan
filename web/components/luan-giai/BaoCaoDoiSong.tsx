@@ -79,6 +79,21 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
     if (h && doc.some((c) => c.ma === h)) moChuong(h, true);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- một lần khi bài hiện
   }, [khoaBai]);
+  // BD-1: khối khác trên trang (Bản đồ lá số Bát tự) xin mở một chương: sự kiện `hbt:mo-chuong` {mo_dun, ma}.
+  useEffect(() => {
+    const nghe = (e: Event) => {
+      const d = (e as CustomEvent<{ mo_dun?: string; ma: string }>).detail;
+      if (!d || (d.mo_dun && d.mo_dun !== bc.mo_dun)) return;
+      if (doc.some((c) => c.ma === d.ma)) moChuong(d.ma, true);
+      else if (bc.chuong.some((c) => c.ma === d.ma)) {   // chương còn khoá → tới phần mời mở khoá
+        (document.getElementById(`lg-${d.ma}`) ?? document.querySelector('[data-testid="lg-phan-khoa"]'))
+          ?.scrollIntoView({ behavior: giamChuyenDong() ? "auto" : "smooth", block: "start" });
+      }
+    };
+    window.addEventListener("hbt:mo-chuong", nghe);
+    return () => window.removeEventListener("hbt:mo-chuong", nghe);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- gắn lại khi đổi bài
+  }, [khoaBai]);
   // reading_completed (Gate 1) — xem lib/doc-xong-cho: khi có báo cáo Tử vi / Bát tự, mốc "đọc xong" dưới báo cáo chỉ tính
   // khi chương đọc được CUỐI CÙNG đã mở và cuộn hết. Bài đã lưu / Bản đồ con số không chặn (mốc của chúng khác chỗ).
   const chanMa = bc.mo_dun === "tuvi" || bc.mo_dun === "battu" ? bc.mo_dun : null;

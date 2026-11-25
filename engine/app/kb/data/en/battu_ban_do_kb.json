@@ -1,0 +1,258 @@
+{
+  "_trang_thai": "bien_tap",
+  "tru": {
+    "0": {
+      "ten": "year pillar",
+      "tang": "Root",
+      "y": "your roots: grandparents, parents, the household you grew up in",
+      "ngan": "your roots"
+    },
+    "1": {
+      "ten": "month pillar",
+      "tang": "Sprout",
+      "y": "parents, siblings, peers; where you grew up, then studied and worked",
+      "ngan": "parents, siblings and work"
+    },
+    "2": {
+      "ten": "day pillar",
+      "tang": "Flower",
+      "y": "you yourself in the top character, the place of your partner in the bottom one",
+      "y_tre": "you yourself in the top character, your private life in the bottom one",
+      "ngan": "you yourself",
+      "ngan_duoi": "your partnership",
+      "ngan_duoi_tre": "your private life"
+    },
+    "3": {
+      "ten": "hour pillar",
+      "tang": "Fruit",
+      "y": "children and those who come after you; what you build for later",
+      "y_tre": "those who come after you; what you build for later",
+      "ngan": "children and later life",
+      "ngan_tre": "later life"
+    }
+  },
+  "trich": [
+    {
+      "sach": "San Ming Tong Hui",
+      "thien": "論遁月時",
+      "han": "年為根月為苗日為花時為實",
+      "y": "The year is the root, the month the sprout, the day the flower, the hour the fruit."
+    },
+    {
+      "sach": "San Ming Tong Hui",
+      "thien": "論遁月時",
+      "han": "以年為本為父月為兄弟僚友日為主為妻為己身時為子孫",
+      "y": "The year is the base and the father; the month is siblings and colleagues; the day is oneself and one's spouse; the hour is children and grandchildren."
+    },
+    {
+      "sach": "San Ming Tong Hui",
+      "thien": "論正官",
+      "han": "四柱各管年限年管十五失之太早時管五十後失之太遲",
+      "y": "Each pillar governs a span of years: the year pillar up to about age 15, the hour pillar from about age 50."
+    }
+  ],
+  "tuoi": {
+    "ghi_chu": "The book only gives the two ends: the year pillar up to about 15, the hour pillar from about 50. The two middle pillars share ages 16–49 (we do not split what the book does not split)."
+  },
+  "nhom": {
+    "Tỷ Kiếp": {
+      "y": "independence and peers",
+      "nguoi_tre": "siblings and friends"
+    },
+    "Ấn": {
+      "y": "support, learning and protectors",
+      "nguoi_tre": "mother and teachers"
+    },
+    "Thực Thương": {
+      "y": "expression, output and creativity",
+      "nguoi_tre": "talents and things you make yourself"
+    },
+    "Tài": {
+      "y": "money and earning",
+      "nguoi_tre": "father and spending money"
+    },
+    "Quan Sát": {
+      "y": "rules, pressure and authority",
+      "nguoi_tre": "teachers and routines"
+    }
+  },
+  "nguoi": {
+    "Tỷ Kiên": {
+      "nam": "siblings and peers",
+      "nu": "siblings and peers"
+    },
+    "Kiếp Tài": {
+      "nam": "friends, partners in work, people you share with",
+      "nu": "friends, partners in work, people you share with"
+    },
+    "Thực Thần": {
+      "nam": "students and juniors",
+      "nu": "children and students"
+    },
+    "Thương Quan": {
+      "nam": "juniors and people you mentor",
+      "nu": "children and juniors"
+    },
+    "Thiên Tài": {
+      "nam": "father",
+      "nu": "father"
+    },
+    "Chính Tài": {
+      "nam": "",
+      "nu": ""
+    },
+    "Thất Sát": {
+      "nam": "children and demanding bosses",
+      "nu": "demanding bosses"
+    },
+    "Chính Quan": {
+      "nam": "children and superiors",
+      "nu": "superiors and people in position"
+    },
+    "Thiên Ấn": {
+      "nam": "teachers and protectors outside the family",
+      "nu": "teachers and protectors outside the family"
+    },
+    "Chính Ấn": {
+      "nam": "mother and teachers",
+      "nu": "mother and teachers"
+    }
+  },
+  "mau": {
+    "la_ban": "{can} is you: {am_duong} {hanh}, like {hinh}.",
+    "la_ban_than_yeu": "Only about {pct}% of the chart's strength stands on {can}'s side: you do best with support, one step at a time.",
+    "la_ban_than_vua": "About {pct}% of the chart's strength stands on {can}'s side: you can stand on your own and still work well with others.",
+    "la_ban_than_manh": "About {pct}% of the chart's strength stands on {can}'s side: you stand on your own and need room to use that energy.",
+    "la_tt": "{chu} is the part of you about {nhom_y}; in you it shows as being {tinh_cach}.",
+    "nguoi": "{chu} also points to people: {nguoi}.",
+    "tang_can": "Inside {chi} there is also {ds}.",
+    "tang_mot": "{can} ({nhom_y})",
+    "lap": "{chu} appears {n} times in the chart, so what it carries is a strong trait of yours.",
+    "ts": "{chu} also carries the note \"{tieu_de}\": {y}",
+    "dung": {
+      "them": "Both readings see you needing more {hanh}: {chu} is a source of support for you.",
+      "mot_them": "The {cach} reading sees you needing more {hanh}, so {chu} helps you; the other reading does not say so.",
+      "bot": "Both readings see {hanh} as already heavy for you: {chu} adds to that weight.",
+      "mot_bot": "The {cach} reading sees {hanh} as already heavy for you; the other reading does not say so.",
+      "nguoc": "The two readings disagree about the {hanh} of {chu}: compare with what you have lived through."
+    },
+    "ten_cach": {
+      "cach_1": "balance",
+      "cach_2": "birth-month"
+    },
+    "o_dau": "{chu} sits in the {tru}, the {tang}: {y}.",
+    "tuoi_khoang": "The {tru} covers roughly ages {tu}–{den} for you ({nam_tu}–{nam_den}).",
+    "tuoi_tu": "The {tru} covers your life from about age {tu} ({nam_tu} onward).",
+    "dang_o": " You are in this span now.",
+    "da_qua": " This span is behind you.",
+    "chua_toi": " This span is still ahead.",
+    "duoi_ngay": "{chu} is the bottom character of the day pillar: the place of your partner.",
+    "sao_phoi": "For a {gioi}, {chu} also plays the role of the partner: it shows the kind of person you tend to meet and how the two of you bond.",
+    "gioi": {
+      "nam": "man",
+      "nu": "woman"
+    },
+    "noi": "With {chu_kia} in the {tru_kia}: {y}",
+    "nam": "{nam} ({cc}) {loai_y} {chu} in the {tru}: {ve}.",
+    "nam_y": {
+      "hop": "pulls together with",
+      "xung": "stands against",
+      "hinh": "rubs against",
+      "hai": "falls out of step with",
+      "pha": "interrupts",
+      "trung": "repeats"
+    },
+    "nam_ve": {
+      "hop": "matters of {ngan} tend to bring people and connections",
+      "xung": "matters of {ngan} tend to shake up or move",
+      "hinh": "matters of {ngan} tend to carry quiet tension",
+      "hai": "matters of {ngan} tend to bring misunderstandings",
+      "pha": "matters of {ngan} tend to be interrupted midway",
+      "trung": "matters of {ngan} come up again and get clearer"
+    },
+    "ts_tru": "Symbolic stars in the {tru}: {ds}",
+    "vs_tt": "{chu} is {tt} (relative to the day stem {nc})",
+    "vs_nc": "Day stem {can} is the Day Master ({am_duong} {hanh}); strength {ket} {pct}%",
+    "vs_tang": "Hidden stems of {chi}: {ds}",
+    "vs_ts": "Life stage of the Day Master at {chi}: {ts}",
+    "vs_nap": "Na Yin of the {tru}: {nap}",
+    "vs_dung": "{hanh}: balance reading {c1}; birth-month reading {c2}",
+    "vs_tru": "San Ming Tong Hui: the year is the root, the month the sprout, the day the flower, the hour the fruit; the year pillar governs up to about 15, the hour pillar from about 50",
+    "vs_dung_nhan": {
+      "them": "needs more",
+      "bot": "should be reduced",
+      "khong": "not mentioned"
+    }
+  },
+  "cap": {
+    "hop": {
+      "01": "your roots and the place you grew up support each other; home and early surroundings tend to point the same way.",
+      "02": "your roots support you; what you learned from grandparents and parents easily becomes your own capital.",
+      "03": "early life and later life connect; what you received from family tends to pass on to those after you.",
+      "12": "parents, siblings and you tend to stand on the same side; work and home rarely pull against each other.",
+      "13": "the effort of your younger years tends to leave lasting results later on.",
+      "23": "you and those who come after you (children, students, juniors) understand each other easily."
+    },
+    "xung": {
+      "01": "your roots and the place you grew up pull in two directions; you often choose between family ways and your own path. Tell your family about your choices early.",
+      "02": "your roots and you move at different paces; you tend to leave old ways to stand on your own. Keep in regular touch with home even from afar.",
+      "03": "what you were used to as a child does not transfer as is to those after you. Let the next generation choose their own way.",
+      "12": "work, family and you often bump into each other; changes of job or home come easily. Keep some personal space and speak up early about disagreements.",
+      "13": "the work of your younger years and your long-term plans often change direction. Write down long-term goals and review them every year.",
+      "23": "you and those after you often move at different paces. Make time to listen to each other and avoid imposing your way."
+    },
+    "hinh": {
+      "01": "your roots and the place you grew up rub quietly; some things at home were never said. Untangle small things one at a time instead of letting them pile up.",
+      "02": "you tend to be hard on yourself by your family's standards. Set your own standard, one that fits you.",
+      "03": "expectations from your roots can weigh on those who come after you. Put expectations into words and listen to the reply.",
+      "12": "work and home rub lightly but for a long time. Keep work hours and home hours clearly apart.",
+      "13": "current work and later plans tend to step on each other. Finish one thing before opening the next.",
+      "23": "small but lasting tension can build between you and those after you. Speak plainly and gently, early."
+    },
+    "hai": {
+      "01": "your roots and the place you grew up easily misread each other's expectations. Ask again before assuming.",
+      "02": "what your family hopes for and what you want often diverge. Show what you want through concrete actions.",
+      "03": "early-life and later-life expectations tend to drift apart. Write down what you want to pass on.",
+      "12": "family, colleagues and you easily have small misunderstandings. Confirm important things in writing.",
+      "13": "later plans easily drift from what you are doing now. Review your plans every quarter.",
+      "23": "you and those after you easily misread each other. Ask before drawing conclusions."
+    },
+    "pha": {
+      "01": "family life in childhood tends to be interrupted, such as moving house or changing schools. Keep the long friendships you have.",
+      "02": "your work tends to be interrupted midway. Break big tasks into short stages.",
+      "03": "long-range plans tend to be interrupted. Keep a backup plan for long projects.",
+      "12": "work and home tend to cut into each other. Keep dedicated time for each.",
+      "13": "current work and later plans tend to cut into each other. Finish what is unfinished first.",
+      "23": "shared plans with those after you tend to stall. Set a concrete new date each time something is left unfinished."
+    },
+    "tu_hinh": "the same character repeats and rubs against itself: you tend to blame yourself and make things hard for yourself here. Compare yourself less with yourself."
+  },
+  "noi_bat": {
+    "chi_lap": {
+      "2": "Two of the four bottom characters are {chi}: the part about {nhom_y} is emphasised in your chart.",
+      "3": "Three of the four bottom characters are {chi}: the part about {nhom_y} is the strongest trait of your chart.",
+      "4": "All four bottom characters are {chi}: the part about {nhom_y} runs through the whole chart."
+    },
+    "can_lap": {
+      "2": "{can} appears twice in the top row: the part about {nhom_y} shows clearly on the outside.",
+      "3": "{can} appears three times in the top row: the part about {nhom_y} is what others see most in you."
+    },
+    "cuc": "The three characters {ds} gather into one block of {hanh}: the part about {nhom_y} becomes a major strength of the chart.",
+    "than_yeu": "Only about {pct}% of the chart's strength stands on your side ({can}): you do best with support.",
+    "than_manh": "About {pct}% of the chart's strength stands on your side ({can}): you stand on your own and need room to use that energy.",
+    "hanh_nhieu": "{hanh} is the largest share ({pct}%). For you as {nc_hanh}, {hanh} is the part about {nhom_y}.",
+    "thieu": "The chart has no {ds}. Missing does not mean you must add it: it depends on whether you need or should reduce that element.",
+    "lo_can": "{can}, the part about {nhom_y}, shows in the {tru} (the {tang} of your life).",
+    "ngay": "The bottom of the day pillar (the place of your partner) {loai_y} the {tru}."
+  },
+  "thoi_gian": {
+    "nam": "{nam} ({cc}), age {tuoi}: a year of {chu_de}.",
+    "nam_cham": " This year touches {n} characters of your chart.",
+    "nam_khong": " This year touches no character of your chart.",
+    "van": "From {tu_nam} to {den_nam} (about ages {tu_tuoi}–{den_tuoi}): ten years of {chu_de}.",
+    "cham": "{loai_y} {chu} in the {tru}: {ve}.",
+    "hoi": "Looking back at {nam} (when you were {tuoi}), overall it was a year that was…",
+    "hoi_dan": "Years with a dot are years where the two readings disagree. Tell us how that year went and we compare which reading fits your life better.",
+    "nam_toi": "For what to do and avoid in this year, see the chapter \"The next ten years and what to avoid\"."
+  }
+}

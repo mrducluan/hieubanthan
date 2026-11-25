@@ -13,6 +13,7 @@ import { NutXuongForm } from "@/components/huyen-hoc/NutXuongForm";
 import { MoiLapLaSo } from "@/components/huyen-hoc/MoiLapLaSo";
 import { ChipPhai, DongGhiChu, DongPhai, KhungPhai, type PhaiDangDung } from "@/components/huyen-hoc/KhungPhai";
 import { DoiChieuCach } from "@/components/huyen-hoc/DoiChieuCach";
+import { BanDoBatTu } from "@/components/huyen-hoc/BanDoBatTu";
 import { ChanLaSo } from "@/components/huyen-hoc/ChanLaSo";
 import { SachXuaNoi } from "@/components/huyen-hoc/SachXuaNoi";
 import { SachXuaGhi } from "@/components/huyen-hoc/SachXuaGhi";
@@ -149,6 +150,8 @@ export function BatTu() {
             </div>
           </div>
         )}
+        {/* BD-1: bản đồ lá số bấm được — ngay sau lời mở đầu, trước bảng kỹ thuật (phương án 4 chủ dự án duyệt). */}
+        {laSo && ls && <BanDoBatTu laSo={laSo} />}
         {ls && (
           <button type="button" onClick={doiChiTiet} aria-expanded={moChiTiet} aria-controls="la-so-chi-tiet"
             className="flex w-full items-center justify-between gap-3 rounded-2xl border border-line/70 px-4 py-3 text-left transition-colors hover:border-gold/50"
