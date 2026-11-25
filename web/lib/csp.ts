@@ -47,7 +47,7 @@ export function taoCsp(nonce: string, dev = process.env.NODE_ENV !== "production
     `frame-src 'self' https://www.youtube-nocookie.com https://www.googletagmanager.com https://tagassistant.google.com https://*.doubleclick.net ${them.join(" ")}`.trim(),
     "worker-src 'self' blob:",
     "manifest-src 'self'",
-    "media-src 'self'",
+    "media-src 'self' blob:",   // blob: = video Story lì xì quay tại máy (xem trước, không tải lên đâu)
     "frame-ancestors 'self'",
     "base-uri 'self'",
     "object-src 'none'",

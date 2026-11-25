@@ -6,7 +6,7 @@
 //   - Chọn gói 1 / 3 / 5 bao, thanh toán Pay2S, quản lý bao đã mua và tải ảnh chia sẻ Social 3 khổ (Story 9:16 · Post 1:1 · Link 16:9).
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Check, Copy, Dices, Download, Flower2, Gift, Layers, Loader2, QrCode, Share2, SlidersHorizontal, Sparkles } from "lucide-react";
+import { Check, Copy, Dices, Download, Flower2, Gift, Layers, Loader2, PartyPopper, QrCode, Share2, SlidersHorizontal, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input, Textarea } from "@/components/ui/input";
@@ -16,6 +16,7 @@ import { metaDongY } from "@/lib/meta-pixel";
 import { layMaGoogle } from "@/lib/google-qc";
 import { QUAY_VE } from "@/lib/sao-client";
 import { BaoLiXi3D } from "@/components/li-xi/BaoLiXi3D";
+import { NutVideoLiXi } from "@/components/li-xi/NutVideoLiXi";
 import {
   DANH_SACH_HOA_TIET,
   DANH_SACH_KHUNG_SOCIAL,
@@ -24,15 +25,20 @@ import {
   HOA_TIET_TET,
   kiemLoiChuc,
   kiemTen,
+  GIONG_CHUC,
+  LOI_CHUC_CHUNG_DS,
   LOI_CHUC_MAU,
   MAU_THIEP,
   mauThiepTheoMa,
+  QUAN_HE_CHUC,
   taiAnhSocialLiXi,
   thongTinHoaTiet,
   tietKiemPhanTram,
   type BaoLiXiCuaToi,
   type HoaTietTet,
   type KhungSocial,
+  type MaGiongChuc,
+  type MaQuanHeChuc,
   type MauThiep,
   type ThongTinLiXi,
 } from "@/lib/li-xi-tet";
@@ -67,7 +73,10 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
   const [nenGam, setNenGam] = useState(true);
   const [hoaRoi, setHoaRoi] = useState(true);
   const [ten, setTen] = useState("");
-  const [chuc, setChuc] = useState(LOI_CHUC_MAU[0]!);
+  const [chuc, setChuc] = useState<string>(LOI_CHUC_MAU[0]!);
+  const [quanHe, setQuanHe] = useState<MaQuanHeChuc | null>(null);
+  const [giong, setGiong] = useState<MaGiongChuc>("am");
+  const [phatLai, setPhatLai] = useState(0);
   const [moThu, setMoThu] = useState(false);
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
@@ -120,6 +129,28 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
     setMau(pick.mau);
     setHoa(pick.hoa);
     setNenGam(pick.nenGam);
+  }
+
+  /** Chọn người nhận (+ giọng) → điền lời chúc hợp và mở thiệp xem ngay. Gõ tay vào ô lời chúc thì bỏ chọn, không ghi đè lời của bạn. */
+  function chonLoi(q: MaQuanHeChuc, g: MaGiongChuc) {
+    const x = QUAN_HE_CHUC.find((i) => i.ma === q);
+    if (!x) return;
+    setQuanHe(q); setGiong(g); setChuc(x.loi[g]);
+    if (!moThu) { duaBaoVaoTam(); setMoThu(true); }
+    ghi("chart_interacted", { mo_dun: "li_xi", kind: "goi_y_quan_he", quan_he: q, giong: g });
+  }
+  /** Bao nằm ngoài khung nhìn (đang chỉnh form bên phải) → cuộn vào giữa để thấy pháo hoa & lời chúc. */
+  function duaBaoVaoTam() {
+    const el = document.querySelector<HTMLElement>('[data-testid="bao-li-xi-3d"]');
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    // Đặt đỉnh bao cách mép trên ~320px: phía trên còn chỗ cho pháo hoa & chữ "2027" nổ rõ, không đè lên thiệp.
+    if (r.top < 280 || r.top > window.innerHeight * 0.55) window.scrollBy({ top: r.top - 320, behavior: "smooth" });
+  }
+  function xemThuPhao() {
+    duaBaoVaoTam();
+    setMoThu(true); setPhatLai((n) => n + 1);
+    ghi("chart_interacted", { mo_dun: "li_xi", kind: "xem_thu_phao_hoa", mau_thiep: mau });
   }
 
   // GIA-99: "rẻ hơn" tính từ chính bảng giá (đổi giá ở /quan-tri là số tự đổi), một nhãn duy nhất.
@@ -226,7 +257,11 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
             daMo={moThu}
             onMo={() => setMoThu(true)}
             nhanNut="Bấm thử để xem hiệu ứng mở bao & pháo hoa"
+            phatLai={phatLai}
           />
+          <Button type="button" className="w-full" onClick={xemThuPhao} data-testid="nut-xem-thu-phao">
+            <PartyPopper aria-hidden /> Xem thử pháo hoa &amp; lời chúc
+          </Button>
           <div className="flex flex-wrap justify-center gap-1.5">
             <Button type="button" size="sm" variant="secondary" onClick={doiNgauNhien} data-testid="nut-ngau-nhien">
               <Dices className="size-3.5 text-gold" aria-hidden /> Đổi mẫu ngẫu nhiên
@@ -270,6 +305,9 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
                   <span className="text-[10px] text-fg-faint">{k.kichThuoc}</span>
                 </a>
               ))}
+            </div>
+            <div className="border-t border-gold/20 pt-3">
+              <NutVideoLiXi mau={mau} hoa={hoa} nenGam={nenGam} tenNguoiTang={ten} loiChuc={chuc} nguon="mua" />
             </div>
           </Card>
         </div>
@@ -417,8 +455,8 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
             <div className="space-y-1.5">
               <label className="text-xs font-medium text-fg-muted">Chọn nhanh lời chúc hay</label>
               <div className="flex flex-wrap gap-1.5">
-                {LOI_CHUC_MAU.slice(0, 3).map((m, i) => (
-                  <button key={i} type="button" onClick={() => setChuc(m)}
+                {LOI_CHUC_CHUNG_DS.slice(0, 3).map((m, i) => (
+                  <button key={i} type="button" onClick={() => { setChuc(m); setQuanHe(null); }}
                     className="rounded-full border border-line px-2.5 py-1 text-[11px] text-fg-muted hover:border-gold/50 hover:text-fg">
                     Mẫu {i + 1}
                   </button>
@@ -427,12 +465,48 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
             </div>
           </div>
 
+          <div className="space-y-2.5 rounded-2xl border border-line/70 bg-bg-2/30 p-3.5" data-testid="lx-quan-he">
+            <p className="text-xs font-medium text-fg">Bạn tặng ai? <span className="font-normal text-fg-faint">Chọn để có sẵn lời chúc hợp, rồi sửa tuỳ ý</span></p>
+            <div className="flex flex-wrap gap-1.5">
+              {QUAN_HE_CHUC.map((q) => (
+                <button
+                  key={q.ma}
+                  type="button"
+                  onClick={() => chonLoi(q.ma, giong)}
+                  aria-pressed={quanHe === q.ma}
+                  data-testid={`quan-he-${q.ma}`}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${quanHe === q.ma ? "border-gold bg-gold/15 text-gold" : "border-line/70 text-fg-muted hover:border-gold/50 hover:text-fg"}`}
+                >
+                  {q.ten}
+                </button>
+              ))}
+            </div>
+            {quanHe && (
+              <div className="flex flex-wrap items-center gap-1.5 border-t border-line/50 pt-2.5" role="group" aria-label="Giọng lời chúc" data-testid="lx-giong">
+                <span className="mr-1 text-[11px] text-fg-muted">Giọng:</span>
+                {GIONG_CHUC.map((g) => (
+                  <button
+                    key={g.ma}
+                    type="button"
+                    onClick={() => chonLoi(quanHe, g.ma)}
+                    aria-pressed={giong === g.ma}
+                    data-testid={`giong-${g.ma}`}
+                    className={`rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors ${giong === g.ma ? "border-gold bg-gold/15 text-gold" : "border-line/70 text-fg-muted hover:border-gold/50 hover:text-fg"}`}
+                  >
+                    {g.ten}
+                  </button>
+                ))}
+                {giong === "y" && <span className="basis-full text-[11px] text-fg-faint">Mượn hình ảnh của năm Đinh Mùi: ngọn đèn soi đường, nước sông Ngân rộng lượng.</span>}
+              </div>
+            )}
+          </div>
+
           <div className="space-y-1.5">
             <div className="flex items-center justify-between text-xs text-fg-muted">
               <label htmlFor="lx-chuc" className="font-medium">Lời chúc (chọn mẫu hoặc tự viết)</label>
               <span>{chuc.trim().length}/160</span>
             </div>
-            <Textarea id="lx-chuc" rows={2} maxLength={160} value={chuc} onChange={(e) => setChuc(e.target.value)} placeholder="Viết lời chúc đầu xuân (không kèm link hay số điện thoại)" />
+            <Textarea id="lx-chuc" rows={3} maxLength={160} value={chuc} onChange={(e) => { setChuc(e.target.value); setQuanHe(null); }} placeholder="Viết lời chúc đầu xuân (không kèm link hay số điện thoại)" />
             <p className="text-[11px] text-fg-faint">
               {LOI_CHUC_MAU.includes(chuc.trim()) ? "Lời chúc mẫu hiện cả trên ảnh xem trước khi gửi link." : "Lời chúc tự viết chỉ hiện khi người nhận mở bao (ảnh xem trước link dùng câu chung)."}
             </p>
@@ -454,7 +528,13 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
           ) : (
             <div className="rounded-xl border border-gold/25 bg-gold/[0.05] p-4 text-sm text-fg-muted" data-testid="lx-chua-mo">
               <p className="font-medium text-fg">Lì xì Tết 2027 chưa mở bán</p>
-              <p className="mt-1 text-xs">Báo cáo Thời gian tới đang miễn phí cho mọi người, nên chưa bán bao lì xì. Bạn vẫn xem thử mẫu thiệp và tải ảnh chúc Tết ở bên trái.</p>
+              <p className="mt-1 text-xs">
+                {tt.ly_do === "cong_tac_tat" ? "Lì xì Tết 2027 sắp mở bán, bạn quay lại sau nhé."
+                  : tt.ly_do === "chua_co_cong" ? "Cổng thanh toán đang được thiết lập nên chưa bán được."
+                  : tt.ly_do === "khong_doc_duoc" ? "Chưa tải được thông tin bán hàng, bạn thử lại sau ít phút."
+                  : "Báo cáo Thời gian tới đang miễn phí cho mọi người, nên chưa bán bao lì xì."}
+                {" "}Bạn vẫn xem thử mẫu thiệp và tải ảnh chúc Tết ở bên trái.
+              </p>
             </div>
           )}
         </Card>
@@ -477,6 +557,12 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
                     <span className={st.lop}>{st.chu}</span>
                   </div>
                   {b.loi_chuc && <p className="line-clamp-2 text-xs text-fg-muted">“{b.loi_chuc}”</p>}
+                  {b.trang_thai === "da_nhan" && (
+                    <p className="flex items-center gap-1.5 rounded-lg bg-jade/10 px-2.5 py-1.5 text-[11px] text-jade" data-testid="lx-da-mo-luc">
+                      <PartyPopper className="size-3.5 shrink-0" aria-hidden />
+                      Đã có người mở bao{b.nhan_luc ? ` lúc ${new Date(b.nhan_luc).toLocaleString("vi-VN", { hour: "2-digit", minute: "2-digit", day: "2-digit", month: "2-digit" })}` : ""}
+                    </p>
+                  )}
                   {guiDuoc && (
                     <div className="flex gap-2 pt-1">
                       <Button size="sm" variant="secondary" className="flex-1" onClick={() => void chiaSe(b)}>

@@ -13,6 +13,7 @@ import { ghi } from "@/lib/do-luong";
 import { supabase } from "@/lib/supabase/trinh-duyet";
 import { BaoLiXi3D } from "@/components/li-xi/BaoLiXi3D";
 import { BanDoTet2027 } from "@/components/li-xi/BanDoTet2027";
+import { NutVideoLiXi } from "@/components/li-xi/NutVideoLiXi";
 import { hoaTietTuMaBao, laLoiChucMau, type BaoLiXiCongKhai, type HoaTietTet } from "@/lib/li-xi-tet";
 
 export function MoLiXi({
@@ -140,6 +141,9 @@ export function MoLiXi({
                       <Download className="size-4" aria-hidden /> Tải ảnh Story 9:16
                     </a>
                   </Button>
+                </div>
+                <div className="mx-auto max-w-sm border-t border-gold/20 pt-3">
+                  <NutVideoLiXi mau={bao.mau_thiep ?? "do_son"} hoa={hoaTiet ?? hoaTietTuMaBao(ma, bao.mau_thiep)} nenGam={nenGam} tenNguoiTang={bao.ten_nguoi_tang} loiChuc={bao.loi_chuc ?? ""} nguon="nhan" />
                 </div>
               </div>
             ) : daCoNguoiMo ? (

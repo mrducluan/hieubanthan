@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { chuBiChan, kiemLoiChuc, kiemTen, laLoiChucMau, LOI_CHUC_MAU, tietKiemPhanTram } from "./li-xi-tet.ts";
+import { chuBiChan, kiemLoiChuc, kiemTen, laLoiChucMau, GIONG_CHUC, LOI_CHUC_MAU, QUAN_HE_CHUC, tietKiemPhanTram } from "./li-xi-tet.ts";
 
 // Cùng bộ câu với supabase/kiem_thu/thu_li_xi_tet_0042.sql (hàm SQL lx_chu_bi_chan).
 test("chuBiChan: chặn số điện thoại, link không http, chữ ngân hàng, stk", () => {
@@ -21,6 +21,30 @@ test("kiemTen: không chữ số; kiemLoiChuc: ≤ 160 ký tự", () => {
   assert.ok(kiemTen("Vietcombank chuyển khoản"));
   assert.equal(kiemLoiChuc(LOI_CHUC_MAU[0]), null);
   assert.ok(kiemLoiChuc("a".repeat(161)));
+});
+
+test("QUAN_HE_CHUC × GIONG_CHUC: đủ 12 nhóm × 4 giọng, đều qua bộ lọc, không trùng, đủ dài, nằm trong LOI_CHUC_MAU", () => {
+  assert.ok(QUAN_HE_CHUC.length >= 12);
+  assert.deepEqual(GIONG_CHUC.map((g) => g.ma), ["am", "trang", "vui", "y"]);
+  const thay = new Set();
+  for (const q of QUAN_HE_CHUC) {
+    for (const g of GIONG_CHUC) {
+      const l = q.loi[g.ma];
+      assert.ok(l, `${q.ma}/${g.ma} thiếu`);
+      assert.equal(kiemLoiChuc(l), null, l);
+      assert.ok(l.length <= 160 && l.length >= 40, `${q.ma}/${g.ma}: ${l.length}`);
+      assert.ok(!thay.has(l), `trùng: ${l}`);
+      thay.add(l);
+      assert.equal(laLoiChucMau(l), true);
+    }
+  }
+});
+
+test("giọng 'Ý nghĩa' bám hình ảnh thật của năm trong kho tri thức (ngọn đèn Đinh / nước sông Ngân), mọi lời nhắc năm 2027", () => {
+  for (const q of QUAN_HE_CHUC) {
+    assert.match(q.loi.y, /đèn|Ngân|ngọn lửa|mưa/i, q.ma);
+    for (const g of GIONG_CHUC) assert.match(q.loi[g.ma], /2027/, `${q.ma}/${g.ma}`);
+  }
 });
 
 test("laLoiChucMau: chỉ đúng mẫu (bỏ khoảng trắng hai đầu)", () => {
