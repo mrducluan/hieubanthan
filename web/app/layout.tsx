@@ -6,6 +6,7 @@ import { GoiYTiengAnh } from "@/components/khung/GoiYTiengAnh";
 import { Newsreader, Be_Vietnam_Pro, Noto_Serif_TC } from "next/font/google";
 import { HopThoaiSao } from "@/components/sao/HopThoaiSao";
 import { ThuongVe } from "@/components/sao/ThuongVe";
+import { BaoDaMoThongBao } from "@/components/li-xi/BaoDaMoThongBao";
 import { DangKyApp } from "@/components/khung/DangKyApp";
 import { GhiVaoTrang } from "@/components/khung/GhiVaoTrang";
 import { ChanTrang, ChanTrangEn, KhungChanTrang } from "@/components/khung/ChanTrang";
@@ -176,6 +177,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
         <HoiDongYCookie />
         <ChuChung chu={chuChung}><HopThoaiSao /></ChuChung>
         <ThuongVe />
+        <BaoDaMoThongBao />
         <DangKyApp />
         <GhiVaoTrang />
         <DoLuongGoogle nonce={nonce} />
