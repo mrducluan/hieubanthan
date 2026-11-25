@@ -60,7 +60,8 @@
    "bep": "Stove",
    "ve_sinh": "Toilet",
    "ban_tho": "Altar",
-   "cau_thang": "Top of the stairs"
+   "cau_thang": "Top of the stairs",
+   "ban_cong": "Balcony or large back window"
   },
   "lech": {
    "ap_dung": "Where you stood, the compass was off by {do}° from the house axis; every reading inside has been corrected by that amount.",

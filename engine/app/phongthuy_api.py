@@ -685,7 +685,7 @@ def api_hoi_gi(inp: HoiGiInput) -> dict:
 class VatViTriInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    loai: Literal["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang"]
+    loai: Literal["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang", "ban_cong"]
     mau: list[float] | None = Field(default=None, min_length=1, max_length=120, description="Các mẫu la bàn (độ, bắc từ) khi chĩa máy")
     sai_so: float | None = Field(default=None, ge=-1, le=360, description="iOS webkitCompassAccuracy (độ) nếu có")
     diem: tuple[float, float] | None = Field(default=None, description="Điểm chạm trên khung tỉ lệ, chuẩn hoá 0..1 (x trái→phải, y trước→sau)")
@@ -712,7 +712,7 @@ class TangViTriInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     so: int = Field(ge=1, le=6)
-    vat: list[VatViTriInput] = Field(min_length=1, max_length=6)
+    vat: list[VatViTriInput] = Field(min_length=1, max_length=7)
 
     @model_validator(mode="after")
     def _khong_trung(self) -> "TangViTriInput":

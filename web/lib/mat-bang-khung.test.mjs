@@ -74,3 +74,25 @@ test("viTriTuongDoi: chia ba theo chiều sâu và chiều ngang của bản v�
   assert.deepEqual(viTriTuongDoi([0.5, 0.5]), { doc: "giua", ngang: "giua" });
   assert.deepEqual(viTriTuongDoi([0.9, 0.9]), { doc: "sau", ngang: "phai" });
 });
+
+test("luoiCuSangSoDo (TY-2 đợt 2): lưới vẽ tay cũ → sơ đồ tỉ lệ, tâm ô, giữ phần không xây, bỏ lưới cũ", () => {
+  const LOAI = ["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang", "ban_cong"];
+  const cu = { v: 1, bo_cuc: { vi_tri: { bep: "Bắc" }, mat_bang: {
+    luoi: ["110000", "111111", "111111", "111111", "111111", "111111"],
+    phong: { cua_chinh: [0, 0], ve_sinh: [2, 3], phong_lam_viec: [4, 4] }, ban_cong: [5, 2] } } };
+  const moi = mk.luoiCuSangSoDo(cu, LOAI);
+  assert.equal(moi.bo_cuc.mat_bang, undefined);
+  assert.deepEqual(moi.bo_cuc.vi_tri, { bep: "Bắc" });
+  assert.deepEqual(moi.khung, { rong: 6, sau: 6, luoi: cu.bo_cuc.mat_bang.luoi, tu_luoi_cu: true });
+  assert.deepEqual(moi.tang_do, [{ so: 1, vat: { cua_chinh: { diem: [0.083, 0.083] }, ve_sinh: { diem: [0.583, 0.417] }, ban_cong: { diem: [0.417, 0.917] } } }]);
+  // lưới tô kín → không gửi lưới; đã có sơ đồ → chỉ bỏ lưới cũ; không có lưới → giữ nguyên
+  const kin = mk.luoiCuSangSoDo({ bo_cuc: { mat_bang: { luoi: ["111", "111", "111"], phong: { bep: [1, 1] } } } }, LOAI);
+  assert.deepEqual(kin.khung, { rong: 3, sau: 3, tu_luoi_cu: true });
+  const coKhung = { khung: { rong: 5, sau: 15 }, bo_cuc: { mat_bang: { luoi: ["111", "111", "111"] } } };
+  assert.deepEqual(mk.luoiCuSangSoDo(coKhung, LOAI), { khung: { rong: 5, sau: 15 }, bo_cuc: {} });
+  const khong = { bo_cuc: { vi_tri: {} } };
+  assert.equal(mk.luoiCuSangSoDo(khong, LOAI), khong);
+  // chỗ đã đo bằng la bàn giữ nguyên mẫu
+  const laBan = mk.luoiCuSangSoDo({ tang_do: [{ so: 1, vat: { bep: { mau: [90] } } }], bo_cuc: { mat_bang: { luoi: ["111", "111", "111"], phong: { bep: [0, 0] } } } }, LOAI);
+  assert.deepEqual(laBan.tang_do[0].vat.bep, { mau: [90] });
+});

@@ -18,7 +18,7 @@ from app.kb import nap
 from app.kb import ten as _ten
 from app.luangiai import phongthuy_tam_yeu as ty
 
-LOAI = ("cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang")
+LOAI = ("cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang", "ban_cong")
 
 
 def _kb() -> dict:

@@ -8,6 +8,7 @@ import { z } from "zod";
 import { taoChu } from "@/lib/chu-trang";
 import { CHU_PHONG_THUY_UI } from "@/lib/chu/phong-thuy";
 import { tenTheo } from "@/lib/ten-hien";
+import { luoiCuSangSoDo } from "@/lib/mat-bang-khung";
 
 /** EN-ALL GĐ 5: chữ bản Anh của tên nhà / tên căn / loại nhà (bản Việt không dùng). */
 const PT_EN = taoChu(CHU_PHONG_THUY_UI, null, "en");
@@ -28,7 +29,7 @@ export type LoaiNha = (typeof LOAI_NHA)[number];
 export const TEN_LOAI_NHA: Record<LoaiNha, string> = { nha_pho: "Nhà phố", can_ho: "Chung cư", biet_thu: "Biệt thự", nha_cap4: "Nhà cấp 4", khac: "Khác" };
 
 /** VT-1: loại vật đo được khi "đứng giữa nhà, chĩa điện thoại" (khớp engine `/v1/phongthuy/vi-tri-vat`). */
-export const LOAI_VAT = ["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang"] as const;
+export const LOAI_VAT = ["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang", "ban_cong"] as const;
 export type LoaiVat = (typeof LOAI_VAT)[number];
 /** Hướng cửa phòng / hướng nhìn của vật trong khung nhà (theo mặt bản vẽ: truoc = nhìn ra mặt tiền, phai = vách phải, sau = nhìn về hậu, trai = vách trái). */
 export const HUONG_CUA_KHUNG = ["truoc", "phai", "sau", "trai"] as const;
@@ -79,6 +80,8 @@ export const HoSoNha = z.object({
     rong: z.number().positive().max(200),
     sau: z.number().positive().max(200),
     luoi: z.array(z.string().regex(/^[01]{3,12}$/)).min(3).max(12).optional(),
+    /** TY-2 đợt 2: khung chuyển tự động từ lưới vẽ tay cũ (mỗi ô = 1 m, chưa phải số đo thật) — nhắc người dùng nhập số đo. */
+    tu_luoi_cu: z.boolean().optional(),
   }).optional(),
   tang_do: z.array(z.object({
     so: z.number().int().min(1).max(6),
@@ -100,6 +103,21 @@ export const HoSoNha = z.object({
 export type HoSoNha = z.infer<typeof HoSoNha>;
 export type HoSoNhaVao = Partial<Omit<HoSoNha, "v" | "cap_nhat_luc">>;
 
+// ---------------------------------------------------------------- TY-2 đợt 2: MỘT bản vẽ
+/** Hồ sơ cũ có lưới vẽ tay (`bo_cuc.mat_bang`) → sơ đồ tỉ lệ dùng chung (hàm thuần `luoiCuSangSoDo`, lib/mat-bang-khung.ts). */
+export function chuyenLuoiCu(h: HoSoNha): HoSoNha {
+  return luoiCuSangSoDo(h as Parameters<typeof luoiCuSangSoDo>[0], LOAI_VAT) as HoSoNha;
+}
+
+/** Sơ đồ tầng trệt gửi engine (`bo_cuc.so_do`) — khung + điểm người dùng đã đặt; chưa có điểm nào → null. */
+export function soDoGui(n: HoSoNha | null | undefined): { rong: number; sau: number; luoi?: string[]; vat: Record<string, [number, number]> } | null {
+  if (!n?.khung) return null;
+  const t1 = n.tang_do?.find((t) => t.so === 1);
+  const vat = Object.fromEntries(Object.entries(t1?.vat ?? {}).flatMap(([k, v]) => (v?.diem ? [[k, v.diem]] : []))) as Record<string, [number, number]>;
+  if (!Object.keys(vat).length) return null;
+  return { rong: n.khung.rong, sau: n.khung.sau, ...(n.khung.luoi ? { luoi: n.khung.luoi } : {}), vat };
+}
+
 const nghe = new Set<() => void>();
 let daDoc = false;
 let hienTai: HoSoNha | null = null;
@@ -111,7 +129,7 @@ function doc(): HoSoNha | null {
     try {
       const raw = window.localStorage.getItem(KHOA_HO_SO_NHA);
       const kq = raw ? HoSoNha.safeParse(JSON.parse(raw)) : null;
-      hienTai = kq?.success ? kq.data : null;
+      hienTai = kq?.success ? chuyenLuoiCu(kq.data) : null;
     } catch { hienTai = null; }
   }
   return hienTai;
@@ -121,7 +139,7 @@ function bao() { nghe.forEach((f) => f()); }
 /** Ghi đè / gộp vào hồ sơ nhà hiện có (gộp nông theo trường; `bo_cuc` thay cả khối). */
 export function luuHoSoNha(them: HoSoNhaVao): HoSoNha {
   const cu = doc();
-  const moi = HoSoNha.parse({ ...(cu ?? { v: 1, theo: "cua", thanh_vien: [] }), ...them, v: 1, cap_nhat_luc: new Date().toISOString() });
+  const moi = chuyenLuoiCu(HoSoNha.parse({ ...(cu ?? { v: 1, theo: "cua", thanh_vien: [] }), ...them, v: 1, cap_nhat_luc: new Date().toISOString() }));
   hienTai = moi; daDoc = true;
   try { window.localStorage.setItem(KHOA_HO_SO_NHA, JSON.stringify(moi)); } catch { /* chế độ riêng tư */ }
   bao();
@@ -168,16 +186,18 @@ export function tenNha(n: HoSoNha | null | undefined, en = false): string {
 export function boCucGui(n: HoSoNha | null | undefined, huong?: { huong_do?: number; huong?: string }): Record<string, unknown> | null {
   const b = n?.bo_cuc;
   const daXuLy = [...new Set([...(b?.da_xu_ly ?? []), ...(b?.khai_khong ?? [])])].filter((m) => !(b?.dau_hieu ?? []).includes(m));
-  if (!b || !((b.vi_tri && Object.keys(b.vi_tri).length) || b.dau_hieu?.length || b.mat_bang || daXuLy.length)) return null;
+  const soDo = soDoGui(n);
+  if (!((b?.vi_tri && Object.keys(b.vi_tri).length) || b?.dau_hieu?.length || b?.mat_bang || daXuLy.length || soDo)) return null;
   const h = huong ?? (n?.huong_do != null ? { huong_do: n.huong_do } : n?.huong ? { huong: n.huong } : {});
   return {
     ...(h.huong_do != null ? { huong_nha_do: h.huong_do } : h.huong ? { huong_nha: h.huong } : {}),
     ...(n?.loai_nha ? { loai_nha: n.loai_nha } : {}),
-    vi_tri: b.vi_tri ?? {}, huong_do: b.huong_do ?? {},
-    dau_hieu: Object.fromEntries([...(b.dau_hieu ?? []).filter((m) => !daXuLy.includes(m))
-      .map((m) => [m, b.tu_anh?.includes(m) ? { co: true, nguon: "anh", xac_nhan: true } : { co: true, nguon: "nguoi_dung" }]),
+    vi_tri: b?.vi_tri ?? {}, huong_do: b?.huong_do ?? {},
+    dau_hieu: Object.fromEntries([...(b?.dau_hieu ?? []).filter((m) => !daXuLy.includes(m))
+      .map((m) => [m, b?.tu_anh?.includes(m) ? { co: true, nguon: "anh", xac_nhan: true } : { co: true, nguon: "nguoi_dung" }]),
       ...daXuLy.map((m) => [m, { co: false, nguon: "nguoi_dung" }])]),
-    ...(b.mat_bang ? { mat_bang: b.mat_bang } : {}),
+    // TY-2 đợt 2: sơ đồ tỉ lệ là bản vẽ duy nhất; lưới cũ chỉ còn ở hồ sơ chưa kịp chuyển.
+    ...(soDo ? { so_do: soDo } : b?.mat_bang ? { mat_bang: b.mat_bang } : {}),
   };
 }
 /** Toàn bộ đầu vào `nha` + `thanh_vien` cho /api/phongthuy/luan-giai từ một hồ sơ nhà (so hai căn, thẻ chia sẻ). */
@@ -204,7 +224,7 @@ function docDs(): CanDaLuu[] {
     try {
       const raw = window.localStorage.getItem(KHOA_DS_NHA);
       const kq = raw ? DanhSachNha.safeParse(JSON.parse(raw)) : null;
-      dsHienTai = kq?.success ? kq.data.can : [];
+      dsHienTai = kq?.success ? kq.data.can.map((c) => ({ ...chuyenLuoiCu(c), id: c.id })) : [];
     } catch { dsHienTai = []; }
   }
   return dsHienTai;

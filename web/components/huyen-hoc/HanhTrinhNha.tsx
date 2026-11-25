@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import {
   chonCan, LOAI_NHA, luuCanDeSo, luuHoSoNha, tenCan, tenLoaiNha, tenNha, TOI_DA_CAN, useDanhSachNha, useHoSoNha, xoaCan, xoaHoSoNha,
   type LoaiNha,
+  soDoGui,
 } from "@/lib/ho-so-nha";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
@@ -42,7 +43,7 @@ export function HanhTrinhNha({ mq, coSinh, sinh = null }: { mq: { quai: string; 
   const bc = nha?.bo_cuc;
   const soPhong = Object.keys(bc?.vi_tri ?? {}).length;
   const soDau = bc?.dau_hieu?.length ?? 0;
-  const coKhaoSat = soPhong > 0 || soDau > 0 || Boolean(bc?.mat_bang);
+  const coKhaoSat = soPhong > 0 || soDau > 0 || Boolean(bc?.mat_bang || soDoGui(nha));
   const buoc: Buoc[] = [
     { ma: "menh", ten: t("ht.b1"), neo: "#menh-quai",
       trang_thai: mq ? "xong" : coSinh ? "san_sang" : "cho",
@@ -56,7 +57,7 @@ export function HanhTrinhNha({ mq, coSinh, sinh = null }: { mq: { quai: string; 
       chi: coHuong ? t("ht.b3_san") : t("ht.b3_can") },
     { ma: "khao_sat", ten: t("ht.b4"), neo: "#khao-sat-nha",
       trang_thai: coKhaoSat ? "xong" : "san_sang",
-      chi: coKhaoSat ? [soPhong ? (soPhong === 1 ? t("ht.phong_1") : t("ht.phong", { so: String(soPhong) })) : "", soDau ? (soDau === 1 ? t("ht.dau_hieu_1") : t("ht.dau_hieu", { so: String(soDau) })) : "", bc?.mat_bang ? t("ht.mat_bang") : ""].filter(Boolean).join(" · ") : t("ht.b4_can") },
+      chi: coKhaoSat ? [soPhong ? (soPhong === 1 ? t("ht.phong_1") : t("ht.phong", { so: String(soPhong) })) : "", soDau ? (soDau === 1 ? t("ht.dau_hieu_1") : t("ht.dau_hieu", { so: String(soDau) })) : "", bc?.mat_bang || soDoGui(nha) ? t("ht.mat_bang") : ""].filter(Boolean).join(" · ") : t("ht.b4_can") },
     { ma: "nam", ten: t("ht.b5"), neo: "#huyen-khong",
       trang_thai: nha?.nam_xay && (nha.toa || nha.huong_do != null) ? "xong" : coHuong ? "san_sang" : "cho",
       chi: nha?.nam_xay ? t("ht.b5_xong", { nam: String(nha.nam_xay) }) : t("ht.b5_can") },

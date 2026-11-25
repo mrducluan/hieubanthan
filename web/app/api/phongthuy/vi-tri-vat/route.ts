@@ -5,7 +5,7 @@ import { goiEngine } from "@/lib/proxy";
 
 const Do = z.number().min(0).lt(360);
 const Vat = z.object({
-  loai: z.enum(["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang"]),
+  loai: z.enum(["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang", "ban_cong"]),
   mau: z.array(Do).min(1).max(120).optional(),
   sai_so: z.number().min(-1).max(360).optional(),
   diem: z.tuple([z.number().min(0).max(1), z.number().min(0).max(1)]).optional(),

@@ -16,6 +16,14 @@ export const MatBangZ = z.object({
   phong: z.record(z.string().max(30), O).optional(),
   ban_cong: O.optional(),
 }).strict();
+// TY-2 đợt 2: sơ đồ nhà theo tỉ lệ (tầng trệt) — khung mét + điểm 0..1 từng chỗ. Engine tính phương, Trung cung, khuyết góc.
+const Diem = z.tuple([z.number().min(0).max(1), z.number().min(0).max(1)]);
+export const SoDoZ = z.object({
+  rong: z.number().positive().max(200),
+  sau: z.number().positive().max(200),
+  luoi: z.array(z.string().regex(/^[01]{3,12}$/)).min(3).max(12).optional(),
+  vat: z.partialRecord(z.enum(["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang", "ban_cong"]), Diem),
+}).strict();
 export const BoCucZ = z.object({
   phien_ban: z.enum(["0.1", "0.2"]).optional(),
   loai_nha: z.enum(["nha_pho", "can_ho", "biet_thu", "nha_cap4", "khac"]).optional(),
@@ -25,6 +33,7 @@ export const BoCucZ = z.object({
   huong_do: z.record(z.string().max(30), Do).optional(),
   dau_hieu: z.record(z.string().max(40), DauHieuZ).optional(),
   mat_bang: MatBangZ.optional(),
+  so_do: SoDoZ.optional(),
 }).strict();
 /** Q4: câu giải thích dấu hiệu đưa lên trước — theo sách xưa hay theo đời sống (ánh sáng, gió, tiếng ồn). */
 export const GocNhinZ = z.enum(["sach_xua", "doi_song"]);

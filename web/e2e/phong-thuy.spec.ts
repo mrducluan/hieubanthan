@@ -207,27 +207,31 @@ test("KC-2: hồ sơ nhà lưu trên máy sau khi đọc → Hôm nay có thẻ 
   await expect(page.getByLabel("Năm xây hoặc nhập trạch")).toHaveValue("2008");
 });
 
-test("Q2/Q1/Q4/Q5/Q6: vẽ mặt bằng → suy WC giữa nhà + cửa thông ban công (xử lý trước), căn hộ áp luật, việc theo chi phí, đổi góc nhìn", async ({ page }) => {
+test("Q2/Q1/Q4/Q5/Q6 + TY-2 đợt 2: hồ sơ lưới cũ tự thành sơ đồ → suy WC giữa nhà + cửa thông ban công, căn hộ áp luật, việc theo chi phí, đổi góc nhìn", async ({ page }) => {
   await napHoSo(page);
+  // Hồ sơ nhà kiểu cũ: lưới vẽ tay 6×6 tô kín, cửa hàng 1 cột 3, WC hàng 3 cột 3, ban công hàng 6 cột 3.
+  await page.addInitScript(() => {
+    if (window.localStorage.getItem("hbt.nha.v1")) return;
+    window.localStorage.setItem("hbt.nha.v1", JSON.stringify({ v: 1, huong_do: 180, theo: "cua", thanh_vien: [], cap_nhat_luc: "2026-11-20T00:00:00.000Z",
+      bo_cuc: { mat_bang: { luoi: Array(6).fill("111111"), phong: { cua_chinh: [0, 2], ve_sinh: [2, 2] }, ban_cong: [5, 2] } } }));
+  });
   await page.goto("/phong-thuy");
   const ks = page.getByTestId("khao-sat-nha");
   await ks.getByRole("textbox", { name: "Độ hướng nhà khảo sát" }).fill("180");
   await ks.getByLabel("Loại nhà").selectOption("can_ho");
-  await ks.getByLabel(/Vẽ mặt bằng/).check();
-  const ve = ks.getByTestId("ve-mat-bang");
-  // tô cả 6×6 bằng cách bấm từng ô (chế độ "Tô ô")
-  for (let r = 0; r < 6; r++) for (let c = 0; c < 6; c++) await ve.getByRole("button", { name: `Ô hàng ${r + 1} cột ${c + 1}` }).click();
-  await ve.getByRole("radio", { name: "Cửa" }).click();
-  await ve.getByRole("button", { name: /^Ô hàng 1 cột 3/ }).click();
-  await ve.getByRole("radio", { name: "WC" }).click();
-  await ve.getByRole("button", { name: /^Ô hàng 3 cột 3/ }).click();
-  await ve.getByRole("radio", { name: "Ban công" }).click();
-  await ve.getByRole("button", { name: /^Ô hàng 6 cột 3/ }).click();
+  // Khảo sát không còn lưới riêng — đọc sơ đồ của "Đứng giữa nhà" (chuyển từ lưới cũ)
+  await expect(ks.getByTestId("ve-mat-bang")).toHaveCount(0);
+  await expect(ks.getByTestId("ks-so-do")).toContainText("Cửa chính, Nhà vệ sinh, Ban công");
+  const vtMoi = page.getByTestId("vi-tri-vat");
+  await vtMoi.getByTestId("vi-tri-cach-khung").click();
+  await expect(vtMoi.getByTestId("vi-tri-tu-luoi-cu")).toBeVisible();
+  await expect(vtMoi.getByTestId("vi-tri-hop-ban_cong")).toBeVisible();
   await ks.getByLabel(/Giường hoặc bàn làm việc nằm ngay dưới xà ngang/).check();
   await ks.getByRole("button", { name: "Xem luận bố cục" }).click();
   const kq = page.getByTestId("ket-qua-bo-cuc");
   await expect(kq.getByTestId("kq-mat-bang")).toContainText("Nhà vệ sinh ở vùng giữa nhà");
   await expect(kq.getByTestId("kq-mat-bang")).toContainText("Cửa chính nhìn thẳng ra ban công");
+  await expect(kq.getByTestId("kq-mat-bang")).toContainText("Đọc từ sơ đồ nhà theo tỉ lệ");
   await expect(kq.getByTestId("dau-hieu-wc_giua_nha")).toContainText("suy từ mặt bằng");
   await expect(kq.getByTestId("so-do-nha")).toContainText("Nhà vệ sinh");                         // UI-PT 2: sơ đồ 3×3 tô màu
   await expect(kq.getByTestId("dau-hieu-veto").first()).toBeVisible();
@@ -241,7 +245,9 @@ test("Q2/Q1/Q4/Q5/Q6: vẽ mặt bằng → suy WC giữa nhà + cửa thông ba
   // Hồ sơ nhà trên máy có mặt bằng + loại nhà → "Nhà của bạn" đọc kèm: trần mức, việc theo chi phí, ý định
   const hs = await page.evaluate(() => JSON.parse(localStorage.getItem("hbt.nha.v1") ?? "null"));
   expect(hs.loai_nha).toBe("can_ho");
-  expect(hs.bo_cuc.mat_bang.luoi).toHaveLength(6);
+  expect(hs.bo_cuc.mat_bang).toBeUndefined();
+  expect(hs.khung).toMatchObject({ rong: 6, sau: 6, tu_luoi_cu: true });
+  expect(hs.tang_do[0].vat.ban_cong.diem).toEqual([0.417, 0.917]);
   const nha = page.getByTestId("nha-cua-ban");
   await nha.getByLabel("Năm xây hoặc năm dọn vào").fill("2008");
   await nha.getByTestId("nha-y-dinh").getByRole("radio", { name: "Sức khoẻ, giấc ngủ" }).click();
@@ -451,21 +457,20 @@ test("UI-PT2 A/B: chọn Chung cư → hướng dẫn căn hộ + Cách làm; GP
   await expect(page.getByTestId("khao-sat-nha").getByLabel("Loại nhà")).toHaveValue("can_ho");   // Khảo sát đọc cùng hồ sơ nhà
 });
 
-test("UI-PT2 B/C: ảnh mặt bằng làm nền lưới (chỉ trên máy) + Chụp một góc, trả lời 3 câu → tích đúng ô dấu hiệu", async ({ page }) => {
+test("UI-PT2 B/C + TY-2 đợt 2: ảnh bản vẽ làm nền sơ đồ tỉ lệ (chỉ trên máy) + Chụp một góc, trả lời 3 câu → tích đúng ô dấu hiệu", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/phong-thuy");
   const ks = page.getByTestId("khao-sat-nha");
-  await ks.getByLabel(/Vẽ mặt bằng/).check();
-  const ve = ks.getByTestId("ve-mat-bang");
-  await ve.getByTestId("cach-lam-ve_mat_bang").getByTestId("cach-lam-mo").click();
-  await expect(ve).toContainText("Hàng trên cùng là mặt trước nhà");
-  await ve.getByLabel("Ảnh mặt bằng làm nền (chỉ hiện trên máy)").setInputFiles({ name: "mat-bang.png", mimeType: "image/png", buffer: PNG_1 });
-  await expect(ve.getByTestId("anh-mat-bang")).toContainText("Đổi ảnh mặt bằng");
+  await expect(ks.getByTestId("ks-so-do")).toContainText("Chưa có sơ đồ");
+  const ve = page.getByTestId("vi-tri-vat");
+  await ve.getByTestId("vi-tri-cach-khung").click();
+  await ve.getByLabel("Ảnh bản vẽ nhà làm nền cho sơ đồ (chỉ hiện trên máy)").setInputFiles({ name: "mat-bang.png", mimeType: "image/png", buffer: PNG_1 });
+  await expect(ve.getByTestId("vi-tri-anh-dieu-khien")).toContainText("không tải lên");
   await expect(ve.locator("img[src^='blob:']")).toHaveCount(1);        // ảnh là blob trên máy, không có URL máy chủ
-  await ve.getByRole("button", { name: "Xoay ảnh 90 độ" }).click();
+  await ve.getByRole("button", { name: "Xoay ảnh bản vẽ 90 độ" }).click();
   await expect(ve.locator("img[src^='blob:']")).toHaveAttribute("style", /rotate\(90deg\)/);
   await ve.getByRole("button", { name: "Bỏ ảnh" }).click();
-  await expect(ve.locator("img")).toHaveCount(0);
+  await expect(ve.locator("img[src^='blob:']")).toHaveCount(0);
   // P6: hỏi nhanh theo ý định — sức khoẻ → câu đầu là xà ngang; "Có" tích ô dấu hiệu, "Không" bỏ tích
   const hn = ks.getByTestId("hoi-nhanh-anh");
   await hn.getByTestId("hoi-nhanh-suc_khoe").click();

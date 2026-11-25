@@ -7,7 +7,7 @@
 // Kích thước phòng / phía cửa máy tự vẽ mặc định KHÔNG được gửi đi và không lưu — chỉ khi người dùng tự kéo giãn, bấm +/−
 // hoặc bấm "Xoay cửa" (cờ `tu_dat_kt` / `tu_dat_cua`). Số đo & sơ đồ chỉ lưu TRÊN MÁY (hồ sơ nhà) khi người dùng bấm Lưu.
 import { useCallback, useEffect, useId, useMemo, useReducer, useRef, useState, useSyncExternalStore } from "react";
-import { Check, Compass, Crosshair, Layers, Minus, Plus, RotateCw, Ruler, Trash2, Undo2, X } from "lucide-react";
+import { Check, Compass, Crosshair, ImagePlus, Layers, Minus, Plus, RotateCw, Ruler, Trash2, Undo2, X } from "lucide-react";
 import Link from "@/components/khung/Lien";
 import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 import { KetQuaTamYeu, SachTamYeu, type TamYeuRes } from "@/components/phong-thuy/TamYeuCuaChuBep";
@@ -59,7 +59,7 @@ interface ViTriKq {
 }
 
 const VAT_TANG = (so: number): LoaiVat[] =>
-  so === 1 ? ["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho"] : ["cau_thang", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho"];
+  so === 1 ? ["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "ban_cong"] : ["cau_thang", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho"];
 const THOI_GIAN_GHI = 1200;            // ms lấy mẫu mỗi lần ghi
 const TOI_DA_MAU = 30;                 // giữ ≤ 30 mẫu / vật (đủ để máy chủ lấy trung bình, hồ sơ máy nhẹ)
 const LUOI_N = 4;                      // lưới bỏ phần không xây (nhà chữ L…)
@@ -75,6 +75,7 @@ const MAU_PHONG: Record<LoaiVat, { fill: string; stroke: string }> = {
   ve_sinh: { fill: "rgba(20, 184, 166, 0.22)", stroke: "rgb(94, 234, 212)" },
   ban_tho: { fill: "rgba(192, 132, 252, 0.22)", stroke: "rgb(216, 180, 254)" },
   cau_thang: { fill: "rgba(148, 163, 184, 0.22)", stroke: "rgb(203, 213, 225)" },
+  ban_cong: { fill: "rgba(56, 189, 248, 0.16)", stroke: "rgb(125, 211, 252)" },
 };
 
 type CoXinQuyen = typeof DeviceOrientationEvent & { requestPermission?: () => Promise<"granted" | "denied"> };
@@ -178,7 +179,20 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
   const [tang, setTang] = useState(1);
   const [{ doTang, lichSu }, giao] = useReducer(soDoReducer, { doTang: {}, lichSu: [] });
   const [truc, setTruc] = useState<number[] | null>(null);
-  const [khung, setKhung] = useState<{ rong: number; sau: number; luoi: boolean[][] | null }>({ rong: 5, sau: 15, luoi: null });
+  /** `tuLuoiCu` (TY-2 đợt 2): khung chuyển từ lưới vẽ tay cũ — mỗi ô 1 m, chưa phải số đo thật; sửa kích thước là gỡ cờ. */
+  const [khung, setKhung] = useState<{ rong: number; sau: number; luoi: boolean[][] | null; tuLuoiCu?: boolean }>({ rong: 5, sau: 15, luoi: null });
+  // TY-2 đợt 2: ảnh bản vẽ / mặt bằng (chụp hoặc chọn từ máy) đặt DƯỚI sơ đồ để chạm theo — blob trên trình duyệt,
+  // không gửi đi, không lưu (tải lại trang là mất).
+  const [anhNen, setAnhNen] = useState<{ url: string; xoay: number; mo: number } | null>(null);
+  const anhRef = useRef<string | null>(null);
+  useEffect(() => () => { if (anhRef.current) URL.revokeObjectURL(anhRef.current); }, []);
+  const chonAnhNen = (f: File | undefined) => {
+    if (anhRef.current) URL.revokeObjectURL(anhRef.current);
+    if (!f) { anhRef.current = null; setAnhNen(null); return; }
+    const url = URL.createObjectURL(f);
+    anhRef.current = url; setAnhNen({ url, xoay: 0, mo: 0.55 });
+    ghi("chart_interacted", { mo_dun: "phongthuy", kind: "anh_mat_bang_nen", cach: "khung" });
+  };
   const [dangDat, setDangDat] = useState<LoaiVat>("cua_chinh");
   const [dangChon, setDangChon] = useState<LoaiVat | null>(null);
   const [tieuDiem, setTieuDiem] = useState<LoaiVat | null>(null);
@@ -243,7 +257,8 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
     }
     if (hoSo.truc_mau) setTruc(hoSo.truc_mau);
     if (hoSo.khung) {
-      setKhung({ rong: hoSo.khung.rong, sau: hoSo.khung.sau, luoi: hoSo.khung.luoi?.map((r) => [...r].map((x) => x === "1")) ?? null });
+      setKhung({ rong: hoSo.khung.rong, sau: hoSo.khung.sau, luoi: hoSo.khung.luoi?.map((r) => [...r].map((x) => x === "1")) ?? null,
+        ...(hoSo.khung.tu_luoi_cu ? { tuLuoiCu: true } : {}) });
       if (hoSo.khung.luoi) setBoLuoi(true);
     }
   }, [hoSo]);
@@ -358,6 +373,8 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
     suaTang(tang, (t) => (t[l] ? { ...t, [l]: sua(t[l]!) } : t), coHoanTac);
 
   // ---- sơ đồ theo tỉ lệ
+  // Lưới bỏ phần không xây: 4×4 khi vẽ mới; sơ đồ chuyển từ lưới cũ giữ đúng số hàng / cột đã vẽ.
+  const nHang = khung.luoi?.length ?? LUOI_N, nCot = khung.luoi?.[0]?.length ?? LUOI_N;
   const svgRef = useRef<SVGSVGElement>(null);
   const toaDoSvg = (ev: { clientX: number; clientY: number }) => {
     const svg = svgRef.current;
@@ -377,8 +394,8 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
     if (!pt) return;
     const { x, y } = pt;
     if (boLuoi) {
-      const r = Math.min(LUOI_N - 1, Math.floor(y * LUOI_N)), col = Math.min(LUOI_N - 1, Math.floor(x * LUOI_N));
-      const l = khung.luoi ?? Array.from({ length: LUOI_N }, () => Array<boolean>(LUOI_N).fill(true));
+      const r = Math.min(nHang - 1, Math.floor(y * nHang)), col = Math.min(nCot - 1, Math.floor(x * nCot));
+      const l = khung.luoi ?? Array.from({ length: nHang }, () => Array<boolean>(nCot).fill(true));
       setKhung({ ...khung, luoi: l.map((row, i) => row.map((v, j) => (i === r && j === col ? !v : v))) });
       doiSoDo();
       return;
@@ -541,7 +558,7 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
   const luu = () => {
     const t1 = kq?.tang.find((t) => t.so === 1);
     const viTri: Record<string, string> = {};
-    for (const v of t1?.vat ?? []) if (v.loai !== "cau_thang") viTri[v.loai] = v.phuong;
+    for (const v of t1?.vat ?? []) if (v.loai !== "cau_thang" && v.loai !== "ban_cong") viTri[v.loai] = v.phuong;
     const b: BoCuc = hoSo?.bo_cuc ?? {};
     // Dấu hiệu: chỉ ghi câu người dùng ĐÃ trả lời. Có → vào danh sách dấu hiệu; Không → khai rõ không có.
     // Mã từng do sơ đồ thêm (tu_so_do) mà nay không còn được gợi ý + xác nhận thì gỡ — mã tích tay ở Khảo sát không đụng.
@@ -572,7 +589,7 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
           .map(([so, t]) => ({ so: Number(so), vat: t })),
         ...(truc ? { truc_mau: truc } : {}),
         // Khung nhà chỉ lưu khi người dùng thật sự dùng sơ đồ (không ghi 5 × 15 mặc định vào hồ sơ).
-        ...(coDiemNao ? { khung: { rong: khung.rong, sau: khung.sau, ...(luoiGui ? { luoi: luoiGui } : {}) } } : {}),
+        ...(coDiemNao ? { khung: { rong: khung.rong, sau: khung.sau, ...(luoiGui ? { luoi: luoiGui } : {}), ...(khung.tuLuoiCu ? { tu_luoi_cu: true } : {}) } } : {}),
         ...(boCucMoi ? { bo_cuc: boCucMoi } : {}),
       });
       setDaLuu(true);
@@ -698,7 +715,7 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
               <label key={k} className="flex flex-col gap-1 text-xs text-fg-muted">
                 {c(`dv.${k}`)}
                 <input type="number" min={1} max={200} step={0.5} value={khung[k]} data-testid={`vi-tri-${k}`}
-                  onChange={(e) => { const n = Number(e.target.value); if (n > 0 && n <= 200) { setKhung({ ...khung, [k]: n }); doiSoDo(); } }}
+                  onChange={(e) => { const n = Number(e.target.value); if (n > 0 && n <= 200) { setKhung({ ...khung, [k]: n, tuLuoiCu: false }); doiSoDo(); } }}
                   className="w-24 rounded-lg border border-line bg-bg/40 px-2 py-1.5 text-sm text-fg" />
               </label>
             ))}
@@ -706,12 +723,30 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
               <input type="checkbox" checked={boLuoi} onChange={(e) => setBoLuoi(e.target.checked)} data-testid="vi-tri-bo-luoi" />
               {c("dv.khong_vuong")}
             </label>
+            <label className="inline-flex min-h-[36px] cursor-pointer items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-fg-muted hover:text-fg">
+              <ImagePlus className="size-3.5" aria-hidden /> {anhNen ? c("dv.anh_doi") : c("dv.anh_dat")}
+              <input type="file" accept="image/*" className="sr-only" aria-label={c("dv.anh_aria")} data-testid="vi-tri-anh-nen"
+                onChange={(e) => { chonAnhNen(e.target.files?.[0]); e.target.value = ""; }} />
+            </label>
             <button type="button" aria-pressed={hienCuuCung} data-testid="vi-tri-luoi-cuu-cung" onClick={() => setHienCuuCung((x) => !x)}
               className={cn("inline-flex min-h-[36px] items-center gap-1.5 rounded-full border px-3 py-1 text-xs",
                 hienCuuCung ? "border-gold/60 bg-gold/10 text-gold" : "border-line text-fg-muted hover:text-fg")}>
               <Crosshair className="size-3.5" aria-hidden /> {c("dv.luoi_cuu_cung")}
             </button>
           </div>
+
+          {khung.tuLuoiCu && <p className="rounded-xl border border-gold/40 bg-gold/5 p-3 text-xs text-fg-muted" data-testid="vi-tri-tu-luoi-cu"><ChuB chu={c("dv.tu_luoi_cu")} /></p>}
+          {anhNen && (
+            <div className="flex flex-wrap items-center gap-2 text-xs" data-testid="vi-tri-anh-dieu-khien">
+              <button type="button" onClick={() => setAnhNen((a) => a && { ...a, xoay: (a.xoay + 90) % 360 })} aria-label={c("dv.anh_xoay_aria")}
+                className="inline-flex min-h-[36px] items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg"><RotateCw className="size-3.5" aria-hidden /> {c("dv.anh_xoay")}</button>
+              <label className="inline-flex items-center gap-1.5 text-fg-muted">{c("dv.anh_ro")}
+                <input type="range" min={0.2} max={0.9} step={0.05} value={anhNen.mo} aria-label={c("dv.anh_ro_aria")}
+                  onChange={(e) => setAnhNen((a) => a && { ...a, mo: Number(e.target.value) })} className="w-20 accent-[rgb(var(--gold))]" /></label>
+              <button type="button" onClick={() => chonAnhNen(undefined)} className="min-h-[36px] text-fg-faint hover:text-fg">{c("dv.anh_bo")}</button>
+              <span className="text-fg-faint">{c("dv.anh_tren_may")}</span>
+            </div>
+          )}
 
           {/* Chọn chỗ đang đặt + bỏ nhanh từng chỗ + Hoàn tác / Xoá tầng */}
           <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
@@ -762,9 +797,14 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
             <p className="mb-1.5 text-center text-[11px] font-medium uppercase tracking-wider text-gold">
               ▲ {c("dv.mat_truoc")}{huongNha != null ? ` · ${Math.round(huongNha)}°` : ""} · {khung.rong}m × {khung.sau}m
             </p>
+            <div className="relative mx-auto" style={{ aspectRatio: `${khung.rong} / ${khung.sau}`, width: `min(100%, calc(62vh * ${khung.rong / khung.sau}))` }}>
+            {anhNen && (
+              // eslint-disable-next-line @next/next/no-img-element -- ảnh blob trên máy người dùng, không qua next/image
+              <img src={anhNen.url} alt="" aria-hidden className="pointer-events-none absolute inset-0 size-full object-contain"
+                style={{ opacity: anhNen.mo, transform: `rotate(${anhNen.xoay}deg)` }} />
+            )}
             <svg ref={svgRef} viewBox={`0 0 ${khung.rong} ${khung.sau}`} preserveAspectRatio="xMidYMid meet" data-testid="vi-tri-khung"
-              className="mx-auto block touch-none select-none overflow-visible"
-              style={{ aspectRatio: `${khung.rong} / ${khung.sau}`, width: `min(100%, calc(62vh * ${khung.rong / khung.sau}))` }}
+              className="relative block size-full touch-none select-none overflow-visible"
               onPointerDown={datDiem}
               onPointerMove={diChuyenKeo}
               onPointerUp={ketThucKeo}
@@ -779,22 +819,22 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
               </defs>
 
               {/* Nền & lưới 1 m */}
-              <rect x={0} y={0} width={khung.rong} height={khung.sau} fill="rgb(var(--surface) / 0.55)" />
+              <rect x={0} y={0} width={khung.rong} height={khung.sau} fill={anhNen ? "rgb(var(--surface) / 0.12)" : "rgb(var(--surface) / 0.55)"} />
               <rect x={0} y={0} width={khung.rong} height={khung.sau} fill={`url(#${idLuoi})`} pointerEvents="none" />
 
               {/* Ô không xây (nhà chữ L…) */}
               {khung.luoi && khung.luoi.map((row, i) => row.map((v, j) => !v ? (
-                <rect key={`${i}-${j}`} x={(j * khung.rong) / LUOI_N} y={(i * khung.sau) / LUOI_N} width={khung.rong / LUOI_N} height={khung.sau / LUOI_N}
+                <rect key={`${i}-${j}`} x={(j * khung.rong) / nCot} y={(i * khung.sau) / nHang} width={khung.rong / nCot} height={khung.sau / nHang}
                   fill="rgb(var(--bg))" stroke="rgb(var(--line) / 0.5)" strokeWidth={strokeCoBan * 0.6} pointerEvents="none" />
               ) : null))}
 
-              {/* Lưới 4×4 khi đang bỏ phần không xây */}
-              {boLuoi && Array.from({ length: LUOI_N - 1 }, (_, i) => i + 1).map((i) => (
-                <g key={i} stroke="rgb(var(--gold) / 0.45)" strokeWidth={strokeCoBan * 0.7} strokeDasharray={`${strokeCoBan * 3} ${strokeCoBan * 2}`} pointerEvents="none">
-                  <line x1={(i * khung.rong) / LUOI_N} y1={0} x2={(i * khung.rong) / LUOI_N} y2={khung.sau} />
-                  <line x1={0} y1={(i * khung.sau) / LUOI_N} x2={khung.rong} y2={(i * khung.sau) / LUOI_N} />
+              {/* Lưới (4×4, hoặc đúng cỡ lưới cũ) khi đang bỏ phần không xây */}
+              {boLuoi && (
+                <g stroke="rgb(var(--gold) / 0.45)" strokeWidth={strokeCoBan * 0.7} strokeDasharray={`${strokeCoBan * 3} ${strokeCoBan * 2}`} pointerEvents="none">
+                  {Array.from({ length: nCot - 1 }, (_, i) => i + 1).map((i) => <line key={`c${i}`} x1={(i * khung.rong) / nCot} y1={0} x2={(i * khung.rong) / nCot} y2={khung.sau} />)}
+                  {Array.from({ length: nHang - 1 }, (_, i) => i + 1).map((i) => <line key={`h${i}`} x1={0} y1={(i * khung.sau) / nHang} x2={khung.rong} y2={(i * khung.sau) / nHang} />)}
                 </g>
-              ))}
+              )}
 
               {/* Tâm nhà (máy chủ trả với nhà bỏ ô) + 8 tia ranh phương theo hướng nhà đã đo — chỉ là hình vẽ; phương từng chỗ do máy chủ chốt */}
               {hienCuuCung && tamVe && (
@@ -886,6 +926,7 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
                 );
               })}
             </svg>
+            </div>
             {hienCuuCung && !tamVe && <p className="mt-2 text-center text-[11px] text-fg-muted" data-testid="vi-tri-tam-can-xem">{c("dv.tam_can_xem")}</p>}
           </div>
 

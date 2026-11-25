@@ -104,6 +104,19 @@ class MatBang(BaseModel):
     ban_cong: tuple[int, int] | None = None
 
 
+LoaiSoDo = Literal["cua_chinh", "phong_ngu_chinh", "bep", "ve_sinh", "ban_tho", "cau_thang", "ban_cong"]
+
+
+class SoDo(BaseModel):
+    """TY-2 đợt 2 — sơ đồ nhà theo tỉ lệ của "Đứng giữa nhà" (tầng trệt): khung rộng × sâu (mét), lưới bỏ phần không xây,
+    điểm (x trái → phải, y trước → sau, 0..1) của từng chỗ. Thay lưới vẽ tay `mat_bang` (giữ cho hồ sơ / bản gọi cũ)."""
+    model_config = ConfigDict(extra="forbid")
+    rong: float = Field(gt=0, le=200)
+    sau: float = Field(gt=0, le=200)
+    luoi: list[str] | None = Field(default=None, min_length=3, max_length=12)
+    vat: dict[LoaiSoDo, tuple[float, float]] = Field(default_factory=dict)
+
+
 class BoCuc(BaseModel):
     """Bố cục nhà đã chuẩn hoá — đầu vào chung cho form khảo sát (hôm nay) và ảnh/video (PT-V2, PT-V4)."""
     model_config = ConfigDict(extra="forbid", title="BoCuc")
@@ -115,6 +128,7 @@ class BoCuc(BaseModel):
     huong_do: dict[VatHuong, float] = Field(default_factory=dict, description="Độ la bàn hướng vật dụng (0–360)")
     dau_hieu: dict[Literal[tuple(DAU_HIEU)], DauHieuVao] = Field(default_factory=dict)  # type: ignore[valid-type]
     mat_bang: MatBang | None = Field(default=None, description="Q2: mặt bằng vẽ tay — suy vị trí phòng, WC giữa nhà, khuyết góc, cửa thông ban công")
+    so_do: SoDo | None = Field(default=None, description="TY-2: sơ đồ nhà theo tỉ lệ (thắng `mat_bang` khi có cả hai)")
 
 
 def _hien():
@@ -131,7 +145,10 @@ def _nhan(dh: DauHieuVao) -> bool:
 
 
 def _mat_bang(b: "BoCuc", huong_do: float | None) -> tuple[dict | None, dict[str, str], set[str]]:
-    """Q2: phân tích lưới vẽ tay → (kết quả, vị trí phòng suy ra, dấu hiệu suy ra). Vị trí người dùng khai tay thắng."""
+    """Q2: phân tích lưới vẽ tay → (kết quả, vị trí phòng suy ra, dấu hiệu suy ra). Vị trí người dùng khai tay thắng.
+    TY-2 đợt 2: có sơ đồ tỉ lệ (`so_do`) thì đọc sơ đồ, cùng luật suy dấu hiệu."""
+    if b.so_do is not None:
+        return _so_do(b.so_do, huong_do)
     if b.mat_bang is None:
         return None, {}, set()
     from app.calc import mat_bang as mb  # noqa: PLC0415
@@ -141,6 +158,26 @@ def _mat_bang(b: "BoCuc", huong_do: float | None) -> tuple[dict | None, dict[str
     dh = set()
     if r["wc_trung_cung"]:
         dh.add("wc_giua_nha")
+    if r["khuyet_goc"]:
+        dh.add("nha_chu_l")
+    if (r.get("cua_thong_ban_cong") or {}).get("thang_hang"):
+        dh.add("cua_thong_ban_cong")
+    r["dau_hieu_suy_ra"] = sorted(dh)
+    return r, vi_tri, dh
+
+
+_PHONG = set(Phong.__args__)  # type: ignore[attr-defined]
+
+
+def _so_do(s: "SoDo", huong_do: float | None) -> tuple[dict, dict[str, str], set[str]]:
+    from app.calc import mat_bang_khung as mk  # noqa: PLC0415
+    r = mk.phan_tich_so_do(s.rong, s.sau, {k: tuple(v) for k, v in s.vat.items()}, huong_do, s.luoi)
+    vi_tri = {ma: x["phuong"] for ma, x in r["phuong_phong"].items() if x["phuong"] and ma in _PHONG}
+    dh = set()
+    if r["wc_trung_cung"]:
+        dh.add("wc_giua_nha")
+    if r["cau_thang_trung_cung"]:
+        dh.add("cau_thang_giua_nha")
     if r["khuyet_goc"]:
         dh.add("nha_chu_l")
     if (r.get("cua_thong_ban_cong") or {}).get("thang_hang"):

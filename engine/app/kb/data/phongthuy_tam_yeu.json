@@ -3315,7 +3315,8 @@
    "bep": "Bếp",
    "ve_sinh": "Nhà vệ sinh",
    "ban_tho": "Bàn thờ",
-   "cau_thang": "Đầu cầu thang"
+   "cau_thang": "Đầu cầu thang",
+   "ban_cong": "Ban công, cửa sổ lớn phía sau"
   },
   "lech": {
    "ap_dung": "Ở chỗ bạn đứng, la bàn lệch {do}° so với trục nhà; mọi số đo trong nhà đã được trừ phần lệch này.",
