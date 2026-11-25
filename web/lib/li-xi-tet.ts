@@ -173,7 +173,7 @@ export function hoaTietTuMaBao(maBao?: string | null, mau?: MauThiep): HoaTietTe
   return dsLinhVat[sum % dsLinhVat.length]!;
 }
 
-export const LOI_CHUC_MAU = [
+const LOI_CHUC_CHUNG = [
   "Chúc bạn năm Đinh Mùi 2027 vạn sự hanh thông, tâm an trí sáng, mọi quyết định lớn đều đúng thời điểm.",
   "Gửi bạn phong bao LÌ XÌ TẾT 2027 — chúc công việc thăng hoa, tài lộc vững bền, gia đạo êm ấm.",
   "Chúc mừng năm mới Đinh Mùi 2027! Mong bản đồ 12 tháng này giúp bạn chọn đúng tháng đẹp cho mọi dự định.",
@@ -181,6 +181,99 @@ export const LOI_CHUC_MAU = [
   "Chúc bạn năm mới 2027 bứt phá rực rỡ, giữ tiền chắc tay, gặp nhiều quý nhân và bình yên mỗi ngày.",
   "Món quà nhỏ đầu xuân — chúc bạn hiểu rõ nhịp vận 2027 để chủ động đón lành, tránh vội vàng.",
 ];
+
+/** Giọng lời chúc. "Ý nghĩa" mượn hình ảnh THẬT của năm trong kho tri thức: can Đinh = ngọn đèn / ngọn nến soi đường (battu_kb.nhat_chu),
+ *  nạp âm Đinh Mùi = Thiên Hà Thủy — nước sông Ngân, mưa từ trời, rộng lượng, bao dung (battu_kb.nap_am). */
+export const GIONG_CHUC = [
+  { ma: "am", ten: "Ấm áp" },
+  { ma: "trang", ten: "Trang trọng" },
+  { ma: "vui", ten: "Vui tươi" },
+  { ma: "y", ten: "Ý nghĩa" },
+] as const;
+export type MaGiongChuc = (typeof GIONG_CHUC)[number]["ma"];
+
+/** Gợi ý lời chúc theo NGƯỜI NHẬN × GIỌNG (xem trước thông minh): chọn người nhận + giọng → có sẵn lời hợp, sửa tuỳ ý.
+ *  Đều là lời chúc MẪU (ảnh xem trước link dùng được), qua cùng bộ lọc chuBiChan (không link, số, từ lừa đảo). */
+export const QUAN_HE_CHUC = [
+  { ma: "ong_ba", ten: "Ông bà", loi: {
+    am: "Cháu chúc ông bà năm Đinh Mùi 2027 khoẻ mạnh, vui vẻ, được con cháu quây quần mỗi ngày. Cháu thương ông bà nhiều lắm.",
+    trang: "Kính chúc ông bà năm Đinh Mùi 2027 sức khoẻ dồi dào, tinh thần minh mẫn, con cháu thảo hiền, gia đình hạnh phúc đủ đầy.",
+    vui: "Ông bà ơi, năm 2027 cháu chúc ông bà ăn ngon, ngủ khoẻ, cười thật tươi và nhớ nhận lì xì của cháu nhé!",
+    y: "Ông bà như ngọn đèn Đinh soi đường cho cả nhà. Năm 2027 cháu chúc ông bà luôn khoẻ để ngọn đèn ấy sáng thêm thật nhiều mùa xuân.",
+  } },
+  { ma: "bo_me", ten: "Bố mẹ", loi: {
+    am: "Con chúc bố mẹ năm Đinh Mùi 2027 mạnh khoẻ, an vui, bớt lo toan để có thêm thời gian cho riêng mình. Con thương bố mẹ nhiều.",
+    trang: "Con kính chúc bố mẹ năm mới Đinh Mùi 2027 sức khoẻ dồi dào, gia đạo bình an, mọi điều tốt đẹp đều về trong ngôi nhà mình.",
+    vui: "Bố mẹ ơi, năm 2027 con chúc bố mẹ đi chơi thật nhiều, cười thật to và nhớ nhận lì xì của con nhé!",
+    y: "Bố mẹ là ngọn đèn của nhà mình: lặng lẽ mà luôn sáng. Năm 2027 con chúc bố mẹ được nghỉ ngơi, để con có dịp thắp lại ngọn đèn ấy cho bố mẹ.",
+  } },
+  { ma: "gia_dinh", ten: "Cả gia đình", loi: {
+    am: "Chúc cả nhà mình năm Đinh Mùi 2027 sum vầy, bình an, bữa cơm nào cũng đủ đầy tiếng cười và mọi người đều khoẻ.",
+    trang: "Kính chúc gia đình năm Đinh Mùi 2027 an khang thịnh vượng, vạn sự như ý, con cháu hiếu thảo, trong ấm ngoài êm.",
+    vui: "Chúc cả nhà năm 2027 ăn Tết no nê, cười sảng khoái, lì xì rủng rỉnh và không ai phải dọn dẹp một mình!",
+    y: "Năm Đinh Mùi 2027 mang mệnh Thiên Hà Thủy: nước sông Ngân, mưa trời rộng lượng. Chúc gia đình mình bao dung với nhau để mưa thuận gió hoà cả năm.",
+  } },
+  { ma: "anh_chi_em", ten: "Anh chị em", loi: {
+    am: "Chúc anh chị em mình năm Đinh Mùi 2027 mạnh khoẻ, bình an, và bận đến mấy cũng nhớ về ăn với nhau một bữa cơm.",
+    trang: "Chúc anh chị em năm mới Đinh Mùi 2027 sức khoẻ, công việc thuận lợi, gia đình hạnh phúc, anh em luôn gắn bó yêu thương.",
+    vui: "Anh chị em ơi, năm 2027 chúc cả hội giàu lên, đẹp ra, bớt cãi nhau chuyện nhỏ và nhớ lì xì cho nhau nhé!",
+    y: "Anh chị em mình như hai bờ sông Ngân: xa mà vẫn nhìn thấy nhau. Năm 2027 chúc cả nhà khoẻ mạnh, bận mấy cũng nhớ gọi về.",
+  } },
+  { ma: "con_cai", ten: "Con cháu", loi: {
+    am: "Chúc con năm Đinh Mùi 2027 khoẻ mạnh, vui vẻ, học và làm điều con thích. Dù thế nào, gia đình vẫn luôn ở bên con.",
+    trang: "Chúc cháu năm Đinh Mùi 2027 chăm ngoan, học giỏi, khoẻ mạnh, được mọi người yêu quý và luôn là niềm tự hào của gia đình.",
+    vui: "Chúc con năm 2027 ăn nhiều chóng lớn, ngủ ngon, điểm cao, ít bị nhắc và lì xì thật dày nhé!",
+    y: "Con như hạt mưa đầu mùa từ sông Ngân rơi xuống: nhỏ bé mà làm cả khu vườn xanh. Năm 2027 chúc con khoẻ, chăm chỉ, mỗi ngày làm được một bước nhỏ.",
+  } },
+  { ma: "nguoi_thuong", ten: "Người thương", loi: {
+    am: "Chúc người thương năm Đinh Mùi 2027 bình yên, rạng rỡ, và mọi dự định của hai đứa mình đều đúng thời điểm. Có nhau là đủ.",
+    trang: "Chúc người bạn đời năm mới Đinh Mùi 2027 sức khoẻ, hạnh phúc, thành công; chúng ta cùng nhau vun đắp tổ ấm thêm vững bền.",
+    vui: "Năm 2027 chúc người thương ngày nào cũng ăn ngon, ít giận hờn, nhiều tiền và nhớ chia cho mình một nửa nhé!",
+    y: "Có người bên cạnh thì ngọn đèn nào cũng thêm ấm. Năm 2027 chúc hai đứa mình bao dung với nhau như nước sông Ngân và giữ ngọn lửa nhỏ này luôn sáng.",
+  } },
+  { ma: "ban_be", ten: "Bạn bè", loi: {
+    am: "Chúc bạn năm Đinh Mùi 2027 đủ khoẻ, đủ vui, gặp toàn người tử tế. Có chuyện gì cứ rủ nhau, mình luôn ở đây.",
+    trang: "Chúc bạn năm mới Đinh Mùi 2027 sức khoẻ, thành công, vạn sự như ý. Cảm ơn bạn đã luôn là người bạn đáng quý của mình.",
+    vui: "Năm 2027 chúc bạn giàu như đại gia, đẹp như tài tử, và nhớ là còn nợ mình một bữa cà phê nhé!",
+    y: "Bạn bè như ngọn đèn nhỏ giữa đêm dài: không ồn ào mà luôn có mặt. Năm 2027 chúc bạn thắp đèn cho mình, và được người khác thắp lại.",
+  } },
+  { ma: "dong_nghiep", ten: "Đồng nghiệp", loi: {
+    am: "Chúc đồng nghiệp năm Đinh Mùi 2027 giữ được nhịp làm việc khoẻ, nhiều ý tưởng hay và đủ thời gian cho gia đình.",
+    trang: "Chúc quý đồng nghiệp năm Đinh Mùi 2027 công việc hanh thông, dự án thành công, sức khoẻ dồi dào, gia đình hạnh phúc.",
+    vui: "Năm 2027 chúc team mình ít họp thừa, nhiều deadline đẹp, đồng hồ chấm công luôn xanh và thưởng cuối năm thật dày!",
+    y: "Đồng nghiệp tốt là người thắp đèn giúp nhau lúc khuya. Năm 2027 chúc team mình bao dung, ăn ý, và mỗi người tiến thêm một bước nhỏ mỗi ngày.",
+  } },
+  { ma: "sep", ten: "Sếp", loi: {
+    am: "Cảm ơn sếp đã dẫn dắt cả năm qua. Chúc sếp và gia đình năm Đinh Mùi 2027 bình an, nhiều niềm vui và đủ thời gian nghỉ ngơi.",
+    trang: "Kính chúc sếp năm Đinh Mùi 2027 sức khoẻ dồi dào, quyết định nào cũng đúng thời điểm, công việc hanh thông, thành công vượt bậc.",
+    vui: "Chúc sếp năm 2027 họp ngắn, chốt nhanh, khách nào cũng gật đầu và cả team được thưởng thật to!",
+    y: "Người lãnh đạo giỏi như ngọn đèn: soi đường mà không lấn sáng ai. Kính chúc sếp năm Đinh Mùi 2027 sáng suốt, khoẻ mạnh, và đội ngũ luôn đồng hành.",
+  } },
+  { ma: "doi_tac", ten: "Đối tác", loi: {
+    am: "Cảm ơn bạn đã đồng hành cùng chúng tôi. Chúc năm Đinh Mùi 2027 kinh doanh phát đạt, nhiều cơ hội tốt và hợp tác của hai bên thêm bền chặt.",
+    trang: "Kính chúc quý đối tác năm Đinh Mùi 2027 làm ăn thuận lợi, phát triển bền vững, hợp tác lâu dài, mọi dự án đều thành công tốt đẹp.",
+    vui: "Chúc đối tác năm 2027 hợp đồng ký nhanh, dòng tiền chạy đều, đối soát không lệch và mình lại có dịp cụng ly mừng nhé!",
+    y: "Hợp tác bền như nước sông Ngân: rộng lượng, nuôi dưỡng cả hai bờ. Kính chúc quý đối tác năm Đinh Mùi 2027 cùng nhau đi xa, cùng nhau có lợi.",
+  } },
+  { ma: "khach_hang", ten: "Khách hàng", loi: {
+    am: "Cảm ơn quý khách đã tin tưởng và đồng hành. Chúc quý khách và gia đình năm Đinh Mùi 2027 an khang, nhiều niềm vui và may mắn.",
+    trang: "Kính chúc quý khách năm Đinh Mùi 2027 sức khoẻ dồi dào, kinh doanh thuận lợi, vạn sự như ý. Trân trọng cảm ơn sự ủng hộ của quý khách.",
+    vui: "Năm 2027 chúc quý khách mua sắm vui, ít phải chờ, nhiều ưu đãi và cười thật tươi mỗi ngày!",
+    y: "Sự tin tưởng của quý khách như mưa trời tưới khu vườn, nuôi chúng tôi lớn lên. Kính chúc quý khách năm Đinh Mùi 2027 an khang, thịnh vượng.",
+  } },
+  { ma: "thay_co", ten: "Thầy cô", loi: {
+    am: "Em xin cảm ơn thầy cô đã tận tình dạy dỗ. Chúc thầy cô năm Đinh Mùi 2027 mạnh khoẻ, bình an và luôn vui với nghề.",
+    trang: "Kính chúc thầy cô năm Đinh Mùi 2027 sức khoẻ dồi dào, hạnh phúc, thành công trong sự nghiệp trồng người.",
+    vui: "Chúc thầy cô năm 2027 ít phải chấm bài, nhiều học trò ngoan, lương thưởng đầy túi và tóc luôn đen mượt!",
+    y: "Thầy cô là ngọn đèn Đinh soi đường cho bao thế hệ. Năm 2027 em kính chúc thầy cô khoẻ mạnh, và ngọn đèn ấy cháy sáng thêm thật lâu.",
+  } },
+] as const;
+export type MaQuanHeChuc = (typeof QUAN_HE_CHUC)[number]["ma"];
+
+/** Mọi lời chúc mẫu (chung + theo người nhận) — chỉ lời trong danh sách này được hiện ở ảnh chia sẻ / mô tả link. */
+export const LOI_CHUC_MAU: string[] = [...LOI_CHUC_CHUNG, ...QUAN_HE_CHUC.flatMap((q) => GIONG_CHUC.map((g) => q.loi[g.ma]))];
+/** Lời chúc chung (3 mẫu đầu hiện ở nút "Mẫu 1-3"). */
+export const LOI_CHUC_CHUNG_DS: readonly string[] = LOI_CHUC_CHUNG;
 
 export interface ThongTinLiXi {
   bat: boolean;

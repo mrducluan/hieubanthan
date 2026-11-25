@@ -27,6 +27,8 @@ interface Props {
   onMo?: () => void;
   nhanNut?: string;
   compact?: boolean;
+  /** Tăng giá trị để bắn lại pháo hoa từ bên ngoài (nút "Xem thử" ở trang mua). */
+  phatLai?: number;
 }
 
 export function BaoLiXi3D({
@@ -40,6 +42,7 @@ export function BaoLiXi3D({
   onMo,
   nhanNut = "Mở Bao LÌ XÌ TẾT 2027",
   compact = false,
+  phatLai = 0,
 }: Props) {
   const giam = useReducedMotion();
   const patId = useId();
@@ -48,18 +51,23 @@ export function BaoLiXi3D({
   const ttHoa = thongTinHoaTiet(hoa, mauThiep);
   const mauCanh = hoa === "hoa_dao" ? "#fda4af" : hoa === "hoa_mai" ? "#fde047" : t.mauCanhHoa;
   const chucHien = (loiChuc ?? "").trim() || "Chúc năm Đinh Mùi 2027 vạn sự hanh thông, tâm an trí sáng, mọi quyết định lớn đều đúng thời điểm.";
-  const tu = chucHien.split(/\s+/).filter(Boolean);
   const neo = useRef<HTMLDivElement>(null);
   const [lan, setLan] = useState(0);   // số lần bắn pháo hoa (0 = chưa mở)
   useEffect(() => { if (daMo) setLan((n) => (n === 0 ? 1 : n)); else setLan(0); }, [daMo]);
   const bangMau = [t.nhan, "#fda4af", "#fde047", "#fff7d6", "#f97316"];
+  // Lời chúc đổi (chọn mẫu / gõ) → hiện lại từng chữ sau khi người dùng ngừng gõ ~0,5 giây.
+  const [chucAnim, setChucAnim] = useState(chucHien);
+  useEffect(() => { const h = setTimeout(() => setChucAnim(chucHien), 500); return () => clearTimeout(h); }, [chucHien]);
+  const tu = chucAnim.split(/\s+/).filter(Boolean);
+  const khoaChuc = Array.from(chucAnim).reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7).toString(36);
+  useEffect(() => { if (phatLai > 0) setLan((n) => Math.max(n, 1) + 1); }, [phatLai]);
 
   return (
     <div ref={neo} className={`relative mx-auto w-full ${compact ? "max-w-sm" : "max-w-md"} select-none`} data-testid="bao-li-xi-3d">
       {/* Pháo hoa canvas: tên lửa + nhiều kiểu nổ + màn kết; chạm trang để bắn thêm */}
       {daMo && !giam && (
         <div className="pointer-events-none absolute -inset-4 z-30 overflow-visible" aria-hidden data-testid="lx-phao-hoa">
-          <PhaoHoaCanvas kich={lan} neo={neo} bangMau={bangMau} />
+          <PhaoHoaCanvas kich={lan} neo={neo} bangMau={bangMau} chu={["2027", "PHÚC"]} />
         </div>
       )}
 
@@ -80,7 +88,7 @@ export function BaoLiXi3D({
           <span aria-hidden>“</span>
           {tu.map((w, i) => (
             <motion.span
-              key={`${lan}-${i}`}
+              key={`${lan}-${khoaChuc}-${i}`}
               aria-hidden
               className="inline-block whitespace-pre"
               initial={giam || !daMo ? false : { opacity: 0, y: 8, filter: "blur(4px)" }}

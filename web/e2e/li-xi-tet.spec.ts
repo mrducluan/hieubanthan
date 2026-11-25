@@ -123,3 +123,38 @@ test("/og/li-xi trả ảnh PNG 200 đủ 3 khổ với 3 mẫu Linh Vật + Hoa
   // Ảnh mẫu thiệp nằm ngoài đường bị chặn (robots chặn /li-xi/ thì Google không tải được ảnh trang mua).
   expect((await request.get("/anh/li-xi/hoa-mai-vang.jpg")).status()).toBe(200);
 });
+
+test("/li-xi-tet-2027: chọn người nhận → điền lời chúc hợp + mở thiệp xem ngay; đổi giọng; gõ tay thì bỏ chọn", async ({ page }) => {
+  await page.route("**/api/li-xi/thong-tin", (r) => r.fulfill({ json: TT_TAT }));
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/li-xi-tet-2027");
+  const o = page.locator("#lx-chuc");
+  await expect(page.getByTestId("lx-giong")).toHaveCount(0);   // chưa chọn người nhận thì chưa có hàng giọng
+  await page.getByTestId("quan-he-bo_me").click();
+  await expect(o).toHaveValue(/bố mẹ/);
+  await expect(page.getByTestId("quan-he-bo_me")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByTestId("giong-am")).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByTestId("bao-li-xi-3d")).toContainText("Đã mở bao lì xì");
+  const am = await o.inputValue();
+  await page.getByTestId("giong-y").click();
+  expect(await o.inputValue()).not.toBe(am);
+  await expect(o).toHaveValue(/đèn|Ngân/);   // giọng "Ý nghĩa" mượn hình ảnh của năm Đinh Mùi
+  await page.getByTestId("quan-he-doi_tac").click();   // đổi người nhận, giữ giọng đang chọn
+  await expect(o).toHaveValue(/đối tác|Hợp tác/i);
+  await expect(page.getByTestId("giong-y")).toHaveAttribute("aria-pressed", "true");
+  await o.fill("Chúc tự viết của tôi");
+  await expect(page.getByTestId("quan-he-doi_tac")).toHaveAttribute("aria-pressed", "false");
+});
+
+test("/li-xi-tet-2027: nút 'Xem thử pháo hoa' bắn pháo (canvas có mặt); quay video Story ra khung xem trước", async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.route("**/api/li-xi/thong-tin", (r) => r.fulfill({ json: TT_TAT }));
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/li-xi-tet-2027");
+  await page.getByTestId("nut-xem-thu-phao").click();
+  await expect(page.getByTestId("lx-phao-canvas")).toBeAttached();
+  await expect(page.getByTestId("bao-li-xi-3d")).toContainText("Đã mở bao lì xì");
+  await page.getByTestId("lx-nut-quay-video").scrollIntoViewIfNeeded();
+  await page.getByTestId("lx-nut-quay-video").click();
+  await expect(page.getByTestId("lx-video-xem")).toBeVisible({ timeout: 45_000 });   // ~10 giây thời gian thực
+});
