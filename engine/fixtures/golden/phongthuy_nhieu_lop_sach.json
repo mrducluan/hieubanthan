@@ -1,0 +1,39 @@
+{
+ "_nguon": "TY-2 đợt 3 (2026-11-25) — ví dụ nhà nhiều lớp trong Dương Trạch Tam Yếu (Triệu Cửu Phong), kho nguồn engine/fixtures/nguon/duong_trach_tam_yeu.json (chữ máy nhận dạng từ bản in hiện đại, can_doi_chieu). Mỗi ca: `trich` là chuỗi con kho nguồn (đã bỏ dấu câu, khoảng trắng) làm bằng chứng; `lop` = sao (theo du niên) sách ghi cho từng lớp đã nêu. Lớp 1 = cổng (頭層大門). Chỗ chữ máy đọc nghi sai ghi ở `nghi_sai`, không dùng làm đáp án.",
+ "source_id": "duong_trach_tam_yeu",
+ "school_id": "bat_trach_tam_yeu",
+ "ca": [
+  {"ma": "ly_mon_kham_chu_3_lop", "doan": 152, "trich": "離門坎主震竈三層動宅用四正番金頭層延年金二層文曲木第三層生氣貪狼木", "chu": "Khảm", "cua": "Ly", "cua_lech": false, "so_lop": 3,
+   "lop": {"1": "Diên Niên", "2": "Lục Sát", "3": "Sinh Khí"}, "lop_chu": 3,
+   "nghi_sai": ["«二層文曲木»: Văn Khúc thuộc Thuỷ (câu luật «武曲生文曲文曲生貪狼», đoạn 19) — chữ «木» nghi đọc nhầm, sao vẫn là Văn Khúc."]},
+  {"ma": "kham_chu_ly_mon_5_lop", "doan": 154, "trich": "坎主離門震竈五層動宅", "chu": "Khảm", "cua": "Ly", "cua_lech": false, "so_lop": 5,
+   "lop": {"1": "Diên Niên", "2": "Lục Sát", "3": "Sinh Khí", "4": "Ngũ Quỷ", "5": "Thiên Y"}, "lop_chu": 5},
+  {"ma": "chan_mon_doai_chu_5_lop", "doan": 164, "trich": "此宅是震門兌主坤竈第五層巨門", "chu": "Đoài", "cua": "Chấn", "cua_lech": false, "so_lop": 5,
+   "lop": {"1": "Tuyệt Mệnh", "2": "Lục Sát", "3": "Sinh Khí", "4": "Ngũ Quỷ", "5": "Thiên Y"}, "lop_chu": 5},
+  {"ma": "doai_mon_chan_chu_3_lop", "doan": 162, "trich": "從震上起遊年到向上兌宮是破軍金星頭層大門屬金二層屬水三層生氣貪狼木星高大到震", "chu": "Chấn", "cua": "Đoài", "cua_lech": false, "so_lop": 3,
+   "lop": {"1": "Tuyệt Mệnh", "2": "Lục Sát", "3": "Sinh Khí"}, "lop_chu": 3},
+  {"ma": "chan_chu_doai_mon_3_lop", "doan": 65, "trich": "頭層是絕命頭層破軍金金金生水水生木第三層得", "chu": "Chấn", "cua": "Đoài", "cua_lech": false, "so_lop": 3,
+   "lop": {"1": "Tuyệt Mệnh", "2": "Lục Sát", "3": "Sinh Khí"}, "lop_chu": 3},
+  {"ma": "doai_chu_can_mon_lech", "doan": 103, "trich": "如兌主艮門動宅即從艮上起遊年到震宮是六煞頭層即算六煞", "chu": "Đoài", "cua": "Cấn", "cua_lech": true, "so_lop": 2,
+   "lop": {"1": "Lục Sát", "2": "Sinh Khí"},
+   "nghi_sai": ["«頭層即算六煞木星»: Lục Sát (Văn Khúc) thuộc Thuỷ — chữ «木» nghi đọc nhầm; lớp 2 «生氣木» khớp luật Thuỷ sinh Mộc."]},
+  {"ma": "can_chu_khon_mon_7_lop", "doan": 111, "trich": "艮主坤門乾竈第六層高大七層變宅用巧番八卦雙木雙土看法", "chu": "Cấn", "cua": "Khôn", "cua_lech": false, "so_lop": 7,
+   "lop": {"6": "Diên Niên"}, "lop_chu": 6},
+  {"ma": "khon_chu_can_mon_8_lop", "doan": 112, "trich": "頭層生氣木二層輔弼木三層廉貞火四層禍害土五層巨門土六層延年金七層破軍金八層文曲木", "chu": "Khôn", "cua": "Cấn", "cua_lech": false, "so_lop": 8,
+   "lop": {"1": "Sinh Khí", "2": "Phục Vị", "3": "Ngũ Quỷ", "4": "Hoạ Hại", "5": "Thiên Y", "6": "Diên Niên", "7": "Tuyệt Mệnh", "8": "Lục Sát"}, "lop_chu": 6,
+   "nghi_sai": ["«八層文曲木»: Văn Khúc thuộc Thuỷ — chữ «木» nghi đọc nhầm."]},
+  {"ma": "nha_mon_8_lop_ly_mon_kham_chu", "doan": 57, "trich": "此署第五層生氣貪狼木高大升官利財第八層天醫巨門土星高", "chu": "Khảm", "cua": "Ly", "cua_lech": false, "so_lop": 8,
+   "lop": {"1": "Diên Niên", "2": "Tuyệt Mệnh", "3": "Lục Sát", "5": "Sinh Khí", "8": "Thiên Y"}, "lop_chu": 5,
+   "nghi_sai": ["Câu đầu đoạn «…六層火七層天醫巨門土五層貪狼木…» lẫn thứ tự (bản in chen chữ trong đồ hình); dùng câu sau «第五層生氣…第八層天醫…» và đầu câu «頭層金二層金三層水四層木五層木六層火»."]}
+ ],
+ "luat": [
+  {"doan": 25, "trich": "一院爲靜宅從門上週圍順布遊年兩院三院四院五院俱爲動宅", "y": "Một sân (một lớp) là tĩnh trạch; hai đến năm lớp là động trạch."},
+  {"doan": 25, "trich": "六層七層八層九層爲變宅變宅至十層而止", "y": "Sáu đến mười lớp là biến trạch."},
+  {"doan": 25, "trich": "十一十二十三十四十五層皆爲化宅化宅至十五層而止", "y": "Mười một đến mười lăm lớp là hoá trạch (sách dùng số Hà đồ Lạc thư — chưa làm)."},
+  {"doan": 19, "trich": "動宅至五層而止故番星只宜用正五行如巨門生武曲武曲生文曲文曲生貪狼貪狼生廉貞廉貞生巨門", "y": "Động trạch: mỗi lớp sau là sao do hành lớp trước sinh ra, mỗi hành một sao."},
+  {"doan": 20, "trich": "宜用雙金雙木雙土如頭層屬貪狼二層即爲輔弼輔弼生廉貞廉貞生禍害先用禍害次用巨門巨門生武曲先用武曲次用破軍破軍生文曲文曲生輔弼先用輔弼次用貪狼", "y": "Biến trạch: Kim, Mộc, Thổ đi đôi (hai sao cùng hành liền nhau)."},
+  {"doan": 20, "trich": "但六層只雙一層七層雙兩層八層雙三層至九層十層則週而復始", "y": "Sáu lớp chỉ đôi một hành, bảy lớp đôi hai hành, tám lớp đôi ba; chín, mười lớp đi tiếp vòng."},
+  {"doan": 103, "trich": "從坐山主房起遊年到向上看得何星即依是星從門上相生而進", "y": "Sao lớp đầu = du niên từ phía nhà chính tới phía hướng."},
+  {"doan": 103, "trich": "若門偏一邊則從門上起遊年順數至向上", "y": "Cổng lệch một bên: tính du niên từ phía cổng tới phía hướng."}
+ ]
+}

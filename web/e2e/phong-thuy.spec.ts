@@ -706,6 +706,14 @@ test("Dương Trạch Tam Yếu: vòng 24 sơn + Cửa–Chủ–Bếp chạm tr
   await expect(ty.getByTestId("tam-yeu-sach")).toContainText("Dương Trạch Tam Yếu: những nguyên tắc đúng với nhà bạn");
   await expect(ty.getByTestId("tam-yeu-luu-y")).toContainText("không chịu trách nhiệm pháp lý");
   await expect(ty).not.toContainText(/YZ_SY_|trang_pdf|fengshui-yangzhai-kb|Vượng khí|đã thẩm định/i);
+  // TY-2 đợt 3: nhà nhiều lớp — 8 lớp, nhà chính lớp 6 → engine đếm sao từng lớp (biến trạch), web chỉ vẽ.
+  await ty.getByTestId("tam-yeu-so-lop").selectOption("8");
+  await ty.getByTestId("tam-yeu-lop-chu").selectOption("6");
+  const nl = ty.getByTestId("tam-yeu-nhieu-lop");
+  await expect(nl).toContainText("Biến trạch (8 lớp)");
+  await expect(nl.locator("ol > li")).toHaveCount(8);
+  await expect(nl.getByTestId("tam-yeu-lop-chu-loi")).toContainText("Dãy nhà chính ở lớp 6");
+  await expect(nl).toContainText("Quy ước của Hiểu Bản Thân");
   await ty.getByTestId("tam-yeu-ap-dung").click();
   await expect(ty.getByTestId("tam-yeu-ap-dung")).toContainText("Đã lưu vào hồ sơ nhà");
   const saved = await page.evaluate(() => JSON.parse(window.localStorage.getItem("hbt.nha.v1") || "{}"));
@@ -718,6 +726,7 @@ test("Dương Trạch Tam Yếu: vòng 24 sơn + Cửa–Chủ–Bếp chạm tr
   expect(saved.bo_cuc?.vi_tri?.ban_tho).toBe("Đông");
   expect(saved.bo_cuc?.dau_hieu).toContain("guong_doi_dien_giuong");
   expect(saved.bo_cuc?.da_xu_ly).toContain("guong_doi_dien_giuong");
+  expect(saved.nhieu_lop).toEqual({ so_lop: 8, lop_chu: 6 });
 
   // Mở lại trang: ba chỗ tự điền từ hồ sơ nhà.
   await page.reload();
@@ -729,6 +738,7 @@ test("Dương Trạch Tam Yếu: vòng 24 sơn + Cửa–Chủ–Bếp chạm tr
   await expect(tyEn.getByTestId("tam-yeu-ket-luan")).toBeVisible();
   await expect(tyEn.getByTestId("tam-yeu-sach")).toHaveCount(0);
   await expect(tyEn.getByTestId("tam-yeu-the-nha")).toHaveCount(0);
+  await expect(tyEn.getByTestId("tam-yeu-nhieu-lop")).toContainText("Changing house (8 rows)");
   await expect(page.getByTestId("quan-sat-quanh-nha")).toHaveCount(0);
   const chu = await tyEn.innerText();
   expect(chu).not.toMatch(/[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i);

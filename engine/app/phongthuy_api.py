@@ -590,6 +590,9 @@ def api_tam_yeu_so_do(
     gioi_tinh: Literal["nam", "nu"] | None = Query(default=None, description="TY-2: cùng năm sinh → mệnh quái người chủ (Minh Kính)"),
     ve_sinh: _QuaiTamYeu | None = Query(default=None, description="TY-2: quái phương vị nhà vệ sinh (hồ sơ nhà)"),
     ban_tho: _QuaiTamYeu | None = Query(default=None, description="TY-2: quái phương vị bàn thờ (hồ sơ nhà)"),
+    so_lop: int | None = Query(default=None, ge=1, le=15, description="TY-2 đợt 3: số lớp từ cổng vào (1 = một sân)"),
+    lop_chu: int | None = Query(default=None, ge=1, le=15, description="TY-2 đợt 3: lớp có dãy nhà chính (cao, lớn nhất)"),
+    cua_lech: bool = Query(default=False, description="TY-2 đợt 3: cổng lệch một bên"),
 ) -> dict:
     """Du niên ba cặp cửa–chủ, cửa–bếp, chủ–bếp (một bộ tính với báo cáo Nhà của bạn), mức theo thang chung, gợi ý
     phía đặt bếp, việc nên làm và khối sách xưa theo khuôn SX-C (nhóm C chỉ khi người đọc đủ 16 tuổi). TY-2: thêm
@@ -599,8 +602,11 @@ def api_tam_yeu_so_do(
     from app.luangiai import sach_ghi_mon  # noqa: PLC0415
     tuoi = sach_ghi_mon.tuoi_tu(nam_sinh, hom_nay_vn()) if nam_sinh else (sach_ghi_mon.TUOI_NHOM_C if du_18 else None)
     menh = pt.menh_quai(nam_sinh, gioi_tinh)["quai"] if nam_sinh and gioi_tinh else None
-    return {"engine_version": ENGINE_VERSION, "pham_vi": "phongthuy_tam_yeu",
-            **ty.so_do(cua, chu, bep, tuoi, ve_sinh=ve_sinh, ban_tho=ban_tho, menh=menh)}
+    try:
+        r = ty.so_do(cua, chu, bep, tuoi, ve_sinh=ve_sinh, ban_tho=ban_tho, menh=menh, so_lop=so_lop, lop_chu=lop_chu, cua_lech=cua_lech)
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)[:300])
+    return {"engine_version": ENGINE_VERSION, "pham_vi": "phongthuy_tam_yeu", **r}
 
 
 class QuanSatInput(BaseModel):

@@ -11,6 +11,7 @@ from __future__ import annotations
 from app import ngon_ngu
 from app.calc import huyen_khong as hk
 from app.calc import phongthuy as pt
+from app.calc import phongthuy_lop as _lop
 from app.kb import nap
 from app.kb import ten as _ten
 from app.luangiai import sach_ghi_mon
@@ -57,10 +58,13 @@ def _goi_y_bep(cua: str, chu: str | None) -> list[dict]:
 
 def so_do(cua: str, chu: str | None = None, bep: str | None = None, tuoi: int | None = None, *,
           ve_sinh: str | None = None, ban_tho: str | None = None, menh: str | None = None, khac_nhom_nguoi: bool = False,
-          dau_hieu: list[str] | None = None, nhieu_tang: bool = False, cua_sat_ranh: str | None = None) -> dict:
+          dau_hieu: list[str] | None = None, nhieu_tang: bool = False, cua_sat_ranh: str | None = None,
+          so_lop: int | None = None, lop_chu: int | None = None, cua_lech: bool = False) -> dict:
     """`cua`, `chu`, `bep` = quái phương vị (nhìn từ tâm nhà). `tuoi` (tuổi tròn của người đọc, nếu biết) chỉ quyết định
     có hiện ghi chép nhóm C hay không — không đổi mức nào. TY-2: `ve_sinh`, `ban_tho` (quái), `menh` (mệnh quái người chủ),
-    `khac_nhom_nguoi`, `dau_hieu` (đã xác nhận), `nhieu_tang` → nguyên tắc Tam Yếu / điều Minh Kính đúng với nhà này."""
+    `khac_nhom_nguoi`, `dau_hieu` (đã xác nhận), `nhieu_tang` → nguyên tắc Tam Yếu / điều Minh Kính đúng với nhà này.
+    TY-2 đợt 3: `so_lop` (số lớp từ cổng vào), `lop_chu` (lớp có dãy nhà chính), `cua_lech` → `nhieu_lop` (cần `chu`);
+    đây là cách đọc riêng của sách cho nhà nhiều sân — KHÔNG đổi `ket_luan` của Cửa – Chủ – Bếp."""
     cc = _cc()
     ccb = pt.cua_chu_bep(_huong(cua), _huong(chu) if chu else None, _huong(bep) if bep else None)
     cap = []
@@ -126,6 +130,8 @@ def so_do(cua: str, chu: str | None = None, bep: str | None = None, tuoi: int | 
         "sach_ghi": sach,
         "luu_y_tham_khao": cc["luu_y_tham_khao"],
     }
+    if so_lop is not None and chu:
+        ra["nhieu_lop"] = nhieu_lop(cua, chu, so_lop, lop_chu, cua_lech)
     if ngon_ngu.la_viet():
         ra.update(_them_tam_yeu(cua, chu, bep, goi_y))
     if an_c > 0 and tuoi is None:
@@ -186,10 +192,9 @@ def la_ban_24_son() -> dict:
 # định ở đây; câu "nhà bạn thì sao" lấy mẫu ở KB `cong_cu.ap` (chỉ bản Việt). Không sinh câu mới, không đổi mức nào.
 
 DUONG = frozenset({"Càn", "Khảm", "Cấn", "Chấn"})                   # Tam Yếu: Càn Khảm Cấn Chấn dương, Khôn Tốn Ly Đoài âm
-HANH_QUAI = {"Khảm": "Thuỷ", "Ly": "Hoả", "Chấn": "Mộc", "Tốn": "Mộc", "Càn": "Kim", "Đoài": "Kim", "Khôn": "Thổ", "Cấn": "Thổ"}
-# Hành của du niên theo chính sách (nguyên tắc `sao_tot_dung_cho`).
-HANH_DU_NIEN = {"Sinh Khí": "Mộc", "Phục Vị": "Mộc", "Diên Niên": "Kim", "Tuyệt Mệnh": "Kim",
-                "Thiên Y": "Thổ", "Hoạ Hại": "Thổ", "Ngũ Quỷ": "Hoả", "Lục Sát": "Thuỷ"}
+# Hành của quái / du niên theo chính sách (nguyên tắc `sao_tot_dung_cho`) — một nguồn với phép tính nhà nhiều lớp.
+HANH_QUAI = _lop.HANH_QUAI
+HANH_DU_NIEN = _lop.HANH_DU_NIEN
 _SINH = {"Mộc": "Hoả", "Hoả": "Thổ", "Thổ": "Kim", "Kim": "Thuỷ", "Thuỷ": "Mộc"}
 BA_TOT = frozenset({"Sinh Khí", "Diên Niên", "Thiên Y"})
 TOT_CHINH = ("Sinh Khí", "Diên Niên", "Thiên Y")                       # ba du niên tốt lớn (bỏ Phục Vị)
@@ -397,3 +402,41 @@ def nhom_sach(cua: str, chu: str | None = None, bep: str | None = None, *, ve_si
     g2 = [(m, mk[m["ma"]]) for m in kb["minh_kinh"] if m["ma"] in mk and m.get("con_ap_dung", True)][:TOI_DA_MINH_KINH]
     ap = _ap()
     return [x for x in (("tam_yeu_nguyen_tac", ap["ten_nhom_nguyen_tac"], g1), ("minh_kinh", ap["ten_nhom_minh_kinh"], g2)) if x[2]]
+
+
+def nhieu_lop(cua: str, chu: str, so_lop: int, lop_chu: int | None = None, cua_lech: bool = False) -> dict:
+    """TY-2 đợt 3 — nhà nhiều lớp (tĩnh / động / biến / hoá trạch): phép tính ở `calc.phongthuy_lop`, lời ở KB
+    `cong_cu.nhieu_lop`. Lớp 1 = cổng; `lop_chu` = lớp có dãy nhà chính. Hoá trạch (≥ 11 lớp) chỉ nêu loại, chưa tính."""
+    k = _cc()["nhieu_lop"]
+    r = _lop.danh_gia(chu, cua, so_lop, lop_chu, cua_lech)
+    l = k["loai"][r["loai"]]
+    ra = {"loai": r["loai"], "ten_loai": l["ten"].format(n=so_lop), "y": l["y"], "so_lop": so_lop, "quy_uoc": k["quy_uoc"],
+          "lop": None, "lop_chu": None, "loi_lop_chu": None, "lop_nen_cao": [], "loi_nen_cao": None, "ap_sat": None, "can_cu": []}
+    if not r["lop"]:
+        if r["loai"] == "tinh":
+            ra["lop"] = []
+        return ra
+    ten_dn = lambda dn: _ten.ten("du_nien", dn)  # noqa: E731
+    ra["lop"] = [{**x, "sao": k["sao"][x["du_nien"]], "ten_du_nien": ten_dn(x["du_nien"])} for x in r["lop"]]
+    if r["lop_chu"]:
+        x = r["lop_chu"]
+        ra["lop_chu"] = {**x, "sao": k["sao"][x["du_nien"]]}
+        ra["loi_lop_chu"] = k["lop_chu"][x["muc"]].format(so=x["so"], sao=k["sao"][x["du_nien"]], du_nien=ten_dn(x["du_nien"]),
+                                                          quan_he=k["quan_he"][x["quan_he"]])
+    else:
+        ra["loi_lop_chu"] = k["chua_lop_chu"]
+    ra["lop_nen_cao"] = r["lop_nen_cao"]
+    ra["loi_nen_cao"] = (k["nen_cao"].format(ds=", ".join(k["lop_ten"].format(so=n) for n in r["lop_nen_cao"]))
+                         if r["lop_nen_cao"] else k["khong_nen_cao"])
+    if r["ap_sat"]:
+        ra["ap_sat"] = k["ap_sat"]
+    cc = k["can_cu"]
+    ra["can_cu"] = [cc["dau"].format(tu=_ten.ten("huong", _huong(r["sao_dau_tu"])), huong=_ten.ten("huong", _huong(r["huong"])),
+                                     du_nien=ten_dn(r["lop"][0]["du_nien"])),
+                    cc["day"].format(ds="; ".join(f'{k["lop_ten"].format(so=x["so"])} {k["sao"][x["du_nien"]]}' for x in r["lop"])),
+                    cc["luat_dong" if r["loai"] == "dong" else "luat_bien"]]
+    if cua_lech:
+        ra["can_cu"].append(k["cua_lech"])
+    if so_lop == 7:
+        ra["can_cu"].append(k["bay_lop"])
+    return ra

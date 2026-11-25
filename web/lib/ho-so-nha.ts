@@ -71,6 +71,12 @@ export const HoSoNha = z.object({
       ban_cong: z.tuple([z.number().int().min(0).max(11), z.number().int().min(0).max(11)]).optional(),
     }).optional(),
   }).optional(),
+  /** TY-2 đợt 3: nhà nhiều lớp (Tam Yếu) — số lớp từ cổng vào, lớp có dãy nhà chính, cổng lệch. Chỉ trên máy. */
+  nhieu_lop: z.object({
+    so_lop: z.number().int().min(1).max(15),
+    lop_chu: z.number().int().min(1).max(15).optional(),
+    cua_lech: z.boolean().optional(),
+  }).optional(),
   /** TY-2: mã điều người dùng tự tích ở "Nhìn quanh nhà" (Dương Trạch Thập Thư) — chỉ mã, không chữ, không địa chỉ. */
   quan_sat: z.array(z.string().regex(/^[a-z_]{3,40}$/)).max(60).optional(),
   /** VT-1: "đứng giữa nhà, chĩa điện thoại" — mẫu la bàn thô (≤ 30 / vật) hoặc điểm trên khung tỉ lệ, theo tầng. Engine tính

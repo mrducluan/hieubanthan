@@ -3305,7 +3305,65 @@
    "mk_tang": "Nhà bạn có nhiều tầng.",
    "cua_ranh": "Ở nhà bạn: cửa chính đo được nằm sát ranh giữa phía {a} và phía {b} — đúng trường hợp sách dặn nên để cửa nằm gọn một phía."
   },
-  "viec_tuan_tieu_de": "Bếp chưa hợp với cửa theo Dương Trạch Tam Yếu"
+  "viec_tuan_tieu_de": "Bếp chưa hợp với cửa theo Dương Trạch Tam Yếu",
+  "nhieu_lop": {
+   "_nguon": "TY-2 đợt 3 — tóm ý quyển 1–3 Dương Trạch Tam Yếu (tĩnh / động / biến / hoá trạch, cách đếm sao theo lớp); lời ban biên tập viết, nháp. Golden ví dụ sách: fixtures/golden/phongthuy_nhieu_lop_sach.json.",
+   "tieu_de": "Nhà nhiều lớp: sao rơi vào dãy nhà chính",
+   "loai": {
+    "tinh": {
+     "ten": "Tĩnh trạch (một sân)",
+     "y": "Nhà một sân, một lớp: sách xét Cửa – Chủ – Bếp như phần trên, không đếm sao theo lớp."
+    },
+    "dong": {
+     "ten": "Động trạch ({n} lớp)",
+     "y": "Nhà từ hai đến năm lớp: sách đếm sao từ cổng vào, sao của lớp sau do hành của lớp trước sinh ra. Dãy nhà chính (cao, lớn nhất) đứng ở lớp nào thì xem sao của lớp ấy."
+    },
+    "bien": {
+     "ten": "Biến trạch ({n} lớp)",
+     "y": "Nhà từ sáu đến mười lớp: cách đếm như động trạch, nhưng ba hành Kim, Mộc, Thổ có thể đi đôi — hai sao cùng hành đứng liền nhau."
+    },
+    "hoa": {
+     "ten": "Hoá trạch ({n} lớp)",
+     "y": "Nhà từ mười một lớp trở lên: sách đếm theo số Hà đồ, Lạc thư. Hiểu Bản Thân chưa tính phần này."
+    }
+   },
+   "sao": {
+    "Sinh Khí": "Tham Lang",
+    "Thiên Y": "Cự Môn",
+    "Diên Niên": "Vũ Khúc",
+    "Phục Vị": "Phụ Bật",
+    "Hoạ Hại": "Lộc Tồn",
+    "Lục Sát": "Văn Khúc",
+    "Ngũ Quỷ": "Liêm Trinh",
+    "Tuyệt Mệnh": "Phá Quân"
+   },
+   "quan_he": {
+    "ty_hoa": "cùng hành với phía nhà chính",
+    "sao_sinh_cung": "nuôi phía nhà chính",
+    "cung_sinh_sao": "được phía nhà chính nuôi",
+    "sao_khac_cung": "chọi phía nhà chính",
+    "cung_khac_sao": "bị phía nhà chính chọi"
+   },
+   "lop_chu": {
+    "thuan": "Dãy nhà chính ở lớp {so} gặp sao {sao} ({du_nien}), {quan_he}. Sách xem đây là thế thuận: sao tốt đứng đúng chỗ.",
+    "can_bang": "Dãy nhà chính ở lớp {so} gặp sao {sao} ({du_nien}), {quan_he}. Một mặt thuận, một mặt chưa — sách xem là bình thường.",
+    "can_chu_dong": "Dãy nhà chính ở lớp {so} gặp sao {sao} ({du_nien}), {quan_he}. Nên chú ý: sách khuyên dồn chiều cao và chỗ sinh hoạt chính sang lớp có sao tốt hơn khi có dịp sửa nhà."
+   },
+   "chua_lop_chu": "Chọn lớp có dãy nhà chính (cao, lớn nhất) để biết sao nào rơi vào đó.",
+   "nen_cao": "Lớp hợp làm dãy nhà chính (sao tốt và hợp hành phía nhà chính): {ds}.",
+   "khong_nen_cao": "Không lớp nào vừa có sao tốt vừa hợp hành phía nhà chính — giữ nhà chính như hiện tại và chú ý cặp Cửa – Chủ – Bếp ở trên.",
+   "lop_ten": "lớp {so}",
+   "ap_sat": "Cửa và nhà chính chưa hợp nhau nhưng sao tốt rơi đúng dãy nhà chính. Sách gọi là thế sao tốt đè sát: những năm đầu thường thuận, lâu dần cặp cửa – chủ chọi nhau mới lộ ra. Nên chú ý sửa dần chỗ cửa – chủ (đổi lối vào, đổi phòng chính) khi có dịp.",
+   "quy_uoc": "Quy ước của Hiểu Bản Thân (sách viết cho nhà nhiều sân thời xưa, không nói về nhà phố ngày nay): lớp 1 là cổng hoặc cửa chính; mỗi dãy nhà có mái riêng nối tiếp vào sâu, ngăn bởi sân hoặc giếng trời, tính thêm một lớp. Nhà liền một mái, không sân trong là tĩnh trạch.",
+   "cua_lech": "Cổng lệch một bên: sao lớp đầu tính từ phía cổng.",
+   "bay_lop": "Nhà bảy lớp: sách chỉ có ví dụ cho lớp 6; cách đi đôi ở lớp 7 đọc theo câu luật của sách (bảy lớp đôi hai hành).",
+   "can_cu": {
+    "dau": "Lớp 1 (cổng): du niên từ phía {tu} tới phía hướng {huong} là {du_nien}.",
+    "day": "Sao theo lớp: {ds}.",
+    "luat_dong": "Động trạch: lớp sau là sao do hành lớp trước sinh ra (Thổ sinh Kim, Kim sinh Thuỷ, Thuỷ sinh Mộc, Mộc sinh Hoả, Hoả sinh Thổ), mỗi hành một sao.",
+    "luat_bien": "Biến trạch: Kim, Mộc, Thổ đi đôi (Phụ Bật – Tham Lang, Lộc Tồn – Cự Môn, Vũ Khúc – Phá Quân); sáu lớp đôi một hành, bảy lớp hai, từ tám lớp đôi đủ ba."
+   }
+  }
  },
  "vi_tri": {
   "_ghi_chu": "VT-1 (2026-11-21): lời cho 'Đứng giữa nhà, chĩa điện thoại' và khung nhà theo tỉ lệ. Nháp ban biên tập.",

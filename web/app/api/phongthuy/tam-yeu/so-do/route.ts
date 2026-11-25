@@ -18,10 +18,15 @@ export async function GET(req: Request): Promise<NextResponse> {
   const gioi = sp.get("gioi_tinh");
   const veSinh = sp.get("ve_sinh");
   const banTho = sp.get("ban_tho");
+  // TY-2 đợt 3: nhà nhiều lớp — số lớp 1–15, lớp nhà chính, cổng lệch.
+  const soLop = sp.get("so_lop");
+  const lopChu = sp.get("lop_chu");
+  const cuaLech = sp.get("cua_lech") === "1";
   if (!QUAI_HOP_LE.has(cua) || (chu && !QUAI_HOP_LE.has(chu)) || (bep && !QUAI_HOP_LE.has(bep))
       || (veSinh && !QUAI_HOP_LE.has(veSinh)) || (banTho && !QUAI_HOP_LE.has(banTho))
       || (gioi && gioi !== "nam" && gioi !== "nu")
-      || (namSinh && !/^(19|20)\d\d$/.test(namSinh))) {
+      || (namSinh && !/^(19|20)\d\d$/.test(namSinh))
+      || (soLop && !/^([1-9]|1[0-5])$/.test(soLop)) || (lopChu && (!soLop || !/^([1-9]|1[0-5])$/.test(lopChu) || Number(lopChu) > Number(soLop)))) {
     return NextResponse.json({ error: "Đầu vào không hợp lệ." }, { status: 422 });
   }
   const q = new URLSearchParams({ cua });
@@ -32,6 +37,9 @@ export async function GET(req: Request): Promise<NextResponse> {
   if (gioi && namSinh) q.set("gioi_tinh", gioi);
   if (veSinh) q.set("ve_sinh", veSinh);
   if (banTho) q.set("ban_tho", banTho);
+  if (soLop) q.set("so_lop", soLop);
+  if (soLop && lopChu) q.set("lop_chu", lopChu);
+  if (soLop && cuaLech) q.set("cua_lech", "true");
   const rieng = Boolean(namSinh || du18 || veSinh || banTho);
   try {
     const nn = engineTheoReq(req, `/v1/phongthuy/tam-yeu/so-do?${q.toString()}`);
