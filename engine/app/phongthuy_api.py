@@ -270,6 +270,26 @@ def api_doc_anh(inp: DocAnhInput) -> dict:
     return {"engine_version": ENGINE_VERSION, **r}
 
 
+class DocBanVeInput(BaseModel):
+    """TY-2 đợt 4 — một ảnh bản vẽ mặt bằng (đã thu nhỏ trên máy) cho lớp đọc bản vẽ (`narrative/doc_ban_ve.py`). Kết quả là
+    CHỖ gợi ý (toạ độ theo ảnh) cần người dùng xác nhận từng chỗ."""
+    model_config = ConfigDict(extra="forbid")
+
+    anh: AnhVao
+    loai_nha: Annotated[str, StringConstraints(strip_whitespace=True, max_length=30)] | None = None
+    tang: int | None = Field(default=None, ge=1, le=10)
+
+
+@router.post("/doc-ban-ve")
+def api_doc_ban_ve(inp: DocBanVeInput) -> dict:
+    """Máy đọc bản vẽ (TY-2 đợt 4): chỗ cửa chính / phòng ngủ chính / bếp / WC / bàn thờ / cầu thang / ban công + đường bao
+    nhà, toạ độ 0..1 theo ảnh, tất cả `can_xac_nhan`. Không khoá AI → `da_bat: false` (không 5xx)."""
+    from app.narrative import doc_ban_ve  # noqa: PLC0415
+    r = doc_ban_ve.doc_ban_ve({"anh": {"du_lieu": inp.anh.du_lieu, "loai": inp.anh.loai},
+                               "loai_nha": inp.loai_nha, "tang": inp.tang})
+    return {"engine_version": ENGINE_VERSION, **r}
+
+
 @router.get("/bo-cuc/danh-muc")
 def api_bo_cuc_danh_muc() -> dict:
     """Danh mục cho form khảo sát: phòng, phương, dấu hiệu quan sát được (câu hỏi), vật dụng đo hướng."""
