@@ -4,6 +4,11 @@
 // EN-ALL GĐ 8: /en/year/{năm} là rewrite của trang này (chữ lib/chu/nam-tuoi.ts, tên riêng qua `ten_hien`).
 import { AnhTomTat } from "@/components/seo/AnhTomTat";
 import { MoiXemRieng } from "@/components/nam/MoiXemRieng";
+import { HeroTet2027 } from "@/components/nam/HeroTet2027";
+import { DuongSongThienHa, IconDuKienTet } from "@/components/nam/HoaTietNam2027";
+import { KhuLiXiTet2027 } from "@/components/nam/KhuLiXiTet2027";
+import { TimNhanhNamSinh } from "@/components/nam/TimNhanhNamSinh";
+import { thongTinLiXi } from "@/lib/li-xi-may-chu";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -45,7 +50,12 @@ export default async function Page(p: P) {
   const n = docNamBang((await p.params).nam);
   if (!n) notFound();
   const homNayIso = homNayVN();
-  const [d, lich, lichNay] = await Promise.all([namCongKhai(n), lichNgayCongKhai(n), lichNgayChoNgay(homNayIso)]);
+  const [d, lich, lichNay, ttLiXi] = await Promise.all([
+    namCongKhai(n),
+    lichNgayCongKhai(n),
+    lichNgayChoNgay(homNayIso),
+    n === 2027 ? thongTinLiXi() : Promise.resolve(null),
+  ]);
   if (!d) throw new Error("engine không phản hồi");
   const { ngonNgu } = await ngonNguMayChu(), { c: t, p: tp, en } = chuNamTuoi(ngonNgu), ten = tenTheo(d.ten_hien, en);
   const duong = duongNam(n), bien = { nam: String(n), can_chi: d.can_chi };
@@ -77,8 +87,16 @@ export default async function Page(p: P) {
     { href: L(duongThang(tetY, tetM)), ten: t("nam.tra_thang", { thang: tetM, y: tetY }), mo_ta: t("nam.tra_thang_mo") },
     ...(n <= MENH_TOI ? [{ href: en ? (slugMenhEn ? lienNN(en, duongTrang("menh_nam", `sinh-nam-${n}-menh-gi`).replace(/\/[^/]+$/, `/${slugMenhEn}`)) : null) : duongTrang("menh_nam", `sinh-nam-${n}-menh-gi`), ten: t("nam.tra_menh", nb), mo_ta: t("nam.tra_menh_mo") }] : []),
   ] as { href: string | null; ten: string; mo_ta: string }[]).filter((x): x is { href: string; ten: string; mo_ta: string } => Boolean(x.href));
+  const laTet2027 = n === 2027 && !en;
+  const soNgayToiTet = (() => {
+    if (!laTet2027) return null;
+    const ms = Date.parse(`${d.tet}T00:00:00Z`) - Date.parse(`${homNayIso}T00:00:00Z`);
+    const ngay = Math.round(ms / 86_400_000);
+    return Number.isFinite(ngay) && ngay > 0 ? ngay : null;
+  })();
+  const iconTieuDiem: ("can_chi" | "menh" | "tet")[] = ["can_chi", "menh", "tet"];
   return (
-    <div className="mx-auto max-w-3xl">
+    <div className={`mx-auto ${laTet2027 ? "max-w-4xl" : "max-w-3xl"}`}>
       <JsonLd data={goiLd(
         en ? ldTrangWebEn({ duong: dHien, ten: tieuDe, tomTat: d.tra_loi_nhanh, about: [`${d.can_chi} year`, "Vietnamese lunar calendar", "Lunar New Year"] })
           : ldTrangWeb({ duong, ten: tieuDe, tomTat: d.tra_loi_nhanh, about: [`Năm ${d.can_chi}`, "Âm lịch Việt Nam", "Tết Nguyên đán"] }),
@@ -86,22 +104,64 @@ export default async function Page(p: P) {
           : ldDuongDan([{ ten: "Trang chủ", duong: "/" }, { ten: "Năm", duong: "/nam" }, { ten: `Năm ${n}`, duong }]),
         ldHoiDap(d.hoi_dap),
       )} />
-      <nav aria-label={t("c.duong_dan")} className="mb-2 text-sm text-fg-muted"><Link href={L("/nam")!} className="hover:underline">{t("nam.ve_muc")}</Link></nav>
-      <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
-      <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
-      <section aria-label={t("c.tra_loi_nhanh")} className="rounded-2xl border border-gold/30 bg-gold/5 p-5">
-        <p className="eyebrow">{t("c.tra_loi_nhanh")}</p>
-        <p className="mt-2 leading-relaxed text-fg">{d.tra_loi_nhanh}</p>
-      </section>
+      {laTet2027 ? (
+        <>
+          <HeroTet2027
+            hrefVeMuc={L("/nam")!}
+            nhanVeMuc={t("nam.ve_muc")}
+            nhanDuongDan={t("c.duong_dan")}
+            nhanTren={c("dau.nhan_tren", bien)}
+            tieuDe={tieuDe}
+            nhanTraLoiNhanh={t("c.tra_loi_nhanh")}
+            traLoiNhanh={d.tra_loi_nhanh}
+            ngayTetHien={ngayNN(en, d.tet)}
+            soNgayToiTet={soNgayToiTet}
+            hrefCaNhan={L(`/thoi-gian-toi?nam=${n}`)}
+            nhanCaNhan={c("ca_nhan.nut", bien)}
+          />
+          <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-6" />
+        </>
+      ) : (
+        <>
+          <nav aria-label={t("c.duong_dan")} className="mb-2 text-sm text-fg-muted"><Link href={L("/nam")!} className="hover:underline">{t("nam.ve_muc")}</Link></nav>
+          <TieuDeMuc cap={1} nho={c("dau.nhan_tren", bien)} lon={tieuDe} />
+          <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mb-6" />
+          <section aria-label={t("c.tra_loi_nhanh")} className="rounded-2xl border border-gold/30 bg-gold/5 p-5">
+            <p className="eyebrow">{t("c.tra_loi_nhanh")}</p>
+            <p className="mt-2 leading-relaxed text-fg">{d.tra_loi_nhanh}</p>
+          </section>
+        </>
+      )}
 
       <section className="mt-6" aria-labelledby="thong-tin">
         <h2 id="thong-tin" className="sr-only">{tp("nam.sr_thong_tin", nb)}</h2>
-        <dl className="grid grid-cols-2 gap-2 sm:grid-cols-3" data-testid="o-nam">
-          {o.map(([k, v]) => (
-            <div key={k} className="rounded-xl border border-line/70 p-3">
-              <dt className="text-xs text-fg-faint">{k}</dt><dd className="mt-0.5 text-sm text-fg">{v}</dd>
-            </div>
-          ))}
+        <dl className="grid grid-cols-2 gap-2.5 sm:grid-cols-3" data-testid="o-nam">
+          {o.map(([k, v], idx) => {
+            const tieuDiem = laTet2027 && idx < 3;
+            const laMenh = idx === 1;
+            return (
+              <div
+                key={k}
+                className={
+                  tieuDiem
+                    ? `rounded-2xl border p-3.5 shadow-sm ${
+                        laMenh
+                          ? "border-jade/35 bg-gradient-to-br from-[#0e433b]/30 to-surface/80"
+                          : "border-gold/35 bg-gradient-to-br from-[#9e1b22]/20 to-surface/80"
+                      } ${idx === 2 ? "col-span-2 sm:col-span-1" : ""}`
+                    : `rounded-xl border border-line/70 p-3 ${laTet2027 ? "bg-surface/45 transition-colors hover:border-gold/40" : ""}`
+                }
+              >
+                <dt className="flex items-center justify-between gap-2 text-xs text-fg-faint">
+                  <span>{k}</span>
+                  {tieuDiem && <IconDuKienTet loai={iconTieuDiem[idx]!} />}
+                </dt>
+                <dd className={tieuDiem ? `mt-1 font-serif text-lg font-medium leading-snug ${laMenh ? "text-jade" : "text-[#fff7e6]"}` : "mt-0.5 text-sm text-fg"}>
+                  {v}
+                </dd>
+              </div>
+            );
+          })}
         </dl>
         <p className="mt-2 text-xs text-fg-faint">{tp("nam.truoc_tet", { nam: n, can_chi: d.nam_truoc_tet.can_chi, nam_truoc: d.nam_truoc_tet.nam })}</p>
       </section>
@@ -109,7 +169,14 @@ export default async function Page(p: P) {
       {/* LA-UI: lịch cả năm âm (chỉ bản Việt) — sau câu trả lời nhanh + 12 ô dữ kiện của năm. */}
       {!en && lich && <LichAmTheoTab hienTai={lichNay} namXem={lich} nam={n} homNay={homNayIso} className="mt-6" />}
 
-      {L("/thoi-gian-toi") && <section className="mt-8 rounded-2xl border border-line bg-surface/40 p-5" aria-labelledby="ca-nhan" data-nosnippet="">
+      {laTet2027 && (
+        <>
+          <DuongSongThienHa />
+          <KhuLiXiTet2027 thongTin={ttLiXi ?? undefined} />
+        </>
+      )}
+
+      {L("/thoi-gian-toi") && <section className={`mt-8 rounded-2xl border p-5 ${laTet2027 ? "border-gold/30 bg-surface/55" : "border-line bg-surface/40"}`} aria-labelledby="ca-nhan" data-nosnippet="">
         <h2 id="ca-nhan" className="text-xl">{c("ca_nhan.tieu_de", bien)}</h2>
         <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{c("ca_nhan.mo_ta", bien)}</p>
         <div className="mt-3 flex flex-wrap items-center gap-3">
@@ -126,7 +193,7 @@ export default async function Page(p: P) {
         <h2 id="tra" className="text-2xl">{c("tra.tieu_de", bien)}</h2>
         <ul className="mt-3 grid gap-2 sm:grid-cols-2">
           {tra.map((x) => (
-            <li key={x.href}><Link href={x.href} className="block rounded-xl border border-line/70 p-3 hover:border-gold/50">
+            <li key={x.href}><Link href={x.href} className={`block rounded-xl border border-line/70 p-3 transition-colors hover:border-gold/50 ${laTet2027 ? "bg-surface/40" : ""}`}>
               <span className="text-fg">{x.ten}</span><span className="mt-0.5 block text-xs text-fg-muted">{x.mo_ta}</span>
             </Link></li>
           ))}
@@ -135,8 +202,10 @@ export default async function Page(p: P) {
 
       {d.bang_con_giap.some((r) => r.nam_sinh_trang?.length) && (
         <section className="mt-8" aria-labelledby="theo-tuoi">
+          {laTet2027 && <DuongSongThienHa className="mb-6 mt-2" />}
           <h2 id="theo-tuoi" className="text-2xl">{tp("nam.theo_tuoi_tieu_de", nb)}</h2>
           <p className="mt-1 text-sm text-fg-muted">{t("nam.theo_tuoi_mo_ta")}</p>
+          {laTet2027 && <TimNhanhNamSinh nam={n} bang={d.bang_con_giap} />}
           <div className="mt-4 grid gap-2 sm:grid-cols-2" data-testid="luoi-theo-tuoi">
             {d.bang_con_giap.filter((r) => r.nam_sinh_trang?.length).map((r) => (
               <div key={r.chi} className="flex items-center gap-3 rounded-xl border border-line/70 px-3 py-2.5">
