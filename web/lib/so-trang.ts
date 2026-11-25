@@ -260,7 +260,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Các gói xem luận giải theo nhu cầu: năm mới, lá số Tử vi trọn đời, Bát tự, bản đồ con số, chân dung tổng hợp. Chương đầu miễn phí; trả từng lần, gói nhiều lần hoặc hội viên năm.",
   } },
   { duong: "/ban-do-doi-ngu", nhom: "cong_cu", ten: "Bản đồ Đội ngũ", o: O_TRANG_PHU, mac_dinh: {
-    tieu_de_seo: "Bản đồ Đội ngũ: hiểu sở trường & phối hợp nhóm", h1: "Hiểu đúng người cạnh mình: giao đúng việc, giảm va chạm, lấp lỗ hổng đội ngũ",
+    tieu_de_seo: "Xem tuổi hợp tác làm ăn, phối hợp đội nhóm", h1: "Xem tuổi hợp tác làm ăn: giao đúng việc, giảm va chạm trong đội ngũ",
     mo_ta_seo: "Bản đồ Đội ngũ B2B cho chủ doanh nghiệp và quản lý: Radar cân bằng 5 hành, sở trường từng cộng sự và gợi ý phối hợp 2 chiều cho 1–8 người.",
   } },
   { duong: "/hoi-vien", nhom: "cong_cu", ten: "Hội viên năm", o: O_TRANG_PHU, mac_dinh: {

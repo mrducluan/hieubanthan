@@ -321,7 +321,7 @@ test("CTA-LS: hồ sơ thần số (chỉ tên + ngày sinh) → khối mời n�
   // Đầu trang gọn: không còn hàng chip lợi ích và nhãn "Diễn giải từ kho tri thức…" dưới lời dẫn.
   await expect(page.getByTestId("dau-chip")).toHaveCount(0);
   await expect(page.locator("main header").first()).not.toContainText("tham khảo văn hoá");
-  await expect(page.locator("h1")).toHaveText("Xem Tử vi online — Lập lá số 12 cung miễn phí");
+  await expect(page.locator("h1")).toHaveText("Xem Tử vi online: năm nay bạn nên chú ý gì?");
 });
 
 test("CTA-LS: điện thoại 360px — khối mời không tràn ngang, tiêu đề + form trước danh sách; hình đầu trang ẩn", async ({ page }) => {

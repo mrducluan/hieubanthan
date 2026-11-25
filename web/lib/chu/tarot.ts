@@ -12,7 +12,7 @@ const P = "Trang", H = "Bước hỏi", B = "Bàn bài", D = "Bài đọc", L = 
 
 export const CHU_TAROT_UI = {
   // ---------------------------------------------------------------- trang (app/tarot/Tarot.tsx)
-  "dau.ten": m(P, "Xem Tarot: rút bài cho điều bạn đang hỏi", "Tarot reading: draw cards for what you're asking"),
+  "dau.ten": m(P, "Xem Tarot online: rút bài cho điều bạn đang hỏi", "Tarot reading: draw cards for what you're asking"),
   "dau.mo_ta": m(P, "Kể điều bạn đang băn khoăn rồi tự tay rút bài từ bộ 78 lá Rider–Waite. Lật lá nào, nghĩa của lá đó ở đúng vị trí hiện ngay. Bài đọc mở bằng câu trả lời cho đúng câu bạn hỏi — nghiêng về có, có điều kiện hay chưa nên vội, vì sao và việc nên làm — rồi mới tới câu chuyện các lá kể. Miễn phí, không phán, không đọc hộ người khác.",
     "Say what's on your mind, then draw your own cards from the 78-card Rider–Waite deck. Flip a card and its meaning in that position appears straight away. The reading opens with the answer to exactly what you asked — leaning yes, yes with a condition, or not yet — why, and what to do, then the story the cards tell. Free, no fortune-telling, and it never reads someone else."),
   "tai": m(P, "Đang tải", "Loading"),

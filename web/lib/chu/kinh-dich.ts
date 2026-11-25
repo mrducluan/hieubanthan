@@ -13,7 +13,7 @@ const P = "Trang", CG = "Cách gieo", CH = "Tự gieo", DX = "Đồng xu", LS = 
 
 export const CHU_KINH_DICH_UI = {
   // ---------------------------------------------------------------- trang (app/kinh-dich/KinhDich.tsx)
-  "dau.ten": m(P, "Gieo quẻ Kinh Dịch online — Tra 64 quẻ miễn phí", "I Ching reading: is now the time for this?"),
+  "dau.ten": m(P, "Gieo quẻ Kinh Dịch online: việc này nên hay chưa?", "I Ching reading: is now the time for this?"),
   "dau.mo_ta": m(P, "Đang phân vân một việc? Gieo một quẻ, nhận câu trả lời ngắn bằng lời thường: việc đang thuận hay cần đổi cách, và nên làm gì trong tuần này. Quẻ do máy gieo (bạn tự lật từng hào), theo giờ, theo số hay phương vị, hoặc bạn gieo đồng xu thật rồi nhập — không bước nào tự chọn quẻ thay bạn. Lời kinh gốc và ba cách đọc theo phái gập bên dưới cho ai muốn đào sâu.",
     "Unsure about something? Cast one hexagram and get a short answer in plain words: whether the matter is flowing or needs a different approach, and what to do this week. The hexagram is cast by the computer (you turn each line yourself), by the hour, by two numbers or a direction, or with real coins that you enter — no step picks the hexagram for you. The original text and three schools' readings are folded below for anyone who wants to go deeper."),
   "chat.loi_chao": m(P, "Tĩnh tâm một chút, rồi viết câu hỏi về một việc cụ thể — càng rõ việc, quẻ càng dễ soi. Bấm một câu gợi ý thì câu đó điền vào ô, bạn sửa rồi gửi.",

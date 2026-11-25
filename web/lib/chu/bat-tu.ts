@@ -9,7 +9,7 @@ const T = "Bát tự", BS = "Bảng tứ trụ", V = "Vòng địa chi", NG = "N
 
 export const CHU_BAT_TU_UI = {
   // ---------------------------------------------------------------- đầu trang + khung công cụ
-  "dau.ten": { nhom: T, nhan: "H1 mặc định", mac_dinh: "Xem Bát tự: mệnh bạn thiếu hành gì?", en: "BaZi calculator: which element are you missing?" },
+  "dau.ten": { nhom: T, nhan: "H1 mặc định", mac_dinh: "Xem Bát tự online: mệnh bạn thiếu hành gì?", en: "BaZi calculator: which element are you missing?" },
   "dau.mo_ta": { nhom: T, nhan: "Lời dẫn mặc định", toi_da: 400,
     mac_dinh: "Người bảo bạn thiếu Thuỷ, người bảo thiếu Hoả. Nhập ngày giờ sinh để tự thấy: năm hành của bạn dư thiếu ra sao, sức bạn đang mạnh hay đuối, và hai cách đọc hành nên bù để bạn so với chính đời mình.",
     en: "One person says you lack Water, another says Fire. Enter your birth date and time and see for yourself: which of your five elements are strong or thin, whether your own energy runs high or low, and two ways of reading which element to add — so you can check them against your own life." },

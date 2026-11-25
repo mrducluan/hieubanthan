@@ -165,7 +165,7 @@ test.describe("/en/zi-wei-dou-shu trên trình duyệt", () => {
     expect(await chuViet(page)).toEqual([]);
     await page.goto("/tu-vi");
     expect(await page.locator('link[rel="alternate"][hreflang="en"]').getAttribute("href")).toMatch(/\/en\/zi-wei-dou-shu$/);
-    await expect(page.locator("h1")).toContainText("Xem Tử vi online — Lập lá số 12 cung miễn phí");
+    await expect(page.locator("h1")).toContainText("Xem Tử vi online: năm nay bạn nên chú ý gì?");
   });
 
   test("hồ sơ → lá số 12 cung nhãn Anh (hai giao diện) → chi tiết cung → chương đầu bài đọc", async ({ page }) => {

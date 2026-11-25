@@ -61,11 +61,12 @@ const nextConfig = {
       { source: "/sitemap-cum-:ma([a-z-]+).xml", destination: "/sitemap-cum/:ma.xml" },
     ] };
   },
-  // SEO-P0 (2026-11-25): Bật blocking metadata cho MỌI User-Agent (/.*/).
-  // Lý do kỹ thuật: khi bật Edge CDN Cache HTML (Q-I3, public-edge), nếu để Next 16 stream metadata cho trình duyệt
-  // thường (Chrome) hoặc Googlebot, lượt người dùng đầu tiên sẽ warm cache bằng HTML thiếu <title>/<link rel="canonical">/hreflang
-  // trong <head> (đẩy xuống cuối <body>) — rồi Vercel Edge phát lại bản <head> trống đó (x-vercel-cache: HIT) cho Googlebot,
-  // Bingbot và mọi AI bot. Ép `htmlLimitedBots: /.*/` bảo đảm 100% response (cả cache lẫn MISS) luôn có đủ metadata trong <head>.
+  // SEO-P0 (2026-11-25, thay Q-I2): metadata nằm trong <head> cho MỌI user-agent.
+  // Q-I3 cache HTML ở CDN mà khoá cache KHÔNG tách theo user-agent (thêm Vary: User-Agent thì gần như không còn lượt HIT).
+  // Trước đây bot nhận metadata trong <head>, người xem nhận bản "stream" (metadata cuối <body>) → lượt người xem đầu tiên ghi
+  // bản stream vào cache rồi CDN trả bản đó cho Bingbot, GPTBot, Zalo… (không chạy JS = thấy <head> thiếu title/canonical).
+  // Một kiểu HTML cho mọi người thì cache an toàn. Cái giá: lượt chưa cache chờ metadata (đọc CMS có đệm) trước khi gửi
+  // byte đầu — trang công khai phần lớn là lượt HIT nên không đáng kể; e2e "SEO-P0/P1" kiểm cả Chrome lẫn Googlebot.
   htmlLimitedBots: /.*/,
   // Ảnh thẻ chia sẻ (/og) đọc font OFL từ assets/fonts — đưa vào gói deploy. (Next 15: instrumentation.ts bật sẵn.)
   // TR-5: ảnh thẻ Tarot / Ba lá vẽ tranh lá thật (JPEG nhỏ trong assets/tarot — bộ dựng ảnh không đọc webp).

@@ -211,7 +211,7 @@ test("SEO-GEO: cẩm nang pillar mở, /ban-do-doi-ngu & /chi-tay đủ schema, 
   expect(so7).toContain("Xem thần số học online miễn phí");
 });
 
-test("SEO-P0/P1: mọi trang trụ & money page có <title> + canonical ngay trong <head> (cả Chrome lẫn Googlebot), / có hreflang + link /chi-tay, sitemap có /ban-do-doi-ngu + lastmod", async ({ request }) => {
+test("SEO-P0/P1: mọi trang trụ & money page có <title> + canonical ngay trong <head> (cả Chrome lẫn Googlebot), / có hreflang + link /chi-tay, sitemap có /ban-do-doi-ngu, không lastmod giả, H1 không lấn từ khoá", async ({ request }) => {
   const uas = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
     "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
@@ -234,5 +234,14 @@ test("SEO-P0/P1: mọi trang trụ & money page có <title> + canonical ngay tro
   expect(home).toContain('href="/ban-do-doi-ngu"');
   const sm = await (await request.get("/sitemap.xml")).text();
   expect(sm).toContain("/ban-do-doi-ngu</loc>");
-  expect(sm).toMatch(/\/tu-vi<\/loc>\s*<lastmod>20\d\d-\d\d-\d\d<\/lastmod>/);
+  // Không gắn một ngày chung cho mọi trang tĩnh: lastmod sai làm Google bỏ qua lastmod của CẢ sitemap (kể cả ngày thật của
+  // trang kiến thức — sổ ngay_cap_nhat, SEO-L4).
+  expect(sm).not.toMatch(/\/tu-vi<\/loc>\s*<lastmod>/);
+  // SEO-1: H1 trang trụ mở bằng từ khoá của CHÍNH trang, giữ câu hỏi nỗi đau (CTA-LS); không mượn từ khoá trang con
+  // (64 quẻ → /kinh-dich/que, hướng nhà hợp tuổi → /phong-thuy/huong-hop-tuoi).
+  for (const [duong, h1] of [["/tu-vi", "Xem Tử vi online: năm nay bạn nên chú ý gì?"], ["/kinh-dich", "Gieo quẻ Kinh Dịch online: việc này nên hay chưa?"],
+    ["/phong-thuy", "Xem phong thuỷ nhà ở: nhà này có hợp bạn không?"]] as const) {
+    const html = await (await request.get(duong)).text();
+    expect(html, duong).toContain(h1);
+  }
 });

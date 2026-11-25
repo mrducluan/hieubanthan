@@ -16,6 +16,10 @@ const CAP_NHAT = "2026-11-24";
 
 const HOI_DAP_DOI_NGU = [
   {
+    hoi: "Xem tuổi hợp tác làm ăn ở đây xét những gì?",
+    dap: "Với từng cặp bạn và cộng sự, hệ thống xét con giáp hai người (tam hợp, lục xung, tương hình), hành nổi trội trong Bát tự (người này có bù hành người kia thiếu không) và nhịp năm cá nhân năm nay. Kết quả là cách phối hợp: ai hợp giữ trục nào, chỗ nào dễ va và nên trao đổi ra sao — không phải lời phán nên hay không nên làm ăn với ai.",
+  },
+  {
     hoi: "Bản đồ Đội ngũ hoạt động như thế nào?",
     dap: "Bạn nhập ngày sinh của mình và 1–8 cộng sự (hoặc gửi link mời để từng người tự điền). Hệ thống quy đổi sang ngũ hành Bát tự và nhịp năm cá nhân để vẽ Radar cân bằng 5 hành của cả nhóm, chỉ ra lỗ hổng vận hành và gợi ý giao tiếp 2 chiều giữa quản lý với từng người.",
   },

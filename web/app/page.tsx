@@ -123,13 +123,13 @@ export default async function TrangChu() {
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
           <Link href="/chi-tay" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline">
-            Xem chỉ tay online <ArrowRight className="size-3.5" aria-hidden />
+            {c("mang.lien_chi_tay")} <ArrowRight className="size-3.5" aria-hidden />
           </Link>
           <Link href="/ban-do-doi-ngu" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline">
-            Bản đồ Đội ngũ <ArrowRight className="size-3.5" aria-hidden />
+            {c("mang.lien_doi_ngu")} <ArrowRight className="size-3.5" aria-hidden />
           </Link>
           <Link href="/goi-xem" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline">
-            Gói xem luận giải <ArrowRight className="size-3.5" aria-hidden />
+            {c("mang.lien_goi_xem")} <ArrowRight className="size-3.5" aria-hidden />
           </Link>
           <Link href="/huyen-hoc" className="inline-flex items-center gap-1.5 text-gold underline-offset-4 hover:underline">
             {c("mang.xem_tat_ca")} <ArrowRight className="size-4" aria-hidden />
