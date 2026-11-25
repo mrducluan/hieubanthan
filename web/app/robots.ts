@@ -7,7 +7,7 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "@/lib/seo";
 
-const CHAN = ["/api/", "/md/", "/quan-tri", "/tai-khoan", "/dang-nhap", "/auth/", "/chia-se", "/hop-doi/", "/the/", "/qua/", "/li-xi/", "/khung/"];
+const CHAN = ["/api/", "/md/", "/quan-tri", "/tai-khoan", "/dang-nhap", "/auth/", "/chia-se", "/hop-doi/", "/quan-ly-nhan-su/moi", "/ban-do-doi-ngu/moi", "/the/", "/qua/", "/li-xi/", "/khung/"];
 /** Mở lại cụm kiến thức nằm dưới đường dẫn bị chặn (QH-URL: cặp số dời về /hop-doi/cap-so, còn /hop-doi/{mã} là link mời).
  *  Google/Bing lấy luật khớp DÀI NHẤT → Allow này thắng Disallow "/hop-doi/". */
 const MO = ["/hop-doi/cap-so"];

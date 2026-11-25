@@ -78,7 +78,7 @@ export async function taoPricingMd(): Promise<string> {
     `- Trang bảng giá trực quan: ${urlDayDu("/goi-xem")}`,
     `- Trang nạp Sao: ${urlDayDu("/nap-sao")}`,
     `- Hội viên năm: ${urlDayDu("/hoi-vien")}`,
-    `- Bản đồ Đội ngũ (B2B): ${urlDayDu("/ban-do-doi-ngu")}`,
+    `- Quản lý nhân sự & Bản đồ Đội ngũ (B2B): ${urlDayDu("/quan-ly-nhan-su")}`,
     "",
   );
 

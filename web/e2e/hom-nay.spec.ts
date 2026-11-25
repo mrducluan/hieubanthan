@@ -161,7 +161,7 @@ test("DC-MB: có hồ sơ cửa hàng trên máy → thẻ 'Tháng này cửa h�
   await expect(the).toBeVisible({ timeout: 15000 });
   await expect(the).toContainText("Tháng này cửa hàng của bạn");
   await expect(the).toContainText("phía cửa Nam");
-  await expect(the.getByRole("link", { name: /Mặt bằng/ })).toHaveAttribute("href", "/ban-do-doi-ngu");
+  await expect(the.getByRole("link", { name: /Mặt bằng/ })).toHaveAttribute("href", "/quan-ly-nhan-su");
   // Chưa có hồ sơ nhà → thẻ nhà vẫn là lời mời đo hướng như cũ
   await expect(page.getByTestId("thang-nay-nha-trong")).toBeVisible();
   const sk = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []);

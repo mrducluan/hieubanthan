@@ -1,17 +1,17 @@
-// Từ điển chữ giao diện cho trang Bản đồ Đội ngũ (/ban-do-doi-ngu & /ban-do-doi-ngu/moi) —
-// ngôn ngữ đời thường, chạm thẳng nỗi đau vận hành của chủ doanh nghiệp & quản lý, không dùng từ nội bộ hay thuật ngữ kỹ thuật.
+// Từ điển chữ giao diện cho trang Quản lý Nhân sự & Bản đồ Đội ngũ (/quan-ly-nhan-su & /quan-ly-nhan-su/moi) —
+// ngôn ngữ đời thường, chạm thẳng nỗi đau quản lý nhân viên của chủ doanh nghiệp & quản lý, không dùng thuật ngữ kỹ thuật.
 
 export const CHU_DOANH_CHU = {
   meta: {
-    tieu_de: "Bản đồ Đội ngũ: hiểu sở trường & phối hợp nhóm",
-    mo_ta: "Bản đồ Đội ngũ B2B cho chủ doanh nghiệp và quản lý: Radar cân bằng 5 hành, sở trường từng cộng sự và gợi ý phối hợp 2 chiều cho 1–8 người.",
-    moi_tieu_de: "Xác nhận tham gia Bản đồ Đội ngũ — Hiểu Bản Thân",
+    tieu_de: "Quản lý nhân sự & hiểu tính cách nhân viên theo 5 hành",
+    mo_ta: "Cách quản lý nhân viên hiệu quả trong 2 phút: hiểu tính cách nhân sự theo 5 hành, giao đúng việc, giảm va chạm 2 chiều cho 1–8 cộng sự. Không lưu ngày sinh.",
+    moi_tieu_de: "Xác nhận tham gia Bản đồ Nhân sự — Hiểu Bản Thân",
     moi_mo_ta: "Tự nguyện xác nhận tham gia xem phong cách phối hợp đội ngũ. Ngày sinh của bạn được mã hóa riêng, không lưu trên máy chủ.",
   },
   dau_trang: {
-    nho: "Phối hợp đội ngũ · Dành cho chủ doanh nghiệp & quản lý",
-    lon: "Hiểu đúng người cạnh mình: giao đúng việc, giảm va chạm, lấp lỗ hổng đội ngũ",
-    mo_ta: "Trong 2 phút, nhìn rõ nhóm bạn đang mạnh ở đâu, thiếu trục vận hành nào, và cách phối hợp 2 chiều hiệu quả nhất giữa bạn với 1–8 cộng sự chủ chốt. Dữ liệu không lưu trên máy chủ.",
+    nho: "Quản lý nhân sự · Dành cho chủ doanh nghiệp & cấp quản lý",
+    lon: "Cách quản lý nhân viên hiệu quả: hiểu tính cách, giao đúng việc",
+    mo_ta: "Chỉ mất 2 phút (không cần bài test 60 câu), nhìn rõ tính cách làm việc của 1–8 nhân viên chủ chốt, lỗ hổng vận hành cả nhóm và câu mở lời giảm va chạm 2 chiều. Không lưu ngày sinh.",
   },
   loi_ich: [
     {

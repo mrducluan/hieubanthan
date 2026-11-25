@@ -82,7 +82,7 @@ export function StudioDoanhChu() {
 
   const linkMoi =
     maMoi && typeof window !== "undefined"
-      ? `${window.location.origin}/ban-do-doi-ngu/moi?ma=${encodeURIComponent(maMoi)}`
+      ? `${window.location.origin}/quan-ly-nhan-su/moi?ma=${encodeURIComponent(maMoi)}`
       : "";
 
   function capNhatTuNhap(id: string, field: keyof ThanhVienTuNhapForm, value: string) {
