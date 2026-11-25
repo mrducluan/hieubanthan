@@ -15,13 +15,14 @@ import {
   type ThongTinLiXi,
 } from "@/lib/li-xi-tet";
 
-export function KhuLiXiTet2027({ thongTin }: { thongTin?: Pick<ThongTinLiXi, "gia_1" | "gia_3" | "gia_5"> }) {
+export function KhuLiXiTet2027({ thongTin }: { thongTin?: Pick<ThongTinLiXi, "bat" | "gia_1" | "gia_3" | "gia_5"> }) {
   const [mau, setMau] = useState<MauThiep>("do_son");
   const [hoa, setHoa] = useState<HoaTietTet>("linh_vat");
   const [daMo, setDaMo] = useState(false);
   const [phatLai, setPhatLai] = useState(0);
 
   const thongTinMau = mauThiepTheoMa(mau);
+  const banDuoc = thongTin?.bat === true;
   const gia1 = thongTin?.gia_1 ?? 99000;
   const gia3 = thongTin?.gia_3 ?? 249000;
   const gia5 = thongTin?.gia_5 ?? 399000;
@@ -128,6 +129,7 @@ export function KhuLiXiTet2027({ thongTin }: { thongTin?: Pick<ThongTinLiXi, "gi
             </div>
           </div>
 
+          {banDuoc ? (
           <div className="flex flex-wrap gap-2 text-xs text-fg-muted">
             <span className="rounded-lg border border-gold/25 bg-bg/60 px-2.5 py-1">
               1 bao: <strong className="tabular-nums text-[#f7cf68]">{dinhDangVnd(gia1)}</strong>
@@ -139,6 +141,11 @@ export function KhuLiXiTet2027({ thongTin }: { thongTin?: Pick<ThongTinLiXi, "gi
               Combo 5 bao: <strong className="tabular-nums text-[#f7cf68]">{dinhDangVnd(gia5)}</strong>
             </span>
           </div>
+          ) : (
+            <p className="rounded-lg border border-line/70 bg-bg/60 px-3 py-2 text-xs leading-relaxed text-fg-muted" data-testid="li-xi-chua-mo-ban">
+              Lì xì Tết 2027 chưa mở bán — bạn vẫn xem thử bao, pháo hoa và lời chúc ở đây; giá sẽ hiện khi mở bán.
+            </p>
+          )}
 
           <div className="flex flex-wrap items-center gap-2.5 pt-1">
             <Link

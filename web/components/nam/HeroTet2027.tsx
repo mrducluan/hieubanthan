@@ -1,17 +1,16 @@
 "use client";
 // TET-2027 — Hero Ấn phẩm Xuân Đinh Mùi 2027 ("Đêm Giao Thừa Thiên Hà Thủy") cho trang trụ /nam/2027.
-// Tái sử dụng artwork /public/li-xi/ & vector SVG từ HoaTietTet.tsx (sạch CSP-2, 0 CDN, 0 Math.random SSR).
+// Tái sử dụng artwork /public/anh/li-xi/ & vector SVG từ HoaTietTet.tsx (sạch CSP-2, 0 CDN, 0 Math.random SSR).
 // Giữ nguyên <h1> chính xác và khối "Trả lời nhanh" mở 100% trong visible DOM cho chuẩn SEO/AEO 12 điểm.
 import { useId, useState } from "react";
 import Link from "@/components/khung/Lien";
 import { Flower2, Gift, Sparkles } from "lucide-react";
-import { ANH_NEN_GAM_EP_KIM } from "@/lib/li-xi-tet";
 import { CanhHoaRoi, CanhHoaXuan, ConDauTrien, TextureGamCo } from "@/components/li-xi/HoaTietTet";
 
 const MAU_LINH_VAT = [
-  { ma: "ep_kim", ten: "Ép Kim 24K", nhan: "LINH VẬT ĐINH MÙI · ÉP KIM 24K", anh: "/li-xi/linh-vat-ep-kim.jpg" },
-  { ma: "son_mai", ten: "Sơn Mài Thủy", nhan: "LINH VẬT SƠN MÀI · THIÊN HÀ THỦY", anh: "/li-xi/linh-vat-son-mai.jpg" },
-  { ma: "thanh_lich", ten: "Thanh Lịch", nhan: "LINH VẬT ĐINH MÙI · THANH LỊCH", anh: "/li-xi/linh-vat-thanh-lich.jpg" },
+  { ma: "ep_kim", ten: "Ép Kim 24K", nhan: "LINH VẬT ĐINH MÙI · ÉP KIM 24K", anh: "/anh/li-xi/hero/linh-vat-ep-kim.webp" },
+  { ma: "son_mai", ten: "Sơn Mài Thủy", nhan: "LINH VẬT SƠN MÀI · THIÊN HÀ THỦY", anh: "/anh/li-xi/hero/linh-vat-son-mai.webp" },
+  { ma: "thanh_lich", ten: "Thanh Lịch", nhan: "LINH VẬT ĐINH MÙI · THANH LỊCH", anh: "/anh/li-xi/hero/linh-vat-thanh-lich.webp" },
 ] as const;
 
 interface Props {
@@ -57,7 +56,9 @@ export function HeroTet2027({
     >
       {/* Nền gấm đỏ son ép kim 24K hoà trộn tinh tế */}
       <img
-        src={ANH_NEN_GAM_EP_KIM}
+        src="/anh/li-xi/hero/nen-gam-ep-kim.webp"
+        loading="lazy"
+        decoding="async"
         alt=""
         aria-hidden
         className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.15] mix-blend-luminosity"
