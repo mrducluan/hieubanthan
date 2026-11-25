@@ -2,9 +2,9 @@
 // LX-2027 — Bao Lì Xì 3D thủ công LÌ XÌ TẾT 2027 (4 chất liệu giấy × 6 hoạ tiết nghệ thuật + nền gấm ép kim 24K tuỳ chọn).
 // Tích hợp artwork độ phân giải cao tự phục vụ tại /public/li-xi/ (Linh Vật Đinh Mùi 3 phong cách · Hoa Mai Vàng · Hoa Đào Bích ·
 // Nền Gấm Ép Kim 24K), hiệu ứng hoa rơi nhẹ (bật/tắt) và pháo hoa bung tia khi mở bao. Sạch CSP-2, 0 CDN ngoài, 0 hydration warning.
-import { useId } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { Sparkles } from "lucide-react";
+import { RotateCw, Sparkles } from "lucide-react";
 import {
   ANH_NEN_GAM_EP_KIM,
   hoaTietTheoMa,
@@ -14,6 +14,7 @@ import {
   type MauThiep,
 } from "@/lib/li-xi-tet";
 import { BieuTrungDinhMui, CanhHoaRoi, CanhHoaXuan, ConDauTrien, PhaoHoaXuan, TextureGamCo } from "./HoaTietTet";
+import { PhaoHoaCanvas } from "./PhaoHoaCanvas";
 
 interface Props {
   mauThiep: MauThiep;
@@ -47,15 +48,18 @@ export function BaoLiXi3D({
   const ttHoa = thongTinHoaTiet(hoa, mauThiep);
   const mauCanh = hoa === "hoa_dao" ? "#fda4af" : hoa === "hoa_mai" ? "#fde047" : t.mauCanhHoa;
   const chucHien = (loiChuc ?? "").trim() || "Chúc năm Đinh Mùi 2027 vạn sự hanh thông, tâm an trí sáng, mọi quyết định lớn đều đúng thời điểm.";
+  const tu = chucHien.split(/\s+/).filter(Boolean);
+  const neo = useRef<HTMLDivElement>(null);
+  const [lan, setLan] = useState(0);   // số lần bắn pháo hoa (0 = chưa mở)
+  useEffect(() => { if (daMo) setLan((n) => (n === 0 ? 1 : n)); else setLan(0); }, [daMo]);
+  const bangMau = [t.nhan, "#fda4af", "#fde047", "#fff7d6", "#f97316"];
 
   return (
-    <div className={`relative mx-auto w-full ${compact ? "max-w-sm" : "max-w-md"} select-none`} data-testid="bao-li-xi-3d">
-      {/* Pháo hoa bung tia vàng kim ngay khoảnh khắc mở bao lì xì */}
+    <div ref={neo} className={`relative mx-auto w-full ${compact ? "max-w-sm" : "max-w-md"} select-none`} data-testid="bao-li-xi-3d">
+      {/* Pháo hoa canvas: tên lửa + nhiều kiểu nổ + màn kết; chạm trang để bắn thêm */}
       {daMo && !giam && (
         <div className="pointer-events-none absolute -inset-4 z-30 overflow-visible" aria-hidden data-testid="lx-phao-hoa">
-          <PhaoHoaXuan color={t.nhan} bungNo className="absolute -left-2 -top-2 size-24" />
-          <PhaoHoaXuan color="#fda4af" bungNo className="absolute -right-2 top-2 size-20" />
-          <PhaoHoaXuan color="#fde047" bungNo className="absolute right-8 -top-5 size-16" />
+          <PhaoHoaCanvas kich={lan} neo={neo} bangMau={bangMau} />
         </div>
       )}
 
@@ -65,14 +69,38 @@ export function BaoLiXi3D({
         animate={daMo ? { y: 0, opacity: 1, scale: 1 } : { y: 24, opacity: 0, scale: 0.96 }}
         transition={{ duration: giam ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
         aria-hidden={!daMo}
-        className={`relative z-20 mx-3 rounded-2xl border p-5 shadow-2xl ${daMo ? "mb-[-20px]" : "pointer-events-none h-0 overflow-hidden border-0 p-0"}`}
+        className={`relative z-20 mx-3 rounded-2xl border p-5 shadow-2xl ${daMo ? "mb-[-20px] overflow-hidden" : "pointer-events-none h-0 overflow-hidden border-0 p-0"}`}
         style={{ background: "#fffaf0", borderColor: t.vien, color: "#2b1610" }}
       >
         <div className="flex items-center justify-between gap-2">
           <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#9a3412]">Thiệp LÌ XÌ TẾT 2027</span>
           <ConDauTrien />
         </div>
-        <p className="mt-3 font-serif text-lg leading-relaxed text-[#2b1610]">“{chucHien}”</p>
+        <p className="mt-3 font-serif text-lg leading-relaxed text-[#2b1610]" aria-label={chucHien}>
+          <span aria-hidden>“</span>
+          {tu.map((w, i) => (
+            <motion.span
+              key={`${lan}-${i}`}
+              aria-hidden
+              className="inline-block whitespace-pre"
+              initial={giam || !daMo ? false : { opacity: 0, y: 8, filter: "blur(4px)" }}
+              animate={daMo ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0 }}
+              transition={{ duration: giam ? 0 : 0.45, delay: giam ? 0 : 0.55 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {w}{i < tu.length - 1 ? " " : ""}
+            </motion.span>
+          ))}
+          <span aria-hidden>”</span>
+        </p>
+        {daMo && !giam && (
+          <motion.span
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 bg-gradient-to-r from-transparent via-[#ffd36a]/35 to-transparent"
+            initial={{ x: "0%" }}
+            animate={{ x: "420%" }}
+            transition={{ duration: 1.3, delay: 0.5, ease: "easeInOut" }}
+          />
+        )}
         <p className="mt-3 text-right text-xs font-medium text-[#7c2d12]">
           — {tenNguoiTang?.trim() ? `Từ ${tenNguoiTang.trim()}` : "Gửi tặng bạn từ Hiểu Bản Thân"}
         </p>
@@ -185,6 +213,17 @@ export function BaoLiXi3D({
             </div>
           )}
 
+          {daMo && !giam && (
+            <button
+              type="button"
+              onClick={() => setLan((n) => n + 1)}
+              data-testid="lx-ban-lai"
+              className="mt-2.5 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-medium transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              style={{ borderColor: t.vien, color: t.nhan }}
+            >
+              <RotateCw className="size-3" aria-hidden /> Bắn pháo hoa lại · chạm màn hình để bắn thêm
+            </button>
+          )}
           <p className="mt-3.5 text-xs opacity-90">
             {!daMo ? nhanNut : "Trọn bộ Báo cáo Năm Đinh Mùi 2027 (Tử vi · Bát tự · Thần số · 9 việc lớn)"}
           </p>
