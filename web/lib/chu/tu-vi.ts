@@ -15,7 +15,7 @@ const T = "Tử vi", LS = "Lá số", CT = "Chi tiết cung", PH = "Trường ph
 
 export const CHU_TU_VI_UI = {
   // ---------------------------------------------------------------- đầu trang + khung công cụ (app/tu-vi/TuVi.tsx)
-  "dau.ten": m(T, "Xem Tử vi: năm nay bạn nên chú ý gì?", "Zi Wei Dou Shu chart: what should you watch this year?"),
+  "dau.ten": m(T, "Xem Tử vi online: năm nay bạn nên chú ý gì?", "Zi Wei Dou Shu chart: what should you watch this year?"),
   "dau.mo_ta": m(T, "Việc đang chững, tiền vào rồi lại ra, chuyện tình cảm chưa rõ? Nhập ngày giờ sinh để có lá số 12 cung, rồi đọc từng mảng đời bằng lời thường: chỗ đang thuận, chỗ nên chú ý, việc nên làm.",
     "Work has stalled, money comes in and goes out, love is unclear? Enter your birth date and time to get your 12-palace chart, then read each area of life in plain words: what is going well, what needs care, and what to do."),
   "aria.la_so": m(T, "Lá số", "Chart"),

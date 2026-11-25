@@ -21,7 +21,7 @@ export const TEN_MENU_EN: Readonly<Record<string, { ten: string; mo_ta?: string 
   "/hop-doi": { ten: "Numerology compatibility", mo_ta: "Two Life Path numbers, no score" },
   "/tu-vi#hop-tham": { ten: "Compare two charts", mo_ta: "Where two charts meet and how to meet halfway" },
   "/hop-doi/cap-so": { ten: "Number pairs", mo_ta: "45 pairs: where they click, where they clash" },
-  "/ban-do-doi-ngu": { ten: "Team collaboration map", mo_ta: "Five-element team balance and two-way collaboration guide for 1-8 members" },
+  "/quan-ly-nhan-su": { ten: "Team collaboration map", mo_ta: "Five-element team balance and two-way collaboration guide for 1-8 members" },
   "cha:/huyen-hoc": { ten: "Metaphysics" },   // MENU-TS: gồm cả Numerology, Tarot — không còn chỉ phương Đông
   "/tu-vi": { ten: "Zi Wei Dou Shu", mo_ta: "Twelve-palace chart, the next three months" },
   "/bat-tu": { ten: "BaZi", mo_ta: "Four Pillars, Five Elements, Ten Gods" },

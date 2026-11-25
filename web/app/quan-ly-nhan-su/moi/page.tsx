@@ -1,4 +1,4 @@
-// Trang cộng sự tự xác nhận tham gia Bản đồ Đội ngũ (/ban-do-doi-ngu/moi?ma=...).
+// Trang cộng sự tự xác nhận tham gia Bản đồ Đội ngũ (/quan-ly-nhan-su/moi?ma=...).
 // Xác thực chữ ký HMAC của mã mời phía server; ngày sinh được mã hóa riêng, không lưu DB.
 import type { Metadata } from "next";
 import { TieuDeMuc } from "@/components/khung/TieuDe";

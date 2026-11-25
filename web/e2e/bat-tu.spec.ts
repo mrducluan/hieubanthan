@@ -139,7 +139,7 @@ for (const [utc, can, chi, co] of [[undefined, "Kỷ", "Tỵ", true], [-5, "Canh
 test("CTA-LS: chưa có hồ sơ → form xem tứ trụ ngay trên trang, nhập xong ra tứ trụ", async ({ page }) => {
   await napHoSo(page, (({ gio: _g, gioi_tinh: _t, noi_sinh: _n, ...h }) => h)(HO_SO_MAU));
   await page.goto("/bat-tu");
-  await expect(page.locator("h1")).toHaveText("Xem Bát tự: mệnh bạn thiếu hành gì?");
+  await expect(page.locator("h1")).toHaveText("Xem Bát tự online: mệnh bạn thiếu hành gì?");
   const moi = page.getByTestId("moi-lap-la-so");
   await expect(moi.getByRole("heading", { level: 2 })).toContainText("Còn 3 thông tin nữa là có tứ trụ");
   await moi.getByLabel("Giờ sinh", { exact: true }).fill(HO_SO_MAU.gio!);

@@ -1,10 +1,10 @@
-// E2E /ban-do-doi-ngu: chip "Bổ trợ ổn định" của Bản đồ đội ngũ + bộ 3 tab điều hành (Đội ngũ · Lịch 12 tháng · Mặt bằng).
+// E2E /quan-ly-nhan-su: chip "Bổ trợ ổn định" của Bản đồ đội ngũ + bộ 3 tab điều hành (Đội ngũ · Lịch 12 tháng · Mặt bằng).
 import { expect, test } from "@playwright/test";
 import { napHoSo } from "./_hoso";
 
 // Rà soát 2026-11-20: engine trả muc_phoi_hop "bo_tro_tot", web từng lọc theo "bo_tro_on_dinh" → chip luôn 0 người.
 test("Bản đồ đội ngũ mẫu: chip 'Bổ trợ ổn định' đếm đúng người và lọc ra danh sách", async ({ page }) => {
-  await page.goto("/ban-do-doi-ngu");
+  await page.goto("/quan-ly-nhan-su");
   await page.getByRole("button", { name: /Xem thử đội ngũ mẫu/ }).click();
   const chip = page.getByRole("tab", { name: /^Bổ trợ ổn định \(\d+\)$/ });
   await expect(chip).toBeVisible({ timeout: 20_000 });
@@ -16,9 +16,9 @@ test("Bản đồ đội ngũ mẫu: chip 'Bổ trợ ổn định' đếm đún
 
 const CHU_DN = { v: 1, ho_ten: "Nguyễn Đức Luân", ngay: 15, thang: 8, nam: 1986, gioi_tinh: "nam" as const, tao_luc: "2026-09-30T00:00:00Z" };
 
-test("3 tab /ban-do-doi-ngu: Lịch 12 tháng → Mặt bằng (kiêm hướng · không vong · không rõ năm xây · hồ sơ cửa hàng)", async ({ page }) => {
+test("3 tab /quan-ly-nhan-su: Lịch 12 tháng → Mặt bằng (kiêm hướng · không vong · không rõ năm xây · hồ sơ cửa hàng)", async ({ page }) => {
   await napHoSo(page, CHU_DN);
-  await page.goto("/ban-do-doi-ngu");
+  await page.goto("/quan-ly-nhan-su");
 
   await expect(page.getByTestId("tab-ban-do-doi-ngu")).toHaveAttribute("aria-selected", "true");
   await expect(page.getByTestId("tab-lich-12-thang")).toBeVisible();
@@ -96,7 +96,7 @@ test("3 tab /ban-do-doi-ngu: Lịch 12 tháng → Mặt bằng (kiêm hướng �
 
 test("Lịch 12 tháng có giờ sinh: gửi giờ, đọc thêm Bát tự hai cách; 'Xem trước năm sau' bắt đầu từ tháng 1", async ({ page }) => {
   await napHoSo(page, { ...CHU_DN, gio: "09:30" });
-  await page.goto("/ban-do-doi-ngu");
+  await page.goto("/quan-ly-nhan-su");
   await page.getByTestId("tab-lich-12-thang").click();
   const namSau = new Date().getFullYear() + 1;
   await page.getByLabel("Khoảng xem", { exact: true }).selectOption("nam_sau");
@@ -108,4 +108,56 @@ test("Lịch 12 tháng có giờ sinh: gửi giờ, đọc thêm Bát tự hai c
   await expect(kq.getByTestId("thieu-gio-lich-12")).toHaveCount(0);
   await expect(kq.getByTestId("hai-cach-lich-12")).toContainText("Cách 1");
   await expect(kq.getByTestId("thang-lich-12").first()).toContainText("Bát tự");
+});
+
+// QLNS-1 (2026-11-25): /ban-do-doi-ngu và /doanh-chu (cả link mời ?ma=) chuyển 308 MỘT bước về /quan-ly-nhan-su.
+test("QLNS-1: URL cũ 308 một bước, giữ mã mời", async ({ request }) => {
+  for (const [cu, moi] of [
+    ["/ban-do-doi-ngu", "/quan-ly-nhan-su"],
+    ["/doanh-chu", "/quan-ly-nhan-su"],
+    ["/ban-do-doi-ngu/moi?ma=abc123", "/quan-ly-nhan-su/moi?ma=abc123"],
+    ["/doanh-chu/moi?ma=abc123", "/quan-ly-nhan-su/moi?ma=abc123"],
+  ] as const) {
+    const r = await request.get(cu, { maxRedirects: 0 });
+    expect(r.status(), cu).toBe(308);
+    expect(new URL(r.headers()["location"]!, "http://x").pathname + new URL(r.headers()["location"]!, "http://x").search, cu).toBe(moi);
+  }
+  const html = await (await request.get("/quan-ly-nhan-su")).text();
+  expect(html).toContain("Quản lý nhân sự theo ngũ hành");
+  // Không nêu tên bài trắc nghiệm của tổ chức khác (Luật Quảng cáo).
+  expect(html).not.toMatch(/DISC|MBTI/);
+  // Kho tình huống đọc từ engine (không viết cứng ở web).
+  expect(html).toContain("Câu mở lời:");
+});
+
+test("QLNS-1: kết quả mẫu có kế hoạch 30 ngày, tình huống của nhóm, câu hỏi 1-1, lối bước tiếp", async ({ page }) => {
+  await page.goto("/quan-ly-nhan-su");
+  await page.getByRole("button", { name: /Xem thử đội ngũ mẫu/ }).click();
+  const kh = page.getByTestId("ke-hoach-30-ngay");
+  await expect(kh).toBeVisible({ timeout: 20_000 });
+  expect(await kh.locator("li").count()).toBeGreaterThanOrEqual(3);
+  await expect(kh).toContainText("Tuần 1");
+  await expect(kh).toContainText("Vì sao");
+  const th = page.getByTestId("tinh-huong-nhom");
+  await expect(th).toContainText("Câu mở lời mẫu");
+  await expect(page.getByTestId("hoi-1-1")).toBeVisible();
+  // "Bước tiếp" → mở tab Lịch 12 tháng
+  await page.getByTestId("buoc-tiep").getByRole("button", { name: /Lịch 12 tháng/ }).click();
+  await expect(page.getByTestId("tab-lich-12-thang")).toHaveAttribute("aria-selected", "true");
+});
+
+test("QLNS-1: người được mời xác nhận xong nhận bản 'Cách làm việc của bạn' + lối sang thần số và lập bản đồ nhóm mình", async ({ page, request }) => {
+  const r = await request.post("/api/doanh-chu/moi", { data: { ten_nhom: "Nhóm thử" } });
+  test.skip(!r.ok(), "môi trường thiếu bí mật ký link mời");
+  const { ma_moi } = (await r.json()) as { ma_moi: string };
+  await page.goto(`/quan-ly-nhan-su/moi?ma=${encodeURIComponent(ma_moi)}`);
+  await page.getByPlaceholder(/VD: Minh, An/).fill("An");
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: /Xác nhận & Tạo mã/ }).click();
+  const cn = page.getByTestId("ban-ca-nhan");
+  await expect(cn).toBeVisible({ timeout: 20_000 });
+  await expect(cn).toContainText("Cách làm việc của bạn");
+  await expect(cn).toContainText("Bạn làm tốt nhất khi");
+  await expect(cn.getByRole("link", { name: /4 con số/ })).toHaveAttribute("href", "/than-so");
+  await expect(cn.getByRole("link", { name: /Lập bản đồ cho nhóm/ })).toHaveAttribute("href", "/quan-ly-nhan-su");
 });

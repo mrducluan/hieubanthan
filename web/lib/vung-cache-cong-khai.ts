@@ -16,7 +16,7 @@ const DUONG_CHINH_XAC = new Set([
   "/tarot",
   "/hop-doi",
   "/chi-tay",
-  "/ban-do-doi-ngu",
+  "/quan-ly-nhan-su",
   "/huyen-hoc",
   "/kien-thuc",
   "/tu-dien",
@@ -38,7 +38,7 @@ const DUONG_CHINH_XAC = new Set([
 ]);
 
 /** Tiền tố được phép cache cả cây trang con (chỉ các cụm kiến thức / tra cứu công khai, KHÔNG gồm /hop-doi/<mã-mời>
- *  hay /ban-do-doi-ngu/moi). */
+ *  hay /quan-ly-nhan-su/moi). */
 const TIEN_TO_CONG_KHAI = [
   "/than-so/",
   "/tu-vi/",

@@ -1,0 +1,291 @@
+{
+  "_nguon": "Ban biên tập Hiểu Bản Thân soạn lời quản lý đội ngũ (QLNS-1, 2026-11-25). Dữ kiện lấy từ phép tính có sẵn của Bản đồ đội ngũ: hành nổi trội Bát tự của từng người, đường đời và năm cá nhân thần số, quan hệ con giáp giữa người quản lý và từng người. Chỉ là gợi ý cách phối hợp và trao đổi, không dùng để tuyển chọn, đánh giá, xếp lương hay kỷ luật.",
+  "_trang_thai": "nhap_ban_bien_tap",
+  "source_id": "doanh_chu_quan_ly_kb",
+  "school_id": "tong_hop",
+  "hanh": {
+    "Kim": {
+      "bu": {
+        "tieu_de": "Bù trục kiểm soát: số liệu và tiêu chuẩn",
+        "viec": "Chọn 3 con số cả nhóm cùng nhìn mỗi tuần (doanh thu, chi phí, đơn lỗi) và một người giữ bảng số. Việc nào trên 5 triệu đồng thì hai người cùng duyệt.",
+        "cach_do": "Sau 4 tuần: bảng số có được cập nhật đủ 4 lần không."
+      },
+      "troi": {
+        "tieu_de": "Nhóm thiên kiểm soát: đừng để quy trình chặn việc mới",
+        "viec": "Mỗi tháng dành riêng một việc nhỏ để thử cách mới, chấp nhận sai trong khuôn ngân sách nhỏ đã định trước."
+      }
+    },
+    "Mộc": {
+      "bu": {
+        "tieu_de": "Bù trục mở rộng: việc mới và kế hoạch dài",
+        "viec": "Giao một người giữ danh sách cơ hội mới (khách, kênh bán, sản phẩm), mỗi tháng chọn một cơ hội để thử nhỏ.",
+        "cach_do": "Sau 4 tuần: có ít nhất một việc thử nhỏ đã chạy xong và có kết quả."
+      },
+      "troi": {
+        "tieu_de": "Nhóm thiên mở rộng: chốt việc trước khi mở việc",
+        "viec": "Quy ước: chỉ mở dự án mới khi dự án đang chạy đã có người nhận phần hoàn thiện cuối."
+      }
+    },
+    "Thủy": {
+      "bu": {
+        "tieu_de": "Bù trục đối ngoại: lắng nghe khách và thị trường",
+        "viec": "Mỗi tuần một người gọi lại 3 khách cũ hỏi họ cần gì thêm, ghi lại một trang ngắn cho cả nhóm đọc.",
+        "cach_do": "Sau 4 tuần: có 12 cuộc gọi và ít nhất một thay đổi nhỏ từ ý khách."
+      },
+      "troi": {
+        "tieu_de": "Nhóm thiên phân tích: đặt hạn chót cho việc bàn",
+        "viec": "Mỗi quyết định có một ngày chốt. Tới ngày đó chưa đủ thông tin thì chọn phương án an toàn nhất rồi chạy."
+      }
+    },
+    "Hỏa": {
+      "bu": {
+        "tieu_de": "Bù trục tuyến đầu: bán hàng và truyền thông",
+        "viec": "Mỗi tuần nhóm có một buổi 20 phút kể lại khách vừa chốt và lý do họ mua; chọn một người nói thay nhóm với khách mới.",
+        "cach_do": "Sau 4 tuần: nhóm có được câu giới thiệu chung một phút mà ai cũng nói được không."
+      },
+      "troi": {
+        "tieu_de": "Nhóm thiên tuyến đầu: giữ khách sau khi bán",
+        "viec": "Gắn mỗi đơn đã chốt với một bước chăm sóc sau bán có ngày cụ thể, có người nhận."
+      }
+    },
+    "Thổ": {
+      "bu": {
+        "tieu_de": "Bù trục vận hành: quy trình và bàn giao",
+        "viec": "Viết danh sách kiểm 5 bước cho việc lặp lại nhiều nhất của nhóm, dán ở chỗ ai cũng thấy; cuối ngày một người rà.",
+        "cach_do": "Sau 4 tuần: số lần làm lại vì sót bước giảm đi."
+      },
+      "troi": {
+        "tieu_de": "Nhóm thiên vận hành: chừa chỗ cho thay đổi",
+        "viec": "Mỗi quý xem lại một quy trình cũ, bỏ bớt bước không còn cần, hỏi người làm trực tiếp trước khi sửa."
+      }
+    }
+  },
+  "ke_hoach": {
+    "quy_che": {
+      "tieu_de": "Đặt quy ước trao đổi với {ten}",
+      "viec": "Hai bên dễ đối chọi thẳng khi bàn việc. Chốt trước: ai quyết phần nào, việc lớn trao đổi bằng văn bản 3 gạch đầu dòng, không tranh luận trước cả nhóm.",
+      "vi_sao": "Con giáp xung / hình nhau hoặc cả hai cùng quen làm người quyết."
+    },
+    "bu_khuyet": {
+      "tieu_de": "Giao phần việc bạn hay bỏ sót cho {ten}",
+      "viec": "Bạn đang thiếu hành {hanh}; người này mạnh đúng chỗ đó. Giao trọn một đầu việc thuộc trục ấy, hẹn báo kết quả hai tuần một lần.",
+      "vi_sao": "Hành nổi trội của họ bù đúng hành bạn đang thiếu."
+    },
+    "ghep_cap": {
+      "tieu_de": "Ghép cặp {ten} chạy một dự án nhỏ",
+      "viec": "Hai người mạnh hai trục khác nhau. Giao chung một dự án ngắn 4 tuần, mỗi người giữ một nửa rõ ràng.",
+      "vi_sao": "Hai trục bổ cho nhau: một người mở việc, một người giữ việc."
+    },
+    "mot_mot": {
+      "tieu_de": "Nói chuyện riêng 15 phút với từng người",
+      "viec": "Trong tuần cuối, hẹn mỗi người 15 phút. Dùng hai câu hỏi gợi ý ở thẻ của từng người, chỉ nghe và ghi lại, chưa hứa gì ngay.",
+      "vi_sao": "Gợi ý cách phối hợp chỉ có ích khi khớp với điều chính người ấy nói ra."
+    },
+    "bu_truc": {
+      "vi_sao": "Hành mỏng nhất của cả nhóm là {hanh} — trục {vai_tro}."
+    },
+    "troi_truc": {
+      "vi_sao": "Cả nhóm dồn về hành {hanh} — mạnh ở {vai_tro}, nên dễ thiếu phía ngược lại."
+    }
+  },
+  "tuan": {
+    "1": "Tuần 1",
+    "2": "Tuần 2",
+    "3": "Tuần 3",
+    "4": "Tuần 4"
+  },
+  "tinh_huong": {
+    "phan_bien_cang": {
+      "van_de": "Người giỏi chuyên môn nhưng phản biện căng, khó góp ý",
+      "goc_nhin": "{ten} quen tự quyết và cần thấy tiêu chuẩn rõ trước khi nhận việc. Khi chỉ nhận lệnh mà không thấy lý do, người kiểu này dễ cãi lại.",
+      "mo_loi": "“Anh / chị cần góc nhìn phản biện của em ở mục này. Mình chốt tiêu chuẩn đầu ra trước, cách làm em tự chọn.”",
+      "viec": "Giao mục tiêu và tiêu chuẩn, để người ấy tự chọn cách làm; góp ý riêng, không góp ý trước cả nhóm."
+    },
+    "ban_hang_sot_quy_trinh": {
+      "van_de": "Nhóm làm nhanh, hăng hái nhưng hay sót quy trình, quên báo cáo",
+      "goc_nhin": "Cả nhóm nghiêng về {hanh_troi} (chạy nhanh, thích gặp người) và mỏng {hanh_thieu} (giữ quy trình, kiểm chi tiết).",
+      "mo_loi": "“Mình giữ tốc độ bán như cũ, chỉ thêm 3 bước cuối ngày để khách không bị rơi.”",
+      "viec": "Gom việc nhập liệu lặp lại thành danh sách kiểm 3 bước cuối ngày, giao một người rà chéo."
+    },
+    "hai_truc_va_cham": {
+      "van_de": "Hai người chủ chốt đều giỏi nhưng họp chung là căng",
+      "goc_nhin": "{ten_a} thiên mở rộng, muốn chạy nhanh; {ten_b} thiên kiểm soát, muốn chắc từng bước. Hai người đúng ở hai phía.",
+      "mo_loi": "“15 phút đầu để {ten_a} nêu phương án, 15 phút sau để {ten_b} rà rủi ro. Không cắt lời nhau giữa hai phần.”",
+      "viec": "Tách cuộc họp thành hai phần có giờ rõ ràng; quyết định cuối do một người được giao trước."
+    },
+    "nguoi_om_viec": {
+      "van_de": "Người tận tâm nhất lại hay ôm việc tới quá tải",
+      "goc_nhin": "{ten} có thói quen gánh thay người khác và ngại nói không.",
+      "mo_loi": "“Tuần này em liệt kê giúp anh / chị những việc em đang làm thay người khác. Mình trả bớt về đúng người.”",
+      "viec": "Mỗi tháng xem lại danh sách việc của người ấy, trả việc không thuộc phần họ về đúng chỗ."
+    },
+    "y_tuong_nhieu": {
+      "van_de": "Ý tưởng nhiều nhưng việc nào cũng dở dang",
+      "goc_nhin": "{ten} mạnh khâu nghĩ và mở việc, trong khi cả nhóm đang mỏng {hanh_thieu} — trục giữ việc tới cuối.",
+      "mo_loi": "“Mỗi lần mở việc mới, em chọn giúp một người giữ phần hoàn thiện cuối cùng em.”",
+      "viec": "Mỗi người chỉ giữ tối đa hai việc đang mở; việc thứ ba phải chờ một việc xong."
+    },
+    "it_noi_trong_hop": {
+      "van_de": "Có người rất ít nói trong họp, sau đó lại không đồng ý",
+      "goc_nhin": "{ten} nghĩ kỹ rồi mới nói và ngại tranh luận đông người.",
+      "mo_loi": "“Em gửi anh / chị ý kiến bằng chữ trước giờ họp nhé, anh / chị sẽ đọc to phần của em.”",
+      "viec": "Gửi nội dung họp trước một ngày, nhận ý kiến bằng chữ; hỏi riêng người ấy sau họp."
+    },
+    "doi_nhip": {
+      "van_de": "Một người trụ cột bỗng chững lại",
+      "goc_nhin": "Năm nay {ten} ở pha {pha} theo thần số — quãng người ta hay muốn đổi cách làm hoặc học thêm. Chững lại chưa hẳn là kém đi.",
+      "mo_loi": "“Quý tới em muốn học thêm hoặc thử việc gì? Mình xem có giao được trong nhóm không.”",
+      "viec": "Hỏi trước khi kết luận; giao một phần việc mới hoặc việc đào tạo người khác trong nhóm."
+    },
+    "giu_nhip": {
+      "van_de": "Nhóm đang ổn, làm sao giữ được",
+      "goc_nhin": "Chưa thấy chỗ va chạm rõ trong nhóm. Chỗ dễ trượt là việc lặp lại lâu ngày không ai xem lại.",
+      "mo_loi": "“Tháng này mỗi người chọn một việc mình thấy làm thừa bước, mình bỏ bớt cùng nhau.”",
+      "viec": "Mỗi tháng một buổi 30 phút rà lại việc lặp lại, giữ những gì đang chạy tốt."
+    }
+  },
+  "pha": {
+    "5": "chuyển dịch",
+    "7": "đào sâu",
+    "9": "tổng kết"
+  },
+  "dd": {
+    "1": {
+      "hoi": [
+        "Việc nào em muốn được tự quyết từ đầu tới cuối?",
+        "Khi nào em thấy bị giám sát quá sát?"
+      ],
+      "manh": "Bạn hợp nhận việc từ đầu tới cuối và tự quyết cách làm.",
+      "de_y": "Khi áp lực, bạn dễ tự làm hết thay vì chia việc. Báo trước với người quản lý phần nào bạn đang giữ.",
+      "lam_tot": "Mục tiêu rõ, quyền quyết rõ, ít người can thiệp giữa chừng.",
+      "trao_doi": "Nói thẳng điều bạn cần quyết, kèm mốc báo kết quả."
+    },
+    "2": {
+      "hoi": [
+        "Có điều gì em thấy chưa ổn mà chưa tiện nói?",
+        "Em muốn được hỏi ý kiến ở loại việc nào?"
+      ],
+      "manh": "Bạn giỏi giữ êm giữa các bên và nhận ra cảm xúc người khác sớm.",
+      "de_y": "Bạn dễ giữ ý kiến trái chiều trong lòng. Viết ra một câu trước buổi họp rồi gửi.",
+      "lam_tot": "Nhóm ít va chạm, có người lắng nghe ý kiến riêng.",
+      "trao_doi": "Gửi ý kiến bằng chữ trước, rồi nói ngắn trong buổi gặp."
+    },
+    "3": {
+      "hoi": [
+        "Ý tưởng nào em muốn thử nhất quý này?",
+        "Việc nào em hay để dở, cần ai giúp phần cuối?"
+      ],
+      "manh": "Bạn mạnh ở ý tưởng, nói chuyện cuốn hút và làm không khí nhóm sống lên.",
+      "de_y": "Bạn dễ mở nhiều việc cùng lúc. Giữ tối đa hai việc đang dở.",
+      "lam_tot": "Có chỗ thử ý mới, có người cùng giữ phần hoàn thiện.",
+      "trao_doi": "Mang ý tưởng kèm một bước làm thử nhỏ và ngày xong."
+    },
+    "4": {
+      "hoi": [
+        "Quy trình nào em thấy đang thừa hoặc thiếu?",
+        "Khi kế hoạch đổi, em cần biết trước những gì?"
+      ],
+      "manh": "Bạn làm việc có hệ thống, cẩn thận, rất được tin ở khâu cần chính xác.",
+      "de_y": "Bạn chậm lại khi kế hoạch đổi bất ngờ. Hỏi lý do và lộ trình chuyển đổi ngay khi nghe tin.",
+      "lam_tot": "Việc có quy trình, có thời hạn rõ, ít đổi giữa chừng.",
+      "trao_doi": "Đề xuất bằng danh sách bước cụ thể và rủi ro bạn thấy."
+    },
+    "5": {
+      "hoi": [
+        "Việc nào em thấy lặp lại tới mức chán?",
+        "Em muốn thử mảng mới nào?"
+      ],
+      "manh": "Bạn học nhanh, xoay xở tốt khi có biến và hợp mảng mới.",
+      "de_y": "Việc lặp lại lâu làm bạn nhanh chán. Tự đặt mục tiêu mới mỗi quý thay vì đợi người giao.",
+      "lam_tot": "Mục tiêu thay đổi theo quý, có chỗ thử cách mới.",
+      "trao_doi": "Nói rõ việc nào bạn muốn đổi và việc nào bạn vẫn giữ."
+    },
+    "6": {
+      "hoi": [
+        "Việc nào em đang làm thay người khác?",
+        "Em cần anh / chị gỡ giúp phần nào?"
+      ],
+      "manh": "Bạn tận tâm, có trách nhiệm với đồng đội và khách, hợp chăm sóc và giữ người.",
+      "de_y": "Bạn dễ ôm việc thay người khác. Mỗi tháng liệt kê việc không thuộc phần mình và trả lại.",
+      "lam_tot": "Phần việc rõ ranh giới, có người cùng chia khi đông việc.",
+      "trao_doi": "Nói sớm khi quá tải, kèm việc bạn đề xuất chuyển cho người khác."
+    },
+    "7": {
+      "hoi": [
+        "Em đang thấy lỗ hổng nào trong cách nhóm làm?",
+        "Em muốn trao đổi bằng chữ hay gặp trực tiếp?"
+      ],
+      "manh": "Bạn phân tích sâu, nhìn ra lỗ hổng sớm, hợp chuyên môn và kiểm chất lượng.",
+      "de_y": "Bạn ít nói trong họp đông người. Gửi nhận xét bằng chữ trước giờ họp.",
+      "lam_tot": "Có thời gian làm việc tập trung, ít họp hình thức.",
+      "trao_doi": "Trao đổi ngắn, dựa trên dữ kiện cụ thể."
+    },
+    "8": {
+      "hoi": [
+        "Em muốn được giao chỉ tiêu ở mức nào thì thấy vừa sức?",
+        "Phần quyền nào em thấy còn mập mờ?"
+      ],
+      "manh": "Bạn nhạy với con số, mục tiêu và nguồn lực, hợp dẫn một mảng có chỉ tiêu.",
+      "de_y": "Khi ranh giới quyền hạn không rõ, bạn dễ va chạm. Hỏi rõ phần mình được quyết ngay từ đầu.",
+      "lam_tot": "Mục tiêu đo được, quyền hạn rõ, thưởng gắn với kết quả.",
+      "trao_doi": "Đi thẳng vào con số và đề xuất của bạn."
+    },
+    "9": {
+      "hoi": [
+        "Việc nào em thấy có ý nghĩa nhất với mình?",
+        "Mục tiêu lớn đó, mình đo bằng con số nào?"
+      ],
+      "manh": "Bạn nhìn xa, quan tâm người khác, hợp việc thương hiệu và dự án dài hơi.",
+      "de_y": "Bạn dễ đặt lý tưởng trước con số ngắn hạn. Gắn mỗi mục tiêu lớn với một chỉ số đo được.",
+      "lam_tot": "Việc có ý nghĩa rõ, có mốc đo kết quả.",
+      "trao_doi": "Nêu vì sao việc đáng làm, kèm con số bạn sẽ theo dõi."
+    },
+    "11": {
+      "hoi": [
+        "Em đang thấy xu hướng nào mà nhóm chưa để ý?",
+        "Điều gì trong nhóm làm em mệt nhất?"
+      ],
+      "manh": "Bạn nhạy với xu hướng và cảm xúc con người, hợp vai trò cố vấn và sáng tạo.",
+      "de_y": "Môi trường lộn xộn kéo dài làm bạn mệt nhanh. Nói sớm khi thấy nhóm rối.",
+      "lam_tot": "Nhóm minh bạch, ít chuyện nội bộ.",
+      "trao_doi": "Nói điều bạn cảm thấy kèm dấu hiệu cụ thể bạn thấy."
+    },
+    "22": {
+      "hoi": [
+        "Hệ thống nào em muốn dựng trong năm nay?",
+        "Mình chia việc lớn đó thành mấy giai đoạn?"
+      ],
+      "manh": "Bạn dựng được hệ thống lớn và biến kế hoạch dài thành cách làm thật.",
+      "de_y": "Bạn đặt kỳ vọng rất cao cho mình và người khác. Chia mục tiêu thành giai đoạn ngắn.",
+      "lam_tot": "Có quyền thiết kế cách làm, có thời gian cho việc dài hơi.",
+      "trao_doi": "Trình bày theo giai đoạn, mỗi giai đoạn một kết quả."
+    },
+    "33": {
+      "hoi": [
+        "Em đang kèm ai trong nhóm?",
+        "Tiêu chuẩn nào em thấy khó giữ khi thương người?"
+      ],
+      "manh": "Bạn giỏi kèm người, nâng tay nghề đội và giữ uy tín với khách.",
+      "de_y": "Bạn dễ nới tiêu chuẩn vì thương người. Giữ tiêu chuẩn chung đã thống nhất.",
+      "lam_tot": "Được kèm người mới, có tiêu chuẩn chung cho cả nhóm.",
+      "trao_doi": "Nói rõ ai bạn đang kèm và cần thêm gì để kèm tốt."
+    }
+  },
+  "ca_nhan": {
+    "tieu_de": "Cách làm việc của bạn",
+    "ve_nhom": "Người mời bạn sẽ thấy con giáp, trục mạnh, đường đời, năm cá nhân của bạn và gợi ý cách phối hợp — không thấy ngày sinh.",
+    "nhan_manh": "Bạn mạnh ở",
+    "nhan_de_y": "Nên để ý",
+    "nhan_lam_tot": "Bạn làm tốt nhất khi",
+    "nhan_trao_doi": "Cách trao đổi với người quản lý",
+    "nhan_nam": "Năm nay của bạn"
+  },
+  "an_danh": {
+    "ten": "người ấy",
+    "ten_a": "người thiên mở rộng",
+    "ten_b": "người thiên kiểm soát",
+    "hanh_troi": "Hỏa",
+    "hanh_thieu": "Thổ",
+    "pha": "chuyển dịch"
+  }
+}

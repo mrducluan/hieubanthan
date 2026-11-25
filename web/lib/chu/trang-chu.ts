@@ -102,6 +102,10 @@ export const CHU_TRANG_CHU = {
   "mang.lon": { nhom: M, nhan: "Tiêu đề mục", mac_dinh: "Sáu mảng huyền học, một hồ sơ", toi_da: 120 },
   "mang.mo_ta": { nhom: M, nhan: "Mô tả dưới tiêu đề", toi_da: 300,
     mac_dinh: "Sau thần số, bạn đi tiếp vào mảng mình tò mò — dùng luôn hồ sơ đã nhập. Tử vi, Bát tự cần thêm giờ sinh; xem tướng và Tarot thì không." },
+  // Lối đi tiếp dưới thẻ mảng: trang trụ không có thẻ riêng (chỉ tay, đội ngũ) + bảng giá. Chữ link = từ khoá trang đích (SEO-1).
+  "mang.lien_chi_tay": { nhom: M, nhan: "Link phụ 1 (mở /chi-tay)", mac_dinh: "Xem chỉ tay online", toi_da: 40 },
+  "mang.lien_doi_ngu": { nhom: M, nhan: "Link phụ 2 (mở /quan-ly-nhan-su)", mac_dinh: "Quản lý nhân sự theo ngũ hành", toi_da: 40 },
+  "mang.lien_goi_xem": { nhom: M, nhan: "Link phụ 3 (mở /goi-xem)", mac_dinh: "Các gói xem luận giải", toi_da: 40 },
   "mang.xem_tat_ca": { nhom: M, nhan: "Link dưới các thẻ (mở /huyen-hoc)", mac_dinh: "Xem cả bảy mảng và công cụ lịch, tuổi", toi_da: 60 },
   ...Object.fromEntries(MANG.flatMap(([k, ten, mo]) => [
     [`mang.${k}_ten`, { nhom: M, nhan: `Thẻ ${ten} — tên`, mac_dinh: ten, toi_da: 30 }],

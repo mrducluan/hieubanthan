@@ -1,6 +1,6 @@
 // Q-I1 + Q-I2 (chủ dự án duyệt 2026-11-05, docs/AUDIT-INDEX-2026-11.md): thu cửa sổ index trang ngày (−7…+90) và
-// trang "ngày tốt {việc} tháng" (tháng này…+6); Googlebot nhận trang dạng luồng (không chờ metadata) như mặc định Next,
-// các bot không chạy JS vẫn nhận <title>/canonical ngay trong <head>.
+// trang "ngày tốt {việc} tháng" (tháng này…+6). Q-I2 (Googlebot nhận trang dạng luồng) đã thay bằng SEO-P0 2026-11-25:
+// mọi user-agent nhận <title>/canonical ngay trong <head> vì cache HTML ở CDN (Q-I3) không tách theo user-agent.
 import { expect, test } from "@playwright/test";
 import { NGAY_SAU, VIEC_THANG_SAU, ngayDangIndex, viecThangIndex } from "../lib/hoang-lich";
 
@@ -28,12 +28,11 @@ test("Q-I1: cửa sổ index trang ngày −7…+90, việc-tháng tháng này�
   expect(viecThangIndex(2027, 5, 0, "2026-11-05")).toBe(false);   // 0 ngày tốt (AUD-Q3)
 });
 
-test("Q-I2: Googlebot + Kiểm tra URL không nằm trong htmlLimitedBots; bot không chạy JS vẫn nằm trong", async () => {
+test("SEO-P0 (thay Q-I2): mọi user-agent nằm trong htmlLimitedBots — cache HTML ở CDN không tách theo user-agent", async () => {
   // @ts-expect-error — next.config.mjs không có tệp khai kiểu
   const { default: c } = (await import("../next.config.mjs")) as { default: { htmlLimitedBots: RegExp } };
   const re = new RegExp(c.htmlLimitedBots.source, "i");                // đúng cách Next đọc cấu hình
-  for (const k of ["googlebot", "googlebotMay", "kiemTraUrl", "nguoi"] as const) expect(re.test(UA[k]), k).toBe(false);
-  for (const k of ["gpt", "bing", "claude", "zalo", "ads"] as const) expect(re.test(UA[k]), k).toBe(true);
+  for (const k of Object.keys(UA) as (keyof typeof UA)[]) expect(re.test(UA[k]), k).toBe(true);
 });
 
 test("Q-I2: bot không chạy JS nhận <title> + canonical trong <head>; Googlebot vẫn có đủ hai thẻ", async ({ request }) => {

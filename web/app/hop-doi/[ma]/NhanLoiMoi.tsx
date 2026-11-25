@@ -144,7 +144,7 @@ export function NhanLoiMoi({ ma, tenMoi, soMoi, tuKhoa, quanHeBanDau = "nguoi_ye
                   <p className="mt-1 text-sm text-fg-muted">Cân bằng 5 hành, sở trường từng cộng sự và gợi ý ghép cặp dự án — không lưu ngày sinh.</p>
                 </div>
                 <Button asChild size="sm" className="shrink-0 self-start sm:self-center">
-                  <Link href="/ban-do-doi-ngu">Mở Bản đồ Đội ngũ</Link>
+                  <Link href="/quan-ly-nhan-su">Mở Bản đồ Đội ngũ</Link>
                 </Button>
               </Card>
               <p className="rounded-xl border border-line/70 bg-surface/40 px-4 py-3 text-xs leading-relaxed text-fg-muted">

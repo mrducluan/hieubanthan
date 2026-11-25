@@ -19,6 +19,7 @@ import { NgayTotTrangChu } from "@/components/hoang-lich/NgayTotTrangChu";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { LoiDanCms } from "@/components/cms/DauTrangCms";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { themHreflangVi } from "@/lib/en/seo";
 
 // Mô tả trang chủ ≤ 160 ký tự (mô tả site dài hơn vẫn dùng cho schema/llms.txt).
 // SEO-1 (chủ dự án chốt 2026-11-24, sửa SEO-N): trang chủ không mang tên môn nào — tránh ăn thịt từ khoá; /than-so sở hữu
@@ -38,7 +39,7 @@ const DUONG = "/";
 const H1_MAC_DINH = "Bạn là số mấy?";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return apDungSeo(META, await layNoiDungTrang(DUONG), { tuyetDoi: true });
+  return themHreflangVi(apDungSeo(META, await layNoiDungTrang(DUONG), { tuyetDoi: true }), DUONG);
 }
 
 // Chữ thẻ: bảng chữ trang chủ (mang.<khoa>_ten / _mo).
@@ -120,9 +121,20 @@ export default async function TrangChu() {
             </Link>
           ))}
         </div>
-        <Link href="/huyen-hoc" className="mt-4 inline-flex items-center gap-1.5 text-sm text-gold underline-offset-4 hover:underline">
-          {c("mang.xem_tat_ca")} <ArrowRight className="size-4" aria-hidden />
-        </Link>
+        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+          <Link href="/chi-tay" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline">
+            {c("mang.lien_chi_tay")} <ArrowRight className="size-3.5" aria-hidden />
+          </Link>
+          <Link href="/quan-ly-nhan-su" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline">
+            {c("mang.lien_doi_ngu")} <ArrowRight className="size-3.5" aria-hidden />
+          </Link>
+          <Link href="/goi-xem" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline">
+            {c("mang.lien_goi_xem")} <ArrowRight className="size-3.5" aria-hidden />
+          </Link>
+          <Link href="/huyen-hoc" className="inline-flex items-center gap-1.5 text-gold underline-offset-4 hover:underline">
+            {c("mang.xem_tat_ca")} <ArrowRight className="size-4" aria-hidden />
+          </Link>
+        </div>
       </section>
 
       {/* Bài đọc ghép nhiều mảng (CD-1 chân dung, NAM-2 thời gian tới, NAM-1 theo năm). */}

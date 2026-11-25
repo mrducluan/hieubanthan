@@ -195,7 +195,7 @@ test.describe("/en/bazi trên trình duyệt", () => {
     await page.goto("/bat-tu");
     expect(await page.locator('link[rel="alternate"][hreflang="en"]').getAttribute("href")).toMatch(/\/en\/bazi$/);
     await expect(page.locator("html")).toHaveAttribute("lang", "vi");
-    await expect(page.locator("h1")).toContainText("Xem Bát tự: mệnh bạn thiếu hành gì?");
+    await expect(page.locator("h1")).toContainText("Xem Bát tự online: mệnh bạn thiếu hành gì?");
   });
 
   test("hồ sơ → tứ trụ → chương đầu bằng tiếng Anh; đổi ngôn ngữ về /bat-tu giữ hồ sơ", async ({ page }) => {

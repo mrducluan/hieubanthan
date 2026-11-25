@@ -1,0 +1,288 @@
+{
+  "_trang_thai": "bien_tap",
+  "hanh": {
+    "Kim": {
+      "bu": {
+        "tieu_de": "Shore up control: numbers and standards",
+        "viec": "Pick 3 numbers the whole team reviews weekly (revenue, cost, defects) and one person who owns the sheet. Any spend above an agreed amount needs two approvers.",
+        "cach_do": "After 4 weeks: was the sheet updated all 4 times?"
+      },
+      "troi": {
+        "tieu_de": "Control-heavy team: keep process from blocking new work",
+        "viec": "Each month, reserve one small task for trying a new approach, with a small budget agreed in advance."
+      }
+    },
+    "Mộc": {
+      "bu": {
+        "tieu_de": "Shore up growth: new work and long-range plans",
+        "viec": "Give one person the list of new opportunities (clients, channels, products); each month pick one to test small.",
+        "cach_do": "After 4 weeks: at least one small test has finished with a result."
+      },
+      "troi": {
+        "tieu_de": "Growth-heavy team: finish before you start",
+        "viec": "Agree that a new project only opens when the running one has an owner for the final finishing work."
+      }
+    },
+    "Thủy": {
+      "bu": {
+        "tieu_de": "Shore up outreach: listen to clients and the market",
+        "viec": "Each week one person calls 3 existing clients to ask what else they need, then writes one short page for the team.",
+        "cach_do": "After 4 weeks: 12 calls and at least one small change based on client feedback."
+      },
+      "troi": {
+        "tieu_de": "Analysis-heavy team: put a deadline on discussion",
+        "viec": "Every decision gets a decision date. If information is still missing by then, pick the safest option and move."
+      }
+    },
+    "Hỏa": {
+      "bu": {
+        "tieu_de": "Shore up the front line: sales and communication",
+        "viec": "Hold a 20-minute weekly round where someone retells a recent win and why the client bought; name one person to speak for the team with new clients.",
+        "cach_do": "After 4 weeks: does the team have a one-minute pitch everyone can say?"
+      },
+      "troi": {
+        "tieu_de": "Front-line-heavy team: keep clients after the sale",
+        "viec": "Attach every closed deal to one follow-up step with a date and an owner."
+      }
+    },
+    "Thổ": {
+      "bu": {
+        "tieu_de": "Shore up operations: process and handover",
+        "viec": "Write a 5-step checklist for the team's most repeated task, post it where everyone sees it, and have one person review it at day's end.",
+        "cach_do": "After 4 weeks: fewer redo's caused by a missed step."
+      },
+      "troi": {
+        "tieu_de": "Operations-heavy team: leave room for change",
+        "viec": "Each quarter, review one old process and drop steps no longer needed; ask the people who do the work before changing it."
+      }
+    }
+  },
+  "ke_hoach": {
+    "quy_che": {
+      "tieu_de": "Agree on how you discuss work with {ten}",
+      "viec": "You two tend to clash head-on. Settle who decides what, put big items in writing as 3 bullet points, and avoid debating in front of the team.",
+      "vi_sao": "Your zodiac signs clash, or you are both used to being the one who decides."
+    },
+    "bu_khuyet": {
+      "tieu_de": "Hand the work you tend to miss to {ten}",
+      "viec": "You are light on {hanh}; this person is strong exactly there. Give them a whole stream of that work and agree on a results check every two weeks.",
+      "vi_sao": "Their leading element fills the element you lack."
+    },
+    "ghep_cap": {
+      "tieu_de": "Pair {ten} on a small project",
+      "viec": "These two are strong on different axes. Give them one 4-week project, each owning a clear half.",
+      "vi_sao": "The two axes complement each other: one opens work, one keeps it going."
+    },
+    "mot_mot": {
+      "tieu_de": "A 15-minute one-to-one with each person",
+      "viec": "In the last week, book 15 minutes with each person. Use the two suggested questions on their card, listen and take notes, and promise nothing yet.",
+      "vi_sao": "Collaboration tips only help when they match what the person actually tells you."
+    },
+    "bu_truc": {
+      "vi_sao": "The team's lightest element is {hanh}, the axis of {vai_tro}."
+    },
+    "troi_truc": {
+      "vi_sao": "The whole team leans toward {hanh}, strong in {vai_tro}, so the opposite side is easy to miss."
+    }
+  },
+  "tuan": {
+    "1": "Week 1",
+    "2": "Week 2",
+    "3": "Week 3",
+    "4": "Week 4"
+  },
+  "tinh_huong": {
+    "phan_bien_cang": {
+      "van_de": "A strong specialist who pushes back hard and is hard to give feedback to",
+      "goc_nhin": "{ten} is used to deciding alone and needs to see clear standards before taking on work. Given orders without reasons, this kind of person tends to argue back.",
+      "mo_loi": "\"I need your critical view on this. Let's agree the output standard first; how you get there is your call.\"",
+      "viec": "Set the goal and the standard, let them choose the method, and give feedback in private, not in front of the team."
+    },
+    "ban_hang_sot_quy_trinh": {
+      "van_de": "A fast, keen team that keeps skipping process and reports",
+      "goc_nhin": "The whole team leans toward {hanh_troi} (moves fast, likes meeting people) and is light on {hanh_thieu} (keeping process, checking detail).",
+      "mo_loi": "\"We keep the same selling pace and just add 3 end-of-day steps so no client slips through.\"",
+      "viec": "Turn repeated data entry into a 3-step end-of-day checklist and have one person cross-check."
+    },
+    "hai_truc_va_cham": {
+      "van_de": "Two key people are both good, but meetings with both get tense",
+      "goc_nhin": "{ten_a} leans toward growth and wants speed; {ten_b} leans toward control and wants certainty at each step. Both are right from their side.",
+      "mo_loi": "\"The first 15 minutes are for {ten_a} to propose; the next 15 are for {ten_b} to check risks. No cutting in across the two parts.\"",
+      "viec": "Split the meeting into two timed parts; the final call belongs to one person named in advance."
+    },
+    "nguoi_om_viec": {
+      "van_de": "Your most dedicated person keeps taking on too much",
+      "goc_nhin": "{ten} tends to carry other people's work and finds it hard to say no.",
+      "mo_loi": "\"This week, list the tasks you're doing for other people. Let's hand them back to the right owners.\"",
+      "viec": "Review their task list monthly and send back what isn't theirs."
+    },
+    "y_tuong_nhieu": {
+      "van_de": "Plenty of ideas, but every project stays half-done",
+      "goc_nhin": "{ten} is strong at thinking up and starting work, while the whole team is light on {hanh_thieu}, the axis that carries work to the end.",
+      "mo_loi": "\"Each time you start something new, pick one person to own the finishing with you.\"",
+      "viec": "Each person holds at most two open tasks; a third waits until one is done."
+    },
+    "it_noi_trong_hop": {
+      "van_de": "Someone says little in meetings, then disagrees afterwards",
+      "goc_nhin": "{ten} thinks things through before speaking and avoids debating in a crowd.",
+      "mo_loi": "\"Send me your view in writing before the meeting; I'll read your part out.\"",
+      "viec": "Send the agenda a day ahead, take written input, and check in with them privately after."
+    },
+    "doi_nhip": {
+      "van_de": "A key person suddenly slows down",
+      "goc_nhin": "This year {ten} is in a {pha} phase in numerology, a stretch when people often want to change how they work or learn something new. Slowing down is not the same as getting worse.",
+      "mo_loi": "\"What would you like to learn or try next quarter? Let's see if the team can give you that.\"",
+      "viec": "Ask before drawing conclusions; give them a new piece of work or have them train someone on the team."
+    },
+    "giu_nhip": {
+      "van_de": "The team is doing fine. How do you keep it that way?",
+      "goc_nhin": "No clear friction point shows up in this team. What slips first is repeated work nobody reviews.",
+      "mo_loi": "\"This month, everyone pick one task where we do an extra step, and we'll cut it together.\"",
+      "viec": "Hold a 30-minute monthly review of repeated work and keep what is working."
+    }
+  },
+  "pha": {
+    "5": "transition",
+    "7": "deep-focus",
+    "9": "completion"
+  },
+  "dd": {
+    "1": {
+      "hoi": [
+        "Which work would you like to own from start to finish?",
+        "When do you feel watched too closely?"
+      ],
+      "manh": "You do well owning work end to end and choosing your own method.",
+      "de_y": "Under pressure you tend to do everything yourself instead of sharing. Tell your manager early which parts you are holding.",
+      "lam_tot": "Clear goals, clear decision rights, little interference midway.",
+      "trao_doi": "Say plainly what you need to decide, with a date for reporting results."
+    },
+    "2": {
+      "hoi": [
+        "Is there something that isn't working that you haven't felt able to say?",
+        "On what kind of work would you like to be asked for your view?"
+      ],
+      "manh": "You keep things calm between people and notice others' feelings early.",
+      "de_y": "You tend to keep disagreement to yourself. Write one sentence before the meeting and send it.",
+      "lam_tot": "A team with little friction and someone who listens to private input.",
+      "trao_doi": "Send your view in writing first, then speak briefly in the meeting."
+    },
+    "3": {
+      "hoi": [
+        "Which idea would you most like to try this quarter?",
+        "Which work do you tend to leave unfinished, and who could help with the end?"
+      ],
+      "manh": "You are strong on ideas, persuasive in conversation, and lift the team's mood.",
+      "de_y": "You tend to open many things at once. Keep at most two tasks in progress.",
+      "lam_tot": "Room to try new ideas and someone who shares the finishing.",
+      "trao_doi": "Bring an idea with one small test step and a finish date."
+    },
+    "4": {
+      "hoi": [
+        "Which process feels like too much or too little?",
+        "When plans change, what do you need to know first?"
+      ],
+      "manh": "You work systematically and carefully, and are trusted wherever precision matters.",
+      "de_y": "You slow down when plans change suddenly. Ask for the reason and the transition plan as soon as you hear.",
+      "lam_tot": "Work with a process, clear deadlines and few changes midway.",
+      "trao_doi": "Propose with a concrete list of steps and the risks you see."
+    },
+    "5": {
+      "hoi": [
+        "Which task feels repetitive to the point of boredom?",
+        "Which new area would you like to try?"
+      ],
+      "manh": "You learn fast, handle surprises well and suit new areas.",
+      "de_y": "Long repetitive work bores you quickly. Set yourself a new goal each quarter instead of waiting to be given one.",
+      "lam_tot": "Goals that change by quarter and room to try new approaches.",
+      "trao_doi": "Say clearly what you want to change and what you will keep."
+    },
+    "6": {
+      "hoi": [
+        "Which work are you doing in place of someone else?",
+        "Which part would you like me to take off your hands?"
+      ],
+      "manh": "You are dedicated and responsible toward teammates and clients, and suit care and retention roles.",
+      "de_y": "You tend to carry others' work. Each month, list what isn't yours and hand it back.",
+      "lam_tot": "Clearly bounded work and someone to share the load when it is busy.",
+      "trao_doi": "Say early when you are overloaded, with the work you suggest moving to someone else."
+    },
+    "7": {
+      "hoi": [
+        "What gap do you see in how the team works?",
+        "Do you prefer to discuss in writing or in person?"
+      ],
+      "manh": "You analyse deeply and spot gaps early; you suit specialist and quality roles.",
+      "de_y": "You speak little in large meetings. Send your comments in writing beforehand.",
+      "lam_tot": "Time for focused work and few formal meetings.",
+      "trao_doi": "Keep it short and based on concrete facts."
+    },
+    "8": {
+      "hoi": [
+        "At what target level would you feel the workload is right?",
+        "Which authority still feels unclear?"
+      ],
+      "manh": "You have a sharp eye for numbers, targets and resources, and suit leading an area with targets.",
+      "de_y": "When authority lines are unclear you tend to clash. Ask early what you can decide.",
+      "lam_tot": "Measurable goals, clear authority and rewards tied to results.",
+      "trao_doi": "Go straight to the numbers and your proposal."
+    },
+    "9": {
+      "hoi": [
+        "Which work feels most meaningful to you?",
+        "For that big goal, which number shall we track?"
+      ],
+      "manh": "You see the big picture and care about people; you suit brand and long-range projects.",
+      "de_y": "You tend to put ideals ahead of short-term numbers. Tie each big goal to one measurable indicator.",
+      "lam_tot": "Work with a clear purpose and milestones to measure.",
+      "trao_doi": "Say why the work matters, with the number you will track."
+    },
+    "11": {
+      "hoi": [
+        "What trend are you seeing that the team hasn't noticed?",
+        "What on the team tires you most?"
+      ],
+      "manh": "You sense trends and people's feelings; you suit advisory and creative roles.",
+      "de_y": "Long periods of disorder wear you out fast. Speak up early when the team feels chaotic.",
+      "lam_tot": "A transparent team with little internal politics.",
+      "trao_doi": "Share what you sense along with the concrete signs you noticed."
+    },
+    "22": {
+      "hoi": [
+        "Which system would you like to build this year?",
+        "How many phases shall we split that big job into?"
+      ],
+      "manh": "You can build large systems and turn long-range plans into working practice.",
+      "de_y": "You set very high expectations for yourself and others. Split goals into short phases.",
+      "lam_tot": "Freedom to design how things work and time for long projects.",
+      "trao_doi": "Present by phase, with one result per phase."
+    },
+    "33": {
+      "hoi": [
+        "Who on the team are you mentoring?",
+        "Which standard is hard to hold when you care about someone?"
+      ],
+      "manh": "You are good at mentoring people, raising team skill and keeping clients' trust.",
+      "de_y": "You tend to relax standards out of kindness. Hold to the standards the team agreed.",
+      "lam_tot": "Mentoring newcomers, with shared standards for the whole team.",
+      "trao_doi": "Say who you are mentoring and what you need to do it well."
+    }
+  },
+  "ca_nhan": {
+    "tieu_de": "How you work",
+    "ve_nhom": "The person who invited you will see your zodiac sign, strongest element, life path, personal year and collaboration tips, not your birth date.",
+    "nhan_manh": "You are strong at",
+    "nhan_de_y": "Worth watching",
+    "nhan_lam_tot": "You work best when",
+    "nhan_trao_doi": "How to talk with your manager",
+    "nhan_nam": "Your year"
+  },
+  "an_danh": {
+    "ten": "this person",
+    "ten_a": "the growth-minded person",
+    "ten_b": "the control-minded person",
+    "hanh_troi": "Fire",
+    "hanh_thieu": "Earth",
+    "pha": "transition"
+  }
+}

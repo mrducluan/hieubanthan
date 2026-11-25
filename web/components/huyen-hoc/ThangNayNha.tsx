@@ -47,7 +47,7 @@ export function ThangNayNha({ cuaHang = false }: { cuaHang?: boolean } = {}) {
   if (cuaHang) {
     if (!thanCh || !kq) return null;
     return <TheThangNay kq={kq} tieuDe="Tháng này cửa hàng của bạn" testid="thang-nay-cua-hang"
-      link={{ href: "/ban-do-doi-ngu", chu: "Xem Mặt bằng & Lịch 12 tháng của cửa hàng →" }} />;
+      link={{ href: "/quan-ly-nhan-su", chu: "Xem Mặt bằng & Lịch 12 tháng của cửa hàng →" }} />;
   }
   if (nha === undefined) return null;
   if (!than) {

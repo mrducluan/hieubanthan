@@ -9,6 +9,7 @@ import { CHU_DOANH_CHU } from "@/lib/chu/doanh-chu";
 import type { CapQuanLy, KetQuaDoanhChu, NhomViec } from "@/lib/doanh-chu";
 import { RadarNguHanh } from "./RadarNguHanh";
 import { MaTranHaiChieu } from "./MaTranHaiChieu";
+import { BuocTiep, KeHoach30Ngay, TinhHuongNhom } from "./QuanLyNhom";
 
 interface MaThanhVienDaThem {
   id: string;
@@ -44,6 +45,12 @@ export function StudioDoanhChu() {
   const namMacDinh = Math.min(2050, Math.max(2020, new Date().getFullYear()));
   const [cheDoDangGoi, setCheDoDangGoi] = useState<"mau" | "tu_nhap" | "doi_ngu">("tu_nhap");
   const [tabBuoc2, setTabBuoc2] = useState<"tu_nhap" | "gui_link">("tu_nhap");
+  const refBuoc2 = useRef<HTMLDivElement>(null);
+  // QLNS-1: lối "gửi link để từng người tự điền" — mỗi người nhận bản "Cách làm việc của bạn" của chính họ.
+  const moLinkMoi = () => {
+    setTabBuoc2("gui_link");
+    refBuoc2.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   const [namXem, setNamXem] = useState<number>(namMacDinh);
   const [capQuanLy, setCapQuanLy] = useState<CapQuanLy>("chu_dn");
 
@@ -82,7 +89,7 @@ export function StudioDoanhChu() {
 
   const linkMoi =
     maMoi && typeof window !== "undefined"
-      ? `${window.location.origin}/ban-do-doi-ngu/moi?ma=${encodeURIComponent(maMoi)}`
+      ? `${window.location.origin}/quan-ly-nhan-su/moi?ma=${encodeURIComponent(maMoi)}`
       : "";
 
   function capNhatTuNhap(id: string, field: keyof ThanhVienTuNhapForm, value: string) {
@@ -404,7 +411,7 @@ export function StudioDoanhChu() {
         </div>
 
         {/* Bước 2: 2 Tab (Nhập trực tiếp vs Gửi link mời bảo mật AES-256-GCM) */}
-        <div className="glass rounded-3xl p-5 sm:p-6">
+        <div ref={refBuoc2} className="glass scroll-mt-24 rounded-3xl p-5 sm:p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2 text-sm font-semibold text-jade">
               <Users className="h-4 w-4" />
@@ -711,6 +718,9 @@ export function StudioDoanhChu() {
             </section>
           )}
 
+          {ketQua.ke_hoach_30_ngay && <KeHoach30Ngay ds={ketQua.ke_hoach_30_ngay} />}
+          {ketQua.tinh_huong && <TinhHuongNhom ds={ketQua.tinh_huong} />}
+
           <MaTranHaiChieu danhSach={ketQua.ma_tran_phoi_hop} namXem={ketQua.nam_xem} />
 
           {/* Gợi ý ghép cặp cộng sự cùng chạy dự án */}
@@ -731,6 +741,8 @@ export function StudioDoanhChu() {
               </div>
             </section>
           )}
+
+          <BuocTiep moLinkMoi={moLinkMoi} />
 
           {/* Gợi ý theo quy mô doanh nghiệp */}
           <section className="glass rounded-3xl p-5 sm:p-6">

@@ -180,8 +180,8 @@ test("SEO-P: tiêu đề trả lời câu hỏi, 12 con giáp ngày, năm nhuậ
 });
 
 // SEO-GEO (2026-11-24): Cẩm nang GEO mở trên trang trụ, bảng so sánh, link trực tiếp trang con, <time>,
-// schema đầy đủ trên /ban-do-doi-ngu + /chi-tay, /pricing.md động và anchor ngược chuẩn từ khoá.
-test("SEO-GEO: cẩm nang pillar mở, /ban-do-doi-ngu & /chi-tay đủ schema, /pricing.md hoạt động, anchor ngược chuẩn", async ({ request }) => {
+// schema đầy đủ trên /quan-ly-nhan-su + /chi-tay, /pricing.md động và anchor ngược chuẩn từ khoá.
+test("SEO-GEO: cẩm nang pillar mở, /quan-ly-nhan-su & /chi-tay đủ schema, /pricing.md hoạt động, anchor ngược chuẩn", async ({ request }) => {
   for (const [duong, con] of [
     ["/than-so", "/than-so/y-nghia-so/so-7"],
     ["/tu-vi", "/tu-vi/chinh-tinh/sao-tu-vi"],
@@ -194,7 +194,7 @@ test("SEO-GEO: cẩm nang pillar mở, /ban-do-doi-ngu & /chi-tay đủ schema, 
     expect(html, duong).toContain("<table");
     expect(html, duong).toContain(`href="${con}"`);
   }
-  for (const duong of ["/ban-do-doi-ngu", "/chi-tay"] as const) {
+  for (const duong of ["/quan-ly-nhan-su", "/chi-tay"] as const) {
     const html = await (await request.get(duong)).text();
     const t = (/<title>([^<]*)<\/title>/.exec(html)?.[1] ?? "").replace(/&amp;/g, "&");
     expect(t, duong).toContain("· Hiểu Bản Thân");
@@ -209,4 +209,39 @@ test("SEO-GEO: cẩm nang pillar mở, /ban-do-doi-ngu & /chi-tay đủ schema, 
   expect(await md.text()).toContain("/goi-xem");
   const so7 = await (await request.get("/than-so/y-nghia-so/so-7")).text();
   expect(so7).toContain("Xem thần số học online miễn phí");
+});
+
+test("SEO-P0/P1: mọi trang trụ & money page có <title> + canonical ngay trong <head> (cả Chrome lẫn Googlebot), / có hreflang + link /chi-tay, sitemap có /quan-ly-nhan-su, không lastmod giả, H1 không lấn từ khoá", async ({ request }) => {
+  const uas = [
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+  ];
+  for (const duong of ["/", "/tu-vi", "/than-so", "/bat-tu", "/phong-thuy", "/kinh-dich", "/nhan-tuong", "/tarot", "/hop-doi", "/chi-tay", "/quan-ly-nhan-su", "/goi-xem"] as const) {
+    for (const ua of uas) {
+      const html = await (await request.get(duong, { headers: { "user-agent": ua } })).text();
+      const head = html.slice(0, html.indexOf("</head>"));
+      expect(head, `${duong} (${ua.slice(0, 20)})`).toMatch(/<title>[^<]+<\/title>/);
+      expect(head, `${duong} (${ua.slice(0, 20)})`).toMatch(/rel="canonical"/);
+      expect(head, `${duong} (${ua.slice(0, 20)})`).toMatch(/name="description"/);
+    }
+  }
+  const home = await (await request.get("/")).text();
+  const homeHead = home.slice(0, home.indexOf("</head>"));
+  expect(homeHead).toMatch(/hrefLang="en"[^>]*href="[^"]*\/en"/i);
+  expect(homeHead).toMatch(/hrefLang="vi"[^>]*href="[^"]+"/i);
+  expect(homeHead).toMatch(/hrefLang="x-default"[^>]*href="[^"]+"/i);
+  expect(home).toContain('href="/chi-tay"');
+  expect(home).toContain('href="/quan-ly-nhan-su"');
+  const sm = await (await request.get("/sitemap.xml")).text();
+  expect(sm).toContain("/quan-ly-nhan-su</loc>");
+  // Không gắn một ngày chung cho mọi trang tĩnh: lastmod sai làm Google bỏ qua lastmod của CẢ sitemap (kể cả ngày thật của
+  // trang kiến thức — sổ ngay_cap_nhat, SEO-L4).
+  expect(sm).not.toMatch(/\/tu-vi<\/loc>\s*<lastmod>/);
+  // SEO-1: H1 trang trụ mở bằng từ khoá của CHÍNH trang, giữ câu hỏi nỗi đau (CTA-LS); không mượn từ khoá trang con
+  // (64 quẻ → /kinh-dich/que, hướng nhà hợp tuổi → /phong-thuy/huong-hop-tuoi).
+  for (const [duong, h1] of [["/tu-vi", "Xem Tử vi online: năm nay bạn nên chú ý gì?"], ["/kinh-dich", "Gieo quẻ Kinh Dịch online: việc này nên hay chưa?"],
+    ["/phong-thuy", "Xem phong thuỷ nhà ở: nhà này có hợp bạn không?"]] as const) {
+    const html = await (await request.get(duong)).text();
+    expect(html, duong).toContain(h1);
+  }
 });

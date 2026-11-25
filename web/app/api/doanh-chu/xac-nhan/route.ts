@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { docLoiMoiDoiNgu, maHoaDongYThanhVien } from "@/lib/doanh-chu-ma";
-import { dauNguoiGoi, laBanAnh, loiChung } from "@/lib/proxy";
+import { dauNgonNgu, dauNguoiGoi, goiEngineDaKiem, laBanAnh, loiChung } from "@/lib/proxy";
 
 // Chống tạo hàng loạt mã "đã đồng ý" từ một máy: tối đa 10 mã / 10 phút mỗi người gọi trên một phiên bản máy chủ
 // (khoá = IP băm cắt ngắn, chỉ trong bộ nhớ — cùng cách /api/thanso/phan-hoi). Một người xác nhận chỉ cần một mã.
@@ -69,7 +69,12 @@ export async function POST(req: Request): Promise<NextResponse> {
     nam,
     gioi_tinh,
   });
+  // QLNS-1: bản "Cách làm việc của bạn" cho chính người vừa xác nhận — engine tính từ ngày sinh vừa nhập, không lưu.
+  // Engine lỗi → vẫn trả mã (bản cá nhân là phần thêm, không chặn việc gửi mã cho trưởng nhóm).
+  const namXem = Math.min(2050, Math.max(2020, new Date().getFullYear()));
+  const cn = await goiEngineDaKiem({ ngay, thang, nam, gioi_tinh, nam_xem: namXem }, "/v1/doanh-chu/ca-nhan", dauNgonNgu(req));
   return NextResponse.json({
+    ca_nhan: cn.ok ? cn.body : null,
     tv_token,
     biet_danh,
     vai_tro,

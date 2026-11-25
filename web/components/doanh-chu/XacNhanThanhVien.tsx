@@ -2,7 +2,10 @@
 // Biểu mẫu để chính nhân sự tự xác nhận đồng ý (Luật BVDLCN 91/2025/QH15) và nhận mã hóa AES-256-GCM gửi lại trưởng nhóm.
 import { useState } from "react";
 import { Check, Copy, Lock, ShieldCheck } from "lucide-react";
+import Link from "@/components/khung/Lien";
 import { CHU_DOANH_CHU } from "@/lib/chu/doanh-chu";
+import type { CaNhanDoiNgu } from "@/lib/doanh-chu";
+import { ghi } from "@/lib/do-luong";
 
 export function XacNhanThanhVien({ maMoi, tenNhom }: { maMoi: string; tenNhom: string }) {
   const [bietDanh, setBietDanh] = useState<string>("");
@@ -17,6 +20,7 @@ export function XacNhanThanhVien({ maMoi, tenNhom }: { maMoi: string; tenNhom: s
   const [loi, setLoi] = useState<string>("");
   const [tvToken, setTvToken] = useState<string>("");
   const [daChep, setDaChep] = useState<boolean>(false);
+  const [caNhan, setCaNhan] = useState<CaNhanDoiNgu | null>(null);
 
   async function guiXacNhan(e: React.FormEvent) {
     e.preventDefault();
@@ -41,12 +45,16 @@ export function XacNhanThanhVien({ maMoi, tenNhom }: { maMoi: string; tenNhom: s
           dong_y_tu_nguyen: true,
         }),
       });
-      const data = (await r.json().catch(() => null)) as { tv_token?: string; error?: string } | null;
+      const data = (await r.json().catch(() => null)) as { tv_token?: string; error?: string; ca_nhan?: CaNhanDoiNgu | null } | null;
       if (!r.ok || !data?.tv_token) {
         setLoi(data?.error ?? "Không tạo được mã bảo mật. Kiểm tra lại ngày sinh.");
         return;
       }
       setTvToken(data.tv_token);
+      if (data.ca_nhan) {
+        setCaNhan(data.ca_nhan);
+        ghi("chart_interacted", { mo_dun: "doanh_chu", kind: "ca_nhan_xem" });
+      }
     } catch {
       setLoi("Không kết nối được máy chủ.");
     } finally {
@@ -84,6 +92,7 @@ export function XacNhanThanhVien({ maMoi, tenNhom }: { maMoi: string; tenNhom: s
           {daChep ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
           <span>{daChep ? CHU_DOANH_CHU.buoc_nhap.da_chep : CHU_DOANH_CHU.trang_moi.nut_chep_ma}</span>
         </button>
+        {caNhan && <BanCaNhan cn={caNhan} />}
       </div>
     );
   }
@@ -206,5 +215,49 @@ export function XacNhanThanhVien({ maMoi, tenNhom }: { maMoi: string; tenNhom: s
         <span>{dangGui ? CHU_DOANH_CHU.trang_moi.dang_tao_ma : CHU_DOANH_CHU.trang_moi.nut_tao_ma}</span>
       </button>
     </form>
+  );
+}
+
+/** QLNS-1 — "Cách làm việc của bạn": phần quà cho chính người vừa xác nhận (chỉ trên máy họ, engine không lưu),
+ *  kèm lối sang thần số học và lối "bạn cũng quản lý một nhóm?" (người được mời thành người lập bản đồ mới). */
+function BanCaNhan({ cn }: { cn: CaNhanDoiNgu }) {
+  const T = CHU_DOANH_CHU.trang_moi;
+  const dong = (nhan: string, chu: string) => (
+    <div className="rounded-2xl border border-line/60 bg-bg/50 p-3.5">
+      <p className="text-xs font-semibold text-jade">{nhan}</p>
+      <p className="mt-1 text-sm leading-relaxed text-fg">{chu}</p>
+    </div>
+  );
+  const bam = (den: string) => ghi("cross_cta_clicked", { tu: "quan_ly_nhan_su_moi", den });
+  return (
+    <section className="mt-6 space-y-3 border-t border-line/60 pt-5" data-testid="ban-ca-nhan">
+      <h2 className="font-serif text-xl text-fg">{cn.nhan.tieu_de}</h2>
+      <p className="text-xs text-fg-muted">{T.ca_nhan_mo_ta}</p>
+      <p className="text-sm text-fg">
+        <span className="text-gold">{cn.hanh_manh}</span> · {cn.vai_tro_hop}
+      </p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {dong(cn.nhan.nhan_manh, cn.manh)}
+        {dong(cn.nhan.nhan_lam_tot, cn.lam_tot)}
+        {dong(cn.nhan.nhan_de_y, cn.de_y)}
+        {dong(cn.nhan.nhan_trao_doi, cn.trao_doi)}
+      </div>
+      {dong(`${cn.nhan.nhan_nam} ${cn.nam_xem}`, cn.nhip_nam)}
+      <p className="text-xs leading-relaxed text-fg-faint">{cn.nhan.ve_nhom}</p>
+      <div className="flex flex-wrap gap-2 pt-1">
+        <Link href="/than-so" onClick={() => bam("than_so")}
+          className="inline-flex min-h-[44px] items-center rounded-full border border-gold/50 bg-gold/15 px-4 text-sm font-medium text-gold hover:bg-gold/25">
+          {T.ca_nhan_than_so}
+        </Link>
+        <Link href="/quan-ly-nhan-su" onClick={() => bam("lap_ban_do")}
+          className="inline-flex min-h-[44px] items-center rounded-full border border-line px-4 text-sm text-fg hover:border-gold/60">
+          {T.ca_nhan_nhom_minh}
+        </Link>
+        <Link href="/hom-nay" onClick={() => bam("hom_nay")}
+          className="inline-flex min-h-[44px] items-center rounded-full border border-line px-4 text-sm text-fg-muted hover:text-fg">
+          {T.ca_nhan_hom_nay}
+        </Link>
+      </div>
+    </section>
   );
 }

@@ -117,7 +117,7 @@ _NHIP_NAM = {
     5: ("Pha chuyển dịch — năng lượng thay đổi cao, cần giao mục tiêu linh hoạt để tránh nhàm chán.", "Transition phase — high appetite for change; provide dynamic goals."),
     6: ("Pha trách nhiệm — tập trung gắn kết nội bộ, chăm sóc khách hàng và giữ chất lượng.", "Stewardship phase — strong for retention, service quality, and team stability."),
     7: ("Pha đào sâu — hợp nghiên cứu, nâng cấp chuyên môn và rà soát lỗ hổng hệ thống.", "Deep-focus phase — suited for R&D, upskilling, and structural audits."),
-    8: ("Pha gặt hái & thực thi mạnh — rất hợp giao chỉ tiêu doanh thu hoặc vai trò quản lý.", "Execution & harvest phase — strong for revenue targets and leadership."),
+    8: ("Pha gặt hái & thực thi mạnh — hợp nhận phần việc có mục tiêu đo được rõ ràng.", "Execution & harvest phase — suits work with clearly measurable goals."),
     9: ("Pha tổng kết & chuyển giao — thích hợp đóng gói kinh nghiệm, dọn gọn dự án cũ để chuẩn bị chu kỳ mới.", "Completion phase — ideal for wrapping up legacy work and preparing the next cycle."),
 }
 
@@ -222,7 +222,7 @@ def phan_tich_nhan_su(ong_chu: dict, nhan_su: dict, nam_xem: int) -> dict:
             {"yeu_to": "Hiệu quả mang lại cho ông chủ", "chi_tiet": vt_hieu_qua},
             {"yeu_to": "Sở trường giải quyết vấn đề", "chi_tiet": dd_pos_vi},
             {"yeu_to": "Khả năng bù khuyết với lãnh đạo", "chi_tiet": bu_khuyet_giai_thich},
-            {"yeu_to": "Nhịp hiệu suất năm hiện tại", "chi_tiet": nhip_vi},
+            {"yeu_to": "Nhịp làm việc năm nay", "chi_tiet": nhip_vi},
             {"yeu_to": "Vai trò đề xuất phát huy cao nhất", "chi_tiet": vt_ten},
             {"yeu_to": "Cách đặt cơ chế phối hợp hiệu quả", "chi_tiet": ong_chu_chu_y[1]},
         ]
@@ -249,7 +249,7 @@ def phan_tich_nhan_su(ong_chu: dict, nhan_su: dict, nam_xem: int) -> dict:
             {"yeu_to": "Core outcome for the owner", "chi_tiet": vt_hieu_qua},
             {"yeu_to": "Problem-solving strength", "chi_tiet": dd_pos_en},
             {"yeu_to": "Leadership complementarity", "chi_tiet": bu_khuyet_giai_thich},
-            {"yeu_to": "Current-year performance rhythm", "chi_tiet": nhip_en},
+            {"yeu_to": "This year's working rhythm", "chi_tiet": nhip_en},
             {"yeu_to": "Recommended primary role", "chi_tiet": vt_ten},
             {"yeu_to": "Collaboration cadence", "chi_tiet": ong_chu_chu_y[1]},
         ]
