@@ -8,6 +8,7 @@ import { HeroTet2027 } from "@/components/nam/HeroTet2027";
 import { DuongSongThienHa, IconDuKienTet } from "@/components/nam/HoaTietNam2027";
 import { KhuLiXiTet2027 } from "@/components/nam/KhuLiXiTet2027";
 import { TimNhanhNamSinh } from "@/components/nam/TimNhanhNamSinh";
+import { thongTinLiXi } from "@/lib/li-xi-may-chu";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -49,7 +50,12 @@ export default async function Page(p: P) {
   const n = docNamBang((await p.params).nam);
   if (!n) notFound();
   const homNayIso = homNayVN();
-  const [d, lich, lichNay] = await Promise.all([namCongKhai(n), lichNgayCongKhai(n), lichNgayChoNgay(homNayIso)]);
+  const [d, lich, lichNay, ttLiXi] = await Promise.all([
+    namCongKhai(n),
+    lichNgayCongKhai(n),
+    lichNgayChoNgay(homNayIso),
+    n === 2027 ? thongTinLiXi() : Promise.resolve(null),
+  ]);
   if (!d) throw new Error("engine không phản hồi");
   const { ngonNgu } = await ngonNguMayChu(), { c: t, p: tp, en } = chuNamTuoi(ngonNgu), ten = tenTheo(d.ten_hien, en);
   const duong = duongNam(n), bien = { nam: String(n), can_chi: d.can_chi };
@@ -166,7 +172,7 @@ export default async function Page(p: P) {
       {laTet2027 && (
         <>
           <DuongSongThienHa />
-          <KhuLiXiTet2027 />
+          <KhuLiXiTet2027 thongTin={ttLiXi ?? undefined} />
         </>
       )}
 

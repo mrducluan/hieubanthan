@@ -147,11 +147,11 @@ export function HeroTet2027({
         <div className="flex flex-col items-center text-center">
           <div className="relative flex size-48 items-center justify-center sm:size-52">
             <div
-              className="pointer-events-none absolute inset-0 rounded-full border border-dashed border-gold/45 motion-safe:animate-[logo-quay_48s_linear_infinite]"
+              className="pointer-events-none absolute inset-0 rounded-full border border-dashed border-gold/45 motion-safe:animate-spin-slow"
               aria-hidden
             />
             <div
-              className="relative size-44 overflow-hidden rounded-full p-1 shadow-2xl sm:size-46"
+              className="relative size-44 overflow-hidden rounded-full p-1 shadow-2xl sm:size-[184px]"
               style={{
                 background: "linear-gradient(135deg, #f7d983, #8b1218 50%, #e9c46a)",
                 boxShadow: "0 0 36px -8px rgba(233,196,106,0.45), 0 18px 34px rgba(0,0,0,0.6)",

@@ -8,18 +8,23 @@ import { Gift, PartyPopper, RotateCcw, Sparkles } from "lucide-react";
 import { BaoLiXi3D } from "@/components/li-xi/BaoLiXi3D";
 import {
   DANH_SACH_MAU_THIEP,
+  dinhDangVnd,
   mauThiepTheoMa,
   type HoaTietTet,
   type MauThiep,
+  type ThongTinLiXi,
 } from "@/lib/li-xi-tet";
 
-export function KhuLiXiTet2027() {
+export function KhuLiXiTet2027({ thongTin }: { thongTin?: Pick<ThongTinLiXi, "gia_1" | "gia_3" | "gia_5"> }) {
   const [mau, setMau] = useState<MauThiep>("do_son");
   const [hoa, setHoa] = useState<HoaTietTet>("linh_vat");
   const [daMo, setDaMo] = useState(false);
   const [phatLai, setPhatLai] = useState(0);
 
   const thongTinMau = mauThiepTheoMa(mau);
+  const gia1 = thongTin?.gia_1 ?? 99000;
+  const gia3 = thongTin?.gia_3 ?? 249000;
+  const gia5 = thongTin?.gia_5 ?? 399000;
 
   function chonMau(m: MauThiep) {
     setMau(m);
@@ -40,7 +45,7 @@ export function KhuLiXiTet2027() {
       aria-labelledby="tieu-de-li-xi-2027"
       data-testid="khu-li-xi-tet-2027"
       data-nosnippet=""
-      className="relative overflow-hidden rounded-3xl border border-gold/40 p-5 shadow-card sm:p-6"
+      className="relative overflow-x-clip rounded-3xl border border-gold/40 p-5 shadow-card sm:p-6"
       style={{
         background:
           "radial-gradient(80% 80% at 0% 50%, rgba(158, 27, 34, 0.28), transparent 60%), radial-gradient(60% 60% at 100% 0%, rgba(233, 196, 106, 0.14), transparent 55%), rgba(18, 18, 42, 0.82)",
@@ -125,13 +130,13 @@ export function KhuLiXiTet2027() {
 
           <div className="flex flex-wrap gap-2 text-xs text-fg-muted">
             <span className="rounded-lg border border-gold/25 bg-bg/60 px-2.5 py-1">
-              1 bao: <strong className="text-[#f7cf68]">99.000 ₫</strong>
+              1 bao: <strong className="tabular-nums text-[#f7cf68]">{dinhDangVnd(gia1)}</strong>
             </span>
             <span className="rounded-lg border border-gold/35 bg-gold/10 px-2.5 py-1">
-              Combo 3 bao: <strong className="text-[#f7cf68]">249.000 ₫</strong>
+              Combo 3 bao: <strong className="tabular-nums text-[#f7cf68]">{dinhDangVnd(gia3)}</strong>
             </span>
             <span className="rounded-lg border border-gold/25 bg-bg/60 px-2.5 py-1">
-              Combo 5 bao: <strong className="text-[#f7cf68]">399.000 ₫</strong>
+              Combo 5 bao: <strong className="tabular-nums text-[#f7cf68]">{dinhDangVnd(gia5)}</strong>
             </span>
           </div>
 
