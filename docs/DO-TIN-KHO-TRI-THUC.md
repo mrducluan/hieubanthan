@@ -15,7 +15,7 @@
 
 | Mảng | Có nguyên văn đối chiếu | Tóm ý cổ thư, chưa khớp từng câu | Tập quán / sách hiện đại tóm ý | Ban biên tập soạn | Tệp kỹ thuật |
 |---|---|---|---|---|---|
-| Bát tự | 3 | 1 | 1 | 5 |  |
+| Bát tự | 3 | 1 | 1 | 6 |  |
 | Tử vi | 1 | 3 | 7 | 7 |  |
 | Kinh Dịch | 4 | 2 | 1 | 2 |  |
 | Phong thuỷ | 2 | 2 | 1 | 5 |  |
@@ -30,6 +30,7 @@
 
 | Tệp | Phần | Kho nguồn | Test | Ghi chú |
 |---|---|---|---|---|
+| `battu_ban_do_kb.json` | trich | `tam_menh_thong_hoi_du_bo.json` | `test_tuoi_theo_sach_va_nam_that` | ba câu nguyên văn về tuổi của từng trụ |
 | `battu_dieu_hau.json` | (cả tệp) | `cung_thong_bao_giam.json` | `test_dieu_hau_khop_nguyen_van_tung_o` |  |
 | `battu_doi_song_kb.json` | ngoai_cach | `tu_binh_chan_thuyen.json` | `test_trich_la_nguyen_van` | câu hỷ / kỵ khớp nguyên văn; lời đời thường là tóm ý |
 | `battu_kb.json` | co_tho | `uyen_hai_tu_binh.json` | `test_co_tho_nhat_chu_khop_nguyen_van_uyen_hai` |  |
@@ -71,6 +72,8 @@
 
 | Mảng | Tệp | Phần | Mức | Ghi chú |
 |---|---|---|---|---|
+| Bát tự | `battu_ban_do_kb.json` |  | Ban biên tập soạn | BD-1 Bản đồ Bát tự: lời ô, quan hệ, năm — ban biên tập |
+| Bát tự | `battu_ban_do_kb.json` | trich | Có nguyên văn đối chiếu | ba câu nguyên văn về tuổi của từng trụ |
 | Bát tự | `battu_dieu_hau.json` |  | Có nguyên văn đối chiếu |  |
 | Bát tự | `battu_doi_song_kb.json` |  | Ban biên tập soạn |  |
 | Bát tự | `battu_doi_song_kb.json` | cach | Tóm ý cổ thư, chưa khớp từng câu | ba cách Thất Sát / Chính Ấn / Thiên Ấn đã khớp «Luận dụng thần» (Q5) |
