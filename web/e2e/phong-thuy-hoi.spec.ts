@@ -195,9 +195,9 @@ test("Bản tiếng Anh /en/feng-shui: tiêu đề câu hỏi tiếng Anh, khôn
 test("Huyền Không: bật / tắt lớp số và 'Xem từng lớp' chỉ đổi cách hiện số engine đã trả", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await napHoSo(page);
+  await napNha(page, { nam_xay: 2024, toa: "Tý" });                       // PT-NHA: đủ năm + toạ → tự lập, không bấm
   await page.goto("/phong-thuy");
   const hk = page.locator("#huyen-khong");
-  await hk.getByRole("button", { name: "Lập bàn" }).click();
   const ban = hk.getByTestId("ban-huyen-khong");
   await expect(ban.getByRole("cell").first()).toHaveAttribute("aria-label", /lưu niên \d/);
 

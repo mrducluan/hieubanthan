@@ -1,14 +1,15 @@
 "use client";
 // PT-HK — Huyền Không phi tinh: nhập năm xây + toạ sơn (hoặc độ la bàn) → hạ quái bàn 3×3 (Nam ở trên).
 // Mỗi cung: sơn tinh (trái) · hướng tinh (phải) · vận tinh (giữa dưới) · lưu niên (góc). Engine tính hết.
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input, Select } from "@/components/ui/input";
+import { Select } from "@/components/ui/input";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
-import { luuHoSoNha, useHoSoNha } from "@/lib/ho-so-nha";
+import { laHuong8, luuHoSoNha, namXayGui, useHoSoNha } from "@/lib/ho-so-nha";
+import { DongNha } from "@/components/phong-thuy/NhaCuaToi";
 import { cn } from "@/lib/utils";
 import { useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 import { ChonTrenVeTinh, coBanDoVeTinh, type LaBanHuyenKhongMap } from "@/components/huyen-hoc/ChonTrenVeTinh";
@@ -37,7 +38,7 @@ interface ThanhMon {
 }
 interface Cung { cung: string; phuong: string; luoi: [number, number]; goc: number; van: number; son: number; huong: number; y_cap?: YCap }
 interface Ban {
-  van: number; nam_xay: number; cuc: string; cuc_ten: string; cuc_y: { y: string; goi_y: string };
+  van: number; nam_xay: number | null; khoang_xay?: { tu: number; den: number }; cuc: string; cuc_ten: string; cuc_y: { y: string; goi_y: string };
   toa: { son: string; quai: string; phuong: string }; huong: { son: string; quai: string; phuong: string };
   cung: Cung[]; to_hop: { ma: string; ten: string; nhom: string; y: string; cung?: string[] }[];
   thanh_mon?: ThanhMon;
@@ -64,11 +65,7 @@ const KHOA_TT: Record<string, string> = { "vượng": "vuong", "sinh": "sinh", "
 const LOP = ["van", "son", "huong", "ln"] as const;
 type Lop = (typeof LOP)[number];
 
-export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
-  const [namXay, setNamXay] = useState("2024");
-  const [cach, setCach] = useState<"son" | "do">("son");
-  const [toa, setToa] = useState("Tý");
-  const [doLa, setDoLa] = useState("");
+export function HuyenKhong() {
   const [lop, setLop] = useState({ van: true, son: true, huong: true, ln: true });
   // Số lớp đã hiện (4 = đủ). "Xem từng lớp" hiện lần lượt vận → sơn → hướng → năm; không mô phỏng đường bay.
   const [buocLop, setBuocLop] = useState<number>(LOP.length);
@@ -91,33 +88,10 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
     }, 600);
   };
   const hienLop = (k: Lop) => lop[k] && LOP.indexOf(k) < buocLop;
-  // PT-V1: độ toạ đo bằng la bàn điện thoại → điền sẵn vào ô "Nhập độ la bàn".
-  useEffect(() => {
-    if (doToaGoiY == null) return;
-    setCach("do");
-    setDoLa(String(doToaGoiY));
-  }, [doToaGoiY]);
-  // KC-2: hồ sơ nhà trên máy → năm xây + độ toạ (= hướng + 180°) điền sẵn một lần.
-  // Theo dõi cả khi hồ sơ nhà có thêm năm xây / hướng SAU lần tải đầu (vừa đo hướng, vừa nhập năm ở "Nhà của bạn"): ô còn
-  // giá trị mặc định hoặc giá trị lần điền tự động trước thì điền lại; người dùng đã gõ tay thì giữ tay.
+  // PT-NHA: năm xây (hoặc khoảng năm = vận) + hướng nhà đọc từ hồ sơ nhà (thẻ "Nhà của tôi"); bỏ mặc định "2024" — chưa có
+  // năm thì KHÔNG lập bàn, chỉ hỏi năm (DongNha). Có số độ hướng nhà → gửi `huong_do`, engine đổi sang toạ (web không cộng
+  // 180°). Chưa có số độ → cho chọn toạ sơn (lưu `toa` vào hồ sơ). Đủ dữ liệu là tự lập, không cần bấm.
   const nhaLuu = useHoSoNha();
-  const tuDien = useRef<{ nam: string | null; doLa: string | null }>({ nam: null, doLa: null });
-  const hienTai = useRef({ namXay, doLa });
-  useEffect(() => { hienTai.current = { namXay, doLa }; });
-  const namLuu = nhaLuu?.nam_xay ? String(nhaLuu.nam_xay) : null;
-  const doLuu = nhaLuu?.huong_do != null ? String(Math.round(((nhaLuu.huong_do + 180) % 360) * 10) / 10) : null;
-  useEffect(() => {
-    if (!namLuu) return;
-    const cu = hienTai.current.namXay;
-    if (cu === "2024" || cu === tuDien.current.nam) setNamXay(namLuu);
-    tuDien.current.nam = namLuu;
-  }, [namLuu]);
-  useEffect(() => {
-    if (doLuu == null || doToaGoiY != null) return;
-    const cu = hienTai.current.doLa;
-    if (cu === "" || cu === tuDien.current.doLa) { setCach("do"); setDoLa(doLuu); }
-    tuDien.current.doLa = doLuu;
-  }, [doLuu, doToaGoiY]);
   const [kiem, setKiem] = useState(false);
   const [ban, setBan] = useState<Ban | null>(null);
   const [chonCung, setChonCung] = useState<string | null>(null);
@@ -128,37 +102,36 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
   const tn = tenTheo(ban?.ten_hien, en);
   const ttTen = (x: string) => (KHOA_TT[x] ? t(`hk.tt.${KHOA_TT[x]}`) : x);
 
-  const lap = async () => {
-    const nam = Number(namXay), d = Number(doLa.replace(",", "."));
-    if (!(nam >= 1864 && nam <= 2150)) { setLoi(t("hk.loi_nam")); return; }
-    if (cach === "do" && !(doLa.trim() !== "" && d >= 0 && d < 360)) { setLoi(t("hk.loi_do")); return; }
+  const huongDo = nhaLuu?.huong_do ?? null;
+  const toa = huongDo == null ? nhaLuu?.toa ?? null : null;
+  const nam = namXayGui(nhaLuu);
+  const coNam = Object.keys(nam).length > 0;
+  const than = coNam && (huongDo != null || toa)
+    ? { ...nam, ...(huongDo != null ? { huong_do: huongDo } : { toa: toa!, ...(kiem ? { the_quai: true } : {}) }) }
+    : null;
+  const khoa = than ? JSON.stringify(than) : null;
+  const luot = useRef(0);
+  const lap = useCallback(async () => {
+    if (!khoa) return;
+    const g = ++luot.current;
     setDang(true); setLoi(null);
     try {
-      const body = { nam_xay: Number(namXay), ...(cach === "son" ? { toa, ...(kiem ? { the_quai: true } : {}) } : { do: d }) };
-      const kq = await postJson<Ban>("/api/phongthuy/huyen-khong", body);
+      const kq = await postJson<Ban>("/api/phongthuy/huyen-khong", JSON.parse(khoa));
+      if (g !== luot.current) return;
       setBan(kq);
       setChonCung(kq.huong.quai);
-      try { luuHoSoNha({ nam_xay: nam, ...(cach === "son" ? { toa } : {}) }); } catch { /* bỏ qua */ }
       ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong" });
-    } catch (e) { setLoi(e instanceof Error ? e.message : t("hk.loi_lap")); }
-    finally { setDang(false); }
-  };
+    } catch (e) { if (g === luot.current) setLoi(e instanceof Error ? e.message : t("hk.loi_lap")); }
+    finally { if (g === luot.current) setDang(false); }
+  }, [khoa, t]);
+  const daTai = nhaLuu !== undefined;
+  useEffect(() => {
+    if (!daTai) return;
+    if (!khoa) { luot.current++; setBan(null); setDang(false); return; }
+    void lap();
+  }, [khoa, lap, daTai]);
 
-  const lapVoiDo = async (doToa: number) => {
-    const nam = Number(namXay);
-    if (!(nam >= 1864 && nam <= 2150)) { setLoi(t("hk.loi_nam")); return; }
-    setCach("do");
-    setDoLa(String(doToa));
-    setDang(true); setLoi(null);
-    try {
-      const kq = await postJson<Ban>("/api/phongthuy/huyen-khong", { nam_xay: nam, do: doToa });
-      setBan(kq);
-      setChonCung(kq.huong.quai);
-      try { luuHoSoNha({ nam_xay: nam, huong_do: (doToa + 180) % 360 }); } catch { /* bỏ qua */ }
-      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong_ve_tinh" });
-    } catch (e) { setLoi(e instanceof Error ? e.message : t("hk.loi_lap")); }
-    finally { setDang(false); }
-  };
+  const chonToa = (s: string) => { try { luuHoSoNha({ toa: s }); } catch { /* bỏ qua */ } };
 
   const duLieuMap: LaBanHuyenKhongMap | null = ban ? {
     van: ban.van,
@@ -185,36 +158,24 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
         </div>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-[8rem_1fr_auto] sm:items-end">
-        <label className="space-y-1 text-sm">
-          <span className="text-fg-muted">{t("hk.nam_nhan")}</span>
-          <Input inputMode="numeric" value={namXay} onChange={(e) => setNamXay(e.target.value.replace(/\D/g, "").slice(0, 4))} aria-label={t("hk.nam_aria")} />
-        </label>
-        <div className="space-y-1 text-sm">
-          <div className="flex gap-3 text-fg-muted">
-            <label className="flex min-h-10 cursor-pointer items-center gap-2"><input type="radio" className="size-4 accent-[rgb(var(--gold))]" checked={cach === "son"} onChange={() => setCach("son")} />{t("hk.chon_son")}</label>
-            <label className="flex min-h-10 cursor-pointer items-center gap-2"><input type="radio" className="size-4 accent-[rgb(var(--gold))]" checked={cach === "do"} onChange={() => setCach("do")} />{t("hk.nhap_do")}</label>
-          </div>
-          {cach === "son" ? (
-            <Select value={toa} onChange={(e) => setToa(e.target.value)} aria-label={t("hk.son_aria")}>
-              {SON_24.map(([s, p], i) => {
-                const [h, ph] = SON_24[(i + 12) % 24]!;
-                return <option key={s} value={s}>{en ? t("hk.son_lua_chon", { s: tn("son", s), p: tn("huong", p), h: tn("son", h), ph: tn("huong", ph) }) : <>Toạ {s} ({p}) — hướng {h} ({ph})</>}</option>;
-              })}
-            </Select>
-          ) : null}
-          {cach === "son" && (
-            <label className="flex items-center gap-1.5 text-xs text-fg-muted">
-              <input type="checkbox" checked={kiem} onChange={(e) => setKiem(e.target.checked)} />
-              {t("hk.kiem")}
-            </label>
-          )}
-          {cach === "do" && (
-            <Input inputMode="decimal" value={doLa} onChange={(e) => setDoLa(e.target.value)} placeholder={t("hk.do_vi_du")} aria-label={t("hk.do_aria")} />
-          )}
+      <DongNha can="nam" testId="dong-nha-hk" />
+      {huongDo == null && (
+        <div className="space-y-1 text-sm" data-testid="hk-chon-son">
+          <span className="text-fg-muted">{t("hk.chon_son")}</span>
+          <Select value={toa ?? ""} onChange={(e) => chonToa(e.target.value)} aria-label={t("hk.son_aria")}>
+            <option value="">—</option>
+            {SON_24.map(([s, p], i) => {
+              const [h, ph] = SON_24[(i + 12) % 24]!;
+              return <option key={s} value={s}>{en ? t("hk.son_lua_chon", { s: tn("son", s), p: tn("huong", p), h: tn("son", h), ph: tn("huong", ph) }) : `Toạ ${s} (${p}) — hướng ${h} (${ph})`}</option>;
+            })}
+          </Select>
+          <label className="flex items-center gap-1.5 text-xs text-fg-muted">
+            <input type="checkbox" checked={kiem} onChange={(e) => setKiem(e.target.checked)} />
+            {t("hk.kiem")}
+          </label>
         </div>
-        <Button onClick={lap} disabled={dang || namXay.length !== 4 || (cach === "do" && doLa === "")}>{dang ? t("hk.dang_lap") : t("hk.lap")}</Button>
-      </div>
+      )}
+      {dang && !ban && <p className="text-sm text-fg-muted" role="status">{t("hk.dang_lap")}</p>}
       {coBanDoVeTinh() && (
         <div className="space-y-2" data-testid="hk-ve-tinh-wrap">
           <p className="text-xs text-fg-muted">
@@ -228,13 +189,14 @@ export function HuyenKhong({ doToaGoiY }: { doToaGoiY?: number | null } = {}) {
             chonCung={chonCung}
             onChonCung={(c) => { setChonCung(c); ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong_map_cung" }); }}
             onDung={(kq) => {
-              const doToa = Math.round(((kq.do_huong + 180) % 360) * 10) / 10;
-              void lapVoiDo(doToa);
+              // Hướng engine vừa đo trên ảnh vệ tinh → hồ sơ nhà (bỏ toạ chọn tay cũ); bàn tự lập lại khi đã có năm.
+              try { luuHoSoNha({ huong_do: kq.do_huong, huong: laHuong8(kq.huong) ? kq.huong : undefined, toa: undefined }); } catch { /* bỏ qua */ }
+              ghi("chart_interacted", { mo_dun: "phongthuy", kind: "huyen_khong_ve_tinh" });
             }}
           />
         </div>
       )}
-      {loi && <BaoLoi loi={loi} thuLai={lap} />}
+      {loi && <BaoLoi loi={loi} thuLai={() => void lap()} />}
 
       {ban && (
         <div className="space-y-5" data-testid="ban-huyen-khong">

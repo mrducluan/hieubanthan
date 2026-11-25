@@ -18,6 +18,7 @@ import { LaBan } from "@/components/huyen-hoc/LaBan";
 import { TamYeuCuaChuBep } from "@/components/phong-thuy/TamYeuCuaChuBep";
 import { QuanSatQuanhNha } from "@/components/phong-thuy/QuanSatQuanhNha";
 import { DoViTriVat } from "@/components/phong-thuy/DoViTriVat";
+import { TheNhaCuaToi, ThanhNhaCuaToi } from "@/components/phong-thuy/NhaCuaToi";
 import { KhungTai } from "@/components/khung/TieuDe";
 import { usePost } from "@/lib/goi-api";
 import { BaoLoi } from "@/components/khung/BaoLoi";
@@ -73,8 +74,6 @@ export function PhongThuy() {
   const [mqTruoc, setMqTruoc] = useState<{ khoa: string; mq: MenhQuai } | null>(null);
   useEffect(() => { if (mq && khoaSinh) setMqTruoc({ khoa: khoaSinh, mq }); }, [mq, khoaSinh]);
   const ss = mq ?? (mqTruoc && mqTruoc.khoa === khoaSinh ? mqTruoc.mq : null);
-  const [doToa, setDoToa] = useState<number | null>(null);
-  const [doHuong, setDoHuong] = useState<number | null>(null);
   const [cauChon, setCauChon] = useState<MaCau | null>(null);
   const [cauDienSan, setCauDienSan] = useState<{ cau: string; lan: number } | null>(null);
   const [huongChot, setHuongChot] = useState<string | null>(null);
@@ -136,14 +135,17 @@ export function PhongThuy() {
           sinh={sinh}
           laBan={mq ? { quai: mq.quai, bang: mq.bang_huong, huongCat: mq.huong_cat, duNienY: mq.du_nien_y } : null}
           // Độ toạ do engine trả (`do_toa`) — web không tự cộng 180°.
-          onChot={(k) => { setDoHuong(k.do_huong); setHuongChot(k.huong); setDoToa(k.do_toa); }}
-          onDungToa={(d) => {
-            setDoToa(d);
+          onChot={(k) => setHuongChot(k.huong)}
+          // PT-NHA: hướng vừa chốt đã vào hồ sơ nhà → Huyền Không tự lập bàn (cần năm xây); nút này chỉ cuộn tới đó.
+          onDungToa={() => {
             const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
             document.getElementById("huyen-khong")?.scrollIntoView({ behavior: giam ? "auto" : "smooth", block: "start" });
           }}
         />
       </div>
+      {/* PT-NHA: một chỗ nhập loại nhà, năm xây, người cùng ở — hiện ngay khi đã chốt hướng; các khối dưới dùng chung. */}
+      <div className="mx-auto mt-4 max-w-3xl"><TheNhaCuaToi /></div>
+      <ThanhNhaCuaToi />
       <div className="mx-auto mt-8 max-w-3xl scroll-mt-24">
         <DoViTriVat sinh={sinh} />
       </div>
@@ -159,9 +161,10 @@ export function PhongThuy() {
             moTa="Chín điều bố trí chép trong sách Bát trạch đời Minh cho đúng cung mệnh của bạn: phòng ở, cửa, lối đi, bếp, giếng. Đọc để tham khảo; nhà ngày nay áp dụng được tới đâu thì ghi rõ ở từng điều." />
         </div>
       )}
-      <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="nha-cua-ban"><NhaCuaBan sinh={sinh} doHuongGoiY={doHuong} yDinhGoiY={cauChon ? Y_DINH_THEO_CAU[cauChon] : null} /></div>
-      <div className="mx-auto mt-8 max-w-5xl scroll-mt-24" id="khao-sat-nha"><KhaoSatNha sinh={sinh} doHuongGoiY={doHuong} /></div>
-      <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="huyen-khong"><HuyenKhong doToaGoiY={doToa} /></div>
+      <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="nha-cua-ban"><NhaCuaBan sinh={sinh} yDinhGoiY={cauChon ? Y_DINH_THEO_CAU[cauChon] : null} /></div>
+      <div className="mx-auto mt-8 max-w-5xl scroll-mt-24" id="khao-sat-nha"><KhaoSatNha sinh={sinh} /></div>
+      <div className="mx-auto mt-8 max-w-3xl scroll-mt-24" id="huyen-khong"><HuyenKhong /></div>
+      <div id="nha-het" aria-hidden />
       {/* EN-ALL: bản Anh chưa có lối đi chéo mảng → bỏ khối CTA, giữ mốc đọc xong + góp ý (như Bát tự, Tử vi). */}
       {mq && <div className="mx-auto max-w-3xl"><CuoiBaiDoc moDun="phongthuy" cauHoi={t("cuoi.cau_hoi")} maYDinh="nha_cua" khongCta={en} /></div>}
 

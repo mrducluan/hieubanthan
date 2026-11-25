@@ -186,6 +186,7 @@
   "cua.huong_hop": "Bốn hướng hợp với bạn: {ds}.",
   "cua.viec_bu": "Kê đầu giường hoặc bàn làm việc quay về một trong các hướng: {ds}.",
   "cua.tran": "Nhà đang có điểm nên xử lý trước ({ds}) nên phần này tối đa ở mức 'Cân bằng' cho tới khi xử lý.",
+  "cua.sao_van": "Nhà xây / dọn vào trong vận {van}; phía cửa có cặp sao {son}–{sao_huong}.",
   "cua.sao": "Nhà xây / dọn vào năm {nam_xay} thuộc vận {van}; phía cửa có cặp sao {son}–{sao_huong}.",
   "cua.sao_y": "Về cặp sao ở phía cửa: {y}",
   "bc.co_lon": "Có {n} điểm nên xử lý trước: {ds}.",

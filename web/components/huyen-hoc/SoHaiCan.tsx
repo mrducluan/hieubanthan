@@ -43,7 +43,7 @@ function CotCan({ c, i, sinh, gocNhin }: { c: CanDaLuu; i: number; sinh: SinhSo;
       <p className="font-semibold text-fg">{tenCan(c, i, en)}</p>
       <p className="text-xs text-fg-muted">
         {c.loai_nha ? tenLoaiNha(c.loai_nha, en) : t("sc.nha")}{bc?.da_tinh.huong_nha ? t("sc.huong", { huong: huong(bc.da_tinh.huong_nha) }) : c.huong_do != null ? ` · ${c.huong_do}°` : ""}
-        {c.nam_xay ? t("sc.nam", { nam: String(c.nam_xay) }) : ""}{c.thanh_vien.length ? t("sc.nguoi", { so: String(c.thanh_vien.length) }) : ""}
+        {c.nam_xay ? t("sc.nam", { nam: String(c.nam_xay) }) : c.van_xay ? t("sc.van", { van: String(c.van_xay) }) : ""}{c.thanh_vien.length ? t("sc.nguoi", { so: String(c.thanh_vien.length) }) : ""}
       </p>
       {loi && <p role="alert" className="mt-2 text-sm text-cinnabar">{loi}</p>}
       {!bc && !loi && <p className="mt-2 text-sm text-fg-faint">{t("sc.dang_doc")}</p>}

@@ -148,6 +148,7 @@
   "cua.huong_hop": "Your four supportive directions: {ds}.",
   "cua.viec_bu": "Point the bed-head or desk towards one of: {ds}.",
   "cua.tran": "The home has points to deal with first ({ds}), so this part stays at 'Balanced' at most until they are handled.",
+  "cua.sao_van": "Built / moved in during Period {van}; the door side holds the star pair {son}–{sao_huong}.",
   "cua.sao": "Built / moved in {nam_xay}: Period {van}; the door side holds the star pair {son}–{sao_huong}.",
   "cua.sao_y": "About the star pair at the door: {y}",
   "bc.co_lon": "There are {n} point(s) to deal with first: {ds}.",
