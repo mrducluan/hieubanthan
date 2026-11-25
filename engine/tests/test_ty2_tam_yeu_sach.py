@@ -114,3 +114,15 @@ def test_bao_cao_khong_doi_muc(quan_sat):
     c2 = next(c for c in co["chuong"] if c["ma"] == "ngoi_nha_voi_ban")
     td = {h["tieu_de"] for h in c2["hop"]}
     assert ("Quanh nhà có điều sách xưa dặn để ý" in td) == bool(quan_sat)
+
+
+def test_sach_noi_bat_toi_da_ba_khong_nhom_c():
+    """Gói 1: mỗi nhà ~20 mục sách → web chỉ hiện trước tối đa 3 điều (nhóm B trước, không nhóm C)."""
+    for cua, chu, bep in itertools.product(Q8, Q8, (None, "Khảm")):
+        r = ty.so_do(cua, chu, bep, 30, menh="Khảm")
+        nb = r["sach_noi_bat"]
+        assert len(nb) <= 3 and all(m["nhom"] in ("A", "B") for m in nb)
+        tat_ca = [m for g in (r["sach_ghi"] or {}).get("nhom", []) for m in g["muc"]]
+        assert all(m in tat_ca for m in nb)
+        if any(m["nhom"] == "B" for m in tat_ca):
+            assert nb[0]["nhom"] == "B"

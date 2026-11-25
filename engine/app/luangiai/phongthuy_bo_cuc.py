@@ -173,17 +173,19 @@ def _so_do(s: "SoDo", huong_do: float | None) -> tuple[dict, dict[str, str], set
     from app.calc import mat_bang_khung as mk  # noqa: PLC0415
     r = mk.phan_tich_so_do(s.rong, s.sau, {k: tuple(v) for k, v in s.vat.items()}, huong_do, s.luoi)
     vi_tri = {ma: x["phuong"] for ma, x in r["phuong_phong"].items() if x["phuong"] and ma in _PHONG}
-    dh = set()
+    # SD-1: dấu hiệu từ sơ đồ chỉ là GỢI Ý — người dùng xác nhận (vào `dau_hieu`) mới được luận. Không tự thêm.
+    goi_y = set()
     if r["wc_trung_cung"]:
-        dh.add("wc_giua_nha")
+        goi_y.add("wc_giua_nha")
     if r["cau_thang_trung_cung"]:
-        dh.add("cau_thang_giua_nha")
+        goi_y.add("cau_thang_giua_nha")
     if r["khuyet_goc"]:
-        dh.add("nha_chu_l")
+        goi_y.add("nha_chu_l")
     if (r.get("cua_thong_ban_cong") or {}).get("thang_hang"):
-        dh.add("cua_thong_ban_cong")
-    r["dau_hieu_suy_ra"] = sorted(dh)
-    return r, vi_tri, dh
+        goi_y.add("cua_thong_ban_cong")
+    r["dau_hieu_suy_ra"] = []
+    r["dau_hieu_goi_y"] = [{"ma": ma, "hoi": hoi(ma)} for ma in DAU_HIEU if ma in goi_y]
+    return r, vi_tri, set()
 
 
 def _quy_tac(loai_nha: str | None, co: set[str]) -> list[dict]:
@@ -255,6 +257,7 @@ def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
     huong_nha = pt.huong_tu_do(b.huong_nha_do) if b.huong_nha_do is not None else b.huong_nha
     do_cho_mb = b.huong_nha_do if b.huong_nha_do is not None else (pt.HUONG.index(b.huong_nha) * 45.0 if b.huong_nha else None)
     mat_bang, vi_tri_mb, dh_mb = _mat_bang(b, do_cho_mb)
+    wc_khai = b.vi_tri.get("ve_sinh") == "Trung cung" or (b.so_do is None and vi_tri_mb.get("ve_sinh") == "Trung cung")
     if vi_tri_mb:
         b.vi_tri = {**vi_tri_mb, **b.vi_tri}     # người khai tay thắng ô vẽ
     trach = pt.trach(huong_nha) if huong_nha else None
@@ -290,7 +293,7 @@ def luan(bo_cuc: dict, sinh: dict | None, goc_nhin: str = "sach_xua") -> dict:
 
     # Dấu hiệu: chỉ luận cái đã xác nhận; suy thêm từ vị trí (WC ở trung cung).
     co = {ma for ma, dh in b.dau_hieu.items() if _nhan(dh)} | dh_mb
-    if b.vi_tri.get("ve_sinh") == "Trung cung":
+    if wc_khai:                                        # người dùng tự khai WC ở giữa nhà (sơ đồ tỉ lệ chỉ gợi ý — SD-1)
         co.add("wc_giua_nha")
     # UI-PT 4 ("Tôi đã xử lý"): người dùng khai rõ `co: false` thắng dấu hiệu máy suy từ mặt bằng / vị trí phòng
     # (đã che xà, đã dời WC…) — chỉ nguồn người dùng; nguồn ảnh/video không ghi đè.

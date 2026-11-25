@@ -66,6 +66,15 @@ def test_tinh_trach_va_hoa_trach_khong_tinh_lop():
     assert r["loai"] == "hoa" and r["lop"] is None
 
 
+@pytest.mark.parametrize("ca", G["ca"], ids=lambda c: c["ma"])
+def test_tu_suy_cong_lech_khop_sach(ca):
+    """Không cần người dùng khai: cổng không đối diện nhà chính = cổng lệch — đúng cả 9 ví dụ sách."""
+    assert pl.cong_lech(ca["chu"], ca["cua"]) is ca["cua_lech"]
+    day = pl.day_lop(ca["chu"], ca["cua"], ca["so_lop"])
+    for so, dn in ca["lop"].items():
+        assert day[int(so) - 1] == dn
+
+
 def test_cua_lech_tinh_tu_phia_cua():
     assert pl.sao_dau("Đoài", "Cấn", False) == "Tuyệt Mệnh"      # Đoài → Chấn (hướng)
     assert pl.sao_dau("Đoài", "Cấn", True) == "Lục Sát"          # Cấn → Chấn

@@ -3354,7 +3354,7 @@
    "khong_nen_cao": "Không lớp nào vừa có sao tốt vừa hợp hành phía nhà chính — giữ nhà chính như hiện tại và chú ý cặp Cửa – Chủ – Bếp ở trên.",
    "lop_ten": "lớp {so}",
    "ap_sat": "Cửa và nhà chính chưa hợp nhau nhưng sao tốt rơi đúng dãy nhà chính. Sách gọi là thế sao tốt đè sát: những năm đầu thường thuận, lâu dần cặp cửa – chủ chọi nhau mới lộ ra. Nên chú ý sửa dần chỗ cửa – chủ (đổi lối vào, đổi phòng chính) khi có dịp.",
-   "quy_uoc": "Quy ước của Hiểu Bản Thân (sách viết cho nhà nhiều sân thời xưa, không nói về nhà phố ngày nay): lớp 1 là cổng hoặc cửa chính; mỗi dãy nhà có mái riêng nối tiếp vào sâu, ngăn bởi sân hoặc giếng trời, tính thêm một lớp. Nhà liền một mái, không sân trong là tĩnh trạch.",
+   "quy_uoc": "Quy ước của Hiểu Bản Thân (sách viết cho nhà nhiều sân thời xưa, không nói về nhà phố ngày nay): lớp 1 là cổng hoặc cửa chính; mỗi dãy nhà có mái riêng nối tiếp vào sâu, ngăn bởi sân hoặc giếng trời, tính thêm một lớp. Nhà liền một mái, không sân trong là tĩnh trạch. Với nhà nhiều sân, sách đặt la bàn riêng ở sân trong cổng (lấy cửa), sân nhà chính (lấy chủ) và sân bếp (lấy bếp); công cụ này đo cả ba từ tâm cả khu nhà, nên phía của cửa, bếp có thể lệch so với cách sách đo — dãy sao theo lớp vẫn đúng cách đếm của sách.",
    "cua_lech": "Cổng lệch một bên: sao lớp đầu tính từ phía cổng.",
    "bay_lop": "Nhà bảy lớp: sách chỉ có ví dụ cho lớp 6; cách đi đôi ở lớp 7 đọc theo câu luật của sách (bảy lớp đôi hai hành).",
    "can_cu": {

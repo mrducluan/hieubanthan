@@ -1,6 +1,6 @@
 "use client";
 // TY-2 đợt 3 — "Nhà nhiều lớp" (Dương Trạch Tam Yếu: tĩnh / động / biến / hoá trạch). Người dùng tự khai số lớp từ cổng vào,
-// lớp có dãy nhà chính, cổng có lệch không; ENGINE đếm sao từng lớp và đánh giá (`nhieu_lop` của /api/phongthuy/tam-yeu/so-do).
+// lớp có dãy nhà chính (cổng lệch hay không engine tự suy từ phía cổng — gói 1); ENGINE đếm sao từng lớp và đánh giá (`nhieu_lop` của /api/phongthuy/tam-yeu/so-do).
 // Web chỉ thu lựa chọn và vẽ — không tính sao, không chấm mức.
 import { Layers, Star } from "lucide-react";
 import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
@@ -30,7 +30,7 @@ export function NhapNhieuLop({ gia, onDoi }: { gia: LuaChonLop | null; onDoi: (g
           <select value={so || ""} data-testid="tam-yeu-so-lop" className="h-9 rounded-lg border border-line bg-bg/40 px-2 text-sm text-fg"
             onChange={(e) => {
               const n = Number(e.target.value);
-              onDoi(n ? { so_lop: n, ...(gia?.lop_chu && gia.lop_chu <= n ? { lop_chu: gia.lop_chu } : {}), ...(gia?.cua_lech ? { cua_lech: true } : {}) } : null);
+              onDoi(n ? { so_lop: n, ...(gia?.lop_chu && gia.lop_chu <= n ? { lop_chu: gia.lop_chu } : {}) } : null);
             }}>
             <option value="">{c("nl.chua_chon")}</option>
             {SO.map((n) => <option key={n} value={n}>{n === 1 ? c("nl.mot_san") : String(n)}</option>)}
@@ -43,13 +43,6 @@ export function NhapNhieuLop({ gia, onDoi }: { gia: LuaChonLop | null; onDoi: (g
               <option value="">{c("nl.chua_chon")}</option>
               {SO.slice(1, so).map((n) => <option key={n} value={n}>{String(n)}</option>)}
             </select>
-          </label>
-        )}
-        {so > 1 && (
-          <label className="inline-flex min-h-[36px] items-center gap-2 text-fg">
-            <input type="checkbox" checked={Boolean(gia?.cua_lech)} data-testid="tam-yeu-cua-lech"
-              onChange={(e) => onDoi({ ...gia!, cua_lech: e.target.checked || undefined })} />
-            {c("nl.cua_lech")}
           </label>
         )}
       </div>

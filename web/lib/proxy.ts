@@ -103,11 +103,16 @@ export async function goiEngineDaKiem(data: unknown, path: string, them: Record<
   }
 }
 
-export async function goiEngine(req: Request, schema: ZodTypeAny, path: string): Promise<NextResponse> {
+export async function goiEngine(req: Request, schema: ZodTypeAny, path: string,
+  lui?: (data: unknown) => unknown | null): Promise<NextResponse> {
   const parsed = schema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) {
     return NextResponse.json({ error: loiChung("dau_vao", laBanAnh(req)) }, { status: 422 });
   }
-  const kq = await goiEngineDaKiem(parsed.data, path, dauNguoiGoi(req));
+  const dau = dauNguoiGoi(req);
+  let kq = await goiEngineDaKiem(parsed.data, path, dau);
+  // Deploy lệch (web mới, engine cũ): engine từ chối trường mới (422) → gọi lại một lần không kèm phần đó.
+  const banLui = !kq.ok && kq.res.status === 422 && lui ? lui(parsed.data) : null;
+  if (banLui) kq = await goiEngineDaKiem(banLui, path, dau);
   return kq.ok ? NextResponse.json(kq.body) : kq.res;
 }

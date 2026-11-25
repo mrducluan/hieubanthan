@@ -83,9 +83,14 @@ def test_bo_cuc_doc_so_do():
     r = bc.luan(BC, {"nam": 1985, "gioi_tinh": "nam"})
     vt_ = {p["phong"]: p["cung"] for p in r["da_tinh"]["vi_tri"]}
     assert vt_ == {"cua_chinh": "Nam", "bep": "Bắc", "ve_sinh": "Trung cung"}
-    dh = {d["ma"]: d for d in r["dien_giai"]["dau_hieu"]}
-    assert dh["wc_giua_nha"]["tu_mat_bang"] and dh["cua_thong_ban_cong"]["tu_mat_bang"]
+    # SD-1: sơ đồ chỉ GỢI Ý dấu hiệu — chưa xác nhận thì không luận, không trần mức
+    assert r["dien_giai"]["dau_hieu"] == [] and r["veto_da_xac_nhan"] == []
+    assert {g["ma"] for g in r["mat_bang"]["dau_hieu_goi_y"]} == {"wc_giua_nha", "cua_thong_ban_cong"}
+    assert all(g["hoi"] for g in r["mat_bang"]["dau_hieu_goi_y"])
     assert r["mat_bang"]["nguon"] == "so_do"
+    # người dùng xác nhận → luận
+    xn = bc.luan({**BC, "dau_hieu": {"wc_giua_nha": {"co": True, "nguon": "nguoi_dung"}}}, None)
+    assert "wc_giua_nha" in xn["veto_da_xac_nhan"]
     assert r["da_tinh"]["cua_chu_bep"] is not None
 
 
@@ -102,9 +107,16 @@ def test_bo_cuc_so_do_thang_luoi_cu():
     assert r["mat_bang"]["nguon"] == "so_do"
 
 
-def test_so_do_bao_cau_thang_giua_nha():
+def test_so_do_goi_y_cau_thang_giua_nha():
     r = bc.luan({"huong_nha_do": 90.0, "so_do": {"rong": 6, "sau": 12, "vat": {"cau_thang": [0.5, 0.5]}}}, None)
-    assert "cau_thang_giua_nha" in {d["ma"] for d in r["dien_giai"]["dau_hieu"]}
+    assert "cau_thang_giua_nha" in {g["ma"] for g in r["mat_bang"]["dau_hieu_goi_y"]}
+    assert r["dien_giai"]["dau_hieu"] == []
+
+
+def test_wc_khai_tay_giua_nha_van_luan():
+    """Người dùng tự chọn WC ở Trung cung (lưới 3×3) vẫn là lời khai — luận như cũ."""
+    r = bc.luan({**BC, "vi_tri": {"ve_sinh": "Trung cung"}}, None)
+    assert "wc_giua_nha" in {d["ma"] for d in r["dien_giai"]["dau_hieu"]}
 
 
 

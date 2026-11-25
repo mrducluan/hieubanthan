@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
 import { themHocLuanGiai } from "@/lib/hoc-tuvi";
 import { LuanGiaiPTZ as Input } from "@/lib/bo-cuc-zod";
+import { boSoDo } from "@/lib/lui-so-do";
 
 export async function POST(req: Request) {
   const parsed = Input.safeParse(await req.json().catch(() => null));
@@ -13,5 +14,8 @@ export async function POST(req: Request) {
   const dau = dauNguoiGoi(req);
   let kq = await goiEngineDaKiem({ ...parsed.data, ...them }, "/v1/phongthuy/luan-giai", dau);
   if (!kq.ok && Object.keys(them).length) kq = await goiEngineDaKiem(parsed.data, "/v1/phongthuy/luan-giai", dau);
+  // Deploy lệch: engine cũ chưa nhận sơ đồ tỉ lệ (`nha.bo_cuc.so_do`) → đọc lại không kèm sơ đồ.
+  const banLui = !kq.ok && kq.res.status === 422 ? boSoDo(parsed.data) : null;
+  if (banLui) kq = await goiEngineDaKiem(banLui, "/v1/phongthuy/luan-giai", dau);
   return kq.ok ? NextResponse.json(kq.body) : kq.res;
 }

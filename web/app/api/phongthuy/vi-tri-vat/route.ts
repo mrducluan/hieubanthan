@@ -2,6 +2,7 @@
 // → engine tính phương, sơn từng vật, Cửa – Chủ – Bếp từng tầng, du niên với mệnh, sao Huyền Không. Web chỉ kiểm đầu vào.
 import { z } from "zod";
 import { goiEngine } from "@/lib/proxy";
+import { boBanCong } from "@/lib/lui-so-do";
 
 const Do = z.number().min(0).lt(360);
 const Vat = z.object({
@@ -32,5 +33,5 @@ const Input = z.object({
 }).strict();
 
 export function POST(req: Request) {
-  return goiEngine(req, Input, "/v1/phongthuy/vi-tri-vat");
+  return goiEngine(req, Input, "/v1/phongthuy/vi-tri-vat", boBanCong);
 }

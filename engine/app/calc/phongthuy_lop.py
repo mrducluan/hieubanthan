@@ -42,12 +42,19 @@ def du_nien(a: str, b: str) -> str:
     return pt.bang_huong(a)[pt.QUAI[b][1]]
 
 
-def sao_dau(chu: str, cua: str, cua_lech: bool = False) -> str:
-    """Du niên lớp 1 (cổng): từ phía nhà chính — hoặc phía cổng khi cổng lệch — tới phía hướng (đối diện nhà chính)."""
-    return du_nien(cua if cua_lech else chu, DOI_DIEN[chu])
+def cong_lech(chu: str, cua: str) -> bool:
+    """Cổng không nằm ở phía đối diện nhà chính (phía hướng) = cổng lệch một bên (門偏一邊) — khớp cả 9 ví dụ sách."""
+    return cua != DOI_DIEN[chu]
 
 
-def day_lop(chu: str, cua: str, so_lop: int, cua_lech: bool = False) -> list[str] | None:
+def sao_dau(chu: str, cua: str, cua_lech: bool | None = None) -> str:
+    """Du niên lớp 1 (cổng): từ phía nhà chính — hoặc phía cổng khi cổng lệch — tới phía hướng (đối diện nhà chính).
+    `cua_lech` None → tự suy (`cong_lech`)."""
+    lech = cong_lech(chu, cua) if cua_lech is None else cua_lech
+    return du_nien(cua if lech else chu, DOI_DIEN[chu])
+
+
+def day_lop(chu: str, cua: str, so_lop: int, cua_lech: bool | None = None) -> list[str] | None:
     """Du niên của từng lớp (lớp 1 = cổng). Tĩnh trạch → []; hoá trạch → None (chưa làm)."""
     k = loai(so_lop)
     if k == "tinh":
@@ -92,12 +99,14 @@ def _muc(dn: str, qh: str) -> str:
     return "thuan" if cat and hop else "can_chu_dong" if not cat and not hop else "can_bang"
 
 
-def danh_gia(chu: str, cua: str, so_lop: int, lop_chu: int | None = None, cua_lech: bool = False) -> dict:
+def danh_gia(chu: str, cua: str, so_lop: int, lop_chu: int | None = None, cua_lech: bool | None = None) -> dict:
     """`lop_chu` = lớp có dãy nhà chính (cao, lớn nhất), đếm từ cổng = 1. Trả dãy sao, đánh giá lớp nhà chính, các lớp
     nên làm cao, cờ nhà 'đè sát' (cặp cửa – chủ xấu nhưng sao tốt rơi đúng nhà chính)."""
     k = loai(so_lop)
     if lop_chu is not None and not 1 <= lop_chu <= so_lop:
         raise ValueError("Lớp nhà chính phải nằm trong số lớp của nhà")
+    if cua_lech is None:
+        cua_lech = cong_lech(chu, cua)
     day = day_lop(chu, cua, so_lop, cua_lech)
     if not day:
         return {"loai": k, "so_lop": so_lop, "lop": day, "lop_chu": None, "lop_nen_cao": [], "ap_sat": False}

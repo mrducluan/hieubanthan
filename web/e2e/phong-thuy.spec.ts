@@ -232,7 +232,14 @@ test("Q2/Q1/Q4/Q5/Q6 + TY-2 đợt 2: hồ sơ lưới cũ tự thành sơ đồ
   await expect(kq.getByTestId("kq-mat-bang")).toContainText("Nhà vệ sinh ở vùng giữa nhà");
   await expect(kq.getByTestId("kq-mat-bang")).toContainText("Cửa chính nhìn thẳng ra ban công");
   await expect(kq.getByTestId("kq-mat-bang")).toContainText("Đọc từ sơ đồ nhà theo tỉ lệ");
-  await expect(kq.getByTestId("dau-hieu-wc_giua_nha")).toContainText("suy từ mặt bằng");
+  // Gói 1 (SD-1): sơ đồ chỉ GỢI Ý — chưa xác nhận thì không luận; bấm Có rồi xem lại mới tính.
+  await expect(kq.getByTestId("dau-hieu-wc_giua_nha")).toHaveCount(0);
+  const goiY = kq.getByTestId("ks-so-do-goi-y");
+  await goiY.getByTestId("ks-goi-y-wc_giua_nha").getByRole("button", { name: "Có" }).click();
+  await goiY.getByTestId("ks-goi-y-cua_thong_ban_cong").getByRole("button", { name: "Có" }).click();
+  await expect(goiY).toHaveCount(0);
+  await ks.getByRole("button", { name: "Xem luận bố cục" }).click();
+  await expect(kq.getByTestId("dau-hieu-wc_giua_nha")).toBeVisible();
   await expect(kq.getByTestId("so-do-nha")).toContainText("Nhà vệ sinh");                         // UI-PT 2: sơ đồ 3×3 tô màu
   await expect(kq.getByTestId("dau-hieu-veto").first()).toBeVisible();
   await expect(kq.getByTestId("dau-hieu-xa_ngang").getByTestId("dau-hieu-viec")).toContainText("0 đồng");
@@ -705,6 +712,7 @@ test("Dương Trạch Tam Yếu: vòng 24 sơn + Cửa–Chủ–Bếp chạm tr
   for (const cap of ["cua_chu", "cua_bep", "chu_bep"]) await expect(ty.getByTestId(`tam-yeu-do-hinh-${cap}`)).toHaveCount(1);
   await expect(ty.getByTestId("tam-yeu-dieu-can").locator("li")).toHaveCount(3);
   await expect(ty.getByTestId("tam-yeu-sach")).toContainText("Dương Trạch Tam Yếu: những nguyên tắc đúng với nhà bạn");
+  await expect(ty.getByTestId("tam-yeu-sach-noi-bat").locator("li")).toHaveCount(3);     // gói 1: 3 điều đáng xem trước
   await expect(ty.getByTestId("tam-yeu-luu-y")).toContainText("không chịu trách nhiệm pháp lý");
   await expect(ty).not.toContainText(/YZ_SY_|trang_pdf|fengshui-yangzhai-kb|Vượng khí|đã thẩm định/i);
   // TY-2 đợt 3: nhà nhiều lớp — 8 lớp, nhà chính lớp 6 → engine đếm sao từng lớp (biến trạch), web chỉ vẽ.

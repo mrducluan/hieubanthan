@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { Check, Compass, Flame, Home } from "lucide-react";
 import { ChuB, useChuPT } from "@/components/huyen-hoc/chu-phong-thuy";
 import { LUOI_9 } from "@/components/huyen-hoc/SoDoNha";
-import { SachXuaGhi, type KhoiSachGhi } from "@/components/huyen-hoc/SachXuaGhi";
+import { SachXuaGhi, type KhoiSachGhi, type MucSachGhi } from "@/components/huyen-hoc/SachXuaGhi";
 import { DoHinhTamYeu } from "@/components/phong-thuy/DoHinhTamYeu";
 import { KetQuaNhieuLop, NhapNhieuLop, type LuaChonLop, type NhieuLopRes } from "@/components/phong-thuy/NhaNhieuLop";
 import { NHAN_MUC, type Muc } from "@/components/luan-giai/kieu";
@@ -46,6 +46,8 @@ export interface TamYeuRes {
   viec: { chi_phi: "0" | "co"; lam: string }[];
   can_cu: string[];
   sach_ghi: KhoiSachGhi | null;
+  /** Gói 1: tối đa 3 điều sách đáng xem trước (engine chọn — nhóm B trước, không nhóm C). */
+  sach_noi_bat?: MucSachGhi[];
   luu_y_tham_khao: string;
   nhom_c_an?: { so: number; loi: string };
   /** TY-2 đợt 3: nhà nhiều lớp (chỉ khi gửi `so_lop` và có phòng chính). */
@@ -113,7 +115,6 @@ export function TamYeuCuaChuBep({ huongCuaGoiY, namSinh, gioiTinh }: { huongCuaG
     if (lop && vt.chu) {
       q.set("so_lop", String(lop.so_lop));
       if (lop.lop_chu) q.set("lop_chu", String(lop.lop_chu));
-      if (lop.cua_lech) q.set("cua_lech", "1");
     }
     fetch(urlTheoNgonNgu(`/api/phongthuy/tam-yeu/so-do?${q.toString()}`))
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error("loi"))))
@@ -327,6 +328,20 @@ export function SachTamYeu({ kq, coNamSinh, du18, onDu18 }: { kq: TamYeuRes; coN
     <>
         {!en && (kq.sach_ghi || kq.nhom_c_an || du18) && (
           <div className="mt-5 space-y-2" data-testid="tam-yeu-sach">
+            {kq.sach_noi_bat && kq.sach_noi_bat.length > 0 && (
+              <div className="rounded-xl border border-gold/40 bg-gold/5 p-4" data-testid="tam-yeu-sach-noi-bat">
+                <p className="text-xs uppercase tracking-wide text-gold">{c("ty.noi_bat")}</p>
+                <ol className="mt-2 space-y-2 text-sm">
+                  {kq.sach_noi_bat.map((m, i) => (
+                    <li key={i}>
+                      <p className="text-fg">{m.loi}</p>
+                      {m.viec && <p className="mt-0.5 text-fg-muted">{c("ty.viec_nho")} {m.viec}</p>}
+                      <p className="mt-0.5 text-[11px] text-fg-faint">{m.ve}</p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
             {kq.sach_ghi && <SachXuaGhi khoi={kq.sach_ghi} moDun="phongthuy" tieuDe={c("ty.sach_tieu_de")} />}
             {(kq.nhom_c_an || du18) && !coNamSinh && (
               <div className="rounded-xl border border-line/70 bg-surface/40 p-3 text-xs text-fg-muted" data-testid="tam-yeu-nhom-c">

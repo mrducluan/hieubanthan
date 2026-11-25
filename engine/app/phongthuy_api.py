@@ -592,7 +592,7 @@ def api_tam_yeu_so_do(
     ban_tho: _QuaiTamYeu | None = Query(default=None, description="TY-2: quái phương vị bàn thờ (hồ sơ nhà)"),
     so_lop: int | None = Query(default=None, ge=1, le=15, description="TY-2 đợt 3: số lớp từ cổng vào (1 = một sân)"),
     lop_chu: int | None = Query(default=None, ge=1, le=15, description="TY-2 đợt 3: lớp có dãy nhà chính (cao, lớn nhất)"),
-    cua_lech: bool = Query(default=False, description="TY-2 đợt 3: cổng lệch một bên"),
+    cua_lech: bool | None = Query(default=None, description="TY-2 đợt 3: cổng lệch một bên — bỏ trống thì engine tự suy"),
 ) -> dict:
     """Du niên ba cặp cửa–chủ, cửa–bếp, chủ–bếp (một bộ tính với báo cáo Nhà của bạn), mức theo thang chung, gợi ý
     phía đặt bếp, việc nên làm và khối sách xưa theo khuôn SX-C (nhóm C chỉ khi người đọc đủ 16 tuổi). TY-2: thêm

@@ -59,7 +59,7 @@ def _goi_y_bep(cua: str, chu: str | None) -> list[dict]:
 def so_do(cua: str, chu: str | None = None, bep: str | None = None, tuoi: int | None = None, *,
           ve_sinh: str | None = None, ban_tho: str | None = None, menh: str | None = None, khac_nhom_nguoi: bool = False,
           dau_hieu: list[str] | None = None, nhieu_tang: bool = False, cua_sat_ranh: str | None = None,
-          so_lop: int | None = None, lop_chu: int | None = None, cua_lech: bool = False) -> dict:
+          so_lop: int | None = None, lop_chu: int | None = None, cua_lech: bool | None = None) -> dict:
     """`cua`, `chu`, `bep` = quái phương vị (nhìn từ tâm nhà). `tuoi` (tuổi tròn của người đọc, nếu biết) chỉ quyết định
     có hiện ghi chép nhóm C hay không — không đổi mức nào. TY-2: `ve_sinh`, `ban_tho` (quái), `menh` (mệnh quái người chủ),
     `khac_nhom_nguoi`, `dau_hieu` (đã xác nhận), `nhieu_tang` → nguyên tắc Tam Yếu / điều Minh Kính đúng với nhà này.
@@ -128,6 +128,7 @@ def so_do(cua: str, chu: str | None = None, bep: str | None = None, tuoi: int | 
         "viec": viec,
         "can_cu": can_cu,
         "sach_ghi": sach,
+        "sach_noi_bat": noi_bat(sach),
         "luu_y_tham_khao": cc["luu_y_tham_khao"],
     }
     if so_lop is not None and chu:
@@ -404,7 +405,7 @@ def nhom_sach(cua: str, chu: str | None = None, bep: str | None = None, *, ve_si
     return [x for x in (("tam_yeu_nguyen_tac", ap["ten_nhom_nguyen_tac"], g1), ("minh_kinh", ap["ten_nhom_minh_kinh"], g2)) if x[2]]
 
 
-def nhieu_lop(cua: str, chu: str, so_lop: int, lop_chu: int | None = None, cua_lech: bool = False) -> dict:
+def nhieu_lop(cua: str, chu: str, so_lop: int, lop_chu: int | None = None, cua_lech: bool | None = None) -> dict:
     """TY-2 đợt 3 — nhà nhiều lớp (tĩnh / động / biến / hoá trạch): phép tính ở `calc.phongthuy_lop`, lời ở KB
     `cong_cu.nhieu_lop`. Lớp 1 = cổng; `lop_chu` = lớp có dãy nhà chính. Hoá trạch (≥ 11 lớp) chỉ nêu loại, chưa tính."""
     k = _cc()["nhieu_lop"]
@@ -435,8 +436,17 @@ def nhieu_lop(cua: str, chu: str, so_lop: int, lop_chu: int | None = None, cua_l
                                      du_nien=ten_dn(r["lop"][0]["du_nien"])),
                     cc["day"].format(ds="; ".join(f'{k["lop_ten"].format(so=x["so"])} {k["sao"][x["du_nien"]]}' for x in r["lop"])),
                     cc["luat_dong" if r["loai"] == "dong" else "luat_bien"]]
-    if cua_lech:
+    if r["cua_lech"]:
         ra["can_cu"].append(k["cua_lech"])
     if so_lop == 7:
         ra["can_cu"].append(k["bay_lop"])
     return ra
+
+
+def noi_bat(sach: dict | None, toi_da: int = 3) -> list[dict]:
+    """Gói 1 — tối đa `toi_da` điều sách đáng xem trước: "Nên chú ý" (nhóm B) trước, rồi nhóm A, theo thứ tự nhóm
+    engine đã xếp (nguyên tắc Tam Yếu ưu tiên trước). Không lấy nhóm C (để trong khối gập). Chỉ chọn, không viết lời mới."""
+    if not sach:
+        return []
+    cac = [m for g in sach.get("nhom", []) for m in g.get("muc", [])]
+    return ([m for m in cac if m.get("nhom") == "B"] + [m for m in cac if m.get("nhom") == "A"])[:toi_da]

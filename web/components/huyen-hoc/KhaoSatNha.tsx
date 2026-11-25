@@ -40,6 +40,8 @@ interface MatBangKq {
   o_9: { hang: number; cot: number; ti_le: number; phuong: string | null; khuyet: boolean }[];
   phuong_phong: Record<string, { o?: number[]; diem?: number[]; phuong: string | null; trung_cung: boolean }>;
   wc_trung_cung: boolean; cua_thong_ban_cong: { lech_do: number; thang_hang: boolean } | null; canh_bao: string[];
+  /** Gói 1 (SD-1): dấu hiệu sơ đồ GỢI Ý — chưa luận cho tới khi người dùng xác nhận. */
+  dau_hieu_goi_y?: { ma: string; hoi: string }[];
 }
 interface KetQua {
   /** Q1 / Q2 / Q4 / Q5 / Q6 */
@@ -350,12 +352,13 @@ export function KhaoSatNha({ sinh, doHuongGoiY }: {
         {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
       </div>
 
-      {kq && <TenHienProvider ten={[kq.ten_hien]}><KetQuaBoCuc kq={kq} /></TenHienProvider>}
+      {kq && <TenHienProvider ten={[kq.ten_hien]}><KetQuaBoCuc kq={kq} daTra={new Set([...dau, ...khongCo])}
+        onGoiY={(ma, co) => { if (co) tichO(ma, true); else setKhongCo((x) => new Set(x).add(ma)); }} /></TenHienProvider>}
     </section>
   );
 }
 
-function KetQuaBoCuc({ kq }: { kq: KetQua }) {
+function KetQuaBoCuc({ kq, daTra, onGoiY }: { kq: KetQua; daTra: Set<string>; onGoiY: (ma: string, co: boolean) => void }) {
   const d = kq.da_tinh;
   const giai = Object.fromEntries(kq.dien_giai.vi_tri.map((x) => [x.phong, x]));
   const { c: t, en, huong, quai, nhom, duNien } = useChuPT();
@@ -473,6 +476,20 @@ function KetQuaBoCuc({ kq }: { kq: KetQua }) {
             ))}
           </div>
           {kq.mat_bang.canh_bao.map((c) => <p key={c} className="mt-1 text-xs text-fg-faint">{c}</p>)}
+          {(kq.mat_bang.dau_hieu_goi_y ?? []).filter((g) => !daTra.has(g.ma)).length > 0 && (
+            <div className="mt-3 rounded-xl border border-gold/40 bg-gold/5 p-3 text-sm" data-testid="ks-so-do-goi-y">
+              <p className="text-xs text-fg-muted">{t("ks.so_do_goi_y")}</p>
+              <ul className="mt-1.5 space-y-1.5">
+                {(kq.mat_bang.dau_hieu_goi_y ?? []).filter((g) => !daTra.has(g.ma)).map((g) => (
+                  <li key={g.ma} className="flex flex-wrap items-center gap-2" data-testid={`ks-goi-y-${g.ma}`}>
+                    <span className="text-fg">{g.hoi}</span>
+                    <button type="button" className="min-h-[32px] rounded-full border border-gold/60 px-2.5 text-xs text-gold" onClick={() => onGoiY(g.ma, true)}>{t("ks.goi_y_co")}</button>
+                    <button type="button" className="min-h-[32px] rounded-full border border-line px-2.5 text-xs text-fg-muted" onClick={() => onGoiY(g.ma, false)}>{t("ks.goi_y_khong")}</button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       )}
 

@@ -2,6 +2,7 @@
 // + dấu hiệu (Q1 veto, Q4 hai lối giải thích, Q5 việc theo chi phí, Q6 luật căn hộ). Proxy mỏng; không lưu gì.
 import { z } from "zod";
 import { goiEngine } from "@/lib/proxy";
+import { boSoDo } from "@/lib/lui-so-do";
 import { BoCucZ, GocNhinZ } from "@/lib/bo-cuc-zod";
 
 const Input = z.object({
@@ -15,5 +16,5 @@ const Input = z.object({
 }).strict();
 
 export function POST(req: Request) {
-  return goiEngine(req, Input, "/v1/phongthuy/bo-cuc");
+  return goiEngine(req, Input, "/v1/phongthuy/bo-cuc", boSoDo);
 }
