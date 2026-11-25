@@ -9,6 +9,8 @@ import { taoChu } from "@/lib/chu-trang";
 import { CHU_PHONG_THUY_UI } from "@/lib/chu/phong-thuy";
 import { tenTheo } from "@/lib/ten-hien";
 import { luoiCuSangSoDo } from "@/lib/mat-bang-khung";
+import { namXayGui } from "@/lib/nha-toi";
+export { KHOANG_XAY, namXayGui, nguoiTuGiaDinh } from "@/lib/nha-toi";
 
 /** EN-ALL GĐ 5: chữ bản Anh của tên nhà / tên căn / loại nhà (bản Việt không dùng). */
 const PT_EN = taoChu(CHU_PHONG_THUY_UI, null, "en");
@@ -46,6 +48,8 @@ export const HoSoNha = z.object({
   huong: z.enum(HUONG8).optional(),
   theo: z.enum(["cua", "ban_cong"]).default("cua"),
   nam_xay: z.number().int().min(1864).max(2150).optional(),
+  /** PT-NHA: chỉ nhớ KHOẢNG năm xây → vận (6–9, chip ở thẻ "Nhà của tôi"). Không cùng lúc với `nam_xay` (`datNamXay`). */
+  van_xay: z.number().int().min(1).max(9).optional(),
   toa: z.string().max(10).optional(),
   thanh_vien: z.array(ThanhVienNha).max(6).default([]),
   /** Loại nhà (Q6: căn hộ → luật thực hành căn hộ). */
@@ -174,10 +178,23 @@ function dangKy(f: () => void) {
 export function useHoSoNha(): HoSoNha | null | undefined {
   return useSyncExternalStore(dangKy, doc, () => undefined);
 }
+// ---------------------------------------------------------------- PT-NHA: thẻ "Nhà của tôi" — một chỗ nhập, mọi khối dùng
+/** Ghi năm xây: `{nam}` · `{van}` · `null` (không rõ — xoá cả hai). */
+export function datNamXay(v: { nam: number } | { van: number } | null): HoSoNha {
+  return luuHoSoNha("nam" in (v ?? {}) ? { nam_xay: (v as { nam: number }).nam, van_xay: undefined }
+    : v ? { van_xay: (v as { van: number }).van, nam_xay: undefined } : { nam_xay: undefined, van_xay: undefined });
+}
+/** Tên hướng engine trả có thuộc 8 hướng của hồ sơ không (giữ hồ sơ hợp lệ nếu engine đổi mã). */
+export const laHuong8 = (h: unknown): h is (typeof HUONG8)[number] => typeof h === "string" && (HUONG8 as readonly string[]).includes(h);
+/** Hồ sơ có hướng nhà chưa (số độ hoặc 8 hướng). */
+export const coHuongNha = (n: HoSoNha | null | undefined) => Boolean(n && (n.huong_do != null || n.huong));
+
 /** Đầu vào `nha` cho /api/phongthuy/luan-giai và /api/phongthuy/thang-nay từ hồ sơ nhà (null nếu chưa có hướng). */
-export function nhaTuHoSo(n: HoSoNha | null | undefined): { huong_do?: number; huong?: string; nam_xay?: number; toa?: string; theo: "cua" | "ban_cong" } | null {
+export function nhaTuHoSo(n: HoSoNha | null | undefined): { huong_do?: number; huong?: string; nam_xay?: number; van_xay?: number; toa?: string; theo: "cua" | "ban_cong" } | null {
   if (!n || (n.huong_do == null && !n.huong)) return null;
-  return { ...(n.huong_do != null ? { huong_do: n.huong_do } : { huong: n.huong }), ...(n.nam_xay ? { nam_xay: n.nam_xay } : {}), ...(n.toa ? { toa: n.toa } : {}), theo: n.theo };
+  // Có số độ thì toạ do ENGINE suy từ số độ — toạ sơn chọn tay (Huyền Không, khi chưa đo) chỉ dùng khi không có số độ,
+  // để mọi khối cùng một hướng (hồ sơ cũ có thể còn cả hai).
+  return { ...(n.huong_do != null ? { huong_do: n.huong_do } : { huong: n.huong, ...(n.toa ? { toa: n.toa } : {}) }), ...namXayGui(n), theo: n.theo };
 }
 export function tenNha(n: HoSoNha | null | undefined, en = false): string {
   if (en) {

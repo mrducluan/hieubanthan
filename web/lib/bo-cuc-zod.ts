@@ -51,6 +51,7 @@ export const LuanGiaiPTZ = z.object({
     huong_do: Do.optional(),
     huong: z.enum(["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"]).optional(),
     nam_xay: z.number().int().min(1864).max(2150).optional(),
+    van_xay: z.number().int().min(1).max(9).optional(),   // PT-NHA: chỉ nhớ khoảng năm xây → vận
     toa: z.string().max(10).optional(),
     theo: z.enum(["cua", "ban_cong"]).optional(),
     bo_cuc: BoCucZ.optional(),

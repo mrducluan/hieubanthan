@@ -14,6 +14,7 @@ from fastapi import APIRouter, BackgroundTasks, HTTPException, Query
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, ValidationError, field_validator, model_validator
 
 from app.calc import phongthuy as pt
+from app.calc.huyen_khong import nam_dau_van as hk_nam_dau_van
 from app.kb import phongthuy_kb as kbp
 from app.kb import tu_dien
 from app import ngon_ngu, nhat_ky
@@ -331,20 +332,37 @@ def api_hoi(inp: HoiPTInput, background: BackgroundTasks) -> dict:
     return {"engine_version": ENGINE_VERSION, **kq, "thuat_ngu": tu_dien.nhan_dien(kq.get("cau_tra_loi", ""), "phongthuy")}
 
 
+def _van_xay_field():
+    """PT-NHA: người dùng chỉ nhớ KHOẢNG năm xây (chip theo vận ở thẻ "Nhà của tôi") → gửi vận 1–9 thay năm cụ thể.
+    Bàn sao chỉ phụ thuộc vận; lời luận nói "vận …", không bịa năm."""
+    return Field(default=None, ge=1, le=9, description="Vận nhà xây (1–9) khi chỉ nhớ khoảng năm; không gửi cùng nam_xay")
+
+
+def _mot_nam_xay(nam_xay: int | None, van_xay: int | None) -> None:
+    if nam_xay is not None and van_xay is not None:
+        raise ValueError("chỉ gửi một trong hai: nam_xay hoặc van_xay")
+
+
 class HuyenKhongInput(BaseModel):
-    """PT-HK — hạ quái bàn Huyền Không: năm xây/nhập trạch + toạ sơn (tên 24 sơn hoặc độ la bàn)."""
+    """PT-HK — hạ quái bàn Huyền Không: năm xây/nhập trạch (hoặc vận) + toạ sơn (tên 24 sơn, độ la bàn của toạ, hoặc độ
+    HƯỚNG nhà — engine tự đổi sang toạ, web không cộng 180°)."""
     model_config = ConfigDict(extra="forbid")
 
-    nam_xay: int = Field(ge=1864, le=2150)
+    nam_xay: int | None = Field(default=None, ge=1864, le=2150)
+    van_xay: int | None = _van_xay_field()
     toa: str | None = Field(default=None, max_length=10, description="Toạ sơn, vd 'Tý', 'Nhâm'")
     do: float | None = Field(default=None, ge=0, lt=360, description="Độ la bàn của TOẠ (lưng nhà), 0 = chính Bắc")
+    huong_do: float | None = Field(default=None, ge=0, lt=360, description="Độ HƯỚNG nhà (mặt nhìn ra) — thay `do`")
     nam_xem: int | None = Field(default=None, ge=1900, le=2150)
     the_quai: bool | None = Field(default=None, description="Ép thế quái/hạ quái; mặc định: tự theo độ (lệch > 3°)")
 
     @model_validator(mode="after")
     def _can_toa(self) -> "HuyenKhongInput":
-        if (self.toa is None) == (self.do is None):
-            raise ValueError("cần đúng một trong hai: toa hoặc do")
+        if sum(x is not None for x in (self.toa, self.do, self.huong_do)) != 1:
+            raise ValueError("cần đúng một trong ba: toa, do hoặc huong_do")
+        if self.nam_xay is None and self.van_xay is None:
+            raise ValueError("cần nam_xay hoặc van_xay")
+        _mot_nam_xay(self.nam_xay, self.van_xay)
         return self
 
 
@@ -364,8 +382,10 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
 
     canh_bao = []
     toa = inp.toa
-    if inp.do is not None:
-        s = hk.son_tu_do(inp.do)
+    do_toa = inp.do if inp.do is not None else (round((inp.huong_do + 180) % 360, 2) if inp.huong_do is not None else None)
+    nam_xay = inp.nam_xay if inp.nam_xay is not None else hk.nam_dau_van(inp.van_xay)
+    if do_toa is not None:
+        s = hk.son_tu_do(do_toa)
         toa = s["son"]
         if s["canh_bao"] == "khong_vong":
             canh_bao.append({"loai": "khong_vong", "chi_tiet": L("pt.hk.khong_vong", "Toạ {do}° nằm đúng ranh giới hai sơn (không vong) — nên đo lại; bàn có thể sai hoàn toàn.", do=s['do'])})
@@ -374,8 +394,8 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
                                                                      lech=abs(s['lech']), son=_ten_son(toa))})
     the_quai = inp.the_quai if inp.the_quai is not None else any(c["loai"] == "kiem_huong" for c in canh_bao)
     try:
-        b = hk.trach_ban(inp.nam_xay, toa, the_quai=the_quai)
-        ha = hk.trach_ban(inp.nam_xay, toa) if the_quai else None
+        b = hk.trach_ban(nam_xay, toa, the_quai=the_quai)
+        ha = hk.trach_ban(nam_xay, toa) if the_quai else None
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
     if ha:
@@ -397,6 +417,12 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
         for c in b["cung"]
     ]
     tm = hk.thanh_mon(b["van"], toa)
+    if inp.van_xay is not None:                       # chỉ biết khoảng năm → không trả một năm cụ thể như thể đã biết
+        tu, den = hk.khoang_van(inp.van_xay)
+        b["nam_xay"] = None
+        b["khoang_xay"] = {"tu": tu, "den": den}
+    if inp.huong_do is not None:                      # chỉ khi web gửi hướng nhà: báo lại độ toạ engine đã đổi ra
+        b["do_toa"] = do_toa
     if ngon_ngu.la_viet():
         tm_ra = {**tm, **({"y": kb["thanh_mon"]} if kb.get("thanh_mon") else {})}
     else:
@@ -487,6 +513,7 @@ class NhaInput(BaseModel):
     huong_do: float | None = Field(default=None, ge=0, lt=360, description="Độ HƯỚNG nhà (mặt nhìn ra), 0 = chính Bắc")
     huong: Literal["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] | None = None
     nam_xay: int | None = Field(default=None, ge=1864, le=2150)
+    van_xay: int | None = _van_xay_field()
     toa: str | None = Field(default=None, max_length=10)
     theo: Literal["cua", "ban_cong"] = "cua"
     bo_cuc: _BoCuc | None = None
@@ -494,6 +521,11 @@ class NhaInput(BaseModel):
     quan_sat: list[Annotated[str, StringConstraints(pattern=r"^[a-z_]{3,40}$")]] = Field(default_factory=list, max_length=60)
     # TY-2 gói 2: nhà nhiều lớp (số lớp từ cổng vào, lớp có dãy nhà chính) — khai ở công cụ Cửa – Chủ – Bếp, lưu trên máy.
     nhieu_lop: "_NhieuLopNha | None" = None
+
+    @model_validator(mode="after")
+    def _mot_nam(self) -> "NhaInput":
+        _mot_nam_xay(self.nam_xay, self.van_xay)
+        return self
 
 
 class _NhieuLopNha(BaseModel):
@@ -557,6 +589,7 @@ class ThangNayInput(BaseModel):
     huong_do: float | None = Field(default=None, ge=0, lt=360)
     huong: Literal["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] | None = None
     nam_xay: int | None = Field(default=None, ge=1864, le=2150)
+    van_xay: int | None = _van_xay_field()
     toa: str | None = Field(default=None, max_length=10)
     ngay_xem: _dt.date | None = None
 
@@ -564,6 +597,7 @@ class ThangNayInput(BaseModel):
     def _can_huong(self) -> "ThangNayInput":
         if self.huong_do is None and self.huong is None:
             raise ValueError("cần huong_do hoặc huong")
+        _mot_nam_xay(self.nam_xay, self.van_xay)
         return self
 
 
@@ -679,8 +713,14 @@ class _NhaHoiGi(BaseModel):
     huong_do: float | None = Field(default=None, ge=0, lt=360)
     huong: Literal["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] | None = None
     nam_xay: int | None = Field(default=None, ge=1864, le=2150)
+    van_xay: int | None = _van_xay_field()
     loai_nha: Literal["nha_pho", "can_ho", "biet_thu", "nha_cap4", "khac"] | None = None
     bo_cuc: _BoCuc | None = None
+
+    @model_validator(mode="after")
+    def _mot_nam(self) -> "_NhaHoiGi":
+        _mot_nam_xay(self.nam_xay, self.van_xay)
+        return self
 
 
 class HoiGiInput(BaseModel):
@@ -780,6 +820,7 @@ class ViTriVatInput(BaseModel):
     truc_mau: list[float] | None = Field(default=None, min_length=1, max_length=120, description="Các mẫu la bàn khi đo trục (thay truc_do)")
     khung: KhungNhaInput | None = None
     nam_xay: int | None = Field(default=None, ge=1864, le=2150)
+    van_xay: int | None = _van_xay_field()
     sinh: SinhInput | None = None
     du_18: bool = False
     tang: list[TangViTriInput] = Field(min_length=1, max_length=6)
@@ -792,6 +833,7 @@ class ViTriVatInput(BaseModel):
             raise ValueError("số độ trục phải trong [0, 360)")
         if any(v.diem is not None for t in self.tang for v in t.vat) and self.khung is None:
             raise ValueError("có điểm trên khung thì cần kích thước khung")
+        _mot_nam_xay(self.nam_xay, self.van_xay)
         return self
 
 
@@ -812,7 +854,8 @@ def api_vi_tri_vat(inp: ViTriVatInput) -> dict:
     try:
         r = vtr.phan_tich([{"so": t.so, "vat": [{k: x for k, x in v.model_dump().items() if k not in _RIENG_SO_DO} for v in t.vat]}
                            for t in inp.tang], inp.huong_nha_do, truc,
-                          inp.khung.model_dump() if inp.khung else None, mq, inp.nam_xay, tuoi)
+                          inp.khung.model_dump() if inp.khung else None, mq,
+                          inp.nam_xay if inp.nam_xay is not None else (hk_nam_dau_van(inp.van_xay) if inp.van_xay else None), tuoi)
         them = _goi_y_so_do(inp)
     except ValueError as e:
         raise HTTPException(422, detail=str(e)[:300])

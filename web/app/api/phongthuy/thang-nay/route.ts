@@ -6,6 +6,7 @@ const Input = z.object({
   huong_do: z.number().min(0).lt(360).optional(),
   huong: z.enum(["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"]).optional(),
   nam_xay: z.number().int().min(1864).max(2150).optional(),
+  van_xay: z.number().int().min(1).max(9).optional(),   // PT-NHA: chỉ nhớ khoảng năm xây → vận
   toa: z.string().max(10).optional(),
   ngay_xem: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
 }).strict().refine((x) => x.huong_do !== undefined || x.huong !== undefined, "Cần hướng nhà");

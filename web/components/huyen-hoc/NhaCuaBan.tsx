@@ -4,9 +4,8 @@
 // Tầng đời thường hiện ngay (mức, hộp nổi bật, việc nên làm); tầng học thuật (du niên, phi tinh, cặp sao) gập trong
 // "Vì sao nói vậy". Không lưu gì; thành viên chỉ gửi năm sinh + giới tính.
 import { useEffect, useRef, useState } from "react";
-import { Home, Plus, X } from "lucide-react";
+import { Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input, Select } from "@/components/ui/input";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { ChipMuc } from "@/components/luan-giai/BaoCaoDoiSong";
 import { HopNoiBat, KiemChungBai, ViSao } from "@/components/luan-giai/HopNoiBat";
@@ -25,7 +24,8 @@ import { datGocNhin, TEN_GOC_NHIN, useGocNhin, type GocNhin } from "@/lib/goc-nh
 import { SoDoNha } from "@/components/huyen-hoc/SoDoNha";
 import { DoHinhTamYeu, type CapDoHinh } from "@/components/phong-thuy/DoHinhTamYeu";
 import { NHAN_MUC } from "@/components/luan-giai/kieu";
-import { boCucGui, nhieuLopGui, type HoSoNha } from "@/lib/ho-so-nha";
+import { coHuongNha, nhaGui, type HoSoNha } from "@/lib/ho-so-nha";
+import { DongNha } from "@/components/phong-thuy/NhaCuaToi";
 import { NutChiaSeNha } from "@/components/chia-se/NutChiaSeNha";
 import { Undo2, Wrench } from "lucide-react";
 import { ChanQr } from "@/components/khung/ChanQr";
@@ -35,7 +35,6 @@ import type { TenHien } from "@/lib/ten-hien";
 import { SachXuaNoi, type CauSachXua } from "@/components/huyen-hoc/SachXuaNoi";
 
 type Sinh = { birth_date: string; gender: "nam" | "nu"; moc_nam?: MocNam } | null;
-interface ThanhVien { vai: "vo" | "chong" | "con" | "cha_me" | "khac"; nam: string; gioi_tinh: "nam" | "nu" }
 interface Chuong {
   ma: string; tieu_de: string; cau_hoi?: string; muc: Muc | null; nhan_muc: string | null; tom_tat?: string; thieu?: string;
   hop: Hop[]; doan: string[]; can_cu: string[]; cau_tu_soi?: string | null;
@@ -68,19 +67,12 @@ interface BaoCao {
 /** 11 ý định chung (KB y_dinh_chung.json của engine) — chỉ mã để chọn; nhãn ở bảng chữ (`nc.y.<mã>`); engine tra đồ thị. */
 export const Y_DINH = ["nha_cua", "kinh_doanh_tien", "cong_viec", "tinh_cam", "gia_dinh", "suc_khoe", "hoc_hanh", "quan_he", "di_xa", "thoi_diem", "ban_than"] as const;
 
-const HUONG8 = ["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"];
-const VAI: ThanhVien["vai"][] = ["vo", "chong", "con", "cha_me", "khac"];
 
-export function NhaCuaBan({ sinh, doHuongGoiY, yDinhGoiY }: {
-  sinh: Sinh; doHuongGoiY: number | null;
+export function NhaCuaBan({ sinh, yDinhGoiY }: {
+  sinh: Sinh;
   /** HG-1: câu hỏi người dùng vừa chọn ở thẻ "Hỏi gì xem nấy" → chọn sẵn điều băn khoăn tương ứng (đổi tay vẫn được). */
   yDinhGoiY?: (typeof Y_DINH)[number] | null;
 }) {
-  const [doHuong, setDoHuong] = useState("");
-  const [huong, setHuong] = useState("");
-  const [theo, setTheo] = useState<"cua" | "ban_cong">("cua");
-  const [namXay, setNamXay] = useState("");
-  const [tv, setTv] = useState<ThanhVien[]>([]);
   const [bc, setBc] = useState<BaoCao | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
@@ -91,72 +83,42 @@ export function NhaCuaBan({ sinh, doHuongGoiY, yDinhGoiY }: {
   // UI-PT2 P7: đầu vào của bài đọc đang hiện — máy chủ đọc lại rồi ký thẻ chia sẻ (không ký ở trình duyệt).
   const [yeuCau, setYeuCau] = useState<Record<string, unknown> | null>(null);
   const gocNhin = useGocNhin();
-  const { c: t, en, huong: tenHuong } = useChuPT();
-  useEffect(() => { if (doHuongGoiY != null) setDoHuong(String(doHuongGoiY)); }, [doHuongGoiY]);
-  // KC-2: hồ sơ nhà lưu trên máy điền sẵn một lần (người dùng đổi tay thì giữ tay).
+  const { c: t, en } = useChuPT();
+  // PT-NHA: hướng, chỗ đo, năm xây (hoặc vận), người cùng ở, bố cục — tất cả từ hồ sơ nhà (thẻ "Nhà của tôi"); khối này
+  // không còn ô nhập riêng. Đổi căn đang xem (id khác) thì bỏ bài đọc cũ.
   const nhaLuu = useHoSoNha();
-  // Đồng bộ khi người dùng vừa đo hướng hoặc nhập năm xây ở phần trên (Hỏi gì xem nấy / Đo hướng) sau khi trang đã mở:
-  // chỉ điền khi ô đang trống, không ghi đè số người dùng đã gõ tay.
-  const huongDoLuu = nhaLuu?.huong_do, huongLuu = nhaLuu?.huong, namXayLuu = nhaLuu?.nam_xay, theoLuu = nhaLuu?.theo;
+  const idCan = useRef<string | null | undefined>(undefined);
   useEffect(() => {
-    if (doHuongGoiY != null) return;
-    if (huongDoLuu != null) setDoHuong((c) => (c === "" ? String(huongDoLuu) : c));
-    else if (huongLuu) setHuong((c) => (c === "" ? huongLuu : c));
-  }, [huongDoLuu, huongLuu, doHuongGoiY]);
-  useEffect(() => {
-    if (namXayLuu != null) setNamXay((c) => (c === "" ? String(namXayLuu) : c));
-  }, [namXayLuu]);
-  useEffect(() => {
-    if (theoLuu) setTheo(theoLuu);
-  }, [theoLuu]);
-  // UI-PT2 P5: điền lại khi đổi CĂN đang xem (id khác) — người dùng gõ tay trong cùng một căn thì giữ tay.
-  const daDien = useRef<string | null>(null);
-  useEffect(() => {
-    const khoa = nhaLuu ? `${nhaLuu.id ?? "_"}` : null;
-    if (!nhaLuu || daDien.current === khoa) return;
-    // Đổi căn thật = hai mã căn khác nhau (không phải lần điền đầu, không phải vừa "Lưu căn này để so" gắn id cho căn đang xem).
-    const doiCan = daDien.current !== null && daDien.current !== "_" && khoa !== "_";
-    const lanDau = daDien.current === null;
-    daDien.current = khoa;
-    if (!lanDau && !doiCan) return;
-    if (nhaLuu.huong_do != null) { setDoHuong(String(nhaLuu.huong_do)); setHuong(""); } else if (nhaLuu.huong) { setHuong(nhaLuu.huong); setDoHuong(""); }
-    setTheo(nhaLuu.theo);
-    if (nhaLuu.nam_xay || doiCan) setNamXay(nhaLuu.nam_xay ? String(nhaLuu.nam_xay) : "");
-    if (nhaLuu.thanh_vien.length || doiCan) setTv(nhaLuu.thanh_vien.map((x) => ({ vai: x.vai, nam: String(x.nam), gioi_tinh: x.gioi_tinh })));
-    if (doiCan) { setBc(null); setSoSanh(null); }
+    if (nhaLuu === undefined) return;
+    const id = nhaLuu?.id ?? null;
+    if (idCan.current !== undefined && idCan.current !== id && idCan.current !== null && id !== null) { setBc(null); setSoSanh(null); }
+    idCan.current = id;
   }, [nhaLuu]);
+
+  const dungYeuCau = (nhaDung: HoSoNha | null | undefined): Record<string, unknown> => {
+    const g = nhaDung ? nhaGui(nhaDung) : { nha: { theo: "cua" as const } };
+    return { ...(sinh ? { sinh } : {}), ...g, goc_nhin: gocNhin, ...(yDinh ? { y_dinh: yDinh } : {}) };
+  };
+  const coHuong = coHuongNha(nhaLuu);
+  // Bài đang hiện dựng từ hồ sơ cũ (người dùng vừa sửa ở "Nhà của tôi") → nhắc đọc lại, không tự gọi lại.
+  // Chỉ so phần NHÀ + người (đổi chip băn khoăn / góc nhìn không phải "nhà vừa đổi").
+  const khoaNha = (yc: Record<string, unknown>) => JSON.stringify([yc.sinh ?? null, yc.nha ?? null, yc.thanh_vien ?? null]);
+  const cu = Boolean(bc && yeuCau && !soSanh && khoaNha(dungYeuCau(nhaLuu)) !== khoaNha(yeuCau));
 
   const doc = async (nhaMoi?: HoSoNha | null) => {
     const nhaDung = nhaMoi === undefined ? nhaLuu : nhaMoi;
     setLoi(null);
-    const d = doHuong.trim() === "" ? null : Number(doHuong.replace(",", "."));
-    if (d != null && !(d >= 0 && d < 360)) { setLoi(t("nc.loi_do")); return; }
-    const nx = namXay.trim() === "" ? null : Number(namXay);
-    if (nx != null && !(nx >= 1864 && nx <= 2150)) { setLoi(t("nc.loi_nam")); return; }
-    if (d == null && !huong && !sinh) { setLoi(t("nc.loi_thieu")); return; }
-    const thanh_vien = tv.filter((x) => /^\d{4}$/.test(x.nam)).map((x) => ({ vai: x.vai, birth_year: Number(x.nam), gender: x.gioi_tinh }));
+    if (!coHuongNha(nhaDung) && !sinh) { setLoi(t("nc.loi_thieu")); return; }
     setDang(true);
     try {
-      // Q2/Q1: bố cục đã khai ở Khảo sát nhà (hồ sơ nhà trên máy) đi kèm → báo cáo có hình thế, trần mức, việc theo chi phí.
-      // Q2/Q1: bố cục đã khai ở Khảo sát nhà (hồ sơ nhà trên máy) + dấu hiệu đã xử lý (UI-PT 4) — một hàm dựng chung (lib/ho-so-nha).
-      const bo_cuc = boCucGui(nhaDung, d != null ? { huong_do: d } : huong ? { huong } : {});
-      const yc = {
-        ...(sinh ? { sinh } : {}),
-        nha: { ...(d != null ? { huong_do: d } : huong ? { huong } : {}), ...(nx != null ? { nam_xay: nx } : {}), theo, ...(bo_cuc ? { bo_cuc } : {}),
-          ...(nhaDung?.quan_sat?.length ? { quan_sat: nhaDung.quan_sat } : {}),
-          ...(nhieuLopGui(nhaDung) ? { nhieu_lop: nhieuLopGui(nhaDung)! } : {}) },
-        ...(thanh_vien.length ? { thanh_vien } : {}),
-        goc_nhin: gocNhin, ...(yDinh ? { y_dinh: yDinh } : {}),
-      };
+      // Q2/Q1: bố cục đã khai ở Khảo sát nhà + dấu hiệu đã xử lý (UI-PT 4) + nhiều lớp + người cùng ở — một hàm dựng chung.
+      const yc = dungYeuCau(nhaDung);
       const r = await postJson<BaoCao>("/api/phongthuy/luan-giai", yc);
       setYeuCau(yc);
       setBc(r);
-      // KC-2: nhớ nhà trên máy để Hôm nay, Khảo sát, Huyền Không dùng chung (không gửi máy chủ).
-      try {
-        luuHoSoNha({ ...(d != null ? { huong_do: d, huong: undefined } : huong ? { huong: huong as never, huong_do: undefined } : {}),
-          theo, ...(nx != null ? { nam_xay: nx } : {}), thanh_vien: thanh_vien.map((x) => ({ vai: x.vai, nam: x.birth_year, gioi_tinh: x.gender })) });
-      } catch { /* bỏ qua */ }
-      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "nha_cua_ban", co_nam_xay: nx != null, so_thanh_vien: thanh_vien.length, y_dinh: yDinh ?? "", goc_nhin: gocNhin, co_bo_cuc: Boolean(bo_cuc) });
+      const n = (yc.nha ?? {}) as Record<string, unknown>;
+      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "nha_cua_ban", co_nam_xay: Boolean(n.nam_xay || n.van_xay), so_thanh_vien: nhaDung?.thanh_vien.length ?? 0,
+        y_dinh: yDinh ?? "", goc_nhin: gocNhin, co_bo_cuc: Boolean(n.bo_cuc) });
     } catch (e) { setLoi(e instanceof Error ? e.message : t("nc.loi_doc")); }
     finally { setDang(false); }
   };
@@ -194,45 +156,7 @@ export function NhaCuaBan({ sinh, doHuongGoiY, yDinhGoiY }: {
         </div>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2">
-        <div className="space-y-1 text-sm">
-          <span className="text-fg-muted">{t("nc.huong_nhan")}</span>
-          <Input inputMode="decimal" value={doHuong} onChange={(e) => setDoHuong(e.target.value)} placeholder={t("nc.vi_du_do")} aria-label={t("nc.do_aria")} />
-          <Select value={huong} onChange={(e) => setHuong(e.target.value)} aria-label={t("nc.chon_aria")} className="h-10 text-sm" disabled={doHuong.trim() !== ""}>
-            <option value="">{t("nc.chon_8")}</option>
-            {HUONG8.map((h) => <option key={h} value={h}>{tenHuong(h)}</option>)}
-          </Select>
-          <div className="flex gap-3 pt-1 text-xs text-fg-muted">
-            <label className="flex cursor-pointer items-center gap-1.5"><input type="radio" className="size-3.5 accent-[rgb(var(--gold))]" checked={theo === "cua"} onChange={() => setTheo("cua")} />{t("nc.theo_cua")}</label>
-            <label className="flex cursor-pointer items-center gap-1.5"><input type="radio" className="size-3.5 accent-[rgb(var(--gold))]" checked={theo === "ban_cong"} onChange={() => setTheo("ban_cong")} />{t("nc.theo_ban_cong")}</label>
-          </div>
-        </div>
-        <div className="space-y-1 text-sm">
-          <span className="text-fg-muted">{t("nc.nam_nhan")}</span>
-          <Input inputMode="numeric" value={namXay} onChange={(e) => setNamXay(e.target.value.replace(/\D/g, "").slice(0, 4))} placeholder={t("nc.vi_du_nam")} aria-label={t("nc.nam_aria")} />
-          <div className="pt-1">
-            <span className="text-fg-muted">{t("nc.cung_o")}</span>
-            <ul className="mt-1 space-y-1.5">
-              {tv.map((x, i) => (
-                <li key={i} className="flex items-center gap-1.5">
-                  <Select value={x.vai} onChange={(e) => setTv((a) => a.map((y, j) => j === i ? { ...y, vai: e.target.value as ThanhVien["vai"] } : y))} aria-label={t("nc.vai_aria")} className="h-9 w-28 text-xs">
-                    {VAI.map((m) => <option key={m} value={m}>{t(`nc.vai.${m}`)}</option>)}
-                  </Select>
-                  <Input inputMode="numeric" value={x.nam} onChange={(e) => setTv((a) => a.map((y, j) => j === i ? { ...y, nam: e.target.value.replace(/\D/g, "").slice(0, 4) } : y))} placeholder={t("nc.nam_sinh")} aria-label={t("nc.nam_sinh_aria", { so: String(i + 1) })} className="h-9 w-24 text-xs" />
-                  <Select value={x.gioi_tinh} onChange={(e) => setTv((a) => a.map((y, j) => j === i ? { ...y, gioi_tinh: e.target.value as "nam" | "nu" } : y))} aria-label={t("nc.gioi_aria")} className="h-9 w-20 text-xs">
-                    <option value="nam">{t("nc.nam")}</option><option value="nu">{t("nc.nu")}</option>
-                  </Select>
-                  <button type="button" aria-label={t("nc.bo_aria")} onClick={() => setTv((a) => a.filter((_, j) => j !== i))} className="grid size-9 place-items-center rounded-lg text-fg-faint hover:text-fg"><X className="size-4" /></button>
-                </li>
-              ))}
-            </ul>
-            {tv.length < 6 && (
-              <button type="button" onClick={() => setTv((a) => [...a, { vai: "vo", nam: "", gioi_tinh: "nu" }])}
-                className="mt-1.5 inline-flex items-center gap-1 text-xs text-gold hover:underline"><Plus className="size-3.5" /> {t("nc.them")}</button>
-            )}
-          </div>
-        </div>
-      </div>
+      <DongNha namTuyChon testId="dong-nha-nc" />
       <div className="space-y-2 text-sm" data-testid="nha-y-dinh">
         <span className="text-fg-muted">{t("nc.ban_khoan")}</span>
         <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label={t("nc.ban_khoan_aria")}>
@@ -249,7 +173,13 @@ export function NhaCuaBan({ sinh, doHuongGoiY, yDinhGoiY }: {
           ))}
         </div>
       </div>
-      <Button onClick={() => void doc()} disabled={dang}>{dang ? t("nc.dang_doc") : t("nc.doc")}</Button>
+      {cu && (
+        <p className="flex flex-wrap items-center gap-2 rounded-xl border border-gold/40 bg-gold/5 px-3 py-2 text-xs text-fg-muted" role="status" data-testid="nha-doi">
+          {t("nt.doi_nha")}
+          <button type="button" onClick={() => void doc()} disabled={dang} className="min-h-8 rounded-full border border-gold/60 px-3 text-gold">{t("nt.doc_lai")}</button>
+        </p>
+      )}
+      <Button onClick={() => void doc()} disabled={dang || (!coHuong && !sinh)}>{dang ? t("nc.dang_doc") : t("nc.doc")}</Button>
       {!sinh && <p className="text-xs text-fg-faint">{t("nc.chua_sinh")}</p>}
       {loi && <BaoLoi loi={loi} thuLai={() => void doc()} />}
 

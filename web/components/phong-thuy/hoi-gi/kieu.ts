@@ -1,6 +1,6 @@
 // HG-1 — kiểu dữ liệu của "Hỏi gì xem nấy" (khớp engine `/v1/phongthuy/hoi-gi`) + dựng đầu vào `nha` từ hồ sơ nhà trên máy.
 // Tệp thuần (không React): web chỉ chuyển dữ kiện người dùng đã khai, không tính gì.
-import { boCucGui, type HoSoNha } from "@/lib/ho-so-nha";
+import { boCucGui, namXayGui, type HoSoNha } from "@/lib/ho-so-nha";
 import type { Muc } from "@/components/luan-giai/kieu";
 
 export const MA_CAU = ["cua_chinh", "bo_cuc", "gia_dinh", "han_nam", "so_sanh", "mo_quan"] as const;
@@ -27,7 +27,7 @@ export interface Nguoi2 { nam: number; gioi_tinh: "nam" | "nu" }
 
 type DauHieuGui = { co: boolean; nguon?: "nguoi_dung" | "anh" | "video"; xac_nhan?: boolean };
 export interface NhaHoiGi {
-  huong_do?: number; huong?: string; nam_xay?: number; loai_nha?: string;
+  huong_do?: number; huong?: string; nam_xay?: number; van_xay?: number; loai_nha?: string;
   bo_cuc?: { dau_hieu?: Record<string, DauHieuGui>; vi_tri?: Record<string, string> };
 }
 
@@ -46,7 +46,7 @@ export function nhaHoiGi(n: HoSoNha | null | undefined): NhaHoiGi | undefined {
   };
   const nha: NhaHoiGi = {
     ...(n.huong_do != null ? { huong_do: n.huong_do } : n.huong ? { huong: n.huong } : {}),
-    ...(n.nam_xay ? { nam_xay: n.nam_xay } : {}),
+    ...namXayGui(n),
     ...(n.loai_nha ? { loai_nha: n.loai_nha } : {}),
     ...(Object.keys(bo_cuc).length ? { bo_cuc } : {}),
   };

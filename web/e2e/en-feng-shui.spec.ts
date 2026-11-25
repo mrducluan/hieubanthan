@@ -113,9 +113,16 @@ test.describe("/en/feng-shui trên trình duyệt", () => {
     await expect(kq).toContainText("Xun (SE2)");
     await expect(kq).toContainText("Sheng Qi");
 
+    // PT-NHA: chốt hướng → thẻ "My home" (một chỗ nhập loại nhà, năm xây, người cùng ở) — chữ Anh
+    const the = page.getByTestId("the-nha-cua-toi");
+    await expect(the).toContainText("Locked at 135° — the home faces South-East");
+    await the.getByTestId("nt-nam").getByTestId("nam-nhap").fill("2008");
+    await the.getByTestId("nt-nam").getByTestId("nam-luu").click();
+    await expect(the.getByTestId("nt-nam")).toContainText("2008");
+
     // Nhà của bạn: bài đọc 5 chương (khung báo cáo chung), sơ đồ nhà; không lưu tài khoản / thẻ chia sẻ / nhắc việc ở bản Anh
     const nc = page.getByTestId("nha-cua-ban");
-    await nc.getByRole("textbox", { name: "Year built or moved in" }).fill("2008");
+    await expect(nc.getByTestId("dong-nha-nc")).toContainText("Using my home:");
     await nc.getByRole("button", { name: "Read my home" }).click();
     await expect(page.getByTestId("bao-cao-nha")).toBeVisible({ timeout: 60_000 });
     await expect(page.getByTestId("bao-cao-nha")).toContainText("What matters most");
@@ -135,11 +142,9 @@ test.describe("/en/feng-shui trên trình duyệt", () => {
     const docKy = kqbc.getByRole("link", { name: "Read more about this sign" }).first();
     expect(await docKy.getAttribute("href")).toMatch(/^\/en\/feng-shui\/home-signs\//);
 
-    // Huyền Không: lập bàn từ độ toạ gợi ý → bàn 3×3 tiếng Anh
+    // Huyền Không: hướng 135° + năm 2008 từ "My home" → tự lập bàn 3×3 tiếng Anh (không nhập lại, không bấm)
     await page.getByRole("button", { name: "Use 315° for the Flying Star chart" }).click();
-    await page.getByRole("button", { name: "Set up the chart" }).click();
     const hk = page.getByTestId("ban-huyen-khong");
-    // Năm xây 2008 đã nhập ở "Your home" tự điền sang Huyền Không (không bắt nhập lại) → vận 8.
     await expect(hk).toContainText("Period 8", { timeout: 30_000 });
     await expect(hk).toContainText(/mountain star/i);
 

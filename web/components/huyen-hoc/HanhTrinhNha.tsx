@@ -59,8 +59,8 @@ export function HanhTrinhNha({ mq, coSinh, sinh = null }: { mq: { quai: string; 
       trang_thai: coKhaoSat ? "xong" : "san_sang",
       chi: coKhaoSat ? [soPhong ? (soPhong === 1 ? t("ht.phong_1") : t("ht.phong", { so: String(soPhong) })) : "", soDau ? (soDau === 1 ? t("ht.dau_hieu_1") : t("ht.dau_hieu", { so: String(soDau) })) : "", bc?.mat_bang || soDoGui(nha) ? t("ht.mat_bang") : ""].filter(Boolean).join(" · ") : t("ht.b4_can") },
     { ma: "nam", ten: t("ht.b5"), neo: "#huyen-khong",
-      trang_thai: nha?.nam_xay && (nha.toa || nha.huong_do != null) ? "xong" : coHuong ? "san_sang" : "cho",
-      chi: nha?.nam_xay ? t("ht.b5_xong", { nam: String(nha.nam_xay) }) : t("ht.b5_can") },
+      trang_thai: (nha?.nam_xay || nha?.van_xay) && (nha.toa || nha.huong_do != null) ? "xong" : coHuong ? "san_sang" : "cho",
+      chi: nha?.nam_xay ? t("ht.b5_xong", { nam: String(nha.nam_xay) }) : nha?.van_xay ? t("ht.b5_xong_van", { van: String(nha.van_xay) }) : t("ht.b5_can") },
   ];
   const daXong = buoc.filter((b) => b.trang_thai === "xong").length;
 
