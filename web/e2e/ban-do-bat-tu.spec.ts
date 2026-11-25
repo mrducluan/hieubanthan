@@ -1,0 +1,127 @@
+// BD-1 — "Bản đồ lá số" Bát tự: engine THẬT dựng nghĩa từng chữ + dòng thời gian; web chỉ vẽ. Kiểm: 8 ô, bảng nghĩa
+// bốn lớp, nối sang ô khác, bốn cách xem, kể lại năm đã qua dùng chung câu trả lời với "Cách nào đúng với bạn?", nút đọc
+// chương mở đúng chương báo cáo, điện thoại 360px không tràn ngang, sự kiện đo không mang năm.
+import { test, expect } from "@playwright/test";
+import { napHoSo } from "./_hoso";
+import FX from "./fixtures/luan-giai-bat-tu.json";
+
+const LA_SO = { birth_date: "1990-05-17", birth_time: "12:30", gender: "nam", noi_sinh: "ha-noi" };
+const NHAN: Record<string, string> = { thuan: "Khá suôn sẻ", can_bang: "Bình thường", can_chu_dong: "Khá vất vả" };
+
+test.beforeEach(async ({ page }) => {
+  await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: false, gia: 10 } }));
+  await page.route("**/api/battu/luan-giai", (r) => r.fulfill({ json: FX.bao_cao }));
+  await page.route("**/api/kiem-chung/ty-le**", (r) => r.fulfill({ json: FX.ty_le }));
+  await napHoSo(page);
+});
+
+test("tám ô bấm được, bảng nghĩa bốn lớp, nối sang ô khác, Esc đóng", async ({ page, request }) => {
+  const bd = await (await request.post("/api/battu/ban-do", { data: { la_so: LA_SO } })).json();
+  expect(bd.phien_ban).toBe("ban_do_1");
+  await page.goto("/bat-tu");
+  const khoi = page.getByTestId("ban-do-bat-tu");
+  await expect(khoi.getByRole("heading", { level: 2 })).toHaveText("Bản đồ lá số của bạn");
+  for (const ma of ["c0", "c1", "c2", "c3", "z0", "z1", "z2", "z3"]) await expect(khoi.getByTestId(`bd-o-${ma}`)).toBeVisible();
+  await expect(khoi.getByTestId("bd-o-c2")).toContainText("chính bạn");
+
+  const coNoi = (bd.o as { ma: string; noi_voi: { o: string }[]; la_gi: string[] }[]).find((o) => o.noi_voi.length)!;
+  await khoi.getByTestId(`bd-o-${coNoi.ma}`).locator("text").first().click();
+  const bang = page.getByTestId("bd-bang-o");
+  await expect(bang).toContainText(coNoi.la_gi[0]!);
+  await expect(bang).toContainText("Nằm ở đâu trong đời bạn");
+  await expect(bang).toContainText("Vì sao nói vậy");
+  await bang.getByText("Nối với chữ khác").locator("..").getByRole("button").first().click();
+  await expect(khoi.getByTestId(`bd-o-${coNoi.noi_voi[0]!.o}`)).toHaveAttribute("aria-pressed", "true");
+  await page.keyboard.press("Escape");
+  await expect(bang).toHaveCount(0);
+
+  const sk = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []);
+  expect(sk.some((x) => x.kind === "ban_do_o")).toBe(true);
+});
+
+test("năm hành: năm vòng theo tỉ lệ engine, chạm một hành mở lời, chạm vệ tinh mở chữ", async ({ page, request }) => {
+  const bd = await (await request.post("/api/battu/ban-do", { data: { la_so: LA_SO } })).json();
+  await page.goto("/bat-tu");
+  const khoi = page.getByTestId("ban-do-bat-tu");
+  await khoi.getByTestId("bd-che-nam_hanh").click();
+  for (let k = 0; k < 5; k++) await expect(khoi.getByTestId(`bd-hanh-${k}`)).toBeVisible();
+  const h = bd.ngu_hanh[1];
+  await expect(khoi.getByTestId("bd-hanh-1")).toHaveAttribute("aria-label", `${h.hanh} ${h.phan_tram}%`);
+  await khoi.getByTestId("bd-hanh-1").click();
+  await expect(page.getByTestId("bd-bang-o")).toContainText(h.y);
+  await page.keyboard.press("Escape");
+  await khoi.getByTestId("bd-ve-tinh-c2").locator("text").click();
+  await expect(page.getByTestId("bd-bang-o")).toContainText("chính bạn");
+});
+
+test("kim năm: phím mũi tên đổi năm, thẻ năm đổi theo", async ({ page, request }) => {
+  const bd = await (await request.post("/api/battu/ban-do", { data: { la_so: LA_SO } })).json();
+  await page.goto("/bat-tu");
+  const khoi = page.getByTestId("ban-do-bat-tu");
+  const kim = khoi.getByTestId("bd-kim");
+  await expect(kim).toHaveAttribute("aria-valuenow", String(bd.thoi_gian.nam_xem));
+  await kim.focus();
+  await page.keyboard.press("ArrowLeft");
+  await expect(kim).toHaveAttribute("aria-valuenow", String(bd.thoi_gian.nam_xem - 1));
+  await expect(khoi.getByTestId("bd-the-nam")).toContainText(String(bd.thoi_gian.nam_xem - 1));
+});
+
+test("theo năm: kể lại một năm ở bản đồ → lật ra hai cách đã nói gì; sự kiện không mang năm", async ({ page, request }) => {
+  const bd = await (await request.post("/api/battu/ban-do", { data: { la_so: LA_SO } })).json();
+  const nam = (bd.thoi_gian.nam as { nam: number; ma?: string; dc?: string[] }[]).find((n) => n.ma && n.dc)!;
+  await page.goto("/bat-tu");
+  const khoi = page.getByTestId("ban-do-bat-tu");
+  const truot = khoi.getByTestId("bd-nam-truot");
+  await truot.fill(String(nam.nam));
+  await expect(khoi.getByTestId("bd-the-nam")).toContainText(String(nam.nam));
+  await khoi.getByTestId(`bd-tra-${nam.dc![0]}`).click();
+  await expect(khoi.getByTestId("bd-hai-cach")).toContainText(NHAN[nam.dc![1]!]!);
+  await expect(khoi.getByTestId("bd-ket-qua")).toContainText("Bạn đã kể 1/");
+  const sk = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []);
+  const e = sk.filter((x) => String(x.kind).startsWith("ban_do"));
+  expect(e.length).toBeGreaterThan(0);
+  expect(JSON.stringify(e)).not.toMatch(/19\d\d|20\d\d/);
+});
+
+test("cách a: năm nay có mức + nên tránh / nên làm, năm sau chỉ mức và lời mời mở chương", async ({ page, request }) => {
+  const bd = await (await request.post("/api/battu/ban-do", { data: { la_so: LA_SO } })).json();
+  const ds = bd.thoi_gian.nam as { nam: number; muc?: string; nhan_muc?: string; nen_tranh?: string; khoa?: boolean }[];
+  const n0 = ds.find((n) => n.nam === bd.thoi_gian.nam_xem)!;
+  await page.goto("/bat-tu");
+  const khoi = page.getByTestId("ban-do-bat-tu");
+  await expect(khoi.getByTestId("bd-muc-nam")).toHaveText(n0.nhan_muc!);
+  if (n0.nen_tranh) await expect(khoi.getByTestId("bd-nen-tranh")).toContainText(n0.nen_tranh);
+  await expect(khoi.getByTestId("bd-nam-khoa")).toHaveCount(0);
+  const sau = ds.find((n) => n.nam === bd.thoi_gian.nam_xem + 1)!;
+  expect(sau.khoa).toBe(true);
+  expect(sau.nen_tranh).toBeUndefined();          // lời của năm sau không xuống trình duyệt
+  await khoi.getByTestId("bd-nam-truot").fill(String(sau.nam));
+  await expect(khoi.getByTestId("bd-muc-nam")).toHaveText(sau.nhan_muc!);
+  await expect(khoi.getByTestId("bd-nam-khoa")).toContainText(String(sau.nam));
+  await expect(khoi.getByTestId("bd-nen-tranh")).toHaveCount(0);
+});
+
+test("nút đọc chương mở đúng chương trong báo cáo", async ({ page }) => {
+  await page.goto("/bat-tu");
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible();
+  const khoi = page.getByTestId("ban-do-bat-tu");
+  await khoi.getByTestId("bd-o-c2").locator("text").first().click();
+  await page.getByTestId("bd-doc-chuong").click();
+  await expect(page).toHaveURL(/#lg-tong_quan/);
+});
+
+test("điện thoại 360px: không tràn ngang, bảng nghĩa trượt từ đáy", async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 760 });
+  await page.goto("/bat-tu");
+  const khoi = page.getByTestId("ban-do-bat-tu");
+  await expect(khoi).toBeVisible();
+  const tran = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  expect(tran).toBeLessThanOrEqual(1);
+  await khoi.getByTestId("bd-o-z2").locator("text").first().click();
+  const bang = page.getByTestId("bd-bang-o");
+  await expect(bang).toBeVisible();
+  const hop = await bang.boundingBox();
+  expect(hop!.y + hop!.height).toBeGreaterThan(700);   // dính đáy màn hình
+  await bang.getByRole("button", { name: "Đóng" }).click();
+  await expect(bang).toHaveCount(0);
+});

@@ -5,52 +5,46 @@ import { test, expect } from "@playwright/test";
 import { HO_SO_MAU, napHoSo } from "./_hoso";
 import FX from "./fixtures/luan-giai-bat-tu.json";
 
-type Cau = { ma: string; cach_1: string; cach_2: string };
-const NHAN: Record<string, string> = { thuan: "Khá suôn sẻ", can_bang: "Bình thường", can_chu_dong: "Khá vất vả" };
 const LA_SO = { birth_date: "1990-05-17", birth_time: "12:30", gender: "nam", noi_sinh: HO_SO_MAU.noi_sinh };
 
-test("kể lại các năm đã qua theo đúng cách 2 → kết luận cách 2, chọn làm cách chính, báo cáo nhấn theo cách đó", async ({ page, request }) => {
-  const dc = await (await request.post("/api/battu/doi-chieu-cach", { data: { la_so: LA_SO } })).json();
-  expect(dc.co_cau_hoi).toBe(true);
-  expect(dc.chon).toBeNull();
-  const cau = dc.cau as Cau[];
-  expect(cau.length).toBeGreaterThanOrEqual(3);
+test("kể lại các năm đã qua trên Bản đồ theo đúng cách 2 → kết luận cách 2, chọn làm cách chính, báo cáo nhấn theo cách đó", async ({ page, request }) => {
+  // BD-1: khối "Cách nào đúng" gộp vào Bản đồ lá số — năm đã qua có câu hỏi ở chế độ kéo năm, mức hai cách do engine chấm.
+  const bd = await (await request.post("/api/battu/ban-do", { data: { la_so: LA_SO } })).json();
+  const nam = (bd.thoi_gian.nam as { nam: number; ma?: string; dc?: string[] }[]).filter((n) => n.ma && n.dc).slice(0, 4);
+  expect(nam.length).toBeGreaterThanOrEqual(3);
 
   await page.route("**/api/luan-giai/phi*", (r) => r.fulfill({ json: { thu: false, gia: 10 } }));
   await page.route("**/api/battu/luan-giai", (r) => r.fulfill({ json: FX.bao_cao }));
   await page.route("**/api/kiem-chung/ty-le**", (r) => r.fulfill({ json: FX.ty_le }));
   await napHoSo(page);
   await page.goto("/bat-tu");
-  const khoi = page.getByTestId("doi-chieu-cach");
-  await expect(khoi.getByRole("heading", { level: 2 })).toHaveText("Cách nào đúng với bạn?");
-  await expect(khoi.getByTestId("dc-cach_1")).toContainText(dc.cach.cach_1.ten);
+  const khoi = page.getByTestId("ban-do-bat-tu");
+  await expect(khoi.getByTestId("bd-cach_1")).toContainText(bd.thoi_gian.cach.cach_1.ten);
+  await expect(page.getByTestId("doi-chieu-cach")).toHaveCount(0);   // không còn khối trùng
 
-  for (const [i, c] of cau.entries()) {
-    await expect(khoi.getByTestId("dc-cau")).toContainText(dc.cau[i].hoi);
-    await khoi.getByTestId("dc-cau").getByRole("button", { name: NHAN[c.cach_2]! }).click();
-    await expect(khoi.getByTestId("dc-da-tra-loi")).toHaveCount(i + 1);
+  for (const [i, n] of nam.entries()) {
+    await khoi.getByTestId("bd-nam-truot").fill(String(n.nam));
+    await expect(khoi.getByTestId("bd-the-nam")).toContainText(String(n.nam));
+    await khoi.getByTestId(`bd-tra-${n.dc![1]}`).click();
+    await expect(khoi.getByTestId("bd-ket-qua")).toContainText(`Bạn đã kể ${i + 1}/`);
   }
-  await expect(khoi.getByTestId("dc-cau")).toHaveCount(0);
-  const kl = khoi.getByTestId("dc-ket-luan");
-  await expect(kl).toContainText(dc.ket_luan.cach_2);
-  await expect(kl).toContainText(`${dc.cach.cach_2.ten} ${cau.length}/${cau.length}`);
+  await expect(khoi.getByTestId("bd-ket-luan")).toContainText(bd.thoi_gian.ket_luan.cach_2);
   const sk = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []);
-  const e = sk.find((x) => x.kind === "battu_doi_chieu")!;
-  expect(e).toMatchObject({ ket_qua: "cach_2", cach_cuc: dc.cach_cuc, khop_2: cau.length, so_cau: cau.length });
+  const e = sk.filter((x) => x.kind === "ban_do_tra_loi");
+  expect(e.length).toBe(nam.length);
   expect(JSON.stringify(e)).not.toMatch(/19\d\d|20\d\d/);          // không gửi năm
 
-  await kl.getByRole("button", { name: /làm cách chính/ }).click();
-  await expect(khoi.getByTestId("dc-cach_2")).toContainText("cách chính của bạn");
-  // Báo cáo: dải thời gian hiện mức theo cách bạn chọn ở những giai đoạn hai cách khác nhau
-  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible();   // CRO-1: Bát tự tự mở chương 1 (không còn nút mở)
+  await khoi.getByRole("button", { name: /làm cách chính/ }).click();
+  await expect(khoi.getByTestId("bd-cach_2")).toContainText("cách chính của bạn");
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible();
   const khac = FX.bao_cao.thoi_gian_bieu.filter((m) => m.hai_cach_khac);
   expect(khac.length).toBeGreaterThan(0);
   await expect(page.getByTestId("dong-thoi-gian").getByTestId("muc-cach-chinh")).toHaveCount(khac.length);
 
   // Tải lại: câu trả lời + cách chính còn nguyên (lưu trên máy)
   await page.reload();
-  await expect(page.getByTestId("doi-chieu-cach").getByTestId("dc-ket-luan")).toBeVisible();
-  await expect(page.getByTestId("doi-chieu-cach").getByTestId("dc-cach_2")).toContainText("cách chính của bạn");
+  await expect(page.getByTestId("ban-do-bat-tu").getByTestId("bd-ket-luan")).toBeVisible();
+  await expect(page.getByTestId("ban-do-bat-tu").getByTestId("bd-cach_2")).toContainText("cách chính của bạn");
 });
 
 test("không nhớ rõ thì không tính; người còn ít năm đã qua thấy lời giải thích thay cho câu hỏi", async ({ request }) => {

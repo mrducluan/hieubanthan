@@ -175,6 +175,21 @@ def api_doi_chieu_cach(inp: DoiChieuBTInput) -> dict:
     return {"engine_version": ENGINE_VERSION, **battu_doi_chieu.lap(sinh, inp.ngay_xem), "co_canh_bao": flags}
 
 
+class BanDoBTInput(BaseModel):
+    """BD-1 — Bản đồ lá số: 8 chữ chạm được + lớp thời gian (không lưu, không trừ Sao)."""
+    model_config = ConfigDict(extra="forbid")
+
+    la_so: TuanTrietInput
+    ngay_xem: _dt.date | None = None
+
+
+@router.post("/ban-do")
+def api_ban_do(inp: BanDoBTInput) -> dict:
+    from app.luangiai import battu_ban_do
+    sinh, flags = _sinh(inp.la_so)
+    return {"engine_version": ENGINE_VERSION, **battu_ban_do.lap(sinh, inp.ngay_xem), "co_canh_bao": flags}
+
+
 @router.post("/luan-giai")
 def api_luan_giai(inp: LuanGiaiBTInput) -> dict:
     from app.luangiai import toan_bo

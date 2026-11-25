@@ -261,6 +261,7 @@ def luot_goi(client=None) -> list[Luot]:
         p(f"tuvi.phi_hoa.{k}", "/v1/tuvi/phi-hoa", {"la_so": ls, "nam_xem": 2027})
         p(f"battu.luu_nien.{k}", "/v1/battu/luu-nien", {"la_so": ls, "nam_xem": 2027})
         p(f"battu.doi_chieu_cach.{k}", "/v1/battu/doi-chieu-cach", {"la_so": ls, "ngay_xem": XEM})
+        p(f"battu.ban_do.{k}", "/v1/battu/ban-do", {"la_so": ls, "ngay_xem": XEM})
         kia_ls = kia["ls"]
         p(f"tuvi.hop_tham.{k}", "/v1/tuvi/hop-tham", {
             "la_so": ls, "quan_he": ("nguoi_yeu", "vo_chong", "ban_be", "dong_nghiep", "doi_tac")[i % 5],
