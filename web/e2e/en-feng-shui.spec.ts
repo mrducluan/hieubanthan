@@ -77,7 +77,7 @@ test.describe("/en/feng-shui trên trình duyệt", () => {
     await page.goto("/phong-thuy");
     expect(await page.locator('link[rel="alternate"][hreflang="en"]').getAttribute("href")).toMatch(/\/en\/feng-shui$/);
     await expect(page.locator("html")).toHaveAttribute("lang", "vi");
-    await expect(page.locator("h1")).toContainText("Xem phong thuỷ: nhà này có hợp bạn không?");
+    await expect(page.locator("h1")).toContainText("Xem phong thuỷ nhà ở & hướng nhà hợp tuổi");
   });
 
   test("hồ sơ → Kua + la bàn → đo hướng → Nhà của bạn → Khảo sát → Huyền Không → hỏi đáp, tất cả tiếng Anh", async ({ page }) => {

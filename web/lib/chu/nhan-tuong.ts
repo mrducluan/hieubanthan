@@ -15,7 +15,7 @@ const P = "Trang", K = "Khảo sát", B = "Bài đọc", M = "Bản đồ mặt"
 
 export const CHU_NHAN_TUONG_UI = {
   // ---------------------------------------------------------------- trang (app/nhan-tuong/NhanTuong.tsx)
-  "dau.ten": m(P, "Xem tướng mặt: gương mặt bạn nói gì?", "Face reading: what does your face say?"),
+  "dau.ten": m(P, "Xem tướng mặt online — Tự soi Nhân tướng học", "Face reading: what does your face say?"),
   "dau.mo_ta": m(P, "Gương mặt kể gì về bạn? Tải một ảnh chân dung để máy gợi ý nét mặt (có thoả thuận, ảnh không lưu), hoặc đứng trước gương tự trả lời 31 câu theo sáu bước — trang ghép điều bạn thấy với cách đọc của sách tướng xưa thành bài đọc tám chương: dáng mặt theo năm hành, tính cách, việc và tiền, tình cảm, sức khoẻ, năm nay nhìn vào đâu, tướng và lá số, việc nên làm. Không điểm số, không xem tướng người khác.",
     "What does your face say about you? Measure a portrait photo on your own device (the photo never leaves it), or stand at a mirror and answer 31 short questions in six steps. The page puts what you see together with how the classic face-reading books read it, in an eight-chapter reading: your face shape by the five elements, character, work and money, love, health, which area to watch this year, face and birth chart, and things to do. No scores, and it never reads someone else."),
   "loi.ks": m(P, "Chưa tải được bộ câu hỏi — thử lại sau ít phút.", "Could not load the questions — please try again in a few minutes."),

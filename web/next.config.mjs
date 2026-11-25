@@ -61,14 +61,12 @@ const nextConfig = {
       { source: "/sitemap-cum-:ma([a-z-]+).xml", destination: "/sitemap-cum/:ma.xml" },
     ] };
   },
-  // Next 15 mặc định "stream" metadata: <title>/<meta> nằm cuối <body> (JS mới dời lên <head>). Googlebot và bot AI
-  // (GPTBot, ClaudeBot, PerplexityBot…) không nằm trong danh sách mặc định → bot không chạy JS đọc nhầm <title> của
-  // hình SVG. Mọi bot / crawler / trình xem trước link nhận metadata ngay trong <head> (kiểm bằng scripts/kiem-tra-seo.mjs).
-  // Q-I2 (chủ dự án duyệt 2026-11-05, docs/AUDIT-INDEX-2026-11.md): TRỪ Googlebot + Google-InspectionTool (công cụ Kiểm tra
-  // URL — để bản kiểm trực tiếp giống hệt bản Googlebot nhận). Googlebot chạy JS (Next mặc định cũng không chặn nó);
-  // chờ đủ metadata làm Googlebot chậm hơn người xem ~0,1–0,25 giây mỗi trang → bớt suất thu thập. Chữ "bot" khớp cả
-  // "google.com/bot.html" trong UA Googlebot nên loại bằng lookahead đầu chuỗi (Next dùng new RegExp(source, "i").test).
-  htmlLimitedBots: /^(?!.*(?:googlebot|google-inspectiontool))(?=.*(?:bot|crawl|spider|slurp|preview|facebookexternalhit|facebookcatalog|embedly|whatsapp|zalo|google-extended|googleother|mediapartners-google|adsbot-google|storebot-google|anthropic|claude|perplexity|cohere|bytespider|meta-externalagent|ia_archiver|vkshare|yeti))/i,
+  // SEO-P0 (2026-11-25): Bật blocking metadata cho MỌI User-Agent (/.*/).
+  // Lý do kỹ thuật: khi bật Edge CDN Cache HTML (Q-I3, public-edge), nếu để Next 16 stream metadata cho trình duyệt
+  // thường (Chrome) hoặc Googlebot, lượt người dùng đầu tiên sẽ warm cache bằng HTML thiếu <title>/<link rel="canonical">/hreflang
+  // trong <head> (đẩy xuống cuối <body>) — rồi Vercel Edge phát lại bản <head> trống đó (x-vercel-cache: HIT) cho Googlebot,
+  // Bingbot và mọi AI bot. Ép `htmlLimitedBots: /.*/` bảo đảm 100% response (cả cache lẫn MISS) luôn có đủ metadata trong <head>.
+  htmlLimitedBots: /.*/,
   // Ảnh thẻ chia sẻ (/og) đọc font OFL từ assets/fonts — đưa vào gói deploy. (Next 15: instrumentation.ts bật sẵn.)
   // TR-5: ảnh thẻ Tarot / Ba lá vẽ tranh lá thật (JPEG nhỏ trong assets/tarot — bộ dựng ảnh không đọc webp).
   outputFileTracingIncludes: { "/og": ["./assets/fonts/**"], "/og/tarot": ["./assets/fonts/**", "./assets/tarot/**"], "/og/ba-la": ["./assets/fonts/**", "./assets/tarot/**"], "/og/li-xi": ["./assets/fonts/**", "./public/li-xi/**"] },
