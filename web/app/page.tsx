@@ -125,7 +125,7 @@ export default async function TrangChu() {
           <Link href="/chi-tay" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline">
             {c("mang.lien_chi_tay")} <ArrowRight className="size-3.5" aria-hidden />
           </Link>
-          <Link href="/ban-do-doi-ngu" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline">
+          <Link href="/quan-ly-nhan-su" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline">
             {c("mang.lien_doi_ngu")} <ArrowRight className="size-3.5" aria-hidden />
           </Link>
           <Link href="/goi-xem" className="inline-flex items-center gap-1.5 text-fg-muted underline-offset-4 hover:text-gold hover:underline">

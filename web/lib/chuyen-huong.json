@@ -33,6 +33,14 @@
     [
       "/kham-pha",
       "/huyen-hoc"
+    ],
+    [
+      "/ban-do-doi-ngu",
+      "/quan-ly-nhan-su"
+    ],
+    [
+      "/doanh-chu",
+      "/quan-ly-nhan-su"
     ]
   ],
   "tuoi_huong": "/phong-thuy/huong-hop-tuoi"

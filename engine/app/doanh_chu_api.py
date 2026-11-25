@@ -8,7 +8,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.calc import doanh_chu
-from app.luangiai import doanh_chu_lich, doanh_chu_mat_bang
+from app.luangiai import doanh_chu_lich, doanh_chu_mat_bang, doanh_chu_quan_ly
 from app.config import ENGINE_VERSION
 
 router = APIRouter(prefix="/v1/doanh-chu", tags=["doanh-chu"])
@@ -74,7 +74,35 @@ def phan_tich_doi_ngu(inp: DoiNguIn) -> dict:
         nam_xem=inp.nam_xem,
         cap_quan_ly=inp.cap_quan_ly,
     )
+    doanh_chu_quan_ly.lam_giau(kq)
     return {"engine_version": ENGINE_VERSION, "khong_luu_du_lieu": True, **kq}
+
+
+class CaNhanIn(BaseModel):
+    """Thành viên được mời tự xem "Cách làm việc của bạn" — dữ liệu chỉ đi qua lượt tính, không lưu."""
+    model_config = ConfigDict(extra="forbid")
+
+    ngay: int = Field(..., ge=1, le=31)
+    thang: int = Field(..., ge=1, le=12)
+    nam: int = Field(..., ge=1930, le=2025)
+    gioi_tinh: str = Field(default="nam", pattern="^(nam|nu)$")
+    nam_xem: int = Field(..., ge=2020, le=2050)
+
+
+@router.post("/ca-nhan")
+def api_ca_nhan(inp: CaNhanIn) -> dict:
+    try:
+        dt.date(inp.nam, inp.thang, inp.ngay)
+    except ValueError as e:
+        raise HTTPException(422, detail="Ngày sinh không hợp lệ.") from e
+    kq = doanh_chu_quan_ly.ca_nhan(inp.ngay, inp.thang, inp.nam, inp.gioi_tinh, inp.nam_xem)
+    return {"engine_version": ENGINE_VERSION, "khong_luu_du_lieu": True, **kq}
+
+
+@router.get("/tinh-huong")
+def api_tinh_huong() -> dict:
+    """Kho tình huống quản lý + vai trò 5 hành cho trang công khai (một nguồn)."""
+    return {"engine_version": ENGINE_VERSION, **doanh_chu_quan_ly.danh_muc()}
 
 
 class Lich12ThangIn(BaseModel):

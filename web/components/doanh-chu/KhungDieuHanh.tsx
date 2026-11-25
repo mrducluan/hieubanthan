@@ -1,6 +1,6 @@
 "use client";
 // Khung điều hành 3 công cụ cho Chủ DN & Quản lý: Bản đồ Đội ngũ · Lịch Quyết Định 12 Tháng · Mặt bằng & Khai trương.
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Building2, CalendarDays, Users } from "lucide-react";
 import { StudioDoanhChu } from "./StudioDoanhChu";
 import { LichQuyetDinh12Thang } from "./LichQuyetDinh12Thang";
@@ -12,8 +12,28 @@ type TabDieuHanh = "doi_ngu" | "lich_12" | "mat_bang";
 export function KhungDieuHanh() {
   const [tab, setTab] = useState<TabDieuHanh>("doi_ngu");
 
+  // QLNS-1: mở đúng tab từ #lich-12-thang / #mat-bang (link blog, khối "Bước tiếp theo") hoặc sự kiện "hbt:dieu-hanh-tab".
+  useEffect(() => {
+    const theoNeo = () => {
+      const h = window.location.hash;
+      if (h === "#lich-12-thang") setTab("lich_12");
+      else if (h === "#mat-bang") setTab("mat_bang");
+    };
+    const theoSuKien = (e: Event) => {
+      const t = (e as CustomEvent<TabDieuHanh>).detail;
+      if (t === "doi_ngu" || t === "lich_12" || t === "mat_bang") setTab(t);
+    };
+    theoNeo();
+    window.addEventListener("hashchange", theoNeo);
+    window.addEventListener("hbt:dieu-hanh-tab", theoSuKien);
+    return () => {
+      window.removeEventListener("hashchange", theoNeo);
+      window.removeEventListener("hbt:dieu-hanh-tab", theoSuKien);
+    };
+  }, []);
+
   return (
-    <div className="space-y-6">
+    <div id="cong-cu-dieu-hanh" className="scroll-mt-24 space-y-6">
       <div className="flex flex-wrap gap-2 border-b border-line/70 pb-3" role="tablist" aria-label="Công cụ điều hành">
         <button
           type="button"

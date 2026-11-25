@@ -184,7 +184,7 @@ export function HopDoi() {
                     <p className="mt-1 text-sm text-fg-muted">Xem Bản đồ Đội ngũ để nhìn bức tranh cân bằng 5 hành, sở trường từng người và cách ghép cặp dự án.</p>
                   </div>
                   <Button asChild size="sm" className="shrink-0 self-start sm:self-center">
-                    <Link href="/ban-do-doi-ngu">Mở Bản đồ Đội ngũ</Link>
+                    <Link href="/quan-ly-nhan-su">Mở Bản đồ Đội ngũ</Link>
                   </Button>
                 </Card>
                 <p className="rounded-xl border border-line/70 bg-surface/40 px-4 py-3 text-xs leading-relaxed text-fg-muted" data-testid="luu-y-phap-ly-cong-viec">

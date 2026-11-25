@@ -72,6 +72,45 @@ export interface ThanhVienMaTran {
   ong_chu_can_chu_y: string[];
   nhan_su_can_luu_y: string[];
   kich_ban_trao_doi: string;
+  /** QLNS-1: hai câu hỏi cho buổi nói chuyện riêng (engine chọn theo đường đời). */
+  cau_hoi_1_1?: string[];
+}
+
+/** QLNS-1: một việc trong kế hoạch 30 ngày — engine dựng từ dữ liệu nhóm. */
+export interface ViecKeHoach {
+  tuan: string;
+  ma: string;
+  tieu_de: string;
+  viec: string;
+  vi_sao: string;
+  cach_do?: string;
+  ai?: string[];
+}
+
+/** QLNS-1: tình huống quản lý ĐÚNG với nhóm này (engine chọn theo luật công khai). */
+export interface TinhHuongQuanLy {
+  ma: string;
+  van_de: string;
+  goc_nhin: string;
+  mo_loi: string;
+  viec: string;
+  ai?: string[];
+}
+
+/** QLNS-1: bản "Cách làm việc của bạn" cho chính thành viên được mời. */
+export interface CaNhanDoiNgu {
+  nhan: { tieu_de: string; ve_nhom: string; nhan_manh: string; nhan_de_y: string; nhan_lam_tot: string; nhan_trao_doi: string; nhan_nam: string };
+  hanh_manh: string;
+  vai_tro_hop: string;
+  gia_tri: string;
+  duong_doi: number;
+  nam_ca_nhan: number;
+  nam_xem: number;
+  manh: string;
+  de_y: string;
+  lam_tot: string;
+  trao_doi: string;
+  nhip_nam: string;
 }
 
 export interface GoiYQuyMo {
@@ -91,6 +130,8 @@ export interface KetQuaDoanhChu {
   ma_tran_phoi_hop: ThanhVienMaTran[];
   goi_y_ghep_cap?: GoiYGhepCap[];
   goi_y_quy_mo: GoiYQuyMo;
+  ke_hoach_30_ngay?: ViecKeHoach[];
+  tinh_huong?: TinhHuongQuanLy[];
   ranh_gioi_phap_ly: string;
 }
 

@@ -225,6 +225,16 @@ export function MaTranHaiChieu({
                 </div>
               </div>
 
+              {/* QLNS-1: hai câu hỏi cho buổi nói chuyện riêng (engine chọn theo đường đời) */}
+              {dangChon.cau_hoi_1_1 && dangChon.cau_hoi_1_1.length > 0 && (
+                <div className="rounded-2xl border border-line/70 bg-bg/50 p-4" data-testid="hoi-1-1">
+                  <p className="text-sm font-semibold text-fg">{CHU_DOANH_CHU.ma_tran.hoi_1_1}</p>
+                  <ol className="mt-2 list-decimal space-y-1.5 pl-5 text-sm leading-relaxed text-fg-muted">
+                    {dangChon.cau_hoi_1_1.map((h) => <li key={h}>{h}</li>)}
+                  </ol>
+                </div>
+              )}
+
               {/* Kịch bản mở lời hóa giải bất đồng (Copy 1 chạm) */}
               <div className="rounded-2xl border border-gold/35 bg-gold/10 p-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">

@@ -15,7 +15,7 @@
 
 | Mảng | Có nguyên văn đối chiếu | Tóm ý cổ thư, chưa khớp từng câu | Tập quán / sách hiện đại tóm ý | Ban biên tập soạn | Tệp kỹ thuật |
 |---|---|---|---|---|---|
-| Bát tự | 3 | 1 | 1 | 6 |  |
+| Bát tự | 3 | 1 | 1 | 7 |  |
 | Tử vi | 1 | 3 | 7 | 7 |  |
 | Kinh Dịch | 4 | 2 | 1 | 2 |  |
 | Phong thuỷ | 2 | 2 | 1 | 5 |  |
@@ -91,6 +91,7 @@
 | Bát tự | `bo_sung_nhat_chu.json` |  | Ban biên tập soạn |  |
 | Bát tự | `bo_sung_thap_than.json` |  | Ban biên tập soạn |  |
 | Bát tự | `doanh_chu_lich_kb.json` |  | Ban biên tập soạn | PR #328: lời đời thường Lịch quyết định 12 tháng; mức tháng từ các lớp của Thời gian tới + tháng cá nhân |
+| Bát tự | `doanh_chu_quan_ly_kb.json` |  | Ban biên tập soạn | QLNS-1: lời quản lý đội ngũ (kế hoạch 30 ngày, tình huống, câu hỏi 1-1, bản cá nhân); dữ kiện từ Bản đồ đội ngũ |
 | Tử vi | `bo_sung_cung.json` |  | Ban biên tập soạn |  |
 | Tử vi | `bo_sung_hoa_cung.json` |  | Ban biên tập soạn |  |
 | Tử vi | `bo_sung_sao.json` |  | Ban biên tập soạn |  |

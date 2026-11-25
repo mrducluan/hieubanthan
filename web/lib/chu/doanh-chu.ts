@@ -1,17 +1,17 @@
-// Từ điển chữ giao diện cho trang Bản đồ Đội ngũ (/ban-do-doi-ngu & /ban-do-doi-ngu/moi) —
+// Từ điển chữ giao diện cho trang Bản đồ quản lý nhân sự (/quan-ly-nhan-su & /quan-ly-nhan-su/moi) —
 // ngôn ngữ đời thường, chạm thẳng nỗi đau vận hành của chủ doanh nghiệp & quản lý, không dùng từ nội bộ hay thuật ngữ kỹ thuật.
 
 export const CHU_DOANH_CHU = {
   meta: {
-    tieu_de: "Xem tuổi hợp tác làm ăn, phối hợp đội nhóm",
-    mo_ta: "Bản đồ Đội ngũ B2B cho chủ doanh nghiệp và quản lý: Radar cân bằng 5 hành, sở trường từng cộng sự và gợi ý phối hợp 2 chiều cho 1–8 người.",
-    moi_tieu_de: "Xác nhận tham gia Bản đồ Đội ngũ — Hiểu Bản Thân",
+    tieu_de: "Quản lý nhân sự theo ngũ hành: bản đồ đội ngũ",
+    mo_ta: "Bản đồ quản lý nhân sự cho chủ doanh nghiệp, trưởng nhóm: 5 hành của cả đội, cách phối hợp với từng người, tình huống hay gặp và kế hoạch 30 ngày. Xem mẫu miễn phí.",
+    moi_tieu_de: "Xác nhận tham gia bản đồ đội ngũ — Hiểu Bản Thân",
     moi_mo_ta: "Tự nguyện xác nhận tham gia xem phong cách phối hợp đội ngũ. Ngày sinh của bạn được mã hóa riêng, không lưu trên máy chủ.",
   },
   dau_trang: {
-    nho: "Phối hợp đội ngũ · Dành cho chủ doanh nghiệp & quản lý",
-    lon: "Xem tuổi hợp tác làm ăn: giao đúng việc, giảm va chạm trong đội ngũ",
-    mo_ta: "Trong 2 phút, nhìn rõ nhóm bạn đang mạnh ở đâu, thiếu trục vận hành nào, và cách phối hợp 2 chiều hiệu quả nhất giữa bạn với 1–8 cộng sự chủ chốt. Dữ liệu không lưu trên máy chủ.",
+    nho: "Bản đồ quản lý nhân sự · Dành cho chủ doanh nghiệp & trưởng nhóm",
+    lon: "Quản lý nhân sự theo ngũ hành: giao đúng việc, giảm va chạm",
+    mo_ta: "Trong 2 phút: nhóm bạn mạnh trục nào, thiếu trục nào, nên phối hợp với từng người ra sao, tình huống nào dễ xảy ra và 4 tuần tới nên làm gì trước. Dữ liệu không lưu trên máy chủ. Chỉ để phối hợp và trao đổi — không dùng tuyển chọn, đánh giá hay xếp lương.",
   },
   loi_ich: [
     {
@@ -20,11 +20,11 @@ export const CHU_DOANH_CHU = {
     },
     {
       tieu_de: "Giao đúng việc, đỡ mất sức chỉnh sửa",
-      mo_ta: "Nắm sở trường giải quyết vấn đề và nhịp năm nay của từng người (đang pha tăng tốc hay pha xây nền) để phân bổ vai trò và đặt KPI vừa tầm.",
+      mo_ta: "Nắm sở trường và nhịp năm nay của từng người để chia việc vừa sức, kèm hai câu hỏi cho buổi nói chuyện riêng với từng người.",
     },
     {
-      tieu_de: "Có sẵn cách mở lời khi bất đồng",
-      mo_ta: "Nhìn rõ 3 điều bạn cần lưu ý khi trao đổi với từng cộng sự và 2 điều họ cần tự điều chỉnh, kèm câu mở lời hóa giải căng thẳng.",
+      tieu_de: "Kế hoạch 30 ngày và câu mở lời có sẵn",
+      mo_ta: "4 việc theo tuần dựng từ chính nhóm bạn, các tình huống quản lý dễ gặp với đội này và câu mở lời mẫu cho từng tình huống.",
     },
   ],
   che_do: {
@@ -55,7 +55,7 @@ export const CHU_DOANH_CHU = {
     danh_sach_trong: "Chưa có cộng sự nào gửi mã xác nhận. Bạn có thể chuyển sang tab \"Nhập trực tiếp (nhanh)\" hoặc bấm \"Xem thử đội ngũ mẫu (1 chạm)\" ở trên.",
     huy_hieu_xac_nhan: "Cộng sự đã tự xác nhận ✓",
     xoa_thanh_vien: "Gỡ",
-    nut_phan_tich: "Xem Bản đồ Đội ngũ ngay",
+    nut_phan_tich: "Xem bản đồ đội ngũ ngay",
     dang_phan_tich: "Đang lập Bản đồ 5 Hành & Ma trận phối hợp…",
     ten_nhan: "Tên hiển thị / biệt danh",
     vai_tro_nhan: "Vai trò của bạn",
@@ -120,8 +120,33 @@ export const CHU_DOANH_CHU = {
     cot_ong_chu: "Điều bạn cần chú ý khi giao việc & trao đổi",
     cot_nhan_su: "Điều cộng sự nên chủ động lưu ý",
     kich_ban_tieu_de: "Gợi ý câu mở lời khi bất đồng hướng làm",
+    hoi_1_1: "Hai câu hỏi cho buổi nói chuyện riêng",
     nut_chep_kich_ban: "Chép câu mở lời",
     da_chep_kich_ban: "Đã chép ✓",
+  },
+  ke_hoach: {
+    nho: "KẾ HOẠCH 30 NGÀY",
+    tieu_de: "4 tuần tới nên làm gì với nhóm này",
+    phu_de: "Dựng từ chính dữ liệu nhóm bạn: trục đang mỏng, trục đang dồn, cặp cần quy ước trao đổi. Mỗi việc nêu vì sao.",
+    vi_sao: "Vì sao",
+    cach_do: "Đo thế nào",
+    ai: "Liên quan",
+  },
+  tinh_huong: {
+    nho: "TÌNH HUỐNG DỄ GẶP VỚI NHÓM NÀY",
+    tieu_de: "Chuyện quản lý có thể đã hoặc sắp xảy ra",
+    phu_de: "Chọn theo dữ liệu nhóm bạn, không phải danh sách chung. Mỗi tình huống có câu mở lời mẫu.",
+    goc_nhin: "Vì sao nhóm này dễ gặp",
+    mo_loi: "Câu mở lời mẫu",
+    viec: "Nên làm",
+    chep: "Chép câu mở lời",
+    da_chep: "Đã chép ✓",
+  },
+  buoc_tiep: {
+    tieu_de: "Bước tiếp theo",
+    moi: "Gửi link để từng người tự điền và nhận bản riêng của họ",
+    lich: "Chọn tháng thuận để ra mắt, ký kết: Lịch 12 tháng",
+    mat_bang: "Hướng cửa, quầy thu ngân: Mặt bằng & Khai trương",
   },
   quy_mo: {
     tieu_de: "Gợi ý áp dụng theo quy mô đội ngũ",
@@ -130,7 +155,7 @@ export const CHU_DOANH_CHU = {
   },
   trang_moi: {
     nho: "Xác nhận tham gia tự nguyện · Không lưu ngày sinh",
-    tieu_de: "Xác nhận tham gia Bản đồ Đội ngũ",
+    tieu_de: "Xác nhận tham gia bản đồ đội ngũ",
     link_loi: "Liên kết mời không hợp lệ hoặc đã hết hạn sau 7 ngày. Bạn vui lòng nhờ trưởng nhóm gửi lại link mới.",
     nhom_label: "Nhóm mời bạn cùng tham gia:",
     cam_ket_1: "Kết quả chỉ dùng để hiểu phong cách làm việc, cải thiện giao tiếp và phối hợp ăn ý hơn — tuyệt đối không dùng để đánh giá nhân sự hay sàng lọc lao động.",
@@ -144,5 +169,9 @@ export const CHU_DOANH_CHU = {
     thanh_cong_tieu_de: "Đã tạo xong mã bảo mật (dùng trong 7 ngày)",
     thanh_cong_mo_ta: "Bạn chỉ cần chép đoạn mã dưới đây gửi lại cho trưởng nhóm. Ngày sinh của bạn đã được ẩn hoàn toàn bên trong.",
     nut_chep_ma: "Chép mã gửi trưởng nhóm",
+    ca_nhan_mo_ta: "Phần này chỉ hiện trên máy của bạn, tính từ ngày sinh bạn vừa nhập.",
+    ca_nhan_than_so: "Xem đủ 4 con số của bạn (miễn phí)",
+    ca_nhan_nhom_minh: "Bạn cũng quản lý một nhóm? Lập bản đồ cho nhóm của bạn",
+    ca_nhan_hom_nay: "Hôm nay của bạn",
   },
 } as const;
