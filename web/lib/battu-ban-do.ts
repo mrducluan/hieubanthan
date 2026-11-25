@@ -11,7 +11,7 @@ export interface OBanDo {
   ma: MaO; tru: number; hang: "can" | "chi"; can?: string; chi?: string; hanh: string; thap_than?: string; nhom?: string;
   la_ban: boolean; dung: Dung; nguoi?: string;
   la_gi: string[]; o_dau: string[]; noi_voi: { o: MaO; loai: LoaiNoi; cau: string }[];
-  nam: { nam: number; can: string; chi: string; loai: LoaiNoi; cau: string }[];
+  nam: { nam: number; can: string; chi: string; loai: LoaiNoi; muc: MucCach | null; cau: string }[];
   vi_sao: string[]; chuong: string;
 }
 export interface TruBanDo {
@@ -22,10 +22,15 @@ export interface ChamNam { o: MaO; loai: LoaiNoi }
 export interface NamBanDo {
   nam: number; can: string; chi: string; thap_than: string; tuoi: number; dai_van: number | null; qua: boolean;
   hanh_can: string; hanh_chi: string;
+  /** Năm nay + chín năm tới: đúng mức chương "Mười năm tới" (một nguồn). */
+  muc?: MucCach; nhan_muc?: string; mang?: string;
+  /** Cách a: chỉ năm nay có lời nên tránh / nên làm; năm sau `khoa` = lời nằm trong chương trả Sao. */
+  y?: string; nen_tranh?: string; nen_lam?: string; khoa?: boolean;
   cham: ChamNam[]; cau: string; chi_tiet: string[]; ma?: string; dc?: [MucCach, MucCach]; hoi?: string;
 }
 export interface VanBanDo {
   i: number; can: string; chi: string; thap_than: string; tu_nam: number; den_nam: number; tu_tuoi: number; hien_tai: boolean;
+  nhan: string;
   cham: ChamNam[]; chi_tiet: string[]; cau: string;
 }
 export interface HanhBanDo {
@@ -76,6 +81,3 @@ export function capNoi(ds: Pick<OBanDo, "ma" | "noi_voi">[]): { a: MaO; b: MaO; 
   }
   return ra;
 }
-
-const SLUG: Record<string, string> = { "Kim": "kim", "Mộc": "moc", "Thủy": "thuy", "Hỏa": "hoa", "Thổ": "tho" };
-export const slugHanh = (h: string) => SLUG[h] ?? "";

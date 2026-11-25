@@ -82,23 +82,28 @@
   "nhom": {
     "Tỷ Kiếp": {
       "y": "tự lập, bạn bè ngang hàng",
-      "nguoi_tre": "anh chị em, bạn bè"
+      "nguoi_tre": "anh chị em, bạn bè",
+      "ngan": "Bạn bè, tự lập"
     },
     "Ấn": {
       "y": "chỗ dựa, việc học, người che chở",
-      "nguoi_tre": "mẹ, thầy cô"
+      "nguoi_tre": "mẹ, thầy cô",
+      "ngan": "Học, chỗ dựa"
     },
     "Thực Thương": {
       "y": "nói ra, làm ra, sáng tạo",
-      "nguoi_tre": "tài năng, việc bạn tự làm"
+      "nguoi_tre": "tài năng, việc bạn tự làm",
+      "ngan": "Sáng tạo, thể hiện"
     },
     "Tài": {
       "y": "tiền bạc, việc làm ra tiền",
-      "nguoi_tre": "cha, chuyện tiền tiêu"
+      "nguoi_tre": "cha, chuyện tiền tiêu",
+      "ngan": "Tiền bạc"
     },
     "Quan Sát": {
       "y": "khuôn phép, áp lực, người cấp trên",
-      "nguoi_tre": "thầy cô, nề nếp"
+      "nguoi_tre": "thầy cô, nề nếp",
+      "ngan": "Việc, vị trí"
     }
   },
   "mau": {
@@ -146,11 +151,11 @@
       "trung": "lặp lại"
     },
     "nam_ve": {
-      "hop": "chuyện {ngan} dễ có người, có việc kết nối",
-      "xung": "chuyện {ngan} dễ xáo động, đổi chỗ",
-      "hinh": "chuyện {ngan} dễ căng âm ỉ",
-      "hai": "chuyện {ngan} dễ hiểu lầm, lệch kỳ vọng",
-      "pha": "chuyện {ngan} dễ đứt quãng giữa chừng",
+      "hop": "chuyện {ngan} được kéo lại gần nhau",
+      "xung": "chuyện {ngan} có dịch chuyển, thay đổi",
+      "hinh": "chuyện {ngan} cần nhẫn nại hơn",
+      "hai": "chuyện {ngan} dễ lệch kỳ vọng nếu không nói rõ",
+      "pha": "chuyện {ngan} dễ phải dừng giữa chừng",
       "trung": "chuyện {ngan} được nhắc lại, làm rõ thêm"
     },
     "ts_tru": "Thần sát ở {tru}: {ds}",
@@ -173,7 +178,8 @@
       "bot": "Cả hai cách đọc đều thấy hành {hanh} đang nhiều so với bạn.",
       "mot_bot": "Cách đọc {cach} thấy hành {hanh} đang nhiều so với bạn; cách còn lại không nói vậy.",
       "nguoc": "Hai cách đọc nói ngược nhau về hành {hanh}: nên đối chiếu với điều bạn đã trải qua."
-    }
+    },
+    "nam_muc": " Mức chung năm ấy: {muc}."
   },
   "cap": {
     "hop": {
@@ -244,7 +250,8 @@
     "cham": "{loai_y} {chu} ở {tru}: {ve}.",
     "hoi": "Năm {nam} (khi bạn {tuoi} tuổi), nhìn chung với bạn là một năm…",
     "hoi_dan": "Những năm có dấu chấm là năm hai cách đọc nói khác nhau. Bạn kể lại năm ấy, máy so xem cách đọc nào khớp với đời bạn hơn.",
-    "nam_toi": "Muốn biết năm này nên làm gì, nên tránh gì: xem chương \"Mười năm tới & điều nên tránh\"."
+    "nam_toi": "Muốn biết năm này nên làm gì, nên tránh gì: xem chương \"Mười năm tới & điều nên tránh\".",
+    "cham_nhom": "{loai_y} {so} chữ {chu} ở {tru}: {ve}."
   },
   "nguoi": {
     "Tỷ Kiên": {
@@ -287,5 +294,10 @@
       "nam": "mẹ, thầy cô",
       "nu": "mẹ, thầy cô"
     }
+  },
+  "so_chu": {
+    "2": "hai",
+    "3": "ba",
+    "4": "bốn"
   }
 }

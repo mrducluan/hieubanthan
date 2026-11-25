@@ -66,7 +66,7 @@ test("kim năm: phím mũi tên đổi năm, thẻ năm đổi theo", async ({ p
   await expect(khoi.getByTestId("bd-the-nam")).toContainText(String(bd.thoi_gian.nam_xem - 1));
 });
 
-test("theo năm: kể lại một năm ở bản đồ → khối Cách nào đúng thấy ngay; sự kiện không mang năm", async ({ page, request }) => {
+test("theo năm: kể lại một năm ở bản đồ → lật ra hai cách đã nói gì; sự kiện không mang năm", async ({ page, request }) => {
   const bd = await (await request.post("/api/battu/ban-do", { data: { la_so: LA_SO } })).json();
   const nam = (bd.thoi_gian.nam as { nam: number; ma?: string; dc?: string[] }[]).find((n) => n.ma && n.dc)!;
   await page.goto("/bat-tu");
@@ -77,15 +77,28 @@ test("theo năm: kể lại một năm ở bản đồ → khối Cách nào đ�
   await khoi.getByTestId(`bd-tra-${nam.dc![0]}`).click();
   await expect(khoi.getByTestId("bd-hai-cach")).toContainText(NHAN[nam.dc![1]!]!);
   await expect(khoi.getByTestId("bd-ket-qua")).toContainText("Bạn đã kể 1/");
-  // Cùng mã nam.YYYY → khối "Cách nào đúng" thấy câu đã trả lời (nếu năm ấy nằm trong danh sách của khối).
-  const dc = await (await request.post("/api/battu/doi-chieu-cach", { data: { la_so: LA_SO } })).json();
-  if ((dc.cau as { ma: string }[]).some((c) => c.ma === nam.ma)) {
-    await expect(page.getByTestId("doi-chieu-cach").getByTestId("dc-da-tra-loi")).toHaveCount(1);
-  }
   const sk = await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? []);
   const e = sk.filter((x) => String(x.kind).startsWith("ban_do"));
   expect(e.length).toBeGreaterThan(0);
   expect(JSON.stringify(e)).not.toMatch(/19\d\d|20\d\d/);
+});
+
+test("cách a: năm nay có mức + nên tránh / nên làm, năm sau chỉ mức và lời mời mở chương", async ({ page, request }) => {
+  const bd = await (await request.post("/api/battu/ban-do", { data: { la_so: LA_SO } })).json();
+  const ds = bd.thoi_gian.nam as { nam: number; muc?: string; nhan_muc?: string; nen_tranh?: string; khoa?: boolean }[];
+  const n0 = ds.find((n) => n.nam === bd.thoi_gian.nam_xem)!;
+  await page.goto("/bat-tu");
+  const khoi = page.getByTestId("ban-do-bat-tu");
+  await expect(khoi.getByTestId("bd-muc-nam")).toHaveText(n0.nhan_muc!);
+  if (n0.nen_tranh) await expect(khoi.getByTestId("bd-nen-tranh")).toContainText(n0.nen_tranh);
+  await expect(khoi.getByTestId("bd-nam-khoa")).toHaveCount(0);
+  const sau = ds.find((n) => n.nam === bd.thoi_gian.nam_xem + 1)!;
+  expect(sau.khoa).toBe(true);
+  expect(sau.nen_tranh).toBeUndefined();          // lời của năm sau không xuống trình duyệt
+  await khoi.getByTestId("bd-nam-truot").fill(String(sau.nam));
+  await expect(khoi.getByTestId("bd-muc-nam")).toHaveText(sau.nhan_muc!);
+  await expect(khoi.getByTestId("bd-nam-khoa")).toContainText(String(sau.nam));
+  await expect(khoi.getByTestId("bd-nen-tranh")).toHaveCount(0);
 });
 
 test("nút đọc chương mở đúng chương trong báo cáo", async ({ page }) => {

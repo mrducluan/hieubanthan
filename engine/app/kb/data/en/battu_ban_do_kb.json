@@ -57,23 +57,28 @@
   "nhom": {
     "Tỷ Kiếp": {
       "y": "independence and peers",
-      "nguoi_tre": "siblings and friends"
+      "nguoi_tre": "siblings and friends",
+      "ngan": "Peers, independence"
     },
     "Ấn": {
       "y": "support, learning and protectors",
-      "nguoi_tre": "mother and teachers"
+      "nguoi_tre": "mother and teachers",
+      "ngan": "Learning, support"
     },
     "Thực Thương": {
       "y": "expression, output and creativity",
-      "nguoi_tre": "talents and things you make yourself"
+      "nguoi_tre": "talents and things you make yourself",
+      "ngan": "Creating, expressing"
     },
     "Tài": {
       "y": "money and earning",
-      "nguoi_tre": "father and spending money"
+      "nguoi_tre": "father and spending money",
+      "ngan": "Money"
     },
     "Quan Sát": {
       "y": "rules, pressure and authority",
-      "nguoi_tre": "teachers and routines"
+      "nguoi_tre": "teachers and routines",
+      "ngan": "Work, standing"
     }
   },
   "nguoi": {
@@ -163,11 +168,11 @@
       "trung": "repeats"
     },
     "nam_ve": {
-      "hop": "matters of {ngan} tend to bring people and connections",
-      "xung": "matters of {ngan} tend to shake up or move",
-      "hinh": "matters of {ngan} tend to carry quiet tension",
-      "hai": "matters of {ngan} tend to bring misunderstandings",
-      "pha": "matters of {ngan} tend to be interrupted midway",
+      "hop": "matters of {ngan} are drawn closer",
+      "xung": "matters of {ngan} shift and change",
+      "hinh": "matters of {ngan} need more patience",
+      "hai": "matters of {ngan} can miss expectations unless spelled out",
+      "pha": "matters of {ngan} may pause midway",
       "trung": "matters of {ngan} come up again and get clearer"
     },
     "ts_tru": "Symbolic stars in the {tru}: {ds}",
@@ -190,7 +195,8 @@
       "bot": "Both readings say {hanh} is already heavy for you.",
       "mot_bot": "The {cach} reading says {hanh} is already heavy for you; the other doesn't.",
       "nguoc": "The two readings disagree about {hanh}: check it against what you have lived through."
-    }
+    },
+    "nam_muc": " Overall level that year: {muc}."
   },
   "cap": {
     "hop": {
@@ -261,6 +267,12 @@
     "cham": "{loai_y} {chu} in the {tru}: {ve}.",
     "hoi": "Looking back at {nam} (when you were {tuoi}), overall it was a year that was…",
     "hoi_dan": "Years with a dot are years where the two readings disagree. Tell us how that year went and we compare which reading fits your life better.",
-    "nam_toi": "For what to do and avoid in this year, see the chapter \"The next ten years and what to avoid\"."
+    "nam_toi": "For what to do and avoid in this year, see the chapter \"The next ten years and what to avoid\".",
+    "cham_nhom": "{loai_y} the {so} {chu} characters in the {tru}: {ve}."
+  },
+  "so_chu": {
+    "2": "two",
+    "3": "three",
+    "4": "four"
   }
 }

@@ -12,7 +12,6 @@ import { DauMang } from "@/components/huyen-hoc/KhungMang";
 import { NutXuongForm } from "@/components/huyen-hoc/NutXuongForm";
 import { MoiLapLaSo } from "@/components/huyen-hoc/MoiLapLaSo";
 import { ChipPhai, DongGhiChu, DongPhai, KhungPhai, type PhaiDangDung } from "@/components/huyen-hoc/KhungPhai";
-import { DoiChieuCach } from "@/components/huyen-hoc/DoiChieuCach";
 import { BanDoBatTu } from "@/components/huyen-hoc/BanDoBatTu";
 import { ChanLaSo } from "@/components/huyen-hoc/ChanLaSo";
 import { SachXuaNoi } from "@/components/huyen-hoc/SachXuaNoi";
@@ -310,10 +309,6 @@ export function BatTu() {
         )}
         {ls?.co_canh_bao.map((c) => <p key={c.loai} className="text-xs text-moon">{CO_CO_LOI.has(c.loai) ? cb(`co.${c.loai}`) : c.chi_tiet}</p>)}
       </section>
-
-      {laSo && ls && (
-        <div className="mt-10"><DoiChieuCach laSo={laSo} /></div>
-      )}
 
       {laSo && ls && (
         <section id="luan-giai" aria-label={cb("aria.luan_giai")} className="mt-10 scroll-mt-24">

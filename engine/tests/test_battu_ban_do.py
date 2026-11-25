@@ -101,11 +101,11 @@ def test_tuoi_theo_sach_va_nam_that(kq):
         assert sach_ghi.chuan(tr["han"]) in sach_ghi.chuan(nguon), tr["han"]
 
 
-def test_nam_cham_muoi_nam_toi_khong_mang_muc(kq):
+def test_nam_cham_muoi_nam_toi_mang_muc_van_han(kq):
     for o in kq["o"]:
         for n in o["nam"]:
-            assert XEM.year <= n["nam"] <= XEM.year + 10 and n["cau"]
-            assert not set(n) & {"muc", "muc_cach_1", "muc_cach_2", "dc"}
+            assert XEM.year <= n["nam"] <= XEM.year + 9 and n["cau"]
+            assert n["muc"] in MUC and not set(n) & {"muc_cach_1", "muc_cach_2", "dc"}
     z2 = _o(kq, "z2")                               # Hợi: 2031 Hợi (trùng), 2025 Tỵ đã qua → không hiện
     assert any(n["nam"] == 2031 for n in z2["nam"])
 
@@ -154,7 +154,7 @@ def test_thoi_gian_nam_qua_doi_chieu(kq):
     assert tg["nam_xem"] == 2026 and tg["luat"] == {"toi_thieu": 3, "chenh": 2}
     assert [x["ma"] for x in tg["lua_chon"]] == ["thuan", "can_bang", "can_chu_dong", "khong_nho"]
     nam = {x["nam"]: x for x in tg["nam"]}
-    assert min(nam) == 1990 and max(nam) == 2036
+    assert min(nam) == 1990 and max(nam) == 2035
     for n, x in nam.items():
         assert x["cau"] and x["dai_van"] is None or isinstance(x["dai_van"], int)
         if "dc" in x:                                     # chỉ năm đã qua, từ 16 tuổi, hai cách khác nhau
@@ -202,3 +202,48 @@ def test_ngu_hanh_cho_hinh_nam_hanh(kq):
     assert kq["suc"] == 36
     n = kq["thoi_gian"]["nam"][0]
     assert {"hanh_can", "hanh_chi"} <= set(n)
+
+
+client = TestClient(app)
+
+
+def test_muc_nam_mot_nguon_voi_chuong_van_han():
+    """Bản đồ không được nói ngược chương "Mười năm tới": mức từng năm lấy đúng dòng mười năm của báo cáo."""
+    from app.luangiai import battu_doi_song as bt
+    for la in ({"birth_date": "1990-05-17", "birth_time": "12:30", "gender": "nam"},
+               {"birth_date": "1990-06-15", "birth_time": "11:30", "gender": "nu"},
+               {"birth_date": "1984-11-03", "birth_time": "07:10", "gender": "nam"}):
+        r = client.post("/v1/battu/ban-do", json={"la_so": la, "ngay_xem": "2026-11-25"}).json()
+        sinh = {"lich": dt.datetime.fromisoformat(f"{la['birth_date']}T{la['birth_time']}"), "gioi_tinh": la["gender"]}
+        dong = {g["nam"]: g for g in bt.dong_nam_cua(sinh, dt.date(2026, 11, 25))}
+        nam = {n["nam"]: n for n in r["thoi_gian"]["nam"]}
+        assert max(nam) == max(dong)
+        for n, g in dong.items():
+            assert nam[n]["muc"] == g["muc"], n
+        n0 = r["thoi_gian"]["nam_xem"]
+        assert nam[n0].get("nen_tranh") == dong[n0].get("nen_tranh") and nam[n0].get("y") == (dong[n0].get("y") or None)
+        for n in dong:   # cách a: năm sau chỉ có mức, lời "nên tránh" nằm trong chương trả Sao
+            if n != n0:
+                assert nam[n].get("khoa") and "nen_tranh" not in nam[n]
+        for o in r["o"]:
+            for x in o["nam"]:
+                assert x["muc"] == dong[x["nam"]]["muc"]
+
+
+def test_loi_nam_khong_tu_suy_tot_xau():
+    import json
+    kb = json.loads((GOC / "app/kb/data/battu_ban_do_kb.json").read_text())
+    ve = " ".join(kb["mau"]["nam_ve"].values())
+    for cum in ("dễ có người", "căng âm ỉ", "xáo động", "tốt", "xấu"):
+        assert cum not in ve
+
+
+def test_chu_lap_gop_mot_dong():
+    r = client.post("/v1/battu/ban-do", json={"la_so": {"birth_date": "1990-05-17", "birth_time": "12:30", "gender": "nam"},
+                                              "ngay_xem": "2026-11-25"}).json()
+    for n in r["thoi_gian"]["nam"]:
+        ngo = [c for c in n["chi_tiet"] if "Ngọ" in c]
+        loai = {x["loai"] for x in n["cham"] if x["o"] in ("z0", "z2", "z3")}
+        assert len(ngo) <= max(1, len(loai)) + 1, n["chi_tiet"]
+    assert any("ba chữ Ngọ" in c for n in r["thoi_gian"]["nam"] for c in n["chi_tiet"])
+    assert all(v["nhan"] for v in r["thoi_gian"]["dai_van"])

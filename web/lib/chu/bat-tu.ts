@@ -5,7 +5,7 @@
 // Tên riêng (can, chi, hành, thập thần, thần sát…) KHÔNG ở đây: engine trả mã + `ten_hien` (lib/ten-hien.ts).
 import type { BangChu } from "@/lib/chu-trang";
 
-const T = "Bát tự", BS = "Bảng tứ trụ", V = "Vòng địa chi", NG = "Ngũ hành", DV = "Đại vận", DT = "Dụng thần", DC = "Cách nào đúng", BD = "Bản đồ lá số";
+const T = "Bát tự", BS = "Bảng tứ trụ", V = "Vòng địa chi", NG = "Ngũ hành", DV = "Đại vận", DT = "Dụng thần", BD = "Bản đồ lá số";
 
 export const CHU_BAT_TU_UI = {
   // ---------------------------------------------------------------- đầu trang + khung công cụ
@@ -223,22 +223,6 @@ export const CHU_BAT_TU_UI = {
   "dt.cach_cuc": { nhom: DT, nhan: "Vế cách cục ({ten})", mac_dinh: " Cách cục theo nguyệt lệnh: {ten}.", en: " Structure by the month order: {ten}." },
 
   // ---------------------------------------------------------------- cách nào đúng với bạn
-  "dc.tieu_de": { nhom: DC, nhan: "Tiêu đề", mac_dinh: "Cách nào đúng với bạn?", en: "Which reading fits you?" },
-  "dc.dan": { nhom: DC, nhan: "Lời dẫn", toi_da: 400,
-    mac_dinh: "Bát tự có hai cách đọc, đôi khi nói khác nhau. Bạn là người biết rõ nhất những năm đã qua — kể lại vài năm, xem cách nào khớp với đời bạn hơn.",
-    en: "BaZi has two ways of reading, and sometimes they disagree. You know your past years best — tell us about a few of them and see which reading matches your life." },
-  "dc.cach_chinh": { nhom: DC, nhan: "Nhãn cách chính", mac_dinh: "cách chính của bạn", en: "your main reading" },
-  "dc.tien_do": { nhom: DC, nhan: "Tên dải tiến độ", mac_dinh: "Tiến độ", en: "Progress" },
-  "dc.da_ke": { nhom: DC, nhan: "Tên danh sách năm đã kể", mac_dinh: "Những năm bạn đã kể", en: "The years you described" },
-  "dc.ban_ke": { nhom: DC, nhan: "Câu bạn kể ({nhan}, {tl})", mac_dinh: "*{nhan}*: bạn kể “{tl}”", en: "*{nhan}*: you said “{tl}”" },
-  "dc.khop": { nhom: DC, nhan: "Nhãn khớp (trình đọc)", mac_dinh: "khớp", en: "matches" },
-  "dc.khop_dem": { nhom: DC, nhan: "Dòng đếm khớp ({ca}, {ka}, {cb}, {kb}, {n})", mac_dinh: "Khớp: {ca} {ka}/{n} · {cb} {kb}/{n}", en: "Matches: {ca} {ka}/{n} · {cb} {kb}/{n}" },
-  "dc.dung_cach": { nhom: DC, nhan: "Nút dùng làm cách chính ({cach})", mac_dinh: "Dùng {cach} làm cách chính", en: "Use {cach} as my main reading" },
-  "dc.bo_chon": { nhom: DC, nhan: "Nút bỏ chọn", mac_dinh: "Bỏ chọn cách chính", en: "Clear my main reading" },
-  "dc.ke_lai": { nhom: DC, nhan: "Nút kể lại", mac_dinh: "Kể lại", en: "Start over" },
-  "dc.ghi_chu": { nhom: DC, nhan: "Ghi chú cuối", toi_da: 400,
-    mac_dinh: "Chọn cách chính chỉ đổi chỗ nhấn khi hai cách nói khác nhau trong bài luận giải; phép tính và cả hai cách vẫn hiện đủ. Câu trả lời chỉ lưu trên máy bạn.",
-    en: "Choosing a main reading only changes what gets highlighted where the two readings disagree; the calculation and both readings stay in full. Your answers are kept only on your device." },
   // ---------------------------------------------------------------- BD-1 bản đồ lá số (dải 4 trụ bấm được)
   "bd.tieu_de": { nhom: BD, nhan: "Tiêu đề", mac_dinh: "Bản đồ lá số của bạn", en: "Your chart, mapped" },
   "bd.dan": { nhom: BD, nhan: "Lời dẫn", toi_da: 300,
@@ -255,7 +239,6 @@ export const CHU_BAT_TU_UI = {
   "bd.dung.mot_them": { nhom: BD, nhan: "Huy hiệu: một cách cần thêm", mac_dinh: "một cách: nên thêm", en: "one reading: add more" },
   "bd.dung.mot_bot": { nhom: BD, nhan: "Huy hiệu: một cách nên bớt", mac_dinh: "một cách: nên bớt", en: "one reading: ease off" },
   "bd.dung.nguoc": { nhom: BD, nhan: "Huy hiệu: hai cách ngược nhau", mac_dinh: "hai cách nói ngược", en: "readings disagree" },
-  "bd.chu_giai_noi": { nhom: BD, nhan: "Chú giải đường nối", mac_dinh: "Đường nối: liền = kéo về một phía · đứt = đối đầu, va chạm", en: "Lines: solid = pulling together · dashed = clashing" },
   "bd.muc.la_gi": { nhom: BD, nhan: "Mục: là gì", mac_dinh: "Chữ này là gì", en: "What it stands for" },
   "bd.muc.o_dau": { nhom: BD, nhan: "Mục: nằm đâu trong đời", mac_dinh: "Nằm ở đâu trong đời bạn", en: "Where it sits in your life" },
   "bd.muc.noi_voi": { nhom: BD, nhan: "Mục: nối với", mac_dinh: "Nối với chữ khác", en: "Links to other characters" },
@@ -275,12 +258,11 @@ export const CHU_BAT_TU_UI = {
   "bd.nam.truoc": { nhom: BD, nhan: "Nút năm trước", mac_dinh: "Năm trước", en: "Previous year" },
   "bd.nam.sau": { nhom: BD, nhan: "Nút năm sau", mac_dinh: "Năm sau", en: "Next year" },
   "bd.nam.nay": { nhom: BD, nhan: "Nút về năm nay", mac_dinh: "Năm nay", en: "This year" },
-  "bd.nam.khong_cham": { nhom: BD, nhan: "Năm không chạm chữ nào", mac_dinh: "Năm này không chạm thẳng vào chữ nào trong lá số.", en: "This year doesn't touch any character in your chart directly." },
   "bd.nam.hai_cach": { nhom: BD, nhan: "Dòng hai cách đã nói ({ca}, {ma}, {cb}, {mb})", mac_dinh: "{ca} đọc năm này là “{ma}”; {cb} đọc là “{mb}”.", en: "{ca} read this year as “{ma}”; {cb} read it as “{mb}”." },
   "bd.nam.ban_ke": { nhom: BD, nhan: "Câu bạn đã kể ({tl})", mac_dinh: "Bạn kể: “{tl}”.", en: "You said: “{tl}”." },
   "bd.nam.da_tra": { nhom: BD, nhan: "Đếm năm đã kể ({n}, {tong})", mac_dinh: "Bạn đã kể {n}/{tong} năm có chấm.", en: "You've described {n} of {tong} marked years." },
   "bd.nam.dung_cach": { nhom: BD, nhan: "Nút dùng cách ({cach})", mac_dinh: "Dùng {cach} làm cách chính", en: "Use {cach} as my main reading" },
-  "bd.nam.cach_chinh": { nhom: BD, nhan: "Nhãn đang là cách chính", mac_dinh: "đang là cách chính", en: "your main reading" },
+  "bd.nam.cach_chinh": { nhom: BD, nhan: "Nhãn đang là cách chính", mac_dinh: "cách chính của bạn", en: "your main reading" },
   "bd.loai.hop": { nhom: BD, nhan: "Quan hệ: hợp", mac_dinh: "kéo về một phía", en: "pulls together" },
   "bd.loai.xung": { nhom: BD, nhan: "Quan hệ: xung", mac_dinh: "đối đầu", en: "clashes" },
   "bd.loai.hinh": { nhom: BD, nhan: "Quan hệ: hình", mac_dinh: "va chạm", en: "friction" },
@@ -311,10 +293,24 @@ export const CHU_BAT_TU_UI = {
   "bd.hanh.thieu": { nhom: BD, nhan: "Nhãn hành vắng", mac_dinh: "vắng mặt", en: "absent" },
   "bd.nam.chay": { nhom: BD, nhan: "Nút chạy năm", mac_dinh: "Chạy qua các năm", en: "Play through the years" },
   "bd.nam.dung": { nhom: BD, nhan: "Nút dừng chạy năm", mac_dinh: "Dừng", en: "Pause" },
-  "bd.nam.cham_hanh": { nhom: BD, nhan: "Năm sáng hành ({a}, {b})", mac_dinh: "Năm này mang hành {a} và {b} — hai vòng ấy đang sáng.", en: "This year carries {a} and {b} — those circles are lit." },
+  "bd.loai_ngan.hop": { nhom: BD, nhan: "Nhãn ngắn trong ô: hợp", mac_dinh: "kéo về", en: "pulls in" },
+  "bd.loai_ngan.xung": { nhom: BD, nhan: "Nhãn ngắn trong ô: xung", mac_dinh: "đối đầu", en: "clashes" },
+  "bd.loai_ngan.hinh": { nhom: BD, nhan: "Nhãn ngắn trong ô: hình", mac_dinh: "cọ xát", en: "friction" },
+  "bd.loai_ngan.hai": { nhom: BD, nhan: "Nhãn ngắn trong ô: hại", mac_dinh: "lệch nhịp", en: "off-beat" },
+  "bd.loai_ngan.pha": { nhom: BD, nhan: "Nhãn ngắn trong ô: phá", mac_dinh: "ngắt quãng", en: "breaks" },
+  "bd.loai_ngan.trung": { nhom: BD, nhan: "Nhãn ngắn trong ô: lặp lại", mac_dinh: "lặp lại", en: "repeats" },
+  "bd.chu_giai_muc": { nhom: BD, nhan: "Chú giải vạch mức năm", mac_dinh: "Vạch màu sát vòng ngoài là mức từng năm trong mười năm tới: xanh thuận lợi · xám cân bằng · hổ phách cần lưu ý.", en: "The coloured ticks on the outer ring show each of the next ten years: green favourable · grey balanced · amber needs care." },
+  "bd.nam.muc_chung": { nhom: BD, nhan: "Nhãn mức chung", mac_dinh: "Mức chung của năm", en: "Overall level" },
+  "bd.nam.nen_tranh": { nhom: BD, nhan: "Nhãn nên tránh", mac_dinh: "Nên tránh", en: "Better to avoid" },
+  "bd.nam.nen_lam": { nhom: BD, nhan: "Nhãn nên làm", mac_dinh: "Nên làm", en: "Worth doing" },
+  "bd.nam.khoa": { nhom: BD, nhan: "Lời mời mở chương ({nam})", toi_da: 200,
+    mac_dinh: "Năm {nam} nên tránh gì, nên làm gì nằm trong chương “Mười năm tới & điều nên tránh”.",
+    en: "What to avoid and what to do in {nam} is in the “Next ten years” chapter." },
+  "bd.nam.mo_chuong": { nhom: BD, nhan: "Nút mở chương vận hạn", mac_dinh: "Xem chương này", en: "Open that chapter" },
+  "bd.cach.tieu_de": { nhom: BD, nhan: "Tiêu đề hai cách đọc", mac_dinh: "Cách đọc nào khớp với đời bạn?", en: "Which reading fits your life?" },
   "bd.ghi_chu": { nhom: BD, nhan: "Ghi chú cuối", toi_da: 300,
-    mac_dinh: "Câu trả lời về năm đã qua chỉ lưu trên máy bạn, dùng chung với mục “Cách nào đúng với bạn?”.",
-    en: "Your answers about past years stay on your device and are shared with the “Which reading fits you?” section." },
+    mac_dinh: "Câu trả lời về năm đã qua chỉ lưu trên máy bạn. Chọn cách chính chỉ đổi chỗ nhấn trong bài luận khi hai cách nói khác nhau; phép tính không đổi.",
+    en: "Your answers about past years stay on your device. Choosing a main reading only changes what the report highlights where the two readings disagree; nothing is recalculated." },
 } satisfies BangChu;
 
 export type KhoaBatTu = keyof typeof CHU_BAT_TU_UI;

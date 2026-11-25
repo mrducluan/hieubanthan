@@ -15,6 +15,7 @@ import { ChuNhan } from "@/components/cms/ChuNhan";
 import { TenHienProvider, useTen } from "@/components/khung/TenHien";
 import { useChuBatTu } from "@/components/huyen-hoc/chu-bat-tu";
 import { HanhVector, MAU_HANH } from "@/components/huyen-hoc/HanhVector";
+import { ConGiapVector } from "@/components/huyen-hoc/ConGiapVector";
 import { usePost } from "@/lib/goi-api";
 import { ghi } from "@/lib/do-luong";
 import { useCuaLuanGiai } from "@/lib/cta-sao";
@@ -33,6 +34,8 @@ const MAU_LOAI: Record<LoaiNoi, string> = {
 };
 const NET_LOAI: Record<LoaiNoi, string | undefined> = { hop: undefined, trung: undefined, xung: "7 6", hinh: "2 5", hai: "2 5", pha: "2 5" };
 const mauH = (h: string) => MAU_HANH[h]?.mau ?? "rgb(214 211 230)";
+/** Màu mức năm (một nguồn với chương Vận hạn): lục thuận · xám cân bằng · hổ phách cần lưu ý — không đỏ. */
+const MAU_MUC: Record<string, string> = { thuan: "rgb(111 211 160)", can_bang: "rgb(150 148 186)", can_chu_dong: "rgb(217 151 58)" };
 
 type LaSo = { birth_date: string; birth_time?: string | null; gender?: string } & Record<string, unknown>;
 
@@ -49,6 +52,14 @@ function useMayTinh() {
     (f) => { const m = window.matchMedia(MQ_LG); m.addEventListener("change", f); return () => m.removeEventListener("change", f); },
     () => window.matchMedia(MQ_LG).matches,
     () => true,
+  );
+}
+/** Điện thoại hẹp (< 640px): bánh xe bỏ nhãn nhỏ trong ô, chữ vòng ngoài to hơn. */
+function useNho() {
+  return useSyncExternalStore(
+    (f) => { const m = window.matchMedia("(max-width: 639px)"); m.addEventListener("change", f); return () => m.removeEventListener("change", f); },
+    () => window.matchMedia("(max-width: 639px)").matches,
+    () => false,
   );
 }
 function useGiamChuyenDong() {
@@ -191,7 +202,7 @@ function BanDo({ bd, khoa }: { bd: BD; khoa: string | null }) {
 
       <div className="mt-4 grid gap-5 lg:grid-cols-[minmax(0,1fr)_23rem]">
         <div className="min-w-0">
-          <div className="mx-auto w-full max-w-[36rem]">
+          <div className="-mx-3 sm:mx-auto sm:w-full sm:max-w-[36rem]">
             {che === "banh_xe"
               ? <BanhXe bd={bd} oTheoMa={oTheoMa} namDang={namDang} setNam={(n) => { setChay(false); setNam(n); }}
                   chon={chon?.loai === "o" ? chon.ma : null} sang={sang} traLoi={traLoi} chonO={chonO} giam={giam} />
@@ -216,7 +227,9 @@ function BanDo({ bd, khoa }: { bd: BD; khoa: string | null }) {
               })}
             </div>
           )}
-          <p className="mx-auto mt-2 max-w-[36rem] text-center text-xs text-fg-faint">{che === "banh_xe" ? c("bd.chu_giai_banh_xe") : c("bd.chu_giai_nam_hanh")}</p>
+          <p className="mx-auto mt-2 max-w-[36rem] text-center text-xs text-fg-faint">
+            {che === "banh_xe" ? <>{c("bd.chu_giai_banh_xe")} {c("bd.chu_giai_muc")}</> : c("bd.chu_giai_nam_hanh")}
+          </p>
           <ThanhNam bd={bd} nam={nam} setNam={(n) => { setChay(false); setNam(n); }} traLoi={traLoi} chay={chay} setChay={setChay} />
         </div>
 
@@ -237,6 +250,7 @@ function BanhXe({ bd, oTheoMa, namDang, setNam, chon, sang, traLoi, chonO, giam 
 }) {
   const { c, tru } = useChuBatTu();
   const ten = useTen();
+  const nho = useNho();
   const tg = bd.thoi_gian;
   const svg = useRef<SVGSVGElement>(null);
   const keo = useRef(false);
@@ -282,22 +296,37 @@ function BanhXe({ bd, oTheoMa, namDang, setNam, chon, sang, traLoi, chonO, giam 
           const a0 = gocTuoi(v.tu_tuoi), a1 = Math.min(gocTuoi(v.tu_tuoi + 10), 360);
           if (a0 >= 360) return null;
           const dangDi = namDang.nam >= v.tu_nam && namDang.nam <= v.den_nam;
-          const [tx, ty] = diemTron(235, (a0 + a1) / 2);
+          const giua = (a0 + a1) / 2, duoi = giua > 90 && giua < 270;
+          const [tx, ty] = diemTron(235, giua);
+          // Nhãn cong theo vòng; nửa dưới đi ngược chiều để chữ không lộn ngược.
+          const [p0x, p0y] = diemTron(232, duoi ? a1 - 1 : a0 + 1), [p1x, p1y] = diemTron(232, duoi ? a0 + 1 : a1 - 1);
+          const cung = `M${p0x} ${p0y}A232 232 0 0 ${duoi ? 0 : 1} ${p1x} ${p1y}`;
           return (
             <g key={v.i} className="cursor-pointer" onClick={() => setNam(Math.max(dau, Math.min(cuoi, v.tu_nam)))}>
               <title>{v.cau}</title>
               <path d={quat(220, 250, a0 + 0.6, a1 - 0.6)}
                 fill={dangDi ? "rgb(233 196 106 / 0.22)" : v.i % 2 ? "rgb(32 30 72)" : "rgb(40 38 88)"}
                 stroke={dangDi ? "rgb(233 196 106 / 0.85)" : "none"} strokeWidth={1.4} />
-              <text x={tx} y={ty + 4} textAnchor="middle" fontSize={11} fill={dangDi ? "rgb(233 196 106)" : "rgb(150 148 186)"}>{v.tu_tuoi}</text>
+              {nho || !v.nhan || a1 - a0 < 30
+                ? <text x={tx} y={ty + 5} textAnchor="middle" fontSize={nho ? 17 : 11} fontWeight={nho ? 600 : 400} fill={dangDi ? "rgb(233 196 106)" : "rgb(170 168 205)"}>{v.tu_tuoi}</text>
+                : <>
+                    <path id={`bd-cung-${v.i}`} d={cung} fill="none" />
+                    <text fontSize={9.5} fill={dangDi ? "rgb(233 196 106)" : "rgb(170 168 205)"} dy={duoi ? 7 : 3}>
+                      <textPath href={`#bd-cung-${v.i}`} startOffset="50%" textAnchor="middle">{`${v.tu_tuoi} · ${v.nhan}`}</textPath>
+                    </text>
+                  </>}
             </g>
           );
         })}
+        {tg.nam.filter((n) => n.muc).map((n) => (
+          <path key={`m${n.nam}`} d={quat(252, 258, gocTuoi(n.tuoi) - 1.7, gocTuoi(n.tuoi) + 1.7)} fill={MAU_MUC[n.muc!]}
+            opacity={n.nam === namDang.nam ? 1 : 0.75}><title>{`${n.nam}: ${n.nhan_muc}`}</title></path>
+        ))}
         {tg.nam.filter((n) => n.ma && n.dc).map((n) => {
-          const [x, y] = diemTron(258, gocTuoi(n.tuoi));
+          const [x, y] = diemTron(262, gocTuoi(n.tuoi));
           return <circle key={n.nam} cx={x} cy={y} r={2.8} fill={traLoi[n.ma!] ? "rgb(233 196 106)" : "none"} stroke="rgb(233 196 106)" strokeWidth={1} />;
         })}
-        <text x={0} y={-274} textAnchor="middle" fontSize={9.5} letterSpacing="2" fill="rgb(150 148 186)">{c("bd.tuoi_vong").toUpperCase()}</text>
+        <text x={0} y={-274} textAnchor="middle" fontSize={nho ? 14 : 9.5} letterSpacing="2" fill="rgb(150 148 186)">{c("bd.tuoi_vong").toUpperCase()}</text>
       </g>
 
       {/* bốn trụ: can (vòng trong) + chi (vòng giữa) */}
@@ -319,11 +348,15 @@ function BanhXe({ bd, oTheoMa, namDang, setNam, chon, sang, traLoi, chonO, giam 
               <path d={quat(r0, r1, a - 43, a + 43)} fill={o.la_ban ? "rgb(48 42 34)" : "rgb(22 22 52)"}
                 stroke={vien} strokeWidth={duoc || loaiNam ? 2.4 : 1}
                 className="transition-[fill,stroke] duration-200 group-hover:fill-[rgb(36_34_76)] group-focus-visible:stroke-[rgb(233_196_106)]" />
-              <HanhVector hanh={o.hanh} co={o.hang === "can" ? 15 : 17} x={ix} y={iy} mo={0.9} />
-              <text x={cx} y={cy + 9} textAnchor="middle" fontSize={o.hang === "can" ? 23 : 26} className="font-serif" fill={mauH(o.hanh)}>{chu}</text>
-              <text x={nx} y={ny + 3} textAnchor="middle" fontSize={8.5} fill={o.la_ban ? "rgb(233 196 106)" : loaiNam ? MAU_LOAI[loaiNam] : "rgb(150 148 186)"}>
-                {o.la_ban ? c("bd.ban") : loaiNam ? c(`bd.loai.${loaiNam}`) : o.thap_than ? ten("thap_than", o.thap_than) : ""}
-              </text>
+              {o.hang === "can"
+                ? <HanhVector hanh={o.hanh} co={nho ? 20 : 17} x={ix} y={iy} mo={0.95} />
+                : <ConGiapVector chi={o.chi ?? ""} mau={mauH(o.hanh)} co={nho ? 24 : 21} x={ix} y={iy} />}
+              <text x={cx} y={cy + 9} textAnchor="middle" fontSize={(o.hang === "can" ? 23 : 26) * (nho ? 1.18 : 1)} className="font-serif" fill={mauH(o.hanh)}>{chu}</text>
+              {(!nho || o.la_ban) && (
+                <text x={nx} y={ny + 3} textAnchor="middle" fontSize={nho ? 13 : 8.5} fill={o.la_ban ? "rgb(233 196 106)" : loaiNam ? MAU_LOAI[loaiNam] : "rgb(150 148 186)"}>
+                  {o.la_ban ? c("bd.ban") : loaiNam ? c(`bd.loai_ngan.${loaiNam}`) : o.thap_than ? ten("thap_than", o.thap_than) : ""}
+                </text>
+              )}
               {loaiNam && !duoc && (() => { const [dx, dy] = diemTron(r1 - 8, a + 39); return <circle cx={dx} cy={dy} r={3.2} fill={MAU_LOAI[loaiNam]} className="bd-cham-nam" />; })()}
             </g>
           );
@@ -347,7 +380,7 @@ function BanhXe({ bd, oTheoMa, namDang, setNam, chon, sang, traLoi, chonO, giam 
         <circle r={73} fill="none" stroke="rgb(233 196 106)" strokeWidth={6} strokeLinecap="round"
           strokeDasharray={`${(2 * Math.PI * 73 * bd.suc) / 100} ${2 * Math.PI * 73}`} transform="rotate(-90)" />
         <text y={4} textAnchor="middle" fontSize={30} className="font-serif" fill={mauH(nc.hanh)}>{ten("can", nc.can ?? "")}</text>
-        <text y={26} textAnchor="middle" fontSize={9.5} fill="rgb(170 168 205)">{c("bd.suc", { n: String(bd.suc) })}</text>
+        <text y={26} textAnchor="middle" fontSize={nho ? 13 : 9.5} fill="rgb(170 168 205)">{nho ? `${bd.suc}%` : c("bd.suc", { n: String(bd.suc) })}</text>
       </g>
 
       {/* kim năm — kéo được, phím mũi tên đổi năm */}
@@ -543,7 +576,9 @@ function BangO({ o, oTheoMa, onDong, onChon, moChuong }: {
   return (
     <TamBang onDong={onDong} tieuDe={
       <span className="flex items-center gap-2">
-        <BieuTuong hanh={o.hanh} lop="size-8" />
+        {o.hang === "chi"
+          ? <svg viewBox="-14 -14 28 28" className="size-9" aria-hidden><ConGiapVector chi={o.chi ?? ""} mau={mauH(o.hanh)} co={24} /></svg>
+          : <BieuTuong hanh={o.hanh} lop="size-8" />}
         <span style={{ color: mauH(o.hanh) }}>{chuO(o)}</span>
         <span className="text-base text-fg-muted">{o.la_ban ? c("bd.ban") : o.thap_than ? ten("thap_than", o.thap_than) : ""}</span>
       </span>}>
@@ -566,7 +601,19 @@ function BangO({ o, oTheoMa, onDong, onChon, moChuong }: {
           </ul>
         </div>
       )}
-      {o.nam.length > 0 && <Muc tieu={c("bd.muc.nam")} ds={o.nam.map((n) => n.cau)} />}
+      {o.nam.length > 0 && (
+        <div className="mt-4">
+          <p className="eyebrow">{c("bd.muc.nam")}</p>
+          <ul className="mt-1.5 space-y-1.5 text-sm leading-relaxed text-fg">
+            {o.nam.map((n) => (
+              <li key={n.nam} className="flex gap-2">
+                <span aria-hidden className="mt-2 inline-block size-2 shrink-0 rounded-full" style={{ background: n.muc ? MAU_MUC[n.muc] : "rgb(150 148 186)" }} />
+                <span>{n.cau}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <details className="mt-4 rounded-xl border border-line/60 px-3 py-2">
         <summary className="cursor-pointer text-sm text-fg-muted">{c("bd.muc.vi_sao")}</summary>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-xs text-fg-muted">{o.vi_sao.map((x) => <li key={x}>{x}</li>)}</ul>
@@ -653,7 +700,42 @@ function TheNam({ bd, namDang, traLoi, khoa, chinh, moChuong, anMayTinh }: {
           <BieuTuong hanh={namDang.hanh_chi} lop="size-7" />
           <p className="font-serif text-lg">{namDang.nam} · {ten("can", namDang.can)} {ten("chi", namDang.chi)}</p>
         </div>
-        <p className="mt-2 font-medium text-fg">{namDang.cau}</p>
+        {namDang.muc && (
+          <p className="mt-2 flex flex-wrap items-center gap-2 text-sm">
+            <span className="text-fg-muted">{c("bd.nam.muc_chung")}</span>
+            <span className="rounded-full px-2.5 py-0.5 text-xs font-semibold" data-testid="bd-muc-nam"
+              style={{ color: MAU_MUC[namDang.muc], background: `color-mix(in srgb, ${MAU_MUC[namDang.muc]} 16%, transparent)` }}>
+              {namDang.nhan_muc}
+            </span>
+            {namDang.mang && <span className="text-xs text-fg-muted">· {namDang.mang}</span>}
+          </p>
+        )}
+        {namDang.y && <p className="mt-2 text-fg">{namDang.y}</p>}
+        {(namDang.nen_tranh || namDang.nen_lam) && (
+          <div className="mt-3 grid gap-2 sm:grid-cols-2" data-testid="bd-nen-tranh">
+            {namDang.nen_tranh && (
+              <div className="rounded-xl border border-[rgb(217_151_58/0.45)] bg-[rgb(217_151_58/0.07)] p-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[rgb(217_151_58)]">{c("bd.nam.nen_tranh")}</p>
+                <p className="mt-1 text-sm text-fg">{namDang.nen_tranh}</p>
+              </div>
+            )}
+            {namDang.nen_lam && (
+              <div className="rounded-xl border border-[rgb(111_211_160/0.45)] bg-[rgb(111_211_160/0.07)] p-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[rgb(111_211_160)]">{c("bd.nam.nen_lam")}</p>
+                <p className="mt-1 text-sm text-fg">{namDang.nen_lam}</p>
+              </div>
+            )}
+          </div>
+        )}
+        {namDang.khoa && (
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-gold/40 bg-gold/[0.06] px-3 py-2" data-testid="bd-nam-khoa">
+            <p className="text-sm text-fg">{c("bd.nam.khoa", { nam: String(namDang.nam) })}</p>
+            <button type="button" onClick={() => moChuong("van_han")} className="shrink-0 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-[#1a1406]">
+              {c("bd.nam.mo_chuong")}
+            </button>
+          </div>
+        )}
+        <p className="mt-3 text-sm font-medium text-fg">{namDang.cau}</p>
         {van && <p className="mt-1.5 text-sm text-fg-muted">{van.cau}</p>}
         {namDang.chi_tiet.length > 0 && (
           <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-fg-muted">{namDang.chi_tiet.map((x) => <li key={x}>{x}</li>)}</ul>
@@ -678,31 +760,36 @@ function TheNam({ bd, namDang, traLoi, khoa, chinh, moChuong, anMayTinh }: {
             )}
           </div>
         )}
-        {!namDang.qua && (
-          <button type="button" onClick={() => moChuong("van_han")}
-            className="mt-3 text-left text-sm text-gold underline-offset-4 hover:underline">{tg.nam_toi}</button>
-        )}
       </div>
       {cau.length > 0 && (
         <div className="rounded-2xl border border-moon/30 bg-moon/[0.05] p-4 text-sm" data-testid="bd-ket-qua">
-          <div className="flex items-center justify-between gap-2">
+          <p className="font-serif text-base text-fg">{c("bd.cach.tieu_de")}</p>
+          <div className="mt-2 grid gap-1.5">
+            {(["cach_1", "cach_2"] as const).map((k, i) => (
+              <div key={k} data-testid={`bd-${k}`} className={cn("rounded-xl border px-3 py-2", chinh === k ? "border-gold/70 bg-gold/[0.06]" : "border-line/60")}>
+                <p className="flex flex-wrap items-center gap-1.5 text-fg">
+                  <span className={cn("inline-block size-2 rounded-full", i ? "border-2 border-moon" : "bg-moon")} aria-hidden />
+                  <b className="font-medium">{tg.cach[k].ten}</b>
+                  {chinh === k && <span className="rounded-full bg-gold px-1.5 py-px text-[0.65rem] font-semibold text-[#1a1406]">{c("bd.nam.cach_chinh")}</span>}
+                </p>
+                <p className="mt-0.5 text-xs text-fg-muted">{tg.cach[k].mo_ta}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-3 flex items-center justify-between gap-2">
             <p className="text-fg-muted">{c("bd.nam.da_tra", { n: String(daTra), tong: String(cau.length) })}</p>
             <div className="h-1.5 w-20 overflow-hidden rounded-full bg-line/60" aria-hidden>
               <div className="h-full rounded-full bg-gold transition-[width] duration-500" style={{ width: `${(daTra / cau.length) * 100}%` }} />
             </div>
           </div>
-          {kq.ma && <p className="mt-1.5 text-fg">{tg.ket_luan[kq.ma]}</p>}
-          {nghieng && khoa && (
-            chinh === nghieng
-              ? <p className="mt-2 text-xs font-semibold text-gold">{tg.cach[nghieng].ten} · {c("bd.nam.cach_chinh")}</p>
-              : (
+          {kq.ma && <p className="mt-1.5 text-fg" data-testid="bd-ket-luan">{tg.ket_luan[kq.ma]}</p>}
+          {nghieng && khoa && chinh !== nghieng && (
                 <button type="button" onClick={() => {
                   ghiLa(khoa, { tra_loi: traLoi, chinh: nghieng });
                   ghi("chart_interacted", { mo_dun: "battu", kind: "battu_cach_chinh", ket_qua: nghieng, nguon: "ban_do" });
                 }} className="mt-2 rounded-full border border-gold/60 px-3 py-1.5 text-xs font-medium text-fg hover:bg-gold/10">
                   {c("bd.nam.dung_cach", { cach: tg.cach[nghieng].ten })}
                 </button>
-              )
           )}
           <p className="mt-2 text-xs text-fg-faint"><ChuNhan chu={c("bd.ghi_chu")} /></p>
         </div>

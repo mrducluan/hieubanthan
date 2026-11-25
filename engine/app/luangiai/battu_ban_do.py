@@ -221,7 +221,8 @@ def _o_ds(ls: dict) -> list[dict]:
     return ds
 
 
-def _lap_o(pt: dict, o: dict, ds_o: list[dict], qh_o: dict, ln10: list[dict], tuoi_tru: dict, gioi: str, lon: bool) -> dict:
+def _lap_o(pt: dict, o: dict, ds_o: list[dict], qh_o: dict, ln10: list[dict], tuoi_tru: dict, gioi: str, lon: bool,
+           muc_nam: dict | None = None) -> dict:
     ls, mr = pt["ls"], pt["mr"]
     nc = ls["nhat_chu"]
     chu = _chu(o)
@@ -293,7 +294,8 @@ def _lap_o(pt: dict, o: dict, ds_o: list[dict], qh_o: dict, ln10: list[dict], tu
         noi.append({"o": ma2, "loai": gl, "cau": _m("noi").format(chu_kia=_chu(o2), tru_kia=_ten_tru(o2["tru"]), y=y)})
         vi_sao.append(q["mo_ta"] if ngon_ngu.la_viet() else battu_hien.mo_ta_quan_he(q))
 
-    # lớp 4 — năm chạm tới (10 năm tới, không mức)
+    # lớp 4 — năm chạm tới (10 năm tới). Lời chỉ nói chữ này bị chạm vào chuyện gì; tốt / cần lưu ý là MỨC của chương
+    # Vận hạn (một nguồn, `muc_nam`), không tự suy "hợp là tốt, xung là xấu".
     nam = []
     for ln in ln10:
         gl = None
@@ -307,10 +309,14 @@ def _lap_o(pt: dict, o: dict, ds_o: list[dict], qh_o: dict, ln10: list[dict], tu
                 if g2 and (gl is None or UU_TIEN_LOAI.index(g2) < UU_TIEN_LOAI.index(gl)):
                     gl = g2
         if gl:
-            nam.append({"nam": ln["nam"], "can": ln["can"], "chi": ln["chi"], "loai": gl,
-                        "cau": _m("nam").format(nam=ln["nam"], cc=f"{_t('can', ln['can'])} {_t('chi', ln['chi'])}",
-                                                loai_y=_m("nam_y", gl), chu=chu, tru=_ten_tru(i),
-                                                ve=_m("nam_ve", gl).format(ngan=_ngan(i, o["hang"], lon)))})
+            mn = (muc_nam or {}).get(ln["nam"])
+            cau = _m("nam").format(nam=ln["nam"], cc=f"{_t('can', ln['can'])} {_t('chi', ln['chi'])}",
+                                   loai_y=_m("nam_y", gl), chu=chu, tru=_ten_tru(i),
+                                   ve=_m("nam_ve", gl).format(ngan=_ngan(i, o["hang"], lon)))
+            if mn:
+                cau += _m("nam_muc").format(muc=mn["nhan_muc"])
+            nam.append({"nam": ln["nam"], "can": ln["can"], "chi": ln["chi"], "loai": gl, "muc": mn["muc"] if mn else None,
+                        "cau": cau})
     ra = {**o, "nhom": g, "la_ban": o["ma"] == "c2", "dung": dung, "nguoi": None if o["ma"] == "c2" else _nguoi(tt, g, gioi, lon),
           "la_gi": la_gi, "o_dau": o_dau, "noi_voi": noi, "nam": nam[:NAM_MOI_O], "vi_sao": vi_sao,
           "chuong": _chuong(o, g, lon)}
@@ -399,16 +405,26 @@ def _cham_nam(i_can: str, i_chi: str, ls: dict, quan_he: list[dict], tru_moi: in
 
 
 def _cau_cham(ch: list[dict], ds_o: dict, lon: bool) -> list[str]:
-    """`lon` theo TUỔI CỦA NĂM / VẬN đang nói (vận tuổi nhỏ không nói "chuyện vợ chồng")."""
-    ra = []
-    for x in ch:
+    """`lon` theo TUỔI CỦA NĂM / VẬN đang nói (vận tuổi nhỏ không nói "chuyện vợ chồng"). Cùng một chữ lặp ở nhiều trụ, cùng
+    kiểu chạm → gộp một dòng ("ba chữ Ngọ ở trụ năm, trụ ngày và trụ giờ")."""
+    nhom: dict[tuple[str, str, str], list[dict]] = {}
+    for x in ch:   # gộp theo MÃ chữ (bản Anh "Mậu" và "Ngọ" cùng viết "Wu" — không gộp theo chữ hiển thị)
         o = ds_o[x["o"]]
-        ra.append(_k("thoi_gian", "cham").format(loai_y=hoa_dau(_m("nam_y", x["loai"])), chu=_chu(o), tru=_ten_tru(o["tru"]),
-                                                  ve=_m("nam_ve", x["loai"]).format(ngan=_ngan(o["tru"], o["hang"], lon))))
+        nhom.setdefault((x["loai"], o["hang"], o.get("can") or o.get("chi") or ""), []).append(o)
+    ra = []
+    for (loai, _hang, _ma), ds in nhom.items():
+        chu = _chu(ds[0])
+        ngan = danh_sach([_ngan(o["tru"], o["hang"], lon) for o in ds])
+        ve = _m("nam_ve", loai).format(ngan=ngan)
+        if len(ds) == 1:
+            ra.append(_k("thoi_gian", "cham").format(loai_y=hoa_dau(_m("nam_y", loai)), chu=chu, tru=_ten_tru(ds[0]["tru"]), ve=ve))
+        else:
+            ra.append(_k("thoi_gian", "cham_nhom").format(loai_y=hoa_dau(_m("nam_y", loai)), so=_k("so_chu", str(len(ds))) or len(ds),
+                                                           chu=chu, tru=danh_sach([_ten_tru(o["tru"]) for o in ds]), ve=ve))
     return ra
 
 
-def _thoi_gian(pt: dict, sinh: dict, nam0: int, ngay_xem: dt.date, ds_o: list[dict], lon: bool) -> dict:
+def _thoi_gian(pt: dict, sinh: dict, nam0: int, ngay_xem: dt.date, ds_o: list[dict], lon: bool, dong: list[dict]) -> dict:
     ls = pt["ls"]
     nam_sinh = sinh["lich"].year
     nam_dau = ls.get("nam_bat_tu", nam_sinh)
@@ -417,7 +433,9 @@ def _thoi_gian(pt: dict, sinh: dict, nam0: int, ngay_xem: dt.date, ds_o: list[di
     tgb = bt.thoi_gian_bieu(pt, ngay_xem)
     tg = _k("thoi_gian") or {}
     nam = []
-    for n in range(nam_dau, nam0 + SO_NAM_TOI + 1):
+    muc_nam = {g["nam"]: g for g in dong}
+    nam_cuoi = max(muc_nam) if muc_nam else nam0 + SO_NAM_TOI
+    for n in range(nam_dau, nam_cuoi + 1):
         ln = mr_calc.luu_nien(ls, n)
         tuoi = n - nam_sinh
         ch = _cham_nam(ln["can"], ln["chi"], ls, ln["quan_he"], 4)
@@ -429,6 +447,13 @@ def _thoi_gian(pt: dict, sinh: dict, nam0: int, ngay_xem: dt.date, ds_o: list[di
         x = {"nam": n, "can": ln["can"], "chi": ln["chi"], "thap_than": ln["thap_than"], "tuoi": tuoi, "dai_van": idx,
              "hanh_can": bt_calc._nh_can(ln["can"]), "hanh_chi": bt_calc.CHI_NH[bt_calc.CHI.index(ln["chi"])],
              "qua": n < nam0, "cham": ch, "cau": cau, "chi_tiet": _cau_cham(ch, o_theo, lon and tuoi >= config.TUOI_NGUOI_LON)}
+        g = muc_nam.get(n)
+        if g:   # năm nay + chín năm tới: đúng mức chương "Mười năm tới & điều nên tránh" (một nguồn)
+            x.update({"muc": g["muc"], "nhan_muc": g["nhan_muc"], "mang": g.get("mang") or ""})
+            if n == nam0:   # cách a (chủ dự án chốt): chỉ năm nay mở "nên tránh / nên làm"; năm sau mời mở chương
+                x.update({k: g[k] for k in ("y", "nen_tranh", "nen_lam") if g.get(k)})
+            else:
+                x["khoa"] = True
         if n < nam0 and tuoi >= dc.TUOI_NHO_NHAT:
             m1, m2, _ = bt.muc_hai_cach(pt, ln["can"], ln["chi"])
             if m1 != m2:
@@ -441,6 +466,7 @@ def _thoi_gian(pt: dict, sinh: dict, nam0: int, ngay_xem: dt.date, ds_o: list[di
         tt = bt_calc.thap_than(ls["nhat_chu"]["can"], d["can"])
         cd = kb_ds.van(tt) or {}
         van.append({"i": k, "can": d["can"], "chi": d["chi"], "thap_than": tt, "tu_nam": d["tu_nam"], "den_nam": d["den_nam"],
+                    "nhan": _k("nhom", bt.TT_NHOM.get(tt, ""), "ngan") or "",
                     "tu_tuoi": d["tu_tuoi_thuc"], "hien_tai": bool(tgb[k]["hien_tai"]) if k < len(tgb) else False,
                     "cham": ch, "chi_tiet": _cau_cham(ch, o_theo, lon and d["tu_tuoi_thuc"] + 9 >= config.TUOI_NGUOI_LON),
                     "cau": tg["van"].format(tu_nam=d["tu_nam"], den_nam=d["den_nam"], tu_tuoi=d["tu_tuoi_thuc"],
@@ -489,10 +515,13 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None) -> dict:
     tuoi_tru = {i: _tuoi_tru(i, nam_sinh, tuoi) for i in range(4)}
     ds_o = _o_ds(ls)
     qh_o = _quan_he_o(pt["mr"])
-    ln10 = [mr_calc.luu_nien(ls, n) for n in range(nam0, nam0 + SO_NAM_TOI + 1)]
-    o = [_lap_o(pt, x, ds_o, qh_o, ln10, tuoi_tru, gioi, lon) for x in ds_o]
+    dong = bt.dong_nam_cua(sinh, ngay_xem, ls)
+    muc_nam = {g["nam"]: g for g in dong}
+    nam_cuoi = max(muc_nam) if muc_nam else nam0 + SO_NAM_TOI
+    ln10 = [mr_calc.luu_nien(ls, n) for n in range(nam0, nam_cuoi + 1)]
+    o = [_lap_o(pt, x, ds_o, qh_o, ln10, tuoi_tru, gioi, lon, muc_nam) for x in ds_o]
     tru = [{"i": i, "ten": _ten_tru(i), "tang": _tru_kb(i).get("tang", ""), **tuoi_tru[i]} for i in range(4)]
     return {"phien_ban": PHIEN_BAN, "tuoi": tuoi, "nguoi_lon": lon, "tru": tru, "o": o,
             "suc": round(ls["than"]["ti_le"] * 100), "ngu_hanh": _ngu_hanh(pt, ds_o),
             "noi_bat": _noi_bat(pt, ds_o, lon), "trich": _k("trich") or [], "tuoi_ghi_chu": _k("tuoi", "ghi_chu") or "",
-            "thoi_gian": _thoi_gian(pt, sinh, nam0, ngay_xem, ds_o, lon), "ngay_xem": ngay_xem.isoformat(), **meta()}
+            "thoi_gian": _thoi_gian(pt, sinh, nam0, ngay_xem, ds_o, lon, dong), "ngay_xem": ngay_xem.isoformat(), **meta()}
