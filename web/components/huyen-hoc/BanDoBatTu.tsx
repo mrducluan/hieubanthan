@@ -5,7 +5,8 @@
 // cách lấy dụng thần, không chọn thay) · Theo năm (C: kéo năm / đại vận, năm đã qua hai cách nói khác nhau thì hỏi lại —
 // dùng chung câu trả lời với khối "Cách nào đúng với bạn?"). Web CHỈ vẽ: lời, quan hệ, tuổi, năm, mức đều do engine.
 // Đo: chart_interacted{mo_dun: battu, kind: ban_do_*} — chỉ mã ô / cách xem, không năm, không câu trả lời.
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Map as IconMap, X } from "lucide-react";
 import { ChuNhan } from "@/components/cms/ChuNhan";
 import { TenHienProvider, useTen } from "@/components/khung/TenHien";
@@ -171,7 +172,7 @@ function O({ o, che, chon, sang, mo, loaiNam, onChon }: {
   const { c } = useChuBatTu();
   const ten = useTen();
   const chu = o.hang === "can" ? ten("can", o.can ?? "") : ten("chi", o.chi ?? "");
-  const duoi = o.la_ban ? c("bd.ban")
+  const duoi = che === "nam" && loaiNam ? c(`bd.loai.${loaiNam}`) : o.la_ban ? c("bd.ban")
     : che === "nguoi" ? o.nguoi ?? ""
       : che === "hanh" ? (o.dung ? c(`bd.dung.${o.dung}`) : ten("hanh", o.hanh))
         : che === "nam" ? (loaiNam ? c(`bd.loai.${loaiNam}`) : "")
@@ -187,10 +188,21 @@ function O({ o, che, chon, sang, mo, loaiNam, onChon }: {
         o.la_ban && "border-gold/70",
         chon && "border-gold ring-2 ring-gold/60", sang && !chon && "border-gold/60", mo && "opacity-45",
         che === "nam" && !loaiNam && "opacity-55")}>
-      <span className="font-serif text-3xl leading-none sm:text-4xl" style={{ color: "rgb(var(--hanh))" }}>{chu}</span>
+      <span className="font-serif text-[1.65rem] leading-none sm:text-4xl" style={{ color: "rgb(var(--hanh))" }}>{chu}</span>
       <span className={cn("line-clamp-2 max-w-full text-[0.68rem] leading-tight sm:text-xs",
         o.la_ban ? "font-semibold text-gold" : che === "hanh" && o.dung ? "text-fg" : "text-fg-muted")}>{duoi}</span>
     </button>
+  );
+}
+
+// Máy tính (≥ lg): bảng nghĩa nằm trong khung. Điện thoại: tấm trượt từ đáy, đưa ra <body> qua portal — khung `glass`
+// có backdrop-filter tạo lớp xếp chồng riêng, z-index bên trong không thắng được thanh tab dưới.
+const MQ = "(min-width: 1024px)";
+function useMayTinh() {
+  return useSyncExternalStore(
+    (f) => { const m = window.matchMedia(MQ); m.addEventListener("change", f); return () => m.removeEventListener("change", f); },
+    () => window.matchMedia(MQ).matches,
+    () => true,
   );
 }
 
@@ -200,9 +212,10 @@ function BangO({ o, oTheoMa, onDong, onChon, moChuong, ten }: {
 }) {
   const { c } = useChuBatTu();
   const tieuDe = useRef<HTMLHeadingElement>(null);
+  const mayTinh = useMayTinh();
   useEffect(() => {
     if (!o) return;
-    tieuDe.current?.focus({ preventScroll: window.matchMedia("(min-width: 1024px)").matches });
+    tieuDe.current?.focus({ preventScroll: window.matchMedia(MQ).matches });
     const esc = (e: KeyboardEvent) => { if (e.key === "Escape") onDong(); };
     window.addEventListener("keydown", esc);
     return () => window.removeEventListener("keydown", esc);
@@ -215,12 +228,12 @@ function BangO({ o, oTheoMa, onDong, onChon, moChuong, ten }: {
     );
   }
   const chuO = (x: OBanDo) => (x.hang === "can" ? ten("can", x.can ?? "") : ten("chi", x.chi ?? ""));
-  return (
+  const bang = (
     <>
       {/* Điện thoại: tấm trượt từ đáy; máy tính: cột phải trong khung. */}
-      <div aria-hidden className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={onDong} />
+      <div aria-hidden className="fixed inset-0 z-[60] bg-black/50 lg:hidden" onClick={onDong} />
       <div role="dialog" aria-modal="false" aria-labelledby="bd-o-tieu-de" data-testid="bd-bang-o"
-        className="fixed inset-x-0 bottom-0 z-50 max-h-[78vh] overflow-y-auto rounded-t-3xl border border-line/70 bg-[rgb(var(--bg))] p-5 shadow-2xl
+        className="fixed inset-x-0 bottom-0 z-[61] max-h-[78vh] pb-[max(1.25rem,env(safe-area-inset-bottom))] overflow-y-auto rounded-t-3xl border border-line/70 bg-[rgb(var(--bg))] p-5 shadow-2xl
           lg:static lg:z-auto lg:max-h-[34rem] lg:rounded-2xl lg:bg-transparent lg:p-4 lg:shadow-none">
         <div className="flex items-start justify-between gap-3">
           <h3 id="bd-o-tieu-de" ref={tieuDe} tabIndex={-1} className="font-serif text-2xl outline-none">
@@ -264,6 +277,7 @@ function BangO({ o, oTheoMa, onDong, onChon, moChuong, ten }: {
       </div>
     </>
   );
+  return mayTinh ? bang : createPortal(bang, document.body);
 }
 
 function Muc({ tieu, ds }: { tieu: string; ds: string[] }) {
@@ -368,7 +382,7 @@ function TheoNam({ bd, nam, setNam, namDang, traLoi, khoa, chinh, moChuong }: {
             {tl && (
               <p className="mt-2 text-sm text-fg-muted" data-testid="bd-hai-cach">
                 {tl !== "khong_nho" && <>{c("bd.nam.ban_ke", { tl: nhanMuc(tl) })} </>}
-                {c("bd.nam.hai_cach", { c1: tg.cach.cach_1.ten, m1: nhanMuc(namDang.dc[0]), c2: tg.cach.cach_2.ten, m2: nhanMuc(namDang.dc[1]) })}
+                {c("bd.nam.hai_cach", { ca: tg.cach.cach_1.ten, ma: nhanMuc(namDang.dc[0]), cb: tg.cach.cach_2.ten, mb: nhanMuc(namDang.dc[1]) })}
               </p>
             )}
           </div>

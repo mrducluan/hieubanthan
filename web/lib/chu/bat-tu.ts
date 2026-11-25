@@ -285,7 +285,7 @@ export const CHU_BAT_TU_UI = {
   "bd.nam.nay": { nhom: BD, nhan: "Nút về năm nay", mac_dinh: "Năm nay", en: "This year" },
   "bd.nam.van": { nhom: BD, nhan: "Tên dải đại vận", mac_dinh: "Mười năm một chặng", en: "Ten-year stretches" },
   "bd.nam.khong_cham": { nhom: BD, nhan: "Năm không chạm chữ nào", mac_dinh: "Năm này không chạm thẳng vào chữ nào trong lá số.", en: "This year doesn't touch any character in your chart directly." },
-  "bd.nam.hai_cach": { nhom: BD, nhan: "Dòng hai cách đã nói ({c1}, {m1}, {c2}, {m2})", mac_dinh: "{c1} đọc năm này là “{m1}”; {c2} đọc là “{m2}”.", en: "{c1} read this year as “{m1}”; {c2} read it as “{m2}”." },
+  "bd.nam.hai_cach": { nhom: BD, nhan: "Dòng hai cách đã nói ({ca}, {ma}, {cb}, {mb})", mac_dinh: "{ca} đọc năm này là “{ma}”; {cb} đọc là “{mb}”.", en: "{ca} read this year as “{ma}”; {cb} read it as “{mb}”." },
   "bd.nam.ban_ke": { nhom: BD, nhan: "Câu bạn đã kể ({tl})", mac_dinh: "Bạn kể: “{tl}”.", en: "You said: “{tl}”." },
   "bd.nam.da_tra": { nhom: BD, nhan: "Đếm năm đã kể ({n}, {tong})", mac_dinh: "Bạn đã kể {n}/{tong} năm có chấm.", en: "You've described {n} of {tong} marked years." },
   "bd.nam.dung_cach": { nhom: BD, nhan: "Nút dùng cách ({cach})", mac_dinh: "Dùng {cach} làm cách chính", en: "Use {cach} as my main reading" },
