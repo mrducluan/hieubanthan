@@ -88,7 +88,8 @@ def phan_tich(tang: list[dict], huong_nha_do: float | None = None, truc_do: floa
         if cua and (chu or bep):
             q = lambda k: theo[k]["quai"] if k in theo and theo[k]["phuong"] != "Trung cung" else None  # noqa: E731
             o["tam_yeu"] = ty.so_do(cua["quai"], chu["quai"] if chu else None, bep["quai"] if bep else None, tuoi,
-                                    ve_sinh=q("ve_sinh"), ban_tho=q("ban_tho"), menh=menh_quai, nhieu_tang=len(tang) > 1)
+                                    ve_sinh=q("ve_sinh"), ban_tho=q("ban_tho"), menh=menh_quai, nhieu_tang=len(tang) > 1,
+                                    cua_sat_ranh=cua.get("sat_ranh_8") if t["so"] == 1 else None)
             if t["so"] > 1:                     # tầng trên: "cửa" là đầu cầu thang — gọi đúng tên
                 for c in o["tam_yeu"]["cap"]:
                     c["ten"] = kb["ten_cap_tren"].get(c["cap"], c["ten"])

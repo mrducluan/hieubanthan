@@ -3302,7 +3302,8 @@
    "mk_cua_doi": "Bạn đã khai trước cửa có đường đâm thẳng hoặc ngã ba.",
    "mk_nhieu_cua": "Bạn đã khai trong nhà có cửa đối thẳng nhau.",
    "mk_nen": "Bạn đã khai nhà không vuông (chữ L, khuyết góc).",
-   "mk_tang": "Nhà bạn có nhiều tầng."
+   "mk_tang": "Nhà bạn có nhiều tầng.",
+   "cua_ranh": "Ở nhà bạn: cửa chính đo được nằm sát ranh giữa phía {a} và phía {b} — đúng trường hợp sách dặn nên để cửa nằm gọn một phía."
   },
   "viec_tuan_tieu_de": "Bếp chưa hợp với cửa theo Dương Trạch Tam Yếu"
  },

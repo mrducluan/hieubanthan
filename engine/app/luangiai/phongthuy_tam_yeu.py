@@ -57,7 +57,7 @@ def _goi_y_bep(cua: str, chu: str | None) -> list[dict]:
 
 def so_do(cua: str, chu: str | None = None, bep: str | None = None, tuoi: int | None = None, *,
           ve_sinh: str | None = None, ban_tho: str | None = None, menh: str | None = None, khac_nhom_nguoi: bool = False,
-          dau_hieu: list[str] | None = None, nhieu_tang: bool = False) -> dict:
+          dau_hieu: list[str] | None = None, nhieu_tang: bool = False, cua_sat_ranh: str | None = None) -> dict:
     """`cua`, `chu`, `bep` = quái phương vị (nhìn từ tâm nhà). `tuoi` (tuổi tròn của người đọc, nếu biết) chỉ quyết định
     có hiện ghi chép nhóm C hay không — không đổi mức nào. TY-2: `ve_sinh`, `ban_tho` (quái), `menh` (mệnh quái người chủ),
     `khac_nhom_nguoi`, `dau_hieu` (đã xác nhận), `nhieu_tang` → nguyên tắc Tam Yếu / điều Minh Kính đúng với nhà này."""
@@ -107,7 +107,8 @@ def so_do(cua: str, chu: str | None = None, bep: str | None = None, tuoi: int | 
         can_cu.append(cc["can_cu"]["sach_khac"])
 
     # SX-C: khối sách xưa (chỉ bản Việt). Đếm số mục nhóm C bị giữ lại để web mời người đọc xác nhận đủ 18 tuổi.
-    them = {"ve_sinh": ve_sinh, "ban_tho": ban_tho, "menh": menh, "khac_nhom_nguoi": khac_nhom_nguoi, "nhieu_tang": nhieu_tang}
+    them = {"ve_sinh": ve_sinh, "ban_tho": ban_tho, "menh": menh, "khac_nhom_nguoi": khac_nhom_nguoi, "nhieu_tang": nhieu_tang,
+            "cua_sat_ranh": cua_sat_ranh}
     sach = sach_ghi_mon.phongthuy(dau_hieu=dau_hieu, cua=cua, chu=chu, bep=bep, tuoi=tuoi, them=them)
     an_c = 0
     if ngon_ngu.la_viet() and (tuoi is None or tuoi < sach_ghi_mon.TUOI_NHOM_C):
@@ -240,8 +241,8 @@ def bep_dieu_can(cua: str) -> list[dict]:
     return ra
 
 
-def _su_kien(cua, chu, bep, ve_sinh, ban_tho, menh, khac_nhom_nguoi, dau_hieu, nhieu_tang) -> dict:
-    f = {"cua": cua, "chu": chu, "bep": bep, "wc": ve_sinh, "tho": ban_tho, "menh": menh, "dh": set(dau_hieu or ()),
+def _su_kien(cua, chu, bep, ve_sinh, ban_tho, menh, khac_nhom_nguoi, dau_hieu, nhieu_tang, cua_sat_ranh=None) -> dict:
+    f = {"ranh": cua_sat_ranh, "cua": cua, "chu": chu, "bep": bep, "wc": ve_sinh, "tho": ban_tho, "menh": menh, "dh": set(dau_hieu or ()),
          "khac_nhom_nguoi": bool(khac_nhom_nguoi), "nhieu_tang": bool(nhieu_tang)}
     f["cc"] = du_nien(cua, chu) if chu else None
     f["cb"] = du_nien(cua, bep) if bep else None
@@ -313,6 +314,8 @@ def _r_nguyen_tac(f: dict) -> dict[str, str]:
         ra["menh_nguoi_o"] = _f(k, q=m, nm=_nhom_ten(m), nn=_nhom_ten(cua), ds=_ds(tot))
     if f["dh"] & {"duong_dam", "song_truoc"}:
         ra["truoc_nha"] = _ap()["truoc_nha"]
+    if f["ranh"]:            # VT-1 đo được cửa nằm sát ranh 8 phương (≤ 5°) — nguyên tắc "cửa gọn trong một phía"
+        ra["cua_gon_mot_phia"] = _f("cua_ranh", a=_h(cua), b=_ten.ten("huong", f["ranh"]))
     return ra
 
 
@@ -372,7 +375,7 @@ def _r_minh_kinh(f: dict) -> dict[str, str]:
 
 TOI_DA_NGUYEN_TAC = 10
 # Nguyên tắc có câu tính riêng cho nhà này đứng trước; câu nhắc chung (khung ba chỗ, bếp nuôi người…) đứng sau.
-UU_TIEN_NGUYEN_TAC = ("nha_ba_tot", "sao_tot_dung_cho", "du_cung_mem", "bon_du_nien_xau", "chinh_va_phu", "bep_cung_nhom",
+UU_TIEN_NGUYEN_TAC = ("cua_gon_mot_phia", "nha_ba_tot", "sao_tot_dung_cho", "du_cung_mem", "bon_du_nien_xau", "chinh_va_phu", "bep_cung_nhom",
                       "hai_nhom_dong_tay", "menh_nguoi_o", "cua_sau_phia_xau", "du_nien_hop_nhom", "truoc_nha",
                       "bep_theo_dieu_can", "bon_cho_phu", "bon_du_nien_tot", "bep_nuoi_nguoi", "tam_yeu")
 TOI_DA_MINH_KINH = 8
@@ -380,13 +383,14 @@ TOI_DA_MINH_KINH = 8
 
 def nhom_sach(cua: str, chu: str | None = None, bep: str | None = None, *, ve_sinh: str | None = None,
               ban_tho: str | None = None, menh: str | None = None, khac_nhom_nguoi: bool = False,
-              dau_hieu: list[str] | None = None, nhieu_tang: bool = False) -> list[tuple[str, str, list[tuple[dict, str]]]]:
+              dau_hieu: list[str] | None = None, nhieu_tang: bool = False,
+              cua_sat_ranh: str | None = None) -> list[tuple[str, str, list[tuple[dict, str]]]]:
     """Nhóm câu sách cho khối "Sách xưa ghi" (khuôn SX-C `sach_ghi_mon.khoi`): nguyên tắc Tam Yếu + điều Minh Kính có điều
     kiện đúng với nhà này, mỗi mục kèm câu "ở nhà bạn" làm `ve`. Thứ tự theo KB; chỉ bản Việt (khuôn tự bỏ bản khác)."""
     if not ngon_ngu.la_viet() or not cua:
         return []
     kb = nap.doc(TEP)
-    f = _su_kien(cua, chu, bep, ve_sinh, ban_tho, menh, khac_nhom_nguoi, dau_hieu, nhieu_tang)
+    f = _su_kien(cua, chu, bep, ve_sinh, ban_tho, menh, khac_nhom_nguoi, dau_hieu, nhieu_tang, cua_sat_ranh)
     nt, mk = _r_nguyen_tac(f), _r_minh_kinh(f)
     theo_ma = {m["ma"]: m for m in kb["nguyen_tac"]}
     g1 = [(theo_ma[ma], nt[ma]) for ma in UU_TIEN_NGUYEN_TAC if ma in nt and ma in theo_ma][:TOI_DA_NGUYEN_TAC]
