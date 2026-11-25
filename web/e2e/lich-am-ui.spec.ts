@@ -48,7 +48,12 @@ test("/lich-am (năm đang đi) có nút Hôm nay; /nam/2027 có lịch; 390px k
   expect(o!.width).toBeGreaterThanOrEqual(44);
   expect(o!.height).toBeGreaterThanOrEqual(44);
   await page.goto("/nam/2027");
+  // NAM-4: mặc định tab "Lịch âm" (tháng âm đang đi, mở sẵn hôm nay); tab "Năm 2027" là lịch cả năm 2027.
+  await expect(page.getByTestId("lich-am-tab-nay")).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByTestId("lich-am-hom-nay")).toBeVisible();
+  await page.getByTestId("lich-am-tab-nam").click();
   await expect(page.getByTestId("lich-am-nam")).toContainText("Lịch âm năm Đinh Mùi 2027");
+  await expect(page.getByTestId("lich-am-ca-nam")).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(0);
 });
 
