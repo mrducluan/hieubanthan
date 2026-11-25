@@ -798,7 +798,8 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
               ▲ {c("dv.mat_truoc")}{huongNha != null ? ` · ${Math.round(huongNha)}°` : ""} · {khung.rong}m × {khung.sau}m
             </p>
             <div className="relative mx-auto" style={{ aspectRatio: `${khung.rong} / ${khung.sau}`, width: `min(100%, calc(62vh * ${khung.rong / khung.sau}))` }}>
-            {anhNen && (
+            {anhNen && anhNen.url.startsWith("blob:") && (
+              // Chỉ nhận đường dẫn blob: do URL.createObjectURL tạo từ tệp người dùng chọn — không bao giờ là chuỗi gõ tay.
               // eslint-disable-next-line @next/next/no-img-element -- ảnh blob trên máy người dùng, không qua next/image
               <img src={anhNen.url} alt="" aria-hidden className="pointer-events-none absolute inset-0 size-full object-contain"
                 style={{ opacity: anhNen.mo, transform: `rotate(${anhNen.xoay}deg)` }} />
