@@ -8,6 +8,7 @@ import { ArrowDown, ChevronDown, ChevronLeft, ChevronRight, Download, Layers, Mo
 import { KhungChat } from "@/components/hoi/KhungChat";
 import { CuoiBaiDoc, useBatDauDoc } from "@/components/khung/CuoiBaiDoc";
 import { BangTuTru, DaiVanLuuNien, DungThan, NguGiacNguHanh, VongDiaChi } from "@/components/huyen-hoc/BatTuTrucQuan";
+import { BatTuTomTat } from "@/components/huyen-hoc/BatTuTomTat";
 import { DauMang } from "@/components/huyen-hoc/KhungMang";
 import { NutXuongForm } from "@/components/huyen-hoc/NutXuongForm";
 import { MoiLapLaSo } from "@/components/huyen-hoc/MoiLapLaSo";
@@ -149,6 +150,7 @@ export function BatTu() {
             </div>
           </div>
         )}
+        {ls && <BatTuTomTat ls={ls} />}
         {ls && (
           <button type="button" onClick={doiChiTiet} aria-expanded={moChiTiet} aria-controls="la-so-chi-tiet"
             className="flex w-full items-center justify-between gap-3 rounded-2xl border border-line/70 px-4 py-3 text-left transition-colors hover:border-gold/50"

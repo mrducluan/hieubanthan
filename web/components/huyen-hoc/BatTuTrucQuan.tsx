@@ -130,6 +130,8 @@ const KIEU_QH: Record<string, { mau: string; net?: string; ten: string }> = {
 export function VongDiaChi({ ls, them }: { ls: LaSoBatTu; them?: { chi: string; nhan: string } | null }) {
   const m = ls.mo_rong;
   const [chon, setChon] = useState<number | null>(null);
+  const [hoverQh, setHoverQh] = useState<number | null>(null);
+  const [chiChon, setChiChon] = useState<string | null>(null);
   const giam = useReducedMotion();
   const { c, tru } = useChuBatTu();
   const ten = useTen();
@@ -144,6 +146,19 @@ export function VongDiaChi({ ls, them }: { ls: LaSoBatTu; them?: { chi: string; 
   const nhanTai = (chi: string) => [...MA_TRU.map((_, i) => tru(i)), them?.nhan ?? ""].filter((_, i) => tatCaChi[i] === chi);
   const qh = m.quan_he.filter((q) => !q.loai.startsWith("can "));
   const qhCan = m.quan_he.filter((q) => q.loai.startsWith("can "));
+  const tatCaQh = [...qh, ...qhCan];
+  const activeQh = chon ?? hoverQh;
+  const yNghiaQh = (loai: string) => {
+    if (loai.includes("hợp") || loai.includes("hội")) return c("vong.y_hop");
+    if (loai.includes("xung")) return c("vong.y_xung");
+    if (loai.includes("hình")) return c("vong.y_hinh");
+    if (loai.includes("hại")) return c("vong.y_hai");
+    if (loai.includes("phá")) return c("vong.y_pha");
+    return "";
+  };
+  const qhDangChon = chon !== null ? tatCaQh[chon] : undefined;
+  const qhTheoChi = chiChon !== null ? qh.filter((q) => q.tru.some((i) => truChi[i] === chiChon)) : [];
+  const truCuaChi = chiChon !== null ? nhanTai(chiChon) : [];
   return (
     <figure className="space-y-3">
       <svg viewBox="0 0 360 360" className="mx-auto block w-full max-w-[22rem]" role="img"
@@ -153,7 +168,10 @@ export function VongDiaChi({ ls, them }: { ls: LaSoBatTu; them?: { chi: string; 
         {qh.map((q, k) => {
           const k2: { mau: string; net?: string } = KIEU_QH[q.loai] ?? { mau: "var(--ls-mo)" };
           const diem = [...new Set(q.tru.map((i) => truChi[i]!))].map((c) => pos(c, R - 18));
-          const mo = chon !== null && chon !== k ? 0.15 : 0.9;
+          const lienQuanChi = chiChon !== null && q.tru.some((i) => truChi[i] === chiChon);
+          const mo = chiChon !== null
+            ? (lienQuanChi ? 0.95 : 0.15)
+            : (activeQh !== null && activeQh < qh.length && activeQh !== k ? 0.15 : 0.9);
           if (diem.length === 1) {
             const [x, y] = diem[0]!;
             return <circle key={k} cx={x + (C - x) * 0.18} cy={y + (C - y) * 0.18} r={14} fill="none" stroke={k2.mau} strokeWidth={2} strokeDasharray={k2.net} opacity={mo} />;
@@ -165,16 +183,35 @@ export function VongDiaChi({ ls, them }: { ls: LaSoBatTu; them?: { chi: string; 
               initial={giam ? false : { pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.6, delay: k * 0.06 }} />
           );
         })}
-        {CHI12.map((c) => {
-          const [x, y] = pos(c);
-          const co = nhanTai(c);
-          const [lx, ly] = pos(c, R + 30);
+        {CHI12.map((chi) => {
+          const [x, y] = pos(chi);
+          const co = nhanTai(chi);
+          const [lx, ly] = pos(chi, R + 30);
+          const dangChon = chiChon === chi;
+          const rChi = co.length ? 19 : 13;
           return (
-            <g key={c}>
-              <circle cx={x} cy={y} r={co.length ? 19 : 13} fill={co.length ? "var(--ls-o-sang)" : "var(--ls-o)"}
-                stroke={co.length ? mau(m.bang_hanh.chi[c]) : "var(--ls-vien)"} strokeWidth={co.length ? 2 : 1} />
-              <text x={x} y={y + 4.5} textAnchor="middle" fontSize={co.length ? 13 : 11} fontWeight={co.length ? 700 : 400}
-                fill={co.length ? mau(m.bang_hanh.chi[c]) : "var(--ls-mo)"}>{ten("chi", c)}</text>
+            <g
+              key={chi}
+              role="button"
+              tabIndex={0}
+              aria-pressed={dangChon}
+              aria-label={c("vong.chi_aria", { chi: ten("chi", chi) })}
+              data-testid={`vong-chi-${chi}`}
+              className="cursor-pointer focus:outline-none"
+              onClick={() => { setChon(null); setChiChon((prev) => (prev === chi ? null : chi)); }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setChon(null);
+                  setChiChon((prev) => (prev === chi ? null : chi));
+                }
+              }}
+            >
+              {dangChon && <circle cx={x} cy={y} r={rChi + 4} fill="none" stroke="var(--ls-nhan)" strokeWidth={2} />}
+              <circle cx={x} cy={y} r={rChi} fill={co.length || dangChon ? "var(--ls-o-sang)" : "var(--ls-o)"}
+                stroke={co.length || dangChon ? mau(m.bang_hanh.chi[chi]) : "var(--ls-vien)"} strokeWidth={co.length || dangChon ? 2 : 1} />
+              <text x={x} y={y + 4.5} textAnchor="middle" fontSize={co.length ? 13 : 11} fontWeight={co.length || dangChon ? 700 : 400}
+                fill={co.length || dangChon ? mau(m.bang_hanh.chi[chi]) : "var(--ls-mo)"}>{ten("chi", chi)}</text>
               {co.length > 0 && <text x={lx} y={ly + 4} textAnchor="middle" fontSize={10.5} fill="var(--ls-chu)">{co.join("·")}</text>}
             </g>
           );
@@ -182,25 +219,107 @@ export function VongDiaChi({ ls, them }: { ls: LaSoBatTu; them?: { chi: string; 
         <text x={C} y={C - 4} textAnchor="middle" fontSize={11} letterSpacing="0.2em" fill="var(--ls-mo)">{c("vong.giua")}</text>
         <text x={C} y={C + 14} textAnchor="middle" fontSize={12} fill="var(--ls-han)" style={{ fontFamily: "var(--font-han), serif" }}>地支</text>
       </svg>
-      <figcaption>
-        <DanhSachQuanHe ds={[...qh, ...qhCan]} chon={chon} setChon={(k) => setChon(k !== null && k < qh.length ? k : null)} />
+      <figcaption className="space-y-2.5">
+        <DanhSachQuanHe
+          ds={tatCaQh}
+          chon={chon}
+          hoverQh={hoverQh}
+          setHoverQh={setHoverQh}
+          onToggle={(k) => { setChiChon(null); setChon((prev) => (prev === k ? null : k)); }}
+        />
+        {chiChon === null && chon === null && (
+          <p className="text-center text-xs text-[var(--ls-mo)]">{c("vong.goi_y")}</p>
+        )}
+        {(chiChon !== null || qhDangChon) && (
+          <div
+            data-testid="vong-inspector"
+            className="rounded-xl border border-[var(--ls-vien)] bg-[var(--ls-o)] p-3 text-left text-xs"
+          >
+            <div className="flex items-start justify-between gap-2">
+              {qhDangChon ? (
+                <div className="space-y-1">
+                  <p className="font-semibold text-[var(--ls-chu)]">
+                    <span style={{ color: KIEU_QH[qhDangChon.loai]?.mau }}>
+                      {KIEU_QH[qhDangChon.loai] ? c(KIEU_QH[qhDangChon.loai]!.ten) : ten("quan_he", qhDangChon.loai)}
+                    </span>
+                    {" · "}
+                    <span>{qhDangChon.mo_ta}</span>
+                  </p>
+                  <p className="text-[var(--ls-mo)]">
+                    {c("vong.qh_tru", { ds: qhDangChon.tru.map((i) => tru(i)).join(" – ") })}
+                  </p>
+                  {yNghiaQh(qhDangChon.loai) && <p className="text-[var(--ls-chu)]">{yNghiaQh(qhDangChon.loai)}</p>}
+                </div>
+              ) : chiChon !== null ? (
+                <div className="space-y-1.5">
+                  <p className="font-semibold text-[var(--ls-chu)]">
+                    {c("vong.chi_tieu_de", {
+                      chi: ten("chi", chiChon),
+                      hanh: ten("hanh", m.bang_hanh.chi[chiChon]),
+                    })}
+                  </p>
+                  <p className="text-[var(--ls-mo)]">
+                    {truCuaChi.length > 0
+                      ? c("vong.chi_co_tru", { ds: truCuaChi.join(", ") })
+                      : c("vong.chi_khong_tru")}
+                  </p>
+                  {qhTheoChi.length > 0 ? (
+                    <ul className="space-y-1 pt-0.5">
+                      {qhTheoChi.map((q, idx) => (
+                        <li key={idx}>
+                          <b style={{ color: KIEU_QH[q.loai]?.mau }}>
+                            {KIEU_QH[q.loai] ? c(KIEU_QH[q.loai]!.ten) : ten("quan_he", q.loai)}
+                          </b>
+                          {" · "}
+                          <span>{q.mo_ta}</span>
+                          {yNghiaQh(q.loai) ? <span className="block text-[var(--ls-mo)]">{yNghiaQh(q.loai)}</span> : null}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-[var(--ls-mo)]">{c("vong.chi_khong_qh")}</p>
+                  )}
+                </div>
+              ) : null}
+              <button
+                type="button"
+                onClick={() => { setChon(null); setChiChon(null); }}
+                className="shrink-0 rounded-full border border-[var(--ls-vien)] px-2 py-0.5 text-[0.7rem] text-[var(--ls-mo)] hover:text-[var(--ls-chu)]"
+              >
+                {c("vong.dong")}
+              </button>
+            </div>
+          </div>
+        )}
       </figcaption>
     </figure>
   );
 }
 
-function DanhSachQuanHe({ ds, chon, setChon }: { ds: QuanHe[]; chon: number | null; setChon: (k: number | null) => void }) {
+function DanhSachQuanHe({ ds, chon, hoverQh, setHoverQh, onToggle }: {
+  ds: QuanHe[]; chon: number | null; hoverQh: number | null; setHoverQh: (k: number | null) => void; onToggle: (k: number) => void;
+}) {
   const { c } = useChuBatTu();
   const ten = useTen();
   if (!ds.length) return <p className="text-center text-sm text-[var(--ls-mo)]">{c("vong.trong")}</p>;
+  const active = chon ?? hoverQh;
   return (
     <ul className="flex flex-wrap justify-center gap-1.5">
       {ds.map((q, k) => {
         const k2 = KIEU_QH[q.loai];
+        const isSelected = chon === k;
         return (
           <li key={k}>
-            <button type="button" onMouseEnter={() => setChon(k)} onMouseLeave={() => setChon(null)} onFocus={() => setChon(k)} onBlur={() => setChon(null)}
-              className={cn("rounded-full border px-2.5 py-1 text-xs transition-opacity", chon !== null && chon !== k && "opacity-50")}
+            <button type="button"
+              aria-pressed={isSelected}
+              onClick={() => onToggle(k)}
+              onMouseEnter={() => setHoverQh(k)} onMouseLeave={() => setHoverQh(null)}
+              onFocus={() => setHoverQh(k)} onBlur={() => setHoverQh(null)}
+              className={cn(
+                "rounded-full border px-2.5 py-1 text-xs transition-opacity",
+                isSelected && "ring-1 ring-[var(--ls-nhan)]",
+                active !== null && active !== k && "opacity-50"
+              )}
               style={{ borderColor: k2?.mau, color: "var(--ls-chu)" }}>
               <b style={{ color: k2?.mau }}>{k2 ? c(k2.ten) : ten("quan_he", q.loai)}</b> · {q.mo_ta.split(":")[0]}{q.mo_ta.includes(":") ? ` (${q.mo_ta.split(": ")[1]?.split(" ")[0]})` : ""}
             </button>
