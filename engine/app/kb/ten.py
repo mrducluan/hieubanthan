@@ -133,7 +133,7 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "ngu_hanh.nhieu_nhat": "hanh", "ngu_hanh.thieu": "hanh", "nhat_chu.ngu_hanh": "hanh", "nhat_chu.can": "can",
     "bieu_do.nhat_chu": "hanh",
     # BD-1 Bản đồ lá số Bát tự: nhóm thập thần của từng ô
-    "o.nhom": "nhom_thap_than",
+    "o.nhom": "nhom_thap_than", "ngu_hanh.nhom": "nhom_thap_than", "hanh_can": "hanh", "hanh_chi": "hanh",
     # dict có khoá là mã VÀ giá trị là mã (nhóm khoá, nhóm giá trị)
     "bang_hanh.can": ("can", "hanh"), "bang_hanh.chi": ("chi", "hanh"), "vai_tro_hanh": ("hanh", "nhom_thap_than"),
     # EN-ALL GĐ 3c — hỏi đáp: nhãn mục hình (khối `truc_quan`), loại trong danh sách gói bằng chứng (nhóm gộp ở `NHOM`)

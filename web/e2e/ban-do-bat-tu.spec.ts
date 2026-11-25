@@ -25,7 +25,7 @@ test("tám ô bấm được, bảng nghĩa bốn lớp, nối sang ô khác, Es
   await expect(khoi.getByTestId("bd-o-c2")).toContainText("chính bạn");
 
   const coNoi = (bd.o as { ma: string; noi_voi: { o: string }[]; la_gi: string[] }[]).find((o) => o.noi_voi.length)!;
-  await khoi.getByTestId(`bd-o-${coNoi.ma}`).click();
+  await khoi.getByTestId(`bd-o-${coNoi.ma}`).locator("text").first().click();
   const bang = page.getByTestId("bd-bang-o");
   await expect(bang).toContainText(coNoi.la_gi[0]!);
   await expect(bang).toContainText("Nằm ở đâu trong đời bạn");
@@ -39,14 +39,31 @@ test("tám ô bấm được, bảng nghĩa bốn lớp, nối sang ô khác, Es
   expect(sk.some((x) => x.kind === "ban_do_o")).toBe(true);
 });
 
-test("bốn cách xem: người quanh bạn, năm hành có nhãn hai cách", async ({ page }) => {
+test("năm hành: năm vòng theo tỉ lệ engine, chạm một hành mở lời, chạm vệ tinh mở chữ", async ({ page, request }) => {
+  const bd = await (await request.post("/api/battu/ban-do", { data: { la_so: LA_SO } })).json();
   await page.goto("/bat-tu");
   const khoi = page.getByTestId("ban-do-bat-tu");
-  await khoi.getByTestId("bd-che-nguoi").click();
-  await expect(khoi.getByTestId("bd-o-c2")).toContainText("chính bạn");
-  await khoi.getByTestId("bd-che-hanh").click();
-  await expect(khoi.getByText(/Màu ô theo hành/)).toBeVisible();
-  await expect(khoi.getByText(/cách: nên|hai cách nói ngược/).first()).toBeVisible();
+  await khoi.getByTestId("bd-che-nam_hanh").click();
+  for (let k = 0; k < 5; k++) await expect(khoi.getByTestId(`bd-hanh-${k}`)).toBeVisible();
+  const h = bd.ngu_hanh[1];
+  await expect(khoi.getByTestId("bd-hanh-1")).toHaveAttribute("aria-label", `${h.hanh} ${h.phan_tram}%`);
+  await khoi.getByTestId("bd-hanh-1").click();
+  await expect(page.getByTestId("bd-bang-o")).toContainText(h.y);
+  await page.keyboard.press("Escape");
+  await khoi.getByTestId("bd-ve-tinh-c2").locator("text").click();
+  await expect(page.getByTestId("bd-bang-o")).toContainText("chính bạn");
+});
+
+test("kim năm: phím mũi tên đổi năm, thẻ năm đổi theo", async ({ page, request }) => {
+  const bd = await (await request.post("/api/battu/ban-do", { data: { la_so: LA_SO } })).json();
+  await page.goto("/bat-tu");
+  const khoi = page.getByTestId("ban-do-bat-tu");
+  const kim = khoi.getByTestId("bd-kim");
+  await expect(kim).toHaveAttribute("aria-valuenow", String(bd.thoi_gian.nam_xem));
+  await kim.focus();
+  await page.keyboard.press("ArrowLeft");
+  await expect(kim).toHaveAttribute("aria-valuenow", String(bd.thoi_gian.nam_xem - 1));
+  await expect(khoi.getByTestId("bd-the-nam")).toContainText(String(bd.thoi_gian.nam_xem - 1));
 });
 
 test("theo năm: kể lại một năm ở bản đồ → khối Cách nào đúng thấy ngay; sự kiện không mang năm", async ({ page, request }) => {
@@ -54,7 +71,6 @@ test("theo năm: kể lại một năm ở bản đồ → khối Cách nào đ�
   const nam = (bd.thoi_gian.nam as { nam: number; ma?: string; dc?: string[] }[]).find((n) => n.ma && n.dc)!;
   await page.goto("/bat-tu");
   const khoi = page.getByTestId("ban-do-bat-tu");
-  await khoi.getByTestId("bd-che-nam").click();
   const truot = khoi.getByTestId("bd-nam-truot");
   await truot.fill(String(nam.nam));
   await expect(khoi.getByTestId("bd-the-nam")).toContainText(String(nam.nam));
@@ -76,7 +92,7 @@ test("nút đọc chương mở đúng chương trong báo cáo", async ({ page 
   await page.goto("/bat-tu");
   await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible();
   const khoi = page.getByTestId("ban-do-bat-tu");
-  await khoi.getByTestId("bd-o-c2").click();
+  await khoi.getByTestId("bd-o-c2").locator("text").first().click();
   await page.getByTestId("bd-doc-chuong").click();
   await expect(page).toHaveURL(/#lg-tong_quan/);
 });
@@ -88,7 +104,7 @@ test("điện thoại 360px: không tràn ngang, bảng nghĩa trượt từ đ�
   await expect(khoi).toBeVisible();
   const tran = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(tran).toBeLessThanOrEqual(1);
-  await khoi.getByTestId("bd-o-z2").click();
+  await khoi.getByTestId("bd-o-z2").locator("text").first().click();
   const bang = page.getByTestId("bd-bang-o");
   await expect(bang).toBeVisible();
   const hop = await bang.boundingBox();

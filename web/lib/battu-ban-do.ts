@@ -21,14 +21,19 @@ export interface TruBanDo {
 export interface ChamNam { o: MaO; loai: LoaiNoi }
 export interface NamBanDo {
   nam: number; can: string; chi: string; thap_than: string; tuoi: number; dai_van: number | null; qua: boolean;
+  hanh_can: string; hanh_chi: string;
   cham: ChamNam[]; cau: string; chi_tiet: string[]; ma?: string; dc?: [MucCach, MucCach]; hoi?: string;
 }
 export interface VanBanDo {
   i: number; can: string; chi: string; thap_than: string; tu_nam: number; den_nam: number; tu_tuoi: number; hien_tai: boolean;
   cham: ChamNam[]; chi_tiet: string[]; cau: string;
 }
+export interface HanhBanDo {
+  hanh: string; phan_tram: number; so_chu: number; dung: Dung; nhat_chu: boolean; nhieu: boolean; thieu: boolean;
+  nhom: string; y: string; cau_dung: string | null;
+}
 export interface BanDoBatTu {
-  phien_ban: string; tuoi: number; nguoi_lon: boolean; tru: TruBanDo[]; o: OBanDo[];
+  phien_ban: string; tuoi: number; nguoi_lon: boolean; tru: TruBanDo[]; o: OBanDo[]; suc: number; ngu_hanh: HanhBanDo[];
   noi_bat: { ma: string; o: MaO[]; cau: string }[]; trich: { sach: string; thien: string; han: string; y: string }[]; tuoi_ghi_chu?: string;
   thoi_gian: {
     nam_xem: number; nam: NamBanDo[]; dai_van: VanBanDo[]; hoi_dan: string; nam_toi: string;
@@ -44,21 +49,23 @@ export function cauDoiChieu(bd: Pick<BanDoBatTu, "thoi_gian">) {
   return bd.thoi_gian.nam.filter((n) => n.ma && n.dc).map((n) => ({ ma: n.ma!, cach_1: n.dc![0], cach_2: n.dc![1] }));
 }
 
-/** Toạ độ tâm ô trên lưới 4 cột × 2 hàng (hệ 400 × 200) — để vẽ đường nối. */
-export function tamO(ma: MaO): [number, number] {
-  const i = Number(ma[1]);
-  return [50 + 100 * i, ma[0] === "c" ? 50 : 150];
+/** Điểm trên vòng tròn: góc tính theo độ, 0 = đỉnh, chiều kim đồng hồ (hệ SVG tâm 0, 0). */
+export function diemTron(r: number, goc: number): [number, number] {
+  const t = ((goc - 90) * Math.PI) / 180;
+  return [r * Math.cos(t), r * Math.sin(t)];
 }
 
-/** Đường nối hai ô (hệ 400 × 200, lưới cao 200): cùng hàng thì cong ra NGOÀI lưới (trên hàng can, dưới hàng chi) để
- *  không đè chữ; khác hàng thì thẳng tâm–tâm (đi dưới nền ô bán trong suốt). */
-export function duongNoi(a: MaO, b: MaO): string {
-  const [x1, y1] = tamO(a), [x2, y2] = tamO(b);
-  if (y1 !== y2) return `M${x1} ${y1} L${x2} ${y2}`;
-  const xa = Math.abs(x2 - x1) / 100 - 1;
-  if (y1 === 50) return `M${x1} 4 Q${(x1 + x2) / 2} ${-30 - 10 * xa} ${x2} 4`;
-  return `M${x1} 196 Q${(x1 + x2) / 2} ${230 + 10 * xa} ${x2} 196`;
+/** Hình quạt vành khăn r0..r1 từ góc a0 tới a1 (độ). */
+export function quat(r0: number, r1: number, a0: number, a1: number): string {
+  const [x0, y0] = diemTron(r1, a0), [x1, y1] = diemTron(r1, a1), [x2, y2] = diemTron(r0, a1), [x3, y3] = diemTron(r0, a0);
+  const l = a1 - a0 > 180 ? 1 : 0;
+  return `M${x0} ${y0}A${r1} ${r1} 0 ${l} 1 ${x1} ${y1}L${x2} ${y2}A${r0} ${r0} 0 ${l} 0 ${x3} ${y3}Z`;
 }
+
+/** Góc giữa của ô trên bánh xe: trụ i chiếm góc phần tư i (năm ở góc trên phải, theo chiều kim đồng hồ). */
+export const gocO = (o: { tru: number }) => o.tru * 90 + 45;
+/** Tuổi → góc trên vòng đời (0–90 tuổi = một vòng). */
+export const gocTuoi = (t: number) => (Math.max(0, Math.min(90, t)) / 90) * 360;
 
 /** Các cặp ô có quan hệ (không lặp hai chiều). */
 export function capNoi(ds: Pick<OBanDo, "ma" | "noi_voi">[]): { a: MaO; b: MaO; loai: LoaiNoi }[] {

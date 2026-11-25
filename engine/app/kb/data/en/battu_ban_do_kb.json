@@ -182,6 +182,14 @@
       "them": "needs more",
       "bot": "should be reduced",
       "khong": "not mentioned"
+    },
+    "hanh_y": "For you as {nc_hanh}, {hanh} is the part about {nhom_y}.",
+    "dung_hanh": {
+      "them": "Both readings say you need more {hanh}.",
+      "mot_them": "The {cach} reading says you need more {hanh}; the other doesn't.",
+      "bot": "Both readings say {hanh} is already heavy for you.",
+      "mot_bot": "The {cach} reading says {hanh} is already heavy for you; the other doesn't.",
+      "nguoc": "The two readings disagree about {hanh}: check it against what you have lived through."
     }
   },
   "cap": {

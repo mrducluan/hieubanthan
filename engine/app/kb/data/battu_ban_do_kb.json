@@ -165,6 +165,14 @@
       "them": "cần thêm",
       "bot": "nên bớt",
       "khong": "không nói tới"
+    },
+    "hanh_y": "Với bạn là {nc_hanh}, hành {hanh} là phần {nhom_y}.",
+    "dung_hanh": {
+      "them": "Cả hai cách đọc đều thấy bạn cần thêm hành {hanh}.",
+      "mot_them": "Cách đọc {cach} thấy bạn cần thêm hành {hanh}; cách còn lại không nói vậy.",
+      "bot": "Cả hai cách đọc đều thấy hành {hanh} đang nhiều so với bạn.",
+      "mot_bot": "Cách đọc {cach} thấy hành {hanh} đang nhiều so với bạn; cách còn lại không nói vậy.",
+      "nguoc": "Hai cách đọc nói ngược nhau về hành {hanh}: nên đối chiếu với điều bạn đã trải qua."
     }
   },
   "cap": {

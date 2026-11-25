@@ -187,3 +187,18 @@ def test_route():
     assert r.status_code == 200, r.text
     j = r.json()
     assert j["phien_ban"] == "ban_do_1" and len(j["o"]) == 8 and "engine_version" in j
+
+
+def test_ngu_hanh_cho_hinh_nam_hanh(kq):
+    nh = kq["ngu_hanh"]
+    assert [x["hanh"] for x in nh] == ["Mộc", "Hỏa", "Thổ", "Kim", "Thủy"]
+    assert 95 <= sum(x["phan_tram"] for x in nh) <= 105
+    assert sum(x["so_chu"] for x in nh) == 8
+    assert [x for x in nh if x["nhat_chu"]][0]["hanh"] == "Kim"
+    assert [x for x in nh if x["nhieu"]][0]["hanh"] == "Hỏa"
+    for x in nh:
+        assert x["y"] and "{" not in x["y"]
+        assert (x["dung"] is None) == (x["cau_dung"] is None)
+    assert kq["suc"] == 36
+    n = kq["thoi_gian"]["nam"][0]
+    assert {"hanh_can", "hanh_chi"} <= set(n)

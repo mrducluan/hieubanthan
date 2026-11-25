@@ -427,6 +427,7 @@ def _thoi_gian(pt: dict, sinh: dict, nam0: int, ngay_xem: dt.date, ds_o: list[di
                                chu_de=cd.get("chu_de") or _t("thap_than", ln["thap_than"]))
         cau += tg["nam_cham"].format(n=len(ch)) if ch else tg["nam_khong"]
         x = {"nam": n, "can": ln["can"], "chi": ln["chi"], "thap_than": ln["thap_than"], "tuoi": tuoi, "dai_van": idx,
+             "hanh_can": bt_calc._nh_can(ln["can"]), "hanh_chi": bt_calc.CHI_NH[bt_calc.CHI.index(ln["chi"])],
              "qua": n < nam0, "cham": ch, "cau": cau, "chi_tiet": _cau_cham(ch, o_theo, lon and tuoi >= config.TUOI_NGUOI_LON)}
         if n < nam0 and tuoi >= dc.TUOI_NHO_NHAT:
             m1, m2, _ = bt.muc_hai_cach(pt, ln["can"], ln["chi"])
@@ -448,6 +449,32 @@ def _thoi_gian(pt: dict, sinh: dict, nam0: int, ngay_xem: dt.date, ds_o: list[di
     return {"nam_xem": nam0, "nam": nam, "dai_van": van, "hoi_dan": tg.get("hoi_dan", ""), "nam_toi": tg.get("nam_toi", ""), **k}
 
 
+def _cau_dung_hanh(pt: dict, ma: str | None, hanh: str) -> str | None:
+    if not ma:
+        return None
+    khoa = "ky" if ma == "mot_bot" else "hanh"
+    cach = next((c for c in bt.CACH if hanh in pt[c][khoa]), "cach_1")
+    return _m("dung_hanh", ma).format(hanh=_t("hanh", hanh), cach=_m("ten_cach", cach))
+
+
+VONG_HANH = ("Mộc", "Hỏa", "Thổ", "Kim", "Thủy")   # thứ tự tương sinh — web vẽ ngôi sao năm hành theo đúng thứ tự này
+
+
+def _ngu_hanh(pt: dict, ds_o: list[dict]) -> list[dict]:
+    """Năm hành của lá số cho hình "Năm hành": tỉ lệ (điểm engine), số chữ, hai cách nói gì, nghĩa với người này."""
+    ls = pt["ls"]
+    nc = ls["nhat_chu"]["ngu_hanh"]
+    ra = []
+    for h in VONG_HANH:
+        g = pt["mr"]["vai_tro_hanh"][h]
+        ra.append({"hanh": h, "phan_tram": round(pt["ty_le_hanh"][h] * 100), "so_chu": sum(o["hanh"] == h for o in ds_o),
+                   "dung": _dung(pt, h), "nhat_chu": h == nc, "nhieu": h == ls["ngu_hanh"]["nhieu_nhat"],
+                   "thieu": h in ls["ngu_hanh"]["thieu"], "nhom": g,
+                   "y": _m("hanh_y").format(nc_hanh=_t("hanh", nc), hanh=_t("hanh", h), nhom_y=_nhom_y(g)),
+                   "cau_dung": _cau_dung_hanh(pt, _dung(pt, h), h)})
+    return ra
+
+
 def lap(sinh: dict, ngay_xem: dt.date | None = None) -> dict:
     """`sinh` như `battu_doi_song.lap` → bản đồ 8 ô + điều nổi bật + lớp thời gian."""
     ngay_xem = ngay_xem or config.hom_nay_vn()
@@ -466,5 +493,6 @@ def lap(sinh: dict, ngay_xem: dt.date | None = None) -> dict:
     o = [_lap_o(pt, x, ds_o, qh_o, ln10, tuoi_tru, gioi, lon) for x in ds_o]
     tru = [{"i": i, "ten": _ten_tru(i), "tang": _tru_kb(i).get("tang", ""), **tuoi_tru[i]} for i in range(4)]
     return {"phien_ban": PHIEN_BAN, "tuoi": tuoi, "nguoi_lon": lon, "tru": tru, "o": o,
+            "suc": round(ls["than"]["ti_le"] * 100), "ngu_hanh": _ngu_hanh(pt, ds_o),
             "noi_bat": _noi_bat(pt, ds_o, lon), "trich": _k("trich") or [], "tuoi_ghi_chu": _k("tuoi", "ghi_chu") or "",
             "thoi_gian": _thoi_gian(pt, sinh, nam0, ngay_xem, ds_o, lon), "ngay_xem": ngay_xem.isoformat(), **meta()}
