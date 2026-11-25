@@ -66,15 +66,20 @@ def test_route_goi_mo_hinh_va_khong_log_anh(monkeypatch, caplog):
     monkeypatch.setenv("OPENROUTER_API_KEY", "k")
     monkeypatch.setattr(ngan_sach, "kiem_luot", lambda *a, **k: None)
     gui: dict = {}
+    noi = {"la_ban_ve": True, "khung": {"x0": 0.05, "y0": 0.05, "x1": 0.95, "y1": 0.95},
+           "cho": [{"ma": "cua_chinh", "x": 0.5, "y": 0.95, "do_tin": 0.9, "ly_do": "cửa ở mặt tiền"}]}
 
-    def gia(self, url, headers=None, json=None):  # noqa: A002
-        gui.update(json)
-        noi = {"la_ban_ve": True, "khung": {"x0": 0.05, "y0": 0.05, "x1": 0.95, "y1": 0.95},
-               "cho": [{"ma": "cua_chinh", "x": 0.5, "y": 0.95, "do_tin": 0.9, "ly_do": "cửa ở mặt tiền"}]}
-        return httpx.Response(200, json={"choices": [{"message": {"content": "```json\n" + __import__("json").dumps(noi) + "\n```"}}]},
-                              request=httpx.Request("POST", url))
+    class Gia:
+        """Thay httpx.Client của module (không vá lớp httpx.Client — TestClient là lớp con của nó)."""
+        def __init__(self, *a, **k): ...
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+        def post(self, url, headers=None, json=None):  # noqa: A002
+            gui.update(json)
+            return httpx.Response(200, json={"choices": [{"message": {"content": "```json\n" + __import__("json").dumps(noi) + "\n```"}}]},
+                                  request=httpx.Request("POST", url))
 
-    monkeypatch.setattr(httpx.Client, "post", gia)
+    monkeypatch.setattr(dbv.httpx, "Client", Gia)
     with caplog.at_level(logging.DEBUG):
         r = client.post("/v1/phongthuy/doc-ban-ve", json={"anh": {"du_lieu": ANH, "loai": "image/png"}, "loai_nha": "nha_pho"})
     assert r.status_code == 200, r.text
@@ -88,7 +93,13 @@ def test_route_goi_mo_hinh_va_khong_log_anh(monkeypatch, caplog):
 def test_loi_dich_vu_tat_em(monkeypatch, caplog):
     monkeypatch.setenv("OPENROUTER_API_KEY", "k")
     monkeypatch.setattr(ngan_sach, "kiem_luot", lambda *a, **k: None)
-    monkeypatch.setattr(httpx.Client, "post", lambda *a, **k: (_ for _ in ()).throw(httpx.ConnectError("x")))
+    class Hong:
+        def __init__(self, *a, **k): ...
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+        def post(self, *a, **k): raise httpx.ConnectError("x")
+
+    monkeypatch.setattr(dbv.httpx, "Client", Hong)
     r = client.post("/v1/phongthuy/doc-ban-ve", json={"anh": {"du_lieu": ANH, "loai": "image/png"}})
     assert r.json()["ly_do_tat"] == "loi_dich_vu" and DAU_VET not in caplog.text
 
