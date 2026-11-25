@@ -483,7 +483,7 @@ test("UI-PT2 B/C + TY-2 đợt 2 + gói 3: ảnh bản vẽ làm nền sơ đồ
     return btoa(s);
   }), "base64");
   await ve.getByLabel("Ảnh bản vẽ nhà làm nền cho sơ đồ (chỉ hiện trên máy)").setInputFiles({ name: "mat-bang.png", mimeType: "image/png", buffer: pngBanVe });
-  await expect(ve.getByTestId("vi-tri-anh-dieu-khien")).toContainText("không tải lên");
+  await expect(ve.getByTestId("vi-tri-anh-dieu-khien")).toContainText("chỉ gửi đi khi bạn tự tích đồng ý");
   const canvas = ve.getByTestId("vi-tri-anh-canvas");
   await expect(canvas).toHaveCount(1);   // ảnh vẽ lên canvas trên máy — không có đường dẫn ảnh nào
   await expect(ve.locator("img")).toHaveCount(0);

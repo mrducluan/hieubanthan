@@ -305,3 +305,81 @@ test("SD-1: 360px — sơ đồ và thanh chỉnh phòng không làm trang tràn
   expect(hop.x).toBeGreaterThanOrEqual(0);
   expect(hop.x + hop.width).toBeLessThanOrEqual(360 + 0.5);
 });
+
+// TY-2 đợt 4 — máy đọc bản vẽ: chỉ gửi khi tự tích đồng ý (bỏ tích sau mỗi lần gửi), chỗ gợi ý là chấm nét đứt, bấm Đúng
+// mới thành điểm trên sơ đồ; gợi ý xoay ảnh khi cửa ở dưới; căn theo đường bao máy thấy.
+const PNG_1X1 = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==", "base64");
+const moSoDoAnh = async (page: Page, kq: object) => {
+  await napHoSo(page);
+  await napNha(page);
+  const gui: Record<string, unknown>[] = [];
+  await page.route("**/api/phongthuy/doc-ban-ve", async (r) => {
+    gui.push(r.request().postDataJSON() as Record<string, unknown>);
+    await r.fulfill({ json: { engine_version: "x", da_bat: true, ly_do_tat: null, can_xac_nhan: true, luu_y: [], ...kq } });
+  });
+  await page.goto("/phong-thuy");
+  const vt = page.getByTestId("vi-tri-vat");
+  await vt.scrollIntoViewIfNeeded();
+  await vt.getByTestId("vi-tri-cach-khung").click();
+  await vt.getByTestId("vi-tri-rong").fill("10");
+  await vt.getByTestId("vi-tri-sau").fill("10");
+  await vt.getByTestId("vi-tri-anh-nen").setInputFiles({ name: "ban-ve.png", mimeType: "image/png", buffer: PNG_1X1 });
+  await expect(vt.getByTestId("ban-ve")).toBeVisible();
+  return { vt, gui };
+};
+
+test("TY-2 đợt 4: máy đọc bản vẽ — đồng ý từng lần, chấm gợi ý, Đúng / Bỏ, căn theo đường bao", async ({ page }) => {
+  const { vt, gui } = await moSoDoAnh(page, {
+    la_ban_ve: true, khung: { x0: 0.1, y0: 0.1, x1: 0.9, y1: 0.9 },
+    cho: [{ ma: "cua_chinh", x: 0.5, y: 0.12, do_tin: 0.9, ly_do: "cửa ở mặt tiền" },
+          { ma: "bep", x: 0.3, y: 0.8, do_tin: 0.8, ly_do: "chữ BẾP" },
+          { ma: "cau_thang", x: 0.7, y: 0.5, do_tin: 0.8, ly_do: "thang" }],     // tầng 1 không có chỗ cầu thang → bỏ
+  });
+  const doc = vt.getByTestId("ban-ve-doc");
+  await expect(doc).toBeDisabled();
+  await vt.getByTestId("ban-ve-dong-y").check();
+  await doc.click();
+  await expect(vt.getByTestId("ban-ve-cho-bep")).toBeVisible();
+  expect(gui).toHaveLength(1);
+  expect((gui[0]!.anh as { loai: string }).loai).toBe("image/jpeg");
+  expect(gui[0]!.tang).toBe(1);
+  await expect(vt.getByTestId("ban-ve-dong-y")).not.toBeChecked();
+  await expect(vt.getByTestId("ban-ve-cho-cau_thang")).toHaveCount(0);
+  await expect(vt.getByTestId("ban-ve-cham-bep")).toBeVisible();
+  await expect(vt.getByTestId("ban-ve-goi-xoay")).toHaveCount(0);
+
+  await vt.getByTestId("ban-ve-can").click();
+  await expect(vt.getByTestId("vi-tri-anh-canvas")).toHaveAttribute("data-can", "1");
+  await expect(vt.getByTestId("ban-ve-goi-can")).toHaveCount(0);
+
+  await expect(vt.getByTestId("vi-tri-hop-bep")).toHaveCount(0);
+  await vt.getByTestId("ban-ve-dung-bep").click();
+  await expect(vt.getByTestId("vi-tri-hop-bep")).toBeVisible();
+  await expect(vt.getByTestId("ban-ve-cho-bep")).toHaveCount(0);
+  await vt.getByTestId("ban-ve-bo-cua_chinh").click();
+  await expect(vt.getByTestId("ban-ve-cho-cua_chinh")).toHaveCount(0);
+  await expect(vt.getByTestId("vi-tri-hop-cua_chinh")).toHaveCount(0);
+});
+
+test("TY-2 đợt 4: cửa chính máy thấy ở dưới bản vẽ → gợi ý xoay ảnh, chấm xoay theo, không gửi lại", async ({ page }) => {
+  const { vt, gui } = await moSoDoAnh(page, {
+    la_ban_ve: true, khung: null, cho: [{ ma: "cua_chinh", x: 0.5, y: 0.95, do_tin: 0.9, ly_do: "" }],
+  });
+  await vt.getByTestId("ban-ve-dong-y").check();
+  await vt.getByTestId("ban-ve-doc").click();
+  await expect(vt.getByTestId("ban-ve-goi-xoay")).toBeVisible();
+  await vt.getByTestId("ban-ve-xoay").click();
+  await expect(vt.getByTestId("vi-tri-anh-canvas")).toHaveAttribute("data-xoay", "180");
+  await expect(vt.getByTestId("ban-ve-goi-xoay")).toHaveCount(0);
+  await vt.getByTestId("ban-ve-dung-cua_chinh").click();
+  await expect(vt.getByTestId("vi-tri-hop-cua_chinh")).toBeVisible();
+  expect(gui).toHaveLength(1);
+});
+
+test("TY-2 đợt 4: ảnh không phải bản vẽ → không gợi ý chỗ nào", async ({ page }) => {
+  const { vt } = await moSoDoAnh(page, { la_ban_ve: false, khung: null, cho: [] });
+  await vt.getByTestId("ban-ve-dong-y").check();
+  await vt.getByTestId("ban-ve-doc").click();
+  await expect(vt.getByTestId("ban-ve-bao")).toContainText("không phải bản vẽ");
+  await expect(vt.getByTestId("ban-ve-lop")).toHaveCount(0);
+});

@@ -25,7 +25,8 @@ import {
   type HopPhongKhung,
 } from "@/lib/mat-bang-khung";
 import { layQuayLai, ngheQuayLai, veCauTraLoi } from "@/lib/quay-lai-hoi-gi";
-import { cssCan, kep01, tinhCan, type CanAnh, type Diem } from "@/lib/can-anh";
+import { anhSangKhung, anhSangSoDo, canTuKhung, cssCan, gocNenXoay, kep01, tinhCan, xoayKetQua, type CanAnh, type Diem } from "@/lib/can-anh";
+import { LopGoiYBanVe, PanelDocBanVe, type GoiYHien, type KqBanVe } from "@/components/phong-thuy/DocBanVe";
 import { daiTai, doiCao, doiSan, hopLe, keoMep, khoiVe, themSan, xoaSan, TOI_DA_SAN, type Dai } from "@/lib/san-gieng-troi";
 import { giaiMa, nguonSuKien, type SuKienTho } from "@/lib/la-kinh/hop-nhat";
 import { tenTheo, type TenHien } from "@/lib/ten-hien";
@@ -214,6 +215,7 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
   useEffect(() => () => { anhNen?.anh.close(); }, [anhNen?.anh]);
   const chonAnhNen = (f: File | undefined) => {
     setCanDang(null);
+    setBanVe(null); setBvBao(null);
     if (!f) { setAnhNen(null); return; }
     createImageBitmap(f)
       .then((anh) => { if (song.current) setAnhNen({ anh, xoay: 0, mo: 0.55 }); else anh.close(); })
@@ -457,6 +459,86 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
   };
 
   const doHienTai = useMemo(() => doTang[tang] ?? {}, [doTang, tang]);
+
+  // ---- TY-2 đợt 4: máy đọc bản vẽ. `banVe.kq` ở toạ độ của ảnh ĐANG HIỆN (xoay ảnh thì xoay theo, khỏi gửi lại).
+  const [banVe, setBanVe] = useState<{ kq: KqBanVe; bo: string[] } | null>(null);
+  const [bvDongY, setBvDongY] = useState(false);
+  const [bvDang, setBvDang] = useState(false);
+  const [bvBao, setBvBao] = useState<string | null>(null);
+  const xoayAnh = (goc: number) => {
+    setCanDang(null);
+    setAnhNen((a) => a && { ...a, xoay: (a.xoay + goc) % 360, can: undefined });
+    setBanVe((b) => b && { ...b, kq: xoayKetQua(b.kq, goc) });
+  };
+  const docBanVe = async () => {
+    const cv = canvasAnh.current;
+    if (!cv || !anhNen || !bvDongY || bvDang) return;
+    setBvDang(true); setBvBao(null);
+    try {
+      // Ảnh đúng như người dùng đang thấy (đã xoay), cạnh dài ≤ 1600 px, JPEG — chữ trên bản vẽ còn đọc được.
+      const k = Math.min(1, 1600 / Math.max(cv.width, cv.height));
+      const nho = document.createElement("canvas");
+      nho.width = Math.max(1, Math.round(cv.width * k)); nho.height = Math.max(1, Math.round(cv.height * k));
+      const g = nho.getContext("2d");
+      if (!g) throw new Error("khong_co_canvas");
+      g.fillStyle = "#ffffff"; g.fillRect(0, 0, nho.width, nho.height);
+      g.drawImage(cv, 0, 0, nho.width, nho.height);
+      let du = "", cl = 0.85;
+      for (let lan = 0; lan < 4; lan++) {
+        du = nho.toDataURL("image/jpeg", cl).replace(/^data:[^,]*,/, "");
+        if (du.length <= 1_500_000) break;
+        cl -= 0.15;
+      }
+      if (du.length > 1_500_000) throw new Error("anh_qua_nang");
+      const d = await postJson<{ da_bat: boolean; ly_do_tat: string | null } & KqBanVe>("/api/phongthuy/doc-ban-ve",
+        { anh: { du_lieu: du, loai: "image/jpeg" }, loai_nha: hoSo?.loai_nha ?? null, tang });
+      if (!song.current) return;
+      if (!d.da_bat) { setBanVe(null); setBvBao(c(`da.tat.${d.ly_do_tat ?? "loi_dich_vu"}`)); }
+      else {
+        const kq: KqBanVe = { la_ban_ve: d.la_ban_ve, khung: d.khung, luu_y: d.luu_y ?? [],
+          cho: (d.cho ?? []).filter((x) => (VAT_TANG(tang) as string[]).includes(x.ma)) };
+        setBanVe({ kq, bo: [] });
+        setBvBao(kq.la_ban_ve === false ? c("dv.bv.khong_phai") : kq.cho.length ? null : c("dv.bv.khong_thay"));
+      }
+      ghi("chart_interacted", { mo_dun: "phongthuy", kind: "doc_ban_ve", da_bat: d.da_bat ? 1 : 0, so_cho: d.cho?.length ?? 0, co_khung: d.khung ? 1 : 0 });
+    } catch {
+      if (song.current) setBvBao(c("da.tat.loi_dich_vu"));
+    } finally {
+      if (song.current) { setBvDang(false); setBvDongY(false); }        // đồng ý theo từng lần gửi
+    }
+  };
+  useEffect(() => { setBanVe(null); setBvBao(null); }, [tang]);       // bản vẽ đọc cho một tầng
+  const bvKichThuoc = useMemo<[number, number] | null>(() => (anhNen
+    ? (anhNen.xoay % 180 ? [anhNen.anh.height, anhNen.anh.width] : [anhNen.anh.width, anhNen.anh.height]) : null), [anhNen]);
+  const goiYBanVe: GoiYHien[] = useMemo(() => {
+    if (!banVe || !bvKichThuoc || banVe.kq.la_ban_ve === false) return [];
+    const [w, h] = bvKichThuoc;
+    return banVe.kq.cho.filter((x) => !banVe.bo.includes(x.ma)).map((x) => ({
+      cho: x, diem: anhSangSoDo([x.x, x.y], w, h, khung.rong, khung.sau, anhNen?.can), daCo: Boolean(doHienTai[x.ma as LoaiVat]?.diem),
+    }));
+  }, [banVe, bvKichThuoc, khung.rong, khung.sau, anhNen?.can, doHienTai]);
+  const bvCua = banVe?.kq.cho.find((x) => x.ma === "cua_chinh");
+  const bvGocXoay = tang === 1 && bvCua ? gocNenXoay([bvCua.x, bvCua.y]) : 0;
+  const bvBao4: [Diem, Diem] | null = banVe?.kq.khung && bvKichThuoc && !anhNen?.can
+    ? [anhSangKhung([banVe.kq.khung.x0, banVe.kq.khung.y0], bvKichThuoc[0], bvKichThuoc[1], khung.rong, khung.sau),
+       anhSangKhung([banVe.kq.khung.x1, banVe.kq.khung.y1], bvKichThuoc[0], bvKichThuoc[1], khung.rong, khung.sau)] : null;
+  const dungBanVe = (ds: LoaiVat[]) => {
+    const dat = goiYBanVe.filter((g) => g.diem && ds.includes(g.cho.ma as LoaiVat));
+    if (!dat.length) return;
+    suaTang(tang, (t) => {
+      const moi = { ...t };
+      for (const g of dat) {
+        const { mau: _m, sai_so: _s, ...giu } = chuanVat(t[g.cho.ma as LoaiVat] ?? {});
+        void _m; void _s;
+        moi[g.cho.ma as LoaiVat] = { ...giu, diem: [lam3(g.diem![0]), lam3(g.diem![1])] };
+      }
+      return moi;
+    });
+    setBanVe((b) => b && { ...b, bo: [...b.bo, ...dat.map((g) => g.cho.ma)] });
+    setDangChon(dat[dat.length - 1]!.cho.ma as LoaiVat);
+    for (const g of dat) ghi("chart_interacted", { mo_dun: "phongthuy", kind: "vi_tri_ghi", cho: g.cho.ma, cach: "ban_ve" });
+  };
+
 
   const xoaVat = (l: LoaiVat) => {
     if (!doHienTai[l]) return;
@@ -945,7 +1027,7 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
           {khung.tuLuoiCu && <p className="rounded-xl border border-gold/40 bg-gold/5 p-3 text-xs text-fg-muted" data-testid="vi-tri-tu-luoi-cu"><ChuB chu={c("dv.tu_luoi_cu")} /></p>}
           {anhNen && (
             <div className="flex flex-wrap items-center gap-2 text-xs" data-testid="vi-tri-anh-dieu-khien">
-              <button type="button" onClick={() => { setCanDang(null); setAnhNen((a) => a && { ...a, xoay: (a.xoay + 90) % 360, can: undefined }); }} aria-label={c("dv.anh_xoay_aria")}
+              <button type="button" onClick={() => xoayAnh(90)} aria-label={c("dv.anh_xoay_aria")}
                 className="inline-flex min-h-[36px] items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg"><RotateCw className="size-3.5" aria-hidden /> {c("dv.anh_xoay")}</button>
               <label className="inline-flex items-center gap-1.5 text-fg-muted">{c("dv.anh_ro")}
                 <input type="range" min={0.2} max={0.9} step={0.05} value={anhNen.mo} aria-label={c("dv.anh_ro_aria")}
@@ -965,6 +1047,19 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
               <span className="text-fg-faint">{c("dv.anh_tren_may")}</span>
               <span id={`can-hd-${uid}`} className="sr-only">{c("dv.can.hd")} {c("dv.can.phim")}</span>
             </div>
+          )}
+
+          {anhNen && !en && !canDang && (
+            <PanelDocBanVe dongY={bvDongY} onDongY={setBvDongY} dang={bvDang} thongBao={bvBao} kq={banVe?.kq ?? null}
+              goiY={goiYBanVe} gocXoay={bvGocXoay} coTheCan={Boolean(bvBao4)}
+              onDoc={() => void docBanVe()} onDung={(m) => dungBanVe([m])} onDungHet={() => dungBanVe(goiYBanVe.map((g) => g.cho.ma as LoaiVat))}
+              onBo={(m) => { setBanVe((b) => b && { ...b, bo: [...b.bo, m] }); ghi("chart_interacted", { mo_dun: "phongthuy", kind: "doc_ban_ve_bo", cho: m }); }}
+              onXoay={() => { xoayAnh(bvGocXoay); ghi("chart_interacted", { mo_dun: "phongthuy", kind: "doc_ban_ve_xoay", goc: bvGocXoay }); }}
+              onCan={() => {
+                if (!banVe?.kq.khung || !bvKichThuoc) return;
+                const can = canTuKhung(banVe.kq.khung, bvKichThuoc[0], bvKichThuoc[1], khung.rong, khung.sau);
+                if (can) { setAnhNen((a) => a && { ...a, can }); ghi("chart_interacted", { mo_dun: "phongthuy", kind: "doc_ban_ve_can" }); }
+              }} />
           )}
 
           {/* Chọn chỗ đang đặt + bỏ nhanh từng chỗ + Hoàn tác / Xoá tầng */}
@@ -1247,6 +1342,10 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
                   </g>
                 );
               })}
+              {anhNen && !en && (goiYBanVe.length > 0 || bvBao4) && (
+                <LopGoiYBanVe goiY={goiYBanVe} bao={bvBao4} rong={khung.rong} sau={khung.sau} net={strokeCoBan}
+                  mau={(l) => MAU_PHONG[l].stroke} ten={(l) => c(`dv.ten.${l}`)} onDung={(m) => dungBanVe([m])} />
+              )}
             </svg>
             {/* Đang căn ảnh: lớp phủ nhận MỌI lần chạm (không đặt phòng / sân), dấu chữ thập ở chỗ đã chạm */}
             {canDang && (
