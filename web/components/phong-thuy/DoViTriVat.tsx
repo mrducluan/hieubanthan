@@ -25,6 +25,7 @@ import {
   type HopPhongKhung,
 } from "@/lib/mat-bang-khung";
 import { layQuayLai, ngheQuayLai, veCauTraLoi } from "@/lib/quay-lai-hoi-gi";
+import { cssCan, kep01, tinhCan, type CanAnh, type Diem } from "@/lib/can-anh";
 import { daiTai, doiCao, doiSan, hopLe, keoMep, khoiVe, themSan, xoaSan, TOI_DA_SAN, type Dai } from "@/lib/san-gieng-troi";
 import { giaiMa, nguonSuKien, type SuKienTho } from "@/lib/la-kinh/hop-nhat";
 import { tenTheo, type TenHien } from "@/lib/ten-hien";
@@ -204,10 +205,15 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
   // TY-2 đợt 2: ảnh bản vẽ / mặt bằng (chụp hoặc chọn từ máy) đặt DƯỚI sơ đồ để chạm theo — blob trên trình duyệt,
   // không gửi đi, không lưu (tải lại trang là mất).
   // Vẽ lên <canvas> bằng createImageBitmap — không tạo đường dẫn ảnh nào (không blob:, không src).
-  const [anhNen, setAnhNen] = useState<{ anh: ImageBitmap; xoay: number; mo: number } | null>(null);
+  // `can` (TY-2 gói 3): phép căn ảnh theo khung — chỉ để hiển thị, trong bộ nhớ (xoay ảnh / bỏ ảnh là mất).
+  const [anhNen, setAnhNen] = useState<{ anh: ImageBitmap; xoay: number; mo: number; can?: CanAnh } | null>(null);
+  /** Đang căn ảnh: bước 1 (góc trước – trái) / 2 (góc sau – phải), điểm đã chạm, phép căn cũ (để Thôi), con trỏ bàn phím. */
+  const [canDang, setCanDang] = useState<{ buoc: 1 | 2; p1?: Diem; truoc?: CanAnh; conTro: Diem; loi?: boolean; phim?: boolean } | null>(null);
+  const vungCan = useRef<HTMLDivElement>(null);
   const canvasAnh = useRef<HTMLCanvasElement>(null);
   useEffect(() => () => { anhNen?.anh.close(); }, [anhNen?.anh]);
   const chonAnhNen = (f: File | undefined) => {
+    setCanDang(null);
     if (!f) { setAnhNen(null); return; }
     createImageBitmap(f)
       .then((anh) => { if (song.current) setAnhNen({ anh, xoay: 0, mo: 0.55 }); else anh.close(); })
@@ -230,6 +236,53 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
     g.drawImage(anh, -anh.width / 2, -anh.height / 2);
     g.restore();
   }, [anhNen]);
+
+  // ---- TY-2 gói 3: căn ảnh theo khung bằng hai lần chạm (toạ độ 0..1 theo khung đang hiện, ảnh lúc đang căn là nguyên vẹn)
+  const batDauCan = () => {
+    if (!anhNen) return;
+    setCanDang({ buoc: 1, truoc: anhNen.can, conTro: [0.1, 0.1] });
+    setAnhNen((a) => a && { ...a, can: undefined });
+    setCheDoSan(false); setBoLuoi(false);
+    window.setTimeout(() => vungCan.current?.focus(), 0);
+  };
+  const thoiCan = useCallback(() => {
+    setCanDang((d) => {
+      if (d) setAnhNen((a) => a && { ...a, can: d.truoc });
+      return null;
+    });
+  }, []);
+  const chamCan = (p: Diem) => {
+    if (!canDang) return;
+    const q: Diem = [kep01(p[0]), kep01(p[1])];
+    if (canDang.buoc === 1) { setCanDang({ ...canDang, buoc: 2, p1: q, conTro: [Math.min(0.95, q[0] + 0.3), Math.min(0.95, q[1] + 0.3)], loi: false }); return; }
+    const can = tinhCan(canDang.p1!, q);
+    if (!can) { setCanDang({ ...canDang, conTro: q, loi: true }); return; }
+    setAnhNen((a) => a && { ...a, can });
+    setCanDang(null);
+    ghi("chart_interacted", { mo_dun: "phongthuy", kind: "anh_can_khung" });
+  };
+  const chamCanChuot = (ev: React.PointerEvent<HTMLDivElement>) => {
+    const r = ev.currentTarget.getBoundingClientRect();
+    if (!r.width || !r.height) return;
+    ev.preventDefault();
+    chamCan([(ev.clientX - r.left) / r.width, (ev.clientY - r.top) / r.height]);
+  };
+  const phimCan = (ev: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!canDang) return;
+    const b = ev.shiftKey ? 0.1 : 0.02;
+    const d: Record<string, Diem> = { ArrowLeft: [-b, 0], ArrowRight: [b, 0], ArrowUp: [0, -b], ArrowDown: [0, b] };
+    if (d[ev.key]) {
+      ev.preventDefault();
+      setCanDang({ ...canDang, phim: true, conTro: [kep01(canDang.conTro[0] + d[ev.key]![0]), kep01(canDang.conTro[1] + d[ev.key]![1])] });
+    } else if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); chamCan(canDang.conTro); }
+  };
+  // Esc ở bất kỳ đâu khi đang căn → thôi, trả phép căn cũ.
+  useEffect(() => {
+    if (!canDang) return;
+    const nghePhim = (e: KeyboardEvent) => { if (e.key === "Escape") { e.preventDefault(); thoiCan(); } };
+    window.addEventListener("keydown", nghePhim);
+    return () => window.removeEventListener("keydown", nghePhim);
+  }, [canDang, thoiCan]);
 
   const [dangDat, setDangDat] = useState<LoaiVat>("cua_chinh");
   const [dangChon, setDangChon] = useState<LoaiVat | null>(null);
@@ -892,13 +945,25 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
           {khung.tuLuoiCu && <p className="rounded-xl border border-gold/40 bg-gold/5 p-3 text-xs text-fg-muted" data-testid="vi-tri-tu-luoi-cu"><ChuB chu={c("dv.tu_luoi_cu")} /></p>}
           {anhNen && (
             <div className="flex flex-wrap items-center gap-2 text-xs" data-testid="vi-tri-anh-dieu-khien">
-              <button type="button" onClick={() => setAnhNen((a) => a && { ...a, xoay: (a.xoay + 90) % 360 })} aria-label={c("dv.anh_xoay_aria")}
+              <button type="button" onClick={() => { setCanDang(null); setAnhNen((a) => a && { ...a, xoay: (a.xoay + 90) % 360, can: undefined }); }} aria-label={c("dv.anh_xoay_aria")}
                 className="inline-flex min-h-[36px] items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg"><RotateCw className="size-3.5" aria-hidden /> {c("dv.anh_xoay")}</button>
               <label className="inline-flex items-center gap-1.5 text-fg-muted">{c("dv.anh_ro")}
                 <input type="range" min={0.2} max={0.9} step={0.05} value={anhNen.mo} aria-label={c("dv.anh_ro_aria")}
                   onChange={(e) => setAnhNen((a) => a && { ...a, mo: Number(e.target.value) })} className="w-20 accent-[rgb(var(--gold))]" /></label>
+              {canDang ? (
+                <button type="button" onClick={thoiCan} data-testid="vi-tri-anh-can-thoi"
+                  className="inline-flex min-h-[36px] items-center gap-1 rounded-full border border-gold/60 bg-gold/10 px-2.5 py-1 text-gold"><X className="size-3.5" aria-hidden /> {c("dv.can.huy")}</button>
+              ) : (
+                <button type="button" onClick={batDauCan} data-testid="vi-tri-anh-can" aria-describedby={`can-hd-${uid}`}
+                  className="inline-flex min-h-[36px] items-center gap-1 rounded-full border border-line px-2.5 py-1 text-fg-muted hover:text-fg"><Crosshair className="size-3.5" aria-hidden /> {c("dv.can.nut")}</button>
+              )}
+              {anhNen.can && !canDang && (
+                <button type="button" onClick={() => setAnhNen((a) => a && { ...a, can: undefined })} data-testid="vi-tri-anh-bo-can"
+                  className="min-h-[36px] text-fg-muted underline underline-offset-2 hover:text-fg">{c("dv.can.bo")}</button>
+              )}
               <button type="button" onClick={() => chonAnhNen(undefined)} className="min-h-[36px] text-fg-faint hover:text-fg">{c("dv.anh_bo")}</button>
               <span className="text-fg-faint">{c("dv.anh_tren_may")}</span>
+              <span id={`can-hd-${uid}`} className="sr-only">{c("dv.can.hd")} {c("dv.can.phim")}</span>
             </div>
           )}
 
@@ -965,13 +1030,25 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
             <p className="mb-1.5 text-center text-[11px] font-medium uppercase tracking-wider text-gold">
               ▲ {c("dv.mat_truoc")}{huongNha != null ? ` · ${Math.round(huongNha)}°` : ""} · {khung.rong}m × {khung.sau}m
             </p>
+            {canDang && (
+              <div className="mb-2 rounded-lg border border-gold/50 bg-gold/10 px-3 py-2 text-xs" data-testid="vi-tri-anh-can-buoc" data-buoc={canDang.buoc} aria-live="polite">
+                <p className="font-medium text-fg">{c(canDang.buoc === 1 ? "dv.can.b1" : "dv.can.b2")}</p>
+                {canDang.loi && <p className="mt-0.5 text-gold" role="status" data-testid="vi-tri-anh-can-loi">{c("dv.can.loi")}</p>}
+                <p className="mt-0.5 text-fg-muted">{c("dv.can.hd")}</p>
+                <p className="mt-0.5 hidden text-fg-faint [@media(pointer:fine)]:block">{c("dv.can.phim")}</p>
+              </div>
+            )}
             <div className="relative mx-auto" style={{ aspectRatio: `${khung.rong} / ${khung.sau}`, width: `min(100%, calc(62vh * ${khung.rong / khung.sau}))` }}>
             {anhNen && (
-              <canvas ref={canvasAnh} aria-hidden data-testid="vi-tri-anh-canvas" data-xoay={anhNen.xoay}
-                className="pointer-events-none absolute inset-0 size-full object-contain" style={{ opacity: anhNen.mo }} />
+              // Khung riêng cắt phần ảnh tràn ra khi đã căn (sơ đồ SVG phía trên vẫn được tràn mép cho ký hiệu cửa, tay kéo).
+              <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
+                <canvas ref={canvasAnh} data-testid="vi-tri-anh-canvas" data-xoay={anhNen.xoay} data-can={anhNen.can ? "1" : "0"}
+                  className="absolute inset-0 size-full object-contain"
+                  style={{ opacity: anhNen.mo, transformOrigin: "0 0", transform: cssCan(anhNen.can) }} />
+              </div>
             )}
             <svg ref={svgRef} viewBox={`0 0 ${khung.rong} ${khung.sau}`} preserveAspectRatio="xMidYMid meet" data-testid="vi-tri-khung"
-              className="relative block size-full touch-none select-none overflow-visible"
+              className={cn("relative block size-full touch-none select-none overflow-visible", canDang && "opacity-30")}
               onPointerDown={datDiem}
               onPointerMove={diChuyenKeo}
               onPointerUp={ketThucKeo}
@@ -1171,6 +1248,26 @@ export function DoViTriVat({ sinh }: { sinh?: { birth_date: string; gender: "nam
                 );
               })}
             </svg>
+            {/* Đang căn ảnh: lớp phủ nhận MỌI lần chạm (không đặt phòng / sân), dấu chữ thập ở chỗ đã chạm */}
+            {canDang && (
+              <div ref={vungCan} role="application" tabIndex={0} data-testid="vi-tri-anh-can-vung"
+                aria-label={c("dv.can.aria", { buoc: c(canDang.buoc === 1 ? "dv.can.b1" : "dv.can.b2") })}
+                className="absolute inset-0 z-10 cursor-crosshair touch-none rounded-sm outline-none ring-2 ring-gold/60 ring-offset-0 focus-visible:ring-gold"
+                onPointerDown={chamCanChuot} onKeyDown={phimCan}>
+                {[...(canDang.p1 ? [{ ma: "p1", p: canDang.p1 }] : []), ...(canDang.phim ? [{ ma: "con_tro", p: canDang.conTro }] : [])].map(({ ma, p }) => {
+                  const laConTro = ma === "con_tro";
+                  return (
+                    <span key={ma} data-testid={`vi-tri-anh-can-${ma}`} aria-hidden
+                      className={cn("pointer-events-none absolute size-6 -translate-x-1/2 -translate-y-1/2", laConTro && "opacity-60")}
+                      style={{ left: `${p[0] * 100}%`, top: `${p[1] * 100}%` }}>
+                      <span className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-gold shadow-[0_0_0_1px_rgb(var(--bg))]" />
+                      <span className="absolute left-0 top-1/2 h-0.5 w-full -translate-y-1/2 bg-gold shadow-[0_0_0_1px_rgb(var(--bg))]" />
+                      {!laConTro && <span className="absolute left-full top-full ml-0.5 rounded bg-bg/80 px-1 text-[10px] font-semibold text-gold">1</span>}
+                    </span>
+                  );
+                })}
+              </div>
+            )}
             </div>
             {hienCuuCung && !tamVe && <p className="mt-2 text-center text-[11px] text-fg-muted" data-testid="vi-tri-tam-can-xem">{c("dv.tam_can_xem")}</p>}
           </div>

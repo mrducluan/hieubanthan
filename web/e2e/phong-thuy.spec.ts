@@ -464,19 +464,77 @@ test("UI-PT2 A/B: chọn Chung cư → hướng dẫn căn hộ + Cách làm; GP
   await expect(page.getByTestId("khao-sat-nha").getByLabel("Loại nhà")).toHaveValue("can_ho");   // Khảo sát đọc cùng hồ sơ nhà
 });
 
-test("UI-PT2 B/C + TY-2 đợt 2: ảnh bản vẽ làm nền sơ đồ tỉ lệ (chỉ trên máy) + Chụp một góc, trả lời 3 câu → tích đúng ô dấu hiệu", async ({ page }) => {
+test("UI-PT2 B/C + TY-2 đợt 2 + gói 3: ảnh bản vẽ làm nền sơ đồ tỉ lệ (chỉ trên máy), căn ảnh theo khung + Chụp một góc, trả lời 3 câu → tích đúng ô dấu hiệu", async ({ page }) => {
   await napHoSo(page);
   await page.goto("/phong-thuy");
   const ks = page.getByTestId("khao-sat-nha");
   await expect(ks.getByTestId("ks-so-do")).toContainText("Chưa có sơ đồ");
   const ve = page.getByTestId("vi-tri-vat");
   await ve.getByTestId("vi-tri-cach-khung").click();
-  await ve.getByLabel("Ảnh bản vẽ nhà làm nền cho sơ đồ (chỉ hiện trên máy)").setInputFiles({ name: "mat-bang.png", mimeType: "image/png", buffer: PNG_1 });
+  // Ảnh bản vẽ giả 120×200 (khung chữ nhật trên nền trắng) dựng ngay trong trình duyệt
+  const pngBanVe = Buffer.from(await page.evaluate(async () => {
+    const cv = new OffscreenCanvas(120, 200);
+    const g = cv.getContext("2d")!;
+    g.fillStyle = "#fff"; g.fillRect(0, 0, 120, 200);
+    g.strokeStyle = "#000"; g.lineWidth = 3; g.strokeRect(20, 20, 80, 160);
+    const b = await cv.convertToBlob({ type: "image/png" });
+    const u8 = new Uint8Array(await b.arrayBuffer());
+    let s = ""; u8.forEach((x) => { s += String.fromCharCode(x); });
+    return btoa(s);
+  }), "base64");
+  await ve.getByLabel("Ảnh bản vẽ nhà làm nền cho sơ đồ (chỉ hiện trên máy)").setInputFiles({ name: "mat-bang.png", mimeType: "image/png", buffer: pngBanVe });
   await expect(ve.getByTestId("vi-tri-anh-dieu-khien")).toContainText("không tải lên");
-  await expect(ve.getByTestId("vi-tri-anh-canvas")).toHaveCount(1);   // ảnh vẽ lên canvas trên máy — không có đường dẫn ảnh nào
+  const canvas = ve.getByTestId("vi-tri-anh-canvas");
+  await expect(canvas).toHaveCount(1);   // ảnh vẽ lên canvas trên máy — không có đường dẫn ảnh nào
   await expect(ve.locator("img")).toHaveCount(0);
+  await expect(canvas).toHaveAttribute("data-can", "0");
+  // TY-2 gói 3: căn ảnh theo khung bằng hai lần chạm — lần chạm không đặt phòng
+  const chamVung = async (x: number, y: number) => {
+    const vung = ve.getByTestId("vi-tri-anh-can-vung");
+    await vung.evaluate((el) => el.scrollIntoView({ block: "center" }));
+    const b = (await vung.boundingBox())!;
+    await page.mouse.click(b.x + b.width * x, b.y + b.height * y);
+  };
+  await ve.getByTestId("vi-tri-anh-can").click();
+  await expect(ve.getByTestId("vi-tri-anh-can-buoc")).toHaveAttribute("data-buoc", "1");
+  await chamVung(0.17, 0.1);
+  await expect(ve.getByTestId("vi-tri-anh-can-buoc")).toHaveAttribute("data-buoc", "2");
+  await expect(ve.getByTestId("vi-tri-anh-can-p1")).toBeVisible();
+  await chamVung(0.12, 0.05);                                   // lên trên – sang trái góc đầu → báo, vẫn ở bước 2
+  await expect(ve.getByTestId("vi-tri-anh-can-loi")).toBeVisible();
+  await expect(ve.getByTestId("vi-tri-anh-can-buoc")).toHaveAttribute("data-buoc", "2");
+  await chamVung(0.83, 0.9);
+  await expect(ve.getByTestId("vi-tri-anh-can-buoc")).toHaveCount(0);
+  await expect(canvas).toHaveAttribute("data-can", "1");
+  const bien = (await canvas.evaluate((el) => (el as HTMLElement).style.transform)).match(/^scale\(([\d.]+), ([\d.]+)\) translate\((-[\d.]+)%, (-[\d.]+)%\)$/);
+  expect(bien).not.toBeNull();
+  const [sx, sy, tx, ty] = bien!.slice(1).map(Number);
+  expect(sx).toBeGreaterThan(1.45); expect(sx).toBeLessThan(1.6);    // ≈ 1 / (0.83 − 0.17)
+  expect(sy).toBeGreaterThan(1.2); expect(sy).toBeLessThan(1.3);     // ≈ 1 / (0.9 − 0.1)
+  expect(tx).toBeGreaterThan(-19); expect(tx).toBeLessThan(-15);
+  expect(ty).toBeGreaterThan(-12); expect(ty).toBeLessThan(-8);
+  await expect(ve.locator('[data-testid^="vi-tri-hop-"]')).toHaveCount(0);   // không phòng nào được đặt bởi các lần chạm căn
+  // Bắt đầu căn lại rồi Esc → trả phép căn cũ
+  await ve.getByTestId("vi-tri-anh-can").click();
+  await expect(canvas).toHaveAttribute("data-can", "0");                     // đang căn: ảnh hiện nguyên vẹn
+  await page.keyboard.press("Escape");
+  await expect(ve.getByTestId("vi-tri-anh-can-vung")).toHaveCount(0);
+  await expect(canvas).toHaveAttribute("data-can", "1");
+  // Bỏ căn
+  await ve.getByTestId("vi-tri-anh-bo-can").click();
+  await expect(canvas).toHaveAttribute("data-can", "0");
+  expect(await canvas.evaluate((el) => (el as HTMLElement).style.transform)).toBe("");
+  // Bàn phím: Enter chọn chỗ con trỏ, mũi tên dời; xoay ảnh thì bỏ căn
+  await ve.getByTestId("vi-tri-anh-can").click();
+  await expect(ve.getByTestId("vi-tri-anh-can-vung")).toBeFocused();
+  await page.keyboard.press("Enter");
+  for (let i = 0; i < 6; i++) await page.keyboard.press("Shift+ArrowRight");
+  for (let i = 0; i < 6; i++) await page.keyboard.press("Shift+ArrowDown");
+  await page.keyboard.press("Enter");
+  await expect(canvas).toHaveAttribute("data-can", "1");
   await ve.getByRole("button", { name: "Xoay ảnh bản vẽ 90 độ" }).click();
-  await expect(ve.getByTestId("vi-tri-anh-canvas")).toHaveAttribute("data-xoay", "90");
+  await expect(canvas).toHaveAttribute("data-xoay", "90");
+  await expect(canvas).toHaveAttribute("data-can", "0");
   await ve.getByRole("button", { name: "Bỏ ảnh" }).click();
   await expect(ve.getByTestId("vi-tri-anh-canvas")).toHaveCount(0);
   // P6: hỏi nhanh theo ý định — sức khoẻ → câu đầu là xà ngang; "Có" tích ô dấu hiệu, "Không" bỏ tích

@@ -229,6 +229,16 @@ export const CHU_PHONG_THUY_UI = {
   "dv.giam": m(DV, "Giảm {chieu}", "Decrease {chieu}"),
   "dv.tang_len": m(DV, "Tăng {chieu}", "Increase {chieu}"),
   "dv.so_do_aria": m(DV, "Sơ đồ nhà theo tỉ lệ, mặt trên là mặt trước nhà", "Scaled floor plan; the top edge is the front of the home"),
+  // TY-2 gói 3: căn ảnh bản vẽ theo khung bằng hai lần chạm
+  "dv.can.nut": m(DV, "Căn ảnh theo khung", "Align photo to outline"),
+  "dv.can.b1": m(DV, "Bước 1/2: chạm góc trước – trái của nhà trên ảnh", "Step 1 of 2: tap the front-left corner of the home on the photo"),
+  "dv.can.b2": m(DV, "Bước 2/2: chạm góc sau – phải của nhà trên ảnh", "Step 2 of 2: tap the back-right corner of the home on the photo"),
+  "dv.can.hd": m(DV, "Mặt trước là cạnh trên của khung. Hai góc bạn chạm sẽ được kéo về đúng hai góc khung.", "The front is the top edge of the outline. The two corners you tap are stretched onto the two corners of the outline."),
+  "dv.can.phim": m(DV, "Bàn phím: mũi tên dời dấu chữ thập (Shift: bước lớn), Enter để chọn, Esc để thôi.", "Keyboard: arrow keys move the crosshair (Shift: bigger steps), Enter picks, Esc cancels."),
+  "dv.can.loi": m(DV, "Góc sau – phải cần nằm thấp hơn và ở bên phải góc đầu tiên. Chạm lại.", "The back-right corner needs to be lower than and to the right of the first one. Please tap again."),
+  "dv.can.huy": m(DV, "Thôi căn", "Cancel"),
+  "dv.can.bo": m(DV, "Bỏ căn", "Reset alignment"),
+  "dv.can.aria": m(DV, "Vùng căn ảnh theo khung. {buoc}", "Photo alignment area. {buoc}"),
   // TY-2 gói 2: sân / giếng trời + "thử dời bếp" (tự tính lại, trước – sau)
   "dv.san.nut": m(DV, "Sân / giếng trời", "Courtyard / light well"),
   "dv.san.hd": m(DV, "Chạm vào sơ đồ ở chỗ có sân hoặc giếng trời chạy ngang nhà để đánh dấu. Kéo dải để dời, kéo vạch vàng ở mép trên / dưới để nới. Máy chia nhà thành các lớp và đo cửa, phòng chính, bếp theo từng sân như sách Tam Yếu.", "Tap the plan where a courtyard or light well runs across the home to mark it. Drag a band to move it, drag the gold bar on its top or bottom edge to resize. The home is split into rows and the door, main room and stove are read from each courtyard, as the Three Essentials does."),
