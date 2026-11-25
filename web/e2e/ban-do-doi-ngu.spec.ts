@@ -2,11 +2,11 @@
 import { expect, test } from "@playwright/test";
 import { napHoSo } from "./_hoso";
 
-test("308 redirect 1 bước từ URL cũ /ban-do-doi-ngu & /doanh-chu sang /quan-ly-nhan-su (giữ nguyên ?ma=)", async ({ request }) => {
+test("308 redirect 1 bước từ URL cũ /ban-do-doi-ngu & /doanh-chu sang /quan-ly-nhan-su (giữ nguyên ?ma=, ?utm_source=, gclid)", async ({ request }) => {
   for (const [cu, dich] of [
-    ["/ban-do-doi-ngu", "/quan-ly-nhan-su"],
+    ["/ban-do-doi-ngu?utm_source=google&gclid=abc", "/quan-ly-nhan-su?utm_source=google&gclid=abc"],
     ["/ban-do-doi-ngu/moi?ma=abc123", "/quan-ly-nhan-su/moi?ma=abc123"],
-    ["/doanh-chu", "/quan-ly-nhan-su"],
+    ["/doanh-chu?utm_source=fb", "/quan-ly-nhan-su?utm_source=fb"],
     ["/doanh-chu/moi?ma=abc123", "/quan-ly-nhan-su/moi?ma=abc123"],
   ] as const) {
     const r = await request.get(cu, { maxRedirects: 0 });
