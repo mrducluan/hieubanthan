@@ -87,3 +87,17 @@ def test_nha_cua_ban_co_hop_nhieu_lop_khong_doi_muc():
     assert "Động trạch (3 lớp)" in [h["tieu_de"] for h in tp(r.json())["hop"]]
     assert [x.get("muc") for x in r.json()["chuong"]] == [x.get("muc") for x in goc["chuong"]]
     del dt
+
+
+@pytest.mark.parametrize("nl", [None, {"so_lop": 3, "lop_chu": 3}])
+def test_chuong_tung_phong_khong_trung_hop_ccb(nl):
+    """Hồi quy: chen hộp nhà nhiều lớp từng làm `elif xau` rơi khỏi `if h_ty` → hộp "chưa cùng nhịp" xuất hiện hai lần."""
+    import datetime as dt
+
+    from app.luangiai import phongthuy_doi_song as ds
+    nha = {"huong": "Nam", "bo_cuc": {"vi_tri": {"cua_chinh": "Nam", "phong_ngu_chinh": "Tây", "bep": "Đông Bắc"}}}
+    if nl:
+        nha["nhieu_lop"] = nl
+    r = ds.luan_giai({"nam": 1985, "gioi_tinh": "nam"}, nha, ngay_xem=dt.date(2026, 11, 25))
+    td = [h["tieu_de"] for h in next(c for c in r["chuong"] if c["ma"] == "tung_phong")["hop"]]
+    assert len(td) == len(set(td)), td

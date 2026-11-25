@@ -5,7 +5,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem } from "@/lib/proxy";
-import { boSoDo } from "@/lib/lui-so-do";
+import { boNhieuLop, boSoDo, gopLui } from "@/lib/lui-so-do";
 import { LuanGiaiPTZ } from "@/lib/bo-cuc-zod";
 import { CUNG_9, HUONG_8, kyMaNha, LOAI_NHA_THE, MUC_THE, PHONG_THE, tuTuMa } from "@/lib/ma-moi";
 import { traLoiChiaSe } from "@/lib/loi-chia-se";
@@ -29,7 +29,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   if (!p.success) return NextResponse.json({ error: "Đầu vào không hợp lệ" }, { status: 422 });
   const { ten_hien_thi, loai_nha_the, ...yc } = p.data;
   let r = await goiEngineDaKiem(yc, "/v1/phongthuy/luan-giai", dauNguoiGoi(req));
-  const banLui = !r.ok && r.res.status === 422 ? boSoDo(yc) : null;       // deploy lệch: engine cũ chưa nhận sơ đồ tỉ lệ
+  const banLui = !r.ok && r.res.status === 422 ? gopLui(boSoDo, boNhieuLop)(yc) : null;       // deploy lệch: engine cũ chưa nhận sơ đồ tỉ lệ
   if (banLui) r = await goiEngineDaKiem(banLui, "/v1/phongthuy/luan-giai", dauNguoiGoi(req));
   if (!r.ok) return r.res;
   const bc = BaoCao.safeParse(r.body);

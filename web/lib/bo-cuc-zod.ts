@@ -56,6 +56,11 @@ export const LuanGiaiPTZ = z.object({
     bo_cuc: BoCucZ.optional(),
     // TY-2: mã điều đã tích ở "Nhìn quanh nhà" (Dương Trạch Thập Thư) — engine kiểm danh mục.
     quan_sat: z.array(z.string().regex(/^[a-z_]{3,40}$/)).max(60).optional(),
+    // TY-2 gói 2: nhà nhiều lớp (số lớp từ cổng vào, lớp có dãy nhà chính) — từ sân / giếng trời hoặc khai ở Tam Yếu.
+    nhieu_lop: z.object({
+      so_lop: z.number().int().min(1).max(15),
+      lop_chu: z.number().int().min(1).max(15).optional(),
+    }).strict().optional(),
   }).strict(),
   thanh_vien: z.array(SinhZ.extend({ vai: z.enum(["vo", "chong", "con", "cha_me", "khac"]).optional() }).strict()).max(6).optional(),
   ngay_xem: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),

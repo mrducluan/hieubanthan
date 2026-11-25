@@ -25,7 +25,7 @@ import { datGocNhin, TEN_GOC_NHIN, useGocNhin, type GocNhin } from "@/lib/goc-nh
 import { SoDoNha } from "@/components/huyen-hoc/SoDoNha";
 import { DoHinhTamYeu, type CapDoHinh } from "@/components/phong-thuy/DoHinhTamYeu";
 import { NHAN_MUC } from "@/components/luan-giai/kieu";
-import { boCucGui, type HoSoNha } from "@/lib/ho-so-nha";
+import { boCucGui, nhieuLopGui, type HoSoNha } from "@/lib/ho-so-nha";
 import { NutChiaSeNha } from "@/components/chia-se/NutChiaSeNha";
 import { Undo2, Wrench } from "lucide-react";
 import { ChanQr } from "@/components/khung/ChanQr";
@@ -143,7 +143,8 @@ export function NhaCuaBan({ sinh, doHuongGoiY, yDinhGoiY }: {
       const yc = {
         ...(sinh ? { sinh } : {}),
         nha: { ...(d != null ? { huong_do: d } : huong ? { huong } : {}), ...(nx != null ? { nam_xay: nx } : {}), theo, ...(bo_cuc ? { bo_cuc } : {}),
-          ...(nhaDung?.quan_sat?.length ? { quan_sat: nhaDung.quan_sat } : {}) },
+          ...(nhaDung?.quan_sat?.length ? { quan_sat: nhaDung.quan_sat } : {}),
+          ...(nhieuLopGui(nhaDung) ? { nhieu_lop: nhieuLopGui(nhaDung)! } : {}) },
         ...(thanh_vien.length ? { thanh_vien } : {}),
         goc_nhin: gocNhin, ...(yDinh ? { y_dinh: yDinh } : {}),
       };

@@ -523,13 +523,13 @@ def _chuong_tung_phong(mq, huong, b, bc_luan, bo_cuc_in, tvs=None, tuoi=None, nh
                                  ds="; ".join(f"{x['cap']} {_dnt(x['du_nien'])}" for x in ccb["cap"])))
             if h_ty:
                 c["hop"].append(h_ty)
-            h_nl = _hop_nhieu_lop(bc_luan, nhieu_lop)
-            if h_nl:
-                c["hop"].append(h_nl)
             elif xau:
                 c["hop"].append(_hop("loi_khuyen", L("pt.c3.ccb.td", "Cửa, phòng ngủ, bếp chưa cùng nhịp"),
                                      L("pt.c3.ccb.nd", "Cặp {ds} đang ở du niên kém. Phần dễ đổi nhất là miệng bếp và đầu giường — quay về phía hợp với bạn.",
                                        ds=_ds(x['cap'] for x in xau))))
+            h_nl = _hop_nhieu_lop(bc_luan, nhieu_lop)
+            if h_nl:
+                c["hop"].append(h_nl)
         dau_tien = True
         for d in sorted(bc_luan["dien_giai"]["dau_hieu"], key=lambda d: not d.get("veto")):
             if not d["tot"]:

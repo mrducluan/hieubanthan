@@ -31,3 +31,31 @@ export function boBanCong(yc: unknown): unknown | null {
   }).filter((t) => t.vat.length);
   return co && tang.length ? { ...yc, tang } : null;
 }
+
+/** TY-2 gói 2: bỏ `nha.nhieu_lop` (nhà nhiều lớp từ sân / giếng trời) — engine cũ chưa nhận trường này ở Nhà của bạn. */
+export function boNhieuLop(yc: unknown): unknown | null {
+  if (!laObj(yc) || !laObj(yc.nha) || !("nhieu_lop" in yc.nha)) return null;
+  const { nhieu_lop: _n, ...nha } = yc.nha;
+  void _n;
+  return { ...yc, nha };
+}
+
+/** TY-2 gói 2: bỏ `khung.san` (dải sân / giếng trời) của yêu cầu vi-tri-vat — engine cũ chưa nhận. */
+export function boSan(yc: unknown): unknown | null {
+  if (!laObj(yc) || !laObj(yc.khung) || !("san" in yc.khung)) return null;
+  const { san: _s, ...khung } = yc.khung;
+  void _s;
+  return { ...yc, khung };
+}
+
+/** Ghép nhiều hàm lùi: áp lần lượt mọi hàm có việc để làm; không hàm nào đổi gì → null (khi đó không gọi lại). */
+export function gopLui(...ham: ((yc: unknown) => unknown | null)[]): (yc: unknown) => unknown | null {
+  return (yc) => {
+    let cur = yc, doi = false;
+    for (const f of ham) {
+      const r = f(cur);
+      if (r != null) { cur = r; doi = true; }
+    }
+    return doi ? cur : null;
+  };
+}

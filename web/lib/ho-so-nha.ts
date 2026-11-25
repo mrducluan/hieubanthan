@@ -88,6 +88,8 @@ export const HoSoNha = z.object({
     luoi: z.array(z.string().regex(/^[01]{3,12}$/)).min(3).max(12).optional(),
     /** TY-2 đợt 2: khung chuyển tự động từ lưới vẽ tay cũ (mỗi ô = 1 m, chưa phải số đo thật) — nhắc người dùng nhập số đo. */
     tu_luoi_cu: z.boolean().optional(),
+    /** TY-2 gói 2: dải sân / giếng trời (y0, y1 theo chiều sâu, 0..1; 0 = mặt trước) — người dùng tự vẽ. Engine đếm lớp. */
+    san: z.array(z.tuple([z.number().min(0).max(1), z.number().min(0).max(1)])).max(14).optional(),
   }).optional(),
   tang_do: z.array(z.object({
     so: z.number().int().min(1).max(6),
@@ -206,10 +208,18 @@ export function boCucGui(n: HoSoNha | null | undefined, huong?: { huong_do?: num
     ...(soDo ? { so_do: soDo } : b?.mat_bang ? { mat_bang: b.mat_bang } : {}),
   };
 }
+/** TY-2 gói 2: nhà nhiều lớp gửi engine (`nha.nhieu_lop` của /api/phongthuy/luan-giai) — chỉ số lớp + lớp nhà chính. */
+export function nhieuLopGui(n: HoSoNha | null | undefined): { so_lop: number; lop_chu?: number } | null {
+  const nl = n?.nhieu_lop;
+  if (!nl || nl.so_lop < 2) return null;
+  return { so_lop: nl.so_lop, ...(nl.lop_chu && nl.lop_chu <= nl.so_lop ? { lop_chu: nl.lop_chu } : {}) };
+}
 /** Toàn bộ đầu vào `nha` + `thanh_vien` cho /api/phongthuy/luan-giai từ một hồ sơ nhà (so hai căn, thẻ chia sẻ). */
 export function nhaGui(n: HoSoNha): { nha: Record<string, unknown>; thanh_vien?: { vai: string; birth_year: number; gender: "nam" | "nu" }[] } {
   const bo_cuc = boCucGui(n);
-  const nha = { ...(nhaTuHoSo(n) ?? { theo: n.theo }), ...(bo_cuc ? { bo_cuc } : {}), ...(n.quan_sat?.length ? { quan_sat: n.quan_sat } : {}) };
+  const nl = nhieuLopGui(n);
+  const nha = { ...(nhaTuHoSo(n) ?? { theo: n.theo }), ...(bo_cuc ? { bo_cuc } : {}), ...(n.quan_sat?.length ? { quan_sat: n.quan_sat } : {}),
+    ...(nl ? { nhieu_lop: nl } : {}) };
   const tv = n.thanh_vien.map((x) => ({ vai: x.vai, birth_year: x.nam, gender: x.gioi_tinh }));
   return { nha, ...(tv.length ? { thanh_vien: tv } : {}) };
 }

@@ -2,7 +2,7 @@
 // → engine tính phương, sơn từng vật, Cửa – Chủ – Bếp từng tầng, du niên với mệnh, sao Huyền Không. Web chỉ kiểm đầu vào.
 import { z } from "zod";
 import { goiEngine } from "@/lib/proxy";
-import { boBanCong } from "@/lib/lui-so-do";
+import { boBanCong, boSan, gopLui } from "@/lib/lui-so-do";
 
 const Do = z.number().min(0).lt(360);
 const Vat = z.object({
@@ -21,6 +21,8 @@ const Input = z.object({
     rong: z.number().positive().max(200),
     sau: z.number().positive().max(200),
     luoi: z.array(z.string().regex(/^[01]{3,12}$/)).min(3).max(12).optional(),
+    // TY-2 gói 2: dải sân / giếng trời (y0, y1 theo chiều sâu, 0..1) — engine kiểm nằm trong nhà, không chồng, đếm lớp.
+    san: z.array(z.tuple([z.number().min(0).max(1), z.number().min(0).max(1)])).max(14).optional(),
   }).strict().optional(),
   nam_xay: z.number().int().min(1864).max(2150).optional(),
   sinh: z.object({
@@ -33,5 +35,6 @@ const Input = z.object({
 }).strict();
 
 export function POST(req: Request) {
-  return goiEngine(req, Input, "/v1/phongthuy/vi-tri-vat", boBanCong);
+  // Deploy lệch: engine cũ chưa nhận "ban_cong" / sân → gọi lại một lần không kèm các phần đó.
+  return goiEngine(req, Input, "/v1/phongthuy/vi-tri-vat", gopLui(boBanCong, boSan));
 }
