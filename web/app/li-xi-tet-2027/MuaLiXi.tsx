@@ -96,6 +96,18 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
         if (typeof nhap.ten === "string") setTen(nhap.ten);
         if (typeof nhap.chuc === "string") setChuc(nhap.chuc);
       }
+      const sp = new URLSearchParams(window.location.search);
+      const qMau = sp.get("mau");
+      const qHoa = sp.get("hoa");
+      if (qMau && (MAU_THIEP as readonly string[]).includes(qMau)) {
+        const m = qMau as MauThiep;
+        setMau(m);
+        if (qHoa && (HOA_TIET_TET as readonly string[]).includes(qHoa)) {
+          setHoa(qHoa as HoaTietTet);
+        } else {
+          setHoa(mauThiepTheoMa(m).hoaMacDinh);
+        }
+      }
     } catch { /* bỏ qua */ }
 
     fetch("/api/li-xi/thong-tin", { cache: "no-store" })
