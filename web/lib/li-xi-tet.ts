@@ -190,6 +190,8 @@ export interface ThongTinLiXi {
   nam: number;
   han: string;
   cong: "pay2s" | "gia" | null;
+  /** Vì sao chưa bán (chỉ khi `bat` = false): công tắc Lì xì tắt · chưa có cổng nạp · báo cáo đang miễn phí · chưa đọc được. */
+  ly_do?: "cong_tac_tat" | "chua_co_cong" | "mien_phi" | "khong_doc_duoc";
 }
 
 export interface BaoLiXiCongKhai {

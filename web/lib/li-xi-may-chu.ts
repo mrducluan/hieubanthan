@@ -18,7 +18,7 @@ const khachAnon = () => {
 
 export async function thongTinLiXi(): Promise<ThongTinLiXi> {
   const cong = congDangBat();
-  const macDinh: ThongTinLiXi = { bat: false, gia_1: 99000, gia_3: 249000, gia_5: 399000, nam: 2027, han: "2027-03-31", cong };
+  const macDinh: ThongTinLiXi = { bat: false, gia_1: 99000, gia_3: 249000, gia_5: 399000, nam: 2027, han: "2027-03-31", cong, ly_do: "khong_doc_duoc" };
   const sb = khachAnon();
   if (!sb) return macDinh;
   try {
@@ -28,8 +28,10 @@ export async function thongTinLiXi(): Promise<ThongTinLiXi> {
     // Chỉ bán khi báo cáo Thời gian tới đang thu Sao — không bán quà cho thứ ai cũng đọc miễn phí.
     const thu = d.bat === true && cong !== null ? await dangThuSao("thoi_gian") : false;
     const so = (v: unknown, m: number) => (typeof v === "number" && Number.isFinite(v) ? v : m);
+    const ly_do: ThongTinLiXi["ly_do"] = thu ? undefined : d.bat !== true ? "cong_tac_tat" : cong === null ? "chua_co_cong" : "mien_phi";
     return {
       bat: thu,
+      ly_do,
       gia_1: so(d.gia_1, macDinh.gia_1),
       gia_3: so(d.gia_3, macDinh.gia_3),
       gia_5: so(d.gia_5, macDinh.gia_5),

@@ -454,7 +454,13 @@ export function MuaLiXi({ banDau }: { banDau: ThongTinLiXi }) {
           ) : (
             <div className="rounded-xl border border-gold/25 bg-gold/[0.05] p-4 text-sm text-fg-muted" data-testid="lx-chua-mo">
               <p className="font-medium text-fg">Lì xì Tết 2027 chưa mở bán</p>
-              <p className="mt-1 text-xs">Báo cáo Thời gian tới đang miễn phí cho mọi người, nên chưa bán bao lì xì. Bạn vẫn xem thử mẫu thiệp và tải ảnh chúc Tết ở bên trái.</p>
+              <p className="mt-1 text-xs">
+                {tt.ly_do === "cong_tac_tat" ? "Lì xì Tết 2027 sắp mở bán, bạn quay lại sau nhé."
+                  : tt.ly_do === "chua_co_cong" ? "Cổng thanh toán đang được thiết lập nên chưa bán được."
+                  : tt.ly_do === "khong_doc_duoc" ? "Chưa tải được thông tin bán hàng, bạn thử lại sau ít phút."
+                  : "Báo cáo Thời gian tới đang miễn phí cho mọi người, nên chưa bán bao lì xì."}
+                {" "}Bạn vẫn xem thử mẫu thiệp và tải ảnh chúc Tết ở bên trái.
+              </p>
             </div>
           )}
         </Card>
