@@ -22,7 +22,10 @@
     "tt_tu_soi": "Self-reflection prompt from your Four Pillars: {cau_tu_soi}",
     "bc_gop_von": "From your chart ({ten_chuong}): {tra_loi}",
     "bc_sau_do_vo": "Anchor from your chart ({ten_chuong}): {giai_thich}",
-    "bc_khac_khau": "Partnership rhythm on your chart: {song_cung}"
+    "bc_khac_khau": "Partnership rhythm on your chart: {song_cung}",
+    "khong_co_vcd": "As calculated here, your {cung} ({chi}) holds the major star(s) {sao}, so it is not an empty palace. What you were told may rest on a different birth time, star-placement method or school.",
+    "khong_co_tt": "As calculated here, {ten_tt} does not show on any pillar stem or among your hidden stems. What you were told may rest on a different birth time or method.",
+    "bc_sau_do_vo_nam": "{nam}: your chart shows a smoother rhythm for relationships, a good time to meet people and open up again once you feel ready."
   },
   "mach": {
     "sau_do_vo": {

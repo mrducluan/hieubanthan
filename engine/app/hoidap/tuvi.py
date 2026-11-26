@@ -1870,6 +1870,8 @@ def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_
             kq, pl=pl, cau_hoi=cau_hoi, mo_dun="tuvi", ls=ls, sinh=sinh,
             bc_ds=bc_ds, dung_bc=_lay_bc, nguoi_than=_nt,
         )
+        if (kq.get("go_nut_doi_song") or {}).get("ma") == "go_loi_phan_doa":
+            kq.pop("luan_hoi", None)      # người hỏi đang lo vì bị phán → không chồng thêm một nhãn của lá số lên nỗi lo
     return kq
 
 

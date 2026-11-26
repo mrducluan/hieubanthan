@@ -1220,6 +1220,35 @@
   },
   "anh_xa_hoi_dap": [
     {
+      "chuong": "gia_dinh",
+      "ma": "con_cai",
+      "cung_tv": ["Tử Nữ"],
+      "chu_de_bt": ["con_cai", "gia_dinh"],
+      "vai_khac": ["con"],
+      "mau": [
+        "duong con cai .{0,25}(the nao|ra sao)",
+        "con cai cua (toi|minh|em) .{0,20}(the nao|ra sao)"
+      ],
+      "tu_khoa": [
+        ["con cai", "duong con", "chuyen con\\b"]
+      ]
+    },
+    {
+      "chuong": "gia_dinh",
+      "ma": "cha_me",
+      "cung_tv": ["Phụ Mẫu", "Phúc Đức", "Mệnh"],
+      "chu_de_bt": ["gia_dinh"],
+      "vai_khac": ["cha_me"],
+      "mau": [
+        "(voi |cung )?(cha me|bo me) .{0,25}(duyen gan|co hop|the nao|ra sao|can luu y|gan gui)",
+        "(toi|minh|em) .{0,15}(voi |va )(cha me|bo me) .{0,25}(co hop|duyen gan|gan gui|the nao)"
+      ],
+      "tu_khoa": [
+        ["\\b(cha me|bo me|ba me|phu mau)\\b(?! (chong|vo))", "song than", "ba ma", "bo me de", "\\bvoi (bo|me|cha|ba)\\b(?! (me )?(chong|vo)\\b)"],
+        ["duyen", "hop", "gan gui", "(voi|va) (toi|minh|em)", "(toi|minh|em) (voi|va)", "cua (toi|minh|em)", "nho cay", "luu y", "xa cach", "bat dong", "xung khac", "hieu nhau", "(voi|va) (cha me|bo me|ba me)"]
+      ]
+    },
+    {
       "chuong": "tinh_cam",
       "ma": "nguoi_thu_ba",
       "cung_tv": ["Phu Thê", "Mệnh"],
@@ -1230,6 +1259,9 @@
         "dau hieu .{0,20}(nguoi thu ba|ke thu ba|ngoai tinh)",
         "(co |lieu .{0,25}co )(chuyen )?(nguoi thu ba|ke thu ba|ngoai tinh)",
         "(nguoi thu ba|ke thu ba) .{0,20}(xen vao|khong|ko)"
+      ],
+      "tu_khoa": [
+        ["nguoi thu ba", "ke thu ba", "ngoai tinh", "(chong|vo|ny|nguoi yeu|ban doi|nua kia|anh ay|co ay)( \\w+){0,3} lang nhang", "tinh dich", "ong buom", "phan boi", "bo bich", "ngoai luong", "vo be", "ngoai vo", "bong hong", "pha dam", "chen chan", "nguoi chen giua", "(chong|vo|ny|nguoi yeu|anh ay|co ay|ban doi) co bo", "co bo (ben ngoai|be|nhi)"]
       ]
     },
     {
@@ -1244,6 +1276,9 @@
         "hai lan do",
         "(hon nhan|vo chong|duyen) .{0,25}(co ben|ben vung|ben lau|dut ganh|do vo|dang do)",
         "ben vung hay .{0,25}(dang do|hai lan do|do vo)"
+      ],
+      "tu_khoa": [
+        ["hai lan do", "dang do", "ly di", "ly hon", "tan vo", "do vo", "duyen mong", "(mot|hai|may) doi (vo|chong)", "ben (vung|lau)", "dut ganh", "chia ly", "(lay|cuoi) (chong|vo) hai lan", "hai doi (chong|vo)", "do dua hai ben", "hai ben", "tan dan xe nghe", "xe nghe"]
       ]
     },
     {
@@ -1257,8 +1292,11 @@
         "(cuoi|ket hon|lap gia dinh) som hay muon",
         "nen cuoi som hay muon",
         "(tinh duyen|duong tinh) .{0,20}lan dan",
-        "muon (chong|vo)",
+        "(?<!toi )(?<!minh )(?<!em )(?<!to )muon (chong|vo)",
         "(bao gio|khi nao) .{0,20}(lay chong|lay vo|ket hon|co nguoi yeu|lap gia dinh)"
+      ],
+      "tu_khoa": [
+        ["(cuoi|ket hon|lay (chong|vo)|lap gia dinh) (som|muon)", "som hay (de )?muon", "may tuoi (thi )?(nen |moi )?(cuoi|ket hon|lay)", "(bao gio|khi nao|nam nao) .{0,25}(cuoi|ket hon|lay (chong|vo)|co nguoi yeu|gap (nguoi|ai))", "(tinh duyen|duong tinh|chuyen tinh cam) .{0,25}(lan dan|trac tro|muon|kho)", "(?<!toi )(?<!minh )(?<!em )(?<!to )muon (chong|vo)", "\\bduyen (den )?muon\\b", "(truoc|sau) (30|ba muoi|25|35)", "den (som|muon)", "muon hay som", "(nen|co nen) (lay (chong|vo)|cuoi|ket hon)( \\w+)? (nam nay|nam sau|nam toi|bay gio|luc nay|som|muon|chua|khong)", "nhan duyen .{0,25}(trac tro|lan dan|muon|kho)", "len xe hoa", "(cho|doi) (them )?(vai|may) nam", "(lay (chong|vo)|cuoi|ket hon) (nam nay|nam sau) hay (nam nay|nam sau)", "lay som", "(de|cho) ngoai (25|30|35)", "duyen (phan )?.{0,15}muon"]
       ]
     },
     {
@@ -1271,6 +1309,10 @@
       "mau": [
         "(nguoi ban doi|chong tuong lai|vo tuong lai|ban doi|nua kia) .{0,25}(la nguoi|the nao|ra sao|tinh cach|kieu nguoi)",
         "lay (nguoi|chong|vo) nhu the nao"
+      ],
+      "tu_khoa": [
+        ["(chong|vo|ban doi|nua kia|nguoi ay|nguoi yeu) (sau nay|tuong lai)", "(nguoi ban doi|ban doi|nua kia)", "lay (nguoi|chong|vo) (nhu the nao|ra sao|kieu gi)", "ket toc", "nguoi (se )?(cuoi|lay)", "nua kia"],
+        ["tinh (tinh|cach)", "kieu nguoi", "la nguoi", "the nao", "ra sao", "nhu the nao", "tinh khi", "tinh net", "dang dap", "hien hay nong"]
       ]
     },
     {
@@ -1283,6 +1325,10 @@
       "mau": [
         "hon nhan .{0,25}(co hanh phuc|hanh phuc khong|em am khong)",
         "doi song hon nhan .{0,20}(co hanh phuc|the nao)"
+      ],
+      "tu_khoa": [
+        ["hon nhan", "lay (chong|vo)", "vo chong", "gia dinh nho", "cuoc song chung", "doi song vo chong", "cuoc song gia dinh", "gia that", "cuoc song vo chong", "sau khi (lay|cuoi)"],
+        ["hanh phuc", "em am", "yen am", "eu am", "vui ve", "thuan hoa", "yen on", "am cung", "song gio", "hoa hop", "dam thuan", "hoa thuan", "yen vui"]
       ]
     },
     {
@@ -1291,36 +1337,27 @@
       "cung_tv": ["Phụ Mẫu", "Huynh Đệ", "Tử Nữ", "Điền Trạch", "Phúc Đức", "Mệnh"],
       "chu_de_bt": ["gia_dinh", "tinh_cach"],
       "vai_khac": ["cha_me", "con"],
-      "mau": ["tac dong .{0,25}(nguoi trong nha|gia dinh|vo con|bo me)"]
-    },
-    {
-      "chuong": "gia_dinh",
-      "ma": "cha_me",
-      "cung_tv": ["Phụ Mẫu", "Phúc Đức", "Mệnh"],
-      "chu_de_bt": ["gia_dinh"],
-      "vai_khac": ["cha_me"],
       "mau": [
-        "(voi |cung )?(cha me|bo me) .{0,25}(duyen gan|co hop|the nao|ra sao|can luu y|gan gui)",
-        "(toi|minh|em) .{0,15}(voi |va )(cha me|bo me) .{0,25}(co hop|duyen gan|gan gui|the nao)"
+        "tac dong .{0,25}(nguoi trong nha|gia dinh|vo con|bo me)"
+      ],
+      "tu_khoa": [
+        ["nguoi trong nha", "gia dinh (minh|toi|em)", "khong khi (trong )?gia dinh", "ca nha", "nguoi nha", "song cung nha", "o cung nha", "nguoi than trong nha"],
+        ["tac dong", "anh huong", "(minh|toi|em) la nguoi the nao", "mang lai", "dong gop", "su co mat"]
       ]
     },
     {
-      "chuong": "gia_dinh",
-      "ma": "anh_em",
-      "cung_tv": ["Huynh Đệ", "Mệnh"],
-      "chu_de_bt": ["gia_dinh", "quan_he"],
-      "vai_khac": ["anh_em"],
-      "mau": ["anh (chi )?em .{0,25}(nho cay|hoa thuan|co hop)"]
-    },
-    {
-      "chuong": "gia_dinh",
-      "ma": "con_cai",
-      "cung_tv": ["Tử Nữ"],
-      "chu_de_bt": ["con_cai", "gia_dinh"],
-      "vai_khac": ["con"],
+      "chuong": "tien_bac",
+      "ma": "kinh_doanh",
+      "cung_tv": ["Tài Bạch", "Quan Lộc", "Mệnh"],
+      "chu_de_bt": ["nghe_tien"],
+      "vai_khac": [],
       "mau": [
-        "duong con cai .{0,25}(the nao|ra sao)",
-        "con cai cua (toi|minh|em) .{0,20}(the nao|ra sao)"
+        "kinh doanh hay (lam luong|an luong|lam cong|di lam)",
+        "(lam luong|an luong) hay (kinh doanh|buon ban)"
+      ],
+      "tu_khoa": [
+        ["kinh doanh", "buon ban", "mo (cua hang|quan|tiem|shop)", "kinh doanh online", "ban hang online"],
+        ["(lam|an|huong|di lam(?! an) .{0,10}) luong", "di lam(?! an)", "lam cong", "lam thue", "bo luong", "bo viec .{0,10}(kinh doanh|buon ban)"]
       ]
     },
     {
@@ -1333,6 +1370,121 @@
         "lam chu hay lam (cong|thue)",
         "(lam thue|di lam|lam cong|an luong) .{0,25}hay .{0,25}(mo rieng|ra rieng|lam chu|khoi nghiep)",
         "(mo rieng|ra rieng|lam chu) hay (lam thue|lam cong|di lam|an luong)"
+      ],
+      "tu_khoa": [
+        ["lam chu", "ra rieng", "mo rieng", "khoi nghiep", "tu lam", "ong chu", "lam sep", "sep cua chinh (minh|toi)", "tu dung ra", "lam rieng"],
+        ["lam cong", "lam thue", "di lam(?! an)", "an luong", "lam (cho )?nguoi khac", "lam chu (khong|duoc)", "lam nhan vien", "duoi truong", "lam thue an luong"]
+      ]
+    },
+    {
+      "chuong": "quan_he",
+      "ma": "ban_be",
+      "cung_tv": ["Nô Bộc", "Huynh Đệ"],
+      "chu_de_bt": ["quan_he"],
+      "vai_khac": ["ban_be"],
+      "mau": [
+        "ban be .{0,25}(co tin duoc|tot khong|chan thanh)"
+      ],
+      "tu_khoa": [
+        ["ban be", "\\bchoi nham ban\\b", "bang huu", "ban ruou"],
+        ["tin (duoc|tuong)", "that long", "phu long", "chan thanh", "tot", "loi dung", "choi nham", "nham ban", "dang tin", "ban ruou ban bia", "dam sau lung", "lua", "phan"]
+      ]
+    },
+    {
+      "chuong": "quan_he",
+      "ma": "thi_phi",
+      "cung_tv": ["Thiên Di", "Nô Bộc", "Quan Lộc", "Mệnh"],
+      "chu_de_bt": ["phap_ly", "quan_he"],
+      "vai_khac": ["ban_be"],
+      "mau": [
+        "(gap |dinh |hay bi )?(thi phi|ke choi xau|choi xau|dam sau lung)"
+      ],
+      "tu_khoa": [
+        ["thi phi", "noi xau", "choi xau", "gay kho de", "dam sau lung", "tieu nhan", "ganh ghet", "keo chan", "hai sau lung", "tai tieng", "mang tieng", "keo xau"]
+      ]
+    },
+    {
+      "chuong": "quan_he",
+      "ma": "lam_an_chung",
+      "cung_tv": ["Nô Bộc", "Tài Bạch", "Quan Lộc", "Thiên Di", "Mệnh"],
+      "chu_de_bt": ["quan_he", "nghe_tien"],
+      "vai_khac": ["doi_tac", "ban_be"],
+      "mau": [
+        "(lam an|hun von|gop von|hop tac|mo) chung",
+        "hop tac lam an voi (ban|nguoi khac)"
+      ],
+      "tu_khoa": [
+        ["lam an chung", "hop tac", "hun von", "gop von", "chung von", "co[ -]?founder", "chia (co )?phan", "lam chung", "gop .{0,10}von", "chia vai", "hun hap"]
+      ]
+    },
+    {
+      "chuong": "su_nghiep",
+      "ma": "dong_nghiep",
+      "cung_tv": ["Nô Bộc", "Quan Lộc"],
+      "chu_de_bt": ["quan_he", "nghe_tien"],
+      "vai_khac": ["ban_be"],
+      "mau": [
+        "dong nghiep.{0,20}(cap duoi|voi toi|voi minh|voi em|ra sao|the nao)",
+        "cap duoi voi (toi|minh|em)"
+      ],
+      "tu_khoa": [
+        ["dong nghiep", "cap duoi", "nhan vien", "dong su", "nguoi lam cung", "linh duoi quyen", "duoi quyen"]
+      ]
+    },
+    {
+      "chuong": "gia_dinh",
+      "ma": "anh_em",
+      "cung_tv": ["Huynh Đệ", "Mệnh"],
+      "chu_de_bt": ["gia_dinh", "quan_he"],
+      "vai_khac": ["anh_em"],
+      "mau": [
+        "anh (chi )?em .{0,25}(nho cay|hoa thuan|co hop)"
+      ],
+      "tu_khoa": [
+        ["\\banh (chi )?em\\b(?! (dong nghiep|cong ty|trong cong ty|xa hoi|ban be|o cho lam))", "\\bchi em\\b", "huynh de"],
+        ["nho cay", "giup (duoc )?nhau", "do dan", "hoa thuan", "hop", "(voi|va) (toi|minh|em)", "duoc"]
+      ]
+    },
+    {
+      "chuong": "tien_bac",
+      "ma": "trac_tro",
+      "cung_tv": ["Tài Bạch", "Mệnh"],
+      "chu_de_bt": ["nghe_tien"],
+      "vai_khac": [],
+      "mau": [
+        "(tien bac|tai chinh|tai loc) .{0,25}(co gap )?trac tro"
+      ],
+      "tu_khoa": [
+        ["tien", "tai chinh", "tai loc"],
+        ["trac tro", "hao hut", "mat mat", "ket tien", "kho khan", "thua lo", "hut tien", "vo no", "mat tien", "gap han", "\\bhan\\b", "lo von", "thung lo", "mat cua", "hao (tai|cua)", "bi ket", "\\bket\\b"]
+      ]
+    },
+    {
+      "chuong": "tien_bac",
+      "ma": "giai_doan_kha",
+      "cung_tv": ["Tài Bạch", "Quan Lộc", "Mệnh"],
+      "chu_de_bt": ["nghe_tien"],
+      "vai_khac": [],
+      "mau": [
+        "(giai doan|dai van|dai han|tuoi) nao .{0,25}(tien bac|tai chinh|tai loc|kinh te) .{0,20}(kha|tot|vuong|giau)"
+      ],
+      "tu_khoa": [
+        ["(giai doan|nam|tuoi|khoang tuoi|dai van|dai han) nao", "luc nao", "bao gio", "quang (doi|thoi gian) nao"],
+        ["kiem tien", "tien bac", "tai loc", "tai chinh", "giau", "vuong (tai|nhat)", "kha (gia|nhat)", "tui tien", "rung rinh", "du da"]
+      ]
+    },
+    {
+      "chuong": "su_nghiep",
+      "ma": "trac_tro",
+      "cung_tv": ["Quan Lộc", "Mệnh"],
+      "chu_de_bt": ["nghe_tien"],
+      "vai_khac": [],
+      "mau": [
+        "(cong viec|su nghiep|duong quan loc) .{0,25}(co gap )?(trac tro|chong chenh|lan dan)"
+      ],
+      "tu_khoa": [
+        ["cong viec", "su nghiep", "quan loc", "cong danh"],
+        ["trac tro", "kho khan", "\\bvap\\b", "lan dan", "chong chenh", "that bai", "tuot doc", "chung lai", "dung lai", "bi chan", "kho tien", "o ga", "o voi", "truc trac"]
       ]
     },
     {
@@ -1341,32 +1493,13 @@
       "cung_tv": ["Quan Lộc", "Mệnh"],
       "chu_de_bt": ["nghe_tien", "hoc_hanh", "tinh_cach"],
       "vai_khac": [],
-      "mau": ["trai nghe", "trai nganh", "lam khac nganh"]
-    },
-    {
-      "chuong": "su_nghiep",
-      "ma": "nghe_hop",
-      "cung_tv": ["Quan Lộc", "Mệnh", "Tài Bạch"],
-      "chu_de_bt": ["nghe_tien", "cach_cuc", "ngu_hanh", "tinh_cach"],
-      "vai_khac": [],
-      "dieu_hoi": ["chon_nghe"],
       "mau": [
-        "hop (lam )?nghe gi",
-        "lam nghe gi (hop|tot|phat|nhat)",
-        "(nghe|nganh|cong viec) nao hop",
-        "chon nghe gi"
-      ]
-    },
-    {
-      "chuong": "su_nghiep",
-      "ma": "hoc_hanh",
-      "cung_tv": ["Quan Lộc", "Phụ Mẫu", "Mệnh"],
-      "chu_de_bt": ["hoc_hanh"],
-      "vai_khac": [],
-      "mau": [
-        "duong hoc hanh",
-        "hoc hanh.{0,20}(bang cap|thi cu|the nao|ra sao|sang khong)",
-        "bang cap cua (toi|minh|em)"
+        "trai nghe",
+        "trai nganh",
+        "lam khac nganh"
+      ],
+      "tu_khoa": [
+        ["trai nghe", "trai nganh", "khac nganh", "(doi|chuyen|re) (nganh|nghe)", "hoc mot (dang|nganh) lam mot (neo|nganh)", "lam khac (nganh|nghe) (da )?hoc", "re ngang", "(nganh|nghe) khong (lien quan|dung) .{0,20}(hoc|chuyen mon)"]
       ]
     },
     {
@@ -1379,17 +1512,9 @@
         "sep cua (toi|minh|em) .{0,25}(la nguoi|the nao|ra sao)",
         "hop kieu sep nao",
         "(voi |gap )?(cap tren|be tren|sep) .{0,20}(co duyen|the nao|ra sao)"
-      ]
-    },
-    {
-      "chuong": "su_nghiep",
-      "ma": "dong_nghiep",
-      "cung_tv": ["Nô Bộc", "Quan Lộc"],
-      "chu_de_bt": ["quan_he", "nghe_tien"],
-      "vai_khac": ["ban_be"],
-      "mau": [
-        "dong nghiep.{0,20}(cap duoi|voi toi|voi minh|voi em|ra sao|the nao)",
-        "cap duoi voi (toi|minh|em)"
+      ],
+      "tu_khoa": [
+        ["\\bsep\\b", "cap tren", "be tren"]
       ]
     },
     {
@@ -1398,36 +1523,41 @@
       "cung_tv": ["Thiên Di", "Quan Lộc", "Mệnh"],
       "chu_de_bt": ["di_xa"],
       "vai_khac": [],
-      "mau": ["(nen |hop )?(di lam xa|lam an xa|lap nghiep xa|doi moi truong)"]
+      "mau": [
+        "(nen |hop )?(di lam xa|lam an xa|lap nghiep xa|doi moi truong)"
+      ],
+      "tu_khoa": [
+        ["lam xa", "xa que", "nuoc ngoai", "xuat khau lao dong", "doi moi truong", "lap nghiep xa", "tha huong", "(chuyen|vao|ra|len) (sai gon|ha noi|thanh pho|tp) (lap nghiep|lam viec|lam an|song)", "lap nghiep (o )?(noi khac|thanh pho)", "(xa|roi) que", "doi gio", "thanh pho khac", "tinh khac", "noi khac", "di lam xa", "di xa (lap nghiep|lam an|kiem song)", "dinh cu", "xuat ngoai", "roi que"]
+      ],
+      "loai_tru": ["du lich", "di choi", "nghi mat"]
     },
     {
       "chuong": "su_nghiep",
-      "ma": "trac_tro",
-      "cung_tv": ["Quan Lộc", "Mệnh"],
-      "chu_de_bt": ["nghe_tien"],
-      "vai_khac": [],
-      "mau": ["(cong viec|su nghiep|duong quan loc) .{0,25}(co gap )?(trac tro|chong chenh|lan dan)"]
-    },
-    {
-      "chuong": "tien_bac",
-      "ma": "kinh_doanh",
-      "cung_tv": ["Tài Bạch", "Quan Lộc", "Mệnh"],
-      "chu_de_bt": ["nghe_tien"],
+      "ma": "hoc_hanh",
+      "cung_tv": ["Quan Lộc", "Phụ Mẫu", "Mệnh"],
+      "chu_de_bt": ["hoc_hanh"],
       "vai_khac": [],
       "mau": [
-        "kinh doanh hay (lam luong|an luong|lam cong|di lam)",
-        "(lam luong|an luong) hay (kinh doanh|buon ban)"
+        "duong hoc hanh",
+        "hoc hanh.{0,20}(bang cap|thi cu|the nao|ra sao|sang khong)",
+        "bang cap cua (toi|minh|em)"
+      ],
+      "tu_khoa": [
+        ["hoc hanh", "hoc van", "bang cap", "thac si", "tien si", "hoc len", "thi cu", "hoc tap", "duong hoc", "con duong hoc", "chuyen hoc", "thi dau", "den sach", "khoa cu"]
       ]
     },
     {
       "chuong": "tien_bac",
-      "ma": "kiem_bang_gi",
-      "cung_tv": ["Tài Bạch", "Quan Lộc", "Mệnh"],
-      "chu_de_bt": ["nghe_tien"],
+      "ma": "cong_danh",
+      "cung_tv": ["Quan Lộc", "Tài Bạch", "Mệnh"],
+      "chu_de_bt": ["nghe_tien", "cach_cuc"],
       "vai_khac": [],
       "mau": [
-        "kiem tien bang (cach|nghe|huong|con duong|gi)",
-        "lam gi (de )?ra tien"
+        "cong danh.{0,15}chuc (vi|vu)",
+        "chuc (vi|vu) cua (toi|minh|em)"
+      ],
+      "tu_khoa": [
+        ["cong danh", "chuc (vu|vi)", "thang tien", "len chuc", "truong phong", "dia vi", "thang quan", "tien chuc", "co chuc", "co quyen"]
       ]
     },
     {
@@ -1441,53 +1571,25 @@
         "giu (duoc )?(tien|cua)",
         "(kiem|lam) bao nhieu tieu het",
         "giu tien kem"
+      ],
+      "tu_khoa": [
+        ["giu (duoc )?tien", "tu tai", "hao tai", "tieu het", "(?<!gui )tiet kiem", "di het", "de danh", "tich luy", "khong giu duoc", "tich cop", "gio vao nha trong", "tien vao .{0,15}(kho|di)", "tieu hoang", "tay trai ra tay phai", "vung tay"]
       ]
     },
     {
       "chuong": "tien_bac",
-      "ma": "cong_danh",
-      "cung_tv": ["Quan Lộc", "Tài Bạch", "Mệnh"],
-      "chu_de_bt": ["nghe_tien", "cach_cuc"],
-      "vai_khac": [],
-      "mau": [
-        "cong danh.{0,15}chuc (vi|vu)",
-        "chuc (vi|vu) cua (toi|minh|em)"
-      ]
-    },
-    {
-      "chuong": "tien_bac",
-      "ma": "giai_doan_kha",
+      "ma": "kiem_bang_gi",
       "cung_tv": ["Tài Bạch", "Quan Lộc", "Mệnh"],
       "chu_de_bt": ["nghe_tien"],
       "vai_khac": [],
-      "mau": ["(giai doan|dai van|dai han|tuoi) nao .{0,25}(tien bac|tai chinh|tai loc|kinh te) .{0,20}(kha|tot|vuong|giau)"]
-    },
-    {
-      "chuong": "tien_bac",
-      "ma": "trac_tro",
-      "cung_tv": ["Tài Bạch", "Mệnh"],
-      "chu_de_bt": ["nghe_tien"],
-      "vai_khac": [],
-      "mau": ["(tien bac|tai chinh|tai loc) .{0,25}(co gap )?trac tro"]
-    },
-    {
-      "chuong": "quan_he",
-      "ma": "lam_an_chung",
-      "cung_tv": ["Nô Bộc", "Tài Bạch", "Quan Lộc", "Thiên Di", "Mệnh"],
-      "chu_de_bt": ["quan_he", "nghe_tien"],
-      "vai_khac": ["doi_tac", "ban_be"],
       "mau": [
-        "(lam an|hun von|gop von|hop tac|mo) chung",
-        "hop tac lam an voi (ban|nguoi khac)"
+        "kiem tien bang (cach|nghe|huong|con duong|gi)",
+        "lam gi (de )?ra tien"
+      ],
+      "tu_khoa": [
+        ["kiem tien", "ra tien", "lam giau", "nguon (thu|tien)", "kiem ra tien"],
+        ["bang (gi|cach|nghe)", "tu dau", "cach nao", "hop", "nghe gi", "lam gi", "con duong nao", "duong nao"]
       ]
-    },
-    {
-      "chuong": "quan_he",
-      "ma": "thi_phi",
-      "cung_tv": ["Thiên Di", "Nô Bộc", "Quan Lộc", "Mệnh"],
-      "chu_de_bt": ["phap_ly", "quan_he"],
-      "vai_khac": ["ban_be"],
-      "mau": ["(gap |dinh |hay bi )?(thi phi|ke choi xau|choi xau|dam sau lung)"]
     },
     {
       "chuong": "quan_he",
@@ -1499,15 +1601,28 @@
       "mau": [
         "(?<!thien at )co (duyen gap )?(nguoi giup do|quy nhan)",
         "(?<!thien at )quy nhan .{0,20}(giup do|nang do|o dau|the nao)"
+      ],
+      "tu_khoa": [
+        ["quy nhan", "nguoi giup", "nang do", "giup do", "do dau", "cuu giup", "ai giup", "co ai (do|nang|giup)", "tu boi", "tu lap"]
       ]
     },
     {
-      "chuong": "quan_he",
-      "ma": "ban_be",
-      "cung_tv": ["Nô Bộc", "Huynh Đệ"],
-      "chu_de_bt": ["quan_he"],
-      "vai_khac": ["ban_be"],
-      "mau": ["ban be .{0,25}(co tin duoc|tot khong|chan thanh)"]
+      "chuong": "su_nghiep",
+      "ma": "nghe_hop",
+      "cung_tv": ["Quan Lộc", "Mệnh", "Tài Bạch"],
+      "chu_de_bt": ["nghe_tien", "cach_cuc", "ngu_hanh", "tinh_cach"],
+      "vai_khac": [],
+      "dieu_hoi": ["chon_nghe"],
+      "mau": [
+        "hop (lam )?nghe gi",
+        "lam nghe gi (hop|tot|phat|nhat)",
+        "(nghe|nganh|cong viec) nao hop",
+        "chon nghe gi"
+      ],
+      "tu_khoa": [
+        ["\\bnganh\\b", "\\bnghe\\b", "cong viec", "lam gi", "linh vuc", "huong nao", "nganh nao", "nghe nao", "chon nganh"],
+        ["\\bhop\\b", "nen (chon|theo|lam)", "phu hop"]
+      ]
     }
   ]
 }

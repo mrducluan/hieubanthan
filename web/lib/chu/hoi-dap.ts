@@ -60,4 +60,5 @@ export const CHU_HOI_DAP = {
   // Chặng 1 — Gỡ nút đời sống & Công tắc 2 Chế độ trong KhungChat.
   "gn.nhan": { nhom: K, nhan: "Nhãn hộp gỡ nút đời sống", mac_dinh: "Góc nhìn gỡ nút thực tế", en: "Balanced practical perspective" },
   "gn.viec": { nhom: K, nhan: "Nhãn danh sách việc thực tế", mac_dinh: "Ba bước thực tế nên làm:", en: "Practical next steps:" },
+  "gn.khoa_nut": { nhom: K, nhan: "Nút mở chương khi phần riêng theo lá số còn khoá", mac_dinh: "Đọc phần riêng theo lá số của bạn trong báo cáo", en: "Read the part drawn from your own chart in the report" },
 } as const satisfies BangChu;

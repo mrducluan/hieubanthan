@@ -187,6 +187,16 @@ export function catLuanHoiChat<T extends Record<string, unknown>>(
       };
     }
   }
+  // Khối "Gỡ nút đời sống": phần KB chung (góc nhìn hai mặt, việc thực tế) miễn phí; phần mượn CHƯƠNG báo cáo
+  // (`du_kien_la_so`, `viec_la_so` — engine ghi `tu_chuong`) bị cắt khi chương đó còn khoá.
+  if (out.go_nut_doi_song && typeof out.go_nut_doi_song === "object") {
+    const gn = out.go_nut_doi_song as Record<string, unknown>;
+    const ch = typeof gn.tu_chuong === "string" ? gn.tu_chuong : "";
+    if (ch && !mo.has(ch)) {
+      const { du_kien_la_so: _d, viec_la_so: _v, ...con } = gn;
+      out = { ...out, go_nut_doi_song: { ...con, khoa: true } };
+    }
+  }
   return out;
 }
 

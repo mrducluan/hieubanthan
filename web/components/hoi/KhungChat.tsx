@@ -66,6 +66,10 @@ export interface GoNutDoiSongChat {
   du_kien_la_so?: string;
   goc_nhin_hai_mat: string;
   viec_thuc_te: string[];
+  /** Phần mượn từ chương báo cáo (trả phí theo SAO-2) — máy chủ cắt khi chương còn khoá. */
+  viec_la_so?: string[];
+  tu_chuong?: string;
+  khoa?: boolean;
 }
 
 export interface KetQuaHoi {

@@ -24,7 +24,7 @@ from app.kb import battu_kb, nap, ten as _ten, tuvi_kb
 
 _TEP = "go_nut_doi_song_kb.json"
 _LOAI_CA_NHAN = {
-    "tuvi": ("la_so", "han", "sat_tinh_la_so", "cach_cuc_la_so", "hop_hon"),
+    "tuvi": ("la_so", "han", "sat_tinh_la_so", "cach_cuc_la_so", "hop_hon", "sao_cung", "ky_thuat"),
     "battu": ("la_so", "van", "hop"),
 }
 _CHI_DOI = {
@@ -35,7 +35,7 @@ _TRU_MA = ("năm", "tháng", "ngày", "giờ")
 _TRU_EN = ("Year Pillar", "Month Pillar", "Day Pillar", "Hour Pillar")
 
 _BOI_CANH_LO_DOA = re.compile(
-    r"\b(xau|nang|so|lo|kho|lan dan|co doc|sat phu|sat the|thay|nghe noi|nguoi ta bao|phan|doa"
+    r"\b(xau|nang|so|lo|kho|lan dan|co doc|sat phu|sat the|khac (?:chong|vo)|thay|nghe noi|nguoi ta (?:bao|noi|phan)|coi boi|xem boi|ba boi|thay boi|co sao khong|phan|doa"
     r"|cua toi|cua minh|cua em|menh toi|menh minh|menh em|la so toi|la so minh|la so em"
     r"|bad|harsh|feared|cursed|worried|my chart|my palace)\b"
 )
@@ -44,16 +44,22 @@ _MAU_3_DOI_SONG: list[tuple[str, list[str]]] = [
     ("sau_do_vo", [
         r"sau (khi )?(ly hon|ly di|chia tay|do vo|dut ganh)",
         r"(da |tung |vua |moi )(ly hon|ly di|do vo|qua mot lan do)",
-        r"(tai hon|buoc nua|mo long lai|bat dau lai chuyen tinh)",
+        r"(tai hon|buoc nua|mo long lai|bat dau lai chuyen tinh|yeu lai|qua duoc)",
+        r"(ly hon|ly di|chia tay|do vo) .{0,25}(roi|duoc \d+|nam roi|mot lan)",
         r"\b(after (my |a )?(divorce|breakup)|remarry|open up again)\b",
     ]),
     ("khac_khau_vo_chong", [
-        r"(vo chong|hai dua|nha toi|gia dao) .{0,25}(khac khau|hay cai|cai nhau|luc duc|lanh nhat|bat hoa|cang thang)",
+        r"(vo chong|hai dua|nha toi|gia dao) .{0,45}(khac khau|hay cai|cai nhau|luc duc|lanh nhat|bat hoa|cang thang|gat nhau|khau chien)",
+        r"(chong|vo) (voi|va) (toi|minh|em) .{0,25}(cai nhau|gat nhau|khac khau|lanh nhat|bat hoa|khau chien)",
+        r"(vo chong|chong|vo) .{0,25}(noi chuyen la lech|lech nhau|gian (ca|nhau)|lanh nhat voi|chien tranh lanh|it noi chuyen)",
+        r"(vo chong|tui minh|hai dua|chung toi) .{0,40}(to tieng|com khong lanh|han gan|ba bua lai cai|cai (mot|1) tran)",
+        r"\b(chong|vo)( \w+){0,2} (lanh nhat|cau gat|gat gong|khong noi chuyen|chien tranh lanh)",
         r"(khac khau|luc duc) .{0,20}(vo chong|gia dinh)",
         r"\b(husband|wife|spouse|partner|marriage).{0,25}(argue|clash|fight|friction)\b",
     ]),
     ("gop_von_phan_vai", [
-        r"(hun von|gop von|chung von|lam an chung|mo chung|co[ -]?founder|chia co phan)",
+        r"(hun von|gop .{0,10}von|co[ -]?founder|chia co phan)",
+        r"(dinh|sap|muon|tinh|chuan bi|ru) .{0,20}(lam an chung|mo chung|hop tac lam an|chung von)",
         r"\b(pool capital|co[ -]?founder|business partner|joint venture)\b",
     ]),
 ]
@@ -101,7 +107,12 @@ def _giai_oan_tuvi(gop: str, ls: dict, pl: dict, mau: dict) -> dict | None:
         cung_kiem = pl.get("cung") or ["Mệnh"]
         c_vcd = next((theo_ten[ten] for ten in cung_kiem if ten in theo_ten and not theo_ten[ten].get("chinh_tinh")), None)
         if not c_vcd:
-            return None
+            c_hoi = next((theo_ten[ten] for ten in cung_kiem if ten in theo_ten), None)
+            if not c_hoi or not mau.get("khong_co_vcd"):
+                return None
+            sao_co = ", ".join(_tsao(x["ten"]) for x in c_hoi.get("chinh_tinh", []))
+            return {"du_kien_la_so": mau["khong_co_vcd"].format(cung=_tc(c_hoi["ten"]), chi=_tchi(c_hoi["chi"]), sao=sao_co),
+                    "goc_nhin_rieng": "", "viec_them": []}
         chi_xung = _CHI_DOI.get(c_vcd["chi"], "")
         c_doi = theo_chi.get(chi_xung)
         sao_muon = [s["ten"] for s in (c_doi or {}).get("chinh_tinh", [])]
@@ -120,7 +131,7 @@ def _giai_oan_tuvi(gop: str, ls: dict, pl: dict, mau: dict) -> dict | None:
 
     if chung.co(gop, [r"khong kiep", r"dia khong", r"dia kiep", r"sky void", r"earth robbery"]):
         co_kk = []
-        for ten_c in cung_uu_tien:
+        for ten_c in list(dict.fromkeys([*cung_uu_tien, *(c["ten"] for c in cung_list)])):
             c = theo_ten.get(ten_c)
             if c:
                 kk = [s for s in c.get("phu_tinh", []) if s in ("Địa Không", "Địa Kiếp")]
@@ -178,16 +189,18 @@ def _giai_oan_tuvi(gop: str, ls: dict, pl: dict, mau: dict) -> dict | None:
 def _giai_oan_battu(gop: str, ls: dict, mau: dict) -> dict | None:
     vi = ngon_ngu.la_viet()
     tt_can = list(ls.get("thap_than_can") or [])
-    tt_tang = [x for nhom in (ls.get("tang_can_thap_than") or []) for x in (nhom if isinstance(nhom, list) else [])]
+    tt_tang = [x for nhom in (ls.get("thap_than_chi") or []) for x in (nhom if isinstance(nhom, list) else [])]
 
     for ten_tt, mau_tt in _THAP_THAN_GIAI_OAN_BT:
         if not chung.co(gop, mau_tt):
             continue
         vi_tri_can = [i for i, x in enumerate(tt_can) if x == ten_tt and i < 4]
-        if not vi_tri_can and ten_tt not in tt_tang:
-            return None
         info = (battu_kb.thap_than(ten_tt) or {}) if vi else {}
         ten_hien = ten_tt if vi else _ten.ten("thap_than", ten_tt)
+        if not vi_tri_can and ten_tt not in tt_tang:
+            if not mau.get("khong_co_tt"):
+                return None
+            return {"du_kien_la_so": mau["khong_co_tt"].format(ten_tt=ten_hien), "goc_nhin_rieng": "", "viec_them": []}
         if vi_tri_can:
             vt_str = ", ".join((f"trụ {_TRU_MA[i]}" if vi else _TRU_EN[i]) for i in vi_tri_can)
         else:
@@ -207,49 +220,61 @@ def _giai_oan_battu(gop: str, ls: dict, mau: dict) -> dict | None:
     return None
 
 
-def _rut_tu_bao_cao(ma: str, bc: dict | None, mau: dict) -> tuple[str, list[str]]:
+def _rut_tu_bao_cao(ma: str, bc: dict | None, mau: dict) -> tuple[str | None, str, list[str]]:
+    """Mượn dữ kiện của CHƯƠNG báo cáo (nội dung trả phí theo SAO-2) → trả `(tu_chuong, du_kien, viec_la_so)`.
+
+    Web cắt `du_kien_la_so` + `viec_la_so` khi chương `tu_chuong` còn khoá với người xem (`catLuanHoiChat`).
+    Chỉ mượn phần hợp đúng hoàn cảnh của mạch:
+      - `sau_do_vo`: KHÔNG mượn lời hoá giải của chương (viết cho người đang có đôi, vd "bàn cùng người ấy");
+        chỉ lấy thế "bền" của lá số + các năm thuận cho tình cảm từ dòng mười năm của chính chương.
+      - `khac_khau_vo_chong`: chân dung chung sống + phần "Cần sửa" (cách xử lý va chạm).
+      - `gop_von_phan_vai`: câu trả lời "làm ăn chung" + "Cần sửa" / "Cảnh báo" của chương Bạn bè, ra ngoài."""
     if not bc:
-        return "", []
+        return None, "", []
     ch_dich = "quan_he" if ma == "gop_von_phan_vai" else "tinh_cam"
     c = next((x for x in bc.get("chuong", []) if x.get("ma") == ch_dich), None)
     if not c:
-        return "", []
-
-    vi = ngon_ngu.la_viet()
-    viec: list[str] = []
-    du_kien = ""
-
+        return None, "", []
     lh = c.get("luan_hoi") or {}
-    if vi and lh:
-        hg = lh.get("hoa_giai") or {}
-        for khoa in ("phat_huy", "can_sua", "canh_bao"):
-            val = hg.get(khoa)
-            if isinstance(val, str) and val:
-                viec.append(val)
-            elif isinstance(val, list):
-                viec.extend(x for x in val if isinstance(x, str) and x)
-        ds_tl = lh.get("tra_loi") or []
-        if ma == "gop_von_phan_vai":
-            tl_lac = next((t for t in ds_tl if t.get("ma") == "lam_an_chung"), None)
-            if tl_lac and tl_lac.get("tra_loi"):
-                du_kien = mau["bc_gop_von"].format(ten_chuong=c.get("tieu_de", ""), tra_loi=tl_lac["tra_loi"])
-        elif ma == "sau_do_vo":
-            tl_ben = next((t for t in ds_tl if t.get("ma") == "ben"), None)
-            if tl_ben and tl_ben.get("giai_thich"):
-                du_kien = mau["bc_sau_do_vo"].format(ten_chuong=c.get("tieu_de", ""), giai_thich=tl_ben["giai_thich"])
-        elif ma == "khac_khau_vo_chong":
-            nguoi = (lh.get("nguoi") or [None])[0]
-            if isinstance(nguoi, dict) and nguoi.get("song_cung"):
-                du_kien = mau["bc_khac_khau"].format(song_cung=nguoi["song_cung"])
-
-    if not du_kien:
+    if not lh:
+        # Lớp "Luận theo câu hỏi" chỉ có ở bản Việt (LH-1) → bản khác chỉ mượn tiêu đề hộp đầu của chương.
         hop0 = next((h for h in (c.get("hop") or []) if h.get("tieu_de")), None)
-        if hop0:
-            du_kien = f"{c.get('tieu_de', '')}: {hop0['tieu_de']}".strip(": ")
-            if isinstance(hop0.get("huong_xu_ly"), str) and hop0["huong_xu_ly"]:
-                viec.insert(0, hop0["huong_xu_ly"])
-    dedup = list(dict.fromkeys(x for x in viec if isinstance(x, str) and x))
-    return du_kien, dedup[:3]
+        if not hop0:
+            return None, "", []
+        return ch_dich, f"{c.get('tieu_de', '')}: {hop0['tieu_de']}".strip(": "), []
+    hg = lh.get("hoa_giai") or {}
+    ds_tl = lh.get("tra_loi") or []
+
+    def _lay(*khoa: str) -> list[str]:
+        ra: list[str] = []
+        for k in khoa:
+            v = hg.get(k)
+            ra.extend([v] if isinstance(v, str) else [x for x in (v or []) if isinstance(x, str)])
+        return [x for x in ra if x]
+
+    du_kien = ""
+    viec: list[str] = []
+    if ma == "gop_von_phan_vai":
+        tl = next((t for t in ds_tl if t.get("ma") == "lam_an_chung"), None)
+        if tl and tl.get("tra_loi"):
+            du_kien = mau["bc_gop_von"].format(ten_chuong=c.get("tieu_de", ""), tra_loi=tl["tra_loi"])
+        viec = _lay("can_sua", "canh_bao")
+    elif ma == "sau_do_vo":
+        tl = next((t for t in ds_tl if t.get("ma") == "ben"), None)
+        if tl and tl.get("giai_thich"):
+            du_kien = mau["bc_sau_do_vo"].format(ten_chuong=c.get("tieu_de", ""), giai_thich=tl["giai_thich"])
+        nam_thuan = [str(d["nam"]) for d in (lh.get("dong_mang") or [])
+                     if d.get("muc") == "thuan"][:3]
+        if nam_thuan and mau.get("bc_sau_do_vo_nam"):
+            viec = [mau["bc_sau_do_vo_nam"].format(nam=", ".join(nam_thuan))]
+    elif ma == "khac_khau_vo_chong":
+        nguoi = next((n for n in (lh.get("nguoi") or []) if isinstance(n, dict) and n.get("song_chung")), None)
+        if nguoi:
+            du_kien = mau["bc_khac_khau"].format(song_cung=nguoi["song_chung"])
+        viec = _lay("can_sua")
+    if not du_kien:
+        return None, "", []
+    return ch_dich, du_kien, list(dict.fromkeys(viec))[:2]
 
 
 def gan_vao_hoi(
@@ -280,8 +305,13 @@ def gan_vao_hoi(
     goc_norm = re.sub(r"\s+", " ", chung.chuan_hoa_cau(cau_hoi or "")).strip()
     if hieu_cau.kieu(t_norm or goc_norm) == "kien_thuc":
         return
-    if lhk.la_hai_nguoi_hoac_nguoi_khac(t_norm, goc_norm):
-        return
+    if lhk.la_hai_nguoi_hoac_nguoi_khac(t_norm, goc_norm, cau_hoi):
+        # Mạch vợ chồng lục đục: "chồng em / vợ tôi" chính là cặp của người hỏi → xét lại sau khi coi họ là "mình".
+        cau_mot_cap = re.sub(r"(?i)\b(chồng|vợ|ck|vk|chong|vo)\s+(tôi|em|mình|toi|minh)\b", "vợ chồng mình", cau_hoi or "")
+        gop0 = re.sub(r"\s+", " ", f"{goc_norm} {t_norm}")
+        if not (chung.co(gop0, dict(_MAU_3_DOI_SONG)["khac_khau_vo_chong"])
+                and not lhk.la_hai_nguoi_hoac_nguoi_khac(chung.chuan_hoa_cau(cau_mot_cap), "", cau_mot_cap)):
+            return
 
     gop = re.sub(r"\s+", " ", f"{goc_norm} {t_norm} {(cau_hoi or '').lower()}").strip()
     k = _kb()
@@ -303,18 +333,17 @@ def gan_vao_hoi(
             return
 
     for ma, ds_mau in _MAU_3_DOI_SONG:
+        if ma == "gop_von_phan_vai" and lhk.ke_su_viec(t_norm or goc_norm):
+            continue      # đã bị lừa / mất vốn rồi → không phải chuyện chia vai trước khi góp
         if chung.co(gop, ds_mau) and kb_mach.get(ma):
             m = kb_mach[ma]
             bc = bc_ds or (dung_bc() if dung_bc else None)
-            du_kien, viec_la_so = _rut_tu_bao_cao(ma, bc, mau)
-            if not du_kien:
-                return
-            viec = list(dict.fromkeys([*viec_la_so, *list(m["viec_thuc_te"])]))[:3]
+            tu_chuong, du_kien, viec_la_so = _rut_tu_bao_cao(ma, bc, mau)
             kq["go_nut_doi_song"] = {
                 "ma": ma,
                 "tieu_de": m["tieu_de"],
-                "du_kien_la_so": du_kien,
                 "goc_nhin_hai_mat": m["goc_nhin_hai_mat"],
-                "viec_thuc_te": viec,
+                "viec_thuc_te": list(m["viec_thuc_te"])[:3],
+                **({"tu_chuong": tu_chuong, "du_kien_la_so": du_kien, "viec_la_so": viec_la_so} if tu_chuong else {}),
             }
             return

@@ -264,3 +264,26 @@ test("SAO-2: khoaLaBiCat liệt kê khoá cấp gốc chưa phân loại (Defaul
   assert.deepEqual(khoaLaBiCat({ chuong: [], mo_dun: "tuvi", cot_loi: [], ung_dung_co_dien: {} }), []);
   assert.deepEqual(khoaLaBiCat({ chuong: [], mo_dun: "tuvi", truong_moi_a: 1, truong_moi_b: { x: 1 } }).sort(), ["truong_moi_a", "truong_moi_b"]);
 });
+
+test("SAO-2: khối gỡ nút giữ phần KB chung nhưng cắt phần mượn chương khi chương còn khoá", () => {
+  const goc = {
+    cau_tra_loi: "…",
+    go_nut_doi_song: {
+      ma: "sau_do_vo", tieu_de: "Nhịp phục hồi", goc_nhin_hai_mat: "Góc nhìn chung", viec_thuc_te: ["Việc chung"],
+      tu_chuong: "tinh_cam", du_kien_la_so: "Lời riêng từ chương Tình cảm", viec_la_so: ["Năm 2028: nhịp thuận"],
+    },
+  };
+  const khoa = catLuanHoiChat(goc, { daMoToanBo: false, chuongMo: new Set(["tong_quan"]) });
+  const gn = khoa.go_nut_doi_song;
+  assert.equal(gn.khoa, true);
+  assert.equal(gn.du_kien_la_so, undefined);
+  assert.equal(gn.viec_la_so, undefined);
+  assert.deepEqual(gn.viec_thuc_te, ["Việc chung"]);
+  assert.ok(!JSON.stringify(khoa).includes("Lời riêng từ chương"));
+  // Chương đã mở / đã mua cả báo cáo → giữ nguyên.
+  assert.deepEqual(catLuanHoiChat(goc, { daMoToanBo: false, chuongMo: new Set(["tong_quan", "tinh_cam"]) }), goc);
+  assert.deepEqual(catLuanHoiChat(goc, true), goc);
+  // Giải oan đọc lá số (miễn phí), không mang tu_chuong → không cắt.
+  const oan = { go_nut_doi_song: { ma: "go_loi_phan_doa", tieu_de: "t", goc_nhin_hai_mat: "g", viec_thuc_te: [], du_kien_la_so: "Địa Không ở Tài Bạch" } };
+  assert.deepEqual(catLuanHoiChat(oan, { daMoToanBo: false, chuongMo: new Set(["tong_quan"]) }), oan);
+});

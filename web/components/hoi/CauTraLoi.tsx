@@ -91,7 +91,7 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
       {t.van && !gapChung && theo.size > 0 && <p className="text-xs text-fg-faint">{hd.c("chu_xanh")}</p>}
       {t.van && <ViSao canCu={t.canCu} thuatNgu={t.thuatNgu} />}
       <KhungGiaiNghia ds={t.thuatNgu} />
-      {!t.loi && t.goNutDoiSong && <HopGoNutDoiSong gn={t.goNutDoiSong} />}
+      {!t.loi && t.goNutDoiSong && <HopGoNutDoiSong gn={t.goNutDoiSong} moDun={moDun} />}
       {!hd.en && !t.loi && !t.luanHoi && t.doiSongLienKet && <LienKetDoiSongChat lk={t.doiSongLienKet} moDun={moDun} />}
       {t.canhBao?.map((c) => (
         <p key={c} className="flex gap-2 rounded-xl bg-moon/10 px-3 py-2 text-xs text-moon"><Info className="mt-0.5 size-3.5 shrink-0" aria-hidden /> {c}</p>
@@ -243,10 +243,11 @@ function LienKetDoiSongChat({ lk, moDun }: { lk: DoiSongLienKetChat; moDun: stri
 }
 
 /** Chặng 1 — hộp Gỡ Nút Đời Sống hai mặt (Sau ly hôn, Vợ chồng khắc khẩu, Góp vốn phân vai, Giải oan cách cục). */
-function HopGoNutDoiSong({ gn }: { gn: GoNutDoiSongChat }) {
+function HopGoNutDoiSong({ gn, moDun }: { gn: GoNutDoiSongChat; moDun: string }) {
   const hd = useChuHoiDap();
+  const viec = [...(gn.viec_la_so ?? []), ...gn.viec_thuc_te];
   return (
-    <div className="rounded-2xl border border-jade/35 bg-jade/5 p-4" data-testid="hoi-go-nut-doi-song" data-ma={gn.ma}>
+    <div className="rounded-2xl border border-jade/35 bg-jade/5 p-4" data-testid="hoi-go-nut-doi-song" data-ma={gn.ma} data-khoa={gn.khoa ? "1" : undefined}>
       <p className="text-xs font-semibold uppercase tracking-wider text-jade">{hd.c("gn.nhan")}</p>
       <p className="mt-1 font-serif text-lg text-fg">{gn.tieu_de}</p>
       {gn.du_kien_la_so && (
@@ -255,12 +256,22 @@ function HopGoNutDoiSong({ gn }: { gn: GoNutDoiSongChat }) {
         </p>
       )}
       <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{gn.goc_nhin_hai_mat}</p>
-      {gn.viec_thuc_te.length > 0 && (
+      {viec.length > 0 && (
         <div className="mt-2.5 border-t border-line/50 pt-2.5 text-xs leading-relaxed text-fg-muted">
           <p className="font-semibold text-fg">{hd.c("gn.viec")}</p>
           <ul className="mt-1 list-disc space-y-1 pl-4">
-            {gn.viec_thuc_te.map((v) => <li key={v}>{v}</li>)}
+            {viec.map((v) => <li key={v}>{v}</li>)}
           </ul>
+        </div>
+      )}
+      {gn.khoa && gn.tu_chuong && (
+        <div className="mt-2.5 border-t border-line/50 pt-2.5" data-testid="hoi-go-nut-khoa">
+          <button type="button" onClick={() => nhayChuongBaoCao(moDun, gn.tu_chuong as string)}
+            className="inline-flex min-h-10 items-center gap-1.5 text-sm font-medium text-gold underline-offset-4 hover:underline">
+            <LockKeyhole className="size-3.5 shrink-0" aria-hidden />
+            <span>{hd.c("gn.khoa_nut")}</span>
+            <ArrowUpRight className="size-4 shrink-0" aria-hidden />
+          </button>
         </div>
       )}
     </div>

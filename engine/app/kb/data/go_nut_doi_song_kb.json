@@ -21,7 +21,10 @@
     "tt_tu_soi": "Câu tự soi từ tứ trụ của bạn: {cau_tu_soi}",
     "bc_gop_von": "Theo lá số của bạn ({ten_chuong}): {tra_loi}",
     "bc_sau_do_vo": "Điểm tựa từ lá số của bạn ({ten_chuong}): {giai_thich}",
-    "bc_khac_khau": "Cách chung sống hợp lá số của bạn: {song_cung}"
+    "bc_khac_khau": "Cách chung sống hợp lá số của bạn: {song_cung}",
+    "khong_co_vcd": "Theo lá số tính ở đây, cung {cung} ({chi}) của bạn có chính tinh {sao}, không phải Vô Chính Diệu. Lời phán bạn nghe có thể dựa trên cách an sao, giờ sinh hoặc trường phái khác.",
+    "khong_co_tt": "Theo tứ trụ tính ở đây, {ten_tt} không lộ ở can trụ nào và không nằm trong tàng can của bạn. Lời phán bạn nghe có thể dựa trên giờ sinh hoặc cách tính khác.",
+    "bc_sau_do_vo_nam": "Năm {nam}: lá số của bạn có nhịp thuận cho chuyện tình cảm, hợp để gặp gỡ và mở lòng lại khi bạn thấy đã sẵn sàng."
   },
   "mach": {
     "sau_do_vo": {
