@@ -1,0 +1,102 @@
+{
+  "_nguon": "Stage 2 (Business Expansion) — Multi-Discipline Business Strategy & Commercial Space Playbook KB (English overlay). AI draft awaiting project owner review.",
+  "_trang_thai": "ban_phu_en",
+  "mui_nhon_kinh_doanh": {
+    "thuc_thuong": {
+      "ten": "Product Innovation, Specialized Craft & Brand Storytelling (Output-Driven Wealth)",
+      "chien_luoc": "Your natural edge lies in differentiating through product craft, customer experience and compelling brand positioning rather than competing on razor-thin commodity pricing.",
+      "rui_ro_can_giu": "Avoid scattering energy across too many simultaneous launches; standardize unit SOPs before replicating locations."
+    },
+    "tai_tinh": {
+      "ten": "Commercial Agility, Fast Cashflow Turnover & Direct Deal-Making (Wealth-Star Lead)",
+      "chien_luoc": "You read immediate market demand sharply, track unit margins closely and turn inventory into cashflow efficiently.",
+      "rui_ro_can_giu": "Guard against locking excessive cash in slow inventory or extending informal credit without clear collateral."
+    },
+    "quan_an": {
+      "ten": "Structured Systems, B2B Accounts & Institutional Trust (Authority–Resource Synergy)",
+      "chien_luoc": "You excel in standardized operations, long-term enterprise contracts, structured franchising and compliance-heavy sectors.",
+      "rui_ro_can_giu": "Keep administrative layers lean and pair up with an agile frontline sales lead so market speed stays sharp."
+    },
+    "ty_kiep": {
+      "ten": "Partner Networks, Agency Channels & Revenue-Sharing Alliances (Peer-Network Drive)",
+      "chien_luoc": "You rally teams naturally and scale well through distributor networks, affiliates and performance-aligned partners.",
+      "rui_ro_can_giu": "Protect net margins and formalize revenue-sharing rules in writing upfront to prevent partner friction."
+    }
+  },
+  "phuong_vi_thi_truong": {
+    "Kim": {
+      "nganh_bo_tro": "Finance, precision equipment, standardized retail chains, operations consulting, engineering"
+    },
+    "Mộc": {
+      "nganh_bo_tro": "Education, wellness, timber/interiors, clean food & agriculture, sustainable consumer goods"
+    },
+    "Thủy": {
+      "nganh_bo_tro": "Logistics, e-commerce distribution, beverages, travel & hospitality, advisory services"
+    },
+    "Hỏa": {
+      "nganh_bo_tro": "Technology/AI, digital media, hot F&B concepts, beauty & aesthetics, energy, live experiences"
+    },
+    "Thổ": {
+      "nganh_bo_tro": "Commercial real estate, warehousing, construction materials, staple goods, fulfillment operations"
+    }
+  },
+  "thien_di_thi_truong": {
+    "danh_xa_thuan": "Your Zi Wei Travel/External Palace is strong: expanding beyond your home district, scaling nationwide online channels or serving out-of-province/international clients is well supported.",
+    "giu_cu_diem": "Your Zi Wei Travel Palace advises caution when opening distant branches solo: fortify your flagship home base first and work through vetted local partners in distant markets.",
+    "chua_co_gio": "Birth hour is not yet provided, so market direction is derived from your BaZi Three Pillars and Personal Trigram (add birth hour to unlock your Zi Wei Travel Palace)."
+  },
+  "thanh_mon": {
+    "co": "Xuan Kong Castle Gate rule: the {phuong} side ({vai}) receives the timely star of construction Period {van}. It only counts if the {phuong} side really has a side entrance, large window or open space; if so, keep that side bright, clean and easy to walk through — it can serve as a customer-facing spot or carry signage.",
+    "khong": "For construction Period {van}, neither side next to the facing direction can use the Castle Gate rule — focus brightness and openness on the main entrance.",
+    "vai": {
+      "chinh": "Primary Castle Gate",
+      "phu": "Secondary Castle Gate"
+    }
+  },
+  "checklist_loan_dau_cua_hang": [
+    "Clear Bright Hall (frontage): ensure the sidewalk and sightline to your signage are unobstructed by transformers, heavy poles or visual clutter",
+    "Favor storefronts on the gentle inner curve of traffic flow rather than facing a T-junction head-on or the sharp outer curve of fast traffic",
+    "Keep customer entry flowing smoothly on the active side while anchoring the cashier in a calm, supported corner so visitors browse deeper inside",
+    "Ensure floor level is even with or slightly above street grade so rainwater and street dust never pool toward the threshold",
+    "Verify no heavy exposed ceiling beam presses directly above the cashier counter or the owner's primary desk",
+    "Keep restrooms and hot kitchen exhaust enclosed and out of direct alignment with the cashier counter or the center of the floorplan"
+  ],
+  "nhan_su_cot_can": {
+    "ranh_gioi_lao_dong": "For role pairing and collaboration style only — never use birth data to screen applicants, evaluate job performance or set compensation (in strict compliance with labor law).",
+    "vai_can_bu": {
+      "Kim": "Pair with a Financial & Process Controller (Metal style): crisp with numbers, contract discipline and budget guardrails.",
+      "Mộc": "Pair with a Market & Account Builder (Wood style): patient in nurturing long-term client relationships and product lines.",
+      "Thủy": "Pair with an Analytics & Agile Coordinator (Water style): adaptable in negotiation, market sensing and cross-team communication.",
+      "Hỏa": "Pair with a Frontline Sales & Campaign Driver (Fire style): energetic in launches, visibility and closing momentum.",
+      "Thổ": "Pair with an Operations & Fulfillment Anchor (Earth style): steady in daily quality control, inventory and customer retention."
+    },
+    "no_boc_giao_quyen": {
+      "thuan": "Your Zi Wei Peers/Team Palace is supportive: you can delegate clear outcome KPIs to capable leads and free up time for strategy.",
+      "can_chu_dong": "Your Zi Wei Peers Palace calls for two-layer operational hygiene: use weekly milestone check-ins, separate purchasing from payment approval and keep client records in shared company systems.",
+      "can_bang": "Team synergy is balanced: build a tight 3–5 person core with crisp written responsibilities before scaling headcount.",
+      "chua_co_gio": "Role pairing above reflects your BaZi element profile (add exact birth hour to unlock your Zi Wei Team Palace delegation lens)."
+    }
+  },
+  "bo_tri_van_phong_chu": {
+    "nguyen_tac_4_diem": [
+      "Solid backing behind the owner's chair: sit with a solid wall or tall cabinet behind you rather than an open walkway or bare glass window",
+      "Commanding view of the door: angle your desk to see the room entrance diagonally without sitting directly in line with the doorway",
+      "Eight Mansions personal facing: orient your chair to face one of your favorable {quai} trigram directions ({huong_tot})",
+      "Light and paperwork: keep the desk naturally bright and lock important papers away. The classical texts do not assign desk colours or meeting hours by element, so the system does not suggest them."
+    ]
+  },
+  "bo_tri_cua_hang_buon_ban": {
+    "nguyen_tac_quay_thu_ngan": [
+      "Anchor the cashier counter against a solid backing wall in a sector receiving Period-9 timely Facing stars (9 Purple or 1 White) or your favorable direction",
+      "Keep POS screens and cash drawers shielded from direct street glare, away from overhead beams and never facing a restroom door",
+      "Make the entrance threshold the brightest, most welcoming zone with clear signage and zero stacked inventory blocking entry",
+      "Assign sectors visited by annual stars 5 Yellow and 2 Black to quiet storage or tidy shelving, avoiding noisy heat equipment or major drilling there this year"
+    ],
+    "dien_trach_tich_san": {
+      "thuan": "Your Zi Wei Property Palace is steady: well-suited for long-term lease stability or gradually building flagship premises equity.",
+      "can_chu_dong": "Your Zi Wei Property Palace favors an asset-light footprint: audit lease renewal caps, landlord title and electrical/plumbing capacity carefully before signing.",
+      "can_bang": "Premises rhythm is steady: maximize revenue per square meter on a right-sized space before committing to oversized overhead.",
+      "chua_co_gio": "Keep fixed rent below 15–20% of conservative monthly revenue and verify lease exit clauses upfront."
+    }
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "_nguon": "Stage 2 — Orthogonal Three-Pillar Life & Business Advisor KB (English overlay). AI draft awaiting project owner review.",
+  "_trang_thai": "ban_phu_en",
+  "ten_bao_cao": "Three-Pillar Advisor for Your Decision",
+  "ket": "The three views below each read one side of the same decision: your own capacity, timing and space. They are not merged into one verdict, and the decision stays yours.",
+  "nhan_nhip_thang": {
+    "day_manh": "Advance",
+    "can_bang": "Steady pace",
+    "phong_thu": "Consolidate"
+  },
+  "ten_tru": {
+    "nhan": "Human · Your own capacity",
+    "thien": "Heaven · Timing",
+    "dia": "Earth · Space"
+  },
+  "lop_ten": {
+    "battu_tam_tru": "BaZi Three Pillars (6 characters)",
+    "battu_tu_tru": "BaZi Four Pillars (dual balancing lenses)",
+    "thanso_pitago": "Pythagorean Numerology (personal year & month)",
+    "tuvi_phi_hoa": "Zi Wei Dou Shu & Liang Flying Transformations",
+    "phongthuy_menh_quai": "Eight Mansions Personal Trigram",
+    "huyen_khong_van_9": "Period-9 Xuan Kong Flying Stars",
+    "hoang_lich_30_ngay": "30-Day Auspicious Almanac Selection",
+    "tuong_tac_doi_tac": "Counterparty Five-Element & Branch Synergy"
+  },
+  "goi_y_nang_bac": {
+    "bac_2": {
+      "nhan": "Add birth time & birthplace to unlock 12-Palace Zi Wei & Ji-to-Ji chains",
+      "ly_do": "Exact birth hour unlocks your BaZi Hour Pillar (both balancing methods) plus full Zi Wei Flying Transformations."
+    },
+    "bac_3_nha": {
+      "nhan": "Add compass facing & construction year to unlock Period-9 Flying Stars",
+      "ly_do": "Reveals the exact Mountain–Facing star pair at your entrance and Period-9 lighting/material harmony."
+    },
+    "bac_3_doi_tac": {
+      "nhan": "Add partner or co-founder birth date",
+      "ly_do": "Shows whether they complement or duplicate your Five-Element profile so you can divide roles cleanly."
+    }
+  },
+  "mach": {
+    "su_nghiep_chuyen_viec": {
+      "ten": "Career shift, promotion & independent venture",
+      "cung_tuvi": "su_nghiep",
+      "chuong_battu": "su_nghiep",
+      "viec_hoang_lich": "ky_ket",
+      "diem_tua": "Anchor your role in {hanh_can}-aligned strengths and your Personal Year {nam_cn} cadence.",
+      "diem_giu": "Avoid reactive career exits during consolidation months; keep at least a six-month living reserve.",
+      "lien_ket": {
+        "ten": "Zi Wei chart — Career",
+        "duong": "/en/zi-wei-dou-shu"
+      }
+    },
+    "tai_chinh_dau_tu": {
+      "ten": "Capital allocation, cashflow & investment",
+      "cung_tuvi": "tien_bac",
+      "chuong_battu": "tien_bac",
+      "viec_hoang_lich": "giao_dich",
+      "diem_tua": "Rely on written unit-economics checklists and schedule key negotiations in Advance months.",
+      "diem_giu": "Never concentrate all liquidity into a single bet or rush into unverified commitments.",
+      "lien_ket": {
+        "ten": "Zi Wei chart — Money",
+        "duong": "/en/zi-wei-dou-shu"
+      }
+    },
+    "gop_von_hop_tac": {
+      "ten": "Co-founding, pooling capital & partner roles",
+      "cung_tuvi": "quan_he",
+      "chuong_battu": "quan_he",
+      "viec_hoang_lich": "ky_ket",
+      "diem_tua": "Clear role boundaries and dual-approval spending thresholds protect both the venture and the friendship.",
+      "diem_giu": "Avoid placing both sales expansion and treasury control in one unchecked lane.",
+      "lien_ket": {
+        "ten": "BaZi chart",
+        "duong": "/en/bazi"
+      }
+    },
+    "nha_cua_mat_bang": {
+      "ten": "Home purchase, relocation & business premises",
+      "cung_tuvi": "nha_cua",
+      "chuong_battu": "tien_bac",
+      "viec_hoang_lich": "nhap_trach",
+      "diem_tua": "Prioritize bright airflow and orient your desk and bed-head with your {quai} trigram.",
+      "diem_giu": "Keep monthly housing commitments within comfortable cashflow limits and avoid major drilling in Consolidate months.",
+      "lien_ket": {
+        "ten": "Feng Shui — Your home",
+        "duong": "/en/feng-shui"
+      }
+    },
+    "tinh_cam_cam_ket": {
+      "ten": "Relationships, commitment & opening up",
+      "cung_tuvi": "tinh_cam",
+      "chuong_battu": "tinh_cam",
+      "viec_hoang_lich": "cuoi_hoi",
+      "diem_tua": "Steady, consistent small actions speak louder than grand promises right now.",
+      "diem_giu": "Avoid carrying work exhaustion or past grievances into late-night relationship talks.",
+      "lien_ket": {
+        "ten": "Zi Wei chart — Love",
+        "duong": "/en/zi-wei-dou-shu"
+      }
+    },
+    "gia_dao_hoa_giai": {
+      "ten": "Family harmony & cooling partner friction",
+      "cung_tuvi": "gia_dinh",
+      "chuong_battu": "gia_dinh",
+      "viec_hoang_lich": "xuat_hanh",
+      "diem_tua": "Warm shared meals, soft lighting and clear practical requests rebuild warmth quickly.",
+      "diem_giu": "Skip sensitive money or in-law debates late at night when energy is depleted.",
+      "lien_ket": {
+        "ten": "BaZi chart — Family",
+        "duong": "/en/bazi"
+      }
+    },
+    "suc_ben_nang_luong": {
+      "ten": "Stamina, sleep rhythm & burnout recovery",
+      "cung_tuvi": "suc_khoe",
+      "chuong_battu": "suc_khoe",
+      "viec_hoang_lich": "xuat_hanh",
+      "diem_tua": "Support {hanh_can}-aligned daily habits and keep your sleeping area quiet and airy.",
+      "diem_giu": "Do not ignore persistent fatigue or postpone routine health checkups.",
+      "lien_ket": {
+        "ten": "BaZi chart — Health",
+        "duong": "/en/bazi"
+      }
+    },
+    "quyet_dinh_tong_hop": {
+      "ten": "Overall direction & next-phase priorities",
+      "cung_tuvi": "tong_quan",
+      "chuong_battu": "tong_quan",
+      "viec_hoang_lich": "ky_ket",
+      "diem_tua": "Pair {hanh_can}-supportive routines with your Advance months so effort lands cleanly.",
+      "diem_giu": "Avoid launching more than two major commitments simultaneously.",
+      "lien_ket": {
+        "ten": "BaZi chart",
+        "duong": "/en/bazi"
+      }
+    }
+  },
+  "nguon": {
+    "battu_chuong": "BaZi reading — “{chuong}” chapter",
+    "thanso_nam": "Numerology — Personal Year {n} (no birth hour, so no BaZi level is used)",
+    "tuvi_chuong": "Zi Wei reading — “{chuong}” chapter",
+    "lich_12": "12-month decision calendar (zodiac branch, annual star, solar terms{them})",
+    "lich_12_them": ", monthly Zi Wei and BaZi",
+    "phongthuy": "Feng Shui — Your home (facing {do}°{nam})",
+    "menh_quai": "Eight Mansions — your personal trigram (no house direction, so no level)"
+  },
+  "mau": {
+    "nhan_co_gio": "In your BaZi reading, the “{chuong}” chapter is at {nhan_muc}. Element running low in your eight characters: {hanh}.",
+    "nhan_khong_gio": "Without a birth hour BaZi has six characters: the element running low is {hanh}. Personal Year {n}: {y}",
+    "thien_co_gio": "In your Zi Wei reading, the “{chuong}” chapter is at {nhan_muc}.",
+    "thien_lich": "Over the next 12 months, months to move forward: {mo}; months to conserve energy: {giu}.",
+    "khong_co": "none",
+    "dia_co_nha": "From Your home: {tom}",
+    "dia_khong_nha": "Your trigram is {quai}; your Vitality direction is {huong}. Add your house direction to see a level for the home.",
+    "dia_hd_khong_nha": "For important work, you can sit facing {huong} and keep the spot bright and tidy.",
+    "tong_cung": "The views that give a level point the same way ({muc}). It is still one angle — decide by your real circumstances.",
+    "tong_khac": "The views disagree ({ds}). The system does not pick a side: each looks at one aspect, and you weigh them against your real circumstances.",
+    "tong_mot": "Only one view can give a level ({ds}); add a birth hour or house direction for more angles.",
+    "doi_tac": "The other person leans toward the “{vai}” role ({hanh}): {gia_tri}. Agree in writing who owns which part; this is not a compatibility score.",
+    "doi_tac_tieu_de": "Which role the other person leans toward",
+    "nen_giu": "Worth keeping in mind",
+    "xem_them": "Read more"
+  },
+  "chuyen_huong": {
+    "nguoi_khac": "This question is about someone else. The advisor only reads your own birth date, so it does not answer for that person. To look at two people, use the two-person chart — the other person should enter their own details or agree to you entering them.",
+    "ke_su_viec": "It sounds like this has already happened. A chart cannot judge what already happened; first steady yourself, talk to someone you trust and, if money or legal matters are involved, ask a qualified professional. When you are ready, you can ask about your own next step.",
+    "chua_ro": "The advisor could not tell what you are deciding. Pick the closest topic below, or ask directly in each practice's Q&A.",
+    "duoi_tuoi": "The decision advisor is for people aged 16 and over. For younger people, parents can read the child's BaZi or Zi Wei pages, written for parents."
+  },
+  "lien_ket_chung": [
+    {
+      "ten": "BaZi",
+      "duong": "/en/bazi"
+    },
+    {
+      "ten": "Zi Wei Dou Shu",
+      "duong": "/en/zi-wei-dou-shu"
+    },
+    {
+      "ten": "Feng Shui",
+      "duong": "/en/feng-shui"
+    }
+  ]
+}

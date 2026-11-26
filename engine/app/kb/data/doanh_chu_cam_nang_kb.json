@@ -1,0 +1,104 @@
+{
+  "_nguon": "Chặng 2 (Mở rộng Kinh doanh) — Cẩm nang Chiến lược Kinh doanh Liên mảng (Bát tự Thập thần & Dụng thần · Tử vi Thiên Di, Tài Bạch, Quan Lộc, Nô Bộc, Điền Trạch · Phong thuỷ Bát trạch, Huyền Không Vận 9 & Thành Môn Quyết · Hoàng lịch & Kỳ Môn). Nháp AI biên soạn, chờ chủ dự án đọc duyệt.",
+  "source_id": "doanh_chu_cam_nang",
+  "school_id": "tam_tai_kinh_doanh",
+  "trang_thai": "nhap_ai",
+  "mui_nhon_kinh_doanh": {
+    "thuc_thuong": {
+      "ten": "Mũi nhọn Sản phẩm mới, Dịch vụ chuyên sâu & Truyền thông sáng tạo (Thực Thương dẫn Tài)",
+      "chien_luoc": "Thế mạnh tự nhiên của bạn là tạo sự khác biệt bằng chất lượng sản phẩm, trải nghiệm khách hàng và cách kể câu chuyện thương hiệu thay vì đua giá rẻ đại trà.",
+      "rui_ro_can_giu": "Dễ lan man quá nhiều ý tưởng mới cùng lúc; cần chốt quy trình đóng gói chuẩn trước khi nhân bản chi nhánh."
+    },
+    "tai_tinh": {
+      "ten": "Mũi nhọn Thương mại, Vòng quay vốn nhanh & Chốt đơn thực tế (Tài tinh chủ đạo)",
+      "chien_luoc": "Bạn nhạy bén với nhu cầu thị trường thực, tính toán biên lợi nhuận sát sườn và xoay vòng hàng hoá nhanh.",
+      "rui_ro_can_giu": "Tránh để vốn bị chôn vào tồn kho lớn hoặc nới công nợ dễ dãi cho khách quen không có bảo đảm."
+    },
+    "quan_an": {
+      "ten": "Mũi nhọn Hệ thống chuẩn mực, Khách hàng tổ chức (B2B) & Uy tín thương hiệu (Quan Ấn tương sinh)",
+      "chien_luoc": "Bạn phát huy mạnh nhất ở mô hình có quy chuẩn rõ ràng, hợp đồng dài hạn, nhượng quyền bài bản hoặc cung ứng cho đối tác doanh nghiệp.",
+      "rui_ro_can_giu": "Bộ máy dễ cồng kềnh giấy tờ làm chậm tốc độ phản ứng thị trường bán lẻ; cần ghép thêm người bán hàng linh hoạt."
+    },
+    "ty_kiep": {
+      "ten": "Mũi nhọn Mạng lưới Cộng sự, Đại lý & Chia sẻ doanh thu (Tỷ Kiếp liên minh)",
+      "chien_luoc": "Bạn giỏi đứng mũi chịu sào, gây dựng đội ngũ bán hàng hoặc mở rộng qua mạng lưới đại lý, cộng tác viên cùng hưởng lợi.",
+      "rui_ro_can_giu": "Dễ rò rỉ biên lợi nhuận hoặc va chạm quyền lợi với người quen nếu không khoá ranh giới tài chính bằng văn bản ngay từ đầu."
+    }
+  },
+  "phuong_vi_thi_truong": {
+    "Kim": {
+      "nganh_bo_tro": "Tài chính, cơ khí chính xác, thiết bị, vận hành chuỗi quy chuẩn, dịch vụ quản trị"
+    },
+    "Mộc": {
+      "nganh_bo_tro": "Giáo dục, chăm sóc sức khoẻ, nội thất gỗ, nông sản sạch, tiêu dùng bền vững, xuất bản"
+    },
+    "Thủy": {
+      "nganh_bo_tro": "Logistics, thương mại điện tử, phân phối lưu thông, đồ uống, du lịch, dịch vụ tư vấn"
+    },
+    "Hỏa": {
+      "nganh_bo_tro": "Công nghệ/AI, truyền thông số, ẩm thực nóng, làm đẹp – thẩm mỹ, năng lượng, sự kiện"
+    },
+    "Thổ": {
+      "nganh_bo_tro": "Mặt bằng cho thuê, kho vận, xây dựng – vật liệu, thực phẩm thiết yếu, dịch vụ hậu cần"
+    }
+  },
+  "thien_di_thi_truong": {
+    "danh_xa_thuan": "Cung Thiên Di trên lá số Tử vi sáng sủa: rất lợi khi mở rộng ra ngoài địa bàn quen thuộc, phát triển kênh trực tuyến toàn quốc, làm việc với khách hàng tỉnh xa hoặc thị trường nước ngoài.",
+    "giu_cu_diem": "Cung Thiên Di nhắc cẩn trọng khi đi xa mở điểm mới một mình: nên làm thật chắc cứ điểm trung tâm hiện tại, dùng đối tác bản địa am hiểu địa bàn trước khi tự bỏ vốn mở chi nhánh xa.",
+    "chua_co_gio": "Chưa nhập giờ sinh nên hệ thống định hướng thị trường theo Bát tự Tam trụ và Mệnh quái (thêm giờ sinh ở trên để soi sâu cung Thiên Di & đường bay Phi hoá ra ngoài)."
+  },
+  "thanh_mon": {
+    "co": "Phép Thành Môn của Huyền Không: phía {phuong} ({vai}) đón được sao đương vận của vận xây dựng {van}. Phép này chỉ tính khi phía {phuong} thật sự có lối phụ, cửa sổ lớn hoặc khoảng thoáng; nếu có, nên giữ phía ấy sáng, sạch và dễ đi lại — làm chỗ đón khách hoặc biển hiệu cũng được.",
+    "khong": "Với vận xây dựng {van}, hai phía kề hướng mặt bằng chưa dùng được phép Thành Môn — nên dồn độ thoáng sáng cho cửa chính và lối vào.",
+    "vai": {
+      "chinh": "Chính Thành Môn",
+      "phu": "Phó Thành Môn"
+    }
+  },
+  "checklist_loan_dau_cua_hang": [
+    "Minh đường (khoảng lùi vỉa hè trước cửa) phải thoáng rộng, không bị trạm biến áp, gốc cây to hay biển báo che khuất tầm nhìn biển hiệu từ xa",
+    "Ưu tiên mặt bằng nằm ở phía đường uốn cong ôm nhẹ vào nhà (thế tụ khách), tránh mặt bằng nằm ngay mũi đường cong phóng thẳng vào hoặc ngã ba đâm trực diện",
+    "Lối khách bước vào nên thuận bên tay trái từ trong nhìn ra (Tả Thanh Long động), quầy thu ngân đặt bên tĩnh vững để khách đi trọn vòng xem hàng",
+    "Nền cửa hàng bằng phẳng hoặc cao dần từ ngoài vào trong, tuyệt đối tránh mặt bằng thấp trũng hơn mặt đường dễ đọng nước mưa",
+    "Kiểm tra trần trên khu vực quầy thu ngân và bàn chủ cơ sở không có dầm bê tông lớn đè ngang trực tiếp gây cảm giác bức bối",
+    "Cửa khu vệ sinh và bếp chế biến nóng phải khuất kín, không mở thẳng ra quầy thu ngân hoặc ngay chính giữa mặt bằng (Trung cung)"
+  ],
+  "nhan_su_cot_can": {
+    "ranh_gioi_lao_dong": "Chỉ dùng làm khung tham khảo để phân công vai trò bổ trợ và chọn cách trao đổi với cộng sự — tuyệt đối không dùng ngày sinh để sàng lọc tuyển dụng, đánh giá năng lực hay xếp lương (tuân thủ Bộ luật Lao động).",
+    "vai_can_bu": {
+      "Kim": "Cần ghép người giữ vai Kiểm soát tài chính – Quy trình (tính Kim): quyết đoán con số, rà soát hợp đồng chặt và dám nhắc kỷ luật ngân sách.",
+      "Mộc": "Cần ghép người giữ vai Mở rộng thị trường – Chăm sóc đối tác (tính Mộc): kiên trì gieo quan hệ khách hàng dài hạn và phát triển sản phẩm mới.",
+      "Thủy": "Cần ghép người giữ vai Phân tích dữ liệu – Điều phối linh hoạt (tính Thủy): mềm dẻo đàm phán, nhạy xu hướng và tháo gỡ nút thắt giao tiếp.",
+      "Hỏa": "Cần ghép người giữ vai Tuyến đầu bán hàng – Truyền thông (tính Hỏa): giàu năng lượng khuấy động chiến dịch, chốt việc nhanh và tạo độ nhận diện.",
+      "Thổ": "Cần ghép người giữ vai Quản lý vận hành – Hậu cần kho bãi (tính Thổ): điềm tĩnh, giữ cam kết chất lượng đều đặn mỗi ngày không sai sót."
+    },
+    "no_boc_giao_quyen": {
+      "thuan": "Cung Nô Bộc (Giao Hữu) thuận lợi: bạn có duyên gặp cộng sự đắc lực — có thể phân quyền theo mục tiêu đầu ra (KPI) để nhân sự chủ động gánh vác.",
+      "can_chu_dong": "Cung Nô Bộc nhắc giữ quy trình kiểm soát hai lớp: khi giao việc nên chia mốc nghiệm thu ngắn theo tuần, tách người mua hàng với người duyệt chi và giữ dữ liệu khách hàng trên hệ thống chung của công ty.",
+      "can_bang": "Nhịp phối hợp nhân sự ở mức cân bằng: hợp xây dựng đội nhóm tinh gọn 3–5 vị trí nòng cốt rõ mô tả công việc trước khi tuyển ồ ạt.",
+      "chua_co_gio": "Chưa có giờ sinh nên hệ thống gợi ý mảnh ghép nhân sự theo hành khuyết Bát tự của bạn (thêm giờ sinh để đọc thêm cung Nô Bộc trên lá số Tử vi)."
+    }
+  },
+  "bo_tri_van_phong_chu": {
+    "nguyen_tac_4_diem": [
+      "Thế ngồi Hậu chẩm vững chãi: sau lưng ghế Chủ cơ sở phải là tường kín hoặc tủ hồ sơ cao kiên cố, không quay lưng ra cửa đi lại hoặc vách kính trống trải",
+      "Tầm nhìn bao quát Minh đường: từ bàn làm việc nhìn chéo kiểm soát được cửa phòng nhưng không kê bàn thẳng tắp đối diện cửa ra vào",
+      "Hướng ngồi đón cát khí Bát trạch: xoay mặt ghế nhìn về một trong các hướng hợp mệnh quái {quai} của bạn ({huong_tot})",
+      "Ánh sáng và giấy tờ: chỗ ngồi đủ sáng tự nhiên, giấy tờ quan trọng cất gọn trong tủ có khoá. Sách xưa không định màu sắc hay giờ họp theo hành cho bàn làm việc, nên phần này hệ thống không gợi ý."
+    ]
+  },
+  "bo_tri_cua_hang_buon_ban": {
+    "nguyen_tac_quay_thu_ngan": [
+      "Quầy thu ngân đặt tại góc tĩnh vững có tường tựa sau lưng, ưu tiên vùng đón sao Hướng vượng/sinh của Vận 9 (sao 9 Cửu Tử, sao 1 Nhất Bạch) hoặc phương hợp mệnh chủ",
+      "Két tiền và màn hình doanh thu đặt kín đáo, không phô thẳng ra cửa chính ngoài phố và không đặt ngay dưới dầm ngang hay sát vách nhà vệ sinh",
+      "Khu vực cửa đón khách giữ độ sáng ấm cao nhất trong tiệm, biển hiệu rõ nét, mặt tiền không xếp thùng hàng che chắn dòng khách bước vào",
+      "Các phương có sao lưu niên số 5 (Ngũ Hoàng) và số 2 (Nhị Hắc) trong năm cần bố trí làm kho gọn, tủ đồ tĩnh; tránh đặt máy pha chế ồn nóng hoặc đục sửa lớn tại đó"
+    ],
+    "dien_trach_tich_san": {
+      "thuan": "Cung Điền Trạch sáng vững: thuận lợi cho việc đầu tư mặt bằng dài hạn, chuẩn hoá cửa hàng khang trang để tích luỹ giá trị thương hiệu bền vững.",
+      "can_chu_dong": "Cung Điền Trạch nhắc ưu tiên mô hình mặt bằng gọn nhẹ (Asset-light), kiểm tra thật kỹ pháp lý hợp đồng thuê, điều khoản tăng giá thuê và hệ thống điện nước trước khi xuống cọc.",
+      "can_bang": "Nhịp mặt bằng ổn định: nên tối ưu công năng và doanh thu trên từng mét vuông mặt bằng hiện có trước khi thuê mặt bằng diện tích quá lớn.",
+      "chua_co_gio": "Giữ tỷ lệ tiền thuê mặt bằng trong ngưỡng an toàn (dưới 15–20% doanh thu dự kiến) và rà kỹ hợp đồng thuê dài hạn."
+    }
+  }
+}

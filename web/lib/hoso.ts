@@ -104,6 +104,8 @@ export const KHOA_NGUOI_THAN = "hbt.nguoi_than.v1";
 export const SU_KIEN_NGUOI_THAN = "hbt-nguoi-than";
 /** GD-1: hồ sơ gia đình trên máy (lib/gia-dinh) — xoá cùng hồ sơ; báo đọc lại bằng chính SU_KIEN_NGUOI_THAN. */
 export const KHOA_GIA_DINH = "hbt.gia_dinh.v1";
+/** Sổ nháp đối tác & mặt bằng (/co-van-kinh-doanh, lib/ma-hoa-ban-co) — có ngày sinh người khác, xoá cùng hồ sơ. */
+export const KHOA_SO_NHAP_KINH_DOANH = "hbt.ban_co_kinh_doanh.e2ee.v1";
 
 export function xoaHoSo(): void {
   hienTai = null;
@@ -114,6 +116,7 @@ export function xoaHoSo(): void {
     // NT-1: xoá hồ sơ (kể cả thu hồi đồng ý ở "Dữ liệu của tôi") xoá luôn lá số người thân đã lưu trên máy.
     window.localStorage.removeItem(KHOA_NGUOI_THAN);
     window.localStorage.removeItem(KHOA_GIA_DINH);
+    window.localStorage.removeItem(KHOA_SO_NHAP_KINH_DOANH);
   } catch {
     /* bỏ qua */
   }
