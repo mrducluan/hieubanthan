@@ -48,3 +48,58 @@ def test_so_khong_lo_ra_api():
     from app.main import app
     for r in app.routes:
         assert "do-tin" not in getattr(r, "path", "") and "do_tin_kb" not in getattr(r, "path", "")
+
+
+# ---- KY-LUAT-V2 (sửa review PR #373): mức `luat_tom_y` phải thật sự là "tóm ý có trang", không chứa nguyên văn Hán
+_TRANG = re.compile(r"\btr\.\s*\d")
+_HAN = re.compile(r"[㐀-鿿]+")
+# Tên sách / tác giả được phép viết bằng chữ Hán (nơi dẫn nguồn, KHÔNG phải câu sách). Câu sách dài ngoài danh sách này → test đỏ.
+_TEN_HAN_CHO_PHEP = {"紫雲", "斗數論命", "韋千里", "千里命稿", "王虎應", "增刪卜易評釋", "六爻分類預測斷語", "邵偉華", "周易預測學"}
+# Quy tắc TỔNG HỢP cấp tệp (rút từ cả cuốn, không ứng một trang) — được miễn dòng trang; mọi mục cụ thể khác bắt buộc có trang.
+_TONG_HOP_CAP_TEP = {"tuvi_phi_hoa_luong_672.json": {"quy_tac_hai_chieu"}, "tuvi_trung_chau_60_tinh_he.json": {"nguyen_tac_luan"}}
+_KHOA_NOI_DUNG = ("y_chinh", "mat_tich_cuc", "huong_chuyen_hoa", "mat_tieu_cuc_can_chu_y")
+
+
+def _tep_luat_tom_y() -> list[str]:
+    return sorted(d["tep"] for d in do_tin.bang() if not d["phan"] and d["muc"] == "luat_tom_y")
+
+
+def _muc_noi_dung(x, duong=()):
+    """Mọi dict là một MỤC nội dung (có y_chinh / mat_tich_cuc…), kèm đường dẫn khoá."""
+    if isinstance(x, dict):
+        if any(k in x for k in _KHOA_NOI_DUNG):
+            yield duong, x
+        for k, v in x.items():
+            yield from _muc_noi_dung(v, duong + (k,))
+    elif isinstance(x, list):
+        for i, v in enumerate(x):
+            yield from _muc_noi_dung(v, duong + (str(i),))
+
+
+def test_luat_tom_y_moi_muc_co_trang_doi_chieu():
+    teps = _tep_luat_tom_y()
+    assert len(teps) >= 4, teps
+    for tep in teps:
+        kb = json.loads((DATA / tep).read_text("utf-8"))
+        n = 0
+        for duong, m in _muc_noi_dung(kb):
+            if duong[0] in _TONG_HOP_CAP_TEP.get(tep, ()):
+                continue
+            sg = m.get("sach_ghi") or {}
+            tham_chieu = " ".join(str(v) for v in (m.get("trang"), sg.get("trang"), sg.get("nguon")) if v)
+            assert _TRANG.search(tham_chieu), f"{tep} {'/'.join(duong)}: mức luat_tom_y mà không ghi số trang đối chiếu ('tr. N')"
+            n += 1
+        assert n >= 6, (tep, n)
+
+
+def test_luat_tom_y_khong_chua_nguyen_van_han():
+    for tep in _tep_luat_tom_y():
+        raw = (DATA / tep).read_text("utf-8")
+        for run in _HAN.findall(raw):
+            assert run in _TEN_HAN_CHO_PHEP, f"{tep}: chuỗi Hán '{run}' không phải tên sách / tác giả — sách còn bản quyền chỉ được tóm ý"
+
+
+def test_nhap_ai_cho_duyet_la_tep_ai_chua_duyet_moi_va_khong_lan_vao_luat_tom_y():
+    ai = {d["tep"] for d in do_tin.bang() if not d["phan"] and d["muc"] == "nhap_ai_cho_duyet"}
+    assert ai == {"ung_dung_co_dien_kb.json", "go_nut_doi_song_kb.json"}, ai   # thêm / bớt tệp = quyết định có chủ đích
+    assert not ai & set(_tep_luat_tom_y())

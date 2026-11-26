@@ -117,14 +117,20 @@
     "bt_thuan_hk_tinh": {
       "tieu_de": "Two-School Lens at the Main Entrance (Eight Mansions & Period-9 Flying Stars)",
       "goc_bat_trach": "Eight Mansions lens (personal trigram alignment): this entrance direction matches the householder's group, supporting long-term personal steadiness.",
-      "goc_huyen_khong_van_9": "Period-9 Flying Star lens (timely sector qi, star pair {cap}): the entrance sector carries stars that prefer calm, clutter-free Metal-toned moderation.",
-      "cach_dung_hoa": "Keep your entrance, bed-head and stove facing aligned with Eight Mansions, while styling the doorway in crisp light neutral tones without harsh heat lamps or heavy drilling."
+      "goc_huyen_khong_van_9": "Period-9 Flying Star lens (timely sector qi, star pair {cap}): the entrance sector carries stars that are best kept calm and uncluttered.",
+      "cach_dung_hoa": {
+        "sao_tho": "Keep your entrance, bed-head and stove facing aligned with Eight Mansions, while styling the doorway in crisp light neutral tones without harsh heat lamps or heavy drilling.",
+        "chung": "Keep your entrance, bed-head and stove facing aligned with Eight Mansions, while keeping the doorway clear and softly lit, with nothing stacked against the door and no heavy renovation unless needed."
+      }
     },
     "hk_vuong_bt_lech": {
       "tieu_de": "Two-School Lens at the Main Entrance (Eight Mansions & Period-9 Flying Stars)",
       "goc_bat_trach": "Eight Mansions lens (personal trigram alignment): this entrance direction belongs to the opposite East/West group from the householder.",
       "goc_huyen_khong_van_9": "Period-9 Flying Star lens (timely sector qi, star pair {cap}): the entrance welcomes timely or prosperous Period-9 qi favorable for activity and commerce.",
-      "cach_dung_hoa": "Keep the entrance bright and open to welcome Period-9 flow, while orienting your bed-head, stove-mouth and desk chair toward your personal Eight Mansions directions."
+      "cach_dung_hoa": {
+        "sao_9_1": "Keep the entrance bright and open to welcome Period-9 flow, while orienting your bed-head, stove-mouth and desk chair toward your personal Eight Mansions directions.",
+        "chung": "Keep the entrance clear and tidy so the favorable flow at this sector can settle, while orienting your bed-head, stove-mouth and desk chair toward your personal Eight Mansions directions."
+      }
     }
   }
 }

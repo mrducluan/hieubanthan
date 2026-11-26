@@ -25,6 +25,19 @@ export const KHOA_CAT_RIENG_SAO2 = new Set<string>([
   "chuong", "cot_loi", "thoi_gian_bieu", "luu_y_mang", "nguoi_quanh", "ung_dung_co_dien",
 ]);
 
+/** Bảng DUY NHẤT `mã khung ung_dung_co_dien → chương nguồn phải mở thì khung mới mở trọn` (Bát tự đọc từ `ngu_hanh`, Tử vi từ
+ *  `su_nghiep`). Thêm khung mới = thêm một dòng ở đây; thiếu dòng thì khung luôn khoá khi báo cáo còn chương khoá. */
+export const CHUONG_NGUON_UNG_DUNG: Readonly<Record<string, string>> = {
+  battu_co_dien: "ngu_hanh",
+  tuvi_co_dien: "su_nghiep",
+};
+
+/** Khoá cấp gốc CHƯA phân loại (không ở `KHOA_CONG_KHAI_SAO2` lẫn `KHOA_CAT_RIENG_SAO2`) — `catXemTruoc` sẽ cắt chúng im lặng
+ *  khi báo cáo đang khoá; nơi gọi dùng danh sách này để báo (Sentry) cho người phát triển phân loại. */
+export function khoaLaBiCat(bc: Record<string, unknown>): string[] {
+  return Object.keys(bc).filter((k) => !KHOA_CONG_KHAI_SAO2.has(k) && !KHOA_CAT_RIENG_SAO2.has(k));
+}
+
 export function catXemTruoc<T extends BaoCaoDay>(bc: T, mienPhi: number): Omit<T, "chuong"> & { chuong: (ChuongDay | ChuongKhoa)[]; so_khoa: number } {
   const n = Math.max(0, Math.min(mienPhi, bc.chuong.length));
   const khoa = bc.chuong.slice(n).map((c): ChuongKhoa => ({
@@ -62,14 +75,14 @@ export function catXemTruoc<T extends BaoCaoDay>(bc: T, mienPhi: number): Omit<T
       typeof r.tu_chuong === "string" && mo.has(r.tu_chuong) ? r
         : { ma: r.ma, ten: r.ten, muc: r.muc, nhan_muc: r.nhan_muc, tu_chuong: r.tu_chuong, khoa: true });
   }
-  // Chặng 1: khung "Ứng dụng Ngũ hành cổ điển" của Bát tự (đọc từ `ngu_hanh`) và Tử vi (đọc từ `su_nghiep`) chỉ mở trọn
-  // khi chương nguồn đã mở; khi còn khoá chỉ giữ tiêu đề + nguyên tắc ưu tiên, cắt bảng chi tiết ở máy chủ.
+  // Chặng 1: khung "Ứng dụng Ngũ hành cổ điển": chỉ mở trọn khi chương nguồn của ĐÚNG mã khung đã mở. Mã chưa có trong
+  // `CHUONG_NGUON_UNG_DUNG` (kể cả mã mới thêm sau này) MẶC ĐỊNH KHOÁ — chỉ giữ tiêu đề + nguyên tắc ưu tiên.
   if (bc.ung_dung_co_dien && typeof bc.ung_dung_co_dien === "object") {
     const u = bc.ung_dung_co_dien as Record<string, unknown>;
-    const canMo = u.ma === "battu_co_dien" ? "ngu_hanh" : u.ma === "tuvi_co_dien" ? "su_nghiep" : null;
-    o.ung_dung_co_dien = canMo && !mo.has(canMo)
-      ? { khoa: true, ma: u.ma, tieu_de: u.tieu_de, nguyen_tac_uu_tien: u.nguyen_tac_uu_tien }
-      : bc.ung_dung_co_dien;
+    const canMo = typeof u.ma === "string" ? CHUONG_NGUON_UNG_DUNG[u.ma] : undefined;
+    o.ung_dung_co_dien = canMo && mo.has(canMo)
+      ? bc.ung_dung_co_dien
+      : { khoa: true, ma: u.ma, tieu_de: u.tieu_de, nguyen_tac_uu_tien: u.nguyen_tac_uu_tien };
   }
 
   return o as Omit<T, "chuong"> & { chuong: (ChuongDay | ChuongKhoa)[]; so_khoa: number };

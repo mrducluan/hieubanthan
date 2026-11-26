@@ -6,6 +6,8 @@ Mỗi tệp trong `kb/data/` (và một số PHẦN trong tệp) mang MỘT mứ
 - `nguyen_van`         — có nguyên văn cổ thư trong kho nguồn `fixtures/nguon/` VÀ có test so khớp (ghi tên kho + tên test).
 - `tom_y_co_thu`       — tóm ý từ cổ thư nêu tên; chưa khớp từng câu với nguyên văn (việc của các đợt đối chiếu sau).
 - `luat_tom_y`         — tiên đề / luật logic rút ý từ sách hiện đại còn bản quyền (PR #320 phương án C: không chép nguyên văn, ghi nguồn + trang).
+                         ĐIỀU KIỆN (test `tests/test_do_tin_kb.py`): mọi mục cụ thể có số trang đối chiếu (`tr. N`), không chứa chuỗi Hán nào ngoài tên sách / tác giả;
+                         tệp chưa ghi được số trang thì để `truyen_thong` — KHÔNG bịa trang.
 - `truyen_thong`       — tập quán dân gian, truyền khẩu hoặc trường phái phổ thông chưa đối chiếu trang sách cụ thể.
 - `bien_tap`           — ban biên tập soạn (đã rà soát ổn định): lời diễn giải đời thường, ứng dụng, mẫu câu.
 - `nhap_ai_cho_duyet`  — nháp mới do AI biên soạn, đang chờ chủ dự án đọc duyệt trước khi chuyển sang `bien_tap`.
@@ -43,8 +45,9 @@ SO: dict[str, dict] = {
     "battu_sach_ghi.json": {"mang": "battu", **_nv("tam_menh_thong_hoi.json", "tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem",
                                                 "SX-C: câu Tam Mệnh Thông Hội + Uyên Hải Tử Bình (thần sát, thập thần, lục thân, tính nết, thân thể) khớp kho nguồn")},
     "battu_dieu_hau.json": {"mang": "battu", **_nv("cung_thong_bao_giam.json", f"{_T}::test_dieu_hau_khop_nguyen_van_tung_o")},
-    "battu_thien_ly_menh_cao.json": {"mang": "battu", "muc": "luat_tom_y",
-                                     "ghi_chu": "Đợt 3: 6 quy tắc Thập Thần & Cách Cục 2 chiều rút ý từ Thiên Lý Mệnh Cảo (Vi Thiên Lý, 1934 — bazi-kb)"},
+    "battu_thien_ly_menh_cao.json": {"mang": "battu", "muc": "truyen_thong",
+                                     "ghi_chu": "Đợt 3: 6 quy tắc Thập Thần & Cách Cục 2 chiều rút ý từ Thiên Lý Mệnh Cảo (Vi Thiên Lý, 1934 — bazi-kb). "
+                                                "Hạ từ luat_tom_y (KY-LUAT-V2 sửa review): chỉ ghi tên thiên (Nhân Nguyên / Lục Thần / Cách Cục), chưa ghi số trang"},
     "battu_kb.json": {"mang": "battu", "muc": "tom_y_co_thu", "phan": {
         "co_tho": _nv("uyen_hai_tu_binh.json", f"{_T}::test_co_tho_nhat_chu_khop_nguyen_van_uyen_hai"),
         "co_van_thap_than": _nv("uyen_hai_tu_binh.json", f"{_T}::test_co_van_thap_than_khop_nguyen_van_uyen_hai"),
@@ -210,8 +213,9 @@ SO: dict[str, dict] = {
                                              "B.O.T.A., Thoth vẫn là tóm ý (Marseille đã soát với Mathers + Papus, B.O.T.A. ẩn chính với Case 1920)")},
     "tarot_greer_nguoc.json": {"mang": "tarot", "muc": "luat_tom_y",
                                "ghi_chu": "Đợt 2B: 22 Lá Ẩn Chính ngược rút ý 2 mặt từ Mary K. Greer (2002), không nguyên văn, giữ trang"},
-    "kinhdich_luc_hao_thuc_chien.json": {"mang": "kinhdich", "muc": "luat_tom_y",
-                                         "ghi_chu": "Đợt 2B: 8 nguyên tắc Lục Hào + 5 Lục Thân thực chiến rút ý từ Vương Hổ Ứng & Thiệu Vĩ Hoa"},
+    "kinhdich_luc_hao_thuc_chien.json": {"mang": "kinhdich", "muc": "truyen_thong",
+                                         "ghi_chu": "Đợt 2B: 8 nguyên tắc Lục Hào + 5 Lục Thân thực chiến rút ý từ Vương Hổ Ứng & Thiệu Vĩ Hoa. "
+                                                    "Hạ từ luat_tom_y (KY-LUAT-V2 sửa review): chỉ ghi \"Phần N\" của bộ kho tri thức, chưa ghi số trang sách"},
     # ---- Thần số (truyền thống phương Tây hiện đại — không có "cổ thư")
     **{f: {"mang": "thanso", "muc": "truyen_thong"} for f in (
         "thanso_meanings.json", "thanso_depth.json", "thanso_chaldean.json", "thanso_cap_so.json", "thanso_chi_so_phu.json",

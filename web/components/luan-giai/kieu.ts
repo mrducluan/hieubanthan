@@ -180,6 +180,8 @@ export interface DoiChieuHaiPhai {
   tieu_de: string;
   goc_bat_trach: string;
   goc_huyen_khong_van_9: string;
+  /** Biến thể lời dung hoà theo cặp sao thật: sao_tho (2/5) · sao_9_1 · chung (trung tính, không nêu màu). */
+  ma_dung_hoa?: "sao_tho" | "sao_9_1" | "chung";
   cach_dung_hoa: string;
 }
 

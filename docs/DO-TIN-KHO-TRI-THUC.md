@@ -17,9 +17,9 @@
 
 | Mảng | Có nguyên văn đối chiếu | Tóm ý cổ thư, chưa khớp từng câu | Tiên đề logic sách hiện đại (ghi trang) | Tập quán / truyền khẩu phổ thông | Ban biên tập soạn | Nháp AI chờ chủ dự án duyệt | Tệp kỹ thuật |
 |---|---|---|---|---|---|---|---|
-| Bát tự | 3 | 1 | 1 |  | 7 |  |  |
+| Bát tự | 3 | 1 |  | 1 | 7 |  |  |
 | Tử vi | 1 | 3 | 3 | 4 | 7 |  |  |
-| Kinh Dịch | 4 | 2 | 1 |  | 2 |  |  |
+| Kinh Dịch | 4 | 2 |  | 1 | 2 |  |  |
 | Phong thuỷ | 2 | 2 |  | 1 | 5 |  |  |
 | Nhân tướng | 6 | 2 |  | 1 | 1 |  |  |
 | Tarot | 1 |  | 1 |  |  |  |  |
@@ -89,7 +89,7 @@
 | Bát tự | `battu_luan_hoi_kb.json` |  | Ban biên tập soạn | lớp Luận theo câu hỏi Bát tự (LH-2) |
 | Bát tự | `battu_ngay_gio.json` |  | Có nguyên văn đối chiếu | TK-2: 120 bài ca chung «六X日Y時斷» quyển 8–9, mỗi câu đúng mục can ngày × giờ |
 | Bát tự | `battu_sach_ghi.json` |  | Có nguyên văn đối chiếu | SX-C: câu Tam Mệnh Thông Hội + Uyên Hải Tử Bình (thần sát, thập thần, lục thân, tính nết, thân thể) khớp kho nguồn |
-| Bát tự | `battu_thien_ly_menh_cao.json` |  | Tiên đề logic sách hiện đại (ghi trang) | Đợt 3: 6 quy tắc Thập Thần & Cách Cục 2 chiều rút ý từ Thiên Lý Mệnh Cảo (Vi Thiên Lý, 1934 — bazi-kb) |
+| Bát tự | `battu_thien_ly_menh_cao.json` |  | Tập quán / truyền khẩu phổ thông | Đợt 3: 6 quy tắc Thập Thần & Cách Cục 2 chiều rút ý từ Thiên Lý Mệnh Cảo (Vi Thiên Lý, 1934 — bazi-kb). Hạ từ luat_tom_y (KY-LUAT-V2 sửa review): chỉ ghi tên thiên (Nhân Nguyên / Lục Thần / Cách Cục), chưa ghi số trang |
 | Bát tự | `bo_sung_nhat_chu.json` |  | Ban biên tập soạn |  |
 | Bát tự | `bo_sung_thap_than.json` |  | Ban biên tập soạn |  |
 | Bát tự | `doanh_chu_lich_kb.json` |  | Ban biên tập soạn | PR #328: lời đời thường Lịch quyết định 12 tháng; mức tháng từ các lớp của Thời gian tới + tháng cá nhân |
@@ -127,7 +127,7 @@
 | Kinh Dịch | `kinhdich_kb.json` | mau | Ban biên tập soạn |  |
 | Kinh Dịch | `kinhdich_kb.json` | giai_thich | Ban biên tập soạn |  |
 | Kinh Dịch | `kinhdich_legge.json` |  | Có nguyên văn đối chiếu | TK-2 việc 4: bản dịch Anh James Legge 1882 (PD) — chỉ quẻ qua kiểm vạch âm dương + kiểm chữ hỏng; chỉ bản /en |
-| Kinh Dịch | `kinhdich_luc_hao_thuc_chien.json` |  | Tiên đề logic sách hiện đại (ghi trang) | Đợt 2B: 8 nguyên tắc Lục Hào + 5 Lục Thân thực chiến rút ý từ Vương Hổ Ứng & Thiệu Vĩ Hoa |
+| Kinh Dịch | `kinhdich_luc_hao_thuc_chien.json` |  | Tập quán / truyền khẩu phổ thông | Đợt 2B: 8 nguyên tắc Lục Hào + 5 Lục Thân thực chiến rút ý từ Vương Hổ Ứng & Thiệu Vĩ Hoa. Hạ từ luat_tom_y (KY-LUAT-V2 sửa review): chỉ ghi "Phần N" của bộ kho tri thức, chưa ghi số trang sách |
 | Kinh Dịch | `kinhdich_tra_loi.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
 | Kinh Dịch | `kinhdich_tra_loi.json` | tinh_chat_que | Có nguyên văn đối chiếu |  |
 | Kinh Dịch | `kinhdich_tra_loi.json` | sach_xua_viec | Có nguyên văn đối chiếu | WS-5: câu Tăng San Bốc Dịch theo chương ứng với việc; lời Việt là tóm ý |

@@ -155,9 +155,9 @@ Nếu hôm nay anh giao quyền điều hành cho em, **em sẽ KHÔNG bắt đ�
    - Chế độ `[Đời sống & Hành động]` giữ một hướng dẫn thống nhất (Hình thế → Bát Trạch theo mệnh chủ → Phi Tinh Vận 9 theo góc phòng).
    - Khi Bát Trạch và Huyền Không Vận 9 trái chiều tại hướng cửa, khung `doi_chieu_hai_phai` hiện trung lập hai góc nhìn và cách dung hòa thực tế trong chế độ `[Học thuật Cổ điển & Ngũ hành]` và B2B Mặt bằng.
 3. **Ngân Sách Dung Lượng Từng Lớp (`< 190 KB` cảnh báo CI / `256 KB` trần cứng DB):**
-   - Giữ trần cảnh báo `190.000 bytes` cho bài lưu cốt lõi (chừa ~72 KB cho bản diễn đạt AI trước trần cứng `262.144 bytes` của trigger `0017_tuvi_hoc.sql`); lớp tóm tắt cổ điển nội tuyến khóa `< 3.000 bytes` (`tests/test_ky_luat_v2.py`).
-   - Từ Chặng 2 trở đi: mọi phụ lục đa phái lớn hơn `3 KB` bắt buộc tách sang tra cứu theo mã khóa (lazy-load qua route có kiểm quyền `SAO-2`), và báo cáo Liên mảng Tam Tài (`/co-van`) phải lưu dưới `mo_dun = "tam_tai"` độc lập.
+   - Giữ trần cảnh báo `190.000 bytes` cho bài lưu cốt lõi (chừa ~72 KB cho bản diễn đạt AI trước trần cứng `262.144 bytes` của trigger `0017_tuvi_hoc.sql`); lớp tóm tắt cổ điển nội tuyến khóa `< 3.000 bytes` (Tử vi, Bát tự) và `< 3.500 bytes` (Phong thuỷ — mang thêm khung đối chiếu hai phái) (`tests/test_ky_luat_v2.py`). **Đo thật 2026-11-26 trên 40 lá golden**: Tử vi tối đa 200.070 B (10/40 lá ≥ 190.000 B) — vạch 190 KB chưa giữ được, test khoá đỉnh hiện tại < 205.000 B và trần cứng 262.144 B, việc cắt/tách chờ chủ dự án quyết; Bát tự tối đa 169.005 B.
+   - Từ Chặng 2 trở đi: mọi phụ lục đa phái lớn hơn `3 KB` bắt buộc tách sang tra cứu theo mã khóa (lazy-load qua route có kiểm quyền `SAO-2`), và báo cáo Liên mảng Tam Tài (`/co-van`) phải lưu dưới `mo_dun = "tam_tai"` độc lập (*định hướng, chưa có mã*).
 4. **Cổng Khóa `SAO-2` Allowlist Mặc Định Khóa (`Default-Deny`):**
    - `catXemTruoc` trong `web/lib/sao-xem-truoc.ts` chỉ cho phép các khóa cấp gốc đã khai báo trong `KHOA_CONG_KHAI_SAO2` hoặc đã lọc qua `KHOA_CAT_RIENG_SAO2` (có bài test tự động quét mọi mẫu golden thật).
-   - Với dữ liệu mã hóa đầu-cuối phía trình duyệt (E2EE Bàn cờ Đối tác ở Chặng 2), áp dụng cơ chế kiểm quyền gói trên server trước khi gọi Engine tính toán (`Gate-before-Compute`).
+   - Với dữ liệu mã hóa đầu-cuối phía trình duyệt (E2EE Bàn cờ Đối tác ở Chặng 2), áp dụng cơ chế kiểm quyền gói trên server trước khi gọi Engine tính toán (`Gate-before-Compute`) (*định hướng, chưa có mã*).
 
