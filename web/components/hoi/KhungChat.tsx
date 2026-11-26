@@ -10,12 +10,54 @@ import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
 import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
 import type { KhoiTrucQuan } from "@/components/hoi/TrucQuan";
+import type { Muc } from "@/components/luan-giai/kieu";
 import { CauTraLoi } from "@/components/hoi/CauTraLoi";
 import { useMaCuaToi } from "@/lib/sao";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
 import { LoiMoiChuyenGiaTuDong } from "@/components/chuyen-gia/LoiMoiChuyenGia";
 import { nenMoiChuyenGia } from "@/lib/moi-chuyen-gia";
+
+export type LuanHoiChat =
+  | {
+      khoa?: false;
+      ma: string;
+      cau: string;
+      tra_loi: string;
+      giai_thich?: string;
+      nhan: string;
+      sac: Muc;
+      ma_mau: string;
+      phai: string;
+      chuong: string;
+      ten_chuong: string;
+      ghi_chu?: string;
+    }
+  | {
+      khoa: true;
+      ma: string;
+      cau: string;
+      sac: Muc;
+      chuong: string;
+      ten_chuong: string;
+    };
+
+export type DoiSongLienKetChat =
+  | {
+      khoa?: false;
+      chuong: string;
+      ten_chuong: string;
+      tieu_de_hop?: string;
+      muc?: Muc;
+      nhan_muc?: string;
+      ma_mau: string;
+      phai: string;
+    }
+  | {
+      khoa: true;
+      chuong: string;
+      ten_chuong: string;
+    };
 
 export interface KetQuaHoi {
   van?: string;
@@ -43,6 +85,10 @@ export interface KetQuaHoi {
   hoTro?: string;
   /** Câu khủng hoảng / từ chối / dẫn hướng (engine phan_loai.xu_ly không phải trả lời thường): không bao giờ mời mua. */
   dacBiet?: boolean;
+  /** D2 (Chặng 0) — câu trả lời thẳng đồng bộ 100% từ lớp `luan_hoi` của báo cáo 99 Sao, kèm `ma_mau` nuôi DB 0017. */
+  luanHoi?: LuanHoiChat;
+  /** Chặng 0 — liên kết hộp đời sống & chương báo cáo cho các câu mảng đời sống ngoài 27 câu `luan_hoi`. */
+  doiSongLienKet?: DoiSongLienKetChat;
 }
 
 interface Tin extends KetQuaHoi {

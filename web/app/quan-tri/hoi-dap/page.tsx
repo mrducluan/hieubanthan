@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { BaoCong } from "@/components/quan-tri/BaoCong";
 import { congQuanTri } from "@/lib/quan-tri";
+import { gomRadarToMo } from "@/lib/radar-to-mo";
 
 export const metadata: Metadata = { title: "Hỏi đáp" };
 
@@ -43,6 +44,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ k
     return <Card><p role="alert" className="text-sm text-cinnabar">Chưa đọc được nhật ký hỏi đáp (chạy migration 0011 trên Supabase; engine cần NHAT_KY_HOI=1 để ghi).</p></Card>;
   }
   const t = tk.data as ThongKeHoi, cau = ds.data as CauHoi[];
+  const radar = gomRadarToMo(cau);
   const lk = (o: { ky?: string; mo_dun?: string | null }) => {
     const q = new URLSearchParams();
     const k = o.ky ?? ky, m = "mo_dun" in o ? o.mo_dun : moDun;
@@ -106,6 +108,46 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ k
           </ul>
         </Card>
       </div>
+
+      <Card data-testid="qt-radar-to-mo">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 className="text-lg">Radar 8 mạch tò mò chưa có KB sâu</h2>
+          <Link href="/quan-tri/hoc" className="text-xs text-gold hover:underline">Xem phiếu kiểm chứng &amp; đề xuất luật →</Link>
+        </div>
+        <p className="mt-1 text-xs text-fg-muted">
+          Tự động gom nhóm các câu hỏi chưa phủ gần đây theo 8 mạch trăn trở đời sống và chỉ thẳng tệp KB cần bồi đắp.
+        </p>
+        {radar.length === 0 ? (
+          <p className="mt-3 text-sm text-fg-faint">Chưa có cụm tò mò nào thiếu độ phủ trong danh sách gần đây.</p>
+        ) : (
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {radar.map((r) => (
+              <div key={r.ma} className="rounded-xl border border-line/70 bg-surface-2/30 p-3.5 text-sm">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="font-medium text-fg">{r.ten}</span>
+                  <div className="flex items-center gap-1.5">
+                    <Badge>{r.so_cau} câu</Badge>
+                    {r.so_khong_huu_ich > 0 && <Badge tone="cinnabar">{r.so_khong_huu_ich} 👎</Badge>}
+                  </div>
+                </div>
+                <p className="mt-1 text-xs text-fg-faint">{r.mo_ta}</p>
+                {r.mau_cau.length > 0 && (
+                  <ul className="mt-2 list-disc space-y-1 pl-4 text-xs text-fg-muted">
+                    {r.mau_cau.map((m) => <li key={m.id}>{m.cau_hoi}</li>)}
+                  </ul>
+                )}
+                <div className="mt-2.5 flex flex-wrap gap-2 border-t border-line/50 pt-2 text-xs">
+                  {r.tep_kb.map((kb) => (
+                    <Link key={kb.tep} href={kb.duong} className="rounded-full border border-gold/40 bg-gold/5 px-2.5 py-1 text-gold hover:border-gold">
+                      Bồi đắp {kb.nhan} →
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </Card>
 
       <Card>
         <h2 className="text-lg">Câu hỏi chưa trả lời tốt gần đây{moDun ? ` · ${MO_DUN[moDun]}` : ""}</h2>

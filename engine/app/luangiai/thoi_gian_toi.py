@@ -118,6 +118,41 @@ def _khong_trung_ma(hop: list[dict]) -> list[dict]:
     return hop
 
 
+def _chon_cot_loi_c1(c1_hop: list[dict], toi_da: int = 3) -> list[dict]:
+    """KH-1 mục 4: dựng tối đa `toi_da` hộp "Điều quan trọng nhất" từ chính các hộp chương 1 miễn phí (`tom_tat`),
+    ưu tiên: (1) nhất quán hai lá số (hoặc năm cá nhân khi thiếu lá số), (2) tháng nổi bật nhất trong 12 tháng tới (`xep`),
+    (3) góc nhà hợp phong thuỷ năm / điểm nhấn năm còn lại. Giữ nguyên `ma_mau` và đánh dấu `tham_chieu = 'cot_loi'` ở `c1`
+    để web hiện gọn một dòng trong chương 1 và SAO-2 không rò dữ liệu chương khoá."""
+    chon: list[dict] = []
+    da: set[str] = set()
+
+    def _them(ung_vien: list[dict]) -> None:
+        for h in ung_vien:
+            m = h.get("ma_mau")
+            if len(chon) >= toi_da or not m or m in da:
+                continue
+            da.add(m)
+            h["tham_chieu"] = "cot_loi"
+            chon.append({**{k: v for k, v in h.items() if k != "tham_chieu"},
+                         "tu_chuong": "tom_tat", "loai_goc": h["loai"], "loai": "cot_loi"})
+            break
+
+    _them([h for h in c1_hop if h.get("nguon") == "hai_la_so"] + [h for h in c1_hop if h.get("nguon") == "thanso"])
+    _them([h for h in c1_hop if h.get("ma_mau", "").startswith("ds.tgt.xep.")])
+    _them([h for h in c1_hop if h.get("nguon") == "phong_thuy"]
+          + [h for h in c1_hop if h.get("nguon") in ("tuvi", "battu", "thanso", "con_giap")])
+    for h in c1_hop:
+        if len(chon) >= toi_da:
+            break
+        m = h.get("ma_mau")
+        if m and m not in da and not h.get("thang"):
+            da.add(m)
+            h["tham_chieu"] = "cot_loi"
+            chon.append({**{k: v for k, v in h.items() if k != "tham_chieu"},
+                         "tu_chuong": "tom_tat", "loai_goc": h["loai"], "loai": "cot_loi"})
+    return chon
+
+
 # ------------------------------------------------------------------ thần số
 def _thang_ts(ngay: int, thang: int, tu: dt.date, so: int) -> list[dict]:
     van = kbts.ban_do()
@@ -612,9 +647,10 @@ def lap(ngay_sinh: dt.date, hom_nay: dt.date, nam: int | None = None, gioi_tinh:
         c["moi_xem"] = {"diem_nhan": diem_nhan(c["doan"]), "cau_hoi": Lo(f"tgt.cau_hoi.{c['ma']}", CAU_HOI[c["ma"]]), "so_doan": len(c["doan"]),
                         "phut_doc": max(1, round(so_chu_chuong(c) / 200))}
         ds.append(c)
+    cot_loi = _chon_cot_loi_c1(c1["hop"])
     bc = {"phien_ban": kh.PHIEN_BAN, "mo_dun": MO_DUN, "nam": nam, "cac_nam": cho_phep, "nam_toi": nam_toi,
           "ngay_xem": hom_nay.isoformat(), "thieu": thieu,
-          "cot_loi": [], "chuong": ds,
+          "cot_loi": cot_loi, "chuong": ds,
           "nguon": Lo("tgt.nguon", "Thần số Pitago · Tử vi Nam phái · Bát tự Tử Bình · tập quán dân gian Việt Nam"),
           "trang_thai": "nhap_ai", "dien_dat": "mau",
           "ket": Lo("tgt.ket", "Đây là nhịp gợi ý để bạn tự sắp việc. Quyết định lớn vẫn dựa trên điều kiện thực tế của bạn.")}

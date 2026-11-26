@@ -5,7 +5,7 @@ current_phase: 1
 current_hypothesis: >-
   H1 Free Reading thu hút người dùng + H2 Metaphysics ID tạo gắn bó
   (chủ dự án cho làm song song một phần Phase 2: hợp đôi + link mời — H3)
-current_build: "GTM nạp mọi trang (đo lường bật mặc định) + SEO-I 48 trang tứ hoá × cung (sau SEO-H, PERF-1, HH-CT3, A11Y-1)"
+current_build: "Chặng 0 (Trục sống DB ↔ KB): Tam Trụ Doanh Chủ + Cốt lõi Thời gian tới + D2 đồng bộ 27 nhãn luan_hoi & KiemChung trong KhungChat + Radar 8 mạch tò mò ở /quan-tri/hoc (sau NAM-TET-2027, QLNS-2/3, PT-NHA, BD-1, LX-2027)"
 current_gate: "Gate 0 bỏ qua theo quyết định chủ dự án (2026-10-08) — mở công khai, đo Gate 1 trên người dùng thật"
 current_metrics: []   # PostHog đã bật (mục G); GA4 qua GTM khi chủ dự án gắn thẻ GA4 trong GTM
 current_risks:
@@ -20,6 +20,7 @@ current_risks:
   - "Đã mở công khai trước khi xong thử nghiệm nội bộ 2 tháng (chủ dự án chốt 2026-10-08); bán Sao vẫn chặn"
   - "Trang pháp lý đã có (Luật BVDLCN 91/2025 + NĐ 356/2025) nhưng chưa luật sư duyệt, chưa điền thông tin đơn vị vận hành"
 completed_work:
+  - "CHANG-0 (2026-11-26): (1) calc/battu.py + doanh_chu.py hỗ trợ Tam Trụ chuẩn (co_gio=False, không gán giả giờ Ngọ 12:00) + Tứ Trụ khi có giờ sinh + đọc đúng dụng thần phù ức/điều hậu; (2) điền cot_loi cho /thoi-gian-toi từ chương 1 miễn phí (an toàn SAO-2, khớp VI/EN); (3) D2 nâng cấp: hoidap/luan_hoi_khop.py đồng bộ 27 nhãn câu hỏi thẳng của báo cáo Tử vi/Bát tự vào hỏi đáp kèm cổng cắt SAO-2 phía máy chủ (catLuanHoiChat / daMoBaoCaoHoi khớp khoá HMAC & chuong_mien_phi), KiemChung nuôi DB 0017 & cầu nối mở chương trên CauTraLoi.tsx; (4) Radar 8 mạch tò mò & bảng sức khoẻ 8 migration tầng HỌC trên /quan-tri/hoc và /quan-tri/hoi-dap"
   - "SEO-J: 76 trang \"sinh năm X mệnh gì\" (1950–2025) + KB 30 nạp âm; link hai chiều với trang tuổi hợp hướng; sitemap 625 URL"
   - "SEO-I: 48 trang \"Hoá X ở cung Y\" (10 năm can → sao mang hoá, link trang sao ở cung, tam phương); sitemap 548 URL"
   - "A11Y-1: rà trợ năng 19 trang × (máy tính, điện thoại) × (có/không hồ sơ) + lá số 2 giao diện — sửa 5 màu chữ Giấy cổ + nhãn nhỏ trên giấy đạt WCAG AA; scripts/kiem-tra-tro-nang.mjs + e2e/tro-nang.spec.ts"
@@ -76,4 +77,4 @@ prohibited_until_gate:
   - "Community"
   - "Marketplace"
   - "Native Mobile"
-last_updated: "2026-10-08"
+last_updated: "2026-11-26"

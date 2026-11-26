@@ -1849,13 +1849,21 @@ def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_
     if ls is not None:
         co.append({"loai": "nam_phai", "chi_tiet": kb.luu_y("iztro")})
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
-    return {"hoi_lai": chung.hoi_lai_neu(pl, "tuvi"), "phan_loai": goi["phan_loai"], "van_han": vh, "bang_chung": goi, "cau_tra_loi": van,
-            "can_cu": can_cu_template(goi) + (goi.get("sach_ghi_hoi") or {}).get("can_cu", []), "truc_quan": truc_quan.tuvi(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_tuvi(goi, ls),
-            "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"],
-            "co_canh_bao": co, "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong",
-            # LG-ĐS: web chỉ tra kho vectơ khi co_the_goi_y (từ khoá không nhận ra, câu bản mệnh/hạn, không đặc biệt).
-            "nhan_ra_y_dinh": bool(pl.get("nhan_ra_y_dinh")), "co_the_goi_y": bool(pl.get("co_the_goi_y")),
-            "y_dinh_tu_goi_y": bool(pl.get("y_dinh_tu_goi_y"))}
+    kq = {"hoi_lai": chung.hoi_lai_neu(pl, "tuvi"), "phan_loai": goi["phan_loai"], "van_han": vh, "bang_chung": goi, "cau_tra_loi": van,
+          "can_cu": can_cu_template(goi) + (goi.get("sach_ghi_hoi") or {}).get("can_cu", []), "truc_quan": truc_quan.tuvi(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_tuvi(goi, ls),
+          "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"],
+          "co_canh_bao": co, "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong",
+          # LG-ĐS: web chỉ tra kho vectơ khi co_the_goi_y (từ khoá không nhận ra, câu bản mệnh/hạn, không đặc biệt).
+          "nhan_ra_y_dinh": bool(pl.get("nhan_ra_y_dinh")), "co_the_goi_y": bool(pl.get("co_the_goi_y")),
+          "y_dinh_tu_goi_y": bool(pl.get("y_dinh_tu_goi_y"))}
+    if ls is not None and sinh:
+        from app.hoidap import luan_hoi_khop as lhk  # noqa: PLC0415
+        lhk.gan_vao_hoi(
+            kq, mo_dun="tuvi", pl=pl, cau_hoi=cau_hoi, sinh=sinh, bc_ds=bc_ds,
+            dung_bc=lambda: _lap_doi_song(sinh, ngay_xem, ls, vh),
+            nguoi_than=bool(NGUOI_THAN.get()),
+        )
+    return kq
 
 
 def _tra_loi_theo_vi(*a, **kw):

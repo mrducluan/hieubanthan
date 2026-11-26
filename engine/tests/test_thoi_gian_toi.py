@@ -176,6 +176,34 @@ def test_tre_nho_khong_sao_han():
     _sach(bc)
 
 
+def test_cot_loi_day_du_an_toan_sao2_va_song_ngu():
+    """Chặng 0 (KH-1 mục 4): điền hộp `cot_loi` ('Điều quan trọng nhất') cho Thời gian tới từ chương 1 miễn phí (`tom_tat`),
+    giữ nguyên tập mã kiểm chứng `ma_mau`, gắn `tham_chieu='cot_loi'` ở chương 1 để không lặp thẻ, và khớp VI/EN."""
+    from app import ngon_ngu
+
+    # 1. Chỉ có ngày sinh: vẫn có 2–3 hộp cốt lõi (năm cá nhân + tháng đáng chú ý / con giáp)
+    bc_ngay = T.lap(SINH, HOM_NAY)
+    assert 2 <= len(bc_ngay["cot_loi"]) <= 3
+    assert all(h["loai"] == "cot_loi" and h["tu_chuong"] == "tom_tat" for h in bc_ngay["cot_loi"])
+    ma_c1_ngay = {h["ma_mau"]: h for h in bc_ngay["chuong"][0]["hop"]}
+    for h in bc_ngay["cot_loi"]:
+        assert h["ma_mau"] in ma_c1_ngay
+        assert ma_c1_ngay[h["ma_mau"]].get("tham_chieu") == "cot_loi"
+
+    # 2. Đủ lá số Tử vi + Bát tự: có 3 hộp cốt lõi, ưu tiên hộp nhất quán hai lá số + tháng xếp hạng + góc phong thuỷ
+    bc_du = T.lap(SINH, HOM_NAY, gioi_tinh="nam", tv_sinh=TV, bt_sinh=BT)
+    assert len(bc_du["cot_loi"]) == 3
+    assert all(h["tu_chuong"] == "tom_tat" and h["ma_mau"].startswith("ds.") for h in bc_du["cot_loi"])
+    assert any(h.get("nguon") == "hai_la_so" for h in bc_du["cot_loi"])
+    _sach(bc_du)
+
+    # 3. Đối xứng mã kiểm chứng VI ↔ EN
+    with ngon_ngu.dung("en"):
+        bc_en = T.lap(SINH, HOM_NAY, gioi_tinh="nam", tv_sinh=TV, bt_sinh=BT)
+    assert [h["ma_mau"] for h in bc_en["cot_loi"]] == [h["ma_mau"] for h in bc_du["cot_loi"]]
+
+
+
 def test_api_nam():
     r = client.get("/v1/thoi-gian-toi/nam")
     j = r.json()

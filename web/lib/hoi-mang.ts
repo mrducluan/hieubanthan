@@ -7,7 +7,7 @@ import { tenTheo, type TenHien } from "@/lib/ten-hien";
 
 /** EN-ALL GĐ 3d: chữ khung hỏi đáp theo ngôn ngữ trang đang mở (bản Việt = chữ cũ). */
 const chuHoi = () => taoChu(CHU_HOI_DAP, null, maNgonNguTrang() === "vi" ? "vi" : "en");
-import type { KetQuaHoi } from "@/components/hoi/KhungChat";
+import type { DoiSongLienKetChat, KetQuaHoi, LuanHoiChat } from "@/components/hoi/KhungChat";
 import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
 import type { KhoiTrucQuan } from "@/components/hoi/TrucQuan";
 
@@ -30,6 +30,8 @@ export interface HoiMangRes {
   error?: string;
   luot?: LuotHoi;
   phan_loai?: { xu_ly?: string; [k: string]: unknown };
+  luan_hoi?: LuanHoiChat;
+  doi_song_lien_ket?: DoiSongLienKetChat;
 }
 
 /** Câu khủng hoảng / từ chối / dẫn hướng tâm linh (engine `chung.DAC_BIET` + từ chối cứng). */
@@ -69,6 +71,8 @@ export async function hoiMang<T extends HoiMangRes>(
     hoTro: d.ho_tro || undefined,
     dacBiet: laDacBiet(d.phan_loai?.xu_ly),
     canCu: d.can_cu?.length ? d.can_cu : undefined,
+    luanHoi: d.luan_hoi,
+    doiSongLienKet: d.doi_song_lien_ket,
     phu: phu?.(d),
     canhBao: d.co_canh_bao?.filter((c) => !boQuaCanhBao.includes(c.loai)).map((c) => c.chi_tiet),
     ghiChu: d.che_do === "llm" ? c("ghi_chu_llm") : c("ghi_chu_ghep"),
