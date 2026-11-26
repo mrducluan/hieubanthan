@@ -3,6 +3,7 @@
 // Chạm trang để bắn thêm; tự dừng khi hết hạt; giảm chuyển động → nơi gọi không render component này.
 import { useEffect, useRef, type RefObject } from "react";
 import { taoPhaoHoa, type DieuKhienPhaoHoa } from "@/lib/phao-hoa";
+import { amChoTrang, amDangTat } from "@/lib/phao-hoa-am";
 
 interface Props {
   /** Đổi giá trị (≥ 1) để bắn một màn pháo hoa mới. */
@@ -15,9 +16,11 @@ interface Props {
   chu?: string[];
   /** Chạm trang để bắn thêm (mặc định bật). */
   chamDeBan?: boolean;
+  /** Phát tiếng pháo + nhạc Năm mới (người dùng đã bấm; tắt được, nhớ trên máy). */
+  tiengDong?: boolean;
 }
 
-export function PhaoHoaCanvas({ kich, neo, bangMau, chu, chamDeBan = true }: Props) {
+export function PhaoHoaCanvas({ kich, neo, bangMau, chu, chamDeBan = true, tiengDong = true }: Props) {
   const cvRef = useRef<HTMLCanvasElement>(null);
   const heRef = useRef<DieuKhienPhaoHoa | null>(null);
   const chuKhoa = (chu ?? []).join("|");
@@ -27,6 +30,7 @@ export function PhaoHoaCanvas({ kich, neo, bangMau, chu, chamDeBan = true }: Pro
     const cv = cvRef.current;
     if (!cv) return;
     const he = taoPhaoHoa({
+      am: tiengDong && !amDangTat() ? amChoTrang() : null,
       canvas: cv, rong: window.innerWidth, cao: window.innerHeight, bangMau: mauKhoa.split("|"), chu: chuKhoa ? chuKhoa.split("|") : [],
       vung: () => {
         const r = neo.current?.getBoundingClientRect();
@@ -41,9 +45,14 @@ export function PhaoHoaCanvas({ kich, neo, bangMau, chu, chamDeBan = true }: Pro
     const doCo = () => he.doiCo(window.innerWidth, window.innerHeight);
     window.addEventListener("resize", doCo);
     return () => { window.removeEventListener("resize", doCo); he.dung(); heRef.current = null; };
-  }, [neo, mauKhoa, chuKhoa]);
+  }, [neo, mauKhoa, chuKhoa, tiengDong]);
 
-  useEffect(() => { if (kich > 0) heRef.current?.banMan(); }, [kich]);
+  useEffect(() => {
+    if (kich <= 0) return;
+    heRef.current?.banMan();
+    // nhạc Năm mới chỉ chơi ở màn đầu (lần bấm đầu); bắn lại thì chỉ có tiếng pháo
+    if (kich === 1 && tiengDong && !amDangTat()) { try { amChoTrang()?.nhac(undefined, 0.46); } catch { /* bỏ qua */ } }
+  }, [kich, tiengDong]);
 
   useEffect(() => {
     if (!chamDeBan || kich < 1) return;

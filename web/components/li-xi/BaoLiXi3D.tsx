@@ -4,7 +4,7 @@
 // Nền Gấm Ép Kim 24K), hiệu ứng hoa rơi nhẹ (bật/tắt) và pháo hoa bung tia khi mở bao. Sạch CSP-2, 0 CDN ngoài, 0 hydration warning.
 import { useEffect, useId, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { RotateCw, Sparkles } from "lucide-react";
+import { RotateCw, Sparkles, Volume2, VolumeX } from "lucide-react";
 import {
   ANH_NEN_GAM_EP_KIM,
   hoaTietTheoMa,
@@ -15,6 +15,7 @@ import {
 } from "@/lib/li-xi-tet";
 import { BieuTrungDinhMui, CanhHoaRoi, CanhHoaXuan, ConDauTrien, PhaoHoaXuan, TextureGamCo } from "./HoaTietTet";
 import { PhaoHoaCanvas } from "./PhaoHoaCanvas";
+import { amDangTat, datAmTat, moKhoaAm } from "@/lib/phao-hoa-am";
 
 interface Props {
   mauThiep: MauThiep;
@@ -53,6 +54,9 @@ export function BaoLiXi3D({
   const chucHien = (loiChuc ?? "").trim() || "Chúc năm Đinh Mùi 2027 vạn sự hanh thông, tâm an trí sáng, mọi quyết định lớn đều đúng thời điểm.";
   const neo = useRef<HTMLDivElement>(null);
   const [lan, setLan] = useState(0);   // số lần bắn pháo hoa (0 = chưa mở)
+  const [tatTieng, setTatTieng] = useState(false);
+  useEffect(() => { setTatTieng(amDangTat()); }, []);
+  function doiTieng() { const moi = !tatTieng; setTatTieng(moi); datAmTat(moi); if (!moi) moKhoaAm(); }
   useEffect(() => { if (daMo) setLan((n) => (n === 0 ? 1 : n)); else setLan(0); }, [daMo]);
   const bangMau = [t.nhan, "#fda4af", "#fde047", "#fff7d6", "#f97316"];
   // Lời chúc đổi (chọn mẫu / gõ) → hiện lại từng chữ sau khi người dùng ngừng gõ ~0,5 giây.
@@ -63,11 +67,12 @@ export function BaoLiXi3D({
   useEffect(() => { if (phatLai > 0) setLan((n) => Math.max(n, 1) + 1); }, [phatLai]);
 
   return (
-    <div ref={neo} className={`relative mx-auto w-full ${compact ? "max-w-sm" : "max-w-md"} select-none`} data-testid="bao-li-xi-3d">
+    <div ref={neo} className={`relative mx-auto w-full ${compact ? "max-w-sm" : "max-w-md"} select-none`} data-testid="bao-li-xi-3d"
+      onPointerDownCapture={() => { if (!daMo) moKhoaAm(); }}>
       {/* Pháo hoa canvas: tên lửa + nhiều kiểu nổ + màn kết; chạm trang để bắn thêm */}
       {daMo && !giam && (
         <div className="pointer-events-none absolute -inset-4 z-30 overflow-visible" aria-hidden data-testid="lx-phao-hoa">
-          <PhaoHoaCanvas kich={lan} neo={neo} bangMau={bangMau} chu={["2027", "PHÚC"]} />
+          <PhaoHoaCanvas kich={lan} neo={neo} bangMau={bangMau} chu={["2027", "PHÚC"]} tiengDong={!tatTieng} />
         </div>
       )}
 
@@ -221,6 +226,18 @@ export function BaoLiXi3D({
             </div>
           )}
 
+          {daMo && !giam && (
+            <button
+              type="button"
+              onClick={doiTieng}
+              aria-pressed={!tatTieng}
+              data-testid="lx-nut-tieng"
+              className="mr-2 mt-2.5 inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-medium transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              style={{ borderColor: t.vien, color: t.nhan }}
+            >
+              {tatTieng ? <VolumeX className="size-3" aria-hidden /> : <Volume2 className="size-3" aria-hidden />} {tatTieng ? "Bật tiếng" : "Tắt tiếng"}
+            </button>
+          )}
           {daMo && !giam && (
             <button
               type="button"

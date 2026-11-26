@@ -12,7 +12,16 @@ interface Hat {
 }
 interface TenLua { x: number; y: number; dich: number; vy: number; mau: string; kieu: KieuPhao | "chu"; chu?: string }
 
+/** Móc âm thanh (tuỳ chọn): x theo tỉ lệ 0..1 ngang canvas. Lõi chỉ gọi, không biết âm thanh làm bằng gì. */
+export interface AmPhaoHoa {
+  len: (x: number) => void;
+  no: (x: number, kieu: string, lon: number) => void;
+  chu: (x: number) => void;
+}
+
 export interface TuyChonPhaoHoa {
+  /** Âm thanh đi kèm từng tên lửa / tiếng nổ (không có thì im lặng). */
+  am?: AmPhaoHoa | null;
   canvas: HTMLCanvasElement;
   rong: number;
   cao: number;
@@ -93,7 +102,8 @@ export function taoPhaoHoa(o: TuyChonPhaoHoa): DieuKhienPhaoHoa {
   };
 
   const no = (x: number, y: number, kieu: KieuPhao | "chu", mau: string, chu?: string) => {
-    if (kieu === "chu") { noChu(x, y, chu ?? "2027", mau); }
+    o.am?.no(x / w, kieu, kieu === "chu" ? 1.25 : kieu === "hai_lop" ? 1.1 : 1);
+    if (kieu === "chu") { o.am?.chu(x / w); noChu(x, y, chu ?? "2027", mau); }
     else {
       const n = Math.round((kieu === "vong" ? 60 : kieu === "lieu" ? 80 : 110) * heSo);
       const phu = chon(mauNen);
@@ -117,6 +127,7 @@ export function taoPhaoHoa(o: TuyChonPhaoHoa): DieuKhienPhaoHoa {
   };
 
   const phong = (x: number, dich: number, y0: number, kieu: TenLua["kieu"], chu?: string) => {
+    o.am?.len(x / w);
     lua.push({ x, y: y0, dich, vy: -ngau(8, 11), mau: chon(mauNen), kieu, chu });
   };
 

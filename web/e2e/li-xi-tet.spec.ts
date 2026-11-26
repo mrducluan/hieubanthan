@@ -150,11 +150,54 @@ test("/li-xi-tet-2027: nút 'Xem thử pháo hoa' bắn pháo (canvas có mặt)
   test.setTimeout(90_000);
   await page.route("**/api/li-xi/thong-tin", (r) => r.fulfill({ json: TT_TAT }));
   await page.emulateMedia({ reducedMotion: "no-preference" });
+  // CSP chặn fetch(blob:) → test tự gom các mảnh dữ liệu mà MediaRecorder trả (mã sản phẩm không đổi).
+  await page.addInitScript(() => {
+    const w = window as unknown as { __manh: Blob[] };
+    w.__manh = [];
+    const mo = Object.getOwnPropertyDescriptor(MediaRecorder.prototype, "ondataavailable");
+    Object.defineProperty(MediaRecorder.prototype, "ondataavailable", {
+      configurable: true,
+      get() { return mo?.get?.call(this); },
+      set(f: ((e: BlobEvent) => void) | null) { mo?.set?.call(this, f && ((e: BlobEvent) => { if (e.data.size) w.__manh.push(e.data); f(e); })); },
+    });
+  });
   await page.goto("/li-xi-tet-2027");
   await page.getByTestId("nut-xem-thu-phao").click();
   await expect(page.getByTestId("lx-phao-canvas")).toBeAttached();
   await expect(page.getByTestId("bao-li-xi-3d")).toContainText("Đã mở bao lì xì");
   await page.getByTestId("lx-nut-quay-video").scrollIntoViewIfNeeded();
+  await expect(page.getByTestId("lx-video-tieng")).toBeChecked();   // mặc định kèm tiếng pháo + nhạc Năm mới
   await page.getByTestId("lx-nut-quay-video").click();
   await expect(page.getByTestId("lx-video-xem")).toBeVisible({ timeout: 45_000 });   // ~10 giây thời gian thực
+  // Video thật sự có ÂM THANH (không im lặng): giải mã luồng âm của tệp vừa quay rồi đo biên độ.
+  const kq = await page.evaluate(async () => {
+    const buf = await new Blob((window as unknown as { __manh: Blob[] }).__manh).arrayBuffer();
+    const ctx = new AudioContext();
+    try {
+      const a = await ctx.decodeAudioData(buf.slice(0));
+      const d = a.getChannelData(0);
+      let tong = 0, dinh = 0;
+      for (let i = 0; i < d.length; i += 16) { const x = Math.abs(d[i]!); tong += x * x; if (x > dinh) dinh = x; }
+      return { giay: a.duration, rms: Math.sqrt(tong / (d.length / 16)), dinh };
+    } catch (e) { return { loi: String(e) }; } finally { void ctx.close(); }
+  });
+  expect(kq, JSON.stringify(kq)).toHaveProperty("rms");
+  expect((kq as { rms: number }).rms).toBeGreaterThan(0.004);
+  expect((kq as { giay: number }).giay).toBeGreaterThan(8);
+});
+
+test("/li-xi-tet-2027: nút Tắt tiếng / Bật tiếng nhớ trên máy; bắn pháo hoa có tiếng (tạo ngữ cảnh âm thanh)", async ({ page }) => {
+  await page.route("**/api/li-xi/thong-tin", (r) => r.fulfill({ json: TT_TAT }));
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.addInitScript(() => { (window as unknown as { __nb: number }).__nb = 0; const goc = window.AudioContext; window.AudioContext = class extends goc { constructor(o?: AudioContextOptions) { super(o); (window as unknown as { __nb: number }).__nb++; } } as typeof AudioContext; });
+  await page.goto("/li-xi-tet-2027");
+  await page.getByTestId("nut-xem-thu-phao").click();
+  await expect(page.getByTestId("lx-nut-tieng")).toContainText("Tắt tiếng");
+  await expect.poll(() => page.evaluate(() => (window as unknown as { __nb: number }).__nb)).toBeGreaterThan(0);
+  await page.getByTestId("lx-nut-tieng").click();
+  await expect(page.getByTestId("lx-nut-tieng")).toContainText("Bật tiếng");
+  expect(await page.evaluate(() => localStorage.getItem("hbt.am_phao.tat"))).toBe("1");
+  await page.reload();
+  await page.getByTestId("nut-xem-thu-phao").click();
+  await expect(page.getByTestId("lx-nut-tieng")).toContainText("Bật tiếng");   // nhớ lựa chọn tắt
 });

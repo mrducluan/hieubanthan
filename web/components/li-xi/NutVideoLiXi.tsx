@@ -24,6 +24,7 @@ export function NutVideoLiXi({ mau, hoa, nenGam, tenNguoiTang, loiChuc, nguon }:
   const [tienDo, setTienDo] = useState(0);
   const [kq, setKq] = useState<{ ket: KetQuaVideo; url: string } | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
+  const [kemTieng, setKemTieng] = useState(true);
   const urlRef = useRef<string | null>(null);
 
   useEffect(() => { setDuoc(hoTroQuayVideo()); }, []);
@@ -34,11 +35,11 @@ export function NutVideoLiXi({ mau, hoa, nenGam, tenNguoiTang, loiChuc, nguon }:
     if (urlRef.current) { URL.revokeObjectURL(urlRef.current); urlRef.current = null; }
     setKq(null);
     try {
-      const ket = await quayVideoLiXi({ mau, hoa, nenGam, tenNguoiTang, loiChuc, onTienDo: setTienDo });
+      const ket = await quayVideoLiXi({ mau, hoa, nenGam, tenNguoiTang, loiChuc, kemTieng, onTienDo: setTienDo });
       const url = URL.createObjectURL(ket.blob);
       urlRef.current = url;
       setKq({ ket, url });
-      ghi("share_created", { kind: "li_xi_video", nguon, mau_thiep: mau, dinh_dang: ket.duoi });
+      ghi("share_created", { kind: "li_xi_video", nguon, mau_thiep: mau, dinh_dang: ket.duoi, co_tieng: ket.coTieng });
     } catch (e) {
       setLoi(e instanceof Error ? e.message : "Chưa quay được video, bạn thử lại nhé.");
     } finally {
@@ -66,6 +67,12 @@ export function NutVideoLiXi({ mau, hoa, nenGam, tenNguoiTang, loiChuc, nguon }:
   }
   return (
     <div className="space-y-2.5" data-testid="lx-video">
+      {!kq && !dang && (
+        <label className="flex cursor-pointer items-start gap-2 text-[11px] leading-relaxed text-fg-muted">
+          <input type="checkbox" checked={kemTieng} onChange={(e) => setKemTieng(e.target.checked)} className="mt-0.5 accent-[var(--gold,#e9c46a)]" data-testid="lx-video-tieng" />
+          <span>Kèm tiếng pháo hoa và giai điệu Năm mới (tạo tại máy bạn, không dùng bản thu của ai). Nếu trình duyệt không ghi được âm thanh, video vẫn có hình như thường.</span>
+        </label>
+      )}
       {!kq && (
         <Button type="button" variant="secondary" className="w-full" onClick={() => void quay()} disabled={dang} data-testid="lx-nut-quay-video">
           {dang ? <Loader2 className="animate-spin" aria-hidden /> : <Film aria-hidden className="text-gold" />}
