@@ -100,7 +100,7 @@ _DAU_VE_SO_HUU = re.compile(_DEM_DAU + _NGUOI_CAN_SO_HUU + r"(?: (?:cu|moi|ruot|
 _DAU_VE_TRAN = re.compile(_DEM_DAU + _NGUOI_DUNG_DAU + r"\b")
 
 
-_TEN_RIENG = re.compile(r"(?:^|[,.;:!?\n]\s*)(?:[Tt]hằng|[Cc]on bé|[Aa]nh|[Cc]hị|[Ôô]ng|[Bb]à|[Cc]ô|[Cc]hú|[Bb]ạn|[Ss]ếp|[Ll]ão|[Mm]ụ)\s+(\w+)")
+_TEN_RIENG = re.compile(r"(?:^|[,.;:!?\n])[ \t]*(?:[Tt]hằng|[Cc]on bé|[Aa]nh|[Cc]hị|[Ôô]ng|[Bb]à|[Cc]ô|[Cc]hú|[Bb]ạn|[Ss]ếp|[Ll]ão|[Mm]ụ)[ \t]+(\w+)")
 _KHONG_PHAI_TEN = {"Tôi", "Toi", "Mình", "Minh", "Em", "Ơi", "Oi", "Ạ", "A"}
 
 
