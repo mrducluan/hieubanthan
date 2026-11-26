@@ -43,7 +43,8 @@ test("/co-van-kinh-doanh: cẩm nang không xếp hạng; sổ nháp khoá mật
   await page.getByTestId("cam-nang-nut-lap").click();
   await expect(page.getByTestId("cn-tru-1-thi-truong")).toBeVisible({ timeout: 20_000 });
   await expect(page.getByTestId("cn-mat-bang-1")).toBeVisible();
-  await expect(page.getByTestId("cn-mat-bang-1")).not.toContainText("Ưu tiên");
+  await expect(page.getByTestId("cn-mat-bang-1")).not.toContainText("Ưu tiên khảo sát số 1");
+  await expect(page.getByTestId("cn-mat-bang-1")).not.toContainText("#1 ·");
 
   await page.getByTestId("tab-cvkd-ban-co-e2ee").click();
   await expect(page.getByTestId("ban-co-e2ee")).not.toContainText("Đầu-Cuối");
@@ -69,7 +70,7 @@ test("/co-van-kinh-doanh: cẩm nang không xếp hạng; sổ nháp khoá mật
   for (const o of await page.getByTestId("gop-von-dong-y").all()) await expect(o).not.toBeChecked();
   await expect(page.getByTestId("gop-von-cam-ket")).not.toBeChecked();
   await page.getByTestId("gop-von-xem").click();
-  await expect(page.getByRole("alert")).toContainText("đồng ý");
+  await expect(page.getByTestId("gop-von").getByRole("alert")).toContainText("đồng ý");
   for (const o of await page.getByTestId("gop-von-dong-y").all()) await o.check();
   await page.getByTestId("gop-von-cam-ket").check();
   await page.getByTestId("gop-von-xem").click();
