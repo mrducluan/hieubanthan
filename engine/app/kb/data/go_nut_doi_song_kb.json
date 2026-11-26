@@ -1,8 +1,28 @@
 {
-  "_nguon": "Chặng 1 — Kho Gỡ Nút Đời Sống chuyên sâu cho 4 mạch trăn trở lớn người dùng hay hỏi nhất: (1) Phục hồi & mở lòng sau ly hôn/đổ vỡ, (2) Vợ chồng khắc khẩu lục đục, (3) Hợp tác góp vốn & nguyên tắc phân vai, (4) Giải oan hai mặt các cách cục hay bị nơi khác phán dọa. Ban biên tập soạn theo tinh thần nhân văn, không định mệnh, gắn trực tiếp với dữ kiện lá số.",
+  "_nguon": "Chặng 1 — Kho Gỡ Nút Đời Sống chuyên sâu cho 4 mạch trăn trở lớn người dùng hay hỏi nhất: (1) Phục hồi & mở lòng sau ly hôn/đổ vỡ, (2) Vợ chồng khắc khẩu lục đục, (3) Hợp tác góp vốn & nguyên tắc phân vai, (4) Giải oan hai mặt các cách cục hay bị nơi khác phán dọa. Ban biên tập soạn theo tinh thần nhân văn, không định mệnh, gắn trực tiếp với dữ kiện đã tính của lá số.",
   "source_id": "go_nut_doi_song",
   "school_id": "huyen_hoc_ung_dung",
   "trang_thai": "nhap_ai",
+  "mau_la_so": {
+    "vcd_du_kien": "Trên lá số của bạn: cung {cung} ({chi}) Vô Chính Diệu, mượn chính tinh cung đối ({cung_doi}: {sao_muon}).",
+    "vcd_khong_sao": "các sao hội chiếu",
+    "vcd_diem_manh": " Khi mượn lực {sao}, điểm mạnh bạn dùng được là {diem_manh}.",
+    "vcd_goc_nhin": "Cung {cung} Vô Chính Diệu không phải cung trống hay kém may, mà hoạt động như tấm gương linh hoạt đón lực từ cung đối ({sao_muon}).{diem_sang}",
+    "kk_du_kien": "Trên lá số của bạn: {sao} đóng tại cung {cung} ({chi}).",
+    "kk_goc_nhin": "Ở cung {cung}, {sao} có hai mặt rõ trong kho tri thức: mặt sáng là {diem_manh}; mặt cần canh là {mat_toi}.",
+    "kk_diem_manh_mac_dinh": "tư duy phá cách, xoay chuyển nhanh trước biến động",
+    "kk_mat_toi_mac_dinh": "dễ quyết vội theo cảm hứng hoặc hụt sức nếu tất tay",
+    "sao_du_kien": "Trên lá số của bạn: sao {sao}{do_sang} toạ thủ tại cung {cung} ({chi}).",
+    "sao_goc_nhin": "Kho tri thức ghi nhận {sao} ở hai mặt công bằng: điểm mạnh là {diem_manh}; chỗ dễ vấp là {mat_toi}. {chi_tiet}",
+    "sao_tu_soi": "Câu tự soi cho nét {sao} trên lá số của bạn: {cau_tu_soi}",
+    "tt_tang_can": "tàng can ẩn trong địa chi",
+    "tt_du_kien": "Trên tứ trụ của bạn: {ten_tt} hiện diện tại {vi_tri}.",
+    "tt_goc_nhin": "{y_nghia} Mặt sáng bạn đang sở hữu là {diem_manh}; mặt cần tiết chế khi quá đà là {mat_toi}.",
+    "tt_tu_soi": "Câu tự soi từ tứ trụ của bạn: {cau_tu_soi}",
+    "bc_gop_von": "Theo lá số của bạn ({ten_chuong}): {tra_loi}",
+    "bc_sau_do_vo": "Điểm tựa từ lá số của bạn ({ten_chuong}): {giai_thich}",
+    "bc_khac_khau": "Cách chung sống hợp lá số của bạn: {song_cung}"
+  },
   "mach": {
     "sau_do_vo": {
       "tieu_de": "Nhịp phục hồi & mở lòng sau một lần dang dở",
@@ -33,13 +53,7 @@
     },
     "go_loi_phan_doa": {
       "tieu_de": "Nhìn công bằng hai mặt về nét lá số bạn đang lo lắng",
-      "goc_nhin_hai_mat": "Sách xưa viết trong bối cảnh xã hội nông nghiệp ưa ổn định tuyệt đối nên thường dùng từ rất nặng với các thế lá số mạnh mẽ, độc lập hoặc nhiều biến động (như Vô Chính Diệu, Không Kiếp, Thất Sát, Thương Quan). Trong xã hội hiện đại, chính những cấu trúc này lại là nguồn lực rất sắc bén cho sự linh hoạt, lối nghĩ mới mẻ, tay nghề chuyên sâu và bản lĩnh tự lập khi đặt đúng chỗ.",
-      "rieng": {
-        "vo_chinh_dieu": "Cung Vô Chính Diệu giống như tấm gương linh hoạt: lúc trẻ dễ băn khoăn tìm hướng, nhưng nhờ không bị đóng khung cứng nên khả năng thích nghi môi trường mới, làm cố vấn và điều phối lại rất giỏi.",
-        "khong_kiep": "Địa Không – Địa Kiếp mang nhịp nhanh, dám nghĩ khác thường và xoay chuyển gắt: nếu đầu tư cảm tính thì dễ hụt, nhưng đặt vào công nghệ, sáng tạo, xử lý khủng hoảng hoặc việc ngắn hạn rõ mục tiêu thì rất nhạy bén.",
-        "that_sat": "Thất Sát là nét quyết đoán, chịu áp lực giỏi và dám gánh việc khó: chỉ cần rèn sự mềm mỏng khi lắng nghe người thân là biến sức mạnh cứng rắn thành chỗ dựa vững vàng.",
-        "thuong_quan": "Thương Quan là tài ăn nói, óc phản biện, mỹ cảm và năng lực cải tiến vượt khuôn mẫu: người có nét này hợp công việc có tự do chuyên môn và bạn đời biết tôn trọng không gian riêng, hoàn toàn không phải nhãn xấu cố định."
-      },
+      "goc_nhin_hai_mat": "Sách xưa viết trong bối cảnh xã hội nông nghiệp ưa ổn định tuyệt đối nên thường dùng từ rất nặng với các thế lá số mạnh mẽ, độc lập hoặc nhiều biến động. Trong xã hội hiện đại, chính những cấu trúc này lại là nguồn lực sắc bén cho sự linh hoạt, tay nghề chuyên sâu và bản lĩnh tự lập khi đặt đúng môi trường.",
       "viec_thuc_te": [
         "Đọc thế lá số như bản hướng dẫn sử dụng cá tính của mình: phát huy đúng môi trường cần nét mạnh ấy thay vì tự lo sợ vì một nhãn gọi cũ",
         "Giữ hai nguyên tắc an toàn thực tế là quỹ dự phòng tài chính và nhịp trao đổi ôn hoà với người thương để trung hoà mặt sắc cạnh"

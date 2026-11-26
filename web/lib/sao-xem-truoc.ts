@@ -1,65 +1,135 @@
-// SAO-2 — cắt báo cáo "Luận giải toàn bộ" thành bản xem trước (thuần, không I/O — dùng ở máy chủ, có test).
-// N chương đầu giữ trọn; chương sau CHỈ còn tiêu đề + lời mời xem tiếp (điểm nhấn đã tính + câu hỏi mở) do engine
-// soạn — đoạn văn bị bỏ hẳn khỏi phản hồi (không lộ qua tab Network), không phải làm mờ bằng CSS.
+// SAO-2 v2.0 (Allowlist mặc định khoá) — cắt báo cáo "Luận giải toàn bộ" thành bản xem trước (thuần, không I/O).
+// Mọi khoá cấp gốc phải được khai báo tường minh trong KHOA_CONG_KHAI_SAO2 hoặc KHOA_CAT_RIENG_SAO2:
+// nếu Engine sinh thêm khoá cấp gốc mới chưa phân loại khi `so_khoa > 0`, hàm mặc định BỎ HẲN khỏi JSON trả về client
+// (không bao giờ rò nội dung chương khoá vì quên cập nhật Denylist!).
 
-export type MoiXem = { diem_nhan: string; cau_hoi: string; so_doan: number; phut_doc: number;
-  /** LH-1: các CÂU HỎI chương trả lời (chỉ câu hỏi — không có câu trả lời) + số người có chân dung trong chương. */
-  cau_tra_loi?: { ma: string; cau: string }[]; so_nguoi?: number };
+import { createHmac } from "node:crypto";
+
+export type MoiXem = {
+  diem_nhan: string;
+  cau_hoi: string;
+  so_doan: number;
+  phut_doc: number;
+  cau_tra_loi?: { ma: string; cau: string }[];
+  so_nguoi?: number;
+};
 export type ChuongDay = { ma: string; tieu_de: string; doan: string[]; van_ai?: string; moi_xem?: MoiXem; [k: string]: unknown };
 export type ChuongKhoa = { ma: string; tieu_de: string; khoa: true; moi_xem: MoiXem };
 export type BaoCaoDay = { chuong: ChuongDay[]; [k: string]: unknown };
 
-export function catXemTruoc<T extends BaoCaoDay>(bc: T, mienPhi: number): Omit<T, "chuong"> & { chuong: (ChuongDay | ChuongKhoa)[]; so_khoa: number } {
+/** Các trường metadata / header cấp gốc an toàn được giữ nguyên khi `so_khoa > 0` (đối chứng toàn bộ 5 route trong mau.json.gz). */
+export const KHOA_CONG_KHAI_SAO2 = new Set([
+  "engine_version",
+  "mo_dun",
+  "phien_ban",
+  "phai",
+  "ten",
+  "ho_ten",
+  "ngay_sinh",
+  "nam",
+  "cac_nam",
+  "nam_toi",
+  "ngay_xem",
+  "thieu",
+  "gio_tam",
+  "vai_doc",
+  "loi_vai_doc",
+  "nguon",
+  "source_id",
+  "school_id",
+  "trang_thai",
+  "can_doi_chieu",
+  "dien_dat",
+  "ket",
+  "phi",
+  "co_canh_bao",
+  "ten_hien",
+  "ma_tran",
+  "mon_co",
+  "so_mang_cung",
+  "so_mang_khac",
+  "quy_uoc_duong_doi",
+  "tuoi_mu",
+  "so_chu_dao",
+  "con_so",
+  "bieu_do_ngay_sinh",
+]);
+
+/** Các trường cấp gốc mang nội dung chương sau -> bắt buộc đi qua bộ lọc cắt riêng theo tập chương mở `mo`. */
+export const KHOA_CAT_RIENG_SAO2 = new Set([
+  "chuong",
+  "so_khoa",
+  "cot_loi",
+  "thoi_gian_bieu",
+  "luu_y_mang",
+  "nguoi_quanh",
+  "ung_dung_co_dien",
+]);
+
+export function catXemTruoc<T extends BaoCaoDay>(
+  bc: T,
+  mienPhi: number,
+): Omit<T, "chuong"> & { chuong: (ChuongDay | ChuongKhoa)[]; so_khoa: number } {
   const n = Math.max(0, Math.min(mienPhi, bc.chuong.length));
   const khoa = bc.chuong.slice(n).map((c): ChuongKhoa => ({
-    ma: c.ma, tieu_de: c.tieu_de, khoa: true,
+    ma: c.ma,
+    tieu_de: c.tieu_de,
+    khoa: true,
     moi_xem: c.moi_xem ?? { diem_nhan: "", cau_hoi: "Chương này nói gì về chính bạn?", so_doan: c.doan.length, phut_doc: 1 },
   }));
-  const out: Omit<T, "chuong"> & { chuong: (ChuongDay | ChuongKhoa)[]; so_khoa: number } =
-    { ...bc, chuong: [...bc.chuong.slice(0, n), ...khoa], so_khoa: khoa.length };
-  // LG-ĐS: báo cáo đời sống có trường ngoài `chuong` mang nội dung của chương sau — không được lộ khi chương đó khoá.
-  if (khoa.length) {
-    const mo = new Set(bc.chuong.slice(0, n).map((c) => c.ma));
-    const o = out as Record<string, unknown>;
-    if (Array.isArray(bc.cot_loi)) {
-      o.cot_loi = (bc.cot_loi as { tu_chuong?: unknown }[]).filter((h) => typeof h.tu_chuong === "string" && mo.has(h.tu_chuong));
-    }
-    if ("thoi_gian_bieu" in bc && !mo.has("cuoc_doi")) delete o.thoi_gian_bieu;
-    // MT-ĐS B6: khung "Cần lưu ý ở từng mảng" — dòng của chương khoá chỉ giữ tên + mức (lời và việc nên làm bỏ hẳn).
-    if (Array.isArray(bc.luu_y_mang)) {
-      o.luu_y_mang = (bc.luu_y_mang as Record<string, unknown>[]).map((r) =>
-        typeof r.tu_chuong === "string" && mo.has(r.tu_chuong) ? r
-          : { ma: r.ma, ten: r.ten, muc: r.muc, nhan_muc: r.nhan_muc, tu_chuong: r.tu_chuong, khoa: true });
-    }
-    // LH-1: bản đồ "Người quanh bạn" — người thuộc chương khoá chỉ giữ tên + mức (chân dung, tác động bỏ hẳn).
-    if (Array.isArray(bc.nguoi_quanh)) {
-      o.nguoi_quanh = (bc.nguoi_quanh as Record<string, unknown>[]).map((r) =>
-        typeof r.tu_chuong === "string" && mo.has(r.tu_chuong) ? r
-          : { ma: r.ma, ten: r.ten, muc: r.muc, nhan_muc: r.nhan_muc, tu_chuong: r.tu_chuong, khoa: true });
-    }
-    // Chặng 1: khung "Ứng dụng Ngũ hành cổ điển" của Bát tự (đọc từ `ngu_hanh`) và Tử vi (đọc từ `su_nghiep`) chỉ mở trọn
-    // khi chương nguồn đã mở; khi còn khoá chỉ giữ tiêu đề + nguyên tắc ưu tiên, cắt bảng chi tiết ở máy chủ.
-    if (bc.ung_dung_co_dien && typeof bc.ung_dung_co_dien === "object") {
-      const u = bc.ung_dung_co_dien as Record<string, unknown>;
-      const canMo = u.ma === "battu_co_dien" ? "ngu_hanh" : u.ma === "tuvi_co_dien" ? "su_nghiep" : null;
-      if (canMo && !mo.has(canMo)) {
-        o.ung_dung_co_dien = {
-          khoa: true,
-          ma: u.ma,
-          tieu_de: u.tieu_de,
-          nguyen_tac_uu_tien: u.nguyen_tac_uu_tien,
-        };
-      }
+
+  if (!khoa.length) {
+    return { ...bc, chuong: [...bc.chuong], so_khoa: 0 };
+  }
+
+  const mo = new Set(bc.chuong.slice(0, n).map((c) => c.ma));
+  const out: Record<string, unknown> = {};
+
+  // 1. Chỉ chép sang `out` những khoá nằm trong Allowlist công khai
+  for (const [k, v] of Object.entries(bc)) {
+    if (KHOA_CONG_KHAI_SAO2.has(k)) {
+      out[k] = v;
     }
   }
-  return out;
-}
 
-import { createHmac } from "node:crypto";
+  // 2. Xử lý từng khoá thuộc nhóm cắt riêng theo tập chương đã mở `mo`
+  out.chuong = [...bc.chuong.slice(0, n), ...khoa];
+  out.so_khoa = khoa.length;
+
+  if (Array.isArray(bc.cot_loi)) {
+    out.cot_loi = (bc.cot_loi as { tu_chuong?: unknown }[]).filter((h) => typeof h.tu_chuong === "string" && mo.has(h.tu_chuong));
+  }
+  if ("thoi_gian_bieu" in bc && mo.has("cuoc_doi")) {
+    out.thoi_gian_bieu = bc.thoi_gian_bieu;
+  }
+  if (Array.isArray(bc.luu_y_mang)) {
+    out.luu_y_mang = (bc.luu_y_mang as Record<string, unknown>[]).map((r) =>
+      typeof r.tu_chuong === "string" && mo.has(r.tu_chuong)
+        ? r
+        : { ma: r.ma, ten: r.ten, muc: r.muc, nhan_muc: r.nhan_muc, tu_chuong: r.tu_chuong, khoa: true },
+    );
+  }
+  if (Array.isArray(bc.nguoi_quanh)) {
+    out.nguoi_quanh = (bc.nguoi_quanh as Record<string, unknown>[]).map((r) =>
+      typeof r.tu_chuong === "string" && mo.has(r.tu_chuong)
+        ? r
+        : { ma: r.ma, ten: r.ten, muc: r.muc, nhan_muc: r.nhan_muc, tu_chuong: r.tu_chuong, khoa: true },
+    );
+  }
+  if (bc.ung_dung_co_dien && typeof bc.ung_dung_co_dien === "object") {
+    const u = bc.ung_dung_co_dien as Record<string, unknown>;
+    const canMo = u.ma === "battu_co_dien" ? "ngu_hanh" : u.ma === "tuvi_co_dien" ? "su_nghiep" : null;
+    out.ung_dung_co_dien =
+      canMo && !mo.has(canMo)
+        ? { khoa: true, ma: u.ma, tieu_de: u.tieu_de, nguyen_tac_uu_tien: u.nguyen_tac_uu_tien }
+        : u;
+  }
+
+  return out as Omit<T, "chuong"> & { chuong: (ChuongDay | ChuongKhoa)[]; so_khoa: number };
+}
 
 /** D1 (LH-3): câu trả lời mẫu duy nhất được mở miễn phí ở chương 1 ngay cả khi đang thu Sao. */
 export const CAU_MAU_MIEN_PHI = { chuong: "su_nghiep", ma: "nghe_hop" } as const;
-/** Thứ tự chương cố định của Tử vi & Bát tự để suy tập chương mở theo `luan_giai.chuong_mien_phi + chuongDuocTang`. */
 export const THU_TU_CHUONG_HOI: Record<"tuvi" | "battu", readonly string[]> = {
   tuvi: ["tong_quan", "cuoc_doi", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh", "suc_khoe", "quan_he", "nha_cua", "duong_bay", "nam_nay", "van_han", "loi_khuyen"],
   battu: ["tong_quan", "ngu_hanh", "cuoc_doi", "su_nghiep", "tien_bac", "tinh_cam", "gia_dinh", "hoc_tap", "suc_khoe", "quan_he", "nam_nay", "van_han", "loi_khuyen"],
@@ -76,7 +146,6 @@ export interface QuyenDocHoi {
   chuongMo?: ReadonlySet<string>;
 }
 
-/** Luật quyết định quyền đọc `luan_hoi` / `doi_song_lien_ket` trong hỏi đáp (thuần, test được mọi nhánh). */
 export function xetQuyenDocHoi(p: {
   coLaSo: boolean;
   mienPhiAnh: boolean;
@@ -97,7 +166,6 @@ export function xetQuyenDocHoi(p: {
   return { daMoToanBo: false, chuongMo: tapChuongMoHoi(p.moDun, p.soChuongMo) };
 }
 
-/** Bỏ `tinh_trang` khỏi `la_so` để khoá giao dịch "đã mở hôm nay" giữa `/luan-giai` và `/hoi` khớp từng byte. */
 export function boTinhTrangKhoa(d: Record<string, unknown>): Record<string, unknown> {
   const ls = d.la_so;
   if (!ls || typeof ls !== "object" || !("tinh_trang" in ls)) return d;
@@ -109,9 +177,6 @@ export function taoKhoaGiaoDichLuanGiai(biMatMay: string, moDun: string, duLieuD
   return `lg:${createHmac("sha256", biMatMay).update(`${moDun}|${JSON.stringify(duLieuDaBoTinhTrang)}|${ngayVn}`).digest("hex").slice(0, 40)}`;
 }
 
-/** D2 + SAO-2: khi báo cáo của mảng đang khoá với người xem, cả `luan_hoi` (trừ câu mẫu miễn phí D1 hoặc chương nằm trong `chuongMo`)
- *  lẫn `doi_song_lien_ket` (trừ chương nằm trong `chuongMo`) đều bị cắt sạch `tra_loi`, `giai_thich`, `nhan`, `ma_mau`, `tieu_de_hop`
- *  ở máy chủ — không lộ qua tab Network và không hiện nút KiemChung cho nội dung người dùng chưa mở. */
 export function catLuanHoiChat<T extends Record<string, unknown>>(
   body: T,
   quyen: boolean | QuyenDocHoi,
@@ -156,4 +221,3 @@ export function catLuanHoiChat<T extends Record<string, unknown>>(
   }
   return out;
 }
-

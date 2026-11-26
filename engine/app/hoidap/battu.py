@@ -904,14 +904,17 @@ def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_
           "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.battu(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_battu(pl)}
     if ls is not None and sinh:
         from app.hoidap import luan_hoi_khop as lhk  # noqa: PLC0415
-        from app.luangiai import battu_doi_song as bds  # noqa: PLC0415
+        from app.luangiai import battu_doi_song as bds, go_nut_doi_song as gnds  # noqa: PLC0415
+        _lay_bc = lambda: bds.lap(sinh, ngay_xem, ls=ls)  # noqa: E731
         lhk.gan_vao_hoi(
             kq, mo_dun="battu", pl=pl, cau_hoi=cau_hoi, sinh=sinh, bc_ds=bc_ds,
-            dung_bc=lambda: bds.lap(sinh, ngay_xem, ls=ls),
+            dung_bc=_lay_bc,
             nguoi_than=False,
         )
-    from app.luangiai import go_nut_doi_song as gnds  # noqa: PLC0415
-    gnds.gan_vao_hoi(kq, pl=pl, cau_hoi=cau_hoi)
+        gnds.gan_vao_hoi(
+            kq, pl=pl, cau_hoi=cau_hoi, mo_dun="battu", ls=ls, sinh=sinh,
+            bc_ds=bc_ds, dung_bc=_lay_bc, nguoi_than=False,
+        )
     return kq
 
 

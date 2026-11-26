@@ -1,8 +1,8 @@
 "use client";
-// Chặng 1 — Công tắc 2 Chế độ "Zero-Bloat": [Đời sống & Hành động] ⇄ [Học thuật Cổ điển & Ngũ hành].
-// Lưu lựa chọn trên máy (localStorage) và đồng bộ tức thì giữa báo cáo & khung chat trên cùng trang, không lệch SSR hydrate.
+// Chặng 1 (nâng cấp) — Công tắc 2 Chế độ: [Đời sống & Hành động] ⇄ [Đối chiếu Cổ điển].
+// Bật 'co_dien' tự mở toàn bộ 'Vì sao nói vậy' trên bài luận và hiện khung đối chiếu sách xưa & sơ đồ thật (không bịa màu/giờ/hướng).
 import { useEffect, useState, type ReactNode } from "react";
-import { BookOpen, Compass, LockKeyhole, Sparkles } from "lucide-react";
+import { BookOpen, Compass, LockKeyhole, Scale, Sparkles } from "lucide-react";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 import { useChuBaoCao } from "./chu-bao-cao";
@@ -80,7 +80,6 @@ export function KhungUngDungCoDien({ u, moKhoa }: { u?: UngDungCoDien; moKhoa?: 
         <h3 id="lg-ung-dung-co-dien-td" className="font-serif text-xl text-fg">{u.tieu_de}</h3>
       </div>
       <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{u.nguyen_tac_uu_tien}</p>
-      {u.tom_tat_dung_than && <p className="mt-2 text-sm font-medium text-gold">{u.tom_tat_dung_than}</p>}
 
       {u.khoa ? (
         <div className="mt-3 rounded-xl border border-line/70 bg-surface/40 p-3.5 text-sm text-fg-muted" data-testid="lg-ung-dung-co-dien-khoa">
@@ -92,32 +91,45 @@ export function KhungUngDungCoDien({ u, moKhoa }: { u?: UngDungCoDien; moKhoa?: 
         </div>
       ) : (
         <>
-          {u.hanh_ung_dung && u.hanh_ung_dung.length > 0 && (
-            <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2">
-              {u.hanh_ung_dung.map((h) => (
-                <div key={h.hanh_ma} className="rounded-xl border border-line/70 bg-bg/60 p-3.5 text-sm">
-                  <p className="font-semibold text-gold">{h.ten_hanh}</p>
-                  <dl className="mt-2 space-y-1.5 text-xs leading-relaxed text-fg-muted">
-                    <div><dt className="inline font-medium text-fg">{chu("cd.mau_sac")} </dt><dd className="inline">{h.mau_sac}</dd></div>
-                    <div><dt className="inline font-medium text-fg">{chu("cd.chat_lieu")} </dt><dd className="inline">{h.chat_lieu}</dd></div>
-                    <div><dt className="inline font-medium text-fg">{chu("cd.phuong_vi")} </dt><dd className="inline">{h.phuong_vi}</dd></div>
-                    <div><dt className="inline font-medium text-fg">{chu("cd.khung_gio")} </dt><dd className="inline">{h.khung_gio}</dd></div>
-                  </dl>
-                  {h.thoi_quen.length > 0 && (
-                    <div className="mt-2.5 border-t border-line/50 pt-2 text-xs text-fg-muted">
-                      <p className="font-medium text-fg">{chu("cd.thoi_quen")}</p>
-                      <ul className="mt-1 list-disc space-y-1 pl-4">
-                        {h.thoi_quen.map((q) => <li key={q}>{q}</li>)}
-                      </ul>
-                    </div>
-                  )}
+          {u.diem_hoc_thuat && u.diem_hoc_thuat.length > 0 && (
+            <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2" data-testid="lg-diem-hoc-thuat">
+              {u.diem_hoc_thuat.map((d) => (
+                <div key={d.nhan} className="rounded-xl border border-line/70 bg-bg/60 p-3.5 text-sm">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-gold">{d.nhan}</p>
+                  <p className="mt-1.5 leading-relaxed text-fg">{d.noi_dung}</p>
                 </div>
               ))}
             </div>
           )}
 
+          {u.sach && u.sach.length > 0 && (
+            <div className="mt-4 space-y-2.5" data-testid="lg-sach-co-dien">
+              <p className="text-xs font-semibold uppercase tracking-wider text-gold">{chu("cd.sach_xua")}</p>
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+                {u.sach.map((s, idx) => (
+                  <div key={`${s.sach}-${idx}`} className="rounded-xl border border-line/70 bg-bg/60 p-3.5 text-sm">
+                    <p className="text-xs font-medium text-gold/90">{s.sach}{s.ve ? ` · ${s.ve}` : ""}</p>
+                    <p className="mt-1.5 text-xs leading-relaxed text-fg">{s.y}</p>
+                    {s.nguyen_van && (
+                      <details className="mt-2 text-xs text-fg-faint">
+                        <summary className="cursor-pointer hover:text-fg-muted">{chu("cd.nguyen_van")}</summary>
+                        <p className="mt-1 font-serif text-fg-muted">{s.nguyen_van}</p>
+                      </details>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {u.ghi_chu_so_do && (
+            <p className="mt-3 rounded-xl border border-moon/30 bg-moon/5 px-3.5 py-2.5 text-xs leading-relaxed text-fg-muted" data-testid="lg-ghi-chu-so-do">
+              {u.ghi_chu_so_do}
+            </p>
+          )}
+
           {u.khu_vuc_van_9 && u.khu_vuc_van_9.length > 0 && (
-            <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-3">
+            <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-2" data-testid="lg-khu-vuc-van-9">
               {u.khu_vuc_van_9.map((kv) => (
                 <div key={kv.khu_vuc} className="rounded-xl border border-line/70 bg-bg/60 p-3.5 text-sm">
                   <div className="flex items-baseline justify-between gap-2">
@@ -129,6 +141,20 @@ export function KhungUngDungCoDien({ u, moKhoa }: { u?: UngDungCoDien; moKhoa?: 
                   <p className="mt-2 text-xs leading-relaxed text-fg-muted">{kv.ung_dung}</p>
                 </div>
               ))}
+            </div>
+          )}
+
+          {u.doi_chieu_hai_phai && (
+            <div className="mt-4 rounded-xl border border-gold/35 bg-gold/5 p-3.5 text-xs leading-relaxed" data-testid="lg-doi-chieu-hai-phai">
+              <p className="flex items-center gap-1.5 font-semibold text-gold">
+                <Scale className="size-3.5 shrink-0" aria-hidden />
+                <span>{chu("cd.doi_chieu")}</span>
+              </p>
+              <div className="mt-2 grid grid-cols-1 gap-2 md:grid-cols-2">
+                <p className="rounded-lg border border-line/60 bg-bg/60 p-2.5 text-fg-muted">{u.doi_chieu_hai_phai.goc_bat_trach}</p>
+                <p className="rounded-lg border border-line/60 bg-bg/60 p-2.5 text-fg-muted">{u.doi_chieu_hai_phai.goc_huyen_khong}</p>
+              </div>
+              <p className="mt-2 text-fg">{u.doi_chieu_hai_phai.cach_dung_hoa}</p>
             </div>
           )}
         </>

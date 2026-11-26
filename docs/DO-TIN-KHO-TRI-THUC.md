@@ -58,7 +58,7 @@
 | `nhan_tuong_sach_ghi.json` | (cả tệp) | `than_tuong_toan_bien.json` | `test_moi_muc_qua_bo_kiem` | SX-C: câu Thần Tướng Toàn Biên gắn với nét khảo sát + 12 cung trên mặt |
 | `nhantuong_ngu_hanh_va_co_thu.json` | quy_tac_co_thu | `lieu_trang_tuong_phap.json` | `test_moi_muc_qua_bo_kiem` | PR #320 (2026-11-20): 81/150 quy tắc giữ lại, mỗi câu Hán khớp kho nguồn Liễu Trang tướng pháp / Thần Tướng Toàn Biên (than_tuong_toan_bien.json); lời Việt khuôn SX-C do ban biên tập viết |
 | `phongthuy_cung_menh.json` | (cả tệp) | `duong_trach_thap_thu.json` | `test_cung_menh_khop_phep_tinh` | SX-C: chín điều bố trí × 8 cung (東/西四位宅圖說); phương + du niên khớp phép tính Bát trạch |
-| `phongthuy_huyen_khong.json` | to_hop_81 | `phongthuy_huyen_khong_co_thu.json` | `test_to_hop_81_sach_qua_bo_kiem_sx_c` | Chặng 1: 63/81 tổ hợp sao có câu nguyên văn Huyền Không Bí Chỉ / Tử Bạch Đoạn / Phi Tinh Đoạn qua bộ kiểm SX-C (18 cặp còn lại là lời biên tập, chưa có câu phú riêng trong 4 bản chép); Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json) |
+| `phongthuy_huyen_khong.json` | to_hop_81 | `phongthuy_huyen_khong_co_thu.json` | `test_to_hop_81_sach_qua_bo_kiem_sx_c` | Chặng 1 (đã soát nghĩa từng câu): 61/81 tổ hợp sao có câu nguyên văn Huyền Không Bí Chỉ / Tử Bạch Quyết / Phi Tinh Phú qua bộ kiểm SX-C3 (20 cặp còn lại giữ lời biên tập trung thực); Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu đồ bàn Thẩm Thị (huyen_khong_tham_thi.json) |
 | `phongthuy_kb.json` | du_nien | `duong_trach_thap_thu.json` | `test_cau_trich_kb_la_nguyen_van` | KT-PT1: 8 du niên có câu «吉星三 / 凶星五» của Dương Trạch Thập Thư; phép tính du niên + bảng cung phi 180 năm khớp sách (test_dai_du_nien_ca_khop_phep_tinh, test_bang_cung_phi_180_nam_khop_phep_tinh); lời ý nghĩa vẫn là tóm ý |
 | `phongthuy_kb.json` | sach_xua_nha | `duong_trach_thap_thu.json` | `test_moi_cau_la_nguyen_van_kho_nguon` | WS-3: câu Dương Trạch Thập Thư cho khối «Sách xưa nói gì về nhà của bạn»; lời Việt là tóm ý |
 | `phongthuy_sach_ghi.json` | (cả tệp) | `duong_trach_thap_thu.json` | `test_moi_muc_qua_bo_kiem` | SX-C: 116 điều về thế nhà (論宅外形, 內形篇, 何知經…) khớp kho nguồn; vế 'vì sao hợp lẽ thường' là lời biên tập |
@@ -139,7 +139,7 @@
 | Phong thuỷ | `phongthuy_doi_song.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_hoi_gi_kb.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_huyen_khong.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
-| Phong thuỷ | `phongthuy_huyen_khong.json` | to_hop_81 | Có nguyên văn đối chiếu | Chặng 1: 63/81 tổ hợp sao có câu nguyên văn Huyền Không Bí Chỉ / Tử Bạch Đoạn / Phi Tinh Đoạn qua bộ kiểm SX-C (18 cặp còn lại là lời biên tập, chưa có câu phú riêng trong 4 bản chép); Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json) |
+| Phong thuỷ | `phongthuy_huyen_khong.json` | to_hop_81 | Có nguyên văn đối chiếu | Chặng 1 (đã soát nghĩa từng câu): 61/81 tổ hợp sao có câu nguyên văn Huyền Không Bí Chỉ / Tử Bạch Quyết / Phi Tinh Phú qua bộ kiểm SX-C3 (20 cặp còn lại giữ lời biên tập trung thực); Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu đồ bàn Thẩm Thị (huyen_khong_tham_thi.json) |
 | Phong thuỷ | `phongthuy_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | KT-PT1: 7 dấu hiệu `bo_tri` có câu nguyên văn (`sach`); phần còn lại chưa khớp từng câu |
 | Phong thuỷ | `phongthuy_kb.json` | du_nien | Có nguyên văn đối chiếu | KT-PT1: 8 du niên có câu «吉星三 / 凶星五» của Dương Trạch Thập Thư; phép tính du niên + bảng cung phi 180 năm khớp sách (test_dai_du_nien_ca_khop_phep_tinh, test_bang_cung_phi_180_nam_khop_phep_tinh); lời ý nghĩa vẫn là tóm ý |
 | Phong thuỷ | `phongthuy_kb.json` | sach_xua_nha | Có nguyên văn đối chiếu | WS-3: câu Dương Trạch Thập Thư cho khối «Sách xưa nói gì về nhà của bạn»; lời Việt là tóm ý |
@@ -206,7 +206,7 @@
 | Liên mảng · kỹ thuật | `chuyen_nghia_kb.json` | khai_niem | Có nguyên văn đối chiếu | mỗi khái niệm một câu sách khớp kho nguồn; nghĩa đời nay là biên tập |
 | Liên mảng · kỹ thuật | `dong_thuan_thong_ke.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `giao_thoa_kb.json` |  | Ban biên tập soạn |  |
-| Liên mảng · kỹ thuật | `go_nut_doi_song_kb.json` |  | Ban biên tập soạn | Chặng 1: nháp AI biên soạn cho 4 mạch gỡ nút đời sống, chờ chủ dự án đọc soát |
+| Liên mảng · kỹ thuật | `go_nut_doi_song_kb.json` |  | Ban biên tập soạn | Chặng 1: khung lời hai mặt gắn dữ kiện thật của lá số cho 4 mạch gỡ nút đời sống (nháp biên tập, chờ chủ dự án đọc soát) |
 | Liên mảng · kỹ thuật | `goc_nhin.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `goi_y_cheo_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `hoan_canh_kb.json` |  | Ban biên tập soạn |  |
@@ -221,7 +221,7 @@
 | Liên mảng · kỹ thuật | `thuat_ngu_en.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `tu_dien.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `tuan_hai_nguoi_kb.json` |  | Ban biên tập soạn |  |
-| Liên mảng · kỹ thuật | `ung_dung_co_dien_kb.json` |  | Ban biên tập soạn | Chặng 1: nháp AI tổng hợp ứng dụng Ngũ hành & điều hoà Vận 9, chờ chủ dự án đọc soát |
+| Liên mảng · kỹ thuật | `ung_dung_co_dien_kb.json` |  | Ban biên tập soạn | Chặng 1: khung nhãn song ngữ cho chế độ Đối chiếu Cổ điển (hiển thị cổ thư & sơ đồ phòng thật có sẵn trong Engine, không bịa màu/giờ/hướng) |
 | Liên mảng · kỹ thuật | `y_dinh_chung.json` |  | Ban biên tập soạn |  |
 
 ## Cách nâng mức một phần

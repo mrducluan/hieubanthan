@@ -76,28 +76,51 @@ def test_chuoi_chuyen_ky_khop_toan_hoc_tren_3_la_so_mau_va_song_ngu():
 
 def test_go_nut_doi_song_4_mach_khuyet_tren_tuvi_va_battu():
     cam = kh.cum_cam_chung()
-    cac_ca = [
+    cac_ca_3_mach = [
         ("Mình vừa bước ra sau ly hôn, bao giờ mới sẵn sàng mở lòng lại?", "sau_do_vo"),
         ("Dạo này hai vợ chồng hay khắc khẩu cãi nhau vì chuyện nhỏ, làm sao hạ nhiệt?", "khac_khau_vo_chong"),
         ("Tôi định hùn vốn mở cửa hàng với bạn, nên phân vai giữ tiền thế nào?", "gop_von_phan_vai"),
-        ("Thầy khác bảo cung Mệnh tôi Vô Chính Diệu và có Địa Kiếp là xấu lắm phải không?", "go_loi_phan_doa"),
-        ("Nghe nói nữ mệnh Thương Quan mạnh là trắc trở chuyện chồng con lắm hả?", "go_loi_phan_doa"),
     ]
-    for cau, ma_mong_doi in cac_ca:
+    for cau, ma_mong_doi in cac_ca_3_mach:
         for url in ("/v1/tuvi/hoi", "/v1/battu/hoi"):
             r = _CLIENT.post(url, json={"cau_hoi": cau, "la_so": _LA_SO_IN, "ngay_xem": _NGAY_XEM})
             assert r.status_code == 200, (url, cau, r.text)
             gn = r.json().get("go_nut_doi_song")
             assert gn is not None and gn["ma"] == ma_mong_doi, (url, cau, gn)
-            assert gn["tieu_de"] and gn["goc_nhin_hai_mat"] and len(gn["viec_thuc_te"]) >= 2
-            for s in (gn["tieu_de"], gn["goc_nhin_hai_mat"], *gn["viec_thuc_te"]):
+            assert gn.get("du_kien_la_so") and gn["tieu_de"] and gn["goc_nhin_hai_mat"] and len(gn["viec_thuc_te"]) >= 2
+            for s in (gn["tieu_de"], gn["du_kien_la_so"], gn["goc_nhin_hai_mat"], *gn["viec_thuc_te"]):
                 assert not kds.tim_cum_cam(s, cam), (url, ma_mong_doi, s)
 
-    # Không bao giờ gắn go_nut_doi_song ở câu khủng hoảng hoặc thiếu lá số khi hỏi chuyện cá nhân
+    # Giải oan lá số (`go_loi_phan_doa`): chỉ gắn khi lá số người xem THỰC SỰ có sao / thập thần đó
+    ls_tv = htv.tom_tat(az.an_sao_tho(dt.date(1990, 5, 15), az.time_index(8, 30), "nam", "vi-VN"))
+    sao_co_that = next(
+        s["ten"] for c in ls_tv["cung"] for s in c["chinh_tinh"]
+        if s["ten"] in ("Thất Sát", "Phá Quân", "Liêm Trinh", "Cự Môn", "Tham Lang")
+    )
+    r_tv_go = _CLIENT.post(
+        "/v1/tuvi/hoi",
+        json={"cau_hoi": f"Thầy khác bảo lá số tôi có sao {sao_co_that} là nặng lắm phải không?", "la_so": _LA_SO_IN, "ngay_xem": _NGAY_XEM},
+    ).json()
+    assert r_tv_go.get("go_nut_doi_song", {}).get("ma") == "go_loi_phan_doa"
+    assert sao_co_that in r_tv_go["go_nut_doi_song"]["du_kien_la_so"]
+
+    # Tìm 1 ngày sinh có Thương Quan trên tứ trụ để kiểm giải oan Bát tự gắn đúng trụ thật
+    ls_bt_tq = {"birth_date": "1990-06-15", "birth_time": "12:00", "gender": "nu", "noi_sinh": "ha-noi"}
+    r_bt_go = _CLIENT.post(
+        "/v1/battu/hoi",
+        json={"cau_hoi": "Nghe nói lá số của em có Thương Quan là trắc trở chuyện chồng con lắm hả?", "la_so": ls_bt_tq, "ngay_xem": _NGAY_XEM},
+    ).json()
+    if "Thương Quan" in str(r_bt_go.get("la_so", {}).get("thap_than_can")) or "Thương Quan" in str(r_bt_go.get("la_so", {}).get("tang_can_thap_than")):
+        assert r_bt_go.get("go_nut_doi_song", {}).get("ma") == "go_loi_phan_doa"
+        assert "Thương Quan" in r_bt_go["go_nut_doi_song"]["du_kien_la_so"]
+
+    # Không bao giờ gắn go_nut_doi_song ở câu khủng hoảng, câu kiến thức hoặc thiếu lá số
     r_kh = _CLIENT.post("/v1/tuvi/hoi", json={"cau_hoi": "Sau ly hôn tôi tuyệt vọng muốn chết đi cho xong", "la_so": _LA_SO_IN, "ngay_xem": _NGAY_XEM})
     assert "go_nut_doi_song" not in r_kh.json()
+    r_kt = _CLIENT.post("/v1/battu/hoi", json={"cau_hoi": "Thương Quan là gì?", "la_so": _LA_SO_IN, "ngay_xem": _NGAY_XEM})
+    assert "go_nut_doi_song" not in r_kt.json()
 
-    # Kiểm bản tiếng Anh hoạt động sạch chữ Việt
+    # Kiểm bản tiếng Anh hoạt động sạch chữ Việt và có du_kien_la_so tiếng Anh
     r_en = _CLIENT.post(
         "/v1/battu/hoi",
         json={"cau_hoi": "After my divorce, how should I rebuild and open up again?", "la_so": _LA_SO_IN, "ngay_xem": _NGAY_XEM},
@@ -105,6 +128,6 @@ def test_go_nut_doi_song_4_mach_khuyet_tren_tuvi_va_battu():
     )
     assert r_en.status_code == 200
     gn_en = r_en.json().get("go_nut_doi_song")
-    assert gn_en is not None and gn_en["ma"] == "sau_do_vo"
-    for s in (gn_en["tieu_de"], gn_en["goc_nhin_hai_mat"], *gn_en["viec_thuc_te"]):
+    assert gn_en is not None and gn_en["ma"] == "sau_do_vo" and gn_en.get("du_kien_la_so")
+    for s in (gn_en["tieu_de"], gn_en["du_kien_la_so"], gn_en["goc_nhin_hai_mat"], *gn_en["viec_thuc_te"]):
         assert not _VIET.search(s), f"Rò chữ Việt ở go_nut_doi_song (EN): {s}"

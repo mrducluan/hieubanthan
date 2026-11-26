@@ -96,7 +96,14 @@ def _nam_xay(nha: dict) -> tuple[int | None, bool]:
     return None, False
 
 
-def _trach_ban(nha: dict, do: float | None, huong: str | None, nam_xem: int | None = None) -> dict | None:
+def _loc_nhom_c_cap(cap: dict, du_tuoi: bool) -> dict:
+    """Cổng tuổi RULES (SX-C3 / TUOI-16): bỏ `sach_ghi` nhóm C khi người đọc chưa rõ tuổi hoặc dưới 16 tuổi."""
+    if not du_tuoi and (cap.get("sach_ghi") or {}).get("nhom") == "C":
+        return {k: v for k, v in cap.items() if k != "sach_ghi"}
+    return cap
+
+
+def _trach_ban(nha: dict, do: float | None, huong: str | None, nam_xem: int | None = None, *, du_tuoi: bool = False) -> dict | None:
     nam_xay, uoc = _nam_xay(nha)
     if not nam_xay:
         return None
@@ -116,9 +123,10 @@ def _trach_ban(nha: dict, do: float | None, huong: str | None, nam_xem: int | No
     cung = {c["cung"]: c for c in b["cung"]}
     b["cung_map"] = cung
     b["nam_uoc"] = uoc
+    b["du_tuoi"] = du_tuoi
     qh, qt = b["huong"]["quai"], b["toa"]["quai"]
-    b["cap_huong"] = hk.to_hop_cung(cung[qh]["son"], cung[qh]["huong"], b["van"], cung=qh, nam=nam_xem)
-    b["cap_toa"] = hk.to_hop_cung(cung[qt]["son"], cung[qt]["huong"], b["van"], cung=qt, nam=nam_xem)
+    b["cap_huong"] = _loc_nhom_c_cap(hk.to_hop_cung(cung[qh]["son"], cung[qh]["huong"], b["van"], cung=qh, nam=nam_xem), du_tuoi)
+    b["cap_toa"] = _loc_nhom_c_cap(hk.to_hop_cung(cung[qt]["son"], cung[qt]["huong"], b["van"], cung=qt, nam=nam_xem), du_tuoi)
     return b
 
 
@@ -126,7 +134,7 @@ def _cap_tai(b: dict | None, phuong: str) -> dict | None:
     if not b or phuong == "Trung cung":
         return None
     c = b["cung_map"][_CUNG_QUAI[phuong]]
-    return hk.to_hop_cung(c["son"], c["huong"], b["van"])
+    return _loc_nhom_c_cap(hk.to_hop_cung(c["son"], c["huong"], b["van"]), bool(b.get("du_tuoi")))
 
 # ----------------------------------------------------------------------------- EN-ALL GĐ 5: tên hiển thị theo ngôn ngữ
 def _h(x: str) -> str:
@@ -942,12 +950,14 @@ def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None
             bc_luan = bo_cuc.luan(nha["bo_cuc"], sinh, goc_nhin)
         except ValueError:
             bc_luan = None
-    b = _trach_ban(nha, do, huong, ngay_xem.year)
+    from app import config as _cfg  # noqa: PLC0415
+    from app.luangiai import sach_ghi_mon as _sm  # noqa: PLC0415
+    tuoi = _sm.tuoi_tu((sinh.get("ngay") or sinh.get("nam")) if sinh else None, ngay_xem)
+    du_tuoi = tuoi is not None and tuoi >= _cfg.TUOI_NGUOI_LON
+    b = _trach_ban(nha, do, huong, ngay_xem.year, du_tuoi=du_tuoi)
     tvs = _thanh_vien(mq, thanh_vien or [])
     c1 = _chuong_ban_hop_huong(mq)
     c2 = _chuong_ngoi_nha(mq, huong, do, nha, b, tvs, bc_luan)
-    from app.luangiai import sach_ghi_mon as _sm  # noqa: PLC0415
-    tuoi = _sm.tuoi_tu((sinh.get("ngay") or sinh.get("nam")) if sinh else None, ngay_xem)
     c3 = _chuong_tung_phong(mq, huong, b, bc_luan, nha.get("bo_cuc"), tvs, tuoi, nha.get("nhieu_lop"))
     c4 = _chuong_nam_nay(mq, sinh, huong, b, bc_luan, ngay_xem)
     c5 = _chuong_viec_nen_lam(c1, c2, c3, c4)
@@ -1009,7 +1019,7 @@ def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None
              "theo_y_dinh": theo_y_dinh,
              "nguyen_tac": L("pt.nguyen_tac", "Hình thế là nền, lý khí là nhịp: dấu hiệu nhìn thấy và du niên với người ở quyết định mức; sao năm, sao tháng chỉ quyết định thời điểm."),
              "y_dinh_chung": "nha_cua", "goi_mo": __import__("app.kb.y_dinh_chung", fromlist=["goi_mo"]).goi_mo("nha_cua", "phongthuy"), **kb.meta()}
-    u_cd = ud.tu_bao_cao_phongthuy(kq_ra)
+    u_cd = ud.tu_bao_cao_phongthuy(kq_ra, bc_luan=bc_luan, mq=mq)
     if u_cd:
         kq_ra["ung_dung_co_dien"] = u_cd
     return kq_ra

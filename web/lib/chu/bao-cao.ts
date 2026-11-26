@@ -120,14 +120,12 @@ export const CHU_BAO_CAO = {
   "sl.can_cu": { nhom: K, nhan: "Sao lưu năm — dòng căn cứ ({ten}, {ds}, {can_chi})", mac_dinh: "{ten}: cung {ds} (năm {can_chi})", en: "{ten}: {ds} ({can_chi} year)" },
   "gnk.so_y": { nhom: K, nhan: "Góc nhìn khác — số ý ({so})", mac_dinh: "· {so} ý tham khảo", en: "· {so} point(s) for reference" },
   "gnk.thu": { nhom: K, nhan: "Góc nhìn khác — chữ trước hướng xử lý", mac_dinh: "Thử:", en: "Try:" },
-  // Chặng 1 — Công tắc 2 Chế độ: Đời sống & Hành động ⇄ Học thuật Cổ điển & Ngũ hành.
+  // Chặng 1 — Công tắc 2 Chế độ: Đời sống & Hành động ⇄ Đối chiếu Cổ điển.
   "cd.nhan": { nhom: K, nhan: "Nhãn công tắc chế độ đọc", mac_dinh: "Cách trình bày", en: "Reading lens" },
   "cd.doi_song": { nhom: K, nhan: "Nút chế độ Đời sống & Hành động", mac_dinh: "Đời sống & Hành động", en: "Everyday & Practical" },
-  "cd.co_dien": { nhom: K, nhan: "Nút chế độ Học thuật Cổ điển & Ngũ hành", mac_dinh: "Học thuật Cổ điển & Ngũ hành", en: "Classical & Five Elements" },
-  "cd.mau_sac": { nhom: K, nhan: "Nhãn tông màu bổ trợ", mac_dinh: "Tông màu bổ trợ:", en: "Supportive colors:" },
-  "cd.chat_lieu": { nhom: K, nhan: "Nhãn chất liệu không gian", mac_dinh: "Chất liệu & vật dụng:", en: "Everyday materials:" },
-  "cd.phuong_vi": { nhom: K, nhan: "Nhãn phương vị", mac_dinh: "Phương vị:", en: "Directions:" },
-  "cd.khung_gio": { nhom: K, nhan: "Nhãn khung giờ tập trung", mac_dinh: "Khung giờ tập trung:", en: "Focus hours:" },
-  "cd.thoi_quen": { nhom: K, nhan: "Nhãn nếp dưỡng khí", mac_dinh: "Nếp thực hành:", en: "Daily habits:" },
-  "cd.khoa_mo_ta": { nhom: K, nhan: "Mô tả khi bảng ứng dụng cổ điển đang khoá", mac_dinh: "Mở toàn bộ báo cáo để xem chi tiết bảng màu sắc, chất liệu, phương vị và khung giờ Ngũ hành của riêng lá số này.", en: "Unlock the full report to view your personalized Five-Element colors, materials, directions and focus hours." },
+  "cd.co_dien": { nhom: K, nhan: "Nút chế độ Đối chiếu Cổ điển", mac_dinh: "Đối chiếu Cổ điển", en: "Classical Sources" },
+  "cd.sach_xua": { nhom: K, nhan: "Tiêu đề mục trích dẫn sách xưa", mac_dinh: "Câu sách xưa khớp lá số", en: "Matched classical passages" },
+  "cd.nguyen_van": { nhom: K, nhan: "Nút xem nguyên văn chữ Hán", mac_dinh: "Nguyên văn chữ Hán", en: "Original Chinese text" },
+  "cd.doi_chieu": { nhom: K, nhan: "Tiêu đề đối chiếu 2 phái Bát Trạch & Huyền Không", mac_dinh: "Đối chiếu hai phái trên hướng nhà của bạn", en: "Two-school comparison for your home's facing" },
+  "cd.khoa_mo_ta": { nhom: K, nhan: "Mô tả khi bảng đối chiếu cổ điển đang khoá", mac_dinh: "Mở toàn bộ báo cáo để xem chi tiết đối chiếu cổ thư, cách cục và điều hậu của riêng lá số này.", en: "Unlock the full report to inspect the classical pattern and seasonal reference notes for your chart." },
 } as const satisfies BangChu;

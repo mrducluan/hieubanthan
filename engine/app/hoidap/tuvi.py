@@ -1858,13 +1858,18 @@ def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_
           "y_dinh_tu_goi_y": bool(pl.get("y_dinh_tu_goi_y"))}
     if ls is not None and sinh:
         from app.hoidap import luan_hoi_khop as lhk  # noqa: PLC0415
+        from app.luangiai import go_nut_doi_song as gnds  # noqa: PLC0415
+        _lay_bc = lambda: _lap_doi_song(sinh, ngay_xem, ls, vh)  # noqa: E731
+        _nt = bool(NGUOI_THAN.get())
         lhk.gan_vao_hoi(
             kq, mo_dun="tuvi", pl=pl, cau_hoi=cau_hoi, sinh=sinh, bc_ds=bc_ds,
-            dung_bc=lambda: _lap_doi_song(sinh, ngay_xem, ls, vh),
-            nguoi_than=bool(NGUOI_THAN.get()),
+            dung_bc=_lay_bc,
+            nguoi_than=_nt,
         )
-    from app.luangiai import go_nut_doi_song as gnds  # noqa: PLC0415
-    gnds.gan_vao_hoi(kq, pl=pl, cau_hoi=cau_hoi)
+        gnds.gan_vao_hoi(
+            kq, pl=pl, cau_hoi=cau_hoi, mo_dun="tuvi", ls=ls, sinh=sinh,
+            bc_ds=bc_ds, dung_bc=_lay_bc, nguoi_than=_nt,
+        )
     return kq
 
 

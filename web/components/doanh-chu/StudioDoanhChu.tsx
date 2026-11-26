@@ -25,8 +25,11 @@ interface ThanhVienTuNhapForm {
   ngay: string;
   thang: string;
   nam: string;
+  gio: string;
   gioi_tinh: "nam" | "nu";
 }
+
+const GIO_HOP_LE = /^([01]\d|2[0-3]):[0-5]\d$/;
 
 function taoThanhVienTrong(thuTu: number): ThanhVienTuNhapForm {
   return {
@@ -37,6 +40,7 @@ function taoThanhVienTrong(thuTu: number): ThanhVienTuNhapForm {
     ngay: "10",
     thang: "3",
     nam: "1992",
+    gio: "",
     gioi_tinh: "nam",
   };
 }
@@ -60,11 +64,12 @@ export function StudioDoanhChu() {
   const [ngayChu, setNgayChu] = useState<string>("15");
   const [thangChu, setThangChu] = useState<string>("8");
   const [namChu, setNamChu] = useState<string>("1986");
+  const [gioChu, setGioChu] = useState<string>("");
   const [gioiTinhChu, setGioiTinhChu] = useState<"nam" | "nu">("nam");
 
   // Bước 2A: Nhập trực tiếp (theo DC-1, checkbox cam kết chưa tích sẵn)
   const [dsTuNhap, setDsTuNhap] = useState<ThanhVienTuNhapForm[]>([
-    { id: "tv-init-1", ten: "", vai_tro: "Vận hành", nhom_viec: "van_hanh", ngay: "10", thang: "3", nam: "1992", gioi_tinh: "nu" },
+    { id: "tv-init-1", ten: "", vai_tro: "Vận hành", nhom_viec: "van_hanh", ngay: "10", thang: "3", nam: "1992", gio: "", gioi_tinh: "nu" },
   ]);
   const [camKetThoaThuan, setCamKetThoaThuan] = useState<boolean>(false);
 
@@ -176,12 +181,14 @@ export function StudioDoanhChu() {
     setDangTai(true);
     setCheDoDangGoi(cheDoGoi);
     try {
+      const gioChuSach = GIO_HOP_LE.test(gioChu.trim()) ? gioChu.trim() : undefined;
       const ongChuPayload = {
         ten: tenChu.trim() || "Ông chủ",
         vai_tro: vaiTroChu.trim() || "Chủ doanh nghiệp",
         ngay: Number(ngayChu),
         thang: Number(thangChu),
         nam: Number(namChu),
+        ...(gioChuSach ? { gio: gioChuSach } : {}),
         gioi_tinh: gioiTinhChu,
       };
 
@@ -192,16 +199,20 @@ export function StudioDoanhChu() {
             ? {
                 che_do: "tu_nhap" as const,
                 ong_chu: ongChuPayload,
-                doi_ngu: dsTuNhap.map((tv, idx) => ({
-                  ten: tv.ten.trim() || `Cộng sự #${idx + 1}`,
-                  vai_tro: tv.vai_tro.trim(),
-                  nhom_viec: tv.nhom_viec,
-                  ngay: Number(tv.ngay),
-                  thang: Number(tv.thang),
-                  nam: Number(tv.nam),
-                  gioi_tinh: tv.gioi_tinh,
-                  dong_y_tu_nguyen: true as const,
-                })),
+                doi_ngu: dsTuNhap.map((tv, idx) => {
+                  const gioTv = GIO_HOP_LE.test(tv.gio.trim()) ? tv.gio.trim() : undefined;
+                  return {
+                    ten: tv.ten.trim() || `Cộng sự #${idx + 1}`,
+                    vai_tro: tv.vai_tro.trim(),
+                    nhom_viec: tv.nhom_viec,
+                    ngay: Number(tv.ngay),
+                    thang: Number(tv.thang),
+                    nam: Number(tv.nam),
+                    ...(gioTv ? { gio: gioTv } : {}),
+                    gioi_tinh: tv.gioi_tinh,
+                    dong_y_tu_nguyen: true as const,
+                  };
+                }),
                 nam_xem: namXem,
                 cap_quan_ly: capQuanLy,
                 cam_ket_thoa_thuan: true as const,
@@ -376,6 +387,26 @@ export function StudioDoanhChu() {
             </div>
           </div>
 
+          <div className="mt-3.5">
+            <label className="text-xs text-fg-muted" htmlFor="dc-gio-chu">{CHU_DOANH_CHU.buoc_nhap.gio_nhan}</label>
+            <div className="mt-1 flex items-center gap-2">
+              <input
+                id="dc-gio-chu"
+                type="time"
+                value={gioChu}
+                onChange={(e) => setGioChu(e.target.value)}
+                data-testid="dc-gio-chu"
+                className="w-full rounded-xl border border-line bg-bg/70 px-3 py-2 text-sm tabular-nums text-fg"
+              />
+              {gioChu && (
+                <button type="button" onClick={() => setGioChu("")} className="shrink-0 rounded-xl border border-line/70 px-2.5 py-2 text-xs text-fg-muted hover:text-fg">
+                  Bỏ giờ
+                </button>
+              )}
+            </div>
+            <p className="mt-1 text-[11px] text-fg-faint">{CHU_DOANH_CHU.buoc_nhap.gio_goi_y}</p>
+          </div>
+
           <div className="mt-3.5 grid gap-3.5 sm:grid-cols-2">
             <div>
               <label className="text-xs text-fg-muted">{CHU_DOANH_CHU.buoc_nhap.gioi_tinh_nhan}</label>
@@ -492,7 +523,7 @@ export function StudioDoanhChu() {
                         className="rounded-xl border border-line bg-surface/70 px-3 py-1.5 text-xs text-fg placeholder:text-fg-faint"
                       />
                     </div>
-                    <div className="mt-2 grid grid-cols-4 gap-2">
+                    <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-5">
                       <input
                         type="number"
                         min={1}
@@ -523,11 +554,18 @@ export function StudioDoanhChu() {
                         placeholder="Năm"
                         className="rounded-xl border border-line bg-surface/70 px-2.5 py-1.5 text-xs tabular-nums text-fg"
                       />
+                      <input
+                        type="time"
+                        value={tv.gio}
+                        onChange={(e) => capNhatTuNhap(tv.id, "gio", e.target.value)}
+                        aria-label={CHU_DOANH_CHU.buoc_nhap.gio_nhan}
+                        className="rounded-xl border border-line bg-surface/70 px-2.5 py-1.5 text-xs tabular-nums text-fg"
+                      />
                       <select
                         value={tv.gioi_tinh}
                         onChange={(e) => capNhatTuNhap(tv.id, "gioi_tinh", e.target.value as "nam" | "nu")}
                         aria-label="Giới tính"
-                        className="rounded-xl border border-line bg-surface/70 px-2 py-1.5 text-xs text-fg"
+                        className="col-span-2 rounded-xl border border-line bg-surface/70 px-2 py-1.5 text-xs text-fg sm:col-span-1"
                       >
                         <option value="nam">{CHU_DOANH_CHU.buoc_nhap.nam}</option>
                         <option value="nu">{CHU_DOANH_CHU.buoc_nhap.nu}</option>

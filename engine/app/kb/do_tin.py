@@ -142,8 +142,8 @@ SO: dict[str, dict] = {
         "phan": {
             "to_hop_81": _nv("phongthuy_huyen_khong_co_thu.json",
                              "tests/test_huyen_khong_tham_thi.py::test_to_hop_81_sach_qua_bo_kiem_sx_c",
-                             "Chặng 1: 63/81 tổ hợp sao có câu nguyên văn Huyền Không Bí Chỉ / Tử Bạch Đoạn / Phi Tinh Đoạn qua bộ kiểm SX-C (18 cặp còn lại là lời biên tập, chưa có câu phú riêng trong 4 bản chép); "
-                             "Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json)"),
+                             "Chặng 1 (đã soát nghĩa từng câu): 61/81 tổ hợp sao có câu nguyên văn Huyền Không Bí Chỉ / Tử Bạch Quyết / Phi Tinh Phú qua bộ kiểm SX-C3 (20 cặp còn lại giữ lời biên tập trung thực); "
+                             "Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu đồ bàn Thẩm Thị (huyen_khong_tham_thi.json)"),
         },
     },
     "phongthuy_doi_song.json": {"mang": "phongthuy", "muc": "bien_tap"},
@@ -227,8 +227,8 @@ SO: dict[str, dict] = {
     "ke_hoach_thang_kb.json": {"mang": "lich", "muc": "bien_tap", "ghi_chu": "KH-1: việc định làm ↔ số tháng cá nhân / việc sách lịch — nháp"},
     # ---- Liên mảng (lời ghép, ranh giới, mẫu câu)
     "suc_khoe_kb.json": {"mang": "chung", "muc": "tom_y_co_thu", "ghi_chu": "hành ↔ tạng phủ theo Nội Kinh; tên bệnh hay gặp là kiến thức phổ thông (SK-2)"},
-    "go_nut_doi_song_kb.json": {"mang": "chung", "muc": "bien_tap", "ghi_chu": "Chặng 1: nháp AI biên soạn cho 4 mạch gỡ nút đời sống, chờ chủ dự án đọc soát"},
-    "ung_dung_co_dien_kb.json": {"mang": "chung", "muc": "bien_tap", "ghi_chu": "Chặng 1: nháp AI tổng hợp ứng dụng Ngũ hành & điều hoà Vận 9, chờ chủ dự án đọc soát"},
+    "go_nut_doi_song_kb.json": {"mang": "chung", "muc": "bien_tap", "ghi_chu": "Chặng 1: khung lời hai mặt gắn dữ kiện thật của lá số cho 4 mạch gỡ nút đời sống (nháp biên tập, chờ chủ dự án đọc soát)"},
+    "ung_dung_co_dien_kb.json": {"mang": "chung", "muc": "bien_tap", "ghi_chu": "Chặng 1: khung nhãn song ngữ cho chế độ Đối chiếu Cổ điển (hiển thị cổ thư & sơ đồ phòng thật có sẵn trong Engine, không bịa màu/giờ/hướng)"},
     **{f: {"mang": "chung", "muc": "bien_tap"} for f in (
         "chu_y_kb.json", "chan_dung_kb.json", "giao_thoa_kb.json", "goi_y_cheo_kb.json", "hoan_canh_kb.json", "nhat_quan_kb.json",
         "push_sang_nay.json", "sinh_nuoc_ngoai_kb.json", "tuan_hai_nguoi_kb.json", "tu_dien.json", "y_dinh_chung.json")},

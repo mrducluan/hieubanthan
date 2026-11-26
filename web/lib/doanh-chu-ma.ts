@@ -1,17 +1,18 @@
 // Mã mời đội ngũ (HMAC-SHA256) và Mã xác nhận đồng ý của nhân sự (mã hóa AES-256-GCM) — CHỈ chạy phía server.
-// Tuân thủ Luật BVDLCN 91/2025/QH15 & nguyên tắc không lưu dữ liệu ngày sinh trên DB (THIET-KE-UI §8):
-//   1. Ông chủ tạo mã mời gắn `nonce` riêng cho phiên đội ngũ (hạn 7 ngày).
-//   2. Nhân sự tự mở link trên thiết bị của mình, đọc phạm vi tham khảo giao tiếp và tự bấm đồng ý.
-//   3. Server mã hóa thông tin thành viên bằng AES-256-GCM (kèm AuthTag + AAD) → trả về `tv_token` ngắn.
-//      Ngay cả ông chủ cũng KHÔNG đọc ngược được ngày sinh từ `tv_token`.
-//   4. Chỉ proxy máy chủ (/api/doanh-chu) giải mã, kiểm tra đúng `scope`, đúng `nonce`, còn hạn rồi mới đặt
-//      `dong_y_tu_nguyen = true` gửi sang engine.
+// Tuân thủ Luật BVDLCN 91/2025/QH15 & nguyên tắc không lưu dữ liệu ngày giờ sinh trên DB (THIET-KE-UI §8).
 import { createCipheriv, createDecipheriv, createHash, createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 
-export const PHIEN_BAN_DONG_Y = "nd13-2023-v1" as const;
+export const PHIEN_BAN_DONG_Y = "dlcn91-2025-v2" as const;
+const PHIEN_BAN_HOP_LE = new Set<string>(["nd13-2023-v1", PHIEN_BAN_DONG_Y]);
 const HAN_MS = 7 * 24 * 60 * 60 * 1000; // 7 ngày
 const AAD_TV = Buffer.from("doanh-chu-tv-v1", "utf8");
 const NONCE_RE = /^[a-f0-9]{16,32}$/;
+const GIO_RE = /^([01]\d|2[0-3]):[0-5]\d$/;
+const KHOA_TV_BAT_BUOC = [
+  "v", "scope", "nonce", "phien_ban_dong_y", "thoi_diem_dong_y", "exp",
+  "biet_danh", "vai_tro", "ngay", "thang", "nam", "gioi_tinh",
+] as const;
+const KHOA_TV_CHO_PHEP = new Set<string>([...KHOA_TV_BAT_BUOC, "gio"]);
 
 function biMatGoc(): string {
   const k = process.env.LOI_MOI_SECRET || process.env.SAO_KHOA_SECRET;
@@ -35,7 +36,7 @@ export interface NoiDungMoiDoiNgu {
   scope: "doanh-chu-moi";
   nonce: string;
   ten_nhom: string;
-  phien_ban_dong_y: typeof PHIEN_BAN_DONG_Y;
+  phien_ban_dong_y: string;
   iat: number;
   exp: number;
 }
@@ -44,7 +45,7 @@ export interface NoiDungDongYThanhVien {
   v: 1;
   scope: "doanh-chu-tv";
   nonce: string;
-  phien_ban_dong_y: typeof PHIEN_BAN_DONG_Y;
+  phien_ban_dong_y: string;
   thoi_diem_dong_y: string;
   exp: number;
   biet_danh: string;
@@ -53,6 +54,7 @@ export interface NoiDungDongYThanhVien {
   thang: number;
   nam: number;
   gioi_tinh: "nam" | "nu";
+  gio?: string;
 }
 
 function kiemNoiDungMoi(x: unknown): NoiDungMoiDoiNgu | null {
@@ -60,7 +62,7 @@ function kiemNoiDungMoi(x: unknown): NoiDungMoiDoiNgu | null {
   const o = x as Record<string, unknown>;
   const keys = Object.keys(o);
   if (keys.length !== 7) return null;
-  if (o.v !== 1 || o.scope !== "doanh-chu-moi" || o.phien_ban_dong_y !== PHIEN_BAN_DONG_Y) return null;
+  if (o.v !== 1 || o.scope !== "doanh-chu-moi" || typeof o.phien_ban_dong_y !== "string" || !PHIEN_BAN_HOP_LE.has(o.phien_ban_dong_y)) return null;
   if (typeof o.nonce !== "string" || !NONCE_RE.test(o.nonce)) return null;
   if (typeof o.ten_nhom !== "string" || o.ten_nhom.trim().length < 1 || o.ten_nhom.length > 50) return null;
   if (typeof o.iat !== "number" || !Number.isInteger(o.iat) || o.iat <= 0) return null;
@@ -70,7 +72,7 @@ function kiemNoiDungMoi(x: unknown): NoiDungMoiDoiNgu | null {
     scope: "doanh-chu-moi",
     nonce: o.nonce,
     ten_nhom: o.ten_nhom.trim(),
-    phien_ban_dong_y: PHIEN_BAN_DONG_Y,
+    phien_ban_dong_y: o.phien_ban_dong_y,
     iat: o.iat,
     exp: o.exp,
   };
@@ -80,22 +82,23 @@ function kiemNoiDungTv(x: unknown): NoiDungDongYThanhVien | null {
   if (!x || typeof x !== "object" || Array.isArray(x)) return null;
   const o = x as Record<string, unknown>;
   const keys = Object.keys(o);
-  if (keys.length !== 12) return null;
-  if (o.v !== 1 || o.scope !== "doanh-chu-tv" || o.phien_ban_dong_y !== PHIEN_BAN_DONG_Y) return null;
+  if (!keys.every((k) => KHOA_TV_CHO_PHEP.has(k)) || !KHOA_TV_BAT_BUOC.every((k) => k in o)) return null;
+  if (o.v !== 1 || o.scope !== "doanh-chu-tv" || typeof o.phien_ban_dong_y !== "string" || !PHIEN_BAN_HOP_LE.has(o.phien_ban_dong_y)) return null;
   if (typeof o.nonce !== "string" || !NONCE_RE.test(o.nonce)) return null;
   if (typeof o.thoi_diem_dong_y !== "string" || o.thoi_diem_dong_y.length < 10 || o.thoi_diem_dong_y.length > 40) return null;
   if (typeof o.exp !== "number" || !Number.isInteger(o.exp) || o.exp <= 0) return null;
-  if (typeof o.biet_danh !== "string" || o.biet_danh.trim().length < 1 || o.biet_danh.length > 40) return null;
+  if (typeof o.biet_danh !== "string" || o.biet_danh.trim().length < 1 || o.biet_danh.trim().length > 40) return null;
   if (typeof o.vai_tro !== "string" || o.vai_tro.length > 60) return null;
   if (typeof o.ngay !== "number" || !Number.isInteger(o.ngay) || o.ngay < 1 || o.ngay > 31) return null;
   if (typeof o.thang !== "number" || !Number.isInteger(o.thang) || o.thang < 1 || o.thang > 12) return null;
   if (typeof o.nam !== "number" || !Number.isInteger(o.nam) || o.nam < 1930 || o.nam > 2025) return null;
   if (o.gioi_tinh !== "nam" && o.gioi_tinh !== "nu") return null;
+  if (o.gio !== undefined && (typeof o.gio !== "string" || !GIO_RE.test(o.gio))) return null;
   return {
     v: 1,
     scope: "doanh-chu-tv",
     nonce: o.nonce,
-    phien_ban_dong_y: PHIEN_BAN_DONG_Y,
+    phien_ban_dong_y: o.phien_ban_dong_y,
     thoi_diem_dong_y: o.thoi_diem_dong_y,
     exp: o.exp,
     biet_danh: o.biet_danh.trim(),
@@ -104,6 +107,7 @@ function kiemNoiDungTv(x: unknown): NoiDungDongYThanhVien | null {
     thang: o.thang,
     nam: o.nam,
     gioi_tinh: o.gioi_tinh,
+    ...(typeof o.gio === "string" ? { gio: o.gio } : {}),
   };
 }
 
@@ -143,7 +147,7 @@ export function docLoiMoiDoiNgu(ma: string, bayGioMs = Date.now()): NoiDungMoiDo
   }
 }
 
-/** Mã hóa AES-256-GCM thông tin xác nhận đồng ý tự nguyện của nhân sự → `tv_token` (không lộ ngày sinh). */
+/** Mã hóa AES-256-GCM thông tin xác nhận đồng ý tự nguyện của nhân sự → `tv_token` (không lộ ngày/giờ sinh). */
 export function maHoaDongYThanhVien(
   duLieu: {
     nonce: string;
@@ -153,6 +157,7 @@ export function maHoaDongYThanhVien(
     thang: number;
     nam: number;
     gioi_tinh: "nam" | "nu";
+    gio?: string;
   },
   bayGioMs = Date.now(),
 ): { tv_token: string; het_han: number } {
@@ -170,6 +175,7 @@ export function maHoaDongYThanhVien(
     thang: duLieu.thang,
     nam: duLieu.nam,
     gioi_tinh: duLieu.gioi_tinh,
+    ...(duLieu.gio ? { gio: duLieu.gio } : {}),
   });
   if (!payload) throw new Error("Dữ liệu thành viên không hợp lệ.");
   const iv = randomBytes(12);

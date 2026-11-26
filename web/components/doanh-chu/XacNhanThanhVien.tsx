@@ -13,6 +13,7 @@ export function XacNhanThanhVien({ maMoi, tenNhom }: { maMoi: string; tenNhom: s
   const [ngay, setNgay] = useState<string>("10");
   const [thang, setThang] = useState<string>("3");
   const [nam, setNam] = useState<string>("1992");
+  const [gio, setGio] = useState<string>("");
   const [gioiTinh, setGioiTinh] = useState<"nam" | "nu">("nam");
   const [dongY, setDongY] = useState<boolean>(false);
 
@@ -31,6 +32,7 @@ export function XacNhanThanhVien({ maMoi, tenNhom }: { maMoi: string; tenNhom: s
     }
     setDangGui(true);
     try {
+      const gioSach = /^([01]\d|2[0-3]):[0-5]\d$/.test(gio.trim()) ? gio.trim() : undefined;
       const r = await fetch("/api/doanh-chu/xac-nhan", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -41,6 +43,7 @@ export function XacNhanThanhVien({ maMoi, tenNhom }: { maMoi: string; tenNhom: s
           ngay: Number(ngay),
           thang: Number(thang),
           nam: Number(nam),
+          ...(gioSach ? { gio: gioSach } : {}),
           gioi_tinh: gioiTinh,
           dong_y_tu_nguyen: true,
         }),
@@ -174,23 +177,36 @@ export function XacNhanThanhVien({ maMoi, tenNhom }: { maMoi: string; tenNhom: s
         </div>
       </div>
 
-      <div>
-        <label className="text-xs text-fg-muted">{CHU_DOANH_CHU.buoc_nhap.gioi_tinh_nhan}</label>
-        <div className="mt-1 grid max-w-xs grid-cols-2 gap-2">
-          {(["nam", "nu"] as const).map((gt) => (
-            <button
-              key={gt}
-              type="button"
-              onClick={() => setGioiTinh(gt)}
-              className={`rounded-xl border py-2 text-sm transition ${
-                gioiTinh === gt
-                  ? "border-gold/60 bg-gold/15 text-gold"
-                  : "border-line/70 bg-bg/50 text-fg-muted hover:text-fg"
-              }`}
-            >
-              {gt === "nam" ? CHU_DOANH_CHU.buoc_nhap.nam : CHU_DOANH_CHU.buoc_nhap.nu}
-            </button>
-          ))}
+      <div className="grid gap-3.5 sm:grid-cols-2">
+        <div>
+          <label className="text-xs text-fg-muted">{CHU_DOANH_CHU.buoc_nhap.gioi_tinh_nhan}</label>
+          <div className="mt-1 grid grid-cols-2 gap-2">
+            {(["nam", "nu"] as const).map((gt) => (
+              <button
+                key={gt}
+                type="button"
+                onClick={() => setGioiTinh(gt)}
+                className={`rounded-xl border py-2 text-sm transition ${
+                  gioiTinh === gt
+                    ? "border-gold/60 bg-gold/15 text-gold"
+                    : "border-line/70 bg-bg/50 text-fg-muted hover:text-fg"
+                }`}
+              >
+                {gt === "nam" ? CHU_DOANH_CHU.buoc_nhap.nam : CHU_DOANH_CHU.buoc_nhap.nu}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <label className="text-xs text-fg-muted" htmlFor="dc-moi-gio">{CHU_DOANH_CHU.buoc_nhap.gio_nhan}</label>
+          <input
+            id="dc-moi-gio"
+            type="time"
+            value={gio}
+            onChange={(e) => setGio(e.target.value)}
+            className="mt-1 w-full rounded-xl border border-line bg-bg/70 px-3 py-2 text-sm tabular-nums text-fg"
+          />
+          <p className="mt-1 text-[11px] text-fg-faint">{CHU_DOANH_CHU.buoc_nhap.gio_goi_y}</p>
         </div>
       </div>
 

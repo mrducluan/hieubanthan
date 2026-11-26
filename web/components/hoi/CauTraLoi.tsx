@@ -249,6 +249,11 @@ function HopGoNutDoiSong({ gn }: { gn: GoNutDoiSongChat }) {
     <div className="rounded-2xl border border-jade/35 bg-jade/5 p-4" data-testid="hoi-go-nut-doi-song" data-ma={gn.ma}>
       <p className="text-xs font-semibold uppercase tracking-wider text-jade">{hd.c("gn.nhan")}</p>
       <p className="mt-1 font-serif text-lg text-fg">{gn.tieu_de}</p>
+      {gn.du_kien_la_so && (
+        <p className="mt-1.5 rounded-xl border border-jade/30 bg-bg/50 px-3 py-2 text-xs font-medium leading-relaxed text-fg" data-testid="hoi-go-nut-du-kien">
+          {gn.du_kien_la_so}
+        </p>
+      )}
       <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{gn.goc_nhin_hai_mat}</p>
       {gn.viec_thuc_te.length > 0 && (
         <div className="mt-2.5 border-t border-line/50 pt-2.5 text-xs leading-relaxed text-fg-muted">

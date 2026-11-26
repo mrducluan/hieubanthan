@@ -1,111 +1,99 @@
 # -*- coding: utf-8 -*-
-"""Kiểm định Chặng 1 (Lát cắt 1.1 & 1.3):
-1. Nâng số cặp sao có câu cổ thư nguyên văn đối chiếu trong `phongthuy_huyen_khong.json` (`to_hop_81`) từ 28 lên ≥ 65/81 cặp
-   (100% khớp nguyên văn `phongthuy_huyen_khong_co_thu.json`, 0 câu bịa, 0 lỗi `sach_ghi.kiem_tep`).
-2. Bộ quy tắc tất định `luangiai/ung_dung_co_dien.py` + KB song ngữ `ung_dung_co_dien_kb.json` (`vi` + `en/`):
-   - Đọc từ dữ kiện `CALC` (hành cần thêm 2 cách Bát tự, trục hành Mệnh–Quan–Tài Tử vi, cặp sao Sơn–Hướng–Lưu niên Vận 9);
-   - Thứ tự ưu tiên rõ ràng, không bao giờ mâu thuẫn hướng quay giường/bếp của Bát Trạch;
-   - Sạch tuyệt đối cụm giọng AI (`cum_cam_chung`), từ doạ / mê tín / vật phẩm, dung lượng < 3 KB, khớp khung VI ↔ EN."""
+"""Kiểm định Chặng 1 (nâng cấp trung thực học thuật) — lớp 'Đối chiếu Cổ điển' (`ung_dung_co_dien`):
+1. Bát tự: trình bày song song hai phép Dụng thần + Cách cục Tử Bình Chân Thuyên + Điều hậu Cùng Thông Bảo Giám;
+   TUYỆT ĐỐI KHÔNG khuyên phương vị / hướng theo ngũ hành (tuân thủ quyết định `6b` tránh mâu thuẫn Bát trạch).
+2. Tử vi: tổng hợp nền tảng Lập cực (Nạp âm – Cục, Mệnh/Thân chủ, Lai nhân cung) + cổ phú khớp lá số;
+   TUYỆT ĐỐI KHÔNG bịa màu sắc, khung giờ theo sao và không gán mặc định 'Thổ'.
+3. Phong thuỷ:
+   - Sao 2 Nhị Hắc ở Vận 9 tính đúng là `sinh` khí theo `calc.huyen_khong.trang_thai(2, 9) == 'sinh'`, không gán nhầm là sát.
+   - Đọc ĐÚNG vị trí phòng thật từ `bo_cuc.vi_tri` / `so_do`; khi chưa khai sơ đồ phòng thì chỉ nêu trung thực
+     `huong_thu` & `toa_son`, không gán giả cung Toạ là phòng ngủ.
+   - Sinh khối `doi_chieu_hai_phai` khi hướng nhà có độ lệch giữa Bát Trạch và Huyền Không Vận 9.
+4. Đối xứng khung dữ kiện 100% giữa bản Việt và bản Anh (`dr.khung`), 0 chữ Việt lọt sang bản Anh, dung lượng < 3.5 KB."""
 from __future__ import annotations
 
 import datetime as dt
 import json
 import re
-from pathlib import Path
 
 from app import ngon_ngu
-from app.calc import tuvi_an_sao as az
-from app.kb import sach_ghi as sg, tuvi_doi_song_kb as kds
-from app.luangiai import battu_doi_song as btd
-from app.luangiai import doi_song_khuon as kh
-from app.luangiai import phongthuy_doi_song as ptds
-from app.luangiai import tuvi_doi_song as tvd
-from app.luangiai import ung_dung_co_dien as ud
+from app.calc import huyen_khong as hk, tuvi_an_sao as az
+from app.luangiai import phongthuy_doi_song as ptds, toan_bo
 from tests import _dau_ra as dr
 
-_GOC = Path(__file__).resolve().parents[1]
 _VIET = re.compile(r"[ăâđêôơưàáạảãầấậẩẫằắặẳẵèéẹẻẽềếệểễìíịỉĩòóọỏõồốộổỗờớợởỡùúụủũừứựửữỳýỵỷỹ]", re.I)
-_CAM_ME_TIN = ("cúng", "dâng sao", "giải hạn", "bùa", "ngải", "trấn yểm", "tỳ hưu", "thiềm thừ", "vòng đá", "mua vật phẩm",
-               "phát tài chắc chắn", "giàu to", "đại hung", "chết")
+_NGAY_XEM = dt.date(2026, 11, 26)
 
 
-def _chuoi_tat_ca(x):
-    if isinstance(x, str):
-        yield x
-    elif isinstance(x, dict):
-        for k, v in x.items():
-            if k not in ("ma", "khu_vuc", "loai_phep", "muc_uu_tien"):
-                yield from _chuoi_tat_ca(v)
-    elif isinstance(x, list):
-        for v in x:
-            yield from _chuoi_tat_ca(v)
-
-
-def test_to_hop_81_nang_len_63_cap_khop_nguyen_van_co_thu():
-    kb_path = _GOC / "app" / "kb" / "data" / "phongthuy_huyen_khong.json"
-    n, loi = sg.kiem_tep(kb_path)
-    assert n >= 63, f"Kỳ vọng ≥ 63 cặp to_hop_81 có nguyên văn cổ thư đối chiếu, thực tế {n}"
-    assert not loi, "Lỗi SX-C trong phongthuy_huyen_khong.json:\n" + "\n".join(loi)
-
-
-def test_ung_dung_co_dien_battu_tuvi_phongthuy_dung_luat_va_gon_nhe():
-    cam = kh.cum_cam_chung()
-    ngay_xem = dt.date(2026, 11, 10)
-    bc_bt = btd.lap({"lich": dt.datetime(1990, 5, 15, 8, 30), "gioi_tinh": "nam", "gio_ty": "da_ty"}, ngay_xem)
-    bc_tv = tvd.lap({"ngay": dt.date(1990, 5, 15), "ti": az.time_index(8, 30), "gioi_tinh": "nam", "tz_lich": 7.0}, ngay_xem)
-    bc_pt = ptds.luan_giai({"nam": 1990, "gioi_tinh": "nam", "ngay": dt.date(1990, 5, 15)},
-                           {"huong_do": 180.0, "nam_xay": 2024, "theo": "cua"}, ngay_xem=ngay_xem)
-
-    u_bt = ud.tu_bao_cao_battu(bc_bt)
-    u_tv = ud.tu_bao_cao_tuvi(bc_tv)
-    u_pt = ud.tu_bao_cao_phongthuy(bc_pt)
-
-    for ten, goi in (("battu", u_bt), ("tuvi", u_tv), ("phongthuy", u_pt)):
-        assert goi and goi["tieu_de"] and goi["nguyen_tac_uu_tien"]
-        raw = json.dumps(goi, ensure_ascii=False)
-        assert len(raw.encode("utf-8")) < 3500, f"{ten} quá nặng ({len(raw.encode('utf-8'))} bytes), nguy cơ chạm trần 190 KB"
-        low = raw.lower()
-        assert not any(c in low for c in _CAM_ME_TIN), (ten, [c for c in _CAM_ME_TIN if c in low])
-        for s in _chuoi_tat_ca(goi):
-            assert not kds.tim_cum_cam(s, cam), (ten, kds.tim_cum_cam(s, cam), s)
-
-    # Phong thuỷ phải nêu rõ quy tắc phân vai không mâu thuẫn Bát Trạch (hướng quay theo Bát Trạch, ngũ hành góc phòng theo Phi Tinh)
-    assert "Bát trạch" in u_pt["nguyen_tac_uu_tien"] or "hướng quay" in u_pt["nguyen_tac_uu_tien"]
-    assert len(u_pt["khu_vuc_van_9"]) >= 3
-
-
-def test_dieu_hoa_van9_phan_ung_dung_voi_ngu_hoang_cuu_tu_tam_that():
-    # 1. Cặp có Ngũ Hoàng (5) hoặc Nhị Hắc (2) -> bắt buộc phép Kim tiết khí + giữ tĩnh, không kích động nước
-    sat_5 = ud.dieu_hoa_cung_van9(son=2, huong=5, luu_nien=5, van=9, khu_vuc="cua_chinh")
-    assert sat_5["loai_phep"] == "tiet_khi_kim"
-    assert "tĩnh" in sat_5["ung_dung"].lower() or "kim" in sat_5["ngu_hanh_dieu_hoa"].lower()
-
-    # 2. Hướng tinh 9 đương vận sạch (không dính 2/5) -> phép kích hoạt vượng khí Cửu Tử / Nhất Bạch
-    vuong_9 = ud.dieu_hoa_cung_van9(son=1, huong=9, luu_nien=1, van=9, khu_vuc="ban_lam_viec")
-    assert vuong_9["loai_phep"] == "kich_vuong_van_9"
-
-    # 3. Cặp 3-7 / 7-3 Kim Mộc giao chiến -> phép Thuỷ thông quan (Kim sinh Thuỷ, Thuỷ sinh Mộc)
-    xung_37 = ud.dieu_hoa_cung_van9(son=3, huong=7, luu_nien=6, van=9, khu_vuc="phong_khach")
-    assert xung_37["loai_phep"] == "thong_quan_thuy"
-
-
-def test_ung_dung_co_dien_doi_xung_khung_vi_en_khong_ro_chu_viet():
-    ngay_xem = dt.date(2026, 11, 10)
-    sinh_bt = {"lich": dt.datetime(1990, 5, 15, 8, 30), "gioi_tinh": "nam", "gio_ty": "da_ty"}
-    sinh_tv = {"ngay": dt.date(1990, 5, 15), "ti": az.time_index(8, 30), "gioi_tinh": "nam", "tz_lich": 7.0}
-    nha = {"huong_do": 180.0, "nam_xay": 2024, "theo": "cua"}
-    sinh_pt = {"nam": 1990, "gioi_tinh": "nam", "ngay": dt.date(1990, 5, 15)}
-
-    v_bt = ud.tu_bao_cao_battu(btd.lap(sinh_bt, ngay_xem))
-    v_tv = ud.tu_bao_cao_tuvi(tvd.lap(sinh_tv, ngay_xem))
-    v_pt = ud.tu_bao_cao_phongthuy(ptds.luan_giai(sinh_pt, nha, ngay_xem=ngay_xem))
+def test_battu_co_dien_khong_phuong_vi_trai_6b_va_co_dieu_hau_ctbg():
+    sinh = {"lich": dt.datetime(1990, 5, 15, 8, 30), "gioi_tinh": "nam", "gio_ty": "da_ty"}
+    bc_vi = toan_bo.battu(sinh, _NGAY_XEM)
+    u_vi = bc_vi["ung_dung_co_dien"]
+    assert u_vi["ma"] == "battu_co_dien"
+    assert "hanh_ung_dung" not in u_vi
+    van_json = json.dumps(u_vi, ensure_ascii=False).lower()
+    # Quyết định 6b: không khuyên hướng Tây/Đông/Bắc/Nam theo ngũ hành trong Bát tự
+    for huong_cam in ("hướng tây", "hướng đông", "hướng bắc", "hướng nam"):
+        assert huong_cam not in van_json, f"Vi phạm 6b: {huong_cam}"
+    assert len(u_vi["diem_hoc_thuat"]) >= 2
+    assert any("Cùng Thông Bảo Giám" in d["nhan"] for d in u_vi["diem_hoc_thuat"])
+    assert u_vi.get("sach"), "Bản Việt phải có nguyên văn cổ thư đối chiếu"
+    assert len(json.dumps(u_vi, ensure_ascii=False).encode("utf-8")) < 3500
 
     with ngon_ngu.dung("en"):
-        e_bt = ud.tu_bao_cao_battu(btd.lap(sinh_bt, ngay_xem))
-        e_tv = ud.tu_bao_cao_tuvi(tvd.lap(sinh_tv, ngay_xem))
-        e_pt = ud.tu_bao_cao_phongthuy(ptds.luan_giai(sinh_pt, nha, ngay_xem=ngay_xem))
+        bc_en = toan_bo.battu(sinh, _NGAY_XEM)
+    u_en = bc_en["ung_dung_co_dien"]
+    assert dr.khung(u_vi) == dr.khung(u_en)
+    assert not _VIET.search(json.dumps(u_en, ensure_ascii=False))
 
-    for ten, gv, ge in (("battu", v_bt, e_bt), ("tuvi", v_tv, e_tv), ("phongthuy", v_pt, e_pt)):
-        assert dr.khung(gv) == dr.khung(ge), f"Lệch khung VI ↔ EN ở {ten}"
-        for s in _chuoi_tat_ca(ge):
-            assert not _VIET.search(s), f"Rò chữ Việt ở {ten} (EN): {s}"
+
+def test_tuvi_co_dien_lap_cuc_that_khong_bia_mau_gio_va_khong_fallback_tho():
+    sinh = {"ngay": dt.date(1990, 5, 15), "ti": az.time_index(8, 30), "gioi_tinh": "nam", "tz_lich": 7.0}
+    bc_vi = toan_bo.tuvi(sinh, _NGAY_XEM)
+    u_vi = bc_vi["ung_dung_co_dien"]
+    assert u_vi["ma"] == "tuvi_co_dien"
+    assert "hanh_ung_dung" not in u_vi
+    assert len(u_vi["diem_hoc_thuat"]) == 3
+    nhan_ds = [d["nhan"] for d in u_vi["diem_hoc_thuat"]]
+    assert any("Cục" in n for n in nhan_ds) and any("Lai nhân" in n for n in nhan_ds)
+    assert len(json.dumps(u_vi, ensure_ascii=False).encode("utf-8")) < 3500
+
+    with ngon_ngu.dung("en"):
+        bc_en = toan_bo.tuvi(sinh, _NGAY_XEM)
+    u_en = bc_en["ung_dung_co_dien"]
+    assert dr.khung(u_vi) == dr.khung(u_en)
+    assert not _VIET.search(json.dumps(u_en, ensure_ascii=False))
+
+
+def test_phongthuy_co_dien_ton_trong_phong_that_bo_cuc_va_sao_2_van_9_la_sinh():
+    assert hk.trang_thai(2, 9) == "sinh"
+    sinh = {"nam": 1990, "gioi_tinh": "nam", "ngay": dt.date(1990, 5, 15)}
+
+    # 1. Chưa khai sơ đồ phòng -> CHỈ có huong_thu & toa_son, tuyệt đối không gán giả 'phong_ngu'
+    bc_chua_so_do = ptds.luan_giai(sinh, {"huong_do": 180.0, "nam_xay": 2024}, ngay_xem=_NGAY_XEM)
+    u0 = bc_chua_so_do["ung_dung_co_dien"]
+    assert u0.get("ghi_chu_so_do")
+    assert [x["khu_vuc"] for x in u0["khu_vuc_van_9"]] == ["huong_thu", "toa_son"]
+
+    # 2. Đã khai sơ đồ phòng thật -> đọc đúng phòng người dùng đã khai (cua_chinh Nam, phong_ngu_chinh Đông, bep Đông Nam)
+    nha_co_so_do = {
+        "huong_do": 180.0,
+        "nam_xay": 2024,
+        "bo_cuc": {"vi_tri": {"cua_chinh": "Nam", "phong_ngu_chinh": "Đông", "bep": "Đông Nam"}},
+    }
+    bc_co_so_do = ptds.luan_giai(sinh, nha_co_so_do, ngay_xem=_NGAY_XEM)
+    u1 = bc_co_so_do["ung_dung_co_dien"]
+    assert "ghi_chu_so_do" not in u1
+    assert [x["khu_vuc"] for x in u1["khu_vuc_van_9"]] == ["cua_chinh", "phong_ngu_chinh", "bep"]
+    pn = next(x for x in u1["khu_vuc_van_9"] if x["khu_vuc"] == "phong_ngu_chinh")
+    assert "Đông" in pn["ten_khu_vuc"]
+    # Kiểm không còn câu nào gán nhầm sao 2 ở Vận 9 là 'Thổ sát'
+    assert "thổ sát" not in json.dumps(u1, ensure_ascii=False).lower()
+
+    # 3. Kiểm đối xứng VI ↔ EN và khối doi_chieu_hai_phai khi 2 phái trái chiều (Nam 1990 Khảm Đông tứ mệnh ở nhà hướng Tây 270°)
+    nha_lech = {"huong_do": 270.0, "nam_xay": 2024, "bo_cuc": {"vi_tri": {"cua_chinh": "Tây", "phong_ngu_chinh": "Bắc"}}}
+    bc_lech_vi = ptds.luan_giai(sinh, nha_lech, ngay_xem=_NGAY_XEM)
+    with ngon_ngu.dung("en"):
+        bc_lech_en = ptds.luan_giai(sinh, nha_lech, ngay_xem=_NGAY_XEM)
+    assert dr.khung(bc_lech_vi["ung_dung_co_dien"]) == dr.khung(bc_lech_en["ung_dung_co_dien"])
+    assert not _VIET.search(json.dumps(bc_lech_en["ung_dung_co_dien"], ensure_ascii=False))

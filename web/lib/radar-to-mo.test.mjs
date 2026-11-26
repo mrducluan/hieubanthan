@@ -12,6 +12,15 @@ test("phân đúng 8 mạch tò mò đời sống và gắn link tệp KB chuẩ
   assert.equal(phanMachToMo("Thầy bảo mệnh Vô Chính Diệu và bếp đặt hướng Tây có sao không?", "phongthuy"), "nha_cua_kiem_chung");
   assert.equal(phanMachToMo("Năm 2027 ba tháng đầu năm của mình thế nào?", "thanso"), "tuong_lai_nhip_thang");
   assert.equal(duongTriThucKb("tuvi_luan_hoi_kb.json"), "/quan-tri/tri-thuc/tuvi_luan_hoi_kb");
+  // Ưu tiên nhãn phân loại đã tính của Engine hơn từ khoá bề mặt
+  assert.equal(
+    phanMachToMo("Em gái tôi lăng nhăng quá gia đình mệt mỏi", "battu", { loai: "la_so", chu_de: "gia_dinh" }),
+    "gia_dao_con_cai",
+  );
+  assert.equal(
+    phanMachToMo("Tháng mấy làm lễ?", "tuvi", { loai: "han", y_dinh: "chon_thoi_diem" }),
+    "tuong_lai_nhip_thang",
+  );
 });
 
 test("gom cụm radar sắp xếp theo số lượng câu chưa phủ và đếm đúng lượt không hữu ích", () => {

@@ -10,6 +10,8 @@ export interface OngChuTomTat {
   hanh_can_bu: string;
   duong_doi: number;
   nam_ca_nhan: number | [number, number];
+  so_tru?: 3 | 4;
+  hanh_dung_than?: string[];
 }
 
 export interface CanBangNguHanh {
@@ -63,6 +65,7 @@ export interface ThanhVienMaTran {
     nam_ca_nhan: number | [number, number];
     quan_he_dia_chi: string;
     bu_khuyet_ngu_hanh: boolean;
+    so_tru?: 3 | 4;
   };
   muc_phoi_hop: MucPhoiHop;
   nhan_phoi_hop: string;

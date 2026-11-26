@@ -314,10 +314,13 @@
       "sach": {
         "han": "三碧臨庚遇一白而丁口頻添",
         "am": "Tam Bích lâm Canh, ngộ Nhất Bạch nhi đinh khẩu tần thiêm",
-        "y": "Thuỷ sinh Mộc thông suốt: lợi cho việc mở mang, di chuyển, bắt đầu kế hoạch mới một cách chủ động.",
-        "nhom": "A",
-        "chu_de": "cong_viec",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "nhom": "C",
+        "sat": true,
+        "chu_de": "con_cai",
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Sách ghi: sao Tam Bích tới phương Canh, gặp Nhất Bạch thì nhà năng thêm người, thêm con cháu.",
+        "ham_y": "Nên chú ý giữ không gian sinh hoạt chung thoáng sáng, thuận tiện cho việc chăm sóc người trong nhà.",
+        "viec": "Sắp xếp phòng ốc gọn gàng, đón ánh sáng tự nhiên và chăm sóc sức khoẻ các thành viên đều đặn."
       }
     },
     "1-4": {
@@ -385,14 +388,14 @@
       ],
       "sach": {
         "han": "子癸歲廉飛到陰處生瘍",
-        "am": "Tử Quý tuế Liêm phi đáo, âm xứ sinh dương",
+        "am": "Tý Quý tuế Liêm phi đáo, âm xứ sinh dương",
         "nhom": "C",
         "sat": true,
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: sao Nhất Bạch gặp Ngũ Hoàng (Liêm Trinh) bị Thổ khắc Thuỷ, nơi ẩm thấp dễ ảnh hưởng sức khoẻ.",
-        "ham_y": "Nên chú ý chống thấm, giữ nhà vệ sinh và đường nước sạch khô.",
-        "viec": "Kiểm tra rò rỉ nước, thông gió tốt và khám sức khoẻ định kỳ mỗi năm."
+        "y": "Sách ghi: phương Tý Quý (Nhất Bạch) có sao Liêm Trinh (Ngũ Hoàng) lưu niên bay tới thì vùng kín, phần dưới thuộc thận dễ sinh mụn nhọt, viêm nhiễm; nên đi khám sớm.",
+        "ham_y": "Nên chú ý giữ vệ sinh cá nhân, chống ẩm khu vực tắm rửa và theo dõi sức khoẻ thận – tiết niệu.",
+        "viec": "Giữ phòng tắm khô thoáng, uống đủ nước sạch và đi khám sức khoẻ định kỳ mỗi năm."
       }
     },
     "1-6": {
@@ -427,10 +430,10 @@
       "sach": {
         "han": "土能制水復生金定主田莊之富",
         "am": "Thổ năng chế thuỷ phục sinh kim, định chủ điền trang chi phú",
-        "y": "Kim và Thuỷ tương sinh điều hoà: sách xưa ghi là thế vượng điền sản, tích luỹ bền và sáng trí.",
         "nhom": "A",
         "chu_de": "tien_bac",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Ở thế Nhất Lục tương sinh, gặp thêm Thổ tuy chế Thuỷ nhưng lại sinh Kim để nuôi Thuỷ, sách xưa khen là chủ giàu có điền trang, ruộng đất."
       }
     },
     "1-7": {
@@ -468,7 +471,7 @@
         "sat": true,
         "chu_de": "tinh_net",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: Kim và Thuỷ gặp nhau lúc thất vận thì người ở dễ vui chơi quá đà, mải chuyện tình cảm tiệc tùng.",
+        "y": "Sách ghi: Kim (Đoài – Thất Xích) và Thuỷ (Khảm – Nhất Bạch) đa tình thì dễ ham vui sắc rượu, tiệc tùng.",
         "ham_y": "Nên chú ý giữ chừng mực trong giao tiếp xã giao và chi tiêu cảm hứng.",
         "viec": "Giữ khu vực này gọn sáng, đặt lịch sinh hoạt và ngân sách tiếp khách rõ ràng."
       }
@@ -526,11 +529,14 @@
       },
       "sach": {
         "han": "離壬會子癸喜產多男",
-        "am": "Ly Nhâm hội Tử Quý, hỷ sản đa nam",
-        "y": "Thuỷ và Hoả giao hoà đúng phép ký tế: sách xưa coi là thế sinh sôi, gia đạo ấm áp và thuận đường con cháu.",
-        "nhom": "A",
-        "chu_de": "gia_dinh",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "am": "Ly Nhâm hội Tý Quý, hỷ sản đa nam",
+        "nhom": "C",
+        "sat": true,
+        "chu_de": "con_cai",
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Sách ghi: phương Ly, Nhâm hội cùng phương Tý, Quý (Cửu Tử phối Nhất Bạch) thì mừng sinh nhiều con trai.",
+        "ham_y": "Nên chú ý quan niệm trọng nam thời xưa chỉ để tham khảo; cốt ở giữ nhà cửa ấm áp và chăm sóc sức khoẻ gia đình.",
+        "viec": "Giữ phòng thông thoáng, ánh sáng hài hoà và duy trì lịch khám sức khoẻ định kỳ cho cả nhà."
       }
     },
     "2-1": {
@@ -589,15 +595,7 @@
       },
       "an_toan": [
         "Giữ khô thoáng, chống ẩm mốc; thức ăn đậy kín, bảo quản kỹ; không động thổ, đục phá ở phía này trong năm có sao 5, sao 2 bay tới."
-      ],
-      "sach": {
-        "han": "遇中二二而附鳳非難",
-        "am": "Ngộ trung Nhị Nhị nhi phụ phụng phi nan",
-        "y": "Sách xưa ghi sao Nhị gặp sao Nhị khi đắc vận vẫn có cơ hội tiến thân và giữ đất đai; khi trái vận cần giữ yên tĩnh.",
-        "nhom": "A",
-        "chu_de": "nha_cua",
-        "nguon": "phongthuy_huyen_khong_co_thu"
-      }
+      ]
     },
     "2-3": {
       "ten": "Đấu ngưu sát",
@@ -666,15 +664,15 @@
         ]
       },
       "sach": {
-        "han": "風行地而硬直難當",
-        "am": "Phong hành địa nhi ngạnh trực nan đương",
-        "nhom": "B",
+        "han": "風行地而硬直難當室有欺姑之婦",
+        "am": "Phong hành địa nhi ngạnh trực nan đương, thất hữu khi cô chi phụ",
+        "nhom": "C",
         "sat": true,
         "chu_de": "gia_dinh",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: Tốn Mộc khắc Khôn Thổ, trong nhà dễ nảy sinh lời nói thẳng cứng, bất đồng giữa các thế hệ.",
-        "ham_y": "Nên chú ý lắng nghe và nhường nhịn nhau trong chuyện sinh hoạt gia đình.",
-        "viec": "Thêm chút ánh sáng ấm để trung hoà giữa Mộc và Thổ, giữ lối đi thông thoáng."
+        "y": "Sách ghi: Tốn Phong (Tứ Lục) đi trên Khôn Địa (Nhị Hắc) mà thế đất, lối nước cứng thẳng khó đương nổi thì trong nhà có chuyện nàng dâu lấn lướt mẹ chồng.",
+        "ham_y": "Nên chú ý lắng nghe, nhường nhịn nhau giữa các thế hệ trong gia đình và tránh lối đi chĩa thẳng gắt.",
+        "viec": "Giữ lối đi thông thoáng, thêm ánh sáng ấm dịu để hoà khí trong nhà êm thuận hơn."
       }
     },
     "2-5": {
@@ -749,8 +747,8 @@
         "sat": true,
         "chu_de": "tinh_net",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: Khôn và Càn giao hội lúc suy khí khiến người ở dễ tính toán quá chặt, luôn thấy chưa yên tâm về tiền của.",
-        "ham_y": "Nên chú ý cân bằng giữa tiết kiệm và chăm sóc đời sống tinh thần gia đình.",
+        "y": "Sách ghi: Càn (Lục Bạch) và Khôn (Nhị Hắc) giao hội thì lòng dễ keo chặt, tính toán kỹ mà vẫn thấy chưa đủ.",
+        "ham_y": "Nên chú ý cân bằng giữa việc giữ của và chăm lo đời sống tinh thần gia đình.",
         "viec": "Sắp xếp lại tủ đồ gọn thoáng, bỏ bớt vật dụng cũ tích trữ lâu ngày không dùng."
       }
     },
@@ -784,13 +782,13 @@
         "Cẩn thận hơn với lửa và điện ở phía này: kiểm tra dây điện cũ, ổ cắm, bếp gas định kỳ; không để nhiều thiết bị toả nhiệt một chỗ; có bình chữa cháy nhỏ trong nhà."
       ],
       "sach": {
-        "han": "澤金洩坤腹之氣",
-        "am": "Trạch Kim tiết Khôn phúc chi khí",
+        "han": "臨云泄痢澤金洩坤腹之氣",
+        "am": "Lâm vân tiết lỵ, Trạch Kim tiết Khôn phúc chi khí",
         "nhom": "C",
         "sat": true,
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: Đoài Kim làm hao khí của Khôn Thổ, gắn với vùng bụng và đường ăn uống dễ nhạy cảm.",
+        "y": "Sách ghi: tượng quẻ Lâm (Khôn Nhị Hắc gặp Đoài Thất Xích) chủ chứng đau bụng, tiêu chảy do Trạch Kim làm tiết hao khí vùng bụng của quẻ Khôn; nên đi khám khi kéo dài.",
         "ham_y": "Nên chú ý ăn uống điều độ, giữ vệ sinh bếp núc và chăm sóc hệ tiêu hoá.",
         "viec": "Ăn chín uống sôi, hạn chế đồ lạnh và đi khám sức khoẻ định kỳ khi bụng dạ khó chịu."
       }
@@ -821,12 +819,12 @@
         ]
       },
       "sach": {
-        "han": "逢八白而財源大進",
-        "am": "Phùng Bát Bạch nhi tài nguyên đại tiến",
-        "y": "Nhị Hắc và Bát Bạch cộng thành mười (hợp thập): sách xưa khen là thế thông khí, thuận cho tích luỹ và nhà đất.",
+        "han": "二黑飛乾逢八白而財源大進",
+        "am": "Nhị Hắc phi Càn, phùng Bát Bạch nhi tài nguyên đại tiến",
         "nhom": "A",
         "chu_de": "tien_bac",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Sao Nhị Hắc bay tới cung Càn, gặp Bát Bạch: sách xưa khen là thế nguồn tài lộc tiến mạnh."
       }
     },
     "2-9": {
@@ -895,10 +893,13 @@
       "sach": {
         "han": "三碧臨庚遇一白而丁口頻添",
         "am": "Tam Bích lâm Canh, ngộ Nhất Bạch nhi đinh khẩu tần thiêm",
-        "y": "Nhất Bạch Thuỷ dưỡng Tam Bích Mộc: sách xưa coi là thế sinh khí dồi dào, nhà cửa thêm sức sống và nhân đinh.",
-        "nhom": "A",
-        "chu_de": "gia_dinh",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "nhom": "C",
+        "sat": true,
+        "chu_de": "con_cai",
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Sách ghi: sao Tam Bích tới phương Canh, gặp Nhất Bạch thì nhà năng thêm người, thêm nhân đinh.",
+        "ham_y": "Nên chú ý giữ không gian gia đình ấm cúng, thông thoáng để thuận cho sinh hoạt nhiều thế hệ.",
+        "viec": "Dọn thoáng lối đi, giữ phòng ốc đủ sáng và duy trì nếp sinh hoạt điều độ cho cả nhà."
       }
     },
     "3-2": {
@@ -1072,9 +1073,9 @@
         "sat": true,
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: Lục Bạch Kim khắc Tam Bích Mộc, gắn với vùng đầu và gân cơ dễ căng mỏi khi làm việc quá sức.",
-        "ham_y": "Nên chú ý nghỉ mắt, ngủ đủ giấc và tránh để bàn ghế sắc cạnh chĩa vào chỗ ngồi.",
-        "viec": "Giữ nhịp nghỉ ngắn giữa giờ làm và đi khám sức khoẻ khi hay đau mỏi đầu."
+        "y": "Sách ghi: chứng ù vang trong đầu ứng vào cặp sao Lục Bạch gặp Tam Bích; nên đi khám khi kéo dài.",
+        "ham_y": "Nên chú ý nghỉ ngơi điều độ, ngủ đủ giấc và tránh để vật sắc cạnh chĩa vào chỗ ngồi.",
+        "viec": "Giữ nhịp nghỉ ngắn giữa giờ làm và đi khám sức khoẻ khi hay đau mỏi hoặc ù đầu."
       }
     },
     "3-7": {
@@ -1188,10 +1189,10 @@
       "sach": {
         "han": "木見火而生聰明秀士",
         "am": "Mộc kiến Hoả nhi sinh thông minh tú sĩ",
-        "y": "Mộc sinh Hoả thông minh sáng sủa: rất thuận cho suy nghĩ nhanh nhạy, sáng tạo, học tập và truyền thông.",
         "nhom": "A",
         "chu_de": "cong_viec",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Mộc (Tam Bích) gặp Hoả (Cửu Tử), sách xưa khen là thế Mộc Hoả thông minh, nhà có người sáng dạ, thuận đường học vấn."
       }
     },
     "4-1": {
@@ -1255,15 +1256,15 @@
         ]
       },
       "sach": {
-        "han": "風行地而硬直難當",
-        "am": "Phong hành địa nhi ngạnh trực nan đương",
-        "nhom": "B",
+        "han": "風行地而硬直難當室有欺姑之婦",
+        "am": "Phong hành địa nhi ngạnh trực nan đương, thất hữu khi cô chi phụ",
+        "nhom": "C",
         "sat": true,
         "chu_de": "gia_dinh",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: sao Tứ Lục và Nhị Hắc khắc nhau, việc nhà dễ căng thẳng vì cách làm khác biệt giữa người lớn và người trẻ.",
-        "ham_y": "Nên chú ý phân chia rõ phần việc trong nhà thay vì góp ý lúc đang mệt.",
-        "viec": "Giữ phòng thoáng khí, điểm nhẹ gam màu ấm dịu để bầu không khí mềm lại."
+        "y": "Sách ghi: Tốn Phong (Tứ Lục) đi trên Khôn Địa (Nhị Hắc) mà hình thế cứng thẳng khó đương nổi thì trong nhà dễ có chuyện nàng dâu lấn lướt mẹ chồng.",
+        "ham_y": "Nên chú ý phân chia rõ việc nhà và giữ thái độ tôn trọng, ôn hoà giữa người lớn với người trẻ.",
+        "viec": "Giữ phòng thoáng khí, điểm nhẹ gam màu ấm dịu và tránh kê đồ sắc cạnh chĩa vào chỗ ngồi."
       }
     },
     "4-3": {
@@ -1368,7 +1369,7 @@
         "sat": true,
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: sao Tứ Lục gặp Ngũ Hoàng lúc suy khí thì phần ngực và sức đề kháng dễ suy giảm nếu nơi ở ẩm bí.",
+        "y": "Sách ghi: Ngũ Hoàng gặp Tứ Lục thì dễ sinh chứng sưng viêm, mụn nhọt ở vùng ngực; nên đi khám sớm để kiểm tra.",
         "ham_y": "Nên chú ý mở thoáng cửa sổ đón nắng gió và giữ thói quen tầm soát sức khoẻ.",
         "viec": "Dọn sạch đồ ẩm mốc ở góc này và đi khám sức khoẻ tổng quát định kỳ."
       }
@@ -1405,7 +1406,7 @@
         "sat": true,
         "chu_de": "cong_viec",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: Càn Kim khắc Tốn Mộc (tượng Tiểu Súc), người ở hay phải tất bật gánh nhiều đầu việc chi tiết.",
+        "y": "Sách ghi: tượng quẻ Tiểu Súc (Tốn Tứ Lục gặp Càn Lục Bạch) chủ cảnh bị sai phái chạy việc, tất bật lao nhọc.",
         "ham_y": "Nên chú ý sắp xếp thứ tự ưu tiên, tránh tự ôm hết phần việc vặt trong nhà và cơ quan.",
         "viec": "Lên danh sách ba việc chính mỗi ngày và bàn giao bớt các khâu phụ."
       }
@@ -1444,7 +1445,7 @@
         "sat": true,
         "chu_de": "gia_dinh",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: Thất Xích Kim khắc Tứ Lục Mộc, chuyện tình cảm và lời ăn tiếng nói trong nhà dễ va chạm nhỏ.",
+        "y": "Sách ghi: Thìn (Tốn – Tứ Lục) gặp Dậu (Đoài – Thất Xích) thì chốn phòng khuê, người trong nhà dễ bất hoà.",
         "ham_y": "Nên chú ý nói chuyện nhẹ nhàng, tránh nhắc lại chuyện cũ lúc đôi bên đang mệt.",
         "viec": "Cất gọn vật sắc nhọn và giữ không gian sinh hoạt chung êm dịu, thoáng đãng."
       }
@@ -1516,12 +1517,12 @@
         "Nếu là bếp hoặc nơi để nhiều đồ điện: kiểm tra bếp gas, dây điện định kỳ; nấu xong tắt bếp, khoá gas."
       ],
       "sach": {
-        "han": "火曜連珠相遇青雲路上逍遙",
-        "am": "Hoả diệu liên châu tương ngộ, thanh vân lộ thượng tiêu dao",
-        "y": "Tứ Lục Văn Khúc sinh Cửu Tử Hoả: sách xưa khen là thế Mộc Hoả thông minh, thuận cho học vấn, danh tiếng và sáng tạo.",
+        "han": "木見火而生聰明秀士",
+        "am": "Mộc kiến Hoả nhi sinh thông minh tú sĩ",
         "nhom": "A",
         "chu_de": "cong_viec",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Mộc (Tứ Lục) gặp Hoả (Cửu Tử), sách xưa khen là thế Mộc Hoả thông minh, nhà có người sáng dạ, thuận cho học vấn và danh tiếng."
       }
     },
     "5-1": {
@@ -1554,14 +1555,14 @@
       ],
       "sach": {
         "han": "子癸歲廉飛到陰處生瘍",
-        "am": "Tử Quý tuế Liêm phi đáo, âm xứ sinh dương",
+        "am": "Tý Quý tuế Liêm phi đáo, âm xứ sinh dương",
         "nhom": "C",
         "sat": true,
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: Ngũ Hoàng khắc Nhất Bạch Thuỷ, sách dặn giữ khu vực này khô ráo và chú ý chăm sóc hệ bài tiết, tai thận.",
-        "ham_y": "Nên chú ý uống đủ nước sạch, giữ ấm cơ thể và tránh để nước tù đọng.",
-        "viec": "Vệ sinh đường thoát nước định kỳ và đi khám sức khoẻ phòng ngừa."
+        "y": "Sách ghi: phương Tý Quý (Nhất Bạch) gặp sao Liêm Trinh (Ngũ Hoàng) lưu niên bay tới thì vùng dưới thuộc thận dễ sinh mụn nhọt, viêm nhiễm; nên đi khám kiểm tra.",
+        "ham_y": "Nên chú ý uống đủ nước sạch, giữ ấm cơ thể và chăm sóc hệ thận – tiết niệu.",
+        "viec": "Vệ sinh đường thoát nước khô sạch và đi khám sức khoẻ phòng ngừa định kỳ."
       }
     },
     "5-2": {
@@ -1664,9 +1665,9 @@
         "sat": true,
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: Ngũ Hoàng đi cùng Tứ Lục dễ làm khí trệ, sách dặn giữ gìn cơ thể và tránh làm việc kiệt sức.",
-        "ham_y": "Nên chú ý nghỉ ngơi điều độ, không kê giường ngủ lâu ngày ở góc thiếu sáng.",
-        "viec": "Giữ phòng khô sạch, thoáng gió và duy trì lịch khám định kỳ hằng năm."
+        "y": "Sách ghi: sao Ngũ Hoàng hội cùng Tứ Lục chủ chứng mụn nhọt, viêm sưng vùng ngực; nên đi khám kiểm tra định kỳ.",
+        "ham_y": "Nên chú ý nghỉ ngơi điều độ, không kê giường ngủ lâu ngày ở góc thiếu sáng, bí khí.",
+        "viec": "Giữ phòng khô sạch, thoáng gió và duy trì lịch khám sức khoẻ hằng năm."
       }
     },
     "5-5": {
@@ -1696,18 +1697,7 @@
       },
       "an_toan": [
         "Giữ khô thoáng, chống ẩm mốc; thức ăn đậy kín, bảo quản kỹ; không động thổ, đục phá ở phía này trong năm có sao 5, sao 2 bay tới."
-      ],
-      "sach": {
-        "han": "五黃關煞不拘臨方到向人口常損",
-        "am": "Ngũ Hoàng quan sát bất câu lâm phương đáo hướng",
-        "nhom": "C",
-        "sat": true,
-        "chu_de": "suc_khoe",
-        "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: sao Ngũ Hoàng chồng lên nhau là thế khí nặng, sách dặn tránh động thổ và chú ý chăm sóc sức khoẻ cả nhà.",
-        "ham_y": "Nên chú ý giữ cung này thật yên tĩnh, không khoan đục sửa chữa lớn.",
-        "viec": "Dọn gọn gàng, tránh đặt bếp hay giường chính tại đây và đi khám sức khoẻ định kỳ."
-      }
+      ]
     },
     "5-6": {
       "ten": "Ngũ Lục",
@@ -1862,10 +1852,10 @@
       "sach": {
         "han": "土能制水復生金定主田莊之富",
         "am": "Thổ năng chế thuỷ phục sinh kim, định chủ điền trang chi phú",
-        "y": "Lục Bạch sinh Nhất Bạch: hợp việc quản lý, học thuật và tích luỹ tài sản theo đường dài.",
         "nhom": "A",
-        "chu_de": "cong_viec",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "chu_de": "tien_bac",
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Ở thế Lục Nhất Kim Thuỷ tương sinh, gặp hành Thổ tuy chế Thuỷ nhưng lại sinh Kim, sách xưa khen là chủ vượng điền trang, tích luỹ nhà đất."
       }
     },
     "6-2": {
@@ -1900,9 +1890,9 @@
         "sat": true,
         "chu_de": "tien_bac",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: Càn Kim gặp Khôn Thổ trái thời thì thuận giữ của nhưng tâm lý dễ khắt khe, ôm đồm việc quản lý.",
-        "ham_y": "Nên chú ý chia sẻ trách nhiệm tài chính rõ ràng để giảm áp lực tự thân.",
-        "viec": "Giữ góc phòng sáng sủa, tránh bày quá đặc đồ nặng nề."
+        "y": "Sách ghi: Càn (Lục Bạch) và Khôn (Nhị Hắc) gặp nhau thì dễ sinh tâm lý tiếc của, chặt chẽ mà lòng chưa thấy đủ.",
+        "ham_y": "Nên chú ý minh bạch kế hoạch chi tiêu chung để bớt lo nghĩ nặng nề về tiền bạc.",
+        "viec": "Giữ góc phòng sáng sủa, thoáng đãng, tránh bày quá đặc đồ đạc nặng nề."
       }
     },
     "6-3": {
@@ -1939,9 +1929,9 @@
         "sat": true,
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: sao Lục Bạch và Tam Bích giao khắc khiến đầu óc dễ căng thẳng, nóng vội khi chịu áp lực kéo dài.",
-        "ham_y": "Nên chú ý hạ nhịp công việc buổi tối và chăm sóc giấc ngủ, xương khớp.",
-        "viec": "Giữ phòng ngủ yên tĩnh, đi khám định kỳ để theo dõi huyết áp và giấc ngủ."
+        "y": "Sách ghi: chứng ù vang vùng đầu ứng vào cặp sao Lục Bạch hội cùng Tam Bích; nên đi khám để kiểm tra.",
+        "ham_y": "Nên chú ý hạ nhịp công việc buổi tối và chăm sóc giấc ngủ, huyết áp.",
+        "viec": "Giữ phòng ngủ yên tĩnh và đi khám định kỳ để theo dõi huyết áp, thần kinh."
       }
     },
     "6-4": {
@@ -1976,7 +1966,7 @@
         "sat": true,
         "chu_de": "cong_viec",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: Lục Bạch hợp thập với Tứ Lục nhưng Kim khắc Mộc nên thành quả đi kèm nhiều công sức chạy việc.",
+        "y": "Sách ghi: tượng quẻ Tiểu Súc (Càn Lục Bạch gặp Tốn Tứ Lục) chủ việc bận rộn do bị sai phái, chạy việc lao nhọc.",
         "ham_y": "Nên chú ý giữ nhịp nghỉ hợp lý để không bị cuốn vào guồng bận rộn liên miên.",
         "viec": "Giữ bàn làm việc tinh gọn, dùng lịch nhắc cố định cho giờ nghỉ ngơi."
       }
@@ -2190,9 +2180,9 @@
         "sat": true,
         "chu_de": "tinh_duyen",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: sao Thất Xích sinh Nhất Bạch khi trái vận dễ sinh chuyện vương vấn tình cảm, lời ăn tiếng nói.",
-        "ham_y": "Nên chú ý ranh giới trong các mối quan hệ bên ngoài và lời hứa miệng.",
-        "viec": "Ưu tiên ánh sáng ấm vừa phải, tránh bày nhiều đồ kim loại sắc cạnh ở góc này."
+        "y": "Sách ghi: Kim (Thất Xích) và Thuỷ (Nhất Bạch) đa tình thì dễ ham chuyện sắc rượu, vui chơi quá đà.",
+        "ham_y": "Nên chú ý giữ ranh giới trong các mối quan hệ bên ngoài và sinh hoạt điều độ.",
+        "viec": "Ưu tiên ánh sáng ấm vừa phải, giữ góc phòng gọn gàng và hạn chế tiệc tùng khuya."
       }
     },
     "7-2": {
@@ -2225,15 +2215,15 @@
         "Cẩn thận hơn với lửa và điện ở phía này: kiểm tra dây điện cũ, ổ cắm, bếp gas định kỳ; không để nhiều thiết bị toả nhiệt một chỗ; có bình chữa cháy nhỏ trong nhà."
       ],
       "sach": {
-        "han": "澤金洩坤腹之氣",
-        "am": "Trạch Kim tiết Khôn phúc chi khí",
+        "han": "臨云泄痢澤金洩坤腹之氣",
+        "am": "Lâm vân tiết lỵ, Trạch Kim tiết Khôn phúc chi khí",
         "nhom": "C",
         "sat": true,
         "chu_de": "suc_khoe",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: sao Thất Xích gặp Nhị Hắc làm tiết khí hành Thổ, người ở dễ mệt đường tiêu hoá khi ăn ngủ thất thường.",
-        "ham_y": "Nên chú ý giữ nếp bữa ăn đúng giờ và kiểm tra sức khoẻ phòng ngừa.",
-        "viec": "Giữ khu vực bếp và phòng ăn khô sạch, đi khám định kỳ mỗi năm."
+        "y": "Sách ghi: tượng quẻ Lâm (Đoài Thất Xích gặp Khôn Nhị Hắc) chủ chứng rối loạn tiêu hoá, đi ngoài do Trạch Kim làm tiết khí vùng bụng của Khôn; nên đi khám khi bất thường.",
+        "ham_y": "Nên chú ý giữ nếp bữa ăn đúng giờ và kiểm tra sức khoẻ hệ tiêu hoá phòng ngừa.",
+        "viec": "Giữ khu vực bếp và phòng ăn khô sạch, đi khám sức khoẻ định kỳ mỗi năm."
       }
     },
     "7-3": {
@@ -2312,8 +2302,8 @@
         "sat": true,
         "chu_de": "tinh_duyen",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: Đoài Kim gặp Tốn Mộc trái vận dễ sinh hờn giận, hiểu lầm trong quan hệ gần gũi.",
-        "ham_y": "Nên chú ý trao đổi thẳng thắn mà ôn hoà, hạn chế tranh luận qua tin nhắn.",
+        "y": "Sách ghi: Dậu (Đoài – Thất Xích) gặp Thìn (Tốn – Tứ Lục) thì chuyện phòng khuê, tình cảm trong nhà dễ bất hoà.",
+        "ham_y": "Nên chú ý trao đổi thẳng thắn mà ôn hoà, hạn chế tranh luận căng thẳng.",
         "viec": "Dùng tông màu trung tính dịu mắt và giữ phòng ốc gọn gàng."
       }
     },
@@ -2443,10 +2433,10 @@
       "sach": {
         "han": "胃入斗牛積千箱之玉帛",
         "am": "Vị nhập Đẩu Ngưu, tích thiên tương chi ngọc bạch",
-        "y": "Cấn Thổ sinh Đoài Kim âm dương chính phối: sách xưa khen là thế vượng tài lộc, hợp tác thuận hoà và giữ được của.",
         "nhom": "A",
         "chu_de": "tien_bac",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Sao Vị (Đoài – Thất Xích) hội vào cung Đẩu Ngưu (Cấn – Bát Bạch), sách xưa khen là thế Cấn Đoài tương sinh, tích luỹ giàu có đầy kho."
       }
     },
     "7-9": {
@@ -2542,12 +2532,12 @@
         ]
       },
       "sach": {
-        "han": "逢八白而財源大進",
-        "am": "Phùng Bát Bạch nhi tài nguyên đại tiến",
-        "y": "Bát Bạch hợp thập cùng Nhị Hắc: dòng tiền và tài sản tích luỹ ổn định khi không gian giữ sạch, thoáng.",
+        "han": "二黑飛乾逢八白而財源大進",
+        "am": "Nhị Hắc phi Càn, phùng Bát Bạch nhi tài nguyên đại tiến",
         "nhom": "A",
         "chu_de": "tien_bac",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Sao Nhị Hắc bay tới cung Càn gặp Bát Bạch, sách xưa ghi là thế nguồn tiền của mở rộng, tiến tới dồi dào."
       }
     },
     "8-3": {
@@ -2713,10 +2703,10 @@
       "sach": {
         "han": "胃入斗牛積千箱之玉帛",
         "am": "Vị nhập Đẩu Ngưu, tích thiên tương chi ngọc bạch",
-        "y": "Bát Bạch sinh Thất Xích hài hoà: thuận cho thương lượng, kinh doanh, tích luỹ và gắn kết người trẻ trong nhà.",
         "nhom": "A",
         "chu_de": "tien_bac",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Sao Vị (Đoài – Thất Xích) đi vào cung Đẩu Ngưu (Cấn – Bát Bạch), sách xưa khen là thế tích chứa ngàn rương ngọc lụa, của cải dồi dào."
       }
     },
     "8-8": {
@@ -2806,11 +2796,14 @@
       },
       "sach": {
         "han": "離壬會子癸喜產多男",
-        "am": "Ly Nhâm hội Tử Quý, hỷ sản đa nam",
-        "y": "Cửu Tử gặp Nhất Bạch âm dương chính phối: thuận cho hỷ sự, tài khí luân chuyển và tinh thần phấn chấn.",
-        "nhom": "A",
-        "chu_de": "tien_bac",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "am": "Ly Nhâm hội Tý Quý, hỷ sản đa nam",
+        "nhom": "C",
+        "sat": true,
+        "chu_de": "con_cai",
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Sách ghi: phương Ly, Nhâm hội cùng phương Tý, Quý (Cửu Tử gặp Nhất Bạch) thì mừng sinh nhiều con trai.",
+        "ham_y": "Nên chú ý lời sách xưa mang quan niệm con trai thời cũ; ngày nay quan trọng là gia đạo hoà thuận, con cái khoẻ mạnh.",
+        "viec": "Sắp xếp không gian sống thoáng sạch, cân bằng ánh sáng và chăm sóc sức khoẻ các thành viên."
       }
     },
     "9-2": {
@@ -2883,10 +2876,10 @@
       "sach": {
         "han": "木見火而生聰明秀士",
         "am": "Mộc kiến Hoả nhi sinh thông minh tú sĩ",
-        "y": "Cửu Tử được Tam Bích tương sinh: đầu óc lanh lợi, việc triển khai nhanh; chỉ cần thêm tính kiên nhẫn ở khâu chốt.",
         "nhom": "A",
         "chu_de": "cong_viec",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Mộc (Tam Bích) gặp Hoả (Cửu Tử), sách xưa khen là thế sinh bậc tú sĩ thông minh, sáng đường chữ nghĩa."
       }
     },
     "9-4": {
@@ -2919,12 +2912,12 @@
         "Nếu là bếp hoặc nơi để nhiều đồ điện: kiểm tra bếp gas, dây điện định kỳ; nấu xong tắt bếp, khoá gas."
       ],
       "sach": {
-        "han": "火曜連珠相遇青雲路上逍遙",
-        "am": "Hoả diệu liên châu tương ngộ, thanh vân lộ thượng tiêu dao",
-        "y": "Cửu Tử và Tứ Lục tương sinh: rất hợp đặt bàn học, bàn làm việc hoặc góc đọc sách trong Vận 9.",
+        "han": "木見火而生聰明秀士",
+        "am": "Mộc kiến Hoả nhi sinh thông minh tú sĩ",
         "nhom": "A",
         "chu_de": "cong_viec",
-        "nguon": "phongthuy_huyen_khong_co_thu"
+        "nguon": "phongthuy_huyen_khong_co_thu",
+        "y": "Mộc (Tứ Lục) gặp Hoả (Cửu Tử), sách xưa khen là thế sinh người học hành thông minh, sáng sủa."
       }
     },
     "9-5": {
@@ -3114,15 +3107,15 @@
         "Cẩn thận hơn với lửa và điện ở phía này: kiểm tra dây điện cũ, ổ cắm, bếp gas định kỳ; không để nhiều thiết bị toả nhiệt một chỗ; có bình chữa cháy nhỏ trong nhà."
       ],
       "sach": {
-        "han": "火星旺宮單遇動始為殃煞處重逢靜亦肆虐",
-        "am": "Hoả tinh vượng cung đơn ngộ động thuỷ vi ương",
+        "han": "運如已退九火相逢灾不輕",
+        "am": "Vận như dĩ thoái, Cửu Hoả tương phùng tai bất khinh",
         "nhom": "B",
         "sat": true,
         "chu_de": "nha_cua",
         "nguon": "phongthuy_huyen_khong_co_thu",
-        "y": "Sách ghi: sao Cửu Tử Hoả gặp nhau ở vận vượng thì rực rỡ nhưng nếu kích động quá mức dễ nóng vội, hao sức và cần phòng cháy nổ.",
-        "ham_y": "Nên chú ý giữ ánh sáng vừa đủ, kiểm tra an toàn điện lửa và làm việc có nhịp nghỉ.",
-        "viec": "Rà lại ổ cắm, thiết bị nhiệt ở phía này và giữ không gian thoáng mát."
+        "y": "Sách ghi: vận nếu đã thoái mà hai sao Cửu Tử Hoả gặp nhau thì hoạ lửa chẳng nhẹ; sách dặn nên cẩn thận lửa, điện.",
+        "ham_y": "Nên chú ý giữ ánh sáng vừa đủ, kiểm tra an toàn điện lửa và thông gió tốt ở khu vực này.",
+        "viec": "Rà lại ổ cắm, thiết bị toả nhiệt ở phía này và giữ không gian thoáng mát."
       }
     }
   },

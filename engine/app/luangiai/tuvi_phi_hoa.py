@@ -361,52 +361,54 @@ def chon_noi_bat(duong: list[dict]) -> list[dict]:
 
 
 def _luan_chuoi_chuyen_ky(cung: list[dict]) -> list[dict]:
-    """Diễn giải đời thường cho chuỗi Kỵ chuyển Kỵ & Lộc chuyển Kỵ (tên cung, sao, can chỉ nằm ở `can_cu`; đối xứng VI ↔ EN)."""
+    """Diễn giải đời thường cho chuỗi Kỵ chuyển Kỵ & Lộc chuyển Kỵ từ KB `tuvi_phi_hoa_kb` (+ `loi_khuon` bản Anh);
+    bỏ số trang sách hiện đại chưa có trong kho nguồn, giữ đủ toạ độ cung/sao và `ma_mau` chuẩn DB 0017."""
     vi = la_viet()
     ra = []
     for ch in ph.chuoi_chuyen_ky(cung):
-        ma_a = ten_mang(ch["tu_cung"]) if vi else mang(ch["tu_cung"])
-        ma_b = ten_mang(ch["qua_cung"]) if vi else mang(ch["qua_cung"])
-        ma_c = ten_mang(ch["den_cung"]) if vi else mang(ch["den_cung"])
-        ngan_a = mang_ngan(ch["tu_cung"])
-        ngan_b = mang_ngan(ch["qua_cung"])
-        ngan_c = mang_ngan(ch["den_cung"])
-        if ch["loai"] == "ky_chuyen_ky":
-            if vi:
-                td = f"Mạch bận tâm từ {ngan_a} qua {ngan_b} rồi dồn về {ngan_c}"
-                ng = f"Nỗi lo bắt đầu ở {ma_a} thường kéo sang {ma_b}, sau đó hệ quả thực tế lại lắng xuống ở {ma_c}."
-                viec = f"Khi {ngan_a} nảy sinh khúc mắc, khoan lấy {ngan_c} ra bù đắp vội; hãy gỡ thẳng nút thắt ngay từ bước {ngan_b}."
-                cu = (f"Kỵ chuyển Kỵ (phái Phi tinh Lương Nhược Du, tr. 52, 54 — tóm ý): Cung {ch['tu_cung']} ({ch['can_dau']}) hoá Kỵ "
-                      f"({ch['sao_dau']}) sang {ch['qua_cung']} ({ch['can_chuyen']}), chuyển Kỵ ({ch['sao_chuyen']}) về {ch['den_cung']} "
-                      f"(xung {ch['xung_cung']})")
-            else:
-                td = f"Ripple of pressure from {ngan_a} through {ngan_b} into {ngan_c}"
-                ng = f"Concerns starting in {ma_a} tend to pass through {ma_b} and settle as practical pressure in {ma_c}."
-                viec = f"When {ngan_a} feels strained, avoid over-drawing on {ngan_c}; resolve the bottleneck early at the {ngan_b} step."
-                cu = (f"Ji-to-Ji chain (Liang Flying-Star school, pp. 52, 54 — summary): {tc(ch['tu_cung'])} ({tcan(ch['can_dau'])}) sends {th('Kỵ')} "
-                      f"({ts(ch['sao_dau'])}) to {tc(ch['qua_cung'])} ({tcan(ch['can_chuyen'])}), turning {th('Kỵ')} ({ts(ch['sao_chuyen'])}) "
-                      f"into {tc(ch['den_cung'])} (clashing {tc(ch['xung_cung'])})")
-        else:
-            if vi:
-                td = f"Thuận lợi từ {ngan_a} sang {ngan_b} cần giữ kỹ khâu {ngan_c}"
-                ng = f"Nguồn mở ra từ {ma_a} đem cơ hội tới {ma_b}, nhưng dễ kéo theo sự bận lòng hoặc hao sức ở {ma_c}."
-                viec = f"Đón nhận thuận lợi ở {ngan_b} nhưng đặt sẵn hạn mức thời gian và chi phí cho {ngan_c} để giữ trọn thành quả."
-                cu = (f"Lộc chuyển Kỵ (phái Phi tinh Lương Nhược Du, tr. 99, 105 — tóm ý): Cung {ch['tu_cung']} ({ch['can_dau']}) hoá Lộc "
-                      f"({ch['sao_dau']}) sang {ch['qua_cung']} ({ch['can_chuyen']}), chuyển Kỵ ({ch['sao_chuyen']}) về {ch['den_cung']}")
-            else:
-                td = f"Gain from {ngan_a} to {ngan_b} needs boundaries around {ngan_c}"
-                ng = f"Support flowing from {ma_a} brings momentum to {ma_b}, yet can quietly pull extra effort or outlay into {ma_c}."
-                viec = f"Welcome the opening in {ngan_b} while setting clear time and budget limits around {ngan_c}."
-                cu = (f"Lu-to-Ji chain (Liang Flying-Star school, pp. 99, 105 — summary): {tc(ch['tu_cung'])} ({tcan(ch['can_dau'])}) sends {th('Lộc')} "
-                      f"({ts(ch['sao_dau'])}) to {tc(ch['qua_cung'])} ({tcan(ch['can_chuyen'])}), turning {th('Kỵ')} ({ts(ch['sao_chuyen'])}) "
-                      f"into {tc(ch['den_cung'])}")
+        loai = ch["loai"]
+        mau = kb.chuoi_chuyen_ky(loai) or {}
+        tat_loai = "kck" if loai == "ky_chuyen_ky" else "lck"
+        ma_mau = f"ds.duong_bay.{tat_loai}.{MA_CUNG[ch['tu_cung']]}+{MA_CUNG[ch['den_cung']]}"
+        bien = {
+            "ma_a": ten_mang(ch["tu_cung"]) if vi else mang(ch["tu_cung"]),
+            "ma_b": ten_mang(ch["qua_cung"]) if vi else mang(ch["qua_cung"]),
+            "ma_c": ten_mang(ch["den_cung"]) if vi else mang(ch["den_cung"]),
+            "ngan_a": mang_ngan(ch["tu_cung"]),
+            "ngan_b": mang_ngan(ch["qua_cung"]),
+            "ngan_c": mang_ngan(ch["den_cung"]),
+            "tu_cung": tc(ch["tu_cung"]),
+            "qua_cung": tc(ch["qua_cung"]),
+            "den_cung": tc(ch["den_cung"]),
+            "xung_cung": tc(ch["xung_cung"]),
+            "can_dau": tcan(ch["can_dau"]),
+            "can_chuyen": tcan(ch["can_chuyen"]),
+            "sao_dau": ts(ch["sao_dau"]),
+            "sao_chuyen": ts(ch["sao_chuyen"]),
+            "hoa_ky": th("Kỵ"),
+            "hoa_loc": th("Lộc"),
+        }
+        td = kb.dien(mau.get("tieu_de"), **bien) if vi else L(f"tv2.chuoi.{loai}.tieu_de", mau.get("tieu_de") or "", **bien)
+        ng = kb.dien(mau.get("nghia"), **bien) if vi else L(f"tv2.chuoi.{loai}.nghia", mau.get("nghia") or "", **bien)
+        viec = kb.dien(mau.get("viec_nen_lam"), **bien) if vi else L(f"tv2.chuoi.{loai}.viec_nen_lam", mau.get("viec_nen_lam") or "", **bien)
+        cu = kb.dien(mau.get("can_cu"), **bien) if vi else L(f"tv2.chuoi.{loai}.can_cu", mau.get("can_cu") or "", **bien)
         ra.append({
-            "loai": ch["loai"],
+            "loai": loai,
             "phai": ch["phai"],
-            "tieu_de": td,
-            "nghia": ng,
-            "viec_nen_lam": viec,
-            "can_cu": [cu],
+            "ma_mau": ma_mau,
+            "tu_cung": ch["tu_cung"],
+            "can_dau": ch["can_dau"],
+            "hoa_dau": ch["hoa_dau"],
+            "sao_dau": ch["sao_dau"],
+            "qua_cung": ch["qua_cung"],
+            "can_chuyen": ch["can_chuyen"],
+            "sao_chuyen": ch["sao_chuyen"],
+            "den_cung": ch["den_cung"],
+            "xung_cung": ch["xung_cung"],
+            "tieu_de": td or "",
+            "nghia": ng or "",
+            "viec_nen_lam": viec or "",
+            "can_cu": [cu] if cu else [],
         })
     return ra
 

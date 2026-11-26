@@ -63,6 +63,7 @@ export type DoiSongLienKetChat =
 export interface GoNutDoiSongChat {
   ma: string;
   tieu_de: string;
+  du_kien_la_so?: string;
   goc_nhin_hai_mat: string;
   viec_thuc_te: string[];
 }
