@@ -376,14 +376,14 @@ def _luan_chuoi_chuyen_ky(cung: list[dict]) -> list[dict]:
                 td = f"Mạch bận tâm từ {ngan_a} qua {ngan_b} rồi dồn về {ngan_c}"
                 ng = f"Nỗi lo bắt đầu ở {ma_a} thường kéo sang {ma_b}, sau đó hệ quả thực tế lại lắng xuống ở {ma_c}."
                 viec = f"Khi {ngan_a} nảy sinh khúc mắc, khoan lấy {ngan_c} ra bù đắp vội; hãy gỡ thẳng nút thắt ngay từ bước {ngan_b}."
-                cu = (f"Kỵ chuyển Kỵ (phái Phi tinh Lương Nhược Du, tóm ý): Cung {ch['tu_cung']} ({ch['can_dau']}) hoá Kỵ "
+                cu = (f"Kỵ chuyển Kỵ (phái Phi tinh Lương Nhược Du, tr. 52, 54 — tóm ý): Cung {ch['tu_cung']} ({ch['can_dau']}) hoá Kỵ "
                       f"({ch['sao_dau']}) sang {ch['qua_cung']} ({ch['can_chuyen']}), chuyển Kỵ ({ch['sao_chuyen']}) về {ch['den_cung']} "
                       f"(xung {ch['xung_cung']})")
             else:
                 td = f"Ripple of pressure from {ngan_a} through {ngan_b} into {ngan_c}"
                 ng = f"Concerns starting in {ma_a} tend to pass through {ma_b} and settle as practical pressure in {ma_c}."
                 viec = f"When {ngan_a} feels strained, avoid over-drawing on {ngan_c}; resolve the bottleneck early at the {ngan_b} step."
-                cu = (f"Ji-to-Ji chain (Liang Flying-Star school, summary): {tc(ch['tu_cung'])} ({tcan(ch['can_dau'])}) sends {th('Kỵ')} "
+                cu = (f"Ji-to-Ji chain (Liang Flying-Star school, pp. 52, 54 — summary): {tc(ch['tu_cung'])} ({tcan(ch['can_dau'])}) sends {th('Kỵ')} "
                       f"({ts(ch['sao_dau'])}) to {tc(ch['qua_cung'])} ({tcan(ch['can_chuyen'])}), turning {th('Kỵ')} ({ts(ch['sao_chuyen'])}) "
                       f"into {tc(ch['den_cung'])} (clashing {tc(ch['xung_cung'])})")
         else:
@@ -391,13 +391,13 @@ def _luan_chuoi_chuyen_ky(cung: list[dict]) -> list[dict]:
                 td = f"Thuận lợi từ {ngan_a} sang {ngan_b} cần giữ kỹ khâu {ngan_c}"
                 ng = f"Nguồn mở ra từ {ma_a} đem cơ hội tới {ma_b}, nhưng dễ kéo theo sự bận lòng hoặc hao sức ở {ma_c}."
                 viec = f"Đón nhận thuận lợi ở {ngan_b} nhưng đặt sẵn hạn mức thời gian và chi phí cho {ngan_c} để giữ trọn thành quả."
-                cu = (f"Lộc chuyển Kỵ (phái Phi tinh Lương Nhược Du, tóm ý): Cung {ch['tu_cung']} ({ch['can_dau']}) hoá Lộc "
+                cu = (f"Lộc chuyển Kỵ (phái Phi tinh Lương Nhược Du, tr. 99, 105 — tóm ý): Cung {ch['tu_cung']} ({ch['can_dau']}) hoá Lộc "
                       f"({ch['sao_dau']}) sang {ch['qua_cung']} ({ch['can_chuyen']}), chuyển Kỵ ({ch['sao_chuyen']}) về {ch['den_cung']}")
             else:
                 td = f"Gain from {ngan_a} to {ngan_b} needs boundaries around {ngan_c}"
                 ng = f"Support flowing from {ma_a} brings momentum to {ma_b}, yet can quietly pull extra effort or outlay into {ma_c}."
                 viec = f"Welcome the opening in {ngan_b} while setting clear time and budget limits around {ngan_c}."
-                cu = (f"Lu-to-Ji chain (Liang Flying-Star school, summary): {tc(ch['tu_cung'])} ({tcan(ch['can_dau'])}) sends {th('Lộc')} "
+                cu = (f"Lu-to-Ji chain (Liang Flying-Star school, pp. 99, 105 — summary): {tc(ch['tu_cung'])} ({tcan(ch['can_dau'])}) sends {th('Lộc')} "
                       f"({ts(ch['sao_dau'])}) to {tc(ch['qua_cung'])} ({tcan(ch['can_chuyen'])}), turning {th('Kỵ')} ({ts(ch['sao_chuyen'])}) "
                       f"into {tc(ch['den_cung'])}")
         ra.append({

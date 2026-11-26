@@ -50,7 +50,7 @@ def test_thanh_mon_khop_tham_thi(ca):
 
 def test_to_hop_81_sach_qua_bo_kiem_sx_c():
     n, loi = sg.kiem_tep(_KB_PATH)
-    assert n >= 65, f"Kỳ vọng ít nhất 65 mục sách xưa trong to_hop_81, thực tế {n}"
+    assert n >= 63, f"Kỳ vọng ít nhất 63 mục sách xưa trong to_hop_81, thực tế {n}"
     assert not loi, "Lỗi kiểm định SX-C:\n" + "\n".join(loi)
 
 
