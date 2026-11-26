@@ -9,10 +9,13 @@ import {
   type MauThiep,
 } from "@/lib/li-xi-tet";
 import { taoPhaoHoa } from "@/lib/phao-hoa";
+import { taoAmThanh } from "@/lib/phao-hoa-am";
 
 const W = 720;
 const H = 1280;
 const TONG_MS = 10_500;
+// Có âm thanh: nêu rõ mã âm (mp4a / opus) để trình duyệt chọn đúng bộ mã hoá; không hỗ trợ thì rơi về danh sách không tiếng.
+const KIEU_CO_TIENG = ["video/mp4;codecs=avc1.42E01E,mp4a.40.2", "video/mp4;codecs=avc1,mp4a.40.2", "video/webm;codecs=vp9,opus", "video/webm;codecs=vp8,opus"];
 const KIEU_UU_TIEN = ["video/mp4;codecs=avc1.42E01E", "video/mp4", "video/webm;codecs=vp9", "video/webm;codecs=vp8", "video/webm"];
 
 export function hoTroQuayVideo(): boolean {
@@ -22,8 +25,9 @@ export function hoTroQuayVideo(): boolean {
   } catch { return false; }
 }
 
-function chonKieu(): string | null {
+function chonKieu(coTieng = false): string | null {
   if (typeof MediaRecorder === "undefined") return null;
+  if (coTieng) { const k = KIEU_CO_TIENG.find((x) => MediaRecorder.isTypeSupported(x)); if (k) return k; }
   return KIEU_UU_TIEN.find((k) => MediaRecorder.isTypeSupported(k)) ?? null;
 }
 
@@ -71,12 +75,18 @@ export interface TuyChonVideo {
   nenGam: boolean;
   tenNguoiTang?: string | null;
   loiChuc: string;
+  /** Kèm tiếng pháo + nhạc Năm mới (tổng hợp tại máy, ghi vào video; không phát ra loa). */
+  kemTieng?: boolean;
   onTienDo?: (phanTram: number) => void;
 }
-export interface KetQuaVideo { blob: Blob; duoi: "mp4" | "webm"; mime: string }
+export interface KetQuaVideo { blob: Blob; duoi: "mp4" | "webm"; mime: string; coTieng: boolean }
 
 export async function quayVideoLiXi(o: TuyChonVideo): Promise<KetQuaVideo> {
-  const kieu = chonKieu();
+  const am = o.kemTieng ? taoAmThanh(true) : null;
+  const kc = am?.luongVideo ? chonKieu(true) : null;
+  const coTieng = Boolean(kc && /mp4a|opus/.test(kc));
+  const kieu = chonKieu(coTieng);
+  if (am && !coTieng) am.dong();
   if (!kieu || !hoTroQuayVideo()) throw new Error("Trình duyệt này chưa hỗ trợ quay video.");
   const t = mauThiepTheoMa(o.mau);
   const tt = thongTinHoaTiet(o.hoa, o.mau);
@@ -89,7 +99,7 @@ export async function quayVideoLiXi(o: TuyChonVideo): Promise<KetQuaVideo> {
   const fw = document.createElement("canvas");
   const bangMau = [t.nhan, "#fda4af", "#fde047", "#fff7d6", "#f97316"];
   const vung = { tam: W / 2, rong: W * 0.78, day: H * 0.44, dinh: H * 0.07 };
-  const phao = taoPhaoHoa({ canvas: fw, rong: W, cao: H, dpr: 1, heSo: 1, bangMau, vung: () => vung, chu: ["2027", "PHÚC"] });
+  const phao = taoPhaoHoa({ am: coTieng ? am : null, canvas: fw, rong: W, cao: H, dpr: 1, heSo: 1, bangMau, vung: () => vung, chu: ["2027", "PHÚC"] });
 
   const chuc = o.loiChuc.trim() || "Chúc năm Đinh Mùi 2027 vạn sự hanh thông, tâm an trí sáng.";
   const ten = o.tenNguoiTang?.trim();
@@ -185,6 +195,7 @@ export async function quayVideoLiXi(o: TuyChonVideo): Promise<KetQuaVideo> {
 
   ve(0);
   const luong = ra.captureStream(30);
+  if (coTieng) am!.luongVideo!.getAudioTracks().forEach((tr) => luong.addTrack(tr));
   const mrec = new MediaRecorder(luong, { mimeType: kieu, videoBitsPerSecond: 4_000_000 });
   const manh: BlobPart[] = [];
   mrec.ondataavailable = (e) => { if (e.data.size) manh.push(e.data); };
@@ -192,6 +203,7 @@ export async function quayVideoLiXi(o: TuyChonVideo): Promise<KetQuaVideo> {
 
   mrec.start(250);
   const bat = performance.now();
+  if (coTieng) { await am!.ctx.resume().catch(() => undefined); am!.nhac(am!.ctx.currentTime + 0.15, 0.46); }
   phao.banMan();
   await new Promise<void>((ok) => {
     const khung = (now: number) => {
@@ -206,6 +218,7 @@ export async function quayVideoLiXi(o: TuyChonVideo): Promise<KetQuaVideo> {
   mrec.stop();
   await xong;
   luong.getTracks().forEach((tr) => tr.stop());
+  am?.dong();
   const mime = kieu.split(";")[0]!;
-  return { blob: new Blob(manh, { type: mime }), duoi: mime === "video/mp4" ? "mp4" : "webm", mime };
+  return { blob: new Blob(manh, { type: mime }), duoi: mime === "video/mp4" ? "mp4" : "webm", mime, coTieng };
 }
