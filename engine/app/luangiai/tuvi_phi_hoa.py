@@ -369,7 +369,8 @@ def _luan_chuoi_chuyen_ky(cung: list[dict]) -> list[dict]:
         loai = ch["loai"]
         mau = kb.chuoi_chuyen_ky(loai) or {}
         tat_loai = "kck" if loai == "ky_chuyen_ky" else "lck"
-        ma_mau = f"ds.duong_bay.{tat_loai}.{MA_CUNG[ch['tu_cung']]}+{MA_CUNG[ch['den_cung']]}"
+        # 3 trạm (từ + qua + đến): hai chuỗi cùng điểm đầu – cuối nhưng khác cung trung chuyển là hai nhận định khác nhau.
+        ma_mau = f"ds.duong_bay.{tat_loai}.{MA_CUNG[ch['tu_cung']]}+{MA_CUNG[ch['qua_cung']]}+{MA_CUNG[ch['den_cung']]}"
         bien = {
             "ma_a": ten_mang(ch["tu_cung"]) if vi else mang(ch["tu_cung"]),
             "ma_b": ten_mang(ch["qua_cung"]) if vi else mang(ch["qua_cung"]),
