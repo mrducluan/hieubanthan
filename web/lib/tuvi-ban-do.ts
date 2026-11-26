@@ -94,7 +94,6 @@ export interface NamBanDoTV {
   hoa_nam: { hoa: string; sao: string; den: MaCung | null; xung: MaCung | null }[];
   cham: { o: MaCung; loai: LoaiChamTV }[];
   cau: string;
-  chi_tiet: string[];
   muc?: MucCung;
   nhan_muc?: string;
   mang?: string | null;
@@ -124,6 +123,8 @@ export interface BanDoTuVi {
   tuoi: number;
   tuoi_mu: number;
   nguoi_lon: boolean;
+  vai_doc?: "ban_than" | "cha_me" | null;
+  loi_vai_doc?: string;
   tam: {
     cuc: string;
     hanh_cuc: string;
@@ -184,9 +185,15 @@ export function gocRanhGioi(chiSoA: number, chiSoB: number): number {
   return (gocChi(nho) + 15) % 360;
 }
 
-/** Tuổi mụ → góc trên vành Đại hạn (0–90 tuổi = một vòng 360°). */
-export function gocTuoi(tuoi: number): number {
-  return (Math.max(0, Math.min(90, tuoi)) / 90) * 360;
+/** Số tuổi một vòng vành Đại hạn: tối thiểu 90, nới theo tuổi lớn nhất có trên bản đồ (tròn chục) để người trên 80
+ *  tuổi vẫn thấy đủ các năm và đại vận đang đi (trước kẹp 90 → mọi năm sau 90 chồng ở 360°). */
+export function tuoiVong(tuoiLonNhat: number): number {
+  return Math.max(90, Math.ceil(Math.max(0, tuoiLonNhat) / 10) * 10);
+}
+
+/** Tuổi mụ → góc trên vành Đại hạn (0–`vong` tuổi = một vòng 360°). */
+export function gocTuoi(tuoi: number, vong = 90): number {
+  return (Math.max(0, Math.min(vong, tuoi)) / vong) * 360;
 }
 
 /** Cung bậc hai Bézier nối từ góc `aTu` sang `aDen` trên bán kính `r` (trả đường dẫn `d` + toạ độ điểm giữa `t = 0.5`). */

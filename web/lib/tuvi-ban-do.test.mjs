@@ -6,7 +6,7 @@ import {
   diemTron,
   gocChi,
   gocRanhGioi,
-  gocTuoi,
+  gocTuoi, tuoiVong,
   khuyenTuHoa,
   quat,
 } from "./tuvi-ban-do.ts";
@@ -40,6 +40,11 @@ test("gocTuoi & quat: kẹp biên 0..90 tuổi và khép kín đường quạt",
   assert.equal(gocTuoi(-5), 0);
   assert.equal(gocTuoi(45), 180);
   assert.equal(gocTuoi(120), 360);
+  // Người trên 80 tuổi: vành nới theo tuổi lớn nhất (tròn chục), không kẹp 90.
+  assert.equal(tuoiVong(40), 90);
+  assert.equal(tuoiVong(94), 100);
+  assert.equal(tuoiVong(105), 110);
+  assert.equal(gocTuoi(95, 110), (95 / 110) * 360);
 
   const q = quat(90, 190, -14.4, 14.4);
   assert.match(q, /^M.+A190 190 0 0 1 .+L.+A90 90 0 0 0 .+Z$/);

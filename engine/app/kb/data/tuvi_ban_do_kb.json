@@ -147,13 +147,12 @@
       "hoa_sinh": "Từ gốc năm sinh, chuyện {ngan} có sẵn nét {y_hoa}.",
       "cat": "Ở mảng {ngan}, bạn dễ gặp người hỗ trợ hoặc có sẵn điểm tựa khi cần xoay xở.",
       "sat": "Chuyện {ngan} đôi lúc có việc gấp chen ngang: chừa khoảng dự phòng giúp bạn giữ nhịp ổn định.",
-      "tuan_triet": "Nhịp ở mảng {ngan} thường chậm bước đầu: càng chuẩn bị kỹ và kiên nhẫn càng bền về sau."
+      "tuan_triet": "Nhịp ở mảng {ngan} thường chậm bước đầu: càng chuẩn bị kỹ và kiên nhẫn càng bền về sau.",
+      "suc_khoe_mien_tru": "Đây là lời nhắc phòng ngừa, không thay lời bác sĩ; có dấu hiệu bất thường thì nên đi khám."
     },
     "tam_phuong": {
       "mo": "Mảng {ngan} luôn nối trực tiếp với phía đối diện ({ngan_xung}) và hai phía hợp lực ({ngan_th1}, {ngan_th2}).",
-      "do": "Nhờ {ds_do} đang vững, khi cần xoay xở cho {ngan} bạn có chỗ tựa thực tế.",
-      "keo": "Phía {ds_keo} cần chăm kỹ hơn, nên giữ ranh giới rõ để không kéo thêm việc sang {ngan}.",
-      "can": "Ba phía liên đới giữ thế cân bằng: kết quả ở {ngan} phụ thuộc nhiều vào nhịp chuẩn bị đều đặn của bạn."
+      "muc": "Mức của ba cung ấy trong báo cáo: {ds}."
     },
     "bay_cung": {
       "di": "Từ {ngan} truyền {y_hoa} sang chuyện {ngan_kia}.",
@@ -189,20 +188,11 @@
       "menh_than_trung": "Cung Mệnh và cung Thân đồng cung tại {chi}: tính cách gốc và hướng chọn lựa nửa sau cuộc đời đi chung một trục ({muc}).",
       "menh_than_khac": "Trục bản thân nối sang {ngan_than} (nơi Thân cư): càng trưởng thành bạn càng dồn tâm sức cho mảng {ngan_than}.",
       "lai_nhan": "Điểm khởi nguồn năm sinh đặt ở mảng {ngan}: cách bạn vun đắp chuyện {ngan} mở nhịp cho nhiều chặng lớn.",
-      "truc_loc_ky": "Nguồn thuận tự nhiên nằm ở chuyện {ngan_loc}, còn nơi cần đi chậm và làm kỹ nằm ở chuyện {ngan_ky}.",
       "chuoi_dau": "Mạch hai chặng đáng lưu tâm nối từ {ngan_tu} qua {ngan_qua} về chuyện {ngan_den}."
     },
     "thoi_gian": {
-      "nam": "Năm {nam} ({cc}, {tuoi} tuổi mụ): nhịp lưu niên đi qua chuyện {ngan_ln}.",
+      "nam": "Năm {nam} ({cc}, {tuoi} tuổi mụ): nhịp lưu niên đi qua mảng {ngan_ln}.",
       "nam_cham": " Chạm {n} cung trên bản đồ.",
-      "chi_tiet": {
-        "luu_nien": "Lưu niên đặt tại mảng {ngan} ({cung})",
-        "loc_nam": "Nguồn thuận của năm ghé vào chuyện {ngan} ({cung})",
-        "quyen_nam": "Việc cần cầm trịch trong năm tập trung ở chuyện {ngan} ({cung})",
-        "khoa_nam": "Sự rõ ràng, uy tín của năm sáng lên ở chuyện {ngan} ({cung})",
-        "ky_nam": "Điểm cần rà kỹ trong năm nằm ở chuyện {ngan} ({cung})",
-        "ky_xung": "Dư âm đối diện nhắc giữ nhịp ở chuyện {ngan} ({cung})"
-      },
       "dai_van": "Giai đoạn {tu_tuoi}–{den_tuoi} tuổi ({tu_nam}–{den_nam}): trọng tâm ở {chu_de} — mức {muc}.",
       "hoi_dan": "Kéo kim vàng trên vành ngoài hoặc thanh năm để xem từng năm chạm vào những cung nào.",
       "nam_toi": "Mười năm tới dùng chung một nguồn tính với chương Vận hạn trong bài đọc."
@@ -217,6 +207,7 @@
       "sat": "Sát tinh tại cung: {ds}",
       "tuan_triet": "Án ngữ bởi {ds} (lối Nam phái)",
       "tam_phuong": "Tam phương tứ chính: xung chiếu {xung}, tam hợp {th1} và {th2}"
-    }
+    },
+    "vai_doc_cha_me": "Bản đồ này của một bạn dưới 16 tuổi: lời viết để cha mẹ, người lớn đọc hộ; các mảng chuyện người lớn (công việc, hôn nhân) được để trống."
   }
 }

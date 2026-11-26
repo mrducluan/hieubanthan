@@ -244,20 +244,20 @@ def _bay_cua_cung(ten: str, ma: str, duong_all: list[dict], lon: bool) -> list[d
         tu_ma = MA_CUNG[d["tu_cung"]]
         den_ma = MA_CUNG[d["den_cung"]]
         hoa = d["hoa"]
+        if not lon and ({tu_ma, den_ma} & {"phu_the", "tu_nu"}):
+            continue
+        cau = d.get("nghia") or ""
         if d["tu_hoa"] and tu_ma == ma:
-            cau = _m("bay_cung", "tu_hoa").format(ngan=_ngan(ma, lon), y_hoa_ngan=_y_hoa_ngan(hoa))
             ung.append((10 + _HOA_TRONG.get(hoa, 1), -idx, {
                 "chieu": "tu_hoa", "cung_kia": ma, "hoa": hoa, "sao": d["sao"], "cau": cau,
             }))
         elif tu_ma == ma and not d["tu_hoa"]:
             w = _HOA_TRONG.get(hoa, 1) + (2 if den_ma in _CUNG_CHINH_MA else 0)
-            cau = _m("bay_cung", "di").format(ngan=_ngan(ma, lon), y_hoa=_y_hoa(hoa), ngan_kia=_ngan(den_ma, lon))
             ung.append((w, -idx, {
                 "chieu": "di", "cung_kia": den_ma, "hoa": hoa, "sao": d["sao"], "cau": cau,
             }))
         elif den_ma == ma and not d["tu_hoa"]:
             w = _HOA_TRONG.get(hoa, 1) + (2 if tu_ma in _CUNG_CHINH_MA else 0)
-            cau = _m("bay_cung", "den").format(ngan=_ngan(ma, lon), y_hoa=_y_hoa(hoa), ngan_kia=_ngan(tu_ma, lon))
             ung.append((w, -idx, {
                 "chieu": "den", "cung_kia": tu_ma, "hoa": hoa, "sao": d["sao"], "cau": cau,
             }))
@@ -307,7 +307,7 @@ def _lap_o(
     if c["chi"] == chi_lai:
         la_gi.append(_m("la_gi", "lai_nhan").format(ngan=ngan))
 
-    if not vo_chinh and (lon or ma not in ("phu_the", "tu_nu")):
+    if not vo_chinh and lon:
         s0 = c["chinh_tinh"][0]
         ds0 = s0.get("do_sang") or "Bình"
         nhom_s = "ham" if ds0 == "Hãm" else "sang"
@@ -320,12 +320,14 @@ def _lap_o(
 
     if cc_o["hoa"]:
         la_gi.append(_m("la_gi", "hoa_sinh").format(ngan=ngan, y_hoa=_y_hoa(cc_o["hoa"][0]["hoa"])))
-    if cc_o["cat"]:
+    if cc_o["cat"] and muc != "can_chu_dong":
         la_gi.append(_m("la_gi", "cat").format(ngan=ngan))
-    elif cc_o["sat"]:
+    if cc_o["sat"] and muc != "thuan":
         la_gi.append(_m("la_gi", "sat").format(ngan=ngan))
     if cc_o["tuan_triet"]:
         la_gi.append(_m("la_gi", "tuan_triet").format(ngan=ngan))
+    if ma == "tat_ach":
+        la_gi.append(_m("la_gi", "suc_khoe_mien_tru"))
 
     # Lớp 2 — `tam_phuong`: 3 cung tam phương tứ chính đỡ hay kéo
     tp_cau = [_m("tam_phuong", "mo").format(
@@ -334,14 +336,9 @@ def _lap_o(
         ngan_th1=_ngan(th1_ma, lon),
         ngan_th2=_ngan(th2_ma, lon),
     )]
-    do_ds = [_ngan(MA_CUNG[k], lon) for k in (xung_ten, th1_ten, th2_ten) if cc[k]["muc"] == "thuan"]
-    keo_ds = [_ngan(MA_CUNG[k], lon) for k in (xung_ten, th1_ten, th2_ten) if cc[k]["muc"] == "can_chu_dong"]
-    if do_ds:
-        tp_cau.append(_m("tam_phuong", "do").format(ds_do=danh_sach(do_ds), ngan=ngan))
-    if keo_ds:
-        tp_cau.append(_m("tam_phuong", "keo").format(ds_keo=danh_sach(keo_ds), ngan=ngan))
-    if not do_ds and not keo_ds:
-        tp_cau.append(_m("tam_phuong", "can").format(ngan=ngan))
+    tp_cau.append(_m("tam_phuong", "muc").format(ds=danh_sach([
+        f"{_ngan(MA_CUNG[k], lon)} ({_nhan_muc(cc[k]['muc']).lower()})" for k in (xung_ten, th1_ten, th2_ten)
+    ])))
 
     # Lớp 3 — `bay_cung`: đường bay tứ hoá đi / đến cung này
     bay_cung = _bay_cua_cung(ten, ma, duong_all, lon)
@@ -473,18 +470,6 @@ def _noi_bat_la_so(
             "cau": _m("noi_bat", "menh_than_khac").format(ngan_than=_ngan(cung_than_ma, lon)),
         })
 
-    hoa_goc = {h["hoa"]: MA_CUNG[h["cung"]] for h in ls["tu_hoa"] if h.get("cung") in MA_CUNG}
-    if "Lộc" in hoa_goc and "Kỵ" in hoa_goc:
-        o_lk = list(dict.fromkeys([hoa_goc["Lộc"], hoa_goc["Kỵ"]]))
-        ra.append({
-            "ma": "truc_loc_ky",
-            "o": o_lk,
-            "cau": _m("noi_bat", "truc_loc_ky").format(
-                ngan_loc=_ngan(hoa_goc["Lộc"], lon),
-                ngan_ky=_ngan(hoa_goc["Kỵ"], lon),
-            ),
-        })
-
     if chuoi:
         c0 = chuoi[0]
         ra.append({
@@ -508,7 +493,7 @@ def _noi_bat_la_so(
 
 def _duong_bay_view(ls: dict, can_phi: str, nam_am_xem: int, lon: bool) -> tuple[dict, list[dict]]:
     phi = phl.lap(ls, can_phi, nam_am_xem)
-    chuoi = _luan_chuoi_chuyen_ky(ls["cung"], lon)
+    chuoi = _luan_chuoi_chuyen_ky(ls["cung"], lon) if lon else []   # trẻ dưới 16: lời chuỗi viết cho người lớn
     lai_cung = (phi.get("lai_nhan") or {}).get("cung")
     lai_ma = MA_CUNG[lai_cung] if lai_cung in MA_CUNG else None
 
@@ -674,14 +659,6 @@ def _thoi_gian(
             ngan_ln=_ngan(cung_ln_ma, lon_n),
         ) + _m("thoi_gian", "nam_cham").format(n=len(cham))
 
-        chi_tiet = [
-            _m("thoi_gian", "chi_tiet", ch["loai"]).format(
-                ngan=_ngan(ch["o"], lon_n),
-                cung=_t("cung", TEN_TU_MA[ch["o"]]),
-            )
-            for ch in cham[:4]
-        ]
-
         x: dict = {
             "nam": n,
             "tuoi": tuoi_n,
@@ -693,16 +670,12 @@ def _thoi_gian(
             "hoa_nam": hoa_nam,
             "cham": cham,
             "cau": cau,
-            "chi_tiet": chi_tiet,
         }
         g = muc_nam.get(n)
         if g:
-            x.update({
-                "muc": g["muc"],
-                "nhan_muc": g["nhan_muc"],
-                "mang": g.get("mang") or "",
-            })
+            x.update({"muc": g["muc"], "nhan_muc": g["nhan_muc"]})
             if n == nam_am_xem:
+                x["mang"] = g.get("mang") or ""
                 # Cách a (SAO-2): CHỈ năm hiện tại có lời giải & nên tránh / nên làm
                 x.update({k: g[k] for k in ("y", "nen_tranh", "nen_lam") if g.get(k)})
             else:
@@ -792,6 +765,9 @@ def lap(sinh: dict, ngay_duong_sinh: dt.date, ngay_xem: dt.date | None = None) -
         "tuoi": tuoi,
         "tuoi_mu": tuoi_mu,
         "nguoi_lon": lon,
+        # TUOI-16: dưới 16 tuổi — bản đồ viết cho cha mẹ / người lớn đọc hộ (như báo cáo đời sống).
+        "vai_doc": config.vai_doc(tuoi),
+        **({"loi_vai_doc": _m("vai_doc_cha_me")} if not lon else {}),
         "tam": tam,
         "o": o_ds,
         "noi_bat": _noi_bat_la_so(ls, cc, cung_than_ma, lai_ma, duong_bay["chuoi_chuyen_ky"], lon),

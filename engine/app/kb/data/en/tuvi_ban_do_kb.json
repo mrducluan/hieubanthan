@@ -143,13 +143,12 @@
       "hoa_sinh": "From your birth year, matters of {ngan} carry {y_hoa}.",
       "cat": "Around {ngan}, helpful people and steady backing tend to show up when needed.",
       "sat": "Sudden tasks can cut across {ngan}: leaving buffer time keeps your rhythm steady.",
-      "tuan_triet": "Progress around {ngan} often starts slowly: patient preparation pays off later."
+      "tuan_triet": "Progress around {ngan} often starts slowly: patient preparation pays off later.",
+      "suc_khoe_mien_tru": "This is a preventive reminder, not medical advice; see a doctor if anything feels unusual."
     },
     "tam_phuong": {
       "mo": "Matters of {ngan} stay linked with the opposite palace ({ngan_xung}) and two triad partners ({ngan_th1}, {ngan_th2}).",
-      "do": "Because {ds_do} stand on firm ground, you have practical backing whenever {ngan} needs support.",
-      "keo": "Since {ds_keo} call for extra attention, keeping clear boundaries prevents spillover into {ngan}.",
-      "can": "The three connected palaces sit in balance: results in {ngan} follow your own steady preparation."
+      "muc": "Levels of those three palaces in your report: {ds}."
     },
     "bay_cung": {
       "di": "Matters of {ngan} send {y_hoa} toward {ngan_kia}.",
@@ -185,20 +184,11 @@
       "menh_than_trung": "Your Life and Body Palaces share {chi}: your core nature and your later-life direction run on the same track ({muc}).",
       "menh_than_khac": "Your core self connects to {ngan_than} (your Body Palace): as years pass, {ngan_than} shapes more of your choices.",
       "lai_nhan": "Your birth-stem origin sits in {ngan}: how you tend {ngan} sets the tone for major chapters.",
-      "truc_loc_ky": "Natural ease gathers in {ngan_loc}, while {ngan_ky} asks for unhurried, thorough care.",
       "chuoi_dau": "A notable two-step chain links {ngan_tu} through {ngan_qua} into {ngan_den}."
     },
     "thoi_gian": {
       "nam": "Year {nam} ({cc}, lunar age {tuoi}): the annual focus moves through {ngan_ln}.",
       "nam_cham": " Touches {n} palaces on your map.",
-      "chi_tiet": {
-        "luu_nien": "Annual palace sits in {ngan} ({cung})",
-        "loc_nam": "Annual ease visits {ngan} ({cung})",
-        "quyen_nam": "Annual leadership weight gathers in {ngan} ({cung})",
-        "khoa_nam": "Annual clarity and goodwill highlight {ngan} ({cung})",
-        "ky_nam": "Annual extra-care point sits in {ngan} ({cung})",
-        "ky_xung": "Opposite-axis reminder touches {ngan} ({cung})"
-      },
       "dai_van": "Ages {tu_tuoi}–{den_tuoi} ({tu_nam}–{den_nam}): centred on {chu_de} — {muc}.",
       "hoi_dan": "Drag the gold hand on the outer ring or slide the bar to see which palaces each year touches.",
       "nam_toi": "The next ten years share the exact same calculation as the Timing chapter in your full reading."
@@ -213,6 +203,7 @@
       "sat": "Sharp stars present: {ds}",
       "tuan_triet": "Blocked by {ds} (Vietnamese Southern school)",
       "tam_phuong": "Triad and opposite axis: opposite {xung}, triad {th1} and {th2}"
-    }
+    },
+    "vai_doc_cha_me": "This map belongs to someone under 16: it is written for a parent or guardian to read, and adult topics (career, marriage) are left out."
   }
 }

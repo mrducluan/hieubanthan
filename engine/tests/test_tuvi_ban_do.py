@@ -274,3 +274,44 @@ def test_60_la_golden_chuoi_chuyen_ky_qua_sql():
             tong += 1
             assert kcm._hop_le("doi_song", ch["ma_mau"], ch["phai"]), ch
     assert tong >= 60
+
+
+# --------------------------------------------------------------------------- review 2026-11-26: bản đồ không nói ngược
+_NHIEU_LA = [
+    {"birth_date": f"{y}-{m:02d}-{d:02d}", "birth_time": t, "gender": g, "noi_sinh": "ha-noi"}
+    for (y, m, d, t, g) in (
+        (1942, 3, 8, "06:00", "nu"), (1931, 11, 2, "14:20", "nam"), (1955, 7, 19, "23:40", "nam"),
+        (1968, 2, 1, "09:15", "nu"), (1975, 12, 30, "17:05", "nam"), (1983, 6, 6, "03:30", "nu"),
+        (1990, 1, 26, "23:30", "nam"), (1995, 9, 9, "11:11", "nu"), (2001, 4, 4, "20:00", "nam"),
+        (2012, 8, 15, "07:45", "nu"), (2024, 2, 10, "10:00", "nam"), (1988, 10, 24, "08:30", "nam"),
+    )
+]
+_TRE_CAM = re.compile(r"đồng nghiệp|kinh doanh|sếp|vợ chồng|hôn nhân|bạn đời|đầu tư|tài chính", re.I)
+
+
+@pytest.mark.parametrize("la", _NHIEU_LA, ids=lambda la: la["birth_date"])
+def test_ban_do_khong_noi_nguoc_muc_va_khoa_dung(la):
+    r = client.post("/v1/tuvi/ban-do", json={"la_so": la, "ngay_xem": XEM.isoformat()})
+    assert r.status_code == 200, r.text
+    bd = r.json()
+    cat_cau = nap.doc("tuvi_ban_do_kb.json")["mau"]["la_gi"]
+    for o in bd["o"]:
+        noi = " ".join(o["la_gi"])
+        mau_cat = cat_cau["cat"].split("{ngan}")[1][:25]
+        mau_sat = cat_cau["sat"].split("{ngan}")[1][:25]
+        if o["muc"] == "can_chu_dong":
+            assert mau_cat not in noi, (la, o["ma"], noi)          # không khen "dễ gặp người hỗ trợ" ở cung Cần lưu ý
+        if o["muc"] == "thuan":
+            assert mau_sat not in noi, (la, o["ma"], noi)
+        if o["ma"] == "tat_ach":
+            assert cat_cau["suc_khoe_mien_tru"] in o["la_gi"]       # SK-1: luôn kèm câu không thay lời bác sĩ
+        if not bd["nguoi_lon"]:
+            assert not _TRE_CAM.search(noi), (la, o["ma"], noi)
+    assert all(not n.get("chi_tiet") for n in bd["thoi_gian"]["nam"])
+    for n in bd["thoi_gian"]["nam"]:
+        if n["nam"] > bd["thoi_gian"]["nam_xem"]:
+            assert not ({"y", "nen_tranh", "nen_lam", "mang"} & set(n)), n   # SAO-2: năm khoá chỉ mức
+    assert all(x["ma"] != "truc_loc_ky" for x in bd["noi_bat"])
+    if not bd["nguoi_lon"]:
+        assert bd["vai_doc"] == "cha_me" and bd.get("loi_vai_doc")
+        assert bd["duong_bay"]["chuoi_chuyen_ky"] == []

@@ -1,7 +1,7 @@
 "use client";
 // TV-BD1 — "Bản đồ 12 cung" Tử vi dạng VÒNG TRÒN + MẠNG ĐƯỜNG BAY TỨ HOÁ 2 CHẶNG:
 //  · Bánh xe 12 cung: Ngọ ở đỉnh (0°), Tý ở đáy (180°), vạch mức từng cung (lục / xám / hổ phách — 0 màu đỏ),
-//    tam giác vàng Tam phương + dây đứt Xung chiếu, huy hiệu Tuần/Triệt đúng vách ngăn, vành Đại hạn 0–90 tuổi có chữ cong
+//    tam giác vàng Tam phương + dây đứt Xung chiếu, huy hiệu Tuần/Triệt đúng vách ngăn, vành Đại hạn 0–90 tuổi (nới theo tuổi lớn nhất) có chữ cong
 //    + kim năm kéo được (chuột / chạm / phím mũi tên / nút ▶).
 //  · Mạng đường bay: 12 nút cung + cung bậc hai Bézier lọc theo Đáng chú ý · Chuỗi 2 chặng (① -> ②) · Bay vào Mệnh · Tự hoá.
 // Web CHỈ vẽ dữ liệu engine (/v1/tuvi/ban-do). Đo PostHog: chart_interacted{mo_dun: "tuvi", kind: "ban_do_*"} — không gửi năm.
@@ -23,7 +23,7 @@ import { ghi } from "@/lib/do-luong";
 import { useCuaLuanGiai } from "@/lib/cta-sao";
 import { useTyLe, type BangTyLe } from "@/lib/ty-le-kiem-chung";
 import {
-  chuoiBezierHaiChang, cungBezier, diemTron, gocChi, gocRanhGioi, gocTuoi, khuyenTuHoa, quat,
+  chuoiBezierHaiChang, cungBezier, diemTron, gocChi, gocRanhGioi, gocTuoi, khuyenTuHoa, quat, tuoiVong,
   type BanDoTuVi as BD, type ChuoiHaiChang, type CungBanDo, type MaCung, type NamBanDoTV,
 } from "@/lib/tuvi-ban-do";
 import { cn } from "@/lib/utils";
@@ -62,6 +62,10 @@ export function BanDoTuVi({
   if (!data?.o?.length) return null;
   return (
     <TenHienProvider ten={[data.ten_hien]}>
+      {data.vai_doc === "cha_me" && data.loi_vai_doc && (
+        <p role="note" data-testid="ban-do-tv-vai-doc"
+          className="mb-3 rounded-xl border border-gold/30 bg-gold/5 px-4 py-3 text-sm text-fg-muted">{data.loi_vai_doc}</p>
+      )}
       <BanDo bd={data} coBaoCao={coBaoCao} onChonCung={onChonCung} />
     </TenHienProvider>
   );
@@ -386,6 +390,7 @@ function BanDo({
               tyLe={tyLe}
               onDong={dong}
               onChon={chonO}
+              coBaoCao={coBaoCao}
             />
           )}
           <TheNamTV
@@ -432,7 +437,8 @@ function BanhXe12Cung({
   const namSinh = namDang.nam - namDang.tuoi + 1;
   const dau = tg.nam[0]!.nam;
   const cuoi = tg.nam[tg.nam.length - 1]!.nam;
-  const gocKim = useGocTroi(gocTuoi(namDang.tuoi), giam);
+  const vong = useMemo(() => tuoiVong(Math.max(...tg.nam.map((x) => x.tuoi), ...tg.dai_van.map((v) => v.den_tuoi))), [tg]);
+  const gocKim = useGocTroi(gocTuoi(namDang.tuoi, vong), giam);
   const [kx, ky] = diemTron(264, gocKim);
   const [gx, gy] = diemTron(80, gocKim);
 
@@ -462,7 +468,7 @@ function BanhXe12Cung({
     const x = e.clientX - (r.left + r.width / 2);
     const y = e.clientY - (r.top + r.height / 2);
     const goc = (((Math.atan2(y, x) * 180) / Math.PI + 90) % 360 + 360) % 360;
-    const tuoiChon = Math.max(1, Math.round((goc / 360) * 90));
+    const tuoiChon = Math.max(1, Math.round((goc / 360) * vong));
     setNam(Math.max(dau, Math.min(cuoi, namSinh + tuoiChon - 1)));
   };
 
@@ -495,13 +501,13 @@ function BanhXe12Cung({
       <g>
         {tg.dong_han && (
           <path
-            d={quat(216, 246, 0.5, Math.max(2, gocTuoi(tg.dong_han.den_tuoi + 1) - 0.5))}
+            d={quat(216, 246, 0.5, Math.max(2, gocTuoi(tg.dong_han.den_tuoi + 1, vong) - 0.5))}
             fill="rgb(20 20 46)"
           />
         )}
         {tg.dai_van.map((v) => {
-          const a0 = gocTuoi(v.tu_tuoi);
-          const a1 = Math.min(gocTuoi(v.den_tuoi + 1), 360);
+          const a0 = gocTuoi(v.tu_tuoi, vong);
+          const a1 = Math.min(gocTuoi(v.den_tuoi + 1, vong), 360);
           if (a0 >= 360 || a1 - a0 < 3) return null;
           const dangDi = namDang.nam >= v.tu_nam && namDang.nam <= v.den_nam;
           const giua = (a0 + a1) / 2;
@@ -546,7 +552,7 @@ function BanhXe12Cung({
         {tg.nam.filter((n) => n.muc).map((n) => (
           <path
             key={`m${n.nam}`}
-            d={quat(249, 256, gocTuoi(n.tuoi) - 1.6, gocTuoi(n.tuoi) + 1.6)}
+            d={quat(249, 256, gocTuoi(n.tuoi, vong) - 1.6, gocTuoi(n.tuoi, vong) + 1.6)}
             fill={MAU_MUC[n.muc!]}
             opacity={n.nam === namDang.nam ? 1 : 0.78}
           >
@@ -1264,12 +1270,15 @@ function BangChuoi({
   tyLe,
   onDong,
   onChon,
+  coBaoCao,
 }: {
   ch: ChuoiHaiChang;
   oTheoMa: Record<MaCung, CungBanDo>;
   tyLe: BangTyLe;
   onDong: () => void;
   onChon: (m: MaCung) => void;
+  /** false = đang xem lá số người thân (chỉ đọc) → không hiện "Đúng với mình". */
+  coBaoCao: boolean;
 }) {
   const { c, ten } = useChuTuVi();
   const tram: [MaCung, MaCung, MaCung] = [ch.tu, ch.qua, ch.den];
@@ -1313,7 +1322,7 @@ function BangChuoi({
         <ViSao canCu={ch.can_cu} nho />
       </div>
       <div className="mt-3">
-        <KiemChung loai="doi_song" mau={ch.ma_mau} phai={ch.phai} tyLe={tyLe[ch.ma_mau]} />
+        {coBaoCao && <KiemChung loai="doi_song" mau={ch.ma_mau} phai={ch.phai} tyLe={tyLe[ch.ma_mau]} />}
       </div>
     </TamBang>
   );
@@ -1413,12 +1422,6 @@ function TheNamTV({
             {tenGon(ten("cung", oLn.cung))} ({ten("chi", oLn.chi)})
           </button>
         </div>
-
-        {namDang.chi_tiet.length > 0 && (
-          <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-fg-muted">
-            {namDang.chi_tiet.map((x) => <li key={x}>{x}</li>)}
-          </ul>
-        )}
       </div>
     </div>
   );
