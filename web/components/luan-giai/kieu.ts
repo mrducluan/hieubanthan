@@ -178,8 +178,12 @@ export interface KhuVucVan9CoDien {
 }
 
 export interface DoiChieuHaiPhaiCoDien {
+  loai?: string;
+  tieu_de?: string;
   goc_bat_trach: string;
-  goc_huyen_khong: string;
+  goc_huyen_khong?: string;
+  goc_huyen_khong_van_9?: string;
+  ma_dung_hoa?: string;
   cach_dung_hoa: string;
 }
 

@@ -258,7 +258,7 @@ def _ten_quai(q: str) -> str:
 def _muc_cap_van9(son: int, huong: int, van: int, ten_cap_vi: str, y_vi: str, luu_y_vi: str) -> tuple[str, str]:
     """Dựng tên cặp & hướng điều hoà 0 đồng cho một khu vực dựa trên `hk.trang_thai(sao, van)` (sao 2 Vận 9 = `sinh`!)."""
     if ngon_ngu.la_viet():
-        ung = f"{y_vi} {luu_y_vi}".strip()
+        ung = (luu_y_vi or y_vi).strip()
         return ten_cap_vi, ung
     ts, th = hk.trang_thai(son, van), hk.trang_thai(huong, van)
     ten_en = f"Pair {son}-{huong}"
@@ -271,6 +271,16 @@ def _muc_cap_van9(son: int, huong: int, van: int, ten_cap_vi: str, y_vi: str, lu
     else:
         ung_en = "Keep airflow balanced, lighting gentle and pathways uncluttered according to the room's daily function."
     return ten_en, ung_en
+
+
+def ma_dung_hoa(loai: str, son: int, huong: int) -> str:
+    """Chọn biến thể câu dung hoà theo CẶP SAO thật tại cửa: cặp có sao Thổ 2 / 5 · cặp có sao 9 / 1 ở nhánh vượng · còn lại trung tính."""
+    cap = {son, huong}
+    if loai == "bt_thuan_hk_tinh" and cap & {2, 5}:
+        return "sao_tho"
+    if loai == "hk_vuong_bt_lech" and cap & {9, 1}:
+        return "sao_9_1"
+    return "chung"
 
 
 def tu_bao_cao_phongthuy(bc: dict, bc_luan: dict | None = None, mq: dict | None = None) -> dict | None:
@@ -305,7 +315,7 @@ def tu_bao_cao_phongthuy(bc: dict, bc_luan: dict | None = None, mq: dict | None 
     ds_kv: list[dict] = []
 
     if not chua_khai:
-        for ma_phong, phuong in vi_tri_that[:4]:
+        for ma_phong, phuong in vi_tri_that[:3]:
             c_hk = cung_theo_phuong[phuong]
             quai = c_hk["cung"]
             th_cap = hk.to_hop_cung(c_hk["son"], c_hk["huong"], van)
@@ -357,29 +367,33 @@ def tu_bao_cao_phongthuy(bc: dict, bc_luan: dict | None = None, mq: dict | None 
                 "ung_dung": ung,
             })
 
-    # Đối chiếu 2 phái Bát Trạch ↔ Huyền Không khi hướng nhà có độ lệch nhận định giữa mệnh chủ và thời vận
+    # Đối chiếu 2 phái Bát Trạch ↔ Huyền Không Vận 9 khi hướng nhà có độ lệch nhận định giữa mệnh chủ và thời vận
     doi_chieu = None
     mq_quai = (mq or dt_info.get("menh_quai") or {}).get("quai")
     huong_nha = dt_info.get("huong_nha")
-    if mq_quai and huong_nha in pt.HUONG:
-        dn_cua = pt.bang_huong(mq_quai).get(huong_nha)
-        bt_thuan = dn_cua in pt.CAT
+    dc_kb = k.get("doi_chieu_hai_phai") or {}
+    if mq_quai and huong_nha in pt.HUONG and dc_kb:
+        dn_obj = pt.du_nien(mq_quai, huong_nha)
+        bt_thuan = bool(dn_obj and dn_obj.get("cat"))
         ch_info = b_hk["cap_huong"]
         hk_muc = ch_info.get("muc")
-        ten_cap_hien = ch_info["ten"] if ngon_ngu.la_viet() else f"Pair {ch_info['ma']}"
-        if bt_thuan and hk_muc == "can_chu_dong":
-            m_dc = kb_pt["doi_chieu"]["thuan_bt_can_hk"]
+        loai_dc = None
+        if bt_thuan and (hk_muc == "can_chu_dong" or ({ch_info["son"], ch_info["huong"]} & {2, 5})):
+            loai_dc = "bt_thuan_hk_tinh"
+        elif (not bt_thuan) and (hk_muc == "thuan" or ch_info["huong"] in (9, 1)):
+            loai_dc = "hk_vuong_bt_lech"
+        if loai_dc and loai_dc in dc_kb:
+            mau_dc = dc_kb[loai_dc]
+            cap_str = f"{ch_info['son']}-{ch_info['huong']}"
+            ma_dh = ma_dung_hoa(loai_dc, ch_info["son"], ch_info["huong"])
+            dh = mau_dc["cach_dung_hoa"]
             doi_chieu = {
-                "goc_bat_trach": m_dc["goc_bat_trach"].format(quai=_ten_quai(mq_quai), du_nien=_ten_du_nien(dn_cua)),
-                "goc_huyen_khong": m_dc["goc_huyen_khong"].format(van=van, cap=ch_info["ma"], ten_cap=ten_cap_hien),
-                "cach_dung_hoa": m_dc["cach_dung_hoa"],
-            }
-        elif (not bt_thuan) and hk_muc == "thuan":
-            m_dc = kb_pt["doi_chieu"]["can_bt_thuan_hk"]
-            doi_chieu = {
-                "goc_bat_trach": m_dc["goc_bat_trach"].format(quai=_ten_quai(mq_quai), du_nien=_ten_du_nien(dn_cua)),
-                "goc_huyen_khong": m_dc["goc_huyen_khong"].format(van=van, cap=ch_info["ma"], ten_cap=ten_cap_hien),
-                "cach_dung_hoa": m_dc["cach_dung_hoa"].format(van=van),
+                "loai": loai_dc,
+                "tieu_de": mau_dc["tieu_de"],
+                "goc_bat_trach": mau_dc["goc_bat_trach"],
+                "goc_huyen_khong_van_9": mau_dc["goc_huyen_khong_van_9"].format(cap=cap_str),
+                "ma_dung_hoa": ma_dh,
+                "cach_dung_hoa": dh[ma_dh] if isinstance(dh, dict) else dh,
             }
 
     ra = {

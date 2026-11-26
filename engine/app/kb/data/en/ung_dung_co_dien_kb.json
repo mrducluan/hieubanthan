@@ -44,17 +44,25 @@
       "ve_sinh": "Bathroom ({phuong})"
     },
     "trang_thai_cap": "Mountain {son} ({tt_son}) · Facing {huong} ({tt_huong}){ln}",
-    "luu_nien_phu": " · Annual star {sao}",
-    "doi_chieu": {
-      "thuan_bt_can_hk": {
-        "goc_bat_trach": "Eight Mansions ({quai} Gua): house facing aligns with {du_nien} — supportive for the resident over the long term.",
-        "goc_huyen_khong": "Period {van} Xuan Kong: the facing sector carries pair {cap} ({ten_cap}) — temporal Qi calls for calm, uncluttered upkeep.",
-        "cach_dung_hoa": "Synthesis: physical form and Eight Mansions compatibility provide a steady foundation; simply keep the entrance bright, tidy and free of heavy renovation during sensitive annual stars."
-      },
-      "can_bt_thuan_hk": {
-        "goc_bat_trach": "Eight Mansions ({quai} Gua): house facing falls on {du_nien} — outside the resident's primary East/West group.",
-        "goc_huyen_khong": "Period {van} Xuan Kong: the facing sector receives timely/upcoming pair {cap} ({ten_cap}).",
-        "cach_dung_hoa": "Synthesis: welcome natural light and timely Period {van} airflow at the entrance without structural demolition, while orienting your bed headboard and desk toward your favorable personal directions."
+    "luu_nien_phu": " · Annual star {sao}"
+  },
+  "doi_chieu_hai_phai": {
+    "bt_thuan_hk_tinh": {
+      "tieu_de": "Two-School Lens at the Main Entrance (Eight Mansions & Period-9 Flying Stars)",
+      "goc_bat_trach": "Eight Mansions lens (personal trigram alignment): this entrance direction matches the householder's group, supporting long-term personal steadiness.",
+      "goc_huyen_khong_van_9": "Period-9 Flying Star lens (timely sector qi, star pair {cap}): the entrance sector carries stars that are best kept calm and uncluttered.",
+      "cach_dung_hoa": {
+        "sao_tho": "Keep your entrance, bed-head and stove facing aligned with Eight Mansions, while styling the doorway in crisp light neutral tones without harsh heat lamps or heavy drilling.",
+        "chung": "Keep your entrance, bed-head and stove facing aligned with Eight Mansions, while keeping the doorway clear and softly lit, with nothing stacked against the door and no heavy renovation unless needed."
+      }
+    },
+    "hk_vuong_bt_lech": {
+      "tieu_de": "Two-School Lens at the Main Entrance (Eight Mansions & Period-9 Flying Stars)",
+      "goc_bat_trach": "Eight Mansions lens (personal trigram alignment): this entrance direction belongs to the opposite East/West group from the householder.",
+      "goc_huyen_khong_van_9": "Period-9 Flying Star lens (timely sector qi, star pair {cap}): the entrance welcomes timely or prosperous Period-9 qi favorable for activity and commerce.",
+      "cach_dung_hoa": {
+        "sao_9_1": "Keep the entrance bright and open to welcome Period-9 flow, while orienting your bed-head, stove-mouth and desk chair toward your personal Eight Mansions directions.",
+        "chung": "Keep the entrance clear and tidy so the favorable flow at this sector can settle, while orienting your bed-head, stove-mouth and desk chair toward your personal Eight Mansions directions."
       }
     }
   }

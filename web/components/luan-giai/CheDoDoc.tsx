@@ -148,11 +148,13 @@ export function KhungUngDungCoDien({ u, moKhoa }: { u?: UngDungCoDien; moKhoa?: 
             <div className="mt-4 rounded-xl border border-gold/35 bg-gold/5 p-3.5 text-xs leading-relaxed" data-testid="lg-doi-chieu-hai-phai">
               <p className="flex items-center gap-1.5 font-semibold text-gold">
                 <Scale className="size-3.5 shrink-0" aria-hidden />
-                <span>{chu("cd.doi_chieu")}</span>
+                <span>{u.doi_chieu_hai_phai.tieu_de ?? chu("cd.doi_chieu")}</span>
               </p>
               <div className="mt-2 grid grid-cols-1 gap-2 md:grid-cols-2">
                 <p className="rounded-lg border border-line/60 bg-bg/60 p-2.5 text-fg-muted">{u.doi_chieu_hai_phai.goc_bat_trach}</p>
-                <p className="rounded-lg border border-line/60 bg-bg/60 p-2.5 text-fg-muted">{u.doi_chieu_hai_phai.goc_huyen_khong}</p>
+                <p className="rounded-lg border border-line/60 bg-bg/60 p-2.5 text-fg-muted">
+                  {u.doi_chieu_hai_phai.goc_huyen_khong_van_9 ?? u.doi_chieu_hai_phai.goc_huyen_khong}
+                </p>
               </div>
               <p className="mt-2 text-fg">{u.doi_chieu_hai_phai.cach_dung_hoa}</p>
             </div>
