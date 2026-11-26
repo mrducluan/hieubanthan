@@ -100,7 +100,6 @@ const TEN_PHAN_DS: Record<string, string> = {
   thang: "12 tháng tới", cham: "có tháng nên chậm",
   // TV-YBS đợt 4 (ds.hai.<ý>.<ai>.<quan hệ>)
   ban: "lá của bạn", kia: "lá người ấy", nguoi_yeu: "người yêu", vo_chong: "vợ chồng",
-  // TV-BD1 / PR #371 (ds.duong_bay.{kck|lck}.<tu>+<den>)
   kck: "Kỵ chuyển Kỵ", lck: "Lộc chuyển Kỵ",
 };
 

@@ -1,0 +1,68 @@
+{
+  "_nguon": "Chế độ Học thuật Cổ điển — khung nhãn song ngữ hiển thị tri thức cổ thư & bảng kỹ thuật ĐÃ CÓ NGUỒN trong Engine (Bát tự: hai cách Dụng thần, Điều hậu Cùng Thông Bảo Giám, Cách cục Tử Bình Chân Thuyên; Tử vi: Nạp âm – Cục, Mệnh/Thân chủ, Lai nhân cung, Cách cục Toàn Thư / Cốt Tuỷ Phú; Phong thuỷ: tổ hợp 81 cặp sao Huyền Không trên phòng thật bo_cuc & đối chiếu Bát Trạch – Phi Tinh). Không bịa màu sắc/khung giờ theo sao, không khuyên hướng theo ngũ hành trái Bát trạch (quyết định 6b).",
+  "source_id": "co_dien_tong_hop",
+  "school_id": "da_phai_co_dien",
+  "trang_thai": "bien_tap",
+  "tieu_de": {
+    "battu": "Đối chiếu Học thuật Cổ điển (Tử Bình Chân Thuyên · Cùng Thông Bảo Giám)",
+    "tuvi": "Đối chiếu Học thuật Cổ điển (Lập cực · Cách cục · Cổ phú)",
+    "phongthuy": "Đối chiếu Học thuật Cổ điển (Bát Trạch · Huyền Không theo sơ đồ thật)"
+  },
+  "nguyen_tac_uu_tien": {
+    "battu": "Trình bày song song hai phép lấy Dụng thần (Phù ức/Điều hậu & Cách cục nguyệt lệnh) kèm câu nguyên văn Cùng Thông Bảo Giám theo tháng sinh; không quy đổi sang hướng nhà theo ngũ hành để tránh mâu thuẫn Bát trạch.",
+    "tuvi": "Tổng hợp nền tảng lập cực của lá số (quan hệ Bản mệnh Nạp âm – Cục, Mệnh chủ – Thân chủ, Lai nhân cung) và các câu phú cổ thư đã đối chiếu; mở sẵn mục 'Vì sao nói vậy' ở toàn bộ các chương.",
+    "phongthuy": "Đọc cặp Sơn tinh – Hướng tinh từ bảng 81 tổ hợp Huyền Không trên đúng vị trí phòng người dùng đã khai báo (khi chưa khai phòng chỉ nêu Hướng thủ & Toạ sơn, không gán giả phòng ngủ); sao 2 Nhị Hắc ở Vận 9 tính đúng là Sinh khí."
+  },
+  "battu": {
+    "nhan_cach_cuc": "Cách cục nguyệt lệnh (Tử Bình Chân Thuyên)",
+    "nhan_hai_cach": "Hai phép lấy Dụng thần",
+    "cung_can": "Cả hai phép cùng cần hành: {ds}.",
+    "khac_nhau": "Phép cân sức/điều hậu cần: {c1} · Phép cách cục tháng sinh cần: {c2} (hệ thống trình bày song song, không chọn thay).",
+    "trung_hoa": "Tứ trụ khá cân hoà, ưu tiên giữ nhịp ổn định theo từng đại vận.",
+    "nhan_dieu_hau": "Điều hậu tháng sinh (Cùng Thông Bảo Giám)",
+    "noi_dung_dieu_hau": "Nhật chủ {can} sinh tháng {chi}: sách xếp thứ tự can điều hậu {can_dh}."
+  },
+  "tuvi": {
+    "nhan_lap_cuc": "Lập cực Bản mệnh & Cục",
+    "noi_dung_lap_cuc": "Bản mệnh {nap_am} · {cuc} ({menh_cuc}).",
+    "nhan_chu_than": "Mệnh chủ · Thân chủ · Cung Thân",
+    "noi_dung_chu_than": "Mệnh chủ: {menh_chu} · Thân chủ: {than_chu} · Thân cư {than_cu}.",
+    "nhan_lai_nhan": "Lai nhân cung (gốc khởi tứ hoá năm sinh)",
+    "noi_dung_lai_nhan": "Thiên can năm sinh {can_nam} lập Lai nhân cung tại {cung_lai} ({chi_lai}) — mảng đời gắn nhiều duyên nợ tự thân nhất theo phái Phi tinh."
+  },
+  "phongthuy": {
+    "chua_khai_phong": "Chưa khai vị trí từng phòng trên sơ đồ: chỉ hiển thị cặp sao tại Hướng thủ (trước nhà) và Toạ sơn (lưng nhà). Hãy khai sơ đồ phòng để xem đúng từng phòng.",
+    "ten_vi_tri": {
+      "huong_thu": "Hướng thủ (phía trước nhà — {phuong})",
+      "toa_son": "Toạ sơn (phía lưng nhà — {phuong})",
+      "cua_chinh": "Cửa chính ({phuong})",
+      "phong_ngu_chinh": "Phòng ngủ chính ({phuong})",
+      "bep": "Bếp ({phuong})",
+      "phong_lam_viec": "Bàn / Phòng làm việc ({phuong})",
+      "ban_tho": "Không gian thờ ({phuong})",
+      "ve_sinh": "Khu vệ sinh ({phuong})"
+    },
+    "trang_thai_cap": "Sơn tinh {son} ({tt_son}) · Hướng tinh {huong} ({tt_huong}){ln}",
+    "luu_nien_phu": " · Sao năm {sao}"
+  },
+  "doi_chieu_hai_phai": {
+    "bt_thuan_hk_tinh": {
+      "tieu_de": "Đối chiếu hai trường phái tại hướng cửa (Bát Trạch & Huyền Không Vận 9)",
+      "goc_bat_trach": "Theo Bát Trạch (xét độ hợp với mệnh quái người ở): hướng cửa này thuận nhóm mệnh của chủ nhà, tốt cho tâm thế ổn định lâu dài.",
+      "goc_huyen_khong_van_9": "Theo Huyền Không Vận 9 (xét nhịp khí thời vận tại cửa, cặp sao {cap}): khu vực cửa đang có sao cần giữ yên tĩnh và tiết khí nhẹ.",
+      "cach_dung_hoa": {
+        "sao_tho": "Giữ nguyên hướng cửa và hướng quay đầu giường/bếp theo Bát Trạch; riêng tại thềm cửa ưu tiên gam trắng – xám sáng, gọn thoáng, tránh đèn nóng gắt hoặc sửa chữa đục phá lớn.",
+        "chung": "Giữ nguyên hướng cửa và hướng quay đầu giường/bếp theo Bát Trạch; riêng tại thềm cửa giữ lối đi thông thoáng, ánh sáng vừa mắt, không chất đồ chắn cửa và tránh sửa chữa đục phá lớn khi chưa cần."
+      }
+    },
+    "hk_vuong_bt_lech": {
+      "tieu_de": "Đối chiếu hai trường phái tại hướng cửa (Bát Trạch & Huyền Không Vận 9)",
+      "goc_bat_trach": "Theo Bát Trạch (xét độ hợp với mệnh quái người ở): hướng cửa chưa cùng nhóm Đông/Tây tứ mệnh với chủ nhà.",
+      "goc_huyen_khong_van_9": "Theo Huyền Không Vận 9 (xét nhịp khí thời vận tại cửa, cặp sao {cap}): phía cửa đang đón sao đương vận/sinh khí thuận lợi cho công việc và giao thương.",
+      "cach_dung_hoa": {
+        "sao_9_1": "Tận dụng lối cửa thoáng sáng để đón khí Vận 9 (nhất là nhà vừa ở vừa làm việc); đồng thời xoay đầu giường ngủ, miệng bếp và ghế ngồi làm việc về các hướng hợp Bát Trạch của chủ nhà để cân bằng.",
+        "chung": "Giữ lối cửa thông thoáng, gọn gàng để phía cửa phát huy nhịp khí thuận; đồng thời xoay đầu giường ngủ, miệng bếp và ghế ngồi làm việc về các hướng hợp Bát Trạch của chủ nhà để cân bằng."
+      }
+    }
+  }
+}

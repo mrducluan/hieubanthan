@@ -7,6 +7,8 @@ import { z } from "zod";
 import { dauNguoiGoi, loiEngine } from "@/lib/proxy";
 import { LaSoVao } from "@/lib/la-so-vao";
 import { dauPhanLoaiAi } from "@/lib/phan-loai-ai";
+import { daMoBaoCaoHoi } from "@/lib/luan-giai-sao";
+import { catLuanHoiChat } from "@/lib/sao-xem-truoc";
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";
 const ENGINE_API_KEY = process.env.ENGINE_API_KEY;
@@ -45,7 +47,10 @@ async function xuLy(req: Request): Promise<NextResponse> {
       const l = loiEngine(r.status, body);
       return NextResponse.json({ error: l.error }, { status: l.status });
     }
-    return NextResponse.json(body);
+    const obj = (body && typeof body === "object" ? body : {}) as Record<string, unknown>;
+    const canKiemSao = Boolean(obj.luan_hoi || obj.doi_song_lien_ket || obj.go_nut_doi_song);
+    const quyen = canKiemSao ? await daMoBaoCaoHoi(req, "battu", parsed.data.la_so) : true;
+    return NextResponse.json(catLuanHoiChat(obj, quyen));
   } catch (e) {
     baoLoi(e, { noi: "api", duong: new URL(req.url).pathname });
     return NextResponse.json({ error: "Không kết nối được máy tính toán. Thử lại sau ít phút." }, { status: 502 });

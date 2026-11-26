@@ -10,7 +10,7 @@ Hợp đồng:
 - Cổng TUOI-16: người dưới 16 tuổi (`birth_date: "2014-05-15"`) nhận `nguoi_lon: False`, cung Phu Thê / Tử Nữ dùng lời
   phù hợp lứa tuổi (không nói vợ chồng / hôn nhân / bạn đời), không dẫn sang chương tình yêu hôn nhân.
 - Không biết giờ sinh (`do_tin_gio: "unknown"`) trả HTTP 422 ở cả bản Việt và bản Anh.
-- Chuỗi phi hoá 2 chặng `chuoi_chuyen_ky` (`A -> B -> C`) có `ma_mau = "ds.duong_bay.{kck|lck}.{tu}+{den}"` và
+- Chuỗi phi hoá 2 chặng `chuoi_chuyen_ky` (`A -> B -> C`) có `ma_mau = "ds.duong_bay.{kck|lck}.{tu}+{qua}+{den}"` và
   `phai = "luong_phai_phi_tinh"`, đi qua bộ kiểm SQL `test_kiem_chung_ma._hop_le("doi_song", ...)`.
 - Đối xứng song ngữ VI ↔ EN: `dr.khung(dv) == dr.khung(de)`, `dr.loi_en(de, body) == []`, sạch `cum_cam_chung()` & `cum_cam_en`.
 """

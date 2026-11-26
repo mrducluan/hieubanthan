@@ -899,9 +899,25 @@ def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_
     if pl.get("lo_so") and not goi["luu_y"] and goi["muc"]:
         goi["luu_y"] = kb.luu_y("lo_so")
     dac_biet = pl["xu_ly"] in chung.DAC_BIET or bool(goi["can_them"])
-    return {"hoi_lai": chung.hoi_lai_neu(pl, "battu"), "phan_loai": goi["phan_loai"], "la_so": ls, "bang_chung": goi, "cau_tra_loi": van,
-            "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": co,
-            "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.battu(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_battu(pl)}
+    kq = {"hoi_lai": chung.hoi_lai_neu(pl, "battu"), "phan_loai": goi["phan_loai"], "la_so": ls, "bang_chung": goi, "cau_tra_loi": van,
+          "che_do_van": che_do_van, "loi_kiem_tra": loi, "can_them": goi["can_them"], "co_canh_bao": co,
+          "do_phu": "day_du" if (goi["muc"] or dac_biet) else "khong", "truc_quan": truc_quan.battu(goi, ls), "hoi_tiep": truc_quan.hoi_tiep_battu(pl)}
+    if ls is not None and sinh:
+        from app.hoidap import luan_hoi_khop as lhk  # noqa: PLC0415
+        from app.luangiai import battu_doi_song as bds, go_nut_doi_song as gnds  # noqa: PLC0415
+        _lay_bc = lambda: bds.lap(sinh, ngay_xem, ls=ls)  # noqa: E731
+        lhk.gan_vao_hoi(
+            kq, mo_dun="battu", pl=pl, cau_hoi=cau_hoi, sinh=sinh, bc_ds=bc_ds,
+            dung_bc=_lay_bc,
+            nguoi_than=False,
+        )
+        gnds.gan_vao_hoi(
+            kq, pl=pl, cau_hoi=cau_hoi, mo_dun="battu", ls=ls, sinh=sinh,
+            bc_ds=bc_ds, dung_bc=_lay_bc, nguoi_than=False,
+        )
+        if (kq.get("go_nut_doi_song") or {}).get("ma") == "go_loi_phan_doa":
+            kq.pop("luan_hoi", None)      # người hỏi đang lo vì bị phán → không chồng thêm một nhãn của lá số lên nỗi lo
+    return kq
 
 
 _tra_loi_theo_vi = _dsk.vi_quyet_dinh(_tra_loi)

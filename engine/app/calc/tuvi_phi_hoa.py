@@ -93,10 +93,10 @@ CUNG_CHUOI_MAC_DINH = ("Mệnh", "Tài Bạch", "Quan Lộc", "Phu Thê", "Đi�
 
 
 def chuoi_chuyen_ky(cung: list[dict], cung_goc: tuple[str, ...] = CUNG_CHUOI_MAC_DINH, toi_da: int = 6) -> list[dict]:
-    """Chuỗi Phi Hoá bậc 2 theo phái Lương Nhược Du (`luong_phai_phi_tinh`):
-      * `ky_chuyen_ky`: cung A hoá Kỵ bay vào cung B (B != A), lấy can của cung B tìm sao hoá Kỵ tiếp sang cung C (`den_cung`)
-        — bận tâm từ mảng A qua B rồi dồn điểm rơi thực tế sang mảng C (xung cung đối C').
-      * `loc_chuyen_ky`: cung A hoá Lộc bay vào cung B (B != A), lấy can của cung B tìm sao hoá Kỵ sang cung C —
+    """Chặng 1 — Chuỗi Phi Hoá bậc 2 theo phái Lương Nhược Du (`luong_phai_phi_tinh`):
+      * `ky_chuyen_ky`: cung A hoá Kỵ bay vào cung B (B ≠ A), lấy can của cung B tìm sao hoá Kỵ tiếp sang cung C (`den_cung`)
+        — cho thấy bận tâm từ mảng A qua B rồi dồn điểm rơi thực tế sang mảng C (xung cung đối C').
+      * `loc_chuyen_ky`: cung A hoá Lộc bay vào cung B (B ≠ A), lấy can của cung B tìm sao hoá Kỵ sang cung C — cho thấy
         thuận lợi ở B dễ kéo theo chỗ hao sức hoặc ràng buộc ở C nếu không giữ nhịp.
     Tất định 100%, không đổi `phi_hoa()`."""
     theo_ten = {c["ten"]: c for c in cung}
@@ -131,3 +131,4 @@ def chuoi_chuyen_ky(cung: list[dict], cung_goc: tuple[str, ...] = CUNG_CHUOI_MAC
             if len(ra) >= toi_da:
                 return ra
     return ra
+

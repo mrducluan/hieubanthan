@@ -124,6 +124,10 @@ def y_dinh_hoi() -> list[dict]:
     return [m for m in x if isinstance(m, dict)] if isinstance(x, list) else []
 
 
+def chuoi_chuyen_ky(loai: str) -> dict | None:
+    return _muc(_lay("chuoi_chuyen_ky", loai))
+
+
 def dien(mau: str | None, **bien: str) -> str | None:
     """Thay {bien} đã biết trong mẫu KB; ngoặc lạ giữ nguyên (không ném lỗi như str.format)."""
     if not mau:

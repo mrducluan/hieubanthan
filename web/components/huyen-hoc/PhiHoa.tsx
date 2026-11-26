@@ -41,8 +41,9 @@ export function PhiHoaXem({ d, onChonCung, onHoi }: { d: PhiHoaOutputT; onChonCu
     m.set(x.hoa, x);
     theoCung.set(x.tu_cung, m);
   }
-  // "x% trong N người thấy đúng" khi mã đủ ≥ 30 phiếu (LG-ĐS mục 5) — một lời gọi cho mọi thẻ nổi bật.
-  const tyLe = useTyLe(d.noi_bat.map(maPhiHoa));
+  // "x% trong N người thấy đúng" khi mã đủ ≥ 30 phiếu (LG-ĐS mục 5) — một lời gọi cho mọi thẻ nổi bật + chuỗi 2 chặng.
+  const maChuoi = (d.chuoi_chuyen_ky ?? []).map((x) => x.ma_mau).filter((x): x is string => Boolean(x));
+  const tyLe = useTyLe([...d.noi_bat.map(maPhiHoa), ...maChuoi]);
 
   return (
     <div className="space-y-5" data-testid="phi-hoa-noi-dung">
@@ -99,6 +100,54 @@ export function PhiHoaXem({ d, onChonCung, onHoi }: { d: PhiHoaOutputT; onChonCu
                 <KiemChung loai="phi_hoa" mau={maPhiHoa(n)} phai="phi_tinh" tyLe={tyLe[maPhiHoa(n)]} />
               </li>
             ))}
+          </ul>
+        </div>
+      )}
+
+      {d.chuoi_chuyen_ky && d.chuoi_chuyen_ky.length > 0 && (
+        <div>
+          <p className="mb-2"><NhanLop lop="giai" /> <span className="text-xs text-fg-faint">{t("ph.chuoi_mo_ta")}</span></p>
+          <ul className="grid gap-3 sm:grid-cols-2" data-testid="phi-hoa-chuoi">
+            {d.chuoi_chuyen_ky.map((ch, idx) => {
+              const nhanLoai = ch.loai === "ky_chuyen_ky" ? t("ph.chuoi_kck") : t("ph.chuoi_lck");
+              return (
+                <li key={`${ch.loai}-${ch.tu_cung ?? idx}-${ch.den_cung ?? idx}`} className="glass flex flex-col gap-2 rounded-2xl p-4">
+                  <div className="flex flex-wrap items-center gap-2 text-xs">
+                    <span className={cn("rounded-full px-2 py-0.5 font-medium", ch.loai === "ky_chuyen_ky" ? "bg-moon/15 text-moon" : "bg-jade/15 text-jade")}>
+                      {nhanLoai}
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-lg leading-snug text-fg">{ch.tieu_de}</h3>
+                  {ch.tu_cung && ch.qua_cung && ch.den_cung && (
+                    <p className="flex flex-wrap items-center gap-1 text-xs text-fg-faint">
+                      <NhanLop lop="tinh" />
+                      <button type="button" onClick={() => chon(ch.tu_cung ?? null)} className="ml-1 rounded-md border border-line/60 px-1.5 py-0.5 text-fg hover:border-gold/50">
+                        {tc(ch.tu_cung)}
+                      </button>
+                      <ArrowRight className="size-3" aria-hidden />
+                      <button type="button" onClick={() => chon(ch.qua_cung ?? null)} className="rounded-md border border-line/60 px-1.5 py-0.5 text-fg hover:border-gold/50">
+                        {tc(ch.qua_cung)}
+                      </button>
+                      <ArrowRight className="size-3" aria-hidden />
+                      <button type="button" onClick={() => chon(ch.den_cung ?? null)} className="rounded-md border border-gold/40 bg-gold/10 px-1.5 py-0.5 font-medium text-fg hover:border-gold">
+                        {tc(ch.den_cung)}
+                      </button>
+                    </p>
+                  )}
+                  <p className="text-sm leading-relaxed text-fg-muted">{ch.nghia}</p>
+                  {ch.viec_nen_lam && <p className="text-sm"><span className="text-jade">{t("ph.nen_lam")}</span> {ch.viec_nen_lam}</p>}
+                  {ch.can_cu && ch.can_cu.length > 0 && <ViSao canCu={ch.can_cu} nho />}
+                  {ch.tu_cung && ch.qua_cung && ch.den_cung && (
+                    <div className="mt-auto flex flex-wrap gap-2 pt-1">
+                      <Button size="sm" variant="ghost" onClick={() => onHoi(t("ph.chuoi_hoi", { loai: nhanLoai, tu: tc(ch.tu_cung), qua: tc(ch.qua_cung), den: tc(ch.den_cung) }))}>
+                        <MessageCircleQuestion aria-hidden /> {t("ph.hoi")}
+                      </Button>
+                    </div>
+                  )}
+                  {ch.ma_mau && <KiemChung loai="doi_song" mau={ch.ma_mau} phai={ch.phai} tyLe={tyLe[ch.ma_mau]} />}
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

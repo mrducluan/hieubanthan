@@ -12,6 +12,8 @@ import { SoanLaiLech } from "./SoanLaiLech";
 import { DungKhoVec, DuyetDeXuat, DuyetVec } from "./HocTuvi";
 import { mangCuaMa, nhanMau, TEN_LOAI_KIEM_CHUNG, TEN_MANG, tinhKiemChung, type DongKiemChung } from "@/lib/kiem-chung";
 import { goiEngineDaKiem } from "@/lib/proxy";
+import { tinhTrangMigration } from "@/lib/migration-qt";
+import { gomRadarToMo, MIGRATION_TRUC_HOC, tongKetMigrationHoc, type CauHoiNhatKy } from "@/lib/radar-to-mo";
 
 export const metadata: Metadata = { title: "Học từ góp ý" };
 
@@ -62,14 +64,19 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ t
   const tt = TT.some(([k]) => k === sp.tt) ? sp.tt! : "cho_duyet";
   const ttVec = TT_VEC.some(([k]) => k === sp.vec) ? sp.vec! : "cho_duyet";
   const ttDx = TT_DX.some(([k]) => k === sp.dx) ? sp.dx! : "cho_duyet";
-  const [{ data, error }, tv, dx, nn] = await Promise.all([
+  const [{ data, error }, tv, dx, nn, ttMig, nhatKyChuaPhu] = await Promise.all([
     p.sb.rpc("qt_cum_bat_thuong", { p_trang_thai: tt }),
     p.sb.rpc("thong_ke_hoc_tuvi", { p_trang_thai: ttVec }),
     p.sb.rpc("thong_ke_de_xuat_luat", { p_trang_thai: ttDx }),
     p.sb.rpc("ty_le_kiem_chung_ngon_ngu", { p_toi_thieu: 30 }),      // HTT-1 (migration 0034)
+    tinhTrangMigration(),
+    p.sb.rpc("nhat_ky_hoi_gan_day", { p_mo_dun: null, p_chi_khong_phu: true, p_gioi_han: 40 }),
   ]);
   const lech = await lechNgonNgu(nn.error ? null : (nn.data as DongNgonNgu[]));
   const dongThuan = await docDongThuan();
+  const sucKhoeMig = tongKetMigrationHoc(ttMig);
+  const radar = !nhatKyChuaPhu.error && Array.isArray(nhatKyChuaPhu.data) ? gomRadarToMo(nhatKyChuaPhu.data as CauHoiNhatKy[]).slice(0, 4) : [];
+  const khungTrucHoc = <KhungSucKhoeTrucHoc mig={sucKhoeMig} radar={radar} />;
   const khungTuvi = (<>
     <KhungTuvi d={tv.error ? null : (tv.data as HocTuvi)} ttVec={ttVec} tt={tt} />
     <KhungDeXuat d={dx.error ? null : (dx.data as HocDeXuat)} ttDx={ttDx} tt={tt} ttVec={ttVec} />
@@ -79,6 +86,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ t
   if (error) {
     return (
       <div className="space-y-6">
+        {khungTrucHoc}
         <Card><p role="alert" className="text-sm text-cinnabar">Chưa đọc được góp ý (chạy migration 0016 trên Supabase; vai trò chủ sở hữu, biên tập hoặc thẩm định).</p></Card>
         {khungTuvi}
       </div>
@@ -88,13 +96,14 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ t
   return (
     <div className="space-y-6" data-testid="qt-hoc">
       <div>
-        <h1 className="text-2xl">Học từ góp ý</h1>
+        <h1 className="text-2xl">Học từ góp ý &amp; Trục tri thức tự tiến hóa</h1>
         <p className="mt-1 text-sm text-fg-muted">
-          Góp ý "đúng / chưa đúng" dưới mỗi câu trả lời thần số — chỉ lưu các con số đã tính, không tên, không ngày sinh.
-          Cụm đủ 5 lần "chưa đúng" sẽ chờ duyệt. Sửa nội dung ở
+          Góp ý "đúng / chưa đúng" dưới mỗi hộp luận giải &amp; câu trả lời hỏi đáp — chỉ lưu mã định danh, không tên, không ngày sinh.
+          Cụm đủ ngưỡng sẽ vào hàng chờ duyệt. Sửa nội dung ở
           <Link href="/quan-tri/tri-thuc" className="mx-1 text-gold hover:underline">Kho tri thức</Link>rồi đánh dấu "Đã sửa".
         </p>
       </div>
+      {khungTrucHoc}
       <div className="grid gap-3 sm:grid-cols-3">
         <Card><p className="text-xs text-fg-muted">Góp ý 30 ngày</p><p className="text-2xl">{d.tong_30_ngay.gop_y}</p></Card>
         <Card><p className="text-xs text-fg-muted">Tỉ lệ "đúng"</p><p className="text-2xl">{tyLe(d.tong_30_ngay.dung, d.tong_30_ngay.gop_y)}</p></Card>
@@ -146,6 +155,51 @@ async function lechNgonNgu(dong: DongNgonNgu[] | null): Promise<KetQuaLech | nul
   const kq = await goiEngineDaKiem({ dong: gui.slice(0, 10_000) }, "/v1/quan-tri/lech-ngon-ngu",
     process.env.ENGINE_QUAN_TRI_KEY ? { "x-quan-tri-key": process.env.ENGINE_QUAN_TRI_KEY } : {}).catch(() => null);
   return kq && kq.ok ? (kq.body as KetQuaLech) : null;
+}
+
+function KhungSucKhoeTrucHoc({ mig, radar }: {
+  mig: ReturnType<typeof tongKetMigrationHoc>;
+  radar: ReturnType<typeof gomRadarToMo>;
+}) {
+  return (
+    <Card data-testid="qt-truc-hoc-db-kb">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 className="text-xl">Trục sống DB ↔ KB tự tiến hóa</h2>
+        <span className="text-xs text-fg-muted">
+          {mig.doc_duoc ? `${mig.da_chay.length}/${MIGRATION_TRUC_HOC.length} bảng tự học đã bật` : "Chưa đọc được trạng thái migration"}
+        </span>
+      </div>
+      {mig.doc_duoc && mig.con_thieu.length > 0 && (
+        <div className="mt-3 rounded-xl border border-cinnabar/40 bg-cinnabar/10 p-3 text-xs text-fg">
+          <p className="font-medium text-cinnabar">Còn {mig.con_thieu.length} migration tầng HỌC cần chạy trong Supabase SQL Editor để bật 100% trí nhớ tự học:</p>
+          <ul className="mt-1.5 list-disc space-y-1 pl-4 text-fg-muted">
+            {mig.con_thieu.map((m) => (
+              <li key={m.so}><code>supabase/migrations/{m.so}_*.sql</code> — {m.vai_tro}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {mig.doc_duoc && mig.con_thieu.length === 0 && (
+        <p className="mt-2 text-xs text-jade">Tất cả 8 bảng/hàm cốt lõi của tầng HỌC trên DB đã sẵn sàng thu nhận tín hiệu thực chứng.</p>
+      )}
+      {radar.length > 0 && (
+        <div className="mt-4 border-t border-line/60 pt-3">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <p className="text-sm font-medium text-fg">Mạch tò mò người dùng đang hỏi mà KB chưa phủ sâu</p>
+            <Link href="/quan-tri/hoi-dap" className="text-xs text-gold hover:underline">Mở toàn bộ Radar Hỏi đáp →</Link>
+          </div>
+          <div className="mt-2.5 flex flex-wrap gap-2 text-xs">
+            {radar.map((r) => (
+              <Link key={r.ma} href={r.tep_kb[0]?.duong ?? "/quan-tri/tri-thuc"}
+                className="rounded-full border border-gold/40 bg-gold/5 px-3 py-1 text-fg hover:border-gold">
+                {r.ten} ({r.so_cau}) · <span className="text-gold">{r.tep_kb[0]?.nhan}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </Card>
+  );
 }
 
 function KhungLechNgonNgu({ d }: { d: KetQuaLech | null | "chua_bat" }) {

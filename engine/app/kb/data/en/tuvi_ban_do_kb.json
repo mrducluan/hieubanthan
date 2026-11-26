@@ -166,20 +166,6 @@
         "ky_xung": "pressure from the opposite axis reminds you to pace {ngan}"
       }
     },
-    "chuoi": {
-      "kck": {
-        "tieu_de": "{A_tu} passes through {ngan_qua} and lands in {ngan_den}",
-        "nghia": "Concern starting in {ngan_tu} tends to spill into {ngan_qua}, with the practical fallout settling in {ngan_den}.",
-        "viec_nen_lam": "When tension rises in {ngan_tu}, contain it early at {ngan_qua} so it does not spread to {ngan_den}.",
-        "can_cu": "Ji-to-Ji chain: {tu} ({can_dau} stem) sends Hua Ji ({sao_dau}) to {qua}, whose {can_chuyen} stem sends Hua Ji ({sao_chuyen}) to {den}"
-      },
-      "lck": {
-        "tieu_de": "Ease from {ngan_tu} via {ngan_qua} needs pacing in {ngan_den}",
-        "nghia": "Support from {ngan_tu} opens room in {ngan_qua}, yet moving too fast there can pull extra strain into {ngan_den}.",
-        "viec_nen_lam": "When things go well in {ngan_qua}, set aside reserves early and review commitments affecting {ngan_den}.",
-        "can_cu": "Lu-to-Ji chain: {tu} ({can_dau} stem) sends Hua Lu ({sao_dau}) to {qua}, whose {can_chuyen} stem sends Hua Ji ({sao_chuyen}) to {den}"
-      }
-    },
     "noi_bat": {
       "menh_than_trung": "Your Life and Body Palaces share {chi}: your core nature and your later-life direction run on the same track ({muc}).",
       "menh_than_khac": "Your core self connects to {ngan_than} (your Body Palace): as years pass, {ngan_than} shapes more of your choices.",

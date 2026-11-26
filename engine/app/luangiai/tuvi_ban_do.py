@@ -189,49 +189,20 @@ def _cham_cua_nam(cung_ln_ma: str, hoa_nam: list[dict]) -> list[dict]:
     return [{"o": ma, "loai": l} for ma, l in sorted(ra.items(), key=lambda x: (_UU_TIEN_CHAM.index(x[1]), x[0]))]
 
 
-def _luan_chuoi_chuyen_ky(cung: list[dict], lon: bool) -> list[dict]:
+def _chuoi_tu_phi_hoa(phi: dict) -> list[dict]:
+    """Chuỗi Kỵ chuyển Kỵ / Lộc chuyển Kỵ lấy NGUYÊN lời + mã kiểm chứng của `tuvi_phi_hoa.lap` (một nguồn với khối Phi
+    hoá) — bản đồ chỉ thêm mã ô (`tu`, `qua`, `den`, `xung`) để vẽ."""
     ra: list[dict] = []
-    for ch in phi_calc.chuoi_chuyen_ky(cung):
-        ma_tu = MA_CUNG[ch["tu_cung"]]
-        ma_qua = MA_CUNG[ch["qua_cung"]]
-        ma_den = MA_CUNG[ch["den_cung"]]
-        ma_xung = MA_CUNG[ch["xung_cung"]] if ch.get("xung_cung") in MA_CUNG else None
-        tat = "kck" if ch["loai"] == "ky_chuyen_ky" else "lck"
-        ma_mau = f"ds.duong_bay.{tat}.{ma_tu}+{ma_qua}+{ma_den}"
-        mk = _k("mau", "chuoi", tat) or {}
-        ngan_tu = _ngan(ma_tu, lon)
-        ngan_qua = _ngan(ma_qua, lon)
-        ngan_den = _ngan(ma_den, lon)
-        bien = {
-            "A_tu": _hoa_dau(ngan_tu),
-            "ngan_tu": ngan_tu,
-            "ngan_qua": ngan_qua,
-            "ngan_den": ngan_den,
-            "tu": _t("cung", ch["tu_cung"]),
-            "qua": _t("cung", ch["qua_cung"]),
-            "den": _t("cung", ch["den_cung"]),
-            "can_dau": _t("can", ch["can_dau"]),
-            "can_chuyen": _t("can", ch["can_chuyen"]),
-            "sao_dau": _t("sao", ch["sao_dau"]),
-            "sao_chuyen": _t("sao", ch["sao_chuyen"]),
-        }
+    for ch in phi.get("chuoi_chuyen_ky") or []:
+        if ch.get("tu_cung") not in MA_CUNG or ch.get("qua_cung") not in MA_CUNG or ch.get("den_cung") not in MA_CUNG:
+            continue
         ra.append({
-            "loai": ch["loai"],
-            "phai": ch["phai"],
-            "ma_mau": ma_mau,
-            "tu": ma_tu,
-            "qua": ma_qua,
-            "den": ma_den,
-            "xung": ma_xung,
-            "can_dau": ch["can_dau"],
-            "can_chuyen": ch["can_chuyen"],
-            "hoa_dau": ch["hoa_dau"],
-            "sao_dau": ch["sao_dau"],
-            "sao_chuyen": ch["sao_chuyen"],
-            "tieu_de": str(mk.get("tieu_de") or "").format(**bien),
-            "nghia": str(mk.get("nghia") or "").format(**bien),
-            "viec_nen_lam": str(mk.get("viec_nen_lam") or "").format(**bien),
-            "can_cu": [str(mk.get("can_cu") or "").format(**bien)],
+            **{k: ch[k] for k in ("loai", "phai", "ma_mau", "can_dau", "can_chuyen", "hoa_dau", "sao_dau", "sao_chuyen",
+                                  "tieu_de", "nghia", "viec_nen_lam", "can_cu") if k in ch},
+            "tu": MA_CUNG[ch["tu_cung"]],
+            "qua": MA_CUNG[ch["qua_cung"]],
+            "den": MA_CUNG[ch["den_cung"]],
+            "xung": MA_CUNG[ch["xung_cung"]] if ch.get("xung_cung") in MA_CUNG else None,
         })
     return ra
 
@@ -493,7 +464,7 @@ def _noi_bat_la_so(
 
 def _duong_bay_view(ls: dict, can_phi: str, nam_am_xem: int, lon: bool) -> tuple[dict, list[dict]]:
     phi = phl.lap(ls, can_phi, nam_am_xem)
-    chuoi = _luan_chuoi_chuyen_ky(ls["cung"], lon) if lon else []   # trẻ dưới 16: lời chuỗi viết cho người lớn
+    chuoi = _chuoi_tu_phi_hoa(phi) if lon else []   # trẻ dưới 16: lời chuỗi viết cho người lớn
     lai_cung = (phi.get("lai_nhan") or {}).get("cung")
     lai_ma = MA_CUNG[lai_cung] if lai_cung in MA_CUNG else None
 

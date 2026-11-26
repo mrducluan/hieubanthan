@@ -170,20 +170,6 @@
         "ky_xung": "nhịp đối diện dội sang nhắc bạn đi chậm ở chuyện {ngan}"
       }
     },
-    "chuoi": {
-      "kck": {
-        "tieu_de": "{A_tu} nối qua {ngan_qua} rồi dồn về {ngan_den}",
-        "nghia": "Bận tâm khởi từ chuyện {ngan_tu} dễ kéo sang {ngan_qua}, rồi điểm rơi cuối thường nằm ở chuyện {ngan_den}.",
-        "viec_nen_lam": "Khi chuyện {ngan_tu} phát sinh vướng mắc, khoanh gọn ngay ở chặng {ngan_qua} để tránh lan sang {ngan_den}.",
-        "can_cu": "Chuỗi Kỵ chuyển Kỵ: cung {tu} (can {can_dau}) hoá Kỵ ({sao_dau}) vào {qua}, can {can_chuyen} tiếp tục hoá Kỵ ({sao_chuyen}) về {den}"
-      },
-      "lck": {
-        "tieu_de": "Thuận lợi từ {ngan_tu} qua {ngan_qua} cần giữ nhịp ở {ngan_den}",
-        "nghia": "Nguồn thuận từ chuyện {ngan_tu} mở ra cơ hội ở {ngan_qua}, song nếu mở quá nhanh dễ kéo thêm bận tâm về chuyện {ngan_den}.",
-        "viec_nen_lam": "Khi đón điều thuận ở {ngan_qua}, trích trước phần dự phòng và rà kỹ các cam kết chạm tới {ngan_den}.",
-        "can_cu": "Chuỗi Lộc chuyển Kỵ: cung {tu} (can {can_dau}) hoá Lộc ({sao_dau}) vào {qua}, can {can_chuyen} hoá Kỵ ({sao_chuyen}) về {den}"
-      }
-    },
     "noi_bat": {
       "menh_than_trung": "Cung Mệnh và cung Thân đồng cung tại {chi}: tính cách gốc và hướng chọn lựa nửa sau cuộc đời đi chung một trục ({muc}).",
       "menh_than_khac": "Trục bản thân nối sang {ngan_than} (nơi Thân cư): càng trưởng thành bạn càng dồn tâm sức cho mảng {ngan_than}.",

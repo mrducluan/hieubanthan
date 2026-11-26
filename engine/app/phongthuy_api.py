@@ -413,7 +413,15 @@ def api_huyen_khong(inp: HuyenKhongInput) -> dict:
     kb = phongthuy_kb.huyen_khong()
     nam_xem = inp.nam_xem or hk.nam_theo_lap_xuan(_bay_gio_utc())
     cung_chi_tiet = [
-        {**c, "y_cap": hk.to_hop_cung(c["son"], c["huong"], b["van"], cung=c["cung"], nam=nam_xem)}
+        {
+            **c,
+            "y_cap": {
+                k: v
+                for k, v in hk.to_hop_cung(c["son"], c["huong"], b["van"], cung=c["cung"], nam=nam_xem).items()
+                # Route tra bàn công khai không nhận tuổi người xem -> ẩn câu nhóm C theo quy tắc SX-C3 / TUOI-16.
+                if not (k == "sach_ghi" and isinstance(v, dict) and v.get("nhom") == "C")
+            },
+        }
         for c in b["cung"]
     ]
     tm = hk.thanh_mon(b["van"], toa)

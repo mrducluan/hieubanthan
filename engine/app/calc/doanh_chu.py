@@ -41,7 +41,7 @@ _VAI_TRO_HANH = {
         "en": ("Finance Control · Compliance · Risk Governance", "Maintains budget discipline, quality standards, and data-driven decision rigor."),
     },
     "Mộc": {
-        "vi": ("Mở rộng thị trường · Chiến lược · Phát triển dự án mới", "Tạo đà tăng trưởng, dám tiên phong khai phá sản phẩm hoặc chi nhánh mới cho doanh nghiệp."),
+        "vi": ("Mở rộng thị trường · Chiến lược · Phát triển dự án mới", "Tạo đà tăng trưởng, dám tiên phong mở lối sản phẩm hoặc chi nhánh mới cho doanh nghiệp."),
         "en": ("Market Expansion · Strategy · New Initiatives", "Drives growth momentum and pioneers new products, markets, or business units."),
     },
     "Thủy": {
@@ -150,19 +150,32 @@ _RANH_GIOI_EN = (
 )
 
 
-def _ho_so_co_ban(ngay: int, thang: int, nam: int, gioi_tinh: str, nam_xem: int) -> dict:
-    """Tính toán tất định Bát Tự + Thần Số cho 1 người (dùng giờ Ngọ 12:00 khi không có giờ sinh; nam_xem bắt buộc)."""
-    ls = battu.la_so(dt.datetime(nam, thang, ngay, 12, 0), gioi_tinh)
+def _ho_so_co_ban(ngay: int, thang: int, nam: int, gioi_tinh: str, nam_xem: int, gio: str | None = None) -> dict:
+    """Tính toán tất định Bát Tự + Thần Số cho 1 người: có `gio` (HH:MM) thì lập đủ Tứ Trụ; khuyết giờ sinh thì lập Tam Trụ
+    (6 chữ Năm – Tháng – Ngày, `co_gio=False`, chỉ mượn mốc 12:00 để tra tiết khí ngày) nhằm không bơm giả Hỏa/Thổ giờ Ngọ."""
+    if gio:
+        hh, mm = (int(x) for x in gio.split(":", 1))
+        ls = battu.la_so(dt.datetime(nam, thang, ngay, hh, mm), gioi_tinh, co_gio=True)
+        so_tru = 4
+    else:
+        ls = battu.la_so(dt.datetime(nam, thang, ngay, 12, 0), gioi_tinh, co_gio=False)
+        so_tru = 3
     nh = ls["ngu_hanh"]["diem"]
     tong_nh = sum(nh.values()) or 1.0
     ty_le_nh = {h: round(nh.get(h, 0.0) / tong_nh, 3) for h in HANH_5}
     hanh_manh = max(HANH_5, key=lambda h: ty_le_nh[h])
     hanh_yeu = min(HANH_5, key=lambda h: ty_le_nh[h])
-    can_dt = list((ls.get("dung_than") or {}).get("can") or [hanh_yeu])
+    dt_obj = ls.get("dung_than") or {}
+    phu_dieu = list(dict.fromkeys([
+        *((dt_obj.get("phu_uc") or {}).get("hanh") or []),
+        *((dt_obj.get("dieu_hau") or {}).get("hanh") or []),
+    ]))
+    can_dt = phu_dieu or [hanh_yeu]
     dd = thanso.duong_doi(ngay, thang, nam)
     ncn = thanso.nam_ca_nhan(ngay, thang, nam_xem)
     chi_nam = ls["tru"][0]["chi"]
     return {
+        "so_tru": so_tru,
         "nhat_chu_hanh": ls["nhat_chu"]["ngu_hanh"],
         "chi_nam": chi_nam,
         "ty_le_ngu_hanh": ty_le_nh,
@@ -178,8 +191,8 @@ def phan_tich_nhan_su(ong_chu: dict, nhan_su: dict, nam_xem: int) -> dict:
     """Phân tích 2 chiều phong cách hợp tác & giao tiếp giữa 1 Ông Chủ và 1 Thành Viên tự nguyện đồng ý."""
     vi = ngon_ngu.la_viet()
     nam_hien = nam_xem
-    ceo = _ho_so_co_ban(ong_chu["ngay"], ong_chu["thang"], ong_chu["nam"], ong_chu.get("gioi_tinh", "nam"), nam_hien)
-    ns = _ho_so_co_ban(nhan_su["ngay"], nhan_su["thang"], nhan_su["nam"], nhan_su.get("gioi_tinh", "nam"), nam_hien)
+    ceo = _ho_so_co_ban(ong_chu["ngay"], ong_chu["thang"], ong_chu["nam"], ong_chu.get("gioi_tinh", "nam"), nam_hien, ong_chu.get("gio"))
+    ns = _ho_so_co_ban(nhan_su["ngay"], nhan_su["thang"], nhan_su["nam"], nhan_su.get("gioi_tinh", "nam"), nam_hien, nhan_su.get("gio"))
 
     qh_chi = _quan_he_dia_chi(ceo["chi_nam"], ns["chi_nam"])
     bu_hanh = ns["hanh_manh"] in ceo["hanh_can_bu"] or ns["hanh_manh"] == ceo["hanh_yeu"]
@@ -260,6 +273,7 @@ def phan_tich_nhan_su(ong_chu: dict, nhan_su: dict, nam_xem: int) -> dict:
         "nhom_viec": nhan_su.get("nhom_viec") or "",
         "khop_nhom_viec": _danh_gia_nhom_viec(nhan_su.get("nhom_viec") or "", ns["hanh_manh"], vi),
         "chi_so": {
+            "so_tru": ns["so_tru"],
             "hanh_manh": ns["hanh_manh"],
             "duong_doi": ns["duong_doi"],
             "nam_ca_nhan": ns["nam_ca_nhan"],
@@ -428,12 +442,12 @@ def ban_do_doi_ngu(ong_chu: dict, doi_ngu: list[dict], nam_xem: int, cap_quan_ly
     """Bậc 2 & 3 — Bản Đồ Cân Bằng Ngũ Hành & Ma Trận Giao Tiếp cho 1 Ông Chủ + 1..8 thành viên tự nguyện đồng ý."""
     vi = ngon_ngu.la_viet()
     nam_hien = nam_xem
-    ceo = _ho_so_co_ban(ong_chu["ngay"], ong_chu["thang"], ong_chu["nam"], ong_chu.get("gioi_tinh", "nam"), nam_hien)
+    ceo = _ho_so_co_ban(ong_chu["ngay"], ong_chu["thang"], ong_chu["nam"], ong_chu.get("gioi_tinh", "nam"), nam_hien, ong_chu.get("gio"))
 
     tong_hanh = {h: ceo["ty_le_ngu_hanh"][h] for h in HANH_5}
     chi_tiet_ns = []
     for ns_in in doi_ngu:
-        ns_base = _ho_so_co_ban(ns_in["ngay"], ns_in["thang"], ns_in["nam"], ns_in.get("gioi_tinh", "nam"), nam_hien)
+        ns_base = _ho_so_co_ban(ns_in["ngay"], ns_in["thang"], ns_in["nam"], ns_in.get("gioi_tinh", "nam"), nam_hien, ns_in.get("gio"))
         for h in HANH_5:
             tong_hanh[h] += ns_base["ty_le_ngu_hanh"][h]
         chi_tiet_ns.append(phan_tich_nhan_su(ong_chu, ns_in, nam_hien))
@@ -486,8 +500,10 @@ def ban_do_doi_ngu(ong_chu: dict, doi_ngu: list[dict], nam_xem: int, cap_quan_ly
         "cap_quan_ly": goi_y_cap,
         "ong_chu": {
             "ten": ong_chu.get("ten") or ("Ông chủ" if vi else "Owner"),
+            "so_tru": ceo["so_tru"],
             "hanh_manh": ceo["hanh_manh"],
             "hanh_can_bu": ceo["hanh_yeu"],
+            "hanh_dung_than": ceo["hanh_can_bu"],
             "duong_doi": ceo["duong_doi"],
             "nam_ca_nhan": ceo["nam_ca_nhan"],
         },

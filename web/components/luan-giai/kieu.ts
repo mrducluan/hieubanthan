@@ -155,6 +155,51 @@ export interface SaoLuuNam {
 }
 export interface ChuongKhoa { ma: string; tieu_de: string; khoa: true; moi_xem: MoiXem }
 
+export interface DiemHocThuatCoDien {
+  nhan: string;
+  noi_dung: string;
+}
+
+export interface SachCoDien {
+  sach: string;
+  ve?: string;
+  nguyen_van?: string;
+  y: string;
+}
+
+export interface KhuVucVan9CoDien {
+  khu_vuc: string;
+  ten_khu_vuc: string;
+  cap_sao: string;
+  loai_phep?: string;
+  ten_phep: string;
+  ngu_hanh_dieu_hoa: string;
+  ung_dung: string;
+}
+
+export interface DoiChieuHaiPhaiCoDien {
+  loai?: string;
+  tieu_de?: string;
+  goc_bat_trach: string;
+  goc_huyen_khong?: string;
+  goc_huyen_khong_van_9?: string;
+  ma_dung_hoa?: string;
+  cach_dung_hoa: string;
+}
+
+export interface UngDungCoDien {
+  khoa?: boolean;
+  ma: string;
+  tieu_de: string;
+  nguyen_tac_uu_tien: string;
+  tom_tat_dung_than?: string;
+  diem_hoc_thuat?: DiemHocThuatCoDien[];
+  sach?: SachCoDien[];
+  ghi_chu_so_do?: string;
+  khu_vuc_van_9?: KhuVucVan9CoDien[];
+  doi_chieu_hai_phai?: DoiChieuHaiPhaiCoDien;
+}
+
 export interface BaoCaoDoiSong {
   mo_dun: string;
   phien_ban: "doi_song_1";
@@ -170,6 +215,8 @@ export interface BaoCaoDoiSong {
   luu_y_mang?: LuuYMang[];
   /** LH-1: bản đồ người quanh bạn (người thuộc chương khoá SAO-2 chỉ còn tên + mức). */
   nguoi_quanh?: NguoiQuanh[];
+  /** Chặng 1: gói Ứng dụng Ngũ hành & Điều hoà Vận 9 cho chế độ 'Học thuật Cổ điển & Ngũ hành' (< 3 KB, an toàn SAO-2). */
+  ung_dung_co_dien?: UngDungCoDien;
   /** EN-2: không biết giờ sinh — một câu engine soạn, web hiện thành dải riêng đầu bài (không phụ thuộc bản AI). */
   gio_tam?: string;
   /** TUOI-16: ai đọc bài — "cha_me" khi người được xem chưa đủ 16 tuổi tròn (người lớn đọc hộ); `loi_vai_doc` là câu
