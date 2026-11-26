@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import datetime as dt
 
-from app.calc import huyen_khong as hk
+from app.calc import huyen_khong as hk, phongthuy as pt
 from app.kb import nap
 from app.kb.loi import danh_sach
 
@@ -175,9 +175,32 @@ def tu_bao_cao_phongthuy(bc: dict) -> dict | None:
             continue
         ds_kv.append(dieu_hoa_cung_van9(c["son"], c["huong"], ln_map.get(ten_cung), van=van, khu_vuc=kv))
 
-    return {
+    ra = {
         "ma": "phongthuy_co_dien",
         "tieu_de": k["tieu_de"]["phongthuy"],
         "nguyen_tac_uu_tien": k["nguyen_tac_uu_tien"]["phongthuy"],
         "khu_vuc_van_9": ds_kv,
     }
+    mq = dt_info.get("menh_quai")
+    huong_nha = dt_info.get("huong_nha")
+    dc_kb = k.get("doi_chieu_hai_phai") or {}
+    if mq and mq.get("quai") and huong_nha and dc_kb:
+        dn = pt.du_nien(mq["quai"], huong_nha)
+        bt_thuan = bool(dn and dn.get("cat"))
+        hk_muc = ch.get("muc")
+        loai_dc = None
+        if bt_thuan and (hk_muc == "can_chu_dong" or ({ch["son"], ch["huong"]} & {2, 5})):
+            loai_dc = "bt_thuan_hk_tinh"
+        elif (not bt_thuan) and (hk_muc == "thuan" or ch["huong"] in (9, 1)):
+            loai_dc = "hk_vuong_bt_lech"
+        if loai_dc and loai_dc in dc_kb:
+            mau_dc = dc_kb[loai_dc]
+            cap_str = f"{ch['son']}-{ch['huong']}"
+            ra["doi_chieu_hai_phai"] = {
+                "loai": loai_dc,
+                "tieu_de": mau_dc["tieu_de"],
+                "goc_bat_trach": mau_dc["goc_bat_trach"],
+                "goc_huyen_khong_van_9": mau_dc["goc_huyen_khong_van_9"].format(cap=cap_str),
+                "cach_dung_hoa": mau_dc["cach_dung_hoa"],
+            }
+    return ra

@@ -150,6 +150,13 @@ supabase/        Migration, mỗi file .sql có file .down.sql đi kèm
 Engine không biết Supabase tồn tại. Web không tự tính bất cứ thứ gì (tầng HỌC: web máy chủ xin engine "chữ ký số"
 rồi mới ghi Supabase).
 
+### Kỷ luật Thép v2.0 (chủ dự án chốt 2026-11-26 — bắt buộc cho cả 2 harness)
+
+1. **Sổ độ tin 7 mức (`engine/app/kb/do_tin.py`) & Cấm bịa chữ Hán (`SX-C`)**: (a) Cổ thư công cộng đi ray `nguyen_van` (chuỗi con 100% kho nguồn `fixtures/nguon/` + test khóa); (b) sách học thuật hiện đại còn bản quyền đi ray `luat_tom_y` (chỉ lưu tiên đề logic + số trang đối chiếu, tuyệt đối không chép nguyên văn); (c) tệp AI mới tạo bắt buộc gắn `nhap_ai_cho_duyet` cho tới khi chủ dự án duyệt sang `bien_tap`, sau đó chạy `scripts/do_tin_kb.py`.
+2. **Bát Trạch & Huyền Không Vận 9**: chế độ `[Đời sống & Hành động]` giữ 1 lời khuyên thống nhất không mâu thuẫn; khi hai phái trái chiều tại hướng cửa, phần đối chiếu trung lập + cách dung hoà (`doi_chieu_hai_phai`) chỉ hiện ở chế độ `[Học thuật Cổ điển & Ngũ hành]` hoặc B2B Mặt bằng.
+3. **Ngân sách dung lượng `< 190.000 bytes` (`tests/test_ky_luat_v2.py`)**: vạch cảnh báo CI chừa đệm cho trần cứng `256 KB` (`0017_tuvi_hoc.sql`, `luan-giai/luu/route.ts`). Lớp tóm tắt cổ điển nội tuyến `< 3.000 bytes`; từ Chặng 2 mọi phụ lục đa phái lớn hơn bắt buộc tách sang tra cứu lazy-load qua route có kiểm quyền `SAO-2`, và báo cáo Liên mảng Tam Tài (`/co-van`) phải tách `mo_dun = "tam_tai"` độc lập.
+4. **Cổng `SAO-2` Allowlist mặc định khóa (`web/lib/sao-xem-truoc.ts`)**: `catXemTruoc` dựng phản hồi xem trước theo `KHOA_CONG_KHAI_SAO2` và `KHOA_CAT_RIENG_SAO2` (không dùng `{ ...bc }`). Mọi khoá cấp gốc mới thêm vào báo cáo có cổng Sao bắt buộc phân loại vào 1 trong 2 tập này và qua bài test quét khoá tự động trong `web/lib/sao-xem-truoc.test.mjs`; dữ liệu E2EE trình duyệt dùng cơ chế kiểm quyền gói trước khi gọi Engine (`Gate-before-Compute`).
+
 ## Quyết định đã chốt (không mở lại nếu không có lý do mới)
 
 | Ngày | Quyết định |

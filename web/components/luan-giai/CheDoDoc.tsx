@@ -131,6 +131,20 @@ export function KhungUngDungCoDien({ u, moKhoa }: { u?: UngDungCoDien; moKhoa?: 
               ))}
             </div>
           )}
+
+          {u.doi_chieu_hai_phai && (
+            <div className="mt-4 rounded-xl border border-gold/30 bg-surface/50 p-3.5 text-xs leading-relaxed text-fg-muted" data-testid="lg-doi-chieu-hai-phai" data-loai={u.doi_chieu_hai_phai.loai}>
+              <p className="font-semibold text-gold">{u.doi_chieu_hai_phai.tieu_de}</p>
+              <ul className="mt-1.5 space-y-1">
+                <li>• {u.doi_chieu_hai_phai.goc_bat_trach}</li>
+                <li>• {u.doi_chieu_hai_phai.goc_huyen_khong_van_9}</li>
+              </ul>
+              <p className="mt-2 border-t border-line/50 pt-2 text-fg">
+                <span className="font-semibold text-gold">{chu("cd.dung_hoa")} </span>
+                {u.doi_chieu_hai_phai.cach_dung_hoa}
+              </p>
+            </div>
+          )}
         </>
       )}
     </section>

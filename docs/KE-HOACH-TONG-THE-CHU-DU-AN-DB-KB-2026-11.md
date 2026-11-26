@@ -142,3 +142,22 @@ Nếu hôm nay anh giao quyền điều hành cho em, **em sẽ KHÔNG bắt đ�
   - Xây dựng 5 kho nền (`planets_signs`, `houses`, `aspects`, `transits_timing`, `synastry`) + kho thứ 6 **`astro_east_west_bridge_kb.json`** đối chiếu trực tiếp Đông – Tây (*Tử Vi + Bát Tự ↔ Natal + Transit*).
 - **Việc 4.3 (Bộ máy Bổ trợ & Tự Tiến Hóa Cấp Cao):**
   - Bổ sung **Trạch Nhật chuyên sâu** (*Đổng Công Tuyển Trạch + Hiệp Kỷ Biện Phương Thư 35 quyển*), vận hành vòng duyệt tự động hàng tuần từ dữ liệu thực chứng `kiem_chung_phieu` + `kiem_chung_sau` (cả tiếng Việt lẫn `/en`), đưa kho tri thức của `hieubanthan` trở thành tài sản trí tuệ ngày càng thông minh theo năm tháng.
+
+---
+
+## 6. Bộ Kỷ Luật Thép v2.0 (Chủ Dự Án Chốt 2026-11-26)
+
+1. **Sổ Độ Tin 7 Mức (`do_tin.py`) & Hai Đường Ray Tri Thức:**
+   - **Ray 1 (Cổ thư công cộng):** Bắt buộc khớp nguyên văn 100% chuỗi con trong `fixtures/nguon/` (`nguyen_van` + kiểm `SX-C`), tuyệt đối không bịa chữ Hán.
+   - **Ray 2 (Sách học thuật hiện đại còn bản quyền):** Đi mức `luat_tom_y` (chỉ lưu tiên đề logic + số trang đối chiếu, không chép nguyên văn).
+   - **Minh bạch duyệt bài:** Mọi tệp KB do AI mới tạo phải gắn `nhap_ai_cho_duyet` cho tới khi Chủ dự án đọc duyệt sang `bien_tap`.
+2. **Không Mâu Thuẫn ở Đời Sống · Minh Bạch Đối Chiếu 2 Phái ở Cổ Điển:**
+   - Chế độ `[Đời sống & Hành động]` giữ một hướng dẫn thống nhất (Hình thế → Bát Trạch theo mệnh chủ → Phi Tinh Vận 9 theo góc phòng).
+   - Khi Bát Trạch và Huyền Không Vận 9 trái chiều tại hướng cửa, khung `doi_chieu_hai_phai` hiện trung lập hai góc nhìn và cách dung hòa thực tế trong chế độ `[Học thuật Cổ điển & Ngũ hành]` và B2B Mặt bằng.
+3. **Ngân Sách Dung Lượng Từng Lớp (`< 190 KB` cảnh báo CI / `256 KB` trần cứng DB):**
+   - Giữ trần cảnh báo `190.000 bytes` cho bài lưu cốt lõi (chừa ~72 KB cho bản diễn đạt AI trước trần cứng `262.144 bytes` của trigger `0017_tuvi_hoc.sql`); lớp tóm tắt cổ điển nội tuyến khóa `< 3.000 bytes` (`tests/test_ky_luat_v2.py`).
+   - Từ Chặng 2 trở đi: mọi phụ lục đa phái lớn hơn `3 KB` bắt buộc tách sang tra cứu theo mã khóa (lazy-load qua route có kiểm quyền `SAO-2`), và báo cáo Liên mảng Tam Tài (`/co-van`) phải lưu dưới `mo_dun = "tam_tai"` độc lập.
+4. **Cổng Khóa `SAO-2` Allowlist Mặc Định Khóa (`Default-Deny`):**
+   - `catXemTruoc` trong `web/lib/sao-xem-truoc.ts` chỉ cho phép các khóa cấp gốc đã khai báo trong `KHOA_CONG_KHAI_SAO2` hoặc đã lọc qua `KHOA_CAT_RIENG_SAO2` (có bài test tự động quét mọi mẫu golden thật).
+   - Với dữ liệu mã hóa đầu-cuối phía trình duyệt (E2EE Bàn cờ Đối tác ở Chặng 2), áp dụng cơ chế kiểm quyền gói trên server trước khi gọi Engine tính toán (`Gate-before-Compute`).
+
