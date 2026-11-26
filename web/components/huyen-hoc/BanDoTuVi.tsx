@@ -139,12 +139,12 @@ function BanDo({
   const cuaLg = useCuaLuanGiai();
   const giam = useGiamChuyenDong();
 
+  // Chỉ tải tỉ lệ kiểm chứng khi người dùng mở thẻ chuỗi 2 chặng ở tab Mạng đường bay — giữ đúng quy ước LG-ĐS mục 5
+  // (tải trang /tu-vi chỉ có duy nhất 1 lượt gọi /api/kiem-chung/ty-le của BaoCaoDoiSong).
+  const canTaiTyLe = che === "duong_bay" && chon?.loai === "chuoi";
   const maKiemChung = useMemo(
-    () => [
-      ...bd.duong_bay.noi_bat.map((n) => n.ma),
-      ...bd.duong_bay.chuoi_chuyen_ky.map((ch) => ch.ma_mau),
-    ],
-    [bd.duong_bay],
+    () => (canTaiTyLe ? bd.duong_bay.chuoi_chuyen_ky.map((ch) => ch.ma_mau) : []),
+    [canTaiTyLe, bd.duong_bay.chuoi_chuyen_ky],
   );
   const tyLe = useTyLe(maKiemChung);
 

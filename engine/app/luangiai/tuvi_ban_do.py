@@ -197,7 +197,7 @@ def _luan_chuoi_chuyen_ky(cung: list[dict], lon: bool) -> list[dict]:
         ma_den = MA_CUNG[ch["den_cung"]]
         ma_xung = MA_CUNG[ch["xung_cung"]] if ch.get("xung_cung") in MA_CUNG else None
         tat = "kck" if ch["loai"] == "ky_chuyen_ky" else "lck"
-        ma_mau = f"ds.duong_bay.{tat}.{ma_tu}+{ma_den}"
+        ma_mau = f"ds.duong_bay.{tat}.{ma_tu}+{ma_qua}+{ma_den}"
         mk = _k("mau", "chuoi", tat) or {}
         ngan_tu = _ngan(ma_tu, lon)
         ngan_qua = _ngan(ma_qua, lon)

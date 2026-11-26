@@ -35,12 +35,24 @@ test("12 cung bấm được, tam phương tứ chính sáng, bảng 4 lớp, Es
   expect(JSON.stringify(ev)).not.toMatch(/19\d\d|20\d\d/);
 });
 
-test("mạng đường bay tứ hoá & chuỗi chuyển Kỵ 2 chặng (① → ②)", async ({ page, request }) => {
+test("mạng đường bay tứ hoá & chuỗi chuyển Kỵ 2 chặng (① → ②) chỉ gọi ty-le khi mở thẻ chuỗi", async ({ page, request }) => {
+  const luotTyLe: string[] = [];
+  await page.route("**/api/kiem-chung/ty-le**", (r) => {
+    luotTyLe.push(r.request().url());
+    return r.fulfill({ json: { ty_le: {} } });
+  });
   const bd = await (await request.post("/api/tuvi/ban-do", { data: { la_so: LA_SO } })).json();
   expect(bd.duong_bay.chuoi_chuyen_ky.length).toBeGreaterThan(0);
+  expect(bd.duong_bay.chuoi_chuyen_ky[0].ma_mau).toMatch(/^ds\.duong_bay\.(kck|lck)\.[a-z_]+\+[a-z_]+\+[a-z_]+$/);
 
   await page.goto("/tu-vi");
   const khoi = page.getByTestId("ban-do-tu-vi");
+  await expect(khoi).toBeVisible();
+  await expect(page.getByTestId("luan-giai-toan-bo")).toBeVisible();
+  // Khi mới mở trang (tab Bánh xe 12 cung), chỉ có đúng 1 lượt gọi ty-le của BaoCaoDoiSong, chưa có mã chuỗi 2 chặng kck/lck
+  expect(luotTyLe.some((u) => /ds\.duong_bay\.(kck|lck)\./.test(decodeURIComponent(u)))).toBe(false);
+  expect(new Set(luotTyLe).size).toBe(1);
+
   await khoi.getByTestId("bd-che-duong_bay").click();
   await expect(khoi.getByTestId("bd-bo-loc-bay")).toBeVisible();
 
@@ -48,6 +60,7 @@ test("mạng đường bay tứ hoá & chuỗi chuyển Kỵ 2 chặng (① → 
   await expect(khoi.getByTestId("bd-ds-chuoi")).toBeVisible();
   await khoi.getByTestId("bd-the-chuoi-0").click();
   await expect(page.getByTestId("bd-chuoi-3-tram")).toBeVisible();
+  await expect.poll(() => luotTyLe.some((u) => /ds\.duong_bay\.(kck|lck)\./.test(decodeURIComponent(u)))).toBe(true);
 });
 
 test("kim năm & khoá SAO-2: năm nay mở lời khuyên, năm sau mang khoa=true không lộ nen_tranh", async ({ page, request }) => {
