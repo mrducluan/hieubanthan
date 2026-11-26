@@ -407,10 +407,15 @@ def lap(
         "ma_mau": ma_kl,
     }
 
+    vai_thien = (
+        k["vai_tro_tru"]["thien"] if co_gio
+        else ("Đọc từ Nhịp 12 tháng đa lớp (Con giáp, Phong thuỷ năm & Lịch tiết khí): chỉ rõ cửa sổ mở bước và giữ sức"
+              if vi else "From 12-Month Multi-Layer Cadence (Branch, Annual Feng Shui & Solar Terms): maps Advance and Consolidate windows")
+    )
     ba_tru = {
         "nhan": {"ma": "nhan", "ten_tru": k["ten_tru"]["nhan"], "vai_tro": k["vai_tro_tru"]["nhan"],
                  "muc": muc_nhan, "nhan_muc": _nhan_muc(muc_nhan), "nhan_xet": nx_nhan, "hanh_dong": hd_nhan, "can_cu": cc_nhan},
-        "thien": {"ma": "thien", "ten_tru": k["ten_tru"]["thien"], "vai_tro": k["vai_tro_tru"]["thien"],
+        "thien": {"ma": "thien", "ten_tru": k["ten_tru"]["thien"], "vai_tro": vai_thien,
                   "muc": muc_thien, "nhan_muc": _nhan_muc(muc_thien), "nhan_xet": nx_thien, "hanh_dong": hd_thien, "can_cu": cc_thien},
         "dia": {"ma": "dia", "ten_tru": k["ten_tru"]["dia"], "vai_tro": k["vai_tro_tru"]["dia"],
                 "muc": muc_dia, "nhan_muc": _nhan_muc(muc_dia), "nhan_xet": nx_dia, "hanh_dong": hd_dia, "can_cu": cc_dia},
