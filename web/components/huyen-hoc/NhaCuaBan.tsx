@@ -9,9 +9,10 @@ import { Button } from "@/components/ui/button";
 import { BaoLoi } from "@/components/khung/BaoLoi";
 import { ChipMuc } from "@/components/luan-giai/BaoCaoDoiSong";
 import { HopNoiBat, KiemChungBai, ViSao } from "@/components/luan-giai/HopNoiBat";
+import { CongTacCheDoDoc, KhungUngDungCoDien } from "@/components/luan-giai/CheDoDoc";
 import { useTyLe } from "@/lib/ty-le-kiem-chung";
 import { PHAI_DOI_SONG } from "@/lib/kiem-chung";
-import type { Hop, Muc } from "@/components/luan-giai/kieu";
+import type { Hop, Muc, UngDungCoDien } from "@/components/luan-giai/kieu";
 import type { MocNam } from "@/components/huyen-hoc/KhungPhai";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
@@ -60,6 +61,7 @@ interface BaoCao {
   ten_hien?: TenHien;
   /** WS-3: câu Dương Trạch Thập Thư chọn theo mệnh quái của bạn + người cùng nhà khác nhóm. */
   sach_xua?: CauSachXua[];
+  ung_dung_co_dien?: UngDungCoDien;
   da_tinh: { menh_quai: { quai: string; nhom: string } | null; huong_nha: string | null; trach: { quai: string; nhom: string } | null;
     thanh_vien: { ten_vai: string; quai: string; nhom: string; cung_nhom_voi_chu: boolean | null; huong_chung: string[] }[];
     veto_da_xac_nhan?: { ma: string; tieu_de: string }[]; goc_nhin?: GocNhin };
@@ -213,6 +215,10 @@ function BaoCaoNha({ bc, soSanh, onDaXuLy, onHoanTac, dang }: {
   return (
     <KiemChungBai.Provider value={{ tyLe, phai: PHAI_DOI_SONG.phongthuy! }}>
     <article className="space-y-8 border-t border-line/70 pt-5" data-testid="bao-cao-nha">
+      <div>
+        <CongTacCheDoDoc moDun="phongthuy" nho />
+        <KhungUngDungCoDien u={bc.ung_dung_co_dien} />
+      </div>
       {bc.cot_loi.length > 0 && (
         <section aria-label={t("nc.quan_trong")}>
           <h3 className="font-serif text-xl">{t("nc.quan_trong")}</h3>

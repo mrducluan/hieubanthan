@@ -318,16 +318,12 @@ def to_hop_cung(son: int, huong: int, van: int, cung: str | None = None, nam: in
         from app.kb import sach_ghi as sg  # noqa: PLC0415
         sm = m["sach"]
         if ngon_ngu.la_viet():
+            co_am = sm.get("nhom") == "A" or bool(sm.get("sat"))
             ra["sach_ghi"] = {
-                "loi": sg.loi(sm, co_am=sm.get("nhom") != "C"),
+                "loi": sg.loi(sm, co_am=co_am),
                 "nhom": sm["nhom"],
                 **({"viec": sm["viec"]} if sm.get("viec") else {}),
                 **({"cau_ket": ck} if (ck := sg.cau_ket([sm])) else {}),
-            }
-        else:
-            ra["sach_ghi"] = {
-                "loi": f"Classical text: \"{sm['han']}\"",
-                "nhom": sm["nhom"],
             }
     if cung and nam:
         ra["nam_chu_y"] = nam_chu_y(cung, m["kich_hoat"], int(nam))

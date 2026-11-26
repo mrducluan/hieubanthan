@@ -372,7 +372,7 @@ TU_CHOI: list[tuple[str, str | None, str]] = [
      r"(hoãn|lùi|dời) (lịch )?mổ|(phẫu thuật|ca mổ|mổ)(?!\w).{0,15}(có )?(thành công|ổn|suôn sẻ) (không|ko|chứ)",
      "suc_khoe_the_chat"),
     (r"(la so|tuoi|menh|tuong|ngay sinh|so chu dao|bat tu)( cua)? (sep|dong nghiep|nhan vien|hang xom|doi tac|nguoi ay|anh ay"
-     r"|co ay|ong ay|ba ay|chi ay|nguoi yeu|chong|vo|ban)( toi| em| minh)?(?!\w).{0,40}(co phai |la )(nguoi |ke |dua )?"
+     r"|co ay|ong ay|ba ay|chi ay|nguoi yeu|chong|vo(?! chinh dieu)|ban)( toi| em| minh)?(?!\w).{0,40}(co phai |la )(nguoi |ke |dua )?"
      r"(xau|lua dao|gian doi|noi doi|dao hoa|doc ac|ac|xau tinh|hai minh|phan boi)(?!\w)", None, "ngoai_pham_vi"),
     # chỉ khi có ý giải hạn / đổi vận / chiêu tài — "đeo vòng thạch anh có hợp mệnh không" vẫn trả lời (màu, hành)
     (r"(ty huu|coc ba chan|thach anh|linh vat|bua (ho menh|binh an|giai han|may man)).{0,40}(giai han|hoa giai|giai (duoc )?han|doi van|chieu tai|giai xui|cat han|hoa han)|(giai han|hoa giai|giai (duoc )?han|doi van|chieu tai|giai xui|cat han|hoa han).{0,40}(ty huu|coc ba chan|thach anh|linh vat|bua (ho menh|binh an|giai han|may man))",

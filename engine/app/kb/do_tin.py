@@ -3,11 +3,15 @@
 
 Mỗi tệp trong `kb/data/` (và một số PHẦN trong tệp) mang MỘT mức, xếp theo "lời này truy được về đâu":
 
-- `nguyen_van`   — có nguyên văn cổ thư trong kho nguồn `fixtures/nguon/` VÀ có test so khớp (ghi tên kho + tên test).
-- `tom_y_co_thu` — tóm ý từ cổ thư nêu tên; chưa khớp từng câu với nguyên văn (việc của các đợt đối chiếu sau).
-- `truyen_thong` — tập quán, truyền khẩu, hoặc sách hiện đại / trường phái gần đây (chỉ tóm ý, ghi nguồn).
-- `bien_tap`     — ban biên tập soạn: lời diễn giải đời thường, ứng dụng, mẫu câu. Không có cổ thư làm gốc trực tiếp.
-- `he_thong`     — tệp kỹ thuật (bảng tên, slug, sổ ngày, số thống kê): không phải tri thức để luận.
+- `nguyen_van`         — có nguyên văn cổ thư trong kho nguồn `fixtures/nguon/` VÀ có test so khớp (ghi tên kho + tên test).
+- `tom_y_co_thu`       — tóm ý từ cổ thư nêu tên; chưa khớp từng câu với nguyên văn (việc của các đợt đối chiếu sau).
+- `luat_tom_y`         — tiên đề / luật logic rút ý từ sách hiện đại còn bản quyền (PR #320 phương án C: không chép nguyên văn, ghi nguồn + trang).
+                         ĐIỀU KIỆN (test `tests/test_do_tin_kb.py`): mọi mục cụ thể có số trang đối chiếu (`tr. N`), không chứa chuỗi Hán nào ngoài tên sách / tác giả;
+                         tệp chưa ghi được số trang thì để `truyen_thong` — KHÔNG bịa trang.
+- `truyen_thong`       — tập quán dân gian, truyền khẩu hoặc trường phái phổ thông chưa đối chiếu trang sách cụ thể.
+- `bien_tap`           — ban biên tập soạn (đã rà soát ổn định): lời diễn giải đời thường, ứng dụng, mẫu câu.
+- `nhap_ai_cho_duyet`  — nháp mới do AI biên soạn, đang chờ chủ dự án đọc duyệt trước khi chuyển sang `bien_tap`.
+- `he_thong`           — tệp kỹ thuật (bảng tên, slug, sổ ngày, số thống kê): không phải tri thức để luận.
 
 Mức KHÔNG phải nhãn "đã thẩm định" (thẩm định là việc của chuyên gia — `tham_dinh.json`) và không hiện cho người dùng.
 Mức do NGƯỜI ghi vào sổ, máy chỉ kiểm tính nhất quán: tệp mới phải vào sổ; `nguyen_van` phải có kho + test thật
@@ -15,9 +19,16 @@ Mức do NGƯỜI ghi vào sổ, máy chỉ kiểm tính nhất quán: tệp m�
 """
 from __future__ import annotations
 
-THANG = ("nguyen_van", "tom_y_co_thu", "truyen_thong", "bien_tap", "he_thong")
-TEN_MUC = {"nguyen_van": "Có nguyên văn đối chiếu", "tom_y_co_thu": "Tóm ý cổ thư, chưa khớp từng câu",
-           "truyen_thong": "Tập quán / sách hiện đại tóm ý", "bien_tap": "Ban biên tập soạn", "he_thong": "Tệp kỹ thuật"}
+THANG = ("nguyen_van", "tom_y_co_thu", "luat_tom_y", "truyen_thong", "bien_tap", "nhap_ai_cho_duyet", "he_thong")
+TEN_MUC = {
+    "nguyen_van": "Có nguyên văn đối chiếu",
+    "tom_y_co_thu": "Tóm ý cổ thư, chưa khớp từng câu",
+    "luat_tom_y": "Tiên đề logic sách hiện đại (ghi trang)",
+    "truyen_thong": "Tập quán / truyền khẩu phổ thông",
+    "bien_tap": "Ban biên tập soạn",
+    "nhap_ai_cho_duyet": "Nháp AI chờ chủ dự án duyệt",
+    "he_thong": "Tệp kỹ thuật",
+}
 
 _T = "tests/test_kt_tt_kho_nguon.py"
 
@@ -35,7 +46,8 @@ SO: dict[str, dict] = {
                                                 "SX-C: câu Tam Mệnh Thông Hội + Uyên Hải Tử Bình (thần sát, thập thần, lục thân, tính nết, thân thể) khớp kho nguồn")},
     "battu_dieu_hau.json": {"mang": "battu", **_nv("cung_thong_bao_giam.json", f"{_T}::test_dieu_hau_khop_nguyen_van_tung_o")},
     "battu_thien_ly_menh_cao.json": {"mang": "battu", "muc": "truyen_thong",
-                                     "ghi_chu": "Đợt 3: 6 quy tắc Thập Thần & Cách Cục 2 chiều trích dẫn có phép từ Thiên Lý Mệnh Cảo (Vi Thiên Lý, 1934 — bazi-kb)"},
+                                     "ghi_chu": "Đợt 3: 6 quy tắc Thập Thần & Cách Cục 2 chiều rút ý từ Thiên Lý Mệnh Cảo (Vi Thiên Lý, 1934 — bazi-kb). "
+                                                "Hạ từ luat_tom_y (KY-LUAT-V2 sửa review): chỉ ghi tên thiên (Nhân Nguyên / Lục Thần / Cách Cục), chưa ghi số trang"},
     "battu_kb.json": {"mang": "battu", "muc": "tom_y_co_thu", "phan": {
         "co_tho": _nv("uyen_hai_tu_binh.json", f"{_T}::test_co_tho_nhat_chu_khop_nguyen_van_uyen_hai"),
         "co_van_thap_than": _nv("uyen_hai_tu_binh.json", f"{_T}::test_co_van_thap_than_khop_nguyen_van_uyen_hai"),
@@ -76,11 +88,11 @@ SO: dict[str, dict] = {
         "cau": _nv("tu_vi_dau_so_toan_thu.json", "tests/test_tuvi_co_thu.py::test_nguyen_van_khop_kho_nguon_toan_thu_tung_chu",
                    "84 câu Cốt Tuỷ Phú khớp từng chữ (giản ↔ phồn); phiên âm, nghĩa là nháp; chưa so bản khắc 1600")}},
     "tuvi_phi_hoa_kb.json": {"mang": "tuvi", "muc": "truyen_thong", "ghi_chu": "phi tinh tứ hoá — trường phái hiện đại"},
-    "tuvi_phi_hoa_luong_672.json": {"mang": "tuvi", "muc": "truyen_thong",
-                                    "ghi_chu": "PR #320 (2026-11-20, phương án C): 576 tượng phi hoá — TÓM Ý của ban biên tập theo phái Lương Nhược Du (sách hiện đại còn bản quyền); không nguyên văn, giữ trang để đối chiếu"},
-    "tuvi_trung_chau_60_tinh_he.json": {"mang": "tuvi", "muc": "truyen_thong",
-                                        "ghi_chu": "PR #320 (2026-11-20, phương án C): 60 tinh hệ — TÓM Ý của ban biên tập theo Trung Châu phái (Vương Đình Chi, sách hiện đại còn bản quyền); không nguyên văn, giữ trang"},
-    "tuvi_tu_van_thai_tue.json": {"mang": "tuvi", "muc": "truyen_thong",
+    "tuvi_phi_hoa_luong_672.json": {"mang": "tuvi", "muc": "luat_tom_y",
+                                    "ghi_chu": "PR #320 (2026-11-20, phương án C): 576 tượng phi hoá — TÓM Ý theo phái Lương Nhược Du (sách hiện đại còn bản quyền); không nguyên văn, giữ trang để đối chiếu"},
+    "tuvi_trung_chau_60_tinh_he.json": {"mang": "tuvi", "muc": "luat_tom_y",
+                                        "ghi_chu": "PR #320 (2026-11-20, phương án C): 60 tinh hệ — TÓM Ý theo Trung Châu phái (Vương Đình Chi, sách hiện đại còn bản quyền); không nguyên văn, giữ trang"},
+    "tuvi_tu_van_thai_tue.json": {"mang": "tuvi", "muc": "luat_tom_y",
                                   "ghi_chu": "Đợt 4: 6 nguyên tắc cốt lõi Tử Vân (Thái Tuế Nhập Quái · Tam Đại Tiên Hậu Thiên · Giáp Cung — ziwei-ziyun-kb)"},
     "tuvi_sao_luu_kb.json": {"mang": "tuvi", "muc": "truyen_thong"},
     "tuvi_y_bo_sung.json": {"mang": "tuvi", "muc": "truyen_thong", "ghi_chu": "rút ý lời giảng hiện đại, viết lại (TV-YBS)"},
@@ -142,8 +154,8 @@ SO: dict[str, dict] = {
         "phan": {
             "to_hop_81": _nv("phongthuy_huyen_khong_co_thu.json",
                              "tests/test_huyen_khong_tham_thi.py::test_to_hop_81_sach_qua_bo_kiem_sx_c",
-                             "Gói 1A: 28 tổ hợp sao tiêu biểu có câu nguyên văn Tử Bạch Đoạn / Phi Tinh Phú qua bộ kiểm SX-C; "
-                             "Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json)"),
+                             "Chặng 1 (đã soát nghĩa từng câu): 61/81 tổ hợp sao có câu nguyên văn Huyền Không Bí Chỉ / Tử Bạch Quyết / Phi Tinh Phú qua bộ kiểm SX-C3 (20 cặp còn lại giữ lời biên tập trung thực); "
+                             "Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu đồ bàn Thẩm Thị (huyen_khong_tham_thi.json)"),
         },
     },
     "phongthuy_doi_song.json": {"mang": "phongthuy", "muc": "bien_tap"},
@@ -199,10 +211,11 @@ SO: dict[str, dict] = {
     "tarot_kb.json": {"mang": "tarot", **_nv("tarot_waite_1910.json", "tests/test_tarot_nguon.py::test_moi_trich_la_nguyen_van_cua_nguon",
                                              "câu trích khớp Waite / Mathers / Book T / Papus 1892 / Case 1920 / Ouspensky 1913; lời lớp Marseille, "
                                              "B.O.T.A., Thoth vẫn là tóm ý (Marseille đã soát với Mathers + Papus, B.O.T.A. ẩn chính với Case 1920)")},
-    "tarot_greer_nguoc.json": {"mang": "tarot", "muc": "truyen_thong",
-                               "ghi_chu": "Đợt 2B: 22 Lá Ẩn Chính ngược đối chiếu & trích dẫn có phép từ Mary K. Greer (2002), phân tích 2 mặt tích cực + tiêu cực cần chú ý"},
+    "tarot_greer_nguoc.json": {"mang": "tarot", "muc": "luat_tom_y",
+                               "ghi_chu": "Đợt 2B: 22 Lá Ẩn Chính ngược rút ý 2 mặt từ Mary K. Greer (2002), không nguyên văn, giữ trang"},
     "kinhdich_luc_hao_thuc_chien.json": {"mang": "kinhdich", "muc": "truyen_thong",
-                                         "ghi_chu": "Đợt 2B: 8 nguyên tắc Lục Hào + 5 Lục Thân thực chiến đối chiếu & trích dẫn chữ Hán có phép từ Vương Hổ Ứng & Thiệu Vĩ Hoa (iching-kb)"},
+                                         "ghi_chu": "Đợt 2B: 8 nguyên tắc Lục Hào + 5 Lục Thân thực chiến rút ý từ Vương Hổ Ứng & Thiệu Vĩ Hoa. "
+                                                    "Hạ từ luat_tom_y (KY-LUAT-V2 sửa review): chỉ ghi \"Phần N\" của bộ kho tri thức, chưa ghi số trang sách"},
     # ---- Thần số (truyền thống phương Tây hiện đại — không có "cổ thư")
     **{f: {"mang": "thanso", "muc": "truyen_thong"} for f in (
         "thanso_meanings.json", "thanso_depth.json", "thanso_chaldean.json", "thanso_cap_so.json", "thanso_chi_so_phu.json",
@@ -227,6 +240,8 @@ SO: dict[str, dict] = {
     "ke_hoach_thang_kb.json": {"mang": "lich", "muc": "bien_tap", "ghi_chu": "KH-1: việc định làm ↔ số tháng cá nhân / việc sách lịch — nháp"},
     # ---- Liên mảng (lời ghép, ranh giới, mẫu câu)
     "suc_khoe_kb.json": {"mang": "chung", "muc": "tom_y_co_thu", "ghi_chu": "hành ↔ tạng phủ theo Nội Kinh; tên bệnh hay gặp là kiến thức phổ thông (SK-2)"},
+    "go_nut_doi_song_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 1: nháp AI biên soạn cho 4 mạch gỡ nút đời sống, chờ chủ dự án đọc duyệt"},
+    "ung_dung_co_dien_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 1: nháp AI tổng hợp ứng dụng Ngũ hành, điều hoà Vận 9 & đối chiếu 2 phái, chờ chủ dự án đọc duyệt"},
     **{f: {"mang": "chung", "muc": "bien_tap"} for f in (
         "chu_y_kb.json", "chan_dung_kb.json", "giao_thoa_kb.json", "goi_y_cheo_kb.json", "hoan_canh_kb.json", "nhat_quan_kb.json",
         "push_sang_nay.json", "sinh_nuoc_ngoai_kb.json", "tuan_hai_nguoi_kb.json", "tu_dien.json", "y_dinh_chung.json")},

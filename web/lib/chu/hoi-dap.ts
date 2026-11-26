@@ -51,4 +51,14 @@ export const CHU_HOI_DAP = {
   "tq.lb_title": { nhom: K, nhan: "La bàn 8 hướng — tên hình", mac_dinh: "La bàn tám hướng, hướng hợp được tô sáng", en: "Eight-direction compass, with your good directions highlighted" },
   "tq.lb_nha": { nhom: K, nhan: "La bàn 8 hướng — chữ giữa", mac_dinh: "Nhà", en: "Home" },
   "tq.lb_it_hop": { nhom: K, nhan: "La bàn 8 hướng — hướng ít hợp", mac_dinh: "ít hợp", en: "less suitable" },
+  // D2 (Chặng 0) — thẻ trả lời thẳng từ lá số & liên kết chương báo cáo trong KhungChat.
+  "lh.tieu_de": { nhom: K, nhan: "Nhãn hộp trả lời thẳng trong hỏi đáp", mac_dinh: "Trả lời thẳng từ lá số", en: "Direct reading from your chart" },
+  "lh.mo_chuong": { nhom: K, nhan: "Nút mở chương đầy đủ ({chuong})", mac_dinh: "Đọc trọn chương “{chuong}” (chân dung người liên quan & hướng hoá giải)", en: "Read the full “{chuong}” chapter (people around you & guidance)" },
+  "lh.khoa_mo_ta": { nhom: K, nhan: "Mô tả khi chương chứa câu trả lời thẳng đang khoá ({chuong})", mac_dinh: "Câu trả lời thẳng cho câu hỏi này (kèm chân dung người liên quan và hướng hoá giải) nằm trong chương “{chuong}” của bài luận toàn bộ.", en: "The direct chart answer for this question (with people profiles and guidance) is in the “{chuong}” chapter of the full report." },
+  "lh.khoa_nut": { nhom: K, nhan: "Nút dẫn tới mở khoá chương ({chuong})", mac_dinh: "Mở chương “{chuong}” trong bài luận", en: "Unlock the “{chuong}” chapter in the full report" },
+  "lh.ds_mo_chuong": { nhom: K, nhan: "Nút dẫn lên chương đời sống ({chuong})", mac_dinh: "Đọc trọn chương “{chuong}” trong bài luận", en: "Read the full “{chuong}” chapter in your report" },
+  // Chặng 1 — Gỡ nút đời sống & Công tắc 2 Chế độ trong KhungChat.
+  "gn.nhan": { nhom: K, nhan: "Nhãn hộp gỡ nút đời sống", mac_dinh: "Góc nhìn gỡ nút thực tế", en: "Balanced practical perspective" },
+  "gn.viec": { nhom: K, nhan: "Nhãn danh sách việc thực tế", mac_dinh: "Ba bước thực tế nên làm:", en: "Practical next steps:" },
+  "gn.khoa_nut": { nhom: K, nhan: "Nút mở chương khi phần riêng theo lá số còn khoá", mac_dinh: "Đọc phần riêng theo lá số của bạn trong báo cáo", en: "Read the part drawn from your own chart in the report" },
 } as const satisfies BangChu;

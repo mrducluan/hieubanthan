@@ -201,6 +201,20 @@ def test_moi_ma_engine_duoc_sql_nhan(phieu):
         assert not sai, f"{TEN_TEP}: {loai} từ chối {len(sai)} mã, vd {sai[:5]}"
 
 
+def test_chuoi_chuyen_ky_ma_mau_duoc_sql_nhan():
+    """Mọi chuỗi 2 chặng (`chuoi_chuyen_ky`) trên 30 lá golden đều sinh `ma_mau` hợp lệ với SQL `kiem_chung_ma_hop_le('doi_song', ...)`."""
+    ds_chuoi = set()
+    for ca in _G60[::2]:
+        la = az.an_sao_tho(dt.date.fromisoformat(ca["ngay"]), ca["ti"], ca["gioi_tinh"], "vi-VN")
+        can = str(la.get("chineseDate", "")).split(" ")[0]
+        kq = tuvi_phi_hoa.lap(tom_tat(la), can)
+        for ch in kq.get("chuoi_chuyen_ky", []):
+            ds_chuoi.add((ch["ma_mau"], ch["phai"]))
+    assert ds_chuoi
+    sai = sorted((m, p) for m, p in ds_chuoi if not _hop_le("doi_song", m, p))
+    assert not sai, f"SQL từ chối mã chuoi_chuyen_ky: {sai}"
+
+
 def test_du_loai_ma(phieu):
     """Mỗi tiền tố mảng đều có mặt (thiếu = một mảng ngừng sinh mã mà không ai biết)."""
     ds = {m for m, _ in phieu["doi_song"]}

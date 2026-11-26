@@ -1,0 +1,90 @@
+{"id": "lhc_h001", "mo_dun": "tuvi", "cau": "Đời sống vợ chồng sau này của tớ có êm không hay sóng gió?", "luan_hoi": "tinh_cam.hanh_phuc", "go_nut": null, "nhom": "duong", "ly_do": "Hạnh phúc hôn nhân của chính mình."}
+{"id": "lhc_h002", "mo_dun": "battu", "cau": "gia dinh nho sau nay cua minh co am cung khong", "luan_hoi": "tinh_cam.hanh_phuc", "go_nut": null, "nhom": "duong", "ly_do": "Không dấu, tổ ấm tương lai."}
+{"id": "lhc_h003", "mo_dun": "tuvi", "cau": "Nửa kia tương lai của em có tính cách thế nào, có hiền không?", "luan_hoi": "tinh_cam.nguoi_ay", "go_nut": null, "nhom": "duong", "ly_do": "Bạn đời theo lá số, chưa phải người cụ thể."}
+{"id": "lhc_h004", "mo_dun": "battu", "cau": "Bát tự của mình thì người chồng sau này làm nghề gì, tính ra sao?", "luan_hoi": "tinh_cam.nguoi_ay", "go_nut": null, "nhom": "duong", "ly_do": "Bạn đời tương lai theo lá số."}
+{"id": "lhc_h005", "mo_dun": "tuvi", "cau": "Duyên vợ chồng của tôi có bền đến già không hay giữa đường đứt gánh?", "luan_hoi": "tinh_cam.ben", "go_nut": null, "nhom": "duong", "ly_do": "Bền hay dang dở."}
+{"id": "lhc_h006", "mo_dun": "battu", "cau": "lá số mình có nói chuyện lấy chồng hai lần không", "luan_hoi": "tinh_cam.ben", "go_nut": null, "nhom": "duong", "ly_do": "Hai lần đò, giả định."}
+{"id": "lhc_h007", "mo_dun": "tuvi", "cau": "Sau này cưới rồi tôi có phải lo chuyện chồng có bồ không?", "luan_hoi": "tinh_cam.nguoi_thu_ba", "go_nut": null, "nhom": "duong", "ly_do": "Giả định tương lai, chưa có sự việc."}
+{"id": "lhc_h008", "mo_dun": "tuvi", "cau": "Toi muon biet co nen lay vo truoc 30 khong hay de sau", "luan_hoi": "tinh_cam.som_muon", "go_nut": null, "nhom": "duong", "ly_do": "Không dấu, cưới sớm hay muộn."}
+{"id": "lhc_h009", "mo_dun": "battu", "cau": "duyên của em đến muộn hay sớm ạ", "luan_hoi": "tinh_cam.som_muon", "go_nut": null, "nhom": "duong", "ly_do": "Duyên sớm muộn."}
+{"id": "lhc_h010", "mo_dun": "tuvi", "cau": "Lá số tôi có xa cách bố mẹ không?", "luan_hoi": "gia_dinh.cha_me", "go_nut": null, "nhom": "duong", "ly_do": "Duyên với cha mẹ."}
+{"id": "lhc_h011", "mo_dun": "battu", "cau": "toi co de bat dong voi bo me khong", "luan_hoi": "gia_dinh.cha_me", "go_nut": null, "nhom": "duong", "ly_do": "Không dấu, quan hệ với cha mẹ."}
+{"id": "lhc_h012", "mo_dun": "tuvi", "cau": "Chuyện con cái về sau có làm tôi vất vả không?", "luan_hoi": "gia_dinh.con_cai", "go_nut": null, "nhom": "duong", "ly_do": "Đường con cái."}
+{"id": "lhc_h013", "mo_dun": "battu", "cau": "anh chi em ruot co ho tro minh duoc gi khong", "luan_hoi": "gia_dinh.anh_em", "go_nut": null, "nhom": "duong", "ly_do": "Không dấu, anh chị em."}
+{"id": "lhc_h014", "mo_dun": "tuvi", "cau": "Sự có mặt của mình mang lại điều gì cho cả nhà?", "luan_hoi": "gia_dinh.tac_dong_nha", "go_nut": null, "nhom": "duong", "ly_do": "Tác động tới người nhà."}
+{"id": "lhc_h015", "mo_dun": "tuvi", "cau": "Em đang phân vân chọn ngành, theo lá số em hợp hướng nào?", "luan_hoi": "su_nghiep.nghe_hop", "go_nut": null, "nhom": "duong", "ly_do": "Nghề hợp."}
+{"id": "lhc_h016", "mo_dun": "battu", "cau": "Ngũ hành của tôi hợp làm việc trong lĩnh vực nào?", "luan_hoi": "su_nghiep.nghe_hop", "go_nut": null, "nhom": "duong", "ly_do": "Nghề hợp."}
+{"id": "lhc_h017", "mo_dun": "tuvi", "cau": "minh co nen nghi viec ra lam chu khong hay cu lam thue", "luan_hoi": "su_nghiep.chu_hay_cong", "go_nut": null, "nhom": "duong", "ly_do": "Không dấu, chủ hay công."}
+{"id": "lhc_h018", "mo_dun": "tuvi", "cau": "Học một đằng làm một nẻo có ổn với lá số của tôi không?", "luan_hoi": "su_nghiep.trai_nghe", "go_nut": null, "nhom": "duong", "ly_do": "Trái nghề."}
+{"id": "lhc_h019", "mo_dun": "battu", "cau": "Con đường học hành của tôi có suôn sẻ không", "luan_hoi": "su_nghiep.hoc_hanh", "go_nut": null, "nhom": "duong", "ly_do": "Học hành."}
+{"id": "lhc_h020", "mo_dun": "tuvi", "cau": "bằng cấp có giúp gì cho tôi không, có nên học thêm văn bằng 2", "luan_hoi": "su_nghiep.hoc_hanh", "go_nut": null, "nhom": "duong", "ly_do": "Bằng cấp của chính mình."}
+{"id": "lhc_h021", "mo_dun": "tuvi", "cau": "Tôi hay xung đột với cấp trên, kiểu lãnh đạo nào thì hợp với tôi?", "luan_hoi": "su_nghiep.sep", "go_nut": null, "nhom": "duong", "ly_do": "Thói quen chung, hỏi kiểu sếp hợp."}
+{"id": "lhc_h022", "mo_dun": "tuvi", "cau": "Ở chỗ làm mình có được anh em đồng nghiệp quý không", "luan_hoi": "su_nghiep.dong_nghiep", "go_nut": null, "nhom": "duong", "ly_do": "Đồng nghiệp nói chung."}
+{"id": "lhc_h023", "mo_dun": "battu", "cau": "Tôi có nên chuyển vào Sài Gòn lập nghiệp không?", "luan_hoi": "su_nghiep.di_xa", "go_nut": null, "nhom": "duong", "ly_do": "Đổi môi trường, đi xa."}
+{"id": "lhc_h024", "mo_dun": "tuvi", "cau": "di xuat khau lao dong co hop voi la so toi khong", "luan_hoi": "su_nghiep.di_xa", "go_nut": null, "nhom": "duong", "ly_do": "Không dấu, đi làm xa."}
+{"id": "lhc_h025", "mo_dun": "tuvi", "cau": "Đường công việc của tôi khúc nào dễ bị chững lại?", "luan_hoi": "su_nghiep.trac_tro", "go_nut": null, "nhom": "duong", "ly_do": "Trắc trở công việc."}
+{"id": "lhc_h026", "mo_dun": "tuvi", "cau": "Tôi nên kiếm tiền bằng tay chân hay bằng đầu óc, cách nào hợp?", "luan_hoi": "tien_bac.kiem_bang_gi", "go_nut": null, "nhom": "duong", "ly_do": "Cách kiếm tiền."}
+{"id": "lhc_h027", "mo_dun": "battu", "cau": "minh co de bi tieu hoang, khong giu duoc tien khong", "luan_hoi": "tien_bac.giu_tien", "go_nut": null, "nhom": "duong", "ly_do": "Không dấu, giữ tiền."}
+{"id": "lhc_h028", "mo_dun": "tuvi", "cau": "Kiếm được bao nhiêu cũng hết, tôi có số giữ của không?", "luan_hoi": "tien_bac.giu_tien", "go_nut": null, "nhom": "duong", "ly_do": "Giữ tiền."}
+{"id": "lhc_h029", "mo_dun": "tuvi", "cau": "Đường thăng tiến, chức tước của tôi có cao không?", "luan_hoi": "tien_bac.cong_danh", "go_nut": null, "nhom": "duong", "ly_do": "Công danh."}
+{"id": "lhc_h030", "mo_dun": "battu", "cau": "Tôi có duyên buôn bán không hay chỉ nên ăn lương?", "luan_hoi": "tien_bac.kinh_doanh", "go_nut": null, "nhom": "duong", "ly_do": "Kinh doanh hay lương."}
+{"id": "lhc_h031", "mo_dun": "tuvi", "cau": "co nen mo shop online hay cu di lam huong luong", "luan_hoi": "tien_bac.kinh_doanh", "go_nut": null, "nhom": "duong", "ly_do": "Không dấu, kinh doanh hay lương."}
+{"id": "lhc_h032", "mo_dun": "tuvi", "cau": "Khoảng mười năm nào là lúc tài chính của tôi rủng rỉnh nhất?", "luan_hoi": "tien_bac.giai_doan_kha", "go_nut": null, "nhom": "duong", "ly_do": "Giai đoạn tiền khá."}
+{"id": "lhc_h033", "mo_dun": "tuvi", "cau": "Có năm nào tôi dễ bị mất tiền, vỡ nợ không?", "luan_hoi": "tien_bac.trac_tro", "go_nut": null, "nhom": "duong", "ly_do": "Trắc trở tiền, giả định."}
+{"id": "lhc_h034", "mo_dun": "battu", "cau": "tien bac cua toi co luc nao gap han khong", "luan_hoi": "tien_bac.trac_tro", "go_nut": null, "nhom": "duong", "ly_do": "Không dấu, trắc trở tiền."}
+{"id": "lhc_h035", "mo_dun": "tuvi", "cau": "Mình có hay chơi nhầm bạn không?", "luan_hoi": "quan_he.ban_be", "go_nut": null, "nhom": "duong", "ly_do": "Bạn bè nói chung."}
+{"id": "lhc_h036", "mo_dun": "tuvi", "cau": "Có ai giúp tôi trên đường đời không hay toàn tự bơi?", "luan_hoi": "quan_he.quy_nhan", "go_nut": null, "nhom": "duong", "ly_do": "Quý nhân."}
+{"id": "lhc_h037", "mo_dun": "battu", "cau": "quy nhan cua minh la ai, o dau", "luan_hoi": "quan_he.quy_nhan", "go_nut": null, "nhom": "duong", "ly_do": "Không dấu, quý nhân."}
+{"id": "lhc_h038", "mo_dun": "tuvi", "cau": "Tôi làm ăn chung thì hay được việc hay hay bị lừa?", "luan_hoi": "quan_he.lam_an_chung", "go_nut": null, "nhom": "duong", "ly_do": "Làm ăn chung nói chung."}
+{"id": "lhc_h039", "mo_dun": "tuvi", "cau": "Tôi có hay bị kẻ xấu hại sau lưng không?", "luan_hoi": "quan_he.thi_phi", "go_nut": null, "nhom": "duong", "ly_do": "Thị phi."}
+{"id": "lhc_h040", "mo_dun": "battu", "cau": "Đi đâu tôi cũng dễ dính tai tiếng, lá số có nói vậy không?", "luan_hoi": "quan_he.thi_phi", "go_nut": null, "nhom": "duong", "ly_do": "Thói quen chung, hỏi thế thị phi."}
+{"id": "lhc_h041", "mo_dun": "tuvi", "cau": "Thằng con trai tôi lười học, sau này nó có làm nên trò trống gì không?", "luan_hoi": null, "go_nut": null, "nhom": "a_nguoi_khac", "ly_do": "Chủ thể là con trai."}
+{"id": "lhc_h042", "mo_dun": "tuvi", "cau": "Em trai tôi muốn đi Nhật, đi xa có hợp với nó không", "luan_hoi": null, "go_nut": null, "nhom": "a_nguoi_khac", "ly_do": "Chủ thể là em trai."}
+{"id": "lhc_h043", "mo_dun": "battu", "cau": "vk toi co giu duoc tien khong, tieu nhieu qua", "luan_hoi": null, "go_nut": null, "nhom": "a_nguoi_khac", "ly_do": "Chủ thể là vợ."}
+{"id": "lhc_h044", "mo_dun": "tuvi", "cau": "Chị gái tôi 35 tuổi chưa chồng, duyên của chị có muộn quá không?", "luan_hoi": null, "go_nut": null, "nhom": "a_nguoi_khac", "ly_do": "Chủ thể là chị gái."}
+{"id": "lhc_h045", "mo_dun": "tuvi", "cau": "Bạn trai em có hợp làm chủ không hay chỉ nên làm công?", "luan_hoi": null, "go_nut": null, "nhom": "a_nguoi_khac", "ly_do": "Chủ thể là bạn trai."}
+{"id": "lhc_h046", "mo_dun": "battu", "cau": "Bố tôi có quý nhân giúp đỡ trong việc làm ăn không", "luan_hoi": null, "go_nut": null, "nhom": "a_nguoi_khac", "ly_do": "Chủ thể là bố."}
+{"id": "lhc_h047", "mo_dun": "tuvi", "cau": "Cô bạn cùng phòng của tôi có bị người thứ ba phá đám không", "luan_hoi": null, "go_nut": null, "nhom": "a_nguoi_khac", "ly_do": "Chủ thể là bạn cùng phòng."}
+{"id": "lhc_h048", "mo_dun": "tuvi", "cau": "Sep minh nam nay co duoc thang chuc khong", "luan_hoi": null, "go_nut": null, "nhom": "a_nguoi_khac", "ly_do": "Hỏi công danh của sếp."}
+{"id": "lhc_h049", "mo_dun": "tuvi", "cau": "Đứa cháu ngoại tôi mới sinh, lá số cháu sau này học hành thế nào?", "luan_hoi": null, "go_nut": null, "nhom": "a_nguoi_khac", "ly_do": "Chủ thể là cháu."}
+{"id": "lhc_h050", "mo_dun": "battu", "cau": "Chồng sắp cưới của tôi là người thế nào?", "luan_hoi": null, "go_nut": null, "nhom": "a_nguoi_khac", "ly_do": "Người cụ thể đã có, không phải thế cung bạn đời."}
+{"id": "lhc_h051", "mo_dun": "tuvi", "cau": "Mẹ chồng em có khó tính không, xem lá số em có biết được không", "luan_hoi": null, "go_nut": null, "nhom": "a_nguoi_khac", "ly_do": "Chủ thể là mẹ chồng."}
+{"id": "lhc_h052", "mo_dun": "tuvi", "cau": "Anh ho toi lam an chung voi ban co bi lua khong", "luan_hoi": null, "go_nut": null, "nhom": "a_nguoi_khac", "ly_do": "Người làm ăn chung là anh họ."}
+{"id": "lhc_h053", "mo_dun": "tuvi", "cau": "Chồng tôi dạo này hay giấu điện thoại, có phải anh ấy có người khác không", "luan_hoi": null, "go_nut": null, "nhom": "b_su_viec", "ly_do": "Nghi ngờ sự việc hiện tại."}
+{"id": "lhc_h054", "mo_dun": "tuvi", "cau": "vk em dang doi ly hon, cuoc hon nhan nay con cuu duoc khong", "luan_hoi": null, "go_nut": null, "nhom": "b_su_viec", "ly_do": "Sự việc đang xảy ra."}
+{"id": "lhc_h055", "mo_dun": "battu", "cau": "Tôi vừa nộp đơn nghỉ việc, có nên rút lại không", "luan_hoi": null, "go_nut": null, "nhom": "b_su_viec", "ly_do": "Quyết định cụ thể vừa xảy ra."}
+{"id": "lhc_h056", "mo_dun": "tuvi", "cau": "Người yêu mới chia tay em tuần trước đã có người mới, họ có bền không", "luan_hoi": null, "go_nut": null, "nhom": "b_su_viec", "ly_do": "Sự việc vừa xảy ra, hỏi về người khác."}
+{"id": "lhc_h057", "mo_dun": "tuvi", "cau": "Tôi đang nợ 300 triệu, bao giờ thì trả hết", "luan_hoi": null, "go_nut": null, "nhom": "b_su_viec", "ly_do": "Tình trạng cụ thể hiện tại."}
+{"id": "lhc_h058", "mo_dun": "tuvi", "cau": "Tôi vừa bị bạn thân lừa mất tiền hùn vốn, giờ có lấy lại được không", "luan_hoi": null, "go_nut": null, "nhom": "b_su_viec", "ly_do": "Bẫy: hùn vốn đã xảy ra, không phải kế hoạch."}
+{"id": "lhc_h059", "mo_dun": "battu", "cau": "Sếp đang trù dập tôi, tôi có nên nghỉ không", "luan_hoi": null, "go_nut": null, "nhom": "b_su_viec", "ly_do": "Sự việc đang xảy ra."}
+{"id": "lhc_h060", "mo_dun": "tuvi", "cau": "Bố mẹ đang phản đối em lấy anh ấy, bố mẹ có đổi ý không", "luan_hoi": null, "go_nut": null, "nhom": "b_su_viec", "ly_do": "Sự việc hiện tại, ý nghĩ người khác."}
+{"id": "lhc_h061", "mo_dun": "tuvi", "cau": "Đêm qua chồng không về, em lo anh ấy ngoại tình, có đúng không", "luan_hoi": null, "go_nut": null, "nhom": "b_su_viec", "ly_do": "Nghi ngờ sự việc cụ thể."}
+{"id": "lhc_h062", "mo_dun": "tuvi", "cau": "Tuần sau tôi phỏng vấn ở ngân hàng, có đậu không", "luan_hoi": null, "go_nut": null, "nhom": "b_su_viec", "ly_do": "Đoán kết quả một sự việc cụ thể."}
+{"id": "lhc_h063", "mo_dun": "battu", "cau": "chong cu quay lai doi tai hop, anh ta co thay doi that khong", "luan_hoi": null, "go_nut": null, "nhom": "b_su_viec", "ly_do": "Bẫy: hỏi về chồng cũ, không phải hồi phục của mình."}
+{"id": "lhc_h064", "mo_dun": "tuvi", "cau": "Công ty tôi đang cắt giảm nhân sự, tôi có bị cho nghỉ không", "luan_hoi": null, "go_nut": null, "nhom": "b_su_viec", "ly_do": "Sự việc đang diễn ra."}
+{"id": "lhc_h065", "mo_dun": "tuvi", "cau": "cung Quan Loc la cung gi", "luan_hoi": null, "go_nut": null, "nhom": "c_kien_thuc", "ly_do": "Câu kiến thức, không dấu."}
+{"id": "lhc_h066", "mo_dun": "battu", "cau": "Thực Thần với Thương Quan khác nhau thế nào", "luan_hoi": null, "go_nut": null, "nhom": "c_kien_thuc", "ly_do": "Câu kiến thức."}
+{"id": "lhc_h067", "mo_dun": "tuvi", "cau": "Thiên Lương ở cung Phúc Đức nghĩa là gì?", "luan_hoi": null, "go_nut": null, "nhom": "c_kien_thuc", "ly_do": "Kiến thức chung."}
+{"id": "lhc_h068", "mo_dun": "tuvi", "cau": "Địa Kiếp là sao tốt hay xấu", "luan_hoi": null, "go_nut": null, "nhom": "c_kien_thuc", "ly_do": "Bẫy: 'tốt hay xấu' nhưng không nói lá số mình, không ai phán."}
+{"id": "lhc_h069", "mo_dun": "battu", "cau": "Đại vận là gì vậy?", "luan_hoi": null, "go_nut": null, "nhom": "c_kien_thuc", "ly_do": "Câu kiến thức."}
+{"id": "lhc_h070", "mo_dun": "tuvi", "cau": "Em tuổi Hợi, anh ấy tuổi Tỵ, có nên cưới không?", "luan_hoi": null, "go_nut": null, "nhom": "d_hai_tuoi", "ly_do": "Ghép hai tuổi."}
+{"id": "lhc_h071", "mo_dun": "battu", "cau": "toi sinh 1987 lam an chung voi nguoi sinh 1979 co hop khong", "luan_hoi": null, "go_nut": null, "nhom": "d_hai_tuoi", "ly_do": "Bẫy: làm ăn chung nhưng ghép hai năm sinh."}
+{"id": "lhc_h072", "mo_dun": "tuvi", "cau": "Vợ tôi 1991, tôi 1989, năm 2027 có nên sinh con không?", "luan_hoi": null, "go_nut": null, "nhom": "d_hai_tuoi", "ly_do": "Ghép hai năm sinh."}
+{"id": "lhc_h073", "mo_dun": "tuvi", "cau": "Sếp sinh năm 1980, tôi 1996, có hợp làm việc chung không", "luan_hoi": null, "go_nut": null, "nhom": "d_hai_tuoi", "ly_do": "Bẫy: quan hệ sếp nhưng ghép hai năm sinh."}
+{"id": "lhc_h074", "mo_dun": "battu", "cau": "Tuổi Thìn với tuổi Tuất có xung không", "luan_hoi": null, "go_nut": null, "nhom": "d_hai_tuoi", "ly_do": "Ghép hai tuổi."}
+{"id": "lhc_h075", "mo_dun": "tuvi", "cau": "Sống thế này chẳng còn ý nghĩa gì, tôi không muốn tồn tại nữa", "luan_hoi": null, "go_nut": null, "nhom": "e_dac_biet", "ly_do": "Khủng hoảng nói gián tiếp."}
+{"id": "lhc_h076", "mo_dun": "battu", "cau": "Năm nào thì tôi mất?", "luan_hoi": null, "go_nut": null, "nhom": "e_dac_biet", "ly_do": "Năm mất."}
+{"id": "lhc_h077", "mo_dun": "tuvi", "cau": "Mộ tổ nhà tôi có bị động không mà làm ăn mãi không lên", "luan_hoi": null, "go_nut": null, "nhom": "e_dac_biet", "ly_do": "Tâm linh."}
+{"id": "lhc_h078", "mo_dun": "tuvi", "cau": "tôi bị suy thận có chữa được không", "luan_hoi": null, "go_nut": null, "nhom": "e_dac_biet", "ly_do": "Bệnh nặng."}
+{"id": "lhc_h079", "mo_dun": "tuvi", "cau": "Ly dị rồi một mình nuôi con, tôi có nên đi bước nữa không?", "luan_hoi": null, "go_nut": "sau_do_vo", "nhom": "go_nut", "ly_do": "Chính mình đã ly dị, hỏi tái hôn."}
+{"id": "lhc_h080", "mo_dun": "battu", "cau": "sau do vo minh mat niem tin, lam sao de mo long lai", "luan_hoi": null, "go_nut": "sau_do_vo", "nhom": "go_nut", "ly_do": "Không dấu, hồi phục sau đổ vỡ của mình."}
+{"id": "lhc_h081", "mo_dun": "battu", "cau": "Chị tôi vừa ly dị, chị có tái hôn được không", "luan_hoi": null, "go_nut": null, "nhom": "go_nut", "ly_do": "Âm: chủ thể là chị."}
+{"id": "lhc_h082", "mo_dun": "tuvi", "cau": "Vợ chồng mình cứ nói chuyện là lệch nhau, giận cả tuần", "luan_hoi": null, "go_nut": "khac_khau_vo_chong", "nhom": "go_nut", "ly_do": "Khắc khẩu vợ chồng của chính mình."}
+{"id": "lhc_h083", "mo_dun": "tuvi", "cau": "ck em lanh nhat voi em may thang nay, co cach nao gan lai khong", "luan_hoi": null, "go_nut": "khac_khau_vo_chong", "nhom": "go_nut", "ly_do": "Lạnh nhạt vợ chồng mình, không phải ngoại tình."}
+{"id": "lhc_h084", "mo_dun": "tuvi", "cau": "Hai vợ chồng anh trai tôi lục đục, có ly hôn không", "luan_hoi": null, "go_nut": null, "nhom": "go_nut", "ly_do": "Âm: vợ chồng người khác."}
+{"id": "lhc_h085", "mo_dun": "battu", "cau": "Tôi chuẩn bị góp 40% vốn vào công ty bạn, nên chia vai trò thế nào", "luan_hoi": "quan_he.lam_an_chung", "go_nut": "gop_von_phan_vai", "nhom": "go_nut", "ly_do": "Kế hoạch góp vốn của chính mình."}
+{"id": "lhc_h086", "mo_dun": "tuvi", "cau": "dinh hun von voi dong nghiep cu lam app, minh co hop lam an chung khong", "luan_hoi": "quan_he.lam_an_chung", "go_nut": "gop_von_phan_vai", "nhom": "go_nut", "ly_do": "Không dấu, kế hoạch hùn vốn."}
+{"id": "lhc_h087", "mo_dun": "tuvi", "cau": "Ông thầy xem cho tôi bảo có Thất Sát nên khắc vợ, tôi hoang mang quá", "luan_hoi": null, "go_nut": "go_loi_phan_doa", "nhom": "go_nut", "ly_do": "Bị thầy phán về lá số mình."}
+{"id": "lhc_h088", "mo_dun": "battu", "cau": "Nghe nói Kiếp Tài nặng thì giữ tiền kém, bát tự tôi có Kiếp Tài có sao không", "luan_hoi": null, "go_nut": "go_loi_phan_doa", "nhom": "go_nut", "ly_do": "Bị phán + hỏi thế giữ tiền của chính mình: cả thẻ và khối. [Thống nhất luật 2026-11-26: câu bị phán không kèm thẻ nhãn]"}
+{"id": "lhc_h089", "mo_dun": "tuvi", "cau": "La so toi Menh vo chinh dieu, nguoi ta bao bap benh, co xau lam khong", "luan_hoi": null, "go_nut": "go_loi_phan_doa", "nhom": "go_nut", "ly_do": "Không dấu, người ta bảo, lo."}
+{"id": "lhc_h090", "mo_dun": "tuvi", "cau": "Địa Không Địa Kiếp đóng cung Mệnh thì thường được giải thích thế nào?", "luan_hoi": null, "go_nut": null, "nhom": "go_nut", "ly_do": "Âm: kiến thức chung, không ai phán, không lo."}

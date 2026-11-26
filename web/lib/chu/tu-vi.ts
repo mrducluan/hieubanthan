@@ -366,6 +366,10 @@ export const CHU_TU_VI_UI = {
   "ph.menh": m(PT, "· Mệnh", "· Life"),
   "ph.tu_hoa_thuong": m(PT, "tự hoá", "self"),
   "ph.phai": m(PT, "Phái: {ten}", "School: {ten}"),
+  "ph.chuoi_mo_ta": m(PT, "· chuỗi chuyển tiếp qua hai cung", "· two-step chains across palaces"),
+  "ph.chuoi_kck": m(PT, "Kỵ chuyển Kỵ", "Ji-to-Ji chain"),
+  "ph.chuoi_lck": m(PT, "Lộc chuyển Kỵ", "Lu-to-Ji chain"),
+  "ph.chuoi_hoi": m(PT, "Chuỗi {loai} từ cung {tu} qua {qua} về {den} có ý nghĩa gì với tôi?", "What does the {loai} from my {tu} through {qua} to {den} mean for me?"),
   // ---------------------------------------------------------------- định giờ sinh (DinhGioSinh.tsx)
   "dg.ly_do.gan_ranh_gio": m(DG, "Giờ bạn nhập nằm sát ranh giới giữa hai canh giờ — lệch vài phút là sang lá số khác.", "The time you entered is close to the edge between two two-hour periods — a few minutes either way gives a different chart."),
   "dg.ly_do.ang_chung": m(DG, "Bạn ghi giờ sinh là áng chừng.", "You marked your birth time as approximate."),

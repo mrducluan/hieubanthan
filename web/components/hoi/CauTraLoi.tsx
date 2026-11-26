@@ -6,7 +6,7 @@
 //  · Ý 2: "Chia sẻ" thẻ câu trả lời (lib/the-hoi.ts — chỉ dữ liệu danh mục cố định + câu hỏi chuẩn, không câu gõ / ngày sinh).
 import { useState, type ReactNode } from "react";
 import Link from "@/components/khung/Lien";
-import { BookmarkCheck, BookmarkPlus, Heart, Info } from "lucide-react";
+import { ArrowUpRight, BookmarkCheck, BookmarkPlus, Heart, Info, LockKeyhole } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ghi } from "@/lib/do-luong";
@@ -18,9 +18,12 @@ import { CTA_CHIA_SE, loiNhanThe } from "@/lib/loi-nhan-chia-se";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { doanCoThuatNgu, KhungGiaiNghia } from "@/components/hoi/ThuatNgu";
 import { ViSao } from "@/components/luan-giai/HopNoiBat";
+import { KiemChung } from "@/components/huyen-hoc/KiemChung";
+import { NHAN_MUC } from "@/components/luan-giai/kieu";
+import { useTyLe } from "@/lib/ty-le-kiem-chung";
 import { KIEU_BIET, TrucQuan, type CoCauChuan, type KhoiTrucQuan } from "@/components/hoi/TrucQuan";
 import { banDoKhop, useChieuSang, VungChieuSang } from "@/components/hoi/ChieuSang";
-import type { KetQuaHoi } from "@/components/hoi/KhungChat";
+import type { DoiSongLienKetChat, GoNutDoiSongChat, KetQuaHoi, LuanHoiChat } from "@/components/hoi/KhungChat";
 import { useXemNguoiThan } from "@/components/huyen-hoc/XemNguoiThan";
 import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
 
@@ -71,6 +74,7 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
           </div>
         </div>
       )}
+      {!hd.en && !t.loi && t.luanHoi && <HopLuanHoiChat lh={t.luanHoi} moDun={moDun} />}
       {t.van && (gapChung ? (
         // EN-AI: bản Anh — máy chưa hiểu chắc câu hỏi → không đoán thay: lời đáp chung gập lại dưới "Did you mean…".
         <details className="group" data-testid="tra-loi-chung">
@@ -87,6 +91,8 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
       {t.van && !gapChung && theo.size > 0 && <p className="text-xs text-fg-faint">{hd.c("chu_xanh")}</p>}
       {t.van && <ViSao canCu={t.canCu} thuatNgu={t.thuatNgu} />}
       <KhungGiaiNghia ds={t.thuatNgu} />
+      {!t.loi && t.goNutDoiSong && <HopGoNutDoiSong gn={t.goNutDoiSong} moDun={moDun} />}
+      {!hd.en && !t.loi && !t.luanHoi && t.doiSongLienKet && <LienKetDoiSongChat lk={t.doiSongLienKet} moDun={moDun} />}
       {t.canhBao?.map((c) => (
         <p key={c} className="flex gap-2 rounded-xl bg-moon/10 px-3 py-2 text-xs text-moon"><Info className="mt-0.5 size-3.5 shrink-0" aria-hidden /> {c}</p>
       ))}
@@ -133,6 +139,141 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
           {loi}
         </div>
       ) : loi}
+    </div>
+  );
+}
+
+function nhayChuongBaoCao(moDun: string, chuong: string, maCau?: string) {
+  ghi("sao_cta_clicked", { tu: maCau ? "chat_luan_hoi" : "chat_doi_song", mo_dun: moDun, chuong, ...(maCau ? { cau: maCau } : {}) });
+  window.dispatchEvent(new CustomEvent("hbt:mo-chuong", { detail: { mo_dun: moDun, ma: chuong } }));
+  const giam = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  const dich = document.getElementById(`lg-${chuong}`)
+    ?? document.querySelector('[data-testid="lg-phan-khoa"]')
+    ?? document.getElementById("luan-giai");
+  dich?.scrollIntoView({ behavior: giam ? "auto" : "smooth", block: "start" });
+}
+
+/** D2 (Chặng 0) — hộp nhận định thẳng từ lá số (đồng bộ 100% nhãn với báo cáo 99 Sao; tôn trọng cổng SAO-2 khi chương khoá), kèm KiemChung nuôi DB 0017 & cầu nối mở chương. */
+function HopLuanHoiChat({ lh, moDun }: { lh: LuanHoiChat; moDun: string }) {
+  const hd = useChuHoiDap();
+  const tyLe = useTyLe(lh.khoa ? [] : [lh.ma_mau]);
+  if (lh.khoa) {
+    return (
+      <div className="rounded-2xl border border-gold/40 bg-surface-2/50 p-4" data-testid="hoi-luan-hoi-khoa" data-ma={lh.ma}>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
+            <LockKeyhole className="size-3.5 shrink-0" aria-hidden />
+            {hd.c("lh.tieu_de")}
+          </span>
+          <span data-muc={lh.sac} className="chip-muc inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium">
+            {NHAN_MUC[lh.sac]}
+          </span>
+        </div>
+        <p className="mt-2 text-sm font-medium text-fg">{lh.cau}</p>
+        <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{hd.c("lh.khoa_mo_ta", { chuong: lh.ten_chuong })}</p>
+        <div className="mt-3 border-t border-line/50 pt-2.5">
+          <button type="button" onClick={() => nhayChuongBaoCao(moDun, lh.chuong, lh.ma)} data-testid="hoi-luan-hoi-mo-chuong"
+            className="inline-flex min-h-10 items-center gap-1.5 text-sm font-medium text-gold underline-offset-4 hover:underline">
+            <span>{hd.c("lh.khoa_nut", { chuong: lh.ten_chuong })}</span>
+            <ArrowUpRight className="size-4 shrink-0" aria-hidden />
+          </button>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="rounded-2xl border border-gold/40 bg-surface-2/50 p-4" data-testid="hoi-luan-hoi" data-ma={lh.ma} data-nhan={lh.nhan}>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <span className="text-xs font-semibold uppercase tracking-wider text-gold">{hd.c("lh.tieu_de")}</span>
+        <span data-muc={lh.sac} className="chip-muc inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium">
+          {NHAN_MUC[lh.sac]}
+        </span>
+      </div>
+      <p className="mt-2 text-xs text-fg-muted">{lh.cau}</p>
+      <p className="mt-1.5 text-[1.05rem] font-medium leading-relaxed text-fg" data-testid="hoi-luan-hoi-tra-loi">{lh.tra_loi}</p>
+      {lh.giai_thich && <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{lh.giai_thich}</p>}
+      {lh.ghi_chu && <p className="mt-2 text-xs leading-relaxed text-fg-faint">{lh.ghi_chu}</p>}
+      <div className="mt-3">
+        <KiemChung loai="doi_song" mau={lh.ma_mau} phai={lh.phai} tyLe={tyLe[lh.ma_mau]} theoDoi={lh.cau} />
+      </div>
+      <div className="mt-2.5 border-t border-line/50 pt-2.5">
+        <button type="button" onClick={() => nhayChuongBaoCao(moDun, lh.chuong, lh.ma)} data-testid="hoi-luan-hoi-mo-chuong"
+          className="inline-flex min-h-10 items-center gap-1.5 text-sm font-medium text-gold underline-offset-4 hover:underline">
+          <span>{hd.c("lh.mo_chuong", { chuong: lh.ten_chuong })}</span>
+          <ArrowUpRight className="size-4 shrink-0" aria-hidden />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/** Chặng 0 — với các câu mảng đời sống ngoài 27 câu `luan_hoi`, chỉ hiện KiemChung khi hộp mở & có tiêu đề rõ ràng; khi chương khoá chỉ hiện nút dẫn mở chương. */
+function LienKetDoiSongChat({ lk, moDun }: { lk: DoiSongLienKetChat; moDun: string }) {
+  const hd = useChuHoiDap();
+  const tyLe = useTyLe(lk.khoa ? [] : [lk.ma_mau]);
+  if (lk.khoa) {
+    return (
+      <div className="rounded-2xl border border-line/70 bg-surface/30 p-3.5" data-testid="hoi-doi-song-lien-ket-khoa">
+        <button type="button" onClick={() => nhayChuongBaoCao(moDun, lk.chuong)} data-testid="hoi-doi-song-mo-chuong"
+          className="inline-flex min-h-10 items-center gap-1.5 text-sm font-medium text-gold underline-offset-4 hover:underline">
+          <LockKeyhole className="size-3.5 shrink-0" aria-hidden />
+          <span>{hd.c("lh.khoa_nut", { chuong: lk.ten_chuong })}</span>
+          <ArrowUpRight className="size-4 shrink-0" aria-hidden />
+        </button>
+      </div>
+    );
+  }
+  return (
+    <div className="rounded-2xl border border-line/70 bg-surface/30 p-3.5" data-testid="hoi-doi-song-lien-ket">
+      {lk.tieu_de_hop && (
+        <>
+          <p className="mb-2 text-sm font-medium text-fg">{lk.tieu_de_hop}</p>
+          <KiemChung loai="doi_song" mau={lk.ma_mau} phai={lk.phai} tyLe={tyLe[lk.ma_mau]} />
+        </>
+      )}
+      <div className={cn(lk.tieu_de_hop && "mt-2.5 border-t border-line/50 pt-2.5")}>
+        <button type="button" onClick={() => nhayChuongBaoCao(moDun, lk.chuong)} data-testid="hoi-doi-song-mo-chuong"
+          className="inline-flex min-h-10 items-center gap-1.5 text-sm font-medium text-gold underline-offset-4 hover:underline">
+          <span>{hd.c("lh.ds_mo_chuong", { chuong: lk.ten_chuong })}</span>
+          <ArrowUpRight className="size-4 shrink-0" aria-hidden />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/** Chặng 1 — hộp Gỡ Nút Đời Sống hai mặt (Sau ly hôn, Vợ chồng khắc khẩu, Góp vốn phân vai, Giải oan cách cục). */
+function HopGoNutDoiSong({ gn, moDun }: { gn: GoNutDoiSongChat; moDun: string }) {
+  const hd = useChuHoiDap();
+  const viec = [...(gn.viec_la_so ?? []), ...gn.viec_thuc_te];
+  return (
+    <div className="rounded-2xl border border-jade/35 bg-jade/5 p-4" data-testid="hoi-go-nut-doi-song" data-ma={gn.ma} data-khoa={gn.khoa ? "1" : undefined}>
+      <p className="text-xs font-semibold uppercase tracking-wider text-jade">{hd.c("gn.nhan")}</p>
+      <p className="mt-1 font-serif text-lg text-fg">{gn.tieu_de}</p>
+      {gn.du_kien_la_so && (
+        <p className="mt-1.5 rounded-xl border border-jade/30 bg-bg/50 px-3 py-2 text-xs font-medium leading-relaxed text-fg" data-testid="hoi-go-nut-du-kien">
+          {gn.du_kien_la_so}
+        </p>
+      )}
+      <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{gn.goc_nhin_hai_mat}</p>
+      {viec.length > 0 && (
+        <div className="mt-2.5 border-t border-line/50 pt-2.5 text-xs leading-relaxed text-fg-muted">
+          <p className="font-semibold text-fg">{hd.c("gn.viec")}</p>
+          <ul className="mt-1 list-disc space-y-1 pl-4">
+            {viec.map((v) => <li key={v}>{v}</li>)}
+          </ul>
+        </div>
+      )}
+      {gn.khoa && gn.tu_chuong && (
+        <div className="mt-2.5 border-t border-line/50 pt-2.5" data-testid="hoi-go-nut-khoa">
+          <button type="button" onClick={() => nhayChuongBaoCao(moDun, gn.tu_chuong as string)}
+            className="inline-flex min-h-10 items-center gap-1.5 text-sm font-medium text-gold underline-offset-4 hover:underline">
+            <LockKeyhole className="size-3.5 shrink-0" aria-hidden />
+            <span>{hd.c("gn.khoa_nut")}</span>
+            <ArrowUpRight className="size-4 shrink-0" aria-hidden />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

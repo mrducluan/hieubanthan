@@ -12,7 +12,8 @@ import type { ZodTypeAny } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem as goiEngine, laBanAnh, loiChung, mienPhiBanAnh } from "@/lib/proxy";
 import { layCauHinh } from "@/lib/cau-hinh";
 import { biMat, chaoMungConNhan, coTaiKhoan, phienNguoiDung } from "@/lib/cua-sao";
-import { catXemTruoc, type BaoCaoDay } from "@/lib/sao-xem-truoc";
+import { boTinhTrangKhoa, catXemTruoc, khoaLaBiCat, taoKhoaGiaoDichLuanGiai, xetQuyenDocHoi, type BaoCaoDay, type QuyenDocHoi } from "@/lib/sao-xem-truoc";
+import { baoLoi } from "@/lib/giam-sat";
 import { mangLuanGiai } from "@/lib/luan-giai-mang";
 import { congDangBat } from "@/lib/thanh-toan/cong";
 import { uuDaiCho } from "@/lib/uu-dai-may-chu";
@@ -109,12 +110,7 @@ const TEN: Record<string, string> = { tuvi: "Tử vi", battu: "Bát tự", thans
  *  chưa nhận trường đó (422) → gọi lại không kèm, báo cáo vẫn ra. */
 /** EN-2 mục 5: tình trạng (độc thân / có đôi) chỉ đổi MỘT hộp lời khuyên, không đổi bản chất báo cáo → không tính vào
  *  khoá "đã mở hôm nay" (đổi lựa chọn trong ngày không bị trừ Sao lần hai). */
-export function boTinhTrang(d: Record<string, unknown>): Record<string, unknown> {
-  const ls = d.la_so;
-  if (!ls || typeof ls !== "object" || !("tinh_trang" in ls)) return d;
-  const { tinh_trang: _bo, ...con } = ls as Record<string, unknown>;
-  return { ...d, la_so: con };
-}
+export const boTinhTrang = boTinhTrangKhoa;
 
 export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: string, moDun: string,
                                     khoaTu: (d: Record<string, unknown>) => unknown = boTinhTrang,
@@ -151,7 +147,7 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   const bi_mat = biMat();
   const ngay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
   const khoa = bi_mat
-    ? `lg:${createHmac("sha256", bi_mat).update(`${moDun}|${JSON.stringify(khoaTu(parsed.data as Record<string, unknown>))}|${ngay}`).digest("hex").slice(0, 40)}`
+    ? taoKhoaGiaoDichLuanGiai(bi_mat, moDun, khoaTu(parsed.data as Record<string, unknown>), ngay)
     : null;
 
   // SAO-HV (0028): hội viên năm đang hiệu lực → báo cáo đầy đủ, KHÔNG trừ Sao (kể cả lượt xem trước), ghi "đã mở" bằng
@@ -192,6 +188,11 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     if (!kq.ok) return kq.res;
     const day = kq.body as BaoCaoDay;
     const ban = catXemTruoc(day, mienPhi + tang);
+    // SAO-2 Default-Deny: khoá cấp gốc chưa phân loại bị cắt im lặng → báo (chỉ tên khoá, không nội dung) để phân loại.
+    if (ban.so_khoa > 0) {
+      const la = khoaLaBiCat(day);
+      if (la.length) baoLoi(new Error("sao2_khoa_la_bi_cat"), { noi: "luan_giai_sao", mo_dun: moDun, khoa: la.slice(0, 8).join(",") });
+    }
     const maTang = tang ? day.chuong[mienPhi]?.ma ?? null : null;
     let soDu: number | null = null;
     if (phien) { const { data } = await phien.sb.rpc("so_du_sao"); soDu = typeof data === "number" ? data : null; }
@@ -231,3 +232,45 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
   if (r.ket_qua !== "da_dung") return NextResponse.json({ error: "Chưa trừ được Sao, thử lại sau." }, { status: 400 });
   return NextResponse.json({ ...(kq.body as object), phi: { sao: gia, ly_do: "da_tru_sao", so_du: r.so_du ?? null } });
 }
+
+/** D2 + SAO-2: xác định quyền đọc `luan_hoi` / `doi_song_lien_ket` trong `/api/<tuvi|battu>/hoi`, khớp 100% quy tắc của
+ *  `luanGiaiCoSao` (công tắc thu Sao · bản Anh · chủ sở hữu · hội viên năm · đã mở hôm nay · `chuong_mien_phi + chuongDuocTang`;
+ *  thiếu bí mật máy chủ thì đóng an toàn, không mở nhầm). Không trừ Sao, không ghi DB. */
+export async function daMoBaoCaoHoi(req: Request, moDun: "tuvi" | "battu", laSo: unknown): Promise<QuyenDocHoi> {
+  const coLaSo = Boolean(laSo && typeof laSo === "object");
+  const mienPhiAnh = mienPhiBanAnh(req, "luan_giai", moDun);
+  if (!coLaSo || mienPhiAnh) {
+    return xetQuyenDocHoi({ coLaSo, mienPhiAnh, thuSaoBat: false, coPhien: false, chuSoHuu: false, hoiVien: false, coBiMat: false, daMoHomNay: false, moDun, soChuongMo: 1 });
+  }
+  const thuSaoBat = await dangThuSao(moDun);
+  if (!thuSaoBat) {
+    return xetQuyenDocHoi({ coLaSo, mienPhiAnh, thuSaoBat: false, coPhien: false, chuSoHuu: false, hoiVien: false, coBiMat: false, daMoHomNay: false, moDun, soChuongMo: 1 });
+  }
+  const [mienPhi, phien] = await Promise.all([layCauHinh<number>("luan_giai.chuong_mien_phi"), phienNguoiDung()]);
+  const tang = await chuongDuocTang(phien, moDun);
+  const soChuongMo = mienPhi + tang;
+  if (!phien) {
+    return xetQuyenDocHoi({ coLaSo, mienPhiAnh, thuSaoBat: true, coPhien: false, chuSoHuu: false, hoiVien: false, coBiMat: Boolean(biMat()), daMoHomNay: false, moDun, soChuongMo });
+  }
+  if (await laChuSoHuu(phien)) {
+    return xetQuyenDocHoi({ coLaSo, mienPhiAnh, thuSaoBat: true, coPhien: true, chuSoHuu: true, hoiVien: false, coBiMat: true, daMoHomNay: false, moDun, soChuongMo });
+  }
+  if (await laHoiVien(phien)) {
+    return xetQuyenDocHoi({ coLaSo, mienPhiAnh, thuSaoBat: true, coPhien: true, chuSoHuu: false, hoiVien: true, coBiMat: true, daMoHomNay: false, moDun, soChuongMo });
+  }
+  const bi_mat = biMat();
+  if (!bi_mat) {
+    return xetQuyenDocHoi({ coLaSo, mienPhiAnh, thuSaoBat: true, coPhien: true, chuSoHuu: false, hoiVien: false, coBiMat: false, daMoHomNay: false, moDun, soChuongMo });
+  }
+  const ngay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
+  const khoa = taoKhoaGiaoDichLuanGiai(bi_mat, moDun, boTinhTrang({ la_so: laSo }), ngay);
+  let daMoHomNay = false;
+  try {
+    const { data } = await phien.sb.from("so_cai_sao").select("id").eq("khoa", `dung:${phien.user.id}:${khoa}`).limit(1);
+    daMoHomNay = Boolean(data?.length);
+  } catch {
+    daMoHomNay = false;
+  }
+  return xetQuyenDocHoi({ coLaSo, mienPhiAnh, thuSaoBat: true, coPhien: true, chuSoHuu: false, hoiVien: false, coBiMat: true, daMoHomNay, moDun, soChuongMo });
+}
+

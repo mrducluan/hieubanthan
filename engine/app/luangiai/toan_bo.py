@@ -144,11 +144,14 @@ def tuvi(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = No
          ca_nhan: dict | None = None) -> dict:
     """LG-ĐS: báo cáo `doi_song_1` (cot_loi, thoi_gian_bieu, 13 chương có hop/doan/can_cu) + các trường cũ
     (mo_dun, chuong[].ma/tieu_de/cau_hoi/doan/moi_xem, ket, trang_thai, phi) cho SAO-2 và tầng diễn đạt."""
+    from app.luangiai import ung_dung_co_dien as ud  # noqa: PLC0415
     bc = ds_tuvi.lap(sinh, ngay_xem, trong_so=trong_so, ca_nhan=ca_nhan)
     chuong = [{**c, "moi_xem": _moi_xem("tuvi", c["ma"], c["doan"], c)} for c in bc["chuong"]]
     for c in chuong:            # EN-ALL: câu hỏi mở của lời mời theo ngôn ngữ (bản Việt giữ nguyên chữ)
         c["moi_xem"]["cau_hoi"] = L(f"tvds.moi_xem.{c['ma']}", c["moi_xem"]["cau_hoi"])
-    return {"mo_dun": "tuvi", **bc, "chuong": chuong, "ket": L("tvds.ket", hoi_van.KET), "trang_thai": bc.get("trang_thai", "nhap_ai"),
+    u_cd = ud.tu_bao_cao_tuvi(bc, sinh=sinh)
+    return {"mo_dun": "tuvi", **bc, "chuong": chuong, **({"ung_dung_co_dien": u_cd} if u_cd else {}),
+            "ket": L("tvds.ket", hoi_van.KET), "trang_thai": bc.get("trang_thai", "nhap_ai"),
             "phi": PHI}
 
 
@@ -156,9 +159,12 @@ def battu(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = N
           ca_nhan: dict | None = None) -> dict:
     """BT-ĐS: báo cáo `doi_song_1` cùng khung Tử vi (cot_loi, thoi_gian_bieu đại vận, 13 chương có hop/doan/can_cu) +
     các trường cũ (mo_dun, chuong[].ma/tieu_de/cau_hoi/doan/moi_xem, ket, trang_thai, phi) cho SAO-2 và diễn đạt."""
+    from app.luangiai import ung_dung_co_dien as ud  # noqa: PLC0415
     bc = ds_battu.lap(sinh, ngay_xem, trong_so=trong_so, ca_nhan=ca_nhan)
     chuong = [{**c, "moi_xem": _moi_xem("battu", c["ma"], c["doan"], c)} for c in bc["chuong"]]
     for c in chuong:            # EN-ALL: câu hỏi mở của lời mời theo ngôn ngữ (bản Việt giữ nguyên chữ)
         c["moi_xem"]["cau_hoi"] = L(f"bt_ds.moi_xem.{c['ma']}", c["moi_xem"]["cau_hoi"])
-    return {"mo_dun": "battu", **bc, "chuong": chuong, "ket": L("bt_ds.ket", hoi_van.KET),
+    u_cd = ud.tu_bao_cao_battu(bc, sinh=sinh)
+    return {"mo_dun": "battu", **bc, "chuong": chuong, **({"ung_dung_co_dien": u_cd} if u_cd else {}),
+            "ket": L("bt_ds.ket", hoi_van.KET),
             "trang_thai": bc.get("trang_thai", "nhap_ai"), "phi": PHI}

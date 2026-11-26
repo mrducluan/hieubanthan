@@ -1,0 +1,66 @@
+{
+  "_nguon": "Chặng 1 — Kho Gỡ Nút Đời Sống chuyên sâu cho 4 mạch trăn trở lớn người dùng hay hỏi nhất: (1) Phục hồi & mở lòng sau ly hôn/đổ vỡ, (2) Vợ chồng khắc khẩu lục đục, (3) Hợp tác góp vốn & nguyên tắc phân vai, (4) Giải oan hai mặt các cách cục hay bị nơi khác phán dọa. Ban biên tập soạn theo tinh thần nhân văn, không định mệnh, gắn trực tiếp với dữ kiện đã tính của lá số.",
+  "source_id": "go_nut_doi_song",
+  "school_id": "huyen_hoc_ung_dung",
+  "trang_thai": "nhap_ai",
+  "mau_la_so": {
+    "vcd_du_kien": "Trên lá số của bạn: cung {cung} ({chi}) Vô Chính Diệu, mượn chính tinh cung đối ({cung_doi}: {sao_muon}).",
+    "vcd_khong_sao": "các sao hội chiếu",
+    "vcd_diem_manh": " Khi mượn lực {sao}, điểm mạnh bạn dùng được là {diem_manh}.",
+    "vcd_goc_nhin": "Cung {cung} Vô Chính Diệu không phải cung trống hay kém may, mà hoạt động như tấm gương linh hoạt đón lực từ cung đối ({sao_muon}).{diem_sang}",
+    "kk_du_kien": "Trên lá số của bạn: {sao} đóng tại cung {cung} ({chi}).",
+    "kk_goc_nhin": "Ở cung {cung}, {sao} có hai mặt rõ trong kho tri thức: mặt sáng là {diem_manh}; mặt cần canh là {mat_toi}.",
+    "kk_diem_manh_mac_dinh": "tư duy phá cách, xoay chuyển nhanh trước biến động",
+    "kk_mat_toi_mac_dinh": "dễ quyết vội theo cảm hứng hoặc hụt sức nếu tất tay",
+    "sao_du_kien": "Trên lá số của bạn: sao {sao}{do_sang} toạ thủ tại cung {cung} ({chi}).",
+    "sao_goc_nhin": "Kho tri thức ghi nhận {sao} ở hai mặt công bằng: điểm mạnh là {diem_manh}; chỗ dễ vấp là {mat_toi}. {chi_tiet}",
+    "sao_tu_soi": "Câu tự soi cho nét {sao} trên lá số của bạn: {cau_tu_soi}",
+    "tt_tang_can": "tàng can ẩn trong địa chi",
+    "tt_du_kien": "Trên tứ trụ của bạn: {ten_tt} hiện diện tại {vi_tri}.",
+    "tt_goc_nhin": "{y_nghia} Mặt sáng bạn đang sở hữu là {diem_manh}; mặt cần tiết chế khi quá đà là {mat_toi}.",
+    "tt_tu_soi": "Câu tự soi từ tứ trụ của bạn: {cau_tu_soi}",
+    "bc_gop_von": "Theo lá số của bạn ({ten_chuong}): {tra_loi}",
+    "bc_sau_do_vo": "Điểm tựa từ lá số của bạn ({ten_chuong}): {giai_thich}",
+    "bc_khac_khau": "Cách chung sống hợp lá số của bạn: {song_cung}",
+    "khong_co_vcd": "Theo lá số tính ở đây, cung {cung} ({chi}) của bạn có chính tinh {sao}, không phải Vô Chính Diệu. Lời phán bạn nghe có thể dựa trên cách an sao, giờ sinh hoặc trường phái khác.",
+    "khong_co_tt": "Theo tứ trụ tính ở đây, {ten_tt} không lộ ở can trụ nào và không nằm trong tàng can của bạn. Lời phán bạn nghe có thể dựa trên giờ sinh hoặc cách tính khác.",
+    "bc_sau_do_vo_nam": "Năm {nam}: lá số của bạn có nhịp thuận cho chuyện tình cảm, hợp để gặp gỡ và mở lòng lại khi bạn thấy đã sẵn sàng."
+  },
+  "mach": {
+    "sau_do_vo": {
+      "tieu_de": "Nhịp phục hồi & mở lòng sau một lần dang dở",
+      "goc_nhin_hai_mat": "Trong mệnh lý phương Đông, cung phối ngẫu nhiều va đập ở giai đoạn đầu đời thường phản ánh bài học về ranh giới và cách chọn bạn đời lúc còn trẻ, hoàn toàn không phải dấu chấm hết cho hạnh phúc về sau. Những người đi qua một lần gãy đổ khi bước sang vận mới thường có độ chín chắn, biết mình cần sự bình yên thực chất nào nên mối gắn bó sau lại bền hơn.",
+      "viec_thuc_te": [
+        "Dành một khoảng lặng ổn định lại tài chính riêng và nhịp sinh hoạt cá nhân trước khi bước vào cam kết mới",
+        "Nhìn lại điểm hay lệch nhịp ở chuyện cũ (cách nói khi giận, chuyện tiền nong hay khoảng cách với hai bên gia đình) để không lặp lại khuôn mẫu cũ",
+        "Ưu tiên tìm hiểu chậm qua những tình huống đời thực thay vì quyết định nhanh trong giai đoạn cảm xúc đang trống trải"
+      ]
+    },
+    "khac_khau_vo_chong": {
+      "tieu_de": "Cầu nối hạ nhiệt khi vợ chồng hay lời qua tiếng lại",
+      "goc_nhin_hai_mat": "Hai người thương nhau mà mở lời dễ thành cãi vã phần lớn do lệch nhịp phản ứng (một bên muốn giải quyết dứt điểm ngay lập tức, bên kia lại cần khoảng lặng hoặc lời ghi nhận trước). Lá số chỉ ra điểm hay chạm tự ái ấy để hai người đổi cách nói, không phải để kết luận không hợp nhau.",
+      "viec_thuc_te": [
+        "Thống nhất nguyên tắc không bàn chuyện tiền bạc, con cái hay nội ngoại sau 10 giờ tối hoặc lúc một trong hai đang kiệt sức",
+        "Đổi câu trách móc sang nêu nhu cầu cụ thể trong tuần (ai đón con, khoản nào chi chung, ngày nào nghỉ riêng)",
+        "Tạo một không gian hoặc hoạt động trung gian nhẹ nhàng ngoài nhà để tách khỏi bầu không khí căng thẳng quen thuộc"
+      ]
+    },
+    "gop_von_phan_vai": {
+      "tieu_de": "Nguyên tắc phân vai & rào chắn khi hùn vốn làm ăn chung",
+      "goc_nhin_hai_mat": "Làm ăn chung bền hay gãy hiếm khi do hợp tuổi chung chung, mà nằm ở chỗ hai người có bù được điểm khuyết vận hành của nhau và khoá chặt biên giới quyền quyết định từ lúc còn vui vẻ hay không.",
+      "viec_thuc_te": [
+        "Tách bạch rõ ba vai ngay trên giấy tờ trước khi xuống tiền: người mở thị trường, người kiểm soát dòng tiền – sổ sách và người giữ vận hành",
+        "Quy định sẵn cơ chế rút vốn, định giá phần hùn và ngưỡng chi tiêu cần cả hai cùng duyệt bằng văn bản",
+        "Chạy thử một thương vụ hoặc dự án nhỏ có thời hạn 1–3 tháng để kiểm chứng nhịp phối hợp thực tế trước khi góp vốn lớn"
+      ]
+    },
+    "go_loi_phan_doa": {
+      "tieu_de": "Nhìn công bằng hai mặt về nét lá số bạn đang lo lắng",
+      "goc_nhin_hai_mat": "Sách xưa viết trong bối cảnh xã hội nông nghiệp ưa ổn định tuyệt đối nên thường dùng từ rất nặng với các thế lá số mạnh mẽ, độc lập hoặc nhiều biến động. Trong xã hội hiện đại, chính những cấu trúc này lại là nguồn lực sắc bén cho sự linh hoạt, tay nghề chuyên sâu và bản lĩnh tự lập khi đặt đúng môi trường.",
+      "viec_thuc_te": [
+        "Đọc thế lá số như bản hướng dẫn sử dụng cá tính của mình: phát huy đúng môi trường cần nét mạnh ấy thay vì tự lo sợ vì một nhãn gọi cũ",
+        "Giữ hai nguyên tắc an toàn thực tế là quỹ dự phòng tài chính và nhịp trao đổi ôn hoà với người thương để trung hoà mặt sắc cạnh"
+      ]
+    }
+  }
+}

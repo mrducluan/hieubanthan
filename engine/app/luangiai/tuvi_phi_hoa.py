@@ -360,6 +360,60 @@ def chon_noi_bat(duong: list[dict]) -> list[dict]:
     return ra
 
 
+def _luan_chuoi_chuyen_ky(cung: list[dict]) -> list[dict]:
+    """Diễn giải đời thường cho chuỗi Kỵ chuyển Kỵ & Lộc chuyển Kỵ từ KB `tuvi_phi_hoa_kb` (+ `loi_khuon` bản Anh);
+    bỏ số trang sách hiện đại chưa có trong kho nguồn, giữ đủ toạ độ cung/sao và `ma_mau` chuẩn DB 0017."""
+    vi = la_viet()
+    ra = []
+    for ch in ph.chuoi_chuyen_ky(cung):
+        loai = ch["loai"]
+        mau = kb.chuoi_chuyen_ky(loai) or {}
+        tat_loai = "kck" if loai == "ky_chuyen_ky" else "lck"
+        # 3 trạm (từ + qua + đến): hai chuỗi cùng điểm đầu – cuối nhưng khác cung trung chuyển là hai nhận định khác nhau.
+        ma_mau = f"ds.duong_bay.{tat_loai}.{MA_CUNG[ch['tu_cung']]}+{MA_CUNG[ch['qua_cung']]}+{MA_CUNG[ch['den_cung']]}"
+        bien = {
+            "ma_a": ten_mang(ch["tu_cung"]) if vi else mang(ch["tu_cung"]),
+            "ma_b": ten_mang(ch["qua_cung"]) if vi else mang(ch["qua_cung"]),
+            "ma_c": ten_mang(ch["den_cung"]) if vi else mang(ch["den_cung"]),
+            "ngan_a": mang_ngan(ch["tu_cung"]),
+            "ngan_b": mang_ngan(ch["qua_cung"]),
+            "ngan_c": mang_ngan(ch["den_cung"]),
+            "tu_cung": tc(ch["tu_cung"]),
+            "qua_cung": tc(ch["qua_cung"]),
+            "den_cung": tc(ch["den_cung"]),
+            "xung_cung": tc(ch["xung_cung"]),
+            "can_dau": tcan(ch["can_dau"]),
+            "can_chuyen": tcan(ch["can_chuyen"]),
+            "sao_dau": ts(ch["sao_dau"]),
+            "sao_chuyen": ts(ch["sao_chuyen"]),
+            "hoa_ky": th("Kỵ"),
+            "hoa_loc": th("Lộc"),
+        }
+        td = kb.dien(mau.get("tieu_de"), **bien) if vi else L(f"tv2.chuoi.{loai}.tieu_de", mau.get("tieu_de") or "", **bien)
+        ng = kb.dien(mau.get("nghia"), **bien) if vi else L(f"tv2.chuoi.{loai}.nghia", mau.get("nghia") or "", **bien)
+        viec = kb.dien(mau.get("viec_nen_lam"), **bien) if vi else L(f"tv2.chuoi.{loai}.viec_nen_lam", mau.get("viec_nen_lam") or "", **bien)
+        cu = kb.dien(mau.get("can_cu"), **bien) if vi else L(f"tv2.chuoi.{loai}.can_cu", mau.get("can_cu") or "", **bien)
+        ra.append({
+            "loai": loai,
+            "phai": ch["phai"],
+            "ma_mau": ma_mau,
+            "tu_cung": ch["tu_cung"],
+            "can_dau": ch["can_dau"],
+            "hoa_dau": ch["hoa_dau"],
+            "sao_dau": ch["sao_dau"],
+            "qua_cung": ch["qua_cung"],
+            "can_chuyen": ch["can_chuyen"],
+            "sao_chuyen": ch["sao_chuyen"],
+            "den_cung": ch["den_cung"],
+            "xung_cung": ch["xung_cung"],
+            "tieu_de": td or "",
+            "nghia": ng or "",
+            "viec_nen_lam": viec or "",
+            "can_cu": [cu] if cu else [],
+        })
+    return ra
+
+
 def lap(ls: dict, can_nam: str, nam_xem: int | None = None) -> dict:
     """`ls` = hoidap.tuvi.tom_tat(lá số); `can_nam` = can năm sinh (âm lịch dùng để an lá); `nam_xem` = năm âm
     lịch muốn xem tứ hoá lưu niên (tuỳ chọn)."""
@@ -371,12 +425,13 @@ def lap(ls: dict, can_nam: str, nam_xem: int | None = None) -> dict:
         "can_nam_sinh": can_nam,
         "lai_nhan": {"cung": c_lai["ten"] if c_lai else None, "chi": chi_lai,
                      "can": c_lai["can"] if c_lai else ph.ngu_ho_don(can_nam, chi_lai)},
-        "cung": [{"ten": c["ten"], "chi": c["chi"], "can": c["can"], "la_menh": c["ten"] == "Mệnh",
+        "cung": [{"ten": c["ten"], "chi": chi_c if (chi_c := c["chi"]) else "", "can": c["can"], "la_menh": c["ten"] == "Mệnh",
                   "la_lai_nhan": c["chi"] == chi_lai} for c in cung],
         "duong_bay": duong,
         "tu_hoa": [d for d in duong if d["tu_hoa"]],
         "vao_menh": [d for d in duong if d["den_cung"] == "Mệnh"],
         "noi_bat": chon_noi_bat(duong),
+        "chuoi_chuyen_ky": _luan_chuoi_chuyen_ky(cung),
         "luu_nien": None,
         "phai": phai(),
         "luu_y": luu_y(),

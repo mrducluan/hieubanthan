@@ -1,0 +1,69 @@
+{
+  "_nguon": "Classical Scholarship Mode — English overlay surfacing verified classical texts & technical chart structures already computed by the Engine (no invented star colors/hours, no five-element compass directions conflicting with Eight Mansions per Decision 6b).",
+  "source_id": "co_dien_tong_hop",
+  "school_id": "da_phai_co_dien",
+  "_trang_thai": "ban_phu_en",
+  "trang_thai": "bien_tap",
+  "tieu_de": {
+    "battu": "Classical Scholarship Lens (Zi Ping Zhen Quan · Qiong Tong Bao Jian)",
+    "tuvi": "Classical Scholarship Lens (Chart Foundation · Patterns · Verses)",
+    "phongthuy": "Classical Scholarship Lens (Eight Mansions · Xuan Kong on Real Layout)"
+  },
+  "nguyen_tac_uu_tien": {
+    "battu": "Presents both Useful-God methods side by side (Balance/Climate & Month-Branch Pattern) together with seasonal Qiong Tong Bao Jian stems; omits generic five-element compass directions so it never contradicts Eight Mansions.",
+    "tuvi": "Summarizes classical chart foundations (Nayin vs Bureau relation, Life/Body Lords, Origin Palace) and expands 'Why we say this' technical notes across chapters.",
+    "phongthuy": "Reads Mountain–Facing star pairs from the 81 Xuan Kong combinations on the actual rooms you mapped (or strictly Facing & Sitting sectors when no floorplan is entered); Star 2 in Period 9 is treated accurately as Upcoming Sheng Qi."
+  },
+  "battu": {
+    "nhan_cach_cuc": "Month-Branch Pattern (Zi Ping Zhen Quan)",
+    "nhan_hai_cach": "Two Useful-God Methods",
+    "cung_can": "Both classical methods point to: {ds}.",
+    "khac_nhau": "Balance/Climate method favors: {c1} · Month-Pattern method favors: {c2} (shown side by side without choosing for you).",
+    "trung_hoa": "Your Four Pillars are relatively balanced; prioritize steady pacing across luck decades.",
+    "nhan_dieu_hau": "Seasonal Climate Reference (Qiong Tong Bao Jian)",
+    "noi_dung_dieu_hau": "{can} Day Master born in the {chi} month: classical seasonal tuning prioritizes {can_dh}."
+  },
+  "tuvi": {
+    "nhan_lap_cuc": "Nayin Life Element & Five-Element Bureau",
+    "noi_dung_lap_cuc": "Life Nayin: {nap_am} · Bureau: {cuc} ({menh_cuc}).",
+    "nhan_chu_than": "Life Lord · Body Lord · Body Palace",
+    "noi_dung_chu_than": "Life Lord: {menh_chu} · Body Lord: {than_chu} · Body Palace in {than_cu}.",
+    "nhan_lai_nhan": "Origin Palace (Birth-Stem Transformation Root)",
+    "noi_dung_lai_nhan": "Birth-year stem {can_nam} places your Origin Palace at {cung_lai} ({chi_lai}) — a core self-driven life arena in Flying-Star reading."
+  },
+  "phongthuy": {
+    "chua_khai_phong": "Room layout not yet mapped: showing only the Facing sector (front) and Sitting sector (back). Map your rooms to inspect each room's exact star pair.",
+    "ten_vi_tri": {
+      "huong_thu": "Facing Sector (Front — {phuong})",
+      "toa_son": "Sitting Sector (Back — {phuong})",
+      "cua_chinh": "Main Door ({phuong})",
+      "phong_ngu_chinh": "Master Bedroom ({phuong})",
+      "bep": "Kitchen ({phuong})",
+      "phong_lam_viec": "Study / Desk ({phuong})",
+      "ban_tho": "Altar Space ({phuong})",
+      "ve_sinh": "Bathroom ({phuong})"
+    },
+    "trang_thai_cap": "Mountain {son} ({tt_son}) · Facing {huong} ({tt_huong}){ln}",
+    "luu_nien_phu": " · Annual star {sao}"
+  },
+  "doi_chieu_hai_phai": {
+    "bt_thuan_hk_tinh": {
+      "tieu_de": "Two-School Lens at the Main Entrance (Eight Mansions & Period-9 Flying Stars)",
+      "goc_bat_trach": "Eight Mansions lens (personal trigram alignment): this entrance direction matches the householder's group, supporting long-term personal steadiness.",
+      "goc_huyen_khong_van_9": "Period-9 Flying Star lens (timely sector qi, star pair {cap}): the entrance sector carries stars that are best kept calm and uncluttered.",
+      "cach_dung_hoa": {
+        "sao_tho": "Keep your entrance, bed-head and stove facing aligned with Eight Mansions, while styling the doorway in crisp light neutral tones without harsh heat lamps or heavy drilling.",
+        "chung": "Keep your entrance, bed-head and stove facing aligned with Eight Mansions, while keeping the doorway clear and softly lit, with nothing stacked against the door and no heavy renovation unless needed."
+      }
+    },
+    "hk_vuong_bt_lech": {
+      "tieu_de": "Two-School Lens at the Main Entrance (Eight Mansions & Period-9 Flying Stars)",
+      "goc_bat_trach": "Eight Mansions lens (personal trigram alignment): this entrance direction belongs to the opposite East/West group from the householder.",
+      "goc_huyen_khong_van_9": "Period-9 Flying Star lens (timely sector qi, star pair {cap}): the entrance welcomes timely or prosperous Period-9 qi favorable for activity and commerce.",
+      "cach_dung_hoa": {
+        "sao_9_1": "Keep the entrance bright and open to welcome Period-9 flow, while orienting your bed-head, stove-mouth and desk chair toward your personal Eight Mansions directions.",
+        "chung": "Keep the entrance clear and tidy so the favorable flow at this sector can settle, while orienting your bed-head, stove-mouth and desk chair toward your personal Eight Mansions directions."
+      }
+    }
+  }
+}

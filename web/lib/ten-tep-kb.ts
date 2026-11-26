@@ -23,7 +23,11 @@ export const TEN_TEP_KB: Record<string, string> = {
   "tu_dien.json": "Từ điển thuật ngữ",
   "tham_dinh.json": "Sổ thẩm định chuyên gia",
   "goc_nhin.json": "Góc nhìn chuyên gia — ô để anh tự viết (42 trang)",
+  "ung_dung_co_dien_kb.json": "Liên mảng · Ứng dụng Ngũ hành & Điều hoà Vận 9 (Chế độ Cổ điển)",
+  "go_nut_doi_song_kb.json": "Liên mảng · Gỡ nút đời sống (Sau ly hôn, Vợ chồng, Góp vốn, Giải oan lá số)",
   // QTE / HTT-2: bản phủ tiếng Anh (kb/data/en/) + biến thể thị trường (kb/data/en-us/)
+  "en/ung_dung_co_dien_kb.json": "Bản Anh · Ứng dụng Ngũ hành & Điều hoà Vận 9",
+  "en/go_nut_doi_song_kb.json": "Bản Anh · Gỡ nút đời sống (4 mạch chuyên sâu)",
   "en/tarot_kb.json": "Bản Anh · Tarot (78 lá, trải bài, mẫu câu)",
   "en/loi_khuon.json": "Bản Anh · Mẫu câu theo ngôn ngữ (loi.L)",
   "en/giao_thoa_kb.json": "Bản Anh · Điểm giao thoa",

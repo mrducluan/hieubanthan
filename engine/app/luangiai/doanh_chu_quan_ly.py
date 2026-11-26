@@ -168,10 +168,10 @@ def lam_giau(kq: dict) -> dict:
     return kq
 
 
-def ca_nhan(ngay: int, thang: int, nam: int, gioi_tinh: str, nam_xem: int) -> dict:
+def ca_nhan(ngay: int, thang: int, nam: int, gioi_tinh: str, nam_xem: int, gio: str | None = None) -> dict:
     """Bản "Cách làm việc của bạn" cho chính thành viên được mời — đọc đúng hồ sơ của `calc.doanh_chu` (một bộ tính)."""
     vi = ngon_ngu.la_viet()
-    hs = dc._ho_so_co_ban(ngay, thang, nam, gioi_tinh, nam_xem)
+    hs = dc._ho_so_co_ban(ngay, thang, nam, gioi_tinh, nam_xem, gio)
     k = kb()
     d = k["dd"].get(str(hs["duong_doi"])) or k["dd"]["4"]
     vt_ten, vt_hq = dc._VAI_TRO_HANH[hs["hanh_manh"]]["vi" if vi else "en"]
@@ -179,6 +179,7 @@ def ca_nhan(ngay: int, thang: int, nam: int, gioi_tinh: str, nam_xem: int) -> di
     nhip_vi, nhip_en = dc._NHIP_NAM.get(ncn, dc._NHIP_NAM[4])
     return {
         "nhan": k["ca_nhan"],
+        "so_tru": hs["so_tru"],
         "hanh_manh": _hanh(hs["hanh_manh"]),
         "vai_tro_hop": vt_ten,
         "gia_tri": vt_hq,

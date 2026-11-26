@@ -18,12 +18,15 @@ import { docLoiMoiDoiNgu, giaiMaDongYThanhVien } from "@/lib/doanh-chu-ma";
 import { dauNguoiGoi, goiEngineDaKiem, laBanAnh, loiChung } from "@/lib/proxy";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
 
+const GioSinhZ = z.string().trim().regex(/^([01]\d|2[0-3]):[0-5]\d$/).optional();
+
 const OngChuIn = z.object({
   ten: z.string().trim().max(60).default("Ông chủ"),
   vai_tro: z.string().trim().max(60).default("Chủ doanh nghiệp"),
   ngay: z.number().int().min(1).max(31),
   thang: z.number().int().min(1).max(12),
   nam: z.number().int().min(1930).max(2025),
+  gio: GioSinhZ,
   gioi_tinh: z.enum(["nam", "nu"]).default("nam"),
 }).strict();
 
@@ -37,6 +40,7 @@ const ThanhVienTuNhapIn = z.object({
   ngay: z.number().int().min(1).max(31),
   thang: z.number().int().min(1).max(12),
   nam: z.number().int().min(1930).max(2025),
+  gio: GioSinhZ,
   gioi_tinh: z.enum(["nam", "nu"]).default("nam"),
   dong_y_tu_nguyen: z.literal(true),
 }).strict();
@@ -164,6 +168,7 @@ export async function POST(req: Request): Promise<NextResponse> {
         ngay: tv.ngay,
         thang: tv.thang,
         nam: tv.nam,
+        ...(tv.gio ? { gio: tv.gio } : {}),
         gioi_tinh: tv.gioi_tinh,
         dong_y_tu_nguyen: true, // Chỉ proxy đặt true sau khi giải mã AES-256-GCM thành công.
       });
@@ -214,10 +219,20 @@ export async function POST(req: Request): Promise<NextResponse> {
           { status: 402 },
         );
       }
-      // Khoá giao dịch = HMAC(bí mật máy chủ, đội ngũ + ngày giờ VN): bấm hai lần / xem lại cùng đội ngũ trong ngày không
-      // trừ thêm (dung_sao trả "da_dung" khi khoá đã có). Tiền tố "hoi:" để hoan_sao_hoi (0024) nhận khoá khi phải hoàn.
+      // Khoá giao dịch = HMAC(bí mật máy chủ, danh tính đội ngũ không kèm giờ + ngày giờ VN): bổ sung thêm giờ sinh cho
+      // cùng đội ngũ trong ngày được tính lại Tứ Trụ miễn phí, không bị trừ Sao hai lần.
+      const boGio = (u: unknown) => {
+        if (!u || typeof u !== "object") return u;
+        const { gio: _g, ...con } = u as Record<string, unknown>;
+        return con;
+      };
+      const khungKhoa = {
+        ...payloadEngine,
+        ong_chu: boGio(payloadEngine.ong_chu),
+        doi_ngu: Array.isArray(payloadEngine.doi_ngu) ? payloadEngine.doi_ngu.map(boGio) : payloadEngine.doi_ngu,
+      };
       const ngay = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Ho_Chi_Minh" }).format(new Date());
-      const khoa = `hoi:doanh_chu:${createHmac("sha256", bi_mat).update(`doanh_chu|${JSON.stringify(payloadEngine)}|${ngay}`).digest("hex").slice(0, 40)}`;
+      const khoa = `hoi:doanh_chu:${createHmac("sha256", bi_mat).update(`doanh_chu|${JSON.stringify(khungKhoa)}|${ngay}`).digest("hex").slice(0, 40)}`;
       const { data: d } = await phien.sb.rpc("dung_sao", { p_so: gia, p_khoa: khoa, p_ghi_chu: "Phân tích đội ngũ Doanh Chủ" });
       const kqTru = d as { ket_qua?: string; so_du?: number } | null;
       if (kqTru?.ket_qua !== "da_dung") {

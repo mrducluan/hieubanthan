@@ -28,6 +28,7 @@ const Input = z.object({
   ngay: z.number().int().min(1).max(31),
   thang: z.number().int().min(1).max(12),
   nam: z.number().int().min(1930).max(2025),
+  gio: z.string().trim().regex(/^([01]\d|2[0-3]):[0-5]\d$/).optional(),
   gioi_tinh: z.enum(["nam", "nu"]).default("nam"),
   dong_y_tu_nguyen: z.literal(true),
 }).strict();
@@ -49,7 +50,7 @@ export async function POST(req: Request): Promise<NextResponse> {
   if (!parsed.success) {
     return NextResponse.json({ error: loiChung("dau_vao", en) }, { status: 422 });
   }
-  const { ma_moi, biet_danh, vai_tro, ngay, thang, nam, gioi_tinh } = parsed.data;
+  const { ma_moi, biet_danh, vai_tro, ngay, thang, nam, gio, gioi_tinh } = parsed.data;
   if (!ngayHopLe(nam, thang, ngay)) {
     return NextResponse.json({ error: loiChung("khong_hop_le", en) }, { status: 422 });
   }
@@ -68,11 +69,12 @@ export async function POST(req: Request): Promise<NextResponse> {
     thang,
     nam,
     gioi_tinh,
+    ...(gio ? { gio } : {}),
   });
-  // QLNS-1: bản "Cách làm việc của bạn" cho chính người vừa xác nhận — engine tính từ ngày sinh vừa nhập, không lưu.
+  // QLNS-1: bản "Cách làm việc của bạn" cho chính người vừa xác nhận — engine tính từ ngày/giờ sinh vừa nhập, không lưu.
   // Engine lỗi → vẫn trả mã (bản cá nhân là phần thêm, không chặn việc gửi mã cho trưởng nhóm).
   const namXem = Math.min(2050, Math.max(2020, new Date().getFullYear()));
-  const cn = await goiEngineDaKiem({ ngay, thang, nam, gioi_tinh, nam_xem: namXem }, "/v1/doanh-chu/ca-nhan", dauNgonNgu(req));
+  const cn = await goiEngineDaKiem({ ngay, thang, nam, ...(gio ? { gio } : {}), gioi_tinh, nam_xem: namXem }, "/v1/doanh-chu/ca-nhan", dauNgonNgu(req));
   return NextResponse.json({
     ca_nhan: cn.ok ? cn.body : null,
     tv_token,

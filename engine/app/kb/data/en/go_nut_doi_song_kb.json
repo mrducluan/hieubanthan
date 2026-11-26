@@ -1,0 +1,67 @@
+{
+  "_nguon": "Stage 1 — Deep Life-Bottleneck Resolution KB (English overlay) covering post-divorce recovery, marital friction cooling, business co-founder structuring, and chart-grounded two-sided classical demystification.",
+  "source_id": "go_nut_doi_song",
+  "school_id": "huyen_hoc_ung_dung",
+  "_trang_thai": "ban_phu_en",
+  "trang_thai": "nhap_ai",
+  "mau_la_so": {
+    "vcd_du_kien": "On your chart: {cung} ({chi}) has no resident major star, borrowing {sao_muon} from {cung_doi}.",
+    "vcd_khong_sao": "opposing trine stars",
+    "vcd_diem_manh": "",
+    "vcd_goc_nhin": "An empty {cung} is not a deficit — it acts as an adaptable mirror drawing strength from {sao_muon} across the axis.{diem_sang}",
+    "kk_du_kien": "On your chart: {sao} sits in {cung} ({chi}).",
+    "kk_goc_nhin": "In {cung}, {sao} carries two sides: unconventional speed and crisis agility when channeled into focused craft, balanced by watching impulsive leaps.",
+    "kk_diem_manh_mac_dinh": "unconventional speed and creative problem-solving",
+    "kk_mat_toi_mac_dinh": "impulsive leaps when under emotional pressure",
+    "sao_du_kien": "On your chart: {sao}{do_sang} resides in {cung} ({chi}).",
+    "sao_goc_nhin": "{sao} in {cung} pairs strong drive, decisiveness and independent capability on its bright side with a need for steadier pacing and calm listening under stress.",
+    "sao_tu_soi": "Self-reflection prompt for {sao} on your chart: {cau_tu_soi}",
+    "tt_tang_can": "hidden stems",
+    "tt_du_kien": "On your Four Pillars: {ten_tt} appears in your {vi_tri}.",
+    "tt_goc_nhin": "{ten_tt} brings sharp expression, independent judgment and problem-solving drive on its bright side; the key balance is moderating intensity and keeping room for calm dialogue.",
+    "tt_tu_soi": "Self-reflection prompt from your Four Pillars: {cau_tu_soi}",
+    "bc_gop_von": "From your chart ({ten_chuong}): {tra_loi}",
+    "bc_sau_do_vo": "Anchor from your chart ({ten_chuong}): {giai_thich}",
+    "bc_khac_khau": "Partnership rhythm on your chart: {song_cung}",
+    "khong_co_vcd": "As calculated here, your {cung} ({chi}) holds the major star(s) {sao}, so it is not an empty palace. What you were told may rest on a different birth time, star-placement method or school.",
+    "khong_co_tt": "As calculated here, {ten_tt} does not show on any pillar stem or among your hidden stems. What you were told may rest on a different birth time or method.",
+    "bc_sau_do_vo_nam": "{nam}: your chart shows a smoother rhythm for relationships, a good time to meet people and open up again once you feel ready."
+  },
+  "mach": {
+    "sau_do_vo": {
+      "tieu_de": "Rebuilding steadiness & opening up after a past breakup or divorce",
+      "goc_nhin_hai_mat": "In classical Eastern chart reading, early relationship turbulence reflects a learning curve around boundaries and partner dynamics rather than a permanent verdict on love. Once you step into a steadier cycle with clearer self-knowledge, a later bond built on calm mutual respect often lasts far longer.",
+      "viec_thuc_te": [
+        "Stabilize your independent finances and daily personal rhythm first before rushing into a new commitment",
+        "Note the recurring friction points from the past chapter (conflict style, money habits or family boundaries) so you spot them early next time",
+        "Take time to observe a new partner across everyday situations rather than deciding quickly during a lonely stretch"
+      ]
+    },
+    "khac_khau_vo_chong": {
+      "tieu_de": "Cooling communication friction when partners clash frequently",
+      "goc_nhin_hai_mat": "Couples who care deeply yet argue over small things usually clash in pacing — one side pushes for an immediate answer while the other needs breathing room or reassurance first. Your chart highlights that trigger point so you can adjust how you talk, not to label the relationship incompatible.",
+      "viec_thuc_te": [
+        "Agree not to debate money, parenting or extended-family issues late at night or when either person is exhausted",
+        "Replace broad blame with concrete weekly agreements (who handles which task, shared budget caps and personal rest windows)",
+        "Step outside your usual home routine for calm conversations so old tension cues do not take over"
+      ]
+    },
+    "gop_von_phan_vai": {
+      "tieu_de": "Role clarity & safeguards before pooling capital with a partner",
+      "goc_nhin_hai_mat": "Co-founded ventures succeed or fracture less from generic zodiac labels and far more from whether partners truly complement missing operational lanes and put clear decision rules in writing while goodwill is high.",
+      "viec_thuc_te": [
+        "Separate three lanes clearly in writing before contributing capital: market growth, financial/bookkeeping control and daily operations",
+        "Define exit terms, valuation rules and dual-approval spending thresholds upfront in your agreement",
+        "Run a bounded 1–3 month pilot project together first to test real working chemistry before committing major capital"
+      ]
+    },
+    "go_loi_phan_doa": {
+      "tieu_de": "A balanced two-sided look at the chart pattern worrying you",
+      "goc_nhin_hai_mat": "Classical manuals were written in an agrarian era that prized conformity, so bold, independent or fast-moving chart patterns were often described in harsh words. In modern work and life, those very same traits become sharp assets for adaptability, specialized craft and resilience when channeled well.",
+      "viec_thuc_te": [
+        "Treat your chart pattern as an operating manual for your temperament: place bold energy into work that rewards it rather than fearing an old label",
+        "Keep two practical stabilizers — a financial reserve buffer and unhurried communication with loved ones — to balance sharper edges"
+      ]
+    }
+  }
+}
