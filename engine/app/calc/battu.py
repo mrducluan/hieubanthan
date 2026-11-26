@@ -84,7 +84,8 @@ GIO_TY = ("da_ty", "sang_ngay")
 
 
 def la_so(lich: dt.datetime, gioi_tinh: str, gio_ty: str = "da_ty",
-          utc_lich: float = config.CALENDAR_MERIDIAN_TZ, nam_ban_cau: bool = False) -> dict:
+          utc_lich: float = config.CALENDAR_MERIDIAN_TZ, nam_ban_cau: bool = False,
+          *, co_gio: bool = True) -> dict:
     """`lich`: giờ sinh theo kinh tuyến lịch UTC+7 (đã quy đổi múi giờ lịch sử). EN-6 BI-3: sinh ở nước ngoài thì
     `lich` là giờ chuẩn địa phương và `utc_lich` = múi giờ chuẩn nơi sinh — chỉ dùng để so mốc tiết khí (năm, tháng,
     khởi vận); trụ ngày, trụ giờ vẫn theo ngày giờ địa phương (ABROAD_LOCAL_TIME).
@@ -95,7 +96,10 @@ def la_so(lich: dt.datetime, gioi_tinh: str, gio_ty: str = "da_ty",
 
     HTT-2 H1 — `nam_ban_cau=True` (người dùng chọn, chỉ mở cho nơi sinh ngoài chí tuyến Nam): CHỈ lớp điều hậu của dụng thần
     cách 1 đọc theo mùa thực nơi sinh (tháng Tỵ Ngọ Mùi là giữa đông → cần Hỏa; Hợi Tý Sửu là giữa hè → cần Thủy). Trụ,
-    cách cục, cách 2, đại vận không đổi — không đảo trụ tháng (không có cổ thư; thuyết hiện đại, ghi rõ trong lời)."""
+    cách cục, cách 2, đại vận không đổi — không đảo trụ tháng (không có cổ thư; thuyết hiện đại, ghi rõ trong lời).
+
+    `co_gio=False`: lập Tam Trụ (6 chữ Năm – Tháng – Ngày) khi khuyết giờ sinh — không thêm trụ giờ giả tạo vào điểm ngũ hành,
+    thân vượng/nhược hay thiên can thấu của cách cục."""
     if gioi_tinh not in ("nam", "nu"):
         raise ValueError("gioi_tinh phải là 'nam' hoặc 'nu'")
     if gio_ty not in GIO_TY:
@@ -107,27 +111,31 @@ def la_so(lich: dt.datetime, gioi_tinh: str, gio_ty: str = "da_ty",
     (t_truoc, g_truoc), (t_sau, _) = tk.tiet_bao_quanh(t_utc)
     k = ((g_truoc - 315) % 360) // 30                    # 0 = tháng Dần
     chi_thang, can_thang = (2 + k) % 12, (can_nam * 2 + 2 + k) % 10
-    # --- trụ ngày + trụ giờ
+    # --- trụ ngày (+ trụ giờ khi co_gio=True)
     ngay = timebase.ngay_can_chi(lich)
-    sang_ngay = gio_ty == "sang_ngay" and lich.hour == 23
+    sang_ngay = co_gio and gio_ty == "sang_ngay" and lich.hour == 23
     if sang_ngay:
         ngay += dt.timedelta(days=1)
     i_ngay = (ngay.toordinal() + 1721425 + 49) % 60
     can_ngay, chi_ngay = i_ngay % 10, i_ngay % 12
-    chi_gio = ((lich.hour + 1) // 2) % 12
-    can_goc_gio = (can_ngay + 1) % 10 if lich.hour == 23 and not sang_ngay else can_ngay  # dạ Tý: Tý của ngày sau
-    can_gio = ((can_goc_gio % 5) * 2 + chi_gio) % 10
-
-    tru = [_gz(_chi_so_60(can_nam, chi_nam)), _gz(_chi_so_60(can_thang, chi_thang)),
-           _gz(i_ngay), _gz(_chi_so_60(can_gio, chi_gio))]
+    if co_gio:
+        chi_gio = ((lich.hour + 1) // 2) % 12
+        can_goc_gio = (can_ngay + 1) % 10 if lich.hour == 23 and not sang_ngay else can_ngay  # dạ Tý: Tý của ngày sau
+        can_gio = ((can_goc_gio % 5) * 2 + chi_gio) % 10
+        tru = [_gz(_chi_so_60(can_nam, chi_nam)), _gz(_chi_so_60(can_thang, chi_thang)),
+               _gz(i_ngay), _gz(_chi_so_60(can_gio, chi_gio))]
+    else:
+        tru = [_gz(_chi_so_60(can_nam, chi_nam)), _gz(_chi_so_60(can_thang, chi_thang)), _gz(i_ngay)]
     dm = tru[2]["can"]
     tang = [TANG_CAN[t["chi"]] for t in tru]
+    tt_can = [thap_than(dm, tru[0]["can"]), thap_than(dm, tru[1]["can"]), "Nhật chủ"]
+    if co_gio:
+        tt_can.append(thap_than(dm, tru[3]["can"]))
     kq = {
         "tru": tru,
         "nhat_chu": {"can": dm, "ngu_hanh": _nh_can(dm), "am_duong": "Dương" if can_ngay % 2 == 0 else "Âm"},
         "tang_can": tang,
-        "thap_than_can": [thap_than(dm, tru[0]["can"]), thap_than(dm, tru[1]["can"]), "Nhật chủ",
-                          thap_than(dm, tru[3]["can"])],
+        "thap_than_can": tt_can,
         "thap_than_chi": [[thap_than(dm, c) for c in x] for x in tang],
         "nam_bat_tu": nam,
         "nam_duong": lich.year,          # EN-5.3: năm dương lịch sinh (tiểu vận đếm từ năm này)
@@ -203,7 +211,7 @@ def cach_cuc_tbct(ls: dict) -> dict:
     nc = ls["nhat_chu"]["can"]
     chi_thang = ls["tru"][1]["chi"]
     tang = TANG_CAN[chi_thang]
-    lo = [ls["tru"][i]["can"] for i in (0, 1, 3)]
+    lo = [ls["tru"][i]["can"] for i in (0, 1, *([3] if len(ls["tru"]) > 3 else []))]
     tt_ban = thap_than(nc, tang[0])
     if tt_ban in ("Tỷ Kiên", "Kiếp Tài"):
         ma = ("kien_loc" if LOC[nc] == chi_thang else

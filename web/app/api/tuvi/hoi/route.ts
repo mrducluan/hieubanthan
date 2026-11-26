@@ -12,6 +12,8 @@ import { LaSoVao } from "@/lib/la-so-vao";
 import { khachDichVu } from "@/lib/thanh-toan/cong";
 import { MO_HINH_NHUNG, NGUONG_Y_DINH } from "@/lib/hoc-tuvi";
 import { dauPhanLoaiAi } from "@/lib/phan-loai-ai";
+import { daMoBaoCaoHoi } from "@/lib/luan-giai-sao";
+import { catLuanHoiChat } from "@/lib/sao-xem-truoc";
 
 const LaSo = LaSoVao;
 
@@ -38,12 +40,15 @@ async function xuLy(req: Request): Promise<NextResponse> {
   const dau = { ...dauNguoiGoi(req), ...(await dauPhanLoaiAi(req)) };
   const kq = await goiEngineDaKiem(parsed.data, "/v1/tuvi/hoi", dau);
   if (!kq.ok) return kq.res;
-  const goc = kq.body as TraLoi;
+  const goc = kq.body as TraLoi & Record<string, unknown>;
+  let cuoi: Record<string, unknown> = goc;
   if (goc?.co_the_goi_y && !goc.nhan_ra_y_dinh && !["an_toan", "tu_choi_nhe", "dan_huong"].includes(goc.phan_loai?.xu_ly ?? "")) {
     const goiY = await thuGoiY(parsed.data, dau).catch((e: unknown) => { baoLoi(e, { noi: "api", duong: "/api/tuvi/hoi#vec" }); return null; });
-    if (goiY) return NextResponse.json(goiY);
+    if (goiY) cuoi = goiY as Record<string, unknown>;
   }
-  return NextResponse.json(goc);
+  const canKiemSao = Boolean(cuoi?.luan_hoi || cuoi?.doi_song_lien_ket);
+  const quyen = canKiemSao ? await daMoBaoCaoHoi(req, "tuvi", parsed.data.la_so) : true;
+  return NextResponse.json(catLuanHoiChat(cuoi, quyen));
 }
 
 /** Nhánh kho vectơ: null = không có gợi ý (thiếu Supabase, chưa chạy 0017, không đủ gần, engine lỗi…). */

@@ -28,6 +28,7 @@ class ThanhVienIn(BaseModel):
     thang: int = Field(..., ge=1, le=12)
     nam: int = Field(..., ge=1930, le=2025)
     gioi_tinh: str = Field(default="nam", pattern="^(nam|nu)$")
+    gio: str | None = Field(default=None, pattern=r"^([01]\d|2[0-3]):[0-5]\d$", description="Giờ sinh HH:MM tuỳ chọn; thiếu = lập Tam Trụ chuẩn (không gán giả giờ Ngọ)")
     dong_y_tu_nguyen: bool = Field(default=False, description="Bắt buộc true cho mỗi thành viên (Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15)")
 
 
@@ -86,6 +87,7 @@ class CaNhanIn(BaseModel):
     thang: int = Field(..., ge=1, le=12)
     nam: int = Field(..., ge=1930, le=2025)
     gioi_tinh: str = Field(default="nam", pattern="^(nam|nu)$")
+    gio: str | None = Field(default=None, pattern=r"^([01]\d|2[0-3]):[0-5]\d$", description="Giờ sinh HH:MM tuỳ chọn; thiếu = lập Tam Trụ chuẩn")
     nam_xem: int = Field(..., ge=2020, le=2050)
 
 
@@ -95,7 +97,7 @@ def api_ca_nhan(inp: CaNhanIn) -> dict:
         dt.date(inp.nam, inp.thang, inp.ngay)
     except ValueError as e:
         raise HTTPException(422, detail="Ngày sinh không hợp lệ.") from e
-    kq = doanh_chu_quan_ly.ca_nhan(inp.ngay, inp.thang, inp.nam, inp.gioi_tinh, inp.nam_xem)
+    kq = doanh_chu_quan_ly.ca_nhan(inp.ngay, inp.thang, inp.nam, inp.gioi_tinh, inp.nam_xem, inp.gio)
     return {"engine_version": ENGINE_VERSION, "khong_luu_du_lieu": True, **kq}
 
 
