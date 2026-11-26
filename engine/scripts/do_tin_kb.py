@@ -22,7 +22,7 @@ def dung() -> str:
     ra = ["# Độ tin của kho tri thức (KT-TT6)", "",
           "> Tệp này do `engine/scripts/do_tin_kb.py` dựng từ sổ `engine/app/kb/do_tin.py` — **không sửa tay**. Nội bộ, không hiện",
           "> cho người dùng. Mức nói \"lời này truy được về đâu\", KHÔNG phải \"đã thẩm định\" (thẩm định là việc của chuyên gia).",
-          "", "## Thang năm mức", ""]
+          "", f"## Thang {len(do_tin.THANG)} mức", ""]
     ra += [f"- **{do_tin.TEN_MUC[m]}** (`{m}`)" for m in do_tin.THANG]
     ra += ["", "## Số tệp theo mảng", "", "| Mảng | " + " | ".join(do_tin.TEN_MUC[m] for m in do_tin.THANG) + " |",
            "|---|" + "---|" * len(do_tin.THANG)]

@@ -12,7 +12,8 @@ import type { ZodTypeAny } from "zod";
 import { dauNguoiGoi, goiEngineDaKiem as goiEngine, laBanAnh, loiChung, mienPhiBanAnh } from "@/lib/proxy";
 import { layCauHinh } from "@/lib/cau-hinh";
 import { biMat, chaoMungConNhan, coTaiKhoan, phienNguoiDung } from "@/lib/cua-sao";
-import { boTinhTrangKhoa, catXemTruoc, taoKhoaGiaoDichLuanGiai, xetQuyenDocHoi, type BaoCaoDay, type QuyenDocHoi } from "@/lib/sao-xem-truoc";
+import { boTinhTrangKhoa, catXemTruoc, khoaLaBiCat, taoKhoaGiaoDichLuanGiai, xetQuyenDocHoi, type BaoCaoDay, type QuyenDocHoi } from "@/lib/sao-xem-truoc";
+import { baoLoi } from "@/lib/giam-sat";
 import { mangLuanGiai } from "@/lib/luan-giai-mang";
 import { congDangBat } from "@/lib/thanh-toan/cong";
 import { uuDaiCho } from "@/lib/uu-dai-may-chu";
@@ -187,6 +188,11 @@ export async function luanGiaiCoSao(req: Request, schema: ZodTypeAny, path: stri
     if (!kq.ok) return kq.res;
     const day = kq.body as BaoCaoDay;
     const ban = catXemTruoc(day, mienPhi + tang);
+    // SAO-2 Default-Deny: khoá cấp gốc chưa phân loại bị cắt im lặng → báo (chỉ tên khoá, không nội dung) để phân loại.
+    if (ban.so_khoa > 0) {
+      const la = khoaLaBiCat(day);
+      if (la.length) baoLoi(new Error("sao2_khoa_la_bi_cat"), { noi: "luan_giai_sao", mo_dun: moDun, khoa: la.slice(0, 8).join(",") });
+    }
     const maTang = tang ? day.chuong[mienPhi]?.ma ?? null : null;
     let soDu: number | null = null;
     if (phien) { const { data } = await phien.sb.rpc("so_du_sao"); soDu = typeof data === "number" ? data : null; }

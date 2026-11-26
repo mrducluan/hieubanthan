@@ -175,6 +175,16 @@ export interface KhuVucVan9CoDien {
   ung_dung: string;
 }
 
+export interface DoiChieuHaiPhai {
+  loai: string;
+  tieu_de: string;
+  goc_bat_trach: string;
+  goc_huyen_khong_van_9: string;
+  /** Biến thể lời dung hoà theo cặp sao thật: sao_tho (2/5) · sao_9_1 · chung (trung tính, không nêu màu). */
+  ma_dung_hoa?: "sao_tho" | "sao_9_1" | "chung";
+  cach_dung_hoa: string;
+}
+
 export interface UngDungCoDien {
   khoa?: boolean;
   ma: string;
@@ -183,6 +193,7 @@ export interface UngDungCoDien {
   tom_tat_dung_than?: string;
   hanh_ung_dung?: HanhUngDungCoDien[];
   khu_vuc_van_9?: KhuVucVan9CoDien[];
+  doi_chieu_hai_phai?: DoiChieuHaiPhai;
 }
 
 export interface BaoCaoDoiSong {

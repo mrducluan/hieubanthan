@@ -114,5 +114,25 @@
       "ngu_hanh_dieu_hoa": "Cân bằng sáng – tối, gọn gàng",
       "ung_dung": "Đảm bảo thông gió tự nhiên, ánh sáng vừa mắt và lối đi không vướng đồ đạc để giữ dòng khí ổn định."
     }
+  },
+  "doi_chieu_hai_phai": {
+    "bt_thuan_hk_tinh": {
+      "tieu_de": "Đối chiếu hai trường phái tại hướng cửa (Bát Trạch & Huyền Không Vận 9)",
+      "goc_bat_trach": "Theo Bát Trạch (xét độ hợp với mệnh quái người ở): hướng cửa này thuận nhóm mệnh của chủ nhà, tốt cho tâm thế ổn định lâu dài.",
+      "goc_huyen_khong_van_9": "Theo Huyền Không Vận 9 (xét nhịp khí thời vận tại cửa, cặp sao {cap}): khu vực cửa đang có sao cần giữ yên tĩnh và tiết khí nhẹ.",
+      "cach_dung_hoa": {
+        "sao_tho": "Giữ nguyên hướng cửa và hướng quay đầu giường/bếp theo Bát Trạch; riêng tại thềm cửa ưu tiên gam trắng – xám sáng, gọn thoáng, tránh đèn nóng gắt hoặc sửa chữa đục phá lớn.",
+        "chung": "Giữ nguyên hướng cửa và hướng quay đầu giường/bếp theo Bát Trạch; riêng tại thềm cửa giữ lối đi thông thoáng, ánh sáng vừa mắt, không chất đồ chắn cửa và tránh sửa chữa đục phá lớn khi chưa cần."
+      }
+    },
+    "hk_vuong_bt_lech": {
+      "tieu_de": "Đối chiếu hai trường phái tại hướng cửa (Bát Trạch & Huyền Không Vận 9)",
+      "goc_bat_trach": "Theo Bát Trạch (xét độ hợp với mệnh quái người ở): hướng cửa chưa cùng nhóm Đông/Tây tứ mệnh với chủ nhà.",
+      "goc_huyen_khong_van_9": "Theo Huyền Không Vận 9 (xét nhịp khí thời vận tại cửa, cặp sao {cap}): phía cửa đang đón sao đương vận/sinh khí thuận lợi cho công việc và giao thương.",
+      "cach_dung_hoa": {
+        "sao_9_1": "Tận dụng lối cửa thoáng sáng để đón khí Vận 9 (nhất là nhà vừa ở vừa làm việc); đồng thời xoay đầu giường ngủ, miệng bếp và ghế ngồi làm việc về các hướng hợp Bát Trạch của chủ nhà để cân bằng.",
+        "chung": "Giữ lối cửa thông thoáng, gọn gàng để phía cửa phát huy nhịp khí thuận; đồng thời xoay đầu giường ngủ, miệng bếp và ghế ngồi làm việc về các hướng hợp Bát Trạch của chủ nhà để cân bằng."
+      }
+    }
   }
 }

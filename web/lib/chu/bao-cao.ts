@@ -130,4 +130,5 @@ export const CHU_BAO_CAO = {
   "cd.khung_gio": { nhom: K, nhan: "Nhãn khung giờ tập trung", mac_dinh: "Khung giờ tập trung:", en: "Focus hours:" },
   "cd.thoi_quen": { nhom: K, nhan: "Nhãn nếp dưỡng khí", mac_dinh: "Nếp thực hành:", en: "Daily habits:" },
   "cd.khoa_mo_ta": { nhom: K, nhan: "Mô tả khi bảng ứng dụng cổ điển đang khoá", mac_dinh: "Mở toàn bộ báo cáo để xem chi tiết bảng màu sắc, chất liệu, phương vị và khung giờ Ngũ hành của riêng lá số này.", en: "Unlock the full report to view your personalized Five-Element colors, materials, directions and focus hours." },
+  "cd.dung_hoa": { nhom: K, nhan: "Nhãn cách dung hoà 2 phái", mac_dinh: "Cách dung hoà thực tế:", en: "Practical synthesis:" },
 } as const satisfies BangChu;
