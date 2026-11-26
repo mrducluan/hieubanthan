@@ -1,5 +1,5 @@
 "use client";
-// Chặng 2 — Không gian Cố vấn Kinh doanh & Bàn cờ E2EE (/co-van-kinh-doanh).
+// Chặng 2 — Không gian Cố vấn Kinh doanh (/co-van-kinh-doanh): Cẩm nang · Hỏi quyết định · Khi góp vốn · Sổ nháp.
 import { useState } from "react";
 import { ArrowUpRight, Briefcase, Compass, LockKeyhole, Users } from "lucide-react";
 import Link from "@/components/khung/Lien";
@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { BanCoMaHoaE2EE } from "./BanCoMaHoaE2EE";
 import { CamNangKinhDoanh } from "./CamNangKinhDoanh";
 import { CongCoVanTamTai } from "./CongCoVanTamTai";
-import { SoiGopVonDoiTac } from "./SoiGopVonDoiTac";
+import { GopVon } from "@/components/doanh-chu/GopVon";
 
 type TabKinhDoanh = "quyet_dinh" | "cam_nang" | "gop_von" | "ban_co_e2ee";
 
@@ -57,7 +57,7 @@ export function KhungCoVanKinhDoanh() {
             tab === "gop_von" ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:text-fg",
           )}
         >
-          <Users className="size-4" aria-hidden /> Soi Bù Khuyết Góp Vốn (2–4 người)
+          <Users className="size-4" aria-hidden /> Khi góp vốn (2–4 người)
         </button>
         <button
           type="button"
@@ -70,13 +70,13 @@ export function KhungCoVanKinhDoanh() {
             tab === "ban_co_e2ee" ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:text-fg",
           )}
         >
-          <LockKeyhole className="size-4" aria-hidden /> Bàn cờ Đối tác &amp; Mặt bằng (E2EE)
+          <LockKeyhole className="size-4" aria-hidden /> Sổ nháp đối tác &amp; mặt bằng
         </button>
       </div>
 
       {tab === "cam_nang" && <CamNangKinhDoanh matBangTuBanCo={mbChuyenSang} />}
       {tab === "quyet_dinh" && <CongCoVanTamTai macDinhCheDo="kinh_doanh" />}
-      {tab === "gop_von" && <SoiGopVonDoiTac danhSachTuBanCo={dsChuyenSang} />}
+      {tab === "gop_von" && <GopVon key={dsChuyenSang ? "so" : "moi"} tuSoNhap={dsChuyenSang} />}
       {tab === "ban_co_e2ee" && (
         <BanCoMaHoaE2EE
           onChuyenSangGopVon={(ds) => {

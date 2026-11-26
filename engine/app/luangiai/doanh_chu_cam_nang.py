@@ -20,7 +20,6 @@ from app.luangiai import (
     battu_doi_song as btd,
     doanh_chu_mat_bang as dcmb,
     tuvi_doi_song as tvd,
-    ung_dung_co_dien as ud,
 )
 
 _TEP = "doanh_chu_cam_nang_kb.json"
@@ -51,7 +50,6 @@ def _cham_mot_mat_bang(
     ngay_sinh: dt.date,
     gioi_tinh: str,
     hom_nay: dt.date,
-    tinh_ngay: bool,
     k: dict,
 ) -> dict:
     do_h = float(mb_in["do_huong"])
@@ -61,53 +59,32 @@ def _cham_mot_mat_bang(
         f"Mặt bằng #{idx}" if ngon_ngu.la_viet() else f"Candidate #{idx}"
     )
 
-    # Tái sử dụng doanh_chu_mat_bang.kiem_tra_mat_bang (nếu không phải mặt bằng đầu thì dùng bản rút gọn không chạy lặp Kỳ Môn 60 ngày)
-    if tinh_ngay:
-        kq_mb = dcmb.kiem_tra_mat_bang(
-            do_huong=do_h, nam_xay=nam_xay,
-            ngay_sinh=ngay_sinh.day, thang_sinh=ngay_sinh.month, nam_sinh=ngay_sinh.year,
-            gioi_tinh=gioi_tinh, loai_hinh=loai_hinh, ngay_bat_dau=hom_nay,
-        )
-    else:
-        goc_fn = dcmb._ngay_khai_truong
-        try:
-            dcmb._ngay_khai_truong = lambda *a, **kw: {"ds": [], "cach_chon": ""}  # type: ignore[assignment]
-            kq_mb = dcmb.kiem_tra_mat_bang(
-                do_huong=do_h, nam_xay=nam_xay,
-                ngay_sinh=ngay_sinh.day, thang_sinh=ngay_sinh.month, nam_sinh=ngay_sinh.year,
-                gioi_tinh=gioi_tinh, loai_hinh=loai_hinh, ngay_bat_dau=hom_nay,
-            )
-        finally:
-            dcmb._ngay_khai_truong = goc_fn  # type: ignore[assignment]
-
-    # Tính Thành Môn Quyết (城門訣) từ calc.huyen_khong.thanh_mon
-    info_mb = kq_mb["mat_bang"]
-    van_nay = int(info_mb["van_hien_tai"])
-    tm_raw = hk.thanh_mon(int(info_mb["van"] or van_nay), info_mb["son_toa"])
-    tm_chon = tm_raw["chinh"] if tm_raw["chinh"]["dung_duoc"] else tm_raw["phu"] if tm_raw["phu"]["dung_duoc"] else None
-    if tm_chon:
-        vai_str = ("Chính Thành Môn" if tm_chon["vai"] == "chinh" else "Phó Thành Môn") if ngon_ngu.la_viet() else (
-            "Primary Castle Gate" if tm_chon["vai"] == "chinh" else "Secondary Castle Gate"
-        )
-        loi_tm = k["thanh_mon"]["co"].format(
-            vai=vai_str,
-            cung=ten_kb.ten("cung_hk", tm_chon["cung"]),
-            phuong=ten_kb.ten("huong", tm_chon["phuong"]),
-            van=tm_raw["van"],
-        )
-    else:
-        loi_tm = k["thanh_mon"]["khong"].format(van=tm_raw["van"])
-
-    # Khóa xếp hạng tất định (không trả điểm số ra ngoài, chỉ để xếp mặt bằng thuận nhất lên đầu):
-    # 1) Không phạm Không Vong, 2) Cửa chính thuận/cân bằng, 3) Số khu vực đạt mức "thuan", 4) Có Thành Môn đắc vận
-    cua_kv = next((x for x in kq_mb["danh_sach_khu_vuc"] if x["ma"] == "cua_chinh"), {})
-    so_khu_thuan = sum(1 for x in kq_mb["danh_sach_khu_vuc"] if x.get("muc") == "thuan")
-    hang_khoa = (
-        info_mb.get("canh_bao_ma") != "khong_vong",
-        cua_kv.get("muc") == "thuan",
-        so_khu_thuan,
-        bool(tm_chon),
+    # Một bộ tính với Mặt bằng & Khai trương (MB-1); không xếp hạng các mặt bằng (không điểm số).
+    kq_mb = dcmb.kiem_tra_mat_bang(
+        do_huong=do_h, nam_xay=nam_xay,
+        ngay_sinh=ngay_sinh.day, thang_sinh=ngay_sinh.month, nam_sinh=ngay_sinh.year,
+        gioi_tinh=gioi_tinh, loai_hinh=loai_hinh, ngay_bat_dau=hom_nay,
     )
+    info_mb = kq_mb["mat_bang"]
+
+    # Thành Môn chỉ khi biết năm xây (vận xây dựng) — không biết năm thì không lập bàn sao, không nói Thành Môn (MB-1).
+    thanh_mon_quyet = None
+    if info_mb.get("van"):
+        tm_raw = hk.thanh_mon(int(info_mb["van"]), info_mb["son_toa"])
+        tm_chon = tm_raw["chinh"] if tm_raw["chinh"]["dung_duoc"] else tm_raw["phu"] if tm_raw["phu"]["dung_duoc"] else None
+        if tm_chon:
+            loi_tm = k["thanh_mon"]["co"].format(
+                vai=k["thanh_mon"]["vai"][tm_chon["vai"]],
+                phuong=ten_kb.ten("huong", tm_chon["phuong"]),
+                van=tm_raw["van"],
+            )
+        else:
+            loi_tm = k["thanh_mon"]["khong"].format(van=tm_raw["van"])
+        thanh_mon_quyet = {
+            "co_thanh_mon": bool(tm_chon),
+            "phuong_thanh_mon": ten_kb.ten("huong", tm_chon["phuong"]) if tm_chon else None,
+            "luan_giai": loi_tm,
+        }
 
     ds_ngay_kt = kq_mb["ngay_khai_truong"]
     if not ngon_ngu.la_viet() and ds_ngay_kt:
@@ -115,7 +92,7 @@ def _cham_mot_mat_bang(
         ds_ngay_kt = [{**x, "can_chi": lich_hien.can_chi(x["can_chi"]) if x.get("can_chi") else ""} for x in ds_ngay_kt]
 
     return {
-        "_hang": hang_khoa,
+        "thu_tu": idx,
         "ten_diem": ten_diem,
         "loai_hinh": kq_mb["loai_hinh"],
         "do_huong": info_mb["do_huong"],
@@ -124,11 +101,7 @@ def _cham_mot_mat_bang(
         "cuc_ten": info_mb["cuc_ten"],
         "canh_bao_kiem_huong": info_mb["canh_bao_kiem_huong"],
         "tong_quan": kq_mb["tong_quan"],
-        "thanh_mon_quyet": {
-            "co_thanh_mon": bool(tm_chon),
-            "phuong_thanh_mon": ten_kb.ten("huong", tm_chon["phuong"]) if tm_chon else None,
-            "luan_giai": loi_tm,
-        },
+        "thanh_mon_quyet": thanh_mon_quyet,
         "danh_sach_khu_vuc": kq_mb["danh_sach_khu_vuc"],
         "ngay_khai_truong": ds_ngay_kt,
     }
@@ -145,32 +118,23 @@ def lap_cam_nang(
 ) -> dict:
     hom_nay = ngay_xem or hom_nay_vn()
     k = _kb()
-    kb_ud = nap.doc("ung_dung_co_dien_kb.json")
     co_gio = bool(gio_sinh)
 
-    # ---- BÁT TỰ & DỤNG THẦN (Tứ trụ khi có giờ, Tam trụ khi chưa có giờ) --------------------------------------------
+    # ---- BÁT TỰ: hành đang ít theo điểm năm hành của lá số (phần công khai; không dùng dụng thần của chương trả phí) --
     if co_gio:
         hh, mm = (int(x) for x in str(gio_sinh).split(":"))
         lich_bt = dt.datetime(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, hh, mm)
-        ls_bt = bt_calc.la_so(lich_bt, gioi_tinh=gioi_tinh, co_gio=True)
-        bc_bt = btd.lap({"lich": lich_bt, "gioi_tinh": gioi_tinh, "gio_ty": "da_ty"}, hom_nay, ls=ls_bt)
-        u_bt = ud.tu_bao_cao_battu(bc_bt)
-        hanh_bu_goc = [
-            next(hg for hg in ("Kim", "Mộc", "Thủy", "Hỏa", "Thổ") if ud._HANH_SLUG[hg] == x["hanh_ma"])
-            for x in (u_bt or {}).get("hanh_ung_dung", [])
-        ]
     else:
         lich_bt = dt.datetime(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, 12, 0)
-        ls_bt = bt_calc.la_so(lich_bt, gioi_tinh=gioi_tinh, co_gio=False)
-        diem_tmp = {_NORM_H[hk_k]: float(v) for hk_k, v in ls_bt["ngu_hanh"]["diem"].items()}
-        sx_thieu = sorted(diem_tmp.items(), key=lambda kv: kv[1])
-        hanh_bu_goc = [sx_thieu[0][0], sx_thieu[1][0]]
+    ls_bt = bt_calc.la_so(lich_bt, gioi_tinh=gioi_tinh, co_gio=co_gio)
+    diem_tmp = {_NORM_H[hk_k]: float(v) for hk_k, v in ls_bt["ngu_hanh"]["diem"].items()}
+    hanh_bu_goc = [h for h, _ in sorted(diem_tmp.items(), key=lambda kv: kv[1])[:2]]
 
     diem_norm = {_NORM_H[hk_k]: float(v) for hk_k, v in ls_bt["ngu_hanh"]["diem"].items()}
     nc_can = ls_bt["nhat_chu"]["can"]
     nc_hanh = _NORM_H[ls_bt["nhat_chu"]["ngu_hanh"]]
     hanh_chinh = hanh_bu_goc[0] if hanh_bu_goc else "Thổ"
-    the_hanh = kb_ud["ngu_hanh"][hanh_chinh]
+    ten_hanh_chinh = ten_kb.ten("hanh", hanh_chinh)
 
     # ---- TỬ VI (Thiên Di · Nô Bộc · Điền Trạch, chỉ khi có giờ sinh chính xác) --------------------------------------
     muc_thien_di = None
@@ -201,7 +165,6 @@ def lap_cam_nang(
         "ten_mui_nhon": mui_info["ten"],
         "chien_luoc_cot_loi": mui_info["chien_luoc"],
         "rui_ro_can_giu": mui_info["rui_ro_can_giu"],
-        "phuong_vi_uu_tien": pv_info["huong_uu_tien"],
         "nganh_nghe_bo_tro_van_9": pv_info["nganh_bo_tro"],
         "goc_nhin_thien_di": k["thien_di_thi_truong"][td_key],
     }
@@ -210,19 +173,10 @@ def lap_cam_nang(
     ds_mb_ra = []
     ds_uv = (mat_bang_ung_vien or [])[:3]
     if ds_uv:
-        tam = [
-            _cham_mot_mat_bang(mb, idx=i + 1, ngay_sinh=ngay_sinh, gioi_tinh=gioi_tinh, hom_nay=hom_nay, tinh_ngay=False, k=k)
+        ds_mb_ra = [
+            _cham_mot_mat_bang(mb, idx=i + 1, ngay_sinh=ngay_sinh, gioi_tinh=gioi_tinh, hom_nay=hom_nay, k=k)
             for i, mb in enumerate(ds_uv)
         ]
-        tam.sort(key=lambda x: x["_hang"], reverse=True)
-        # Tính đủ 5 ngày khai trương + giờ Kỳ Môn cho mặt bằng đứng đầu để phản hồi nhanh < 150ms
-        dau_goc = next(mb for mb in ds_uv if round(float(mb["do_huong"]) % 360.0, 1) % 360.0 == tam[0]["do_huong"])
-        tam[0] = _cham_mot_mat_bang(dau_goc, idx=1, ngay_sinh=ngay_sinh, gioi_tinh=gioi_tinh, hom_nay=hom_nay, tinh_ngay=True, k=k)
-        tam[0]["ten_diem"] = (dau_goc.get("ten_diem") or "").strip() or tam[0]["ten_diem"]
-        for rank_idx, item in enumerate(tam, start=1):
-            item.pop("_hang", None)
-            item["thu_tu_uu_tien"] = rank_idx
-            ds_mb_ra.append(item)
 
     chon_dia_diem_cua_hang = {
         "menh_quai_chu": ten_quai,
@@ -245,15 +199,12 @@ def lap_cam_nang(
     fmt_vp = {
         "quai": ten_quai,
         "huong_tot": ", ".join(huong_tot[:3]),
-        "hanh_can": the_hanh["ten"],
-        "mau_sac": the_hanh["mau_sac"].lower(),
-        "chat_lieu": the_hanh["chat_lieu"].lower(),
-        "khung_gio": the_hanh["khung_gio"],
+        "hanh_can": ten_hanh_chinh,
     }
     bo_tri_van_phong = {
         "nhat_chu": f"{ten_kb.ten('can', nc_can)} ({ten_kb.ten('hanh', nc_hanh)})",
         "co_gio": co_gio,
-        "hanh_bo_tro_khong_gian": the_hanh["ten"],
+        "hanh_bo_tro_khong_gian": ten_hanh_chinh,
         "nguyen_tac_4_diem": [s.format(**fmt_vp) for s in k["bo_tri_van_phong_chu"]["nguyen_tac_4_diem"]],
     }
 

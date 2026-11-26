@@ -25,23 +25,18 @@
   },
   "phuong_vi_thi_truong": {
     "Kim": {
-      "huong_uu_tien": "West and Northwest corridors relative to your base",
       "nganh_bo_tro": "Finance, precision equipment, standardized retail chains, operations consulting, engineering"
     },
     "Mộc": {
-      "huong_uu_tien": "East and Southeast corridors relative to your base",
       "nganh_bo_tro": "Education, wellness, timber/interiors, clean food & agriculture, sustainable consumer goods"
     },
     "Thủy": {
-      "huong_uu_tien": "North corridor or high-flow commercial hubs near major transit arteries",
       "nganh_bo_tro": "Logistics, e-commerce distribution, beverages, travel & hospitality, advisory services"
     },
     "Hỏa": {
-      "huong_uu_tien": "South corridor (aligned with Period-9 Purple Fire prosperity, 2024–2043)",
       "nganh_bo_tro": "Technology/AI, digital media, hot F&B concepts, beauty & aesthetics, energy, live experiences"
     },
     "Thổ": {
-      "huong_uu_tien": "Central urban hubs, Northeast or Southwest corridors",
       "nganh_bo_tro": "Commercial real estate, warehousing, construction materials, staple goods, fulfillment operations"
     }
   },
@@ -51,8 +46,12 @@
     "chua_co_gio": "Birth hour is not yet provided, so market direction is derived from your BaZi Three Pillars and Personal Trigram (add birth hour to unlock your Zi Wei Travel Palace)."
   },
   "thanh_mon": {
-    "co": "Active Castle Gate (Cheng Men `{vai}` in {cung} palace — {phuong} sector): in Shen's Xuan Kong Feng Shui, this acts as a secondary Period-{van} wealth intake. Placing a secondary entrance, large window, reception counter or bright signage in the {phuong} sector strongly supports customer flow.",
-    "khong": "Neither adjacent palace forms an active Period-{van} Castle Gate for this facing — focus daylight and foot-traffic intake cleanly on the main entrance and cashier sector."
+    "co": "Xuan Kong Castle Gate rule: the {phuong} side ({vai}) receives the timely star of construction Period {van}. It only counts if the {phuong} side really has a side entrance, large window or open space; if so, keep that side bright, clean and easy to walk through — it can serve as a customer-facing spot or carry signage.",
+    "khong": "For construction Period {van}, neither side next to the facing direction can use the Castle Gate rule — focus brightness and openness on the main entrance.",
+    "vai": {
+      "chinh": "Primary Castle Gate",
+      "phu": "Secondary Castle Gate"
+    }
   },
   "checklist_loan_dau_cua_hang": [
     "Clear Bright Hall (frontage): ensure the sidewalk and sightline to your signage are unobstructed by transformers, heavy poles or visual clutter",
@@ -83,7 +82,7 @@
       "Solid backing behind the owner's chair: sit with a solid wall or tall cabinet behind you rather than an open walkway or bare glass window",
       "Commanding view of the door: angle your desk to see the room entrance diagonally without sitting directly in line with the doorway",
       "Eight Mansions personal facing: orient your chair to face one of your favorable {quai} trigram directions ({huong_tot})",
-      "Five-Element workspace harmony ({hanh_can}): incorporate {mau_sac}, {chat_lieu}, and schedule high-stakes decisions during {khung_gio}"
+      "Light and paperwork: keep the desk naturally bright and lock important papers away. The classical texts do not assign desk colours or meeting hours by element, so the system does not suggest them."
     ]
   },
   "bo_tri_cua_hang_buon_ban": {

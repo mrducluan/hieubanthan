@@ -22,7 +22,6 @@ interface KetQuaCamNang {
     ten_mui_nhon: string;
     chien_luoc_cot_loi: string;
     rui_ro_can_giu: string;
-    phuong_vi_uu_tien: string;
     nganh_nghe_bo_tro_van_9: string;
     goc_nhin_thien_di: string;
   };
@@ -30,7 +29,7 @@ interface KetQuaCamNang {
     menh_quai_chu: string;
     huong_hop_menh_chu: string[];
     so_sanh_mat_bang: {
-      thu_tu_uu_tien: number;
+      thu_tu: number;
       ten_diem: string;
       loai_hinh: { ma: string; ten: string };
       do_huong: number;
@@ -39,7 +38,7 @@ interface KetQuaCamNang {
       cuc_ten: string | null;
       canh_bao_kiem_huong: string | null;
       tong_quan: string;
-      thanh_mon_quyet: { co_thanh_mon: boolean; phuong_thanh_mon: string | null; luan_giai: string };
+      thanh_mon_quyet: { co_thanh_mon: boolean; phuong_thanh_mon: string | null; luan_giai: string } | null;
       danh_sach_khu_vuc: { ma: string; ten: string; phuong_goi_y: string; muc: string; thuan_loi: string; nen_chu_y: string; can_cu: string }[];
       ngay_khai_truong: { ngay: string; am: string; can_chi: string; gio_ky_mon: { khung: string; chi: string; phuong: string }[] }[];
     }[];
@@ -63,8 +62,8 @@ interface KetQuaCamNang {
 }
 
 const MAU_2_MAT_BANG: MatBangForm[] = [
-  { ten_diem: "Điểm A (Mặt phố Đông Nam)", loai_hinh: "cua_hang", do_huong: "135", nam_xay: "2024" },
-  { ten_diem: "Điểm B (Góc phố Chính Tây)", loai_hinh: "cua_hang", do_huong: "270", nam_xay: "2024" },
+  { ten_diem: "Điểm A (Mặt phố Đông Nam)", loai_hinh: "cua_hang", do_huong: "135", nam_xay: "" },
+  { ten_diem: "Điểm B (Góc phố Chính Tây)", loai_hinh: "cua_hang", do_huong: "270", nam_xay: "" },
 ];
 
 export function CamNangKinhDoanh({ matBangTuBanCo }: { matBangTuBanCo?: MatBangBanCo[] | null }) {
@@ -192,7 +191,7 @@ export function CamNangKinhDoanh({ matBangTuBanCo }: { matBangTuBanCo?: MatBangB
             {dsMb.length < 3 && (
               <button
                 type="button"
-                onClick={() => setDsMb((c) => [...c, { ten_diem: `Mặt bằng #${c.length + 1}`, loai_hinh: "cua_hang", do_huong: "180", nam_xay: "2024" }])}
+                onClick={() => setDsMb((c) => [...c, { ten_diem: `Mặt bằng #${c.length + 1}`, loai_hinh: "cua_hang", do_huong: "180", nam_xay: "" }])}
                 className="inline-flex items-center gap-1 text-xs text-gold hover:underline"
               >
                 <Plus className="size-3.5" aria-hidden /> Thêm mặt bằng so sánh
@@ -255,11 +254,7 @@ export function CamNangKinhDoanh({ matBangTuBanCo }: { matBangTuBanCo?: MatBangB
             </div>
             <p className="mt-2 text-sm font-semibold text-gold">{kq.mo_rong_thi_truong.ten_mui_nhon}</p>
             <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{kq.mo_rong_thi_truong.chien_luoc_cot_loi}</p>
-            <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-3">
-              <div className="rounded-xl border border-line/60 bg-bg/60 p-3 text-xs">
-                <p className="font-semibold text-fg">Hướng địa lý &amp; trục mở rộng</p>
-                <p className="mt-1 text-fg-muted">{kq.mo_rong_thi_truong.phuong_vi_uu_tien}</p>
-              </div>
+            <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
               <div className="rounded-xl border border-line/60 bg-bg/60 p-3 text-xs">
                 <p className="font-semibold text-fg">Lĩnh vực &amp; dịch vụ trợ lực Vận 9</p>
                 <p className="mt-1 text-fg-muted">{kq.mo_rong_thi_truong.nganh_nghe_bo_tro_van_9}</p>
@@ -289,28 +284,22 @@ export function CamNangKinhDoanh({ matBangTuBanCo }: { matBangTuBanCo?: MatBangB
                 {kq.chon_dia_diem_cua_hang.so_sanh_mat_bang.map((mb) => (
                   <div
                     key={`${mb.ten_diem}-${mb.do_huong}`}
-                    className={cn(
-                      "rounded-xl border p-4 text-xs",
-                      mb.thu_tu_uu_tien === 1 ? "border-jade/50 bg-jade/5" : "border-line/70 bg-bg/60",
-                    )}
-                    data-testid={`cn-mat-bang-${mb.thu_tu_uu_tien}`}
+                    className="rounded-xl border border-line/70 bg-bg/60 p-4 text-xs"
+                    data-testid={`cn-mat-bang-${mb.thu_tu}`}
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <p className="text-sm font-semibold text-fg">
-                        #{mb.thu_tu_uu_tien} · {mb.ten_diem} ({mb.do_huong}° · {mb.phuong_huong}{mb.cuc_ten ? ` · ${mb.cuc_ten}` : ""})
+                        {mb.ten_diem} ({mb.do_huong}° · {mb.phuong_huong}{mb.cuc_ten ? ` · ${mb.cuc_ten}` : ""})
                       </p>
-                      {mb.thu_tu_uu_tien === 1 && (
-                        <span className="rounded-full border border-jade/40 bg-jade/15 px-2.5 py-0.5 text-[11px] font-semibold text-jade">
-                          Ưu tiên khảo sát số 1
-                        </span>
-                      )}
                     </div>
                     <p className="mt-1.5 leading-relaxed text-fg-muted">{mb.tong_quan}</p>
                     {mb.canh_bao_kiem_huong && <p className="mt-1.5 text-amber-300">⚠ {mb.canh_bao_kiem_huong}</p>}
-                    <p className="mt-2 rounded-lg border border-gold/30 bg-gold/5 p-2.5 leading-relaxed text-fg">
-                      <strong className="text-gold">Thành Môn Quyết Vận 9: </strong>
-                      {mb.thanh_mon_quyet.luan_giai}
-                    </p>
+                    {mb.thanh_mon_quyet && (
+                      <p className="mt-2 rounded-lg border border-gold/30 bg-gold/5 p-2.5 leading-relaxed text-fg">
+                        <strong className="text-gold">Thành Môn: </strong>
+                        {mb.thanh_mon_quyet.luan_giai}
+                      </p>
+                    )}
                     <div className="mt-2.5 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
                       {mb.danh_sach_khu_vuc.map((kv) => (
                         <div key={kv.ma} className="rounded-lg border border-line/60 bg-bg/70 p-2.5">

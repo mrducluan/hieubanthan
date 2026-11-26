@@ -1,7 +1,7 @@
-// Chặng 2 — Mã hoá đầu-cuối phía trình duyệt (Zero-Knowledge Client-Side E2EE) cho "Bàn Cờ Đối Tác & Mặt Bằng".
-// Dùng WebCrypto chuẩn (`crypto.subtle`): PBKDF2-HMAC-SHA256 (210.000 vòng, salt 16 byte ngẫu nhiên) → AES-GCM 256-bit
-// (IV 12 byte ngẫu nhiên mỗi lượt lưu). Mật khẩu chỉ tồn tại trong bộ nhớ phiên mở trang; máy chủ không bao giờ thấy
-// mật khẩu, bản rõ hay bản mã. Nếu quên mật khẩu, không ai khôi phục được — giao diện nhắc rõ tải bản sao lưu khi cần.
+// Khoá bằng mật khẩu cho "Sổ nháp đối tác & mặt bằng" lưu trên trình duyệt (không phải mã hoá đầu cuối: dữ liệu người
+// dùng bấm gửi sang Góp vốn / Cẩm nang vẫn lên máy chủ để tính). WebCrypto chuẩn (`crypto.subtle`): PBKDF2-HMAC-SHA256
+// (210.000 vòng, salt 16 byte ngẫu nhiên) → AES-GCM 256-bit (IV 12 byte ngẫu nhiên mỗi lượt lưu). Mật khẩu chỉ ở bộ nhớ
+// phiên mở trang; quên mật khẩu thì không mở lại được — giao diện nhắc tải bản sao lưu.
 
 export const KHOA_BAN_CO_E2EE = "hbt.ban_co_kinh_doanh.e2ee.v1";
 const SO_VONG_PBKDF2 = 210_000;
@@ -23,7 +23,7 @@ export interface MatBangBanCo {
   ten_diem: string;
   loai_hinh: "van_phong" | "cua_hang" | "quan_ca_phe" | "xuong_kho";
   do_huong: number;
-  nam_xay?: number;
+  nam_xay?: number | null;
   ghi_chu?: string;
 }
 

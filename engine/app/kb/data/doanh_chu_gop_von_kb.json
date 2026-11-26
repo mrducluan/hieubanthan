@@ -1,60 +1,74 @@
 {
-  "_nguon": "Chặng 2 — Kho tri thức Soi bù khuyết Co-founder & Phân vai góp vốn (2–4 người sáng lập). Nháp AI biên soạn dựa trên trục Ngũ hành năng lực công việc và nguyên tắc quản trị góp vốn thực chiến, chờ chủ dự án đọc duyệt.",
-  "source_id": "doanh_chu_gop_von",
-  "school_id": "ngu_hanh_quan_tri",
-  "trang_thai": "nhap_ai",
-  "nhan_hoi_dong": {
-    "can_doi": "Hội đồng sáng lập phủ đủ ba trục Mở thị trường – Tài chính – Vận hành",
-    "thien_lech": "Hội đồng sáng lập đang dồn lực một phía — cần khoá điều lệ bù trục khuyết"
+ "_nguon": "GV-1 — Khi góp vốn với người khác (tách từ PR #375, làm lại sau review 2026-11-26). Vai trò của từng người lấy đúng bảng hành → vai trò của Bản đồ quản lý nhân sự (DC-1); nhóm ba khâu và điều lệ gợi ý là nháp ban biên tập, chờ chủ dự án duyệt. Không chấm điểm, không khuyên hợp tác hay không với ai.",
+ "source_id": "doanh_chu_gop_von",
+ "school_id": "ngu_hanh_quan_tri",
+ "trang_thai": "nhap_ai",
+ "lam": {
+  "mo_thi_truong": {
+   "ten": "Mở thị trường, bán hàng, đối ngoại",
+   "hanh": [
+    "Mộc",
+    "Hỏa",
+    "Thủy"
+   ],
+   "nen_de_y": "Người nghiêng về khâu này dễ mở nhiều việc cùng lúc hoặc lạc quan về dòng tiền; nên có người đối chiếu con số trước khi chi."
   },
-  "tom_tat_hoi_dong": {
-    "can_doi": "Nhóm sáng lập có đủ người đẩy doanh thu lẫn người giữ phanh tài chính và vận hành nền tảng; trọng tâm là phân rõ biên giới quyết định ngay từ đầu.",
-    "thien_lech": "Các thành viên sáng lập có xu hướng mạnh giống nhau nên lúc khởi đầu rất ăn ý, nhưng dễ để trống khâu {khuyet} khi quy mô lớn dần."
+  "kiem_soat_tai_chinh": {
+   "ten": "Giữ tiền, sổ sách, giấy tờ",
+   "hanh": [
+    "Kim"
+   ],
+   "nen_de_y": "Người nghiêng về khâu này cẩn trọng, đôi khi làm chậm nhịp thử; nên thống nhất trước một khoản thử nghiệm được phép chi."
   },
-  "lane": {
-    "mo_thi_truong": {
-      "ten": "Mở thị trường, sản phẩm & đối ngoại",
-      "diem_manh": "Nhạy cơ hội, kết nối khách hàng nhanh và tạo đà tăng trưởng ban đầu tốt",
-      "diem_mu": "Dễ lạc quan quá mức về dòng tiền hoặc mở nhiều mũi việc trước khi quy trình kịp theo"
-    },
-    "kiem_soat_tai_chinh": {
-      "ten": "Kiểm soát tài chính, pháp lý & rủi ro",
-      "diem_manh": "Tỉnh táo với con số, giữ kỷ luật ngân sách, công nợ và điều khoản hợp đồng chặt chẽ",
-      "diem_mu": "Đôi khi thận trọng cao độ làm chậm nhịp thử nghiệm thị trường nếu thiếu người mở mũi nhọn"
-    },
-    "van_hanh_hau_can": {
-      "ten": "Vận hành chuẩn hoá, nhân sự & chất lượng",
-      "diem_manh": "Bền bỉ giữ cam kết giao hàng, chăm sóc khách cũ và ổn định hệ thống nội bộ",
-      "diem_mu": "Hay tự ôm việc chi tiết, ngại va chạm khi cần cắt bỏ mảng kém hiệu quả"
-    }
-  },
-  "lo_hong_theo_lane": {
-    "mo_thi_truong": "Thiếu người chuyên trách mở thị trường & bán hàng chủ động — sản phẩm làm kỹ nhưng dễ chậm đầu ra doanh thu.",
-    "kiem_soat_tai_chinh": "Thiếu người giữ vai kiểm soát dòng tiền & pháp lý độc lập — dễ vướng chi vượt dự toán hoặc nhập nhằng công nợ.",
-    "van_hanh_hau_can": "Thiếu người bám sát vận hành & hậu cần mỗi ngày — khách về đông dễ hụt chất lượng phục vụ và quá tải nội bộ."
-  },
-  "dieu_le_mac_dinh": [
-    {
-      "tieu_de": "Nguyên tắc 2 chữ ký & ngưỡng chi tiêu minh bạch",
-      "nguyen_tac": "Mọi khoản chi hoặc cam kết hợp đồng vượt ngưỡng thống nhất (ví dụ 10–15% vốn lưu động tháng) bắt buộc có xác nhận văn bản của cả người phụ trách thị trường và người giữ sổ tài chính."
-    },
-    {
-      "tieu_de": "Tách bạch lương vận hành và cổ tức theo vốn góp",
-      "nguyen_tac": "Người trực tiếp điều hành toàn thời gian nhận lương theo vị trí trước; lợi nhuận ròng sau quỹ dự phòng mới chia theo tỷ lệ cổ phần để tránh ấm ức giữa người làm nhiều và người chỉ góp vốn."
-    },
-    {
-      "tieu_de": "Điều khoản rút vốn, giải thể êm đẹp & thời gian gắn kết (Vesting)",
-      "nguyen_tac": "Quy định trước công thức định giá phần hùn, quyền ưu tiên mua lại của cổ đông hiện hữu và lộ trình nhận cổ phần theo mốc 24–36 tháng ngay khi còn vui vẻ."
-    }
-  ],
-  "dieu_le_bo_sung": {
-    "cung_nong_mo_rong": {
-      "tieu_de": "Chốt trần thử nghiệm cho hội đồng thiên về tấn công",
-      "nguyen_tac": "Vì nhóm sáng lập giàu lửa mở rộng, cần khoá cứng quỹ dự phòng tối thiểu 6 tháng chi phí cố định không được đụng tới khi mở sản phẩm hay chi nhánh mới."
-    },
-    "ty_le_50_50": {
-      "tieu_de": "Cơ chế phá thế bế tắc 50 – 50 (Deadlock breaker)",
-      "nguyen_tac": "Khi chia cổ phần ngang nhau, điều lệ phải chỉ định sẵn quyền quyết cuối cùng theo từng mảng chuyên môn (ai chốt sản phẩm, ai chốt ngân sách) thay vì để treo quyết định."
-    }
+  "van_hanh": {
+   "ten": "Vận hành, quy trình, giao hàng mỗi ngày",
+   "hanh": [
+    "Thổ"
+   ],
+   "nen_de_y": "Người nghiêng về khâu này giữ việc đều tay nhưng dễ ôm hết; nên ghi rõ việc nào cần hai người cùng quyết."
   }
+ },
+ "khau_con_trong": {
+  "mo_thi_truong": "Chưa ai nghiêng hẳn về mở thị trường: nên giao rõ một người chịu trách nhiệm doanh thu, hoặc thuê người bán hàng sớm.",
+  "kiem_soat_tai_chinh": "Chưa ai nghiêng hẳn về giữ tiền và giấy tờ: nên có kế toán hoặc dịch vụ sổ sách độc lập từ tháng đầu, và hai người cùng duyệt khoản chi lớn.",
+  "van_hanh": "Chưa ai nghiêng hẳn về vận hành hằng ngày: nên viết quy trình giao hàng, chăm khách thành danh sách việc và giao một người theo dõi."
+ },
+ "tong_quan": {
+  "du": {
+   "nhan": "Nhóm có người nghiêng về cả ba khâu",
+   "tom_tat": "Mỗi khâu chính đều có người hợp sức; việc còn lại là ghi rõ ai quyết việc gì ngay từ đầu."
+  },
+  "thieu": {
+   "nhan": "Nhóm đang nghiêng về một phía",
+   "tom_tat": "Các thành viên mạnh ở những khâu giống nhau nên lúc đầu dễ ăn ý; khâu {khau} chưa ai nghiêng hẳn, nên lo trước."
+  }
+ },
+ "dieu_le": [
+  {
+   "ma": "hai_nguoi_duyet",
+   "tieu_de": "Hai người cùng duyệt khoản chi lớn",
+   "noi_dung": "Thống nhất một ngưỡng (ví dụ một tỉ lệ vốn lưu động hằng tháng): khoản chi hoặc hợp đồng vượt ngưỡng cần xác nhận bằng văn bản của hai người."
+  },
+  {
+   "ma": "luong_va_loi_nhuan",
+   "tieu_de": "Tách lương người làm và lợi nhuận theo vốn góp",
+   "noi_dung": "Người làm toàn thời gian nhận lương theo việc trước; lợi nhuận sau quỹ dự phòng mới chia theo tỉ lệ góp, để người làm nhiều và người chỉ góp vốn không thiệt thòi lẫn nhau."
+  },
+  {
+   "ma": "rut_von",
+   "tieu_de": "Cách rút vốn và chia tay êm",
+   "noi_dung": "Ghi trước cách định giá phần góp, quyền mua lại của người ở lại và mốc gắn bó tối thiểu, khi mọi người còn vui vẻ."
+  }
+ ],
+ "dieu_le_them": {
+  "ty_le_50_50": {
+   "tieu_de": "Khi hai người chia đều 50 – 50",
+   "noi_dung": "Ghi sẵn ai có tiếng nói cuối ở từng mảng (sản phẩm, ngân sách…) để việc không bị treo khi hai người không thống nhất."
+  },
+  "thieu_tai_chinh": {
+   "tieu_de": "Khi chưa ai giữ tiền",
+   "noi_dung": "Khoá một quỹ dự phòng tối thiểu vài tháng chi phí cố định, không dùng để mở rộng."
+  }
+ },
+ "ranh_gioi": "Kết quả chỉ là tham khảo văn hoá để các bên hiểu thiên hướng làm việc của nhau và phân vai, không phải đánh giá con người, không thay việc tìm hiểu nhau qua công việc thật. Điều lệ ở đây chỉ là gợi ý để trao đổi: trước khi ký thoả thuận góp vốn, nên nhờ luật sư soạn hoặc xem lại; đây không phải lời khuyên pháp lý hay lời khuyên đầu tư. Người nhập xác nhận đã được từng người đồng ý cho dùng ngày sinh; hieuban.com chỉ dùng để tính trong lượt xem này, không lưu."
 }

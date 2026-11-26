@@ -1,12 +1,12 @@
-// Chặng 2 — Trang "/co-van": Cổng Cố vấn Liên mảng Tam Tài (Nhân · Thiên · Địa, thích nghi 3 Bậc đầu vào, 0% ngõ cụt).
+// Trang "/co-van": Cố vấn liên mảng Tam Tài — ba cách xem đọc riêng (Nhân · Thiên · Địa), không gộp mức, miễn phí.
 import type { Metadata } from "next";
 import { DuongDan } from "@/components/khung/DuongDan";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { CongCoVanTamTai } from "@/components/co-van/CongCoVanTamTai";
 
 export const metadata: Metadata = {
-  title: "Cố vấn Tam Tài liên mảng: Hỏi quyết định công việc, tiền bạc, nhà cửa & tình cảm",
-  description: "Đặt một câu hỏi thực tế, hệ thống đồng thời đối chiếu Nội lực (Bát tự & Thần số), Thời điểm (Tử vi & Nhịp 12 tháng) và Không gian (Phong thuỷ Vận 9 & Hoàng lịch) mà không tự mâu thuẫn.",
+  title: "Cố vấn Tam Tài: hỏi một quyết định, xem ba cách nhìn",
+  description: "Nêu điều bạn đang cân nhắc và ngày sinh: hệ thống đọc riêng sức của chính bạn (Bát tự, thần số), thời điểm (Tử vi, lịch 12 tháng) và không gian (phong thuỷ), không gộp thành một kết luận chung.",
   alternates: { canonical: "/co-van" },
   robots: { index: false, follow: true },
 };
@@ -18,8 +18,8 @@ export default function CoVanPage() {
       <TieuDeMuc
         cap={1}
         nho="Cố vấn liên mảng · Nhân – Thiên – Địa"
-        lon="Cố vấn Tam Tài cho quyết định của bạn"
-        mo_ta="Không cần biết mình phải tra Tử vi, Bát tự hay Phong thuỷ trước: chỉ cần nêu điều bạn đang cân nhắc và ngày sinh (chưa biết giờ sinh vẫn tính ngay bằng Tam Trụ chuẩn). Ba trụ độc lập soi rõ sức bền nội lực, cửa sổ thời điểm và đòn bẩy không gian."
+        lon="Hỏi một quyết định, xem ba cách nhìn"
+        mo_ta="Nêu điều bạn đang cân nhắc và ngày sinh (chưa biết giờ sinh vẫn xem được). Ba cách xem đọc riêng: sức của chính bạn, thời điểm và không gian — khi chúng nói khác nhau, trang nói rõ chứ không chọn thay bạn. Miễn phí, không lưu."
       />
       <div className="mt-6">
         <CongCoVanTamTai macDinhCheDo="doi_song" />

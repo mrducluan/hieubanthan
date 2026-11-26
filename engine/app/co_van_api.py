@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Chặng 2 — POST /v1/co-van: Cổng Cố vấn Liên mảng Tam Tài (Nhân · Thiên · Địa, thích nghi 3 Bậc đầu vào)."""
+"""POST /v1/co-van — Cố vấn liên mảng Tam Tài: ba cách xem đọc riêng (không gộp mức), miễn phí, không lưu."""
 from __future__ import annotations
 
 import datetime as dt
@@ -11,7 +11,8 @@ from pydantic import BaseModel, ConfigDict, Field
 from app.calc import tuvi_an_sao
 from app.config import ENGINE_VERSION
 from app.luangiai import co_van_tam_tai as cv
-from app.tuvi_api import _loi_an_sao, _MaMau, _Phieu
+from app import config
+from app.tuvi_api import _loi_an_sao
 
 router = APIRouter(tags=["co-van"])
 
@@ -27,6 +28,7 @@ class DoiTacCoVanIn(BaseModel):
     ngay_sinh: dt.date
     gioi_tinh: Literal["nam", "nu"] = "nam"
     vai_tro: Literal["nguoi_thuong", "gop_von", "cong_su"] = "cong_su"
+    dong_y_tu_nguyen: bool = Field(default=False, description="Bắt buộc true: người liên quan đã đồng ý cho dùng ngày sinh")
 
 
 class CoVanIn(BaseModel):
@@ -41,17 +43,21 @@ class CoVanIn(BaseModel):
     doi_tac: DoiTacCoVanIn | None = None
     che_do: Literal["doi_song", "kinh_doanh"] = "doi_song"
     ngay_xem: dt.date | None = None
-    dien_dat_toi_da: int | None = Field(default=None, ge=0, le=13)
-    trong_so: dict[_MaMau, _Phieu] | None = Field(default=None, max_length=5000)
-    ca_nhan: dict[_MaMau, Literal["dung", "chua_dung"]] | None = Field(default=None, max_length=500)
 
 
 @router.post("/v1/co-van")
 def api_co_van(inp: CoVanIn) -> dict:
     if not (1930 <= inp.ngay_sinh.year <= 2025):
         raise HTTPException(422, detail="Năm sinh cần nằm trong khoảng 1930–2025.")
-    if inp.doi_tac and not (1930 <= inp.doi_tac.ngay_sinh.year <= 2025):
-        raise HTTPException(422, detail="Năm sinh người liên quan cần nằm trong khoảng 1930–2025.")
+    if inp.doi_tac:
+        if not inp.doi_tac.dong_y_tu_nguyen:
+            raise HTTPException(422, detail="Cần xác nhận người liên quan đã đồng ý cho dùng ngày sinh.")
+        if not (1930 <= inp.doi_tac.ngay_sinh.year <= 2025):
+            raise HTTPException(422, detail="Năm sinh người liên quan cần nằm trong khoảng 1930–2025.")
+        hn = inp.ngay_xem or config.hom_nay_vn()
+        ns = inp.doi_tac.ngay_sinh
+        if hn.year - ns.year - ((hn.month, hn.day) < (ns.month, ns.day)) < config.TUOI_NGUOI_LON:
+            raise HTTPException(422, detail="Người liên quan cần đủ 16 tuổi.")
     try:
         kq = cv.lap(
             cau_hoi=inp.cau_hoi,
@@ -64,8 +70,6 @@ def api_co_van(inp: CoVanIn) -> dict:
             doi_tac=inp.doi_tac.model_dump() if inp.doi_tac else None,
             che_do=inp.che_do,
             ngay_xem=inp.ngay_xem,
-            trong_so={k: v.model_dump() for k, v in inp.trong_so.items()} if inp.trong_so else None,
-            ca_nhan=inp.ca_nhan,
         )
     except tuvi_an_sao.AnSaoLoi as e:
         raise _loi_an_sao(e)

@@ -1,6 +1,7 @@
 "use client";
-// Chặng 2 — Bàn Cờ Đối Tác & Mặt Bằng Mã Hoá Đầu-Cuối (AES-GCM 256-bit + PBKDF2 210.000 vòng trên trình duyệt).
-// Zero-Knowledge: mật khẩu và bản rõ chỉ nằm trong RAM phiên mở trang; localStorage chỉ giữ bản mã AES-GCM; không gửi mạng.
+// Sổ nháp đối tác & mặt bằng — lưu trên trình duyệt này, khoá bằng mật khẩu (AES-GCM 256-bit + PBKDF2 210.000 vòng).
+// Lưu / mở khoá không gửi gì lên mạng. KHÔNG phải mã hoá đầu cuối: khi người dùng bấm đưa sang Góp vốn hoặc Cẩm nang,
+// ngày sinh / hướng được gửi lên máy chủ để tính (không lưu) — giao diện nói rõ điều này.
 import { useEffect, useState } from "react";
 import { Download, KeyRound, Lock, Plus, ShieldCheck, Trash2, Unlock } from "lucide-react";
 import {
@@ -17,14 +18,14 @@ import {
 
 const BAN_CO_RONG: DuLieuBanCoKinhDoanh = {
   phien_ban: 1,
-  ten_ban_co: "Bàn cờ Đối tác & Mặt bằng của tôi",
+  ten_ban_co: "Sổ nháp đối tác & mặt bằng của tôi",
   ghi_chu: "",
   doi_tac: [
     { id: "dt-1", ten: "Đối tác A", vai_tro_du_kien: "Tài chính", ngay: 15, thang: 5, nam: 1990, gioi_tinh: "nam", ty_le_du_kien: 50 },
     { id: "dt-2", ten: "Đối tác B", vai_tro_du_kien: "Thị trường", ngay: 20, thang: 9, nam: 1992, gioi_tinh: "nu", ty_le_du_kien: 50 },
   ],
   mat_bang: [
-    { id: "mb-1", ten_diem: "Mặt bằng dự kiến #1", loai_hinh: "cua_hang", do_huong: 180, nam_xay: 2024 },
+    { id: "mb-1", ten_diem: "Mặt bằng dự kiến #1", loai_hinh: "cua_hang", do_huong: 180, nam_xay: null },
   ],
 };
 
@@ -58,7 +59,7 @@ export function BanCoMaHoaE2EE({
         luuGoiBanCoMay(goi);
         setGoiTrenMay(goi);
         setBanCo(BAN_CO_RONG);
-        setThongBao("Đã khởi tạo & mã hoá AES-GCM 256-bit trên máy của bạn.");
+        setThongBao("Đã tạo sổ nháp và khoá bằng mật khẩu trên máy này.");
       }
     } catch (e) {
       setLoi(e instanceof Error ? e.message : "Không thể mở khoá bàn cờ.");
@@ -72,7 +73,7 @@ export function BanCoMaHoaE2EE({
       const goi = await maHoaBanCo(banCo, matKhau);
       luuGoiBanCoMay(goi);
       setGoiTrenMay(goi);
-      setThongBao("Đã mã hoá lại với IV mới và lưu an toàn trên trình duyệt (0 byte gửi lên máy chủ).");
+      setThongBao("Đã lưu sổ nháp trên trình duyệt này (khoá bằng mật khẩu, việc lưu không gửi gì lên mạng).");
     } catch (e) {
       setLoi(e instanceof Error ? e.message : "Chưa lưu được bàn cờ.");
     }
@@ -84,7 +85,7 @@ export function BanCoMaHoaE2EE({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "ban-co-kinh-doanh.hbt-e2ee.json";
+    a.download = "so-nhap-kinh-doanh.hbt.json";
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -94,24 +95,25 @@ export function BanCoMaHoaE2EE({
       <div className="rounded-2xl border border-jade/35 bg-jade/5 p-4 text-xs leading-relaxed text-fg-muted">
         <p className="flex items-center gap-2 font-semibold text-jade">
           <ShieldCheck className="size-4 shrink-0" aria-hidden />
-          <span>Bảo mật Đầu-Cuối Zero-Knowledge (PBKDF2 210.000 vòng + AES-GCM 256-bit)</span>
+          <span>Sổ nháp chỉ lưu trên trình duyệt này, khoá bằng mật khẩu của bạn</span>
         </p>
         <p className="mt-1">
-          Danh sách đối tác tiềm năng và toạ độ mặt bằng của bạn được mã hoá ngay trong trình duyệt trước khi cất vào bộ nhớ máy.
-          Máy chủ Hiểu Bản Thân không bao giờ thấy mật khẩu hay bản rõ — <strong>nếu quên mật khẩu sẽ không thể khôi phục</strong>, hãy tải tệp sao lưu mã hoá khi cần.
+          Sổ được khoá bằng mật khẩu rồi cất trong trình duyệt này; lưu và mở khoá không gửi gì lên mạng. Khi bạn bấm
+          <strong> đưa sang Góp vốn hoặc Cẩm nang</strong>, ngày sinh và hướng mặt bằng sẽ được gửi lên máy chủ để tính rồi bỏ, không lưu.
+          Ngày sinh của người khác chỉ ghi vào sổ khi người đó đồng ý. <strong>Quên mật khẩu thì không mở lại được</strong> — tải tệp sao lưu khi cần.
         </p>
       </div>
 
       {!banCo ? (
         <div className="rounded-2xl border border-line/80 bg-surface/40 p-5" data-testid="e2ee-khung-khoa">
           <h3 className="font-serif text-xl text-fg">
-            {goiTrenMay ? "Mở khoá Bàn cờ Kinh doanh đã mã hoá trên máy" : "Tạo Bàn cờ Kinh doanh Mã hoá mới"}
+            {goiTrenMay ? "Mở sổ nháp đã lưu trên máy này" : "Tạo sổ nháp mới"}
           </h3>
           <div className="mt-3 flex flex-col gap-3 sm:flex-row">
             <input
               type="password"
               minLength={8}
-              placeholder="Nhập mật khẩu giải mã (tối thiểu 8 ký tự)"
+              placeholder="Mật khẩu của sổ (tối thiểu 8 ký tự)"
               value={matKhau}
               onChange={(e) => setMatKhau(e.target.value)}
               data-testid="e2ee-mat-khau"
@@ -124,16 +126,16 @@ export function BanCoMaHoaE2EE({
               className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gold px-5 py-2 text-sm font-semibold text-bg"
             >
               {goiTrenMay ? <Unlock className="size-4" aria-hidden /> : <KeyRound className="size-4" aria-hidden />}
-              <span>{goiTrenMay ? "Giải mã Bàn cờ" : "Khởi tạo & Mã hoá AES-GCM"}</span>
+              <span>{goiTrenMay ? "Mở sổ" : "Tạo sổ"}</span>
             </button>
           </div>
           {goiTrenMay && (
             <button
               type="button"
-              onClick={() => { xoaGoiBanCoMay(); setGoiTrenMay(null); setThongBao("Đã xoá bản mã cũ trên máy."); }}
+              onClick={() => { xoaGoiBanCoMay(); setGoiTrenMay(null); setThongBao("Đã xoá sổ nháp cũ trên máy."); }}
               className="mt-3 text-xs text-fg-faint underline hover:text-amber-300"
             >
-              Quên mật khẩu? Xoá bản mã trên máy để tạo bàn cờ mới
+              Quên mật khẩu? Xoá sổ trên máy để tạo sổ mới
             </button>
           )}
           {loi && <p role="alert" className="mt-2.5 text-xs text-amber-300" data-testid="e2ee-loi">{loi}</p>}
@@ -252,7 +254,7 @@ export function BanCoMaHoaE2EE({
                 data-testid="e2ee-dua-sang-gop-von"
                 className="mt-2 rounded-full border border-gold/50 bg-gold/10 px-4 py-1.5 text-xs font-medium text-gold hover:bg-gold/20"
               >
-                Đưa {banCo.doi_tac.length} người này sang Soi Bù Khuyết Góp Vốn →
+                Đưa {banCo.doi_tac.length} người này sang Khi góp vốn (gửi ngày sinh để tính) →
               </button>
             )}
           </div>
@@ -264,7 +266,7 @@ export function BanCoMaHoaE2EE({
                 type="button"
                 onClick={() => setBanCo({
                   ...banCo,
-                  mat_bang: [...banCo.mat_bang, { id: `mb-${Date.now()}`, ten_diem: `Mặt bằng #${banCo.mat_bang.length + 1}`, loai_hinh: "cua_hang", do_huong: 135, nam_xay: 2024 }],
+                  mat_bang: [...banCo.mat_bang, { id: `mb-${Date.now()}`, ten_diem: `Mặt bằng #${banCo.mat_bang.length + 1}`, loai_hinh: "cua_hang", do_huong: 135, nam_xay: null }],
                 })}
                 className="inline-flex items-center gap-1 text-xs text-gold hover:underline"
               >
@@ -296,10 +298,11 @@ export function BanCoMaHoaE2EE({
                 />
                 <input
                   type="number"
-                  value={mbItem.nam_xay ?? 2024}
+                  value={mbItem.nam_xay ?? ""}
+                  placeholder="Năm xây (nếu biết)"
                   onChange={(e) => {
                     const m = [...banCo.mat_bang];
-                    m[idx] = { ...mbItem, nam_xay: Number(e.target.value) };
+                    m[idx] = { ...mbItem, nam_xay: e.target.value ? Number(e.target.value) : null };
                     setBanCo({ ...banCo, mat_bang: m });
                   }}
                   className="rounded border border-line bg-bg px-2 py-1 text-fg"
@@ -321,7 +324,7 @@ export function BanCoMaHoaE2EE({
                 data-testid="e2ee-dua-sang-cam-nang"
                 className="mt-2 rounded-full border border-jade/50 bg-jade/10 px-4 py-1.5 text-xs font-medium text-jade hover:bg-jade/20"
               >
-                Đưa {banCo.mat_bang.length} mặt bằng này sang So sánh Địa điểm &amp; Bài trí →
+                Đưa {banCo.mat_bang.length} mặt bằng này sang Cẩm nang mặt bằng (gửi hướng để tính) →
               </button>
             )}
           </div>

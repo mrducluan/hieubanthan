@@ -27,23 +27,18 @@
   },
   "phuong_vi_thi_truong": {
     "Kim": {
-      "huong_uu_tien": "Phía Tây và Tây Bắc so với trụ sở chính",
       "nganh_bo_tro": "Tài chính, cơ khí chính xác, thiết bị, vận hành chuỗi quy chuẩn, dịch vụ quản trị"
     },
     "Mộc": {
-      "huong_uu_tien": "Phía Đông và Đông Nam so với trụ sở chính",
       "nganh_bo_tro": "Giáo dục, chăm sóc sức khoẻ, nội thất gỗ, nông sản sạch, tiêu dùng bền vững, xuất bản"
     },
     "Thủy": {
-      "huong_uu_tien": "Phía Bắc hoặc khu vực giao thương sầm uất gần trục giao thông lớn, mặt thoáng rộng",
       "nganh_bo_tro": "Logistics, thương mại điện tử, phân phối lưu thông, đồ uống, du lịch, dịch vụ tư vấn"
     },
     "Hỏa": {
-      "huong_uu_tien": "Phía Nam (đồng pha vượng khí Cửu Tử Vận 9 giai đoạn 2024–2043)",
       "nganh_bo_tro": "Công nghệ/AI, truyền thông số, ẩm thực nóng, làm đẹp – thẩm mỹ, năng lượng, sự kiện"
     },
     "Thổ": {
-      "huong_uu_tien": "Khu vực trung tâm đô thị sầm uất, phía Đông Bắc hoặc Tây Nam",
       "nganh_bo_tro": "Mặt bằng cho thuê, kho vận, xây dựng – vật liệu, thực phẩm thiết yếu, dịch vụ hậu cần"
     }
   },
@@ -53,8 +48,12 @@
     "chua_co_gio": "Chưa nhập giờ sinh nên hệ thống định hướng thị trường theo Bát tự Tam trụ và Mệnh quái (thêm giờ sinh ở trên để soi sâu cung Thiên Di & đường bay Phi hoá ra ngoài)."
   },
   "thanh_mon": {
-    "co": "Đắc Thành Môn Quyết ({vai} tại cung {cung} – phía {phuong}): theo Thẩm Thị Huyền Không Học, đây là 'cổng phụ dẫn vượng khí Vận {van}'. Nếu mặt bằng có lối phụ, cửa sổ lớn, quầy đón khách hoặc biển hiệu sáng ở phía {phuong} thì rất lợi cho lưu lượng khách và dòng tiền.",
-    "khong": "Mặt bằng này không mở Thành Môn phụ đắc vận trong Vận {van} — tập trung dồn toàn bộ độ thoáng sáng cho cửa chính và vị trí quầy thu ngân."
+    "co": "Phép Thành Môn của Huyền Không: phía {phuong} ({vai}) đón được sao đương vận của vận xây dựng {van}. Phép này chỉ tính khi phía {phuong} thật sự có lối phụ, cửa sổ lớn hoặc khoảng thoáng; nếu có, nên giữ phía ấy sáng, sạch và dễ đi lại — làm chỗ đón khách hoặc biển hiệu cũng được.",
+    "khong": "Với vận xây dựng {van}, hai phía kề hướng mặt bằng chưa dùng được phép Thành Môn — nên dồn độ thoáng sáng cho cửa chính và lối vào.",
+    "vai": {
+      "chinh": "Chính Thành Môn",
+      "phu": "Phó Thành Môn"
+    }
   },
   "checklist_loan_dau_cua_hang": [
     "Minh đường (khoảng lùi vỉa hè trước cửa) phải thoáng rộng, không bị trạm biến áp, gốc cây to hay biển báo che khuất tầm nhìn biển hiệu từ xa",
@@ -85,7 +84,7 @@
       "Thế ngồi Hậu chẩm vững chãi: sau lưng ghế Chủ cơ sở phải là tường kín hoặc tủ hồ sơ cao kiên cố, không quay lưng ra cửa đi lại hoặc vách kính trống trải",
       "Tầm nhìn bao quát Minh đường: từ bàn làm việc nhìn chéo kiểm soát được cửa phòng nhưng không kê bàn thẳng tắp đối diện cửa ra vào",
       "Hướng ngồi đón cát khí Bát trạch: xoay mặt ghế nhìn về một trong các hướng hợp mệnh quái {quai} của bạn ({huong_tot})",
-      "Chất liệu & ánh sáng bổ trợ hành {hanh_can}: ưu tiên tông {mau_sac}, vật dụng {chat_lieu}, sắp lịch họp chốt việc lớn vào khung {khung_gio}"
+      "Ánh sáng và giấy tờ: chỗ ngồi đủ sáng tự nhiên, giấy tờ quan trọng cất gọn trong tủ có khoá. Sách xưa không định màu sắc hay giờ họp theo hành cho bàn làm việc, nên phần này hệ thống không gợi ý."
     ]
   },
   "bo_tri_cua_hang_buon_ban": {

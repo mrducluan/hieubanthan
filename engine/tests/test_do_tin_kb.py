@@ -101,5 +101,5 @@ def test_luat_tom_y_khong_chua_nguyen_van_han():
 
 def test_nhap_ai_cho_duyet_la_tep_ai_chua_duyet_moi_va_khong_lan_vao_luat_tom_y():
     ai = {d["tep"] for d in do_tin.bang() if not d["phan"] and d["muc"] == "nhap_ai_cho_duyet"}
-    assert ai == {"ung_dung_co_dien_kb.json", "go_nut_doi_song_kb.json"}, ai   # thêm / bớt tệp = quyết định có chủ đích
+    assert ai == {"ung_dung_co_dien_kb.json", "go_nut_doi_song_kb.json", "co_van_tam_tai_kb.json", "doanh_chu_cam_nang_kb.json"}, ai   # thêm / bớt tệp = quyết định có chủ đích
     assert not ai & set(_tep_luat_tom_y())

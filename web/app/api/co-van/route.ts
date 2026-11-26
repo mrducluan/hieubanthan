@@ -1,9 +1,8 @@
-// POST /api/co-van — Chặng 2: Cổng Cố vấn Liên mảng Tam Tài (Nhân · Thiên · Địa, thích nghi 3 Bậc đầu vào).
-// Đi qua `luanGiaiCoSao` (mô-đun "tam_tai"): chương 1 + kết luận 5 giây + 3 trụ + biểu đồ 5 hành mở miễn phí;
-// các chương chi tiết sau và phụ lục mở bằng Sao khi công tắc thu Sao chung bật (cắt sạch phía máy chủ qua Allowlist SAO-2 v2.0).
+// POST /api/co-van — Cố vấn liên mảng Tam Tài: ba cách xem đọc riêng (không gộp mức), chỉ dùng phần miễn phí của các báo
+// cáo → miễn phí, không đi qua cổng Sao. Không lưu; ngày sinh người liên quan chỉ gửi khi có ô đồng ý.
+import { NextResponse } from "next/server";
 import { z } from "zod";
-import { themHocLuanGiai } from "@/lib/hoc-tuvi";
-import { luanGiaiCoSao } from "@/lib/luan-giai-sao";
+import { dauNguoiGoi, goiEngineDaKiem, laBanAnh, loiChung } from "@/lib/proxy";
 
 const NhaCoVan = z.object({
   do_huong: z.number().min(0).lt(360),
@@ -14,6 +13,7 @@ const DoiTacCoVan = z.object({
   ngay_sinh: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   gioi_tinh: z.enum(["nam", "nu"]).default("nam"),
   vai_tro: z.enum(["nguoi_thuong", "gop_von", "cong_su"]).default("cong_su"),
+  dong_y_tu_nguyen: z.literal(true),
 }).strict();
 
 const Input = z.object({
@@ -29,22 +29,13 @@ const Input = z.object({
   ngay_xem: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable().optional(),
 }).strict();
 
-const khoaCoVan = (d: Record<string, unknown>) => [
-  d.ngay_sinh,
-  d.gioi_tinh ?? "nam",
-  d.gio_sinh ?? "",
-  d.che_do ?? "doi_song",
-];
-
 export const maxDuration = 30;
 
-export function POST(req: Request) {
-  return luanGiaiCoSao(
-    req,
-    Input,
-    "/v1/co-van",
-    "tam_tai",
-    khoaCoVan,
-    () => themHocLuanGiai({ loai: "doi_song", tienTo: "ds.tam_tai." }),
-  );
+export async function POST(req: Request): Promise<NextResponse> {
+  const en = laBanAnh(req);
+  const parsed = Input.safeParse(await req.json().catch(() => null));
+  if (!parsed.success) return NextResponse.json({ error: loiChung("dau_vao", en) }, { status: 422 });
+  const kq = await goiEngineDaKiem(parsed.data, "/v1/co-van", dauNguoiGoi(req));
+  if (!kq.ok) return kq.res;
+  return NextResponse.json(kq.body, { headers: { "cache-control": "no-store" } });
 }

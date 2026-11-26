@@ -1,77 +1,78 @@
-// Chặng 2 E2E — Cổng Cố vấn Liên mảng Tam Tài (/co-van, 5 khối + Công tắc 2 Chế độ + Khủng hoảng) &
-// Không gian Cố vấn Kinh doanh (/co-van-kinh-doanh: Soi Góp Vốn + Bàn cờ AES-GCM 256-bit E2EE không rò bản rõ).
+// Cố vấn Tam Tài (/co-van) + Không gian kinh doanh (/co-van-kinh-doanh) — sau review 2026-11-26: ba cách xem đọc riêng,
+// không mức gộp, chuyển hướng câu về người khác / chưa rõ, an toàn trước; sổ nháp khoá mật khẩu trên máy (không phải E2EE),
+// đưa sang "Khi góp vốn" thì ô đồng ý vẫn để trống.
 import { test, expect } from "@playwright/test";
 
-test("/co-van: Bậc 1 (chỉ ngày sinh) hiện đủ 5 khối trực quan, gạt Công tắc Cổ điển tự mở căn cứ và chặn câu khủng hoảng", async ({ page }) => {
+test("/co-van: ba cách xem riêng, không mức gộp; câu về người khác chuyển hướng; câu khủng hoảng chặn trước", async ({ page }) => {
   await page.goto("/co-van");
-  await expect(page.locator("h1")).toContainText("Cố vấn Tam Tài");
+  await expect(page.locator("h1")).toContainText("ba cách nhìn");
 
   await page.getByTestId("co-van-o-cau-hoi").fill("Năm tới tôi có nên nghỉ việc ra khởi nghiệp riêng không?");
   await page.getByTestId("co-van-ngay-sinh").fill("1990-05-15");
   await page.getByTestId("co-van-nut-gui").click();
 
-  await expect(page.getByTestId("co-van-khoi-1-ket-luan")).toBeVisible({ timeout: 20_000 });
-  await expect(page.getByTestId("co-van-khoi-2-ba-tru")).toBeVisible();
-  await expect(page.getByTestId("co-van-khoi-3-nhip-12-thang")).toBeVisible();
-  await expect(page.getByTestId("co-van-khoi-4-ngu-hanh")).toBeVisible();
-  await expect(page.getByTestId("co-van-khoi-5-nang-bac")).toBeVisible();
+  await expect(page.getByTestId("co-van-ket-qua")).toBeVisible({ timeout: 20_000 });
+  for (const ma of ["nhan", "thien", "dia"]) await expect(page.getByTestId(`co-van-tru-${ma}`)).toBeVisible();
+  // chưa có giờ sinh, chưa có hướng nhà → Nhân và Địa không chấm mức
+  await expect(page.getByTestId("co-van-tru-nhan")).toContainText("Không chấm mức");
+  await expect(page.getByTestId("co-van-tru-dia")).toContainText("Không chấm mức");
+  await expect(page.getByTestId("co-van-nhip-12")).toBeVisible();
 
-  // Bấm Công tắc 2 Chế độ sang Học thuật Cổ điển & Ngũ hành → hiện khung Ứng dụng Cổ điển ngay lập tức
-  await page.getByTestId("co-van-khoi-1-ket-luan").getByTestId("che-do-co-dien").click();
-  await expect(page.getByTestId("co-van-khoi-4-ngu-hanh").getByTestId("lg-ung-dung-co-dien")).toBeVisible();
+  await page.getByTestId("co-van-o-cau-hoi").fill("Chồng tôi có ngoại tình không");
+  await page.getByTestId("co-van-nut-gui").click();
+  await expect(page.getByTestId("co-van-chuyen-huong")).toHaveAttribute("data-ly-do", "nguoi_khac", { timeout: 15_000 });
+  await expect(page.getByTestId("co-van-ket-qua")).toHaveCount(0);
 
-  // Câu khủng hoảng → chặn an toàn ngay lập tức, không hiện khối luận mệnh lý
   await page.getByTestId("co-van-o-cau-hoi").fill("Tôi tuyệt vọng muốn tự tử kết thúc mọi thứ");
   await page.getByTestId("co-van-nut-gui").click();
   await expect(page.getByTestId("co-van-an-toan")).toBeVisible({ timeout: 15_000 });
-  await expect(page.getByTestId("co-van-khoi-1-ket-luan")).toHaveCount(0);
+  await expect(page.getByTestId("co-van-ket-qua")).toHaveCount(0);
 });
 
-test("/co-van-kinh-doanh: Bàn cờ E2EE mã hoá AES-GCM không rò bản rõ lên mạng hay localStorage, nối sang Soi Góp Vốn", async ({ page }) => {
+test("/co-van-kinh-doanh: cẩm nang không xếp hạng; sổ nháp khoá mật khẩu không gửi gì khi lưu; sang Khi góp vốn phải tự tích đồng ý", async ({ page }) => {
   const cacYeuCauMang: string[] = [];
   page.on("request", (req) => {
     if (req.method() === "POST") cacYeuCauMang.push(`${req.url()}::${req.postData() ?? ""}`);
   });
 
   await page.goto("/co-van-kinh-doanh");
-  await expect(page.locator("h1")).toContainText("Không gian Cố vấn Kinh doanh");
+  await expect(page.locator("h1")).toContainText("góp vốn");
 
-  // Tab mặc định Cẩm nang 5 Trụ: nạp mẫu 2 mặt bằng Vận 9 và lập Cẩm nang Chiến lược & Bài trí Kinh doanh
   await expect(page.getByTestId("cam-nang-kinh-doanh")).toBeVisible();
   await page.getByTestId("cam-nang-nap-2-mat-bang").click();
   await page.getByTestId("cam-nang-nut-lap").click();
   await expect(page.getByTestId("cn-tru-1-thi-truong")).toBeVisible({ timeout: 20_000 });
-  await expect(page.getByTestId("cn-tru-2-dia-diem")).toBeVisible();
   await expect(page.getByTestId("cn-mat-bang-1")).toBeVisible();
-  await expect(page.getByTestId("cn-tru-3-nhan-su")).toBeVisible();
-  await expect(page.getByTestId("cn-tru-4-van-phong")).toBeVisible();
-  await expect(page.getByTestId("cn-tru-5-cua-hang")).toBeVisible();
+  await expect(page.getByTestId("cn-mat-bang-1")).not.toContainText("Ưu tiên");
 
-  // Mở tab Bàn cờ E2EE và tạo bàn cờ với mật khẩu >= 8 ký tự
   await page.getByTestId("tab-cvkd-ban-co-e2ee").click();
+  await expect(page.getByTestId("ban-co-e2ee")).not.toContainText("Đầu-Cuối");
   await page.getByTestId("e2ee-mat-khau").fill("KhoaBiMat#2027");
   await page.getByTestId("e2ee-nut-mo-khoa").click();
   await expect(page.getByTestId("e2ee-khung-da-mo")).toBeVisible();
 
-  // Kiểm tra dữ liệu trong localStorage là bản mã AES-GCM, không chứa tên "Đối tác A" và không có request POST nào gửi bản rõ bàn cờ
   const rawLs = await page.evaluate(() => localStorage.getItem("hbt.ban_co_kinh_doanh.e2ee.v1") ?? "");
   expect(rawLs).toContain("hbt_e2ee_v1");
   expect(rawLs).not.toContain("Đối tác A");
   expect(cacYeuCauMang.some((u) => u.includes("Đối tác A"))).toBe(false);
 
-  // Khoá lại rồi nhập sai mật khẩu → từ chối giải mã
   await page.getByTestId("e2ee-nut-khoa-lai").click();
   await page.getByTestId("e2ee-mat-khau").fill("SaiMatKhau1234");
   await page.getByTestId("e2ee-nut-mo-khoa").click();
   await expect(page.getByTestId("e2ee-loi")).toContainText("Sai mật khẩu");
 
-  // Mở đúng mật khẩu → chuyển danh sách sang tab Soi Bù Khuyết Góp Vốn và chạy phân tích
   await page.getByTestId("e2ee-mat-khau").fill("KhoaBiMat#2027");
   await page.getByTestId("e2ee-nut-mo-khoa").click();
   await page.getByTestId("e2ee-dua-sang-gop-von").click();
 
-  await expect(page.getByTestId("soi-gop-von-doi-tac")).toBeVisible();
-  await page.getByTestId("gop-von-nut-phan-tich").click();
+  await expect(page.getByTestId("gop-von")).toBeVisible();
+  for (const o of await page.getByTestId("gop-von-dong-y").all()) await expect(o).not.toBeChecked();
+  await expect(page.getByTestId("gop-von-cam-ket")).not.toBeChecked();
+  await page.getByTestId("gop-von-xem").click();
+  await expect(page.getByRole("alert")).toContainText("đồng ý");
+  for (const o of await page.getByTestId("gop-von-dong-y").all()) await o.check();
+  await page.getByTestId("gop-von-cam-ket").check();
+  await page.getByTestId("gop-von-xem").click();
   await expect(page.getByTestId("gop-von-ket-qua")).toBeVisible({ timeout: 15_000 });
-  await expect(page.getByTestId("gop-von-dieu-le")).toBeVisible();
+  await expect(page.getByTestId("gop-von-ranh-gioi")).toContainText("luật sư");
 });

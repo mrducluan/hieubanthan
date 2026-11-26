@@ -4,26 +4,16 @@
   "school_id": "tam_tai_truc_giao",
   "trang_thai": "nhap_ai",
   "ten_bao_cao": "Cố vấn Tam Tài cho quyết định của bạn",
-  "ket": "Ba trụ Nhân – Thiên – Địa soi ba mặt độc lập của cùng một quyết định: sức bền tự thân, thời điểm hành động và đòn bẩy không gian. Quyền lựa chọn cuối cùng luôn thuộc về điều kiện thực tế của bạn.",
-  "nhan_nhip_ket_luan": {
-    "thuan_mo": "Thuận đà mở bước có kiểm soát",
-    "chuan_bi_chac": "Chuẩn bị chắc nền rồi mới bung sức",
-    "giu_phong_thu": "Ưu tiên giữ nhịp bền & gỡ nút trước"
-  },
+  "ket": "Ba cách xem dưới đây đọc riêng từng mặt của cùng một quyết định: sức của chính bạn, thời điểm và không gian. Hệ thống không gộp chúng thành một kết luận chung và không quyết thay bạn.",
   "nhan_nhip_thang": {
     "day_manh": "Thuận mở bước",
     "can_bang": "Đi đều chắc nhịp",
     "phong_thu": "Giữ sức & rà soát"
   },
   "ten_tru": {
-    "nhan": "Trụ Nhân · Nội lực & Sức bền",
-    "thien": "Trụ Thiên · Thời điểm & Mắt xích hệ quả",
-    "dia": "Trụ Địa · Không gian & Ngày hành động"
-  },
-  "vai_tro_tru": {
-    "nhan": "Đọc từ Bát tự & Thần số học: cho biết sức tải hiện tại và hành bổ khuyết của chính bạn",
-    "thien": "Đọc từ Tử vi / Phi hoá & Nhịp 12 tháng: cho biết cửa sổ thời gian và điểm rơi bước hai",
-    "dia": "Đọc từ Phong thuỷ Mệnh quái / Vận 9 & Hoàng lịch: cho biết cách chỉnh chỗ ngồi, không gian và ngày tốt"
+    "nhan": "Nhân · Sức của chính bạn",
+    "thien": "Thiên · Thời điểm",
+    "dia": "Địa · Không gian"
   },
   "lop_ten": {
     "battu_tam_tru": "Bát tự Tam trụ (6 chữ)",
@@ -55,116 +45,142 @@
       "cung_tuvi": "su_nghiep",
       "chuong_battu": "su_nghiep",
       "viec_hoang_lich": "ky_ket",
-      "ket_luan": {
-        "thuan_mo": "Nội lực và thời thế đang mở lối cho bước chuyển công việc hoặc nhận trọng trách mới, miễn là bạn chốt rõ phạm vi việc và mốc tài chính trước khi ký.",
-        "chuan_bi_chac": "Hướng đi có cơ sở nhưng hai trụ Nội lực – Thời điểm chưa đồng pha hoàn toàn: nên chạy thử từng phần hoặc chuẩn bị xong đầu ra rồi mới rời bến cũ.",
-        "giu_phong_thu": "Giai đoạn này chưa lợi cho quyết định nghỉ ngang hoặc dồn toàn lực sang chỗ mới chưa rõ dòng tiền; ưu tiên củng cố tay nghề và tích luỹ đệm an toàn trước."
-      },
       "diem_tua": "Bám sát năng lực cốt lõi thuộc hành {hanh_can} và nhịp năm cá nhân số {nam_cn} để chọn đúng vai trò bạn làm giỏi nhất.",
-      "diem_giu": "Tránh quyết định chuyển việc chỉ vì bức xúc tức thời trong tháng có nhịp giữ sức; luôn giữ quỹ dự phòng tối thiểu 6 tháng sinh hoạt."
+      "diem_giu": "Tránh quyết định chuyển việc chỉ vì bức xúc tức thời trong tháng có nhịp giữ sức; luôn giữ quỹ dự phòng tối thiểu 6 tháng sinh hoạt.",
+      "lien_ket": {
+        "ten": "Lá số Tử vi — chương Công việc",
+        "duong": "/tu-vi"
+      }
     },
     "tai_chinh_dau_tu": {
       "ten": "Tiền bạc, đầu tư & quản trị dòng tiền",
       "cung_tuvi": "tien_bac",
       "chuong_battu": "tien_bac",
       "viec_hoang_lich": "giao_dich",
-      "ket_luan": {
-        "thuan_mo": "Nhịp tài chính đủ sáng để phân bổ vốn vào kênh bạn hiểu rõ bản chất, đi theo từng đợt có điểm dừng lời và giới hạn rủi ro rõ ràng.",
-        "chuan_bi_chac": "Cơ hội tạo dòng tiền có xuất hiện nhưng dễ đi kèm khoản chi phát sinh: nên chia nhỏ đợt xuống tiền và giữ tỷ lệ tiền mặt chủ động.",
-        "giu_phong_thu": "Ưu tiên số một lúc này là giữ chặt dòng tiền mặt, thu hồi công nợ cũ và tránh dùng đòn bẩy vay mượn cho khoản đầu tư mới."
-      },
       "diem_tua": "Dựa vào kỷ luật chốt số liệu và chọn đúng các tháng thuận mở bước để thương lượng hợp đồng, giá cả.",
-      "diem_giu": "Tuyệt đối không dồn hết vốn vào một cửa hoặc xuống tiền theo lời rủ gấp khi chưa tự kiểm chứng sổ sách."
+      "diem_giu": "Tuyệt đối không dồn hết vốn vào một cửa hoặc xuống tiền theo lời rủ gấp khi chưa tự kiểm chứng sổ sách.",
+      "lien_ket": {
+        "ten": "Lá số Tử vi — chương Tiền bạc",
+        "duong": "/tu-vi"
+      }
     },
     "gop_von_hop_tac": {
       "ten": "Hùn vốn, chọn cộng sự & phân vai làm ăn",
       "cung_tuvi": "quan_he",
       "chuong_battu": "quan_he",
       "viec_hoang_lich": "ky_ket",
-      "ket_luan": {
-        "thuan_mo": "Nhịp hợp tác thuận lợi để ghép sức với người bù đúng hành {hanh_can} của bạn, với điều kiện tách bạch ba vai thị trường – tài chính – vận hành ngay trên giấy.",
-        "chuan_bi_chac": "Có thể phối hợp theo từng dự án ngắn hạn 1–3 tháng để đo nhịp làm việc thật trước khi ký điều lệ góp vốn dài hạn.",
-        "giu_phong_thu": "Chưa nên đứng tên vay chung hoặc góp vốn lớn dựa trên tình cảm quen biết; hãy giữ độc lập tài khoản và làm theo hợp đồng dịch vụ rõ ràng."
-      },
       "diem_tua": "Thế mạnh của bạn phát huy tốt nhất khi giữ rõ biên giới trách nhiệm và cơ chế hai chữ ký cho khoản chi lớn.",
-      "diem_giu": "Đừng gộp chung vai mở thị trường và vai giữ két tiền vào một người không có quy trình đối soát định kỳ."
+      "diem_giu": "Đừng gộp chung vai mở thị trường và vai giữ két tiền vào một người không có quy trình đối soát định kỳ.",
+      "lien_ket": {
+        "ten": "Khi góp vốn với người khác",
+        "duong": "/quan-ly-nhan-su#gop-von"
+      }
     },
     "nha_cua_mat_bang": {
       "ten": "Nhà cửa, chuyển chỗ ở & chọn mặt bằng",
       "cung_tuvi": "nha_cua",
       "chuong_battu": "tien_bac",
       "viec_hoang_lich": "nhap_trach",
-      "ket_luan": {
-        "thuan_mo": "Nhịp an cư và không gian đang ủng hộ việc chốt mặt bằng, dọn về nơi ở mới hoặc sắp xếp lại góc làm việc đón sinh khí.",
-        "chuan_bi_chac": "Nên khảo sát kỹ ánh sáng, thông gió, pháp lý và cân đối sức trả góp hàng tháng trước khi đặt cọc chính thức.",
-        "giu_phong_thu": "Giai đoạn này hợp dọn gọn, chỉnh ánh sáng và chỗ ngồi ngay trên không gian hiện có hơn là vay nặng để mua đổi hoặc đục phá lớn."
-      },
       "diem_tua": "Ưu tiên không gian thoáng sáng, hướng ngồi làm việc và đầu giường thuận mệnh quái {quai} của bạn.",
-      "diem_giu": "Tránh dồn ép tiến độ sửa chữa lớn vào các tháng giữ sức hoặc vượt quá 35% thu nhập ổn định hàng tháng cho khoản trả góp."
+      "diem_giu": "Tránh dồn ép tiến độ sửa chữa lớn vào các tháng giữ sức hoặc vượt quá 35% thu nhập ổn định hàng tháng cho khoản trả góp.",
+      "lien_ket": {
+        "ten": "Phong thuỷ — Nhà của bạn",
+        "duong": "/phong-thuy"
+      }
     },
     "tinh_cam_cam_ket": {
       "ten": "Tình cảm, gắn kết & mở lòng đón duyên",
       "cung_tuvi": "tinh_cam",
       "chuong_battu": "tinh_cam",
       "viec_hoang_lich": "cuoi_hoi",
-      "ket_luan": {
-        "thuan_mo": "Nhịp cảm xúc đang cởi mở và ấm áp, rất thuận để bước sang cam kết sâu hơn hoặc chủ động mở lòng qua những cuộc gặp chân thành.",
-        "chuan_bi_chac": "Tình cảm cần độ lắng và sự thấu hiểu qua đời sống thật: cứ nuôi dưỡng nhịp trò chuyện tự nhiên, khoan ép tiến độ vội vàng.",
-        "giu_phong_thu": "Lúc này bạn cần chăm lại sự bình yên và nhịp sống riêng của chính mình trước; khi nội tâm vững vàng, mối quan hệ lành mạnh mới bền."
-      },
       "diem_tua": "Sự chân thành, nhất quán giữa lời nói và việc làm nhỏ mỗi ngày là sức hút bền nhất của bạn.",
-      "diem_giu": "Tránh đem nỗi lo cũ hoặc áp lực công việc trút sang cuộc trò chuyện tình cảm vào đêm muộn."
+      "diem_giu": "Tránh đem nỗi lo cũ hoặc áp lực công việc trút sang cuộc trò chuyện tình cảm vào đêm muộn.",
+      "lien_ket": {
+        "ten": "Hợp đôi",
+        "duong": "/hop-doi"
+      }
     },
     "gia_dao_hoa_giai": {
       "ten": "Gia đình, vợ chồng & cầu nối hoà khí",
       "cung_tuvi": "gia_dinh",
       "chuong_battu": "gia_dinh",
       "viec_hoang_lich": "xuat_hanh",
-      "ket_luan": {
-        "thuan_mo": "Không khí gia đình có sẵn nền gắn kết để hai bên ngồi lại tháo gỡ khúc mắc nhẹ nhàng và thống nhất lại nếp sinh hoạt chung.",
-        "chuan_bi_chac": "Khúc mắc chủ yếu nằm ở lệch nhịp phản ứng lúc mệt mỏi: hãy đổi cách mở lời và chia nhỏ việc nhà rõ ràng từng tuần.",
-        "giu_phong_thu": "Khi đôi bên đang căng thẳng, bước khôn ngoan nhất là hạ nhiệt lời nói, giữ không gian nhà thoáng dịu và tạm hoãn tranh luận đúng – sai."
-      },
       "diem_tua": "Giữ bữa cơm ấm, ánh sáng phòng sinh hoạt chung dịu mắt và nói thẳng nhu cầu cụ thể thay vì nhắc chuyện cũ.",
-      "diem_giu": "Không bàn chuyện tiền nong, con cái hay nội ngoại lúc cả hai vừa đi làm về đang kiệt sức."
+      "diem_giu": "Không bàn chuyện tiền nong, con cái hay nội ngoại lúc cả hai vừa đi làm về đang kiệt sức.",
+      "lien_ket": {
+        "ten": "Nhà Tôi — cả nhà",
+        "duong": "/gia-dinh"
+      }
     },
     "suc_ben_nang_luong": {
       "ten": "Sức bền cơ thể, giấc ngủ & phục hồi nhịp sống",
       "cung_tuvi": "suc_khoe",
       "chuong_battu": "suc_khoe",
       "viec_hoang_lich": "xuat_hanh",
-      "ket_luan": {
-        "thuan_mo": "Nền thể lực và tinh thần đang thuận để bạn thiết lập lại thói quen vận động đều, ngủ đúng giờ và nâng sức bền dài hạn.",
-        "chuan_bi_chac": "Cơ thể đang nhắc bạn bớt ôm đồm cùng lúc nhiều việc tối muộn; điều chỉnh lại nhịp ăn – nghỉ từ tuần này sẽ thấy nhẹ người rõ rệt.",
-        "giu_phong_thu": "Đây là lúc cần ưu tiên nghỉ ngơi phục hồi, đi khám sức khoẻ định kỳ và cắt bớt lịch làm việc quá tải (lời tham khảo, không thay bác sĩ)."
-      },
       "diem_tua": "Duy trì nhịp sinh hoạt điều độ bổ trợ hành {hanh_can} và phòng ngủ yên tĩnh, thoáng khí.",
-      "diem_giu": "Không thức khuya kéo dài hoặc tự chịu đựng dấu hiệu mệt mỏi mà trì hoãn khám định kỳ."
+      "diem_giu": "Không thức khuya kéo dài hoặc tự chịu đựng dấu hiệu mệt mỏi mà trì hoãn khám định kỳ.",
+      "lien_ket": {
+        "ten": "Lá số Bát tự — chương Sức khoẻ",
+        "duong": "/bat-tu"
+      }
     },
     "quyet_dinh_tong_hop": {
       "ten": "Định hướng tổng thể & sắp việc giai đoạn tới",
       "cung_tuvi": "tong_quan",
       "chuong_battu": "tong_quan",
       "viec_hoang_lich": "ky_ket",
-      "ket_luan": {
-        "thuan_mo": "Ba mặt Nội lực – Thời điểm – Không gian đang tạo thế nâng đỡ tốt để bạn triển khai mục tiêu trọng tâm nhất của mình theo từng mốc rõ ràng.",
-        "chuan_bi_chac": "Giai đoạn bản lề vừa củng cố nền tảng vừa mở từng bước: chọn đúng một mục tiêu quan trọng nhất để dồn sức vào tháng thuận.",
-        "giu_phong_thu": "Giai đoạn này thắng ở sự tĩnh táo và giữ chắc phần gốc: thu gọn đầu việc dàn trải, dưỡng sức đợi đúng tháng mở bước."
-      },
       "diem_tua": "Kết hợp thế mạnh tự thân cần bù hành {hanh_can} với lịch tháng thuận để làm ít mà trúng việc chính.",
-      "diem_giu": "Tránh mở cùng lúc quá ba mũi việc lớn khiến cả thời gian lẫn nguồn lực bị phân tán."
+      "diem_giu": "Tránh mở cùng lúc quá ba mũi việc lớn khiến cả thời gian lẫn nguồn lực bị phân tán.",
+      "lien_ket": {
+        "ten": "Chân dung tổng hợp",
+        "duong": "/chan-dung"
+      }
     }
   },
-  "chuong_tieu_de": {
-    "c1": "Kết luận Tam Tài & bức tranh ba mặt",
-    "c2": "Nội lực tự thân & mắt xích thời thế",
-    "c3": "Nhịp 12 tháng tới & ngày đẹp hành động",
-    "c4": "Đòn bẩy không gian, đối tác & việc làm ngay"
+  "nguon": {
+    "battu_chuong": "Luận giải Bát tự — chương “{chuong}”",
+    "thanso_nam": "Thần số học — năm cá nhân số {n} (chưa có giờ sinh nên không dùng mức của Bát tự)",
+    "tuvi_chuong": "Luận giải Tử vi — chương “{chuong}”",
+    "lich_12": "Lịch quyết định 12 tháng (con giáp, sao năm, lịch tiết khí{them})",
+    "lich_12_them": ", Tử vi và Bát tự theo tháng",
+    "phongthuy": "Phong thuỷ — Nhà của bạn (hướng {do}°{nam})",
+    "menh_quai": "Bát trạch — cung mệnh của bạn (chưa có hướng nhà nên không chấm mức)"
   },
-  "chuong_cau_hoi": {
-    "c1": "Quyết định này nhìn từ ba trụ Nhân – Thiên – Địa đang nghiêng về hướng nào?",
-    "c2": "Sức tải nội lực của bạn và mắt xích hệ quả bước hai đang nhắc điều gì?",
-    "c3": "Tháng nào trong 12 tháng tới nên đẩy mạnh, tháng nào nên giữ nhịp?",
-    "c4": "Chỉnh không gian và cách phối hợp thế nào để trợ lực thực tế ngay tuần này?"
-  }
+  "mau": {
+    "nhan_co_gio": "Theo Luận giải Bát tự, chương “{chuong}” của bạn đang ở mức {nhan_muc}. Hành đang ít trong tám chữ: {hanh}.",
+    "nhan_khong_gio": "Chưa có giờ sinh nên Bát tự chỉ có sáu chữ: hành đang ít là {hanh}. Năm cá nhân số {n}: {y}",
+    "thien_co_gio": "Theo Luận giải Tử vi, chương “{chuong}” của bạn đang ở mức {nhan_muc}.",
+    "thien_lich": "Trong 12 tháng tới, tháng thuận mở bước: {mo}; tháng nên giữ sức: {giu}.",
+    "khong_co": "chưa có",
+    "dia_co_nha": "Theo bài Nhà của bạn: {tom}",
+    "dia_khong_nha": "Bạn thuộc cung {quai}; hướng Sinh Khí của bạn là {huong}. Thêm hướng nhà để xem mức của ngôi nhà.",
+    "dia_hd_khong_nha": "Khi làm việc quan trọng, có thể ngồi quay về hướng {huong}, giữ chỗ ngồi sáng và gọn.",
+    "tong_cung": "Các cách xem có mức đang cùng một chiều ({muc}). Vẫn chỉ là một góc tham khảo — quyết định theo điều kiện thực tế của bạn.",
+    "tong_khac": "Các cách xem đang nói khác nhau ({ds}). Hệ thống không chọn bên nào: mỗi cách nhìn một mặt, bạn cân theo điều kiện thực tế.",
+    "tong_mot": "Chỉ có một cách xem chấm được mức ({ds}); thêm giờ sinh hoặc hướng nhà để có thêm góc nhìn.",
+    "doi_tac": "Người liên quan nghiêng về vai “{vai}” ({hanh}): {gia_tri}. Hai bên nên ghi rõ ai giữ phần việc nào; đây không phải lời chấm hợp hay không hợp.",
+    "doi_tac_tieu_de": "Người liên quan nghiêng về vai nào",
+    "nen_giu": "Điều nên giữ",
+    "xem_them": "Xem kỹ hơn"
+  },
+  "chuyen_huong": {
+    "nguoi_khac": "Câu này hỏi về một người khác. Cố vấn chỉ đọc theo ngày sinh của chính bạn nên không trả lời thay cho người ấy. Nếu muốn xem hai người, dùng “Xem lá số 2 người” hoặc “Nhà Tôi” — người ấy nên tự nhập hoặc đồng ý cho bạn nhập.",
+    "ke_su_viec": "Có vẻ chuyện này đã xảy ra rồi. Lá số không phán được đúng sai của việc đã xảy ra; điều nên làm trước là bình tĩnh, nói chuyện với người đáng tin và, nếu liên quan pháp lý hay tiền bạc, hỏi người có chuyên môn. Khi sẵn sàng, bạn có thể hỏi về bước tiếp theo của chính mình.",
+    "chua_ro": "Cố vấn chưa nhận ra bạn đang cân nhắc việc gì. Bạn chọn một chủ đề gần nhất bên dưới, hoặc hỏi thẳng trong khung hỏi đáp của từng môn.",
+    "duoi_tuoi": "Cố vấn quyết định dành cho người từ 16 tuổi. Với người nhỏ hơn, cha mẹ có thể đọc các trang Tử vi, Bát tự, Thần số học của con — phần viết cho cha mẹ đọc hộ."
+  },
+  "lien_ket_chung": [
+    {
+      "ten": "Xem lá số 2 người",
+      "duong": "/tu-vi#hop-tham"
+    },
+    {
+      "ten": "Nhà Tôi",
+      "duong": "/gia-dinh"
+    },
+    {
+      "ten": "Hỏi đáp Tử vi",
+      "duong": "/tu-vi"
+    }
+  ]
 }

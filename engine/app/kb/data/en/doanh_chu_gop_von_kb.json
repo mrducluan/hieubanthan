@@ -1,58 +1,61 @@
 {
-  "_nguon": "Stage 2 — Co-founder Complementarity & Capital Partnership Safeguards KB (English overlay). AI draft awaiting project owner review.",
-  "_trang_thai": "ban_phu_en",
-  "nhan_hoi_dong": {
-    "can_doi": "Founding team covers Market Growth, Financial Control and Daily Operations",
-    "thien_lech": "Founding team clusters in one style — add charter safeguards for missing lanes"
+ "_nguon": "GV-1 English overlay — editorial draft awaiting owner review.",
+ "_trang_thai": "ban_phu_en",
+ "lam": {
+  "mo_thi_truong": {
+   "ten": "Market growth, sales, partnerships",
+   "nen_de_y": "People leaning this way often open many fronts or feel optimistic about cash flow; have someone check the numbers before spending."
   },
-  "tom_tat_hoi_dong": {
-    "can_doi": "Your co-founding group balances growth drive with financial discipline and steady execution; lock clear decision boundaries upfront.",
-    "thien_lech": "Founders share similar natural instincts, creating fast early rapport while risking blind spots around {khuyet} as operations scale."
+  "kiem_soat_tai_chinh": {
+   "ten": "Money, books, paperwork",
+   "nen_de_y": "People leaning this way are careful and may slow experiments; agree in advance on a test budget that can be spent."
   },
-  "lane": {
-    "mo_thi_truong": {
-      "ten": "Market growth, product & external partnerships",
-      "diem_manh": "Spots commercial openings quickly, builds client momentum and drives early traction",
-      "diem_mu": "Can overestimate cashflow runway or open too many fronts before processes stabilize"
-    },
-    "kiem_soat_tai_chinh": {
-      "ten": "Financial control, legal governance & risk",
-      "diem_manh": "Keeps sharp unit-economics discipline, cashflow visibility and contract rigor",
-      "diem_mu": "High caution can slow market experiments unless paired with a dedicated growth lead"
-    },
-    "van_hanh_hau_can": {
-      "ten": "Operations delivery, team cadence & quality",
-      "diem_manh": "Delivers reliably, retains existing customers and keeps internal execution steady",
-      "diem_mu": "May shoulder excessive operational detail or hesitate when pruning low-margin lines"
-    }
-  },
-  "lo_hong_theo_lane": {
-    "mo_thi_truong": "No dedicated Market & Growth lead — strong craft may struggle to build consistent commercial pipeline.",
-    "kiem_soat_tai_chinh": "No dedicated Finance & Risk guardian — watch closely for budget overruns or informal receivables.",
-    "van_hanh_hau_can": "No dedicated Operations & Delivery anchor — rapid sales growth can strain fulfillment quality."
-  },
-  "dieu_le_mac_dinh": [
-    {
-      "tieu_de": "Dual-approval spending & commitment threshold",
-      "nguyen_tac": "Any expenditure or contract above an agreed monthly threshold (e.g. 10–15% of working capital) requires written sign-off from both the growth lead and finance guardian."
-    },
-    {
-      "tieu_de": "Separate operating salary from equity dividends",
-      "nguyen_tac": "Pay market-aligned operating compensation for full-time roles first; distribute net profit according to equity only after reserve targets are met."
-    },
-    {
-      "tieu_de": "Pre-agreed exit valuation, right of first refusal & vesting",
-      "nguyen_tac": "Define buy-out valuation formulas, right of first refusal and a 24–36 month vesting schedule in writing while goodwill is high."
-    }
-  ],
-  "dieu_le_bo_sung": {
-    "cung_nong_mo_rong": {
-      "tieu_de": "Ring-fenced runway floor for growth-heavy teams",
-      "nguyen_tac": "Because the founding group leans strongly toward expansion, ring-fence at least six months of fixed operating expenses untouched by new experiments."
-    },
-    "ty_le_50_50": {
-      "tieu_de": "50–50 tie-breaker clause by domain authority",
-      "nguyen_tac": "When equity is split evenly, assign final tie-breaking authority by functional lane (product/market vs budget/compliance) so decisions never stall."
-    }
+  "van_hanh": {
+   "ten": "Day-to-day operations, process, delivery",
+   "nen_de_y": "People leaning this way keep things steady but tend to carry everything; write down which decisions need two people."
   }
+ },
+ "khau_con_trong": {
+  "mo_thi_truong": "No one clearly leans toward market growth: name one person accountable for revenue, or hire sales early.",
+  "kiem_soat_tai_chinh": "No one clearly leans toward money and paperwork: use an independent bookkeeper from month one and have two people approve large spending.",
+  "van_hanh": "No one clearly leans toward daily operations: turn delivery and customer care into a checklist and give one person ownership."
+ },
+ "tong_quan": {
+  "du": {
+   "nhan": "The group has someone leaning toward each of the three areas",
+   "tom_tat": "Each core area has a natural owner; what remains is writing down who decides what from day one."
+  },
+  "thieu": {
+   "nhan": "The group leans to one side",
+   "tom_tat": "Members are strong in similar areas, so they click early on; {khau} has no clear owner yet, so plan for it now."
+  }
+ },
+ "dieu_le": [
+  {
+   "ma": "hai_nguoi_duyet",
+   "tieu_de": "Two people approve large spending",
+   "noi_dung": "Agree on a threshold (for example a share of monthly working capital): spending or contracts above it need written sign-off from two people."
+  },
+  {
+   "ma": "luong_va_loi_nhuan",
+   "tieu_de": "Separate salary from profit by share",
+   "noi_dung": "Full-time operators are paid for their role first; profit after reserves is split by ownership, so neither the doers nor the investors feel shortchanged."
+  },
+  {
+   "ma": "rut_von",
+   "tieu_de": "How to exit amicably",
+   "noi_dung": "Write down how a stake is valued, who has first right to buy it, and a minimum commitment period, while everyone still gets along."
+  }
+ ],
+ "dieu_le_them": {
+  "ty_le_50_50": {
+   "tieu_de": "When two people split 50 – 50",
+   "noi_dung": "Name who has the final say in each area (product, budget…) so decisions do not stall when you disagree."
+  },
+  "thieu_tai_chinh": {
+   "tieu_de": "When no one owns the money",
+   "noi_dung": "Lock a reserve of a few months of fixed costs that is not used for expansion."
+  }
+ },
+ "ranh_gioi": "This is cultural reference only, to help partners understand each other's working tendencies and split roles; it is not an assessment of anyone and does not replace getting to know each other through real work. The charter points are prompts for discussion only: have a lawyer draft or review any shareholder agreement before signing; this is not legal or investment advice. The person entering data confirms each person consented to the use of their birth date; hieuban.com uses it only for this calculation and does not store it."
 }
