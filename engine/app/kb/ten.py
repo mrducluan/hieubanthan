@@ -167,6 +167,16 @@ KHOA_MA: dict[str, str | tuple[str, str]] = {
     "vao_menh.sao": "sao", "duong.hoa": "hoa", "duong.sao": "sao", "hoa.hoa": "hoa", "hoa.sao": "sao",
     "nguoi_kia_vao_ban.hoa": "hoa", "nguoi_kia_vao_ban.sao": "sao", "ban_vao_nguoi_kia.hoa": "hoa",
     "ban_vao_nguoi_kia.sao": "sao", "menh_nguoi_kia_vao_ban.hoa": "hoa", "menh_nguoi_kia_vao_ban.sao": "sao",
+    # TV-BD1 — Bản đồ 12 cung Tử vi + chuỗi chuyển Kỵ 2 chặng (`chuoi_chuyen_ky`)
+    "qua_cung": "cung", "can_dau": "can", "can_chuyen": "can",
+    "hoa_dau": "hoa", "sao_dau": "sao", "sao_chuyen": "sao",
+    "o.cung": "cung", "hanh_cung": "hanh", "o.tuan_triet": "tuan_triet",
+    "chinh_tinh.sao": "sao", "bay_cung.hoa": "hoa", "bay_cung.sao": "sao",
+    "tam.cuc": "cuc", "hanh_cuc": "hanh", "tam.nap_am": "nap_am", "hanh_menh": "hanh",
+    "tuan_chi": "chi", "triet_chi": "chi",
+    "sinh_nien.hoa": "hoa", "sinh_nien.sao": "sao",
+    "noi_bat.hoa": "hoa", "noi_bat.sao": "sao",
+    "hoa_nam.hoa": "hoa", "hoa_nam.sao": "sao", "dai_van.ten_cung": "cung",
     # EN-ALL GĐ 4 (agent B) — bài đọc Tử vi: dòng thời gian đại hạn, sao lưu năm
     "thoi_gian_bieu.cung": "cung", "muc.cung": "cung", "muc.cac_cung": "cung",
     # EN-ALL GĐ 4 (agent E) — hỏi đáp Tử vi: cung câu hỏi đọc (web hiện "Cung xem"), bàn 12 cung của khối hình (chi cung hỏi,

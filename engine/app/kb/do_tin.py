@@ -97,6 +97,8 @@ SO: dict[str, dict] = {
     "tuvi_sao_luu_kb.json": {"mang": "tuvi", "muc": "truyen_thong"},
     "tuvi_y_bo_sung.json": {"mang": "tuvi", "muc": "truyen_thong", "ghi_chu": "rút ý lời giảng hiện đại, viết lại (TV-YBS)"},
     "tuvi_doi_song_kb.json": {"mang": "tuvi", "muc": "bien_tap"},
+    "tuvi_ban_do_kb.json": {"mang": "tuvi", "muc": "bien_tap",
+                            "ghi_chu": "TV-BD1 Bản đồ 12 cung Tử vi: lời cung, tam phương, đường bay 2 chặng, năm — ban biên tập"},
     "battu_luan_hoi_kb.json": {"mang": "battu", "muc": "bien_tap", "ghi_chu": "lớp Luận theo câu hỏi Bát tự (LH-2)"},
     "tuvi_luan_hoi_kb.json": {"mang": "tuvi", "muc": "bien_tap", "ghi_chu": "lớp Luận theo câu hỏi (LH-1); tập quán dân gian ghi theo phong tục, không phải cổ thư"},
     "tuvi_hai_nguoi_kb.json": {"mang": "tuvi", "muc": "truyen_thong"},

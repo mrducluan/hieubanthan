@@ -18,7 +18,7 @@
 | Mảng | Có nguyên văn đối chiếu | Tóm ý cổ thư, chưa khớp từng câu | Tiên đề logic sách hiện đại (ghi trang) | Tập quán / truyền khẩu phổ thông | Ban biên tập soạn | Nháp AI chờ chủ dự án duyệt | Tệp kỹ thuật |
 |---|---|---|---|---|---|---|---|
 | Bát tự | 3 | 1 |  | 1 | 7 |  |  |
-| Tử vi | 1 | 3 | 3 | 4 | 7 |  |  |
+| Tử vi | 1 | 3 | 3 | 4 | 8 |  |  |
 | Kinh Dịch | 4 | 2 |  | 1 | 2 |  |  |
 | Phong thuỷ | 2 | 2 |  | 1 | 5 |  |  |
 | Nhân tướng | 6 | 2 |  | 1 | 1 |  |  |
@@ -98,6 +98,7 @@
 | Tử vi | `bo_sung_hoa_cung.json` |  | Ban biên tập soạn |  |
 | Tử vi | `bo_sung_sao.json` |  | Ban biên tập soạn |  |
 | Tử vi | `su_kien_kb.json` |  | Ban biên tập soạn |  |
+| Tử vi | `tuvi_ban_do_kb.json` |  | Ban biên tập soạn | TV-BD1 Bản đồ 12 cung Tử vi: lời cung, tam phương, đường bay 2 chặng, năm — ban biên tập |
 | Tử vi | `tuvi_cach_cuc.json` |  | Tóm ý cổ thư, chưa khớp từng câu | 7 cách có `sach_ghi` khớp «định phú / quý cục» (test_cach_cuc_sach_ghi_khop_dinh_cuc_toan_thu); 37 cách có cổ ca trỏ Cốt Tuỷ Phú; Quân thần khánh hội + Nguyệt sinh thương hải sửa theo sách (KT-TT8); Mã đầu đới kiếm, Lộc Mã bội ấn giữ cách phổ biến, gắn `khac_dieu_kien` |
 | Tử vi | `tuvi_co_thu.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
 | Tử vi | `tuvi_co_thu.json` | cau | Có nguyên văn đối chiếu | 84 câu Cốt Tuỷ Phú khớp từng chữ (giản ↔ phồn); phiên âm, nghĩa là nháp; chưa so bản khắc 1600 |
