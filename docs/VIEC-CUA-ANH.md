@@ -8,9 +8,14 @@
 
 ---
 
-## ⭐ VIỆC MỚI NHẤT — làm từ trên xuống (cập nhật 25/11/2026)
+## ⭐ VIỆC MỚI NHẤT — làm từ trên xuống (cập nhật 26/11/2026)
 
 Làm xong dòng nào thì đánh `[x]` (hoặc nhắn em). Các mục cũ hơn nằm bên dưới đường kẻ.
+
+### 00a. TV-BD1 — Bản đồ 12 cung Tử vi tương tác — sau khi merge
+
+- [ ] **Deploy engine (Render) TRƯỚC, rồi mới tới web (Vercel)** (web gọi route mới `POST /v1/tuvi/ban-do`; khi Render chưa lên thì khối tự ẩn êm ái không báo lỗi).
+- [ ] Mở `/tu-vi` và `/en/zi-wei-dou-shu` trên điện thoại & máy tính trải nghiệm hai chế độ **Bánh xe 12 cung** (kéo kim năm, bấm nút ▶ chạy qua các năm, chạm cung xem Tam phương tứ chính) và **Mạng đường bay** (lọc Chuỗi 2 chặng `① → ②`); câu nào trong `/quan-tri/tri-thuc/tuvi_ban_do_kb` muốn trau chuốt thêm thì sửa trực tiếp trên quản trị.
 
 ### 00. Bốn PR #347 #348 #350 #353 — đã soát và gộp vào một PR mới (25/11/2026, `docs/RA-SOAT-PR-347-353.md`)
 

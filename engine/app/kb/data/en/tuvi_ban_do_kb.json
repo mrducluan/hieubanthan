@@ -1,0 +1,218 @@
+{
+  "_trang_thai": "bien_tap",
+  "source": [
+    "Zi Wei Dou Shu Quan Shu — the twelve palaces and their triad / opposite axes",
+    "Liang Ruoyu — Flying Star Zi Wei Dou Shu (editorial summary of two-step transformation chains)",
+    "Hieu Ban Than Editorial Team — plain-language notes for the 12-Palace Map"
+  ],
+  "can_gio": "A birth time is needed to build the 12-palace Zi Wei map",
+  "nhan_muc": {
+    "thuan": "Favourable",
+    "can_bang": "Balanced",
+    "can_chu_dong": "Needs care"
+  },
+  "muc_thuong": {
+    "thuan": "favourable",
+    "can_bang": "balanced",
+    "can_chu_dong": "needing extra care"
+  },
+  "menh_cuc": {
+    "cuc_sinh_menh": "Your surroundings naturally support your own pace",
+    "menh_sinh_cuc": "You tend to pour your own effort into the world around you",
+    "menh_khac_cuc": "You prefer setting your own direction within practical limits",
+    "cuc_khac_menh": "External demands set a clear frame that builds your steadiness over time",
+    "binh_hoa": "Your own nature and your environment move in step"
+  },
+  "cung": {
+    "menh": {
+      "y": "your core temperament, outlook and natural way of responding",
+      "y_tre": "your natural temperament and how you take in new things around you",
+      "ngan": "yourself",
+      "ngan_tre": "yourself",
+      "chu_de_han": "Self",
+      "chu_de_han_tre": "Self"
+    },
+    "phu_mau": {
+      "y": "parents, elders, formal schooling and official paperwork",
+      "y_tre": "parents, teachers and early guidance",
+      "ngan": "parents and paperwork",
+      "ngan_tre": "parents and teachers",
+      "chu_de_han": "Elders & study",
+      "chu_de_han_tre": "Parents & study"
+    },
+    "phuc_duc": {
+      "y": "inner peace, mental recharge and family roots",
+      "y_tre": "calmness, rest and warmth at home",
+      "ngan": "inner wellbeing",
+      "ngan_tre": "inner wellbeing",
+      "chu_de_han": "Inner calm",
+      "chu_de_han_tre": "Inner calm"
+    },
+    "dien_trach": {
+      "y": "housing, a steady home base and long-term reserves",
+      "y_tre": "home life, your study corner and daily household routines",
+      "ngan": "home and savings",
+      "ngan_tre": "home and study space",
+      "chu_de_han": "Home & reserves",
+      "chu_de_han_tre": "Home base"
+    },
+    "quan_loc": {
+      "y": "work, professional role and how you handle responsibility",
+      "y_tre": "schoolwork, study habits and self-discipline",
+      "ngan": "work and role",
+      "ngan_tre": "schoolwork and habits",
+      "chu_de_han": "Career & role",
+      "chu_de_han_tre": "Schoolwork"
+    },
+    "no_boc": {
+      "y": "friends, colleagues, collaborators and wider circles",
+      "y_tre": "classmates, playmates and how you fit into a group",
+      "ngan": "friends and peers",
+      "ngan_tre": "classmates and friends",
+      "chu_de_han": "Peers & network",
+      "chu_de_han_tre": "Friends"
+    },
+    "thien_di": {
+      "y": "stepping out into the world, travel, new settings and public presence",
+      "y_tre": "going out, school trips and adapting to unfamiliar places",
+      "ngan": "new settings and travel",
+      "ngan_tre": "new places outside",
+      "chu_de_han": "Wider world",
+      "chu_de_han_tre": "Stepping out"
+    },
+    "tat_ach": {
+      "y": "stamina, rest rhythm and how your body signals overload",
+      "y_tre": "daily energy, sleep and steady eating and movement habits",
+      "ngan": "stamina and rest",
+      "ngan_tre": "energy and daily habits",
+      "chu_de_han": "Health & pace",
+      "chu_de_han_tre": "Daily energy"
+    },
+    "tai_bach": {
+      "y": "earning, cash flow and everyday spending discipline",
+      "y_tre": "looking after belongings and learning to handle pocket money",
+      "ngan": "money and income",
+      "ngan_tre": "pocket money and items",
+      "chu_de_han": "Finances",
+      "chu_de_han_tre": "Belongings"
+    },
+    "tu_nu": {
+      "y": "children, younger people and long-term creative projects",
+      "y_tre": "imagination, small joys and things you make with your own hands",
+      "ngan": "children and creation",
+      "ngan_tre": "creativity and play",
+      "chu_de_han": "Children & craft",
+      "chu_de_han_tre": "Creativity"
+    },
+    "phu_the": {
+      "y": "choosing a close partner, keeping commitments and sharing life",
+      "y_tre": "keeping promises, listening well and building healthy bonds later on",
+      "ngan": "close partnership",
+      "ngan_tre": "future close bonds",
+      "chu_de_han": "Partnership",
+      "chu_de_han_tre": "Getting along"
+    },
+    "huynh_de": {
+      "y": "siblings, close confidants and everyday mutual support",
+      "y_tre": "brothers, sisters and your closest friends",
+      "ngan": "siblings and close friends",
+      "ngan_tre": "siblings and close friends",
+      "chu_de_han": "Siblings & allies",
+      "chu_de_han_tre": "Siblings"
+    }
+  },
+  "y_hoa": {
+    "Lộc": "extra ease, resources and timely openings",
+    "Quyền": "greater initiative and decision-making weight",
+    "Khoa": "clearer reputation, structure and understanding",
+    "Kỵ": "extra friction that calls for unhurried, careful steps"
+  },
+  "y_hoa_ngan": {
+    "Lộc": "ease",
+    "Quyền": "initiative",
+    "Khoa": "clarity",
+    "Kỵ": "extra care"
+  },
+  "mau": {
+    "la_gi": {
+      "cung_mo": "The area of {ngan} ({y}) sits at a {muc_thuong} level in your chart.",
+      "cung_menh": "This core palace reflects {y}; overall it is {muc_thuong}.",
+      "than_cu": "Your Body Palace sits here: from midlife onward, matters of {ngan} weigh more heavily in your major choices.",
+      "lai_nhan": "This is your birth-stem origin palace: many turning points start from {ngan}.",
+      "vo_chinh_dieu": "With no main star of its own, this area adapts to context and draws guidance from the opposite side ({ngan_xung}).",
+      "hoa_sinh": "From your birth year, matters of {ngan} carry {y_hoa}.",
+      "cat": "Around {ngan}, helpful people and steady backing tend to show up when needed.",
+      "sat": "Sudden tasks can cut across {ngan}: leaving buffer time keeps your rhythm steady.",
+      "tuan_triet": "Progress around {ngan} often starts slowly: patient preparation pays off later."
+    },
+    "tam_phuong": {
+      "mo": "Matters of {ngan} stay linked with the opposite palace ({ngan_xung}) and two triad partners ({ngan_th1}, {ngan_th2}).",
+      "do": "Because {ds_do} stand on firm ground, you have practical backing whenever {ngan} needs support.",
+      "keo": "Since {ds_keo} call for extra attention, keeping clear boundaries prevents spillover into {ngan}.",
+      "can": "The three connected palaces sit in balance: results in {ngan} follow your own steady preparation."
+    },
+    "bay_cung": {
+      "di": "Matters of {ngan} send {y_hoa} toward {ngan_kia}.",
+      "den": "Matters of {ngan_kia} bring {y_hoa} into {ngan}.",
+      "tu_hoa": "Within {ngan}, {y_hoa_ngan} rises from your own choices and loops right back here."
+    },
+    "nam": {
+      "cham": "Year {nam} ({cc}): {ly_do} — the year's overall level is {muc}.",
+      "ly_do": {
+        "luu_nien": "the year's main focus passes directly through {ngan}",
+        "loc_nam": "annual ease and resources touch {ngan}",
+        "quyen_nam": "decisions you need to lead gather around {ngan}",
+        "khoa_nam": "paperwork, clarity or standing comes into focus around {ngan}",
+        "ky_nam": "matters around {ngan} call for a slower, closer check",
+        "ky_xung": "pressure from the opposite axis reminds you to pace {ngan}"
+      }
+    },
+    "chuoi": {
+      "kck": {
+        "tieu_de": "{A_tu} passes through {ngan_qua} and lands in {ngan_den}",
+        "nghia": "Concern starting in {ngan_tu} tends to spill into {ngan_qua}, with the practical fallout settling in {ngan_den}.",
+        "viec_nen_lam": "When tension rises in {ngan_tu}, contain it early at {ngan_qua} so it does not spread to {ngan_den}.",
+        "can_cu": "Ji-to-Ji chain: {tu} ({can_dau} stem) sends Hua Ji ({sao_dau}) to {qua}, whose {can_chuyen} stem sends Hua Ji ({sao_chuyen}) to {den}"
+      },
+      "lck": {
+        "tieu_de": "Ease from {ngan_tu} via {ngan_qua} needs pacing in {ngan_den}",
+        "nghia": "Support from {ngan_tu} opens room in {ngan_qua}, yet moving too fast there can pull extra strain into {ngan_den}.",
+        "viec_nen_lam": "When things go well in {ngan_qua}, set aside reserves early and review commitments affecting {ngan_den}.",
+        "can_cu": "Lu-to-Ji chain: {tu} ({can_dau} stem) sends Hua Lu ({sao_dau}) to {qua}, whose {can_chuyen} stem sends Hua Ji ({sao_chuyen}) to {den}"
+      }
+    },
+    "noi_bat": {
+      "menh_than_trung": "Your Life and Body Palaces share {chi}: your core nature and your later-life direction run on the same track ({muc}).",
+      "menh_than_khac": "Your core self connects to {ngan_than} (your Body Palace): as years pass, {ngan_than} shapes more of your choices.",
+      "lai_nhan": "Your birth-stem origin sits in {ngan}: how you tend {ngan} sets the tone for major chapters.",
+      "truc_loc_ky": "Natural ease gathers in {ngan_loc}, while {ngan_ky} asks for unhurried, thorough care.",
+      "chuoi_dau": "A notable two-step chain links {ngan_tu} through {ngan_qua} into {ngan_den}."
+    },
+    "thoi_gian": {
+      "nam": "Year {nam} ({cc}, lunar age {tuoi}): the annual focus moves through {ngan_ln}.",
+      "nam_cham": " Touches {n} palaces on your map.",
+      "chi_tiet": {
+        "luu_nien": "Annual palace sits in {ngan} ({cung})",
+        "loc_nam": "Annual ease visits {ngan} ({cung})",
+        "quyen_nam": "Annual leadership weight gathers in {ngan} ({cung})",
+        "khoa_nam": "Annual clarity and goodwill highlight {ngan} ({cung})",
+        "ky_nam": "Annual extra-care point sits in {ngan} ({cung})",
+        "ky_xung": "Opposite-axis reminder touches {ngan} ({cung})"
+      },
+      "dai_van": "Ages {tu_tuoi}–{den_tuoi} ({tu_nam}–{den_nam}): centred on {chu_de} — {muc}.",
+      "hoi_dan": "Drag the gold hand on the outer ring or slide the bar to see which palaces each year touches.",
+      "nam_toi": "The next ten years share the exact same calculation as the Timing chapter in your full reading."
+    },
+    "vi_sao": {
+      "cung": "{cung} at {can} {chi} ({hanh} element) — palace rating: {muc}",
+      "chinh": "Main stars in palace: {ds}",
+      "muon": "No main star here; borrows from opposite palace ({xung}): {ds}",
+      "vo_chinh": "No main star at {chi}",
+      "hoa_goc": "Birth-year transformations here: {ds}",
+      "cat": "Helpful stars present: {ds}",
+      "sat": "Sharp stars present: {ds}",
+      "tuan_triet": "Blocked by {ds} (Vietnamese Southern school)",
+      "tam_phuong": "Triad and opposite axis: opposite {xung}, triad {th1} and {th2}"
+    }
+  }
+}
