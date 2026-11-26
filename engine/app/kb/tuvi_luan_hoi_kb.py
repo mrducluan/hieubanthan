@@ -59,3 +59,9 @@ def dan_gian(chuong: str) -> list[dict]:
 def vai() -> dict:
     x = lay("vai")
     return x if isinstance(x, dict) else {}
+
+
+def anh_xa_hoi_dap() -> list[dict]:
+    """Bảng ánh xạ (chủ đề định tuyến + vai được hỏi + cụm nhận diện) -> `(chuong, ma)` của 27 câu `luan_hoi`."""
+    x = lay("anh_xa_hoi_dap")
+    return [m for m in x if isinstance(m, dict)] if isinstance(x, list) else []

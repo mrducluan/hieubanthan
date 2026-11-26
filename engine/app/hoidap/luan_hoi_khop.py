@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
-"""D2 (Chặng 0) — Đồng bộ 27 nhãn câu hỏi thẳng (`luan_hoi` của LH-1 / LH-2) vào Hỏi đáp Tử vi & Bát tự.
+"""D2 (nâng cấp sau rà soát thực nghiệm) — Đồng bộ 27 nhãn `luan_hoi` (LH-1 / LH-2) vào Hỏi đáp Tử vi & Bát tự.
 
-Nguyên tắc Một Nguồn Sự Thật:
-  - Không tính lại, không viết luật chấm mới: đọc trực tiếp mục `luan_hoi.tra_loi` đã dựng sẵn trong báo cáo đời sống
-    (`tuvi_doi_song.lap` / `battu_doi_song.lap`), giữ nguyên 100% `nhan`, `tra_loi`, `giai_thich`, `sac`, `ma_mau`, `can_cu`.
-  - Hàng rào an toàn: chỉ bật ở bản tiếng Việt, câu trả lời thường của chính người xem (`not nguoi_than`, `not can_them`),
-    đã biết giờ sinh thật (`not sinh.get("gio_tam")` — không phán nhãn mạnh trên giờ tạm 12:00), không phải câu hỏi ghép
-    tuổi với người thứ hai cụ thể, và người xem đủ tuổi người lớn (`bc` đã tự kiểm `TUOI_NGUOI_LON`).
-  - Khi câu hỏi về mảng đời sống khác (vd Sức khoẻ, Nhà cửa) không thuộc 27 câu `luan_hoi`, trả `doi_song_lien_ket` chứa
-    `ma_mau` hộp chính + `chuong` để khung chat hiện nút Kiểm chứng (nuôi bảng `kiem_chung_phieu` 0017) và dẫn lên chương.
+Nguyên tắc thiết kế (Một Bộ Định Tuyến — Một Nguồn KB):
+  1. KHÔNG viết bộ định tuyến độc lập: bám trực tiếp kết quả phân loại `pl` đã có của `hoidap.tuvi` / `hoidap.battu`,
+     `hoidap.hieu_cau` (kiểu câu, người thứ hai, năm sinh) và `hoidap.mo_dau` (khủng hoảng quan hệ, bạo lực, điều hỏi).
+  2. Bảng ánh xạ `(chuong, ma)` nằm trọn trong KB `tuvi_luan_hoi_kb.json -> anh_xa_hoi_dap` (kèm `cung_tv`, `chu_de_bt`,
+     `vai_khac` cho phép).
+  3. Mặc định KHÔNG gắn nhãn (`None`) khi có bất kỳ dấu hiệu:
+     - Câu hỏi kiến thức (`hieu_cau.kieu == 'kien_thuc'`, `loai` không thuộc bản mệnh/vận hạn, hoặc độ tin thấp `hoi_lai`).
+     - Câu ghép hai tuổi / nêu năm sinh người thứ hai (`_HAI_NGUOI_CU_THE`, `nguoi_thu_hai.nam_sinh`).
+     - Câu kể hoặc hỏi chuyện riêng của NGƯỜI KHÁC (em gái, anh trai, chị gái, bạn thân, sếp, đồng nghiệp, con…).
+     - Câu kể chuyện khủng hoảng quan hệ ĐÃ / ĐANG XẢY RA (ngoại tình, phản bội, ly thân, đã ly hôn, bạo hành — theo
+       `mo_dau.khong_mo`), tránh gắn thẻ dự đoán 'Ít dấu hiệu người thứ ba' / 'Một mối bền' nói ngược thực tế người hỏi.
 """
 from __future__ import annotations
 
@@ -16,119 +19,118 @@ import re
 from typing import Callable
 
 from app import ngon_ngu
-from app.hoidap import chung
+from app.hoidap import chung, hieu_cau, mo_dau
 from app.kb import tuvi_luan_hoi_kb as kb_lh
 
 CHUONG_5 = ("tinh_cam", "gia_dinh", "su_nghiep", "tien_bac", "quan_he")
 PHAI_MON = {"tuvi": "nam_phai_viet", "battu": "tu_binh"}
+_LOAI_CHO_PHEP = {"tuvi": ("la_so", "han"), "battu": ("la_so", "van")}
 
 _CHI_RX = r"(ty|suu|dan|mao|thin|ngo|mui|than|dau|tuat|hoi)"
+# Ghép chuỗi thuần (không dùng rf-string với lượng từ {m,n}) để không bao giờ dính lỗi tuple .(0, 25).
 _HAI_NGUOI_CU_THE = re.compile(
-    rf"(\bvoi tuoi {_CHI_RX}\b|\btuoi {_CHI_RX} .{0,25}tuoi {_CHI_RX}\b|\bsinh nam (19|20)\d\d\b)"
+    r"(\bvoi tuoi " + _CHI_RX + r"\b"
+    r"|\btuoi " + _CHI_RX + r"\b.{0,35}\btuoi " + _CHI_RX + r"\b"
+    r"|\b(chong|vo|nguoi yeu|ny|ban|doi tac|con|bo|me)\b.{0,20}\b(sinh nam |sn |tuoi )?(19[4-9]\d|20[0-3]\d)\b)"
+)
+_NAM_SINH_4 = re.compile(r"\b(?:sinh nam |sn )?(19[4-9]\d|20[0-3]\d)\b")
+
+# Chủ thể ngôi thứ ba làm chủ ngữ của biến cố / hành vi riêng (không phải hỏi trục quan hệ 'với tôi').
+_CHU_THE_NGUOI_KHAC = re.compile(
+    r"\b(em gai|chi gai|anh trai|em trai|anh ruot|chi ruot|em ruot|ban than|ban toi|ban minh|ban em"
+    r"|sep|sep toi|sep minh|sep em|dong nghiep|con trai|con gai|con toi|con minh|con em|hang xom)"
+    r"(?: (?:toi|minh|em|cua toi|cua minh|cua em))?\s+"
+    r"(?:dang |vua |moi |hay |rat |qua |dinh |sap |da |bi )?"
+    r"(lang nhang|ngoai tinh|phan boi|cap bo|co bo|ly di|ly hon|chia tay|bo viec|nghi viec|nhay viec"
+    r"|mo quan|mo tiem|mo cong ty|ra rieng|lam bao nhieu|tieu het|hao tai|pha san|vo no|no nan|hop nghe|chon nganh)"
 )
 
-# Thứ tự ưu tiên từ cụ thể đến tổng quát cho 27 câu hỏi đời thường (so trên chuỗi không dấu `chuan_hoa_cau`).
-_MAU_27: list[tuple[str, str, list[str]]] = [
-    # --- Tình cảm (5) ---
-    ("tinh_cam", "nguoi_thu_ba", [
-        r"nguoi thu ba", r"ke thu ba", r"ngoai tinh", r"phan boi", r"lang nhang", r"ong buom", r"tinh dich",
-    ]),
-    ("tinh_cam", "ben", [
-        r"(mot|hai|may) doi (vo|chong)", r"hai lan do", r"dang do", r"ly di",
-        r"(hon nhan|vo chong|duyen) .{0,20}(co ben|ben vung|ben lau|dut ganh|do vo)",
-        r"ben vung hay .{0,20}(dang do|hai lan do|do vo)",
-    ]),
-    ("tinh_cam", "som_muon", [
-        r"(cuoi|ket hon|lap gia dinh) som hay muon", r"nen cuoi som hay muon",
-        r"tinh duyen .{0,20}lan dan", r"duong tinh .{0,20}lan dan", r"muon (chong|vo)",
-        r"(bao gio|khi nao) .{0,20}(lay chong|lay vo|ket hon|co nguoi yeu|lap gia dinh)",
-        r"(?<!\w)e (mai|qua|dai)(?!\w)",
-    ]),
-    ("tinh_cam", "nguoi_ay", [
-        r"(nguoi ban doi|chong tuong lai|vo tuong lai|ban doi|nua kia) .{0,25}(la nguoi|the nao|ra sao|tinh cach|kieu nguoi)",
-        r"lay (nguoi|chong|vo) nhu the nao",
-    ]),
-    ("tinh_cam", "hanh_phuc", [
-        r"hon nhan .{0,25}(co hanh phuc|hanh phuc khong|em am khong)",
-        r"doi song hon nhan .{0,20}(co hanh phuc|the nao)",
-    ]),
-    # --- Gia đình (4) ---
-    ("gia_dinh", "tac_dong_nha", [
-        r"tac dong .{0,25}(nguoi trong nha|gia dinh|vo con|bo me)",
-    ]),
-    ("gia_dinh", "cha_me", [
-        r"(voi |cung )?(cha me|bo me) .{0,25}(duyen gan|co hop|the nao|ra sao|can luu y)",
-    ]),
-    ("gia_dinh", "anh_em", [
-        r"anh (chi )?em .{0,25}(nho cay|hoa thuan|the nao|ra sao|co hop)",
-    ]),
-    ("gia_dinh", "con_cai", [
-        r"duong con cai .{0,20}(the nao|ra sao)",
-        r"con cai cua (toi|minh|em) (the nao|ra sao)",
-    ]),
-    # --- Sự nghiệp (8) ---
-    ("su_nghiep", "chu_hay_cong", [
-        r"lam chu hay lam (cong|thue)", r"(lam thue|di lam|lam cong) .{0,20}hay .{0,20}(mo rieng|ra rieng|lam chu|khoi nghiep)",
-        r"(mo rieng|ra rieng|lam chu) hay (lam thue|lam cong|di lam)",
-    ]),
-    ("su_nghiep", "trai_nghe", [
-        r"trai nghe", r"trai nganh", r"lam khac nganh",
-    ]),
-    ("su_nghiep", "nghe_hop", [
-        r"hop (lam )?nghe gi", r"lam nghe gi (hop|tot|phat)", r"nghe nao hop", r"nganh nao hop",
-        r"chon nghe gi", r"cong viec nao hop",
-    ]),
-    ("su_nghiep", "hoc_hanh", [
-        r"duong hoc hanh", r"hoc hanh.{0,15}bang cap", r"bang cap cua (toi|minh|em)",
-    ]),
-    ("su_nghiep", "sep", [
-        r"sep cua (toi|minh|em)", r"hop kieu sep nao", r"(voi |gap )?(cap tren|be tren|sep) .{0,20}(the nao|ra sao)",
-    ]),
-    ("su_nghiep", "dong_nghiep", [
-        r"dong nghiep.{0,20}(cap duoi|voi toi|voi minh|voi em|ra sao|the nao)",
-        r"cap duoi voi (toi|minh|em)",
-    ]),
-    ("su_nghiep", "di_xa", [
-        r"(nen |hop )?(di lam xa|lam an xa|lap nghiep xa|doi moi truong)",
-    ]),
-    ("su_nghiep", "trac_tro", [
-        r"(cong viec|su nghiep|duong quan loc) .{0,25}(co gap )?(trac tro|chong chenh|lan dan)",
-    ]),
-    # --- Tiền bạc (6) ---
-    ("tien_bac", "kinh_doanh", [
-        r"kinh doanh hay (lam luong|an luong|lam cong|di lam)",
-        r"(lam luong|an luong) hay (kinh doanh|buon ban)",
-    ]),
-    ("tien_bac", "kiem_bang_gi", [
-        r"kiem tien bang (cach|nghe|huong|con duong|gi)", r"lam gi (de )?ra tien",
-    ]),
-    ("tien_bac", "giu_tien", [
-        r"giu (duoc )?tien", r"hay (tieu het|hao tai|hut tien|khong giu duoc tien)",
-        r"lam bao nhieu tieu het",
-    ]),
-    ("tien_bac", "cong_danh", [
-        r"cong danh.{0,15}chuc (vi|vu)", r"chuc (vi|vu) cua (toi|minh|em)",
-    ]),
-    ("tien_bac", "giai_doan_kha", [
-        r"(giai doan|dai van|dai han|tuoi) nao .{0,25}(tien bac|tai chinh|tai loc|kinh te) .{0,20}(kha|tot|vuong|giau)",
-    ]),
-    ("tien_bac", "trac_tro", [
-        r"(tien bac|tai chinh|tai loc) .{0,25}(co gap )?trac tro",
-    ]),
-    # --- Quan hệ (4) ---
-    ("quan_he", "lam_an_chung", [
-        r"(lam an|hun von|gop von|hop tac|mo) chung", r"hop tac lam an voi (ban|nguoi khac)",
-    ]),
-    ("quan_he", "thi_phi", [
-        r"(gap |dinh |hay bi )?(thi phi|ke choi xau|choi xau|dam sau lung)",
-    ]),
-    ("quan_he", "quy_nhan", [
-        r"co (nguoi giup do|quy nhan)", r"quy nhan .{0,20}(khong|o dau|the nao)",
-    ]),
-    ("quan_he", "ban_be", [
-        r"ban be .{0,25}(co tin duoc|tot khong|chan thanh)",
-    ]),
-]
+# Dấu hiệu người hỏi KỂ SỰ VIỆC ĐÃ / ĐANG XẢY RA trong hôn nhân / tình cảm (khác câu hỏi thế lá số giả định).
+_SU_VIEC_QH_DA_XAY_RA = re.compile(
+    r"(\b(da|vua|moi|sau|sau khi|hau) (ly hon|ly di|chia tay|dut ganh|do vo)\b"
+    r"|\bdang ly than\b|\bbi phat hien\b|\bnhieu lan roi\b|\bcap bo\b"
+    r"|\b(chong|vo|nguoi yeu|ny|anh ay|co ay|ban doi)(?: (?:toi|em|minh))? "
+    r"(?:da |dang |vua |hay |lai )?(ngoai tinh|phan boi|co bo|co nguoi thu ba|co nguoi khac|bo di|danh|bao hanh)\b"
+    r"|\b(ngoai tinh|phan boi|co nguoi thu ba|cap bo)\b.{0,35}\bco nen (ly di|ly hon|chia tay|tha thu|giu|buong)\b)"
+)
+# Câu hỏi giả định / lo xa về thế lá số ("có dấu hiệu người thứ ba không", "liệu có ngoại tình không").
+_CAU_HOI_THE_GIA_DINH = re.compile(
+    r"(\bdau hieu\b|\blieu .{0,30}\bco\b|\bsau nay .{0,30}\bco\b|\bco chuyen (ngoai tinh|nguoi thu ba)\b)"
+)
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# "Câu hỏi về NGƯỜI KHÁC" — mặc định KHÔNG gắn thẻ lá số của người hỏi (thẻ nói về chính lá số người đang xem).
+# So từng VẾ câu (tách theo dấu câu ở chữ gốc, rồi chuẩn hoá) để "Mẹ tôi mới ly hôn, hôn nhân có bền không" bắt được
+# chủ thể "mẹ tôi" ở vế đầu.
+_SO_HUU = r"(?:toi|minh|em|to|tui|tao|cua toi|cua minh|cua em|nha toi|nha minh|nha em)"
+# Danh từ người — cần chữ sở hữu theo sau vì cũng là đại từ tự xưng ("Em muốn hỏi", "Cháu chào cô", "Con muốn hỏi").
+_NGUOI_CAN_SO_HUU = (
+    r"(?:me chong|bo chong|me vo|bo vo|chi dau|em dau|anh re|em re|chi chong|em chong|anh chong|chi vo|em vo|anh vo"
+    r"|bo me|cha me|ba noi|ba ngoai|ong noi|ong ngoai|con trai|con gai|anh trai|em trai|chi gai|em gai"
+    r"|anh ho|chi ho|em ho|ban than|ban|thang ban|con ban|dua ban|dua em|hang xom|dong nghiep|doi tac|nhan vien|khach"
+    r"|bo|me|cha|ong|ba|chau|con|anh|chi|em|chu|co|di|cau|mo|thim|bac)"
+)
+# Danh từ người không thể là đại từ tự xưng → đứng đầu vế là đủ.
+_NGUOI_DUNG_DAU = (
+    # "vo / chong" bỏ dấu trùng "vỡ / vô / chống" → chỉ tính khi có chữ sở hữu / chỉ định đi kèm ("vợ tôi", "chồng ấy").
+    r"(?:ban trai cu|ban gai cu|nguoi yeu cu|ny cu|chong cu|vo cu|ban trai|ban gai|nguoi yeu|ny|sep"
+    r"|(?:chong|vo)(?= (?:toi|minh|em|to|tui|ay|anh ay|co ay|sap cuoi|cua toi|cua minh|cua em)\b)"
+    r"|me chong|bo chong|me vo|bo vo|dua|thang|con be|co be|cau be|co ban|anh ban|chi ban|ban cung (?:phong|lop|nha)"
+    r"|chau ngoai|chau noi|co ay|anh ay|chi ay|ong ay|ba ay|em ay|nguoi ay|ho)"
+)
+# Họ hàng nhiều chữ + chữ sở hữu ở GIỮA câu ("hai vợ chồng anh trai tôi", "con gái tôi") — chủ thể là người đó, trừ khi
+# đứng sau "với / cùng / và" (người hỏi làm việc cùng người đó: "góp vốn với anh trai tôi").
+_HO_HANG_GIUA = re.compile(
+    r"(?<!\bvoi )(?<!\bcung )(?<!\bva )\b(?:anh trai|em trai|chi gai|em gai|con trai|con gai|me chong|bo chong|me vo|bo vo"
+    r"|chi dau|em dau|anh re|em re|chau ngoai|chau noi|ban than) " + "(?:toi|minh|em|to|tui)\\b")
+_DEM_DAU = r"^(?:(?:cho (?:em|minh|toi|chau|con) hoi|xin hoi|thua (?:thay|co|chu|anh|chi)|ad oi|admin oi|a oi|oi|da|vang|em hoi|minh hoi)\s+)*"
+_TU_THAN_DOI = re.compile(r"\bvo chong (?:toi|minh|em|chung toi|chung minh)\b")   # "vợ chồng tôi" = chính người hỏi
+_TUONG_LAI = re.compile(r"\b(?:chong|vo|ban doi|nguoi yeu|nua kia|ny) tuong lai\b")
+_QUAN_HE_VOI_TOI = re.compile(r"\b(?:toi|minh|em|cua toi|cua minh|cua em) (?:voi|va|cung)\b|\b(?:voi|va|cung) (?:toi|minh|em)\b")
+# Câu hỏi chân dung qua cung của CHÍNH lá số ("Sếp của tôi là người thế nào", "Chồng tôi là người thế nào") vẫn là đọc
+# lá số người hỏi (cung Phụ Mẫu / Phu Thê) → không tính là hỏi về người khác.
+_CHAN_DUNG = re.compile(r"\b(?:la nguoi (?:the nao|ra sao|nhu the nao)|tinh cach .{0,12}(?:the nao|ra sao)|kieu nguoi (?:gi|nao))\b")
+_HOI_VE = re.compile(r"\b(?:hoi|xem|coi|luan|doan|bat)(?: (?:gium|giup|ho|cho|ve|la so|tuoi|van|menh))* " + _NGUOI_CAN_SO_HUU
+                     + r" " + _SO_HUU + r"\b")
+_LA_SO_NGUOI = re.compile(r"\b(?:la so|tuoi|bat tu|tu tru|menh|so) (?:cua )?(?:" + _NGUOI_CAN_SO_HUU
+                          + r"|chong|vo|ny|nguoi yeu|ban trai|ban gai|sep) " + _SO_HUU + r"\b")
+_CUA_NGUOI = re.compile(r"\bcua " + _NGUOI_CAN_SO_HUU + r" " + _SO_HUU + r"\b")
+_DAU_VE_SO_HUU = re.compile(_DEM_DAU + _NGUOI_CAN_SO_HUU + r"(?: (?:cu|moi|ruot|ho|lon|nho|ut|ca|thu \w+))? " + _SO_HUU + r"\b")
+_DAU_VE_TRAN = re.compile(_DEM_DAU + _NGUOI_DUNG_DAU + r"\b")
+
+
+_TEN_RIENG = re.compile(r"(?:^|[,.;:!?\n])[ \t]*(?:[Tt]hằng|[Cc]on bé|[Aa]nh|[Cc]hị|[Ôô]ng|[Bb]à|[Cc]ô|[Cc]hú|[Bb]ạn|[Ss]ếp|[Ll]ão|[Mm]ụ)[ \t]+(\w+)")
+_KHONG_PHAI_TEN = {"Tôi", "Toi", "Mình", "Minh", "Em", "Ơi", "Oi", "Ạ", "A"}
+
+
+def _co_ten_rieng(cau_goc: str) -> bool:
+    """"Thằng Tuấn…", "Chị Lan…" ở đầu vế: chữ ngay sau là tên riêng VIẾT HOA (kiểm bằng isupper — dải ký tự À–Ỹ trộn
+    cả chữ thường nên không dùng được trong lớp ký tự)."""
+    if any(m.group(1)[:1].isupper() and m.group(1) not in _KHONG_PHAI_TEN for m in _TEN_RIENG.finditer(cau_goc or "")):
+        return True
+    return any(m.group(1)[:1].isupper() for m in re.finditer(r"\b(?:tên|tên là|ten)\s+(\w+)", cau_goc or ""))
+
+
+def _ve(cau_goc: str) -> list[str]:
+    return [v for v in (re.sub(r"\s+", " ", chung.chuan_hoa_cau(x)).strip() for x in re.split(r"[,.;:!?\n…]+", cau_goc or "")) if v]
+
+
+def noi_ve_nguoi_khac(cau_goc: str, t_norm: str = "") -> bool:
+    """True khi câu hỏi lấy NGƯỜI KHÁC làm chủ thể (con, cháu, cha mẹ, vợ/chồng, người yêu, sếp, bạn…). Câu hỏi QUAN HỆ
+    giữa người hỏi và người đó ("tôi với bố mẹ có hợp không") và câu về "chồng/vợ tương lai" không tính."""
+    if cau_goc and _co_ten_rieng(cau_goc.strip()):
+        return True
+    ve = _ve(cau_goc) or ([t_norm] if t_norm else [])
+    for v in ve:
+        v = _TU_THAN_DOI.sub("TU_THAN", v)
+        if _TUONG_LAI.search(v) or _CHAN_DUNG.search(v):
+            continue
+        if _HOI_VE.search(v) or _CUA_NGUOI.search(v) or _HO_HANG_GIUA.search(v) or _LA_SO_NGUOI.search(v):
+            return True
+        if (_DAU_VE_SO_HUU.search(v) or _DAU_VE_TRAN.search(v)) and not _QUAN_HE_VOI_TOI.search(v):
+            return True
+    return False
 
 
 def _chuan_so_khop(s: str) -> str:
@@ -144,19 +146,134 @@ def _bang_cau_chuan() -> dict[str, tuple[str, str]]:
     return ra
 
 
-def nhan_dien_cau_luan_hoi(cau_chuan_hoa: str, cau_goc: str = "") -> tuple[str, str] | None:
-    """Trả `(chuong, ma)` trong 27 câu `luan_hoi` nếu câu hỏi khớp; ngược lại `None`."""
+_CAN_CHI = re.compile(r"\b(?:giap|at|binh|dinh|mau|ky|canh|tan|nham|quy) (?:ty|suu|dan|mao|thin|ti|ngo|mui|than|dau|tuat|hoi)\b")
+
+
+def la_hai_nguoi_hoac_nguoi_khac(t_norm: str, goc_norm: str = "", cau_goc: str = "") -> bool:
+    """Trả `True` nếu câu ghép hai tuổi / nêu năm sinh người kia / kể chuyện riêng của chủ thể ngôi thứ ba."""
+    van = f"{goc_norm} {t_norm}".strip()
+    if _HAI_NGUOI_CU_THE.search(van):
+        return True
+    if len(set(_NAM_SINH_4.findall(goc_norm or t_norm))) >= 2:
+        return True
+    if len(_CAN_CHI.findall(goc_norm or t_norm)) >= 2:
+        return True
+    nth = hieu_cau.nguoi_thu_hai(t_norm)
+    if nth and (nth.get("nam_sinh") or nth.get("cac_nam_sinh")):
+        return True
+    if _CHU_THE_NGUOI_KHAC.search(van):
+        return True
+    return noi_ve_nguoi_khac(cau_goc, t_norm) if cau_goc else False
+
+
+def _vai_nguoi_khac(t_norm: str) -> str | None:
+    """Xác định vai người thứ hai được nhắc trong câu (bổ sung `anh_em` vào `hieu_cau.nguoi_thu_hai`)."""
+    t_norm = re.sub(r"\blam (?:sep|ong chu|ba chu)(?: cua chinh (?:minh|toi|em))?\b", " ", t_norm)   # "làm sếp của chính mình" = tự làm chủ
+    if re.search(r"\b(anh trai|em trai|chi gai|em gai|anh chi em|anh em|chi em)\b(?! (dong nghiep|cong ty|trong cong ty|xa hoi|o cho lam))", t_norm):
+        return "anh_em"
+    nth = hieu_cau.nguoi_thu_hai(t_norm)
+    return nth.get("quan_he") if nth else None
+
+
+_KE_SU_VIEC = re.compile(
+    r"\b(?:vua|moi|dang|da) (?:bi )?(?:ly hon|ly di|chia tay|do vo|noi xau|choi xau|bao cao sai|lua|lua dao|phan boi"
+    r"|bo roi|bo di|duoi viec|cho nghi viec|mat viec|pha san|vo no|thua lo|danh)\b"
+    r"|\bdang bi (?!.{0,6}\b(?:gi|sao)\b)"
+    r"|\b(?:ly hon|ly di|chia tay|do vo) (?:duoc|roi|mot lan|\d+ nam)\b"
+    r"|\bda (?:do vo|ly hon|ly di|chia tay|qua) mot lan\b"
+    r"|\b(?:mat viec|bi duoi|pha san|vo no|bi lua) roi\b"
+    r"|\b(?:vua|moi|dang|da) bi (?:\w+ ){1,3}(?:lua|choi xau|phan boi|bo|danh|cuop|quyt|noi xau|hai)\b"
+    r"|\b(?:vua|moi) (?:bi )?mat (?:\d+ )?(?:trieu|ty|tien|viec|cua|nha|xe|von|het)\b"
+    r"|\b(?:vua|moi|dang|da) bi (?:\w+ ){0,3}(?:mang|chui|ky luat|phat|tru luong|cat luong|che|che bai|bat nat|ep)\b"
+    r"|\b(?:chia tay|ly hon|ly di|bo) (?:chong|vo|ny|nguoi yeu|ban trai|ban gai)\b"
+    r"|\bdang (?:yeu|quen|tim hieu|hen ho) (?:mot|voi|nguoi|anh|chi|co|em)\b|\b(?:gia dinh|bo me|nha) (?:\w+ ){0,2}phan doi\b"
+    r"|\bchua co con\b|\bhiem muon\b|\bvo sinh\b|\bsay thai\b|\b(?:moi|vua|da) cho (?:\w+ ){0,2}(?:vay|muon)\b"
+    # chuyện vợ chồng / tình cảm ĐANG diễn ra ("dạo này lạnh nhạt", "cãi nhau suốt", "giận cả tuần")
+    r"|\b(?:dao nay|gan day|may (?:thang|tuan|hom|nam) nay|cu|suot|lien tuc|hoai)\b.{0,30}\b(?:lanh nhat|cai nhau|gat nhau|luc duc"
+    r"|it noi chuyen|bat hoa|khau chien|lech nhau|gian nhau|chien tranh lanh)\b"
+    r"|\b(?:lanh nhat|cai nhau|gat nhau|luc duc|gian|lech nhau)\b.{0,20}\b(?:may (?:thang|tuan|hom) nay|dao nay|ca (?:tuan|thang)|suot)\b"
+)
+
+
+_KIEN_THUC = re.compile(r"\b(?:la (?:cung|sao|cach|than) gi|la gi|nghia la gi|co nghia gi|y nghia (?:cua|la)|noi ve (?:gi|dieu gi|nhung gi))\b")
+_CUA_MINH = re.compile(r"\b(?:cua (?:toi|minh|em|to|tui)|la so (?:toi|minh|em)|toi|minh)\b")
+
+
+def ke_su_viec(t_norm: str) -> bool:
+    """Người hỏi KỂ một biến cố đã / đang xảy ra với chính họ (ở bất kỳ mảng nào)."""
+    return bool(_KE_SU_VIEC.search(t_norm))
+
+
+def la_chuyen_qh_da_xay_ra(t_norm: str, cau_goc: str = "") -> bool:
+    """Trả `True` khi người dùng kể biến cố tình cảm/hôn nhân đã hoặc đang xảy ra (ngoại tình, bạo lực, đã ly hôn)."""
+    if mo_dau._co(t_norm, mo_dau._BAO_LUC):
+        return True
+    if _SU_VIEC_QH_DA_XAY_RA.search(t_norm):
+        # Ngay cả khi có từ 'có nên', đây là câu hỏi xử lý khủng hoảng đã xảy ra chứ không phải hỏi thế lá số giả định.
+        if not _CAU_HOI_THE_GIA_DINH.search(t_norm) or re.search(r"\bco nen (ly di|ly hon|chia tay|buong)\b", t_norm):
+            return True
+    if mo_dau.khong_mo(t_norm, cau_goc) and not _CAU_HOI_THE_GIA_DINH.search(t_norm):
+        # Kiểm các câu hỏi chuẩn kiểu 'một đời vợ chồng hay dễ ly dị' vẫn hợp lệ nếu không gán cho chồng/vợ hiện tại đang ngoại tình.
+        if re.search(r"\b(chong|vo|nguoi yeu|ny|anh ay|co ay)\b.{0,20}\b(ngoai tinh|phan boi|co bo|ly than|danh)\b", t_norm):
+            return True
+    return False
+
+
+def nhan_dien_cau_luan_hoi(
+    cau_chuan_hoa: str,
+    cau_goc: str = "",
+    *,
+    mo_dun: str | None = None,
+    pl: dict | None = None,
+) -> tuple[str, str] | None:
+    """Trả `(chuong, ma)` trong 27 câu `luan_hoi` dựa trên bộ định tuyến `pl` + bảng KB `anh_xa_hoi_dap`."""
     goc_norm = _chuan_so_khop(cau_goc or cau_chuan_hoa)
-    if _HAI_NGUOI_CU_THE.search(goc_norm):
+    t = _chuan_so_khop(cau_chuan_hoa) or goc_norm
+    if not t:
         return None
+
+    # 1. Chặn hai tuổi cụ thể & chủ thể ngôi thứ ba ngay từ đầu
+
+    # 2. Khớp nguyên văn 1 trong 27 câu chuẩn trên thẻ / chip báo cáo
     bang = _bang_cau_chuan()
     if goc_norm in bang:
         return bang[goc_norm]
-    t = _chuan_so_khop(cau_chuan_hoa) or goc_norm
     if t in bang:
         return bang[t]
-    for ch, ma, ds_mau in _MAU_27:
-        if chung.co(t, ds_mau):
+    if la_hai_nguoi_hoac_nguoi_khac(t, goc_norm, cau_goc):
+        return None
+
+    if _KIEN_THUC.search(t) and not _CUA_MINH.search(t):
+        return None
+    # 3. Lớp an toàn: câu kiến thức, câu khủng hoảng / đặc biệt (do nơi gọi chặn), câu không thuộc lá số của mình.
+    if hieu_cau.kieu(t) == "kien_thuc":
+        return None
+    if pl is not None and pl.get("loai") not in _LOAI_CHO_PHEP.get(mo_dun or "tuvi", ("la_so", "han", "van")):
+        return None
+
+    if ke_su_viec(t):
+        return None
+    vai_khac = _vai_nguoi_khac(t)
+    da_xay_ra = la_chuyen_qh_da_xay_ra(t, cau_goc)
+
+    # 4. Khớp theo NHÓM TỪ KHOÁ trong KB (`tu_khoa`: mọi nhóm phải có ít nhất một cụm) hoặc mẫu câu cũ (`mau`). Thứ tự
+    #    bảng = ưu tiên (mã cụ thể đứng trước mã chung). Không dùng cung / chủ đề của bộ định tuyến làm cổng: hai bộ phân
+    #    loại khác mục đích, chặn oan nhiều hơn chặn đúng (đo trên bộ câu đóng băng `luan_hoi_chat_dev.jsonl`).
+    for muc in kb_lh.anh_xa_hoi_dap():
+        ch, ma = muc.get("chuong"), muc.get("ma")
+        if not ch or not ma:
+            continue
+        if muc.get("chan_da_xay_ra") and da_xay_ra:
+            continue
+        cho_phep_vai = set(muc.get("vai_khac") or [])
+        if vai_khac is not None and vai_khac not in cho_phep_vai:
+            continue
+        if ma == "quy_nhan" and re.search(r"\b(thien at|thien duc|nguyet duc|thai cuc|van xuong|phuc tinh|quoc an|ta phu|huu bat|thien khoi|thien viet)\b", t):
+            continue      # hỏi tên một sao quý nhân → để hỏi đáp sao trả lời
+        if muc.get("loai_tru") and chung.co(t, [r"\b" + x + r"\b" for x in muc["loai_tru"]]):
+            continue
+        nhom = muc.get("tu_khoa") or []
+        if (nhom and all(chung.co(t, [r"\b" + x + r"\b" for x in g]) for g in nhom)) or chung.co(t, muc.get("mau") or []):
             return (ch, ma)
     return None
 
@@ -179,7 +296,17 @@ def gan_vao_hoi(
         return
 
     phai = PHAI_MON.get(mo_dun, "nam_phai_viet")
-    khop = nhan_dien_cau_luan_hoi(pl.get("cau_chuan_hoa") or "", cau_hoi)
+    t_norm = _chuan_so_khop(pl.get("cau_chuan_hoa") or cau_hoi)
+    goc_norm = _chuan_so_khop(cau_hoi)
+    la_cau_chuan = goc_norm in _bang_cau_chuan() or t_norm in _bang_cau_chuan()
+
+
+    khop = nhan_dien_cau_luan_hoi(
+        pl.get("cau_chuan_hoa") or "",
+        cau_hoi,
+        mo_dun=mo_dun,
+        pl=None if la_cau_chuan else pl,
+    )
     if khop is not None:
         ch_ma, cau_ma = khop
         bc = bc_ds or dung_bc()
@@ -206,7 +333,12 @@ def gan_vao_hoi(
                 kq["can_cu"] = list(dict.fromkeys([*cu_them, *cu_cu]))
             return
 
-    # Câu mảng đời sống chung (không nằm trong 27 câu luan_hoi): vẫn gắn ma_mau hộp đầu + chương để Web hiện KiemChung & nhảy chương.
+    # Câu mảng đời sống chung (không nằm trong 27 câu luan_hoi, không phải câu người khác / kiến thức). Bộ định tuyến chưa
+    # chắc hiểu câu (`hoi_lai`) → không gắn liên kết chương (dễ dẫn sang chương không liên quan).
+    if kq.get("hoi_lai"):
+        return
+    if la_hai_nguoi_hoac_nguoi_khac(t_norm, goc_norm, cau_hoi) or hieu_cau.kieu(t_norm) == "kien_thuc":
+        return
     goi = kq.get("bang_chung") or {}
     m_ds = next((m for m in goi.get("muc", []) if m.get("loai") == "doi_song"), None)
     if not m_ds or not m_ds.get("chuong"):

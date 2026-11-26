@@ -1,130 +1,69 @@
 {
-  "_nguon": "Stage 1 — Classical Five-Element & Period-9 Flying Star spatial harmony overlay for the 'Classical Method & Five Elements' view. Practical environment, lighting, everyday materials and daily rhythm only — no rituals or commercial charms.",
+  "_nguon": "Classical Scholarship Mode — English overlay surfacing verified classical texts & technical chart structures already computed by the Engine (no invented star colors/hours, no five-element compass directions conflicting with Eight Mansions per Decision 6b).",
+  "source_id": "co_dien_tong_hop",
+  "school_id": "da_phai_co_dien",
   "_trang_thai": "ban_phu_en",
+  "trang_thai": "bien_tap",
   "tieu_de": {
-    "battu": "Five-Element Balancing from Your Four Pillars",
-    "tuvi": "Five-Element Alignment on the Life – Career – Wealth Axis",
-    "phongthuy": "Five-Element & Period-9 Flying Star Harmony (2024–2043)"
+    "battu": "Classical Scholarship Lens (Zi Ping Zhen Quan · Qiong Tong Bao Jian)",
+    "tuvi": "Classical Scholarship Lens (Chart Foundation · Patterns · Verses)",
+    "phongthuy": "Classical Scholarship Lens (Eight Mansions · Xuan Kong on Real Layout)"
   },
   "nguyen_tac_uu_tien": {
-    "battu": "Read both classical balancing lenses side by side (seasonal/strength balance and month-branch structure): prioritize elements supported by both, applied through workspace setup, colors, materials and daily focus hours.",
-    "tuvi": "Use the Five-Element nature of the major stars in your Life, Career and Wealth palaces as your natural anchor for workspace tone and deep-work hours.",
-    "phongthuy": "Clear non-conflicting priority order: (1) Real-world safety, daylight and ventilation come first; (2) Bed-head, stove-mouth and desk facing follow Eight Mansions for the householder; (3) Room colors, materials and quiet-versus-active use balance the Period-9 Flying Star pair in that sector."
+    "battu": "Presents both Useful-God methods side by side (Balance/Climate & Month-Branch Pattern) together with seasonal Qiong Tong Bao Jian stems; omits generic five-element compass directions so it never contradicts Eight Mansions.",
+    "tuvi": "Summarizes classical chart foundations (Nayin vs Bureau relation, Life/Body Lords, Origin Palace) and expands 'Why we say this' technical notes across chapters.",
+    "phongthuy": "Reads Mountain–Facing star pairs from the 81 Xuan Kong combinations on the actual rooms you mapped (or strictly Facing & Sitting sectors when no floorplan is entered); Star 2 in Period 9 is treated accurately as Upcoming Sheng Qi."
   },
-  "ngu_hanh": {
-    "Kim": {
-      "ten": "Metal",
-      "mau_sac": "Crisp white, light cream, silver-grey, soft metallic accents",
-      "chat_lieu": "Clean metal frames, light stone surfaces, mechanical clock or minimal metal tray",
-      "phuong_vi": "West and Northwest",
-      "khung_gio": "15:00 – 19:00",
-      "thoi_quen": [
-        "Clear your desk completely before starting decisions that require firm precision",
-        "Anchor financial and operational choices in concise written checklists"
-      ]
-    },
-    "Mộc": {
-      "ten": "Wood",
-      "mau_sac": "Soft sage green, pale jade, natural wood grain",
-      "chat_lieu": "Natural timber desk or shelves, paper books, healthy leafy indoor plants",
-      "phuong_vi": "East and Southeast",
-      "khung_gio": "05:00 – 09:00",
-      "thoi_quen": [
-        "Reserve early morning hours for long-term planning, learning and creative drafting",
-        "Take a 15–20 minute walk near trees to reset mental tension"
-      ]
-    },
-    "Thủy": {
-      "ten": "Water",
-      "mau_sac": "Deep navy, slate blue, cool off-white",
-      "chat_lieu": "Clean glass surfaces, soft flowing curtains, fresh drinking water on the desk",
-      "phuong_vi": "North",
-      "khung_gio": "19:00 – 23:00 or quiet early morning",
-      "thoi_quen": [
-        "Keep quiet reflection blocks for deep research and careful listening before negotiations",
-        "Stay well hydrated and leave buffer room in your schedule instead of rigid overbooking"
-      ]
-    },
-    "Hỏa": {
-      "ten": "Fire",
-      "mau_sac": "Warm terracotta, muted amber, tea rose, sunlit gold (used as balanced accents)",
-      "chat_lieu": "Warm-toned desk lamp, natural woven textiles, morning-sunlit corner",
-      "phuong_vi": "South",
-      "khung_gio": "09:00 – 13:00",
-      "thoi_quen": [
-        "Schedule presentations, client meetings and launches during late-morning peak energy",
-        "Open curtains early each day to bring natural daylight into your workspace"
-      ]
-    },
-    "Thổ": {
-      "ten": "Earth",
-      "mau_sac": "Warm beige, sand, muted ochre, soft clay",
-      "chat_lieu": "Matte ceramic vessels, natural stone, steady flat woven rug",
-      "phuong_vi": "Northeast and Southwest",
-      "khung_gio": "07:00 – 09:00 or 13:00 – 15:00",
-      "thoi_quen": [
-        "Keep steady meal, sleep and weekly review times to build grounded momentum",
-        "Finish foundational tasks one by one before opening new commitments"
-      ]
-    }
+  "battu": {
+    "nhan_cach_cuc": "Month-Branch Pattern (Zi Ping Zhen Quan)",
+    "nhan_hai_cach": "Two Useful-God Methods",
+    "cung_can": "Both classical methods point to: {ds}.",
+    "khac_nhau": "Balance/Climate method favors: {c1} · Month-Pattern method favors: {c2} (shown side by side without choosing for you).",
+    "trung_hoa": "Your Four Pillars are relatively balanced; prioritize steady pacing across luck decades.",
+    "nhan_dieu_hau": "Seasonal Climate Reference (Qiong Tong Bao Jian)",
+    "noi_dung_dieu_hau": "{can} Day Master born in the {chi} month: classical seasonal tuning prioritizes {can_dh}."
   },
-  "ghi_chu_hai_cach": {
-    "cung_can": "Both classical lenses (balance/climate and month structure) favor {ds}.",
-    "khac_nhau": "Balance/climate favors {c1}, while month structure favors {c2} — test each gently in your routine and keep what feels steadier.",
-    "trung_hoa": "Your chart's Five Elements are already fairly balanced — keep spaces bright and adjust lightly by season."
+  "tuvi": {
+    "nhan_lap_cuc": "Nayin Life Element & Five-Element Bureau",
+    "noi_dung_lap_cuc": "Life Nayin: {nap_am} · Bureau: {cuc} ({menh_cuc}).",
+    "nhan_chu_than": "Life Lord · Body Lord · Body Palace",
+    "noi_dung_chu_than": "Life Lord: {menh_chu} · Body Lord: {than_chu} · Body Palace in {than_cu}.",
+    "nhan_lai_nhan": "Origin Palace (Birth-Stem Transformation Root)",
+    "noi_dung_lai_nhan": "Birth-year stem {can_nam} places your Origin Palace at {cung_lai} ({chi_lai}) — a core self-driven life arena in Flying-Star reading."
   },
-  "khu_vuc_ten": {
-    "cua_chinh": "Main entrance / Qi intake",
-    "ban_lam_viec": "Work desk / Study area",
-    "bep": "Kitchen area",
-    "phong_ngu": "Primary bedroom",
-    "quay_thu_ngan": "Cashier / Client reception",
-    "phong_khach": "Living room / Shared hall"
-  },
-  "phep_van_9": {
-    "tiet_khi_kim": {
-      "ten": "Metal-draining method for heavy Earth stars (5 Yellow or 2 Black)",
-      "ngu_hanh_dieu_hoa": "Metal (white, light grey, tidy metalware) gently drains heavy Earth",
-      "ung_dung": "Keep this sector quiet, clean and uncluttered; favor white or light-grey tones and tidy metal fixtures; avoid bright red accents, hot lamps, active water features or major drilling."
+  "phongthuy": {
+    "chua_khai_phong": "Room layout not yet mapped: showing only the Facing sector (front) and Sitting sector (back). Map your rooms to inspect each room's exact star pair.",
+    "ten_vi_tri": {
+      "huong_thu": "Facing Sector (Front — {phuong})",
+      "toa_son": "Sitting Sector (Back — {phuong})",
+      "cua_chinh": "Main Door ({phuong})",
+      "phong_ngu_chinh": "Master Bedroom ({phuong})",
+      "bep": "Kitchen ({phuong})",
+      "phong_lam_viec": "Study / Desk ({phuong})",
+      "ban_tho": "Altar Space ({phuong})",
+      "ve_sinh": "Bathroom ({phuong})"
     },
-    "kich_vuong_van_9": {
-      "ten": "Welcoming Period-9 timely star 9 Purple & future star 1 White",
-      "ngu_hanh_dieu_hoa": "Balanced Wood – Fire – Water support by Mountain/Facing role",
-      "ung_dung": "Keep pathways open, let in daylight and use this sector regularly; place gentle clean water only when Facing star is 9 and neither 2 nor 5 is present."
-    },
-    "kich_van_xuong": {
-      "ten": "Supporting 4 Green Literary Star — study, writing & clarity",
-      "ngu_hanh_dieu_hoa": "Water nourishes Wood, Wood brightens Fire",
-      "ung_dung": "Well suited for a tidy desk, bookshelf or study corner; a small healthy plant works well, while stacked paper clutter should be cleared."
-    },
-    "thong_quan_thuy": {
-      "ten": "Water-bridging method for Metal–Wood friction (pairs 3–7 / 7–3)",
-      "ngu_hanh_dieu_hoa": "Water (calm blue, clean glass) bridges Metal to nourish Wood",
-      "ung_dung": "Reduce sharp metal clutter and noise here; use calm blue or soft white tones to cool verbal friction, and double-check contracts and locks."
-    },
-    "dieu_hoa_hoa_kim": {
-      "ten": "Earth-mediating method for Fire–Metal tension (pairs 9–6, 9–7)",
-      "ngu_hanh_dieu_hoa": "Earth (warm beige, matte ceramics) bridges Fire into Metal",
-      "ung_dung": "Avoid harsh glare or heat sources next to metal fixtures; use warm earth tones and ceramics, and keep electrical outlets tidy and inspected."
-    },
-    "giu_on_dinh": {
-      "ten": "Balanced airflow & daylight upkeep",
-      "ngu_hanh_dieu_hoa": "Balanced light, airflow and order",
-      "ung_dung": "Maintain fresh ventilation, comfortable lighting and clear walkways so the room stays steady and restful."
-    }
+    "trang_thai_cap": "Mountain {son} ({tt_son}) · Facing {huong} ({tt_huong}){ln}",
+    "luu_nien_phu": " · Annual star {sao}"
   },
   "doi_chieu_hai_phai": {
     "bt_thuan_hk_tinh": {
       "tieu_de": "Two-School Lens at the Main Entrance (Eight Mansions & Period-9 Flying Stars)",
       "goc_bat_trach": "Eight Mansions lens (personal trigram alignment): this entrance direction matches the householder's group, supporting long-term personal steadiness.",
-      "goc_huyen_khong_van_9": "Period-9 Flying Star lens (timely sector qi, star pair {cap}): the entrance sector carries stars that prefer calm, clutter-free Metal-toned moderation.",
-      "cach_dung_hoa": "Keep your entrance, bed-head and stove facing aligned with Eight Mansions, while styling the doorway in crisp light neutral tones without harsh heat lamps or heavy drilling."
+      "goc_huyen_khong_van_9": "Period-9 Flying Star lens (timely sector qi, star pair {cap}): the entrance sector carries stars that are best kept calm and uncluttered.",
+      "cach_dung_hoa": {
+        "sao_tho": "Keep your entrance, bed-head and stove facing aligned with Eight Mansions, while styling the doorway in crisp light neutral tones without harsh heat lamps or heavy drilling.",
+        "chung": "Keep your entrance, bed-head and stove facing aligned with Eight Mansions, while keeping the doorway clear and softly lit, with nothing stacked against the door and no heavy renovation unless needed."
+      }
     },
     "hk_vuong_bt_lech": {
       "tieu_de": "Two-School Lens at the Main Entrance (Eight Mansions & Period-9 Flying Stars)",
       "goc_bat_trach": "Eight Mansions lens (personal trigram alignment): this entrance direction belongs to the opposite East/West group from the householder.",
       "goc_huyen_khong_van_9": "Period-9 Flying Star lens (timely sector qi, star pair {cap}): the entrance welcomes timely or prosperous Period-9 qi favorable for activity and commerce.",
-      "cach_dung_hoa": "Keep the entrance bright and open to welcome Period-9 flow, while orienting your bed-head, stove-mouth and desk chair toward your personal Eight Mansions directions."
+      "cach_dung_hoa": {
+        "sao_9_1": "Keep the entrance bright and open to welcome Period-9 flow, while orienting your bed-head, stove-mouth and desk chair toward your personal Eight Mansions directions.",
+        "chung": "Keep the entrance clear and tidy so the favorable flow at this sector can settle, while orienting your bed-head, stove-mouth and desk chair toward your personal Eight Mansions directions."
+      }
     }
   }
 }

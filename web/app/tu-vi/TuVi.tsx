@@ -30,6 +30,7 @@ import { DinhGioSinh } from "@/components/huyen-hoc/DinhGioSinh";
 import { HopThamTuVi } from "@/components/huyen-hoc/HopThamTuVi";
 import { ChonNguoiXem, XemNguoiThanCtx } from "@/components/huyen-hoc/NguoiThan";
 import { ChonYDinh, XacNhanYDinh, type GoiYVec } from "@/components/huyen-hoc/XacNhanYDinh";
+import { BanDoTuVi } from "@/components/huyen-hoc/BanDoTuVi";
 import { LaSoTuVi, type PhaiDoSang } from "@/components/huyen-hoc/LaSoTuVi";
 import { KhungLaSo } from "@/components/huyen-hoc/KhungLaSo";
 import { ChanLaSo } from "@/components/huyen-hoc/ChanLaSo";
@@ -287,6 +288,9 @@ export function TuVi() {
             <DongHoaHan vh={vh} lop={lop} namXem={namXem} />
             <DaiHanNhay ls={ls} vh={vh} namXem={namXem} tieuDe={c("dai_han.tieu_de")} onNhay={nhayDaiHan} />
             <CungSaoMenh d={ls.cung_sao_menh} />
+            {laSoGoc && !khongBietGio && (
+              <BanDoTuVi laSo={laSoGoc} coBaoCao={!nt} onChonCung={xemCung} />
+            )}
 
             <div ref={chiTietRef} className="scroll-mt-20">
               <ChiTietCung ls={ls} chi={chiChon} phai={phaiDoSang} vanHan={lop.dai_han || lop.luu_nien ? vh : null} lop={lop}

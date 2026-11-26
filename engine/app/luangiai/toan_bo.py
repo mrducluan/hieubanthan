@@ -149,7 +149,7 @@ def tuvi(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = No
     chuong = [{**c, "moi_xem": _moi_xem("tuvi", c["ma"], c["doan"], c)} for c in bc["chuong"]]
     for c in chuong:            # EN-ALL: câu hỏi mở của lời mời theo ngôn ngữ (bản Việt giữ nguyên chữ)
         c["moi_xem"]["cau_hoi"] = L(f"tvds.moi_xem.{c['ma']}", c["moi_xem"]["cau_hoi"])
-    u_cd = ud.tu_bao_cao_tuvi(bc)
+    u_cd = ud.tu_bao_cao_tuvi(bc, sinh=sinh)
     return {"mo_dun": "tuvi", **bc, "chuong": chuong, **({"ung_dung_co_dien": u_cd} if u_cd else {}),
             "ket": L("tvds.ket", hoi_van.KET), "trang_thai": bc.get("trang_thai", "nhap_ai"),
             "phi": PHI}
@@ -164,7 +164,7 @@ def battu(sinh: dict, ngay_xem: dt.date | None = None, trong_so: dict | None = N
     chuong = [{**c, "moi_xem": _moi_xem("battu", c["ma"], c["doan"], c)} for c in bc["chuong"]]
     for c in chuong:            # EN-ALL: câu hỏi mở của lời mời theo ngôn ngữ (bản Việt giữ nguyên chữ)
         c["moi_xem"]["cau_hoi"] = L(f"bt_ds.moi_xem.{c['ma']}", c["moi_xem"]["cau_hoi"])
-    u_cd = ud.tu_bao_cao_battu(bc)
+    u_cd = ud.tu_bao_cao_battu(bc, sinh=sinh)
     return {"mo_dun": "battu", **bc, "chuong": chuong, **({"ung_dung_co_dien": u_cd} if u_cd else {}),
             "ket": L("bt_ds.ket", hoi_van.KET),
             "trang_thai": bc.get("trang_thai", "nhap_ai"), "phi": PHI}

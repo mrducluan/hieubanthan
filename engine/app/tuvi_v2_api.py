@@ -19,7 +19,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from app.calc import lunar, tuvi_an_sao
 from app import config
-from app.config import ENGINE_VERSION, Region
+from app.config import ENGINE_VERSION, HourConfidence, Region
 from app.hoidap.tuvi import tom_tat
 from app.luangiai import tuvi_dinh_gio, tuvi_hop_tham, tuvi_nhip_3_thang, tuvi_phi_hoa
 from app.tuvi_api import TuanTrietInput, _DauVao, _loi_an_sao, _MaMau, _Phieu
@@ -247,4 +247,26 @@ def api_dinh_gio(inp: DinhGioInput) -> dict:
         raise _loi_an_sao(e)
     except ValueError as e:
         raise HTTPException(422, detail=str(e))
+    return {"engine_version": ENGINE_VERSION, **kq, "co_canh_bao": list(dv.flags)}
+
+
+# ------------------------------------------------------------------ bản đồ 12 cung tương tác (TV-BD1)
+class BanDoTVInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    la_so: TuanTrietInput
+    ngay_xem: _dt.date | None = Field(default=None, description="Mặc định hôm nay (giờ Việt Nam)")
+
+
+@router.post("/ban-do")
+def api_ban_do_tuvi(inp: BanDoTVInput) -> dict:
+    from app.luangiai import tuvi_ban_do  # noqa: PLC0415
+
+    if inp.la_so.do_tin_gio is HourConfidence.UNKNOWN:
+        raise HTTPException(422, detail=tuvi_ban_do.loi_can_gio())
+    dv = _DauVao(inp.la_so)
+    try:
+        kq = tuvi_ban_do.lap(_sinh(dv, inp.la_so.gender), dv.duong_goc, inp.ngay_xem)
+    except tuvi_an_sao.AnSaoLoi as e:
+        raise _loi_an_sao(e)
     return {"engine_version": ENGINE_VERSION, **kq, "co_canh_bao": list(dv.flags)}

@@ -1,6 +1,32 @@
 {
-  "_nguon": "Stage 1 — Deep Life-Bottleneck Resolution KB (English overlay) covering post-divorce recovery, marital friction cooling, business co-founder structuring, and two-sided classical demystification.",
+  "_nguon": "Stage 1 — Deep Life-Bottleneck Resolution KB (English overlay) covering post-divorce recovery, marital friction cooling, business co-founder structuring, and chart-grounded two-sided classical demystification.",
+  "source_id": "go_nut_doi_song",
+  "school_id": "huyen_hoc_ung_dung",
   "_trang_thai": "ban_phu_en",
+  "trang_thai": "nhap_ai",
+  "mau_la_so": {
+    "vcd_du_kien": "On your chart: {cung} ({chi}) has no resident major star, borrowing {sao_muon} from {cung_doi}.",
+    "vcd_khong_sao": "opposing trine stars",
+    "vcd_diem_manh": "",
+    "vcd_goc_nhin": "An empty {cung} is not a deficit — it acts as an adaptable mirror drawing strength from {sao_muon} across the axis.{diem_sang}",
+    "kk_du_kien": "On your chart: {sao} sits in {cung} ({chi}).",
+    "kk_goc_nhin": "In {cung}, {sao} carries two sides: unconventional speed and crisis agility when channeled into focused craft, balanced by watching impulsive leaps.",
+    "kk_diem_manh_mac_dinh": "unconventional speed and creative problem-solving",
+    "kk_mat_toi_mac_dinh": "impulsive leaps when under emotional pressure",
+    "sao_du_kien": "On your chart: {sao}{do_sang} resides in {cung} ({chi}).",
+    "sao_goc_nhin": "{sao} in {cung} pairs strong drive, decisiveness and independent capability on its bright side with a need for steadier pacing and calm listening under stress.",
+    "sao_tu_soi": "Self-reflection prompt for {sao} on your chart: {cau_tu_soi}",
+    "tt_tang_can": "hidden stems",
+    "tt_du_kien": "On your Four Pillars: {ten_tt} appears in your {vi_tri}.",
+    "tt_goc_nhin": "{ten_tt} brings sharp expression, independent judgment and problem-solving drive on its bright side; the key balance is moderating intensity and keeping room for calm dialogue.",
+    "tt_tu_soi": "Self-reflection prompt from your Four Pillars: {cau_tu_soi}",
+    "bc_gop_von": "From your chart ({ten_chuong}): {tra_loi}",
+    "bc_sau_do_vo": "Anchor from your chart ({ten_chuong}): {giai_thich}",
+    "bc_khac_khau": "Partnership rhythm on your chart: {song_cung}",
+    "khong_co_vcd": "As calculated here, your {cung} ({chi}) holds the major star(s) {sao}, so it is not an empty palace. What you were told may rest on a different birth time, star-placement method or school.",
+    "khong_co_tt": "As calculated here, {ten_tt} does not show on any pillar stem or among your hidden stems. What you were told may rest on a different birth time or method.",
+    "bc_sau_do_vo_nam": "{nam}: your chart shows a smoother rhythm for relationships, a good time to meet people and open up again once you feel ready."
+  },
   "mach": {
     "sau_do_vo": {
       "tieu_de": "Rebuilding steadiness & opening up after a past breakup or divorce",
@@ -30,14 +56,8 @@
       ]
     },
     "go_loi_phan_doa": {
-      "tieu_de": "A balanced two-sided look at the chart label worrying you",
-      "goc_nhin_hai_mat": "Classical manuals were written in an agrarian era that prized conformity, so bold, independent or fast-moving chart patterns were often described in harsh words. In modern work and life, those very same traits become sharp assets for adaptability, innovation, specialized craft and resilience when channeled well.",
-      "rieng": {
-        "vo_chinh_dieu": "An Empty Major-Star Palace works like an adaptable mirror: early life may feel undecided, yet not being locked into a rigid mold gives strong flexibility in advisory, coordination and changing environments.",
-        "khong_kiep": "Sky Void and Earth Robbery bring rapid shifts and unconventional thinking: risky for impulsive speculation, yet sharp for technology, creative problem-solving and crisis turnaround.",
-        "that_sat": "Seven Killings reflects decisiveness, grit under pressure and willingness to shoulder hard tasks: pairing that drive with gentler listening at home turns intensity into reliable leadership.",
-        "thuong_quan": "Hurting Officer signifies eloquence, critical thinking, aesthetic sense and process improvement: it thrives in roles with creative autonomy and partners who respect individuality."
-      },
+      "tieu_de": "A balanced two-sided look at the chart pattern worrying you",
+      "goc_nhin_hai_mat": "Classical manuals were written in an agrarian era that prized conformity, so bold, independent or fast-moving chart patterns were often described in harsh words. In modern work and life, those very same traits become sharp assets for adaptability, specialized craft and resilience when channeled well.",
       "viec_thuc_te": [
         "Treat your chart pattern as an operating manual for your temperament: place bold energy into work that rewards it rather than fearing an old label",
         "Keep two practical stabilizers — a financial reserve buffer and unhurried communication with loved ones — to balance sharper edges"

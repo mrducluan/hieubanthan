@@ -46,7 +46,7 @@ async function xuLy(req: Request): Promise<NextResponse> {
     const goiY = await thuGoiY(parsed.data, dau).catch((e: unknown) => { baoLoi(e, { noi: "api", duong: "/api/tuvi/hoi#vec" }); return null; });
     if (goiY) cuoi = goiY as Record<string, unknown>;
   }
-  const canKiemSao = Boolean(cuoi?.luan_hoi || cuoi?.doi_song_lien_ket);
+  const canKiemSao = Boolean(cuoi?.luan_hoi || cuoi?.doi_song_lien_ket || cuoi?.go_nut_doi_song);
   const quyen = canKiemSao ? await daMoBaoCaoHoi(req, "tuvi", parsed.data.la_so) : true;
   return NextResponse.json(catLuanHoiChat(cuoi, quyen));
 }

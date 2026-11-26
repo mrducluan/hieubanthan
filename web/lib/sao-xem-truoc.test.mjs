@@ -10,6 +10,7 @@ import {
   boTinhTrangKhoa,
   catLuanHoiChat,
   catXemTruoc,
+  khoaLaBiCat,
   taoKhoaGiaoDichLuanGiai,
   xetQuyenDocHoi,
 } from "./sao-xem-truoc.ts";
@@ -184,7 +185,7 @@ test("SAO-2 v2.0 (Default-Deny Allowlist): chặn 100% khoá cấp gốc lạ kh
       if (bc.ung_dung_co_dien && typeof bc.ung_dung_co_dien === "object") {
         const u = bc.ung_dung_co_dien;
         const canMo = u.ma === "battu_co_dien" ? "ngu_hanh" : u.ma === "tuvi_co_dien" ? "su_nghiep" : null;
-        if (canMo && !mo.has(canMo)) out.ung_dung_co_dien = { khoa: true, ma: u.ma, tieu_de: u.tieu_de, nguyen_tac_uu_tien: u.nguyen_tac_uu_tien };
+        if (!canMo || !mo.has(canMo)) out.ung_dung_co_dien = { khoa: true, ma: u.ma, tieu_de: u.tieu_de, nguyen_tac_uu_tien: u.nguyen_tac_uu_tien };
       }
     }
     return out;
@@ -222,6 +223,69 @@ test("SAO-2 v2.0 (Default-Deny Allowlist): chặn 100% khoá cấp gốc lạ kh
     chuong: [{ ma: "ba_thang", tieu_de: "3 tháng", doan: ["A"] }, { ma: "muoi_hai_thang", tieu_de: "12 tháng", doan: ["B"] }],
   };
   kiemMau("thoi_gian_toi_va_dieu_kien", mauThoiGianVaDieuKien, null);
+
+  // Mẫu THẬT của engine cho mô-đun `thoi_gian` (golden dau_ra_vi chỉ lưu băm, không có nguyên văn) — `thoi-gian-toi-mau.json.gz`
+  // được engine/tests/test_ky_luat_v2.py so khoá cấp gốc với đầu ra engine hiện hành (không để mẫu cũ đi).
+  const thoiGianThat = JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(import.meta.dirname, "thoi-gian-toi-mau.json.gz"))).toString("utf8"));
+  assert.equal(thoiGianThat.mo_dun, "thoi_gian");
+  assert.equal(thoiGianThat.chuong.length >= 3, true);
+  kiemMau("thoi_gian_toi.that", thoiGianThat, null);
+  const catTg = catXemTruoc(thoiGianThat, 1);
+  assert.equal(catTg.so_khoa, thoiGianThat.chuong.length - 1);
+  assert.equal(JSON.stringify(catTg).includes(thoiGianThat.chuong[1].doan[0]), false);
+});
+
+test("SAO-2: ung_dung_co_dien có `ma` lạ (vd phongthuy_co_dien, mã mới) MẶC ĐỊNH KHOÁ — không lộ khi còn chương khoá", () => {
+  const bc = {
+    chuong: [
+      { ma: "tong_quan", tieu_de: "Mở", doan: ["Đoạn 1"] },
+      { ma: "su_nghiep", tieu_de: "Khoá", doan: ["Đoạn 2"] },
+      { ma: "ngu_hanh", tieu_de: "Khoá 2", doan: ["Đoạn 3"] },
+    ],
+    ung_dung_co_dien: {
+      ma: "phongthuy_co_dien", tieu_de: "Ứng dụng Phong thuỷ", nguyen_tac_uu_tien: "NT…",
+      khu_vuc_van_9: [{ ten_phep: "BÍ_MẬT_CHI_TIẾT" }],
+    },
+  };
+  for (const mienPhi of [1, 2]) {
+    const cat = catXemTruoc(bc, mienPhi);
+    assert.deepEqual(cat.ung_dung_co_dien, { khoa: true, ma: "phongthuy_co_dien", tieu_de: "Ứng dụng Phong thuỷ", nguyen_tac_uu_tien: "NT…" });
+    assert.equal(JSON.stringify(cat).includes("BÍ_MẬT_CHI_TIẾT"), false);
+  }
+  // Mở trọn bài (không còn chương khoá) thì giữ nguyên.
+  assert.deepEqual(catXemTruoc(bc, 3).ung_dung_co_dien, bc.ung_dung_co_dien);
+  // Mã đã biết vẫn đi theo chương nguồn của nó.
+  const bt = { chuong: bc.chuong, ung_dung_co_dien: { ...bc.ung_dung_co_dien, ma: "battu_co_dien" } };
+  assert.equal((catXemTruoc(bt, 2).ung_dung_co_dien).khoa, true);          // ngu_hanh còn khoá
+  assert.equal((catXemTruoc({ chuong: [bc.chuong[0], bc.chuong[2], bc.chuong[1]], ung_dung_co_dien: bt.ung_dung_co_dien }, 2).ung_dung_co_dien).khoa, undefined);
+});
+
+test("SAO-2: khoaLaBiCat liệt kê khoá cấp gốc chưa phân loại (Default-Deny im lặng → có tín hiệu để báo)", () => {
+  assert.deepEqual(khoaLaBiCat({ chuong: [], mo_dun: "tuvi", cot_loi: [], ung_dung_co_dien: {} }), []);
+  assert.deepEqual(khoaLaBiCat({ chuong: [], mo_dun: "tuvi", truong_moi_a: 1, truong_moi_b: { x: 1 } }).sort(), ["truong_moi_a", "truong_moi_b"]);
+});
+
+test("SAO-2: khối gỡ nút giữ phần KB chung nhưng cắt phần mượn chương khi chương còn khoá", () => {
+  const goc = {
+    cau_tra_loi: "…",
+    go_nut_doi_song: {
+      ma: "sau_do_vo", tieu_de: "Nhịp phục hồi", goc_nhin_hai_mat: "Góc nhìn chung", viec_thuc_te: ["Việc chung"],
+      tu_chuong: "tinh_cam", du_kien_la_so: "Lời riêng từ chương Tình cảm", viec_la_so: ["Năm 2028: nhịp thuận"],
+    },
+  };
+  const khoa = catLuanHoiChat(goc, { daMoToanBo: false, chuongMo: new Set(["tong_quan"]) });
+  const gn = khoa.go_nut_doi_song;
+  assert.equal(gn.khoa, true);
+  assert.equal(gn.du_kien_la_so, undefined);
+  assert.equal(gn.viec_la_so, undefined);
+  assert.deepEqual(gn.viec_thuc_te, ["Việc chung"]);
+  assert.ok(!JSON.stringify(khoa).includes("Lời riêng từ chương"));
+  // Chương đã mở / đã mua cả báo cáo → giữ nguyên.
+  assert.deepEqual(catLuanHoiChat(goc, { daMoToanBo: false, chuongMo: new Set(["tong_quan", "tinh_cam"]) }), goc);
+  assert.deepEqual(catLuanHoiChat(goc, true), goc);
+  // Giải oan đọc lá số (miễn phí), không mang tu_chuong → không cắt.
+  const oan = { go_nut_doi_song: { ma: "go_loi_phan_doa", tieu_de: "t", goc_nhin_hai_mat: "g", viec_thuc_te: [], du_kien_la_so: "Địa Không ở Tài Bạch" } };
+  assert.deepEqual(catLuanHoiChat(oan, { daMoToanBo: false, chuongMo: new Set(["tong_quan"]) }), oan);
 });
 
 test("SAO-2 (Chặng 2): Cố vấn Tam Tài cắt goi_y của nhip_12_thang, ngay_dep_30_ngay và chi tiết tam_tai_co_dien khi khoá", () => {

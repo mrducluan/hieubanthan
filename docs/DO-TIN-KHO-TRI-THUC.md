@@ -17,9 +17,9 @@
 
 | Mảng | Có nguyên văn đối chiếu | Tóm ý cổ thư, chưa khớp từng câu | Tiên đề logic sách hiện đại (ghi trang) | Tập quán / truyền khẩu phổ thông | Ban biên tập soạn | Nháp AI chờ chủ dự án duyệt | Tệp kỹ thuật |
 |---|---|---|---|---|---|---|---|
-| Bát tự | 3 | 1 | 1 |  | 7 | 1 |  |
-| Tử vi | 1 | 3 | 3 | 4 | 7 |  |  |
-| Kinh Dịch | 4 | 2 | 1 |  | 2 |  |  |
+| Bát tự | 3 | 1 |  | 1 | 7 | 1 |  |
+| Tử vi | 1 | 3 | 3 | 4 | 8 |  |  |
+| Kinh Dịch | 4 | 2 |  | 1 | 2 |  |  |
 | Phong thuỷ | 2 | 2 |  | 1 | 5 |  |  |
 | Nhân tướng | 6 | 2 |  | 1 | 1 |  |  |
 | Tarot | 1 |  | 1 |  |  |  |  |
@@ -60,7 +60,7 @@
 | `nhan_tuong_sach_ghi.json` | (cả tệp) | `than_tuong_toan_bien.json` | `test_moi_muc_qua_bo_kiem` | SX-C: câu Thần Tướng Toàn Biên gắn với nét khảo sát + 12 cung trên mặt |
 | `nhantuong_ngu_hanh_va_co_thu.json` | quy_tac_co_thu | `lieu_trang_tuong_phap.json` | `test_moi_muc_qua_bo_kiem` | PR #320 (2026-11-20): 81/150 quy tắc giữ lại, mỗi câu Hán khớp kho nguồn Liễu Trang tướng pháp / Thần Tướng Toàn Biên (than_tuong_toan_bien.json); lời Việt khuôn SX-C do ban biên tập viết |
 | `phongthuy_cung_menh.json` | (cả tệp) | `duong_trach_thap_thu.json` | `test_cung_menh_khop_phep_tinh` | SX-C: chín điều bố trí × 8 cung (東/西四位宅圖說); phương + du niên khớp phép tính Bát trạch |
-| `phongthuy_huyen_khong.json` | to_hop_81 | `phongthuy_huyen_khong_co_thu.json` | `test_to_hop_81_sach_qua_bo_kiem_sx_c` | Chặng 1: 63/81 tổ hợp sao có câu nguyên văn Huyền Không Bí Chỉ / Tử Bạch Đoạn / Phi Tinh Đoạn qua bộ kiểm SX-C (18 cặp còn lại là lời biên tập, chưa có câu phú riêng trong 4 bản chép); Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json) |
+| `phongthuy_huyen_khong.json` | to_hop_81 | `phongthuy_huyen_khong_co_thu.json` | `test_to_hop_81_sach_qua_bo_kiem_sx_c` | Chặng 1 (đã soát nghĩa từng câu): 61/81 tổ hợp sao có câu nguyên văn Huyền Không Bí Chỉ / Tử Bạch Quyết / Phi Tinh Phú qua bộ kiểm SX-C3 (20 cặp còn lại giữ lời biên tập trung thực); Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu đồ bàn Thẩm Thị (huyen_khong_tham_thi.json) |
 | `phongthuy_kb.json` | du_nien | `duong_trach_thap_thu.json` | `test_cau_trich_kb_la_nguyen_van` | KT-PT1: 8 du niên có câu «吉星三 / 凶星五» của Dương Trạch Thập Thư; phép tính du niên + bảng cung phi 180 năm khớp sách (test_dai_du_nien_ca_khop_phep_tinh, test_bang_cung_phi_180_nam_khop_phep_tinh); lời ý nghĩa vẫn là tóm ý |
 | `phongthuy_kb.json` | sach_xua_nha | `duong_trach_thap_thu.json` | `test_moi_cau_la_nguyen_van_kho_nguon` | WS-3: câu Dương Trạch Thập Thư cho khối «Sách xưa nói gì về nhà của bạn»; lời Việt là tóm ý |
 | `phongthuy_sach_ghi.json` | (cả tệp) | `duong_trach_thap_thu.json` | `test_moi_muc_qua_bo_kiem` | SX-C: 116 điều về thế nhà (論宅外形, 內形篇, 何知經…) khớp kho nguồn; vế 'vì sao hợp lẽ thường' là lời biên tập |
@@ -89,7 +89,7 @@
 | Bát tự | `battu_luan_hoi_kb.json` |  | Ban biên tập soạn | lớp Luận theo câu hỏi Bát tự (LH-2) |
 | Bát tự | `battu_ngay_gio.json` |  | Có nguyên văn đối chiếu | TK-2: 120 bài ca chung «六X日Y時斷» quyển 8–9, mỗi câu đúng mục can ngày × giờ |
 | Bát tự | `battu_sach_ghi.json` |  | Có nguyên văn đối chiếu | SX-C: câu Tam Mệnh Thông Hội + Uyên Hải Tử Bình (thần sát, thập thần, lục thân, tính nết, thân thể) khớp kho nguồn |
-| Bát tự | `battu_thien_ly_menh_cao.json` |  | Tiên đề logic sách hiện đại (ghi trang) | Đợt 3: 6 quy tắc Thập Thần & Cách Cục 2 chiều rút ý từ Thiên Lý Mệnh Cảo (Vi Thiên Lý, 1934 — bazi-kb) |
+| Bát tự | `battu_thien_ly_menh_cao.json` |  | Tập quán / truyền khẩu phổ thông | Đợt 3: 6 quy tắc Thập Thần & Cách Cục 2 chiều rút ý từ Thiên Lý Mệnh Cảo (Vi Thiên Lý, 1934 — bazi-kb). Hạ từ luat_tom_y (KY-LUAT-V2 sửa review): chỉ ghi tên thiên (Nhân Nguyên / Lục Thần / Cách Cục), chưa ghi số trang |
 | Bát tự | `bo_sung_nhat_chu.json` |  | Ban biên tập soạn |  |
 | Bát tự | `bo_sung_thap_than.json` |  | Ban biên tập soạn |  |
 | Bát tự | `doanh_chu_gop_von_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 2: nháp AI soi bù khuyết Co-founder & điều lệ rào chắn góp vốn, chờ chủ dự án đọc duyệt |
@@ -99,6 +99,7 @@
 | Tử vi | `bo_sung_hoa_cung.json` |  | Ban biên tập soạn |  |
 | Tử vi | `bo_sung_sao.json` |  | Ban biên tập soạn |  |
 | Tử vi | `su_kien_kb.json` |  | Ban biên tập soạn |  |
+| Tử vi | `tuvi_ban_do_kb.json` |  | Ban biên tập soạn | TV-BD1 Bản đồ 12 cung Tử vi: lời cung, tam phương, đường bay 2 chặng, năm — ban biên tập |
 | Tử vi | `tuvi_cach_cuc.json` |  | Tóm ý cổ thư, chưa khớp từng câu | 7 cách có `sach_ghi` khớp «định phú / quý cục» (test_cach_cuc_sach_ghi_khop_dinh_cuc_toan_thu); 37 cách có cổ ca trỏ Cốt Tuỷ Phú; Quân thần khánh hội + Nguyệt sinh thương hải sửa theo sách (KT-TT8); Mã đầu đới kiếm, Lộc Mã bội ấn giữ cách phổ biến, gắn `khac_dieu_kien` |
 | Tử vi | `tuvi_co_thu.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
 | Tử vi | `tuvi_co_thu.json` | cau | Có nguyên văn đối chiếu | 84 câu Cốt Tuỷ Phú khớp từng chữ (giản ↔ phồn); phiên âm, nghĩa là nháp; chưa so bản khắc 1600 |
@@ -128,7 +129,7 @@
 | Kinh Dịch | `kinhdich_kb.json` | mau | Ban biên tập soạn |  |
 | Kinh Dịch | `kinhdich_kb.json` | giai_thich | Ban biên tập soạn |  |
 | Kinh Dịch | `kinhdich_legge.json` |  | Có nguyên văn đối chiếu | TK-2 việc 4: bản dịch Anh James Legge 1882 (PD) — chỉ quẻ qua kiểm vạch âm dương + kiểm chữ hỏng; chỉ bản /en |
-| Kinh Dịch | `kinhdich_luc_hao_thuc_chien.json` |  | Tiên đề logic sách hiện đại (ghi trang) | Đợt 2B: 8 nguyên tắc Lục Hào + 5 Lục Thân thực chiến rút ý từ Vương Hổ Ứng & Thiệu Vĩ Hoa |
+| Kinh Dịch | `kinhdich_luc_hao_thuc_chien.json` |  | Tập quán / truyền khẩu phổ thông | Đợt 2B: 8 nguyên tắc Lục Hào + 5 Lục Thân thực chiến rút ý từ Vương Hổ Ứng & Thiệu Vĩ Hoa. Hạ từ luat_tom_y (KY-LUAT-V2 sửa review): chỉ ghi "Phần N" của bộ kho tri thức, chưa ghi số trang sách |
 | Kinh Dịch | `kinhdich_tra_loi.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
 | Kinh Dịch | `kinhdich_tra_loi.json` | tinh_chat_que | Có nguyên văn đối chiếu |  |
 | Kinh Dịch | `kinhdich_tra_loi.json` | sach_xua_viec | Có nguyên văn đối chiếu | WS-5: câu Tăng San Bốc Dịch theo chương ứng với việc; lời Việt là tóm ý |
@@ -142,7 +143,7 @@
 | Phong thuỷ | `phongthuy_doi_song.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_hoi_gi_kb.json` |  | Ban biên tập soạn |  |
 | Phong thuỷ | `phongthuy_huyen_khong.json` |  | Tóm ý cổ thư, chưa khớp từng câu |  |
-| Phong thuỷ | `phongthuy_huyen_khong.json` | to_hop_81 | Có nguyên văn đối chiếu | Chặng 1: 63/81 tổ hợp sao có câu nguyên văn Huyền Không Bí Chỉ / Tử Bạch Đoạn / Phi Tinh Đoạn qua bộ kiểm SX-C (18 cặp còn lại là lời biên tập, chưa có câu phú riêng trong 4 bản chép); Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json) |
+| Phong thuỷ | `phongthuy_huyen_khong.json` | to_hop_81 | Có nguyên văn đối chiếu | Chặng 1 (đã soát nghĩa từng câu): 61/81 tổ hợp sao có câu nguyên văn Huyền Không Bí Chỉ / Tử Bạch Quyết / Phi Tinh Phú qua bộ kiểm SX-C3 (20 cặp còn lại giữ lời biên tập trung thực); Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu đồ bàn Thẩm Thị (huyen_khong_tham_thi.json) |
 | Phong thuỷ | `phongthuy_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | KT-PT1: 7 dấu hiệu `bo_tri` có câu nguyên văn (`sach`); phần còn lại chưa khớp từng câu |
 | Phong thuỷ | `phongthuy_kb.json` | du_nien | Có nguyên văn đối chiếu | KT-PT1: 8 du niên có câu «吉星三 / 凶星五» của Dương Trạch Thập Thư; phép tính du niên + bảng cung phi 180 năm khớp sách (test_dai_du_nien_ca_khop_phep_tinh, test_bang_cung_phi_180_nam_khop_phep_tinh); lời ý nghĩa vẫn là tóm ý |
 | Phong thuỷ | `phongthuy_kb.json` | sach_xua_nha | Có nguyên văn đối chiếu | WS-3: câu Dương Trạch Thập Thư cho khối «Sách xưa nói gì về nhà của bạn»; lời Việt là tóm ý |

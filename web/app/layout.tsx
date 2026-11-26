@@ -74,6 +74,12 @@ export const metadata: Metadata = {
     type: "website", locale: "vi_VN", siteName: TEN_SITE, url: "/",
     title: "Hiểu Bản Thân — con số nói gì về bạn", description: MO_TA_SITE, images: ["/og"],
   },
+  icons: {
+    icon: [
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+  },
   twitter: { card: "summary_large_image", title: "Hiểu Bản Thân — con số nói gì về bạn", description: MO_TA_SITE, images: ["/og"] },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" } },
   // Xác minh chủ sở hữu (Search Console / Bing Webmaster) bằng thẻ meta — đặt env trên Vercel, không cần sửa DNS.

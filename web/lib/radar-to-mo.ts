@@ -33,6 +33,8 @@ export interface CauHoiNhatKy {
   mo_dun: string;
   cau_hoi: string;
   loai?: string;
+  chu_de?: string;
+  y_dinh?: string;
   do_phu?: string;
   can_them?: string[];
   huu_ich?: boolean | null;
@@ -152,12 +154,50 @@ export function duongTriThucKb(tep: string): string {
   return `/quan-tri/tri-thuc/${tep.replace(/\.json$/, "")}`;
 }
 
-export function phanMachToMo(cauHoi: string, moDun = ""): MaMachToMo {
+/** Ưu tiên đọc thẳng phân loại đã tính của Engine (`loai` / `chu_de` / `y_dinh` / `mo_dun`) từ nhật ký hỏi đáp;
+ *  chỉ rơi về khớp từ khoá khi bản ghi lịch sử cũ thiếu phân loại của Engine. */
+const ANH_XA_ENGINE: Readonly<Record<string, MaMachToMo>> = {
+  hop_lam_an: "kinh_doanh_doi_tac",
+  doi_tac: "kinh_doanh_doi_tac",
+  hop_hon: "tinh_duyen_ly_hon",
+  hon_nhan: "tinh_duyen_ly_hon",
+  tinh_cam: "tinh_duyen_ly_hon",
+  la_so_con: "gia_dao_con_cai",
+  con: "gia_dao_con_cai",
+  sinh_con_tuoi: "gia_dao_con_cai",
+  con_cai: "gia_dao_con_cai",
+  gia_dinh: "gia_dao_con_cai",
+  tai_van: "tai_loc_giu_tien",
+  nghe_tien: "tai_loc_giu_tien",
+  hoc_hanh: "hoc_hanh_thang_tien",
+  hoc_hanh_con: "hoc_hanh_thang_tien",
+  di_hay_o: "hoc_hanh_thang_tien",
+  di_xa: "hoc_hanh_thang_tien",
+  cach_cuc: "hoc_hanh_thang_tien",
+  an_toan: "van_han_hoa_giai",
+  phap_ly: "van_han_hoa_giai",
+  loi_song: "van_han_hoa_giai",
+  than_sat: "van_han_hoa_giai",
+  ba_thang_toi: "tuong_lai_nhip_thang",
+  chon_thoi_diem: "tuong_lai_nhip_thang",
+  tong_quan_nam: "tuong_lai_nhip_thang",
+  han: "tuong_lai_nhip_thang",
+  van: "tuong_lai_nhip_thang",
+};
+
+export function phanMachToMo(
+  cauHoi: string,
+  moDun = "",
+  engineNhan?: { loai?: string; chu_de?: string; y_dinh?: string },
+): MaMachToMo {
+  if (moDun === "phongthuy") return "nha_cua_kiem_chung";
+  for (const nhan of [engineNhan?.y_dinh, engineNhan?.chu_de, engineNhan?.loai]) {
+    if (nhan && ANH_XA_ENGINE[nhan]) return ANH_XA_ENGINE[nhan]!;
+  }
   const t = boDau(cauHoi);
   for (const m of MACH_8) {
     if (m.mau.some((rx) => rx.test(t))) return m.ma;
   }
-  if (moDun === "phongthuy") return "nha_cua_kiem_chung";
   return "tuong_lai_nhip_thang";
 }
 
@@ -176,7 +216,7 @@ export function gomRadarToMo(ds: readonly CauHoiNhatKy[]): CumRadarToMo[] {
   }
   for (const c of ds) {
     if (!c.cau_hoi?.trim()) continue;
-    const ma = phanMachToMo(c.cau_hoi, c.mo_dun);
+    const ma = phanMachToMo(c.cau_hoi, c.mo_dun, { loai: c.loai, chu_de: c.chu_de, y_dinh: c.y_dinh });
     const cum = bang.get(ma)!;
     cum.so_cau += 1;
     if (c.huu_ich === false) cum.so_khong_huu_ich += 1;

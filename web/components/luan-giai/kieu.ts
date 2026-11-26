@@ -155,31 +155,35 @@ export interface SaoLuuNam {
 }
 export interface ChuongKhoa { ma: string; tieu_de: string; khoa: true; moi_xem: MoiXem }
 
-export interface HanhUngDungCoDien {
-  hanh_ma: string;
-  ten_hanh: string;
-  mau_sac: string;
-  chat_lieu: string;
-  phuong_vi: string;
-  khung_gio: string;
-  thoi_quen: string[];
+export interface DiemHocThuatCoDien {
+  nhan: string;
+  noi_dung: string;
+}
+
+export interface SachCoDien {
+  sach: string;
+  ve?: string;
+  nguyen_van?: string;
+  y: string;
 }
 
 export interface KhuVucVan9CoDien {
   khu_vuc: string;
   ten_khu_vuc: string;
   cap_sao: string;
-  loai_phep: string;
+  loai_phep?: string;
   ten_phep: string;
   ngu_hanh_dieu_hoa: string;
   ung_dung: string;
 }
 
-export interface DoiChieuHaiPhai {
-  loai: string;
-  tieu_de: string;
+export interface DoiChieuHaiPhaiCoDien {
+  loai?: string;
+  tieu_de?: string;
   goc_bat_trach: string;
-  goc_huyen_khong_van_9: string;
+  goc_huyen_khong?: string;
+  goc_huyen_khong_van_9?: string;
+  ma_dung_hoa?: string;
   cach_dung_hoa: string;
 }
 
@@ -189,9 +193,11 @@ export interface UngDungCoDien {
   tieu_de: string;
   nguyen_tac_uu_tien: string;
   tom_tat_dung_than?: string;
-  hanh_ung_dung?: HanhUngDungCoDien[];
+  diem_hoc_thuat?: DiemHocThuatCoDien[];
+  sach?: SachCoDien[];
+  ghi_chu_so_do?: string;
   khu_vuc_van_9?: KhuVucVan9CoDien[];
-  doi_chieu_hai_phai?: DoiChieuHaiPhai;
+  doi_chieu_hai_phai?: DoiChieuHaiPhaiCoDien;
 }
 
 export interface BaoCaoDoiSong {

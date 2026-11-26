@@ -48,7 +48,7 @@ async function xuLy(req: Request): Promise<NextResponse> {
       return NextResponse.json({ error: l.error }, { status: l.status });
     }
     const obj = (body && typeof body === "object" ? body : {}) as Record<string, unknown>;
-    const canKiemSao = Boolean(obj.luan_hoi || obj.doi_song_lien_ket);
+    const canKiemSao = Boolean(obj.luan_hoi || obj.doi_song_lien_ket || obj.go_nut_doi_song);
     const quyen = canKiemSao ? await daMoBaoCaoHoi(req, "battu", parsed.data.la_so) : true;
     return NextResponse.json(catLuanHoiChat(obj, quyen));
   } catch (e) {

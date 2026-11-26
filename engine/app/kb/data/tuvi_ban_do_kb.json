@@ -1,0 +1,199 @@
+{
+  "_trang_thai": "nhap_ai",
+  "source": [
+    "Tử Vi Đẩu Số Toàn Thư — mười hai cung và tam phương tứ chính",
+    "Lương Nhược Du — Phi Tinh Tử Vi Đẩu Số (tóm ý nguyên lý phi hoá hai chặng, ban biên tập viết mới)",
+    "Ban biên tập Hiểu Bản Thân — lời đời thường cho Bản đồ 12 cung"
+  ],
+  "source_id": "tuvi_ban_do",
+  "school_id": "nam_phai_viet",
+  "trang_thai": "nhap_ai",
+  "can_doi_chieu": true,
+  "can_gio": "Cần giờ sinh để lập Bản đồ 12 cung Tử vi",
+  "nhan_muc": {
+    "thuan": "Thuận lợi",
+    "can_bang": "Cân bằng",
+    "can_chu_dong": "Cần lưu ý"
+  },
+  "muc_thuong": {
+    "thuan": "thuận lợi",
+    "can_bang": "cân bằng",
+    "can_chu_dong": "cần lưu ý"
+  },
+  "menh_cuc": {
+    "cuc_sinh_menh": "Hoàn cảnh tự nhiên nâng đỡ cho sức tự thân của bạn",
+    "menh_sinh_cuc": "Bạn hay chủ động góp sức ra môi trường xung quanh",
+    "menh_khac_cuc": "Bạn thích tự cầm nhịp và tự mở lối trong hoàn cảnh thực tế",
+    "cuc_khac_menh": "Hoàn cảnh đặt ra khuôn khổ giúp bạn rèn bản lĩnh vững dần",
+    "binh_hoa": "Sức tự thân của bạn và nhịp hoàn cảnh khá đồng điệu"
+  },
+  "cung": {
+    "menh": {
+      "y": "tính cách nền, cách bạn nghĩ và phản ứng trước mọi việc",
+      "y_tre": "tính nết tự nhiên và cách bạn tiếp nhận điều mới quanh mình",
+      "ngan": "chính bạn",
+      "ngan_tre": "chính bạn",
+      "chu_de_han": "Bản thân",
+      "chu_de_han_tre": "Bản thân"
+    },
+    "phu_mau": {
+      "y": "cha mẹ, người lớn tuổi, nề nếp học hành và giấy tờ",
+      "y_tre": "cha mẹ, thầy cô và sự dạy dỗ đầu đời",
+      "ngan": "cha mẹ, giấy tờ",
+      "ngan_tre": "cha mẹ, thầy cô",
+      "chu_de_han": "Gia đạo, học hành",
+      "chu_de_han_tre": "Cha mẹ, học tập"
+    },
+    "phuc_duc": {
+      "y": "đời sống tinh thần, độ bình tâm và nền nếp họ hàng",
+      "y_tre": "sự yên tâm, giấc ngủ và nếp ấm trong nhà",
+      "ngan": "đời sống tinh thần",
+      "ngan_tre": "đời sống tinh thần",
+      "chu_de_han": "Tinh thần",
+      "chu_de_han_tre": "Tinh thần"
+    },
+    "dien_trach": {
+      "y": "nhà cửa, chỗ ở ổn định và phần tích luỹ lâu dài",
+      "y_tre": "không gian sống, góc học tập và nếp sinh hoạt ở nhà",
+      "ngan": "nhà cửa, tích luỹ",
+      "ngan_tre": "chỗ ở, góc học",
+      "chu_de_han": "Nhà cửa, tích luỹ",
+      "chu_de_han_tre": "Nếp nhà"
+    },
+    "quan_loc": {
+      "y": "công việc, vai trò chuyên môn và cách bạn gánh trách nhiệm",
+      "y_tre": "việc học trên lớp, thói quen rèn luyện và tính tự giác",
+      "ngan": "công việc, sự nghiệp",
+      "ngan_tre": "việc học, rèn luyện",
+      "chu_de_han": "Sự nghiệp",
+      "chu_de_han_tre": "Việc học"
+    },
+    "no_boc": {
+      "y": "bạn bè, đồng nghiệp, cộng sự và mạng lưới quen biết",
+      "y_tre": "bạn cùng lớp, bạn chơi chung và cách hoà nhập nhóm",
+      "ngan": "bạn bè, cộng sự",
+      "ngan_tre": "bạn bè cùng lứa",
+      "chu_de_han": "Mạng lưới",
+      "chu_de_han_tre": "Bạn bè"
+    },
+    "thien_di": {
+      "y": "việc đi ra ngoài, môi trường mới và ấn tượng bạn tạo với xã hội",
+      "y_tre": "khi ra ngoài trường lớp, đi chơi xa và làm quen chỗ mới",
+      "ngan": "ra ngoài, môi trường mới",
+      "ngan_tre": "ra ngoài, chỗ mới",
+      "chu_de_han": "Ra ngoài, đổi mới",
+      "chu_de_han_tre": "Ra ngoài"
+    },
+    "tat_ach": {
+      "y": "sức bền cơ thể, nhịp nghỉ ngơi và cách cơ thể báo hiệu khi quá tải",
+      "y_tre": "sức đề kháng, giấc ngủ và nếp ăn uống vận động hằng ngày",
+      "ngan": "sức khoẻ, nhịp nghỉ",
+      "ngan_tre": "sức khoẻ, nếp sinh hoạt",
+      "chu_de_han": "Giữ nhịp sức khoẻ",
+      "chu_de_han_tre": "Sức khoẻ"
+    },
+    "tai_bach": {
+      "y": "cách tạo thu nhập, xoay vòng dòng tiền và giữ kỷ luật chi tiêu",
+      "y_tre": "cách giữ gìn đồ đạc và tập quản lý khoản tiền nhỏ",
+      "ngan": "tiền bạc, thu nhập",
+      "ngan_tre": "tiền tiêu vặt, đồ dùng",
+      "chu_de_han": "Tài chính",
+      "chu_de_han_tre": "Giữ gìn đồ đạc"
+    },
+    "tu_nu": {
+      "y": "con cái, thế hệ trẻ và những dự án bạn chăm chút lâu dài",
+      "y_tre": "óc sáng tạo, niềm vui nhỏ và những thứ bạn tự tay làm ra",
+      "ngan": "con cái, sáng tạo",
+      "ngan_tre": "sáng tạo, niềm vui nhỏ",
+      "chu_de_han": "Con cái, sáng tạo",
+      "chu_de_han_tre": "Sáng tạo"
+    },
+    "phu_the": {
+      "y": "cách chọn người đồng điệu, giữ cam kết và chia sẻ việc chung",
+      "y_tre": "cách giữ lời hứa, lắng nghe và gắn bó lành mạnh khi trưởng thành",
+      "ngan": "quan hệ gắn bó",
+      "ngan_tre": "chuyện gắn bó về sau",
+      "chu_de_han": "Tình cảm, cam kết",
+      "chu_de_han_tre": "Ứng xử, gắn bó"
+    },
+    "huynh_de": {
+      "y": "anh chị em ruột thịt, bạn thân sát sườn và sự san sẻ gần gũi",
+      "y_tre": "anh chị em trong nhà và những người bạn thân thiết nhất",
+      "ngan": "anh chị em, bạn thân",
+      "ngan_tre": "anh chị em, bạn thân",
+      "chu_de_han": "Anh em, bạn thân",
+      "chu_de_han_tre": "Anh em, bạn thân"
+    }
+  },
+  "y_hoa": {
+    "Lộc": "thêm nguồn thuận lợi và cơ hội tự tìm đến",
+    "Quyền": "thêm tính chủ động và tiếng nói cầm trịch",
+    "Khoa": "thêm sự sáng rõ, uy tín và người hiểu chuyện",
+    "Kỵ": "thêm chỗ bận tâm cần làm kỹ từng bước"
+  },
+  "y_hoa_ngan": {
+    "Lộc": "thuận lợi",
+    "Quyền": "chủ động",
+    "Khoa": "rõ ràng",
+    "Kỵ": "bận tâm"
+  },
+  "mau": {
+    "la_gi": {
+      "cung_mo": "Mảng {ngan} ({y}) trên lá số của bạn đang ở mức {muc_thuong}.",
+      "cung_menh": "Đây là cung gốc nói về {y}; tổng thể ở mức {muc_thuong}.",
+      "than_cu": "Cung Thân đặt tại đây: từ trung vận trở đi, chuyện {ngan} càng chi phối rõ các lựa chọn lớn của bạn.",
+      "lai_nhan": "Đây là điểm khởi nguồn theo năm sinh của bạn: nhiều thay đổi đáng kể thường bắt đầu từ chuyện {ngan}.",
+      "vo_chinh_dieu": "Mảng này linh hoạt theo hoàn cảnh, thường mượn nhịp dẫn dắt từ phía {ngan_xung} đối diện.",
+      "hoa_sinh": "Từ gốc năm sinh, chuyện {ngan} có sẵn nét {y_hoa}.",
+      "cat": "Ở mảng {ngan}, bạn dễ gặp người hỗ trợ hoặc có sẵn điểm tựa khi cần xoay xở.",
+      "sat": "Chuyện {ngan} đôi lúc có việc gấp chen ngang: chừa khoảng dự phòng giúp bạn giữ nhịp ổn định.",
+      "tuan_triet": "Nhịp ở mảng {ngan} thường chậm bước đầu: càng chuẩn bị kỹ và kiên nhẫn càng bền về sau.",
+      "suc_khoe_mien_tru": "Đây là lời nhắc phòng ngừa, không thay lời bác sĩ; có dấu hiệu bất thường thì nên đi khám."
+    },
+    "tam_phuong": {
+      "mo": "Mảng {ngan} luôn nối trực tiếp với phía đối diện ({ngan_xung}) và hai phía hợp lực ({ngan_th1}, {ngan_th2}).",
+      "muc": "Mức của ba cung ấy trong báo cáo: {ds}."
+    },
+    "bay_cung": {
+      "di": "Từ {ngan} truyền {y_hoa} sang chuyện {ngan_kia}.",
+      "den": "Chuyện {ngan_kia} đưa {y_hoa} vào mảng {ngan}.",
+      "tu_hoa": "Ngay trong chuyện {ngan}, nét {y_hoa_ngan} tự khởi lên rồi quay về chính mảng này."
+    },
+    "nam": {
+      "cham": "Năm {nam} ({cc}): {ly_do} — mức chung của năm là {muc}.",
+      "ly_do": {
+        "luu_nien": "trọng tâm năm đi thẳng qua chuyện {ngan}",
+        "loc_nam": "có thêm nguồn thuận chạm vào chuyện {ngan}",
+        "quyen_nam": "tăng việc cần bạn đứng ra quyết ở chuyện {ngan}",
+        "khoa_nam": "dễ làm rõ giấy tờ, lời nói hoặc uy tín quanh chuyện {ngan}",
+        "ky_nam": "dễ phát sinh việc cần rà kỹ ở chuyện {ngan}",
+        "ky_xung": "nhịp đối diện dội sang nhắc bạn đi chậm ở chuyện {ngan}"
+      }
+    },
+    "noi_bat": {
+      "menh_than_trung": "Cung Mệnh và cung Thân đồng cung tại {chi}: tính cách gốc và hướng chọn lựa nửa sau cuộc đời đi chung một trục ({muc}).",
+      "menh_than_khac": "Trục bản thân nối sang {ngan_than} (nơi Thân cư): càng trưởng thành bạn càng dồn tâm sức cho mảng {ngan_than}.",
+      "lai_nhan": "Điểm khởi nguồn năm sinh đặt ở mảng {ngan}: cách bạn vun đắp chuyện {ngan} mở nhịp cho nhiều chặng lớn.",
+      "chuoi_dau": "Mạch hai chặng đáng lưu tâm nối từ {ngan_tu} qua {ngan_qua} về chuyện {ngan_den}."
+    },
+    "thoi_gian": {
+      "nam": "Năm {nam} ({cc}, {tuoi} tuổi mụ): nhịp lưu niên đi qua mảng {ngan_ln}.",
+      "nam_cham": " Chạm {n} cung trên bản đồ.",
+      "dai_van": "Giai đoạn {tu_tuoi}–{den_tuoi} tuổi ({tu_nam}–{den_nam}): trọng tâm ở {chu_de} — mức {muc}.",
+      "hoi_dan": "Kéo kim vàng trên vành ngoài hoặc thanh năm để xem từng năm chạm vào những cung nào.",
+      "nam_toi": "Mười năm tới dùng chung một nguồn tính với chương Vận hạn trong bài đọc."
+    },
+    "vi_sao": {
+      "cung": "Cung {cung} tại {can} {chi} (hành {hanh}) — mức chấm cung: {muc}",
+      "chinh": "Chính tinh tại cung: {ds}",
+      "muon": "Vô chính diệu, mượn chính tinh cung đối ({xung}): {ds}",
+      "vo_chinh": "Vô chính diệu tại {chi}",
+      "hoa_goc": "Tứ hoá năm sinh tại cung: {ds}",
+      "cat": "Cát tinh hội về: {ds}",
+      "sat": "Sát tinh tại cung: {ds}",
+      "tuan_triet": "Án ngữ bởi {ds} (lối Nam phái)",
+      "tam_phuong": "Tam phương tứ chính: xung chiếu {xung}, tam hợp {th1} và {th2}"
+    },
+    "vai_doc_cha_me": "Bản đồ này của một bạn dưới 16 tuổi: lời viết để cha mẹ, người lớn đọc hộ; các mảng chuyện người lớn (công việc, hôn nhân) được để trống."
+  }
+}

@@ -290,5 +290,13 @@
  "kd.sach_xua.y.tranh_chap": "When worried about a dispute, the book says that if the Offspring line is moving or sits on your line, the matter is unlikely to grow large.",
  "kd.sach_xua.y.nha_cua": "For building or buying a home, the book looks at the house line (Parent) and your line: both strong, moving and changing well, means a settled home and smooth work.",
  "pt.hk.the_quai_ghi_chu": "The replacement-star (Ti Gua) chart follows the reference charts of the Shen school (star 5 entering the centre stays 5); the original text of Shen's Xuan Kong Studies is not yet in our source library, so this rule is still awaiting verification.",
- "ds.vai_doc.cha_me": "This reading is meant for a parent or another adult reading on the child's behalf: the person in the chart is under {tuoi}. Read the advice as things an adult can help the child do; the classical texts' harsher notes are left out here."
+ "ds.vai_doc.cha_me": "This reading is meant for a parent or another adult reading on the child's behalf: the person in the chart is under {tuoi}. Read the advice as things an adult can help the child do; the classical texts' harsher notes are left out here.",
+ "tv2.chuoi.ky_chuyen_ky.tieu_de": "Ripple of pressure from {ngan_a} through {ngan_b} into {ngan_c}",
+ "tv2.chuoi.ky_chuyen_ky.nghia": "Concerns starting in {ma_a} tend to pass through {ma_b} and settle as practical pressure in {ma_c}.",
+ "tv2.chuoi.ky_chuyen_ky.viec_nen_lam": "When {ngan_a} feels strained, avoid over-drawing on {ngan_c}; resolve the bottleneck early at the {ngan_b} step.",
+ "tv2.chuoi.ky_chuyen_ky.can_cu": "Ji-to-Ji chain (Liang Flying-Star school — editorial summary): {tu_cung} ({can_dau}) sends {hoa_ky} ({sao_dau}) to {qua_cung} ({can_chuyen}), turning {hoa_ky} ({sao_chuyen}) into {den_cung} (clashing {xung_cung})",
+ "tv2.chuoi.loc_chuyen_ky.tieu_de": "Gain from {ngan_a} to {ngan_b} needs boundaries around {ngan_c}",
+ "tv2.chuoi.loc_chuyen_ky.nghia": "Support flowing from {ma_a} brings momentum to {ma_b}, yet can quietly pull extra effort or outlay into {ma_c}.",
+ "tv2.chuoi.loc_chuyen_ky.viec_nen_lam": "Welcome the opening in {ngan_b} while setting clear time and budget limits around {ngan_c}.",
+ "tv2.chuoi.loc_chuyen_ky.can_cu": "Lu-to-Ji chain (Liang Flying-Star school — editorial summary): {tu_cung} ({can_dau}) sends {hoa_loc} ({sao_dau}) to {qua_cung} ({can_chuyen}), turning {hoa_ky} ({sao_chuyen}) into {den_cung}"
 }

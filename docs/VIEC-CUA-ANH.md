@@ -8,9 +8,20 @@
 
 ---
 
-## ⭐ VIỆC MỚI NHẤT — làm từ trên xuống (cập nhật 25/11/2026)
+## ⭐ VIỆC MỚI NHẤT — làm từ trên xuống (cập nhật 26/11/2026)
 
 Làm xong dòng nào thì đánh `[x]` (hoặc nhắn em). Các mục cũ hơn nằm bên dưới đường kẻ.
+
+### 00a. PR #371 (CHANG-0-1-V2) — sau khi merge
+
+- [ ] **Deploy engine (Render) TRƯỚC, rồi mới tới web (Vercel)** (web mới đọc `chuoi_chuyen_ky.ma_mau`, `ung_dung_co_dien.diem_hoc_thuat`, `go_nut_doi_song.du_kien_la_so` và gửi `gio` tuỳ chọn ở `/quan-ly-nhan-su`).
+- [ ] Mở `/quan-tri/hoc` kiểm tra khung **"Sức khoẻ 8 migration tầng HỌC"** xem còn migration nào chưa chạy trên Supabase production không; mở `/quan-tri/hoi-dap` xem **Radar 8 mạch tò mò**.
+- [ ] Đọc lướt 4 mạch trong `/quan-tri/tri-thuc/go_nut_doi_song_kb` và 61 câu sách cổ thư Huyền Không đã soát nghĩa trong `/quan-tri/tri-thuc/phongthuy_huyen_khong` (chỗ nào muốn đổi giọng văn thì sửa ngay trên quản trị → Xuất bản PR).
+
+### 00b. TV-BD1 — Bản đồ 12 cung Tử vi tương tác — sau khi merge
+
+- [ ] **Deploy engine (Render) TRƯỚC, rồi mới tới web (Vercel)** (web gọi route mới `POST /v1/tuvi/ban-do`; khi Render chưa lên thì khối tự ẩn êm ái không báo lỗi).
+- [ ] Mở `/tu-vi` và `/en/zi-wei-dou-shu` trên điện thoại & máy tính trải nghiệm hai chế độ **Bánh xe 12 cung** (kéo kim năm, bấm nút ▶ chạy qua các năm, chạm cung xem Tam phương tứ chính) và **Mạng đường bay** (lọc Chuỗi 2 chặng `① → ②`); câu nào trong `/quan-tri/tri-thuc/tuvi_ban_do_kb` muốn trau chuốt thêm thì sửa trực tiếp trên quản trị.
 
 ### 00. Bốn PR #347 #348 #350 #353 — đã soát và gộp vào một PR mới (25/11/2026, `docs/RA-SOAT-PR-347-353.md`)
 

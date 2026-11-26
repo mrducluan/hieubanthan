@@ -1791,5 +1791,23 @@
    "source_id": "hbt_tong_hop",
    "school_id": "phi_tinh"
   }
- ]
+ ],
+ "chuoi_chuyen_ky": {
+  "ky_chuyen_ky": {
+   "tieu_de": "Mạch bận tâm từ {ngan_a} qua {ngan_b} rồi dồn về {ngan_c}",
+   "nghia": "Nỗi lo bắt đầu ở {ma_a} thường kéo sang {ma_b}, sau đó hệ quả thực tế lại lắng xuống ở {ma_c}.",
+   "viec_nen_lam": "Khi {ngan_a} nảy sinh khúc mắc, khoan lấy {ngan_c} ra bù đắp vội; hãy gỡ thẳng nút thắt ngay từ bước {ngan_b}.",
+   "can_cu": "Kỵ chuyển Kỵ (phái Phi tinh Lương Nhược Du — ban biên tập tóm ý): Cung {tu_cung} ({can_dau}) hoá Kỵ ({sao_dau}) sang {qua_cung} ({can_chuyen}), chuyển Kỵ ({sao_chuyen}) về {den_cung} (xung {xung_cung})",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  },
+  "loc_chuyen_ky": {
+   "tieu_de": "Thuận lợi từ {ngan_a} sang {ngan_b} cần giữ kỹ khâu {ngan_c}",
+   "nghia": "Nguồn mở ra từ {ma_a} đem cơ hội tới {ma_b}, nhưng dễ kéo theo sự bận lòng hoặc hao sức ở {ma_c}.",
+   "viec_nen_lam": "Đón nhận thuận lợi ở {ngan_b} nhưng đặt sẵn hạn mức thời gian và chi phí cho {ngan_c} để giữ trọn thành quả.",
+   "can_cu": "Lộc chuyển Kỵ (phái Phi tinh Lương Nhược Du — ban biên tập tóm ý): Cung {tu_cung} ({can_dau}) hoá Lộc ({sao_dau}) sang {qua_cung} ({can_chuyen}), chuyển Kỵ ({sao_chuyen}) về {den_cung}",
+   "source_id": "phi_tinh_trung_chau",
+   "school_id": "phi_tinh"
+  }
+ }
 }
