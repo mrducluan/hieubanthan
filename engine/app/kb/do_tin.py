@@ -169,6 +169,8 @@ SO: dict[str, dict] = {
                               "ghi_chu": "PR #328: lời đời thường Lịch quyết định 12 tháng; mức tháng từ các lớp của Thời gian tới + tháng cá nhân"},
     "doanh_chu_quan_ly_kb.json": {"mang": "battu", "muc": "bien_tap",
                                   "ghi_chu": "QLNS-1: lời quản lý đội ngũ (kế hoạch 30 ngày, tình huống, câu hỏi 1-1, bản cá nhân); dữ kiện từ Bản đồ đội ngũ"},
+    "doanh_chu_gop_von_kb.json": {"mang": "battu", "muc": "bien_tap",
+                                  "ghi_chu": "GV-1: nhóm ba khâu + điều lệ gợi ý khi góp vốn (nháp); vai trò từng người lấy từ Bản đồ đội ngũ"},
     "doanh_chu_mat_bang_kb.json": {"mang": "phongthuy", "muc": "bien_tap",
                                    "ghi_chu": "PR #329: lời đời thường công cụ Mặt bằng & Khai trương; phép tính lấy từ Huyền Không, Bát trạch, Hoàng lịch, Kỳ Môn có sẵn"},
     "chitay_phuong_tay_kinh_dien.json": {"mang": "nhantuong", **_nv("chi_tay_cheiro_palmistry_for_all.json",

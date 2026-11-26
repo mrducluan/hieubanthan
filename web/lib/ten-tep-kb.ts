@@ -13,6 +13,7 @@ export const TEN_TEP_KB: Record<string, string> = {
   "thanso_chaldean.json": "Thần số · Phái Chaldea (số gốc, số kép)",
   "thanso_hom_nay.json": "Thần số · Hôm nay: ý định trong ngày",
   "tuvi_kb.json": "Tử vi · Sao, cung, tứ hoá",
+  "doanh_chu_gop_von_kb.json": "Quản lý nhân sự · Khi góp vốn với người khác",
   "tuvi_cach_cuc.json": "Tử vi · Cách cục",
   "kinhdich_kb.json": "Kinh Dịch · 64 quẻ",
   "kinhdich_hao.json": "Kinh Dịch · 384 hào",

@@ -8,7 +8,8 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.calc import doanh_chu
-from app.luangiai import doanh_chu_lich, doanh_chu_mat_bang, doanh_chu_quan_ly
+from app.luangiai import doanh_chu_gop_von, doanh_chu_lich, doanh_chu_mat_bang, doanh_chu_quan_ly
+from app import config
 from app.config import ENGINE_VERSION
 
 router = APIRouter(prefix="/v1/doanh-chu", tags=["doanh-chu"])
@@ -166,4 +167,46 @@ def api_mat_bang(inp: MatBangIn) -> dict:
         gioi_tinh=inp.gioi_tinh,
         loai_hinh=inp.loai_hinh,
     )
+    return {"engine_version": ENGINE_VERSION, "khong_luu_du_lieu": True, **kq}
+
+
+# --------------------------------------------------------------------------- GV-1: Khi góp vốn với người khác
+class SangLapIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    ten: str = Field(default="", max_length=40, description="Tên gọi để phân biệt trên kết quả (tuỳ chọn, không lưu)")
+    ngay: int = Field(..., ge=1, le=31)
+    thang: int = Field(..., ge=1, le=12)
+    nam: int = Field(..., ge=1930, le=2025)
+    gioi_tinh: str = Field(default="nam", pattern="^(nam|nu)$")
+    ty_le_du_kien: float | None = Field(default=None, ge=0, le=100)
+    dong_y_tu_nguyen: bool = Field(default=False, description="Bắt buộc true cho mỗi người (Luật Bảo vệ dữ liệu cá nhân 91/2025/QH15)")
+
+
+class GopVonIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    sang_lap: list[SangLapIn] = Field(..., min_length=2, max_length=4)
+    cam_ket_thoa_thuan: bool = Field(default=False, description="Người nhập cam kết đã có đồng ý của từng người")
+    nam_xem: int | None = Field(default=None, ge=2020, le=2050)
+
+
+@router.post("/gop-von")
+def api_gop_von(inp: GopVonIn) -> dict:
+    """GV-1 — vai trò thiên hướng của 2–4 người định góp vốn (một bộ tính với Bản đồ quản lý nhân sự), khâu còn trống và
+    điều lệ gợi ý; không chấm điểm, không khuyên hợp tác hay không với ai, không lưu."""
+    if not inp.cam_ket_thoa_thuan or not all(tv.dong_y_tu_nguyen for tv in inp.sang_lap):
+        raise HTTPException(422, detail="Cần xác nhận đã có đồng ý của từng người trước khi xem.")
+    hom_nay = config.hom_nay_vn()
+    for tv in inp.sang_lap:
+        try:
+            ngay_sinh = dt.date(tv.nam, tv.thang, tv.ngay)
+        except ValueError as e:
+            raise HTTPException(422, detail="Ngày sinh không hợp lệ.") from e
+        tuoi = hom_nay.year - ngay_sinh.year - ((hom_nay.month, hom_nay.day) < (ngay_sinh.month, ngay_sinh.day))
+        if tuoi < config.TUOI_NGUOI_LON:
+            raise HTTPException(422, detail="Mỗi người góp vốn cần đủ 16 tuổi.")
+    if sum(tv.ty_le_du_kien or 0 for tv in inp.sang_lap) > 100 + 1e-9:
+        raise HTTPException(422, detail="Tổng tỉ lệ góp vốn vượt 100%.")
+    kq = doanh_chu_gop_von.phan_tich([tv.model_dump() for tv in inp.sang_lap], inp.nam_xem or hom_nay.year)
     return {"engine_version": ENGINE_VERSION, "khong_luu_du_lieu": True, **kq}

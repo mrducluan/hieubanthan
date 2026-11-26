@@ -1,0 +1,74 @@
+{
+ "_nguon": "GV-1 — Khi góp vốn với người khác (tách từ PR #375, làm lại sau review 2026-11-26). Vai trò của từng người lấy đúng bảng hành → vai trò của Bản đồ quản lý nhân sự (DC-1); nhóm ba khâu và điều lệ gợi ý là nháp ban biên tập, chờ chủ dự án duyệt. Không chấm điểm, không khuyên hợp tác hay không với ai.",
+ "source_id": "doanh_chu_gop_von",
+ "school_id": "ngu_hanh_quan_tri",
+ "trang_thai": "nhap_ai",
+ "lam": {
+  "mo_thi_truong": {
+   "ten": "Mở thị trường, bán hàng, đối ngoại",
+   "hanh": [
+    "Mộc",
+    "Hỏa",
+    "Thủy"
+   ],
+   "nen_de_y": "Người nghiêng về khâu này dễ mở nhiều việc cùng lúc hoặc lạc quan về dòng tiền; nên có người đối chiếu con số trước khi chi."
+  },
+  "kiem_soat_tai_chinh": {
+   "ten": "Giữ tiền, sổ sách, giấy tờ",
+   "hanh": [
+    "Kim"
+   ],
+   "nen_de_y": "Người nghiêng về khâu này cẩn trọng, đôi khi làm chậm nhịp thử; nên thống nhất trước một khoản thử nghiệm được phép chi."
+  },
+  "van_hanh": {
+   "ten": "Vận hành, quy trình, giao hàng mỗi ngày",
+   "hanh": [
+    "Thổ"
+   ],
+   "nen_de_y": "Người nghiêng về khâu này giữ việc đều tay nhưng dễ ôm hết; nên ghi rõ việc nào cần hai người cùng quyết."
+  }
+ },
+ "khau_con_trong": {
+  "mo_thi_truong": "Chưa ai nghiêng hẳn về mở thị trường: nên giao rõ một người chịu trách nhiệm doanh thu, hoặc thuê người bán hàng sớm.",
+  "kiem_soat_tai_chinh": "Chưa ai nghiêng hẳn về giữ tiền và giấy tờ: nên có kế toán hoặc dịch vụ sổ sách độc lập từ tháng đầu, và hai người cùng duyệt khoản chi lớn.",
+  "van_hanh": "Chưa ai nghiêng hẳn về vận hành hằng ngày: nên viết quy trình giao hàng, chăm khách thành danh sách việc và giao một người theo dõi."
+ },
+ "tong_quan": {
+  "du": {
+   "nhan": "Nhóm có người nghiêng về cả ba khâu",
+   "tom_tat": "Mỗi khâu chính đều có người hợp sức; việc còn lại là ghi rõ ai quyết việc gì ngay từ đầu."
+  },
+  "thieu": {
+   "nhan": "Nhóm đang nghiêng về một phía",
+   "tom_tat": "Các thành viên mạnh ở những khâu giống nhau nên lúc đầu dễ ăn ý; khâu {khau} chưa ai nghiêng hẳn, nên lo trước."
+  }
+ },
+ "dieu_le": [
+  {
+   "ma": "hai_nguoi_duyet",
+   "tieu_de": "Hai người cùng duyệt khoản chi lớn",
+   "noi_dung": "Thống nhất một ngưỡng (ví dụ một tỉ lệ vốn lưu động hằng tháng): khoản chi hoặc hợp đồng vượt ngưỡng cần xác nhận bằng văn bản của hai người."
+  },
+  {
+   "ma": "luong_va_loi_nhuan",
+   "tieu_de": "Tách lương người làm và lợi nhuận theo vốn góp",
+   "noi_dung": "Người làm toàn thời gian nhận lương theo việc trước; lợi nhuận sau quỹ dự phòng mới chia theo tỉ lệ góp, để người làm nhiều và người chỉ góp vốn không thiệt thòi lẫn nhau."
+  },
+  {
+   "ma": "rut_von",
+   "tieu_de": "Cách rút vốn và chia tay êm",
+   "noi_dung": "Ghi trước cách định giá phần góp, quyền mua lại của người ở lại và mốc gắn bó tối thiểu, khi mọi người còn vui vẻ."
+  }
+ ],
+ "dieu_le_them": {
+  "ty_le_50_50": {
+   "tieu_de": "Khi hai người chia đều 50 – 50",
+   "noi_dung": "Ghi sẵn ai có tiếng nói cuối ở từng mảng (sản phẩm, ngân sách…) để việc không bị treo khi hai người không thống nhất."
+  },
+  "thieu_tai_chinh": {
+   "tieu_de": "Khi chưa ai giữ tiền",
+   "noi_dung": "Khoá một quỹ dự phòng tối thiểu vài tháng chi phí cố định, không dùng để mở rộng."
+  }
+ },
+ "ranh_gioi": "Kết quả chỉ là tham khảo văn hoá để các bên hiểu thiên hướng làm việc của nhau và phân vai, không phải đánh giá con người, không thay việc tìm hiểu nhau qua công việc thật. Điều lệ ở đây chỉ là gợi ý để trao đổi: trước khi ký thoả thuận góp vốn, nên nhờ luật sư soạn hoặc xem lại; đây không phải lời khuyên pháp lý hay lời khuyên đầu tư. Người nhập xác nhận đã được từng người đồng ý cho dùng ngày sinh; hieuban.com chỉ dùng để tính trong lượt xem này, không lưu."
+}

@@ -1,0 +1,61 @@
+{
+ "_nguon": "GV-1 English overlay — editorial draft awaiting owner review.",
+ "_trang_thai": "ban_phu_en",
+ "lam": {
+  "mo_thi_truong": {
+   "ten": "Market growth, sales, partnerships",
+   "nen_de_y": "People leaning this way often open many fronts or feel optimistic about cash flow; have someone check the numbers before spending."
+  },
+  "kiem_soat_tai_chinh": {
+   "ten": "Money, books, paperwork",
+   "nen_de_y": "People leaning this way are careful and may slow experiments; agree in advance on a test budget that can be spent."
+  },
+  "van_hanh": {
+   "ten": "Day-to-day operations, process, delivery",
+   "nen_de_y": "People leaning this way keep things steady but tend to carry everything; write down which decisions need two people."
+  }
+ },
+ "khau_con_trong": {
+  "mo_thi_truong": "No one clearly leans toward market growth: name one person accountable for revenue, or hire sales early.",
+  "kiem_soat_tai_chinh": "No one clearly leans toward money and paperwork: use an independent bookkeeper from month one and have two people approve large spending.",
+  "van_hanh": "No one clearly leans toward daily operations: turn delivery and customer care into a checklist and give one person ownership."
+ },
+ "tong_quan": {
+  "du": {
+   "nhan": "The group has someone leaning toward each of the three areas",
+   "tom_tat": "Each core area has a natural owner; what remains is writing down who decides what from day one."
+  },
+  "thieu": {
+   "nhan": "The group leans to one side",
+   "tom_tat": "Members are strong in similar areas, so they click early on; {khau} has no clear owner yet, so plan for it now."
+  }
+ },
+ "dieu_le": [
+  {
+   "ma": "hai_nguoi_duyet",
+   "tieu_de": "Two people approve large spending",
+   "noi_dung": "Agree on a threshold (for example a share of monthly working capital): spending or contracts above it need written sign-off from two people."
+  },
+  {
+   "ma": "luong_va_loi_nhuan",
+   "tieu_de": "Separate salary from profit by share",
+   "noi_dung": "Full-time operators are paid for their role first; profit after reserves is split by ownership, so neither the doers nor the investors feel shortchanged."
+  },
+  {
+   "ma": "rut_von",
+   "tieu_de": "How to exit amicably",
+   "noi_dung": "Write down how a stake is valued, who has first right to buy it, and a minimum commitment period, while everyone still gets along."
+  }
+ ],
+ "dieu_le_them": {
+  "ty_le_50_50": {
+   "tieu_de": "When two people split 50 – 50",
+   "noi_dung": "Name who has the final say in each area (product, budget…) so decisions do not stall when you disagree."
+  },
+  "thieu_tai_chinh": {
+   "tieu_de": "When no one owns the money",
+   "noi_dung": "Lock a reserve of a few months of fixed costs that is not used for expansion."
+  }
+ },
+ "ranh_gioi": "This is cultural reference only, to help partners understand each other's working tendencies and split roles; it is not an assessment of anyone and does not replace getting to know each other through real work. The charter points are prompts for discussion only: have a lawyer draft or review any shareholder agreement before signing; this is not legal or investment advice. The person entering data confirms each person consented to the use of their birth date; hieuban.com uses it only for this calculation and does not store it."
+}
