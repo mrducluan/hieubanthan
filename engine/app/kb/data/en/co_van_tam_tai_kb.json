@@ -1,0 +1,168 @@
+{
+  "_nguon": "Stage 2 — Orthogonal Three-Pillar Life & Business Advisor KB (English overlay). AI draft awaiting project owner review.",
+  "_trang_thai": "ban_phu_en",
+  "ten_bao_cao": "Three-Pillar Advisor for Your Decision",
+  "ket": "Human Capacity, Timely Momentum and Spatial Lever illuminate three independent angles of your decision. Use them as a calm planning compass alongside real-world facts.",
+  "nhan_nhip_ket_luan": {
+    "thuan_mo": "Favorable window for measured action",
+    "chuan_bi_chac": "Strengthen foundations before scaling",
+    "giu_phong_thu": "Protect steady pacing & untangle bottlenecks first"
+  },
+  "nhan_nhip_thang": {
+    "day_manh": "Advance",
+    "can_bang": "Steady pace",
+    "phong_thu": "Consolidate"
+  },
+  "ten_tru": {
+    "nhan": "Human Pillar · Inner Capacity & Stamina",
+    "thien": "Heaven Pillar · Timing & Second-Order Ripple",
+    "dia": "Earth Pillar · Space & Action Dates"
+  },
+  "vai_tro_tru": {
+    "nhan": "From BaZi & Numerology: measures your current personal bandwidth and supportive Five-Element balance",
+    "thien": "From Zi Wei / Flying Transformations & 12-Month Rhythm: maps open windows and second-step ripple effects",
+    "dia": "From Eight Mansions / Period-9 Feng Shui & Almanac: pinpoints workspace setup and auspicious dates"
+  },
+  "lop_ten": {
+    "battu_tam_tru": "BaZi Three Pillars (6 characters)",
+    "battu_tu_tru": "BaZi Four Pillars (dual balancing lenses)",
+    "thanso_pitago": "Pythagorean Numerology (personal year & month)",
+    "tuvi_phi_hoa": "Zi Wei Dou Shu & Liang Flying Transformations",
+    "phongthuy_menh_quai": "Eight Mansions Personal Trigram",
+    "huyen_khong_van_9": "Period-9 Xuan Kong Flying Stars",
+    "hoang_lich_30_ngay": "30-Day Auspicious Almanac Selection",
+    "tuong_tac_doi_tac": "Counterparty Five-Element & Branch Synergy"
+  },
+  "goi_y_nang_bac": {
+    "bac_2": {
+      "nhan": "Add birth time & birthplace to unlock 12-Palace Zi Wei & Ji-to-Ji chains",
+      "ly_do": "Exact birth hour unlocks your BaZi Hour Pillar (both balancing methods) plus full Zi Wei Flying Transformations."
+    },
+    "bac_3_nha": {
+      "nhan": "Add compass facing & construction year to unlock Period-9 Flying Stars",
+      "ly_do": "Reveals the exact Mountain–Facing star pair at your entrance and Period-9 lighting/material harmony."
+    },
+    "bac_3_doi_tac": {
+      "nhan": "Add partner or co-founder birth date",
+      "ly_do": "Shows whether they complement or duplicate your Five-Element profile so you can divide roles cleanly."
+    }
+  },
+  "mach": {
+    "su_nghiep_chuyen_viec": {
+      "ten": "Career shift, promotion & independent venture",
+      "cung_tuvi": "su_nghiep",
+      "chuong_battu": "su_nghiep",
+      "viec_hoang_lich": "ky_ket",
+      "ket_luan": {
+        "thuan_mo": "Your inner capacity and timing support stepping into a new role or venture, provided scope and financial milestones are agreed in writing.",
+        "chuan_bi_chac": "The direction is promising yet capacity and timing are not fully aligned: pilot the transition step by step before leaving steady ground.",
+        "giu_phong_thu": "This stretch favors consolidating skills and building a solid cash runway rather than making an abrupt leap into uncertain revenue."
+      },
+      "diem_tua": "Anchor your role in {hanh_can}-aligned strengths and your Personal Year {nam_cn} cadence.",
+      "diem_giu": "Avoid reactive career exits during consolidation months; keep at least a six-month living reserve."
+    },
+    "tai_chinh_dau_tu": {
+      "ten": "Capital allocation, cashflow & investment",
+      "cung_tuvi": "tien_bac",
+      "chuong_battu": "tien_bac",
+      "viec_hoang_lich": "giao_dich",
+      "ket_luan": {
+        "thuan_mo": "Financial rhythm supports staged allocation into assets or operations you understand firsthand, with clear stop-loss and cash limits.",
+        "chuan_bi_chac": "Openings exist alongside potential spillover costs: deploy capital in smaller tranches and preserve liquid reserves.",
+        "giu_phong_thu": "Prioritize cash preservation, receivable collection and avoiding new debt leverage during this cycle."
+      },
+      "diem_tua": "Rely on written unit-economics checklists and schedule key negotiations in Advance months.",
+      "diem_giu": "Never concentrate all liquidity into a single bet or rush into unverified commitments."
+    },
+    "gop_von_hop_tac": {
+      "ten": "Co-founding, pooling capital & partner roles",
+      "cung_tuvi": "quan_he",
+      "chuong_battu": "quan_he",
+      "viec_hoang_lich": "ky_ket",
+      "ket_luan": {
+        "thuan_mo": "Partnership synergy favors teaming up with someone who complements {hanh_can}, once Market, Finance and Operations lanes are separated in writing.",
+        "chuan_bi_chac": "Test real working chemistry on a bounded 1–3 month pilot project before signing long-term equity commitments.",
+        "giu_phong_thu": "Hold off on joint debt or informal equity pooling right now; keep accounts separate and collaborate via clear project contracts."
+      },
+      "diem_tua": "Clear role boundaries and dual-approval spending thresholds protect both the venture and the friendship.",
+      "diem_giu": "Avoid placing both sales expansion and treasury control in one unchecked lane."
+    },
+    "nha_cua_mat_bang": {
+      "ten": "Home purchase, relocation & business premises",
+      "cung_tuvi": "nha_cua",
+      "chuong_battu": "tien_bac",
+      "viec_hoang_lich": "nhap_trach",
+      "ket_luan": {
+        "thuan_mo": "Spatial and timing signals support securing well-ventilated premises, relocating smoothly or refreshing your primary workspace.",
+        "chuan_bi_chac": "Verify daylight, legal paperwork and monthly repayment comfort carefully before locking in a deposit.",
+        "giu_phong_thu": "Favor decluttering, lighting adjustments and desk alignment in your current space over heavy debt or major structural renovation."
+      },
+      "diem_tua": "Prioritize bright airflow and orient your desk and bed-head with your {quai} trigram.",
+      "diem_giu": "Keep monthly housing commitments within comfortable cashflow limits and avoid major drilling in Consolidate months."
+    },
+    "tinh_cam_cam_ket": {
+      "ten": "Relationships, commitment & opening up",
+      "cung_tuvi": "tinh_cam",
+      "chuong_battu": "tinh_cam",
+      "viec_hoang_lich": "cuoi_hoi",
+      "ket_luan": {
+        "thuan_mo": "Emotional rhythm feels warm and receptive, supporting deeper commitment or genuine new connections.",
+        "chuan_bi_chac": "Let trust grow through unhurried everyday experiences rather than forcing a rushed timeline.",
+        "giu_phong_thu": "Focus first on restoring your own calm daily rhythm and boundaries so future closeness stands on steady ground."
+      },
+      "diem_tua": "Steady, consistent small actions speak louder than grand promises right now.",
+      "diem_giu": "Avoid carrying work exhaustion or past grievances into late-night relationship talks."
+    },
+    "gia_dao_hoa_giai": {
+      "ten": "Family harmony & cooling partner friction",
+      "cung_tuvi": "gia_dinh",
+      "chuong_battu": "gia_dinh",
+      "viec_hoang_lich": "xuat_hanh",
+      "ket_luan": {
+        "thuan_mo": "Underlying family goodwill supports calm conversation and resetting shared weekly routines together.",
+        "chuan_bi_chac": "Friction stems mostly from mismatched pacing when tired: switch to concrete weekly agreements and gentler timing.",
+        "giu_phong_thu": "Lower verbal heat first, soften shared living spaces and pause right-versus-wrong debates until everyone is rested."
+      },
+      "diem_tua": "Warm shared meals, soft lighting and clear practical requests rebuild warmth quickly.",
+      "diem_giu": "Skip sensitive money or in-law debates late at night when energy is depleted."
+    },
+    "suc_ben_nang_luong": {
+      "ten": "Stamina, sleep rhythm & burnout recovery",
+      "cung_tuvi": "suc_khoe",
+      "chuong_battu": "suc_khoe",
+      "viec_hoang_lich": "xuat_hanh",
+      "ket_luan": {
+        "thuan_mo": "Your baseline rhythm supports building consistent movement, sleep and long-term stamina habits.",
+        "chuan_bi_chac": "Your body is asking you to trim late-night overload; resetting meal and rest hours this week brings quick relief.",
+        "giu_phong_thu": "Prioritize genuine rest, routine medical checkups and trimming overbooked commitments (for lifestyle reflection, never replacing medical care)."
+      },
+      "diem_tua": "Support {hanh_can}-aligned daily habits and keep your sleeping area quiet and airy.",
+      "diem_giu": "Do not ignore persistent fatigue or postpone routine health checkups."
+    },
+    "quyet_dinh_tong_hop": {
+      "ten": "Overall direction & next-phase priorities",
+      "cung_tuvi": "tong_quan",
+      "chuong_battu": "tong_quan",
+      "viec_hoang_lich": "ky_ket",
+      "ket_luan": {
+        "thuan_mo": "Capacity, timing and spatial levers align well to advance your single highest-value goal with clear milestones.",
+        "chuan_bi_chac": "A bridge phase for strengthening core foundations while testing one focused initiative during Advance months.",
+        "giu_phong_thu": "Steady focus wins this phase: streamline scattered commitments and conserve energy for upcoming open windows."
+      },
+      "diem_tua": "Pair {hanh_can}-supportive routines with your Advance months so effort lands cleanly.",
+      "diem_giu": "Avoid launching more than two major commitments simultaneously."
+    }
+  },
+  "chuong_tieu_de": {
+    "c1": "Three-Pillar Verdict & Big Picture",
+    "c2": "Inner Capacity & Second-Order Timing",
+    "c3": "12-Month Pacing & Auspicious Action Dates",
+    "c4": "Spatial Levers, Counterparty & Immediate Next Steps"
+  },
+  "chuong_cau_hoi": {
+    "c1": "Where does this decision stand across Capacity, Timing and Space?",
+    "c2": "What do your inner stamina and second-order timing chains highlight?",
+    "c3": "Which months favor advancing and which call for steady consolidation?",
+    "c4": "How should you align workspace and partner roles starting this week?"
+  }
+}

@@ -60,7 +60,7 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
   const coThan = (h: Hop) => Boolean(h.noi_dung || h.huong_xu_ly);
   const hopTronHang = !(cotLoi.length % 2) ? -1 : coThan(cotLoi[0]!) ? 0 : coThan(cotLoi.at(-1)!) ? cotLoi.length - 1 : -1;
   // KC-1: phái ghi kèm phiếu kiểm chứng do engine trả (`phai`); báo cáo Tử vi cũ không có → Nam phái Việt.
-  const phai = bc.phai ?? (bc.mo_dun === "thanso" ? "pitago" : bc.mo_dun === "battu" ? "tu_binh" : "nam_phai_viet");
+  const phai = bc.phai ?? (bc.mo_dun === "thanso" ? "pitago" : bc.mo_dun === "battu" ? "tu_binh" : bc.mo_dun === "tam_tai" ? "tam_tai" : "nam_phai_viet");
   const doc = bc.chuong.filter((c): c is ChuongDoiSongMo => !c.khoa);
   const dau = doc[0]?.ma;
   const cuoi = doc.at(-1)?.ma;

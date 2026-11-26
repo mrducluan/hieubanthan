@@ -193,6 +193,8 @@ app.include_router(giao_thoa_router)
 app.include_router(sinh_nuoc_ngoai_router)
 from app.doanh_chu_api import router as doanh_chu_router  # noqa: E402 — Bậc 2 & 3 Doanh chủ
 app.include_router(doanh_chu_router)
+from app.co_van_api import router as co_van_router  # noqa: E402 — Chặng 2: Cổng Cố vấn Liên mảng Tam Tài
+app.include_router(co_van_router)
 
 
 # --------------------------------------------------------------------------- #

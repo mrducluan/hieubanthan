@@ -10,7 +10,7 @@ export type ChuongKhoa = { ma: string; tieu_de: string; khoa: true; moi_xem: Moi
 export type BaoCaoDay = { chuong: ChuongDay[]; [k: string]: unknown };
 
 /** SAO-2 v2.0 (Default-Deny Allowlist): danh sách DUY NHẤT các khoá cấp gốc được phép đi nguyên vẹn xuống trình duyệt khi
- *  báo cáo đang khoá (`so_khoa > 0`) trên cả 5 mô-đun đi qua `luanGiaiCoSao` (`tuvi`, `battu`, `thanso`, `chan_dung`, `thoi_gian`).
+ *  báo cáo đang khoá (`so_khoa > 0`) trên các mô-đun đi qua `luanGiaiCoSao` (`tuvi`, `battu`, `thanso`, `chan_dung`, `thoi_gian`, `tam_tai`).
  *  Mọi khoá cấp gốc mới chưa khai báo tại đây hoặc tại `KHOA_CAT_RIENG_SAO2` sẽ TỰ ĐỘNG BỊ CẮT BỎ (Default-Deny). */
 export const KHOA_CONG_KHAI_SAO2 = new Set<string>([
   "mo_dun", "phien_ban", "ten", "phai", "trang_thai", "ket", "dien_dat",
@@ -18,21 +18,26 @@ export const KHOA_CONG_KHAI_SAO2 = new Set<string>([
   "co_canh_bao", "gio_tam", "vai_doc", "loi_vai_doc", "phi", "so_khoa",
   "nguon", "thieu", "quy_uoc_duong_doi", "tom_tat_do_tin",
   "ma_tran", "so_mang_cung", "so_mang_khac", "nam", "cac_nam", "nam_toi",
+  // Chặng 2 — Cố vấn Tam Tài (/v1/co-van): các khối kết luận thẳng 5 giây, 3 trụ trực giao & biểu đồ ngũ hành công khai.
+  "an_toan_chan", "mach", "ten_mach", "bac_dau_vao", "lop_da_dung",
+  "goi_y_nang_bac", "ket_luan_5_giay", "ba_tru_tam_tai", "bieu_do_ngu_hanh",
 ]);
 
 /** Các khoá cấp gốc có chứa dữ liệu chương sau — bắt buộc đi qua bộ lọc cắt theo tập chương mở `mo`, không bao giờ chép nguyên. */
 export const KHOA_CAT_RIENG_SAO2 = new Set<string>([
   "chuong", "cot_loi", "thoi_gian_bieu", "luu_y_mang", "nguoi_quanh", "ung_dung_co_dien",
+  "nhip_12_thang", "ngay_dep_30_ngay",
 ]);
 
 export function catXemTruoc<T extends BaoCaoDay>(bc: T, mienPhi: number): Omit<T, "chuong"> & { chuong: (ChuongDay | ChuongKhoa)[]; so_khoa: number } {
-  const n = Math.max(0, Math.min(mienPhi, bc.chuong.length));
-  const khoa = bc.chuong.slice(n).map((c): ChuongKhoa => ({
+  const dsChuong = Array.isArray(bc.chuong) ? bc.chuong : [];
+  const n = Math.max(0, Math.min(mienPhi, dsChuong.length));
+  const khoa = dsChuong.slice(n).map((c): ChuongKhoa => ({
     ma: c.ma, tieu_de: c.tieu_de, khoa: true,
     moi_xem: c.moi_xem ?? { diem_nhan: "", cau_hoi: "Chương này nói gì về chính bạn?", so_doan: c.doan.length, phut_doc: 1 },
   }));
   if (!khoa.length) {
-    return { ...bc, chuong: [...bc.chuong], so_khoa: 0 };
+    return { ...bc, chuong: [...dsChuong], so_khoa: 0 };
   }
 
   // SAO-2 v2.0: dựng phản hồi xem trước từ object rỗng theo Allowlist (tuyệt đối không `{ ...bc }`).
@@ -40,10 +45,10 @@ export function catXemTruoc<T extends BaoCaoDay>(bc: T, mienPhi: number): Omit<T
   for (const [k, v] of Object.entries(bc)) {
     if (KHOA_CONG_KHAI_SAO2.has(k)) o[k] = v;
   }
-  o.chuong = [...bc.chuong.slice(0, n), ...khoa];
+  o.chuong = [...dsChuong.slice(0, n), ...khoa];
   o.so_khoa = khoa.length;
 
-  const mo = new Set(bc.chuong.slice(0, n).map((c) => c.ma));
+  const mo = new Set(dsChuong.slice(0, n).map((c) => c.ma));
   if (Array.isArray(bc.cot_loi)) {
     o.cot_loi = (bc.cot_loi as { tu_chuong?: unknown }[]).filter((h) => typeof h.tu_chuong === "string" && mo.has(h.tu_chuong));
   }
@@ -62,14 +67,34 @@ export function catXemTruoc<T extends BaoCaoDay>(bc: T, mienPhi: number): Omit<T
       typeof r.tu_chuong === "string" && mo.has(r.tu_chuong) ? r
         : { ma: r.ma, ten: r.ten, muc: r.muc, nhan_muc: r.nhan_muc, tu_chuong: r.tu_chuong, khoa: true });
   }
-  // Chặng 1: khung "Ứng dụng Ngũ hành cổ điển" của Bát tự (đọc từ `ngu_hanh`) và Tử vi (đọc từ `su_nghiep`) chỉ mở trọn
-  // khi chương nguồn đã mở; khi còn khoá chỉ giữ tiêu đề + nguyên tắc ưu tiên, cắt bảng chi tiết ở máy chủ.
+  // Chặng 1 + Chặng 2: khung "Ứng dụng Ngũ hành cổ điển" của Bát tự (`ngu_hanh`), Tử vi (`su_nghiep`) và Tam Tài
+  // (`don_bay_khong_gian_va_doi_tac`) chỉ mở trọn khi chương nguồn đã mở; khi còn khoá chỉ giữ tiêu đề + nguyên tắc ưu tiên.
   if (bc.ung_dung_co_dien && typeof bc.ung_dung_co_dien === "object") {
     const u = bc.ung_dung_co_dien as Record<string, unknown>;
-    const canMo = u.ma === "battu_co_dien" ? "ngu_hanh" : u.ma === "tuvi_co_dien" ? "su_nghiep" : null;
+    const canMo = u.ma === "battu_co_dien"
+      ? "ngu_hanh"
+      : u.ma === "tuvi_co_dien"
+        ? "su_nghiep"
+        : u.ma === "tam_tai_co_dien"
+          ? "don_bay_khong_gian_va_doi_tac"
+          : null;
     o.ung_dung_co_dien = canMo && !mo.has(canMo)
       ? { khoa: true, ma: u.ma, tieu_de: u.tieu_de, nguyen_tac_uu_tien: u.nguyen_tac_uu_tien }
       : bc.ung_dung_co_dien;
+  }
+  // Chặng 2: nhịp 12 tháng & ngày đẹp 30 ngày của Cố vấn Tam Tài gắn với chương `nhip_12_thang_va_ngay_dep`.
+  if (Array.isArray(bc.nhip_12_thang)) {
+    o.nhip_12_thang = mo.has("nhip_12_thang_va_ngay_dep")
+      ? bc.nhip_12_thang
+      : (bc.nhip_12_thang as Record<string, unknown>[]).map((m) => ({
+          thang: m.thang,
+          nhip: m.nhip,
+          nhan_nhip: m.nhan_nhip,
+          khoa: true,
+        }));
+  }
+  if ("ngay_dep_30_ngay" in bc && mo.has("nhip_12_thang_va_ngay_dep")) {
+    o.ngay_dep_30_ngay = bc.ngay_dep_30_ngay;
   }
 
   return o as Omit<T, "chuong"> & { chuong: (ChuongDay | ChuongKhoa)[]; so_khoa: number };

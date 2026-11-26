@@ -17,7 +17,7 @@
 
 | Mảng | Có nguyên văn đối chiếu | Tóm ý cổ thư, chưa khớp từng câu | Tiên đề logic sách hiện đại (ghi trang) | Tập quán / truyền khẩu phổ thông | Ban biên tập soạn | Nháp AI chờ chủ dự án duyệt | Tệp kỹ thuật |
 |---|---|---|---|---|---|---|---|
-| Bát tự | 3 | 1 | 1 |  | 7 |  |  |
+| Bát tự | 3 | 1 | 1 |  | 7 | 1 |  |
 | Tử vi | 1 | 3 | 3 | 4 | 7 |  |  |
 | Kinh Dịch | 4 | 2 | 1 |  | 2 |  |  |
 | Phong thuỷ | 2 | 2 |  | 1 | 5 |  |  |
@@ -26,7 +26,7 @@
 | Kỳ Môn |  | 1 |  |  | 1 |  |  |
 | Thần số |  |  |  | 11 | 13 |  |  |
 | Lịch · tuổi · tập quán |  | 1 |  | 5 | 1 |  |  |
-| Liên mảng · kỹ thuật |  | 1 |  |  | 12 | 2 | 7 |
+| Liên mảng · kỹ thuật |  | 1 |  |  | 12 | 3 | 7 |
 
 ## Phần đã có nguyên văn đối chiếu (test khoá)
 
@@ -92,6 +92,7 @@
 | Bát tự | `battu_thien_ly_menh_cao.json` |  | Tiên đề logic sách hiện đại (ghi trang) | Đợt 3: 6 quy tắc Thập Thần & Cách Cục 2 chiều rút ý từ Thiên Lý Mệnh Cảo (Vi Thiên Lý, 1934 — bazi-kb) |
 | Bát tự | `bo_sung_nhat_chu.json` |  | Ban biên tập soạn |  |
 | Bát tự | `bo_sung_thap_than.json` |  | Ban biên tập soạn |  |
+| Bát tự | `doanh_chu_gop_von_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 2: nháp AI soi bù khuyết Co-founder & điều lệ rào chắn góp vốn, chờ chủ dự án đọc duyệt |
 | Bát tự | `doanh_chu_lich_kb.json` |  | Ban biên tập soạn | PR #328: lời đời thường Lịch quyết định 12 tháng; mức tháng từ các lớp của Thời gian tới + tháng cá nhân |
 | Bát tự | `doanh_chu_quan_ly_kb.json` |  | Ban biên tập soạn | QLNS-1: lời quản lý đội ngũ (kế hoạch 30 ngày, tình huống, câu hỏi 1-1, bản cá nhân); dữ kiện từ Bản đồ đội ngũ |
 | Tử vi | `bo_sung_cung.json` |  | Ban biên tập soạn |  |
@@ -206,6 +207,7 @@
 | Liên mảng · kỹ thuật | `chu_y_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `chuyen_nghia_kb.json` |  | Ban biên tập soạn | nghĩa đời nay do ban biên tập viết |
 | Liên mảng · kỹ thuật | `chuyen_nghia_kb.json` | khai_niem | Có nguyên văn đối chiếu | mỗi khái niệm một câu sách khớp kho nguồn; nghĩa đời nay là biên tập |
+| Liên mảng · kỹ thuật | `co_van_tam_tai_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 2: nháp AI tổng hợp Cố vấn Liên mảng Tam Tài (Nhân – Thiên – Địa), chờ chủ dự án đọc duyệt |
 | Liên mảng · kỹ thuật | `dong_thuan_thong_ke.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `giao_thoa_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `go_nut_doi_song_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 1: nháp AI biên soạn cho 4 mạch gỡ nút đời sống, chờ chủ dự án đọc duyệt |

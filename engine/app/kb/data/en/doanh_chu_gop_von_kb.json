@@ -1,0 +1,58 @@
+{
+  "_nguon": "Stage 2 — Co-founder Complementarity & Capital Partnership Safeguards KB (English overlay). AI draft awaiting project owner review.",
+  "_trang_thai": "ban_phu_en",
+  "nhan_hoi_dong": {
+    "can_doi": "Founding team covers Market Growth, Financial Control and Daily Operations",
+    "thien_lech": "Founding team clusters in one style — add charter safeguards for missing lanes"
+  },
+  "tom_tat_hoi_dong": {
+    "can_doi": "Your co-founding group balances growth drive with financial discipline and steady execution; lock clear decision boundaries upfront.",
+    "thien_lech": "Founders share similar natural instincts, creating fast early rapport while risking blind spots around {khuyet} as operations scale."
+  },
+  "lane": {
+    "mo_thi_truong": {
+      "ten": "Market growth, product & external partnerships",
+      "diem_manh": "Spots commercial openings quickly, builds client momentum and drives early traction",
+      "diem_mu": "Can overestimate cashflow runway or open too many fronts before processes stabilize"
+    },
+    "kiem_soat_tai_chinh": {
+      "ten": "Financial control, legal governance & risk",
+      "diem_manh": "Keeps sharp unit-economics discipline, cashflow visibility and contract rigor",
+      "diem_mu": "High caution can slow market experiments unless paired with a dedicated growth lead"
+    },
+    "van_hanh_hau_can": {
+      "ten": "Operations delivery, team cadence & quality",
+      "diem_manh": "Delivers reliably, retains existing customers and keeps internal execution steady",
+      "diem_mu": "May shoulder excessive operational detail or hesitate when pruning low-margin lines"
+    }
+  },
+  "lo_hong_theo_lane": {
+    "mo_thi_truong": "No dedicated Market & Growth lead — strong craft may struggle to build consistent commercial pipeline.",
+    "kiem_soat_tai_chinh": "No dedicated Finance & Risk guardian — watch closely for budget overruns or informal receivables.",
+    "van_hanh_hau_can": "No dedicated Operations & Delivery anchor — rapid sales growth can strain fulfillment quality."
+  },
+  "dieu_le_mac_dinh": [
+    {
+      "tieu_de": "Dual-approval spending & commitment threshold",
+      "nguyen_tac": "Any expenditure or contract above an agreed monthly threshold (e.g. 10–15% of working capital) requires written sign-off from both the growth lead and finance guardian."
+    },
+    {
+      "tieu_de": "Separate operating salary from equity dividends",
+      "nguyen_tac": "Pay market-aligned operating compensation for full-time roles first; distribute net profit according to equity only after reserve targets are met."
+    },
+    {
+      "tieu_de": "Pre-agreed exit valuation, right of first refusal & vesting",
+      "nguyen_tac": "Define buy-out valuation formulas, right of first refusal and a 24–36 month vesting schedule in writing while goodwill is high."
+    }
+  ],
+  "dieu_le_bo_sung": {
+    "cung_nong_mo_rong": {
+      "tieu_de": "Ring-fenced runway floor for growth-heavy teams",
+      "nguyen_tac": "Because the founding group leans strongly toward expansion, ring-fence at least six months of fixed operating expenses untouched by new experiments."
+    },
+    "ty_le_50_50": {
+      "tieu_de": "50–50 tie-breaker clause by domain authority",
+      "nguyen_tac": "When equity is split evenly, assign final tie-breaking authority by functional lane (product/market vs budget/compliance) so decisions never stall."
+    }
+  }
+}
