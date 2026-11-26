@@ -37,6 +37,20 @@ export function catXemTruoc<T extends BaoCaoDay>(bc: T, mienPhi: number): Omit<T
         typeof r.tu_chuong === "string" && mo.has(r.tu_chuong) ? r
           : { ma: r.ma, ten: r.ten, muc: r.muc, nhan_muc: r.nhan_muc, tu_chuong: r.tu_chuong, khoa: true });
     }
+    // Chặng 1: khung "Ứng dụng Ngũ hành cổ điển" của Bát tự (đọc từ `ngu_hanh`) và Tử vi (đọc từ `su_nghiep`) chỉ mở trọn
+    // khi chương nguồn đã mở; khi còn khoá chỉ giữ tiêu đề + nguyên tắc ưu tiên, cắt bảng chi tiết ở máy chủ.
+    if (bc.ung_dung_co_dien && typeof bc.ung_dung_co_dien === "object") {
+      const u = bc.ung_dung_co_dien as Record<string, unknown>;
+      const canMo = u.ma === "battu_co_dien" ? "ngu_hanh" : u.ma === "tuvi_co_dien" ? "su_nghiep" : null;
+      if (canMo && !mo.has(canMo)) {
+        o.ung_dung_co_dien = {
+          khoa: true,
+          ma: u.ma,
+          tieu_de: u.tieu_de,
+          nguyen_tac_uu_tien: u.nguyen_tac_uu_tien,
+        };
+      }
+    }
   }
   return out;
 }

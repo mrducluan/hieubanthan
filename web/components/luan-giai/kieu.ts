@@ -155,6 +155,36 @@ export interface SaoLuuNam {
 }
 export interface ChuongKhoa { ma: string; tieu_de: string; khoa: true; moi_xem: MoiXem }
 
+export interface HanhUngDungCoDien {
+  hanh_ma: string;
+  ten_hanh: string;
+  mau_sac: string;
+  chat_lieu: string;
+  phuong_vi: string;
+  khung_gio: string;
+  thoi_quen: string[];
+}
+
+export interface KhuVucVan9CoDien {
+  khu_vuc: string;
+  ten_khu_vuc: string;
+  cap_sao: string;
+  loai_phep: string;
+  ten_phep: string;
+  ngu_hanh_dieu_hoa: string;
+  ung_dung: string;
+}
+
+export interface UngDungCoDien {
+  khoa?: boolean;
+  ma: string;
+  tieu_de: string;
+  nguyen_tac_uu_tien: string;
+  tom_tat_dung_than?: string;
+  hanh_ung_dung?: HanhUngDungCoDien[];
+  khu_vuc_van_9?: KhuVucVan9CoDien[];
+}
+
 export interface BaoCaoDoiSong {
   mo_dun: string;
   phien_ban: "doi_song_1";
@@ -170,6 +200,8 @@ export interface BaoCaoDoiSong {
   luu_y_mang?: LuuYMang[];
   /** LH-1: bản đồ người quanh bạn (người thuộc chương khoá SAO-2 chỉ còn tên + mức). */
   nguoi_quanh?: NguoiQuanh[];
+  /** Chặng 1: gói Ứng dụng Ngũ hành & Điều hoà Vận 9 cho chế độ 'Học thuật Cổ điển & Ngũ hành' (< 3 KB, an toàn SAO-2). */
+  ung_dung_co_dien?: UngDungCoDien;
   /** EN-2: không biết giờ sinh — một câu engine soạn, web hiện thành dải riêng đầu bài (không phụ thuộc bản AI). */
   gio_tam?: string;
   /** TUOI-16: ai đọc bài — "cha_me" khi người được xem chưa đủ 16 tuổi tròn (người lớn đọc hộ); `loi_vai_doc` là câu

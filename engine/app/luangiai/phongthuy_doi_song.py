@@ -1002,13 +1002,17 @@ def luan_giai(sinh: dict | None, nha: dict, thanh_vien: list[dict] | None = None
     da_tinh["veto_da_xac_nhan"] = [{"ma": d["ma"], "tieu_de": d["tieu_de"]} for d in veto]
     da_tinh["goc_nhin"] = goc_nhin
     # WS-3: câu sách xưa theo đúng mệnh quái người đọc + người cùng nhà khác nhóm (chỉ bản Việt; không đổi mức / lời).
-    from app.luangiai import sach_xua  # noqa: PLC0415
+    from app.luangiai import sach_xua, ung_dung_co_dien as ud  # noqa: PLC0415
     sach = sach_xua.phongthuy(mq["quai"] if mq else None, tvs)
-    return {"mo_dun": "phongthuy", "phien_ban": "doi_song_1", "sach_xua": sach, "phai": "bat_trach_huyen_khong", "ten": L("pt.ten_bao_cao", "Nhà của bạn"),
-            "cot_loi": cot_loi, "chuong": chuong, "da_tinh": da_tinh, "thieu": thieu, "ket": kb.mau("ket"),
-            "theo_y_dinh": theo_y_dinh,
-            "nguyen_tac": L("pt.nguyen_tac", "Hình thế là nền, lý khí là nhịp: dấu hiệu nhìn thấy và du niên với người ở quyết định mức; sao năm, sao tháng chỉ quyết định thời điểm."),
-            "y_dinh_chung": "nha_cua", "goi_mo": __import__("app.kb.y_dinh_chung", fromlist=["goi_mo"]).goi_mo("nha_cua", "phongthuy"), **kb.meta()}
+    kq_ra = {"mo_dun": "phongthuy", "phien_ban": "doi_song_1", "sach_xua": sach, "phai": "bat_trach_huyen_khong", "ten": L("pt.ten_bao_cao", "Nhà của bạn"),
+             "cot_loi": cot_loi, "chuong": chuong, "da_tinh": da_tinh, "thieu": thieu, "ket": kb.mau("ket"),
+             "theo_y_dinh": theo_y_dinh,
+             "nguyen_tac": L("pt.nguyen_tac", "Hình thế là nền, lý khí là nhịp: dấu hiệu nhìn thấy và du niên với người ở quyết định mức; sao năm, sao tháng chỉ quyết định thời điểm."),
+             "y_dinh_chung": "nha_cua", "goi_mo": __import__("app.kb.y_dinh_chung", fromlist=["goi_mo"]).goi_mo("nha_cua", "phongthuy"), **kb.meta()}
+    u_cd = ud.tu_bao_cao_phongthuy(kq_ra)
+    if u_cd:
+        kq_ra["ung_dung_co_dien"] = u_cd
+    return kq_ra
 
 
 # ----------------------------------------------------------------------------- KC-2: thẻ "Tháng này nhà bạn" (Hôm nay)

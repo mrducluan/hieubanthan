@@ -23,7 +23,7 @@ import { NHAN_MUC } from "@/components/luan-giai/kieu";
 import { useTyLe } from "@/lib/ty-le-kiem-chung";
 import { KIEU_BIET, TrucQuan, type CoCauChuan, type KhoiTrucQuan } from "@/components/hoi/TrucQuan";
 import { banDoKhop, useChieuSang, VungChieuSang } from "@/components/hoi/ChieuSang";
-import type { DoiSongLienKetChat, KetQuaHoi, LuanHoiChat } from "@/components/hoi/KhungChat";
+import type { DoiSongLienKetChat, GoNutDoiSongChat, KetQuaHoi, LuanHoiChat } from "@/components/hoi/KhungChat";
 import { useXemNguoiThan } from "@/components/huyen-hoc/XemNguoiThan";
 import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
 
@@ -91,6 +91,7 @@ function Than({ t, cauHoi, moDun, dang, daHoi, hoi, maMoi }: Props) {
       {t.van && !gapChung && theo.size > 0 && <p className="text-xs text-fg-faint">{hd.c("chu_xanh")}</p>}
       {t.van && <ViSao canCu={t.canCu} thuatNgu={t.thuatNgu} />}
       <KhungGiaiNghia ds={t.thuatNgu} />
+      {!t.loi && t.goNutDoiSong && <HopGoNutDoiSong gn={t.goNutDoiSong} />}
       {!hd.en && !t.loi && !t.luanHoi && t.doiSongLienKet && <LienKetDoiSongChat lk={t.doiSongLienKet} moDun={moDun} />}
       {t.canhBao?.map((c) => (
         <p key={c} className="flex gap-2 rounded-xl bg-moon/10 px-3 py-2 text-xs text-moon"><Info className="mt-0.5 size-3.5 shrink-0" aria-hidden /> {c}</p>
@@ -237,6 +238,26 @@ function LienKetDoiSongChat({ lk, moDun }: { lk: DoiSongLienKetChat; moDun: stri
           <ArrowUpRight className="size-4 shrink-0" aria-hidden />
         </button>
       </div>
+    </div>
+  );
+}
+
+/** Chặng 1 — hộp Gỡ Nút Đời Sống hai mặt (Sau ly hôn, Vợ chồng khắc khẩu, Góp vốn phân vai, Giải oan cách cục). */
+function HopGoNutDoiSong({ gn }: { gn: GoNutDoiSongChat }) {
+  const hd = useChuHoiDap();
+  return (
+    <div className="rounded-2xl border border-jade/35 bg-jade/5 p-4" data-testid="hoi-go-nut-doi-song" data-ma={gn.ma}>
+      <p className="text-xs font-semibold uppercase tracking-wider text-jade">{hd.c("gn.nhan")}</p>
+      <p className="mt-1 font-serif text-lg text-fg">{gn.tieu_de}</p>
+      <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{gn.goc_nhin_hai_mat}</p>
+      {gn.viec_thuc_te.length > 0 && (
+        <div className="mt-2.5 border-t border-line/50 pt-2.5 text-xs leading-relaxed text-fg-muted">
+          <p className="font-semibold text-fg">{hd.c("gn.viec")}</p>
+          <ul className="mt-1 list-disc space-y-1 pl-4">
+            {gn.viec_thuc_te.map((v) => <li key={v}>{v}</li>)}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,0 +1,116 @@
+{
+  "_nguon": "Stage 1 — Classical Five-Element & Period-9 Flying Star spatial harmony overlay for the 'Classical Method & Five Elements' view. Practical environment, lighting, everyday materials and daily rhythm only — no rituals or commercial charms.",
+  "_trang_thai": "ban_phu_en",
+  "tieu_de": {
+    "battu": "Five-Element Balancing from Your Four Pillars",
+    "tuvi": "Five-Element Alignment on the Life – Career – Wealth Axis",
+    "phongthuy": "Five-Element & Period-9 Flying Star Harmony (2024–2043)"
+  },
+  "nguyen_tac_uu_tien": {
+    "battu": "Read both classical balancing lenses side by side (seasonal/strength balance and month-branch structure): prioritize elements supported by both, applied through workspace setup, colors, materials and daily focus hours.",
+    "tuvi": "Use the Five-Element nature of the major stars in your Life, Career and Wealth palaces as your natural anchor for workspace tone and deep-work hours.",
+    "phongthuy": "Clear non-conflicting priority order: (1) Real-world safety, daylight and ventilation come first; (2) Bed-head, stove-mouth and desk facing follow Eight Mansions for the householder; (3) Room colors, materials and quiet-versus-active use balance the Period-9 Flying Star pair in that sector."
+  },
+  "ngu_hanh": {
+    "Kim": {
+      "ten": "Metal",
+      "mau_sac": "Crisp white, light cream, silver-grey, soft metallic accents",
+      "chat_lieu": "Clean metal frames, light stone surfaces, mechanical clock or minimal metal tray",
+      "phuong_vi": "West and Northwest",
+      "khung_gio": "15:00 – 19:00",
+      "thoi_quen": [
+        "Clear your desk completely before starting decisions that require firm precision",
+        "Anchor financial and operational choices in concise written checklists"
+      ]
+    },
+    "Mộc": {
+      "ten": "Wood",
+      "mau_sac": "Soft sage green, pale jade, natural wood grain",
+      "chat_lieu": "Natural timber desk or shelves, paper books, healthy leafy indoor plants",
+      "phuong_vi": "East and Southeast",
+      "khung_gio": "05:00 – 09:00",
+      "thoi_quen": [
+        "Reserve early morning hours for long-term planning, learning and creative drafting",
+        "Take a 15–20 minute walk near trees to reset mental tension"
+      ]
+    },
+    "Thủy": {
+      "ten": "Water",
+      "mau_sac": "Deep navy, slate blue, cool off-white",
+      "chat_lieu": "Clean glass surfaces, soft flowing curtains, fresh drinking water on the desk",
+      "phuong_vi": "North",
+      "khung_gio": "19:00 – 23:00 or quiet early morning",
+      "thoi_quen": [
+        "Keep quiet reflection blocks for deep research and careful listening before negotiations",
+        "Stay well hydrated and leave buffer room in your schedule instead of rigid overbooking"
+      ]
+    },
+    "Hỏa": {
+      "ten": "Fire",
+      "mau_sac": "Warm terracotta, muted amber, tea rose, sunlit gold (used as balanced accents)",
+      "chat_lieu": "Warm-toned desk lamp, natural woven textiles, morning-sunlit corner",
+      "phuong_vi": "South",
+      "khung_gio": "09:00 – 13:00",
+      "thoi_quen": [
+        "Schedule presentations, client meetings and launches during late-morning peak energy",
+        "Open curtains early each day to bring natural daylight into your workspace"
+      ]
+    },
+    "Thổ": {
+      "ten": "Earth",
+      "mau_sac": "Warm beige, sand, muted ochre, soft clay",
+      "chat_lieu": "Matte ceramic vessels, natural stone, steady flat woven rug",
+      "phuong_vi": "Northeast and Southwest",
+      "khung_gio": "07:00 – 09:00 or 13:00 – 15:00",
+      "thoi_quen": [
+        "Keep steady meal, sleep and weekly review times to build grounded momentum",
+        "Finish foundational tasks one by one before opening new commitments"
+      ]
+    }
+  },
+  "ghi_chu_hai_cach": {
+    "cung_can": "Both classical lenses (balance/climate and month structure) favor {ds}.",
+    "khac_nhau": "Balance/climate favors {c1}, while month structure favors {c2} — test each gently in your routine and keep what feels steadier.",
+    "trung_hoa": "Your chart's Five Elements are already fairly balanced — keep spaces bright and adjust lightly by season."
+  },
+  "khu_vuc_ten": {
+    "cua_chinh": "Main entrance / Qi intake",
+    "ban_lam_viec": "Work desk / Study area",
+    "bep": "Kitchen area",
+    "phong_ngu": "Primary bedroom",
+    "quay_thu_ngan": "Cashier / Client reception",
+    "phong_khach": "Living room / Shared hall"
+  },
+  "phep_van_9": {
+    "tiet_khi_kim": {
+      "ten": "Metal-draining method for heavy Earth stars (5 Yellow or 2 Black)",
+      "ngu_hanh_dieu_hoa": "Metal (white, light grey, tidy metalware) gently drains heavy Earth",
+      "ung_dung": "Keep this sector quiet, clean and uncluttered; favor white or light-grey tones and tidy metal fixtures; avoid bright red accents, hot lamps, active water features or major drilling."
+    },
+    "kich_vuong_van_9": {
+      "ten": "Welcoming Period-9 timely star 9 Purple & future star 1 White",
+      "ngu_hanh_dieu_hoa": "Balanced Wood – Fire – Water support by Mountain/Facing role",
+      "ung_dung": "Keep pathways open, let in daylight and use this sector regularly; place gentle clean water only when Facing star is 9 and neither 2 nor 5 is present."
+    },
+    "kich_van_xuong": {
+      "ten": "Supporting 4 Green Literary Star — study, writing & clarity",
+      "ngu_hanh_dieu_hoa": "Water nourishes Wood, Wood brightens Fire",
+      "ung_dung": "Well suited for a tidy desk, bookshelf or study corner; a small healthy plant works well, while stacked paper clutter should be cleared."
+    },
+    "thong_quan_thuy": {
+      "ten": "Water-bridging method for Metal–Wood friction (pairs 3–7 / 7–3)",
+      "ngu_hanh_dieu_hoa": "Water (calm blue, clean glass) bridges Metal to nourish Wood",
+      "ung_dung": "Reduce sharp metal clutter and noise here; use calm blue or soft white tones to cool verbal friction, and double-check contracts and locks."
+    },
+    "dieu_hoa_hoa_kim": {
+      "ten": "Earth-mediating method for Fire–Metal tension (pairs 9–6, 9–7)",
+      "ngu_hanh_dieu_hoa": "Earth (warm beige, matte ceramics) bridges Fire into Metal",
+      "ung_dung": "Avoid harsh glare or heat sources next to metal fixtures; use warm earth tones and ceramics, and keep electrical outlets tidy and inspected."
+    },
+    "giu_on_dinh": {
+      "ten": "Balanced airflow & daylight upkeep",
+      "ngu_hanh_dieu_hoa": "Balanced light, airflow and order",
+      "ung_dung": "Maintain fresh ventilation, comfortable lighting and clear walkways so the room stays steady and restful."
+    }
+  }
+}

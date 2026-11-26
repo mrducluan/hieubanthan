@@ -1863,6 +1863,8 @@ def _tra_loi(pl: dict, cau_hoi: str, sinh: dict | None, ngay_xem: dt.date, dung_
             dung_bc=lambda: _lap_doi_song(sinh, ngay_xem, ls, vh),
             nguoi_than=bool(NGUOI_THAN.get()),
         )
+    from app.luangiai import go_nut_doi_song as gnds  # noqa: PLC0415
+    gnds.gan_vao_hoi(kq, pl=pl, cau_hoi=cau_hoi)
     return kq
 
 

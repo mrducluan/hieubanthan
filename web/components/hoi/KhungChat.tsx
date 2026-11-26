@@ -11,6 +11,7 @@ import { ghi } from "@/lib/do-luong";
 import type { ThuatNgu } from "@/components/hoi/ThuatNgu";
 import type { KhoiTrucQuan } from "@/components/hoi/TrucQuan";
 import type { Muc } from "@/components/luan-giai/kieu";
+import { CongTacCheDoDoc } from "@/components/luan-giai/CheDoDoc";
 import { CauTraLoi } from "@/components/hoi/CauTraLoi";
 import { useMaCuaToi } from "@/lib/sao";
 import { useNguoiDung } from "@/lib/tai-khoan";
@@ -59,6 +60,13 @@ export type DoiSongLienKetChat =
       ten_chuong: string;
     };
 
+export interface GoNutDoiSongChat {
+  ma: string;
+  tieu_de: string;
+  goc_nhin_hai_mat: string;
+  viec_thuc_te: string[];
+}
+
 export interface KetQuaHoi {
   van?: string;
   /** Phần trực quan kèm câu trả lời (quẻ, cung, tứ trụ…) — hiện TRƯỚC lời trả lời. */
@@ -89,6 +97,8 @@ export interface KetQuaHoi {
   luanHoi?: LuanHoiChat;
   /** Chặng 0 — liên kết hộp đời sống & chương báo cáo cho các câu mảng đời sống ngoài 27 câu `luan_hoi`. */
   doiSongLienKet?: DoiSongLienKetChat;
+  /** Chặng 1 — hộp gỡ nút đời sống hai mặt (Sau ly hôn, Vợ chồng, Góp vốn, Giải oan lời phán dọa). */
+  goNutDoiSong?: GoNutDoiSongChat;
 }
 
 interface Tin extends KetQuaHoi {
@@ -258,9 +268,12 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO: nhanOVao, goiY
   return (
     <div className={cn("flex flex-col sm:glass sm:rounded-2xl", className)}>
       <div className="space-y-6 py-1 sm:p-6" aria-live="polite">
-        <p className="flex items-start gap-2 text-[0.95rem] text-fg-muted">
-          <Sparkles className="mt-1 size-4 shrink-0 text-gold" aria-hidden />{loiChao}
-        </p>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="flex items-start gap-2 text-[0.95rem] text-fg-muted">
+            <Sparkles className="mt-1 size-4 shrink-0 text-gold" aria-hidden />{loiChao}
+          </p>
+          {tin.length > 0 && <CongTacCheDoDoc moDun={moDun} nho />}
+        </div>
 
         <AnimatePresence initial={false}>
           {tin.map((t) =>
