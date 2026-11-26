@@ -1,23 +1,38 @@
 "use client";
 // Chặng 2 — Không gian Cố vấn Kinh doanh & Bàn cờ E2EE (/co-van-kinh-doanh).
 import { useState } from "react";
-import { ArrowUpRight, Briefcase, LockKeyhole, Users } from "lucide-react";
+import { ArrowUpRight, Briefcase, Compass, LockKeyhole, Users } from "lucide-react";
 import Link from "@/components/khung/Lien";
-import type { DoiTacBanCo } from "@/lib/ma-hoa-ban-co";
+import type { DoiTacBanCo, MatBangBanCo } from "@/lib/ma-hoa-ban-co";
 import { cn } from "@/lib/utils";
 import { BanCoMaHoaE2EE } from "./BanCoMaHoaE2EE";
+import { CamNangKinhDoanh } from "./CamNangKinhDoanh";
 import { CongCoVanTamTai } from "./CongCoVanTamTai";
 import { SoiGopVonDoiTac } from "./SoiGopVonDoiTac";
 
-type TabKinhDoanh = "quyet_dinh" | "gop_von" | "ban_co_e2ee";
+type TabKinhDoanh = "quyet_dinh" | "cam_nang" | "gop_von" | "ban_co_e2ee";
 
 export function KhungCoVanKinhDoanh() {
-  const [tab, setTab] = useState<TabKinhDoanh>("quyet_dinh");
+  const [tab, setTab] = useState<TabKinhDoanh>("cam_nang");
   const [dsChuyenSang, setDsChuyenSang] = useState<DoiTacBanCo[] | null>(null);
+  const [mbChuyenSang, setMbChuyenSang] = useState<MatBangBanCo[] | null>(null);
 
   return (
     <div className="space-y-6" data-testid="khung-co-van-kinh-doanh">
       <div className="flex flex-wrap gap-2 border-b border-line/70 pb-3" role="tablist" aria-label="Không gian Cố vấn Kinh doanh">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "cam_nang"}
+          data-testid="tab-cvkd-cam-nang"
+          onClick={() => setTab("cam_nang")}
+          className={cn(
+            "inline-flex min-h-10 items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+            tab === "cam_nang" ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:text-fg",
+          )}
+        >
+          <Compass className="size-4" aria-hidden /> Mở rộng, Mặt bằng &amp; Bài trí (5 Trụ)
+        </button>
         <button
           type="button"
           role="tab"
@@ -29,7 +44,7 @@ export function KhungCoVanKinhDoanh() {
             tab === "quyet_dinh" ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:text-fg",
           )}
         >
-          <Briefcase className="size-4" aria-hidden /> Quyết định Kinh doanh Tam Tài
+          <Briefcase className="size-4" aria-hidden /> Hỏi Quyết định Kinh doanh
         </button>
         <button
           type="button"
@@ -59,6 +74,7 @@ export function KhungCoVanKinhDoanh() {
         </button>
       </div>
 
+      {tab === "cam_nang" && <CamNangKinhDoanh matBangTuBanCo={mbChuyenSang} />}
       {tab === "quyet_dinh" && <CongCoVanTamTai macDinhCheDo="kinh_doanh" />}
       {tab === "gop_von" && <SoiGopVonDoiTac danhSachTuBanCo={dsChuyenSang} />}
       {tab === "ban_co_e2ee" && (
@@ -66,6 +82,10 @@ export function KhungCoVanKinhDoanh() {
           onChuyenSangGopVon={(ds) => {
             setDsChuyenSang(ds);
             setTab("gop_von");
+          }}
+          onChuyenSangCamNang={(mb) => {
+            setMbChuyenSang(mb);
+            setTab("cam_nang");
           }}
         />
       )}

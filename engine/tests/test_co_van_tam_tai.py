@@ -32,7 +32,8 @@ def _chuoi_van(x):
         for k, v in x.items():
             if k not in ("mo_dun", "phien_ban", "engine_version", "trang_thai", "source_id", "school_id",
                          "mach", "nhip", "ma", "muc", "hanh_ma", "loai", "loai_phep", "khu_vuc", "ma_mau",
-                         "ngay_xem", "ngay", "am_lich", "thang", "lane_chinh", "trang_thai_bu_khuyet", "nganh"):
+                         "ngay_xem", "ngay", "am_lich", "thang", "lane_chinh", "trang_thai_bu_khuyet", "nganh",
+                         "ma_mui_nhon", "phuong_ma", "am", "quan_he_tuoi"):
                 yield from _chuoi_van(v)
 
 
@@ -156,4 +157,53 @@ def test_ca_nhan_hoa_khac_nguoi_va_khac_cau_hoi_va_trung_thuc_bac_1():
     }).json()
     assert p_a["mach"] != p_tc["mach"]
     assert p_a["ket_luan_5_giay"]["cau_ket_luan"] != p_tc["ket_luan_5_giay"]["cau_ket_luan"]
+
+
+def test_cam_nang_kinh_doanh_5_tru_thanh_mon_so_sanh_mat_bang_va_song_ngu():
+    cam = kh.cum_cam_chung()
+    payload = {
+        "ngay_sinh": "1990-05-15",
+        "gioi_tinh": "nam",
+        "gio_sinh": "08:30",
+        "nganh": "dich_vu",
+        "mat_bang_ung_vien": [
+            {"ten_diem": "Mặt bằng A", "loai_hinh": "quan_ca_phe", "do_huong": 135.0, "nam_xay": 2024},
+            {"ten_diem": "Mặt bằng B", "loai_hinh": "quan_ca_phe", "do_huong": 270.0, "nam_xay": 2024},
+        ],
+        "ngay_xem": _NGAY_XEM,
+    }
+    r_vi = _CLIENT.post("/v1/doanh-chu/cam-nang-kinh-doanh", json=payload)
+    r_en = _CLIENT.post("/v1/doanh-chu/cam-nang-kinh-doanh", json={
+        **payload,
+        "mat_bang_ung_vien": [
+            {"ten_diem": "Site A", "loai_hinh": "quan_ca_phe", "do_huong": 135.0, "nam_xay": 2024},
+            {"ten_diem": "Site B", "loai_hinh": "quan_ca_phe", "do_huong": 270.0, "nam_xay": 2024},
+        ],
+    }, headers={"x-ngon-ngu": "en"})
+    assert r_vi.status_code == 200 and r_en.status_code == 200
+    d_vi, d_en = r_vi.json(), r_en.json()
+    assert d_vi["bac_phan_tich"] == 3
+    assert len(d_vi["chon_dia_diem_cua_hang"]["so_sanh_mat_bang"]) == 2
+    assert d_vi["chon_dia_diem_cua_hang"]["so_sanh_mat_bang"][0]["thu_tu_uu_tien"] == 1
+    assert len(d_vi["chon_dia_diem_cua_hang"]["so_sanh_mat_bang"][0]["ngay_khai_truong"]) >= 1
+    assert "thanh_mon_quyet" in d_vi["chon_dia_diem_cua_hang"]["so_sanh_mat_bang"][0]
+    assert len(d_vi["chon_dia_diem_cua_hang"]["checklist_loan_dau_6_diem"]) == 6
+    assert len(d_vi["bo_tri_van_phong_chu"]["nguyen_tac_4_diem"]) == 4
+    assert len(d_vi["bo_tri_cua_hang_buon_ban"]["nguyen_tac_quay_thu_ngan_va_cua"]) == 4
+
+    for s in _chuoi_van(d_vi):
+        if len(s) > 25:
+            assert not kds.tim_cum_cam(s, cam), s
+
+    # Kiểm khung VI ↔ EN (bỏ qua key nội bộ can_cu/son_toa/son_huong nếu có khác format ngày)
+    for s in _chuoi_van(d_en):
+        if s not in ("Site A", "Site B"):
+            assert not _VIET.search(s), f"Rò chữ Việt ở cam-nang-kinh-doanh EN: {s}"
+
+    # Bậc 1 (không giờ sinh, không mặt bằng) vẫn trả đủ 5 trụ 0% ngõ cụt
+    r_b1 = _CLIENT.post("/v1/doanh-chu/cam-nang-kinh-doanh", json={"ngay_sinh": "1990-05-15", "gioi_tinh": "nam", "ngay_xem": _NGAY_XEM})
+    assert r_b1.status_code == 200
+    assert r_b1.json()["bac_phan_tich"] == 1
+    assert r_b1.json()["bo_tri_van_phong_chu"]["co_gio"] is False
+
 

@@ -42,8 +42,8 @@ _HANH_NORM = {"Kim": "Kim", "Mộc": "Mộc", "Thủy": "Thủy", "Thuỷ": "Th�
 
 _MAU_MACH: list[tuple[str, list[str]]] = [
     ("gop_von_hop_tac", [
-        r"(hun von|gop von|chung von|gop co phan|lam an chung|lam chung|co[ -]?founder|chia co phan|chia 50|doi tac lam an)",
-        r"\b(co[ -]?founder|pool capital|equity co[ -]?founder|business partner|equity split|joint venture)\b",
+        r"(hun von|gop von|chung von|gop co phan|lam an chung|lam chung|co[ -]?founders?|chia co phan|chia 50|doi tac lam an)",
+        r"\b(co[ -]?founders?|pool capital|split equity|equity split|business partners?|joint ventures?)\b",
     ]),
     ("gia_dao_hoa_giai", [
         r"(vo chong|gia dinh|gia dao|con cai|nuoi day con|noi ngoai|bo me va hai vo chong).{0,45}(cai nhau|luc duc|cang thang|bat hoa|bat dong|lanh nhat|chien tranh lanh|ngot ngat|xung dot|hoa giai|go nut)",
@@ -69,7 +69,7 @@ _MAU_MACH: list[tuple[str, list[str]]] = [
     ]),
     ("su_nghiep_chuyen_viec", [
         r"(nghi viec|nghi han|nhay viec|chuyen viec|doi nghe|thang chuc|giam doc|san dau nguoi|tach xuong|mo tiem|khoi nghiep|ra lam rieng|mo cong ty|su nghiep)",
-        r"\b(quit my job|change jobs|career|headhunter|director|promotion|startup|go independent)\b",
+        r"\b(quit my job|leave .{0,20}job|change jobs?|career|headhunter|director|promotion|startup|go independent|launch .{0,25}(studio|shop|company|venture))\b",
     ]),
 ]
 

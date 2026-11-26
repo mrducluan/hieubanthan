@@ -12,6 +12,7 @@ import {
   type DoiTacBanCo,
   type DuLieuBanCoKinhDoanh,
   type GoiMaHoaBanCo,
+  type MatBangBanCo,
 } from "@/lib/ma-hoa-ban-co";
 
 const BAN_CO_RONG: DuLieuBanCoKinhDoanh = {
@@ -27,7 +28,13 @@ const BAN_CO_RONG: DuLieuBanCoKinhDoanh = {
   ],
 };
 
-export function BanCoMaHoaE2EE({ onChuyenSangGopVon }: { onChuyenSangGopVon?: (ds: DoiTacBanCo[]) => void }) {
+export function BanCoMaHoaE2EE({
+  onChuyenSangGopVon,
+  onChuyenSangCamNang,
+}: {
+  onChuyenSangGopVon?: (ds: DoiTacBanCo[]) => void;
+  onChuyenSangCamNang?: (ds: MatBangBanCo[]) => void;
+}) {
   const [goiTrenMay, setGoiTrenMay] = useState<GoiMaHoaBanCo | null>(null);
   const [matKhau, setMatKhau] = useState("");
   const [banCo, setBanCo] = useState<DuLieuBanCoKinhDoanh | null>(null);
@@ -246,6 +253,75 @@ export function BanCoMaHoaE2EE({ onChuyenSangGopVon }: { onChuyenSangGopVon?: (d
                 className="mt-2 rounded-full border border-gold/50 bg-gold/10 px-4 py-1.5 text-xs font-medium text-gold hover:bg-gold/20"
               >
                 Đưa {banCo.doi_tac.length} người này sang Soi Bù Khuyết Góp Vốn →
+              </button>
+            )}
+          </div>
+
+          <div className="space-y-2 border-t border-line/50 pt-3">
+            <div className="flex items-center justify-between">
+              <h4 className="text-xs font-semibold uppercase tracking-wider text-gold">Mặt bằng / Địa điểm đang khảo sát</h4>
+              <button
+                type="button"
+                onClick={() => setBanCo({
+                  ...banCo,
+                  mat_bang: [...banCo.mat_bang, { id: `mb-${Date.now()}`, ten_diem: `Mặt bằng #${banCo.mat_bang.length + 1}`, loai_hinh: "cua_hang", do_huong: 135, nam_xay: 2024 }],
+                })}
+                className="inline-flex items-center gap-1 text-xs text-gold hover:underline"
+              >
+                <Plus className="size-3.5" /> Thêm mặt bằng
+              </button>
+            </div>
+            {banCo.mat_bang.map((mbItem, idx) => (
+              <div key={mbItem.id} className="grid grid-cols-2 gap-2 rounded-xl border border-line/60 bg-bg/60 p-2.5 text-xs sm:grid-cols-5">
+                <input
+                  type="text"
+                  value={mbItem.ten_diem}
+                  onChange={(e) => {
+                    const m = [...banCo.mat_bang];
+                    m[idx] = { ...mbItem, ten_diem: e.target.value };
+                    setBanCo({ ...banCo, mat_bang: m });
+                  }}
+                  className="col-span-2 rounded border border-line bg-bg px-2 py-1 text-fg"
+                />
+                <input
+                  type="number"
+                  step="0.1"
+                  value={mbItem.do_huong}
+                  onChange={(e) => {
+                    const m = [...banCo.mat_bang];
+                    m[idx] = { ...mbItem, do_huong: Number(e.target.value) };
+                    setBanCo({ ...banCo, mat_bang: m });
+                  }}
+                  className="rounded border border-line bg-bg px-2 py-1 text-fg"
+                />
+                <input
+                  type="number"
+                  value={mbItem.nam_xay ?? 2024}
+                  onChange={(e) => {
+                    const m = [...banCo.mat_bang];
+                    m[idx] = { ...mbItem, nam_xay: Number(e.target.value) };
+                    setBanCo({ ...banCo, mat_bang: m });
+                  }}
+                  className="rounded border border-line bg-bg px-2 py-1 text-fg"
+                />
+                <button
+                  type="button"
+                  onClick={() => setBanCo({ ...banCo, mat_bang: banCo.mat_bang.filter((x) => x.id !== mbItem.id) })}
+                  aria-label="Xoá mặt bằng"
+                  className="justify-self-end text-fg-faint hover:text-amber-300"
+                >
+                  <Trash2 className="size-4" />
+                </button>
+              </div>
+            ))}
+            {banCo.mat_bang.length >= 1 && onChuyenSangCamNang && (
+              <button
+                type="button"
+                onClick={() => onChuyenSangCamNang(banCo.mat_bang)}
+                data-testid="e2ee-dua-sang-cam-nang"
+                className="mt-2 rounded-full border border-jade/50 bg-jade/10 px-4 py-1.5 text-xs font-medium text-jade hover:bg-jade/20"
+              >
+                Đưa {banCo.mat_bang.length} mặt bằng này sang So sánh Địa điểm &amp; Bài trí →
               </button>
             )}
           </div>

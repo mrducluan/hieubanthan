@@ -8,7 +8,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.calc import doanh_chu
-from app.luangiai import doanh_chu_gop_von, doanh_chu_lich, doanh_chu_mat_bang, doanh_chu_quan_ly
+from app.luangiai import doanh_chu_cam_nang, doanh_chu_gop_von, doanh_chu_lich, doanh_chu_mat_bang, doanh_chu_quan_ly
 from app.config import ENGINE_VERSION
 
 router = APIRouter(prefix="/v1/doanh-chu", tags=["doanh-chu"])
@@ -214,4 +214,42 @@ def api_gop_von(inp: GopVonIn) -> dict:
         nam_xem=inp.nam_xem,
     )
     return {"engine_version": ENGINE_VERSION, "khong_luu_du_lieu": True, **kq}
+
+
+class MatBangUngVienIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    ten_diem: str = Field(default="", max_length=80)
+    loai_hinh: str = Field(default="cua_hang", pattern="^(van_phong|cua_hang|quan_ca_phe|xuong_kho)$")
+    do_huong: float = Field(..., ge=0.0, lt=360.0)
+    nam_xay: int | None = Field(default=None, ge=1864, le=2043)
+
+
+class CamNangKinhDoanhIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    ngay_sinh: dt.date
+    gioi_tinh: str = Field(default="nam", pattern="^(nam|nu)$")
+    gio_sinh: str | None = Field(default=None, pattern=r"^([01]\d|2[0-3]):[0-5]\d$")
+    nganh: str = Field(default="dich_vu", pattern="^(dich_vu|thuong_mai|cong_nghe|san_xuat)$")
+    mat_bang_ung_vien: list[MatBangUngVienIn] = Field(default_factory=list, max_length=3)
+    ngay_xem: dt.date | None = None
+
+
+@router.post("/cam-nang-kinh-doanh")
+def api_cam_nang_kinh_doanh(inp: CamNangKinhDoanhIn) -> dict:
+    """Chặng 2 — Cẩm nang Chiến lược Kinh doanh 5 Trụ: Mở rộng thị trường, So sánh 1–3 địa điểm & Thành Môn Quyết,
+    Phối hợp nhân sự cốt cán, Bố trí văn phòng chủ & Bài trí cửa hàng buôn bán (không lưu dữ liệu)."""
+    if not (1930 <= inp.ngay_sinh.year <= 2025):
+        raise HTTPException(422, detail="Năm sinh cần nằm trong khoảng 1930–2025.")
+    kq = doanh_chu_cam_nang.lap_cam_nang(
+        ngay_sinh=inp.ngay_sinh,
+        gioi_tinh=inp.gioi_tinh,
+        gio_sinh=inp.gio_sinh,
+        nganh=inp.nganh,
+        mat_bang_ung_vien=[m.model_dump() for m in inp.mat_bang_ung_vien],
+        ngay_xem=inp.ngay_xem,
+    )
+    return {"engine_version": ENGINE_VERSION, "khong_luu_du_lieu": True, **kq}
+
 

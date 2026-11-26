@@ -26,11 +26,13 @@ export const TEN_TEP_KB: Record<string, string> = {
   "ung_dung_co_dien_kb.json": "Liên mảng · Ứng dụng Ngũ hành & Điều hoà Vận 9 (Chế độ Cổ điển)",
   "go_nut_doi_song_kb.json": "Liên mảng · Gỡ nút đời sống (Sau ly hôn, Vợ chồng, Góp vốn, Giải oan lá số)",
   "co_van_tam_tai_kb.json": "Liên mảng · Cố vấn Tam Tài (Nhân – Thiên – Địa)",
+  "doanh_chu_cam_nang_kb.json": "Doanh chủ · Cẩm nang Mở rộng thị trường, Mặt bằng & Bài trí kinh doanh",
   "doanh_chu_gop_von_kb.json": "Doanh chủ · Soi bù khuyết Co-founder & Phân vai góp vốn",
   // QTE / HTT-2: bản phủ tiếng Anh (kb/data/en/) + biến thể thị trường (kb/data/en-us/)
   "en/ung_dung_co_dien_kb.json": "Bản Anh · Ứng dụng Ngũ hành & Điều hoà Vận 9",
   "en/go_nut_doi_song_kb.json": "Bản Anh · Gỡ nút đời sống (4 mạch chuyên sâu)",
   "en/co_van_tam_tai_kb.json": "Bản Anh · Cố vấn Tam Tài",
+  "en/doanh_chu_cam_nang_kb.json": "Bản Anh · Cẩm nang Chiến lược & Bài trí kinh doanh",
   "en/doanh_chu_gop_von_kb.json": "Bản Anh · Soi bù khuyết Co-founder",
   "en/tarot_kb.json": "Bản Anh · Tarot (78 lá, trải bài, mẫu câu)",
   "en/loi_khuon.json": "Bản Anh · Mẫu câu theo ngôn ngữ (loi.L)",

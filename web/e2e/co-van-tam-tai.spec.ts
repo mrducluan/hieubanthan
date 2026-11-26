@@ -36,6 +36,17 @@ test("/co-van-kinh-doanh: Bàn cờ E2EE mã hoá AES-GCM không rò bản rõ l
   await page.goto("/co-van-kinh-doanh");
   await expect(page.locator("h1")).toContainText("Không gian Cố vấn Kinh doanh");
 
+  // Tab mặc định Cẩm nang 5 Trụ: nạp mẫu 2 mặt bằng Vận 9 và lập Cẩm nang Chiến lược & Bài trí Kinh doanh
+  await expect(page.getByTestId("cam-nang-kinh-doanh")).toBeVisible();
+  await page.getByTestId("cam-nang-nap-2-mat-bang").click();
+  await page.getByTestId("cam-nang-nut-lap").click();
+  await expect(page.getByTestId("cn-tru-1-thi-truong")).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByTestId("cn-tru-2-dia-diem")).toBeVisible();
+  await expect(page.getByTestId("cn-mat-bang-1")).toBeVisible();
+  await expect(page.getByTestId("cn-tru-3-nhan-su")).toBeVisible();
+  await expect(page.getByTestId("cn-tru-4-van-phong")).toBeVisible();
+  await expect(page.getByTestId("cn-tru-5-cua-hang")).toBeVisible();
+
   // Mở tab Bàn cờ E2EE và tạo bàn cờ với mật khẩu >= 8 ký tự
   await page.getByTestId("tab-cvkd-ban-co-e2ee").click();
   await page.getByTestId("e2ee-mat-khau").fill("KhoaBiMat#2027");

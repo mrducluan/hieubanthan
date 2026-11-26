@@ -26,7 +26,7 @@
 | Kỳ Môn |  | 1 |  |  | 1 |  |  |
 | Thần số |  |  |  | 11 | 13 |  |  |
 | Lịch · tuổi · tập quán |  | 1 |  | 5 | 1 |  |  |
-| Liên mảng · kỹ thuật |  | 1 |  |  | 12 | 3 | 7 |
+| Liên mảng · kỹ thuật |  | 1 |  |  | 12 | 4 | 7 |
 
 ## Phần đã có nguyên văn đối chiếu (test khoá)
 
@@ -208,6 +208,7 @@
 | Liên mảng · kỹ thuật | `chuyen_nghia_kb.json` |  | Ban biên tập soạn | nghĩa đời nay do ban biên tập viết |
 | Liên mảng · kỹ thuật | `chuyen_nghia_kb.json` | khai_niem | Có nguyên văn đối chiếu | mỗi khái niệm một câu sách khớp kho nguồn; nghĩa đời nay là biên tập |
 | Liên mảng · kỹ thuật | `co_van_tam_tai_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 2: nháp AI tổng hợp Cố vấn Liên mảng Tam Tài (Nhân – Thiên – Địa), chờ chủ dự án đọc duyệt |
+| Liên mảng · kỹ thuật | `doanh_chu_cam_nang_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 2: nháp AI Cẩm nang Chiến lược Kinh doanh 5 trụ (Thị trường, Địa điểm/Thành Môn, Nhân sự, Văn phòng, Cửa hàng), chờ chủ dự án đọc duyệt |
 | Liên mảng · kỹ thuật | `dong_thuan_thong_ke.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `giao_thoa_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `go_nut_doi_song_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 1: nháp AI biên soạn cho 4 mạch gỡ nút đời sống, chờ chủ dự án đọc duyệt |
