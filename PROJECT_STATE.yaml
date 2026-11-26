@@ -5,7 +5,7 @@ current_phase: 1
 current_hypothesis: >-
   H1 Free Reading thu hút người dùng + H2 Metaphysics ID tạo gắn bó
   (chủ dự án cho làm song song một phần Phase 2: hợp đôi + link mời — H3)
-current_build: "Chặng 1 (Golden KB & Công tắc 2 Chế độ Zero-Bloat): 65/81 cặp Huyền Không có nguyên văn cổ thư + Điều hoà Vận 9 + Kỵ chuyển Kỵ/Lộc chuyển Kỵ + 4 mạch Gỡ nút đời sống + Công tắc Đời sống ⇄ Cổ điển (trên nền origin/main #370 + Chặng 0)"
+current_build: "Chặng 1 (Golden KB & Công tắc 2 Chế độ Zero-Bloat): 63/81 cặp Huyền Không có nguyên văn cổ thư + Điều hoà Vận 9 + Kỵ chuyển Kỵ/Lộc chuyển Kỵ + 4 mạch Gỡ nút đời sống + Công tắc Đời sống ⇄ Cổ điển (trên nền origin/main #370 + Chặng 0)"
 current_gate: "Gate 0 bỏ qua theo quyết định chủ dự án (2026-10-08) — mở công khai, đo Gate 1 trên người dùng thật"
 current_metrics: []   # PostHog đã bật (mục G); GA4 qua GTM khi chủ dự án gắn thẻ GA4 trong GTM
 current_risks:
@@ -20,7 +20,7 @@ current_risks:
   - "Đã mở công khai trước khi xong thử nghiệm nội bộ 2 tháng (chủ dự án chốt 2026-10-08); bán Sao vẫn chặn"
   - "Trang pháp lý đã có (Luật BVDLCN 91/2025 + NĐ 356/2025) nhưng chưa luật sư duyệt, chưa điền thông tin đơn vị vận hành"
 completed_work:
-  - "CHANG-1 (2026-11-26): (1) nâng phongthuy_huyen_khong.json to_hop_81 từ 28 lên 65/81 cặp sao có trích dẫn nguyên văn cổ thư qua kiểm SX-C; (2) xây ung_dung_co_dien_kb.json (+ en/) & luangiai/ung_dung_co_dien.py cho ứng dụng Ngũ hành & điều hoà Vận 9 không mâu thuẫn Bát trạch (< 3 KB, an toàn SAO-2); (3) mở rộng calc/luangiai tuvi_phi_hoa thêm chuỗi Kỵ chuyển Kỵ & Lộc chuyển Kỵ (luong_phai_phi_tinh, song ngữ VI/EN); (4) xây go_nut_doi_song_kb.json (+ en/) cho 4 mạch khuyết lớn (Sau ly hôn, Vợ chồng, Góp vốn, Giải oan lá số) trên hỏi đáp Tử vi & Bát tự; (5) gắn Công tắc 2 Chế độ '[Đời sống & Hành động] ⇄ [Học thuật Cổ điển & Ngũ hành]' (CheDoDoc.tsx) trên BaoCaoDoiSong & KhungChat"
+  - "CHANG-1 (2026-11-26): (1) nâng phongthuy_huyen_khong.json to_hop_81 từ 28 lên 63/81 cặp sao có trích dẫn nguyên văn cổ thư qua kiểm SX-C; (2) xây ung_dung_co_dien_kb.json (+ en/) & luangiai/ung_dung_co_dien.py cho ứng dụng Ngũ hành & điều hoà Vận 9 không mâu thuẫn Bát trạch (< 3 KB, an toàn SAO-2); (3) mở rộng calc/luangiai tuvi_phi_hoa thêm chuỗi Kỵ chuyển Kỵ & Lộc chuyển Kỵ (luong_phai_phi_tinh, song ngữ VI/EN); (4) xây go_nut_doi_song_kb.json (+ en/) cho 4 mạch khuyết lớn (Sau ly hôn, Vợ chồng, Góp vốn, Giải oan lá số) trên hỏi đáp Tử vi & Bát tự; (5) gắn Công tắc 2 Chế độ '[Đời sống & Hành động] ⇄ [Học thuật Cổ điển & Ngũ hành]' (CheDoDoc.tsx) trên BaoCaoDoiSong & KhungChat"
   - "CHANG-0 (2026-11-26): (1) calc/battu.py + doanh_chu.py hỗ trợ Tam Trụ chuẩn (co_gio=False, không gán giả giờ Ngọ 12:00) + Tứ Trụ khi có giờ sinh + đọc đúng dụng thần phù ức/điều hậu; (2) điền cot_loi cho /thoi-gian-toi từ chương 1 miễn phí (an toàn SAO-2, khớp VI/EN); (3) D2 nâng cấp: hoidap/luan_hoi_khop.py đồng bộ 27 nhãn câu hỏi thẳng của báo cáo Tử vi/Bát tự vào hỏi đáp kèm cổng cắt SAO-2 phía máy chủ (catLuanHoiChat / daMoBaoCaoHoi khớp khoá HMAC & chuong_mien_phi), KiemChung nuôi DB 0017 & cầu nối mở chương trên CauTraLoi.tsx; (4) Radar 8 mạch tò mò & bảng sức khoẻ 8 migration tầng HỌC trên /quan-tri/hoc và /quan-tri/hoi-dap"
   - "SEO-J: 76 trang \"sinh năm X mệnh gì\" (1950–2025) + KB 30 nạp âm; link hai chiều với trang tuổi hợp hướng; sitemap 625 URL"
   - "SEO-I: 48 trang \"Hoá X ở cung Y\" (10 năm can → sao mang hoá, link trang sao ở cung, tam phương); sitemap 548 URL"
