@@ -142,7 +142,7 @@ SO: dict[str, dict] = {
         "phan": {
             "to_hop_81": _nv("phongthuy_huyen_khong_co_thu.json",
                              "tests/test_huyen_khong_tham_thi.py::test_to_hop_81_sach_qua_bo_kiem_sx_c",
-                             "Gói 1A: 28 tổ hợp sao tiêu biểu có câu nguyên văn Tử Bạch Đoạn / Phi Tinh Phú qua bộ kiểm SX-C; "
+                             "Chặng 1: 65/81 tổ hợp sao có câu nguyên văn Huyền Không Bí Chỉ / Tử Bạch Đoạn / Phi Tinh Đoạn qua bộ kiểm SX-C; "
                              "Thành Môn Quyết + Hạ Quái/Thế Quái đối chiếu Thẩm Thị Huyền Không Học (huyen_khong_tham_thi.json)"),
         },
     },
@@ -228,8 +228,8 @@ SO: dict[str, dict] = {
     # ---- Liên mảng (lời ghép, ranh giới, mẫu câu)
     "suc_khoe_kb.json": {"mang": "chung", "muc": "tom_y_co_thu", "ghi_chu": "hành ↔ tạng phủ theo Nội Kinh; tên bệnh hay gặp là kiến thức phổ thông (SK-2)"},
     **{f: {"mang": "chung", "muc": "bien_tap"} for f in (
-        "chu_y_kb.json", "chan_dung_kb.json", "giao_thoa_kb.json", "goi_y_cheo_kb.json", "hoan_canh_kb.json", "nhat_quan_kb.json",
-        "push_sang_nay.json", "sinh_nuoc_ngoai_kb.json", "tuan_hai_nguoi_kb.json", "tu_dien.json", "y_dinh_chung.json")},
+        "chu_y_kb.json", "chan_dung_kb.json", "giao_thoa_kb.json", "go_nut_doi_song_kb.json", "goi_y_cheo_kb.json", "hoan_canh_kb.json", "nhat_quan_kb.json",
+        "push_sang_nay.json", "sinh_nuoc_ngoai_kb.json", "tuan_hai_nguoi_kb.json", "tu_dien.json", "ung_dung_co_dien_kb.json", "y_dinh_chung.json")},
     # ---- Tệp kỹ thuật
     **{f: {"mang": "chung", "muc": "he_thong"} for f in (
         "dong_thuan_thong_ke.json", "goc_nhin.json", "ngay_cap_nhat.json", "slug_en.json", "ten_en.json", "tham_dinh.json",

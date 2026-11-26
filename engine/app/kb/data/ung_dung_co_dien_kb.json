@@ -1,0 +1,118 @@
+{
+  "_nguon": "Chặng 1 — Kho ứng dụng Ngũ hành & điều hoà không gian Vận 9 (2024–2043) cho chế độ 'Học thuật Cổ điển & Ngũ hành'. Ban biên tập tổng hợp từ lý Ngũ hành sinh khắc (Tử Bình / Tử Vi) và phép chế hoá cửu tinh của Huyền Không học; chỉ dùng ánh sáng, chất liệu đời thường, hướng ngồi và nhịp sinh hoạt — tuyệt đối không nghi lễ, không vật phẩm phong thuỷ.",
+  "source_id": "ung_dung_co_dien",
+  "school_id": "ngu_hanh_huyen_khong",
+  "trang_thai": "nhap_ai",
+  "tieu_de": {
+    "battu": "Ứng dụng Ngũ hành bổ khuyết từ Tứ Trụ",
+    "tuvi": "Ứng dụng Ngũ hành theo trục Mệnh – Quan – Tài",
+    "phongthuy": "Điều hoà Ngũ hành & Phi Tinh Vận 9 (2024–2043)"
+  },
+  "nguyen_tac_uu_tien": {
+    "battu": "Đọc song song hai cách lấy dụng thần (cân sức/điều hậu và cách cục tháng sinh): ưu tiên hành cả hai cách cùng cần; ứng dụng bằng môi trường, màu sắc, chất liệu sinh hoạt và nhịp làm việc hằng ngày.",
+    "tuvi": "Xét hành của chính tinh đóng tại ba cung trụ cột (Mệnh, Quan Lộc, Tài Bạch) làm trục thuận tự nhiên để chọn phong cách không gian và khung giờ tập trung.",
+    "phongthuy": "Thứ tự ưu tiên không mâu thuẫn: (1) An toàn, nắng gió và công năng thực tế đứng đầu; (2) Hướng quay đầu giường, miệng bếp, ghế ngồi giữ theo Bát trạch hợp mệnh chủ nhà; (3) Màu sắc, chất liệu và độ động – tĩnh tại từng góc phòng mới điều hoà theo cặp sao Phi Tinh Vận 9."
+  },
+  "ngu_hanh": {
+    "Kim": {
+      "ten": "Kim",
+      "mau_sac": "Trắng, kem sáng, xám bạc, ánh kim nhạt",
+      "chat_lieu": "Khung kim loại gọn gàng, mặt bàn đá sáng, đồng hồ cơ hoặc khay kim loại tối giản",
+      "phuong_vi": "Hướng Tây và Tây Bắc",
+      "khung_gio": "15:00 – 19:00 (giờ Thân – Dậu)",
+      "thoi_quen": [
+        "Dọn mặt bàn làm việc thật trống trước khi bắt đầu việc cần quyết đoán",
+        "Chốt công việc và tài chính bằng bảng số liệu, danh sách kiểm ngắn gọn"
+      ]
+    },
+    "Mộc": {
+      "ten": "Mộc",
+      "mau_sac": "Xanh lá dịu, xanh ngọc nhạt, nâu gỗ tự nhiên",
+      "chat_lieu": "Bàn kệ gỗ tự nhiên, sách giấy, cây lá xanh khoẻ mạnh dễ chăm",
+      "phuong_vi": "Hướng Đông và Đông Nam",
+      "khung_gio": "05:00 – 09:00 (giờ Mão – Thìn)",
+      "thoi_quen": [
+        "Dành đầu buổi sáng cho việc lên kế hoạch dài hạn, học kỹ năng mới hoặc viết lách",
+        "Đi bộ ngoài trời có cây xanh 15–20 phút để giải toả căng thẳng"
+      ]
+    },
+    "Thủy": {
+      "ten": "Thủy",
+      "mau_sac": "Xanh lam trầm, xanh đen, trắng phớt xanh",
+      "chat_lieu": "Mặt kính trong sạch, rèm mềm rủ nhẹ, bình nước uống tinh khiết trên bàn",
+      "phuong_vi": "Hướng Bắc",
+      "khung_gio": "19:00 – 23:00 (giờ Tuất – Hợi) hoặc đầu giờ sáng yên tĩnh",
+      "thoi_quen": [
+        "Dành khoảng lặng đọc sâu và lắng nghe kỹ trước các cuộc thương lượng quan trọng",
+        "Uống đủ nước ấm và giữ lịch nghỉ ngơi linh hoạt tránh dồn ép cứng nhắc"
+      ]
+    },
+    "Hỏa": {
+      "ten": "Hỏa",
+      "mau_sac": "Đỏ đất ấm, cam đất, hồng trà, vàng nắng ấm (dùng làm điểm nhấn vừa đủ)",
+      "chat_lieu": "Đèn bàn ánh sáng vàng ấm, chất liệu vải dệt tự nhiên, góc đón nắng sớm",
+      "phuong_vi": "Hướng Nam",
+      "khung_gio": "09:00 – 13:00 (giờ Tỵ – Ngọ)",
+      "thoi_quen": [
+        "Đặt các buổi thuyết trình, gặp gỡ đối tác và ra mắt việc mới vào khung sáng muộn",
+        "Mở rèm đón ánh sáng tự nhiên mỗi sáng để giữ nhịp làm việc hứng khởi"
+      ]
+    },
+    "Thổ": {
+      "ten": "Thổ",
+      "mau_sac": "Vàng kem, nâu đất nhạt, be trầm, gạch nung dịu",
+      "chat_lieu": "Chậu gốm mộc, gạch đá tự nhiên, thảm dệt phẳng chắc chắn",
+      "phuong_vi": "Hướng Đông Bắc và Tây Nam",
+      "khung_gio": "07:00 – 09:00 (giờ Thìn) hoặc 13:00 – 15:00 (giờ Mùi)",
+      "thoi_quen": [
+        "Duy trì giờ giấc ăn ngủ và lịch rà soát công việc cố định đều đặn mỗi tuần",
+        "Hoàn tất dứt điểm từng đầu việc nền tảng trước khi mở thêm việc mới"
+      ]
+    }
+  },
+  "ghi_chu_hai_cach": {
+    "cung_can": "Cả hai cách đọc (cân sức/điều hậu và cách cục tháng sinh) cùng cần hành {ds}.",
+    "khac_nhau": "Cách cân sức/điều hậu cần {c1}; cách cục tháng sinh cần {c2} — ưu tiên dùng thử từng hướng trong sinh hoạt và giữ lại nếp hợp sức nhất.",
+    "trung_hoa": "Ngũ hành lá số vốn khá cân bằng — giữ không gian thoáng sáng và điều tiết nhẹ theo mùa."
+  },
+  "khu_vuc_ten": {
+    "cua_chinh": "Cửa chính / Lối đón khí",
+    "ban_lam_viec": "Bàn làm việc / Góc học tập",
+    "bep": "Khu vực bếp",
+    "phong_ngu": "Phòng ngủ chính",
+    "quay_thu_ngan": "Quầy thu ngân / Bàn tiếp khách",
+    "phong_khach": "Phòng khách / Không gian chung"
+  },
+  "phep_van_9": {
+    "tiet_khi_kim": {
+      "ten": "Phép Kim tiết khí Thổ sát (gặp sao 5 Ngũ Hoàng hoặc sao 2 Nhị Hắc)",
+      "ngu_hanh_dieu_hoa": "Kim (trắng, xám sáng, đồ kim loại gọn) tiết bớt Thổ nặng",
+      "ung_dung": "Giữ khu vực này thật yên tĩnh, sạch thoáng; ưu tiên gam trắng/xám nhạt và đồ gia dụng kim loại gọn gàng; tránh sắc đỏ rực, đèn quá nóng, mặt nước động hoặc khoan đục sửa chữa lớn."
+    },
+    "kich_vuong_van_9": {
+      "ten": "Phép đón Vương khí Cửu Tử (9) & Sinh khí Nhất Bạch (1) Vận 9",
+      "ngu_hanh_dieu_hoa": "Mộc – Hoả – Thuỷ điều hoà theo vai Sơn/Hướng",
+      "ung_dung": "Mở thoáng lối đi, đón ánh sáng tự nhiên và sinh hoạt thường xuyên tại góc này để dẫn khí đương vận; chỉ đặt nước sạch chuyển động nhẹ khi hướng tinh là 9 và cung không có sao 2 hoặc 5."
+    },
+    "kich_van_xuong": {
+      "ten": "Phép thông Văn Xương Tứ Lục (4) — học hành & sáng tạo",
+      "ngu_hanh_dieu_hoa": "Thuỷ dưỡng Mộc, Mộc thông Hoả",
+      "ung_dung": "Hợp đặt bàn làm việc, kệ sách hoặc bàn học gọn sáng; có thể điểm một cây xanh nhỏ khoẻ mạnh, tránh để giấy tờ cũ chất đống gây bế khí."
+    },
+    "thong_quan_thuy": {
+      "ten": "Phép Thuỷ thông quan Kim – Mộc (gặp cặp 3–7 / 7–3 dễ va chạm)",
+      "ngu_hanh_dieu_hoa": "Thuỷ (xanh lam dịu, kính sạch) làm cầu nối Kim sinh Thuỷ, Thuỷ sinh Mộc",
+      "ung_dung": "Giảm đồ kim loại sắc nhọn và tiếng ồn tại khu vực này; dùng gam xanh lam trầm hoặc trắng dịu để hạ nhịp tranh luận, cẩn thận giấy tờ và khoá cửa."
+    },
+    "dieu_hoa_hoa_kim": {
+      "ten": "Phép Thổ điều hoà Hoả – Kim (gặp cặp 9–6, 9–7 Hoả khắc Kim)",
+      "ngu_hanh_dieu_hoa": "Thổ (vàng kem, gốm đá mộc) nối Hoả sinh Thổ, Thổ sinh Kim",
+      "ung_dung": "Tránh ánh đèn chói gắt hoặc nguồn nhiệt sát đồ kim loại; dùng tông kem đất, gốm mộc để giữ khí êm và kiểm tra an toàn điện nhiệt."
+    },
+    "giu_on_dinh": {
+      "ten": "Phép giữ khí cân bằng & thoáng sáng",
+      "ngu_hanh_dieu_hoa": "Cân bằng sáng – tối, gọn gàng",
+      "ung_dung": "Đảm bảo thông gió tự nhiên, ánh sáng vừa mắt và lối đi không vướng đồ đạc để giữ dòng khí ổn định."
+    }
+  }
+}

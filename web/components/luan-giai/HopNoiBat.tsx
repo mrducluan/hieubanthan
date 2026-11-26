@@ -2,7 +2,7 @@
 // LG-ĐS — hộp đóng khung trong Luận giải Tử vi đời sống (docs/LUAN-GIAI-DOI-SONG.md mục 2.3). Màu theo loại
 // (app/globals.css `.hop-nb`): Điều quan trọng (vàng) · Điểm mạnh (lục) · Nên để ý (hổ phách, KHÔNG đỏ) · Lời khuyên
 // (tím) · Thời điểm (lam). "Vì sao nói vậy" mở căn cứ (thuật ngữ, sao, cung) — lời chính không chứa thuật ngữ.
-import { createContext, useContext, useId, useState } from "react";
+import { createContext, useContext, useEffect, useId, useState } from "react";
 import { useChuChung } from "@/components/cms/ChuChung";
 import { CalendarClock, ChevronDown, Eye, Lightbulb, Sprout, Star, type LucideIcon } from "lucide-react";
 import { KiemChung } from "@/components/huyen-hoc/KiemChung";
@@ -10,6 +10,7 @@ import { doanCoThuatNgu, type ThuatNgu } from "@/components/hoi/ThuatNgu";
 import type { BangTyLe } from "@/lib/ty-le-kiem-chung";
 import { cn } from "@/lib/utils";
 import { useChuBaoCao } from "./chu-bao-cao";
+import { useCheDoDoc } from "./CheDoDoc";
 import { TEN_CHI_PHI, type HangLop, type Hop, type LoaiHop, type SachHop } from "./kieu";
 
 /** Nhãn bản Việt (giữ để nơi khác dùng); hiển thị đọc theo ngôn ngữ qua `useChuBaoCao` (khoá loai.<loại>). */
@@ -34,7 +35,11 @@ export function ngayDuong(iso: string): string {
 }
 
 export function ViSao({ canCu, thuatNgu, nho = false, sach }: { canCu?: string[]; thuatNgu?: ThuatNgu[]; nho?: boolean; sach?: SachHop[] }) {
+  const [cheDo] = useCheDoDoc();
   const [mo, setMo] = useState(false);
+  useEffect(() => {
+    setMo(cheDo === "co_dien");
+  }, [cheDo]);
   const id = useId();
   const c = useChuChung();
   if (!canCu?.length && !sach?.length) return null;

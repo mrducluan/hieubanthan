@@ -87,3 +87,48 @@ def phi_hoa(cung: list[dict]) -> list[dict]:
                        "den_cung": x["den_cung"], "xung_cung": x["xung_cung"],
                        "tu_hoa": x["den_cung"] == c["ten"], "den_tuan_triet": x["den_tuan_triet"]})
     return ra
+
+
+CUNG_CHUOI_MAC_DINH = ("Mệnh", "Tài Bạch", "Quan Lộc", "Phu Thê", "Điền Trạch")
+
+
+def chuoi_chuyen_ky(cung: list[dict], cung_goc: tuple[str, ...] = CUNG_CHUOI_MAC_DINH, toi_da: int = 6) -> list[dict]:
+    """Chặng 1 — Chuỗi Phi Hoá bậc 2 theo phái Lương Nhược Du (`luong_phai_phi_tinh`):
+      * `ky_chuyen_ky`: cung A hoá Kỵ bay vào cung B (B ≠ A), lấy can của cung B tìm sao hoá Kỵ tiếp sang cung C (`den_cung`)
+        — cho thấy bận tâm từ mảng A qua B rồi dồn điểm rơi thực tế sang mảng C (xung cung đối C').
+      * `loc_chuyen_ky`: cung A hoá Lộc bay vào cung B (B ≠ A), lấy can của cung B tìm sao hoá Kỵ sang cung C — cho thấy
+        thuận lợi ở B dễ kéo theo chỗ hao sức hoặc ràng buộc ở C nếu không giữ nhịp.
+    Tất định 100%, không đổi `phi_hoa()`."""
+    theo_ten = {c["ten"]: c for c in cung}
+    ra: list[dict] = []
+    for loai, hoa_dau in (("ky_chuyen_ky", "Kỵ"), ("loc_chuyen_ky", "Lộc")):
+        for ten_a in cung_goc:
+            ca = theo_ten.get(ten_a)
+            if not ca:
+                continue
+            b1 = next((x for x in _bay(ca["can"], cung) if x["hoa"] == hoa_dau), None)
+            if not b1 or not b1["den_cung"] or b1["den_cung"] == ten_a:
+                continue
+            cb = theo_ten.get(b1["den_cung"])
+            if not cb:
+                continue
+            b2 = next((x for x in _bay(cb["can"], cung) if x["hoa"] == "Kỵ"), None)
+            if not b2 or not b2["den_cung"] or b2["den_cung"] == cb["ten"]:
+                continue
+            ra.append({
+                "loai": loai,
+                "phai": "luong_phai_phi_tinh",
+                "tu_cung": ten_a,
+                "can_dau": ca["can"],
+                "hoa_dau": hoa_dau,
+                "sao_dau": b1["sao"],
+                "qua_cung": cb["ten"],
+                "can_chuyen": cb["can"],
+                "sao_chuyen": b2["sao"],
+                "den_cung": b2["den_cung"],
+                "xung_cung": b2["xung_cung"],
+            })
+            if len(ra) >= toi_da:
+                return ra
+    return ra
+

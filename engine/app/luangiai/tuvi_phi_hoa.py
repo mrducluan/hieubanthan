@@ -360,6 +360,57 @@ def chon_noi_bat(duong: list[dict]) -> list[dict]:
     return ra
 
 
+def _luan_chuoi_chuyen_ky(cung: list[dict]) -> list[dict]:
+    """Diễn giải đời thường cho chuỗi Kỵ chuyển Kỵ & Lộc chuyển Kỵ (tên cung, sao, can chỉ nằm ở `can_cu`; đối xứng VI ↔ EN)."""
+    vi = la_viet()
+    ra = []
+    for ch in ph.chuoi_chuyen_ky(cung):
+        ma_a = ten_mang(ch["tu_cung"]) if vi else mang(ch["tu_cung"])
+        ma_b = ten_mang(ch["qua_cung"]) if vi else mang(ch["qua_cung"])
+        ma_c = ten_mang(ch["den_cung"]) if vi else mang(ch["den_cung"])
+        ngan_a = mang_ngan(ch["tu_cung"])
+        ngan_b = mang_ngan(ch["qua_cung"])
+        ngan_c = mang_ngan(ch["den_cung"])
+        if ch["loai"] == "ky_chuyen_ky":
+            if vi:
+                td = f"Mạch bận tâm từ {ngan_a} qua {ngan_b} rồi dồn về {ngan_c}"
+                ng = f"Nỗi lo bắt đầu ở {ma_a} thường kéo sang {ma_b}, sau đó hệ quả thực tế lại lắng xuống ở {ma_c}."
+                viec = f"Khi {ngan_a} nảy sinh khúc mắc, khoan lấy {ngan_c} ra bù đắp vội; hãy gỡ thẳng nút thắt ngay từ bước {ngan_b}."
+                cu = (f"Kỵ chuyển Kỵ (phái Phi tinh Lương Nhược Du, tóm ý): Cung {ch['tu_cung']} ({ch['can_dau']}) hoá Kỵ "
+                      f"({ch['sao_dau']}) sang {ch['qua_cung']} ({ch['can_chuyen']}), chuyển Kỵ ({ch['sao_chuyen']}) về {ch['den_cung']} "
+                      f"(xung {ch['xung_cung']})")
+            else:
+                td = f"Ripple of pressure from {ngan_a} through {ngan_b} into {ngan_c}"
+                ng = f"Concerns starting in {ma_a} tend to pass through {ma_b} and settle as practical pressure in {ma_c}."
+                viec = f"When {ngan_a} feels strained, avoid over-drawing on {ngan_c}; resolve the bottleneck early at the {ngan_b} step."
+                cu = (f"Ji-to-Ji chain (Liang Flying-Star school, summary): {tc(ch['tu_cung'])} ({tcan(ch['can_dau'])}) sends {th('Kỵ')} "
+                      f"({ts(ch['sao_dau'])}) to {tc(ch['qua_cung'])} ({tcan(ch['can_chuyen'])}), turning {th('Kỵ')} ({ts(ch['sao_chuyen'])}) "
+                      f"into {tc(ch['den_cung'])} (clashing {tc(ch['xung_cung'])})")
+        else:
+            if vi:
+                td = f"Thuận lợi từ {ngan_a} sang {ngan_b} cần giữ kỹ khâu {ngan_c}"
+                ng = f"Nguồn mở ra từ {ma_a} đem cơ hội tới {ma_b}, nhưng dễ kéo theo sự bận lòng hoặc hao sức ở {ma_c}."
+                viec = f"Đón nhận thuận lợi ở {ngan_b} nhưng đặt sẵn hạn mức thời gian và chi phí cho {ngan_c} để giữ trọn thành quả."
+                cu = (f"Lộc chuyển Kỵ (phái Phi tinh Lương Nhược Du, tóm ý): Cung {ch['tu_cung']} ({ch['can_dau']}) hoá Lộc "
+                      f"({ch['sao_dau']}) sang {ch['qua_cung']} ({ch['can_chuyen']}), chuyển Kỵ ({ch['sao_chuyen']}) về {ch['den_cung']}")
+            else:
+                td = f"Gain from {ngan_a} to {ngan_b} needs boundaries around {ngan_c}"
+                ng = f"Support flowing from {ma_a} brings momentum to {ma_b}, yet can quietly pull extra effort or outlay into {ma_c}."
+                viec = f"Welcome the opening in {ngan_b} while setting clear time and budget limits around {ngan_c}."
+                cu = (f"Lu-to-Ji chain (Liang Flying-Star school, summary): {tc(ch['tu_cung'])} ({tcan(ch['can_dau'])}) sends {th('Lộc')} "
+                      f"({ts(ch['sao_dau'])}) to {tc(ch['qua_cung'])} ({tcan(ch['can_chuyen'])}), turning {th('Kỵ')} ({ts(ch['sao_chuyen'])}) "
+                      f"into {tc(ch['den_cung'])}")
+        ra.append({
+            "loai": ch["loai"],
+            "phai": ch["phai"],
+            "tieu_de": td,
+            "nghia": ng,
+            "viec_nen_lam": viec,
+            "can_cu": [cu],
+        })
+    return ra
+
+
 def lap(ls: dict, can_nam: str, nam_xem: int | None = None) -> dict:
     """`ls` = hoidap.tuvi.tom_tat(lá số); `can_nam` = can năm sinh (âm lịch dùng để an lá); `nam_xem` = năm âm
     lịch muốn xem tứ hoá lưu niên (tuỳ chọn)."""
@@ -371,12 +422,13 @@ def lap(ls: dict, can_nam: str, nam_xem: int | None = None) -> dict:
         "can_nam_sinh": can_nam,
         "lai_nhan": {"cung": c_lai["ten"] if c_lai else None, "chi": chi_lai,
                      "can": c_lai["can"] if c_lai else ph.ngu_ho_don(can_nam, chi_lai)},
-        "cung": [{"ten": c["ten"], "chi": c["chi"], "can": c["can"], "la_menh": c["ten"] == "Mệnh",
+        "cung": [{"ten": c["ten"], "chi": chi_c if (chi_c := c["chi"]) else "", "can": c["can"], "la_menh": c["ten"] == "Mệnh",
                   "la_lai_nhan": c["chi"] == chi_lai} for c in cung],
         "duong_bay": duong,
         "tu_hoa": [d for d in duong if d["tu_hoa"]],
         "vao_menh": [d for d in duong if d["den_cung"] == "Mệnh"],
         "noi_bat": chon_noi_bat(duong),
+        "chuoi_chuyen_ky": _luan_chuoi_chuyen_ky(cung),
         "luu_nien": None,
         "phai": phai(),
         "luu_y": luu_y(),

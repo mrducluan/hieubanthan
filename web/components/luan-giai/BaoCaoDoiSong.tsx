@@ -24,6 +24,7 @@ import { GiaoThoa } from "./GiaoThoa";
 import { ChuQua } from "./ChuQua";
 import { GocNhinKhac } from "./GocNhinKhac";
 import { BanDoNguoi, CauMau, LuanHoiCuoi, LuanHoiDau } from "./LuanHoi";
+import { CongTacCheDoDoc, KhungUngDungCoDien } from "./CheDoDoc";
 import { useCachChinhBaoCao } from "@/lib/cach-chinh-battu";
 import { ChamMuc, ChuThichMuc, CotChuong, giamChuyenDong, ThanhChuongGon, useChuongDangDoc, type MucChuong } from "./MucLucChuong";
 import { useChuBaoCao } from "./chu-bao-cao";
@@ -161,6 +162,12 @@ export function BaoCaoDoiSongView({ bc, ten, goc = false, hanhDong, phanKhoa, ch
               (trước bị lệch vào ~12px và nằm lơ lửng). Từ sm: về góc phải như cũ. */}
           {hanhDong && <div className="-ml-3 flex w-full flex-wrap gap-1 sm:ml-0 sm:w-auto sm:justify-end sm:gap-2 print:hidden" data-testid="lg-hanh-dong">{hanhDong}</div>}
         </header>
+
+        <div className="mt-4 print:hidden">
+          <CongTacCheDoDoc moDun={bc.mo_dun} />
+        </div>
+
+        <KhungUngDungCoDien u={bc.ung_dung_co_dien} moKhoa={bc.ung_dung_co_dien?.khoa ? moKhoaNgay?.("ung_dung_co_dien") : null} />
 
         {bc.vai_doc === "cha_me" && bc.loi_vai_doc && (
           <p role="note" className="mt-4 rounded-xl border border-gold/30 bg-gold/5 px-4 py-3 text-sm text-fg-muted" data-testid="lg-vai-doc">

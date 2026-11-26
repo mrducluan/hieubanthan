@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { LaSoVao } from "./la-so-vao.ts";
-import { boTinhTrangKhoa, catLuanHoiChat, taoKhoaGiaoDichLuanGiai, xetQuyenDocHoi } from "./sao-xem-truoc.ts";
+import { boTinhTrangKhoa, catLuanHoiChat, catXemTruoc, taoKhoaGiaoDichLuanGiai, xetQuyenDocHoi } from "./sao-xem-truoc.ts";
 
 const GOC_BEN = {
   cau_tra_loi: "Đoạn trả lời chung…",
@@ -97,4 +97,31 @@ test("SAO-2: khoá giao dịch HMAC qua đúng schema LaSoVao thực tế giữa
   const kBaoCao = taoKhoaGiaoDichLuanGiai("secret_key_16_chars_min", "tuvi", boTinhTrangKhoa({ la_so: parsedBaoCao }), "2026-11-26");
   const kHoi = taoKhoaGiaoDichLuanGiai("secret_key_16_chars_min", "tuvi", boTinhTrangKhoa({ la_so: parsedHoi }), "2026-11-26");
   assert.equal(kBaoCao, kHoi);
+});
+
+test("SAO-2 (Chặng 1): catXemTruoc cắt chi tiết ung_dung_co_dien khi chương nguồn còn khoá và mở khi đủ chương", () => {
+  const bcDay = {
+    chuong: [
+      { ma: "tong_quan", tieu_de: "Con người bạn", doan: ["Đoạn 1"] },
+      { ma: "ngu_hanh", tieu_de: "Năng lượng", doan: ["Đoạn 2"] },
+    ],
+    ung_dung_co_dien: {
+      ma: "battu_co_dien",
+      tieu_de: "Ứng dụng Ngũ hành bổ khuyết từ Tứ Trụ",
+      nguyen_tac_uu_tien: "Nguyên tắc…",
+      tom_tat_dung_than: "Cả hai cách cùng cần hành Thủy.",
+      hanh_ung_dung: [{ hanh_ma: "Thủy", ten_hanh: "Thủy", mau_sac: "Xanh lam", chat_lieu: "Kính", phuong_vi: "Bắc", khung_gio: "19:00", thoi_quen: [] }],
+    },
+  };
+  const cat1 = catXemTruoc(bcDay, 1);
+  assert.deepEqual(cat1.ung_dung_co_dien, {
+    khoa: true,
+    ma: "battu_co_dien",
+    tieu_de: "Ứng dụng Ngũ hành bổ khuyết từ Tứ Trụ",
+    nguyen_tac_uu_tien: "Nguyên tắc…",
+  });
+  assert.equal(JSON.stringify(cat1).includes("Xanh lam"), false);
+
+  const cat2 = catXemTruoc(bcDay, 2);
+  assert.deepEqual(cat2.ung_dung_co_dien, bcDay.ung_dung_co_dien);
 });

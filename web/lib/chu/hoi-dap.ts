@@ -57,4 +57,7 @@ export const CHU_HOI_DAP = {
   "lh.khoa_mo_ta": { nhom: K, nhan: "Mô tả khi chương chứa câu trả lời thẳng đang khoá ({chuong})", mac_dinh: "Câu trả lời thẳng cho câu hỏi này (kèm chân dung người liên quan và hướng hoá giải) nằm trong chương “{chuong}” của bài luận toàn bộ.", en: "The direct chart answer for this question (with people profiles and guidance) is in the “{chuong}” chapter of the full report." },
   "lh.khoa_nut": { nhom: K, nhan: "Nút dẫn tới mở khoá chương ({chuong})", mac_dinh: "Mở chương “{chuong}” trong bài luận", en: "Unlock the “{chuong}” chapter in the full report" },
   "lh.ds_mo_chuong": { nhom: K, nhan: "Nút dẫn lên chương đời sống ({chuong})", mac_dinh: "Đọc trọn chương “{chuong}” trong bài luận", en: "Read the full “{chuong}” chapter in your report" },
+  // Chặng 1 — Gỡ nút đời sống & Công tắc 2 Chế độ trong KhungChat.
+  "gn.nhan": { nhom: K, nhan: "Nhãn hộp gỡ nút đời sống", mac_dinh: "Góc nhìn gỡ nút thực tế", en: "Balanced practical perspective" },
+  "gn.viec": { nhom: K, nhan: "Nhãn danh sách việc thực tế", mac_dinh: "Ba bước thực tế nên làm:", en: "Practical next steps:" },
 } as const satisfies BangChu;
