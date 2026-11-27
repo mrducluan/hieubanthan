@@ -3,6 +3,7 @@
 // mức engine chấm (lục / xám / hổ phách — không đỏ, không điểm số); chọn việc → engine chỉ hướng + giờ hợp trong ngày;
 // bấm một khung giờ → xin engine bàn của giờ ấy. Không tên, không ngày sinh; không lưu gì.
 import { useCallback, useEffect, useRef, useState } from "react";
+import { LaBanKyMonSvg } from "@/components/ky-mon/LaBanKyMonSvg";
 import { ghi } from "@/lib/do-luong";
 import { cn } from "@/lib/utils";
 import { LUOI_BAC_TREN, type BanKM, type DanhMucKM, type GioTyKM, type HuongKM, type MucKM, type NgayKM, type PhepKM, type ViecKM } from "@/lib/ky-mon";
@@ -33,6 +34,7 @@ export function BanKyMon({ banDau, ngayDau, viec }: { banDau: BanKM; ngayDau: Ng
   const [chonViec, setChonViec] = useState<ViecKM | null>(null);
   const [chonCung, setChonCung] = useState<number | null>(null);
   const [chuyenSau, setChuyenSau] = useState(false);
+  const [cheDoHinh, setCheDoHinh] = useState<"luoi" | "la_ban">("luoi");
   const [tc, setTc] = useState<TuyChon>({ phep: banDau.tuy_chon.phep, gio_ty: banDau.tuy_chon.gio_ty, utc: banDau.tuy_chon.utc });
   const [dangTai, setDangTai] = useState(false);
   const [loi, setLoi] = useState(false);
@@ -91,42 +93,83 @@ export function BanKyMon({ banDau, ngayDau, viec }: { banDau: BanKM; ngayDau: Ng
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]">
         <div>
-          <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-            <p className="text-sm text-fg-muted" data-testid="km-gio">
-              Giờ <span className="text-fg">{d.gio.chi}</span> ({d.gio.khung}) ngày {docNgay(ngayCua(ban.thoi_diem))} ·{" "}
-              <span className={MAU[d.gio.muc].chu}>{d.gio.muc_nhan}</span>
-            </p>
+          <div className="mb-2.5 flex flex-wrap items-center justify-between gap-2">
+            <div className="inline-flex rounded-full border border-line/80 bg-surface/60 p-0.5 text-xs" data-testid="km-che-do-hinh" role="group" aria-label="Chế độ hiển thị bàn Kỳ Môn">
+              <button
+                type="button"
+                aria-pressed={cheDoHinh === "luoi"}
+                onClick={() => setCheDoHinh("luoi")}
+                className={cn(
+                  "rounded-full px-3 py-1 font-medium transition-colors",
+                  cheDoHinh === "luoi" ? "bg-gold/20 text-gold" : "text-fg-muted hover:text-fg",
+                )}
+              >
+                Bàn 9 cung
+              </button>
+              <button
+                type="button"
+                aria-pressed={cheDoHinh === "la_ban"}
+                onClick={() => {
+                  setCheDoHinh("la_ban");
+                  ghi("chart_interacted", { mo_dun: "kymon", kind: "doi_che_do_hinh", muc: "la_ban" });
+                }}
+                className={cn(
+                  "rounded-full px-3 py-1 font-medium transition-colors",
+                  cheDoHinh === "la_ban" ? "bg-gold/20 text-gold" : "text-fg-muted hover:text-fg",
+                )}
+              >
+                La bàn 8 hướng
+              </button>
+            </div>
             <label className="flex cursor-pointer items-center gap-1.5 text-xs text-fg-muted">
               <input type="checkbox" className="accent-[rgb(var(--gold))]" checked={chuyenSau} onChange={(e) => setChuyenSau(e.target.checked)} />
               Hiện Sao · Thần
             </label>
           </div>
-          <div className="grid grid-cols-3 gap-1.5" role="group" aria-label="La bàn tám hướng của giờ này, Bắc ở trên">
-            {LUOI_BAC_TREN.map((k) => {
-              const h = huong.get(k);
-              if (!h) return (
-                <div key={k} className="flex aspect-square flex-col items-center justify-center rounded-xl border border-line/60 text-center text-xs text-fg-faint">
-                  <span>{ban.ban.am_duong === "duong" ? "Dương" : "Âm"} độn</span><span className="text-base text-fg-muted">{ban.ban.cuc} cục</span>
-                </div>
-              );
-              const chon = dangXem?.cung === k;
-              return (
-                <button key={k} type="button" data-cung={k} data-muc={h.muc} aria-pressed={chon}
-                  onClick={() => { setChonCung(k); ghi("chart_interacted", { mo_dun: "kymon", kind: "chon_huong", muc: h.muc }); }}
-                  className={cn("relative flex aspect-square flex-col items-center justify-center rounded-xl border p-1 text-center transition",
-                    MAU[h.muc].o, chon && "ring-2 ring-gold", d.viec?.cung === k && "outline outline-1 outline-gold/70")}>
-                  <span className="text-[0.7rem] uppercase tracking-wide text-fg-faint">{h.phuong}</span>
-                  <span className="mt-0.5 text-lg leading-tight text-fg">{h.cua.ten}</span>
-                  <span className={cn("mt-0.5 text-[0.7rem] leading-tight", MAU[h.muc].chu)}>{h.muc_nhan}{h.noi_bat ? " ★" : ""}</span>
-                  {chuyenSau && (
-                    <span className="mt-0.5 line-clamp-1 text-[0.62rem] text-fg-faint">
-                      {h.sao.ten.replace("Thiên ", "")} · {h.than.ten}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
+          <p className="mb-2 text-sm text-fg-muted" data-testid="km-gio">
+            Giờ <span className="text-fg">{d.gio.chi}</span> ({d.gio.khung}) ngày {docNgay(ngayCua(ban.thoi_diem))} ·{" "}
+            <span className={MAU[d.gio.muc].chu}>{d.gio.muc_nhan}</span>
+          </p>
+          {cheDoHinh === "luoi" ? (
+            <div className="grid grid-cols-3 gap-1.5" role="group" aria-label="La bàn tám hướng của giờ này, Bắc ở trên">
+              {LUOI_BAC_TREN.map((k) => {
+                const h = huong.get(k);
+                if (!h) return (
+                  <div key={k} className="flex aspect-square flex-col items-center justify-center rounded-xl border border-line/60 text-center text-xs text-fg-faint">
+                    <span>{ban.ban.am_duong === "duong" ? "Dương" : "Âm"} độn</span><span className="text-base text-fg-muted">{ban.ban.cuc} cục</span>
+                  </div>
+                );
+                const chon = dangXem?.cung === k;
+                return (
+                  <button key={k} type="button" data-cung={k} data-muc={h.muc} aria-pressed={chon}
+                    onClick={() => { setChonCung(k); ghi("chart_interacted", { mo_dun: "kymon", kind: "chon_huong", muc: h.muc }); }}
+                    className={cn("relative flex aspect-square flex-col items-center justify-center rounded-xl border p-1 text-center transition",
+                      MAU[h.muc].o, chon && "ring-2 ring-gold", d.viec?.cung === k && "outline outline-1 outline-gold/70")}>
+                    <span className="text-[0.7rem] uppercase tracking-wide text-fg-faint">{h.phuong}</span>
+                    <span className="mt-0.5 text-lg leading-tight text-fg">{h.cua.ten}</span>
+                    <span className={cn("mt-0.5 text-[0.7rem] leading-tight", MAU[h.muc].chu)}>{h.muc_nhan}{h.noi_bat ? " ★" : ""}</span>
+                    {chuyenSau && (
+                      <span className="mt-0.5 line-clamp-1 text-[0.62rem] text-fg-faint">
+                        {h.sao.ten.replace("Thiên ", "")} · {h.than.ten}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          ) : (
+            <LaBanKyMonSvg
+              ban={ban.ban}
+              huongMap={huong}
+              dangXemCung={dangXem?.cung ?? null}
+              viecCung={d.viec?.cung}
+              chuyenSau={chuyenSau}
+              onChonCung={(cung, muc) => {
+                setChonCung(cung);
+                ghi("chart_interacted", { mo_dun: "kymon", kind: "chon_huong", muc });
+              }}
+            />
+          )}
           <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-fg-faint" aria-label="Chú thích màu">
             {(["thuan", "binh", "cham"] as MucKM[]).map((m) => (
               <li key={m} className="flex items-center gap-1.5"><span className={cn("h-2 w-2 rounded-full", MAU[m].cham)} aria-hidden />{m === "thuan" ? "Thuận" : m === "binh" ? "Bình thường" : "Nên chậm"}</li>

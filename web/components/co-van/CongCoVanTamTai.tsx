@@ -5,6 +5,7 @@
 import { useEffect, useState } from "react";
 import { AlertTriangle, ArrowUpRight, CalendarClock, Compass, Layers, ShieldAlert, Sparkles } from "lucide-react";
 import Link from "@/components/khung/Lien";
+import { SoDoTamTaiSvg, SongNhip12ThangSvg, type NhipThangTamTai, type TruTamTai } from "@/components/co-van/SoDoTamTaiSvg";
 import { KiemChung } from "@/components/huyen-hoc/KiemChung";
 import { KhungUngDungCoDien } from "@/components/luan-giai/CheDoDoc";
 import { ViSao } from "@/components/luan-giai/HopNoiBat";
@@ -12,19 +13,6 @@ import type { Muc, UngDungCoDien } from "@/components/luan-giai/kieu";
 import { ghi } from "@/lib/do-luong";
 import { ngaySinhIso, useHoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
-
-interface TruTamTai {
-  ma: "nhan" | "thien" | "dia";
-  ten_tru: string;
-  nguon: string;
-  muc: Muc | null;
-  nhan_muc: string | null;
-  nhan_xet: string;
-  hanh_dong: string;
-  can_cu: string[];
-  lien_ket: { ten: string; duong: string };
-  ma_mau: string;
-}
 
 interface KetQuaTamTai {
   an_toan_chan?: { xu_ly: string; loai: string; cau_tra_loi: string };
@@ -42,7 +30,7 @@ interface KetQuaTamTai {
     co_gio: boolean;
     hanh: { hanh_ma: string; ten: string; diem: number; ty_le: number; trang_thai: "thieu" | "vua" | "thua" }[];
   };
-  nhip_12_thang?: { thang: string; nhip: "day_manh" | "can_bang" | "phong_thu"; nhan_nhip: string; goi_y?: string }[];
+  nhip_12_thang?: NhipThangTamTai[];
   ngay_dep_30_ngay?: { ngay: string; am_lich: string; truc: string; ly_do: string }[];
   doi_tac?: { tieu_de: string; vai_tro: string; hanh_manh: string; loi: string };
   ung_dung_co_dien?: UngDungCoDien;
@@ -90,6 +78,7 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [kq, setKq] = useState<KetQuaTamTai | null>(null);
+  const [chonThangIdx, setChonThangIdx] = useState(0);
 
   useEffect(() => {
     if (!hs) return;
@@ -141,6 +130,7 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
         return;
       }
       setKq(data);
+      setChonThangIdx(0);
       ghi("chart_interacted", {
         mo_dun: "tam_tai", kind: "co_van_xem", ket_qua: data.an_toan_chan ? data.an_toan_chan.xu_ly : data.chuyen_huong?.ly_do ?? data.mach ?? "",
         bac: data.bac_dau_vao ?? 0,
@@ -399,6 +389,12 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
             )}
           </section>
 
+          <SoDoTamTaiSvg
+            tenMach={kq.ten_mach}
+            baTru={kq.ba_tru_tam_tai}
+            onChonTru={(ma) => ghi("chart_interacted", { mo_dun: "tam_tai", kind: "chon_dinh_tam_tai", tru: ma })}
+          />
+
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
             {([kq.ba_tru_tam_tai.nhan, kq.ba_tru_tam_tai.thien, kq.ba_tru_tam_tai.dia] as const).map((tru) => (
               <section key={tru.ma} className="flex flex-col rounded-2xl border border-line/70 bg-surface/40 p-4" data-testid={`co-van-tru-${tru.ma}`}>
@@ -432,13 +428,30 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
           {kq.nhip_12_thang && kq.nhip_12_thang.length > 0 && (
             <section className="rounded-2xl border border-line/70 bg-surface/40 p-4" data-testid="co-van-nhip-12">
               <h3 className="flex items-center gap-2 font-serif text-lg text-fg"><CalendarClock className="size-4 text-gold" aria-hidden /> 12 tháng tới</h3>
+              <SongNhip12ThangSvg
+                danhSach={kq.nhip_12_thang}
+                chonIndex={chonThangIdx}
+                onChonThang={(idx) => {
+                  setChonThangIdx(idx);
+                  ghi("chart_interacted", { mo_dun: "tam_tai", kind: "chon_nhip_thang", thang: kq.nhip_12_thang?.[idx]?.thang ?? "" });
+                }}
+              />
               <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-                {kq.nhip_12_thang.map((th) => (
-                  <div key={th.thang} className="rounded-lg border border-line/60 bg-bg/60 p-2.5 text-xs">
+                {kq.nhip_12_thang.map((th, idx) => (
+                  <button
+                    key={th.thang}
+                    type="button"
+                    onClick={() => setChonThangIdx(idx)}
+                    aria-pressed={chonThangIdx === idx}
+                    className={cn(
+                      "rounded-lg border bg-bg/60 p-2.5 text-left text-xs transition-colors",
+                      chonThangIdx === idx ? "border-gold ring-1 ring-gold/60" : "border-line/60 hover:border-gold/40",
+                    )}
+                  >
                     <p className="font-semibold text-fg">{th.thang}</p>
                     <p className={cn("mt-0.5", th.nhip === "day_manh" ? "text-jade" : th.nhip === "phong_thu" ? "text-amber-300" : "text-gold")}>{th.nhan_nhip}</p>
                     {th.goi_y && <p className="mt-1 leading-snug text-fg-muted">{th.goi_y}</p>}
-                  </div>
+                  </button>
                 ))}
               </div>
               {kq.ngay_dep_30_ngay && kq.ngay_dep_30_ngay.length > 0 && (

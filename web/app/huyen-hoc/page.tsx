@@ -223,6 +223,36 @@ export default async function HuyenHoc() {
         </div>
       </section>
 
+      {/* CHANG-5: Lối vào trực quan cho Bản đồ sao Đông–Tây (/chiem-tinh) và Cố vấn Tam Tài & Kinh doanh (/co-van, /co-van-kinh-doanh). */}
+      <section aria-label="Bản đồ sao Đông–Tây và Cố vấn Tam Tài" data-testid="khoi-dong-tay-co-van" className="grid gap-4 lg:grid-cols-2">
+        <article className="glass group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-gold/35 bg-gradient-to-br from-gold/[0.07] via-surface/70 to-bg/50 p-6">
+          <div>
+            <p className="eyebrow text-gold">Đông – Tây đối chiếu · Không quy đổi</p>
+            <h2 className="mt-2 font-serif text-2xl text-fg sm:text-[1.7rem]">Chiêm tinh &amp; Cầu nối Đông – Tây</h2>
+            <p className="mt-2 text-sm leading-relaxed text-fg-muted">
+              Vòng tròn 12 Cung Hoàng đạo, Vòng đôi Vận hạn (Bi-Wheel Transit), Ma trận góc chiếu 13×13, Phẩm giá cổ điển Ptolemy và Lá số Điểm giữa (Composite) đặt cạnh Bát tự – Tử vi.
+            </p>
+          </div>
+          <div className="mt-5 flex flex-wrap items-center gap-3">
+            <Button asChild><Link href="/chiem-tinh">Lập bản đồ sao <ArrowRight aria-hidden /></Link></Button>
+            <Link href="/sinh-o-nuoc-ngoai" className="text-xs text-fg-muted underline-offset-4 hover:text-gold hover:underline">Hỗ trợ 33.000+ thành phố quốc tế</Link>
+          </div>
+        </article>
+        <article className="glass group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-jade/35 bg-gradient-to-br from-jade/[0.07] via-surface/70 to-bg/50 p-6">
+          <div>
+            <p className="eyebrow text-jade">Ba góc nhìn đọc riêng · Không gộp điểm</p>
+            <h2 className="mt-2 font-serif text-2xl text-fg sm:text-[1.7rem]">Cố vấn Tam Tài &amp; Kinh doanh</h2>
+            <p className="mt-2 text-sm leading-relaxed text-fg-muted">
+              Đặt một quyết định lớn trước Sơ đồ Tam Tài trực giao (Nhân · Bát tự, Thiên · Tử vi, Địa · Phong thuỷ), kèm Sự vụ tức thời (Kỳ Môn &amp; Lục Hào) và Sổ nháp góp vốn mã hoá trên máy.
+            </p>
+          </div>
+          <div className="mt-5 flex flex-wrap items-center gap-3">
+            <Button asChild><Link href="/co-van">Hỏi việc đời sống <ArrowRight aria-hidden /></Link></Button>
+            <Button asChild variant="secondary"><Link href="/co-van-kinh-doanh">Cố vấn kinh doanh</Link></Button>
+          </div>
+        </article>
+      </section>
+
       {/* RS-2: lối vào hai trang trả phí trước đây chỉ tới được từ Nạp Sao / Tài khoản. Hỏi chuyên gia chỉ hiện khi đang mở. */}
       <section aria-label={c("sau_hon.nho")} data-testid="khoi-sau-hon">
         <p className="eyebrow">{c("sau_hon.nho")}</p>

@@ -671,6 +671,39 @@ export const SO_TRANG_EN: Readonly<Record<string, TrangCongCuEn>> = {
       ] },
     },
   },
+  "/chiem-tinh": {
+    ten: "Western Astrology",
+    tieu_de_seo: "Free Western birth chart & East-West bridge · Hieuban",
+    mo_ta_seo: "Free birth chart from your date, time and place of birth: 12 signs, houses, live transits, composite chart and side-by-side bridge to BaZi & Zi Wei.",
+    tra_loi_nhanh: {
+      hoi: "What does this Western birth chart calculator show?",
+      dap: "Enter your birth date and birthplace (with optional birth time) to map the Sun, Moon, Ascendant, 12 houses, Ptolemaic essential dignities, full aspect grid and live transits using deterministic NASA JPL DE441 ephemeris math. It also places your Western chart side by side with BaZi and Zi Wei Dou Shu without equating systems or scoring compatibility.",
+      lien_ket: [{ href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" }, { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" }],
+    },
+    gioi_thieu: {
+      tieu_de: "About the Western birth chart & East-West bridge",
+      doan: [
+        "Western natal astrology maps the ecliptic longitudes of the Sun, Moon, planets and lunar nodes at the moment you were born. Each body represents an everyday human function — core direction, emotional comfort, speech, affection, drive, boundaries — while its zodiac sign and house describe how and where that tendency shows up.",
+        "With an exact birth time and city, the page computes your Ascendant, Midheaven and twelve houses (Whole Sign or Placidus, automatically falling back to Whole Sign at high latitudes), along with Ptolemaic essential dignities, a 13x13 aspect matrix, a live transit bi-wheel, and a relationship Synastry & Composite midpoint view.",
+        "Unlike tools that merge everything into a synthetic percentage, our East-West bridge sets your Western placements right beside your BaZi Day Master and Zi Wei Life Palace so you can compare two independent traditions on your own terms.",
+      ],
+      hoi_dap_tieu_de: "Questions people ask",
+      hoi_dap: [
+        { hoi: "Can I read my chart if I do not know my exact birth time?", dap: "Yes. Without a birth time the page omits the Ascendant and houses rather than guessing them, and calculates the Moon's full 24-hour range on your birth date so you know if the Moon changed signs that day." },
+        { hoi: "What ephemeris does the calculator use?", dap: "Positions from 1926 to 2049 are computed deterministically from US Government public-domain NASA JPL Horizons DE441 tables combined with analytical solar and lunar series, with historical local time zones." },
+        { hoi: "What is the difference between Whole Sign and Placidus houses?", dap: "Whole Sign places the entire zodiac sign of the Ascendant as the 1st house and each following sign as one full house; Placidus divides diurnal and nocturnal semi-arcs by time. You can switch between both in one click." },
+        { hoi: "Why does the East-West bridge not equate the Five Elements with the four Western elements?", dap: "Chinese Wood, Fire, Earth, Metal and Water describe relational phases of qi, whereas Western Fire, Earth, Air and Water group temperaments by heat and moisture. Keeping both side by side respects each tradition." },
+        { hoi: "How do Synastry and the Composite chart differ?", dap: "Synastry compares how one person's planets aspect the other's; a Composite chart computes the shortest-arc midpoint between each pair of planets to describe the shared rhythm of the partnership itself. Neither assigns a score, and explicit consent is required." },
+        { hoi: "Is my birth data stored?", dap: "No. Your profile stays in your own browser unless you explicitly save an account profile; partner birth dates in Synastry are processed in memory and never stored." },
+      ],
+      doc_them: { tieu_de: "Also in English:", lien_ket: [
+        { href: "/en/bazi", ten: "BaZi (Four Pillars) calculator" },
+        { href: "/en/zi-wei-dou-shu", ten: "Zi Wei Dou Shu chart" },
+        { href: "/en/numerology", ten: "Numerology reading" },
+        { href: "/en/tarot", ten: "Tarot spread" },
+      ] },
+    },
+  },
 };
 
 export const trangCongCuEn = (duongVi: string): TrangCongCuEn | null => SO_TRANG_EN[duongVi] ?? null;

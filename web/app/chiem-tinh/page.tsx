@@ -1,6 +1,6 @@
-// Chiêm tinh phương Tây — bản đồ sao ngày sinh (cung Mặt Trời, Mặt Trăng, Cung Mọc, 12 nhà, góc chiếu, chu kỳ Thổ tinh)
-// đặt cạnh Bát tự và Tử vi, không quy đổi, không chấm điểm (CD-1). Engine tính, trang chỉ hiển thị. Câu trả lời nhanh và hỏi
-// đáp dựng ở máy chủ (Google, bot AI đọc được không cần JS). Chữ đầu trang sửa được ở CMS "Trang website" (sổ trang).
+// Chiêm tinh phương Tây — bản đồ sao ngày sinh (cung Mặt Trời, Mặt Trăng, Cung Mọc, 12 nhà, góc chiếu, Bi-Wheel Vận hạn,
+// Lá số Điểm giữa Composite) đặt cạnh Bát tự và Tử vi, không quy đổi, không chấm điểm (CD-1).
+// EN-ALL: /en/astrology là rewrite của trang này (proxy `x-ngon-ngu: en`) — metadata & nội dung máy chủ từ lib/so-trang-en.ts.
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -11,9 +11,13 @@ import { HoiDapHien, TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { KhungChiemTinh } from "@/components/chiem-tinh/KhungChiemTinh";
 import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
 import { duongDanCongCu } from "@/lib/duong-dan";
-import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { apDungSeo, kemHreflang, layNoiDungTrang } from "@/lib/noi-dung-trang";
+import { ngonNguMayChu } from "@/lib/ngon-ngu-may-chu";
+import { ldDuongDanEn, metaCongCuEn } from "@/lib/en/seo";
+import { trangCongCuEn } from "@/lib/so-trang-en";
 
 const DUONG = "/chiem-tinh";
+const DUONG_EN = "/en/astrology";
 const MAC = {
   tieuDe: "Chiêm tinh online: lập bản đồ sao cá nhân miễn phí",
   h1: "Chiêm tinh: bản đồ sao ngày sinh của bạn nói gì?",
@@ -32,14 +36,97 @@ const HOI_DAP = [
   { hoi: "Cung Mặt Trời khác cung Mọc thế nào?", dap: "Cung Mặt Trời (cung bạn hay đọc trên báo) tính theo ngày sinh và nói về điều bạn hướng tới. Cung Mọc tính theo giờ và nơi sinh, nói về dáng vẻ và cách bạn bước vào chỗ mới. Hai người cùng ngày sinh nhưng khác giờ có thể khác Cung Mọc." },
   { hoi: "Vì sao không quy đổi sang ngũ hành hay chấm điểm?", dap: "Chiêm tinh phương Tây và Bát tự, Tử vi là các hệ khác nhau: ngũ hành không phải bốn nguyên tố lửa, đất, khí, nước. Trang đặt hai bên cạnh nhau để bạn tự so, không cộng thành một con số." },
   { hoi: "Thổ tinh hồi quy (Saturn Return) là gì?", dap: "Thổ tinh đi hết một vòng hoàng đạo khoảng 29,5 năm. Quanh tuổi 28–30 và 57–60, nó quay lại đúng chỗ lúc bạn sinh — chiêm tinh coi đó là lúc rà lại cam kết và trách nhiệm. Đây là một nhịp để tự nhìn lại, không phải điều đã định." },
-  { hoi: "Xem hợp đôi bằng bản đồ sao có cần gì?", dap: "Cần ngày sinh của người kia và người ấy phải đồng ý chia sẻ. Trang chỉ chỉ ra chỗ hai người dễ đồng điệu và chỗ cần thoả thuận, không chấm điểm hợp – khắc, không lưu ngày sinh." },
+  { hoi: "Xem hợp đôi bằng bản đồ sao có cần gì?", dap: "Cần ngày sinh của người kia và người ấy phải đồng ý chia sẻ. Trang hiển thị cả vòng góc chiếu chéo (Synastry) lẫn Bản đồ điểm giữa (Composite) để chỉ ra chỗ hai người dễ đồng điệu và chỗ cần thoả thuận, không chấm điểm hợp – khắc, không lưu ngày sinh." },
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
-  return apDungSeo(metaTrang({ tieuDe: MAC.tieuDe, moTa: MAC.moTa, duong: DUONG }), await layNoiDungTrang(DUONG));
+  if ((await ngonNguMayChu()).ngonNgu === "en") return metaCongCuEn(DUONG);
+  return apDungSeo(kemHreflang(metaTrang({ tieuDe: MAC.tieuDe, moTa: MAC.moTa, duong: DUONG }), DUONG), await layNoiDungTrang(DUONG));
 }
 
 export default async function ChiemTinhPage() {
+  const { ngonNgu } = await ngonNguMayChu();
+  if (ngonNgu === "en") {
+    const t = trangCongCuEn(DUONG)!;
+    const h1En = "Western birth chart & East-West bridge";
+    return (
+      <div className="mx-auto max-w-5xl">
+        <JsonLd data={goiLd(
+          {
+            "@type": "WebPage",
+            "@id": `${urlDayDu(DUONG_EN)}#trang`,
+            url: urlDayDu(DUONG_EN),
+            name: h1En,
+            description: t.mo_ta_seo,
+            inLanguage: "en",
+            isPartOf: { "@id": `${siteUrl()}/#website` },
+            mainEntity: { "@id": `${urlDayDu(DUONG_EN)}#ung-dung` },
+          },
+          {
+            "@type": "WebApplication",
+            "@id": `${urlDayDu(DUONG_EN)}#ung-dung`,
+            name: h1En,
+            url: urlDayDu(DUONG_EN),
+            description: t.mo_ta_seo,
+            applicationCategory: "LifestyleApplication",
+            operatingSystem: "Web",
+            inLanguage: "en",
+            isAccessibleForFree: true,
+            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+            publisher: { "@id": `${siteUrl()}/#to-chuc` },
+          },
+          ldDuongDanEn([{ ten: t.ten, duong: DUONG_EN }]),
+          ldHoiDap(t.gioi_thieu.hoi_dap),
+        )} />
+        <nav aria-label="Breadcrumb" className="mb-2 text-xs text-fg-faint">
+          <Link href="/en" className="hover:text-gold">Hieuban</Link> <span aria-hidden>›</span>{" "}
+          <span className="text-fg-muted">{t.ten}</span>
+        </nav>
+        <TieuDeMuc
+          cap={1}
+          nho="Metaphysics · Natal, Transit & Composite Chart"
+          lon={h1En}
+          mo_ta="Enter your birth date and city to map the Sun, Moon, planets, Ptolemaic dignities, 13x13 aspect grid and live transits — placed side by side with BaZi and Zi Wei Dou Shu, with zero score-averaging."
+        />
+        <div className="mb-8">
+          <section className="glass rounded-2xl p-5 text-sm leading-relaxed text-fg-muted" aria-label="Quick answer">
+            <h2 className="font-serif text-base font-medium text-fg">{t.tra_loi_nhanh.hoi}</h2>
+            <p className="mt-1.5">{t.tra_loi_nhanh.dap}</p>
+          </section>
+        </div>
+        <KhungChiemTinh />
+        <section className="mt-12 space-y-3 text-sm leading-relaxed text-fg-muted" aria-labelledby="about-astrology">
+          <h2 id="about-astrology" className="font-serif text-2xl text-fg">{t.gioi_thieu.tieu_de}</h2>
+          {t.gioi_thieu.doan.map((d, i) => <p key={i}>{d}</p>)}
+        </section>
+        <section className="mt-10" aria-labelledby="faq-astrology">
+          <h2 id="faq-astrology" className="font-serif text-2xl text-fg">{t.gioi_thieu.hoi_dap_tieu_de}</h2>
+          <div className="mt-4 divide-y divide-line/50 rounded-2xl border border-line/60">
+            {t.gioi_thieu.hoi_dap.map((h, i) => (
+              <details key={i} className="group px-5" open={i === 0}>
+                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 py-4 font-medium text-fg">
+                  <h3 className="text-base">{h.hoi}</h3>
+                </summary>
+                <p className="pb-4 text-sm leading-relaxed text-fg-muted">{h.dap}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+        {t.gioi_thieu.doc_them && (
+          <p className="mt-10 text-sm text-fg-muted">
+            {t.gioi_thieu.doc_them.tieu_de}{" "}
+            {t.gioi_thieu.doc_them.lien_ket.map((l, idx) => (
+              <span key={l.href}>
+                {idx > 0 ? " · " : ""}
+                <Link href={l.href} className="text-gold underline">{l.ten}</Link>
+              </span>
+            ))}
+          </p>
+        )}
+      </div>
+    );
+  }
+
   const nd = await layNoiDungTrang(DUONG);
   const h1 = nd.dau.h1 ?? MAC.h1;
   const dd = duongDanCongCu(DUONG, "Chiêm tinh");
@@ -74,6 +161,7 @@ export default async function ChiemTinhPage() {
       <p className="mt-10 text-sm text-fg-muted">
         Đọc thêm: <Link href="/bat-tu" className="text-gold underline">Xem Bát tự</Link> ·{" "}
         <Link href="/tu-vi" className="text-gold underline">Xem Tử vi</Link> ·{" "}
+        <Link href="/co-van" className="text-gold underline">Cố vấn Tam Tài</Link> ·{" "}
         <Link href="/huyen-hoc" className="text-gold underline">Huyền học</Link>
       </p>
       <KhoiCms ds={nd.khoi.cuoi} duong={DUONG} viTri="cuoi" className="mt-10" />

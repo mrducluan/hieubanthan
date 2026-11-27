@@ -12,8 +12,9 @@ export const metadata: Metadata = metaEn({
 });
 
 const MANG = [
-  { href: "/en/numerology", ten: "Numerology", mo_ta: "Four core numbers from your name and date of birth, a four-sided portrait with strengths and blind spots you tick yourself, your personal year and month, and a question box.", nut: "Get my numbers" },
-  { href: "/en/tarot", ten: "Tarot", mo_ta: "Type a question, shuffle, draw your own cards and flip them. The reading opens with the answer to your question — leaning yes, with a condition or not yet — then each position, how the cards flow and what to do in 72 hours.", nut: "Draw a spread" },
+  { href: "/en/numerology", testId: "vao-numerology", ten: "Numerology", mo_ta: "Four core numbers from your name and date of birth, a four-sided portrait with strengths and blind spots you tick yourself, your personal year and month, and a question box.", nut: "Get my numbers" },
+  { href: "/en/tarot", testId: "vao-tarot", ten: "Tarot", mo_ta: "Type a question, shuffle, draw your own cards and flip them. The reading opens with the answer to your question — leaning yes, with a condition or not yet — then each position, how the cards flow and what to do in 72 hours.", nut: "Draw a spread" },
+  { href: "/en/astrology", testId: "vao-astrology", ten: "Western Astrology", mo_ta: "Your 12-sign birth chart wheel, Ptolemaic dignities, 13x13 aspect matrix, live transit bi-wheel, composite chart, and a side-by-side bridge to BaZi and Zi Wei Dou Shu.", nut: "Open birth chart" },
 ];
 
 export default function Page() {
@@ -30,12 +31,12 @@ export default function Page() {
         <h1 className="mt-2 font-serif text-4xl sm:text-5xl">Know yourself through numbers and cards — without being told your future.</h1>
         <p className="mt-4 text-lg text-fg-muted">Every reading here is built from sourced books and shows its reasoning. You decide what rings true. Nothing is a prediction, and nothing replaces a doctor, a lawyer or your own judgement.</p>
       </header>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {MANG.map((m) => (
-          <section key={m.href} className="glass rounded-2xl p-6">
+          <section key={m.href} className="glass flex flex-col rounded-2xl p-6">
             <h2 className="text-2xl">{m.ten}</h2>
-            <p className="mt-2 text-fg-muted">{m.mo_ta}</p>
-            <Lien href={m.href} className="mt-4 inline-flex rounded-full bg-gold px-5 py-2 text-sm font-medium text-bg hover:opacity-90" data-testid={`vao-${m.ten.toLowerCase()}`}>{m.nut}</Lien>
+            <p className="mt-2 flex-1 text-fg-muted">{m.mo_ta}</p>
+            <Lien href={m.href} className="mt-4 inline-flex w-fit rounded-full bg-gold px-5 py-2 text-sm font-medium text-bg hover:opacity-90" data-testid={m.testId}>{m.nut}</Lien>
           </section>
         ))}
       </div>
