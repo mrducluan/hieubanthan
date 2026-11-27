@@ -20,6 +20,7 @@
 | Kanseki Repository (kanripo) | Bản số hoá Tứ khố toàn thư: *Tam Mệnh Thông Hội*, *Hiệp Kỷ Biện Phương Thư* — đọc nguyên văn để đối chiếu (`docs/QUYET-DINH-EN5-EN6.md`) | Cổ thư công cộng; chỉ trích ngắn quy tắc, không chép bản số hoá vào repo |
 | horosa-skill (Horace-Maxwell) | Chỉ đọc danh mục kỹ thuật để đánh giá thiếu hụt (`docs/DANH-GIA-ENGINE-HUYEN-HOC.md`) | **AGPL — KHÔNG chép mã/dữ liệu** |
 | VSOP87 rút gọn | Tiết khí cho Bát tự (sai ≤ 0,63 phút) | Mô hình thiên văn công bố, tự cài đặt |
+| NASA JPL Horizons DE441 & Meeus ELP2000-82 | Lịch hành tinh, Mặt Trăng, Nút thực & Chiron cho Chiêm tinh phương Tây (`calc/data/jpl_de441_ephem.json` + `calc/chiem_tinh_lich.py`, sai ≤ 0,25 phút cung 1925–2050) | Dữ liệu thiên văn chính phủ Hoa Kỳ thuộc phạm vi công cộng (17 U.S.C. § 105) + công thức Jean Meeus tự cài đặt (không dùng `pyswisseph` AGPL) |
 | TuViMCP (© 2026 Manh Ha Nguyen) | Danh mục cách cục Tử vi để đối chiếu | MIT |
 | opencode-tianji 0.6.0 | Bản số hoá nguyên văn Chu Dịch (quái từ, hào từ) | MIT |
 | anko-ki-maya (Mahesh Koria) | Khung mục chân dung thần số (không chép nội dung) | MIT |
