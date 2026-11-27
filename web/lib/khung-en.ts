@@ -30,6 +30,7 @@ export const TEN_MENU_EN: Readonly<Record<string, { ten: string; mo_ta?: string 
   "/nhan-tuong": { ten: "Face reading", mo_ta: "A guided look in the mirror, eight-chapter reading, no photo needed" },
   "/tarot": { ten: "Tarot", mo_ta: "Shuffle, draw, seven spreads, 78 sourced cards" },
   "/ky-mon": { ten: "Qi Men Dun Jia", mo_ta: "Which direction favours this hour, and for what" },
+  "/chiem-tinh": { ten: "Western astrology", mo_ta: "Birth chart: Sun, Moon and Rising signs, synastry" },
   "/xem-tuoi-lam-nha": { ten: "Building and wedding years", mo_ta: "Vietnamese customs: Kim Lau, Hoang Oc, Tam Tai" },
   "/tu-vi/sao-o-cung": { ten: "Stars in each palace", mo_ta: "14 main stars across 12 palaces" },
   "/bat-tu/menh-theo-nam": { ten: "Element by birth year", mo_ta: "Stem and branch, Na Yin, colours, 1950–2027" },
