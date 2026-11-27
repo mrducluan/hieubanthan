@@ -9,6 +9,8 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     // MENU-TS (chủ dự án 2026-11-22): "Thần số học" chuyển sang Huyền học (URL /than-so giữ nguyên).
     { href: "/hom-nay", ten: "Hôm nay của bạn", mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
     { href: "/xem-ngay-tot", ten: "Xem ngày tốt", mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
+    // CV-3 (2026-11-27): Cố vấn quyết định có lối vào menu — hỏi bằng lời thường ("có nên mở shop năm sau?"), không cần biết môn nào.
+    { href: "/co-van", ten: "Hỏi một quyết định", mo_ta: "Mở shop, mua nhà, nghỉ việc: tháng nào hợp, cần chuẩn bị gì" },
     // GD-MENU (chủ dự án duyệt 2026-11-16): hồ sơ gia đình "Nhà Tôi" thuộc cụm Bản thân (không cần tài khoản, tab đầu ở điện thoại).
     { href: "/gia-dinh", ten: "Nhà Tôi", mo_ta: "Năm nay cả nhà cần để ý gì, tuổi ai hợp ai" },
   ] },
@@ -17,6 +19,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/tu-vi#hop-tham", ten: "Xem lá số 2 người", mo_ta: "Điểm hợp – khắc theo Tử vi, cách dung hoà" },
     { href: "/hop-doi/cap-so", ten: "Số chủ đạo hợp nhau", mo_ta: "45 cặp số, hợp ở đâu, vấp ở đâu" },
     { href: "/quan-ly-nhan-su", ten: "Quản lý nhân sự (Chủ DN)", mo_ta: "5 hành của đội, cách phối hợp từng người, kế hoạch 30 ngày" },
+    { href: "/co-van-kinh-doanh", ten: "Cố vấn kinh doanh", mo_ta: "Mở quán, góp vốn, chọn mặt bằng: hỏi quyết định, soạn nháp đối tác" },
   ] },
   { href: "/huyen-hoc", ten: "Huyền học", bieu_tuong: "la_ban", di_dong: true, con: [
     // MENU-TS (chủ dự án 2026-11-22): Thần số học đứng đầu menu Huyền học (cửa vào như hub /huyen-hoc, breadcrumb TM-1

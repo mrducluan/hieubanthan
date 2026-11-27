@@ -28,6 +28,8 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     // MENU-TS: Thần số học chuyển sang Huyền học (migration menu_ts_huyen_hoc).
     { ...lk("/hom-nay", "Hôm nay của bạn"), mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
     { ...lk("/xem-ngay-tot", "Xem ngày tốt"), mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
+    // CV-3: Cố vấn quyết định (migration cv_3_menu_co_van_chiem_tinh).
+    { ...lk("/co-van", "Hỏi một quyết định"), mo_ta: "Mở shop, mua nhà, nghỉ việc: tháng nào hợp, cần chuẩn bị gì" },
     // GD-MENU: hồ sơ gia đình "Nhà Tôi" thuộc cụm Bản thân (migration gd_menu_nha_toi).
     { ...lk("/gia-dinh", "Nhà Tôi"), mo_ta: "Năm nay cả nhà cần để ý gì, tuổi ai hợp ai" },
   ] },
@@ -36,6 +38,7 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     { ...lk("/tu-vi#hop-tham", "Xem lá số 2 người"), mo_ta: "Điểm hợp – khắc theo Tử vi, cách dung hoà" },
     { ...lk("/hop-doi/cap-so", "Số chủ đạo hợp nhau"), mo_ta: "45 cặp số, hợp ở đâu, vấp ở đâu" },
     { ...lk("/quan-ly-nhan-su", "Quản lý nhân sự (Chủ DN)"), mo_ta: "5 hành của đội, cách phối hợp từng người, kế hoạch 30 ngày" },
+    { ...lk("/co-van-kinh-doanh", "Cố vấn kinh doanh"), mo_ta: "Mở quán, góp vốn, chọn mặt bằng: hỏi quyết định, soạn nháp đối tác" },
   ] },
   { ...lk("/huyen-hoc", "Huyền học"), bieu_tuong: "la_ban", di_dong: true, con: [
     // MENU-TS: Thần số học đứng đầu; "Tuổi làm nhà, cưới hỏi" nhường chỗ (migration menu_ts_huyen_hoc).

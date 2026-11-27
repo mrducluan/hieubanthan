@@ -13,6 +13,7 @@ import type { KhoiTrucQuan } from "@/components/hoi/TrucQuan";
 import type { Muc } from "@/components/luan-giai/kieu";
 import { CongTacCheDoDoc } from "@/components/luan-giai/CheDoDoc";
 import { CauTraLoi } from "@/components/hoi/CauTraLoi";
+import { GoiYCoVan } from "@/components/hoi/GoiYCoVan";
 import { useMaCuaToi } from "@/lib/sao";
 import { useNguoiDung } from "@/lib/tai-khoan";
 import { useChuHoiDap } from "@/components/luan-giai/chu-bao-cao";
@@ -153,6 +154,8 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO: nhanOVao, goiY
   const nguoi = useNguoiDung();
   const maMoi = useMaCuaToi(Boolean(nguoi) && tin.length > 0);
   /** Câu hỏi đứng ngay trước câu trả lời `id`. */
+  /** Câu trả lời MỚI NHẤT (chỉ đó mới có gợi ý sang Cố vấn). */
+  const idTraLoiCuoi = [...tin].reverse().find((x) => x.ai !== "ban")?.id;
   const cauTruoc = (id: number) => [...tin].reverse().find((x) => x.ai === "ban" && x.id < id)?.van;
   const vung = useRef<HTMLDivElement>(null);
   const oNhap = useRef<HTMLTextAreaElement>(null);
@@ -290,6 +293,7 @@ export function KhungChat({ loiChao, goiY, gui, dieuKhien, nhanO: nhanOVao, goiY
             ) : (
               <motion.div key={t.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="-mt-2" data-testid="cau-tra-loi">
                 <CauTraLoi t={t} cauHoi={cauTruoc(t.id)} moDun={moDun} dang={dang} daHoi={daHoi.map((h) => h.van ?? "")} hoi={(c) => void hoi(c)} maMoi={maMoi} />
+                {!hd.en && t.id === idTraLoiCuoi && !t.loi && cauTruoc(t.id) && <GoiYCoVan cau={cauTruoc(t.id)!} moDun={moDun} />}
               </motion.div>
             ),
           )}

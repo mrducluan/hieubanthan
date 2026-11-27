@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function CoVanKinhDoanhPage() {
   return (
     <div className="mx-auto max-w-5xl">
-      <DuongDan ds={[{ ten: "Trang chủ", duong: "/" }, { ten: "Cố vấn Tam Tài", duong: "/co-van" }, { ten: "Không gian Kinh doanh", duong: "/co-van-kinh-doanh" }]} />
+      <DuongDan ds={[{ ten: "Trang chủ", duong: "/" }, { ten: "Hỏi một quyết định", duong: "/co-van" }, { ten: "Không gian Kinh doanh", duong: "/co-van-kinh-doanh" }]} />
       <TieuDeMuc
         cap={1}
         nho="Chủ cơ sở & người định góp vốn"

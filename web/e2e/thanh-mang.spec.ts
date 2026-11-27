@@ -120,6 +120,12 @@ test("menu Huyền học: 3 cụm kiến thức lớn thay 3 công cụ đã có
   for (const d of ["/tarot", "/tarot/la-bai/thap", "/kinh-dich/que/can", "/kien-thuc", "/chiem-tinh", "/bat-tu/menh-theo-nam/sinh-nam-1990-menh-gi"]) expect(dangOMuc(d, huyenHoc), d).toBe(true);
   // MENU-TS (2026-11-22): Thần số học đứng đầu Huyền học, rời Bản thân; Tuổi làm nhà rời menu nhưng vẫn sáng mục cha.
   expect(hh[0]).toBe("/than-so");
+  // CV-3 (2026-11-27): Chiêm tinh vào menu Huyền học ngay sau Kỳ Môn; "Dấu hiệu trong nhà" nhường chỗ nhưng vẫn sáng mục cha
+  // (đường /phong-thuy/dau-hieu thuộc menu con /phong-thuy). Cố vấn quyết định ở Bản thân, Cố vấn kinh doanh ở Hợp đôi.
+  expect(hh[hh.indexOf("/ky-mon") + 1]).toBe("/chiem-tinh");
+  expect(dangOMuc("/phong-thuy/dau-hieu/cot-dien", MENU_DAU_TRANG.find((m) => m.href === "/huyen-hoc")!)).toBe(true);
+  expect(MENU_DAU_TRANG.find((m) => m.href === "/ban-than")!.con.map((c) => c.href)).toContain("/co-van");
+  expect(MENU_DAU_TRANG.find((m) => m.href === "/hop-doi")!.con.map((c) => c.href)).toContain("/co-van-kinh-doanh");
   expect(hh).not.toContain("/xem-tuoi-lam-nha");
   const banThan = MENU_DAU_TRANG.find((m) => m.href === "/ban-than")!;
   expect(banThan.con.map((c) => c.href)).not.toContain("/than-so");

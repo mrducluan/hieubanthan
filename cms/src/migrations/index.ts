@@ -36,6 +36,7 @@ import * as migration_20261118_120000_km_3_chan_trang from './20261118_120000_km
 import * as migration_20261120_120000_rs_2_chan_trang_goi_xem from './20261120_120000_rs_2_chan_trang_goi_xem';
 import * as migration_20261121_005103_ry_1_rankyak from './20261121_005103_ry_1_rankyak';
 import * as migration_20261122_090000_menu_ts_huyen_hoc from './20261122_090000_menu_ts_huyen_hoc';
+import * as migration_20261127_120000_cv_3_menu_co_van_chiem_tinh from './20261127_120000_cv_3_menu_co_van_chiem_tinh';
 import * as migration_20261122_100000_chan_trang_cum_tu_khoa from './20261122_100000_chan_trang_cum_tu_khoa';
 import * as migration_20261125_090000_hd_th_tinh_huong from './20261125_090000_hd_th_tinh_huong';
 import * as migration_20261125_120000_qlns_1_quan_ly_nhan_su from './20261125_120000_qlns_1_quan_ly_nhan_su';
@@ -251,5 +252,10 @@ export const migrations = [
     up: migration_20261127_090000_chiem_tinh_menu_chan_trang.up,
     down: migration_20261127_090000_chiem_tinh_menu_chan_trang.down,
     name: '20261127_090000_chiem_tinh_menu_chan_trang'
+  },
+  {
+    up: migration_20261127_120000_cv_3_menu_co_van_chiem_tinh.up,
+    down: migration_20261127_120000_cv_3_menu_co_van_chiem_tinh.down,
+    name: '20261127_120000_cv_3_menu_co_van_chiem_tinh'
   },
 ];
