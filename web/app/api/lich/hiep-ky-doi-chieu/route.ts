@@ -6,7 +6,7 @@ import { dauNguoiGoi, goiEngineDaKiem, laBanAnh, loiChung } from "@/lib/proxy";
 const Input = z.object({
   tu_ngay: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable().optional(),
   so_ngay: z.number().int().min(1).max(30).default(7),
-  huong_tu_tao: z.enum(["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"]).nullable().optional(),
+  huong_tu_tao: z.enum(["bac", "dong_bac", "dong", "dong_nam", "nam", "tay_nam", "tay", "tay_bac"]).nullable().optional(),   // mã hướng
 }).strict();
 
 export const maxDuration = 20;

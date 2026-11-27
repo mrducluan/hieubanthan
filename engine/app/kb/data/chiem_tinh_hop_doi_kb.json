@@ -1,6 +1,8 @@
 {
   "_nguon": "Chặng 4.2 — Đối chiếu Tương tác 2 Bản đồ sao (Synastry, không chấm điểm CD-1).",
   "_trang_thai": "nhap_ai_cho_duyet",
+  "source_id": "bien_tap_chiem_tinh_2026",
+  "school_id": "chiem_tinh_tay",
   "ranh_gioi": {
     "dong_y": "Chỉ đối chiếu khi người liên quan đã tự nguyện đồng ý chia sẻ thông tin ngày sinh; ngày sinh của họ không lưu lại trên máy chủ.",
     "khong_cham_diem": "Chiêm tinh tương tác không chấm điểm phần trăm tương hợp mà chỉ ra chỗ hai người dễ đồng điệu và chỗ cần thoả thuận cách lắng nghe."
@@ -8,23 +10,33 @@
   "chieu_tuong_tac": {
     "mat_troi_mat_trang": {
       "ten": "Nhịp sinh hoạt & Cảm thông nền tảng (Mặt Trời – Mặt Trăng)",
-      "goi_y": "Tôn trọng nhịp nghỉ ngơi và cách nạp lại tinh thần khác nhau của mỗi người sau giờ làm việc."
+      "goi_y": "Tôn trọng nhịp nghỉ ngơi và cách nạp lại tinh thần khác nhau của mỗi người sau giờ làm việc.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "kim_tinh_hoa_tinh": {
       "ten": "Sự thu hút & Cách bày tỏ thiện chí (Kim tinh – Hoả tinh)",
-      "goi_y": "Nói rõ ngôn ngữ quan tâm mà mỗi bên trân trọng thay vì ngầm đoán ý nhau."
+      "goi_y": "Nói rõ ngôn ngữ quan tâm mà mỗi bên trân trọng thay vì ngầm đoán ý nhau.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "thuy_tinh_giao_tiep": {
       "ten": "Cách trao đổi & Giải quyết việc chung (Thuỷ tinh)",
-      "goi_y": "Khi bàn việc quan trọng, tóm tắt lại ý người kia trước khi phản hồi để tránh lệch cách hiểu từ ngữ."
+      "goi_y": "Khi bàn việc quan trọng, tóm tắt lại ý người kia trước khi phản hồi để tránh lệch cách hiểu từ ngữ.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "tho_tinh_cam_ket": {
       "ten": "Trách nhiệm đường dài & Sự bền bỉ (Thổ tinh)",
-      "goi_y": "Phân chia rõ phần việc và cam kết thực tế vừa sức, tránh biến sự lo lắng thành lời thúc ép."
+      "goi_y": "Phân chia rõ phần việc và cam kết thực tế vừa sức, tránh biến sự lo lắng thành lời thúc ép.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "asc_an_tuong_dau": {
       "ten": "Phong thái tiếp xúc & Phối hợp bên ngoài (Cung Mọc)",
-      "goi_y": "Phát huy sự bổ trợ phong cách khi cùng xuất hiện hoặc đón tiếp đối tác bên ngoài."
+      "goi_y": "Phát huy sự bổ trợ phong cách khi cùng xuất hiện hoặc đón tiếp đối tác bên ngoài.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     }
   }
 }

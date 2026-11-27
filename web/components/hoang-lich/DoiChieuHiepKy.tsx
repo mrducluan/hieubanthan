@@ -20,7 +20,13 @@ interface KetQuaHiepKy {
   trich_co_thu: { sach: string; han: string; y_nghia: string }[];
 }
 
-const HUONG_8 = ["Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] as const;
+// Gửi MÃ hướng cho engine; nhãn hiển thị theo ngôn ngữ trang.
+const HUONG_8: { ma: string; vi: string; en: string }[] = [
+  { ma: "bac", vi: "Bắc", en: "North" }, { ma: "dong_bac", vi: "Đông Bắc", en: "Northeast" },
+  { ma: "dong", vi: "Đông", en: "East" }, { ma: "dong_nam", vi: "Đông Nam", en: "Southeast" },
+  { ma: "nam", vi: "Nam", en: "South" }, { ma: "tay_nam", vi: "Tây Nam", en: "Southwest" },
+  { ma: "tay", vi: "Tây", en: "West" }, { ma: "tay_bac", vi: "Tây Bắc", en: "Northwest" },
+];
 
 export function DoiChieuHiepKy({ ngayMacDinh, en = false }: { ngayMacDinh: string; en?: boolean }) {
   const [tuNgay, setTuNgay] = useState(ngayMacDinh);
@@ -89,7 +95,7 @@ export function DoiChieuHiepKy({ ngayMacDinh, en = false }: { ngayMacDinh: strin
           >
             <option value="">{en ? "Not doing earthwork" : "Không động thổ / giao dịch thường"}</option>
             {HUONG_8.map((h) => (
-              <option key={h} value={h}>{h}</option>
+              <option key={h.ma} value={h.ma}>{en ? h.en : h.vi}</option>
             ))}
           </select>
         </div>
