@@ -355,7 +355,7 @@ export function Tarot() {
         <section ref={refDoc} aria-labelledby="bai-doc" id="bai-doc" className="mx-auto mb-10 max-w-5xl scroll-mt-24">
           <TieuDeMuc id="bai-doc" nho={c("bai_doc.nho")} lon={c("bai_doc.lon")} />
           <BaoCaoTarot bc={bc} tb={bo.trai_bai[bc.da_tinh.trai_bai] ?? tb} boLa={bo.la} ten={hoSo?.ho_ten?.trim() ? hoSo.ho_ten : t("ten.ban")} cau={cau.trim() || null} />
-          <ChieuSauTraiBai la={bc.da_tinh.vi_tri.map((v) => ({ id: v.id, nguoc: v.nguoc }))} en={en} />
+          <ChieuSauTraiBai la={bc.da_tinh.vi_tri.map((v) => ({ id: v.id, nguoc: v.nguoc }))} />
           <div className="mt-6 flex flex-wrap items-start gap-3">
             <Button variant="secondary" onClick={lamLai} data-testid="nut-trai-bai-moi"><RotateCcw aria-hidden /> {t("nut.trai_bai_moi")}</Button>
             {!en && bc.hieu_cau && bc.hieu_cau.co_cau && !bc.hieu_cau.chan && (

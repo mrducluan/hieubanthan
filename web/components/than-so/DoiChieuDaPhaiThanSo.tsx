@@ -1,8 +1,16 @@
 "use client";
-// Chặng 3.3A — Đối chiếu 5 Trường phái Thần số học (Pitago · Balliett 1908 · Westcott/Sepharial · Phillips · Chaldea Cheiro).
+// Chặng 3.3A — "Các trường phái khác đọc ngày sinh của bạn thế nào?" — khối PHỤ, gập sẵn, đặt SAU bài đọc chính (bài đọc
+// chính và khung "Cách xem" vẫn là Pitago / Phillips — TS-PHAI-3, chủ dự án 2026-11-27). Chỉ tải khi người dùng mở.
+// Tên trường phái chỉ là nhãn cột; tên sách + câu trích nằm trong "Vì sao nói vậy". Cha truyền `key` theo ngày sinh / họ tên /
+// cách tính để đổi hồ sơ là xoá kết quả cũ.
 import { useState } from "react";
-import { ArrowUpRight, Layers } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Link from "@/components/khung/Lien";
+import { useDuong } from "@/components/khung/NgonNgu";
+import { ViSao } from "@/components/luan-giai/HopNoiBat";
+import { fetchNN, useChuThanSo } from "@/components/than-so/chu-than-so";
+import { ghi } from "@/lib/do-luong";
+import { loiTheoNgonNgu } from "@/lib/loi-ngon-ngu";
 
 interface PhaiItem {
   ma: string;
@@ -13,115 +21,105 @@ interface PhaiItem {
 }
 
 interface KetQuaDaPhai {
-  khung: { tieu_de: string; phu_de: string; cau_noi_dong_phuong: string };
+  khung?: { tieu_de?: string; phu_de?: string; cau_noi_dong_phuong?: string };
   nam_phai: PhaiItem[];
-  lien_ket_mo_rong: { ten: string; duong: string }[];
+  lien_ket_mo_rong?: { ten: string; duong: string }[];
 }
 
 export function DoiChieuDaPhaiThanSo({
   ngaySinhIso,
   hoTen,
   quyUoc = "tong_het",
-  en = false,
 }: {
   ngaySinhIso: string;
   hoTen: string;
   quyUoc?: "tong_het" | "tung_phan";
-  en?: boolean;
 }) {
+  const { c: t, en } = useChuThanSo();
+  const d = useDuong();
   const [dangTai, setDangTai] = useState(false);
   const [kq, setKq] = useState<KetQuaDaPhai | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
 
   async function taiDaPhai() {
+    if (dangTai || kq) return;
     setDangTai(true);
     setLoi(null);
     try {
-      const res = await fetch("/api/thanso/doi-chieu-phai", {
+      const res = await fetchNN("/api/thanso/doi-chieu-phai", {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-          ...(en ? { "x-ngon-ngu": "en" } : {}),
-        },
-        body: JSON.stringify({
-          ngay_sinh: ngaySinhIso,
-          ho_ten: hoTen,
-          quy_uoc_duong_doi: quyUoc,
-        }),
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ ngay_sinh: ngaySinhIso, ho_ten: hoTen, quy_uoc_duong_doi: quyUoc }),
       });
       const body = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        setLoi(body.error ?? (en ? "Could not load 5-school comparison." : "Chưa tải được đối chiếu 5 trường phái."));
+      if (!res.ok || !Array.isArray(body?.nam_phai)) {
+        setLoi(loiTheoNgonNgu(body?.error, en, t("dp.loi")));
         return;
       }
       setKq(body as KetQuaDaPhai);
     } catch {
-      setLoi(en ? "Temporary connection error." : "Mất kết nối tạm thời.");
+      setLoi(t("dp.loi_mang"));
     } finally {
       setDangTai(false);
     }
   }
 
   return (
-    <section className="my-8 rounded-2xl border border-line/80 bg-surface/35 p-5 sm:p-6" data-testid="doi-chieu-da-phai-thanso">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-gold">
-            {en ? "Multi-School Classical & Modern Comparison" : "Đối chiếu Học thuật Đa phái · Đọc riêng từng phái"}
+    <details
+      className="group my-8 rounded-2xl border border-line/80 bg-surface/35"
+      data-testid="doi-chieu-da-phai-thanso"
+      onToggle={(e) => {
+        if (!(e.currentTarget as HTMLDetailsElement).open) return;
+        if (!kq) ghi("chart_interacted", { mo_dun: "thanso", kind: "da_phai_mo" });
+        void taiDaPhai();
+      }}
+    >
+      <summary data-testid="nut-mo-5-phai-thanso"
+        className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-5 py-3 text-base font-semibold text-fg [&::-webkit-details-marker]:hidden">
+        <span>{t("dp.tieu_de")}</span>
+        <ChevronDown className="size-4 shrink-0 text-fg-muted transition-transform group-open:rotate-180" aria-hidden />
+      </summary>
+
+      <div className="space-y-4 px-5 pb-5">
+        <p className="text-sm leading-relaxed text-fg-muted">{t("dp.dan")}</p>
+        {dangTai && <p className="text-sm text-fg-muted">{t("dp.dang")}</p>}
+        {loi && (
+          <p role="alert" className="text-sm text-amber-300">
+            {loi}{" "}
+            <button type="button" onClick={() => void taiDaPhai()} className="min-h-11 font-medium text-gold underline">{t("dp.thu_lai")}</button>
           </p>
-          <h3 className="mt-1 text-lg font-semibold text-fg">
-            {en ? "Compare 5 Western Numerology Schools" : "Đối chiếu 5 Trường phái Thần số học (Pitago · Balliett · Westcott · Phillips · Chaldea)"}
-          </h3>
-        </div>
-        {!kq && (
-          <button
-            type="button"
-            onClick={taiDaPhai}
-            disabled={dangTai}
-            data-testid="nut-mo-5-phai-thanso"
-            className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-gold/50 bg-gold/10 px-4 py-2 text-xs font-semibold text-gold hover:bg-gold/20 disabled:opacity-50"
-          >
-            <Layers className="size-3.5" aria-hidden />
-            {dangTai ? (en ? "Loading…" : "Đang đối chiếu…") : (en ? "Open 5-School View" : "Mở đối chiếu 5 trường phái")}
-          </button>
         )}
-      </div>
 
-      {loi && <p role="alert" className="mt-3 text-xs text-amber-300">{loi}</p>}
-
-      {kq && (
-        <div className="mt-5 space-y-4" data-testid="ket-qua-5-phai-thanso">
-          <p className="text-xs leading-relaxed text-fg-muted">{kq.khung.phu_de}</p>
-          <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
-            {kq.nam_phai.map((p) => (
-              <div key={p.ma} className="rounded-xl border border-line/70 bg-bg/55 p-4 text-sm">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-xs font-semibold text-gold">{p.ten_phai}</span>
-                  <span className="rounded-full border border-line px-2.5 py-0.5 font-mono text-xs text-fg">{p.chi_so_chinh}</span>
-                </div>
-                <p className="mt-2 text-xs leading-relaxed text-fg-muted">{p.nhan_xet}</p>
-                {p.trich_nguon && (
-                  <div className="mt-2.5 border-t border-line/50 pt-2 text-[11px] text-fg-faint">
-                    <p className="font-medium text-fg-muted">{p.trich_nguon.sach}</p>
-                    <p className="mt-0.5 italic">&ldquo;{p.trich_nguon.nguyen_van_en}&rdquo;</p>
+        {kq && (
+          <div className="space-y-4" data-testid="ket-qua-5-phai-thanso">
+            <div className="grid grid-cols-1 gap-3.5 md:grid-cols-2">
+              {kq.nam_phai.map((p) => (
+                <div key={p.ma} className="min-w-0 rounded-xl border border-line/70 bg-bg/55 p-4 text-sm">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-semibold text-gold">{p.ten_phai}</span>
+                    <span className="rounded-full border border-line px-2.5 py-0.5 font-mono text-xs text-fg">{p.chi_so_chinh}</span>
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="rounded-xl border border-jade/35 bg-jade/5 p-4 text-xs">
-            <p className="leading-relaxed text-fg-muted">{kq.khung.cau_noi_dong_phuong}</p>
-            <div className="mt-2.5 flex flex-wrap gap-3">
-              {kq.lien_ket_mo_rong.map((lk) => (
-                <Link key={lk.duong} href={en ? `/en${lk.duong}` : lk.duong} className="inline-flex items-center gap-1 font-medium text-jade hover:underline">
-                  {lk.ten} <ArrowUpRight className="size-3.5" aria-hidden />
-                </Link>
+                  <p className="mt-2 text-sm leading-relaxed text-fg-muted">{p.nhan_xet}</p>
+                  {p.trich_nguon && <ViSao nho canCu={[`${p.trich_nguon.sach}: “${p.trich_nguon.nguyen_van_en}”`]} />}
+                </div>
               ))}
             </div>
+
+            {(kq.khung?.cau_noi_dong_phuong || kq.lien_ket_mo_rong?.length) ? (
+              <div className="rounded-xl border border-jade/35 bg-jade/5 p-4 text-sm">
+                {kq.khung?.cau_noi_dong_phuong && <p className="leading-relaxed text-fg-muted">{kq.khung.cau_noi_dong_phuong}</p>}
+                <div className="mt-1 flex flex-wrap gap-x-4">
+                  {kq.lien_ket_mo_rong?.map((lk) => (
+                    <Link key={lk.duong} href={d(lk.duong)} className="inline-flex min-h-11 items-center gap-1 font-medium text-jade hover:underline">
+                      {lk.ten} <ArrowUpRight className="size-3.5" aria-hidden />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : null}
           </div>
-        </div>
-      )}
-    </section>
+        )}
+      </div>
+    </details>
   );
 }
