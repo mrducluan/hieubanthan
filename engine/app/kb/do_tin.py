@@ -243,6 +243,10 @@ SO: dict[str, dict] = {
     # ---- Liên mảng (lời ghép, ranh giới, mẫu câu)
     "suc_khoe_kb.json": {"mang": "chung", "muc": "tom_y_co_thu", "ghi_chu": "hành ↔ tạng phủ theo Nội Kinh; tên bệnh hay gặp là kiến thức phổ thông (SK-2)"},
     "co_van_tam_tai_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 2: nháp AI tổng hợp Cố vấn Liên mảng Tam Tài (Nhân – Thiên – Địa), chờ chủ dự án đọc duyệt"},
+    "su_vu_chien_thuat_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 3.1: nháp AI Chiến thuật Sự vụ tức thời (Kỳ Môn Thời Gia · Lục Hào Nạp Giáp đọc riêng; câu Hán trích nguyên văn ky_mon_co_kim_do_thu & tang_san_boc_dich), chờ chủ dự án đọc duyệt"},
+    "tuong_menh_doi_chieu_kb.json": {"mang": "nhantuong", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 3.2: nháp AI đối chiếu Nhịp năm Lá số & Tướng lưu niên / Chỉ tay Saint-Germain 1897, chờ chủ dự án đọc duyệt"},
+    "thanso_da_phai_kb.json": {"mang": "thanso", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 3.3: nháp AI đối chiếu 5 trường phái Thần số học (trích nguyên văn Westcott 1911, Sepharial 1913, Balliett 1908), chờ chủ dự án đọc duyệt"},
+    "tarot_an_phu_nguoc_kb.json": {"mang": "tarot", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 3.3: nháp AI 56 lá Ẩn Phụ ngược (trích nguyên văn Waite 1910 & Mathers 1888, 0% Bunning/Pollack) + Phẩm giá nguyên tố, chờ chủ dự án đọc duyệt"},
     "chiem_tinh_hanh_tinh_cung_kb.json": {"mang": "chiemtinh", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI 13 thiên thể × 12 cung Hoàng đạo, chờ chủ dự án đọc duyệt"},
     "chiem_tinh_nha_kb.json": {"mang": "chiemtinh", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI 12 nhà & trục Asc/MC (Whole Sign & Placidus), chờ chủ dự án đọc duyệt"},
     "chiem_tinh_goc_chieu_kb.json": {"mang": "chiemtinh", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI 5 góc chiếu Ptolemaic chính, chờ chủ dự án đọc duyệt"},

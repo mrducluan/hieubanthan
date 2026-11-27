@@ -23,6 +23,10 @@ _C = TestClient(app)
 
 
 def test_api_chiem_tinh_ban_do_cau_noi_dong_tay_song_ngu_va_tuoi_16():
+    # Ngoài phạm vi lịch 1926–2049 -> trả 422 sạch (không 500, không ngoại suy âm thầm)
+    assert _C.post("/v1/chiem-tinh/ban-do", json={"ngay_sinh": "1920-01-01"}).status_code == 422
+    assert _C.post("/v1/chiem-tinh/ban-do", json={"ngay_sinh": "1990-05-15", "ngay_xem": "2060-01-01"}).status_code == 422
+
     # Dưới 16 tuổi -> chuyển hướng lịch sự
     nho = _C.post("/v1/chiem-tinh/ban-do", json={"ngay_sinh": "2014-06-01", "ngay_xem": "2026-11-27"}).json()
     assert nho["chuyen_huong_tuoi"]["tuoi"] < 16 and "hanh_tinh" not in nho

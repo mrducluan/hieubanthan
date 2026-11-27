@@ -1,0 +1,52 @@
+{
+  "_nguon": "Chặng 3.2 — Đối chiếu Tướng học & Chỉ tay Đông–Tây (Saint-Germain 1897 + Thần Tướng Toàn Biên lưu niên) độc lập với nhịp năm của lá số. Không gộp điểm (CD-1), không chẩn đoán y khoa hay tuổi thọ.",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "khung": {
+    "tieu_de": "Đối chiếu Nhịp Năm Lá Số & Dấu Hiệu Tướng – Chỉ Tay Hiện Tại",
+    "phu_de": "Lá số (Bát tự / Tử vi) soi cấu trúc mùa sinh và nhịp năm; Tướng mặt lưu niên và hai bàn tay (Tiên thiên – Hậu thiên) phản chiếu nếp sinh hoạt thực tế bạn đang tích luỹ. Ba góc nhìn đặt cạnh nhau để tự quan sát, không chấm điểm gộp.",
+    "ranh_gioi": "Các dấu hiệu sắc mặt và đường chỉ tay thay đổi theo giấc ngủ, mức độ căng thẳng và thói quen làm việc; hoàn toàn không dùng để chẩn đoán sức khoẻ hay đoán định tuổi thọ.",
+    "tuoi_nho": "Phần đối chiếu tướng – mệnh chỉ mở cho người từ đủ 16 tuổi trở lên."
+  },
+  "saint_germain_1897": {
+    "sach": "Comte C. de Saint-Germain · The Practice of Palmistry for Professional Purposes (1897, phạm vi công cộng)",
+    "muc": {
+      "ngon_cai": {
+        "ten": "Ngón cái — Ý chí & khả năng tự điều phối",
+        "nguyen_van_en": "It would be a loss of space for me to expatiate further on the extraordinary value and interest of the thumb in its physical as well as ethnological aspect.",
+        "y_ung_dung": "Góc mở và độ vững của ngón cái cho biết cách bạn giữ kỷ luật tự thân khi vào năm nhiều biến động: ngón cái mở vừa phải giúp linh hoạt mà không buông trôi kế hoạch."
+      },
+      "duong_tri_dao": {
+        "ten": "Đường Trí đạo — Nhịp suy xét & độ tập trung",
+        "nguyen_van_en": "This is the line which acts as a clear and accurate gauge as to the intellectual worth of the subject and as to the healthy condition of his, or her, brain and blood circulation.",
+        "y_ung_dung": "Đường Trí đạo rõ và liền nét phản ánh thói quen phân tích mạch lạc; khi đang ở năm cần quyết định lớn, nên ưu tiên viết rõ tiêu chí ra giấy thay vì ôm nhiều việc cùng lúc."
+      },
+      "duong_su_nghiep": {
+        "ten": "Đường Sự nghiệp — Trục cam kết đường dài",
+        "nguyen_van_en": "I now turn my attention to a vertical line, one of the five lines the starting points of which are to be found in the lower part of the palm and the terminations more or less close",
+        "y_ung_dung": "Đường dọc giữa lòng bàn tay thuận đậm hơn tay không thuận cho thấy nỗ lực tự rèn luyện đang tạo ra trục nghề nghiệp rõ nét hơn nền tảng ban đầu."
+      },
+      "duong_thai_duong": {
+        "ten": "Đường Thái dương — Sự bền bỉ hoàn tất tác phẩm",
+        "nguyen_van_en": "Artistic instincts but insufficient powers of execution; the “Art amateur’s Line.",
+        "y_ung_dung": "Saint-Germain lưu ý cảm hứng sáng tạo luôn cần sức thực thi đi kèm: tập trung hoàn thành trọn vẹn từng đầu việc nhỏ sẽ nuôi dưỡng uy tín thực chất."
+      },
+      "tam_giac_tu_giac": {
+        "ten": "Khoảng Tứ giác giữa Tâm đạo & Trí đạo — Độ rộng mở tâm thế",
+        "nguyen_van_en": "There are two figures in the hands traced by the combination of the principal Lines which I had often occasion to mention but not to define or expatiate upon all through these page",
+        "y_ung_dung": "Khoảng cách cân đối giữa đường Tâm và đường Trí cho thấy sự hài hoà giữa lý trí và sự cảm thông khi làm việc cùng tập thể."
+      }
+    }
+  },
+  "nhip_hanh_nam": {
+    "Kim": "Năm mang khí Kim nhắc rèn sự gọn gàng, chốt dứt điểm từng việc và giữ nhịp thở đều đặn.",
+    "Mộc": "Năm mang khí Mộc hợp học thêm kỹ năng mới, mở rộng kết nối và dành thời gian vận động ngoài trời.",
+    "Thủy": "Năm mang khí Thuỷ hợp lắng nghe, bồi đắp chiều sâu chuyên môn và giữ giấc ngủ đủ giấc.",
+    "Hỏa": "Năm mang khí Hoả nhịp việc dễ dồn dập, nên chia nhỏ tiến độ và giữ khoảng nghỉ tĩnh mỗi tối.",
+    "Thổ": "Năm mang khí Thổ hợp củng cố nền tảng tài chính, quy trình làm việc và sự ấm áp trong gia đình."
+  },
+  "hai_tay": {
+    "thuan_troi": "Bàn tay thuận có nét rõ hơn tay không thuận: nếp rèn luyện và lựa chọn chủ động hiện tại của bạn đang dẫn dắt cuộc sống rõ hơn thói quen bẩm sinh.",
+    "khong_thuan_troi": "Bàn tay không thuận rõ nét hơn tay thuận: bạn đang giữ nhiều tiềm năng tự nhiên nhưng gần đây có thể đang phân tán sức lực, nên gom lại một mục tiêu trọng tâm.",
+    "can_doi": "Hai bàn tay có độ rõ tương đương: nhịp sống bên ngoài và tính cách nền bên trong đang đi khá đồng điệu."
+  }
+}

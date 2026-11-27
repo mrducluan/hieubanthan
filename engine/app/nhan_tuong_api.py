@@ -251,3 +251,31 @@ def api_do_hinh_mot(ma: str) -> dict:
     if d is None:
         raise HTTPException(404, detail="Không có đồ hình này.")
     return {"engine_version": ENGINE_VERSION, "pham_vi": "nhan_tuong_do_hinh", **d}
+
+
+class DoiChieuTuongMenhInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    ngay_sinh: _dt.date
+    gioi_tinh: Literal["nam", "nu"] = "nam"
+    gio_sinh: str | None = Field(default=None, pattern=r"^([01]\d|2[0-3]):[0-5]\d$")
+    do_lech_hai_tay: Literal["thuan_troi", "khong_thuan_troi", "can_doi"] = "can_doi"
+    muc_chi_tay: list[Literal["ngon_cai", "duong_tri_dao", "duong_su_nghiep", "duong_thai_duong", "tam_giac_tu_giac"]] | None = Field(
+        default=None, max_length=5
+    )
+    ngay_xem: _dt.date | None = None
+
+
+@router.post("/doi-chieu-menh")
+def api_doi_chieu_tuong_menh(inp: DoiChieuTuongMenhInput) -> dict:
+    if not (1930 <= inp.ngay_sinh.year <= 2025):
+        raise HTTPException(422, detail="Năm sinh cần nằm trong khoảng 1930–2025.")
+    from app.luangiai import tuong_menh_doi_chieu as tmdc  # noqa: PLC0415
+    kq = tmdc.doi_chieu_tuong_menh(
+        ngay_sinh=inp.ngay_sinh,
+        gioi_tinh=inp.gioi_tinh,
+        gio_sinh=inp.gio_sinh,
+        do_lech_hai_tay=inp.do_lech_hai_tay,
+        muc_chi_tay=list(inp.muc_chi_tay) if inp.muc_chi_tay else None,
+        ngay_xem=inp.ngay_xem,
+    )
+    return {"engine_version": ENGINE_VERSION, **kq}
