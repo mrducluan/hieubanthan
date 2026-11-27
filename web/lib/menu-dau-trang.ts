@@ -45,6 +45,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     // chỗ cho cụm kiến thức lớn chưa có lối vào menu. Ba công cụ vẫn ở menu Năm, hub Huyền học, chân trang.
     { href: "/tu-vi/sao-o-cung", ten: "Sao ở từng cung Tử vi", mo_ta: "14 chính tinh ở 12 cung: sáng hãm, sao đi cùng" },
     { href: "/phong-thuy/huong-hop-tuoi", ten: "Hướng nhà hợp tuổi", mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
+    { href: "/phong-thuy/dau-hieu", ten: "Dấu hiệu trong nhà", mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
   ] },
   // NAM-1/NAM-2 (2026-10-30): menu lớn theo năm — {nam} thay bằng năm engine chọn (năm tới khi Tết sau còn ≤ 120 ngày,
   // không thì năm âm đang đi) lúc dựng trang → không phải sửa tay mỗi năm (`thayNamMenu`).

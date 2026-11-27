@@ -57,6 +57,7 @@ export const MENU_DAU_MAC_DINH: (Lk & { bieu_tuong: string; di_dong: boolean; co
     // TM-1: ba công cụ có bản theo năm ở menu "Năm" nhường chỗ cho cụm kiến thức lớn (migration tm_1_menu_huyen_hoc).
     { ...lk("/tu-vi/sao-o-cung", "Sao ở từng cung Tử vi"), mo_ta: "14 chính tinh ở 12 cung: sáng hãm, sao đi cùng" },
     { ...lk("/phong-thuy/huong-hop-tuoi", "Hướng nhà hợp tuổi"), mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
+    { ...lk("/phong-thuy/dau-hieu", "Dấu hiệu trong nhà"), mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
   ] },
   // NAM-1/NAM-2: "{nam}" được web thay bằng năm đang mời xem (gõ {nam} trong chữ / đường dẫn của mục bất kỳ).
   { ...lk("/nam/{nam}", "Năm {nam}"), bieu_tuong: "lich", di_dong: true, con: [
