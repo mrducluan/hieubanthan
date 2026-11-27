@@ -136,6 +136,14 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
   const [loi, setLoi] = useState<string | null>(null);
   const [kq, setKq] = useState<KetQuaTamTai | null>(null);
 
+  // CV-3: ?cau=… điền sẵn ô hỏi (từ nút ở trang khác); KHÔNG tự gửi, và ô vẫn sửa được.
+  useEffect(() => {
+    try {
+      const c = new URLSearchParams(window.location.search).get("cau");
+      if (c) setCauHoi(c.replace(/\s+/g, " ").trim().slice(0, 300));
+    } catch { /* bỏ qua */ }
+  }, []);
+
   useEffect(() => {
     if (!hs) return;
     setNgaySinh(ngaySinhIso(hs));

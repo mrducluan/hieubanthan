@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import {
   ArrowRight, BookOpen, CalendarCheck, CalendarDays, CalendarRange, Check, Compass, DoorOpen, HeartHandshake, Home, Hourglass,
-  Layers, ListOrdered, MessageCircleQuestion, MoonStar, Navigation, Repeat, ScanFace, Sparkles, Sun, UserRound, type LucideIcon,
+  Layers, ListOrdered, MessageCircleQuestion, MoonStar, Navigation, Repeat, ScanFace, Sparkles, Star, Sun, Target, UserRound, type LucideIcon,
 } from "lucide-react";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
@@ -220,6 +220,21 @@ export default async function HuyenHoc() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* CV-3: hai trang trước đây không có lối vào nào ngoài đường dẫn trực tiếp: Cố vấn quyết định và Chiêm tinh. */}
+      <section aria-label={c("them.nho")} data-testid="khoi-hai-loi-khac">
+        <p className="eyebrow">{c("them.nho")}</p>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          <Link href="/co-van" className="glass group flex items-start gap-3 rounded-2xl p-4 hover:border-gold/50" data-testid="the-co-van">
+            <Target className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
+            <span><b className="text-fg">{c("them.cv_ten")}</b><span className="mt-1 block text-sm text-fg-muted">{c("them.cv_mo")}</span></span>
+          </Link>
+          <Link href="/chiem-tinh" className="glass group flex items-start gap-3 rounded-2xl p-4 hover:border-gold/50" data-testid="the-chiem-tinh">
+            <Star className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
+            <span><b className="text-fg">{c("them.ct_ten")}</b><span className="mt-1 block text-sm text-fg-muted">{c("them.ct_mo")}</span></span>
+          </Link>
         </div>
       </section>
 

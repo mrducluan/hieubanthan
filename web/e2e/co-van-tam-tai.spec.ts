@@ -127,3 +127,21 @@ test("/co-van-kinh-doanh: cẩm nang không xếp hạng; sổ nháp khoá mật
   await expect(page.getByTestId("gop-von-ket-qua")).toBeVisible({ timeout: 15_000 });
   await expect(page.getByTestId("gop-von-ranh-gioi")).toContainText("luật sư");
 });
+
+test("lối vào Cố vấn + Chiêm tinh: menu, hub Huyền học, điền sẵn câu hỏi từ ?cau=", async ({ page }) => {
+  await page.goto("/huyen-hoc");
+  await expect(page.getByTestId("the-co-van")).toHaveAttribute("href", "/co-van");
+  await expect(page.getByTestId("the-chiem-tinh")).toHaveAttribute("href", "/chiem-tinh");
+
+  // menu thả xuống: Bản thân → "Hỏi một quyết định", Huyền học → "Chiêm tinh phương Tây"
+  const menu = page.getByRole("navigation").first();
+  await menu.getByText("Bản thân", { exact: true }).first().hover();
+  await expect(page.getByRole("link", { name: /Hỏi một quyết định/ }).first()).toBeVisible();
+  await menu.getByText("Huyền học", { exact: true }).first().hover();
+  await expect(page.getByRole("link", { name: /Chiêm tinh phương Tây/ }).first()).toBeVisible();
+
+  // ?cau= điền sẵn, không tự gửi, sửa được
+  await page.goto("/co-van?cau=" + encodeURIComponent("Năm sau tôi có nên mở quán cà phê không?"));
+  await expect(page.getByTestId("co-van-o-cau-hoi")).toHaveValue("Năm sau tôi có nên mở quán cà phê không?");
+  await expect(page.getByTestId("co-van-ket-qua")).toHaveCount(0);
+});

@@ -18,7 +18,7 @@ export const DUONG_TRONG_SITE = /^\/(?![/\\])[^\s\\]*$/;   // chặn //x và /\x
 export const MENU_MAC_DINH: { ten: string; lien_ket: { nhan: string; duong_dan: string }[] }[] = [
   { ten: "Huyền học", lien_ket: [
     ["/than-so", "Thần số học"], ["/tu-vi", "Xem Tử vi"], ["/bat-tu", "Xem Bát tự (Tứ trụ)"], ["/kinh-dich", "Gieo quẻ Kinh Dịch"],
-    ["/phong-thuy", "Phong thuỷ nhà ở"], ["/nhan-tuong", "Xem tướng mặt"], ["/tarot", "Xem bài Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"],
+    ["/phong-thuy", "Phong thuỷ nhà ở"], ["/nhan-tuong", "Xem tướng mặt"], ["/tarot", "Xem bài Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"], ["/chiem-tinh", "Chiêm tinh phương Tây"],
     ["/hop-doi", "Xem hợp đôi"], ["/huyen-hoc", "Tất cả các môn huyền học"],
   ].map(([duong_dan, nhan]) => ({ nhan: nhan!, duong_dan: duong_dan! })) },
   { ten: "Lịch & tuổi", lien_ket: [

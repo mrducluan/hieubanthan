@@ -9,6 +9,8 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     // MENU-TS (chủ dự án 2026-11-22): "Thần số học" chuyển sang Huyền học (URL /than-so giữ nguyên).
     { href: "/hom-nay", ten: "Hôm nay của bạn", mo_ta: "Ngày cá nhân, âm lịch và một câu tự soi mỗi ngày" },
     { href: "/xem-ngay-tot", ten: "Xem ngày tốt", mo_ta: "Hoàng đạo, giờ tốt, việc nên làm, tìm ngày đẹp" },
+    // CV-3 (2026-11-27): Cố vấn quyết định có lối vào menu — hỏi bằng lời thường ("có nên mở shop năm sau?"), không cần biết môn nào.
+    { href: "/co-van", ten: "Hỏi một quyết định", mo_ta: "Mở shop, mua nhà, nghỉ việc: tháng nào hợp, cần chuẩn bị gì" },
     // GD-MENU (chủ dự án duyệt 2026-11-16): hồ sơ gia đình "Nhà Tôi" thuộc cụm Bản thân (không cần tài khoản, tab đầu ở điện thoại).
     { href: "/gia-dinh", ten: "Nhà Tôi", mo_ta: "Năm nay cả nhà cần để ý gì, tuổi ai hợp ai" },
   ] },
@@ -17,6 +19,7 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/tu-vi#hop-tham", ten: "Xem lá số 2 người", mo_ta: "Điểm hợp – khắc theo Tử vi, cách dung hoà" },
     { href: "/hop-doi/cap-so", ten: "Số chủ đạo hợp nhau", mo_ta: "45 cặp số, hợp ở đâu, vấp ở đâu" },
     { href: "/quan-ly-nhan-su", ten: "Quản lý nhân sự (Chủ DN)", mo_ta: "5 hành của đội, cách phối hợp từng người, kế hoạch 30 ngày" },
+    { href: "/co-van-kinh-doanh", ten: "Cố vấn kinh doanh", mo_ta: "Mở quán, góp vốn, chọn mặt bằng: hỏi quyết định, soạn nháp đối tác" },
   ] },
   { href: "/huyen-hoc", ten: "Huyền học", bieu_tuong: "la_ban", di_dong: true, con: [
     // MENU-TS (chủ dự án 2026-11-22): Thần số học đứng đầu menu Huyền học (cửa vào như hub /huyen-hoc, breadcrumb TM-1
@@ -35,12 +38,14 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/tarot", ten: "Xem Tarot", mo_ta: "Xáo bài, rút lá, 5 trải bài, 78 lá có nguồn" },
     // KM-3 (chủ dự án duyệt 2026-11-18): Kỳ Môn Độn Giáp vào menu Huyền học — mục thứ 12 (đủ trần).
     { href: "/ky-mon", ten: "Kỳ Môn Độn Giáp", mo_ta: "Giờ này hướng nào thuận, hợp việc gì" },
+    // CV-3: Chiêm tinh phương Tây vào menu Huyền học; "Dấu hiệu trong nhà" nhường chỗ (≤ 12 mục con) — vẫn ở thanh mảng
+    // Phong thuỷ, hub Huyền học, chân trang; trang gốc vẫn làm sáng mục cha (/phong-thuy là menu con).
+    { href: "/chiem-tinh", ten: "Chiêm tinh phương Tây", mo_ta: "Bản đồ sao: cung Mặt Trời, Mặt Trăng, Cung Mọc, 12 nhà" },
     // TM-1 (chủ dự án duyệt 2026-11-03): 3 công cụ đã có bản theo năm ở menu "Năm" (hướng xấu, xông đất, sao hạn) nhường
     // chỗ cho cụm kiến thức lớn chưa có lối vào menu. Ba công cụ vẫn ở menu Năm, hub Huyền học, chân trang.
     { href: "/tu-vi/sao-o-cung", ten: "Sao ở từng cung Tử vi", mo_ta: "14 chính tinh ở 12 cung: sáng hãm, sao đi cùng" },
     { href: "/bat-tu/menh-theo-nam", ten: "Sinh năm nào mệnh gì", mo_ta: "Can chi, nạp âm, màu hợp, tuổi hợp 1950–2027" },
     { href: "/phong-thuy/huong-hop-tuoi", ten: "Hướng nhà hợp tuổi", mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
-    { href: "/phong-thuy/dau-hieu", ten: "Dấu hiệu trong nhà", mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
   ] },
   // NAM-1/NAM-2 (2026-10-30): menu lớn theo năm — {nam} thay bằng năm engine chọn (năm tới khi Tết sau còn ≤ 120 ngày,
   // không thì năm âm đang đi) lúc dựng trang → không phải sửa tay mỗi năm (`thayNamMenu`).

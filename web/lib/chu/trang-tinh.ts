@@ -112,6 +112,12 @@ export const CHU_HUYEN_HOC = {
   "chan_dung.lon": { nhom: "Chân dung tổng hợp", nhan: "Tiêu đề khối", mac_dinh: "Ba cách nhìn, một con người", toi_da: 80 },
   "chan_dung.mo": { nhom: "Chân dung tổng hợp", nhan: "Lời dẫn", mac_dinh: "Tử vi nhìn hoàn cảnh quanh bạn, Bát tự nhìn sức của chính bạn, nhân tướng nhìn điều bạn đang thấy ở mình. Đặt ba cách cạnh nhau theo từng mảng đời: mảng nào cả ba cùng thấy, mảng nào nhìn khác nhau và vì sao.", toi_da: 300 },
   "chan_dung.nut": { nhom: "Chân dung tổng hợp", nhan: "Chữ nút", mac_dinh: "Xem chân dung tổng hợp", toi_da: 40 },
+  // CV-3: hai lối vào chưa có chỗ trên hub — Cố vấn quyết định (hỏi bằng lời thường) và Chiêm tinh phương Tây.
+  "them.nho": { nhom: "Hai lối khác", nhan: "Dòng nhỏ", mac_dinh: "Hai lối khác để bắt đầu", toi_da: 60 },
+  "them.cv_ten": { nhom: "Hai lối khác", nhan: "Cố vấn — tên", mac_dinh: "Hỏi một quyết định", toi_da: 60 },
+  "them.cv_mo": { nhom: "Hai lối khác", nhan: "Cố vấn — lời dẫn", mac_dinh: "Đang cân nhắc mở shop, mua nhà, nghỉ việc? Nêu câu hỏi và ngày sinh: tháng nào hợp, cần chuẩn bị gì, hướng cửa có hợp không. Không cần biết môn nào.", toi_da: 220 },
+  "them.ct_ten": { nhom: "Hai lối khác", nhan: "Chiêm tinh — tên", mac_dinh: "Chiêm tinh phương Tây", toi_da: 60 },
+  "them.ct_mo": { nhom: "Hai lối khác", nhan: "Chiêm tinh — lời dẫn", mac_dinh: "Bản đồ sao theo ngày, giờ, nơi sinh: cung Mặt Trời, Mặt Trăng, Cung Mọc, 12 nhà. Đặt cạnh Bát tự và Tử vi để tự so.", toi_da: 220 },
   // RS-2: lối vào gói xem + hỏi chuyên gia (thẻ chuyên gia chỉ hiện khi công tắc sao.chuyen_gia.bat bật).
   "sau_hon.nho": { nhom: "Đọc sâu hơn", nhan: "Dòng nhỏ", mac_dinh: "Khi muốn đọc sâu hơn", toi_da: 60 },
   "sau_hon.goi_ten": { nhom: "Đọc sâu hơn", nhan: "Gói xem — tên", mac_dinh: "Các gói xem", toi_da: 60 },

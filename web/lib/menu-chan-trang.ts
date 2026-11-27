@@ -10,7 +10,7 @@ export const TRU_CHAN_TRANG = ["/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/
 export const COT_CHAN_TRANG: readonly CotChanTrang[] = [
   { ten: "Huyền học", ds: [
     ["/than-so", "Thần số học"], ["/tu-vi", "Xem Tử vi"], ["/bat-tu", "Xem Bát tự (Tứ trụ)"], ["/kinh-dich", "Gieo quẻ Kinh Dịch"],
-    ["/phong-thuy", "Phong thuỷ nhà ở"], ["/nhan-tuong", "Xem tướng mặt"], ["/tarot", "Xem bài Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"],
+    ["/phong-thuy", "Phong thuỷ nhà ở"], ["/nhan-tuong", "Xem tướng mặt"], ["/tarot", "Xem bài Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"], ["/chiem-tinh", "Chiêm tinh phương Tây"],
     ["/hop-doi", "Xem hợp đôi"], ["/huyen-hoc", "Tất cả các môn huyền học"],
   ] },
   { ten: "Lịch & tuổi", ds: [
