@@ -42,7 +42,8 @@ async function goi(duong: string, init: RequestInit = {}): Promise<unknown> {
 export async function dsRankYak(): Promise<BaiRankYak[]> {
   const kq: BaiRankYak[] = [];
   for (let trang = 1; trang <= 10; trang++) {
-    const d = (await goi(`/articles?per_page=100&exclude_h1=true&page=${trang}`)) as { data?: BaiRankYak[]; links?: { next?: string | null } };
+    // exclude_h1 phải là 1 / 0 (RankYak kiểm kiểu boolean kiểu Laravel: "true" → 422, nên cron vớt bài lỡ từng không chạy được).
+    const d = (await goi(`/articles?per_page=100&exclude_h1=1&page=${trang}`)) as { data?: BaiRankYak[]; links?: { next?: string | null } };
     kq.push(...(Array.isArray(d?.data) ? d.data : []));
     if (!d?.links?.next) break;
   }
@@ -81,8 +82,12 @@ async function slugTrong(payload: Payload, req: PayloadRequest | undefined, slug
 
 export type KetQuaNhapRy = { id: number | string; moi: boolean; slug: string; da_duyet: boolean; anh_loi: string[]; loi_kho?: string };
 
-/** Tạo hoặc cập nhật bản NHÁP từ một bài RankYak. Không xuất bản ở đây. */
-export async function nhapBaiRankYak(payload: Payload, req: PayloadRequest, a: BaiRankYak): Promise<KetQuaNhapRy> {
+/** Tạo hoặc cập nhật bản NHÁP từ một bài RankYak. Không xuất bản ở đây.
+ *  `boAnh`: chỉ ghi CHỮ (ảnh thành đoạn "[Ảnh chưa nhập …]") — lượt đầu của webhook, phải xong trong ~1 giây để RankYak không
+ *  báo "Failed" vì chờ lâu (tải + lưu ảnh qua kho S3 mất vài giây mỗi ảnh); lượt sau (`lanHai`) làm lại có ảnh, không ghi
+ *  thêm dòng "RankYak gửi bản cập nhật". */
+export async function nhapBaiRankYak(payload: Payload, req: PayloadRequest, a: BaiRankYak,
+  { boAnh = false, lanHai = false }: { boAnh?: boolean; lanHai?: boolean } = {}): Promise<KetQuaNhapRy> {
   const tieuDe = String(a.title ?? "").normalize("NFC").trim();
   if (!tieuDe) throw new Error("Bài RankYak thiếu tiêu đề.");
   const html = boH1Dau(String(a.html ?? ""));
@@ -91,15 +96,15 @@ export async function nhapBaiRankYak(payload: Payload, req: PayloadRequest, a: B
   const anhLoi: string[] = [];
   const phien: PhienAnh = { loiKho: null, heThong: true, nguonAnh: NGUON_ANH_RANKYAK, tienTo: "rankyak" };
 
-  const bia = a.header_image_url ? await taoAnh(payload, req, phien, a.header_image_url, tieuDe) : null;
-  if (a.header_image_url && bia == null) anhLoi.push(a.header_image_url);
+  const bia = a.header_image_url && !boAnh ? await taoAnh(payload, req, phien, a.header_image_url, tieuDe) : null;
+  if (a.header_image_url && bia == null && !boAnh) anhLoi.push(a.header_image_url);
   const khoi = htmlSangKhoi(html);
   const idAnh = new Map<ChoAnh, number | string | null>();
   for (const k of khoi) {
     if (k.type !== "__anh") continue;
     const c = k as ChoAnh;
-    const id = await taoAnh(payload, req, phien, c.src, c.alt || tieuDe, c.chu_thich);
-    if (id == null) anhLoi.push(c.src);
+    const id = boAnh ? null : await taoAnh(payload, req, phien, c.src, c.alt || tieuDe, c.chu_thich);
+    if (id == null && !boAnh) anhLoi.push(c.src);
     idAnh.set(c, id);
   }
   const moTa = String(a.meta_description || a.excerpt || "").normalize("NFC").trim();
@@ -116,7 +121,7 @@ export async function nhapBaiRankYak(payload: Payload, req: PayloadRequest, a: B
 
   if (co) {
     const daDuyet = co.trang_thai_duyet === "da_duyet";
-    const ghi = [`RY-1: RankYak gửi bản cập nhật ${new Date().toISOString().slice(0, 10)}${a.updated_at ? ` (sửa lúc ${a.updated_at})` : ""}`
+    const ghi = lanHai ? String(co.ghi_chu_duyet ?? "") : [`RY-1: RankYak gửi bản cập nhật ${new Date().toISOString().slice(0, 10)}${a.updated_at ? ` (sửa lúc ${a.updated_at})` : ""}`
       + (daDuyet ? " — bài Chủ biên đã duyệt: bản đang xuất bản CHƯA đổi; đọc bản nháp này rồi bấm Xuất bản nếu muốn dùng." : "."),
     String(co.ghi_chu_duyet ?? "").replace(new RegExp(`^${DA_THU}[^\\n]*\\n?`), "")].filter(Boolean).join("\n").slice(0, 2000);
     await payload.update({ collection: "bai-viet", id: co.id, draft: true, overrideAccess: true, req, context: ctx,
@@ -169,15 +174,57 @@ export async function tuDongRankYak(payload: Payload, req: PayloadRequest,
     pagination: false, req, where: { rankyak_id: { in: ids } } as never, select: { rankyak_id: true } as never });
   const co = new Set(da.docs.map((d) => String((d as { rankyak_id?: number }).rankyak_id)));
   const chua = ds.filter((a) => !co.has(String(a.id)));
+  // Bản nháp webhook đã LƯU CHỮ nhưng phần sau (ảnh, chuẩn hoá, tự xuất bản) chưa chạy nốt — `after()` bị cắt / không dùng
+  // được. Dấu hiệu: chưa có ảnh bìa (chuẩn hoá luôn vẽ bìa) và chưa ghi lý do "chưa tự xuất bản", chưa từng xuất bản, Chủ biên
+  // chưa duyệt. Chỉ động tới nháp ở trạng thái này nên không đè chữ Chủ biên đã sửa.
+  const dang = await payload.find({ collection: "bai-viet", draft: true, overrideAccess: true, depth: 0, pagination: false, req,
+    where: { and: [{ nguon_goc: { equals: "rankyak" } }, { _status: { equals: "draft" } }, { anh_bia: { exists: false } },
+      { trang_thai_duyet: { in: ["dang_viet", "cho_duyet"] } }] } as never,
+    select: { rankyak_id: true, ghi_chu_duyet: true } as never });
+  const theoId = new Map(ds.map((a) => [String(a.id), a]));
+  const doDang: BaiRankYak[] = [];
+  for (const d of dang.docs as unknown as { id: number | string; rankyak_id?: number | null; ghi_chu_duyet?: string | null }[]) {
+    const a = theoId.get(String(d.rankyak_id));
+    if (!a || String(d.ghi_chu_duyet ?? "").includes(DA_THU)) continue;
+    const v = await payload.findVersions({ collection: "bai-viet", overrideAccess: true, limit: 1, depth: 0, req,
+      where: { and: [{ parent: { equals: d.id } }, { "version._status": { equals: "published" } }] } });
+    if (!v.totalDocs) doDang.push(a);
+  }
   const moi: KetQuaTuDongRy["moi"] = [];
-  for (const a of chua) {
+  for (const a of [...chua, ...doDang]) {
     if (moi.length >= toiDa || bayGio() - bat > hanMs) break;
     try {
-      const n = await nhapBaiRankYak(payload, req, a);
+      const n = await nhapBaiRankYak(payload, req, a, { lanHai: doDang.includes(a) });
       moi.push({ rankyak_id: a.id, ...(await xuLyBaiRankYak(payload, req, n, a.id)) });
     } catch (e) {
       moi.push({ rankyak_id: a.id, loi: String((e as Error)?.message ?? e).slice(0, 200) });
     }
   }
-  return { co_khoa: true, moi, con_lai: Math.max(0, chua.length - moi.length) };
+  const tong = chua.length + doDang.length;
+  return { co_khoa: true, moi, con_lai: Math.max(0, tong - moi.length) };
+}
+
+/** Thử lại các nháp RankYak mà lần trước bị "lỗi chặn" (vd bộ kiểm định báo nhầm "trùng số" thành "trúng số") — CHỈ chấm lại +
+ *  tự xuất bản nếu đạt, KHÔNG nhập lại chữ từ RankYak (không đè chỗ Chủ biên đã sửa). Dùng một lần sau khi sửa bộ kiểm định. */
+export async function thuLaiBaiRankYakBiChan(payload: Payload, req?: PayloadRequest,
+  { hanMs = 10 * 60_000, bayGio = () => Date.now() } = {}): Promise<KetQuaTuDongRy["moi"]> {
+  const bat = bayGio();
+  const ds = await payload.find({ collection: "bai-viet", draft: true, overrideAccess: true, depth: 0, pagination: false, req,
+    where: { and: [{ nguon_goc: { equals: "rankyak" } }, { _status: { equals: "draft" } },
+      { trang_thai_duyet: { in: ["dang_viet", "cho_duyet"] } }] } as never,
+    select: { rankyak_id: true, slug: true, ghi_chu_duyet: true } as never });
+  const kq: KetQuaTuDongRy["moi"] = [];
+  for (const d of ds.docs as unknown as { id: number | string; rankyak_id?: number | null; slug?: string; ghi_chu_duyet?: string | null }[]) {
+    if (bayGio() - bat > hanMs) break;
+    if (d.rankyak_id == null || !new RegExp(`${DA_THU}: lỗi chặn`).test(String(d.ghi_chu_duyet ?? ""))) continue;
+    const v = await payload.findVersions({ collection: "bai-viet", overrideAccess: true, limit: 1, depth: 0, req,
+      where: { and: [{ parent: { equals: d.id } }, { "version._status": { equals: "published" } }] } });
+    if (v.totalDocs) continue;
+    try {
+      kq.push({ rankyak_id: d.rankyak_id, ...(await xuLyBaiRankYak(payload, req, { id: d.id, moi: false, slug: String(d.slug ?? ""), da_duyet: false, anh_loi: [] }, d.rankyak_id)) });
+    } catch (e) {
+      kq.push({ rankyak_id: d.rankyak_id, loi: String((e as Error)?.message ?? e).slice(0, 200) });
+    }
+  }
+  return kq;
 }

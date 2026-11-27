@@ -34,3 +34,19 @@ test("đường dẫn trong site", () => {
   for (const d of ["/", "/tu-vi", "/gioi-thieu#nguon"]) assert.ok(laDuongTrongSite(d), d);
   for (const d of ["//evil.vn", "/\\evil.vn", "https://x.vn", "javascript:alert(1)", "/a b", 3]) assert.ok(!laDuongTrongSite(d), String(d));
 });
+
+test('"trùng số" (hai số trùng nhau) KHÔNG bị khớp nhầm với cụm cấm "trúng số" (RankYak, 2026-11-27)', () => {
+  assert.deepEqual(chan("Khi số biểu đạt trùng số chủ đạo, tên khuếch đại những nét sẵn có."), []);
+  assert.deepEqual(chan("Họ hứa chắc chắn trúng số."), ["vung_cam"]);
+  assert.deepEqual(chan("Đã trúng số rồi."), ["vung_cam"]);
+  assert.deepEqual(chan("Bùa hộ mệnh."), ["vung_cam"]);
+  assert.deepEqual(chan("Bữa tối nay ăn gì."), []);
+});
+
+test('"mua vật phẩm" trong lời CẢNH BÁO / ngăn không bị chặn; lời mời mua vẫn bị chặn', () => {
+  assert.deepEqual(chan("Nếu một nơi bắt bạn mua vật phẩm giải hạn sau khi đọc lá số, hãy dừng lại."), []);
+  assert.deepEqual(chan("Bạn không cần mua vật phẩm để làm theo bài này."), []);
+  assert.deepEqual(chan("Giải pháp có bắt buộc mua vật phẩm không, và vì sao?"), []);
+  assert.deepEqual(chan("Hãy mua vật phẩm này để chuyển vận."), ["vung_cam"]);
+  assert.deepEqual(chan("Chợ hợp với người muốn mua vật phẩm cho bàn làm việc."), ["vung_cam"]);
+});

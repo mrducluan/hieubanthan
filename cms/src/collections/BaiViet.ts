@@ -202,8 +202,9 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
     },
     {
       // RY-1: webhook "Next.js connection" của RankYak (dán URL https://cms.hieuban.com/api/bai-viet/rankyak vào RankYak).
-      // Bí mật RANKYAK_WEBHOOK_SECRET trong một header. Ghi bản nháp ngay, trả 200; chuẩn hoá + tự xuất bản chạy SAU khi
-      // trả lời (`after`) để RankYak không chờ quá lâu rồi gửi lại. Lỗi ghi bài → 502 để RankYak tự gửi lại (tới 3 ngày).
+      // Bí mật RANKYAK_WEBHOOK_SECRET trong một header. Chỉ ghi CHỮ của bài (bản nháp) rồi trả 200 trong ~1 giây — RankYak chờ
+      // vài giây là báo "Failed", mà tải + lưu ảnh + chuẩn hoá + tự xuất bản mất ~10 giây (2026-11-22…24: cả 4 bài lên web
+      // nhưng RankYak ghi Failed). Phần nặng chạy SAU khi trả lời (`after`). Lỗi ghi bài → 502 để RankYak tự gửi lại (tới 3 ngày).
       path: "/rankyak", method: "post",
       handler: async (req) => {
         if (!process.env.RANKYAK_WEBHOOK_SECRET?.trim()) return Response.json({ loi: "CMS chưa đặt RANKYAK_WEBHOOK_SECRET." }, { status: 503 });
@@ -216,14 +217,18 @@ export const BaiViet: CollectionConfig<"bai-viet"> = {
         if (!sk.article) return Response.json({ ok: true, event: sk.event });   // lượt thử khi bấm Save
         if (sk.event && !/^article\.(published|updated|created)$/.test(sk.event)) return Response.json({ ok: true, bo_qua: sk.event });
         try {
-          const n = await nhapBaiRankYak(req.payload, req, sk.article);
-          const payload = req.payload, idRy = sk.article.id;
+          const a = sk.article, payload = req.payload;
+          const n = await nhapBaiRankYak(payload, req, a, { boAnh: true });
           const sau = async () => {
-            try { console.log("[rankyak] xử lý", JSON.stringify({ rankyak_id: idRy, ...(await xuLyBaiRankYak(payload, undefined, n, idRy)) })); }
-            catch (e) { console.error("[rankyak] chuẩn hoá lỗi", idRy, (e as Error)?.message); }
+            try {
+              // Lượt hai: có ảnh (đã có bài thì cập nhật đúng bài đó), rồi chuẩn hoá SEO → tự xuất bản nếu đạt.
+              const n2 = await nhapBaiRankYak(payload, { payload } as never, a, { lanHai: true });
+              console.log("[rankyak] xử lý", JSON.stringify({ rankyak_id: a.id, ...(await xuLyBaiRankYak(payload, undefined, n2, a.id)) }));
+            } catch (e) { console.error("[rankyak] xử lý lỗi", a.id, (e as Error)?.message); }
           };
-          // Ngoài phạm vi một yêu cầu Next (test gọi thẳng handler) `after` ném lỗi → chạy luôn.
-          try { after(sau); } catch { await sau(); }
+          // Ngoài một yêu cầu Next (test gọi thẳng handler) `after` ném lỗi → chạy luôn. Trên Vercel mà `after` lỗi thì KHÔNG chờ
+          // (sẽ làm RankYak báo Failed): bản nháp đã lưu, cron ngày xử lý nốt (`tuDongRankYak`).
+          try { after(sau); } catch { if (!process.env.VERCEL) await sau(); else console.warn("[rankyak] after() không dùng được — cron ngày xử lý nốt bài", a.id); }
           return Response.json({ ok: true, id: n.id, moi: n.moi, status: "draft" });
         } catch (e) {
           console.error("[rankyak] nhập lỗi", (e as Error)?.message);
