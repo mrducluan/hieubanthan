@@ -1,6 +1,8 @@
 {
   "_nguon": "Stage 4.2 English overlay — 12 Houses & Angles.",
   "_trang_thai": "nhap_may",
+  "source_id": "bien_tap_chiem_tinh_2026",
+  "school_id": "chiem_tinh_tay",
   "he_nha": {
     "whole_sign": {
       "ten": "Whole Sign Houses",
@@ -79,18 +81,18 @@
   },
   "truc_goc": {
     "asc": {
-      "bach_duong": "Aries Rising: your natural doorway into new situations carries direct initiative, candid candor, and quick readiness to begin.",
-      "kim_nguu": "Taurus Rising: your natural doorway into new situations carries steady accumulation, tangible craft, and unhurried reliability.",
-      "song_tu": "Gemini Rising: your natural doorway into new situations carries curious inquiry, agile dialogue, and multi-threaded learning.",
-      "cu_giai": "Cancer Rising: your natural doorway into new situations carries protective care, emotional memory, and devotion to safe belonging.",
-      "su_tu": "Leo Rising: your natural doorway into new situations carries warm self-direction, generous presence, and wholehearted expression.",
-      "xu_nu": "Virgo Rising: your natural doorway into new situations carries discerning refinement, practical service, and clean organization.",
-      "thien_binh": "Libra Rising: your natural doorway into new situations carries fair-minded mediation, relational poise, and balanced proportion.",
-      "bo_cap": "Scorpio Rising: your natural doorway into new situations carries focused intensity, root-cause honesty, and deep loyalty.",
-      "nhan_ma": "Sagittarius Rising: your natural doorway into new situations carries broad horizon-seeking, candid synthesis, and love of exploration.",
-      "ma_ket": "Capricorn Rising: your natural doorway into new situations carries long-horizon discipline, structural accountability, and earned mastery.",
-      "bao_binh": "Aquarius Rising: your natural doorway into new situations carries independent systems thinking, principled reform, and civic perspective.",
-      "song_ngu": "Pisces Rising: your natural doorway into new situations carries receptive empathy, imaginative synthesis, and quiet compassion."
+      "bach_duong": "Aries Rising: people see you as quick, direct and ready to act; you enter new places through action.",
+      "kim_nguu": "Taurus Rising: people see you as calm, pleasant and dependable; you enter new places slowly, observing first.",
+      "song_tu": "Gemini Rising: people see you as lively, curious and easy to talk to; you get to know others through questions and exchange.",
+      "cu_giai": "Cancer Rising: people see you as gentle, attentive and a little reserved at first; you open up once you feel safe.",
+      "su_tu": "Leo Rising: people see you as confident, warm and noticeable; you walk into new places with clear presence.",
+      "xu_nu": "Virgo Rising: people see you as neat, modest and considerate; you connect by helping with something concrete.",
+      "thien_binh": "Libra Rising: people see you as polite, likeable and tactful; you enter new places with grace.",
+      "bo_cap": "Scorpio Rising: people see you as private, deep and observant; you keep your distance until you trust.",
+      "nhan_ma": "Sagittarius Rising: people see you as cheerful, open and playful; you treat new places as an adventure.",
+      "ma_ket": "Capricorn Rising: people see you as serious, mature and measured; you earn trust by being on time and keeping your word.",
+      "bao_binh": "Aquarius Rising: people see you as different, friendly yet a little distant; you connect through ideas.",
+      "song_ngu": "Pisces Rising: people see you as soft, dreamy and empathetic; you blend into the mood of a new place."
     },
     "mc": {
       "bach_duong": "Aries Midheaven (MC): public vocation and reputation mature through direct initiative, candid candor, and quick readiness to begin.",

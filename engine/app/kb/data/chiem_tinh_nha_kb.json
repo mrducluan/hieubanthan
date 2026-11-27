@@ -1,96 +1,130 @@
 {
   "_nguon": "Chặng 4.2 — 12 Nhà & Trục góc Ascendant / MC.",
   "_trang_thai": "nhap_ai_cho_duyet",
+  "source_id": "bien_tap_chiem_tinh_2026",
+  "school_id": "chiem_tinh_tay",
   "he_nha": {
     "whole_sign": {
       "ten": "Hệ Nhà Trọn Cung (Whole Sign)",
-      "giai_thich": "Mỗi cung hoàng đạo trọn vẹn là một nhà tính từ cung chứa điểm Mọc — hệ cổ điển Hy Lạp rõ ràng, không bị méo nhà ở mọi vĩ độ."
+      "giai_thich": "Mỗi cung hoàng đạo trọn vẹn là một nhà tính từ cung chứa điểm Mọc — hệ cổ điển Hy Lạp rõ ràng, không bị méo nhà ở mọi vĩ độ.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "placidus": {
       "ten": "Hệ Nhà Placidus (Chia cung ngày đêm)",
-      "giai_thich": "Chia nhà theo phần ba cung bán nhật/bán dạ của từng độ hoàng đạo; tự động lùi an toàn về Whole Sign khi vĩ độ từ 66° trở lên."
+      "giai_thich": "Chia nhà theo phần ba cung bán nhật/bán dạ của từng độ hoàng đạo; tự động lùi an toàn về Whole Sign khi vĩ độ từ 66° trở lên.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "khong_gio_solar": {
       "ten": "Bản đồ Mặt Trời (Chưa rõ giờ sinh)",
-      "giai_thich": "Khi chưa biết giờ sinh, hệ thống không đoán mò Cung Mọc hay 12 nhà mà đọc vị trí cung của các hành tinh kèm biên độ Mặt Trăng trong ngày."
+      "giai_thich": "Khi chưa biết giờ sinh, hệ thống không đoán mò Cung Mọc hay 12 nhà mà đọc vị trí cung của các hành tinh kèm biên độ Mặt Trăng trong ngày.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     }
   },
   "nha": {
     "1": {
       "ten": "Nhà 1 · Bản thân & Dáng vẻ tiếp cận đời sống",
       "linh_vuc": "cách tự thể hiện bước đầu và sức bật cá nhân",
-      "y_chinh": "Nhà 1 · Bản thân & Dáng vẻ tiếp cận đời sống xoay quanh cách tự thể hiện bước đầu và sức bật cá nhân."
+      "y_chinh": "Nhà 1 · Bản thân & Dáng vẻ tiếp cận đời sống xoay quanh cách tự thể hiện bước đầu và sức bật cá nhân.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "2": {
       "ten": "Nhà 2 · Tài chính tự thân & Thước đo giá trị",
       "linh_vuc": "cách tạo thu nhập, giữ tài sản và trân trọng năng lực thực",
-      "y_chinh": "Nhà 2 · Tài chính tự thân & Thước đo giá trị xoay quanh cách tạo thu nhập, giữ tài sản và trân trọng năng lực thực."
+      "y_chinh": "Nhà 2 · Tài chính tự thân & Thước đo giá trị xoay quanh cách tạo thu nhập, giữ tài sản và trân trọng năng lực thực.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "3": {
       "ten": "Nhà 3 · Học hỏi, Giao tiếp & Môi trường gần",
       "linh_vuc": "việc viết lách, trao đổi hàng ngày và kết nối lân cận",
-      "y_chinh": "Nhà 3 · Học hỏi, Giao tiếp & Môi trường gần xoay quanh việc viết lách, trao đổi hàng ngày và kết nối lân cận."
+      "y_chinh": "Nhà 3 · Học hỏi, Giao tiếp & Môi trường gần xoay quanh việc viết lách, trao đổi hàng ngày và kết nối lân cận.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "4": {
       "ten": "Nhà 4 · Tổ ấm, Gia đình gốc & Điểm tựa nội tâm",
       "linh_vuc": "nền tảng gia đình, chỗ ở và sự bình yên khi khép cửa",
-      "y_chinh": "Nhà 4 · Tổ ấm, Gia đình gốc & Điểm tựa nội tâm xoay quanh nền tảng gia đình, chỗ ở và sự bình yên khi khép cửa."
+      "y_chinh": "Nhà 4 · Tổ ấm, Gia đình gốc & Điểm tựa nội tâm xoay quanh nền tảng gia đình, chỗ ở và sự bình yên khi khép cửa.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "5": {
       "ten": "Nhà 5 · Sáng tạo, Niềm vui & Biểu đạt cá nhân",
       "linh_vuc": "dự án tâm huyết, sở thích lành mạnh và tình cảm con cái",
-      "y_chinh": "Nhà 5 · Sáng tạo, Niềm vui & Biểu đạt cá nhân xoay quanh dự án tâm huyết, sở thích lành mạnh và tình cảm con cái."
+      "y_chinh": "Nhà 5 · Sáng tạo, Niềm vui & Biểu đạt cá nhân xoay quanh dự án tâm huyết, sở thích lành mạnh và tình cảm con cái.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "6": {
       "ten": "Nhà 6 · Nhịp làm việc hàng ngày & Chăm sóc sức bền",
       "linh_vuc": "quy trình chuyên môn, kỷ luật sinh hoạt và rèn luyện thân thể",
-      "y_chinh": "Nhà 6 · Nhịp làm việc hàng ngày & Chăm sóc sức bền xoay quanh quy trình chuyên môn, kỷ luật sinh hoạt và rèn luyện thân thể."
+      "y_chinh": "Nhà 6 · Nhịp làm việc hàng ngày & Chăm sóc sức bền xoay quanh quy trình chuyên môn, kỷ luật sinh hoạt và rèn luyện thân thể.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "7": {
       "ten": "Nhà 7 · Bạn đời, Đối tác 1–1 & Thoả thuận song phương",
       "linh_vuc": "hôn nhân, cộng sự đối đẳng và cam kết minh bạch hai chiều",
-      "y_chinh": "Nhà 7 · Bạn đời, Đối tác 1–1 & Thoả thuận song phương xoay quanh hôn nhân, cộng sự đối đẳng và cam kết minh bạch hai chiều."
+      "y_chinh": "Nhà 7 · Bạn đời, Đối tác 1–1 & Thoả thuận song phương xoay quanh hôn nhân, cộng sự đối đẳng và cam kết minh bạch hai chiều.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "8": {
       "ten": "Nhà 8 · Nguồn lực chung, Thuế nợ & Đổi mới sâu",
       "linh_vuc": "quản trị vốn góp chung, bảo hiểm, thừa kế và vượt thử thách",
-      "y_chinh": "Nhà 8 · Nguồn lực chung, Thuế nợ & Đổi mới sâu xoay quanh quản trị vốn góp chung, bảo hiểm, thừa kế và vượt thử thách."
+      "y_chinh": "Nhà 8 · Nguồn lực chung, Thuế nợ & Đổi mới sâu xoay quanh quản trị vốn góp chung, bảo hiểm, thừa kế và vượt thử thách.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "9": {
       "ten": "Nhà 9 · Tri thức bậc cao, Đi xa & Tầm nhìn sống",
       "linh_vuc": "học thuật chuyên sâu, ngoại ngữ, xuất ngoại và triết lý sống",
-      "y_chinh": "Nhà 9 · Tri thức bậc cao, Đi xa & Tầm nhìn sống xoay quanh học thuật chuyên sâu, ngoại ngữ, xuất ngoại và triết lý sống."
+      "y_chinh": "Nhà 9 · Tri thức bậc cao, Đi xa & Tầm nhìn sống xoay quanh học thuật chuyên sâu, ngoại ngữ, xuất ngoại và triết lý sống.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "10": {
       "ten": "Nhà 10 · Sự nghiệp, Vị thế xã hội & Trách nhiệm công",
       "linh_vuc": "con đường nghề nghiệp dài hạn, uy tín và đóng góp xã hội",
-      "y_chinh": "Nhà 10 · Sự nghiệp, Vị thế xã hội & Trách nhiệm công xoay quanh con đường nghề nghiệp dài hạn, uy tín và đóng góp xã hội."
+      "y_chinh": "Nhà 10 · Sự nghiệp, Vị thế xã hội & Trách nhiệm công xoay quanh con đường nghề nghiệp dài hạn, uy tín và đóng góp xã hội.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "11": {
       "ten": "Nhà 11 · Cộng đồng, Mạng lưới đồng chí & Mục tiêu xa",
       "linh_vuc": "đội nhóm cùng chí hướng, hội đoàn chuyên môn và mục tiêu dài hạn",
-      "y_chinh": "Nhà 11 · Cộng đồng, Mạng lưới đồng chí & Mục tiêu xa xoay quanh đội nhóm cùng chí hướng, hội đoàn chuyên môn và mục tiêu dài hạn."
+      "y_chinh": "Nhà 11 · Cộng đồng, Mạng lưới đồng chí & Mục tiêu xa xoay quanh đội nhóm cùng chí hướng, hội đoàn chuyên môn và mục tiêu dài hạn.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "12": {
       "ten": "Nhà 12 · Khoảng lặng chiêm nghiệm & Phục hồi tâm trí",
       "linh_vuc": "thời gian tĩnh tâm, tháo gỡ nỗi lo thầm kín và nghỉ ngơi sâu",
-      "y_chinh": "Nhà 12 · Khoảng lặng chiêm nghiệm & Phục hồi tâm trí xoay quanh thời gian tĩnh tâm, tháo gỡ nỗi lo thầm kín và nghỉ ngơi sâu."
+      "y_chinh": "Nhà 12 · Khoảng lặng chiêm nghiệm & Phục hồi tâm trí xoay quanh thời gian tĩnh tâm, tháo gỡ nỗi lo thầm kín và nghỉ ngơi sâu.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     }
   },
   "truc_goc": {
     "asc": {
-      "bach_duong": "Cung Mọc Bạch Dương: cách bạn bước vào môi trường mới mang nét chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
-      "kim_nguu": "Cung Mọc Kim Ngưu: cách bạn bước vào môi trường mới mang nét bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
-      "song_tu": "Cung Mọc Song Tử: cách bạn bước vào môi trường mới mang nét nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
-      "cu_giai": "Cung Mọc Cự Giải: cách bạn bước vào môi trường mới mang nét giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
-      "su_tu": "Cung Mọc Sư Tử: cách bạn bước vào môi trường mới mang nét ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
-      "xu_nu": "Cung Mọc Xử Nữ: cách bạn bước vào môi trường mới mang nét tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
-      "thien_binh": "Cung Mọc Thiên Bình: cách bạn bước vào môi trường mới mang nét cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
-      "bo_cap": "Cung Mọc Bọ Cạp: cách bạn bước vào môi trường mới mang nét tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
-      "nhan_ma": "Cung Mọc Nhân Mã: cách bạn bước vào môi trường mới mang nét hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
-      "ma_ket": "Cung Mọc Ma Kết: cách bạn bước vào môi trường mới mang nét trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
-      "bao_binh": "Cung Mọc Bảo Bình: cách bạn bước vào môi trường mới mang nét độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
-      "song_ngu": "Cung Mọc Song Ngư: cách bạn bước vào môi trường mới mang nét cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung."
+      "bach_duong": "Cung Mọc Bạch Dương: người khác thấy bạn nhanh nhẹn, thẳng thắn, sẵn sàng làm ngay; bạn bước vào chỗ mới bằng hành động.",
+      "kim_nguu": "Cung Mọc Kim Ngưu: người khác thấy bạn điềm tĩnh, dễ chịu, đáng tin; bạn vào chỗ mới chậm rãi, quan sát trước.",
+      "song_tu": "Cung Mọc Song Tử: người khác thấy bạn hoạt bát, tò mò, dễ bắt chuyện; bạn làm quen bằng câu hỏi và trao đổi.",
+      "cu_giai": "Cung Mọc Cự Giải: người khác thấy bạn hiền, chu đáo, hơi dè dặt lúc đầu; bạn mở lòng khi thấy an toàn.",
+      "su_tu": "Cung Mọc Sư Tử: người khác thấy bạn tự tin, ấm áp, dễ được chú ý; bạn bước vào chỗ mới với phong thái rõ ràng.",
+      "xu_nu": "Cung Mọc Xử Nữ: người khác thấy bạn gọn gàng, khiêm tốn, chu đáo; bạn làm quen bằng cách giúp một việc cụ thể.",
+      "thien_binh": "Cung Mọc Thiên Bình: người khác thấy bạn lịch sự, dễ mến, khéo cư xử; bạn vào chỗ mới bằng sự nhã nhặn.",
+      "bo_cap": "Cung Mọc Bọ Cạp: người khác thấy bạn kín đáo, có chiều sâu, hay quan sát; bạn giữ khoảng cách cho tới khi tin.",
+      "nhan_ma": "Cung Mọc Nhân Mã: người khác thấy bạn vui vẻ, cởi mở, hay đùa; bạn vào chỗ mới như một chuyến khám phá.",
+      "ma_ket": "Cung Mọc Ma Kết: người khác thấy bạn nghiêm túc, chững chạc, có chừng mực; bạn tạo niềm tin bằng sự đúng hẹn.",
+      "bao_binh": "Cung Mọc Bảo Bình: người khác thấy bạn khác biệt, thân thiện nhưng giữ khoảng cách; bạn làm quen bằng ý tưởng.",
+      "song_ngu": "Cung Mọc Song Ngư: người khác thấy bạn mềm mỏng, mơ màng, dễ đồng cảm; bạn hoà vào không khí chỗ mới.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     },
     "mc": {
       "bach_duong": "Thiên Đỉnh (MC) Bạch Dương: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
@@ -104,7 +138,9 @@
       "nhan_ma": "Thiên Đỉnh (MC) Nhân Mã: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
       "ma_ket": "Thiên Đỉnh (MC) Ma Kết: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
       "bao_binh": "Thiên Đỉnh (MC) Bảo Bình: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
-      "song_ngu": "Thiên Đỉnh (MC) Song Ngư: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung."
+      "song_ngu": "Thiên Đỉnh (MC) Song Ngư: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
     }
   }
 }

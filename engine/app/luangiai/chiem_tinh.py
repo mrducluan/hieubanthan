@@ -22,7 +22,6 @@ from app.calc import (
     tuvi_an_sao as az,
 )
 from app.kb import nap, ten as _tn
-from app.ngon_ngu import la_viet
 
 _HANH_CHUAN = {"Thuỷ": "Thủy", "Hoả": "Hỏa", "Kim": "Kim", "Mộc": "Mộc", "Thủy": "Thủy", "Hỏa": "Hỏa", "Thổ": "Thổ"}
 
@@ -51,14 +50,53 @@ def _kb_bridge() -> dict:
     return nap.doc("astro_east_west_bridge_kb.json")
 
 
+def _loi() -> dict:
+    return _kb_ht()["loi"]
+
+
 def _ten_diem(ma: str, kb_ht: dict) -> str:
     if ma in kb_ht["hanh_tinh"]:
         return kb_ht["hanh_tinh"][ma]["ten"]
-    if ma == "asc":
-        return "Cung Mọc (Asc)" if la_viet() else "Ascendant (Asc)"
-    if ma == "mc":
-        return "Thiên Đỉnh (MC)" if la_viet() else "Midheaven (MC)"
+    if ma in ("asc", "mc"):
+        return kb_ht["loi"]["ten_" + ma]
     return ma
+
+
+def _dau_vao_dong(ngay_sinh: dt.date, gio_sinh: str, gioi_tinh: str, noi_sinh: str | None, vung_vn: str):
+    """Cùng tiền xử lý thời gian với lá số Tử vi / Bát tự (`tuvi_api._DauVao`: múi giờ lịch sử, nơi sinh, âm lịch Việt).
+    Thiếu / sai nơi sinh hoặc vùng → `None` (bên phương Đông báo thiếu, không đoán)."""
+    from fastapi import HTTPException  # noqa: PLC0415
+
+    from app.calc import dia_ly, mui_gio  # noqa: PLC0415
+    from app.config import Region  # noqa: PLC0415
+    from app.tuvi_api import TuanTrietInput, _DauVao  # noqa: PLC0415
+
+    ma = (noi_sinh or "").strip()
+    if ma and mui_gio.thanh_pho(ma) is not None:
+        kw: dict = {"noi_sinh": dia_ly.NUOC_NGOAI, "mui_gio": ma}
+    elif ma and dia_ly.tra(dia_ly._ma(ma)) is not None:
+        kw = {"noi_sinh": dia_ly._ma(ma)}
+    elif ma:
+        return None
+    else:
+        kw = {"vung": Region.SOUTH if vung_vn == "south" else Region.NORTH}
+    try:
+        return _DauVao(TuanTrietInput(birth_date=ngay_sinh, birth_time=gio_sinh, gender=gioi_tinh, **kw))
+    except HTTPException:
+        return None
+
+
+def _menh_tuvi(dv, gioi_tinh: str) -> dict:
+    """Chính tinh cung Mệnh Tử vi — đúng đường an sao của lá số Tử vi (iztro, âm lịch Việt, giờ theo `time_index`).
+    Cung Mệnh vô chính diệu → mượn cung đối diện (như các mảng khác)."""
+    cal = dv.tb.calendar_dt
+    ti = az.time_index(cal.hour, cal.minute)
+    la = az.an_sao_tho(cal.date(), ti, gioi_tinh, "vi-VN", tz_lich=dv.tz_lich, **dv.tuy_chon)
+    cung = la["palaces"]
+    i = next(k for k, p in enumerate(cung) if p["name"] == "Mệnh")
+    muon = not cung[i]["majorStars"]
+    p = cung[(i + 6) % 12] if muon else cung[i]
+    return {"sao": [x["name"] for x in p["majorStars"]], "muon": muon}
 
 
 def _cau_noi_dong_tay(
@@ -68,52 +106,54 @@ def _cau_noi_dong_tay(
     natal: dict,
     transit: dict,
     kb_ht: dict,
+    noi_sinh: str | None = None,
+    vung_vn: str = "north",
 ) -> dict:
+    """CD-1: đặt hai hệ cạnh nhau, không quy đổi Ngũ hành ↔ 4 nguyên tố, không chấm điểm."""
     kb_br = _kb_bridge()
-    vi = la_viet()
-    hh, mm = (int(x) for x in gio_sinh.split(":")) if gio_sinh else (12, 0)
-    ls_bt = bt_calc.la_so(
-        dt.datetime(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, hh, mm),
-        gioi_tinh=gioi_tinh,
-        co_gio=bool(gio_sinh),
-    )
+    loi = kb_br["loi"]
+    gt = gioi_tinh if gioi_tinh in ("nam", "nu") else "nam"
+
+    dv = _dau_vao_dong(ngay_sinh, gio_sinh, gt, noi_sinh, vung_vn) if gio_sinh else None
+    if dv is not None:
+        ls_bt = bt_calc.la_so(dv.tb.calendar_dt, gioi_tinh=gt, utc_lich=dv.utc_lich)
+    else:   # chưa có giờ (hoặc thiếu nơi sinh): chỉ trụ ngày theo ngày sinh, không đọc giờ
+        ls_bt = bt_calc.la_so(dt.datetime(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, 12, 0), gioi_tinh=gt,
+                              co_gio=False)
     can_nc = _tn.ten("can", ls_bt["nhat_chu"]["can"])
     hanh_nc = _tn.ten("hanh", _HANH_CHUAN[ls_bt["nhat_chu"]["ngu_hanh"]])
 
-    ten_sao_menh = None
-    if gio_sinh:
-        try:
-            ls_tv = az.an_sao(ngay_sinh.isoformat(), hh // 2 if hh < 23 else 0, gioi_tinh)
-            c_menh = next((c for c in ls_tv.get("cung", []) if c.get("la_menh")), None)
-            chinh_tinh = [s["ten"] for s in (c_menh or {}).get("chinh_tinh", []) if s.get("ten")]
-            if chinh_tinh:
-                ten_sao_menh = ", ".join(_tn.ten("sao", s) for s in chinh_tinh)
-        except Exception:
-            ten_sao_menh = None
+    if not gio_sinh:
+        tv, thieu = None, "gio"
+    elif dv is None:
+        tv, thieu = None, "noi_sinh"
+    else:
+        tv, thieu = _menh_tuvi(dv, gt), None
+        if not tv["sao"]:
+            tv, thieu = None, "khong_chinh_tinh"
+
+    tom_dong = loi["dong_bat_tu"].format(can=can_nc, hanh=hanh_nc)
+    if tv:
+        sao = loi["noi"].join(_tn.ten("sao", x) for x in tv["sao"])
+        tom_dong += loi["dong_tu_vi_muon" if tv["muon"] else "dong_tu_vi"].format(sao=sao)
+    else:
+        tom_dong += loi["dong_thieu_" + thieu]
 
     sun_c = kb_ht["cung_hoang_dao"][natal["thien_the"]["mat_troi"]["cung"]]["ten"]
     moon_c = kb_ht["cung_hoang_dao"][natal["thien_the"]["mat_trang"]["cung"]]["ten"]
     asc_c = kb_ht["cung_hoang_dao"][natal["truc"]["asc"]["cung"]]["ten"] if natal.get("truc") else None
-
-    if vi:
-        tom_dong = f"Nhật chủ Bát tự: {can_nc} ({hanh_nc})" + (
-            f" · Chính tinh cung Mệnh Tử vi: {ten_sao_menh}." if ten_sao_menh else " (nhập thêm giờ sinh để đối chiếu cung Mệnh Tử vi)."
-        )
-        tom_tay = f"Mặt Trời {sun_c} · Mặt Trăng {moon_c}" + (
-            f" · Cung Mọc {asc_c}." if asc_c else " (chưa rõ giờ sinh nên không gán Cung Mọc)."
-        )
-    else:
-        tom_dong = f"BaZi Day Master: {can_nc} ({hanh_nc})" + (
-            f" · Zi Wei Life Palace stars: {ten_sao_menh}." if ten_sao_menh else " (add birth hour to compare your Zi Wei Life Palace)."
-        )
-        tom_tay = f"Sun in {sun_c} · Moon in {moon_c}" + (
-            f" · {asc_c} Rising." if asc_c else " (Ascendant omitted without birth hour)."
-        )
+    tom_tay = loi["tay"].format(mat_troi=sun_c, mat_trang=moon_c) + (
+        loi["tay_asc"].format(asc=asc_c) if asc_c else loi["tay_khong_asc"])
 
     return {
         "nguyen_tac": kb_br["nguyen_tac_cau_noi"],
         "tom_tat_phuong_dong": tom_dong,
         "tom_tat_phuong_tay": tom_tay,
+        "tu_vi_menh": (
+            {"sao": [_tn.ten("sao", x) for x in tv["sao"]], "muon_cung_doi": tv["muon"]}
+            if tv else None
+        ),
+        "thieu": thieu,
         "bon_chieu": [
             {"ma": k, **v} for k, v in kb_br["bon_chieu_doi_chieu"].items()
         ],
@@ -135,18 +175,13 @@ def doc_ban_do_chiem_tinh(
     kem_cau_noi_dong_tay: bool = True,
 ) -> dict:
     hn = ngay_xem or config.hom_nay_vn()
-    vi = la_viet()
     tuoi = hn.year - ngay_sinh.year - ((hn.month, hn.day) < (ngay_sinh.month, ngay_sinh.day))
     if tuoi < config.TUOI_NGUOI_LON:
         return {
             "mo_dun": "chiem_tinh",
             "chuyen_huong_tuoi": {
                 "tuoi": tuoi,
-                "thong_bao": (
-                    "Bản đồ sao Chiêm tinh chi tiết và vận hạn chỉ mở cho người từ đủ 16 tuổi trở lên."
-                    if vi
-                    else "Detailed Western Astrology natal and transit readings are available only for users aged 16 and older."
-                ),
+                "thong_bao": _loi()["tuoi_chua_du"].format(tuoi=config.TUOI_NGUOI_LON),
             },
         }
 
@@ -217,17 +252,11 @@ def doc_ban_do_chiem_tinh(
         c0 = kb_ht["cung_hoang_dao"][bd_mt["cung_00h"]]["ten"]
         c1 = kb_ht["cung_hoang_dao"][bd_mt["cung_24h"]]["ten"]
         if bd_mt["doi_cung_trong_ngay"]:
-            ghi_chu_mat_trang = (
-                f"Chưa rõ giờ sinh: trong ngày này Mặt Trăng di chuyển từ {c0} sang {c1} ({bd_mt['kinh_do_00h']}° → {bd_mt['kinh_do_24h']}°). Nhập giờ sinh nếu biết để chốt chính xác cung Mặt Trăng và 12 Nhà."
-                if vi
-                else f"Birth hour unknown: on this date the Moon moves across {c0} into {c1} ({bd_mt['kinh_do_00h']}° -> {bd_mt['kinh_do_24h']}°). Add your birth time if known to lock Moon sign and 12 Houses."
-            )
+            ghi_chu_mat_trang = kb_ht["loi"]["mat_trang_doi_cung"].format(
+                c0=c0, c1=c1, d0=bd_mt["kinh_do_00h"], d1=bd_mt["kinh_do_24h"])
         else:
-            ghi_chu_mat_trang = (
-                f"Dù chưa rõ giờ sinh, suốt 24 giờ ngày này Mặt Trăng đều nằm trọn trong cung {c0} ({bd_mt['kinh_do_00h']}° → {bd_mt['kinh_do_24h']}°)."
-                if vi
-                else f"Even without a birth hour, the Moon remains in {c0} throughout all 24 hours of your birth date ({bd_mt['kinh_do_00h']}° -> {bd_mt['kinh_do_24h']}°)."
-            )
+            ghi_chu_mat_trang = kb_ht["loi"]["mat_trang_mot_cung"].format(
+                c0=c0, d0=bd_mt["kinh_do_00h"], d1=bd_mt["kinh_do_24h"])
 
     # Góc chiếu chính
     ds_goc = []
@@ -276,18 +305,14 @@ def doc_ban_do_chiem_tinh(
     }
 
     cau_noi = (
-        _cau_noi_dong_tay(ngay_sinh, gio_sinh, gioi_tinh, natal, transit, kb_ht)
+        _cau_noi_dong_tay(ngay_sinh, gio_sinh, gioi_tinh, natal, transit, kb_ht, noi_sinh=noi_sinh, vung_vn=vung_vn)
         if kem_cau_noi_dong_tay
         else None
     )
 
     return {
         "mo_dun": "chiem_tinh",
-        "phuong_phap_lich": (
-            "Lịch thiên văn tất định VSOP87D + Meeus ELP2000-82 + NASA JPL Horizons DE441 (sai số < 0,25 phút cung, không lưu dữ liệu cá nhân)."
-            if vi
-            else "Deterministic ephemeris: VSOP87D + Meeus ELP2000-82 + Public-Domain NASA JPL Horizons DE441 (< 0.25 arcmin error, zero personal data stored)."
-        ),
+        "phuong_phap_lich": kb_ht["loi"]["phuong_phap_lich"],
         "dau_vao": natal["dau_vao_da_chuan"],
         "co_gio_sinh": natal["co_gio_sinh"],
         "he_nha": {
@@ -319,6 +344,14 @@ def doc_ban_do_chiem_tinh(
     }
 
 
+def _vi_tri_sinh(p: dict) -> dict:
+    """Chuyển nguyên các trường giờ / nơi sinh có trong yêu cầu (calc tự báo `LoiNoiSinh` khi nơi lạ → API 422)."""
+    kw = {k: p[k] for k in ("gio_sinh", "noi_sinh", "vi_do", "kinh_do", "utc_lech") if p.get(k) is not None}
+    if p.get("vung_vn"):
+        kw["vung_vn"] = p["vung_vn"]
+    return kw
+
+
 def doc_hop_doi_synastry(
     *,
     nguoi_a: dict,
@@ -336,16 +369,8 @@ def doc_hop_doi_synastry(
     kb_gc = _kb_gc()
     kb_hd = _kb_hd()
 
-    na = ctn.lap_ban_do_natal(
-        ngay_sinh=nguoi_a["ngay_sinh"],
-        gio_sinh=nguoi_a.get("gio_sinh"),
-        noi_sinh=nguoi_a.get("noi_sinh"),
-    )
-    nb = ctn.lap_ban_do_natal(
-        ngay_sinh=nguoi_b["ngay_sinh"],
-        gio_sinh=nguoi_b.get("gio_sinh"),
-        noi_sinh=nguoi_b.get("noi_sinh"),
-    )
+    na = ctn.lap_ban_do_natal(ngay_sinh=nguoi_a["ngay_sinh"], **_vi_tri_sinh(nguoi_a))
+    nb = ctn.lap_ban_do_natal(ngay_sinh=nguoi_b["ngay_sinh"], **_vi_tri_sinh(nguoi_b))
     syn = cts.tinh_synastry(na, nb)
 
     chieu_da_co: dict[str, list[dict]] = {}

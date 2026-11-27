@@ -1,58 +1,130 @@
 {
-  "_nguon": "Chặng 4.3 — Trạch Nhật chuyên sâu đối chiếu Khâm Định Hiệp Kỷ Biện Phương Thư (câu Hán trích nguyên văn từ hiep_ky_bien_phuong_thu_du_bo.json).",
+  "_nguon": "Chặng 4.3 — Trạch Nhật chuyên sâu đối chiếu Khâm Định Hiệp Kỷ Biện Phương Thư (câu Hán trích nguyên văn từ hiep_ky_bien_phuong_thu_du_bo.json; lời Việt là tóm ý của ban biên tập, nói theo nghĩa đời nay).",
   "_trang_thai": "nhap_ai_cho_duyet",
+  "source_id": "hiep_ky_bien_phuong_thu",
+  "school_id": "trach_nhat_hiep_ky",
   "khung": {
-    "tieu_de": "Đối chiếu Trạch Nhật Cổ điển (Hiệp Kỷ Biện Phương Thư)",
-    "phu_de": "Bổ sung góc nhìn phân tích gốc can chi của Hiệp Kỷ Biện Phương Thư bên cạnh lịch chọn ngày thông dụng: xét quan hệ Can – Chi (Bảo, Nghĩa, Chế, Chuyên, Phạt), ngày giao mùa Tứ Ly – Tứ Tuyệt, phương Tam Sát khi động thổ/tu tạo và tinh thần Biện Ngoa gạt bỏ các kiêng kỵ doạ dẫm vô căn cứ.",
-    "ranh_gioi": "Trạch nhật cổ điển giúp chọn nhịp tâm lý chủ động và tránh ngày giao tiết gay gắt; sự chuẩn bị kỹ về con người và quy trình luôn là gốc quyết định."
+    "tieu_de": "Đối chiếu ngày theo sách Hiệp Kỷ Biện Phương Thư",
+    "phu_de": "Thêm góc nhìn của bộ sách chọn ngày triều Thanh bên cạnh lịch chọn ngày thông dụng: quan hệ sinh khắc giữa can và chi của ngày (Bảo, Nghĩa, Chế, Chuyên, Phạt), ngày giáp ranh mùa, phương Tam Sát khi đào đất sửa nhà, và những chỗ chính bộ sách bác bỏ lời kiêng không có căn cứ.",
+    "ranh_gioi": "Đây là tham khảo văn hoá theo sách xưa. Chuẩn bị kỹ về người, việc và giấy tờ vẫn là điều quyết định."
   },
   "ngu_loai_nhat": {
     "bao": {
-      "ten": "Bảo nhật (Can sinh Chi)",
-      "y_nghia": "Trên nâng đỡ dưới: thuận cho việc ban giao, mở hàng, đón khách và gắn kết đội ngũ."
+      "ten": "Bảo nhật (can sinh chi)",
+      "y_nghia": "Sách dẫn Hoài Nam Tử: ngày Bảo hợp việc nuôi dưỡng, vun đắp cho mọi thứ lớn lên — ngày nay là việc chăm khách, chăm đội ngũ, tích luỹ dần.",
+      "source_id": "hiep_ky_bien_phuong_thu_q5",
+      "school_id": "trach_nhat_hiep_ky"
     },
     "nghia": {
-      "ten": "Nghĩa nhật (Chi sinh Can)",
-      "y_nghia": "Gốc rễ nâng đỡ ngọn: rất thuận cho ký kết hợp tác, cầu quý nhân và khởi sự đường dài."
+      "ten": "Nghĩa nhật (chi sinh can)",
+      "y_nghia": "Sách dẫn Hoài Nam Tử: ngày Nghĩa hợp làm việc theo lẽ phải, danh tiếng đứng vững — ngày nay là giữ chữ tín, ký kết rõ ràng, làm việc đúng quy định.",
+      "source_id": "hiep_ky_bien_phuong_thu_q5",
+      "school_id": "trach_nhat_hiep_ky"
     },
     "che": {
-      "ten": "Chế nhật (Can chế Chi)",
-      "y_nghia": "Chủ động cầm cương điều phối: hợp việc chấn chỉnh quy trình, thu xếp kỷ luật và giải quyết tồn đọng."
+      "ten": "Chế nhật (can khắc chi)",
+      "y_nghia": "Sách ghi ngày Chế thuận cho việc ra quân — ngày nay là thế chủ động: giải quyết việc tồn đọng, chỉnh lại quy trình, đàm phán khi đã chuẩn bị kỹ.",
+      "source_id": "hiep_ky_bien_phuong_thu_q5",
+      "school_id": "trach_nhat_hiep_ky"
     },
     "chuyen": {
-      "ten": "Chuyên nhật (Can Chi cùng hành)",
-      "y_nghia": "Khí lực thuần nhất tập trung: hợp việc chuyên sâu, hội họp nội bộ (tránh dàn trải nhiều đầu việc trái chiều)."
+      "ten": "Chuyên nhật (can chi cùng hành)",
+      "y_nghia": "Sách ghi ngày Chuyên làm một việc cho tới nơi thì có kết quả, nhưng kiêng ra quân — ngày nay là hợp dồn sức vào một việc, không hợp mở cuộc đối đầu, tranh chấp.",
+      "source_id": "hiep_ky_bien_phuong_thu_q5",
+      "school_id": "trach_nhat_hiep_ky"
     },
     "phat": {
-      "ten": "Phạt nhật (Chi dưới ngược lên Can)",
-      "y_nghia": "Dưới ngược lên trên, sức cản ngoại cảnh lớn: Hiệp Kỷ khuyên không chọn cho việc đại sự mở mang mới."
+      "ten": "Phạt nhật (chi khắc can)",
+      "y_nghia": "Sách ghi ngày Phạt kiêng tấn công, ra quân, chiếm đất — ngày nay là nên tránh khơi tranh chấp, kiện cáo, giành giật gay gắt; việc thường ngày không nói tới.",
+      "source_id": "hiep_ky_bien_phuong_thu_q5",
+      "school_id": "trach_nhat_hiep_ky"
     }
+  },
+  "loi": {
+    "tu_ly": "Ngày Tứ Ly: sách coi là ngày âm dương, ngũ hành tách ra trước một kỳ phân, chí. Lịch chỉ để các việc cúng lễ, tắm gội, cắt tóc, quét dọn, sửa nhỏ; việc khác sách khuyên để ngày khác.",
+    "tu_tuyet": "Ngày Tứ Tuyệt (trước Lập xuân, Lập hạ, Lập thu, Lập đông một ngày): sách coi là ngày giao mùa. Lịch chỉ để các việc cúng lễ, tắm gội, cắt tóc, quét dọn, sửa nhỏ; việc khác sách khuyên để ngày khác.",
+    "thap_ac_dien_thuc": "Lịch dân gian ghi ngày này là Thập Ác Đại Bại (Lộc của ngày ở {chi} rơi vào Tuần Không). Theo lời án của Hiệp Kỷ: {dien} cũng ở {chi} nên Lộc không còn rỗng — không phải ngày kiêng.",
+    "thap_ac_khong": "Lộc của ngày ở {chi} rơi vào Tuần Không, và năm, tháng, vị trí Mặt Trời đều không ở {chi} — theo lời án của Hiệp Kỷ, đây mới đúng là ngày 'Vô Lộc' (Thập Ác Đại Bại) mà lịch cũ kiêng.",
+    "dien_thuc": {
+      "thai_tue": "chi năm (Thái Tuế)",
+      "nguyet_kien": "chi tháng (Nguyệt Kiến)",
+      "thai_duong": "cung Mặt Trời (Thái Dương)"
+    },
+    "noi": ", ",
+    "duong_cong": "Lịch dân gian ghi ngày Dương Công kỵ. Hiệp Kỷ quyển 36 giải thích đây chỉ là ngày sao Thất đếm từ đầu năm và bác việc kiêng; giữ hay không tuỳ tập quán nhà bạn.",
+    "tam_sat": "Hướng {huong} nằm trong vùng Tam Sát của năm (phía {phuong}). Sách xưa khuyên tránh đào đất, đục phá, sửa lớn ở phía này; Hiệp Kỷ cho rằng nhà có thể quay mặt về phía này nhưng không nên đặt lưng nhà ở đó.",
+    "nhuan": " nhuận"
   },
   "trich_co_thu": {
     "ngu_loai": {
-      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 5",
-      "han": "枝生幹也制日者幹克枝也",
-      "y_nghia": "Xét tương sinh và chế hoá giữa Thiên Can và Địa Chi của ngày để phân định Nghĩa nhật, Chế nhật và Phạt nhật."
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 5 (dẫn Độn Giáp kinh)",
+      "han": "寳日者幹生枝也義日者枝生幹也制日者幹克枝也",
+      "y_nghia": "Ngày Bảo là can sinh chi, ngày Nghĩa là chi sinh can, ngày Chế là can khắc chi.",
+      "source_id": "hiep_ky_bien_phuong_thu_q5",
+      "school_id": "trach_nhat_hiep_ky"
+    },
+    "phat_nhat": {
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 5 (dẫn Độn Giáp kinh)",
+      "han": "伐日者支克干辰也其日忌攻討征伐出軍掠地",
+      "y_nghia": "Ngày Phạt là chi khắc can; ngày ấy kiêng tấn công, ra quân, chiếm đất — đời nay hiểu là tránh khơi tranh chấp, đối đầu.",
+      "source_id": "hiep_ky_bien_phuong_thu_q5",
+      "school_id": "trach_nhat_hiep_ky"
     },
     "tu_ly_tu_tuyet": {
       "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 9",
       "han": "四離冬至夏至春分秋分各前一日四絶立春立夏立秋立冬各前一日",
-      "y_nghia": "Tứ Ly là một ngày trước Xuân phân, Hạ chí, Thu phân, Đông chí; Tứ Tuyệt là một ngày trước Lập xuân, Lập hạ, Lập thu, Lập đông — lúc khí mùa chuyển giao nên tĩnh dưỡng, tránh khởi công lớn."
+      "y_nghia": "Tứ Ly là một ngày trước Đông chí, Hạ chí, Xuân phân, Thu phân; Tứ Tuyệt là một ngày trước Lập xuân, Lập hạ, Lập thu, Lập đông.",
+      "source_id": "hiep_ky_bien_phuong_thu_q9",
+      "school_id": "trach_nhat_hiep_ky"
+    },
+    "tu_ly_viec": {
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 10",
+      "han": "上朔四離四絶晦日止不忌祭祀解除沐浴整容剃頭整手足甲補垣塞穴掃舍宇修飾垣牆平治道塗破屋壊垣伐木餘事皆忌",
+      "y_nghia": "Ngày Tứ Ly, Tứ Tuyệt chỉ không kiêng cúng lễ, giải trừ, tắm gội, sửa sang dung mạo, cắt tóc, cắt móng, vá tường bịt lỗ, quét dọn nhà, sửa tường, sửa đường, phá nhà tường hư, chặt cây; các việc khác đều kiêng.",
+      "source_id": "hiep_ky_bien_phuong_thu_q10",
+      "school_id": "trach_nhat_hiep_ky"
     },
     "thap_ac_bien_ngoa": {
-      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 5 (Biện ngoa)",
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 5 (lời án)",
       "han": "按無禄日乃禄䧟旬空故以為忌然六壬火珠林之法填實則不空非不論年月而概以此十日為禄空也",
-      "y_nghia": "Hiệp Kỷ chỉ rõ ngày gọi là Thập Ác Đại Bại thực chất chỉ là Lộc rơi vào Tuần Không; nếu năm tháng điền thực thì hoàn toàn không rỗng, không nên kiêng mù quáng cho mọi việc."
+      "y_nghia": "Ngày Vô Lộc (Thập Ác Đại Bại) chỉ là Lộc rơi vào Tuần Không nên mới kiêng; theo phép Lục Nhâm, Hoả Châu Lâm thì chỗ trống được lấp đầy là hết rỗng — không thể không xét năm tháng mà coi cả mười ngày đều rỗng.",
+      "source_id": "hiep_ky_bien_phuong_thu_q5",
+      "school_id": "trach_nhat_hiep_ky"
+    },
+    "thap_ac_dien_thuc": {
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 5 (lời án)",
+      "han": "若太嵗月建太陽在寅則不為空",
+      "y_nghia": "Ví dụ ngày Giáp Thìn Lộc ở Dần rơi vào Tuần Không: nếu Thái Tuế (chi năm), Nguyệt Kiến (chi tháng) hoặc Thái Dương (vị trí Mặt Trời) ở Dần thì không còn rỗng.",
+      "source_id": "hiep_ky_bien_phuong_thu_q5",
+      "school_id": "trach_nhat_hiep_ky"
     },
     "tam_sat": {
-      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 8",
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 3",
+      "han": "考原所謂宜向不宜坐之説最為得之蓋三煞之方皆太歲之所惡而不可居",
+      "y_nghia": "Hiệp Kỷ cho rằng lời Khảo Nguyên 'nên quay mặt về, không nên toạ ở' phương Tam Sát là đúng nhất, vì phương Tam Sát là nơi Thái Tuế ghét, không nên ở.",
+      "source_id": "hiep_ky_bien_phuong_thu_q3",
+      "school_id": "trach_nhat_hiep_ky"
+    },
+    "tam_sat_thong_thu": {
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 8 (Hiệp Kỷ dẫn lời Thông Thư)",
       "han": "修方若遇吉星所值不問太嵗三煞官符大將軍諸凶",
-      "y_nghia": "Phương Tam Sát chỉ lưu ý khi tu tạo động thổ đúng phương vị đó, còn giao dịch sinh hoạt thường nhật hoặc gặp cát tinh chế hoá thì không đáng ngại."
+      "y_nghia": "Hiệp Kỷ dẫn lời Thông Thư: sửa một phương mà gặp sao tốt chiếu đúng chỗ ấy thì không cần xét Thái Tuế, Tam Sát, Quan Phù, Đại Tướng Quân và các sát khác.",
+      "source_id": "hiep_ky_bien_phuong_thu_q8",
+      "school_id": "trach_nhat_hiep_ky"
+    },
+    "duong_cong": {
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 36 (Biện ngoa)",
+      "han": "楊公忌世俗多畏楊公忌通書亦多載之謂其日不宜出行舉事犯之不利皆因未悉其原委故為所惑耳",
+      "y_nghia": "Người đời sợ ngày Dương Công kỵ, Thông Thư cũng chép nhiều, cho rằng ngày ấy không nên đi xa, làm việc; sách nói đó là vì chưa hiểu gốc gác nên mới bị mê hoặc.",
+      "source_id": "hiep_ky_bien_phuong_thu_q36",
+      "school_id": "trach_nhat_hiep_ky"
     },
     "bien_ngoa_chung": {
       "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 36 (Biện ngoa)",
       "han": "隂陽家言多病迂泥術士揑造益屬荒唐",
-      "y_nghia": "Chính sách lịch kinh điển bác bỏ các ngày kiêng gán ghép hoang đường do thuật sĩ đời sau tự đặt ra để hù doạ dân gian."
+      "y_nghia": "Lời của nhà âm dương phần nhiều cứng nhắc, những điều thầy thuật tự đặt ra càng hoang đường.",
+      "source_id": "hiep_ky_bien_phuong_thu_q36",
+      "school_id": "trach_nhat_hiep_ky"
     }
   }
 }

@@ -315,6 +315,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Lập bàn Kỳ Môn Độn Giáp theo giờ, miễn phí: tám hướng của giờ này hướng nào thuận, hợp gặp gỡ, ký kết, đi xa hay nộp hồ sơ; giờ tốt trong ngày cho việc bạn định làm. Có giải nghĩa và câu sách xưa.",
     loi_dan: "Mỗi hai tiếng, tám hướng quanh bạn đổi vai một lần. Xem giờ này hướng nào thuận, hợp việc gì, và hôm nay giờ nào hợp việc bạn định làm.",
   } },
+  { duong: "/chiem-tinh", nhom: "tinh", ten: "Chiêm tinh phương Tây", o: O_TINH, mac_dinh: {   // CHANG-4: bản đồ sao ngày sinh
+    tieu_de_seo: "Chiêm tinh online: lập bản đồ sao cá nhân miễn phí", h1: "Chiêm tinh: bản đồ sao ngày sinh của bạn nói gì?",
+    mo_ta_seo: "Lập bản đồ sao theo ngày, giờ, nơi sinh: cung Mặt Trời, Mặt Trăng, Cung Mọc, 12 nhà, góc chiếu, đặt cạnh Bát tự và Tử vi. Miễn phí, không lưu dữ liệu.",
+    loi_dan: "Nhập ngày sinh để xem các hành tinh nằm ở cung hoàng đạo nào lúc bạn ra đời. Có giờ và nơi sinh thì xem thêm Cung Mọc, 12 nhà; chưa biết giờ vẫn xem được cung Mặt Trời và cung Mặt Trăng.",
+  } },
   { duong: "/li-xi-tet-2027", nhom: "tinh", ten: "LÌ XÌ TẾT 2027", o: O_TINH, mac_dinh: {   // LX-2027 (0042)
     tieu_de_seo: "LÌ XÌ TẾT 2027 — Phong bao Đinh Mùi mở trọn Báo cáo Năm 2027", h1: "LÌ XÌ TẾT 2027",
     mo_ta_seo: "Tặng bạn bè, người thân, đối tác Bao LÌ XÌ TẾT 2027 (chọn chất liệu gấm lụa, hoa mai, hoa đào, linh vật Đinh Mùi, pháo hoa) mở trọn Báo cáo Năm 2027 cá nhân hoá. Người nhận tự nhập ngày sinh, riêng tư tuyệt đối.",

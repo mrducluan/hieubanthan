@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Chặng 4.3 — Tầng RULES Đối chiếu Trạch Nhật *Hiệp Kỷ Biện Phương Thư* (`luangiai/trach_nhat_chuyen_sau.py`)."""
+"""Chặng 4.3 — Tầng RULES Đối chiếu Trạch Nhật *Hiệp Kỷ Biện Phương Thư* (`luangiai/trach_nhat_chuyen_sau.py`).
+
+Mọi câu hiển thị lấy ở KB `trach_nhat_hiep_ky_kb.json` (+ bản phủ `en/`); số liệu ở `calc.trach_nhat_hiep_ky` (đọc
+đúng giá trị thẻ ngày của trang Xem ngày tốt)."""
 from __future__ import annotations
 
 import datetime as dt
@@ -7,11 +10,35 @@ import datetime as dt
 from app import config
 from app.calc import trach_nhat_hiep_ky as hk_calc
 from app.kb import nap, ten as _tn
-from app.ngon_ngu import la_viet
 
 
 def _kb() -> dict:
     return nap.doc("trach_nhat_hiep_ky_kb.json")
+
+
+def _luu_y(raw: dict, loi: dict) -> list[str]:
+    ra: list[str] = []
+    if raw["tu_ly"]:
+        ra.append(loi["tu_ly"])
+    if raw["tu_tuyet"]:
+        ra.append(loi["tu_tuyet"])
+
+    ta = raw["thap_ac_dai_bai"]
+    if ta:
+        chi = _tn.ten("chi", ta["chi_loc"])
+        if ta["da_dien_thuc"]:
+            dien = loi["noi"].join(loi["dien_thuc"][m] for m in ta["dien_thuc_boi"])
+            ra.append(loi["thap_ac_dien_thuc"].format(chi=chi, dien=dien))
+        else:
+            ra.append(loi["thap_ac_khong"].format(chi=chi))
+
+    if raw["duong_cong_ky"]:
+        ra.append(loi["duong_cong"])
+
+    ts = raw["tam_sat_nam"]
+    if ts["cham_huong_dang_xet"]:
+        ra.append(loi["tam_sat"].format(huong=_tn.ten("huong", raw["_huong"]), phuong=_tn.ten("huong", ts["phuong_chinh"])))
+    return ra
 
 
 def doi_chieu_hiep_ky(
@@ -20,77 +47,33 @@ def doi_chieu_hiep_ky(
     so_ngay: int = 7,
     huong_tu_tao: str | None = None,
 ) -> dict:
+    """`huong_tu_tao`: tên Việt của một trong 8 hướng (`hk_calc.HUONG_MA` — API đổi mã sang tên trước khi gọi)."""
     kb = _kb()
-    vi = la_viet()
+    loi = kb["loi"]
     bat_dau = tu_ngay or config.hom_nay_vn()
     so_ngay = max(1, min(30, so_ngay))
 
     ds_ngay = []
     for i in range(so_ngay):
         d = bat_dau + dt.timedelta(days=i)
-        raw = hk_calc.phan_tich_ngay_hiep_ky(d, huong_tu_tao=huong_tu_tao)
+        raw = {**hk_calc.phan_tich_ngay_hiep_ky(d, huong_tu_tao=huong_tu_tao), "_huong": huong_tu_tao}
         nl = kb["ngu_loai_nhat"][raw["ngu_loai_ma"]]
-        luu_y: list[str] = []
-        if raw["tu_ly_tu_tuyet"] == "tu_ly":
-            luu_y.append(
-                "Ngày Tứ Ly (trước Xuân phân/Hạ chí/Thu phân/Đông chí 1 ngày): khí mùa phân tách, hợp nghỉ ngơi hơn khởi công lớn."
-                if vi
-                else "Four Separations eve (1 day before equinox/solstice): seasonal transition suited for rest rather than major launches."
-            )
-        elif raw["tu_ly_tu_tuyet"] == "tu_tuyet":
-            luu_y.append(
-                "Ngày Tứ Tuyệt (trước Lập xuân/Lập hạ/Lập thu/Lập đông 1 ngày): giao tiết cuối mùa, nên hoãn động thổ mở mang lớn."
-                if vi
-                else "Four Extinctions eve (1 day before seasonal start): transitional cusp — defer heavy construction if flexible."
-            )
-
-        ta = raw["thap_ac_dai_bai"]
-        if ta:
-            chi_loc_hien = _tn.ten("chi", ta["chi_loc"])
-            if ta["da_dien_thuc"]:
-                luu_y.append(
-                    f"Lịch dân gian gắn nhãn Thập Ác Đại Bại, nhưng theo Hiệp Kỷ Biện Phương Thư: chi Lộc ({chi_loc_hien}) đã được Năm/Tháng điền thực nên KHÔNG rỗng — dùng bình thường."
-                    if vi
-                    else f"Folk almanacs label this Ten Great Defeat, yet per Xie Ji Bian Fang Shu the Salary branch ({chi_loc_hien}) is filled by the Year/Month and is NOT void."
-                )
-            else:
-                luu_y.append(
-                    f"Lộc ngày ({chi_loc_hien}) tạm rơi Tuần Không (Thập Ác Đại Bại): cân nhắc tránh mở kho xuất vốn lớn, việc thường nhật không kỵ."
-                    if vi
-                    else f"Day Salary ({chi_loc_hien}) sits in Void: exercise routine care on major capital outlays; everyday tasks are unaffected."
-                )
-
-        if raw["duong_cong_ky"]:
-            luu_y.append(
-                "Trùng ngày Dương Công Kỵ dân gian (Hiệp Kỷ quyển 36 đã biện bác sự thổi phồng; chỉ kiêng nếu gia đình có tập quán giữ lịch cũ)."
-                if vi
-                else "Coincides with folk Yang Gong taboo (critiqued in Xie Ji Scroll 36 as overstated; observe only if family custom prefers)."
-            )
-
-        ts = raw["tam_sat_nam"]
-        phuong_ts_hien = _tn.ten("huong", ts["phuong_chinh"])
-        if ts["cham_huong_dang_xet"]:
-            luu_y.append(
-                f"Hướng tu tạo đang xét ({phuong_ts_hien}) trùng phương Tam Sát của năm: tránh khoan đục động thổ mạnh ở phương này nếu chưa chọn giờ cát tinh chế hoá."
-                if vi
-                else f"Selected construction sector ({phuong_ts_hien}) matches the annual Three Sha direction: avoid heavy earthwork there without auspicious hour mitigation."
-            )
-
-        am_hien = raw["am_lich"].replace(" (nhuận)", "" if vi else " (leap)")
+        am = raw["am"]
         ds_ngay.append({
             "ngay": raw["ngay"],
-            "am_lich": am_hien,
+            "am_lich": f"{am['ngay']:02d}/{am['thang']:02d}/{am['nam']}" + (loi["nhuan"] if am["nhuan"] else ""),
             "can_chi_ngay": f"{_tn.ten('can', raw['can_ngay'])} {_tn.ten('chi', raw['chi_ngay'])}",
             "ngu_loai_ma": raw["ngu_loai_ma"],
             "ngu_loai_ten": nl["ten"],
             "ngu_loai_y_nghia": nl["y_nghia"],
-            "phuong_tam_sat_nam": phuong_ts_hien,
-            "luu_y_hiep_ky": luu_y,
+            "phuong_tam_sat_nam": _tn.ten("huong", raw["tam_sat_nam"]["phuong_chinh"]),
+            "luu_y_hiep_ky": _luu_y(raw, loi),
         })
 
     return {
         "mo_dun": "trach_nhat_hiep_ky",
         "khung": kb["khung"],
         "ngay_phan_tich": ds_ngay,
-        "trich_co_thu": list(kb["trich_co_thu"].values()),
+        "trich_co_thu": [{"sach": v["sach"], "han": v["han"], "y_nghia": v["y_nghia"]}
+                         for v in kb["trich_co_thu"].values()],
     }

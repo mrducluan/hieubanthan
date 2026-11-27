@@ -1,6 +1,8 @@
 {
   "_nguon": "Stage 4.2 English overlay — Planets × 12 Zodiac Signs.",
   "_trang_thai": "nhap_may",
+  "source_id": "bien_tap_chiem_tinh_2026",
+  "school_id": "chiem_tinh_tay",
   "cung_hoang_dao": {
     "bach_duong": {
       "ten": "Aries",
@@ -106,64 +108,64 @@
       "vai_tro": "core conscious identity and vital direction",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Sun in Aries: core conscious identity and vital direction operates through direct initiative, candid candor, and quick readiness to begin.",
-          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel core conscious identity and vital direction into one steady daily habit aligned with Aries."
+          "diem_sang": "You feel most alive when you start something new and make your own call; you bounce back fast and dare to go first.",
+          "nen_de_y": "You can rush, then drop things once the thrill fades; others may feel you push past them.",
+          "viec_ung_dung": "Before diving into something new, write three concrete steps and name one person who will see it through with you."
         },
         "kim_nguu": {
-          "diem_sang": "Sun in Taurus: core conscious identity and vital direction operates through steady accumulation, tangible craft, and unhurried reliability.",
-          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel core conscious identity and vital direction into one steady daily habit aligned with Taurus."
+          "diem_sang": "You feel most confident building things that last: savings, solid skills, a steady routine; you keep your word and stay patient.",
+          "nen_de_y": "You can be stubborn and resist change even when the old way no longer fits; you may hold on to things and habits.",
+          "viec_ung_dung": "Each month, make one deliberate small change (a new method, a different spend) so steady does not turn rigid."
         },
         "song_tu": {
-          "diem_sang": "Sun in Gemini: core conscious identity and vital direction operates through curious inquiry, agile dialogue, and multi-threaded learning.",
-          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel core conscious identity and vital direction into one steady daily habit aligned with Gemini."
+          "diem_sang": "You light up when you learn, ask, talk and connect people; your mind is quick and adaptable.",
+          "nen_de_y": "You can take on too much at once and spread thin, talking more than doing; others may find you inconsistent.",
+          "viec_ung_dung": "Pick one subject to study in depth for three months and note what you got done each week."
         },
         "cu_giai": {
-          "diem_sang": "Sun in Cancer: core conscious identity and vital direction operates through protective care, emotional memory, and devotion to safe belonging.",
-          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel core conscious identity and vital direction into one steady daily habit aligned with Cancer."
+          "diem_sang": "You are strongest when you care for the people close to you and build a safe place; you sense others' feelings and remember kindness.",
+          "nen_de_y": "You can take things personally and withdraw when hurt; sometimes you care for others and forget to state your own needs.",
+          "viec_ung_dung": "When upset, say one plain sentence starting with 'I need…' instead of waiting for others to guess."
         },
         "su_tu": {
-          "diem_sang": "Sun in Leo: core conscious identity and vital direction operates through warm self-direction, generous presence, and wholehearted expression.",
-          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel core conscious identity and vital direction into one steady daily habit aligned with Leo."
+          "diem_sang": "You shine when you create, lead and are recognised; generous, warm and inspiring.",
+          "nen_de_y": "You can feel slighted when overlooked and want the spotlight; feedback may be hard to take.",
+          "viec_ung_dung": "Find one thing you are proud of doing without anyone's praise, and leave room for others to shine too."
         },
         "xu_nu": {
-          "diem_sang": "Sun in Virgo: core conscious identity and vital direction operates through discerning refinement, practical service, and clean organization.",
-          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel core conscious identity and vital direction into one steady daily habit aligned with Virgo."
+          "diem_sang": "You are at your best organising, improving and being genuinely useful; careful, practical and dedicated.",
+          "nen_de_y": "You can be hard on yourself and others, fret over small details and rarely feel satisfied.",
+          "viec_ung_dung": "Set a 'good enough' bar before each task and stop when you reach it; note one thing you did well each day."
         },
         "thien_binh": {
-          "diem_sang": "Sun in Libra: core conscious identity and vital direction operates through fair-minded mediation, relational poise, and balanced proportion.",
-          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel core conscious identity and vital direction into one steady daily habit aligned with Libra."
+          "diem_sang": "You are strong at balancing sides, building harmony and beauty; fair, courteous and good at teamwork.",
+          "nen_de_y": "You can hesitate and delay decisions to avoid upsetting anyone; sometimes you accommodate too much.",
+          "viec_ung_dung": "Give small decisions a short deadline; practise saying 'no' gently."
         },
         "bo_cap": {
-          "diem_sang": "Sun in Scorpio: core conscious identity and vital direction operates through focused intensity, root-cause honesty, and deep loyalty.",
-          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel core conscious identity and vital direction into one steady daily habit aligned with Scorpio."
+          "diem_sang": "You are strong when you see something through and look beneath the surface; determined, deep and loyal.",
+          "nen_de_y": "You can hold things inside, grow suspicious and find it hard to let go; you may want control.",
+          "viec_ung_dung": "Choose one trusted person to tell what you have been holding in; let go of one thing that does not need your control."
         },
         "nhan_ma": {
-          "diem_sang": "Sun in Sagittarius: core conscious identity and vital direction operates through broad horizon-seeking, candid synthesis, and love of exploration.",
-          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel core conscious identity and vital direction into one steady daily habit aligned with Sagittarius."
+          "diem_sang": "You feel most alive travelling, learning big ideas and seeking meaning; optimistic, frank and generous.",
+          "nen_de_y": "You can over-promise and dodge details or long commitments; your bluntness may hurt.",
+          "viec_ung_dung": "Turn one big wish into a plan with real dates; before speaking bluntly, think how the listener will take it."
         },
         "ma_ket": {
-          "diem_sang": "Sun in Capricorn: core conscious identity and vital direction operates through long-horizon discipline, structural accountability, and earned mastery.",
-          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel core conscious identity and vital direction into one steady daily habit aligned with Capricorn."
+          "diem_sang": "You are strong at setting long-term goals and climbing step by step; disciplined, responsible and reliable.",
+          "nen_de_y": "You can overwork, be strict with yourself and hide your feelings; you may measure your worth by results.",
+          "viec_ung_dung": "Schedule fixed rest time alongside work; each week do one thing purely for fun."
         },
         "bao_binh": {
-          "diem_sang": "Sun in Aquarius: core conscious identity and vital direction operates through independent systems thinking, principled reform, and civic perspective.",
-          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel core conscious identity and vital direction into one steady daily habit aligned with Aquarius."
+          "diem_sang": "You are strong at thinking differently, improving how things work and serving the common good; independent, open to the new, loyal to friends.",
+          "nen_de_y": "You can seem distant, hold tightly to your views and shy away from emotional closeness.",
+          "viec_ung_dung": "Test a new idea right away with a real group; ask loved ones how they feel, not only what they think."
         },
         "song_ngu": {
-          "diem_sang": "Sun in Pisces: core conscious identity and vital direction operates through receptive empathy, imaginative synthesis, and quiet compassion.",
-          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel core conscious identity and vital direction into one steady daily habit aligned with Pisces."
+          "diem_sang": "You are strong in imagination and compassion; intuitive, artistic and kind-hearted.",
+          "nen_de_y": "You can drift, avoid hard facts and get swept along by others; boundaries are hard to set.",
+          "viec_ung_dung": "Keep one regular activity with clear hours; write down your limits before agreeing to help someone."
         }
       }
     },
@@ -173,64 +175,64 @@
       "vai_tro": "instinctive emotional rhythm, habit patterns, and inner safety",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Moon in Aries: instinctive emotional rhythm, habit patterns, and inner safety operates through direct initiative, candid candor, and quick readiness to begin.",
-          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel instinctive emotional rhythm, habit patterns, and inner safety into one steady daily habit aligned with Aries."
+          "diem_sang": "You need freedom and quick responses; feelings flare up and pass fast, and you say what you see.",
+          "nen_de_y": "Waiting irritates you, and when annoyed you may speak before thinking.",
+          "viec_ung_dung": "When annoyed, move for ten minutes (a walk, the stairs) before you reply."
         },
         "kim_nguu": {
-          "diem_sang": "Moon in Taurus: instinctive emotional rhythm, habit patterns, and inner safety operates through steady accumulation, tangible craft, and unhurried reliability.",
-          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel instinctive emotional rhythm, habit patterns, and inner safety into one steady daily habit aligned with Taurus."
+          "diem_sang": "You feel settled with familiar routines, good food and a comfortable home; your moods are steady.",
+          "nen_de_y": "Sudden change unsettles you for a long time; you may seek comfort in food or shopping.",
+          "viec_ung_dung": "Keep a small evening ritual (tea, music, tidying your sleep corner) to calm down instead of shopping."
         },
         "song_tu": {
-          "diem_sang": "Moon in Gemini: instinctive emotional rhythm, habit patterns, and inner safety operates through curious inquiry, agile dialogue, and multi-threaded learning.",
-          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel instinctive emotional rhythm, habit patterns, and inner safety into one steady daily habit aligned with Gemini."
+          "diem_sang": "You calm down by talking, reading and understanding what is going on; your feelings are flexible.",
+          "nen_de_y": "You may analyse feelings instead of feeling them; your mind finds it hard to rest.",
+          "viec_ung_dung": "Write three lines each night: what happened, how you felt, what you need."
         },
         "cu_giai": {
-          "diem_sang": "Moon in Cancer: instinctive emotional rhythm, habit patterns, and inner safety operates through protective care, emotional memory, and devotion to safe belonging.",
-          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel instinctive emotional rhythm, habit patterns, and inner safety into one steady daily habit aligned with Cancer."
+          "diem_sang": "You need a sense of family, to be sheltered and to shelter others; warm-hearted with a long memory.",
+          "nen_de_y": "Your mood rises and falls with the atmosphere at home; careless words hurt.",
+          "viec_ung_dung": "Make one corner of home truly comfortable; when someone hurts you, ask what they meant instead of guessing."
         },
         "su_tu": {
-          "diem_sang": "Moon in Leo: instinctive emotional rhythm, habit patterns, and inner safety operates through warm self-direction, generous presence, and wholehearted expression.",
-          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel instinctive emotional rhythm, habit patterns, and inner safety into one steady daily habit aligned with Leo."
+          "diem_sang": "You need love shown clearly and to feel valued; when happy you are warm and big-hearted.",
+          "nen_de_y": "You may feel hurt when ignored and need praise to feel okay.",
+          "viec_ung_dung": "Acknowledge yourself for one thing each day; tell loved ones what kind of attention you hope for."
         },
         "xu_nu": {
-          "diem_sang": "Moon in Virgo: instinctive emotional rhythm, habit patterns, and inner safety operates through discerning refinement, practical service, and clean organization.",
-          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel instinctive emotional rhythm, habit patterns, and inner safety into one steady daily habit aligned with Virgo."
+          "diem_sang": "You feel settled when things are in order and you can be useful; you show love through practical help.",
+          "nen_de_y": "You can worry, blame yourself and feel tense when things are messy.",
+          "viec_ung_dung": "When worried, list what is in your hands and do the smallest item right away."
         },
         "thien_binh": {
-          "diem_sang": "Moon in Libra: instinctive emotional rhythm, habit patterns, and inner safety operates through fair-minded mediation, relational poise, and balanced proportion.",
-          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel instinctive emotional rhythm, habit patterns, and inner safety into one steady daily habit aligned with Libra."
+          "diem_sang": "You need harmony and company; you are most at ease when relationships are smooth.",
+          "nen_de_y": "You may swallow irritation to keep the peace, then feel drained without saying why.",
+          "viec_ung_dung": "Practise stating what bothers you in one gentle sentence the same day, instead of letting it pile up."
         },
         "bo_cap": {
-          "diem_sang": "Moon in Scorpio: instinctive emotional rhythm, habit patterns, and inner safety operates through focused intensity, root-cause honesty, and deep loyalty.",
-          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel instinctive emotional rhythm, habit patterns, and inner safety into one steady daily habit aligned with Scorpio."
+          "diem_sang": "Your feelings run deep and strong; you need trust and sincere closeness.",
+          "nen_de_y": "You may feel jealous, hold on to the past and find it hard to open up before you fully trust.",
+          "viec_ung_dung": "Write down what is weighing on you and sleep on it before acting; share it bit by bit with someone you trust."
         },
         "nhan_ma": {
-          "diem_sang": "Moon in Sagittarius: instinctive emotional rhythm, habit patterns, and inner safety operates through broad horizon-seeking, candid synthesis, and love of exploration.",
-          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel instinctive emotional rhythm, habit patterns, and inner safety into one steady daily habit aligned with Sagittarius."
+          "diem_sang": "You need space and new experiences to feel happy; optimistic and quick to bounce back.",
+          "nen_de_y": "You may dodge heavy feelings by going out or keeping busy; sitting with sadness is hard.",
+          "viec_ung_dung": "When something sad happens, set aside one session just to think it through before looking for something new."
         },
         "ma_ket": {
-          "diem_sang": "Moon in Capricorn: instinctive emotional rhythm, habit patterns, and inner safety operates through long-horizon discipline, structural accountability, and earned mastery.",
-          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel instinctive emotional rhythm, habit patterns, and inner safety into one steady daily habit aligned with Capricorn."
+          "diem_sang": "You feel settled when things are under control and responsibilities are clear; steady and rarely complaining.",
+          "nen_de_y": "You may hide feelings, carry everything alone and avoid asking for help.",
+          "viec_ung_dung": "Each week, ask someone for one small favour, and share one real feeling with a loved one."
         },
         "bao_binh": {
-          "diem_sang": "Moon in Aquarius: instinctive emotional rhythm, habit patterns, and inner safety operates through independent systems thinking, principled reform, and civic perspective.",
-          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel instinctive emotional rhythm, habit patterns, and inner safety into one steady daily habit aligned with Aquarius."
+          "diem_sang": "You need freedom and to be yourself; you value friends and stay calm in a storm.",
+          "nen_de_y": "You may detach from feelings, and loved ones may find you cool or distant.",
+          "viec_ung_dung": "See loved ones in person more often; when they are sad, ask 'do you want me to listen or to advise?'."
         },
         "song_ngu": {
-          "diem_sang": "Moon in Pisces: instinctive emotional rhythm, habit patterns, and inner safety operates through receptive empathy, imaginative synthesis, and quiet compassion.",
-          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
-          "viec_ung_dung": "Channel instinctive emotional rhythm, habit patterns, and inner safety into one steady daily habit aligned with Pisces."
+          "diem_sang": "You sense things finely, empathise easily and need quiet time and your own inner world.",
+          "nen_de_y": "You may absorb other people's feelings as your own and feel drained without knowing why; you may escape.",
+          "viec_ung_dung": "After seeing many people, give yourself quiet time; practise asking 'is this feeling mine or theirs?'."
         }
       }
     },
@@ -971,5 +973,13 @@
         }
       }
     }
+  },
+  "loi": {
+    "ten_asc": "Ascendant (Asc)",
+    "ten_mc": "Midheaven (MC)",
+    "tuoi_chua_du": "Detailed birth chart and transit readings are available only for users aged {tuoi} and older.",
+    "mat_trang_doi_cung": "Birth hour unknown: on this date the Moon moves from {c0} into {c1} ({d0}° -> {d1}°). Add your birth time if known to fix your Moon sign and 12 Houses.",
+    "mat_trang_mot_cung": "Even without a birth hour, the Moon stays in {c0} for all 24 hours of your birth date ({d0}° -> {d1}°).",
+    "phuong_phap_lich": "Deterministic astronomical calculation, accurate to under 0.25 arcminutes: the same date, time and place always give the same chart. No personal data is stored."
   }
 }
