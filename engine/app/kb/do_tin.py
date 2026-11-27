@@ -242,7 +242,7 @@ SO: dict[str, dict] = {
     "ke_hoach_thang_kb.json": {"mang": "lich", "muc": "bien_tap", "ghi_chu": "KH-1: việc định làm ↔ số tháng cá nhân / việc sách lịch — nháp"},
     # ---- Liên mảng (lời ghép, ranh giới, mẫu câu)
     "suc_khoe_kb.json": {"mang": "chung", "muc": "tom_y_co_thu", "ghi_chu": "hành ↔ tạng phủ theo Nội Kinh; tên bệnh hay gặp là kiến thức phổ thông (SK-2)"},
-    "co_van_tam_tai_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 2: nháp AI tổng hợp Cố vấn Liên mảng Tam Tài (Nhân – Thiên – Địa), chờ chủ dự án đọc duyệt"},
+    "co_van_tam_tai_kb.json": {"mang": "chung", "muc": "bien_tap", "ghi_chu": "Chủ dự án đọc duyệt 2026-11-26 — Chặng 2: nháp AI tổng hợp Cố vấn Liên mảng Tam Tài (Nhân – Thiên – Địa), chờ chủ dự án đọc duyệt"},
     "su_vu_chien_thuat_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 3.1: nháp AI Chiến thuật Sự vụ tức thời (Kỳ Môn Thời Gia · Lục Hào Nạp Giáp đọc riêng; câu Hán trích nguyên văn ky_mon_co_kim_do_thu & tang_san_boc_dich), chờ chủ dự án đọc duyệt"},
     "tuong_menh_doi_chieu_kb.json": {"mang": "nhantuong", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 3.2: nháp AI đối chiếu Nhịp năm Lá số & Tướng lưu niên / Chỉ tay Saint-Germain 1897, chờ chủ dự án đọc duyệt"},
     "thanso_da_phai_kb.json": {"mang": "thanso", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 3.3: nháp AI đối chiếu 5 trường phái Thần số học (trích nguyên văn Westcott 1911, Sepharial 1913, Balliett 1908), chờ chủ dự án đọc duyệt"},
@@ -254,11 +254,11 @@ SO: dict[str, dict] = {
     "chiem_tinh_hop_doi_kb.json": {"mang": "chiemtinh", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI đối chiếu tương tác 2 bản đồ sao Synastry không chấm điểm, chờ chủ dự án đọc duyệt"},
     "astro_east_west_bridge_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI Cầu nối Chiêm tinh Phương Tây × Bát tự & Tử vi Phương Đông, chờ chủ dự án đọc duyệt"},
     "trach_nhat_hiep_ky_kb.json": {"mang": "lich", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.3: nháp AI đối chiếu Trạch Nhật Hiệp Kỷ Biện Phương Thư (câu Hán khớp hiep_ky_bien_phuong_thu_du_bo), chờ chủ dự án đọc duyệt"},
-    "doanh_chu_cam_nang_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 2: nháp AI Cẩm nang Chiến lược Kinh doanh 5 trụ (Thị trường, Địa điểm/Thành Môn, Nhân sự, Văn phòng, Cửa hàng), chờ chủ dự án đọc duyệt"},
+    "doanh_chu_cam_nang_kb.json": {"mang": "chung", "muc": "bien_tap", "ghi_chu": "Chủ dự án đọc duyệt 2026-11-26 — Chặng 2: nháp AI Cẩm nang Chiến lược Kinh doanh 5 trụ (Thị trường, Địa điểm/Thành Môn, Nhân sự, Văn phòng, Cửa hàng), chờ chủ dự án đọc duyệt"},
     "doanh_chu_gop_von_kb.json": {"mang": "battu", "muc": "bien_tap",
                                   "ghi_chu": "GV-1: nhóm ba khâu + điều lệ gợi ý khi góp vốn (nháp); vai trò từng người lấy từ Bản đồ đội ngũ"},
-    "go_nut_doi_song_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 1: nháp AI biên soạn cho 4 mạch gỡ nút đời sống, chờ chủ dự án đọc duyệt"},
-    "ung_dung_co_dien_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 1: nháp AI tổng hợp ứng dụng Ngũ hành, điều hoà Vận 9 & đối chiếu 2 phái, chờ chủ dự án đọc duyệt"},
+    "go_nut_doi_song_kb.json": {"mang": "chung", "muc": "bien_tap", "ghi_chu": "Chủ dự án đọc duyệt 2026-11-26 — Chặng 1: nháp AI biên soạn cho 4 mạch gỡ nút đời sống, chờ chủ dự án đọc duyệt"},
+    "ung_dung_co_dien_kb.json": {"mang": "chung", "muc": "bien_tap", "ghi_chu": "Chủ dự án đọc duyệt 2026-11-26 — Chặng 1: nháp AI tổng hợp ứng dụng Ngũ hành, điều hoà Vận 9 & đối chiếu 2 phái, chờ chủ dự án đọc duyệt"},
     **{f: {"mang": "chung", "muc": "bien_tap"} for f in (
         "chu_y_kb.json", "chan_dung_kb.json", "giao_thoa_kb.json", "goi_y_cheo_kb.json", "hoan_canh_kb.json", "nhat_quan_kb.json",
         "push_sang_nay.json", "sinh_nuoc_ngoai_kb.json", "tuan_hai_nguoi_kb.json", "tu_dien.json", "y_dinh_chung.json")},
