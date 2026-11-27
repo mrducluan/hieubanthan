@@ -290,7 +290,7 @@ export const SO_TRANG: readonly MucSoTrang[] = [
   { duong: "/huyen-hoc", nhom: "tinh", ten: "Huyền học", o: O_TINH, mac_dinh: { chu: CHU_HUYEN_HOC, hinh: HINH_HUYEN_HOC,
     tieu_de_seo: "Huyền học là gì? Tám môn huyền học xem online miễn phí",
     mo_ta_seo: "Huyền học và thần số học trong một hồ sơ: lá số Tử vi, Bát tự, quẻ Kinh Dịch, phong thuỷ, nhân tướng, Tarot, Kỳ Môn Độn Giáp. Minh bạch, có nguồn, miễn phí.",
-    h1: "Huyền học — tám cách nhìn lại mình",
+    h1: "Huyền học — chín cách nhìn lại mình",
     // AIO: câu đầu định nghĩa thẳng "huyền học là gì" (≤ 45 chữ) để máy tìm kiếm / AI trích nguyên câu.
     loi_dan: "Huyền học là những hệ thống người xưa dùng để đọc nhịp của con người và thời gian — qua con số, ngày giờ sinh, quẻ dịch, nơi ở, gương mặt, lá bài, giờ và hướng. Thần số học là cửa vào nhanh nhất; Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng đi sâu hơn; Tarot nhìn lại một việc cụ thể; Kỳ Môn chọn giờ, chọn hướng trong ngày. Mảng nào cần ngày sinh thì dùng chung một hồ sơ; mọi mảng tính từng bước, có nguồn sách.",
   } },
@@ -405,13 +405,14 @@ export const TEP_KB_THEO_LOAI: Record<LoaiTrang, string[]> = {
   tinh_yeu: ["thanso_chan_dung.json", "thanso_linh_vuc.json"], nam_ca_nhan: ["thanso_depth.json"], no_nghiep: ["thanso_chi_so_phu.json"],
   so_kep: ["thanso_chaldean.json"], dau_hieu: ["phongthuy_kb.json", "phongthuy_do_thi.json"],
   co_thu: ["tuvi_co_thu.json", "tuvi_cach_cuc.json"], bo_vi: ["nhan_tuong_kb.json"], la_bai: ["tarot_kb.json"],
+  cung_hd: ["chiem_tinh_cung_hoang_dao_kb.json", "chiem_tinh_hanh_tinh_cung_kb.json"],
 };
 /** Trang mẫu của từng loại (để CMS xem trước chữ KB của cụm). */
 const VI_DU: Record<LoaiTrang, string> = {
   so: "so-1", que: "que-1-can", sao: "sao-tu-vi", cung: "cung-menh", thap_than: "ty-kien", nhat_chu: "nhat-chu-giap",
   cap_so: "so-chu-dao-1-va-1", nghe: "so-1-hop-nghe-gi", tinh_yeu: "so-1-trong-tinh-yeu", nam_ca_nhan: "nam-ca-nhan-1",
   no_nghiep: "no-nghiep-13", sao_cung: "tu-vi-cung-menh", hoa_cung: "hoa-loc-cung-menh", menh_nam: "sinh-nam-1950-menh-gi",
-  so_kep: "so-kep-10", dau_hieu: "duong-dam-thang-vao-nha", co_thu: "cot-tuy-phu", bo_vi: "an-duong", la_bai: "thap",
+  so_kep: "so-kep-10", dau_hieu: "duong-dam-thang-vao-nha", co_thu: "cot-tuy-phu", bo_vi: "an-duong", la_bai: "thap", cung_hd: "bach-duong",
 };
 
 /** ND-7 đợt 2: mọi cụm (trừ hồ sơ chuyên gia) cho đặt MỘT ảnh chia sẻ dùng chung — thay ảnh /og tự vẽ theo tiêu đề. */

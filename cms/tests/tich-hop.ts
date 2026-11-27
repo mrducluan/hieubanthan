@@ -720,6 +720,52 @@ await ca("chân trang: chữ thương hiệu mặc định; miễn trừ không 
   await payload.updateGlobal({ slug: "dieu-huong", overrideAccess: true, data: { thuong_hieu: { gioi_thieu: null, cam_ket: [] }, nhan_ung_ho: null } as never });
 });
 
+await ca("CHANG-4 migration: menu Huyền học đổi Sinh năm nào mệnh gì → Chiêm tinh (sau Kỳ Môn), chân trang thêm /chiem-tinh; sửa tay giữ nguyên; down trả lại", async () => {
+  const { up, down } = await import("../src/migrations/20261127_090000_chiem_tinh_menu_chan_trang");
+  const { MENU_DAU_MAC_DINH } = await import("../src/globals/MenuDauTrang");
+  const { CHAN_TRANG_MAC_DINH } = await import("../src/globals/DieuHuong");
+  const { sql } = await import("@payloadcms/db-postgres");
+  const db = payload.db.drizzle as unknown as { execute: (q: unknown) => Promise<unknown> };
+  const args = { db, payload, req: {} } as never;
+  const MENH = { nhan: "Sinh năm nào mệnh gì", duong_dan: "/bat-tu/menh-theo-nam", mo_ta: "Can chi, nạp âm, màu hợp, tuổi hợp 1950–2027" };
+  const menuCu = (suaMenh?: string) => MENU_DAU_MAC_DINH.map((m) => {
+    const con = m.duong_dan !== "/huyen-hoc" ? m.con : m.con.flatMap((c) => c.duong_dan === "/chiem-tinh" ? []
+      : c.duong_dan === "/tu-vi/sao-o-cung" ? [c, suaMenh ? { ...MENH, nhan: suaMenh } : MENH] : [c]);
+    return { ...m, loai: "duong_dan", con: con.map((c) => ({ ...c, loai: "duong_dan" })) };
+  });
+  const GT_CU = CHAN_TRANG_MAC_DINH.gioi_thieu.replace(", Chiêm tinh —", " —");
+  const hh = async () => ((await payload.findGlobal({ slug: "menu-dau-trang", overrideAccess: true })) as unknown as
+    { muc: { duong_dan: string; con: { duong_dan: string }[] }[] }).muc.find((m) => m.duong_dan === "/huyen-hoc")!.con.map((c) => c.duong_dan);
+  const chan = async () => (await payload.findGlobal({ slug: "dieu-huong", overrideAccess: true })) as unknown as
+    { cot: { lien_ket: { duong_dan: string; nhan: string }[] }[]; thuong_hieu: { gioi_thieu: string } };
+  const chanMoi = MENU_MAC_DINH.map((c) => ({ ...c, lien_ket: c.lien_ket.map((l) => ({ ...l, loai: "duong_dan" })) }));
+  // Dữ liệu cũ: menu đúng mặc định trước CHANG-4; chân trang thiếu /chiem-tinh (Payload không cho lưu nữa → gỡ bằng SQL).
+  await payload.updateGlobal({ slug: "menu-dau-trang", overrideAccess: true, data: { muc: menuCu() } as never });
+  await payload.updateGlobal({ slug: "dieu-huong", overrideAccess: true, data: { cot: chanMoi, thuong_hieu: { gioi_thieu: GT_CU } } as never });
+  await db.execute(sql`DELETE FROM "cms"."dieu_huong_cot_lien_ket" WHERE "duong_dan" = '/chiem-tinh'`);
+  await up(args);
+  assert.deepEqual(await hh(), MENU_DAU_MAC_DINH.find((m) => m.duong_dan === "/huyen-hoc")!.con.map((c) => c.duong_dan));
+  let c = await chan();
+  assert.deepEqual(c.cot.map((x) => x.lien_ket.map((l) => [l.duong_dan, l.nhan])), MENU_MAC_DINH.map((x) => x.lien_ket.map((l) => [l.duong_dan, l.nhan])));
+  assert.equal(c.thuong_hieu.gioi_thieu, CHAN_TRANG_MAC_DINH.gioi_thieu);
+  await up(args);   // chạy lại không thêm trùng
+  assert.equal((await hh()).filter((d) => d === "/chiem-tinh").length, 1);
+  assert.equal((await chan()).cot.flatMap((x) => x.lien_ket).filter((l) => l.duong_dan === "/chiem-tinh").length, 1);
+  await down(args);
+  assert.deepEqual(await hh(), menuCu()[2]!.con.map((x) => x.duong_dan));
+  c = await chan();
+  assert.ok(!c.cot.flatMap((x) => x.lien_ket).some((l) => l.duong_dan === "/chiem-tinh"));
+  assert.equal(c.thuong_hieu.gioi_thieu, GT_CU);
+  // Dòng mệnh theo năm đã sửa tay → giữ, menu đủ 12 mục → không thêm Chiêm tinh (không vượt trần CMS).
+  await payload.updateGlobal({ slug: "menu-dau-trang", overrideAccess: true, data: { muc: menuCu("Mệnh theo năm sinh") } as never });
+  await up(args);
+  const h3 = await hh();
+  assert.ok(h3.includes("/bat-tu/menh-theo-nam") && !h3.includes("/chiem-tinh") && h3.length === 12);
+  await payload.updateGlobal({ slug: "menu-dau-trang", overrideAccess: true, data: { muc: menuCu() } as never });
+  await payload.updateGlobal({ slug: "dieu-huong", overrideAccess: true, data: { cot: chanMoi, thuong_hieu: { gioi_thieu: CHAN_TRANG_MAC_DINH.gioi_thieu } } as never });
+  await up(args);
+});
+
 await ca("QH-URL migration: chữ CMS của URL cũ đi theo URL silo (bản chính + phiên bản); trùng đích không đè; down trả lại", async () => {
   const { up, down } = await import("../src/migrations/20261019_060000_qh_url_doi_duong");
   const args = { db: payload.db.drizzle, payload, req: {} } as never;

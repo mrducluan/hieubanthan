@@ -3,6 +3,7 @@
 // (components/sao/HopThoaiSao, gắn ở layout) hỏi người dùng: đăng nhập / đồng ý trừ Sao / nạp nhanh.
 // Đồng ý trừ Sao → gửi lại đúng yêu cầu kèm header x-dong-y-sao: 1 (máy chủ trừ SAU khi trả lời được).
 import { maNgonNguTrang } from "@/lib/ngon-ngu";
+import { dauTruongPhai } from "@/lib/truong-phai";
 import type { UuDai } from "@/lib/uu-dai";
 
 export type CanSao = "dang_nhap" | "xac_nhan_sao" | "nap";
@@ -59,9 +60,13 @@ export function dangChoMo(duong: string, nguoi: unknown): boolean {
  *  Chỉ route trong site; trang Việt không gửi gì (lời gọi bản Việt giữ nguyên từng byte). */
 export function kemNgonNgu(url: string, init: RequestInit = {}): RequestInit {
   const nn = maNgonNguTrang();
-  if (nn === "vi" || !url.startsWith("/") || url.startsWith("//")) return init;
+  if (!url.startsWith("/") || url.startsWith("//")) return init;
+  // TP-1: công tắc trường phái đang chọn (vd Dương Công theo sách Hiệp Kỷ) đi cùng mọi lượt gọi /api/* cùng site.
+  const tp = dauTruongPhai();
+  if (nn === "vi" && !Object.keys(tp).length) return init;
   const h = new Headers(init.headers);
-  if (!h.has("x-ngon-ngu")) h.set("x-ngon-ngu", nn);
+  if (nn !== "vi" && !h.has("x-ngon-ngu")) h.set("x-ngon-ngu", nn);
+  for (const [k, v] of Object.entries(tp)) if (!h.has(k)) h.set(k, v);
   return { ...init, headers: h };
 }
 

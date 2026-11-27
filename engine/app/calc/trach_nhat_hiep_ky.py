@@ -14,9 +14,9 @@ Phần chỉ có ở khối này:
      không còn rỗng.
   4. Năm theo Lập xuân (Hiệp Kỷ xét năm từ Lập xuân, không từ Tết).
 
-`tu_ly` = cờ thần sát 四离 của bảng thẻ ngày (giá trị trang đang hiện). Định nghĩa của sách (một ngày trước Xuân phân,
-Hạ chí, Thu phân, Đông chí) trả riêng ở `tu_ly_theo_sach` — hai cách lệch nhau, ghi trong
-`docs/GHI-CHU-HIEP-KY-TU-LY.md` để chủ dự án quyết; hệ thống không tự chọn.
+`tu_ly` = cờ Tứ Ly của thẻ ngày. TP-1 (chủ dự án duyệt 2026-11-27): thẻ ngày nay tính Tứ Ly theo định nghĩa sách
+(`hoang_lich.la_tu_ly`, một ngày trước Xuân phân, Hạ chí, Thu phân, Đông chí) — `tu_ly` và `tu_ly_theo_sach` luôn bằng
+nhau; Tứ Tuyệt dùng cùng bộ hàm (`hoang_lich.la_tu_tuyet`).
 """
 from __future__ import annotations
 
@@ -72,23 +72,14 @@ def ngu_loai_nhat(can_ngay: str, chi_ngay: str) -> str:
     return "phat"
 
 
-def _ngay_tiet(nam: int, kinh_do: int) -> dt.date:
-    """Ngày địa phương (kinh tuyến lịch, như `hoang_lich`) của thời điểm giao tiết `kinh_do`."""
-    return (tietkhi.thoi_diem(nam, kinh_do) + dt.timedelta(hours=CALENDAR_MERIDIAN_TZ)).date()
-
-
-def _truoc_tiet(d: dt.date, cac_goc: tuple[int, ...]) -> bool:
-    return any(d == _ngay_tiet(nam, g) - dt.timedelta(days=1) for nam in (d.year, d.year + 1) for g in cac_goc)
-
-
 def la_tu_tuyet(d: dt.date) -> bool:
-    """Một ngày trước Lập xuân 315°, Lập hạ 45°, Lập thu 135°, Lập đông 225° (Hiệp Kỷ quyển 9)."""
-    return _truoc_tiet(d, (315, 45, 135, 225))
+    """Một ngày trước Lập xuân 315°, Lập hạ 45°, Lập thu 135°, Lập đông 225° (Hiệp Kỷ quyển 9) — hàm chung `hoang_lich`."""
+    return hl.la_tu_tuyet(d)
 
 
 def la_tu_ly_theo_sach(d: dt.date) -> bool:
-    """Định nghĩa của sách: một ngày trước Xuân phân 0°, Hạ chí 90°, Thu phân 180°, Đông chí 270° (quyển 9)."""
-    return _truoc_tiet(d, (0, 90, 180, 270))
+    """Một ngày trước Xuân phân, Hạ chí, Thu phân, Đông chí (quyển 9) — hàm chung `hoang_lich` (thẻ ngày dùng cùng hàm)."""
+    return hl.la_tu_ly(d)
 
 
 def _cuoi_ngay_utc(d: dt.date) -> dt.datetime:
@@ -113,9 +104,9 @@ def _viet_chi(chi_han: str) -> str:
     return lunar.CHI[hl.ZHI.index(chi_han)]
 
 
-def phan_tich_ngay_hiep_ky(d: dt.date, huong_tu_tao: str | None = None) -> dict:
+def phan_tich_ngay_hiep_ky(d: dt.date, huong_tu_tao: str | None = None, duong_cong: str = "lich_viet") -> dict:
     """Chẩn đoán Hiệp Kỷ Biện Phương Thư cho một ngày dương lịch `d` (`huong_tu_tao`: tên Việt trong `HUONG_MA`)."""
-    the = hl.ngay(d)                                    # đúng giá trị thẻ ngày của trang đang hiện
+    the = hl.ngay(d, duong_cong=duong_cong)             # đúng giá trị thẻ ngày của trang đang hiện (cùng phái)
     can_n = lunar.CAN[hl.GAN.index(the["ngay_gz"][0])]
     chi_n = _viet_chi(the["ngay_gz"][1])
     chi_thang = _viet_chi(the["thang_gz"][1])

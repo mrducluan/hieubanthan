@@ -1,0 +1,786 @@
+{
+  "_nguon": "TP-1 (chủ dự án duyệt 2026-11-27) — sổ các chỗ hai nguồn cổ truyền / hai trường phái thật sự nói khác nhau, người dùng được chọn. Lời mô tả do ban biên tập viết; câu Hán (`trich`) là nguyên văn kho nguồn fixtures/nguon/. Mặc định = cách phổ biến ở Việt Nam (= cách hệ thống đang chạy).",
+  "_trang_thai": "bien_tap",
+  "source_id": "truong_phai_tp1",
+  "school_id": "he_thong",
+  "nguyen_tac": [
+    "Chỉ mở lựa chọn ở chỗ hai nguồn thật sự nói khác nhau; chỗ sai thì sửa, không biến thành lựa chọn.",
+    "Mặc định là cách phổ biến ở Việt Nam.",
+    "Trang chỉ nhắc tới lựa chọn khi cách kia làm khác kết quả của chính bạn."
+  ],
+  "diem": [
+    {
+      "ma": "duong_cong",
+      "mon": "lich",
+      "ten": "Ngày Dương Công kỵ",
+      "truong_api": "duong_cong",
+      "noi_gui": "query",
+      "anh_huong": [
+        "the_ngay",
+        "ngay_dep",
+        "chon_ngay",
+        "lich_thang",
+        "lich_nam"
+      ],
+      "mo_ta": "Mười ba ngày Dương Công kỵ trong năm. Lịch dân gian Việt ghi tháng 7 là mùng 8 và 29, áp cả tháng nhuận; sách Hiệp Kỷ ghi tháng 7 là mùng 1 và 29, không nói tới tháng nhuận.",
+      "source_id": "hoang_lich_dan_gian_viet",
+      "school_id": "lich_dan_gian",
+      "lua_chon": [
+        {
+          "ma": "lich_viet",
+          "ten": "Lịch dân gian Việt",
+          "mac_dinh": true,
+          "mo_ta": "Tháng 7 kiêng mùng 8 và 29; tháng nhuận cũng kiêng như tháng chính.",
+          "nguon": {
+            "sach": "Lịch vạn sự, lịch dân gian Việt Nam (truyền khẩu)"
+          },
+          "source_id": "hoang_lich_dan_gian_viet",
+          "school_id": "lich_dan_gian"
+        },
+        {
+          "ma": "hiep_ky",
+          "ten": "Theo sách Hiệp Kỷ",
+          "mac_dinh": false,
+          "mo_ta": "Tháng 7 kiêng mùng 1 và 29; tháng nhuận không tính. Sách cũng nói rõ đây chỉ là ngày sao Thất đếm từ đầu năm, không nên quá sợ.",
+          "nguon": {
+            "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 36",
+            "trich": "一以至七月初一二十九而終于十二月十九凡十"
+          },
+          "source_id": "hiep_ky_bien_phuong_thu_q36",
+          "school_id": "trach_nhat_hiep_ky"
+        }
+      ],
+      "loi_khac": {
+        "lich_viet.co": "Lịch dân gian ghi ngày này kiêng (Dương Công). Sách Hiệp Kỷ ghi khác — theo sách, ngày này không kiêng.",
+        "lich_viet.khong": "Sách Hiệp Kỷ ghi ngày này là ngày Dương Công kỵ; lịch dân gian Việt không ghi.",
+        "hiep_ky.co": "Đang xem theo sách Hiệp Kỷ: ngày này là Dương Công kỵ; lịch dân gian Việt không ghi.",
+        "hiep_ky.khong": "Đang xem theo sách Hiệp Kỷ: ngày này không kiêng; lịch dân gian Việt ghi là Dương Công kỵ.",
+        "them": "thêm {ngay}",
+        "bot": "bớt {ngay}",
+        "nut.hiep_ky": "Xem theo sách Hiệp Kỷ",
+        "nut.lich_viet": "Xem theo lịch dân gian",
+        "khoang.hiep_ky": "Theo sách Hiệp Kỷ, danh sách này đổi: {doi}.",
+        "khoang.lich_viet": "Theo lịch dân gian Việt, danh sách này đổi: {doi}."
+      }
+    },
+    {
+      "ma": "tuvi.lich",
+      "mon": "tuvi",
+      "ten": "Lịch âm dùng để lập lá số",
+      "truong_api": "lich",
+      "noi_gui": "body",
+      "anh_huong": [
+        "la_so"
+      ],
+      "mo_ta": "Âm lịch Việt Nam và lịch Trung Quốc có lúc lệch nhau một ngày hoặc một tháng ở đầu tháng âm.",
+      "source_id": "lich_am_viet_trung",
+      "school_id": "tuvi_nam_phai",
+      "lua_chon": [
+        {
+          "ma": "viet",
+          "ten": "Âm lịch Việt Nam",
+          "mac_dinh": true,
+          "mo_ta": "Tính theo giờ Việt Nam.",
+          "nguon": {
+            "sach": "Âm lịch Việt Nam (giờ Việt Nam)"
+          },
+          "source_id": "lich_am_viet",
+          "school_id": "tuvi_nam_phai"
+        },
+        {
+          "ma": "trung",
+          "ten": "Lịch Trung Quốc",
+          "mac_dinh": false,
+          "mo_ta": "Tính theo giờ Bắc Kinh.",
+          "nguon": {
+            "sach": "Nông lịch Trung Quốc"
+          },
+          "source_id": "lich_am_trung",
+          "school_id": "tuvi_trung_chau"
+        }
+      ]
+    },
+    {
+      "ma": "tuvi.do_sang",
+      "mon": "tuvi",
+      "ten": "Bảng độ sáng của sao",
+      "truong_api": null,
+      "noi_gui": "web",
+      "anh_huong": [
+        "la_so_hien_thi"
+      ],
+      "mo_ta": "Sách Việt và sách Trung ghi độ sáng (miếu, vượng, hãm…) của sao ở mỗi cung khác nhau ở một số ô. Hệ thống trả cả hai, trang chọn cách hiện.",
+      "source_id": "do_sang_tuvi",
+      "school_id": "tuvi_nam_phai",
+      "lua_chon": [
+        {
+          "ma": "nam_phai",
+          "ten": "Lối Việt (Nam phái)",
+          "mac_dinh": true,
+          "mo_ta": "Bảng độ sáng hay dùng ở sách Tử vi Việt.",
+          "nguon": {
+            "sach": "Tử vi Nam phái"
+          },
+          "source_id": "do_sang_nam_phai",
+          "school_id": "tuvi_nam_phai"
+        },
+        {
+          "ma": "trung",
+          "ten": "Phái Trung",
+          "mac_dinh": false,
+          "mo_ta": "Bảng độ sáng của sách Trung Châu.",
+          "nguon": {
+            "sach": "Tử vi Trung Châu phái"
+          },
+          "source_id": "do_sang_trung_chau",
+          "school_id": "tuvi_trung_chau"
+        }
+      ]
+    },
+    {
+      "ma": "tuvi.hoa_linh",
+      "mon": "tuvi",
+      "ten": "Cách an sao Hoả Tinh, Linh Tinh",
+      "truong_api": "hoa_linh",
+      "noi_gui": "body",
+      "anh_huong": [
+        "la_so"
+      ],
+      "mo_ta": "Lối Việt và phái Trung Châu đặt hai sao này ở chỗ khác nhau với một số tuổi.",
+      "source_id": "hoa_linh_tuvi",
+      "school_id": "tuvi_nam_phai",
+      "lua_chon": [
+        {
+          "ma": "viet",
+          "ten": "Lối Việt",
+          "mac_dinh": true,
+          "mo_ta": "Cách an hay gặp trong sách Tử vi Việt.",
+          "nguon": {
+            "sach": "Tử vi Nam phái"
+          },
+          "source_id": "hoa_linh_viet",
+          "school_id": "tuvi_nam_phai"
+        },
+        {
+          "ma": "trung",
+          "ten": "Phái Trung Châu",
+          "mac_dinh": false,
+          "mo_ta": "Cách an theo sách Trung Châu.",
+          "nguon": {
+            "sach": "Tử vi Trung Châu phái"
+          },
+          "source_id": "hoa_linh_trung_chau",
+          "school_id": "tuvi_trung_chau"
+        }
+      ]
+    },
+    {
+      "ma": "tuvi.thang_nhuan",
+      "mon": "tuvi",
+      "ten": "Sinh vào tháng nhuận",
+      "truong_api": "thang_nhuan",
+      "noi_gui": "body",
+      "anh_huong": [
+        "la_so"
+      ],
+      "mo_ta": "Sách không thống nhất người sinh tháng nhuận tính như tháng chính hay tháng sau.",
+      "source_id": "thang_nhuan_tuvi",
+      "school_id": "tuvi_nam_phai",
+      "lua_chon": [
+        {
+          "ma": "thang_sau",
+          "ten": "Nửa sau tính tháng sau",
+          "mac_dinh": true,
+          "mo_ta": "Từ ngày 16 tháng nhuận tính như tháng sau.",
+          "nguon": {
+            "sach": "Tử vi Nam phái"
+          },
+          "source_id": "thang_nhuan_nua_sau",
+          "school_id": "tuvi_nam_phai"
+        },
+        {
+          "ma": "thang_chinh",
+          "ten": "Như tháng chính",
+          "mac_dinh": false,
+          "mo_ta": "Cả tháng nhuận tính như tháng chính.",
+          "nguon": {
+            "sach": "Một số sách Tử vi"
+          },
+          "source_id": "thang_nhuan_chinh",
+          "school_id": "tuvi_trung_chau"
+        },
+        {
+          "ma": "ca_thang_sau",
+          "ten": "Cả tháng tính tháng sau",
+          "mac_dinh": false,
+          "mo_ta": "Cả tháng nhuận tính như tháng sau.",
+          "nguon": {
+            "sach": "Một số sách Tử vi"
+          },
+          "source_id": "thang_nhuan_ca_sau",
+          "school_id": "tuvi_trung_chau"
+        }
+      ]
+    },
+    {
+      "ma": "tuvi.luu_nguyet",
+      "mon": "tuvi",
+      "ten": "Cách tính tháng hạn",
+      "truong_api": "luu_nguyet",
+      "noi_gui": "body",
+      "anh_huong": [
+        "thang_han"
+      ],
+      "mo_ta": "Có năm cách đặt tháng Giêng của năm hạn lên lá số, mỗi sách theo một cách.",
+      "source_id": "luu_nguyet_tuvi",
+      "school_id": "tuvi_nam_phai",
+      "lua_chon": [
+        {
+          "ma": "dau_quan_thai_tue",
+          "ten": "Đẩu Quân từ Thái Tuế",
+          "mac_dinh": true,
+          "mo_ta": "Cách phổ biến nhất.",
+          "nguon": {
+            "sach": "Tử Vi Đẩu Số Toàn Thư"
+          },
+          "source_id": "luu_nguyet_dq_tt",
+          "school_id": "tuvi_nam_phai"
+        },
+        {
+          "ma": "dau_quan_tieu_han",
+          "ten": "Đẩu Quân từ Tiểu hạn",
+          "mac_dinh": false,
+          "mo_ta": "Đếm Đẩu Quân từ cung Tiểu hạn.",
+          "nguon": {
+            "sach": "Một số sách Tử vi Việt"
+          },
+          "source_id": "luu_nguyet_dq_th",
+          "school_id": "tuvi_nam_phai"
+        },
+        {
+          "ma": "tieu_han",
+          "ten": "Tháng Giêng tại Tiểu hạn",
+          "mac_dinh": false,
+          "mo_ta": "Tháng Giêng đặt ở cung Tiểu hạn.",
+          "nguon": {
+            "sach": "Một số sách Tử vi Việt"
+          },
+          "source_id": "luu_nguyet_th",
+          "school_id": "tuvi_nam_phai"
+        },
+        {
+          "ma": "luu_nien",
+          "ten": "Tháng Giêng tại cung năm",
+          "mac_dinh": false,
+          "mo_ta": "Tháng Giêng đặt ở cung lưu niên.",
+          "nguon": {
+            "sach": "Một số sách Tử vi"
+          },
+          "source_id": "luu_nguyet_ln",
+          "school_id": "tuvi_trung_chau"
+        },
+        {
+          "ma": "dia_chi_thang",
+          "ten": "Theo địa chi tháng",
+          "mac_dinh": false,
+          "mo_ta": "Mỗi tháng ở cung cùng địa chi.",
+          "nguon": {
+            "sach": "Một số sách Tử vi"
+          },
+          "source_id": "luu_nguyet_dc",
+          "school_id": "tuvi_trung_chau"
+        }
+      ]
+    },
+    {
+      "ma": "tuvi.gio_sinh",
+      "mon": "tuvi",
+      "ten": "Giờ sinh dùng để lập lá số",
+      "truong_api": "gio_sinh",
+      "noi_gui": "body",
+      "anh_huong": [
+        "la_so"
+      ],
+      "mo_ta": "Giờ trên đồng hồ và giờ theo mặt trời ở nơi sinh có thể lệch vài chục phút.",
+      "source_id": "gio_sinh_dong_ho_mat_troi",
+      "school_id": "tuvi_nam_phai",
+      "lua_chon": [
+        {
+          "ma": "dong_ho",
+          "ten": "Giờ đồng hồ",
+          "mac_dinh": true,
+          "mo_ta": "Như sách Việt hay dùng.",
+          "nguon": {
+            "sach": "Tử vi Nam phái"
+          },
+          "source_id": "gio_dong_ho",
+          "school_id": "tuvi_nam_phai"
+        },
+        {
+          "ma": "mat_troi",
+          "ten": "Giờ mặt trời thực",
+          "mac_dinh": false,
+          "mo_ta": "Theo kinh độ nơi sinh.",
+          "nguon": {
+            "sach": "Cách tính hiện đại theo kinh độ nơi sinh"
+          },
+          "source_id": "gio_mat_troi",
+          "school_id": "hien_dai"
+        }
+      ]
+    },
+    {
+      "ma": "tuvi.truong_phai",
+      "mon": "tuvi",
+      "ten": "Tuần, Triệt ảnh hưởng tới đâu",
+      "truong_api": "truong_phai",
+      "noi_gui": "body",
+      "anh_huong": [
+        "tuan_triet"
+      ],
+      "mo_ta": "Hai sách Tử vi Việt nói khác nhau về việc Tuần, Triệt chỉ chặn cung nó đóng hay lan sang cả cung hợp chiếu.",
+      "source_id": "tuan_triet_hai_phai",
+      "school_id": "tuvi_nam_phai",
+      "lua_chon": [
+        {
+          "ma": "npl",
+          "ten": "Theo Nguyễn Phát Lộc",
+          "mac_dinh": true,
+          "mo_ta": "Chỉ chặn đúng cung Tuần, Triệt đóng, không lan sang cung hợp chiếu.",
+          "nguon": {
+            "sach": "Tử vi tổng hợp (Nguyễn Phát Lộc)"
+          },
+          "source_id": "tuvi_npl",
+          "school_id": "tuvi_nam_phai"
+        },
+        {
+          "ma": "vvt",
+          "ten": "Theo Việt Viêm Tử",
+          "mac_dinh": false,
+          "mo_ta": "Lan sang cung hợp chiếu, mạnh nhẹ tuỳ âm dương của tuổi.",
+          "nguon": {
+            "sach": "Tử vi (Việt Viêm Tử)"
+          },
+          "source_id": "tuvi_vvt",
+          "school_id": "tuvi_nam_phai"
+        }
+      ],
+      "mac_dinh_api": null
+    },
+    {
+      "ma": "battu.gio_ty",
+      "mon": "battu",
+      "ten": "Sinh từ 23 giờ đến nửa đêm",
+      "truong_api": "gio_ty",
+      "noi_gui": "body",
+      "anh_huong": [
+        "tu_tru"
+      ],
+      "mo_ta": "Giờ Tý bắt đầu lúc 23 giờ; sách khác nhau ở chỗ có đổi sang ngày hôm sau hay không.",
+      "source_id": "gio_ty_battu",
+      "school_id": "tu_binh",
+      "lua_chon": [
+        {
+          "ma": "da_ty",
+          "ten": "Giữ ngày hôm đó",
+          "mac_dinh": true,
+          "mo_ta": "Trụ ngày vẫn là ngày hôm đó, trụ giờ là giờ Tý của ngày sau.",
+          "nguon": {
+            "sach": "Tử Bình (lệ dạ Tý)"
+          },
+          "source_id": "da_ty",
+          "school_id": "tu_binh"
+        },
+        {
+          "ma": "sang_ngay",
+          "ten": "Sang ngày mới lúc 23 giờ",
+          "mac_dinh": false,
+          "mo_ta": "Trụ ngày đổi sang ngày hôm sau.",
+          "nguon": {
+            "sach": "Một số sách Tử Bình"
+          },
+          "source_id": "sang_ngay_23h",
+          "school_id": "tu_binh"
+        }
+      ]
+    },
+    {
+      "ma": "battu.dieu_hau",
+      "mon": "battu",
+      "ten": "Mùa nơi sinh",
+      "truong_api": "dieu_hau",
+      "noi_gui": "body",
+      "anh_huong": [
+        "dung_than"
+      ],
+      "mo_ta": "Chỉ có ý nghĩa với người sinh ở xa về phía Nam bán cầu, nơi mùa ngược với lịch tiết khí.",
+      "source_id": "dieu_hau_nam_ban_cau",
+      "school_id": "tu_binh",
+      "lua_chon": [
+        {
+          "ma": "bac_ban_cau",
+          "ten": "Theo lịch tiết khí",
+          "mac_dinh": true,
+          "mo_ta": "Như sách xưa.",
+          "nguon": {
+            "sach": "Cùng Thông Bảo Giám"
+          },
+          "source_id": "cung_thong_bao_giam",
+          "school_id": "tu_binh"
+        },
+        {
+          "ma": "noi_sinh",
+          "ten": "Theo mùa thực nơi sinh",
+          "mac_dinh": false,
+          "mo_ta": "Thuyết hiện đại, không có trong sách xưa.",
+          "nguon": {
+            "sach": "Thuyết hiện đại cho Nam bán cầu"
+          },
+          "source_id": "nam_ban_cau_hien_dai",
+          "school_id": "hien_dai"
+        }
+      ]
+    },
+    {
+      "ma": "battu.gio_sinh",
+      "mon": "battu",
+      "ten": "Giờ sinh dùng để lập tứ trụ",
+      "truong_api": "gio_sinh",
+      "noi_gui": "body",
+      "anh_huong": [
+        "tu_tru"
+      ],
+      "mo_ta": "Giờ trên đồng hồ và giờ theo mặt trời ở nơi sinh có thể lệch vài chục phút.",
+      "source_id": "gio_sinh_dong_ho_mat_troi",
+      "school_id": "tu_binh",
+      "lua_chon": [
+        {
+          "ma": "dong_ho",
+          "ten": "Giờ đồng hồ",
+          "mac_dinh": true,
+          "mo_ta": "Như sách Việt hay dùng.",
+          "nguon": {
+            "sach": "Cách lập tứ trụ phổ biến"
+          },
+          "source_id": "gio_dong_ho",
+          "school_id": "tu_binh"
+        },
+        {
+          "ma": "mat_troi",
+          "ten": "Giờ mặt trời thực",
+          "mac_dinh": false,
+          "mo_ta": "Theo kinh độ nơi sinh.",
+          "nguon": {
+            "sach": "Cách tính hiện đại theo kinh độ nơi sinh"
+          },
+          "source_id": "gio_mat_troi",
+          "school_id": "hien_dai"
+        }
+      ]
+    },
+    {
+      "ma": "phongthuy.moc_nam",
+      "mon": "phongthuy",
+      "ten": "Mốc đầu năm để tính cung mệnh",
+      "truong_api": "moc_nam",
+      "noi_gui": "body",
+      "anh_huong": [
+        "cung_menh"
+      ],
+      "mo_ta": "Người sinh đầu năm dương lịch có thể ra cung mệnh khác tuỳ lấy Lập xuân hay Tết làm đầu năm.",
+      "source_id": "moc_nam_bat_trach",
+      "school_id": "bat_trach",
+      "lua_chon": [
+        {
+          "ma": "lap_xuan",
+          "ten": "Lập xuân",
+          "mac_dinh": true,
+          "mo_ta": "Mốc tiết khí, như sách Bát trạch.",
+          "nguon": {
+            "sach": "Bát Trạch Minh Kính"
+          },
+          "source_id": "lap_xuan",
+          "school_id": "bat_trach"
+        },
+        {
+          "ma": "tet_viet",
+          "ten": "Tết âm lịch Việt",
+          "mac_dinh": false,
+          "mo_ta": "Mùng 1 Tết theo lịch Việt.",
+          "nguon": {
+            "sach": "Tập quán Việt Nam"
+          },
+          "source_id": "tet_viet",
+          "school_id": "dan_gian_viet"
+        },
+        {
+          "ma": "tet_trung",
+          "ten": "Tết âm lịch Trung Quốc",
+          "mac_dinh": false,
+          "mo_ta": "Mùng 1 Tết theo lịch Trung Quốc.",
+          "nguon": {
+            "sach": "Nông lịch Trung Quốc"
+          },
+          "source_id": "tet_trung",
+          "school_id": "dan_gian_trung"
+        }
+      ]
+    },
+    {
+      "ma": "thanso.phai",
+      "mon": "thanso",
+      "ten": "Trường phái thần số",
+      "truong_api": "phai",
+      "noi_gui": "body",
+      "anh_huong": [
+        "bai_doc"
+      ],
+      "mo_ta": "Mỗi phái đổi chữ thành số và đọc con số theo cách riêng.",
+      "source_id": "thanso_phai",
+      "school_id": "pythagore",
+      "lua_chon": [
+        {
+          "ma": "pitago",
+          "ten": "Pitago",
+          "mac_dinh": true,
+          "mo_ta": "Phổ biến nhất ở Việt Nam.",
+          "nguon": {
+            "sach": "Thần số học Pitago hiện đại"
+          },
+          "source_id": "pitago",
+          "school_id": "pythagore"
+        },
+        {
+          "ma": "phillips",
+          "ten": "Phillips",
+          "mac_dinh": false,
+          "mo_ta": "Thêm Kim Tự Tháp bốn đỉnh.",
+          "nguon": {
+            "sach": "David A. Phillips"
+          },
+          "source_id": "phillips",
+          "school_id": "phillips"
+        },
+        {
+          "ma": "chaldea",
+          "ten": "Chaldea",
+          "mac_dinh": false,
+          "mo_ta": "Bảng chữ theo âm, số kép (bản tiếng Anh).",
+          "nguon": {
+            "sach": "Cheiro's Book of Numbers (1926)"
+          },
+          "source_id": "chaldean_cheiro",
+          "school_id": "chaldean_cheiro"
+        },
+        {
+          "ma": "tong_hop",
+          "ten": "Tổng hợp hai phái",
+          "mac_dinh": false,
+          "mo_ta": "Đặt Pitago và Chaldea cạnh nhau (bản tiếng Anh).",
+          "nguon": {
+            "sach": "Pitago và Chaldea"
+          },
+          "source_id": "tong_hop",
+          "school_id": "pythagore"
+        }
+      ]
+    },
+    {
+      "ma": "thanso.quy_uoc_duong_doi",
+      "mon": "thanso",
+      "ten": "Cách tính con số đường đời",
+      "truong_api": "quy_uoc_duong_doi",
+      "noi_gui": "body",
+      "mac_dinh_api": "tong_het",
+      "anh_huong": [
+        "duong_doi"
+      ],
+      "mo_ta": "Cộng hết các chữ số ngày sinh một lần, hay rút gọn ngày, tháng, năm riêng rồi mới cộng — hai cách có lúc ra số khác.",
+      "source_id": "duong_doi_hai_cach",
+      "school_id": "pythagore",
+      "lua_chon": [
+        {
+          "ma": "tung_phan",
+          "ten": "Rút gọn con số",
+          "mac_dinh": true,
+          "mo_ta": "Rút gọn ngày, tháng, năm riêng rồi cộng.",
+          "nguon": {
+            "sach": "Hans Decoz"
+          },
+          "source_id": "decoz",
+          "school_id": "pythagore"
+        },
+        {
+          "ma": "tong_het",
+          "ten": "Cộng hết",
+          "mac_dinh": false,
+          "mo_ta": "Cộng mọi chữ số ngày sinh một lần.",
+          "nguon": {
+            "sach": "Thần số học Pitago phổ biến ở Việt Nam"
+          },
+          "source_id": "tong_het",
+          "school_id": "pythagore"
+        }
+      ]
+    },
+    {
+      "ma": "kymon.phep",
+      "mon": "kymon",
+      "ten": "Cách định cục",
+      "truong_api": "phep",
+      "noi_gui": "body",
+      "anh_huong": [
+        "ban_ky_mon"
+      ],
+      "mo_ta": "Sách Kỳ Môn có hai cách xếp cục theo tiết khí.",
+      "source_id": "ky_mon_dinh_cuc",
+      "school_id": "ky_mon",
+      "lua_chon": [
+        {
+          "ma": "sach_bo",
+          "ten": "Sách bổ",
+          "mac_dinh": true,
+          "mo_ta": "Lấy tiết khí đang đi làm cục.",
+          "nguon": {
+            "sach": "Cổ Kim Đồ Thư Tập Thành · Kỳ Môn Độn Giáp"
+          },
+          "source_id": "ky_mon_sach_bo",
+          "school_id": "ky_mon"
+        },
+        {
+          "ma": "tri_nhuan",
+          "ten": "Trí nhuận",
+          "mac_dinh": false,
+          "mo_ta": "Thêm cục nhuận khi lệch quá chín ngày.",
+          "nguon": {
+            "sach": "Cổ Kim Đồ Thư Tập Thành · Kỳ Môn Độn Giáp, quyển 708"
+          },
+          "source_id": "ky_mon_tri_nhuan",
+          "school_id": "ky_mon"
+        }
+      ]
+    },
+    {
+      "ma": "kymon.gio_ty",
+      "mon": "kymon",
+      "ten": "Giờ từ 23 giờ đến nửa đêm",
+      "truong_api": "gio_ty",
+      "noi_gui": "body",
+      "anh_huong": [
+        "ban_ky_mon"
+      ],
+      "mo_ta": "Như Bát tự: giờ 23 giờ có đổi sang ngày hôm sau hay không.",
+      "source_id": "gio_ty_ky_mon",
+      "school_id": "ky_mon",
+      "lua_chon": [
+        {
+          "ma": "da_ty",
+          "ten": "Giữ ngày hôm đó",
+          "mac_dinh": true,
+          "mo_ta": "Như Bát tự.",
+          "nguon": {
+            "sach": "Lệ dạ Tý"
+          },
+          "source_id": "da_ty",
+          "school_id": "ky_mon"
+        },
+        {
+          "ma": "sang_ngay",
+          "ten": "Sang ngày mới lúc 23 giờ",
+          "mac_dinh": false,
+          "mo_ta": "Ngày đổi lúc 23 giờ.",
+          "nguon": {
+            "sach": "Một số sách Kỳ Môn"
+          },
+          "source_id": "sang_ngay_23h",
+          "school_id": "ky_mon"
+        }
+      ]
+    },
+    {
+      "ma": "kinhdich.truong_phai",
+      "mon": "kinhdich",
+      "ten": "Cách đọc quẻ",
+      "truong_api": "truong_phai",
+      "noi_gui": "body",
+      "anh_huong": [
+        "bai_doc"
+      ],
+      "mo_ta": "Ba cách đọc một quẻ: theo lời kinh, theo sáu hào và lục thân, theo Mai Hoa.",
+      "source_id": "kinhdich_ba_cach",
+      "school_id": "kinhdich",
+      "lua_chon": [
+        {
+          "ma": "nghia_ly",
+          "ten": "Nghĩa lý",
+          "mac_dinh": true,
+          "mo_ta": "Đọc theo lời quẻ, lời hào.",
+          "nguon": {
+            "sach": "Chu Dịch Truyện Nghĩa Đại Toàn"
+          },
+          "source_id": "chu_dich_truyen_nghia",
+          "school_id": "nghia_ly"
+        },
+        {
+          "ma": "luc_hao",
+          "ten": "Lục hào",
+          "mac_dinh": false,
+          "mo_ta": "Đọc theo dụng thần, thế ứng.",
+          "nguon": {
+            "sach": "Tăng San Bốc Dịch"
+          },
+          "source_id": "tang_san_boc_dich",
+          "school_id": "luc_hao"
+        },
+        {
+          "ma": "mai_hoa",
+          "ten": "Mai Hoa",
+          "mac_dinh": false,
+          "mo_ta": "Đọc theo quẻ chủ, quẻ hỗ, quẻ biến.",
+          "nguon": {
+            "sach": "Mai Hoa Dịch Số"
+          },
+          "source_id": "mai_hoa_dich_so",
+          "school_id": "mai_hoa"
+        }
+      ]
+    },
+    {
+      "ma": "chitay.phai",
+      "mon": "chitay",
+      "ten": "Phái xem chỉ tay",
+      "truong_api": "phai",
+      "noi_gui": "body",
+      "anh_huong": [
+        "bai_doc"
+      ],
+      "mo_ta": "Phái Đông đọc hình vân và tám cung; phái Tây đọc dáng tay, gò và đường chỉ.",
+      "source_id": "chi_tay_hai_phai",
+      "school_id": "chi_tay",
+      "lua_chon": [
+        {
+          "ma": "dong",
+          "ten": "Phái Đông",
+          "mac_dinh": true,
+          "mo_ta": "Theo Thần Tướng Toàn Biên.",
+          "nguon": {
+            "sach": "Thần Tướng Toàn Biên · quyển 10"
+          },
+          "source_id": "than_tuong_toan_bien",
+          "school_id": "chi_tay_dong"
+        },
+        {
+          "ma": "tay",
+          "ten": "Phái Tây",
+          "mac_dinh": false,
+          "mo_ta": "Theo Cheiro, Benham.",
+          "nguon": {
+            "sach": "Cheiro (1894), Benham (1900)"
+          },
+          "source_id": "cheiro_benham",
+          "school_id": "chi_tay_tay"
+        }
+      ]
+    }
+  ]
+}

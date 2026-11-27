@@ -21,62 +21,62 @@
     "1": {
       "ten": "1st House · Self & Approach",
       "linh_vuc": "first impressions, personal agency, and physical vitality",
-      "y_chinh": "1st House · Self & Approach centers on first impressions, personal agency, and physical vitality."
+      "y_chinh": "In the 1st house this point shows on the surface: your manner, how you start new things and the first impression others have of you."
     },
     "2": {
       "ten": "2nd House · Personal Resources & Values",
       "linh_vuc": "earning habits, material stewardship, and self-worth",
-      "y_chinh": "2nd House · Personal Resources & Values centers on earning habits, material stewardship, and self-worth."
+      "y_chinh": "In the 2nd house this point is about how you earn and keep money and how you rate your own abilities."
     },
     "3": {
       "ten": "3rd House · Learning, Siblings & Daily Exchange",
       "linh_vuc": "everyday writing, study habits, and local networks",
-      "y_chinh": "3rd House · Learning, Siblings & Daily Exchange centers on everyday writing, study habits, and local networks."
+      "y_chinh": "In the 3rd house this point shows in everyday learning, talking and writing, and in ties with siblings and neighbours."
     },
     "4": {
       "ten": "4th House · Home, Roots & Private Foundation",
       "linh_vuc": "family roots, living space, and private emotional grounding",
-      "y_chinh": "4th House · Home, Roots & Private Foundation centers on family roots, living space, and private emotional grounding."
+      "y_chinh": "In the 4th house this point sits in home life, your family of origin and what helps you feel at ease when you get home."
     },
     "5": {
       "ten": "5th House · Creativity, Joy & Offspring",
       "linh_vuc": "creative play, heartfelt expression, and mentoring younger generations",
-      "y_chinh": "5th House · Creativity, Joy & Offspring centers on creative play, heartfelt expression, and mentoring younger generations."
+      "y_chinh": "In the 5th house this point pours into joy: hobbies, creativity, dating and how you play with children."
     },
     "6": {
       "ten": "6th House · Daily Craft, Service & Well-Being",
       "linh_vuc": "daily workflows, practical craftsmanship, and health routines",
-      "y_chinh": "6th House · Daily Craft, Service & Well-Being centers on daily workflows, practical craftsmanship, and health routines."
+      "y_chinh": "In the 6th house this point shows in your daily work habits, how you organise your routine and keep up your energy."
     },
     "7": {
       "ten": "7th House · Committed Partnerships & Agreements",
       "linh_vuc": "marriage, one-to-one business partners, and clear covenants",
-      "y_chinh": "7th House · Committed Partnerships & Agreements centers on marriage, one-to-one business partners, and clear covenants."
+      "y_chinh": "In the 7th house this point shows through your partner, close collaborators and agreements between two people."
     },
     "8": {
       "ten": "8th House · Shared Capital, Trust & Deep Renewal",
       "linh_vuc": "joint finances, shared obligations, and psychological resilience",
-      "y_chinh": "8th House · Shared Capital, Trust & Deep Renewal centers on joint finances, shared obligations, and psychological resilience."
+      "y_chinh": "In the 8th house this point concerns shared money and property, debt, insurance, inheritance, and the times you have to change from within."
     },
     "9": {
       "ten": "9th House · Higher Study, Long Journeys & Worldview",
       "linh_vuc": "advanced study, cross-cultural travel, and ethical horizon",
-      "y_chinh": "9th House · Higher Study, Long Journeys & Worldview centers on advanced study, cross-cultural travel, and ethical horizon."
+      "y_chinh": "In the 9th house this point points toward higher learning, travel, foreign languages and the beliefs you choose to live by."
     },
     "10": {
       "ten": "10th House · Vocation, Public Standing & Legacy",
       "linh_vuc": "long-term career direction, public reputation, and leadership",
-      "y_chinh": "10th House · Vocation, Public Standing & Legacy centers on long-term career direction, public reputation, and leadership."
+      "y_chinh": "In the 10th house this point appears in your career, social position and how the wider world knows you."
     },
     "11": {
       "ten": "11th House · Community, Allies & Future Plans",
       "linh_vuc": "professional circles, shared causes, and long-range aspirations",
-      "y_chinh": "11th House · Community, Allies & Future Plans centers on professional circles, shared causes, and long-range aspirations."
+      "y_chinh": "In the 11th house this point shows through friends, the groups you join and your long-term goals."
     },
     "12": {
       "ten": "12th House · Solitude, Reflection & Quiet Restoration",
       "linh_vuc": "quiet retreat, releasing hidden fatigue, and inner restoration",
-      "y_chinh": "12th House · Solitude, Reflection & Quiet Restoration centers on quiet retreat, releasing hidden fatigue, and inner restoration."
+      "y_chinh": "In the 12th house this point works behind the scenes: when you are alone, when you rest, and in what you rarely say out loud."
     }
   },
   "truc_goc": {
@@ -95,18 +95,18 @@
       "song_ngu": "Pisces Rising: people see you as soft, dreamy and empathetic; you blend into the mood of a new place."
     },
     "mc": {
-      "bach_duong": "Aries Midheaven (MC): public vocation and reputation mature through direct initiative, candid candor, and quick readiness to begin.",
-      "kim_nguu": "Taurus Midheaven (MC): public vocation and reputation mature through steady accumulation, tangible craft, and unhurried reliability.",
-      "song_tu": "Gemini Midheaven (MC): public vocation and reputation mature through curious inquiry, agile dialogue, and multi-threaded learning.",
-      "cu_giai": "Cancer Midheaven (MC): public vocation and reputation mature through protective care, emotional memory, and devotion to safe belonging.",
-      "su_tu": "Leo Midheaven (MC): public vocation and reputation mature through warm self-direction, generous presence, and wholehearted expression.",
-      "xu_nu": "Virgo Midheaven (MC): public vocation and reputation mature through discerning refinement, practical service, and clean organization.",
-      "thien_binh": "Libra Midheaven (MC): public vocation and reputation mature through fair-minded mediation, relational poise, and balanced proportion.",
-      "bo_cap": "Scorpio Midheaven (MC): public vocation and reputation mature through focused intensity, root-cause honesty, and deep loyalty.",
-      "nhan_ma": "Sagittarius Midheaven (MC): public vocation and reputation mature through broad horizon-seeking, candid synthesis, and love of exploration.",
-      "ma_ket": "Capricorn Midheaven (MC): public vocation and reputation mature through long-horizon discipline, structural accountability, and earned mastery.",
-      "bao_binh": "Aquarius Midheaven (MC): public vocation and reputation mature through independent systems thinking, principled reform, and civic perspective.",
-      "song_ngu": "Pisces Midheaven (MC): public vocation and reputation mature through receptive empathy, imaginative synthesis, and quiet compassion."
+      "bach_duong": "Aries Midheaven (MC): suits work where you get to initiate, lead and decide fast; people remember you for daring to go first.",
+      "kim_nguu": "Taurus Midheaven (MC): suits work that makes tangible, lasting things (craft, finance, food, design); your standing comes from consistent quality and reliability.",
+      "song_tu": "Gemini Midheaven (MC): suits work with words, communication, teaching, media and trade; you are known for being quick and clear.",
+      "cu_giai": "Cancer Midheaven (MC): suits work in care, education, food, housing and family-related fields; your standing comes from dedication.",
+      "su_tu": "Leo Midheaven (MC): suits work in front of others: leading, performing, creating, training; you are remembered for your enthusiasm.",
+      "xu_nu": "Virgo Midheaven (MC): suits work that needs precision and usefulness: engineering, analysis, accounting, health care, process management; your standing comes from careful work.",
+      "thien_binh": "Libra Midheaven (MC): suits work with people and beauty: law, negotiation, design, consulting, partnerships; you are trusted for being fair.",
+      "bo_cap": "Scorpio Midheaven (MC): suits work that goes deep: research, investigation, psychology, managing resources, handling difficult cases; your standing comes from discretion and persistence.",
+      "nhan_ma": "Sagittarius Midheaven (MC): suits work that widens horizons: teaching, publishing, travel, foreign trade, law; you are remembered for vision and frankness.",
+      "ma_ket": "Capricorn Midheaven (MC): suits climbing step by step within an organisation: management, administration, construction, corporate finance; your standing comes from long-term responsibility.",
+      "bao_binh": "Aquarius Midheaven (MC): suits innovative and community-minded work: technology, science, social organising, networks; you are known for original ideas.",
+      "song_ngu": "Pisces Midheaven (MC): suits art, music, design, social work and emotional support; your standing comes from compassion and imagination."
     }
   }
 }

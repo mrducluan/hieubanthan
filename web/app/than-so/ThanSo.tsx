@@ -226,7 +226,7 @@ export function ThanSo() {
             <span className="text-moon">{t("phai.cach_con_lai", { so: String(quyUoc === "tung_phan" ? kq.duong_doi_hai_cach.tong_het : kq.duong_doi_hai_cach.tung_phan) })}</span>
           )}</span>}
         moTa={<>{t("phai.mo_ta")}</>}>
-        <DongPhai ten={t("phai.truong_phai")} nhan={t("phai.chon_truong_phai")} giaTri={phai} doi={doiPhai}
+        <DongPhai ma="thanso.phai" ten={t("phai.truong_phai")} nhan={t("phai.chon_truong_phai")} giaTri={phai} doi={doiPhai}
           luaChon={cacPhai(en).map((p) => [p, t(p === "tong_hop" ? "phai.tong_hop_chon" : `phai.${p}`)] as [PhaiThanSo, string])}
           goiY={phai === "chaldea"
             ? (hoSo.ten_khac ? t("phai.ten_goi_khac", { ten: hoSo.ten_khac }) : t("phai.ten_goi", { ten: hoSo.ho_ten.trim().split(/\s+/).pop() ?? "" }))
@@ -234,7 +234,7 @@ export function ThanSo() {
             : phai === "tong_hop" ? t("phai.goi_y_tong_hop")
             : t("phai.goi_y_pitago")} />
         {(phai === "pitago" || phai === "tong_hop") && (
-          <DongPhai ten={t("phai.cach_tinh_dd")} nhan={t("phai.chon_cach_tinh_dd")} giaTri={quyUoc} doi={doiQuyUoc}
+          <DongPhai ma="thanso.quy_uoc_duong_doi" ten={t("phai.cach_tinh_dd")} nhan={t("phai.chon_cach_tinh_dd")} giaTri={quyUoc} doi={doiQuyUoc}
             luaChon={[["tung_phan", t("phai.nhan_rut_gon")], ["tong_het", t("phai.nhan_cong_het")]]}
             noiBat={Boolean(kq.duong_doi_hai_cach?.lech)} nhanNoiBat={t("phai.doi_ra_khac")}
             goiY={<span data-testid="goi-y-duong-doi">{kq.giai_thich_quy_uoc?.[quyUoc]}{kq.duong_doi_hai_cach?.lech

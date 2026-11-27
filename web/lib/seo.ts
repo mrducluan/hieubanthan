@@ -44,6 +44,8 @@ export const THUC_THE = {
   tarot: { name: "Tarot", alternateName: "Tarot card reading", sameAs: ["https://en.wikipedia.org/wiki/Tarot", "https://vi.wikipedia.org/wiki/Tarot", "https://www.wikidata.org/wiki/Q126645"] },
   // KM-3: chỉ trang Wikipedia tiếng Anh (đã có từ lâu); chưa kiểm chứng được mã Wikidata → không ghi (HTT-1: QID sai còn hại hơn thiếu).
   "ky-mon": { name: "Kỳ Môn Độn Giáp", alternateName: "Qimen Dunjia", sameAs: ["https://en.wikipedia.org/wiki/Qimen_Dunjia"] },
+  // CHANG-4: chiêm tinh phương Tây — chỉ trang Wikipedia tiếng Anh đã chắc chắn có; chưa kiểm chứng mã Wikidata → không ghi.
+  "chiem-tinh": { name: "Chiêm tinh phương Tây", alternateName: "Western astrology", sameAs: ["https://en.wikipedia.org/wiki/Western_astrology"] },
   lich: { name: "Âm lịch", alternateName: "Chinese calendar", sameAs: ["https://en.wikipedia.org/wiki/Chinese_calendar", "https://www.wikidata.org/wiki/Q134032"] },
 } as const satisfies Record<MangAnh, { name: string; alternateName: string; sameAs: readonly string[] }>;
 
@@ -188,7 +190,7 @@ export function catMoTa(s: string, toiDa = 160): string {
 }
 
 /** SEO-K: ảnh đại diện bài 1200×630 có hình theo mảng (la bàn, 12 cung, quẻ, tứ trụ, vòng số, lịch) — /og vẽ. */
-export type MangAnh = "than-so" | "tu-vi" | "bat-tu" | "kinh-dich" | "phong-thuy" | "nhan-tuong" | "tarot" | "ky-mon" | "lich";
+export type MangAnh = "than-so" | "tu-vi" | "bat-tu" | "kinh-dich" | "phong-thuy" | "nhan-tuong" | "tarot" | "ky-mon" | "chiem-tinh" | "lich";
 export function anhBai(o: { tieuDe: string; mang?: MangAnh | null; nhan?: string; tot?: string[]; so?: string | number; hao?: number[]; la?: string }): string {
   const q = new URLSearchParams({ tieu_de: o.tieuDe });
   if (o.mang) {

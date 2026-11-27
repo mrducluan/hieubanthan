@@ -11,6 +11,29 @@ import { ChevronDown, Info, Layers } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { useChuGiaoDien } from "@/components/khung/chu-giao-dien";
+import { useDiemPhai, type DiemPhai } from "@/lib/truong-phai";
+
+/** TP-1: nguồn của các lựa chọn ở một điểm trường phái (sách + câu trích nguyên văn nếu có) — đọc từ SỔ engine
+ *  (GET /v1/truong-phai), web không viết tri thức. Sổ chưa tải được → không hiện gì. */
+export function NguonPhai({ diem }: { diem: DiemPhai | null }) {
+  const { c } = useChuGiaoDien();
+  if (!diem) return null;
+  return (
+    <span className="mt-1.5 block space-y-0.5" data-testid={`nguon-phai-${diem.ma}`}>
+      {diem.lua_chon.map((x) => (
+        <span key={x.ma} className="block">
+          <b className="font-medium">{x.ten}</b>{x.mac_dinh ? ` (${c("phai.mac_dinh")})` : ""}: {x.mo_ta}{" "}
+          <span className="text-fg-faint">{c("phai.nguon")}{x.nguon.sach}{x.nguon.trich ? <> «<span lang="zh-Hant">{x.nguon.trich}</span>»</> : null}</span>
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function NguonTheoMa({ ma }: { ma: string }) {
+  const { en } = useChuGiaoDien();
+  return <NguonPhai diem={useDiemPhai(ma, en)} />;
+}
 
 /** Mốc đầu năm tính mệnh quái (phong thuỷ): Lập xuân / Tết âm lịch Việt Nam / Tết âm lịch Trung Quốc. */
 export type MocNam = "lap_xuan" | "tet_viet" | "tet_trung";
@@ -136,12 +159,13 @@ export function ChonPhai<T extends string>({ giaTri, doi, luaChon, nhan }: {
   );
 }
 
-export function DongPhai<T extends string>({ ten, giaTri, doi, luaChon, goiY, noiBat, nhanNoiBat, nhan, testId }: {
+/** `ma` (TP-1): mã điểm trong sổ trường phái — có thì dòng giải thích thêm nguồn của từng lựa chọn. */
+export function DongPhai<T extends string>({ ten, giaTri, doi, luaChon, goiY, noiBat, nhanNoiBat, nhan, testId, ma }: {
   ten: string; giaTri: T; doi: (v: T) => void; luaChon: [T, string][]; goiY: ReactNode; noiBat?: boolean; nhanNoiBat?: string;
-  nhan: string; testId?: string;
+  nhan: string; testId?: string; ma?: string;
 }) {
   return (
-    <DongKhung ten={ten} goiY={goiY} noiBat={noiBat} nhanNoiBat={nhanNoiBat} testId={testId}>
+    <DongKhung ten={ten} goiY={ma ? <>{goiY}<NguonTheoMa ma={ma} /></> : goiY} noiBat={noiBat} nhanNoiBat={nhanNoiBat} testId={testId}>
       <ChonPhai giaTri={giaTri} doi={doi} luaChon={luaChon} nhan={nhan} />
     </DongKhung>
   );

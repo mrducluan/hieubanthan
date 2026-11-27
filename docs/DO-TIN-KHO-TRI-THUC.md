@@ -25,7 +25,7 @@
 | Tarot | 1 |  | 1 |  |  | 1 |  |
 | Kỳ Môn |  | 1 |  |  | 1 |  |  |
 | Thần số |  |  |  | 11 | 13 | 1 |  |
-| Lịch · tuổi · tập quán |  | 1 |  | 5 | 1 | 1 |  |
+| Lịch · tuổi · tập quán |  | 1 |  | 5 | 2 | 1 |  |
 | Liên mảng · kỹ thuật |  | 1 |  |  | 16 | 2 | 7 |
 
 ## Phần đã có nguyên văn đối chiếu (test khoá)
@@ -207,6 +207,7 @@
 | Lịch · tuổi · tập quán | `sao_han_kb.json` |  | Tập quán / truyền khẩu phổ thông |  |
 | Lịch · tuổi · tập quán | `thoi_gian_lop_kb.json` |  | Tập quán / truyền khẩu phổ thông |  |
 | Lịch · tuổi · tập quán | `trach_nhat_hiep_ky_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 4.3: nháp đối chiếu Trạch Nhật Hiệp Kỷ Biện Phương Thư (câu Hán khớp hiep_ky_bien_phuong_thu_du_bo, lời Việt tóm ý theo đúng chữ sách), chờ chủ dự án đọc duyệt; chỗ thẻ ngày lệch sách ghi ở docs/GHI-CHU-HIEP-KY-TU-LY.md |
+| Lịch · tuổi · tập quán | `truong_phai.json` |  | Ban biên tập soạn | TP-1: sổ các chỗ người dùng chọn trường phái — mô tả ban biên tập, câu Hán (trich) khớp kho nguồn (tests/test_truong_phai.py) |
 | Lịch · tuổi · tập quán | `tuoi_dan_gian_kb.json` |  | Tập quán / truyền khẩu phổ thông |  |
 | Liên mảng · kỹ thuật | `astro_east_west_bridge_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 4.2: nháp AI Cầu nối Chiêm tinh Phương Tây × Bát tự & Tử vi Phương Đông, chờ chủ dự án đọc duyệt |
 | Liên mảng · kỹ thuật | `chan_dung_kb.json` |  | Ban biên tập soạn |  |

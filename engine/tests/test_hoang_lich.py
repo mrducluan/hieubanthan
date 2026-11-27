@@ -34,7 +34,8 @@ def test_khop_oracle(i):
     assert kq["nghi"] == [x for x in g["nghi"] if x != "无"]
     assert kq["ky"] == [x for x in g["ky"] if x != "无"]
     assert kq["cat_than"] == [x for x in g["cat"] if x != "无"]
-    assert kq["hung_sat"] == [x for x in g["hung"] if x != "无"]
+    # TP-1: Tứ Ly theo định nghĩa sách (test_truong_phai) — phần còn lại của bảng hung sát khớp oracle.
+    assert [x for x in kq["hung_sat"] if x != "四离"] == [x for x in g["hung"] if x not in ("无", "四离")]
     assert kq["tu"] == g["tu"]
     assert f"({kq['xung']['can']}{kq['xung']['chi']})" in g["xung"]
     assert kq["sat_phuong"] == g["sat"]

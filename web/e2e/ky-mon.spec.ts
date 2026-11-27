@@ -111,14 +111,14 @@ test.describe("Kỳ Môn nối vào các trang", () => {
   test("hub /huyen-hoc có thẻ Kỳ Môn; chân trang có Nhân tướng, Tarot, Kỳ Môn", async ({ page, request }) => {
     const html = await (await request.get("/huyen-hoc")).text();
     expect(html).toContain('data-testid="the-mang-ky_mon"');
-    expect(html).toContain("tám cách nhìn lại mình");
+    expect(html).toContain("chín cách nhìn lại mình");   // CHANG-4: thêm Chiêm tinh
     expect(html).toContain("https://en.wikipedia.org/wiki/Qimen_Dunjia");
     await page.goto("/huyen-hoc");
     const the = page.getByTestId("the-mang-ky_mon");
     await expect(the).toContainText("Giờ này nên đi hướng nào?");
     await expect(the.locator('a[href="/ky-mon"]')).toHaveCount(1);
     await expect(the.getByTestId("chip-can")).toContainText("Không cần ngày sinh");
-    expect(await page.getByTestId("hinh-ngu-mang").locator("a").count()).toBe(8);
+    expect(await page.getByTestId("hinh-ngu-mang").locator("a").count()).toBe(9);   // CHANG-4: + Chiêm tinh
     const ct = page.getByTestId("chan-trang");
     for (const d of ["/nhan-tuong", "/tarot", "/ky-mon", "/tarot/la-bai", "/tuoi-xong-dat", "/xem-sao-han", "/doi-lich-am-duong"]) {
       await expect(ct.locator(`a[href="${d}"]`), d).toHaveCount(1);

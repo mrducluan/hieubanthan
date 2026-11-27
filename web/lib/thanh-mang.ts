@@ -69,6 +69,11 @@ export const THANH_MANG: readonly ThanhMang[] = [
     { ma: "la_bai", duong: cum("la-bai"), nhan: "78 lá bài", dem: "la-bai", en: "78 cards" },
     { ma: "hoi", duong: "/tarot#hoi-dap", nhan: "Hỏi về một lá", en: "Ask about a card" },
   ] },
+  // CHT-1: Chiêm tinh phương Tây — công cụ bản đồ sao + cụm 12 cung hoàng đạo.
+  { tru: "/chiem-tinh", ma: "chiemtinh", ten: "Chiêm tinh", en: "Astrology", muc: [
+    { ma: "cong_cu", duong: "/chiem-tinh", nhan: "Bản đồ sao của tôi", en: "My birth chart" },
+    { ma: "cung_hd", duong: cum("cung-hoang-dao"), nhan: "12 cung hoàng đạo", dem: "cung-hoang-dao", en: "12 zodiac signs" },
+  ] },
   // "Số trong tình yêu" nằm dưới /than-so (silo) nhưng thuộc ý định hợp đôi → thanh Hợp đôi trỏ cùng cụm.
   { tru: "/hop-doi", ma: "hopdoi", ten: "Hợp đôi", en: "Compatibility", muc: [
     { ma: "cong_cu", duong: "/hop-doi", nhan: "Xem hợp đôi", en: "Check compatibility" },

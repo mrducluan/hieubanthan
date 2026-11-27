@@ -31,7 +31,9 @@ export type MinhHoaDuLieu =
   // NT-1: bộ vị gương mặt — vùng sáng trên bản đồ mặt (components/nhan-tuong/BanDoMat, vẽ tĩnh)
   | { kieu: "bo_vi"; vung: string; ten: string; cung: string | null }
   // TR-1: một lá bài Tarot (components/tarot/LaBai, vẽ tĩnh mặt trước)
-  | { kieu: "la_bai"; id: string; ten: string; en: string; so: number; bo: BoTarot | null; loai: LoaiLa; nguyen_to: NguyenTo };
+  | { kieu: "la_bai"; id: string; ten: string; en: string; so: number; bo: BoTarot | null; loai: LoaiLa; nguyen_to: NguyenTo }
+  // CHT-1: một cung hoàng đạo — vòng 12 ký hiệu, cung đang xem sáng (thứ tự + nguyên tố engine trả)
+  | { kieu: "cung_hd"; ma: string; so: number; ten: string; ky_hieu: string; nguyen_to: "lua" | "dat" | "khi" | "nuoc" };
 
 // Màu ngũ hành theo token giao diện (KB ghi cả "Hoả/Hỏa", "Thuỷ/Thủy").
 // Lớp Tailwind viết đủ (không ghép chuỗi) để trình biên dịch CSS thấy được.
@@ -345,6 +347,37 @@ function HinhLaBai({ c, tiengAnh, ...mh }: { id: string; ten: string; en: string
   );
 }
 
+// ---------------------------------------------------------------- CHT-1: cung hoàng đạo — vòng 12 ký hiệu theo thứ tự
+// hoàng đạo (Bạch Dương ở bên trái, đi ngược chiều kim đồng hồ như bản đồ sao); ô của cung đang xem sáng theo màu nguyên tố.
+const KY_HIEU_HD = ["♈", "♉", "♊", "♋", "♌", "♍", "♎", "♏", "♐", "♑", "♒", "♓"];
+const MAU_NT: Record<string, string> = { lua: "fill-gold/30 stroke-gold", dat: "fill-jade/25 stroke-jade", khi: "fill-fg/15 stroke-fg", nuoc: "fill-moon/25 stroke-moon" };
+function HinhCungHoangDao({ so, ten, ky_hieu, nguyen_to, c }: { so: number; ten: string; ky_hieu: string; nguyen_to: string; c: Chu }) {
+  const cx = 160, cy = 120, r = 92;
+  return (
+    <Khung nhan={c("mh.cung_hd", { ten, so: String(so) })}>
+      <circle cx={cx} cy={cy} r={r} className="fill-none stroke-gold/25" strokeWidth={1} />
+      <circle cx={cx} cy={cy} r={r - 36} className="fill-none stroke-gold/15" strokeWidth={1} />
+      {KY_HIEU_HD.map((k, i) => {
+        const g = Math.PI + (Math.PI * i) / 6 + Math.PI / 12;
+        const x = cx + (r - 18) * Math.cos(g), y = cy - (r - 18) * Math.sin(g);
+        const g0 = Math.PI + (Math.PI * i) / 6;
+        const chon = i === so - 1;
+        return (
+          <g key={k}>
+            <line x1={(cx + (r - 36) * Math.cos(g0)).toFixed(1)} y1={(cy - (r - 36) * Math.sin(g0)).toFixed(1)}
+              x2={(cx + r * Math.cos(g0)).toFixed(1)} y2={(cy - r * Math.sin(g0)).toFixed(1)} className="stroke-gold/20" strokeWidth={1} />
+            {chon && <circle cx={x.toFixed(1)} cy={y.toFixed(1)} r={13} className={MAU_NT[nguyen_to] ?? "fill-gold/20 stroke-gold"} strokeWidth={1.2} />}
+            <text x={x.toFixed(1)} y={(y + 5).toFixed(1)} textAnchor="middle" fontSize={chon ? 15 : 12}
+              className={chon ? "fill-fg" : "fill-fg-faint"}>{k}</text>
+          </g>
+        );
+      })}
+      <text x={cx} y={cy + 4} textAnchor="middle" className="fill-gold" fontSize={34}>{ky_hieu}</text>
+      <text x={cx} y={cy + 26} textAnchor="middle" className="fill-fg font-serif" fontSize={13}>{ten}</text>
+    </Khung>
+  );
+}
+
 /** `en` + `ten`: trang Anh (EN-ALL) — chữ hình theo bảng chiều `en`, mã engine qua `ten_hien`. Mặc định bản Việt. */
 export function MinhHoa({ mh, duong, gon = false, en = false, ten = MA }: { mh?: MinhHoaDuLieu | null; duong?: string; gon?: boolean; en?: boolean; ten?: DocTen }) {
   if (!mh) return null;
@@ -364,6 +397,7 @@ export function MinhHoa({ mh, duong, gon = false, en = false, ten = MA }: { mh?:
       case "dau_hieu": return <HinhDauHieu {...mh} c={c} />;
       case "bo_vi": return <HinhBoVi {...mh} c={c} tiengAnh={en} />;
       case "la_bai": return <HinhLaBai {...mh} c={c} tiengAnh={en} />;
+      case "cung_hd": return <HinhCungHoangDao {...mh} c={c} />;
       default: return null;
     }
   })();
