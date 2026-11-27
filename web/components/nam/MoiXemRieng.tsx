@@ -41,7 +41,7 @@ const NGAY_TOT: LoiDi = { ma: "ngay_tot", href: "/xem-ngay-tot", ten: "Chọn ng
 /** Lối đi theo nội dung trang — lối đầu là nơi form đưa tới sau khi nhập. */
 const LOI_DI: Record<TrangNam, (nam: number) => LoiDi[]> = {
   nam: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), CO_VAN(n)],
-  tuoi: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), CO_VAN(n)],
+  tuoi: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), NHAN_TUONG],
   sinh_con: (n) => [TU_VI(n), BAT_TU, HOP_DOI, NHA_MINH(n)],
   cuoi_hoi: (n) => [TU_VI(n), HAI_NGUOI, NHA_MINH(n), NGAY_TOT],
   lich_am: (n) => [TU_VI(n), THOI_GIAN(n), CO_VAN(n), NGAY_TOT],
