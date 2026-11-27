@@ -26,7 +26,7 @@ export const ALT_HINH_MANG: Record<KieuMang, { vi: string; en: string }> = {
   tarot: { vi: "Hình minh hoạ ba lá bài Tarot trong một trải bài", en: "Illustration of three tarot cards in a spread" },
   "ky-mon": { vi: "Hình minh hoạ bàn Kỳ Môn Độn Giáp chín ô, tám hướng", en: "Illustration of a nine-palace Qimen Dunjia board with eight directions" },
   "than-so": { vi: "Hình minh hoạ các con số thần số học", en: "Illustration of numerology numbers" },
-  "chiem-tinh": { vi: "Hình minh hoạ vòng 12 cung hoàng đạo", en: "Illustration of the twelve-sign zodiac wheel" },
+  "chiem-tinh": { vi: "Hình minh hoạ vòng hoàng đạo 12 cung với Mặt Trời, Mặt Trăng, cung Mọc", en: "Illustration of a twelve-sign zodiac wheel with Sun, Moon and Ascendant" },
 };
 
 export function HinhDauMang({ kieu, alt, className }: { kieu: KieuMang; /** Chữ thay thế; trống → hình trang trí (aria-hidden). */ alt?: string; className?: string }) {

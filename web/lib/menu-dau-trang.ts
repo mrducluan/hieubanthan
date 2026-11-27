@@ -35,10 +35,12 @@ export const MENU_DAU_TRANG: MucMenu[] = [
     { href: "/tarot", ten: "Xem Tarot", mo_ta: "Xáo bài, rút lá, 5 trải bài, 78 lá có nguồn" },
     // KM-3 (chủ dự án duyệt 2026-11-18): Kỳ Môn Độn Giáp vào menu Huyền học — mục thứ 12 (đủ trần).
     { href: "/ky-mon", ten: "Kỳ Môn Độn Giáp", mo_ta: "Giờ này hướng nào thuận, hợp việc gì" },
+    // CHANG-4 menu (chủ dự án duyệt 2026-11-27): Chiêm tinh phương Tây vào menu sau 8 công cụ; "Sinh năm nào mệnh gì" nhường chỗ
+    // (≤ 12 mục con) — vẫn ở chân trang (Lịch & tuổi), hub Huyền học, thanh mảng Bát tự; vẫn làm sáng mục cha qua /bat-tu.
+    { href: "/chiem-tinh", ten: "Chiêm tinh", mo_ta: "Bản đồ sao, cung Mặt Trời – Mặt Trăng – Mọc, hợp đôi" },
     // TM-1 (chủ dự án duyệt 2026-11-03): 3 công cụ đã có bản theo năm ở menu "Năm" (hướng xấu, xông đất, sao hạn) nhường
     // chỗ cho cụm kiến thức lớn chưa có lối vào menu. Ba công cụ vẫn ở menu Năm, hub Huyền học, chân trang.
     { href: "/tu-vi/sao-o-cung", ten: "Sao ở từng cung Tử vi", mo_ta: "14 chính tinh ở 12 cung: sáng hãm, sao đi cùng" },
-    { href: "/bat-tu/menh-theo-nam", ten: "Sinh năm nào mệnh gì", mo_ta: "Can chi, nạp âm, màu hợp, tuổi hợp 1950–2027" },
     { href: "/phong-thuy/huong-hop-tuoi", ten: "Hướng nhà hợp tuổi", mo_ta: "Bốn hướng tốt, xấu theo năm sinh" },
     { href: "/phong-thuy/dau-hieu", ten: "Dấu hiệu trong nhà", mo_ta: "23 điều nên rà: cửa, bếp, WC, cầu thang" },
   ] },

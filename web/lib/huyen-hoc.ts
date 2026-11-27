@@ -3,7 +3,7 @@
 import type { KieuMang } from "@/components/minh-hoa/TrangTri";
 import type { MangAnh } from "@/lib/seo";
 
-export type KhoaMangHH = "than_so" | "tu_vi" | "bat_tu" | "phong_thuy" | "kinh_dich" | "nhan_tuong" | "tarot" | "ky_mon";
+export type KhoaMangHH = "than_so" | "tu_vi" | "bat_tu" | "phong_thuy" | "kinh_dich" | "nhan_tuong" | "tarot" | "ky_mon" | "chiem_tinh";
 export type MangHH = { khoa: KhoaMangHH; href: string; kieu: KieuMang; mang: MangAnh; han: string; lop: string };
 
 // Thứ tự = thứ tự đọc: thần số (cửa vào) → hai lá số → nhà → một việc → gương mặt. Lưới 6 cột: ba thẻ một hàng.
@@ -16,9 +16,10 @@ export const MANG_HH: MangHH[] = [
   // NT-1 (2026-11-06): mảng thứ sáu — tự quan sát gương mặt; lưới 6 cột: 2+2+2 / 2+2+2 (sáu thẻ đều nhau).
   { khoa: "nhan_tuong", href: "/nhan-tuong", kieu: "nhan-tuong", mang: "nhan-tuong", han: "相", lop: "lg:col-span-2" },
   // TR-1 (2026-11-07): mảng thứ bảy — Tarot phương Tây. KM-3 (2026-11-18): mảng thứ tám — Kỳ Môn Độn Giáp (giờ và hướng).
-  // Lưới 6 cột: 3 + 3 + 2 → hai thẻ hàng cuối đặt giữa (Tarot bắt đầu cột 2).
-  { khoa: "tarot", href: "/tarot", kieu: "tarot", mang: "tarot", han: "牌", lop: "lg:col-span-2 lg:col-start-2" },
+  { khoa: "tarot", href: "/tarot", kieu: "tarot", mang: "tarot", han: "牌", lop: "lg:col-span-2" },
   { khoa: "ky_mon", href: "/ky-mon", kieu: "ky-mon", mang: "ky-mon", han: "奇門", lop: "lg:col-span-2" },
+  // CHANG-4 (2026-11-27): mảng thứ chín — Chiêm tinh phương Tây (bản đồ sao ngày sinh). Lưới 6 cột: 3 + 3 + 3 đủ ba hàng.
+  { khoa: "chiem_tinh", href: "/chiem-tinh", kieu: "chiem-tinh", mang: "chiem-tinh", han: "星", lop: "lg:col-span-2" },
 ];
 
 /** Đích của 6 câu "Bạn đang băn khoăn điều gì?" (chữ: hoi.cau_n / hoi.den_n). */
@@ -42,4 +43,5 @@ export const TRA_CUU_THEM: Partial<Record<KhoaMangHH, { duong: string; ten: stri
   nhan_tuong: [{ duong: "/tu-dien", ten: "Từ điển thuật ngữ", khoa: null }],
   tarot: [{ duong: "/kinh-dich", ten: "Gieo quẻ Kinh Dịch", khoa: null }],
   ky_mon: [{ duong: "/xem-ngay-tot", ten: "Xem ngày tốt", khoa: null }, { duong: "/phong-thuy/huong-hop-tuoi", ten: "Hướng hợp tuổi", khoa: null }],
+  chiem_tinh: [{ duong: "/sinh-o-nuoc-ngoai", ten: "Sinh ở nước ngoài", khoa: null }, { duong: "/bat-tu", ten: "Đặt cạnh Bát tự", khoa: null }],
 };

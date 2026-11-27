@@ -54,7 +54,7 @@ export async function taoLlmsTxt(): Promise<string> {
     "",
     "## Công cụ miễn phí — kết quả cá nhân",
     "",
-    `- [Huyền học](${urlDayDu("/huyen-hoc")}): tổng quan tám môn (thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot, Kỳ Môn) — chọn công cụ theo câu hỏi.`,
+    `- [Huyền học](${urlDayDu("/huyen-hoc")}): tổng quan chín môn (thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot, Kỳ Môn, Chiêm tinh) — chọn công cụ theo câu hỏi.`,
     `- [Thần số học](${urlDayDu("/than-so")}): họ tên + ngày sinh → số chủ đạo, sứ mệnh, linh hồn, nhân cách, biểu đồ ngày sinh, năm cá nhân; có từng bước tính.`,
     `- [Hợp đôi](${urlDayDu("/hop-doi")}): so cặp số theo quan hệ (người yêu, bạn bè, đồng nghiệp, sếp, gia đình) — chỗ hoà, chỗ va, việc nên làm.`,
     `- [Lá số Tử vi](${urlDayDu("/tu-vi")}): lá số 12 cung theo giờ, ngày, nơi sinh; đại hạn, lưu niên, luận giải theo chương.`,

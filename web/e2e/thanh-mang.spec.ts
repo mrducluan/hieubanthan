@@ -110,11 +110,14 @@ test("mục lục cụm trên dữ liệu engine thật: đủ bài, đúng số
 test("menu Huyền học: 3 cụm kiến thức lớn thay 3 công cụ đã có bản theo năm ở menu Năm", () => {
   const hh = MENU_DAU_TRANG.find((m) => m.href === "/huyen-hoc")!.con.map((c) => c.href);
   expect(hh).toHaveLength(12);                      // KM-3: thêm /ky-mon — đủ trần 12 mục con
-  for (const h of ["/tu-vi/sao-o-cung", "/bat-tu/menh-theo-nam", "/tarot", "/ky-mon"]) expect(hh).toContain(h);
+  for (const h of ["/tu-vi/sao-o-cung", "/tarot", "/ky-mon", "/chiem-tinh"]) expect(hh).toContain(h);
+  // CHANG-4 menu (2026-11-27): Chiêm tinh ngay sau Kỳ Môn; "Sinh năm nào mệnh gì" rời menu nhưng vẫn làm sáng mục cha.
+  expect(hh.indexOf("/chiem-tinh")).toBe(hh.indexOf("/ky-mon") + 1);
+  expect(hh).not.toContain("/bat-tu/menh-theo-nam");
   // TR-1 menu: Tarot vào menu, "64 quẻ Kinh Dịch" + "Thư viện kiến thức" rời menu (vẫn làm sáng mục cha Huyền học).
   for (const h of ["/tuoi-xong-dat", "/xem-sao-han", "/phong-thuy/huong-xau-nam", "/kinh-dich/que", "/kien-thuc"]) expect(hh).not.toContain(h);
   const huyenHoc = MENU_DAU_TRANG.find((m) => m.href === "/huyen-hoc")!;
-  for (const d of ["/tarot", "/tarot/la-bai/thap", "/kinh-dich/que/can", "/kien-thuc"]) expect(dangOMuc(d, huyenHoc), d).toBe(true);
+  for (const d of ["/tarot", "/tarot/la-bai/thap", "/kinh-dich/que/can", "/kien-thuc", "/chiem-tinh", "/bat-tu/menh-theo-nam/sinh-nam-1990-menh-gi"]) expect(dangOMuc(d, huyenHoc), d).toBe(true);
   // MENU-TS (2026-11-22): Thần số học đứng đầu Huyền học, rời Bản thân; Tuổi làm nhà rời menu nhưng vẫn sáng mục cha.
   expect(hh[0]).toBe("/than-so");
   expect(hh).not.toContain("/xem-tuoi-lam-nha");
@@ -278,7 +281,9 @@ test("menu đầu trang: bảng Huyền học có 3 cụm mới", async ({ page 
   await choHydrate(page, '[data-testid="menu-dau-trang"] button');
   await page.getByTestId("menu-dau-trang").getByRole("button", { name: /Huyền học/ }).click();
   const menu = page.getByTestId("menu-dau-trang");
-  for (const t of ["Sao ở từng cung Tử vi", "Sinh năm nào mệnh gì", "Xem Tarot"]) await expect(menu.getByRole("link", { name: new RegExp(t) })).toBeVisible();
+  for (const t of ["Sao ở từng cung Tử vi", "Chiêm tinh", "Xem Tarot"]) await expect(menu.getByRole("link", { name: new RegExp(t) })).toBeVisible();
+  await expect(menu.getByRole("link", { name: /^Chiêm tinh/ })).toHaveAttribute("href", "/chiem-tinh");   // CHANG-4
+  await expect(menu.getByRole("link", { name: /Sinh năm nào mệnh gì/ })).toHaveCount(0);
   await expect(menu.getByRole("link", { name: /Xem Tarot/ })).toHaveAttribute("href", "/tarot");
   await expect(menu.getByRole("link", { name: /Kỳ Môn Độn Giáp/ })).toHaveAttribute("href", "/ky-mon");   // KM-3
   await expect(menu.getByRole("link", { name: /Thần số học/ })).toHaveAttribute("href", "/than-so");   // MENU-TS
