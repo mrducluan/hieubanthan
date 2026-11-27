@@ -1,0 +1,32 @@
+{
+  "_nguon": "Stage 4.2 English overlay — Two-Chart Synastry (zero compatibility score CD-1).",
+  "_trang_thai": "nhap_may",
+  "source_id": "bien_tap_chiem_tinh_2026",
+  "school_id": "chiem_tinh_tay",
+  "ranh_gioi": {
+    "dong_y": "Run synastry only with the counterpart's explicit consent; birth dates are processed in memory and never stored.",
+    "khong_cham_diem": "Synastry never assigns a compatibility percentage; it highlights natural rapport alongside communication habits worth agreeing on."
+  },
+  "chieu_tuong_tac": {
+    "mat_troi_mat_trang": {
+      "ten": "Core Rhythm & Everyday Emotional Comfort (Sun – Moon)",
+      "goi_y": "Respect how each person unwinds and recharges differently at the end of the day."
+    },
+    "kim_tinh_hoa_tinh": {
+      "ten": "Warmth, Appreciation & Initiative (Venus – Mars)",
+      "goi_y": "State appreciation and boundaries plainly rather than assuming unspoken cues."
+    },
+    "thuy_tinh_giao_tiep": {
+      "ten": "Dialogue & Practical Problem-Solving (Mercury)",
+      "goi_y": "Paraphrase the other person's key point during major decisions before offering counter-proposals."
+    },
+    "tho_tinh_cam_ket": {
+      "ten": "Long-Term Reliability & Shared Duty (Saturn)",
+      "goi_y": "Set realistic shared commitments so accountability feels supportive rather than heavy."
+    },
+    "asc_an_tuong_dau": {
+      "ten": "Outward Presence & Teamwork Style (Ascendant)",
+      "goi_y": "Let each person's natural social pace complement the other in external settings."
+    }
+  }
+}

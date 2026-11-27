@@ -1,0 +1,43 @@
+{
+  "_nguon": "Chặng 4.2 — 5 Góc chiếu Ptolemaic chính.",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "source_id": "bien_tap_chiem_tinh_2026",
+  "school_id": "chiem_tinh_tay",
+  "loai_goc": {
+    "trung_hop": {
+      "ten": "Trùng hợp (0°)",
+      "tinh_chat": "hoi_tu",
+      "cach_doc": "Hai nguồn lực chập làm một điểm nhấn: rất tập trung nhưng cần tự quan sát để có độ lùi khách quan.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
+    },
+    "luc_hop": {
+      "ten": "Lục hợp (60°)",
+      "tinh_chat": "thuan_nhip",
+      "cach_doc": "Cơ hội phối hợp nhẹ nhàng xuất hiện khi bạn chủ động bắt tay thực hiện.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
+    },
+    "vuong_goc": {
+      "ten": "Vuông góc (90°)",
+      "tinh_chat": "co_xat_truong_thanh",
+      "cach_doc": "Động lực rèn luyện thực tế: hai nhu cầu thúc nhau hành động để xây năng lực cứng cáp.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
+    },
+    "tam_hop": {
+      "ten": "Tam hợp (120°)",
+      "tinh_chat": "thuan_nhip",
+      "cach_doc": "Dòng chảy tự nhiên cùng nguyên tố: thuận lợi phát huy sở trường nhưng tránh chủ quan bỏ qua rèn luyện.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
+    },
+    "doi_xung": {
+      "ten": "Đối xứng (180°)",
+      "tinh_chat": "co_xat_truong_thanh",
+      "cach_doc": "Trục soi gương hai đầu: học cách cân bằng nhu cầu cá nhân và sự phối hợp với người đối diện.",
+      "source_id": "bien_tap_chiem_tinh_2026",
+      "school_id": "chiem_tinh_tay"
+    }
+  }
+}

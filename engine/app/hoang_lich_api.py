@@ -133,3 +133,29 @@ def api_viec_thang(viec: str, nam: Annotated[int, Path(ge=1901, le=2099)], thang
     if viec not in {v["ma"] for v in L.VIEC_SEO}:
         raise HTTPException(404, detail=_L("lich.loi.viec", "Không có trang cho việc này"))
     return H.viec_thang(L.viec_thang(viec, nam, thang))
+
+
+class HiepKyDoiChieuIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    tu_ngay: _dt.date | None = None
+    so_ngay: int = Field(default=7, ge=1, le=30)
+    # Mã hướng (web gửi): bac · dong_bac · dong · dong_nam · nam · tay_nam · tay · tay_bac. Tên Việt cũ vẫn nhận.
+    huong_tu_tao: Literal["bac", "dong_bac", "dong", "dong_nam", "nam", "tay_nam", "tay", "tay_bac",
+                          "Bắc", "Đông Bắc", "Đông", "Đông Nam", "Nam", "Tây Nam", "Tây", "Tây Bắc"] | None = None
+
+
+@router.post("/v1/lich/hiep-ky-doi-chieu")
+def api_hiep_ky_doi_chieu(inp: HiepKyDoiChieuIn) -> dict:
+    if inp.tu_ngay:
+        _trong_khoang(inp.tu_ngay)
+    from app.calc.trach_nhat_hiep_ky import HUONG_MA  # noqa: PLC0415
+    from app.config import ENGINE_VERSION  # noqa: PLC0415
+    from app.luangiai import trach_nhat_chuyen_sau as tncs  # noqa: PLC0415
+    return {
+        "engine_version": ENGINE_VERSION,
+        **tncs.doi_chieu_hiep_ky(
+            tu_ngay=inp.tu_ngay,
+            so_ngay=inp.so_ngay,
+            huong_tu_tao=HUONG_MA.get(inp.huong_tu_tao, inp.huong_tu_tao) if inp.huong_tu_tao else None,
+        ),
+    }

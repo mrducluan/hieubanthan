@@ -1,0 +1,44 @@
+{
+  "_nguon": "Stage 4.2 English overlay — East–West Bridge.",
+  "_trang_thai": "nhap_may",
+  "source_id": "bien_tap_cau_noi_dong_tay_2026",
+  "school_id": "lien_mon_dong_tay",
+  "nguyen_tac_cau_noi": {
+    "tieu_de": "East–West Bridge: Complementary Coordinate Systems Without False Equivalence",
+    "giai_thich": "BaZi measures seasonal solar climate through Five Phases, Zi Wei Dou Shu maps 12 functional life palaces on the lunisolar calendar, while Western Astrology measures real ecliptic geometry of the planets. Reading them side by side illuminates both inner psychological drivers and external timing without forcing a merged score."
+  },
+  "bon_chieu_doi_chieu": {
+    "ban_nga_noi_luc": {
+      "ten": "1. Core Identity & Inner Temperament",
+      "phuong_dong": "Your BaZi Day Master and Zi Wei Life Palace show structural resilience and natural stance under pressure.",
+      "phuong_tay": "Your Sun, Moon, and Ascendant triad describes conscious purpose, instinctive emotional needs, and outward approach."
+    },
+    "su_nghiep_vai_tro": {
+      "ten": "2. Vocation & Public Stewardship",
+      "phuong_dong": "Career/Wealth palaces and seasonal balance in BaZi clarify organizational role and resource pacing.",
+      "phuong_tay": "Midheaven (MC), the 10th and 6th Houses, Saturn, and Jupiter highlight where disciplined craft builds lasting standing."
+    },
+    "gan_ket_doi_tac": {
+      "ten": "3. Relationships & One-to-One Alliances",
+      "phuong_dong": "The BaZi Day Branch and Spouse/Peers palaces reflect household harmony and collaborative chemistry.",
+      "phuong_tay": "Venus, the Moon, and the 7th House clarify how affection is shared and what fairness means in mutual agreements."
+    },
+    "nhip_thoi_van": {
+      "ten": "4. Timing & Developmental Milestones",
+      "phuong_dong": "Ten-year Luck Pillars and Annual Charts distinguish expansion seasons from consolidation years.",
+      "phuong_tay": "Saturn Return (~29.5y), Jupiter cycles (~12y), and outer-planet Transits pinpoint structural maturation milestones."
+    }
+  },
+  "loi": {
+    "dong_bat_tu": "BaZi Day Master: {can} ({hanh})",
+    "dong_tu_vi": " · Zi Wei Life Palace stars: {sao}.",
+    "dong_tu_vi_muon": " · Your Zi Wei Life Palace has no major star, so it borrows the opposite palace: {sao}.",
+    "dong_thieu_gio": " (add your birth hour to compare your Zi Wei Life Palace).",
+    "dong_thieu_noi_sinh": " (Zi Wei Life Palace not compared: choose a birthplace from the province or overseas city list).",
+    "dong_thieu_khong_chinh_tinh": ".",
+    "noi": ", ",
+    "tay": "Sun in {mat_troi} · Moon in {mat_trang}",
+    "tay_asc": " · {asc} Rising.",
+    "tay_khong_asc": " (Ascendant omitted without birth hour)."
+  }
+}

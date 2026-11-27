@@ -195,6 +195,8 @@ from app.doanh_chu_api import router as doanh_chu_router  # noqa: E402 — Bậc
 app.include_router(doanh_chu_router)
 from app.co_van_api import router as co_van_router  # noqa: E402 — Chặng 2: Cổng Cố vấn Liên mảng Tam Tài
 app.include_router(co_van_router)
+from app.chiem_tinh_api import router as chiem_tinh_router  # noqa: E402 — Chặng 4: Chiêm tinh phương Tây & Cầu nối Đông–Tây
+app.include_router(chiem_tinh_router)
 
 
 # --------------------------------------------------------------------------- #

@@ -1,0 +1,985 @@
+{
+  "_nguon": "Stage 4.2 English overlay — Planets × 12 Zodiac Signs.",
+  "_trang_thai": "nhap_may",
+  "source_id": "bien_tap_chiem_tinh_2026",
+  "school_id": "chiem_tinh_tay",
+  "cung_hoang_dao": {
+    "bach_duong": {
+      "ten": "Aries",
+      "ky_hieu": "♈",
+      "nguyen_to": "lua",
+      "pham_chat": "thong_linh",
+      "chu_tinh": "hoa_tinh",
+      "tom_tat": "Aries expresses direct initiative, candid candor, and quick readiness to begin."
+    },
+    "kim_nguu": {
+      "ten": "Taurus",
+      "ky_hieu": "♉",
+      "nguyen_to": "dat",
+      "pham_chat": "kien_dinh",
+      "chu_tinh": "kim_tinh",
+      "tom_tat": "Taurus expresses steady accumulation, tangible craft, and unhurried reliability."
+    },
+    "song_tu": {
+      "ten": "Gemini",
+      "ky_hieu": "♊",
+      "nguyen_to": "khi",
+      "pham_chat": "linh_hoat",
+      "chu_tinh": "thuy_tinh",
+      "tom_tat": "Gemini expresses curious inquiry, agile dialogue, and multi-threaded learning."
+    },
+    "cu_giai": {
+      "ten": "Cancer",
+      "ky_hieu": "♋",
+      "nguyen_to": "nuoc",
+      "pham_chat": "thong_linh",
+      "chu_tinh": "mat_trang",
+      "tom_tat": "Cancer expresses protective care, emotional memory, and devotion to safe belonging."
+    },
+    "su_tu": {
+      "ten": "Leo",
+      "ky_hieu": "♌",
+      "nguyen_to": "lua",
+      "pham_chat": "kien_dinh",
+      "chu_tinh": "mat_troi",
+      "tom_tat": "Leo expresses warm self-direction, generous presence, and wholehearted expression."
+    },
+    "xu_nu": {
+      "ten": "Virgo",
+      "ky_hieu": "♍",
+      "nguyen_to": "dat",
+      "pham_chat": "linh_hoat",
+      "chu_tinh": "thuy_tinh",
+      "tom_tat": "Virgo expresses discerning refinement, practical service, and clean organization."
+    },
+    "thien_binh": {
+      "ten": "Libra",
+      "ky_hieu": "♎",
+      "nguyen_to": "khi",
+      "pham_chat": "thong_linh",
+      "chu_tinh": "kim_tinh",
+      "tom_tat": "Libra expresses fair-minded mediation, relational poise, and balanced proportion."
+    },
+    "bo_cap": {
+      "ten": "Scorpio",
+      "ky_hieu": "♏",
+      "nguyen_to": "nuoc",
+      "pham_chat": "kien_dinh",
+      "chu_tinh": "hoa_tinh",
+      "tom_tat": "Scorpio expresses focused intensity, root-cause honesty, and deep loyalty."
+    },
+    "nhan_ma": {
+      "ten": "Sagittarius",
+      "ky_hieu": "♐",
+      "nguyen_to": "lua",
+      "pham_chat": "linh_hoat",
+      "chu_tinh": "moc_tinh",
+      "tom_tat": "Sagittarius expresses broad horizon-seeking, candid synthesis, and love of exploration."
+    },
+    "ma_ket": {
+      "ten": "Capricorn",
+      "ky_hieu": "♑",
+      "nguyen_to": "dat",
+      "pham_chat": "thong_linh",
+      "chu_tinh": "tho_tinh",
+      "tom_tat": "Capricorn expresses long-horizon discipline, structural accountability, and earned mastery."
+    },
+    "bao_binh": {
+      "ten": "Aquarius",
+      "ky_hieu": "♒",
+      "nguyen_to": "khi",
+      "pham_chat": "kien_dinh",
+      "chu_tinh": "tho_tinh",
+      "tom_tat": "Aquarius expresses independent systems thinking, principled reform, and civic perspective."
+    },
+    "song_ngu": {
+      "ten": "Pisces",
+      "ky_hieu": "♓",
+      "nguyen_to": "nuoc",
+      "pham_chat": "linh_hoat",
+      "chu_tinh": "moc_tinh",
+      "tom_tat": "Pisces expresses receptive empathy, imaginative synthesis, and quiet compassion."
+    }
+  },
+  "hanh_tinh": {
+    "mat_troi": {
+      "ten": "Sun",
+      "ky_hieu": "☉",
+      "vai_tro": "core conscious identity and vital direction",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "You feel most alive when you start something new and make your own call; you bounce back fast and dare to go first.",
+          "nen_de_y": "You can rush, then drop things once the thrill fades; others may feel you push past them.",
+          "viec_ung_dung": "Before diving into something new, write three concrete steps and name one person who will see it through with you."
+        },
+        "kim_nguu": {
+          "diem_sang": "You feel most confident building things that last: savings, solid skills, a steady routine; you keep your word and stay patient.",
+          "nen_de_y": "You can be stubborn and resist change even when the old way no longer fits; you may hold on to things and habits.",
+          "viec_ung_dung": "Each month, make one deliberate small change (a new method, a different spend) so steady does not turn rigid."
+        },
+        "song_tu": {
+          "diem_sang": "You light up when you learn, ask, talk and connect people; your mind is quick and adaptable.",
+          "nen_de_y": "You can take on too much at once and spread thin, talking more than doing; others may find you inconsistent.",
+          "viec_ung_dung": "Pick one subject to study in depth for three months and note what you got done each week."
+        },
+        "cu_giai": {
+          "diem_sang": "You are strongest when you care for the people close to you and build a safe place; you sense others' feelings and remember kindness.",
+          "nen_de_y": "You can take things personally and withdraw when hurt; sometimes you care for others and forget to state your own needs.",
+          "viec_ung_dung": "When upset, say one plain sentence starting with 'I need…' instead of waiting for others to guess."
+        },
+        "su_tu": {
+          "diem_sang": "You shine when you create, lead and are recognised; generous, warm and inspiring.",
+          "nen_de_y": "You can feel slighted when overlooked and want the spotlight; feedback may be hard to take.",
+          "viec_ung_dung": "Find one thing you are proud of doing without anyone's praise, and leave room for others to shine too."
+        },
+        "xu_nu": {
+          "diem_sang": "You are at your best organising, improving and being genuinely useful; careful, practical and dedicated.",
+          "nen_de_y": "You can be hard on yourself and others, fret over small details and rarely feel satisfied.",
+          "viec_ung_dung": "Set a 'good enough' bar before each task and stop when you reach it; note one thing you did well each day."
+        },
+        "thien_binh": {
+          "diem_sang": "You are strong at balancing sides, building harmony and beauty; fair, courteous and good at teamwork.",
+          "nen_de_y": "You can hesitate and delay decisions to avoid upsetting anyone; sometimes you accommodate too much.",
+          "viec_ung_dung": "Give small decisions a short deadline; practise saying 'no' gently."
+        },
+        "bo_cap": {
+          "diem_sang": "You are strong when you see something through and look beneath the surface; determined, deep and loyal.",
+          "nen_de_y": "You can hold things inside, grow suspicious and find it hard to let go; you may want control.",
+          "viec_ung_dung": "Choose one trusted person to tell what you have been holding in; let go of one thing that does not need your control."
+        },
+        "nhan_ma": {
+          "diem_sang": "You feel most alive travelling, learning big ideas and seeking meaning; optimistic, frank and generous.",
+          "nen_de_y": "You can over-promise and dodge details or long commitments; your bluntness may hurt.",
+          "viec_ung_dung": "Turn one big wish into a plan with real dates; before speaking bluntly, think how the listener will take it."
+        },
+        "ma_ket": {
+          "diem_sang": "You are strong at setting long-term goals and climbing step by step; disciplined, responsible and reliable.",
+          "nen_de_y": "You can overwork, be strict with yourself and hide your feelings; you may measure your worth by results.",
+          "viec_ung_dung": "Schedule fixed rest time alongside work; each week do one thing purely for fun."
+        },
+        "bao_binh": {
+          "diem_sang": "You are strong at thinking differently, improving how things work and serving the common good; independent, open to the new, loyal to friends.",
+          "nen_de_y": "You can seem distant, hold tightly to your views and shy away from emotional closeness.",
+          "viec_ung_dung": "Test a new idea right away with a real group; ask loved ones how they feel, not only what they think."
+        },
+        "song_ngu": {
+          "diem_sang": "You are strong in imagination and compassion; intuitive, artistic and kind-hearted.",
+          "nen_de_y": "You can drift, avoid hard facts and get swept along by others; boundaries are hard to set.",
+          "viec_ung_dung": "Keep one regular activity with clear hours; write down your limits before agreeing to help someone."
+        }
+      }
+    },
+    "mat_trang": {
+      "ten": "Moon",
+      "ky_hieu": "☽",
+      "vai_tro": "instinctive emotional rhythm, habit patterns, and inner safety",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "You need freedom and quick responses; feelings flare up and pass fast, and you say what you see.",
+          "nen_de_y": "Waiting irritates you, and when annoyed you may speak before thinking.",
+          "viec_ung_dung": "When annoyed, move for ten minutes (a walk, the stairs) before you reply."
+        },
+        "kim_nguu": {
+          "diem_sang": "You feel settled with familiar routines, good food and a comfortable home; your moods are steady.",
+          "nen_de_y": "Sudden change unsettles you for a long time; you may seek comfort in food or shopping.",
+          "viec_ung_dung": "Keep a small evening ritual (tea, music, tidying your sleep corner) to calm down instead of shopping."
+        },
+        "song_tu": {
+          "diem_sang": "You calm down by talking, reading and understanding what is going on; your feelings are flexible.",
+          "nen_de_y": "You may analyse feelings instead of feeling them; your mind finds it hard to rest.",
+          "viec_ung_dung": "Write three lines each night: what happened, how you felt, what you need."
+        },
+        "cu_giai": {
+          "diem_sang": "You need a sense of family, to be sheltered and to shelter others; warm-hearted with a long memory.",
+          "nen_de_y": "Your mood rises and falls with the atmosphere at home; careless words hurt.",
+          "viec_ung_dung": "Make one corner of home truly comfortable; when someone hurts you, ask what they meant instead of guessing."
+        },
+        "su_tu": {
+          "diem_sang": "You need love shown clearly and to feel valued; when happy you are warm and big-hearted.",
+          "nen_de_y": "You may feel hurt when ignored and need praise to feel okay.",
+          "viec_ung_dung": "Acknowledge yourself for one thing each day; tell loved ones what kind of attention you hope for."
+        },
+        "xu_nu": {
+          "diem_sang": "You feel settled when things are in order and you can be useful; you show love through practical help.",
+          "nen_de_y": "You can worry, blame yourself and feel tense when things are messy.",
+          "viec_ung_dung": "When worried, list what is in your hands and do the smallest item right away."
+        },
+        "thien_binh": {
+          "diem_sang": "You need harmony and company; you are most at ease when relationships are smooth.",
+          "nen_de_y": "You may swallow irritation to keep the peace, then feel drained without saying why.",
+          "viec_ung_dung": "Practise stating what bothers you in one gentle sentence the same day, instead of letting it pile up."
+        },
+        "bo_cap": {
+          "diem_sang": "Your feelings run deep and strong; you need trust and sincere closeness.",
+          "nen_de_y": "You may feel jealous, hold on to the past and find it hard to open up before you fully trust.",
+          "viec_ung_dung": "Write down what is weighing on you and sleep on it before acting; share it bit by bit with someone you trust."
+        },
+        "nhan_ma": {
+          "diem_sang": "You need space and new experiences to feel happy; optimistic and quick to bounce back.",
+          "nen_de_y": "You may dodge heavy feelings by going out or keeping busy; sitting with sadness is hard.",
+          "viec_ung_dung": "When something sad happens, set aside one session just to think it through before looking for something new."
+        },
+        "ma_ket": {
+          "diem_sang": "You feel settled when things are under control and responsibilities are clear; steady and rarely complaining.",
+          "nen_de_y": "You may hide feelings, carry everything alone and avoid asking for help.",
+          "viec_ung_dung": "Each week, ask someone for one small favour, and share one real feeling with a loved one."
+        },
+        "bao_binh": {
+          "diem_sang": "You need freedom and to be yourself; you value friends and stay calm in a storm.",
+          "nen_de_y": "You may detach from feelings, and loved ones may find you cool or distant.",
+          "viec_ung_dung": "See loved ones in person more often; when they are sad, ask 'do you want me to listen or to advise?'."
+        },
+        "song_ngu": {
+          "diem_sang": "You sense things finely, empathise easily and need quiet time and your own inner world.",
+          "nen_de_y": "You may absorb other people's feelings as your own and feel drained without knowing why; you may escape.",
+          "viec_ung_dung": "After seeing many people, give yourself quiet time; practise asking 'is this feeling mine or theirs?'."
+        }
+      }
+    },
+    "thuy_tinh": {
+      "ten": "Mercury",
+      "ky_hieu": "☿",
+      "vai_tro": "information processing, reasoning style, and everyday communication",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Mercury in Aries: information processing, reasoning style, and everyday communication operates through direct initiative, candid candor, and quick readiness to begin.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel information processing, reasoning style, and everyday communication into one steady daily habit aligned with Aries."
+        },
+        "kim_nguu": {
+          "diem_sang": "Mercury in Taurus: information processing, reasoning style, and everyday communication operates through steady accumulation, tangible craft, and unhurried reliability.",
+          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel information processing, reasoning style, and everyday communication into one steady daily habit aligned with Taurus."
+        },
+        "song_tu": {
+          "diem_sang": "Mercury in Gemini: information processing, reasoning style, and everyday communication operates through curious inquiry, agile dialogue, and multi-threaded learning.",
+          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel information processing, reasoning style, and everyday communication into one steady daily habit aligned with Gemini."
+        },
+        "cu_giai": {
+          "diem_sang": "Mercury in Cancer: information processing, reasoning style, and everyday communication operates through protective care, emotional memory, and devotion to safe belonging.",
+          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel information processing, reasoning style, and everyday communication into one steady daily habit aligned with Cancer."
+        },
+        "su_tu": {
+          "diem_sang": "Mercury in Leo: information processing, reasoning style, and everyday communication operates through warm self-direction, generous presence, and wholehearted expression.",
+          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel information processing, reasoning style, and everyday communication into one steady daily habit aligned with Leo."
+        },
+        "xu_nu": {
+          "diem_sang": "Mercury in Virgo: information processing, reasoning style, and everyday communication operates through discerning refinement, practical service, and clean organization.",
+          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel information processing, reasoning style, and everyday communication into one steady daily habit aligned with Virgo."
+        },
+        "thien_binh": {
+          "diem_sang": "Mercury in Libra: information processing, reasoning style, and everyday communication operates through fair-minded mediation, relational poise, and balanced proportion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel information processing, reasoning style, and everyday communication into one steady daily habit aligned with Libra."
+        },
+        "bo_cap": {
+          "diem_sang": "Mercury in Scorpio: information processing, reasoning style, and everyday communication operates through focused intensity, root-cause honesty, and deep loyalty.",
+          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel information processing, reasoning style, and everyday communication into one steady daily habit aligned with Scorpio."
+        },
+        "nhan_ma": {
+          "diem_sang": "Mercury in Sagittarius: information processing, reasoning style, and everyday communication operates through broad horizon-seeking, candid synthesis, and love of exploration.",
+          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel information processing, reasoning style, and everyday communication into one steady daily habit aligned with Sagittarius."
+        },
+        "ma_ket": {
+          "diem_sang": "Mercury in Capricorn: information processing, reasoning style, and everyday communication operates through long-horizon discipline, structural accountability, and earned mastery.",
+          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel information processing, reasoning style, and everyday communication into one steady daily habit aligned with Capricorn."
+        },
+        "bao_binh": {
+          "diem_sang": "Mercury in Aquarius: information processing, reasoning style, and everyday communication operates through independent systems thinking, principled reform, and civic perspective.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel information processing, reasoning style, and everyday communication into one steady daily habit aligned with Aquarius."
+        },
+        "song_ngu": {
+          "diem_sang": "Mercury in Pisces: information processing, reasoning style, and everyday communication operates through receptive empathy, imaginative synthesis, and quiet compassion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel information processing, reasoning style, and everyday communication into one steady daily habit aligned with Pisces."
+        }
+      }
+    },
+    "kim_tinh": {
+      "ten": "Venus",
+      "ky_hieu": "♀",
+      "vai_tro": "values, aesthetic taste, and how affection and rapport are shared",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Venus in Aries: values, aesthetic taste, and how affection and rapport are shared operates through direct initiative, candid candor, and quick readiness to begin.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel values, aesthetic taste, and how affection and rapport are shared into one steady daily habit aligned with Aries."
+        },
+        "kim_nguu": {
+          "diem_sang": "Venus in Taurus: values, aesthetic taste, and how affection and rapport are shared operates through steady accumulation, tangible craft, and unhurried reliability.",
+          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel values, aesthetic taste, and how affection and rapport are shared into one steady daily habit aligned with Taurus."
+        },
+        "song_tu": {
+          "diem_sang": "Venus in Gemini: values, aesthetic taste, and how affection and rapport are shared operates through curious inquiry, agile dialogue, and multi-threaded learning.",
+          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel values, aesthetic taste, and how affection and rapport are shared into one steady daily habit aligned with Gemini."
+        },
+        "cu_giai": {
+          "diem_sang": "Venus in Cancer: values, aesthetic taste, and how affection and rapport are shared operates through protective care, emotional memory, and devotion to safe belonging.",
+          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel values, aesthetic taste, and how affection and rapport are shared into one steady daily habit aligned with Cancer."
+        },
+        "su_tu": {
+          "diem_sang": "Venus in Leo: values, aesthetic taste, and how affection and rapport are shared operates through warm self-direction, generous presence, and wholehearted expression.",
+          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel values, aesthetic taste, and how affection and rapport are shared into one steady daily habit aligned with Leo."
+        },
+        "xu_nu": {
+          "diem_sang": "Venus in Virgo: values, aesthetic taste, and how affection and rapport are shared operates through discerning refinement, practical service, and clean organization.",
+          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel values, aesthetic taste, and how affection and rapport are shared into one steady daily habit aligned with Virgo."
+        },
+        "thien_binh": {
+          "diem_sang": "Venus in Libra: values, aesthetic taste, and how affection and rapport are shared operates through fair-minded mediation, relational poise, and balanced proportion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel values, aesthetic taste, and how affection and rapport are shared into one steady daily habit aligned with Libra."
+        },
+        "bo_cap": {
+          "diem_sang": "Venus in Scorpio: values, aesthetic taste, and how affection and rapport are shared operates through focused intensity, root-cause honesty, and deep loyalty.",
+          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel values, aesthetic taste, and how affection and rapport are shared into one steady daily habit aligned with Scorpio."
+        },
+        "nhan_ma": {
+          "diem_sang": "Venus in Sagittarius: values, aesthetic taste, and how affection and rapport are shared operates through broad horizon-seeking, candid synthesis, and love of exploration.",
+          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel values, aesthetic taste, and how affection and rapport are shared into one steady daily habit aligned with Sagittarius."
+        },
+        "ma_ket": {
+          "diem_sang": "Venus in Capricorn: values, aesthetic taste, and how affection and rapport are shared operates through long-horizon discipline, structural accountability, and earned mastery.",
+          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel values, aesthetic taste, and how affection and rapport are shared into one steady daily habit aligned with Capricorn."
+        },
+        "bao_binh": {
+          "diem_sang": "Venus in Aquarius: values, aesthetic taste, and how affection and rapport are shared operates through independent systems thinking, principled reform, and civic perspective.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel values, aesthetic taste, and how affection and rapport are shared into one steady daily habit aligned with Aquarius."
+        },
+        "song_ngu": {
+          "diem_sang": "Venus in Pisces: values, aesthetic taste, and how affection and rapport are shared operates through receptive empathy, imaginative synthesis, and quiet compassion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel values, aesthetic taste, and how affection and rapport are shared into one steady daily habit aligned with Pisces."
+        }
+      }
+    },
+    "hoa_tinh": {
+      "ten": "Mars",
+      "ky_hieu": "♂",
+      "vai_tro": "action drive, boundary assertion, and stamina under pressure",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Mars in Aries: action drive, boundary assertion, and stamina under pressure operates through direct initiative, candid candor, and quick readiness to begin.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel action drive, boundary assertion, and stamina under pressure into one steady daily habit aligned with Aries."
+        },
+        "kim_nguu": {
+          "diem_sang": "Mars in Taurus: action drive, boundary assertion, and stamina under pressure operates through steady accumulation, tangible craft, and unhurried reliability.",
+          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel action drive, boundary assertion, and stamina under pressure into one steady daily habit aligned with Taurus."
+        },
+        "song_tu": {
+          "diem_sang": "Mars in Gemini: action drive, boundary assertion, and stamina under pressure operates through curious inquiry, agile dialogue, and multi-threaded learning.",
+          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel action drive, boundary assertion, and stamina under pressure into one steady daily habit aligned with Gemini."
+        },
+        "cu_giai": {
+          "diem_sang": "Mars in Cancer: action drive, boundary assertion, and stamina under pressure operates through protective care, emotional memory, and devotion to safe belonging.",
+          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel action drive, boundary assertion, and stamina under pressure into one steady daily habit aligned with Cancer."
+        },
+        "su_tu": {
+          "diem_sang": "Mars in Leo: action drive, boundary assertion, and stamina under pressure operates through warm self-direction, generous presence, and wholehearted expression.",
+          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel action drive, boundary assertion, and stamina under pressure into one steady daily habit aligned with Leo."
+        },
+        "xu_nu": {
+          "diem_sang": "Mars in Virgo: action drive, boundary assertion, and stamina under pressure operates through discerning refinement, practical service, and clean organization.",
+          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel action drive, boundary assertion, and stamina under pressure into one steady daily habit aligned with Virgo."
+        },
+        "thien_binh": {
+          "diem_sang": "Mars in Libra: action drive, boundary assertion, and stamina under pressure operates through fair-minded mediation, relational poise, and balanced proportion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel action drive, boundary assertion, and stamina under pressure into one steady daily habit aligned with Libra."
+        },
+        "bo_cap": {
+          "diem_sang": "Mars in Scorpio: action drive, boundary assertion, and stamina under pressure operates through focused intensity, root-cause honesty, and deep loyalty.",
+          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel action drive, boundary assertion, and stamina under pressure into one steady daily habit aligned with Scorpio."
+        },
+        "nhan_ma": {
+          "diem_sang": "Mars in Sagittarius: action drive, boundary assertion, and stamina under pressure operates through broad horizon-seeking, candid synthesis, and love of exploration.",
+          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel action drive, boundary assertion, and stamina under pressure into one steady daily habit aligned with Sagittarius."
+        },
+        "ma_ket": {
+          "diem_sang": "Mars in Capricorn: action drive, boundary assertion, and stamina under pressure operates through long-horizon discipline, structural accountability, and earned mastery.",
+          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel action drive, boundary assertion, and stamina under pressure into one steady daily habit aligned with Capricorn."
+        },
+        "bao_binh": {
+          "diem_sang": "Mars in Aquarius: action drive, boundary assertion, and stamina under pressure operates through independent systems thinking, principled reform, and civic perspective.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel action drive, boundary assertion, and stamina under pressure into one steady daily habit aligned with Aquarius."
+        },
+        "song_ngu": {
+          "diem_sang": "Mars in Pisces: action drive, boundary assertion, and stamina under pressure operates through receptive empathy, imaginative synthesis, and quiet compassion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel action drive, boundary assertion, and stamina under pressure into one steady daily habit aligned with Pisces."
+        }
+      }
+    },
+    "moc_tinh": {
+      "ten": "Jupiter",
+      "ky_hieu": "♃",
+      "vai_tro": "growth horizon, guiding philosophy, and constructive generosity",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Jupiter in Aries: growth horizon, guiding philosophy, and constructive generosity operates through direct initiative, candid candor, and quick readiness to begin.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel growth horizon, guiding philosophy, and constructive generosity into one steady daily habit aligned with Aries."
+        },
+        "kim_nguu": {
+          "diem_sang": "Jupiter in Taurus: growth horizon, guiding philosophy, and constructive generosity operates through steady accumulation, tangible craft, and unhurried reliability.",
+          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel growth horizon, guiding philosophy, and constructive generosity into one steady daily habit aligned with Taurus."
+        },
+        "song_tu": {
+          "diem_sang": "Jupiter in Gemini: growth horizon, guiding philosophy, and constructive generosity operates through curious inquiry, agile dialogue, and multi-threaded learning.",
+          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel growth horizon, guiding philosophy, and constructive generosity into one steady daily habit aligned with Gemini."
+        },
+        "cu_giai": {
+          "diem_sang": "Jupiter in Cancer: growth horizon, guiding philosophy, and constructive generosity operates through protective care, emotional memory, and devotion to safe belonging.",
+          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel growth horizon, guiding philosophy, and constructive generosity into one steady daily habit aligned with Cancer."
+        },
+        "su_tu": {
+          "diem_sang": "Jupiter in Leo: growth horizon, guiding philosophy, and constructive generosity operates through warm self-direction, generous presence, and wholehearted expression.",
+          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel growth horizon, guiding philosophy, and constructive generosity into one steady daily habit aligned with Leo."
+        },
+        "xu_nu": {
+          "diem_sang": "Jupiter in Virgo: growth horizon, guiding philosophy, and constructive generosity operates through discerning refinement, practical service, and clean organization.",
+          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel growth horizon, guiding philosophy, and constructive generosity into one steady daily habit aligned with Virgo."
+        },
+        "thien_binh": {
+          "diem_sang": "Jupiter in Libra: growth horizon, guiding philosophy, and constructive generosity operates through fair-minded mediation, relational poise, and balanced proportion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel growth horizon, guiding philosophy, and constructive generosity into one steady daily habit aligned with Libra."
+        },
+        "bo_cap": {
+          "diem_sang": "Jupiter in Scorpio: growth horizon, guiding philosophy, and constructive generosity operates through focused intensity, root-cause honesty, and deep loyalty.",
+          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel growth horizon, guiding philosophy, and constructive generosity into one steady daily habit aligned with Scorpio."
+        },
+        "nhan_ma": {
+          "diem_sang": "Jupiter in Sagittarius: growth horizon, guiding philosophy, and constructive generosity operates through broad horizon-seeking, candid synthesis, and love of exploration.",
+          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel growth horizon, guiding philosophy, and constructive generosity into one steady daily habit aligned with Sagittarius."
+        },
+        "ma_ket": {
+          "diem_sang": "Jupiter in Capricorn: growth horizon, guiding philosophy, and constructive generosity operates through long-horizon discipline, structural accountability, and earned mastery.",
+          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel growth horizon, guiding philosophy, and constructive generosity into one steady daily habit aligned with Capricorn."
+        },
+        "bao_binh": {
+          "diem_sang": "Jupiter in Aquarius: growth horizon, guiding philosophy, and constructive generosity operates through independent systems thinking, principled reform, and civic perspective.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel growth horizon, guiding philosophy, and constructive generosity into one steady daily habit aligned with Aquarius."
+        },
+        "song_ngu": {
+          "diem_sang": "Jupiter in Pisces: growth horizon, guiding philosophy, and constructive generosity operates through receptive empathy, imaginative synthesis, and quiet compassion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel growth horizon, guiding philosophy, and constructive generosity into one steady daily habit aligned with Pisces."
+        }
+      }
+    },
+    "tho_tinh": {
+      "ten": "Saturn",
+      "ky_hieu": "♄",
+      "vai_tro": "structural discipline, realistic limits, and long-term craft",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Saturn in Aries: structural discipline, realistic limits, and long-term craft operates through direct initiative, candid candor, and quick readiness to begin.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel structural discipline, realistic limits, and long-term craft into one steady daily habit aligned with Aries."
+        },
+        "kim_nguu": {
+          "diem_sang": "Saturn in Taurus: structural discipline, realistic limits, and long-term craft operates through steady accumulation, tangible craft, and unhurried reliability.",
+          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel structural discipline, realistic limits, and long-term craft into one steady daily habit aligned with Taurus."
+        },
+        "song_tu": {
+          "diem_sang": "Saturn in Gemini: structural discipline, realistic limits, and long-term craft operates through curious inquiry, agile dialogue, and multi-threaded learning.",
+          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel structural discipline, realistic limits, and long-term craft into one steady daily habit aligned with Gemini."
+        },
+        "cu_giai": {
+          "diem_sang": "Saturn in Cancer: structural discipline, realistic limits, and long-term craft operates through protective care, emotional memory, and devotion to safe belonging.",
+          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel structural discipline, realistic limits, and long-term craft into one steady daily habit aligned with Cancer."
+        },
+        "su_tu": {
+          "diem_sang": "Saturn in Leo: structural discipline, realistic limits, and long-term craft operates through warm self-direction, generous presence, and wholehearted expression.",
+          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel structural discipline, realistic limits, and long-term craft into one steady daily habit aligned with Leo."
+        },
+        "xu_nu": {
+          "diem_sang": "Saturn in Virgo: structural discipline, realistic limits, and long-term craft operates through discerning refinement, practical service, and clean organization.",
+          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel structural discipline, realistic limits, and long-term craft into one steady daily habit aligned with Virgo."
+        },
+        "thien_binh": {
+          "diem_sang": "Saturn in Libra: structural discipline, realistic limits, and long-term craft operates through fair-minded mediation, relational poise, and balanced proportion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel structural discipline, realistic limits, and long-term craft into one steady daily habit aligned with Libra."
+        },
+        "bo_cap": {
+          "diem_sang": "Saturn in Scorpio: structural discipline, realistic limits, and long-term craft operates through focused intensity, root-cause honesty, and deep loyalty.",
+          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel structural discipline, realistic limits, and long-term craft into one steady daily habit aligned with Scorpio."
+        },
+        "nhan_ma": {
+          "diem_sang": "Saturn in Sagittarius: structural discipline, realistic limits, and long-term craft operates through broad horizon-seeking, candid synthesis, and love of exploration.",
+          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel structural discipline, realistic limits, and long-term craft into one steady daily habit aligned with Sagittarius."
+        },
+        "ma_ket": {
+          "diem_sang": "Saturn in Capricorn: structural discipline, realistic limits, and long-term craft operates through long-horizon discipline, structural accountability, and earned mastery.",
+          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel structural discipline, realistic limits, and long-term craft into one steady daily habit aligned with Capricorn."
+        },
+        "bao_binh": {
+          "diem_sang": "Saturn in Aquarius: structural discipline, realistic limits, and long-term craft operates through independent systems thinking, principled reform, and civic perspective.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel structural discipline, realistic limits, and long-term craft into one steady daily habit aligned with Aquarius."
+        },
+        "song_ngu": {
+          "diem_sang": "Saturn in Pisces: structural discipline, realistic limits, and long-term craft operates through receptive empathy, imaginative synthesis, and quiet compassion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel structural discipline, realistic limits, and long-term craft into one steady daily habit aligned with Pisces."
+        }
+      }
+    },
+    "thien_vuong": {
+      "ten": "Uranus",
+      "ky_hieu": "♅",
+      "vai_tro": "drive to refresh stale habits and protect intellectual autonomy",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Uranus in Aries: drive to refresh stale habits and protect intellectual autonomy operates through direct initiative, candid candor, and quick readiness to begin.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel drive to refresh stale habits and protect intellectual autonomy into one steady daily habit aligned with Aries."
+        },
+        "kim_nguu": {
+          "diem_sang": "Uranus in Taurus: drive to refresh stale habits and protect intellectual autonomy operates through steady accumulation, tangible craft, and unhurried reliability.",
+          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel drive to refresh stale habits and protect intellectual autonomy into one steady daily habit aligned with Taurus."
+        },
+        "song_tu": {
+          "diem_sang": "Uranus in Gemini: drive to refresh stale habits and protect intellectual autonomy operates through curious inquiry, agile dialogue, and multi-threaded learning.",
+          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel drive to refresh stale habits and protect intellectual autonomy into one steady daily habit aligned with Gemini."
+        },
+        "cu_giai": {
+          "diem_sang": "Uranus in Cancer: drive to refresh stale habits and protect intellectual autonomy operates through protective care, emotional memory, and devotion to safe belonging.",
+          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel drive to refresh stale habits and protect intellectual autonomy into one steady daily habit aligned with Cancer."
+        },
+        "su_tu": {
+          "diem_sang": "Uranus in Leo: drive to refresh stale habits and protect intellectual autonomy operates through warm self-direction, generous presence, and wholehearted expression.",
+          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel drive to refresh stale habits and protect intellectual autonomy into one steady daily habit aligned with Leo."
+        },
+        "xu_nu": {
+          "diem_sang": "Uranus in Virgo: drive to refresh stale habits and protect intellectual autonomy operates through discerning refinement, practical service, and clean organization.",
+          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel drive to refresh stale habits and protect intellectual autonomy into one steady daily habit aligned with Virgo."
+        },
+        "thien_binh": {
+          "diem_sang": "Uranus in Libra: drive to refresh stale habits and protect intellectual autonomy operates through fair-minded mediation, relational poise, and balanced proportion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel drive to refresh stale habits and protect intellectual autonomy into one steady daily habit aligned with Libra."
+        },
+        "bo_cap": {
+          "diem_sang": "Uranus in Scorpio: drive to refresh stale habits and protect intellectual autonomy operates through focused intensity, root-cause honesty, and deep loyalty.",
+          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel drive to refresh stale habits and protect intellectual autonomy into one steady daily habit aligned with Scorpio."
+        },
+        "nhan_ma": {
+          "diem_sang": "Uranus in Sagittarius: drive to refresh stale habits and protect intellectual autonomy operates through broad horizon-seeking, candid synthesis, and love of exploration.",
+          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel drive to refresh stale habits and protect intellectual autonomy into one steady daily habit aligned with Sagittarius."
+        },
+        "ma_ket": {
+          "diem_sang": "Uranus in Capricorn: drive to refresh stale habits and protect intellectual autonomy operates through long-horizon discipline, structural accountability, and earned mastery.",
+          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel drive to refresh stale habits and protect intellectual autonomy into one steady daily habit aligned with Capricorn."
+        },
+        "bao_binh": {
+          "diem_sang": "Uranus in Aquarius: drive to refresh stale habits and protect intellectual autonomy operates through independent systems thinking, principled reform, and civic perspective.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel drive to refresh stale habits and protect intellectual autonomy into one steady daily habit aligned with Aquarius."
+        },
+        "song_ngu": {
+          "diem_sang": "Uranus in Pisces: drive to refresh stale habits and protect intellectual autonomy operates through receptive empathy, imaginative synthesis, and quiet compassion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel drive to refresh stale habits and protect intellectual autonomy into one steady daily habit aligned with Pisces."
+        }
+      }
+    },
+    "hai_vuong": {
+      "ten": "Neptune",
+      "ky_hieu": "♆",
+      "vai_tro": "imagination, ideals, and areas needing clear practical grounding",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Neptune in Aries: imagination, ideals, and areas needing clear practical grounding operates through direct initiative, candid candor, and quick readiness to begin.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel imagination, ideals, and areas needing clear practical grounding into one steady daily habit aligned with Aries."
+        },
+        "kim_nguu": {
+          "diem_sang": "Neptune in Taurus: imagination, ideals, and areas needing clear practical grounding operates through steady accumulation, tangible craft, and unhurried reliability.",
+          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel imagination, ideals, and areas needing clear practical grounding into one steady daily habit aligned with Taurus."
+        },
+        "song_tu": {
+          "diem_sang": "Neptune in Gemini: imagination, ideals, and areas needing clear practical grounding operates through curious inquiry, agile dialogue, and multi-threaded learning.",
+          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel imagination, ideals, and areas needing clear practical grounding into one steady daily habit aligned with Gemini."
+        },
+        "cu_giai": {
+          "diem_sang": "Neptune in Cancer: imagination, ideals, and areas needing clear practical grounding operates through protective care, emotional memory, and devotion to safe belonging.",
+          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel imagination, ideals, and areas needing clear practical grounding into one steady daily habit aligned with Cancer."
+        },
+        "su_tu": {
+          "diem_sang": "Neptune in Leo: imagination, ideals, and areas needing clear practical grounding operates through warm self-direction, generous presence, and wholehearted expression.",
+          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel imagination, ideals, and areas needing clear practical grounding into one steady daily habit aligned with Leo."
+        },
+        "xu_nu": {
+          "diem_sang": "Neptune in Virgo: imagination, ideals, and areas needing clear practical grounding operates through discerning refinement, practical service, and clean organization.",
+          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel imagination, ideals, and areas needing clear practical grounding into one steady daily habit aligned with Virgo."
+        },
+        "thien_binh": {
+          "diem_sang": "Neptune in Libra: imagination, ideals, and areas needing clear practical grounding operates through fair-minded mediation, relational poise, and balanced proportion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel imagination, ideals, and areas needing clear practical grounding into one steady daily habit aligned with Libra."
+        },
+        "bo_cap": {
+          "diem_sang": "Neptune in Scorpio: imagination, ideals, and areas needing clear practical grounding operates through focused intensity, root-cause honesty, and deep loyalty.",
+          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel imagination, ideals, and areas needing clear practical grounding into one steady daily habit aligned with Scorpio."
+        },
+        "nhan_ma": {
+          "diem_sang": "Neptune in Sagittarius: imagination, ideals, and areas needing clear practical grounding operates through broad horizon-seeking, candid synthesis, and love of exploration.",
+          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel imagination, ideals, and areas needing clear practical grounding into one steady daily habit aligned with Sagittarius."
+        },
+        "ma_ket": {
+          "diem_sang": "Neptune in Capricorn: imagination, ideals, and areas needing clear practical grounding operates through long-horizon discipline, structural accountability, and earned mastery.",
+          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel imagination, ideals, and areas needing clear practical grounding into one steady daily habit aligned with Capricorn."
+        },
+        "bao_binh": {
+          "diem_sang": "Neptune in Aquarius: imagination, ideals, and areas needing clear practical grounding operates through independent systems thinking, principled reform, and civic perspective.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel imagination, ideals, and areas needing clear practical grounding into one steady daily habit aligned with Aquarius."
+        },
+        "song_ngu": {
+          "diem_sang": "Neptune in Pisces: imagination, ideals, and areas needing clear practical grounding operates through receptive empathy, imaginative synthesis, and quiet compassion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel imagination, ideals, and areas needing clear practical grounding into one steady daily habit aligned with Pisces."
+        }
+      }
+    },
+    "diem_vuong": {
+      "ten": "Pluto",
+      "ky_hieu": "♇",
+      "vai_tro": "deep pruning of outgrown structures and quiet regeneration",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Pluto in Aries: deep pruning of outgrown structures and quiet regeneration operates through direct initiative, candid candor, and quick readiness to begin.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel deep pruning of outgrown structures and quiet regeneration into one steady daily habit aligned with Aries."
+        },
+        "kim_nguu": {
+          "diem_sang": "Pluto in Taurus: deep pruning of outgrown structures and quiet regeneration operates through steady accumulation, tangible craft, and unhurried reliability.",
+          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel deep pruning of outgrown structures and quiet regeneration into one steady daily habit aligned with Taurus."
+        },
+        "song_tu": {
+          "diem_sang": "Pluto in Gemini: deep pruning of outgrown structures and quiet regeneration operates through curious inquiry, agile dialogue, and multi-threaded learning.",
+          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel deep pruning of outgrown structures and quiet regeneration into one steady daily habit aligned with Gemini."
+        },
+        "cu_giai": {
+          "diem_sang": "Pluto in Cancer: deep pruning of outgrown structures and quiet regeneration operates through protective care, emotional memory, and devotion to safe belonging.",
+          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel deep pruning of outgrown structures and quiet regeneration into one steady daily habit aligned with Cancer."
+        },
+        "su_tu": {
+          "diem_sang": "Pluto in Leo: deep pruning of outgrown structures and quiet regeneration operates through warm self-direction, generous presence, and wholehearted expression.",
+          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel deep pruning of outgrown structures and quiet regeneration into one steady daily habit aligned with Leo."
+        },
+        "xu_nu": {
+          "diem_sang": "Pluto in Virgo: deep pruning of outgrown structures and quiet regeneration operates through discerning refinement, practical service, and clean organization.",
+          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel deep pruning of outgrown structures and quiet regeneration into one steady daily habit aligned with Virgo."
+        },
+        "thien_binh": {
+          "diem_sang": "Pluto in Libra: deep pruning of outgrown structures and quiet regeneration operates through fair-minded mediation, relational poise, and balanced proportion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel deep pruning of outgrown structures and quiet regeneration into one steady daily habit aligned with Libra."
+        },
+        "bo_cap": {
+          "diem_sang": "Pluto in Scorpio: deep pruning of outgrown structures and quiet regeneration operates through focused intensity, root-cause honesty, and deep loyalty.",
+          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel deep pruning of outgrown structures and quiet regeneration into one steady daily habit aligned with Scorpio."
+        },
+        "nhan_ma": {
+          "diem_sang": "Pluto in Sagittarius: deep pruning of outgrown structures and quiet regeneration operates through broad horizon-seeking, candid synthesis, and love of exploration.",
+          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel deep pruning of outgrown structures and quiet regeneration into one steady daily habit aligned with Sagittarius."
+        },
+        "ma_ket": {
+          "diem_sang": "Pluto in Capricorn: deep pruning of outgrown structures and quiet regeneration operates through long-horizon discipline, structural accountability, and earned mastery.",
+          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel deep pruning of outgrown structures and quiet regeneration into one steady daily habit aligned with Capricorn."
+        },
+        "bao_binh": {
+          "diem_sang": "Pluto in Aquarius: deep pruning of outgrown structures and quiet regeneration operates through independent systems thinking, principled reform, and civic perspective.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel deep pruning of outgrown structures and quiet regeneration into one steady daily habit aligned with Aquarius."
+        },
+        "song_ngu": {
+          "diem_sang": "Pluto in Pisces: deep pruning of outgrown structures and quiet regeneration operates through receptive empathy, imaginative synthesis, and quiet compassion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel deep pruning of outgrown structures and quiet regeneration into one steady daily habit aligned with Pisces."
+        }
+      }
+    },
+    "la_hau": {
+      "ten": "North Node",
+      "ky_hieu": "☊",
+      "vai_tro": "unfamiliar growth edge worth practicing deliberately over time",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "North Node in Aries: unfamiliar growth edge worth practicing deliberately over time operates through direct initiative, candid candor, and quick readiness to begin.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel unfamiliar growth edge worth practicing deliberately over time into one steady daily habit aligned with Aries."
+        },
+        "kim_nguu": {
+          "diem_sang": "North Node in Taurus: unfamiliar growth edge worth practicing deliberately over time operates through steady accumulation, tangible craft, and unhurried reliability.",
+          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel unfamiliar growth edge worth practicing deliberately over time into one steady daily habit aligned with Taurus."
+        },
+        "song_tu": {
+          "diem_sang": "North Node in Gemini: unfamiliar growth edge worth practicing deliberately over time operates through curious inquiry, agile dialogue, and multi-threaded learning.",
+          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel unfamiliar growth edge worth practicing deliberately over time into one steady daily habit aligned with Gemini."
+        },
+        "cu_giai": {
+          "diem_sang": "North Node in Cancer: unfamiliar growth edge worth practicing deliberately over time operates through protective care, emotional memory, and devotion to safe belonging.",
+          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel unfamiliar growth edge worth practicing deliberately over time into one steady daily habit aligned with Cancer."
+        },
+        "su_tu": {
+          "diem_sang": "North Node in Leo: unfamiliar growth edge worth practicing deliberately over time operates through warm self-direction, generous presence, and wholehearted expression.",
+          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel unfamiliar growth edge worth practicing deliberately over time into one steady daily habit aligned with Leo."
+        },
+        "xu_nu": {
+          "diem_sang": "North Node in Virgo: unfamiliar growth edge worth practicing deliberately over time operates through discerning refinement, practical service, and clean organization.",
+          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel unfamiliar growth edge worth practicing deliberately over time into one steady daily habit aligned with Virgo."
+        },
+        "thien_binh": {
+          "diem_sang": "North Node in Libra: unfamiliar growth edge worth practicing deliberately over time operates through fair-minded mediation, relational poise, and balanced proportion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel unfamiliar growth edge worth practicing deliberately over time into one steady daily habit aligned with Libra."
+        },
+        "bo_cap": {
+          "diem_sang": "North Node in Scorpio: unfamiliar growth edge worth practicing deliberately over time operates through focused intensity, root-cause honesty, and deep loyalty.",
+          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel unfamiliar growth edge worth practicing deliberately over time into one steady daily habit aligned with Scorpio."
+        },
+        "nhan_ma": {
+          "diem_sang": "North Node in Sagittarius: unfamiliar growth edge worth practicing deliberately over time operates through broad horizon-seeking, candid synthesis, and love of exploration.",
+          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel unfamiliar growth edge worth practicing deliberately over time into one steady daily habit aligned with Sagittarius."
+        },
+        "ma_ket": {
+          "diem_sang": "North Node in Capricorn: unfamiliar growth edge worth practicing deliberately over time operates through long-horizon discipline, structural accountability, and earned mastery.",
+          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel unfamiliar growth edge worth practicing deliberately over time into one steady daily habit aligned with Capricorn."
+        },
+        "bao_binh": {
+          "diem_sang": "North Node in Aquarius: unfamiliar growth edge worth practicing deliberately over time operates through independent systems thinking, principled reform, and civic perspective.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel unfamiliar growth edge worth practicing deliberately over time into one steady daily habit aligned with Aquarius."
+        },
+        "song_ngu": {
+          "diem_sang": "North Node in Pisces: unfamiliar growth edge worth practicing deliberately over time operates through receptive empathy, imaginative synthesis, and quiet compassion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel unfamiliar growth edge worth practicing deliberately over time into one steady daily habit aligned with Pisces."
+        }
+      }
+    },
+    "ke_do": {
+      "ten": "South Node",
+      "ky_hieu": "☋",
+      "vai_tro": "familiar baseline strengths not to over-rely on out of habit",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "South Node in Aries: familiar baseline strengths not to over-rely on out of habit operates through direct initiative, candid candor, and quick readiness to begin.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel familiar baseline strengths not to over-rely on out of habit into one steady daily habit aligned with Aries."
+        },
+        "kim_nguu": {
+          "diem_sang": "South Node in Taurus: familiar baseline strengths not to over-rely on out of habit operates through steady accumulation, tangible craft, and unhurried reliability.",
+          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel familiar baseline strengths not to over-rely on out of habit into one steady daily habit aligned with Taurus."
+        },
+        "song_tu": {
+          "diem_sang": "South Node in Gemini: familiar baseline strengths not to over-rely on out of habit operates through curious inquiry, agile dialogue, and multi-threaded learning.",
+          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel familiar baseline strengths not to over-rely on out of habit into one steady daily habit aligned with Gemini."
+        },
+        "cu_giai": {
+          "diem_sang": "South Node in Cancer: familiar baseline strengths not to over-rely on out of habit operates through protective care, emotional memory, and devotion to safe belonging.",
+          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel familiar baseline strengths not to over-rely on out of habit into one steady daily habit aligned with Cancer."
+        },
+        "su_tu": {
+          "diem_sang": "South Node in Leo: familiar baseline strengths not to over-rely on out of habit operates through warm self-direction, generous presence, and wholehearted expression.",
+          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel familiar baseline strengths not to over-rely on out of habit into one steady daily habit aligned with Leo."
+        },
+        "xu_nu": {
+          "diem_sang": "South Node in Virgo: familiar baseline strengths not to over-rely on out of habit operates through discerning refinement, practical service, and clean organization.",
+          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel familiar baseline strengths not to over-rely on out of habit into one steady daily habit aligned with Virgo."
+        },
+        "thien_binh": {
+          "diem_sang": "South Node in Libra: familiar baseline strengths not to over-rely on out of habit operates through fair-minded mediation, relational poise, and balanced proportion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel familiar baseline strengths not to over-rely on out of habit into one steady daily habit aligned with Libra."
+        },
+        "bo_cap": {
+          "diem_sang": "South Node in Scorpio: familiar baseline strengths not to over-rely on out of habit operates through focused intensity, root-cause honesty, and deep loyalty.",
+          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel familiar baseline strengths not to over-rely on out of habit into one steady daily habit aligned with Scorpio."
+        },
+        "nhan_ma": {
+          "diem_sang": "South Node in Sagittarius: familiar baseline strengths not to over-rely on out of habit operates through broad horizon-seeking, candid synthesis, and love of exploration.",
+          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel familiar baseline strengths not to over-rely on out of habit into one steady daily habit aligned with Sagittarius."
+        },
+        "ma_ket": {
+          "diem_sang": "South Node in Capricorn: familiar baseline strengths not to over-rely on out of habit operates through long-horizon discipline, structural accountability, and earned mastery.",
+          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel familiar baseline strengths not to over-rely on out of habit into one steady daily habit aligned with Capricorn."
+        },
+        "bao_binh": {
+          "diem_sang": "South Node in Aquarius: familiar baseline strengths not to over-rely on out of habit operates through independent systems thinking, principled reform, and civic perspective.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel familiar baseline strengths not to over-rely on out of habit into one steady daily habit aligned with Aquarius."
+        },
+        "song_ngu": {
+          "diem_sang": "South Node in Pisces: familiar baseline strengths not to over-rely on out of habit operates through receptive empathy, imaginative synthesis, and quiet compassion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel familiar baseline strengths not to over-rely on out of habit into one steady daily habit aligned with Pisces."
+        }
+      }
+    },
+    "chiron": {
+      "ten": "Chiron",
+      "ky_hieu": "⚷",
+      "vai_tro": "tender sensitivity that matures into practical wisdom for others",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Chiron in Aries: tender sensitivity that matures into practical wisdom for others operates through direct initiative, candid candor, and quick readiness to begin.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aries qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel tender sensitivity that matures into practical wisdom for others into one steady daily habit aligned with Aries."
+        },
+        "kim_nguu": {
+          "diem_sang": "Chiron in Taurus: tender sensitivity that matures into practical wisdom for others operates through steady accumulation, tangible craft, and unhurried reliability.",
+          "nen_de_y": "Under heavy workload, pace yourself so Taurus qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel tender sensitivity that matures into practical wisdom for others into one steady daily habit aligned with Taurus."
+        },
+        "song_tu": {
+          "diem_sang": "Chiron in Gemini: tender sensitivity that matures into practical wisdom for others operates through curious inquiry, agile dialogue, and multi-threaded learning.",
+          "nen_de_y": "Under heavy workload, pace yourself so Gemini qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel tender sensitivity that matures into practical wisdom for others into one steady daily habit aligned with Gemini."
+        },
+        "cu_giai": {
+          "diem_sang": "Chiron in Cancer: tender sensitivity that matures into practical wisdom for others operates through protective care, emotional memory, and devotion to safe belonging.",
+          "nen_de_y": "Under heavy workload, pace yourself so Cancer qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel tender sensitivity that matures into practical wisdom for others into one steady daily habit aligned with Cancer."
+        },
+        "su_tu": {
+          "diem_sang": "Chiron in Leo: tender sensitivity that matures into practical wisdom for others operates through warm self-direction, generous presence, and wholehearted expression.",
+          "nen_de_y": "Under heavy workload, pace yourself so Leo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel tender sensitivity that matures into practical wisdom for others into one steady daily habit aligned with Leo."
+        },
+        "xu_nu": {
+          "diem_sang": "Chiron in Virgo: tender sensitivity that matures into practical wisdom for others operates through discerning refinement, practical service, and clean organization.",
+          "nen_de_y": "Under heavy workload, pace yourself so Virgo qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel tender sensitivity that matures into practical wisdom for others into one steady daily habit aligned with Virgo."
+        },
+        "thien_binh": {
+          "diem_sang": "Chiron in Libra: tender sensitivity that matures into practical wisdom for others operates through fair-minded mediation, relational poise, and balanced proportion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Libra qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel tender sensitivity that matures into practical wisdom for others into one steady daily habit aligned with Libra."
+        },
+        "bo_cap": {
+          "diem_sang": "Chiron in Scorpio: tender sensitivity that matures into practical wisdom for others operates through focused intensity, root-cause honesty, and deep loyalty.",
+          "nen_de_y": "Under heavy workload, pace yourself so Scorpio qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel tender sensitivity that matures into practical wisdom for others into one steady daily habit aligned with Scorpio."
+        },
+        "nhan_ma": {
+          "diem_sang": "Chiron in Sagittarius: tender sensitivity that matures into practical wisdom for others operates through broad horizon-seeking, candid synthesis, and love of exploration.",
+          "nen_de_y": "Under heavy workload, pace yourself so Sagittarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel tender sensitivity that matures into practical wisdom for others into one steady daily habit aligned with Sagittarius."
+        },
+        "ma_ket": {
+          "diem_sang": "Chiron in Capricorn: tender sensitivity that matures into practical wisdom for others operates through long-horizon discipline, structural accountability, and earned mastery.",
+          "nen_de_y": "Under heavy workload, pace yourself so Capricorn qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel tender sensitivity that matures into practical wisdom for others into one steady daily habit aligned with Capricorn."
+        },
+        "bao_binh": {
+          "diem_sang": "Chiron in Aquarius: tender sensitivity that matures into practical wisdom for others operates through independent systems thinking, principled reform, and civic perspective.",
+          "nen_de_y": "Under heavy workload, pace yourself so Aquarius qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel tender sensitivity that matures into practical wisdom for others into one steady daily habit aligned with Aquarius."
+        },
+        "song_ngu": {
+          "diem_sang": "Chiron in Pisces: tender sensitivity that matures into practical wisdom for others operates through receptive empathy, imaginative synthesis, and quiet compassion.",
+          "nen_de_y": "Under heavy workload, pace yourself so Pisces qualities stay balanced rather than rigid or rushed.",
+          "viec_ung_dung": "Channel tender sensitivity that matures into practical wisdom for others into one steady daily habit aligned with Pisces."
+        }
+      }
+    }
+  },
+  "loi": {
+    "ten_asc": "Ascendant (Asc)",
+    "ten_mc": "Midheaven (MC)",
+    "tuoi_chua_du": "Detailed birth chart and transit readings are available only for users aged {tuoi} and older.",
+    "mat_trang_doi_cung": "Birth hour unknown: on this date the Moon moves from {c0} into {c1} ({d0}° -> {d1}°). Add your birth time if known to fix your Moon sign and 12 Houses.",
+    "mat_trang_mot_cung": "Even without a birth hour, the Moon stays in {c0} for all 24 hours of your birth date ({d0}° -> {d1}°).",
+    "phuong_phap_lich": "Deterministic astronomical calculation, accurate to under 0.25 arcminutes: the same date, time and place always give the same chart. No personal data is stored."
+  }
+}
