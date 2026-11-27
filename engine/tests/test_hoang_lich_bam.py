@@ -19,8 +19,10 @@ G = json.loads((Path(__file__).parents[1] / "fixtures" / "golden" / "hoang_lich_
 
 def _ngay_chuan(d: dt.date) -> list:
     k = hl.ngay(d, tz=8.0)
+    # TP-1: thẻ ngày thay cờ 四离 của bảng bằng định nghĩa sách (`hl.sua_tu_ly`) — oracle so BẢNG thần sát gốc.
+    _, hung_bang = hl._than_sat(k["thang_gz"][1], k["ngay_gz"])  # noqa: SLF001
     return [d.isoformat(), k["thang_gz"], k["ngay_gz"], k["truc"], k["than"], k["nghi"], k["ky"], k["cat_than"],
-            k["hung_sat"], k["tu"], f"{k['xung']['can']}{k['xung']['chi']}", k["sat_phuong"], list(k["banh_to"]),
+            hung_bang, k["tu"], f"{k['xung']['can']}{k['xung']['chi']}", k["sat_phuong"], list(k["banh_to"]),
             [k["huong"]["hy_than"], k["huong"]["tai_than"], k["huong"]["phuc_than"]], k["thai_than"],
             [x["than"] for x in k["gio"]]]
 

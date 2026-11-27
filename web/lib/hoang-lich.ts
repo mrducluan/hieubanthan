@@ -2,6 +2,7 @@
 // web chỉ hiển thị. Bản công khai (không ngày sinh) đọc bằng GET để cache; bản cá nhân đi qua /api/lich/*.
 import { duongTheoLuot } from "@/lib/engine-ngon-ngu";
 import { unstable_noStore as noStore } from "next/cache";
+import type { DiemKhac } from "@/lib/truong-phai";
 
 /** `ten` = việc theo lối ngày nay; `ten_goc` = cách sách xưa gọi (chỉ ở phần giải nghĩa); `luu_y` = việc y tế / pháp lý. */
 export interface MucNghiKy { ma: string; ten: string; nghia: string; ten_goc?: string; luu_y?: string }
@@ -12,7 +13,7 @@ export interface GioNgay {
 }
 export interface TomTatNgay {
   ngay: string; am: string; can_chi: string; truc: string; than: string; hoang_dao: boolean; ky_dan_gian: string[]; nhan_tap_quan?: string[];
-  con_ngay?: number; viec?: string; quan_he_tuoi?: string | null; diem_cong?: string[];
+  con_ngay?: number; viec?: string; quan_he_tuoi?: string | null; diem_cong?: string[]; diem_khac?: DiemKhac[];
   /** Engine chấm "ngày đẹp" chung: hoàng đạo + trực tốt + không rơi ngày kỵ dân gian. */
   dep?: boolean;
 }
@@ -41,6 +42,8 @@ export interface NgayTot {
   ngay_mai: TomTatNgay; ngay_tot_gan: TomTatNgay | null;
   danh_sach_viec: { ma: string; ten: string }[];
   nguon: string; trang_thai: string; luu_y: string; tra_loi_nhanh?: string;
+  /** TP-1: chỗ phái còn lại (vd Dương Công theo sách Hiệp Kỷ) làm khác ngày này — chỉ có khi khác. */
+  diem_khac?: DiemKhac[];
 }
 // SEO-M: tóm tắt tháng + ngày tốt theo việc + hỏi đáp (engine cũ không có → tuỳ chọn).
 export interface ThangLich {
@@ -51,7 +54,7 @@ export interface ThangLich {
 }
 export interface ChonNgayKq {
   viec: { ma: string; ten: string }; tu: string; den: string; tuoi: { can_chi: string } | null;
-  ngay: TomTatNgay[]; luu_y: string; cach_chon: string;
+  ngay: TomTatNgay[]; luu_y: string; cach_chon: string; diem_khac?: DiemKhac[];
 }
 
 // EN-5.1 — chọn ngày cho nhiều người (engine dựng hết, web chỉ hiển thị).
@@ -74,7 +77,7 @@ export interface ChonNgayNhieuKq {
   ngay: NgayNhieu[]; ngay_noi_bat: NgayNhieu[];
   thang: { thang: string; so_ngay: number; ngay: NgayNhieu[]; luu_y: string[] }[];
   tom_tat: string; goi_y: string[]; giai_thich?: { nhan: string; loi: string }[]; cach_chon: string; chua_xet?: string; luu_y: string;
-  thang_gia_thu?: ThangGiaThu | null;
+  thang_gia_thu?: ThangGiaThu | null; diem_khac?: DiemKhac[];
 }
 
 const ENGINE_URL = process.env.ENGINE_URL ?? "http://localhost:8000";

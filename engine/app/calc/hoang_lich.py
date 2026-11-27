@@ -34,6 +34,12 @@ TAM_NUONG = {3, 7, 13, 18, 22, 27}
 NGUYET_KY = {5, 14, 23}
 DUONG_CONG = {(13, 1), (11, 2), (9, 3), (7, 4), (5, 5), (3, 6), (8, 7), (29, 7), (27, 8), (25, 9), (23, 10),
               (21, 11), (19, 12)}
+# TP-1 (chủ dự án duyệt 2026-11-27): hai nguồn nói khác nhau về Dương Công kỵ — người dùng chọn.
+#   "lich_viet" (mặc định): lịch dân gian Việt — tháng 7 là mùng 8 và 29, áp cả tháng nhuận (bảng `DUONG_CONG`).
+#   "hiep_ky": Hiệp Kỷ Biện Phương Thư q.36 «…以至七月初一二十九而終于十二月十九凡十三日» — tháng 7 là mùng 1 và 29;
+#              sách không nói tới tháng nhuận → tháng nhuận không tính.
+DUONG_CONG_HIEP_KY = (DUONG_CONG - {(8, 7)}) | {(1, 7)}
+DUONG_CONG_PHAI = ("lich_viet", "hiep_ky")
 
 _TAM_HOP = ("申子辰", "寅午戌", "巳酉丑", "亥卯未")
 _LUC_HOP = {frozenset(x) for x in ("子丑", "寅亥", "卯戌", "辰酉", "巳申", "午未")}
@@ -111,14 +117,59 @@ def ly_thuan_phong(thang_am: int, ngay_am: int) -> list[str]:
     return [LY_THUAN_PHONG[(thang_am - 1 + ngay_am - 1 + h) % 6] for h in range(12)]
 
 
-def ky_dan_gian(ngay_am: int, thang_am: int) -> list[str]:
+def la_duong_cong(ngay_am: int, thang_am: int, nhuan: bool = False, duong_cong: str = "lich_viet") -> bool:
+    """Ngày Dương Công kỵ theo phái `duong_cong` (xem `DUONG_CONG_PHAI`)."""
+    if duong_cong == "hiep_ky":
+        return not nhuan and (ngay_am, thang_am) in DUONG_CONG_HIEP_KY
+    if duong_cong != "lich_viet":
+        raise ValueError(duong_cong)
+    return (ngay_am, thang_am) in DUONG_CONG
+
+
+def ky_dan_gian(ngay_am: int, thang_am: int, nhuan: bool = False, duong_cong: str = "lich_viet") -> list[str]:
     ra = []
     if ngay_am in TAM_NUONG:
         ra.append("tam_nuong")
     if ngay_am in NGUYET_KY:
         ra.append("nguyet_ky")
-    if (ngay_am, thang_am) in DUONG_CONG:
+    if la_duong_cong(ngay_am, thang_am, nhuan, duong_cong):
         ra.append("duong_cong")
+    return ra
+
+
+# ---- Tứ Ly / Tứ Tuyệt theo định nghĩa sách (TP-1 sửa lỗi, chủ dự án duyệt 2026-11-27) --------------------------------
+# Hiệp Kỷ q.9 «四離冬至夏至春分秋分各前一日»: Tứ Ly = một ngày trước Xuân phân (0°), Hạ chí (90°), Thu phân (180°),
+# Đông chí (270°); Tứ Tuyệt = một ngày trước Lập xuân (315°), Lập hạ (45°), Lập thu (135°), Lập đông (225°). Ngày giao
+# tiết lấy theo NGÀY ĐỊA PHƯƠNG (`tz`, mặc định giờ Việt Nam) — cùng quy ước tháng tiết của thẻ ngày. Cờ 四离 trong bảng
+# thần sát (`hoang_lich_vendor.DAY_SHEN_SHA`) gần như không bao giờ trúng nghĩa sách (đo 2020–2025: 2 ngày, không ngày nào
+# đúng) → thẻ ngày bỏ cờ của bảng, dùng hàm dưới đây. Một hàm dùng chung với `calc.trach_nhat_hiep_ky`.
+_GOC_TU_LY = (0, 90, 180, 270)
+_GOC_TU_TUYET = (315, 45, 135, 225)
+
+
+@lru_cache(maxsize=1024)
+def _ngay_tiet(nam: int, kinh_do: int, tz: float) -> dt.date:
+    return (tk.thoi_diem(nam, kinh_do) + dt.timedelta(hours=tz)).date()
+
+
+def _truoc_tiet(d: dt.date, cac_goc: tuple[int, ...], tz: float) -> bool:
+    sau = d + dt.timedelta(days=1)
+    return any(sau == _ngay_tiet(nam, g, tz) for nam in (d.year, d.year + 1) for g in cac_goc)
+
+
+def la_tu_ly(d: dt.date, tz: float = CALENDAR_MERIDIAN_TZ) -> bool:
+    return _truoc_tiet(d, _GOC_TU_LY, tz)
+
+
+def la_tu_tuyet(d: dt.date, tz: float = CALENDAR_MERIDIAN_TZ) -> bool:
+    return _truoc_tiet(d, _GOC_TU_TUYET, tz)
+
+
+def sua_tu_ly(hung: list[str], d: dt.date, tz: float = CALENDAR_MERIDIAN_TZ) -> list[str]:
+    """Danh sách hung sát của bảng, thay cờ 四离 của bảng bằng định nghĩa sách (`la_tu_ly`)."""
+    ra = [x for x in hung if x != "四离"]
+    if la_tu_ly(d, tz):
+        ra.append("四离")
     return ra
 
 
@@ -154,12 +205,14 @@ def quan_he_tuoi(chi_ngay: str, chi_tuoi: str) -> str | None:
     return None
 
 
-def ngay(d: dt.date, tz: float = CALENDAR_MERIDIAN_TZ) -> dict:
+def ngay(d: dt.date, tz: float = CALENDAR_MERIDIAN_TZ, duong_cong: str = "lich_viet") -> dict:
+    """Thẻ một ngày. `duong_cong`: phái Dương Công kỵ (TP-1, `DUONG_CONG_PHAI`; mặc định lịch dân gian Việt)."""
     ngay_gz, thang_gz = gz_ngay(d), gz_thang(d, tz)
     can_i, chi = GAN.index(ngay_gz[0]), ngay_gz[1]
     than = than_truc_nhat(thang_gz[1], chi)
     nghi, ky = _nghi_ky(thang_gz, ngay_gz)
     cat, hung = _than_sat(thang_gz[1], ngay_gz)
+    hung = sua_tu_ly(hung, d, tz)
     tuan = (d.weekday() + 1) % 7                         # 0 = Chủ nhật (như bảng XIU)
     tu = V.XIU[chi + str(tuan)]
     ad, am, ay, nhuan = lunar.solar_to_lunar(d.day, d.month, d.year, tz)
@@ -188,6 +241,6 @@ def ngay(d: dt.date, tz: float = CALENDAR_MERIDIAN_TZ) -> dict:
                   "phuc_than": V.POSITION_FU_2[can_i + 1]},
         "thai_than": V.POSITION_TAI_DAY[_chi_so_60(ngay_gz)],
         "gio": gio,
-        "ky_dan_gian": ky_dan_gian(ad, am),
+        "ky_dan_gian": ky_dan_gian(ad, am, bool(nhuan), duong_cong),
         "nhan_tap_quan": nhan_tap_quan(chi, thang_gz[1], nam_gz[1]),
     }
