@@ -1,0 +1,148 @@
+{
+  "_nguon": "Stage 3.1 English overlay — Tactical Immediate Event layer (Qi Men Dun Jia hourly timing + Liu Yao Six Lines hexagram analysis). Independent readings, zero merged score (CD-1).",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "khung": {
+    "tieu_de": "Immediate Tactical Playbook (Qi Men · Six Lines)",
+    "phu_de": "Built for a concrete matter unfolding over the next few days: Qi Men selects auspicious daytime windows and seating/departure directions; Six Lines (Na Jia) weighs the Use God line and timing triggers from your cast hexagram. Both methods read independently with no averaged score.",
+    "ranh_gioi": "Use these insights to prepare practical options and pace your outreach calmly; this does not replace legal or financial counsel and never guarantees an outcome.",
+    "tuoi_nho": "Tactical business and transaction readings are open only to users aged 16 and older.",
+    "nhan_ky_mon": "Method 1 · Hourly Qi Men Dun Jia (timing windows & direction)",
+    "nhan_luc_hao": "Method 2 · Six Lines Na Jia (deciding line strength & timing trigger)",
+    "chua_co_gio_tot": "Daytime hours on the selected date carry cautionary chart formations; focus on document preparation or check the following day if timing is flexible.",
+    "ung_ky_ghi_chu": "Timing triggers point to the nearest stem-branch days when the deciding line is released (emerging from Void, roused by clash, or supported) — useful for pacing a polite follow-up, not a guaranteed deadline."
+  },
+  "tinh_huong": {
+    "dam_phan_thuong_vu": {
+      "ten": "Commercial Negotiation · Partner Meeting",
+      "mo_ta": "Discussing partnership terms, pitching services, meeting a key client, or negotiating commercial conditions.",
+      "viec_ky_mon": "gap_go",
+      "dung_than": "Thê Tài",
+      "ly_do_dung_than": "Commercial negotiations center on tangible value exchange and revenue, making Wealth (Wife-Wealth) the primary Use God alongside the Self–Other line balance.",
+      "trich_ky_mon": {
+        "sach": "Complete Classics Collection · Qi Men Dun Jia (Audience & Meetings)",
+        "han": "休門宮分為所見之人時干宮為干謁之人",
+        "y_nghia": "The Rest Door palace represents the counterpart you meet while the Hour Stem palace represents the initiator; harmonious generation eases opening dialogue."
+      },
+      "trich_luc_hao": {
+        "sach": "Zeng Shan Bu Yi · Scroll 3 (Six Harmonies, Ch. 19)",
+        "han": "然必用神有气相宜用若失陷無益",
+        "y_nghia": "Even when surface harmony appears, the deciding Use God line must carry real seasonal vitality; if depleted, spoken goodwill has not yet solidified into real figures."
+      },
+      "chuan_bi_thuc_te": [
+        "Define your walk-away threshold and backup alternative clearly before entering the room.",
+        "Use the first conversation to uncover the counterpart's core constraint rather than forcing every clause at once if the deciding line is quiet or in Void.",
+        "Send a concise written recap of agreed items right after the meeting."
+      ]
+    },
+    "ky_ket_hop_dong": {
+      "ten": "Contract Signing · Formal Paperwork",
+      "mo_ta": "Signing a lease, purchase agreement, co-founder charter, or filing official documentation.",
+      "viec_ky_mon": "ky_ket",
+      "dung_than": "Phụ Mẫu",
+      "ly_do_dung_than": "Written contracts, deeds, certificates, and protective clauses belong to the Parents line in Six Lines; a clear Parents line points to clean documentation.",
+      "trich_ky_mon": {
+        "sach": "Complete Classics Collection · Qi Men Dun Jia (Transactions)",
+        "han": "直符為買物之人生門為所買之物",
+        "y_nghia": "Chief Star marks the initiating party and Life Door marks the asset or subject of exchange; mutual support favors smooth execution."
+      },
+      "trich_luc_hao": {
+        "sach": "Zeng Shan Bu Yi · Scroll 2 (Use God, Ch. 8)",
+        "han": "皆以父母爻爲用神",
+        "y_nghia": "All matters involving written covenants, property deeds, certificates, and formal filings take the Parents line as the primary reference."
+      },
+      "chuan_bi_thuc_te": [
+        "Verify penalty clauses, early-exit conditions, and payment milestone definitions line by line.",
+        "If the Parents line meets Void or Month Break, double-check signatory authority, missing annexes, or supporting certificates.",
+        "Archive a dated comparison copy immediately before final signature."
+      ]
+    },
+    "thu_hoi_cong_no": {
+      "ten": "Receivables Collection · Payment Follow-Up",
+      "mo_ta": "Following up on overdue invoices, reconciling delivery sign-offs, and collecting receivables.",
+      "viec_ky_mon": "thu_no",
+      "dung_than": "Thê Tài",
+      "ly_do_dung_than": "Funds due for collection take the Wealth line as the deciding Use God regardless of how familiar the client or acquaintance may be.",
+      "trich_ky_mon": {
+        "sach": "Complete Classics Collection · Qi Men Dun Jia (Collecting Debts)",
+        "han": "甲子戊會開門加內地時干其債速還",
+        "y_nghia": "When Jiazi-Wu meets the Open Door on the inner plate in harmony with the Hour Stem, reconciliation and settlement move swiftly."
+      },
+      "trich_luc_hao": {
+        "sach": "Zeng Shan Bu Yi · Scroll 2 (Original & Rival Gods, Ch. 9)",
+        "han": "元神生用神之神卽爲元神忌神克用神之爻也",
+        "y_nghia": "An active Original God (Offspring) opens cash-flow channels supporting Wealth, whereas an active Rival God (Siblings) signals installment delays."
+      },
+      "chuan_bi_thuc_te": [
+        "Attach signed delivery confirmation and a clean statement of account before calling.",
+        "If the Wealth line is hidden or quiet, propose a structured 2–3 installment schedule with concrete dates instead of an all-or-nothing demand.",
+        "Time your calm follow-up around the suggested stem-branch trigger days."
+      ]
+    },
+    "ra_mat_khai_truong": {
+      "ten": "Product Launch · Storefront Opening",
+      "mo_ta": "Launching a new offering, opening a commercial space, or kicking off a market campaign.",
+      "viec_ky_mon": "ra_mat",
+      "dung_than": "Thê Tài",
+      "ly_do_dung_than": "Storefront openings and product launches test real customer demand and cash flow, anchoring on the Wealth line supported by Offspring (customer flow).",
+      "trich_ky_mon": {
+        "sach": "Complete Classics Collection · Qi Men Dun Jia (Seeking Wealth)",
+        "han": "生門之上好求財上下兩盤仔細猜",
+        "y_nghia": "The Life Door is the primary sector for commercial openings, yet both heaven and earth plates must be weighed carefully before committing full budget."
+      },
+      "trich_luc_hao": {
+        "sach": "Zeng Shan Bu Yi · Scroll 2 (Returning & Wandering Souls, Ch. 26)",
+        "han": "須以用神爲主然後以此參之",
+        "y_nghia": "Always anchor judgment on the real vitality of the deciding Use God line first, treating outer hexagram patterns as secondary context."
+      },
+      "chuan_bi_thuc_te": [
+        "Dry-run customer checkout, fulfillment, and staffing before the main opening hour.",
+        "Lead with one or two clear flagship offerings on day one rather than an overloaded menu.",
+        "Review real customer questions from the first seven days to refine pricing or display."
+      ]
+    },
+    "hoa_giai_bat_dong": {
+      "ten": "Resolving Friction · De-escalating Tension",
+      "mo_ta": "Clearing misunderstandings with a co-worker, business partner, client, or family member.",
+      "viec_ky_mon": "hoa_giai",
+      "dung_than": "Huynh Đệ",
+      "ly_do_dung_than": "Peer-to-peer dialogue and clearing friction examine the Siblings line alongside the Self and Other lines to gauge mutual receptivity.",
+      "trich_ky_mon": {
+        "sach": "Complete Classics Collection · Qi Men Dun Jia (Eight Doors)",
+        "han": "開門宜遠行征討所向通達休門宜集萬事治兵習業生門宜見貴人營造百事",
+        "y_nghia": "Each door serves its season: Open Door suits outward travel, Life Door suits building anew, while the calm Rest Door best suits reconciliation."
+      },
+      "trich_luc_hao": {
+        "sach": "Zeng Shan Bu Yi · Scroll 3 (Six Clashes, Ch. 20)",
+        "han": "用神旺𨿽沖不破用神失陷凶而又凶",
+        "y_nghia": "When underlying goodwill remains strong, a clash merely surfaces unspoken concerns without breaking the bond; when both sides are exhausted, pause first."
+      },
+      "chuan_bi_thuc_te": [
+        "Choose a quiet Rest Door window for a private one-on-one conversation rather than debating in front of a group.",
+        "Open by naming the shared goal both sides want to protect, keeping past grievances out of scope.",
+        "Write down one clear operating agreement for how similar decisions will be handled next time."
+      ]
+    },
+    "cho_tin_ket_qua": {
+      "ten": "Awaiting Approval · Pending Decision",
+      "mo_ta": "Waiting for application review, bid feedback, regulatory clearance, or executive sign-off.",
+      "viec_ky_mon": "giay_to",
+      "dung_than": "Quan Quỷ",
+      "ly_do_dung_than": "Institutional review, executive sign-off, and official rulings correspond to the Official line (paired with Parents for the written notice).",
+      "trich_ky_mon": {
+        "sach": "Complete Classics Collection · Qi Men Dun Jia (Timing of Departure)",
+        "han": "時干為起行之人日干為牽纏節制之人開門為起行之期",
+        "y_nghia": "The Hour Stem reflects forward motion, the Day Stem shows current procedural holds, and the Open Door marks when the file moves forward."
+      },
+      "trich_luc_hao": {
+        "sach": "Zeng Shan Bu Yi · Scroll 2 (Timing Summary, Ch. 26)",
+        "han": "大象吉而受克須待克神受克",
+        "y_nghia": "When the overall structure is sound but held back by one bottleneck, progress arrives on the stem-branch window that restrains the blocking factor."
+      },
+      "chuan_bi_thuc_te": [
+        "Verify spam folders, portal status messages, and completeness of submitted attachments.",
+        "Send a brief, courteous status check during an auspicious Qi Men hour or the hexagram's trigger day rather than nudging daily.",
+        "Advance a parallel contingency option so your schedule never depends on a single reply."
+      ]
+    }
+  }
+}

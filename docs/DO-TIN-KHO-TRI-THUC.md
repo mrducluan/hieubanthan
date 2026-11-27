@@ -26,7 +26,7 @@
 | Kỳ Môn |  | 1 |  |  | 1 |  |  |
 | Thần số |  |  |  | 11 | 13 |  |  |
 | Lịch · tuổi · tập quán |  | 1 |  | 5 | 1 |  |  |
-| Liên mảng · kỹ thuật |  | 1 |  |  | 12 | 4 | 7 |
+| Liên mảng · kỹ thuật |  | 1 |  |  | 12 | 5 | 7 |
 
 ## Phần đã có nguyên văn đối chiếu (test khoá)
 
@@ -221,6 +221,7 @@
 | Liên mảng · kỹ thuật | `push_sang_nay.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `sinh_nuoc_ngoai_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `slug_en.json` |  | Tệp kỹ thuật |  |
+| Liên mảng · kỹ thuật | `su_vu_chien_thuat_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 3.1: nháp AI Chiến thuật Sự vụ tức thời (Kỳ Môn Thời Gia · Lục Hào Nạp Giáp đọc riêng; câu Hán trích nguyên văn ky_mon_co_kim_do_thu & tang_san_boc_dich), chờ chủ dự án đọc duyệt |
 | Liên mảng · kỹ thuật | `suc_khoe_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | hành ↔ tạng phủ theo Nội Kinh; tên bệnh hay gặp là kiến thức phổ thông (SK-2) |
 | Liên mảng · kỹ thuật | `ten_en.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `tham_dinh.json` |  | Tệp kỹ thuật |  |

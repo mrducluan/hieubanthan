@@ -243,6 +243,7 @@ SO: dict[str, dict] = {
     # ---- Liên mảng (lời ghép, ranh giới, mẫu câu)
     "suc_khoe_kb.json": {"mang": "chung", "muc": "tom_y_co_thu", "ghi_chu": "hành ↔ tạng phủ theo Nội Kinh; tên bệnh hay gặp là kiến thức phổ thông (SK-2)"},
     "co_van_tam_tai_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 2: nháp AI tổng hợp Cố vấn Liên mảng Tam Tài (Nhân – Thiên – Địa), chờ chủ dự án đọc duyệt"},
+    "su_vu_chien_thuat_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 3.1: nháp AI Chiến thuật Sự vụ tức thời (Kỳ Môn Thời Gia · Lục Hào Nạp Giáp đọc riêng; câu Hán trích nguyên văn ky_mon_co_kim_do_thu & tang_san_boc_dich), chờ chủ dự án đọc duyệt"},
     "doanh_chu_cam_nang_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 2: nháp AI Cẩm nang Chiến lược Kinh doanh 5 trụ (Thị trường, Địa điểm/Thành Môn, Nhân sự, Văn phòng, Cửa hàng), chờ chủ dự án đọc duyệt"},
     "doanh_chu_gop_von_kb.json": {"mang": "battu", "muc": "bien_tap",
                                   "ghi_chu": "GV-1: nhóm ba khâu + điều lệ gợi ý khi góp vốn (nháp); vai trò từng người lấy từ Bản đồ đội ngũ"},
