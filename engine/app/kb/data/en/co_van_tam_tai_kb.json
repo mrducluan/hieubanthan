@@ -199,7 +199,8 @@
         "day_manh": "Favourable month: sign the lease, place the first stock order and open if the preparation is done.",
         "can_bang": "Even-paced month: do the preparation (permits, suppliers, design, trial sales); no need to rush the main step.",
         "phong_thu": "A month to slow down: no long lease and no big stock order yet; use the time to review numbers and permits."
-      }
+      },
+      "cau_goi": "open a shop"
     },
     "mo_quan": {
       "ten": "opening a restaurant or cafe",
@@ -216,7 +217,8 @@
         "day_manh": "Favourable month: sign the lease, buy equipment and open if the trial menu went well.",
         "can_bang": "Even-paced month: do permits, choose suppliers, trial the menu; no need to rush the opening date.",
         "phong_thu": "A month to slow down: no big equipment, no long lease; use the time to recount costs."
-      }
+      },
+      "cau_goi": "open a cafe"
     },
     "mo_rong": {
       "ten": "opening another branch",
@@ -233,7 +235,8 @@
         "day_manh": "Favourable month: sign the new site and hire if the old outlet already runs steadily.",
         "can_bang": "Even-paced month: survey locations, cost it, train the manager; no need to sign in a hurry.",
         "phong_thu": "A month to slow down: strengthen the current outlet, do not sign a new site yet."
-      }
+      },
+      "cau_goi": "open another branch"
     },
     "ra_lam_rieng": {
       "ten": "going independent",
@@ -250,7 +253,8 @@
         "day_manh": "Favourable month: sign the first client, register the business, announce the new work.",
         "can_bang": "Even-paced month: run in parallel, find more clients, refine the offer; no need to drop your old income yet.",
         "phong_thu": "A month to slow down: keep your current income, avoid large commitments; just stay in touch with prospects."
-      }
+      },
+      "cau_goi": "go independent"
     },
     "chuyen_viec": {
       "ten": "changing jobs or career direction",
@@ -267,7 +271,8 @@
         "day_manh": "Favourable month: accept the offer, negotiate terms and give notice if everything is clear.",
         "can_bang": "Even-paced month: update your profile, meet more people in the field, practise interviews; no need to decide in a hurry.",
         "phong_thu": "A month to slow down: do not give notice or sign an offer while terms are vague."
-      }
+      },
+      "cau_goi": "change jobs"
     },
     "dau_tu": {
       "ten": "investing",
@@ -284,7 +289,8 @@
         "day_manh": "Favourable month: commit in small tranches following a plan written in advance.",
         "can_bang": "Even-paced month: study the channel and ask a professional; no need to commit in a hurry.",
         "phong_thu": "A month to slow down: no large commitment; hold cash and review the plan."
-      }
+      },
+      "cau_goi": "invest"
     },
     "gop_von": {
       "ten": "pooling capital or working together",
@@ -301,7 +307,8 @@
         "day_manh": "Favourable month: sign and transfer capital if both have read the document carefully.",
         "can_bang": "Even-paced month: draft the agreement, divide roles, consult a lawyer; no need to transfer capital yet.",
         "phong_thu": "A month to slow down: do not sign or transfer yet; use the time to clarify roles."
-      }
+      },
+      "cau_goi": "pool capital with a partner"
     },
     "mua_nha": {
       "ten": "buying a home or moving",
@@ -318,7 +325,8 @@
         "day_manh": "Favourable month: pay the deposit, sign and take over if the legal status is clean.",
         "can_bang": "Even-paced month: view homes, check the legal status, work out the loan; no need to pay a deposit in a hurry.",
         "phong_thu": "A month to slow down: no deposit or signing yet; use the time to review documents."
-      }
+      },
+      "cau_goi": "buy a home"
     },
     "tinh_cam": {
       "ten": "a relationship or marriage matter",
@@ -335,7 +343,8 @@
         "day_manh": "Favourable month: have the serious talk, meet both families, settle a plan if you both agree.",
         "can_bang": "Even-paced month: talk steadily about money, housing, children; no need to fix a date yet.",
         "phong_thu": "A month to slow down: no big decision yet; listen to each other and meet more family."
-      }
+      },
+      "cau_goi": "marry"
     },
     "gia_dao": {
       "ten": "a family matter, easing tension at home",
@@ -352,7 +361,8 @@
         "day_manh": "Favourable month: open the bigger topic, bring in a mediator if needed.",
         "can_bang": "Even-paced month: talk lightly and regularly, avoid piling up old matters.",
         "phong_thu": "A month to slow down: hold off heavy talk, keep the atmosphere calm."
-      }
+      },
+      "cau_goi": "ease family conflict between spouses"
     },
     "suc_ben": {
       "ten": "regaining energy",
@@ -369,7 +379,8 @@
         "day_manh": "Favourable month: take longer leave, lighten your work rhythm.",
         "can_bang": "Even-paced month: keep a steady bedtime and light exercise.",
         "phong_thu": "A month to slow down: cut workload, prioritise rest, see a doctor if tiredness lasts."
-      }
+      },
+      "cau_goi": "recover from burnout"
     }
   },
   "hieu_cau": {
@@ -453,5 +464,11 @@
   "doan": {
     "mot": "{t}",
     "nhieu": "{a}–{b}"
+  },
+  "tiep_theo": {
+    "thang": "Should I {cau_goi} in {thang}?",
+    "nhan_thang": "Try {thang}: a month where several readings agree",
+    "nam": "Should I {cau_goi} in {nam}?",
+    "nhan_nam": "See the whole of {nam}"
   }
 }

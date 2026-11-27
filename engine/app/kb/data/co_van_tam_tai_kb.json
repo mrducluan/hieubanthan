@@ -201,7 +201,8 @@
         "day_manh": "Tháng thuận: ký thuê, nhập hàng đợt đầu và khai trương nếu phần chuẩn bị đã xong.",
         "can_bang": "Tháng đều nhịp: làm phần chuẩn bị (giấy phép, nhà cung cấp, thiết kế, bán thử), chưa cần gấp phần chính.",
         "phong_thu": "Tháng nên đi chậm: chưa ký thuê dài hạn, chưa nhập hàng lớn; dùng thời gian rà số liệu và giấy phép."
-      }
+      },
+      "cau_goi": "mở cửa hàng"
     },
     "mo_quan": {
       "ten": "mở quán ăn, quán cà phê",
@@ -218,7 +219,8 @@
         "day_manh": "Tháng thuận: ký thuê, mua thiết bị và khai trương nếu thực đơn đã chạy thử ổn.",
         "can_bang": "Tháng đều nhịp: làm giấy phép, chọn nhà cung cấp, chạy thử thực đơn; chưa cần gấp ngày khai trương.",
         "phong_thu": "Tháng nên đi chậm: chưa mua thiết bị lớn, chưa ký thuê dài hạn; dùng thời gian tính lại chi phí."
-      }
+      },
+      "cau_goi": "mở quán cà phê"
     },
     "mo_rong": {
       "ten": "mở thêm chi nhánh",
@@ -235,7 +237,8 @@
         "day_manh": "Tháng thuận: ký thuê điểm mới và tuyển người nếu điểm cũ đã chạy đều.",
         "can_bang": "Tháng đều nhịp: khảo sát vị trí, tính chi phí, đào tạo người quản lý; chưa cần ký gấp.",
         "phong_thu": "Tháng nên đi chậm: giữ chắc điểm hiện tại, chưa ký điểm mới."
-      }
+      },
+      "cau_goi": "mở thêm chi nhánh"
     },
     "ra_lam_rieng": {
       "ten": "tự kinh doanh, làm riêng",
@@ -252,7 +255,8 @@
         "day_manh": "Tháng thuận: ký khách đầu tiên, đăng ký kinh doanh, công bố việc mới.",
         "can_bang": "Tháng đều nhịp: làm song song, tìm thêm khách, hoàn thiện sản phẩm; chưa cần bỏ hẳn nguồn thu cũ.",
         "phong_thu": "Tháng nên đi chậm: không bỏ nguồn thu hiện tại, không ký cam kết lớn; chỉ giữ liên lạc với khách tiềm năng."
-      }
+      },
+      "cau_goi": "ra làm riêng"
     },
     "chuyen_viec": {
       "ten": "chuyển việc, chuyển hướng sự nghiệp",
@@ -269,7 +273,8 @@
         "day_manh": "Tháng thuận: nhận thư mời, thương lượng điều khoản và nộp đơn nghỉ nếu mọi thứ đã rõ.",
         "can_bang": "Tháng đều nhịp: cập nhật hồ sơ, gặp thêm người trong ngành, phỏng vấn thử; chưa cần quyết gấp.",
         "phong_thu": "Tháng nên đi chậm: chưa nộp đơn nghỉ, chưa ký thư mời nếu điều khoản còn mơ hồ."
-      }
+      },
+      "cau_goi": "chuyển việc"
     },
     "dau_tu": {
       "ten": "đầu tư",
@@ -286,7 +291,8 @@
         "day_manh": "Tháng thuận: giải ngân từng đợt nhỏ theo kế hoạch đã viết sẵn.",
         "can_bang": "Tháng đều nhịp: tìm hiểu kênh, hỏi người có chuyên môn, chưa cần giải ngân gấp.",
         "phong_thu": "Tháng nên đi chậm: không giải ngân khoản lớn, giữ tiền mặt và rà lại kế hoạch."
-      }
+      },
+      "cau_goi": "đầu tư"
     },
     "gop_von": {
       "ten": "góp vốn, làm chung",
@@ -303,7 +309,8 @@
         "day_manh": "Tháng thuận: ký thoả thuận và chuyển vốn nếu bản chữ đã được cả hai đọc kỹ.",
         "can_bang": "Tháng đều nhịp: soạn thoả thuận, chia việc, hỏi luật sư; chưa cần chuyển vốn gấp.",
         "phong_thu": "Tháng nên đi chậm: chưa ký, chưa chuyển vốn; dùng thời gian nói rõ phần việc hai bên."
-      }
+      },
+      "cau_goi": "góp vốn làm chung"
     },
     "mua_nha": {
       "ten": "mua nhà, chuyển chỗ ở",
@@ -320,7 +327,8 @@
         "day_manh": "Tháng thuận: đặt cọc, ký hợp đồng và nhận nhà nếu pháp lý đã sạch.",
         "can_bang": "Tháng đều nhịp: xem nhà, kiểm pháp lý, tính vay; chưa cần đặt cọc gấp.",
         "phong_thu": "Tháng nên đi chậm: chưa đặt cọc, chưa ký; dùng thời gian rà giấy tờ."
-      }
+      },
+      "cau_goi": "mua nhà"
     },
     "tinh_cam": {
       "ten": "chuyện tình cảm, hôn nhân",
@@ -337,7 +345,8 @@
         "day_manh": "Tháng thuận: bàn chuyện nghiêm túc, gặp gia đình hai bên, chốt kế hoạch nếu hai người đã đồng ý.",
         "can_bang": "Tháng đều nhịp: nói chuyện đều đặn về tiền, nhà ở, con cái; chưa cần chốt ngày.",
         "phong_thu": "Tháng nên đi chậm: chưa quyết chuyện lớn, ưu tiên nghe nhau và gặp thêm gia đình."
-      }
+      },
+      "cau_goi": "kết hôn"
     },
     "gia_dao": {
       "ten": "chuyện gia đạo, hoà giải trong nhà",
@@ -354,7 +363,8 @@
         "day_manh": "Tháng thuận: mở lời về chuyện lớn, nhờ người trung gian nếu cần.",
         "can_bang": "Tháng đều nhịp: nói chuyện nhẹ đều đặn, tránh dồn chuyện cũ.",
         "phong_thu": "Tháng nên đi chậm: chưa nói chuyện nặng, ưu tiên giữ không khí yên."
-      }
+      },
+      "cau_goi": "hoà giải chuyện vợ chồng cãi nhau"
     },
     "suc_ben": {
       "ten": "lấy lại sức",
@@ -371,7 +381,8 @@
         "day_manh": "Tháng thuận: xin nghỉ phép dài, đổi nhịp làm việc cho nhẹ hơn.",
         "can_bang": "Tháng đều nhịp: giữ giờ ngủ và vận động nhẹ đều đặn.",
         "phong_thu": "Tháng nên đi chậm: giảm việc, ưu tiên nghỉ ngơi, đi khám nếu mệt kéo dài."
-      }
+      },
+      "cau_goi": "lấy lại sức sau khi kiệt sức"
     }
   },
   "hieu_cau": {
@@ -455,5 +466,11 @@
   "doan": {
     "mot": "{t}",
     "nhieu": "{a}–{b}"
+  },
+  "tiep_theo": {
+    "thang": "Tôi có nên {cau_goi} vào {thang} không?",
+    "nhan_thang": "Thử {thang}: tháng nhiều cách cùng thuận",
+    "nam": "Tôi có nên {cau_goi} năm {nam} không?",
+    "nhan_nam": "Xem cả năm {nam}"
   }
 }

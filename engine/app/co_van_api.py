@@ -132,3 +132,14 @@ def api_co_van_su_vu(inp: SuVuIn) -> dict:
         raise HTTPException(422, detail=str(e)) from e
     return {"engine_version": ENGINE_VERSION, **kq}
 
+
+
+class NhanDienIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    cau_hoi: str = Field(..., min_length=3, max_length=500)
+
+
+@router.post("/v1/co-van/nhan-dien")
+def api_co_van_nhan_dien(inp: NhanDienIn) -> dict:
+    """Khung hỏi đáp hỏi: câu vừa hỏi có phải một quyết định Cố vấn đọc được không (không ngày sinh, không lưu)."""
+    return cv.nhan_dien(inp.cau_hoi)

@@ -495,6 +495,18 @@ def lap(
         "tieu_de_nen_giu": mau["nen_giu"],
         "nhan_manh": tl["nhan_manh"],
     }
+    # CV-4: "thử khung khác" — câu hỏi tiếp đã dựng sẵn để bấm (mỗi câu đọc lại ra ĐÚNG việc đó): tháng thuận đầu tiên chưa được hỏi,
+    # rồi năm kế tiếp khi đang xem năm nay. Chỉ cho việc có bước hành động theo ngày (mở, ký, chuyển, đầu tư…).
+    tiep_theo: list[dict] = []
+    if v.ma in _CO_NGAY:
+        tt = k["tiep_theo"]
+        thang_khac = [(y, m) for y, m in th_mo if not (khung["thang"] == m and not khung["mac_dinh"])]
+        if thang_khac:
+            y, m = thang_khac[0]
+            tiep_theo.append({"loai": "thang", "nhan": tt["nhan_thang"].format(thang=_ten_thang(m, y, vi)),
+                              "cau": tt["thang"].format(cau_goi=vk["cau_goi"], thang=_ten_thang(m, y, vi) if vi else f"{_THANG_EN[m - 1]} {y}")})
+        if nam_k == config.hom_nay_vn().year and nam_k + 1 <= config.hom_nay_vn().year + 1:
+            tiep_theo.append({"loai": "nam", "nhan": tt["nhan_nam"].format(nam=nam_k + 1), "cau": tt["nam"].format(cau_goi=vk["cau_goi"], nam=nam_k + 1)})
     kieu_ten = k["hieu_cau"]["kieu"][hc["kieu"]]
     ten_khung_hc = (k["hieu_cau"]["khung"]["mac_dinh"] if khung["mac_dinh"] else
                     k["hieu_cau"]["khung"]["thang"].format(thang=_ten_thang(khung["thang"], nam_k, vi)) if khung["thang"] is not None
@@ -559,6 +571,7 @@ def lap(
         "lien_ket_mach": m_kb["lien_ket"],
         "hieu_cau": hieu_cau_ra,
         "tra_loi": tra_loi,
+        "tiep_theo": tiep_theo,
         "bac_dau_vao": bac,
         "lop_da_dung": lop_da_dung,
         "goi_y_nang_bac": goi_y_nang,
@@ -575,3 +588,18 @@ def lap(
 def _y_nam(n: int) -> str:
     """Nghĩa năm cá nhân từ KB Bản đồ con số (một nguồn với /than-so)."""
     return (nap.doc("thanso_ban_do.json").get("nam_doc_thang") or {}).get(str(n), "")
+
+
+def nhan_dien(cau_hoi: str) -> dict:
+    """Câu hỏi này có phải MỘT QUYẾT ĐỊNH mà Cố vấn đọc được không? (cho khung hỏi đáp gợi ý "xem ba cách nhìn"). Không tính gì,
+    không lưu. Câu khủng hoảng / từ chối / về người khác / chuyện đã xảy ra → không gợi ý (chỉ khung hỏi đáp xử lý)."""
+    nhan_ra = {"nhan_ra": False, "viec": None, "kieu": None}
+    t = chung.chuan_hoa_cau(cau_hoi or "")
+    if _kiem_an_toan(cau_hoi) is not None or lhk.noi_ve_nguoi_khac(cau_hoi, t) or lhk.ke_su_viec(t):
+        return nhan_ra
+    kieu = ch_hieu.kieu(t)
+    v = ch_hieu.viec(t)
+    if v is None or kieu == "kien_thuc":
+        return nhan_ra
+    ten = _kb()["viec"][v.ma]["ten"]
+    return {"nhan_ra": True, "viec": {"ma": v.ma, "ten": ten, "khong_gian": v.khong_gian}, "kieu": kieu}

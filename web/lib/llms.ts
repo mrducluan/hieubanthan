@@ -67,6 +67,7 @@ export async function taoLlmsTxt(): Promise<string> {
     `- [Bản đồ Đội ngũ](${urlDayDu("/quan-ly-nhan-su")}): Radar 5 hành & phối hợp 2 chiều cho 1–8 cộng sự (chủ DN & quản lý).`,
     `- [Gói xem & Bảng giá](${urlDayDu("/goi-xem")}): phần miễn phí, mức Sao, hội viên năm và hoàn tiền.`,
     `- [Chiêm tinh](${urlDayDu("/chiem-tinh")}): bản đồ sao theo ngày, giờ, nơi sinh — cung Mặt Trời, Mặt Trăng, Cung Mọc, 12 nhà, góc chiếu; đặt cạnh Bát tự, Tử vi, không chấm điểm.`,
+    `- [Hỏi một quyết định (Cố vấn)](${urlDayDu("/co-van")}): nêu việc định làm (mở shop, mua nhà, nghỉ việc, góp vốn…) và ngày sinh — tháng nào hợp, điều kiện nên có, hướng mặt tiền; không trả lời có/không thay người dùng.`,
     `- [Kỳ Môn Độn Giáp](${urlDayDu("/ky-mon")}): giờ này hướng nào thuận, hợp việc gì; không cần ngày sinh.`,
     `- [Xem tuổi làm nhà, cưới hỏi](${urlDayDu("/xem-tuoi-lam-nha")}): tuổi mụ có phạm Kim lâu, Hoang ốc, Tam tai không, năm thuận gần nhất; trang theo năm sinh dạng ${urlDayDu(`/xem-tuoi-lam-nha/${nam}/tuoi-1990`)}, bảng mọi tuổi một năm dạng ${urlDayDu(`/xem-tuoi-lam-nha/${nam}`)}.`,
     `- [Hướng xấu theo năm](${urlDayDu("/phong-thuy/huong-xau-nam")}): Thái Tuế, Tuế Phá, Tam Sát, Ngũ Hoàng, Nhị Hắc + bàn phi tinh 9 cung (dạng ${urlDayDu(`/phong-thuy/huong-xau-nam/${nam}`)}).`,

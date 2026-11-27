@@ -9,7 +9,7 @@ import { DuongDan } from "@/components/khung/DuongDan";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { HoiDapHien, TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { KhungChiemTinh } from "@/components/chiem-tinh/KhungChiemTinh";
-import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
+import { anhBai, goiLd, ldAnh, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
 import { duongDanCongCu } from "@/lib/duong-dan";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
 
@@ -54,6 +54,7 @@ export default async function ChiemTinhPage() {
           name: h1,
           url: urlDayDu(DUONG),
           description: MAC.moTa,
+          image: ldAnh(anhBai({ tieuDe: h1 }), h1),        // Image metadata (bản quyền ảnh) — cùng khối với primaryImageOfPage của WebPage
           applicationCategory: "LifestyleApplication",
           operatingSystem: "Web",
           inLanguage: "vi-VN",

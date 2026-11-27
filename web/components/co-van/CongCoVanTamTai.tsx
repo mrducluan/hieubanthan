@@ -15,6 +15,7 @@ import { useHoSoNha } from "@/lib/ho-so-nha";
 import { useMatBang } from "@/lib/mat-bang";
 import { cn } from "@/lib/utils";
 import { huongTuCuaHang, huongTuHoSoNha, type HuongChon } from "@/lib/huong-co-van";
+import { cauTuUrl, layCauChoCoVan } from "@/lib/cau-hoi-co-van";
 import { HuongKhongGian, TEN_NGUON_HUONG, type NguonHuong } from "./HuongKhongGian";
 
 interface TruTamTai {
@@ -47,6 +48,7 @@ interface KetQuaTamTai {
     khung: { nam: number; thang: number | null; mac_dinh: boolean; nhan: string };
     ghi_chu: string | null;
   };
+  tiep_theo?: { loai: "thang" | "nam"; nhan: string; cau: string }[];
   tra_loi?: {
     cau: string;
     nghieng: "thuan" | "can_nhac" | "chuan_bi";
@@ -136,11 +138,12 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
   const [loi, setLoi] = useState<string | null>(null);
   const [kq, setKq] = useState<KetQuaTamTai | null>(null);
 
-  // CV-3: ?cau=… điền sẵn ô hỏi (từ nút ở trang khác); KHÔNG tự gửi, và ô vẫn sửa được.
+  // CV-3/CV-4: điền sẵn ô hỏi từ trang khác — câu NGƯỜI DÙNG GÕ đến qua sessionStorage (đọc một lần), câu gợi ý cố định qua ?cau=
+  // (chỉ nhận câu thuộc danh mục). KHÔNG tự gửi, ô vẫn sửa được.
   useEffect(() => {
     try {
-      const c = new URLSearchParams(window.location.search).get("cau");
-      if (c) setCauHoi(c.replace(/\s+/g, " ").trim().slice(0, 300));
+      const c = layCauChoCoVan() ?? cauTuUrl(new URLSearchParams(window.location.search).get("cau"));
+      if (c) setCauHoi(c);
     } catch { /* bỏ qua */ }
   }, []);
 
@@ -155,8 +158,9 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
     if (hs.noi_sinh) setNoiSinh(hs.noi_sinh);
   }, [hs]);
 
-  async function guiCoVan(ghiDe?: { mat_bang?: HuongChon; nha?: HuongChon; nguon?: NguonHuong }) {
-    if (cauHoi.trim().length < 3 || !ngaySinh || dang) return;
+  async function guiCoVan(ghiDe?: { mat_bang?: HuongChon; nha?: HuongChon; nguon?: NguonHuong; cau?: string }) {
+    const cauGui = (ghiDe?.cau ?? cauHoi).trim();
+    if (cauGui.length < 3 || !ngaySinh || dang) return;
     const coDoiTac = moBac3 && /^\d{4}-\d{2}-\d{2}$/.test(ngaySinhDoiTac);
     if (coDoiTac && !dongYDoiTac) {
       setLoi("Cần đánh dấu người liên quan đã đồng ý cho dùng ngày sinh, hoặc xoá ngày sinh người ấy.");
@@ -171,7 +175,7 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
       setNguonDia(ghiDe?.mat_bang ? (ghiDe.nguon ?? null) : huongChon?.mat_bang ? (huongChon.nguon ?? null) : cuaHangHoSo ? "ho_so_cua_hang"
         : ghiDe?.nha ? (ghiDe.nguon ?? null) : huongChon?.nha ? (huongChon.nguon ?? null) : nhaHoSo ? "ho_so_nha" : null);
       const body: Record<string, unknown> = {
-        cau_hoi: cauHoi.trim(),
+        cau_hoi: cauGui,
         ngay_sinh: ngaySinh,
         gioi_tinh: gioiTinh,
         gio_sinh: coGio ? gioSinh.trim() : null,
@@ -456,6 +460,20 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
             </div>
             <p className="mt-4 text-xs text-fg-faint">{kq.tra_loi.nhan_manh}</p>
           </section>
+
+          {/* CV-4: thử khung khác — câu hỏi tiếp dựng sẵn (tháng thuận đầu tiên, năm kế tiếp), bấm là hỏi lại ngay */}
+          {kq.tiep_theo && kq.tiep_theo.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2" data-testid="co-van-tiep-theo">
+              <span className="text-xs text-fg-muted">Thử khung khác:</span>
+              {kq.tiep_theo.map((t) => (
+                <button key={t.cau} type="button" disabled={dang}
+                  onClick={() => { ghi("chart_interacted", { mo_dun: "tam_tai", kind: "co_van_tiep_theo", loai: t.loai }); setCauHoi(t.cau); void guiCoVan({ cau: t.cau }); }}
+                  className="min-h-10 rounded-full border border-gold/45 bg-gold/10 px-3.5 py-1.5 text-xs font-medium text-gold transition-colors hover:bg-gold/20 disabled:opacity-60">
+                  {t.nhan}
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* HƯỚNG: chỉ khi việc này đụng tới không gian — lấy từ hồ sơ trên máy, hoặc đo / chọn như ở Phong thuỷ */}
           {(kq.can_bo_sung || doiHuong) && kq.hieu_cau.viec.khong_gian !== "khong" && (

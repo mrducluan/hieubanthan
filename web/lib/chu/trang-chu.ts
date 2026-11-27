@@ -112,6 +112,16 @@ export const CHU_TRANG_CHU = {
     [`mang.${k}_mo`, { nhom: M, nhan: `Thẻ ${ten} — mô tả`, mac_dinh: mo, toi_da: 80 }],
   ])),
 
+  // CV-4: ô hỏi một quyết định (trang chủ) → /co-van.
+  "cv.nho": { nhom: G, nhan: "Dòng nhỏ trên tiêu đề mục (cũng là nhãn ô nhập)", mac_dinh: "Bạn đang cân nhắc điều gì?", toi_da: 60 },
+  "cv.lon": { nhom: G, nhan: "Tiêu đề mục", mac_dinh: "Một quyết định cần chọn thời điểm?", toi_da: 120 },
+  "cv.mo_ta": { nhom: G, nhan: "Mô tả dưới tiêu đề", toi_da: 300,
+    mac_dinh: "Mở shop, mua nhà, nghỉ việc, góp vốn: gõ câu hỏi như hỏi một người quen. Hệ thống nói tháng nào hợp, cần chuẩn bị gì, hướng cửa có hợp không, và nói rõ khi các cách xem nhìn khác nhau." },
+  "cv.o_goi_y": { nhom: G, nhan: "Chữ gợi trong ô nhập", mac_dinh: "Ví dụ: Năm sau tôi có nên mở shop không?", toi_da: 80 },
+  "cv.nut": { nhom: G, nhan: "Chữ nút", mac_dinh: "Hỏi Cố vấn", toi_da: 30 },
+  "cv.chip_nhan": { nhom: G, nhan: "Nhãn cho trình đọc màn hình của hàng câu gợi ý", mac_dinh: "Câu hỏi thường gặp", toi_da: 60 },
+  "cv.ghi_chu": { nhom: G, nhan: "Dòng nhỏ dưới ô", mac_dinh: "Miễn phí, không lưu câu hỏi. Chưa biết giờ sinh vẫn xem được.", toi_da: 120 },
+  "cv.lien_kinh_doanh": { nhom: G, nhan: "Link phụ (mở /co-van-kinh-doanh)", mac_dinh: "Dành cho chủ cơ sở", toi_da: 40 },
   "ghep.nho": { nhom: G, nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Ghép lại cho rõ", toi_da: 60 },
   "ghep.lon": { nhom: G, nhan: "Tiêu đề mục", mac_dinh: "Khi một cách nhìn chưa đủ", toi_da: 120 },
   "ghep.mo_ta": { nhom: G, nhan: "Mô tả dưới tiêu đề", toi_da: 300,

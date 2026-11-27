@@ -203,3 +203,59 @@ def test_ban_tieng_anh_cung_khung_va_sach_chu_viet():
     assert not _VIET.search(json.dumps({k: v for k, v in en.items() if k != "ngay_xem"}, ensure_ascii=False))
     vi = _goi(_SHOP, **kw)
     assert dr.khung(vi) == dr.khung(en)
+
+
+# ---- 7. CV-4: "thử khung khác" + nhận diện quyết định cho khung hỏi đáp ---------------------------------------------------
+def test_tiep_theo_tu_hoi_lai_dung_viec_va_dung_thang_thuan():
+    d = _goi(_SHOP, **_CO_GIO)
+    tt = d["tiep_theo"]
+    assert 1 <= len(tt) <= 2 and all(x["cau"] and x["nhan"] for x in tt)
+    ds = [t for dn in d["thoi_gian"]["doan"] if dn["nhip"] == "day_manh" for t in dn["thang"]]
+    thang_dau = min(ds, key=lambda s: int(s[1:].split("/")[0]))
+    nho = _goi(tt[0]["cau"], **_CO_GIO)
+    assert nho["hieu_cau"]["viec"]["ma"] == "mo_cua_hang"
+    assert f"T{nho['hieu_cau']['khung']['thang']}/{nho['hieu_cau']['khung']['nam']}" == thang_dau
+    assert nho["tra_loi"]["thang_hoi"]["nhip"] == "day_manh"
+
+
+def test_tiep_theo_nam_sau_khi_dang_xem_nam_nay():
+    d = _goi("Năm nay tôi có nên mở shop không?", **_CO_GIO)
+    sau = [x for x in d["tiep_theo"] if "2027" in x["cau"]]
+    assert sau and _goi(sau[0]["cau"], **_CO_GIO)["hieu_cau"]["khung"]["nam"] == 2027
+
+
+def test_tiep_theo_chi_cho_viec_co_ngay_hanh_dong():
+    for cau in ("Năm sau tôi có nên kết hôn không?", "Dạo này mất ngủ kiệt sức, làm sao lấy lại sức?"):
+        assert _goi(cau, **_CO_GIO)["tiep_theo"] == []
+
+
+def test_moi_viec_co_cau_goi_doc_lai_dung_viec_ca_hai_ngon_ngu():
+    from app.hoidap import chung
+    from app.kb import nap
+    from app.luangiai import co_van_hieu as ch
+    for ngon in ("vi", "en"):
+        from app import ngon_ngu
+        with ngon_ngu.dung(ngon):
+            for ma, v in nap.doc("co_van_tam_tai_kb.json")["viec"].items():
+                got = ch.viec(chung.chuan_hoa_cau(v["cau_goi"]))
+                assert got and got.ma == ma, (ngon, ma, v["cau_goi"])
+
+
+def test_nhan_dien_quyet_dinh_cho_khung_hoi_dap():
+    ok = _C.post("/v1/co-van/nhan-dien", json={"cau_hoi": "Năm sau tôi có nên mở quán cà phê không?"}).json()
+    assert ok["nhan_ra"] and ok["viec"]["ma"] == "mo_quan" and ok["kieu"] == "co_nen"
+    for cau in ("Tôi muốn tự tử", "Chồng tôi có ngoại tình không", "Vừa bị lừa mất tiền, có nên kiện không",
+                "Sao Thiên Cơ ở cung Mệnh nghĩa là gì?"):
+        r = _C.post("/v1/co-van/nhan-dien", json={"cau_hoi": cau}).json()
+        assert not r["nhan_ra"] and r["viec"] is None, cau
+
+
+def test_cau_goi_y_cua_web_deu_la_quyet_dinh_doc_duoc():
+    """Danh mục chip của web (web/lib/cau-hoi-co-van.ts CAU_QUYET_DINH) — mỗi câu phải được Cố vấn nhận ra và không bị chặn."""
+    cau = ["Năm sau tôi có nên mở shop kinh doanh không?", "Có nên mở quán cà phê vào đầu năm sau không?",
+           "Năm sau tôi có nên nghỉ việc ra làm riêng không?", "Có nên mua nhà cuối năm sau không?",
+           "Có nên góp vốn làm chung với bạn không?", "Năm sau tôi có nên kết hôn không?"]
+    for c in cau:
+        r = _C.post("/v1/co-van/nhan-dien", json={"cau_hoi": c}).json()
+        assert r["nhan_ra"], c
+        assert _goi(c, **_CO_GIO).get("tra_loi"), c

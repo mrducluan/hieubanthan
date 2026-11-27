@@ -320,6 +320,11 @@ export const SO_TRANG: readonly MucSoTrang[] = [
     mo_ta_seo: "Lập bản đồ sao theo ngày, giờ, nơi sinh: cung Mặt Trời, Mặt Trăng, Cung Mọc, 12 nhà, góc chiếu, đặt cạnh Bát tự và Tử vi. Miễn phí, không lưu dữ liệu.",
     loi_dan: "Nhập ngày sinh để xem các hành tinh nằm ở cung hoàng đạo nào lúc bạn ra đời. Có giờ và nơi sinh thì xem thêm Cung Mọc, 12 nhà; chưa biết giờ vẫn xem được cung Mặt Trời và cung Mặt Trăng.",
   } },
+  { duong: "/co-van", nhom: "tinh", ten: "Hỏi một quyết định (Cố vấn)", o: O_TINH, mac_dinh: {   // CV-4: mở cho tìm kiếm
+    tieu_de_seo: "Có nên mở shop, mua nhà, nghỉ việc? Hỏi theo ngày sinh", h1: "Có nên mở shop, mua nhà, nghỉ việc? Hỏi một quyết định, xem ba cách nhìn",
+    mo_ta_seo: "Nêu việc bạn định làm và ngày sinh: hệ thống nói tháng nào hợp, cần chuẩn bị gì, hướng cửa có hợp không, và nói rõ khi các cách xem nhìn khác nhau. Miễn phí, không lưu.",
+    loi_dan: "Nêu điều bạn đang cân nhắc và ngày sinh (chưa biết giờ sinh vẫn xem được). Ba cách xem đọc riêng: sức của chính bạn, thời điểm của đúng năm hoặc tháng bạn hỏi, và không gian khi việc đụng tới. Khi chúng nói khác nhau, trang nói rõ chứ không chọn thay bạn.",
+  } },
   { duong: "/li-xi-tet-2027", nhom: "tinh", ten: "LÌ XÌ TẾT 2027", o: O_TINH, mac_dinh: {   // LX-2027 (0042)
     tieu_de_seo: "LÌ XÌ TẾT 2027 — Phong bao Đinh Mùi mở trọn Báo cáo Năm 2027", h1: "LÌ XÌ TẾT 2027",
     mo_ta_seo: "Tặng bạn bè, người thân, đối tác Bao LÌ XÌ TẾT 2027 (chọn chất liệu gấm lụa, hoa mai, hoa đào, linh vật Đinh Mùi, pháo hoa) mở trọn Báo cáo Năm 2027 cá nhân hoá. Người nhận tự nhập ngày sinh, riêng tư tuyệt đối.",

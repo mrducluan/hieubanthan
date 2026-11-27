@@ -140,8 +140,89 @@ test("lối vào Cố vấn + Chiêm tinh: menu, hub Huyền học, điền sẵ
   await menu.getByText("Huyền học", { exact: true }).first().hover();
   await expect(page.getByRole("link", { name: /Chiêm tinh phương Tây/ }).first()).toBeVisible();
 
-  // ?cau= điền sẵn, không tự gửi, sửa được
-  await page.goto("/co-van?cau=" + encodeURIComponent("Năm sau tôi có nên mở quán cà phê không?"));
-  await expect(page.getByTestId("co-van-o-cau-hoi")).toHaveValue("Năm sau tôi có nên mở quán cà phê không?");
+  // ?cau= chỉ điền câu gợi ý CỐ ĐỊNH của danh mục (không tự gửi); câu lạ trên URL bị bỏ qua
+  const chip = "Có nên mở quán cà phê vào đầu năm sau không?";
+  await page.goto("/co-van?cau=" + encodeURIComponent(chip));
+  await expect(page.getByTestId("co-van-o-cau-hoi")).toHaveValue(chip);
   await expect(page.getByTestId("co-van-ket-qua")).toHaveCount(0);
+  await page.goto("/co-van?cau=" + encodeURIComponent("Câu lạ do người khác dựng link"));
+  await expect(page.getByTestId("co-van-o-cau-hoi")).toHaveValue("");
 });
+
+test("CV-4: ô hỏi ở trang chủ → /co-van điền sẵn; chữ người dùng gõ KHÔNG lên URL", async ({ page }) => {
+  await page.goto("/");
+  const o = page.getByTestId("hoi-quyet-dinh-o");
+  await o.scrollIntoViewIfNeeded();
+  await expect(page.getByTestId("hoi-quyet-dinh-gui")).toBeDisabled();
+  const cau = "Tôi muốn mở tiệm bánh ở quê, năm sau có nên không?";
+  await o.fill(cau);
+  await page.getByTestId("hoi-quyet-dinh-gui").click();
+  await expect(page).toHaveURL(/\/co-van$/);
+  expect(page.url()).not.toContain("cau=");
+  await expect(page.getByTestId("co-van-o-cau-hoi")).toHaveValue(cau);
+  // chip cố định đi bằng ?cau=
+  await page.goto("/");
+  await page.getByTestId("hoi-quyet-dinh").getByRole("link", { name: /mở shop kinh doanh/ }).click();
+  await expect(page.getByTestId("co-van-o-cau-hoi")).toHaveValue("Năm sau tôi có nên mở shop kinh doanh không?");
+});
+
+test("CV-4: kết quả có 'thử khung khác' — bấm là hỏi lại ngay đúng tháng thuận / năm kế", async ({ page }) => {
+  await page.goto("/co-van");
+  await page.getByTestId("co-van-o-cau-hoi").fill("Năm nay tôi có nên mở shop không?");
+  await page.getByTestId("co-van-ngay-sinh").fill("1988-12-02");
+  await page.getByTestId("co-van-nut-gui").click();
+  await expect(page.getByTestId("co-van-ket-qua")).toBeVisible({ timeout: 20_000 });
+  const tiep = page.getByTestId("co-van-tiep-theo");
+  await expect(tiep).toBeVisible();
+  await tiep.getByRole("button").last().click();           // "Xem cả năm {năm sau}"
+  await expect(page.getByTestId("co-van-hieu-cau")).toContainText("năm 20", { timeout: 20_000 });
+  await expect(page.getByTestId("co-van-o-cau-hoi")).toHaveValue(/năm 20\d\d không\?$/);
+});
+
+test("CV-4: /co-van mở cho tìm kiếm (không noindex), có hỏi đáp + schema, nằm trong sitemap; API nhận diện quyết định", async ({ page, request }) => {
+  const res = await page.goto("/co-van");
+  expect(res?.status()).toBe(200);
+  for (const r of await page.locator('meta[name="robots"]').evaluateAll((els) => els.map((e) => e.getAttribute("content") ?? ""))) expect(r).not.toContain("noindex");
+  await expect(page).toHaveTitle(/Có nên mở shop, mua nhà, nghỉ việc/);
+  const ld = (await page.locator('script[type="application/ld+json"]').allTextContents()).join(" ");
+  for (const k of ["FAQPage", "WebApplication", "BreadcrumbList"]) expect(ld).toContain(k);
+  await expect(page.getByTestId("tra-loi-nhanh").or(page.locator("details").first())).toBeVisible();
+  const sm = await (await request.get("/sitemap.xml")).text();
+  expect(sm).toContain("/co-van</loc>");
+
+  const ok = await request.post("/api/co-van/nhan-dien", { data: { cau_hoi: "Năm sau tôi có nên mở quán cà phê không?" } });
+  expect(await ok.json()).toMatchObject({ nhan_ra: true, viec: { ma: "mo_quan" } });
+  const khung = await request.post("/api/co-van/nhan-dien", { data: { cau_hoi: "Tôi muốn tự tử" } });
+  expect(await khung.json()).toMatchObject({ nhan_ra: false, viec: null });
+});
+
+// Search Console → "Breadcrumbs" và "Image metadata": mỗi trang MỘT BreadcrumbList khớp đường hiển thị; mọi ImageObject trong
+// dữ liệu có cấu trúc mang đủ creator / creditText / copyrightNotice / license / acquireLicensePage và kích thước.
+for (const [duong, tenCuoi, soCap] of [["/co-van", "Hỏi một quyết định", 2], ["/chiem-tinh", "Chiêm tinh", 3]] as const) {
+  test(`dữ liệu có cấu trúc ${duong}: breadcrumb khớp đường hiển thị + metadata ảnh đủ`, async ({ page }) => {
+    await page.goto(duong);
+    const khoi = await page.locator('script[type="application/ld+json"]').allTextContents();
+    const nut: Record<string, unknown>[] = [];
+    const gom = (o: unknown) => {
+      if (Array.isArray(o)) o.forEach(gom);
+      else if (o && typeof o === "object") { const r = o as Record<string, unknown>; nut.push(r); Object.values(r).forEach(gom); }
+    };
+    khoi.forEach((k) => gom(JSON.parse(k)));
+
+    const bc = nut.filter((n) => n["@type"] === "BreadcrumbList");
+    expect(bc, "đúng một BreadcrumbList").toHaveLength(1);
+    const ds = bc[0]!.itemListElement as { position: number; name: string; item: string }[];
+    expect(ds).toHaveLength(soCap);
+    ds.forEach((x, i) => { expect(x.position).toBe(i + 1); expect(x.item).toMatch(/^https:\/\/hieuban\.com\//); });
+    expect(ds.at(-1)!.name).toContain(tenCuoi);
+    // đường hiển thị trên trang = cùng thứ tự, cùng chữ
+    const hien = await page.locator('nav[aria-label*="Đường dẫn"] a, nav[aria-label*="đường dẫn"] a, nav[aria-label*="readcrumb"] a').allInnerTexts();
+    if (hien.length) expect(hien.map((t) => t.trim())).toEqual(ds.slice(0, hien.length).map((x) => x.name));
+
+    const anh = nut.filter((n) => n["@type"] === "ImageObject" && typeof n.contentUrl === "string" && !String(n.contentUrl).includes("/thuong-hieu/"));
+    expect(anh.length).toBeGreaterThan(0);
+    for (const a of anh) {
+      for (const k of ["creator", "creditText", "copyrightNotice", "license", "acquireLicensePage", "width", "height", "caption"]) expect(a[k], `${k} của ${a.contentUrl}`).toBeTruthy();
+    }
+  });
+}
