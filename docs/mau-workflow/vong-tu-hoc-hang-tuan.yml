@@ -1,0 +1,88 @@
+# Chặng 5 — Tự động hoá Vòng Tuần Hoàn Tự Tiến Hoá `DB → KB` hàng tuần.
+# Kéo số liệu gộp ẩn danh (0% PII, không đọc câu chữ tự do) từ Supabase REST, chạy `tong_hop_vong_tu_hoc.py`
+# và mở/cập nhật Pull Request báo cáo ứng viên nâng cấp KB để Chủ dự án đọc duyệt (KHÔNG BAO GIỜ tự sửa KB hay tự merge).
+name: Vòng tự học DB-KB hàng tuần
+
+on:
+  schedule:
+    - cron: "30 1 * * 1"   # 08:30 sáng Thứ Hai hàng tuần (giờ Việt Nam GMT+7)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: vong-tu-hoc-hang-tuan
+  cancel-in-progress: true
+
+jobs:
+  tong-hop-tu-hoc:
+    runs-on: ubuntu-24.04
+    env:
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            engine/requirements.txt
+            engine/constraints.txt
+
+      - run: pip install -r engine/requirements.txt -c engine/constraints.txt
+
+      - name: Tổng hợp ứng viên nâng cấp KB từ Supabase (ẩn danh, 0% PII)
+        working-directory: engine
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          python scripts/tong_hop_vong_tu_hoc.py \
+            --tu-supabase \
+            --cho-phep-thieu-env \
+            --out-json ../docs/bao-cao-tu-hoc/tuan-moi-nhat.json \
+            --out-md ../docs/bao-cao-tu-hoc/tuan-moi-nhat.md
+
+      - name: Mở hoặc cập nhật Pull Request báo cáo tuần khi có hạng mục cần rà soát
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ ! -f docs/bao-cao-tu-hoc/tuan-moi-nhat.json ]; then
+            echo "Chưa cấu hình khóa Supabase trên GitHub Secrets — dừng êm."
+            exit 0
+          fi
+          TONG=$(python3 -c 'import json; print(json.load(open("docs/bao-cao-tu-hoc/tuan-moi-nhat.json"))["tong_can_xu_ly"])')
+          if [ "$TONG" -eq 0 ]; then
+            echo "Tuần này chưa có hộp KB nào chạm ngưỡng cần biên tập lại ($TONG mục)."
+            exit 0
+          fi
+          NHANH="tu-hoc/bao-cao-hang-tuan"
+          NGAY=$(python3 -c 'import json; print(json.load(open("docs/bao-cao-tu-hoc/tuan-moi-nhat.json"))["ngay_tong_hop"])')
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$NHANH"
+          git add docs/bao-cao-tu-hoc/tuan-moi-nhat.json docs/bao-cao-tu-hoc/tuan-moi-nhat.md
+          if git diff --cached --quiet; then
+            echo "Báo cáo không thay đổi so với bản trước."
+            exit 0
+          fi
+          git commit -m "TU-HOC: báo cáo ứng viên nâng cấp KB tuần ${NGAY} (${TONG} mục chờ duyệt)"
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" "HEAD:refs/heads/${NHANH}"
+          PR_CU=$(gh pr list --repo "$REPO" --head "$NHANH" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$PR_CU" ]; then
+            gh pr edit "$PR_CU" --repo "$REPO" \
+              --title "TU-HOC: báo cáo ứng viên nâng cấp KB tuần ${NGAY} (${TONG} mục)" \
+              --body-file docs/bao-cao-tu-hoc/tuan-moi-nhat.md
+          else
+            gh pr create --repo "$REPO" \
+              --base main \
+              --head "$NHANH" \
+              --title "TU-HOC: báo cáo ứng viên nâng cấp KB tuần ${NGAY} (${TONG} mục)" \
+              --body-file docs/bao-cao-tu-hoc/tuan-moi-nhat.md
+          fi
