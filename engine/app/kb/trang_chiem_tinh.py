@@ -177,7 +177,8 @@ def trang_cung(ma: str, slug: str) -> dict:
                 "doan": L("trang_ct.giap_ranh", "Sinh đúng ngày đổi cung thì phải có giờ sinh mới biết chắc. Tra năm sinh của bạn trong "
                           "bảng trên: sinh trước giờ ghi trong bảng là cung trước, sau giờ đó là cung sau. Sinh trước năm 1976 thì dùng ô "
                           "tra theo ngày sinh ở trang 12 cung hoàng đạo: ô này tính theo giờ đồng hồ thời ấy (có những giai "
-                          "đoạn đồng hồ miền Nam chạy UTC+8, nhanh hơn bây giờ một giờ, như 1960–1975)."),
+                          "đoạn đồng hồ miền Nam chạy UTC+8, nhanh hơn bây giờ một giờ, như 1960–1975). Sinh ở nước ngoài thì đổi giờ sinh "
+                          "sang giờ Việt Nam (UTC+7) trước khi so với bảng."),
                 "danh_sach": _giap_ranh(ma, "dau") + _giap_ranh(ma, "cuoi")})
     dong_nt = L("trang_ct.nt", "Nguyên tố {nt}: {y}. Cùng nguyên tố với {ds}.", nt=nt["ten"], y=nt["y"], ds=_noi([_ten(x) for x in cung_nt]))
     ds3 = [dong_nt,
@@ -185,12 +186,12 @@ def trang_cung(ma: str, slug: str) -> dict:
            (L("trang_ct.chu2", "Chủ tinh: {chu} theo lối cổ điển; lối hiện đại gán thêm {hd}.", chu=chu, hd=_hanh_tinh(chu_hd))
             if chu_hd else L("trang_ct.chu", "Chủ tinh: {chu}.", chu=chu)),
            L("trang_ct.hinh", "Hình tượng: {h}, ký hiệu {kh}.", h=k["hinh_tuong"], kh=c["ky_hieu"]),
-           L("trang_ct.doi", "Cung đối diện: {doi} — hai cung nằm hai đầu vòng hoàng đạo, nhìn cùng một chuyện từ hai phía.", doi=_ten(doi))]
+           L("trang_ct.doi", "Cung đối diện: {doi} — hai cung nằm đối diện nhau trên vòng hoàng đạo, nhìn cùng một chuyện từ hai phía.", doi=_ten(doi))]
     muc.append({"tieu_de": L("trang_ct.td.nt", "Cung {ten} thuộc nguyên tố gì, chủ tinh là gì?", ten=ten), "danh_sach": ds3})
     muc.append({"tieu_de": L("trang_ct.td.manh", "Điểm mạnh của người cung {ten}", ten=ten),
-                "danh_sach": [mt["diem_sang"], *k["diem_manh"]]})
+                "doan": mt["diem_sang"], "danh_sach": list(k["diem_manh"])})
     muc.append({"tieu_de": L("trang_ct.td.mu", "Điểm dễ vấp của người cung {ten}", ten=ten),
-                "danh_sach": [mt["nen_de_y"], *k["diem_mu"]]})
+                "doan": mt["nen_de_y"], "danh_sach": list(k["diem_mu"])})
     dong, va = _hop(ma)
     muc.append({"tieu_de": L("trang_ct.td.yeu", "Cung {ten} trong tình yêu", ten=ten),
                 "doan": k["tinh_yeu"],
@@ -231,7 +232,8 @@ def trang_cung(ma: str, slug: str) -> dict:
     return {"loai": "cung_hd", "slug": slug, "tieu_de": tieu_de, "mo_ta": mo_ta, "tra_loi_nhanh": tra_loi,
             "muc": muc, "hoi_dap": hoi_dap, "y_chinh": y_chinh,
             "lien_quan": [{"loai": "cung_hd", "slug": _slug_cua(x)} for x in dict.fromkeys((truoc, sau, doi))],
-            "lien_ket_ngoai": [{"duong": DUONG_CONG_CU, "ten": L("trang_ct.lk", "Lập bản đồ sao của bạn")}],
+            "lien_ket_ngoai": [{"duong": DUONG_CUM, "ten": L("trang_ct.lk_tra", "Tra cung theo ngày sinh")},
+                               {"duong": DUONG_CONG_CU, "ten": L("trang_ct.lk", "Lập bản đồ sao của bạn")}],
             "minh_hoa": {"kieu": "cung_hd", "ma": ma, "so": i + 1, "ten": ten, "ky_hieu": c["ky_hieu"], "nguyen_to": c["nguyen_to"]},
             "trang_thai": "nhap_ai",
             "nguon": [L("trang_ct.nguon1", "Ban biên tập Hiểu Bản Thân — cung Mặt Trời trong chiêm tinh phương Tây, theo cách hiểu phổ biến"),
