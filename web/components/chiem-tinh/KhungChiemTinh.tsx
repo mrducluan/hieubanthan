@@ -14,6 +14,7 @@ import { ngaySinhIso, NUOC_NGOAI, useHoSo } from "@/lib/hoso";
 import { urlTheoNgonNgu } from "@/lib/ngon-ngu";
 import { cn } from "@/lib/utils";
 import { BanDoSaoSvg, type GocChieuBieuDo, type GocChieuCheoBieuDo, type HanhTinhBieuDo } from "./BanDoSaoSvg";
+import { NutChiaSeBanDoSao, NutChiaSeHopDoiSao } from "./NutChiaSeSao";
 import {
   HeTrucQuanChiemTinh,
   type GocChieuDayDu,
@@ -119,6 +120,7 @@ interface KetQuaSynastry {
 }
 
 interface NoiSinhChon { tinh: string; ngoai: string; vung: "" | "north" | "south" }
+type NguoiThe = { ngay_sinh: string; gio_sinh: string | null; noi_sinh: string; vung_vn?: "north" | "south" };
 
 const NOI_TRONG: NoiSinhChon = { tinh: "", ngoai: "", vung: "" };
 
@@ -200,6 +202,10 @@ export function KhungChiemTinh() {
   const [dangTaiSyn, setDangTaiSyn] = useState(false);
   const [loiSyn, setLoiSyn] = useState<string | null>(null);
   const [kqSyn, setKqSyn] = useState<KetQuaSynastry | null>(null);
+  const [vaoBanDo, setVaoBanDo] = useState<{ nguoi: NguoiThe; gioiTinh: "nam" | "nu" } | null>(null);
+  const [vaoSyn, setVaoSyn] = useState<{ a: NguoiThe; b: NguoiThe } | null>(null);
+
+  useEffect(() => { if (window.location.hash === "#hop-doi") setTab("hop_doi"); }, []);
 
   const loiNoiSinh = en
     ? "Please select a birthplace (for births outside Vietnam, pick a city from the suggestions) so time zone and coordinates are exact."
@@ -250,6 +256,10 @@ export function KhungChiemTinh() {
       }
       const duLieu = body as KetQuaBanDo;
       setKq(duLieu);
+      setVaoBanDo({
+        nguoi: { ngay_sinh: ngaySinh, gio_sinh: gioSinh || null, noi_sinh: ma, ...(noiSinh.vung ? { vung_vn: noiSinh.vung } : {}) },
+        gioiTinh,
+      });
       if (duLieu.van_han?.ngay_xem && !ngayXem) setNgayXem(duLieu.van_han.ngay_xem);
     } catch {
       setLoi(en ? "Temporary connection issue." : "Mất kết nối tạm thời.");
@@ -297,6 +307,10 @@ export function KhungChiemTinh() {
         return;
       }
       setKqSyn(body as KetQuaSynastry);
+      setVaoSyn({
+        a: { ngay_sinh: ngaySinh, gio_sinh: gioSinh || null, noi_sinh: maA },
+        b: { ngay_sinh: nsDoiTac, gio_sinh: gioDoiTac || null, noi_sinh: maB },
+      });
     } catch {
       setLoiSyn(en ? "Temporary connection issue." : "Mất kết nối tạm thời.");
     } finally {
@@ -585,6 +599,17 @@ export function KhungChiemTinh() {
               </div>
             </div>
           </div>
+
+          {!en && vaoBanDo && (
+            <div className="flex justify-center" data-testid="ct-chia-se-sao">
+              <NutChiaSeBanDoSao
+                nguoi={vaoBanDo.nguoi}
+                gioiTinh={vaoBanDo.gioiTinh}
+                matTroi={kq.hanh_tinh.find((p) => p.ma === "mat_troi")?.cung_ten ?? null}
+                matTrang={kq.ghi_chu_mat_trang ? null : kq.hanh_tinh.find((p) => p.ma === "mat_trang")?.cung_ten ?? null}
+              />
+            </div>
+          )}
 
           {/* VẬN HẠN TRANSIT & SATURN / SOLAR RETURN */}
           {kq.van_han && (
@@ -897,6 +922,15 @@ export function KhungChiemTinh() {
                     </div>
                   </div>
                 )
+              )}
+              {!en && vaoSyn && (
+                <div className="flex justify-center pt-2" data-testid="syn-chia-se">
+                  <NutChiaSeHopDoiSao
+                    nguoiA={vaoSyn.a}
+                    nguoiB={vaoSyn.b}
+                    chuDe={kqSyn.cac_chieu_tuong_tac.find((c) => c.goc_chieu.length > 0)?.ten ?? null}
+                  />
+                </div>
               )}
             </div>
           )}

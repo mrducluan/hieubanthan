@@ -6,7 +6,7 @@
 // {tu: "nam_<trang>", den, ca_nhan} + `profile_created` (NhapHoSo ghi). Chỉ bản Việt (bản Anh chưa mở đủ các mảng này).
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowRight, CalendarHeart, Compass, HeartHandshake, Orbit, ScanFace, Sparkles, Sun, Users, type LucideIcon } from "lucide-react";
+import { ArrowRight, CalendarHeart, Compass, HeartHandshake, Orbit, ScanFace, Sparkles, Sun, Target, Users, type LucideIcon } from "lucide-react";
 import Link from "@/components/khung/Lien";
 import { NhapHoSo } from "@/components/hoso/NhapHoSo";
 import { ghi } from "@/lib/do-luong";
@@ -32,16 +32,19 @@ const HAI_NGUOI: LoiDi = { ma: "hai_nguoi", href: "/tu-vi#hop-tham", ten: "Lá s
   mo_ta: "Tử vi của hai bạn nhìn nhau thế nào, có điểm tham khảo." };
 const NHA_MINH = (nam: number): LoiDi => ({ ma: "gia_dinh", href: "/gia-dinh", ten: `Năm ${nam} của cả nhà`, Icon: Users,
   mo_ta: "Thêm người nhà: ai năm tuổi, Tam tai, tuổi ai hợp ai." });
+// CV-3: người đang đọc trang năm thường có một quyết định cụ thể trong năm (mở shop, mua nhà, cưới, nghỉ việc).
+const CO_VAN = (nam: number): LoiDi => ({ ma: "co_van", href: "/co-van", ten: "Hỏi một quyết định", Icon: Target,
+  mo_ta: `Mở shop, mua nhà, nghỉ việc trong ${nam}: tháng nào hợp, cần chuẩn bị gì.` });
 const NGAY_TOT: LoiDi = { ma: "ngay_tot", href: "/xem-ngay-tot", ten: "Chọn ngày cho cả nhà", Icon: CalendarHeart,
   mo_ta: "Ngày hợp việc, không xung tuổi cô dâu, chú rể, bố mẹ." };
 
 /** Lối đi theo nội dung trang — lối đầu là nơi form đưa tới sau khi nhập. */
 const LOI_DI: Record<TrangNam, (nam: number) => LoiDi[]> = {
-  nam: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), NHA_MINH(n)],
+  nam: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), CO_VAN(n)],
   tuoi: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), NHAN_TUONG],
   sinh_con: (n) => [TU_VI(n), BAT_TU, HOP_DOI, NHA_MINH(n)],
   cuoi_hoi: (n) => [TU_VI(n), HAI_NGUOI, NHA_MINH(n), NGAY_TOT],
-  lich_am: (n) => [TU_VI(n), BAT_TU, THOI_GIAN(n), NGAY_TOT],
+  lich_am: (n) => [TU_VI(n), THOI_GIAN(n), CO_VAN(n), NGAY_TOT],
 };
 const CHU: Record<TrangNam, { tieu_de: (nam: number) => string; cau: string }> = {
   nam: { tieu_de: (n) => `Năm ${n} với riêng bạn thì sao?`,

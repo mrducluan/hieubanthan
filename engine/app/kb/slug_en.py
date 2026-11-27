@@ -72,6 +72,10 @@ def tinh(loai: str, ten: object) -> str:
         from app.kb import tarot_kb, trang_tarot  # noqa: PLC0415 — slug lá bài có từ QTE-3 (giữ nguyên)
         with ngon_ngu.dung("vi"):
             return trang_tarot.slug_en(tarot_kb.la()[str(ten)]["en"])
+    if loai == "cung_hd":
+        from app.kb import nap as _nap  # noqa: PLC0415 — CHT-1: tên tiếng Anh của cung ("aries")
+        with ngon_ngu.dung("vi"):
+            return _slug(_nap.doc("chiem_tinh_cung_hoang_dao_kb.json")["cung"][str(ten)]["ten_en"])
     if loai in ("dau_hieu", "bo_vi", "co_thu"):
         s = (_bang().get(loai) or {}).get(str(ten))
         if not s:

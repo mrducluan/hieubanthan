@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import {
   ArrowRight, BookOpen, CalendarCheck, CalendarDays, CalendarRange, Check, Compass, DoorOpen, HeartHandshake, Home, Hourglass,
-  Layers, ListOrdered, MessageCircleQuestion, MoonStar, Navigation, Repeat, ScanFace, Sparkles, Sun, UserRound, type LucideIcon,
+  Layers, ListOrdered, MessageCircleQuestion, MoonStar, Navigation, Repeat, ScanFace, Sparkles, Star, Sun, Target, UserRound, type LucideIcon,
 } from "lucide-react";
 import { BaiLienQuanMang } from "@/components/blog/BaiLienQuanMang";
 import { HinhMang, type KieuMang } from "@/components/minh-hoa/TrangTri";
@@ -84,7 +84,7 @@ export default async function HuyenHoc() {
           <h1 className="mt-3 text-4xl leading-[1.1] sm:text-5xl lg:text-[3.4rem]">
             {nd.dau.h1 && nd.dau.h1 !== MD.h1
               ? <ChuNhan chu={nd.dau.h1} lopNhan="text-gradient-gold italic" />
-              : <><span className="text-gradient-gold italic">Huyền học</span> — tám cách nhìn lại mình</>}
+              : <><span className="text-gradient-gold italic">Huyền học</span> — chín cách nhìn lại mình</>}
           </h1>
           <LoiDanCms nd={nd} className="mt-4 max-w-xl text-base leading-relaxed text-fg-muted sm:text-lg">{MD.loi_dan}</LoiDanCms>
           <ul className="mt-5 hidden flex-wrap gap-2 text-sm text-fg-muted sm:flex" aria-label="Điểm khác biệt">
@@ -223,34 +223,19 @@ export default async function HuyenHoc() {
         </div>
       </section>
 
-      {/* CHANG-5: Lối vào trực quan cho Bản đồ sao Đông–Tây (/chiem-tinh) và Cố vấn Tam Tài & Kinh doanh (/co-van, /co-van-kinh-doanh). */}
-      <section aria-label="Bản đồ sao Đông–Tây và Cố vấn Tam Tài" data-testid="khoi-dong-tay-co-van" className="grid gap-4 lg:grid-cols-2">
-        <article className="glass group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-gold/35 bg-gradient-to-br from-gold/[0.07] via-surface/70 to-bg/50 p-6">
-          <div>
-            <p className="eyebrow text-gold">Đông – Tây đối chiếu · Không quy đổi</p>
-            <h2 className="mt-2 font-serif text-2xl text-fg sm:text-[1.7rem]">Chiêm tinh &amp; Cầu nối Đông – Tây</h2>
-            <p className="mt-2 text-sm leading-relaxed text-fg-muted">
-              Vòng tròn 12 Cung Hoàng đạo, Vòng đôi Vận hạn (Bi-Wheel Transit), Ma trận góc chiếu 13×13, Phẩm giá cổ điển Ptolemy và Lá số Điểm giữa (Composite) đặt cạnh Bát tự – Tử vi.
-            </p>
-          </div>
-          <div className="mt-5 flex flex-wrap items-center gap-3">
-            <Button asChild><Link href="/chiem-tinh">Lập bản đồ sao <ArrowRight aria-hidden /></Link></Button>
-            <Link href="/sinh-o-nuoc-ngoai" className="text-xs text-fg-muted underline-offset-4 hover:text-gold hover:underline">Hỗ trợ 33.000+ thành phố quốc tế</Link>
-          </div>
-        </article>
-        <article className="glass group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-jade/35 bg-gradient-to-br from-jade/[0.07] via-surface/70 to-bg/50 p-6">
-          <div>
-            <p className="eyebrow text-jade">Ba góc nhìn đọc riêng · Không gộp điểm</p>
-            <h2 className="mt-2 font-serif text-2xl text-fg sm:text-[1.7rem]">Cố vấn Tam Tài &amp; Kinh doanh</h2>
-            <p className="mt-2 text-sm leading-relaxed text-fg-muted">
-              Đặt một quyết định lớn trước Sơ đồ Tam Tài trực giao (Nhân · Bát tự, Thiên · Tử vi, Địa · Phong thuỷ), kèm Sự vụ tức thời (Kỳ Môn &amp; Lục Hào) và Sổ nháp góp vốn mã hoá trên máy.
-            </p>
-          </div>
-          <div className="mt-5 flex flex-wrap items-center gap-3">
-            <Button asChild><Link href="/co-van">Hỏi việc đời sống <ArrowRight aria-hidden /></Link></Button>
-            <Button asChild variant="secondary"><Link href="/co-van-kinh-doanh">Cố vấn kinh doanh</Link></Button>
-          </div>
-        </article>
+      {/* CV-3: hai trang trước đây không có lối vào nào ngoài đường dẫn trực tiếp: Cố vấn quyết định và Chiêm tinh. */}
+      <section aria-label={c("them.nho")} data-testid="khoi-hai-loi-khac">
+        <p className="eyebrow">{c("them.nho")}</p>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          <Link href="/co-van" className="glass group flex items-start gap-3 rounded-2xl p-4 hover:border-gold/50" data-testid="the-co-van">
+            <Target className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
+            <span><b className="text-fg">{c("them.cv_ten")}</b><span className="mt-1 block text-sm text-fg-muted">{c("them.cv_mo")}</span></span>
+          </Link>
+          <Link href="/chiem-tinh" className="glass group flex items-start gap-3 rounded-2xl p-4 hover:border-gold/50" data-testid="the-chiem-tinh">
+            <Star className="mt-0.5 size-5 shrink-0 text-gold" aria-hidden />
+            <span><b className="text-fg">{c("them.ct_ten")}</b><span className="mt-1 block text-sm text-fg-muted">{c("them.ct_mo")}</span></span>
+          </Link>
+        </div>
       </section>
 
       {/* RS-2: lối vào hai trang trả phí trước đây chỉ tới được từ Nạp Sao / Tài khoản. Hỏi chuyên gia chỉ hiện khi đang mở. */}

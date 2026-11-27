@@ -11,6 +11,7 @@ import { taoChu } from "@/lib/chu-trang";
 import { CO_TRANG_CHU, layCo } from "@/lib/kieu-chu";
 import { CHU_TRANG_CHU, DS_GHEP, SO_DIEM_MU } from "@/lib/chu/trang-chu";
 import { SoSanhChatbot } from "@/components/trang-chu/SoSanhChatbot";
+import { HoiQuyetDinh } from "@/components/trang-chu/HoiQuyetDinh";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
 import { TEN_SITE } from "@/lib/seo";
 import { BannerTrangChu } from "@/components/khung/BannerTrangChu";
@@ -135,6 +136,12 @@ export default async function TrangChu() {
             {c("mang.xem_tat_ca")} <ArrowRight className="size-4" aria-hidden />
           </Link>
         </div>
+      </section>
+
+      {/* CV-4: người đang cân nhắc một việc cụ thể (mở shop, mua nhà, nghỉ việc) gõ thẳng câu hỏi → Cố vấn. */}
+      <section aria-labelledby="hoi-quyet-dinh" className="hien-dan" data-testid="khoi-hoi-quyet-dinh">
+        <TieuDeMuc id="hoi-quyet-dinh" nho={c("cv.nho")} lon={c("cv.lon")} mo_ta={c("cv.mo_ta")} />
+        <HoiQuyetDinh chu={{ nho: c("cv.nho"), o_goi_y: c("cv.o_goi_y"), nut: c("cv.nut"), chip_nhan: c("cv.chip_nhan"), ghi_chu: c("cv.ghi_chu"), lien_kinh_doanh: c("cv.lien_kinh_doanh") }} />
       </section>
 
       {/* Bài đọc ghép nhiều mảng (CD-1 chân dung, NAM-2 thời gian tới, NAM-1 theo năm). */}

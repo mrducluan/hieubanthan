@@ -1,0 +1,420 @@
+{
+ "_nguon": "CHT-1 — 12 cung hoàng đạo (cung Mặt Trời): tính cách, tình yêu, công việc, việc nên làm. Ban biên tập viết, theo cách hiểu phổ biến của chiêm tinh phương Tây; không phán số phận, không chẩn đoán.",
+ "_trang_thai": "nhap_ai_cho_duyet",
+ "source_id": "bien_tap_chiem_tinh_2026",
+ "school_id": "chiem_tinh_tay",
+ "nguyen_to": {
+  "lua": {
+   "ten": "Lửa",
+   "y": "nhiệt tình, chủ động, cần được hành động",
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "dat": {
+   "ten": "Đất",
+   "y": "thực tế, bền bỉ, cần thấy kết quả cầm nắm được",
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "khi": {
+   "ten": "Khí",
+   "y": "nghĩ nhanh, thích trao đổi, cần ý tưởng và con người",
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "nuoc": {
+   "ten": "Nước",
+   "y": "giàu cảm xúc, nhạy, cần sự gắn bó",
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  }
+ },
+ "pham_chat": {
+  "thong_linh": {
+   "ten": "Khởi đầu",
+   "goc": "Cardinal",
+   "y": "mở đầu mùa, giỏi khởi động việc mới",
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "kien_dinh": {
+   "ten": "Kiên định",
+   "goc": "Fixed",
+   "y": "giữa mùa, giỏi giữ và làm cho bền",
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "linh_hoat": {
+   "ten": "Linh hoạt",
+   "goc": "Mutable",
+   "y": "cuối mùa, giỏi thích nghi và chuyển tiếp",
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  }
+ },
+ "cung": {
+  "bach_duong": {
+   "ten_en": "Aries",
+   "hinh_tuong": "con cừu đực",
+   "diem_manh": [
+    "Dám làm trước, không chờ ai rủ",
+    "Nói thẳng, dễ biết mình đang ở đâu với họ",
+    "Hồi phục nhanh sau một lần hỏng việc"
+   ],
+   "diem_mu": [
+    "Nóng vội, quyết khi chưa đủ thông tin",
+    "Hăng lúc đầu rồi chán khi việc vào giai đoạn đều đều",
+    "Dễ thấy người khác chậm, sốt ruột với họ"
+   ],
+   "tinh_yeu": "Thích người thẳng thắn, có lửa, không vòng vo. Khi thích ai thường là người chủ động trước. Mối quan hệ bền hơn khi hai người có việc chung để cùng làm, và khi bạn tập nghe hết câu của người kia trước khi đáp.",
+   "cong_viec": "Hợp việc cần mở đầu, xử lý nhanh, có chỉ tiêu rõ. Dễ mất hứng ở việc lặp lại nhiều; nên ghép với người giỏi theo dõi tới cuối.",
+   "nghe": [
+    "kinh doanh, mở thị trường mới",
+    "thể thao, huấn luyện",
+    "cứu hộ, xử lý sự cố",
+    "khởi nghiệp, quản lý dự án ngắn"
+   ],
+   "tien_bac": "Kiếm được khi chịu ra tay; dễ chi theo cảm hứng. Để một khoản riêng không được động tới trong ba tháng giúp bạn giữ được tiền.",
+   "tu_soi": "Việc nào gần đây mình bắt đầu hăng hái nhưng chưa làm tới cuối?",
+   "viec": [
+    "Trước một quyết định lớn, chờ thêm một đêm rồi mới trả lời.",
+    "Mỗi tuần chọn một việc đang dở và làm cho xong trước khi nhận việc mới."
+   ],
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "kim_nguu": {
+   "ten_en": "Taurus",
+   "hinh_tuong": "con bò đực",
+   "diem_manh": [
+    "Kiên nhẫn, làm đều tay tới khi xong",
+    "Giữ lời, ít hứa nhưng hứa là làm",
+    "Biết hưởng thụ, giỏi tạo chỗ ở, chỗ làm dễ chịu"
+   ],
+   "diem_mu": [
+    "Chậm đổi ý dù đã thấy mình sai",
+    "Dễ ghen, giữ chặt người và thứ mình có",
+    "Hay trì hoãn việc không có lợi ngay trước mắt"
+   ],
+   "tinh_yeu": "Yêu chậm mà chắc, cần thấy an toàn rồi mới mở lòng. Thể hiện tình cảm bằng việc làm: nấu một bữa, sửa giúp một món đồ, có mặt đúng giờ. Dễ ghen khi thấy mối quan hệ chông chênh.",
+   "cong_viec": "Hợp việc cần bền bỉ, chất lượng, có kết quả nhìn thấy được. Làm tốt khi được giữ nhịp riêng; không hợp chỗ đổi kế hoạch liên tục.",
+   "nghe": [
+    "tài chính, kế toán, ngân hàng",
+    "nấu ăn, làm vườn, nông nghiệp",
+    "thiết kế, thủ công, làm đẹp",
+    "bất động sản, quản lý tài sản"
+   ],
+   "tien_bac": "Có khiếu tích luỹ, mua đồ bền. Cái bẫy là giữ tiền ở một chỗ quá lâu vì ngại tìm hiểu cách mới.",
+   "tu_soi": "Mình đang giữ cách làm nào chỉ vì quen, không vì nó còn tốt?",
+   "viec": [
+    "Đặt một ngày trong tháng để rà lại một thói quen chi tiêu hoặc cách làm.",
+    "Khi bất đồng, nói rõ mình cần gì thay vì im lặng giữ ý."
+   ],
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "song_tu": {
+   "ten_en": "Gemini",
+   "hinh_tuong": "hai anh em sinh đôi",
+   "diem_manh": [
+    "Học nhanh, nắm ý mới chỉ sau một lần nghe",
+    "Nói chuyện được với nhiều kiểu người",
+    "Linh hoạt, đổi hướng nhanh khi tình thế đổi"
+   ],
+   "diem_mu": [
+    "Dàn trải, ôm nhiều việc mà ít việc tới nơi",
+    "Dễ chán khi phải đi sâu một chủ đề lâu",
+    "Lời nói đôi khi đi trước suy nghĩ"
+   ],
+   "tinh_yeu": "Cần một người nói chuyện được, có tiếng cười và có điều mới để kể. Dễ rung động vì trí tuệ hơn vẻ ngoài. Mối quan hệ cần chỗ cho cả hai có bạn bè, việc riêng.",
+   "cong_viec": "Hợp việc có nhiều trao đổi, thông tin, đổi mới liên tục. Làm tốt khi được giao việc đa dạng; nên có người giữ tiến độ hoặc công cụ ghi việc.",
+   "nghe": [
+    "báo chí, truyền thông, nội dung",
+    "bán hàng, chăm sóc khách hàng",
+    "giảng dạy, dịch thuật",
+    "tiếp thị, quan hệ công chúng"
+   ],
+   "tien_bac": "Có nhiều nguồn thu nhỏ; dễ chi cho đồ mới, khoá học mới. Ghi chi tiêu mỗi tuần giúp bạn thấy tiền đi đâu.",
+   "tu_soi": "Trong mười việc mình đang theo, việc nào thật sự đáng đi tới cuối?",
+   "viec": [
+    "Trước khi hứa, xem lại lịch xem còn chỗ không.",
+    "Mỗi tối ghi ba việc đã xong trong ngày, dù nhỏ."
+   ],
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "cu_giai": {
+   "ten_en": "Cancer",
+   "hinh_tuong": "con cua",
+   "diem_manh": [
+    "Biết chăm người đúng lúc, không cần ai nhắc",
+    "Nhớ ơn, giữ kỷ niệm, quý gia đình",
+    "Có trực giác tốt về con người"
+   ],
+   "diem_mu": [
+    "Lo trước những chuyện chưa xảy ra",
+    "Nhớ lâu chuyện buồn cũ, khó cho qua",
+    "Tâm trạng lên xuống theo không khí xung quanh"
+   ],
+   "tinh_yeu": "Yêu sâu, chung thuỷ, cần cảm giác có nhà để về. Hay thể hiện bằng chăm sóc. Mối quan hệ khó khi bạn đoán ý thay vì hỏi thẳng; nói ra điều mình cần là việc nên tập.",
+   "cong_viec": "Hợp việc chăm sóc, nuôi dưỡng, giữ không khí đội nhóm. Làm tốt ở chỗ có người tin mình; khó chịu ở môi trường lạnh lùng, cạnh tranh gay gắt.",
+   "nghe": [
+    "y tá, điều dưỡng, chăm sóc",
+    "giáo viên mầm non, tiểu học",
+    "nhà hàng, khách sạn, ẩm thực",
+    "nhân sự, công tác xã hội"
+   ],
+   "tien_bac": "Thích để dành cho gia đình, cho lúc khó. Dễ chi vì thương người khác; đặt trước một mức giúp đỡ cho mỗi tháng.",
+   "tu_soi": "Gần đây mình đã nói ra điều mình cần với ai chưa, hay chỉ mong họ tự hiểu?",
+   "viec": [
+    "Giữ một buổi mỗi tuần chỉ cho bản thân.",
+    "Khi lo, viết ra điều đang lo và một việc nhỏ làm được ngay."
+   ],
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "su_tu": {
+   "ten_en": "Leo",
+   "hinh_tuong": "con sư tử",
+   "diem_manh": [
+    "Ấm áp, rộng rãi với người mình quý",
+    "Dám đứng ra nhận trách nhiệm trước đám đông",
+    "Sáng tạo, có gu, làm việc gì cũng muốn đẹp"
+   ],
+   "diem_mu": [
+    "Cần được ghi nhận, buồn lâu khi bị bỏ qua",
+    "Khó nhận lỗi trước mặt người khác",
+    "Dễ ôm hết phần việc để giữ vai chính"
+   ],
+   "tinh_yeu": "Yêu hết mình, thích chăm chút và được chăm chút lại. Cần được khen thật lòng. Mối quan hệ bền khi bạn để người kia cũng có chỗ được nổi bật.",
+   "cong_viec": "Hợp vai dẫn dắt, đứng trước người khác, làm việc có dấu ấn cá nhân. Làm tốt khi được tin giao; nên tập chia việc và khen người dưới quyền.",
+   "nghe": [
+    "biểu diễn, nghệ thuật, sân khấu",
+    "quản lý, lãnh đạo nhóm",
+    "tổ chức sự kiện, thời trang",
+    "giảng dạy, diễn thuyết"
+   ],
+   "tien_bac": "Rộng tay với bạn bè, thích đồ có giá trị. Đặt trước ngân sách cho tiệc tùng, quà tặng giúp bạn vẫn hào phóng mà không hụt.",
+   "tu_soi": "Mình đang làm việc này vì thích nó, hay vì muốn người khác nhìn thấy?",
+   "viec": [
+    "Mỗi tuần khen thật cụ thể một người làm cùng.",
+    "Khi sai, nói 'mình sai ở chỗ này' trong một câu."
+   ],
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "xu_nu": {
+   "ten_en": "Virgo",
+   "hinh_tuong": "người thiếu nữ cầm bó lúa",
+   "diem_manh": [
+    "Tỉ mỉ, thấy lỗi nhỏ người khác bỏ qua",
+    "Thích giúp bằng việc làm thiết thực",
+    "Sắp xếp giỏi, làm việc có quy trình"
+   ],
+   "diem_mu": [
+    "Tự đòi hỏi quá cao, khó hài lòng với mình",
+    "Dễ soi lỗi người khác thành chê",
+    "Lo lắng vì muốn mọi thứ đúng"
+   ],
+   "tinh_yeu": "Yêu bằng sự quan tâm thực tế: nhớ lịch, lo việc nhỏ. Cần thời gian để tin. Mối quan hệ nhẹ hơn khi bạn khen nhiều hơn góp ý và chấp nhận người kia không hoàn hảo.",
+   "cong_viec": "Hợp việc cần chính xác, phân tích, cải tiến quy trình. Làm tốt khi có tiêu chuẩn rõ; nên đặt hạn cho việc sửa đi sửa lại.",
+   "nghe": [
+    "kế toán, kiểm toán, phân tích dữ liệu",
+    "y tế, dược, dinh dưỡng",
+    "biên tập, kiểm định chất lượng",
+    "lập trình, kỹ thuật"
+   ],
+   "tien_bac": "Chi tiêu có tính toán, ít mua bốc đồng. Cái bẫy là lo quá mà không dám dùng tiền cho việc đáng làm.",
+   "tu_soi": "Việc này đã đủ tốt để giao chưa, hay mình đang sửa vì sợ bị chê?",
+   "viec": [
+    "Đặt giờ dừng cho mỗi lần chỉnh sửa.",
+    "Trước khi góp ý, nói một điều người kia đã làm tốt."
+   ],
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "thien_binh": {
+   "ten_en": "Libra",
+   "hinh_tuong": "cái cân",
+   "diem_manh": [
+    "Nhìn được cả hai phía của một chuyện",
+    "Khéo hoà giải, giữ không khí dễ chịu",
+    "Có mắt thẩm mỹ, chuộng sự cân đối"
+   ],
+   "diem_mu": [
+    "Khó chọn, sợ chọn sai làm mất lòng ai",
+    "Dễ chiều theo người khác mà giấu ý mình",
+    "Ngại xung đột nên để việc kéo dài"
+   ],
+   "tinh_yeu": "Cần một người bạn đời thật sự, cùng bàn, cùng quyết. Thích sự lịch thiệp, tôn trọng. Mối quan hệ bền khi bạn dám nói 'không' và nói rõ điều mình muốn.",
+   "cong_viec": "Hợp việc thương lượng, kết nối, làm đẹp, làm luật. Làm tốt trong nhóm có nhịp hợp tác; nên đặt hạn chót cho mỗi lần cân nhắc.",
+   "nghe": [
+    "luật, hoà giải, đàm phán",
+    "thiết kế, kiến trúc, thời trang",
+    "quan hệ đối tác, ngoại giao",
+    "tư vấn, nhân sự"
+   ],
+   "tien_bac": "Thích chi cho cái đẹp và cho các mối quan hệ. Bàn với người cùng chi trả từ đầu giúp tránh khó xử về sau.",
+   "tu_soi": "Lần gần nhất mình gật đầu trong khi trong lòng muốn nói 'không' là khi nào?",
+   "viec": [
+    "Với việc nhỏ, cho mình năm phút để chọn rồi thôi.",
+    "Nói ý mình trước, rồi mới hỏi ý người khác."
+   ],
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "bo_cap": {
+   "ten_en": "Scorpio",
+   "hinh_tuong": "con bọ cạp",
+   "diem_manh": [
+    "Tập trung cao, theo việc tới tận gốc",
+    "Chung thuỷ, giữ bí mật cho người tin mình",
+    "Nhìn ra động cơ thật sau lời nói"
+   ],
+   "diem_mu": [
+    "Khó tin người, thử lòng người khác",
+    "Giữ lâu chuyện bị tổn thương",
+    "Muốn nắm hết mọi thứ trong tay"
+   ],
+   "tinh_yeu": "Yêu mãnh liệt, cần sự thật lòng tuyệt đối. Khó mở lòng nhưng đã mở thì gắn bó lâu. Mối quan hệ nhẹ hơn khi bạn nói thẳng điều đang nghi ngại thay vì tự âm thầm thử người kia.",
+   "cong_viec": "Hợp việc cần đào sâu, nghiên cứu, xử lý khủng hoảng, quản lý rủi ro. Làm tốt khi được tin giao trọn vẹn; nên tập chia sẻ thông tin với nhóm.",
+   "nghe": [
+    "nghiên cứu, điều tra, phân tích",
+    "tâm lý, tư vấn",
+    "tài chính, đầu tư, bảo hiểm",
+    "kỹ thuật chuyên sâu, an ninh mạng"
+   ],
+   "tien_bac": "Giỏi tính đường dài, thích nắm rõ tiền của mình. Tiền chung nên có giấy tờ rõ để không thành chuyện nghi ngờ.",
+   "tu_soi": "Điều mình đang tránh nói ra vì sợ bị tổn thương là gì?",
+   "viec": [
+    "Khi nghi ngại, hỏi một câu trực tiếp thay vì thử lòng.",
+    "Viết ra một chuyện cũ mình muốn buông rồi để nó lại."
+   ],
+   "chu_tinh_hien_dai": "diem_vuong",
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "nhan_ma": {
+   "ten_en": "Sagittarius",
+   "hinh_tuong": "người cung thủ nửa người nửa ngựa",
+   "diem_manh": [
+    "Lạc quan, dễ thấy cơ hội",
+    "Thích học hỏi, đi xa, gặp điều mới",
+    "Thật thà, nói điều mình nghĩ"
+   ],
+   "diem_mu": [
+    "Hứa nhiều hơn sức làm",
+    "Nói thật mà quên cách nói",
+    "Ngại ràng buộc, dễ bỏ đi khi thấy gò bó"
+   ],
+   "tinh_yeu": "Cần một người bạn đồng điệu để cùng đi, cùng học, cùng cười. Không chịu được sự kiểm soát. Mối quan hệ bền khi cả hai có tự do và có một kế hoạch chung để hướng tới.",
+   "cong_viec": "Hợp việc có tầm nhìn rộng, đi lại, giảng dạy, kết nối nhiều nơi. Làm tốt khi được tự chủ; nên có người giỏi chi tiết đi cùng.",
+   "nghe": [
+    "du lịch, hàng không, vận tải",
+    "giảng dạy, đào tạo, xuất bản",
+    "xuất nhập khẩu, kinh doanh quốc tế",
+    "thể thao, hoạt động ngoài trời"
+   ],
+   "tien_bac": "Dễ chi cho trải nghiệm, chuyến đi. Đặt trước một quỹ đi chơi riêng giúp vừa vui vừa không hụt các khoản cần.",
+   "tu_soi": "Mình có đang hứa với ai điều mà mình biết là khó giữ không?",
+   "viec": [
+    "Trước khi nhận lời, đếm thử mình còn bao nhiêu giờ trống.",
+    "Nói thật kèm một câu hỏi: 'Bạn thấy sao?'."
+   ],
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "ma_ket": {
+   "ten_en": "Capricorn",
+   "hinh_tuong": "con dê núi đuôi cá",
+   "diem_manh": [
+    "Làm việc đều đặn, ít phụ thuộc vào hứng thú",
+    "Có trách nhiệm, được người khác tin giao việc",
+    "Thực tế, biết lượng sức"
+   ],
+   "diem_mu": [
+    "Ít cho mình nghỉ, coi nghỉ ngơi là lười",
+    "Khó nhờ người khác giúp, hay ôm việc một mình",
+    "Dễ bi quan khi kế hoạch chậm hơn dự tính"
+   ],
+   "tinh_yeu": "Yêu nghiêm túc, nghĩ tới chuyện lâu dài từ sớm. Thể hiện bằng sự lo toan, ít nói lời ngọt. Mối quan hệ ấm hơn khi bạn dành thời gian vui chơi cùng nhau, bên cạnh việc lo toan.",
+   "cong_viec": "Hợp việc có lộ trình rõ, trách nhiệm cao, quản lý, xây nền lâu dài. Làm tốt trong tổ chức có thứ bậc rõ; nên học cách giao bớt việc.",
+   "nghe": [
+    "quản lý, điều hành doanh nghiệp",
+    "kỹ thuật, xây dựng",
+    "tài chính, hành chính công",
+    "luật, kiểm toán"
+   ],
+   "tien_bac": "Giỏi để dành, tích luỹ cho đường dài. Cái bẫy là tiết kiệm quá mức tới không dám tiêu cho sức khoẻ, niềm vui.",
+   "tu_soi": "Mình đang đo giá trị của mình bằng thành tích hay bằng điều gì khác?",
+   "viec": [
+    "Ghi lịch nghỉ như ghi lịch họp.",
+    "Mỗi tuần nói một câu cảm ơn hoặc thương với người nhà."
+   ],
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "bao_binh": {
+   "ten_en": "Aquarius",
+   "hinh_tuong": "người mang bình nước",
+   "diem_manh": [
+    "Nghĩ khác, thấy cách làm mới",
+    "Quan tâm tới việc chung, công bằng cho nhóm",
+    "Thân thiện với nhiều kiểu người"
+   ],
+   "diem_mu": [
+    "Giữ khoảng cách cảm xúc, khó gần lúc đầu",
+    "Bướng với ý mình khi tin là đúng",
+    "Dễ coi nhẹ việc thường ngày, lặt vặt"
+   ],
+   "tinh_yeu": "Cần một người vừa là bạn vừa là người yêu, tôn trọng tự do và ý kiến riêng. Thể hiện tình cảm theo cách riêng, ít theo khuôn. Mối quan hệ gần hơn khi bạn nói ra cả cảm xúc, ngoài ý kiến.",
+   "cong_viec": "Hợp việc đổi mới, công nghệ, cộng đồng, cải tiến hệ thống. Làm tốt khi được thử cách mới; nên kiên nhẫn với các bước nhỏ thường ngày.",
+   "nghe": [
+    "công nghệ, lập trình, khoa học",
+    "tổ chức phi lợi nhuận, cộng đồng",
+    "nghiên cứu, phát minh",
+    "truyền thông số, thiết kế sản phẩm"
+   ],
+   "tien_bac": "Có ý tưởng kiếm tiền mới; dễ bỏ qua việc theo dõi chi tiêu. Một bảng tính đơn giản mỗi tháng là đủ giữ nhịp.",
+   "tu_soi": "Người thân của mình có biết lúc này mình đang cảm thấy thế nào không?",
+   "viec": [
+    "Mỗi ngày làm xong một việc nhỏ thường ngày trước khi nghĩ việc lớn.",
+    "Khi tranh luận, nhắc lại ý người kia trước khi nói ý mình."
+   ],
+   "chu_tinh_hien_dai": "thien_vuong",
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  },
+  "song_ngu": {
+   "ten_en": "Pisces",
+   "hinh_tuong": "hai con cá bơi ngược chiều",
+   "diem_manh": [
+    "Giàu cảm thông, dễ hiểu nỗi lòng người khác",
+    "Trí tưởng tượng phong phú, hợp nghệ thuật",
+    "Hiền, dễ tha thứ"
+   ],
+   "diem_mu": [
+    "Khó nói 'không', dễ bị lợi dụng lòng tốt",
+    "Hay mơ mà chậm biến thành việc",
+    "Dễ né chuyện khó bằng cách trì hoãn"
+   ],
+   "tinh_yeu": "Yêu lãng mạn, sẵn lòng hy sinh. Cần một người dịu dàng mà vững. Mối quan hệ lành hơn khi bạn giữ ranh giới rõ và không gánh hết nỗi buồn của người kia.",
+   "cong_viec": "Hợp việc sáng tạo, chăm sóc, chữa lành tinh thần, nghệ thuật. Làm tốt khi có không gian yên; nên có lịch và hạn chót cụ thể.",
+   "nghe": [
+    "âm nhạc, hội hoạ, điện ảnh",
+    "chăm sóc, tâm lý, công tác xã hội",
+    "thiết kế, nhiếp ảnh",
+    "giáo dục đặc biệt, thiện nguyện"
+   ],
+   "tien_bac": "Rộng lòng, dễ cho vay hoặc chi theo cảm xúc. Đặt một mức cho vay tối đa từ trước giúp giữ được cả tình lẫn tiền.",
+   "tu_soi": "Việc mình mơ làm từ lâu, bước nhỏ nhất có thể làm trong tuần này là gì?",
+   "viec": [
+    "Tập nói: 'Để mình xem lại rồi trả lời'.",
+    "Biến một ý tưởng thành ba việc có ngày làm cụ thể."
+   ],
+   "chu_tinh_hien_dai": "hai_vuong",
+   "source_id": "bien_tap_chiem_tinh_2026",
+   "school_id": "chiem_tinh_tay"
+  }
+ }
+}

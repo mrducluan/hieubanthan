@@ -310,6 +310,12 @@ def luot_goi(client=None) -> list[Luot]:
     # ---- Lịch, năm, tuổi (GET công khai)
     for ngay in ("2026-11-10", "2027-02-06", "2027-02-07", "2026-12-22", "2027-06-15"):
         g(f"lich.ngay.{ngay}", f"/v1/lich/ngay-tot/{ngay}")
+    # TP-1: Tứ Ly theo sách (21/12/2026 = trước Đông chí) + Dương Công hai phái (2/8/2027 = mùng 1, 9/8/2027 = mùng 8 tháng 7).
+    for ngay in ("2026-12-21", "2027-08-02", "2027-08-09"):
+        g(f"lich.ngay.{ngay}", f"/v1/lich/ngay-tot/{ngay}")
+        g(f"lich.ngay.{ngay}.hiep_ky", f"/v1/lich/ngay-tot/{ngay}?duong_cong=hiep_ky")
+    p("lich.chon_ngay.tp1.hiep_ky", "/v1/lich/chon-ngay?duong_cong=hiep_ky", {"viec": "xuat_hanh", "tu": "2027-07-20", "den": "2027-08-31"})
+    p("lich.chon_ngay.tp1", "/v1/lich/chon-ngay", {"viec": "xuat_hanh", "tu": "2027-07-20", "den": "2027-08-31"})
     for nam, th in ((2026, 11), (2026, 12), (2027, 1), (2027, 2), (2027, 7)):
         g(f"lich.thang.{nam}.{th}", f"/v1/lich/thang/{nam}/{th}")
         g(f"lich.viec_dem.{nam}.{th}", f"/v1/lich/viec-thang-dem/{nam}/{th}")

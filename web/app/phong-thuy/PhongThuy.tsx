@@ -106,7 +106,7 @@ export function PhongThuy() {
               tomTat={<ChipPhai ds={[{ nhan: t("phai.chip", { moc: TEN_MOC(mocNam) }), khac: mocNam !== "lap_xuan" }]} />}
               nhac={ss?.moc_khac ? t("phai.nhac") : undefined}
               moTa={<ChuB chu={t("phai.mo_ta")} lop="text-fg" />}>
-              <DongPhai ten={t("phai.ten")} nhan={t("phai.nhan")} giaTri={mocNam} doi={setMocNam}
+              <DongPhai ma="phongthuy.moc_nam" ten={t("phai.ten")} nhan={t("phai.nhan")} giaTri={mocNam} doi={setMocNam}
                 luaChon={MOC.map((m) => [m, t(`moc.chon_${m}`)] as [MocNam, string])}
                 noiBat={!!ss?.moc_khac} nhanNoiBat={t("phai.ap_dung")}
                 goiY={ss?.so_sanh_moc

@@ -106,7 +106,7 @@ def test_nhap_ai_cho_duyet_la_tep_ai_chua_duyet_moi_va_khong_lan_vao_luat_tom_y(
         "tuong_menh_doi_chieu_kb.json",
         "thanso_da_phai_kb.json",
         "tarot_an_phu_nguoc_kb.json",
-        "chiem_tinh_hanh_tinh_cung_kb.json",
+        "chiem_tinh_hanh_tinh_cung_kb.json", "chiem_tinh_cung_hoang_dao_kb.json",
         "chiem_tinh_nha_kb.json",
         "chiem_tinh_goc_chieu_kb.json",
         "chiem_tinh_van_han_kb.json",

@@ -19,6 +19,8 @@ import { useChuLich } from "./chu-lich";
 import { useDuong } from "@/components/khung/NgonNgu";
 import { LichAmNam } from "@/components/lich-am/LichAmNam";
 import type { LichNgay } from "@/lib/lich-am";
+import { useDuongCong } from "@/lib/truong-phai";
+import { DongDiemKhac, KhungDuongCong } from "@/components/truong-phai/TruongPhaiLich";
 
 export function LichThang({ t, chon }: { t: ThangLich; chon?: string }) {
   const { c, en, ma, thangNam } = useChuLich();
@@ -79,6 +81,8 @@ function ChonNgay({ dsViec, tu, tuoi }: { dsViec: { ma: string; ten: string }[];
   const [kq, setKq] = useState<ChonNgayKq | null>(null);
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
+  const [dc] = useDuongCong();
+  useEffect(() => { setKq(null); }, [dc]);           // TP-1: đổi phái → kết quả cũ không còn đúng
 
   async function tim() {
     setDang(true); setLoi(null);
@@ -116,6 +120,7 @@ function ChonNgay({ dsViec, tu, tuoi }: { dsViec: { ma: string; ten: string }[];
       {loi && <p role="alert" className="text-sm text-cinnabar">{loi}</p>}
       {kq && (
         <div data-testid="ket-qua-chon-ngay" aria-live="polite" ref={(el) => { el?.scrollIntoView({ behavior: "smooth", block: "nearest" }); }}>
+          <DongDiemKhac ds={kq.diem_khac} testId="diem-khac-chon-ngay" />
           {kq.ngay.length === 0 ? <p className="text-sm text-fg-muted">{en ? c("tim.khong_co", { viec: kq.viec.ten.toLowerCase() }) : <>Khoảng này sách lịch không có ngày hợp riêng cho việc {kq.viec.ten.toLowerCase()} — thử khoảng dài hơn.</>}</p> : (
             <ol className="space-y-2">
               {kq.ngay.slice(0, 8).map((n: TomTatNgay) => (
@@ -142,23 +147,27 @@ export function XemNgayTot({ banDau, thang, lichAm }: { banDau: NgayTot; thang: 
   const hoSo = useHoSo();
   const [d, setD] = useState<NgayTot>(banDau);
   const tuoi = useMemo(() => hoSo ? { nam_sinh: hoSo.nam, thang_sinh: hoSo.thang, ngay_sinh: hoSo.ngay } : null, [hoSo]);
+  const [dc] = useDuongCong();
 
   useEffect(() => { setD(banDau); }, [banDau]);
   useEffect(() => {
-    if (!tuoi) return;
+    // Bản công khai (máy chủ dựng sẵn) theo mặc định; có tuổi hoặc đã đổi phái (TP-1) → tính lại cho đúng người xem.
+    if (!tuoi && dc === "lich_viet") { setD(banDau); return; }
     let huy = false;
     fetch("/api/lich/ngay-tot", kemNgonNgu("/api/lich/ngay-tot", { method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ ngay: banDau.ngay, ...tuoi }) }))
+      body: JSON.stringify({ ngay: banDau.ngay, ...(tuoi ?? {}) }) }))
       .then((r) => r.ok ? r.json() : null).then((j) => { if (!huy && j) setD(j as NgayTot); })
       .catch(() => { /* giữ bản công khai */ });
     return () => { huy = true; };
-  }, [tuoi, banDau.ngay]);
+  }, [tuoi, banDau, dc]);
 
   useBatDauDoc("xem_ngay", true);
   const homNay = homNayVN();
   return (
     <div className="space-y-5">
+      <KhungDuongCong diemKhac={d.diem_khac} />
       <TheNgay d={d} />
+      <DongDiemKhac ds={d.diem_khac} />
       <ChonNgay dsViec={banDau.danh_sach_viec} tu={banDau.ngay >= homNay ? banDau.ngay : homNay} tuoi={tuoi} />
       <ChonNgayNhieu tu={banDau.ngay >= homNay ? banDau.ngay : homNay} dsViec={banDau.danh_sach_viec} />
       {lichAm && !en ? <LichAmNam d={lichAm} homNay={homNay} chon={banDau.ngay} dangXem={banDau.ngay} lienKet />

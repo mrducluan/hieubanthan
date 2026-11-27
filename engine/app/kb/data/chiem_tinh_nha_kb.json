@@ -1,12 +1,12 @@
 {
-  "_nguon": "Chặng 4.2 — 12 Nhà & Trục góc Ascendant / MC.",
+  "_nguon": "Chặng 4.2 — 12 Nhà & Trục góc Ascendant / MC. Nháp biên tập theo truyền thống chiêm tinh phương Tây hiện đại, không trích nguyên văn sách nào; chờ chủ dự án duyệt.",
   "_trang_thai": "nhap_ai_cho_duyet",
   "source_id": "bien_tap_chiem_tinh_2026",
   "school_id": "chiem_tinh_tay",
   "he_nha": {
     "whole_sign": {
       "ten": "Hệ Nhà Trọn Cung (Whole Sign)",
-      "giai_thich": "Mỗi cung hoàng đạo trọn vẹn là một nhà tính từ cung chứa điểm Mọc — hệ cổ điển Hy Lạp rõ ràng, không bị méo nhà ở mọi vĩ độ.",
+      "giai_thich": "Mỗi cung hoàng đạo trọn vẹn là một nhà tính từ cung chứa điểm Mọc — hệ cổ điển Hy Lạp rõ ràng, không bị méo nhà ở mọi vĩ độ. Thiên Đỉnh (MC) được tính riêng nên có thể không nằm ở nhà 10, nhất là ở vĩ độ cao.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },
@@ -27,84 +27,84 @@
     "1": {
       "ten": "Nhà 1 · Bản thân & Dáng vẻ tiếp cận đời sống",
       "linh_vuc": "cách tự thể hiện bước đầu và sức bật cá nhân",
-      "y_chinh": "Nhà 1 · Bản thân & Dáng vẻ tiếp cận đời sống xoay quanh cách tự thể hiện bước đầu và sức bật cá nhân.",
+      "y_chinh": "Nằm ở nhà 1, điểm này hiện rõ ra ngoài: dáng vẻ, cách bạn mở đầu việc mới và ấn tượng đầu tiên người khác có về bạn.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },
     "2": {
       "ten": "Nhà 2 · Tài chính tự thân & Thước đo giá trị",
       "linh_vuc": "cách tạo thu nhập, giữ tài sản và trân trọng năng lực thực",
-      "y_chinh": "Nhà 2 · Tài chính tự thân & Thước đo giá trị xoay quanh cách tạo thu nhập, giữ tài sản và trân trọng năng lực thực.",
+      "y_chinh": "Ở nhà 2, điểm này nói về cách bạn kiếm tiền, giữ tiền và tự đánh giá năng lực của mình.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },
     "3": {
       "ten": "Nhà 3 · Học hỏi, Giao tiếp & Môi trường gần",
       "linh_vuc": "việc viết lách, trao đổi hàng ngày và kết nối lân cận",
-      "y_chinh": "Nhà 3 · Học hỏi, Giao tiếp & Môi trường gần xoay quanh việc viết lách, trao đổi hàng ngày và kết nối lân cận.",
+      "y_chinh": "Ở nhà 3, điểm này thể hiện trong việc học, nói, viết hằng ngày và quan hệ với anh chị em, hàng xóm.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },
     "4": {
       "ten": "Nhà 4 · Tổ ấm, Gia đình gốc & Điểm tựa nội tâm",
       "linh_vuc": "nền tảng gia đình, chỗ ở và sự bình yên khi khép cửa",
-      "y_chinh": "Nhà 4 · Tổ ấm, Gia đình gốc & Điểm tựa nội tâm xoay quanh nền tảng gia đình, chỗ ở và sự bình yên khi khép cửa.",
+      "y_chinh": "Ở nhà 4, điểm này nằm ở chuyện nhà cửa, gia đình gốc và những gì giúp bạn thấy yên khi về nhà.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },
     "5": {
       "ten": "Nhà 5 · Sáng tạo, Niềm vui & Biểu đạt cá nhân",
       "linh_vuc": "dự án tâm huyết, sở thích lành mạnh và tình cảm con cái",
-      "y_chinh": "Nhà 5 · Sáng tạo, Niềm vui & Biểu đạt cá nhân xoay quanh dự án tâm huyết, sở thích lành mạnh và tình cảm con cái.",
+      "y_chinh": "Ở nhà 5, điểm này dồn vào niềm vui: sở thích, sáng tạo, chuyện hẹn hò và cách bạn chơi với trẻ con.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },
     "6": {
       "ten": "Nhà 6 · Nhịp làm việc hàng ngày & Chăm sóc sức bền",
       "linh_vuc": "quy trình chuyên môn, kỷ luật sinh hoạt và rèn luyện thân thể",
-      "y_chinh": "Nhà 6 · Nhịp làm việc hàng ngày & Chăm sóc sức bền xoay quanh quy trình chuyên môn, kỷ luật sinh hoạt và rèn luyện thân thể.",
+      "y_chinh": "Ở nhà 6, điểm này thể hiện qua nếp làm việc mỗi ngày, cách bạn sắp xếp sinh hoạt và giữ sức.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },
     "7": {
       "ten": "Nhà 7 · Bạn đời, Đối tác 1–1 & Thoả thuận song phương",
       "linh_vuc": "hôn nhân, cộng sự đối đẳng và cam kết minh bạch hai chiều",
-      "y_chinh": "Nhà 7 · Bạn đời, Đối tác 1–1 & Thoả thuận song phương xoay quanh hôn nhân, cộng sự đối đẳng và cam kết minh bạch hai chiều.",
+      "y_chinh": "Ở nhà 7, điểm này thể hiện qua người bạn đời, cộng sự và những thoả thuận giữa hai người.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },
     "8": {
       "ten": "Nhà 8 · Nguồn lực chung, Thuế nợ & Đổi mới sâu",
       "linh_vuc": "quản trị vốn góp chung, bảo hiểm, thừa kế và vượt thử thách",
-      "y_chinh": "Nhà 8 · Nguồn lực chung, Thuế nợ & Đổi mới sâu xoay quanh quản trị vốn góp chung, bảo hiểm, thừa kế và vượt thử thách.",
+      "y_chinh": "Ở nhà 8, điểm này liên quan tới tiền và tài sản chung, nợ, bảo hiểm, thừa kế, và những lần bạn phải thay đổi từ bên trong.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },
     "9": {
       "ten": "Nhà 9 · Tri thức bậc cao, Đi xa & Tầm nhìn sống",
       "linh_vuc": "học thuật chuyên sâu, ngoại ngữ, xuất ngoại và triết lý sống",
-      "y_chinh": "Nhà 9 · Tri thức bậc cao, Đi xa & Tầm nhìn sống xoay quanh học thuật chuyên sâu, ngoại ngữ, xuất ngoại và triết lý sống.",
+      "y_chinh": "Ở nhà 9, điểm này hướng về việc học cao, đi xa, ngoại ngữ và những điều bạn tin để sống theo.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },
     "10": {
       "ten": "Nhà 10 · Sự nghiệp, Vị thế xã hội & Trách nhiệm công",
       "linh_vuc": "con đường nghề nghiệp dài hạn, uy tín và đóng góp xã hội",
-      "y_chinh": "Nhà 10 · Sự nghiệp, Vị thế xã hội & Trách nhiệm công xoay quanh con đường nghề nghiệp dài hạn, uy tín và đóng góp xã hội.",
+      "y_chinh": "Ở nhà 10, điểm này hiện ra trong sự nghiệp, vị trí xã hội và cách người ngoài biết tới bạn.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },
     "11": {
       "ten": "Nhà 11 · Cộng đồng, Mạng lưới đồng chí & Mục tiêu xa",
       "linh_vuc": "đội nhóm cùng chí hướng, hội đoàn chuyên môn và mục tiêu dài hạn",
-      "y_chinh": "Nhà 11 · Cộng đồng, Mạng lưới đồng chí & Mục tiêu xa xoay quanh đội nhóm cùng chí hướng, hội đoàn chuyên môn và mục tiêu dài hạn.",
+      "y_chinh": "Ở nhà 11, điểm này thể hiện qua bạn bè, các nhóm bạn tham gia và những mục tiêu dài hạn.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },
     "12": {
       "ten": "Nhà 12 · Khoảng lặng chiêm nghiệm & Phục hồi tâm trí",
       "linh_vuc": "thời gian tĩnh tâm, tháo gỡ nỗi lo thầm kín và nghỉ ngơi sâu",
-      "y_chinh": "Nhà 12 · Khoảng lặng chiêm nghiệm & Phục hồi tâm trí xoay quanh thời gian tĩnh tâm, tháo gỡ nỗi lo thầm kín và nghỉ ngơi sâu.",
+      "y_chinh": "Ở nhà 12, điểm này làm việc ở phía sau: lúc bạn ở một mình, khi nghỉ ngơi, và những điều bạn ít nói ra.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     }
@@ -127,18 +127,18 @@
       "school_id": "chiem_tinh_tay"
     },
     "mc": {
-      "bach_duong": "Thiên Đỉnh (MC) Bạch Dương: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
-      "kim_nguu": "Thiên Đỉnh (MC) Kim Ngưu: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
-      "song_tu": "Thiên Đỉnh (MC) Song Tử: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
-      "cu_giai": "Thiên Đỉnh (MC) Cự Giải: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
-      "su_tu": "Thiên Đỉnh (MC) Sư Tử: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
-      "xu_nu": "Thiên Đỉnh (MC) Xử Nữ: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
-      "thien_binh": "Thiên Đỉnh (MC) Thiên Bình: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
-      "bo_cap": "Thiên Đỉnh (MC) Bọ Cạp: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
-      "nhan_ma": "Thiên Đỉnh (MC) Nhân Mã: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
-      "ma_ket": "Thiên Đỉnh (MC) Ma Kết: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
-      "bao_binh": "Thiên Đỉnh (MC) Bảo Bình: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
-      "song_ngu": "Thiên Đỉnh (MC) Song Ngư: định hướng nghề nghiệp và uy tín xã hội phát triển qua nét cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+      "bach_duong": "Thiên Đỉnh (MC) Bạch Dương: hợp hướng nghề được tự khởi xướng, dẫn đầu và quyết nhanh; người ta nhớ tới bạn vì dám làm trước.",
+      "kim_nguu": "Thiên Đỉnh (MC) Kim Ngưu: hợp hướng nghề làm ra thứ hữu hình, bền lâu (tay nghề, tài chính, ẩm thực, thiết kế); uy tín đến từ chất lượng đều và sự đáng tin.",
+      "song_tu": "Thiên Đỉnh (MC) Song Tử: hợp nghề chữ nghĩa, giao tiếp, dạy học, truyền thông, buôn bán; được biết tới nhờ nhanh nhạy và nói rõ.",
+      "cu_giai": "Thiên Đỉnh (MC) Cự Giải: hợp nghề chăm sóc, giáo dục, ẩm thực, nhà ở, việc gắn với gia đình; uy tín đến từ sự tận tâm.",
+      "su_tu": "Thiên Đỉnh (MC) Sư Tử: hợp nghề được đứng trước người khác: dẫn dắt, biểu diễn, sáng tạo, đào tạo; được nhớ tới nhờ sự nhiệt thành.",
+      "xu_nu": "Thiên Đỉnh (MC) Xử Nữ: hợp nghề cần chính xác và có ích: kỹ thuật, phân tích, kế toán, y tế, quản lý quy trình; uy tín đến từ việc làm kỹ.",
+      "thien_binh": "Thiên Đỉnh (MC) Thiên Bình: hợp nghề về con người và cái đẹp: luật, thương lượng, thiết kế, tư vấn, quan hệ đối tác; được tin vì công bằng.",
+      "bo_cap": "Thiên Đỉnh (MC) Bọ Cạp: hợp nghề cần đi sâu: nghiên cứu, điều tra, tâm lý, quản lý nguồn lực, xử lý việc khó; uy tín đến từ sự kín đáo và bền bỉ.",
+      "nhan_ma": "Thiên Đỉnh (MC) Nhân Mã: hợp nghề mở rộng tầm nhìn: giảng dạy, xuất bản, du lịch, ngoại thương, luật; được nhớ tới nhờ tầm nhìn và sự thẳng thắn.",
+      "ma_ket": "Thiên Đỉnh (MC) Ma Kết: hợp con đường đi lên từng bậc trong tổ chức: quản lý, hành chính, xây dựng, tài chính doanh nghiệp; uy tín đến từ trách nhiệm lâu dài.",
+      "bao_binh": "Thiên Đỉnh (MC) Bảo Bình: hợp nghề đổi mới và vì cộng đồng: công nghệ, khoa học, tổ chức xã hội, mạng lưới; được biết tới nhờ ý tưởng khác biệt.",
+      "song_ngu": "Thiên Đỉnh (MC) Song Ngư: hợp nghề nghệ thuật, âm nhạc, thiết kế, công tác xã hội, chăm sóc tinh thần; uy tín đến từ lòng cảm thông và trí tưởng tượng.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     }

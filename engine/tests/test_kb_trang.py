@@ -31,7 +31,8 @@ def test_danh_sach_du_ba_loai():
                    "dau_hieu": 23,    # Y5: dấu hiệu nhà ở (form Khảo sát nhà)
                    "co_thu": 1,       # TV-CTP: Đẩu Số Cốt Tuỷ Phú (một trang trụ cho cả bài phú)
                    "bo_vi": 25,       # NT-1: bộ vị gương mặt
-                   "la_bai": 78}      # TR-1: 78 lá bài Tarot
+                   "la_bai": 78,      # TR-1: 78 lá bài Tarot
+                   "cung_hd": 12}     # CHT-1: 12 cung hoàng đạo
     assert len({(t["loai"], t["slug"]) for t in ds}) == len(ds)
 
 
@@ -81,7 +82,7 @@ def test_lien_quan_tro_toi_trang_ton_tai():
 
 def test_api():
     r = client.get("/v1/kb/trang")
-    assert r.status_code == 200 and len(r.json()["trang"]) == 668
+    assert r.status_code == 200 and len(r.json()["trang"]) == 680   # CHT-1: +12 cung hoàng đạo
     r = client.get("/v1/kb/trang/so/so-22")
     assert r.status_code == 200 and r.json()["slug"] == "so-22"
     assert client.get("/v1/kb/trang/so/so-10").status_code == 404

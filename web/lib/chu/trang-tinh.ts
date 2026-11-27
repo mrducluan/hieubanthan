@@ -30,6 +30,10 @@ const MANG: [string, string, string, string, [string, string, string], string, s
   ["ky_mon", "Kỳ Môn Độn Giáp", "Giờ này nên đi hướng nào?",
     "Mỗi hai tiếng, tám hướng quanh bạn đổi vai một lần. Chọn việc định làm — gặp gỡ, ký kết, đi xa, giấy tờ — để biết giờ nào, hướng nào hợp trong ngày.",
     ["Tám hướng của giờ đang đi", "Giờ hợp việc trong ngày", "Câu sách xưa cho từng cửa"], "Không cần ngày sinh", "Xem giờ và hướng"],
+  // CHANG-4 (2026-11-27): bản đồ sao ngày sinh theo chiêm tinh phương Tây — chưa có giờ sinh vẫn xem được Mặt Trời, Mặt Trăng.
+  ["chiem_tinh", "Chiêm tinh", "Lúc mình ra đời, bầu trời trông thế nào?",
+    "Các hành tinh nằm ở cung hoàng đạo nào lúc bạn sinh: cung Mặt Trời, Mặt Trăng, cung Mọc, 12 nhà, góc chiếu — đặt cạnh Bát tự và Tử vi để thấy hai cách nhìn bổ cho nhau.",
+    ["Bản đồ sao vẽ theo ngày giờ sinh", "Mặt Trời, Mặt Trăng, cung Mọc", "Đối chiếu hai bản đồ sao, không chấm điểm"], "Cần ngày sinh, nơi sinh", "Lập bản đồ sao"],
 ];
 const HOI: [string, string][] = [
   ["Mình là người thế nào?", "Thần số học"],
@@ -66,6 +70,7 @@ const SO_SANH: [string, string, string, string, string][] = [
   ["nhan_tuong", "Nhân tướng học", "Điều bạn tự thấy trong gương (31 câu)", "Tính cách, nếp thói quen, vùng mặt nên chăm, tuổi lưu niên", "Ma Y Thần Tướng, Băng Giám, Nội Kinh"],
   ["tarot", "Tarot", "Một câu hỏi, lá bạn tự rút", "Một việc cụ thể: chuyện gì đang có, dòng chảy, việc nên làm", "Waite 1910, Book T (Golden Dawn), Marseille, B.O.T.A."],
   ["ky_mon", "Kỳ Môn Độn Giáp", "Giờ đang đi và nơi bạn đứng", "Chọn giờ, chọn hướng cho một việc trong ngày", "Yên Ba Điếu Tẩu Ca, Độn Giáp Diễn Nghĩa"],
+  ["chiem_tinh", "Chiêm tinh", "Ngày, giờ, nơi sinh", "Tính cách theo bầu trời lúc sinh, nhịp lớn của các năm", "Chiêm tinh phương Tây cổ điển: 12 cung, 12 nhà, góc chiếu"],
 ];
 const HOI_DAP: [string, string][] = [
   ["Huyền học là gì?", "Là tên gọi chung cho các hệ thống người xưa dùng để đọc nhịp của con người và thời gian: qua con số, ngày giờ sinh (Tử vi, Bát tự), quẻ dịch, nơi ở (Phong thuỷ), gương mặt (Nhân tướng), giờ và hướng (Kỳ Môn). Ở đây chúng là nội dung văn hoá để tham khảo và tự soi, không phải lời tiên đoán."],
@@ -95,7 +100,7 @@ export const CHU_HUYEN_HOC = {
     [`hoi.den_${i + 1}`, { nhom: "Chọn theo câu hỏi", nhan: `Câu ${i + 1} — tên công cụ`, mac_dinh: den, toi_da: 30 }],
   ])),
 
-  "mang.nho": { nhom: THE, nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Tám hệ thống, một hồ sơ", toi_da: 60 },
+  "mang.nho": { nhom: THE, nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Chín hệ thống, một hồ sơ", toi_da: 60 },
   "mang.lon": { nhom: THE, nhan: "Tiêu đề mục", mac_dinh: "Mỗi mảng trả lời một kiểu câu hỏi", toi_da: 80 },
   ...Object.fromEntries(MANG.flatMap(([k, ten, hoi, mo, nhan, can, nut]) => [
     [`the.${k}_ten`, { nhom: THE, nhan: `${ten} — tên`, mac_dinh: ten, toi_da: 40 }],
@@ -112,6 +117,12 @@ export const CHU_HUYEN_HOC = {
   "chan_dung.lon": { nhom: "Chân dung tổng hợp", nhan: "Tiêu đề khối", mac_dinh: "Ba cách nhìn, một con người", toi_da: 80 },
   "chan_dung.mo": { nhom: "Chân dung tổng hợp", nhan: "Lời dẫn", mac_dinh: "Tử vi nhìn hoàn cảnh quanh bạn, Bát tự nhìn sức của chính bạn, nhân tướng nhìn điều bạn đang thấy ở mình. Đặt ba cách cạnh nhau theo từng mảng đời: mảng nào cả ba cùng thấy, mảng nào nhìn khác nhau và vì sao.", toi_da: 300 },
   "chan_dung.nut": { nhom: "Chân dung tổng hợp", nhan: "Chữ nút", mac_dinh: "Xem chân dung tổng hợp", toi_da: 40 },
+  // CV-3: hai lối vào chưa có chỗ trên hub — Cố vấn quyết định (hỏi bằng lời thường) và Chiêm tinh phương Tây.
+  "them.nho": { nhom: "Hai lối khác", nhan: "Dòng nhỏ", mac_dinh: "Hai lối khác để bắt đầu", toi_da: 60 },
+  "them.cv_ten": { nhom: "Hai lối khác", nhan: "Cố vấn — tên", mac_dinh: "Hỏi một quyết định", toi_da: 60 },
+  "them.cv_mo": { nhom: "Hai lối khác", nhan: "Cố vấn — lời dẫn", mac_dinh: "Đang cân nhắc mở shop, mua nhà, nghỉ việc? Nêu câu hỏi và ngày sinh: tháng nào hợp, cần chuẩn bị gì, hướng cửa có hợp không. Không cần biết môn nào.", toi_da: 220 },
+  "them.ct_ten": { nhom: "Hai lối khác", nhan: "Chiêm tinh — tên", mac_dinh: "Chiêm tinh phương Tây", toi_da: 60 },
+  "them.ct_mo": { nhom: "Hai lối khác", nhan: "Chiêm tinh — lời dẫn", mac_dinh: "Bản đồ sao theo ngày, giờ, nơi sinh: cung Mặt Trời, Mặt Trăng, Cung Mọc, 12 nhà. Đặt cạnh Bát tự và Tử vi để tự so.", toi_da: 220 },
   // RS-2: lối vào gói xem + hỏi chuyên gia (thẻ chuyên gia chỉ hiện khi công tắc sao.chuyen_gia.bat bật).
   "sau_hon.nho": { nhom: "Đọc sâu hơn", nhan: "Dòng nhỏ", mac_dinh: "Khi muốn đọc sâu hơn", toi_da: 60 },
   "sau_hon.goi_ten": { nhom: "Đọc sâu hơn", nhan: "Gói xem — tên", mac_dinh: "Các gói xem", toi_da: 60 },
@@ -126,7 +137,7 @@ export const CHU_HUYEN_HOC = {
   ])),
 
   "so_sanh.nho": { nhom: "Bảng so sánh", nhan: "Dòng nhỏ trên tiêu đề mục", mac_dinh: "Khác nhau thế nào", toi_da: 60 },
-  "so_sanh.lon": { nhom: "Bảng so sánh", nhan: "Tiêu đề mục", mac_dinh: "Tám hệ thống, tám kiểu câu hỏi", toi_da: 80 },
+  "so_sanh.lon": { nhom: "Bảng so sánh", nhan: "Tiêu đề mục", mac_dinh: "Chín hệ thống, chín kiểu câu hỏi", toi_da: 80 },
   "so_sanh.cot_1": { nhom: "Bảng so sánh", nhan: "Tên cột 1", mac_dinh: "Hệ thống", toi_da: 30 },
   "so_sanh.cot_2": { nhom: "Bảng so sánh", nhan: "Tên cột 2", mac_dinh: "Dựa vào", toi_da: 30 },
   "so_sanh.cot_3": { nhom: "Bảng so sánh", nhan: "Tên cột 3", mac_dinh: "Trả lời tốt nhất", toi_da: 30 },

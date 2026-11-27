@@ -55,6 +55,8 @@ export const CHU_KIEN_THUC = {
   "moi.nut_tarot": { nhom: M, nhan: "Nút mời — Tarot", mac_dinh: "Rút bài Tarot của tôi", en: "Draw my tarot cards" },
   // EN-ALL GĐ 8 — cụm bộ vị gương mặt (bản Việt đọc LOI_MOI / NUT_CONG_CU trong TrangKienThuc, chữ Việt ở đây = nút cũ).
   "moi.bo_vi": { nhom: M, nhan: "Lời mời — trang bộ vị gương mặt", mac_dinh: "Vùng này trên gương mặt bạn trông thế nào, sách xưa đọc ra sao? Soi gương sáu bước — không cần ảnh.", en: "How does this area look on your own face, and how do the old books read it? Take the six-step mirror survey — no photo needed." },
+  "moi.cung_hd": { nhom: M, nhan: "Lời mời — trang cung hoàng đạo", mac_dinh: "Ngoài cung Mặt Trời, Mặt Trăng và Cung Mọc của bạn rơi vào cung nào? Nhập ngày, giờ, nơi sinh để lập bản đồ sao — có từng bước tính.", en: "Beyond your Sun sign, which signs hold your Moon and Ascendant? Enter your birth date, time and place to draw your birth chart." },
+  "moi.nut_chiem_tinh": { nhom: M, nhan: "Nút mời — Chiêm tinh", mac_dinh: "Lập bản đồ sao của tôi", en: "Draw my birth chart" },
   "moi.nut_nhan_tuong": { nhom: M, nhan: "Nút mời — Nhân tướng học", mac_dinh: "Xem tướng mặt của tôi", en: "Read my face" },
 
   // ---------------------------------------------------------------- mục lục cụm dài (DanhSachCum + BoLocCum)
@@ -114,6 +116,7 @@ export const CHU_KIEN_THUC = {
   "mh.menh": { nhom: H, nhan: "Mệnh năm — chú thích hình ({can_chi}, {nap_am}, {han}, {hanh})", mac_dinh: "Tuổi {can_chi}, mệnh {nap_am} ({han}) — hành {hanh} trong vòng ngũ hành", en: "{can_chi} year, Na Yin {nap_am} ({han}) — {hanh} in the five-element cycle" },
   "mh.sao": { nhom: H, nhan: "Sao Tử vi — chú thích hình ({ten}, {han}, {hanh})", mac_dinh: "Sao {ten} ({han}), hành {hanh}", en: "{ten} ({han}), {hanh} element" },
   "mh.sao_duoi": { nhom: H, nhan: "Sao Tử vi — chữ dưới hình ({ten}, {hanh})", mac_dinh: "{ten} · {hanh}", en: "{ten} · {hanh}" },
+  "mh.cung_hd": { nhom: H, nhan: "Cung hoàng đạo — chú thích hình ({ten}, {so})", mac_dinh: "Cung {ten} — cung thứ {so} trên vòng hoàng đạo", en: "{ten} — sign {so} on the zodiac wheel" },
   "mh.cung": { nhom: H, nhan: "Cung Tử vi — chú thích hình ({cung})", mac_dinh: "Cung {cung} — vị trí trong vòng 12 cung Tử vi", en: "The {cung} — its place in the ring of 12 palaces" },
   "mh.sao_cung": { nhom: H, nhan: "Sao ở cung — chú thích hình ({ten}, {han}, {cung})", mac_dinh: "Sao {ten} ({han}) ở cung {cung} — vòng 12 cung Tử vi", en: "{ten} ({han}) in the {cung} — the ring of 12 palaces" },
   "mh.hoa_cung": { nhom: H, nhan: "Hoá ở cung — chú thích hình ({hoa}, {han}, {cung})", mac_dinh: "Hoá {hoa} ({han}) ở cung {cung} — vòng 12 cung Tử vi", en: "Hua {hoa} ({han}) in the {cung} — the ring of 12 palaces" },
@@ -133,5 +136,5 @@ export const CHU_KIEN_THUC = {
 /** EN-ALL — khoá chữ nút mời cuối trang kiến thức bản Anh theo trang công cụ của mảng (thiếu → "moi.nut_chung"). */
 export const NUT_MOI_EN: Readonly<Record<string, keyof typeof CHU_KIEN_THUC>> = {
   "/bat-tu": "moi.nut_bat_tu", "/tu-vi": "moi.nut_tu_vi", "/phong-thuy": "moi.nut_phong_thuy", "/kinh-dich": "moi.nut_kinh_dich",
-  "/than-so": "moi.nut_than_so", "/hop-doi": "moi.nut_hop_doi", "/tarot": "moi.nut_tarot", "/nhan-tuong": "moi.nut_nhan_tuong",
+  "/than-so": "moi.nut_than_so", "/hop-doi": "moi.nut_hop_doi", "/tarot": "moi.nut_tarot", "/nhan-tuong": "moi.nut_nhan_tuong", "/chiem-tinh": "moi.nut_chiem_tinh",
 };

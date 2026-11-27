@@ -1,0 +1,362 @@
+{
+ "_nguon": "CHT-1 — English overlay of chiem_tinh_cung_hoang_dao_kb.json (editorial team).",
+ "_trang_thai": "nhap_ai_cho_duyet",
+ "nguyen_to": {
+  "lua": {
+   "ten": "Fire",
+   "y": "enthusiastic, proactive, needs to act"
+  },
+  "dat": {
+   "ten": "Earth",
+   "y": "practical, steady, needs tangible results"
+  },
+  "khi": {
+   "ten": "Air",
+   "y": "quick-thinking, loves exchange, needs ideas and people"
+  },
+  "nuoc": {
+   "ten": "Water",
+   "y": "emotional, sensitive, needs closeness"
+  }
+ },
+ "pham_chat": {
+  "thong_linh": {
+   "ten": "Cardinal",
+   "y": "opens a season, good at getting new things going"
+  },
+  "kien_dinh": {
+   "ten": "Fixed",
+   "y": "the middle of a season, good at holding steady and making things last"
+  },
+  "linh_hoat": {
+   "ten": "Mutable",
+   "y": "closes a season, good at adapting and handing over"
+  }
+ },
+ "cung": {
+  "bach_duong": {
+   "hinh_tuong": "the ram",
+   "diem_manh": [
+    "Acts first without waiting to be asked",
+    "Speaks plainly, so people know where they stand",
+    "Recovers quickly after a setback"
+   ],
+   "diem_mu": [
+    "Rushes, deciding before the facts are in",
+    "Keen at the start, bored once the work turns routine",
+    "Easily impatient with slower people"
+   ],
+   "tinh_yeu": "Drawn to people who are direct and lively, with no games. Often the one who makes the first move. The bond lasts longer with a shared project to work on, and when you learn to hear the other person out before answering.",
+   "cong_viec": "Suits work that needs a start, quick action and clear targets. Loses interest in repetitive tasks; pair up with someone good at seeing things through.",
+   "nghe": [
+    "sales, opening new markets",
+    "sports, coaching",
+    "rescue and incident response",
+    "start-ups, short project management"
+   ],
+   "tien_bac": "Earns well when willing to act; tends to spend on impulse. A separate pot you do not touch for three months helps the money stay.",
+   "tu_soi": "What did I start with energy lately but have not finished?",
+   "viec": [
+    "Before a big decision, sleep on it one night before answering.",
+    "Each week pick one unfinished task and close it before taking on a new one."
+   ]
+  },
+  "kim_nguu": {
+   "hinh_tuong": "the bull",
+   "diem_manh": [
+    "Patient, steady until the work is done",
+    "Keeps promises; promises little but delivers",
+    "Enjoys comfort and makes home and work pleasant"
+   ],
+   "diem_mu": [
+    "Slow to change their mind even after seeing they were wrong",
+    "Can be possessive of people and things",
+    "Puts off tasks with no immediate payoff"
+   ],
+   "tinh_yeu": "Falls in love slowly but surely and needs to feel safe before opening up. Shows love through deeds: cooking a meal, fixing something, being on time. Can turn jealous when the relationship feels shaky.",
+   "cong_viec": "Suits work that needs persistence, quality and visible results. Does well at their own pace; struggles where plans change all the time.",
+   "nghe": [
+    "finance, accounting, banking",
+    "cooking, gardening, farming",
+    "design, crafts, beauty",
+    "real estate, asset management"
+   ],
+   "tien_bac": "Has a knack for saving and buying things that last. The trap is leaving money in one place too long to avoid learning something new.",
+   "tu_soi": "Which habit am I keeping only because it is familiar, not because it still works?",
+   "viec": [
+    "Set one day a month to review one spending habit or way of working.",
+    "In a disagreement, say what you need instead of going quiet."
+   ]
+  },
+  "song_tu": {
+   "hinh_tuong": "the twins",
+   "diem_manh": [
+    "Learns fast and grasps a new idea on first hearing",
+    "Can talk with many kinds of people",
+    "Flexible, quick to change course when things change"
+   ],
+   "diem_mu": [
+    "Spreads thin, starting many things and finishing few",
+    "Gets bored going deep on one topic for long",
+    "Words sometimes run ahead of thought"
+   ],
+   "tinh_yeu": "Needs someone to talk to, with laughter and new things to share. Falls for a mind more than a face. The relationship needs room for both to keep friends and interests of their own.",
+   "cong_viec": "Suits work full of exchange, information and constant change. Does well with varied tasks; a teammate or a task list helps keep the pace.",
+   "nghe": [
+    "journalism, media, content",
+    "sales, customer care",
+    "teaching, translation",
+    "marketing, public relations"
+   ],
+   "tien_bac": "Often has several small income streams; tends to spend on new gadgets and courses. Logging expenses weekly shows where the money goes.",
+   "tu_soi": "Of the ten things I am chasing, which one is truly worth finishing?",
+   "viec": [
+    "Before promising, check your calendar for room.",
+    "Each evening note three things you finished that day, however small."
+   ]
+  },
+  "cu_giai": {
+   "hinh_tuong": "the crab",
+   "diem_manh": [
+    "Looks after people at the right moment without being asked",
+    "Grateful, keeps memories, values family",
+    "Good instincts about people"
+   ],
+   "diem_mu": [
+    "Worries about things that have not happened",
+    "Remembers old hurts for a long time",
+    "Mood rises and falls with the atmosphere around them"
+   ],
+   "tinh_yeu": "Loves deeply and loyally and needs a sense of home. Shows love through care. Things get hard when you guess instead of asking; saying what you need is the skill to practise.",
+   "cong_viec": "Suits caring and nurturing work and keeping a team's mood warm. Does well where people trust you; uncomfortable in cold, cut-throat settings.",
+   "nghe": [
+    "nursing and care work",
+    "early-years and primary teaching",
+    "restaurants, hotels, food",
+    "human resources, social work"
+   ],
+   "tien_bac": "Likes saving for family and for hard times. Tends to spend out of kindness; set a monthly amount for helping others in advance.",
+   "tu_soi": "Have I recently told anyone what I need, or did I hope they would just know?",
+   "viec": [
+    "Keep one evening a week just for yourself.",
+    "When worried, write down the worry and one small thing you can do right now."
+   ]
+  },
+  "su_tu": {
+   "hinh_tuong": "the lion",
+   "diem_manh": [
+    "Warm and generous with the people they love",
+    "Willing to step forward and take responsibility in public",
+    "Creative, with taste, wanting every task done beautifully"
+   ],
+   "diem_mu": [
+    "Needs recognition, stays hurt when overlooked",
+    "Finds it hard to admit mistakes in front of others",
+    "Tends to take on everything to keep the lead role"
+   ],
+   "tinh_yeu": "Loves wholeheartedly, likes to spoil and be spoiled. Needs sincere praise. The bond lasts when you let your partner shine too.",
+   "cong_viec": "Suits leading roles, standing in front of others and work with a personal stamp. Does well when trusted; practise sharing tasks and praising your team.",
+   "nghe": [
+    "performing arts, stage",
+    "management, team leadership",
+    "events, fashion",
+    "teaching, public speaking"
+   ],
+   "tien_bac": "Open-handed with friends, likes things of quality. A set budget for parties and gifts keeps you generous without running short.",
+   "tu_soi": "Am I doing this because I enjoy it, or because I want to be seen?",
+   "viec": [
+    "Each week give one co-worker specific, honest praise.",
+    "When wrong, say 'I got this part wrong' in one sentence."
+   ]
+  },
+  "xu_nu": {
+   "hinh_tuong": "the maiden holding a sheaf of wheat",
+   "diem_manh": [
+    "Meticulous, spots small errors others miss",
+    "Likes to help in practical ways",
+    "Organised, works with a clear process"
+   ],
+   "diem_mu": [
+    "Sets the bar too high and is rarely satisfied",
+    "Fault-finding can turn into criticism",
+    "Worries because everything must be right"
+   ],
+   "tinh_yeu": "Shows love through practical attention: remembering dates, handling small chores. Needs time to trust. Things feel lighter when you praise more than you correct and accept that your partner is not perfect.",
+   "cong_viec": "Suits work that needs accuracy, analysis and process improvement. Does well with clear standards; set a limit on rounds of revision.",
+   "nghe": [
+    "accounting, auditing, data analysis",
+    "health care, pharmacy, nutrition",
+    "editing, quality control",
+    "programming, engineering"
+   ],
+   "tien_bac": "Spends carefully, rarely on impulse. The trap is worrying so much that you will not spend on things worth doing.",
+   "tu_soi": "Is this good enough to hand over, or am I still fixing it out of fear of criticism?",
+   "viec": [
+    "Set a stop time for each round of edits.",
+    "Before giving feedback, name one thing the other person did well."
+   ]
+  },
+  "thien_binh": {
+   "hinh_tuong": "the scales",
+   "diem_manh": [
+    "Sees both sides of a story",
+    "Good at making peace and keeping things pleasant",
+    "An eye for beauty and balance"
+   ],
+   "diem_mu": [
+    "Struggles to choose, afraid a choice will upset someone",
+    "Goes along with others and hides their own view",
+    "Avoids conflict and lets problems drag on"
+   ],
+   "tinh_yeu": "Wants a true partner to discuss and decide with. Values courtesy and respect. The bond lasts when you dare to say no and state what you want.",
+   "cong_viec": "Suits negotiation, networking, design and law. Does well in a cooperative team; set a deadline for every round of weighing options.",
+   "nghe": [
+    "law, mediation, negotiation",
+    "design, architecture, fashion",
+    "partnerships, diplomacy",
+    "consulting, human resources"
+   ],
+   "tien_bac": "Likes to spend on beauty and on relationships. Agreeing up front with whoever shares the bill avoids awkwardness later.",
+   "tu_soi": "When did I last nod while wanting to say no?",
+   "viec": [
+    "For small things, give yourself five minutes to choose and stop.",
+    "State your own view first, then ask others."
+   ]
+  },
+  "bo_cap": {
+   "hinh_tuong": "the scorpion",
+   "diem_manh": [
+    "Highly focused, follows things to the root",
+    "Loyal, keeps the secrets of those who trust them",
+    "Sees the real motive behind the words"
+   ],
+   "diem_mu": [
+    "Slow to trust, tests other people",
+    "Holds on to hurt for a long time",
+    "Wants control of everything"
+   ],
+   "tinh_yeu": "Loves intensely and needs complete honesty. Slow to open up, but once open stays attached for long. Things get easier when you voice a doubt directly instead of quietly testing your partner.",
+   "cong_viec": "Suits work that needs digging deep: research, crisis handling, risk management. Does well when fully trusted; practise sharing information with the team.",
+   "nghe": [
+    "research, investigation, analysis",
+    "psychology, counselling",
+    "finance, investment, insurance",
+    "specialist technical work, cybersecurity"
+   ],
+   "tien_bac": "Good at long-range planning and likes to know exactly where money is. Shared money is best kept on clear paper to avoid suspicion.",
+   "tu_soi": "What am I avoiding saying because I am afraid of getting hurt?",
+   "viec": [
+    "When in doubt, ask one direct question instead of testing.",
+    "Write down one old grievance you want to drop, and leave it there."
+   ]
+  },
+  "nhan_ma": {
+   "hinh_tuong": "the archer, half human and half horse",
+   "diem_manh": [
+    "Optimistic, quick to spot opportunity",
+    "Loves learning, travel and new things",
+    "Honest, says what they think"
+   ],
+   "diem_mu": [
+    "Promises more than they can deliver",
+    "Tells the truth but forgets how to say it",
+    "Dislikes commitment and may walk away when hemmed in"
+   ],
+   "tinh_yeu": "Needs a kindred companion to travel, learn and laugh with. Cannot stand being controlled. The bond lasts when both keep their freedom and share a plan to work toward.",
+   "cong_viec": "Suits wide-horizon work: travel, teaching, links across places. Does well with autonomy; pair up with someone good at details.",
+   "nghe": [
+    "travel, aviation, transport",
+    "teaching, training, publishing",
+    "import-export, international business",
+    "sports and outdoor work"
+   ],
+   "tien_bac": "Easily spends on experiences and trips. A separate travel fund lets you enjoy yourself without shortchanging the essentials.",
+   "tu_soi": "Am I promising anyone something I know will be hard to keep?",
+   "viec": [
+    "Before saying yes, count how many free hours you really have.",
+    "Pair honesty with a question: 'How does that sound to you?'."
+   ]
+  },
+  "ma_ket": {
+   "hinh_tuong": "the sea-goat",
+   "diem_manh": [
+    "Works steadily and does not depend on being in the mood",
+    "Responsible, trusted with important work",
+    "Practical, knows their limits"
+   ],
+   "diem_mu": [
+    "Rarely allows rest and treats rest as laziness",
+    "Finds it hard to ask for help, carries the load alone",
+    "Turns gloomy when a plan runs behind schedule"
+   ],
+   "tinh_yeu": "Takes love seriously and thinks long term early on. Shows it by taking care of things more than with sweet words. Warmer when you make time to play, not only to plan.",
+   "cong_viec": "Suits work with a clear path and high responsibility: management, building foundations for the long run. Does well in clear hierarchies; learn to delegate.",
+   "nghe": [
+    "business management and operations",
+    "engineering, construction",
+    "finance, public administration",
+    "law, auditing"
+   ],
+   "tien_bac": "Good at saving and building up for the long haul. The trap is saving so hard you will not spend on health and enjoyment.",
+   "tu_soi": "Am I measuring my worth by achievements or by something else?",
+   "viec": [
+    "Book rest in your calendar the way you book meetings.",
+    "Each week say one word of thanks or affection to family."
+   ]
+  },
+  "bao_binh": {
+   "hinh_tuong": "the water bearer",
+   "diem_manh": [
+    "Thinks differently and sees new ways of doing things",
+    "Cares about the common good and fairness in a group",
+    "Friendly with many kinds of people"
+   ],
+   "diem_mu": [
+    "Keeps emotional distance and can seem hard to reach",
+    "Stubborn about their ideas once convinced",
+    "Tends to brush off everyday chores"
+   ],
+   "tinh_yeu": "Wants someone who is both friend and lover and respects freedom and opinions. Shows affection in their own way, rarely by the book. Closer when you share feelings, not only ideas.",
+   "cong_viec": "Suits innovation, technology, community work and improving systems. Does well when free to try new methods; be patient with the small daily steps.",
+   "nghe": [
+    "technology, programming, science",
+    "non-profits and community work",
+    "research and invention",
+    "digital media, product design"
+   ],
+   "tien_bac": "Has fresh ideas for earning; tends to skip tracking spending. A simple monthly spreadsheet keeps the rhythm.",
+   "tu_soi": "Do the people close to me know how I am feeling right now?",
+   "viec": [
+    "Finish one small everyday task each day before thinking big.",
+    "In a debate, repeat the other person's point before making yours."
+   ]
+  },
+  "song_ngu": {
+   "hinh_tuong": "two fish swimming in opposite directions",
+   "diem_manh": [
+    "Deeply sympathetic, understands what others feel",
+    "Rich imagination, suited to the arts",
+    "Gentle and quick to forgive"
+   ],
+   "diem_mu": [
+    "Finds it hard to say no, so kindness gets exploited",
+    "Dreams a lot but is slow to act",
+    "Dodges hard things by putting them off"
+   ],
+   "tinh_yeu": "Loves romantically and is ready to give a lot. Needs someone gentle yet steady. Healthier when you keep clear boundaries and do not carry all of your partner's sadness.",
+   "cong_viec": "Suits creative, caring and arts work. Does well in a quiet space; keep a schedule and concrete deadlines.",
+   "nghe": [
+    "music, painting, film",
+    "care work, psychology, social work",
+    "design, photography",
+    "special education, volunteering"
+   ],
+   "tien_bac": "Big-hearted, quick to lend or to spend on feelings. Setting a lending limit in advance protects both the friendship and the money.",
+   "tu_soi": "For the thing I have long dreamed of doing, what is the smallest step I can take this week?",
+   "viec": [
+    "Practise saying: 'Let me think it over and get back to you'.",
+    "Turn one idea into three tasks, each with a date."
+   ]
+  }
+ }
+}

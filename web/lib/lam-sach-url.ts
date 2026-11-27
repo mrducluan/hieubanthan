@@ -13,6 +13,8 @@ export function lamSachUrl(u: string): string {
     x.pathname = x.pathname.split("/").map((d, i, ds) => (MA_TRONG_URL.test(d) || (ds[i - 1] === "qua" && MA_QUA_URL.test(d))
       || (ds[i - 1] === "li-xi" && MA_LI_XI_URL.test(d)) ? ":ma" : d)).join("/");
     for (const k of ["the", "ma"]) if (x.searchParams.has(k)) x.searchParams.set(k, ":ma");
+    // CV-4: /co-van?cau= mang câu hỏi → không để câu (kể cả câu gợi ý cố định) vào đo lường.
+    if (x.pathname === "/co-van" && x.searchParams.has("cau")) x.searchParams.set("cau", ":cau");
     // Trang đăng nhập mang đường quay về (?tiep=/li-xi/<mã>, /qua/<mã>…) → lọc cả đường đó.
     const tiep = x.searchParams.get("tiep");
     if (tiep && tiep.startsWith("/")) x.searchParams.set("tiep", lamSachUrl(tiep));

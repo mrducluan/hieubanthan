@@ -2,17 +2,39 @@
 // Cố vấn liên mảng Tam Tài (/co-van, tab "Hỏi quyết định" của /co-van-kinh-doanh) — làm lại sau review 2026-11-26:
 // ba cách xem đọc riêng (không gộp mức), chỉ dùng phần miễn phí của các báo cáo nên trang miễn phí; câu về người khác,
 // chuyện đã xảy ra, người dưới 16 tuổi, câu chưa rõ việc gì → chuyển hướng (engine quyết, web chỉ vẽ).
-import { useEffect, useState } from "react";
-import { AlertTriangle, ArrowUpRight, CalendarClock, Compass, Layers, ShieldAlert, Sparkles } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { AlertTriangle, ArrowUpRight, CalendarClock, Compass, Layers, ListChecks, ShieldAlert, Sparkles, Target } from "lucide-react";
 import Link from "@/components/khung/Lien";
-import { SoDoTamTaiSvg, SongNhip12ThangSvg, type NhipThangTamTai, type TruTamTai } from "@/components/co-van/SoDoTamTaiSvg";
 import { KiemChung } from "@/components/huyen-hoc/KiemChung";
 import { KhungUngDungCoDien } from "@/components/luan-giai/CheDoDoc";
 import { ViSao } from "@/components/luan-giai/HopNoiBat";
 import type { Muc, UngDungCoDien } from "@/components/luan-giai/kieu";
 import { ghi } from "@/lib/do-luong";
 import { ngaySinhIso, useHoSo } from "@/lib/hoso";
+import { useHoSoNha } from "@/lib/ho-so-nha";
+import { useMatBang } from "@/lib/mat-bang";
 import { cn } from "@/lib/utils";
+import { huongTuCuaHang, huongTuHoSoNha, type HuongChon } from "@/lib/huong-co-van";
+import { cauTuUrl, layCauChoCoVan } from "@/lib/cau-hoi-co-van";
+import { HuongKhongGian, TEN_NGUON_HUONG, type NguonHuong } from "./HuongKhongGian";
+import { SoDoTamTaiSvg } from "./SoDoTamTaiSvg";
+
+interface TruTamTai {
+  ma: "nhan" | "thien" | "dia";
+  ten_tru: string;
+  nguon: string;
+  muc: Muc | null;
+  nhan_muc: string | null;
+  nhan_xet: string;
+  hanh_dong: string;
+  can_cu: string[];
+  lien_ket: { ten: string; duong: string };
+  ma_mau: string;
+  muc_tung_mon?: { tuvi: Muc | null; battu: Muc | null };
+  nhan_tung_mon?: { tuvi: string | null; battu: string | null };
+}
+
+type Nhip = "day_manh" | "can_bang" | "phong_thu";
 
 interface KetQuaTamTai {
   an_toan_chan?: { xu_ly: string; loai: string; cau_tra_loi: string };
@@ -20,18 +42,42 @@ interface KetQuaTamTai {
   mach?: string;
   ten_mach?: string;
   lien_ket_mach?: { ten: string; duong: string };
+  hieu_cau?: {
+    cau: string;
+    viec: { ma: string; ten: string; khong_gian: "mat_bang" | "nha_o" | "khong" };
+    kieu: string;
+    khung: { nam: number; thang: number | null; mac_dinh: boolean; nhan: string };
+    ghi_chu: string | null;
+  };
+  tiep_theo?: { loai: "thang" | "nam"; nhan: string; cau: string }[];
+  tra_loi?: {
+    cau: string;
+    nghieng: "thuan" | "can_nhac" | "chuan_bi";
+    thang_hoi: { nhan: string; nhip: Nhip; cau: string } | null;
+    tieu_de_dieu_kien: string;
+    dieu_kien: string[];
+    truoc_het: string;
+    nen_giu: string;
+    tieu_de_nen_giu: string;
+    nhan_manh: string;
+  };
   bac_dau_vao?: 1 | 2 | 3;
   lop_da_dung?: string[];
   goi_y_nang_bac?: { bac_tiep: 2 | 3; nhan: string; ly_do: string }[];
-  tong_quan?: { cau: string; nen_giu: string; tieu_de_nen_giu: string };
-  ba_tru_tam_tai?: { nhan: TruTamTai; thien: TruTamTai; dia: TruTamTai };
+  can_bo_sung?: { loai: "mat_bang" | "nha_o"; nhan: string; ly_do: string; cach: string[] };
+  ba_tru_tam_tai?: { nhan: TruTamTai; thien: TruTamTai; dia?: TruTamTai };
   bieu_do_ngu_hanh?: {
     nhat_chu: string;
     co_gio: boolean;
     hanh: { hanh_ma: string; ten: string; diem: number; ty_le: number; trang_thai: "thieu" | "vua" | "thua" }[];
   };
-  nhip_12_thang?: NhipThangTamTai[];
-  ngay_dep_30_ngay?: { ngay: string; am_lich: string; truc: string; ly_do: string }[];
+  thoi_gian?: {
+    nam: number;
+    luoi: { thang: string; nhip: Nhip }[];
+    doan: { nhip: Nhip; nhan_nhip: string; nhan: string; ly_do: string; thang: string[]; thang_hoi: boolean }[];
+    cach_lam: { nhip: Nhip; nhan_nhip: string; nhan: string; nen_lam: string }[];
+    ngay_dep: { thang: string; ngay: string; am_lich: string; truc: string; ly_do: string }[];
+  };
   doi_tac?: { tieu_de: string; vai_tro: string; hanh_manh: string; loi: string };
   ung_dung_co_dien?: UngDungCoDien;
   ket?: string;
@@ -53,6 +99,13 @@ const GOI_Y_KINH_DOANH = [
   "Đang kẹt dòng tiền công nợ, nên thu hẹp hay xoay vốn ngắn hạn?",
 ];
 
+const MAU_NHIP: Record<Nhip, string> = { day_manh: "bg-jade/70", can_bang: "bg-gold/55", phong_thu: "bg-amber-400/70" };
+const CHU_NHIP: Record<Nhip, string> = { day_manh: "text-jade", can_bang: "text-gold", phong_thu: "text-amber-300" };
+const MAU_NGHIENG: Record<string, string> = {
+  thuan: "border-jade/45 bg-jade/10 text-jade", can_nhac: "border-gold/45 bg-gold/10 text-gold", chuan_bi: "border-amber-400/45 bg-amber-500/10 text-amber-300",
+};
+const CHU_NGHIENG: Record<string, string> = { thuan: "Nghiêng về thuận", can_nhac: "Làm được, chọn thời điểm", chuan_bi: "Nên chuẩn bị thêm" };
+
 function mauMuc(m: Muc | null) {
   if (m === "thuan") return "border-jade/45 bg-jade/10 text-jade";
   if (m === "can_chu_dong") return "border-amber-400/45 bg-amber-500/10 text-amber-300";
@@ -68,8 +121,15 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
   const [gioSinh, setGioSinh] = useState("");
   const [noiSinh, setNoiSinh] = useState("");
   const [moBac3, setMoBac3] = useState(false);
-  const [doHuong, setDoHuong] = useState("");
-  const [namXay, setNamXay] = useState("");
+  // CV-2: hướng đã chọn trong phiên (đo / chọn / lấy từ hồ sơ). Hồ sơ cửa hàng + hồ sơ nhà trên máy tự được gửi kèm khi có.
+  const [huongChon, setHuongChon] = useState<{ mat_bang?: HuongChon; nha?: HuongChon; nguon?: NguonHuong } | null>(null);
+  const [doiHuong, setDoiHuong] = useState(false);
+  const [nguonDia, setNguonDia] = useState<NguonHuong | null>(null);
+  const hsNha = useHoSoNha();
+  const hsCuaHang = useMatBang();
+  const nhaHoSo = huongTuHoSoNha(hsNha);
+  const cuaHangHoSo = huongTuCuaHang(hsCuaHang);
+  const khungKq = useRef<HTMLDivElement | null>(null);
   const [ngaySinhDoiTac, setNgaySinhDoiTac] = useState("");
   const [gioiTinhDoiTac, setGioiTinhDoiTac] = useState<"nam" | "nu">("nu");
   const [dongYDoiTac, setDongYDoiTac] = useState(false);
@@ -78,7 +138,15 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
   const [dang, setDang] = useState(false);
   const [loi, setLoi] = useState<string | null>(null);
   const [kq, setKq] = useState<KetQuaTamTai | null>(null);
-  const [chonThangIdx, setChonThangIdx] = useState(0);
+
+  // CV-3/CV-4: điền sẵn ô hỏi từ trang khác — câu NGƯỜI DÙNG GÕ đến qua sessionStorage (đọc một lần), câu gợi ý cố định qua ?cau=
+  // (chỉ nhận câu thuộc danh mục). KHÔNG tự gửi, ô vẫn sửa được.
+  useEffect(() => {
+    try {
+      const c = layCauChoCoVan() ?? cauTuUrl(new URLSearchParams(window.location.search).get("cau"));
+      if (c) setCauHoi(c);
+    } catch { /* bỏ qua */ }
+  }, []);
 
   useEffect(() => {
     if (!hs) return;
@@ -91,8 +159,9 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
     if (hs.noi_sinh) setNoiSinh(hs.noi_sinh);
   }, [hs]);
 
-  async function guiCoVan() {
-    if (cauHoi.trim().length < 3 || !ngaySinh || dang) return;
+  async function guiCoVan(ghiDe?: { mat_bang?: HuongChon; nha?: HuongChon; nguon?: NguonHuong; cau?: string }) {
+    const cauGui = (ghiDe?.cau ?? cauHoi).trim();
+    if (cauGui.length < 3 || !ngaySinh || dang) return;
     const coDoiTac = moBac3 && /^\d{4}-\d{2}-\d{2}$/.test(ngaySinhDoiTac);
     if (coDoiTac && !dongYDoiTac) {
       setLoi("Cần đánh dấu người liên quan đã đồng ý cho dùng ngày sinh, hoặc xoá ngày sinh người ấy.");
@@ -102,18 +171,19 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
     setLoi(null);
     try {
       const coGio = moBac2 && /^([01]\d|2[0-3]):[0-5]\d$/.test(gioSinh.trim());
-      const huongNum = moBac3 && doHuong.trim() !== "" ? Number(doHuong) : null;
-      const namXayNum = moBac3 && namXay.trim() !== "" ? Number(namXay) : null;
+      const mb = ghiDe?.mat_bang ?? huongChon?.mat_bang ?? cuaHangHoSo;
+      const nhaGui = ghiDe?.nha ?? huongChon?.nha ?? nhaHoSo;
+      setNguonDia(ghiDe?.mat_bang ? (ghiDe.nguon ?? null) : huongChon?.mat_bang ? (huongChon.nguon ?? null) : cuaHangHoSo ? "ho_so_cua_hang"
+        : ghiDe?.nha ? (ghiDe.nguon ?? null) : huongChon?.nha ? (huongChon.nguon ?? null) : nhaHoSo ? "ho_so_nha" : null);
       const body: Record<string, unknown> = {
-        cau_hoi: cauHoi.trim(),
+        cau_hoi: cauGui,
         ngay_sinh: ngaySinh,
         gioi_tinh: gioiTinh,
         gio_sinh: coGio ? gioSinh.trim() : null,
         do_tin_gio: coGio ? "exact" : "unknown",
         noi_sinh: coGio && noiSinh.trim() ? noiSinh.trim().slice(0, 60) : null,
-        nha: huongNum !== null && !Number.isNaN(huongNum) && huongNum >= 0 && huongNum < 360
-          ? { do_huong: huongNum, ...(namXayNum && namXayNum >= 1864 && namXayNum <= 2043 ? { nam_xay: namXayNum } : {}) }
-          : null,
+        nha: nhaGui ? { do_huong: nhaGui.do_huong, vai: "nha_o", ...(nhaGui.nam_xay ? { nam_xay: nhaGui.nam_xay } : {}) } : null,
+        mat_bang: mb ? { do_huong: mb.do_huong, ...(mb.nam_xay ? { nam_xay: mb.nam_xay } : {}) } : null,
         doi_tac: coDoiTac
           ? { ngay_sinh: ngaySinhDoiTac, gioi_tinh: gioiTinhDoiTac, vai_tro: macDinhCheDo === "kinh_doanh" ? "gop_von" : "nguoi_thuong", dong_y_tu_nguyen: true }
           : null,
@@ -130,11 +200,11 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
         return;
       }
       setKq(data);
-      setChonThangIdx(0);
       ghi("chart_interacted", {
         mo_dun: "tam_tai", kind: "co_van_xem", ket_qua: data.an_toan_chan ? data.an_toan_chan.xu_ly : data.chuyen_huong?.ly_do ?? data.mach ?? "",
-        bac: data.bac_dau_vao ?? 0,
+        bac: data.bac_dau_vao ?? 0, viec: data.hieu_cau?.viec.ma ?? "", co_huong: Boolean(data.ba_tru_tam_tai?.dia), can_bo_sung: data.can_bo_sung?.loai ?? "",
       });
+      setDoiHuong(false);
     } catch {
       setLoi("Kết nối tạm gián đoạn, bạn kiểm tra mạng rồi thử lại nhé.");
     } finally {
@@ -232,8 +302,8 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
               moBac3 ? "border-gold bg-gold/15 text-gold" : "border-line/80 text-fg-muted hover:text-fg",
             )}
           >
-            <Compass className="size-3.5" aria-hidden />
-            {moBac3 ? "Đang dùng hướng nhà / người liên quan" : "+ Thêm hướng nhà hoặc người liên quan"}
+            <Layers className="size-3.5" aria-hidden />
+            {moBac3 ? "Đang dùng người liên quan" : "+ Thêm đối tác / người thương (nếu việc này có người cùng làm)"}
           </button>
         </div>
 
@@ -264,35 +334,7 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
         )}
 
         {moBac3 && (
-          <div className="mt-3 grid grid-cols-1 gap-3 rounded-xl border border-line/60 bg-bg/40 p-3.5 sm:grid-cols-2 lg:grid-cols-4" data-testid="co-van-khung-bac-3">
-            <div>
-              <label htmlFor="cv-do-huong" className="block text-xs text-fg-muted">Độ la bàn cửa/mặt bằng (0–359°)</label>
-              <input
-                id="cv-do-huong"
-                type="number"
-                min={0}
-                max={359.9}
-                step="0.1"
-                placeholder="VD: 180"
-                value={doHuong}
-                onChange={(e) => setDoHuong(e.target.value)}
-                data-testid="co-van-do-huong"
-                className="mt-1 min-h-10 w-full rounded-lg border border-line bg-bg px-3 text-sm text-fg"
-              />
-            </div>
-            <div>
-              <label htmlFor="cv-nam-xay" className="block text-xs text-fg-muted">Năm xây (nếu biết)</label>
-              <input
-                id="cv-nam-xay"
-                type="number"
-                min={1864}
-                max={2043}
-                value={namXay}
-                onChange={(e) => setNamXay(e.target.value)}
-                data-testid="co-van-nam-xay"
-                className="mt-1 min-h-10 w-full rounded-lg border border-line bg-bg px-3 text-sm text-fg"
-              />
-            </div>
+          <div className="mt-3 grid grid-cols-1 gap-3 rounded-xl border border-line/60 bg-bg/40 p-3.5 sm:grid-cols-3" data-testid="co-van-khung-bac-3">
             <div>
               <label htmlFor="cv-dt-ngay" className="block text-xs text-fg-muted">Ngày sinh đối tác / người thương</label>
               <input
@@ -319,7 +361,7 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
               </select>
             </div>
             {ngaySinhDoiTac && (
-              <label className="flex items-start gap-2 text-xs text-fg-muted sm:col-span-2 lg:col-span-4">
+              <label className="flex items-start gap-2 text-xs text-fg-muted sm:col-span-3">
                 <input type="checkbox" checked={dongYDoiTac} onChange={(e) => setDongYDoiTac(e.target.checked)}
                   data-testid="co-van-doi-tac-dong-y" className="mt-0.5" />
                 <span>Người này đã đồng ý cho dùng ngày sinh để tính. Ngày sinh chỉ gửi đi để tính rồi bỏ, không lưu, không in lại trong kết quả.</span>
@@ -376,37 +418,155 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
         </section>
       )}
 
-      {kq?.ba_tru_tam_tai && kq.tong_quan && (
-        <div className="space-y-6" data-testid="co-van-ket-qua">
-          <section className="rounded-2xl border border-gold/40 bg-surface-2/40 p-5">
-            <p className="text-xs uppercase tracking-wider text-gold">{kq.ten_mach}</p>
-            <p className="mt-2 text-base leading-relaxed text-fg" data-testid="co-van-tong-quan">{kq.tong_quan.cau}</p>
-            <p className="mt-3 text-sm leading-relaxed text-fg-muted">
-              <span className="font-medium text-fg">{kq.tong_quan.tieu_de_nen_giu}: </span>{kq.tong_quan.nen_giu}
-            </p>
-            {kq.lop_da_dung && kq.lop_da_dung.length > 0 && (
-              <p className="mt-3 text-xs text-fg-faint">Đã dùng: {kq.lop_da_dung.join(" · ")}</p>
+      {kq?.ba_tru_tam_tai && kq.tra_loi && kq.hieu_cau && (
+        <div className="space-y-6" data-testid="co-van-ket-qua" ref={khungKq}>
+          <div className="flex flex-wrap items-center gap-2 text-xs text-fg-muted" data-testid="co-van-hieu-cau">
+            <Target className="size-3.5 text-gold" aria-hidden />
+            <span>{kq.hieu_cau.cau}</span>
+          </div>
+          {kq.hieu_cau.ghi_chu && (
+            <p className="rounded-xl border border-amber-400/40 bg-amber-500/10 px-4 py-2.5 text-xs text-amber-200" data-testid="co-van-ghi-chu-khung">{kq.hieu_cau.ghi_chu}</p>
+          )}
+
+          {/* CÂU TRẢ LỜI ĐỨNG ĐẦU — đúng việc, đúng khung thời gian, điều kiện và việc đầu tiên */}
+          <section className="rounded-2xl border border-gold/45 bg-surface-2/50 p-5 sm:p-6" data-testid="co-van-tra-loi">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className={cn("rounded-full border px-3 py-0.5 text-[11px] font-semibold", MAU_NGHIENG[kq.tra_loi.nghieng])}>{CHU_NGHIENG[kq.tra_loi.nghieng]}</span>
+              <span className="text-[11px] uppercase tracking-wider text-gold">{kq.hieu_cau.viec.ten}</span>
+            </div>
+            <p className="mt-3 font-serif text-xl leading-snug text-fg sm:text-2xl" data-testid="co-van-tra-loi-cau">{kq.tra_loi.cau}</p>
+            {kq.tra_loi.thang_hoi && (
+              <p className={cn("mt-3 rounded-xl border px-4 py-2.5 text-sm leading-relaxed", MAU_NGHIENG[kq.tra_loi.thang_hoi.nhip === "day_manh" ? "thuan" : kq.tra_loi.thang_hoi.nhip === "phong_thu" ? "chuan_bi" : "can_nhac"])}
+                data-testid="co-van-thang-hoi">{kq.tra_loi.thang_hoi.cau}</p>
             )}
+            <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+              <div>
+                <h3 className="flex items-center gap-2 text-sm font-medium text-fg"><ListChecks className="size-4 text-gold" aria-hidden /> {kq.tra_loi.tieu_de_dieu_kien}</h3>
+                <ul className="mt-2 space-y-2 text-sm leading-relaxed text-fg-muted" data-testid="co-van-dieu-kien">
+                  {kq.tra_loi.dieu_kien.map((d) => (
+                    <li key={d} className="flex gap-2"><span className="mt-2 size-1.5 shrink-0 rounded-full bg-gold/70" aria-hidden /><span>{d}</span></li>
+                  ))}
+                </ul>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-sm font-medium text-fg">Việc đầu tiên nên làm</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-fg-muted" data-testid="co-van-truoc-het">{kq.tra_loi.truoc_het}</p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium text-fg">{kq.tra_loi.tieu_de_nen_giu}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-fg-muted">{kq.tra_loi.nen_giu}</p>
+                </div>
+              </div>
+            </div>
+            <p className="mt-4 text-xs text-fg-faint">{kq.tra_loi.nhan_manh}</p>
           </section>
 
+          {/* CV-4: thử khung khác — câu hỏi tiếp dựng sẵn (tháng thuận đầu tiên, năm kế tiếp), bấm là hỏi lại ngay */}
+          {kq.tiep_theo && kq.tiep_theo.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2" data-testid="co-van-tiep-theo">
+              <span className="text-xs text-fg-muted">Thử khung khác:</span>
+              {kq.tiep_theo.map((t) => (
+                <button key={t.cau} type="button" disabled={dang}
+                  onClick={() => { ghi("chart_interacted", { mo_dun: "tam_tai", kind: "co_van_tiep_theo", loai: t.loai }); setCauHoi(t.cau); void guiCoVan({ cau: t.cau }); }}
+                  className="min-h-10 rounded-full border border-gold/45 bg-gold/10 px-3.5 py-1.5 text-xs font-medium text-gold transition-colors hover:bg-gold/20 disabled:opacity-60">
+                  {t.nhan}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* HƯỚNG: chỉ khi việc này đụng tới không gian — lấy từ hồ sơ trên máy, hoặc đo / chọn như ở Phong thuỷ */}
+          {(kq.can_bo_sung || doiHuong) && kq.hieu_cau.viec.khong_gian !== "khong" && (
+            <HuongKhongGian
+              loai={(kq.can_bo_sung?.loai ?? kq.hieu_cau.viec.khong_gian) as "mat_bang" | "nha_o"}
+              nhan={kq.can_bo_sung?.nhan ?? "Đổi hướng"}
+              lyDo={kq.can_bo_sung?.ly_do ?? "Chọn một hướng khác để xem lại phần Địa — kết quả cập nhật ngay."}
+              nhaHoSo={nhaHoSo}
+              cuaHangHoSo={cuaHangHoSo}
+              ngaySinh={ngaySinh}
+              gioiTinh={gioiTinh}
+              onChon={(h, nguon) => {
+                const loai = (kq.can_bo_sung?.loai ?? kq.hieu_cau?.viec.khong_gian) as "mat_bang" | "nha_o";
+                const moi = loai === "mat_bang" ? { mat_bang: h, nguon } : { nha: h, nguon };
+                setHuongChon((c) => ({ ...c, ...moi }));
+                setDoiHuong(false);
+                void guiCoVan(moi);
+              }}
+            />
+          )}
+
+          {/* DÒNG THỜI GIAN — chỉ năm / khung được hỏi; tháng giống nhau gộp lại */}
+          {kq.thoi_gian && (
+            <section className="rounded-2xl border border-line/70 bg-surface/40 p-4 sm:p-5" data-testid="co-van-nhip-12">
+              <h3 className="flex items-center gap-2 font-serif text-lg text-fg"><CalendarClock className="size-4 text-gold" aria-hidden /> Thời điểm trong {kq.hieu_cau.khung.mac_dinh ? "12 tháng tới" : `năm ${kq.thoi_gian.nam}`}</h3>
+              <div className="mt-3 grid grid-cols-12 gap-1" role="img" aria-label="Nhịp từng tháng: xanh là thuận, vàng là đều nhịp, hổ phách là nên đi chậm">
+                {kq.thoi_gian.luoi.map((t) => {
+                  const hoi = kq.tra_loi?.thang_hoi?.nhan === t.thang;
+                  return (
+                    <div key={t.thang} className="text-center">
+                      <div className={cn("h-7 rounded-md", MAU_NHIP[t.nhip], hoi && "ring-2 ring-fg ring-offset-2 ring-offset-bg")} />
+                      <p className={cn("mt-1 text-[10px] tabular-nums", hoi ? "font-semibold text-fg" : "text-fg-faint")}>{t.thang.split("/")[0]}</p>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="mt-4 space-y-3">
+                {kq.thoi_gian.cach_lam.map((c) => (
+                  <div key={c.nhip} className="rounded-xl border border-line/60 bg-bg/50 p-3.5" data-testid={`co-van-nhip-${c.nhip}`}>
+                    <p className={cn("text-sm font-semibold", CHU_NHIP[c.nhip])}>{c.nhan_nhip} · {c.nhan}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-fg">{c.nen_lam}</p>
+                    <ul className="mt-2 space-y-1 text-xs text-fg-muted">
+                      {kq.thoi_gian?.doan.filter((d) => d.nhip === c.nhip).map((d) => (
+                        <li key={d.nhan + d.ly_do}><span className="font-medium text-fg">{d.nhan}</span>: {d.ly_do}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              {kq.thoi_gian.ngay_dep.length > 0 && (
+                <div className="mt-4" data-testid="co-van-ngay-dep">
+                  <p className="text-sm font-medium text-fg">Ngày hợp việc trong các tháng ấy</p>
+                  <ul className="mt-1.5 space-y-1 text-xs text-fg-muted">
+                    {kq.thoi_gian.ngay_dep.map((nd) => (
+                      <li key={nd.ngay}><span className="font-medium text-fg">{nd.ngay}</span>{nd.am_lich ? ` (âm ${nd.am_lich})` : ""} — {nd.ly_do}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </section>
+          )}
+
+          {/* BA CÁCH NHÌN — mỗi cách một vai khác nhau; trụ Địa chỉ có khi việc đụng tới không gian và đã có hướng */}
           <SoDoTamTaiSvg
-            tenMach={kq.ten_mach}
+            tenMach={kq.hieu_cau?.viec.ten ?? kq.ten_mach}
             baTru={kq.ba_tru_tam_tai}
             onChonTru={(ma) => ghi("chart_interacted", { mo_dun: "tam_tai", kind: "chon_dinh_tam_tai", tru: ma })}
           />
 
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-            {([kq.ba_tru_tam_tai.nhan, kq.ba_tru_tam_tai.thien, kq.ba_tru_tam_tai.dia] as const).map((tru) => (
+          <div className={cn("grid grid-cols-1 gap-4", kq.ba_tru_tam_tai.dia ? "lg:grid-cols-3" : "lg:grid-cols-2")}>
+            {([kq.ba_tru_tam_tai.nhan, kq.ba_tru_tam_tai.thien, kq.ba_tru_tam_tai.dia] as const).filter((x): x is TruTamTai => Boolean(x)).map((tru) => (
               <section key={tru.ma} className="flex flex-col rounded-2xl border border-line/70 bg-surface/40 p-4" data-testid={`co-van-tru-${tru.ma}`}>
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <h3 className="font-serif text-lg text-fg">{tru.ten_tru}</h3>
-                  <span className={cn("rounded-full border px-2.5 py-0.5 text-[11px] font-semibold", mauMuc(tru.muc))}>
-                    {tru.nhan_muc ?? "Không chấm mức"}
-                  </span>
+                  {tru.nhan_tung_mon && (tru.nhan_tung_mon.tuvi || tru.nhan_tung_mon.battu) ? (
+                    <span className="flex flex-wrap gap-1">
+                      {tru.nhan_tung_mon.tuvi && <span className={cn("rounded-full border px-2.5 py-0.5 text-[11px] font-semibold", mauMuc(tru.muc_tung_mon?.tuvi ?? null))}>Tử vi · {tru.nhan_tung_mon.tuvi}</span>}
+                      {tru.nhan_tung_mon.battu && <span className={cn("rounded-full border px-2.5 py-0.5 text-[11px] font-semibold", mauMuc(tru.muc_tung_mon?.battu ?? null))}>Bát tự · {tru.nhan_tung_mon.battu}</span>}
+                    </span>
+                  ) : (
+                    <span className={cn("rounded-full border px-2.5 py-0.5 text-[11px] font-semibold", mauMuc(tru.muc))}>{tru.nhan_muc ?? "Không chấm mức"}</span>
+                  )}
                 </div>
                 <p className="mt-1 text-[11px] leading-snug text-fg-faint">Nguồn: {tru.nguon}</p>
                 <p className="mt-2 text-sm leading-relaxed text-fg">{tru.nhan_xet}</p>
                 <p className="mt-2 text-sm leading-relaxed text-fg-muted"><span className="font-medium text-fg">Nên làm: </span>{tru.hanh_dong}</p>
+                {tru.ma === "dia" && nguonDia && (
+                  <p className="mt-2 text-[11px] text-fg-faint" data-testid="co-van-nguon-huong">
+                    Hướng lấy từ {TEN_NGUON_HUONG[nguonDia]}.{" "}
+                    <button type="button" onClick={() => setDoiHuong(true)} className="text-gold hover:underline" data-testid="co-van-doi-huong">Đổi hướng</button>
+                  </p>
+                )}
                 {tru.can_cu.length > 0 && <ViSao canCu={tru.can_cu} />}
                 <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-3">
                   <Link href={tru.lien_ket.duong} className="inline-flex items-center gap-1 text-xs font-medium text-gold hover:underline">
@@ -425,52 +585,10 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
             </section>
           )}
 
-          {kq.nhip_12_thang && kq.nhip_12_thang.length > 0 && (
-            <section className="rounded-2xl border border-line/70 bg-surface/40 p-4" data-testid="co-van-nhip-12">
-              <h3 className="flex items-center gap-2 font-serif text-lg text-fg"><CalendarClock className="size-4 text-gold" aria-hidden /> 12 tháng tới</h3>
-              <SongNhip12ThangSvg
-                danhSach={kq.nhip_12_thang}
-                chonIndex={chonThangIdx}
-                onChonThang={(idx) => {
-                  setChonThangIdx(idx);
-                  ghi("chart_interacted", { mo_dun: "tam_tai", kind: "chon_nhip_thang", thang: kq.nhip_12_thang?.[idx]?.thang ?? "" });
-                }}
-              />
-              <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-                {kq.nhip_12_thang.map((th, idx) => (
-                  <button
-                    key={th.thang}
-                    type="button"
-                    onClick={() => setChonThangIdx(idx)}
-                    aria-pressed={chonThangIdx === idx}
-                    className={cn(
-                      "rounded-lg border bg-bg/60 p-2.5 text-left text-xs transition-colors",
-                      chonThangIdx === idx ? "border-gold ring-1 ring-gold/60" : "border-line/60 hover:border-gold/40",
-                    )}
-                  >
-                    <p className="font-semibold text-fg">{th.thang}</p>
-                    <p className={cn("mt-0.5", th.nhip === "day_manh" ? "text-jade" : th.nhip === "phong_thu" ? "text-amber-300" : "text-gold")}>{th.nhan_nhip}</p>
-                    {th.goi_y && <p className="mt-1 leading-snug text-fg-muted">{th.goi_y}</p>}
-                  </button>
-                ))}
-              </div>
-              {kq.ngay_dep_30_ngay && kq.ngay_dep_30_ngay.length > 0 && (
-                <div className="mt-4">
-                  <p className="text-sm font-medium text-fg">Ngày hợp việc trong 30 ngày tới</p>
-                  <ul className="mt-1.5 space-y-1 text-xs text-fg-muted">
-                    {kq.ngay_dep_30_ngay.map((nd) => (
-                      <li key={nd.ngay}><span className="font-medium text-fg">{nd.ngay}</span>{nd.am_lich ? ` (âm ${nd.am_lich})` : ""}{nd.ly_do ? ` — ${nd.ly_do}` : ""}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </section>
-          )}
-
           {kq.bieu_do_ngu_hanh && (
-            <section className="rounded-2xl border border-line/70 bg-surface/40 p-4" data-testid="co-van-ngu-hanh">
-              <h3 className="font-serif text-lg text-fg">Năm hành trong ngày sinh · Nhật chủ {kq.bieu_do_ngu_hanh.nhat_chu}</h3>
-              <p className="mt-0.5 text-xs text-fg-faint">{kq.bieu_do_ngu_hanh.co_gio ? "Đủ tám chữ (có giờ sinh)" : "Sáu chữ (chưa có giờ sinh)"}</p>
+            <details className="rounded-2xl border border-line/70 bg-surface/40 p-4" data-testid="co-van-ngu-hanh">
+              <summary className="cursor-pointer font-serif text-lg text-fg">Năm hành trong ngày sinh · Nhật chủ {kq.bieu_do_ngu_hanh.nhat_chu}</summary>
+              <p className="mt-2 text-xs text-fg-faint">{kq.bieu_do_ngu_hanh.co_gio ? "Đủ tám chữ (có giờ sinh)" : "Sáu chữ (chưa có giờ sinh)"}</p>
               <div className="mt-3 space-y-1.5">
                 {kq.bieu_do_ngu_hanh.hanh.map((h) => (
                   <div key={h.hanh_ma} className="flex items-center gap-2 text-xs">
@@ -482,7 +600,7 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
                   </div>
                 ))}
               </div>
-            </section>
+            </details>
           )}
 
           {kq.ung_dung_co_dien && <KhungUngDungCoDien u={kq.ung_dung_co_dien} />}

@@ -7,6 +7,13 @@ import { dauNguoiGoi, goiEngineDaKiem, laBanAnh, loiChung } from "@/lib/proxy";
 const NhaCoVan = z.object({
   do_huong: z.number().min(0).lt(360),
   nam_xay: z.number().int().min(1864).max(2043).nullable().optional(),
+  vai: z.enum(["mat_bang", "nha_o"]).default("nha_o"),
+}).strict();
+
+// CV-2: hướng mặt tiền CỬA HÀNG (hồ sơ cửa hàng / đo riêng) — câu hỏi kinh doanh dùng hướng này, không dùng hướng nhà ở.
+const MatBangCoVan = z.object({
+  do_huong: z.number().min(0).lt(360),
+  nam_xay: z.number().int().min(1864).max(2043).nullable().optional(),
 }).strict();
 
 const DoiTacCoVan = z.object({
@@ -24,6 +31,7 @@ const Input = z.object({
   do_tin_gio: z.enum(["exact", "approx", "unknown"]).default("unknown"),
   noi_sinh: z.string().trim().max(60).nullable().optional(),
   nha: NhaCoVan.nullable().optional(),
+  mat_bang: MatBangCoVan.nullable().optional(),
   doi_tac: DoiTacCoVan.nullable().optional(),
   che_do: z.enum(["doi_song", "kinh_doanh"]).default("doi_song"),
   ngay_xem: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable().optional(),

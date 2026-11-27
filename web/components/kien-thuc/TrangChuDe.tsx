@@ -1,6 +1,6 @@
 // Trang cụm kiến thức (vd /kinh-dich/que, /tu-vi/sao-o-cung): danh sách mọi bài, render phía server. Schema: CollectionPage +
 // ItemList. QH-URL: cụm nằm dưới trang công cụ của mảng (trang trụ) — breadcrumb Trang chủ › {mảng} › {cụm}.
-import { Suspense } from "react";
+import { Suspense, type ReactNode } from "react";
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
 import { notFound } from "next/navigation";
@@ -42,6 +42,7 @@ const TRA_LOI_CUM: Record<string, string> = {
   "kinh-dich": "Kinh Dịch có 64 quẻ, mỗi quẻ sáu hào. Cụm này có {so} trang, mỗi quẻ một trang: tên, cấu trúc quái trên dưới, lời quẻ nguyên văn kèm cách hiểu đơn giản, lời từng hào và câu hỏi tự soi.",
   "than-so": "Thần số học Pythagoras dùng các số 1–9 và số chủ đạo 11, 22, 33. Cụm này có {so} trang, mỗi số một trang: tính cách, điểm mạnh, điểm dễ vấp, công việc, tình cảm.",
   "tu-vi": "Tử vi có 14 chính tinh. Cụm này có {so} trang, mỗi sao một trang: ngũ hành, tính chất, khi sáng và khi hãm, và ý nghĩa khi đứng ở từng cung.",
+  "cung-hoang-dao": "Mười hai cung hoàng đạo chia vòng đi của Mặt Trời trong năm thành 12 phần, mỗi phần 30°; cung theo ngày sinh là cung Mặt Trời đang đi qua lúc bạn sinh. Cụm này có {so} trang, mỗi cung một trang: ngày bắt đầu, kết thúc và giờ đổi cung từng năm, tính cách, tình yêu, công việc.",
   "cung-tu-vi": "Lá số Tử vi có 12 cung, mỗi cung nói về một mảng đời: Mệnh, Phụ Mẫu, Phúc Đức, Điền Trạch, Quan Lộc, Nô Bộc, Thiên Di, Tật Ách, Tài Bạch, Tử Tức, Phu Thê, Huynh Đệ. Cụm có {so} trang.",
 };
 
@@ -61,7 +62,9 @@ export async function metaChuDe(khoa: string | null): Promise<Metadata> {
   return en ? { ...meta, alternates: { ...meta.alternates, languages: { vi: cd.duong, en, "x-default": cd.duong } } } : meta;
 }
 
-export async function TrangChuDe({ khoa }: { khoa: string | null }) {
+/** `traLoi` / `giua`: trang cụm có dữ kiện riêng (CHT-1: bảng năm nay + ô tra của 12 cung hoàng đạo) — câu trả lời nhanh
+ *  engine dựng thay câu cố định, khối riêng đặt ngay sau câu trả lời. Không truyền = như mọi trang cụm. */
+export async function TrangChuDe({ khoa, traLoi, giua }: { khoa: string | null; traLoi?: string | null; giua?: ReactNode }) {
   const cd = khoa ? CHU_DE[khoa] : undefined;
   if (!khoa || !cd) notFound();
   if ((await ngonNguMayChu()).ngonNgu === "en") return <TrangChuDeEn khoa={khoa} cd={cd} />;
@@ -87,7 +90,8 @@ export async function TrangChuDe({ khoa }: { khoa: string | null }) {
       <HinhMang kieu={HINH_CHU_DE[khoa] ?? "than-so"} className="mt-4 h-20" />
       <h1 className="mt-3 text-4xl sm:text-5xl">{nd.dau.h1 ?? cd.h1 ?? cd.ten}</h1>
       <LoiDanCms nd={nd} className="mt-3 max-w-2xl text-fg-muted">{cd.mo_ta}</LoiDanCms>
-      {TRA_LOI_CUM[khoa] && <div className="mt-6 max-w-3xl"><TraLoiNhanh chu={TRA_LOI_CUM[khoa]!.replace("{so}", String(ds.length))} /></div>}
+      {(traLoi || TRA_LOI_CUM[khoa]) && <div className="mt-6 max-w-3xl"><TraLoiNhanh chu={traLoi || TRA_LOI_CUM[khoa]!.replace("{so}", String(ds.length))} /></div>}
+      {giua}
       <KhoiCms ds={nd.khoi.tren} duong={duong} viTri="tren" className="mt-8" />
       {ml ? <DanhSachCum ml={ml} /> : <ul className="mt-8 grid gap-3 sm:grid-cols-2">
         {ds.map((t) => (

@@ -14,7 +14,7 @@ export interface LoiNhan { ma: string; chu: string }
 
 export type LoaiThe =
   | "card" | "invite" | "ngay" | "xong_dat" | "huy_hieu" | "hai" | "nha" | "que" | "tarot"
-  | "ban_do" | "ba_la" | "thang" | "hoi" | "trang";
+  | "ban_do" | "ba_la" | "thang" | "hoi" | "trang" | "ban_do_sao" | "hop_doi_sao";
 
 export interface DuLieuThe {
   so?: number | null;          // con số chính của thẻ (đường đời, ngày cá nhân…)
@@ -113,6 +113,18 @@ export function loiNhanThe(loai: LoaiThe, d: DuLieuThe = {}): LoiNhan[] {
           ["hoi.thac_mac", d.ten ? `Câu này chắc bạn cũng từng thắc mắc: “${d.ten}”. Hỏi thử, có lời đáp theo ngày sinh của bạn:` : null],
           ["hoi.chung", "Hỏi gì cũng được về tiền bạc, công việc, tình cảm — trả lời theo đúng ngày sinh của bạn:"],
         ];
+      case "ban_do_sao":   // CHANG-4: ten = cung Mặt Trời, nhan = cung Mặt Trăng (engine trả, đã có trên thẻ)
+        return [
+          ["st.khoe", d.ten ? `Mình Mặt Trời ${d.ten}${d.nhan ? `, Mặt Trăng ${d.nhan}` : ""}. Bạn thì sao? Nhập ngày sinh là có bản đồ sao của bạn:` : null],
+          ["st.doan", "Đoán xem cung Mọc của mình là gì? Bấm vào xem, rồi xem luôn bản đồ sao của bạn:"],
+          ["st.ba_diem", "Không chỉ cung Mặt Trời — Mặt Trăng và cung Mọc mới cho thấy mình thật sự thế nào. Xem thử của bạn:"],
+        ];
+      case "hop_doi_sao":   // CHANG-4: ten = một chủ đề tương tác (danh mục engine), không tên người kia
+        return [
+          ["sd.gap", d.ten ? `Hai bản đồ sao của mình với người ấy gặp nhau ở chuyện “${d.ten}”. Bạn với người ấy thì sao?` : null],
+          ["sd.hieu", "Hai người khác nhau ở đâu, dễ hợp nhau ở đâu — không chấm điểm, chỉ để hiểu nhau hơn. Xem thử của bạn:"],
+          ["sd.ru", "Gửi người ấy cùng xem hai bản đồ sao — mỗi người tự nhập ngày sinh của mình:"],
+        ];
       case "trang":
         return [["trang.chung", "Gửi bạn đọc thử:"]];
     }
@@ -189,4 +201,6 @@ export const CTA_CHIA_SE: Record<LoaiThe, { nhan: string; phu: string }> = {
   thang: { nhan: "Khoe tháng của mình", phu: "Không có ngày sinh trên thẻ" },
   hoi: { nhan: "Rủ bạn hỏi câu này", phu: "Chỉ gửi câu hỏi, không gửi câu trả lời của bạn" },
   trang: { nhan: "Gửi người đang cần đọc", phu: "Kèm ảnh tóm tắt có mã QR" },
+  ban_do_sao: { nhan: "Rủ bạn bè xem bản đồ sao", phu: "Thẻ không có ngày giờ sinh, nơi sinh" },
+  hop_doi_sao: { nhan: "Gửi cho người ấy", phu: "Thẻ không ghi tên người kia, không có ngày sinh" },
 };

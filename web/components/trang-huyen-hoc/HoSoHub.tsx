@@ -7,7 +7,7 @@ import { Check, CircleDashed, UserRound } from "lucide-react";
 import { tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
 import type { KhoaMangHH } from "@/lib/huyen-hoc";
 
-const TEN_MANG: Record<KhoaMangHH, string> = { than_so: "Thần số học", tu_vi: "Tử vi", bat_tu: "Bát tự", phong_thuy: "Phong thuỷ", kinh_dich: "Kinh Dịch", nhan_tuong: "Nhân tướng học", tarot: "Tarot", ky_mon: "Kỳ Môn Độn Giáp" };
+const TEN_MANG: Record<KhoaMangHH, string> = { than_so: "Thần số học", tu_vi: "Tử vi", bat_tu: "Bát tự", phong_thuy: "Phong thuỷ", kinh_dich: "Kinh Dịch", nhan_tuong: "Nhân tướng học", tarot: "Tarot", ky_mon: "Kỳ Môn Độn Giáp", chiem_tinh: "Chiêm tinh" };
 const KHOA = Object.keys(TEN_MANG) as KhoaMangHH[];
 
 /** Trường hồ sơ còn thiếu để mở mảng này (Tử vi, Bát tự cần giờ + giới tính + nơi sinh; Phong thuỷ cần giới tính). */
@@ -16,6 +16,7 @@ export function thieuCho(h: HoSo, khoa: KhoaMangHH): string[] {
     return [!h.gio && "giờ sinh", !h.gioi_tinh && "giới tính", !h.noi_sinh && "nơi sinh"].filter((x): x is string => Boolean(x));
   }
   if (khoa === "phong_thuy") return h.gioi_tinh ? [] : ["giới tính"];
+  if (khoa === "chiem_tinh") return h.noi_sinh ? [] : ["nơi sinh"];   // CHANG-4: giờ sinh không bắt buộc (thiếu → không có cung Mọc)
   return [];
 }
 

@@ -5,7 +5,7 @@ không doạ. Tuổi người xem theo NĂM ÂM LỊCH VIỆT (mốc Tết) — 
 """
 from __future__ import annotations
 
-from app import ngon_ngu
+from app import ngon_ngu, truong_phai
 
 import datetime as dt
 import json
@@ -105,11 +105,75 @@ def _danh_gia_viec(c: dict, viec: dict) -> str:
 
 @ngon_ngu.lru(maxsize=2048)
 def _calc(d: dt.date) -> dict:
-    return hl.ngay(d)
+    # TP-1: phái Dương Công của lượt gọi (ngữ cảnh — query / header); bộ nhớ đệm khoá kèm phái (`ngon_ngu.lru`).
+    return hl.ngay(d, duong_cong=truong_phai.hien_tai("duong_cong"))
+
+
+# ---- TP-1 đợt 3: `diem_khac` — chỗ cách kia (phái Dương Công còn lại) làm khác kết quả này --------------------------
+def _khac(ma: str) -> str:
+    hien = truong_phai.hien_tai(ma)
+    return next(x for x in truong_phai.gia_tri(ma) if x != hien)
+
+
+def _loi_dc(khoa: str, **slot) -> str:
+    return truong_phai.diem("duong_cong")["loi_khac"][khoa].format(**slot)
+
+
+def _dc_khac(c: dict) -> bool:
+    """Ngày `c` có là Dương Công kỵ theo phái CÒN LẠI không (chỉ đọc ngày âm đã tính — không tính lại cả ngày)."""
+    am = c["am"]
+    return hl.la_duong_cong(am["ngay"], am["thang"], am["nhuan"], _khac("duong_cong"))
+
+
+def diem_khac_ngay(d: dt.date) -> list[dict]:
+    """[] khi hai phái cùng kết luận cho ngày này; ngược lại một mục {ma, hien, khac, loi, nut} để web hiện một dòng."""
+    c = _calc(d)
+    co = "duong_cong" in c["ky_dan_gian"]
+    if co == _dc_khac(c):
+        return []
+    hien, khac = truong_phai.hien_tai("duong_cong"), _khac("duong_cong")
+    return [{"ma": "duong_cong", "hien": hien, "khac": khac, "co_kieng": co,
+             "loi": _loi_dc(f"{hien}.{'co' if co else 'khong'}"), "nut": _loi_dc(f"nut.{khac}")}]
+
+
+def _c_khac(c: dict) -> dict:
+    am = c["am"]
+    return {**c, "ky_dan_gian": hl.ky_dan_gian(am["ngay"], am["thang"], am["nhuan"], _khac("duong_cong"))}
+
+
+def diem_khac_khoang(ngay_dat: list[str], viec: str, tu: dt.date, den: dt.date, loai=None) -> list[dict]:
+    """Danh sách ngày tốt cho `viec` trong [tu, den] (`ngay_dat` = ISO các ngày đang đạt) đổi thế nào theo phái kia.
+    Chỉ xét những ngày hai phái nói khác nhau về Dương Công (vài ngày mỗi năm) — `loai(c)` = điều kiện loại thêm (xung tuổi)."""
+    v = _VIEC[viec]
+    dat = set(ngay_dat)
+    them, bot = [], []
+    d = tu
+    while d <= den:
+        c = _calc(d)
+        if ("duong_cong" in c["ky_dan_gian"]) != _dc_khac(c) and not (loai and loai(c)):
+            ok = _danh_gia_viec(_c_khac(c), v) == "tot"
+            if ok and d.isoformat() not in dat:
+                them.append(d.isoformat())
+            elif not ok and d.isoformat() in dat:
+                bot.append(d.isoformat())
+        d += dt.timedelta(days=1)
+    if not them and not bot:
+        return []
+    dmy = lambda x: "/".join(reversed(x.split("-")))  # noqa: E731
+    doi = [_loi_dc("them", ngay=", ".join(map(dmy, them)))] if them else []
+    doi += [_loi_dc("bot", ngay=", ".join(map(dmy, bot)))] if bot else []
+    khac = _khac("duong_cong")
+    return [{"ma": "duong_cong", "hien": truong_phai.hien_tai("duong_cong"), "khac": khac, "them": them, "bot": bot,
+             "loi": _loi_dc(f"khoang.{khac}", doi="; ".join(doi)), "nut": _loi_dc(f"nut.{khac}")}]
 
 
 def tom_tat(d: dt.date) -> dict:
     c = _calc(d)
+    dk = diem_khac_ngay(d)
+    return {**({"diem_khac": dk} if dk else {}), **_tom_tat(d, c)}
+
+
+def _tom_tat(d: dt.date, c: dict) -> dict:
     return {"ngay": d.isoformat(), "am": f"{c['am']['ngay']}/{c['am']['thang']}", "can_chi": _gz(c["ngay_gz"]),
             "truc": KB["truc"][c["truc"]]["ten"], "than": KB["than"][c["than"]]["ten"], "hoang_dao": c["hoang_dao"],
             "ky_dan_gian": [KB["ky_dan_gian"][k]["ten"] for k in c["ky_dan_gian"]],
@@ -241,7 +305,9 @@ def ngay_xem(d: dt.date, nam_sinh: int | None = None, thang_sinh: int | None = N
                + (f" Dân gian thường tránh việc lớn vì là ngày {', '.join(ky_dg)}." if ky_dg else "")
                + f" Xung tuổi {_CAN[xc['can']]} {_CHI[xc['chi']]}.")
     tra_loi += f" Giờ hoàng đạo: {', '.join(gio_hd)}."
+    dk = diem_khac_ngay(d)
     return {
+        **({"diem_khac": dk} if dk else {}),
         "tra_loi_nhanh": tra_loi,
         "ngay": d.isoformat(), "thu": thu,
         "am": {**c["am"], "chu": am_chu},
@@ -340,7 +406,10 @@ def chon_ngay(viec: str, tu: dt.date, den: dt.date, nam_sinh: int | None = None,
                 KB["quan_he_tuoi"][q]["ten"].lower() if q in ("tam_hop", "luc_hop") else None) if x]})
         d += dt.timedelta(days=1)
     ra.sort(key=lambda x: (-len(x["diem_cong"]), x["ngay"]))
-    return {"viec": {"ma": viec, "ten": v["ten"]}, "tu": tu.isoformat(), "den": den.isoformat(),
+    dk = diem_khac_khoang([x["ngay"] for x in ra], viec, tu, den,
+                          (lambda c: hl.quan_he_tuoi(c["ngay_gz"][1], t["han"]) == "xung") if t else None)
+    return {**({"diem_khac": dk} if dk else {}),
+            "viec": {"ma": viec, "ten": v["ten"]}, "tu": tu.isoformat(), "den": den.isoformat(),
             "tuoi": t, "ngay": ra, "luu_y": LUU_Y,
             "cach_chon": "Ngày có việc này trong mục Nên của sách lịch, không nằm trong mục Kiêng, trực không thuộc "
                          "nhóm sách khuyên tránh cho việc này" + (", không xung tuổi bạn" if t else "") + "."}
@@ -396,7 +465,8 @@ def viec_thang(viec: str, nam: int, thang_: int) -> dict:
         {"hoi": f"Ngày tốt {ten} tháng {thang_}/{nam} có hợp với tuổi tôi không?",
          "dap": "Bảng này chưa xét tuổi. Nhập năm sinh trong công cụ Xem ngày tốt để bỏ các ngày xung tuổi bạn."},
     ]
-    return {"viec": v, "nam": nam, "thang": thang_, "tieu_de": f"Ngày tốt {ten} tháng {thang_} năm {nam}",
+    return {**({"diem_khac": kq["diem_khac"]} if kq.get("diem_khac") else {}),
+            "viec": v, "nam": nam, "thang": thang_, "tieu_de": f"Ngày tốt {ten} tháng {thang_} năm {nam}",
             "thang_am": thang_am, "ngay": ds, "so_ngay": len(ds), "dep_nhat": dep,
             "tra_loi_nhanh": tra_loi, "hoi_dap": hd, "cach_chon": kq["cach_chon"], "luu_y": LUU_Y,
             "trang_thai": KB["trang_thai"]}

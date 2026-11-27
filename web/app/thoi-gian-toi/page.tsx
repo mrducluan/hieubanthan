@@ -3,6 +3,7 @@
 // thiệu + hỏi đáp dựng sẵn trên máy chủ (SEO), phần riêng dựng ở trình duyệt từ hồ sơ trên máy.
 import type { Metadata } from "next";
 import Link from "@/components/khung/Lien";
+import { MoiHoiQuyetDinh } from "@/components/co-van/MoiHoiQuyetDinh";
 import { TieuDeTrang } from "@/components/cms/DauCms";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { apDungSeo, kemHreflang, layNoiDungTrang } from "@/lib/noi-dung-trang";
@@ -40,6 +41,9 @@ export default async function Page(p: P) {
         {/* CRO-2: điện thoại chưa có hồ sơ — một nút đưa xuống ô nhập (tự ẩn khi đã có hồ sơ). */}
         {!en && <div className="-mt-5 mb-5"><NutXuongForm moDun="thoi_gian" nhan="Nhập ngày sinh · xem ngay" chon={'[data-testid="tgt-nhap"]'} /></div>}
         <ThoiGianToi cacNam={n.cac_nam} namBanDau={banDau} />
+        {/* CV-4: người xem thời gian tới thường có một việc cụ thể trong năm → Cố vấn trả lời đúng việc ấy. */}
+        {!en && <MoiHoiQuyetDinh className="mt-8" tu="thoi_gian_toi" tieuDe="Đang cân nhắc một việc cụ thể trong năm?"
+          loiDan="Mở shop, mua nhà, nghỉ việc: Cố vấn đọc đúng việc ấy, nói tháng nào hợp, cần chuẩn bị gì và hướng cửa có hợp không." />}
         {/* EN-ALL GĐ 8: trang năm (/nam) chưa mở bản Anh → bản Anh không có dòng link này. */}
         {!en && (
           <div className="mt-8 space-y-2 text-sm text-fg-muted">

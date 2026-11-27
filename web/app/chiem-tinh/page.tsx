@@ -9,7 +9,8 @@ import { DuongDan } from "@/components/khung/DuongDan";
 import { KhoiCms } from "@/components/cms/KhoiCms";
 import { HoiDapHien, TraLoiNhanh } from "@/components/seo/TraLoiNhanh";
 import { KhungChiemTinh } from "@/components/chiem-tinh/KhungChiemTinh";
-import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
+import { CumKienThucTru } from "@/components/kien-thuc/CumKienThucTru";
+import { anhBai, goiLd, ldAnh, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
 import { duongDanCongCu } from "@/lib/duong-dan";
 import { apDungSeo, kemHreflang, layNoiDungTrang } from "@/lib/noi-dung-trang";
 import { ngonNguMayChu } from "@/lib/ngon-ngu-may-chu";
@@ -141,6 +142,7 @@ export default async function ChiemTinhPage() {
           name: h1,
           url: urlDayDu(DUONG),
           description: MAC.moTa,
+          image: ldAnh(anhBai({ tieuDe: h1 }), h1),        // Image metadata (bản quyền ảnh) — cùng khối với primaryImageOfPage của WebPage
           applicationCategory: "LifestyleApplication",
           operatingSystem: "Web",
           inLanguage: "vi-VN",
@@ -157,9 +159,11 @@ export default async function ChiemTinhPage() {
       <div className="mb-8"><TraLoiNhanh chu={TRA_LOI} /></div>
       <KhungChiemTinh />
       <KhoiCms ds={nd.khoi.duoi} duong={DUONG} viTri="duoi" className="mt-10" />
+      <CumKienThucTru tru={DUONG} className="mt-12" />
       <div className="mt-12"><HoiDapHien ds={HOI_DAP} /></div>
       <p className="mt-10 text-sm text-fg-muted">
-        Đọc thêm: <Link href="/bat-tu" className="text-gold underline">Xem Bát tự</Link> ·{" "}
+        Đọc thêm: <Link href="/chiem-tinh/cung-hoang-dao" className="text-gold underline">12 cung hoàng đạo theo ngày sinh</Link> ·{" "}
+        <Link href="/bat-tu" className="text-gold underline">Xem Bát tự</Link> ·{" "}
         <Link href="/tu-vi" className="text-gold underline">Xem Tử vi</Link> ·{" "}
         <Link href="/co-van" className="text-gold underline">Cố vấn Tam Tài</Link> ·{" "}
         <Link href="/huyen-hoc" className="text-gold underline">Huyền học</Link>

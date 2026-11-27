@@ -95,15 +95,33 @@ function sacTheoMuc(muc: Muc | null): {
   };
 }
 
+const TRU_DIA_TRONG: TruTamTai = {
+  ma: "dia",
+  ten_tru: "Địa · Không gian",
+  nguon: "Phong thủy Bát Trạch & Huyền Không",
+  muc: null,
+  nhan_muc: "Chưa cần hướng",
+  nhan_xet: "Câu hỏi hiện tại chưa gắn với nhà ở hay mặt bằng cụ thể (hoặc bạn chưa chọn hướng cửa), nên trục Địa tạm để mở.",
+  hanh_dong: "Khi quyết định liên quan tới mua nhà, thuê mặt bằng hoặc đặt bàn làm việc, chọn hướng cửa để mở thêm trục Địa.",
+  can_cu: [],
+  lien_ket: { ten: "Xem Phong thuỷ theo hướng", duong: "/phong-thuy" },
+  ma_mau: "ds.tam_tai.dia.chua_chon",
+};
+
 export function SoDoTamTaiSvg({
   tenMach,
-  baTru,
-   onChonTru,
+  baTru: baTruGoc,
+  onChonTru,
 }: {
   tenMach?: string;
-  baTru: { nhan: TruTamTai; thien: TruTamTai; dia: TruTamTai };
+  baTru: { nhan: TruTamTai; thien: TruTamTai; dia?: TruTamTai | null };
   onChonTru?: (ma: "nhan" | "thien" | "dia") => void;
 }) {
+  const baTru = {
+    nhan: baTruGoc.nhan,
+    thien: baTruGoc.thien,
+    dia: baTruGoc.dia ?? TRU_DIA_TRONG,
+  };
   const [dangChonTru, setDangChonTru] = useState<"nhan" | "thien" | "dia">("thien");
 
   const chonTru = (ma: "nhan" | "thien" | "dia") => {

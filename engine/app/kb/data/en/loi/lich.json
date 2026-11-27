@@ -151,5 +151,7 @@
  "lich.nam.d_khong_nhuan2": "No. Lunar year {nam} has 12 months and no leap month.",
  "lich.nam.d_nhuan_vn": " Calculated with the Vietnamese lunar calendar (Hanoi time).",
  "lich.cn.tom_1": "From {tu} to {den} there is one day the almanac lists as suitable for {viec} that clashes with none of the {k} people",
- "lich.cn.tom_sach_1": "; one of them has no age-related notes."
+ "lich.cn.tom_sach_1": "; one of them has no age-related notes.",
+ "tp.loi.mon": "No such discipline",
+ "tp.loi.gia_tri": "Invalid school option: {muc}"
 }

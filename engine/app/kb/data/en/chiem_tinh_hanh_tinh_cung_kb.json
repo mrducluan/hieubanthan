@@ -1,5 +1,5 @@
 {
-  "_nguon": "Stage 4.2 English overlay — Planets × 12 Zodiac Signs.",
+  "_nguon": "Stage 4.2 English overlay — Planets × 12 Zodiac Signs. Editorial draft in the modern Western astrological tradition; no verbatim source text.",
   "_trang_thai": "nhap_may",
   "source_id": "bien_tap_chiem_tinh_2026",
   "school_id": "chiem_tinh_tay",
@@ -242,64 +242,64 @@
       "vai_tro": "information processing, reasoning style, and everyday communication",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "You grasp core points rapidly, speak straight to the issue, and ask direct questions when discussions drift.",
-          "nen_de_y": "You can interrupt slower speakers or jump to conclusions halfway through a briefing, and quick messages may sound abrupt.",
-          "viec_ung_dung": "Pause for three quiet breaths after someone finishes speaking before you answer, and reread messages once to add a courteous opening."
+          "diem_sang": "You think fast, speak plainly and decide quickly; you are good at opening a discussion and getting to the point.",
+          "nen_de_y": "You may cut people off or conclude before hearing everything; words said in a hurry can sting.",
+          "viec_ung_dung": "In an important conversation, wait until the other person finishes and repeat their point in one sentence before you answer."
         },
         "kim_nguu": {
-          "diem_sang": "Your thinking builds step by step on verified facts, translating complex ideas into tangible, everyday examples.",
-          "nen_de_y": "Once your mind is set on a method, shifting angles feels uncomfortable, and rushed on-the-spot demands can stall you.",
-          "viec_ung_dung": "Ask for thirty minutes to review written materials before responding to a new proposal, and prepare three practical test questions."
+          "diem_sang": "You think slowly but solidly, remember for a long time and say little but clearly; you learn best by doing and seeing real examples.",
+          "nen_de_y": "Once you hold an opinion it is hard to shift; you may skip new information because the old way still seems fine.",
+          "viec_ung_dung": "When choosing, write down two options with concrete numbers (time, cost) before you settle."
         },
         "song_tu": {
-          "diem_sang": "You connect disparate facts effortlessly, adapt your vocabulary to any audience, and keep dialogue lively and curious.",
-          "nen_de_y": "Jumping across too many tabs at once can fragment deep reading, and wordplay debates can sidetrack the main deliverable.",
-          "viec_ung_dung": "Close extra browser tabs each morning to focus on one document at a time, and end long meetings with three written action bullets."
+          "diem_sang": "Your mind is quick and curious about many things at once; you talk with charm and pick up languages and new skills fast.",
+          "nen_de_y": "You may juggle many topics and finish few; talking a lot can crowd out listening.",
+          "viec_ung_dung": "Keep a notebook of ideas; each week pick exactly one to carry through and park the rest."
         },
         "cu_giai": {
-          "diem_sang": "You listen with emotional memory, recall subtle personal context others shared months ago, and phrase feedback with care.",
-          "nen_de_y": "Reasoning can sway with the mood in the room, and when slighted you may retreat into silent assumptions rather than asking.",
-          "viec_ung_dung": "Separate objective facts from personal feelings in two columns before making work decisions, and ask directly when a tone feels off."
+          "diem_sang": "You think with feeling and memory; you recall small details about loved ones and know what to say to someone who is sad.",
+          "nen_de_y": "Your mood can colour how you hear others; one hurtful remark may stay with you a long time.",
+          "viec_ung_dung": "When a remark unsettles you, ask \"do you mean...?\" before drawing your own conclusion."
         },
         "su_tu": {
-          "diem_sang": "You speak with vivid warmth, frame ideas into memorable stories, and rally a team around a clear, confident vision.",
-          "nen_de_y": "You may dramatize details for effect or tie your pride so closely to an opinion that counterarguments feel personal.",
-          "viec_ung_dung": "Invite two dissenting viewpoints to speak first in team discussions before you summarize and state your conclusion."
+          "diem_sang": "You speak persuasively, tell stories well and like presenting your ideas to a group.",
+          "nen_de_y": "You may take disagreement as a matter of pride; sometimes you speak to be recognised rather than to exchange.",
+          "viec_ung_dung": "After you present, invite one suggestion from the listeners and thank them for it in front of everyone."
         },
         "xu_nu": {
-          "diem_sang": "You sort information cleanly, spot workflow gaps early, and write step-by-step instructions that anyone can follow.",
-          "nen_de_y": "Nitpicking minor wording flaws can slow group momentum, and your mind often runs unfinished checklists late into the evening.",
-          "viec_ung_dung": "Spend five minutes at the start of a task defining which two elements require strict precision and where good enough suffices."
+          "diem_sang": "Your mind is precise, good at organising information and spotting small errors others miss; you write and explain clearly.",
+          "nen_de_y": "You may nitpick yourself and others; you can worry in circles over details that do not matter yet.",
+          "viec_ung_dung": "When giving feedback, say one good point first, then what to fix, and stop at three items at most."
         },
         "thien_binh": {
-          "diem_sang": "You articulate both sides of an argument fairly, choose diplomatic phrasing, and defuse tense negotiations with grace.",
-          "nen_de_y": "Weighing every perspective can make your conclusions sound noncommittal, leaving colleagues unsure which option you back.",
-          "viec_ung_dung": "After outlining pros and cons, close every memo with one explicit recommendation and the top practical reason behind it."
+          "diem_sang": "You weigh both sides, speak courteously and are good at smoothing things over and finding tactful words.",
+          "nen_de_y": "You may hesitate when you must choose, or talk around a point so no one is upset.",
+          "viec_ung_dung": "Give small decisions a deadline (say, one day); when time is up, pick the option you already lean toward."
         },
         "bo_cap": {
-          "diem_sang": "You read unspoken motives beneath polite talk, ask investigative questions that reach root causes, and guard confidential facts.",
-          "nen_de_y": "Fixating on a single suspicion or delivering razor-sharp critiques during disagreements can put others on the defensive.",
-          "viec_ung_dung": "Frame tough findings as forward-looking repair questions rather than accusations, and set a time cap on investigative rabbit holes."
+          "diem_sang": "You think deeply and read the motive behind words; you are good at getting to the root, keeping secrets and asking the hard question.",
+          "nen_de_y": "You may grow suspicious and read hidden meaning where there is none; words spoken when hurt can be sharp.",
+          "viec_ung_dung": "When in doubt, write down what you know for sure and what you only guess, then ask directly about the guess."
         },
         "nhan_ma": {
-          "diem_sang": "You synthesize big-picture patterns across disciplines quickly and share candid, inspiring perspectives that widen the conversation.",
-          "nen_de_y": "Fine print and administrative clauses easily bore you, and unfiltered candor can land harder than you intend.",
-          "viec_ung_dung": "Run a five-point detail checklist before signing or sending any formal document, and acknowledge effort before delivering blunt feedback."
+          "diem_sang": "You think broadly and love big ideas, philosophy and faraway places; you speak frankly, cheerfully and spread enthusiasm.",
+          "nen_de_y": "You may promise quickly and skip details; your honesty can lack tact.",
+          "viec_ung_dung": "Before promising, ask yourself how many steps it takes and how long, and state that number with the promise."
         },
         "ma_ket": {
-          "diem_sang": "You structure thoughts around feasibility, timelines, and clear accountability, turning abstract goals into executable plans.",
-          "nen_de_y": "A dry, rule-heavy tone can discourage early brainstorming, and untested approaches may trigger immediate skepticism.",
-          "viec_ung_dung": "When presented with an unfamiliar idea, ask what a low-risk two-week trial would require before listing reasons it might fail."
+          "diem_sang": "You think systematically and practically and speak briefly to the point; you plan well and think long term.",
+          "nen_de_y": "You may be too serious and dismiss new ideas that show no quick benefit; your feedback can sound dry.",
+          "viec_ung_dung": "Each week spend ten minutes hearing out one \"unrealistic\" idea from someone else without arguing back."
         },
         "bao_binh": {
-          "diem_sang": "You think independently outside convention, grasp systems architecture quickly, and evaluate arguments on logic rather than hierarchy.",
-          "nen_de_y": "You can hold onto an intellectual framework stubbornly or skip intermediate steps so listeners lose your train of thought.",
-          "viec_ung_dung": "Pair new system proposals with a one-page flowchart and ask teammates which everyday step will change for them."
+          "diem_sang": "You think independently, like new methods and see problems from angles few others take; you reason well and like technology.",
+          "nen_de_y": "You may hold a view just to stand apart; sometimes you argue logic and forget how the listener feels.",
+          "viec_ung_dung": "In a debate, ask one question about how the other person feels before giving your reasons."
         },
         "song_ngu": {
-          "diem_sang": "You absorb meaning through tone, metaphor, and subtle atmosphere, offering compassionate listening and creative synthesis.",
-          "nen_de_y": "Heavy information noise can blur dates and details, and impressionistic phrasing can leave practical expectations unclear.",
-          "viec_ung_dung": "Follow up every verbal agreement with a brief message confirming exact dates, numbers, and next steps."
+          "diem_sang": "You think in images and intuition and have a rich imagination; you speak gently and sense what others feel.",
+          "nen_de_y": "You may drift, forget details and be vague about agreements; you may nod along just to close the matter.",
+          "viec_ung_dung": "Put anything important in writing (a message, a note) right after you agree on it."
         }
       }
     },
@@ -309,64 +309,64 @@
       "vai_tro": "values, aesthetic taste, and how affection and rapport are shared",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "You express affection and appreciation with fresh candor, take the first step warmly, and move past minor friction quickly.",
-          "nen_de_y": "Impulse purchases can spike on a whim, and everyday relational routines can feel dull once the initial spark settles.",
-          "viec_ung_dung": "Wait forty-eight hours before buying non-essential items, and plan active shared outings to keep close bonds energized."
+          "diem_sang": "In love you take the lead, like fresh feelings and show them openly; your taste is bold and eye-catching.",
+          "nen_de_y": "Your interest may flare fast and cool fast; you may shop on impulse.",
+          "viec_ung_dung": "When you like someone or something, wait three days before deciding; if you still like it, go ahead."
         },
         "kim_nguu": {
-          "diem_sang": "You cultivate lasting comfort, appreciate fine craftsmanship and good meals, and offer steady, loyal affection over time.",
-          "nen_de_y": "Possessiveness or resistance to changing relationship routines can surface, along with comfort spending when tired.",
-          "viec_ung_dung": "Automate savings transfers at the start of each month, and voice appreciation aloud alongside tangible gifts."
+          "diem_sang": "You love slowly and steadily and show it through practical care; you enjoy quality things, good food and a comfortable home.",
+          "nen_de_y": "You may want to hold on tightly and resist change in a relationship; comfort can take a big share of your spending.",
+          "viec_ung_dung": "Set a fixed monthly amount for your own pleasures and stop when it is used up."
         },
         "song_tu": {
-          "diem_sang": "You build rapport through wit, curiosity, and engaging conversation, keeping friendships and partnerships light on their feet.",
-          "nen_de_y": "Keeping interactions playful can become a way to sidestep vulnerable emotional talks or deeper commitments.",
-          "viec_ung_dung": "Set aside one phone-free evening each week for an unhurried, heartfelt conversation, and track social spending in a simple budget."
+          "diem_sang": "You are drawn to people you can talk with, who are fun and quick; your taste is varied and you like trying different styles.",
+          "nen_de_y": "You may change your mind about who you like; heavy emotional talks can make you uneasy.",
+          "viec_ung_dung": "Once a week, spend an evening talking with your partner with the phone put away."
         },
         "cu_giai": {
-          "diem_sang": "You show care through thoughtful domestic warmth, remembering what makes loved ones feel safe and genuinely looked after.",
-          "nen_de_y": "When insecure you may sulk indirectly or over-give silently and then feel resentful when the gesture is not mirrored.",
-          "viec_ung_dung": "State one specific way you would like to be cared for each week, and maintain a personal reserve fund for peace of mind."
+          "diem_sang": "You love by protecting and remember small things about the person you care for; you like keepsakes and a warm atmosphere.",
+          "nen_de_y": "You may feel hurt when care is not returned the way you hoped; you keep old things for sentimental reasons.",
+          "viec_ung_dung": "State one need in a concrete sentence (\"I need a message when you will be late\") instead of waiting to be guessed."
         },
         "su_tu": {
-          "diem_sang": "You love generously, bring flair and celebration into shared life, and take pride in cheering on the people you cherish.",
-          "nen_de_y": "Overspending to make a grand impression or feeling deflated when thoughtful gestures go unpraised can create strain.",
-          "viec_ung_dung": "Cap monthly gift and entertainment budgets in advance, and ask loved ones how they prefer to receive appreciation."
+          "diem_sang": "You love warmly and generously and like being appreciated openly; your taste is stylish with a touch of flair.",
+          "nen_de_y": "You may feel hurt when overlooked; sometimes you spend to keep up appearances.",
+          "viec_ung_dung": "Each day praise your partner for one specific thing; the way you want to be treated is the way to give."
         },
         "xu_nu": {
-          "diem_sang": "You express devotion through quiet, practical helpfulness, thoughtful attention to detail, and sensible stewardship of money.",
-          "nen_de_y": "Offering unsolicited fixes as a form of care can feel critical to a partner and crowd out spontaneous warmth.",
-          "viec_ung_dung": "Name three things you appreciate about someone before suggesting an improvement, and budget a small sum for pure leisure."
+          "diem_sang": "You show affection through deeds: helping, organising, remembering things for the other person; you like neatness and refinement.",
+          "nen_de_y": "You may criticise small details and expect a lot of yourself and your partner; sweet words do not come easily.",
+          "viec_ung_dung": "For one week, swap one piece of criticism a day for one specific thank-you and notice how the mood changes."
         },
         "thien_binh": {
-          "diem_sang": "You bring natural grace, fair-minded reciprocity, and refined aesthetic balance into partnerships and social spaces.",
-          "nen_de_y": "Saying yes just to preserve surface harmony can breed quiet exhaustion, and simple choices can stall in indecision.",
-          "viec_ung_dung": "Offer two concrete options you genuinely enjoy when planning shared time, and review style or decor purchases against a monthly list."
+          "diem_sang": "You value harmony, courtesy and fairness in relationships; you have a good eye and enjoy balanced beauty.",
+          "nen_de_y": "You may go along with others to keep the peace and then feel resentful; being alone can feel uncomfortable.",
+          "viec_ung_dung": "Once a week say \"no\" to something you do not want, gently but clearly."
         },
         "bo_cap": {
-          "diem_sang": "You bond with deep loyalty, stand firm through real hardship, and handle shared financial resources with sharp discernment.",
-          "nen_de_y": "All-or-nothing emotional tests, jealousy, or locking feelings away after a disappointment can strain trust.",
-          "viec_ung_dung": "Voice relationship concerns calmly as soon as they arise rather than testing the other person in silence, and keep joint finances transparent."
+          "diem_sang": "You love deeply and loyally and need complete trust; you like beauty that is understated and has depth.",
+          "nen_de_y": "You may get jealous and hold on to hurt; letting go after being let down is hard.",
+          "viec_ung_dung": "When you feel insecure, name the feeling with \"I feel...\" instead of checking up on or testing the other person."
         },
         "nhan_ma": {
-          "diem_sang": "You bring open-hearted humor, respect for personal freedom, and a love of shared travel and learning into relationships.",
-          "nen_de_y": "Restlessness when domestic duties pile up or optimistic overspending on trips and courses can catch up with you.",
-          "viec_ung_dung": "Keep a dedicated travel and learning sinking fund, and honor small daily promises so loved ones trust your consistency."
+          "diem_sang": "You are drawn to open-minded people to travel and learn with; you love freedom and fun and your taste is easygoing.",
+          "nen_de_y": "You may shy away from commitment and feel boxed in when a relationship settles into routine; you may overspend on experiences.",
+          "viec_ung_dung": "Plan a trip or a class with your partner, but keep one evening a week just for yourself."
         },
         "ma_ket": {
-          "diem_sang": "You demonstrate affection through enduring reliability, kept promises, and thoughtful long-range financial planning.",
-          "nen_de_y": "Holding back tender words or treating relationship milestones like performance reviews can make you seem reserved.",
-          "viec_ung_dung": "Send one warm, unhurried note during the workday with no agenda attached, and protect leisure hours free of productivity goals."
+          "diem_sang": "You love seriously and open up slowly, showing care through responsibility and shared plans; you like classic, lasting things.",
+          "nen_de_y": "You may come across as dry and put work ahead of feelings; you may count every coin when spending.",
+          "viec_ung_dung": "Schedule time with your partner the way you schedule work, and keep it on time."
         },
         "bao_binh": {
-          "diem_sang": "You value intellectual friendship, unconventional individuality, and giving partners ample breathing room to be themselves.",
-          "nen_de_y": "Responding to a partner's emotional vulnerability with cool logic can leave them feeling held at arm's length.",
-          "viec_ung_dung": "Offer quiet physical presence and empathetic listening first when someone close is upset before suggesting practical solutions."
+          "diem_sang": "You want friendship inside love and respect personal space; your taste is unusual and unlike the crowd.",
+          "nen_de_y": "You may keep emotional distance so the other person feels far away; very close bonds can feel tight.",
+          "viec_ung_dung": "Tell your partner clearly how much time alone you need, so distance is not mistaken for coldness."
         },
         "song_ngu": {
-          "diem_sang": "You offer gentle compassion, poetic romance, and forgiving kindness that helps people feel accepted without judgment.",
-          "nen_de_y": "Looking past red flags out of sympathy or lending money without clear boundaries can drain your resources.",
-          "viec_ung_dung": "Set a fixed monthly ceiling for financial help or favors, and ground relationship trust in consistent actions rather than promises."
+          "diem_sang": "You love romantically, empathise easily and will give a lot for the one you love; you are moved by art and music.",
+          "nen_de_y": "You may idealise the other person and give beyond your means; money can slip away out of politeness.",
+          "viec_ung_dung": "Before helping someone with a large sum or a big effort, sleep on it and ask a clear-headed friend."
         }
       }
     },
@@ -376,64 +376,64 @@
       "vai_tro": "action drive, boundary assertion, and stamina under pressure",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "You launch into action decisively, tackle high-pressure starters head-on, and clear immediate obstacles without hesitation.",
-          "nen_de_y": "Flashes of impatience when slowed down and sprinting hard early only to lose steam on maintenance tasks can trip you up.",
-          "viec_ung_dung": "Break long projects into seven-day sprints with clear finish lines, and use regular physical exercise to release nervous tension."
+          "diem_sang": "You act fast, take on hard tasks and come alive with a challenge; you react at once under pressure.",
+          "nen_de_y": "You may flare up and cool down fast, but words said in anger linger; you may drop things once the thrill fades.",
+          "viec_ung_dung": "Break long tasks into short stages with deadlines and give yourself a small reward after each one."
         },
         "kim_nguu": {
-          "diem_sang": "Once in motion you work with remarkable stamina, seeing demanding practical builds through to completion without cutting corners.",
-          "nen_de_y": "Getting started on unfamiliar tasks takes extra inertia, and grievances held too long can erupt in immovable stubbornness.",
-          "viec_ung_dung": "Kick off each morning with one fifteen-minute tangible task to build momentum, and address minor frustrations the week they happen."
+          "diem_sang": "You have staying power: slow to start but you finish what you begin; you excel at work that needs persistence and craft.",
+          "nen_de_y": "Changing course once you have started is hard; you anger slowly but stay angry long.",
+          "viec_ung_dung": "When pushed to change plans, ask for a short pause to rearrange before you answer."
         },
         "song_tu": {
-          "diem_sang": "You coordinate multiple fast-moving tasks smoothly, pivot tactics on the fly, and defend your position with quick verbal agility.",
-          "nen_de_y": "Scattering effort across too many side projects dilutes impact, and irritation can spill out as sharp sarcasm.",
-          "viec_ung_dung": "Commit to finishing two priority tasks each morning before opening new threads, and draft heated replies offline before sending."
+          "diem_sang": "You run several tasks at once and react quickly with words; you suit varied work with lots of contact.",
+          "nen_de_y": "Your energy scatters easily; when annoyed you argue with logic, which can turn into long disputes.",
+          "viec_ung_dung": "Each day pick three main tasks and finish them before opening anything new."
         },
         "cu_giai": {
-          "diem_sang": "You act with fierce protective resolve when defending family, close teammates, or a safe working environment.",
-          "nen_de_y": "Asserting boundaries sideways through moodiness or letting emotional weather dictate daily work output can slow you down.",
-          "viec_ung_dung": "State personal boundaries in one calm, direct sentence without apology, and keep a steady physical routine regardless of mood."
+          "diem_sang": "You act most strongly when protecting your family and the place you belong; you are persistent and good at the indirect route.",
+          "nen_de_y": "You may sulk instead of speaking plainly; your mood strongly affects your energy for work.",
+          "viec_ung_dung": "When upset, say one concrete sentence about what you need that day instead of letting it pile up."
         },
         "su_tu": {
-          "diem_sang": "You bring bold, wholehearted energy to leadership challenges, inspiring confidence and taking visible ownership of hard goals.",
-          "nen_de_y": "Wounded pride can trigger disproportionate pushback, and quiet behind-the-scenes upkeep can feel unrewarding.",
-          "viec_ung_dung": "Ask yourself in heated moments whether you are defending the work outcome or your ego, and take pride in thorough preparation."
+          "diem_sang": "You work with flair, like to lead and give everything when handed the main role.",
+          "nen_de_y": "You may take offence when criticised in front of others; sometimes winning matters more to you than the result.",
+          "viec_ung_dung": "This month take on one task that helps someone else do their part well, so your drive to lead has somewhere to go."
         },
         "xu_nu": {
-          "diem_sang": "You channel drive into precise craftsmanship, troubleshooting bottlenecks methodically and improving everyday systems.",
-          "nen_de_y": "Stress can tighten into perfectionist micromanagement, redoing others' work while feeling silently overburdened.",
-          "viec_ung_dung": "Define clear acceptance criteria when delegating tasks so you can step back, and stretch tense shoulders during afternoon breaks."
+          "diem_sang": "You work precisely and methodically, improving bit by bit; you excel at tasks that need skill and checking.",
+          "nen_de_y": "You may hoard work for fear others will not do it well and carry quiet stress; make time to rest.",
+          "viec_ung_dung": "Hand one small task to someone else and accept a \"good enough\" result the first time."
         },
         "thien_binh": {
-          "diem_sang": "You act through collaborative strategy, rallying allies and stepping up firmly when fairness or shared agreements are breached.",
-          "nen_de_y": "Polling everyone's opinion before acting or delaying necessary confrontation to keep the peace can stall execution.",
-          "viec_ung_dung": "Set a twenty-four-hour decision window for independent tasks, and address disagreements early while the stakes are still small."
+          "diem_sang": "You act through cooperation, negotiate well and speak up for fairness.",
+          "nen_de_y": "You may hesitate and avoid confrontation, then build up resentment; sometimes you let others decide for you.",
+          "viec_ung_dung": "When you disagree, set a specific time within three days to talk it through; do not let it run past a week."
         },
         "bo_cap": {
-          "diem_sang": "You possess unwavering focus under crisis, conserving energy for the decisive move and seeing deep reforms through.",
-          "nen_de_y": "Power struggles can turn uncompromising, and old slights may simmer below the surface long after an issue is settled.",
-          "viec_ung_dung": "Channel intense drive into endurance training or deep technical research, and consciously close the book once a dispute is resolved."
+          "diem_sang": "You have great focus and determination and rarely give up; you handle difficult work and work that needs discretion.",
+          "nen_de_y": "You may hold anger inside for a long time and it comes out strongly; letting go is hard once you have decided to see it through.",
+          "viec_ung_dung": "Find a regular outlet for energy (running, sport, hands-on work) so frustration does not build up."
         },
         "nhan_ma": {
-          "diem_sang": "You surge with enthusiasm when pursuing a meaningful quest, breaking trail into new territory with infectious optimism.",
-          "nen_de_y": "Routine follow-through after the launch phase can lag, and debates over principles can get overly fiery.",
-          "viec_ung_dung": "Partner with a detail-oriented colleague to anchor project completion, and close one open loop before starting any new venture."
+          "diem_sang": "You chase what you believe in with enthusiasm and love adventure and learning; you work best with a big purpose.",
+          "nen_de_y": "You may get heated when blocked and lose patience with small chores; you often overdo it and tire.",
+          "viec_ung_dung": "Write your big purpose down, then pull out one small task you can do today."
         },
         "ma_ket": {
-          "diem_sang": "You pace your energy like a seasoned mountaineer, executing complex long-term plans with cool composure under pressure.",
-          "nen_de_y": "Driving yourself and others on relentless efficiency metrics can override early signs of physical fatigue.",
-          "viec_ung_dung": "Block recovery time on your calendar with the same discipline as deadlines, and celebrate incremental milestones along the climb."
+          "diem_sang": "You are disciplined, work steadily to plan, handle pressure and climb step by step.",
+          "nen_de_y": "You may overwork out of duty and hold anger until it turns cold; make time to rest.",
+          "viec_ung_dung": "Set aside one session a week to move your body just to feel well, with no performance target."
         },
         "bao_binh": {
-          "diem_sang": "You tackle problems through inventive experimentation, challenging outdated rules and mobilizing collective reforms.",
-          "nen_de_y": "Arbitrary authority can provoke sudden contrarian pushback or abrupt withdrawal from an ongoing workflow.",
-          "viec_ung_dung": "Negotiate clear autonomy over your methods at the start of a project, and give teammates advance notice before changing a shared process."
+          "diem_sang": "You act on ideals and in your own way; you are good at reinventing processes and teamwork toward a shared goal.",
+          "nen_de_y": "You may resist rules simply because you dislike being told; when annoyed you go cold and withdraw.",
+          "viec_ung_dung": "Before objecting to a rule, write down one concrete alternative."
         },
         "song_ngu": {
-          "diem_sang": "You move with intuitive timing, navigating around rigid obstacles creatively and pouring heart into service or artistic work.",
-          "nen_de_y": "Unclear priorities can lead to drifting procrastination or exhaustion from absorbing everyone else's urgent requests.",
-          "viec_ung_dung": "Complete one measurable priority task before noon each day, and practice declining requests that exceed your weekly capacity."
+          "diem_sang": "You work from inspiration and adapt easily, suiting creative work or helping people; soft yet persistent in your own way.",
+          "nen_de_y": "You may avoid conflict and let annoyance simmer; your energy rises and falls with your mood.",
+          "viec_ung_dung": "Write the day's tasks on paper and work through them in order, even when you do not feel like it yet."
         }
       }
     },
@@ -443,64 +443,64 @@
       "vai_tro": "growth horizon, guiding philosophy, and constructive generosity",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "You expand opportunities fastest when pioneering fresh ventures, inspiring confidence through decisive action and self-reliant courage.",
-          "nen_de_y": "Early enthusiasm can cause you to underestimate logistical groundwork or launch too many fronts at once before securing support.",
-          "viec_ung_dung": "Before greenlighting a major initiative, define three progress checkpoints and partner with an operations-minded colleague."
+          "diem_sang": "People born while Jupiter was in Aries (a cohort of about one year) tend to do well when they open their own path; they trust their strength and get excited by new starts.",
+          "nen_de_y": "You may take on too much out of confidence in your strength.",
+          "viec_ung_dung": "Each year pick one new project to lead yourself and see it through to a result."
         },
         "kim_nguu": {
-          "diem_sang": "Your growth vision is rooted in tangible value: compounding financial resources, durable craftsmanship, and steady long-term yields.",
-          "nen_de_y": "Over-prioritizing familiar comfort and guaranteed returns can make you pass up timely innovations that require stepping onto new ground.",
-          "viec_ung_dung": "Allocate a fixed quarterly budget or time block to test one emerging tool or invest in a long-horizon skill upgrade."
+          "diem_sang": "People born while Jupiter was in Taurus (a cohort of about one year) grow through steady building: savings, skill and a settled routine; they are generous with family.",
+          "nen_de_y": "You may spend freely on comfort.",
+          "viec_ung_dung": "Keep a regular monthly saving, however small."
         },
         "song_tu": {
-          "diem_sang": "You thrive through cross-disciplinary curiosity, weaving diverse streams of information together and translating complex ideas into accessible stories.",
-          "nen_de_y": "Chasing too many fascinating topics simultaneously can dilute your expertise, leaving wide reading unfinished as concrete deliverables.",
-          "viec_ung_dung": "Pick one anchor theme each quarter to synthesize into a structured guide or teach back to peers so your knowledge crystallizes."
+          "diem_sang": "People born while Jupiter was in Gemini (a cohort of about one year) grow through learning, reading and conversation; they know many people and often find openings through introductions.",
+          "nen_de_y": "You may know a little about a lot without going deep.",
+          "viec_ung_dung": "Each year choose one field to study properly, besides what you read for fun."
         },
         "cu_giai": {
-          "diem_sang": "Your generosity shines through nurturing close communities, creating psychologically safe workplaces, and building enduring interpersonal trust.",
-          "nen_de_y": "Well-meant protection can tip into over-sheltering others, fostering dependency or draining your own reserves with emotional caretaking.",
-          "viec_ung_dung": "Support people by equipping them with tools and coaching their next step rather than taking over the entire burden yourself."
+          "diem_sang": "People born while Jupiter was in Cancer (a cohort of about one year) feel well off when the family is at peace; they like helping and looking after relatives.",
+          "nen_de_y": "You may over-protect the people close to you.",
+          "viec_ung_dung": "Help relatives in ways that let them do it themselves rather than doing it for them."
         },
         "su_tu": {
-          "diem_sang": "You radiate optimism through warm-hearted leadership, championing the talents of people around you and staging ambitious creative showcases.",
-          "nen_de_y": "A desire for grand scale or visible prestige can tempt you to overextend budgets or promise more than the team can sustainably deliver.",
-          "viec_ung_dung": "Focus resources on initiatives that build lasting shared value, and invite candid cost-and-capacity feedback before scaling up."
+          "diem_sang": "People born while Jupiter was in Leo (a cohort of about one year) are big-hearted, like doing things on a large scale and have a flair for creative and public work.",
+          "nen_de_y": "You may show off or promise big.",
+          "viec_ung_dung": "Attach a concrete date to every big promise."
         },
         "xu_nu": {
-          "diem_sang": "You unlock significant growth by refining operational standards, elevating service quality, and earning trust through meticulous craft.",
-          "nen_de_y": "Zooming in too tightly on minor defects can narrow your strategic horizon, making you hesitate before bold moves that are not yet flawless.",
-          "viec_ung_dung": "When evaluating a new proposal, write a full page on its upside potential before listing the technical risks that need mitigation."
+          "diem_sang": "People born while Jupiter was in Virgo (a cohort of about one year) grow by doing each detail well; good fortune comes through skill and being useful.",
+          "nen_de_y": "You may get lost in small things and lose the big picture.",
+          "viec_ung_dung": "Once a quarter, look at where your small tasks are leading."
         },
         "thien_binh": {
-          "diem_sang": "Your horizons widen through equitable partnerships, diplomatic conflict resolution, and a natural sense of proportion that draws allies together.",
-          "nen_de_y": "Trying to keep every stakeholder equally pleased can delay strategic decisions that require taking a firm, unmistakable stand.",
-          "viec_ung_dung": "Draft explicit partnership criteria in writing up front so collaboration rests on transparent principles rather than polite accommodation."
+          "diem_sang": "People born while Jupiter was in Libra (a cohort of about one year) do well through partnership, good relationships and fair dealing; they make friends easily.",
+          "nen_de_y": "You may say yes too often to avoid upsetting anyone.",
+          "viec_ung_dung": "Choose your collaborators carefully and agree on clear terms from the start."
         },
         "bo_cap": {
-          "diem_sang": "You grow most powerfully when diving into specialized research, navigating high-stakes turnarounds, or pooling resources for root-cause reform.",
-          "nen_de_y": "A habit of guarding information too closely or assuming hidden motives can limit the open trust needed for broader alliances.",
-          "viec_ung_dung": "Practice graduated transparency with vetted partners and apply your investigative depth to untangling shared bottlenecks."
+          "diem_sang": "People born while Jupiter was in Scorpio (a cohort of about one year) grow stronger by going deep into one thing; they are good at getting to the root and handling shared resources.",
+          "nen_de_y": "You may pour everything into a single direction.",
+          "viec_ung_dung": "When you commit to something big, always keep a backup plan."
         },
         "nhan_ma": {
-          "diem_sang": "You possess a far-reaching horizon, spotting cultural or educational trends early and sustaining an infectious love of lifelong exploration.",
-          "nen_de_y": "Excitement over the grand thesis can leave daily execution under-scaffolded or lead to commitments that exceed your calendar.",
-          "viec_ung_dung": "Anchor every big-picture vision to a monthly execution roadmap with concrete, measurable deliverables."
+          "diem_sang": "People born while Jupiter was in Sagittarius (a cohort of about one year) are optimistic, love travel and higher learning and have strong faith in what they pursue.",
+          "nen_de_y": "You may be so optimistic that you overlook risk.",
+          "viec_ung_dung": "Before a big step, write down three things that may not go as hoped and how you would handle each."
         },
         "ma_ket": {
-          "diem_sang": "You scale through patient institutional building, earning professional credibility step by step and turning real-world constraints into leverage.",
-          "nen_de_y": "Excessive caution or reliance only on proven precedents can make you slow to embrace unconventional breakthroughs.",
-          "viec_ung_dung": "Alongside your core conservative plan, open one bounded pilot track with capped downside to test fresh approaches."
+          "diem_sang": "People born while Jupiter was in Capricorn (a cohort of about one year) advance slowly but surely through discipline and responsibility; they earn trust once results show.",
+          "nen_de_y": "You may be strict with your own enjoyment.",
+          "viec_ung_dung": "Allow yourself a small pleasure after each finished stage of work."
         },
         "bao_binh": {
-          "diem_sang": "You open new frontiers through independent systems thinking, connecting diverse civic or professional networks around forward-looking reforms.",
-          "nen_de_y": "Focusing heavily on macro-level frameworks can occasionally leave the immediate emotional realities of individuals around you under-attended.",
-          "viec_ung_dung": "Validate every large-scale reform proposal with a small pilot that directly serves a concrete group of everyday users."
+          "diem_sang": "People born while Jupiter was in Aquarius (a cohort of about one year) grow through new ideas, friends and community; they enjoy work for the common good.",
+          "nen_de_y": "You may chase distant ideals and forget what is close by.",
+          "viec_ung_dung": "Turn one community idea into something you can do within a month."
         },
         "song_ngu": {
-          "diem_sang": "You bring deep compassion, artistic imagination, and quiet receptivity that uplifts people who feel unheard or overwhelmed.",
-          "nen_de_y": "Porous boundaries can pull you into impractical appeals or scatter your time across too many rescue efforts at once.",
-          "viec_ung_dung": "Dedicate a fixed weekly time slot and budget for creative or charitable work so your generosity stays sustainable and grounded."
+          "diem_sang": "People born while Jupiter was in Pisces (a cohort of about one year) are compassionate and understanding, with a gift for art and helping others.",
+          "nen_de_y": "You may feel you have helped enough because your intentions are good, without checking whether it truly helps.",
+          "viec_ung_dung": "Set clear limits on the time and money you give to others."
         }
       }
     },
@@ -510,64 +510,64 @@
       "vai_tro": "structural discipline, realistic limits, and long-term craft",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Your core maturation lies in learning self-paced initiative, turning raw starting energy into disciplined, self-directed endurance.",
-          "nen_de_y": "You may swing between hesitating at the starting line out of self-doubt and pushing impatiently before the groundwork is ready.",
-          "viec_ung_dung": "Build independent pacing through thirty-day work sprints, tracking incremental progress rather than demanding instant victories."
+          "diem_sang": "People born while Saturn was in Aries (a cohort of about two and a half years) learn patience and self-control; they mature by seeing through what they start.",
+          "nen_de_y": "When young you may rush, or the opposite, hold back from stepping forward.",
+          "viec_ung_dung": "Practise finishing one task fully before starting another."
         },
         "kim_nguu": {
-          "diem_sang": "You forge lasting stability through financial prudence, steady work habits, and the patience to build tangible assets brick by brick.",
-          "nen_de_y": "Anxiety over material scarcity can harden into reluctance to upgrade outdated tools or let go of low-yield routines.",
-          "viec_ung_dung": "Maintain a transparent reserve fund for peace of mind, and review your workflow quarterly to retire one obsolete habit."
+          "diem_sang": "People born while Saturn was in Taurus (a cohort of about two and a half years) learn about money and self-worth; they build a solid base by persisting step by step.",
+          "nen_de_y": "You may worry about not having enough even when you do.",
+          "viec_ung_dung": "Keep a simple income and spending sheet and review it each month."
         },
         "song_tu": {
-          "diem_sang": "With disciplined practice, your thinking becomes remarkably structured, distilling noisy data into precise, well-verified communication.",
-          "nen_de_y": "Pressure to have an authoritative answer for everything can create mental tension or make you overly guarded in casual dialogue.",
-          "viec_ung_dung": "Keep a topical reference notebook with verified sources and practice summarizing complex briefs into three crisp takeaways."
+          "diem_sang": "People born while Saturn was in Gemini (a cohort of about two and a half years) learn to think and speak with focus; they improve through serious study.",
+          "nen_de_y": "You may dread speaking in public or fear you do not understand enough.",
+          "viec_ung_dung": "Prepare three main points before each time you speak."
         },
         "cu_giai": {
-          "diem_sang": "You mature by establishing healthy emotional boundaries, carrying family or team stewardship reliably without losing your own center.",
-          "nen_de_y": "When depleted, you may put up a stoic defensive shell, swallow unspoken sadness, or feel solely responsible for everyone's comfort.",
-          "viec_ung_dung": "Distribute household or team duties explicitly among members, and state your own need for downtime plainly before resentment builds."
+          "diem_sang": "People born while Saturn was in Cancer (a cohort of about two and a half years) learn about family and a sense of security; they mature by being able to look after themselves and their family.",
+          "nen_de_y": "You may carry heavy household duties or find it hard to express feelings.",
+          "viec_ung_dung": "Split household tasks clearly with the people you live with."
         },
         "su_tu": {
-          "diem_sang": "You cultivate dignified leadership grounded in genuine creative craft and kept promises rather than applause or surface spectacle.",
-          "nen_de_y": "Harsh self-criticism can make you shy away from sharing your work publicly or drain the spontaneous joy out of creative play.",
-          "viec_ung_dung": "Protect a regular creative session where output is never graded for performance, keeping playful curiosity alive alongside high standards."
+          "diem_sang": "People born while Saturn was in Leo (a cohort of about two and a half years) learn to be confident without needing approval; they improve by patiently training a creative craft.",
+          "nen_de_y": "You may hold back from showing yourself for fear of being judged.",
+          "viec_ung_dung": "Each month show one piece of your work to someone else."
         },
         "xu_nu": {
-          "diem_sang": "You excel at methodical organization, patiently mastering intricate technical procedures and maintaining rock-solid operational reliability.",
-          "nen_de_y": "Rising pressure can narrow your focus into anxious perfectionism, taking on every task yourself because delegation feels risky.",
-          "viec_ung_dung": "Rank tasks by strategic impact and hand off routine deliverables once they meet a clear baseline checklist."
+          "diem_sang": "People born while Saturn was in Virgo (a cohort of about two and a half years) learn about craft, skills and work habits; they are trusted for being careful.",
+          "nen_de_y": "You may be a perfectionist and blame yourself when things are not perfect; make time to rest.",
+          "viec_ung_dung": "Before you start, set a \"good enough\" level for each task."
         },
         "thien_binh": {
-          "diem_sang": "You treat partnership commitments with high integrity, designing fair agreements and holding steady, objective poise during disputes.",
-          "nen_de_y": "Treating relational harmony as a heavy duty can make partnerships feel effortful or prolong indecision before signing agreements.",
-          "viec_ung_dung": "Clarify mutual expectations, scope limits, and dispute-resolution steps at the start of any collaboration so both sides breathe easier."
+          "diem_sang": "People born while Saturn was in Libra (a cohort of about two and a half years) learn about commitment and fairness in relationships; they keep lasting bonds when agreements are clear.",
+          "nen_de_y": "You may shy away from ties, or stay in a relationship only out of duty.",
+          "viec_ung_dung": "State clearly what each side expects in shared work and close relationships."
         },
         "bo_cap": {
-          "diem_sang": "You bring formidable psychological resilience under pressure, facing hard constraints squarely and restructuring shared resources with rigor.",
-          "nen_de_y": "Fear of betrayal or loss of control can lock you into tight defensiveness, holding onto exhausted commitments long past their season.",
-          "viec_ung_dung": "Audit your long-term obligations twice a year and formally close out arrangements that drain vitality without creating real value."
+          "diem_sang": "People born while Saturn was in Scorpio (a cohort of about two and a half years) learn about trust, control and shared resources; they grow stronger by facing hard matters head on.",
+          "nen_de_y": "You may keep too much to yourself and find it hard to ask for help.",
+          "viec_ung_dung": "Choose one trusted person to talk to when something weighs on you."
         },
         "nhan_ma": {
-          "diem_sang": "You develop a lived philosophy tested against reality, pursuing advanced scholarship or professional mastery with steady perseverance.",
-          "nen_de_y": "Defending principles too rigidly or chafing against detailed regulatory procedures can create unnecessary friction in execution.",
-          "viec_ung_dung": "Pair every theoretical study track with a hands-on field application, and stay receptive to perspectives outside your framework."
+          "diem_sang": "People born while Saturn was in Sagittarius (a cohort of about two and a half years) learn to turn beliefs into disciplined action; they grow up through higher learning and experience.",
+          "nen_de_y": "You may be sceptical, or rigid about your views.",
+          "viec_ung_dung": "Hear an opposing view all the way through before arguing back."
         },
         "ma_ket": {
-          "diem_sang": "You operate at peak strategic capability over long horizons, accepting full accountability and building enduring institutions from the ground up.",
-          "nen_de_y": "Equating personal worth entirely with duty and output can lead to austere overwork, isolation under stress, and neglected physical recovery.",
-          "viec_ung_dung": "Share operational burdens with trusted deputies and treat scheduled physical rest as a non-negotiable pillar of your discipline."
+          "diem_sang": "People born while Saturn was in Capricorn (a cohort of about two and a half years) take on responsibility early, organise well and build a steady career over time.",
+          "nen_de_y": "You may overwork and rarely let yourself rest.",
+          "viec_ung_dung": "Each month hand one task fully to someone else and accept their way of doing it, even if it differs from yours."
         },
         "bao_binh": {
-          "diem_sang": "You translate progressive social or technological concepts into durable governance structures, clear standards, and reliable community systems.",
-          "nen_de_y": "Holding tightly to an abstract rulebook can make you appear detached from group warmth or inflexible toward human exceptions.",
-          "viec_ung_dung": "Gather direct feedback from the people affected by your systems so your designs remain both structurally sound and humane."
+          "diem_sang": "People born while Saturn was in Aquarius (a cohort of about two and a half years) learn to hold their own ground within a group; they are good at building systems and organising communities.",
+          "nen_de_y": "You may feel out of place, or shy away from belonging to a group.",
+          "viec_ung_dung": "Join one group with shared interests on a regular basis."
         },
         "song_ngu": {
-          "diem_sang": "You give tangible form to empathy and imagination, turning artistic inspiration or compassionate service into disciplined daily craft.",
-          "nen_de_y": "Without clear external structure, vague self-doubt or absorbed environmental stress can weigh heavily on your momentum.",
-          "viec_ung_dung": "Anchor your days with fixed start-and-stop work hours, and separate your actionable duties from emotional loads that belong to others."
+          "diem_sang": "People born while Saturn was in Pisces (a cohort of about two and a half years) learn to set boundaries and turn imagination into concrete work.",
+          "nen_de_y": "You may blur wishes with real work, or shy from responsibility for fear you lack the strength.",
+          "viec_ung_dung": "Link each wish to one step you can take this week."
         }
       }
     },
@@ -577,64 +577,64 @@
       "vai_tro": "drive to refresh stale habits and protect intellectual autonomy",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "You spark rapid breakthroughs through bold pioneering initiative, forging independent paths and adapting swiftly to sudden shifts.",
-          "nen_de_y": "An impulse to overhaul everything overnight can lead you to scrap working systems before a viable replacement is ready.",
-          "viec_ung_dung": "When an urgent reform idea strikes, run a two-week small-scale trial to measure real outcomes before rolling it out broadly."
+          "diem_sang": "The generation born while Uranus was in Aries (about six to seven years) shares a drive toward innovating through action and daring to try new methods first. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "nen_de_y": "You may tear down the old before the new is ready.",
+          "viec_ung_dung": "Test something new on a small scale before going big."
         },
         "kim_nguu": {
-          "diem_sang": "You modernize practical domains such as personal finance, resource design, and production workflows with lean, inventive solutions.",
-          "nen_de_y": "Tension between craving material security and sudden urges to disrupt the status quo can trigger erratic financial pivots.",
-          "viec_ung_dung": "Upgrade your tools and asset-management habits on a deliberate step-by-step schedule rather than waiting for a forced disruption."
+          "diem_sang": "The generation born while Uranus was in Taurus (about six to seven years) shares a drive toward rethinking how money is made and how we live with possessions. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "nen_de_y": "You may feel shaken when familiar routines are disrupted.",
+          "viec_ung_dung": "Each year learn one new way to manage money."
         },
         "song_tu": {
-          "diem_sang": "Your mind leaps across disciplines at high speed, spotting unexpected connections and mastering emerging communication media effortlessly.",
-          "nen_de_y": "A racing stream of ideas can overtax your nervous system or make your speech jump ahead of listeners following a linear thread.",
-          "viec_ung_dung": "Capture sudden insights in a pocket note right away, then organize them into a clear outline with beginning, middle, and end."
+          "diem_sang": "The generation born while Uranus was in Gemini (about six to seven years) shares a drive toward reinventing how we learn and talk, adopting information technology very fast. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "nen_de_y": "You may get overloaded with news.",
+          "viec_ung_dung": "Keep a time slot each day with notifications off."
         },
         "cu_giai": {
-          "diem_sang": "You bring refreshing autonomy into domestic life, shaping an unconventional home environment that respects each family member's individuality.",
-          "nen_de_y": "Your emotional rhythm can oscillate abruptly between wanting cozy closeness and needing sudden solo space to breathe.",
-          "viec_ung_dung": "Designate a private workspace or retreat corner at home so you can recharge independently while staying warmly connected to family."
+          "diem_sang": "The generation born while Uranus was in Cancer (about six to seven years) shares a drive toward reshaping family patterns, homes and the ways we care for each other. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "nen_de_y": "You may feel unsettled when home life changes.",
+          "viec_ung_dung": "Keep one small household ritual as an anchor."
         },
         "su_tu": {
-          "diem_sang": "Your creative output carries unmistakable originality, refusing cookie-cutter templates and expressing an authentic personal signature.",
-          "nen_de_y": "Prized individuality can sometimes stiffen into resistance when a collaborative production requires standardized team protocols.",
-          "viec_ung_dung": "Infuse your signature originality into the core concept while honoring shared technical standards so the team can ship smoothly."
+          "diem_sang": "The generation born while Uranus was in Leo (about six to seven years) shares a drive toward expressing individuality and creating in their own style. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "nen_de_y": "You may chase being different just to be noticed.",
+          "viec_ung_dung": "Pick one creative project and stay with it for the long run."
         },
         "xu_nu": {
-          "diem_sang": "You spot clever ways to automate repetitive labor, applying digital tools and sharp analytical tweaks to streamline messy workflows.",
-          "nen_de_y": "Unexpected technical glitches can trigger high-strung restlessness or tempt you to switch software stacks too frequently.",
-          "viec_ung_dung": "Commit to a vetted workflow toolkit for at least six months before deciding whether a new platform or process change is warranted."
+          "diem_sang": "The generation born while Uranus was in Virgo (about six to seven years) shares a drive toward reinventing work methods, processes and everyday tools. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "nen_de_y": "Repetitive work may make you restless.",
+          "viec_ung_dung": "Each month improve one step in your daily routine."
         },
         "thien_binh": {
-          "diem_sang": "You bring open-minded breath into partnerships, honoring each person's autonomy and convening progressive, non-hierarchical collaborations.",
-          "nen_de_y": "Discomfort with conventional social scripts can prompt abrupt detachment just as a partnership reaches deeper commitment.",
-          "viec_ung_dung": "Discuss personal space and communication rhythms candidly at the outset so your partnerships stay both free-breathing and dependable."
+          "diem_sang": "The generation born while Uranus was in Libra (about six to seven years) shares a drive toward changing views on marriage, partnership and equality. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "nen_de_y": "Relationships in the old mould may be hard to keep.",
+          "viec_ung_dung": "Agree clearly on a way of living together that suits you both."
         },
         "bo_cap": {
-          "diem_sang": "You possess fearless regenerative drive, cutting through stagnant taboos and finding inventive breakthroughs during high-pressure crises.",
-          "nen_de_y": "An all-or-nothing urge for total reinvention can create jarring turbulence for yourself and collaborators when gradual reform would suffice.",
-          "viec_ung_dung": "Direct intense reform energy into targeted deep-dive upgrades backed by clear contingency plans."
+          "diem_sang": "The generation born while Uranus was in Scorpio (about six to seven years) shares a drive toward facing what others avoid and rethinking power and shared money. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "nen_de_y": "You may go to extremes when cornered.",
+          "viec_ung_dung": "Pick a safe place to talk about difficult matters."
         },
         "nhan_ma": {
-          "diem_sang": "You champion open-horizon inquiry in education, travel, and cross-cultural exchange, welcoming unconventional ideas with lively curiosity.",
-          "nen_de_y": "Leaping toward every exciting new frontier can leave promising long-term projects half-built once the novelty wears off.",
-          "viec_ung_dung": "Apply each new paradigm you study to one concrete local problem before setting off after the next intellectual horizon."
+          "diem_sang": "The generation born while Uranus was in Sagittarius (about six to seven years) shares a drive toward renewing beliefs and learning, with a love of travel and cultural exchange. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "nen_de_y": "You may switch views too quickly.",
+          "viec_ung_dung": "Look closely into a new belief before following it."
         },
         "ma_ket": {
-          "diem_sang": "You excel at modernizing legacy institutions from within, blending structural competence with pragmatic, forward-looking reform.",
-          "nen_de_y": "Internal friction between preserving organizational order and challenging outdated hierarchy can build quiet chronic tension.",
-          "viec_ung_dung": "Back your structural reform proposals with clear performance data so traditional stakeholders can adopt changes step by step."
+          "diem_sang": "The generation born while Uranus was in Capricorn (about six to seven years) shares a drive toward reshaping institutions and the way work is done. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "nen_de_y": "You may feel torn between keeping order and wanting change.",
+          "viec_ung_dung": "Change things step by step from inside the system."
         },
         "bao_binh": {
-          "diem_sang": "You operate as a natural catalyst for collective innovation, mobilizing open networks and designing systems aimed at future civic good.",
-          "nen_de_y": "Living several steps ahead in futuristic blueprints can create impatience with colleagues who still rely on familiar habits.",
-          "viec_ung_dung": "Build practical transition bridges that show how your proposed innovation simplifies people's immediate day-to-day work."
+          "diem_sang": "The generation born while Uranus was in Aquarius (about six to seven years) shares a drive toward valuing freedom, science, networks and the common good. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "nen_de_y": "You may become emotionally distant.",
+          "viec_ung_dung": "Meet friends in person, not only online."
         },
         "song_ngu": {
-          "diem_sang": "You receive flashes of intuitive synthesis through music, visual imagery, or quiet contemplation, opening humane approaches to old problems.",
-          "nen_de_y": "Unscheduled waves of inspiration can pull focus away from mundane deliverables or leave you feeling out of step with rigid routines.",
-          "viec_ung_dung": "Record intuitive sparks immediately by voice note or sketch, then reserve a fixed weekly block to shape the best ones into finished work."
+          "diem_sang": "The generation born while Uranus was in Pisces (about six to seven years) shares a drive toward innovating through art, compassion and intuition. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "nen_de_y": "You may blur the line between real life and life online.",
+          "viec_ung_dung": "Balance time online with time offline."
         }
       }
     },
@@ -644,64 +644,64 @@
       "vai_tro": "imagination, ideals, and areas needing clear practical grounding",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "You act from vivid idealistic inspiration, stepping forward courageously to champion humane causes or pioneer expressive creative movements.",
-          "nen_de_y": "When concrete milestones are fuzzy, fiery enthusiasm can dissolve into disillusionment or scatter across quixotic crusades.",
-          "viec_ung_dung": "Test every inspiring initiative against three grounded questions—resources, timeline, and tangible output—before committing full force."
+          "diem_sang": "The generation born while Neptune was in Aries (about twelve to fourteen years) shares an ideal of standing up for what they believe. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "nen_de_y": "You may jump in before the facts are clear.",
+          "viec_ung_dung": "Check information before you act."
         },
         "kim_nguu": {
-          "diem_sang": "You infuse tangible craft with poetic sensibility, excelling in tactile arts, music, culinary design, or restorative physical spaces.",
-          "nen_de_y": "Over-trusting vague financial assurances or blurring business and personal accounts can quietly erode material resources.",
-          "viec_ung_dung": "Verify contract terms in writing, keep transparent ledger entries, and separate emotional goodwill from financial decisions."
+          "diem_sang": "The generation born while Neptune was in Taurus (about twelve to fourteen years) shares a dream of natural beauty and a simple, comfortable life. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "nen_de_y": "You may be vague about money.",
+          "viec_ung_dung": "Write down every income and expense clearly."
         },
         "song_tu": {
-          "diem_sang": "Your language carries rich imagery and empathetic resonance, touching listeners through storytelling, lyric writing, or gentle dialogue.",
-          "nen_de_y": "Imaginative associations or unverified rumors can blur factual precision when you are processing multiple streams of news.",
-          "viec_ung_dung": "Separate verifiable facts from personal impressions in work notes, and trace important claims back to primary sources."
+          "diem_sang": "The generation born while Neptune was in Gemini (about twelve to fourteen years) shares a dream of ideas, words and stories. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "nen_de_y": "You may believe rumours.",
+          "viec_ung_dung": "Compare two sources before you believe something."
         },
         "cu_giai": {
-          "diem_sang": "You possess deep emotional receptivity toward family and community, creating a soothing sanctuary where others feel genuinely held.",
-          "nen_de_y": "Absorbing the unspoken moods of people around you can leave you carrying emotional burdens that are not yours to solve.",
-          "viec_ung_dung": "Take an unplugged decompression walk at day's end, reminding yourself that compassionate listening does not require rescuing."
+          "diem_sang": "The generation born while Neptune was in Cancer (about twelve to fourteen years) shares a dream of home, homeland and an ideal family. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "nen_de_y": "You may dwell too much on the past.",
+          "viec_ung_dung": "Appreciate your family as it actually is."
         },
         "su_tu": {
-          "diem_sang": "You shine through evocative storytelling, cinema, stagecraft, and heartfelt leadership that moves audiences with warmth and grace.",
-          "nen_de_y": "Romanticizing your own role or placing admired figures on a pedestal can lead to sharp letdowns when ordinary human flaws appear.",
-          "viec_ung_dung": "Welcome honest imperfection during the creative process and build relationships on everyday candor rather than idealized glamour."
+          "diem_sang": "The generation born while Neptune was in Leo (about twelve to fourteen years) shares a dream of the stage, film and romantic love. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "nen_de_y": "You may idealise the person you love.",
+          "viec_ung_dung": "See your partner through what they do day to day."
         },
         "xu_nu": {
-          "diem_sang": "You express compassion through attentive daily service, blending subtle intuitive sensitivity with practical healing or meticulous craft.",
-          "nen_de_y": "Friction between high technical standards and fluctuating emotional energy can trigger fatigue or somatic worry.",
-          "viec_ung_dung": "Keep regular sleep and meal rhythms, and consult qualified guidance rather than spiraling into self-diagnosis when tired."
+          "diem_sang": "The generation born while Neptune was in Virgo (about twelve to fourteen years) shares a dream of service, care and useful work. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "nen_de_y": "You may sacrifice beyond your strength.",
+          "viec_ung_dung": "Keep your rest time even when there is more helping to do."
         },
         "thien_binh": {
-          "diem_sang": "You cultivate graceful harmony in aesthetics and human connection, seeking gentle mutual understanding across differences.",
-          "nen_de_y": "Viewing partners through a rose-tinted lens can cause you to overlook real incompatibilities or concede vital boundaries to avoid friction.",
-          "viec_ung_dung": "Hold regular, honest check-ins about practical expectations in shared life and honor your partner's real nature without projection."
+          "diem_sang": "The generation born while Neptune was in Libra (about twelve to fourteen years) shares a dream of peace, fairness and harmonious love. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "nen_de_y": "You may avoid conflict by going quiet.",
+          "viec_ung_dung": "Voice disagreement gently."
         },
         "bo_cap": {
-          "diem_sang": "Your psychological intuition runs deep, sensing undercurrents beneath spoken words and transmuting grief into soulful, resonant art.",
-          "nen_de_y": "During low moods, brooding over hidden meanings or retreating into escapist habits can cloud your judgment.",
-          "viec_ung_dung": "Pour intense emotional undercurrents into structured creative work, journaling, or vigorous outdoor movement near water or trees."
+          "diem_sang": "The generation born while Neptune was in Scorpio (about twelve to fourteen years) shares a dream of emotional depth and what lies hidden. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "nen_de_y": "You may sink into heavy feelings.",
+          "viec_ung_dung": "When feelings get overwhelming, talk to someone you trust or a counsellor."
         },
         "nhan_ma": {
-          "diem_sang": "You carry an inclusive, humane worldview, resonating with diverse cultural traditions and finding uplift in philosophy, art, or service.",
-          "nen_de_y": "Sweeping faith in grand, unvetted promises can pull you off course from grounded professional milestones.",
-          "viec_ung_dung": "Translate your highest philosophical ideals into concrete acts of fairness and reliability in your immediate daily work."
+          "diem_sang": "The generation born while Neptune was in Sagittarius (about twelve to fourteen years) shares a dream of religion, philosophy and distant horizons. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "nen_de_y": "You may put complete faith in one teacher or one doctrine.",
+          "viec_ung_dung": "Keep your right to question any teaching."
         },
         "ma_ket": {
-          "diem_sang": "You distill abstract vision and quiet compassion into durable organizational form, bringing ethical soul into serious leadership.",
-          "nen_de_y": "Conventional status markers can feel hollow if your daily work lacks deeper meaning, occasionally sapping your ambition.",
-          "viec_ung_dung": "Weave tangible social usefulness or creative depth directly into your long-term career architecture."
+          "diem_sang": "The generation born while Neptune was in Capricorn (about twelve to fourteen years) shares a dream of a stable, well-run society. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "nen_de_y": "You may daydream about status.",
+          "viec_ung_dung": "Set career goals that can be measured."
         },
         "bao_binh": {
-          "diem_sang": "Your ideals reach toward broad human solidarity, inspiring humanitarian projects, environmental stewardship, or open knowledge sharing.",
-          "nen_de_y": "Carrying vast collective dreams without a local implementation anchor can leave you feeling helpless when society changes slowly.",
-          "viec_ung_dung": "Ground your civic vision in a neighborhood-scale group with concrete monthly improvements you can see and touch."
+          "diem_sang": "The generation born while Neptune was in Aquarius (about twelve to fourteen years) shares a dream of an equal community and technology that helps people. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "nen_de_y": "You may idealise the crowd.",
+          "viec_ung_dung": "Make your own call instead of following the online majority."
         },
         "song_ngu": {
-          "diem_sang": "You hold a deep reservoir of artistic sensibility and natural compassion, connecting effortlessly with subtle beauty and wounded hearts.",
-          "nen_de_y": "Thin boundaries between dream and daily obligation can lead to drifting schedules or allowing opportunistic people to overdraw your kindness.",
-          "viec_ung_dung": "Work in timed focus blocks with clear stop alarms, and consult a pragmatic friend before agreeing to major rescue commitments."
+          "diem_sang": "The generation born while Neptune was in Pisces (about twelve to fourteen years) shares a dream of wide compassion, art and inner life. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "nen_de_y": "You may escape into daydreams.",
+          "viec_ung_dung": "Each day tie inspiration to one real action."
         }
       }
     },
@@ -711,64 +711,64 @@
       "vai_tro": "deep pruning of outgrown structures and quiet regeneration",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "You bring fierce self-reliant determination, confronting entrenched obstacles head-on to break stagnation and open a decisive new chapter.",
-          "nen_de_y": "When blocked, escalating force into an uncompromising showdown can burn bridges and exhaust allies on both sides.",
-          "viec_ung_dung": "Direct your breakthrough intensity toward solving the core structural problem rather than winning personal turf battles."
+          "diem_sang": "The generation born while Pluto was in Aries (from over a decade to a few decades) lives through deep change around self-assertion and a pioneering spirit. This belongs to a whole generation; what is personal to you shows in the house Pluto occupies and the aspects it makes.",
+          "nen_de_y": "You may get into fierce confrontations.",
+          "viec_ung_dung": "Use your strength to clear a path for others."
         },
         "kim_nguu": {
-          "diem_sang": "You possess remarkable endurance for economic and material rebuilding, stripping away bloated overhead to preserve essential value.",
-          "nen_de_y": "Fear of financial disruption can make you cling tightly to depleted assets or resist overdue structural overhauls.",
-          "viec_ung_dung": "Schedule periodic audits to divest from stagnant projects, unused possessions, or sunk-cost commitments that tie up vitality."
+          "diem_sang": "The generation born while Pluto was in Taurus (from over a decade to a few decades) lives through deep change around wealth, land and material values. This belongs to a whole generation; what is personal to you shows in the house Pluto occupies and the aspects it makes.",
+          "nen_de_y": "You may cling to possessions.",
+          "viec_ung_dung": "Review now and then what truly needs keeping."
         },
         "song_tu": {
-          "diem_sang": "You excel at investigative research that cuts straight to root causes, asking incisive questions and writing with compelling persuasive weight.",
-          "nen_de_y": "In heated debates, relentless cross-examination or biting candor can make interlocutors shut down defensively.",
-          "viec_ung_dung": "Apply your detective instinct to complex technical or archival puzzles, and frame tough questions with curiosity rather than interrogation."
+          "diem_sang": "The generation born while Pluto was in Gemini (from over a decade to a few decades) lives through deep change around communication, the written word and education. This belongs to a whole generation; what is personal to you shows in the house Pluto occupies and the aspects it makes.",
+          "nen_de_y": "You may get pulled into heated arguments.",
+          "viec_ung_dung": "Choose your words carefully when writing in public."
         },
         "cu_giai": {
-          "diem_sang": "You have the depth to heal and rebuild family foundations from the roots up, facing unspoken history honestly to forge authentic kinship.",
-          "nen_de_y": "Anxiety over abandonment can quietly morph into emotional possessiveness or holding onto old domestic grievances.",
-          "viec_ung_dung": "Open candid, blame-free family conversations to clear lingering misunderstandings while respecting loved ones' autonomy."
+          "diem_sang": "The generation born while Pluto was in Cancer (from over a decade to a few decades) lives through deep change around family, homeland and the sense of security. This belongs to a whole generation; what is personal to you shows in the house Pluto occupies and the aspects it makes.",
+          "nen_de_y": "You may carry worries about home.",
+          "viec_ung_dung": "Build a steady home life from small habits."
         },
         "su_tu": {
-          "diem_sang": "You command magnetic presence during high-stakes transitions, pouring wholehearted passion into transformative creative works.",
-          "nen_de_y": "Striving for total command of the stage can draw you into draining ego rivalries or power struggles over recognition.",
-          "viec_ung_dung": "Use your authority to mentor and elevate emerging talents, measuring leadership strength by how brightly the whole ensemble grows."
+          "diem_sang": "The generation born while Pluto was in Leo (from over a decade to a few decades) lives through deep change around self-expression, creativity and raising children. This belongs to a whole generation; what is personal to you shows in the house Pluto occupies and the aspects it makes.",
+          "nen_de_y": "You may put too much weight on being recognised.",
+          "viec_ung_dung": "Encourage young people to express themselves in their own way."
         },
         "xu_nu": {
-          "diem_sang": "You diagnose systemic flaws with surgical accuracy, overhauling convoluted workflows to eliminate deep-seated waste and inefficiency.",
-          "nen_de_y": "Demanding total flawlessness can tighten into compulsive micromanagement that exhausts both you and your team.",
-          "viec_ung_dung": "Target the twenty percent of root operational bottlenecks that drive eighty percent of results, and let minor details breathe."
+          "diem_sang": "The generation born while Pluto was in Virgo (from over a decade to a few decades) lives through deep change around work, technique and healthy routines. This belongs to a whole generation; what is personal to you shows in the house Pluto occupies and the aspects it makes.",
+          "nen_de_y": "You may be perfectionist and strict.",
+          "viec_ung_dung": "Improve how you work without blaming yourself."
         },
         "thien_binh": {
-          "diem_sang": "You refuse superficial politeness in partnerships, pressing for authentic fairness, deep reciprocity, and transformative mutual growth.",
-          "nen_de_y": "Relational dynamics can get tangled in subtle power tests or high-drama ultimatums meant to gauge a partner's loyalty.",
-          "viec_ung_dung": "Bring unspoken tensions to the table early through plain, transparent dialogue rather than silent tests of leverage."
+          "diem_sang": "The generation born while Pluto was in Libra (from over a decade to a few decades) lives through deep change around marriage, partnership and fairness. This belongs to a whole generation; what is personal to you shows in the house Pluto occupies and the aspects it makes.",
+          "nen_de_y": "You may get into tugs of war within relationships.",
+          "viec_ung_dung": "Make fair, clear agreements in close relationships."
         },
         "bo_cap": {
-          "diem_sang": "You carry extraordinary regenerative grit after setbacks, reading underlying motives clearly and steering decisive turnarounds under pressure.",
-          "nen_de_y": "Keeping every calculation under wraps and holding onto grievances after trust is bruised can keep your nervous system on constant alert.",
-          "viec_ung_dung": "Pick only the battles worthy of your full intensity, and deliberately release finished chapters so your energy stays free for renewal."
+          "diem_sang": "The generation born while Pluto was in Scorpio (from over a decade to a few decades) lives through deep change around power, shared money and what is kept hidden. This belongs to a whole generation; what is personal to you shows in the house Pluto occupies and the aspects it makes.",
+          "nen_de_y": "You may go to extremes and find trust hard.",
+          "viec_ung_dung": "Turn your depth into staying power when things get hard."
         },
         "nhan_ma": {
-          "diem_sang": "You pursue truth down to its bedrock, willing to transform your entire worldview through lived cross-cultural and philosophical inquiry.",
-          "nen_de_y": "Fierce conviction in your hard-won truth can tip into zealous preaching or sharp dismissal of differing frameworks.",
-          "viec_ung_dung": "Keep the posture of an open field researcher who continually tests personal hypotheses through respectful dialogue across viewpoints."
+          "diem_sang": "The generation born while Pluto was in Sagittarius (from over a decade to a few decades) lives through deep change around belief, education and the meeting of nations. This belongs to a whole generation; what is personal to you shows in the house Pluto occupies and the aspects it makes.",
+          "nen_de_y": "You may be rigid about your views.",
+          "viec_ung_dung": "Learn from many cultures."
         },
         "ma_ket": {
-          "diem_sang": "You possess the steely resolve to restructure large organizations, carrying out long-term institutional reforms that require unshakeable rigor.",
-          "nen_de_y": "Relying purely on top-down command or ruthless efficiency metrics can freeze out human candor and erode team morale.",
-          "viec_ung_dung": "Pair transparent structural accountability with genuine listening so deep reforms earn voluntary buy-in across the organization."
+          "diem_sang": "The generation born while Pluto was in Capricorn (from over a decade to a few decades) lives through deep change around institutions, work and the structure of society. This belongs to a whole generation; what is personal to you shows in the house Pluto occupies and the aspects it makes.",
+          "nen_de_y": "You may feel pressure to achieve.",
+          "viec_ung_dung": "Build results slowly and surely, by what you value."
         },
         "bao_binh": {
-          "diem_sang": "You act as a deep catalyst for systemic renewal in networks and civic life, questioning obsolete conventions down to their foundations.",
-          "nen_de_y": "Pushing a collective toward radical reform can turn polarizing if you write off slower adopters as adversaries.",
-          "viec_ung_dung": "Design modular community reforms based on voluntary participation, respecting different paces of adaptation across groups."
+          "diem_sang": "The generation born while Pluto was in Aquarius (from over a decade to a few decades) lives through deep change around technology, community and how we live together. This belongs to a whole generation; what is personal to you shows in the house Pluto occupies and the aspects it makes.",
+          "nen_de_y": "You may lose balance between self and group.",
+          "viec_ung_dung": "Keep your own voice within the group."
         },
         "song_ngu": {
-          "diem_sang": "You transmute profound inner reckonings into soulful art, quiet spiritual depth, and non-judgmental compassion for human fragility.",
-          "nen_de_y": "Overwhelming emotional undercurrents can tempt you to withdraw completely from practical duties or linger in hidden melancholy.",
-          "viec_ung_dung": "Stay anchored in physical reality through daily hands-on craft, gardening, or scheduled creative output with clear boundaries."
+          "diem_sang": "The generation born while Pluto was in Pisces (from over a decade to a few decades) lives through deep change around inner life, compassion and art. This belongs to a whole generation; what is personal to you shows in the house Pluto occupies and the aspects it makes.",
+          "nen_de_y": "The line between you and others may blur.",
+          "viec_ung_dung": "Tie your ideals to one concrete action."
         }
       }
     },
@@ -778,64 +778,64 @@
       "vai_tro": "unfamiliar growth edge worth practicing deliberately over time",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Your growth edge lies in making independent decisions, stating your personal needs plainly, and stepping forward without waiting for unanimous approval.",
-          "nen_de_y": "Because solo initiative feels unfamiliar, you may alternate between over-accommodating others and snapping abruptly when cornered.",
-          "viec_ung_dung": "Each week, own one personal decision from initial call to final outcome without polling others for reassurance."
+          "diem_sang": "Direction to practise: deciding for yourself and standing up for what you want.",
+          "nen_de_y": "You may be used to leaning on others' opinions before choosing.",
+          "viec_ung_dung": "Each week make one small decision without asking anyone."
         },
         "kim_nguu": {
-          "diem_sang": "You gain solid traction by building transparent personal finances, honoring a steady daily rhythm, and crafting tangible, lasting value.",
-          "nen_de_y": "While learning unhurried self-sufficiency, you may feel restless without high-drama intensity or procrastinate on routine budgeting.",
-          "viec_ung_dung": "Set up an automatic monthly savings transfer and complete practical projects at an even, sustainable pace."
+          "diem_sang": "Direction to practise: building your own stability, slowing down, valuing what you already have.",
+          "nen_de_y": "You may get swept up in turmoil and other people's business.",
+          "viec_ung_dung": "Keep one steady daily habit for a month."
         },
         "song_tu": {
-          "diem_sang": "Your horizon opens when you adopt a beginner's curiosity, listen closely to everyday perspectives, and explain ideas in clear, relatable language.",
-          "nen_de_y": "You may hesitate to ask basic questions for fear of looking uninformed, or speak in sweeping abstractions that skip local facts.",
-          "viec_ung_dung": "In every meeting or discussion, ask at least two open questions to understand the other person's experience before offering your thesis."
+          "diem_sang": "Direction to practise: being curious, asking questions, listening to many points of view.",
+          "nen_de_y": "You may assume you already know enough.",
+          "viec_ung_dung": "Ask one more question before giving your opinion."
         },
         "cu_giai": {
-          "diem_sang": "Your deepest balance comes from letting yourself express tender care, investing presence in home life, and valuing emotional closeness.",
-          "nen_de_y": "Because vulnerability feels unfamiliar, you can easily hide behind career busyness or formal duty to avoid intimate family moments.",
-          "viec_ung_dung": "Protect one screen-free meal or unhurried conversation with loved ones each week, and practice admitting when you feel tired."
+          "diem_sang": "Direction to practise: caring for your home and letting yourself express feelings.",
+          "nen_de_y": "You may focus only on work and position.",
+          "viec_ung_dung": "Set aside one evening a week for family."
         },
         "su_tu": {
-          "diem_sang": "You grow stronger when you step into visible authorship, lead with warm-hearted generosity, and take honest pride in your creative voice.",
-          "nen_de_y": "Standing in the spotlight can trigger awkwardness, tempting you to retreat into detached group observer mode.",
-          "viec_ung_dung": "Present a project or original piece under your own name and receive compliments with a simple, wholehearted thank-you."
+          "diem_sang": "Direction to practise: expressing yourself, creating, letting yourself have fun.",
+          "nen_de_y": "You may hide in the crowd.",
+          "viec_ung_dung": "This month take on one role in front of others."
         },
         "xu_nu": {
-          "diem_sang": "Your practical breakthrough comes from mastering concrete details, maintaining orderly daily routines, and solving useful problems step by step.",
-          "nen_de_y": "Structured schedules and quality checklists can initially feel confining when you would rather drift on unstructured inspiration.",
-          "viec_ung_dung": "Use a written daily checklist for core responsibilities and finish one concrete maintenance task neatly before logging off."
+          "diem_sang": "Direction to practise: working with routine, attending to detail, helping in concrete ways.",
+          "nen_de_y": "You may drift and avoid practical tasks.",
+          "viec_ung_dung": "Each morning write a list of the day's tasks."
         },
         "thien_binh": {
-          "diem_sang": "You flourish by practicing the art of partnership, weighing others' perspectives fairly, and sharing credit within equitable collaborations.",
-          "nen_de_y": "Accustomed to charging ahead solo, you can feel slowed down by consensus-building or forget to loop stakeholders in early.",
-          "viec_ung_dung": "Before locking in a shared plan, invite your partner's input explicitly and co-design an option that serves both sides."
+          "diem_sang": "Direction to practise: cooperating, listening, weighing others' views.",
+          "nen_de_y": "You may be used to working alone, your own way.",
+          "viec_ung_dung": "Invite someone to join your next task."
         },
         "bo_cap": {
-          "diem_sang": "Your transformative growth opens when you move beyond surface comfort, embrace deep psychological honesty, and pool resources in high-trust alliances.",
-          "nen_de_y": "Letting go of solo material control or confronting complex emotional truths can trigger stubborn self-protective resistance.",
-          "viec_ung_dung": "Collaborate on one joint venture with transparent shared stakes, and consciously retire one outdated habit you have been hoarding."
+          "diem_sang": "Direction to practise: going deep, sharing honestly, daring to change.",
+          "nen_de_y": "You may cling to familiar safety.",
+          "viec_ung_dung": "Tell someone you trust one thing you have kept to yourself."
         },
         "nhan_ma": {
-          "diem_sang": "You expand into your full stature by synthesizing scattered facts into a coherent life philosophy and trusting your broader intuitive compass.",
-          "nen_de_y": "Stepping back from constant micro-details to make a long-horizon commitment can feel dizzying at first.",
-          "viec_ung_dung": "Dedicate time each quarter to an in-depth book or field journey that widens the frame of reference for your multi-year goals."
+          "diem_sang": "Direction to practise: looking far ahead, learning big things, living by your own beliefs.",
+          "nen_de_y": "You may get absorbed in small details.",
+          "viec_ung_dung": "Each quarter read one book that widens your view."
         },
         "ma_ket": {
-          "diem_sang": "You build real backbone by stepping up to professional accountability, setting self-reliant standards, and earning respect through consistent results.",
-          "nen_de_y": "When external expectations rise, an old reflex to seek shelter or let mood swings dictate output can slow your climb.",
-          "viec_ung_dung": "Draft an annual roadmap with concrete review milestones and solve operational hurdles through methodical craft."
+          "diem_sang": "Direction to practise: taking responsibility and setting long-term goals.",
+          "nen_de_y": "You may stay too long in the safety of family.",
+          "viec_ung_dung": "Write one career goal for the next five years."
         },
         "bao_binh": {
-          "diem_sang": "Your path forward opens through civic and team collaboration, contributing your talents to a larger network where everyone holds equal dignity.",
-          "nen_de_y": "Craving special recognition or personal drama can get in the way of smooth, egalitarian teamwork.",
-          "viec_ung_dung": "Co-facilitate a group initiative or community project where decisions are weighed objectively for the collective good."
+          "diem_sang": "Direction to practise: contributing to a group and thinking of the common good.",
+          "nen_de_y": "You may need personal attention.",
+          "viec_ung_dung": "Join a group effort without needing your name on it."
         },
         "song_ngu": {
-          "diem_sang": "You find deep renewal when you loosen rigid control over every detail, trust intuitive flow, and extend gentle compassion to yourself and others.",
-          "nen_de_y": "When events depart from your itemized plan, unfamiliar uncertainty can spark anxious over-analysis.",
-          "viec_ung_dung": "Spend fifteen quiet minutes at day's end with music, art, or mindful breathing without bringing along a to-do list to fix."
+          "diem_sang": "Direction to practise: trusting your intuition, loosening control, living with more compassion.",
+          "nen_de_y": "You may scrutinise and worry over every detail.",
+          "viec_ung_dung": "Spend ten minutes a day sitting still, doing nothing."
         }
       }
     },
@@ -845,64 +845,64 @@
       "vai_tro": "familiar baseline strengths not to over-rely on out of habit",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "You carry natural decisive instincts, fast self-reliant courage, and immediate readiness to act in emergencies.",
-          "nen_de_y": "Under stress, you can default to going it alone, brushing past partners' input and straining collaborative trust.",
-          "viec_ung_dung": "Keep your crisp initiative as an asset, while pausing deliberately to consult teammates and share decision ownership."
+          "diem_sang": "Familiar strength you already have: independence, quickness, daring to act alone.",
+          "nen_de_y": "If you rely on it alone, it can turn into working alone and not listening to others.",
+          "viec_ung_dung": "Use your quickness to get things started, then invite others in."
         },
         "kim_nguu": {
-          "diem_sang": "You possess an ingrained gift for building material steadiness, appreciating tangible quality, and staying calm amid turmoil.",
-          "nen_de_y": "Retreating too deeply into possessive comfort or refusing necessary change can stall your deeper regeneration.",
-          "viec_ung_dung": "Use your practical grounding as a stable base from which to welcome joint ventures and overdue personal renewal."
+          "diem_sang": "Familiar strength you already have: holding on to resources, persistence, a settled life.",
+          "nen_de_y": "If you rely on it alone, you may resist change even when change is needed.",
+          "viec_ung_dung": "Use your steadiness to hold the base, then try one deliberate change."
         },
         "song_tu": {
-          "diem_sang": "You have effortless verbal agility, quick information intake, and an easy rapport with people from all walks of life.",
-          "nen_de_y": "When a situation calls for deep conviction, you can hide in endless tab-gathering or clever banter to avoid taking a firm stand.",
-          "viec_ung_dung": "Once basic facts are in, close the extra browser tabs and commit to one coherent course of action over the long haul."
+          "diem_sang": "Familiar strength you already have: talking, improvising, knowing a bit of everything.",
+          "nen_de_y": "If you rely on it alone, you may know a lot but lack a direction you believe in.",
+          "viec_ung_dung": "Put your knowledge to work for one larger goal."
         },
         "cu_giai": {
-          "diem_sang": "You bring innate emotional sensitivity, protective warmth toward kin, and an immediate feel for the mood in any room.",
-          "nen_de_y": "Under public or professional pressure, retreating into a hurt defensive shell or waiting to be rescued can hold you back.",
-          "viec_ung_dung": "Bring your human empathy into mature professional stewardship, standing tall on clear boundaries and accountable execution."
+          "diem_sang": "Familiar strength you already have: caring and staying close to family.",
+          "nen_de_y": "If you rely on it alone, you may withdraw and hesitate to step outside.",
+          "viec_ung_dung": "Bring that same thoughtfulness into shared work."
         },
         "su_tu": {
-          "diem_sang": "You possess natural stage presence, warm confidence, and an effortless ability to spark creative enthusiasm.",
-          "nen_de_y": "In peer networks, falling back on a need to be the central star or taking group feedback as a personal slight can isolate you.",
-          "viec_ung_dung": "Lend your generous creative spark to collective projects, taking joy in shared network breakthroughs rather than solo applause."
+          "diem_sang": "Familiar strength you already have: confidence and enjoying attention.",
+          "nen_de_y": "If you rely on it alone, you may need too much recognition.",
+          "viec_ung_dung": "Use your confidence to lift others up."
         },
         "xu_nu": {
-          "diem_sang": "You have a sharp eye for technical detail, orderly work habits, and seasoned skill at troubleshooting practical processes.",
-          "nen_de_y": "When facing open-ended or emotional situations, retreating into nitpicking critique and anxious worry can drain your peace.",
-          "viec_ung_dung": "Stop polishing details once a task is solidly functional, leaving room for intuitive synthesis and compassionate acceptance."
+          "diem_sang": "Familiar strength you already have: carefulness, thoroughness, being good at the job.",
+          "nen_de_y": "If you rely on it alone, you may worry and nitpick too much.",
+          "viec_ung_dung": "Be thorough, then let go once the work is good enough."
         },
         "thien_binh": {
-          "diem_sang": "You carry natural diplomatic grace, fair-minded listening skills, and an aesthetic poise that puts others at ease.",
-          "nen_de_y": "When tough calls arise, defaulting to people-pleasing or deferring your own desire to keep surface peace can leave you resentful.",
-          "viec_ung_dung": "Use your natural courtesy to state your independent position plainly, acting on your own conviction even when opinions differ."
+          "diem_sang": "Familiar strength you already have: tact and getting along with others easily.",
+          "nen_de_y": "If you rely on it alone, you may forget what you yourself want.",
+          "viec_ung_dung": "Use your tact to say clearly what you need."
         },
         "bo_cap": {
-          "diem_sang": "You possess deep psychological radar, high crisis stamina, and an instinctive grasp of hidden motives and complex stakes.",
-          "nen_de_y": "When unsettled, slipping back into secretive suspicion or manufacturing intensity can exhaust your everyday peace.",
-          "viec_ung_dung": "Put your depth of insight at the service of building simple, transparent, and calm material stability."
+          "diem_sang": "Familiar strength you already have: sharp perception and endurance when things get hard.",
+          "nen_de_y": "If you rely on it alone, you may get used to living on edge and find it hard to relax.",
+          "viec_ung_dung": "Keep your endurance, but practise enjoying calm moments."
         },
         "nhan_ma": {
-          "diem_sang": "You bring natural big-picture optimism, love of freedom, and a quick grasp of overarching themes and philosophies.",
-          "nen_de_y": "When precision or close listening is required, defaulting to sweeping generalizations or tuning out local details can alienate peers.",
-          "viec_ung_dung": "Ground your broad vision by listening attentively to immediate questions, checking concrete facts, and engaging in two-way dialogue."
+          "diem_sang": "Familiar strength you already have: optimism, love of freedom, having faith.",
+          "nen_de_y": "If you rely on it alone, you may talk theory and skip the details.",
+          "viec_ung_dung": "Let faith drive you, then check each concrete step."
         },
         "ma_ket": {
-          "diem_sang": "You carry seasoned executive discipline, structural competence, and the stamina to shoulder heavy institutional responsibility.",
-          "nen_de_y": "Under emotional strain, locking feelings behind an armor of duty and judging life solely by status metrics can leave home life cold.",
-          "viec_ung_dung": "Use your organizational strength to protect warm family time, allowing yourself honest vulnerability with the people closest to you."
+          "diem_sang": "Familiar strength you already have: responsibility and being used to carrying the load.",
+          "nen_de_y": "If you rely on it alone, you may put tasks before feelings.",
+          "viec_ung_dung": "Keep your maturity, but make room for family."
         },
         "bao_binh": {
-          "diem_sang": "You have an effortless grasp of systems, cool objective judgment, and natural ease inside broad, diverse networks.",
-          "nen_de_y": "When a situation calls for heartfelt personal commitment, staying in detached commentary on the sidelines can dim your vitality.",
-          "viec_ung_dung": "Pair your civic objectivity with wholehearted personal authorship, stepping forward to lead with warmth and visible heart."
+          "diem_sang": "Familiar strength you already have: independence and ease with teamwork.",
+          "nen_de_y": "If you rely on it alone, you may stand outside your own feelings.",
+          "viec_ung_dung": "Use your teamwork skills for something you truly enjoy."
         },
         "song_ngu": {
-          "diem_sang": "You carry deep imaginative empathy, subtle artistic sensitivity, and a natural compassion for unspoken suffering.",
-          "nen_de_y": "When practical demands pile up, drifting into vague escapism, porous schedules, or helpless martyrdom can derail execution.",
-          "viec_ung_dung": "Anchor your compassionate heart in crisp daily work habits, clear step-by-step lists, and well-defined practical service."
+          "diem_sang": "Familiar strength you already have: empathy and strong intuition.",
+          "nen_de_y": "If you rely on it alone, you may drift and find it hard to stick to tasks.",
+          "viec_ung_dung": "Listen to your intuition, then write down a concrete plan."
         }
       }
     },
@@ -912,64 +912,64 @@
       "vai_tro": "tender sensitivity that matures into practical wisdom for others",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Lived sensitivity around self-assertion gives you deep empathy for people finding their voice, making you a steadying coach for independent courage.",
-          "nen_de_y": "You may occasionally question your right to put your own goals first, or over-push in competition just to prove you belong.",
-          "viec_ung_dung": "State one personal preference calmly each day, and use your hard-won self-reliance to mentor newcomers taking their first solo step."
+          "diem_sang": "Sensitive spot: feeling you are not brave enough or not allowed to step forward. Once you understand it, you are often good at helping people in the same situation.",
+          "nen_de_y": "You may hold back, or the opposite, force yourself to look tough.",
+          "viec_ung_dung": "Help others find the courage to speak up; it also eases your own heart."
         },
         "kim_nguu": {
-          "diem_sang": "Navigating early questions around self-worth and material security equips you to offer grounded, practical guidance on resource stewardship.",
-          "nen_de_y": "Even with solid achievements in hand, an undertow of scarcity anxiety can tempt you to underprice your labor.",
-          "viec_ung_dung": "Price your work according to the real durability you deliver, and teach straightforward budgeting habits to people building their foundation."
+          "diem_sang": "Sensitive spot: feeling there is not enough, worrying about money or your own worth. Once you understand it, you are often good at helping people in the same situation.",
+          "nen_de_y": "You may cling to things or money to feel safe.",
+          "viec_ung_dung": "Write down three things you have that money cannot buy."
         },
         "song_tu": {
-          "diem_sang": "Knowing how it feels to be misheard or interrupted sharpens your gift for clear explanation, helping others untangle communication blocks.",
-          "nen_de_y": "Feeling talked over or doubting your intellectual fluency in fast-moving rooms can trigger quiet self-criticism.",
-          "viec_ung_dung": "Write out your core insights in structured essays or guides, and tutor learners who feel intimidated by complex subjects."
+          "diem_sang": "Sensitive spot: worrying that you do not speak well or have not learned enough. Once you understand it, you are often good at helping people in the same situation.",
+          "nen_de_y": "You may avoid asking for fear of looking slow.",
+          "viec_ung_dung": "Explain to someone else a thing you once found hard to learn."
         },
         "cu_giai": {
-          "diem_sang": "Tender sensitivity around belonging and family roots gives you a rare ability to build safe, welcoming spaces for people who feel unanchored.",
-          "nen_de_y": "Old family misunderstandings can ache when your quiet caretaking goes unreciprocated or unnoticed.",
-          "viec_ung_dung": "Practice extending the same nurturing care to yourself that you give loved ones, while building community spaces with clear, respectful boundaries."
+          "diem_sang": "Sensitive spot: feeling short of support and care. Once you understand it, you are often good at helping people in the same situation.",
+          "nen_de_y": "You may use caring for others in place of receiving care.",
+          "viec_ung_dung": "Do one small thing each day to look after yourself."
         },
         "su_tu": {
-          "diem_sang": "Working through self-consciousness around creative visibility makes you an encouraging mentor capable of drawing out shy talent in others.",
-          "nen_de_y": "Unacknowledged creative effort can sting deeply, or make you hesitate to share playful work unless it looks impressive.",
-          "viec_ung_dung": "Create for the intrinsic joy of the craft itself, and make a habit of spotlighting emerging contributors in your circle."
+          "diem_sang": "Sensitive spot: worrying you are not seen or not special. Once you understand it, you are often good at helping people in the same situation.",
+          "nen_de_y": "You may hold back, or need a lot of praise.",
+          "viec_ung_dung": "Praise other people's achievements sincerely."
         },
         "xu_nu": {
-          "diem_sang": "Understanding the exhaustion of perfectionism helps you design humane, practical workflows and realistic wellness routines for overburdened people.",
-          "nen_de_y": "When setbacks occur, an inner critic can fixate on tiny flaws or whisper that your contribution is never quite useful enough.",
-          "viec_ung_dung": "Acknowledge tasks that are solidly complete at eighty percent, and share your practical organizing skills to lighten others' daily load."
+          "diem_sang": "Sensitive spot: worrying you are not good or useful enough. Once you understand it, you are often good at helping people in the same situation.",
+          "nen_de_y": "You may blame yourself for small mistakes.",
+          "viec_ung_dung": "Help others with the same patience you wish to receive."
         },
         "thien_binh": {
-          "diem_sang": "Hard-earned lessons in partnership dynamics give you wise, balanced insight when mediating conflict or coaching healthy relational boundaries.",
-          "nen_de_y": "Fear of relational rupture can lead you to swallow disagreements for too long until quiet resentment builds.",
-          "viec_ung_dung": "Voice minor differences early with calm respect, modeling how honest candor actually strengthens long-term harmony."
+          "diem_sang": "Sensitive spot: fearing being left, finding it hard to balance yourself and others. Once you understand it, you are often good at helping people in the same situation.",
+          "nen_de_y": "You may please people to be loved.",
+          "viec_ung_dung": "Help others find fair words when there is a conflict."
         },
         "bo_cap": {
-          "diem_sang": "Walking through deep trust reckonings or loss equips you to stand beside people navigating major life transitions without flinching.",
-          "nen_de_y": "Tender sensitivity around betrayal can prompt you to erect overly steep loyalty tests before letting anyone close.",
-          "viec_ung_dung": "Apply your psychological depth to confidential mentoring, research, or crisis guidance anchored in clear ethical boundaries."
+          "diem_sang": "Sensitive spot: finding it hard to trust, fearing being let down. Once you understand it, you are often good at helping people in the same situation.",
+          "nen_de_y": "You may keep your distance to protect yourself.",
+          "viec_ung_dung": "Listen without judging to someone going through a hard time."
         },
         "nhan_ma": {
-          "diem_sang": "Questioning inherited dogmas to find lived meaning makes you an open-minded teacher who helps others build their own authentic compass.",
-          "nen_de_y": "Periods of philosophical doubt or feeling out of step with mainstream beliefs can occasionally feel isolating.",
-          "viec_ung_dung": "Share lessons drawn from real field experience rather than abstract doctrine, inviting learners to test ideas for themselves."
+          "diem_sang": "Sensitive spot: feeling unsure about beliefs and the meaning of what you do. Once you understand it, you are often good at helping people in the same situation.",
+          "nen_de_y": "You may cling to one doctrine, or doubt everything.",
+          "viec_ung_dung": "Share with younger people the questions you once wrestled with."
         },
         "ma_ket": {
-          "diem_sang": "Knowing the weight of relentless achievement pressure turns you into a seasoned mentor who balances high standards with humane realism.",
-          "nen_de_y": "Carrying an internal judge that measures worth solely by rank or output can make ordinary rest feel undeserved.",
-          "viec_ung_dung": "Define success by sustainable long-term craft, and coach juniors on how to hit meaningful milestones without burning out."
+          "diem_sang": "Sensitive spot: pressure to succeed and fear of failing in front of others. Once you understand it, you are often good at helping people in the same situation.",
+          "nen_de_y": "You may overwork to be recognised.",
+          "viec_ung_dung": "Guide newcomers to your field with your own lessons."
         },
         "bao_binh": {
-          "diem_sang": "Having felt like an outsider inside conventional groups gives you a gift for weaving diverse, unconventional thinkers into an inclusive network.",
-          "nen_de_y": "Ambivalence between wanting community belonging and guarding your independence can keep you hovering at the edge of the room.",
-          "viec_ung_dung": "Contribute your distinctive systems perspective directly to group problem-solving and make sure quieter voices at the table are heard."
+          "diem_sang": "Sensitive spot: feeling out of place and different from the crowd. Once you understand it, you are often good at helping people in the same situation.",
+          "nen_de_y": "You may cut yourself off from the group.",
+          "viec_ung_dung": "Make room for people who are \"different\" to feel they belong."
         },
         "song_ngu": {
-          "diem_sang": "Deep sensitivity to collective sorrow gives you a gentle healing presence through music, contemplative listening, and unforced compassion.",
-          "nen_de_y": "Without firm daily anchors, absorbing the confusion or distress of your surroundings can leave you emotionally depleted.",
-          "viec_ung_dung": "Return to simple physical grounding and breath after supporting others so your compassion stays clear, steady, and replenished."
+          "diem_sang": "Sensitive spot: soaking up others' sadness and finding boundaries hard. Once you understand it, you are often good at helping people in the same situation.",
+          "nen_de_y": "You may feel you must fix everyone's pain and run out of strength.",
+          "viec_ung_dung": "Help people with empathy, but keep time for yourself."
         }
       }
     }

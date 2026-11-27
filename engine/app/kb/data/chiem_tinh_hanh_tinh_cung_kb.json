@@ -1,5 +1,5 @@
 {
-  "_nguon": "Chặng 4.2 — Hành tinh × 12 Cung Hoàng đạo.",
+  "_nguon": "Chặng 4.2 — Hành tinh × 12 Cung Hoàng đạo. Nháp biên tập theo truyền thống chiêm tinh phương Tây hiện đại, không trích nguyên văn sách nào; chờ chủ dự án duyệt.",
   "_trang_thai": "nhap_ai_cho_duyet",
   "source_id": "bien_tap_chiem_tinh_2026",
   "school_id": "chiem_tinh_tay",
@@ -152,9 +152,9 @@
           "viec_ung_dung": "Khi buồn, nói thẳng một câu 'mình cần…' thay vì im lặng chờ người khác đoán."
         },
         "su_tu": {
-          "diem_sang": "Bạn rạng rỡ khi được sáng tạo, dẫn dắt và được ghi nhận; hào phóng, ấm áp, truyền lửa cho tập thể.",
+          "diem_sang": "Bạn sống động nhất khi được sáng tạo, dẫn dắt và được ghi nhận; hào phóng, ấm áp, truyền cảm hứng.",
           "nen_de_y": "Dễ chạnh lòng khi không được để ý, muốn làm trung tâm; có lúc khó nhận góp ý.",
-          "viec_ung_dung": "Tìm một việc bạn tự hào làm mà không cần ai khen, và chừa chỗ cho người khác cùng nổi bật."
+          "viec_ung_dung": "Tìm một việc bạn tự hào làm mà không cần ai khen, và chừa chỗ cho người khác cùng được ghi nhận."
         },
         "xu_nu": {
           "diem_sang": "Bạn giỏi nhất khi được sắp xếp, sửa cho tốt hơn và giúp ích thật sự; tỉ mỉ, thực tế, tận tâm.",
@@ -178,13 +178,13 @@
         },
         "ma_ket": {
           "diem_sang": "Bạn mạnh khi đặt mục tiêu dài hạn và leo từng bậc; kỷ luật, có trách nhiệm, đáng tin.",
-          "nen_de_y": "Dễ làm quá sức, khắt khe với mình, ngại bộc lộ cảm xúc; hay đo giá trị bản thân bằng thành tích.",
+          "nen_de_y": "Dễ làm quá sức, tự đặt yêu cầu quá cao cho mình, ngại bộc lộ cảm xúc; hay đo giá trị bản thân bằng thành tích.",
           "viec_ung_dung": "Xếp lịch làm việc có cả giờ nghỉ cố định; mỗi tuần làm một việc chỉ để vui."
         },
         "bao_binh": {
           "diem_sang": "Bạn mạnh khi nghĩ khác, cải tiến cách làm và vì việc chung; độc lập, cởi mở với cái mới, quý tình bạn.",
           "nen_de_y": "Dễ xa cách, giữ ý mình rất chặt, ngại gần gũi về cảm xúc.",
-          "viec_ung_dung": "Đem ý tưởng mới thử ngay với một nhóm cụ thể; hỏi han người thân về cảm xúc của họ thay vì chỉ bàn ý kiến."
+          "viec_ung_dung": "Đem ý tưởng mới thử ngay với một nhóm cụ thể; hỏi han người thân về cảm xúc của họ, chứ đừng dừng ở ý kiến."
         },
         "song_ngu": {
           "diem_sang": "Bạn mạnh khi dùng trí tưởng tượng và lòng cảm thông; giàu trực giác, có khiếu nghệ thuật, dễ thương người.",
@@ -231,7 +231,7 @@
           "viec_ung_dung": "Khi lo, liệt kê việc nằm trong tay mình và làm ngay việc nhỏ nhất."
         },
         "thien_binh": {
-          "diem_sang": "Bạn cần hoà khí và có người sát cánh; dễ chịu nhất khi các mối quan hệ êm đẹp.",
+          "diem_sang": "Bạn cần hoà khí và có người bầu bạn; dễ chịu nhất khi các mối quan hệ êm đẹp.",
           "nen_de_y": "Dễ nuốt bực vào trong để giữ hoà, rồi mệt mà không nói ra.",
           "viec_ung_dung": "Tập nói điều mình không thích bằng một câu nhẹ nhàng ngay trong ngày, không để dồn lại."
         },
@@ -270,64 +270,64 @@
       "vai_tro": "cách tiếp nhận thông tin, phân tích và diễn đạt lời nói",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Bạn nắm ý chính rất nhanh, vào thẳng trọng tâm câu chuyện và dám nêu câu hỏi trực diện khi cuộc họp đang vòng vo.",
-          "nen_de_y": "Dễ ngắt lời người nói chậm hoặc kết luận sớm khi mới nghe nửa đầu thông tin; giọng văn tin nhắn đôi khi hơi cụt.",
-          "viec_ung_dung": "Tập đếm thầm ba nhịp sau khi người đối diện dứt câu rồi mới phản hồi; đọc lại email một lượt để thêm câu mở đầu lịch sự."
+          "diem_sang": "Bạn nghĩ nhanh, nói thẳng, quyết gọn; giỏi mở đầu cuộc bàn bạc và đi thẳng vào việc.",
+          "nen_de_y": "Dễ ngắt lời, kết luận khi chưa nghe hết; lời nói lúc vội có thể làm người khác chạnh lòng.",
+          "viec_ung_dung": "Trong cuộc trò chuyện quan trọng, đợi người kia nói xong rồi nhắc lại ý họ một câu trước khi đáp."
         },
         "kim_nguu": {
-          "diem_sang": "Tư duy của bạn đi từng bước chắc chắn, chuộng số liệu kiểm chứng được và giải thích vấn đề phức tạp bằng ví dụ đời thường dễ hiểu.",
-          "nen_de_y": "Khi đã chốt một khung suy nghĩ thì khá ngại đổi góc nhìn; mất nhiều thời gian nếu bị ép trả lời gấp tại chỗ.",
-          "viec_ung_dung": "Khi gặp đề xuất mới, xin trước 30 phút xem tài liệu thay vì từ chối ngay; ghi sẵn ba câu hỏi thực tế để kiểm chứng ý tưởng."
+          "diem_sang": "Bạn nghĩ chậm mà chắc, nhớ lâu, nói ít nhưng rõ; học tốt nhất bằng cách tự tay làm và xem ví dụ thật.",
+          "nen_de_y": "Đã có ý kiến thì khó đổi; dễ bỏ qua thông tin mới vì thấy cách cũ vẫn ổn.",
+          "viec_ung_dung": "Khi phải chọn, viết hai phương án kèm con số cụ thể (thời gian, chi phí) rồi mới chốt."
         },
         "song_tu": {
-          "diem_sang": "Bạn bắt sóng từ ngữ linh hoạt, giỏi nối nhiều nguồn tin rời rạc thành câu chuyện cuốn hút và chuyển đổi ngôn ngữ theo từng nhóm người nghe.",
-          "nen_de_y": "Đầu óc nhảy chủ đề liên tục khiến việc đọc tài liệu dài dễ bị ngắt quãng; có lúc ham tranh luận chữ nghĩa mà trượt khỏi việc chính.",
-          "viec_ung_dung": "Mỗi sáng đóng bớt các tab trình duyệt chỉ giữ một tài liệu đang xử lý; tóm tắt mọi cuộc trao đổi dài thành ba gạch đầu dòng hành động."
+          "diem_sang": "Đầu óc lanh, tò mò nhiều thứ cùng lúc; nói chuyện duyên, học ngôn ngữ và kỹ năng mới nhanh.",
+          "nen_de_y": "Dễ ôm nhiều đề tài mà ít đề tài đi tới cùng; nói nhiều đôi khi lấn phần nghe.",
+          "viec_ung_dung": "Giữ một sổ ghi ý tưởng; mỗi tuần chọn đúng một ý để làm tới nơi, các ý khác để dành."
         },
         "cu_giai": {
-          "diem_sang": "Bạn lắng nghe bằng cả sự tinh tế cảm xúc, nhớ rất rõ những chi tiết nhỏ người thân từng tâm sự và chọn lời góp ý vừa đủ ấm áp.",
-          "nen_de_y": "Lập luận dễ bị ảnh hưởng bởi thiện cảm cá nhân hoặc không khí buổi nói chuyện; khi phật ý thường im lặng suy diễn thay vì hỏi rõ.",
-          "viec_ung_dung": "Tách riêng phần sự việc và phần cảm nhận lên hai cột giấy khi cần ra quyết định công việc; hỏi xác nhận trực tiếp khi thấy giọng người kia khác lạ."
+          "diem_sang": "Bạn nghĩ bằng cả cảm xúc và trí nhớ; nhớ chi tiết về người thân, biết chọn lời cho người đang buồn.",
+          "nen_de_y": "Tâm trạng dễ chi phối cách bạn hiểu lời người khác; một câu nói làm mình buồn có thể nhớ rất lâu.",
+          "viec_ung_dung": "Khi một câu nói làm mình chột dạ, hỏi lại \"ý bạn là…?\" trước khi tự suy diễn."
         },
         "su_tu": {
-          "diem_sang": "Cách trình bày của bạn giàu hình ảnh, có trọng lượng thuyết phục và biết khích lệ tinh thần nhóm bằng những thông điệp rõ ràng, tự tin.",
-          "nen_de_y": "Đôi khi phóng đại chi tiết cho câu chuyện thêm hấp dẫn hoặc đồng nhất ý kiến cá nhân với danh dự nên ngại sửa lời khi bị phản biện.",
-          "viec_ung_dung": "Trong mỗi buổi họp, chủ động mời hai người có góc nhìn trái chiều phát biểu trước khi bạn chốt kết luận cuối cùng."
+          "diem_sang": "Bạn nói có sức thuyết phục, kể chuyện cuốn hút, thích trình bày ý mình trước nhiều người.",
+          "nen_de_y": "Dễ coi ý kiến trái chiều là chuyện thể diện; đôi khi nói để được công nhận hơn là để trao đổi.",
+          "viec_ung_dung": "Sau khi trình bày, mời người nghe góp một ý sửa và cảm ơn họ trước mặt mọi người."
         },
         "xu_nu": {
-          "diem_sang": "Bạn phân loại dữ kiện ngăn nắp, phát hiện nhanh lỗ hổng trong quy trình và viết hướng dẫn mạch lạc đến từng bước nhỏ.",
-          "nen_de_y": "Dễ sa vào bắt lỗi câu chữ vụn vặt làm chậm tiến độ chung; đầu óc hay tự chạy danh sách việc chưa xong ngay cả lúc nghỉ.",
-          "viec_ung_dung": "Dành 5 phút đầu buổi làm việc để khoanh đúng hai chi tiết cốt lõi cần chuẩn xác tuyệt đối, còn các mục phụ cho phép hoàn thiện ở mức vừa đủ."
+          "diem_sang": "Đầu óc tỉ mỉ, giỏi sắp xếp thông tin, thấy lỗi nhỏ người khác bỏ sót; viết và giải thích rõ ràng.",
+          "nen_de_y": "Dễ soi lỗi quá mức, cả với mình lẫn người khác; hay lo nghĩ vòng vo về chi tiết chưa cần.",
+          "viec_ung_dung": "Khi góp ý, nói một điểm tốt trước, chỗ cần sửa sau, và dừng ở tối đa ba chỗ."
         },
         "thien_binh": {
-          "diem_sang": "Bạn nhìn thấy điểm hợp lý ở cả hai phía của cuộc tranh luận, dùng từ nhã nhặn và giỏi gỡ nút thắt khi hai bên đang căng thẳng.",
-          "nen_de_y": "Vì muốn giữ sự cân đối trên bàn đàm phán nên câu trả lời đôi khi nước đôi, khiến đồng nghiệp không rõ bạn nghiêng về phương án nào.",
-          "viec_ung_dung": "Sau khi nêu ưu nhược điểm của hai phương án, tự buộc mình viết một câu chốt rõ phương án ưu tiên kèm lý do thực tế nhất."
+          "diem_sang": "Bạn nghĩ theo kiểu cân nhắc hai phía, nói năng nhã nhặn, giỏi hoà giải và tìm câu chữ khéo.",
+          "nen_de_y": "Dễ chần chừ khi phải chọn, hoặc nói vòng để khỏi làm ai phật lòng.",
+          "viec_ung_dung": "Đặt hạn chót cho quyết định nhỏ (chẳng hạn trong một ngày); quá hạn thì chọn phương án đang nghiêng hơn."
         },
         "bo_cap": {
-          "diem_sang": "Bạn đọc được động cơ ngầm sau lời nói xã giao, đặt câu hỏi đào sâu tới gốc rễ vấn đề và giữ kín những thông tin được uỷ thác.",
-          "nen_de_y": "Dễ xoáy quá lâu vào một nghi vấn hoặc dùng lời nhận xét sắc lạnh chạm đúng chỗ đau của người đối diện khi tranh luận.",
-          "viec_ung_dung": "Khi phát hiện điểm bất thường, chuyển câu chất vấn thành câu hỏi mở hướng tới cách sửa; đặt giới hạn thời gian cho việc tra cứu một nghi vấn."
+          "diem_sang": "Bạn nghĩ sâu, nhìn ra động cơ đằng sau lời nói; giỏi tìm hiểu tới gốc, giữ bí mật và hỏi đúng câu khó.",
+          "nen_de_y": "Dễ nghi ngờ, đọc ra ý ngầm cả khi không có; lời nói lúc phật ý có thể rất sắc.",
+          "viec_ung_dung": "Khi nghi ngờ, viết ra điều mình biết rõ và điều mình chỉ đoán, rồi hỏi thẳng phần đoán."
         },
         "nhan_ma": {
-          "diem_sang": "Bạn nắm bức tranh tổng thể rất nhanh, giỏi xâu chuỗi kiến thức liên ngành và truyền đạt tư tưởng lớn bằng giọng văn hào hứng, thẳng thắn.",
-          "nen_de_y": "Hay bỏ qua điều khoản nhỏ trong văn bản hoặc nói lời quá bộc trực chưa kịp cân nhắc hoàn cảnh của người nghe.",
-          "viec_ung_dung": "Luôn dùng một danh sách kiểm tra 5 mục chi tiết trước khi ký hợp đồng hoặc gửi báo cáo; thêm một câu ghi nhận nỗ lực trước khi góp ý thẳng."
+          "diem_sang": "Bạn nghĩ rộng, thích ý tưởng lớn, triết lý và chuyện xa; nói thẳng, vui, truyền được hứng thú cho người nghe.",
+          "nen_de_y": "Dễ hứa nhanh, bỏ qua chi tiết; nói thật quá đôi khi thiếu tế nhị.",
+          "viec_ung_dung": "Trước khi hứa, hỏi mình \"việc này cần mấy bước, mất bao lâu\" và nói con số đó cùng lời hứa."
         },
         "ma_ket": {
-          "diem_sang": "Lời nói của bạn có cấu trúc chặt chẽ, hướng tới tính khả thi và luôn quy mọi ý tưởng về lộ trình, nguồn lực cùng thời hạn rõ ràng.",
-          "nen_de_y": "Giọng trao đổi đôi khi khô và nặng tính quy chuẩn khiến người mới ngại nêu ý tưởng thử nghiệm; dễ bi quan trước phương án chưa có tiền lệ.",
-          "viec_ung_dung": "Khi nghe một đề xuất mới, hỏi 'cần điều kiện gì để thử nhỏ trong hai tuần' thay vì liệt kê ngay những rủi ro cản trở."
+          "diem_sang": "Bạn nghĩ có hệ thống, thực tế, nói ngắn gọn có trọng tâm; giỏi lập kế hoạch và tính đường dài.",
+          "nen_de_y": "Dễ nghiêm quá, gạt ý mới vì chưa thấy lợi ngay; lời góp ý có thể khô.",
+          "viec_ung_dung": "Mỗi tuần dành mười phút nghe trọn một ý \"chưa thực tế\" của người khác mà không phản bác ngay."
         },
         "bao_binh": {
-          "diem_sang": "Bạn có góc nhìn độc lập không rập khuôn, tiếp cận nhanh công cụ công nghệ hoặc mô hình hệ thống và thảo luận khách quan không vị nể.",
-          "nen_de_y": "Có lúc bảo vệ lý thuyết của mình một cách bướng bỉnh hoặc giải thích quá nhảy cóc khiến người nghe theo không kịp mạch suy luận.",
-          "viec_ung_dung": "Khi trình bày ý tưởng cải tiến, kèm theo một sơ đồ một trang và hỏi người nghe xem bước nào trong quy trình thực tế sẽ bị ảnh hưởng."
+          "diem_sang": "Bạn nghĩ độc lập, thích cách làm mới, nhìn vấn đề từ góc ít ai nhìn; giỏi lý luận và công nghệ.",
+          "nen_de_y": "Dễ giữ quan điểm chỉ để khác người; đôi khi nói lý mà quên cảm xúc người nghe.",
+          "viec_ung_dung": "Khi tranh luận, hỏi một câu về cảm nhận của người kia trước khi đưa lý lẽ."
         },
         "song_ngu": {
-          "diem_sang": "Bạn tiếp nhận thông tin qua sắc thái giọng nói và hình ảnh ẩn dụ, rất nhạy với tâm tư chưa nói thành lời và giàu chất văn chương, nghệ thuật.",
-          "nen_de_y": "Khi nhiều luồng thông tin dồn dập dễ bị quá tải, quên lịch hẹn chi tiết hoặc diễn đạt mơ hồ khiến người phối hợp hiểu lệch ý.",
-          "viec_ung_dung": "Chốt lại mọi thoả thuận miệng bằng một tin nhắn ghi rõ ngày giờ và đầu việc cụ thể ngay sau khi kết thúc cuộc trò chuyện."
+          "diem_sang": "Bạn nghĩ bằng hình ảnh và trực giác, giàu tưởng tượng; nói chuyện mềm, dễ hiểu người khác đang cảm thấy gì.",
+          "nen_de_y": "Dễ lơ đãng, quên chi tiết, hiểu lơ mơ các thoả thuận; dễ gật đầu cho xong chuyện.",
+          "viec_ung_dung": "Việc gì quan trọng thì ghi lại bằng chữ (tin nhắn, ghi chú) ngay sau khi thoả thuận."
         }
       },
       "source_id": "bien_tap_chiem_tinh_2026",
@@ -339,64 +339,64 @@
       "vai_tro": "cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Trong tình cảm và giao tiếp bạn chủ động bày tỏ thiện chí, thích sự nồng nhiệt tươi mới và không để bụng những giận hờn nhỏ nhặt.",
-          "nen_de_y": "Dễ mua sắm bốc đồng theo hứng tức thời hoặc giảm sự kiên nhẫn khi mối quan hệ bước vào giai đoạn lặp lại thường nhật.",
-          "viec_ung_dung": "Áp dụng quy tắc chờ 48 giờ trước khi thanh toán món đồ không nằm trong kế hoạch; chủ động rủ người thương cùng thử một hoạt động vận động mới."
+          "diem_sang": "Trong tình cảm bạn chủ động, thích cảm giác mới, thể hiện thẳng; gu thẩm mỹ khoẻ khoắn, nổi bật.",
+          "nen_de_y": "Dễ nhanh nồng nhanh nguội; hay mua sắm theo hứng nhất thời.",
+          "viec_ung_dung": "Khi thích ai hay thích món gì, chờ ba ngày rồi mới quyết; nếu vẫn thích thì cứ làm."
         },
         "kim_nguu": {
-          "diem_sang": "Bạn trân trọng vẻ đẹp bền vững, chăm chút chất lượng bữa ăn, chất liệu đồ dùng và giữ sự gắn bó thủy chung, ấm áp qua năm tháng.",
-          "nen_de_y": "Trong quan hệ dễ nảy sinh tâm lý sở hữu hoặc ngại làm mới cách thể hiện tình cảm; khi căng thẳng hay tiêu tiền vào đồ ăn ngon và vật dụng êm ái.",
-          "viec_ung_dung": "Tự động trích phần trăm thu nhập vào quỹ tích luỹ ngay đầu tháng; bày tỏ sự trân trọng với người thân bằng lời nói thay vì chỉ tặng quà vật chất."
+          "diem_sang": "Bạn yêu chậm mà bền, thể hiện bằng sự chăm sóc cụ thể; thích đồ có chất lượng, đồ ăn ngon, chỗ ở dễ chịu.",
+          "nen_de_y": "Dễ muốn giữ chặt người mình thương, ngại thay đổi trong quan hệ; chi nhiều cho tiện nghi.",
+          "viec_ung_dung": "Mỗi tháng đặt một khoản cố định cho thú vui riêng, hết khoản đó thì dừng."
         },
         "song_tu": {
-          "diem_sang": "Bạn tạo thiện cảm bằng sự dí dỏm, tò mò lắng nghe câu chuyện của đối phương và giữ cho không khí bên nhau luôn tươi vui, nhẹ nhàng.",
-          "nen_de_y": "Thích giữ câu chuyện ở tầng vui vẻ nên đôi khi lảng tránh những cuộc đối thoại cần bộc lộ sự yếu lòng hoặc cam kết sâu.",
-          "viec_ung_dung": "Mỗi tuần dành một buổi tối tắt điện thoại để trò chuyện trọn vẹn một chủ đề sâu với người bạn trân quý; ghi chép ngân sách chi tiêu cho các cuộc hẹn xã giao."
+          "diem_sang": "Bạn thích người nói chuyện hợp, vui, đầu óc nhanh; gu đa dạng, thích thử nhiều phong cách.",
+          "nen_de_y": "Dễ đổi ý về người mình thích; ngại những cuộc trò chuyện nặng tình cảm.",
+          "viec_ung_dung": "Mỗi tuần dành một buổi nói chuyện với người thương mà không cầm điện thoại."
         },
         "cu_giai": {
-          "diem_sang": "Bạn yêu thương qua sự chăm sóc tận tụy, nhớ thói quen sinh hoạt của từng người thân và biết biến không gian sống thành tổ ấm dịu dàng.",
-          "nen_de_y": "Khi thấy thiếu an toàn dễ quay sang giận dỗi ngầm hoặc hy sinh quá mức rồi âm thầm tủi thân vì người kia không đáp lại tương xứng.",
-          "viec_ung_dung": "Nói rõ một mong muốn chăm sóc mà bạn muốn nhận lại trong tuần; lập một khoản tiết kiệm dự phòng riêng để tâm lý luôn vững vàng."
+          "diem_sang": "Bạn yêu bằng sự che chở, nhớ những điều nhỏ về người thương; thích đồ gắn với kỷ niệm, không khí ấm áp.",
+          "nen_de_y": "Dễ tủi thân khi không được đáp lại đúng cách; hay giữ đồ cũ vì tình cảm.",
+          "viec_ung_dung": "Nói thẳng một nhu cầu bằng câu cụ thể (\"mình cần được báo khi về muộn\") thay vì chờ người kia đoán."
         },
         "su_tu": {
-          "diem_sang": "Bạn hào sảng khi trao tặng tình cảm, có gu thẩm mỹ nổi bật và luôn muốn mang lại niềm tự hào, sự rạng rỡ cho người đi bên cạnh.",
-          "nen_de_y": "Dễ chi tiêu vượt tay vì sĩ diện hoặc buồn lòng nếu sự chu đáo của mình không được người kia khen ngợi, chú ý đúng mức.",
-          "viec_ung_dung": "Đặt hạn mức cố định cho quỹ quà tặng và tiệc tùng mỗi tháng; hỏi đối phương cách họ muốn được yêu thương thay vì chỉ tặng theo gu của bạn."
+          "diem_sang": "Bạn yêu nồng nhiệt, hào phóng, thích được trân trọng công khai; gu thẩm mỹ sang, có điểm nhấn.",
+          "nen_de_y": "Dễ buồn khi bị lơ là; có lúc chi tiêu vì sĩ diện.",
+          "viec_ung_dung": "Mỗi ngày khen người thương một điều cụ thể — cách bạn muốn được đối xử cũng là cách nên trao đi."
         },
         "xu_nu": {
-          "diem_sang": "Bạn bày tỏ thiện cảm bằng những cử chỉ hỗ trợ thiết thực, giữ không gian tinh tươm và chi tiêu rất có tính toán vào những món đồ hữu dụng.",
-          "nen_de_y": "Vì muốn người thương tốt lên nên lời quan tâm đôi khi biến thành lời nhắc nhở sửa lỗi, làm giảm sự lãng mạn tự nhiên.",
-          "viec_ung_dung": "Tập khen ngợi ba điểm đáng quý của người đồng hành trước khi góp ý một thói quen sinh hoạt; cho phép mình chi một khoản nhỏ cho niềm vui thuần túy."
+          "diem_sang": "Bạn thể hiện tình cảm bằng việc làm: giúp đỡ, sắp xếp, nhớ việc cho người kia; thích sự gọn gàng, tinh tế.",
+          "nen_de_y": "Dễ chê chi tiết nhỏ, đòi hỏi cao với mình và người thương; ngại nói lời ngọt.",
+          "viec_ung_dung": "Trong một tuần, mỗi ngày thay một câu góp ý bằng một câu cảm ơn cụ thể, xem không khí đổi ra sao."
         },
         "thien_binh": {
-          "diem_sang": "Bạn có mắt thẩm mỹ thanh lịch, cư xử tinh tế công bằng và biết lắng nghe để hai bên cùng tìm được tiếng nói hài hoà.",
-          "nen_de_y": "Ngại va chạm nên dễ chiều theo ý người khác rồi mất cân bằng bên trong; hay phân vân quá lâu khi chọn mua đồ hoặc chốt kế hoạch hẹn hò.",
-          "viec_ung_dung": "Trong mỗi cuộc hẹn, chủ động đề xuất thẳng hai lựa chọn bạn thật sự thích thay vì nói 'sao cũng được'; kiểm soát chi tiêu cho trang phục và làm đẹp."
+          "diem_sang": "Bạn coi trọng sự hài hoà, lịch sự, công bằng trong quan hệ; có mắt thẩm mỹ, thích cái đẹp cân đối.",
+          "nen_de_y": "Dễ chiều người khác để giữ yên rồi ấm ức; ngại ở một mình.",
+          "viec_ung_dung": "Mỗi tuần nói \"không\" một lần với việc mình không muốn, nói nhẹ nhưng rõ."
         },
         "bo_cap": {
-          "diem_sang": "Khi đã quý trọng ai bạn trao trọn sự tin cậy sâu sắc, không ngại đồng cam cộng khổ lúc khó khăn và quản lý nguồn lực chung rất nhạy bén.",
-          "nen_de_y": "Dễ thử lòng đối phương hoặc rơi vào trạng thái tất cả hoặc không có gì; khi tổn thương thường đóng chặt cửa lòng rất lâu.",
-          "viec_ung_dung": "Khi thấy bất an trong quan hệ, nói thẳng nỗi lo bằng giọng bình tĩnh thay vì im lặng quan sát thử thách; minh bạch các khoản tài chính chung ngay từ đầu."
+          "diem_sang": "Bạn yêu sâu, trung thành, cần sự tin cậy trọn vẹn; thích cái đẹp kín đáo, có chiều sâu.",
+          "nen_de_y": "Dễ ghen, giữ nỗi buồn lâu; khó bỏ qua khi bị phụ lòng.",
+          "viec_ung_dung": "Khi bất an, nói cảm giác của mình bằng câu \"mình thấy…\" thay vì kiểm tra hay thử lòng người kia."
         },
         "nhan_ma": {
-          "diem_sang": "Tình cảm của bạn phóng khoáng, chân thành, tôn trọng tự do phát triển của nhau và thích cùng người thương mở mang trải nghiệm văn hoá, du lịch.",
-          "nen_de_y": "Dễ sốt ruột nếu cảm thấy bị ràng buộc bởi quá nhiều thủ tục tỉ mỉ; chi tiêu cho các chuyến đi hoặc khoá học đôi khi thiếu kiểm soát.",
-          "viec_ung_dung": "Lập quỹ riêng cho việc đi lại và trải nghiệm mới; giữ đúng những lời hứa nhỏ hàng ngày để người bên cạnh yên tâm về sự gắn bó của bạn."
+          "diem_sang": "Bạn thích người cởi mở, cùng đi, cùng học; yêu tự do, vui vẻ, gu phóng khoáng.",
+          "nen_de_y": "Dễ ngại cam kết, thấy gò bó khi quan hệ thành nếp; chi tiêu cho trải nghiệm quá tay.",
+          "viec_ung_dung": "Lên một kế hoạch đi chơi hoặc học chung với người thương, nhưng vẫn giữ một buổi riêng cho mình mỗi tuần."
         },
         "ma_ket": {
-          "diem_sang": "Bạn coi trọng chữ tín trong tình cảm, chứng minh sự gắn bó bằng trách nhiệm đường dài và biết hoạch định tài chính vững chãi.",
-          "nen_de_y": "Ngại nói lời âu yếm mềm mỏng nên dễ tạo cảm giác nghiêm nghị, khoảng cách; đôi khi đặt chuẩn mực thực tế quá cao cho các mối quan hệ.",
-          "viec_ung_dung": "Chủ động gửi một lời hỏi han dịu dàng giữa ngày làm việc mà không bàn chuyện trách nhiệm; dành thời gian thư giãn không gắn với mục tiêu công việc."
+          "diem_sang": "Bạn yêu nghiêm túc, chậm mở lòng, thể hiện bằng trách nhiệm và kế hoạch chung; thích đồ cổ điển, bền.",
+          "nen_de_y": "Dễ khô khan, đặt công việc trước tình cảm; tính toán nhiều khi chi tiêu.",
+          "viec_ung_dung": "Đặt lịch hẹn với người thương như đặt lịch công việc, và giữ đúng giờ."
         },
         "bao_binh": {
-          "diem_sang": "Bạn trân trọng sự đồng điệu trí tuệ, kết bạn không phân biệt hoàn cảnh và luôn dành cho người thương không gian riêng để sống đúng cá tính.",
-          "nen_de_y": "Khi đối phương cần sự vỗ về cảm xúc gần gũi, bạn dễ phản ứng bằng lý lẽ khách quan khiến họ cảm thấy bạn hơi xa cách.",
-          "viec_ung_dung": "Khi người thân đang xúc động, ngồi lắng nghe và nắm tay hoặc hỏi thăm cảm giác của họ trước khi phân tích giải pháp."
+          "diem_sang": "Bạn cần một tình bạn bên trong tình yêu, tôn trọng không gian riêng; gu độc đáo, khác số đông.",
+          "nen_de_y": "Dễ giữ khoảng cách cảm xúc khiến người kia thấy xa; ngại gắn bó quá chặt.",
+          "viec_ung_dung": "Nói rõ với người thương bạn cần bao nhiêu thời gian riêng, để khoảng cách không bị hiểu là lạnh nhạt."
         },
         "song_ngu": {
-          "diem_sang": "Tình cảm của bạn dịu dàng, giàu lòng trắc ẩn, dễ rung động trước nghệ thuật và sẵn sàng bao dung cho những thiếu sót đời thường của người khác.",
-          "nen_de_y": "Dễ lý tưởng hoá một mối quan hệ hoặc cho vay mượn, giúp đỡ vì cả nể mà thiếu ranh giới rõ ràng về tiền bạc và sức lực.",
-          "viec_ung_dung": "Thiết lập hạn mức cụ thể cho khoản tiền có thể hỗ trợ người khác mỗi tháng; giữ thói quen nhìn vào hành động thực tế thay vì lời hứa hẹn."
+          "diem_sang": "Bạn yêu lãng mạn, dễ đồng cảm, sẵn lòng hy sinh cho người mình thương; mê nghệ thuật, âm nhạc.",
+          "nen_de_y": "Dễ thần tượng hoá người kia, cho đi quá sức; tiền dễ trôi qua tay vì cả nể.",
+          "viec_ung_dung": "Trước khi giúp ai một khoản tiền hay công sức lớn, chờ một đêm và hỏi ý một người bạn tỉnh táo."
         }
       },
       "source_id": "bien_tap_chiem_tinh_2026",
@@ -408,64 +408,64 @@
       "vai_tro": "xung lực hành động, cách bảo vệ ranh giới và vượt sức ép",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Xung lực hành động của bạn bộc phát rất nhanh, dám nhận phần việc khó mở màn và xử lý tình huống khẩn cấp gọn gàng, dứt khoát.",
-          "nen_de_y": "Khi bị cản trở dễ bốc hoả tức thời, làm việc theo đợt nước rút quá sức rồi hụt hơi ở khâu hoàn thiện cuối.",
-          "viec_ung_dung": "Chia dự án dài thành các chặng 7 ngày có mốc nghiệm thu nhỏ; duy trì vận động thể lực cường độ vừa để xả bớt sức ép thần kinh."
+          "diem_sang": "Bạn làm nhanh, dám nhận việc khó, hăng hái khi có thử thách; phản ứng ngay trước sức ép.",
+          "nen_de_y": "Dễ nổi nóng rồi nguôi nhanh, nhưng câu nói lúc nóng thì còn ở lại; hay bỏ dở khi hết hứng.",
+          "viec_ung_dung": "Chia việc dài thành những chặng ngắn có hạn, xong mỗi chặng thì tự thưởng một chút."
         },
         "kim_nguu": {
-          "diem_sang": "Sức bền làm việc của bạn rất đáng nể: khi đã bắt nhịp thì làm đều tay, chịu được áp lực dài ngày và bảo vệ thành quả thực tế tới cùng.",
-          "nen_de_y": "Khởi động hơi chậm trước việc lạ; bình thường nhẫn nại nhưng nếu tích tụ bức xúc quá ngưỡng sẽ phản ứng rất cứng rắn, khó lay chuyển.",
-          "viec_ung_dung": "Bắt đầu ngày mới bằng một đầu việc nhỏ làm xong trong 15 phút để lấy đà; xả bớt điểm chưa hài lòng ngay trong tuần thay vì nén lâu."
+          "diem_sang": "Bạn bền sức, khởi động chậm nhưng đã làm thì làm tới; giỏi việc cần kiên trì và tay nghề.",
+          "nen_de_y": "Khó chuyển hướng khi đã bắt đầu; giận chậm nhưng giận lâu.",
+          "viec_ung_dung": "Khi bị ép đổi kế hoạch, xin một khoảng ngắn để tự sắp xếp rồi mới trả lời."
         },
         "song_tu": {
-          "diem_sang": "Bạn phản xạ cực nhanh trong tranh luận, xoay xở khéo nhiều đầu việc ngắn hạn cùng lúc và dùng ngôn từ sắc bén để bảo vệ quan điểm.",
-          "nen_de_y": "Năng lượng dễ bị phân tán vào quá nhiều hướng nên khó dồn lực cho một mục tiêu nặng ký; lúc bực dễ buông lời châm biếm.",
-          "viec_ung_dung": "Giới hạn tối đa hai đầu việc ưu tiên trong mỗi buổi sáng; khi muốn phản bác gay gắt, viết nháp ra giấy rồi cắt bỏ những từ mang tính công kích."
+          "diem_sang": "Bạn làm nhiều việc song song, phản ứng nhanh bằng lời nói; hợp việc hay thay đổi, nhiều giao tiếp.",
+          "nen_de_y": "Sức dễ phân tán; khi bực hay cãi bằng lý lẽ, dễ thành tranh cãi dài.",
+          "viec_ung_dung": "Mỗi ngày chọn ba việc chính, xong ba việc đó rồi mới mở việc mới."
         },
         "cu_giai": {
-          "diem_sang": "Bạn rất kiên cường khi cần bảo vệ gia đình, đội nhóm thân thiết hoặc không gian an toàn, hành động chu đáo để không ai bị bỏ lại phía sau.",
-          "nen_de_y": "Khi bất đồng thường chọn cách đi đường vòng hoặc thu mình phòng thủ thay vì đối diện thẳng; sức lực làm việc phụ thuộc nhiều vào tâm trạng.",
-          "viec_ung_dung": "Tập nêu thẳng ranh giới cá nhân bằng câu ngắn gọn không kèm trách móc; giữ nhịp tập luyện thân thể cố định bất kể ngày vui hay buồn."
+          "diem_sang": "Bạn hành động mạnh nhất khi bảo vệ người thân và nơi mình thuộc về; bền bỉ, khéo đi đường vòng.",
+          "nen_de_y": "Dễ giận dỗi thay vì nói thẳng; tâm trạng ảnh hưởng nhiều tới sức làm việc.",
+          "viec_ung_dung": "Khi bực, nói ra một câu cụ thể về điều mình cần trong ngày đó, đừng để dồn lại."
         },
         "su_tu": {
-          "diem_sang": "Bạn hành động đĩnh đạc, giàu nhiệt huyết truyền cảm hứng và sẵn sàng đứng mũi chịu sào gánh vác phần việc đòi hỏi bản lĩnh dẫn dắt.",
-          "nen_de_y": "Khi tự ái bị chạm tới dễ phản ứng gay gắt để giữ thể diện; ngại nhận những việc hậu trường thầm lặng ít người chú ý.",
-          "viec_ung_dung": "Trước mỗi cuộc tranh luận, tự hỏi mình đang bảo vệ hiệu quả công việc hay bảo vệ cái tôi; kiên trì hoàn thành tốt cả những khâu chuẩn bị âm thầm."
+          "diem_sang": "Bạn làm việc có khí thế, thích dẫn dắt, dồn hết sức khi được giao vai chính.",
+          "nen_de_y": "Dễ tự ái khi bị chê trước mặt người khác; đôi khi lo giành phần thắng hơn lo kết quả.",
+          "viec_ung_dung": "Trong tháng này nhận một việc giúp người khác làm tốt phần của họ, để sức dẫn dắt có chỗ dùng."
         },
         "xu_nu": {
-          "diem_sang": "Bạn dồn năng lượng vào việc làm sạch quy trình, sửa chữa sai sót kỹ thuật bằng sự chuẩn xác cao và không ngại xắn tay làm việc tỉ mỉ.",
-          "nen_de_y": "Khi áp lực tăng dễ trở nên cầu toàn quá mức, vừa tự ôm việc vừa cằn nhằn vì người khác làm không đúng chuẩn của mình.",
-          "viec_ung_dung": "Viết quy trình bàn giao rõ tiêu chí đầu ra để yên tâm phân quyền cho đồng sự; tập giãn cơ và thở chậm mỗi khi thấy bụng hoặc vai căng cứng."
+          "diem_sang": "Bạn làm việc chính xác, có phương pháp, cải tiến từng chút; giỏi việc cần kỹ năng và kiểm tra.",
+          "nen_de_y": "Dễ ôm việc vì sợ người khác làm chưa đạt; căng thẳng âm thầm — chú ý nghỉ ngơi.",
+          "viec_ung_dung": "Giao một việc nhỏ cho người khác và chấp nhận kết quả \"đủ tốt\" ở lần đầu."
         },
         "thien_binh": {
-          "diem_sang": "Bạn hành động có chừng mực, giỏi vận động sự đồng thuận và kiên quyết lên tiếng khi thấy quy tắc công bằng trong tập thể bị xâm phạm.",
-          "nen_de_y": "Dễ tiêu hao năng lượng vào việc cân đo phản ứng của mọi người trước khi bắt tay làm; đôi khi né xung đột trực diện dẫn tới trì hoãn.",
-          "viec_ung_dung": "Đặt nguyên tắc ra quyết định trong vòng 24 giờ cho các đầu việc cá nhân; tập đối thoại thẳng thắn khi có bất đồng thay vì im lặng chiều lòng."
+          "diem_sang": "Bạn hành động qua hợp tác, giỏi thương lượng, dám lên tiếng cho sự công bằng.",
+          "nen_de_y": "Dễ chần chừ, né đối đầu rồi tích bực; đôi khi để người khác quyết thay mình.",
+          "viec_ung_dung": "Khi có bất đồng, hẹn một lúc cụ thể trong ba ngày tới để nói ra, đừng để quá một tuần."
         },
         "bo_cap": {
-          "diem_sang": "Bạn có ý chí tập trung cao độ, chịu được thử thách khắc nghiệt và biết dồn toàn bộ nguồn lực vào đúng thời điểm quyết định.",
-          "nen_de_y": "Khi xảy ra va chạm dễ đẩy cuộc đấu trí tới mức căng thẳng cực đoan hoặc âm thầm giữ sự ấm ức rất lâu không chịu buông.",
-          "viec_ung_dung": "Chuyển nguồn năng lượng dồn nén sang các bài tập sức bền hoặc dự án nghiên cứu chuyên sâu; chọn giải quyết dứt điểm từng mâu thuẫn rồi khép lại."
+          "diem_sang": "Bạn có sức tập trung rất lớn, kiên định, khó bỏ cuộc; giỏi xử lý việc khó, việc cần kín đáo.",
+          "nen_de_y": "Dễ giữ bực trong lòng lâu, khi bùng thì mạnh; khó buông khi đã quyết theo đến cùng.",
+          "viec_ung_dung": "Tìm một cách xả sức đều đặn (chạy bộ, tập thể thao, làm việc tay chân) để bực không dồn lại."
         },
         "nhan_ma": {
-          "diem_sang": "Bạn bùng nổ năng lượng khi công việc gắn với lý tưởng lớn, thích mở đường sang lĩnh vực mới và truyền sự hứng khởi cho cả tập thể.",
-          "nen_de_y": "Dễ khởi xướng rất hăng nhưng thiếu kiên nhẫn ở giai đoạn bảo trì lặp lại; khi tranh luận dễ áp đặt niềm tin của mình lên người khác.",
-          "viec_ung_dung": "Ghép cặp với một đồng sự giỏi quản lý chi tiết để giữ nhịp dự án tới đích; rèn thói quen hoàn tất trọn vẹn việc cũ trước khi nhận đề án mới."
+          "diem_sang": "Bạn hăng hái theo đuổi điều mình tin, thích phiêu lưu, học hỏi; làm tốt nhất khi có mục đích lớn.",
+          "nen_de_y": "Dễ nóng khi bị cản, thiếu kiên nhẫn với việc lặt vặt; hay làm quá sức rồi mệt.",
+          "viec_ung_dung": "Ghi rõ mục đích lớn, rồi tách ra một việc nhỏ làm được ngay hôm nay."
         },
         "ma_ket": {
-          "diem_sang": "Hành động của bạn có tính chiến lược cao, biết phân bổ sức lực cho cuộc đua đường dài và giữ cái đầu lạnh giữa lúc áp lực bủa vây.",
-          "nen_de_y": "Dễ ép bản thân và cộng sự chạy theo hiệu suất không ngừng nghỉ, bỏ qua các tín hiệu mỏi mệt của cơ thể.",
-          "viec_ung_dung": "Đưa giờ nghỉ phục hồi vào lịch tuần như một hạng mục bắt buộc; ghi nhận cả những tiến bộ nhỏ của đội ngũ chứ không chỉ nhìn vào đích cuối."
+          "diem_sang": "Bạn có kỷ luật, làm việc bền bỉ theo kế hoạch, chịu được áp lực và tiến lên từng bậc.",
+          "nen_de_y": "Dễ làm quá sức vì trách nhiệm; kìm giận lâu rồi thành lạnh lùng — chú ý nghỉ ngơi.",
+          "viec_ung_dung": "Mỗi tuần dành một buổi vận động cho cơ thể chỉ để khoẻ và dễ chịu, không đặt chỉ tiêu thành tích."
         },
         "bao_binh": {
-          "diem_sang": "Bạn hành động theo phương pháp độc đáo, dám cải tổ những lề thói lỗi thời và phối hợp rất ăn ý trong các mạng lưới hướng tới lợi ích chung.",
-          "nen_de_y": "Khi cảm thấy bị ép buộc theo mệnh lệnh áp đặt, bạn dễ phản kháng ngược hoặc đột ngột ngắt kết nối làm gián đoạn kế hoạch.",
-          "viec_ung_dung": "Thỏa thuận rõ phạm vi tự chủ ngay từ đầu dự án; khi muốn thay đổi quy trình đang chạy, thông báo trước lộ trình chuyển tiếp cho các bên liên quan."
+          "diem_sang": "Bạn hành động theo lý tưởng và cách làm riêng; giỏi đổi mới quy trình, làm việc nhóm vì mục tiêu chung.",
+          "nen_de_y": "Dễ chống lại quy định chỉ vì không thích bị bảo; khi bực thì lạnh đi và rút lui.",
+          "viec_ung_dung": "Trước khi phản đối một quy định, viết ra một cách thay thế cụ thể."
         },
         "song_ngu": {
-          "diem_sang": "Bạn hành động theo nhịp cảm nhận linh hoạt, biết lách qua trở ngại một cách mềm mại và dồn nhiều tâm sức cho các hoạt động nghệ thuật hoặc trợ giúp cộng đồng.",
-          "nen_de_y": "Khi thiếu mục tiêu rõ ràng dễ rơi vào trạng thái chần chừ, để hoàn cảnh đẩy đưa hoặc tiêu hao sức lực vì ôm việc của người khác.",
-          "viec_ung_dung": "Mỗi sáng chọn đúng một đầu việc cụ thể có thể đo đếm kết quả và làm xong trước giờ trưa; tập từ chối những yêu cầu vượt quá quỹ thời gian của mình."
+          "diem_sang": "Bạn làm việc theo cảm hứng, linh hoạt, hợp việc sáng tạo hoặc giúp người; mềm mà bền theo cách riêng.",
+          "nen_de_y": "Dễ né xung đột, để bực ngấm ngầm; sức làm việc lên xuống theo tâm trạng.",
+          "viec_ung_dung": "Ghi việc trong ngày ra giấy và làm theo thứ tự, kể cả lúc chưa có hứng."
         }
       },
       "source_id": "bien_tap_chiem_tinh_2026",
@@ -477,64 +477,64 @@
       "vai_tro": "hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Bạn mở rộng cơ hội nhanh nhất khi dám tiên phong nhận dự án mới, truyền niềm tin mạnh mẽ qua hành động dứt khoát và tinh thần tự lực.",
-          "nen_de_y": "Sự lạc quan quá đà lúc khởi đầu dễ khiến bạn đánh giá thấp khâu chuẩn bị nguồn lực hoặc ôm đồm nhiều mặt trận cùng lúc.",
-          "viec_ung_dung": "Trước khi phát động một kế hoạch lớn, hãy chốt rõ ba cột mốc kiểm tra tiến độ và rủ một cộng sự giỏi hậu cần cùng đồng hành."
+          "diem_sang": "Người sinh khi Mộc tinh ở Bạch Dương (cả lứa sinh trong khoảng một năm) thường gặp thuận lợi khi tự mở lối; tin vào sức mình và hào hứng với những lần bắt đầu.",
+          "nen_de_y": "Dễ ôm đồm vì quá tự tin vào sức mình.",
+          "viec_ung_dung": "Mỗi năm chọn một việc mới để tự đứng ra làm, theo tới khi có kết quả."
         },
         "kim_nguu": {
-          "diem_sang": "Tầm nhìn phát triển của bạn gắn liền với giá trị thực chất: biết nhân rộng tài sản, tay nghề và nguồn lực bền vững qua thời gian dài.",
-          "nen_de_y": "Khi quá ưu tiên sự ổn định và tiện nghi quen thuộc, bạn có thể bỏ lỡ những cơ hội đổi mới đòi hỏi bước ra khỏi vùng an toàn.",
-          "viec_ung_dung": "Trích một phần ngân sách hoặc quỹ thời gian cố định hằng quý để thử nghiệm một công cụ mới hoặc đầu tư cho việc học kỹ năng dài hạn."
+          "diem_sang": "Người sinh khi Mộc tinh ở Kim Ngưu (cả lứa sinh trong khoảng một năm) thường lớn lên nhờ tích luỹ đều: tiền, tay nghề, nếp sống ổn định; hào phóng với người thân.",
+          "nen_de_y": "Dễ rộng tay chi cho tiện nghi.",
+          "viec_ung_dung": "Giữ một khoản để dành đều mỗi tháng, dù nhỏ."
         },
         "song_tu": {
-          "diem_sang": "Bạn giàu cơ hội phát triển nhờ trí tò mò liên ngành, khả năng kết nối nhiều luồng thông tin và biến kiến thức phức tạp thành câu chuyện dễ hiểu.",
-          "nen_de_y": "Việc hứng thú với quá nhiều chủ đề cùng lúc dễ làm chiều sâu chuyên môn bị pha loãng, đọc rộng nhưng chưa kịp đúc kết thành sản phẩm.",
-          "viec_ung_dung": "Mỗi quý chọn một chủ đề trọng tâm để viết thành chuỗi bài tổng hợp hoặc hướng dẫn lại cho người khác nhằm kết tinh kiến thức."
+          "diem_sang": "Người sinh khi Mộc tinh ở Song Tử (cả lứa sinh trong khoảng một năm) thường mở mang qua học hỏi, đọc, giao tiếp; quen biết rộng, hay gặp cơ hội qua lời giới thiệu.",
+          "nen_de_y": "Dễ biết rộng mà chưa sâu.",
+          "viec_ung_dung": "Mỗi năm chọn một lĩnh vực để học kỹ, ngoài những thứ đọc cho vui."
         },
         "cu_giai": {
-          "diem_sang": "Sự hào phóng của bạn bộc lộ qua việc nâng đỡ người thân, xây dựng môi trường làm việc ấm áp như gia đình và vun đắp lòng tin bền chặt.",
-          "nen_de_y": "Lòng tốt dễ chuyển thành sự bao bọc quá mức, khiến người được giúp sinh tâm lý ỷ lại hoặc làm chính bạn kiệt sức vì gánh chuyện tình cảm.",
-          "viec_ung_dung": "Hỗ trợ người khác theo hướng trao công cụ và hướng dẫn cách tự làm thay vì làm thay trọn gói từ đầu đến cuối."
+          "diem_sang": "Người sinh khi Mộc tinh ở Cự Giải (cả lứa sinh trong khoảng một năm) thường thấy đủ đầy khi gia đình yên ổn; hay giúp đỡ, chăm lo người nhà.",
+          "nen_de_y": "Dễ bao bọc người thân quá mức.",
+          "viec_ung_dung": "Giúp người thân theo cách để họ tự làm được, không làm thay."
         },
         "su_tu": {
-          "diem_sang": "Bạn lan tỏa tinh thần lạc quan qua phong thái rộng rãi, khả năng khích lệ tài năng của người xung quanh và dám đứng ra tổ chức những sân chơi lớn.",
-          "nen_de_y": "Đôi khi nhu cầu tạo tiếng vang hoặc giữ hình ảnh hào nhoáng khiến bạn chi tiêu hoặc cam kết vượt quá khả năng thực tế của đội ngũ.",
-          "viec_ung_dung": "Tập trung nguồn lực vào các hoạt động mang lại giá trị lâu dài cho tập thể và lắng nghe phản biện thực tế trước khi mở rộng quy mô."
+          "diem_sang": "Người sinh khi Mộc tinh ở Sư Tử (cả lứa sinh trong khoảng một năm) thường rộng lượng, thích làm việc lớn, có duyên với sáng tạo và việc trước đông người.",
+          "nen_de_y": "Dễ phô trương, hứa lớn.",
+          "viec_ung_dung": "Mỗi lời hứa lớn đi kèm một mốc thời gian cụ thể."
         },
         "xu_nu": {
-          "diem_sang": "Bạn tìm thấy cơ hội lớn trong việc chuẩn hóa quy trình, nâng cấp chất lượng dịch vụ thực tế và tích lũy uy tín từ những chi tiết làm thật chỉn chu.",
-          "nen_de_y": "Thói quen soi xét lỗi nhỏ quá kỹ có thể thu hẹp tầm nhìn chiến lược, khiến bạn ngần ngại trước những bước tiến lớn chưa hoàn hảo tuyệt đối.",
-          "viec_ung_dung": "Khi đánh giá dự án mới, hãy dành trang đầu tiên để viết về tiềm năng phát triển tổng thể rồi mới liệt kê danh mục rủi ro kỹ thuật cần kiểm soát."
+          "diem_sang": "Người sinh khi Mộc tinh ở Xử Nữ (cả lứa sinh trong khoảng một năm) thường lớn lên qua việc làm tốt từng chi tiết; thuận lợi đến từ tay nghề và sự hữu ích.",
+          "nen_de_y": "Dễ mải chuyện nhỏ mà quên bức tranh chung.",
+          "viec_ung_dung": "Mỗi quý nhìn lại một lần xem các việc nhỏ đang dẫn tới đâu."
         },
         "thien_binh": {
-          "diem_sang": "Cơ hội của bạn mở rộng mạnh mẽ qua các mối quan hệ hợp tác bình đẳng, khả năng hòa giải xung đột và gu thẩm mỹ tạo thiện cảm tự nhiên.",
-          "nen_de_y": "Vì muốn giữ sự hài hòa và làm vừa lòng nhiều phía, bạn dễ trì hoãn những quyết định mở rộng đòi hỏi lập trường dứt khoát.",
-          "viec_ung_dung": "Xây dựng bộ tiêu chí hợp tác rõ ràng bằng văn bản ngay từ đầu để việc đồng hành dựa trên nguyên tắc minh bạch thay vì nể nang."
+          "diem_sang": "Người sinh khi Mộc tinh ở Thiên Bình (cả lứa sinh trong khoảng một năm) thường gặp thuận lợi qua hợp tác, quan hệ tốt và cách cư xử công bằng; khéo kết bạn.",
+          "nen_de_y": "Dễ ngại mất lòng nên nhận lời quá nhiều.",
+          "viec_ung_dung": "Chọn kỹ người cùng làm và thoả thuận rõ ràng ngay từ đầu."
         },
         "bo_cap": {
-          "diem_sang": "Bạn phát triển mạnh khi đi sâu vào các lĩnh vực nghiên cứu chuyên biệt, quản trị khủng hoảng hoặc huy động nguồn lực chung để cải tổ tận gốc.",
-          "nen_de_y": "Xu hướng muốn thâu tóm toàn bộ thông tin ngầm hoặc giữ thái độ hoài nghi quá mức có thể cản trở việc mở rộng mạng lưới cộng tác mở.",
-          "viec_ung_dung": "Thực hành chia sẻ thông tin theo từng cấp độ minh bạch với đối tác tin cậy và dùng năng lực phân tích sâu để tháo gỡ nút thắt chung."
+          "diem_sang": "Người sinh khi Mộc tinh ở Bọ Cạp (cả lứa sinh trong khoảng một năm) thường mạnh lên khi đi sâu vào một việc; giỏi tìm hiểu tới gốc và quản lý nguồn lực chung.",
+          "nen_de_y": "Dễ dồn hết sức vào một hướng.",
+          "viec_ung_dung": "Khi dồn sức vào việc lớn, luôn giữ một phương án dự phòng."
         },
         "nhan_ma": {
-          "diem_sang": "Bạn có tầm nhìn khoáng đạt, nhạy bén với xu hướng văn hóa hoặc giáo dục đường dài và luôn giữ được niềm hứng khởi khám phá chân trời mới.",
-          "nen_de_y": "Sự hào hứng với bức tranh vĩ mô đôi khi khiến bạn bỏ trống khâu thực thi chi tiết hoặc hứa hẹn nhiều hơn quỹ thời gian cho phép.",
-          "viec_ung_dung": "Gắn mỗi ý tưởng tầm xa với một lịch trình hành động theo tháng có sản phẩm đo đếm được cụ thể."
+          "diem_sang": "Người sinh khi Mộc tinh ở Nhân Mã (cả lứa sinh trong khoảng một năm) thường lạc quan, thích đi xa, học cao, có niềm tin mạnh vào điều mình theo đuổi.",
+          "nen_de_y": "Dễ lạc quan quá mà bỏ qua rủi ro.",
+          "viec_ung_dung": "Trước việc lớn, viết ra ba điều có thể không như ý và cách xử lý từng điều."
         },
         "ma_ket": {
-          "diem_sang": "Bạn mở rộng quy mô bằng sự kiên trì xây dựng thể chế, tích lũy uy tín nghề nghiệp từng bậc và biết biến giới hạn thực tế thành đòn bẩy trưởng thành.",
-          "nen_de_y": "Thái độ thận trọng quá mức hoặc chỉ tin vào những mô hình đã có tiền lệ dễ làm bạn chậm nhịp trước các cơ hội sáng tạo đột phá.",
-          "viec_ung_dung": "Bên cạnh kế hoạch cốt lõi an toàn, hãy cho phép mình mở một nhánh thử nghiệm nhỏ có giới hạn rủi ro rõ ràng để đón nhận ý tưởng mới."
+          "diem_sang": "Người sinh khi Mộc tinh ở Ma Kết (cả lứa sinh trong khoảng một năm) thường tiến lên chậm mà chắc nhờ kỷ luật và trách nhiệm; được tin cậy khi đã cho thấy kết quả.",
+          "nen_de_y": "Dễ khắt khe với niềm vui của chính mình.",
+          "viec_ung_dung": "Cho phép mình một niềm vui nhỏ sau mỗi chặng việc làm xong."
         },
         "bao_binh": {
-          "diem_sang": "Bạn mở ra hướng đi mới nhờ tư duy hệ thống độc lập, khả năng kết nối các mạng lưới cộng đồng đa dạng và tinh thần cải tiến vì lợi ích chung.",
-          "nen_de_y": "Đôi khi bạn mải mê với các mô hình lý thuyết tiến bộ trên diện rộng mà thiếu sự quan tâm sát sao tới cảm xúc cụ thể của từng cá nhân bên cạnh.",
-          "viec_ung_dung": "Kiểm nghiệm mỗi đề xuất cải tiến quy mô lớn bằng một dự án thí điểm nhỏ phục vụ trực tiếp một nhóm người dùng thực tế."
+          "diem_sang": "Người sinh khi Mộc tinh ở Bảo Bình (cả lứa sinh trong khoảng một năm) thường mở mang qua ý tưởng mới, bạn bè và cộng đồng; thích những việc vì lợi ích chung.",
+          "nen_de_y": "Dễ mải lý tưởng xa mà quên việc gần.",
+          "viec_ung_dung": "Biến một ý tưởng vì cộng đồng thành một việc làm được trong tháng."
         },
         "song_ngu": {
-          "diem_sang": "Bạn giàu lòng bao dung, dễ chạm tới chiều sâu nghệ thuật hoặc đời sống nội tâm và biết nâng đỡ tinh thần người khác một cách nhẹ nhàng.",
-          "nen_de_y": "Sự cởi mở không ranh giới dễ khiến bạn bị cuốn vào những lời kêu gọi thiếu cơ sở thực tế hoặc tiêu tán nguồn lực cho quá nhiều nơi.",
-          "viec_ung_dung": "Chọn một hoạt động thiện nguyện hoặc sáng tạo có khung giờ và ngân sách định sẵn để lòng tốt được duy trì bền bỉ mà không quá tải."
+          "diem_sang": "Người sinh khi Mộc tinh ở Song Ngư (cả lứa sinh trong khoảng một năm) thường giàu lòng trắc ẩn, dễ cảm thông, có duyên với nghệ thuật và việc giúp người.",
+          "nen_de_y": "Dễ nghĩ mình đã giúp đủ nhờ ý tốt mà chưa kiểm xem việc giúp có thật sự giúp được người ta.",
+          "viec_ung_dung": "Đặt giới hạn rõ cho thời gian và tiền dành để giúp người khác."
         }
       },
       "source_id": "bien_tap_chiem_tinh_2026",
@@ -546,64 +546,64 @@
       "vai_tro": "bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Bài học trưởng thành của bạn là rèn luyện bản lĩnh tự chủ có nhịp độ, biến ngọn lửa xung kích ban đầu thành sức bền tự dẫn dắt đường dài.",
-          "nen_de_y": "Bạn dễ dao động giữa hai thái cực: hoặc ngập ngừng tự kiềm tỏa trước vạch xuất phát, hoặc nôn nóng bứt phá rồi tự trách mình khi vấp cản trở.",
-          "viec_ung_dung": "Rèn kỹ năng tự đặt nhịp làm việc độc lập qua các mục tiêu 30 ngày, ghi nhận từng bước tiến nhỏ thay vì đòi hỏi thắng lợi tức thì."
+          "diem_sang": "Người sinh khi Thổ tinh ở Bạch Dương (cả lứa sinh trong khoảng hai năm rưỡi) thường học cách kiên nhẫn và tự chủ; chín chắn dần khi biết đi tới cùng việc mình khởi xướng.",
+          "nen_de_y": "Lúc trẻ dễ nóng vội, hoặc ngược lại ngại tự đứng ra.",
+          "viec_ung_dung": "Tập làm trọn một việc trước khi bắt đầu việc khác."
         },
         "kim_nguu": {
-          "diem_sang": "Bạn xây dựng sự vững vàng qua kỷ luật tài chính, thói quen lao động đều đặn và khả năng tạo dựng nền tảng vật chất có giá trị sử dụng lâu bền.",
-          "nen_de_y": "Nỗi lo thiếu hụt an toàn vật chất có thể biến thành sự bảo thủ, ngại đầu tư nâng cấp công cụ hoặc bám chặt vào quy trình đã lỗi thời.",
-          "viec_ung_dung": "Thiết lập quỹ dự phòng rõ ràng để tâm trí yên ổn, đồng thời định kỳ rà soát và loại bỏ một thói quen làm việc cũ kém hiệu quả mỗi quý."
+          "diem_sang": "Người sinh khi Thổ tinh ở Kim Ngưu (cả lứa sinh trong khoảng hai năm rưỡi) thường học về tiền bạc và giá trị của bản thân; xây được nền vững khi kiên trì từng bước.",
+          "nen_de_y": "Dễ lo thiếu thốn dù thật ra đã đủ.",
+          "viec_ung_dung": "Lập bảng thu chi đơn giản và xem lại mỗi tháng."
         },
         "song_tu": {
-          "diem_sang": "Khi vào guồng kỷ luật, bạn có tư duy cấu trúc rất chặt chẽ, biết chắt lọc thông tin cốt lõi và diễn đạt vấn đề chuyên môn bằng ngôn ngữ chuẩn xác.",
-          "nen_de_y": "Áp lực phải biết đủ mọi thứ hoặc sợ phát ngôn sai dễ khiến bạn căng thẳng thần kinh, tự giới hạn việc trao đổi cởi mở.",
-          "viec_ung_dung": "Lập sổ tay hệ thống hóa kiến thức theo từng chuyên đề có kiểm chứng nguồn tin và luyện kỹ năng trình bày ngắn gọn trong ba luận điểm chính."
+          "diem_sang": "Người sinh khi Thổ tinh ở Song Tử (cả lứa sinh trong khoảng hai năm rưỡi) thường học cách nghĩ và nói có trọng tâm; giỏi dần lên qua việc học nghiêm túc.",
+          "nen_de_y": "Dễ ngại nói trước đông người hoặc lo mình hiểu chưa đủ.",
+          "viec_ung_dung": "Chuẩn bị ba ý chính trước mỗi lần phát biểu."
         },
         "cu_giai": {
-          "diem_sang": "Bạn trưởng thành qua việc xây dựng ranh giới tình cảm lành mạnh, gánh vác trách nhiệm gia đình một cách chín chắn và tạo chỗ dựa ổn định cho người thân.",
-          "nen_de_y": "Khi mệt mỏi bạn dễ dựng tường phòng vệ lạnh lùng, kìm nén nỗi buồn vào trong hoặc mang cảm giác phải một mình gánh hết trách nhiệm chăm lo.",
-          "viec_ung_dung": "Tập phân chia rõ phần việc nhà hoặc việc nhóm cho các thành viên cùng gánh vác, và dành thời gian trò chuyện thẳng thắn về nhu cầu nghỉ ngơi của mình."
+          "diem_sang": "Người sinh khi Thổ tinh ở Cự Giải (cả lứa sinh trong khoảng hai năm rưỡi) thường học về gia đình và cảm giác an toàn; chín chắn khi tự lo được cho mình và người thân.",
+          "nen_de_y": "Dễ gánh việc nhà nặng hoặc khó nói ra cảm xúc.",
+          "viec_ung_dung": "Chia việc nhà rõ ràng với những người cùng sống."
         },
         "su_tu": {
-          "diem_sang": "Bạn rèn được phong thái dẫn dắt điềm đạm, lấy chất lượng sản phẩm sáng tạo và chữ tín thực chất làm thước đo thay vì tìm kiếm lời khen bề nổi.",
-          "nen_de_y": "Sự tự khắt khe quá mức với bản thân dễ làm bạn ngại thể hiện tài năng trước đám đông hoặc mất đi niềm vui hồn nhiên khi sáng tác.",
-          "viec_ung_dung": "Duy trì một khung giờ sáng tạo định kỳ hoàn toàn không chấm điểm hiệu suất để giữ lửa cảm hứng song hành cùng kỷ luật nghề nghiệp."
+          "diem_sang": "Người sinh khi Thổ tinh ở Sư Tử (cả lứa sinh trong khoảng hai năm rưỡi) thường học cách tự tin mà không cần người khác công nhận; giỏi dần khi chịu khó rèn một nghề sáng tạo.",
+          "nen_de_y": "Dễ ngại thể hiện vì sợ bị đánh giá.",
+          "viec_ung_dung": "Mỗi tháng cho người khác xem một sản phẩm của mình."
         },
         "xu_nu": {
-          "diem_sang": "Bạn có năng lực tổ chức công việc chuẩn mực, kiên nhẫn hoàn thiện từng khâu kỹ thuật khó và giữ được độ tin cậy cao trong vận hành thực tế.",
-          "nen_de_y": "Khi áp lực tăng, sự cẩn trọng dễ trượt thành nỗi lo âu chi tiết vụn vặt, tự ôm hết việc vào người vì sợ giao cho ai cũng không yên tâm.",
-          "viec_ung_dung": "Áp dụng quy tắc phân loại đầu việc theo mức độ trọng yếu và chủ động bàn giao những phần việc đạt mức tiêu chuẩn cơ bản cho cộng sự."
+          "diem_sang": "Người sinh khi Thổ tinh ở Xử Nữ (cả lứa sinh trong khoảng hai năm rưỡi) thường học về nghề, kỹ năng và nếp làm việc; được tin cậy nhờ sự cẩn thận.",
+          "nen_de_y": "Dễ cầu toàn và tự trách khi chưa hoàn hảo — chú ý nghỉ ngơi.",
+          "viec_ung_dung": "Trước khi làm, đặt sẵn mức \"đủ tốt\" cho từng việc."
         },
         "thien_binh": {
-          "diem_sang": "Bạn rất nghiêm túc với các cam kết hợp tác, có khả năng thiết lập quy tắc công bằng và giữ sự điềm tĩnh khách quan khi phân xử bất đồng.",
-          "nen_de_y": "Sức ép phải giữ sự cân bằng hoàn hảo dễ khiến bạn coi mối quan hệ như một gánh nặng nghĩa vụ hoặc chần chừ quá lâu trước khi ký kết.",
-          "viec_ung_dung": "Thảo luận rõ quyền lợi, giới hạn trách nhiệm và cơ chế tháo gỡ bất đồng ngay khi bắt đầu hợp tác để đôi bên cùng nhẹ gánh."
+          "diem_sang": "Người sinh khi Thổ tinh ở Thiên Bình (cả lứa sinh trong khoảng hai năm rưỡi) thường học về cam kết và sự công bằng trong quan hệ; giữ được quan hệ bền khi có thoả thuận rõ.",
+          "nen_de_y": "Dễ ngại ràng buộc, hoặc giữ một quan hệ chỉ vì trách nhiệm.",
+          "viec_ung_dung": "Nói rõ kỳ vọng của hai bên trong việc chung và trong quan hệ thân."
         },
         "bo_cap": {
-          "diem_sang": "Bạn có sức chịu đựng áp lực tâm lý bền bỉ, dám nhìn thẳng vào những giới hạn khắt khe nhất để tái cấu trúc nguồn lực một cách triệt để.",
-          "nen_de_y": "Nỗi sợ mất kiểm soát hoặc bị phụ lòng dễ khiến bạn giữ thái độ phòng thủ quá chặt, khó buông bỏ những cam kết đã không còn phù hợp.",
-          "viec_ung_dung": "Thực hành kiểm toán lại các cam kết dài hạn mỗi nửa năm để chủ động khép lại những hạng mục gây hao tổn sức lực mà không còn giá trị thực."
+          "diem_sang": "Người sinh khi Thổ tinh ở Bọ Cạp (cả lứa sinh trong khoảng hai năm rưỡi) thường học về niềm tin, sự kiểm soát và nguồn lực chung; mạnh lên khi đối diện thẳng chuyện khó.",
+          "nen_de_y": "Dễ giữ kín quá mức, khó mở lời nhờ người khác.",
+          "viec_ung_dung": "Chọn một người tin cậy để chia sẻ khi gặp chuyện nặng lòng."
         },
         "nhan_ma": {
-          "diem_sang": "Bạn rèn luyện được hệ thống quan điểm sống có kiểm chứng thực tiễn, theo đuổi học thuật hoặc chuyên môn cao bằng sự kiên trì nghiêm túc.",
-          "nen_de_y": "Đôi khi bạn trở nên cứng nhắc trong việc bảo vệ nguyên tắc đạo lý hoặc cảm thấy bức bối khi phải tuân thủ các thủ tục hành chính chi tiết.",
-          "viec_ung_dung": "Kết hợp mỗi chương trình học lý thuyết với một bài tập ứng dụng thực địa và giữ thái độ lắng nghe trước những góc nhìn khác biệt."
+          "diem_sang": "Người sinh khi Thổ tinh ở Nhân Mã (cả lứa sinh trong khoảng hai năm rưỡi) thường học cách biến niềm tin thành việc làm có kỷ luật; chín chắn qua học cao và trải nghiệm.",
+          "nen_de_y": "Dễ hoài nghi, hoặc cứng nhắc về quan điểm.",
+          "viec_ung_dung": "Nghe hết một quan điểm trái chiều trước khi phản biện."
         },
         "ma_ket": {
-          "diem_sang": "Bạn phát huy tối đa năng lực hoạch định chiến lược đường dài, chịu trách nhiệm đến cùng và kiên nhẫn xây dựng sự nghiệp từ nền móng vững chắc.",
-          "nen_de_y": "Thói quen đặt gánh nặng nghĩa vụ lên trên hết dễ khiến bạn sống quá nghiêm nghị, tự cô lập khi gặp khó khăn và quên chăm sóc sức khỏe thể chất.",
-          "viec_ung_dung": "Tập chia sẻ thách thức công việc với những cộng sự tin cậy và coi việc nghỉ ngơi tái tạo sức lao động là một phần bắt buộc trong kỷ luật bản thân."
+          "diem_sang": "Người sinh khi Thổ tinh ở Ma Kết (cả lứa sinh trong khoảng hai năm rưỡi) thường có tinh thần trách nhiệm sớm, giỏi tổ chức, xây sự nghiệp vững theo thời gian.",
+          "nen_de_y": "Dễ làm quá sức, ít cho phép mình nghỉ.",
+          "viec_ung_dung": "Mỗi tháng giao hẳn một việc cho người khác và chấp nhận cách họ làm, dù khác cách bạn."
         },
         "bao_binh": {
-          "diem_sang": "Bạn giỏi biến những ý tưởng cải tiến xã hội hoặc công nghệ thành quy trình vận hành có cấu trúc bền vững và nguyên tắc minh bạch.",
-          "nen_de_y": "Sự kiên định với hệ thống lý luận riêng đôi khi làm bạn trở nên tách biệt khỏi tập thể hoặc lạnh lùng trước những ngoại lệ mang tính con người.",
-          "viec_ung_dung": "Lắng nghe phản hồi trực tiếp từ những người chịu ảnh hưởng bởi quy trình bạn thiết kế để điều chỉnh hệ thống sao cho vừa chặt chẽ vừa nhân văn."
+          "diem_sang": "Người sinh khi Thổ tinh ở Bảo Bình (cả lứa sinh trong khoảng hai năm rưỡi) thường học cách giữ vững ý mình giữa tập thể; giỏi xây hệ thống và tổ chức cộng đồng.",
+          "nen_de_y": "Dễ thấy lạc lõng, hoặc ngại gắn bó với một nhóm.",
+          "viec_ung_dung": "Tham gia đều đặn một nhóm có chung mối quan tâm."
         },
         "song_ngu": {
-          "diem_sang": "Bạn có khả năng đưa sự thấu cảm và trí tưởng tượng vào khuôn khổ thực hành đều đặn, biến cảm hứng nghệ thuật hoặc tâm huyết trợ giúp thành công việc cụ thể.",
-          "nen_de_y": "Khi thiếu điểm tựa rõ ràng, bạn dễ rơi vào cảm giác mơ hồ tự nghi ngờ năng lực hoặc để nỗi buồn của môi trường xung quanh làm trĩu nặng tinh thần.",
-          "viec_ung_dung": "Neo giữ nhịp sinh hoạt bằng những khung giờ làm việc và nghỉ ngơi cố định hằng ngày, đồng thời tách bạch rõ phần trách nhiệm của mình với vấn đề của người khác."
+          "diem_sang": "Người sinh khi Thổ tinh ở Song Ngư (cả lứa sinh trong khoảng hai năm rưỡi) thường học cách đặt ranh giới và biến trí tưởng tượng thành việc cụ thể.",
+          "nen_de_y": "Dễ lơ mơ giữa mong ước và việc thật, hoặc ngại nhận trách nhiệm vì sợ mình không đủ sức.",
+          "viec_ung_dung": "Gắn mỗi mong ước với một bước làm được ngay trong tuần."
         }
       },
       "source_id": "bien_tap_chiem_tinh_2026",
@@ -615,64 +615,64 @@
       "vai_tro": "nhu cầu đổi mới cách làm cũ và giữ không gian độc lập",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Bạn bứt phá mạnh mẽ bằng những sáng kiến tiên phong táo bạo, dám tự mở lối đi riêng và phản ứng cực nhanh trước các bước ngoặt công nghệ hoặc đời sống.",
-          "nen_de_y": "Xung lực muốn đổi mới tức thì dễ khiến bạn đập bỏ quy trình cũ khi chưa chuẩn bị xong phương án thay thế khả thi.",
-          "viec_ung_dung": "Khi nảy ra ý tưởng cải tiến đột xuất, hãy chạy thử nghiệm trên một phạm vi nhỏ trong hai tuần để đo kết quả thực tế trước khi áp dụng đại trà."
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Bạch Dương (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới bằng hành động, dám đi đầu thử cách làm mới. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ nôn nóng phá cái cũ trước khi có cái mới.",
+          "viec_ung_dung": "Thử cái mới ở quy mô nhỏ trước khi làm lớn."
         },
         "kim_nguu": {
-          "diem_sang": "Bạn có khả năng cách tân những lĩnh vực thực tế nhất như quản lý tài chính, sản xuất hoặc thiết kế vật dụng theo hướng gọn nhẹ và thông minh hơn.",
-          "nen_de_y": "Sự giằng co giữa mong muốn ổn định vật chất và nhu cầu thay đổi đột ngột dễ tạo ra những quyết định xáo trộn tài chính bất ngờ.",
-          "viec_ung_dung": "Chủ động nâng cấp công cụ làm việc và phương thức quản lý tài sản theo lộ trình từng bước thay vì đợi đến khi buộc phải thay đổi đột ngột."
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Kim Ngưu (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới cách làm ra tiền và cách sống với của cải. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ chao đảo khi nếp quen bị xáo trộn.",
+          "viec_ung_dung": "Mỗi năm học thêm một cách quản lý tiền mới."
         },
         "song_tu": {
-          "diem_sang": "Tư duy của bạn nhảy vọt rất nhanh, giỏi phát hiện những mối liên hệ bất ngờ giữa các ngành khác nhau và làm chủ tốt các phương tiện truyền thông mới.",
-          "nen_de_y": "Nhịp suy nghĩ chạy quá nhanh dễ làm hệ thần kinh căng mỏi, lời nói đôi khi nhảy cóc khiến người nghe khó bắt kịp mạch lập luận.",
-          "viec_ung_dung": "Luôn mang theo sổ ghi chép nhanh các ý tưởng chợt lóe, sau đó chọn lọc và viết lại thành bản đề xuất có mở đầu và kết luận rõ ràng."
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Song Tử (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới cách học, cách giao tiếp, đón công nghệ thông tin rất nhanh. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ quá tải tin tức.",
+          "viec_ung_dung": "Giữ một khung giờ tắt thông báo mỗi ngày."
         },
         "cu_giai": {
-          "diem_sang": "Bạn mang tinh thần tự do vào đời sống gia đình, biết tạo dựng không gian sống độc đáo và tôn trọng cá tính riêng của từng người thân.",
-          "nen_de_y": "Tâm trạng dễ thay đổi thất thường giữa nhu cầu gắn bó ấm áp và mong muốn tách riêng đột ngột để tìm khoảng thở tự do.",
-          "viec_ung_dung": "Thiết kế một góc làm việc hoặc thư giãn hoàn toàn độc lập ngay trong nơi ở để vừa giữ được nhịp riêng tư vừa kết nối hài hòa với người nhà."
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Cự Giải (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới khuôn mẫu gia đình, nơi ở, cách chăm sóc nhau. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ bất an khi tổ ấm thay đổi.",
+          "viec_ung_dung": "Giữ một nếp nhỏ trong nhà làm điểm tựa."
         },
         "su_tu": {
-          "diem_sang": "Sức sáng tạo của bạn mang màu sắc nguyên bản rất cao, không thích sao chép lối mòn và dám thể hiện phong cách cá nhân độc đáo trước công chúng.",
-          "nen_de_y": "Khi quá đề cao sự khác biệt cá nhân, bạn dễ từ chối hợp tác trong các dự án tập thể đòi hỏi sự đồng bộ quy chuẩn.",
-          "viec_ung_dung": "Đưa nét sáng tạo độc đáo vào khâu lên ý tưởng chủ đạo, đồng thời tôn trọng các quy chuẩn kỹ thuật chung để sản phẩm dễ dàng đi vào đời sống."
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Sư Tử (kéo dài khoảng sáu đến bảy năm) mang chung nét muốn thể hiện cá tính và sáng tạo theo kiểu của riêng mình. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ chạy theo sự khác biệt để được chú ý.",
+          "viec_ung_dung": "Chọn một việc sáng tạo và theo đuổi lâu dài."
         },
         "xu_nu": {
-          "diem_sang": "Bạn rất nhạy trong việc ứng dụng kỹ thuật số, tự động hóa hoặc phương pháp phân tích mới để giải phóng sức lao động khỏi các thao tác thủ công rườm rà.",
-          "nen_de_y": "Khi quy trình làm việc gặp sự cố ngoài dự kiến, bạn dễ rơi vào trạng thái bồn chồn cao độ hoặc liên tục thay đổi công cụ làm gián đoạn mạch việc.",
-          "viec_ung_dung": "Chốt một bộ công cụ làm việc tối ưu và sử dụng ổn định ít nhất sáu tháng trước khi đánh giá xem có cần chuyển sang phần mềm hay quy trình mới hay không."
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Xử Nữ (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới cách làm việc, quy trình và công cụ hằng ngày. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ bồn chồn với việc lặp lại.",
+          "viec_ung_dung": "Mỗi tháng cải tiến một bước trong việc thường ngày."
         },
         "thien_binh": {
-          "diem_sang": "Bạn đem lại làn gió cởi mở cho các mối quan hệ hợp tác, tôn trọng khoảng trời tự chủ của đối tác và giỏi kết nối những cá nhân có tư duy tiến bộ.",
-          "nen_de_y": "Nỗi ngại bị ràng buộc bởi các khuôn phép xã giao truyền thống đôi khi khiến bạn ngắt kết nối đột ngột khi mối quan hệ vừa đi vào giai đoạn cam kết.",
-          "viec_ung_dung": "Thỏa thuận thẳng thắn về không gian tự do cá nhân và nhịp độ tương tác phù hợp ngay từ đầu để sự gắn kết luôn thoáng đãng, bền lâu."
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Thiên Bình (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới cách nhìn về hôn nhân, quan hệ đối tác và sự bình đẳng. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ khó giữ quan hệ theo khuôn cũ.",
+          "viec_ung_dung": "Thoả thuận rõ cách sống chung theo kiểu hợp với cả hai người."
         },
         "bo_cap": {
-          "diem_sang": "Bạn có bản lĩnh cải tổ quyết liệt, dám cắt bỏ triệt để những cơ chế trì trệ và tìm ra giải pháp đột phá ngay trong tình huống khủng hoảng căng thẳng nhất.",
-          "nen_de_y": "Xu hướng muốn tạo ra sự lột xác một mất một còn dễ gây áp lực chấn động lớn cho chính bạn và những người cùng làm việc.",
-          "viec_ung_dung": "Chuyển hóa nhu cầu cải cách mạnh mẽ thành các đợt nâng cấp chuyên sâu có kế hoạch dự phòng rủi ro rõ ràng."
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Bọ Cạp (kéo dài khoảng sáu đến bảy năm) mang chung nét dám nhìn thẳng những chuyện bị né tránh, đổi cách nghĩ về quyền lực và tiền chung. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ làm tới cùng khi bị dồn ép.",
+          "viec_ung_dung": "Chọn một chỗ an toàn để nói về chuyện khó."
         },
         "nhan_ma": {
-          "diem_sang": "Bạn có tư duy khai phóng trong giáo dục, du lịch và nghiên cứu, luôn sẵn sàng đón nhận những góc nhìn văn hóa mới lạ với tinh thần cởi mở.",
-          "nen_de_y": "Sự hào hứng chạy theo những trào lưu tư tưởng mới mẻ dễ làm bạn bỏ dở các dự án dài hạn ngay khi giai đoạn khám phá ban đầu vừa qua.",
-          "viec_ung_dung": "Đặt nguyên tắc ứng dụng mỗi tri thức mới học được vào một bài toán thực tế tại nơi mình đang sống trước khi tiếp tục lên đường tìm kiếm chủ đề khác."
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Nhân Mã (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới niềm tin, cách học, thích đi xa và giao lưu văn hoá. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ đổi quan điểm quá nhanh.",
+          "viec_ung_dung": "Tìm hiểu kỹ một niềm tin mới trước khi theo."
         },
         "ma_ket": {
-          "diem_sang": "Bạn biết cách hiện đại hóa các cấu trúc tổ chức truyền thống, kết hợp kinh nghiệm quản trị vững chắc với giải pháp cải cách thực tế, có lộ trình.",
-          "nen_de_y": "Sự xung đột ngầm giữa trách nhiệm giữ gìn kỷ cương và khát vọng phá vỡ khuôn mẫu dễ khiến bạn chịu áp lực nội tâm kéo dài.",
-          "viec_ung_dung": "Đề xuất cải tiến tổ chức dựa trên số liệu hiệu quả thực tế để thuyết phục tập thể chuyển mình từng bước vững chắc."
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Ma Kết (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới cơ cấu tổ chức và cách làm nghề. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ căng thẳng giữa giữ trật tự và muốn thay đổi.",
+          "viec_ung_dung": "Thay đổi từng bước từ bên trong hệ thống."
         },
         "bao_binh": {
-          "diem_sang": "Bạn phát huy trọn vẹn tư duy hướng tới tương lai, giỏi kết nối trí tuệ tập thể qua mạng lưới mở và tiên phong trong các sáng kiến phục vụ cộng đồng.",
-          "nen_de_y": "Đôi khi bạn đi quá xa trong các ý tưởng cải cách vượt trước thời điểm hiện tại nên khó tìm được tiếng nói chung với những người ưa làm theo thói quen cũ.",
-          "viec_ung_dung": "Xây dựng cầu nối chuyển tiếp bằng cách giải thích lợi ích thiết thực gần gũi của phương án mới đối với công việc hằng ngày của mọi người."
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Bảo Bình (kéo dài khoảng sáu đến bảy năm) mang chung nét đề cao tự do, khoa học, mạng lưới và lợi ích chung. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ xa cách về cảm xúc.",
+          "viec_ung_dung": "Gặp bạn bè trực tiếp thay vì chỉ qua mạng."
         },
         "song_ngu": {
-          "diem_sang": "Bạn đón nhận những trực giác sáng tạo độc đáo thông qua nghệ thuật, âm nhạc hoặc những khoảng tĩnh lặng, mở ra cách tiếp cận giàu tính nhân văn.",
-          "nen_de_y": "Những luồng cảm hứng bất chợt không theo lịch trình dễ làm bạn xao nhãng nhiệm vụ thực tế hoặc cảm thấy lạc lõng giữa môi trường quy củ.",
-          "viec_ung_dung": "Ghi âm hoặc phác thảo ngay những ý tưởng trực giác khi chúng xuất hiện, sau đó dành một buổi cố định trong tuần để chọn lọc và dựng thành sản phẩm thực."
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Song Ngư (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới qua nghệ thuật, lòng trắc ẩn và trực giác. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ lẫn lộn ranh giới giữa đời thật và trên mạng.",
+          "viec_ung_dung": "Cân bằng giờ trên mạng với giờ ở ngoài đời."
         }
       },
       "source_id": "bien_tap_chiem_tinh_2026",
@@ -684,64 +684,64 @@
       "vai_tro": "trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Bạn hành động với nguồn cảm hứng giàu lý tưởng, sẵn sàng tiên phong đứng ra bảo vệ những giá trị nhân văn hoặc khởi xướng các phong trào sáng tạo.",
-          "nen_de_y": "Khi mục tiêu thực tế chưa được vạch rõ, nhiệt huyết ban đầu dễ tan thành sự hụt hẫng hoặc tiêu hao sức lực vào những cuộc theo đuổi thiếu điểm dừng.",
-          "viec_ung_dung": "Kiểm tra tính khả thi của mỗi ý tưởng lớn bằng ba câu hỏi thực tế về nguồn lực, thời gian và sản phẩm cụ thể trước khi dốc toàn lực."
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Bạch Dương (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về lý tưởng dám đứng lên vì điều mình tin. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ lao vào việc khi chưa rõ đầu đuôi.",
+          "viec_ung_dung": "Kiểm tra thông tin trước khi hành động."
         },
         "kim_nguu": {
-          "diem_sang": "Bạn biết thổi hồn thẩm mỹ và sự tinh tế vào thế giới vật chất, có năng khiếu trong các lĩnh vực thiết kế, ẩm thực, âm nhạc hoặc tạo dựng không gian chữa lành.",
-          "nen_de_y": "Trong chuyện tài chính và quản lý tài sản, sự cả tin hoặc thiếu tách bạch sổ sách dễ dẫn tới thất thoát nguồn lực mà không nhận ra kịp thời.",
-          "viec_ung_dung": "Luôn kiểm tra kỹ các điều khoản hợp đồng, giữ sổ thu chi minh bạch và không để cảm xúc nể nang chi phối các quyết định tiền bạc."
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Kim Ngưu (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về vẻ đẹp tự nhiên và cuộc sống đủ đầy, giản dị. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ lơ mơ chuyện tiền bạc.",
+          "viec_ung_dung": "Ghi rõ từng khoản thu chi."
         },
         "song_tu": {
-          "diem_sang": "Ngôn từ của bạn giàu sức gợi hình và chất thơ, dễ chạm tới cảm xúc người nghe qua văn chương, kể chuyện hoặc giao tiếp đầy sự thấu cảm.",
-          "nen_de_y": "Khi tiếp nhận thông tin, bạn dễ để trí tưởng tượng tô vẽ thêm hoặc bị nhiễu bởi nhiều luồng tin đồn chưa được kiểm chứng số liệu.",
-          "viec_ung_dung": "Tách bạch rõ phần ghi nhận sự việc khách quan với phần cảm nhận cá nhân khi trao đổi công việc, và tập thói quen đối chiếu nguồn tin gốc."
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Song Tử (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về ý tưởng, chữ nghĩa và những câu chuyện. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ tin lời đồn.",
+          "viec_ung_dung": "Đối chiếu hai nguồn trước khi tin."
         },
         "cu_giai": {
-          "diem_sang": "Bạn có độ nhạy cảm thông sâu sắc với tâm trạng của người thân và cộng đồng, biết tạo ra bầu không khí chở che dịu dàng giúp người khác hồi phục tinh thần.",
-          "nen_de_y": "Vì quá dễ thẩm thấu nỗi buồn của người xung quanh, bạn dễ mang hộ gánh nặng cảm xúc không thuộc về mình và quên chăm sóc nhu cầu cá nhân.",
-          "viec_ung_dung": "Thực hành các khoảng nghỉ ngắt kết nối cuối ngày để làm sạch tâm trí, nhắc mình rằng lắng nghe thấu cảm không đồng nghĩa với việc gánh thay cuộc đời người khác."
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Cự Giải (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về tổ ấm, quê nhà, một gia đình lý tưởng. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ hoài niệm quá mức.",
+          "viec_ung_dung": "Trân trọng gia đình đúng như nó đang là."
         },
         "su_tu": {
-          "diem_sang": "Bạn tỏa sáng qua các loại hình nghệ thuật biểu đạt, điện ảnh, sân khấu hoặc những hoạt động truyền cảm hứng bằng trái tim rộng mở, giàu lòng trắc ẩn.",
-          "nen_de_y": "Bạn dễ lý tưởng hóa quá mức hình ảnh của bản thân hoặc người mình ngưỡng mộ, dẫn tới thất vọng sâu khi đối diện với những góc đời thường bình dị.",
-          "viec_ung_dung": "Đón nhận cả những nét chưa hoàn hảo trong quá trình sáng tạo và xây dựng mối quan hệ dựa trên sự chân thật đời thường thay vì ánh hào quang."
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Sư Tử (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về sân khấu, điện ảnh và tình yêu lãng mạn. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ thần tượng hoá người mình yêu.",
+          "viec_ung_dung": "Nhìn người thương qua việc làm hằng ngày."
         },
         "xu_nu": {
-          "diem_sang": "Bạn thể hiện lòng nhân ái qua sự chăm sóc tận tụy hằng ngày, kết hợp được trực giác tinh tế với kỹ năng trị liệu, điều dưỡng hoặc phục vụ thiết thực.",
-          "nen_de_y": "Sự giằng co giữa mong muốn mọi thứ chuẩn xác và tâm trạng dễ xao động có thể làm bạn mệt mỏi hoặc lo lắng thái quá về sức khỏe.",
-          "viec_ung_dung": "Giữ nếp sinh hoạt ăn ngủ điều độ, tránh tự chẩn đoán lan man khi cơ thể mệt mà hãy nghỉ ngơi thực sự hoặc tham khảo ý kiến chuyên môn rõ ràng."
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Xử Nữ (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về phục vụ, chăm sóc và công việc có ích. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ hy sinh quá sức.",
+          "viec_ung_dung": "Giữ giờ nghỉ dù việc giúp người còn nhiều."
         },
         "thien_binh": {
-          "diem_sang": "Bạn hướng tới vẻ đẹp hài hòa thanh nhã trong nghệ thuật và ứng xử, luôn mong muốn kiến tạo sự êm ấm, bao dung trong các mối quan hệ.",
-          "nen_de_y": "Xu hướng nhìn đối tác qua màu hồng lý tưởng hóa dễ khiến bạn bỏ qua các tín hiệu lệch pha thực tế hoặc nhượng bộ quá giới hạn để tránh va chạm.",
-          "viec_ung_dung": "Giữ thói quen trò chuyện thẳng thắn về các kỳ vọng thực tế trong đời sống chung và tôn trọng sự khác biệt thật sự của người đồng hành."
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Thiên Bình (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về hoà bình, công bằng và tình yêu hài hoà. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ né mâu thuẫn bằng cách im lặng.",
+          "viec_ung_dung": "Nói ra điều không đồng ý một cách nhẹ nhàng."
         },
         "bo_cap": {
-          "diem_sang": "Trực giác tâm lý của bạn rất sâu, có khả năng cảm nhận những chuyển động ngầm trong nội tâm và chuyển hóa nỗi đau thành tác phẩm có sức lay động mạnh.",
-          "nen_de_y": "Khi tâm trạng đi xuống, bạn dễ bị cuốn vào những suy diễn phức tạp, giữ nỗi ám ảnh kéo dài hoặc tìm cách trốn tránh thực tại.",
-          "viec_ung_dung": "Đưa những xúc cảm mãnh liệt vào hoạt động sáng tác nghệ thuật, viết nhật ký hoặc vận động gần thiên nhiên để giải tỏa năng lượng ứ đọng."
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Bọ Cạp (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về chiều sâu cảm xúc và những chuyện bị che giấu. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ chìm trong cảm xúc nặng.",
+          "viec_ung_dung": "Khi cảm xúc quá tải, tìm người tin cậy hoặc người tư vấn để chia sẻ."
         },
         "nhan_ma": {
-          "diem_sang": "Bạn có tầm nhìn nhân văn rộng mở, dễ đồng cảm với các nền văn hóa khác nhau và tìm thấy nguồn cảm hứng lớn trong triết học, nghệ thuật hoặc hoạt động cộng đồng.",
-          "nen_de_y": "Niềm tin quá dễ dãi vào những lời hứa hẹn lớn lao thiếu nền tảng kiểm chứng có thể làm bạn đi chệch khỏi mục tiêu nghề nghiệp thực tế.",
-          "viec_ung_dung": "Luôn đối chiếu những lý tưởng cao đẹp với hành động tử tế cụ thể ngay trong công việc và đời sống thường ngày của mình."
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Nhân Mã (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về tôn giáo, triết lý và những chân trời xa. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ tin trọn vào một người thầy hay một học thuyết.",
+          "viec_ung_dung": "Giữ quyền tự đặt câu hỏi với mọi lời dạy."
         },
         "ma_ket": {
-          "diem_sang": "Bạn có khả năng chưng cất những giấc mơ và cảm hứng trừu tượng thành kế hoạch có hình hài cụ thể, mang tính nhân văn vào trong công tác quản trị.",
-          "nen_de_y": "Đôi khi bạn hoang mang khi thấy các mục tiêu danh vị thuần túy không mang lại sự thỏa mãn tinh thần, làm giảm động lực phấn đấu theo khuôn mẫu cũ.",
-          "viec_ung_dung": "Lồng ghép các giá trị đóng góp xã hội hoặc chiều sâu sáng tạo vào ngay trong lộ trình phát triển sự nghiệp dài hạn của bạn."
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Ma Kết (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về một xã hội vững vàng, tổ chức tốt. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ mơ mộng về địa vị.",
+          "viec_ung_dung": "Đặt mục tiêu nghề nghiệp có số đo cụ thể."
         },
         "bao_binh": {
-          "diem_sang": "Lý tưởng của bạn hướng về tình liên đới rộng lớn, dễ khởi xướng các dự án nhân đạo, bảo vệ môi trường hoặc chia sẻ tri thức mở cho cộng đồng.",
-          "nen_de_y": "Việc ôm những giấc mơ cải tạo xã hội quá rộng mà thiếu điểm neo thực thi tại chỗ dễ khiến bạn cảm thấy bất lực trước thực tế chậm chuyển biến.",
-          "viec_ung_dung": "Bắt đầu hiện thực hóa tầm nhìn cộng đồng từ một nhóm nhỏ tại địa phương với những chỉ số cải thiện cụ thể qua từng tháng."
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Bảo Bình (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về cộng đồng bình đẳng và công nghệ giúp người. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ thần tượng hoá đám đông.",
+          "viec_ung_dung": "Tự quyết thay vì theo số đông trên mạng."
         },
         "song_ngu": {
-          "diem_sang": "Bạn sở hữu kho tàng cảm thụ nghệ thuật và lòng từ bi tự nhiên rất phong phú, dễ kết nối với vẻ đẹp tinh thần và xoa dịu những tâm hồn đang tổn thương.",
-          "nen_de_y": "Ranh giới giữa ước mơ và thực tế rất mỏng dễ khiến bạn trì hoãn các nghĩa vụ đời thường hoặc để người thiếu thiện chí lợi dụng lòng tốt.",
-          "viec_ung_dung": "Thiết lập lịch làm việc có đồng hồ bấm giờ rõ ràng cho từng chặng ngắn và tham khảo ý kiến một người bạn thực tế trước khi nhận lời giúp đỡ lớn."
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Song Ngư (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về lòng trắc ẩn rộng, nghệ thuật và đời sống tinh thần. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ trốn vào mơ mộng.",
+          "viec_ung_dung": "Mỗi ngày gắn cảm hứng với một việc làm thật."
         }
       },
       "source_id": "bien_tap_chiem_tinh_2026",
@@ -753,64 +753,64 @@
       "vai_tro": "quá trình buông bỏ cái cũ và tái tạo nội lực sâu",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Bạn có ý chí tự lực rất mãnh liệt, dám một mình đương đầu với thử thách lớn để phá bỏ sự trì trệ và mở ra cục diện hành động hoàn toàn mới.",
-          "nen_de_y": "Khi gặp sức ép cản đường, phản ứng quyết liệt quá mức dễ biến sự kiên quyết thành cuộc đối đầu căng thẳng làm tổn hao lực lượng đôi bên.",
-          "viec_ung_dung": "Tập trung nguồn lực đột phá vào việc giải quyết bài toán cốt lõi thay vì đấu thắng thua với từng cá nhân, và rèn sức bền qua thể thao."
+          "diem_sang": "Lứa sinh khi Diêm Vương tinh ở Bạch Dương (kéo dài hơn chục năm tới vài chục năm) cùng trải qua thay đổi lớn về cách khẳng định bản thân và tinh thần tiên phong. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Diêm Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ đối đầu gay gắt.",
+          "viec_ung_dung": "Dùng sức mạnh của mình để mở lối cho người khác."
         },
         "kim_nguu": {
-          "diem_sang": "Bạn có sức bền tái thiết đáng kinh ngạc trong lĩnh vực kinh tế và sản xuất, dám cắt bỏ những khoản đầu tư cồng kềnh để giữ lại phần giá trị cốt lõi nhất.",
-          "nen_de_y": "Nỗi sợ mất mát tài sản hoặc sự xáo trộn tiện nghi quen thuộc dễ khiến bạn bám chặt vào những nguồn lực đã cạn kiệt sinh khí.",
-          "viec_ung_dung": "Chủ động thanh lý định kỳ những vật dụng, dự án hoặc khoản chi không còn mang lại giá trị thực để giải phóng dòng vốn và không gian sống."
+          "diem_sang": "Lứa sinh khi Diêm Vương tinh ở Kim Ngưu (kéo dài hơn chục năm tới vài chục năm) cùng trải qua thay đổi lớn về của cải, đất đai và giá trị vật chất. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Diêm Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ bám giữ tài sản.",
+          "viec_ung_dung": "Định kỳ xem lại điều gì thật sự cần giữ."
         },
         "song_tu": {
-          "diem_sang": "Bạn có khả năng đào sâu tới tận gốc vấn đề khi nghiên cứu, đặt những câu hỏi sắc bén bóc tách sự thật và tạo sức nặng thuyết phục lớn trong ngôn từ.",
-          "nen_de_y": "Khi tranh luận hoặc tìm hiểu một nghi vấn, bạn dễ rơi vào trạng thái truy vấn cực đoan hoặc dùng lời lẽ quá sắc lạnh làm người nghe co cụm.",
-          "viec_ung_dung": "Dùng năng lực điều tra sắc bén vào công tác nghiên cứu chuyên môn và lựa chọn cách đặt câu hỏi gợi mở để đối tác sẵn lòng chia sẻ sự thật."
+          "diem_sang": "Lứa sinh khi Diêm Vương tinh ở Song Tử (kéo dài hơn chục năm tới vài chục năm) cùng trải qua thay đổi lớn về cách truyền tin, chữ nghĩa và giáo dục. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Diêm Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ bị cuốn vào tranh cãi gay gắt.",
+          "viec_ung_dung": "Chọn lời cẩn trọng khi viết ở nơi công khai."
         },
         "cu_giai": {
-          "diem_sang": "Bạn có năng lực chữa lành và tái tạo nền tảng gia đình từ gốc rễ, dám đối diện với những khúc mắc tình cảm lâu năm để xây lại sự gắn kết chân thật.",
-          "nen_de_y": "Nỗi sợ bị bỏ rơi hoặc tổn thương tình cảm dễ biến thành nhu cầu kiểm soát ngầm người thân hoặc giữ mãi những ký ức buồn trong lòng.",
-          "viec_ung_dung": "Trò chuyện cởi mở để tháo gỡ từng hiểu lầm trong gia đình và tôn trọng quyền tự quyết của những người bạn yêu thương."
+          "diem_sang": "Lứa sinh khi Diêm Vương tinh ở Cự Giải (kéo dài hơn chục năm tới vài chục năm) cùng trải qua thay đổi lớn về gia đình, quê nhà và cảm giác an toàn. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Diêm Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ mang nỗi lo về mái nhà.",
+          "viec_ung_dung": "Xây nếp nhà vững từ những thói quen nhỏ."
         },
         "su_tu": {
-          "diem_sang": "Bạn có sức hút dẫn dắt mạnh mẽ trong những thời điểm chuyển giao cam go, dám dốc toàn bộ tâm huyết để tạo ra những công trình sáng tạo có tầm vóc.",
-          "nen_de_y": "Khát vọng khẳng định vị thế hoặc nắm quyền chi phối sân chơi dễ đẩy bạn vào những cuộc cạnh tranh quyền lực hao tổn nhiều tâm sức.",
-          "viec_ung_dung": "Dùng uy tín cá nhân để nâng đỡ thế hệ kế cận cùng tỏa sáng, lấy sự trưởng thành của cả tập thể làm thước đo bản lĩnh dẫn dắt."
+          "diem_sang": "Lứa sinh khi Diêm Vương tinh ở Sư Tử (kéo dài hơn chục năm tới vài chục năm) cùng trải qua thay đổi lớn về cách thể hiện cái tôi, sáng tạo và nuôi dạy con. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Diêm Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ đặt nặng chuyện được công nhận.",
+          "viec_ung_dung": "Khuyến khích người trẻ thể hiện theo cách riêng."
         },
         "xu_nu": {
-          "diem_sang": "Bạn rất giỏi chẩn đoán lỗi hệ thống từ gốc, dám phẫu thuật lại những quy trình vận hành phức tạp để loại bỏ tận cùng sự lãng phí và kém hiệu quả.",
-          "nen_de_y": "Sự đòi hỏi độ chuẩn xác tuyệt đối dễ biến thành áp lực kiểm soát từng chi tiết nhỏ nhặt, gây ngạt thở cho cả bạn lẫn cộng sự.",
-          "viec_ung_dung": "Tập trung cải tổ những nút thắt quy trình có tác động lớn nhất (20% nguyên nhân cốt lõi) và cho phép các chi tiết phụ được vận hành linh hoạt."
+          "diem_sang": "Lứa sinh khi Diêm Vương tinh ở Xử Nữ (kéo dài hơn chục năm tới vài chục năm) cùng trải qua thay đổi lớn về công việc, kỹ thuật và nếp sống điều độ. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Diêm Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ cầu toàn, khắt khe.",
+          "viec_ung_dung": "Cải tiến cách làm mà không tự trách."
         },
         "thien_binh": {
-          "diem_sang": "Bạn không chấp nhận sự hòa hảo hời hợt mà luôn thúc đẩy các mối quan hệ hợp tác đi tới sự công bằng thực chất và cam kết sâu sắc.",
-          "nen_de_y": "Trong quan hệ đối tác, bạn dễ bị cuốn vào những ván cờ thăm dò quyền lực ngầm hoặc đẩy mâu thuẫn lên mức căng thẳng để thử lòng nhau.",
-          "viec_ung_dung": "Đặt mọi thỏa thuận hợp tác lên bàn đối thoại minh bạch ngay khi có dấu hiệu lệch pha thay vì dùng sự im lặng để gây sức ép."
+          "diem_sang": "Lứa sinh khi Diêm Vương tinh ở Thiên Bình (kéo dài hơn chục năm tới vài chục năm) cùng trải qua thay đổi lớn về hôn nhân, quan hệ đối tác và lẽ công bằng. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Diêm Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ giằng co phần hơn trong quan hệ.",
+          "viec_ung_dung": "Thoả thuận công bằng, rõ ràng trong quan hệ thân."
         },
         "bo_cap": {
-          "diem_sang": "Bạn sở hữu nội lực hồi sinh mạnh mẽ sau biến cố, có trực giác nhìn xuyên qua lớp vỏ bề ngoài để nắm bắt động cơ cốt lõi và xoay chuyển tình thế.",
-          "nen_de_y": "Thói quen giữ kín mọi suy tính và không dễ tha thứ khi niềm tin bị rạn nứt có thể khiến tâm trí bạn luôn ở trạng thái căng như dây đàn.",
-          "viec_ung_dung": "Chọn lọc những trận chiến thực sự xứng đáng để dồn tâm lực, đồng thời học cách khép lại chuyện cũ để giải phóng nguồn năng lượng tái tạo cho tương lai."
+          "diem_sang": "Lứa sinh khi Diêm Vương tinh ở Bọ Cạp (kéo dài hơn chục năm tới vài chục năm) cùng trải qua thay đổi lớn về quyền lực, tiền chung và những chuyện kín. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Diêm Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ đi tới cực và khó tin người.",
+          "viec_ung_dung": "Biến chiều sâu thành sức bền khi gặp chuyện khó."
         },
         "nhan_ma": {
-          "diem_sang": "Bạn có khát vọng tìm kiếm chân lý đến tận cùng, sẵn sàng lột xác hệ thống niềm tin cá nhân qua những trải nghiệm thực tế sâu sắc và đa văn hóa.",
-          "nen_de_y": "Khi quá tin vào lý tưởng của mình, bạn dễ rơi vào thái độ truyền bá áp đặt hoặc bác bỏ gay gắt những quan điểm sống khác biệt.",
-          "viec_ung_dung": "Giữ tinh thần của một nhà nghiên cứu luôn mở lòng kiểm chứng lại giả thuyết của chính mình qua đối thoại bình đẳng với nhiều góc nhìn."
+          "diem_sang": "Lứa sinh khi Diêm Vương tinh ở Nhân Mã (kéo dài hơn chục năm tới vài chục năm) cùng trải qua thay đổi lớn về niềm tin, giáo dục và sự giao thoa giữa các nước. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Diêm Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ cứng nhắc về quan điểm.",
+          "viec_ung_dung": "Học hỏi từ nhiều nền văn hoá."
         },
         "ma_ket": {
-          "diem_sang": "Bạn có bản lĩnh tái cấu trúc các tổ chức lớn, dám gánh vác những cuộc cải cách thể chế dài hạn đòi hỏi sự kiên định và kỷ luật thép.",
-          "nen_de_y": "Xu hướng dùng quyền lực cứng hoặc đặt hiệu quả công việc lên trên mọi yếu tố tình cảm dễ tạo ra khoảng cách lạnh lùng trong tổ chức.",
-          "viec_ung_dung": "Kết hợp kỷ luật minh bạch với sự lắng nghe thực chất để mỗi cuộc cải tổ đều nhận được sự đồng lòng tự nguyện từ đội ngũ."
+          "diem_sang": "Lứa sinh khi Diêm Vương tinh ở Ma Kết (kéo dài hơn chục năm tới vài chục năm) cùng trải qua thay đổi lớn về thể chế, công việc và cấu trúc xã hội. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Diêm Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ chịu áp lực thành tích.",
+          "viec_ung_dung": "Xây thành quả chậm mà chắc, theo điều mình coi trọng."
         },
         "bao_binh": {
-          "diem_sang": "Bạn là nhân tố thúc đẩy những cuộc chuyển đổi lớn trong mạng lưới cộng đồng và công nghệ, dám đặt lại câu hỏi cho những quy ước xã hội đã cũ kỹ.",
-          "nen_de_y": "Khi muốn cải tạo tập thể theo mô hình lý tưởng, bạn dễ trở nên cực đoan với những ai chưa kịp thay đổi hoặc tự tách mình thành phe đối lập.",
-          "viec_ung_dung": "Xây dựng các mô hình đổi mới dựa trên sự tham gia tự nguyện và tôn trọng nhịp độ thích nghi đa dạng của từng nhóm trong cộng đồng."
+          "diem_sang": "Lứa sinh khi Diêm Vương tinh ở Bảo Bình (kéo dài hơn chục năm tới vài chục năm) cùng trải qua thay đổi lớn về công nghệ, cộng đồng và cách sống cùng nhau. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Diêm Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ mất cân bằng giữa cá nhân và tập thể.",
+          "viec_ung_dung": "Giữ tiếng nói riêng của mình trong nhóm."
         },
         "song_ngu": {
-          "diem_sang": "Bạn có khả năng chuyển hóa những khủng hoảng nội tâm sâu kín thành chiều sâu nghệ thuật, lòng trắc ẩn lớn và sự thấu hiểu con người không phán xét.",
-          "nen_de_y": "Khi đối diện với những cảm xúc ngầm quá mạnh, bạn dễ muốn thu mình hoàn toàn khỏi thế giới thực hoặc để tâm trạng chìm sâu lâu ngày.",
-          "viec_ung_dung": "Duy trì nhịp kết nối đều đặn với đời sống thực tế qua lao động chân tay, chăm sóc cây cối hoặc sáng tác có lịch trình cố định."
+          "diem_sang": "Lứa sinh khi Diêm Vương tinh ở Song Ngư (kéo dài hơn chục năm tới vài chục năm) cùng trải qua thay đổi lớn về đời sống tinh thần, lòng trắc ẩn và nghệ thuật. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Diêm Vương tinh và các góc chiếu của nó.",
+          "nen_de_y": "Dễ mờ ranh giới giữa mình và người.",
+          "viec_ung_dung": "Gắn lý tưởng với một việc làm cụ thể."
         }
       },
       "source_id": "bien_tap_chiem_tinh_2026",
@@ -822,64 +822,64 @@
       "vai_tro": "hướng bài học mới cần chủ động tập luyện để trưởng thành",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Hướng trưởng thành của bạn nằm ở việc tập đưa ra quyết định độc lập, dám nêu rõ nhu cầu cá nhân và chủ động bước lên mở đường mà không chờ sự đồng thuận tuyệt đối.",
-          "nen_de_y": "Do chưa quen tự mình đứng mũi chịu sào, đôi lúc bạn hoặc chần chừ nhìn sắc mặt người khác, hoặc đột ngột gắt lên khi thấy mình bị lấn át.",
-          "viec_ung_dung": "Mỗi tuần chủ động tự quyết định trọn vẹn một đầu việc cá nhân từ khâu chọn hướng đến khâu chịu trách nhiệm kết quả mà không hỏi xin sự phê duyệt không cần thiết."
+          "diem_sang": "Hướng nên tập: tự quyết, dám đứng ra vì điều mình muốn.",
+          "nen_de_y": "Dễ quen dựa vào ý người khác trước khi tự chọn.",
+          "viec_ung_dung": "Mỗi tuần tự quyết một việc nhỏ mà không hỏi ý ai."
         },
         "kim_nguu": {
-          "diem_sang": "Bạn phát triển vững chắc nhất khi học cách tự tay xây dựng nguồn lực tài chính minh bạch, trân trọng nhịp sống bình ổn và làm ra những sản phẩm hữu hình.",
-          "nen_de_y": "Khi mới tập sống chậm và tự chủ kinh tế, bạn dễ thấy sốt ruột trước những biến động kịch tính hoặc loay hoay chưa quen quản lý ngân sách đều đặn.",
-          "viec_ung_dung": "Duy trì thói quen trích lập quỹ tiết kiệm tự động hằng tháng và hoàn thành từng công việc thực tế với tốc độ vừa phải, chắc chắn."
+          "diem_sang": "Hướng nên tập: tự xây sự ổn định, sống chậm lại, trân trọng cái mình đang có.",
+          "nen_de_y": "Dễ cuốn theo biến động và chuyện của người khác.",
+          "viec_ung_dung": "Giữ một thói quen đều đặn mỗi ngày trong một tháng."
         },
         "song_tu": {
-          "diem_sang": "Bạn mở rộng tầm vóc khi rèn thái độ ham học hỏi như người mới bắt đầu, chịu khó lắng nghe câu chuyện đời thường và diễn đạt ý tưởng gần gũi, dễ hiểu.",
-          "nen_de_y": "Đôi khi bạn còn ngại hỏi những câu cơ bản vì sợ lộ sự chưa biết, hoặc nói quá tầm khái quát mà thiếu ví dụ thực tế sát sườn.",
-          "viec_ung_dung": "Trong mỗi cuộc họp hay trò chuyện, hãy tập đặt ít nhất hai câu hỏi mở để tìm hiểu góc nhìn của người đối diện trước khi đưa ra kết luận."
+          "diem_sang": "Hướng nên tập: tò mò, hỏi han, lắng nghe nhiều góc nhìn.",
+          "nen_de_y": "Dễ cho rằng mình đã biết đủ.",
+          "viec_ung_dung": "Hỏi thêm một câu trước khi đưa ra ý kiến."
         },
         "cu_giai": {
-          "diem_sang": "Bài học lớn giúp bạn cân bằng cuộc sống là cho phép mình bộc lộ tình cảm chân thành, dành thời gian chăm chút tổ ấm và vun đắp sự gắn kết thân tình.",
-          "nen_de_y": "Vì chưa quen mở lòng đón nhận sự chăm sóc, bạn dễ lấy lý do bận công việc ngoài xã hội để né tránh những khoảnh khắc gần gũi cảm xúc.",
-          "viec_ung_dung": "Chủ động sắp xếp bữa cơm hoặc buổi trò chuyện không nhìn màn hình điện thoại mỗi tuần với người thân và tập chia sẻ cả những lúc mình thấy mệt."
+          "diem_sang": "Hướng nên tập: chăm lo tổ ấm, cho phép mình nói ra cảm xúc.",
+          "nen_de_y": "Dễ chỉ lo công việc và vị trí.",
+          "viec_ung_dung": "Dành một buổi tối mỗi tuần cho gia đình."
         },
         "su_tu": {
-          "diem_sang": "Bạn trưởng thành mạnh mẽ khi dám bước ra ánh sáng thể hiện phong cách sáng tạo cá nhân, dẫn dắt bằng trái tim ấm áp và tự hào về thành quả chính đáng của mình.",
-          "nen_de_y": "Lúc mới tập đứng ở vị trí trung tâm, bạn dễ thấy ngượng ngùng muốn lùi về đám đông hoặc lo lắng quá mức về việc người khác đánh giá mình ra sao.",
-          "viec_ung_dung": "Đăng ký trình bày một dự án hoặc tác phẩm do chính bạn lên ý tưởng trước tập thể và đón nhận lời khen tặng bằng câu cảm ơn chân thành."
+          "diem_sang": "Hướng nên tập: thể hiện mình, sáng tạo, cho mình được vui chơi.",
+          "nen_de_y": "Dễ ẩn mình trong đám đông.",
+          "viec_ung_dung": "Trong tháng này nhận một vai đứng trước người khác."
         },
         "xu_nu": {
-          "diem_sang": "Hướng rèn luyện mang lại bước tiến thực chất cho bạn là đi vào chi tiết kỹ thuật, xây dựng kỷ luật sinh hoạt ngăn nắp và giải quyết từng bài toán cụ thể có ích.",
-          "nen_de_y": "Khi phải đối diện với các quy trình tỉ mỉ và lịch trình cố định, bạn dễ thấy gò bó hoặc muốn bỏ qua bước kiểm tra lỗi để làm theo cảm hứng.",
-          "viec_ung_dung": "Sử dụng bảng kiểm (checklist) cho các công việc hằng ngày và rèn thói quen hoàn tất gọn gàng từng việc nhỏ trước khi kết thúc giờ làm."
+          "diem_sang": "Hướng nên tập: làm việc có nếp, chăm chút chi tiết, giúp người bằng việc cụ thể.",
+          "nen_de_y": "Dễ lơ mơ, né việc thực tế.",
+          "viec_ung_dung": "Mỗi sáng viết danh sách việc trong ngày."
         },
         "thien_binh": {
-          "diem_sang": "Bạn phát triển toàn diện khi học nghệ thuật đồng hành cùng đối tác, biết đặt mình vào vị trí người khác và chia sẻ thành công trong tinh thần hợp tác công bằng.",
-          "nen_de_y": "Vì quen tự làm một mình theo ý riêng, bạn dễ thấy vướng víu khi phải bàn bạc thống nhất hoặc quên tham khảo ý kiến người cùng chịu trách nhiệm.",
-          "viec_ung_dung": "Trước khi chốt kế hoạch chung, hãy chủ động mời đối tác cùng đóng góp phương án và tìm điểm giao thoa có lợi cho cả hai phía."
+          "diem_sang": "Hướng nên tập: hợp tác, lắng nghe, cân nhắc ý người khác.",
+          "nen_de_y": "Dễ quen làm một mình theo ý mình.",
+          "viec_ung_dung": "Mời một người cùng làm việc tiếp theo."
         },
         "bo_cap": {
-          "diem_sang": "Chiều sâu trưởng thành của bạn mở ra khi dám bước qua vùng an toàn bề nổi để đón nhận những chuyển hóa sâu sắc, học cách tin tưởng và hợp lực tài nguyên cùng người khác.",
-          "nen_de_y": "Trước những thay đổi lớn đòi hỏi buông bỏ thói quen tích trữ cũ, bạn dễ co lại phòng thủ hoặc ngại đi sâu vào các vấn đề tâm lý phức tạp.",
-          "viec_ung_dung": "Tập hợp tác trong một dự án có chia sẻ nguồn lực chung minh bạch và dũng cảm cắt bỏ một thói quen cũ không còn giúp bạn phát triển."
+          "diem_sang": "Hướng nên tập: đi sâu, chia sẻ thật lòng, dám thay đổi.",
+          "nen_de_y": "Dễ bám vào sự an toàn quen thuộc.",
+          "viec_ung_dung": "Nói thật một điều vẫn giữ kín với người mình tin."
         },
         "nhan_ma": {
-          "diem_sang": "Bạn vươn xa nhất khi dám mở rộng tầm nhìn ra thế giới lớn, xây dựng hệ giá trị sống có định hướng rõ ràng và tin vào tiếng nói trực giác tổng hợp của mình.",
-          "nen_de_y": "Khi mới bước ra khỏi những mảnh thông tin vụn vặt hằng ngày, bạn dễ thấy choáng ngợp trước các quyết định chiến lược hoặc còn do dự chưa dám chốt hướng đi lớn.",
-          "viec_ung_dung": "Dành thời gian mỗi quý đọc một cuốn sách chuyên sâu hoặc tham gia một chuyến đi thực địa xa để mở rộng khung tham chiếu cho các kế hoạch dài hạn."
+          "diem_sang": "Hướng nên tập: nhìn xa, học điều lớn, sống theo niềm tin của mình.",
+          "nen_de_y": "Dễ mải mê chi tiết vụn vặt.",
+          "viec_ung_dung": "Mỗi quý đọc một cuốn sách giúp mở rộng tầm nhìn."
         },
         "ma_ket": {
-          "diem_sang": "Bạn cứng cáp lên rõ rệt khi chủ động nhận lãnh trách nhiệm nghề nghiệp, tự thiết lập kỷ luật làm việc bền bỉ và kiên nhẫn xây dựng uy tín bằng kết quả thực.",
-          "nen_de_y": "Lúc đối diện với áp lực công việc ngoài xã hội, bạn dễ nảy sinh tâm lý muốn tìm người che chở hoặc chùn bước trước những tiêu chuẩn đánh giá khắt khe.",
-          "viec_ung_dung": "Tự lập kế hoạch mục tiêu năm có các mốc nghiệm thu rõ ràng và kiên trì giải quyết từng vướng mắc bằng năng lực chuyên môn thay vì chờ sự ưu ái."
+          "diem_sang": "Hướng nên tập: nhận trách nhiệm, đặt mục tiêu dài hạn.",
+          "nen_de_y": "Dễ ở mãi trong vòng an toàn của gia đình.",
+          "viec_ung_dung": "Viết một mục tiêu nghề nghiệp cho năm năm tới."
         },
         "bao_binh": {
-          "diem_sang": "Hướng phát triển rộng mở của bạn là hòa nhịp vào các sáng kiến tập thể, dùng tài năng cá nhân để đóng góp cho mạng lưới cộng đồng và nhìn vấn đề một cách khách quan.",
-          "nen_de_y": "Đôi khi nhu cầu muốn được chú ý riêng hoặc giữ đặc quyền cá nhân làm bạn khó hòa mình vào cơ chế phối hợp bình đẳng của đội nhóm.",
-          "viec_ung_dung": "Tham gia điều phối một dự án nhóm hoặc hoạt động cộng đồng nơi mọi thành viên đều có tiếng nói đóng góp ngang nhau vì mục tiêu chung."
+          "diem_sang": "Hướng nên tập: góp sức cho nhóm, nghĩ cho lợi ích chung.",
+          "nen_de_y": "Dễ cần được chú ý riêng.",
+          "viec_ung_dung": "Tham gia một việc tập thể mà không cần đứng tên."
         },
         "song_ngu": {
-          "diem_sang": "Bạn tìm thấy sự bình an và sáng suốt khi học cách buông bớt áp lực kiểm soát chi tiết, tin vào dòng chảy trực giác và bồi đắp lòng bao dung với bản thân cũng như người khác.",
-          "nen_de_y": "Khi mọi việc không diễn ra khớp từng ly với kế hoạch giấy tờ, bạn dễ lo âu căng thẳng vì chưa quen với sự linh hoạt mềm mại.",
-          "viec_ung_dung": "Dành 15 phút cuối ngày cho nghệ thuật, âm nhạc hoặc thả lỏng tĩnh tâm mà không mang theo danh sách công việc cần sửa chữa."
+          "diem_sang": "Hướng nên tập: tin vào trực giác, bớt kiểm soát, sống cảm thông hơn.",
+          "nen_de_y": "Dễ soi xét và lo từng chi tiết.",
+          "viec_ung_dung": "Mỗi ngày dành mười phút ngồi yên, không làm gì."
         }
       },
       "source_id": "bien_tap_chiem_tinh_2026",
@@ -891,64 +891,64 @@
       "vai_tro": "vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Bạn có sẵn phản xạ quyết đoán, tinh thần độc lập tự xoay xở rất nhanh và không ngại xông pha khi gặp tình huống khẩn cấp.",
-          "nen_de_y": "Khi căng thẳng, bạn dễ quay về thói quen tự làm một mình theo ý riêng, gạt phăng ý kiến đóng góp của đối tác và làm tổn thương tinh thần hợp tác.",
-          "viec_ung_dung": "Giữ sự nhạy bén hành động làm vốn quý, nhưng hãy tập dừng lại một nhịp để bàn bạc và chia sẻ quyền quyết định với người đồng hành."
+          "diem_sang": "Vốn quen sẵn có: tự lập, nhanh nhẹn, dám làm một mình.",
+          "nen_de_y": "Nếu chỉ dựa mãi vào vốn này, dễ thành làm một mình và ít nghe người khác.",
+          "viec_ung_dung": "Dùng sự nhanh nhẹn để mở việc, rồi mời người khác cùng làm."
         },
         "kim_nguu": {
-          "diem_sang": "Bạn sở hữu năng lực tạo dựng sự ổn định vật chất tự nhiên, biết trân quý những giá trị thực tế và giữ được sự điềm tĩnh trước biến động.",
-          "nen_de_y": "Nếu quá bám víu vào vùng an toàn tài sản hoặc từ chối mọi rủi ro đổi mới, bạn dễ tự khóa mình trong sự trì trệ và ngại chia sẻ nguồn lực.",
-          "viec_ung_dung": "Dùng nền tảng thực tế vững vàng làm bệ phóng để dám bước vào những cuộc hợp tác sâu sắc và đón nhận các bước chuyển mình cần thiết."
+          "diem_sang": "Vốn quen sẵn có: giữ của, bền bỉ, sống ổn định.",
+          "nen_de_y": "Nếu chỉ dựa mãi vào vốn này, dễ ngại thay đổi cả khi cần thay đổi.",
+          "viec_ung_dung": "Dùng sự bền để giữ nền, rồi thử một thay đổi có chủ đích."
         },
         "song_tu": {
-          "diem_sang": "Bạn có sẵn sự linh hoạt ngôn từ, khả năng nắm bắt thông tin nhanh nhạy và dễ dàng bắt chuyện với nhiều kiểu người khác nhau.",
-          "nen_de_y": "Lúc gặp bài toán lớn cần định hướng dài hạn, bạn dễ trốn vào việc thu thập thêm hàng loạt mẩu tin vụn vặt hoặc bàn luận vòng vo để né việc chốt lập trường.",
-          "viec_ung_dung": "Sau khi đã gom đủ thông tin cơ bản, hãy tạm đóng các tab tra cứu để tự đúc kết thành một định hướng hành động xuyên suốt và theo đuổi tới cùng."
+          "diem_sang": "Vốn quen sẵn có: ăn nói, xoay xở, biết nhiều thứ.",
+          "nen_de_y": "Nếu chỉ dựa mãi vào vốn này, dễ biết rộng mà thiếu một hướng đi mình tin.",
+          "viec_ung_dung": "Dùng vốn hiểu biết để phục vụ một mục tiêu lớn."
         },
         "cu_giai": {
-          "diem_sang": "Bạn có sẵn sự nhạy cảm tình cảm, lòng trắc ẩn tự nhiên với người thân và khả năng nhận biết nhanh bầu không khí cảm xúc xung quanh.",
-          "nen_de_y": "Khi gặp áp lực ngoài xã hội, bạn dễ rút lui về vỏ ốc quen thuộc, để cảm xúc tủi thân chi phối hoặc tìm kiếm sự bao bọc thay vì đứng ra giải quyết.",
-          "viec_ung_dung": "Mang sự thấu hiểu con người vào phong thái làm việc chuyên nghiệp, tự đứng vững trên đôi chân kỷ luật và chịu trách nhiệm rõ ràng ngoài tập thể."
+          "diem_sang": "Vốn quen sẵn có: chăm sóc, gắn bó với gia đình.",
+          "nen_de_y": "Nếu chỉ dựa mãi vào vốn này, dễ thu mình, ngại bước ra ngoài.",
+          "viec_ung_dung": "Mang sự chu đáo ấy vào công việc chung."
         },
         "su_tu": {
-          "diem_sang": "Bạn có sẵn phong thái tự tin, sức hút cá nhân nổi bật và khả năng khuấy động nguồn cảm hứng sáng tạo một cách tự nhiên.",
-          "nen_de_y": "Khi công việc đòi hỏi sự phối hợp bình đẳng, bạn dễ rơi vào phản xạ muốn mọi thứ xoay quanh cái tôi của mình hoặc tự ái khi không được biệt đãi.",
-          "viec_ung_dung": "Đem nguồn nhiệt huyết ấm áp sẵn có hòa vào mạng lưới tập thể, lấy thành tựu chung của cộng đồng làm niềm vui thay vì chỉ tìm kiếm hào quang riêng."
+          "diem_sang": "Vốn quen sẵn có: tự tin, thích được chú ý.",
+          "nen_de_y": "Nếu chỉ dựa mãi vào vốn này, dễ cần được công nhận quá nhiều.",
+          "viec_ung_dung": "Dùng sự tự tin để nâng người khác lên."
         },
         "xu_nu": {
-          "diem_sang": "Bạn có sẵn con mắt phân tích chi tiết sắc sảo, thói quen làm việc ngăn nắp và kỹ năng xử lý các quy trình kỹ thuật một cách thuần thục.",
-          "nen_de_y": "Khi đứng trước những tình huống chưa có tiền lệ, bạn dễ co cụm vào việc bắt lỗi tiểu tiết, tự phê bình gay gắt và đánh mất bức tranh cảm thông rộng lớn.",
-          "viec_ung_dung": "Biết dừng việc chỉnh sửa chi tiết ở ngưỡng vừa đủ để mở lòng đón nhận trực giác sáng tạo và bao dung hơn với những nét chưa hoàn hảo."
+          "diem_sang": "Vốn quen sẵn có: cẩn thận, chu toàn, giỏi việc.",
+          "nen_de_y": "Nếu chỉ dựa mãi vào vốn này, dễ lo nghĩ và soi lỗi quá mức.",
+          "viec_ung_dung": "Làm chu toàn rồi buông khi việc đã đủ tốt."
         },
         "thien_binh": {
-          "diem_sang": "Bạn có sẵn sự khéo léo ngoại giao, khả năng lắng nghe đa chiều và khiếu thẩm mỹ tạo được thiện cảm nhanh chóng trong giao tiếp.",
-          "nen_de_y": "Lúc cần đưa ra quyết định dứt khoát, bạn dễ trượt vào thói quen chiều lòng mọi phía, dựa dẫm vào ý kiến người khác và đánh mất tiếng nói độc lập.",
-          "viec_ung_dung": "Dùng sự lịch thiệp sẵn có để diễn đạt rõ ràng lập trường riêng của mình, dám tự quyết định và tự chịu trách nhiệm ngay cả khi có người không đồng tình."
+          "diem_sang": "Vốn quen sẵn có: khéo léo, dễ hoà hợp với người khác.",
+          "nen_de_y": "Nếu chỉ dựa mãi vào vốn này, dễ quên mất mình muốn gì.",
+          "viec_ung_dung": "Dùng sự khéo léo để nói rõ điều mình cần."
         },
         "bo_cap": {
-          "diem_sang": "Bạn có sẵn trực giác tâm lý sắc bén, sức chịu đựng khủng hoảng cao và khả năng nhìn thấu những động cơ ẩn sâu bên dưới bề mặt.",
-          "nen_de_y": "Khi bất an, bạn dễ quay về phản xạ nghi kỵ, giữ bí mật phòng thủ hoặc tự đẩy mình vào những cuộc đấu trí căng thẳng không cần thiết.",
-          "viec_ung_dung": "Chuyển hóa chiều sâu tâm lý thành sự điềm tĩnh xây dựng những giá trị bình dị, minh bạch và tận hưởng nhịp sống ổn định, nhẹ nhõm hơn."
+          "diem_sang": "Vốn quen sẵn có: nhạy bén, chịu đựng giỏi lúc gặp chuyện khó.",
+          "nen_de_y": "Nếu chỉ dựa mãi vào vốn này, dễ quen sống căng, khó thả lỏng.",
+          "viec_ung_dung": "Giữ sự bền bỉ, nhưng tập tận hưởng những lúc yên."
         },
         "nhan_ma": {
-          "diem_sang": "Bạn có sẵn tầm nhìn khái quát rộng, tinh thần phóng khoáng ưa tự do và khả năng nắm bắt nhanh các triết lý hoặc xu hướng lớn.",
-          "nen_de_y": "Khi công việc đòi hỏi sự tỉ mỉ hoặc đối thoại sát sườn, bạn dễ nói lý thuyết đại khái từ trên cao, ngại nghe câu chuyện chi tiết của người bên cạnh.",
-          "viec_ung_dung": "Đưa những ý tưởng lớn xuống mặt đất bằng cách kiên nhẫn lắng nghe phản hồi cụ thể, kiểm chứng từng chi tiết nhỏ và trao đổi hai chiều bình đẳng."
+          "diem_sang": "Vốn quen sẵn có: lạc quan, thích tự do, có niềm tin.",
+          "nen_de_y": "Nếu chỉ dựa mãi vào vốn này, dễ nói lý thuyết mà thiếu chi tiết.",
+          "viec_ung_dung": "Lấy niềm tin làm động lực, rồi kiểm từng bước cụ thể."
         },
         "ma_ket": {
-          "diem_sang": "Bạn có sẵn tính kỷ luật, năng lực tổ chức quản trị chặt chẽ và thói quen tự gánh vác trách nhiệm nặng nề với vẻ ngoài cứng cỏi.",
-          "nen_de_y": "Lúc gặp chuyện buồn hoặc quá tải, bạn dễ khóa chặt cảm xúc sau lớp áo nghĩa vụ, đánh giá mọi thứ qua thước đo thành tích khô khan và ngại gần gũi người thân.",
-          "viec_ung_dung": "Dùng bản lĩnh vững vàng để bảo vệ khoảng thời gian ấm áp bên gia đình, cho phép mình được mềm mỏng và chia sẻ tâm tư thật với người thương yêu."
+          "diem_sang": "Vốn quen sẵn có: có trách nhiệm, quen gánh vác.",
+          "nen_de_y": "Nếu chỉ dựa mãi vào vốn này, dễ đặt việc lên trước cảm xúc.",
+          "viec_ung_dung": "Giữ sự chững chạc, nhưng dành chỗ cho gia đình."
         },
         "bao_binh": {
-          "diem_sang": "Bạn có sẵn tư duy khách quan độc lập, khả năng nhìn nhận vấn đề ở quy mô hệ thống và dễ dàng hòa nhập vào các mạng lưới tập thể đa dạng.",
-          "nen_de_y": "Khi cần thể hiện nhiệt huyết cá nhân hoặc gắn kết tình cảm nồng ấm, bạn dễ giữ khoảng cách lạnh lùng, đứng ngoài quan sát như một người bình luận.",
-          "viec_ung_dung": "Kết hợp tầm nhìn tập thể với sự dấn thân trọn vẹn bằng cả trái tim, dám đứng ra nhận vai trò dẫn dắt sáng tạo và trao đi hơi ấm chân thành."
+          "diem_sang": "Vốn quen sẵn có: độc lập, quen làm việc nhóm.",
+          "nen_de_y": "Nếu chỉ dựa mãi vào vốn này, dễ đứng ngoài cảm xúc của chính mình.",
+          "viec_ung_dung": "Dùng vốn làm việc nhóm cho điều mình thật sự thích."
         },
         "song_ngu": {
-          "diem_sang": "Bạn có sẵn lòng cảm thông sâu sắc, trí tưởng tượng phong phú và khả năng cảm nhận tinh tế những chuyển động vô hình trong tâm hồn.",
-          "nen_de_y": "Khi gặp áp lực thực tế đòi hỏi giải quyết rõ ràng, bạn dễ buông xuôi theo hoàn cảnh, mơ màng né tránh lịch trình hoặc tự coi mình là người chịu thiệt.",
-          "viec_ung_dung": "Neo giữ tâm hồn nhạy cảm bằng những thói quen lao động ngăn nắp hằng ngày, phân tích rõ từng bước thực hiện và giữ ranh giới trách nhiệm minh bạch."
+          "diem_sang": "Vốn quen sẵn có: đồng cảm, giàu trực giác.",
+          "nen_de_y": "Nếu chỉ dựa mãi vào vốn này, dễ mơ màng, khó bám việc.",
+          "viec_ung_dung": "Nghe trực giác, rồi viết ra kế hoạch cụ thể."
         }
       },
       "source_id": "bien_tap_chiem_tinh_2026",
@@ -960,64 +960,64 @@
       "vai_tro": "điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Điểm nhạy cảm về quyền tự quyết giúp bạn thấu hiểu sâu sắc những ai đang loay hoay tìm tiếng nói riêng và trở thành người khích lệ bản lĩnh tự lập rất có lực.",
-          "nen_de_y": "Đôi khi bạn tự nghi ngờ quyền được ưu tiên nhu cầu của chính mình, hoặc ngược lại, gồng lên tranh đấu quá mức chỉ để chứng tỏ sự tồn tại.",
-          "viec_ung_dung": "Thực hành khẳng định mong muốn cá nhân bằng giọng điệu bình tĩnh mỗi ngày và dùng trải nghiệm vượt qua sự rụt rè để hướng dẫn người mới vào nghề."
+          "diem_sang": "Điểm dễ chạnh lòng: cảm giác mình chưa đủ can đảm hoặc chưa được phép đứng ra. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
+          "nen_de_y": "Dễ rụt rè, hoặc ngược lại gồng mạnh mẽ quá mức.",
+          "viec_ung_dung": "Giúp người khác dám nói tiếng nói của họ — đó cũng là cách bạn nhẹ lòng hơn."
         },
         "kim_nguu": {
-          "diem_sang": "Sự từng trải qua những nỗi lo về giá trị bản thân và sự an toàn vật chất giúp bạn trở thành người cố vấn rất thực tế về quản lý nguồn lực và xây dựng tay nghề.",
-          "nen_de_y": "Dù đã tích lũy được thành quả, đôi lúc bạn vẫn thoáng cảm giác chưa đủ vững vàng hoặc tự đánh giá thấp giá trị sức lao động của mình.",
-          "viec_ung_dung": "Định giá công sức của bản thân dựa trên chất lượng thực tế mang lại và chia sẻ kinh nghiệm quản lý tài chính giản dị, bền vững cho những người đang lập nghiệp."
+          "diem_sang": "Điểm dễ chạnh lòng: cảm giác không đủ, lo về tiền hay về giá trị của bản thân. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
+          "nen_de_y": "Dễ bám vào đồ vật, tiền bạc để thấy yên tâm.",
+          "viec_ung_dung": "Ghi ra ba điều mình có mà tiền không mua được."
         },
         "song_tu": {
-          "diem_sang": "Những trăn trở về việc liệu mình có được lắng nghe và hiểu đúng giúp bạn rèn được khả năng diễn đạt cực kỳ thấu đáo, biết gỡ rối giao tiếp cho người khác.",
-          "nen_de_y": "Bạn dễ nhạy cảm khi ý kiến của mình bị ngắt lời hoặc tự trách mình chưa đủ sắc sảo trong các cuộc tranh luận nhanh.",
-          "viec_ung_dung": "Viết ra những suy nghĩ tâm huyết theo cấu trúc rõ ràng và mở các buổi hướng dẫn, giải thích kiến thức cho những người đang gặp rào cản trong học tập."
+          "diem_sang": "Điểm dễ chạnh lòng: lo mình nói chưa hay, học chưa đủ. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
+          "nen_de_y": "Dễ ngại hỏi vì sợ bị cho là kém.",
+          "viec_ung_dung": "Giải thích cho người khác điều mình từng thấy khó học."
         },
         "cu_giai": {
-          "diem_sang": "Chiều sâu nhạy cảm về cảm giác thuộc về một mái ấm giúp bạn có khả năng tạo dựng không gian an toàn, nâng đỡ những tâm hồn đang thiếu điểm tựa tình cảm.",
-          "nen_de_y": "Vết xước từ những hiểu lầm gia đình trong quá khứ dễ làm bạn chạnh lòng khi thấy mình chăm lo nhiều mà chưa nhận lại sự thấu hiểu tương xứng.",
-          "viec_ung_dung": "Học cách tự vỗ về và chăm sóc chính mình như chăm một người thân quý, đồng thời xây dựng những cộng đồng nhỏ ấm áp nhưng có ranh giới tôn trọng nhau."
+          "diem_sang": "Điểm dễ chạnh lòng: cảm giác thiếu chỗ dựa, thiếu được chăm sóc. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
+          "nen_de_y": "Dễ lấy việc chăm người khác thay cho việc nhận sự chăm sóc.",
+          "viec_ung_dung": "Mỗi ngày tự chăm mình một việc nhỏ."
         },
         "su_tu": {
-          "diem_sang": "Trải nghiệm vượt qua nỗi ngại ngùng khi bộc lộ tài năng giúp bạn trở thành người thầy tuyệt vời trong việc khơi dậy sự tự tin sáng tạo ở người khác.",
-          "nen_de_y": "Bạn dễ thấy hẫng hụt khi tâm huyết sáng tạo không được ghi nhận ngay hoặc sợ bị chê cười nếu thể hiện niềm vui quá hồn nhiên.",
-          "viec_ung_dung": "Sáng tạo vì niềm vui tự thân trong quá trình làm ra tác phẩm và chủ động khen ngợi, nâng đỡ những tài năng trẻ đang còn rụt rè chưa dám bước ra."
+          "diem_sang": "Điểm dễ chạnh lòng: lo mình không được nhìn thấy, không có gì đặc biệt. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
+          "nen_de_y": "Dễ ngại thể hiện, hoặc cần được khen nhiều.",
+          "viec_ung_dung": "Khen thật lòng thành quả của người khác."
         },
         "xu_nu": {
-          "diem_sang": "Sự thấu hiểu nỗi mệt mỏi của tâm lý cầu toàn giúp bạn rất giỏi thiết kế các quy trình làm việc vừa hiệu quả vừa nhẹ nhàng, hỗ trợ phục hồi sức khỏe thực tế.",
-          "nen_de_y": "Khi gặp chuyện bất như ý, bạn dễ quay lại chì chiết từng thiếu sót nhỏ của bản thân hoặc lo âu quá mức rằng mình chưa đủ hữu ích.",
-          "viec_ung_dung": "Tập ghi nhận những phần việc đã hoàn thành tốt ở mức 80% và dùng kinh nghiệm sắp xếp đời sống khoa học để tư vấn gỡ rối cho những người đang quá tải."
+          "diem_sang": "Điểm dễ chạnh lòng: lo mình chưa đủ tốt, chưa đủ có ích. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
+          "nen_de_y": "Dễ tự trách vì những sai sót nhỏ.",
+          "viec_ung_dung": "Giúp người khác bằng chính sự kiên nhẫn bạn mong được nhận."
         },
         "thien_binh": {
-          "diem_sang": "Những bài học sâu sắc từ các mối quan hệ giúp bạn có con mắt tinh tường trong việc hòa giải bất đồng và hướng dẫn người khác xây dựng sự hợp tác lành mạnh.",
-          "nen_de_y": "Nỗi sợ sự chia cắt hoặc xung đột trực diện dễ khiến bạn nhẫn nhịn chịu thiệt thòi trong một thời gian dài trước khi lên tiếng.",
-          "viec_ung_dung": "Thực hành nêu rõ quan điểm bất đồng ngay từ khi việc còn nhỏ trên tinh thần tôn trọng, qua đó làm mẫu về một mối quan hệ vừa hòa thuận vừa chân thật."
+          "diem_sang": "Điểm dễ chạnh lòng: lo bị bỏ rơi, khó cân bằng giữa mình và người. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
+          "nen_de_y": "Dễ chiều người để được thương.",
+          "viec_ung_dung": "Giúp người khác tìm lời nói công bằng khi có mâu thuẫn."
         },
         "bo_cap": {
-          "diem_sang": "Trải nghiệm đi qua những cuộc khủng hoảng niềm tin hoặc mất mát giúp bạn có bản lĩnh đồng hành vững vàng cùng người khác trong những giai đoạn chuyển giao khó khăn nhất.",
-          "nen_de_y": "Điểm nhạy cảm về sự phản bội dễ khiến bạn dựng hàng rào thử thách quá khắc nghiệt trước khi dám trao gửi sự tin cậy.",
-          "viec_ung_dung": "Chuyển hóa sự sắc sảo tâm lý thành công việc cố vấn, nghiên cứu chiều sâu hoặc hỗ trợ khủng hoảng với nguyên tắc bảo mật và tôn trọng ranh giới."
+          "diem_sang": "Điểm dễ chạnh lòng: khó tin người, lo bị phụ lòng. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
+          "nen_de_y": "Dễ giữ khoảng cách để tự bảo vệ.",
+          "viec_ung_dung": "Lắng nghe người đang gặp chuyện khó mà không phán xét."
         },
         "nhan_ma": {
-          "diem_sang": "Hành trình tự chất vấn và tìm kiếm ý nghĩa sống thật sự giúp bạn trở thành người truyền đạt tri thức rất gần gũi, không giáo điều và khơi mở tư duy tự do.",
-          "nen_de_y": "Có những giai đoạn bạn dễ thấy hoài nghi về định hướng lớn hoặc cảm thấy lạc lõng khi niềm tin tâm huyết của mình khác biệt với số đông.",
-          "viec_ung_dung": "Đúc kết những bài học từ trải nghiệm thực tế thành các câu chuyện chia sẻ chân thành, giúp người học tự tìm ra la bàn giá trị của riêng họ."
+          "diem_sang": "Điểm dễ chạnh lòng: hoang mang về niềm tin và ý nghĩa của việc mình làm. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
+          "nen_de_y": "Dễ bám chặt một học thuyết, hoặc nghi ngờ mọi thứ.",
+          "viec_ung_dung": "Chia sẻ với người trẻ những câu hỏi mình từng trăn trở."
         },
         "ma_ket": {
-          "diem_sang": "Sự thấu hiểu áp lực của chiếc áo thành tích và trách nhiệm giúp bạn trở thành nhà quản lý hoặc cố vấn sự nghiệp vừa nghiêm túc vừa giàu lòng cảm thông.",
-          "nen_de_y": "Bạn dễ tự đặt lên vai mình những tiêu chuẩn thành đạt quá nặng nề và cảm thấy có lỗi mỗi khi cho phép bản thân nghỉ ngơi hoặc phạm sai sót nhỏ.",
-          "viec_ung_dung": "Xây dựng thước đo thành công dựa trên sự trưởng thành bền vững và hướng dẫn cấp dưới hoặc đồng nghiệp cách lập kế hoạch vừa đạt mục tiêu vừa giữ được sức khỏe."
+          "diem_sang": "Điểm dễ chạnh lòng: áp lực phải thành công, sợ thất bại trước người khác. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
+          "nen_de_y": "Dễ làm quá sức để được công nhận.",
+          "viec_ung_dung": "Hướng dẫn người mới vào nghề bằng chính bài học của mình."
         },
         "bao_binh": {
-          "diem_sang": "Cảm giác từng thấy mình khác biệt giữa đám đông giúp bạn rất nhạy trong việc kết nối những cá nhân độc đáo, xây dựng tập thể tôn trọng sự đa dạng.",
-          "nen_de_y": "Đôi lúc bạn vừa mong muốn hòa nhập cùng cộng đồng lại vừa sợ mất đi bản sắc riêng, dẫn tới thái độ đứng bên lề quan sát.",
-          "viec_ung_dung": "Dùng chính góc nhìn độc đáo của bạn để đóng góp giải pháp mới cho tập thể và tạo cầu nối giúp những thành viên trầm lặng trong nhóm được lắng nghe."
+          "diem_sang": "Điểm dễ chạnh lòng: cảm giác lạc loài, khác số đông. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
+          "nen_de_y": "Dễ tự tách mình khỏi nhóm.",
+          "viec_ung_dung": "Tạo chỗ để những người \"khác\" cũng thấy mình thuộc về."
         },
         "song_ngu": {
-          "diem_sang": "Độ nhạy cảm sâu sắc trước những nỗi buồn nhân sinh giúp bạn có khả năng xoa dịu tinh thần qua nghệ thuật, sự lắng nghe tĩnh lặng và lòng bao dung rộng mở.",
-          "nen_de_y": "Khi không giữ được ranh giới rõ ràng, bạn dễ cảm thấy kiệt sức vì ôm trọn sự hoang mang của môi trường xung quanh vào lòng.",
-          "viec_ung_dung": "Rèn thói quen quay về neo giữ hơi thở và nhịp sinh hoạt thực tế sau mỗi lần lắng nghe hỗ trợ người khác, để lòng trắc ẩn luôn đi kèm sự tỉnh táo vững vàng."
+          "diem_sang": "Điểm dễ chạnh lòng: dễ thấm nỗi buồn của người khác, khó đặt ranh giới. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
+          "nen_de_y": "Dễ thấy mình phải gỡ nỗi đau của mọi người rồi cạn sức.",
+          "viec_ung_dung": "Giúp người bằng sự đồng cảm, nhưng giữ giờ riêng cho mình."
         }
       },
       "source_id": "bien_tap_chiem_tinh_2026",

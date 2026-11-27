@@ -5,6 +5,7 @@
 import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { z } from "zod";
 import { MANG_THE, TheGon } from "@/lib/the-hoi";
+import { CUNG_12 } from "@/lib/the-sao";
 
 export const NoiDungMa = z.object({
   v: z.literal(1),
@@ -493,6 +494,90 @@ export function docMaBaLa(ma: string, homNay = new Date()): NoiDungMaBaLa | null
     if (!Array.isArray(g) || g.length !== 7) return null;
     const nd = NoiDungMaBaLa.parse({ v: g[0], t: g[1], l: g[2] ? [g[2], g[3]] : null, n: g[4], q: g[5] || null,
       d: new Date(NGAY_GOC + Number(g[6]) * 86_400_000).toISOString().slice(0, 10) });
+    return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
+  } catch {
+    return null;
+  }
+}
+
+// ---------------------------------------------------------------- CHANG-4: thẻ "Bản đồ sao của tôi" (Chiêm tinh)
+// Mã riêng miền "sao|". Chỉ mang: tên hiển thị (tuỳ chọn), cung Mặt Trời / Mặt Trăng / Mọc (mã + tên engine trả — máy chủ
+// gọi engine với ngày sinh rồi ký; client không tự khai cung), mã biến thể câu mời. Cung chưa chắc (chưa rõ giờ sinh mà
+// trong ngày đổi cung; không giờ sinh → không có cung Mọc) = null. KHÔNG ngày giờ sinh, nơi sinh, độ hoàng đạo.
+const CungThe = z.tuple([z.enum(CUNG_12), z.string().trim().min(1).max(16)]);
+export const NoiDungMaSao = z.object({
+  v: z.literal(1),
+  t: z.string().trim().max(24),
+  s: CungThe,
+  m: CungThe.nullable(),
+  a: CungThe.nullable(),
+  b: z.number().int().min(0).max(2),
+  d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+});
+export type NoiDungMaSao = z.infer<typeof NoiDungMaSao>;
+
+const kySao = (than: string) => b64u(createHmac("sha256", khoa()).update(`sao|${than}`).digest()).slice(0, 16);
+const goiCung = (c: [string, string] | null) => (c ? [CUNG_12.indexOf(c[0] as (typeof CUNG_12)[number]), c[1]] : 0);
+const moCung = (g: unknown) => (Array.isArray(g) && g.length === 2 ? [CUNG_12[Number(g[0])], g[1]] : null);
+
+/** Gói: [1, t, [cung MT, tên], [cung MTr, tên]|0, [cung Mọc, tên]|0, b, số ngày từ 1/1/2026]. */
+export function kyMaSao(nd: Omit<NoiDungMaSao, "v" | "d">, homNay = new Date()): string {
+  const x = NoiDungMaSao.parse({ ...nd, v: 1, d: homNay.toISOString().slice(0, 10) });
+  const goi = [1, x.t, goiCung(x.s), goiCung(x.m), goiCung(x.a), x.b, Math.round((Date.parse(x.d) - NGAY_GOC) / 86_400_000)];
+  const than = b64u(Buffer.from(JSON.stringify(goi), "utf8"));
+  return `${than}.${kySao(than)}`;
+}
+
+export function docMaSao(ma: string, homNay = new Date()): NoiDungMaSao | null {
+  const [than, chu_ky] = ma.split(".");
+  if (!than || !chu_ky || ma.length > 400) return null;
+  const a = Buffer.from(chu_ky), b = Buffer.from(kySao(than));
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  try {
+    const g = JSON.parse(Buffer.from(than, "base64url").toString("utf8")) as unknown[];
+    if (!Array.isArray(g) || g.length !== 7) return null;
+    const nd = NoiDungMaSao.parse({ v: g[0], t: g[1], s: moCung(g[2]), m: moCung(g[3]), a: moCung(g[4]), b: g[5],
+      d: new Date(NGAY_GOC + Number(g[6]) * 86_400_000).toISOString().slice(0, 10) });
+    return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
+  } catch {
+    return null;
+  }
+}
+
+// ---------------------------------------------------------------- CHANG-4: thẻ "Hợp đôi chiêm tinh"
+// Mã riêng miền "sao2|". Chỉ mang: tên hiển thị NGƯỜI GỬI (tuỳ chọn — người kia luôn là "người ấy", như thẻ hai người),
+// cung Mặt Trời của hai người (người kia chưa chắc cung → null) và 1–3 chủ đề tương tác engine nêu (mã + tên). Không điểm
+// số, không ngày giờ / nơi sinh của ai, không lời đọc từng góc chiếu.
+export const NoiDungMaSao2 = z.object({
+  v: z.literal(1),
+  a: z.string().trim().max(24),
+  s: CungThe,
+  k: CungThe.nullable(),
+  c: z.array(z.tuple([z.string().regex(/^[a-z_]{3,30}$/), z.string().trim().min(1).max(80)])).min(1).max(3),
+  d: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+});
+export type NoiDungMaSao2 = z.infer<typeof NoiDungMaSao2>;
+
+const kySao2 = (than: string) => b64u(createHmac("sha256", khoa()).update(`sao2|${than}`).digest()).slice(0, 16);
+
+/** Gói: [1, a, [cung MT người gửi, tên], [cung MT người ấy, tên]|0, [[mã chủ đề, tên]…], số ngày từ 1/1/2026]. */
+export function kyMaSao2(nd: Omit<NoiDungMaSao2, "v" | "d">, homNay = new Date()): string {
+  const x = NoiDungMaSao2.parse({ ...nd, v: 1, d: homNay.toISOString().slice(0, 10) });
+  const goi = [1, x.a, goiCung(x.s), goiCung(x.k), x.c, Math.round((Date.parse(x.d) - NGAY_GOC) / 86_400_000)];
+  const than = b64u(Buffer.from(JSON.stringify(goi), "utf8"));
+  return `${than}.${kySao2(than)}`;
+}
+
+export function docMaSao2(ma: string, homNay = new Date()): NoiDungMaSao2 | null {
+  const [than, chu_ky] = ma.split(".");
+  if (!than || !chu_ky || ma.length > 900) return null;
+  const a = Buffer.from(chu_ky), b = Buffer.from(kySao2(than));
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  try {
+    const g = JSON.parse(Buffer.from(than, "base64url").toString("utf8")) as unknown[];
+    if (!Array.isArray(g) || g.length !== 6) return null;
+    const nd = NoiDungMaSao2.parse({ v: g[0], a: g[1], s: moCung(g[2]), k: moCung(g[3]), c: g[4],
+      d: new Date(NGAY_GOC + Number(g[5]) * 86_400_000).toISOString().slice(0, 10) });
     return (homNay.getTime() - Date.parse(nd.d)) / 86_400_000 <= HAN_NGAY ? nd : null;
   } catch {
     return null;

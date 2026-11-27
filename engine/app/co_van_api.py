@@ -23,6 +23,14 @@ class NhaCoVanIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
     do_huong: float = Field(..., ge=0.0, lt=360.0)
     nam_xay: int | None = Field(default=None, ge=1864, le=2043)
+    vai: Literal["mat_bang", "nha_o"] = Field(
+        default="nha_o", description="Hướng này là của CỬA HÀNG / mặt bằng kinh doanh hay của NHÀ Ở (câu hỏi kinh doanh không dùng hướng nhà ở)")
+
+
+class MatBangCoVanIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    do_huong: float = Field(..., ge=0.0, lt=360.0)
+    nam_xay: int | None = Field(default=None, ge=1864, le=2043)
 
 
 class DoiTacCoVanIn(BaseModel):
@@ -42,6 +50,7 @@ class CoVanIn(BaseModel):
     do_tin_gio: Literal["exact", "approx", "unknown"] = "unknown"
     noi_sinh: str | None = Field(default=None, max_length=60)
     nha: NhaCoVanIn | None = None
+    mat_bang: MatBangCoVanIn | None = Field(default=None, description="Hướng mặt tiền CỬA HÀNG (hồ sơ cửa hàng / đo riêng) — câu hỏi kinh doanh dùng cái này")
     doi_tac: DoiTacCoVanIn | None = None
     che_do: Literal["doi_song", "kinh_doanh"] = "doi_song"
     ngay_xem: dt.date | None = None
@@ -69,6 +78,7 @@ def api_co_van(inp: CoVanIn) -> dict:
             do_tin_gio=inp.do_tin_gio if inp.gio_sinh else "unknown",
             noi_sinh=inp.noi_sinh,
             nha=inp.nha.model_dump() if inp.nha else None,
+            mat_bang=inp.mat_bang.model_dump() if inp.mat_bang else None,
             doi_tac=inp.doi_tac.model_dump() if inp.doi_tac else None,
             che_do=inp.che_do,
             ngay_xem=inp.ngay_xem,
@@ -122,3 +132,14 @@ def api_co_van_su_vu(inp: SuVuIn) -> dict:
         raise HTTPException(422, detail=str(e)) from e
     return {"engine_version": ENGINE_VERSION, **kq}
 
+
+
+class NhanDienIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    cau_hoi: str = Field(..., min_length=3, max_length=500)
+
+
+@router.post("/v1/co-van/nhan-dien")
+def api_co_van_nhan_dien(inp: NhanDienIn) -> dict:
+    """Khung hỏi đáp hỏi: câu vừa hỏi có phải một quyết định Cố vấn đọc được không (không ngày sinh, không lưu)."""
+    return cv.nhan_dien(inp.cau_hoi)

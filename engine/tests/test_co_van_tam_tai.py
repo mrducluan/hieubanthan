@@ -69,10 +69,11 @@ def test_duoi_16_tuoi_chuyen_huong():
 
 def test_khong_muc_gop_va_nguon_trung_thuc_khi_chua_co_gio():
     d = _goi("Năm nay có nên mua nhà không").json()
-    assert "ket_luan_5_giay" not in d and "nhip" not in d["tong_quan"]
-    nhan, dia = d["ba_tru_tam_tai"]["nhan"], d["ba_tru_tam_tai"]["dia"]
+    assert "ket_luan_5_giay" not in d and "tong_quan" not in d
+    nhan = d["ba_tru_tam_tai"]["nhan"]
     assert nhan["muc"] is None and "Thần số" in nhan["nguon"] and "Bát tự" not in nhan["nguon"].split("(")[0]
-    assert dia["muc"] is None
+    # CV-2: chưa có hướng nhà → không bịa mức Địa, mà nói thiếu gì (trụ Địa vắng mặt)
+    assert "dia" not in d["ba_tru_tam_tai"] and d["can_bo_sung"]["loai"] == "nha_o"
 
 
 def test_co_gio_muc_lay_dung_chuong_bao_cao_va_khong_chep_loi_chuong_tra_phi():
@@ -87,12 +88,16 @@ def test_co_gio_muc_lay_dung_chuong_bao_cao_va_khong_chep_loi_chuong_tra_phi():
 
 
 def test_hai_muc_khac_nhau_thi_noi_ro_khong_chon_ben():
-    # quét vài ngày sinh có giờ: khi hai trụ có mức khác nhau, câu tổng quan nói rõ "khác nhau"
-    for ns in ("1990-05-15", "1985-11-08", "1978-02-20", "1995-07-30"):
-        d = _goi("Tôi muốn bỏ việc ra mở quán cà phê năm nay có nên không", ns=ns, gio_sinh="08:30", do_tin_gio="exact").json()
-        muc = {t["muc"] for t in d["ba_tru_tam_tai"].values() if t["muc"]}
-        if len(muc) >= 2:
-            assert "khác nhau" in d["tong_quan"]["cau"]
+    # quét vài ngày sinh có giờ: khi Tử vi và Bát tự đọc NĂM hỏi khác mức, nói rõ "không chọn bên" (CV-2: không còn mức gộp)
+    thay_khac = False
+    for ns in ("1990-05-15", "1985-11-08", "1978-02-20", "1995-07-30", "1988-12-02", "1972-03-09"):
+        d = _goi("Tôi muốn bỏ việc ra mở quán cà phê năm sau có nên không", ns=ns, gio_sinh="08:30", do_tin_gio="exact").json()
+        thien = d["ba_tru_tam_tai"]["thien"]
+        mon = thien["muc_tung_mon"]
+        if mon["tuvi"] and mon["battu"] and mon["tuvi"] != mon["battu"]:
+            thay_khac = True
+            assert "không chọn bên" in thien["nhan_xet"] and thien["muc"] is None
+    assert thay_khac, "bộ ngày sinh mẫu phải có ít nhất một lá hai môn đọc năm khác mức"
 
 
 def test_nguoi_lien_quan_can_dong_y_du_tuoi_va_khong_in_ngay_sinh():

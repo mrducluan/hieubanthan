@@ -60,18 +60,18 @@ export function TruongPhai(p: {
       nhac={nhac || undefined}
       moTa={<>{c("phai.mo_ta_1")}{" "}
         <b className="text-fg">{c("phai.mo_ta_2")}</b>{c("phai.mo_ta_3")}</>}>
-      <DongPhai ten={c("phai.am_lich")} nhan={c("phai.am_lich_nhan")} giaTri={p.lich} doi={p.setLich}
+      <DongPhai ma="tuvi.lich" ten={c("phai.am_lich")} nhan={c("phai.am_lich_nhan")} giaTri={p.lich} doi={p.setLich}
         luaChon={[["viet", c("phai.lich_vn")], ["trung", c("phai.lich_tq")]]}
         noiBat={p.lichKhac} nhanNoiBat={c("phai.doi_khac")}
         goiY={p.lichKhac ? c("phai.lich_goi_y_khac") : c("phai.lich_goi_y_trung")} />
-      <DongPhai ten={c("phai.ds")} nhan={c("phai.ds_nhan")} giaTri={p.phaiDoSang} doi={p.setPhaiDoSang}
+      <DongPhai ma="tuvi.do_sang" ten={c("phai.ds")} nhan={c("phai.ds_nhan")} giaTri={p.phaiDoSang} doi={p.setPhaiDoSang}
         luaChon={[["nam", c("phai.nam_phai")], ["trung", c("phai.phai_trung")]]}
         goiY={c("phai.ds_goi_y")} />
-      <DongPhai ten={c("phai.hl")} nhan={c("phai.hl_nhan")} giaTri={p.hoaLinh} doi={p.setHoaLinh}
+      <DongPhai ma="tuvi.hoa_linh" ten={c("phai.hl")} nhan={c("phai.hl_nhan")} giaTri={p.hoaLinh} doi={p.setHoaLinh}
         luaChon={[["viet", c("phai.loi_viet")], ["trung", c("phai.trung_chau")]]}
         goiY={c("phai.hl_goi_y")} />
       {p.setGioSinh && (
-        <DongPhai testId="chon-gio-sinh" ten={c("phai.gio")} nhan={c("phai.gio_nhan")} giaTri={p.gioSinh ?? "dong_ho"} doi={p.setGioSinh}
+        <DongPhai ma="tuvi.gio_sinh" testId="chon-gio-sinh" ten={c("phai.gio")} nhan={c("phai.gio_nhan")} giaTri={p.gioSinh ?? "dong_ho"} doi={p.setGioSinh}
           luaChon={[["dong_ho", c("phai.theo_dong_ho")], ["mat_troi", c("phai.theo_mat_troi")]]}
           goiY={p.coKinhDo ? c("phai.gio_goi_y_co") : c("phai.gio_goi_y_khong")} />
       )}
@@ -83,7 +83,7 @@ export function TruongPhai(p: {
         </select>
       </DongKhung>
       {p.coNhuan && (
-        <DongPhai testId="chon-thang-nhuan" ten={c("phai.nhuan")} nhan={c("phai.nhuan_nhan")} giaTri={p.thangNhuan} doi={p.setThangNhuan}
+        <DongPhai ma="tuvi.thang_nhuan" testId="chon-thang-nhuan" ten={c("phai.nhuan")} nhan={c("phai.nhuan_nhan")} giaTri={p.thangNhuan} doi={p.setThangNhuan}
           luaChon={[["thang_sau", c("phai.nhuan_sau")], ["thang_chinh", c("phai.nhuan_chinh")], ["ca_thang_sau", c("phai.nhuan_ca")]]}
           noiBat nhanNoiBat={c("phai.ap_dung")}
           goiY={c("phai.nhuan_goi_y")} />

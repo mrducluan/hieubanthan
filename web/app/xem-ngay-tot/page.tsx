@@ -7,6 +7,7 @@ import { TieuDeTrang } from "@/components/cms/DauCms";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { XemNgayTot } from "@/components/hoang-lich/XemNgayTot";
 import { NgayTotTheoViec } from "@/components/hoang-lich/NgayTotTheoViec";
+import { MoiHoiQuyetDinh } from "@/components/co-van/MoiHoiQuyetDinh";
 import { DoiChieuHiepKy } from "@/components/hoang-lich/DoiChieuHiepKy";
 import { homNayVN, ngayTotCongKhai, thangCongKhai } from "@/lib/hoang-lich";
 import { lichNgayChoNgay } from "@/lib/lich-am";
@@ -54,6 +55,8 @@ export default async function Page() {
         <p className="mt-4 text-xs text-fg-faint">Đường dẫn cố định của ngày này: <Link href={`/xem-ngay-tot/${iso}`} className="text-gold underline">/xem-ngay-tot/{iso}</Link></p>
         <TomTatNam kieu="ngay" ngay={iso} gonDong tieuDe={`Hôm nay ${iso.split("-").reverse().join("/")} tốt hay xấu?`} nhanLink="Xem đủ giờ tốt, việc nên làm của ngày này" />
         <NgayTotTheoViec className="mt-10" />
+        <MoiHoiQuyetDinh className="mt-10" tu="xem_ngay_tot" tieuDe="Chọn được ngày rồi, nhưng chưa chắc có nên làm?"
+          loiDan="Ngày tốt chỉ trả lời “ngày nào”. Cố vấn trả lời “có nên không, tháng nào hợp, cần chuẩn bị gì” cho đúng việc bạn định làm." />
         <DoiChieuHiepKy ngayMacDinh={iso} />
       </div>
     </TrangCongCu>
