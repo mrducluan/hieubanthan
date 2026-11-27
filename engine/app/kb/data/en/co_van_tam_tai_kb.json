@@ -20,7 +20,7 @@
     "tuvi_phi_hoa": "Zi Wei Dou Shu & Liang Flying Transformations",
     "phongthuy_menh_quai": "Eight Mansions Personal Trigram",
     "huyen_khong_van_9": "Period-9 Xuan Kong Flying Stars",
-    "hoang_lich_30_ngay": "30-Day Auspicious Almanac Selection",
+    "hoang_lich_30_ngay": "Almanac day selection month by month",
     "tuong_tac_doi_tac": "Counterparty Five-Element & Branch Synergy"
   },
   "goi_y_nang_bac": {
@@ -142,7 +142,9 @@
     "lich_12": "12-month decision calendar (zodiac branch, annual star, solar terms{them})",
     "lich_12_them": ", monthly Zi Wei and BaZi",
     "phongthuy": "Feng Shui — Your home (facing {do}°{nam})",
-    "menh_quai": "Eight Mansions — your personal trigram (no house direction, so no level)"
+    "menh_quai": "Eight Mansions — your personal trigram (no house direction, so no level)",
+    "nam_hai_la_so": "Zi Wei and BaZi readings — level for {nam} (This Year chapter, annual box)",
+    "mat_bang": "Eight Mansions + Flying Stars — shop frontage (direction {do}°{nam})"
   },
   "mau": {
     "nhan_co_gio": "In your BaZi reading, the “{chuong}” chapter is at {nhan_muc}. Element running low in your eight characters: {hanh}.",
@@ -180,5 +182,276 @@
       "ten": "Feng Shui",
       "duong": "/en/feng-shui"
     }
-  ]
+  ],
+  "viec": {
+    "mo_cua_hang": {
+      "ten": "opening a shop",
+      "can": "keeping cash flowing through the first months with no profit, and deciding small daily matters quickly",
+      "viec_nang": "signing the lease, the first stock order, opening day",
+      "giu": "Keep at least 6 months of shop costs (rent, wages, stock) as a reserve, separate from living money; avoid a long lease before a trial run.",
+      "dieu_kien": [
+        "A reserve covering 6 months of fixed costs, separate from the household's living money.",
+        "A lease stating term, price and right to renovate; if possible, trial-sell from a small stall or online first.",
+        "Settle the facing direction and the till position before renovating; changing it later usually costs twice as much."
+      ],
+      "truoc_het": "Work out your fixed monthly cost and how many months you can last without profit, then go and view premises.",
+      "nen_lam": {
+        "day_manh": "Favourable month: sign the lease, place the first stock order and open if the preparation is done.",
+        "can_bang": "Even-paced month: do the preparation (permits, suppliers, design, trial sales); no need to rush the main step.",
+        "phong_thu": "A month to slow down: no long lease and no big stock order yet; use the time to review numbers and permits."
+      }
+    },
+    "mo_quan": {
+      "ten": "opening a restaurant or cafe",
+      "can": "steady quality every day and tolerating quiet weeks at the start",
+      "viec_nang": "signing the lease, buying kitchen equipment, opening day",
+      "giu": "Count rent, wages and ingredients for at least 6 months; trial the menu and the footfall before buying large equipment.",
+      "dieu_kien": [
+        "Capital for 6 months of rent, wages and ingredients while the place is quiet.",
+        "Business and food-safety permits done before opening day.",
+        "Run the menu and a peak hour for 1–2 weeks with regular guests before opening officially."
+      ],
+      "truoc_het": "Work out how many portions you must sell per day to break even, then ask whether the area around the site has enough customers.",
+      "nen_lam": {
+        "day_manh": "Favourable month: sign the lease, buy equipment and open if the trial menu went well.",
+        "can_bang": "Even-paced month: do permits, choose suppliers, trial the menu; no need to rush the opening date.",
+        "phong_thu": "A month to slow down: no big equipment, no long lease; use the time to recount costs."
+      }
+    },
+    "mo_rong": {
+      "ten": "opening another branch",
+      "can": "the current outlet running steadily even when the owner is away",
+      "viec_nang": "signing for the new site, hiring, opening day",
+      "giu": "Open another site only when the current one has been profitable for several months without depending on you alone.",
+      "dieu_kien": [
+        "The current outlet profitable for at least 3–6 months in a row.",
+        "A trained manager for the new site, so you are not running between two places.",
+        "New-site costs covered for at least 6 months if revenue falls short."
+      ],
+      "truoc_het": "Let the current outlet run for a week without you and see whether numbers and customers stay steady.",
+      "nen_lam": {
+        "day_manh": "Favourable month: sign the new site and hire if the old outlet already runs steadily.",
+        "can_bang": "Even-paced month: survey locations, cost it, train the manager; no need to sign in a hurry.",
+        "phong_thu": "A month to slow down: strengthen the current outlet, do not sign a new site yet."
+      }
+    },
+    "ra_lam_rieng": {
+      "ten": "going independent",
+      "can": "finding your own clients and tolerating months of uneven income",
+      "viec_nang": "handing in notice (if employed), signing the first client, registering the business",
+      "giu": "Keep at least 6 months of living money, and have at least one first client or contract before giving up your current income.",
+      "dieu_kien": [
+        "Six months of living money for the household, kept apart from business capital.",
+        "At least one first client or contract, or run it alongside your job for 2–3 months before leaving it.",
+        "Talk with your household about the lowest income they can accept."
+      ],
+      "truoc_het": "Run it alongside your current job and count what you earn over 2–3 months.",
+      "nen_lam": {
+        "day_manh": "Favourable month: sign the first client, register the business, announce the new work.",
+        "can_bang": "Even-paced month: run in parallel, find more clients, refine the offer; no need to drop your old income yet.",
+        "phong_thu": "A month to slow down: keep your current income, avoid large commitments; just stay in touch with prospects."
+      }
+    },
+    "chuyen_viec": {
+      "ten": "changing jobs or career direction",
+      "can": "being clear why you want to leave and whether the new place solves exactly that",
+      "viec_nang": "accepting an offer, handing in notice",
+      "giu": "Resign only after a written offer; read the probation, bonus and contract term carefully; do not decide out of momentary frustration.",
+      "dieu_kien": [
+        "Write down three reasons for leaving and see how many the new place solves.",
+        "A written offer stating pay, probation and contract term.",
+        "Three months of living money in case probation does not work out."
+      ],
+      "truoc_het": "Write down what you most want to change, then ask whether the new place changes exactly that.",
+      "nen_lam": {
+        "day_manh": "Favourable month: accept the offer, negotiate terms and give notice if everything is clear.",
+        "can_bang": "Even-paced month: update your profile, meet more people in the field, practise interviews; no need to decide in a hurry.",
+        "phong_thu": "A month to slow down: do not give notice or sign an offer while terms are vague."
+      }
+    },
+    "dau_tu": {
+      "ten": "investing",
+      "can": "tolerating price swings without having to sell in a hurry",
+      "viec_nang": "committing a large sum",
+      "giu": "Use only spare money set aside for this; this is not investment advice, so consult a qualified professional before committing a large sum.",
+      "dieu_kien": [
+        "Spare money, not living money or short-term borrowing.",
+        "Know how large a fall makes you stop.",
+        "Split a large sum into several tranches instead of one."
+      ],
+      "truoc_het": "Decide how much you can lose without hurting daily life, then choose the channel.",
+      "nen_lam": {
+        "day_manh": "Favourable month: commit in small tranches following a plan written in advance.",
+        "can_bang": "Even-paced month: study the channel and ask a professional; no need to commit in a hurry.",
+        "phong_thu": "A month to slow down: no large commitment; hold cash and review the plan."
+      }
+    },
+    "gop_von": {
+      "ten": "pooling capital or working together",
+      "can": "being clear about roles and money from the start, even with relatives",
+      "viec_nang": "signing the agreement, transferring capital",
+      "giu": "Write down every contribution and authority, keep the business account separate; consult a lawyer before signing a large agreement.",
+      "dieu_kien": [
+        "A document stating capital shares, each person's work, how profit is split and how to exit.",
+        "A business account separate from personal accounts; large sums need two approvals.",
+        "Each person says what they dislike doing, so nobody carries it in silence."
+      ],
+      "truoc_het": "Write one page: who puts in how much, who does what, and how it is settled if one person wants out.",
+      "nen_lam": {
+        "day_manh": "Favourable month: sign and transfer capital if both have read the document carefully.",
+        "can_bang": "Even-paced month: draft the agreement, divide roles, consult a lawyer; no need to transfer capital yet.",
+        "phong_thu": "A month to slow down: do not sign or transfer yet; use the time to clarify roles."
+      }
+    },
+    "mua_nha": {
+      "ten": "buying a home or moving",
+      "can": "a monthly payment that does not squeeze necessary spending",
+      "viec_nang": "paying the deposit, signing the contract, taking over the home",
+      "giu": "Check the legal status (title, zoning, disputes) in documents; pay a deposit only after reading the refund terms.",
+      "dieu_kien": [
+        "Clean legal status: title, zoning, no disputes, checked with the competent authority.",
+        "The monthly payment (if borrowing) leaves room for necessary spending and a 6-month reserve.",
+        "Visit at two different times (daytime and evening) before paying a deposit."
+      ],
+      "truoc_het": "Work out the monthly payment and what remains after paying it, then go and view homes.",
+      "nen_lam": {
+        "day_manh": "Favourable month: pay the deposit, sign and take over if the legal status is clean.",
+        "can_bang": "Even-paced month: view homes, check the legal status, work out the loan; no need to pay a deposit in a hurry.",
+        "phong_thu": "A month to slow down: no deposit or signing yet; use the time to review documents."
+      }
+    },
+    "tinh_cam": {
+      "ten": "a relationship or marriage matter",
+      "can": "both people being able to say hard things and share the work together",
+      "viec_nang": "deciding to marry, moving in together",
+      "giu": "Decide by what the two of you have said to each other, not by the chart; for big legal or child matters consult a professional.",
+      "dieu_kien": [
+        "Each person states the three things they need most and the three they cannot accept.",
+        "Talk about money, housing, children and both families before deciding.",
+        "Do not decide under pressure of age or outside opinion; allow enough time to know each other."
+      ],
+      "truoc_het": "Each person writes the three things they need most in the other, then compare.",
+      "nen_lam": {
+        "day_manh": "Favourable month: have the serious talk, meet both families, settle a plan if you both agree.",
+        "can_bang": "Even-paced month: talk steadily about money, housing, children; no need to fix a date yet.",
+        "phong_thu": "A month to slow down: no big decision yet; listen to each other and meet more family."
+      }
+    },
+    "gia_dao": {
+      "ten": "a family matter, easing tension at home",
+      "can": "one person opening the conversation and hearing the other out first",
+      "viec_nang": "the main conversation, asking a mediator",
+      "giu": "Talk when calm, not when angry; if there is abuse or violence, seek professional support.",
+      "dieu_kien": [
+        "Choose a moment when both are fine: after a meal, no rush, nobody else around.",
+        "Say what you feel rather than listing faults; listen fully before answering.",
+        "If needed, ask someone you both trust to sit in the middle."
+      ],
+      "truoc_het": "Pick a calm moment this week and say one thing that bothers you, starting the sentence with “I”.",
+      "nen_lam": {
+        "day_manh": "Favourable month: open the bigger topic, bring in a mediator if needed.",
+        "can_bang": "Even-paced month: talk lightly and regularly, avoid piling up old matters.",
+        "phong_thu": "A month to slow down: hold off heavy talk, keep the atmosphere calm."
+      }
+    },
+    "suc_ben": {
+      "ten": "regaining energy",
+      "can": "enough sleep and separating work hours from rest",
+      "viec_nang": "taking leave, changing work rhythm",
+      "giu": "See a doctor for long-term sleeplessness or unusual symptoms; a chart is not a substitute for a doctor.",
+      "dieu_kien": [
+        "Sleep on time at least 5 nights a week and switch screens off before bed.",
+        "Drop one unimportant task from this week.",
+        "See a doctor if sleeplessness lasts over 2–3 weeks or tiredness comes with other symptoms."
+      ],
+      "truoc_het": "Pick one task to drop this week and one fixed bedtime.",
+      "nen_lam": {
+        "day_manh": "Favourable month: take longer leave, lighten your work rhythm.",
+        "can_bang": "Even-paced month: keep a steady bedtime and light exercise.",
+        "phong_thu": "A month to slow down: cut workload, prioritise rest, see a doctor if tiredness lasts."
+      }
+    }
+  },
+  "hieu_cau": {
+    "dong": "You are asking: {viec} · {khung} · {kieu}.",
+    "kieu": {
+      "co_nen": "whether to",
+      "khi_nao": "when",
+      "so_sanh": "comparing options",
+      "mo_ta": "how it looks",
+      "kien_thuc": "how it looks"
+    },
+    "khung": {
+      "nam": "{nam}",
+      "thang": "{thang}",
+      "mac_dinh": "the next 12 months"
+    },
+    "ngoai_pham_vi": "You asked about {nam}; only up to {toi_da} can be read for now, so below are the next 12 months."
+  },
+  "tra_loi": {
+    "cau": "{viec_hoa} {khung}: {nghieng}. {thoi_diem}",
+    "nghieng": {
+      "thuan": "the readings lean favourable, and you can go ahead once the practical conditions are ready",
+      "can_nhac": "it is workable, but pick the timing and prepare the weaker part carefully",
+      "chuan_bi": "prepare more before deciding, and do not rush"
+    },
+    "khung_trong": {
+      "nam": "in {nam}",
+      "thang": "in {thang}",
+      "mac_dinh": "over the next 12 months"
+    },
+    "thoi_diem": {
+      "co_thuan": "Months where several readings agree for starting the main step: {thang}.",
+      "khong_thuan": "No single month stands out; the whole period runs evenly, so place the main step on a suitable day listed below.",
+      "co_cham": " Months to slow down: {thang}."
+    },
+    "thang_hoi": {
+      "day_manh": "several readings agree, a good time to start.",
+      "can_bang": "even-paced, neither a highlight nor an obstacle; workable if the preparation is done.",
+      "phong_thu": "better to slow down one step.",
+      "gan_nhat": " The nearest favourable month: {thang}.",
+      "khong_co": " No more favourable month in this window.",
+      "mo": "{thang} you asked about: "
+    },
+    "nhan_manh": "These readings are for reference, to be set against your real numbers; the decision remains yours.",
+    "dieu_kien_dau": "Conditions to have before starting",
+    "nam_cham": " Personal Year {n} (numerology) leans toward preparing rather than a big launch: split the work, prepare in the first half and place the main step in a favourable month."
+  },
+  "nhan": {
+    "co_muc": "{ten_hoa} needs {can}. Your strength for it reads at {nhan_muc} (BaZi, chapter “{chuong}”). The element running low in your eight characters is {hanh}: have a person or a habit cover the role “{vai}”.",
+    "khong_muc": "{ten_hoa} needs {can}. Without a birth hour no level is given; from the birth date, the element running low is {hanh}: have a person or a habit cover the role “{vai}”.",
+    "hd": "Hand the part belonging to the role “{vai}” to someone who does it better from the start, and keep the rest yourself."
+  },
+  "thien": {
+    "cung_muc": "Zi Wei and BaZi both read {nam} at {muc}.",
+    "khac_muc": "Zi Wei reads {nam} at {a}, BaZi at {b}: the two charts see it differently, and the system does not pick a side.",
+    "mot_mon": "{nam} according to {mon}: {muc}.",
+    "nam_ca_nhan": "Personal Year {n} (numerology): {y}",
+    "khong_gio": "Without a birth hour, Zi Wei and BaZi cannot be read for {nam}. Personal Year {n} (numerology): {y}",
+    "hd_thuan": "Put the heavy steps ({viec_nang}) into {thang}; before then only prepare.",
+    "hd_deu": "No need to wait for a special month; place the heavy steps ({viec_nang}) on a suitable day listed below.",
+    "hd_cham": "Avoid {thang} for the heavy steps ({viec_nang}); schedule them in the remaining months."
+  },
+  "dia": {
+    "mat_bang_hd": "Place the till at {thu_ngan} and the owner's seat at {chu}; keep {tinh} calm in {nam}.",
+    "nha_o_hd": "When rearranging the new home, point the bed and desk toward your favourable directions.",
+    "mat_bang_hop": "The frontage faces {phuong} ({do}°), which is among your four favourable directions ({nhom}).",
+    "mat_bang_kem": "The frontage faces {phuong} ({do}°), which is not among your four favourable directions ({nhom}); those four are {huong_tot}."
+  },
+  "can_bo_sung": {
+    "mat_bang": {
+      "nhan": "The shop's frontage direction",
+      "ly_do_thieu": "This question is about a shop, so the shop's own frontage direction is needed (not the residence's) to read the entrance, the till and the owner's seat.",
+      "ly_do_nha_o": "The direction you have is a residence's. If the shop is not in that same house, measure the shop's frontage separately; if the shop is the frontage of that residence, choose “The shop is in this same house”."
+    },
+    "nha_o": {
+      "nhan": "Direction of the home you are considering",
+      "ly_do_thieu": "This question is about a home, so the main door direction of the house is needed (measure it with the compass or take it from Feng Shui).",
+      "ly_do_nha_o": ""
+    }
+  },
+  "doan": {
+    "mot": "{t}",
+    "nhieu": "{a}–{b}"
+  }
 }

@@ -3,20 +3,27 @@
 // đưa sang "Khi góp vốn" thì ô đồng ý vẫn để trống.
 import { test, expect } from "@playwright/test";
 
-test("/co-van: ba cách xem riêng, không mức gộp; câu về người khác chuyển hướng; câu khủng hoảng chặn trước", async ({ page }) => {
+test("/co-van: trả lời đúng việc + đúng khung thời gian, không mức gộp; câu về người khác chuyển hướng; câu khủng hoảng chặn trước", async ({ page }) => {
   await page.goto("/co-van");
   await expect(page.locator("h1")).toContainText("ba cách nhìn");
 
+  // việc không đụng tới không gian (nghỉ việc ra làm riêng): có câu trả lời đứng đầu, không đòi hướng nhà, không trụ Địa
   await page.getByTestId("co-van-o-cau-hoi").fill("Năm tới tôi có nên nghỉ việc ra khởi nghiệp riêng không?");
   await page.getByTestId("co-van-ngay-sinh").fill("1990-05-15");
   await page.getByTestId("co-van-nut-gui").click();
 
   await expect(page.getByTestId("co-van-ket-qua")).toBeVisible({ timeout: 20_000 });
-  for (const ma of ["nhan", "thien", "dia"]) await expect(page.getByTestId(`co-van-tru-${ma}`)).toBeVisible();
-  // chưa có giờ sinh, chưa có hướng nhà → Nhân và Địa không chấm mức
+  await expect(page.getByTestId("co-van-hieu-cau")).toContainText("tự kinh doanh");
+  await expect(page.getByTestId("co-van-tra-loi-cau")).toContainText(/năm 20\d\d/);
+  await expect(page.getByTestId("co-van-dieu-kien").locator("li")).toHaveCount(3);
+  await expect(page.getByTestId("co-van-truoc-het")).not.toBeEmpty();
+  for (const ma of ["nhan", "thien"]) await expect(page.getByTestId(`co-van-tru-${ma}`)).toBeVisible();
+  // chưa có giờ sinh → Nhân không chấm mức; việc này không cần hướng → không có trụ Địa, không có khung "thêm hướng"
   await expect(page.getByTestId("co-van-tru-nhan")).toContainText("Không chấm mức");
-  await expect(page.getByTestId("co-van-tru-dia")).toContainText("Không chấm mức");
+  await expect(page.getByTestId("co-van-tru-dia")).toHaveCount(0);
+  await expect(page.getByTestId("co-van-nang-huong")).toHaveCount(0);
   await expect(page.getByTestId("co-van-nhip-12")).toBeVisible();
+  await expect(page.getByTestId("co-van-tong-quan")).toHaveCount(0);
 
   await page.getByTestId("co-van-o-cau-hoi").fill("Chồng tôi có ngoại tình không");
   await page.getByTestId("co-van-nut-gui").click();
@@ -27,6 +34,49 @@ test("/co-van: ba cách xem riêng, không mức gộp; câu về người khác
   await page.getByTestId("co-van-nut-gui").click();
   await expect(page.getByTestId("co-van-an-toan")).toBeVisible({ timeout: 15_000 });
   await expect(page.getByTestId("co-van-ket-qua")).toHaveCount(0);
+});
+
+test("/co-van: hỏi mở cửa hàng → engine đòi hướng MẶT TIỀN; chọn một hướng thì trụ Địa hiện ngay, tháng đầu câu không lặp", async ({ page }) => {
+  await page.goto("/co-van");
+  await page.getByTestId("co-van-o-cau-hoi").fill("Tháng 3 năm sau tôi có nên mở quán cà phê không?");
+  await page.getByTestId("co-van-ngay-sinh").fill("1988-12-02");
+  await page.getByTestId("co-van-nut-gui").click();
+
+  await expect(page.getByTestId("co-van-ket-qua")).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByTestId("co-van-hieu-cau")).toContainText("quán");
+  await expect(page.getByTestId("co-van-thang-hoi")).toContainText("T3/");
+  const khung = page.getByTestId("co-van-nang-huong");
+  await expect(khung).toBeVisible();
+  await expect(khung).toHaveAttribute("data-loai", "mat_bang");
+  await expect(khung).toContainText("mặt tiền");
+  await expect(page.getByTestId("co-van-tru-dia")).toHaveCount(0);
+
+  await page.getByTestId("co-van-huong-180").click();
+  await expect(page.getByTestId("co-van-tru-dia")).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByTestId("co-van-tru-dia")).toContainText("Mặt tiền hướng Nam");
+  await expect(page.getByTestId("co-van-tru-dia")).toContainText("quầy thu ngân");
+  await expect(page.getByTestId("co-van-nguon-huong")).toContainText("bạn nhập");
+  await expect(page.getByTestId("co-van-nang-huong")).toHaveCount(0);
+
+  // mỗi câu dài chỉ xuất hiện một lần trong kết quả (không còn 10 ô tháng y hệt)
+  const cau = await page.getByTestId("co-van-ket-qua").locator("p, li").allInnerTexts();
+  const dai = cau.map((x) => x.trim()).filter((x) => x.length >= 60);
+  const trung = dai.filter((x, i) => dai.indexOf(x) !== i);
+  expect(trung, `câu lặp: ${trung.join(" | ")}`).toEqual([]);
+});
+
+test("/co-van: hồ sơ cửa hàng đã lưu ở /quan-ly-nhan-su tự được dùng — không hỏi lại hướng", async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem("hbt.mat_bang.v1", JSON.stringify({ v: 1, loai_hinh: "cua_hang", do_huong: 178.8, cach_nam: "chinh_xac", nam_xay: 2007 }));
+  });
+  await page.goto("/co-van");
+  await page.getByTestId("co-van-o-cau-hoi").fill("Năm sau tôi muốn mở shop kinh doanh có được không?");
+  await page.getByTestId("co-van-ngay-sinh").fill("1988-12-02");
+  await page.getByTestId("co-van-nut-gui").click();
+  await expect(page.getByTestId("co-van-tru-dia")).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByTestId("co-van-tru-dia")).toContainText("178.8");
+  await expect(page.getByTestId("co-van-nguon-huong")).toContainText("hồ sơ cửa hàng");
+  await expect(page.getByTestId("co-van-nang-huong")).toHaveCount(0);
 });
 
 test("/co-van-kinh-doanh: cẩm nang không xếp hạng; sổ nháp khoá mật khẩu không gửi gì khi lưu; sang Khi góp vốn phải tự tích đồng ý", async ({ page }) => {

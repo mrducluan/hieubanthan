@@ -22,7 +22,7 @@
     "tuvi_phi_hoa": "Tử vi Nam phái & Phi hoá Lương phái",
     "phongthuy_menh_quai": "Phong thuỷ Bát trạch Mệnh quái",
     "huyen_khong_van_9": "Huyền Không Phi Tinh Vận 9",
-    "hoang_lich_30_ngay": "Hoàng lịch chọn ngày 30 ngày tới",
+    "hoang_lich_30_ngay": "Hoàng lịch chọn ngày theo từng tháng",
     "tuong_tac_doi_tac": "Đối chiếu ngũ hành & con giáp người liên quan"
   },
   "goi_y_nang_bac": {
@@ -144,7 +144,9 @@
     "lich_12": "Lịch quyết định 12 tháng (con giáp, sao năm, lịch tiết khí{them})",
     "lich_12_them": ", Tử vi và Bát tự theo tháng",
     "phongthuy": "Phong thuỷ — Nhà của bạn (hướng {do}°{nam})",
-    "menh_quai": "Bát trạch — cung mệnh của bạn (chưa có hướng nhà nên không chấm mức)"
+    "menh_quai": "Bát trạch — cung mệnh của bạn (chưa có hướng nhà nên không chấm mức)",
+    "nam_hai_la_so": "Luận giải Tử vi và Bát tự — mức năm {nam} (chương Năm nay, hộp lưu niên)",
+    "mat_bang": "Bát trạch + Huyền Không — mặt tiền cửa hàng (hướng {do}°{nam})"
   },
   "mau": {
     "nhan_co_gio": "Theo Luận giải Bát tự, chương “{chuong}” của bạn đang ở mức {nhan_muc}. Hành đang ít trong tám chữ: {hanh}.",
@@ -182,5 +184,276 @@
       "ten": "Hỏi đáp Tử vi",
       "duong": "/tu-vi"
     }
-  ]
+  ],
+  "viec": {
+    "mo_cua_hang": {
+      "ten": "mở cửa hàng",
+      "can": "giữ dòng tiền đều trong những tháng đầu chưa có lãi và quyết nhanh những việc nhỏ hằng ngày",
+      "viec_nang": "ký thuê mặt bằng, nhập hàng đợt đầu, khai trương",
+      "giu": "Giữ quỹ dự phòng tối thiểu 6 tháng chi phí cửa hàng (thuê, lương, hàng tồn), tách khỏi tiền sinh hoạt; chưa ký thuê dài hạn trước khi chạy thử.",
+      "dieu_kien": [
+        "Vốn dự phòng đủ 6 tháng chi phí cố định, tách khỏi tiền sinh hoạt gia đình.",
+        "Hợp đồng thuê ghi rõ thời hạn, giá và quyền sửa chữa; nếu được, bán thử bằng quầy nhỏ hoặc online trước.",
+        "Chốt hướng mặt tiền và chỗ đặt quầy thu ngân trước khi sửa chữa, vì sửa lại sau thường tốn gấp đôi."
+      ],
+      "truoc_het": "Tính chi phí cố định mỗi tháng và số tháng bạn chịu được khi chưa có lãi, rồi mới đi xem mặt bằng.",
+      "nen_lam": {
+        "day_manh": "Tháng thuận: ký thuê, nhập hàng đợt đầu và khai trương nếu phần chuẩn bị đã xong.",
+        "can_bang": "Tháng đều nhịp: làm phần chuẩn bị (giấy phép, nhà cung cấp, thiết kế, bán thử), chưa cần gấp phần chính.",
+        "phong_thu": "Tháng nên đi chậm: chưa ký thuê dài hạn, chưa nhập hàng lớn; dùng thời gian rà số liệu và giấy phép."
+      }
+    },
+    "mo_quan": {
+      "ten": "mở quán ăn, quán cà phê",
+      "can": "giữ chất lượng đều mỗi ngày và chịu được những tuần vắng khách lúc đầu",
+      "viec_nang": "ký thuê mặt bằng, mua thiết bị bếp, khai trương",
+      "giu": "Tính tiền thuê, lương và nguyên liệu cho ít nhất 6 tháng; chạy thử thực đơn và lượng khách trước khi mua thiết bị lớn.",
+      "dieu_kien": [
+        "Vốn đủ 6 tháng tiền thuê, lương, nguyên liệu khi quán còn vắng.",
+        "Giấy phép kinh doanh và an toàn thực phẩm xong trước ngày khai trương.",
+        "Chạy thử thực đơn và giờ cao điểm 1–2 tuần với khách quen trước khi mở chính thức."
+      ],
+      "truoc_het": "Tính số suất phải bán mỗi ngày để hoà vốn, rồi tự hỏi quanh mặt bằng ấy có đủ khách không.",
+      "nen_lam": {
+        "day_manh": "Tháng thuận: ký thuê, mua thiết bị và khai trương nếu thực đơn đã chạy thử ổn.",
+        "can_bang": "Tháng đều nhịp: làm giấy phép, chọn nhà cung cấp, chạy thử thực đơn; chưa cần gấp ngày khai trương.",
+        "phong_thu": "Tháng nên đi chậm: chưa mua thiết bị lớn, chưa ký thuê dài hạn; dùng thời gian tính lại chi phí."
+      }
+    },
+    "mo_rong": {
+      "ten": "mở thêm chi nhánh",
+      "can": "điểm hiện tại đã chạy đều kể cả khi chủ vắng mặt",
+      "viec_nang": "ký thuê điểm mới, tuyển người, khai trương",
+      "giu": "Chỉ mở thêm khi điểm hiện tại đã có lãi ổn định vài tháng liền mà không phụ thuộc riêng vào bạn.",
+      "dieu_kien": [
+        "Điểm hiện tại lãi đều ít nhất 3–6 tháng liên tiếp.",
+        "Đã có người quản lý điểm mới được hướng dẫn, bạn không phải chạy giữa hai nơi.",
+        "Chi phí điểm mới trụ được ít nhất 6 tháng nếu doanh thu thấp hơn dự kiến."
+      ],
+      "truoc_het": "Thử để điểm hiện tại chạy một tuần khi bạn vắng mặt, xem số liệu và khách còn đều không.",
+      "nen_lam": {
+        "day_manh": "Tháng thuận: ký thuê điểm mới và tuyển người nếu điểm cũ đã chạy đều.",
+        "can_bang": "Tháng đều nhịp: khảo sát vị trí, tính chi phí, đào tạo người quản lý; chưa cần ký gấp.",
+        "phong_thu": "Tháng nên đi chậm: giữ chắc điểm hiện tại, chưa ký điểm mới."
+      }
+    },
+    "ra_lam_rieng": {
+      "ten": "tự kinh doanh, làm riêng",
+      "can": "tự tìm khách và chịu được những tháng thu nhập chưa đều",
+      "viec_nang": "nộp đơn nghỉ (nếu đang đi làm), ký khách hàng đầu tiên, đăng ký kinh doanh",
+      "giu": "Giữ quỹ sinh hoạt tối thiểu 6 tháng, và có ít nhất một khách hoặc hợp đồng đầu tiên trước khi bỏ nguồn thu hiện tại.",
+      "dieu_kien": [
+        "Quỹ sinh hoạt 6 tháng riêng cho gia đình, không lẫn với vốn kinh doanh.",
+        "Có ít nhất một khách hoặc hợp đồng đầu tiên, hoặc làm song song 2–3 tháng trước khi bỏ hẳn nguồn thu cũ.",
+        "Bàn với người trong nhà về mức thu nhập thấp nhất họ chịu được."
+      ],
+      "truoc_het": "Làm thử song song với việc hiện tại và đếm xem trong 2–3 tháng bạn kiếm được bao nhiêu.",
+      "nen_lam": {
+        "day_manh": "Tháng thuận: ký khách đầu tiên, đăng ký kinh doanh, công bố việc mới.",
+        "can_bang": "Tháng đều nhịp: làm song song, tìm thêm khách, hoàn thiện sản phẩm; chưa cần bỏ hẳn nguồn thu cũ.",
+        "phong_thu": "Tháng nên đi chậm: không bỏ nguồn thu hiện tại, không ký cam kết lớn; chỉ giữ liên lạc với khách tiềm năng."
+      }
+    },
+    "chuyen_viec": {
+      "ten": "chuyển việc, chuyển hướng sự nghiệp",
+      "can": "hiểu rõ vì sao muốn đi và chỗ mới có giải quyết đúng điều đó không",
+      "viec_nang": "nhận thư mời nhận việc, nộp đơn nghỉ",
+      "giu": "Chỉ nghỉ sau khi đã có thư mời nhận việc bằng văn bản; đọc kỹ thử việc, thưởng, thời hạn hợp đồng; không quyết vì bức xúc nhất thời.",
+      "dieu_kien": [
+        "Viết ra ba lý do muốn đi, xem chỗ mới giải quyết được mấy lý do.",
+        "Thư mời nhận việc bằng văn bản, rõ lương, thử việc, thời hạn hợp đồng.",
+        "Còn quỹ 3 tháng sinh hoạt phòng khi thử việc không đạt."
+      ],
+      "truoc_het": "Viết ra điều bạn muốn thay đổi nhất, rồi hỏi chỗ mới có thay đổi đúng điều đó không.",
+      "nen_lam": {
+        "day_manh": "Tháng thuận: nhận thư mời, thương lượng điều khoản và nộp đơn nghỉ nếu mọi thứ đã rõ.",
+        "can_bang": "Tháng đều nhịp: cập nhật hồ sơ, gặp thêm người trong ngành, phỏng vấn thử; chưa cần quyết gấp.",
+        "phong_thu": "Tháng nên đi chậm: chưa nộp đơn nghỉ, chưa ký thư mời nếu điều khoản còn mơ hồ."
+      }
+    },
+    "dau_tu": {
+      "ten": "đầu tư",
+      "can": "chịu được giá lên xuống mà không phải bán gấp",
+      "viec_nang": "giải ngân khoản lớn",
+      "giu": "Chỉ dùng tiền nhàn rỗi đã để riêng; đây không phải lời khuyên đầu tư, hỏi người có chuyên môn trước khi giải ngân khoản lớn.",
+      "dieu_kien": [
+        "Dùng tiền nhàn rỗi, không phải tiền sinh hoạt hay tiền vay ngắn hạn.",
+        "Biết rõ mình chịu giảm bao nhiêu phần trăm thì dừng.",
+        "Chia khoản lớn thành nhiều đợt thay vì một lần."
+      ],
+      "truoc_het": "Xác định số tiền bạn chịu mất được mà không ảnh hưởng sinh hoạt, rồi mới chọn kênh.",
+      "nen_lam": {
+        "day_manh": "Tháng thuận: giải ngân từng đợt nhỏ theo kế hoạch đã viết sẵn.",
+        "can_bang": "Tháng đều nhịp: tìm hiểu kênh, hỏi người có chuyên môn, chưa cần giải ngân gấp.",
+        "phong_thu": "Tháng nên đi chậm: không giải ngân khoản lớn, giữ tiền mặt và rà lại kế hoạch."
+      }
+    },
+    "gop_von": {
+      "ten": "góp vốn, làm chung",
+      "can": "nói rõ phần việc và tiền ngay từ đầu, kể cả với người thân",
+      "viec_nang": "ký thoả thuận, chuyển vốn",
+      "giu": "Mọi khoản góp và quyền hạn ghi bằng văn bản, tài khoản kinh doanh tách riêng; hỏi luật sư trước khi ký thoả thuận lớn.",
+      "dieu_kien": [
+        "Văn bản ghi rõ tỷ lệ vốn, phần việc từng người, cách chia lãi và cách rút lui.",
+        "Tài khoản kinh doanh tách khỏi tài khoản cá nhân, khoản lớn cần hai người duyệt.",
+        "Mỗi người nói được điều mình ngại làm, để không ai gánh phần ấy trong im lặng."
+      ],
+      "truoc_het": "Viết một trang: ai góp bao nhiêu, ai làm gì, và nếu một người muốn rút thì tính thế nào.",
+      "nen_lam": {
+        "day_manh": "Tháng thuận: ký thoả thuận và chuyển vốn nếu bản chữ đã được cả hai đọc kỹ.",
+        "can_bang": "Tháng đều nhịp: soạn thoả thuận, chia việc, hỏi luật sư; chưa cần chuyển vốn gấp.",
+        "phong_thu": "Tháng nên đi chậm: chưa ký, chưa chuyển vốn; dùng thời gian nói rõ phần việc hai bên."
+      }
+    },
+    "mua_nha": {
+      "ten": "mua nhà, chuyển chỗ ở",
+      "can": "khoản trả đều mỗi tháng không làm hụt chi tiêu cần thiết",
+      "viec_nang": "đặt cọc, ký hợp đồng, nhận nhà",
+      "giu": "Kiểm tra pháp lý (sổ, quy hoạch, tranh chấp) bằng giấy tờ; chỉ đặt cọc sau khi đọc kỹ điều khoản hoàn cọc.",
+      "dieu_kien": [
+        "Pháp lý sạch: sổ, quy hoạch, không tranh chấp, kiểm ở cơ quan có thẩm quyền.",
+        "Khoản trả mỗi tháng (nếu vay) còn chừa chi tiêu cần thiết và quỹ 6 tháng.",
+        "Đi xem nhà vào hai khung giờ khác nhau (ban ngày và buổi tối) trước khi đặt cọc."
+      ],
+      "truoc_het": "Tính khoản trả mỗi tháng và số tiền còn lại sau khi trả, rồi mới đi xem nhà.",
+      "nen_lam": {
+        "day_manh": "Tháng thuận: đặt cọc, ký hợp đồng và nhận nhà nếu pháp lý đã sạch.",
+        "can_bang": "Tháng đều nhịp: xem nhà, kiểm pháp lý, tính vay; chưa cần đặt cọc gấp.",
+        "phong_thu": "Tháng nên đi chậm: chưa đặt cọc, chưa ký; dùng thời gian rà giấy tờ."
+      }
+    },
+    "tinh_cam": {
+      "ten": "chuyện tình cảm, hôn nhân",
+      "can": "hai người nói được điều khó nói và cùng chịu phần việc chung",
+      "viec_nang": "quyết định cưới, về sống chung",
+      "giu": "Quyết định theo điều hai người đã nói ra với nhau, không theo lá số; chuyện lớn về pháp lý hay con cái nên hỏi người có chuyên môn.",
+      "dieu_kien": [
+        "Hai người nói rõ ba điều mỗi người cần nhất và ba điều không chịu được.",
+        "Bàn chuyện tiền, nhà ở, con cái và gia đình hai bên trước khi quyết.",
+        "Không chốt vì áp lực tuổi hay lời người ngoài; có thời gian đủ dài để hiểu nhau."
+      ],
+      "truoc_het": "Mỗi người viết ra ba điều cần nhất ở người kia rồi cùng đối chiếu.",
+      "nen_lam": {
+        "day_manh": "Tháng thuận: bàn chuyện nghiêm túc, gặp gia đình hai bên, chốt kế hoạch nếu hai người đã đồng ý.",
+        "can_bang": "Tháng đều nhịp: nói chuyện đều đặn về tiền, nhà ở, con cái; chưa cần chốt ngày.",
+        "phong_thu": "Tháng nên đi chậm: chưa quyết chuyện lớn, ưu tiên nghe nhau và gặp thêm gia đình."
+      }
+    },
+    "gia_dao": {
+      "ten": "chuyện gia đạo, hoà giải trong nhà",
+      "can": "một người chịu mở lời trước và nghe hết trước khi nói",
+      "viec_nang": "buổi nói chuyện chính, nhờ người trung gian",
+      "giu": "Nói chuyện lúc bình tĩnh, không nói khi đang giận; nếu có xúc phạm hay bạo lực, tìm người hỗ trợ chuyên môn.",
+      "dieu_kien": [
+        "Chọn lúc cả hai đều ổn: ăn xong, không vội, không có người ngoài.",
+        "Nói điều mình cảm thấy, không kể tội; nghe hết trước khi trả lời.",
+        "Cần thì nhờ một người cả hai tin cậy đứng giữa."
+      ],
+      "truoc_het": "Chọn một lúc yên ổn trong tuần này và nói một điều đang khó chịu bằng câu bắt đầu bằng “tôi”.",
+      "nen_lam": {
+        "day_manh": "Tháng thuận: mở lời về chuyện lớn, nhờ người trung gian nếu cần.",
+        "can_bang": "Tháng đều nhịp: nói chuyện nhẹ đều đặn, tránh dồn chuyện cũ.",
+        "phong_thu": "Tháng nên đi chậm: chưa nói chuyện nặng, ưu tiên giữ không khí yên."
+      }
+    },
+    "suc_ben": {
+      "ten": "lấy lại sức",
+      "can": "ngủ đủ và tách giờ làm khỏi giờ nghỉ",
+      "viec_nang": "xin nghỉ phép, đổi nhịp làm việc",
+      "giu": "Mất ngủ kéo dài hoặc có triệu chứng bất thường thì đi khám; lá số không thay lời bác sĩ.",
+      "dieu_kien": [
+        "Ngủ đúng giờ ít nhất 5 đêm mỗi tuần, tắt màn hình trước giờ ngủ.",
+        "Bớt một việc không quan trọng khỏi tuần này.",
+        "Mất ngủ hơn 2–3 tuần, hoặc mệt kèm triệu chứng khác thì đi khám."
+      ],
+      "truoc_het": "Chọn một việc bớt đi khỏi tuần này và một giờ ngủ cố định.",
+      "nen_lam": {
+        "day_manh": "Tháng thuận: xin nghỉ phép dài, đổi nhịp làm việc cho nhẹ hơn.",
+        "can_bang": "Tháng đều nhịp: giữ giờ ngủ và vận động nhẹ đều đặn.",
+        "phong_thu": "Tháng nên đi chậm: giảm việc, ưu tiên nghỉ ngơi, đi khám nếu mệt kéo dài."
+      }
+    }
+  },
+  "hieu_cau": {
+    "dong": "Bạn đang hỏi: {viec} · {khung} · {kieu}.",
+    "kieu": {
+      "co_nen": "có nên không",
+      "khi_nao": "khi nào",
+      "so_sanh": "so sánh các lựa chọn",
+      "mo_ta": "xem thế nào",
+      "kien_thuc": "xem thế nào"
+    },
+    "khung": {
+      "nam": "năm {nam}",
+      "thang": "tháng {thang}",
+      "mac_dinh": "12 tháng tới"
+    },
+    "ngoai_pham_vi": "Bạn hỏi năm {nam}; hiện chỉ xem được tới năm {toi_da}, nên dưới đây là 12 tháng tới."
+  },
+  "tra_loi": {
+    "cau": "{viec_hoa} {khung}: {nghieng}. {thoi_diem}",
+    "nghieng": {
+      "thuan": "các cách xem nghiêng về thuận, có thể tiến hành khi điều kiện thực tế đã sẵn sàng",
+      "can_nhac": "làm được, nhưng nên chọn thời điểm và chuẩn bị kỹ phần còn yếu",
+      "chuan_bi": "nên chuẩn bị thêm trước khi quyết, chưa nên vội"
+    },
+    "khung_trong": {
+      "nam": "trong năm {nam}",
+      "thang": "vào {thang}",
+      "mac_dinh": "trong 12 tháng tới"
+    },
+    "thoi_diem": {
+      "co_thuan": "Tháng nhiều cách cùng thuận để bắt tay vào việc chính: {thang}.",
+      "khong_thuan": "Không có tháng nào nổi hẳn, cả giai đoạn đi đều; đặt việc chính vào ngày hợp ở bên dưới.",
+      "co_cham": " Tháng nên đi chậm: {thang}."
+    },
+    "thang_hoi": {
+      "day_manh": "nhiều cách cùng thuận, hợp để bắt đầu.",
+      "can_bang": "đi đều, không có điểm nổi bật cũng không có điểm vướng; làm được nếu phần chuẩn bị đã xong.",
+      "phong_thu": "nên đi chậm một nhịp.",
+      "gan_nhat": " Tháng thuận gần nhất: {thang}.",
+      "khong_co": " Trong khung này chưa có tháng nào thuận hơn.",
+      "mo": "{thang} bạn hỏi: "
+    },
+    "nhan_manh": "Các cách xem chỉ để tham khảo, đối chiếu với số liệu thật của bạn; quyết định vẫn là của bạn.",
+    "dieu_kien_dau": "Điều kiện nên có trước khi bắt đầu",
+    "nam_cham": " Năm cá nhân {n} (thần số) nghiêng về chuẩn bị hơn là ra mắt lớn: chia việc, nửa đầu năm lo phần chuẩn bị, việc chính đặt vào tháng thuận."
+  },
+  "nhan": {
+    "co_muc": "Việc {ten} cần {can}. Sức của bạn cho việc này đang ở mức {nhan_muc} (Bát tự, chương “{chuong}”). Hành đang ít trong tám chữ là {hanh}: nên có người hoặc thói quen bù vai “{vai}”.",
+    "khong_muc": "Việc {ten} cần {can}. Chưa có giờ sinh nên không chấm mức; từ ngày sinh, hành đang ít là {hanh}: nên có người hoặc thói quen bù vai “{vai}”.",
+    "hd": "Giao phần việc thuộc vai “{vai}” cho người làm tốt hơn ngay từ đầu, bạn giữ phần còn lại."
+  },
+  "thien": {
+    "cung_muc": "Tử vi và Bát tự cùng đọc năm {nam} ở mức {muc}.",
+    "khac_muc": "Tử vi đọc năm {nam} ở mức {a}, Bát tự đọc ở mức {b}: hai lá số nhìn khác nhau, hệ thống không chọn bên.",
+    "mot_mon": "Năm {nam} theo {mon}: {muc}.",
+    "nam_ca_nhan": "Năm cá nhân {n} (thần số): {y}",
+    "khong_gio": "Chưa có giờ sinh nên chưa đọc được Tử vi và Bát tự cho năm {nam}. Năm cá nhân {n} (thần số): {y}",
+    "hd_thuan": "Dồn việc nặng ({viec_nang}) vào {thang}; những tháng trước chỉ chuẩn bị.",
+    "hd_deu": "Không cần chờ tháng đẹp; việc nặng ({viec_nang}) nên đặt vào ngày hợp ở phần bên dưới.",
+    "hd_cham": "Việc nặng ({viec_nang}) nên tránh {thang}; xếp vào các tháng còn lại."
+  },
+  "dia": {
+    "mat_bang_hd": "Đặt quầy thu ngân ở {thu_ngan}, chỗ ngồi của chủ ở {chu}; giữ yên phía {tinh} trong năm {nam}.",
+    "nha_o_hd": "Đặt giường ngủ, bàn làm việc quay về hướng tốt của bạn khi bố trí lại nhà mới.",
+    "mat_bang_hop": "Mặt tiền hướng {phuong} ({do}°), nằm trong bốn hướng hợp với bạn ({nhom}).",
+    "mat_bang_kem": "Mặt tiền hướng {phuong} ({do}°), không nằm trong bốn hướng hợp với bạn ({nhom}); bốn hướng hợp là {huong_tot}."
+  },
+  "can_bo_sung": {
+    "mat_bang": {
+      "nhan": "Hướng mặt tiền của cửa hàng",
+      "ly_do_thieu": "Câu hỏi này nói về cửa hàng, nên cần hướng mặt tiền của chính cửa hàng (không phải hướng nhà ở) để xem cửa vào, quầy thu ngân và chỗ ngồi của chủ.",
+      "ly_do_nha_o": "Hướng đang có là hướng nhà ở. Nếu cửa hàng không nằm ở chính căn nhà ấy, cần đo riêng mặt tiền của cửa hàng; nếu cửa hàng chính là mặt tiền nhà ở, chọn “Cửa hàng ở chính căn nhà này”."
+    },
+    "nha_o": {
+      "nhan": "Hướng của căn nhà định mua",
+      "ly_do_thieu": "Câu hỏi này nói về nhà ở, nên cần hướng cửa chính của căn nhà (đo bằng la bàn hoặc lấy từ Phong thuỷ).",
+      "ly_do_nha_o": ""
+    }
+  },
+  "doan": {
+    "mot": "{t}",
+    "nhieu": "{a}–{b}"
+  }
 }

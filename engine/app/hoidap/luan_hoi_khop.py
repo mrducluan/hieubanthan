@@ -76,7 +76,7 @@ _NGUOI_DUNG_DAU = (
     # "vo / chong" bỏ dấu trùng "vỡ / vô / chống" → chỉ tính khi có chữ sở hữu / chỉ định đi kèm ("vợ tôi", "chồng ấy").
     r"(?:ban trai cu|ban gai cu|nguoi yeu cu|ny cu|chong cu|vo cu|ban trai|ban gai|nguoi yeu|ny|sep"
     r"|(?:chong|vo)(?= (?:toi|minh|em|to|tui|ay|anh ay|co ay|sap cuoi|cua toi|cua minh|cua em)\b)"
-    r"|me chong|bo chong|me vo|bo vo|dua|thang|con be|co be|cau be|co ban|anh ban|chi ban|ban cung (?:phong|lop|nha)"
+    r"|me chong|bo chong|me vo|bo vo|dua|thang(?! (?:\d+|nay|sau|toi|truoc|vua|sap|cuoi|dau|gieng|chap|hai|ba|bon|nam|bay|tam|chin|muoi|giua)\b)|con be|co be|cau be|co ban|anh ban|chi ban|ban cung (?:phong|lop|nha)"
     r"|chau ngoai|chau noi|co ay|anh ay|chi ay|ong ay|ba ay|em ay|nguoi ay|ho)"
 )
 # Họ hàng nhiều chữ + chữ sở hữu ở GIỮA câu ("hai vợ chồng anh trai tôi", "con gái tôi") — chủ thể là người đó, trừ khi
