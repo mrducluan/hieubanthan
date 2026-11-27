@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Compass, Globe2, Orbit, Sparkles, Users } from "lucide-react";
 import Link from "@/components/khung/Lien";
-import { ngaySinhIso, useHoSo } from "@/lib/hoso";
+import { ChonNuocThanhPho } from "@/components/hoso/ChonNuocThanhPho";
+import { useDanhSachTinh } from "@/lib/dia-ly";
+import { ngaySinhIso, NUOC_NGOAI, useHoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
 import { BanDoSaoSvg, type GocChieuBieuDo, type HanhTinhBieuDo } from "./BanDoSaoSvg";
 
@@ -58,13 +60,67 @@ interface KetQuaSynastry {
   }[];
 }
 
+/** Nơi sinh của một người: tỉnh/thành Việt Nam, hoặc "Nước ngoài" + mã thành phố (GeoNames `gn-…`, mã cũ `us-…`).
+ *  Múi giờ lịch sử + toạ độ do engine tra (web không tính). `vung` chỉ cần cho tỉnh không cố định miền (vd Quảng Trị). */
+interface NoiSinhChon { tinh: string; ngoai: string; vung: "" | "north" | "south" }
+
+const NOI_TRONG: NoiSinhChon = { tinh: "", ngoai: "", vung: "" };
+
+/** Mã gửi engine (`noi_sinh`); null = chưa chọn / nước ngoài chưa chọn thành phố (chỉ múi giờ thì thiếu toạ độ). */
+function maNoiSinh(n: NoiSinhChon): string | null {
+  if (n.tinh === NUOC_NGOAI) return n.ngoai && !n.ngoai.includes("/") ? n.ngoai : null;
+  return n.tinh || null;
+}
+
+function ONoiSinhCT({ id, nhan, giaTri, doi }: {
+  id: string; nhan: string; giaTri: NoiSinhChon; doi: (n: NoiSinhChon) => void;
+}) {
+  const { tinh, loi, thuLai } = useDanhSachTinh();
+  const tinhChon = tinh?.find((t) => t.ma === giaTri.tinh);
+  return (
+    <div className="space-y-2">
+      <label htmlFor={`${id}-tinh`} className="block text-xs font-medium text-fg-muted">{nhan}</label>
+      <select
+        id={`${id}-tinh`}
+        data-testid={`${id}-chon-noi`}
+        value={giaTri.tinh}
+        onChange={(e) => doi({ ...NOI_TRONG, tinh: e.target.value })}
+        disabled={!tinh && !loi}
+        className="h-10 w-full rounded-xl border border-line bg-bg/70 px-3 text-sm text-fg"
+      >
+        <option value="">{tinh ? "Chọn nơi sinh" : "Đang tải…"}</option>
+        <option value={NUOC_NGOAI}>Sinh ở nước ngoài</option>
+        {tinh?.map((t) => <option key={t.ma} value={t.ma}>{t.ten}</option>)}
+      </select>
+      {loi && <button type="button" onClick={thuLai} className="text-xs text-amber-300 underline">{loi} Thử lại</button>}
+      {giaTri.tinh === NUOC_NGOAI && (
+        <ChonNuocThanhPho id={id} giaTri={giaTri.ngoai} doi={(ma) => doi({ ...giaTri, ngoai: ma })} />
+      )}
+      {tinhChon && tinhChon.vung === null && (
+        <select
+          aria-label="Nơi sinh thuộc phía nào của vĩ tuyến 17"
+          value={giaTri.vung}
+          onChange={(e) => doi({ ...giaTri, vung: e.target.value as NoiSinhChon["vung"] })}
+          className="h-10 w-full rounded-xl border border-line bg-bg/70 px-3 text-sm text-fg"
+        >
+          <option value="">Phía Bắc hay Nam vĩ tuyến 17?</option>
+          <option value="north">Phía Bắc</option>
+          <option value="south">Phía Nam</option>
+        </select>
+      )}
+    </div>
+  );
+}
+
+const LOI_NOI_SINH = "Hãy chọn nơi sinh (sinh ở nước ngoài thì chọn thành phố trong gợi ý) để tính đúng giờ và vị trí.";
+
 export function KhungChiemTinh() {
   const hs = useHoSo();
   const [tab, setTab] = useState<"ban_do" | "cau_noi" | "hop_doi">("ban_do");
   const [ngaySinh, setNgaySinh] = useState("1997-03-15");
   const [gioSinh, setGioSinh] = useState("09:30");
   const [gioiTinh, setGioiTinh] = useState<"nam" | "nu">("nam");
-  const [noiSinh, setNoiSinh] = useState("ha-noi");
+  const [noiSinh, setNoiSinh] = useState<NoiSinhChon>(NOI_TRONG);
   const [heNha, setHeNha] = useState<"whole_sign" | "placidus">("whole_sign");
 
   const [dangTai, setDangTai] = useState(false);
@@ -75,6 +131,7 @@ export function KhungChiemTinh() {
   // Synastry state
   const [nsDoiTac, setNsDoiTac] = useState("");
   const [gioDoiTac, setGioDoiTac] = useState("");
+  const [noiDoiTac, setNoiDoiTac] = useState<NoiSinhChon>(NOI_TRONG);
   const [dongYDoiTac, setDongYDoiTac] = useState(false);
   const [dangTaiSyn, setDangTaiSyn] = useState(false);
   const [loiSyn, setLoiSyn] = useState<string | null>(null);
@@ -85,10 +142,19 @@ export function KhungChiemTinh() {
     setNgaySinh(ngaySinhIso(hs));
     if (hs.gio && hs.do_tin_gio !== "unknown") setGioSinh(hs.gio);
     if (hs.gioi_tinh === "nam" || hs.gioi_tinh === "nu") setGioiTinh(hs.gioi_tinh);
+    if (hs.noi_sinh) {
+      setNoiSinh({
+        tinh: hs.noi_sinh,
+        ngoai: hs.noi_sinh === NUOC_NGOAI ? (hs.mui_gio ?? "") : "",
+        vung: hs.noi_sinh !== NUOC_NGOAI && hs.vung ? hs.vung : "",
+      });
+    }
   }, [hs]);
 
   async function lapBanDo(e: React.FormEvent) {
     e.preventDefault();
+    const ma = maNoiSinh(noiSinh);
+    if (!ma) { setLoi(LOI_NOI_SINH); return; }
     setDangTai(true);
     setLoi(null);
     try {
@@ -99,7 +165,8 @@ export function KhungChiemTinh() {
           ngay_sinh: ngaySinh,
           gio_sinh: gioSinh || null,
           gioi_tinh: gioiTinh,
-          noi_sinh: noiSinh || "ha-noi",
+          noi_sinh: ma,
+          ...(noiSinh.vung ? { vung_vn: noiSinh.vung } : {}),
           he_nha: heNha,
           kem_cau_noi_dong_tay: true,
         }),
@@ -123,6 +190,9 @@ export function KhungChiemTinh() {
       setLoiSyn("Vui lòng tích xác nhận người liên quan đã tự nguyện đồng ý chia sẻ ngày sinh.");
       return;
     }
+    const maA = maNoiSinh(noiSinh);
+    const maB = maNoiSinh(noiDoiTac);
+    if (!maA || !maB) { setLoiSyn(LOI_NOI_SINH); return; }
     setDangTaiSyn(true);
     setLoiSyn(null);
     try {
@@ -130,8 +200,8 @@ export function KhungChiemTinh() {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          nguoi_a: { ngay_sinh: ngaySinh, gio_sinh: gioSinh || null, noi_sinh: noiSinh || "ha-noi" },
-          nguoi_b: { ngay_sinh: nsDoiTac, gio_sinh: gioDoiTac || null, noi_sinh: "ha-noi" },
+          nguoi_a: { ngay_sinh: ngaySinh, gio_sinh: gioSinh || null, noi_sinh: maA },
+          nguoi_b: { ngay_sinh: nsDoiTac, gio_sinh: gioDoiTac || null, noi_sinh: maB },
           dong_y_tu_nguyen: true,
         }),
       });
@@ -178,23 +248,7 @@ export function KhungChiemTinh() {
               className="mt-1 h-10 w-full rounded-xl border border-line bg-bg/70 px-3 text-sm text-fg"
             />
           </div>
-          <div>
-            <label htmlFor="ct-noi-sinh" className="block text-xs font-medium text-fg-muted">Nơi sinh (tỉnh VN hoặc mã quốc tế)</label>
-            <select
-              id="ct-noi-sinh"
-              value={noiSinh}
-              onChange={(e) => setNoiSinh(e.target.value)}
-              className="mt-1 h-10 w-full rounded-xl border border-line bg-bg/70 px-3 text-sm text-fg"
-            >
-              <option value="ha-noi">Hà Nội (21.03°B, 105.85°Đ)</option>
-              <option value="tp-ho-chi-minh">TP Hồ Chí Minh (10.78°B, 106.70°Đ)</option>
-              <option value="da-nang">Đà Nẵng (16.07°B, 108.21°Đ)</option>
-              <option value="hai-phong">Hải Phòng (20.86°B, 106.68°Đ)</option>
-              <option value="can-tho">Cần Thơ (10.03°B, 105.78°Đ)</option>
-              <option value="us-san_jose">San Jose, Hoa Kỳ</option>
-              <option value="au-sydney">Sydney, Úc</option>
-            </select>
-          </div>
+          <ONoiSinhCT id="ct" nhan="Nơi sinh" giaTri={noiSinh} doi={setNoiSinh} />
           <div>
             <label htmlFor="ct-he-nha" className="block text-xs font-medium text-fg-muted">Hệ chia 12 Nhà</label>
             <select
@@ -462,7 +516,8 @@ export function KhungChiemTinh() {
                   className="mt-1 h-10 w-full rounded-xl border border-line bg-bg/70 px-3 text-sm text-fg"
                 />
               </div>
-              <div className="flex items-end">
+              <ONoiSinhCT id="syn-b" nhan="Nơi sinh người liên quan" giaTri={noiDoiTac} doi={setNoiDoiTac} />
+              <div className="flex items-end sm:col-span-3">
                 <button
                   type="submit"
                   disabled={dangTaiSyn || !nsDoiTac}

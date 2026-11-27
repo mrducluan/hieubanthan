@@ -62,6 +62,31 @@ _DIEM_TINH_GOC = (
 )
 
 
+class LoiNoiSinh(ValueError):
+    """Nơi sinh không tra được (mã lạ, mã GeoNames không có, múi giờ không kèm toạ độ). `ma` là mã lỗi để tầng API
+    chọn lời theo ngôn ngữ; KHÔNG bao giờ lặng lẽ đổi sang Hà Nội."""
+
+    def __init__(self, ma: str):
+        super().__init__(ma)
+        self.ma = ma
+
+
+# Nơi mặc định khi không truyền nơi sinh và không truyền toạ độ: theo miền (giờ đồng hồ lịch sử của miền đó).
+_NOI_MAC_DINH = {"north": "ha-noi", "south": "tp-ho-chi-minh"}
+
+
+def _ket_qua(ngay_sinh: dt.date, hh: int, mm: int, off: float, lat: float, lon: float, ten: str, mo_ho: bool) -> dict:
+    clock_dt = dt.datetime(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, hh, mm)
+    return {
+        "t_utc": clock_dt - dt.timedelta(hours=off),
+        "vi_do": round(lat, 4),
+        "kinh_do": round(lon, 4),
+        "utc_offset": off,
+        "ten_noi": ten,
+        "tz_disputed": bool(mo_ho),
+    }
+
+
 def giai_toa_do_va_utc(
     ngay_sinh: dt.date,
     gio_sinh: str | None = None,
@@ -72,61 +97,73 @@ def giai_toa_do_va_utc(
     kinh_do: float | None = None,
     utc_lech: float | None = None,
 ) -> dict:
-    """Quy đổi địa điểm + ngày giờ đồng hồ lúc sinh ra `(t_utc, vi_do, kinh_do, utc_offset, ten_noi, tz_disputed)`."""
+    """Quy đổi địa điểm + ngày giờ đồng hồ lúc sinh ra `(t_utc, vi_do, kinh_do, utc_offset, ten_noi, tz_disputed)`.
+
+    Thứ tự:
+      1. `noi_sinh` là mã thành phố nước ngoài (`us-san_jose`) hoặc GeoNames (`gn-5392171`): múi giờ lịch sử của
+         tzdata tại đúng ngày giờ sinh (`mui_gio.tai(...)["lech_chinh_xac"]`, không làm tròn 15 phút) + toạ độ của nơi đó.
+      2. `noi_sinh` là mã vùng IANA (`Europe/Paris`): múi giờ như trên, toạ độ BẮT BUỘC truyền kèm.
+      3. `noi_sinh` là tỉnh/thành Việt Nam: giờ đồng hồ lịch sử theo miền (`timebase.clock_offset`, miền Nam UTC+8 …).
+      4. Không có `noi_sinh` mà có toạ độ: dùng toạ độ; múi giờ = `utc_lech` nếu có, không thì giờ đồng hồ Việt Nam
+         theo `vung_vn`.
+      5. Không có gì: nơi mặc định theo miền (`vung_vn`: Hà Nội / TP Hồ Chí Minh).
+    `vi_do` / `kinh_do` truyền kèm luôn thắng toạ độ tra được; `utc_lech` truyền kèm thắng múi giờ tra được.
+    Mã nơi sinh không tra được → `LoiNoiSinh` (tầng API trả 422), không lặng lẽ đổi về Hà Nội.
+    """
     hh, mm = (int(x) for x in gio_sinh.split(":")) if gio_sinh else (12, 0)
     ma = (noi_sinh or "").strip()
+    co_toa_do = vi_do is not None and kinh_do is not None
+    if (vi_do is None) != (kinh_do is None):
+        raise LoiNoiSinh("thieu_toa_do")
 
-    # 1. Thành phố quốc tế hoặc GeoNames (`us-san_jose`, `gn-5392171`)
-    tp_qt = mui_gio.thanh_pho(ma) if ma else None
-    if tp_qt is not None:
-        info_tz = mui_gio.tai(tp_qt["zone"], ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, hh, mm)
-        off = float(info_tz["lech"])
-        lat = float(vi_do if vi_do is not None else tp_qt["vi_do"])
-        lon = float(kinh_do if kinh_do is not None else tp_qt["kinh_do"])
-        clock_dt = dt.datetime(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, hh, mm)
-        return {
-            "t_utc": clock_dt - dt.timedelta(hours=off),
-            "vi_do": round(lat, 4),
-            "kinh_do": round(lon, 4),
-            "utc_offset": off,
-            "ten_noi": tp_qt["ten"],
-            "tz_disputed": bool(info_tz.get("gio_mo_ho")),
-        }
+    if ma:
+        # 1–2. Nước ngoài: mã thành phố / GeoNames / mã vùng IANA
+        tp_qt = mui_gio.thanh_pho(ma)
+        zone = tp_qt["zone"] if tp_qt else (ma if mui_gio.hop_le(ma) else None)
+        if zone is None and ma.startswith("gn-"):
+            raise LoiNoiSinh("khong_ro_noi_sinh")
+        if zone is not None:
+            if tp_qt is None and not co_toa_do:
+                raise LoiNoiSinh("mui_gio_can_toa_do")
+            info_tz = mui_gio.tai(zone, ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, hh, mm)
+            off = float(utc_lech if utc_lech is not None else info_tz["lech_chinh_xac"])
+            lat = float(vi_do if co_toa_do else tp_qt["vi_do"])
+            lon = float(kinh_do if co_toa_do else tp_qt["kinh_do"])
+            ten = tp_qt["ten"] if tp_qt else zone
+            return _ket_qua(ngay_sinh, hh, mm, off, lat, lon, ten,
+                            bool(info_tz.get("gio_mo_ho")) and utc_lech is None)
+        # 3. Tỉnh/thành Việt Nam (mã slug hoặc tên có dấu)
+        ma_vn = dia_ly._ma(ma)
+        tinh = dia_ly.tra(ma_vn)
+        if tinh is None:
+            raise LoiNoiSinh("khong_ro_noi_sinh")
+        return _theo_tinh(ngay_sinh, gio_sinh, hh, mm, tinh, ma_vn, vung_vn, vi_do, kinh_do, utc_lech)
 
-    # 2. Tỉnh/thành Việt Nam (mã slug hoặc tên có dấu)
-    ma_vn = dia_ly._ma(ma) if ma else "ha-noi"
+    if co_toa_do:
+        # 4. Toạ độ truyền thẳng (vd người dùng tự nhập), múi giờ truyền kèm hoặc giờ đồng hồ Việt Nam theo miền
+        reg = Region.SOUTH if vung_vn == "south" else Region.NORTH
+        if utc_lech is not None:
+            off, mo_ho = float(utc_lech), False
+        else:
+            off, mo_ho = timebase.clock_offset(ngay_sinh, reg, hh if gio_sinh else None)
+        return _ket_qua(ngay_sinh, hh, mm, float(off), float(vi_do), float(kinh_do), "", mo_ho)
+
+    # 5. Nơi mặc định theo miền
+    ma_vn = _NOI_MAC_DINH["south" if vung_vn == "south" else "north"]
     tinh = dia_ly.tra(ma_vn)
-    if tinh is not None:
-        vung_eff = tinh["vung"] or vung_vn
-        reg = Region.SOUTH if vung_eff == "south" else Region.NORTH
-        off, disputed = timebase.clock_offset(ngay_sinh, reg, hh if gio_sinh else None)
-        lat = float(vi_do if vi_do is not None else _VI_DO_VN.get(ma_vn, 21.03 if reg is Region.NORTH else 10.78))
-        lon = float(kinh_do if kinh_do is not None else tinh["kinh_do"])
-        clock_dt = dt.datetime(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, hh, mm)
-        return {
-            "t_utc": clock_dt - dt.timedelta(hours=off),
-            "vi_do": round(lat, 4),
-            "kinh_do": round(lon, 4),
-            "utc_offset": off,
-            "ten_noi": tinh["ten"],
-            "tz_disputed": disputed,
-        }
+    return _theo_tinh(ngay_sinh, gio_sinh, hh, mm, tinh, ma_vn, vung_vn, None, None, utc_lech)
 
-    # 3. Toạ độ & múi giờ truyền trực tiếp hoặc mặc định Hà Nội / Sài Gòn theo vung_vn
-    reg = Region.SOUTH if vung_vn == "south" else Region.NORTH
-    off_def, disputed = timebase.clock_offset(ngay_sinh, reg, hh if gio_sinh else None)
-    off = float(utc_lech if utc_lech is not None else off_def)
-    lat = float(vi_do if vi_do is not None else (10.78 if reg is Region.SOUTH else 21.03))
-    lon = float(kinh_do if kinh_do is not None else (106.70 if reg is Region.SOUTH else 105.85))
-    clock_dt = dt.datetime(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, hh, mm)
-    return {
-        "t_utc": clock_dt - dt.timedelta(hours=off),
-        "vi_do": round(lat, 4),
-        "kinh_do": round(lon, 4),
-        "utc_offset": off,
-        "ten_noi": ma or ("TP Hồ Chí Minh" if reg is Region.SOUTH else "Hà Nội"),
-        "tz_disputed": disputed if utc_lech is None else False,
-    }
+
+def _theo_tinh(ngay_sinh, gio_sinh, hh, mm, tinh, ma_vn, vung_vn, vi_do, kinh_do, utc_lech) -> dict:
+    vung_eff = tinh["vung"] or vung_vn
+    reg = Region.SOUTH if vung_eff == "south" else Region.NORTH
+    if utc_lech is not None:
+        off, mo_ho = float(utc_lech), False
+    else:
+        off, mo_ho = timebase.clock_offset(ngay_sinh, reg, hh if gio_sinh else None)
+    lat = float(vi_do if vi_do is not None else _VI_DO_VN[ma_vn])
+    lon = float(kinh_do if kinh_do is not None else tinh["kinh_do"])
+    return _ket_qua(ngay_sinh, hh, mm, float(off), lat, lon, tinh["ten"], mo_ho)
 
 
 def _khoang_goc(a: float, b: float) -> float:
@@ -134,7 +171,22 @@ def _khoang_goc(a: float, b: float) -> float:
     return 360.0 - d if d > 180.0 else d
 
 
-def tinh_goc_chieu(thien_the: dict[str, dict], diem_them: dict[str, dict] | None = None) -> list[dict]:
+def goc_giu_ca_khoang(lon_a: tuple[float, ...], lon_b: tuple[float, ...], goc_chuan: float, orb_max: float) -> bool:
+    """Góc chiếu giữ nguyên SUỐT một khoảng thời gian chưa rõ (vd ngày sinh không biết giờ)?
+
+    `lon_a`, `lon_b` là kinh độ hai điểm ở HAI ĐẦU khoảng (1 phần tử = điểm đứng yên). Trong một ngày mỗi điểm đi gần
+    như thẳng đều, nên độ lệch |khoảng cách góc − góc chuẩn| là hàm lồi theo thời gian: đủ kiểm ở các góc của khoảng."""
+    return all(abs(_khoang_goc(a, b) - goc_chuan) <= orb_max for a in lon_a for b in lon_b)
+
+
+def tinh_goc_chieu(
+    thien_the: dict[str, dict],
+    diem_them: dict[str, dict] | None = None,
+    *,
+    khoang_ngay: dict[str, tuple[float, ...]] | None = None,
+) -> list[dict]:
+    """`khoang_ngay` (khi không biết giờ sinh): {mã điểm: (kinh độ 00:00, kinh độ 23:59)} — góc chiếu dính tới các điểm
+    này chỉ được giữ khi đúng SUỐT cả ngày (cùng loại góc, trong sai số cho phép ở cả hai đầu ngày)."""
     """Tính 5 góc chiếu Ptolemaic chính giữa các hành tinh (và Asc/MC nếu có giờ sinh)."""
     tap: list[tuple[str, float, float]] = [
         (ma, thien_the[ma]["kinh_do"], thien_the[ma]["toc_do_ngay"])
@@ -159,6 +211,10 @@ def tinh_goc_chieu(thien_the: dict[str, dict], diem_them: dict[str, dict] | None
                 orb_max = orb_nn if co_nhat_nguyet else orb_thuong
                 sai_so = abs(sep_now - goc_chuan)
                 if sai_so <= orb_max:
+                    if khoang_ngay and (m1 in khoang_ngay or m2 in khoang_ngay):
+                        if not goc_giu_ca_khoang(khoang_ngay.get(m1, (lon1,)), khoang_ngay.get(m2, (lon2,)),
+                                                 goc_chuan, orb_max):
+                            break
                     # Kiểm chiều hội vào (applying) sau +0.1 ngày: sai số giảm → đang hội vào
                     sep_next = _khoang_goc(lon1 + v1 * 0.1, lon2 + v2 * 0.1)
                     dang_hoi_vao = abs(sep_next - goc_chuan) < sai_so
@@ -210,13 +266,14 @@ def lap_ban_do_natal(
     else:
         for item in thien_the.values():
             item["nha"] = None
-        goc_chieu = tinh_goc_chieu(thien_the, None)
-        # Tính biên độ Mặt Trăng từ 00:00 đến 23:59 giờ địa phương ngày sinh
+        # Biên độ Mặt Trăng từ 00:00 đến 23:59 giờ địa phương ngày sinh (Mặt Trăng đi ~12–15°/ngày): góc chiếu của Mặt
+        # Trăng chỉ giữ khi đúng suốt cả ngày — không lấy vị trí giữa trưa (có thể lệch ±6,5°) rồi so sai số 8°.
         off = td["utc_offset"]
         t_dau = dt.datetime(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, 0, 0) - dt.timedelta(hours=off)
         t_cuoi = dt.datetime(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, 23, 59) - dt.timedelta(hours=off)
         lon_dau = ctl.kinh_do_mat_trang(t_dau)
         lon_cuoi = ctl.kinh_do_mat_trang(t_cuoi)
+        goc_chieu = tinh_goc_chieu(thien_the, None, khoang_ngay={"mat_trang": (lon_dau, lon_cuoi)})
         cung_dau = ctl.CUNG_HOANG_DAO[int(lon_dau // 30.0) % 12]
         cung_cuoi = ctl.CUNG_HOANG_DAO[int(lon_cuoi // 30.0) % 12]
         bien_do_trang = {

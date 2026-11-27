@@ -8,10 +8,33 @@ from typing import Literal
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
 
+from app import ngon_ngu
+from app.calc.chiem_tinh_natal import LoiNoiSinh
 from app.config import ENGINE_VERSION
 from app.luangiai import chiem_tinh as ct
 
 router = APIRouter(prefix="/v1/chiem-tinh", tags=["chiem-tinh"])
+
+# Lời 422 khi nơi sinh không tra được — theo ngôn ngữ lượt gọi (không lặng lẽ đổi về Hà Nội).
+_LOI_NOI_SINH = {
+    "khong_ro_noi_sinh": (
+        "Chưa tìm thấy nơi sinh này. Hãy chọn tỉnh/thành hoặc thành phố trong danh sách gợi ý.",
+        "We could not find this birthplace. Please pick a city from the suggestions.",
+    ),
+    "mui_gio_can_toa_do": (
+        "Chỉ có múi giờ thì chưa đủ để lập bản đồ sao: hãy chọn thành phố nơi sinh để có toạ độ.",
+        "A time zone alone is not enough for a birth chart: please pick the birth city so we have coordinates.",
+    ),
+    "thieu_toa_do": (
+        "Cần nhập đủ cả vĩ độ và kinh độ.",
+        "Please give both latitude and longitude.",
+    ),
+}
+
+
+def _loi_noi_sinh(e: LoiNoiSinh) -> HTTPException:
+    vi, en = _LOI_NOI_SINH.get(e.ma, _LOI_NOI_SINH["khong_ro_noi_sinh"])
+    return HTTPException(422, detail=vi if ngon_ngu.la_viet() else en)
 
 
 class BanDoSaoIn(BaseModel):
@@ -64,6 +87,8 @@ def api_ban_do_chiem_tinh(inp: BanDoSaoIn) -> dict:
             ngay_xem=inp.ngay_xem,
             kem_cau_noi_dong_tay=inp.kem_cau_noi_dong_tay,
         )
+    except LoiNoiSinh as e:
+        raise _loi_noi_sinh(e) from e
     except ValueError as e:
         raise HTTPException(422, detail=str(e)) from e
     return {"engine_version": ENGINE_VERSION, **kq}
@@ -82,6 +107,8 @@ def api_hop_doi_chiem_tinh(inp: HopDoiSaoIn) -> dict:
             nguoi_b=inp.nguoi_b.model_dump(),
             ngay_xem=inp.ngay_xem,
         )
+    except LoiNoiSinh as e:
+        raise _loi_noi_sinh(e) from e
     except ValueError as e:
         raise HTTPException(422, detail=str(e)) from e
     return {"engine_version": ENGINE_VERSION, **kq}

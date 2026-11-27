@@ -7,8 +7,9 @@
     kèm nhiễu loạn Kim tinh, Mộc tinh, độ dẹt Trái Đất và chương động Δψ.
   - La Hầu / Kế Đô (`la_hau` / `ke_do` — True North & South Lunar Nodes): công thức nút thực Meeus Ch. 47.
   - Thuỷ tinh → Diêm Vương tinh & Chiron (`jpl_de441_ephem.json`): nội suy bậc ba Lagrange 4 điểm trên chuỗi góc mở
-    liên tục (unwrapped milli-degrees) trích từ hệ lịch công cộng NASA JPL Horizons DE441 (`1925–2051`, Public Domain
-    17 U.S.C. § 105), kèm đạo hàm vận tốc góc để xác định chính xác trạng thái Nghịch hành (`nghich_hanh = toc_do < 0`).
+    liên tục (unwrapped milli-degrees) trích từ hệ lịch công cộng NASA JPL Horizons DE441 (nút lưới
+    1925-01-01 00:00 → 2051-01-01 00:00 giờ UT; API nhận năm 1926–2049; Public Domain 17 U.S.C. § 105; tạo lại bằng
+    `scripts/_generate_jpl_de441_ephem.py`), kèm đạo hàm vận tốc góc để xác định chính xác trạng thái Nghịch hành (`nghich_hanh = toc_do < 0`).
   - Giờ sao biểu kiến địa phương (`LAST`), Thiên Đỉnh (`MC`), Cung Mọc (`Ascendant`) và 12 nhà (`Whole Sign` & `Placidus`
     có tự động lùi an toàn về `Whole Sign` khi |vĩ độ| ≥ 66°).
 """
@@ -23,7 +24,6 @@ from pathlib import Path
 from app.calc import tietkhi
 
 _J2000 = 2451545.0
-_EPOCH = dt.datetime(2000, 1, 1, 12)
 _EPHEM_PATH = Path(__file__).parent / "data" / "jpl_de441_ephem.json"
 
 CUNG_HOANG_DAO = (
@@ -138,29 +138,31 @@ def _nap_jpl() -> dict[str, tuple[float, float, list[int]]]:
 
 
 def jd_ut(t_utc: dt.datetime) -> float:
-    return _J2000 + (t_utc - _EPOCH).total_seconds() / 86400.0
+    """Ngày Julius theo giờ UT — cùng một hàm với tiết khí (`tietkhi._jd`)."""
+    return tietkhi._jd(t_utc)
 
 
 def jde_tt(t_utc: dt.datetime) -> float:
-    nam_tp = t_utc.year + (t_utc.timetuple().tm_yday - 0.5) / 365.25
-    return jd_ut(t_utc) + tietkhi.delta_t(nam_tp) / 86400.0
+    """Ngày Julius theo giờ TT = UT + ΔT (ΔT Espenak–Meeus của `tietkhi`, cùng năm thập phân)."""
+    return tietkhi._jd(t_utc) + tietkhi.delta_t(tietkhi._nam_thap_phan(t_utc)) / 86400.0
 
 
 def chuong_dong_va_hoang_dao(jde: float) -> tuple[float, float]:
-    """Trả (Δψ tính bằng độ, độ nghiêng hoàng đạo biểu kiến ε tính bằng độ) theo IAU / Meeus Ch. 22."""
+    """Trả (Δψ tính bằng độ, độ nghiêng hoàng đạo biểu kiến ε tính bằng độ) theo Meeus Ch. 22.
+    Chương động lấy từ `tietkhi.chuong_dong` (một bộ tính với Mặt Trời)."""
     T = (jde - _J2000) / 36525.0
-    om = math.radians(125.04452 - 1934.136261 * T + 0.0020708 * T * T)
-    ls = math.radians(280.4665 + 36000.7698 * T)
-    lm = math.radians(218.3165 + 481267.8813 * T)
-    dpsi_arcsec = -17.20 * math.sin(om) - 1.32 * math.sin(2 * ls) - 0.23 * math.sin(2 * lm) + 0.21 * math.sin(2 * om)
-    deps_arcsec = 9.20 * math.cos(om) + 0.57 * math.cos(2 * ls) + 0.10 * math.cos(2 * lm) - 0.09 * math.cos(2 * om)
+    dpsi, deps = tietkhi.chuong_dong(T)
     eps0_arcsec = 84381.448 - 46.8150 * T - 0.00059 * T * T + 0.001813 * T * T * T
-    return dpsi_arcsec / 3600.0, (eps0_arcsec + deps_arcsec) / 3600.0
+    return dpsi, eps0_arcsec / 3600.0 + deps
 
 
 def kinh_do_mat_trang(t_utc: dt.datetime) -> float:
     """Kinh độ hoàng đạo biểu kiến địa tâm của Mặt Trăng (0–360°, Meeus Ch. 47 ELP2000-82)."""
-    jde = jde_tt(t_utc)
+    return kinh_do_mat_trang_jde(jde_tt(t_utc))
+
+
+def kinh_do_mat_trang_jde(jde: float) -> float:
+    """Như `kinh_do_mat_trang` nhưng nhận thẳng JDE (giờ TT) — để đối chiếu ví dụ 47.a của Meeus."""
     T = (jde - _J2000) / 36525.0
     T2, T3, T4 = T * T, T * T * T, T * T * T * T
 
@@ -261,7 +263,7 @@ def vi_tri_hanh_tinh(ma: str, t_utc: dt.datetime) -> tuple[float, float]:
     jd0, step, ds = bang[ma]
     jd = jd_ut(t_utc)
     if jd < jd0 or jd > jd0 + step * (len(ds) - 1):
-        raise ValueError("Thời điểm nằm ngoài phạm vi bảng lịch thiên văn 1925–2050.")
+        raise ValueError("Thời điểm nằm ngoài phạm vi bảng lịch thiên văn 1925–2051.")
     pos = (jd - jd0) / step
     idx = int(math.floor(pos))
     idx = max(1, min(len(ds) - 3, idx))
@@ -312,9 +314,15 @@ def _ra_cung_hoang_dao(ra_deg: float, eps_rad: float) -> float:
 
 
 def _placidus_cusp(ramc_deg: float, phi_rad: float, eps_rad: float, f_semi: float, nocturnal: bool) -> float:
-    """Giải lặp cố định đỉnh nhà Placidus (11: f=1/3 ngày, 12: f=2/3 ngày, 2: f=2/3 đêm, 3: f=1/3 đêm)."""
-    ra_est = (ramc_deg + (180.0 + f_semi * 90.0 if nocturnal else f_semi * 90.0)) % 360.0
-    for _ in range(25):
+    """Đỉnh nhà Placidus: điểm hoàng đạo chia cung bán nhật (semi-arc) CỦA CHÍNH NÓ theo tỉ lệ thời gian.
+
+    - Trên chân trời (nhà 11, 12): RA = RAMC + f·DSA, DSA = 90° + AD — f = 1/3 (nhà 11), 2/3 (nhà 12).
+    - Dưới chân trời (nhà 2, 3): RA = RAMC + 180° − f·NSA, NSA = 90° − AD — f = 2/3 (nhà 2), 1/3 (nhà 3).
+    AD = asin(tan φ · tan δ) là chênh lệch xích kinh của chính điểm ấy. Nhà 5, 6, 8, 9 đối xứng (+180°).
+    Giải lặp điểm bất động (hội tụ nhanh khi |φ| < 66°, lớp trên đã lùi về Whole Sign ở vĩ độ cao hơn).
+    """
+    ra_est = (ramc_deg + (180.0 - f_semi * 90.0 if nocturnal else f_semi * 90.0)) % 360.0
+    for _ in range(200):
         lam_rad = math.atan2(math.sin(math.radians(ra_est)), math.cos(math.radians(ra_est)) * math.cos(eps_rad))
         sin_dec = math.sin(eps_rad) * math.sin(lam_rad)
         tan_dec = sin_dec / math.sqrt(max(1e-12, 1.0 - sin_dec * sin_dec))
@@ -325,8 +333,8 @@ def _placidus_cusp(ramc_deg: float, phi_rad: float, eps_rad: float, f_semi: floa
             ra_next = (ramc_deg + f_semi * semi_arc) % 360.0
         else:
             semi_arc = 90.0 - ad_deg
-            ra_next = (ramc_deg + 180.0 + f_semi * semi_arc) % 360.0
-        if abs(((ra_next - ra_est + 180.0) % 360.0) - 180.0) < 1e-6:
+            ra_next = (ramc_deg + 180.0 - f_semi * semi_arc) % 360.0
+        if abs(((ra_next - ra_est + 180.0) % 360.0) - 180.0) < 1e-9:
             ra_est = ra_next
             break
         ra_est = ra_next
@@ -365,8 +373,8 @@ def tinh_nha_va_truc(
         c7 = (asc + 180.0) % 360.0
         c11 = _placidus_cusp(ramc, phi_r, eps_r, 1.0 / 3.0, nocturnal=False)
         c12 = _placidus_cusp(ramc, phi_r, eps_r, 2.0 / 3.0, nocturnal=False)
-        c2 = _placidus_cusp(ramc, phi_r, eps_r, 1.0 / 3.0, nocturnal=True)
-        c3 = _placidus_cusp(ramc, phi_r, eps_r, 2.0 / 3.0, nocturnal=True)
+        c2 = _placidus_cusp(ramc, phi_r, eps_r, 2.0 / 3.0, nocturnal=True)
+        c3 = _placidus_cusp(ramc, phi_r, eps_r, 1.0 / 3.0, nocturnal=True)
         c5 = (c11 + 180.0) % 360.0
         c6 = (c12 + 180.0) % 360.0
         c8 = (c2 + 180.0) % 360.0

@@ -7,7 +7,8 @@ const Input = z.object({
   ngay_sinh: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   gio_sinh: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/).nullable().optional(),
   gioi_tinh: z.enum(["nam", "nu"]).default("nam"),
-  noi_sinh: z.string().trim().max(60).nullable().optional(),
+  // Tỉnh VN (`ha-noi`), thành phố nước ngoài (`gn-5392171`, `us-san_jose`) hoặc mã vùng IANA (cần kèm toạ độ).
+  noi_sinh: z.string().trim().regex(/^[A-Za-z0-9_+\-\/]{2,60}$/).nullable().optional(),
   vung_vn: z.enum(["north", "south"]).default("north"),
   vi_do: z.number().min(-89.9).max(89.9).nullable().optional(),
   kinh_do: z.number().min(-180).max(180).nullable().optional(),

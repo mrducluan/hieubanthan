@@ -42,18 +42,24 @@ def tinh_synastry(natal_a: dict, natal_b: dict) -> dict:
     if natal_b.get("co_gio_sinh") and natal_b.get("truc"):
         ds_b.append(("asc", natal_b["truc"]["asc"]["kinh_do"]))
 
+    # Người không biết giờ sinh: Mặt Trăng của họ chỉ biết trong khoảng 00:00–23:59 (~12–15°) — góc chiếu chéo dính tới
+    # Mặt Trăng ấy chỉ giữ khi đúng SUỐT cả ngày (cùng một luật với bản đồ gốc, `ctn.goc_giu_ca_khoang`).
+    def _khoang(natal: dict, ma: str, lon: float) -> tuple[float, ...]:
+        bd = natal.get("mat_trang_bien_do_ngay")
+        if ma == "mat_trang" and not natal.get("co_gio_sinh") and bd:
+            return (bd["kinh_do_00h"], bd["kinh_do_24h"])
+        return (lon,)
+
     goc_cheo: list[dict] = []
     for ma_a, lon_a in ds_a:
         for ma_b, lon_b in ds_b:
-            # Nếu một bên không có giờ sinh, bỏ qua góc của Mặt Trăng bên đó nếu Mặt Trăng đổi cung trong ngày
-            if ma_a == "mat_trang" and not natal_a["co_gio_sinh"] and (natal_a.get("mat_trang_bien_do_ngay") or {}).get("doi_cung_trong_ngay"):
-                continue
-            if ma_b == "mat_trang" and not natal_b["co_gio_sinh"] and (natal_b.get("mat_trang_bien_do_ngay") or {}).get("doi_cung_trong_ngay"):
-                continue
+            ka, kb = _khoang(natal_a, ma_a, lon_a), _khoang(natal_b, ma_b, lon_b)
             sep = _goc_ngan(lon_a, lon_b)
             for loai, goc_chuan, _, _ in ctn.GOC_CHIEU_CHINH:
                 sai_so = abs(sep - goc_chuan)
                 if sai_so <= 5.0:
+                    if (len(ka) > 1 or len(kb) > 1) and not ctn.goc_giu_ca_khoang(ka, kb, goc_chuan, 5.0):
+                        break
                     goc_cheo.append({
                         "nguoi_a": ma_a,
                         "nguoi_b": ma_b,

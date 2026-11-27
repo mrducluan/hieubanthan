@@ -6,7 +6,8 @@ import { dauNguoiGoi, goiEngineDaKiem, laBanAnh, loiChung } from "@/lib/proxy";
 const Nguoi = z.object({
   ngay_sinh: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   gio_sinh: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/).nullable().optional(),
-  noi_sinh: z.string().trim().max(60).nullable().optional(),
+  // Tỉnh VN (`ha-noi`), thành phố nước ngoài (`gn-5392171`, `us-san_jose`) hoặc mã vùng IANA (cần kèm toạ độ).
+  noi_sinh: z.string().trim().regex(/^[A-Za-z0-9_+\-\/]{2,60}$/).nullable().optional(),
 }).strict();
 
 const Input = z.object({

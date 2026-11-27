@@ -5,6 +5,7 @@ test.describe("Chặng 4 — Chiêm tinh phương Tây (NASA JPL DE441), Cầu n
     await page.goto("/chiem-tinh");
     await page.getByTestId("ct-ngay-sinh").fill("1997-03-15");
     await page.getByTestId("ct-gio-sinh").fill("09:30");
+    await page.getByTestId("ct-chon-noi").selectOption("ha-noi");
     await page.getByTestId("ct-nut-lap").click();
 
     await expect(page.getByTestId("ban-do-sao-svg")).toBeVisible({ timeout: 15_000 });
@@ -21,6 +22,7 @@ test.describe("Chặng 4 — Chiêm tinh phương Tây (NASA JPL DE441), Cầu n
     // Chuyển sang tab Synastry: chưa tích đồng ý phải chặn, tích đồng ý mới chạy và không chấm điểm
     await page.getByTestId("tab-ct-hop-doi").click();
     await page.getByTestId("syn-ngay-sinh-b").fill("1996-09-22");
+    await page.getByTestId("syn-b-chon-noi").selectOption("tp-ho-chi-minh");
     await page.getByTestId("syn-nut-soi").click();
     await expect(page.getByTestId("syn-ket-qua")).toHaveCount(0);
 

@@ -184,17 +184,26 @@ def delta_t(nam: float) -> float:
     return -20 + 32 * ((y - 1820) / 100) ** 2 - 0.5628 * (2150 - y)
 
 
+def chuong_dong(T: float) -> tuple[float, float]:
+    """Chương động (Meeus Ch. 22, bản rút gọn 4 số hạng, sai ~0,5″): trả (Δψ, Δε) tính bằng ĐỘ, T = thế kỷ Julius từ J2000 (TT).
+    Một nguồn cho tiết khí và Chiêm tinh (`chiem_tinh_lich`)."""
+    om = math.radians(125.04452 - 1934.136261 * T)
+    ls = math.radians(280.4665 + 36000.7698 * T)
+    lm = math.radians(218.3165 + 481267.8813 * T)
+    dpsi = (-17.20 * math.sin(om) - 1.32 * math.sin(2 * ls) - 0.23 * math.sin(2 * lm)
+            + 0.21 * math.sin(2 * om)) / 3600
+    deps = (9.20 * math.cos(om) + 0.57 * math.cos(2 * ls) + 0.10 * math.cos(2 * lm)
+            - 0.09 * math.cos(2 * om)) / 3600
+    return dpsi, deps
+
+
 def _kinh_do_jde(jde: float) -> float:
     """Kinh độ biểu kiến của Mặt Trời (độ) tại JDE (giờ TT)."""
     tau = (jde - _J2000) / 365250
     L = sum(sum(a * math.cos(b + c * tau) for a, b, c in S) * tau**i for i, S in enumerate(_LS)) / 1e8
     T = tau * 10
     lon = math.degrees(L) + 180 - 0.09033 / 3600
-    om = math.radians(125.04452 - 1934.136261 * T)
-    ls = math.radians(280.4665 + 36000.7698 * T)
-    lm = math.radians(218.3165 + 481267.8813 * T)
-    dpsi = (-17.20 * math.sin(om) - 1.32 * math.sin(2 * ls) - 0.23 * math.sin(2 * lm)
-            + 0.21 * math.sin(2 * om)) / 3600
+    dpsi, _ = chuong_dong(T)
     m = math.radians(357.52911 + 35999.05029 * T)
     e = 0.016708634 - 0.000042037 * T
     c = math.radians((1.914602 - 0.004817 * T) * math.sin(m) + 0.019993 * math.sin(2 * m))
