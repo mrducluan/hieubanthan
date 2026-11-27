@@ -39,6 +39,7 @@ import * as migration_20261122_090000_menu_ts_huyen_hoc from './20261122_090000_
 import * as migration_20261122_100000_chan_trang_cum_tu_khoa from './20261122_100000_chan_trang_cum_tu_khoa';
 import * as migration_20261125_090000_hd_th_tinh_huong from './20261125_090000_hd_th_tinh_huong';
 import * as migration_20261125_120000_qlns_1_quan_ly_nhan_su from './20261125_120000_qlns_1_quan_ly_nhan_su';
+import * as migration_20261127_090000_chiem_tinh_menu_chan_trang from './20261127_090000_chiem_tinh_menu_chan_trang';
 
 export const migrations = [
   {
@@ -245,5 +246,10 @@ export const migrations = [
     up: migration_20261125_120000_qlns_1_quan_ly_nhan_su.up,
     down: migration_20261125_120000_qlns_1_quan_ly_nhan_su.down,
     name: '20261125_120000_qlns_1_quan_ly_nhan_su'
+  },
+  {
+    up: migration_20261127_090000_chiem_tinh_menu_chan_trang.up,
+    down: migration_20261127_090000_chiem_tinh_menu_chan_trang.down,
+    name: '20261127_090000_chiem_tinh_menu_chan_trang'
   },
 ];

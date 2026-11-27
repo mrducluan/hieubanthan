@@ -17,7 +17,7 @@ test("đủ trang trụ (kể cả có #neo, ?query, rải nhiều cột) → kh
 
 test("bản sửa tay production (6 mục) → báo đúng các trụ thiếu", () => {
   const cot = [{ lien_ket: ["/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/hop-doi"].map((d) => lk(d)) }]
-  assert.deepEqual(thieuTru(cot), ["/nhan-tuong", "/tarot", "/ky-mon", "/huyen-hoc"])
+  assert.deepEqual(thieuTru(cot), ["/nhan-tuong", "/tarot", "/ky-mon", "/chiem-tinh", "/huyen-hoc"])   // CHANG-4: + Chiêm tinh
 })
 
 test("liên kết loại bài viết / chuyên mục không tính là trang trụ", () => {

@@ -6,12 +6,12 @@ export type CotChanTrang = { ten: string; ds: readonly (readonly [string, string
 // tuổi (từ khoá mùa vụ / theo năm) · Kiến thức (mỗi môn một cụm lớn) · Về chúng tôi (E-E-A-T + pháp lý). Bỏ link trùng URL
 // (#neo), trang noindex (Tài khoản, Nạp Sao), trang đã có ở menu đầu (Hôm nay, Thời gian tới, Bản đồ đội ngũ).
 // TRU_CHAN_TRANG: CMS không cho lưu chân trang thiếu trang trụ nào (cms/src/globals/DieuHuong.ts `thieuTru`).
-export const TRU_CHAN_TRANG = ["/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot", "/ky-mon", "/hop-doi", "/huyen-hoc"] as const;
+export const TRU_CHAN_TRANG = ["/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot", "/ky-mon", "/chiem-tinh", "/hop-doi", "/huyen-hoc"] as const;
 export const COT_CHAN_TRANG: readonly CotChanTrang[] = [
   { ten: "Huyền học", ds: [
     ["/than-so", "Thần số học"], ["/tu-vi", "Xem Tử vi"], ["/bat-tu", "Xem Bát tự (Tứ trụ)"], ["/kinh-dich", "Gieo quẻ Kinh Dịch"],
     ["/phong-thuy", "Phong thuỷ nhà ở"], ["/nhan-tuong", "Xem tướng mặt"], ["/tarot", "Xem bài Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"],
-    ["/hop-doi", "Xem hợp đôi"], ["/huyen-hoc", "Tất cả các môn huyền học"],
+    ["/chiem-tinh", "Chiêm tinh phương Tây"], ["/hop-doi", "Xem hợp đôi"], ["/huyen-hoc", "Tất cả các môn huyền học"],
   ] },
   { ten: "Lịch & tuổi", ds: [
     ["/xem-ngay-tot", "Xem ngày tốt"], ["/lich-am", "Lịch âm các năm"], ["/doi-lich-am-duong", "Đổi lịch âm dương"], ["/nam", "Năm nay con gì, mệnh gì"],
@@ -33,7 +33,7 @@ export const COT_CHAN_TRANG: readonly CotChanTrang[] = [
 
 // ND-1 — chữ chân trang mặc định (CMS trống / lỗi / chậm). Phải trùng CHAN_TRANG_MAC_DINH trong
 // cms/src/globals/DieuHuong.ts — e2e/so-lieu-ngoai.spec.ts kiểm. 115/113/111, dòng ©, thông tin đơn vị giữ trong ChanTrang.
-export const GIOI_THIEU_CHAN_TRANG = "Thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot, Kỳ Môn — trong một hồ sơ. Cách tính minh bạch, nguồn rõ ràng, để tự soi chứ không để phán.";
+export const GIOI_THIEU_CHAN_TRANG = "Thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot, Kỳ Môn, Chiêm tinh — trong một hồ sơ. Cách tính minh bạch, nguồn rõ ràng, để tự soi chứ không để phán.";
 export const CAM_KET_CHAN_TRANG = [
   { chu: "Hồ sơ mặc định chỉ lưu trên máy bạn", bieu_tuong: "khien" },
   { chu: "Lá số tính trên hệ thống riêng; họ tên, ngày sinh không chuyển cho bên thứ ba", bieu_tuong: "may_chu" },
