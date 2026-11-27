@@ -227,7 +227,7 @@ export function NhanTuong() {
         lòng bàn tay (ảnh không rời máy) để thấy tám cung trên tay mình, hoặc chọn hình vân giống tay mình.
       </p>}
 
-      <DoiChieuTuongMenh en={en} />
+      <DoiChieuTuongMenh />
     </div>
   );
 }

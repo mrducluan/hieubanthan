@@ -327,12 +327,14 @@ export function ThanSo() {
           {kq.mo_rong && <TabsContent value="bieu-do"><BieuDoNgaySinh mo={kq.mo_rong} /></TabsContent>}
           {kq.mo_rong && <TabsContent value="phu"><ChiSoPhu mo={kq.mo_rong} /></TabsContent>}
         </Tabs>
-
-        <DoiChieuDaPhaiThanSo ngaySinhIso={ngaySinhIso(hoSo)} hoTen={hoSo.ho_ten ?? ""} quyUoc={quyUoc} en={en} />
       </section>
 
       <CuoiBaiDoc moDun="thanso_sau" khongGopY khongCta={en} />
       </>)}
+
+      {/* CHANG-3: khối phụ, gập sẵn, SAU bài đọc chính — các trường phái khác chỉ để so (Pitago / Phillips vẫn là bài đọc chính). */}
+      <DoiChieuDaPhaiThanSo key={`${ngaySinhIso(hoSo)}|${hoSo.ho_ten ?? ""}|${quyUoc}`}
+        ngaySinhIso={ngaySinhIso(hoSo)} hoTen={hoSo.ho_ten ?? ""} quyUoc={quyUoc} />
 
       <div id="noi-dau" className="scroll-mt-24"><NoiDau hoSo={hoSo} onHoi={hoiCau} theoPitago={phai === "chaldea"} quyUoc={quyUoc} /></div>
 

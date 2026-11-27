@@ -189,7 +189,7 @@ export default async function Page() {
         Đọc thêm: <Link href="/nhan-tuong" className="text-gold underline">Xem tướng mặt online</Link> ·{" "}
         <Link href="/nhan-tuong/do-hinh" className="text-gold underline">Đồ hình nhân tướng</Link>
       </p>
-      <DoiChieuTuongMenh />
+      <DoiChieuTuongMenh moDun="chitay" />
       <KhoiCms ds={nd.khoi.cuoi} duong={DUONG_CHI_TAY} viTri="cuoi" className="mt-10" />
     </div>
   );
