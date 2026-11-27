@@ -243,6 +243,13 @@ SO: dict[str, dict] = {
     # ---- Liên mảng (lời ghép, ranh giới, mẫu câu)
     "suc_khoe_kb.json": {"mang": "chung", "muc": "tom_y_co_thu", "ghi_chu": "hành ↔ tạng phủ theo Nội Kinh; tên bệnh hay gặp là kiến thức phổ thông (SK-2)"},
     "co_van_tam_tai_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 2: nháp AI tổng hợp Cố vấn Liên mảng Tam Tài (Nhân – Thiên – Địa), chờ chủ dự án đọc duyệt"},
+    "chiem_tinh_hanh_tinh_cung_kb.json": {"mang": "chiemtinh", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI 13 thiên thể × 12 cung Hoàng đạo, chờ chủ dự án đọc duyệt"},
+    "chiem_tinh_nha_kb.json": {"mang": "chiemtinh", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI 12 nhà & trục Asc/MC (Whole Sign & Placidus), chờ chủ dự án đọc duyệt"},
+    "chiem_tinh_goc_chieu_kb.json": {"mang": "chiemtinh", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI 5 góc chiếu Ptolemaic chính, chờ chủ dự án đọc duyệt"},
+    "chiem_tinh_van_han_kb.json": {"mang": "chiemtinh", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI chu kỳ Saturn/Jupiter/Solar Return & Transit, chờ chủ dự án đọc duyệt"},
+    "chiem_tinh_hop_doi_kb.json": {"mang": "chiemtinh", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI đối chiếu tương tác 2 bản đồ sao Synastry không chấm điểm, chờ chủ dự án đọc duyệt"},
+    "astro_east_west_bridge_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI Cầu nối Chiêm tinh Phương Tây × Bát tự & Tử vi Phương Đông, chờ chủ dự án đọc duyệt"},
+    "trach_nhat_hiep_ky_kb.json": {"mang": "lich", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.3: nháp AI đối chiếu Trạch Nhật Hiệp Kỷ Biện Phương Thư (câu Hán khớp hiep_ky_bien_phuong_thu_du_bo), chờ chủ dự án đọc duyệt"},
     "doanh_chu_cam_nang_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 2: nháp AI Cẩm nang Chiến lược Kinh doanh 5 trụ (Thị trường, Địa điểm/Thành Môn, Nhân sự, Văn phòng, Cửa hàng), chờ chủ dự án đọc duyệt"},
     "doanh_chu_gop_von_kb.json": {"mang": "battu", "muc": "bien_tap",
                                   "ghi_chu": "GV-1: nhóm ba khâu + điều lệ gợi ý khi góp vốn (nháp); vai trò từng người lấy từ Bản đồ đội ngũ"},

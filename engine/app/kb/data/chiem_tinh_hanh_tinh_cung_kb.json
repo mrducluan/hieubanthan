@@ -1,0 +1,975 @@
+{
+  "_nguon": "Chặng 4.2 — Hành tinh × 12 Cung Hoàng đạo.",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "cung_hoang_dao": {
+    "bach_duong": {
+      "ten": "Bạch Dương",
+      "ky_hieu": "♈",
+      "nguyen_to": "lua",
+      "pham_chat": "thong_linh",
+      "chu_tinh": "hoa_tinh",
+      "tom_tat": "Bạch Dương nổi bật ở nét chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu."
+    },
+    "kim_nguu": {
+      "ten": "Kim Ngưu",
+      "ky_hieu": "♉",
+      "nguyen_to": "dat",
+      "pham_chat": "kien_dinh",
+      "chu_tinh": "kim_tinh",
+      "tom_tat": "Kim Ngưu nổi bật ở nét bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định."
+    },
+    "song_tu": {
+      "ten": "Song Tử",
+      "ky_hieu": "♊",
+      "nguyen_to": "khi",
+      "pham_chat": "linh_hoat",
+      "chu_tinh": "thuy_tinh",
+      "tom_tat": "Song Tử nổi bật ở nét nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt."
+    },
+    "cu_giai": {
+      "ten": "Cự Giải",
+      "ky_hieu": "♋",
+      "nguyen_to": "nuoc",
+      "pham_chat": "thong_linh",
+      "chu_tinh": "mat_trang",
+      "tom_tat": "Cự Giải nổi bật ở nét giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình."
+    },
+    "su_tu": {
+      "ten": "Sư Tử",
+      "ky_hieu": "♌",
+      "nguyen_to": "lua",
+      "pham_chat": "kien_dinh",
+      "chu_tinh": "mat_troi",
+      "tom_tat": "Sư Tử nổi bật ở nét ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành."
+    },
+    "xu_nu": {
+      "ten": "Xử Nữ",
+      "ky_hieu": "♍",
+      "nguyen_to": "dat",
+      "pham_chat": "linh_hoat",
+      "chu_tinh": "thuy_tinh",
+      "tom_tat": "Xử Nữ nổi bật ở nét tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế."
+    },
+    "thien_binh": {
+      "ten": "Thiên Bình",
+      "ky_hieu": "♎",
+      "nguyen_to": "khi",
+      "pham_chat": "thong_linh",
+      "chu_tinh": "kim_tinh",
+      "tom_tat": "Thiên Bình nổi bật ở nét cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà."
+    },
+    "bo_cap": {
+      "ten": "Bọ Cạp",
+      "ky_hieu": "♏",
+      "nguyen_to": "nuoc",
+      "pham_chat": "kien_dinh",
+      "chu_tinh": "hoa_tinh",
+      "tom_tat": "Bọ Cạp nổi bật ở nét tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt."
+    },
+    "nhan_ma": {
+      "ten": "Nhân Mã",
+      "ky_hieu": "♐",
+      "nguyen_to": "lua",
+      "pham_chat": "linh_hoat",
+      "chu_tinh": "moc_tinh",
+      "tom_tat": "Nhân Mã nổi bật ở nét hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa."
+    },
+    "ma_ket": {
+      "ten": "Ma Kết",
+      "ky_hieu": "♑",
+      "nguyen_to": "dat",
+      "pham_chat": "thong_linh",
+      "chu_tinh": "tho_tinh",
+      "tom_tat": "Ma Kết nổi bật ở nét trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước."
+    },
+    "bao_binh": {
+      "ten": "Bảo Bình",
+      "ky_hieu": "♒",
+      "nguyen_to": "khi",
+      "pham_chat": "kien_dinh",
+      "chu_tinh": "tho_tinh",
+      "tom_tat": "Bảo Bình nổi bật ở nét độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể."
+    },
+    "song_ngu": {
+      "ten": "Song Ngư",
+      "ky_hieu": "♓",
+      "nguyen_to": "nuoc",
+      "pham_chat": "linh_hoat",
+      "chu_tinh": "moc_tinh",
+      "tom_tat": "Song Ngư nổi bật ở nét cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung."
+    }
+  },
+  "hanh_tinh": {
+    "mat_troi": {
+      "ten": "Mặt Trời",
+      "ky_hieu": "☉",
+      "vai_tro": "trục ý thức cốt lõi và nguồn sinh lực tự chủ",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Mặt Trời tại Bạch Dương: trục ý thức cốt lõi và nguồn sinh lực tự chủ mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trục ý thức cốt lõi và nguồn sinh lực tự chủ qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "Mặt Trời tại Kim Ngưu: trục ý thức cốt lõi và nguồn sinh lực tự chủ mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trục ý thức cốt lõi và nguồn sinh lực tự chủ qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "Mặt Trời tại Song Tử: trục ý thức cốt lõi và nguồn sinh lực tự chủ mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trục ý thức cốt lõi và nguồn sinh lực tự chủ qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "Mặt Trời tại Cự Giải: trục ý thức cốt lõi và nguồn sinh lực tự chủ mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trục ý thức cốt lõi và nguồn sinh lực tự chủ qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "Mặt Trời tại Sư Tử: trục ý thức cốt lõi và nguồn sinh lực tự chủ mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trục ý thức cốt lõi và nguồn sinh lực tự chủ qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "Mặt Trời tại Xử Nữ: trục ý thức cốt lõi và nguồn sinh lực tự chủ mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trục ý thức cốt lõi và nguồn sinh lực tự chủ qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "Mặt Trời tại Thiên Bình: trục ý thức cốt lõi và nguồn sinh lực tự chủ mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trục ý thức cốt lõi và nguồn sinh lực tự chủ qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "Mặt Trời tại Bọ Cạp: trục ý thức cốt lõi và nguồn sinh lực tự chủ mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trục ý thức cốt lõi và nguồn sinh lực tự chủ qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "Mặt Trời tại Nhân Mã: trục ý thức cốt lõi và nguồn sinh lực tự chủ mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trục ý thức cốt lõi và nguồn sinh lực tự chủ qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "Mặt Trời tại Ma Kết: trục ý thức cốt lõi và nguồn sinh lực tự chủ mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trục ý thức cốt lõi và nguồn sinh lực tự chủ qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "Mặt Trời tại Bảo Bình: trục ý thức cốt lõi và nguồn sinh lực tự chủ mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trục ý thức cốt lõi và nguồn sinh lực tự chủ qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "Mặt Trời tại Song Ngư: trục ý thức cốt lõi và nguồn sinh lực tự chủ mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trục ý thức cốt lõi và nguồn sinh lực tự chủ qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    },
+    "mat_trang": {
+      "ten": "Mặt Trăng",
+      "ky_hieu": "☽",
+      "vai_tro": "nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Mặt Trăng tại Bạch Dương: nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "Mặt Trăng tại Kim Ngưu: nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "Mặt Trăng tại Song Tử: nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "Mặt Trăng tại Cự Giải: nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "Mặt Trăng tại Sư Tử: nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "Mặt Trăng tại Xử Nữ: nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "Mặt Trăng tại Thiên Bình: nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "Mặt Trăng tại Bọ Cạp: nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "Mặt Trăng tại Nhân Mã: nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "Mặt Trăng tại Ma Kết: nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "Mặt Trăng tại Bảo Bình: nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "Mặt Trăng tại Song Ngư: nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhịp cảm xúc tự nhiên, phản xạ thói quen và nhu cầu an toàn qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    },
+    "thuy_tinh": {
+      "ten": "Thuỷ tinh",
+      "ky_hieu": "☿",
+      "vai_tro": "cách tiếp nhận thông tin, phân tích và diễn đạt lời nói",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Thuỷ tinh tại Bạch Dương: cách tiếp nhận thông tin, phân tích và diễn đạt lời nói mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách tiếp nhận thông tin, phân tích và diễn đạt lời nói qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "Thuỷ tinh tại Kim Ngưu: cách tiếp nhận thông tin, phân tích và diễn đạt lời nói mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách tiếp nhận thông tin, phân tích và diễn đạt lời nói qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "Thuỷ tinh tại Song Tử: cách tiếp nhận thông tin, phân tích và diễn đạt lời nói mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách tiếp nhận thông tin, phân tích và diễn đạt lời nói qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "Thuỷ tinh tại Cự Giải: cách tiếp nhận thông tin, phân tích và diễn đạt lời nói mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách tiếp nhận thông tin, phân tích và diễn đạt lời nói qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "Thuỷ tinh tại Sư Tử: cách tiếp nhận thông tin, phân tích và diễn đạt lời nói mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách tiếp nhận thông tin, phân tích và diễn đạt lời nói qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "Thuỷ tinh tại Xử Nữ: cách tiếp nhận thông tin, phân tích và diễn đạt lời nói mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách tiếp nhận thông tin, phân tích và diễn đạt lời nói qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "Thuỷ tinh tại Thiên Bình: cách tiếp nhận thông tin, phân tích và diễn đạt lời nói mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách tiếp nhận thông tin, phân tích và diễn đạt lời nói qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "Thuỷ tinh tại Bọ Cạp: cách tiếp nhận thông tin, phân tích và diễn đạt lời nói mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách tiếp nhận thông tin, phân tích và diễn đạt lời nói qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "Thuỷ tinh tại Nhân Mã: cách tiếp nhận thông tin, phân tích và diễn đạt lời nói mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách tiếp nhận thông tin, phân tích và diễn đạt lời nói qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "Thuỷ tinh tại Ma Kết: cách tiếp nhận thông tin, phân tích và diễn đạt lời nói mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách tiếp nhận thông tin, phân tích và diễn đạt lời nói qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "Thuỷ tinh tại Bảo Bình: cách tiếp nhận thông tin, phân tích và diễn đạt lời nói mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách tiếp nhận thông tin, phân tích và diễn đạt lời nói qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "Thuỷ tinh tại Song Ngư: cách tiếp nhận thông tin, phân tích và diễn đạt lời nói mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách tiếp nhận thông tin, phân tích và diễn đạt lời nói qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    },
+    "kim_tinh": {
+      "ten": "Kim tinh",
+      "ky_hieu": "♀",
+      "vai_tro": "cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Kim tinh tại Bạch Dương: cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "Kim tinh tại Kim Ngưu: cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "Kim tinh tại Song Tử: cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "Kim tinh tại Cự Giải: cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "Kim tinh tại Sư Tử: cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "Kim tinh tại Xử Nữ: cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "Kim tinh tại Thiên Bình: cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "Kim tinh tại Bọ Cạp: cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "Kim tinh tại Nhân Mã: cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "Kim tinh tại Ma Kết: cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "Kim tinh tại Bảo Bình: cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "Kim tinh tại Song Ngư: cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng cách trân trọng giá trị, thẩm mỹ và xây dựng thiện cảm qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    },
+    "hoa_tinh": {
+      "ten": "Hoả tinh",
+      "ky_hieu": "♂",
+      "vai_tro": "xung lực hành động, cách bảo vệ ranh giới và vượt sức ép",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Hoả tinh tại Bạch Dương: xung lực hành động, cách bảo vệ ranh giới và vượt sức ép mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng xung lực hành động, cách bảo vệ ranh giới và vượt sức ép qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "Hoả tinh tại Kim Ngưu: xung lực hành động, cách bảo vệ ranh giới và vượt sức ép mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng xung lực hành động, cách bảo vệ ranh giới và vượt sức ép qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "Hoả tinh tại Song Tử: xung lực hành động, cách bảo vệ ranh giới và vượt sức ép mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng xung lực hành động, cách bảo vệ ranh giới và vượt sức ép qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "Hoả tinh tại Cự Giải: xung lực hành động, cách bảo vệ ranh giới và vượt sức ép mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng xung lực hành động, cách bảo vệ ranh giới và vượt sức ép qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "Hoả tinh tại Sư Tử: xung lực hành động, cách bảo vệ ranh giới và vượt sức ép mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng xung lực hành động, cách bảo vệ ranh giới và vượt sức ép qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "Hoả tinh tại Xử Nữ: xung lực hành động, cách bảo vệ ranh giới và vượt sức ép mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng xung lực hành động, cách bảo vệ ranh giới và vượt sức ép qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "Hoả tinh tại Thiên Bình: xung lực hành động, cách bảo vệ ranh giới và vượt sức ép mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng xung lực hành động, cách bảo vệ ranh giới và vượt sức ép qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "Hoả tinh tại Bọ Cạp: xung lực hành động, cách bảo vệ ranh giới và vượt sức ép mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng xung lực hành động, cách bảo vệ ranh giới và vượt sức ép qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "Hoả tinh tại Nhân Mã: xung lực hành động, cách bảo vệ ranh giới và vượt sức ép mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng xung lực hành động, cách bảo vệ ranh giới và vượt sức ép qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "Hoả tinh tại Ma Kết: xung lực hành động, cách bảo vệ ranh giới và vượt sức ép mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng xung lực hành động, cách bảo vệ ranh giới và vượt sức ép qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "Hoả tinh tại Bảo Bình: xung lực hành động, cách bảo vệ ranh giới và vượt sức ép mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng xung lực hành động, cách bảo vệ ranh giới và vượt sức ép qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "Hoả tinh tại Song Ngư: xung lực hành động, cách bảo vệ ranh giới và vượt sức ép mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng xung lực hành động, cách bảo vệ ranh giới và vượt sức ép qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    },
+    "moc_tinh": {
+      "ten": "Mộc tinh",
+      "ky_hieu": "♃",
+      "vai_tro": "hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Mộc tinh tại Bạch Dương: hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "Mộc tinh tại Kim Ngưu: hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "Mộc tinh tại Song Tử: hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "Mộc tinh tại Cự Giải: hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "Mộc tinh tại Sư Tử: hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "Mộc tinh tại Xử Nữ: hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "Mộc tinh tại Thiên Bình: hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "Mộc tinh tại Bọ Cạp: hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "Mộc tinh tại Nhân Mã: hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "Mộc tinh tại Ma Kết: hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "Mộc tinh tại Bảo Bình: hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "Mộc tinh tại Song Ngư: hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    },
+    "tho_tinh": {
+      "ten": "Thổ tinh",
+      "ky_hieu": "♄",
+      "vai_tro": "bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Thổ tinh tại Bạch Dương: bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "Thổ tinh tại Kim Ngưu: bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "Thổ tinh tại Song Tử: bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "Thổ tinh tại Cự Giải: bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "Thổ tinh tại Sư Tử: bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "Thổ tinh tại Xử Nữ: bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "Thổ tinh tại Thiên Bình: bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "Thổ tinh tại Bọ Cạp: bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "Thổ tinh tại Nhân Mã: bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "Thổ tinh tại Ma Kết: bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "Thổ tinh tại Bảo Bình: bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "Thổ tinh tại Song Ngư: bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng bài học kỷ luật, giới hạn thực tế và độ chín nghề nghiệp qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    },
+    "thien_vuong": {
+      "ten": "Thiên Vương tinh",
+      "ky_hieu": "♅",
+      "vai_tro": "nhu cầu đổi mới cách làm cũ và giữ không gian độc lập",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Thiên Vương tinh tại Bạch Dương: nhu cầu đổi mới cách làm cũ và giữ không gian độc lập mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhu cầu đổi mới cách làm cũ và giữ không gian độc lập qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "Thiên Vương tinh tại Kim Ngưu: nhu cầu đổi mới cách làm cũ và giữ không gian độc lập mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhu cầu đổi mới cách làm cũ và giữ không gian độc lập qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "Thiên Vương tinh tại Song Tử: nhu cầu đổi mới cách làm cũ và giữ không gian độc lập mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhu cầu đổi mới cách làm cũ và giữ không gian độc lập qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "Thiên Vương tinh tại Cự Giải: nhu cầu đổi mới cách làm cũ và giữ không gian độc lập mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhu cầu đổi mới cách làm cũ và giữ không gian độc lập qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "Thiên Vương tinh tại Sư Tử: nhu cầu đổi mới cách làm cũ và giữ không gian độc lập mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhu cầu đổi mới cách làm cũ và giữ không gian độc lập qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "Thiên Vương tinh tại Xử Nữ: nhu cầu đổi mới cách làm cũ và giữ không gian độc lập mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhu cầu đổi mới cách làm cũ và giữ không gian độc lập qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "Thiên Vương tinh tại Thiên Bình: nhu cầu đổi mới cách làm cũ và giữ không gian độc lập mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhu cầu đổi mới cách làm cũ và giữ không gian độc lập qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "Thiên Vương tinh tại Bọ Cạp: nhu cầu đổi mới cách làm cũ và giữ không gian độc lập mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhu cầu đổi mới cách làm cũ và giữ không gian độc lập qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "Thiên Vương tinh tại Nhân Mã: nhu cầu đổi mới cách làm cũ và giữ không gian độc lập mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhu cầu đổi mới cách làm cũ và giữ không gian độc lập qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "Thiên Vương tinh tại Ma Kết: nhu cầu đổi mới cách làm cũ và giữ không gian độc lập mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhu cầu đổi mới cách làm cũ và giữ không gian độc lập qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "Thiên Vương tinh tại Bảo Bình: nhu cầu đổi mới cách làm cũ và giữ không gian độc lập mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhu cầu đổi mới cách làm cũ và giữ không gian độc lập qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "Thiên Vương tinh tại Song Ngư: nhu cầu đổi mới cách làm cũ và giữ không gian độc lập mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng nhu cầu đổi mới cách làm cũ và giữ không gian độc lập qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    },
+    "hai_vuong": {
+      "ten": "Hải Vương tinh",
+      "ky_hieu": "♆",
+      "vai_tro": "trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Hải Vương tinh tại Bạch Dương: trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "Hải Vương tinh tại Kim Ngưu: trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "Hải Vương tinh tại Song Tử: trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "Hải Vương tinh tại Cự Giải: trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "Hải Vương tinh tại Sư Tử: trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "Hải Vương tinh tại Xử Nữ: trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "Hải Vương tinh tại Thiên Bình: trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "Hải Vương tinh tại Bọ Cạp: trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "Hải Vương tinh tại Nhân Mã: trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "Hải Vương tinh tại Ma Kết: trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "Hải Vương tinh tại Bảo Bình: trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "Hải Vương tinh tại Song Ngư: trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    },
+    "diem_vuong": {
+      "ten": "Diêm Vương tinh",
+      "ky_hieu": "♇",
+      "vai_tro": "quá trình buông bỏ cái cũ và tái tạo nội lực sâu",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Diêm Vương tinh tại Bạch Dương: quá trình buông bỏ cái cũ và tái tạo nội lực sâu mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng quá trình buông bỏ cái cũ và tái tạo nội lực sâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "Diêm Vương tinh tại Kim Ngưu: quá trình buông bỏ cái cũ và tái tạo nội lực sâu mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng quá trình buông bỏ cái cũ và tái tạo nội lực sâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "Diêm Vương tinh tại Song Tử: quá trình buông bỏ cái cũ và tái tạo nội lực sâu mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng quá trình buông bỏ cái cũ và tái tạo nội lực sâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "Diêm Vương tinh tại Cự Giải: quá trình buông bỏ cái cũ và tái tạo nội lực sâu mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng quá trình buông bỏ cái cũ và tái tạo nội lực sâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "Diêm Vương tinh tại Sư Tử: quá trình buông bỏ cái cũ và tái tạo nội lực sâu mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng quá trình buông bỏ cái cũ và tái tạo nội lực sâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "Diêm Vương tinh tại Xử Nữ: quá trình buông bỏ cái cũ và tái tạo nội lực sâu mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng quá trình buông bỏ cái cũ và tái tạo nội lực sâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "Diêm Vương tinh tại Thiên Bình: quá trình buông bỏ cái cũ và tái tạo nội lực sâu mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng quá trình buông bỏ cái cũ và tái tạo nội lực sâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "Diêm Vương tinh tại Bọ Cạp: quá trình buông bỏ cái cũ và tái tạo nội lực sâu mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng quá trình buông bỏ cái cũ và tái tạo nội lực sâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "Diêm Vương tinh tại Nhân Mã: quá trình buông bỏ cái cũ và tái tạo nội lực sâu mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng quá trình buông bỏ cái cũ và tái tạo nội lực sâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "Diêm Vương tinh tại Ma Kết: quá trình buông bỏ cái cũ và tái tạo nội lực sâu mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng quá trình buông bỏ cái cũ và tái tạo nội lực sâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "Diêm Vương tinh tại Bảo Bình: quá trình buông bỏ cái cũ và tái tạo nội lực sâu mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng quá trình buông bỏ cái cũ và tái tạo nội lực sâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "Diêm Vương tinh tại Song Ngư: quá trình buông bỏ cái cũ và tái tạo nội lực sâu mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng quá trình buông bỏ cái cũ và tái tạo nội lực sâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    },
+    "la_hau": {
+      "ten": "La Hầu (Nút Bắc)",
+      "ky_hieu": "☊",
+      "vai_tro": "hướng bài học mới cần chủ động tập luyện để trưởng thành",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "La Hầu (Nút Bắc) tại Bạch Dương: hướng bài học mới cần chủ động tập luyện để trưởng thành mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng bài học mới cần chủ động tập luyện để trưởng thành qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "La Hầu (Nút Bắc) tại Kim Ngưu: hướng bài học mới cần chủ động tập luyện để trưởng thành mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng bài học mới cần chủ động tập luyện để trưởng thành qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "La Hầu (Nút Bắc) tại Song Tử: hướng bài học mới cần chủ động tập luyện để trưởng thành mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng bài học mới cần chủ động tập luyện để trưởng thành qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "La Hầu (Nút Bắc) tại Cự Giải: hướng bài học mới cần chủ động tập luyện để trưởng thành mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng bài học mới cần chủ động tập luyện để trưởng thành qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "La Hầu (Nút Bắc) tại Sư Tử: hướng bài học mới cần chủ động tập luyện để trưởng thành mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng bài học mới cần chủ động tập luyện để trưởng thành qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "La Hầu (Nút Bắc) tại Xử Nữ: hướng bài học mới cần chủ động tập luyện để trưởng thành mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng bài học mới cần chủ động tập luyện để trưởng thành qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "La Hầu (Nút Bắc) tại Thiên Bình: hướng bài học mới cần chủ động tập luyện để trưởng thành mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng bài học mới cần chủ động tập luyện để trưởng thành qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "La Hầu (Nút Bắc) tại Bọ Cạp: hướng bài học mới cần chủ động tập luyện để trưởng thành mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng bài học mới cần chủ động tập luyện để trưởng thành qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "La Hầu (Nút Bắc) tại Nhân Mã: hướng bài học mới cần chủ động tập luyện để trưởng thành mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng bài học mới cần chủ động tập luyện để trưởng thành qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "La Hầu (Nút Bắc) tại Ma Kết: hướng bài học mới cần chủ động tập luyện để trưởng thành mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng bài học mới cần chủ động tập luyện để trưởng thành qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "La Hầu (Nút Bắc) tại Bảo Bình: hướng bài học mới cần chủ động tập luyện để trưởng thành mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng bài học mới cần chủ động tập luyện để trưởng thành qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "La Hầu (Nút Bắc) tại Song Ngư: hướng bài học mới cần chủ động tập luyện để trưởng thành mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng hướng bài học mới cần chủ động tập luyện để trưởng thành qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    },
+    "ke_do": {
+      "ten": "Kế Đô (Nút Nam)",
+      "ky_hieu": "☋",
+      "vai_tro": "vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Kế Đô (Nút Nam) tại Bạch Dương: vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "Kế Đô (Nút Nam) tại Kim Ngưu: vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "Kế Đô (Nút Nam) tại Song Tử: vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "Kế Đô (Nút Nam) tại Cự Giải: vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "Kế Đô (Nút Nam) tại Sư Tử: vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "Kế Đô (Nút Nam) tại Xử Nữ: vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "Kế Đô (Nút Nam) tại Thiên Bình: vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "Kế Đô (Nút Nam) tại Bọ Cạp: vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "Kế Đô (Nút Nam) tại Nhân Mã: vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "Kế Đô (Nút Nam) tại Ma Kết: vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "Kế Đô (Nút Nam) tại Bảo Bình: vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "Kế Đô (Nút Nam) tại Song Ngư: vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng vốn quen thuộc sẵn có nhưng tránh trú ẩn quá lâu qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    },
+    "chiron": {
+      "ten": "Chiron",
+      "ky_hieu": "⚷",
+      "vai_tro": "điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh",
+      "theo_cung": {
+        "bach_duong": {
+          "diem_sang": "Chiron tại Bạch Dương: điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh mang sắc thái chủ động mở lối, thẳng thắn và nhạy với cơ hội khởi đầu.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bạch Dương không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bạch Dương."
+        },
+        "kim_nguu": {
+          "diem_sang": "Chiron tại Kim Ngưu: điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh mang sắc thái bền bỉ tích luỹ, chuộng giá trị thực chất và nhịp độ ổn định.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Kim Ngưu không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh qua từng thói quen nhỏ đều đặn phù hợp với tính chất Kim Ngưu."
+        },
+        "song_tu": {
+          "diem_sang": "Chiron tại Song Tử: điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh mang sắc thái nhạy thông tin, kết nối đa chiều và thích học hỏi linh hoạt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Tử."
+        },
+        "cu_giai": {
+          "diem_sang": "Chiron tại Cự Giải: điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh mang sắc thái giàu sự che chở, coi trọng cảm giác an toàn và gắn kết thân tình.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Cự Giải không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh qua từng thói quen nhỏ đều đặn phù hợp với tính chất Cự Giải."
+        },
+        "su_tu": {
+          "diem_sang": "Chiron tại Sư Tử: điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh mang sắc thái ấm áp tự chủ, cần không gian sáng tạo hào sảng và chân thành.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Sư Tử không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh qua từng thói quen nhỏ đều đặn phù hợp với tính chất Sư Tử."
+        },
+        "xu_nu": {
+          "diem_sang": "Chiron tại Xử Nữ: điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh mang sắc thái tỉ mỉ phân loại, giỏi tinh chỉnh quy trình và hữu ích thực tế.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Xử Nữ không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh qua từng thói quen nhỏ đều đặn phù hợp với tính chất Xử Nữ."
+        },
+        "thien_binh": {
+          "diem_sang": "Chiron tại Thiên Bình: điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh mang sắc thái cân nhắc công bằng, giỏi điều phối quan hệ và thẩm mỹ hài hoà.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Thiên Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh qua từng thói quen nhỏ đều đặn phù hợp với tính chất Thiên Bình."
+        },
+        "bo_cap": {
+          "diem_sang": "Chiron tại Bọ Cạp: điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh mang sắc thái tập trung chiều sâu, nhìn thẳng bản chất và giữ cam kết bền chặt.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bọ Cạp không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bọ Cạp."
+        },
+        "nhan_ma": {
+          "diem_sang": "Chiron tại Nhân Mã: điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh mang sắc thái hướng tầm nhìn rộng, ưa khám phá triết lý và trải nghiệm xa.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Nhân Mã không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh qua từng thói quen nhỏ đều đặn phù hợp với tính chất Nhân Mã."
+        },
+        "ma_ket": {
+          "diem_sang": "Chiron tại Ma Kết: điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh mang sắc thái trọng kỷ luật đường dài, chịu trách nhiệm và xây nền từng bước.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Ma Kết không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh qua từng thói quen nhỏ đều đặn phù hợp với tính chất Ma Kết."
+        },
+        "bao_binh": {
+          "diem_sang": "Chiron tại Bảo Bình: điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh mang sắc thái độc lập tư duy, quan tâm cải tiến hệ thống và lợi ích tập thể.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Bảo Bình không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh qua từng thói quen nhỏ đều đặn phù hợp với tính chất Bảo Bình."
+        },
+        "song_ngu": {
+          "diem_sang": "Chiron tại Song Ngư: điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh mang sắc thái cảm thông tinh tế, giàu trực giác nghệ thuật và lòng bao dung.",
+          "nen_de_y": "Khi căng việc, nên giữ nhịp điều độ để nét Song Ngư không đi quá đà thành vội vã hoặc khép kín.",
+          "viec_ung_dung": "Nuôi dưỡng điểm nhạy cảm riêng giúp bạn thấu hiểu và hướng dẫn người đồng cảnh qua từng thói quen nhỏ đều đặn phù hợp với tính chất Song Ngư."
+        }
+      }
+    }
+  }
+}

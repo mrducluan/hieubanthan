@@ -1,0 +1,110 @@
+{
+  "_nguon": "Stage 4.2 English overlay — 12 Houses & Angles.",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "he_nha": {
+    "whole_sign": {
+      "ten": "Whole Sign Houses",
+      "giai_thich": "Each 30-degree zodiac sign forms one full house starting from the Rising sign — the classical Hellenistic standard, clean at every latitude."
+    },
+    "placidus": {
+      "ten": "Placidus Houses",
+      "giai_thich": "Time-trisected semi-diurnal/nocturnal house cusps; automatically falls back safely to Whole Sign at latitudes >= 66 degrees."
+    },
+    "khong_gio_solar": {
+      "ten": "Solar Chart (Birth Time Unknown)",
+      "giai_thich": "Without a known birth hour, houses and Ascendant are omitted honestly while planetary signs and the Moon's 24-hour range are shown."
+    }
+  },
+  "nha": {
+    "1": {
+      "ten": "1st House · Self & Approach",
+      "linh_vuc": "first impressions, personal agency, and physical vitality",
+      "y_chinh": "1st House · Self & Approach centers on first impressions, personal agency, and physical vitality."
+    },
+    "2": {
+      "ten": "2nd House · Personal Resources & Values",
+      "linh_vuc": "earning habits, material stewardship, and self-worth",
+      "y_chinh": "2nd House · Personal Resources & Values centers on earning habits, material stewardship, and self-worth."
+    },
+    "3": {
+      "ten": "3rd House · Learning, Siblings & Daily Exchange",
+      "linh_vuc": "everyday writing, study habits, and local networks",
+      "y_chinh": "3rd House · Learning, Siblings & Daily Exchange centers on everyday writing, study habits, and local networks."
+    },
+    "4": {
+      "ten": "4th House · Home, Roots & Private Foundation",
+      "linh_vuc": "family roots, living space, and private emotional grounding",
+      "y_chinh": "4th House · Home, Roots & Private Foundation centers on family roots, living space, and private emotional grounding."
+    },
+    "5": {
+      "ten": "5th House · Creativity, Joy & Offspring",
+      "linh_vuc": "creative play, heartfelt expression, and mentoring younger generations",
+      "y_chinh": "5th House · Creativity, Joy & Offspring centers on creative play, heartfelt expression, and mentoring younger generations."
+    },
+    "6": {
+      "ten": "6th House · Daily Craft, Service & Well-Being",
+      "linh_vuc": "daily workflows, practical craftsmanship, and health routines",
+      "y_chinh": "6th House · Daily Craft, Service & Well-Being centers on daily workflows, practical craftsmanship, and health routines."
+    },
+    "7": {
+      "ten": "7th House · Committed Partnerships & Agreements",
+      "linh_vuc": "marriage, one-to-one business partners, and clear covenants",
+      "y_chinh": "7th House · Committed Partnerships & Agreements centers on marriage, one-to-one business partners, and clear covenants."
+    },
+    "8": {
+      "ten": "8th House · Shared Capital, Trust & Deep Renewal",
+      "linh_vuc": "joint finances, shared obligations, and psychological resilience",
+      "y_chinh": "8th House · Shared Capital, Trust & Deep Renewal centers on joint finances, shared obligations, and psychological resilience."
+    },
+    "9": {
+      "ten": "9th House · Higher Study, Long Journeys & Worldview",
+      "linh_vuc": "advanced study, cross-cultural travel, and ethical horizon",
+      "y_chinh": "9th House · Higher Study, Long Journeys & Worldview centers on advanced study, cross-cultural travel, and ethical horizon."
+    },
+    "10": {
+      "ten": "10th House · Vocation, Public Standing & Legacy",
+      "linh_vuc": "long-term career direction, public reputation, and leadership",
+      "y_chinh": "10th House · Vocation, Public Standing & Legacy centers on long-term career direction, public reputation, and leadership."
+    },
+    "11": {
+      "ten": "11th House · Community, Allies & Future Plans",
+      "linh_vuc": "professional circles, shared causes, and long-range aspirations",
+      "y_chinh": "11th House · Community, Allies & Future Plans centers on professional circles, shared causes, and long-range aspirations."
+    },
+    "12": {
+      "ten": "12th House · Solitude, Reflection & Quiet Restoration",
+      "linh_vuc": "quiet retreat, releasing hidden fatigue, and inner restoration",
+      "y_chinh": "12th House · Solitude, Reflection & Quiet Restoration centers on quiet retreat, releasing hidden fatigue, and inner restoration."
+    }
+  },
+  "truc_goc": {
+    "asc": {
+      "bach_duong": "Aries Rising: your natural doorway into new situations carries direct initiative, candid candor, and quick readiness to begin.",
+      "kim_nguu": "Taurus Rising: your natural doorway into new situations carries steady accumulation, tangible craft, and unhurried reliability.",
+      "song_tu": "Gemini Rising: your natural doorway into new situations carries curious inquiry, agile dialogue, and multi-threaded learning.",
+      "cu_giai": "Cancer Rising: your natural doorway into new situations carries protective care, emotional memory, and devotion to safe belonging.",
+      "su_tu": "Leo Rising: your natural doorway into new situations carries warm self-direction, generous presence, and wholehearted expression.",
+      "xu_nu": "Virgo Rising: your natural doorway into new situations carries discerning refinement, practical service, and clean organization.",
+      "thien_binh": "Libra Rising: your natural doorway into new situations carries fair-minded mediation, relational poise, and balanced proportion.",
+      "bo_cap": "Scorpio Rising: your natural doorway into new situations carries focused intensity, root-cause honesty, and deep loyalty.",
+      "nhan_ma": "Sagittarius Rising: your natural doorway into new situations carries broad horizon-seeking, candid synthesis, and love of exploration.",
+      "ma_ket": "Capricorn Rising: your natural doorway into new situations carries long-horizon discipline, structural accountability, and earned mastery.",
+      "bao_binh": "Aquarius Rising: your natural doorway into new situations carries independent systems thinking, principled reform, and civic perspective.",
+      "song_ngu": "Pisces Rising: your natural doorway into new situations carries receptive empathy, imaginative synthesis, and quiet compassion."
+    },
+    "mc": {
+      "bach_duong": "Aries Midheaven (MC): public vocation and reputation mature through direct initiative, candid candor, and quick readiness to begin.",
+      "kim_nguu": "Taurus Midheaven (MC): public vocation and reputation mature through steady accumulation, tangible craft, and unhurried reliability.",
+      "song_tu": "Gemini Midheaven (MC): public vocation and reputation mature through curious inquiry, agile dialogue, and multi-threaded learning.",
+      "cu_giai": "Cancer Midheaven (MC): public vocation and reputation mature through protective care, emotional memory, and devotion to safe belonging.",
+      "su_tu": "Leo Midheaven (MC): public vocation and reputation mature through warm self-direction, generous presence, and wholehearted expression.",
+      "xu_nu": "Virgo Midheaven (MC): public vocation and reputation mature through discerning refinement, practical service, and clean organization.",
+      "thien_binh": "Libra Midheaven (MC): public vocation and reputation mature through fair-minded mediation, relational poise, and balanced proportion.",
+      "bo_cap": "Scorpio Midheaven (MC): public vocation and reputation mature through focused intensity, root-cause honesty, and deep loyalty.",
+      "nhan_ma": "Sagittarius Midheaven (MC): public vocation and reputation mature through broad horizon-seeking, candid synthesis, and love of exploration.",
+      "ma_ket": "Capricorn Midheaven (MC): public vocation and reputation mature through long-horizon discipline, structural accountability, and earned mastery.",
+      "bao_binh": "Aquarius Midheaven (MC): public vocation and reputation mature through independent systems thinking, principled reform, and civic perspective.",
+      "song_ngu": "Pisces Midheaven (MC): public vocation and reputation mature through receptive empathy, imaginative synthesis, and quiet compassion."
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "_nguon": "Chặng 4.3 — Trạch Nhật chuyên sâu đối chiếu Khâm Định Hiệp Kỷ Biện Phương Thư (câu Hán trích nguyên văn từ hiep_ky_bien_phuong_thu_du_bo.json).",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "khung": {
+    "tieu_de": "Đối chiếu Trạch Nhật Cổ điển (Hiệp Kỷ Biện Phương Thư)",
+    "phu_de": "Bổ sung góc nhìn phân tích gốc can chi của Hiệp Kỷ Biện Phương Thư bên cạnh lịch chọn ngày thông dụng: xét quan hệ Can – Chi (Bảo, Nghĩa, Chế, Chuyên, Phạt), ngày giao mùa Tứ Ly – Tứ Tuyệt, phương Tam Sát khi động thổ/tu tạo và tinh thần Biện Ngoa gạt bỏ các kiêng kỵ doạ dẫm vô căn cứ.",
+    "ranh_gioi": "Trạch nhật cổ điển giúp chọn nhịp tâm lý chủ động và tránh ngày giao tiết gay gắt; sự chuẩn bị kỹ về con người và quy trình luôn là gốc quyết định."
+  },
+  "ngu_loai_nhat": {
+    "bao": {
+      "ten": "Bảo nhật (Can sinh Chi)",
+      "y_nghia": "Trên nâng đỡ dưới: thuận cho việc ban giao, mở hàng, đón khách và gắn kết đội ngũ."
+    },
+    "nghia": {
+      "ten": "Nghĩa nhật (Chi sinh Can)",
+      "y_nghia": "Gốc rễ nâng đỡ ngọn: rất thuận cho ký kết hợp tác, cầu quý nhân và khởi sự đường dài."
+    },
+    "che": {
+      "ten": "Chế nhật (Can chế Chi)",
+      "y_nghia": "Chủ động cầm cương điều phối: hợp việc chấn chỉnh quy trình, thu xếp kỷ luật và giải quyết tồn đọng."
+    },
+    "chuyen": {
+      "ten": "Chuyên nhật (Can Chi cùng hành)",
+      "y_nghia": "Khí lực thuần nhất tập trung: hợp việc chuyên sâu, hội họp nội bộ (tránh dàn trải nhiều đầu việc trái chiều)."
+    },
+    "phat": {
+      "ten": "Phạt nhật (Chi dưới ngược lên Can)",
+      "y_nghia": "Dưới ngược lên trên, sức cản ngoại cảnh lớn: Hiệp Kỷ khuyên không chọn cho việc đại sự mở mang mới."
+    }
+  },
+  "trich_co_thu": {
+    "ngu_loai": {
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 5",
+      "han": "枝生幹也制日者幹克枝也",
+      "y_nghia": "Xét tương sinh và chế hoá giữa Thiên Can và Địa Chi của ngày để phân định Nghĩa nhật, Chế nhật và Phạt nhật."
+    },
+    "tu_ly_tu_tuyet": {
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 9",
+      "han": "四離冬至夏至春分秋分各前一日四絶立春立夏立秋立冬各前一日",
+      "y_nghia": "Tứ Ly là một ngày trước Xuân phân, Hạ chí, Thu phân, Đông chí; Tứ Tuyệt là một ngày trước Lập xuân, Lập hạ, Lập thu, Lập đông — lúc khí mùa chuyển giao nên tĩnh dưỡng, tránh khởi công lớn."
+    },
+    "thap_ac_bien_ngoa": {
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 5 (Biện ngoa)",
+      "han": "按無禄日乃禄䧟旬空故以為忌然六壬火珠林之法填實則不空非不論年月而概以此十日為禄空也",
+      "y_nghia": "Hiệp Kỷ chỉ rõ ngày gọi là Thập Ác Đại Bại thực chất chỉ là Lộc rơi vào Tuần Không; nếu năm tháng điền thực thì hoàn toàn không rỗng, không nên kiêng mù quáng cho mọi việc."
+    },
+    "tam_sat": {
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 8",
+      "han": "修方若遇吉星所值不問太嵗三煞官符大將軍諸凶",
+      "y_nghia": "Phương Tam Sát chỉ lưu ý khi tu tạo động thổ đúng phương vị đó, còn giao dịch sinh hoạt thường nhật hoặc gặp cát tinh chế hoá thì không đáng ngại."
+    },
+    "bien_ngoa_chung": {
+      "sach": "Khâm Định Hiệp Kỷ Biện Phương Thư · Quyển 36 (Biện ngoa)",
+      "han": "隂陽家言多病迂泥術士揑造益屬荒唐",
+      "y_nghia": "Chính sách lịch kinh điển bác bỏ các ngày kiêng gán ghép hoang đường do thuật sĩ đời sau tự đặt ra để hù doạ dân gian."
+    }
+  }
+}

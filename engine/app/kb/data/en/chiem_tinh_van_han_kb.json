@@ -1,0 +1,36 @@
+{
+  "_nguon": "Stage 4.2 English overlay — Planetary Cycles & Transits.",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "saturn_return": {
+    "lan_1_29_tuoi": {
+      "ten": "First Saturn Return (around ages 28–30)",
+      "y_nghia": "Saturn completes its ~29.5-year orbit back to its natal degree: a threshold for pruning borrowed expectations and committing to authentic adult structure.",
+      "viec_nen_lam": [
+        "Clarify one core craft or vocation to build steadily over the next decade.",
+        "Audit financial commitments, agreements, and sustainable daily routines."
+      ]
+    },
+    "lan_2_58_tuoi": {
+      "ten": "Second Saturn Return (around ages 57–60)",
+      "y_nghia": "The second ~29.5-year cycle invites streamlining excess obligations and distilling lived wisdom.",
+      "viec_nen_lam": [
+        "Rebalance workload around long-term vitality and meaningful focus.",
+        "Document or mentor practical lessons earned over decades."
+      ]
+    },
+    "ngoai_chu_ky": {
+      "ten": "Between Saturn Return Milestones",
+      "y_nghia": "Transiting Saturn is currently cultivating another sector of your chart through steady incremental practice.",
+      "viec_nen_lam": [
+        "Keep consistent weekly habits aligned with your current annual priorities."
+      ]
+    }
+  },
+  "jupiter_return": {
+    "dang_trong": "Jupiter is returning to its natal sector (~12-year cycle): a favorable window for structured learning, broader horizons, and constructive alliances.",
+    "binh_thuong": "Transiting Jupiter is illuminating a new area of growth; deepen understanding before scaling commitments."
+  },
+  "solar_return": {
+    "giai_thich": "The exact UTC moment the Sun returns to its natal longitude highlights the central theme of your solar year ahead."
+  }
+}

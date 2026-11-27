@@ -25,8 +25,8 @@
 | Tarot | 1 |  | 1 |  |  |  |  |
 | Kỳ Môn |  | 1 |  |  | 1 |  |  |
 | Thần số |  |  |  | 11 | 13 |  |  |
-| Lịch · tuổi · tập quán |  | 1 |  | 5 | 1 |  |  |
-| Liên mảng · kỹ thuật |  | 1 |  |  | 12 | 4 | 7 |
+| Lịch · tuổi · tập quán |  | 1 |  | 5 | 1 | 1 |  |
+| Liên mảng · kỹ thuật |  | 1 |  |  | 12 | 5 | 7 |
 
 ## Phần đã có nguyên văn đối chiếu (test khoá)
 
@@ -203,7 +203,9 @@
 | Lịch · tuổi · tập quán | `nam_tong_quan_kb.json` |  | Tập quán / truyền khẩu phổ thông |  |
 | Lịch · tuổi · tập quán | `sao_han_kb.json` |  | Tập quán / truyền khẩu phổ thông |  |
 | Lịch · tuổi · tập quán | `thoi_gian_lop_kb.json` |  | Tập quán / truyền khẩu phổ thông |  |
+| Lịch · tuổi · tập quán | `trach_nhat_hiep_ky_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 4.3: nháp AI đối chiếu Trạch Nhật Hiệp Kỷ Biện Phương Thư (câu Hán khớp hiep_ky_bien_phuong_thu_du_bo), chờ chủ dự án đọc duyệt |
 | Lịch · tuổi · tập quán | `tuoi_dan_gian_kb.json` |  | Tập quán / truyền khẩu phổ thông |  |
+| Liên mảng · kỹ thuật | `astro_east_west_bridge_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 4.2: nháp AI Cầu nối Chiêm tinh Phương Tây × Bát tự & Tử vi Phương Đông, chờ chủ dự án đọc duyệt |
 | Liên mảng · kỹ thuật | `chan_dung_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `chu_y_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `chuyen_nghia_kb.json` |  | Ban biên tập soạn | nghĩa đời nay do ban biên tập viết |

@@ -1,0 +1,31 @@
+{
+  "_nguon": "Stage 4.2 English overlay — 5 Major Ptolemaic Aspects.",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "loai_goc": {
+    "trung_hop": {
+      "ten": "Conjunction (0°)",
+      "tinh_chat": "hoi_tu",
+      "cach_doc": "Two planetary functions fuse into a concentrated focal point — strong drive benefiting from periodic objective perspective."
+    },
+    "luc_hop": {
+      "ten": "Sextile (60°)",
+      "tinh_chat": "thuan_nhip",
+      "cach_doc": "Constructive openings emerge smoothly whenever you take deliberate initiative."
+    },
+    "vuong_goc": {
+      "ten": "Square (90°)",
+      "tinh_chat": "co_xat_truong_thanh",
+      "cach_doc": "Productive friction that builds real competence by resolving competing priorities through action."
+    },
+    "tam_hop": {
+      "ten": "Trine (120°)",
+      "tinh_chat": "thuan_nhip",
+      "cach_doc": "Natural harmonic flow within the same element — easy talent that grows best with conscious structure."
+    },
+    "doi_xung": {
+      "ten": "Opposition (180°)",
+      "tinh_chat": "co_xat_truong_thanh",
+      "cach_doc": "A mirror axis inviting conscious balance between personal autonomy and relational reciprocity."
+    }
+  }
+}

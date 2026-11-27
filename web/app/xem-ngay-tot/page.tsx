@@ -7,6 +7,7 @@ import { TieuDeTrang } from "@/components/cms/DauCms";
 import { TrangCongCu } from "@/components/cms/TrangCongCu";
 import { XemNgayTot } from "@/components/hoang-lich/XemNgayTot";
 import { NgayTotTheoViec } from "@/components/hoang-lich/NgayTotTheoViec";
+import { DoiChieuHiepKy } from "@/components/hoang-lich/DoiChieuHiepKy";
 import { homNayVN, ngayTotCongKhai, thangCongKhai } from "@/lib/hoang-lich";
 import { lichNgayChoNgay } from "@/lib/lich-am";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
@@ -39,6 +40,7 @@ export default async function Page() {
           <XemNgayTot banDau={d} thang={t} />
           <p className="mt-4 text-xs text-fg-faint">{c("xnt.co_dinh")} <Link href={duongNgay(iso, true)} className="text-gold underline">{duongNgay(iso, true)}</Link></p>
           <NgayTotTheoViec className="mt-10" />
+          <DoiChieuHiepKy ngayMacDinh={iso} en />
         </div>
       </TrangCongCu>
     );
@@ -52,6 +54,7 @@ export default async function Page() {
         <p className="mt-4 text-xs text-fg-faint">Đường dẫn cố định của ngày này: <Link href={`/xem-ngay-tot/${iso}`} className="text-gold underline">/xem-ngay-tot/{iso}</Link></p>
         <TomTatNam kieu="ngay" ngay={iso} gonDong tieuDe={`Hôm nay ${iso.split("-").reverse().join("/")} tốt hay xấu?`} nhanLink="Xem đủ giờ tốt, việc nên làm của ngày này" />
         <NgayTotTheoViec className="mt-10" />
+        <DoiChieuHiepKy ngayMacDinh={iso} />
       </div>
     </TrangCongCu>
   );

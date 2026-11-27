@@ -1,0 +1,58 @@
+{
+  "_nguon": "Stage 4.3 English overlay — Classical Date Selection Inspector (Imperially Endorsed Xie Ji Bian Fang Shu).",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "khung": {
+    "tieu_de": "Classical Date Selection Inspector (Xie Ji Bian Fang Shu)",
+    "phu_de": "Adds classical stem-branch diagnostics from the Xie Ji Bian Fang Shu alongside standard almanac lookup: Stem–Branch Five Day Types (Precious, Righteous, Controlling, Focused, Adverse), seasonal transition days (Four Separations & Four Extinctions), Three Sha directional notes for construction, and the classic's own rational critique of unfounded folk taboos.",
+    "ranh_gioi": "Classical date selection supports calm scheduling and avoids harsh seasonal cusps; thorough practical preparation remains the decisive foundation."
+  },
+  "ngu_loai_nhat": {
+    "bao": {
+      "ten": "Precious Day (Stem generates Branch)",
+      "y_nghia": "Top-down support: well suited for launches, welcoming clients, and team alignment."
+    },
+    "nghia": {
+      "ten": "Righteous Day (Branch generates Stem)",
+      "y_nghia": "Root supporting crown: favorable for signing agreements, seeking allies, and long-term beginnings."
+    },
+    "che": {
+      "ten": "Controlling Day (Stem governs Branch)",
+      "y_nghia": "Deliberate command: suited for operational restructuring, audits, and clearing backlogs."
+    },
+    "chuyen": {
+      "ten": "Focused Day (Stem & Branch same phase)",
+      "y_nghia": "Concentrated single-phase focus: suited for deep internal work rather than scattered expansion."
+    },
+    "phat": {
+      "ten": "Adverse Day (Branch counters Stem)",
+      "y_nghia": "Upward friction from foundation against stem: classically avoided when scheduling major new openings."
+    }
+  },
+  "trich_co_thu": {
+    "ngu_loai": {
+      "sach": "Xie Ji Bian Fang Shu · Scroll 5",
+      "han": "枝生幹也制日者幹克枝也",
+      "y_nghia": "Weighs generation and control between the day's Heavenly Stem and Earthly Branch."
+    },
+    "tu_ly_tu_tuyet": {
+      "sach": "Xie Ji Bian Fang Shu · Scroll 9",
+      "han": "四離冬至夏至春分秋分各前一日四絶立春立夏立秋立冬各前一日",
+      "y_nghia": "Four Separations mark the eve of the solstices and equinoxes; Four Extinctions mark the eve of the four seasonal starts — transitional days suited for rest rather than major groundbreakings."
+    },
+    "thap_ac_bien_ngoa": {
+      "sach": "Xie Ji Bian Fang Shu · Scroll 5 (Rational Critique)",
+      "han": "按無禄日乃禄䧟旬空故以為忌然六壬火珠林之法填實則不空非不論年月而概以此十日為禄空也",
+      "y_nghia": "Clarifies that Ten Great Defeat days merely reflect Salary in Void, which ceases to be void when filled by the year or month — never a blanket taboo."
+    },
+    "tam_sat": {
+      "sach": "Xie Ji Bian Fang Shu · Scroll 8",
+      "han": "修方若遇吉星所值不問太嵗三煞官符大將軍諸凶",
+      "y_nghia": "Three Sha applies specifically to heavy earthwork in that compass sector, not ordinary meetings or commerce."
+    },
+    "bien_ngoa_chung": {
+      "sach": "Xie Ji Bian Fang Shu · Scroll 36 (Rational Critique)",
+      "han": "隂陽家言多病迂泥術士揑造益屬荒唐",
+      "y_nghia": "The imperial almanac explicitly refutes exaggerated folk taboos invented to alarm ordinary households."
+    }
+  }
+}
