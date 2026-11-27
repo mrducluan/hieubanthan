@@ -19,7 +19,9 @@ from typing import Literal
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from app import config
 from app.config import ENGINE_VERSION
+from app.kb.loi import L
 from app.calc import nhan_tuong as calc
 from app.calc import nhan_tuong_do as calc_do
 from app.kb import nhan_tuong_do_hinh as do_hinh_kb
@@ -251,3 +253,31 @@ def api_do_hinh_mot(ma: str) -> dict:
     if d is None:
         raise HTTPException(404, detail="Không có đồ hình này.")
     return {"engine_version": ENGINE_VERSION, "pham_vi": "nhan_tuong_do_hinh", **d}
+
+
+class DoiChieuTuongMenhInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    ngay_sinh: _dt.date
+    gioi_tinh: Literal["nam", "nu"] = "nam"
+    gio_sinh: str | None = Field(default=None, pattern=r"^([01]\d|2[0-3]):[0-5]\d$")
+    do_lech_hai_tay: Literal["thuan_troi", "khong_thuan_troi", "can_doi"] = "can_doi"
+    muc_chi_tay: list[Literal["ngon_cai", "duong_tri_dao", "duong_su_nghiep", "duong_thai_duong", "tam_giac_tu_giac"]] | None = Field(
+        default=None, max_length=5
+    )
+    ngay_xem: _dt.date | None = None
+
+
+@router.post("/doi-chieu-menh")
+def api_doi_chieu_tuong_menh(inp: DoiChieuTuongMenhInput) -> dict:
+    if not (1900 <= inp.ngay_sinh.year and inp.ngay_sinh <= config.hom_nay_vn()):
+        raise HTTPException(422, detail=L("chang3.ngay_sinh", "Ngày sinh cần trong khoảng từ năm 1900 đến hôm nay."))
+    from app.luangiai import tuong_menh_doi_chieu as tmdc  # noqa: PLC0415
+    kq = tmdc.doi_chieu_tuong_menh(
+        ngay_sinh=inp.ngay_sinh,
+        gioi_tinh=inp.gioi_tinh,
+        gio_sinh=inp.gio_sinh,
+        do_lech_hai_tay=inp.do_lech_hai_tay,
+        muc_chi_tay=list(inp.muc_chi_tay) if inp.muc_chi_tay else None,
+        ngay_xem=inp.ngay_xem,
+    )
+    return {"engine_version": ENGINE_VERSION, **kq}

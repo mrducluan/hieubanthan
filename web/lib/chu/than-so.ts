@@ -255,4 +255,14 @@ export const CHU_THAN_SO_UI = {
   "gy.dong_y": m(H, "Đồng ý dùng ghi chú này để cải thiện câu trả lời (lưu kèm các con số rút gọn, không kèm tên, ngày sinh hay tài khoản; email, số điện thoại, ngày tháng tự bị xoá; tự xoá sau 12 tháng). Không tích thì chỉ gửi \"chưa đúng\", không gửi ghi chú; ghi chú không gắn với bạn nên không gỡ riêng được sau khi gửi.", "I agree to this note being used to improve answers (stored with the reduced numbers only — no name, birth date or account; emails, phone numbers and dates are removed automatically; deleted after 12 months). If you don't tick, only \"not quite\" is sent, without the note. The note is not linked to you, so it can't be removed individually after sending."),
   "gy.chinh_sach": m(H, "Chính sách quyền riêng tư", "Privacy policy"),
   "gy.luu": m(H, "Góp ý lưu các con số rút gọn của bạn (nhiều người có chung), không lưu tên hay ngày sinh.", "Feedback stores your reduced numbers (shared by many people), never your name or birth date."),
+
+  // ---------------------------------------------------------------- các trường phái khác (DoiChieuDaPhaiThanSo — CHANG-3)
+  "dp.tieu_de": m(D, "Các trường phái khác đọc ngày sinh của bạn thế nào?", "How do other schools read your birth date?"),
+  "dp.dan": m(D, "Mỗi trường phái có một cách đếm riêng nên con số có thể khác nhau. Bài đọc chính ở trang này theo Pitago; phần dưới chỉ để bạn so thêm.",
+    "Each school counts in its own way, so the numbers can differ. The main reading on this page follows the Pythagorean method; this part is only for comparison."),
+  "dp.mo": m(D, "Xem các trường phái khác", "Show other schools"),
+  "dp.dang": m(D, "Đang tải…", "Loading…"),
+  "dp.loi": m(D, "Chưa tải được phần so sánh các trường phái.", "Could not load the comparison of schools."),
+  "dp.loi_mang": m(D, "Mất kết nối tạm thời — thử lại sau ít phút.", "Connection lost for a moment — please try again in a few minutes."),
+  "dp.thu_lai": m(D, "Thử lại", "Try again"),
 } satisfies BangChu;

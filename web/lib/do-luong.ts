@@ -168,6 +168,11 @@ const CHO_PHEP: Record<string, "string" | "number" | "boolean"> = {
   do_tin: "string",     // do_mat_chinh: thap / trung_binh / cao / so (máy trả con số) / khong
   tay: "string",        // chỉ tay: trai / phai (duong_cv_phan_hoi, chup_tay…)
   kenh: "string",       // HCS-1: share_target — zalo / messenger / facebook / anh / chep / luu_anh / khac
+  tinh_huong: "string", // CHANG-3: su_vu_xem — mã loại việc (dam_phan_thuong_vu…)
+  tu_gieo: "boolean",   // CHANG-3: su_vu_xem — người dùng tự nhập 6 lần gieo
+  so_la: "number",      // CHANG-3: tarot_chieu_sau_mo — số lá ngược
+  hai_tay: "string",    // CHANG-3: doi_chieu_menh_xem — can_doi / thuan_troi / khong_thuan_troi
+  tu_ho_so: "boolean",  // CHANG-3: doi_chieu_menh_xem — ngày sinh lấy từ hồ sơ
   qc: "string",         // META-QC / QC-G: "meta" | "google" = phiên này (hoặc ≤ 30 ngày trước) vào từ quảng cáo Facebook / Instagram (lib/nguon-qc.ts)
 };
 const GIOI_HAN_CHUOI = 40;

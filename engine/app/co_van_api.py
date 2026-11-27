@@ -11,6 +11,8 @@ from pydantic import BaseModel, ConfigDict, Field
 from app.calc import tuvi_an_sao
 from app.config import ENGINE_VERSION
 from app.luangiai import co_van_tam_tai as cv
+from app.luangiai import su_vu_tuc_thoi as sv
+from app.kb.loi import L
 from app import config
 from app.tuvi_api import _loi_an_sao
 
@@ -76,3 +78,47 @@ def api_co_van(inp: CoVanIn) -> dict:
     except ValueError as e:
         raise HTTPException(422, detail=str(e)) from e
     return {"engine_version": ENGINE_VERSION, **kq}
+
+
+TinhHuongSuVu = Literal[
+    "dam_phan_thuong_vu",
+    "ky_ket_hop_dong",
+    "thu_hoi_cong_no",
+    "ra_mat_khai_truong",
+    "hoa_giai_bat_dong",
+    "cho_tin_ket_qua",
+]
+
+
+class SuVuIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    cau_hoi: str = Field(..., min_length=3, max_length=500)
+    tinh_huong: TinhHuongSuVu = "dam_phan_thuong_vu"
+    ngay_xem: dt.date | None = None
+    gio_xem: str | None = Field(default=None, pattern=r"^([01]\d|2[0-3]):[0-5]\d$")
+    utc: float = Field(default=7.0, ge=-12.0, le=14.0, multiple_of=0.25)
+    gia_tri_hao: list[Literal[6, 7, 8, 9]] | None = Field(default=None, min_length=6, max_length=6)
+    hat_giong: str | None = Field(default=None, min_length=4, max_length=128, pattern=r"^[A-Za-z0-9._:-]+$")
+    ngay_sinh: dt.date | None = None
+
+
+@router.post("/v1/co-van/su-vu")
+def api_co_van_su_vu(inp: SuVuIn) -> dict:
+    if inp.ngay_sinh and not (1900 <= inp.ngay_sinh.year and inp.ngay_sinh <= config.hom_nay_vn()):
+        # Chỉ cần ngày sinh cho cổng TUOI-16 → nhận mọi ngày hợp lệ, không chặn người sinh trước 1930 / sau 2025.
+        raise HTTPException(422, detail=L("chang3.ngay_sinh", "Ngày sinh cần trong khoảng từ năm 1900 đến hôm nay."))
+    try:
+        kq = sv.xem_su_vu(
+            cau_hoi=inp.cau_hoi,
+            tinh_huong=inp.tinh_huong,
+            ngay_xem=inp.ngay_xem,
+            gio_xem=inp.gio_xem,
+            utc=inp.utc,
+            gia_tri_hao=list(inp.gia_tri_hao) if inp.gia_tri_hao else None,
+            hat_giong=inp.hat_giong,
+            ngay_sinh=inp.ngay_sinh,
+        )
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)) from e
+    return {"engine_version": ENGINE_VERSION, **kq}
+

@@ -1,0 +1,112 @@
+{
+  "_nguon": "Chặng 3.3 — Đối chiếu Đa phái Thần số học (phần so sánh phụ, người dùng tự mở): Pitago hiện đại · Balliett · Westcott · David Phillips · Chaldea. Câu trích tiếng Anh: Balliett lấy từ kho nguồn (một đoạn, đúng con số ngày sinh), Westcott dùng chung bo_sung_so.json, Chaldea dùng chung thanso_chaldean.json (kep.*.trich).",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "source_id": "thanso_da_phai",
+  "school_id": "da_phai_thanso",
+  "khung": {
+    "tieu_de": "Đối chiếu 5 Góc nhìn Trường phái Thần số học",
+    "phu_de": "Cùng một ngày sinh (và họ tên nếu bạn nhập), mỗi cách xem nhìn một mặt khác nhau: nhịp đường đời, con số như một nốt nhạc, tính chất cổ điển của con số, số chủ đạo và các chặng đỉnh, số kép của tên. Đây là phần so sánh thêm, các cột đọc riêng, không gộp điểm.",
+    "cau_noi_dong_phuong": "Thần số học phác hoạ nét tính cách trội và chu kỳ 9 năm gọn nhẹ chỉ từ ngày sinh dương lịch; nếu muốn soi sâu 12 lĩnh vực (tài chính, gia đạo, cộng sự) theo giờ sinh và mùa sinh, bạn có thể đối chiếu thêm Tử vi và Bát tự.",
+    "ten_phai": {
+      "pitago_hien_dai": "Pitago hiện đại",
+      "balliett_1908": "Con số như nốt nhạc (1908)",
+      "westcott_sepharial": "Truyền thống cổ điển (Westcott)",
+      "david_phillips": "Phillips (Số chủ đạo & 4 Đỉnh)",
+      "chaldea_cheiro": "Chaldea (số kép)"
+    },
+    "lien_ket": [
+      {
+        "ten": "Xem lá số Tử vi 12 cung",
+        "duong": "/tu-vi"
+      },
+      {
+        "ten": "Xem Bát tự tứ trụ theo mùa sinh",
+        "duong": "/bat-tu"
+      }
+    ]
+  },
+  "mau": {
+    "pitago": "Đường đời {dd}; năm {nam} là năm cá nhân {nam_cn}. {ung_dung}",
+    "balliett": "Con số ngày sinh rút gọn là {so}. Cách xem này đọc con số như một nốt nhạc riêng cần học cho trọn, chú trọng nếp sống hằng ngày hơn là đoán việc.",
+    "westcott": "Cách xem cổ điển đọc con số {so} như một tính chất, một tỉ lệ cấu trúc, không dùng để đoán định sự kiện.",
+    "phillips": "Số chủ đạo {scd}; chặng Đỉnh đang đi mang số {dinh}, từ {tu} đến {den} tuổi.",
+    "phillips_khong_dinh": "Số chủ đạo {scd}.",
+    "chaldea_ten": "Họ tên cho số {so}; ngày sinh {ngay} cho gốc {goc_ngay}.",
+    "chaldea_ngay": "Ngày sinh {ngay} cho gốc {goc_ngay}. Nhập họ tên để tính thêm số của tên.",
+    "can_ho_ten": "Cần họ tên để tính số của tên theo bảng chữ Chaldea.",
+    "can_cu_pitago": "Pitago: Đường đời {dd}, năm cá nhân {nam_cn} (mốc 1/1 dương lịch).",
+    "can_cu_balliett": "Sách The Philosophy of Numbers (1908): đọc con số ngày sinh (birth number) {so} như một nốt nhạc.",
+    "can_cu_phillips": "Phillips: Số chủ đạo = cộng ngang mọi chữ số ngày sinh ({cach}).",
+    "can_cu_chaldea": "Chaldea (Cheiro, 1926): bảng chữ theo âm, số 1–8, giữ số kép 10–52."
+  },
+  "trich_co_dien": {
+    "balliett_1908": {
+      "sach": "The Philosophy of Numbers: Their Tone and Colors (1908)",
+      "theo_so": {
+        "3": "If your name digit or birth vibration is 3, to be a perfect character you must express the two preceding vibrations, 1 and 2.",
+        "4": "If 4 is your birth number, find all there is in 4 or F.",
+        "5": "If your birth vibration is 5, you are seeking the knowledge contained in it.",
+        "6": "If the digit of your name or birth vibration is 6, know the desirable thing for you to gain is rest in motion— complete rest and complete motion.",
+        "7": "As 7 is not free, it holds and feels the perfect power it cannot liberate, especially when the birth number is 7, unless it has with it a free number.",
+        "9": "If your birth vibration is 9 and your name is not so high, then have patience with yourself while you are earning this much loved free vibration."
+      },
+      "source_id": "thanso_balliett_philosophy_1908",
+      "school_id": "pythagoras_hien_dai"
+    },
+    "cheiro": {
+      "sach": "Cheiro · Cheiro's Book of Numbers (1926)",
+      "source_id": "thanso_cheiro_book_of_numbers_1926",
+      "school_id": "chaldean_cheiro"
+    }
+  },
+  "theo_so": {
+    "1": {
+      "nhan": "Khởi xướng độc lập",
+      "ung_dung": "Tập trung dẫn dắt bằng gương làm thật, lắng nghe phản biện trước khi chốt."
+    },
+    "2": {
+      "nhan": "Kết nối & điều hoà",
+      "ung_dung": "Giữ ranh giới cá nhân rõ ràng để sự tinh tế không biến thành ôm việc hộ người khác."
+    },
+    "3": {
+      "nhan": "Biểu đạt & sáng tạo",
+      "ung_dung": "Đóng gói ý tưởng thành sản phẩm hoàn chỉnh đúng hạn thay vì mở quá nhiều dự án dở dang."
+    },
+    "4": {
+      "nhan": "Nền móng & quy trình",
+      "ung_dung": "Xây hệ thống từng bước bền bỉ, đồng thời chừa khoảng linh hoạt khi hoàn cảnh đổi nhịp."
+    },
+    "5": {
+      "nhan": "Trải nghiệm & xoay chuyển",
+      "ung_dung": "Neo tự do vào một trục chuyên môn sâu để sự đổi mới tạo ra giá trị tích luỹ dài hạn."
+    },
+    "6": {
+      "nhan": "Trách nhiệm & chăm sóc",
+      "ung_dung": "Chăm lo cho tập thể và gia đình bằng sự tin cậy và san sẻ việc cụ thể, tránh cầu toàn quá mức."
+    },
+    "7": {
+      "nhan": "Chiêm nghiệm & phân tích",
+      "ung_dung": "Kết hợp nghiên cứu độc lập với việc chia sẻ kết quả thực tiễn ra đời sống thường nhật."
+    },
+    "8": {
+      "nhan": "Tổ chức & quản trị nguồn lực",
+      "ung_dung": "Đo hiệu quả bằng giá trị thực tạo ra cho cộng đồng song hành cùng kỷ luật tài chính."
+    },
+    "9": {
+      "nhan": "Tổng kết & phụng sự rộng",
+      "ung_dung": "Biết khép lại những cam kết đã hết vai trò để dồn tâm sức cho việc thật sự có ích."
+    },
+    "11": {
+      "nhan": "Trực giác nhạy & gợi mở (Số bậc thầy 11/2)",
+      "ung_dung": "Neo cảm hứng nhạy bén vào lịch sinh hoạt đều đặn của số gốc 2 để tránh quá tải thần kinh."
+    },
+    "22": {
+      "nhan": "Xây dựng quy mô thực tế (Số bậc thầy 22/4)",
+      "ung_dung": "Đi từng viên gạch kỷ luật của số gốc 4 trước khi mở rộng tầm nhìn lớn."
+    },
+    "33": {
+      "nhan": "Nâng đỡ & dẫn dắt tận tâm (Số bậc thầy 33/6)",
+      "ung_dung": "Giữ sức bền cá nhân ổn định trên nền số 6 trước khi nhận thêm trách nhiệm cộng đồng."
+    }
+  }
+}

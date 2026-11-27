@@ -30,8 +30,9 @@ def test_do_tin_thang_7_muc_tach_ro_luat_tom_y_va_nhap_ai_cho_duyet():
     assert "luat_tom_y" in do_tin.THANG
     assert "nhap_ai_cho_duyet" in do_tin.THANG
     assert len(do_tin.THANG) == 7
-    assert do_tin.muc("ung_dung_co_dien_kb.json") == "nhap_ai_cho_duyet"
-    assert do_tin.muc("go_nut_doi_song_kb.json") == "nhap_ai_cho_duyet"
+    assert do_tin.muc("ung_dung_co_dien_kb.json") == "bien_tap"
+    assert do_tin.muc("go_nut_doi_song_kb.json") == "bien_tap"
+    assert do_tin.muc("su_vu_chien_thuat_kb.json") == "nhap_ai_cho_duyet"
     assert do_tin.muc("tuvi_phi_hoa_luong_672.json") == "luat_tom_y"
     assert do_tin.muc("tuvi_tu_van_thai_tue.json") == "luat_tom_y"
     assert do_tin.muc("battu_thien_ly_menh_cao.json") == "truyen_thong"   # chỉ ghi tên thiên, chưa có trang → không mang mức luat_tom_y

@@ -14,6 +14,7 @@ import { ChonVanTay } from "@/components/chi-tay/ChonVanTay";
 import { ChupBanTay } from "@/components/chi-tay/ChupBanTay";
 import { CongTacPhai, TheoPhai } from "@/components/chi-tay/PhaiChiTay";
 import { ChonChiTayTay, MucTayView } from "@/components/chi-tay/ChonChiTayTay";
+import { DoiChieuTuongMenh } from "@/components/nhan-tuong/DoiChieuTuongMenh";
 import { goiLd, ldDuongDan, ldHoiDap, ldTrangWeb, metaTrang, siteUrl, urlDayDu } from "@/lib/seo";
 import { duongDanCongCu } from "@/lib/duong-dan";
 import { apDungSeo, layNoiDungTrang } from "@/lib/noi-dung-trang";
@@ -188,6 +189,7 @@ export default async function Page() {
         Đọc thêm: <Link href="/nhan-tuong" className="text-gold underline">Xem tướng mặt online</Link> ·{" "}
         <Link href="/nhan-tuong/do-hinh" className="text-gold underline">Đồ hình nhân tướng</Link>
       </p>
+      <DoiChieuTuongMenh moDun="chitay" />
       <KhoiCms ds={nd.khoi.cuoi} duong={DUONG_CHI_TAY} viTri="cuoi" className="mt-10" />
     </div>
   );

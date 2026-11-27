@@ -165,7 +165,7 @@ def luan_phillips(
         "ten_phai": kb["ten_phai"],
         "gioi_thieu": kb["gioi_thieu"],
         "sach_goc": kb.get("sach_goc"),
-        "ho_ten": ho_ten[0],
+        "ho_ten": ho_ten[0] if ho_ten else "",
         "ngay_sinh": f"{d:02d}/{m:02d}/{y}",
         "so_chu_dao": {**scd, "nghia": nghia_scd},
         "kim_tu_thap": {**ktt, "dinh": dinh_kem_nghia},

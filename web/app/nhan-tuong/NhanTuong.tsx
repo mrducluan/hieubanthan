@@ -16,6 +16,7 @@ import { BanDoMat } from "@/components/nhan-tuong/BanDoMat";
 import { BaoCaoNhanTuong } from "@/components/nhan-tuong/BaoCaoNhanTuong";
 import { AnhChanDung } from "@/components/nhan-tuong/AnhChanDung";
 import { KhaoSatGuong } from "@/components/nhan-tuong/KhaoSatGuong";
+import { DoiChieuTuongMenh } from "@/components/nhan-tuong/DoiChieuTuongMenh";
 import { MA_CAU_PHI_ANH, PopupCauHoiPhu } from "@/components/nhan-tuong/PopupCauHoiPhu";
 import { ghi } from "@/lib/do-luong";
 import { postJson } from "@/lib/goi-api";
@@ -225,6 +226,8 @@ export function NhanTuong() {
         Xem thêm bàn tay: <Link href="/chi-tay" className="text-gold underline underline-offset-2">Xem chỉ tay theo sách xưa</Link> — chụp
         lòng bàn tay (ảnh không rời máy) để thấy tám cung trên tay mình, hoặc chọn hình vân giống tay mình.
       </p>}
+
+      <DoiChieuTuongMenh />
     </div>
   );
 }

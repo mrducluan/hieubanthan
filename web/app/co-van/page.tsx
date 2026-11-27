@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { DuongDan } from "@/components/khung/DuongDan";
 import { TieuDeMuc } from "@/components/khung/TieuDe";
-import { CongCoVanTamTai } from "@/components/co-van/CongCoVanTamTai";
+import { KhungTrangCoVan } from "@/components/co-van/KhungTrangCoVan";
 
 export const metadata: Metadata = {
   title: "Cố vấn Tam Tài: hỏi một quyết định, xem ba cách nhìn",
@@ -22,7 +22,7 @@ export default function CoVanPage() {
         mo_ta="Nêu điều bạn đang cân nhắc và ngày sinh (chưa biết giờ sinh vẫn xem được). Ba cách xem đọc riêng: sức của chính bạn, thời điểm và không gian — khi chúng nói khác nhau, trang nói rõ chứ không chọn thay bạn. Miễn phí, không lưu."
       />
       <div className="mt-6">
-        <CongCoVanTamTai macDinhCheDo="doi_song" />
+        <KhungTrangCoVan />
       </div>
     </div>
   );

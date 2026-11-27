@@ -1,0 +1,56 @@
+{
+  "_nguon": "Chặng 3.2 — Đối chiếu Tướng học & Chỉ tay Đông–Tây (Saint-Germain 1897 + Thần Tướng Toàn Biên lưu niên) độc lập với nhịp năm của lá số. Không gộp điểm (CD-1), không chẩn đoán y khoa hay tuổi thọ.",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "source_id": "tuong_menh_doi_chieu",
+  "school_id": "tuong_menh_dong_tay",
+  "khung": {
+    "tieu_de": "Đối chiếu Nhịp Năm Lá Số & Dấu Hiệu Tướng – Chỉ Tay Hiện Tại",
+    "phu_de": "Lá số (Bát tự / Tử vi) soi cấu trúc mùa sinh và nhịp năm; Tướng mặt lưu niên và hai bàn tay (Tiên thiên – Hậu thiên) phản chiếu nếp sinh hoạt thực tế bạn đang tích luỹ. Ba góc nhìn đặt cạnh nhau để tự quan sát, không chấm điểm gộp.",
+    "ranh_gioi": "Các dấu hiệu sắc mặt và đường chỉ tay thay đổi theo giấc ngủ, mức độ căng thẳng và thói quen làm việc; hoàn toàn không dùng để chẩn đoán sức khoẻ hay đoán định tuổi thọ.",
+    "tuoi_nho": "Phần đối chiếu tướng – mệnh chỉ mở cho người từ đủ 16 tuổi trở lên."
+  },
+  "saint_germain_1897": {
+    "sach": "Comte C. de Saint-Germain · Practical Palmistry (1897, phạm vi công cộng)",
+    "muc": {
+      "ngon_cai": {
+        "ten": "Ngón cái — Ý chí và sự tự lực",
+        "nguyen_van_en": "It represents will-power, self-reliance, domineering spirit.",
+        "y_ung_dung": "Sách gắn ngón cái với ý chí, sự tự lực, có khi là tính muốn làm chủ người khác. Nên chú ý dùng ý chí để giữ kế hoạch của mình, không biến thành áp đặt lên người xung quanh."
+      },
+      "duong_tri_dao": {
+        "ten": "Đường Trí đạo — Nhịp suy xét và độ tập trung",
+        "nguyen_van_en": "“A short, clear line, or a long, faintly traced line” — Flightiness, lack of concentration.",
+        "y_ung_dung": "Sách xem đường Trí ngắn, hoặc dài mà mờ, là dấu hiệu dễ phân tâm. Dù đường tay thế nào, khi cần quyết định lớn nên viết rõ tiêu chí ra giấy và làm xong từng việc một."
+      },
+      "duong_su_nghiep": {
+        "ten": "Đường Sự nghiệp — Trục cam kết đường dài",
+        "nguyen_van_en": "\"Rising from the inside of the Triangle in both hands” — Favorable opportunities obtained through hard labor and intelligent planning.",
+        "y_ung_dung": "Sách đọc đường dọc mọc từ trong tam giác ở cả hai tay là cơ hội đến nhờ làm việc chăm chỉ và tính toán có kế hoạch. Nên chú ý giữ đều một nhịp làm việc có kế hoạch, vì đó là phần bạn tự quyết được."
+      },
+      "duong_thai_duong": {
+        "ten": "Đường Thái dương — Sức hoàn tất công việc",
+        "nguyen_van_en": "“Pale or simply poorly colored” — Artistic instincts but insufficient powers of execution; the “Art amateur’s Line.”",
+        "y_ung_dung": "Sách mô tả đường Thái dương nhạt là có năng khiếu nghệ thuật nhưng thiếu sức làm cho trọn. Nên chú ý hoàn thành từng việc nhỏ đến cuối, uy tín đến từ việc đã xong."
+      },
+      "tam_giac_tu_giac": {
+        "ten": "Khoảng Tứ giác giữa đường Tâm và đường Trí — Độ rộng mở",
+        "nguyen_van_en": "\"Wide, with a good Line of Head and a well formed second phalanx of the thumb” — Broadmindedness.",
+        "y_ung_dung": "Sách đọc khoảng Tứ giác rộng, cùng đường Trí tốt, là tính rộng lượng, cởi mở. Nên chú ý nghe hết ý người khác trước khi kết luận khi làm việc nhóm."
+      }
+    },
+    "source_id": "chi_tay_saint_germain_1897",
+    "school_id": "chi_tay_tay"
+  },
+  "nhip_hanh_nam": {
+    "Kim": "Năm mang khí Kim nhắc rèn sự gọn gàng, chốt dứt điểm từng việc và giữ nhịp thở đều đặn.",
+    "Mộc": "Năm mang khí Mộc hợp học thêm kỹ năng mới, mở rộng kết nối và dành thời gian vận động ngoài trời.",
+    "Thủy": "Năm mang khí Thuỷ hợp lắng nghe, bồi đắp chiều sâu chuyên môn và giữ giấc ngủ đủ giấc.",
+    "Hỏa": "Năm mang khí Hoả nhịp việc dễ dồn dập, nên chia nhỏ tiến độ và giữ khoảng nghỉ tĩnh mỗi tối.",
+    "Thổ": "Năm mang khí Thổ hợp củng cố nền tảng tài chính, quy trình làm việc và sự ấm áp trong gia đình."
+  },
+  "hai_tay": {
+    "thuan_troi": "Bàn tay thuận có nét rõ hơn tay không thuận: nếp rèn luyện và lựa chọn chủ động hiện tại của bạn đang dẫn dắt cuộc sống rõ hơn thói quen bẩm sinh.",
+    "khong_thuan_troi": "Bàn tay không thuận rõ nét hơn tay thuận: bạn đang giữ nhiều tiềm năng tự nhiên nhưng gần đây có thể đang phân tán sức lực, nên gom lại một mục tiêu trọng tâm.",
+    "can_doi": "Hai bàn tay có độ rõ tương đương: nhịp sống bên ngoài và tính cách nền bên trong đang đi khá đồng điệu."
+  }
+}

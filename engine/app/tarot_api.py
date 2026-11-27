@@ -171,3 +171,18 @@ def api_la_ngay(ngay: _dt.date | None = None) -> dict:
 @router.post("/la-ngay")
 def api_la_ngay_rieng(inp: LaNgayInput) -> dict:
     return {"engine_version": ENGINE_VERSION, "pham_vi": "tarot_la_ngay", **tr.la_ngay(inp.ngay, inp.ngay_sinh)}
+
+
+class ChieuSauTarotInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    la: list[_La] = Field(..., min_length=1, max_length=10)
+
+
+@router.post("/chieu-sau")
+def api_tarot_chieu_sau(inp: ChieuSauTarotInput) -> dict:
+    from app.luangiai import tarot_chieu_sau as tcs  # noqa: PLC0415
+    try:
+        kq = tcs.phan_tich_chieu_sau([x.model_dump() for x in inp.la])
+    except ValueError as e:
+        raise HTTPException(422, detail=str(e)) from e
+    return {"engine_version": ENGINE_VERSION, **kq}

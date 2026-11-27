@@ -22,7 +22,8 @@ import { BieuDoNgaySinh, ChiSoPhu } from "@/components/than-so/BieuDoNgaySinh";
 import { TheBaLop } from "@/components/than-so/TheBaLop";
 import { useBaiDoc } from "@/lib/bai-doc";
 import { BaoLoi } from "@/components/khung/BaoLoi";
-import { hoTenList, tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
+import { hoTenList, ngaySinhIso, tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
+import { DoiChieuDaPhaiThanSo } from "@/components/than-so/DoiChieuDaPhaiThanSo";
 import { DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
 import { ChaldeaDoc } from "@/components/than-so/ChaldeaDoc";
 import { PhillipsDoc } from "@/components/than-so/PhillipsDoc";
@@ -330,6 +331,10 @@ export function ThanSo() {
 
       <CuoiBaiDoc moDun="thanso_sau" khongGopY khongCta={en} />
       </>)}
+
+      {/* CHANG-3: khối phụ, gập sẵn, SAU bài đọc chính — các trường phái khác chỉ để so (Pitago / Phillips vẫn là bài đọc chính). */}
+      <DoiChieuDaPhaiThanSo key={`${ngaySinhIso(hoSo)}|${hoSo.ho_ten ?? ""}|${quyUoc}`}
+        ngaySinhIso={ngaySinhIso(hoSo)} hoTen={hoSo.ho_ten ?? ""} quyUoc={quyUoc} />
 
       <div id="noi-dau" className="scroll-mt-24"><NoiDau hoSo={hoSo} onHoi={hoiCau} theoPitago={phai === "chaldea"} quyUoc={quyUoc} /></div>
 

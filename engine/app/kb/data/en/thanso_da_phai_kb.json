@@ -1,0 +1,112 @@
+{
+  "_nguon": "Stage 3.3 English overlay — five-school numerology comparison (optional, secondary).",
+  "_trang_thai": "nhap_may",
+  "source_id": "thanso_da_phai",
+  "school_id": "da_phai_thanso",
+  "khung": {
+    "tieu_de": "Five-School Numerology Perspective Comparison",
+    "phu_de": "From the same birth date (and your name, if you enter it), each approach looks at a different side: the life path rhythm, the number as a musical note, the classical quality of the number, the ruling number and its peaks, and the compound number of a name. This is an extra comparison; each column is read on its own, with no combined score.",
+    "cau_noi_dong_phuong": "Numerology sketches core temperament and 9-year cycles from your solar birth date alone; to examine 12 specific life domains (career, property, partnerships) with birth hour and seasonal five-element structure, explore Zi Wei Dou Shu and BaZi alongside it.",
+    "ten_phai": {
+      "pitago_hien_dai": "Modern Pythagorean",
+      "balliett_1908": "The number as a musical note (1908)",
+      "westcott_sepharial": "Classical tradition (Westcott)",
+      "david_phillips": "Phillips (Ruling Number & Four Peaks)",
+      "chaldea_cheiro": "Chaldean (compound numbers)"
+    },
+    "lien_ket": [
+      {
+        "ten": "Explore the 12-Palace Zi Wei chart",
+        "duong": "/tu-vi"
+      },
+      {
+        "ten": "Explore the BaZi Four Pillars by birth season",
+        "duong": "/bat-tu"
+      }
+    ]
+  },
+  "mau": {
+    "pitago": "Life Path {dd}; {nam} is Personal Year {nam_cn}. {ung_dung}",
+    "balliett": "Your reduced birth number is {so}. This approach reads the number as a musical note to be learned in full, focusing on daily habits rather than predicting events.",
+    "westcott": "The classical approach reads the number {so} as a quality and a structural proportion, not as a forecast of events.",
+    "phillips": "Ruling Number {scd}; the current Peak carries number {dinh}, from age {tu} to {den}.",
+    "phillips_khong_dinh": "Ruling Number {scd}.",
+    "chaldea_ten": "Your name gives {so}; birth day {ngay} gives root {goc_ngay}.",
+    "chaldea_ngay": "Birth day {ngay} gives root {goc_ngay}. Enter your name to add the name number.",
+    "can_ho_ten": "A name is needed to compute the name number on the Chaldean letter table.",
+    "can_cu_pitago": "Pythagorean: Life Path {dd}, Personal Year {nam_cn} (counted from January 1).",
+    "can_cu_balliett": "The Philosophy of Numbers (1908): the birth number {so} read as a musical note.",
+    "can_cu_phillips": "Phillips: Ruling Number = all birth-date digits added across ({cach}).",
+    "can_cu_chaldea": "Chaldean (Cheiro, 1926): sound-based letter table, values 1-8, compound numbers 10-52 kept."
+  },
+  "trich_co_dien": {
+    "balliett_1908": {
+      "sach": "The Philosophy of Numbers: Their Tone and Colors (1908)",
+      "theo_so": {
+        "3": "If your name digit or birth vibration is 3, to be a perfect character you must express the two preceding vibrations, 1 and 2.",
+        "4": "If 4 is your birth number, find all there is in 4 or F.",
+        "5": "If your birth vibration is 5, you are seeking the knowledge contained in it.",
+        "6": "If the digit of your name or birth vibration is 6, know the desirable thing for you to gain is rest in motion— complete rest and complete motion.",
+        "7": "As 7 is not free, it holds and feels the perfect power it cannot liberate, especially when the birth number is 7, unless it has with it a free number.",
+        "9": "If your birth vibration is 9 and your name is not so high, then have patience with yourself while you are earning this much loved free vibration."
+      },
+      "source_id": "thanso_balliett_philosophy_1908",
+      "school_id": "pythagoras_hien_dai"
+    },
+    "cheiro": {
+      "sach": "Cheiro · Cheiro's Book of Numbers (1926)",
+      "source_id": "thanso_cheiro_book_of_numbers_1926",
+      "school_id": "chaldean_cheiro"
+    }
+  },
+  "theo_so": {
+    "1": {
+      "nhan": "Independent Initiative",
+      "ung_dung": "Lead through concrete example while inviting candid feedback before locking decisions."
+    },
+    "2": {
+      "nhan": "Bridge & Mediation",
+      "ung_dung": "Keep healthy personal boundaries so empathy stays constructive rather than draining."
+    },
+    "3": {
+      "nhan": "Expression & Synthesis",
+      "ung_dung": "Ship one finished creative piece at a time instead of scattering sparks across too many drafts."
+    },
+    "4": {
+      "nhan": "Structure & Craft",
+      "ung_dung": "Build reliable step-by-step systems while leaving room to adapt when conditions shift."
+    },
+    "5": {
+      "nhan": "Adaptability & Exploration",
+      "ung_dung": "Anchor curiosity onto one compounding skill so variety builds long-term mastery."
+    },
+    "6": {
+      "nhan": "Stewardship & Care",
+      "ung_dung": "Support family and team through shared responsibility rather than perfectionist over-carrying."
+    },
+    "7": {
+      "nhan": "Inquiry & Discernment",
+      "ung_dung": "Pair quiet analytical depth with regular, grounded communication in everyday life."
+    },
+    "8": {
+      "nhan": "Stewardship of Resources",
+      "ung_dung": "Balance operational execution with transparent governance and sustainable pacing."
+    },
+    "9": {
+      "nhan": "Broad Perspective & Service",
+      "ung_dung": "Close completed chapters cleanly so generosity focuses where it genuinely helps."
+    },
+    "11": {
+      "nhan": "Heightened Insight & Inspiration (Master 11/2)",
+      "ung_dung": "Ground intuitive sensitivity in the steady daily rhythm of root number 2."
+    },
+    "22": {
+      "nhan": "Large-Scale Practical Builder (Master 22/4)",
+      "ung_dung": "Lay the disciplined bricks of root number 4 first before scaling ambitious blueprints."
+    },
+    "33": {
+      "nhan": "Compassionate Mentorship (Master 33/6)",
+      "ung_dung": "Protect personal equilibrium on root number 6 before taking on wider mentoring roles."
+    }
+  }
+}

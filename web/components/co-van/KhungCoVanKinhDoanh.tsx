@@ -1,16 +1,18 @@
 "use client";
 // Chặng 2 — Không gian Cố vấn Kinh doanh (/co-van-kinh-doanh): Cẩm nang · Hỏi quyết định · Khi góp vốn · Sổ nháp.
 import { useState } from "react";
-import { ArrowUpRight, Briefcase, Compass, LockKeyhole, Users } from "lucide-react";
+import { ArrowUpRight, Briefcase, Compass, Dices, LockKeyhole, Users } from "lucide-react";
 import Link from "@/components/khung/Lien";
 import type { DoiTacBanCo, MatBangBanCo } from "@/lib/ma-hoa-ban-co";
 import { cn } from "@/lib/utils";
 import { BanCoMaHoaE2EE } from "./BanCoMaHoaE2EE";
 import { CamNangKinhDoanh } from "./CamNangKinhDoanh";
 import { CongCoVanTamTai } from "./CongCoVanTamTai";
+import { SuVuTucThoi } from "./SuVuTucThoi";
+import { CHU_SU_VU } from "@/lib/chu/co-van-su-vu";
 import { GopVon } from "@/components/doanh-chu/GopVon";
 
-type TabKinhDoanh = "quyet_dinh" | "cam_nang" | "gop_von" | "ban_co_e2ee";
+type TabKinhDoanh = "quyet_dinh" | "cam_nang" | "su_vu" | "gop_von" | "ban_co_e2ee";
 
 export function KhungCoVanKinhDoanh() {
   const [tab, setTab] = useState<TabKinhDoanh>("cam_nang");
@@ -49,6 +51,19 @@ export function KhungCoVanKinhDoanh() {
         <button
           type="button"
           role="tab"
+          aria-selected={tab === "su_vu"}
+          data-testid="tab-cvkd-su-vu"
+          onClick={() => setTab("su_vu")}
+          className={cn(
+            "inline-flex min-h-10 items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+            tab === "su_vu" ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:text-fg",
+          )}
+        >
+          <Dices className="size-4" aria-hidden /> {CHU_SU_VU.tab}
+        </button>
+        <button
+          type="button"
+          role="tab"
           aria-selected={tab === "gop_von"}
           data-testid="tab-cvkd-gop-von"
           onClick={() => setTab("gop_von")}
@@ -76,6 +91,7 @@ export function KhungCoVanKinhDoanh() {
 
       {tab === "cam_nang" && <CamNangKinhDoanh matBangTuBanCo={mbChuyenSang} />}
       {tab === "quyet_dinh" && <CongCoVanTamTai macDinhCheDo="kinh_doanh" />}
+      {tab === "su_vu" && <SuVuTucThoi />}
       {tab === "gop_von" && <GopVon key={dsChuyenSang ? "so" : "moi"} tuSoNhap={dsChuyenSang} />}
       {tab === "ban_co_e2ee" && (
         <BanCoMaHoaE2EE
