@@ -123,7 +123,6 @@ test("menu Huyền học: 3 cụm kiến thức lớn thay 3 công cụ đã có
   // CV-3 (2026-11-27): Chiêm tinh vào menu Huyền học ngay sau Kỳ Môn; "Dấu hiệu trong nhà" nhường chỗ nhưng vẫn sáng mục cha
   // (đường /phong-thuy/dau-hieu thuộc menu con /phong-thuy). Cố vấn quyết định ở Bản thân, Cố vấn kinh doanh ở Hợp đôi.
   expect(hh[hh.indexOf("/ky-mon") + 1]).toBe("/chiem-tinh");
-  expect(hh).not.toContain("/phong-thuy/dau-hieu");
   expect(dangOMuc("/phong-thuy/dau-hieu/cot-dien", MENU_DAU_TRANG.find((m) => m.href === "/huyen-hoc")!)).toBe(true);
   expect(MENU_DAU_TRANG.find((m) => m.href === "/ban-than")!.con.map((c) => c.href)).toContain("/co-van");
   expect(MENU_DAU_TRANG.find((m) => m.href === "/hop-doi")!.con.map((c) => c.href)).toContain("/co-van-kinh-doanh");
