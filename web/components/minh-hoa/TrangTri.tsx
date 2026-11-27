@@ -81,7 +81,7 @@ export function HinhBauTroi({ className }: { className?: string }) {
   );
 }
 
-export type KieuMang = "than-so" | "tu-vi" | "kinh-dich" | "bat-tu" | "phong-thuy" | "nhan-tuong" | "tarot" | "ky-mon";
+export type KieuMang = "than-so" | "tu-vi" | "kinh-dich" | "bat-tu" | "phong-thuy" | "nhan-tuong" | "tarot" | "ky-mon" | "chiem-tinh";
 
 /** Hình nhỏ cho thẻ từng mảng (thay icon chung chung). */
 export function HinhMang({ kieu, className }: { kieu: KieuMang; className?: string }) {
@@ -103,6 +103,23 @@ export function HoaTietMang({ kieu }: { kieu: KieuMang }) {
     {kieu === "nhan-tuong" && <MatNho />}
     {kieu === "tarot" && <LaNho />}
     {kieu === "ky-mon" && <BanKyMonNho />}
+    {kieu === "chiem-tinh" && <VongHoangDaoNho />}
+  </>;
+}
+
+function VongHoangDaoNho() {   // CHT-1: vòng hoàng đạo 12 phần, Mặt Trời ở một phần (không phải bản đồ sao của ai)
+  const vach = Array.from({ length: 12 }, (_, i) => {
+    const g = (Math.PI * i) / 6;
+    return [tron(60, 40, 22, g), tron(60, 40, 34, g)] as const;
+  });
+  const [mx, my] = tron(60, 40, 28, Math.PI / 12 + Math.PI);
+  return <>
+    <circle cx={60} cy={40} r={34} className="fill-none stroke-gold/50" strokeWidth={1.2} />
+    <circle cx={60} cy={40} r={22} className="fill-none stroke-gold/30" strokeWidth={1} />
+    {vach.map(([[x1, y1], [x2, y2]], i) => <line key={i} x1={x1.toFixed(1)} y1={y1.toFixed(1)} x2={x2.toFixed(1)} y2={y2.toFixed(1)}
+      className="stroke-gold/40" strokeWidth={1} />)}
+    <circle cx={mx.toFixed(1)} cy={my.toFixed(1)} r={4} className="fill-gold" />
+    <circle cx={60} cy={40} r={6} className="fill-moon/30 stroke-moon/70" strokeWidth={1} />
   </>;
 }
 

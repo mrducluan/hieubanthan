@@ -12,7 +12,7 @@ import CHUYEN from "@/lib/chuyen-huong.json";
 import { CHU_DE_THEO_LOAI as CHU_DE_THEO_LOAI_GOC } from "@/lib/duong-silo";
 
 export type LoaiTrang = "so" | "que" | "sao" | "cung" | "thap_than" | "nhat_chu"
-  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep" | "dau_hieu" | "co_thu" | "bo_vi" | "la_bai";
+  | "cap_so" | "nghe" | "tinh_yeu" | "nam_ca_nhan" | "no_nghiep" | "sao_cung" | "hoa_cung" | "menh_nam" | "so_kep" | "dau_hieu" | "co_thu" | "bo_vi" | "la_bai" | "cung_hd";
 
 /** `h1`: SEO-P — tiêu đề trang + H1 theo đúng câu người ta tìm (Search Console: "thập thần trong bát tự", "tứ hoá ở 12 cung"…);
  *  `ten` ngắn giữ cho breadcrumb, menu, thẻ. Không có `h1` → dùng `ten`. */
@@ -63,6 +63,9 @@ const CHU_DE_GOC: Record<string, ChuDe> = {
   // TR-1: 78 lá bài Tarot — một trang mỗi lá (engine kb/trang_tarot.py)
   "la-bai": { loai: "la_bai", ten: "Ý nghĩa 78 lá bài Tarot", mang: "/tarot",
     mo_ta: "78 lá Tarot: 22 ẩn chính và 56 ẩn phụ (Gậy, Cốc, Kiếm, Tiền) — ý nghĩa xuôi, ngược, theo tình cảm, công việc, tiền bạc; bốn trường phái Waite, Golden Dawn, Marseille, B.O.T.A.; decan và nhịp thời gian." },
+  // CHT-1: 12 cung hoàng đạo — một trang mỗi cung, giờ Mặt Trời vào cung từng năm do engine tính (kb/trang_chiem_tinh.py)
+  "cung-hoang-dao": { loai: "cung_hd", ten: "12 cung hoàng đạo", h1: "12 cung hoàng đạo: sinh ngày nào thuộc cung gì?", mang: "/chiem-tinh",
+    mo_ta: "12 cung hoàng đạo theo ngày sinh: ngày bắt đầu và kết thúc từng cung, giờ Mặt Trời đổi cung mỗi năm, sinh ngày giáp ranh là cung gì; tính cách, tình yêu, công việc của từng cung." },
   "co-thu": { loai: "co_thu", ten: "Cổ thư Tử vi", mang: "/tu-vi",
     mo_ta: "Phú Tử vi trong Tử Vi Đẩu Số Toàn Thư đọc từng câu: nguyên văn chữ Hán, phiên âm Hán Việt, nghĩa đời thường và câu nào ứng với lá số khi nào." },
 };
@@ -83,7 +86,7 @@ export const khoaTheoDuong = (duong: string): string | null =>
 /** Các cụm kiến thức thuộc một trang trụ (theo thứ tự khai báo). */
 export const cumCuaTru = (tru: string) => Object.entries(CHU_DE).filter(([, c]) => truCua(c.duong) === tru);
 /** Thứ tự silo trên thư viện + khối "Kiến thức {mảng}" ở trang công cụ. */
-export const THU_TU_TRU = ["/than-so", "/hop-doi", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot"] as const;
+export const THU_TU_TRU = ["/than-so", "/hop-doi", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot", "/chiem-tinh"] as const;
 export type CumHienThi = { duong: string; ten: string; mo_ta: string; khoa: string | null; hinh: KieuMang };
 /** Cụm không dựng từ CHU_DE (lá số mẫu, trang tuổi phong thuỷ) nhưng thuộc silo của mảng. */
 const CUM_PHU: Record<string, CumHienThi[]> = {
@@ -108,7 +111,7 @@ export function dsCumTru(tru: string): CumHienThi[] {
 export const HINH_CHU_DE: Record<string, KieuMang> = {
   "than-so": "than-so", "kinh-dich": "kinh-dich", "tu-vi": "tu-vi", "cung-tu-vi": "tu-vi", "thap-than": "bat-tu", "nhat-chu": "bat-tu",
   "hop-so": "than-so", "nghe-nghiep": "than-so", "tinh-yeu": "than-so", "nam-ca-nhan": "than-so", "no-nghiep": "than-so", "so-kep": "than-so",
-  "sao-cung": "tu-vi", "tu-hoa": "tu-vi", "menh-tuoi": "bat-tu", "dau-hieu": "phong-thuy", "co-thu": "tu-vi", "bo-vi": "nhan-tuong", "la-bai": "tarot",
+  "sao-cung": "tu-vi", "tu-hoa": "tu-vi", "menh-tuoi": "bat-tu", "dau-hieu": "phong-thuy", "co-thu": "tu-vi", "bo-vi": "nhan-tuong", "la-bai": "tarot", "cung-hoang-dao": "chiem-tinh",
 };
 export const CHU_DE_THEO_LOAI: Record<LoaiTrang, string> = CHU_DE_THEO_LOAI_GOC;
 
