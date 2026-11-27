@@ -254,6 +254,7 @@ SO: dict[str, dict] = {
     "chiem_tinh_van_han_kb.json": {"mang": "chiemtinh", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI chu kỳ Saturn/Jupiter/Solar Return & Transit, chờ chủ dự án đọc duyệt"},
     "chiem_tinh_hop_doi_kb.json": {"mang": "chiemtinh", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI đối chiếu tương tác 2 bản đồ sao Synastry không chấm điểm, chờ chủ dự án đọc duyệt"},
     "astro_east_west_bridge_kb.json": {"mang": "chung", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.2: nháp AI Cầu nối Chiêm tinh Phương Tây × Bát tự & Tử vi Phương Đông, chờ chủ dự án đọc duyệt"},
+    "truong_phai.json": {"mang": "lich", "muc": "bien_tap", "ghi_chu": "TP-1: sổ các chỗ người dùng chọn trường phái — mô tả ban biên tập, câu Hán (trich) khớp kho nguồn (tests/test_truong_phai.py)"},
     "trach_nhat_hiep_ky_kb.json": {"mang": "lich", "muc": "nhap_ai_cho_duyet", "ghi_chu": "Chặng 4.3: nháp đối chiếu Trạch Nhật Hiệp Kỷ Biện Phương Thư (câu Hán khớp hiep_ky_bien_phuong_thu_du_bo, lời Việt tóm ý theo đúng chữ sách), chờ chủ dự án đọc duyệt; chỗ thẻ ngày lệch sách ghi ở docs/GHI-CHU-HIEP-KY-TU-LY.md"},
     "doanh_chu_gop_von_kb.json": {"mang": "battu", "muc": "bien_tap",
                                   "ghi_chu": "GV-1: nhóm ba khâu + điều lệ gợi ý khi góp vốn (nháp); vai trò từng người lấy từ Bản đồ đội ngũ"},
