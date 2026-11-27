@@ -1,5 +1,5 @@
 {
-  "_nguon": "Stage 4.2 English overlay — Planets × 12 Zodiac Signs.",
+  "_nguon": "Stage 4.2 English overlay — Planets × 12 Zodiac Signs. Editorial draft in the modern Western astrological tradition; no verbatim source text.",
   "_trang_thai": "nhap_may",
   "source_id": "bien_tap_chiem_tinh_2026",
   "school_id": "chiem_tinh_tay",
@@ -298,7 +298,7 @@
         },
         "song_ngu": {
           "diem_sang": "You think in images and intuition and have a rich imagination; you speak gently and sense what others feel.",
-          "nen_de_y": "You may drift, forget details and be vague about agreements; saying \"no\" is hard.",
+          "nen_de_y": "You may drift, forget details and be vague about agreements; you may nod along just to close the matter.",
           "viec_ung_dung": "Put anything important in writing (a message, a note) right after you agree on it."
         }
       }
@@ -423,7 +423,7 @@
         "ma_ket": {
           "diem_sang": "You are disciplined, work steadily to plan, handle pressure and climb step by step.",
           "nen_de_y": "You may overwork out of duty and hold anger until it turns cold; make time to rest.",
-          "viec_ung_dung": "Put a rest break in your calendar as a fixed task and do not let work eat into it."
+          "viec_ung_dung": "Set aside one session a week to move your body just to feel well, with no performance target."
         },
         "bao_binh": {
           "diem_sang": "You act on ideals and in your own way; you are good at reinventing processes and teamwork toward a shared goal.",
@@ -499,7 +499,7 @@
         },
         "song_ngu": {
           "diem_sang": "People born while Jupiter was in Pisces (a cohort of about one year) are compassionate and understanding, with a gift for art and helping others.",
-          "nen_de_y": "You may give more than you can afford.",
+          "nen_de_y": "You may feel you have helped enough because your intentions are good, without checking whether it truly helps.",
           "viec_ung_dung": "Set clear limits on the time and money you give to others."
         }
       }
@@ -557,7 +557,7 @@
         "ma_ket": {
           "diem_sang": "People born while Saturn was in Capricorn (a cohort of about two and a half years) take on responsibility early, organise well and build a steady career over time.",
           "nen_de_y": "You may overwork and rarely let yourself rest.",
-          "viec_ung_dung": "Put rest time in your calendar as a commitment."
+          "viec_ung_dung": "Each month hand one task fully to someone else and accept their way of doing it, even if it differs from yours."
         },
         "bao_binh": {
           "diem_sang": "People born while Saturn was in Aquarius (a cohort of about two and a half years) learn to hold their own ground within a group; they are good at building systems and organising communities.",
@@ -566,7 +566,7 @@
         },
         "song_ngu": {
           "diem_sang": "People born while Saturn was in Pisces (a cohort of about two and a half years) learn to set boundaries and turn imagination into concrete work.",
-          "nen_de_y": "You may be vague and find it hard to say \"no\".",
+          "nen_de_y": "You may blur wishes with real work, or shy from responsibility for fear you lack the strength.",
           "viec_ung_dung": "Link each wish to one step you can take this week."
         }
       }
@@ -577,62 +577,62 @@
       "vai_tro": "drive to refresh stale habits and protect intellectual autonomy",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "The generation born while Uranus was in Aries (about seven years) shares a drive toward innovating through action and daring to try new methods first. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Uranus was in Aries (about six to seven years) shares a drive toward innovating through action and daring to try new methods first. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
           "nen_de_y": "You may tear down the old before the new is ready.",
           "viec_ung_dung": "Test something new on a small scale before going big."
         },
         "kim_nguu": {
-          "diem_sang": "The generation born while Uranus was in Taurus (about seven years) shares a drive toward rethinking how money is made and how we live with possessions. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Uranus was in Taurus (about six to seven years) shares a drive toward rethinking how money is made and how we live with possessions. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
           "nen_de_y": "You may feel shaken when familiar routines are disrupted.",
           "viec_ung_dung": "Each year learn one new way to manage money."
         },
         "song_tu": {
-          "diem_sang": "The generation born while Uranus was in Gemini (about seven years) shares a drive toward reinventing how we learn and talk, adopting information technology very fast. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Uranus was in Gemini (about six to seven years) shares a drive toward reinventing how we learn and talk, adopting information technology very fast. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
           "nen_de_y": "You may get overloaded with news.",
           "viec_ung_dung": "Keep a time slot each day with notifications off."
         },
         "cu_giai": {
-          "diem_sang": "The generation born while Uranus was in Cancer (about seven years) shares a drive toward reshaping family patterns, homes and the ways we care for each other. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Uranus was in Cancer (about six to seven years) shares a drive toward reshaping family patterns, homes and the ways we care for each other. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
           "nen_de_y": "You may feel unsettled when home life changes.",
           "viec_ung_dung": "Keep one small household ritual as an anchor."
         },
         "su_tu": {
-          "diem_sang": "The generation born while Uranus was in Leo (about seven years) shares a drive toward expressing individuality and creating in their own style. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Uranus was in Leo (about six to seven years) shares a drive toward expressing individuality and creating in their own style. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
           "nen_de_y": "You may chase being different just to be noticed.",
           "viec_ung_dung": "Pick one creative project and stay with it for the long run."
         },
         "xu_nu": {
-          "diem_sang": "The generation born while Uranus was in Virgo (about seven years) shares a drive toward reinventing work methods, processes and everyday tools. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Uranus was in Virgo (about six to seven years) shares a drive toward reinventing work methods, processes and everyday tools. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
           "nen_de_y": "Repetitive work may make you restless.",
           "viec_ung_dung": "Each month improve one step in your daily routine."
         },
         "thien_binh": {
-          "diem_sang": "The generation born while Uranus was in Libra (about seven years) shares a drive toward changing views on marriage, partnership and equality. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Uranus was in Libra (about six to seven years) shares a drive toward changing views on marriage, partnership and equality. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
           "nen_de_y": "Relationships in the old mould may be hard to keep.",
           "viec_ung_dung": "Agree clearly on a way of living together that suits you both."
         },
         "bo_cap": {
-          "diem_sang": "The generation born while Uranus was in Scorpio (about seven years) shares a drive toward facing what others avoid and rethinking power and shared money. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Uranus was in Scorpio (about six to seven years) shares a drive toward facing what others avoid and rethinking power and shared money. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
           "nen_de_y": "You may go to extremes when cornered.",
           "viec_ung_dung": "Pick a safe place to talk about difficult matters."
         },
         "nhan_ma": {
-          "diem_sang": "The generation born while Uranus was in Sagittarius (about seven years) shares a drive toward renewing beliefs and learning, with a love of travel and cultural exchange. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Uranus was in Sagittarius (about six to seven years) shares a drive toward renewing beliefs and learning, with a love of travel and cultural exchange. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
           "nen_de_y": "You may switch views too quickly.",
           "viec_ung_dung": "Look closely into a new belief before following it."
         },
         "ma_ket": {
-          "diem_sang": "The generation born while Uranus was in Capricorn (about seven years) shares a drive toward reshaping institutions and the way work is done. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Uranus was in Capricorn (about six to seven years) shares a drive toward reshaping institutions and the way work is done. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
           "nen_de_y": "You may feel torn between keeping order and wanting change.",
           "viec_ung_dung": "Change things step by step from inside the system."
         },
         "bao_binh": {
-          "diem_sang": "The generation born while Uranus was in Aquarius (about seven years) shares a drive toward valuing freedom, science, networks and the common good. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Uranus was in Aquarius (about six to seven years) shares a drive toward valuing freedom, science, networks and the common good. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
           "nen_de_y": "You may become emotionally distant.",
           "viec_ung_dung": "Meet friends in person, not only online."
         },
         "song_ngu": {
-          "diem_sang": "The generation born while Uranus was in Pisces (about seven years) shares a drive toward innovating through art, compassion and intuition. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Uranus was in Pisces (about six to seven years) shares a drive toward innovating through art, compassion and intuition. This belongs to a whole generation; what is personal to you shows in the house Uranus occupies and the aspects it makes.",
           "nen_de_y": "You may blur the line between real life and life online.",
           "viec_ung_dung": "Balance time online with time offline."
         }
@@ -644,62 +644,62 @@
       "vai_tro": "imagination, ideals, and areas needing clear practical grounding",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "The generation born while Neptune was in Aries (about fourteen years) shares a dream of an ideal of standing up for what they believe. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Neptune was in Aries (about twelve to fourteen years) shares an ideal of standing up for what they believe. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
           "nen_de_y": "You may jump in before the facts are clear.",
           "viec_ung_dung": "Check information before you act."
         },
         "kim_nguu": {
-          "diem_sang": "The generation born while Neptune was in Taurus (about fourteen years) shares a dream of natural beauty and a simple, comfortable life. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Neptune was in Taurus (about twelve to fourteen years) shares a dream of natural beauty and a simple, comfortable life. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
           "nen_de_y": "You may be vague about money.",
           "viec_ung_dung": "Write down every income and expense clearly."
         },
         "song_tu": {
-          "diem_sang": "The generation born while Neptune was in Gemini (about fourteen years) shares a dream of ideas, words and stories. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Neptune was in Gemini (about twelve to fourteen years) shares a dream of ideas, words and stories. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
           "nen_de_y": "You may believe rumours.",
           "viec_ung_dung": "Compare two sources before you believe something."
         },
         "cu_giai": {
-          "diem_sang": "The generation born while Neptune was in Cancer (about fourteen years) shares a dream of home, homeland and an ideal family. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Neptune was in Cancer (about twelve to fourteen years) shares a dream of home, homeland and an ideal family. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
           "nen_de_y": "You may dwell too much on the past.",
           "viec_ung_dung": "Appreciate your family as it actually is."
         },
         "su_tu": {
-          "diem_sang": "The generation born while Neptune was in Leo (about fourteen years) shares a dream of the stage, film and romantic love. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Neptune was in Leo (about twelve to fourteen years) shares a dream of the stage, film and romantic love. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
           "nen_de_y": "You may idealise the person you love.",
           "viec_ung_dung": "See your partner through what they do day to day."
         },
         "xu_nu": {
-          "diem_sang": "The generation born while Neptune was in Virgo (about fourteen years) shares a dream of service, care and useful work. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Neptune was in Virgo (about twelve to fourteen years) shares a dream of service, care and useful work. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
           "nen_de_y": "You may sacrifice beyond your strength.",
           "viec_ung_dung": "Keep your rest time even when there is more helping to do."
         },
         "thien_binh": {
-          "diem_sang": "The generation born while Neptune was in Libra (about fourteen years) shares a dream of peace, fairness and harmonious love. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Neptune was in Libra (about twelve to fourteen years) shares a dream of peace, fairness and harmonious love. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
           "nen_de_y": "You may avoid conflict by going quiet.",
           "viec_ung_dung": "Voice disagreement gently."
         },
         "bo_cap": {
-          "diem_sang": "The generation born while Neptune was in Scorpio (about fourteen years) shares a dream of emotional depth and what lies hidden. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Neptune was in Scorpio (about twelve to fourteen years) shares a dream of emotional depth and what lies hidden. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
           "nen_de_y": "You may sink into heavy feelings.",
           "viec_ung_dung": "When feelings get overwhelming, talk to someone you trust or a counsellor."
         },
         "nhan_ma": {
-          "diem_sang": "The generation born while Neptune was in Sagittarius (about fourteen years) shares a dream of religion, philosophy and distant horizons. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Neptune was in Sagittarius (about twelve to fourteen years) shares a dream of religion, philosophy and distant horizons. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
           "nen_de_y": "You may put complete faith in one teacher or one doctrine.",
           "viec_ung_dung": "Keep your right to question any teaching."
         },
         "ma_ket": {
-          "diem_sang": "The generation born while Neptune was in Capricorn (about fourteen years) shares a dream of a stable, well-run society. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Neptune was in Capricorn (about twelve to fourteen years) shares a dream of a stable, well-run society. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
           "nen_de_y": "You may daydream about status.",
           "viec_ung_dung": "Set career goals that can be measured."
         },
         "bao_binh": {
-          "diem_sang": "The generation born while Neptune was in Aquarius (about fourteen years) shares a dream of an equal community and technology that helps people. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Neptune was in Aquarius (about twelve to fourteen years) shares a dream of an equal community and technology that helps people. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
           "nen_de_y": "You may idealise the crowd.",
           "viec_ung_dung": "Make your own call instead of following the online majority."
         },
         "song_ngu": {
-          "diem_sang": "The generation born while Neptune was in Pisces (about fourteen years) shares a dream of wide compassion, art and inner life. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
+          "diem_sang": "The generation born while Neptune was in Pisces (about twelve to fourteen years) shares a dream of wide compassion, art and inner life. This belongs to a whole generation; what is personal to you shows in the house Neptune occupies and the aspects it makes.",
           "nen_de_y": "You may escape into daydreams.",
           "viec_ung_dung": "Each day tie inspiration to one real action."
         }
@@ -928,7 +928,7 @@
         },
         "cu_giai": {
           "diem_sang": "Sensitive spot: feeling short of support and care. Once you understand it, you are often good at helping people in the same situation.",
-          "nen_de_y": "You may care for others and forget yourself.",
+          "nen_de_y": "You may use caring for others in place of receiving care.",
           "viec_ung_dung": "Do one small thing each day to look after yourself."
         },
         "su_tu": {
@@ -968,7 +968,7 @@
         },
         "song_ngu": {
           "diem_sang": "Sensitive spot: soaking up others' sadness and finding boundaries hard. Once you understand it, you are often good at helping people in the same situation.",
-          "nen_de_y": "You may wear yourself out carrying others' feelings.",
+          "nen_de_y": "You may feel you must fix everyone's pain and run out of strength.",
           "viec_ung_dung": "Help people with empathy, but keep time for yourself."
         }
       }
