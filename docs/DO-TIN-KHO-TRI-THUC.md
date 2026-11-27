@@ -26,7 +26,7 @@
 | Kỳ Môn |  | 1 |  |  | 1 |  |  |
 | Thần số |  |  |  | 11 | 13 | 1 |  |
 | Lịch · tuổi · tập quán |  | 1 |  | 5 | 1 |  |  |
-| Liên mảng · kỹ thuật |  | 1 |  |  | 12 | 5 | 7 |
+| Liên mảng · kỹ thuật |  | 1 |  |  | 16 | 1 | 7 |
 
 ## Phần đã có nguyên văn đối chiếu (test khoá)
 
@@ -211,11 +211,11 @@
 | Liên mảng · kỹ thuật | `chu_y_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `chuyen_nghia_kb.json` |  | Ban biên tập soạn | nghĩa đời nay do ban biên tập viết |
 | Liên mảng · kỹ thuật | `chuyen_nghia_kb.json` | khai_niem | Có nguyên văn đối chiếu | mỗi khái niệm một câu sách khớp kho nguồn; nghĩa đời nay là biên tập |
-| Liên mảng · kỹ thuật | `co_van_tam_tai_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 2: nháp AI tổng hợp Cố vấn Liên mảng Tam Tài (Nhân – Thiên – Địa), chờ chủ dự án đọc duyệt |
-| Liên mảng · kỹ thuật | `doanh_chu_cam_nang_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 2: nháp AI Cẩm nang Chiến lược Kinh doanh 5 trụ (Thị trường, Địa điểm/Thành Môn, Nhân sự, Văn phòng, Cửa hàng), chờ chủ dự án đọc duyệt |
+| Liên mảng · kỹ thuật | `co_van_tam_tai_kb.json` |  | Ban biên tập soạn | Chủ dự án đọc duyệt 2026-11-26 — Chặng 2: nháp AI tổng hợp Cố vấn Liên mảng Tam Tài (Nhân – Thiên – Địa), chờ chủ dự án đọc duyệt |
+| Liên mảng · kỹ thuật | `doanh_chu_cam_nang_kb.json` |  | Ban biên tập soạn | Chủ dự án đọc duyệt 2026-11-26 — Chặng 2: nháp AI Cẩm nang Chiến lược Kinh doanh 5 trụ (Thị trường, Địa điểm/Thành Môn, Nhân sự, Văn phòng, Cửa hàng), chờ chủ dự án đọc duyệt |
 | Liên mảng · kỹ thuật | `dong_thuan_thong_ke.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `giao_thoa_kb.json` |  | Ban biên tập soạn |  |
-| Liên mảng · kỹ thuật | `go_nut_doi_song_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 1: nháp AI biên soạn cho 4 mạch gỡ nút đời sống, chờ chủ dự án đọc duyệt |
+| Liên mảng · kỹ thuật | `go_nut_doi_song_kb.json` |  | Ban biên tập soạn | Chủ dự án đọc duyệt 2026-11-26 — Chặng 1: nháp AI biên soạn cho 4 mạch gỡ nút đời sống, chờ chủ dự án đọc duyệt |
 | Liên mảng · kỹ thuật | `goc_nhin.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `goi_y_cheo_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `hoan_canh_kb.json` |  | Ban biên tập soạn |  |
@@ -231,7 +231,7 @@
 | Liên mảng · kỹ thuật | `thuat_ngu_en.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `tu_dien.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `tuan_hai_nguoi_kb.json` |  | Ban biên tập soạn |  |
-| Liên mảng · kỹ thuật | `ung_dung_co_dien_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 1: nháp AI tổng hợp ứng dụng Ngũ hành, điều hoà Vận 9 & đối chiếu 2 phái, chờ chủ dự án đọc duyệt |
+| Liên mảng · kỹ thuật | `ung_dung_co_dien_kb.json` |  | Ban biên tập soạn | Chủ dự án đọc duyệt 2026-11-26 — Chặng 1: nháp AI tổng hợp ứng dụng Ngũ hành, điều hoà Vận 9 & đối chiếu 2 phái, chờ chủ dự án đọc duyệt |
 | Liên mảng · kỹ thuật | `y_dinh_chung.json` |  | Ban biên tập soạn |  |
 
 ## Cách nâng mức một phần
