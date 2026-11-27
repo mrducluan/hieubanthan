@@ -1,12 +1,12 @@
 {
-  "_nguon": "Chặng 4.2 — 12 Nhà & Trục góc Ascendant / MC.",
+  "_nguon": "Chặng 4.2 — 12 Nhà & Trục góc Ascendant / MC. Nháp biên tập theo truyền thống chiêm tinh phương Tây hiện đại, không trích nguyên văn sách nào; chờ chủ dự án duyệt.",
   "_trang_thai": "nhap_ai_cho_duyet",
   "source_id": "bien_tap_chiem_tinh_2026",
   "school_id": "chiem_tinh_tay",
   "he_nha": {
     "whole_sign": {
       "ten": "Hệ Nhà Trọn Cung (Whole Sign)",
-      "giai_thich": "Mỗi cung hoàng đạo trọn vẹn là một nhà tính từ cung chứa điểm Mọc — hệ cổ điển Hy Lạp rõ ràng, không bị méo nhà ở mọi vĩ độ.",
+      "giai_thich": "Mỗi cung hoàng đạo trọn vẹn là một nhà tính từ cung chứa điểm Mọc — hệ cổ điển Hy Lạp rõ ràng, không bị méo nhà ở mọi vĩ độ. Thiên Đỉnh (MC) được tính riêng nên có thể không nằm ở nhà 10, nhất là ở vĩ độ cao.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
     },

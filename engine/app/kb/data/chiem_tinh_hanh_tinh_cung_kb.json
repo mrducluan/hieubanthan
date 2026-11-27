@@ -1,5 +1,5 @@
 {
-  "_nguon": "Chặng 4.2 — Hành tinh × 12 Cung Hoàng đạo.",
+  "_nguon": "Chặng 4.2 — Hành tinh × 12 Cung Hoàng đạo. Nháp biên tập theo truyền thống chiêm tinh phương Tây hiện đại, không trích nguyên văn sách nào; chờ chủ dự án duyệt.",
   "_trang_thai": "nhap_ai_cho_duyet",
   "source_id": "bien_tap_chiem_tinh_2026",
   "school_id": "chiem_tinh_tay",
@@ -326,7 +326,7 @@
         },
         "song_ngu": {
           "diem_sang": "Bạn nghĩ bằng hình ảnh và trực giác, giàu tưởng tượng; nói chuyện mềm, dễ hiểu người khác đang cảm thấy gì.",
-          "nen_de_y": "Dễ lơ đãng, quên chi tiết, hiểu lơ mơ các thoả thuận; khó nói \"không\".",
+          "nen_de_y": "Dễ lơ đãng, quên chi tiết, hiểu lơ mơ các thoả thuận; dễ gật đầu cho xong chuyện.",
           "viec_ung_dung": "Việc gì quan trọng thì ghi lại bằng chữ (tin nhắn, ghi chú) ngay sau khi thoả thuận."
         }
       },
@@ -418,7 +418,7 @@
           "viec_ung_dung": "Khi bị ép đổi kế hoạch, xin một khoảng ngắn để tự sắp xếp rồi mới trả lời."
         },
         "song_tu": {
-          "diem_sang": "Bạn làm nhiều việc song song, phản ứng bằng lời lẹ làng; hợp việc hay thay đổi, nhiều giao tiếp.",
+          "diem_sang": "Bạn làm nhiều việc song song, phản ứng nhanh bằng lời nói; hợp việc hay thay đổi, nhiều giao tiếp.",
           "nen_de_y": "Sức dễ phân tán; khi bực hay cãi bằng lý lẽ, dễ thành tranh cãi dài.",
           "viec_ung_dung": "Mỗi ngày chọn ba việc chính, xong ba việc đó rồi mới mở việc mới."
         },
@@ -455,7 +455,7 @@
         "ma_ket": {
           "diem_sang": "Bạn có kỷ luật, làm việc bền bỉ theo kế hoạch, chịu được áp lực và tiến lên từng bậc.",
           "nen_de_y": "Dễ làm quá sức vì trách nhiệm; kìm giận lâu rồi thành lạnh lùng — chú ý nghỉ ngơi.",
-          "viec_ung_dung": "Ghi một mốc nghỉ vào lịch như một việc bắt buộc, không để việc lấn mất giờ nghỉ."
+          "viec_ung_dung": "Mỗi tuần dành một buổi vận động cho cơ thể chỉ để khoẻ và dễ chịu, không đặt chỉ tiêu thành tích."
         },
         "bao_binh": {
           "diem_sang": "Bạn hành động theo lý tưởng và cách làm riêng; giỏi đổi mới quy trình, làm việc nhóm vì mục tiêu chung.",
@@ -477,7 +477,7 @@
       "vai_tro": "hướng mở rộng tầm hiểu biết, niềm tin và sự hào phóng",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Người sinh khi Mộc tinh ở Bạch Dương (cả lứa sinh trong khoảng một năm) thường thường gặp thuận lợi khi tự mở lối; tin vào sức mình và hào hứng với những lần bắt đầu.",
+          "diem_sang": "Người sinh khi Mộc tinh ở Bạch Dương (cả lứa sinh trong khoảng một năm) thường gặp thuận lợi khi tự mở lối; tin vào sức mình và hào hứng với những lần bắt đầu.",
           "nen_de_y": "Dễ ôm đồm vì quá tự tin vào sức mình.",
           "viec_ung_dung": "Mỗi năm chọn một việc mới để tự đứng ra làm, theo tới khi có kết quả."
         },
@@ -533,7 +533,7 @@
         },
         "song_ngu": {
           "diem_sang": "Người sinh khi Mộc tinh ở Song Ngư (cả lứa sinh trong khoảng một năm) thường giàu lòng trắc ẩn, dễ cảm thông, có duyên với nghệ thuật và việc giúp người.",
-          "nen_de_y": "Dễ cho đi quá sức.",
+          "nen_de_y": "Dễ nghĩ mình đã giúp đủ nhờ ý tốt mà chưa kiểm xem việc giúp có thật sự giúp được người ta.",
           "viec_ung_dung": "Đặt giới hạn rõ cho thời gian và tiền dành để giúp người khác."
         }
       },
@@ -593,7 +593,7 @@
         "ma_ket": {
           "diem_sang": "Người sinh khi Thổ tinh ở Ma Kết (cả lứa sinh trong khoảng hai năm rưỡi) thường có tinh thần trách nhiệm sớm, giỏi tổ chức, xây sự nghiệp vững theo thời gian.",
           "nen_de_y": "Dễ làm quá sức, ít cho phép mình nghỉ.",
-          "viec_ung_dung": "Ghi giờ nghỉ vào lịch như một cam kết."
+          "viec_ung_dung": "Mỗi tháng giao hẳn một việc cho người khác và chấp nhận cách họ làm, dù khác cách bạn."
         },
         "bao_binh": {
           "diem_sang": "Người sinh khi Thổ tinh ở Bảo Bình (cả lứa sinh trong khoảng hai năm rưỡi) thường học cách giữ vững ý mình giữa tập thể; giỏi xây hệ thống và tổ chức cộng đồng.",
@@ -602,7 +602,7 @@
         },
         "song_ngu": {
           "diem_sang": "Người sinh khi Thổ tinh ở Song Ngư (cả lứa sinh trong khoảng hai năm rưỡi) thường học cách đặt ranh giới và biến trí tưởng tượng thành việc cụ thể.",
-          "nen_de_y": "Dễ lơ mơ, khó nói \"không\".",
+          "nen_de_y": "Dễ lơ mơ giữa mong ước và việc thật, hoặc ngại nhận trách nhiệm vì sợ mình không đủ sức.",
           "viec_ung_dung": "Gắn mỗi mong ước với một bước làm được ngay trong tuần."
         }
       },
@@ -615,62 +615,62 @@
       "vai_tro": "nhu cầu đổi mới cách làm cũ và giữ không gian độc lập",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Bạch Dương (kéo dài khoảng bảy năm) mang chung nét đổi mới bằng hành động, dám đi đầu thử cách làm mới. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Bạch Dương (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới bằng hành động, dám đi đầu thử cách làm mới. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ nôn nóng phá cái cũ trước khi có cái mới.",
           "viec_ung_dung": "Thử cái mới ở quy mô nhỏ trước khi làm lớn."
         },
         "kim_nguu": {
-          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Kim Ngưu (kéo dài khoảng bảy năm) mang chung nét đổi mới cách làm ra tiền và cách sống với của cải. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Kim Ngưu (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới cách làm ra tiền và cách sống với của cải. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ chao đảo khi nếp quen bị xáo trộn.",
           "viec_ung_dung": "Mỗi năm học thêm một cách quản lý tiền mới."
         },
         "song_tu": {
-          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Song Tử (kéo dài khoảng bảy năm) mang chung nét đổi mới cách học, cách giao tiếp, đón công nghệ thông tin rất nhanh. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Song Tử (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới cách học, cách giao tiếp, đón công nghệ thông tin rất nhanh. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ quá tải tin tức.",
           "viec_ung_dung": "Giữ một khung giờ tắt thông báo mỗi ngày."
         },
         "cu_giai": {
-          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Cự Giải (kéo dài khoảng bảy năm) mang chung nét đổi mới khuôn mẫu gia đình, nơi ở, cách chăm sóc nhau. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Cự Giải (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới khuôn mẫu gia đình, nơi ở, cách chăm sóc nhau. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ bất an khi tổ ấm thay đổi.",
           "viec_ung_dung": "Giữ một nếp nhỏ trong nhà làm điểm tựa."
         },
         "su_tu": {
-          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Sư Tử (kéo dài khoảng bảy năm) mang chung nét muốn thể hiện cá tính và sáng tạo theo kiểu của riêng mình. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Sư Tử (kéo dài khoảng sáu đến bảy năm) mang chung nét muốn thể hiện cá tính và sáng tạo theo kiểu của riêng mình. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ chạy theo sự khác biệt để được chú ý.",
           "viec_ung_dung": "Chọn một việc sáng tạo và theo đuổi lâu dài."
         },
         "xu_nu": {
-          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Xử Nữ (kéo dài khoảng bảy năm) mang chung nét đổi mới cách làm việc, quy trình và công cụ hằng ngày. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Xử Nữ (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới cách làm việc, quy trình và công cụ hằng ngày. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ bồn chồn với việc lặp lại.",
           "viec_ung_dung": "Mỗi tháng cải tiến một bước trong việc thường ngày."
         },
         "thien_binh": {
-          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Thiên Bình (kéo dài khoảng bảy năm) mang chung nét đổi mới cách nhìn về hôn nhân, quan hệ đối tác và sự bình đẳng. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Thiên Bình (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới cách nhìn về hôn nhân, quan hệ đối tác và sự bình đẳng. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ khó giữ quan hệ theo khuôn cũ.",
           "viec_ung_dung": "Thoả thuận rõ cách sống chung theo kiểu hợp với cả hai người."
         },
         "bo_cap": {
-          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Bọ Cạp (kéo dài khoảng bảy năm) mang chung nét dám nhìn thẳng những chuyện bị né tránh, đổi cách nghĩ về quyền lực và tiền chung. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Bọ Cạp (kéo dài khoảng sáu đến bảy năm) mang chung nét dám nhìn thẳng những chuyện bị né tránh, đổi cách nghĩ về quyền lực và tiền chung. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ làm tới cùng khi bị dồn ép.",
           "viec_ung_dung": "Chọn một chỗ an toàn để nói về chuyện khó."
         },
         "nhan_ma": {
-          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Nhân Mã (kéo dài khoảng bảy năm) mang chung nét đổi mới niềm tin, cách học, thích đi xa và giao lưu văn hoá. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Nhân Mã (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới niềm tin, cách học, thích đi xa và giao lưu văn hoá. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ đổi quan điểm quá nhanh.",
           "viec_ung_dung": "Tìm hiểu kỹ một niềm tin mới trước khi theo."
         },
         "ma_ket": {
-          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Ma Kết (kéo dài khoảng bảy năm) mang chung nét đổi mới cơ cấu tổ chức và cách làm nghề. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Ma Kết (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới cơ cấu tổ chức và cách làm nghề. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ căng thẳng giữa giữ trật tự và muốn thay đổi.",
           "viec_ung_dung": "Thay đổi từng bước từ bên trong hệ thống."
         },
         "bao_binh": {
-          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Bảo Bình (kéo dài khoảng bảy năm) mang chung nét đề cao tự do, khoa học, mạng lưới và lợi ích chung. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Bảo Bình (kéo dài khoảng sáu đến bảy năm) mang chung nét đề cao tự do, khoa học, mạng lưới và lợi ích chung. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ xa cách về cảm xúc.",
           "viec_ung_dung": "Gặp bạn bè trực tiếp thay vì chỉ qua mạng."
         },
         "song_ngu": {
-          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Song Ngư (kéo dài khoảng bảy năm) mang chung nét đổi mới qua nghệ thuật, lòng trắc ẩn và trực giác. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Thiên Vương tinh ở Song Ngư (kéo dài khoảng sáu đến bảy năm) mang chung nét đổi mới qua nghệ thuật, lòng trắc ẩn và trực giác. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Thiên Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ lẫn lộn ranh giới giữa đời thật và trên mạng.",
           "viec_ung_dung": "Cân bằng giờ trên mạng với giờ ở ngoài đời."
         }
@@ -684,62 +684,62 @@
       "vai_tro": "trí tưởng tượng, lý tưởng nhân văn và chỗ dễ mơ hồ cần neo thực tế",
       "theo_cung": {
         "bach_duong": {
-          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Bạch Dương (kéo dài khoảng mười bốn năm) cùng mơ về lý tưởng dám đứng lên vì điều mình tin. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Bạch Dương (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về lý tưởng dám đứng lên vì điều mình tin. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ lao vào việc khi chưa rõ đầu đuôi.",
           "viec_ung_dung": "Kiểm tra thông tin trước khi hành động."
         },
         "kim_nguu": {
-          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Kim Ngưu (kéo dài khoảng mười bốn năm) cùng mơ về vẻ đẹp tự nhiên và cuộc sống đủ đầy, giản dị. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Kim Ngưu (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về vẻ đẹp tự nhiên và cuộc sống đủ đầy, giản dị. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ lơ mơ chuyện tiền bạc.",
           "viec_ung_dung": "Ghi rõ từng khoản thu chi."
         },
         "song_tu": {
-          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Song Tử (kéo dài khoảng mười bốn năm) cùng mơ về ý tưởng, chữ nghĩa và những câu chuyện. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Song Tử (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về ý tưởng, chữ nghĩa và những câu chuyện. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ tin lời đồn.",
           "viec_ung_dung": "Đối chiếu hai nguồn trước khi tin."
         },
         "cu_giai": {
-          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Cự Giải (kéo dài khoảng mười bốn năm) cùng mơ về tổ ấm, quê nhà, một gia đình lý tưởng. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Cự Giải (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về tổ ấm, quê nhà, một gia đình lý tưởng. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ hoài niệm quá mức.",
           "viec_ung_dung": "Trân trọng gia đình đúng như nó đang là."
         },
         "su_tu": {
-          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Sư Tử (kéo dài khoảng mười bốn năm) cùng mơ về sân khấu, điện ảnh và tình yêu lãng mạn. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Sư Tử (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về sân khấu, điện ảnh và tình yêu lãng mạn. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ thần tượng hoá người mình yêu.",
           "viec_ung_dung": "Nhìn người thương qua việc làm hằng ngày."
         },
         "xu_nu": {
-          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Xử Nữ (kéo dài khoảng mười bốn năm) cùng mơ về phục vụ, chăm sóc và công việc có ích. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Xử Nữ (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về phục vụ, chăm sóc và công việc có ích. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ hy sinh quá sức.",
           "viec_ung_dung": "Giữ giờ nghỉ dù việc giúp người còn nhiều."
         },
         "thien_binh": {
-          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Thiên Bình (kéo dài khoảng mười bốn năm) cùng mơ về hoà bình, công bằng và tình yêu hài hoà. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Thiên Bình (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về hoà bình, công bằng và tình yêu hài hoà. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ né mâu thuẫn bằng cách im lặng.",
           "viec_ung_dung": "Nói ra điều không đồng ý một cách nhẹ nhàng."
         },
         "bo_cap": {
-          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Bọ Cạp (kéo dài khoảng mười bốn năm) cùng mơ về chiều sâu cảm xúc và những chuyện bị che giấu. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Bọ Cạp (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về chiều sâu cảm xúc và những chuyện bị che giấu. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ chìm trong cảm xúc nặng.",
           "viec_ung_dung": "Khi cảm xúc quá tải, tìm người tin cậy hoặc người tư vấn để chia sẻ."
         },
         "nhan_ma": {
-          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Nhân Mã (kéo dài khoảng mười bốn năm) cùng mơ về tôn giáo, triết lý và những chân trời xa. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Nhân Mã (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về tôn giáo, triết lý và những chân trời xa. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ tin trọn vào một người thầy hay một học thuyết.",
           "viec_ung_dung": "Giữ quyền tự đặt câu hỏi với mọi lời dạy."
         },
         "ma_ket": {
-          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Ma Kết (kéo dài khoảng mười bốn năm) cùng mơ về một xã hội vững vàng, tổ chức tốt. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Ma Kết (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về một xã hội vững vàng, tổ chức tốt. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ mơ mộng về địa vị.",
           "viec_ung_dung": "Đặt mục tiêu nghề nghiệp có số đo cụ thể."
         },
         "bao_binh": {
-          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Bảo Bình (kéo dài khoảng mười bốn năm) cùng mơ về cộng đồng bình đẳng và công nghệ giúp người. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Bảo Bình (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về cộng đồng bình đẳng và công nghệ giúp người. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ thần tượng hoá đám đông.",
           "viec_ung_dung": "Tự quyết thay vì theo số đông trên mạng."
         },
         "song_ngu": {
-          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Song Ngư (kéo dài khoảng mười bốn năm) cùng mơ về lòng trắc ẩn rộng, nghệ thuật và đời sống tinh thần. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
+          "diem_sang": "Lứa sinh khi Hải Vương tinh ở Song Ngư (kéo dài khoảng mười hai đến mười bốn năm) cùng mơ về lòng trắc ẩn rộng, nghệ thuật và đời sống tinh thần. Đây là nét của cả thế hệ; điều riêng của bạn nằm ở nhà chứa Hải Vương tinh và các góc chiếu của nó.",
           "nen_de_y": "Dễ trốn vào mơ mộng.",
           "viec_ung_dung": "Mỗi ngày gắn cảm hứng với một việc làm thật."
         }
@@ -976,7 +976,7 @@
         },
         "cu_giai": {
           "diem_sang": "Điểm dễ chạnh lòng: cảm giác thiếu chỗ dựa, thiếu được chăm sóc. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
-          "nen_de_y": "Dễ chăm người khác mà quên mình.",
+          "nen_de_y": "Dễ lấy việc chăm người khác thay cho việc nhận sự chăm sóc.",
           "viec_ung_dung": "Mỗi ngày tự chăm mình một việc nhỏ."
         },
         "su_tu": {
@@ -1016,7 +1016,7 @@
         },
         "song_ngu": {
           "diem_sang": "Điểm dễ chạnh lòng: dễ thấm nỗi buồn của người khác, khó đặt ranh giới. Khi đã hiểu nó, bạn thường giỏi giúp người cùng cảnh.",
-          "nen_de_y": "Dễ mệt vì gánh cảm xúc của người khác.",
+          "nen_de_y": "Dễ thấy mình phải gỡ nỗi đau của mọi người rồi cạn sức.",
           "viec_ung_dung": "Giúp người bằng sự đồng cảm, nhưng giữ giờ riêng cho mình."
         }
       },
