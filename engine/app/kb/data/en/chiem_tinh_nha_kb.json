@@ -1,12 +1,12 @@
 {
-  "_nguon": "Stage 4.2 English overlay — 12 Houses & Angles.",
+  "_nguon": "Stage 4.2 English overlay — 12 Houses & Angles. Editorial draft in the modern Western astrological tradition; no verbatim source text.",
   "_trang_thai": "nhap_may",
   "source_id": "bien_tap_chiem_tinh_2026",
   "school_id": "chiem_tinh_tay",
   "he_nha": {
     "whole_sign": {
       "ten": "Whole Sign Houses",
-      "giai_thich": "Each 30-degree zodiac sign forms one full house starting from the Rising sign — the classical Hellenistic standard, clean at every latitude."
+      "giai_thich": "Each 30-degree zodiac sign forms one full house starting from the Rising sign — the classical Hellenistic standard, clean at every latitude. The Midheaven (MC) is calculated separately, so it may not fall in the 10th house, especially at high latitudes."
     },
     "placidus": {
       "ten": "Placidus Houses",
