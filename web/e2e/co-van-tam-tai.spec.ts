@@ -213,7 +213,9 @@ for (const [duong, tenCuoi, soCap] of [["/co-van", "Hỏi một quyết định"
     expect(bc, "đúng một BreadcrumbList").toHaveLength(1);
     const ds = bc[0]!.itemListElement as { position: number; name: string; item: string }[];
     expect(ds).toHaveLength(soCap);
-    ds.forEach((x, i) => { expect(x.position).toBe(i + 1); expect(x.item).toMatch(/^https:\/\/hieuban\.com\//); });
+    ds.forEach((x, i) => { expect(x.position).toBe(i + 1); expect(new URL(x.item).pathname.startsWith("/")).toBe(true); });
+    expect(new URL(ds[0]!.item).pathname).toBe("/");                 // cấp đầu là trang chủ
+    expect(new URL(ds.at(-1)!.item).pathname).toBe(duong);           // cấp cuối là chính trang này
     expect(ds.at(-1)!.name).toContain(tenCuoi);
     // đường hiển thị trên trang = cùng thứ tự, cùng chữ
     const hien = await page.locator('nav[aria-label*="Đường dẫn"] a, nav[aria-label*="đường dẫn"] a, nav[aria-label*="readcrumb"] a').allInnerTexts();
