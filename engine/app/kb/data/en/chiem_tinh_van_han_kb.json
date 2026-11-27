@@ -1,5 +1,5 @@
 {
-  "_nguon": "Stage 4.2 English overlay — Planetary Cycles & Transits.",
+  "_nguon": "Stage 4.2 & Stage 5 English overlay — Planetary Cycles, Transits & Life Milestones.",
   "_trang_thai": "nhap_may",
   "source_id": "bien_tap_chiem_tinh_2026",
   "school_id": "chiem_tinh_tay",
@@ -34,5 +34,39 @@
   },
   "solar_return": {
     "giai_thich": "The exact UTC moment the Sun returns to its natal longitude highlights the central theme of your solar year ahead."
+  },
+  "moc_chu_ky_doi": {
+    "jupiter_1": {
+      "ten": "First Jupiter Return",
+      "y_nghia": "Early horizon-widening curiosity and first independent learning interests."
+    },
+    "jupiter_2": {
+      "ten": "Second Jupiter Return",
+      "y_nghia": "Stepping into broader professional networks and testing an autonomous worldview."
+    },
+    "saturn_1": {
+      "ten": "First Saturn Return",
+      "y_nghia": "Threshold of grounded adulthood: choosing durable commitments and long-horizon craft."
+    },
+    "jupiter_3": {
+      "ten": "Third Jupiter Return",
+      "y_nghia": "Consolidating vocational depth, meaningful collaboration, and practical generosity."
+    },
+    "uranus_doi_xung": {
+      "ten": "Midlife Uranus Opposition",
+      "y_nghia": "Reawakening sidelined creative autonomy and refreshing stale routines with care."
+    },
+    "jupiter_4": {
+      "ten": "Fourth Jupiter Return",
+      "y_nghia": "Seasoned synthesis, mentorship, and selective long-range stewardship."
+    },
+    "chiron_hoi_quy": {
+      "ten": "Chiron Return",
+      "y_nghia": "Making peace with earlier tender spots and turning lived experience into calm guidance."
+    },
+    "saturn_2": {
+      "ten": "Second Saturn Return",
+      "y_nghia": "Streamlining unessential burdens, protecting vitality, and passing on durable wisdom."
+    }
   }
 }

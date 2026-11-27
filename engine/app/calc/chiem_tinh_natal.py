@@ -46,6 +46,46 @@ _PHAM_CHAT_CUNG = {
     "song_tu": "linh_hoat", "xu_nu": "linh_hoat", "nhan_ma": "linh_hoat", "song_ngu": "linh_hoat",
 }
 
+# Bảng Phẩm giá hành tinh cổ điển (Essential Dignities — Claudius Ptolemy, Tetrabiblos I.17–19).
+# CHỈ áp cho 7 thiên thể cổ điển; các thiên thể ngoài Thổ tinh, La Hầu/Kế Đô và Chiron luôn trả None.
+PHAM_GIA_PTOLEMY: dict[str, dict[str, tuple[str, ...]]] = {
+    "mat_troi": {"vuong_dia": ("su_tu",), "vuong_ton": ("bach_duong",), "tu_dia": ("bao_binh",), "suy_dia": ("thien_binh",)},
+    "mat_trang": {"vuong_dia": ("cu_giai",), "vuong_ton": ("kim_nguu",), "tu_dia": ("ma_ket",), "suy_dia": ("bo_cap",)},
+    "thuy_tinh": {"vuong_dia": ("song_tu", "xu_nu"), "vuong_ton": ("xu_nu",), "tu_dia": ("nhan_ma", "song_ngu"), "suy_dia": ("song_ngu",)},
+    "kim_tinh": {"vuong_dia": ("kim_nguu", "thien_binh"), "vuong_ton": ("song_ngu",), "tu_dia": ("bo_cap", "bach_duong"), "suy_dia": ("xu_nu",)},
+    "hoa_tinh": {"vuong_dia": ("bach_duong", "bo_cap"), "vuong_ton": ("ma_ket",), "tu_dia": ("thien_binh", "kim_nguu"), "suy_dia": ("cu_giai",)},
+    "moc_tinh": {"vuong_dia": ("nhan_ma", "song_ngu"), "vuong_ton": ("cu_giai",), "tu_dia": ("song_tu", "xu_nu"), "suy_dia": ("ma_ket",)},
+    "tho_tinh": {"vuong_dia": ("ma_ket", "bao_binh"), "vuong_ton": ("thien_binh",), "tu_dia": ("cu_giai", "su_tu"), "suy_dia": ("bach_duong",)},
+}
+
+_CUNG_THEO_NT_PC: dict[tuple[str, str], str] = {
+    (_NGUYEN_TO_CUNG[c], _PHAM_CHAT_CUNG[c]): c for c in _NGUYEN_TO_CUNG
+}
+
+
+def tra_pham_gia_ptolemy(ma_hanh_tinh: str, ma_cung: str) -> str | None:
+    """Trả mã phẩm giá cổ điển theo Ptolemy cho 7 thiên thể cổ điển; hành tinh hiện đại / nút / Chiron trả `None`."""
+    bang = PHAM_GIA_PTOLEMY.get(ma_hanh_tinh)
+    if not bang:
+        return None
+    vd = ma_cung in bang["vuong_dia"]
+    vt = ma_cung in bang["vuong_ton"]
+    td = ma_cung in bang["tu_dia"]
+    sd = ma_cung in bang["suy_dia"]
+    if vd and vt:
+        return "vuong_dia_kiem_vuong_ton"
+    if td and sd:
+        return "tu_dia_kiem_suy_dia"
+    if vd:
+        return "vuong_dia"
+    if vt:
+        return "vuong_ton"
+    if td:
+        return "tu_dia"
+    if sd:
+        return "suy_dia"
+    return None
+
 # 5 góc chiếu Ptolemaic chính: (mã, góc chuẩn, sai số tối đa khi có Nhật/Nguyệt, sai số chuẩn hành tinh khác)
 GOC_CHIEU_CHINH: tuple[tuple[str, float, float, float], ...] = (
     ("trung_hop", 0.0, 8.0, 6.0),
@@ -284,13 +324,26 @@ def lap_ban_do_natal(
             "doi_cung_trong_ngay": cung_dau != cung_cuoi,
         }
 
-    # Cân bằng 4 Nguyên tố (Lửa/Đất/Khí/Nước) & 3 Phẩm chất trên 10 hành tinh chính
+    # Cân bằng 4 Nguyên tố (Lửa/Đất/Khí/Nước) & 3 Phẩm chất trên 10 hành tinh chính + Ma trận 4×3 ô
     dem_nt = {"lua": 0, "dat": 0, "khi": 0, "nuoc": 0}
     dem_pc = {"thong_linh": 0, "kien_dinh": 0, "linh_hoat": 0}
+    ma_tran_nt_pc: dict[str, dict[str, dict]] = {
+        nt: {
+            pc: {"cung": _CUNG_THEO_NT_PC[(nt, pc)], "hanh_tinh": []}
+            for pc in ("thong_linh", "kien_dinh", "linh_hoat")
+        }
+        for nt in ("lua", "dat", "khi", "nuoc")
+    }
     for ma_10 in ctl.HANH_TINH_THU_TU[:10]:
         c = thien_the[ma_10]["cung"]
-        dem_nt[_NGUYEN_TO_CUNG[c]] += 1
-        dem_pc[_PHAM_CHAT_CUNG[c]] += 1
+        nt = _NGUYEN_TO_CUNG[c]
+        pc = _PHAM_CHAT_CUNG[c]
+        dem_nt[nt] += 1
+        dem_pc[pc] += 1
+        ma_tran_nt_pc[nt][pc]["hanh_tinh"].append(ma_10)
+
+    for ma_ht, item in thien_the.items():
+        item["pham_gia_ma"] = tra_pham_gia_ptolemy(ma_ht, item["cung"])
 
     return {
         "co_gio_sinh": co_gio,
@@ -317,4 +370,5 @@ def lap_ban_do_natal(
         "goc_chieu": goc_chieu,
         "phan_bo_nguyen_to": dem_nt,
         "phan_bo_pham_chat": dem_pc,
+        "ma_tran_nguyen_to_pham_chat": ma_tran_nt_pc,
     }

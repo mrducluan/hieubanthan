@@ -1,5 +1,5 @@
 {
-  "_nguon": "Chặng 4.2 — Đối chiếu Tương tác 2 Bản đồ sao (Synastry, không chấm điểm CD-1).",
+  "_nguon": "Chặng 4.2 & Chặng 5 — Đối chiếu Tương tác 2 Bản đồ sao (Synastry & Composite Midpoint Chart, không chấm điểm CD-1).",
   "_trang_thai": "nhap_ai_cho_duyet",
   "source_id": "bien_tap_chiem_tinh_2026",
   "school_id": "chiem_tinh_tay",
@@ -37,6 +37,16 @@
       "goi_y": "Phát huy sự bổ trợ phong cách khi cùng xuất hiện hoặc đón tiếp đối tác bên ngoài.",
       "source_id": "bien_tap_chiem_tinh_2026",
       "school_id": "chiem_tinh_tay"
+    }
+  },
+  "composite": {
+    "gioi_thieu": "Bản đồ Composite lấy điểm giữa cung ngắn nhất giữa từng cặp hành tinh của hai người để phác hoạ không gian chung khi hai người đồng hành (như một đội nhóm độc lập, tách biệt với tính cách riêng của từng cá nhân).",
+    "luu_y_khuyet_gio": "Chưa đủ giờ sinh của cả hai người nên Mặt Trăng điểm giữa có biên độ dao động rộng và trang không an 12 nhà Composite.",
+    "theo_nguyen_to_mat_troi": {
+      "lua": "Mặt Trời điểm giữa thuộc nhóm Lửa: hai người dễ tiếp lửa hành động, hợp cùng bắt tay dự án mới hoặc hoạt động ngoài trời năng động.",
+      "dat": "Mặt Trời điểm giữa thuộc nhóm Đất: mối quan hệ mạnh khi cùng vun đắp mục tiêu hữu hình, tài chính minh bạch và lịch sinh hoạt đều đặn.",
+      "khi": "Mặt Trời điểm giữa thuộc nhóm Khí: không khí chung sáng lên nhờ trò chuyện cởi mở, chia sẻ tri thức và tôn trọng khoảng trời tư duy riêng.",
+      "nuoc": "Mặt Trời điểm giữa thuộc nhóm Nước: sợi dây gắn kết nằm ở sự thấu cảm tinh tế, sẻ chia tâm sự sâu và giữ không gian bình yên cho nhau."
     }
   }
 }
