@@ -103,3 +103,43 @@ def test_su_vu_an_toan_va_tuoi_16():
     )
     assert kq_nho["chuyen_huong_tuoi"]["tuoi"] < 16
     assert "goc_luc_hao" not in kq_nho
+
+
+def test_su_vu_dung_than_mot_nguon_kinhdich_tra_loi():
+    from app.kb import kinhdich_tra_loi_kb as kd_kb
+    kb = json.loads((KB_DIR / "su_vu_chien_thuat_kb.json").read_text("utf-8"))
+    for ma, th in kb["tinh_huong"].items():
+        assert "dung_than" not in th, f"{ma}: bảng dụng thần thứ hai — phải lấy từ kinhdich_tra_loi"
+        kq = sv.xem_su_vu(cau_hoi="Cần chuẩn bị gì cho việc này tuần tới?", tinh_huong=ma,
+                          ngay_xem=dt.date(2026, 12, 1), gio_xem="09:00", hat_giong=f"s-{ma}")
+        assert kq["goc_luc_hao"]["dung_than"] == kd_kb.dung_than_viec(th["viec_kinh_dich"])["chinh"], ma
+    assert kb["tinh_huong"]["dam_phan_thuong_vu"]["viec_kinh_dich"] == "hop_tac"
+    assert kb["tinh_huong"]["cho_tin_ket_qua"]["viec_kinh_dich"] == "giay_to"
+    assert kb["tinh_huong"]["hoa_giai_bat_dong"]["viec_kinh_dich"] == "tranh_chap"
+    assert "起行" not in kb["tinh_huong"]["cho_tin_ket_qua"]["trich_ky_mon"]["han"]   # câu xuất hành → câu tin tức
+
+
+def test_su_vu_gio_dang_xem_doc_dung_muc_cua_doc_gio():
+    # 2026-12-01, việc gặp gỡ: 09:00 và 15:00 thuận, 07:00 và 13:00 nên giữ nhịp (theo luangiai.ky_mon.doc_gio)
+    muc = {}
+    for gio in ("07:00", "09:00", "13:00", "15:00"):
+        kq = sv.xem_su_vu(cau_hoi="Cần chuẩn bị gì cho buổi gặp đối tác?", tinh_huong="dam_phan_thuong_vu",
+                          ngay_xem=dt.date(2026, 12, 1), gio_xem=gio, hat_giong="abcd")
+        g = kq["goc_ky_mon"]["gio_dang_xem"]
+        assert g["khung"].startswith(gio), g
+        muc[gio] = g["muc"]
+    assert muc == {"07:00": "cham", "09:00": "thuan", "13:00": "cham", "15:00": "thuan"}
+
+
+def test_su_vu_khong_gio_xem_gieo_theo_gio_hien_tai():
+    kq = sv.xem_su_vu(cau_hoi="Cần chuẩn bị gì cho buổi gặp đối tác?", tinh_huong="dam_phan_thuong_vu", hat_giong="abcd")
+    assert kq["goc_ky_mon"]["gio_dang_xem"] is None
+    assert kq["goc_luc_hao"]["thoi_diem_gieo"][:10] == kq["goc_ky_mon"]["ngay"]
+
+
+def test_api_su_vu_ngay_sinh_truoc_1930_va_loi_theo_ngon_ngu():
+    client = TestClient(app)
+    p = {"cau_hoi": "Cần chuẩn bị gì cho buổi ký hợp đồng?", "tinh_huong": "ky_ket_hop_dong", "hat_giong": "abcd"}
+    assert client.post("/v1/co-van/su-vu", json={**p, "ngay_sinh": "1925-03-01"}).status_code == 200
+    r = client.post("/v1/co-van/su-vu", json={**p, "ngay_sinh": "1890-03-01"}, headers={"x-ngon-ngu": "en"})
+    assert r.status_code == 422 and not _VIET.search(r.json()["detail"])

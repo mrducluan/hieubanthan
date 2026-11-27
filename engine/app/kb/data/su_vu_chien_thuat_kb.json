@@ -1,6 +1,8 @@
 {
   "_nguon": "Chặng 3.1 — Tầng Chiến thuật Sự vụ tức thời: phối hợp Kỳ Môn Thời Gia (cửa, kỳ, hướng giờ) và Lục Hào Nạp Giáp (dụng thần, nguyên/kỵ thần, ứng kỳ). Hai môn đọc độc lập, không gộp điểm (CD-1). Câu chữ Hán trích nguyên văn từ ky_mon_co_kim_do_thu.json và tang_san_boc_dich.json.",
   "_trang_thai": "nhap_ai_cho_duyet",
+  "source_id": "su_vu_chien_thuat",
+  "school_id": "ky_mon_luc_hao",
   "khung": {
     "tieu_de": "Chiến thuật Sự vụ tức thời (Kỳ Môn · Lục Hào)",
     "phu_de": "Dành cho một việc cụ thể sắp diễn ra trong vài ngày tới: Kỳ Môn chọn khung giờ và hướng ngồi/xuất phát theo thời điểm; Lục Hào soi lực của hào đại diện (dụng thần) và nhịp ứng kỳ trên quẻ vừa gieo. Hai góc nhìn đọc riêng, không chấm điểm gộp.",
@@ -9,24 +11,40 @@
     "nhan_ky_mon": "Góc nhìn 1 · Kỳ Môn Thời Gia (chọn giờ & hướng hành sự)",
     "nhan_luc_hao": "Góc nhìn 2 · Lục Hào Nạp Giáp (soi hào đại diện & nhịp ứng kỳ)",
     "chua_co_gio_tot": "Trong ngày đang xem các khung giờ ban ngày đều vướng cách cục cần chậm lại; ưu tiên chuẩn bị hồ sơ kỹ hoặc dời sang ngày kế tiếp nếu không gấp.",
-    "ung_ky_ghi_chu": "Ứng kỳ là mốc ngày can chi gần nhất khi hào đại diện được tháo gỡ (xuất không, xung động hoặc gặp ngày sinh trợ) — dùng để canh nhịp nhắc tin, không phải lời hẹn chắc chắn."
+    "ung_ky_ghi_chu": "Ứng kỳ là mốc ngày can chi gần nhất khi hào đại diện được tháo gỡ (xuất không, xung động hoặc gặp ngày sinh trợ) — dùng để canh nhịp nhắc tin, không phải lời hẹn chắc chắn.",
+    "ly_do_dung_than": "Việc này lấy {ten} làm hào chính ({chinh}){phu}.",
+    "ly_do_phu": "; xem thêm {ten} ({lt})",
+    "ly_do_ky": "; để ý {ten} ({lt})",
+    "muc_gio_nhan": {
+      "thuan": "Có hướng thuận",
+      "binh": "Bình thường",
+      "cham": "Giờ nên giữ nhịp"
+    },
+    "loi_viec_mau": {
+      "thuan": "Với việc này, giờ ấy hợp nhất là hướng {phuong}.",
+      "binh": "Giờ này dùng được cho việc nhỏ; chưa có hướng nào thật rõ.",
+      "cham": "Với việc này, giờ ấy nên giữ nhịp, chuẩn bị thay vì đẩy mạnh."
+    }
   },
   "tinh_huong": {
     "dam_phan_thuong_vu": {
       "ten": "Đàm phán thương vụ · Gặp đối tác",
       "mo_ta": "Bàn điều khoản hợp tác, chào giá dịch vụ, gặp khách hàng lớn hoặc thương lượng quyền lợi.",
       "viec_ky_mon": "gap_go",
-      "dung_than": "Thê Tài",
-      "ly_do_dung_than": "Thương vụ hướng tới giá trị trao đổi và dòng doanh thu thực tế nên lấy hào Thê Tài làm dụng thần chính; xem thêm hào Thế – Ứng để biết độ ăn khớp giữa mình và phía đối tác.",
+      "viec_kinh_dich": "hop_tac",
       "trich_ky_mon": {
         "sach": "Cổ Kim Đồ Thư Tập Thành · Kỳ Môn Độn Giáp (Can yết)",
         "han": "休門宮分為所見之人時干宮為干謁之人",
-        "y_nghia": "Cung có cửa Hưu đại diện phía người mình đến gặp, cung can giờ là phía người đi gặp; cửa êm và tương sinh thì buổi nói chuyện dễ mở lời."
+        "y_nghia": "Cung có cửa Hưu đại diện phía người mình đến gặp, cung can giờ là phía người đi gặp; cửa êm và tương sinh thì buổi nói chuyện dễ mở lời.",
+        "source_id": "ky_mon_co_kim_do_thu",
+        "school_id": "ky_mon"
       },
       "trich_luc_hao": {
         "sach": "Tăng San Bốc Dịch · Quyển 3 (Lục hợp chương thứ 19)",
         "han": "然必用神有气相宜用若失陷無益",
-        "y_nghia": "Dù quẻ có nét hoà hợp bề ngoài, cốt lõi vẫn cần hào dụng thần có khí lực; nếu dụng thần suy hãm thì lời hứa hẹn chưa thành con số thật."
+        "y_nghia": "Dù quẻ có nét hoà hợp bề ngoài, cốt lõi vẫn cần hào dụng thần có khí lực; nếu dụng thần suy hãm thì lời hứa hẹn chưa thành con số thật.",
+        "source_id": "tang_san_boc_dich",
+        "school_id": "luc_hao"
       },
       "chuan_bi_thuc_te": [
         "Chốt sẵn ngưỡng nhượng bộ tối đa và phương án thay thế trước khi vào bàn đàm phán.",
@@ -38,17 +56,20 @@
       "ten": "Ký kết hợp đồng · Chốt văn bản giấy tờ",
       "mo_ta": "Ký hợp đồng thuê mặt bằng, hợp đồng mua bán, biên bản góp vốn hoặc nộp hồ sơ thủ tục.",
       "viec_ky_mon": "ky_ket",
-      "dung_than": "Phụ Mẫu",
-      "ly_do_dung_than": "Hợp đồng, giấy phép, chứng từ và điều khoản bảo hộ đều thuộc hào Phụ Mẫu trong Lục Hào; hào Phụ Mẫu sáng rõ thì câu chữ và thủ tục ít vướng.",
+      "viec_kinh_dich": "giay_to",
       "trich_ky_mon": {
         "sach": "Cổ Kim Đồ Thư Tập Thành · Kỳ Môn Độn Giáp (Chiếm giao dịch)",
         "han": "直符為買物之人生門為所買之物",
-        "y_nghia": "Trực Phù là bên chủ động giao dịch, cửa Sinh là phần tài sản/hạng mục giao dịch; hai cung tương sinh thì việc ký nhận thuận lợi đôi bên."
+        "y_nghia": "Trực Phù là bên chủ động giao dịch, cửa Sinh là phần tài sản/hạng mục giao dịch; hai cung tương sinh thì việc ký nhận thuận lợi đôi bên.",
+        "source_id": "ky_mon_co_kim_do_thu",
+        "school_id": "ky_mon"
       },
       "trich_luc_hao": {
         "sach": "Tăng San Bốc Dịch · Quyển 2 (Dụng thần chương thứ 8)",
         "han": "皆以父母爻爲用神",
-        "y_nghia": "Mọi việc liên quan đến văn khế, giấy tờ, nhà cửa, xe cộ và chương tấu đều lấy hào Phụ Mẫu làm gốc để xét độ rõ ràng."
+        "y_nghia": "Mọi việc liên quan đến văn khế, giấy tờ, nhà cửa, xe cộ và chương tấu đều lấy hào Phụ Mẫu làm gốc để xét độ rõ ràng.",
+        "source_id": "tang_san_boc_dich",
+        "school_id": "luc_hao"
       },
       "chuan_bi_thuc_te": [
         "Rà kỹ điều khoản phạt vi phạm, điều kiện chấm dứt trước hạn và mốc nghiệm thu thanh toán.",
@@ -60,17 +81,20 @@
       "ten": "Thu hồi công nợ · Nhắc khoản thanh toán",
       "mo_ta": "Nhắc đối tác tất toán công nợ đến hạn, đối soát biên bản nghiệm thu để thu tiền về.",
       "viec_ky_mon": "thu_no",
-      "dung_than": "Thê Tài",
-      "ly_do_dung_than": "Khoản tiền cần thu về thuộc hào Thê Tài (dù người nợ là khách quen hay đối tác lâu năm, theo quy tắc việc nào dụng thần nấy của Dã Hạc).",
+      "viec_kinh_dich": "tien_no",
       "trich_ky_mon": {
         "sach": "Cổ Kim Đồ Thư Tập Thành · Kỳ Môn Độn Giáp (Chiếm sách trái)",
         "han": "甲子戊會開門加內地時干其債速還",
-        "y_nghia": "Mậu hội cửa Khai về nội bàn cùng can giờ sáng sủa thì việc đối soát thu hồi khoản nợ diễn ra nhanh gọn."
+        "y_nghia": "Mậu hội cửa Khai về nội bàn cùng can giờ sáng sủa thì việc đối soát thu hồi khoản nợ diễn ra nhanh gọn.",
+        "source_id": "ky_mon_co_kim_do_thu",
+        "school_id": "ky_mon"
       },
       "trich_luc_hao": {
         "sach": "Tăng San Bốc Dịch · Quyển 2 (Dụng thần nguyên thần kỵ thần chương thứ 9)",
         "han": "元神生用神之神卽爲元神忌神克用神之爻也",
-        "y_nghia": "Nguyên thần (Tử Tôn) động thì có đường tháo gỡ dòng tiền sinh trợ cho Thê Tài; Kỵ thần (Huynh Đệ) động thì dễ bị khất lần hoặc chia nhỏ đợt trả."
+        "y_nghia": "Nguyên thần (Tử Tôn) động thì có đường tháo gỡ dòng tiền sinh trợ cho Thê Tài; Kỵ thần (Huynh Đệ) động thì dễ bị khất lần hoặc chia nhỏ đợt trả.",
+        "source_id": "tang_san_boc_dich",
+        "school_id": "luc_hao"
       },
       "chuan_bi_thuc_te": [
         "Gửi bảng đối chiếu công nợ kèm chứng từ nghiệm thu rõ ràng trước khi gọi hoặc gặp trực tiếp.",
@@ -82,17 +106,20 @@
       "ten": "Ra mắt sản phẩm · Mở hàng đón khách",
       "mo_ta": "Mở bán dòng sản phẩm mới, khai trương điểm bán hoặc phát động chiến dịch tiếp cận thị trường.",
       "viec_ky_mon": "ra_mat",
-      "dung_than": "Thê Tài",
-      "ly_do_dung_than": "Mở hàng và ra mắt sản phẩm nhắm đến sức mua thực tế của thị trường nên lấy hào Thê Tài làm trọng tâm, kết hợp xem Tử Tôn (nguồn khách hàng).",
+      "viec_kinh_dich": "kinh_doanh",
       "trich_ky_mon": {
         "sach": "Cổ Kim Đồ Thư Tập Thành · Kỳ Môn Độn Giáp (Chiếm cầu tài)",
         "han": "生門之上好求財上下兩盤仔細猜",
-        "y_nghia": "Cửa Sinh là phương chủ đạo để mở hàng cầu tài, nhưng phải xét kỹ sự phối hợp giữa thiên bàn và địa bàn trước khi bung lực."
+        "y_nghia": "Cửa Sinh là phương chủ đạo để mở hàng cầu tài, nhưng phải xét kỹ sự phối hợp giữa thiên bàn và địa bàn trước khi bung lực.",
+        "source_id": "ky_mon_co_kim_do_thu",
+        "school_id": "ky_mon"
       },
       "trich_luc_hao": {
         "sach": "Tăng San Bốc Dịch · Quyển 2 (Quy hồn du hồn chương thứ 26)",
         "han": "須以用神爲主然後以此參之",
-        "y_nghia": "Khi xét việc mở mang, luôn lấy sức thực của hào dụng thần làm gốc rồi mới tham khảo thêm thế quẻ xung – hợp bên ngoài."
+        "y_nghia": "Khi xét việc mở mang, luôn lấy sức thực của hào dụng thần làm gốc rồi mới tham khảo thêm thế quẻ xung – hợp bên ngoài.",
+        "source_id": "tang_san_boc_dich",
+        "school_id": "luc_hao"
       },
       "chuan_bi_thuc_te": [
         "Chạy thử quy trình đón khách, thanh toán và hậu cần một lượt nhỏ trước giờ mở bán chính thức.",
@@ -104,17 +131,20 @@
       "ten": "Hoà giải bất đồng · Tháo gỡ va chạm",
       "mo_ta": "Ngồi lại tháo gỡ hiểu lầm với cộng sự, khách hàng khiếu nại hoặc người thân đang căng thẳng.",
       "viec_ky_mon": "hoa_giai",
-      "dung_than": "Huynh Đệ",
-      "ly_do_dung_than": "Việc gỡ nút ngang hàng giữa cộng sự, đồng nghiệp hoặc đối thoại hai chiều lấy hào Huynh Đệ và nhịp đối ứng Thế – Ứng để xem độ lắng nghe.",
+      "viec_kinh_dich": "tranh_chap",
       "trich_ky_mon": {
         "sach": "Cổ Kim Đồ Thư Tập Thành · Kỳ Môn Độn Giáp (Thích bát môn sở chủ)",
         "han": "開門宜遠行征討所向通達休門宜集萬事治兵習業生門宜見貴人營造百事",
-        "y_nghia": "Mỗi cửa có một công dụng riêng: cửa Khai hợp mở lối đi xa, cửa Sinh hợp dựng việc mới, còn cửa Hưu êm dịu hợp nhất để thu xếp và hoà giải."
+        "y_nghia": "Mỗi cửa có một công dụng riêng: cửa Khai hợp mở lối đi xa, cửa Sinh hợp dựng việc mới, còn cửa Hưu êm dịu hợp nhất để thu xếp và hoà giải.",
+        "source_id": "ky_mon_co_kim_do_thu",
+        "school_id": "ky_mon"
       },
       "trich_luc_hao": {
         "sach": "Tăng San Bốc Dịch · Quyển 3 (Lục xung chương thứ 20)",
         "han": "用神旺𨿽沖不破用神失陷凶而又凶",
-        "y_nghia": "Việc bất đồng nếu thiện chí gốc (dụng thần) còn vượng thì va chạm chỉ là nhất thời để nói rõ lòng nhau; nếu đang kiệt sức thì nên tạm nghỉ cho nguội rồi hãy bàn."
+        "y_nghia": "Việc bất đồng nếu thiện chí gốc (dụng thần) còn vượng thì va chạm chỉ là nhất thời để nói rõ lòng nhau; nếu đang kiệt sức thì nên tạm nghỉ cho nguội rồi hãy bàn.",
+        "source_id": "tang_san_boc_dich",
+        "school_id": "luc_hao"
       },
       "chuan_bi_thuc_te": [
         "Chọn khung giờ cửa Hưu yên tĩnh, gặp riêng ít người thay vì tranh luận giữa tập thể đông người.",
@@ -126,17 +156,20 @@
       "ten": "Việc đang chờ hồi âm · Xin phê duyệt",
       "mo_ta": "Đang chờ kết quả xét duyệt hồ sơ, phản hồi báo giá, lịch hẹn từ cơ quan hoặc cấp quyết định.",
       "viec_ky_mon": "giay_to",
-      "dung_than": "Quan Quỷ",
-      "ly_do_dung_than": "Quyết định phê duyệt từ cấp thẩm quyền, hội đồng xét duyệt hoặc cơ quan quản lý thuộc hào Quan Quỷ (đi kèm Phụ Mẫu là văn bản trả lời).",
+      "viec_kinh_dich": "giay_to",
       "trich_ky_mon": {
-        "sach": "Cổ Kim Đồ Thư Tập Thành · Kỳ Môn Độn Giáp (Chiếm hành kỳ)",
-        "han": "時干為起行之人日干為牽纏節制之人開門為起行之期",
-        "y_nghia": "Can giờ là nhịp chuyển động mới, can ngày là phần thủ tục đang giữ chân, cửa Khai chỉ thời điểm hồ sơ được mở lối thông suốt."
+        "sach": "Cổ Kim Đồ Thư Tập Thành · Kỳ Môn Độn Giáp (Viễn tín — tin từ xa)",
+        "han": "六丁落宮為信時干落宮內外為遲速臨外信遲內主速",
+        "y_nghia": "Cung có Đinh là phía tin tức; cung của can giờ nằm ở vòng trong hay vòng ngoài cho biết tin về nhanh hay chậm: ở ngoài thì chậm, ở trong thì nhanh.",
+        "source_id": "ky_mon_co_kim_do_thu",
+        "school_id": "ky_mon"
       },
       "trich_luc_hao": {
         "sach": "Tăng San Bốc Dịch · Quyển 2 (Các môn loại ứng kỳ tổng chú chương 26)",
         "han": "大象吉而受克須待克神受克",
-        "y_nghia": "Khi thế chung của việc đã thuận nhưng còn vướng một khâu kìm giữ, chỉ cần đợi đến mốc ngày chế phục lực cản đó thì tin hồi âm sẽ mở."
+        "y_nghia": "Khi thế chung của việc đã thuận nhưng còn vướng một khâu kìm giữ, chỉ cần đợi đến mốc ngày chế phục lực cản đó thì tin hồi âm sẽ mở.",
+        "source_id": "tang_san_boc_dich",
+        "school_id": "luc_hao"
       },
       "chuan_bi_thuc_te": [
         "Kiểm tra lại kênh liên lạc, hộp thư phụ và tính đầy đủ của các tệp đính kèm đã nộp.",

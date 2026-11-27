@@ -1,6 +1,8 @@
 {
   "_nguon": "Stage 3.2 English overlay — Side-by-side reflection of Annual Natal Rhythm & East-West Physiognomy / Palmistry (Saint-Germain 1897 PD).",
   "_trang_thai": "nhap_may",
+  "source_id": "tuong_menh_doi_chieu",
+  "school_id": "tuong_menh_dong_tay",
   "khung": {
     "tieu_de": "Side-by-Side Reflection: Annual Chart Rhythm & Face / Palm Observations",
     "phu_de": "Your birth chart maps seasonal structure and annual cycles, while Classical Annual Facial Zones and Two-Hand Palmistry reflect daily habits you are actively cultivating. Each perspective stands independently with no merged score.",
@@ -8,34 +10,36 @@
     "tuoi_nho": "Physiognomy and natal cross-reflection is available only for users aged 16 and older."
   },
   "saint_germain_1897": {
-    "sach": "Comte C. de Saint-Germain · The Practice of Palmistry for Professional Purposes (1897, public domain)",
+    "sach": "Comte C. de Saint-Germain · Practical Palmistry (1897, public domain)",
     "muc": {
       "ngon_cai": {
-        "ten": "The Thumb — Willpower & Self-Regulation",
-        "nguyen_van_en": "It would be a loss of space for me to expatiate further on the extraordinary value and interest of the thumb in its physical as well as ethnological aspect.",
-        "y_ung_dung": "Thumb carriage and balance reflect how steadily you pace personal discipline during demanding annual transitions."
+        "ten": "The Thumb — Will and Self-Reliance",
+        "nguyen_van_en": "It represents will-power, self-reliance, domineering spirit.",
+        "y_ung_dung": "The book ties the thumb to willpower and self-reliance, sometimes a wish to dominate. Use your will to keep your own plan on track, without turning it into pressure on others."
       },
       "duong_tri_dao": {
-        "ten": "Line of Head — Focus & Deliberate Judgment",
-        "nguyen_van_en": "This is the line which acts as a clear and accurate gauge as to the intellectual worth of the subject and as to the healthy condition of his, or her, brain and blood circulation.",
-        "y_ung_dung": "A clear Head Line reflects structured thinking; in decision-heavy years, write criteria down clearly instead of multitasking."
+        "ten": "Line of Head — Judgment and Focus",
+        "nguyen_van_en": "“A short, clear line, or a long, faintly traced line” — Flightiness, lack of concentration.",
+        "y_ung_dung": "The book reads a short Head Line, or a long but faint one, as a sign of being easily distracted. Whatever your line looks like, before a big decision write your criteria down and finish one task at a time."
       },
       "duong_su_nghiep": {
-        "ten": "Line of Career — Long-Term Commitment Axis",
-        "nguyen_van_en": "I now turn my attention to a vertical line, one of the five lines the starting points of which are to be found in the lower part of the palm and the terminations more or less close",
-        "y_ung_dung": "When the vertical central line is clearer on the active hand than the passive hand, deliberate daily practice is shaping a stronger direction than baseline habit."
+        "ten": "Line of Fate — Long-Term Commitment",
+        "nguyen_van_en": "\"Rising from the inside of the Triangle in both hands” — Favorable opportunities obtained through hard labor and intelligent planning.",
+        "y_ung_dung": "The book reads a vertical line rising from inside the Triangle in both hands as opportunities won through hard work and careful planning. Keep a steady, planned work rhythm, since that part is in your hands."
       },
       "duong_thai_duong": {
-        "ten": "Line of the Sun — Follow-Through & Craft",
-        "nguyen_van_en": "Artistic instincts but insufficient powers of execution; the “Art amateur’s Line.",
-        "y_ung_dung": "Saint-Germain notes that creative instinct requires steady execution: finishing concrete deliverables builds lasting credibility."
+        "ten": "Line of the Sun — Follow-Through",
+        "nguyen_van_en": "“Pale or simply poorly colored” — Artistic instincts but insufficient powers of execution; the “Art amateur’s Line.”",
+        "y_ung_dung": "The book describes a pale Sun Line as artistic instinct without enough power to carry things through. Finish small tasks all the way; credibility comes from what is done."
       },
       "tam_giac_tu_giac": {
-        "ten": "The Quadrangle & Triangle — Mental Openness",
-        "nguyen_van_en": "There are two figures in the hands traced by the combination of the principal Lines which I had often occasion to mention but not to define or expatiate upon all through these page",
-        "y_ung_dung": "Balanced spacing between Heart and Head lines points to even-handedness when collaborating under pressure."
+        "ten": "The Quadrangle — Openness of Mind",
+        "nguyen_van_en": "\"Wide, with a good Line of Head and a well formed second phalanx of the thumb” — Broadmindedness.",
+        "y_ung_dung": "The book reads a wide Quadrangle, with a good Head Line, as broadmindedness. When working in a group, hear others out before drawing a conclusion."
       }
-    }
+    },
+    "source_id": "chi_tay_saint_germain_1897",
+    "school_id": "chi_tay_tay"
   },
   "nhip_hanh_nam": {
     "Kim": "A Metal-toned year favors streamlining commitments, clear boundaries, and steady breathing routines.",

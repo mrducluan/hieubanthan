@@ -16,8 +16,9 @@ import hashlib
 from app import config
 from app.calc import kinhdich, ky_mon as calc_km, luc_hao as lh, vuong_suy as vs
 from app.hoidap import chung as hd_chung, luan_hoi_khop as lhk
-from app.kb import nap, ten as _tn
+from app.kb import kinhdich_tra_loi_kb as kd_kb, nap, ten as _tn
 from app.luangiai import co_van_tam_tai as cv, kinhdich_doi_song as kd_ds, ky_mon as lg_km
+from app.kb.loi import L
 from app.ngon_ngu import la_viet
 
 MA_TINH_HUONG = (
@@ -32,6 +33,16 @@ MA_TINH_HUONG = (
 
 def _kb() -> dict:
     return nap.doc("su_vu_chien_thuat_kb.json")
+
+
+def _ly_do_dung_than(khung: dict, dt_viec: dict) -> str:
+    """Lời "vì sao lấy hào này" dựng từ MỘT nguồn dụng thần theo việc (`kinhdich_tra_loi.dung_than_viec`)."""
+    phu = ""
+    if dt_viec.get("phu"):
+        phu += khung["ly_do_phu"].format(ten=dt_viec.get("ten_phu", ""), lt=_tn.ten("luc_than_kd", dt_viec["phu"]))
+    if dt_viec.get("ky"):
+        phu += khung["ly_do_ky"].format(ten=dt_viec.get("ten_ky", ""), lt=_tn.ten("luc_than_kd", dt_viec["ky"]))
+    return khung["ly_do_dung_than"].format(ten=dt_viec.get("ten", ""), chinh=_tn.ten("luc_than_kd", dt_viec["chinh"]), phu=phu)
 
 
 def _gieo_tu_hat_giong(hat_giong: str) -> list[int]:
@@ -121,7 +132,10 @@ def xem_su_vu(
 ) -> dict:
     kb = _kb()
     khung = kb["khung"]
-    hn = ngay_xem or config.hom_nay_vn()
+    # Giờ "bây giờ" theo đúng múi giờ người xem (`utc`, mặc định giờ VN): không truyền ngày → hôm nay ở múi giờ đó;
+    # không truyền giờ → quẻ gieo ở giờ hiện tại (trả ra `thoi_diem_gieo`), không cố định một giờ giả.
+    bay_gio = dt.datetime.now(dt.timezone(dt.timedelta(hours=utc))).replace(tzinfo=None)
+    hn = ngay_xem or bay_gio.date()
 
     # 1. Cổng an toàn chung (khủng hoảng có 988 song ngữ, y tế cấp cứu, pháp lý hình sự, cá cược đỏ đen)
     chan = cv._kiem_an_toan(cau_hoi)
@@ -162,7 +176,7 @@ def xem_su_vu(
         }
 
     if tinh_huong not in kb["tinh_huong"]:
-        raise ValueError(f"Tình huống sự vụ không hợp lệ: {tinh_huong}")
+        raise ValueError(L("chang3.tinh_huong", "Tình huống sự vụ không hợp lệ: {ma}.", ma=tinh_huong))
     th = kb["tinh_huong"][tinh_huong]
 
     # 3. Góc nhìn 1 — Kỳ Môn Thời Gia (chọn khung giờ ban ngày & hướng cho đúng việc)
@@ -174,18 +188,29 @@ def xem_su_vu(
         gio_ban_ngay = gio_tot_all[:3]
 
     ban_gio_chon = None
-    gio_phut = (9, 30)
     if gio_xem:
         hh, mm = map(int, gio_xem.split(":"))
         gio_phut = (hh, mm)
         td_chon = dt.datetime(hn.year, hn.month, hn.day, hh, mm)
         ban_raw = calc_km.lap_ban(td_chon, utc=utc)
         dg = lg_km.doc_gio(ban_raw, viec=viec_km)
+        g, v = dg.get("gio") or {}, dg.get("viec") or {}
+        muc_gio, muc_viec = g.get("muc", "binh"), v.get("muc", "binh")
+        if la_viet():
+            muc_nhan, loi_viec = g.get("muc_nhan", ""), v.get("loi", "")
+        else:   # bài đọc Kỳ Môn chưa có bản Anh — nhãn + lời ngắn theo MÃ mức (KB en)
+            muc_nhan = khung["muc_gio_nhan"].get(muc_gio, "")
+            loi_viec = khung["loi_viec_mau"].get(muc_viec, "").format(phuong=_tn.ten("huong", v.get("phuong") or ""))
         ban_gio_chon = {
-            "khung": dg.get("khung", ""),
-            "muc": dg.get("muc", "binh"),
+            "khung": g.get("khung", ""),
+            "muc": muc_gio,
+            "muc_nhan": muc_nhan,
             "huong_thuan": [h if la_viet() else _tn.ten("huong", h) for h in (dg.get("huong_thuan") or [])],
+            "muc_viec": muc_viec,
+            "loi_viec": loi_viec,
         }
+    else:
+        gio_phut = (bay_gio.hour, bay_gio.minute)   # không chọn giờ → giờ hiện tại ở múi giờ người xem (ghi ở `thoi_diem_gieo`)
 
     goc_ky_mon = {
         "nhan": khung["nhan_ky_mon"],
@@ -200,7 +225,7 @@ def xem_su_vu(
     # 4. Góc nhìn 2 — Lục Hào Nạp Giáp (khởi quẻ + phân tích dụng thần + ứng kỳ)
     if gia_tri_hao is not None:
         if len(gia_tri_hao) != 6 or any(v not in kinhdich.GIA_TRI_HOP_LE for v in gia_tri_hao):
-            raise ValueError("gia_tri_hao cần đúng 6 giá trị thuộc {6, 7, 8, 9}.")
+            raise ValueError(L("chang3.gia_tri_hao", "gia_tri_hao cần đúng 6 giá trị, mỗi giá trị là 6, 7, 8 hoặc 9."))
         vals, nguon_ma = list(gia_tri_hao), "tay"
     elif hat_giong:
         vals, nguon_ma = _gieo_tu_hat_giong(hat_giong), "hat_giong"
@@ -210,7 +235,8 @@ def xem_su_vu(
     que = kinhdich.khoi_que(vals)
     luc_gieo = dt.datetime(hn.year, hn.month, hn.day, gio_phut[0], gio_phut[1])
     tg = vs.thoi_gian(luc_gieo)
-    dung_than_goc = th["dung_than"]
+    dt_viec = kd_kb.dung_than_viec(th["viec_kinh_dich"])   # một nguồn dụng thần theo việc (KD-V3)
+    dung_than_goc = dt_viec["chinh"]
     pt = lh.phan_tich(que, tg, dung_than_goc, luc_gieo)
     gn_lh = kd_ds._goc_nhin_luc_hao(pt) or {}
     the_q = kd_ds.the_que(que)
@@ -221,6 +247,7 @@ def xem_su_vu(
     goc_luc_hao = {
         "nhan": khung["nhan_luc_hao"],
         "nguon_gieo": _nhan_nguon_que(nguon_ma),
+        "thoi_diem_gieo": luc_gieo.strftime("%Y-%m-%d %H:%M"),
         "gia_tri_hao": vals,
         "que_ban": {
             "so": que["quai_ban"]["so_king_wen"],
@@ -233,7 +260,9 @@ def xem_su_vu(
             else None
         ),
         "dung_than": _tn.ten("luc_than_kd", dung_than_goc),
-        "ly_do_dung_than": th["ly_do_dung_than"],
+        "dung_than_phu": _tn.ten("luc_than_kd", dt_viec["phu"]) if dt_viec.get("phu") else None,
+        "ly_do_dung_than": _ly_do_dung_than(khung, dt_viec),
+        "viec_kinh_dich": th["viec_kinh_dich"],
         "muc": gn_lh.get("muc", "can_bang"),
         "nhan_muc": gn_lh.get("nhan", ""),
         "tom_tat": gn_lh.get("tom_tat", ""),

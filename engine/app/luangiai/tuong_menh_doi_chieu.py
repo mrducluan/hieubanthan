@@ -11,7 +11,9 @@ from __future__ import annotations
 import datetime as dt
 
 from app import config
-from app.calc import battu as bt_calc, lunar
+from app.calc import battu as bt_calc, huyen_khong, lunar, nhan_tuong as nt_calc, tuoi_dan_gian as tdg
+from app.config import CALENDAR_MERIDIAN_TZ
+from app.luangiai import tuoi_dan_gian as tdg_luan
 from app.kb import nap, ten as _tn
 from app.ngon_ngu import la_viet
 
@@ -76,7 +78,9 @@ def doi_chieu_tuong_menh(
     )
     can_nc = ls["nhat_chu"]["can"]
     hanh_nc = _HANH_CHUAN[ls["nhat_chu"]["ngu_hanh"]]
-    can_nam, chi_nam = lunar.can_chi_nam(hn.year)
+    # Năm can chi của Bát tự đổi ở Lập xuân, không phải 1/1 (20/01/2027 vẫn là Bính Ngọ).
+    nam_lx = huyen_khong.nam_theo_lap_xuan(dt.datetime(hn.year, hn.month, hn.day, 12))
+    can_nam, chi_nam = lunar.can_chi_nam(nam_lx)
     hanh_nam = _CAN_HANH[can_nam]
 
     goc_menh = {
@@ -85,7 +89,7 @@ def doi_chieu_tuong_menh(
             if la_viet()
             else "Perspective 1 · Annual Natal Rhythm (BaZi)"
         ),
-        "nam_xem": hn.year,
+        "nam_xem": nam_lx,
         "can_chi_nam": f"{_tn.ten('can', can_nam)} {_tn.ten('chi', chi_nam)}",
         "nhat_chu": f"{_tn.ten('can', can_nc)} ({_tn.ten('hanh', hanh_nc)})",
         "co_gio_sinh": bool(gio_sinh),
@@ -93,39 +97,52 @@ def doi_chieu_tuong_menh(
     }
 
     # 2. Góc Tướng lưu niên (Thần Tướng Toàn Biên)
-    tuoi_mu = max(16, min(99, hn.year - ngay_sinh.year + 1))
+    # Tuổi mụ theo năm âm lịch Việt (như bài đọc Nhân tướng) + vị lưu niên "nam tả nữ hữu" — một bộ tính calc.nhan_tuong.
+    tuoi_mu = tdg.tuoi_mu(tdg_luan.nam_am_sinh(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day),
+                          lunar.solar_to_lunar(hn.day, hn.month, hn.year, CALENDAR_MERIDIAN_TZ)[2])
     nt = _nt_kb()
-    ln_item = next((x for x in nt.get("luu_nien", []) if x.get("tuoi") == tuoi_mu), None)
+    ln_item = nt_calc.luu_nien(tuoi_mu, gioi_tinh)
+    if ln_item:
+        ln_item = {**ln_item, "han": next((x.get("han", "") for x in nt.get("luu_nien", []) if x.get("tuoi") == ln_item["vi"]), "")}
     bo_vi_ma = (ln_item or {}).get("bo_vi", "an_duong")
     ben_ma = (ln_item or {}).get("ben") or "giua"
+    han = (ln_item or {}).get("han", "")
     if la_viet():
-        bo_vi_ten = ((nt.get("bo_vi") or {}).get(bo_vi_ma) or {}).get("ten", bo_vi_ma)
+        bo_vi_ten_day = ((nt.get("bo_vi") or {}).get(bo_vi_ma) or {}).get("ten", bo_vi_ma)
+        bo_vi_ten = bo_vi_ten_day.split(" (")[0]          # lời hiển thị: tên thường, thuật ngữ xuống can_cu
+        ben = _BEN_HIEN[True].get(ben_ma, ben_ma)
         loi_ln = (
-            f"Tuổi mụ {tuoi_mu} ứng với bộ vị «{ln_item['ten']}» ({ln_item.get('han', '')}) vùng {bo_vi_ten} ({_BEN_HIEN[True].get(ben_ma, ben_ma)}): "
+            f"Năm nay (tuổi mụ {tuoi_mu}) sách xưa xem vùng {bo_vi_ten.lower()}, {ben}: "
             "nên giữ sắc diện vùng này sáng thoáng, ngủ đủ giấc và thả lỏng cơ mặt khi làm việc căng thẳng."
             if ln_item
-            else f"Tuổi mụ {tuoi_mu}: giữ thần sắc vùng Ấn Đường và ánh mắt thư thái, tránh thức khuya kéo dài."
+            else f"Tuổi mụ {tuoi_mu}: nên giữ vùng giữa hai lông mày và ánh mắt thư thái, tránh thức khuya kéo dài."
         )
+        can_cu_ln = ([f"Thần Tướng Toàn Biên, bài lưu niên: tuổi {tuoi_mu} ứng với vị «{ln_item['ten']}» ({han}) thuộc {bo_vi_ten_day}; "
+                      "nam tả nữ hữu."] if ln_item else [])
     else:
         bo_vi_ten = _BO_VI_EN.get(bo_vi_ma, "facial zone")
+        ben = _BEN_HIEN[False].get(ben_ma, ben_ma)
         loi_ln = (
-            f"Traditional age {tuoi_mu} corresponds to classical point ({ln_item.get('han', '')}) at the {bo_vi_ten} ({_BEN_HIEN[False].get(ben_ma, ben_ma)}): "
-            "keep posture and facial tension relaxed and protect consistent rest during busy weeks."
+            f"This year (traditional age {tuoi_mu}) the old texts look at the {bo_vi_ten.lower()}, {ben}: "
+            "keep facial tension relaxed and protect steady rest during busy weeks."
             if ln_item
             else f"Traditional age {tuoi_mu}: keep brow and eye tension relaxed through steady sleep routines."
         )
+        can_cu_ln = ([f"Shen Xiang Quan Bian, annual-position verse: age {tuoi_mu} falls on the point {han} in the {bo_vi_ten}; "
+                      "left for men, right for women."] if ln_item else [])
 
     goc_tuong = {
         "nhan": (
-            "Góc nhìn 2 · Bộ vị Lưu niên (Thần Tướng Toàn Biên)"
+            "Góc nhìn 2 · Vùng lưu niên trên gương mặt"
             if la_viet()
-            else "Perspective 2 · Classical Annual Facial Zone (Shen Xiang Quan Bian)"
+            else "Perspective 2 · This year's facial zone"
         ),
         "tuoi_mu": tuoi_mu,
         "bo_vi_ma": bo_vi_ma,
         "bo_vi_ten": bo_vi_ten,
-        "han": (ln_item or {}).get("han", ""),
+        "han": han,
         "loi_quan_sat": loi_ln,
+        "can_cu": can_cu_ln,
     }
 
     # 3. Góc Chỉ tay Đông – Tây (Saint-Germain 1897 + hai bàn tay)
@@ -137,11 +154,12 @@ def doi_chieu_tuong_menh(
 
     goc_chi_tay = {
         "nhan": (
-            "Góc nhìn 3 · Chỉ tay Đông – Tây (Saint-Germain 1897 & Hai bàn tay)"
+            "Góc nhìn 3 · Chỉ tay Đông – Tây (hai bàn tay)"
             if la_viet()
-            else "Perspective 3 · East–West Palmistry (Saint-Germain 1897 & Two-Hand Balance)"
+            else "Perspective 3 · East–West palmistry (both hands)"
         ),
         "sach_co_dien": sg_kb["sach"],
+        "can_cu": [sg_kb["sach"]],
         "hai_tay_nhan_xet": kb["hai_tay"][hai_tay_ma],
         "diem_doi_chieu": [
             {

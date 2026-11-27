@@ -165,8 +165,8 @@
 | Nhân tướng | `nhantuong_ngu_hanh_va_co_thu.json` | quy_tac_co_thu | Có nguyên văn đối chiếu | PR #320 (2026-11-20): 81/150 quy tắc giữ lại, mỗi câu Hán khớp kho nguồn Liễu Trang tướng pháp / Thần Tướng Toàn Biên (than_tuong_toan_bien.json); lời Việt khuôn SX-C do ban biên tập viết |
 | Nhân tướng | `nhantuong_ngu_hanh_va_co_thu.json` | quy_tac_khong_dua | Ban biên tập soạn | 69 quy tắc không đưa ra người dùng, chỉ còn mã + lý do |
 | Nhân tướng | `tuong_do_anh_kb.json` |  | Ban biên tập soạn | PR #338: ngưỡng + lời phép đo ước lượng trên ảnh (mặt 3D, vùng ảnh, bàn tay) — ban biên tập tự đặt, chưa hiệu chỉnh trên ảnh thật |
-| Nhân tướng | `tuong_menh_doi_chieu_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 3.2: nháp AI đối chiếu Nhịp năm Lá số & Tướng lưu niên / Chỉ tay Saint-Germain 1897, chờ chủ dự án đọc duyệt |
-| Tarot | `tarot_an_phu_nguoc_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 3.3: nháp AI 56 lá Ẩn Phụ ngược (trích nguyên văn Waite 1910 & Mathers 1888, 0% Bunning/Pollack) + Phẩm giá nguyên tố, chờ chủ dự án đọc duyệt |
+| Nhân tướng | `tuong_menh_doi_chieu_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 3.2: nháp AI đối chiếu nhịp năm lá số & tướng lưu niên (calc.nhan_tuong) / chỉ tay Saint-Germain, Practical Palmistry 1897 (câu trích trọn câu, khớp kho nguồn), chờ chủ dự án đọc duyệt |
+| Tarot | `tarot_an_phu_nguoc_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 3.3: nháp AI 56 lời lá Ẩn Phụ ngược viết sát nghĩa ngược của Waite 1910 (Mathers 1888 phụ); phẩm giá tính bằng calc.tarot (Book T), chờ chủ dự án đọc duyệt |
 | Tarot | `tarot_greer_nguoc.json` |  | Tiên đề logic sách hiện đại (ghi trang) | Đợt 2B: 22 Lá Ẩn Chính ngược rút ý 2 mặt từ Mary K. Greer (2002), không nguyên văn, giữ trang |
 | Tarot | `tarot_kb.json` |  | Có nguyên văn đối chiếu | câu trích khớp Waite / Mathers / Book T / Papus 1892 / Case 1920 / Ouspensky 1913; lời lớp Marseille, B.O.T.A., Thoth vẫn là tóm ý (Marseille đã soát với Mathers + Papus, B.O.T.A. ẩn chính với Case 1920) |
 | Kỳ Môn | `ky_mon_bi_kip_cuu_don.json` |  | Tóm ý cổ thư, chưa khớp từng câu | Cửu Độn: lời đời thường tóm ý theo Kỳ Môn Độn Giáp Bí Kíp Đại Toàn q.21; câu sách đi kèm (`sach_ghi`) là nguyên văn Độn Giáp Diễn Nghĩa quyển 2, khớp kho nguồn don_giap_dien_nghia.json qua tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem (PR #320, 2026-11-20) |
@@ -188,7 +188,7 @@
 | Thần số | `thanso_chaldean.json` | kep | Có nguyên văn đối chiếu | TK-2: 43/43 số kép có câu Cheiro (OCR, can_doi_chieu); bảng chữ 23/26 khớp; lời Việt là tóm ý trung tính |
 | Thần số | `thanso_chan_dung.json` |  | Tập quán / truyền khẩu phổ thông |  |
 | Thần số | `thanso_chi_so_phu.json` |  | Tập quán / truyền khẩu phổ thông |  |
-| Thần số | `thanso_da_phai_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 3.3: nháp AI đối chiếu 5 trường phái Thần số học (trích nguyên văn Westcott 1911, Sepharial 1913, Balliett 1908), chờ chủ dự án đọc duyệt |
+| Thần số | `thanso_da_phai_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 3.3: nháp AI so sánh phụ 5 trường phái Thần số (câu Balliett theo đúng số ngày sinh; Westcott, Chaldea dùng chung bo_sung_so / thanso_chaldean), chờ chủ dự án đọc duyệt |
 | Thần số | `thanso_depth.json` |  | Tập quán / truyền khẩu phổ thông |  |
 | Thần số | `thanso_do_thi.json` |  | Ban biên tập soạn |  |
 | Thần số | `thanso_doi_chieu.json` |  | Tập quán / truyền khẩu phổ thông |  |
@@ -211,11 +211,11 @@
 | Liên mảng · kỹ thuật | `chu_y_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `chuyen_nghia_kb.json` |  | Ban biên tập soạn | nghĩa đời nay do ban biên tập viết |
 | Liên mảng · kỹ thuật | `chuyen_nghia_kb.json` | khai_niem | Có nguyên văn đối chiếu | mỗi khái niệm một câu sách khớp kho nguồn; nghĩa đời nay là biên tập |
-| Liên mảng · kỹ thuật | `co_van_tam_tai_kb.json` |  | Ban biên tập soạn | Chủ dự án đọc duyệt 2026-11-26 — Chặng 2: nháp AI tổng hợp Cố vấn Liên mảng Tam Tài (Nhân – Thiên – Địa), chờ chủ dự án đọc duyệt |
-| Liên mảng · kỹ thuật | `doanh_chu_cam_nang_kb.json` |  | Ban biên tập soạn | Chủ dự án đọc duyệt 2026-11-26 — Chặng 2: nháp AI Cẩm nang Chiến lược Kinh doanh 5 trụ (Thị trường, Địa điểm/Thành Môn, Nhân sự, Văn phòng, Cửa hàng), chờ chủ dự án đọc duyệt |
+| Liên mảng · kỹ thuật | `co_van_tam_tai_kb.json` |  | Ban biên tập soạn | Chặng 2: Cố vấn Liên mảng Tam Tài (Nhân – Thiên – Địa). Chủ dự án đọc duyệt 2026-11-26, nâng bien_tap |
+| Liên mảng · kỹ thuật | `doanh_chu_cam_nang_kb.json` |  | Ban biên tập soạn | Chặng 2: Cẩm nang Chiến lược Kinh doanh 5 trụ (Thị trường, Địa điểm/Thành Môn, Nhân sự, Văn phòng, Cửa hàng). Chủ dự án đọc duyệt 2026-11-26, nâng bien_tap |
 | Liên mảng · kỹ thuật | `dong_thuan_thong_ke.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `giao_thoa_kb.json` |  | Ban biên tập soạn |  |
-| Liên mảng · kỹ thuật | `go_nut_doi_song_kb.json` |  | Ban biên tập soạn | Chủ dự án đọc duyệt 2026-11-26 — Chặng 1: nháp AI biên soạn cho 4 mạch gỡ nút đời sống, chờ chủ dự án đọc duyệt |
+| Liên mảng · kỹ thuật | `go_nut_doi_song_kb.json` |  | Ban biên tập soạn | Chặng 1: 4 mạch gỡ nút đời sống. Chủ dự án đọc duyệt 2026-11-26, nâng bien_tap |
 | Liên mảng · kỹ thuật | `goc_nhin.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `goi_y_cheo_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `hoan_canh_kb.json` |  | Ban biên tập soạn |  |
@@ -224,14 +224,14 @@
 | Liên mảng · kỹ thuật | `push_sang_nay.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `sinh_nuoc_ngoai_kb.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `slug_en.json` |  | Tệp kỹ thuật |  |
-| Liên mảng · kỹ thuật | `su_vu_chien_thuat_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 3.1: nháp AI Chiến thuật Sự vụ tức thời (Kỳ Môn Thời Gia · Lục Hào Nạp Giáp đọc riêng; câu Hán trích nguyên văn ky_mon_co_kim_do_thu & tang_san_boc_dich), chờ chủ dự án đọc duyệt |
+| Liên mảng · kỹ thuật | `su_vu_chien_thuat_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 3.1: nháp AI Chiến thuật Sự vụ tức thời (Kỳ Môn Thời Gia · Lục Hào đọc riêng; dụng thần lấy từ kinhdich_tra_loi.dung_than_viec; câu Hán trích nguyên văn ky_mon_co_kim_do_thu & tang_san_boc_dich), chờ chủ dự án đọc duyệt |
 | Liên mảng · kỹ thuật | `suc_khoe_kb.json` |  | Tóm ý cổ thư, chưa khớp từng câu | hành ↔ tạng phủ theo Nội Kinh; tên bệnh hay gặp là kiến thức phổ thông (SK-2) |
 | Liên mảng · kỹ thuật | `ten_en.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `tham_dinh.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `thuat_ngu_en.json` |  | Tệp kỹ thuật |  |
 | Liên mảng · kỹ thuật | `tu_dien.json` |  | Ban biên tập soạn |  |
 | Liên mảng · kỹ thuật | `tuan_hai_nguoi_kb.json` |  | Ban biên tập soạn |  |
-| Liên mảng · kỹ thuật | `ung_dung_co_dien_kb.json` |  | Ban biên tập soạn | Chủ dự án đọc duyệt 2026-11-26 — Chặng 1: nháp AI tổng hợp ứng dụng Ngũ hành, điều hoà Vận 9 & đối chiếu 2 phái, chờ chủ dự án đọc duyệt |
+| Liên mảng · kỹ thuật | `ung_dung_co_dien_kb.json` |  | Ban biên tập soạn | Chặng 1: ứng dụng Ngũ hành, điều hoà Vận 9 & đối chiếu 2 phái. Chủ dự án đọc duyệt 2026-11-26, nâng bien_tap |
 | Liên mảng · kỹ thuật | `y_dinh_chung.json` |  | Ban biên tập soạn |  |
 
 ## Cách nâng mức một phần

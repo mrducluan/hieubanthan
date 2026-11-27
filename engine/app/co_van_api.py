@@ -12,6 +12,7 @@ from app.calc import tuvi_an_sao
 from app.config import ENGINE_VERSION
 from app.luangiai import co_van_tam_tai as cv
 from app.luangiai import su_vu_tuc_thoi as sv
+from app.kb.loi import L
 from app import config
 from app.tuvi_api import _loi_an_sao
 
@@ -103,8 +104,9 @@ class SuVuIn(BaseModel):
 
 @router.post("/v1/co-van/su-vu")
 def api_co_van_su_vu(inp: SuVuIn) -> dict:
-    if inp.ngay_sinh and not (1930 <= inp.ngay_sinh.year <= 2025):
-        raise HTTPException(422, detail="Năm sinh cần nằm trong khoảng 1930–2025.")
+    if inp.ngay_sinh and not (1900 <= inp.ngay_sinh.year and inp.ngay_sinh <= config.hom_nay_vn()):
+        # Chỉ cần ngày sinh cho cổng TUOI-16 → nhận mọi ngày hợp lệ, không chặn người sinh trước 1930 / sau 2025.
+        raise HTTPException(422, detail=L("chang3.ngay_sinh", "Ngày sinh cần trong khoảng từ năm 1900 đến hôm nay."))
     try:
         kq = sv.xem_su_vu(
             cau_hoi=inp.cau_hoi,
