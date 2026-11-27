@@ -3,7 +3,9 @@
 import type { Payload, TypedUser } from "payload";
 import { webUrl } from "../lib/web";
 
-type Bai = { id: number | string; tieu_de?: string; diem_kiem_dinh?: number | null; _status?: string; slug?: string };
+type Bai = { id: number | string; tieu_de?: string; diem_kiem_dinh?: number | null; _status?: string; slug?: string; ghi_chu_duyet?: string | null };
+/** Lý do máy chưa tự xuất bản (dòng "BLOG-10: chưa tự xuất bản: …" ở Ghi chú của Chủ biên), cắt gọn. */
+const lyDoChua = (b: Bai) => /BLOG-10: chưa tự xuất bản: ([^\n]*)/.exec(String(b.ghi_chu_duyet ?? ""))?.[1]?.replace(/ — sửa rồi bấm Xuất bản tay\.?$/, "").slice(0, 160);
 
 export async function TongQuan({ payload, user }: { payload: Payload; user?: TypedUser }) {
   if (!user) return null;
@@ -28,8 +30,8 @@ export async function TongQuan({ payload, user }: { payload: Payload; user?: Typ
   // bấm Xuất bản ("da_duyet") không tính.
   const nf = ctv ? null : await payload.find({
     collection: "bai-viet", ...q, draft: true, limit: 8, depth: 0, sort: "-createdAt",
-    where: { and: [{ nguon_goc: { equals: "notfair" } }, { trang_thai_duyet: { not_equals: "da_duyet" } }] },
-    select: { tieu_de: true, diem_kiem_dinh: true, _status: true, slug: true },
+    where: { and: [{ nguon_goc: { in: ["notfair", "rankyak"] } }, { trang_thai_duyet: { not_equals: "da_duyet" } }] },
+    select: { tieu_de: true, diem_kiem_dinh: true, _status: true, slug: true, ghi_chu_duyet: true },
   });
   const diem = tb.docs.map((d) => (d as Bai).diem_kiem_dinh).filter((d): d is number => typeof d === "number");
   const trungBinh = diem.length ? Math.round(diem.reduce((a, b) => a + b, 0) / diem.length) : null;
@@ -70,14 +72,15 @@ export async function TongQuan({ payload, user }: { payload: Payload; user?: Typ
       </div>
       {nf && nf.docs.length > 0 && (
         <div className="hbt-tq-can-sua" data-testid="tq-notfair-moi">
-          <p><b>Bài NotFair mới chờ anh/chị đọc</b> ({nf.totalDocs}) — máy đã nhập, chuẩn hoá SEO, thay ảnh. Bài đạt điểm
+          <p><b>Bài NotFair / RankYak mới chờ anh/chị đọc</b> ({nf.totalDocs}) — máy đã nhập, chuẩn hoá SEO, thay ảnh. Bài đạt điểm
             kiểm định thì máy đã tự xuất bản (đang hiện trên web); bài còn là nháp thì chưa hiện — đọc, sửa rồi bấm <b>Xuất bản</b>.</p>
           <ul>
             {(nf.docs as Bai[]).map((b) => (
               <li key={b.id}>
                 <a href={`/admin/collections/bai-viet/${b.id}`}>{b.tieu_de || "(chưa có tiêu đề)"}</a>
                 <span> — {typeof b.diem_kiem_dinh === "number" ? `${b.diem_kiem_dinh}/100` : "chưa chấm"}
-                  {" · "}{b._status === "published" ? "máy đã tự xuất bản" : "nháp, chưa lên web"}</span>
+                  {" · "}{b._status === "published" ? "máy đã tự xuất bản" : "nháp, chưa lên web"}
+                  {b._status !== "published" && lyDoChua(b) ? ` — ${lyDoChua(b)}` : ""}</span>
               </li>
             ))}
           </ul>

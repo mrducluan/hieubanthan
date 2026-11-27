@@ -52,12 +52,14 @@ export function slugViet(s: string): string {
   return cat.slice(0, cat.lastIndexOf("-") > 0 ? cat.lastIndexOf("-") : 80);
 }
 
-// Chuẩn hoá dấu kiểu cũ/mới (hoá ↔ hóa) mà KHÔNG bỏ hết dấu (để "bùa" không trùng "bữa") — như engine tham_dinh._DAU.
-const DAU_CU_MOI: Record<string, string> = {
-  ó: "o", ò: "o", ỏ: "o", õ: "o", ọ: "o", á: "a", à: "a", ả: "a", ã: "a", ạ: "a", ú: "u", ù: "u", ủ: "u", ũ: "u",
-  ụ: "u", ý: "y", ỳ: "y", ỷ: "y", ỹ: "y", ỵ: "y", é: "e", è: "e", ẻ: "e", ẽ: "e", ẹ: "e",
-};
-const chuanCum = (s: string) => s.normalize("NFC").toLowerCase().replace(/[óòỏõọáàảãạúùủũụýỳỷỹỵéèẻẽẹ]/g, (c) => DAU_CU_MOI[c] ?? c);
+// Chuẩn hoá dấu kiểu cũ/mới (hoá ↔ hóa, thuỷ ↔ thủy): CHỈ dời dấu thanh trong vần oa / oe / uy về chữ cái sau (kiểu site
+// dùng: "hoà, thuỷ"). KHÔNG bỏ dấu của chữ khác: bản cũ bỏ dấu mọi nguyên âm a/e/o/u/y nên "trùng số chủ đạo" bị khớp nhầm
+// với cụm cấm "trúng số" và bài RankYak bị chặn xuất bản (2026-11-27); "bùa" cũng không được trùng "bữa".
+const DAU_THANH = "\u0300\u0301\u0303\u0309\u0323";
+const chuanCum = (s: string) => s.normalize("NFD").toLowerCase()
+  .replace(new RegExp(`o([${DAU_THANH}])([ae])(?![\\u0300-\\u036f])`, "g"), "o$2$1")
+  .replace(new RegExp(`u([${DAU_THANH}])y(?![\\u0300-\\u036f])`, "g"), "uy$1")
+  .normalize("NFC");
 
 // ------------------------------------------------------------------ chuẩn hoá tiếng Việt
 
@@ -216,9 +218,15 @@ const CAU_HOI = /\?\s*$|là gì|thế nào|như nào|tại sao|vì sao|bao nhiê
 
 // Khớp TRỌN TỪ: "ung thư" không được khớp "cung thường", "dùng thường" (2026-11-06: hai bài bị chặn oan).
 const thoatRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+// Cụm cấm mà bài CẢNH BÁO người đọc cũng dùng ("nếu nơi nào bắt bạn mua vật phẩm giải hạn, hãy dừng lại", "không cần mua vật
+// phẩm"): bỏ qua khi ngay trước nó (cách tối đa 2 chữ) là lời ngăn / ép buộc. Chỉ áp cho cụm khai báo ở đây — cụm khác khớp như cũ.
+const LOI_NGAN = "(?:bắt|ép|buộc|không|đừng|chẳng|tránh|khỏi)";
+const BO_QUA_KHI_NGAN: Record<string, string> = {
+  "mua vật phẩm": `(?<!(?:^|[^\\p{L}\\p{N}])${chuanCum(LOI_NGAN)}(?:\\s+\\p{L}+){0,2}\\s+)`,
+};
 const timCum = (van: string, ds: string[]) => {
   const v = chuanCum(van);
-  return ds.filter((c) => new RegExp(`(?<![\\p{L}\\p{N}])${thoatRe(chuanCum(c))}(?![\\p{L}\\p{N}])`, "u").test(v));
+  return ds.filter((c) => new RegExp(`${BO_QUA_KHI_NGAN[c] ?? ""}(?<![\\p{L}\\p{N}])${thoatRe(chuanCum(c))}(?![\\p{L}\\p{N}])`, "u").test(v));
 };
 
 // ------------------------------------------------------------------ kiểm định

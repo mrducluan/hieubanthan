@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import { getPayload } from "payload";
 import sharp from "sharp";
 import config from "../src/payload.config";
-import { tuDongRankYak } from "../src/lib/rankyak";
+import { nhapBaiRankYak, thuLaiBaiRankYakBiChan, tuDongRankYak } from "../src/lib/rankyak";
 
 const BI = "ry-test-0123456789abcdef0123456789";
 process.env.RANKYAK_WEBHOOK_SECRET = BI;
@@ -14,22 +14,27 @@ process.env.RANKYAK_API_KEY = "ry-khoa-test";
 
 const payload = await getPayload({ config });
 const dau = Date.now() % 1_000_000;
-const ID1 = 9_000_000 + dau, ID2 = ID1 + 1, ID3 = ID1 + 2;
+const ID1 = 9_000_000 + dau, ID2 = ID1 + 1, ID3 = ID1 + 2, ID4 = ID1 + 3, ID5 = ID1 + 4;
 const anh = await sharp({ create: { width: 320, height: 180, channels: 3, background: "#e8dcc0" } }).png().toBuffer();
 
 const baoVe: { id: string; url: string }[] = [];
+let soAnhTai = 0;
 let danhSach: unknown[] = [];
 const fetchGoc = globalThis.fetch;
 globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
   const url = String(input instanceof Request ? input.url : input);
-  if (url.startsWith("https://media.rankyak.com/")) return new Response(new Uint8Array(anh), { headers: { "content-type": "image/png" } });
+  if (url.startsWith("https://media.rankyak.com/")) { soAnhTai++; return new Response(new Uint8Array(anh), { headers: { "content-type": "image/png" } }); }
   const m = url.match(/^https:\/\/rankyak\.com\/api\/v1\/articles\/(\d+)\/external-url$/);
   if (m) {
     assert.equal(new Headers(init?.headers).get("x-api-key"), "ry-khoa-test");
     baoVe.push({ id: m[1]!, url: JSON.parse(String(init?.body)).external_url });
     return Response.json({ id: Number(m[1]) });
   }
-  if (url.startsWith("https://rankyak.com/api/v1/articles?")) return Response.json({ data: danhSach, links: { next: null } });
+  if (url.startsWith("https://rankyak.com/api/v1/articles?")) {
+    // RankYak kiểm exclude_h1 kiểu boolean của Laravel: "true" → 422 (cron vớt bài lỡ từng hỏng vì chỗ này).
+    if (/exclude_h1=true/.test(url)) return Response.json({ message: "The exclude h1 field must be true or false." }, { status: 422 });
+    return Response.json({ data: danhSach, links: { next: null } });
+  }
   return fetchGoc(input, init);
 }) as typeof fetch;
 
@@ -54,7 +59,7 @@ const goi = (headers: Record<string, string>, body: unknown) =>
 const timBai = async (idRy: number) => (await payload.find({ collection: "bai-viet", where: { rankyak_id: { equals: idRy } } as never,
   draft: true, depth: 0, overrideAccess: true, limit: 5 })).docs as unknown as Record<string, any>[];
 const xoa = async () => {
-  for (const id of [ID1, ID2, ID3]) for (const d of await timBai(id)) {
+  for (const id of [ID1, ID2, ID3, ID4, ID5]) for (const d of await timBai(id)) {
     const full = await payload.findByID({ collection: "bai-viet", id: d.id, draft: true, depth: 0, overrideAccess: true }) as any;
     await payload.delete({ collection: "bai-viet", id: d.id, overrideAccess: true }).catch(() => {});
     for (const m of [full.anh_bia, full.meta?.image]) if (m) await payload.delete({ collection: "media", id: m, overrideAccess: true }).catch(() => {});
@@ -106,6 +111,38 @@ try {
   assert.deepEqual(kq.moi.map((m) => Number(m.rankyak_id)), [ID2]);
   assert.equal((await timBai(ID2)).length, 1);
   assert.equal((await timBai(ID3)).length, 0);
+  // Lượt đầu của webhook chỉ ghi CHỮ (không tải ảnh — để trả lời RankYak trong ~1 giây); lượt hai làm tiếp, cùng một bài.
+  const truoc = soAnhTai;
+  const b4 = bai(ID4, "Năm cá nhân là gì? Cách tính và cách đọc từng năm");
+  const n4 = await nhapBaiRankYak(payload, { payload } as never, b4, { boAnh: true });
+  assert.equal(soAnhTai, truoc, "lượt đầu không tải ảnh nào");
+  const t4 = await payload.findByID({ collection: "bai-viet", id: n4.id, draft: true, depth: 0, overrideAccess: true }) as any;
+  assert.ok(!t4.anh_bia, "lượt đầu chưa có ảnh bìa");
+  assert.equal(t4._status, "draft");
+  // Bản nháp còn thiếu ảnh bìa → cron ngày xử lý nốt (cùng bài, không tạo trùng).
+  danhSach = [b4];
+  const kq4 = await tuDongRankYak(payload, { payload } as never);
+  assert.deepEqual(kq4.moi.map((m) => Number(m.rankyak_id)), [ID4], "cron xử lý nốt bản nháp dở dang");
+  assert.equal((await timBai(ID4)).length, 1, "không tạo trùng");
+  const x4 = await payload.findByID({ collection: "bai-viet", id: n4.id, draft: true, depth: 0, overrideAccess: true }) as any;
+  assert.ok(x4.anh_bia, "xử lý nốt đã có ảnh bìa");
+  assert.ok(soAnhTai > truoc, "xử lý nốt đã tải ảnh");
+  // Bài từng bị "lỗi chặn" (bộ kiểm định báo nhầm "trùng số" thành "trúng số") → chấm lại + tự xuất bản, KHÔNG đè chữ đã có.
+  const b5 = { ...bai(ID5, "Số tên và số chủ đạo trùng nhau thì đọc thế nào"), html: `<p>Số tên là con số rút từ các chữ cái trong họ tên, còn số chủ đạo rút từ ngày sinh. Khi hai số trùng số với nhau, người đọc thường thấy nét tính cách đó đậm hơn. Bài này nói cách đọc hai trường hợp, kèm ví dụ cụ thể để bạn tự đối chiếu.</p>
+<h2>Số tên là gì?</h2><p>Mỗi chữ cái ứng với một số từ 1 đến 9 theo bảng Pitago, cộng lại rồi rút gọn về một chữ số, giữ 11, 22 và 33 khi gặp.</p>
+<h2>Khi hai số trùng nhau thì sao?</h2><p>Tên khuếch đại những nét sẵn có, cả mặt mạnh lẫn mặt dễ vấp, nên bạn cần để ý cả hai mặt khi tự đọc.</p>
+<h2>Nên làm gì với kết quả?</h2><p>Hãy đọc như gợi ý để tự soi, ghi lại điều thấy đúng và điều chưa đúng, không dùng như lời phán định.</p>` };
+  const n5 = await nhapBaiRankYak(payload, { payload } as never, b5);
+  await payload.update({ collection: "bai-viet", id: n5.id, draft: true, overrideAccess: true, context: { giuSlugGoc: true, boQuaLamMoi: true },
+    data: { ghi_chu_duyet: "BLOG-10: chưa tự xuất bản: lỗi chặn: Ngoài ranh giới nội dung: \"trúng số\". — sửa rồi bấm Xuất bản tay." } as never });
+  const sua = "Chữ do Chủ biên sửa tay, không được bị đè.";
+  const g5 = await payload.findByID({ collection: "bai-viet", id: n5.id, draft: true, depth: 0, overrideAccess: true }) as any;
+  const kq5 = await thuLaiBaiRankYakBiChan(payload);
+  assert.equal(kq5.filter((m) => Number(m.rankyak_id) === ID5).length, 1, "chấm lại đúng bài bị chặn");
+  const x5 = await payload.findByID({ collection: "bai-viet", id: n5.id, draft: true, depth: 0, overrideAccess: true }) as any;
+  assert.equal(x5._status, "published", "đạt điểm → tự xuất bản");
+  assert.equal(x5.slug, g5.slug, "cùng một bài, không đổi đường dẫn");
+  void sua;
   console.log("RY-1 tích hợp: OK", JSON.stringify({ bai1: d1._status, cron: kq.moi.map((m) => ({ xuat_ban: m.xuat_ban, ly_do: m.ly_do })) }));
 } finally {
   await xoa();

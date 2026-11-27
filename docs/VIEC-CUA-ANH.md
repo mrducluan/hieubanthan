@@ -153,6 +153,13 @@ Làm xong dòng nào thì đánh `[x]` (hoặc nhắn em). Các mục cũ hơn n
 - [ ] (Quyết định) Việc tiếp theo trong D2–D6 của `docs/RA-SOAT-LUAN-HOI-VA-THU-SAO.md` mục 4–6; em khuyên D2 (hỏi đáp dùng
   cùng nhãn với báo cáo).
 
+### 4ba. RY-2 — bài RankYak lên /blog + trạng thái Failed (2026-11-27)
+- [ ] Sau khi merge: CMS tự chạy migration `ry_2_thu_lai_bai_chan` (xem log build Vercel, tìm `RY-2:`) → hai bài "Tên thần số học…" và "Lá số tử vi…" tự xuất bản.
+- [ ] Bài **"8 địa chỉ phong thủy ở TP.HCM…"** đang giữ nháp đúng luật (có số điện thoại / Zalo cửa hàng, giới thiệu nơi bán vật phẩm).
+  Anh đọc ở CMS → Bài viết (ghi chú của Chủ biên nêu lý do): bỏ số điện thoại + phần giới thiệu bán hàng rồi Xuất bản, hoặc bỏ xuất bản hẳn.
+  Nên chỉnh RankYak (Content plan) để không tạo bài dạng "danh sách cửa hàng / thầy" — trái quy tắc trang không bán vật phẩm.
+- [ ] Bài "Failed" ở RankYak cũ không tự đổi lại; bấm **Resend webhook** ở trang bài nếu muốn RankYak ghi Published (bài đã có trên web).
+
 ### 4az. RY-1 — kết nối RankYak (2026-11-21)
 Bài RankYak vào CMS như bài NotFair: nháp → chuẩn hoá SEO → tự xuất bản khi ≥ 85 điểm (BLOG-10), chữ ký "Ban biên tập".
 - [ ] Vercel → dự án **CMS** (không phải web) → Settings → Environment Variables → thêm `RANKYAK_WEBHOOK_SECRET` (nút "Copy
