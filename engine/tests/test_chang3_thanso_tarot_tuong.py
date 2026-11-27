@@ -78,7 +78,7 @@ def test_thanso_trich_la_chuoi_con_mot_doan_va_dung_con_so():
         assert q and chuan(q["nguyen_van"]) in wc, so
     cheiro = chuan(" ".join(_doan("thanso_cheiro_book_of_numbers_1926.json")))
     with ngon_ngu.dung("vi"):
-        r = tsdp.doi_chieu_da_phai(ngay_sinh=dt.date(1988, 11, 22), ho_ten="Nguyen Van Minh", ngay_xem=dt.date(2026, 11, 27))
+        r = tsdp.doi_chieu_da_phai(ngay_sinh=dt.date(1988, 11, 22), ho_ten="Le Hoang Nam", ngay_xem=dt.date(2026, 11, 27))
     ch = next(p for p in r["nam_phai"] if p["ma"] == "chaldea_cheiro")
     assert ch["trich_nguon"] and "Cheiro" in ch["trich_nguon"]["sach"] and "Sepharial" not in ch["trich_nguon"]["sach"]
     assert chuan(ch["trich_nguon"]["nguyen_van_en"]) in cheiro
@@ -227,3 +227,13 @@ def test_api_thanso_5_phai_va_tarot_chieu_sau_song_ngu():
     assert dr.khung(vi_tr) == dr.khung(en_tr)
     for la in vi_tr["la_nguoc"]:
         assert la["can_cu"] and not any(s in la["chieu_nguoc_go_mo"] for s in ("Waite", "Mathers", "Book T"))
+
+
+def test_chaldea_khong_gan_cau_phan_xau_vao_ket_qua_ca_nhan():
+    # "Nguyen Van An" → số kép 43, Cheiro ghi "This is an unfortunate number." — không đặt lên kết quả của chính người đọc.
+    from fastapi.testclient import TestClient
+    from app.main import app
+    d = TestClient(app).post("/v1/thanso/doi-chieu-phai", json={"ngay_sinh": "1988-10-24", "ho_ten": "Nguyen Van An"}).json()
+    ch = next(p for p in d["nam_phai"] if p["ma"] == "chaldea_cheiro")
+    assert ch["chi_so_chinh"].startswith("43/")
+    assert ch["trich_nguon"] is None

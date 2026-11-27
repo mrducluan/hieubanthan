@@ -16,8 +16,15 @@ from __future__ import annotations
 import datetime as dt
 
 from app import config
+import re
+
 from app.calc import thanso as ts_calc, thanso_chaldean as ch_calc, thanso_phillips as ph_calc
 from app.kb import nap, thanso_v2
+
+
+# Câu Cheiro dán nhãn số "xấu" / cảnh báo phản bội, nguy hiểm — vẫn ở trang kiến thức Số kép (TK-2), nhưng không đặt
+# lên khối kết quả cá nhân (KB Chaldea đã viết trung tính, bỏ nhãn "xấu" của Cheiro — TS-PHAI).
+_PHAN_XET = re.compile(r"unfortunate|treacher|danger|destruction|warn|deception|disaster|ruin|evil|lonely|isolat|sorrow|grief", re.I)
 
 
 def _kb() -> dict:
@@ -117,6 +124,8 @@ def doi_chieu_da_phai(
         nx_ch = mau["chaldea_ngay"].format(ngay=d, goc_ngay=sn["goc"])
     kep = thanso_v2.chaldea_kep(kep_dung) if kep_dung else None
     tr_kep = (kep or {}).get("trich") or {}
+    if _PHAN_XET.search(tr_kep.get("en", "")):
+        tr_kep = {}  # câu sách phán xấu / cảnh báo (Cheiro gọi số "unfortunate") không gắn vào kết quả của chính người đọc
     chaldea = {
         "ma": "chaldea_cheiro",
         "ten_phai": khung["ten_phai"]["chaldea_cheiro"],
