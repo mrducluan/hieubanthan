@@ -30,7 +30,7 @@ export const TEN_MENU_EN: Readonly<Record<string, { ten: string; mo_ta?: string 
   "/nhan-tuong": { ten: "Face reading", mo_ta: "A guided look in the mirror, eight-chapter reading, no photo needed" },
   "/tarot": { ten: "Tarot", mo_ta: "Shuffle, draw, seven spreads, 78 sourced cards" },
   "/ky-mon": { ten: "Qi Men Dun Jia", mo_ta: "Which direction favours this hour, and for what" },
-  "/chiem-tinh": { ten: "Western astrology", mo_ta: "Birth chart: Sun, Moon and Rising signs, synastry" },
+  "/chiem-tinh": { ten: "Western astrology", mo_ta: "Birth chart wheel, live transits, composite chart and East-West bridge" },
   "/co-van": { ten: "Ask about a decision", mo_ta: "Opening a shop, buying a home, changing jobs: which month fits, what to prepare" },
   "/co-van-kinh-doanh": { ten: "Business advisor", mo_ta: "Opening a cafe, pooling capital, choosing premises: ask a decision, draft partner notes" },
   "/xem-tuoi-lam-nha": { ten: "Building and wedding years", mo_ta: "Vietnamese customs: Kim Lau, Hoang Oc, Tam Tai" },
@@ -85,7 +85,7 @@ export function menuEn(mau: readonly MucMenu[]): MucMenu[] {
  *  Liệt kê sẵn cả trang chưa mở — mở ở bảng đường dẫn là tự hiện. */
 const COT_EN: readonly CotChanTrang[] = [
   { ten: "Explore", ds: [
-    ["/than-so", "Numerology"], ["/tarot", "Tarot"], ["/bat-tu", "BaZi (Four Pillars)"], ["/tu-vi", "Zi Wei Dou Shu"],
+    ["/than-so", "Numerology"], ["/tarot", "Tarot"], ["/chiem-tinh", "Western Astrology"], ["/bat-tu", "BaZi (Four Pillars)"], ["/tu-vi", "Zi Wei Dou Shu"],
     ["/kinh-dich", "I Ching"], ["/phong-thuy", "Feng Shui"], ["/nhan-tuong", "Face reading"], ["/hop-doi", "Compatibility"],
     ["/huyen-hoc", "All topics"], ["/hom-nay", "Your day"], ["/thoi-gian-toi", "Your year ahead"],
     ["/xem-ngay-tot", "Auspicious dates"], ["/doi-lich-am-duong", "Lunar–solar converter"],

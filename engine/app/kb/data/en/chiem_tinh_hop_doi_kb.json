@@ -1,5 +1,5 @@
 {
-  "_nguon": "Stage 4.2 English overlay — Two-Chart Synastry (zero compatibility score CD-1).",
+  "_nguon": "Stage 4.2 & Stage 5 English overlay — Two-Chart Synastry & Composite Midpoint Chart (zero compatibility score CD-1).",
   "_trang_thai": "nhap_may",
   "source_id": "bien_tap_chiem_tinh_2026",
   "school_id": "chiem_tinh_tay",
@@ -27,6 +27,16 @@
     "asc_an_tuong_dau": {
       "ten": "Outward Presence & Teamwork Style (Ascendant)",
       "goi_y": "Let each person's natural social pace complement the other in external settings."
+    }
+  },
+  "composite": {
+    "gioi_thieu": "A Composite Midpoint chart computes the shortest-arc midpoint between each pair of planets to describe the shared atmosphere you create together as a distinct partnership.",
+    "luu_y_khuyet_gio": "Because exact birth times are not provided for both people, the Composite Moon spans a wider daily arc and Composite houses are omitted.",
+    "theo_nguyen_to_mat_troi": {
+      "lua": "Composite Sun in Fire: your shared rhythm thrives on active initiative, candid momentum, and tackling fresh projects side by side.",
+      "dat": "Composite Sun in Earth: the bond grows steadier through tangible shared goals, practical planning, and dependable routines.",
+      "khi": "Composite Sun in Air: dialogue, shared curiosity, and intellectual breathing room keep your connection lively and clear.",
+      "nuoc": "Composite Sun in Water: emotional candor, quiet care, and unhurried presence anchor the space between you."
     }
   }
 }

@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
-"""Chặng 4.2 — Tầng RULES Chiêm tinh phương Tây & Cầu nối Đông – Tây (`engine/app/luangiai/chiem_tinh.py`).
+"""Chặng 4.2 & Chặng 5 — Tầng RULES Chiêm tinh phương Tây & Cầu nối Đông – Tây (`engine/app/luangiai/chiem_tinh.py`).
 
-Đọc bản đồ sao Natal, Transit và Synastry từ 6 tệp KB song ngữ (`chiem_tinh_*_kb.json` + `astro_east_west_bridge_kb.json`).
+Đọc bản đồ sao Natal, Phẩm giá Ptolemy, Ma trận Nguyên tố × Phẩm chất, Vận hạn Bi-Wheel / Chu kỳ Đời, Synastry và
+Composite Midpoint từ 6 tệp KB song ngữ (`chiem_tinh_*_kb.json` + `astro_east_west_bridge_kb.json`).
 Tuân thủ nghiêm ngặt:
   - Cổng `TUOI-16` (< 16 tuổi → chuyển hướng lịch sự, không luận vận hạn/tình cảm).
   - Cầu nối Đông – Tây đọc riêng từng hệ toạ độ (`Bát tự` & `Tử vi` chỉ đọc chỉ số công khai miễn phí, không lộ chương khoá
     `SAO-2`, không quy đồng 5 Hành = 4 Nguyên tố, không gộp điểm `CD-1`).
-  - Synastry bắt buộc có xác nhận đồng ý tự nguyện và không in lại ngày sinh của đối tác ra lời văn.
+  - Synastry & Composite bắt buộc có xác nhận đồng ý tự nguyện và không in lại ngày/giờ sinh của đối tác ra đầu ra.
 """
 from __future__ import annotations
 
 import datetime as dt
+import unicodedata
 
-from app import config
+from app import config, ngon_ngu
 from app.calc import (
     battu as bt_calc,
     chiem_tinh_lich as ctl,
@@ -24,6 +26,12 @@ from app.calc import (
 from app.kb import nap, ten as _tn
 
 _HANH_CHUAN = {"Thuỷ": "Thủy", "Hoả": "Hỏa", "Kim": "Kim", "Mộc": "Mộc", "Thủy": "Thủy", "Hỏa": "Hỏa", "Thổ": "Thổ"}
+_NGUYEN_TO_CUNG = {
+    "bach_duong": "lua", "su_tu": "lua", "nhan_ma": "lua",
+    "kim_nguu": "dat", "xu_nu": "dat", "ma_ket": "dat",
+    "song_tu": "khi", "thien_binh": "khi", "bao_binh": "khi",
+    "cu_giai": "nuoc", "bo_cap": "nuoc", "song_ngu": "nuoc",
+}
 
 
 def _kb_ht() -> dict:
@@ -63,8 +71,7 @@ def _ten_diem(ma: str, kb_ht: dict) -> str:
 
 
 def _dau_vao_dong(ngay_sinh: dt.date, gio_sinh: str, gioi_tinh: str, noi_sinh: str | None, vung_vn: str):
-    """Cùng tiền xử lý thời gian với lá số Tử vi / Bát tự (`tuvi_api._DauVao`: múi giờ lịch sử, nơi sinh, âm lịch Việt).
-    Thiếu / sai nơi sinh hoặc vùng → `None` (bên phương Đông báo thiếu, không đoán)."""
+    """Cùng tiền xử lý thời gian với lá số Tử vi / Bát tự (`tuvi_api._DauVao`: múi giờ lịch sử, nơi sinh, âm lịch Việt)."""
     from fastapi import HTTPException  # noqa: PLC0415
 
     from app.calc import dia_ly, mui_gio  # noqa: PLC0415
@@ -87,8 +94,7 @@ def _dau_vao_dong(ngay_sinh: dt.date, gio_sinh: str, gioi_tinh: str, noi_sinh: s
 
 
 def _menh_tuvi(dv, gioi_tinh: str) -> dict:
-    """Chính tinh cung Mệnh Tử vi — đúng đường an sao của lá số Tử vi (iztro, âm lịch Việt, giờ theo `time_index`).
-    Cung Mệnh vô chính diệu → mượn cung đối diện (như các mảng khác)."""
+    """Chính tinh cung Mệnh Tử vi — đúng đường an sao của lá số Tử vi (iztro, âm lịch Việt, giờ theo `time_index`)."""
     cal = dv.tb.calendar_dt
     ti = az.time_index(cal.hour, cal.minute)
     la = az.an_sao_tho(cal.date(), ti, gioi_tinh, "vi-VN", tz_lich=dv.tz_lich, **dv.tuy_chon)
@@ -117,7 +123,7 @@ def _cau_noi_dong_tay(
     dv = _dau_vao_dong(ngay_sinh, gio_sinh, gt, noi_sinh, vung_vn) if gio_sinh else None
     if dv is not None:
         ls_bt = bt_calc.la_so(dv.tb.calendar_dt, gioi_tinh=gt, utc_lich=dv.utc_lich)
-    else:   # chưa có giờ (hoặc thiếu nơi sinh): chỉ trụ ngày theo ngày sinh, không đọc giờ
+    else:
         ls_bt = bt_calc.la_so(dt.datetime(ngay_sinh.year, ngay_sinh.month, ngay_sinh.day, 12, 0), gioi_tinh=gt,
                               co_gio=False)
     can_nc = _tn.ten("can", ls_bt["nhat_chu"]["can"])
@@ -160,6 +166,21 @@ def _cau_noi_dong_tay(
     }
 
 
+def _dinh_dang_goc(ds_raw: list[dict], kb_ht: dict, kb_gc: dict) -> list[dict]:
+    out: list[dict] = []
+    for g in ds_raw:
+        lg = kb_gc["loai_goc"][g["loai"]]
+        out.append({
+            **g,
+            "ten_diem_1": _ten_diem(g["diem_1"], kb_ht),
+            "ten_diem_2": _ten_diem(g["diem_2"], kb_ht),
+            "ten_loai": lg["ten"],
+            "tinh_chat": lg["tinh_chat"],
+            "cach_doc": lg["cach_doc"],
+        })
+    return out
+
+
 def doc_ban_do_chiem_tinh(
     *,
     ngay_sinh: dt.date,
@@ -189,6 +210,7 @@ def doc_ban_do_chiem_tinh(
     kb_nha = _kb_nha()
     kb_gc = _kb_gc()
     kb_vh = _kb_vh()
+    bang_pg_kb = kb_ht.get("pham_gia_ptolemy", {}).get("muc", {})
 
     natal = ctn.lap_ban_do_natal(
         ngay_sinh=ngay_sinh,
@@ -202,7 +224,7 @@ def doc_ban_do_chiem_tinh(
     )
     transit = ctt.tinh_transit(natal, hn)
 
-    # Diễn giải 13 điểm thiên văn
+    # Diễn giải 13 điểm thiên văn kèm Phẩm giá Ptolemy (chỉ 7 hành tinh cổ điển)
     ds_hanh_tinh = []
     for ma in ctl.HANH_TINH_THU_TU:
         p = natal["thien_the"][ma]
@@ -211,6 +233,12 @@ def doc_ban_do_chiem_tinh(
         loi_cung = ht_meta["theo_cung"][p["cung"]]
         nha_so = p["nha"]
         loi_nha = kb_nha["nha"][str(nha_so)]["y_chinh"] if nha_so else None
+        pg_ma = p.get("pham_gia_ma")
+        pg_obj = (
+            {"ma": pg_ma, "ten": bang_pg_kb[pg_ma]["ten"], "giai_thich": bang_pg_kb[pg_ma]["giai_thich"]}
+            if pg_ma and pg_ma in bang_pg_kb
+            else None
+        )
         ds_hanh_tinh.append({
             "ma": ma,
             "ten": ht_meta["ten"],
@@ -222,6 +250,7 @@ def doc_ban_do_chiem_tinh(
             "kinh_do": p["kinh_do"],
             "nghich_hanh": p["nghich_hanh"],
             "nha": nha_so,
+            "pham_gia": pg_obj,
             "diem_sang": loi_cung["diem_sang"],
             "nen_de_y": loi_cung["nen_de_y"],
             "viec_ung_dung": loi_cung["viec_ung_dung"],
@@ -258,20 +287,59 @@ def doc_ban_do_chiem_tinh(
             ghi_chu_mat_trang = kb_ht["loi"]["mat_trang_mot_cung"].format(
                 c0=c0, d0=bd_mt["kinh_do_00h"], d1=bd_mt["kinh_do_24h"])
 
-    # Góc chiếu chính
-    ds_goc = []
-    for g in natal["goc_chieu"][:14]:
-        lg = kb_gc["loai_goc"][g["loai"]]
-        ds_goc.append({
-            **g,
-            "ten_diem_1": _ten_diem(g["diem_1"], kb_ht),
-            "ten_diem_2": _ten_diem(g["diem_2"], kb_ht),
-            "ten_loai": lg["ten"],
-            "tinh_chat": lg["tinh_chat"],
-            "cach_doc": lg["cach_doc"],
+    # Góc chiếu chính (top 14 nổi bật + toàn bộ góc chiếu cho Ma trận 13×13)
+    tat_ca_goc = _dinh_dang_goc(natal["goc_chieu"], kb_ht, kb_gc)
+    ds_goc = tat_ca_goc[:14]
+
+    # Ma trận Nguyên tố × Phẩm chất đã dịch tên cung & hành tinh
+    ma_tran_nt_pc_ui = []
+    for nt in ("lua", "dat", "khi", "nuoc"):
+        hang = []
+        for pc in ("thong_linh", "kien_dinh", "linh_hoat"):
+            o = natal["ma_tran_nguyen_to_pham_chat"][nt][pc]
+            c_meta = kb_ht["cung_hoang_dao"][o["cung"]]
+            hang.append({
+                "nguyen_to": nt,
+                "pham_chat": pc,
+                "cung_ma": o["cung"],
+                "cung_ten": c_meta["ten"],
+                "cung_ky_hieu": c_meta["ky_hieu"],
+                "hanh_tinh": [
+                    {"ma": m, "ten": kb_ht["hanh_tinh"][m]["ten"], "ky_hieu": kb_ht["hanh_tinh"][m]["ky_hieu"]}
+                    for m in o["hanh_tinh"]
+                ],
+            })
+        ma_tran_nt_pc_ui.append(hang)
+
+    # 13 điểm Transit lưu niên cho vòng ngoài Bi-Wheel & Cột mốc Chu kỳ Đời
+    ds_ht_transit = []
+    for ma in ctl.HANH_TINH_THU_TU:
+        pt = transit["thien_the_transit"][ma]
+        ht_meta = kb_ht["hanh_tinh"][ma]
+        c_meta = kb_ht["cung_hoang_dao"][pt["cung"]]
+        ds_ht_transit.append({
+            "ma": ma,
+            "ten": ht_meta["ten"],
+            "ky_hieu": ht_meta["ky_hieu"],
+            "cung_ma": pt["cung"],
+            "cung_ten": c_meta["ten"],
+            "cung_ky_hieu": c_meta["ky_hieu"],
+            "do_cung": pt["do_cung"],
+            "kinh_do": pt["kinh_do"],
+            "nghich_hanh": pt["nghich_hanh"],
         })
 
-    # Vận hạn (Saturn Return, Jupiter Return, Solar Return & Transit)
+    kb_moc = kb_vh.get("moc_chu_ky_doi", {})
+    moc_doi = [
+        {
+            **m,
+            "ten": kb_moc.get(m["ma"], {}).get("ten", m["ma"]),
+            "y_nghia": kb_moc.get(m["ma"], {}).get("y_nghia", ""),
+            "ky_hieu": kb_ht["hanh_tinh"][m["hanh_tinh"]]["ky_hieu"],
+        }
+        for m in transit.get("moc_chu_ky_doi", [])
+    ]
+
     sr_gd = transit["saturn_return"]["giai_doan"]
     sr_kb = kb_vh["saturn_return"][sr_gd]
     jr_dang = transit["jupiter_return"]["dang_trong_chu_ky"]
@@ -298,10 +366,13 @@ def doc_ban_do_chiem_tinh(
                 "ten_transit": _ten_diem(t["transit"], kb_ht),
                 "ten_natal": _ten_diem(t["natal"], kb_ht),
                 "ten_loai": kb_gc["loai_goc"][t["loai"]]["ten"],
+                "tinh_chat": kb_gc["loai_goc"][t["loai"]]["tinh_chat"],
                 "cach_doc": kb_gc["loai_goc"][t["loai"]]["cach_doc"],
             }
-            for t in transit["goc_chieu_transit"][:8]
+            for t in transit["goc_chieu_transit"][:12]
         ],
+        "hanh_tinh_transit": ds_ht_transit,
+        "moc_chu_ky_doi": moc_doi,
     }
 
     cau_noi = (
@@ -310,10 +381,20 @@ def doc_ban_do_chiem_tinh(
         else None
     )
 
+    dau_vao_out = dict(natal["dau_vao_da_chuan"])
+    if not ngon_ngu.la_viet() and dau_vao_out.get("ten_noi"):
+        tn = str(dau_vao_out["ten_noi"])
+        if tn in ("TP. Hồ Chí Minh", "Thành phố Hồ Chí Minh"):
+            dau_vao_out["ten_noi"] = "Ho Chi Minh City"
+        else:
+            tn_nfd = unicodedata.normalize("NFD", tn.replace("đ", "d").replace("Đ", "D"))
+            dau_vao_out["ten_noi"] = "".join(ch for ch in tn_nfd if unicodedata.category(ch) != "Mn")
+
     return {
         "mo_dun": "chiem_tinh",
         "phuong_phap_lich": kb_ht["loi"]["phuong_phap_lich"],
-        "dau_vao": natal["dau_vao_da_chuan"],
+        "nguon_pham_gia": kb_ht.get("pham_gia_ptolemy", {}).get("nguon_tham_chieu"),
+        "dau_vao": dau_vao_out,
         "co_gio_sinh": natal["co_gio_sinh"],
         "he_nha": {
             "ma": natal["he_nha"],
@@ -337,8 +418,10 @@ def doc_ban_do_chiem_tinh(
         "ghi_chu_mat_trang": ghi_chu_mat_trang,
         "hanh_tinh": ds_hanh_tinh,
         "goc_chieu": ds_goc,
+        "tat_ca_goc_chieu": tat_ca_goc,
         "phan_bo_nguyen_to": natal["phan_bo_nguyen_to"],
         "phan_bo_pham_chat": natal["phan_bo_pham_chat"],
+        "ma_tran_nguyen_to_pham_chat": ma_tran_nt_pc_ui,
         "van_han": van_han,
         "cau_noi_dong_tay": cau_noi,
     }
@@ -350,6 +433,27 @@ def _vi_tri_sinh(p: dict) -> dict:
     if p.get("vung_vn"):
         kw["vung_vn"] = p["vung_vn"]
     return kw
+
+
+def _rut_gon_vong_sao(natal: dict, kb_ht: dict) -> list[dict]:
+    """Trích toạ độ hoàng đạo của 10 hành tinh cho biểu đồ vòng Synastry — tuyệt đối không đính kèm ngày/giờ sinh."""
+    out = []
+    for ma in ctl.HANH_TINH_THU_TU[:10]:
+        p = natal["thien_the"][ma]
+        ht_meta = kb_ht["hanh_tinh"][ma]
+        c_meta = kb_ht["cung_hoang_dao"][p["cung"]]
+        out.append({
+            "ma": ma,
+            "ten": ht_meta["ten"],
+            "ky_hieu": ht_meta["ky_hieu"],
+            "cung_ma": p["cung"],
+            "cung_ten": c_meta["ten"],
+            "cung_ky_hieu": c_meta["ky_hieu"],
+            "do_cung": p["do_cung"],
+            "kinh_do": p["kinh_do"],
+            "nghich_hanh": p["nghich_hanh"],
+        })
+    return out
 
 
 def doc_hop_doi_synastry(
@@ -366,24 +470,31 @@ def doc_hop_doi_synastry(
             raise ValueError("Cả hai người cần đủ 16 tuổi trở lên.")
 
     kb_ht = _kb_ht()
+    kb_nha = _kb_nha()
     kb_gc = _kb_gc()
     kb_hd = _kb_hd()
 
     na = ctn.lap_ban_do_natal(ngay_sinh=nguoi_a["ngay_sinh"], **_vi_tri_sinh(nguoi_a))
     nb = ctn.lap_ban_do_natal(ngay_sinh=nguoi_b["ngay_sinh"], **_vi_tri_sinh(nguoi_b))
     syn = cts.tinh_synastry(na, nb)
+    comp = cts.tinh_composite(na, nb)
 
     chieu_da_co: dict[str, list[dict]] = {}
+    goc_cheo_ui: list[dict] = []
     for g in syn["goc_cheo"]:
         lg = kb_gc["loai_goc"][g["loai"]]
         item = {
+            "ma_a": g["nguoi_a"],
+            "ma_b": g["nguoi_b"],
             "nguoi_a": _ten_diem(g["nguoi_a"], kb_ht),
             "nguoi_b": _ten_diem(g["nguoi_b"], kb_ht),
+            "loai": g["loai"],
             "ten_loai": lg["ten"],
             "sai_so": g["sai_so"],
             "tinh_chat": lg["tinh_chat"],
             "cach_doc": lg["cach_doc"],
         }
+        goc_cheo_ui.append(item)
         chieu_da_co.setdefault(g["chieu"], []).append(item)
 
     cac_chieu = []
@@ -395,9 +506,69 @@ def doc_hop_doi_synastry(
             "goc_chieu": chieu_da_co.get(ma_c, [])[:4],
         })
 
+    # Diễn giải bản đồ điểm giữa (Composite Midpoint Chart)
+    comp_kb = kb_hd.get("composite", {})
+    ds_comp_ht = []
+    for ma, p in comp["thien_the"].items():
+        ht_meta = kb_ht["hanh_tinh"][ma]
+        c_meta = kb_ht["cung_hoang_dao"][p["cung"]]
+        ds_comp_ht.append({
+            "ma": ma,
+            "ten": ht_meta["ten"],
+            "ky_hieu": ht_meta["ky_hieu"],
+            "cung_ma": p["cung"],
+            "cung_ten": c_meta["ten"],
+            "cung_ky_hieu": c_meta["ky_hieu"],
+            "do_cung": p["do_cung"],
+            "kinh_do": p["kinh_do"],
+            "nghich_hanh": False,
+            "nha": p["nha"],
+        })
+
+    truc_comp_ui = None
+    if comp["truc"]:
+        ac = comp["truc"]["asc"]["cung"]
+        mc = comp["truc"]["mc"]["cung"]
+        truc_comp_ui = {
+            "asc": {**comp["truc"]["asc"], "cung_ten": kb_ht["cung_hoang_dao"][ac]["ten"]},
+            "mc": {**comp["truc"]["mc"], "cung_ten": kb_ht["cung_hoang_dao"][mc]["ten"]},
+        }
+
+    nt_sun_comp = _NGUYEN_TO_CUNG[comp["thien_the"]["mat_troi"]["cung"]]
+    ban_do_composite = {
+        "khong_cham_diem": True,
+        "co_du_gio_hai_nguoi": comp["co_du_gio_hai_nguoi"],
+        "mat_trang_khuyet_gio": comp["mat_trang_khuyet_gio"],
+        "gioi_thieu": comp_kb.get("gioi_thieu", ""),
+        "luu_y_khuyet_gio": comp_kb.get("luu_y_khuyet_gio") if comp["mat_trang_khuyet_gio"] else None,
+        "sac_thai_mat_troi_chung": comp_kb.get("theo_nguyen_to_mat_troi", {}).get(nt_sun_comp, ""),
+        "truc": truc_comp_ui,
+        "nha": (
+            [
+                {
+                    **n,
+                    "cung_ten": kb_ht["cung_hoang_dao"][n["cung"]]["ten"],
+                    "cung_ky_hieu": kb_ht["cung_hoang_dao"][n["cung"]]["ky_hieu"],
+                    "ten_nha": kb_nha["nha"][str(n["so"])]["ten"],
+                }
+                for n in comp["nha"]
+            ]
+            if comp["nha"]
+            else None
+        ),
+        "hanh_tinh": ds_comp_ht,
+        "goc_chieu": _dinh_dang_goc(comp["goc_chieu"], kb_ht, kb_gc),
+    }
+
     return {
         "mo_dun": "chiem_tinh_hop_doi",
         "khong_cham_diem": True,
         "ranh_gioi": kb_hd["ranh_gioi"],
         "cac_chieu_tuong_tac": cac_chieu,
+        "vong_synastry": {
+            "hanh_tinh_a": _rut_gon_vong_sao(na, kb_ht),
+            "hanh_tinh_b": _rut_gon_vong_sao(nb, kb_ht),
+            "goc_cheo": goc_cheo_ui,
+        },
+        "ban_do_composite": ban_do_composite,
     }

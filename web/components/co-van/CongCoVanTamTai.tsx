@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import { huongTuCuaHang, huongTuHoSoNha, type HuongChon } from "@/lib/huong-co-van";
 import { cauTuUrl, layCauChoCoVan } from "@/lib/cau-hoi-co-van";
 import { HuongKhongGian, TEN_NGUON_HUONG, type NguonHuong } from "./HuongKhongGian";
+import { SoDoTamTaiSvg } from "./SoDoTamTaiSvg";
 
 interface TruTamTai {
   ma: "nhan" | "thien" | "dia";
@@ -537,6 +538,12 @@ export function CongCoVanTamTai({ macDinhCheDo = "doi_song" }: { macDinhCheDo?: 
           )}
 
           {/* BA CÁCH NHÌN — mỗi cách một vai khác nhau; trụ Địa chỉ có khi việc đụng tới không gian và đã có hướng */}
+          <SoDoTamTaiSvg
+            tenMach={kq.hieu_cau?.viec.ten ?? kq.ten_mach}
+            baTru={kq.ba_tru_tam_tai}
+            onChonTru={(ma) => ghi("chart_interacted", { mo_dun: "tam_tai", kind: "chon_dinh_tam_tai", tru: ma })}
+          />
+
           <div className={cn("grid grid-cols-1 gap-4", kq.ba_tru_tam_tai.dia ? "lg:grid-cols-3" : "lg:grid-cols-2")}>
             {([kq.ba_tru_tam_tai.nhan, kq.ba_tru_tam_tai.thien, kq.ba_tru_tam_tai.dia] as const).filter((x): x is TruTamTai => Boolean(x)).map((tru) => (
               <section key={tru.ma} className="flex flex-col rounded-2xl border border-line/70 bg-surface/40 p-4" data-testid={`co-van-tru-${tru.ma}`}>

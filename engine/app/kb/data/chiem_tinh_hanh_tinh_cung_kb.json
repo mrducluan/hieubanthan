@@ -1031,5 +1031,34 @@
     "mat_trang_doi_cung": "Chưa rõ giờ sinh: trong ngày này Mặt Trăng đi từ {c0} sang {c1} ({d0}° → {d1}°). Nhập giờ sinh nếu biết để chốt cung Mặt Trăng và 12 Nhà.",
     "mat_trang_mot_cung": "Dù chưa rõ giờ sinh, suốt 24 giờ ngày này Mặt Trăng đều nằm trong cung {c0} ({d0}° → {d1}°).",
     "phuong_phap_lich": "Lịch thiên văn tất định, sai số dưới 0,25 phút cung: cùng ngày giờ, nơi sinh luôn ra cùng một bản đồ. Không lưu dữ liệu cá nhân."
+  },
+  "pham_gia_ptolemy": {
+    "nguon_tham_chieu": "Bảng phẩm giá hành tinh cổ điển tổng hợp theo Claudius Ptolemy, Tetrabiblos, Quyển I, Chương 17–19 (Nhà chủ tinh và bậc Vượng tôn của 7 thiên thể cổ điển).",
+    "muc": {
+      "vuong_dia": {
+        "ten": "Vượng địa (Domicile)",
+        "giai_thich": "Hành tinh ở đúng cung chủ quản theo hệ cổ điển Ptolemy: năng lực tự nhiên bộc lộ thuận chiều, chủ động và ổn định."
+      },
+      "vuong_ton": {
+        "ten": "Vượng tôn (Exaltation)",
+        "giai_thich": "Hành tinh ở cung tôn quý theo bảng Ptolemy: phẩm chất của hành tinh được nâng tầm rõ nét, dễ phát huy điểm sắc sảo khi có kỷ luật."
+      },
+      "vuong_dia_kiem_vuong_ton": {
+        "ten": "Vượng địa kiêm Vượng tôn (Domicile & Exaltation)",
+        "giai_thich": "Thuỷ tinh tại Xử Nữ vừa ở cung chủ quản vừa đạt bậc Vượng tôn theo Ptolemy: tư duy phân tích, phân loại và ứng dụng thực tế đạt độ sắc bén cao."
+      },
+      "tu_dia": {
+        "ten": "Tù địa (Detriment)",
+        "giai_thich": "Hành tinh ở cung đối diện cung chủ quản: cần vận dụng có ý thức và qua rèn luyện thực tế thay vì phản xạ tự động."
+      },
+      "suy_dia": {
+        "ten": "Suy địa (Fall)",
+        "giai_thich": "Hành tinh ở cung đối diện cung Vượng tôn: năng lượng dễ ẩn vào trong hoặc cần thời gian cọ xát để tìm được nhịp biểu đạt vừa vặn."
+      },
+      "tu_dia_kiem_suy_dia": {
+        "ten": "Tù địa kiêm Suy địa (Detriment & Fall)",
+        "giai_thich": "Thuỷ tinh tại Song Ngư đối diện cung Xử Nữ: tư duy thiên về trực giác và hình ảnh tổng thể hơn là tách bạch chi tiết, cần neo lại bằng ghi chép cụ thể."
+      }
+    }
   }
 }

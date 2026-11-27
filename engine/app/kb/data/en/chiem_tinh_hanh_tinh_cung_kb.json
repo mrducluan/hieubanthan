@@ -981,5 +981,34 @@
     "mat_trang_doi_cung": "Birth hour unknown: on this date the Moon moves from {c0} into {c1} ({d0}° -> {d1}°). Add your birth time if known to fix your Moon sign and 12 Houses.",
     "mat_trang_mot_cung": "Even without a birth hour, the Moon stays in {c0} for all 24 hours of your birth date ({d0}° -> {d1}°).",
     "phuong_phap_lich": "Deterministic astronomical calculation, accurate to under 0.25 arcminutes: the same date, time and place always give the same chart. No personal data is stored."
+  },
+  "pham_gia_ptolemy": {
+    "nguon_tham_chieu": "Classical essential dignities table synthesized from Claudius Ptolemy, Tetrabiblos, Book I, Chapters 17-19 (Houses of the Planets and Exaltations of the seven classical bodies).",
+    "muc": {
+      "vuong_dia": {
+        "ten": "Domicile (Rulership)",
+        "giai_thich": "The planet occupies its own classical sign in Ptolemy's scheme: its function expresses directly, steadily, and on its own terms."
+      },
+      "vuong_ton": {
+        "ten": "Exaltation",
+        "giai_thich": "The planet occupies its classical sign of honor in Ptolemy's table: its faculties are heightened and sharp when channeled with discipline."
+      },
+      "vuong_dia_kiem_vuong_ton": {
+        "ten": "Domicile & Exaltation",
+        "giai_thich": "Mercury in Virgo holds both domicile rulership and exaltation in Ptolemy's table: analytical precision, classification, and practical craft operate at peak clarity."
+      },
+      "tu_dia": {
+        "ten": "Detriment",
+        "giai_thich": "The planet occupies the sign opposite its classical domicile: its function works through deliberate adaptation rather than automatic habit."
+      },
+      "suy_dia": {
+        "ten": "Fall",
+        "giai_thich": "The planet occupies the sign opposite its classical exaltation: its expression matures through lived calibration and patient boundary-setting."
+      },
+      "tu_dia_kiem_suy_dia": {
+        "ten": "Detriment & Fall",
+        "giai_thich": "Mercury in Pisces sits opposite Virgo in Ptolemy's scheme: perception flows through imagery and empathy rather than linear sorting, benefiting from written anchors."
+      }
+    }
   }
 }

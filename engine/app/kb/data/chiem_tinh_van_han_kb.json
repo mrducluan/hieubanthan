@@ -1,5 +1,5 @@
 {
-  "_nguon": "Chặng 4.2 — Chu kỳ Vận hạn Chiêm tinh.",
+  "_nguon": "Chặng 4.2 & Chặng 5 — Chu kỳ Vận hạn Chiêm tinh & Cột mốc Đời người.",
   "_trang_thai": "nhap_ai_cho_duyet",
   "source_id": "bien_tap_chiem_tinh_2026",
   "school_id": "chiem_tinh_tay",
@@ -40,5 +40,39 @@
   },
   "solar_return": {
     "giai_thich": "Thời điểm Mặt Trời trở về đúng độ hoàng đạo lúc sinh đánh dấu chủ đề trọng tâm của vòng tuổi mới."
+  },
+  "moc_chu_ky_doi": {
+    "jupiter_1": {
+      "ten": "Mộc tinh hồi quy vòng 1",
+      "y_nghia": "Mở rộng nhận thức đầu đời và hình thành niềm tin học hỏi ban đầu."
+    },
+    "jupiter_2": {
+      "ten": "Mộc tinh hồi quy vòng 2",
+      "y_nghia": "Bước ra môi trường rộng hơn, thử nghiệm hướng nghề nghiệp và thế giới quan tự lập."
+    },
+    "saturn_1": {
+      "ten": "Thổ tinh hồi quy lần 1",
+      "y_nghia": "Ngưỡng trưởng thành thực chất: chọn lọc cam kết dài hạn và chịu trách nhiệm cho con đường riêng."
+    },
+    "jupiter_3": {
+      "ten": "Mộc tinh hồi quy vòng 3",
+      "y_nghia": "Mở rộng độ chín chuyên môn, hợp tác sâu và lan toả giá trị đã tích luỹ."
+    },
+    "uranus_doi_xung": {
+      "ten": "Thiên Vương đối xung giữa đời",
+      "y_nghia": "Nhịp đánh thức những khát vọng tự chủ từng gác lại để làm mới cách sống một cách tỉnh táo."
+    },
+    "jupiter_4": {
+      "ten": "Mộc tinh hồi quy vòng 4",
+      "y_nghia": "Tầm nhìn tổng quát chín muồi, thuận cho vai trò dẫn dắt, cố vấn và học tập suốt đời."
+    },
+    "chiron_hoi_quy": {
+      "ten": "Chiron hồi quy",
+      "y_nghia": "Hoà giải nhẹ nhàng với những va vấp cũ và chuyển hoá trải nghiệm thành sự thấu hiểu nâng đỡ người khác."
+    },
+    "saturn_2": {
+      "ten": "Thổ tinh hồi quy lần 2",
+      "y_nghia": "Tinh gọn gánh nặng không còn cần thiết, giữ sức bền và để lại di sản kinh nghiệm vững chãi."
+    }
   }
 }
