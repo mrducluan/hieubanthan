@@ -14,6 +14,11 @@ export function MucGap({ id, ma, tieuDe, tomTat, phu, children, testId, classNam
   const el = useRef<HTMLDetailsElement>(null);
   const daGhi = useRef(false);
   const tuMo = useRef(moSan);   // <details open> lúc gắn vào trang cũng phát "toggle" — lượt đó không phải người dùng bấm
+  // Người dùng bấm mở TRƯỚC khi trang hydrate xong (máy chậm): <details> tự mở, onToggle chưa gắn → lượt mở bị mất.
+  // Lúc gắn mà mục đã mở (không phải mở sẵn) thì ghi lượt mở đó.
+  useEffect(() => {
+    if (!moSan && el.current?.open && !daGhi.current) { daGhi.current = true; tuMo.current = false; ghi("chart_interacted", { kind: "hom_nay_mo", muc: ma }); }
+  }, []);   // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!id) return;
     const xet = () => {

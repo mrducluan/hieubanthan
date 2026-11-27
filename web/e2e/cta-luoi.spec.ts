@@ -85,8 +85,8 @@ test("thư viện /kien-thuc: mỗi silo kín hàng 3 cột; silo ít cụm mờ
   await page.setViewportSize({ width: 1280, height: 900 });
   await moTrang(page, "/kien-thuc");
   const sec = page.locator("main section[aria-labelledby^='silo-']");
-  await expect(sec).toHaveCount(8);      // NT-1: + silo Nhân tướng học; TR-1: + silo Tarot
-  for (let i = 0; i < 8; i++) await kiemKinHang(sec.nth(i).locator("div.grid"), `silo ${i}`);
+  await expect(sec).toHaveCount(9);      // NT-1: + silo Nhân tướng học; TR-1: + silo Tarot; CHT-1: + silo Chiêm tinh
+  for (let i = 0; i < 9; i++) await kiemKinHang(sec.nth(i).locator("div.grid"), `silo ${i}`);
   await expect(page.locator('section[aria-labelledby="silo-kinh-dich"] [data-the-lap="/kinh-dich"]')).toContainText("Gieo quẻ Kinh Dịch");
   await expect(page.locator('section[aria-labelledby="silo-hop-doi"] [data-the-lap="/hop-doi"]')).toContainText("Xem hợp đôi");
 });

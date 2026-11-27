@@ -705,5 +705,19 @@
   "hiep-si-tien": "knight-of-pentacles",
   "hoang-hau-tien": "queen-of-pentacles",
   "vua-tien": "king-of-pentacles"
+ },
+ "cung_hd": {
+  "bach-duong": "aries",
+  "kim-nguu": "taurus",
+  "song-tu": "gemini",
+  "cu-giai": "cancer",
+  "su-tu": "leo",
+  "xu-nu": "virgo",
+  "thien-binh": "libra",
+  "bo-cap": "scorpio",
+  "nhan-ma": "sagittarius",
+  "ma-ket": "capricorn",
+  "bao-binh": "aquarius",
+  "song-ngu": "pisces"
  }
 }

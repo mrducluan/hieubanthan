@@ -18,8 +18,8 @@ export const DUONG_TRONG_SITE = /^\/(?![/\\])[^\s\\]*$/;   // chặn //x và /\x
 export const MENU_MAC_DINH: { ten: string; lien_ket: { nhan: string; duong_dan: string }[] }[] = [
   { ten: "Huyền học", lien_ket: [
     ["/than-so", "Thần số học"], ["/tu-vi", "Xem Tử vi"], ["/bat-tu", "Xem Bát tự (Tứ trụ)"], ["/kinh-dich", "Gieo quẻ Kinh Dịch"],
-    ["/phong-thuy", "Phong thuỷ nhà ở"], ["/nhan-tuong", "Xem tướng mặt"], ["/tarot", "Xem bài Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"], ["/chiem-tinh", "Chiêm tinh phương Tây"],
-    ["/hop-doi", "Xem hợp đôi"], ["/huyen-hoc", "Tất cả các môn huyền học"],
+    ["/phong-thuy", "Phong thuỷ nhà ở"], ["/nhan-tuong", "Xem tướng mặt"], ["/tarot", "Xem bài Tarot"], ["/ky-mon", "Kỳ Môn Độn Giáp"],
+    ["/chiem-tinh", "Chiêm tinh phương Tây"], ["/hop-doi", "Xem hợp đôi"], ["/huyen-hoc", "Tất cả các môn huyền học"],
   ].map(([duong_dan, nhan]) => ({ nhan: nhan!, duong_dan: duong_dan! })) },
   { ten: "Lịch & tuổi", lien_ket: [
     ["/xem-ngay-tot", "Xem ngày tốt"], ["/lich-am", "Lịch âm các năm"], ["/doi-lich-am-duong", "Đổi lịch âm dương"], ["/nam", "Năm nay con gì, mệnh gì"],
@@ -40,7 +40,7 @@ export const MENU_MAC_DINH: { ten: string; lien_ket: { nhan: string; duong_dan: 
 
 /** Chữ chân trang đang chạy trong code (trùng web/lib/menu-chan-trang.ts — e2e/so-lieu-ngoai.spec.ts kiểm). */
 export const CHAN_TRANG_MAC_DINH = {
-  gioi_thieu: "Thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot, Kỳ Môn — trong một hồ sơ. Cách tính minh bạch, nguồn rõ ràng, để tự soi chứ không để phán.",
+  gioi_thieu: "Thần số học, Tử vi, Bát tự, Kinh Dịch, Phong thuỷ, Nhân tướng, Tarot, Kỳ Môn, Chiêm tinh — trong một hồ sơ. Cách tính minh bạch, nguồn rõ ràng, để tự soi chứ không để phán.",
   cam_ket: [
     { chu: "Hồ sơ mặc định chỉ lưu trên máy bạn", bieu_tuong: "khien" },
     { chu: "Lá số tính trên hệ thống riêng; họ tên, ngày sinh không chuyển cho bên thứ ba", bieu_tuong: "may_chu" },

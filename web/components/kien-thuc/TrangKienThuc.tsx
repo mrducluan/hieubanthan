@@ -101,7 +101,7 @@ async function metaGoc(params: Thamso): Promise<Metadata> {
 const NUT_CONG_CU: Record<string, string> = {
   "/tu-vi": "Xem Tử vi online miễn phí", "/bat-tu": "Xem Bát tự online miễn phí", "/than-so": "Xem thần số học online miễn phí",
   "/hop-doi": "Xem hợp đôi theo ngày sinh", "/kinh-dich": "Gieo quẻ Kinh Dịch online", "/phong-thuy": "Xem hướng nhà hợp tuổi",
-  "/nhan-tuong": "Xem tướng mặt online", "/tarot": "Xem Tarot online miễn phí",
+  "/nhan-tuong": "Xem tướng mặt online", "/tarot": "Xem Tarot online miễn phí", "/chiem-tinh": "Lập bản đồ sao online miễn phí",
 };
 const LOI_MOI: Partial<Record<string, string>> = {
   sao_cung: "Trên lá số của bạn, sao này nằm ở cung nào, sáng hay hãm, năm nào được hoá? Nhập ngày giờ sinh để xem — có từng bước an sao.",
@@ -120,6 +120,7 @@ const LOI_MOI: Partial<Record<string, string>> = {
   nhat_chu: "Nhật chủ của bạn là can nào, thân mạnh hay yếu? Nhập ngày giờ sinh để lập tứ trụ.",
   menh_nam: "Ngoài mệnh theo năm sinh, ngũ hành trong tứ trụ của bạn thiếu đủ thế nào? Nhập ngày giờ sinh để xem.",
   dau_hieu: "Nhà bạn có dấu hiệu này không, nên xử lý gì trước, việc nào không tốn tiền? Khảo sát nhà miễn phí.",
+  cung_hd: "Ngoài cung Mặt Trời, Mặt Trăng và Cung Mọc của bạn rơi vào cung nào? Nhập ngày, giờ, nơi sinh để lập bản đồ sao — có từng bước tính.",
   co_thu: "Câu phú nào ứng với lá số của bạn — sao nào ở Mệnh, cách cục nào thành? Nhập ngày giờ sinh để xem, có từng bước an sao.",
 };
 

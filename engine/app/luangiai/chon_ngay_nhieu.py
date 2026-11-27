@@ -218,7 +218,11 @@ def chon(viec: str, tu: dt.date, den: dt.date, nguoi: list[dict]) -> dict:
                + (f"; {len(sach)} ngày trong số đó không vướng lưu ý theo tuổi." if len(sach) != len(ngay) else ".")
                if ngay else f"Trong khoảng này chưa có ngày nào vừa hợp {ten_viec} vừa không xung tuổi cả {len(ps)} "
                             "người — thử nới khoảng ngày hoặc bớt người chỉ cần không xung.")
-    return {"viec": {"ma": viec, "ten": v["ten"]}, "tu": tu.isoformat(), "den": den.isoformat(), "nguoi": nguoi_ra,
+    # TP-1 đợt 3: theo phái Dương Công còn lại danh sách có đổi không (chỉ xét vài ngày hai phái nói khác nhau).
+    dk = L.diem_khac_khoang([n["ngay"] for n in ngay], viec, tu, den,
+                            lambda c: any(hl.quan_he_tuoi(c["ngay_gz"][1], p["han"]) == "xung" for p in ps))
+    return {**({"diem_khac": dk} if dk else {}),
+            "viec": {"ma": viec, "ten": v["ten"]}, "tu": tu.isoformat(), "den": den.isoformat(), "nguoi": nguoi_ra,
             "ngay": ngay, "ngay_noi_bat": noi_bat, "thang": thang, "tom_tat": tom_tat, "goi_y": goi_y,
             "giai_thich": [{"nhan": k, "loi": v} for k, v in sorted(giai_thich.items())],
             "cach_chon": ("Ngày có việc này trong mục Nên của sách lịch, không nằm trong mục Kiêng, trực không thuộc nhóm "

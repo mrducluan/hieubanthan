@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 import { CTA_CHIA_SE, loiNhanThe, loiNhanTrang, type LoaiThe } from "../lib/loi-nhan-chia-se";
 import { ghepLoiNhan, thuTuKenh, urlFacebook, urlMessenger } from "../lib/kenh-chia-se";
 
-const LOAI: LoaiThe[] = ["card", "invite", "ngay", "xong_dat", "huy_hieu", "hai", "nha", "que", "tarot", "ban_do", "ba_la", "thang", "hoi", "trang"];
+const LOAI: LoaiThe[] = ["card", "invite", "ngay", "xong_dat", "huy_hieu", "hai", "nha", "que", "tarot", "ban_do", "ba_la", "thang", "hoi", "trang", "ban_do_sao", "hop_doi_sao"];
 // Không doạ, không hứa chính xác, không vật phẩm (CLAUDE.md CY-1, SX-C; thẻ chia sẻ lan ra ngoài site).
 const CAM = /xui|hạn nặng|tai hoạ|tai họa|đại kỵ|chắc chắn|100\s?%|chính xác tuyệt|giải hạn|vật phẩm|bùa|undefined|null|NaN/i;
 
@@ -25,13 +25,15 @@ test("lời nhắn theo thẻ: đủ ≥ 2 lời (trừ trang), có dữ kiện 
   expect(loiNhanThe("que", d)[0]!.chu).toContain("quẻ Lý");
   expect(loiNhanThe("hai", d)[0]!.chu).toContain("72/100");
   expect(loiNhanThe("xong_dat", d)[0]!.chu).toContain("Tết Đinh Mùi 2027");
+  expect(loiNhanThe("ban_do_sao", d)[0]!.chu).toContain("Mặt Trời Lý");   // CHANG-4
+  expect(loiNhanThe("hop_doi_sao", d)[0]!.chu).toContain("“Lý”");
   // Thiếu dữ kiện → bỏ lời cần dữ kiện, không in "undefined"
   for (const l of LOAI) for (const x of loiNhanThe(l)) expect(x.chu, `${l} trống`).not.toMatch(CAM);
 });
 
 test("'Gửi cho người ấy' chỉ ở thẻ cặp đôi", () => {
   const coNguoiAy = Object.entries(CTA_CHIA_SE).filter(([, v]) => /người ấy/i.test(v.nhan)).map(([k]) => k).sort();
-  expect(coNguoiAy).toEqual(["hai", "invite"]);
+  expect(coNguoiAy).toEqual(["hai", "hop_doi_sao", "invite"]);   // CHANG-4: hợp đôi chiêm tinh cũng là thẻ cặp đôi
 });
 
 test("lời nhắn theo trang: câu hỏi + trả lời ngắn của trang, nỗi lo theo cụm", () => {

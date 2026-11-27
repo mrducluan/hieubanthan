@@ -24,7 +24,7 @@ from app.cong_khai import PhanHoiCongKhai
 from app.kb import tu_dien
 from app.kb.loi import L
 from app.calc import thanso, timebase
-from app import ngon_ngu
+from app import ngon_ngu, truong_phai
 from app.kb import store as kb_store
 from app.kb import trang as kb_trang
 from app.kb import tham_dinh as kb_tham_dinh
@@ -43,6 +43,7 @@ from app.push_api import router as push_router
 from app.kinhdich_api import router as kinhdich_router
 from app.lich_api import router as lich_router
 from app.hoang_lich_api import router as hoang_lich_router
+from app.truong_phai_api import router as truong_phai_router
 from app.tuoi_dan_gian_api import router as tuoi_dan_gian_router
 from app.thoi_gian_toi_api import router as thoi_gian_toi_router  # noqa: E402 — NAM-2
 from app.phongthuy_api import router as phongthuy_router
@@ -154,6 +155,21 @@ async def require_engine_key(request: Request, call_next):
                 return JSONResponse({"detail": "Dữ liệu gửi lên quá lớn"}, status_code=413)
             phan.append(khuc)
         request._body = b"".join(phan)          # Starlette phát lại thân đã đọc cho route phía sau
+    # TP-1: công tắc trường phái theo ngữ cảnh (lịch: Dương Công kỵ) — header `x-<mã>` (web chuyển tiếp) thắng query
+    # `?<mã>=`; giá trị lạ → 422 (cùng một chỗ kiểm cho mọi route). Không gửi → mặc định (đầu ra như cũ).
+    tok_tp = []
+    for _ma in truong_phai.NGU_CANH:
+        _gt = request.headers.get("x-" + _ma.replace("_", "-")) or request.query_params.get(_ma)
+        if _gt:
+            try:
+                tok_tp.append((_ma, truong_phai.dat(_ma, _gt)))
+            except ValueError:
+                for _m, _t in reversed(tok_tp):
+                    truong_phai.bo(_m, _t)
+                from app.kb.loi import L as _Lp  # noqa: PLC0415
+                with ngon_ngu.dung(request.headers.get("x-ngon-ngu") or request.query_params.get("ngon_ngu")):
+                    _thong = _Lp("tp.loi.gia_tri", "Lựa chọn trường phái không hợp lệ: {muc}", muc=_ma)
+                return JSONResponse({"detail": _thong}, status_code=422)
     tok = ngan_sach.NGUOI_GOI.set(ai)
     # QTE-2: ngôn ngữ của lượt gọi — header `x-ngon-ngu` (web gửi) thắng query `?ngon_ngu=`; lạ → "vi". Chỉ lớp CHỮ
     # (kb.nap, kb.ten, lời RULES) đọc; phép tính không đổi theo ngôn ngữ.
@@ -166,6 +182,8 @@ async def require_engine_key(request: Request, call_next):
         ngon_ngu.BIEN_THE.reset(tok_bt)
         ngon_ngu.HIEN_TAI.reset(tok_nn)
         ngan_sach.NGUOI_GOI.reset(tok)
+        for _m, _t in reversed(tok_tp):
+            truong_phai.bo(_m, _t)
 
 
 app.include_router(tuvi_router)
@@ -179,6 +197,7 @@ app.include_router(battu_router)
 app.include_router(phongthuy_router)
 app.include_router(lich_router)
 app.include_router(hoang_lich_router)
+app.include_router(truong_phai_router)
 app.include_router(tuoi_dan_gian_router)
 app.include_router(quan_tri_router)
 app.include_router(nhung_router)
@@ -197,6 +216,8 @@ from app.co_van_api import router as co_van_router  # noqa: E402 — Chặng 2: 
 app.include_router(co_van_router)
 from app.chiem_tinh_api import router as chiem_tinh_router  # noqa: E402 — Chặng 4: Chiêm tinh phương Tây & Cầu nối Đông–Tây
 app.include_router(chiem_tinh_router)
+from app.cung_hoang_dao_api import router as cung_hoang_dao_router  # noqa: E402 — CHT-1: 12 cung hoàng đạo
+app.include_router(cung_hoang_dao_router)
 
 
 # --------------------------------------------------------------------------- #

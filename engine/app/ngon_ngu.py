@@ -95,6 +95,17 @@ def theo_viet(fn):
     return boc
 
 
+_TP = None
+
+
+def _khoa_truong_phai() -> tuple:
+    global _TP
+    if _TP is None:
+        from app import truong_phai as _m  # noqa: PLC0415 — tránh vòng import (truong_phai → kb.nap → ngon_ngu)
+        _TP = _m
+    return _TP.khoa()
+
+
 def lru(maxsize: int | None = 128):
     """`functools.lru_cache` có khoá kèm ngôn ngữ + biến thể của lượt gọi (EN-ALL): kết quả có CHỮ theo ngôn ngữ không
     được rò từ lượt bản Anh sang lượt bản Việt trong cùng tiến trình."""
@@ -102,12 +113,13 @@ def lru(maxsize: int | None = 128):
 
     def deco(fn):
         @lru_cache(maxsize=maxsize)
-        def trong(_nn, _bt, *a, **kw):
+        def trong(_nn, _bt, _tp, *a, **kw):
             return fn(*a, **kw)
 
         @wraps(fn)
         def boc(*a, **kw):
-            return trong(hien_tai(), bien_the(), *a, **kw)
+            # TP-1: khoá kèm công tắc trường phái của lượt gọi (vd Dương Công theo Hiệp Kỷ) — lượt khác phái không rò.
+            return trong(hien_tai(), bien_the(), _khoa_truong_phai(), *a, **kw)
         boc.cache_clear = trong.cache_clear  # type: ignore[attr-defined]
         boc.cache_info = trong.cache_info    # type: ignore[attr-defined]
         return boc

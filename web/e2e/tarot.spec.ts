@@ -128,7 +128,7 @@ test("cụm 78 lá, trang con, .md, sitemap, thanh mảng, hub bảy mảng", as
   expect(sm).toContain("/tarot/la-bai/thap</loc>");
   const hub = await (await request.get("/huyen-hoc")).text();
   expect(hub).toContain('data-testid="the-mang-tarot"');
-  expect(hub).toContain("tám cách nhìn lại mình");
+  expect(hub).toContain("chín cách nhìn lại mình");   // CHANG-4
   const trang = await (await request.get("/tarot")).text();
   expect(trang).toContain("Trải bài của tôi");
 });

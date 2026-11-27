@@ -160,8 +160,10 @@ test("Hôm nay ba tầng: điện thoại xếp thẻ ngày → ba lá → ý đ
   await expect(bt.getByText("Xem lá Bát tự đầy đủ")).toBeHidden();
   await bt.locator("summary").click();
   await expect(bt.getByText("Xem lá Bát tự đầy đủ")).toBeVisible();
-  const mo = (await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? [])).filter((e) => e.kind === "hom_nay_mo");
-  expect(mo).toHaveLength(1);
+  // Bấm có thể tới trước khi trang hydrate xong: <details> mở bằng trình duyệt, lượt mở được ghi lúc component gắn (MucGap) → chờ.
+  const suKienMo = async () => (await page.evaluate(() => (window as unknown as { __hbt_su_kien?: Record<string, unknown>[] }).__hbt_su_kien ?? [])).filter((e) => e.kind === "hom_nay_mo");
+  await expect.poll(async () => (await suKienMo()).length).toBe(1);
+  const mo = await suKienMo();
   expect(mo[0]).toMatchObject({ muc: "bat_tu" });
   // Bàn phím mở được mục gập.
   const hl = page.getByTestId("hoang-lich-hom-nay");

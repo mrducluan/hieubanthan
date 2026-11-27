@@ -8,6 +8,7 @@ import { useDanhSachTinh } from "@/lib/dia-ly";
 import { ngaySinhIso, NUOC_NGOAI, useHoSo } from "@/lib/hoso";
 import { cn } from "@/lib/utils";
 import { BanDoSaoSvg, type GocChieuBieuDo, type HanhTinhBieuDo } from "./BanDoSaoSvg";
+import { NutChiaSeBanDoSao, NutChiaSeHopDoiSao } from "./NutChiaSeSao";
 
 interface HanhTinhChiTiet extends HanhTinhBieuDo {
   cung_ma: string;
@@ -63,6 +64,7 @@ interface KetQuaSynastry {
 /** Nơi sinh của một người: tỉnh/thành Việt Nam, hoặc "Nước ngoài" + mã thành phố (GeoNames `gn-…`, mã cũ `us-…`).
  *  Múi giờ lịch sử + toạ độ do engine tra (web không tính). `vung` chỉ cần cho tỉnh không cố định miền (vd Quảng Trị). */
 interface NoiSinhChon { tinh: string; ngoai: string; vung: "" | "north" | "south" }
+type NguoiThe = { ngay_sinh: string; gio_sinh: string | null; noi_sinh: string; vung_vn?: "north" | "south" };
 
 const NOI_TRONG: NoiSinhChon = { tinh: "", ngoai: "", vung: "" };
 
@@ -136,6 +138,12 @@ export function KhungChiemTinh() {
   const [dangTaiSyn, setDangTaiSyn] = useState(false);
   const [loiSyn, setLoiSyn] = useState<string | null>(null);
   const [kqSyn, setKqSyn] = useState<KetQuaSynastry | null>(null);
+  // Thẻ chia sẻ ký lại từ ĐÚNG đầu vào đã lập kết quả (người dùng sửa form sau đó thì thẻ vẫn khớp kết quả đang xem).
+  const [vaoBanDo, setVaoBanDo] = useState<{ nguoi: NguoiThe; gioiTinh: "nam" | "nu" } | null>(null);
+  const [vaoSyn, setVaoSyn] = useState<{ a: NguoiThe; b: NguoiThe } | null>(null);
+
+  // Link thẻ "Hợp đôi chiêm tinh" mở thẳng tab hai người (/chiem-tinh#hop-doi).
+  useEffect(() => { if (window.location.hash === "#hop-doi") setTab("hop_doi"); }, []);
 
   useEffect(() => {
     if (!hs) return;
@@ -177,6 +185,7 @@ export function KhungChiemTinh() {
         return;
       }
       setKq(body as KetQuaBanDo);
+      setVaoBanDo({ nguoi: { ngay_sinh: ngaySinh, gio_sinh: gioSinh || null, noi_sinh: ma, ...(noiSinh.vung ? { vung_vn: noiSinh.vung } : {}) }, gioiTinh });
     } catch {
       setLoi("Mất kết nối tạm thời.");
     } finally {
@@ -211,6 +220,7 @@ export function KhungChiemTinh() {
         return;
       }
       setKqSyn(body as KetQuaSynastry);
+      setVaoSyn({ a: { ngay_sinh: ngaySinh, gio_sinh: gioSinh || null, noi_sinh: maA }, b: { ngay_sinh: nsDoiTac, gio_sinh: gioDoiTac || null, noi_sinh: maB } });
     } catch {
       setLoiSyn("Mất kết nối tạm thời.");
     } finally {
@@ -399,6 +409,14 @@ export function KhungChiemTinh() {
             </div>
           </div>
 
+          {vaoBanDo && (
+            <div className="flex justify-center" data-testid="ct-chia-se-sao">
+              <NutChiaSeBanDoSao nguoi={vaoBanDo.nguoi} gioiTinh={vaoBanDo.gioiTinh}
+                matTroi={kq.hanh_tinh.find((p) => p.ma === "mat_troi")?.cung_ten ?? null}
+                matTrang={kq.ghi_chu_mat_trang ? null : kq.hanh_tinh.find((p) => p.ma === "mat_trang")?.cung_ten ?? null} />
+            </div>
+          )}
+
           {/* VẬN HẠN TRANSIT & SATURN / SOLAR RETURN */}
           {kq.van_han && (
             <div className="grid grid-cols-1 gap-4 rounded-2xl border border-line/80 bg-surface/35 p-5 md:grid-cols-2" data-testid="ct-van-han">
@@ -559,6 +577,12 @@ export function KhungChiemTinh() {
                   </div>
                 ))}
               </div>
+              {vaoSyn && (
+                <div className="flex justify-center pt-2" data-testid="syn-chia-se">
+                  <NutChiaSeHopDoiSao nguoiA={vaoSyn.a} nguoiB={vaoSyn.b}
+                    chuDe={kqSyn.cac_chieu_tuong_tac.find((c) => c.goc_chieu.length > 0)?.ten ?? null} />
+                </div>
+              )}
             </div>
           )}
         </div>

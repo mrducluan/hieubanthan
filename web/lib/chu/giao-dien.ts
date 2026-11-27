@@ -13,6 +13,9 @@ export const CHU_GIAO_DIEN = {
   "phai.doi": { nhom: P, nhan: "Nút mở để đổi", mac_dinh: "Đổi", en: "Change" },
   "phai.khac_nhau": { nhom: P, nhan: "Nút mở giải thích", mac_dinh: "Khác nhau thế nào?", en: "What is the difference?" },
   "phai.khac_ban": { nhom: P, nhan: "Nhãn \"khác với bạn\" mặc định", mac_dinh: "Khác với bạn", en: "Differs for you" },
+  // TP-1: dòng nguồn của từng lựa chọn (đọc từ sổ trường phái của engine).
+  "phai.nguon": { nhom: P, nhan: "Chữ trước tên sách", mac_dinh: "Nguồn: ", en: "Source: " },
+  "phai.mac_dinh": { nhom: P, nhan: "Nhãn lựa chọn mặc định", mac_dinh: "mặc định", en: "default" },
   // EN-ALL GĐ 5: khối "xin thêm dữ liệu" dùng chung (components/huyen-hoc/KhungMang.tsx XinThemDuLieu).
   "xin.tao": { nhom: P, nhan: "Nút tạo hồ sơ", mac_dinh: "Tạo hồ sơ", en: "Create a profile" },
   "xin.bo_sung": { nhom: P, nhan: "Tiêu đề bảng bổ sung hồ sơ", mac_dinh: "Bổ sung hồ sơ", en: "Complete your profile" },

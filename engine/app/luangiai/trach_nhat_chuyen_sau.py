@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import datetime as dt
 
-from app import config
+from app import config, truong_phai
 from app.calc import trach_nhat_hiep_ky as hk_calc
 from app.kb import nap, ten as _tn
 
@@ -33,7 +33,8 @@ def _luu_y(raw: dict, loi: dict) -> list[str]:
             ra.append(loi["thap_ac_khong"].format(chi=chi))
 
     if raw["duong_cong_ky"]:
-        ra.append(loi["duong_cong"])
+        # TP-1: theo phái Hiệp Kỷ thì đây là ngày CHÍNH sách ghi (và sách bác việc kiêng) — lời riêng.
+        ra.append(loi["duong_cong_hiep_ky"] if raw.get("_duong_cong") == "hiep_ky" else loi["duong_cong"])
 
     ts = raw["tam_sat_nam"]
     if ts["cham_huong_dang_xet"]:
@@ -56,7 +57,9 @@ def doi_chieu_hiep_ky(
     ds_ngay = []
     for i in range(so_ngay):
         d = bat_dau + dt.timedelta(days=i)
-        raw = {**hk_calc.phan_tich_ngay_hiep_ky(d, huong_tu_tao=huong_tu_tao), "_huong": huong_tu_tao}
+        dc = truong_phai.hien_tai("duong_cong")
+        raw = {**hk_calc.phan_tich_ngay_hiep_ky(d, huong_tu_tao=huong_tu_tao, duong_cong=dc), "_huong": huong_tu_tao,
+               "_duong_cong": dc}
         nl = kb["ngu_loai_nhat"][raw["ngu_loai_ma"]]
         am = raw["am"]
         ds_ngay.append({

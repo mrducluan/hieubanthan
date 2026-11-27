@@ -15,7 +15,8 @@ const NUT: { kieu: KieuMang; ten: string; href: string }[] = [
   { kieu: "kinh-dich", ten: "Kinh Dịch", href: "/kinh-dich" },
   { kieu: "nhan-tuong", ten: "Nhân tướng", href: "/nhan-tuong" },
   { kieu: "tarot", ten: "Tarot", href: "/tarot" },   // TR-1: mảng thứ bảy
-  { kieu: "ky-mon", ten: "Kỳ Môn", href: "/ky-mon" },   // KM-3: mảng thứ tám — hình tám cánh {8/3}
+  { kieu: "ky-mon", ten: "Kỳ Môn", href: "/ky-mon" },   // KM-3: mảng thứ tám
+  { kieu: "chiem-tinh", ten: "Chiêm tinh", href: "/chiem-tinh" },   // CHANG-4: mảng thứ chín — hình chín cánh {9/4}
 ];
 
 // Sao rải cố định (server và client vẽ giống nhau).
@@ -27,14 +28,14 @@ const SAO: [number, number, number][] = [
 export function HinhNguMang({ className }: { className?: string }) {
   const cx = 200, cy = 196, r = 138;
   const nut = NUT.map((n, i) => ({ ...n, p: tron(cx, cy, r, -Math.PI / 2 + (2 * Math.PI * i) / NUT.length) }));
-  // Hình tám cánh {8/3}: 0 → 3 → 6 → 1 → 4 → 7 → 2 → 5 → 0 — một nét liền để chạy hiệu ứng vẽ nét (KM-3 thêm mảng thứ tám).
+  // Hình chín cánh {9/4}: 0 → 4 → 8 → 3 → 7 → 2 → 6 → 1 → 5 → 0 — một nét liền để chạy hiệu ứng vẽ nét (CHANG-4 thêm mảng thứ chín).
   const diem = (k: number) => `${nut[k]!.p[0].toFixed(1)},${nut[k]!.p[1].toFixed(1)}`;
-  const sao = `M${diem(0)} L${diem(3)} L${diem(6)} L${diem(1)} L${diem(4)} L${diem(7)} L${diem(2)} L${diem(5)} Z`;
+  const sao = `M${[0, 4, 8, 3, 7, 2, 6, 1, 5].map(diem).join(" L")} Z`;
   const vach = Array.from({ length: 40 }, (_, k) => tron(cx, cy, r + 40, (k * Math.PI) / 20));
   return (
     <svg viewBox="0 0 400 400" data-testid="hinh-ngu-mang" aria-labelledby="nm-tieu-de"
       className={cn("h-auto w-full overflow-visible", className)}>
-      <title id="nm-tieu-de">Tám mảng huyền học xếp quanh Thái cực: thần số, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch, Nhân tướng, Tarot, Kỳ Môn</title>
+      <title id="nm-tieu-de">Chín mảng huyền học xếp quanh Thái cực: thần số, Tử vi, Bát tự, Phong thuỷ, Kinh Dịch, Nhân tướng, Tarot, Kỳ Môn, Chiêm tinh</title>
       <defs>
         <radialGradient id="nm-tinh-van" cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor="rgb(var(--moon))" stopOpacity="0.22" />

@@ -30,8 +30,7 @@ export const TEN_MENU_EN: Readonly<Record<string, { ten: string; mo_ta?: string 
   "/nhan-tuong": { ten: "Face reading", mo_ta: "A guided look in the mirror, eight-chapter reading, no photo needed" },
   "/tarot": { ten: "Tarot", mo_ta: "Shuffle, draw, seven spreads, 78 sourced cards" },
   "/ky-mon": { ten: "Qi Men Dun Jia", mo_ta: "Which direction favours this hour, and for what" },
-  // CV-3: các trang chưa có bản Anh (menuEn chỉ hiện mục đã mở) — vẫn cần tên Anh để bộ kiểm "mọi mục menu có chữ Anh" xanh.
-  "/chiem-tinh": { ten: "Western astrology", mo_ta: "Birth chart: Sun, Moon and Rising sign, the twelve houses" },
+  "/chiem-tinh": { ten: "Western astrology", mo_ta: "Birth chart: Sun, Moon and Rising signs, synastry" },
   "/co-van": { ten: "Ask about a decision", mo_ta: "Opening a shop, buying a home, changing jobs: which month fits, what to prepare" },
   "/co-van-kinh-doanh": { ten: "Business advisor", mo_ta: "Opening a cafe, pooling capital, choosing premises: ask a decision, draft partner notes" },
   "/xem-tuoi-lam-nha": { ten: "Building and wedding years", mo_ta: "Vietnamese customs: Kim Lau, Hoang Oc, Tam Tai" },

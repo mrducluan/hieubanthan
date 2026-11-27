@@ -11,6 +11,8 @@ const N = "Thẻ ngày", G = "Giờ", L = "Lịch tháng", C = "Tìm ngày", H =
   T = "Trang", A = "Lịch âm";
 
 export const CHU_LICH_UI = {
+  // ---------------------------------------------------------------- TP-1 trường phái lịch (components/truong-phai/)
+  "tp.khung_mo_ta": m(N, "Chỉ ở vài chỗ hai nguồn thật sự nói khác nhau. Mặc định là cách phổ biến ở Việt Nam; đổi ở đây là mọi ngày, mọi danh sách trên trang tính lại theo cách bạn chọn.", "Only where two sources really disagree. The default is the most common practice in Vietnam; changing it here recomputes every day and list on the page."),
   // ---------------------------------------------------------------- thẻ ngày (components/hoang-lich/TheNgay.tsx)
   "the.hoang_dao": m(N, "Ngày Hoàng đạo", "Yellow Path day"),
   "the.hac_dao": m(N, "Ngày Hắc đạo", "Black Path day"),

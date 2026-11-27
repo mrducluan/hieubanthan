@@ -1,7 +1,7 @@
-// FOOTER-2 — trang trụ của 8 môn huyền học + Hợp đôi + hub phải luôn có ở chân trang (liên kết nội bộ toàn site tới trang
+// FOOTER-2 — trang trụ của 9 môn (8 môn huyền học + Chiêm tinh) + Hợp đôi + hub phải luôn có ở chân trang (liên kết nội bộ toàn site tới trang
 // trụ). Sửa tay ở CMS từng làm rơi 5 môn khỏi chân trang → CMS không cho lưu khi thiếu (globals/DieuHuong.ts).
 // Trùng TRU_CHAN_TRANG trong web/lib/menu-chan-trang.ts (e2e so-lieu-ngoai kiểm).
-export const TRU_CHAN_TRANG = ["/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot", "/ky-mon", "/hop-doi", "/huyen-hoc"] as const
+export const TRU_CHAN_TRANG = ["/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot", "/ky-mon", "/chiem-tinh", "/hop-doi", "/huyen-hoc"] as const
 
 type LienKet = { loai?: string | null; duong_dan?: string | null }
 

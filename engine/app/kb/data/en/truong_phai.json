@@ -1,0 +1,438 @@
+{
+  "_trang_thai": "bien_tap",
+  "nguyen_tac": [
+    "A choice is offered only where two sources really say different things; errors are fixed, not turned into choices.",
+    "The default is the most common practice in Vietnam.",
+    "A page only mentions a choice when the other option changes your own result."
+  ],
+  "diem": [
+    {
+      "ten": "Yang Gong taboo days",
+      "mo_ta": "The thirteen Yang Gong taboo days of the year. Vietnamese folk almanacs list the 7th month as the 8th and 29th days and also apply leap months; the Xie Ji book lists the 7th month as the 1st and 29th and says nothing about leap months.",
+      "lua_chon": [
+        {
+          "ten": "Vietnamese folk almanac",
+          "mo_ta": "In the 7th month avoid the 8th and 29th; a leap month is treated like the regular month.",
+          "nguon": {
+            "sach": "Vietnamese folk almanacs (oral tradition)"
+          }
+        },
+        {
+          "ten": "By the Xie Ji book",
+          "mo_ta": "In the 7th month avoid the 1st and 29th; leap months are not counted. The book also says these are only days of the Room mansion counted from New Year, not something to fear.",
+          "nguon": {
+            "sach": "Imperial Xie Ji Bian Fang Shu, scroll 36"
+          }
+        }
+      ],
+      "loi_khac": {
+        "lich_viet.co": "Folk almanacs mark this day as a Yang Gong taboo day. The Xie Ji book lists it differently - by the book this day is not a taboo day.",
+        "lich_viet.khong": "The Xie Ji book lists this day as a Yang Gong taboo day; Vietnamese folk almanacs do not.",
+        "hiep_ky.co": "Reading by the Xie Ji book: this is a Yang Gong taboo day; Vietnamese folk almanacs do not list it.",
+        "hiep_ky.khong": "Reading by the Xie Ji book: this day is not a taboo day; Vietnamese folk almanacs list it as a Yang Gong taboo day.",
+        "them": "adds {ngay}",
+        "bot": "drops {ngay}",
+        "nut.hiep_ky": "Read by the Xie Ji book",
+        "nut.lich_viet": "Read by the folk almanac",
+        "khoang.hiep_ky": "By the Xie Ji book, this list changes: {doi}.",
+        "khoang.lich_viet": "By the Vietnamese folk almanac, this list changes: {doi}."
+      }
+    },
+    {
+      "ten": "Lunar calendar used for the chart",
+      "mo_ta": "The Vietnamese and Chinese lunar calendars sometimes differ by a day or a month at the start of a lunar month.",
+      "lua_chon": [
+        {
+          "ten": "Vietnamese lunar calendar",
+          "mo_ta": "Computed in Vietnam time.",
+          "nguon": {
+            "sach": "Vietnamese lunar calendar (Vietnam time)"
+          }
+        },
+        {
+          "ten": "Chinese lunar calendar",
+          "mo_ta": "Computed in Beijing time.",
+          "nguon": {
+            "sach": "Chinese lunar calendar"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "Star brightness table",
+      "mo_ta": "Vietnamese and Chinese books give different brightness (temple, prosperous, weak...) for a star in some palaces. The system returns both; the page chooses which to show.",
+      "lua_chon": [
+        {
+          "ten": "Vietnamese (Southern school)",
+          "mo_ta": "The brightness table common in Vietnamese Zi Wei books.",
+          "nguon": {
+            "sach": "Zi Wei, Southern school"
+          }
+        },
+        {
+          "ten": "Chinese school",
+          "mo_ta": "The brightness table of the Zhongzhou books.",
+          "nguon": {
+            "sach": "Zi Wei, Zhongzhou school"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "How to place the Fire and Bell stars",
+      "mo_ta": "The Vietnamese way and the Zhongzhou school place these two stars differently for some birth years.",
+      "lua_chon": [
+        {
+          "ten": "Vietnamese way",
+          "mo_ta": "The placement common in Vietnamese Zi Wei books.",
+          "nguon": {
+            "sach": "Zi Wei, Southern school"
+          }
+        },
+        {
+          "ten": "Zhongzhou school",
+          "mo_ta": "The placement of the Zhongzhou books.",
+          "nguon": {
+            "sach": "Zi Wei, Zhongzhou school"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "Born in a leap month",
+      "mo_ta": "Books disagree on whether a leap month counts as the regular month or the next month.",
+      "lua_chon": [
+        {
+          "ten": "Second half as next month",
+          "mo_ta": "From the 16th of the leap month, count it as the next month.",
+          "nguon": {
+            "sach": "Zi Wei, Southern school"
+          }
+        },
+        {
+          "ten": "As the regular month",
+          "mo_ta": "The whole leap month counts as the regular month.",
+          "nguon": {
+            "sach": "Some Zi Wei books"
+          }
+        },
+        {
+          "ten": "Whole month as next month",
+          "mo_ta": "The whole leap month counts as the next month.",
+          "nguon": {
+            "sach": "Some Zi Wei books"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "How to count the monthly periods",
+      "mo_ta": "There are five ways to place the first month of a year period on the chart; each book follows one.",
+      "lua_chon": [
+        {
+          "ten": "Dou Jun from Tai Sui",
+          "mo_ta": "The most common way.",
+          "nguon": {
+            "sach": "Complete Book of Zi Wei Dou Shu"
+          }
+        },
+        {
+          "ten": "Dou Jun from the minor period",
+          "mo_ta": "Count Dou Jun from the minor period palace.",
+          "nguon": {
+            "sach": "Some Vietnamese Zi Wei books"
+          }
+        },
+        {
+          "ten": "First month at the minor period",
+          "mo_ta": "The first month sits in the minor period palace.",
+          "nguon": {
+            "sach": "Some Vietnamese Zi Wei books"
+          }
+        },
+        {
+          "ten": "First month at the year palace",
+          "mo_ta": "The first month sits in the yearly palace.",
+          "nguon": {
+            "sach": "Some Zi Wei books"
+          }
+        },
+        {
+          "ten": "By the month branch",
+          "mo_ta": "Each month sits in the palace of the same branch.",
+          "nguon": {
+            "sach": "Some Zi Wei books"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "Birth time used for the chart",
+      "mo_ta": "Clock time and true solar time at the birthplace can differ by tens of minutes.",
+      "lua_chon": [
+        {
+          "ten": "Clock time",
+          "mo_ta": "As Vietnamese books usually do.",
+          "nguon": {
+            "sach": "Zi Wei, Southern school"
+          }
+        },
+        {
+          "ten": "True solar time",
+          "mo_ta": "By the longitude of the birthplace.",
+          "nguon": {
+            "sach": "Modern method by birthplace longitude"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "How far Tuan and Triet reach",
+      "mo_ta": "Two Vietnamese Zi Wei books disagree on whether Tuan and Triet block only their own palace or also the palaces in trine.",
+      "lua_chon": [
+        {
+          "ten": "By Nguyen Phat Loc",
+          "mo_ta": "Blocks only the palace where Tuan or Triet sits, not the palaces in trine.",
+          "nguon": {
+            "sach": "Zi Wei compendium (Nguyen Phat Loc)"
+          }
+        },
+        {
+          "ten": "By Viet Viem Tu",
+          "mo_ta": "Reaches the palaces in trine, stronger or weaker by the yin or yang of the birth year.",
+          "nguon": {
+            "sach": "Zi Wei (Viet Viem Tu)"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "Born between 23:00 and midnight",
+      "mo_ta": "The Zi hour starts at 23:00; books differ on whether the day changes then.",
+      "lua_chon": [
+        {
+          "ten": "Keep that day",
+          "mo_ta": "The day pillar stays that day; the hour pillar is the Zi hour of the next day.",
+          "nguon": {
+            "sach": "Zi Ping (late Zi hour rule)"
+          }
+        },
+        {
+          "ten": "New day at 23:00",
+          "mo_ta": "The day pillar moves to the next day.",
+          "nguon": {
+            "sach": "Some Zi Ping books"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "Season at the birthplace",
+      "mo_ta": "Only matters for people born far south, where the seasons run opposite to the solar terms.",
+      "lua_chon": [
+        {
+          "ten": "By the solar terms",
+          "mo_ta": "As in the old books.",
+          "nguon": {
+            "sach": "Qiong Tong Bao Jian"
+          }
+        },
+        {
+          "ten": "By the real season at the birthplace",
+          "mo_ta": "A modern idea, not in the old books.",
+          "nguon": {
+            "sach": "Modern idea for the southern hemisphere"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "Birth time used for the four pillars",
+      "mo_ta": "Clock time and true solar time at the birthplace can differ by tens of minutes.",
+      "lua_chon": [
+        {
+          "ten": "Clock time",
+          "mo_ta": "As Vietnamese books usually do.",
+          "nguon": {
+            "sach": "Common way of setting the four pillars"
+          }
+        },
+        {
+          "ten": "True solar time",
+          "mo_ta": "By the longitude of the birthplace.",
+          "nguon": {
+            "sach": "Modern method by birthplace longitude"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "Start of the year for your life gua",
+      "mo_ta": "People born early in the solar year can get a different life gua depending on whether the year starts at Start of Spring or at Lunar New Year.",
+      "lua_chon": [
+        {
+          "ten": "Start of Spring",
+          "mo_ta": "A solar term, as in the Eight Mansions books.",
+          "nguon": {
+            "sach": "Ba Zhai Ming Jing"
+          }
+        },
+        {
+          "ten": "Vietnamese Lunar New Year",
+          "mo_ta": "New Year's Day by the Vietnamese calendar.",
+          "nguon": {
+            "sach": "Vietnamese custom"
+          }
+        },
+        {
+          "ten": "Chinese Lunar New Year",
+          "mo_ta": "New Year's Day by the Chinese calendar.",
+          "nguon": {
+            "sach": "Chinese lunar calendar"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "Numerology school",
+      "mo_ta": "Each school turns letters into numbers and reads them in its own way.",
+      "lua_chon": [
+        {
+          "ten": "Pythagorean",
+          "mo_ta": "The most common in Vietnam.",
+          "nguon": {
+            "sach": "Modern Pythagorean numerology"
+          }
+        },
+        {
+          "ten": "Phillips",
+          "mo_ta": "Adds the four-peak pyramid.",
+          "nguon": {
+            "sach": "David A. Phillips"
+          }
+        },
+        {
+          "ten": "Chaldean",
+          "mo_ta": "Letters by sound, compound numbers (English version).",
+          "nguon": {
+            "sach": "Cheiro's Book of Numbers (1926)"
+          }
+        },
+        {
+          "ten": "Both schools",
+          "mo_ta": "Pythagorean and Chaldean side by side (English version).",
+          "nguon": {
+            "sach": "Pythagorean and Chaldean"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "How to work out the life path number",
+      "mo_ta": "Add all the digits of the birth date at once, or reduce day, month and year separately first - the two ways sometimes give different numbers.",
+      "lua_chon": [
+        {
+          "ten": "Reduce each part",
+          "mo_ta": "Reduce day, month and year separately, then add.",
+          "nguon": {
+            "sach": "Hans Decoz"
+          }
+        },
+        {
+          "ten": "Add everything",
+          "mo_ta": "Add all the digits of the birth date at once.",
+          "nguon": {
+            "sach": "Pythagorean numerology common in Vietnam"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "How to set the chart number",
+      "mo_ta": "Qi Men books have two ways to assign the chart number by solar term.",
+      "lua_chon": [
+        {
+          "ten": "Supplement method",
+          "mo_ta": "Use the current solar term for the chart.",
+          "nguon": {
+            "sach": "Gu Jin Tu Shu Ji Cheng, Qi Men Dun Jia"
+          }
+        },
+        {
+          "ten": "Intercalation method",
+          "mo_ta": "Insert a leap chart when the gap exceeds nine days.",
+          "nguon": {
+            "sach": "Gu Jin Tu Shu Ji Cheng, Qi Men Dun Jia, scroll 708"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "Hour from 23:00 to midnight",
+      "mo_ta": "As in Ba Zi: whether the day changes at 23:00.",
+      "lua_chon": [
+        {
+          "ten": "Keep that day",
+          "mo_ta": "As in Ba Zi.",
+          "nguon": {
+            "sach": "Late Zi hour rule"
+          }
+        },
+        {
+          "ten": "New day at 23:00",
+          "mo_ta": "The day changes at 23:00.",
+          "nguon": {
+            "sach": "Some Qi Men books"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "How to read the hexagram",
+      "mo_ta": "Three ways to read one hexagram: by the text, by the six lines and six relations, by Plum Blossom.",
+      "lua_chon": [
+        {
+          "ten": "Meaning and principle",
+          "mo_ta": "Read by the hexagram and line texts.",
+          "nguon": {
+            "sach": "Zhou Yi Zhuan Yi Da Quan"
+          }
+        },
+        {
+          "ten": "Six lines",
+          "mo_ta": "Read by the useful god, self and other lines.",
+          "nguon": {
+            "sach": "Zeng Shan Bu Yi"
+          }
+        },
+        {
+          "ten": "Plum Blossom",
+          "mo_ta": "Read by the main, nuclear and changed hexagrams.",
+          "nguon": {
+            "sach": "Mei Hua Yi Shu"
+          }
+        }
+      ]
+    },
+    {
+      "ten": "Palm reading school",
+      "mo_ta": "The Eastern school reads line figures and eight palaces; the Western school reads hand shape, mounts and lines.",
+      "lua_chon": [
+        {
+          "ten": "Eastern school",
+          "mo_ta": "By the Shen Xiang Quan Bian.",
+          "nguon": {
+            "sach": "Shen Xiang Quan Bian, scroll 10"
+          }
+        },
+        {
+          "ten": "Western school",
+          "mo_ta": "By Cheiro, Benham.",
+          "nguon": {
+            "sach": "Cheiro (1894), Benham (1900)"
+          }
+        }
+      ]
+    }
+  ]
+}

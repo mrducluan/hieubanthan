@@ -497,7 +497,7 @@ test("Giao diện website: menu chân trang, dải thông báo, banner, bài m�
   expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h, data: { cot: [
     { ten: "Thiếu trụ", lien_ket: [{ nhan: "Tử vi", loai: "duong_dan", duong_dan: "/tu-vi" }] },
   ] } })).status()).toBe(400);
-  const tru = ["/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot", "/ky-mon", "/hop-doi", "/huyen-hoc"]
+  const tru = ["/than-so", "/tu-vi", "/bat-tu", "/kinh-dich", "/phong-thuy", "/nhan-tuong", "/tarot", "/ky-mon", "/chiem-tinh", "/hop-doi", "/huyen-hoc"]
     .map((d) => ({ nhan: `Trụ ${d}`, loai: "duong_dan", duong_dan: d }));
   expect((await request.post(`${CMS}/api/globals/dieu-huong`, { headers: h, data: { cot: [
     { ten: "Đọc gì hôm nay", lien_ket: [{ nhan: "Bài số 7 nổi bật", loai: "bai", bai: bai.id }, ...tru] },
