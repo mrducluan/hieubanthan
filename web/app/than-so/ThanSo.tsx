@@ -22,7 +22,8 @@ import { BieuDoNgaySinh, ChiSoPhu } from "@/components/than-so/BieuDoNgaySinh";
 import { TheBaLop } from "@/components/than-so/TheBaLop";
 import { useBaiDoc } from "@/lib/bai-doc";
 import { BaoLoi } from "@/components/khung/BaoLoi";
-import { hoTenList, tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
+import { hoTenList, ngaySinhIso, tenGoi, useHoSo, type HoSo } from "@/lib/hoso";
+import { DoiChieuDaPhaiThanSo } from "@/components/than-so/DoiChieuDaPhaiThanSo";
 import { DongPhai, KhungPhai } from "@/components/huyen-hoc/KhungPhai";
 import { ChaldeaDoc } from "@/components/than-so/ChaldeaDoc";
 import { PhillipsDoc } from "@/components/than-so/PhillipsDoc";
@@ -326,6 +327,8 @@ export function ThanSo() {
           {kq.mo_rong && <TabsContent value="bieu-do"><BieuDoNgaySinh mo={kq.mo_rong} /></TabsContent>}
           {kq.mo_rong && <TabsContent value="phu"><ChiSoPhu mo={kq.mo_rong} /></TabsContent>}
         </Tabs>
+
+        <DoiChieuDaPhaiThanSo ngaySinhIso={ngaySinhIso(hoSo)} hoTen={hoSo.ho_ten ?? ""} quyUoc={quyUoc} en={en} />
       </section>
 
       <CuoiBaiDoc moDun="thanso_sau" khongGopY khongCta={en} />

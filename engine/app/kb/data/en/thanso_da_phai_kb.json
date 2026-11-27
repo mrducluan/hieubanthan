@@ -1,0 +1,77 @@
+{
+  "_nguon": "Stage 3.3 English overlay — 5-School Numerology Comparison (Modern Pythagorean, Balliett 1908, Westcott/Sepharial Classical, David Phillips Arrows/Pyramids, Cheiro Chaldean).",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "khung": {
+    "tieu_de": "Five-School Numerology Perspective Comparison",
+    "phu_de": "From the same birth date and name, each Western tradition highlights a distinct facet: Modern Pythagorean maps the Life Path, Balliett (1908) reads vibrational harmony, Westcott & Sepharial trace classical geometric-Kabbalistic roots, Phillips maps Birth Chart Arrows & Four Peaks, and Chaldean (Cheiro) weighs compound name numbers.",
+    "cau_noi_dong_phuong": "Numerology sketches core temperament and 9-year cycles from your solar birth date alone; to examine 12 specific life domains (career, property, partnerships) with birth hour and seasonal five-element structure, explore Zi Wei Dou Shu and BaZi alongside it."
+  },
+  "trich_co_dien": {
+    "westcott_1911": {
+      "sach": "W. Wynn Westcott · Numbers: Their Occult Power and Mystic Virtues (1911)",
+      "nguyen_van_en": "Pythagoras, one of the greatest philosophers of ancient Europe, was the son of Mnesarchus, an engraver. He was born about the year 580 B.C.",
+      "phu_luc_en": "Many nations of antiquity made use of the letters of their alphabets as substitutes for any independent signs to typify numerical conceptions."
+    },
+    "sepharial_kabala": {
+      "sach": "Sepharial · The Kabala of Numbers (1913)",
+      "nguyen_van_en": "Figures are the means employed by us to express definite quantities. They do not express anything of quality.",
+      "phu_luc_en": "One of the most interesting forms of the kabalism of numbers is that which relates names to incidents by means of the numerical value of letters."
+    },
+    "balliett_1908": {
+      "sach": "Mrs. L. Dow Balliett · The Philosophy of Numbers (1908)",
+      "nguyen_van_1": "you stand as a foundation for others to build upon. It is your mission to\nhold to Unity in all things. Let others falter, but you must remain steadfast.",
+      "nguyen_van_4": "you have passed in safety the F note and know the secrets of that musical\nvibration. What you now desire to do lies in the note of your birth path.",
+      "nguyen_van_8": "your soul knows freedom and with many stripes has tried to make\nyour brain realize it. You should stand ready to help every other soul sing his own song of life."
+    }
+  },
+  "theo_so": {
+    "1": {
+      "nhan": "Independent Initiative",
+      "ung_dung": "Lead through concrete example while inviting candid feedback before locking decisions."
+    },
+    "2": {
+      "nhan": "Bridge & Mediation",
+      "ung_dung": "Keep healthy personal boundaries so empathy stays constructive rather than draining."
+    },
+    "3": {
+      "nhan": "Expression & Synthesis",
+      "ung_dung": "Ship one finished creative piece at a time instead of scattering sparks across too many drafts."
+    },
+    "4": {
+      "nhan": "Structure & Craft",
+      "ung_dung": "Build reliable step-by-step systems while leaving room to adapt when conditions shift."
+    },
+    "5": {
+      "nhan": "Adaptability & Exploration",
+      "ung_dung": "Anchor curiosity onto one compounding skill so variety builds long-term mastery."
+    },
+    "6": {
+      "nhan": "Stewardship & Care",
+      "ung_dung": "Support family and team through shared responsibility rather than perfectionist over-carrying."
+    },
+    "7": {
+      "nhan": "Inquiry & Discernment",
+      "ung_dung": "Pair quiet analytical depth with regular, grounded communication in everyday life."
+    },
+    "8": {
+      "nhan": "Stewardship of Resources",
+      "ung_dung": "Balance operational execution with transparent governance and sustainable pacing."
+    },
+    "9": {
+      "nhan": "Broad Perspective & Service",
+      "ung_dung": "Close completed chapters cleanly so generosity focuses where it genuinely helps."
+    },
+    "11": {
+      "nhan": "Heightened Insight & Inspiration (Master 11/2)",
+      "ung_dung": "Ground intuitive sensitivity in the steady daily rhythm of root number 2."
+    },
+    "22": {
+      "nhan": "Large-Scale Practical Builder (Master 22/4)",
+      "ung_dung": "Lay the disciplined bricks of root number 4 first before scaling ambitious blueprints."
+    },
+    "33": {
+      "nhan": "Compassionate Mentorship (Master 33/6)",
+      "ung_dung": "Protect personal equilibrium on root number 6 before taking on wider mentoring roles."
+    }
+  }
+}

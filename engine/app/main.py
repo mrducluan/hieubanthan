@@ -423,6 +423,30 @@ def api_ba_goc_nhin(inp: BaGocNhinInput) -> dict:
             **phai_nao_dung.ba_goc_nhin(inp.ho_ten, inp.ngay, inp.thang, inp.nam, inp.linh_vuc, inp.quy_uoc_duong_doi)}
 
 
+class DoiChieuDaPhaiThanSoInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    ngay_sinh: _dt.date
+    ho_ten: str = Field(default="", max_length=120)
+    quy_uoc_duong_doi: Literal["tong_het", "tung_phan"] = "tong_het"
+    ngay_xem: _dt.date | None = None
+
+
+@app.post("/v1/thanso/doi-chieu-phai")
+def api_thanso_doi_chieu_phai(inp: DoiChieuDaPhaiThanSoInput) -> dict:
+    if not (1900 <= inp.ngay_sinh.year <= 2026):
+        raise HTTPException(422, detail="Năm sinh không hợp lệ.")
+    from app.luangiai import thanso_da_phai as tsdp  # noqa: PLC0415
+    return {
+        "engine_version": ENGINE_VERSION,
+        **tsdp.doi_chieu_da_phai(
+            ngay_sinh=inp.ngay_sinh,
+            ho_ten=inp.ho_ten,
+            quy_uoc_duong_doi=inp.quy_uoc_duong_doi,
+            ngay_xem=inp.ngay_xem,
+        ),
+    }
+
+
 class ChuKySoInput(ThanSoInput):
     phai: Literal["pitago", "chaldea", "tong_hop"] = "pitago"
 

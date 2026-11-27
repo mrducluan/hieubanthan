@@ -1,0 +1,577 @@
+{
+  "_nguon": "Chặng 3.3 — Chiều sâu 56 Lá Ẩn Phụ ngược (nguyên văn Waite 1910 & Mathers 1888 công cộng, 0% Bunning/Pollack) + Phẩm giá nguyên tố chuỗi 3 lá (Liber LXXVIII / Book T).",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "khung": {
+    "tieu_de": "Chiều sâu Lá Ngược & Phẩm Giá Nguyên Tố Trong Trải Bài",
+    "phu_de": "Lá bài xoay ngược không phải điềm xấu cố định, mà chỉ ra chỗ đang hướng vào trong, khởi động chậm hoặc cần điều chỉnh nhịp độ; bên cạnh đó, nguyên tố của các lá đứng cạnh nhau nâng đỡ hay làm dịu nhau theo quy tắc Phẩm giá nguyên tố cổ điển.",
+    "cau_noi_menh_ly": "Tarot phản chiếu tâm thế và tình huống ngay lúc rút bài; nếu bạn muốn đối chiếu bức tranh dài hạn 12 tháng hoặc cấu trúc bản mệnh theo ngày giờ sinh, hãy xem thêm Tử vi và Bát tự."
+  },
+  "pham_gia_chuoi": {
+    "tuong_tro": "Lá giữa được lá kề bên thuộc nhóm nguyên tố tương trợ (Lửa–Khí hoặc Nước–Đất): tín hiệu của lá giữa biểu hiện rõ ràng, mạch hành động thông suốt.",
+    "cung_nguyen_to": "Các lá liền kề trùng cùng một nguyên tố: chủ đề của nguyên tố đó đang chiếm ưu thế mạnh trong trải bài, cần lưu ý giữ thế cân bằng không thái quá.",
+    "doi_nghich": "Lá giữa đứng cạnh cặp nguyên tố đối cực (Lửa ↔ Nước hoặc Khí ↔ Đất): nội tâm đang giằng co hai nhu cầu trái nhau, nên xử lý tuần tự từng vế thay vì ép cùng lúc.",
+    "trung_tinh": "Lá giữa phối hợp với nguyên tố trung tính (Lửa–Đất hoặc Nước–Khí): tình huống cần kết hợp cả cảm nhận lẫn bước thực thi thực tế."
+  },
+  "la_an_phu": {
+    "gay_1": {
+      "ten": "Át Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "Fall, decadence, ruin, perdition, to perish; also a certain clouded joy.",
+      "trich_mathers_1888_nguoc": "Persecution, Pursuits Voilence, Vexation, Cruelty, Tyranny",
+      "chieu_xuoi_ngan": "Một ý mới vừa nhen, kèm sức để bắt đầu. Lá này là hạt lửa: chưa phải kết quả, là cái muốn. Việc là giữ lửa bằng một hành động nhỏ hôm nay.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Át Gậy (Gậy (Lửa · Hành động)), khởi đầu mới đang chờ đủ điều kiện chín muồi: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh khởi đầu mới đang chờ đủ điều kiện chín muồi, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_2": {
+      "ten": "2 Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "Surprise, wonder, enchantment, emotion, trouble, fear.",
+      "trich_mathers_1888_nguoc": "Surprise, Astonishment, Event, Extraordinary Occurrence",
+      "chieu_xuoi_ngan": "Bạn đã có một chỗ đứng và đang nhìn xa hơn nó. Lá này nói về kế hoạch và sự chờ có chủ đích: thế giới trong tay, nhưng chưa bước ra.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 2 Gậy (Gậy (Lửa · Hành động)), thế cân nhắc hai chiều chưa vội nghiêng hẳn về một bên: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh thế cân nhắc hai chiều chưa vội nghiêng hẳn về một bên, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_3": {
+      "ten": "3 Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "The end of troubles, suspension or cessation of adversity, toil and disappointment.",
+      "trich_mathers_1888_nguoc": "Hope, Desire, Attempt, Wish",
+      "chieu_xuoi_ngan": "Việc đã gửi đi và đang về — buôn bán, hợp tác, tin từ xa. Lá này nói về tầm nhìn đã thành đường: giữ chỗ đứng, chờ đúng chỗ, và tính bước sau.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 3 Gậy (Gậy (Lửa · Hành động)), khâu phối hợp nhóm hoặc bước mở đầu cần chỉnh lại phân công: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh khâu phối hợp nhóm hoặc bước mở đầu cần chỉnh lại phân công, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_4": {
+      "ten": "4 Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "The meaning remains unaltered; it is prosperity, increase, felicity, beauty, embellishment.",
+      "trich_mathers_1888_nguoc": "Prosperity, Success, Happiness, Advantage",
+      "chieu_xuoi_ngan": "Một mốc đã xong, có nền để ăn mừng: nhà, nhóm, lễ, sự ổn định sau một đợt gắng. Lá này bảo: dừng một nhịp mà vui, rồi mới đi tiếp.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 4 Gậy (Gậy (Lửa · Hành động)), nhu cầu củng cố lại điểm tựa hoặc bước ra khỏi vùng quá quen thuộc: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh nhu cầu củng cố lại điểm tựa hoặc bước ra khỏi vùng quá quen thuộc, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_5": {
+      "ten": "5 Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "Litigation, disputes, trickery, contradiction.",
+      "trich_mathers_1888_nguoc": "Legal proceedings, Judgment, Law, Lawyer, Tribunal",
+      "chieu_xuoi_ngan": "Nhiều người, nhiều ý, không ai nghe ai — va chạm nhưng chưa phải hại nhau. Lá này nói về cạnh tranh và tiếng ồn: cần một luật chơi, không cần kẻ thắng.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 5 Gậy (Gậy (Lửa · Hành động)), cọ xát vừa qua đang dần lắng xuống để rút ra bài học thực tế: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh cọ xát vừa qua đang dần lắng xuống để rút ra bài học thực tế, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_6": {
+      "ten": "6 Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "Apprehension, fear, as of a victorious enemy at the gate; treachery, disloyalty, as of gates being opened to the enemy; also indefinite delay.",
+      "trich_mathers_1888_nguoc": "Infidelity, Treachery, Disloyalty, Perfidy",
+      "chieu_xuoi_ngan": "Thắng và được thấy: tin vui, công nhận, đi đầu. Lá này nói về việc nhận lời khen cho đúng — và nhớ ai đã đi sau mình.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 6 Gậy (Gậy (Lửa · Hành động)), nhịp trao – nhận hoặc bước chuyển giao cần cân bằng công bằng hơn: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh nhịp trao – nhận hoặc bước chuyển giao cần cân bằng công bằng hơn, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_7": {
+      "ten": "7 Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "Perplexity, embarrassments, anxiety. It is also a caution against indecision.",
+      "trich_mathers_1888_nguoc": "Indecision, Doubt, Hesitation, Embarrassment, Anxiety",
+      "chieu_xuoi_ngan": "Bạn đang giữ một chỗ cao mà nhiều phía muốn lấy. Lá này nói về can đảm giữ lập trường — và nhắc: giữ cái đáng giữ, không giữ mọi thứ.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 7 Gậy (Gậy (Lửa · Hành động)), cần kiên nhẫn rà lại chiến lược thay vì phản ứng vội trước sức ép: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh cần kiên nhẫn rà lại chiến lược thay vì phản ứng vội trước sức ép, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_8": {
+      "ten": "8 Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "Arrows of jealousy, internal dispute, stingings of conscience, quarrels; and domestic disputes for persons who are married.",
+      "trich_mathers_1888_nguoc": "Quarrels, Intestine disputes, Discord",
+      "chieu_xuoi_ngan": "Mọi thứ đang chuyển nhanh: tin đến, việc đi, chuyến đi gấp. Lá này bảo: đi theo nhịp, trả lời sớm — nhưng xem lại trước khi gửi.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 8 Gậy (Gậy (Lửa · Hành động)), nhịp độ công việc hoặc kỹ năng cần tháo bớt nút nghẽn lặp đi lặp lại: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh nhịp độ công việc hoặc kỹ năng cần tháo bớt nút nghẽn lặp đi lặp lại, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_9": {
+      "ten": "9 Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "Obstacles, adversity, calamity.",
+      "trich_mathers_1888_nguoc": "Obstacles, Crosses, Delay, Displeasure",
+      "chieu_xuoi_ngan": "Bạn đã đi gần hết, mang vết thương, vẫn đứng. Lá này nói về sức bền và sự cảnh giác — và nhắc: đứng gác là cần, nhưng không ai đến thì hạ gậy xuống.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 9 Gậy (Gậy (Lửa · Hành động)), sức bền cuối chặng nhắc nghỉ ngơi hợp lý và không ôm hết một mình: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh sức bền cuối chặng nhắc nghỉ ngơi hợp lý và không ôm hết một mình, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_10": {
+      "ten": "10 Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "Contrarieties, difficulties, intrigues, and their analogies.",
+      "trich_mathers_1888_nguoc": "Treachery, Subterfuge, Duplicity, Bar",
+      "chieu_xuoi_ngan": "Bạn đang ôm quá nhiều — đa phần là việc bạn tự nhận. Lá này nói về gánh và về việc sắp tới nhà: đặt bớt xuống thì tới nhanh hơn.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 10 Gậy (Gậy (Lửa · Hành động)), gánh nặng tích tụ đã đến lúc san sẻ hoặc khép lại phần việc quá tải: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh gánh nặng tích tụ đã đến lúc san sẻ hoặc khép lại phần việc quá tải, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_tieu_dong": {
+      "ten": "Tiểu đồng Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "Anecdotes, announcements, evil news. Also indecision and the instability which accompanies it.",
+      "trich_mathers_1888_nguoc": "Ill News, Displeasure, Chagrin, Worry",
+      "chieu_xuoi_ngan": "Một tin vui, một ý thích mới, hoặc một người trẻ nhiệt tình xuất hiện. Lá này là lửa đang học: tò mò, hứng, chưa chắc tay — cứ thử, nhưng thử cho tới cùng một thứ.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Tiểu đồng Gậy (Gậy (Lửa · Hành động)), thông tin mới hoặc việc học hỏi cần kiểm chứng kỹ trước khi tin ngay: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh thông tin mới hoặc việc học hỏi cần kiểm chứng kỹ trước khi tin ngay, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_hiep_si": {
+      "ten": "Hiệp sĩ Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "Rupture, division, interruption, discord.",
+      "trich_mathers_1888_nguoc": "Rupture, Discord, Quarrel",
+      "chieu_xuoi_ngan": "Lao tới, nhanh, nóng — một chuyến đi, một người đến mang theo gió. Lá này nói về nhiệt huyết hành động: tốt cho khởi hành, dở cho những việc cần kiên nhẫn.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Hiệp sĩ Gậy (Gậy (Lửa · Hành động)), tốc độ tiến bước cần giữ phanh đúng lúc để tránh hụt đà: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh tốc độ tiến bước cần giữ phanh đúng lúc để tránh hụt đà, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_hoang_hau": {
+      "ten": "Hoàng hậu Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "Good, economical, obliging, serviceable. Signifies also--but in certain positions and in the neighborhood of other cards tending in such directions--opposition, jealousy, even deceit and infidelity.",
+      "trich_mathers_1888_nguoc": "A good a virtuous Woman, but strict and economical, Obstacles, Resistance, Opposition",
+      "chieu_xuoi_ngan": "Ấm, tự tin, làm chủ chuyện của mình mà vẫn thân thiện. Lá này nói về sức hút tự nhiên: biết mình muốn gì và làm cho người khác cũng muốn.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Hoàng hậu Gậy (Gậy (Lửa · Hành động)), việc chăm sóc nội lực bên trong cần đặt trước khi lo cho xung quanh: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh việc chăm sóc nội lực bên trong cần đặt trước khi lo cho xung quanh, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "gay_vua": {
+      "ten": "Vua Gậy",
+      "bo": "gay",
+      "trich_waite_1910_nguoc": "Good, but severe; austere, yet tolerant.",
+      "trich_mathers_1888_nguoc": "A naturally good but severe man, Counsel, Advice, Deliberation",
+      "chieu_xuoi_ngan": "Người dẫn dắt bằng tầm nhìn và quyết đoán — có thể là bạn, có thể là người bạn cần gặp. Lá này nói về việc đứng đầu: chọn hướng, chịu kết quả, và cho người khác chỗ.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Vua Gậy (Gậy (Lửa · Hành động)), cách điều phối và ra quyết định cần mềm dẻo lắng nghe thực tế hơn: nhiệt huyết hành động đang bị dồn nén hoặc vội vã chưa đúng nhịp.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: hạ bớt một đầu việc phụ, làm gọn từng bước nhỏ trong 48 giờ tới.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh cách điều phối và ra quyết định cần mềm dẻo lắng nghe thực tế hơn, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_1": {
+      "ten": "Át Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "House of the false heart, mutation, instability, revolution.",
+      "trich_mathers_1888_nguoc": "Change, Novelty, Metamorphosis, Inconstancy",
+      "chieu_xuoi_ngan": "Trái tim đang mở: một tình cảm mới, một cảm giác được yêu, hoặc trực giác lên tiếng. Lá này là hạt nước: để nó tràn, đừng đậy nắp.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Át Cốc (Cốc (Nước · Cảm xúc)), khởi đầu mới đang chờ đủ điều kiện chín muồi: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh khởi đầu mới đang chờ đủ điều kiện chín muồi, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_2": {
+      "ten": "2 Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "Passion.",
+      "trich_mathers_1888_nguoc": "Crossed desires, Obstacles, Opposition, Hindrance",
+      "chieu_xuoi_ngan": "Hai bên đang gặp nhau ở giữa — một mối quan hệ, một hợp tác có đi có lại. Lá này nói về sự cân bằng của hai người: mỗi bên một cốc.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 2 Cốc (Cốc (Nước · Cảm xúc)), thế cân nhắc hai chiều chưa vội nghiêng hẳn về một bên: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh thế cân nhắc hai chiều chưa vội nghiêng hẳn về một bên, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_3": {
+      "ten": "3 Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "Expedition, dispatch, achievement, end. It signifies also the side of excess in physical enjoyment, and the pleasures of the senses.",
+      "trich_mathers_1888_nguoc": "Expedition of business, Quickness, Celerity, Vigilance",
+      "chieu_xuoi_ngan": "Niềm vui chung: bạn bè, nhóm, lễ, tin mừng được chia. Lá này nói về sức của cộng đồng nhỏ — bạn không đi một mình.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 3 Cốc (Cốc (Nước · Cảm xúc)), khâu phối hợp nhóm hoặc bước mở đầu cần chỉnh lại phân công: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh khâu phối hợp nhóm hoặc bước mở đầu cần chỉnh lại phân công, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_4": {
+      "ten": "4 Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "Novelty, presage, new instruction, new relations.",
+      "trich_mathers_1888_nguoc": "New Acquaintance, Conjecture, Sign, Presentiment",
+      "chieu_xuoi_ngan": "Bạn đang chán và không thấy thứ đang được đưa tới. Lá này nói về sự thờ ơ: không phải không có gì, mà là bạn đang nhìn vào trong.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 4 Cốc (Cốc (Nước · Cảm xúc)), nhu cầu củng cố lại điểm tựa hoặc bước ra khỏi vùng quá quen thuộc: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh nhu cầu củng cố lại điểm tựa hoặc bước ra khỏi vùng quá quen thuộc, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_5": {
+      "ten": "5 Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "News, alliances, affinity, consanguinity, ancestry, return, false projects.",
+      "trich_mathers_1888_nguoc": "Arrival, Return, News, Surprise, False projects",
+      "chieu_xuoi_ngan": "Có mất mát và bạn đang nhìn vào ba cốc đổ. Lá này không bảo đừng buồn — nó chỉ nhắc hai cốc sau lưng và cây cầu vẫn còn.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 5 Cốc (Cốc (Nước · Cảm xúc)), cọ xát vừa qua đang dần lắng xuống để rút ra bài học thực tế: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh cọ xát vừa qua đang dần lắng xuống để rút ra bài học thực tế, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_6": {
+      "ten": "6 Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "The future, renewal, that which will come to pass presently.",
+      "trich_mathers_1888_nguoc": "The Future, that which is to come, Shortly, Soon",
+      "chieu_xuoi_ngan": "Kỷ niệm, lòng tốt đơn giản, chuyện về quê, người cũ. Lá này nói về điều ngọt của quá khứ — tốt để lấy sức, không tốt để ở lại.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 6 Cốc (Cốc (Nước · Cảm xúc)), nhịp trao – nhận hoặc bước chuyển giao cần cân bằng công bằng hơn: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh nhịp trao – nhận hoặc bước chuyển giao cần cân bằng công bằng hơn, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_7": {
+      "ten": "7 Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "Desire, will, determination, project.",
+      "trich_mathers_1888_nguoc": "Plan, Design, Resolution, Decision",
+      "chieu_xuoi_ngan": "Quá nhiều lựa chọn và nhiều cái chỉ là mây. Lá này nói về mơ mộng: thích thì được, nhưng chọn một cốc thật thì mới uống được.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 7 Cốc (Cốc (Nước · Cảm xúc)), cần kiên nhẫn rà lại chiến lược thay vì phản ứng vội trước sức ép: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh cần kiên nhẫn rà lại chiến lược thay vì phản ứng vội trước sức ép, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_8": {
+      "ten": "8 Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "Great joy, happiness, feasting.",
+      "trich_mathers_1888_nguoc": "Gaiety, Feasting, Joy, Pleasure",
+      "chieu_xuoi_ngan": "Bạn đang rời một thứ đã đủ nhưng không còn nuôi mình. Lá này nói về việc bỏ đi có ý: không giận ai, chỉ đi tìm điều sâu hơn.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 8 Cốc (Cốc (Nước · Cảm xúc)), nhịp độ công việc hoặc kỹ năng cần tháo bớt nút nghẽn lặp đi lặp lại: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh nhịp độ công việc hoặc kỹ năng cần tháo bớt nút nghẽn lặp đi lặp lại, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_9": {
+      "ten": "9 Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "Truth, loyalty, liberty; but the readings vary and include mistakes, imperfections, etc.",
+      "trich_mathers_1888_nguoc": "Faults, Errors, Mistakes, Imperfections",
+      "chieu_xuoi_ngan": "Điều ước đã thành ở mức đời thường: no, đủ, được khen. Lá này nói về sự mãn nguyện — và hỏi nhẹ: đủ rồi, bạn có chia không?",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 9 Cốc (Cốc (Nước · Cảm xúc)), sức bền cuối chặng nhắc nghỉ ngơi hợp lý và không ôm hết một mình: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh sức bền cuối chặng nhắc nghỉ ngơi hợp lý và không ôm hết một mình, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_10": {
+      "ten": "10 Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "Repose of the false heart, indignation, violence.",
+      "trich_mathers_1888_nguoc": "Combat, Strife, Opposition, Differences, Dispute",
+      "chieu_xuoi_ngan": "Hạnh phúc chung: gia đình thuận, nhà yên, lòng đầy. Lá này là cốc tràn của bộ Nước — nhắc rằng niềm vui lớn nhất là niềm vui có người cùng.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 10 Cốc (Cốc (Nước · Cảm xúc)), gánh nặng tích tụ đã đến lúc san sẻ hoặc khép lại phần việc quá tải: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh gánh nặng tích tụ đã đến lúc san sẻ hoặc khép lại phần việc quá tải, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_tieu_dong": {
+      "ten": "Tiểu đồng Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "Taste, inclination, attachment, seduction, deception, artifice.",
+      "trich_mathers_1888_nguoc": "A Flatterer, Deception, Artifice",
+      "chieu_xuoi_ngan": "Một tin về tình cảm, một ý thơ, một trực giác chợt lên — như con cá nhô khỏi cốc. Lá này là nước đang học: nhạy, mơ, dễ xúc động.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Tiểu đồng Cốc (Cốc (Nước · Cảm xúc)), thông tin mới hoặc việc học hỏi cần kiểm chứng kỹ trước khi tin ngay: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh thông tin mới hoặc việc học hỏi cần kiểm chứng kỹ trước khi tin ngay, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_hiep_si": {
+      "ten": "Hiệp sĩ Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "Trickery, artifice, subtlety, swindling, duplicity, fraud.",
+      "trich_mathers_1888_nguoc": "Duplicity, Abuse of Confidence, Fraud, Cunning",
+      "chieu_xuoi_ngan": "Một lời đề nghị bằng tim: cầu hôn, lời mời, ý tưởng lãng mạn. Lá này nói về việc đi theo cảm xúc — chậm, đẹp, cần thêm chân thật.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Hiệp sĩ Cốc (Cốc (Nước · Cảm xúc)), tốc độ tiến bước cần giữ phanh đúng lúc để tránh hụt đà: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh tốc độ tiến bước cần giữ phanh đúng lúc để tránh hụt đà, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_hoang_hau": {
+      "ten": "Hoàng hậu Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "The accounts vary; good woman; otherwise, distinguished woman but one not to be trusted; perverse woman; vice, dishonor, depravity.",
+      "trich_mathers_1888_nguoc": "A Woman in good position, but intermeddling, and to be distrusted; Success, but with some attendant trouble",
+      "chieu_xuoi_ngan": "Người hiểu cảm xúc của người khác mà không mất mình — có thể là bạn, có thể là người đang giúp bạn. Lá này nói về trực giác chín và sự chăm sóc có ranh giới.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Hoàng hậu Cốc (Cốc (Nước · Cảm xúc)), việc chăm sóc nội lực bên trong cần đặt trước khi lo cho xung quanh: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh việc chăm sóc nội lực bên trong cần đặt trước khi lo cho xung quanh, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "coc_vua": {
+      "ten": "Vua Cốc",
+      "bo": "coc",
+      "trich_waite_1910_nguoc": "Dishonest, double-dealing man; roguery, exaction, injustice, vice, scandal, pillage, considerable loss.",
+      "trich_mathers_1888_nguoc": "A Man of good position, but shifty in his Dealings, Distrust, Doubt, Suspicion",
+      "chieu_xuoi_ngan": "Giữ được bình tĩnh giữa sóng — người điềm tĩnh, khoan dung, biết cảm xúc mà không bị nó cuốn. Lá này nói về sự chín của tim.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Vua Cốc (Cốc (Nước · Cảm xúc)), cách điều phối và ra quyết định cần mềm dẻo lắng nghe thực tế hơn: cảm xúc đang khép lại để tự vệ hoặc kỳ vọng chưa được nói thẳng thành lời.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: dành 15 phút gọi tên đúng điều mình cần và trao đổi nhẹ nhàng trực tiếp.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh cách điều phối và ra quyết định cần mềm dẻo lắng nghe thực tế hơn, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_1": {
+      "ten": "Át Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "The same, but the results are disastrous; another account says--conception--childbirth, augmentation, multiplicity.",
+      "trich_mathers_1888_nguoc": "Embarrassment, Foolish and Hopeless Love, Obstacle, Hindrance",
+      "chieu_xuoi_ngan": "Một ý nghĩ sáng rõ cắt qua mớ rối: sự thật, quyết định, lời nói đúng. Lá này là hạt khí — sắc, cần dùng cho đúng chỗ.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Át Kiếm (Kiếm (Khí · Tư duy)), khởi đầu mới đang chờ đủ điều kiện chín muồi: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh khởi đầu mới đang chờ đủ điều kiện chín muồi, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_2": {
+      "ten": "2 Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "Imposture, falsehood, duplicity, disloyalty.",
+      "trich_mathers_1888_nguoc": "False Friends, Treachery, Lies",
+      "chieu_xuoi_ngan": "Bạn đang giữ hai thanh kiếm cân nhau và bịt mắt để khỏi phải chọn. Lá này nói về đình chiến: cần cho một lúc, nhưng tay sẽ mỏi.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 2 Kiếm (Kiếm (Khí · Tư duy)), thế cân nhắc hai chiều chưa vội nghiêng hẳn về một bên: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh thế cân nhắc hai chiều chưa vội nghiêng hẳn về một bên, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_3": {
+      "ten": "3 Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "Mental alienation, error, loss, distraction, disorder, confusion.",
+      "trich_mathers_1888_nguoc": "Error, Confusion, Misrule, Disorder",
+      "chieu_xuoi_ngan": "Đau — thường vì lời nói hoặc sự thật rõ. Lá này không giảm nhẹ nó; nó nói: nhìn thẳng vết thương là bước đầu để lành.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 3 Kiếm (Kiếm (Khí · Tư duy)), khâu phối hợp nhóm hoặc bước mở đầu cần chỉnh lại phân công: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh khâu phối hợp nhóm hoặc bước mở đầu cần chỉnh lại phân công, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_4": {
+      "ten": "4 Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "Wise administration, circumspection, economy, avarice, precaution, testament.",
+      "trich_mathers_1888_nguoc": "Economy, Precaution, Regulation of Expenditure",
+      "chieu_xuoi_ngan": "Nghỉ thật — không phải bỏ cuộc. Lá này bảo: rút khỏi tiếng ồn, nằm xuống, để đầu nguội trước khi cầm kiếm lại.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 4 Kiếm (Kiếm (Khí · Tư duy)), nhu cầu củng cố lại điểm tựa hoặc bước ra khỏi vùng quá quen thuộc: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh nhu cầu củng cố lại điểm tựa hoặc bước ra khỏi vùng quá quen thuộc, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_5": {
+      "ten": "5 Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "The same; burial and obsequies.",
+      "trich_mathers_1888_nguoc": "Losses Trouble (same signification, whether reversed or not.)",
+      "chieu_xuoi_ngan": "Có người thắng, nhưng mọi người đều mất — một cuộc tranh làm xấu cả hai bên. Lá này bảo: rút khỏi trận không đáng, kể cả khi bạn đang cầm kiếm.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 5 Kiếm (Kiếm (Khí · Tư duy)), cọ xát vừa qua đang dần lắng xuống để rút ra bài học thực tế: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh cọ xát vừa qua đang dần lắng xuống để rút ra bài học thực tế, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_6": {
+      "ten": "6 Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "Declaration, confession, publicity; one account says that it is a proposal of love.",
+      "trich_mathers_1888_nguoc": "Declaration, Love proposed, Revelation, Surprise",
+      "chieu_xuoi_ngan": "Đang rời chỗ khó sang chỗ yên hơn — chậm, có người chở, mang theo mấy thanh kiếm. Lá này nói về chuyển đổi: chưa vui, nhưng đúng hướng.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 6 Kiếm (Kiếm (Khí · Tư duy)), nhịp trao – nhận hoặc bước chuyển giao cần cân bằng công bằng hơn: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh nhịp trao – nhận hoặc bước chuyển giao cần cân bằng công bằng hơn, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_7": {
+      "ten": "7 Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "Good advice, counsel, instruction, slander, babbling.",
+      "trich_mathers_1888_nguoc": "Wise Advice, Good Counsel, Wisdom, Prudence, Circumspection",
+      "chieu_xuoi_ngan": "Có chuyện làm lén — của bạn hoặc của ai đó quanh bạn. Lá này nói về mưu mẹo và trốn đối diện: khéo thì được việc, nhưng mang không hết và để lại dấu.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 7 Kiếm (Kiếm (Khí · Tư duy)), cần kiên nhẫn rà lại chiến lược thay vì phản ứng vội trước sức ép: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh cần kiên nhẫn rà lại chiến lược thay vì phản ứng vội trước sức ép, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_8": {
+      "ten": "8 Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "Disquiet, difficulty, opposition, accident, treachery; what is unforeseen; fatality.",
+      "trich_mathers_1888_nguoc": "Treachery in the Past, Event, Accident, Remarkable Incident",
+      "chieu_xuoi_ngan": "Bạn thấy mình bị kẹt — nhưng dây trói lỏng, kiếm không chạm, chân không bị buộc. Lá này nói về cái kẹt do suy nghĩ: nó thật trong đầu, nhưng không thật trên đất.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 8 Kiếm (Kiếm (Khí · Tư duy)), nhịp độ công việc hoặc kỹ năng cần tháo bớt nút nghẽn lặp đi lặp lại: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh nhịp độ công việc hoặc kỹ năng cần tháo bớt nút nghẽn lặp đi lặp lại, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_9": {
+      "ten": "9 Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "Imprisonment, suspicion, doubt, reasonable fear, shame.",
+      "trich_mathers_1888_nguoc": "Wise distrust, Suspicion, Fear, Doubt, Shady character",
+      "chieu_xuoi_ngan": "Đêm dài của lo nghĩ: hối, sợ, tự trách — chín kiếm trên tường chứ không trên người. Lá này nói về nỗi lo lớn hơn sự thật; nó nhắc: trời sẽ sáng, và chăn dưới bạn có hoa.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 9 Kiếm (Kiếm (Khí · Tư duy)), sức bền cuối chặng nhắc nghỉ ngơi hợp lý và không ôm hết một mình: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh sức bền cuối chặng nhắc nghỉ ngơi hợp lý và không ôm hết một mình, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_10": {
+      "ten": "10 Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "Advantage, profit, success, favor, but none of these are permanent; also power and authority.",
+      "trich_mathers_1888_nguoc": "Passing Success, Momentary Advantage",
+      "chieu_xuoi_ngan": "Chạm đáy: một chuyện kết thúc đau, có thể do người thân cận. Lá này nặng, nhưng nó cũng là lá cuối của bộ Kiếm: không còn kiếm nào để cắm nữa, và chân trời đã hửng.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 10 Kiếm (Kiếm (Khí · Tư duy)), gánh nặng tích tụ đã đến lúc san sẻ hoặc khép lại phần việc quá tải: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh gánh nặng tích tụ đã đến lúc san sẻ hoặc khép lại phần việc quá tải, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_tieu_dong": {
+      "ten": "Tiểu đồng Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "More evil side of these qualities; what is unforeseen, unprepared state; sickness is also intimated.",
+      "trich_mathers_1888_nguoc": "That which is unforeseen, Vigilance, Support",
+      "chieu_xuoi_ngan": "Đầu óc nhanh, tò mò, cảnh giác — một tin tức, một người trẻ sắc sảo, hoặc chính bạn đang quan sát. Lá này nói về trí đang học: nhiều câu hỏi, ít kiên nhẫn.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Tiểu đồng Kiếm (Kiếm (Khí · Tư duy)), thông tin mới hoặc việc học hỏi cần kiểm chứng kỹ trước khi tin ngay: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh thông tin mới hoặc việc học hỏi cần kiểm chứng kỹ trước khi tin ngay, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_hiep_si": {
+      "ten": "Hiệp sĩ Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "Imprudence, incapacity, extravagance.",
+      "trich_mathers_1888_nguoc": "A conceited fool, Ingenuousness, Simplicity",
+      "chieu_xuoi_ngan": "Lao vào bằng lý và tốc độ: tranh luận, quyết liệt, nói thẳng không ngại. Lá này nói về sức đẩy của trí — mạnh khi có lý đúng, hại khi quên người đối diện.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Hiệp sĩ Kiếm (Kiếm (Khí · Tư duy)), tốc độ tiến bước cần giữ phanh đúng lúc để tránh hụt đà: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh tốc độ tiến bước cần giữ phanh đúng lúc để tránh hụt đà, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_hoang_hau": {
+      "ten": "Hoàng hậu Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "Malice, bigotry, artifice, prudery, bale, deceit.",
+      "trich_mathers_1888_nguoc": "A Bad Woman, ill-tempered and bigoted, Riches and Discord, Abundance together with Worry, Joy with Grief",
+      "chieu_xuoi_ngan": "Người từng trải, nói rõ, có ranh giới — thường là người đã qua mất mát và không còn cần ai dỗ. Lá này nói về sự độc lập sáng suốt.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Hoàng hậu Kiếm (Kiếm (Khí · Tư duy)), việc chăm sóc nội lực bên trong cần đặt trước khi lo cho xung quanh: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh việc chăm sóc nội lực bên trong cần đặt trước khi lo cho xung quanh, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "kiem_vua": {
+      "ten": "Vua Kiếm",
+      "bo": "kiem",
+      "trich_waite_1910_nguoc": "Cruelty, perversity, barbarity, perfidy, evil intention.",
+      "trich_mathers_1888_nguoc": "A Wicked Man, Chagrin, Worry, Grief, Fear, Disturbance",
+      "chieu_xuoi_ngan": "Người phân xử bằng lý: luật sư, thẩm phán, người đứng đầu nghiêm. Lá này nói về trí đã chín: quyết bằng nguyên tắc, không bằng cảm tình.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Vua Kiếm (Kiếm (Khí · Tư duy)), cách điều phối và ra quyết định cần mềm dẻo lắng nghe thực tế hơn: suy nghĩ dễ quay vòng tự chất vấn hoặc lời nói lúc mệt dễ sắc quá mức cần thiết.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: tạm dừng tranh luận khi căng, viết ra 3 dữ kiện thực tế đã kiểm chứng.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh cách điều phối và ra quyết định cần mềm dẻo lắng nghe thực tế hơn, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_1": {
+      "ten": "Át Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "The evil side of wealth, bad intelligence; also great riches. In any case it shows prosperity, comfortable material conditions, but whether these are of advantage to the possessor will depend on whether the card is reversed or not.",
+      "trich_mathers_1888_nguoc": "Purse of Gold, Money, Gain, Help, Profit, Riches",
+      "chieu_xuoi_ngan": "Một cơ hội sờ được: việc, tiền, nhà, sức khoẻ — hạt giống đã có, đất đã sẵn. Lá này bảo: gieo, và chăm đều.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Át Tiền (Tiền (Đất · Thực chất)), khởi đầu mới đang chờ đủ điều kiện chín muồi: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh khởi đầu mới đang chờ đủ điều kiện chín muồi, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_2": {
+      "ten": "2 Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Enforced gaiety, simulated enjoyment, literal sense, handwriting, composition, letters of exchange.",
+      "trich_mathers_1888_nguoc": "Letter, Missive, Epistle, Message",
+      "chieu_xuoi_ngan": "Đang giữ hai thứ cùng lúc (việc – nhà, hai nguồn tiền) và vẫn nhảy được. Lá này nói về linh hoạt: tung hứng được, nhưng đừng thêm quả bóng thứ ba.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 2 Tiền (Tiền (Đất · Thực chất)), thế cân nhắc hai chiều chưa vội nghiêng hẳn về một bên: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh thế cân nhắc hai chiều chưa vội nghiêng hẳn về một bên, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_3": {
+      "ten": "3 Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Mediocrity, in work and otherwise, puerility, pettiness, weakness.",
+      "trich_mathers_1888_nguoc": "Children, Sons, Daughters, Youths, Commencement",
+      "chieu_xuoi_ngan": "Việc làm cùng nhau, mỗi người một nghề, có bản vẽ. Lá này nói về tay nghề được công nhận và sức của nhóm nhỏ làm đúng vai.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 3 Tiền (Tiền (Đất · Thực chất)), khâu phối hợp nhóm hoặc bước mở đầu cần chỉnh lại phân công: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh khâu phối hợp nhóm hoặc bước mở đầu cần chỉnh lại phân công, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_4": {
+      "ten": "4 Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Suspense, delay, opposition",
+      "trich_mathers_1888_nguoc": "Obstacles, Hindrances",
+      "chieu_xuoi_ngan": "Giữ chặt cái đang có — an toàn, tiết kiệm, kiểm soát. Lá này nói về sự ổn định đã có, và hỏi: ôm chặt thế thì tay đâu để nhận?",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 4 Tiền (Tiền (Đất · Thực chất)), nhu cầu củng cố lại điểm tựa hoặc bước ra khỏi vùng quá quen thuộc: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh nhu cầu củng cố lại điểm tựa hoặc bước ra khỏi vùng quá quen thuộc, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_5": {
+      "ten": "5 Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Disorder, chaos, ruin, discord, profligacy.",
+      "trich_mathers_1888_nguoc": "Disgraceful Love, Imprudence, License, Profligacy",
+      "chieu_xuoi_ngan": "Thiếu thốn — tiền, sức, hoặc cảm giác bị bỏ ngoài — trong khi ánh sáng ở ngay bên cạnh. Lá này bảo: xin giúp không phải xấu, cửa đang mở.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 5 Tiền (Tiền (Đất · Thực chất)), cọ xát vừa qua đang dần lắng xuống để rút ra bài học thực tế: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh cọ xát vừa qua đang dần lắng xuống để rút ra bài học thực tế, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_6": {
+      "ten": "6 Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Desire, cupidity, envy, jealousy, illusion.",
+      "trich_mathers_1888_nguoc": "Ambition, Desire, Passion, Aim, Longing",
+      "chieu_xuoi_ngan": "Cho và nhận đang chảy: ai có thì chia, ai thiếu thì nhận — có cân. Lá này nói về hào phóng công bằng và nhắc xem bạn đang đứng bên nào của cán cân.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 6 Tiền (Tiền (Đất · Thực chất)), nhịp trao – nhận hoặc bước chuyển giao cần cân bằng công bằng hơn: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh nhịp trao – nhận hoặc bước chuyển giao cần cân bằng công bằng hơn, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_7": {
+      "ten": "7 Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Cause for anxiety regarding money which it may be proposed to lend.",
+      "trich_mathers_1888_nguoc": "Disturbance, Worry, Anxiety, Melancholy",
+      "chieu_xuoi_ngan": "Đã gieo, đang chờ — và tự hỏi có đáng không. Lá này nói về đánh giá giữa chừng: xem cây lớn tới đâu, chăm thêm hay chuyển chỗ gieo.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 7 Tiền (Tiền (Đất · Thực chất)), cần kiên nhẫn rà lại chiến lược thay vì phản ứng vội trước sức ép: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh cần kiên nhẫn rà lại chiến lược thay vì phản ứng vội trước sức ép, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_8": {
+      "ten": "8 Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Voided ambition, vanity, cupidity, exaction, usury. It may also signify the possession of skill, in the sense of the ingenious mind turned to cunning and intrigue.",
+      "trich_mathers_1888_nguoc": "Flattery, Usury, Hypocrisy, Shifty",
+      "chieu_xuoi_ngan": "Làm đều, làm kỹ, từng đồng một. Lá này nói về sự rèn tay nghề: không hào nhoáng, nhưng chính nó làm ra mọi thứ bền.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 8 Tiền (Tiền (Đất · Thực chất)), nhịp độ công việc hoặc kỹ năng cần tháo bớt nút nghẽn lặp đi lặp lại: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh nhịp độ công việc hoặc kỹ năng cần tháo bớt nút nghẽn lặp đi lặp lại, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_9": {
+      "ten": "9 Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Roguery, deception, voided project, bad faith.",
+      "trich_mathers_1888_nguoc": "Deceit, Bad faith, Artifices, Deception",
+      "chieu_xuoi_ngan": "Tự đủ: thành quả do mình làm ra, vườn của mình, không cần ai. Lá này nói về sự độc lập đã chín — và nhắc vườn đẹp cũng cần khách.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 9 Tiền (Tiền (Đất · Thực chất)), sức bền cuối chặng nhắc nghỉ ngơi hợp lý và không ôm hết một mình: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh sức bền cuối chặng nhắc nghỉ ngơi hợp lý và không ôm hết một mình, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_10": {
+      "ten": "10 Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Chance, fatality, loss, robbery, games of hazard; sometimes gift, dowry, pension.",
+      "trich_mathers_1888_nguoc": "Gambling, Dissipation, Robbery, Loss",
+      "chieu_xuoi_ngan": "Gia sản theo nghĩa rộng: nhà, nghề, nếp, người — ba thế hệ dưới một cổng. Lá này nói về cái lâu dài và nhắc: của cải đâu phải mỗi tiền.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của 10 Tiền (Tiền (Đất · Thực chất)), gánh nặng tích tụ đã đến lúc san sẻ hoặc khép lại phần việc quá tải: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh gánh nặng tích tụ đã đến lúc san sẻ hoặc khép lại phần việc quá tải, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_tieu_dong": {
+      "ten": "Tiểu đồng Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Prodigality, dissipation, liberality, luxury, unfavorable news.",
+      "trich_mathers_1888_nguoc": "Prodigality, Profusion, Waste, Dissipation",
+      "chieu_xuoi_ngan": "Một cơ hội nhỏ, thật, và sự chăm chỉ học việc. Lá này là đất đang học: chậm, kỹ, tin vào thứ sờ được.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Tiểu đồng Tiền (Tiền (Đất · Thực chất)), thông tin mới hoặc việc học hỏi cần kiểm chứng kỹ trước khi tin ngay: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh thông tin mới hoặc việc học hỏi cần kiểm chứng kỹ trước khi tin ngay, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_hiep_si": {
+      "ten": "Hiệp sĩ Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Inertia, idleness, repose of that kind, stagnation; also placidity, discouragement, carelessness.",
+      "trich_mathers_1888_nguoc": "A brave Man, but out of Employment, Idle, Unemployed, Negligent",
+      "chieu_xuoi_ngan": "Chậm, chắc, làm xong việc — không bay nhưng tới. Lá này nói về sự bền bỉ có trách nhiệm: hợp mọi việc cần thời gian.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Hiệp sĩ Tiền (Tiền (Đất · Thực chất)), tốc độ tiến bước cần giữ phanh đúng lúc để tránh hụt đà: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh tốc độ tiến bước cần giữ phanh đúng lúc để tránh hụt đà, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_hoang_hau": {
+      "ten": "Hoàng hậu Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Evil, suspicion, suspense, fear, mistrust.",
+      "trich_mathers_1888_nguoc": "Certain Evil, a suspicious Woman, a Woman justly regarded with Suspicion, Doubt, Mistrust",
+      "chieu_xuoi_ngan": "Người chăm lo bằng việc thật: bữa ăn, nhà cửa, tiền đủ — có thể là bạn hoặc người đang đỡ bạn. Lá này nói về sự ấm no do tay làm ra.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Hoàng hậu Tiền (Tiền (Đất · Thực chất)), việc chăm sóc nội lực bên trong cần đặt trước khi lo cho xung quanh: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh việc chăm sóc nội lực bên trong cần đặt trước khi lo cho xung quanh, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    },
+    "tien_vua": {
+      "ten": "Vua Tiền",
+      "bo": "tien",
+      "trich_waite_1910_nguoc": "Vice, weakness, perversity, peril.",
+      "trich_mathers_1888_nguoc": "An old and vicious Man, a Dangerous Man, Doubt, Fear, Peril, Danger",
+      "chieu_xuoi_ngan": "Người thành đạt bằng kiên nhẫn: của cải, kinh nghiệm, sẵn lòng bảo trợ. Lá này nói về sự chín của đất — chắc, rộng, và biết chia.",
+      "chieu_nguoc_go_mo": "Ở thế ngược của Vua Tiền (Tiền (Đất · Thực chất)), cách điều phối và ra quyết định cần mềm dẻo lắng nghe thực tế hơn: tiến độ vật chất hoặc nguồn lực đang cần rà lại lỗ hổng chi tiêu và quy trình.",
+      "viec_nho_go_nut": "Gợi ý tháo gỡ: kiểm tra lại bảng thu chi, thời hạn bàn giao và chất lượng khâu cơ bản nhất.",
+      "cau_hoi_tu_soi": "Ngay lúc này ở khía cạnh cách điều phối và ra quyết định cần mềm dẻo lắng nghe thực tế hơn, mình đang giữ thói quen nào làm chậm nhịp tiến tự nhiên?"
+    }
+  }
+}

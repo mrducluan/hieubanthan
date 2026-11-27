@@ -107,5 +107,8 @@ def test_nhap_ai_cho_duyet_la_tep_ai_chua_duyet_moi_va_khong_lan_vao_luat_tom_y(
         "co_van_tam_tai_kb.json",
         "doanh_chu_cam_nang_kb.json",
         "su_vu_chien_thuat_kb.json",
+        "tuong_menh_doi_chieu_kb.json",
+        "thanso_da_phai_kb.json",
+        "tarot_an_phu_nguoc_kb.json",
     }, ai   # thêm / bớt tệp = quyết định có chủ đích
     assert not ai & set(_tep_luat_tom_y())

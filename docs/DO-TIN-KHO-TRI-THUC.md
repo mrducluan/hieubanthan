@@ -21,10 +21,10 @@
 | Tử vi | 1 | 3 | 3 | 4 | 8 |  |  |
 | Kinh Dịch | 4 | 2 |  | 1 | 2 |  |  |
 | Phong thuỷ | 2 | 2 |  | 1 | 5 |  |  |
-| Nhân tướng | 6 | 2 |  | 1 | 1 |  |  |
-| Tarot | 1 |  | 1 |  |  |  |  |
+| Nhân tướng | 6 | 2 |  | 1 | 1 | 1 |  |
+| Tarot | 1 |  | 1 |  |  | 1 |  |
 | Kỳ Môn |  | 1 |  |  | 1 |  |  |
-| Thần số |  |  |  | 11 | 13 |  |  |
+| Thần số |  |  |  | 11 | 13 | 1 |  |
 | Lịch · tuổi · tập quán |  | 1 |  | 5 | 1 |  |  |
 | Liên mảng · kỹ thuật |  | 1 |  |  | 12 | 5 | 7 |
 
@@ -165,6 +165,8 @@
 | Nhân tướng | `nhantuong_ngu_hanh_va_co_thu.json` | quy_tac_co_thu | Có nguyên văn đối chiếu | PR #320 (2026-11-20): 81/150 quy tắc giữ lại, mỗi câu Hán khớp kho nguồn Liễu Trang tướng pháp / Thần Tướng Toàn Biên (than_tuong_toan_bien.json); lời Việt khuôn SX-C do ban biên tập viết |
 | Nhân tướng | `nhantuong_ngu_hanh_va_co_thu.json` | quy_tac_khong_dua | Ban biên tập soạn | 69 quy tắc không đưa ra người dùng, chỉ còn mã + lý do |
 | Nhân tướng | `tuong_do_anh_kb.json` |  | Ban biên tập soạn | PR #338: ngưỡng + lời phép đo ước lượng trên ảnh (mặt 3D, vùng ảnh, bàn tay) — ban biên tập tự đặt, chưa hiệu chỉnh trên ảnh thật |
+| Nhân tướng | `tuong_menh_doi_chieu_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 3.2: nháp AI đối chiếu Nhịp năm Lá số & Tướng lưu niên / Chỉ tay Saint-Germain 1897, chờ chủ dự án đọc duyệt |
+| Tarot | `tarot_an_phu_nguoc_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 3.3: nháp AI 56 lá Ẩn Phụ ngược (trích nguyên văn Waite 1910 & Mathers 1888, 0% Bunning/Pollack) + Phẩm giá nguyên tố, chờ chủ dự án đọc duyệt |
 | Tarot | `tarot_greer_nguoc.json` |  | Tiên đề logic sách hiện đại (ghi trang) | Đợt 2B: 22 Lá Ẩn Chính ngược rút ý 2 mặt từ Mary K. Greer (2002), không nguyên văn, giữ trang |
 | Tarot | `tarot_kb.json` |  | Có nguyên văn đối chiếu | câu trích khớp Waite / Mathers / Book T / Papus 1892 / Case 1920 / Ouspensky 1913; lời lớp Marseille, B.O.T.A., Thoth vẫn là tóm ý (Marseille đã soát với Mathers + Papus, B.O.T.A. ẩn chính với Case 1920) |
 | Kỳ Môn | `ky_mon_bi_kip_cuu_don.json` |  | Tóm ý cổ thư, chưa khớp từng câu | Cửu Độn: lời đời thường tóm ý theo Kỳ Môn Độn Giáp Bí Kíp Đại Toàn q.21; câu sách đi kèm (`sach_ghi`) là nguyên văn Độn Giáp Diễn Nghĩa quyển 2, khớp kho nguồn don_giap_dien_nghia.json qua tests/test_sx_c_sach_ghi.py::test_moi_muc_qua_bo_kiem (PR #320, 2026-11-20) |
@@ -186,6 +188,7 @@
 | Thần số | `thanso_chaldean.json` | kep | Có nguyên văn đối chiếu | TK-2: 43/43 số kép có câu Cheiro (OCR, can_doi_chieu); bảng chữ 23/26 khớp; lời Việt là tóm ý trung tính |
 | Thần số | `thanso_chan_dung.json` |  | Tập quán / truyền khẩu phổ thông |  |
 | Thần số | `thanso_chi_so_phu.json` |  | Tập quán / truyền khẩu phổ thông |  |
+| Thần số | `thanso_da_phai_kb.json` |  | Nháp AI chờ chủ dự án duyệt | Chặng 3.3: nháp AI đối chiếu 5 trường phái Thần số học (trích nguyên văn Westcott 1911, Sepharial 1913, Balliett 1908), chờ chủ dự án đọc duyệt |
 | Thần số | `thanso_depth.json` |  | Tập quán / truyền khẩu phổ thông |  |
 | Thần số | `thanso_do_thi.json` |  | Ban biên tập soạn |  |
 | Thần số | `thanso_doi_chieu.json` |  | Tập quán / truyền khẩu phổ thông |  |

@@ -1,0 +1,52 @@
+{
+  "_nguon": "Stage 3.2 English overlay — Side-by-side reflection of Annual Natal Rhythm & East-West Physiognomy / Palmistry (Saint-Germain 1897 PD).",
+  "_trang_thai": "nhap_ai_cho_duyet",
+  "khung": {
+    "tieu_de": "Side-by-Side Reflection: Annual Chart Rhythm & Face / Palm Observations",
+    "phu_de": "Your birth chart maps seasonal structure and annual cycles, while Classical Annual Facial Zones and Two-Hand Palmistry reflect daily habits you are actively cultivating. Each perspective stands independently with no merged score.",
+    "ranh_gioi": "Facial complexion and palm creases shift with sleep, stress, and work habits; this reflection is never medical advice or a lifespan prediction.",
+    "tuoi_nho": "Physiognomy and natal cross-reflection is available only for users aged 16 and older."
+  },
+  "saint_germain_1897": {
+    "sach": "Comte C. de Saint-Germain · The Practice of Palmistry for Professional Purposes (1897, public domain)",
+    "muc": {
+      "ngon_cai": {
+        "ten": "The Thumb — Willpower & Self-Regulation",
+        "nguyen_van_en": "It would be a loss of space for me to expatiate further on the extraordinary value and interest of the thumb in its physical as well as ethnological aspect.",
+        "y_ung_dung": "Thumb carriage and balance reflect how steadily you pace personal discipline during demanding annual transitions."
+      },
+      "duong_tri_dao": {
+        "ten": "Line of Head — Focus & Deliberate Judgment",
+        "nguyen_van_en": "This is the line which acts as a clear and accurate gauge as to the intellectual worth of the subject and as to the healthy condition of his, or her, brain and blood circulation.",
+        "y_ung_dung": "A clear Head Line reflects structured thinking; in decision-heavy years, write criteria down clearly instead of multitasking."
+      },
+      "duong_su_nghiep": {
+        "ten": "Line of Career — Long-Term Commitment Axis",
+        "nguyen_van_en": "I now turn my attention to a vertical line, one of the five lines the starting points of which are to be found in the lower part of the palm and the terminations more or less close",
+        "y_ung_dung": "When the vertical central line is clearer on the active hand than the passive hand, deliberate daily practice is shaping a stronger direction than baseline habit."
+      },
+      "duong_thai_duong": {
+        "ten": "Line of the Sun — Follow-Through & Craft",
+        "nguyen_van_en": "Artistic instincts but insufficient powers of execution; the “Art amateur’s Line.",
+        "y_ung_dung": "Saint-Germain notes that creative instinct requires steady execution: finishing concrete deliverables builds lasting credibility."
+      },
+      "tam_giac_tu_giac": {
+        "ten": "The Quadrangle & Triangle — Mental Openness",
+        "nguyen_van_en": "There are two figures in the hands traced by the combination of the principal Lines which I had often occasion to mention but not to define or expatiate upon all through these page",
+        "y_ung_dung": "Balanced spacing between Heart and Head lines points to even-handedness when collaborating under pressure."
+      }
+    }
+  },
+  "nhip_hanh_nam": {
+    "Kim": "A Metal-toned year favors streamlining commitments, clear boundaries, and steady breathing routines.",
+    "Mộc": "A Wood-toned year supports learning fresh skills, constructive outreach, and regular outdoor movement.",
+    "Thủy": "A Water-toned year favors deep research, careful listening, and protecting restorative sleep.",
+    "Hỏa": "A Fire-toned year brings brisk activity; pace milestones calmly and keep an evening wind-down routine.",
+    "Thổ": "An Earth-toned year favors consolidating savings, reliable workflows, and grounded family routines."
+  },
+  "hai_tay": {
+    "thuan_troi": "Active hand clearer than passive hand: your conscious routines and present choices are actively steering your path beyond baseline temperament.",
+    "khong_thuan_troi": "Passive hand clearer than active hand: strong natural reserves are present, though recent energy may be scattered across too many fronts.",
+    "can_doi": "Both hands show comparable clarity: outer commitments and inner temperament are moving in steady alignment."
+  }
+}
