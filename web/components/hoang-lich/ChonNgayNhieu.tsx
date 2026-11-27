@@ -2,7 +2,7 @@
 // EN-5.1 — "Chọn ngày cho cả nhà": cưới hỏi (cô dâu, chú rể, bố mẹ hai bên), khai trương / về nhà mới (người đứng tên +
 // người cùng làm). Engine chọn ngày hợp việc, không xung tuổi ai, gắn lưu ý tháng xung / Kim lâu / tuổi làm nhà của người
 // chính — web chỉ hiển thị. Năm sinh của người khác chỉ đi qua lượt gọi, không lưu ở máy chủ hay trên máy.
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { kemNgonNgu } from "@/lib/sao-client";
 import Link from "@/components/khung/Lien";
 import { CalendarHeart, Plus, Search, X } from "lucide-react";
@@ -11,6 +11,8 @@ import { ghi } from "@/lib/do-luong";
 import { dinhNgay } from "@/lib/dinh-dang";
 import { congNgay, duongNgay, type ChonNgayNhieuKq, type NgayNhieu, type ThangGiaThu } from "@/lib/hoang-lich";
 import { useChuLich } from "./chu-lich";
+import { useDuongCong } from "@/lib/truong-phai";
+import { DongDiemKhac } from "@/components/truong-phai/TruongPhaiLich";
 
 // RS-3: chỉ MÃ việc có vai (cô dâu, người đứng tên…) nằm ở đây; tên việc lấy từ danh sách engine (`danh_sach_viec`,
 // đúng ngôn ngữ, cùng tên với khối "Chọn ngày theo việc") — không chép tên tay.
@@ -79,6 +81,8 @@ export function ChonNgayNhieu({ tu, dsViec }: { tu: string; dsViec: { ma: string
   const [dong, setDong] = useState<Dong[]>(macDinh("cuoi_hoi"));
   const [soThang, setSoThang] = useState(12);
   const [kq, setKq] = useState<ChonNgayNhieuKq | null>(null);
+  const [dc] = useDuongCong();
+  useEffect(() => { setKq(null); }, [dc]);           // TP-1: đổi phái → bấm tìm lại
   const [loi, setLoi] = useState<string | null>(null);
   const [dang, setDang] = useState(false);
   const dsVai = viec === "cuoi_hoi" ? VAI_CUOI : VAI_KHAC;
@@ -160,6 +164,7 @@ export function ChonNgayNhieu({ tu, dsViec }: { tu: string; dsViec: { ma: string
       {kq && (
         <div data-testid="ket-qua-nhieu" aria-live="polite" className="space-y-3">
           <p className="font-medium">{kq.tom_tat}</p>
+          <DongDiemKhac ds={kq.diem_khac} testId="diem-khac-nhieu" />
           {kq.goi_y.map((g) => <p key={g} className="rounded-xl border border-gold/30 bg-gold/5 px-3 py-2 text-sm">{g}</p>)}
           {kq.giai_thich && kq.giai_thich.length > 0 && (
             <details className="rounded-xl border border-line/70 px-3 py-2 text-sm" data-testid="giai-thich-nhieu">

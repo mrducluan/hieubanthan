@@ -48,7 +48,19 @@ export function loiEngine(status: number, body: unknown, en = false): { error: s
  *  `x-forwarded-for` do Vercel đặt, người dùng không tự giả được. */
 export function dauNguoiGoi(req: Request): Record<string, string> {
   const ip = req.headers.get("x-real-ip") ?? req.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
-  return { ...(ip ? { "x-nguoi-goi": ip.slice(0, 64) } : {}), ...dauNgonNgu(req) };
+  return { ...(ip ? { "x-nguoi-goi": ip.slice(0, 64) } : {}), ...dauNgonNgu(req), ...dauTruongPhaiReq(req) };
+}
+
+/** TP-1: công tắc trường phái theo ngữ cảnh (trình duyệt gửi `x-duong-cong`) → chuyển tiếp nguyên header; giá trị lạ bỏ
+ *  qua (engine còn kiểm lần nữa, lạ → 422). Không có → không gửi (engine dùng mặc định). */
+const TRUONG_PHAI_NGU_CANH: Record<string, RegExp> = { "x-duong-cong": /^(lich_viet|hiep_ky)$/ };
+export function dauTruongPhaiReq(req: Request): Record<string, string> {
+  const ra: Record<string, string> = {};
+  for (const [k, re] of Object.entries(TRUONG_PHAI_NGU_CANH)) {
+    const v = req.headers.get(k);
+    if (v && re.test(v)) ra[k] = v;
+  }
+  return ra;
 }
 
 /** QTE: ngôn ngữ của lượt gọi (trang /en gửi `x-ngon-ngu: en`) → chuyển tiếp nguyên header tới engine; giá trị lạ bỏ qua. */

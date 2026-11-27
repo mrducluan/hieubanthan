@@ -169,16 +169,16 @@ export function BatTu() {
             tomTat={<ChipPhai ds={phaiDangDung} />}
             nhac={sinhGioTy ? cb("phai.nhac_ty") : undefined}
             moTa={cb("phai.mo_ta")}>
-            <DongPhai ten={cb("phai.ty.ten")} nhan={cb("phai.ty.nhan")} giaTri={gioTy} doi={setGioTy}
+            <DongPhai ma="battu.gio_ty" ten={cb("phai.ty.ten")} nhan={cb("phai.ty.nhan")} giaTri={gioTy} doi={setGioTy}
               luaChon={[["da_ty", cb("phai.ty.da_ty")], ["sang_ngay", cb("phai.ty.sang_ngay")]]}
               noiBat={sinhGioTy} nhanNoiBat={cb("phai.ap_dung")}
               goiY={sinhGioTy ? cb("phai.ty.goi_y_co") : cb("phai.ty.goi_y_khong")} />
-            <DongPhai testId="chon-gio-sinh-bat-tu" ten={cb("phai.gio_sinh.ten")} nhan={cb("phai.gio_sinh.nhan")} giaTri={gioSinh}
+            <DongPhai ma="battu.gio_sinh" testId="chon-gio-sinh-bat-tu" ten={cb("phai.gio_sinh.ten")} nhan={cb("phai.gio_sinh.nhan")} giaTri={gioSinh}
               doi={(v) => { setGioSinh(v); ghi("chart_interacted", { mo_dun: "battu", kind: "phai_gio_sinh", gio_sinh: v }); }}
               luaChon={[["dong_ho", cb("phai.gio_sinh.dong_ho")], ["mat_troi", cb("phai.gio_sinh.mat_troi")]]}
               goiY={coKinhDo ? cb("phai.gio_sinh.goi_y_co") : cb("phai.gio_sinh.goi_y_khong")} />
             {namBanCau && (
-              <DongPhai testId="chon-dieu-hau-bat-tu" ten={cb("phai.dieu_hau.ten")} nhan={cb("phai.dieu_hau.nhan")} giaTri={dieuHau}
+              <DongPhai ma="battu.dieu_hau" testId="chon-dieu-hau-bat-tu" ten={cb("phai.dieu_hau.ten")} nhan={cb("phai.dieu_hau.nhan")} giaTri={dieuHau}
                 doi={(v) => { setDieuHau(v); ghi("chart_interacted", { mo_dun: "battu", kind: "phai_dieu_hau", dieu_hau: v }); }}
                 luaChon={[["bac_ban_cau", cb("phai.dieu_hau.bac")], ["noi_sinh", cb("phai.dieu_hau.nam")]]}
                 noiBat nhanNoiBat={cb("phai.ap_dung")}

@@ -1,5 +1,6 @@
 "use client";
 // Chặng 4.3 — Khung Đối chiếu Trạch Nhật cổ điển theo Khâm Định Hiệp Kỷ Biện Phương Thư trên /xem-ngay-tot.
+import { dauTruongPhai } from "@/lib/truong-phai";
 import { useState } from "react";
 import { BookOpen, Sparkles } from "lucide-react";
 
@@ -43,6 +44,7 @@ export function DoiChieuHiepKy({ ngayMacDinh, en = false }: { ngayMacDinh: strin
         headers: {
           "content-type": "application/json",
           ...(en ? { "x-ngon-ngu": "en" } : {}),
+          ...dauTruongPhai(),                       // TP-1: cùng phái Dương Công với thẻ ngày
         },
         body: JSON.stringify({
           tu_ngay: tuNgay || null,
