@@ -1,8 +1,15 @@
 "use client";
-// Chặng 3.3B — Chiều sâu 56 Lá Ẩn Phụ ngược (Waite 1910 & Mathers 1888) & Phẩm giá nguyên tố chuỗi bài.
+// Chặng 3.3B — "Lá ngược nói thêm gì?": với lá Ẩn phụ đang NGƯỢC, một câu nghĩa ngược ngắn theo sách xưa. Khối gọn, gập
+// sẵn, đặt sau bài đọc. Không lặp phần BaoCaoTarot / BanTraiBai đã có (nghĩa từng vị trí, việc nhỏ, câu tự hỏi, đường phẩm
+// giá giữa các lá) — chỉ giữ câu nghĩa ngược mới; tên sách + câu trích chỉ trong "Vì sao nói vậy" (TR-4).
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import Link from "@/components/khung/Lien";
+import { useDuong } from "@/components/khung/NgonNgu";
+import { ViSao } from "@/components/luan-giai/HopNoiBat";
+import { useChuTarot } from "@/components/tarot/chu-tarot";
+import { ghi } from "@/lib/do-luong";
+import { kemNgonNgu } from "@/lib/sao-client";
 
 interface LaRut {
   id: string;
@@ -17,108 +24,82 @@ interface KetQuaChieuSau {
     id: string;
     ten: string;
     chieu_nguoc_go_mo: string;
-    viec_nho_go_nut: string;
-    cau_hoi_tu_soi: string;
-    trich_waite_1910_nguoc: string;
+    trich_waite_1910_nguoc?: string | null;
     trich_mathers_1888_nguoc?: string | null;
-  }[];
-  pham_gia_nguyen_to: {
-    cap_vi_tri: number[];
-    cap_la: string;
-    cap_nguyen_to: string;
-    quan_he: string;
-    dien_giai: string;
   }[];
   lien_ket_menh_ly: { ten: string; duong: string }[];
 }
 
-export function ChieuSauTraiBai({ la, en = false }: { la: LaRut[]; en?: boolean }) {
+export function ChieuSauTraiBai({ la }: { la: LaRut[] }) {
+  const { c, en } = useChuTarot();
+  const d = useDuong();
   const [kq, setKq] = useState<KetQuaChieuSau | null>(null);
 
+  // Khoá theo NỘI DUNG lá (không theo mảng `la` — mảng mới mỗi lần cha render sẽ gọi lại liên tục).
   const keyLa = la.map((x) => `${x.id}:${x.nguoc ? 1 : 0}`).join(",");
 
   useEffect(() => {
+    setKq(null);
+    if (!keyLa) return;
     let huy = false;
-    if (!la.length) return;
-    fetch("/api/tarot/chieu-sau", {
+    const ds = keyLa.split(",").map((p) => { const [id, n] = p.split(":"); return { id: id!, nguoc: n === "1" }; });
+    if (!ds.some((x) => x.nguoc)) return;
+    const url = "/api/tarot/chieu-sau";
+    fetch(url, kemNgonNgu(url, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-        ...(en ? { "x-ngon-ngu": "en" } : {}),
-      },
-      body: JSON.stringify({ la }),
-    })
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ la: ds }),
+    }))
       .then((r) => (r.ok ? r.json() : null))
-      .then((d) => {
-        if (!huy && d) setKq(d as KetQuaChieuSau);
-      })
-      .catch(() => {});
-    return () => {
-      huy = true;
-    };
-  }, [keyLa, en, la]);
+      .then((j) => { if (!huy) setKq(j ? (j as KetQuaChieuSau) : null); })
+      .catch(() => { if (!huy) setKq(null); });
+    return () => { huy = true; };
+  }, [keyLa, en]);
 
-  if (!kq) return null;
-  if (kq.so_la_nguoc === 0 && kq.pham_gia_nguyen_to.length === 0) return null;
+  if (!kq || !kq.la_nguoc?.length) return null;
 
   return (
-    <div className="mt-6 space-y-4 rounded-2xl border border-line/80 bg-surface/35 p-5" data-testid="chieu-sau-trai-bai">
-      <div>
-        <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-gold">
-          <Sparkles className="size-3.5" aria-hidden /> {kq.khung.tieu_de}
-        </p>
-        <p className="mt-1 text-xs leading-relaxed text-fg-muted">{kq.khung.phu_de}</p>
-      </div>
-
-      {kq.la_nguoc.length > 0 && (
-        <div className="space-y-3">
-          {kq.la_nguoc.map((l) => (
-            <div key={`${l.vi_tri}-${l.id}`} className="rounded-xl border border-line/70 bg-bg/55 p-3.5 text-xs">
+    <details
+      className="group mt-6 rounded-2xl border border-line/80 bg-surface/35"
+      data-testid="chieu-sau-trai-bai"
+      onToggle={(e) => {
+        if ((e.currentTarget as HTMLDetailsElement).open) ghi("chart_interacted", { mo_dun: "tarot", kind: "tarot_chieu_sau_mo", so_la: kq.la_nguoc.length });
+      }}
+    >
+      <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 px-5 py-3 text-sm font-semibold text-fg [&::-webkit-details-marker]:hidden">
+        <span>{c("cs.tieu_de")} <span className="font-normal text-fg-muted">({kq.la_nguoc.length})</span></span>
+        <ChevronDown className="size-4 shrink-0 text-fg-muted transition-transform group-open:rotate-180" aria-hidden />
+      </summary>
+      <div className="space-y-3 px-5 pb-5">
+        <p className="text-xs leading-relaxed text-fg-muted">{c("cs.dan")}</p>
+        {kq.la_nguoc.map((l) => {
+          const trich = [
+            l.trich_waite_1910_nguoc ? `Waite (1910): “${l.trich_waite_1910_nguoc}”` : null,
+            l.trich_mathers_1888_nguoc ? `Mathers (1888): “${l.trich_mathers_1888_nguoc}”` : null,
+          ].filter((x): x is string => !!x);
+          return (
+            <div key={`${l.vi_tri}-${l.id}`} className="rounded-xl border border-line/70 bg-bg/55 p-3.5 text-sm">
               <p className="font-semibold text-fg">
-                #{l.vi_tri} · {l.ten} ({en ? "Reversed" : "Lá ngược"})
+                {l.vi_tri}. {l.ten} <span className="text-xs font-normal text-fg-muted">({c("cs.nguoc")})</span>
               </p>
               <p className="mt-1 leading-relaxed text-fg-muted">{l.chieu_nguoc_go_mo}</p>
-              <p className="mt-1 font-medium text-jade">{l.viec_nho_go_nut}</p>
-              <p className="mt-1 italic text-fg-faint">{l.cau_hoi_tu_soi}</p>
-              {l.trich_waite_1910_nguoc && (
-                <p className="mt-2 border-t border-line/50 pt-1.5 text-[11px] text-fg-faint">
-                  Waite (1910): &ldquo;{l.trich_waite_1910_nguoc}&rdquo;
-                  {l.trich_mathers_1888_nguoc ? ` · Mathers (1888): "${l.trich_mathers_1888_nguoc}"` : ""}
-                </p>
-              )}
+              <ViSao nho canCu={trich} />
             </div>
-          ))}
-        </div>
-      )}
-
-      {kq.pham_gia_nguyen_to.length > 0 && (
-        <div className="space-y-2">
-          <p className="text-xs font-semibold text-gold">
-            {en ? "Elemental Dignities Across Neighboring Cards (Liber LXXVIII)" : "Phẩm giá nguyên tố giữa các lá liền kề (Liber LXXVIII)"}
-          </p>
-          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-            {kq.pham_gia_nguyen_to.map((pg, idx) => (
-              <div key={idx} className="rounded-xl border border-line/60 bg-bg/45 p-3 text-xs">
-                <p className="font-medium text-fg">
-                  {pg.cap_la} <span className="text-gold">({pg.cap_nguyen_to})</span>
-                </p>
-                <p className="mt-1 leading-relaxed text-fg-muted">{pg.dien_giai}</p>
-              </div>
-            ))}
+          );
+        })}
+        {kq.lien_ket_menh_ly?.length > 0 && (
+          <div className="border-t border-line/50 pt-3 text-xs text-fg-muted">
+            {kq.khung?.cau_noi_menh_ly && <p>{kq.khung.cau_noi_menh_ly}</p>}
+            <div className="mt-1 flex flex-wrap gap-x-4">
+              {kq.lien_ket_menh_ly.map((lk) => (
+                <Link key={lk.duong} href={d(lk.duong)} className="inline-flex min-h-11 items-center gap-1 font-medium text-gold hover:underline">
+                  {lk.ten} <ArrowUpRight className="size-3.5" aria-hidden />
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-
-      <div className="border-t border-line/50 pt-3 text-xs text-fg-muted">
-        <p>{kq.khung.cau_noi_menh_ly}</p>
-        <div className="mt-2 flex flex-wrap gap-3">
-          {kq.lien_ket_menh_ly.map((lk) => (
-            <Link key={lk.duong} href={en ? `/en${lk.duong}` : lk.duong} className="inline-flex items-center gap-1 font-medium text-gold hover:underline">
-              {lk.ten} <ArrowUpRight className="size-3.5" aria-hidden />
-            </Link>
-          ))}
-        </div>
+        )}
       </div>
-    </div>
+    </details>
   );
 }

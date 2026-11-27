@@ -1,27 +1,62 @@
 {
-  "_nguon": "Chặng 3.3 — Đối chiếu Đa phái Thần số học: Pitago hiện đại · Balliett (1908) · Westcott/Sepharial (1911–1913) · David Phillips · Chaldea (Cheiro 1926). Kèm trích dẫn nguyên văn tiếng Anh công cộng.",
+  "_nguon": "Chặng 3.3 — Đối chiếu Đa phái Thần số học (phần so sánh phụ, người dùng tự mở): Pitago hiện đại · Balliett · Westcott · David Phillips · Chaldea. Câu trích tiếng Anh: Balliett lấy từ kho nguồn (một đoạn, đúng con số ngày sinh), Westcott dùng chung bo_sung_so.json, Chaldea dùng chung thanso_chaldean.json (kep.*.trich).",
   "_trang_thai": "nhap_ai_cho_duyet",
+  "source_id": "thanso_da_phai",
+  "school_id": "da_phai_thanso",
   "khung": {
     "tieu_de": "Đối chiếu 5 Góc nhìn Trường phái Thần số học",
-    "phu_de": "Cùng một ngày sinh và họ tên, mỗi trường phái phương Tây đặt trọng tâm khác nhau: Pitago đọc nhịp Đường đời, Balliett đọc độ rung thanh âm, Westcott & Sepharial truy về gốc hình học – Kabala cổ điển, Phillips soi Biểu đồ ngày sinh & 4 Đỉnh cao, còn Chaldea (Cheiro) cân số kép của tên gọi.",
-    "cau_noi_dong_phuong": "Thần số học phác hoạ nét tính cách trội và chu kỳ 9 năm gọn nhẹ chỉ từ ngày sinh dương lịch; nếu muốn soi sâu 12 lĩnh vực (tài chính, gia đạo, cộng sự) theo giờ sinh và mùa sinh, bạn có thể đối chiếu thêm Tử vi và Bát tự."
+    "phu_de": "Cùng một ngày sinh (và họ tên nếu bạn nhập), mỗi cách xem nhìn một mặt khác nhau: nhịp đường đời, con số như một nốt nhạc, tính chất cổ điển của con số, số chủ đạo và các chặng đỉnh, số kép của tên. Đây là phần so sánh thêm, các cột đọc riêng, không gộp điểm.",
+    "cau_noi_dong_phuong": "Thần số học phác hoạ nét tính cách trội và chu kỳ 9 năm gọn nhẹ chỉ từ ngày sinh dương lịch; nếu muốn soi sâu 12 lĩnh vực (tài chính, gia đạo, cộng sự) theo giờ sinh và mùa sinh, bạn có thể đối chiếu thêm Tử vi và Bát tự.",
+    "ten_phai": {
+      "pitago_hien_dai": "Pitago hiện đại",
+      "balliett_1908": "Con số như nốt nhạc (1908)",
+      "westcott_sepharial": "Truyền thống cổ điển (Westcott)",
+      "david_phillips": "Phillips (Số chủ đạo & 4 Đỉnh)",
+      "chaldea_cheiro": "Chaldea (số kép)"
+    },
+    "lien_ket": [
+      {
+        "ten": "Xem lá số Tử vi 12 cung",
+        "duong": "/tu-vi"
+      },
+      {
+        "ten": "Xem Bát tự tứ trụ theo mùa sinh",
+        "duong": "/bat-tu"
+      }
+    ]
+  },
+  "mau": {
+    "pitago": "Đường đời {dd}; năm {nam} là năm cá nhân {nam_cn}. {ung_dung}",
+    "balliett": "Con số ngày sinh rút gọn là {so}. Cách xem này đọc con số như một nốt nhạc riêng cần học cho trọn, chú trọng nếp sống hằng ngày hơn là đoán việc.",
+    "westcott": "Cách xem cổ điển đọc con số {so} như một tính chất, một tỉ lệ cấu trúc, không dùng để đoán định sự kiện.",
+    "phillips": "Số chủ đạo {scd}; chặng Đỉnh đang đi mang số {dinh}, từ {tu} đến {den} tuổi.",
+    "phillips_khong_dinh": "Số chủ đạo {scd}.",
+    "chaldea_ten": "Họ tên cho số {so}; ngày sinh {ngay} cho gốc {goc_ngay}.",
+    "chaldea_ngay": "Ngày sinh {ngay} cho gốc {goc_ngay}. Nhập họ tên để tính thêm số của tên.",
+    "can_ho_ten": "Cần họ tên để tính số của tên theo bảng chữ Chaldea.",
+    "can_cu_pitago": "Pitago: Đường đời {dd}, năm cá nhân {nam_cn} (mốc 1/1 dương lịch).",
+    "can_cu_balliett": "Sách The Philosophy of Numbers (1908): đọc con số ngày sinh (birth number) {so} như một nốt nhạc.",
+    "can_cu_phillips": "Phillips: Số chủ đạo = cộng ngang mọi chữ số ngày sinh ({cach}).",
+    "can_cu_chaldea": "Chaldea (Cheiro, 1926): bảng chữ theo âm, số 1–8, giữ số kép 10–52."
   },
   "trich_co_dien": {
-    "westcott_1911": {
-      "sach": "W. Wynn Westcott · Numbers: Their Occult Power and Mystic Virtues (1911)",
-      "nguyen_van_en": "Pythagoras, one of the greatest philosophers of ancient Europe, was the son of Mnesarchus, an engraver. He was born about the year 580 B.C.",
-      "phu_luc_en": "Many nations of antiquity made use of the letters of their alphabets as substitutes for any independent signs to typify numerical conceptions."
-    },
-    "sepharial_kabala": {
-      "sach": "Sepharial · The Kabala of Numbers (1913)",
-      "nguyen_van_en": "Figures are the means employed by us to express definite quantities. They do not express anything of quality.",
-      "phu_luc_en": "One of the most interesting forms of the kabalism of numbers is that which relates names to incidents by means of the numerical value of letters."
-    },
     "balliett_1908": {
-      "sach": "Mrs. L. Dow Balliett · The Philosophy of Numbers (1908)",
-      "nguyen_van_1": "you stand as a foundation for others to build upon. It is your mission to\nhold to Unity in all things. Let others falter, but you must remain steadfast.",
-      "nguyen_van_4": "you have passed in safety the F note and know the secrets of that musical\nvibration. What you now desire to do lies in the note of your birth path.",
-      "nguyen_van_8": "your soul knows freedom and with many stripes has tried to make\nyour brain realize it. You should stand ready to help every other soul sing his own song of life."
+      "sach": "The Philosophy of Numbers: Their Tone and Colors (1908)",
+      "theo_so": {
+        "3": "If your name digit or birth vibration is 3, to be a perfect character you must express the two preceding vibrations, 1 and 2.",
+        "4": "If 4 is your birth number, find all there is in 4 or F.",
+        "5": "If your birth vibration is 5, you are seeking the knowledge contained in it.",
+        "6": "If the digit of your name or birth vibration is 6, know the desirable thing for you to gain is rest in motion— complete rest and complete motion.",
+        "7": "As 7 is not free, it holds and feels the perfect power it cannot liberate, especially when the birth number is 7, unless it has with it a free number.",
+        "9": "If your birth vibration is 9 and your name is not so high, then have patience with yourself while you are earning this much loved free vibration."
+      },
+      "source_id": "thanso_balliett_philosophy_1908",
+      "school_id": "pythagoras_hien_dai"
+    },
+    "cheiro": {
+      "sach": "Cheiro · Cheiro's Book of Numbers (1926)",
+      "source_id": "thanso_cheiro_book_of_numbers_1926",
+      "school_id": "chaldean_cheiro"
     }
   },
   "theo_so": {

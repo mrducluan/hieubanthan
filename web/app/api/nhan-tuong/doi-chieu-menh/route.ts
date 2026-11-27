@@ -5,7 +5,7 @@ import { dauNguoiGoi, goiEngineDaKiem, laBanAnh, loiChung } from "@/lib/proxy";
 
 const Input = z.object({
   ngay_sinh: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  gioi_tinh: z.enum(["nam", "nu"]).default("nam"),
+  gioi_tinh: z.enum(["nam", "nu"]),
   gio_sinh: z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/).nullable().optional(),
   do_lech_hai_tay: z.enum(["thuan_troi", "khong_thuan_troi", "can_doi"]).default("can_doi"),
   muc_chi_tay: z.array(z.enum(["ngon_cai", "duong_tri_dao", "duong_su_nghiep", "duong_thai_duong", "tam_giac_tu_giac"])).max(5).nullable().optional(),

@@ -1,0 +1,9 @@
+{
+ "_nguon": "Chặng 3 — lỗi đầu vào của bốn route so sánh (sự vụ, đối chiếu tướng–mệnh, thần số đa phái, chiều sâu Tarot).",
+ "_trang_thai": "bien_tap",
+ "chang3.ngay_sinh": "Birth date must be between 1900 and today.",
+ "chang3.so_la": "The spread needs between 1 and 10 cards.",
+ "chang3.khong_la": "Unknown card: {ma}.",
+ "chang3.tinh_huong": "Unknown situation: {ma}.",
+ "chang3.gia_tri_hao": "gia_tri_hao needs exactly 6 values, each 6, 7, 8 or 9."
+}

@@ -19,7 +19,9 @@ from typing import Literal
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from app import config
 from app.config import ENGINE_VERSION
+from app.kb.loi import L
 from app.calc import nhan_tuong as calc
 from app.calc import nhan_tuong_do as calc_do
 from app.kb import nhan_tuong_do_hinh as do_hinh_kb
@@ -267,8 +269,8 @@ class DoiChieuTuongMenhInput(BaseModel):
 
 @router.post("/doi-chieu-menh")
 def api_doi_chieu_tuong_menh(inp: DoiChieuTuongMenhInput) -> dict:
-    if not (1930 <= inp.ngay_sinh.year <= 2025):
-        raise HTTPException(422, detail="Năm sinh cần nằm trong khoảng 1930–2025.")
+    if not (1900 <= inp.ngay_sinh.year and inp.ngay_sinh <= config.hom_nay_vn()):
+        raise HTTPException(422, detail=L("chang3.ngay_sinh", "Ngày sinh cần trong khoảng từ năm 1900 đến hôm nay."))
     from app.luangiai import tuong_menh_doi_chieu as tmdc  # noqa: PLC0415
     kq = tmdc.doi_chieu_tuong_menh(
         ngay_sinh=inp.ngay_sinh,

@@ -9,6 +9,7 @@ import { BanCoMaHoaE2EE } from "./BanCoMaHoaE2EE";
 import { CamNangKinhDoanh } from "./CamNangKinhDoanh";
 import { CongCoVanTamTai } from "./CongCoVanTamTai";
 import { SuVuTucThoi } from "./SuVuTucThoi";
+import { CHU_SU_VU } from "@/lib/chu/co-van-su-vu";
 import { GopVon } from "@/components/doanh-chu/GopVon";
 
 type TabKinhDoanh = "quyet_dinh" | "cam_nang" | "su_vu" | "gop_von" | "ban_co_e2ee";
@@ -58,7 +59,7 @@ export function KhungCoVanKinhDoanh() {
             tab === "su_vu" ? "border-gold bg-gold/15 text-gold" : "border-line text-fg-muted hover:text-fg",
           )}
         >
-          <Dices className="size-4" aria-hidden /> Sự vụ tức thời (Kỳ Môn · Lục Hào)
+          <Dices className="size-4" aria-hidden /> {CHU_SU_VU.tab}
         </button>
         <button
           type="button"

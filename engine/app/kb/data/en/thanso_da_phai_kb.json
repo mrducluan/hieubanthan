@@ -1,27 +1,62 @@
 {
-  "_nguon": "Stage 3.3 English overlay — 5-School Numerology Comparison (Modern Pythagorean, Balliett 1908, Westcott/Sepharial Classical, David Phillips Arrows/Pyramids, Cheiro Chaldean).",
+  "_nguon": "Stage 3.3 English overlay — five-school numerology comparison (optional, secondary).",
   "_trang_thai": "nhap_may",
+  "source_id": "thanso_da_phai",
+  "school_id": "da_phai_thanso",
   "khung": {
     "tieu_de": "Five-School Numerology Perspective Comparison",
-    "phu_de": "From the same birth date and name, each Western tradition highlights a distinct facet: Modern Pythagorean maps the Life Path, Balliett (1908) reads vibrational harmony, Westcott & Sepharial trace classical geometric-Kabbalistic roots, Phillips maps Birth Chart Arrows & Four Peaks, and Chaldean (Cheiro) weighs compound name numbers.",
-    "cau_noi_dong_phuong": "Numerology sketches core temperament and 9-year cycles from your solar birth date alone; to examine 12 specific life domains (career, property, partnerships) with birth hour and seasonal five-element structure, explore Zi Wei Dou Shu and BaZi alongside it."
+    "phu_de": "From the same birth date (and your name, if you enter it), each approach looks at a different side: the life path rhythm, the number as a musical note, the classical quality of the number, the ruling number and its peaks, and the compound number of a name. This is an extra comparison; each column is read on its own, with no combined score.",
+    "cau_noi_dong_phuong": "Numerology sketches core temperament and 9-year cycles from your solar birth date alone; to examine 12 specific life domains (career, property, partnerships) with birth hour and seasonal five-element structure, explore Zi Wei Dou Shu and BaZi alongside it.",
+    "ten_phai": {
+      "pitago_hien_dai": "Modern Pythagorean",
+      "balliett_1908": "The number as a musical note (1908)",
+      "westcott_sepharial": "Classical tradition (Westcott)",
+      "david_phillips": "Phillips (Ruling Number & Four Peaks)",
+      "chaldea_cheiro": "Chaldean (compound numbers)"
+    },
+    "lien_ket": [
+      {
+        "ten": "Explore the 12-Palace Zi Wei chart",
+        "duong": "/tu-vi"
+      },
+      {
+        "ten": "Explore the BaZi Four Pillars by birth season",
+        "duong": "/bat-tu"
+      }
+    ]
+  },
+  "mau": {
+    "pitago": "Life Path {dd}; {nam} is Personal Year {nam_cn}. {ung_dung}",
+    "balliett": "Your reduced birth number is {so}. This approach reads the number as a musical note to be learned in full, focusing on daily habits rather than predicting events.",
+    "westcott": "The classical approach reads the number {so} as a quality and a structural proportion, not as a forecast of events.",
+    "phillips": "Ruling Number {scd}; the current Peak carries number {dinh}, from age {tu} to {den}.",
+    "phillips_khong_dinh": "Ruling Number {scd}.",
+    "chaldea_ten": "Your name gives {so}; birth day {ngay} gives root {goc_ngay}.",
+    "chaldea_ngay": "Birth day {ngay} gives root {goc_ngay}. Enter your name to add the name number.",
+    "can_ho_ten": "A name is needed to compute the name number on the Chaldean letter table.",
+    "can_cu_pitago": "Pythagorean: Life Path {dd}, Personal Year {nam_cn} (counted from January 1).",
+    "can_cu_balliett": "The Philosophy of Numbers (1908): the birth number {so} read as a musical note.",
+    "can_cu_phillips": "Phillips: Ruling Number = all birth-date digits added across ({cach}).",
+    "can_cu_chaldea": "Chaldean (Cheiro, 1926): sound-based letter table, values 1-8, compound numbers 10-52 kept."
   },
   "trich_co_dien": {
-    "westcott_1911": {
-      "sach": "W. Wynn Westcott · Numbers: Their Occult Power and Mystic Virtues (1911)",
-      "nguyen_van_en": "Pythagoras, one of the greatest philosophers of ancient Europe, was the son of Mnesarchus, an engraver. He was born about the year 580 B.C.",
-      "phu_luc_en": "Many nations of antiquity made use of the letters of their alphabets as substitutes for any independent signs to typify numerical conceptions."
-    },
-    "sepharial_kabala": {
-      "sach": "Sepharial · The Kabala of Numbers (1913)",
-      "nguyen_van_en": "Figures are the means employed by us to express definite quantities. They do not express anything of quality.",
-      "phu_luc_en": "One of the most interesting forms of the kabalism of numbers is that which relates names to incidents by means of the numerical value of letters."
-    },
     "balliett_1908": {
-      "sach": "Mrs. L. Dow Balliett · The Philosophy of Numbers (1908)",
-      "nguyen_van_1": "you stand as a foundation for others to build upon. It is your mission to\nhold to Unity in all things. Let others falter, but you must remain steadfast.",
-      "nguyen_van_4": "you have passed in safety the F note and know the secrets of that musical\nvibration. What you now desire to do lies in the note of your birth path.",
-      "nguyen_van_8": "your soul knows freedom and with many stripes has tried to make\nyour brain realize it. You should stand ready to help every other soul sing his own song of life."
+      "sach": "The Philosophy of Numbers: Their Tone and Colors (1908)",
+      "theo_so": {
+        "3": "If your name digit or birth vibration is 3, to be a perfect character you must express the two preceding vibrations, 1 and 2.",
+        "4": "If 4 is your birth number, find all there is in 4 or F.",
+        "5": "If your birth vibration is 5, you are seeking the knowledge contained in it.",
+        "6": "If the digit of your name or birth vibration is 6, know the desirable thing for you to gain is rest in motion— complete rest and complete motion.",
+        "7": "As 7 is not free, it holds and feels the perfect power it cannot liberate, especially when the birth number is 7, unless it has with it a free number.",
+        "9": "If your birth vibration is 9 and your name is not so high, then have patience with yourself while you are earning this much loved free vibration."
+      },
+      "source_id": "thanso_balliett_philosophy_1908",
+      "school_id": "pythagoras_hien_dai"
+    },
+    "cheiro": {
+      "sach": "Cheiro · Cheiro's Book of Numbers (1926)",
+      "source_id": "thanso_cheiro_book_of_numbers_1926",
+      "school_id": "chaldean_cheiro"
     }
   },
   "theo_so": {

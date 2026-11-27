@@ -435,8 +435,9 @@ class DoiChieuDaPhaiThanSoInput(BaseModel):
 
 @app.post("/v1/thanso/doi-chieu-phai")
 def api_thanso_doi_chieu_phai(inp: DoiChieuDaPhaiThanSoInput) -> dict:
-    if not (1900 <= inp.ngay_sinh.year <= 2026):
-        raise HTTPException(422, detail="Năm sinh không hợp lệ.")
+    from app.kb.loi import L  # noqa: PLC0415
+    if not (1900 <= inp.ngay_sinh.year and inp.ngay_sinh <= config.hom_nay_vn()):
+        raise HTTPException(422, detail=L("chang3.ngay_sinh", "Ngày sinh cần trong khoảng từ năm 1900 đến hôm nay."))
     from app.luangiai import thanso_da_phai as tsdp  # noqa: PLC0415
     return {
         "engine_version": ENGINE_VERSION,

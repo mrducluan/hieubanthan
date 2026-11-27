@@ -1,16 +1,30 @@
 {
   "_nguon": "Stage 3.3 English overlay — 56 Minor Arcana Reversals (verbatim public-domain Waite 1910 & Mathers 1888, zero modern copyrighted text) + Golden Dawn Elemental Dignities.",
   "_trang_thai": "nhap_may",
+  "source_id": "waite_1910",
+  "school_id": "rws",
   "khung": {
     "tieu_de": "Reversed Card Depth & Elemental Dignities Across Your Spread",
     "phu_de": "A reversed card is never a fixed ill omen; it signals focus turned inward, delayed timing, or pacing ready for adjustment, while neighboring card elements strengthen or temper one another through classical Elemental Dignities.",
-    "cau_noi_menh_ly": "Tarot mirrors present mindset and situational dynamics at the moment of drawing; for 12-month timing windows and natal structure from your birth date and hour, explore Zi Wei Dou Shu and BaZi."
+    "cau_noi_menh_ly": "Tarot mirrors present mindset and situational dynamics at the moment of drawing; for 12-month timing windows and natal structure from your birth date and hour, explore Zi Wei Dou Shu and BaZi.",
+    "can_cu_waite": "Reversed meaning in Waite (1910): \"{trich}\"",
+    "can_cu_mathers": "Mathers (1888), reversed: \"{trich}\"",
+    "can_cu_pham_gia": "Book T, \"Of the Dignities\": cards of the same element strengthen each other; Fire is friendly with Air and Earth, Water with Air and Earth; Fire opposes Water, Air opposes Earth.",
+    "lien_ket": [
+      {
+        "ten": "Compare 12-Palace Zi Wei timing",
+        "duong": "/tu-vi"
+      },
+      {
+        "ten": "Compare BaZi five-element structure",
+        "duong": "/bat-tu"
+      }
+    ]
   },
   "pham_gia_chuoi": {
-    "tuong_tro": "Center card supported by friendly neighbor elements (Fire–Air or Water–Earth): its message expresses smoothly with constructive momentum.",
-    "cung_nguyen_to": "Adjacent cards share the exact same element: that element's theme dominates the spread — keep practical balance so it does not tip into excess.",
-    "doi_nghich": "Center card meets contrary elements (Fire ↔ Water or Air ↔ Earth): competing priorities pull at once; address them sequentially rather than forcing both simultaneously.",
-    "trung_tinh": "Center card pairs neutral elements (Fire–Earth or Water–Air): steady progress comes from pairing reflection with grounded execution."
+    "cung_nguyen_to": "Two neighboring cards of the same element: that quality is multiplied, both its strength and its tendency to overdo. Keep things in balance.",
+    "tuong_tro": "Two neighboring cards of friendly elements: they lend each other strength, and both messages come through clearly.",
+    "doi_nghich": "Two neighboring cards of opposing elements (Fire and Water, Air and Earth): they hold each other back, two needs pulling in different directions. Handle one thing at a time."
   },
   "la_an_phu": {
     "gay_1": {
@@ -19,9 +33,11 @@
       "trich_waite_1910_nguoc": "Fall, decadence, ruin, perdition, to perish; also a certain clouded joy.",
       "trich_mathers_1888_nguoc": "Persecution, Pursuits Voilence, Vexation, Cruelty, Tyranny",
       "chieu_xuoi_ngan": "Creation, invention, enterprise, the powers which result in these; principle, beginning, source; birth, family, origin, and in a sense the virility which is behind them; the starting point of enterprises; according to another account, money, fortune, inheritance.",
-      "chieu_nguoc_go_mo": "Reversed Ace of Wands (Wands (Fire · Initiative)) highlights a fresh seed awaiting practical readiness before full launch: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding a fresh seed awaiting practical readiness before full launch, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card speaks of a start losing its breath: early drive falling away, joy clouded over. Watch that a new effort is not dropped just because the first steps feel flat.",
+      "viec_nho_go_nut": "Write down one reason you began, then redo the single smallest step today.",
+      "cau_hoi_tu_soi": "What cooled your drive: the task itself, or your own tiredness?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_2": {
       "ten": "Two of Wands",
@@ -29,9 +45,11 @@
       "trich_waite_1910_nguoc": "Surprise, wonder, enchantment, emotion, trouble, fear.",
       "trich_mathers_1888_nguoc": "Surprise, Astonishment, Event, Extraordinary Occurrence",
       "chieu_xuoi_ngan": "Between the alternative readings there is no marriage possible; on the one hand, riches, fortune, magnificence; on the other, physical suffering, disease, chagrin, sadness, mortification. The design gives one suggestion; here is a lord overlooking his dominion and alternately contemplating a globe; it looks like the malady, the mortification, the sadness of Alexander amidst the grandeur of this world's wealth.",
-      "chieu_nguoc_go_mo": "Reversed Two of Wands (Wands (Fire · Initiative)) highlights a two-way weighing phase that benefits from unhurried observation: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding a two-way weighing phase that benefits from unhurried observation, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is a surprise that shakes the plan: wonder, strong feeling and some fear at once. Let the emotion settle before choosing a direction.",
+      "viec_nho_go_nut": "List three things that changed from the old plan and one that did not.",
+      "cau_hoi_tu_soi": "Is this worry about what happened, or about what you imagine might happen?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_3": {
       "ten": "Three of Wands",
@@ -39,9 +57,11 @@
       "trich_waite_1910_nguoc": "The end of troubles, suspension or cessation of adversity, toil and disappointment.",
       "trich_mathers_1888_nguoc": "Hope, Desire, Attempt, Wish",
       "chieu_xuoi_ngan": "He symbolizes established strength, enterprise, effort, trade, commerce, discovery; those are his ships, bearing his merchandise, which are sailing over the sea. The card also signifies able co-operation in business, as if the successful merchant prince were looking from his side towards yours with a view to help you.",
-      "chieu_nguoc_go_mo": "Reversed Three of Wands (Wands (Fire · Initiative)) highlights early collaboration or role alignment needing clearer expectations: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding early collaboration or role alignment needing clearer expectations, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card marks a hard stretch closing: trouble, toil and disappointment easing off. Rest and draw the lesson before rushing into the next push.",
+      "viec_nho_go_nut": "Spend 15 minutes noting what this stretch taught you, then give yourself a real rest.",
+      "cau_hoi_tu_soi": "As this load lightens, where do you want to spend the strength you saved?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_4": {
       "ten": "Four of Wands",
@@ -49,9 +69,11 @@
       "trich_waite_1910_nguoc": "The meaning remains unaltered; it is prosperity, increase, felicity, beauty, embellishment.",
       "trich_mathers_1888_nguoc": "Prosperity, Success, Happiness, Advantage",
       "chieu_xuoi_ngan": "They are for once almost on the surface--country life, haven of refuge, a species of domestic harvest-home, repose, concord, harmony, prosperity, peace, and the perfected work of these.",
-      "chieu_nguoc_go_mo": "Reversed Four of Wands (Wands (Fire · Initiative)) highlights re-examining comfort zones or reinforcing foundational stability: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding re-examining comfort zones or reinforcing foundational stability, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "The old text says this card keeps its good meaning when reversed: prosperity, increase, happiness, beauty. The joy may simply arrive more quietly, so share it on purpose.",
+      "viec_nho_go_nut": "Invite someone close to celebrate one small thing you finished this week.",
+      "cau_hoi_tu_soi": "Have you really let yourself enjoy what you managed?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_5": {
       "ten": "Five of Wands",
@@ -59,9 +81,11 @@
       "trich_waite_1910_nguoc": "Litigation, disputes, trickery, contradiction.",
       "trich_mathers_1888_nguoc": "Legal proceedings, Judgment, Law, Lawyer, Tribunal",
       "chieu_xuoi_ngan": "Imitation, as, for example, sham fight, but also the strenuous competition and struggle of the search after riches and fortune. In this sense it connects with the battle of life. Hence some attributions say that it is a card of gold, gain, opulence.",
-      "chieu_nguoc_go_mo": "Reversed Five of Wands (Wands (Fire · Initiative)) highlights recent friction beginning to settle so constructive lessons can emerge: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding recent friction beginning to settle so constructive lessons can emerge, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card turns rivalry into dispute: arguments, contradiction, sometimes tricks. Keep agreements in writing and argue from facts, not tone.",
+      "viec_nho_go_nut": "Gather the papers and messages about the current dispute into one folder.",
+      "cau_hoi_tu_soi": "In this argument, what do you actually need to keep?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_6": {
       "ten": "Six of Wands",
@@ -69,9 +93,11 @@
       "trich_waite_1910_nguoc": "Apprehension, fear, as of a victorious enemy at the gate; treachery, disloyalty, as of gates being opened to the enemy; also indefinite delay.",
       "trich_mathers_1888_nguoc": "Infidelity, Treachery, Disloyalty, Perfidy",
       "chieu_xuoi_ngan": "The card has been so designed that it can cover several significations; on the surface, it is a victor triumphing, but it is also great news, such as might be carried in state by the King's courier; it is expectation crowned with its own desire, the crown of hope, and so forth.",
-      "chieu_nguoc_go_mo": "Reversed Six of Wands (Wands (Fire · Initiative)) highlights re-balancing reciprocity or pacing a transition more evenly: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding re-balancing reciprocity or pacing a transition more evenly, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is worry that a rival is gaining, that someone inside may not keep faith, and that things are put off without a date. Check who holds the key information and ask for a clear deadline.",
+      "viec_nho_go_nut": "Ask the person in charge for one concrete date for the stalled matter.",
+      "cau_hoi_tu_soi": "Are you worried because of real signs, or because the wait has been long?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_7": {
       "ten": "Seven of Wands",
@@ -79,9 +105,11 @@
       "trich_waite_1910_nguoc": "Perplexity, embarrassments, anxiety. It is also a caution against indecision.",
       "trich_mathers_1888_nguoc": "Indecision, Doubt, Hesitation, Embarrassment, Anxiety",
       "chieu_xuoi_ngan": "It is a card of valor, for, on the surface, six are attacking one, who has, however, the vantage position. On the intellectual plane, it signifies discussion, wordy strife; in business--negotiations, war of trade, barter, competition. It is further a card of success, for the combatant is on the top and his enemies may be unable to reach him.",
-      "chieu_nguoc_go_mo": "Reversed Seven of Wands (Wands (Fire · Initiative)) highlights reviewing strategy patiently rather than reacting to short-term pressure: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding reviewing strategy patiently rather than reacting to short-term pressure, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is perplexity, awkwardness and anxiety, and the text adds a clear warning against indecision. Pick one clear position and hold it instead of defending every side.",
+      "viec_nho_go_nut": "Write down one point you will no longer give up and tell the people involved.",
+      "cau_hoi_tu_soi": "Are you hesitating for lack of information, or for fear of pushback?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_8": {
       "ten": "Eight of Wands",
@@ -89,9 +117,11 @@
       "trich_waite_1910_nguoc": "Arrows of jealousy, internal dispute, stingings of conscience, quarrels; and domestic disputes for persons who are married.",
       "trich_mathers_1888_nguoc": "Quarrels, Intestine disputes, Discord",
       "chieu_xuoi_ngan": "Activity in undertakings, the path of such activity, swiftness, as that of an express messenger; great haste, great hope, speed towards an end which promises assured felicity; generally, that which is on the move; also the arrows of love.",
-      "chieu_nguoc_go_mo": "Reversed Eight of Wands (Wands (Fire · Initiative)) highlights clearing repetitive workflow bottlenecks to restore steady motion: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding clearing repetitive workflow bottlenecks to restore steady motion, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card shows arrows of jealousy, quarrels at home or in the group, and the sting of your own conscience. Talk early and briefly, before a small issue grows into a big grudge.",
+      "viec_nho_go_nut": "Pick one simmering issue and talk it through with the other person for 10 minutes, leaving old grievances out.",
+      "cau_hoi_tu_soi": "What is nagging at your conscience that you have not said out loud?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_9": {
       "ten": "Nine of Wands",
@@ -99,9 +129,11 @@
       "trich_waite_1910_nguoc": "Obstacles, adversity, calamity.",
       "trich_mathers_1888_nguoc": "Obstacles, Crosses, Delay, Displeasure",
       "chieu_xuoi_ngan": "The card signifies strength in opposition. If attacked, the person will meet an onslaught boldly; and his build shows that he may prove a formidable antagonist. With this main significance there are all its possible adjuncts--delay, suspension, adjournment.",
-      "chieu_nguoc_go_mo": "Reversed Nine of Wands (Wands (Fire · Initiative)) highlights late-stage endurance calling for rest and smart delegation: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding late-stage endurance calling for rest and smart delegation, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is obstacles and adversity piling up when your strength is already thin. Do not carry it all alone; ask for help and save your energy for the main task.",
+      "viec_nho_go_nut": "Ask someone to take one specific task off your hands this week.",
+      "cau_hoi_tu_soi": "Which task are you holding that someone else could actually do?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_10": {
       "ten": "Ten of Wands",
@@ -109,9 +141,11 @@
       "trich_waite_1910_nguoc": "Contrarieties, difficulties, intrigues, and their analogies.",
       "trich_mathers_1888_nguoc": "Treachery, Subterfuge, Duplicity, Bar",
       "chieu_xuoi_ngan": "A card of many significances, and some of the readings cannot be harmonized. I set aside that which connects it with honor and good faith. The chief meaning is oppression simply, but it is also fortune, gain, any kind of success, and then it is the oppression of these things. It is also a card of false-seeming, disguise, perfidy. The place which the figure is approaching may suffer from the rods that he carries. Success is stultified if the Nine of Swords follows, and if it is a question of a lawsuit, there will be certain loss.",
-      "chieu_nguoc_go_mo": "Reversed Ten of Wands (Wands (Fire · Initiative)) highlights accumulated load signaling it is time to share or trim excess obligations: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding accumulated load signaling it is time to share or trim excess obligations, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is a heavy load meeting more setbacks, difficulties and behind-the-scenes intrigue. Make clear who is responsible for what before taking on more.",
+      "viec_nho_go_nut": "List what you are carrying and mark one task to hand back to the right person.",
+      "cau_hoi_tu_soi": "Did you take this load because it was needed, or because saying no felt awkward?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_tieu_dong": {
       "ten": "Page of Wands",
@@ -119,9 +153,11 @@
       "trich_waite_1910_nguoc": "Anecdotes, announcements, evil news. Also indecision and the instability which accompanies it.",
       "trich_mathers_1888_nguoc": "Ill News, Displeasure, Chagrin, Worry",
       "chieu_xuoi_ngan": "Dark young man, faithful, a lover, an envoy, a postman. Beside a man, he will bear favorable testimony concerning him. A dangerous rival, if followed by the Page of Cups. Has the chief qualities of his suit. He may signify family intelligence.",
-      "chieu_nguoc_go_mo": "Reversed Page of Wands (Wands (Fire · Initiative)) highlights new messages or early learning requiring fact-checking before action: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding new messages or early learning requiring fact-checking before action, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card brings gossip, announcements, sometimes unwelcome news, along with wavering and instability. Check news at its source before you react.",
+      "viec_nho_go_nut": "Before passing on any news today, check with the person it first came from.",
+      "cau_hoi_tu_soi": "Are you shaken by facts, or by a story told second-hand?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_hiep_si": {
       "ten": "Knight of Wands",
@@ -129,9 +165,11 @@
       "trich_waite_1910_nguoc": "Rupture, division, interruption, discord.",
       "trich_mathers_1888_nguoc": "Rupture, Discord, Quarrel",
       "chieu_xuoi_ngan": "Departure, absence, flight, emigration. A dark young man, friendly. Change of residence.",
-      "chieu_nguoc_go_mo": "Reversed Knight of Wands (Wands (Fire · Initiative)) highlights forward momentum needing measured pacing so enthusiasm stays grounded: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding forward momentum needing measured pacing so enthusiasm stays grounded, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is a break, a split, an interruption and discord. Do not walk off in the heat of the moment; if you must pause, pause with notice.",
+      "viec_nho_go_nut": "If you have to stop something, send the people involved a short note saying when you will return to it.",
+      "cau_hoi_tu_soi": "Do you want to leave because it truly does not fit, or because you are annoyed?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_hoang_hau": {
       "ten": "Queen of Wands",
@@ -139,9 +177,11 @@
       "trich_waite_1910_nguoc": "Good, economical, obliging, serviceable. Signifies also--but in certain positions and in the neighborhood of other cards tending in such directions--opposition, jealousy, even deceit and infidelity.",
       "trich_mathers_1888_nguoc": "A good a virtuous Woman, but strict and economical, Obstacles, Resistance, Opposition",
       "chieu_xuoi_ngan": "A dark woman, country-woman, friendly, chaste, loving, honorable. If the card beside her signifies a man, she is well disposed towards him; if a woman, she is interested in the Querent. Also, love of money, or a certain success in business.",
-      "chieu_nguoc_go_mo": "Reversed Queen of Wands (Wands (Fire · Initiative)) highlights replenishing inner steadiness before tending to everyone else's requests: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding replenishing inner steadiness before tending to everyone else's requests, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card still shows someone good, thrifty and willing to help; only beside heavier cards does the text add opposition, jealousy or broken faith. Notice whether your generosity is being taken for granted.",
+      "viec_nho_go_nut": "Keep one evening this week for yourself, with no favors for anyone.",
+      "cau_hoi_tu_soi": "Do you help people because you enjoy it, or because you fear looking unkind?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "gay_vua": {
       "ten": "King of Wands",
@@ -149,9 +189,11 @@
       "trich_waite_1910_nguoc": "Good, but severe; austere, yet tolerant.",
       "trich_mathers_1888_nguoc": "A naturally good but severe man, Counsel, Advice, Deliberation",
       "chieu_xuoi_ngan": "Dark man, friendly, countryman, generally married, honest and conscientious. The card always signifies honesty, and may mean news concerning an unexpected heritage to fall in before very long.",
-      "chieu_nguoc_go_mo": "Reversed King of Wands (Wands (Fire · Initiative)) highlights executive judgment benefiting from flexible listening rather than rigid control: creative momentum is either inwardly delayed or scattered across too many fronts.",
-      "viec_nho_go_nut": "Grounding step: drop one non-essential task and complete one concrete step within 48 hours.",
-      "cau_hoi_tu_soi": "Regarding executive judgment benefiting from flexible listening rather than rigid control, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is a good but severe person, austere yet tolerant. Check whether your strictness makes others hesitate to tell you the truth.",
+      "viec_nho_go_nut": "Ask a colleague what they have wanted to tell you but have held back.",
+      "cau_hoi_tu_soi": "Where could you be softer without giving up your principles?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_1": {
       "ten": "Ace of Cups",
@@ -159,9 +201,11 @@
       "trich_waite_1910_nguoc": "House of the false heart, mutation, instability, revolution.",
       "trich_mathers_1888_nguoc": "Change, Novelty, Metamorphosis, Inconstancy",
       "chieu_xuoi_ngan": "House of the true heart, joy, content, abode, nourishment, abundance, fertility; Holy Table, felicity hereof.",
-      "chieu_nguoc_go_mo": "Reversed Ace of Cups (Cups (Water · Emotion)) highlights a fresh seed awaiting practical readiness before full launch: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding a fresh seed awaiting practical readiness before full launch, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is a heart that is not fully sincere, feelings that shift and waver. Tell apart what you truly feel from what you think you should feel.",
+      "viec_nho_go_nut": "Write three lines about how you really feel today, without polishing them.",
+      "cau_hoi_tu_soi": "Is there something you are showing that your heart does not quite mean?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_2": {
       "ten": "Two of Cups",
@@ -169,9 +213,11 @@
       "trich_waite_1910_nguoc": "Passion.",
       "trich_mathers_1888_nguoc": "Crossed desires, Obstacles, Opposition, Hindrance",
       "chieu_xuoi_ngan": "Love, passion, friendship, affinity, union, concord, sympathy, the inter-relation of the sexes, and--as a suggestion apart from all offices of divination--that desire which is not in Nature, but by which Nature is sanctified.",
-      "chieu_nguoc_go_mo": "Reversed Two of Cups (Cups (Water · Emotion)) highlights a two-way weighing phase that benefits from unhurried observation: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding a two-way weighing phase that benefits from unhurried observation, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "The text gives this card reversed as passion: feeling running ahead of reason. Keep a steady pace so attraction leaves room for real understanding.",
+      "viec_nho_go_nut": "Before any decision made in the heat of feeling, sleep on it one night.",
+      "cau_hoi_tu_soi": "Are you drawn to this person, or to the feeling of being swept away?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_3": {
       "ten": "Three of Cups",
@@ -179,9 +225,11 @@
       "trich_waite_1910_nguoc": "Expedition, dispatch, achievement, end. It signifies also the side of excess in physical enjoyment, and the pleasures of the senses.",
       "trich_mathers_1888_nguoc": "Expedition of business, Quickness, Celerity, Vigilance",
       "chieu_xuoi_ngan": "The conclusion of any matter in plenty, perfection and merriment; happy issue, victory, fulfilment, solace, healing.",
-      "chieu_nguoc_go_mo": "Reversed Three of Cups (Cups (Water · Emotion)) highlights early collaboration or role alignment needing clearer expectations: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding early collaboration or role alignment needing clearer expectations, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is things done quickly and brought to an end; it is also the side of overdoing food, drink and pleasure. Keep moderation when you celebrate.",
+      "viec_nho_go_nut": "Set limits for your next night out in advance: what time you leave, how much you drink.",
+      "cau_hoi_tu_soi": "Which pleasures leave you stronger, and which leave you drained afterward?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_4": {
       "ten": "Four of Cups",
@@ -189,9 +237,11 @@
       "trich_waite_1910_nguoc": "Novelty, presage, new instruction, new relations.",
       "trich_mathers_1888_nguoc": "New Acquaintance, Conjecture, Sign, Presentiment",
       "chieu_xuoi_ngan": "Weariness, disgust, aversion, imaginary vexations, as if the wine of this world had caused satiety only; another wine, as if a fairy gift, is now offered the wastrel, but he sees no consolation therein. This is also a card of blended pleasure.",
-      "chieu_nguoc_go_mo": "Reversed Four of Cups (Cups (Water · Emotion)) highlights re-examining comfort zones or reinforcing foundational stability: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding re-examining comfort zones or reinforcing foundational stability, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is something new arriving: a hint, a new lesson, new people. Stay open instead of refusing out of habit.",
+      "viec_nho_go_nut": "Accept one invitation or try one new thing you were about to brush aside.",
+      "cau_hoi_tu_soi": "When did you last say yes to something unfamiliar?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_5": {
       "ten": "Five of Cups",
@@ -199,9 +249,11 @@
       "trich_waite_1910_nguoc": "News, alliances, affinity, consanguinity, ancestry, return, false projects.",
       "trich_mathers_1888_nguoc": "Arrival, Return, News, Surprise, False projects",
       "chieu_xuoi_ngan": "It is a card of loss, but something remains over; three have been taken, but two are left; it is a card of inheritance, patrimony, transmission, but not corresponding to expectations; with some interpreters it is a card of marriage, but not without bitterness or frustration.",
-      "chieu_nguoc_go_mo": "Reversed Five of Cups (Cups (Water · Emotion)) highlights recent friction beginning to settle so constructive lessons can emerge: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding recent friction beginning to settle so constructive lessons can emerge, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is news, renewed ties, family and a return; it also warns of plans that are not what they seem. Reach out to your people, but look hard at plans that sound too good.",
+      "viec_nho_go_nut": "Call a relative or old friend you have not spoken to in a long time.",
+      "cau_hoi_tu_soi": "Which old connection would you like to renew?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_6": {
       "ten": "Six of Cups",
@@ -209,9 +261,11 @@
       "trich_waite_1910_nguoc": "The future, renewal, that which will come to pass presently.",
       "trich_mathers_1888_nguoc": "The Future, that which is to come, Shortly, Soon",
       "chieu_xuoi_ngan": "A card of the past and of memories, looking back, as--for example--on childhood; happiness, enjoyment, but coming rather from the past; things that have vanished. Another reading reverses this, giving new relations, new knowledge, new environment, and then the children are disporting in an unfamiliar precinct.",
-      "chieu_nguoc_go_mo": "Reversed Six of Cups (Cups (Water · Emotion)) highlights re-balancing reciprocity or pacing a transition more evenly: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding re-balancing reciprocity or pacing a transition more evenly, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card faces forward: renewal and what is about to happen. Loosen your hold on old memories to make room for what is coming.",
+      "viec_nho_go_nut": "Put away one keepsake from the past that you keep taking out to look at.",
+      "cau_hoi_tu_soi": "What is coming up that you have not yet prepared for?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_7": {
       "ten": "Seven of Cups",
@@ -219,9 +273,11 @@
       "trich_waite_1910_nguoc": "Desire, will, determination, project.",
       "trich_mathers_1888_nguoc": "Plan, Design, Resolution, Decision",
       "chieu_xuoi_ngan": "Fairy favors, images of reflection, sentiment, imagination, things seen in the glass of contemplation; some attainment in these degrees, but nothing permanent or substantial is suggested.",
-      "chieu_nguoc_go_mo": "Reversed Seven of Cups (Cups (Water · Emotion)) highlights reviewing strategy patiently rather than reacting to short-term pressure: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding reviewing strategy patiently rather than reacting to short-term pressure, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is daydreams giving way to desire, will, determination and a clear project. Choose one thing and commit to it.",
+      "viec_nho_go_nut": "Pick one of your current ideas and write down its first three steps.",
+      "cau_hoi_tu_soi": "Of everything you dream about, which one are you ready to actually do?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_8": {
       "ten": "Eight of Cups",
@@ -229,9 +285,11 @@
       "trich_waite_1910_nguoc": "Great joy, happiness, feasting.",
       "trich_mathers_1888_nguoc": "Gaiety, Feasting, Joy, Pleasure",
       "chieu_xuoi_ngan": "The card speaks for itself on the surface, but other readings are entirely antithetical--giving joy, mildness, timidity, honor, modesty. In practice, it is usually found that the card shows the decline of a matter, or that a matter which has been thought to be important is really of slight consequence--either for good or evil.",
-      "chieu_nguoc_go_mo": "Reversed Eight of Cups (Cups (Water · Emotion)) highlights clearing repetitive workflow bottlenecks to restore steady motion: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding clearing repetitive workflow bottlenecks to restore steady motion, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "The text gives this card reversed as great joy, happiness and feasting. Enjoy it, while remembering what you once wanted to leave behind.",
+      "viec_nho_go_nut": "Note one happy moment from this week and why it felt good.",
+      "cau_hoi_tu_soi": "Is this joy keeping you in a place you had wanted to move on from?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_9": {
       "ten": "Nine of Cups",
@@ -239,9 +297,11 @@
       "trich_waite_1910_nguoc": "Truth, loyalty, liberty; but the readings vary and include mistakes, imperfections, etc.",
       "trich_mathers_1888_nguoc": "Faults, Errors, Mistakes, Imperfections",
       "chieu_xuoi_ngan": "Concord, contentment, physical _bien-être_; also victory, success, advantage; satisfaction for the Querent or person for whom the consultation is made.",
-      "chieu_nguoc_go_mo": "Reversed Nine of Cups (Cups (Water · Emotion)) highlights late-stage endurance calling for rest and smart delegation: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding late-stage endurance calling for rest and smart delegation, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card speaks of truth, loyalty and freedom; other readings give mistakes and flaws. Look honestly at what is not yet right instead of settling too soon.",
+      "viec_nho_go_nut": "Recheck one task you consider finished and find one gap.",
+      "cau_hoi_tu_soi": "Are you satisfied too early?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_10": {
       "ten": "Ten of Cups",
@@ -249,9 +309,11 @@
       "trich_waite_1910_nguoc": "Repose of the false heart, indignation, violence.",
       "trich_mathers_1888_nguoc": "Combat, Strife, Opposition, Differences, Dispute",
       "chieu_xuoi_ngan": "Contentment, repose of the entire heart; the perfection of that state; also perfection of human love and friendship; if with several picture-cards, a person who is taking charge of the Querent's interests; also the town, village or country inhabited by the Querent.",
-      "chieu_nguoc_go_mo": "Reversed Ten of Cups (Cups (Water · Emotion)) highlights accumulated load signaling it is time to share or trim excess obligations: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding accumulated load signaling it is time to share or trim excess obligations, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is outward calm covering an insincere heart, with resentment and tension at home. Raise what hurts you early; if there is any violence, put safety first and reach out for help.",
+      "viec_nho_go_nut": "Set a calm time to talk with someone at home about one thing that is bothering you.",
+      "cau_hoi_tu_soi": "What is keeping the peace on the outside costing you inside?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_tieu_dong": {
       "ten": "Page of Cups",
@@ -259,9 +321,11 @@
       "trich_waite_1910_nguoc": "Taste, inclination, attachment, seduction, deception, artifice.",
       "trich_mathers_1888_nguoc": "A Flatterer, Deception, Artifice",
       "chieu_xuoi_ngan": "Fair young man, one impelled to render service and with whom the Querent will be connected; a studious youth; news, message; application, reflection, meditation; also these things directed to business.",
-      "chieu_nguoc_go_mo": "Reversed Page of Cups (Cups (Water · Emotion)) highlights new messages or early learning requiring fact-checking before action: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding new messages or early learning requiring fact-checking before action, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is taste, attachment and charm, but also deception and artifice. Watch for sweet words that are not matched by deeds.",
+      "viec_nho_go_nut": "For one recent promise, ask: what exactly will be done, and when?",
+      "cau_hoi_tu_soi": "Are you drawn by the person, or by the words?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_hiep_si": {
       "ten": "Knight of Cups",
@@ -269,9 +333,11 @@
       "trich_waite_1910_nguoc": "Trickery, artifice, subtlety, swindling, duplicity, fraud.",
       "trich_mathers_1888_nguoc": "Duplicity, Abuse of Confidence, Fraud, Cunning",
       "chieu_xuoi_ngan": "Arrival, approach--sometimes that of a messenger; advances, proposition, demeanor, invitation, incitement.",
-      "chieu_nguoc_go_mo": "Reversed Knight of Cups (Cups (Water · Emotion)) highlights forward momentum needing measured pacing so enthusiasm stays grounded: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding forward momentum needing measured pacing so enthusiasm stays grounded, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is trickery, subtlety, swindling and double-dealing. Do not hand over money or deep trust before you have checked.",
+      "viec_nho_go_nut": "Before sending anyone money, confirm through a second channel.",
+      "cau_hoi_tu_soi": "Which recent offer sounded a little too good?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_hoang_hau": {
       "ten": "Queen of Cups",
@@ -279,9 +345,11 @@
       "trich_waite_1910_nguoc": "The accounts vary; good woman; otherwise, distinguished woman but one not to be trusted; perverse woman; vice, dishonor, depravity.",
       "trich_mathers_1888_nguoc": "A Woman in good position, but intermeddling, and to be distrusted; Success, but with some attendant trouble",
       "chieu_xuoi_ngan": "Good, fair woman; honest, devoted woman, who will do service to the Querent; loving intelligence, and hence the gift of vision; success, happiness, pleasure; also wisdom, virtue; a perfect spouse and a good mother.",
-      "chieu_nguoc_go_mo": "Reversed Queen of Cups (Cups (Water · Emotion)) highlights replenishing inner steadiness before tending to everyone else's requests: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding replenishing inner steadiness before tending to everyone else's requests, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "The accounts of this card reversed vary: a good person, or someone of standing who should not be fully trusted yet. Base trust on what people do, not how they look.",
+      "viec_nho_go_nut": "With a new partner, start with a small task before handing over a big one.",
+      "cau_hoi_tu_soi": "Do you trust this person because you have seen them deliver, or because they seem trustworthy?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "coc_vua": {
       "ten": "King of Cups",
@@ -289,9 +357,11 @@
       "trich_waite_1910_nguoc": "Dishonest, double-dealing man; roguery, exaction, injustice, vice, scandal, pillage, considerable loss.",
       "trich_mathers_1888_nguoc": "A Man of good position, but shifty in his Dealings, Distrust, Doubt, Suspicion",
       "chieu_xuoi_ngan": "Fair man, man of business, law, or divinity; responsible, disposed to oblige the Querent; also equity, art and science, including those who profess science, law and art; creative intelligence.",
-      "chieu_nguoc_go_mo": "Reversed King of Cups (Cups (Water · Emotion)) highlights executive judgment benefiting from flexible listening rather than rigid control: feelings are held inward self-protectively or unspoken expectations need gentle airing.",
-      "viec_nho_go_nut": "Grounding step: take 15 quiet minutes to name what you genuinely need and share it calmly.",
-      "cau_hoi_tu_soi": "Regarding executive judgment benefiting from flexible listening rather than rigid control, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is a double-dealing person, crooked business, injustice, scandal and the risk of a sizable loss. Check the terms and who stands behind any large deal.",
+      "viec_nho_go_nut": "Ask someone who knows the field to reread a contract or large payment before you sign.",
+      "cau_hoi_tu_soi": "Is there a deal you are rushing out of politeness to someone?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_1": {
       "ten": "Ace of Swords",
@@ -299,9 +369,11 @@
       "trich_waite_1910_nguoc": "The same, but the results are disastrous; another account says--conception--childbirth, augmentation, multiplicity.",
       "trich_mathers_1888_nguoc": "Embarrassment, Foolish and Hopeless Love, Obstacle, Hindrance",
       "chieu_xuoi_ngan": "Triumph, the excessive degree in everything, conquest, triumph of force. It is a card of great force, in love as well as in hatred. The crown may carry a much higher significance than comes usually within the sphere of fortune-telling.",
-      "chieu_nguoc_go_mo": "Reversed Ace of Swords (Swords (Air · Clarity)) highlights a fresh seed awaiting practical readiness before full launch: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding a fresh seed awaiting practical readiness before full launch, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "The text says this card reversed has the same force as upright but pushed too far, so the results go wrong. Use firm words and decisions only as much as needed.",
+      "viec_nho_go_nut": "Before sending a sharp message, wait 30 minutes and reread it.",
+      "cau_hoi_tu_soi": "Do you need to win, or do you need the problem solved?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_2": {
       "ten": "Two of Swords",
@@ -309,9 +381,11 @@
       "trich_waite_1910_nguoc": "Imposture, falsehood, duplicity, disloyalty.",
       "trich_mathers_1888_nguoc": "False Friends, Treachery, Lies",
       "chieu_xuoi_ngan": "Conformity and the equipoise which it suggests, courage, friendship, concord in a state of arms; another reading gives tenderness, affection, intimacy. The suggestion of harmony and other favorable readings must be considered in a qualified manner, as Swords generally are not symbolical of beneficent forces in human affairs.",
-      "chieu_nguoc_go_mo": "Reversed Two of Swords (Swords (Air · Clarity)) highlights a two-way weighing phase that benefits from unhurried observation: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding a two-way weighing phase that benefits from unhurried observation, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is imposture, falsehood, duplicity and disloyalty. Stop looking away and check the facts against papers and messages.",
+      "viec_nho_go_nut": "Verify one important piece of information against a second source.",
+      "cau_hoi_tu_soi": "Which truth are you avoiding looking at?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_3": {
       "ten": "Three of Swords",
@@ -319,9 +393,11 @@
       "trich_waite_1910_nguoc": "Mental alienation, error, loss, distraction, disorder, confusion.",
       "trich_mathers_1888_nguoc": "Error, Confusion, Misrule, Disorder",
       "chieu_xuoi_ngan": "Removal, absence, delay, division, rupture, dispersion, and all that the design signifies naturally, being too simple and obvious to call for specific enumeration.",
-      "chieu_nguoc_go_mo": "Reversed Three of Swords (Swords (Air · Clarity)) highlights early collaboration or role alignment needing clearer expectations: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding early collaboration or role alignment needing clearer expectations, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is a troubled mind, error, loss, distraction and confusion. Cut back, sleep enough and find someone to talk to; if it lasts, see a professional.",
+      "viec_nho_go_nut": "Write everything swirling in your head onto paper, then pick one thing to do first.",
+      "cau_hoi_tu_soi": "Which sadness have you not yet allowed yourself to name?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_4": {
       "ten": "Four of Swords",
@@ -329,9 +405,11 @@
       "trich_waite_1910_nguoc": "Wise administration, circumspection, economy, avarice, precaution, testament.",
       "trich_mathers_1888_nguoc": "Economy, Precaution, Regulation of Expenditure",
       "chieu_xuoi_ngan": "Vigilance, retreat, solitude, hermit's repose, exile, tomb and coffin. It is these last that have suggested the design.",
-      "chieu_nguoc_go_mo": "Reversed Four of Swords (Swords (Air · Clarity)) highlights re-examining comfort zones or reinforcing foundational stability: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding re-examining comfort zones or reinforcing foundational stability, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is wise management, caution and thrift, sometimes tipping into stinginess; it is also a time to put papers in order. Be careful without boxing yourself in.",
+      "viec_nho_go_nut": "Put your important papers (insurance, records, contracts) in one easy-to-find place.",
+      "cau_hoi_tu_soi": "Is your caution keeping you safe, or keeping you stuck?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_5": {
       "ten": "Five of Swords",
@@ -339,9 +417,11 @@
       "trich_waite_1910_nguoc": "The same; burial and obsequies.",
       "trich_mathers_1888_nguoc": "Losses Trouble (same signification, whether reversed or not.)",
       "chieu_xuoi_ngan": "Degradation, destruction, revocation, infamy, dishonor, loss, with the variants and analogues of these.",
-      "chieu_nguoc_go_mo": "Reversed Five of Swords (Swords (Air · Clarity)) highlights recent friction beginning to settle so constructive lessons can emerge: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding recent friction beginning to settle so constructive lessons can emerge, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "The text says this card reversed keeps its upright sense: loss and setback after a contest, and the closing of a chapter. Let go of what is over rather than fighting on just to get even.",
+      "viec_nho_go_nut": "Close an old argument: send one short closing message and leave it there.",
+      "cau_hoi_tu_soi": "What is the cost of insisting on winning this time?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_6": {
       "ten": "Six of Swords",
@@ -349,9 +429,11 @@
       "trich_waite_1910_nguoc": "Declaration, confession, publicity; one account says that it is a proposal of love.",
       "trich_mathers_1888_nguoc": "Declaration, Love proposed, Revelation, Surprise",
       "chieu_xuoi_ngan": "Journey by water, route, way, envoy, commissionary, expedient.",
-      "chieu_nguoc_go_mo": "Reversed Six of Swords (Swords (Air · Clarity)) highlights re-balancing reciprocity or pacing a transition more evenly: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding re-balancing reciprocity or pacing a transition more evenly, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is when something hidden comes out: a declaration, a confession, publicity, sometimes a proposal of love. Choose the moment and the way so the truth can be received.",
+      "viec_nho_go_nut": "Tell the right person, in private, one thing you have kept to yourself for a long time.",
+      "cau_hoi_tu_soi": "What do you want to say that you are still holding back?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_7": {
       "ten": "Seven of Swords",
@@ -359,9 +441,11 @@
       "trich_waite_1910_nguoc": "Good advice, counsel, instruction, slander, babbling.",
       "trich_mathers_1888_nguoc": "Wise Advice, Good Counsel, Wisdom, Prudence, Circumspection",
       "chieu_xuoi_ngan": "Design, attempt, wish, hope, confidence; also quarrelling, a plan that may fail, annoyance. The design is uncertain in its import, because the significations are widely at variance with each other.",
-      "chieu_nguoc_go_mo": "Reversed Seven of Swords (Swords (Air · Clarity)) highlights reviewing strategy patiently rather than reacting to short-term pressure: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding reviewing strategy patiently rather than reacting to short-term pressure, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is good advice and instruction, but also slander and idle talk. Listen to people who know the work, and stay quiet about what is unclear.",
+      "viec_nho_go_nut": "Ask someone experienced for their view on what you are planning.",
+      "cau_hoi_tu_soi": "Are you hearing advice, or just hearing gossip?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_8": {
       "ten": "Eight of Swords",
@@ -369,9 +453,11 @@
       "trich_waite_1910_nguoc": "Disquiet, difficulty, opposition, accident, treachery; what is unforeseen; fatality.",
       "trich_mathers_1888_nguoc": "Treachery in the Past, Event, Accident, Remarkable Incident",
       "chieu_xuoi_ngan": "Bad news, violent chagrin, crisis, censure, power in trammels, conflict, calumny; also sickness.",
-      "chieu_nguoc_go_mo": "Reversed Eight of Swords (Swords (Air · Clarity)) highlights clearing repetitive workflow bottlenecks to restore steady motion: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding clearing repetitive workflow bottlenecks to restore steady motion, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is unease, difficulty, opposition and the unforeseen. Take care when travelling and keep a backup plan ready.",
+      "viec_nho_go_nut": "Make a plan B for your most important task this week.",
+      "cau_hoi_tu_soi": "What have you not accounted for that you could prepare for now?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_9": {
       "ten": "Nine of Swords",
@@ -379,9 +465,11 @@
       "trich_waite_1910_nguoc": "Imprisonment, suspicion, doubt, reasonable fear, shame.",
       "trich_mathers_1888_nguoc": "Wise distrust, Suspicion, Fear, Doubt, Shady character",
       "chieu_xuoi_ngan": "Death, failure, miscarriage, delay, deception, disappointment, despair.",
-      "chieu_nguoc_go_mo": "Reversed Nine of Swords (Swords (Air · Clarity)) highlights late-stage endurance calling for rest and smart delegation: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding late-stage endurance calling for rest and smart delegation, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is feeling confined, suspicion, doubt, a fear with real grounds, and shame. Separate the grounded fear from the one that grows at night; be careful with papers and legal matters.",
+      "viec_nho_go_nut": "Write down your biggest worry and one concrete step that reduces it.",
+      "cau_hoi_tu_soi": "Which part of this fear is real, and which part did the late night add?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_10": {
       "ten": "Ten of Swords",
@@ -389,9 +477,11 @@
       "trich_waite_1910_nguoc": "Advantage, profit, success, favor, but none of these are permanent; also power and authority.",
       "trich_mathers_1888_nguoc": "Passing Success, Momentary Advantage",
       "chieu_xuoi_ngan": "Whatsoever is intimated by the design; also pain, affliction, tears, sadness, desolation. It is not especially a card of violent death.",
-      "chieu_nguoc_go_mo": "Reversed Ten of Swords (Swords (Air · Clarity)) highlights accumulated load signaling it is time to share or trim excess obligations: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding accumulated load signaling it is time to share or trim excess obligations, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is advantage, profit, success and favor, none of them lasting; it is also power and authority. Use the good spell to strengthen your base rather than treating it as permanent.",
+      "viec_nho_go_nut": "Set aside part of a recent gain as a reserve.",
+      "cau_hoi_tu_soi": "If this run of luck stopped, what would you still have?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_tieu_dong": {
       "ten": "Page of Swords",
@@ -399,9 +489,11 @@
       "trich_waite_1910_nguoc": "More evil side of these qualities; what is unforeseen, unprepared state; sickness is also intimated.",
       "trich_mathers_1888_nguoc": "That which is unforeseen, Vigilance, Support",
       "chieu_xuoi_ngan": "Authority, overseeing, secret service, vigilance, spying, examination, and the qualities thereto belonging.",
-      "chieu_nguoc_go_mo": "Reversed Page of Swords (Swords (Air · Clarity)) highlights new messages or early learning requiring fact-checking before action: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding new messages or early learning requiring fact-checking before action, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is the weaker side of alertness: the unforeseen catching you unprepared; the text also hints at health. Prepare ahead, rest enough, and see a doctor if tiredness lingers.",
+      "viec_nho_go_nut": "Get everything ready for your next important task the evening before.",
+      "cau_hoi_tu_soi": "What are you leaving to the last minute?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_hiep_si": {
       "ten": "Knight of Swords",
@@ -409,9 +501,11 @@
       "trich_waite_1910_nguoc": "Imprudence, incapacity, extravagance.",
       "trich_mathers_1888_nguoc": "A conceited fool, Ingenuousness, Simplicity",
       "chieu_xuoi_ngan": "Skill, bravery, capacity, defense, address, enmity, wrath, war, destruction, opposition, resistance, ruin. There is therefore a sense in which the card signifies death, but it carries this meaning only in its proximity to other cards of fatality.",
-      "chieu_nguoc_go_mo": "Reversed Knight of Swords (Swords (Air · Clarity)) highlights forward momentum needing measured pacing so enthusiasm stays grounded: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding forward momentum needing measured pacing so enthusiasm stays grounded, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is imprudence, taking on more than you can handle, and showing off. Slow down a beat and measure your strength before charging in.",
+      "viec_nho_go_nut": "Before accepting the next task, ask for its scope and timeline.",
+      "cau_hoi_tu_soi": "Are you fast because it is needed, or because you want to be seen as fast?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_hoang_hau": {
       "ten": "Queen of Swords",
@@ -419,9 +513,11 @@
       "trich_waite_1910_nguoc": "Malice, bigotry, artifice, prudery, bale, deceit.",
       "trich_mathers_1888_nguoc": "A Bad Woman, ill-tempered and bigoted, Riches and Discord, Abundance together with Worry, Joy with Grief",
       "chieu_xuoi_ngan": "Widowhood, female sadness and embarrassment, absence, sterility, mourning, privation, separation.",
-      "chieu_nguoc_go_mo": "Reversed Queen of Swords (Swords (Air · Clarity)) highlights replenishing inner steadiness before tending to everyone else's requests: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding replenishing inner steadiness before tending to everyone else's requests, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is malice, narrow-mindedness, artifice, prudishness and deceit. Notice whether your sharp words are hurting others, and do not let prejudice hide the facts.",
+      "viec_nho_go_nut": "Hear out someone you often disagree with before you reply.",
+      "cau_hoi_tu_soi": "Which prejudice is making you mishear other people?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "kiem_vua": {
       "ten": "King of Swords",
@@ -429,9 +525,11 @@
       "trich_waite_1910_nguoc": "Cruelty, perversity, barbarity, perfidy, evil intention.",
       "trich_mathers_1888_nguoc": "A Wicked Man, Chagrin, Worry, Grief, Fear, Disturbance",
       "chieu_xuoi_ngan": "Whatsoever arises out of the idea of judgment and all its connections--power, command, authority, militant intelligence, law, offices of the crown, and so forth.",
-      "chieu_nguoc_go_mo": "Reversed King of Swords (Swords (Air · Clarity)) highlights executive judgment benefiting from flexible listening rather than rigid control: analytical loops risk over-complicating the issue or phrasing sounds sharper than intended.",
-      "viec_nho_go_nut": "Grounding step: pause heated debate and list three verifiable facts on paper first.",
-      "cau_hoi_tu_soi": "Regarding executive judgment benefiting from flexible listening rather than rigid control, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is power misused: cruelty, perversity, betrayal, ill intent. Do not let anyone use argument or rank to pressure you, and do not do it yourself.",
+      "viec_nho_go_nut": "If you are pushed to decide in a hurry, ask for more time and consult someone outside the situation.",
+      "cau_hoi_tu_soi": "Are you using reason to beat people rather than to understand them?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_1": {
       "ten": "Ace of Pentacles",
@@ -439,9 +537,11 @@
       "trich_waite_1910_nguoc": "The evil side of wealth, bad intelligence; also great riches. In any case it shows prosperity, comfortable material conditions, but whether these are of advantage to the possessor will depend on whether the card is reversed or not.",
       "trich_mathers_1888_nguoc": "Purse of Gold, Money, Gain, Help, Profit, Riches",
       "chieu_xuoi_ngan": "Perfect contentment, felicity, ecstasy; also speedy intelligence; gold.",
-      "chieu_nguoc_go_mo": "Reversed Ace of Pentacles (Pentacles (Earth · Craft)) highlights a fresh seed awaiting practical readiness before full launch: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding a fresh seed awaiting practical readiness before full launch, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card still shows wealth and comfort, sometimes great riches, but the shadow side of money: bad information, gains that do not do you good. Notice where money comes from and whether it improves your life.",
+      "viec_nho_go_nut": "Review one recent income: is there a condition attached that you have not read carefully?",
+      "cau_hoi_tu_soi": "Does having more money actually make you feel lighter?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_2": {
       "ten": "Two of Pentacles",
@@ -449,9 +549,11 @@
       "trich_waite_1910_nguoc": "Enforced gaiety, simulated enjoyment, literal sense, handwriting, composition, letters of exchange.",
       "trich_mathers_1888_nguoc": "Letter, Missive, Epistle, Message",
       "chieu_xuoi_ngan": "On the one hand it is represented as a card of gaiety, recreation and its connections, which is the subject of the design; but it is read also as news and messages in writing, as obstacles, agitation, trouble, embroilment.",
-      "chieu_nguoc_go_mo": "Reversed Two of Pentacles (Pentacles (Earth · Craft)) highlights a two-way weighing phase that benefits from unhurried observation: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding a two-way weighing phase that benefits from unhurried observation, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is forced cheer, pretending to be at ease while juggling; it is also paperwork, handwriting, bills of exchange. Review your accounts and stop acting fine when you are not.",
+      "viec_nho_go_nut": "Write every payment due this month on one page.",
+      "cau_hoi_tu_soi": "Who are you pretending to be relaxed in front of?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_3": {
       "ten": "Three of Pentacles",
@@ -459,9 +561,11 @@
       "trich_waite_1910_nguoc": "Mediocrity, in work and otherwise, puerility, pettiness, weakness.",
       "trich_mathers_1888_nguoc": "Children, Sons, Daughters, Youths, Commencement",
       "chieu_xuoi_ngan": "_Métier_, trade, skilled labor; usually, however, regarded as a card of nobility, aristocracy, renown, glory.",
-      "chieu_nguoc_go_mo": "Reversed Three of Pentacles (Pentacles (Earth · Craft)) highlights early collaboration or role alignment needing clearer expectations: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding early collaboration or role alignment needing clearer expectations, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is mediocre, petty work and weak skill. Raise the quality of one piece of work instead of doing a lot just to get by.",
+      "viec_nho_go_nut": "Pick one product or assignment and redo its weakest part properly.",
+      "cau_hoi_tu_soi": "Which task are you doing only to get it over with?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_4": {
       "ten": "Four of Pentacles",
@@ -469,9 +573,11 @@
       "trich_waite_1910_nguoc": "Suspense, delay, opposition",
       "trich_mathers_1888_nguoc": "Obstacles, Hindrances",
       "chieu_xuoi_ngan": "The surety of possessions, cleaving to that which one has, gift, legacy, inheritance.",
-      "chieu_nguoc_go_mo": "Reversed Four of Pentacles (Pentacles (Earth · Craft)) highlights re-examining comfort zones or reinforcing foundational stability: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding re-examining comfort zones or reinforcing foundational stability, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is suspense, delay and opposition. Do not grip money and control so tightly that nothing can move.",
+      "viec_nho_go_nut": "Clear one bottleneck: approve a payment or decision that has been waiting.",
+      "cau_hoi_tu_soi": "What are you holding onto tightly out of fear of losing it?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_5": {
       "ten": "Five of Pentacles",
@@ -479,9 +585,11 @@
       "trich_waite_1910_nguoc": "Disorder, chaos, ruin, discord, profligacy.",
       "trich_mathers_1888_nguoc": "Disgraceful Love, Imprudence, License, Profligacy",
       "chieu_xuoi_ngan": "The card foretells material trouble above all, whether in the form illustrated--that is, destitution--or otherwise. For some cartomancists, it is a card of love and lovers--wife, husband, friend, mistress; also concordance, affinities. These alternatives cannot be harmonized.",
-      "chieu_nguoc_go_mo": "Reversed Five of Pentacles (Pentacles (Earth · Craft)) highlights recent friction beginning to settle so constructive lessons can emerge: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding recent friction beginning to settle so constructive lessons can emerge, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is disorder, chaos, decline, discord and reckless spending. Stop impulse spending and put each expense back in order.",
+      "viec_nho_go_nut": "Cancel one subscription or spending habit you no longer need.",
+      "cau_hoi_tu_soi": "Which purchases are you making to fill a feeling?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_6": {
       "ten": "Six of Pentacles",
@@ -489,9 +597,11 @@
       "trich_waite_1910_nguoc": "Desire, cupidity, envy, jealousy, illusion.",
       "trich_mathers_1888_nguoc": "Ambition, Desire, Passion, Aim, Longing",
       "chieu_xuoi_ngan": "Presents, gifts, gratification; another account says attention, vigilance; now is the accepted time, present prosperity, etc.",
-      "chieu_nguoc_go_mo": "Reversed Six of Pentacles (Pentacles (Earth · Craft)) highlights re-balancing reciprocity or pacing a transition more evenly: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding re-balancing reciprocity or pacing a transition more evenly, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is desire, greed, envy, jealousy and illusion around giving and receiving. Keep things fair and do not let comparison spoil a relationship.",
+      "viec_nho_go_nut": "Settle one small outstanding amount with someone, paying or asking for it.",
+      "cau_hoi_tu_soi": "Who are you comparing yourself with?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_7": {
       "ten": "Seven of Pentacles",
@@ -499,9 +609,11 @@
       "trich_waite_1910_nguoc": "Cause for anxiety regarding money which it may be proposed to lend.",
       "trich_mathers_1888_nguoc": "Disturbance, Worry, Anxiety, Melancholy",
       "chieu_xuoi_ngan": "These are exceedingly contradictory; in the main, it is a card of money, business, barter; but one reading gives altercation, quarrel--and another innocence, ingenuity, purgation.",
-      "chieu_nguoc_go_mo": "Reversed Seven of Pentacles (Pentacles (Earth · Craft)) highlights reviewing strategy patiently rather than reacting to short-term pressure: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding reviewing strategy patiently rather than reacting to short-term pressure, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is worry about money someone wants to borrow or that you plan to lend. Only lend what you could afford to lose, and write down the repayment date.",
+      "viec_nho_go_nut": "If you plan to lend, write a note with the amount, the due date and both signatures.",
+      "cau_hoi_tu_soi": "Are you lending because you want to help, or because refusing feels awkward?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_8": {
       "ten": "Eight of Pentacles",
@@ -509,9 +621,11 @@
       "trich_waite_1910_nguoc": "Voided ambition, vanity, cupidity, exaction, usury. It may also signify the possession of skill, in the sense of the ingenious mind turned to cunning and intrigue.",
       "trich_mathers_1888_nguoc": "Flattery, Usury, Hypocrisy, Shifty",
       "chieu_xuoi_ngan": "Work, employment, commission, craftsmanship, skill in craft and business, perhaps in the preparatory stage.",
-      "chieu_nguoc_go_mo": "Reversed Eight of Pentacles (Pentacles (Earth · Craft)) highlights clearing repetitive workflow bottlenecks to restore steady motion: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding clearing repetitive workflow bottlenecks to restore steady motion, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is ambition gone hollow, vanity, greed, exaction and usury; skill turned to cunning. Keep your skill for honest work and avoid high-interest borrowing.",
+      "viec_nho_go_nut": "Check the real interest rate on one loan or installment plan you have.",
+      "cau_hoi_tu_soi": "Are you building your craft to be good, or to earn fast?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_9": {
       "ten": "Nine of Pentacles",
@@ -519,9 +633,11 @@
       "trich_waite_1910_nguoc": "Roguery, deception, voided project, bad faith.",
       "trich_mathers_1888_nguoc": "Deceit, Bad faith, Artifices, Deception",
       "chieu_xuoi_ngan": "Prudence, safety, success, accomplishment, certitude, discernment.",
-      "chieu_nguoc_go_mo": "Reversed Nine of Pentacles (Pentacles (Earth · Craft)) highlights late-stage endurance calling for rest and smart delegation: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding late-stage endurance calling for rest and smart delegation, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is roguery, deception, a project that falls through and bad faith. Keep your records and check your partners before putting in more money.",
+      "viec_nho_go_nut": "File the invoices and receipts for recent large amounts in one place.",
+      "cau_hoi_tu_soi": "Is there a project where you should stop adding money and take another look?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_10": {
       "ten": "Ten of Pentacles",
@@ -529,9 +645,11 @@
       "trich_waite_1910_nguoc": "Chance, fatality, loss, robbery, games of hazard; sometimes gift, dowry, pension.",
       "trich_mathers_1888_nguoc": "Gambling, Dissipation, Robbery, Loss",
       "chieu_xuoi_ngan": "Gain, riches; family matters, archives, extraction, the abode of a family.",
-      "chieu_nguoc_go_mo": "Reversed Ten of Pentacles (Pentacles (Earth · Craft)) highlights accumulated load signaling it is time to share or trim excess obligations: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding accumulated load signaling it is time to share or trim excess obligations, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is chance, loss, theft and gambling; sometimes a gift, dowry or pension instead. Stay away from games of chance, guard your assets, and talk openly about money at home.",
+      "viec_nho_go_nut": "Check your locks, bank passwords and property papers this week.",
+      "cau_hoi_tu_soi": "Which money matter at home should be talked through soon?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_tieu_dong": {
       "ten": "Page of Pentacles",
@@ -539,9 +657,11 @@
       "trich_waite_1910_nguoc": "Prodigality, dissipation, liberality, luxury, unfavorable news.",
       "trich_mathers_1888_nguoc": "Prodigality, Profusion, Waste, Dissipation",
       "chieu_xuoi_ngan": "Application, study, scholarship, reflection; another reading says news, messages and the bringer thereof; also rule, management.",
-      "chieu_nguoc_go_mo": "Reversed Page of Pentacles (Pentacles (Earth · Craft)) highlights new messages or early learning requiring fact-checking before action: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding new messages or early learning requiring fact-checking before action, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is extravagance, waste, open-handedness, luxury and unwelcome news. Set a spending limit and learn to hold on to money.",
+      "viec_nho_go_nut": "Set a maximum to spend this week and note every purchase.",
+      "cau_hoi_tu_soi": "Do you shop more when you are happy, or when you are low?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_hiep_si": {
       "ten": "Knight of Pentacles",
@@ -549,9 +669,11 @@
       "trich_waite_1910_nguoc": "Inertia, idleness, repose of that kind, stagnation; also placidity, discouragement, carelessness.",
       "trich_mathers_1888_nguoc": "A brave Man, but out of Employment, Idle, Unemployed, Negligent",
       "chieu_xuoi_ngan": "Utility, serviceableness, interest, responsibility, rectitude--all on the normal and external plane.",
-      "chieu_nguoc_go_mo": "Reversed Knight of Pentacles (Pentacles (Earth · Craft)) highlights forward momentum needing measured pacing so enthusiasm stays grounded: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding forward momentum needing measured pacing so enthusiasm stays grounded, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is inertia, idleness and standing still; calm turning into discouragement and carelessness. Set a small but steady working rhythm again.",
+      "viec_nho_go_nut": "Spend 20 minutes today on the task you keep postponing.",
+      "cau_hoi_tu_soi": "Are you resting to recover, or are you discouraged?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_hoang_hau": {
       "ten": "Queen of Pentacles",
@@ -559,9 +681,11 @@
       "trich_waite_1910_nguoc": "Evil, suspicion, suspense, fear, mistrust.",
       "trich_mathers_1888_nguoc": "Certain Evil, a suspicious Woman, a Woman justly regarded with Suspicion, Doubt, Mistrust",
       "chieu_xuoi_ngan": "Opulence, generosity, magnificence, security, liberty.",
-      "chieu_nguoc_go_mo": "Reversed Queen of Pentacles (Pentacles (Earth · Craft)) highlights replenishing inner steadiness before tending to everyone else's requests: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding replenishing inner steadiness before tending to everyone else's requests, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is suspicion, suspense, fear and mistrust. Say plainly what worries you to the person who shares the household or money with you.",
+      "viec_nho_go_nut": "Ask one direct question about what you suspect instead of guessing.",
+      "cau_hoi_tu_soi": "What evidence does this suspicion actually have?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     },
     "tien_vua": {
       "ten": "King of Pentacles",
@@ -569,9 +693,11 @@
       "trich_waite_1910_nguoc": "Vice, weakness, perversity, peril.",
       "trich_mathers_1888_nguoc": "An old and vicious Man, a Dangerous Man, Doubt, Fear, Peril, Danger",
       "chieu_xuoi_ngan": "Valor, intelligence, business, mathematical gifts, and success in these paths.",
-      "chieu_nguoc_go_mo": "Reversed King of Pentacles (Pentacles (Earth · Craft)) highlights executive judgment benefiting from flexible listening rather than rigid control: tangible resources, budget pacing, or foundational routines call for a practical audit.",
-      "viec_nho_go_nut": "Grounding step: review cash flow, realistic timelines, and the basic quality checklist step by step.",
-      "cau_hoi_tu_soi": "Regarding executive judgment benefiting from flexible listening rather than rigid control, what small habit can you simplify today to restore natural flow?"
+      "chieu_nguoc_go_mo": "Reversed, this card is vice, weakness, perversity and danger around money and property. Do not use money to prove yourself, and be careful with big financial decisions.",
+      "viec_nho_go_nut": "Before a large purchase, ask the opinion of someone outside the situation who knows the field.",
+      "cau_hoi_tu_soi": "Are you spending because you need to, or to be seen?",
+      "source_id": "waite_1910",
+      "school_id": "rws"
     }
   }
 }

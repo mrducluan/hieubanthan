@@ -151,4 +151,11 @@ export const CHU_TAROT_UI = {
   "ls.xem_lai": m(S, "Xem lại", "Open again"),
   "ls.xoa_aria": m(S, "Xoá trải bài này", "Delete this spread"),
   "ls.xoa": m(S, "Xoá", "Delete"),
+
+  // ---------------------------------------------------------------- lá ngược nói thêm (ChieuSauTraiBai — CHANG-3)
+  "cs.tieu_de": m(D, "Lá ngược nói thêm gì?", "What do the reversed cards add?"),
+  "cs.dan": m(D, "Với các lá số và lá hoàng gia đang ngược trong trải bài, sách xưa còn ghi thêm một nghĩa ngược ngắn. Đọc như một gợi ý để tự soi, không phải điềm.",
+    "For the reversed number and court cards in your spread, the old books add one more short reversed meaning. Read it as a prompt to reflect on, not an omen."),
+  "cs.nguoc": m(D, "ngược", "reversed"),
+  "cs.loi": m(D, "Chưa tải được phần này.", "Could not load this part."),
 } satisfies BangChu;
