@@ -1,0 +1,8 @@
+# sinh ra được từ kich-ban.json + chup-ui.mjs + giong.py + dung-ui.mjs
+ra/
+anh-tai/
+giong/*.mp3
+*.mp4
+*.wav
+hf-*/
+ui/

@@ -1,0 +1,649 @@
+{
+ "_ghi_chu": "Lô v28–31 (Tử vi · Bát tự · Phong thuỷ · Nhân tướng). Quy tắc: video-ngan/QUY-TAC-VIDEO.md. Nhân vật minh hoạ: Thu Hà, nữ, 12/09/1992 07:30, TP. Hồ Chí Minh (không phải người thật). Dữ liệu chạy bằng hệ thống Hiểu Bản Thân ngày 26/11/2026; nguồn từng cảnh ở trường 'nguon' của video. Lời đọc (vo) dùng cho ElevenLabs; chữ trên hình (chu, phu, dong) không có từ kỹ thuật.",
+ "nhan_vat": {
+  "ten": "Thu Hà",
+  "gioi": "nữ",
+  "ngay_sinh": "12/09/1992",
+  "gio": "07:30",
+  "noi_sinh": "TP. Hồ Chí Minh",
+  "can_chi": "Nhâm Thân",
+  "tuoi_mu_2027": 36
+ },
+ "video": [
+  {
+   "ma": "v28",
+   "mang": "Tử vi",
+   "mau": "#E9C46A",
+   "url": "hieuban.com/tu-vi",
+   "tieu_de": "2027: tháng nào nên mua nhà, mua xe, mở rộng kinh doanh?",
+   "nguon": [
+    "Giao diện hieuban.com/thoi-gian-toi và /tu-vi (chụp bằng chup-ui.mjs ngày 27/11/2026), hồ sơ minh hoạ Thu Hà. Chữ, tháng, ngày trên hình và trong lời đọc lấy nguyên từ giao diện."
+   ],
+   "canh": [
+    {
+     "chu": "2027: tháng nào nên *mua nhà, mua xe*, khai trương?",
+     "phu": "Xem ngay trên hieuban.com",
+     "url": "hieuban.com/thoi-gian-toi",
+     "nhin": [
+      "viec-khai/cau",
+      "viec-khai/nut"
+     ],
+     "vo": "[curious] Định mua nhà, mua xe, hay khai trương trong năm tới? Chọn việc bạn định làm, hiểu bản chấm com chỉ ra tháng nào hợp.",
+     "duoi": [],
+     "anh": "nha_3",
+     "giu": 3.4
+    },
+    {
+     "chu": "Lá số Tử vi của *chị Thu Hà*",
+     "phu": "12/9/1992 · 7:30 · Sài Gòn · nhân vật minh hoạ",
+     "url": "hieuban.com/tu-vi",
+     "nhin": [
+      "la-so",
+      "muc-luc"
+     ],
+     "vo": "[warmly] Ví dụ chị Thu Hà, sinh mười hai tháng chín năm chín hai, bảy rưỡi sáng ở Sài Gòn. Lá số mười hai cung, kèm mười ba chương luận bằng lời thường.",
+     "duoi": []
+    },
+    {
+     "chu": "2027 theo Tử vi: *cần lưu ý*",
+     "phu": "Nhất là chuyện tiền bạc",
+     "url": "hieuban.com/thoi-gian-toi",
+     "nhin": [
+      "nam-tuvi",
+      "hai-la"
+     ],
+     "vo": "Theo Tử vi, năm hai không hai bảy cần lưu ý hơn, nhất là chuyện tiền bạc. Hãy chăm lo niềm vui riêng, và giữ cho giấc ngủ được yên.",
+     "anh": "tien_0",
+     "giu": 1.5,
+     "duoi": [
+      "hai-la"
+     ]
+    },
+    {
+     "chu": "Khai trương: hợp nhất *tháng 3, tháng 6*",
+     "phu": "Ngày đẹp tháng 3: 15, 17, 27",
+     "url": "hieuban.com/thoi-gian-toi",
+     "nhin": [
+      "viec-khai/chip",
+      "viec-khai/t3+tcot",
+      "viec-khai/ct"
+     ],
+     "vo": "[confident] Khai trương: hợp nhất là tháng ba và tháng sáu. Trong tháng ba, nên chọn ngày mười lăm, mười bảy, hoặc hai mươi bảy. Tháng tám đến tháng mười thì nên lùi.",
+     "anh": "shop_0",
+     "giu": 1.6,
+     "duoi": [
+      "hai-la"
+     ]
+    },
+    {
+     "chu": "Gặp đối tác, *ký hợp đồng*",
+     "phu": "Hợp nhất tháng 3, tháng 6",
+     "url": "hieuban.com/thoi-gian-toi",
+     "nhin": [
+      "viec-kyhd/chip",
+      "viec-kyhd/ct",
+      "viec-kyhd/nen"
+     ],
+     "vo": "Còn chuyện gặp đối tác, ký hợp đồng, bàn lương: cũng là tháng ba và tháng sáu. Đọc thật kỹ hợp đồng vào buổi sáng, ghi sẵn ba điều bạn không nhượng bộ.",
+     "anh": "bat_tay_3",
+     "giu": 1.6,
+     "duoi": [
+      "hai-la"
+     ]
+    },
+    {
+     "chu": "Mua nhà: ngày *1, 9, 17 tháng 3*",
+     "phu": "Lùi khỏi tháng 7, tháng 9",
+     "url": "hieuban.com/thoi-gian-toi",
+     "nhin": [
+      "viec-nha/chip",
+      "viec-nha/ct",
+      "viec-nha/nen"
+     ],
+     "vo": "Mua nhà: tháng ba, ngày một, chín, hoặc mười bảy. Nên lùi khỏi tháng bảy và tháng chín. Trước khi đặt cọc, kiểm tra giấy tờ pháp lý của căn nhà.",
+     "anh": "cua_2",
+     "giu": 1.6,
+     "duoi": [
+      "hai-la"
+     ]
+    },
+    {
+     "chu": "Mua xe: *tháng 3* hợp nhất",
+     "phu": "Ngày 16/3 hoặc 28/3",
+     "url": "hieuban.com/thoi-gian-toi",
+     "nhin": [
+      "viec-xe/chip",
+      "viec-xe/ct",
+      "viec-xe/nen"
+     ],
+     "vo": "Mua xe: chỉ tháng ba là hợp nhất, ngày mười sáu hoặc hai mươi tám. Nhớ so giá ít nhất ba nơi, và tính cả tiền nuôi xe hằng tháng.",
+     "anh": "xe_0",
+     "giu": 1.6,
+     "duoi": [
+      "hai-la"
+     ]
+    },
+    {
+     "chu": "Học, thi: *tháng 3, tháng 6*",
+     "phu": "Ngày 5/3, 6/3",
+     "url": "hieuban.com/thoi-gian-toi",
+     "nhin": [
+      "viec-hoc/chip",
+      "viec-hoc/ct",
+      "viec-hoc/nen"
+     ],
+     "vo": "Học thêm, thi cử: tháng ba và tháng sáu. Chia mục tiêu theo tuần, làm thử một đề ngay tuần đầu, và ngủ đủ trước ngày thi.",
+     "anh": "hoc_0",
+     "giu": 1.6,
+     "duoi": [
+      "hai-la"
+     ]
+    },
+    {
+     "chu": "Tháng *7, 9, 10*: đi chậm lại",
+     "phu": "Việc lớn nên chuẩn bị từ trước",
+     "url": "hieuban.com/thoi-gian-toi",
+     "nhin": [
+      "thang-cuoi/t7+t10"
+     ],
+     "vo": "[softly] Để ý nhé: tháng bảy, chín và mười, nhiều việc báo nên đi chậm. Việc lớn thì chuẩn bị trước, đừng dồn vào lúc này.",
+     "anh": "den_long_2",
+     "giu": 1.4,
+     "duoi": [
+      "hai-la"
+     ]
+    },
+    {
+     "chu": "Gợi ý để bạn *tự sắp việc*",
+     "phu": "Không phải lời khuyên đầu tư",
+     "url": "hieuban.com/thoi-gian-toi",
+     "nhin": [
+      "viec-xe/ranh"
+     ],
+     "vo": "Đây là nhịp gợi ý để bạn tự sắp việc, không phải lời khuyên đầu tư. Quyết định vẫn dựa trên điều kiện thật của bạn.",
+     "duoi": [
+      "hai-la"
+     ]
+    },
+    {
+     "chu": "Việc *của bạn* hợp tháng nào?",
+     "phu": "Chọn việc và xem · miễn phí",
+     "url": "hieuban.com/thoi-gian-toi",
+     "nhin": [
+      "viec-khai/cau"
+     ],
+     "vo": "[warmly] Việc bạn định làm rơi vào tháng nào? Vào hiểu bản chấm com, mục Thời gian tới, chọn việc và xem. Miễn phí.",
+     "duoi": [],
+     "anh": "nha_3",
+     "giu": 2.0
+    }
+   ],
+   "kieu": "ui",
+   "ket": {
+    "url": "hieuban.com/thoi-gian-toi",
+    "nut": "Chọn việc của bạn · Miễn phí"
+   }
+  },
+  {
+   "ma": "v29",
+   "mang": "Bát tự",
+   "mau": "#7FC8F8",
+   "url": "hieuban.com/bat-tu",
+   "tieu_de": "Lá số thiếu hẳn hành Hoả: bạn có đang như vậy?",
+   "nguon": [
+    "Giao diện hieuban.com (chụp bằng chup-ui.mjs ngày 27/11/2026), hồ sơ minh hoạ Thu Hà. Chữ, số trên hình và trong lời đọc lấy từ giao diện."
+   ],
+   "canh": [
+    {
+     "chu": "Việc cứ chững lại? Có thể bạn *thiếu một hành*",
+     "phu": "Xem ngay trên hieuban.com",
+     "url": "hieuban.com/bat-tu",
+     "nhin": [
+      "bt-banhxe"
+     ],
+     "duoi": [],
+     "vo": "[curious] Làm hoài mà cứ chững lại, ngại thể hiện, hay cứng nhắc? Thử xem lá số Bát tự: bạn đang dư hành gì, thiếu hành gì.",
+     "anh": "ban_lv_0",
+     "giu": 3.2
+    },
+    {
+     "chu": "*Hỏa 0%*, Kim 40%",
+     "phu": "Sinh 12/9/1992 · nhân vật minh hoạ",
+     "url": "hieuban.com/bat-tu",
+     "nhin": [
+      "bt-hanh/hoa",
+      "bt-hanh/du"
+     ],
+     "duoi": [
+      "bt-hoa"
+     ],
+     "vo": "[warmly] Lá số chị Thu Hà, sinh mười hai tháng chín năm chín hai: Kim bốn mươi phần trăm, đang dư. Còn Hỏa bằng không, đang thiếu."
+    },
+    {
+     "chu": "Thiếu Hỏa, dư Kim: *vấp gì?*",
+     "phu": "Soi lại xem có giống bạn không",
+     "url": "hieuban.com/bat-tu",
+     "nhin": [
+      "bt-hoa",
+      "bt-kim"
+     ],
+     "duoi": [],
+     "vo": "Thiếu Hỏa thì dễ thiếu hứng khởi, ngại thể hiện mình. Kim nhiều thì dễ cứng nhắc, hay phân xử đúng sai cả trong chuyện tình cảm. Có giống bạn không?",
+     "anh": "den_long_2",
+     "giu": 1.5
+    },
+    {
+     "chu": "Bù bằng *nếp sống*: Thủy, Mộc, Hỏa",
+     "phu": "Hai cách đọc cùng gợi ý",
+     "url": "hieuban.com/bat-tu",
+     "nhin": [
+      "bt-bu/tieu",
+      "bt-bu"
+     ],
+     "duoi": [
+      "bt-hoi"
+     ],
+     "vo": "[confident] Cả hai cách đọc đều gợi ý thêm Thủy, Mộc, Hỏa. Uống đủ nước, ngủ đủ giấc, chăm một chậu cây, đi bộ công viên, đọc vài trang sách mỗi tối.",
+     "anh": "tet_2",
+     "giu": 1.5
+    },
+    {
+     "chu": "Công việc: hợp *tự đứng tên*",
+     "phu": "Ngành được tiếp sức theo ngũ hành",
+     "url": "hieuban.com/bat-tu",
+     "nhin": [
+      "bt-nghe",
+      "bt-labannghe"
+     ],
+     "duoi": [],
+     "vo": "Công việc: bạn hợp tự đứng tên, làm cùng người ngang hàng. Ngành được tiếp sức: giáo dục, xuất bản, gỗ giấy, nông lâm, thời trang, dược liệu.",
+     "anh": "shop_0",
+     "giu": 1.5
+    },
+    {
+     "chu": "Tiền: dễ ra vì *bạn bè, anh em*",
+     "phu": "Cho vay, góp chung, giữ thể diện",
+     "url": "hieuban.com/bat-tu",
+     "nhin": [
+      "bt-tien"
+     ],
+     "duoi": [
+      "bt-tinh"
+     ],
+     "vo": "[softly] Tiền bạc: dễ ra vì bạn bè, anh em, cho vay, góp chung, chi giữ thể diện. Chỉ cho vay số bạn chấp nhận mất, và ghi giấy khi góp vốn.",
+     "anh": "tien_0",
+     "giu": 1.5
+    },
+    {
+     "chu": "Học: hiểu *tận gốc* mới yên",
+     "phu": "Học theo dự án, rồi dạy lại",
+     "url": "hieuban.com/bat-tu",
+     "nhin": [
+      "bt-hoc",
+      "bt-hoc2"
+     ],
+     "duoi": [],
+     "vo": "Học hành: cần hiểu tận gốc, ghét học thuộc lòng. Hợp sách nền tảng, lớp học bài bản, làm dự án thật, rồi dạy lại cho người khác.",
+     "anh": "hoc_2",
+     "giu": 1.5
+    },
+    {
+     "chu": "Tình cảm: quen *tự lo một mình*",
+     "phu": "Báo trước khi có thay đổi lớn",
+     "url": "hieuban.com/bat-tu",
+     "nhin": [
+      "bt-tinh",
+      "bt-tinh2"
+     ],
+     "duoi": [],
+     "vo": "Tình cảm: quen tự lo nên người khác ngại đến gần. Thử để người ấy giúp một việc nhỏ. Đổi chỗ ở, đổi việc thì báo trước cho nhau.",
+     "anh": "doi_ban_tay_3",
+     "giu": 1.5
+    },
+    {
+     "chu": "Con cái: hỏi con *trước khi khuyên*",
+     "phu": "Để con tự chọn ở việc nhỏ",
+     "url": "hieuban.com/bat-tu",
+     "nhin": [
+      "bt-con"
+     ],
+     "duoi": [
+      "bt-nam"
+     ],
+     "vo": "Con cái dễ khác tính, muốn đi đường riêng. Hỏi con nghĩ gì trước khi khuyên, và để con tự chọn ở những việc nhỏ."
+    },
+    {
+     "chu": "Năm *2028*: giấy tờ, nhà cửa nên chậm",
+     "phu": "Rà giấy tờ, lịch khám của cha mẹ",
+     "url": "hieuban.com/bat-tu",
+     "nhin": [
+      "bt-nam"
+     ],
+     "duoi": [
+      "bt-hoi"
+     ],
+     "vo": "Để ý năm hai không hai tám: chuyện nhà cửa, giấy tờ đất đai nên chậm lại. Rà giấy tờ và lịch khám của cha mẹ ngay đầu năm.",
+     "anh": "cua_2",
+     "giu": 1.5
+    },
+    {
+     "chu": "Lá số bạn *thiếu hành gì?*",
+     "phu": "Xem ngũ hành từ ngày giờ sinh",
+     "url": "hieuban.com/bat-tu",
+     "nhin": [
+      "bt-hanh"
+     ],
+     "duoi": [
+      "bt-hoa"
+     ],
+     "vo": "[warmly] Bạn thấy mình có đúng như vậy không? Vào hiểu bản chấm com, mục Bát tự, nhập ngày giờ sinh, xem ngũ hành của bạn.",
+     "anh": "ban_lv_0",
+     "giu": 2.0
+    }
+   ],
+   "kieu": "ui",
+   "ket": {
+    "url": "hieuban.com/bat-tu",
+    "nut": "Xem ngũ hành của bạn"
+   }
+  },
+  {
+   "ma": "v30",
+   "mang": "Phong thuỷ",
+   "mau": "#8FD694",
+   "url": "hieuban.com/phong-thuy",
+   "tieu_de": "Tết này treo gương bát quái trước cửa?",
+   "nguon": [
+    "Giao diện hieuban.com (chụp bằng chup-ui.mjs ngày 27/11/2026), hồ sơ minh hoạ Thu Hà. Chữ, số trên hình và trong lời đọc lấy từ giao diện."
+   ],
+   "canh": [
+    {
+     "chu": "Tết này định treo *gương bát quái* trước cửa?",
+     "phu": "Khoan, xem cái này đã",
+     "url": "hieuban.com/phong-thuy/dau-hieu",
+     "nhin": [
+      "pt-guong-dau"
+     ],
+     "duoi": [],
+     "vo": "[curious] Tết này định treo gương bát quái trước cửa? Khoan đã, xem hiểu bản chấm com viết gì.",
+     "anh": "nha_3",
+     "giu": 3.2
+    },
+    {
+     "chu": "Gương bát quái: *tín ngưỡng*, không phải lý khí",
+     "phu": "Đồ trang trí, không cần mua để nhà yên",
+     "url": "hieuban.com/phong-thuy/dau-hieu",
+     "nhin": [
+      "pt-guong-noi"
+     ],
+     "duoi": [],
+     "vo": "Treo gương bát quái để trấn là tín ngưỡng dân gian, không thuộc lý khí. Còn gương đối thẳng cửa thì người vào dễ giật mình, ánh sáng hắt chói.",
+     "anh": "guong_1",
+     "giu": 1.5
+    },
+    {
+     "chu": "Việc *0 đồng*: dời gương sang bên",
+     "phu": "Hoặc thay bằng tranh, kệ nhỏ",
+     "url": "hieuban.com/phong-thuy/dau-hieu",
+     "nhin": [
+      "pt-guong-noi/bang"
+     ],
+     "duoi": [
+      "pt-hoi"
+     ],
+     "vo": "Việc không tốn đồng nào: dời gương sang tường bên hông cửa. Hoặc thay bằng tranh, kệ treo đồ nhỏ ở lối vào."
+    },
+    {
+     "chu": "Nữ 1992: mệnh *Đoài*, Tây tứ mệnh",
+     "phu": "Chị Thu Hà · nhân vật minh hoạ",
+     "url": "hieuban.com/phong-thuy",
+     "nhin": [
+      "pt-laban/menh"
+     ],
+     "duoi": [
+      "pt-hoi"
+     ],
+     "vo": "[warmly] Muốn biết hướng hợp thì xem la bàn. Chị Thu Hà, sinh năm chín hai: mệnh Đoài, Tây tứ mệnh."
+    },
+    {
+     "chu": "4 hướng tốt: *Tây Bắc* là Sinh Khí",
+     "phu": "Tây Nam · Đông Bắc · Tây",
+     "url": "hieuban.com/phong-thuy",
+     "nhin": [
+      "pt-laban/tb",
+      "pt-laban/tn",
+      "pt-laban/db",
+      "pt-laban/tay"
+     ],
+     "duoi": [
+      "pt-hoi"
+     ],
+     "vo": "Bốn hướng tốt: Tây Bắc là Sinh Khí, Tây Nam là Thiên Y, Đông Bắc là Diên Niên, hướng Tây là Phục Vị."
+    },
+    {
+     "chu": "Bàn làm việc: đừng *quay lưng ra cửa*",
+     "phu": "Xoay bàn, lưng tựa tường đặc",
+     "url": "hieuban.com/phong-thuy/dau-hieu",
+     "nhin": [
+      "pt-lung-noi",
+      "pt-lung-noi/bang"
+     ],
+     "duoi": [
+      "pt-hoi"
+     ],
+     "vo": "Bàn làm việc: đừng ngồi quay lưng ra cửa. Cứ phải ngoái lại thì khó tập trung lâu. Xoay bàn nhìn chéo ra cửa, lưng tựa tường đặc.",
+     "anh": "ban_lv_0",
+     "giu": 1.5
+    },
+    {
+     "chu": "Bếp nhìn *thẳng ra cửa*?",
+     "phu": "Gió tạt lửa, mất riêng tư",
+     "url": "hieuban.com/phong-thuy/dau-hieu",
+     "nhin": [
+      "pt-bep-noi"
+     ],
+     "duoi": [],
+     "vo": "Còn bếp: mở cửa là thấy ngay bếp thì gió tạt lửa, mùi dầu mỡ bay ngược vào nhà, nhà mất riêng tư.",
+     "anh": "bep_2",
+     "giu": 1.5
+    },
+    {
+     "chu": "Việc *0 đồng*: đóng cửa khi nấu",
+     "phu": "Rèm, kệ hở, chậu cây cao",
+     "url": "hieuban.com/phong-thuy/dau-hieu",
+     "nhin": [
+      "pt-bep-noi/bang"
+     ],
+     "duoi": [
+      "pt-hoi"
+     ],
+     "vo": "Việc không đồng: đóng cửa khi nấu. Ít tiền thì treo rèm, kê kệ hở hay chậu cây cao. Sửa nhà thì thêm vách kính hoặc quầy ngăn."
+    },
+    {
+     "chu": "Đang băn khoăn gì? *Chọn một câu*",
+     "phu": "Trả lời riêng cho nhà bạn",
+     "url": "hieuban.com/phong-thuy",
+     "nhin": [
+      "pt-hoi"
+     ],
+     "duoi": [
+      "pt-laban"
+     ],
+     "vo": "Vợ chồng khác mệnh, so hai căn nhà, hay mở quán? Chọn đúng câu hỏi, trang trả lời riêng cho nhà bạn."
+    },
+    {
+     "chu": "*4 hướng hợp* của bạn là gì?",
+     "phu": "Xem la bàn mệnh của bạn",
+     "url": "hieuban.com/phong-thuy",
+     "nhin": [
+      "pt-laban"
+     ],
+     "duoi": [
+      "pt-hoi"
+     ],
+     "vo": "[warmly] Bạn hợp những hướng nào? Vào hiểu bản chấm com, mục Phong thuỷ, nhập năm sinh để xem hướng hợp của chính bạn.",
+     "anh": "nha_3",
+     "giu": 2.0
+    }
+   ],
+   "kieu": "ui",
+   "ket": {
+    "url": "hieuban.com/phong-thuy",
+    "nut": "Xem hướng hợp của bạn"
+   }
+  },
+  {
+   "ma": "v31",
+   "mang": "Nhân tướng",
+   "mau": "#F4A3C1",
+   "url": "hieuban.com/nhan-tuong",
+   "tieu_de": "Tuổi 35–40, sách tướng xưa nhìn vào đôi mắt",
+   "nguon": [
+    "Giao diện hieuban.com (chụp bằng chup-ui.mjs ngày 27/11/2026), hồ sơ minh hoạ Thu Hà. Chữ, số trên hình và trong lời đọc lấy từ giao diện."
+   ],
+   "canh": [
+    {
+     "chu": "Tuổi *35–40*: sách tướng nhìn vào đôi mắt",
+     "phu": "Vì sao lại là mắt?",
+     "url": "hieuban.com/nhan-tuong/bo-vi/mat",
+     "nhin": [
+      "nt-mat"
+     ],
+     "duoi": [],
+     "vo": "[curious] Từ ba mươi lăm đến bốn mươi tuổi, sách tướng xưa nhìn vào đâu? Nhìn vào đôi mắt.",
+     "anh": "mat_0",
+     "giu": 3.2
+    },
+    {
+     "chu": "Mỗi tuổi *một chỗ* trên mặt",
+     "phu": "Bản khắc Thần Tướng Toàn Biên",
+     "url": "hieuban.com/nhan-tuong/do-hinh",
+     "nhin": [
+      "nt-khac"
+     ],
+     "duoi": [
+      "nt-dohinh"
+     ],
+     "vo": "Bản khắc sách Thần Tướng gắn mỗi tuổi với một chỗ trên mặt: từ tai, lên trán, xuống mắt, mũi, miệng, cằm."
+    },
+    {
+     "chu": "Sinh 1992: năm nay *tuổi mụ 35*",
+     "phu": "Chị Thu Hà · nhân vật minh hoạ",
+     "url": "hieuban.com/nhan-tuong/do-hinh",
+     "nhin": [
+      "nt-khac/mat"
+     ],
+     "duoi": [
+      "nt-dohinh"
+     ],
+     "vo": "[warmly] Chị Thu Hà sinh năm chín hai, năm nay ba mươi lăm tuổi tính theo tuổi mụ, đúng đoạn sách nhìn vào đôi mắt."
+    },
+    {
+     "chu": "Mắt: nơi *thần* tụ lại",
+     "phu": "Quan trọng nhất trong ngũ quan",
+     "url": "hieuban.com/nhan-tuong/bo-vi/mat",
+     "nhin": [
+      "nt-noi"
+     ],
+     "duoi": [
+      "nt-than",
+      "nt-dai"
+     ],
+     "vo": "Sách xưa xem mắt là quan trọng nhất trong ngũ quan, vì thần tụ ở mắt. Vùng này thuộc cung Mệnh, nói về tinh thần của bạn lúc này.",
+     "anh": "mat_0",
+     "giu": 1.5
+    },
+    {
+     "chu": "*Ánh mắt yên, sáng*: tinh thần vững",
+     "phu": "Nhìn thẳng khi nói chuyện quan trọng",
+     "url": "hieuban.com/nhan-tuong/bo-vi/mat",
+     "nhin": [
+      "nt-than"
+     ],
+     "duoi": [
+      "nt-dai",
+      "nt-len",
+      "nt-cup"
+     ],
+     "vo": "Ánh mắt yên mà sáng: tinh thần vững, không dễ cuốn theo đám đông. Khi nói chuyện quan trọng, hãy giữ thói quen nhìn thẳng."
+    },
+    {
+     "chu": "Đuôi mắt *chếch lên* hay *cụp xuống*?",
+     "phu": "Bạn nghiêng bên nào?",
+     "url": "hieuban.com/nhan-tuong/bo-vi/mat",
+     "nhin": [
+      "nt-len",
+      "nt-cup"
+     ],
+     "duoi": [
+      "nt-mo",
+      "nt-dai",
+      "nt-than"
+     ],
+     "vo": "[confident] Khoé ngoài mắt hướng lên: tự tin, thích dẫn dắt, nhưng khó nhận mình sai. Khoé ngoài mắt hướng xuống: hiền, hay nhường, nhưng buồn lâu. Bạn nghiêng bên nào?",
+     "anh": "doi_ban_tay_3",
+     "giu": 1.5
+    },
+    {
+     "chu": "Mắt mờ, uể: *đừng quyết vội*",
+     "phu": "Ngủ đủ 3 đêm rồi mới quyết",
+     "url": "hieuban.com/nhan-tuong/bo-vi/mat",
+     "nhin": [
+      "nt-mo"
+     ],
+     "duoi": [
+      "nt-dai",
+      "nt-than",
+      "nt-len"
+     ],
+     "vo": "[softly] Mắt mờ, nhiều tia đỏ: thần đang mệt. Ngủ đủ ba đêm rồi mới quyết việc lớn. Mắt đỏ kéo dài thì đi khám.",
+     "anh": "ban_lv_0",
+     "giu": 1.5
+    },
+    {
+     "chu": "Cách nhìn của sách, *không phải dự báo*",
+     "phu": "Vùng đầy, sáng · có nếp, tối",
+     "url": "hieuban.com/nhan-tuong/do-hinh",
+     "nhin": [
+      "nt-dohinh"
+     ],
+     "duoi": [
+      "nt-khac"
+     ],
+     "vo": "Sách ghi: vùng đầy, sáng thì tuổi ấy nhẹ; có nếp, tối thì nên chủ động hơn. Đó là cách nhìn của sách, không phải dự báo."
+    },
+    {
+     "chu": "Tải ảnh, *máy bạn tự đo*",
+     "phu": "Ảnh không rời máy",
+     "url": "hieuban.com/nhan-tuong",
+     "nhin": [
+      "nt-tai"
+     ],
+     "duoi": [
+      "nt-guong"
+     ],
+     "vo": "Muốn soi gương mặt của chính bạn? Quét ba góc, hoặc chọn một ảnh chân dung, điện thoại của bạn tự đo. Ảnh không rời máy.",
+     "anh": "guong_1",
+     "giu": 1.5
+    },
+    {
+     "chu": "Gương mặt *kể gì* về bạn?",
+     "phu": "Tự soi theo sách xưa",
+     "url": "hieuban.com/nhan-tuong",
+     "nhin": [
+      "nt-guong"
+     ],
+     "duoi": [],
+     "vo": "[warmly] Gương mặt kể gì về bạn? Vào hiểu bản chấm com, mục Nhân tướng, để tự soi.",
+     "anh": "mat_0",
+     "giu": 2.0
+    }
+   ],
+   "kieu": "ui",
+   "ket": {
+    "url": "hieuban.com/nhan-tuong",
+    "nut": "Soi gương mặt của bạn"
+   }
+  }
+ ]
+}
