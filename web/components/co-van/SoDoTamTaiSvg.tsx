@@ -95,41 +95,26 @@ function sacTheoMuc(muc: Muc | null): {
   };
 }
 
-const TRU_DIA_TRONG: TruTamTai = {
-  ma: "dia",
-  ten_tru: "Địa · Không gian",
-  nguon: "Phong thủy Bát Trạch & Huyền Không",
-  muc: null,
-  nhan_muc: "Chưa cần hướng",
-  nhan_xet: "Câu hỏi hiện tại chưa gắn với nhà ở hay mặt bằng cụ thể (hoặc bạn chưa chọn hướng cửa), nên trục Địa tạm để mở.",
-  hanh_dong: "Khi quyết định liên quan tới mua nhà, thuê mặt bằng hoặc đặt bàn làm việc, chọn hướng cửa để mở thêm trục Địa.",
-  can_cu: [],
-  lien_ket: { ten: "Xem Phong thuỷ theo hướng", duong: "/phong-thuy" },
-  ma_mau: "ds.tam_tai.dia.chua_chon",
-};
-
 export function SoDoTamTaiSvg({
   tenMach,
-  baTru: baTruGoc,
+  baTru,
   onChonTru,
 }: {
   tenMach?: string;
   baTru: { nhan: TruTamTai; thien: TruTamTai; dia?: TruTamTai | null };
   onChonTru?: (ma: "nhan" | "thien" | "dia") => void;
 }) {
-  const baTru = {
-    nhan: baTruGoc.nhan,
-    thien: baTruGoc.thien,
-    dia: baTruGoc.dia ?? TRU_DIA_TRONG,
-  };
   const [dangChonTru, setDangChonTru] = useState<"nhan" | "thien" | "dia">("thien");
+  const dinhHien = DINH_TAM_TAI.filter((d) => Boolean(baTru[d.ma]));
 
   const chonTru = (ma: "nhan" | "thien" | "dia") => {
     setDangChonTru(ma);
     onChonTru?.(ma);
+    const the = typeof document !== "undefined" ? document.querySelector(`[data-testid="co-van-tru-${ma}"]`) : null;
+    the?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   };
 
-  const truDangXem = baTru[dangChonTru] ?? baTru.thien ?? baTru.nhan ?? baTru.dia;
+  const truDangXem = baTru[dangChonTru] ?? baTru.thien ?? baTru.nhan ?? baTru.dia ?? null;
   if (!truDangXem) return null;
   const sacDangXem = sacTheoMuc(truDangXem.muc);
   const cx = 260;
@@ -206,19 +191,21 @@ export function SoDoTamTaiSvg({
             strokeOpacity="0.2"
           />
 
-          {/* Tam giác nối 3 đỉnh độc lập (chỉ biểu diễn thế chân kiềng, không gộp điểm) */}
-          <polygon
-            points={`${DINH_TAM_TAI[0].x},${DINH_TAM_TAI[0].y} ${DINH_TAM_TAI[1].x},${DINH_TAM_TAI[1].y} ${DINH_TAM_TAI[2].x},${DINH_TAM_TAI[2].y}`}
-            fill="none"
-            stroke="#94A3B8"
-            strokeOpacity="0.22"
-            strokeWidth="1.2"
-            strokeDasharray="5 5"
-          />
+          {/* Đường nối các đỉnh có mặt (chỉ biểu diễn thế đối chiếu, không gộp điểm) */}
+          {dinhHien.length === 3 && (
+            <polygon
+              points={`${dinhHien[0]!.x},${dinhHien[0]!.y} ${dinhHien[1]!.x},${dinhHien[1]!.y} ${dinhHien[2]!.x},${dinhHien[2]!.y}`}
+              fill="none"
+              stroke="#94A3B8"
+              strokeOpacity="0.22"
+              strokeWidth="1.2"
+              strokeDasharray="5 5"
+            />
+          )}
 
-          {/* 3 trục trực giao từ tâm ra 3 đỉnh */}
-          {DINH_TAM_TAI.map((dinh) => {
-            const tru = baTru[dinh.ma];
+          {/* Các trục trực giao từ tâm ra các đỉnh có mặt */}
+          {dinhHien.map((dinh) => {
+            const tru = baTru[dinh.ma]!;
             const sac = sacTheoMuc(tru.muc);
             const dangChon = dangChonTru === dinh.ma;
             return (
@@ -287,9 +274,9 @@ export function SoDoTamTaiSvg({
             </text>
           </g>
 
-          {/* 3 đỉnh Thiên - Nhân - Địa */}
-          {DINH_TAM_TAI.map((dinh) => {
-            const tru = baTru[dinh.ma];
+          {/* Các đỉnh Thiên - Nhân (- Địa khi có mặt) */}
+          {dinhHien.map((dinh) => {
+            const tru = baTru[dinh.ma]!;
             const sac = sacTheoMuc(tru.muc);
             const dangChon = dangChonTru === dinh.ma;
             const nhanMuc = tru.nhan_muc ?? "Không chấm mức";
@@ -390,8 +377,8 @@ export function SoDoTamTaiSvg({
 
       {/* Thanh chuyển nhanh & Ngăn chi tiết trụ đang chọn ngay dưới sơ đồ */}
       <div className="mt-3 flex flex-wrap gap-2" role="tablist" aria-label="Chọn trụ Tam Tài để đọc chi tiết">
-        {DINH_TAM_TAI.map((dinh) => {
-          const tru = baTru[dinh.ma];
+        {dinhHien.map((dinh) => {
+          const tru = baTru[dinh.ma]!;
           const dangChon = dangChonTru === dinh.ma;
           return (
             <button
@@ -419,52 +406,6 @@ export function SoDoTamTaiSvg({
             </button>
           );
         })}
-      </div>
-
-      <div
-        className="mt-3 rounded-xl border border-gold/35 bg-bg/75 p-4"
-        data-testid="tam-tai-chi-tiet-tru"
-        data-tru-dang-xem={truDangXem.ma}
-        aria-live="polite"
-      >
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <h4 className="font-serif text-base text-fg">{truDangXem.ten_tru}</h4>
-            <p className="text-xs text-fg-faint">Nguồn: {truDangXem.nguon}</p>
-          </div>
-          <span className={cn("rounded-full border px-2.5 py-0.5 text-xs font-semibold", sacDangXem.badgeClass)}>
-            {truDangXem.nhan_muc ?? "Không chấm mức"}
-          </span>
-        </div>
-
-        <p className="mt-2.5 text-sm leading-relaxed text-fg">{truDangXem.nhan_xet}</p>
-        <p className="mt-2 text-sm leading-relaxed text-fg-muted">
-          <span className="font-medium text-fg">Nên làm: </span>
-          {truDangXem.hanh_dong}
-        </p>
-
-        {truDangXem.can_cu.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-1.5" data-testid="tam-tai-can-cu-chips">
-            {truDangXem.can_cu.map((cc) => (
-              <span
-                key={cc}
-                className="rounded-lg border border-line/70 bg-surface/60 px-2.5 py-1 text-xs text-fg-muted"
-              >
-                {cc}
-              </span>
-            ))}
-          </div>
-        )}
-
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-line/50 pt-3">
-          <Link
-            href={truDangXem.lien_ket.duong}
-            className="inline-flex items-center gap-1 text-xs font-medium text-gold hover:underline"
-          >
-            {truDangXem.lien_ket.ten}
-            <ArrowUpRight className="size-3.5" aria-hidden />
-          </Link>
-        </div>
       </div>
     </section>
   );

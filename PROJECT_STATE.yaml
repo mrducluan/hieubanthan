@@ -5,7 +5,7 @@ current_phase: 1
 current_hypothesis: >-
   H1 Free Reading thu hút người dùng + H2 Metaphysics ID tạo gắn bó
   (chủ dự án cho làm song song một phần Phase 2: hợp đôi + link mời — H3)
-current_build: "Chặng 2 (Cố vấn Liên mảng Tam Tài & Kinh doanh E2EE): POST /v1/co-van (3 bậc đầu vào, 8 mạch, 5 khối trực quan) + POST /v1/doanh-chu/gop-von + Bàn cờ Đối tác/Mặt bằng AES-GCM 256-bit (/co-van & /co-van-kinh-doanh)"
+current_build: "Chặng 5 (Hệ biểu đồ tương tác Đông–Tây, Phẩm giá Ptolemy, Lá số Composite, /en/astrology & Vòng tự học DB→KB tự động hàng tuần)"
 current_gate: "Gate 0 bỏ qua theo quyết định chủ dự án (2026-10-08) — mở công khai, đo Gate 1 trên người dùng thật"
 current_metrics: []   # PostHog đã bật (mục G); GA4 qua GTM khi chủ dự án gắn thẻ GA4 trong GTM
 current_risks:
@@ -20,6 +20,9 @@ current_risks:
   - "Đã mở công khai trước khi xong thử nghiệm nội bộ 2 tháng (chủ dự án chốt 2026-10-08); bán Sao vẫn chặn"
   - "Trang pháp lý đã có (Luật BVDLCN 91/2025 + NĐ 356/2025) nhưng chưa luật sư duyệt, chưa điền thông tin đơn vị vận hành"
 completed_work:
+  - "CHANG-5 (2026-11-27): (1) nâng cấp tầng CALC & RULES Chiêm tinh phương Tây bổ sung bảng Phẩm giá cổ điển Ptolemy (7 thiên thể truyền thống), Ma trận 4 Nguyên tố × 3 Phẩm chất, Vòng ngoài 13 điểm Transit lưu niên, Đường thời gian Cột mốc Chu kỳ Đời và Bản đồ Điểm giữa Composite Midpoint (giao hoán qua mốc 0°/360°, bắt buộc đồng ý, 0% chấm điểm CD-1); (2) xây Hệ biểu đồ tương tác Đêm sao: Bi-Wheel Natal×Transit, Lưới Góc chiếu 13×13, Vòng đôi Synastry & Composite (BanDoSaoSvg, HeTrucQuanChiemTinh), Sơ đồ Tam Tài trực giao trên /co-van (SoDoTamTaiSvg), La bàn 8 hướng Kỳ Môn trên /ky-mon (LaBanKyMonSvg) và mở bản tiếng Anh /en/astrology (0% lộ chữ Việt); (3) nâng cấp scripts/tong_hop_vong_tu_hoc.py kéo trực tiếp số liệu gộp ẩn danh 0% PII từ Supabase REST/RPC kèm mẫu GitHub Action báo cáo tuần"
+  - "CHANG-4 (2026-11-27, PR #379..#382): Chiêm tinh phương Tây không AGPL (VSOP87D + ELP2000-82 + NASA JPL Horizons DE441 1926–2049), Cầu nối Đông–Tây (Bát tự & Tử vi song song), cụm 12 cung hoàng đạo, thẻ chia sẻ bản đồ sao & Trạch Nhật Hiệp Kỷ Biện Phương Thư / Dương Công kỵ hai phái"
+  - "CHANG-3 (2026-11-27, PR #378): Sự vụ chiến thuật tức thời (Kỳ Môn Thời Gia & Lục Hào Nạp Giáp đọc riêng trên /co-van), Đối chiếu Tướng – Chỉ tay Saint-Germain 1897 × nhịp năm, Thần số 5 trường phái & Tarot 56 Ẩn Phụ ngược + Phẩm giá Nguyên tố"
   - "CHANG-2 (2026-11-26): (1) xây POST /v1/co-van (mo_dun=tam_tai, co_van_tam_tai_kb.json + en/, luangiai/co_van_tam_tai.py) thích nghi 3 Bậc đầu vào (0% ngõ cụt), tổng hợp Tam Tài Phân Vai Trực Giao (Nhân · Thiên · Địa) qua 8 mạch quyết định với bảng chân trị không mâu thuẫn & rào khủng hoảng/cá cược; (2) xây POST /v1/doanh-chu/gop-von (doanh_chu_gop_von_kb.json + en/, luangiai/doanh_chu_gop_von.py) soi bù khuyết 2–4 Co-founder theo 3 làn & điều lệ phá thế 50–50; (3) xây giao diện 5 Khối Trực Quan trên /co-van + Không gian /co-van-kinh-doanh kèm Bàn cờ Đối tác/Mặt bằng mã hoá đầu-cuối WebCrypto AES-GCM 256-bit (PBKDF2 210.000 vòng) & kiểm định Red-Team 28 kịch bản thực tế + 16 bài Playwright E2E trên Chromium thật"
   - "CHANG-0-1-V2 (2026-11-26): (1) luan_hoi_khop.py dùng bộ định tuyến sẵn có của hoidap + bảng KB anh_xa_hoi_dap (chặn câu kiến thức, 2 tuổi, người thứ 3, thần sát riêng và khủng hoảng đã xảy ra) + quét AST f-string .{0,} toàn engine/app/; (2) go_nut_doi_song.py đọc dữ kiện lá số thật (du_kien_la_so + hộp hoá giải); (3) soát 61/81 cặp sao Huyền Không đúng nghĩa nguyên văn & nhóm SX-C3 + cổng TUOI-16 nhóm C ở RULES/API; (4) chuỗi Kỵ/Lộc chuyển Kỵ vào KB & hiển thị ở PhiHoa.tsx có KiemChung; (5) Đối chiếu Cổ điển xác thực (bỏ màu/giờ Tử vi & hướng ngũ hành trái 6b, phòng thật bo_cuc, sao 2 Vận 9 = sinh); (6) ô giờ sinh tuỳ chọn trên /quan-ly-nhan-su & tv_token tương thích ngược"
   - "KY-LUAT-V2 (2026-11-26): (1) đổi catXemTruoc trong web/lib/sao-xem-truoc.ts sang Allowlist mặc định khoá (KHOA_CONG_KHAI_SAO2 + KHOA_CAT_RIENG_SAO2) kèm test quét khoá cấp gốc tự động trên kho golden thật; (2) mở rộng thang do_tin.py lên 7 mức (tách rõ luat_tom_y cho sách hiện đại ghi trang và nhap_ai_cho_duyet cho nháp AI mới) + thêm khung doi_chieu_hai_phai Bát Trạch ↔ Vận 9 ở chế độ Cổ điển khi hai phái trái chiều (song ngữ VI/EN); (3) khoá test_ky_luat_v2.py kiểm ngân sách byte từng lớp (< 3 KB nội tuyến / < 190 KB bài lưu) và cập nhật CLAUDE.md cho cả 2 harness"
@@ -81,4 +84,4 @@ prohibited_until_gate:
   - "Community"
   - "Marketplace"
   - "Native Mobile"
-last_updated: "2026-11-26"
+last_updated: "2026-11-27"
